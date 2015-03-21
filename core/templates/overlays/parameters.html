@@ -1,0 +1,30 @@
+{% load i18n core_components components %}
+
+{% overlay id_paramContainer %}
+    <div class="argumentsOverlay">
+        <div class="In clearfix">
+            <div>
+                <h4>{% trans "APP-PARAM-TEXT" %}</h4>
+
+                <p class="info">{% trans "OVERLAY-PARAM-TIP" %}</p>
+                
+                <div class="form clearfix">
+                    <form action="" onsubmit="return false" autocomplete="off">
+                        {% for parameter in datastream.parameters %}
+                            <div class="row">
+                                <label for="id_param{{forloop.counter0}}">{{parameter.name}}</label>
+                                <input id="id_param{{forloop.counter0}}" name="param{{forloop.counter0}}" type="text" size="30" value="{{parameter.value}}" class="field"/>
+                            </div>
+                        {% endfor %}
+                    </form>
+                </div>
+                
+                <div class="buttons center">
+                <a id="id_paramAcceptButton" class="genericButton normalButton" title="{% trans 'APP-DONE-TEXT' %}"><span>{% trans "APP-DONE-TEXT" %}</span></a>
+                <a id="id_paramCancelButton" class="cancelLink" title="{% trans 'APP-CANCEL-TEXT' %}">{% trans "APP-CANCEL-TEXT" %}</a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+{% endoverlay %}

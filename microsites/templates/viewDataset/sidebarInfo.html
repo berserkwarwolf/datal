@@ -1,0 +1,125 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<div class="box infoBox" id="id_infoSidebar">
+
+    <!-- Title -->
+    <header class="title clearfix">
+        <h1 class="FL">{% trans 'VIEWDS-INFO-TITLE' %}</h1>
+        <a class="FR close" title="{% trans 'APP-CLOSE-TEXT' %}" id="id_closeInfoButton">{% trans 'APP-CLOSE-TEXT' %}</a>
+    </header>
+    <div class="boxContent">
+
+        <!-- Permalink -->
+        <article class="permalink rowForm">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-PERMALINK' %}</h1>
+                <input id="id_permalink" type="text" value="{{permalink}}" class="share_url_input" readonly />
+            </header>
+        </article>
+
+        <!-- Category -->
+        <article class="category">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-CATEGORY-TEXT' %}</h1>
+            </header>
+            <p>{{dataset.category_name|capfirst}}</p>
+        </article>
+
+        <!-- Last Update -->
+        <article class="lastUpdate">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-LASTUPDATE' %}</h1>
+            </header>
+            <p id="id_lastUpdate">{{dataset.created_at|date:'F d, Y, h:i A'|capfirst}}</p>
+        </article>
+        
+        {% if dataset.frequency %}
+        <!-- Update frequency -->
+        <article class="updateFrequency">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-UPDATE-FREQUENCY-TEXT' %}</h1>
+            </header>
+            <p>{{dataset.frequency|capfirst}}</p>
+        </article>
+        {% endif %}
+
+        <!-- Type -->
+        <article class="type">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-TYPE-TEXT' %}</h1>
+            </header>
+            <p><i class="icon {{impl_type_nice}}">{{impl_type_nice}}</i></p>
+        </article>
+        
+        {% if dataset.spatial %}
+        <!-- Region -->
+        <article class="region">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-REGION-TEXT' %}</h1>
+            </header>
+            <p>{{dataset.spatial|capfirst}}</p>
+        </article>
+        {% endif %}
+        
+        {% if dataset.license_url %}
+        <!-- License -->
+        <article class="license">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-LICENSE-TEXT' %}</h1>
+            </header>
+            <p><a href="{{dataset.license_url}}" target="_blank">{{dataset.license_url|capfirst}}</a></p>
+        </article>
+        {% endif %}
+        
+        {% if dataset.mbox %}
+        <!-- Contact e-mail -->
+        <article class="contact">
+            <i></i>
+            <header>
+                <h1>{% trans 'APP-CONTACT-EMAIL-FOR-DATASET-TEXT' %}</h1>
+            </header>
+            <p><a href="mailto:{{dataset.mbox}}">{{dataset.mbox}}</a></p>
+        </article>
+        {% endif %}
+
+        {% if dataset.get_sources %}
+        <!-- Sources -->
+        <article class="sources">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-SOURCES' %}</h1>
+            </header>
+            <ul class="list">
+                {% for source in dataset.get_sources %}
+                <li class="clearfix"><a href="{{source.url|addhttp}}" target="_blank" title="{{source.name|capfirst}}">{{source.name|capfirst}}</a></li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+
+        {% if dataset.get_tags %}
+        <!-- Tags -->
+        <article class="tags">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-TAGS' %}</h1>
+            </header>
+            <ul class="list">
+                {% url "search.action_search" as search_url %}
+                {% for tag in dataset.get_tags %}
+                <li class="clearfix"><a href="{{ search_url }}?tag={{tag|prepareTagForSearch}}" title="{{tag|capfirst}}" rel="nofollow tag">{{tag|capfirst}}</a></li>
+                {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+
+    </div>
+</div>

@@ -1,0 +1,137 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+<link href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.cookie.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script src="/js_workspace/admin_manager/categories.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+
+        <div class="titleContainer clearfix">
+            <h3 class="FL">{% trans "APP-CATEGORIES-TEXT" %}</h3>
+            <div class="actionButtons FR">
+                <button class="button green small" title="{% trans 'WORKSPACE-CREATE-CATEGORY' %}" id="id_create_category">{% trans "WORKSPACE-CREATE-CATEGORY" %}</button>
+            </div>
+        </div>
+
+        <div class="list-container">
+            <div class="workspaceGrid">
+                <table id="id_categoriesTable">
+                    <thead>
+                        <tr>
+                            <th>{% trans "APP-NAME-TEXT" %}</th>
+                            <th>{% trans "ACCOUNT-IS-DEFAULT-CATEGORY" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for category in categories %}
+                        <tr data-id="{{category.id}}" data-description="{{category.categoryi18n__description}}" data-is_default="{% if category.id == default_category %}true{% else %}false{% endif %}">
+                            <td>
+                                <span class="name">{{category.categoryi18n__name}}</span>
+                                <ul class="actions clearfix">
+                                    {# just allow edit NON transparency categories#}
+                                    {% if category.id|slugify not in used_transparency_categories %}
+                                    <li class="edit">
+                                        <a>{% trans 'APP-EDIT-TEXT' %}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% if category.id != default_category %}
+                                    {% if category.id|slugify not in used_transparency_categories %}
+                                    <li class="delete">
+                                        <a>{% trans 'APP-DELETE-TEXT' %}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endif %}
+                                </ul>
+                            </td>
+                            <td class="is_default">{% if category.id == default_category %}{% trans "APP-YES-TEXT" %}{% endif %}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block popupsOverlay %}
+{% overlay id_categoryFormContainer %}
+<div class="In clearfix categoriesForm">
+    <form action="{{form.action}}" method="post" id="id_categoryForm">
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% csrf_token %}
+        <h4>{% trans "WORKSPACE-CREATE-CATEGORY" %}</h4>
+        <div class="columns clearfix">
+            <div class="CL">
+                <div class="dataStreamForm">
+                    <fieldset class="form">
+                        <div class="row clearfix">
+                            <label for="{{form.name.auto_id}}">{{form.name.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.name}}
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <label for="{{form.description.auto_id}}">{{form.description.label}}:</label>
+                            <div class="formErrorMessageContainer">{{form.description}}</div>
+                        </div>
+                        <div class="row clearfix checkbox">
+                            <div class="formErrorMessageContainer">
+                                {{form.is_default}}
+                            </div>
+                            <label for="{{form.is_default.auto_id}}">{{form.is_default.label}}</label>
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+                      
+            <div class="CR">
+            </div>
+        </div>
+        
+        <div class="buttons center">
+            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+        </div>
+    </form>
+    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="/media_core/images/common/im_smallAjaxLoader.gif"/></div>
+</div>
+{% endoverlay %}
+
+{% overlay id_deleteCategoryFormContainer %}
+<div class="In clearfix categoriesForm">
+    <form action="{{form.action}}" method="post" id="id_categoryForm">
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% csrf_token %}
+        <h4>{% trans "APP-DELETE-CATEGORY-TITLE" %}</h4>
+        <div class="columns clearfix">
+            <div class="CL">
+                <div class="dataStreamForm">
+                    <fieldset class="form">
+                        <p>{% trans "APP-DELETE-CATEGORY-TEXT" %}</p>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+        
+        <div class="buttons center">
+            <input type="submit" value="{% trans 'APP-DELETE-TEXT' %}" class="button red small" title="{% trans 'APP-DELETE-TEXT' %}"/>
+            <input type="submit" value="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha small" title="{% trans 'APP-CANCEL-TEXT' %}"/>
+        </div>
+    </form>
+    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="/media_core/images/common/im_smallAjaxLoader.gif"/></div>
+</div>
+{% endoverlay %}
+{% endblock %}

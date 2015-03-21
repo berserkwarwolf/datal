@@ -1,0 +1,15 @@
+.box{margin-top:0;}
+.box > header{margin:0;}
+.box > header h4{padding:8px 0 0;font-weight:bold;color:#717171;display:inline-block;}
+.resources-list{overflow-x:hidden;overflow-y:auto;}
+.resources-list table{width:100%;font-size:12px;text-shadow:0 1px 0 #fff;border-collapse: collapse; }
+.resources-list table th{text-align:left;color:#999;font-family:'proxima_novasemibold';text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 0 0 15px;}
+.resources-list table td{color:#989898;border-bottom:1px solid #efefef;vertical-align:middle;padding:12px 0 12px 15px;line-height:18px;
+    -webkit-box-shadow:inset 0 2px 0 0 #fff;
+       -moz-box-shadow:inset 0 2px 0 0 #fff;
+            box-shadow:inset 0 2px 0 0 #fff; 
+}
+.resources-list table tr:nth-child(odd) td{background:#fbfbfb;}
+.resources-list table tr:hover td{background:#f6f9ff !important;}
+.resources-list .icon-resources{width:inherit;padding-left:22px;}
+.resources-list .api_example p:first-child{margin-top:5px;font-weight:bold;}

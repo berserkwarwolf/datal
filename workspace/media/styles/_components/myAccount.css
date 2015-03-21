@@ -1,0 +1,8 @@
+/*MY ACCOUNT*/
+.dataStreamForm .form .formErrorMessageContainer{float:inherit;}
+.dataStreamForm .row input[type=text], .dataStreamForm .row input[type=email], .dataStreamForm .row input[type=password]{width:258px;}
+.dataStreamForm .row input[type=password]{padding-right:100px;}
+.dataStreamForm .row p.tip.changePass{padding-top:0;}
+.dataStreamForm .row p.tip.changePass a{margin-top:7px;display:inline-block;}
+.dataStreamForm .row .passwordStrength{position:absolute;top:11px;right:215px;}
+.formContainer .buttons .button{display:initial;}

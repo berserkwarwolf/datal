@@ -1,0 +1,59 @@
+{% load i18n extra_tags core_components components dataset_tags %}
+
+<section class="filters-container" id="filters-container" style="display:none;">
+   
+   <!-- Active Filters -->
+   <div class="activeFilters" id="activeFilters" style="display:none;">
+      <h3 class="PNB">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <ul id="active-filters-list"></ul>
+   </div>
+
+   <!-- Category -->
+   {% if filters.category_filter %}
+   <div class="filters" id="category_filter">
+      <h3 class="PNB">{% trans 'APP-CATEGORY-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.category_filter %}
+         <li><a class="filter_link" title="">{{ filter }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+
+   <!-- Type -->
+   {% if filters.type_filter %}
+   <div class="filters" id="type_filter">
+      <h3 class="PNB">{% trans 'APP-TYPE-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.type_filter %}
+         <li><a class="filter_link" title="">{{ filter|type_str }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+
+   <!-- Author -->
+   {% if filters.author_filter %}
+   <div class="filters" id="author_filter">
+      <h3 class="PNB">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.author_filter %}
+         <li><a class="filter_link" title="">{{ filter }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+
+   <!-- Status -->
+   {% if filters.status_filter %}
+   <div class="filters" id="status_filter">
+      <h3 class="PNB">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.status_filter %}
+         <li><a class="filter_link" title="">{{ filter|status_str }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+
+</section>

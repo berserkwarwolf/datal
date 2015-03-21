@@ -1,0 +1,56 @@
+{% extends "base_microsites.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block SEO %}
+	<title>{% if pageTitle %}{{pageTitle}}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
+{% endblock %}
+
+{% block meta %}
+
+	<!-- CSS -->
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" />
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/homeModules.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/loadHome.css?id={{settings.VERSION_JS_CSS}}" />
+
+	<!-- BRANDED CSS -->
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+
+	<!-- JS -->
+	{% ifequal LANGUAGE_CODE 'es'%}
+	  <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
+	{%endifequal%}
+
+	<script type="text/javascript" src="/js_core/libs/jquery.stupidtable.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableSearchManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatablePaginationManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	{% ifequal preferences.account_home_filters 'featured_accounts' %}
+	    <script type="text/javascript" src="/js_microsites/loadHome/datatableHomeFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	    <script type="text/javascript" src="/js_microsites/loadHome/datatableHomeHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	{% else %}
+	    <script type="text/javascript" src="/js_microsites/loadHome/datatableHomeFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	    <script type="text/javascript" src="/js_microsites/loadHome/datatableHomeHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+	{% endifequal %}
+	<script type="text/javascript" src="/js_microsites/loadHome/datatableHomeManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	<script type="text/javascript" src="/js_microsites/loadHome/loadHome.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	<script type="text/javascript" src="/js_core/base_modules/data_table/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	{% block themeMeta %}{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+	{% block themeContent %}{% endblock %}
+{% endblock %}

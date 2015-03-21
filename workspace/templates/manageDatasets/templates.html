@@ -1,0 +1,97 @@
+{% load i18n extra_tags core_components components %}
+
+{# Active Filter #}
+<script type="text/template" id="active-filters-template">
+	<li><span><%= filter_name %></span> <a class="remove" title="{% trans 'FILTERS-REMOVE-TEXT' %}" id="<%= filter_id %>">x</a></li>
+</script>
+
+{# Grid - Title Cell #}
+<script type="text/template" id="grid-titlecell-template">
+	
+	{# Title #}
+	<h3><a href="<%=url%>" title="<%=title%>"><%=title%></a></h3>
+	
+	{# End Point #}
+	<span class="filename">
+		<% 
+			// If FILE
+			if(collect_type == 0){
+		%>
+			<%= filename %>
+		<% 
+			// Else, if URL or WEBSERVICE
+			} else if( collect_type == 1 || collect_type == 2 ){
+		%>
+			<%= end_point %>
+		<% } %>
+	</span>
+	
+	{# Last Modified #}
+	<% if(created_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% } %>
+	
+	{# Actions #}
+	<ul class="actions clearfix">
+
+		{# Review #}
+		<% if( authManager.isPublisher() || authManager.isAdmin() ){ %>
+			<% 
+				// Status Pending Review = 1
+				if( status == 1 ){ 
+			%>
+				<li class="review"><a href="<%=url%>" title=<%= gettext('APP-REVIEW-TEXT') %>><%= gettext('APP-REVIEW-TEXT')%></a></li>
+			<% } %>
+		<% } %>
+
+		{# Create Data View #}
+		<% 
+			// If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button.
+			if( 
+				collect_type == 1 ||
+				collect_type == 2 ||
+				_.contains( datastreamImplValidChoices, impl_type)
+			){ 
+		%>
+		<li class="create">
+			<a href="{% url 'manageDataviews.create' %}?dataset_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>
+		</li>
+		 <% } %>
+
+		{# Edit #}
+		<% 
+			// Status Pending Review = 1
+			if( status !== 1 ){ 
+		%>
+			<li class="edit">
+				<a href="{% url 'manageDatasets.edit' %}/<%=id%>/" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+			</li>
+		<% } %>
+
+		{# Delete #}
+		<li class="delete">
+			<a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a>
+		</li>
+
+		{# Download #}
+		<li class="download">
+			<% 
+				// If FILE
+				if(collect_type == 0){
+			%>
+				<a rel="nofollow" href="/dataset/action_request_file?dataset_revision_id=<%=id%>" id="id_downloadLink" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
+			<% 
+				// Else, if URL or WEBSERVICE
+				} else if( collect_type == 1 || collect_type == 2 ){
+			%>
+				<a rel="nofollow" href="<%=end_point%>" target="_blank" id="id_gotosource" title="{% trans 'APP-SOURCE-TEXT' %}">{% trans 'APP-SOURCE-TEXT' %}</a>
+			<% }%>
+		</li>
+
+	</ul>
+</script>
+
+{# Grid - Type Cell #}
+<script type="text/template" id="id_typeCellTemplate">
+	<i class="type_nice icon <%= type_classname %>"></i> <%= type_nice %>
+</script>

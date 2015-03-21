@@ -1,0 +1,60 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+<link href="/media_workspace/styles/createCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<link href="/media_workspace/styles/createVisualization.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<script language="javascript" src="/js_workspace/createVisualization/createVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/createVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<meta name="main-option" content="id_visualizations_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1 class="FL"><a href="{% url 'manageVisualizations.list' %}" title="{% trans 'APP-VISUALIZATIONS-TEXT' %}">{% trans "APP-VISUALIZATIONS-TEXT" %}</a></h1>
+<h2 class="FL">{% trans 'APP-VISUALIZATIONS-CREATE-TEXT' %}</h2>
+<ul class="buttons-bar FR" data-step="0">
+  <li class="step0"><a id="id_step0Button" rel="0" class="button black small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
+  <li class="step1"><a id="id_step1Button" rel="1" class="button black small" title="{% trans 'APP-DATA-TEXT' %}">{% trans 'APP-DATA-TEXT' %}</a></li>
+  <li class="step2"><a id="id_step2Button" rel="2" class="button black small" title="{% trans 'APP-TYPES-TEXT' %}">{% trans 'APP-TYPES-TEXT' %}</a></li>
+  <li class="step3"><a id="id_step3Button" rel="3" class="button black small" title="{% trans 'APP-CUSTOMIZE-TEXT' %}">{% trans 'APP-CUSTOMIZE-TEXT' %}</a></li>
+  <li class="step4"><a id="id_step4Button" rel="4" class="button black small" title="{% trans 'APP-FINISH-TEXT' %}">{% trans 'APP-FINISH-TEXT' %}</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+
+  <div class="createVizualization create" id="id_createVisualization">
+
+    {% include "createVisualization/start.html" %}
+
+    {# include "createVisualization/data.html" #}
+
+    {# include "createVisualization/chart/types.html" #}
+
+    {# include "createVisualization/chart/customize.html" #}
+
+    {# include "createVisualization/map/customizeTrace.html" #}
+
+    {# include "createVisualization/map/customizeMarkers.html" #}
+
+    {# include "createVisualization/map/customizeGeo.html" #}
+
+    {# include "createVisualization/finish.html" #}
+
+  </div>
+
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var createVisualizationModel = new CreateVisualizationModel({
+    // Complete model here
+  });
+  var createVisualizationView = new CreateVisualizationView({model: createVisualizationModel});
+});
+</script>
+{% endblock %}

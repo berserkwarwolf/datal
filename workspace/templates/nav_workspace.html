@@ -1,0 +1,48 @@
+{% load i18n %}
+<nav class="main-navigation border-box">
+  <ul>
+
+    <!-- Datasets -->
+    <li>
+      <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="nav-datasets"><i></i><span>{% trans 'APP-DATASETS-TEXT' %}</span></a>
+    </li>
+
+    <!-- Data Views -->
+    <li>
+      <a id="id_dataviews_option" href="{% url 'manageDataviews.list' %}" class="nav-dataviews"><i></i><span>{% trans 'APP-DATAVIEWS-TEXT' %}</span></a>
+    </li>
+    
+    {% comment %}
+    <!-- Visualizations -->
+    <li>
+      <a id="id_visualizations_option" href="{% url 'manageVisualizations.list' %}" class="nav-visualizations"><i></i><span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</span></a>
+    </li>
+    {% endcomment %}
+
+    <!-- Dashboards -->
+    <li style="display:none;">
+      <a id="id_dashboards_option" href="#" class="nav-dashboards"><i></i><span>{% trans 'APP-DASHBOARDS-TEXT' %}</span></a>
+    </li>
+
+    {% if 'workspace.can_access_report' in auth_manager.privileges %}
+    <!-- Reports -->
+    <li style="display:none;">
+      <a id="id_reports_option" href="/reports/action_query" class="nav-reports"><i></i><span>{% trans 'APP-REPORTS-TEXT' %}</span></a>
+    </li>
+    {% endif %}
+
+    {% if 'workspace.can_access_admin' in auth_manager.privileges %}
+    <!-- Settings -->
+    <li>
+      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="nav-settings"><i></i><span>{% trans 'APP-SETTINGS-TEXT' %}</span></a>
+    </li>
+    {% endif %}
+
+    <!-- Feedback -->
+    {% get_current_language as LANGUAGE_CODE %}
+    <li>
+      <a href="https://junar.zendesk.com/entries/new?forum_id={% ifequal LANGUAGE_CODE 'en' %}20733822{% endifequal %}{% ifequal LANGUAGE_CODE 'es' %}21185063{% endifequal %}" class="nav-feedback" target="_blank"><i></i><span>{% trans 'APP-FEEDBACK-TEXT' %}</span></a>
+    </li>
+
+  </ul>
+</nav>

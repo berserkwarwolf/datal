@@ -1,0 +1,26 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_CollectWebserviceAddParamTemplate">
+
+	{# name #}
+	<div class="row clearfix">
+		<label for="id_param_name">{% trans 'APP-NAME-TEXT' %}</label>
+		<input type="text" name="param_name" id="id_param_name">
+	</div>
+
+	{# default_value #}
+	<div class="row clearfix">
+		<label for="id_default_value">{% trans 'WORKSPACE-PARAM-DEFAULT' %}</label>
+		<input type="text" name="default_value" id="id_default_value">
+	</div>
+
+	{# enable_editable #}
+	<div class="row clearfix">
+		<input type="checkbox" value="True" name="enable_editable" id="id_enable_editable" class="nolabel">{% trans 'WORKSPACE-PARAM-EDITABLE' %}
+	</div>
+
+	<div class="row clearfix">
+		<a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_applyParamButton">{% trans 'APP-ADD-TEXT' %}</a>
+	</div>
+
+</script>

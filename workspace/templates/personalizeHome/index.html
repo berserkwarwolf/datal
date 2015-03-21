@@ -1,0 +1,242 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components  %}
+
+{% block meta %}
+<meta name="main-option" content="id_account_admin"/>
+
+<!-- CSS LIBS -->
+<link href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"></script>
+<link type="text/css" href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"></script>
+
+<!-- CSS JUNAR -->
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/personalizeHome.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<!-- JS LIBS -->
+<script type="text/javascript" src="/js_core/plugins/saferStringify.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backbone100/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/epoxy/backbone.epoxy.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/taggingCompleteSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- JS JUNAR -->
+<script type="text/javascript" src="/js_workspace/personalizeHome/validation.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme0Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme0View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme1Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme1View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme2Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme2View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme3Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme3View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme4Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme4View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme5Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme5View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme6Model.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/theme6View.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/personalizeHomeModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/personalizeHome/personalizeHomeView.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+<!-- Tabs -->
+{% include "admin_manager/tabs.html" %}
+
+<!-- Personalize Home -->
+<div class="personalizeHome" id="id_personalizeHome">
+	<div class="formContainer">
+
+	<!-- Title -->
+	<header class="titleConteiner">
+		<h3>{% trans "ADMIN-HOME-TITLE" %}</h3>
+	</header>
+
+	<!-- Themes Tabs -->
+	<div class="columns">
+	<div class="dataStreamForm">
+	<section class="themeTabs">
+	<ul class="clearfix">
+			<li class="noTheme">
+				<a id="id_noThemeButton" rel="null">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-NOTHEME-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_noTheme.gif"/>
+					</span>
+				</a>
+			</li>
+			<li class="theme0">
+				<a id="id_theme0Button" rel="0">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME0-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme0.gif"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+						<i class="i3">3</i>
+						<i class="i4">4</i>
+						<i class="i5">5</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme1">
+				<a id="id_theme1Button" rel="1">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME1-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme1.gif"/>
+						<i class="i1">1</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme2">
+				<a id="id_theme2Button" rel="2">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME2-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme2.gif"/>
+						<i class="i1">1</i>
+						<i class="i2a">2</i>
+						<i class="i2b">2</i>
+						<i class="i3">3</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme3">
+				<a id="id_theme3Button" rel="3">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME3-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme3.gif"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme4">
+				<a id="id_theme4Button" rel="4">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME4-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme4.gif"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+						<i class="i3">3</i>
+						<i class="i4">4</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme5">
+				<a id="id_theme5Button" rel="5">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME5-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme5.gif"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+						<i class="i3">3</i>
+						<i class="i4">4</i>
+						<i class="i5">5</i>
+						<i class="i6">6</i>
+						<i class="i7">7</i>
+						<i class="i8">8</i>
+					</span>
+				</a>
+			</li>
+			<li class="theme6">
+				<a id="id_theme6Button" rel="6">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME6-TEXT" %}</span>
+					<span class="img">
+						<img src="/media_workspace/images/personalizeHome/im_theme6.gif"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+						<i class="i3">3</i>
+						<i class="i4">4</i>
+						<i class="i5">5</i>
+						<i class="i6">6</i>
+					</span>
+				</a>
+			</li>
+		</ul>
+	</section>
+
+  </div>
+  </div>
+  </div>
+
+	<!-- Configs -->
+	<div class="configs columns clearfix" id="id_themeConfigs" style="display:none;">
+
+		<!-- Column - Left -->
+		<section class="formContainer">
+
+			<header class="titleConteiner">
+				<h3>{% trans "ADMIN-HOME-CONFIG-TITLE" %}</h3>
+			</header>
+
+			<div class="columns clearfix">
+		<!-- Column - Left -->
+		<div class="CL FL">
+
+		<div class="dataStreamForm">
+
+			<p class="description">
+				<strong>{% trans "ADMIN-HOME-THEMES-DESCRIPTION" %}</strong>
+				<span id="id_description"></span>
+			</p>
+
+			<p class="configDescription">{% trans "ADMIN-HOME-CONFIG-DESCRIPTION" %}</p>
+
+      <form novalidate action=""> 
+      	<article id="id_themeForm"></article>
+      </form>
+
+      </div>
+      </div>
+
+
+		<!-- Column - Right -->
+		<aside class="CR FR">
+			<div class="helpBox">
+        <div class="helpBoxInner">
+          <h3>{% trans "DSFIND-HELPTIP-TITLE" %}</h3>
+            <div class="rowTop">{% trans "ACCOUNT-HOME-HELPTIP" %}</div>
+            <div class="rowBottom">{% trans "ACCOUNT-HOME-HELPTIP-2" %}</div>
+          </div>
+        </div>
+		</aside>
+
+		</div>
+		</section>
+		</div>
+  <!-- Buttons -->
+
+  <section class="formContainer">
+  <div class="buttons center">
+    <a id="id_preview" title="{% trans 'APP-PREVIEW-TEXT' %}" class="genericButton txt14">{% trans 'APP-PREVIEW-TEXT' %}</a>
+    <a id="id_save" title="{% trans 'APP-SAVE-TEXT' %}" class="genericButton txt14">{% trans 'APP-SAVE-TEXT' %}</a>
+  </div>
+  </section>
+
+  </div>
+
+	</div>
+	</div>
+
+<!-- Backbone templates -->
+{% include "personalizeHome/theme0.html" %}
+{% include "personalizeHome/theme1.html" %}
+{% include "personalizeHome/theme2.html" %}
+{% include "personalizeHome/theme3.html" %}
+{% include "personalizeHome/theme4.html" %}
+{% include "personalizeHome/theme5.html" %}
+{% include "personalizeHome/theme6.html" %}
+
+<script type="text/javascript">
+  $(document).ready(function(){
+   	var personalizeHomeModel = new personalizeModel({ 
+   		jsonContent: {% if jsonContent %}{{jsonContent|safe}}{% else %}""{% endif %}
+   	});
+   	var personalizeHomeView = new personalizeView({ model: personalizeHomeModel });
+  });
+</script>
+{% endblock %}

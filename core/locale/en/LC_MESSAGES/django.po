@@ -1,0 +1,775 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "CHANNEL_TYPE_WEB"
+msgstr "Web"
+
+msgid "CHANNEL_TYPE_API"
+msgstr "API"
+
+msgid "ACTION_STREAM_CREATE"
+msgstr "Created"
+
+msgid "ACTION_STREAM_DELETE"
+msgstr "Deleted"
+
+msgid "ACTION_STREAM_PUBLISH"
+msgstr "Published"
+
+msgid "ACTION_STREAM_UNPUBLISH"
+msgstr "Unpublished"
+
+msgid "MODEL_STATUS_DRAFT"
+msgstr "Draft"
+
+msgid "MODEL_STATUS_PENDING_REVIEW"
+msgstr "Pending review"
+
+msgid "MODEL_STATUS_UNDER_REVIEW"
+msgstr "Under review"
+
+msgid "MODEL_STATUS_PUBLISHED"
+msgstr "Published"
+
+msgid "MODEL_STATUS_UNPUBLISHED"
+msgstr "Unpublished"
+
+msgid "MODEL_STATUS_REJECTED"
+msgstr "Rejected"
+
+msgid "MODEL_STATUS_APPROVED"
+msgstr "Approved"
+
+msgid "MODEL-LANGUAJE-EN"
+msgstr "English "
+
+msgid "MODEL-LANGUAJE-ES"
+msgstr "Spanish"
+
+msgid "MODEL-COUNTRY-US"
+msgstr "United States"
+
+msgid "MODEL-COUNTRY-AR"
+msgstr "Argentina"
+
+msgid "MODEL-COUNTRY-CL"
+msgstr "Chile"
+
+msgid "MODEL-COUNTRY-BR"
+msgstr "Brazil"
+
+msgid "MODEL-COUNTRY-UY"
+msgstr "Uruguay"
+
+msgid "MODEL-COUNTRY-MX"
+msgstr "Mexico"
+
+msgid "MODEL-COUNTRY-CR"
+msgstr "Costa Rica"
+
+msgid "MODEL-COUNTRY-OC"
+msgstr "Other Countries"
+
+msgid "MODEL-OCUPATION-FI"
+msgstr "Finance / Accounting"
+
+msgid "MODEL-OCUPATION-AN"
+msgstr "Analyst"
+
+msgid "MODEL-OCUPATION-MA"
+msgstr "Marketing / Sales"
+
+msgid "MODEL-OCUPATION-EN"
+msgstr "Entrepreneur"
+
+msgid "MODEL-OCUPATION-OT"
+msgstr "Others"
+
+msgid "MODEL-USERNAME-TEXT"
+msgstr "Username"
+
+msgid "MODEL-PASSWORD-TEXT"
+msgstr "Password"
+
+msgid "MODEL-COUNTRY-TEXT"
+msgstr "Country"
+
+msgid "MODEL-OCUPATION-TEXT"
+msgstr "Ocupation"
+
+msgid "MODEL-LANGUAGE-TEXT"
+msgstr "Language"
+
+msgid "MODEL-FAVOURITE-TEXT"
+msgstr "Favourites"
+
+msgid "MODEL-ROLES-TEXT"
+msgstr "Roles"
+
+msgid "MODEL-USER-GRANTS-TEXT"
+msgstr "User Grants"
+
+msgid "MODEL_USER_LABEL"
+msgstr "User"
+
+msgid "MODEL_IS_PRIVATE_LABEL"
+msgstr "Is private"
+
+msgid "MODEL_DATASTREAM_LABEL"
+msgstr "Data View"
+
+msgid "MODEL_DATASET_LABEL"
+msgstr "Dataset"
+
+msgid "MODEL_CATEGORY_LABEL"
+msgstr "Category"
+
+msgid "MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL"
+msgstr ""
+
+msgid "MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL"
+msgstr ""
+
+msgid "MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL"
+msgstr ""
+
+msgid "MODEL_ACTION_LABEL"
+msgstr "Action"
+
+msgid "MODEL_STATUS_LABEL"
+msgstr "Status"
+
+msgid "MODEL_META_TEXT_LABEL"
+msgstr "Meta text"
+
+msgid "MODEL_LANGUAGE_LABEL"
+msgstr "Language"
+
+msgid "MODEL_DATASTREAM_REVISION_LABEL"
+msgstr "Data View Revision"
+
+msgid "MODEL_TITLE_LABEL"
+msgstr "Title"
+
+msgid "MODEL_DESCRIPTION_LABEL"
+msgstr "Description"
+
+msgid "MODEL_NOTE_LABEL"
+msgstr "Note"
+
+msgid "MODEL_LICENSE_LABEL"
+msgstr "License URL"
+
+msgid "MODEL_SPATIAL_LABEL"
+msgstr "Spatial extent of the resource"
+
+msgid "MODEL_FREQUENCY_LABEL"
+msgstr "Frequency of data update"
+
+msgid "MODEL_MBOX_LABEL"
+msgstr "Mailbox for questions about datasets"
+
+msgid "MODEL_NAME_LABEL"
+msgstr "Name"
+
+
+msgid "MODEL_IMPLEMENTATION_DETAILS_LABEL"
+msgstr "Implementation Details"
+
+msgid "MODEL_DASHBOARD_LABEL"
+msgstr "Dashboard"
+
+msgid "MODEL_DASHBOARD_WIDGET_TEXT"
+msgstr "Dashboard widget"
+
+msgid "MODEL_DASHBOARD_REVISION_LABEL"
+msgstr "Dashboard Revision"
+
+msgid "MODEL-ORDER-TEXT"
+msgstr "Order"
+
+msgid "MODEL-URL-TEXT"
+msgstr "Url"
+
+msgid "MODEL-DASHBOARD-TEXT"
+msgstr "Dashboard"
+
+msgid "MODEL-DATASTREAM-TEXT"
+msgstr "Data View"
+
+msgid "MODEL-VISUALIZATION-TEXT"
+msgstr "Visualization"
+
+msgid "MODEL-USER-TEXT"
+msgstr "User"
+
+msgid "MODEL_IS_DEAD_LABEL"
+msgstr "Is dead"
+
+msgid "MODEL_END_POINT_LABEL"
+msgstr "End Point"
+
+msgid "MODEL_FILENAME_LABEL"
+msgstr "Filename"
+
+msgid "MODEL_IMPLEMENTATION_TYPE_LABEL"
+msgstr "Implementation type"
+
+msgid "MODEL_SIZE_LABEL"
+msgstr "Size"
+
+msgid "MODEL_DATASET_REVISION_LABEL"
+msgstr "Dataset Revision"
+
+msgid "MODEL_VISUALIZATION_LABEL"
+msgstr "Visualization"
+
+msgid "MODEL_SLUG_LABEL"
+msgstr ""
+
+msgid "MODEL_VISUALIZATION_REVISION_LABEL"
+msgstr "Visualization Revision"
+
+msgid "MODEL_TAG_TEXT"
+msgstr "Tag"
+
+msgid "MODEL_CODE_LABEL"
+msgstr "Code"
+
+msgid "MODEL_ROLE_GRANTS_LABEL"
+msgstr "Role Grants"
+
+msgid "MODEL_ROLE_LABEL"
+msgstr "Role"
+
+msgid "MODEL_GUEST_LABEL"
+msgstr "Guest"
+
+msgid "MODEL_PRIVILEGE_LABEL"
+msgstr "Privilege"
+
+msgid "MODEL_GRANT_LABEL"
+msgstr "Grant"
+
+msgid "MODEL_TYPE_LABEL"
+msgstr "Type"
+
+msgid "MODEL_AUTH_KEY_LABEL"
+msgstr "Auth key"
+
+msgid "MODEL_EMAIL_LABEL"
+msgstr "E-mail"
+
+msgid "MODEL_GUEST_GRANT_LABEL"
+msgstr "Guest Grant"
+
+msgid "MODEL_METADATA_LABEL"
+msgstr "Metadata"
+
+msgid "MODEL_CREATED_AT_LABEL"
+msgstr "Created at"
+
+msgid "MODEL_EXPIRES_AT_LABEL"
+msgstr "Expires at"
+
+msgid "MODEL-POSITION-TEXT"
+msgstr "Position"
+
+msgid "MODEL-AUTHOR-TEXT"
+msgstr "Author"
+
+msgid "MODEL-COMMENT-TEXT"
+msgstr "Comment"
+
+msgid "APP-EXCEDEDDATASET-LIMIT"
+msgstr "Account limit reached for creating Datasets, upgrade your account to create more"
+
+msgid "APP-EXCEDEDUSERS-LIMIT"
+msgstr "Account limit reached for creating Users, upgrade your account to create more"
+
+msgid "APP-ERROR-TEXT"
+msgstr "Error"
+
+msgid "APP-PAGENOTFOUND-TEXT"
+msgstr "Page not found"
+
+msgid "APP-DISCOVERINGDATA-TEXT"
+msgstr "Discovering Data"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Reload"
+
+msgid "APP-TECNOLOGY-TEXT"
+msgstr "Tecnology"
+
+msgid "APP-BY-TEXT"
+msgstr "by"
+
+msgid "APP-YEARSAGO-TEXT"
+msgstr "years ago"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "APP-404-ERROR"
+msgstr "The page that you are looking for does not exists anymore, <br/>or maybe it did not load properly"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Please"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "try again"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "Or go to the"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "Source"
+
+msgid "APP-INTERNALERROR-TEXT"
+msgstr "Internal server error"
+
+msgid "APP-500-ERROR"
+msgstr "Our server explode! Or maybe it went down for maintenance"
+
+msgid "APP-INAFEWMINUTES-TEXT"
+msgstr "in a few minutes"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Actions"
+
+msgid "APP-EXPORTCHART-TITLE"
+msgstr "Export this Visualization to a CSV file"
+
+msgid "APP-EXPORTCHART-TEXT"
+msgstr "Export Visualization"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Web collected data"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "User uploaded data"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Sources"
+
+msgid "APP-EXPORTDS-TITLE"
+msgstr "Export this Data Stream to a CSV file"
+
+msgid "APP-EXPORTDS-TEXT"
+msgstr "Export Data Stream"
+
+msgid "DSDET-SHARE-TITLE"
+msgstr "Share this Data Stream"
+
+msgid "APP-SHARE-TEXT"
+msgstr "Share"
+
+msgid "DSDET-GOOGLESPREADSHEETS-SUBTITLE"
+msgstr "Add this Data Stream to your Google Spreadsheets!"
+
+msgid "DSDET-GOOGLESPREADSHEETS-CONTENT"
+msgstr "Copy &amp; Paste the code below in a cell where you want to use this Data Stream."
+
+msgid "APP-NO_RECORDS_FOUND-TEXT"
+msgstr "There are no resources available at the moment."
+
+msgid "APP-FILTERS-TEXT"
+msgstr "Filters"
+
+msgid "APP-ALL-TEXT"
+msgstr "All"
+
+msgid "APP-OWNEDBYME-TEXT"
+msgstr "Owned by me"
+
+msgid "APP-DELETE-TEXT"
+msgstr "Delete"
+
+msgid "APP-ACTIONS-SUBMIT"
+msgstr "Submit"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publish"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "ITEMS-PER-PAGE"
+msgstr "Items per page"
+
+msgid "APP-PREVIOUS-TEXT"
+msgstr "Previous"
+
+msgid "APP-PAGE-TEXT"
+msgstr "Page"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Next"
+
+msgid "SEARCH-DATASETS-TEXT"
+msgstr "Search Datasets"
+
+msgid "SEARCH-DATASTREAMS-TEXT"
+msgstr "Search Data Views"
+
+msgid "SEARCH-DASHBOARDS-TEXT"
+msgstr "Search Dashboards"
+
+msgid "SEARCH-VISUALIZATIONS-TEXT"
+msgstr "Search Visualizations"
+
+msgid "SEARCH-HOME-TEXT"
+msgstr "Filter Resources"
+
+msgid "APP-DATASETS-TEXT"
+msgstr "Datasets"
+
+msgid "APP-VIEWS-TEXT"
+msgstr "Data Views"
+
+msgid "APP-CHARTS-TEXT"
+msgstr "Visualizations"
+
+msgid "APP-DASHBOARDS-TEXT"
+msgstr "Dashboards"
+
+msgid "APP-EMBED-TEXT"
+msgstr "Embed"
+
+msgid "OVERLAY-DSEMBED-TITLE"
+msgstr "Add this Data Stream everywhere!"
+
+msgid "OVERLAY-DSEMBED-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Data Stream"
+
+msgid "APP-WIDTH-TEXT"
+msgstr "Width"
+
+msgid "APP-HEIGHT-TEXT"
+msgstr "Height"
+
+msgid "APP-FREEZE-TEXT"
+msgstr "Freeze"
+
+msgid "APP-ROWS-TEXT"
+msgstr "rows"
+
+msgid "APP-COLUMNS-TEXT"
+msgstr "Comment"
+
+msgid "OVERLAY-CHARTEMBED-TITLE"
+msgstr "Add this Visualization everywhere!"
+
+msgid "OVERLAY-CHARTEMBED-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Powered by"
+
+
+msgid "DEV-PAGE-TITLE"
+msgstr "Developers page"
+
+msgid "DEV-PAGE-SUBTITLE"
+msgstr "Try the Junar API"
+
+msgid "DEV-DESCRIPTION-TEXT1"
+msgstr ""
+"The Junar API enables direct access to Junar data catalog and engine from "
+"your application, for the purpose of <strong>discovering data streams and "
+"dashboards</strong>, invoking data streams, <strong>and soon... collecting "
+"data and publishing it as data streams</strong>. It uses a RESTful interface "
+"and returns data in JSON."
+
+msgid "DEV-DESCRIPTION-TEXT2"
+msgstr ""
+"Data streams invoked through the API provide online and standarized access "
+"to data contained in HTML pages, XLS, CSV and other similar file types "
+"available on Internet."
+
+msgid "DEV-CALL-JUNAR"
+msgstr "Contact us at support@junar.com"
+
+msgid "APP-ANYDOUBTS-TEXT"
+msgstr "Any doubts?"
+
+msgid "APP-TRYITNOW-TEX"
+msgstr "Get your API key!"
+
+msgid "APP-REQUIRESSIGNIN-TEXT"
+msgstr "Requires sign in"
+
+msgid "DEV-GETKEY-TITLE"
+msgstr "Get an Auth Key"
+
+msgid "DEV-GETKEY-SUBTITLE"
+msgstr "The Junar API requires a <span class='br'>key to operate.</span>"
+
+msgid "DEV-GETKEY-TEXT1"
+msgstr "Get one and access to any resource through it"
+
+msgid "DEV-GETKEY-TEXT2"
+msgstr "Jump right into the"
+
+msgid "DEV-GETKEY-TEXT3"
+msgstr "API resource documentation"
+
+msgid "DEV-GETKEY-TEXT4"
+msgstr "to get in touch with the requests and methods you can use"
+
+msgid "DEV-CREATEREQUEST-TITLE"
+msgstr "Create a Request"
+
+msgid "DEV-CREATEREQUEST-SUBTITLE"
+msgstr "The Junar API accepts RESTful requests"
+
+msgid "DEV-CREATEREQUEST-TEX1"
+msgstr "A typical request will look like this"
+
+msgid "DEV-CREATEREQUEST-TEX2"
+msgstr ""
+"http://apisandbox.junar.com/datastreams/invoke/TEPCO-STOCK-QUOTE?"
+"auth_key=YOUR_API_KEY"
+
+msgid "DEV-CREATEREQUEST-TEX3"
+msgstr "A few things to note in the request above"
+
+msgid "DEV-CREATEREQUEST-TEX4"
+msgstr "/datastreams/invoke/"
+
+msgid "DEV-CREATEREQUEST-TEX5"
+msgstr ""
+"This is an invoke request, that will return a json response. The entire "
+"resources descriptions are available in the"
+
+msgid "DEV-CREATEREQUEST-TEX6"
+msgstr "API resource documentation"
+
+msgid "DEV-CREATEREQUEST-TEX7"
+msgstr "TEPCO-STOCK-QUOTE"
+
+msgid "DEV-CREATEREQUEST-TEX8"
+msgstr ""
+"This is the GUID of the data stream you are accessing. You will always find "
+"this GUID in the Data Stream Details page, making a data stream search "
+"through the API, or in many other places"
+
+msgid "DEV-CREATEREQUEST-TEX9"
+msgstr "auth_key"
+
+msgid "DEV-CREATEREQUEST-TEX10"
+msgstr "=YOUR_API_KEY"
+
+msgid "DEV-CREATEREQUEST-TEX11"
+msgstr "This is the key from step 1.  You'll need it for every request"
+
+msgid "DEV-PROCESS-TITLE1"
+msgstr "Process"
+
+msgid "DEV-PROCESS-TITLE2"
+msgstr "your response"
+
+msgid "DEV-PROCESS-TEX1"
+msgstr ""
+"Your response will be returned as JSON. You can also obtain the response in XML, CSV and HTML."
+
+msgid "DEV-PROCESS-TEX2"
+msgstr "To understand the format of the result field, read the"
+
+msgid "DEV-PROCESS-TEX3"
+msgstr "API resource documentation"
+
+msgid "DEV-OV-TITLE"
+msgstr "Confirmation and Key"
+
+msgid "DEV-OV-SUBTITLE"
+msgstr "Thanks for trying out the Junar API"
+
+msgid "DEV-OV-TEXT"
+msgstr "Here is your Auth key"
+
+msgid "DEV-OV-TIP1"
+msgstr "For further info, read the"
+
+msgid "DEV-OV-TIP2"
+msgstr "or contact developers@junar.com for support"
+
+msgid "OLD-PASSWORD-MISMATCH"
+msgstr "Old password is incorrect."
+
+msgid "NEW-PASSWORD-MISMATCH"
+msgstr "New passwords do not match."
+
+msgid "EMAIL-EXISTS"
+msgstr "Email already exists."
+
+msgid "HEADER-IE-MESSAGES"
+msgstr "<p><strong>Warning:</strong> Junar runs correctly in Internet Explorer versions 8 or higher and may not work properly in older versions of this browser, or in <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='Compatibility view' target='_blank'>compatibility view</a> mode. Please <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Upgrade it' target='_blank'>upgrade it</a> or <a href='http://abetterbrowser.org/' title='Use another browser' target='_blank'>use another browser</a>.</p>"
+
+msgid "APP-HELP-TEXT"
+msgstr "Online Support"
+
+msgid "APP-LOADING-TEXT"
+msgstr "Loading. Please wait."
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No data found"
+
+msgid "APP-TOTALMARKERSLEFT-TEXT"
+msgstr "Total markers left"
+
+msgid "APP-NEXTMARKERS-TEXT"
+msgstr "Show next 1000 markers"
+
+msgid "APP-DATAVIEWS-TEXT"
+msgstr "Data Views"
+
+msgid "APP-RESOURCES-TEXT"
+msgstr "Resources"
+
+msgid "APP-TOPCATEGORIES-TEXT"
+msgstr "Top Categories"
+
+msgid "APP-SOAP-TEXT"
+msgstr "Data is collected from a Web Service"
+
+msgid "APP-TITLE"
+msgstr "Title"
+
+msgid "APP-PUBLISHED_DATE"
+msgstr "Last update"
+
+msgid "APP-DEVELOPERS-TEXT"
+msgstr "Developers"
+
+msgid "APP-HOME-TEXT"
+msgstr "Home"
+
+msgid "APP-WIKI-TEXT"
+msgstr "Wiki"
+
+msgid "APP-EXPORTDS-XLS"
+msgstr "Export to Excel 2007"
+
+msgid "APP-FILE-TEXT"
+msgstr "File"
+
+msgid "OVPRIV-TITLE-TEXT"
+msgstr "Share settings"
+
+msgid "APP-CANVIEW-TEXT"
+msgstr "Shared with:"
+
+msgid "APP-SELECTUSER-TEXT"
+msgstr "Select an user..."
+
+msgid "APP-DONE-TEXT"
+msgstr "Done"
+
+msgid "APP-ADD-TEXT"
+msgstr "Add"
+
+msgid "APP-SIGNINTO-TEXT"
+msgstr "Sign in to"
+
+msgid "APP-LOGIN-TEXT"
+msgstr "Login"
+
+msgid "APP-ACTIVATION-TITLE-TEXT"
+msgstr "Activate your Junar account"
+
+msgid "APP-ACTIVATION-SUBTITLE-TEXT"
+msgstr "Enter a password in order to finish your account activation"
+
+msgid "APP-BYCLICKINGAGREE-TEXT"
+msgstr "By clicking, you agree to our"
+
+msgid "APP-AND-TEXT"
+msgstr "and"
+
+msgid "APP-TERMS-TITLE"
+msgstr "See our Terms of Service"
+
+msgid "APP-TERMS-TEXT"
+msgstr "Terms of Service"
+
+msgid "APP-PRIVACY-TITLE"
+msgstr "See our Privacy Policy"
+
+msgid "APP-PRIVACY-TEXT"
+msgstr "Privacy Policy"
+
+msgid "APP-REGISTER-TEXT"
+msgstr "Create account"
+
+msgid "OVPRIV-REMOVEUSER-TEXT"
+msgstr "Remove user from list"
+
+msgid "OVPRIV-CANVIEW-TEXT"
+msgstr "Can view"
+
+msgid "OVPRIV-CANUSE-TEXT"
+msgstr "Can use"
+
+msgid "PRIV-SHARING-UPDATED"
+msgstr "The sharing options have been updated"
+
+msgid "PRIV-SHARE-DS-ERROR"
+msgstr "Oops! We couldn't share your data view"
+
+msgid "PRIV-SHARE-DB-ERROR"
+msgstr "Oops! We couldn't share your dashboard"
+
+msgid "PRIV-SHARE-VZ-ERROR"
+msgstr "Oops! We couldn't share your visualization"
+
+msgid "PRIV-SHARE-EMAIL-ERROR"
+msgstr "Oops! We couldn't process this email"
+
+msgid "FOOTER-OPENDATA-BUTTON"
+msgstr "This material is Open Data"
+
+msgid "APP-GETEMBED-TEXT"
+msgstr "Copy & Paste the embed code below:"
+
+msgid "APP-CLOSE-TEXT"
+msgstr "Close"
+
+msgid "APP-CANCEL-TEXT"
+msgstr "Cancel"
+
+msgid "APP-DOWNLOADDATASET-TEXT"
+msgstr "Download Dataset"
+
+msgid "APP-REQUESTDEMO-TEXT"
+msgstr "Request Demo"
+
+msgid "CHART-HEATMAP-TEXT"
+msgstr "Toggle Heatmap"
+
+msgid "APP-LICENSES-CONTENT"
+msgstr "Content Licenses"
+
+msgid "APP-LICENSES-DATA"
+msgstr "Data Licenses"
+
+msgid "APP-ON-TEXT"
+msgstr "On"
+
+msgid "APP-AT-TEXT"
+msgstr "at"

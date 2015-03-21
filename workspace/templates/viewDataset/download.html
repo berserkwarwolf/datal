@@ -1,0 +1,18 @@
+{% load i18n %}
+
+{% if dataset.collect_type == 0 %}
+<!-- Download -->
+<div class="centeredMessaje">
+	<div class="centeredIcon"></div>
+  <p><a class="button black small" href="/dataset/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></p>
+</div>
+
+{% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
+<!-- Go to Source 
+<a id="id_gotosource" class="" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a>
+-->
+<div class="centeredMessaje">
+	<div class="centeredIcon"></div>
+  <p><a class="button black small" href="{{ dataset.end_point }}" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></p>
+</div>
+{% endif %}

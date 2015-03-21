@@ -1,0 +1,42 @@
+{% load i18n extra_tags %}
+
+<div id="datatable_grid" class="workspaceGrid">
+    <table>
+        <thead id="{{table_prefix}}_header">
+            <tr>
+                {% if header_template %}
+                	{% include header_template %}
+                {% else %}
+                	{% include 'datatable_manager/datatable_header.html' %}
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for revision in revisions.object_list %}
+                <tr id="id_{{table_prefix}}_{{revision.id}}">
+                    {% if table_body_template %}
+                        {% include table_body_template %}
+                    {% else %}
+                        {% include 'datatable_manager/table_body.html' %}
+                    {% endif %}
+                        {% if row_button_template %}
+                            {% include row_button_template %}
+                        {% else %}
+                            {% include 'datatable_manager/row_buttons.html' %}
+                        {% endif %}
+                    {% if row_data_template %}
+                        {% include row_data_template %}
+                    {% else %}
+                        {% include 'datatable_manager/row_data.html' %}
+                    {% endif %}                
+                </tr>
+                {% empty %}
+                    <tr>
+                    <td class="noneMsg" colspan="20">
+                    {% trans 'APP-NO_RECORDS_FOUND-TEXT' %}
+                    </td>
+                    </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

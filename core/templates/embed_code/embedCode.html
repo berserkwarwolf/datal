@@ -1,0 +1,69 @@
+{% load i18n core_components components %}
+
+{% overlay id_embedCode %}
+    <div class="embedPopup">
+        <div class="In clearfix">
+            <div id="id_embed_datastream_container" style="display:none;">
+                <h4>{% trans "APP-EMBED-TEXT" %}</h4>
+
+                <h5><strong>{% trans "OVERLAY-DSEMBED-TITLE" %}</strong></h5>
+                <p>{% trans "OVERLAY-DSEMBED-TIP" %}.</p>
+                
+                <div class="form clearfix">
+                    <form action="#" method="get">
+                        <table class="ao-dialogue">
+                            <tr>
+                                <td>
+                                    <textarea id="id_embedDatastreamTextarea" cols="" rows="" readonly="readonly"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="id_embedWidth">{% trans "APP-WIDTH-TEXT" %}:</label>
+                                    <input id="id_embedWidth" name="id_embedWidth" type="text" size="3" value="400" title="Enter width value"/>
+                                    <label for="id_embedHeight">{% trans "APP-HEIGHT-TEXT" %}:</label>
+                                    <input id="id_embedHeight" name="id_embedHeight" type="text" size="3" value="175" title="Enter height value"/>
+                                    
+        							<label for="id_embedHeadersRows">{% trans "APP-FREEZE-TEXT" %}</label>
+                                    <input id="id_embedHeadersRows" name="embedHeadersRows" type="text" size="3" value="0" title="Enter the number of rows to freeze" style="width:12px;"/>
+                                    <label for="id_embedHeadersRows">{% trans "APP-ROWS-TEXT" %}</label>
+        							<!--
+        							<label for="id_embedColumns">{% trans "APP-FREEZE-TEXT" %}</label>
+                                    <input id="id_embedColumns" name="embedColumns" type="text" size="3" value="0" title="Enter the number of columns to freeze" style="width:12px;"/>
+                                    <label for="id_embedColumns">{% trans "APP-COLUMNS-TEXT" %}</label>
+                                    -->
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+            <div id="id_embed_chart_container" style="display:none;">
+                <h5><strong>{% trans "OVERLAY-CHARTEMBED-TITLE" %}</strong></h5>
+                <p>{% trans "OVERLAY-CHARTEMBED-TIP" %}.</p>
+
+                <div class="form clearfix">
+                    <form action="">
+                        <table class="ao-dialogue">
+                            <tr>
+                                <td>
+                                    <textarea id="id_embedTextarea" cols="" rows="" readonly="readonly"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="id_embedWidth">{% trans "APP-WIDTH-TEXT" %}:</label>
+                                    <input id="id_embedWidth" name="id_embedWidth" type="text" size="3" value="400" title="Enter width value"/>
+                                    <label for="id_embedHeight">{% trans "APP-HEIGHT-TEXT" %}:</label>
+                                    <input id="id_embedHeight" name="id_embedHeight" type="text" size="3" value="175" title="Enter height value"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endoverlay %}

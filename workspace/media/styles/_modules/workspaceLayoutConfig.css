@@ -1,0 +1,28 @@
+/*LAYOUT CONFIGURATION*/
+html, 
+body,
+.layout,
+.layoutInner,
+.content,
+.contentInner,
+.gradient,
+.in,
+.inInner{height:100%;}
+
+body,
+.contentInner,
+.content,
+.layout{background:#f4f3f3 url(/media_website/images/common/bg-body.jpg);}
+.contentInner .gradient{background:url(/media_website/images/common/gr-body.jpg) repeat-x;}
+.contentInner .in{background:url(/media_website/images/common/sh-body.png) repeat-x;}
+.inInner{background:#fff;}
+.cont{padding:0 1px;}
+
+.header{position:absolute;top:0;left:0;width:100%;}
+/*.footerWorkspace{position:fixed;bottom:0;left:0;width:100%;}*/
+.layout .cont{padding-bottom:70px;}
+
+
+/*FIXED HEADER - to let height 100% fit in*/
+.header{position:absolute;top:0;left:0;width:100%;}
+.layout .cont{padding-top:45px;}

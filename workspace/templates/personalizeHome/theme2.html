@@ -1,0 +1,60 @@
+{% load i18n extra_tags components %}
+
+<script type="text/html" id="id_theme2Template">
+
+  <!-- Main section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">1</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-MAINTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-MAINDESCRIPTION-1') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<label for="id_theme2MainTitle"><%= gettext('ADMIN-HOME-SECTION-MAINTITLELABEL') %></label>
+				<input type="text" class="field" id="id_theme2MainTitle" name="id_theme2MainTitle" value="<%=mainTitle%>" data-bind="value:mainTitle,events:['keyup']"/>
+			</div>
+			<div class="row">
+				<label for="id_theme2MainText"><%= gettext('ADMIN-HOME-SECTION-MAINTEXTLABEL') %></label>
+				<textarea cols="" rows="" class="field" id="id_theme2MainText" name="id_theme2MainText" data-bind="value:mainSection,events:['keyup']"><%= mainSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- Resources Slider section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">2</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-RESOURCETITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-RESOURCEDESCRIPTION') %></h2>
+			</hgroup>       
+		</header>
+  	<fieldset class="form clearfix">
+      <div class="row clearfix">
+        <div>
+          <input id="id_sourceNameSuggest" name="source-name" type="text" class="field" maxlength="80"/>            
+        </div>
+      </div>       
+		</fieldset>     
+  </div>  
+
+	<!-- Middle section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">3</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-MIDDLETITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-MIDDLEDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<textarea cols="" rows="" class="field" id="id_theme2MiddleText" name="id_theme2MiddleText" data-bind="value:middleSection,events:['keyup']"><%= middleSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+</script>

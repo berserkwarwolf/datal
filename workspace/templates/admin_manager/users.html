@@ -1,0 +1,129 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+<link href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script src="/js_workspace/admin_manager/users.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+
+        <div class="titleContainer clearfix">
+            <h3 class="FL">{% trans "APP-USERS-TEXT" %}</h3>
+            <div class="actionButtons FR">
+                <button class="button green small" title="{% trans 'WORKSPACE-CREATE-USER' %}" id="id_create_user">{% trans "WORKSPACE-CREATE-USER" %}</button>
+            </div>
+        </div>
+        
+        <div class="list-container">
+            <div class="workspaceGrid">
+                <table id="id_usersTable">
+                    <thead>
+                        <tr>
+                            <th>{% trans "APP-NAME-TEXT" %}</th>
+                            <th>{% trans "APP-USERNAME-TEXT" %}</th>
+                            <th>{% trans "APP-ROLE-TEXT" %}</th>
+                            <th>{% trans "APP-LAST-ACTIVITY-TEXT" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr data-id="{{user.id}}" data-email="{{user.email}}" data-role="{{user.roles__code}}">
+                            <td>
+                                <span class="name">{{user.name}}</span>
+                                <ul class="actions clearfix">
+                                    <li class="edit">
+                                        <a>{% trans 'APP-EDIT-TEXT' %}</a>   
+                                    </li>
+                                </ul>
+                            </td>
+                            <td class="username">{{user.nick}}</td>
+                            <td>{{user.roles__name}}</td>
+                            <td>{{user.last_visit|timesince}}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+    			<div class="helpBox">
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block popupsOverlay %}
+{% overlay id_userFormContainer %}
+<div class="In clearfix">
+    <form action="{{form.action}}" method="POST" id="id_userForm" class="ao-L">
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% csrf_token %}
+        <h4>{% trans "WORKSPACE-CREATE-USER" %}</h4>
+       
+        <div class="dataStreamForm">
+            <div class="columns clearfix">
+                <div class="CL">
+                    <fieldset class="form">
+                        <div class="row clearfix">
+                            <label for="{{form.name.auto_id}}">{{form.name.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.name}}
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <label for="{{form.username.auto_id}}">{{form.username.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.username}}
+                            </div>
+                            <p class="tip">{% trans "ACCOUNT-USERS-USERNAME-TIP" %}</p>
+                        </div>
+                        <div class="row clearfix">
+                            <label for="{{form.email.auto_id}}">{{form.email.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.email}}
+                            </div>
+                            <p class="tip">{% trans "ACCOUNT-USERS-EMAIL-TIP" %}</p>
+                        </div>
+                        <div class="row clearfix">
+                            <label for="{{form.confirm_email.auto_id}}">{{form.confirm_email.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.confirm_email}}
+                            </div>
+                        </div>
+                        <div class="row clearfix">
+                            <label for="{{form.role.auto_id}}">{{form.role.label}}:</label>
+                            <div class="formErrorMessageContainer">
+                                {{form.role}}
+                            </div>
+                            <p class="tip">{% trans "ACCOUNT-USERS-ROLES-TIP" %}</p>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            {% trans "APP-USER-TIP" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons center">
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            </div>
+        </div>
+    </form>
+</div>
+{% endoverlay %}
+{% endblock %}

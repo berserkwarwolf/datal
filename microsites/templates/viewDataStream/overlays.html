@@ -1,0 +1,29 @@
+{% load i18n core_components components %}
+
+<!-- Google Spreadsheet overlay -->
+{% overlay id_googleSpreadsheetsDatastreamContainer %}
+  <div class="In clearfix">
+    <h4>{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</h4>
+    <h5><strong>{% trans "DSDET-GOOGLESPREADSHEETS-SUBTITLE" %}</strong></h5>
+    <p>{% trans "DSDET-GOOGLESPREADSHEETS-CONTENT" %}</p>
+    <div class="form clearfix">
+      <form action="" onsubmit="return false">
+        <table class="ao-dialogue">
+          <tr>
+            <td>
+              <input id="id_googleSpreadsheetDataStreamInput" readonly="readonly" style="width: 400px;" value="=ImportHtml(&quot;{{base_uri}}{% url "datastream_manager.action_html" datastream.datastream_id datastream.slug %}{%if url_query%}?{{url_query}}{%endif%}&quot; ; &quot;table&quot; ; 1)" />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+  </div>
+{% endoverlay %}
+
+{% if preferences.enable_embed_options %}
+  <!-- Embed overlay -->
+  {% include "overlays/embed.html" %}
+{% endif %}
+
+<!-- Parameters overlay -->
+{% include "overlays/parameters.html" %}

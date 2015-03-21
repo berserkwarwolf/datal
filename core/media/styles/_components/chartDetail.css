@@ -1,0 +1,24 @@
+/*CHART DETAIL*/
+
+/*BLOCK PANEL TITLE
+.blockPanelTitle{float:left;text-decoration:none;padding:8px 0 2px;font-weight:normal;position:relative;}
+.blockPanelTitle strong{color:#ef7f10;font-size:20px;height:20px;font-weight:bold;float:left;}
+.blockPageTitle .titleGradient{padding-right:0;}
+.blockPageTitle .leftContent{float:none;padding-right:320px;width:auto;}
+.blockPageTitle .bl{right:299px;}
+.blockPageTitle .rightContent{position:absolute;top:0;right:0;border-top:1px solid #fff;}
+.blockPageTitle .othersContainer{background:url(../../images/common/sb_contentAlpha.png) no-repeat center -1px;border-top:1px solid #d6d5d6;}
+.shareBox .firstRow .ao-wink span{position:relative;top:3px;}
+.dropDownMenu{top:4px;}
+.dropDownMenu .dashboard-dataservice-tooltip{width:120px;left:-100px;}
+.dropDownMenu .dashboard-dataservice-tooltip .In{padding:10px 10px 0;}*/
+
+	/*for CHARTS
+	.blockPageTitle{padding-bottom:0;background:none;}*/
+
+
+/*new Styles*/
+.grayContainer{background:none;border:0;}
+.grayContainer .columns{background:none;padding-left:10px;padding-right:10px;width:auto;min-width:940px;}
+.grayContainer .boxTitle{background:none;border-bottom:1px solid #ececec;padding-bottom:10px;margin-bottom:10px;}
+.grayContainer .columns .CL{width:auto;padding-right:320px;padding-left:10px;float:none;}

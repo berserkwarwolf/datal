@@ -1,0 +1,75 @@
+{% extends 'base_microsites.html' %}
+{% load i18n extra_tags %}
+
+{% block meta %}
+<script type="text/javascript">
+{% for message in messages %}
+    jQuery.TwitterMessage( { type: 'error', message : '{{message|escapejs}}' } );
+{% endfor %}
+</script>
+<link href="/media_workspace/styles/_components/usersManager.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/signInUp.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/signInLayoutConfig.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_microsites/styles/components/privateSignIn.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<!--[if lt IE 8]>
+<link href="/media_workspace/styles/_components/signInLayoutConfig-IE.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<![endif]-->
+
+<!-- BRANDED -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+{% endblock %}
+
+{% block header %}
+    
+{% endblock %}
+
+{% block content %}
+<div class="boxesContainer signUp w940">
+
+    <div class="signInTitleBox imgContainer clearfix">
+        {% account_logo account "FL" '' %}
+    </div>
+
+    <!-- SIGN IN -->
+    <div class="signForm signUpBox backShadow individualSignInBox">
+
+        <div class="boxShadow">
+            <div class="signBox">
+                <div class="pageFormContainer">
+                    <form action="{{form.action}}" method="post">
+                        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                        {% csrf_token %}
+                        <fieldset>
+                            <div class="signInTitleBox center">
+                                <h1>{% trans "APP-SIGNIN-TEXT" %}</h1>
+                            </div>
+                            <div class="row clearfix">
+                                <label for="id_nick">{% trans "MODEL-USERNAME-TEXT" %}:</label>
+                                <div class="formErrorMessageContainer">{{form.username}}</div>
+                                <span class="sign"></span>
+                            </div>
+                            <div class="row clearfix">
+                                <label for="id_password">{% trans "MODEL-PASSWORD-TEXT" %}:</label>
+                                <div class="formErrorMessageContainer">{{form.password}}</div>
+                                <span class="sign"></span>
+                            </div>
+                            <div class="buttons">
+                                <div class="buttonsInner center">
+                                    <input type="submit" class="genericButton txt14" value="{% trans 'APP-LOGIN-TEXT' %}" />
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}
+
+{% block footer %}
+    
+{% endblock %}

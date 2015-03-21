@@ -1,0 +1,36 @@
+{% load i18n extra_tags %}
+<div id="home_filter" class="sidebarPadding referencesContainer">
+    <dl class="filters">    
+        <dt><span>{% trans "APP-RESOURCES-TEXT" %}</span></dt>
+        <dd class="filter_all filter_who filter-active DN">
+            <span title="{% trans 'APP-ALL-TEXT' %}">{% trans 'APP-ALL-TEXT' %}</span>
+        </dd>
+        {% if preferences.account_dataset_showhome == 'True' %}
+        <dd class="filter_type" data="dt">
+            <span title="{% trans 'APP-DATASETS-TEXT' %}">{% trans 'APP-DATASETS-TEXT' %}</span>
+        </dd>
+        {% endif %}
+        <dd class="filter_type" data="ds">
+            <span title="{% trans 'APP-DATAVIEWS-TEXT' %}">{% trans 'APP-DATAVIEWS-TEXT' %}</span>
+        </dd>
+        <dd class="filter_type" data="chart">
+            <span title="{% trans 'APP-CHARTS-TEXT' %}">{% trans 'APP-CHARTS-TEXT' %}</span>
+        </dd>
+        <dd class="filter_type" data="db">
+            <span title="{% trans 'APP-DASHBOARDS-TEXT' %}">{% trans 'APP-DASHBOARDS-TEXT' %}</span>
+        </dd>
+    </dl>
+
+    <dl class="filters">
+        <dt><span>{% trans "APP-TOPCATEGORIES-TEXT" %}</span></dt>
+        {% for category in categories %}
+            <dd class="filter_category">
+                <span id="id_category_{{category.id}}" title="{{category.name}}">{{category.name}}</span>
+            </dd>
+            <script type="text/javascript">
+                $('#id_category_{{category.id}}').data("category", "{{category.name}}");
+            </script>
+        {%endfor%}
+    </dl>
+
+</div>

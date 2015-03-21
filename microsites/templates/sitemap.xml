@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+<url>
+  <loc>http://{{domain}}</loc>
+  <lastmod>{{ now|date:"c" }}</lastmod>
+</url>
+
+
+{% for d in dss %}
+<url>
+  <loc></loc>
+  <loc>http://{{domain}}{{d.link}}</loc>
+  <lastmod>{{ d.date|date:"c" }}</lastmod>
+</url>
+{% endfor %}
+
+{% for v in vss %}
+<url>
+  <loc></loc>
+  <loc>http://{{domain}}{{v.link}}</loc>
+  <lastmod>{{ v.date|date:"c" }}</lastmod>
+</url>
+{% endfor %}
+
+{% for d in dshs %}
+<url>
+  <loc></loc>
+  <loc>http://{{domain}}{{d.link}}</loc>
+  <lastmod>{{ d.date|date:"c" }}</lastmod>
+</url>
+{% endfor %}
+
+</urlset>

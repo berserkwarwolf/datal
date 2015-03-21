@@ -1,0 +1,9 @@
+{% load i18n core_components components %}
+
+{% if preferences.enable_embed_options %}
+  <!-- Embed overlay -->
+  {% include "overlays/embed.html" %}
+{% endif %}
+
+<!-- Parameters overlay -->
+{% include "overlays/parameters.html" %}

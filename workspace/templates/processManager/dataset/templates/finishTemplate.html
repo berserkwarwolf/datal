@@ -1,0 +1,72 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_finishTemplate">
+
+<fieldset>
+	
+	{# title #}
+	<div class="row clearfix">
+		{{ form.title.label_tag }}
+		<span class="required">*</span>
+		{{ form.title }}
+	</div>
+	
+	{# description #}
+	<div class="row clearfix">
+		{{ form.description.label_tag }}
+		<span class="required">*</span>
+		{{ form.description }}
+	</div>
+	
+	{# category #}
+	<div class="row clearfix">
+		{{ form.category.label_tag }}
+		{# <span class="required">*</span> #}
+		{{ form.category }}
+	</div>
+	
+	{# status #}
+	<div class="row clearfix">
+		{{ form.status.label_tag }}
+		{# <span class="required">*</span> #}
+	  {{ form.status }}
+	</div>
+	
+	<hr class="separator">
+	
+	{# Sources #}
+	<div class="row clearfix">
+		<div id="sourceForm">
+			<div id="addSource"></div>
+			<div class="sourcesContent"></div>
+			<div id="addNewSource"></div>
+		</div>
+	</div>
+	
+	{# Tags #}
+	<div class="row clearfix">
+		<div id="tagForm">
+			<div id="addTag"></div>
+			<div class="tagsContent"></div>
+		</div>
+	</div>
+
+	<hr class="separator">
+	
+	{# notes #}
+	<div class="row clearfix">
+		{{ form.notes.label_tag }}
+		<div class="textarea clearfix FL">
+			{{ form.notes }}
+		</div>
+	</div>
+
+</fieldset>
+
+</script>
+
+{# Backbone Template #}
+{% include "processManager/dataset/templates/collectAddSourceTemplate.html" %}
+{% include "processManager/dataset/templates/collectAddNewSourceTemplate.html" %}
+{% include "processManager/dataset/templates/collectAddTagTemplate.html" %}
+{% include "processManager/dataset/templates/collectTagTemplate.html" %}

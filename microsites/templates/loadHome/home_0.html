@@ -1,0 +1,118 @@
+
+{% extends "loadHome/index.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block themeMeta %}
+
+{% if datastreams %}
+<script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/loadHome/sliderThemes.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/loadHome/slider.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/chart_manager/junarCharts.js?id={{settings.VERSION_JS_CSS}}"></script>    
+<script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+  google.load('visualization', '1', {
+    packages: ['corechart','geomap']
+  });
+</script>
+{% endif %}
+
+{% endblock %}
+
+{% block themeContent %}
+{% with number=paginator.count|intcomma %}
+<div class="homeContent w960 theme0">
+
+    {% if config.mainTitle %}
+    <div class="featuredContent placeholder">
+        <h1 class="PNR">{{config.mainTitle|format:number|safe}}</h1>
+    </div>
+    {% endif %}
+
+    {% if config.mainSection or datastreams or config.sideBarSection %}
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns clearfix">
+
+        {% if config.mainSection %}
+        <!-- COLUMN - Left -->
+        <div class="CL FL">
+            <div class="homeMainContent placeholder">
+                {{config.mainSection|format:number|safe}}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if datastreams or config.sideBarSection %}
+        <!-- COLUMN - Right -->
+        <div class="CR FR relative{% if datastreams %} paddingSlider{% endif %}">
+
+            {% if datastreams %}
+            <!-- SLIDER CONTAINER -->  
+            <div class="sliderContainer">
+                <div class="sliderWrapper">
+                    <div class="dataStreamBorder">
+                        <div class="innerBox" id="id_dataservices_container">                       
+                            {% include "loadHome/DSSlider.html" %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if config.sideBarSection %}
+            <!-- SIDEBAR CONTAINER -->
+            <div class="searchContainerContent boxContent">
+                <div class="homeSearchContent placeholder">
+                    {{config.sideBarSection|format:number|safe}}
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+    <!-- RESOURCES TABLE -->
+    {% include "loadHome/resourcesTable.html" %}
+
+    {% if config.leftBottomSection or config.rightBottomSection %}
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns clearfix">
+
+        {% if config.leftBottomSection %}
+        <!-- COLUMN - Left -->
+        <div class="CL FL">
+
+            <div class="placeholder boxContent">
+                <div class="homeFooterLeftContent placeholder">
+                    {{config.leftBottomSection|format:number|safe}}
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+        {% if config.rightBottomSection %}
+        <!-- COLUMN - Right -->
+        <div class="CR FR">
+
+            <div class="linksContainer boxContent">
+                <div class="homeFooterRightContent placeholder">
+                    {{config.rightBottomSection|format:number|safe}}
+                </div>
+            </div>
+
+        </div>
+        {% endif %}
+
+    </div>
+    {% endif %}
+    
+</div>
+{% endwith %}
+{% endblock %}

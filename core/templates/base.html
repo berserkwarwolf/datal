@@ -1,0 +1,75 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="{% if auth_manager.language == 'en' %}en-US{% endif %}{% if auth_manager.language == 'es' %}es-ES{% endif %}{% if auth_manager.language == 'pt' %}pt-BR{% endif %}">
+<head>
+    <meta charset="utf-8">
+
+    {% block SEO %}
+    <title>{% block title %}Junar &middot; The Open Data Platform{% endblock %}</title>
+    <meta name="description" content="Junar delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
+    {% endblock %}
+
+	<meta http-equiv="CACHE-CONTROL" content="max-age=0, no-store" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	
+	{% block head %}{% endblock %}
+	
+    {% block favicon %}
+        <link rel="shortcut icon" href="/media_core/images/favicon/junar.ico" />
+    {% endblock %}
+
+	{% include "css.html" %}
+    {% block css_includes %}{% endblock %}
+	
+	{% include "js.html" %}
+    {% block js_includes %}{% endblock %}
+	
+    {% block facebook %}{% endblock %}
+
+	{% block meta %}{% endblock %}
+</head>
+<body class="{% block body_class %}{% endblock %}">
+	{% block body %}
+	
+	{% endblock %}
+
+    {% block popupsOverlay %}
+    
+    {% endblock %}
+	
+	<!-- Overlay Mask -->
+	<div id="id_overlayMask" class="overlayMask"></div>
+
+    {% block loadingOverlay %}
+    <div class="ajaxLoadingOverlay" id="ajax_loading_overlay">
+        <p>{% trans "APP-LOADING-TEXT" %}</p>
+    </div>
+    {% endblock %}
+
+    {% block ga_code %}
+    <script type="text/javascript">
+ 
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-15500152-1']);
+      _gaq.push(['_setDomainName', 'junar.com']);
+      _gaq.push(['_trackPageview']);
+     
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+     
+    </script>
+    {% endblock %}
+
+    {% block zendesk_chat %}
+
+    {% endblock %}
+
+    {% block base_bottom_js %}
+
+    {% endblock %}
+
+</body>
+</html>

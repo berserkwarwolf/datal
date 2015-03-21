@@ -1,0 +1,11 @@
+{% extends "workspace_errors/lifeCycleException.html" %}
+{% load i18n %}
+
+{% block error_title %}
+	{% trans "APP-DATAVIEW-REQUIRED-TITLE" %}
+{% endblock %}
+
+{% block error_text %}
+	<p>{% trans "APP-DATAVIEW-REQUIRED-TEXT" %}</p>
+	<a title="{% trans "APP-GO-TO-DATAVIEWS-TEXT" %}" class="button black small FL" id="id_goToDataviews" href="{% url "manageDataviews.list" %}">{% trans "APP-GO-TO-DATAVIEWS-TEXT" %}</a>
+{% endblock %}

@@ -1,0 +1,72 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<script type="text/html" id="id_dataTableTemplate">
+
+</script>
+
+<div class="dataTable box" id="id_dataStreamContainer">
+	
+	<!-- Header -->
+	<header class="border-box {% if preferences.account_enable_sharing %}sharingEnabled{% endif %}">
+		
+		{% if preferences.account_enable_sharing %}
+    <div class="socialBox clearfix FR">
+      <span class='st_facebook_large' displayText='Facebook'></span>
+      <span class='st_twitter_large' displayText='Tweet'></span>
+      <span class='st_googleplus_large' displayText='Google +'></span>
+      <span class='st_linkedin_large' displayText='LinkedIn'></span>
+    </div>
+		{% endif %}
+
+		<!-- Title and Description -->
+		<hgroup>
+			<h1 class="clearfix">
+				<strong class="FL">{{dataset.title|capfirst}}</strong>
+			</h1>
+			<h2>{{dataset.description|capfirst}}</h2>
+      <h4>{% trans 'APP-RESOURCESCREATED-TEXT' %}</h4>
+		</hgroup>
+
+	</header>
+
+	<!-- Resources List -->
+    <div class="resources-list">
+
+        <div id="id_resourcesList">
+            
+            <!-- Table -->
+              <table id='dataset_table_list' class='backgrid'>                
+                <thead>
+                  <tr>
+                    <th>{% trans 'APP-RESOURCE-TEXT' %}</th>
+                    <th>{% trans 'APP-LAST-UPDATE-TEXT' %}</th>
+                  </tr>
+                </thead>
+                
+                <tbody>
+                  
+                  {% for resource in related_resources.datastreams %} 
+                    <tr>
+                      <td>
+                      	<i class="icon-resources dataview">
+                      		<h3><a>{{ resource.datastreami18n__title }}</a></h3>
+                        	<p>{{ resource.datastreami18n__description }}</p>
+                          <div class="api_example">
+                            <p>API request example:</p>
+                            <p>http://{{preferences.account_api_domain}}/dataviews/invoke/{{resource.datastream__guid}}?auth_key=YOUR_API_KEY</p>
+                          </div>
+                      	</i>
+                      </td>
+                      <td>{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}</td>
+                    </tr>
+                  {% endfor %}
+
+                </tbody>
+              </table>
+
+        </div>
+
+    </div>
+
+</div>

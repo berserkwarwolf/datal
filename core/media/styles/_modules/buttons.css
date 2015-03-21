@@ -1,0 +1,85 @@
+/*GENERIC BUTTON*/
+.genericButton{border:1px solid #7c9e12;color:#fff;text-shadow:0 1px 0 #769513;font:bold 12px arial, helvetica, sans-serif;background:#a4c531 url(../../images/common/dg_genericButton.gif) repeat-x 0 0;display:inline-block;line-height:28px;overflow:visible;width:auto;height:30px;padding:0 15px 3px;cursor:pointer;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;
+}
+.genericButton:hover{background-position:0 bottom;}
+.genericButton.txt14{font-size:14px;font-weight:normal;}
+.genericButton[disabled=disabled] {filter:alpha(opacity=50);opacity: 0.5;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";}
+a.genericButton{padding-bottom:0;height:28px;}
+a.genericButton:hover{text-decoration:none;}
+
+	/*SLIM*/
+	.genericButton.buttonSlim{border-color:#84981d;font:11px arial, helvetica, sans-serif;background-image:url(../../images/common/dg_genericButtonSlim.jpg);line-height:16px;overflow:visible;height:19px;padding:0 5px 0;}
+	a.genericButton.buttonSlim{height:17px;}
+	
+	/*MEDIUM*/
+	.genericButton.buttonMedium{border-color:#84981d;font:12px arial, helvetica, sans-serif;background-image:url(../../images/common/dg_genericButtonMedium.jpg);line-height:21px;overflow:visible;height:24px;padding:0 5px 0;}
+	a.genericButton.buttonMedium{height:22px;}
+	
+	/*BIG*/
+	.genericButton.buttonBig{border-color:#7c9e12;font:bold 18px arial, helvetica, sans-serif;background-image:url(../../images/common/dg_genericButtonBig.jpg);line-height:37px;overflow:visible;height:40px;padding:0 19px 0;text-align:center;}
+	a.genericButton.buttonBig{height:38px;}
+	a.genericButton.buttonBig span{padding:0 12px 0 0;background:url(../../images/common/fl_genericButtonBig.gif) right 5px no-repeat;text-shadow:#517605 1px 1px 1px;}
+	a.genericButton.buttonBig b{color:#e4fb94;}
+
+	a.genericButton.buttonBig .legend{display:none;}
+
+	/*BIG WITH LEGEND*/
+	a.genericButton.buttonBig.withLegend{position:relative;line-height:26px;}
+	a.genericButton.buttonBig.withLegend span{background:none;padding:0;}
+	a.genericButton.buttonBig.withLegend .legend{display:block;position:absolute;background:none;padding:0;font-size:9px;text-transform:uppercase;color:#264c00;width:100%;top:25px;left:0;line-height:normal;text-shadow:0 0 0 transparent;}
+
+	/*MORE BIG BUTTON*/
+	a.genericButton.moreBigButton{padding:0 11px;}
+	a.genericButton.moreBigButton span{background:url(../../images/common/fl_genericButton.gif) no-repeat right 4px;font-size:15px;padding:0 12px 0 0;text-shadow: 0 1px 0 #517605;}
+	
+	/*NORMAL BUTTON*/
+	a.genericButton.normalButton,
+    button.genericButton.normalButton{border-color:#84982d;height:20px;line-height:20px;background-image:url(../../images/common/dg_followButton.gif);padding:0;}
+	a.genericButton.normalButton span,
+    button.genericButton.normalButton span{padding:0 8px;text-shadow:0 1px 0 #5b7605;display:inline-block;line-height:20px;}
+    button.genericButton.normalButton{padding-bottom:3px;line-height:normal;}
+    button.genericButton.normalButton span{line-height:18px;}
+	
+	/*MORE*/
+	a.genericButton.moreButton,
+	button.genericButton.moreButton{border-color:#84982d;height:20px;line-height:20px;background-image:url(../../images/common/dg_followButton.gif);padding:0;}
+	a.genericButton.moreButton span,
+	button.genericButton.moreButton span{padding:0 13px 0 8px;margin-right:8px;background:url(../../images/common/bt_icMore.gif) right center no-repeat;text-shadow:0 1px 0 #5b7605;display:inline-block;line-height:20px;}
+	
+	/*FOLLOW*/
+	a.genericButton.followButton span,
+	button.genericButton.followButton span{padding:0 10px 0 26px;margin-right:0;background:url(../../images/common/bt_icFollow.gif) 6px 3px no-repeat;}
+
+    /*ACTION BUTTON*/
+    a.genericButton.actionButton{border-color:#dbdada;height:18px;line-height:18px;background-color:#fff;background-image:url(../../images/new/dg_actionButton.gif);padding:0;
+    }
+    a.genericButton.actionButton span{padding:0 8px;text-shadow:0 1px 0 #fff;display:inline-block;line-height:16px;border:1px solid #fff;color:#333;font-size:11px;font-weight:normal;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+    button.genericButton.actionButton{border-color:#dbdada;height:18px;line-height:normal;background-color:#fff;background-image:url(../../images/new/dg_actionButton.gif);padding:0 4px 2px;-moz-box-shadow:inset 0 0 2px #fff;-webkit-box-shadow:inset 0 0 2px #fff;box-shadow:inset 0 0 2px #fff;color:#333;font-size:11px;font-weight:normal;text-shadow:0 1px 0 #fff;white-space:nowrap;
+        -webkit-transition:all 0.30s ease-in-out;
+           -moz-transition:all 0.30s ease-in-out;
+            -ms-transition:all 0.30s ease-in-out;
+             -o-transition:all 0.30s ease-in-out;
+                transition:all 0.30s ease-in-out;
+    }
+
+    /*ARROW BUTTON*/
+    a.genericButton.arrowButton{border-color:#888e7c;border-color:rgba(28, 40, 2, 0.5);height:auto;line-height:normal;padding:0;background-image:url(../../images/common/bt_gradient12.gif);
+        -webkit-transition:all 0.30s ease-in-out;
+           -moz-transition:all 0.30s ease-in-out;
+            -ms-transition:all 0.30s ease-in-out;
+             -o-transition:all 0.30s ease-in-out;
+                transition:all 0.30s ease-in-out;
+    }
+    a.genericButton.arrowButton span,
+    a.genericButton.arrowButton b{font-size:12px;height:22px;line-height:20px;text-shadow:0 1px 0 #517605;border:1px solid #cada66;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;display:inline-block;padding:0 22px 0 8px;background:url(../../images/common/bt_arrow12.gif) no-repeat right 6px;}
+
+    /*ARROW BUTTON 15*/
+    a.genericButton.arrowButton.txt15{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
+    a.genericButton.arrowButton.txt15 span,
+    a.genericButton.arrowButton.txt15 b{height:31px;line-height:29px;padding-left:13px;padding-right:24px;font-size:15px;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;background-position:right 11px;}
+
+/*COLLAPSE BUTTON*/
+.btnCollapse a{background:url(../../images/common/bt_Expandir.gif) no-repeat 0 0;width:24px;height:20px;display:block;float:right;}
+.btnCollapse a:hover{background-position:0 bottom;}
+.btnCollapse a.expand{background-position:right 0;}
+.btnCollapse a.expand:hover{background-position:right bottom;}

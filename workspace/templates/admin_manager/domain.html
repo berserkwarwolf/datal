@@ -1,0 +1,71 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block meta %}
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script src="/js_core/plugins/jquery.enable.disable.plugin.min.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<script src="/js_workspace/admin_manager/domain.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+        <form action="{{form.action}}" method="post" id="id_adminDomainForm">
+            {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% csrf_token %}
+            <div class="titleContainer clearfix">
+                <h3 class="FL">{% trans "WORKSPACE-DOMAIN-SETTINGS" %}</h3>
+            </div>
+            
+            <div class="columns clearfix">
+                <div class="CL">
+                    <div class="dataStreamForm domainForm" id="id_update_user_container">
+                        <fieldset class="form">
+                            <div class="row clearfix">
+                                <label for="{{form.account_domain.auto_id}}">{{form.account_domain.label}}:</label>
+                                <div class="formErrorMessageContainer radioLabel">
+                                    {{form.pick_a_domain.0.tag}}
+                                    {{form.account_domain_internal}}
+                                    <span class="text14" id="id_defaultDomain">{{default_domain}}</span>
+                                    <p class="tip">{% trans "ACCOUNT-DOMAIN-TIP-1" %}</p>
+                                </div>
+                                <div class="formErrorMessageContainer radioLabel simulateLabelSpace">
+                                    {{form.pick_a_domain.1.tag}}
+                                    {{form.account_domain_external}}
+                                    <p class="tip">{% trans "ACCOUNT-DOMAIN-TIP" %}</p>
+                                </div>
+                            </div>
+                            <!-- API URL -->
+                            <div class="row clearfix">
+                                <label>API URL:</label>
+                                <div class="formErrorMessageContainer api">
+                                    <span class="text14" id="id_apiDomain">{{form.data.account_api_domain}}</span>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            {%if is_private_site%}{% trans "WRKSPCE-DOMAIN-TIP-PRIVATE" %}{%else%}{% trans "WRKSPCE-DOMAIN-TIP" %}{%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="buttons center">
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}

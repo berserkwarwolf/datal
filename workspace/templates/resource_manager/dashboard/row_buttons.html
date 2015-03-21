@@ -1,0 +1,19 @@
+{% load i18n extra_tags %}
+<td class="itemActions">
+
+{% if revision.status == 0 %}
+{% if 'workspace.can_submit_dashboard_revision' in auth_manager.privileges %}
+<button class="submit genericButton actionButton workspaceIcon sendToReviewIcon"><span class="submit">{% trans "APP-SENDTOREVIEW-TEXT" %}</span></button>
+{% endif %}
+{% endif %}
+{% if revision.status != 2 %}
+{% if 'workspace.can_edit_dashboard_revision' in auth_manager.privileges %}
+<button class="edit genericButton actionButton workspaceIcon editIcon"><span class="edit">{% trans "APP-ACTIONS-EDIT" %}</span></button>
+{% endif %}
+{% endif %}
+{% if revision.status != 2 and revision.status != 3 %}
+{% if 'workspace.can_delete_dashboard_revision' in auth_manager.privileges %}
+<button class="delete genericButton actionButton workspaceIcon deleteIcon"><span class="delete">{% trans "APP-DELETE-TEXT" %}</span></button>
+{% endif %}
+{% endif %}
+</td>

@@ -1,0 +1,20 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_collectUrlTemplate">
+
+<fieldset>
+	
+	{# endpoint #}
+	<div class="row clearfix">
+		<label for="{{ form.end_point.if_for_label }}">{% trans 'APP-URL-TEXT' %}</label>
+		<span class="required">*</span>
+		{{ form.end_point }}
+		<p class="tip">{% trans 'APP-URL-TIP' %}</p>
+	</div>
+	
+	{# Common Fields #}
+	{% include "processManager/dataset/templates/collectCommonTemplate.html" %}
+
+</fieldset>
+
+</script>

@@ -1,0 +1,119 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags %}
+{% block meta %}
+<script type="text/javascript">
+
+var my_account_messages = new Array();
+{% for message in messages %}
+    my_account_messages.push('{{message}}');
+{% endfor %}
+
+var my_form_error_messages = new Array();
+{% for message in form.non_field_errors %}
+    my_form_error_messages.push('{{message}}');
+{% endfor %}
+</script>
+
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/myAccount.css?id={{settings.VERSION_JS_CSS}}"/>
+
+<script src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<script type="text/javascript" src="/js_workspace/accounts/myAccount.js?id={{settings.VERSION_JS_CSS}}"></script>
+<meta name="main-option" content="id_account_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-MYACCOUNT-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="formContainer" id="id_update_user_container">
+    <form action="{{form.action}}" method="post" id="id_myAccountForm">
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% csrf_token %}
+
+            <header>
+                <h3>{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</h3>
+            </header>
+
+        <div class="columns clearfix">
+            <div class="CL">
+                <div class="dataStreamForm">
+                    <fieldset class="form">
+
+                        <div class="row clearfix">
+                            <div class="formErrorMessageContainer">
+                                <label for="{{form.name.auto_id}}">{{form.name.label}}:</label>
+                                {{form.name}}
+                                <p class="tip changePass"><a id="id_changePasswordButton" href="javascript:;" rel="#id_changePasswordContainer" title="{% trans 'APP-CHANGEPASSWORD-TEXT' %}">{% trans "APP-CHANGEPASSWORD-TEXT" %}</a></p>
+                            </div>
+                        </div>
+
+                        <div id="id_changePasswordContainer" style="display:none">
+                            <div class="row clearfix">
+                                <div class="formErrorMessageContainer">
+                                    <label for="{{form.old_password.auto_id}}">{{form.old_password.label}}:</label>
+                                    {{form.old_password}}
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="formErrorMessageContainer">
+                                    <label for="{{form.new_password.auto_id}}">{{form.new_password.label}}:</label>
+                                    {{form.new_password}}
+                                    <div class="passwordStrength">
+                                        <div id="id_passwordStrengthDiv" class="is0"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <div class="formErrorMessageContainer">
+                                    <label for="{{form.new_password_again.auto_id}}">{{form.new_password_again.label}}:</label>
+                                    {{form.new_password_again}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row clearfix">
+                            <div class="formErrorMessageContainer">
+                                <label for="{{form.email.auto_id}}">{{form.email.label}}:</label>
+                                {{form.email}}
+                            </div>
+                        </div>
+
+                        <!--<div class="row clearfix">
+                            <label for="{{form.language.auto_id}}">{{form.language.label}}:</label>
+                            <div class="formErrorMessageContainer">{{form.language}}</div>
+                        </div>
+                        -->
+                        <div class="row clearfix">
+                            <label for="">{% trans "APP-PICTURE-TEXT" %}:</label>
+                            <div class="avatar clearfix">{% gravatar auth_manager "medium" "FL" %}</div>
+                        </div>
+
+                    </fieldset>
+                </div>
+
+            </div>
+
+            <div class="CR">
+                <div class="helpBox">
+                    <div class="helpBoxInner">
+                        <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                        <p>{% trans "USR-GRAVATAR-TIP1" %} <a href="http://www.gravatar.com" target="_blank">Gravatar</a> {% trans "USR-GRAVATAR-TIP2" %} <a href="http://en.gravatar.com/site/login" target="_blank">{% trans "APP-HERE-TEXT" %}</a>.</p> 
+                        <p>{% trans "USR-GRAVATAR-TIP4" %} <a href="http://en.gravatar.com/site/signup/" target="_blank">{% trans "APP-HERE-TEXT" %}</a>.<p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div class="buttons center">
+            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+        </div>
+
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'manageDatasets/index.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block css_hide %}
+display:none;
+{% endblock %}
+
+{% block noresults %}
+<div class="zeroResults">
+	<div class="zeroIcon zeroDatasets"></div>
+  <p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
+</div>
+<div class="startAdding">
+	<div class="startAddingArrows startDatasets"></div>
+	<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+	<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+</div>
+{% endblock %}

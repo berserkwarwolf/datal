@@ -1,0 +1,122 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_collectWebserviceTemplate">
+
+	<div class="title">{% trans 'ANALYTICS-DASHBOARD-DETAILS' %}</div>
+	<fieldset>
+
+		{# end_point #}
+		<div class="row clearfix">
+			{{ form.end_point.label_tag }}
+			<span class="required">*</span>
+			{{ form.end_point }}
+			<p class="tip">{% trans 'WORKSPACE-ENDPOINT-TIP' %}</p>
+		</div>
+
+		{# impl_type #}
+		<div class="row clearfix">
+			{# form.impl_type #} 
+			<label for="{{ form.impl_type.id_for_label }}">{% trans 'WORKSPACE-WSTYPE-TEXT' %}</label>
+			{{ form.impl_type }} 
+			<p class="tip">{% trans 'WORKSPACE-WSTYPE-TIP' %}</p>
+		</div>
+
+		<div id="id_rest_json">
+
+			{# path_to_headers #}
+			<div class="row clearfix">
+				{{ form.path_to_headers.label_tag }}
+				{{ form.path_to_headers }}
+				<p class="tip">{% trans 'WORKSPACE-PATHTOHEADERS-TIP' %}</p>
+			</div>
+
+			{# path_to_data #}
+			<div class="row clearfix">
+				{{ form.path_to_data.label_tag }}
+				{{ form.path_to_data }} 
+				<p class="tip">{% trans 'WORKSPACE-PATHTODATA-TIP' %}</p>
+			</div>
+
+			{# signature name #}
+			<div class="row clearfix">
+				{{ form.signature.label_tag }}
+				{{ form.signature }}
+				<p class="tip">{% trans 'WORKSPACE-SIGNATURE-TIP' %}</p>
+			</div>
+
+			{# token #}
+			<div class="row clearfix">
+				{{ form.token.label_tag }}
+				{{ form.token }}
+				<p class="tip">{% trans 'WORKSPACE-TOKEN-TIP' %}</p>
+			</div>
+
+			{# algorithm #}
+			<div class="row clearfix">
+				{{ form.algorithm.label_tag }}
+				{{ form.algorithm }}
+				<p class="tip">{% trans 'WORKSPACE-ALGORITHM-TIP' %}</p>
+			</div>
+
+			{# username #}
+			<div class="row clearfix">
+				{{ form.username.label_tag }}
+				{{ form.username }}
+			</div>
+
+			{# password #}
+			<div class="row clearfix">
+				{{ form.password.label_tag }}
+				{{ form.password }}
+			</div>
+
+		</div>
+
+		<div id="id_soap_xml" style="display:none;">
+
+			{# method #}
+			<div class="row clearfix">
+				{{ form.method_name.label_tag }}
+				{{ form.method_name }}
+				<p class="tip">{% trans 'WORKSPACE-METHODNAME-TIP' %}</p>
+			</div>
+
+			{# name space #}
+			<div class="row clearfix">
+				{{ form.namespace.label_tag }}
+				{{ form.namespace }}
+				<p class="tip">{% trans 'WORKSPACE-NAMESPACE-TIP' %}</p>
+			</div>
+
+		</div>
+
+		{# enable_use_cache #}
+		<div class="row checkbox clearfix">
+			{{ form.use_cache.label_tag }}
+			{{ form.use_cache }}
+			<p class="tip">{% trans 'WORKSPACE-CACHE-TIP' %}</p>
+		</div>
+
+	</fieldset>
+
+	<div class="title">{% trans 'WORKSPACE-PARAM-TITLE' %}</div>
+	<fieldset id="paramForm">
+
+		<div id="addForm"></div>
+		<div class="paramContent"></div>
+		
+	</fieldset>
+
+	<div class="title">{% trans 'APP-DATASET-INFORMATION-TEXT' %}</div>
+	<fieldset>
+	
+		{# Common Fields #}
+		{% include "processManager/dataset/templates/collectCommonTemplate.html" %}
+
+	</fieldset>
+
+</script>
+
+{# Backbone Template #}
+{% include "processManager/dataset/templates/collectWebserviceParamTemplate.html" %}
+{% include "processManager/dataset/templates/collectWebserviceAddParamTemplate.html" %}

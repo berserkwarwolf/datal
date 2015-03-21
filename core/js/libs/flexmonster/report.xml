@@ -1,0 +1,29 @@
+<config>
+  <dataSource type="CSV">
+    <filename>data.csv</filename>
+  </dataSource>
+  <defaultSlice>
+    <axes>
+      <axis name="rows">
+        <hierarchy>
+          <dimensionName>[Country]</dimensionName>
+          <hierarchyName>[Country].[Country]</hierarchyName>
+        </hierarchy>
+        <hierarchy>
+          <dimensionName>[Measures]</dimensionName>
+          <hierarchyName>[Measures]</hierarchyName>
+        </hierarchy>
+      </axis>
+      <axis name="columns">
+        <hierarchy>
+          <dimensionName>[Color]</dimensionName>
+          <hierarchyName>[Color].[Color]</hierarchyName>
+        </hierarchy>
+      </axis>
+    </axes>
+    <measures>
+      <measure>[Measures].[Price]</measure>
+      <measure>[Measures].[Discount]</measure>
+    </measures>
+  </defaultSlice>
+</config>

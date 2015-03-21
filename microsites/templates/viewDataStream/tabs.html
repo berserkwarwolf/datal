@@ -1,0 +1,60 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<ul class="icons">
+	<li>
+		<a class="icon info border-box sidebarIcon" id="id_openInfoButton" rel="id_infoSidebar">
+			<i></i> 
+			<span>{% trans 'VIEWDS-TABS-INFO' %}</span>
+		</a>
+	</li>
+	<li>
+		<a class="icon refresh border-box" id="id_refreshButton">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-REFRESH' %}</span>
+		</a>
+	</li>
+	{% if preferences.account_pivottable %}
+	<li>
+		<a class="icon pivot border-box" id="id_pivotComponentButton">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-PIVOTTABLE' %}</span>
+		</a>
+	</li>
+	{% endif %}
+	{% if preferences.enable_embed_options %}
+	<li>
+		<a class="icon embed border-box" id="id_embedButton">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-EMBED' %}</span>
+		</a>
+	</li>
+	{% endif %}
+	{% if notes and preferences.account_enable_notes %}
+	<li>
+		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-NOTES' %}</span>
+		</a>
+	</li>
+	{% endif %}
+	<li>
+		<a class="icon api border-box sidebarIcon" id="id_openAPIButton" rel="id_apiSidebar">
+			<i></i> 
+			<span>{% trans 'VIEWDS-TABS-API' %}</span>
+		</a>
+	</li>
+	<li class="relative">
+		<a class="icon export border-box" id="id_exportButton" rel="id_tooltipExport">
+			<i></i> 
+			<span>{% trans 'VIEWDS-TABS-EXPORT' %}</span>
+		</a>
+		<ul class="tooltip border-box" style="display:none;" id="id_tooltipExport">
+			{% if can_export %}
+			<li><a id="id_exportToCSVButton" rel="id_tooltipExport" href="{% url "datastream_manager.action_csv" datastream.datastream_id datastream.slug %}{%if url_query%}?{{url_query}}{%endif%}">{% trans 'VIEWDS-EXPORT-CSV' %}</a></li>
+			<li><a id="id_exportToXLSButton" rel="id_tooltipExport" href="{% url "datastream_manager.action_xls" datastream.datastream_id datastream.slug %}{%if url_query%}?{{url_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS">{% trans 'VIEWDS-EXPORT-XLS' %}</a></li>
+			{% endif %}
+			<li><a id="id_googleSpreadSheetButton" rel="id_tooltipExport">{% trans 'VIEWDS-EXPORT-GS' %}</a></li>
+		</ul>
+	</li>
+</ul>                                

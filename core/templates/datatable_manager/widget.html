@@ -1,0 +1,62 @@
+{% load i18n extra_tags %}
+
+<div class="CL sidebar">
+    <div class="sidebarInner">
+        <div id="{{table_prefix}}_filter" class="sidebarPadding">
+            <div class="accountLogo clearfix center">
+                {% account_logo auth_manager.get_account "FL" auth_manager.is_admin %}
+            </div>
+
+            {% if filter_button_template %}
+                {% include filter_button_template %}
+            {% else %}
+                {% include 'datatable_manager/filter_button.html' %}
+            {% endif %}
+            
+            {% include 'datatable_manager/filters.html' %}
+        </div>
+    </div>
+</div>
+<div class="CR grid">
+    <div id="{{table_prefix}}_grid" class="gridInner">
+
+        <div class="sectionInfo clearfix">
+            <div class="sectionInfoInner">
+                {% if table_prefix == 'dataset' %}
+                    <h2>{% trans "APP-DATASETS-TEXT" %}</h2>
+                {% endif %}
+                {% if table_prefix == 'datastream' %}
+                    <h2>{% trans "APP-VIEWS-TEXT" %}</h2>
+                {% endif %}
+                {% if table_prefix == 'visualization' %}
+                    <h2>{% trans "APP-CHARTS-TEXT" %}</h2>
+                {% endif %}
+                {% if table_prefix == 'dashboard' %}
+                    <h2>{% trans "APP-DASHBOARDS-TEXT" %}</h2>
+                {% endif %}
+            
+                {% if mass_template %}
+                    {% include mass_template %}
+                {% else %}
+                    {% include 'datatable_manager/mass_widget.html' %}
+                {% endif %}
+                
+            </div>
+            {% if search_template %}
+                {% include search_template %}
+            {% else %}
+                {% include 'datatable_manager/search_widget.html' %}
+            {% endif %}
+        </div>
+        <div id="grid_table" class="gridContainer">
+            {% include 'datatable_manager/datatable.html' %}
+        </div>
+        <div id="{{table_prefix}}_pagination" class="pagButtons clearfix pagination">
+            {% if pagination_template %}
+                {% include pagination_template %}
+            {% else %}
+                {% include 'datatable_manager/pagination_widget.html' %}
+            {% endif %}            
+        </div>
+    </div>
+</div>

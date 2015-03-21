@@ -1,0 +1,27 @@
+{% extends "base_microsites.html" %}
+{% load i18n extra_tags components core_components %}
+
+{% block SEO %}
+<title>Cómo Sumarse - {{preferences.account_page_titles}}</title>
+{% endblock %}
+
+{% block meta %}
+    <!-- CUSTOM -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/custom/opendatalatam/styles/opendatalatam.css?id={{settings.VERSION_JS_CSS}}"/>
+
+    <!-- BRANDED -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+
+{% endblock %}
+
+{% block content %}
+<div class="custom ODL">
+  <div class="innerODL">
+
+    <iframe src="https://docs.google.com/forms/d/11Sh2cLl_F08bftoErCtjU9HALCna8eQCBlrfnqdAhow/viewform?embedded=true" width="940" height="880" frameborder="0" marginheight="0" marginwidth="0">Cargando...</iframe>
+
+  </div>
+</div>
+{% endblock %}

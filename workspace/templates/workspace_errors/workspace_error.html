@@ -1,0 +1,29 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block sectionTitle %}
+	<h1>{% trans "APP-OOPS-ERROR-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+{% block error_content %}
+  <section class="box pink">
+		
+		<header>
+    	<h3 class="title">
+  			{% block error_title %}
+				{% endblock %}
+			</h3>
+		</header>
+
+		<div class="box-content clearfix">
+		{% block error_text %}
+		{% endblock %}
+		</div>
+
+  </section>
+{% endblock %}
+{% endblock %}
+
+{% block extras %}
+{% endblock %}

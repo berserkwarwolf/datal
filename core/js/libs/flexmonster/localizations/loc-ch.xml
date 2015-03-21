@@ -1,0 +1,176 @@
+﻿<localSettings>
+
+	<fieldsList>
+		<hierarchyBox>选择尺寸</hierarchyBox>
+		<filterBox>放报告筛选器</filterBox>
+		<rowBox>行</rowBox>
+		<columnBox>放栏</columnBox>
+		<measureBox>放值</measureBox>
+		<values>数值</values>
+		<addCalculatedMeasure>添加计算措施</addCalculatedMeasure>
+	</fieldsList>
+	
+	<filter>
+		<all>全</all>
+		<multipleItems>多个项目</multipleItems>
+		<selectAll>全选</selectAll>
+		<top>顶部</top>
+		<bottom>底部</bottom>
+		<ascSort>Az</ascSort>
+		<descSort>zA</descSort>
+		<topX>十大</topX>
+		<measuresPrompt>选择措施</measuresPrompt>
+		<search>搜索</search>
+		<amountSelected>{0} 的 {1} 选择的</amountSelected>
+	</filter>
+	
+	<calculatedView>
+		<measureBox>拖动措施到公式</measureBox>
+		<measureName>度量值名称</measureName>
+		<formula>配方</formula>
+	</calculatedView>
+	
+	<buttons>
+		<ok>好</ok>
+		<cancel>取消</cancel>
+		<save>保存</save>
+		<clear>抹去</clear>
+		<select>浏览...</select>
+	</buttons>
+	
+	<grid>
+		<total>共有</total><!--total is for OLAP data sources only-->
+		<totals>共有记录</totals>
+		<grandTotal>总值</grandTotal>
+	</grid>
+	
+	<charts>
+		<showLegend>显示图例</showLegend>
+		<hideLegend>隐藏的传奇</hideLegend>
+	</charts>
+	
+	<tooltips>
+		<row>行：</row>
+		<column>栏：</column>
+		<headerResize>拖动以调整</headerResize>
+		<headerFit>双击以适应</headerFit>
+		<filterIcon>点击进行筛选</filterIcon>
+		<filtered>过滤</filtered>
+		<expandIcon>单击以展开</expandIcon>
+		<collapseIcon>按一下可折叠</collapseIcon>
+		<sortIcon>点击降序排序</sortIcon>
+		<sortedDescIcon>单击"升序排序</sortedDescIcon>
+		<sortedAscIcon>点击降序排序</sortedAscIcon>
+	</tooltips>
+	
+	<aggregations>
+		<sum>
+			<caption>总和</caption>
+			<totalCaption><![CDATA[总和{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[之总和{0}]]></grandTotalCaption>
+		</sum>
+		<count>
+			<caption>数</caption>
+			<totalCaption><![CDATA[计数{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总的计数{0}]]></grandTotalCaption>
+		</count>
+		<distinctCount>
+			<caption>重复计数度</caption>
+			<totalCaption><![CDATA[重复计数度的 {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总重复计数度的 {0}]]></grandTotalCaption>
+		</distinctCount>
+		<average>
+			<caption>平均</caption>
+			<totalCaption><![CDATA[平均{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总平均{0}]]></grandTotalCaption>
+		</average>
+		<product>
+			<caption>产品</caption>
+			<totalCaption><![CDATA[产品{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总产品{0}]]></grandTotalCaption>
+		</product>
+		<min>
+			<caption>最低限度</caption>
+			<totalCaption><![CDATA[最低限度{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总的最小{0}]]></grandTotalCaption>
+		</min>
+		<max>
+			<caption>最大</caption>
+			<totalCaption><![CDATA[最大{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总的最大{0}]]></grandTotalCaption>
+		</max>
+		<percent>
+			<caption>百分之</caption>
+			<totalCaption><![CDATA[％的{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总的百分比{0}]]></grandTotalCaption>
+		</percent>
+		<percentOfColumn>
+			<caption>柱百分比</caption>
+			<totalCaption><![CDATA[柱百分比{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[总数的百分之柱{0}]]></grandTotalCaption>
+		</percentOfColumn>
+		<index>
+			<caption>指数</caption>
+			<totalCaption><![CDATA[指数的{0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[指数的{0}]]></grandTotalCaption>
+		</index>
+	</aggregations>
+	
+	<messages>
+		<error>错误！</error>
+		<warning>警告</warning>
+		<browse>浏览</browse>
+		<confirmation>确认</confirmation>
+		
+		<loading>载入...</loading>
+		<loadingConfiguration>载入配置...</loadingConfiguration>
+		<loadingData>数据加载...</loadingData>
+		<waiting>{0} 秒</waiting>
+		<progress><![CDATA[{0}К {1}К]]></progress>
+		<progressUnknown><![CDATA[加载 {0}К]]></progressUnknown>
+		<analyzing>数据分析...</analyzing>
+		<analyzingProgress><![CDATA[{0}记录{1} ({2}%)]]></analyzingProgress>
+		<loadingDimensions>载入中尺寸...</loadingDimensions>
+		<loadingHierarchies>载入层次...</loadingHierarchies>
+		<loadingMeasures>载入措施...</loadingMeasures>
+		<loadingMembers>载入中成员...</loadingMembers>
+		<loadingLevels>载入中水平...</loadingLevels>
+		<loadingSkin><![CDATA[载入样式... {0}%]]></loadingSkin>
+		<fullscreen>打开全屏透视？</fullscreen>
+		<exportComplete>出口数据被创建，请单击"保存"按钮保存数据。</exportComplete>
+		<exportProgress>正在进行中的出口...</exportProgress>
+		<generatingPDF>生成PDF</generatingPDF>
+		<pleaseWait>请稍候</pleaseWait>
+		<pagesWereGenerated>网页被生成的</pagesWereGenerated>
+		<uploading>上传到服务器...</uploading>
+		<cantSaveFile>错误：无法保存文件。</cantSaveFile>
+		<cantSaveToClipboard>错误：无法写入到剪贴板。</cantSaveToClipboard>
+		<selectFile>选择要载入的CSV文件</selectFile>
+		<saveReportToFile>报告是随时可以保存到文件，请单击“保存”按钮保存报告。</saveReportToFile>
+		<loadReportFromFile>选择要载入的报告</loadReportFromFile>
+		<inputNewName>输入新的名称</inputNewName>
+		<inputReportName>请输入报告名称</inputReportName>
+	</messages>
+	
+	<quarters>
+		<q1>第1季度</q1>
+		<q2>第2季度</q2>
+		<q3>第3季度</q3>
+		<q4>第4季度</q4>
+	</quarters>
+	<months>
+		<january>一月</january>
+		<february>二月</february>
+		<march>三月</march>
+		<april>四月</april>
+		<may>五月</may>
+		<june>六月</june>
+		<july>七月</july>
+		<august>八月</august>
+		<september>九月</september>
+		<october>十月</october>
+		<november>十一月</november>
+		<december>十二月</december>
+	</months>
+	
+</localSettings>

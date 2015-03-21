@@ -1,0 +1,20 @@
+{% load i18n %}
+
+<div id="{{table_prefix}}_search" class="search FR">
+    {% if table_prefix == 'dataset' %}
+    <input class="search_datatable field" type="text" placeholder="{% trans 'SEARCH-DATASETS-TEXT' %}"/>
+    {% endif %}
+    {% if table_prefix == 'datastream' %}
+    <input class="search_datatable field" type="text" placeholder="{% trans 'SEARCH-DATASTREAMS-TEXT' %}"/>
+    {% endif %}
+    {% if table_prefix == 'dashboard' %}
+    <input class="search_datatable field" type="text" placeholder="{% trans 'SEARCH-DASHBOARDS-TEXT' %}"/>
+    {% endif %}
+    {% if table_prefix == 'visualization' %}
+    <input class="search_datatable field" type="text" placeholder="{% trans 'SEARCH-VISUALIZATIONS-TEXT' %}"/>
+    {% endif %}
+    {% if table_prefix == 'home' %}
+    <input class="search_datatable field" type="text" placeholder="{% trans 'SEARCH-HOME-TEXT' %}"/>
+    {% endif %}
+    
+</div>

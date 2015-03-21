@@ -1,0 +1,40 @@
+{% load i18n %}
+<!DOCTYPE html>
+<html>
+<head>
+<title>Junar &middot; {% trans "APP-DISCOVERINGDATA-TEXT" %}</title>
+<meta charset="utf-8">
+
+<!-- RESET -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/reset.css?id={{settings.VERSION_JS_CSS}}"/>
+<!-- ACTIONS -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/actions.css?id={{settings.VERSION_JS_CSS}}"/>
+<!-- DATA STREAM BOX -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+<!-- COMPONENT -->
+<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/_modules/embed.css?id={{settings.VERSION_JS_CSS}}"/>
+
+<link rel="shortcut icon" href="/media_core/images/favicon/junar.ico" />
+
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+
+</head>
+<body>
+<div class="dataStreamContainer" id="id_dataservice_container">
+    <div id="id_dataservice_NN">
+        <div class="dataStreamBox clearfix">
+            <h2>
+                <a href="{{settings.BASE_URI}}" title="Junar" class="clearfix" target="_blank">
+                  <span class="txt"><span class="titleDS"><strong>Junar</strong>
+                  <br> {% trans "APP-DISCOVERINGDATA-TEXT" %}
+                  </span></span>
+                </a>
+            </h2>
+            <div class="Mensaje">
+                <table class="Nulo"><tbody><tr><td> {% trans "APP-OOPS-TEXT" %} <span>{% trans "APP-NODATAFOUD-TEXT" %}.</span></td></tr></tbody></table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

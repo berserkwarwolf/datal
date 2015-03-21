@@ -1,0 +1,32 @@
+{% load i18n extra_tags components %}
+
+<div class="step collect" data-step="collect" style="display:none;">
+
+	<header>
+		<h3>{% trans 'APP-COLLECT-WEBSITE-TITLE' %} <span>{% trans 'APP-MANDATORY-FIELDS-TEXT' %}</span></h3>
+		<div class="navigation FR">
+			<a title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small backButton"><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
+			<a title="{% trans 'APP-NEXT-TEXT' %}" class="button green small nextButton">{% trans 'APP-NEXT-TEXT' %}<i class="right-arrow"></i></a>
+		</div>
+	</header>
+	
+	<div class="columns clearfix">
+
+		<div class="CL formContent"></div>
+
+		<div class="CR">
+			<div class="helpBox">
+				<div class="helpBoxInner">
+					<h6>{% trans 'DSFIND-HELPTIP-TITLE' %}</h6>
+					<p>{% trans 'HOME-SEARCH-TIP' %}</p>
+					<p>{% trans 'APP-ANYDOUBTS-TEXT2' %} <a href="mailto:support@junar.com">{% trans 'APP-CALLUSONSKYPE-TEXT2' %}</a></p>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	
+</div>
+
+{# Backbone Templates #}
+{% include "processManager/dataset/templates/collectUrlTemplate.html" %}

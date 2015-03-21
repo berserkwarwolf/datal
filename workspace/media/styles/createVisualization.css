@@ -1,0 +1,65 @@
+/* Start */
+
+.createVizualization .box .chart{background-image:url(../images/createVisualization/thumb_createNewChart.svg);}
+.createVizualization .box .mapTrace{background-image:url(../images/createVisualization/thumb_createNewTraceMap.svg);}
+.createVizualization .box .mapMarkers{background-image:url(../images/createVisualization/thumb_createNewMarkersMap.svg);}
+.createVizualization .box .mapGeo{background-image:url(../images/createVisualization/thumb_createNewGeoMap.svg);}
+
+@media all and (min-width:1337px){
+  .createVizualization .box{width:320px;margin:0 20px 20px;}
+  .createVizualization .box .boxVizContent{height:227px;}
+}
+@media all and (max-width:1024px){
+  .createVizualization .boxContent{padding:20px 0;}
+  .createVizualization .box{width:200px;}
+  .createVizualization .box .boxVizContent{height:142px;}
+}
+
+.createVizualization .wrapper1, .createVizualization .wrapper2, .createVizualization .wrapper3{height:100%;width:100%;
+  -webkit-border-radius:3px;
+     -moz-border-radius:3px;
+          border-radius:3px;
+}
+.createVizualization .wrapper1{background-color:#f6f4f4;height:100%;padding-left:310px;}
+.createVizualization .wrapper2{border-left:1px solid #e5e5e5;background-color:#fff;}
+.createVizualization .wrapper3{float:left;margin-left:-310px;}
+.createVizualization .config-container{float:left;height:100%;width:310px;}
+
+/* Types */
+.create .sidebar fieldset{padding:15px;}
+.create .sidebar .subtitle{font-weight:bold;padding-bottom:15px;}
+.create .sidebar label{display:block;margin-bottom:8px;}
+.create .sidebar input[type=radio]{margin:0 7px 0 0;}
+.create .sidebar i.radio{background-image:url(../images/common/ic_chartConfig.png);background-repeat:no-repeat;width:17px;height:17px;margin-right:7px;display:inline-block;}
+.create .sidebar i.bar{}
+.create .sidebar i.column{background-position:0 -17px;}
+.create .sidebar i.line{background-position:0 -34px;}
+.create .sidebar i.pie{background-position:0 -51px;}
+.create .sidebar i.area{background-position:0 -68px;}
+
+.create .sidebar .preview-container{padding:15px;float:right;height:100%;margin-right:-310px;width:100%;}
+.create .sidebar .preview-container h4{font-size:16px;}
+
+/* Customize */
+.create .sidebar .row{padding-bottom:15px;}
+.create .sidebar ..sidebarErrorMessageContainer{float:left;position:relative;}
+.create .sidebar .row input[type=checkbox]{width:inherit;}
+
+.create .sidebar .row input, .create .sidebar .row select, .create .sidebar .row a.range{position:relative;width:60%;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;color:#333;
+  background:#fff;
+  background:-webkit-linear-gradient(to bottom, #fff 0%, #f0f0f0 8%, #fff 70%);
+  background:-o-linear-gradient(to bottom, #fff 0%, #f0f0f0 8%, #fff 70%);
+  background:-ms-linear-gradient(to bottom, #fff 0%, #f0f0f0 8%, #fff 70%);
+  background:linear-gradient(to bottom, #fff 0%, #f0f0f0 8%, #fff 70%);
+  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f0f0f0', endColorstr='#fff',GradientType=0 );
+  border: 1px solid #e2e0e0;
+  -webkit-border-radius:3px;
+  	 -moz-border-radius:3px;
+  	 			border-radius:3px;
+}
+.create .sidebar .row input{height:auto;padding:7px 5px 6px;font-size:12px;}
+.create .sidebar .row select{padding:5px 5px 6px;font-size:12px;}
+.create .sidebar .row a.range{display: block;float:left;padding:6px 5px;text-decoration:none;}
+.create .rangeIcon{background-image:url(../images/common/ic_formsInput.png);background-repeat:no-repeat;width:21px;height:20px;position:absolute;top:4px;right:4px;}
+.create .sidebar .row a.range:hover .rangeIcon, .create .rangeIcon:hover{background-position:0 -20px;}
+.create .sidebar p.tip{padding-bottom:10px;}

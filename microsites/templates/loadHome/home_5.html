@@ -1,0 +1,220 @@
+{% extends "loadHome/index.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block themeMeta %}
+<script type="text/javascript" src="/js_microsites/loadHome/theme5View.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# Google Plus JS #}
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+{% endblock %}
+
+{% block themeContent %}
+
+{# Facebook SDK #}
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  
+  var locale = "en_US";
+  {% if language == "es" %}
+  locale = "es_LA";
+  {% endif %}
+
+  js.src = "//connect.facebook.net/"+locale+"/sdk.js#xfbml=1&version=v2.0";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+{% with number=paginator.count|intcomma %}
+<div class="homeContent w960 theme5" id="theme5">
+
+    <!-- Breadcrumb -->
+    {% if config.breadcrumbSection %}
+    <div class="breadcrumb clearfix">
+        {{ config.breadcrumbSection|format:number|safe }}
+    </div>
+    {% endif %}
+
+    <div class="themeWrapper">
+        <!-- Top Section -->
+        {% if config.welcomeFirstTitle or config.welcomeSecondTitle or config.welcomeImageUrl or config.featuredLink or config.featuredTitle or config.featuredImageUrl %}
+        <section class="topSection clearfix">
+
+            <div class="CL FL">
+            
+                <!-- Welcome section -->
+                {% if config.welcomeFirstTitle or config.welcomeSecondTitle or config.welcomeImageUrl %}
+                <article class="welcomeSection relative clearfix{% if config.welcomePopupTitle or config.welcomePopupText or config.welcomePopupFooter %} hasPopup{% endif %}">
+                    <header>
+                        <hgroup class="absolute">
+                            <h1 class="GM">{{ config.welcomeFirstTitle|format:number|safe }}</h1>
+                            <h2 class="GM">{{ config.welcomeSecondTitle|format:number|safe }}</h2>
+                        </hgroup>
+                    </header>
+                    {% if config.welcomeImageUrl %}
+                    <img src="{{ config.welcomeImageUrl }}" alt="{{ config.welcomeFirstTitle|format:number|safe }} {{ config.welcomeSecondTitle|format:number|safe }}" class="FL relative roundedBox15"/>
+                    {% endif %}
+                </article>
+                {% endif %}
+
+                <!-- Search box -->
+                <div class="searchBox roundedBox10 border-box">
+                    <form method="get" action="/search/" class="clearfix">
+                        <input type="text" name="q" placeholder="{% trans 'APP-SEARCH-TEXT' %}" class="FL"/> 
+                        <input type="submit" value="{% trans 'APP-SEARCH-TEXT' %}" title="{% trans 'APP-SEARCH-TEXT' %}" class="FR submit"/> 
+                    </form>
+                </div>
+
+            </div>
+
+            <div class="CR FR">
+
+                {% if config.featuredLink or config.featuredTitle or config.featuredImageUrl %}
+                <!-- Featured section -->
+                <article class="featuredSection">
+                    {% if config.featuredLink %}
+                    <a href="{{ config.featuredLink }}" title="{{ config.featuredTitle|format:number|safe }}" class="clearfix" target="_blank">
+                    {% endif %}
+                        <span class="GB roundedBox15 border-box">{{ config.featuredTitle|format:number|safe }}</span>
+                        {% if config.featuredImageUrl %}
+                        <img src="{{ config.featuredImageUrl }}" alt="{{ config.featuredTitle|format:number|safe }}" class="FL"/>
+                        {% endif %}
+                    {% if config.featuredLink %}
+                    </a>
+                    {% endif %}
+                </article>
+                {% endif %}
+
+                <div class="socialButtons clearfix">
+                    
+                    {# Twitter #}
+                    <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://data.cityofpaloalto.org/home/">Tweet</a>
+
+                    {# Google plus #}
+                    <div class="g-plusone" data-href="http://data.cityofpaloalto.org/home/"></div>
+
+                    {# Facebook #}
+                    <div class="fb-like" data-href="http://data.cityofpaloalto.org/home/" data-layout="button_count" data-action="like" data-show-faces="false" data-share="false"></div>
+
+                </div>
+
+            </div>
+
+        </section>
+        {% endif %}
+
+        <!-- Buttons section -->
+        {% if config.buttonSection %}
+        <ul class="buttonsSection clearfix">
+
+            {% for button in config.buttonSection %}                    
+            <li style="width:{{ config.buttonsPerRowWidth }}%;" class="border-box">
+                <a href="{{ button.btnURL }}" title="{{ button.btnText|format:number|safe }}" style="background-color:{{ button.btnHexColor }};" class="GM roundedBox15" target="_blank"><span><span>{{ button.btnText|format:number|safe }}</span></span></a>
+            </li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+
+        <!-- Bottom Section -->
+        {% if config.leftBottomSectionLink or config.leftBottomSectionTitle or config.leftBottomSectionImageUrl or config.middleBottomSectionLink or config.middleBottomSectionTitle or config.middleBottomSectionImageUrl or config.rightBottomSectionLink or config.rightBottomSectionTitle or config.rightBottomSectionImageUrl %}
+        <section class="bottomSection clearfix">
+
+            <!-- Left Bottom section -->
+            {% if config.leftBottomSectionLink or config.leftBottomSectionTitle or config.leftBottomSectionImageUrl %}
+            <article class="leftBottom bottomSectionBox border-box FL">
+                {% if config.leftBottomSectionLink %}
+                <a href="{{ config.leftBottomSectionLink }}" title="{{ config.leftBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+                {% endif %}
+                    <span class="GB border-box roundedBox15">{{ config.leftBottomSectionTitle|format:number|safe }}</span>
+                    {% if config.leftBottomSectionImageUrl %}
+                    <img src="{{ config.leftBottomSectionImageUrl }}" alt="{{ config.leftBottomSectionTitle|format:number|safe }}" class="FL"/>
+                    {% endif %}
+                {% if config.leftBottomSectionLink %}
+                </a>
+                {% endif %}
+            </article>
+            {% endif %}
+
+            <!-- Middle Bottom section -->
+            {% if config.middleBottomSectionLink or config.middleBottomSectionTitle or config.middleBottomSectionImageUrl %}
+            <article class="middleBottom bottomSectionBox border-box FL">
+                {% if config.middleBottomSectionLink %}
+                <a href="{{ config.middleBottomSectionLink }}" title="{{ config.middleBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+                {% endif %}
+                    <span class="GB border-box roundedBox15">{{ config.middleBottomSectionTitle|format:number|safe }}</span>
+                    {% if config.middleBottomSectionImageUrl %}
+                    <img src="{{ config.middleBottomSectionImageUrl }}" alt="{{ config.middleBottomSectionTitle|format:number|safe }}" class="FL"/>
+                    {% endif %}
+                {% if config.middleBottomSectionLink %}
+                </a>
+                {% endif %}
+            </article>
+            {% endif %}
+
+            <!-- Right Bottom section -->
+            {% if config.rightBottomSectionLink or config.rightBottomSectionTitle or config.rightBottomSectionImageUrl %}
+            <article class="rightBottom bottomSectionBox border-box FL">
+                {% if config.rightBottomSectionLink %}
+                <a href="{{ config.rightBottomSectionLink }}" title="{{ config.rightBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+                {% endif %}
+                    <span class="GB border-box roundedBox15">{{ config.rightBottomSectionTitle|format:number|safe }}</span>
+                    {% if config.rightBottomSectionImageUrl %}
+                    <img src="{{ config.rightBottomSectionImageUrl }}" alt="{{ config.rightBottomSectionTitle|format:number|safe }}" class="FL"/>
+                    {% endif %}
+                {% if config.rightBottomSectionLink %}
+                </a>
+                {% endif %}
+            </article>
+            {% endif %}
+
+        </section>
+        {% endif %}
+
+        <!-- Links Section -->
+        {% if config.links %}
+        <ul class="linksSection center">
+
+            {% for link in config.links %}  
+            <li>
+                <a href="{{ link.linkURL }}" title="{{ link.linkText|format:number|safe }}" target="_blank">{{ link.linkText|format:number|safe }}</a>
+            </li>
+            {% endfor %}
+
+        </ul>
+        {% endif %}
+
+    </div>
+
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+    var theme5View = new Theme5View();
+});
+</script>
+{% endwith %}
+{% endblock %}
+
+{% block popupsOverlay %}
+{% with number=paginator.count|intcomma %}
+
+    {% if config.welcomePopupTitle or config.welcomePopupText or config.welcomePopupFooter %}
+
+        <!-- Welcome popup -->
+        {% overlay id_welcomePopup %}
+          <div class="In clearfix">
+            <h4>{{ config.welcomePopupTitle|format:number|safe }}</h4>
+            <p>{{ config.welcomePopupText|format:number|safe }}</p>
+            <footer>
+                <p>{{ config.welcomePopupFooter|format:number|safe }}</p>
+            </footer>
+          </div>
+        {% endoverlay %}
+
+    {% endif %}
+
+{% endwith %}
+{% endblock %}

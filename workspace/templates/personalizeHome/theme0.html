@@ -1,0 +1,92 @@
+{% load i18n extra_tags components %}
+
+<script type="text/html" id="id_theme0Template">
+
+	<!-- Main section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">1</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-MAINTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-MAINDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<label for="id_theme0MainTitle"><%= gettext('ADMIN-HOME-SECTION-MAINTITLELABEL') %></label>
+				<input type="text" class="field" id="id_theme0MainTitle" name="id_theme0MainTitle" value="<%= mainTitle%>" data-bind="value:mainTitle,events:['keyup']"/>
+			 
+      </div>
+			<div class="row">
+				<label for="id_theme0MainText"><%= gettext('ADMIN-HOME-SECTION-MAINTEXTLABEL') %></label>
+				<textarea cols="20" rows="10" class="field" id="id_theme0MainText" name="id_theme0MainText"  data-bind="value:mainSection,events:['keyup']"><%= mainSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- Resources Slider section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">2</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-RESOURCETITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-RESOURCEDESCRIPTION') %></h2>
+			</hgroup>       
+		</header>
+  	<fieldset class="form clearfix">
+      <div class="row clearfix">
+        <div>
+          <input id="id_theme0NameSuggest" name="source-name" type="text" class="field" maxlength="80"/>            
+        </div>
+      </div>       
+		</fieldset>     
+  </div>  
+
+	<!-- Sidebar section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">3</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-SIDEBARTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-SIDEBARDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<textarea cols="20" rows="10" class="field" id="id_theme0SidebarText" name="id_theme0SidebarText" data-bind="value:sideBarSection,events:['keyup']"><%=sideBarSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- Left Bottom section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">4</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-LEFTBOTTOMTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-LEFTBOTTOMDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<textarea cols="" rows="" class="field" id="id_theme0LeftBottomText" name="id_theme0LeftBottomText" data-bind="value:leftBottomSection,events:['keyup']"></textarea>
+			</div>
+		</fieldset>
+	</div>
+	<!-- Right Bottom section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">5</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-RIGHTBOTTOMTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-RIGHTBOTTOMDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<textarea cols="" rows="" class="field" id="id_theme0RightBottomText" name="id_theme0RightBottomText" data-bind="value:rightBottomSection,events:['keyup']"></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+</script>

@@ -1,0 +1,77 @@
+{% extends "base_microsites.html" %}
+{% load i18n extra_tags components core_components %}
+
+{% block SEO %}
+    <title>{% trans "APP-TRANSPARENCY-TITLE" %} &middot; {{preferences.account_page_titles}}</title>
+    <meta name="description" content="{% trans 'APP-TRANSPARENCY-DESCRIPTION' %} {{preferences.account_name}}" />
+{% endblock %}
+
+{% block meta %}
+
+<!-- CSS -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/transparency.css?id={{settings.VERSION_JS_CSS}}"/>
+
+<!-- BRANDED CSS -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+
+<!-- BRANDED JS -->
+<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+
+{% endblock %}
+
+{% block content %}
+<section class="transparencyPage">
+  <h1 class="title">{% trans "APP-TRANSPARENCY-TITLE" %} {{preferences.account_name}}</h1>
+	<div class="columns clearfix">
+
+    <!-- Column -->
+
+    {# iterate each transparency category #}
+    {# for category in categories #}
+    {% for column in column_data %}
+    <div class="column border-box">
+
+    {% for category in column %}
+
+    {# hide empty categories #}
+    {% if category.sets|length > 0 %}
+
+        <div class="box">
+        <h3>{{category.name}}</h3>
+        <ul>
+            {% for cset in category.sets|slice:":5" %}
+            <li class="{{cset.tipo}}">
+                <a target="_blank" href="{{cset.permalink}}" title="" {% if set.tipo == "dataset" %} class="{{cset.tipo}} external" target="_blank" {% endif %}>{{cset.titulo}}</a>
+            </li>
+            {% endfor %}
+        </ul>
+        {% if category.sets|length > 5 %}
+        <footer>
+          <a target="_blank" href="/search/category/name:{{category.name}}?datasets=1" title="{% trans 'APP-TRANSPARENCY-VIEWMORE' %}">{% trans "APP-TRANSPARENCY-VIEWMORE" %}</a>
+        </footer>
+        {% endif %}
+      </div>
+    {% endif %}
+
+
+    {% endfor %}
+    </div>
+    {% endfor %}
+
+
+
+  </div>
+  <div class="references">
+  	<h4>{% trans "HOME-REFENCES-TEXT" %}</h4>
+  	<ul>
+                <li class="dataset">{% trans "HOME-DATASET-TEXT" %}</li>
+                <li class="dataview">{% trans "HOME-DS-TEXT" %}</li>
+                <li class="visualization">{% trans "HOME-VZ-TEXT" %}</li>
+                <li class="dashboard">{% trans "HOME-DB-TEXT" %}</li>
+  	</ul>
+  </div>
+</section>
+
+{% endblock %}

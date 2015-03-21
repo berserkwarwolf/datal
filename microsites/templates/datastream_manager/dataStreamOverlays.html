@@ -1,0 +1,74 @@
+{% load i18n core_components components %}
+
+<!-- GOOGLE SPREADSHEET DATA STREAM -->
+{% overlay id_googleSpreadsheetsDatastreamContainer %}
+<div class="In clearfix">
+  <h4>{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</h4>
+  <h5><strong>{% trans "DSDET-GOOGLESPREADSHEETS-SUBTITLE" %}</strong></h5>
+  <p>{% trans "DSDET-GOOGLESPREADSHEETS-CONTENT" %}</p>
+  <div class="form clearfix">
+    <form action="#">
+      <table class="ao-dialogue">
+        <tr>
+          <td>
+            <input id="id_googleSpreadsheetDataStreamInput" readonly="readonly" style="width: 400px;" value="=ImportHtml(&quot;{{base_uri}}{% url "datastream_manager.action_html" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}&quot; ; &quot;table&quot; ; 1)" />
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>
+{% endoverlay %}
+
+{% if not is_private_site %}
+
+  <!-- Embed overlay -->
+  {% if enable.embed.options %}
+    {% include "embed_code/embedCode.html" %}
+  {% endif %}
+
+{% endif %}
+
+{% if can_share %}
+  {% privateDataStreamShareForm datastream.datastream_id auth_manager %}
+{% endif %}
+
+{% if false %}
+  {% overlay id_pivotTables %}
+  <div class="In clearfix">
+    <h4>{% trans "DSDET-PIVOTTABLES-TITLE" %}</h4>
+    <p>{% trans "DSDET-PIVOTTABLES-CONTENT" %}</p>
+    <ul class="pivotData">
+      <li><span class="ui-icon ui-icon-grip-dotted-vertical"></span>Column A</li>
+      <li><span class="ui-icon ui-icon-grip-dotted-vertical"></span>Column B</li>
+    </ul>
+    <p class="clearfix checkbox">
+      <input type="checkbox" id="id_pivot_headers"/>
+      <label for="id_pivot_headers">{% trans "DSDET-PIVOTTABLES-CHECKBOX" %}</label>
+    </p>
+    <div class="sortData clearfix">
+      <div class="FL">
+        <div class="listTitle">{% trans "DSDET-PIVOTTABLES-GROUPBY" %}</div>
+        <ul class="sortList">
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Column C</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Column D</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>sortable item</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>sortable item</li>
+        </ul>
+      </div>
+      <div class="FR">
+        <div class="listTitle">{% trans "DSDET-PIVOTTABLES-SUM" %}</div>
+        <ul class="sortList">
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Column E</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Column F</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>sortable item</li>
+          <li><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>sortable item</li>
+        </ul>
+      </div>
+    </div>
+    <div class="buttons center border">
+      <button class="genericButton" title="{% trans 'DSDET-PIVOTTABLES-ACCEPT' %}"><span>{% trans "DSDET-PIVOTTABLES-ACCEPT" %}</span></button>
+    </div>
+  </div>
+  {% endoverlay %}
+{% endif %}

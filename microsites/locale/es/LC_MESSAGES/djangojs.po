@@ -1,0 +1,151 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-DESCRIPTION-TEXT"
+msgstr "Descripción"
+
+msgid "DS-STOP-TITLE"
+msgstr "Detener la carga de esta Vista"
+
+msgid "DS-STOP-TEXT"
+msgstr "detener"
+
+msgid "APP-BY-TEXT"
+msgstr "por"
+
+msgid "DBMAN-GETGUID-TITLE"
+msgstr "El GUID es usado para identificar la Vista cuando necesites llamarla externamente desde "
+
+msgid "DSDET-GETGUID-TITLE"
+msgstr "Este es el GUID de la Vista:"
+
+msgid "DB-FAVDB-DEFAULTSEARCH"
+msgstr "Busca Vistas: Prueba ‘GDP’, ‘futbol’, ‘USA’, ‘Apple’"
+
+msgid "DB-FAVDB-SEARCHTIP"
+msgstr "Prueba ‘Deportes’, ‘USA’ o usuarios como ‘betogess’ o ‘birdman"
+
+msgid "DB-INITDB-CHECKOUT"
+msgstr "Hey! Revisa esta Colección "
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Desarrollado por"
+
+msgid "DBMAN-DSPRIVATE-TITLE"
+msgstr "Esta Vista es privada"
+
+msgid "DBMAN-DSPRIVATE-SUBTITLE"
+msgstr "No puedes ver a esta Vista porque es privada."
+
+msgid "DBMAN-DSPRIVATE-TIP"
+msgstr "Solo el dueño puede verlo."
+
+msgid "APP-LASTUPDATE-TEXT"
+msgstr "Última actualización"
+
+msgid "APP-PRIVATEDS-TEXT"
+msgstr "Vista Privada"
+
+msgid "DS-ENTERANEWVALUEFOR-TEXT"
+msgstr "ingresa un nuevo valor para"
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No se encontraron datos"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Por favor"
+
+msgid "APP-TRYAGAIN-TITLE"
+msgstr "Inténtalo Nuevamente"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "inténtalo nuevamente"
+
+msgid "DBMAN-ADDDS-SUCCESS"
+msgstr "¡Vista agregada satisfactoriamente!"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DS-CANTLOADDATA-TEXT"
+msgstr "No pudimos cargar la data"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "O puedes ir a la"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "fuente"
+
+msgid "DB-REMOVEDS-CONFIRM"
+msgstr "¿Estás seguro que deseas eliminar esta Vista de tu Colección?"
+
+msgid "DB-DSREMOVE-SUCCESS"
+msgstr "Vista eliminada satisfactoriamente"
+
+msgid "DB-REMOVECOMMENT-CONFIRM"
+msgstr "¿Estás seguro que deseas eliminar el Comentario?"
+
+msgid "APP-AND-TEXT"
+msgstr "y"
+
+msgid "APP-SEARCHFORDATA-TEXT"
+msgstr "Buscar Datos"
+
+msgid "SHARE-TWITTER-CHECKDS"
+msgstr "Hey! Revisa esta Vista"
+
+msgid "APP-LOADING-TEXT"
+msgstr "Cargando..."
+
+msgid "VIEWDS-FLEXIGRID-ERRORMSG"
+msgstr "Error de conexión"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-1"
+msgstr "Mostrando"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-2"
+msgstr "a"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-3"
+msgstr "de"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-4"
+msgstr "filas"
+
+msgid "VIEWDS-FLEXIGRID-PAGETEXT"
+msgstr "Página"
+
+msgid "VIEWDS-FLEXIGRID-OUTOF"
+msgstr "de"
+
+msgid "VIEWDS-FLEXIGRID-FINDTEXT"
+msgstr "Buscar"
+
+msgid "VIEWDS-FLEXIGRID-PROCMSG"
+msgstr "Cargando, por favor espere..."
+
+msgid "VIEWDS-FLEXIGRID-NOMSG"
+msgstr "Sin filas"
+
+msgid "VIEWDS-WAITMESSAGEDOWNLOAD-TITLE"
+msgstr "Descargando..."
+
+msgid "VIEWDS-WAITMESSAGEDOWNLOAD-TEXT"
+msgstr "Tu descarga comenzará en un momento. Si esto no sucede, por favor intente nuevamente."
+
+msgid "VIEWDS-WAITMESSAGEEXPORT-TITLE"
+msgstr "Exportando..."

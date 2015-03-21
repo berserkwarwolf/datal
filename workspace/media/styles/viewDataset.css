@@ -1,0 +1,34 @@
+/* List */
+.resources-list h4{background-color:#f8f7f7;border-bottom:1px solid #dfdfdf;padding:8px 15px;font-weight:bold;color:#717171;}
+.api_example{margin-top:5px;font-weight:bold;}
+.resources-list table{width:100%;font-size:12px;text-shadow:0 1px 0 #fff;border-collapse: collapse; }
+.resources-list table th{text-align:left;color:#999;font-family:'proxima_novasemibold';text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 0 0 15px;}
+.resources-list table td{border-bottom:1px solid #dfdfdf;vertical-align:top;padding:12px 0 12px 15px;line-height:18px;
+    -webkit-box-shadow:inset 0 2px 0 0 #fff, 0 1px 0 0 #fff;
+       -moz-box-shadow:inset 0 2px 0 0 #fff, 0 1px 0 0 #fff;
+            box-shadow:inset 0 2px 0 0 #fff, 0 1px 0 0 #fff; 
+}
+.resources-list table .massive-cell{width:35px;padding-right:0;text-align:center;}
+.resources-list table h3{font-size:14px;}
+.resources-list table h3:first-letter{text-transform:uppercase;}
+.resources-list table .filename{display:block;}
+.resources-list table .filename a{color:#3a3a3a;}
+.resources-list table .date{display:block;color:#999;}
+.resources-list table .actions{padding-top:10px;}
+.resources-list table .actions li{float:left;visibility:hidden;}
+.resources-list table .actions li:before{content:"|";padding:7px;color:#e1e1e1;display:inline;position:relative;}
+.resources-list table .actions li:first-child:before{display:none;}
+.resources-list table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}
+.resources-list table .actions li.review{visibility:visible;}
+.resources-list table .actions li.review a{padding-left:23px;background:url(../images/common/ic_warning_orange.png) no-repeat 0 1px;}
+.resources-list table .actions li.delete a{color:#c00202;}
+.resources-list table i{font-style:normal;display:inline-block;}
+.resources-list table tr:nth-child(odd) td{background:#fbfbfb;}
+.resources-list table tr:hover td{background:#f6f9ff !important;}
+.resources-list table tr:hover li{visibility:visible;}
+.resources-list .icon-resources{width:inherit;padding-left:22px;}
+
+/* Download */
+.centeredMessaje{position:absolute;height:180px;width:150px;left:50%;top:50%;margin:-100px 0 0 -75px;text-align:center;}
+.centeredMessaje p{color:#ebe9e9;font-size:20px;font-weight:bold;text-shadow:1px -1px 0 #dfdcdc;margin-top:15px;}
+.centeredIcon{height:125px;width:100%;background-image:url(../images/common/ic_downloadLa.png);background-repeat:no-repeat;}

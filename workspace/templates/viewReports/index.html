@@ -1,0 +1,129 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block meta %}
+<link href="/media_workspace/styles/viewReports.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script language="javascript" src="/js_workspace/viewReports/viewReports.js"></script>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-REPORTS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+<div class="columns equal-width clearfix">
+
+  <!-- Column - Left -->
+  <div class="column CL">
+
+    <!-- Numbers -->
+    <section class="box numbers">
+      <header class="clearfix">
+        <h3 class="title FL">{% trans "LANDINGPAGE-NUMBERS-TITLE" %}</h3>
+      </header>
+      <div class="box-content">
+
+        <table class="graph">
+          <tbody>
+            <tr>
+              <td class="data">
+                <i class="icon-dataset"></i>
+                <strong>{{my_total_datasets}}</strong>
+                {% trans "APP-DATASETS-TEXT" %}
+              </td>
+              <td class="bar">
+                <div><div style="width:{{my_total_perc_datasets}}%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="data">
+                <i class="icon-dataview"></i>
+                <strong>{{my_total_datastreams}}</strong>
+                {% trans "APP-DATAVIEWS-TEXT" %}
+              </td>
+              <td class="bar">
+                <div><div style="width:{{my_total_perc_datastreams}}%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="data">
+                <i class="icon-visualization"></i>
+                <strong>{{my_total_visualizations}}</strong>
+                {% trans "APP-VISUALIZATIONS-TEXT" %}
+              </td>
+              <td class="bar">
+                <div><div style="width:{{my_total_perc_visualizations}}%%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="data">
+                <i class="icon-dashboard"></i>
+                <strong>{{my_total_dashboards}}</strong>
+                {% trans "APP-DASHBOARDS-TEXT" %}
+              </td>
+              <td class="bar">
+                <div><div style="width:{{my_total_perc_dashboards}}%;"></div></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </section>
+
+    <!-- Hit Chart -->
+    <section class="box hit-chart">
+      <header>
+        <h3 class="title">{% trans "APP-USERHITS-TEXT" %}</h3>
+      </header>
+      <div class="box-content">
+
+        <div id=""></div>
+
+      </div>
+      <footer class="box-footer center">
+        <a href="#" class="button small green" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
+      </footer>
+    </section>
+
+    <!-- Top Chart -->
+    <section class="box top-chart">
+      <header>
+        <h3 class="title">{% trans "APP-TOP10-TEXT" %}</h3>
+      </header>
+      <div class="box-content">
+
+        <div id=""></div>
+
+      </div>
+      <footer class="box-footer center">
+        <a href="#" class="button small green" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
+      </footer>
+    </section>
+
+  </div>
+
+  <!-- Column - Right -->
+  <div class="column CR">
+
+    <!-- Hits -->
+    <section class="box white hits">
+
+      <ul id="tabs" class="tabs-list clearfix">
+        <li class="tab tab-selected">
+          <a class="tab-datastreams" title="{% trans 'APP-DATAVIEW-TEXT' %}">{% trans "APP-DATAVIEWS-TEXT" %}</a>
+        </li>
+        <li class="tab">
+          <a class="tab-visualizations" title="{% trans 'APP-VISUALIZATIONS-TEXT' %}">{% trans "APP-VISUALIZATIONS-TEXT" %}</a>
+        </li>
+      </ul>
+
+      <div class="manager-table" id=""></div>
+
+    </section>
+
+
+  </div>
+
+</div>
+{% endblock %}

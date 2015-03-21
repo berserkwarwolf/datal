@@ -1,0 +1,208 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block meta %}
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/plugins/colorpicker.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.fileupload.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.iframe-transport.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_workspace/plugins/colorpicker.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/admin_manager/branding.js?id={{settings.VERSION_JS_CSS}}"></script>
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+        <form id="id_adminBrandingForm" action="{{form.action}}" method="post">
+            {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% csrf_token %}
+            <div class="titleContainer clearfix">
+                <h3 class="FL">{%if sis_private_site%}{% trans "WORKSPACE-MICROSITE-SETTINGS-PRIVATE" %}{%else%}{% trans "WORKSPACE-MICROSITE-SETTINGS" %}{%endif%}</h3>
+            </div>
+
+            <div class="columns clearfix">
+                <div class="CL">
+                    <div class="dataStreamForm">
+                        <fieldset class="form">
+                            <div class="row clearfix">
+                                <label for="{{form.account_page_titles.auto_id}}">{{form.account_page_titles.label}}:</label>
+                                <div class="formErrorMessageContainer">{{form.account_page_titles}}</div>
+                            </div>
+                            <div class="row clearfix">
+                                <label for="{{form.account_header_uri.auto_id}}">{{form.account_header_uri.label}}:</label>
+                                <div class="formErrorMessageContainer iframeSettings">{{form.account_header_uri}}</div>
+                                <div class="heightContainer">
+                                    <label for="{{form.account_header_height.auto_id}}">{{form.account_header_height.label}}:</label>
+                                    <div class="formErrorMessageContainer">{{form.account_header_height}}</div>
+                                    <p>px</p>
+                                </div>
+                                <p class="tip">{% trans "ACCOUNT-BRANDING-HEADER-TIP" %}</p>
+                            </div>
+                            <div class="row clearfix">
+                                <label for="{{form.account_footer_uri.auto_id}}">{{form.account_footer_uri.label}}:</label>
+                                <div class="formErrorMessageContainer iframeSettings">{{form.account_footer_uri}}</div>
+                                <div class="heightContainer">
+                                    <label for="{{form.account_footer_height.auto_id}}">{{form.account_footer_height.label}}:</label>
+                                    <div class="formErrorMessageContainer">{{form.account_footer_height}}</div>
+                                    <p>px</p>
+                                </div>
+                                <p class="tip">{% trans "ACCOUNT-BRANDING-FOOTER-TIP" %}</p>
+                            </div>
+                            <!--<div class="row clearfix">
+                                <label for="{{form.account_language.auto_id}}">{{form.account_language.label}}:</label>
+                                <div class="formErrorMessageContainer">{{form.account_language}}</div>
+                            </div>-->
+                            <div id="id_branding_logo" class="row imgContainer clearfix">
+                                <label for="{{form.account_logo.auto_id}}">{{form.account_logo.label}}:</label>
+                                <div class="textContainer">
+                                    <div class="formErrorMessageContainer">{{form.account_logo}}</div>
+                                    <p class="tip">{% trans 'ACCOUNT-LOGO-TIP' %}</p>
+                                </div>
+                                <div class="img imgLogo FL" style="display:{% if form.initial.account_logo %}block{% else %}none{% endif %}">
+                                    <span class="clearfix">
+                                        <img src="{{ form.initial.account_logo }}?updateCache={{ updateCache }}" class="FL"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row imgContainer clearfix">
+                                <label for="{{form.account_favicon.auto_id}}">{{form.account_favicon.label}}:</label>
+                                 <div class="img imgFavicon FL" style="display:{% if form.initial.account_favicon %}block{% else %}none{% endif %}">
+                                    <span class="clearfix">
+                                        <img src="{{ form.initial.account_favicon }}?updateCache={{ updateCache }}" class="FL"/>
+                                    </span>
+                                </div>
+                                <div class="textContainer">
+                                    <div class="formErrorMessageContainer">{{form.account_favicon}}</div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            {%if is_private_site%}{% trans "BRANDED-OPEN-DATA-SITE-TIP-PRIVATE" %}{%else%}{% trans "BRANDED-OPEN-DATA-SITE-TIP" %}{%endif%}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="titleContainer clearfix">
+                <h3 class="FL">{% trans "WORKSPACE-CUSTOMIZE-SETTINGS" %}</h3>
+            </div>
+            <div class="columns clearfix">
+                <div class="CL">
+                    <div class="dataStreamForm">
+                        <fieldset class="form">
+                            <div class="settingsBoxes clearfix">
+
+                                <div class="CL">
+
+                                    <!-- TITLES -->
+                                    <div class="settingsBox">
+                                        <h4>{% trans "ACCOUNT-MICROSITE-TITLES" %}</h4>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_title_color.label}}:</label>
+                                            <div id="account_title_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- DASHBOARD'S DATAVIEWS OVERS -->
+                                    <div class="settingsBox">
+                                        <h4>{% trans "ACCOUNT-MOUSEOVER-TITLE" %}</h4>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_mouseover_bg_color.label}}:</label>
+                                            <div id="account_mouseover_bg_color" class="colorPicker"><div></div></div>
+                                        </div>
+
+                                        <div class="row clearfix">
+                                            <label>{{form.account_mouseover_border_color.label}}:</label>
+                                            <div id="account_mouseover_border_color" class="colorPicker"><div></div></div>
+                                        </div>
+
+                                        <div class="row clearfix">
+                                            <label>{{form.account_mouseover_title_color.label}}:</label>
+                                            <div id="account_mouseover_title_color" class="colorPicker"><div></div></div>
+                                        </div>
+
+                                        <div class="row clearfix">
+                                            <label>{{form.account_mouseover_text_color.label}}:</label>
+                                            <div id="account_mouseover_text_color" class="colorPicker"><div></div></div>
+                                        </div>
+
+                                        <p class="tip noPadding">{% trans "ACCOUNT-MOUSEOVER-TIP" %}</p>
+                                    </div>
+
+                                </div>
+
+                                <div class="CR">
+
+                                    <!-- HEADER -->
+                                    <div class="settingsBox">
+                                        <h4>{% trans "APP-HEADER-TEXT" %}</h4>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_header_bg_color.label}}:</label>
+                                            <div id="account_header_bg_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_header_border_color.label}}:</label>
+                                            <div id="account_header_border_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                        <p class="tip noPadding">{% trans "ACCOUNT-HEADER-TIP" %}</p>
+                                    </div>
+
+                                    <!-- BUTTONS -->
+                                    <div class="settingsBox">
+                                        <h4>{% trans "APP-BUTTONS-TEXT" %}</h4>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_button_bg_color.label}}:</label>
+                                            <div id="account_button_bg_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_button_border_color.label}}:</label>
+                                            <div id="account_button_border_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                        <div class="row clearfix">
+                                            <label>{{form.account_button_font_color.label}}:</label>
+                                            <div id="account_button_font_color" class="colorPicker"><div></div></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            <p>{%if is_private_site%}{% trans "BRANDED-BRANDINGS-TIP-PRIVATE" %}{%else%}{% trans "BRANDED-BRANDINGS-TIP" %}{%endif%}<p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="buttons center">
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            </div>
+            
+        </div>
+    </form>
+</div>
+{% endblock %}

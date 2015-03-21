@@ -1,0 +1,63 @@
+{% extends 'base_microsites.html' %}
+{% load i18n %}
+
+{% block meta %}
+<link href="/media_workspace/styles/_components/usersManager.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/signInUp.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_microsites/accounts/activate.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %}
+<div class="gradient">
+    <div class="in w960">
+        <div class="inInner">
+            <div class="cont">
+                <div class="boxesContainer signUp moreBoxHeight accountSignIn accountSignUp activateBox layoutHeight">
+
+                    <div class="signInTitleBox clearfix">
+                        <h1 class="neuton">{% trans "APP-ACTIVATION-TITLE-TEXT" %}</h1>
+                        <p>{% trans "APP-ACTIVATION-SUBTITLE-TEXT" %}</p>
+                    </div>
+
+                    <!-- SIGN UP -->
+                    <div class="signForm signUpBox backShadow individualSignInBox">
+
+                        <div class="boxShadow">
+                            <div class="signBox">
+                                <div class="pageFormContainer">
+                                    <form action="{{form.action}}" method="post" id="id_activateForm">
+                                        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+                                        {% csrf_token %}
+                                        <fieldset>
+                                            <div class="row clearfix">
+                                                {{form.password.label_tag}}
+                                                <div class="formErrorMessageContainer">{{form.password}}</div>
+                                                <div class="passwordStrength"><div id="id_passwordStrengthDiv" class="is0"></div></div>
+                                            </div>
+
+                                            <div class="row clearfix">
+                                                {{form.password_again.label_tag}}
+                                                <div class="formErrorMessageContainer">{{form.password_again}}</div>
+                                            </div>
+
+                                            <div class="buttons center">
+                                                <div class="buttonsInner">
+                                                    <p>{% trans "APP-BYCLICKINGAGREE-TEXT" %} <a href="http://www.junar.com/privacy-policy" onclick="window.open( this.href, 'Junar - Privacy Policy','width=600,height=500,resizable=yes,scrollbars=yes');return false;" title="{% trans 'APP-PRIVACY-TITLE' %}" target="_blank">{% trans "APP-PRIVACY-TEXT" %}</a>.</p>
+                                                    <input type="submit" class="genericButton txt14" value="{% trans 'APP-REGISTER-TEXT' %}" />
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

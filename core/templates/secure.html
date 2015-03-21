@@ -1,0 +1,5 @@
+<p>Hola, {{auth_manager.nick}}, no tienes permitido andar por aca.</p>
+{% if private_microsite %}
+<p>Quizas quieras ir a <a href="{{private_microsite}}">{{private_microsite}}</a></p>
+{% endif %}
+<p>Quizas quieras cambiar de usuario <a href="{% url "accounts.signout" %}">cambiar de usuario</a></p>

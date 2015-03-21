@@ -1,0 +1,65 @@
+/*FULL BRANDED*/
+
+/*AUTOMATIC HEADER*/
+.headerAuto{background:#ccc;min-width:998px;position:relative;border-bottom:4px solid #ccc;}
+.headerAuto .innerHeader{position:relative;min-height:82px;}
+	.headerAuto .logo{float:left;max-height:320px;margin:10px;max-width:320px;}
+	.headerAuto form{position:absolute;top:50%;margin-top:-21px;right:15px;z-index:100;}
+
+	/*SEARCH*/
+	.headerAuto .search{border:1px solid #e0e0e0;background:url(/media_workspace/images/_workspace/dg_inputs.gif) repeat-x 0 0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+	.headerAuto .search .field{padding:0 5px 0 40px;width:600px;border:1px solid #fff;background:#fff url(/media_workspace/images/_workspace/ic_searchInputs.gif) no-repeat 13px 11px;height:40px;line-height:40px;font-size:16px;}
+	.headerAuto .search .button{filter:alpha(opacity=0);opacity: 0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";position:absolute;top:0;left:0;width:29px;border:0;height:29px;z-index:100;overflow:hidden;}
+
+/*HEADER - FOOTER*/
+.brandingHeader, 
+.brandingFooter{overflow:hidden;}
+.brandingHeader:after, 
+.brandingFooter:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.brandingHeader, 
+.brandingFooter{display:block;}
+.brandingHeader iframe, 
+.brandingFooter iframe{float:left;width:100%;}
+
+/*GENERAL*/
+a.genericButton.moreButton span{background:none;padding:0 10px;margin-right:0;}
+/*body{background:#fff;}*/
+
+/*BUTTONS*/
+a.genericButton,
+a.genericButton span
+a.genericButton.moreButton,
+a.genericButton.moreButton span,
+a.genericButton.buttonBig,
+a.genericButton.buttonBig span{text-shadow:0 0 0 transparent;}
+a.genericButton.buttonBig span{background:none;padding-right:0;}
+
+/*SEARCH
+.sectionTitleContainer{display:none;}*/
+
+/*DB DETAIL - EMBED - CHARTS - CHARTS EMBED*/
+.dataStreamBox h2 a:hover .txt .titleDS,
+.dataStreamBox h2 a:hover .txt .titleDS strong,
+.dataStreamBox h2 a:hover .txt .infoDS .categoryDS,
+.dataStreamBox h2 a:hover .txt .infoDS .sep,
+.dataStreamBox h2 a:hover .txt .infoDS .authorDS,
+.dataStreamBox h2 a:hover .txt .infoDS .authorDS strong,
+.chartBox .chartTitle a:hover,
+a.genericButton.normalButton span{text-shadow:0 0 0 transparent;}
+
+/*DS DETAIL - DB DETAIL*/
+.topDashBox li div.num{display:none;}
+.topDashBox li h6, 
+.topDashBox li .txt,
+.topDashBox li .by{padding-left:10px;}
+.topDashBox li h6 a{color:#0862A2;}
+.dropDownMenu{top:1px;}
+.content-container{padding-bottom:0;min-height:0;}
+.grayContainer .CR{display:none;}
+.ao-notes{padding-bottom:0;}
+
+/*DS DETAIL*/
+.keepConnectedTip{display:none;}
+.userBox{display:none;}
+.relDataBox li h6 a{color:#0862A2;}
+.topDashBox.separator li{padding-left:0;}

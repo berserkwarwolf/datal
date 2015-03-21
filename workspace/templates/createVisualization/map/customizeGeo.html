@@ -1,0 +1,94 @@
+{% load i18n extra_tags components %}
+
+<div class="step customize" id="id_step3">
+
+	<header>
+		<h3>{% trans 'APP-CUSTOMIZE-TEXT' %} <span>{% trans 'APP-CUSTOMIZE-GEO-MAP-SUBTITLE' %}</span></h3>
+		<div class="navigation FR">
+      <a title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small" href="#" id=""><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
+      <a title="{% trans 'BTN-NEXT-TEXT' %}" class="button green small" href="#" id="">{% trans 'BTN-NEXT-TEXT' %}<i class="right-arrow"></i></a>
+    </div>
+	</header>
+	
+	<div class="wrapper1">
+    <div class="wrapper2 clearfix">
+      <div class="wrapper3">
+
+				<section class="sidebar">
+          <div class="boxConfig">
+
+            <div class="itemConfig">
+              <div class="title">{% trans 'APP-DATA-TYPE-TEXT' %}</div>
+              <fieldset>
+                <div class="row clearfix">
+                  <p class="subtitle">{% trans 'APP-KIND-OF-DATA-TEXT' %}</p>
+                  <label for="id_visualization_customize_mapTrace_title">{% trans 'APP-TYPE-OF-DATA-TEXT' %}</label>
+                    <select id="id_mapTypeSelect_mapchart" class="regions">
+                      <option value="roadmap" selected="selected">{% trans 'APP-MARKERS-TEXT' %}</option>
+                      <option value="hybrid">{% trans 'APP-REGION-TEXT' %}</option>
+                    </select>
+                    <span class="required">*</span>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="itemConfig" id="geo_coordinates">
+          		<div class="title">{% trans 'APP-MARKERS-TEXT' %}</div>
+          		<fieldset>
+                <div class="row clearfix">
+                  <label for="id_visualization_customize_range_selected">{% trans 'APP-LATITUDE-TEXT' %}</label>
+                  <a id="id_visualization_customize_range_selected" href="" class="range">{% trans 'CHRT-SELECTRANGE-TEXT' %}<span class="rangeIcon"></span></a><span class="required">*</span>
+                </div>
+
+                <div class="row clearfix">
+                  <label for="id_visualization_customize_range_selected">{% trans 'APP-LONGITUDE-TEXT' %}</label>
+                  <a id="id_visualization_customize_range_selected" href="" class="range">{% trans 'CHRT-SELECTRANGE-TEXT' %}<span class="rangeIcon"></span></a><span class="required">*</span>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="itemConfig" id="geo_countries" style="display:none;">
+              <div class="title">{% trans 'APP-REGION-TEXT' %}</div>
+              <fieldset class="form">
+                <div class="row clearfix">
+                  <label for="id_visualization_customize_range_selected">{% trans 'CHRT-RANGESELECTED-TEXT' %}</label>
+                  <a id="id_visualization_customize_range_selected" href="" class="range">{% trans 'CHRT-SELECTRANGE-TEXT' %}<span class="rangeIcon"></span></a><span class="required">*</span>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="itemConfig">
+          		<div class="title">{% trans 'APP-INFORMATION-TEXT' %}</div>
+          		<fieldset>
+                <div class="row clearfix">
+                  <label for="id_visualization_customize_range_selected">{% trans 'CHRT-RANGESELECTED-TEXT' %}</label>
+                  <a id="id_visualization_customize_range_selected" href="" class="range">{% trans 'CHRT-SELECTRANGE-TEXT' %}<span class="rangeIcon"></span></a>
+                </div>
+              </fieldset>
+            </div>
+
+            <div class="itemConfig">
+              <div class="title">{% trans 'APP-HEADERS-TEXT' %}</div>
+              <fieldset>
+                <div class="row clearfix">
+                  <label for="id_visualization_customize_range_selected">{% trans 'CHRT-RANGESELECTED-TEXT' %}</label>
+                  <a id="id_visualization_customize_range_selected" href="" class="range">{% trans 'CHRT-SELECTRANGE-TEXT' %}<span class="rangeIcon"></span></a>
+                </div>
+              </fieldset>
+            </div>
+
+          </div>
+        </section>
+
+        <section class="preview-container">
+        	<h4>{% trans 'APP-PREVIEW-TEXT' %}</h4>
+        	<div></div>
+        </section>
+
+      </div>
+    </div>
+  </div>
+
+	</div>
+
+</div>

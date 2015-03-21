@@ -1,0 +1,2927 @@
+# Junar's language pack.
+# Copyright (C) 2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: 2012-05-19 16:34-0500\n"
+"Last-Translator: Alvaro Encina <alvaro.encina@junar.com>\n"
+"Language-Team: English\n"
+"Language: English\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+
+msgid "APP-ACCOUNT-NAME-TEXT"
+msgstr "Organization name"
+
+msgid "APP-ADMIN-URL-TEXT"
+msgstr "Admin url"
+
+msgid "APP-USERNAME-TEXT"
+msgstr "Username"
+
+msgid "APP-PASSWORD-TEXT"
+msgstr "Password"
+
+msgid "UPDATE-PASSWORD-CONFIRMPSW"
+msgstr "Confirm Password"
+
+msgid "APP-EMAIL-TEXT"
+msgstr "E-mail"
+
+msgid "APP-REMEMBERME-TEXT"
+msgstr "Remember me"
+
+msgid "APP-PASSWORD-MUST-MATCH"
+msgstr "The passwords must match!"
+
+msgid "UPDATE-PASSWORD-OLDPSW"
+msgstr "Old password"
+
+msgid "UPDATE-PASSWORD-NEWPSW"
+msgstr "New password"
+
+msgid "INVALID-USER-OR-PASS"
+msgstr "Invalid username or password."
+
+msgid "FORGOT-USER-NOFOUND"
+msgstr "User not found.<br/>Please try with another user or email."
+
+msgid "ACCOUNT-FORM-NAME-LABEL"
+msgstr "Organization Name"
+
+msgid "ACCOUNT-FORM-LINK-LABEL"
+msgstr "Website"
+
+msgid "ACCOUNT-FORM-LOGO-LABEL"
+msgstr "Logo"
+
+msgid "ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL"
+msgstr "Contact Person"
+
+msgid "ACCOUNT-FORM-CONTACT-PERSON-EMAIL-LABEL"
+msgstr "E-mail of contact person"
+
+msgid "ACCOUNT-FORM-CONTACT-DATAPERSON-EMAIL-LABEL"
+msgstr "E-mail of data responsable"
+
+msgid "ACCOUNT-FORM-CONTACT-PERSON-PHONE-LABEL"
+msgstr "Phone"
+
+msgid "ACCOUNT-FORM-CONTACT-PERSON-COUNTRY-LABEL"
+msgstr "Country"
+
+msgid "ACCOUNT-HTML-TITLE-LABEL"
+msgstr "HTML <title>"
+
+msgid "ACCOUNT-FORM-HEADER-URI-LABEL"
+msgstr "Header URL"
+
+msgid "ACCOUNT-FORM-HEIGHT-LABEL"
+msgstr "Height"
+
+msgid "ACCOUNT-FORM-FOOTER-URI-LABEL"
+msgstr "Footer URL"
+
+msgid "APP-LANGUAGE-TEXT"
+msgstr "Language"
+
+msgid "ACCOUNT-FORM-FAVICON-LABEL"
+msgstr "Favicon"
+
+msgid "ACCOUNT-TITLE-COLOR"
+msgstr "Title color"
+
+msgid "ACCOUNT-BG-COLOR"
+msgstr "Background color"
+
+msgid "ACCOUNT-BORDER-COLOR"
+msgstr "Border color"
+
+msgid "ACCOUNT-FONT-COLOR"
+msgstr "Font color"
+
+msgid "ACCOUNT-TEXT-COLOR"
+msgstr "Text color"
+
+msgid "ACCOUNT-ENABLE-COMMENTS-LABEL"
+msgstr "Enable comments"
+
+msgid "ACCOUNT-ENABLE-EMBED-OPTIONS-LABEL"
+msgstr "Enable embed actions"
+
+msgid "ACCOUNT-ENABLE-SHARING-LABEL"
+msgstr "Enable social sharing"
+
+msgid "ACCOUNT-ENABLE-NOTES-LABEL"
+msgstr "Enable notes"
+
+msgid "ACCOUNT-DOMAIN-LABEL"
+msgstr "Open Data URL"
+
+msgid "ACCOUNT-DOMAIN-TRANSPARENCY-LABEL"
+msgstr "Transparency URL"
+
+msgid "ACCOUNT-DOMAIN-LABEL-PRIVATE"
+msgstr "Private Data URL"
+
+msgid "ACCOUNT-DOMAIN-EXTERNAL-LABEL"
+msgstr "Open Data URL"
+
+msgid "ACCOUNT-DOMAIN-EXTERNAL-LABEL-PRIVATE"
+msgstr "Private Data URL"
+
+msgid "WORKSPACE-CATEGORY-NAME-LABEL"
+msgstr "Create category"
+
+msgid "WORKSPACE-CATEGORY-DESCRIPTION-LABEL"
+msgstr "Description"
+
+msgid "APP-NAME-TEXT"
+msgstr "Name"
+
+msgid "APP-DESCRIPTION-TEXT"
+msgstr "Description"
+
+msgid "APP-CONFIRMEMAIL-TEXT"
+msgstr "Confirm E-mail"
+
+msgid "APP-ROLE-TEXT"
+msgstr "Role"
+
+msgid "APP-EMAILS-MUST-MATCH"
+msgstr "The e-mails must matcH!"
+
+msgid "APP-PREFERENCES-SAVESUCCESSFULLY-TEXT"
+msgstr "Preferences successfully saved"
+
+msgid "APP-USER-CREATEDSUCCESSFULLY-TEXT"
+msgstr "User created successfully"
+
+msgid "APP-USER-UPDATEDSUCCESSFULLY-TEXT"
+msgstr "User updated successfully"
+
+msgid "APP-USER-DELETESUCCESSFULLY-TEXT"
+msgstr "User deleted successfully"
+
+msgid "APP-CATEGORY-CREATEDSUCCESSFULLY-TEXT"
+msgstr "Category created successfully"
+
+msgid "APP-CATEGORY-UPDATEDSUCCESSFULLY-TEXT"
+msgstr "The Category was succesfully updated"
+
+msgid "APP-CATEGORY-DELETESUCCESSFULLY-TEXT"
+msgstr "The Category was succesfully deleted"
+
+msgid "APP-DATASTREAMREVISION-TEXT"
+msgstr "Data views"
+
+msgid "APP-VISUALIZATIONREVISION-TEXT"
+msgstr "Visualization"
+
+msgid "APP-ISPRIVATE-TEXT"
+msgstr "Is Private"
+
+msgid "APP-IMPLDETAILS-TEXT"
+msgstr "Implementation Details"
+
+msgid "APP-STATUS-TEXT"
+msgstr "Status"
+
+msgid "APP-DASHBOARDREVISION-TEXT"
+msgstr "Dashboards"
+
+msgid "APP-CHART-DATASTREAMDOESNOTEXIST-TEXT"
+msgstr "That data view does not exist"
+
+msgid "APP-DATASTREAM-DATASETNOTFOUND-TEXT"
+msgstr "Dataset not found"
+
+msgid "APP-DATASTREAM-DATASETNOTPUBLISHED-TEXT"
+msgstr "The dataset is not published. We can't publish the Data View."
+
+msgid "APP-CHART-SAVESUCCESSFULLY-TEXT"
+msgstr "Visualization successfully saved"
+
+msgid "APP-CHART-CANNOTSAVE-TEXT"
+msgstr "We can't save that visualization"
+
+msgid "APP-CHART-DOESNOTEXIST-TEXT"
+msgstr "That visualization does not exist"
+
+msgid "APP-DATASET-DOESNOTEXIST-TEXT"
+msgstr "Dataset revision doesn't exist."
+
+msgid "APP-CHART-NOTLASTREVISION-TEXT"
+msgstr "That is not the last revision of the visualization"
+
+msgid "APP-CHART-UNDERREVIEW-TEXT"
+msgstr "Visualization under review"
+
+msgid "APP-CHART-UPDATEDSUCCESSFULLY-TEXT"
+msgstr "Visualization updated successfully"
+
+msgid "APP-CATEGORY-TEXT"
+msgstr "Category"
+
+msgid "APP-TITLE-TEXT"
+msgstr "Title"
+
+msgid "APP-METATEXT-TEXT"
+msgstr "Metatext"
+
+msgid "APP-NOTES-TEXT"
+msgstr "Notes"
+
+msgid "APP-DASHBOARDWIDGET-TEXT"
+msgstr "Dashboard widget"
+
+msgid "APP-TO-TEXT"
+msgstr "to"
+
+msgid "APP-ENDPOINT-TEXT"
+msgstr "End-point"
+
+msgid "APP-PAGE-TEXT"
+msgstr "Page"
+
+msgid "APP-SEARCH-TEXT"
+msgstr "Search"
+
+msgid "APP-FIRSTSEARCH-TEXT"
+msgstr "First Search"
+
+msgid "APP-WIDGETID-TEXT"
+msgstr "Widget id"
+
+msgid "APP-DASHBOARD-SAVESUCCESSFULLY-TEXT"
+msgstr "Dashboard saved successffully"
+
+msgid "APP-DASHBOARD-CANNOTSAVE-TEXT"
+msgstr "We can't save the Dashboard"
+
+msgid "APP-DASHBOARD-DOESNOTEXISTS-TEXT"
+msgstr "The Dashboard do not exist"
+
+msgid "APP-DASHBOARD-NOTLASTREVISION-TEXT"
+msgstr "The Dashboard revision is not the last revision"
+
+msgid "APP-DASHBOARD-UNDERREVIEW-TEXT"
+msgstr "Dashboard is under review"
+
+msgid "APP-DASHBOARD-UPDATESUCCESSFULLY-TEXT"
+msgstr "Dashboard updated successfully"
+
+msgid "APP-DASHBOARD-CANNOTUPDATE-TEXT"
+msgstr "We can't update the Dashboard"
+
+msgid "APP-DASHBOARD-NOTESAVESUCCESSFULLY-TEXT"
+msgstr "Note saved successffully"
+
+msgid "APP-DASHBOARD-MOVESUCCESSFULLY-TEXT"
+msgstr "Moved successfully"
+
+msgid "APP-DASHBOARD-CANNOTMOVE-TEXT"
+msgstr "Can't move"
+
+msgid "APP-DASHBOARD-ADDDATASTREAMSUCCESSFULLY-TEXT"
+msgstr "Data View added successffully"
+
+msgid "APP-DASHBOARD-CANNOTADDDATASTREAM-TEXT"
+msgstr "We can't add the Data View to the Dashboard"
+
+msgid "APP-DASHBOARD-REMOVEDWIDGETSUCCESSFULLY-TEXT"
+msgstr "Widget removed successfully"
+
+msgid "APP-DASHBOARD-ERRORREMOVINGWIDGET-TEXT"
+msgstr "Widget could not be removed"
+
+msgid "APP-DATASET-CATEGORYDOESNOTEXIST-TEXT"
+msgstr "Category doesn't exist."
+
+msgid "APP-DATASET-NOTLASTREVISION-TEXT"
+msgstr "Dataset revision is not the last revision."
+
+msgid "APP-DATASET-UNDERREVIEW-TEXT"
+msgstr "Can't edit a Dataset under review status."
+
+msgid "APP-DATASET-UPDATEDSUCCESSFULLY-TEXT"
+msgstr "Dataset updated successfully."
+
+msgid "APP-DATASET-CREATEDSUCCESSFULLY-TEXT"
+msgstr "Dataset created successfully."
+
+msgid "DATASET-REVISION-NOT-DRAFT"
+msgstr "A dataset revision was not in draft status."
+
+msgid "DATASET-REVISION-NOT-EXIST"
+msgstr "A dataset revision does not exist."
+
+msgid "DATASET-NOT-EXIST"
+msgstr "A dataset does not exist."
+
+msgid "DATASET-REVISION-NOT-TOP"
+msgstr "A dataset revision is not the top revision."
+
+msgid "DATASET-RESOURCE-PUBLISHED-OR-REVIEW"
+msgstr "A resource related to this dataset is either published or under review."
+
+msgid "URL-RETRIEVE-SUCCESS"
+msgstr "URL retrieved successfully."
+
+msgid "URL-RETRIEVE-ERROR"
+msgstr "Error retrieving URL."
+
+msgid "APP-DATASETREVISION-TEXT"
+msgstr "Dataset revision"
+
+msgid "APP-DATASOURCE-TEXT"
+msgstr "Data Source"
+
+msgid "APP-SELECTSTATEMENT-TEXT"
+msgstr "Select statment"
+
+msgid "APP-RDFTEMPLATE-TEXT"
+msgstr "RDF template"
+
+msgid "APP-POSITION-TEXT"
+msgstr "Position"
+
+msgid "APP-URL-TEXT"
+msgstr "URL"
+
+msgid "APP-FILENAME-TEXT"
+msgstr "File name"
+
+msgid "APP-DATASTREAM-SAVESUCCESSFULLY-TEXT"
+msgstr "Data View saved successfully"
+
+msgid "APP-DATASTREAM-CANNOTSAVE-TEXT"
+msgstr "We can't save the Data View. Please try again."
+
+msgid "APP-DATASTREAM-DOESNOTEXIST-TEXT"
+msgstr "Data View do not exist"
+
+msgid "APP-DATASTREAM-NOTLASTREVISION-TEXT"
+msgstr "The Data View is not in its last revision!"
+
+msgid "APP-DATASTREAM-UNDERREVIEW-TEXT"
+msgstr "Data View is under review"
+
+msgid "APP-DATASTREAM-UPDATESUCCESSFULLY-TEXT"
+msgstr "Data View Updated"
+
+msgid "APP-DATASTREAM-CANNOTUPDATE-TEXT"
+msgstr "Data view can't be updated"
+
+msgid "APP-DATASTREAM-NOTESAVESUCCESSFULLY-TEXT"
+msgstr "Note saved successfully"
+
+msgid "APP-DATASTREAM-CANNOTSAVENOTE-TEXT"
+msgstr "We can't save the note. Please try again."
+
+msgid "APP-DATASTREAM-DELETECACHEKEYS-TEXT"
+msgstr "Changes updated successfully"
+
+msgid "APP-VISUALIZATION-TEXT"
+msgstr "Visualization"
+
+msgid "APP-DATASTREAM-TEXT"
+msgstr "Data view"
+
+msgid "REPORT-CHART-DATE"
+msgstr "Date"
+
+msgid "REPORT-CHART-NO_DATA"
+msgstr "No data available yet"
+
+msgid "REPORT-CHART-TOTAL_HITS"
+msgstr "Total hits"
+
+msgid "RESOURCE-NOT-EXIST"
+msgstr "A resource does not exist."
+
+msgid "REVISION-NOT-EXIST"
+msgstr "A revision does not exist."
+
+msgid "REVISION-PUBLISHED-OR-REVIEW"
+msgstr "A revision is published or under review."
+
+msgid "REVISION-NOT-DRAFT"
+msgstr "A revision was not under draft status"
+
+msgid "SUBMIT-RESOURCE-SUCCESS"
+msgstr "Successfully submitted resource."
+
+msgid "DASHBOARD-REVISION-NOT-FOUND"
+msgstr "A dashboard revision was not found"
+
+msgid "SAVE-FEATURED-DASHBOARD-SUCCESS"
+msgstr "Successfully updated"
+
+msgid "RESOURCE-NOT-FOUND"
+msgstr "A resource was not found"
+
+msgid "RESOURCE-NOT-UNPUBLISHED"
+msgstr "A resource was not unpublished"
+
+msgid "UNPUBLISH-RESOURCE-SUCCESS"
+msgstr "Successfully unpublished a resource."
+
+msgid "RESOURCE-NOT-APPROVED-OR-UNPUBLISHED"
+msgstr "A resource was not approved or unpublished"
+
+msgid "RESOURCE-PUBLISHED-SUCCESS"
+msgstr "Successfully published resource"
+
+msgid "RESOURCE-NOT-PENDING-OR-UNDER-REVIEW"
+msgstr "A resource was not pending review or under review"
+
+msgid "RESOURCE-REJECTED-SUCCESS"
+msgstr "Successfully rejected resource."
+
+msgid "RESOURCE-APPROVED-SUCCESS"
+msgstr "Successfully approved a resource."
+
+msgid "APP-INSTITUTIONAL-TEXT"
+msgstr "Institutional"
+
+msgid "APP-ABOUTUS-TITLE"
+msgstr "See who is behind Junar"
+
+msgid "APP-ABOUTUS-TEXT"
+msgstr "About us"
+
+msgid "APP-CONTACT-TEXT"
+msgstr "Contact us"
+
+msgid "APP-WIKI-TEXT"
+msgstr "Wiki"
+
+msgid "APP-COMMUNITY-TEXT"
+msgstr "Junar Community"
+
+msgid "APP-FOLLOWUSON-TEXT"
+msgstr "Follow us on"
+
+# msgid "HEADER-JUNAR-TITLE"
+# msgstr "Junar is the Easiest-to-Use Open Data Platform"
+
+msgid "HEADER-JUNAR-TITLE-PRIVATE"
+msgstr "Junar is the Easiest-to-Use Private Data Platform"
+
+msgid "APP-COLLECT-TEXT"
+msgstr "Collect"
+
+msgid "APP-ENHANCE-TEXT"
+msgstr "Enhance"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publish"
+
+msgid "APP-REPORT-TEXT"
+msgstr "Reports"
+
+msgid "APP-ANYDOUBTS-TEXT2"
+msgstr "Any question?"
+
+msgid "APP-ACCOUNTDETAILLS-TEXT"
+msgstr "Account Details"
+
+msgid "APP-SIGNOUT-TEXT"
+msgstr "Sign out"
+
+msgid "APP-ACCOUNTADMIN-TEXT"
+msgstr "Account settings"
+
+msgid "APP-SIGNINTO-TEXT"
+msgstr "Sign in to"
+
+msgid "APP-SIGNINWELCOME-TEXT"
+msgstr "<h2>Welcome back! this is the private entrance for current Junar customers.<br/>If you got here by accident, please <a href='http://www.junar.com'>go back</a>.</h2><p><strong>With Junar you can:</strong></p><ul><li>Manage your Open Data projects end-to-end</li><li>Build visually compelling visualizations and tables with your data</li><li>Easily integrate your Open Data into your website or have us host it</li><li>Make your data social and track its usage</li></ul>"
+
+msgid "APP-SIGNINWELCOME-TEXT-PRIVATE"
+msgstr "<h2>Welcome back! this is the private entrance for current Junar customers.<br/>If you got here by accident, please <a href='http://www.junar.com'>go back</a>.</h2><p><strong>With Junar you can:</strong></p><ul><li>Manage your Private Data projects end-to-end</li><li>Build visually compelling visualizations and tables with your data</li>/ul>"
+
+msgid "MODEL-USERNAME-TEXT"
+msgstr "Username"
+
+msgid "MODEL-PASSWORD-TEXT"
+msgstr "Password"
+
+msgid "APP-FORGOTPASSWORD-TEXT"
+msgstr "Forgot your password?"
+
+msgid "FORGOT-PASSWORD-LABEL"
+msgstr "Please enter your username or email address:"
+
+msgid "FORGOT-PASSWORD-TIP"
+msgstr "You will receive instructions to get a new password via email."
+
+msgid "APP-RECOVERIT-TEX"
+msgstr "Get new password"
+
+msgid "ACCOUNT-ACCOUNTINFORMATION-TEXT"
+msgstr "Account information"
+
+msgid "APP-CHANGEPASSWORD-TEXT"
+msgstr "Change password"
+
+msgid "APP-PICTURE-TEXT"
+msgstr "Picture"
+
+msgid "DSFIND-HELPTIP-TITLE"
+msgstr "Helpful Tips"
+
+msgid "USR-GRAVATAR-TIP1"
+msgstr "Junar uses the power of"
+
+msgid "USR-GRAVATAR-TIP2"
+msgstr "to show your picture. If you already have a Gravatar account, you can change "
+
+msgid "APP-HERE-TEXT"
+msgstr "here"
+
+msgid "USR-GRAVATAR-TIP4"
+msgstr "To create an account and upload your picture go"
+
+msgid "APP-SAVE-TEXT"
+msgstr "Save"
+
+msgid "FORGOT-PASSWORD-RESET"
+msgstr "Your password has been reset"
+
+msgid "FORGOT-PASSWORD-EMAIL"
+msgstr "New password has been sent to you by e-mail"
+
+msgid "FORFOT-PASSWORD-SIGNIN"
+msgstr "Sign in with new password"
+
+msgid "OV-SIGINCREATE-SIGINSUBMIT"
+msgstr "Sign in to Junar"
+
+msgid "APP-THEOPENDATAPLATFORM-TEXT"
+msgstr "The Open Data Platform"
+
+msgid "APP-TRYJUNARFREE-TEXT"
+msgstr "Request a demo"
+
+msgid "APP-SIGNUP-TITLE-TEXT"
+msgstr "Create a new account"
+
+msgid "WS-ACCOUNTS-ACCOUNT-NAME-TIP"
+msgstr "Enter your organization name"
+
+msgid "WS-ACCOUNTS-AVAILABLE"
+msgstr "Available"
+
+msgid "WS-ACCOUNTS-ADMIN-URL-TIP"
+msgstr "Your Open Data will be hosted here"
+
+msgid "APP-SIGNUP-TEXT"
+msgstr "Sign Up"
+
+msgid "APP-SIGNIN-TEXT"
+msgstr "Sign In"
+
+msgid "APP-DATAECONOMY-TEXT"
+msgstr "Open Data"
+
+msgid "APP-WHYJUNAR-TEXT"
+msgstr "Why Junar?"
+
+msgid "APP-HOWITWORKS-TEXT"
+msgstr "How it Works"
+
+msgid "APP-TEXT-MOTD"
+msgstr "Message of the Day"
+
+msgid "APP-TEXT-SUMMARY"
+msgstr "7 days summary"
+
+msgid "APP-TEXT-ADMIN"
+msgstr "Administrator"
+
+msgid "APP-TEXT-PUBLISHER"
+msgstr "Publisher"
+
+msgid "APP-TEXT-ENHANCER"
+msgstr "Editor"
+
+msgid "APP-TEXT-COLLECTOR"
+msgstr "Editor"
+
+msgid "APP-AS-CREATED"
+msgstr "has created"
+
+msgid "APP-AS-DATASET-SINGULAR"
+msgstr "Dataset"
+
+msgid "APP-AS-DATASET-PLURAL"
+msgstr "Datasets"
+
+msgid "APP-AS-AND"
+msgstr "and"
+
+msgid "APP-AS-DATASTREAM-SINGULAR"
+msgstr "Data view"
+
+msgid "APP-AS-DATASTREAM-PLURAL"
+msgstr "Data views"
+
+msgid "APP-AS-VISUALIZATION-SINGULAR"
+msgstr "Visualization"
+
+msgid "APP-AS-VISUALIZATION-PLURAL"
+msgstr "Visualizations"
+
+msgid "APP-AS-DASHBOARD-SINGULAR"
+msgstr "Dashboard"
+
+msgid "APP-AS-DASHBOARD-PLURAL"
+msgstr "Dashboards"
+
+msgid "APP-AS-PENDING"
+msgstr "Pending of approval"
+
+msgid "APP-AS-UNDER_REVIEW"
+msgstr "Under review"
+
+msgid "APP-AS-REJECTED"
+msgstr "Rejected"
+
+msgid "APP-AS-APPROVED"
+msgstr "Approved"
+
+msgid "APP-AS-PUBLISHED"
+msgstr "Published"
+
+msgid "APP-TEXT-ODM"
+msgstr "Open Data Metrics"
+
+msgid "APP-TEXT-PDM"
+msgstr "Private Data Metrics"
+
+msgid "APP-PUBLISHED-TEXT"
+msgstr "Published"
+
+# msgid "APP-DATASETS-TEXT"
+# msgstr "Datasets"
+
+msgid "APP-VIEWS-TEXT"
+msgstr "Data Views"
+
+# msgid "APP-DASHBOARDS-TEXT"
+# msgstr "Dashboards"
+
+msgid "APP-CHARTS-TEXT"
+msgstr "Visualizations"
+
+msgid "APP-MY-LAST-ACTIVITY"
+msgstr "My recent activity"
+
+# msgid "APP-DATAVIEWS-TEXT"
+# msgstr "Data Views"
+
+msgid "APP-TEXT-CONFIGURE_GRAVATAR"
+msgstr "Configure your picture"
+
+msgid "APP-DATASET-ABBR-TEXT"
+msgstr "Datasets"
+
+msgid "APP-ACTIVITYSTREAM-TITLE"
+msgstr "Welcome to Junar!"
+
+msgid "APP-TOTAL-TEXT"
+msgstr "Total"
+
+msgid "DATASET-TABLE-HEADER-MODIFIED"
+msgstr "Last modified"
+
+msgid "APP-DATASET-TEXT"
+msgstr "Dataset"
+
+msgid "WORKSPACE-MICROSITE-SETTINGS"
+msgstr "Branded Open Data Site settings"
+
+msgid "WORKSPACE-MICROSITE-SETTINGS-PRIVATE"
+msgstr "Branded Private Data Site settings"
+
+msgid "ACCOUNT-BRANDING-HEADER-TIP"
+msgstr "Paste an URL reference here for the header<br/>Example: http://www.my-organization.com/my-header.html"
+
+msgid "ACCOUNT-BRANDING-FOOTER-TIP"
+msgstr "Paste an URL reference here for the footer<br/>Example: http://www.my-organization.com/my-footer.html"
+
+msgid "BRANDED-OPEN-DATA-SITE-TIP"
+msgstr "<p>The Junar Branded Open Data Site enables you to integrate your customized Open Data dashboards into your website. It includes the option to add a header and footer. The branded site mirrors your existing website and enables your audience full access to your published data.</p><br />"
+
+msgid "BRANDED-OPEN-DATA-SITE-TIP-PRIVATE"
+msgstr "<p>The Junar Branded Private Data Site enables you to integrate your customized Private Data dashboards into your website. It includes the option to add a header and footer. The branded site mirrors your existing website and enables your audience full access to your published data.</p><br />"
+
+msgid "WORKSPACE-CUSTOMIZE-SETTINGS"
+msgstr "Customize display"
+
+msgid "ACCOUNT-MICROSITE-TITLES"
+msgstr "Main titles"
+
+msgid "APP-BUTTONS-TEXT"
+msgstr "Buttons"
+
+msgid "ACCOUNT-MOUSEOVER-TITLE"
+msgstr "Mouseover state for Data Views *"
+
+msgid "ACCOUNT-MOUSEOVER-TIP"
+msgstr "(*) in Dashboards and Data Views embeds"
+
+msgid "BRANDED-BRANDINGS-TIP"
+msgstr "Use the color pickers to customize the colors of the Branded Open Data Site with the ones of your brand."
+
+msgid "BRANDED-BRANDINGS-TIP-PRIVATE"
+msgstr "Use the color pickers to customize the colors of the Branded Private Data Site with the ones of your brand."
+
+msgid "APP-CATEGORIES-TEXT"
+msgstr "Categories"
+
+msgid "WORKSPACE-CREATE-CATEGORY"
+msgstr "Create category"
+
+msgid "WORKSPACE-CREATE-TRANSP-CATEGORIES"
+msgstr "Create transparency's categories"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Actions"
+
+msgid "APP-ACTIONS-EDIT"
+msgstr "Edit"
+
+msgid "APP-DELETE-TEXT"
+msgstr "Delete"
+
+msgid "WORKSPACE-DOMAIN-SETTINGS"
+msgstr "Domains settings"
+
+msgid "ACCOUNT-DOMAIN-TIP"
+msgstr "Enter your domain here.<br/>You need first to configure a CNAME with your sysadmin and point it to cloud.junar.com"
+
+msgid "WRKSPCE-DOMAIN-TIP"
+msgstr "<p>Junar lets you Open Data.</p><p>In order to define where data is opened, we offer 2 alternatives:</p><ul><li>Junar can host your data in an Open Data Domain</li><li>You can integrate your data into your website by creating a subdomain and pointing it to our cloud</li></ul><p>Please contact us at <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> to help you set this up in a few minutes.</p>"
+
+msgid "WRKSPCE-DOMAIN-TIP-PRIVATE"
+msgstr "<ul><li>Junar can host your data in an Private Data Domain</li><li>You can integrate your data into your website by creating a subdomain and pointing it to our cloud</li></ul><p>Please contact us at <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> to help you set this up in a few minutes.</p>"
+
+msgid "ACCOUNT-CONTACT-INFORMATION-TEXT"
+msgstr "Contact Information"
+
+msgid "ACCOUNT-CONTACT-INFORMATION-HELP"
+msgstr "This will be the contact information that we will use in case we need to contact you."
+
+msgid "WORKSPACE-SOCIAL-SETTINGS"
+msgstr "Social Settings"
+
+msgid "SOCIAL-COMMENTS-TIP"
+msgstr "Allow your Branded Open Data Site visitors to post comments and questions."
+
+msgid "SOCIAL-COMMENTS-TIP-PRIVATE"
+msgstr "Allow your Branded Private Data Site visitors to post comments and questions."
+
+msgid "SOCIAL-EMBED-TIP"
+msgstr "Allow users to use actions in embeded Data Views and Visualizations."
+
+msgid "SOCIAL-SHARING-TIP"
+msgstr "Makes it easy for users to share your data and make it viral online via social networks."
+
+msgid "SOCIAL-NOTES-TIP"
+msgstr "Add more context to your Data Views by adding notes."
+
+msgid "WRKSPC-SOCIAL-TIP"
+msgstr "<p>Data must be opened to unleash its value!</p><br/><p>Junar makes it easy to optimize your open data to be shareable via social network sites and searchable by search engines which helps to drive additional views and engagement.</p>"
+
+msgid "WRKSPC-SOCIAL-TIP-PRIVATE"
+msgstr ""
+
+msgid "ACCOUNT-USERS-TAB"
+msgstr "Users"
+
+msgid "APP-BRANDING-TEXT"
+msgstr "Branding"
+
+msgid "APP-SOCIAL-TEXT"
+msgstr "Social"
+
+msgid "ACCOUNT-DOMAINSETTINGS-TAB"
+msgstr "Domain settings"
+
+msgid "ACCOUNT-CATEGORIES-TAB"
+msgstr "Categories"
+
+msgid "APP-USERS-TEXT"
+msgstr "Users"
+
+msgid "WORKSPACE-CREATE-USER"
+msgstr "Add new user"
+
+msgid "APP-LAST-ACTIVITY-TEXT"
+msgstr "Last activity"
+
+msgid "APP-USER-TIP"
+msgstr "<h6>HELPFUL TIPS</h6><p>There are 3 types of roles:</p><p><strong>Editor:</strong><br> Can collect and transform datasets into Data Views and Visualizations, and use those in Dashboards.</p><p><strong>Publishers:</strong><br> Same privileges as Editor, plus the permition to publish the resources to the Branded Open Data Site.</p><p><strong>Account administrators:</strong><br> Same privileges as Editor and Publisher, plus management of account settings.</p>"
+
+msgid "APP-USER-TIP-PRIVATE"
+msgstr "<h6>HELPFUL TIPS</h6><p>There are 4 roles in the Junar Private Data Platform:</p><p><strong>Editor:</strong><br> Collect and transform datasets into richer and more usable formats such as Data Views, Visualizations, and themed Dashboards</p><p><strong>Publishers:</strong><br> Collect and enhance datasets, and approve which data to publish in the Branded Private Data Site</p><p><strong>Administrators:</strong> Collect, Enhance, and Publish datasets and manageaccount settings</p><p><strong>Members:</strong><br>Chance to access to private resources</p>"
+
+msgid "CHRT-XAXISNAME-TEXT"
+msgstr "X axis name"
+
+msgid "CHRT-YAXISNAME-TEXT"
+msgstr "Y axis name"
+
+msgid "CHRT-SCALE-TEXT"
+msgstr "Y axis max value"
+
+msgid "CHRT-LABEL-TITLE"
+msgstr "Visualization labels"
+
+msgid "CHRT-START-TIP1"
+msgstr "Pick and drag in the table to select the range of cells that contains the &quot;<strong>"
+
+msgid "APP-LABEL-TEXT"
+msgstr "Labels"
+
+msgid "CHRT-START-TIP2"
+msgstr "</strong>&quot; for the visualization. <em>Selection color:</em>"
+
+msgid "DBMAN-PERSONALIZEDB-HINT1"
+msgstr "HINT:"
+
+msgid "CHRT-LABEL-TIP2"
+msgstr "are not mandatory"
+
+msgid "APP-CLEARSELECTION-TEXT"
+msgstr "Clear selection"
+
+msgid "CHRT-RANGESELECTED-TEXT"
+msgstr "Range selected"
+
+msgid "CHRT-EDITRANGE-TEXT"
+msgstr "Edit Range"
+
+msgid "CHRT-SELECTRANGE-TEXT"
+msgstr "Select range..."
+
+msgid "CHRT-HEADERS-TITLE"
+msgstr "Visualization headers"
+
+msgid "APP-HEADERS-TEXT"
+msgstr "Headers"
+
+msgid "APP-EDITCHART-TEXT"
+msgstr "Edit Visualization"
+
+msgid "APP-CREATECHART-TEXT"
+msgstr "Create Visualization"
+
+msgid "APP-EDITDATA-TEXT"
+msgstr "Edit Data"
+
+msgid "APP-START-TEXT"
+msgstr "Start"
+
+msgid "APP-CHARTTYPES-TEXT"
+msgstr "Visualization types"
+
+msgid "APP-CUSTOMIZE-TEXT"
+msgstr "Customize"
+
+msgid "CHRT-CHART-DATA"
+msgstr "Visualization data"
+
+msgid "CHRT-WARNING-MSG"
+msgstr "Visualization values must all be numeric.</strong> Choosing string values as <em>data</em> might cause an incorrect visualization"
+
+msgid "APP-DATA-TEXT"
+msgstr "Data"
+
+msgid "CHRT-START-TIP"
+msgstr "The &quot;<strong>data</strong>&quot; must contain numeric figures"
+
+msgid "CHRT-EMPTYCELL-TITLE"
+msgstr "Empty cells will be"
+
+msgid "CHRT-EMPTYCELL-OPT1"
+msgstr "Excluded from the data set"
+
+msgid "CHRT-EMPTYCELL-OPT2"
+msgstr "Set to previous value in data set"
+
+msgid "CHRT-EMPTYCELL-OPT3"
+msgstr "Set to a given value"
+
+msgid "CHRT-SELECTION-TITLE"
+msgstr "The selection will be treated as"
+
+msgid "CHRT-SELECTION-OPT1"
+msgstr "Default"
+
+msgid "CHRT-SELECTION-OPT2"
+msgstr "Inverted Data"
+
+msgid "CHRT-SELECTION-OPT3"
+msgstr "Inverted Axis"
+
+msgid "CHRT-SELECTION-OPT4"
+msgstr "Correlative"
+
+msgid "CHRT-SELECTION-OPT5"
+msgstr "Multiple series"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Next"
+
+msgid "APP-SELECTCHART-TEXT"
+msgstr "Select Visualization"
+
+msgid "CHRT-TYPE-BAR"
+msgstr "Bar"
+
+msgid "CHRT-TYPE-COLUMN"
+msgstr "Column"
+
+msgid "CHRT-TYPE-LINE"
+msgstr "Line"
+
+msgid "CHRT-TYPE-PIE"
+msgstr "Pie"
+
+msgid "CHRT-TYPE-AREA"
+msgstr "Area"
+
+msgid "CHRT-TYPE-GEO"
+msgstr "Geo"
+
+msgid "CHRT-TYPE-MAP"
+msgstr "Map"
+
+msgid "APP-PREVIOUS-TEXT"
+msgstr "Previous"
+
+msgid "APP-OPTIONS-TEXT"
+msgstr "Options"
+
+msgid "CHRT-CHART-TITLE"
+msgstr "Visualization title"
+
+msgid "CHRT-SHOWLEGEND-TEXT"
+msgstr "Show Legend"
+
+msgid "APP-SAVEDRAFT-TEXT"
+msgstr "Save"
+
+msgid "APP-SENDTOREVIEW-TEXT"
+msgstr "Send to review"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Approve"
+
+msgid "APP-CANCEL-TEXT"
+msgstr "Cancel"
+
+msgid "APP-PREVIEW-TEXT"
+msgstr "Preview"
+
+msgid "APP-ERROR-TEXT"
+msgstr "Error"
+
+msgid "CHRT-BADDS-ERROR"
+msgstr "The current data view is not suitable for visualizing"
+
+msgid "APP-GOBACK-TEXT"
+msgstr "Go Back"
+
+msgid "APP-ENTERAVALUEFOR-TEXT"
+msgstr "Enter a value for"
+
+msgid "APP-TAGS-TEXT"
+msgstr "Tags"
+
+msgid "APP-NOTAGS-TEXT"
+msgstr "No tags"
+
+msgid "APP-VIEWALL-TEXT"
+msgstr "View all"
+
+msgid "APP-CURRENT_STATUS-TEXT"
+msgstr "Current status"
+
+msgid "APP-CHANGE_STATUS-TEXT"
+msgstr "Change status"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Reject"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-INFORMATION-TEXT"
+msgstr "Information"
+
+msgid "APP-COLLECTMORE-TITLE"
+msgstr "Collect more from this source"
+
+msgid "APP-COLLECTMORE-TEXT"
+msgstr "Collect more"
+
+msgid "APP-CREATEDBY-TEXT"
+msgstr "Created by"
+
+msgid "APP-EDITEDBY-TEXT"
+msgstr "Edited by"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Sources"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Reload"
+
+msgid "CHRT-REGION-TEXT"
+msgstr "Region"
+
+msgid "APP-WORLD-TEXT"
+msgstr "World"
+
+msgid "APP-ASIA-TEXT"
+msgstr "Asia"
+
+msgid "APP-EUROPE-TEXT"
+msgstr "Europe"
+
+msgid "APP-NORTHAMERICA-TEXT"
+msgstr "North America"
+
+msgid "APP-SOUTHAMERICA-TEXT"
+msgstr "South America"
+
+msgid "APP-CENTRALAMERICA-TEXT"
+msgstr "Central America"
+
+msgid "APP-UNITEDSTATES-TEXT"
+msgstr "United States"
+
+msgid "APP-AFRICA-TEXT"
+msgstr "Africa"
+
+msgid "APP-LATITUDE-TEXT"
+msgstr "Latitude"
+
+msgid "APP-LONGITUDE-TEXT"
+msgstr "Longitude"
+
+msgid "APP-MAPTYPE-TEXT"
+msgstr "Map Type"
+
+msgid "CHRT-ROADMAP-TEXT"
+msgstr "RoadMap"
+
+msgid "CHRT-HYBRID-TEXT"
+msgstr "Hybrid"
+
+msgid "CHRT-SATELLITE-TEXT"
+msgstr "Satellite"
+
+msgid "APP-TRACE-TEXT"
+msgstr "Trace"
+
+msgid "CHRT-3DCHART-TEXT"
+msgstr "3D Visualization"
+
+msgid "DBMAN-DBCREATOR-NAMETIP"
+msgstr "What's the purpose of your dashboard? Name it properly, so others can find it easily and instantly know what they can get from it"
+
+msgid "DBMAN-DBCREATOR-DESCRIPTIONTIP"
+msgstr "A few words to let everyone know what they will find in your Dashboard"
+
+msgid "OVCREATEDB-TAGS-TIP"
+msgstr "Type a tag here and separate them by commas or enter key"
+
+msgid "APP-REMOVETAG-TEXT"
+msgstr "Remove Tag"
+
+msgid "DBMAN-DBCREATOR-TAGSTIP"
+msgstr "Keywords to help identify Dashboard content"
+
+msgid "APP-UPDATEDASHBOARD-TEXT"
+msgstr "Update Dashboard"
+
+msgid "OVERLAY-MAXIMIZE-TIP"
+msgstr "Click on the data views to maximize them"
+
+msgid "APP-CLOSEALL-TEXT"
+msgstr "Close All"
+
+msgid "OVERLAY-ADDDSPARAM-TITLE"
+msgstr "Enter data view's parameters"
+
+msgid "APP-ACCEPT-TEXT"
+msgstr "Accept"
+
+msgid "OVERLAY-MOVEDS-BODY"
+msgstr "Drop the data view in the new position"
+
+msgid "APP-DROPHERE-TEXT"
+msgstr "Drop Here"
+
+msgid "APP-REMOVE-TEXT"
+msgstr "Remove"
+
+msgid "APP-MAXIMIZE-TEXT"
+msgstr "Maximize"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Web collected data"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "User uploaded data"
+
+msgid "APP-EDIT-TEXT"
+msgstr "Edit"
+
+msgid "APP-EDITDSSELECTION-INFORMATION"
+msgstr "Edit data view's information"
+
+msgid "APP-ADDDATA-TITLE"
+msgstr "Add data views to your Dashboard"
+
+msgid "APP-ADDDATA-TEXT"
+msgstr "Add Data"
+
+msgid "APP-NOTES-TITLE"
+msgstr "Notes"
+
+msgid "APP-NOTES-EDIT-TITLE"
+msgstr "Edit Note"
+
+msgid "APP-VIEWMORE-TEXT"
+msgstr "View more"
+
+msgid "APP-POST-TEXT"
+msgstr "Post"
+
+msgid "APP-ADDANOTE-TEXT"
+msgstr "Add a Note"
+
+msgid "APP-MY-TEXT"
+msgstr "My"
+
+msgid "APP-DASHBOARDDE-TEXT-ES"
+msgstr "Dashboard"
+
+msgid "APP-'S-TEXT-EN"
+msgstr "'s"
+
+msgid "APP-DASHBOARD-TEXT-EN"
+msgstr "Dashboard"
+
+msgid "APP-BY-TEXT"
+msgstr "by"
+
+msgid "APP-ME-TEXT"
+msgstr "Me"
+
+msgid "DBMAN-EDITDB-TITLE"
+msgstr "Dashboard's Information"
+
+msgid "APP-ADDTAGS-TEXT"
+msgstr "Add tags"
+
+msgid "DBMAN-ADDDS-TITLE"
+msgstr "Click here to add a data view to your Dashboard"
+
+msgid "DBMAN-ADDDS-LINK"
+msgstr "Add a data view"
+
+msgid "DBMAN-ADDDSTODB-TITLE"
+msgstr "Add data view to this Dashboard"
+
+msgid "DBMAN-PREVIEWDS-TITLE"
+msgstr "Preview this data view"
+
+msgid "DBMAN-PERSONALIZEDB-TITLE"
+msgstr "Organize data views"
+
+msgid "DBMAN-PERSONALIZEDB-SUBTITLE"
+msgstr "Just drag the data views to your Dashboard. It's that simple"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DBMAN-PERSONALIZEDB-NOFOUDERROR1"
+msgstr "Sorry, but there were no results."
+
+msgid "APP-ORGANIZEYOURDATA-TEXT"
+msgstr "Organize your Data"
+
+msgid "STEP0-MYCOMPUTER-TEXT"
+msgstr "My computer"
+
+msgid "STEP0-AWEBSITEPAGE-TEXT"
+msgstr "A website page"
+
+msgid "APP-CALLUSONSKYPE-TEXT2"
+msgstr "Send us an email"
+
+msgid "DSCRE-UPLOAD-TIP"
+msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV, ZIP, RAR, JPG, JPEG, PNG, GIF. <br/> Files must be encoded in UTF-8."
+
+msgid "APP-LOADING-TEXT"
+msgstr "loading"
+
+msgid "APP-ACTIONS-EDITDATASET"
+msgstr "Edit Dataset"
+
+msgid "APP-ACTIONS-CREATEDATASET"
+msgstr "Collect Dataset"
+
+msgid "DATASET-TABLE-HEADER-ENDPOINT"
+msgstr "Collected URL or File"
+
+msgid "DATASET-TABLE-HEADER-OWNER"
+msgstr "Owner"
+
+msgid "APP-TYPE-TEXT"
+msgstr "Type"
+
+msgid "DATASET-TABLE-HEADER-STATUS"
+msgstr "Status"
+
+msgid "APP-ACTIONS-CREATEDATASET-ABBR"
+msgstr "Collect Dataset"
+
+msgid "APP-ACTIONS-CREATEVIEW"
+msgstr "Create Data View"
+
+msgid "APP-EXPAND-TEXT"
+msgstr "Expand"
+
+msgid "APP-COLLAPSE-TEXT"
+msgstr "Collapse"
+
+msgid "DSDET-UPDATEDS-TTITLE"
+msgstr "Update data view"
+
+msgid "APP-EDITDS-INFORMATION"
+msgstr "Edit data view's information"
+
+msgid "APP-EDITDSSELECTION-TEXT"
+msgstr "Edit Selection"
+
+msgid "APP-VISITORS_ACTIVITY-TEXT"
+msgstr "Visitors activity"
+
+msgid "APP-USERHITS-TEXT"
+msgstr "All hits for Data Views and Visualizations in the last 90 days"
+
+msgid "APP-TOP10-TEXT"
+msgstr "Top 10 Data Views and Visualizations in the last 90 days"
+
+msgid "APP-DATASTREAMS-TEXT"
+msgstr "Data views"
+
+msgid "REPORTS-TABLE-HEADER-MODIFIED"
+msgstr "Date published"
+
+msgid "REPORTS-TABLE-HEADER-CHANNEL_TYPE"
+msgstr "Channel"
+
+msgid "REPORTS-TABLE-HEADER-TOTAL_HITS"
+msgstr "Total hits"
+
+msgid "REPORTS-TABLE-HEADER-THIRTY_DAYS"
+msgstr "Hits for last 30 days"
+
+msgid "SEARCH-DATASETS-TEXT"
+msgstr "Search Datasets"
+
+msgid "APP-DASHBOARD-TEXT"
+msgstr "Dashboard"
+
+msgid "APP-CREATEDASHBOARD-TEXT"
+msgstr "Create Dashboard"
+
+msgid "APP-CREATEDATASTREAM-TEXT"
+msgstr "Create data view"
+
+msgid "APP-ACTIONS-CREATEDASHBOARD"
+msgstr "Create Dashboard"
+
+msgid "APP-ACTIONS-CREATE_VISUALIZATION"
+msgstr "Create Visualization"
+
+msgid "APP-FEATURED-TEXT"
+msgstr "Featured"
+
+msgid "APP-FEATURED-SUBTITLE"
+msgstr "Arrange in the right box the dashboards that will be set as featured."
+
+msgid "APP-FEATURED-HELPTIP"
+msgstr "The featured dashboards will appear as tabs in the Branded Open Data Site, and they will be arranged in the same order as they appear in the right box."
+
+msgid "APP-FEATURED-HELPTIP-PRIVATE"
+msgstr "The featured dashboards will appear as tabs in the Branded Private Data Site, and they will be arranged in the same order as they appear in the right box."
+
+msgid "APP-TIME-ALL"
+msgstr "All time"
+
+msgid "APP-TIME-WEEK"
+msgstr "This week"
+
+msgid "APP-TIME-MONTH"
+msgstr "This month"
+
+msgid "APP-ACTIONS-REVIEW"
+msgstr "Review"
+
+msgid "EDITDS-DSINFO-TITLE"
+msgstr "Data view information"
+
+msgid "OVEDITDS-NAME-TIP"
+msgstr "What's the data about? Type a general topic that explains the data you are extracting"
+
+msgid "EDITDS-METATAGS-TITLE"
+msgstr "Data view metatags"
+
+msgid "EDITDS-SOURCE-TITLE"
+msgstr "Data view sources"
+
+msgid "EDITDS-SOURCE-TIP1"
+msgstr "Type the first 3 letters of a source and select one from the autocomplete list. If it doesn't appear, please"
+
+msgid "EDITDS-SOURCE-TIP2"
+msgstr "add a new one"
+
+msgid "APP-ADDNEWSOURCE-TEXT"
+msgstr "Add a new source"
+
+msgid "MODEL-NAME-TEXT"
+msgstr "Name"
+
+msgid "MODEL-URL-TEXT"
+msgstr "Url"
+
+msgid "APP-DSTAGS-TEXT"
+msgstr "Data view tags"
+
+msgid "OVEDITDS-TAGS-TIP"
+msgstr "Keywords to help identify your data view content. Separate the tags with commas"
+
+msgid "CREATE-RECOMENDEDTAGS-TEXT"
+msgstr "Recomended Tags"
+
+msgid "APP-CLICKTOADD-TEXT"
+msgstr "click to add"
+
+msgid "DSCRE-SELECTALLTABLE-TITLE"
+msgstr "Quick tips: Select entire table"
+
+msgid "DSCRE-SELECTALLTABLE-SUBTITLE"
+msgstr "We have noticed that you have selected the entire table, by clicking on cells, columns or rows."
+
+msgid "DSCRE-SELECTALLTABLE-TIP1"
+msgstr "Click on the following button"
+
+msgid "DSCRE-SELECTALLTABLE-TIP2"
+msgstr "to select the whole table."
+
+msgid "APP-CONTINUE-TEXT"
+msgstr "Continue"
+
+msgid "APP-COLLECTDATA-TEXT"
+msgstr "Collect Data"
+
+msgid "APP-SELECT-TEXT"
+msgstr "Select"
+
+msgid "APP-PICKDATA-TEXT"
+msgstr "Pick Data"
+
+msgid "DSCRE-SIDEBAR-COLLECTTITLE"
+msgstr "Collect Summary"
+
+msgid "DSCRE-SIDEBAR-COLLECTSUBTITLE"
+msgstr "To start collecting data, you need to make some selections in the table beside. Read our help and tips to learn more about the different selection combinations"
+
+msgid "APP-SELECTION-TEXT"
+msgstr "Selection"
+
+msgid "APP-CLEAR-TEXT"
+msgstr "Clear"
+
+msgid "APP-FILTERS-TEXT"
+msgstr "Filters"
+
+msgid "APP-EDITHEADERS-TEXT"
+msgstr "Edit headers"
+
+msgid "APP-FUNCTIONS-TEXT"
+msgstr "Functions"
+
+msgid "APP-MOVINGAVERAGE-TEXT"
+msgstr "Moving average"
+
+msgid "APP-ALIASES-TEXT"
+msgstr "Aliases"
+
+msgid "APP-ADVANCEDOPTIONS-TEXT"
+msgstr "Advanced Options"
+
+msgid "CREATION-SIDEBAR-ADVANCEDTIP"
+msgstr "In the advanced mode, there are various functions you can perform, such as: set table headers, add filters, calculate averages and totals. If you use our API, you can also set your aliases in this mode"
+
+msgid "CREATION-ENABLE-ADVANCE"
+msgstr "Enable advanced mode"
+
+msgid "CREATION-SIDEBAR-SELECTION"
+msgstr "The advanced options only work with certain selections. If your selection does not support an option, the option will appear as disabled in the list"
+
+msgid "CREATION-SELECTTABLEHEADERS-TEXT"
+msgstr "Select table headers"
+
+msgid "CREATION-ADDFILTER-TEXT"
+msgstr "Add a Filter"
+
+msgid "CREATIONADDFUNCTIONS-TEXT"
+msgstr "Add Functions"
+
+msgid "CREATION-ADDALIASES-TEXT"
+msgstr "Add Aliases"
+
+msgid "CREATION-FORDEVELOPERS-TEXT"
+msgstr "(for developers)"
+
+msgid "CREATION-HEADERS-SELECTROWS"
+msgstr "Choose the rows that you want to set as headers"
+
+msgid "CREATION-HEADERS-TIP"
+msgstr "<strong>We already selected headers for you.</strong> If this is not what you want, you can unselect them"
+
+msgid "CREATION-CLICKONTHE-TEXT"
+msgstr "Click on the"
+
+msgid "CREATION-FILTERICON-TEXT"
+msgstr "filter icon"
+
+msgid "CREATION-FILTER-SELECT"
+msgstr "for the column you to select as your filter and complete the form"
+
+msgid "CREATION-ADDFUNCTIONS-TEXT"
+msgstr "Add Functions"
+
+msgid "CREATION-FUNCTIONS-TIP"
+msgstr "Functions will be displayed as a new column on the right portion of the data table"
+
+msgid "CREATION-FUNCTIONS-QUESTION"
+msgstr "What function do you want to add"
+
+msgid "CREATION-MOVINGAVERAGE-TITLE"
+msgstr "Add moving average function"
+
+msgid "CREATION-MOVINGAVERAGE-PERIOD"
+msgstr "Select a period for this function"
+
+msgid "CREATION-MOVINGAVERAGE-TIP1"
+msgstr "Select columns as operands"
+
+msgid "CREATION-MOVINGAVERAGE-TIP2"
+msgstr "<strong>In the table beside, the cells you cannot select will appear as <em>'disabled'</em>.</strong> The selections must be related to the previously selected data"
+
+msgid "CREATION-AVERAGE-TITLE"
+msgstr "Add average function"
+
+msgid "CREATION-SUMATORY-TITLE"
+msgstr "Add summatory function"
+
+msgid "CREATION-TOTALS-TITLE"
+msgstr "Add table totals"
+
+msgid "CREATION-TOTALS-TIP"
+msgstr "Table totals will be displayed at the botttom part of the data table, as a new row"
+
+msgid "CREATION-ALIASES-TIP1"
+msgstr "Complete the inputs to add aliases to the columns"
+
+msgid "CREATION-ALIASES-TIP2"
+msgstr "<strong>This is an option for developers.</strong><br/> Use this to set names for key value pairs in the API JSON, when the prettyJSON option is enabled"
+
+msgid "CREATION-TIPS-ALLTABLETITLE"
+msgstr "To select the entire table"
+
+msgid "CREATION-TIPS-ALLTABLETEXT"
+msgstr "Click the &lt; &gt; button on the top-left corner of the grid"
+
+msgid "CREATION-TIPS-COLUMSTITLE"
+msgstr "To select columns"
+
+msgid "CREATION-TIPS-COLUMSTEXT"
+msgstr "Click on one or more of the lettered columns on the top of the table"
+
+msgid "CREATION-TIPS-ROWSTITLE"
+msgstr "To select rows"
+
+msgid "CREATION-TIPS-ROWSTEXT"
+msgstr "Click on one or more of the numbered rows on the left side of the table"
+
+msgid "CREATION-TIPS-CELLTITLE"
+msgstr "To select cells"
+
+msgid "CREATION-TIPS-CELLTEXT"
+msgstr "Click on one or more individual cells or select a group of cells from different rows and columns"
+
+msgid "CREATION-TIPS-DIFFERENTTITLE"
+msgstr "Create different combinations"
+
+msgid "CREATION-TIPS-DIFFERENTTEXT"
+msgstr "Use the same source to publish new data views. You can use the same source of to track different data"
+
+msgid "CREATION-DOUBTS-TIP"
+msgstr "Call us on Skype</a>. <br/>Please, don't hesitate to contact us <br/>for any help or questions"
+
+msgid "APP-HINTS-TEXT"
+msgstr "Hints"
+
+msgid "CREATION-HINTS-HINT1"
+msgstr "Selecting rows and columns simultaneously will collect the intersection of them"
+
+msgid "CREATION-HINTS-HINT2"
+msgstr "You need to select cells in a 'rectangle shape' in order for them be collected as they appear in the &lt;table&gt; of your source. Otherwise, the cells with data you collect will appear side by side"
+
+msgid "CREATION-HINTS-HINT3"
+msgstr "If using filters, the parameters values should be exactly as the value in the columns you are filtering in order to get the appropriate results"
+
+msgid "APP-CLICKTOLOAD-TEXT"
+msgstr "Click to load this Source"
+
+msgid "CREATE-STEP1-TITLE"
+msgstr "Where's the data"
+
+msgid "CREATE-STEP1-SUBTITLE"
+msgstr "Show us what data you want to collect by clicking on the <strong>orange dashed box</strong>"
+
+msgid "APP-NEEDHELP-TEXT"
+msgstr "Need help"
+
+msgid "APP-WOOPSNODATA-TEXT"
+msgstr "Woops! We found a problem with this dataset"
+
+msgid "APP-KEEPINMIND-TEXT"
+msgstr "Please, take a look at the following tips and try again"
+
+msgid "CREATE-STEP1-DISCLAIMER0"
+msgstr "Maximum sizes allowed for datasets are:<ol><li><strong>- CSV:</strong> 500.000 rows and 100 columns</li><li><strong>- XLSx / XLS:</strong> 100.000 rows and 50 columns</li><li><strong>- KML:</strong> 100.000 placemarks</li><li><strong>- HTML, XML and other formats:</strong> 50.000 rows and 30 columns</li></ol>"
+
+msgid "CREATE-STEP1-DISCLAIMER1"
+msgstr "For a URL to be a data source, it must be a HTML webpage that contains HTML &lt;table&gt; tags"
+
+msgid "CREATE-STEP1-DISCLAIMER2"
+msgstr "CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML files can also be used as data sources"
+
+msgid "CREATE-STEP1-DISCLAIMER3"
+msgstr "As of now, you cannot extract data from an image, flash (.swf)"
+
+msgid "CREATE-STEP1-DISCLAIMER4"
+msgstr "The webpage or file that contains the data should have a URL. A URL is the internet address you see in your web browser"
+
+msgid "CREATE-STEP1-DISCLAIMER5"
+msgstr "If you are collecting data from a &lt;table&gt; inside an &lt;iframe&gt; or &lt;frame&gt;, you need to provide the URL of the &lt;iframe&gt; or &lt;frame&gt;"
+
+msgid "CREATE-STEP1-DISCLAIMER6"
+msgstr "Files must be encoded in UTF-8"
+
+msgid "APP-RELATEDSOURCES-TEXT"
+msgstr "Related sources"
+
+msgid "CREATE-STEP1-THROUBLE-TITLE"
+msgstr "Troubleshooting & tips to take into account"
+
+msgid "CREATE-STEP1-THROUBLE1"
+msgstr "You can only collect data from a &lt;table&gt; that has at least one row of data. You cannot select a &lt;table&gt; that is used to organize the structure for a webpage"
+
+msgid "CREATE-STEP1-THROUBLE2"
+msgstr "You can only select one data &lt;table&gt; from a source at a time (at least for now!)"
+
+msgid "CREATE-STEP2-TITLE"
+msgstr "What do you need"
+
+msgid "CREATE-STEP2-SUBTITLE"
+msgstr "Let us know if you want to collect the entire table, specific columns, rows or just cells"
+
+msgid "CREATE-STEP3-TITLE"
+msgstr "Name it"
+
+msgid "CREATE-STEP3-SUBTITLE"
+msgstr "Let us know what is your data view about. Fields with (<span class='required'>*</span>) are mandatory."
+
+msgid "CREATION-STEP3-HELPTITLE"
+msgstr "Names: Best practices and correct uses"
+
+msgid "CREATION-STEP3-HELPTIP"
+msgstr "A good data view clearly communicates what it is about."
+
+msgid "APP-PREVIEWANDSAVE-TEXT"
+msgstr "Preview &amp; Save"
+
+msgid "CREATE-STEP4-SUBTITLE"
+msgstr "Here is a preview of your data view. If everything is fine, click <strong>&quot;Save&quot;</strong>"
+
+msgid "CREATE-STEP4-TAGTITLE"
+msgstr "Tags for this data view"
+
+msgid "CREATE-STEP4-HELPTITLE"
+msgstr "Want to edit your data view"
+
+msgid "CREATE-STEP4-HELPTEXT"
+msgstr "You can always go back by clicking on the <strong>&quot;Previous&quot;</strong> link in the progress bar"
+
+msgid "ACCOUNT-SAVE-SUCCESS"
+msgstr "Account information saved successfully."
+
+msgid "ANALYTICS-TRACKING-ID"
+msgstr "Enter your property ID"
+
+msgid "ANALYTICS-DASHBOARD-CSV"
+msgstr "Export to CSV"
+
+msgid "ANALYTICS-DASHBOARD-GUID"
+msgstr "Get GUID"
+
+msgid "ANALYTICS-DASHBOARD-CHART-EMBED"
+msgstr "Visualization Embed"
+
+msgid "ANALYTICS-DASHBOARD-DV-EMBED"
+msgstr "Data View Embed"
+
+msgid "ANALYTICS-DASHBOARD-SPREAD"
+msgstr "Google Spreadsheet"
+
+msgid "ANALYTICS-DASHBOARD-SOURCE"
+msgstr "Source"
+
+msgid "ANALYTICS-DASHBOARD-SEARCH"
+msgstr "Search"
+
+msgid "ANALYTICS-DASHBOARD-ERROR"
+msgstr "Error"
+
+msgid "ANALYTICS-DASHBOARD-DV-RELOAD"
+msgstr "Data View Reload"
+
+msgid "ANALYTICS-DASHBOARD-CHART-RELOAD"
+msgstr "Visualization Reload"
+
+msgid "ANALYTICS-DASHBOARD-DETAILS"
+msgstr "Details"
+
+msgid "ANALYTICS-DATAVIEW-CSV"
+msgstr "Export to CSV"
+
+msgid "ANALYTICS-DATAVIEW-PAGE"
+msgstr "Page change"
+
+msgid "ANALYTICS-DATAVIEW-EMBED"
+msgstr "Embed"
+
+msgid "ANALYTICS-DATAVIEW-SPREAD"
+msgstr "Google Spreadsheet"
+
+msgid "ANALYTICS-DATAVIEW-SOURCE"
+msgstr "Source"
+
+msgid "ANALYTICS-DATAVIEW-SEARCH"
+msgstr "Search"
+
+msgid "ANALYTICS-DATAVIEW-ERROR"
+msgstr "Error"
+
+msgid "ANALYTICS-DATAVIEW-RELOAD"
+msgstr "Reload"
+
+msgid "ACCOUNT-ANALYTICS-TAB"
+msgstr "Analytics"
+
+msgid "ANALYTICS-DASHBOARD-EVENTS"
+msgstr "Dashboards Events"
+
+msgid "ANALYTICS-DATAVIEW-EVENTS"
+msgstr "Data Views and Visualizations details Events"
+
+msgid "ANALYTICS-DASHBOARD-DV-CSV"
+msgstr "Export Data View to CSV"
+
+msgid "ANALYTICS-DASHBOARD-DV-GUID"
+msgstr "Get GUID from Data View"
+
+msgid "DATASET-NOT-PUBLISHED"
+msgstr "The dataset related to this Data View must be published"
+
+msgid "ACCOUNT-USERS-USERNAME-TIP"
+msgstr "The <em>username</em> must be unique.<br/>This validation is being made between all users from Junar."
+
+msgid "ACCOUNT-USERS-EMAIL-TIP"
+msgstr "The <em>e-mail</em> must be unique.<br/>This validation is being made between all users from Junar."
+
+msgid "ACCOUNT-USERS-ROLES-TIP"
+msgstr "Check below the differences between roles."
+
+msgid "MISSING-TRACKING-ID"
+msgstr "To add any event, you need to set the property ID of your Google Analytics account."
+
+msgid "CREATEDS-STEP4-TIP"
+msgstr "<em>Note:</em> This is just a preview of the data view, and may not contain the actual number of rows."
+
+msgid "ANALYTICS-FORM-TIP"
+msgstr "You can track only one account."
+
+msgid "ANALYTICS-HELP-TIP"
+msgstr "You can find the property ID in the <strong>Admin</strong> tab of your account in <a href='http://www.google.com/analytics/' title='You have to login to your google analytics account to make this link works' target='_blank'>Google Analytics website</a>."
+
+msgid "ANALYTICS-EVENTS-TITLE"
+msgstr "Add Google Analytics events <span>(optional)</span>"
+
+msgid "ANALYTICS-EVENTS-SUBTITLE"
+msgstr "You can track events by adding them <strong>labels</strong> in the fields below.<br/><br/><br/>You can follow the reports in <a href='http://www.google.com/analytics/web/#report/content-event-overview/' title='You have to login to your google analytics account to make this link works' target='_blank'>Google Analytics -> Events</a> section."
+
+msgid "ANALYTICS-HELP-TIP-2"
+msgstr "Take in account that the events' results may take a day to appear in Google Analytics reports."
+
+msgid "ACCOUNT-GOOGLEANALYTICS-TEXT"
+msgstr "Add a Google Analytics account"
+
+msgid "ANALYTICS-DASHBOARD-SUBTITLE"
+msgstr "The following labels refers in Google Analytics to events that happen in Dashboards:"
+
+msgid "ANALYTICS-DASHBOARD-CSV-TIP"
+msgstr "Tracks clicks on '<em>Export Dashboard to CSV</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-GUID-TIP"
+msgstr "Tracks clicks on '<em>Get Dashboard GUID</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-DV-EMBED-TIP"
+msgstr "Tracks clicks on '<em>Get Data View embed code</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-CHART-EMBED-TIP"
+msgstr "Tracks clicks on '<em>Get Visualization embed code</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-SPREADSHEET-TIP"
+msgstr "Tracks clicks on '<em>Get Data View Google Spreadsheet code</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-SOURCE-TIP"
+msgstr "Tracks clicks on '<em>Sources</em>' links"
+
+msgid "ANALYTICS-DASHBOARD-DV-RELOAD-TIP"
+msgstr "Tracks clicks on '<em>Data View reload</em>' button"
+
+msgid "ANALYTICS-DASHBOARD-CHART-RELOAD-TIP"
+msgstr "Tracks clicks on '<em>Visualization reload</em>' button"
+
+msgid "ANALYTICS-DASHBOARD-DETAILS-TIP"
+msgstr "Tracks clicks on '<em>Box titles</em>' links that leads to Data Views or Visualizations Details"
+
+msgid "ANALYTICS-DASHBOARD-DV-GUID-TIP"
+msgstr "Tracks clicks on '<em>Get Data View GUID</em>' link"
+
+msgid "ANALYTICS-DASHBOARD-DV-CSV-TIP"
+msgstr "Tracks clicks on '<em>Export Data View to CSV</em>' link"
+
+msgid "ANALYTICS-DATAVIEW-SUBTITLE"
+msgstr "The following labels refers in Google Analytics to events that happen in Data Views and Visualizations details:"
+
+msgid "ANALYTICS-DATAVIEW-CSV-TIP"
+msgstr "Tracks clicks on '<em>Export Data View to CSV</em>' link"
+
+msgid "ANALYTICS-DATAVIEW-EMBED-TIP"
+msgstr "Tracks clicks on '<em>Get embed code</em>' link"
+
+msgid "ANALYTICS-DATAVIEW-SPREADSHEET-TIP"
+msgstr "Tracks clicks on '<em>Get Data View Google Spreadsheet code</em>' link"
+
+msgid "ANALYTICS-DATAVIEW-SOURCE-TIP"
+msgstr "Tracks clicks on '<em>Sources</em>' links"
+
+msgid "ANALYTICS-DATAVIEW-RELOAD-TIP"
+msgstr "Tracks clicks on '<em>Reload</em>' button"
+
+msgid "ANALYTICS-SEARCH-EVENTS"
+msgstr "Search Events"
+
+msgid "ANALYTICS-SEARCH-SUBTITLE"
+msgstr "The following labels refers in Google Analytics to events that happen when a search is made:"
+
+msgid "ANALYTICS-SEARCH"
+msgstr "Search"
+
+msgid "ANALYTICS-SEARCH-TIP"
+msgstr "Tracks when a search is made"
+
+msgid "CHRT-REGION-TITLE"
+msgstr "Region"
+
+msgid "APP-REGION-TEXT"
+msgstr "Region"
+
+msgid "APP-REGION-TIP"
+msgstr "Region names must be in english for better results."
+
+msgid "APP-ACTIVITYSTREAM-TXT1"
+msgstr "Open Data made easy"
+
+msgid "APP-ACTIVITYSTREAM-TXT1-PRIVATE"
+msgstr "Private Data made easy"
+
+msgid "APP-ACTIVITYSTREAM-TXT2"
+msgstr "Follow these simple steps to get started"
+
+msgid "APP-ACTIVITYSTREAM-TXT3"
+msgstr "<a href='/admin/info' title='Set-up Account'>Set-up Account</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT4"
+msgstr "Customize the <a href='/admin/info' title='Customize the account settings'>account settings</a> and <a href='/admin/users' title='Assign users'>assign users</a> with different roles."
+
+msgid "APP-ACTIVITYSTREAM-TXT5"
+msgstr "<a href='/dataset/action_query' title='Collect Data'>Collect Data</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT6"
+msgstr "<a href='/dataset/action_query' title='Choose the datasets'>Choose the datasets</a> that you want to upload from your computer or the Web."
+
+msgid "APP-ACTIVITYSTREAM-TXT7"
+msgstr "<a href='/resource/action_query' title='Enhance your Data'>Enhance</a> and <a href='/review/action_query' title='Publish your Data'>Publish</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT8"
+msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a> and <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a>, and finally <a href='/review/action_query' title='Publish your resources'>publish them</a> on your <a href='/admin/domain' title='Configure your domain settings'>branded Open Data site</a>."
+
+msgid "APP-ACTIVITYSTREAM-TXT8-PRIVATE"
+msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a> and <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a>, and finally <a href='/review/action_query' title='Publish your resources'>publish them</a> on your <a href='/admin/domain' title='Configure your domain settings'>branded Private Data site</a>."
+
+msgid "APP-ACTIVITYSTREAM-TXT9"
+msgstr "Enhance your Data"
+
+msgid "APP-ACTIVITYSTREAM-TXT10"
+msgstr "The Datasets that you have collected can be enhanced in <a href='/resource/action_query' title='Data Views'>Data Views</a>, <a href='/resource/action_query' title='Visualizations'>Visualizations</a> and <a href='/resource/action_query' title='Dashboards'>Dashboards</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT11"
+msgstr "Your Open Data Site"
+
+msgid "APP-ACTIVITYSTREAM-TXT11-PRIVATE"
+msgstr "Your Private Data Site"
+
+msgid "APP-ACTIVITYSTREAM-TXT12"
+msgstr "Your Data is automatically published in your"
+
+msgid "APP-ACTIVITYSTREAM-TXT13"
+msgstr "Open Data Site"
+
+msgid "APP-ACTIVITYSTREAM-TXT13-PRIVATE"
+msgstr "Private Data Site"
+
+msgid "APP-ACTIVITYSTREAM-TXT14"
+msgstr "hosted on the Junar Platform"
+
+msgid "APP-ACTIVITYSTREAM-TXT15"
+msgstr "<a href='/accounts/my_account' title='Personalize your settings'>Account settings</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT16"
+msgstr "<a href='/accounts/my_account' title='Personalize your settings'>Complete your profile</a>, <a href='/accounts/my_account' title='Personalize your settings'>change your password</a> or <a href='/accounts/my_account' title='Personalize your settings'>select a profile picture</a>."
+
+msgid "APP-ACTIVITYSTREAM-TXT17"
+msgstr "<a href='/dataset/action_query' title='Collect Data'>Collect</a> and <a href='/resource/action_query' title='Enhance your Data'>Enhance</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT18"
+msgstr "<a href='/dataset/action_query' title='Choose the datasets'>Choose the datasets</a> that you want to upload from your computer or the Web, and create <a href='/resource/action_query' title='Create Data Views'>Data Views</a>, <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a> and <a href='/resource/action_query' title='Create Dashboards'>Dashboards</a>."
+
+msgid "APP-ACTIVITYSTREAM-TXT19"
+msgstr "<a href='/review/action_query' title='Publish Data'>Publish Data</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT20"
+msgstr "Select the <a href='/review/action_query' title='Publish your resources'>Data Views, live Visualizations, and Dashboards</a> that you want to feature on your branded Open Data site."
+
+msgid "APP-ACTIVITYSTREAM-TXT20-PRIVATE"
+msgstr "Select the <a href='/review/action_query' title='Publish your resources'>Data Views, live Visualizations, and Dashboards</a> that you want to feature on your branded Private Data site."
+
+msgid "APP-ACTIVITYSTREAM-TXT21"
+msgstr "<a href='/resource/action_query' title='Enhance and submit'>Enhance and submit</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT22"
+msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a>, <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a> and <a href='/resource/action_query' title='Create Dashboards'>Dashboards</a>. Finally, submit them for review."
+
+msgid "APP-ACTIVITYSTREAM-TXT23"
+msgstr "<a href='/dataset/action_query' title='Send Datasets to review'>Send to review</a>"
+
+msgid "APP-ACTIVITYSTREAM-TXT24"
+msgstr "<a href='/dataset/action_query' title='Submit the Datasets to review'>Submit the datasets</a> that you have collected for review and approval."
+
+msgid "STEP0-WEBSERVICE-TEXT"
+msgstr "Web service"
+
+msgid "WORKSPACE-PARAM-TITLE"
+msgstr "Parameters"
+
+msgid "WORKSPACE-PARAM-DEFAULT"
+msgstr "Default value"
+
+msgid "WORKSPACE-PARAM-EDITABLE"
+msgstr "Editable"
+
+msgid "WORKSPACE-PARAM-LISTTITLE"
+msgstr "Added Parameters"
+
+msgid "WORKSPACE-ENDPOINT-TIP"
+msgstr "Defines the address or connection point to a Web service."
+
+msgid "WORKSPACE-METHODNAME-TIP"
+msgstr "Defines the name of the operation to invoke."
+
+msgid "WORKSPACE-NAMESPACE-TIP"
+msgstr "Define the namespace for the operation."
+
+msgid "WORKSPACE-WSTYPE-TIP"
+msgstr "Define the Webservice type."
+
+msgid "WORKSPACE-TOKEN-TIP"
+msgstr "Enter the token to sign the request to the webservice."
+
+msgid "WORKSPACE-ALGORITHM-TIP"
+msgstr "Enter the signature algorithm."
+
+msgid "WORKSPACE-SIGNATURE-TIP"
+msgstr "Enter the name of the argument that will contain the signature."
+
+msgid "WORKSPACE-PATHTOHEADERS-TIP"
+msgstr "Define the path(xpath or json-path) to table headers."
+
+msgid "WORKSPACE-PATHTODATA-TIP"
+msgstr "Define the path(xpath or json-path) to table data."
+
+msgid "WORKSPACE-CACHE-TIP"
+msgstr "Define if webservice result should be cached or not"
+
+msgid "WEBSERVICE-STEP1-TITLE"
+msgstr "Filter your selection as you need"
+
+msgid "WEBSERVICES-PARAMS-TITLE"
+msgstr "Set the parameters for this Dataset:"
+
+msgid "WEBSERVICE-STEP1-HELPTITLE"
+msgstr "What this is all about?"
+
+msgid "WEBSERVICE-STEP1-HELPTEXT"
+msgstr "These parameters has come from the Dataset that you are using to create this Data View. They are used to filter the information that this Dataset can bring.<br/><br/>If the parameters are not editable, you will not be able to change it's original value"
+
+msgid "APP-DSWEBSERVICE-TEXT"
+msgstr "Choose a better name for the parameters (if needed and editable)"
+
+msgid "WEBSERVICE-HELP-TIP"
+msgstr "- The webservice must accept SOAP 1.2 calls<br/>- The response root element must be named 'NewDataSet'. It may have one or more childs representing rows. Rows may have one or more childs representing cells."
+
+msgid "COLLECTORS-DATASET-HELP-TIP"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Send it to review' if you consider that the Dataset is ready to be deployed to your Open Data site."
+
+msgid "COLLECTORS-DATASET-HELP-TIP-PRIVATE"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Send it to review' if you consider that the Dataset is ready to be deployed to your Private Data site."
+
+msgid "ENHANCERS-DATASET-HELP-TIP"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Approve' it if you consider that the Dataset is ready to be deployed to your Open Data site."
+
+msgid "ENHANCERS-DATASET-HELP-TIP-PRIVATE"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Approve' it if you consider that the Dataset is ready to be deployed to your Private Data site."
+
+msgid "PUBLISHERS-DATASET-HELP-TIP"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Publish' it if you consider that the Dataset is ready to be deployed to your Open Data site."
+
+msgid "PUBLISHERS-DATASET-HELP-TIP-PRIVATE"
+msgstr "- 'Save' the Dataset if you want to create/edit a revision in draft, or 'Publish' it if you consider that the Dataset is ready to be deployed to your Private Data site."
+
+msgid "APP-HEADER-TEXT"
+msgstr "Header *"
+
+msgid "ACCOUNT-HEADER-TIP"
+msgstr "(*) This will apply only if you don't set a header URL"
+
+msgid "ACCOUNT-LOGO-TIP"
+msgstr "Image size must be 136 x 80 px, otherwise image could appear distorted"
+
+msgid "ACCOUNT-OPENDATASITE-TAB"
+msgstr "Go to my Open Data site"
+
+msgid "ACCOUNT-OPENDATASITE-TAB-PRIVATE"
+msgstr "Go to my Private Data site"
+
+msgid "WORKSPACE-COLLECT-SELECTCATEGORY"
+msgstr "Select a category"
+
+msgid "WORKSPACE-PATHTOHEADERS-TEXT"
+msgstr "Path to headers"
+
+msgid "WORKSPACE-PATHTODATA-TEXT"
+msgstr "Path to data"
+
+msgid "APP-CACHE-TEXT"
+msgstr "Use cache"
+
+msgid "WORKSPACE-METHODNAME-TEXT"
+msgstr "Method"
+
+msgid "WORKSPACE-NAMESPACE-TEXT"
+msgstr "Name space"
+
+msgid "WORKSPACE-TOKEN-TEXT"
+msgstr "Signature token"
+
+msgid "WORKSPACE-ALGORITHM-TEXT"
+msgstr "Signature algorithm"
+
+msgid "WORKSPACE-WSTYPE-TEXT"
+msgstr "Webservice type"
+
+msgid "JSON-HELP-TIP-1"
+msgstr "WebService will send an if-modified-since http header."
+
+msgid "JSON-HELP-TIP-2"
+msgstr "The response should be a json object."
+
+msgid "JSON-HELP-TIP-3"
+msgstr "One of its properties should cointain the data as an array of arrays of strings."
+
+msgid "WORKSPACE-SIGNATURE-TEXT"
+msgstr "Signature name"
+
+msgid "ACCOUNT-HOME-TAB"
+msgstr "Home page"
+
+msgid "ACCOUNT-HAS-HOME"
+msgstr "Default landing page"
+
+msgid "ACCOUNT-HOME-FEATURED"
+msgstr "Featured content"
+
+msgid "ACCOUNT-HOME-MAIN"
+msgstr "Main content"
+
+msgid "ACCOUNT-HOME-SEARCH"
+msgstr "Search content"
+
+msgid "ACCOUNT-HOME-LEFT-FOOTER"
+msgstr "Left bottom content"
+
+msgid "ACCOUNT-HOME-RIGHT-FOOTER"
+msgstr "Right bottom content"
+
+msgid "ACCOUNT-HOME-FEATURED-TIP"
+msgstr "This content is displayed below the header and above the main content and the resources' slider. <br/>If you want to add an image slider here, please <a href='http://en.wiki.junar.com/index.php/Add_an_image_slider_to_your_Open_Data_site_home_page' title='Junar Wiki' target='_blank'>refer to this documentation</a>."
+
+msgid "ACCOUNT-HOME-MAIN-TIP"
+msgstr "This content is displayed on the left side of the slider"
+
+msgid "ACCOUNT-HOME-SEARCH-TIP"
+msgstr "This content is displayed above the search box. Here you can use <strong>%s</strong> as a variable to display the number of resources"
+
+msgid "ACCOUNT-HOME-FOOTER-LEFT-TIP"
+msgstr "This content is displayed on the left side after the resources list"
+
+msgid "ACCOUNT-HOME-FOOTER-RIGHT-TIP"
+msgstr "This content is displayed on the right side after the resources list"
+
+msgid "ACCOUNT-HOME-TEXT"
+msgstr "Contents for placeholders"
+
+msgid "ACCOUNT-HAS-HOME-TIP"
+msgstr "Use a home page as default landing page, instead of your first featured collection."
+
+msgid "ACCOUNT-HAS-HOME-SMALLTIP"
+msgstr "You will have placeholders to add custom content to better fit your needs.<br/>If you don't need to add content to a field, just leave it empty."
+
+msgid "ACCOUNT-HOME-HELPTIP"
+msgstr "You can edit placeholders using the following HTML tags <div style='padding-top:5px'> <strong>&lt;h1&gt; - &lt;h6&gt;</strong>, <strong>&lt;p&gt;</strong>, <strong>&lt;strong&gt;</strong>, <strong>&lt;em&gt;</strong>, <strong>&lt;ul&gt;</strong>, <strong>&lt;li&gt;</strong>, <strong>&lt;a&gt;</strong>, <strong>&lt;img&gt;</strong> </div>"
+
+msgid "ACCOUNT-HOME-REFERENCETITLE"
+msgstr "References"
+
+msgid "ACCOUNT-DEFAULT-CATEGORY-LABEL"
+msgstr "Set as default category"
+
+msgid "ACCOUNT-IS-DEFAULT-CATEGORY"
+msgstr "Is default category"
+
+msgid "APP-YES-TEXT"
+msgstr "Yes"
+
+msgid "APP-CATEGORY-UPDATED-DEFAULT-FAIL"
+msgstr "Category succesfully refreshed. Please, select a new default category."
+
+msgid "APP-CATEGORY-DEFAULT-CANT-BE-DELETED"
+msgstr "The default category can not be deleted"
+
+msgid "APP-CATEGORY-TRANSPARENCY-CANT-BE-DELETED"
+msgstr "Transparency categories can not be deleted"
+
+msgid "APP-CATEGORY-TRANSPARENCY-CANT-BE-EDITED"
+msgstr "Transparency categories can not be edited"
+
+msgid "APP-CATEGORY-DELETEDSUCCESSFULLY-TEXT"
+msgstr "Category successfully deleted"
+
+msgid "ADMIN-HOME-TITLE"
+msgstr "Select Home page design"
+
+msgid "ADMIN-HOME-THEMES-NOTHEME-TEXT"
+msgstr "No Home page"
+
+msgid "ADMIN-HOME-THEMES-THEME0-TEXT"
+msgstr "Classic"
+
+msgid "ADMIN-HOME-THEMES-THEME1-TEXT"
+msgstr "Minimal"
+
+msgid "ADMIN-HOME-THEMES-THEME2-TEXT"
+msgstr "Resources"
+
+msgid "ADMIN-HOME-THEMES-THEME3-TEXT"
+msgstr "Carrousel"
+
+msgid "ADMIN-HOME-THEMES-THEME4-TEXT"
+msgstr "Cover"
+
+msgid "ADMIN-HOME-THEMES-DESCRIPTION"
+msgstr "Description:"
+
+msgid "ADMIN-HOME-CONFIG-TITLE"
+msgstr "Settings for selected theme"
+
+msgid "ADMIN-HOME-CONFIG-DESCRIPTION"
+msgstr "Complete the options below to add custom content to your home page. <br/> If you don't need to add content to a field, just leave it empty."
+
+msgid "ADMIN-HOME-DELETE-MESSAGE"
+msgstr "The image could not be deleted. Try later or contact us: support@junar.com"
+
+msgid "ACCOUNT-HOME-HELPTIP-2"
+
+msgstr "You can use <strong>%s</strong> as a variable in any of the placeholders, this will be replaced with the number of your available Open Data resources."
+
+msgid "APP-PLANS-TEXT"
+msgstr "Pricing & Add-ons"
+
+msgid "FOOTER-COMPANY-TEXT"
+msgstr "Company"
+
+msgid "APP-BUSSINESS-TEXT"
+msgstr "Business"
+
+msgid "APP-GOVERNMENT-TEXT"
+msgstr "Government"
+
+msgid "APP-NGO-TEXT"
+msgstr "NGOs and Multilaterals"
+
+msgid "APP-ACADEMIA-TEXT"
+msgstr "Academia and Research"
+
+msgid "APP-SHARE-TEXT"
+msgstr "Share"
+
+msgid "APP-ANALYZE-TEXT"
+msgstr "Analyze"
+
+msgid "APP-CONTACTUS-TEXT"
+msgstr "Contact us"
+
+msgid "APP-PRESS-TEXT"
+msgstr "News"
+
+msgid "APP-BLOG-TEXT"
+msgstr "Blog"
+
+msgid "APP-TERMSOFSERVICE-TEXT"
+msgstr "Terms of Service"
+
+msgid "APP-PRIVACYPOLICY-TEXT"
+msgstr "Privacy Policy"
+
+
+
+
+# /------------------ New Workspace keys / 2014-06-17 -----------------/
+
+
+
+
+msgid "HEADER-JUNAR-TITLE"
+msgstr "Junar Open Data Platform"
+
+msgid "HEADER-SEARCH-TEXT"
+msgstr "Search resources"
+
+msgid "HEADER-SEARCH-BUTTON"
+msgstr "Search"
+
+msgid "HEADER-SEARCH-ADVANCED"
+msgstr "Advanced options"
+
+msgid "HEADER-ODS-BUTTON"
+msgstr "View my Open Data Site"
+
+msgid "HEADER-ACCOUNTDETAILLS-TEXT"
+msgstr "Account Details"
+
+msgid "HEADER-SIGNOUT-TEXT"
+msgstr "Sign out"
+
+msgid "HEADER-HELP-TEXT"
+msgstr "Online Support"
+
+msgid "FOOTER-INSTITUTIONAL-TEXT"
+msgstr "Institutional"
+
+msgid "FOOTER-ABOUTUS-TITLE"
+msgstr "See who is behind Junar"
+
+msgid "FOOTER-ABOUTUS-TEXT"
+msgstr "About us"
+
+msgid "FOOTER-CONTACT-TEXT"
+msgstr "Contact us"
+
+msgid "FOOTER-WIKI-TEXT"
+msgstr "Wiki"
+
+msgid "FOOTER-PRIVACY-TITLE"
+msgstr "See our Privacy Policy"
+
+msgid "FOOTER-PRIVACY-TEXT"
+msgstr "Privacy Policy"
+
+msgid "FOOTER-TERMS-TITLE"
+msgstr "See our Terms of Service"
+
+msgid "FOOTER-TERMS-TEXT"
+msgstr "Terms of Service"
+
+msgid "FOOTER-FOLLOWUSON-TEXT"
+msgstr "Follow us on"
+
+msgid "APP-DATASETS-TEXT"
+msgstr "Datasets"
+
+msgid "APP-DATAVIEWS-TEXT"
+msgstr "Data Views"
+
+msgid "APP-VISUALIZATIONS-TEXT"
+msgstr "Visualizations"
+
+msgid "APP-DASHBOARDS-TEXT"
+msgstr "Dashboards"
+
+msgid "APP-REPORTS-TEXT"
+msgstr "Reports"
+
+msgid "APP-SETTINGS-TEXT"
+msgstr "Settings"
+
+msgid "APP-FEEDBACK-TEXT"
+msgstr "Feedback"
+
+msgid "LANDINGPAGE-SECTION-TITLE"
+msgstr "Welcome "
+
+msgid "LANDINGPAGE-GETTINGSTARTED-TITLE"
+msgstr "Open Data made easy"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-SUBTITLE"
+msgstr "Follow these simple steps to get started:"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-REMEMBER"
+msgstr "Remember"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE"
+msgstr "Set up account"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT"
+msgstr "In the settings section, administrators can assign users with different roles, create Open Data categories, set up home page and branding for the Open Data site, among much more things."
+
+msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP"
+msgstr "The home page of your Open Data site can be fully customized, choosing between different themes."
+
+msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE"
+msgstr "Collect, Enhance & Publish data"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
+msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and Visualizations, and finally publish them to your Open Data site individually and arrange them as Dashboards collections."
+
+msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
+msgstr "A Dataset is needed to create a Data View, and a Data View is needed to create a Visualization. <br/> Dashboard are used to arrange several Data Views and Visualizations by topic."
+
+msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
+msgstr "The publishing process and revisions"
+
+msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT"
+msgstr "When you create a resource, you are creating its first revision. So, every time you save a change to it (draft, send to review, publish, or unpublish) you are creating a new revision. This allows you to work out the resource prior publishing it to your Open Data site."
+
+msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP"
+msgstr "Your Open Data site will always show the last published revision of a resource, unless you unpublish it."
+
+msgid "LANDINGPAGE-NUMBERS-TITLE"
+msgstr "Open Data numbers"
+
+msgid "LANDINGPAGE-NUMBERS-REPORTS"
+msgstr "View reports"
+
+msgid "LANDINGPAGE-ACTIVITY-TITLE"
+msgstr "Latest activity"
+
+msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
+msgstr "has created"
+
+msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
+msgstr "has edited"
+
+msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
+msgstr "has deleted"
+
+msgid "LANDINGPAGE-ACTIVITY-TODAY"
+msgstr "Today"
+
+msgid "LANDINGPAGE-ACTIVITY-YESTERDAY"
+msgstr "Yesterday"
+
+msgid "LANDINGPAGE-NEWS-TITLE"
+msgstr "News"
+
+msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
+msgstr "Follow us"
+
+msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
+msgstr "For the latest news and updates on Junar, follow <a href='https://twitter.com/junar' title='Follow @junar on Twitter' target='_blank'>@junar</a> on Twitter and check out the <a href='http://blog.junar.com' title='Check out the Junar blog' target='_blank'>Junar blog</a>. Contact us on <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
+
+msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
+msgstr "Recent Updates - v1.0"
+
+msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TEXT"
+msgstr "Improved Dataviews and Visualization details, workspace redesign, new home page theme tool, and more! Read all the details on the <a href='#' title='View recent updates page' target='_blank'>recent updates</a> page."
+
+msgid "APP-DOWNLOAD-CSV-TEXT"
+msgstr "Download as CSV"
+
+msgid "APP-GOBACKTO-TEXT"
+msgstr "Go back to Junar website"
+
+msgid "FORGOT-ACTIVATION-EMAIL"
+msgstr "An activation link for your new password has been sent to your email."
+
+msgid "APP-ACTIVEFILTERS-TEXT"
+msgstr "Active filters"
+
+msgid "FILTERS-REMOVE-TEXT"
+msgstr "Remove filter"
+
+msgid "APP-AUTHOR-TEXT"
+msgstr "Author"
+
+msgid "APP-DOWNLOAD-TEXT"
+msgstr "Download"
+
+msgid "APP-ADDNEW-TEXT"
+msgstr "Add new"
+
+msgid "APP-INFO-TEXT"
+msgstr "Information"
+
+msgid "APP-FREQUENCY-TEXT"
+msgstr "Update frequency"
+
+msgid "APP-LICENSE-TEXT"
+msgstr "License"
+
+msgid "APP-RESOURCESCREATED-TEXT"
+msgstr "Resources created using this Dataset"
+
+msgid "APP-REVIEW-TEXT"
+msgstr "Review"
+
+msgid "APP-BULKACTIONS-TEXT"
+msgstr "Bulk actions"
+
+msgid "APP-APPLY-TEXT"
+msgstr "Apply"
+
+msgid "APP-OVERLAY-BULKACTIONS-TITLE"
+msgstr "Bulk edits"
+
+msgid "APP-OVERLAY-BULKACTIONS-CATEGORY"
+msgstr "Category"
+
+msgid "APP-OVERLAY-BULKACTIONS-STATUS"
+msgstr "Status"
+
+msgid "APP-OVERLAY-SAVE"
+msgstr "Save"
+
+msgid "APP-OVERLAY-CANCEL"
+msgstr "Cancel"
+
+msgid "APP-OVERLAY-PENDING-TITLE"
+msgstr "Pending actions"
+
+msgid "APP-OVERLAY-ALERT-WARNING"
+msgstr "Your Dataset can't be published yet."
+
+msgid "APP-OVERLAY-ALERT-WARNING-TEXT"
+msgstr "The following resources are associated to this Dataset, and they still need revision. Please, review them and then you will be able to publish this dataset:"
+
+msgid "APP-OVERLAY-ALERT-OK"
+msgstr "Your Data View has been approved."
+
+msgid "APP-OVERLAY-ALERT-OK-TEXT"
+msgstr "Now you need to review the associated Dataset, in order to automatically set as publish this Data View:"
+
+msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
+msgstr "Delete Dataset "
+
+msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
+msgstr "The following resources are associated to this Dataset, and they will also delete and will be removed from dashboards."
+
+msgid "APP-OVERLAY-DELETE"
+msgstr "Delete"
+
+msgid "APP-DELETE-DATASET-ACTION-TEXT"
+msgstr "The dataset and the associated resources have been deleted."
+
+msgid "APP-DELETE-DATASET-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the dataset and the associated resources."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-TEXT"
+msgstr "The dataset revision have been deleted."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the dataset revision."
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
+msgstr "The following resources are associated to this Datastream, and they will also delete and will be removed from dashboards."
+
+msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
+msgstr "The datastream and the associated resources have been deleted."
+
+msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the datastream and the associated resources."
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
+msgstr "The datastream revision have been deleted."
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT"
+msgstr "Error on deleteing the datastream revision."
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
+msgstr "The visualization has been deleted."
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error on deleting visualization."
+
+msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
+msgstr "The visualization revision has been deleted."
+
+msgid "APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT"
+msgstr "Error on deleteing the visualization revision."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
+msgstr "The following resources, that are associated to this Dataset, will also unpublish and will be removed from dashboards."
+
+msgid "APP-OVERLAY-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-VISUALIZATIONS-CREATE-TEXT"
+msgstr "Create Visualization"
+
+msgid "APP-TYPES-TEXT"
+msgstr "Types"
+
+msgid "APP-FINISH-TEXT"
+msgstr "Finish"
+
+msgid "APP-START-TITLE"
+msgstr "Select Visualization"
+
+msgid "APP-START-SUBTITLE"
+msgstr "Choose between chart or map visualization."
+
+msgid "LANDINGPAGE-PENDINGACTIONS-TEXT-1"
+msgstr "You have "
+
+msgid "LANDINGPAGE-PENDINGACTIONS-TEXT-2"
+msgstr " resources pending review."
+
+msgid "APP-PENDINGACTIONS-TEXT"
+msgstr "Pending actions"
+
+msgid "APP-ISPENDINGREVIEW-TEXT"
+msgstr " is pending review"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-CHART-TITLE"
+msgstr "Chart"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-CHART-DESC"
+msgstr "Graph your data as a bar, column, line, pie or area chart."
+
+msgid "APP-VISUALIZATIONS-CREATE-START-MAP-DESC"
+msgstr "Markers, poligons, geochart"
+
+msgid "APP-CHART-TYPES-TITLE"
+msgstr "Chart types"
+
+msgid "APP-CHART-TYPES-SUBTITLE"
+msgstr "Select the chart type that suits your needs, and how data will be handled. Try different combinations."
+
+msgid "BTN-BACK-TEXT"
+msgstr "Back"
+
+msgid "BTN-NEXT-TEXT"
+msgstr "Next"
+
+msgid "APP-CHART-TYPES-QUEST1"
+msgstr "What is the type of chart that you need?"
+
+msgid "APP-CHART-TYPES-QUEST2"
+msgstr "How do we handle the selected data?"
+
+msgid "APP-CHART-TYPES-MULTIPLE"
+msgstr "Multiple series"
+
+msgid "APP-CHART-CUSTOMIZE-SUBTITLE"
+msgstr "Enter here all the extra information of the chart."
+
+msgid "APP-CHART-CUSTOMIZE-CHART-TITLE"
+msgstr "Chart title"
+
+msgid "APP-CHART-CUSTOMIZE-LABELS-TEXT"
+msgstr "Labels text"
+
+msgid "APP-CHART-CUSTOMIZE-LABELS-TEXT-DESC"
+msgstr "Labels gives a reference to the sets of information."
+
+msgid "APP-CHART-CUSTOMIZE-LEGEND-TEXT"
+msgstr "Legend text"
+
+msgid "APP-CHART-CUSTOMIZE-LEGEND-TEXT-DESC"
+msgstr "Select the legend text if you want to complete with more information of what represent each colour of the chart."
+
+msgid "APP-CHART-FINISH-TITLE"
+msgstr "Final information"
+
+msgid "APP-CHART-FINISH-SUBTITLE"
+msgstr "Let us know what is your visualization is about. Fields marked with (<span class='required'>*</span>) are mandatory."
+
+msgid "APP-SELECT-CATEGORY-TEXT"
+msgstr "Select..."
+
+msgid "APP-HELPTIP-CHART-TEXT"
+msgstr "A good visualization clearly communicates what it is about. Please take your time to fill in the fields properly."
+
+msgid "APP-CHART-DATA-TEXT"
+msgstr "Select data"
+
+msgid "APP-CHART-DATA-TEXT-SUBTITLE"
+msgstr "Select the desired range of cells. Do not include text or extra information, because you will do that later."
+
+msgid "APP-DATA-VIEW-TITLE-TEXT"
+msgstr "Data view title"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-TITLE"
+msgstr "Trace map"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-DESC"
+msgstr "Draw geometries, lines or polygons using GIS datasets."
+
+msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-TITLE"
+msgstr "Markers map"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-DESC"
+msgstr "Pinpoint multiple locations using GIS datasets."
+
+msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-TITLE"
+msgstr "Geo map"
+
+msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-DESC"
+msgstr "Identify countries, continents or markers with color-scaled density."
+
+msgid "APP-CREATE-CHART-TEXT"
+msgstr "Create new chart"
+
+msgid "APP-CREATE-TRACE-MAP-TEXT"
+msgstr "Create new trace map"
+
+msgid "APP-CREATE-MARKERS-MAP-TEXT"
+msgstr "Create new markers map"
+
+msgid "APP-CREATE-GEO-MAP-TEXT"
+msgstr "Create new geo map"
+
+msgid "APP-CUSTOMIZE-TRACE-MAP-SUBTITLE"
+msgstr "Select the coordinates and information for each multigeometry element. Fields marked with <span class='ast'>(<span>*</span>)</span> are mandatory."
+
+msgid "APP-CUSTOMIZE-MARKERS-MAP-SUBTITLE"
+msgstr "Select the coordinates and information for each individual marker. Fields marked with <span class='ast'>(<span>*</span>)</span> are mandatory."
+
+msgid "APP-CUSTOMIZE-GEO-MAP-SUBTITLE"
+msgstr "Choose to map either a region or markers and the information for each element. Fields marked with <span class='ast'>(<span>*</span>)</span> are mandatory."
+
+msgid "APP-DATA-TYPE-TEXT"
+msgstr "Data Type"
+
+msgid "APP-KIND-OF-DATA-TEXT"
+msgstr "What kind of data do you have?"
+
+msgid "APP-TYPE-OF-DATA-TEXT"
+msgstr "Type of data"
+
+msgid "APP-MARKERS-TEXT"
+msgstr "Markers"
+
+msgid "APP-COLLECT-TITLE"
+msgstr "From where you want to collect your information?"
+
+msgid "APP-COLLECT-SUBTITLE"
+msgstr "Choose an option to continue."
+
+msgid "APP-WEBSITE-TEXT"
+msgstr "Website / web-hosted file"
+
+msgid "APP-WEBSERVICE-TEXT"
+msgstr "Web service"
+
+msgid "APP-COLLECT-UPLOAD-TITLE"
+msgstr "Collect from your computer"
+
+msgid "APP-MANDATORY-FIELDS-TEXT"
+msgstr "Fields marked with (<span class='required'>*</span>) are mandatory."
+
+msgid "APP-UPLOAD-FILE-TEXT"
+msgstr "Upload file"
+
+msgid "APP-SELECT-FILE-TEXT"
+msgstr "Select file"
+
+msgid "APP-CONTACT-EMAIL-TEXT"
+msgstr "Contact e-mail"
+
+msgid "APP-CONTACT-EMAIL-TIP"
+msgstr "This is the contact e-mail of the person responsible for this dataset."
+
+msgid "APP-LICENSE-TIP"
+msgstr "The license with which the dataset is published. Licenses examples can be found here "
+
+msgid "APP-LICENSE-EXAMPLE-TITLE"
+msgstr "View license examples"
+
+msgid "APP-COLLECT-REGION-TIP"
+msgstr "The range of spatial applicability of a dataset. It could be a specific region, city or country to which the data applies."
+
+msgid "APP-SELECTOPTION-TEXT"
+msgstr "Select..."
+
+msgid "APP-FREQUENCY-TIP"
+msgstr "Frequency with which dataset is published and/or updated."
+
+msgid "APP-HTTP-TEXT"
+msgstr "http://"
+
+msgid "APP-COLLECT-WEBSITE-TITLE"
+msgstr "Collect from website / web-hosted file"
+
+msgid "APP-ONDEMAND-TEXT"
+msgstr "On demand"
+
+msgid "APP-COLLECT-WEBSERVICE-TITLE"
+msgstr "Collect from web service"
+
+msgid "APP-ADD-TEXT"
+msgstr "Add"
+
+msgid "APP-DATASET-INFORMATION-TEXT"
+msgstr "Dataset information"
+
+msgid "APP-YEARLY-TEXT"
+msgstr "Yearly"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Monthly"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Weekly"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Daily"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Hourly"
+
+msgid "APP-MINUTELY-TEXT"
+msgstr "Minutely"
+
+msgid "APP-OTHER-TEXT"
+msgstr "Other"
+
+msgid "APP-OTHER-FREQUENCY-TEXT"
+msgstr "Please, input the custom update frequency of this dataset."
+
+msgid "APP-CREATE-DATASET-FINISH-SUBTITLE"
+msgstr "Let us know what is your dataset about. Fields with (<span class='required'>*</span>) are mandatory."
+
+msgid "APP-ACCOUNT-INFORMATION-TITLE"
+msgstr "Account and contact information"
+
+msgid "APP-DELETE-CATEGORY-TITLE"
+msgstr "Delete category"
+
+msgid "APP-OVERLAY-DELETE-DATASET-TITLE"
+msgstr "Delete Dataset"
+
+msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
+msgstr "Delete Datastream"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-DELETE-VISUALIZATION-TITLE"
+msgstr "Delete Visualization"
+
+msgid "APP-OVERLAY-DELETE-VISUALIZATION-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-DELETE-REVISION-TEXT"
+msgstr "Delete actual revision"
+
+msgid "APP-DELETE-RESOURCE-TEXT"
+msgstr "Delete all revisions"
+
+msgid "APP-REVISION-DELETED-TITLE"
+msgstr "The revision was deleted"
+
+msgid "APP-REVISION-DELETED-TEXT"
+msgstr "The following resources will be reviewed:"
+
+msgid "APP-OTHER-LICENSE-TEXT"
+msgstr "Please, input the custom license of this dataset."
+
+msgid "APP-URL-TIP"
+msgstr "Enter the URL of the dataset."
+
+msgid "APP-MYACCOUNT-TEXT"
+msgstr "My Account"
+
+msgid "APP-ADD-NEW-DATAVIEW-TEXT"
+msgstr "Add new Data View"
+
+msgid "APP-ADD-DATAVIEW-HINT"
+msgstr "Select a Dataset to continue."
+
+msgid "APP-FILTER-DATASETS-TEXT"
+msgstr "Filter Datasets"
+
+msgid "APP-ADD-NEW-VISUALIZATION-TEXT"
+msgstr "Add new Visualization"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
+msgstr "Select a Data view to continue."
+
+msgid "APP-FILTER-VISUALIZATIONS-TEXT"
+msgstr "Filter Visualizations"
+
+msgid "APP-LAST-MODIFIED"
+msgstr "Last modified"
+
+msgid "APP-WAITING-FOR-YOUR-REVIEW-TEXT"
+msgstr "Waiting for your review."
+
+msgid "APP-WAITING-FOR-REVIEW-TEXT"
+msgstr "This resource is waiting for review."
+
+msgid "APP-EDIT-DATAVIEW-TEXT"
+msgstr "Edit Data View"
+
+msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
+msgstr "has published"
+
+msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
+msgstr "has unpublished"
+
+msgid "ACCOUNT-DOMAIN-TIP-1"
+msgstr "This domain must not start with &quot;api&quot;."
+
+msgid "APP-START-ADDING-TEXT"
+msgstr "Start by adding"
+
+msgid "APP-START-ADDING-NEW-DATASET-TEXT"
+msgstr "a new Dataset"
+
+msgid "APP-START-ADDING-NEW-DATAVIEW-TEXT"
+msgstr "a new Data View"
+
+msgid "APP-START-ADDING-NEW-VISUALIZATION-TEXT"
+msgstr "a new Visualization"
+
+msgid "APP-ZERO-DATASETS-TEXT"
+msgstr "Zero Datasets"
+
+msgid "APP-ZERO-DATAVIEWS-TEXT"
+msgstr "Zero Data Views"
+
+msgid "APP-ZERO-VISUALIZATIONS-TEXT"
+msgstr "Zero Visualizations"
+
+msgid "APP-DATASET-REQUIRED-TITLE"
+msgstr "You need a dataset to create a data view"
+
+msgid "APP-DATAVIEW-REQUIRED-TITLE"
+msgstr "You need a data view to create a visualization"
+
+msgid "APP-DATASET-REQUIRED-TEXT"
+msgstr "Data view are created from datasets. You can't have one without the other! Click below to add a new dataset."
+
+msgid "APP-DATAVIEW-REQUIRED-TEXT"
+msgstr "Visualizations are a graphic representation of a data view. Please create a data view first so you can create a visualization from it."
+
+msgid "APP-ADD-NEW-DATASET-TEXT"
+msgstr "Add new dataset"
+
+msgid "APP-GO-TO-DATAVIEWS-TEXT"
+msgstr "Explore data views"
+
+msgid "APP-OOPS-ERROR-TEXT"
+msgstr "Oops! Looks like we found a problem"
+
+msgid "APP-OVERLAY-BULK-DELETE-DATASET-TITLE"
+msgstr "Delete Datasets"
+
+msgid "APP-OVERLAY-BULK-DELETE-DATASET-TEXT"
+msgstr "These actions cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-DELETE-BULK-REVISIONS-TEXT"
+msgstr "Delete actual revision"
+
+msgid "APP-DELETE-BULK-RESOURCES-TEXT"
+msgstr "Delete all revisions"
+
+msgid "APP-OVERLAY-BULK-DELETE-DATASTREAM-TITLE"
+msgstr "Delete Data Views"
+
+msgid "APP-OVERLAY-BULK-DELETE-DATASTREAM-TEXT"
+msgstr "These actions cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-BULK-DELETE-VISUALIZATION-TITLE"
+msgstr "Delete Visualizations"
+
+msgid "APP-OVERLAY-BULK-DELETE-VISUALIZATION-TEXT"
+msgstr "These actions cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-SETTINGS-SAVE-OK-TEXT"
+msgstr "Your changes were successfully saved."
+
+msgid "ADMIN-HOME-THEMES-THEME5-TEXT"
+msgstr "Colorizable"
+
+msgid "ADMIN-HOME-THEMES-THEME6-TEXT"
+msgstr "Carrousel & Buttons"
+
+msgid "ACCOUNT-ENABLE-DOWNLOADS-LABEL"
+msgstr "Enable downloads"
+
+msgid "SOCIAL-DOWNLOADS-TIP"
+msgstr "Allow users download your Datasets."
+
+msgid "APP-DATASETCANTBEUSEDTOCREATECHILD-TEXT"
+msgstr "This Dataset cannot be used to create a Data View."
+
+msgid "APP-NOCHILDRESOURCESYET-TEXT"
+msgstr "There are not associated resources to this Dataset."
+
+msgid "APP-DATASET-APPROVED-TEXT"
+msgstr "This Dataset has been approved."
+
+msgid "APP-DATASET-REJECTED-TEXT"
+msgstr "This Dataset has been rejected and set as draft."
+
+msgid "APP-DATASET-NOT-REVIEWED-TEXT"
+msgstr "This Dataset has not been reviewed."
+
+msgid "APP-DATAVIEW-APPROVED-TEXT"
+msgstr "This Data View has been approved."
+
+msgid "APP-DATAVIEW-REJECTED-TEXT"
+msgstr "This Data View has been rejected and set as draft."
+
+msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
+msgstr "The Data View has not been reviewed."

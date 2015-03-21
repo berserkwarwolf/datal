@@ -1,0 +1,68 @@
+{% load i18n datastream_tags %}
+
+<!-- Resource Detail -->
+<div class="resource-detail box" id="id_dataStreamContainer">
+		
+		<!-- Header -->
+		<header class="border-box">
+
+				<!-- Title and Description -->
+				<hgroup>
+						<h1><strong>{{dataset.title|capfirst}}</strong></h1>
+						<h2>{{dataset.description|capfirst}}</h2>
+				</hgroup>
+
+		</header>
+		
+		<!-- Resources List -->
+		<div class="resources-list">
+			<div id="id_resourcesList" class="resources-table">
+
+				{# If impl_type is not allowed to create a Data View #}
+				{% if dataset.collect_type == 0 and dataset.impl_type in datastream_impl_not_valid_choices %}
+
+					<h4>{% trans 'APP-DATASETCANTBEUSEDTOCREATECHILD-TEXT' %}</h4>
+					{% include "viewDataset/download.html" %}
+
+				{% else %}
+
+					{% if dataset.datastreams %}	
+
+						<h4>{% trans 'APP-RESOURCESCREATED-TEXT' %}</h4>
+						<table id='dataset_table_list'>
+							<thead>
+								<tr>
+									<th>{% trans "APP-TITLE-TEXT" %}</th>
+									<th>{% trans "APP-TYPE-TEXT" %}</th>
+									<th>{% trans "APP-AUTHOR-TEXT" %}</th>
+									<th>{% trans "APP-STATUS-TEXT" %}</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for datastream in dataset.datastreams %}
+								<tr>
+									<td>
+										<h3><a href="" title="May staff">{{ datastream.datastreami18n__title }}</a></h3>
+										<span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ datastream.created_at|date:'F d, Y, h:i A'|capfirst }}</span>
+									</td>
+									<td><i class="icon-resources icon-dataview">{% trans "APP-DATASTREAM-TEXT" %}</i></td>
+									<td><i class="user-thumbnail"></i>{{ datastream.datastream__user__nick }}</td>
+									<td>{{ datastream.status|status_str }}</td>
+								</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+
+					{% else %}
+
+						<h4>{% trans 'APP-NOCHILDRESOURCESYET-TEXT' %}</h4>
+						{% include "viewDataset/download.html" %}
+
+					{% endif %}
+
+				{% endif %}
+
+			</div>
+		</div>
+
+</div>

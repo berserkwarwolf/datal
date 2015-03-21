@@ -1,0 +1,86 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block meta %}
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script src="/js_workspace/admin_manager/social.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+        <form action="{{form.action}}" method="post" id="id_adminSocialForm">
+            {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% csrf_token %}
+            <div class="titleContainer clearfix">
+                <h3 class="FL">{% trans "WORKSPACE-SOCIAL-SETTINGS" %}</h3>
+            </div>
+            <div class="columns clearfix">
+                <div class="CL">
+                    <div class="dataStreamForm socialForm" id="id_update_user_container">
+                        <fieldset class="form">
+                            <div class="settingsBoxes clearfix">
+                                <!--<div class="row clearfix">
+                                    <div class="formErrorMessageContainer">
+                                        {{form.account_comments}}
+                                        <label for="{{form.account_comments.auto_id}}">{{form.account_comments.label}}</label>
+                                    </div>
+                                    <p class="tip socialTip">{% trans "SOCIAL-COMMENTS-TIP" %}</p>
+                                </div>-->
+                                <div class="settingsBox">
+                                    <div class="formErrorMessageContainer">
+                                        {{form.enable_embed_options}}
+                                        <label for="{{form.enable_embed_options.auto_id}}">{{form.enable_embed_options.label}}</label>
+                                    </div>
+                                    <p class="tip socialTip">{% trans "SOCIAL-EMBED-TIP" %}</p>
+                                    </div>
+                                <div class="settingsBox">
+                                    <div class="formErrorMessageContainer">
+                                        {{form.account_enable_sharing}}
+                                        <label for="{{form.account_enable_sharing.auto_id}}">{{form.account_enable_sharing.label}}</label>
+                                    </div>
+                                    <p class="tip socialTip">{% trans "SOCIAL-SHARING-TIP" %}</p>
+                                </div>
+                                <div class="settingsBox">
+                                    <div class="formErrorMessageContainer">
+                                        {{form.account_enable_notes}}
+                                        <label for="{{form.account_enable_notes.auto_id}}">{{form.account_enable_notes.label}}</label>
+                                    </div>
+                                    <p class="tip socialTip">{% trans "SOCIAL-NOTES-TIP" %}</p>
+                                </div>
+                                <div class="settingsBox">
+                                    <div class="formErrorMessageContainer">
+                                        {{form.account_dataset_download}}
+                                        <label for="{{form.account_dataset_download.auto_id}}">{{form.account_dataset_download.label}}</label>
+                                    </div>
+                                    <p class="tip socialTip">{% trans "SOCIAL-DOWNLOADS-TIP" %}</p>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+                
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            {%if is_private_site%}{% trans "WRKSPC-SOCIAL-TIP-PRIVATE" %}{%else%}{% trans "WRKSPC-SOCIAL-TIP" %}{%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons center">
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            </div>
+            
+        </div>
+    </form>
+</div>
+{% endblock %}

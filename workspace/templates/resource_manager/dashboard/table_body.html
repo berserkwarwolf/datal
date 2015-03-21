@@ -1,0 +1,15 @@
+<td>
+    <input type="checkbox"/>
+</td>
+<td class='viewInfo'><a href="/dashboards/action_view?dashboard_revision_id={{revision.id}}" target='_blank'><strong>{{revision.title}}</strong></a> <span class='sep'> | </span>  {{ revision.category }}</td>
+<td>
+    {{revision.author}}
+</td>
+<td>
+    {{revision.created_at}}
+</td>
+{% if not 'ao-free-user' in auth_manager.roles %}
+    <td>
+        {{revision.status_nice}}
+    </td>
+{%endif%}

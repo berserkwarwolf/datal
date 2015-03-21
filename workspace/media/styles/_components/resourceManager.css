@@ -1,0 +1,6 @@
+/*RESOURCE MANAGER*/
+.createViewOverlay{max-height:550px;overflow:auto;overflow-x:hidden;overflow-y:auto;}
+
+/*TAB FIX*/
+.ao-tabs{margin-left:169px;padding-left:17px;}
+.CL.sidebar{position:relative;top:-37px;}

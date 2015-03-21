@@ -1,0 +1,101 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components datastream_tags %}
+
+{% block meta %}
+<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css?id={{settings.VERSION_JS_CSS}}" />
+
+<link href="/media_workspace/styles/detailCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/viewDataStream.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<meta name="main-option" content="id_dataviews_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1 class="FL"><a href="{% url 'manageDataviews.list' %}" title="{% trans 'APP-DATAVIEWS-TEXT' %}">{% trans "APP-DATAVIEWS-TEXT" %}</a></h1>
+<h2 class="FL">{{datastream.title|capfirst}}</h2>
+<ul class="actions FR" style="display:none;">
+  
+  {% if datastream.status != 1 %}
+  <!-- Edit -->
+  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
+  {% endif %}
+
+  <!-- Delete -->
+  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+
+  <!-- Add New -->
+  <li class="has-separator"><a id="id_addNew" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+
+</ul>
+{% endblock %}
+
+{% block content %}
+  <div class="detail" id="id_viewDataStream">
+    <div class="wrapper1">
+      <div class="wrapper2 clearfix">
+        <div class="wrapper3">
+
+          {# Pending review = 1  #}
+          {% if datastream.status == 1 %}
+            <!-- Review -->
+            <div class="alert alert-info clearfix" id="id_reviewBar">
+              {% if auth_manager.is_publisher or auth_manager.is_admin %}
+                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
+                <div class="navigation FR">
+                  <a id="id_approve" class="button green small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+                  <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+                </div>
+              {% else %}
+                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <!-- Sidebar -->
+          <section class="sidebar-container">
+
+            {% include "viewDataStream/sidebar.html" %}
+
+          </section>
+
+          <!-- Detail -->
+          <section class="detail-container">
+
+            {% include "viewDataStream/detail.html" %}
+
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var viewDataStreamModel = new dataStream({
+    reviewURL: "{% url 'manageDataviews.review' datastream.datastream_revision_id %}",
+    status: "{{ datastream.status|status_str }}",
+    id: "{{datastream.datastream_revision_id}}",
+    {% for parameter in datastream.parameters %}
+    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
+    {% endfor %}
+    filter: "",
+  });
+  var viewDataStreamView = new ViewDataStreamView({model: viewDataStreamModel});
+});
+</script>
+{% endblock %}

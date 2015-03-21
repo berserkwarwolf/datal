@@ -1,0 +1,42 @@
+{% load i18n extra_tags %}
+
+<dl class="filters">    
+    <dt><span>{% trans "APP-FILTERS-TEXT" %}</span></dt>
+    <dd class="filter_all filter_who filter-active">
+        <span title="{% trans 'APP-ALL-TEXT' %}">{% trans 'APP-ALL-TEXT' %}</span>
+    </dd>
+    <dd class="filter_mine filter_who">
+        <span title="{% trans 'APP-OWNEDBYME-TEXT' %}">{% trans 'APP-OWNEDBYME-TEXT' %}</span>
+    </dd>
+    {% if extra_filters_template %}
+        {% include extra_filters_template %}
+    {% else %}
+        {% include 'datatable_manager/extra_filters.html' %}
+    {% endif %}
+
+    {% for category in categories %}
+        <dd id="id_filter_category_{{category.category__id}}" class="filter_category">
+            <span title="{{category.name}}">{{category.name}}</span>
+        </dd>
+        <script type="text/javascript">
+        $('#id_filter_category_{{category.category__id}}', '#{{table_prefix}}_filter' ).data("id", {{category.category__id}})
+        </script>
+    {% endfor %}
+    {% for source_choice_id, source_choice_name in source_choices %}
+        <dd id="id_filter_source_choice_{{source_choice_id}}" class="filter_source_choice">
+            <span title="{{source_choice_name}}">{{source_choice_name}}</span>
+        </dd>
+        <script type="text/javascript">
+        $('#id_filter_source_choice_{{source_choice_id}}' , '#{{table_prefix}}_filter').data("id", {{source_choice_id}})
+        </script>
+    {% endfor %}
+    {% for choice_id, choice_name in choices %}
+        <dd id="id_filter_status_{{choice_id}}" class="filter_status">
+            <span title="{{choice_name}}">{{choice_name}}</span>
+        </dd>
+        <script type="text/javascript">
+        $('#id_filter_status_{{choice_id}}', '#{{table_prefix}}_filter').data("id", {{choice_id}})
+        </script>
+    {% endfor %}
+    
+</dl>

@@ -1,0 +1,126 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+
+{# CSS #}
+<link href="/media_core/styles/plugins/backgrid/backgrid.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-paginator.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-text-cell.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-filter.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageDataviews.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+{# JS Libs and Plugins #}
+<script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
+
+{# JS for this screen #}
+<script language="javascript" src="/js_workspace/manageDataviews/filterItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/filtersCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/activeFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/inactiveFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/resourceItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/titleCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datasetItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/listDatasets.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# JS for Edit #}
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemSourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemSourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemAddSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemAddSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemTagModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemTagView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemTagsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/datastreamEditItemTagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/manageDataviewsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# Left Navigation Selected Option #}
+<meta name="main-option" content="id_dataviews_option"/>
+
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-DATAVIEWS-TEXT" %}</h1>
+<div class="bulk-actions FL clearfix" style="display:none;">
+   <select id="id_bulkActions" class="FL">
+      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
+      <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
+      <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
+   </select>
+   <button id="id_applyBulkActions" class="button black small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
+</div>
+<ul class="actions FR">
+   <li><a id="id_addNewButton" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="manager" id="id_manageDataviews" style="{% block css_hide %}{% endblock %}">
+
+  <div class="wrapper1">
+    <div class="wrapper2 clearfix">
+      <div class="wrapper3">
+
+        <!-- Filters -->
+        {% include "manageDataviews/filters.html" %}
+
+        <!-- List -->
+        {% include "manageDataviews/list.html" %}   
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+
+</div>
+
+{% block noresults %}{% endblock %}
+
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    var manageDataviewsView =  new ManageDataviewsView({
+      dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
+      sourceUrl: '/source_manager/action_search',
+      tagUrl: '/tag_manager/action_search'
+    });
+  });
+</script>
+
+{# templates backbone #}
+{% include "manageDataviews/templates.html" %}
+{% endblock %}
+
+{% block popupsOverlay %}
+{% include "manageDataviews/overlays.html" %}
+{% endblock %}

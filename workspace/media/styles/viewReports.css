@@ -1,0 +1,14 @@
+/* Numbers */
+.numbers .box-content{padding-top:12px;}
+.numbers > header{margin-bottom:0;}
+.numbers .graph{width:100%;}
+.numbers .graph tr{margin-top:10px;}
+.numbers .graph tr:first-child{margin-top:0;}
+.numbers .graph td{padding:5px 0;}
+.numbers .graph .data{line-height:20px;height:20px;font-size:14px;color:#999;white-space:nowrap;padding-right:25px;}
+.numbers .graph .data > *{vertical-align:top;}
+.numbers .graph .data strong{font-size:16px;color:#3a3a3a;padding:0 4px;}
+.numbers .graph .bar{width:100%;}
+.numbers .graph .bar div{height:20px;line-height:20px;background:#e5e3e3;}
+.numbers .graph .bar > div > div{background:#4990fc;}
+

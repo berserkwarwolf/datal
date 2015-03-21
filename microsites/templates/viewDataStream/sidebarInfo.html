@@ -1,0 +1,103 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<div class="box infoBox" id="id_infoSidebar">
+
+    <!-- Title -->
+    <header class="title clearfix">
+        <h1 class="FL">{% trans 'VIEWDS-INFO-TITLE' %}</h1>
+        <a class="FR close" title="{% trans 'APP-CLOSE-TEXT' %}" id="id_closeInfoButton">{% trans 'APP-CLOSE-TEXT' %}</a>
+    </header>
+    <div class="boxContent">
+
+        <!-- Permalink -->
+        <article class="permalink rowForm">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-PERMALINK' %}</h1>
+                <input id="id_permalink" type="text" value="" class="share_url_input" readonly />
+            </header>
+        </article>
+
+        <!-- Last Update -->
+        <article class="lastUpdate">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-LASTUPDATE' %}</h1>
+            </header>
+            <p id="id_lastUpdate">{{datastream.created_at|date:'F d, Y, h:i A'|capfirst}}</p>
+        </article>
+
+        <!-- Data Collected From -->
+        <article class="dataCollectedFrom">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-DATACOLLECTEDFROM' %}</h1>
+            </header>
+      <p class="clearfix">
+          {% if datastream.datastream_type == 'URL' %}
+
+              <a class="icon URL {{ impl_type_nice.split|join:'-' }}" id="id_gotosource" href="{{datastream.end_point}}" target="_blank" rel="nofollow" title="{{datastream.end_point}}">{{datastream.end_point}}</a>
+
+          {% elif datastream.datastream_type == 'SELF PUBLISH' %}
+
+              {% if can_download %}
+
+                   <a rel="nofollow" href="{% url "datastream_manager.action_download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="icon FILE {{ impl_type_nice.split|join:'-' }}" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</a>
+
+              {% else %}
+
+                  <span class="icon FILE {{ impl_type_nice.split|join:'-' }}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</span>
+
+              {% endif %}
+
+          {% elif datastream.datastream_type == 'WEBSERVICE' %}
+
+              <span class="icon WS {{ impl_type_nice.split|join:'-' }}">{% trans "APP-WEBSERVICE-TEXT" %}</span>
+
+          {% endif %}
+            </p>
+        </article>
+
+        {% if datastream.get_sources %}
+        <!-- Sources -->
+        <article class="sources">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-SOURCES' %}</h1>
+            </header>
+            <ul class="list">
+                {% for source in datastream.get_sources %}
+                <li class="clearfix"><a href="{{source.url|addhttp}}" target="_blank" title="{{source.name|capfirst}}">{{source.name|capfirst}}</a></li>
+        {%endfor%}
+            </ul>
+        </article>
+        {% endif %}
+
+        {% if datastream.get_tags %}
+        <!-- Tags -->
+        <article class="tags">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-TAGS' %}</h1>
+            </header>
+            <ul class="list">
+                {% url "search.action_search" as search_url %}
+                {% for tag in datastream.get_tags %}
+                <li class="clearfix"><a href="{{ search_url }}?tag={{tag|prepareTagForSearch}}" title="{{tag|capfirst}}" rel="nofollow tag">{{tag|capfirst}}</a></li>
+        {% endfor %}
+            </ul>
+        </article>
+        {% endif %}
+
+        <!-- Visitors -->
+        <article class="visitors">
+            <i></i>
+            <header>
+                <h1>{% trans 'VIEWDS-INFO-VISITORS' %}</h1>
+            </header>
+            <div id="id_datastreamHits"></div>
+        </article>
+
+    </div>
+</div>

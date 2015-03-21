@@ -1,0 +1,66 @@
+<rdf:RDF xmlns:foaf="http://xmlns.com/foaf/0.1/" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dcat="http://www.w3.org/ns/dcat#" xmlns:ods="http://open-data-standards.github.com/2012/01/open-data-standards#" xmlns:dct="http://purl.org/dc/terms/">
+    {% for resource in resources %}
+    <dcat:Dataset rdf:about="{{resource.link}}">
+        <ods:created>{{resource.created_at|date:"c"}}Z</ods:created>
+        <ods:last_modified>{{resource.created_at|date:"c"}}Z</ods:last_modified>
+        <dct:title>{{resource.title}}</dct:title>
+        <dct:description>{{resource.description}}</dct:description>
+        <dct:identifier>{{resource.guid}}</dct:identifier>
+        {% for tag in resource.tags %}<dcat:keyword>{{tag}}</dcat:keyword>{% endfor %}
+        <dcat:distribution><dcat:Download>
+        <dcat:accessURL rdf:resource="{{resource.export_csv_link}}"/></dcat:Download></dcat:distribution>
+        <dcat:distribution><dcat:Download>
+        <dcat:accessURL rdf:resource="{{resource.export_html_link}}"/></dcat:Download></dcat:distribution>
+        <ods:api>
+            <dcat:accessURL>{{resource.api_link}}</dcat:accessURL>
+            <ods:authentication>Basic</ods:authentication>
+            <ods:documentation>{{developers_link}}</ods:documentation>
+            <ods:client_library>https://github.com/Junar/junar-api-java-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-api-python-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-api-php-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-javascript-sdk</ods:client_library>
+            <dct:format>application/json</dct:format>
+            <dct:format>text/csv</dct:format>
+            <dct:format>text/html</dct:format>
+            <dct:format>text/xml</dct:format>
+            <ods:api_type>rest</ods:api_type>
+        </ods:api>
+        {% for visualization in resource.visualizations %}
+        <ods:chart>
+            <dct:title>{{visualization.title}}</dct:title>
+            <dct:description>{{visualization.description}}</dct:description>
+            <dct:identifier>{{visualization.guid}}</dct:identifier>
+            <dcat:accessURL>{{visualization.link}}</dcat:accessURL>
+            <dct:format>text/html</dct:format>
+        </ods:chart>
+        {% endfor %}
+    </dcat:Dataset>
+    {% endfor %}
+    {% for dashboard in dashboards %}
+    <ods:dashboard>
+        <dct:title>{{dashboard.title}}</dct:title>
+        <dct:description>{{dashboard.description}}</dct:description>
+        <dct:identifier>{{dashboard.guid}}</dct:identifier>
+        <dcat:accessURL>{{dashboard.link}}</dcat:accessURL>
+        {% for tag in dashboard.tags %}<dcat:keyword>{{tag}}</dcat:keyword>{% endfor %}
+        <ods:created>{{dashboard.created_at|date:"c"}}Z</ods:created>
+        <ods:last_modified>{{dashboard.created_at|date:"c"}}Z</ods:last_modified>
+        {% for widget in dashboard.get_widgets %}
+        {% with resource=widget.get %}
+        <ods:dataset>http://{{domain}}{{resource.permalink}}</ods:dataset>
+        {% endwith %}
+        {% endfor %}
+        <ods:api>
+            <dcat:accessURL>{{dashboard.api_link}}</dcat:accessURL>
+            <ods:authentication>Basic</ods:authentication>
+            <ods:documentation>{{developers_link}}</ods:documentation>
+            <ods:client_library>https://github.com/Junar/junar-api-java-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-api-python-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-api-php-client</ods:client_library>
+            <ods:client_library>https://github.com/Junar/junar-javascript-sdk</ods:client_library>
+            <dct:format>application/json</dct:format>
+            <ods:api_type>rest</ods:api_type>
+        </ods:api>
+    </ods:dashboard>
+    {% endfor %}
+</rdf:RDF>

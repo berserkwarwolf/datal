@@ -1,0 +1,101 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components dataset_tags %}
+
+{% block meta %}
+<link href="/media_workspace/styles/detailCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/viewDataset.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<meta name="main-option" content="id_datasets_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1 class="FL"><a href="{% url 'manageDatasets.list' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
+<h2 class="FL">{{ dataset.title|capfirst }}</h2>
+<ul class="actions FR">
+
+  {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
+  {% if dataset.collect_type == 1 or dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
+  <!-- Create Data View -->
+  <li><a id="id_create" class="button black small" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}"><i class="new"></i>{% trans 'APP-ACTIONS-CREATEVIEW' %}</a></li>
+  {% endif %}
+
+  <!-- Edit -->
+  {% if dataset.status != 1 %}
+  <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
+  {% endif %}
+
+  <!-- Delete -->
+  <li style="display:none;"><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+
+  {% if dataset.collect_type == 0 %}
+  <!-- Download -->
+  <li><a id="id_download" href="/dataset/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="button black small" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></li>
+  
+  {% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
+  <!-- Go to Source -->
+  <li><a id="id_gotosource" class="button black small" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></li>
+  {% endif %}
+
+  <!-- Add New -->
+  <li class="has-separator"><a href="{% url 'manageDatasets.create' %}" id="id_addNew" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+
+</ul>
+<script>
+</script>
+{% endblock %}
+
+{% block content %}
+  <div class="detail" id="id_viewDataset">
+
+    <div class="wrapper1">
+      <div class="wrapper2 clearfix">
+        <div class="wrapper3">
+          
+          {# Pending review = 1  #}
+          {% if dataset.status == 1 %}
+            <!-- Review -->
+            <div class="alert alert-info clearfix" id="id_reviewBar">
+              {% if auth_manager.is_publisher or auth_manager.is_admin %}
+                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
+                <div class="navigation FR">
+                  <a id="id_approve" class="button green small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+                  <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+                </div>
+              {% else %}
+                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
+              {% endif %}
+            </div>
+          {% endif %}
+
+          <!-- Sidebar -->
+          <section class="sidebar-container">
+
+            {% include "viewDataset/sidebar.html" %}
+
+          </section>
+
+          <!-- Detail -->
+          <section class="detail-container">
+
+            {% include "viewDataset/detail.html" %}
+
+          </section>
+
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var viewDatasetModel = new ViewDatasetModel({
+    reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
+    status: "{{ dataset.status|status_str }}"
+  });
+  var viewDatasetView = new ViewDatasetView({model: viewDatasetModel});
+});
+</script>
+{% endblock %}

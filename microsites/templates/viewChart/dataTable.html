@@ -1,0 +1,35 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<div class="dataTable box relative" id="id_dataStreamContainer">
+	
+	<!-- Header -->
+	<header class="border-box {% if preferences.account_enable_sharing %}sharingEnabled{% endif %}">
+		
+		{% if preferences.account_enable_sharing %}
+    <div class="socialBox clearfix FR">
+      <span class='st_facebook_large' displayText='Facebook'></span>
+      <span class='st_twitter_large' displayText='Tweet'></span>
+      <span class='st_googleplus_large' displayText='Google +'></span>
+      <span class='st_linkedin_large' displayText='LinkedIn'></span>
+    </div>
+		{% endif %}
+
+		<!-- Title and Description -->
+		<hgroup>
+			<h1>
+				<strong>{{datastream.title|capfirst}}</strong>
+			<h2>{{datastream.description|capfirst}}</h2>
+		</hgroup>
+
+	</header>
+
+	<!-- Data -->
+	<div class="data">
+    <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
+  </div>
+
+  <!-- Mini Loading -->
+  <div id="id_miniLoading" style="display:none;" class="absolute">{% trans 'VIEWCHART-MINILOADING-TEXT' %}</div>
+
+</div>

@@ -1,0 +1,158 @@
+{% extends 'base.html' %}
+
+{% block css_includes %}
+	<!-- NEW -->
+	<link href="/media_workspace/styles/common.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+	<!-- OLD -->
+	<!-- <link href="/media_workspace/styles/_modules/buttons_workspace.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/> -->
+{% endblock %}
+
+{% block js_includes %}
+	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
+	<script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/plugins/jquery.validate.custom.methods.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+	<!-- NEW -->
+	<script type="text/javascript" src="/js_workspace/common.js"></script>
+{% endblock %}
+
+{% block body %}
+	<div class="layout">
+
+		{% block header %}
+			<!-- Header -->
+			{% include "header_workspace.html" %}
+		{% endblock %}
+
+		<!-- Workspace -->
+		<div class="workspace">
+			<div class="wrapper1">
+				<div class="wrapper2 clearfix">
+					<div class="wrapper3">
+
+						<!-- Main Nav -->
+						{% include "nav_workspace.html" %}
+
+						<!-- Main Section -->
+						<div class="main-section">
+
+							<!-- Section Title -->
+							<div class="section-title clearfix">
+								{% block sectionTitle %}{% endblock %}
+							</div>
+
+							<!-- Section Content -->
+							<div class="section-content clearfix">
+								{% block content %}{% endblock %}
+							</div>
+
+							<!-- Footer -->
+							{% include "footer_workspace.html" %}
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}
+
+{% block zendesk_chat %}
+<script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.5/zenbox.js"></script>
+<style type="text/css" media="screen, projection">
+	@import url(//assets.zendesk.com/external/zenbox/v2.5/zenbox.css);
+</style>
+<script type="text/javascript">
+	if (typeof(Zenbox) !== "undefined") {
+		Zenbox.init({
+			dropboxID:   "20078963",
+			url:         "https://junar.zendesk.com",
+			tabID:       "Help",
+			tabColor:    "#aac550",
+			tabPosition: "Left"
+		});
+	}
+</script>
+{% endblock %}
+
+{% block base_bottom_js %}
+	<script type="text/javascript">
+		
+		{% if auth_manager %}
+		var authManager = new AuthManager({
+			id: {{auth_manager.id|default_if_none:"null"}}
+			, nick: "{{auth_manager.nick}}"
+			, roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
+			, privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
+			, account_level : "{{ auth_manager.account_level }}"
+			, isAuthenticated: {{ auth_manager.is_authenticated|lower }}
+			, email: "{{ auth_manager.email|lower }}"
+		});
+		{% endif %}
+
+		Configuration = {};
+		Configuration.baseUri = "{{settings.BASE_URI}}";
+		Configuration.apiUri = "{{settings.API_URI}}";
+		Configuration.apiKey = "{{settings.PUBLIC_KEY}}";
+		Configuration.language = "{{LANGUAGE_CODE}}";
+		
+		csrfmiddlewaretoken = '{{ csrf_token }}';
+		
+		function csrfSafeMethod(method) {
+			// these HTTP methods do not require CSRF protection
+			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+		}
+
+		/*
+		-------------------------------------------------------------------------
+		WARNING: beforeSend method in jQuery $.ajax()
+		-------------------------------------------------------------------------
+		
+		If you use a custom beforeSend in your jQuery $.ajax() calls, you will need to include the following in order to prevent overriding the csrf token that is set globally.
+
+		$.ajax({
+			beforeSend : function(xhr, settings){
+				
+				// call global beforeSend func
+				$.ajaxSettings.beforeSend(xhr, settings);
+				
+				// your code here
+
+			}
+		});
+
+		*/
+		$(document).ready(function(){
+
+			//Backbone.$.ajaxSetup({
+			$.ajaxSetup({
+
+				beforeSend: function (xhr, settings) {
+					if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+						xhr.setRequestHeader('X-CSRFToken', csrfmiddlewaretoken);
+					}
+					return true;
+				}
+
+			});
+
+		});
+
+	</script>
+
+	{% block workspace_bottom_js %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var baseView = new BaseView();
+		});
+	</script>
+	{% endblock %}
+
+	{% block bottom_js %}{% endblock %}
+
+{% endblock %}

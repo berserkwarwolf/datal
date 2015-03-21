@@ -1,0 +1,101 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags components %}
+
+{% block meta %}
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.fileupload.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.iframe-transport.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script src="/js_workspace/admin_manager/info.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+
+<meta name="main-option" content="id_settings_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% include "admin_manager/tabs.html" %}
+    <div class="formContainer">
+        <form action="{{form.action}}" id="id_adminInfoForm">
+            {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% csrf_token %}
+            <div class="titleContainer clearfix">
+                <h3 class="FL">{% trans "APP-ACCOUNT-INFORMATION-TITLE" %}</h3>
+            </div>
+            
+            <div class="columns clearfix">
+                <div class="CL">
+                    <div class="dataStreamForm">
+                        <fieldset class="form">
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_name.auto_id}}">{{form.account_name.label}}:</label>
+                                <div class="formErrorMessageContainer">
+                                {{form.account_name}}
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_link.auto_id}}">{{form.account_link.label}}:</label>
+                                <div class="formErrorMessageContainer">
+                                {{form.account_link}}
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_contact_person_name.auto_id}}">{{form.account_contact_person_name.label}}:</label>
+                                <div class="formErrorMessageContainer">
+                                {{form.account_contact_person_name}}
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_contact_person_email.auto_id}}">{{form.account_contact_person_email.label}}:</label>
+                                <div class="formErrorMessageContainer">{{form.account_contact_person_email}}</div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_contact_dataperson_email.auto_id}}">{{form.account_contact_dataperson_email.label}}:</label>
+                                <div class="formErrorMessageContainer">{{form.account_contact_dataperson_email}}</div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_contact_person_country.auto_id}}">{{form.account_contact_person_country.label}}:</label>
+                                <div class="formErrorMessageContainer">
+                                {{form.account_contact_person_country}}
+                                </div>
+                            </div>
+
+                            <div class="row clearfix">
+                                <label for="{{form.account_contact_person_phone.auto_id}}">{{form.account_contact_person_phone.label}}:</label>
+                                <div class="formErrorMessageContainer">
+                                {{form.account_contact_person_phone}}
+                                </div>
+                            </div>
+                            
+                        </fieldset>
+                    </div>
+                </div>
+                
+                <div class="CR">
+                    <div class="helpBox">
+                        <div class="helpBoxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            <p>{% trans "ACCOUNT-CONTACT-INFORMATION-HELP" %}</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+           
+            <div class="buttons center">
+                <input id="id_save" type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            </div>
+        </form>
+    </div>
+{% endblock %}

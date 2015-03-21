@@ -1,0 +1,10 @@
+/*TAGS CONTAINER*/
+.tagsContainer{padding-bottom:5px;}
+.tagsContainer div, 
+.tagsContainer strong{display:inline;}
+.tagsContainer .ic_Tags{padding-left:23px;display:inline-block;}
+.tagsContainer .tagsTitle{color:#6f6f6f;}
+.tagsContainer .tagsItems{color:#898888;height:16px;overflow:hidden;max-width:400px;}
+.tagsContainer a{color:#436bc5;text-decoration:none;white-space:normal;display:inline;word-wrap:break-word;}
+.tagsContainer .In span{display:inline;white-space:normal;word-wrap:break-word;}
+.tagsContainer a:hover{text-decoration:underline;}

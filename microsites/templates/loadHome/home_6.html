@@ -1,0 +1,126 @@
+{% extends "loadHome/index.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block themeMeta %}
+<script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/loadHome/sliderTheme6.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block themeContent %}
+{% with number=paginator.count|intcomma %}
+<div class="homeContent w960 theme6">
+
+	<!-- Slider section -->
+	{% if config.imageSliderSection %}
+    <div class="featuredContent placeholder">
+        <div class="featuredSlider slider">
+
+            <a class="btn izq" title="{% trans 'APP-PREVIOUS-TEXT' %}"><span class="DN">{% trans 'APP-PREVIOUS-TEXT' %}</span></a>
+            <a class="btn der" title="{% trans 'APP-NEXT-TEXT' %}"><span class="DN">{% trans 'APP-NEXT-TEXT' %}</span></a>
+
+            <div class="sliderHome">
+              	{% for source in config.imageSliderSection %}
+                <div class="panel">
+                    <article>
+                        <div class="sliderInfo">
+                            {% if source.description %}
+                                <h1>{{source.description}}</h1>
+                            {% endif %}
+                            {% if source.href %}
+                                <a href="{{source.href}}" class="readMore" target="_blank">{% trans 'APP-READ-MORE-TEXT' %}</a>
+                            {% endif %}
+                        </div>
+
+                        {% if source.image %}
+                            <img src="{{source.image}}" alt=""/>
+                        {% endif %}
+                    </article>
+                </div>
+              	{%endfor%}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- Search box -->
+    <div class="searchBox roundedBox10 border-box">
+        <form class="clearfix searchForm" action="/search/">
+            <input type="text" name="q" placeholder="{% if config.searchboxHintText %}{{ config.searchboxHintText|format:number|safe }}{% else %}{% trans 'APP-SEARCH-TEXT' %}{% endif %}" class="FL"/>
+            <input type="image" value="" title="{% trans 'APP-SEARCH-TEXT' %}" src="/media_core/images/common/im_transparentPixel.png" class="image"/> 
+        </form>
+    </div>
+
+    <!-- Buttons section -->
+    {% if config.buttonSection %}
+    <ul class="buttonsSection clearfix">         
+    	{% for button in config.buttonSection %}      
+        <li style="width:{{ config.buttonsPerRowWidth }}%;" class="border-box">
+            <a href="{{button.href}}" title="{{ button.description|format:number|safe }}" class="buttonContent" target="_blank">
+                <img src="{{button.image}}" alt="{{ button.description|format:number|safe }}"/>
+                <span>{{button.description}}</span>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <!-- Bottom Section -->
+    {% if config.leftBottomSectionLink or config.leftBottomSectionTitle or config.leftBottomSectionImageUrl or config.middleBottomSectionLink or config.middleBottomSectionTitle or config.middleBottomSectionImageUrl or config.rightBottomSectionLink or config.rightBottomSectionTitle or config.rightBottomSectionImageUrl %}
+    <section class="bottomSection clearfix">
+
+        <!-- Left Bottom section -->
+        {% if config.leftBottomSectionLink or config.leftBottomSectionTitle or config.leftBottomSectionImageUrl %}
+        <article class="leftBottom bottomSectionBox border-box FL">
+            {% if config.leftBottomSectionLink %}
+            <a href="{{ config.leftBottomSectionLink }}" title="{{ config.leftBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+            {% endif %}
+                <span class="GB border-box roundedBox15">{{ config.leftBottomSectionTitle|format:number|safe }}</span>
+                {% if config.leftBottomSectionImageUrl %}
+                <img src="{{ config.leftBottomSectionImageUrl }}" alt="{{ config.leftBottomSectionTitle|format:number|safe }}" class="FL"/>
+                {% endif %}
+            {% if config.leftBottomSectionLink %}
+            </a>
+            {% endif %}
+        </article>
+        {% endif %}
+
+        <!-- Middle Bottom section -->
+        {% if config.middleBottomSectionLink or config.middleBottomSectionTitle or config.middleBottomSectionImageUrl %}
+        <article class="middleBottom bottomSectionBox border-box FL">
+            {% if config.middleBottomSectionLink %}
+            <a href="{{ config.middleBottomSectionLink }}" title="{{ config.middleBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+            {% endif %}
+                <span class="GB border-box roundedBox15">{{ config.middleBottomSectionTitle|format:number|safe }}</span>
+                {% if config.middleBottomSectionImageUrl %}
+                <img src="{{ config.middleBottomSectionImageUrl }}" alt="{{ config.middleBottomSectionTitle|format:number|safe }}" class="FL"/>
+                {% endif %}
+            {% if config.middleBottomSectionLink %}
+            </a>
+            {% endif %}
+        </article>
+        {% endif %}
+
+        <!-- Right Bottom section -->
+        {% if config.rightBottomSectionLink or config.rightBottomSectionTitle or config.rightBottomSectionImageUrl %}
+        <article class="rightBottom bottomSectionBox border-box FL">
+            {% if config.rightBottomSectionLink %}
+            <a href="{{ config.rightBottomSectionLink }}" title="{{ config.rightBottomSectionTitle|format:number|safe }}" class="clearfix" target="_blank">
+            {% endif %}
+                <span class="GB border-box roundedBox15">{{ config.rightBottomSectionTitle|format:number|safe }}</span>
+                {% if config.rightBottomSectionImageUrl %}
+                <img src="{{ config.rightBottomSectionImageUrl }}" alt="{{ config.rightBottomSectionTitle|format:number|safe }}" class="FL"/>
+                {% endif %}
+            {% if config.rightBottomSectionLink %}
+            </a>
+            {% endif %}
+        </article>
+        {% endif %}
+
+    </section>
+    {% endif %}
+
+
+</div>
+{% endwith %}
+{% endblock %}

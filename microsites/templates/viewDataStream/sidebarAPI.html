@@ -1,0 +1,53 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<div class="box apiBox" id="id_apiSidebar">
+	<header class="title clearfix">
+		<h1 class="FL">{% trans 'VIEWDS-API-TITLE' %}</h1>
+		<a class="FR close" title="{% trans 'APP-CLOSE-TEXT' %}" id="id_closeAPIButton">{% trans 'APP-CLOSE-TEXT' %}</a>
+	</header>
+	<div class="boxContent">
+		
+		<!-- Request key -->
+		<article class="requestKey">
+			<header>
+				<h1>{% trans 'VIEWDS-API-REQUESTKEY-1' %} <a href="/developers" target="_blank" title="{% trans 'VIEWDS-API-REQUESTKEY-1' %}">{% trans 'VIEWDS-API-REQUESTKEY-2' %}</a>.</h1>
+			</header>
+		</article>
+
+		<!-- GUID -->
+		<article class="GUID rowForm">
+			<header>
+				<h1>GUID:</h1>
+				<input type="text" id="id_GUID" value="{{datastream.guid}}" readonly />
+			</header>
+			<p>{% trans 'VIEWDS-API-DOCUMENTATION-1' %} <a href="{% if preferences.account_api_wiki %}{{preferences.account_api_wiki}}{%else%}{{DOC_API_URL}}{% endif %}" title="{% trans 'VIEWDS-API-DOCUMENTATION-TITLE' %}">{% trans 'VIEWDS-API-DOCUMENTATION-2' %}</a>.</p>
+		</article>
+
+		<!-- Examples -->
+		{% if preferences.account_api_domain %}
+		<article class="examples">
+			<header>
+				<h1>{% trans 'VIEWDS-API-EXAMPLES' %}</h1>
+			</header>
+			<p>{% trans 'VIEWDS-API-EXAMPLES-1' %}</p>
+			<code>http://{{preferences.account_api_domain}}/dataviews/invoke/{{datastream.guid}}?auth_key=YOUR_API_KEY</code>
+			<p>{% trans 'VIEWDS-API-EXAMPLES-2' %}</p>
+			<code>http://{{preferences.account_api_domain}}/dataviews/invoke/{{datastream.guid}}?auth_key=YOUR_API_KEY&amp;output=json_array</code>
+			{% if datastream.parameters %}
+			<p>{% trans 'VIEWDS-API-EXAMPLES-3' %}</p>
+			<code>http://{{preferences.account_api_domain}}/dataviews/invoke/{{datastream.guid}}?auth_key=YOUR_API_KEY&amp;pArgument0=VALUE</code>
+			{% endif %}
+		</article>
+		{% endif %}
+
+		<!-- Need help -->
+		<article class="needHelp">
+			<header>
+				<h1>{% trans 'VIEWDS-API-NEEDHELP' %}</h1>
+			</header>
+			<p><a href="mailto:support@junar.com" title="{% trans 'VIEWDS-API-NEEDHELP-1' %}">{% trans 'VIEWDS-API-NEEDHELP-1' %}</a>. {% trans 'VIEWDS-API-NEEDHELP-2' %}</p>
+		</article>
+
+	</div>
+</div>

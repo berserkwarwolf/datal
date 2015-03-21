@@ -1,0 +1,32 @@
+{% load dataset_tags %}
+{"total_entries":{{data.total_resources}}
+, "items":
+    [
+    {% for resource in data.resources %}
+    {
+        "author": "{{resource.dataset__user__nick}}"
+        , "status": {{resource.status}}
+        , "status_nice": "{{resource.status|status_str|capfirst}}"
+        , "user_id": "{{resource.dataset__user__id}}"
+        , "guid":"{{resource.dataset__guid}}"
+        , "category_id":"{{resource.category__id}}"
+        , "dataset_id": {{resource.dataset__id}}
+        , "category":"{{resource.category__categoryi18n__name}}"
+        , "title":"{{resource.dataseti18n__title|capfirst}}"
+        , "description":"{{resource.dataseti18n__description|capfirst}}"
+        , "last_revision_id":"{{resource.dataset__last_revision_id}}"
+        , "end_point": "{{resource.end_point}}"
+        , "filename": "{{resource.filename}}"
+        , "impl_type": {{resource.impl_type}}
+        , "type_classname": "{{resource.impl_type|type_classname}}"
+        , "type_nice": "{{resource.impl_type|type_str}}"
+        , "url": "/datasets/{{resource.id}}"
+        , "size": {{resource.size}}
+        , "created_at": "{{resource.created_at|date:'F d, Y, h:i A'|capfirst}}"
+        , "id": {{resource.id}}
+        , "collect_type": {{resource.dataset__type}}
+    }
+        {% if not forloop.last %}, {% endif%}
+    {% endfor %}
+    ]
+}

@@ -1,0 +1,100 @@
+{% load i18n extra_tags core_components components %}
+
+{# Active Filter #}
+<script type="text/template" id="active-filters-template">
+	<li><span><%= filter_name %></span> <a class="remove" title="{% trans 'FILTERS-REMOVE-TEXT' %}" id="<%= filter_id %>">x</a></li>
+</script>
+
+{# Grid - Title Cell #}
+<script type="text/template" id="grid-titlecell-template">
+
+	{# Title #}
+  <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
+
+  {# Last Modified #}
+  <% if(created_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% } %>
+
+  {# Actions #}
+  <ul class="actions clearfix">
+
+		{# Review #}
+  	<% if( authManager.isPublisher() || authManager.isAdmin() ){ %>
+    	<% 
+        // Status Pending Review = 1
+        if( status === 1 ){ 
+      %>
+      	<li class="review"><a href="<%=url%>" title=<%= gettext('APP-REVIEW-TEXT') %>><%= gettext('APP-REVIEW-TEXT')%></a></li>
+      <% } %>
+    <% } %>
+
+    {# Create Visualization #}
+    {% comment %}
+    <li class="create">
+    	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+    </li>
+    {% endcomment %}
+
+    {% comment %}
+    {# Edit #}
+		<% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+    	<li class="edit">
+    		<a data-id="<%=id%>" data-url="{% url 'manageDataviews.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+    	</li>
+    <% } %>
+    {% endcomment %}
+
+    {# Delete #}
+    <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a></li>
+
+  </ul>
+</script>
+
+{# Edit - Add New Source #}
+<script type="text/template" id="id_AddNewSourceTemplate">
+  <div class="FL">  
+    <div class="nolabel">
+      <div class="insetFormTitle">{% trans 'APP-ADDNEW-TEXT' %}</div>
+    </div>
+
+    <div class="row clearfix">
+      <label for="id_name"></label>
+      <input type="text" name="name" id="id_name" placeholder="{% trans 'APP-NAME-TEXT' %}">
+    </div>
+
+    <div class="row clearfix">
+      <label for="id_url_source"></label>
+      <input type="text" name="url_source" id="id_url_source" placeholder="{% trans 'APP-URL-TEXT' %}">
+    </div>
+
+    <div class="row clearfix">
+      <a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
+    </div>
+  </div>
+</script>
+
+{# Edit - Add Source #}
+<script type="text/template" id="id_AddSourceTemplate">
+  <label for="id_source_name">{% trans 'APP-SOURCES-TEXT' %}</label>
+  <input type="text" name="source_name" id="id_source_name" tabindex="0">
+  <p class="tip">{% trans 'EDITDS-SOURCE-TIP1' %} <a id="id_addSourceButton" tabindex="-1">{% trans 'EDITDS-SOURCE-TIP2' %}</a></p>
+</script>
+
+{# Edit - Add Tag #}
+<script type="text/template" id="id_AddTagTemplate">
+  <label for="id_tag_name">{% trans 'APP-TAGS-TEXT' %}</label>
+  <input type="text" name="tag_name" id="id_tag_name" tabindex="0">
+  <p class="tip">{% trans 'OVEDITDS-TAGS-TIP' %}</p>
+</script>
+
+{# Edit - Tag #}
+<script type="text/template" id="id_TagTemplate">
+  <span class="tagInner clearfix">
+    <span class="tagTxt"><%= name %></span>
+    <a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
+  </span>
+</script>

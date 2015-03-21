@@ -1,0 +1,767 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "CHANNEL_TYPE_WEB"
+msgstr "Web"
+
+msgid "CHANNEL_TYPE_API"
+msgstr "API"
+
+msgid "ACTION_STREAM_CREATE"
+msgstr "Creado"
+
+msgid "ACTION_STREAM_DELETE"
+msgstr "Borrado"
+
+msgid "ACTION_STREAM_PUBLISH"
+msgstr "Publicado"
+
+msgid "ACTION_STREAM_UNPUBLISH"
+msgstr "Despublicado"
+
+msgid "MODEL_STATUS_DRAFT"
+msgstr "Borrador"
+
+msgid "MODEL_STATUS_PENDING_REVIEW"
+msgstr "Revisión pendiente"
+
+msgid "MODEL_STATUS_UNDER_REVIEW"
+msgstr "Bajo revisión"
+
+msgid "MODEL_STATUS_PUBLISHED"
+msgstr "Publicado"
+
+msgid "MODEL_STATUS_UNPUBLISHED"
+msgstr "No Publicado"
+
+msgid "MODEL_STATUS_REJECTED"
+msgstr "Rechazado"
+
+msgid "MODEL_STATUS_APPROVED"
+msgstr "Aprobado"
+
+msgid "MODEL-LANGUAJE-EN"
+msgstr "Inglés "
+
+msgid "MODEL-LANGUAJE-ES"
+msgstr "Español"
+
+msgid "MODEL-COUNTRY-US"
+msgstr "Estados Unidos"
+
+msgid "MODEL-COUNTRY-AR"
+msgstr "Argentina"
+
+msgid "MODEL-COUNTRY-CL"
+msgstr "Chile"
+
+msgid "MODEL-COUNTRY-BR"
+msgstr "Brasil"
+
+msgid "MODEL-COUNTRY-UY"
+msgstr "Uruguay"
+
+msgid "MODEL-COUNTRY-MX"
+msgstr "Mexico"
+
+msgid "MODEL-COUNTRY-CR"
+msgstr "Costa Rica"
+
+msgid "MODEL-COUNTRY-OC"
+msgstr "Otros Paises"
+
+msgid "MODEL-OCUPATION-FI"
+msgstr "Finanzas / Contabilidad"
+
+msgid "MODEL-OCUPATION-AN"
+msgstr "Analista"
+
+msgid "MODEL-OCUPATION-MA"
+msgstr "Marketing / Ventas"
+
+msgid "MODEL-OCUPATION-EN"
+msgstr "Emprendedor"
+
+msgid "MODEL-OCUPATION-OT"
+msgstr "Otro"
+
+msgid "MODEL-USERNAME-TEXT"
+msgstr "Usuario"
+
+msgid "MODEL-PASSWORD-TEXT"
+msgstr "Contraseña"
+
+msgid "MODEL-COUNTRY-TEXT"
+msgstr "Pais"
+
+msgid "MODEL-OCUPATION-TEXT"
+msgstr "Ocupación"
+
+msgid "MODEL-LANGUAGE-TEXT"
+msgstr "Idioma"
+
+msgid "MODEL-FAVOURITE-TEXT"
+msgstr "Favoritos"
+
+msgid "MODEL-ROLES-TEXT"
+msgstr "Roles"
+
+msgid "MODEL-USER-GRANTS-TEXT"
+msgstr ""
+
+msgid "MODEL_USER_LABEL"
+msgstr "Usuario"
+
+msgid "MODEL_IS_PRIVATE_LABEL"
+msgstr "Es privado"
+
+msgid "MODEL_DATASTREAM_LABEL"
+msgstr "Vista de Datos"
+
+msgid "MODEL_DATASET_LABEL"
+msgstr "Conjunto de Datos"
+
+msgid "MODEL_CATEGORY_LABEL"
+msgstr "Categoría"
+
+msgid "MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL"
+msgstr ""
+
+msgid "MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL"
+msgstr ""
+
+msgid "MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL"
+msgstr ""
+
+msgid "MODEL_ACTION_LABEL"
+msgstr "Accion"
+
+msgid "MODEL_STATUS_LABEL"
+msgstr "Estado"
+
+msgid "MODEL_META_TEXT_LABEL"
+msgstr "Meta text"
+
+msgid "MODEL_LANGUAGE_LABEL"
+msgstr "Idioma"
+
+msgid "MODEL_DATASTREAM_REVISION_LABEL"
+msgstr "Revisión de la Vista de Datos"
+
+msgid "MODEL_TITLE_LABEL"
+msgstr "Título"
+
+msgid "MODEL_DESCRIPTION_LABEL"
+msgstr "Descripción"
+
+msgid "MODEL_NOTE_LABEL"
+msgstr "Nota"
+
+msgid "MODEL_LICENSE_LABEL"
+msgstr "URL de la licencia"
+
+msgid "MODEL_SPATIAL_LABEL"
+msgstr "Alcance espacial del recurso"
+
+msgid "MODEL_FREQUENCY_LABEL"
+msgstr "Frecuencia de actualización de los datos"
+
+msgid "MODEL_MBOX_LABEL"
+msgstr "Casilla para consultas sobre datasets"
+
+msgid "MODEL_NAME_LABEL"
+msgstr "Nombre"
+
+msgid "MODEL_IMPLEMENTATION_DETAILS_LABEL"
+msgstr "Detalles de la Implementación"
+
+msgid "MODEL_DASHBOARD_LABEL"
+msgstr "Colección"
+
+msgid "MODEL_DASHBOARD_WIDGET_TEXT"
+msgstr "Widget de la Colección"
+
+msgid "MODEL_DASHBOARD_REVISION_LABEL"
+msgstr "Revisión de la Colección"
+
+msgid "MODEL-ORDER-TEXT"
+msgstr "Orden"
+
+msgid "MODEL-URL-TEXT"
+msgstr "Url"
+
+msgid "MODEL-DASHBOARD-TEXT"
+msgstr "Colección"
+
+msgid "MODEL-DATASTREAM-TEXT"
+msgstr "Vista de Datos"
+
+msgid "MODEL-VISUALIZATION-TEXT"
+msgstr "Gráfico"
+
+msgid "MODEL-USER-TEXT"
+msgstr "Usuario"
+
+msgid "MODEL_IS_DEAD_LABEL"
+msgstr "Está muerto"
+
+msgid "MODEL_END_POINT_LABEL"
+msgstr "End Point"
+
+msgid "MODEL_FILENAME_LABEL"
+msgstr "Nombre del archivo"
+
+msgid "MODEL_IMPLEMENTATION_TYPE_LABEL"
+msgstr "Tipo de Implementación"
+
+msgid "MODEL_SIZE_LABEL"
+msgstr "Tamaño"
+
+msgid "MODEL_DATASET_REVISION_LABEL"
+msgstr "Revisión del Conjunto de Datos"
+
+msgid "MODEL_VISUALIZATION_LABEL"
+msgstr "Gráfico"
+
+msgid "MODEL_SLUG_LABEL"
+msgstr ""
+
+msgid "MODEL_VISUALIZATION_REVISION_LABEL"
+msgstr "Revisión de la Gráfica"
+
+msgid "MODEL_TAG_TEXT"
+msgstr "Etiqueta"
+
+msgid "MODEL_CODE_LABEL"
+msgstr "Código"
+
+msgid "MODEL_ROLE_GRANTS_LABEL"
+msgstr ""
+
+msgid "MODEL_ROLE_LABEL"
+msgstr "Rol"
+
+msgid "MODEL_GUEST_LABEL"
+msgstr "Invitado"
+
+msgid "MODEL_PRIVILEGE_LABEL"
+msgstr "Privilegio"
+
+msgid "MODEL_GRANT_LABEL"
+msgstr "Conceder"
+
+msgid "MODEL_TYPE_LABEL"
+msgstr "Tipo"
+
+msgid "MODEL_AUTH_KEY_LABEL"
+msgstr "Auth Key"
+
+msgid "MODEL_EMAIL_LABEL"
+msgstr "E-Mail"
+
+msgid "MODEL_GUEST_GRANT_LABEL"
+msgstr ""
+
+msgid "MODEL_METADATA_LABEL"
+msgstr "Metadatos"
+
+msgid "MODEL_CREATED_AT_LABEL"
+msgstr "Fecha de creación"
+
+msgid "MODEL_EXPIRES_AT_LABEL"
+msgstr "Expira en"
+
+msgid "MODEL-POSITION-TEXT"
+msgstr "Posición"
+
+msgid "MODEL-AUTHOR-TEXT"
+msgstr "Autor"
+
+msgid "MODEL-COMMENT-TEXT"
+msgstr "Comentario"
+
+msgid "APP-EXCEDEDDATASET-LIMIT"
+msgstr "La cuenta ha alcanzado el límite de Conjunto de Datos, actualiza tu cuenta para crear más"
+
+msgid "APP-EXCEDEDUSERS-LIMIT"
+msgstr "La cuenta ha alcanzado el límite de Usuarios, actualiza tu cuenta para crear más"
+
+msgid "APP-ERROR-TEXT"
+msgstr "Error"
+
+msgid "APP-PAGENOTFOUND-TEXT"
+msgstr "Página no encontrada"
+
+msgid "APP-DISCOVERINGDATA-TEXT"
+msgstr "Datos Abiertos"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Recargar"
+
+msgid "APP-TECNOLOGY-TEXT"
+msgstr "Tecnología"
+
+msgid "APP-BY-TEXT"
+msgstr "por"
+
+msgid "APP-YEARSAGO-TEXT"
+msgstr "años atras"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "APP-404-ERROR"
+msgstr "La página que estas buscando ya no existe, <br/> o tal vez no cargó correctamente"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Por favor"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "inténtalo nuevamente"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "O anda a la"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "Fuente"
+
+msgid "APP-INTERNALERROR-TEXT"
+msgstr "Error interno del servidor"
+
+msgid "APP-500-ERROR"
+msgstr "¡Nuestro servidor exploto! O quizas está abajo por mantenimiento"
+
+msgid "APP-INAFEWMINUTES-TEXT"
+msgstr "en unos pocos minutos"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Acciones"
+
+msgid "APP-EXPORTCHART-TITLE"
+msgstr "Exporta esta visualización a un archivo CSV"
+
+msgid "APP-EXPORTCHART-TEXT"
+msgstr "Exportar la visualización"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Datos recolectados de la web"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "Datos cargados por el usuario"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Fuentes"
+
+msgid "APP-EXPORTDS-TITLE"
+msgstr "Exporta esta vista a un archivo CSV"
+
+msgid "APP-EXPORTDS-TEXT"
+msgstr "Exportar a CSV"
+
+msgid "DSDET-SHARE-TITLE"
+msgstr "Compartir esta vista"
+
+msgid "APP-SHARE-TEXT"
+msgstr "Compartir"
+
+msgid "DSDET-GOOGLESPREADSHEETS-SUBTITLE"
+msgstr "Agrega esta vista a Google Spreadsheet!"
+
+msgid "DSDET-GOOGLESPREADSHEETS-CONTENT"
+msgstr "Copia y Pega el código de abajo en la celda en la que quiera usar esta Vista."
+
+msgid "APP-NO_RECORDS_FOUND-TEXT"
+msgstr "No hay recursos disponibles en este momento."
+
+msgid "APP-FILTERS-TEXT"
+msgstr "Filtros"
+
+msgid "APP-ALL-TEXT"
+msgstr "Todo"
+
+msgid "APP-OWNEDBYME-TEXT"
+msgstr "Míos"
+
+msgid "APP-DELETE-TEXT"
+msgstr "Borrar"
+
+msgid "APP-ACTIONS-SUBMIT"
+msgstr "Enviar"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publicar"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "ITEMS-PER-PAGE"
+msgstr "Elementos por página"
+
+msgid "APP-PREVIOUS-TEXT"
+msgstr "Anterior"
+
+msgid "APP-PAGE-TEXT"
+msgstr "Página"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Siguiente"
+
+msgid "SEARCH-DATASETS-TEXT"
+msgstr "Buscar Conjuntos de datos"
+
+msgid "SEARCH-DATASTREAMS-TEXT"
+msgstr "Buscar Vistas de Datos"
+
+msgid "SEARCH-DASHBOARDS-TEXT"
+msgstr "Buscar Colecciones"
+
+msgid "SEARCH-VISUALIZATIONS-TEXT"
+msgstr "Buscar Gráficos"
+
+msgid "SEARCH-HOME-TEXT"
+msgstr "Filtrar Recursos"
+
+msgid "APP-DATASETS-TEXT"
+msgstr "Conjuntos de datos"
+
+msgid "APP-VIEWS-TEXT"
+msgstr "Vistas"
+
+msgid "APP-CHARTS-TEXT"
+msgstr "Visualizaciones"
+
+msgid "APP-DASHBOARDS-TEXT"
+msgstr "Colecciones"
+
+msgid "APP-EMBED-TEXT"
+msgstr "Incrustar"
+
+msgid "OVERLAY-DSEMBED-TITLE"
+msgstr "¡Agrega esta vista donde quieras!"
+
+msgid "OVERLAY-DSEMBED-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta vista"
+
+msgid "APP-WIDTH-TEXT"
+msgstr "Ancho"
+
+msgid "APP-HEIGHT-TEXT"
+msgstr "Alto"
+
+msgid "APP-FREEZE-TEXT"
+msgstr "Congelar"
+
+msgid "APP-ROWS-TEXT"
+msgstr "filas"
+
+msgid "APP-COLUMNS-TEXT"
+msgstr "Comentario"
+
+msgid "OVERLAY-CHARTEMBED-TITLE"
+msgstr "¡Agrega esta visualización donde quieras!"
+
+msgid "OVERLAY-CHARTEMBED-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Desarrollado por"
+
+msgid "DEV-PAGE-TITLE"
+msgstr "Página de Desarrolladores"
+
+msgid "DEV-PAGE-SUBTITLE"
+msgstr "Prueba la API de Junar"
+
+msgid "DEV-DESCRIPTION-TEXT1"
+msgstr ""
+"La API de Junar permite el acceso directo al catálogo de Junar y a su motor "
+"desde tu aplicación, para propósitos de <strong>descubrir vistas y "
+"colecciones</strong>,  invocar vistas <strong> y pronto... recolectar y "
+"publicar datos como vistas</strong>. Usa una interfaz RESTful y retorna los "
+"datos en formato JSON."
+
+msgid "DEV-DESCRIPTION-TEXT2"
+msgstr ""
+"Las vistas invocadas a través de la API proveen un acceso estándar online a "
+"datos contenidos en páginas HTML, XLS, CSV y otros archivos similares "
+"disponibles en Internet."
+
+msgid "APP-TRYITNOW-TEX"
+msgstr "¡Obtén tu API key!"
+
+msgid "APP-REQUIRESSIGNIN-TEXT"
+msgstr "Requiere iniciar sesión"
+
+msgid "DEV-GETKEY-TITLE"
+msgstr "Obtén una Clave"
+
+msgid "DEV-GETKEY-SUBTITLE"
+msgstr "La API de Junar requiere una <span class='br'>key para operar.</span>"
+
+msgid "DEV-GETKEY-TEXT1"
+msgstr "Obtén una y accede a cualquier recurso a través de ella"
+
+msgid "DEV-GETKEY-TEXT2"
+msgstr "Conoce inmediatamente la"
+
+msgid "DEV-GETKEY-TEXT3"
+msgstr "documentación de la API"
+
+msgid "DEV-GETKEY-TEXT4"
+msgstr "para conocer los métodos y los request que puedes usar"
+
+msgid "DEV-CREATEREQUEST-TITLE"
+msgstr "Crea un Request"
+
+msgid "DEV-CREATEREQUEST-SUBTITLE"
+msgstr "La API de Junar acepta request RESTfuls"
+
+msgid "DEV-CREATEREQUEST-TEX1"
+msgstr "Un request típico luce así"
+
+msgid "DEV-CREATEREQUEST-TEX2"
+msgstr ""
+"http://apisandbox.junar.com/datastreams/invoke/TEPCO-STOCK-QUOTE?"
+"auth_key=TU_API_KEY"
+
+msgid "DEV-CREATEREQUEST-TEX3"
+msgstr "Algunas puntos importantes en el request anterior"
+
+msgid "DEV-CREATEREQUEST-TEX4"
+msgstr "/datastreams/invoke/"
+
+msgid "DEV-CREATEREQUEST-TEX5"
+msgstr ""
+"Este es un request para invocar, que retornará un json.  Las descripciones "
+"completas de los métodos están disponibles en la"
+
+msgid "DEV-CREATEREQUEST-TEX6"
+msgstr "documentación de la API"
+
+msgid "DEV-CREATEREQUEST-TEX7"
+msgstr "TEPCO-STOCK-QUOTE"
+
+msgid "DEV-CREATEREQUEST-TEX8"
+msgstr ""
+"Este es el GUID de la vista que estás accediendo. Este GUID lo puedes "
+"encontrar en la página del detalle de la vista, haciendo una búsqueda de la "
+"vista a través de la API y en muchos otros lugares"
+
+msgid "DEV-CREATEREQUEST-TEX9"
+msgstr "auth_key"
+
+msgid "DEV-CREATEREQUEST-TEX10"
+msgstr "=TU_API_KEY"
+
+msgid "DEV-CREATEREQUEST-TEX11"
+msgstr "Esta es la clave del paso 1.  La necesitarás para cada request"
+
+msgid "DEV-PROCESS-TITLE1"
+msgstr "Procesa"
+
+msgid "DEV-PROCESS-TITLE2"
+msgstr "la respuesta"
+
+msgid "DEV-PROCESS-TEX1"
+msgstr ""
+"La respuesta será en formato JSON. Usted también puede obtener la respuesta en XML, CSV y HTML."
+
+msgid "DEV-PROCESS-TEX2"
+msgstr "Para entender el formato de los campos de respuesta, lee"
+
+msgid "DEV-PROCESS-TEX3"
+msgstr "la documentación de la API"
+
+msgid "DEV-OV-TITLE"
+msgstr "Confirmación y Key"
+
+msgid "DEV-OV-SUBTITLE"
+msgstr "Gracias por probar la API de Junar"
+
+msgid "DEV-OV-TEXT"
+msgstr "Esta es tu Auth key"
+
+msgid "DEV-OV-TIP1"
+msgstr "Para mayor información lee la"
+
+msgid "DEV-OV-TIP2"
+msgstr "o contacta con developers@junar.com para mayor soporte"
+
+msgid "OLD-PASSWORD-MISMATCH"
+msgstr "La contraseña es incorrecta."
+
+msgid "NEW-PASSWORD-MISMATCH"
+msgstr "Las nuevas contraseñas no coincide."
+
+msgid "EMAIL-EXISTS"
+msgstr "Este email ya existe."
+
+msgid "HEADER-IE-MESSAGES"
+msgstr "<p><strong>Precaución:</strong> Junar funciona correctamente en Internet Explorer 8 o superior y puede no funcionar correctamente en versiones antiguas de este navegador, o en modo <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='vista de compatibilidad' target='_blank'>vista de compatibilidad</a>. Por favor <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Actualice su navegador a la última versión' target='_blank'>actualice su navegador a la última versión</a> o <a href='http://abetterbrowser.org/' title='Use otro navegador' target='_blank'>use otro navegador</a>.</p>"
+
+msgid "APP-HELP-TEXT"
+msgstr "Soporte en línea"
+
+msgid "APP-LOADING-TEXT"
+msgstr "Cargando. Por favor espere."
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No se encontraron datos"
+
+msgid "APP-TOTALMARKERSLEFT-TEXT"
+msgstr "Total marcadores restantes"
+
+msgid "APP-NEXTMARKERS-TEXT"
+msgstr "Mostrar siguentes 1000 marcadores"
+
+msgid "APP-DATAVIEWS-TEXT"
+msgstr "Vistas"
+
+msgid "APP-RESOURCES-TEXT"
+msgstr "Recursos"
+
+msgid "APP-TOPCATEGORIES-TEXT"
+msgstr "Categorías principales"
+
+msgid "APP-SOAP-TEXT"
+msgstr "Los datos se obtuvieron de un Servicio Web"
+
+msgid "APP-TITLE"
+msgstr "Título"
+
+msgid "APP-PUBLISHED_DATE"
+msgstr "Última actualización"
+
+msgid "APP-DEVELOPERS-TEXT"
+msgstr "Desarrolladores"
+
+msgid "APP-HOME-TEXT"
+msgstr "Página de inicio"
+
+msgid "APP-WIKI-TEXT"
+msgstr "Wiki"
+
+msgid "APP-EXPORTDS-XLS"
+msgstr "Exportar a Excel 2007"
+
+msgid "APP-FILE-TEXT"
+msgstr "Archivo"
+
+msgid "OVPRIV-TITLE-TEXT"
+msgstr "Configuración del recurso compartido"
+
+msgid "APP-CANVIEW-TEXT"
+msgstr "Compartido con:"
+
+msgid "APP-SELECTUSER-TEXT"
+msgstr "Seleccione un usuario..."
+
+msgid "APP-DONE-TEXT"
+msgstr "Listo"
+
+msgid "APP-ADD-TEXT"
+msgstr "Agregar"
+
+msgid "APP-SIGNINTO-TEXT"
+msgstr "Ingrese a"
+
+msgid "APP-LOGIN-TEXT"
+msgstr "Entrar"
+
+msgid "APP-ACTIVATION-TITLE-TEXT"
+msgstr "Active su cuenta Junar"
+
+msgid "APP-ACTIVATION-SUBTITLE-TEXT"
+msgstr "Escriba una contraseña con el fin de terminar su activación de la cuenta"
+
+msgid "APP-BYCLICKINGAGREE-TEXT"
+msgstr "Al hacer click, estará de acuerdo con nuestra"
+
+msgid "APP-AND-TEXT"
+msgstr "y"
+
+msgid "APP-TERMS-TITLE"
+msgstr "Revisa nuestros términos de servicio"
+
+msgid "APP-TERMS-TEXT"
+msgstr "Términos de servicio"
+
+msgid "APP-PRIVACY-TITLE"
+msgstr "Revisa nuestra política de privacidad"
+
+msgid "APP-PRIVACY-TEXT"
+msgstr "Política de privacidad"
+
+msgid "APP-REGISTER-TEXT"
+msgstr "Crear cuenta"
+
+msgid "OVPRIV-REMOVEUSER-TEXT"
+msgstr "Quitar acceso a usuario"
+
+msgid "OVPRIV-CANVIEW-TEXT"
+msgstr "Puede ver"
+
+msgid "OVPRIV-CANUSE-TEXT"
+msgstr "Puede usar"
+
+msgid "PRIV-SHARING-UPDATED"
+msgstr "La configuración del recurso ha sido actualizada"
+
+msgid "PRIV-SHARE-DS-ERROR"
+msgstr "Oops! No pudimos compartir tu vista"
+
+msgid "PRIV-SHARE-DB-ERROR"
+msgstr "Oops! No pudimos compartir tu colección"
+
+msgid "PRIV-SHARE-VZ-ERROR"
+msgstr "Oops! No pudimos compartir tu gráfico"
+
+msgid "PRIV-SHARE-EMAIL-ERROR"
+msgstr "Oops! No pudimos procesar el email"
+
+msgid "FOOTER-OPENDATA-BUTTON"
+msgstr "Este material es datos abiertos"
+
+msgid "APP-GETEMBED-TEXT"
+msgstr "Copie y pegue el siguiente código para incrustar:"
+
+msgid "APP-CLOSE-TEXT"
+msgstr "Cerrar"
+
+msgid "APP-CANCEL-TEXT"
+msgstr "Cancelar"
+
+msgid "APP-DOWNLOADDATASET-TEXT"
+msgstr "Descargar Conjunto de Datos"
+
+msgid "APP-REQUESTDEMO-TEXT"
+msgstr "Solicitar Demo"
+
+msgid "CHART-HEATMAP-TEXT"
+msgstr "Mostrar Mapa de Calor"
+
+msgid "APP-LICENSES-CONTENT"
+msgstr "Licencias de contenido"
+
+msgid "APP-LICENSES-DATA"
+msgstr "Licencias de datos"
+
+msgid "APP-ON-TEXT"
+msgstr ""
+
+msgid "APP-AT-TEXT"
+msgstr "a las"

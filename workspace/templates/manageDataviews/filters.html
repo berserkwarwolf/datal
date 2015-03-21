@@ -1,0 +1,35 @@
+{% load i18n extra_tags core_components components datastream_tags %}
+
+<!-- Filters -->
+<section class="filters-container" id="filters-container" style="display:none;">
+
+   <!-- Active filters -->
+   <div class="activeFilters" id="activeFilters" style="display:none;">
+      <h3 class="PNB">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <ul id="active-filters-list"></ul>
+   </div>
+
+   <!-- Author -->
+   {% if filters.author_filter %}
+   <div class="filters" id="author_filter">
+      <h3 class="PNB">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.author_filter %}
+         <li><a class="filter_link" title="">{{ filter }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+   <!-- Status -->
+   {% if filters.status_filter %}
+   <div class="filters" id="status_filter">
+      <h3 class="PNB">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <ul>
+         {% for filter in filters.status_filter %}
+         <li><a class="filter_link" title="">{{ filter|status_str }}</a></li>
+         {% endfor %}
+      </ul>
+   </div>
+   {% endif %}
+   
+</section>

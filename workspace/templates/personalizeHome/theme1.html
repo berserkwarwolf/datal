@@ -1,0 +1,26 @@
+{% load i18n extra_tags components %}
+
+<script type="text/html" id="id_theme1Template">
+
+	<!-- Main section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">1</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-MAINTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-MAINDESCRIPTION-1') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<label for="id_theme1MainTitle"><%= gettext('ADMIN-HOME-SECTION-MAINTITLELABEL') %></label>
+				<input type="text" class="field" id="id_theme1MainTitle" name="id_theme1MainTitle" value="<%= mainTitle%>" data-bind="value:mainTitle,events:['keyup']"/>
+			</div>
+			<div class="row">
+				<label for="id_theme1MainText"><%= gettext('ADMIN-HOME-SECTION-MAINTEXTLABEL') %></label>
+				<textarea cols="" rows="" class="field" id="id_theme1MainText" name="id_theme1MainText" data-bind="value:mainSection,events:['keyup']"><%= mainSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+</script>

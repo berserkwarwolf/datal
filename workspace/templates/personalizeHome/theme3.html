@@ -1,0 +1,51 @@
+{% load i18n extra_tags components %}
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/load-image.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.fileupload.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.iframe-transport.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+
+<script type="text/html" id="id_theme3Template">
+
+  <!-- Carrousel section -->
+  <div class="formBox">
+    <header class="clearfix">
+      <div class="num">1</div>
+      <hgroup>
+        <h1><%= gettext('ADMIN-HOME-SECTION-CARROUSELTITLE') %></h1>
+        <h2><%= gettext('ADMIN-HOME-SECTION-CARROUSELDESCRIPTION') %></h2>
+      </hgroup>
+    </header>
+    <fieldset class="imageComponent theme3">
+      <div id="carrousel_image" class="row">    
+        <table id="image_table"></table>
+        <table id="image_saved"></table>
+      </div>       
+      <div class="row clearfix">
+        <a id="id_new_slide" class="genericButton normalButton FL"><span><%= gettext('ADMIN-HOME-SECTION-NEWSLIDE') %></span></a>
+        <p class="tipText FR"><%= gettext('ADMIN-HOME-SECTION-THEME3-TIP') %></p>
+      </div>
+    </fieldset>
+  </div>
+
+  <!-- Main section -->
+  <div class="formBox">
+    <header class="clearfix">
+      <div class="num">2</div>
+      <hgroup>
+        <h1><%= gettext('ADMIN-HOME-SECTION-MAINTITLE') %></h1>
+        <h2><%= gettext('ADMIN-HOME-SECTION-MAINDESCRIPTION-2') %></h2>
+      </hgroup>
+    </header>
+    <fieldset>
+      <div class="row">
+        <label for="id_theme3MainTitle"><%= gettext('ADMIN-HOME-SECTION-MAINTITLELABEL') %></label>
+        <input type="text" class="field" id="id_theme3MainTitle" name="id_theme3MainTitle" value="<%=mainTitle%>" data-bind="value:mainTitle,events:['keyup']">
+      </div>
+      <div class="row">
+        <label for="id_theme3MainText"><%= gettext('ADMIN-HOME-SECTION-MAINTEXTLABEL') %></label>
+        <textarea cols="20" rows="10" class="field" id="id_theme3MainText" name="id_theme3MainText" data-bind="value:mainSection,events:['keyup']"><%= mainSection%></textarea>
+      </div>
+    </fieldset>
+  </div>
+</script>

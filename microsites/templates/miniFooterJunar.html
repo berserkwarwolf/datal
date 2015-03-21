@@ -1,0 +1,39 @@
+{% load i18n local_tags %}
+
+{% if preferences.enable_junar_footer %}
+	{% if not is_private_site %}
+		<div class="miniFooterJunar">
+		    <div class="w960 clearfix">
+		    	<ul class="clearfix FL">
+		    		{% if preferences.account_has_home %}
+		    		<li><a href="/home/" title="{% trans 'APP-HOME-TEXT' %}">{% trans "APP-HOME-TEXT" %}</a></li>
+		    		{% endif %}
+						<li><a href="/developers/" title="{% trans 'APP-DEVELOPERS-TEXT' %}">{% trans "APP-DEVELOPERS-TEXT" %}</a></li>
+						<li><a href="{% if preferences.account_api_wiki %}{{preferences.account_api_wiki}}{%else%}http://wiki.junar.com/{% endif %}" title="{% trans 'APP-WIKI-TEXT' %}">{% trans "APP-WIKI-TEXT" %}</a></li>
+		    	</ul>
+		    	<p class="FR">
+		    		<a href="http://www.junar.com/" title="Junar, the open data platform" class="logoJunar" target="_blank">Powered by <strong>Junar, the open data platform</strong></a>
+		    		<!-- Open Data Link -->
+		    		<span>
+							{% if not preferences.account_footer_opendatalicense %}
+								<a href="http://opendatacommons.org/licenses/pddl/" target="_blank">
+							  	<img alt="{% trans 'FOOTER-OPENDATA-BUTTON' %}" border="0" src="http://assets.okfn.org/images/ok_buttons/od_80x15_blue.png" />
+								</a>
+							{% else %}
+								{{ preferences.account_footer_opendatalicense|safe }}
+							{% endif %}
+						</span>
+					</p>
+		    </div>
+		</div>
+	{% else %}
+		<div class="miniFooterJunar">
+	    <div class="w960 clearfix">
+	      <ul class="clearfix FL">
+	      	<li><a href="/signout" title="{% trans 'APP-SIGNOUT-TEXT' %}">{% trans 'APP-SIGNOUT-TEXT' %}</a></li>
+	      </ul>
+	    	<p class="FR"><a href="http://www.junar.com/" title="Junar, the open data platform" class="logoJunar" target="_blank">Powered by <strong>Junar, the open data platform</strong></a></p>
+	    </div>
+		</div>
+	{% endif %}
+{% endif %}

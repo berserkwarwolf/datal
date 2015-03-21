@@ -1,0 +1,164 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+<link href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/_modules/liquidWidth.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/_components/resourceManager.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+
+<script type="text/javascript" src="/js_core/plugins/jquery.url.packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/dashboard_manager/createDashboard.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/resource_manager/datatableDashboardFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/resource_manager/datatableDatastreamFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableSearchManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatablePaginationManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/base_modules/view_manager/XmlHandler.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/tab_manager/tabManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/datastream_manager/datatableDatastreamManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/chart_manager/datatableVisualizationManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dashboard_manager/datatableDashboardManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dashboard_manager/datatableDashboardHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/resource_manager/resourceTabManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/confirm_action_manager/ConfirmActionManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_workspace/dataset_manager/datatableDatasetManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dataset_manager/datatableDatasetHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_core/plugins/jquery.dateFormat-1.0.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.fileupload.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.iframe-transport.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/vendor/jquery.ui.widget.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+
+<script type="text/javascript" src="/js_workspace/dataset_manager/datasetCreateManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dataset_manager/datasetCreateSidebarManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dataset_manager/datasetCreateURLManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dataset_manager/datasetCreateFileManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/dataset_manager/datasetCreateWebserviceManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/resource_manager/createDatastreamOverlay.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_workspace/resource_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
+<meta name="main-option" content="id_enhance_option"/>
+{% endblock %}
+
+{% block content %}
+    <div id="tabs" class="ao-tabs relative clearfix">
+        <ul class="tabsList clearfix">
+            <li class="tab tab-selected FL">
+                <div class="clearfix"><a class="tab-datastreams" href="javascript:;" title="{% trans 'APP-VIEWS-TEXT' %}">{% trans 'APP-VIEWS-TEXT' %}</a></div>
+            </li>
+            <li class="tab FL">
+                <div class="clearfix"><a class="tab-visualizations" href="javascript:;" title="{% trans 'APP-CHARTS-TEXT' %}">{% trans 'APP-CHARTS-TEXT' %}</a></div>
+            </li>    
+    		<li class="tab FL">
+                <div class="clearfix"><a class="tab-dashboards" href="javascript:;" title="{% trans 'APP-DASHBOARDS-TEXT' %}">{% trans 'APP-DASHBOARDS-TEXT' %}</a></div>
+            </li>  
+        </ul>
+        {% if preferences.account_domain %}
+        <div class="ODSButton absolute">
+            {%if is_private_site%}
+            <a href="http://{{ preferences.account_domain }}" title="{% trans 'ACCOUNT-OPENDATASITE-TAB-PRIVATE' %}" class="genericButton arrowButton"><span>{% trans "ACCOUNT-OPENDATASITE-TAB-PRIVATE" %}</span></a>
+            {%else%}
+            <a href="http://{{ preferences.account_domain }}" title="{% trans 'ACCOUNT-OPENDATASITE-TAB' %}" class="genericButton arrowButton"><span>{% trans "ACCOUNT-OPENDATASITE-TAB" %}</span></a>
+            {%endif%}
+        </div>
+        {% endif %}
+    </div>
+    <div class="liquidWidth">
+        <div class="liquidWidthInner clearfix">
+            <div id="datastream_datatable" class="columns clearfix">
+                {% datatable_filter categories 'datastream' 'enhance' '' choices auth_manager %}
+                <div class="CR grid">
+                    <div class="gridInner">
+                        <div class="sectionInfo clearfix">
+                            <div class="sectionInfoInner FL">
+                                <h2>{% trans "APP-DATASTREAMS-TEXT" %}</h2>
+                                {% datatable_mass auth_manager 'datastream' %}
+                            </div>
+                            {% datatable_search 'datastream' %}
+                        </div>
+                    </div>
+                    <div class="gridContainer">
+                        {% datatable paginated_datastream categories 'datastream' 'enhance' auth_manager %}
+                    </div>
+                        {% datatable_pagination paginated_datastream 'datastream' %}
+                </div>
+            </div>
+            <div id="visualization_datatable" class="columns clearfix">
+                {% datatable_filter categories 'visualization' 'enhance' '' choices auth_manager %}
+                <div class="CR grid">
+                    <div class="gridInner">
+                        <div class="sectionInfo clearfix">
+                            <div class="sectionInfoInner FL">
+                                <h2>{% trans "APP-VISUALIZATION-TEXT" %}</h2>
+                                {% datatable_mass auth_manager 'visualization' %}
+                            </div>
+                            {% datatable_search 'visualization' %}
+                        </div>
+                    </div>
+                    <div class="gridContainer">
+                        {% datatable paginated_visualization categories 'visualization' 'enhance' auth_manager %}
+                    </div>
+                        {% datatable_pagination paginated_visualization 'visualization' %}
+                </div>
+            </div>
+            <div id="dashboard_datatable" class="columns clearfix">
+                {% datatable_filter categories 'dashboard' 'enhance' '' choices auth_manager %}
+                <div class="CR grid">
+                    <div class="gridInner">
+                        <div class="sectionInfo clearfix">
+                            <div class="sectionInfoInner FL">
+                                <h2>{% trans "APP-DASHBOARD-TEXT" %}</h2>
+                                {% datatable_mass auth_manager 'dashboard' %}
+                            </div>
+                            {% datatable_search 'dashboard' %}
+                        </div>
+                    </div>
+                    <div class="gridContainer">
+                        {% datatable paginated_dashboard categories 'dashboard' 'enhance' auth_manager %}
+                    </div>
+                        {% datatable_pagination paginated_dashboard 'dashboard' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block popupsOverlay %}
+
+    {% overlay id_confirm_datastream_dialog %}
+        {% include "confirm_dialog.html" %}
+    {% endoverlay %}
+
+    {% overlay id_confirm_visualization_dialog %}
+        {% include "confirm_dialog.html" %}
+    {% endoverlay %}
+
+    {% overlay id_confirm_dashboard_dialog %}
+        {% include "confirm_dialog.html" %}
+    {% endoverlay %}
+
+	{% overlay id_create_dashboard_overlay %}
+		<div class="In clearfix">
+	        <h4>{% trans "APP-CREATEDASHBOARD-TEXT" %}</h4>
+	        {% createDashboard "" "" auth_manager %}
+	    </div>
+	{% endoverlay %}
+	
+	{% overlay id_create_datastream_overlay %}
+		<div class="In clearfix">
+	        <h4>{% trans "APP-CREATEDATASTREAM-TEXT" %}</h4>
+			 {% include "resource_manager/create_view.html" %}
+	    </div>
+	{% endoverlay %}
+	
+{% endblock  %}

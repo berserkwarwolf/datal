@@ -1,0 +1,833 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-REQUEST-ERROR"
+msgstr "There was a error proccessing your request, Please try again"
+
+msgid "APP-DELETECATEGORYCONFIRM-TEXT"
+msgstr "Are you sure you want to delete this category?"
+
+msgid "APP-DELETEUSERCONFIRM-TEXT"
+msgstr "Are you sure you want to delete this user?"
+
+msgid "APP-ENTERTITLE-TEXT"
+msgstr "Enter Title"
+
+msgid "CHRT-SELECTION-WARNING"
+msgstr "You must select data from the table before to continue."
+
+msgid "APP-SELECTRANGE-TEXT"
+msgstr "Select range..."
+
+msgid "CHRT-COMPLETE-WARNING"
+msgstr "You need to finish the creation process first."
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-VISUALIZATION"
+msgstr "Are you sure you want to delete this Visualization?"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR"
+msgstr "Are you sure you want to delete this Data View?"
+
+msgid "APP-TEXT-CONFIRM_UNPUBLISH_SINGULAR"
+msgstr "Are you sure you want to unpublish this Data View?"
+
+msgid "APP-SENDTOREVIEW-TEXT"
+msgstr "Send to review"
+
+msgid "APP-ACTIONS-EDIT"
+msgstr "Edit"
+
+msgid "APP-DELETE-TEXT"
+msgstr "Delete"
+
+msgid "APP-TEXT-DELETE_RESOURCE"
+msgstr "Delete this resource"
+
+msgid "APP-TEXT-CANCEL_MODAL"
+msgstr "Cancel"
+
+msgid "APP-TEXT-DELETE_REVISION"
+msgstr "Delete this revision"
+
+msgid "APP-TEXT-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-BY-TEXT"
+msgstr "by"
+
+msgid "DBMAN-GETGUID-TITLE"
+msgstr "This is the GUID for this Dashboard:"
+
+msgid "DSDET-GETGUID-TITLE"
+msgstr "This is the GUID for this Data View:"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Approve"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Reject"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publish"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-DRAFT-TEXT"
+msgstr "Draft"
+
+msgid "APP-PENDINGREVIEW-TEXT"
+msgstr "Pending Review"
+
+msgid "APP-APPROVED-TEXT"
+msgstr "Approved"
+
+msgid "APP-PUBLISHED-TEXT"
+msgstr "Published"
+
+msgid "APP-UNPUBLISH-TEXT"
+msgstr "Unpublish"
+
+msgid "APP-REJECTED-TEXT"
+msgstr "Rejected"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DASHBOARD"
+msgstr "Are you sure you want to unpublish this Dashboard?"
+
+msgid "DB-FAVDB-DEFAULTSEARCH"
+msgstr "Search for data views: Try ‘GDP’, ‘soccer’, ‘USA’, ‘Apple’, ‘Economy’"
+
+msgid "DB-FAVDB-SEARCHTIP"
+msgstr "Try ‘Sports’, ‘USA’ or users as ‘betogess’ or ‘birdman’"
+
+msgid "DBMAN-ADDDS-SUCCESS"
+msgstr "Data View added successfully!"
+
+msgid "APP-DROPHERE-TEXT"
+msgstr "Drop Here"
+
+msgid "APP-REMOVE-TEXT"
+msgstr "Remove"
+
+msgid "APP-MAXIMIZE-TEXT"
+msgstr "Maximize"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Reload"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Web collected data"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "User uploaded data"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Actions"
+
+msgid "DB-ACTIONSMENU-REUSESOURCE"
+msgstr "Publish a new Data View from the same source"
+
+msgid "APP-REUSESOURCE-TEXT"
+msgstr "Reuse Source"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Sources"
+
+msgid "DBMAN-DSPRIVATE-TITLE"
+msgstr "This Data View is private"
+
+msgid "DBMAN-DSPRIVATE-SUBTITLE"
+msgstr "You cannot view this Data View because it is private."
+
+msgid "DBMAN-DSPRIVATE-TIP"
+msgstr "Only the owner can view it."
+
+msgid "DS-STOP-TITLE"
+msgstr "Stop loading this Data View"
+
+msgid "DS-STOP-TEXT"
+msgstr "stop"
+
+msgid "APP-LASTUPDATE-TEXT"
+msgstr "Last update"
+
+msgid "DS-ENTERANEWVALUEFOR-TEXT"
+msgstr "enter a new value for"
+
+msgid "APP-AND-TEXT"
+msgstr "and"
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No data found"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Please"
+
+msgid "APP-TRYAGAIN-TITLE"
+msgstr "Try Again"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "try again"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DS-CANTLOADDATA-TEXT"
+msgstr "We couldn't load your data"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "Or go to the"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "source"
+
+msgid "DB-REMOVEDS-CONFIRM"
+msgstr "Are you sure you want to remove this Data View from your Dashboard?"
+
+msgid "DB-DSREMOVE-SUCCESS"
+msgstr "Data View removed successfully!"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DATASET"
+msgstr "Are you sure you want to delete this Dataset?"
+
+msgid "APP-ACTIONS-CREATE_VIEW"
+msgstr "Create Data View"
+
+msgid "APP-TITSUBDES-NOTEQUALS"
+msgstr "Title and description cannot be the same!"
+
+msgid "DS-VALIDINPUT-TEXT"
+msgstr "You must enter only letters and numbers"
+
+msgid "APP-ACTIONS-CREATE_VISUALIZATION"
+msgstr "Create Visualization"
+
+msgid "APP-TOP_VIEWED_DATA-TEXT"
+msgstr "Top viewed data"
+
+msgid "APP-USER_VIEWS"
+msgstr "User hits"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Next"
+
+msgid "APP-ACTIONS-REVIEW"
+msgstr "Review"
+
+msgid "APP-CHANGESELECTION-WARNING"
+msgstr "Warning! Changing the selection will delete all the advanced options created, are you sure?"
+
+msgid "APP-SETALIAS-TEXT"
+msgstr "Set Alias"
+
+msgid "COLLECT-LOADURL-ERROR"
+msgstr "We couldn't load the source. Maybe it is unavailable. Please try again later."
+
+msgid "OVREPAIR-TABLE-NOSELECTED"
+msgstr "You must select at least one table!"
+
+msgid "COLLECT-TWOTABLES-ERROR"
+msgstr "You can't select two tables at the same time"
+
+msgid "APP-SELECT-TEXT"
+msgstr "Select..."
+
+msgid "APP-MINUTESAGO-TEXT"
+msgstr "minutes ago"
+
+msgid "APP-ENTERNEWVALUE-TEXT"
+msgstr "enter a new value for"
+
+msgid "APP-PUBLISHDS-ERROR"
+msgstr "There was a error proccessing your request, Please try again"
+
+msgid "APP-REMOVETAG-TEXT"
+msgstr "Remove Tag"
+
+msgid "NO-MOTD"
+msgstr "At Junar, we are constantly working behind the scenes to provide you the best experience possible. We just completed a major update and hope you enjoy the added perks."
+
+msgid "VALIDATE-USERNAME"
+msgstr "The username already exist."
+
+msgid "VALIDATE-EMAIL"
+msgstr "The e-mail already exists."
+
+msgid "VALIDATE-DOMAIN"
+msgstr "This domain has already been taken."
+
+msgid "VALIDATE-ADMIN-URL"
+msgstr "This url has already been taken."
+
+msgid "ERROR-LOADING-DATASET"
+msgstr "Dataset could not be loaded. Please retry or contact <a href='mailto:support@junar.com'>mailto:support@junar.com</a>"
+
+msgid "WEBSERVICE-ORIGINALARG-TEXT"
+msgstr "Original name"
+
+msgid "APP-NAME-TEXT"
+msgstr "New Name"
+
+msgid "APP-VALUE-TEXT"
+msgstr "Value"
+
+msgid "NOTIF-REMOVED-TITLE"
+msgstr "Removed"
+
+msgid "NOTIF-REMOVED-DESC-1"
+msgstr "The category was successfully removed. The datasets and resources were moved to the default category."
+
+msgid "NOTIF-SAVED-TITLE"
+msgstr "Saved"
+
+msgid "NOTIF-SAVED-DESC-1"
+msgstr "The Dataset was successfully saved. Now, you can send it to review."
+
+msgid "NOTIF-SAVED-DESC-2"
+msgstr "The Dataset was successfully saved. Now, you can create a Data View from it."
+
+msgid "NOTIF-SAVED-DESC-3"
+msgstr "The Data View was successfully saved. Now, you can add it to Dashboards."
+
+msgid "NOTIF-SAVED-DESC-4"
+msgstr "The Dashboard was successfully saved. Now, you can publish it in order to deliver changes to your Open Data site."
+
+msgid "NOTIF-SAVED-DESC-4-PRIVATE"
+msgstr "The Dashboard was successfully saved. Now, you can publish it in order to deliver changes to your Private Data site."
+
+msgid "NOTIF-REMEMBER-TITLE"
+msgstr "Remember"
+
+msgid "NOTIF-REMEMBER-DESC-1"
+msgstr "This Dataset is now available for editors to create Data Views from it."
+
+msgid "NOTIF-REMEMBER-DESC-2"
+msgstr "You can publish or approve this Dataset in order to deliver changes to your Open Data site."
+
+msgid "NOTIF-REMEMBER-DESC-2-PRIVATE"
+msgstr "You can publish or approve this Dataset in order to deliver changes to your Private Data site."
+
+msgid "NOTIF-REMEMBER-DESC-3"
+msgstr "In order to deliver changes to the Open Data site, you must send this Data View to review."
+
+msgid "NOTIF-REMEMBER-DESC-3-PRIVATE"
+msgstr "In order to deliver changes to the Private Data site, you must send this Data View to review."
+
+msgid "NOTIF-REMEMBER-DESC-4"
+msgstr "You can publish or approve this Data View in order to deliver changes to your Open Data site."
+
+msgid "NOTIF-REMEMBER-DESC-4-PRIVATE"
+msgstr "You can publish or approve this Data View in order to deliver changes to your Private Data site."
+
+msgid "NOTIF-APPROVED-TITLE"
+msgstr "Approved"
+
+msgid "NOTIF-APPROVED-DESC-1"
+msgstr "The Dashboard was successfully approved. Now, you can publish it in order to deliver changes to your Open Data site."
+
+msgid "NOTIF-APPROVED-DESC-1-PRIVATE"
+msgstr "The Dashboard was successfully approved. Now, you can publish it in order to deliver changes to your Private Data site."
+
+msgid "NOTIF-PUBLISHED-TITLE"
+msgstr "Published"
+
+msgid "NOTIF-PUBLISHED-DESC-1"
+msgstr "The Dashboard was successfully published. Now, you can featured it in order to show it in your Open Data site."
+
+msgid "NOTIF-PUBLISHED-DESC-1-PRIVATE"
+msgstr "The Dashboard was successfully published. Now, you can featured it in order to show it in your Private Data site."
+
+msgid "NOTIF-WARNING"
+msgstr "Warning"
+
+msgid "CATEGORY-DELETE-CONFIRMATION"
+msgstr "You are going to delete the category, all the resources will be moved to the default category, are you sure?"
+
+msgid "CATEGORY-ADD-TRANSPARENCY"
+msgstr "You are going to add the following transparency categories, are you sure?"
+
+msgid "CATEGORY-DELETE-INFO"
+msgstr "resource/s has been moved to default category"
+
+msgid "ADMIN-HOME-DESCRIPTION-NOTHEME"
+msgstr "By selecting this option, your Open Data site will not have a home page, and the landing page will be your Featured Dashboards. <br/> Configure Featured Dashboards <a href='/review/action_query' target='_blank'>here</a>."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME0"
+msgstr "The <em>Classic</em> theme provides a two column layout that includes several text sections, a resources slider, and a resources list."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME1"
+msgstr "The <em>Minimal</em> theme provides a single column layout with a main text section and a resources list."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME2"
+msgstr "The <em>Resources</em> theme provides a single column layout with two text sections, a resources slider and a resources list."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME3"
+msgstr "The <em>Carrousel</em> theme provides a single column layout with an images carrousel, a main text section, and a resources list."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME4"
+msgstr "The <em>Cover</em> theme provides a two column layout with a full width featured image at the top, a main text section, a resources slider, quick links section and a resources list."
+
+
+msgid "ADMIN-HOME-SECTION-MAINTITLE"
+msgstr "Main section"
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION"
+msgstr "This content is displayed on the left side of the slider."
+
+msgid "ADMIN-HOME-SECTION-MAINTITLELABEL"
+msgstr "Main title:"
+
+msgid "ADMIN-HOME-SECTION-MAINTEXTLABEL"
+msgstr "Main text:"
+
+msgid "ADMIN-HOME-SECTION-SIDEBARTITLE"
+msgstr "Sidebar section"
+
+msgid "ADMIN-HOME-SECTION-SIDEBARDESCRIPTION"
+msgstr "This content is displayed below the resources slider."
+
+msgid "ADMIN-HOME-SECTION-RESOURCETITLE"
+msgstr "Resources Slider section"
+
+msgid "ADMIN-HOME-SECTION-RESOURCEDESCRIPTION"
+msgstr "Start typing the the name of the resources that will be included in the slider, and select them from the list."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMTITLE"
+msgstr "Left Bottom section"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMDESCRIPTION"
+msgstr "This content is displayed on the left side after the resources list."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMTITLE"
+msgstr "Right Bottom section"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMDESCRIPTION"
+msgstr "This content is displayed on the right side after the resources list."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-1"
+msgstr "This content is displayed above the resources table."
+
+msgid "ADMIN-HOME-SECTION-MIDDLETITLE"
+msgstr "Middle section"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEDESCRIPTION"
+msgstr "This content is displayed between the resources slider and the resources table."
+
+msgid "ADMIN-HOME-SECTION-CARROUSELTITLE"
+msgstr "Images carrousel section"
+
+msgid "ADMIN-HOME-SECTION-CARROUSELDESCRIPTION"
+msgstr "Add images slides with optional links to them, and finally drag and drop the slides to arrange their order. <br/> This content is displayed above the main section. Max file size: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-2"
+msgstr "This content is displayed between the featured images carrousel and the resources table."
+
+msgid "ADMIN-HOME-SECTION-COVERTITLE"
+msgstr "Cover section"
+
+msgid "ADMIN-HOME-SECTION-COVERDESCRIPTION"
+msgstr "This content is displayed above the main section and resouces slider. The image will cover the full width of the screen.</br> Max file size: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-3"
+msgstr "This content is displayed between the cover section and the resources table."
+
+msgid "ADMIN-HOME-SECTION-QUICKLINKSTITLE"
+msgstr "Quick Links section"
+
+msgid "ADMIN-HOME-SECTION-QUICKLINKSDESCRIPTION"
+msgstr "Start typing the the name of the resources that will be included in the Quick Links section, and select them from the list."
+
+msgid "ADMIN-HOME-SECTION-NEWSLIDE"
+msgstr "Add new slide"
+
+msgid "ADMIN-HOME-SECTION-THEME3-TIP"
+msgstr "<span>Important!</span> Image sizes must be 940 x 300 px, otherwise could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-DELETESLIDE"
+msgstr "Delete"
+
+msgid "ADMIN-HOME-SECTION-LINKTEXT"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-THEME4-TIP"
+msgstr "<span>Important!</span> Image size must be 1920 x 300 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-LINKPLACEHOLDER"
+msgstr "Enter link of the image (optional)"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDLABEL"
+msgstr "Featured image:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMETITLELABEL"
+msgstr "Welcome title:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONTEXT"
+msgstr "Browse image..."
+
+msgid "ADMIN-HOME-SECTION-SUCCESS-TITLE"
+msgstr "Home Page saved"
+
+msgid "ADMIN-HOME-SECTION-SUCCESS-TEXT"
+msgstr "Your changes can now be seen on your Open Data site."
+
+msgid "ADMIN-HOME-SECTION-ERROR-TITLE"
+msgstr "An error occurred"
+
+msgid "ADMIN-HOME-SECTION-ERROR-TEXT"
+msgstr "We couldn't save your changes.</br>Please try again later."
+
+msgid "ADMIN-HOME-SECTION-NOTVALIDURL-TITLE"
+msgstr "Validation error"
+
+msgid "ADMIN-HOME-SECTION-NOTVALIDURL-TEXT"
+msgstr "Image Links are not a valid URL.</br>Please check and try again."
+
+msgid "ADMIN-HOME-SECTION-MAXSIZE-TEXT"
+msgstr "Each file size cannot exceed 5MB."
+
+msgid "ADMIN-HOME-SECTION-TIMEOUTERROR-TEXT"
+msgstr "The time expected for this operation has been exceeded.</br>Please try again later."
+
+
+
+
+
+# NEW WORKSPACE KEYS -----------------------------------------
+
+msgid "VALIDATE-REQUIRED-TEXT"
+msgstr "Enter your username or email address in the field to continue."
+
+msgid "VALIDATE-USERNAME-REQUIRED-TEXT"
+msgstr "Enter your username."
+
+msgid "VALIDATE-PASSWORD-REQUIRED-TEXT"
+msgstr "Enter your password."
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "This field is required."
+
+msgid "VALIDATE-MAXLENGTH-TEXT-1"
+msgstr "This field must be at most "
+
+msgid "VALIDATE-MAXLENGTH-TEXT-2"
+msgstr " characters."
+
+msgid "VALIDATE-PASSWORDMATCH-TEXT"
+msgstr "Passwords don't match."
+
+msgid "VALIDATE-EMAILNOTVALID-TEXT"
+msgstr "Enter a valid e-mail adress."
+
+msgid "SIGNUP-ERRORS-MESSAGE"
+msgstr "Correct the errors in the fields below to continue."
+
+msgid "VALIDATE-URLNOTVALID-TEXT"
+msgstr "Enter a valid URL."
+
+msgid "VIEWDS-FLEXIGRID-ERRORMSG"
+msgstr "Connection Error"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-1"
+msgstr "Displaying"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-2"
+msgstr "to"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-3"
+msgstr "of"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-4"
+msgstr "rows"
+
+msgid "VIEWDS-FLEXIGRID-PAGETEXT"
+msgstr "Page"
+
+msgid "VIEWDS-FLEXIGRID-OUTOF"
+msgstr "of"
+
+msgid "VIEWDS-FLEXIGRID-FINDTEXT"
+msgstr "Find"
+
+msgid "VIEWDS-FLEXIGRID-PROCMSG"
+msgstr "Loading, please wait..."
+
+msgid "VIEWDS-FLEXIGRID-NOMSG"
+msgstr "No rows"
+
+msgid "APP-INEXISTENT-DOMAIN-TITLE"
+msgstr "Domain not configured"
+
+msgid "APP-INEXISTENT-DOMAIN"
+msgstr "The account does not have a domain configured. Please contact your account administrator."
+
+msgid "APP-INEXISTENT-DOMAIN-ADMIN-1"
+msgstr "The account doesn't have a domain configured. "
+
+msgid "APP-INEXISTENT-DOMAIN-ADMIN-2"
+msgstr "Configure it here"
+
+msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
+msgstr "Delete Dataset "
+
+msgid "APP-DELETE-DATASET-ACTION-TEXT"
+msgstr "The dataset and the associated resources have been deleted."
+
+msgid "APP-DELETE-DATASET-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the dataset and the associated resources."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-TEXT"
+msgstr "The dataset revision have been deleted."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
+msgstr "Error on deleteing the dataset revision."
+
+msgid "APP-GRID-CELL-TITLE"
+msgstr "TITLE"
+
+msgid "APP-GRID-CELL-DATASET-NAME"
+msgstr "DATASET"
+
+msgid "APP-GRID-CELL-STATUS"
+msgstr "STATUS"
+
+msgid "APP-GRID-CELL-CATEGORY"
+msgstr "CATEGORY"
+
+msgid "APP-GRID-CELL-TYPE"
+msgstr "TYPE"
+
+msgid "APP-GRID-CELL-AUTHOR"
+msgstr "AUTHOR"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
+msgstr "Delete Data View"
+
+msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
+msgstr "The datastream and the associated resources have been deleted."
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
+msgstr "The datastream revision have been deleted."
+
+msgid "APP-ERROR-TEXT"
+msgstr "Error"
+
+msgid "APP-CHANGES-SAVED-TEXT"
+msgstr "Changes saved"
+
+msgid "APP-NOT-API-DOMAIN-TEXT"
+msgstr "Must not start with &quot;api.&quot;"
+
+msgid "APP-NO-RESOURCES-ALERT-TEXT"
+msgstr "Sorry, no resources matched your filters selection. Please try other combinations."
+
+msgid "APP-FILTER-TEXT"
+msgstr "Filter"
+
+msgid "APP-VALIDATE-FILE-TYPE-TEXT"
+msgstr "Invalid file type, please select one of the following supported types: CSV, DOC, DOCX, KML, KMZ, TSV, TXT, XLS, XLSX, XML."
+
+msgid "APP-NO-RESOURCES-FOUND-TEXT"
+msgstr "Sorry, no resources matched your search criteria. Please, try with other criterias."
+
+msgid "ERROR-TRY-ANOTHER-DATASET"
+msgstr "Dataset could not be checked. Please retry or contact <a href='mailto:support@junar.com'>mailto:support@junar.com</a>"
+
+msgid "APP-SETTINGS-SAVE-OK-TITLE"
+msgstr "Success"
+
+msgid "APP-SETTINGS-SAVE-ERROR-TEXT"
+msgstr "There was an error trying to save your changes. Please, try again later or contact us."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME5"
+msgstr "This is a personalized theme designed by the City of Palo Alto to fit their personal goals for their home page. Need a custom theme? Ask for your own <a href='mailto:support@junar.com' title='support@junar.com'>here</a>."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME6"
+msgstr "This is a personalized theme designed by the City of Jackson to fit their personal goals for their home page. Need a custom theme? Ask for your own <a href='mailto:support@junar.com' title='support@junar.com'>here</a>."
+
+msgid "ADMIN-HOME-SECTION-SLIDER-TITLE"
+msgstr "Featured slider section"
+
+msgid "ADMIN-HOME-SECTION-SLIDERTHEME6-DESCRIPTION"
+msgstr "Add images slides with optional links to them, and finally drag and drop the slides to arrange their order. <br/> This content is displayed above the search box. Max file size: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-THEME6-TIP"
+msgstr "<span>Important!</span> Image sizes must be 960 x 320 px, otherwise could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-SEARCHBOX-TITLE"
+msgstr "Search box"
+
+msgid "ADMIN-HOME-SECTION-HINT-TEXT"
+msgstr "Text for the hint"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION-TITLE"
+msgstr "Navigation buttons"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION-DESCRIPTION"
+msgstr "Add icons for navigation. Add links and descriptions for the icons. Max file size: 5MB."
+
+msgid "APP-DESCRIPTION2-LABEL"
+msgstr "Description:"
+
+msgid "APP-DESCRIPTION2-TEXT"
+msgstr "Enter a description (optional)"
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBTITLE"
+msgstr "Breadcrumb section"
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBDESCRIPTION"
+msgstr "Paste here HTML for the breadcrumb. Use &lt;ul&gt;, &lt;li&gt; and &lt;a&gt; tags."
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBHTML"
+msgstr "HTML:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMETITLE"
+msgstr "Welcome section"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEDESCRIPTION"
+msgstr "This content is displayed on the left of featured project section, between breadcrumb and buttons sections. <br> Max file size: 5MB."
+
+msgid "ADMIN-HOME-SECTION-WELCOMELABEL"
+msgstr "Welcome image:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-WELCOMETIP"
+msgstr "<span>Important!</span> Image size must be 544 x 340 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-WELCOMEFIRSTTITLELABEL"
+msgstr "First title:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMESECONDTITLELABEL"
+msgstr "Second title:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPTITLELABEL"
+msgstr "Popup title:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPTEXTLABEL"
+msgstr "Popup text:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPFOOTERLABEL"
+msgstr "Popup footer:"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDTITLE"
+msgstr "Featured project section"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDDESCRIPTION"
+msgstr "This content is displayed on the right of welcome section, between breadcrumb and buttons sections. <br> Max file size: 5MB."
+
+msgid "ADMIN-HOME-SECTION-THEME5-FEATUREDTIP"
+msgstr "<span>Important!</span> Image size must be 356 x 340 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-FEATUREDFIRSTLABEL"
+msgstr "Title:"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDLINKLABEL"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSTITLE"
+msgstr "Buttons section"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSDESCRIPTION"
+msgstr "Add button links, configure its text, link, background color, and finally drag and drop them to arrange their order. <br/> This content is displayed in the middle of the theme."
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-TEXT-LABEL"
+msgstr "Text:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-TEXT-PLACEHOLDER"
+msgstr "Enter text"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-LINK-LABEL"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-LINK-PLACEHOLDER"
+msgstr "Enter link"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-BACKGROUND-LABEL"
+msgstr "Background:"
+
+msgid "ADMIN-HOME-SECTION-NEWBUTTON"
+msgstr "Add new button"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSPERROW"
+msgstr "Buttons per row:"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXTITLE"
+msgstr "Left bottom box section"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXDESCRIPTION"
+msgstr "This content is displayed on the left, below the buttons section. <br/> Max file size: 5MB."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXLABEL"
+msgstr "Image:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-LEFTBOTTOMBOXTIP"
+msgstr "<span>Important!</span> Image size must be 293 x 95 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXFIRSTLABEL"
+msgstr "Title:"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXLINKLABEL"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXTITLE"
+msgstr "Middle bottom box section"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXDESCRIPTION"
+msgstr "This content is displayed on the middle, below the buttons section. <br/> Max file size: 5MB."
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXLABEL"
+msgstr "Image:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-MIDDLEBOTTOMBOXTIP"
+msgstr "<span>Important!</span> Image size must be 293 x 95 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXFIRSTLABEL"
+msgstr "Title:"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXLINKLABEL"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXTITLE"
+msgstr "Right bottom box section"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXDESCRIPTION"
+msgstr "This content is displayed on the right, below the buttons section. <br/> Max file size: 5MB."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXLABEL"
+msgstr "Image:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-RIGHTBOTTOMBOXTIP"
+msgstr "<span>Important!</span> Image size must be 293 x 95 px, otherwise the image could appear distorted."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXFIRSTLABEL"
+msgstr "Title:"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXLINKLABEL"
+msgstr "Link:"
+
+msgid "ADMIN-HOME-SECTION-LINKSTITLE"
+msgstr "Links section"
+
+msgid "ADMIN-HOME-SECTION-LINKSDESCRIPTION"
+msgstr "Add links by configuring its text and link, and finally drag and drop them to arrange their order. <br/> This content is displayed below the bottom boxes."
+
+msgid "ADMIN-HOME-SECTION-NEWLINK"
+msgstr "Add new link"
+
+msgid "ADMIN-HOME-SECTION-DELETE"
+msgstr "Delete"
+
+msgid "VALIDATE-SAME-PASS-TEXT"
+msgstr "Please enter the same value again"

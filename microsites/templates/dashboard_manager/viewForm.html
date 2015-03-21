@@ -1,0 +1,109 @@
+{% extends "base_microsites.html" %}
+{% load i18n components extra_tags %}
+
+{% block SEO %}
+    <title>{{dashboard.title}} &middot; {{preferences.account_page_titles}}</title>
+    <meta name="description" content="{{dashboard.description}}">
+    <link rel="canonical" href="{{base_uri}}{{dashboard.permalink}}" />
+{% endblock %}
+
+{% block meta %}
+    {%if not dashboard_dataservices %}
+        <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    {%endif%}
+    <!-- BLOCK PAGE TITLE -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- DATA STREAM BOX -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- DATA STREAM FORM -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- LIQUID WIDTH -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/liquidWidth.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- PRIVATE -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/private.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- TAGS CONTAINER -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- COMPONENT -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/dashboardManager.css?id={{settings.VERSION_JS_CSS}}"/>
+    {% if can_share %}
+    <!-- PRIVATE -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/privateBox.css?id={{settings.VERSION_JS_CSS}}"/>
+    {% endif %}
+    <!-- BRANDED -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- DASHBOARD FIX-->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/dashboardfix.css?id={{settings.VERSION_JS_CSS}}"/>
+ 
+    {% if preferences.account_enable_sharing %}
+        <script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&amp;login=junar&amp;apiKey=R_4da011b2ee9f2ee2cf80ed8122b73391"></script>
+        <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+        <script type="text/javascript" src="http://platform.linkedin.com/in.js"></script>
+        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+        <script type="text/javascript">stLight.options({publisher: "b6aba428-3562-4003-b6a8-018086ce7af4", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+        <script type="text/javascript" src="/js_microsites/modules/share.js?id={{settings.VERSION_JS_CSS}}"></script>
+    {% endif %}
+
+    <script type="text/javascript" src="/js_core/base_modules/embed_code/embedCode.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/data_table/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/chart_manager/junarCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/chart_manager/chartDashboard.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_microsites/dashboard_manager/dashboardModules.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_microsites/dashboard_manager/viewForm.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/dashboard_tab_manager/dashboardTabManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/endPoint.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_microsites/modules/notes.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript"
+          src="http://maps.googleapis.com/maps/api/js?sensor=false">
+        </script>
+    <script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+    {% if can_share %}
+    <script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/private.js?id={{settings.VERSION_JS_CSS}}"></script>
+    {% endif %}
+
+    <script type="text/javascript">
+    	var fDashboardIdSelected = "{{dashboard.dashboard_id}}";
+        google.load('visualization', '1', {
+            packages: ['corechart', 'geomap']
+        });
+        var canShare = {{can_share|lower}};
+    </script>
+{% endblock %}
+
+{% if preferences.account_enable_sharing %}
+    {% block facebook %}
+        <meta property="og:title" content="{{dashboard.title}} &middot; {{preferences.account_page_titles}}" />
+        <meta property="og:description" content="{{dashboard.description}}" />
+        <meta property="og:image" content="{{preferences.account_logo}}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="{{preferences.account_name}}" />
+    {% endblock %}
+{% endif %}
+
+{% block content %}
+    <div id="id_switch_dashboard_container" class="ao-tabs clearfix">
+        {% include "dashboard_manager/switchDashboardPanel.html" %}
+    </div>
+    <!-- 
+    active categories {{ categoriesWithSidebar }}
+    actual dash category {{ dashboard.category_id }}
+    show dashboards {{ showDashboards }} 
+    dashes {{ relatedDashboards }}
+    -->
+    <div id="id_edit_dashboard_dataservices_container" class="branded{% if showDashboards %} hasSidebar{% endif %}">
+        <div id="id_dashboard_container" class="dashboardContainer">
+            {% include "dashboard_manager/dashboardViewPanel.html" %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block popupsOverlay %}
+    <!-- DASHBOARD COMMON OVERLAYS -->
+    {% include "dashboard_manager/dashboardCommonOverlays.html" %}
+{% endblock %}

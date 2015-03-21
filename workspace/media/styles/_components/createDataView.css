@@ -1,0 +1,238 @@
+/*DOUBTS TIP*/
+.doubts{margin-top:15px;margin-bottom:10px;position:relative;display:block;}
+button.genericButton.normalButton{height:22px !important;padding-bottom:3px;}
+button.genericButton.normalButton span{line-height:19px;}
+.doubts .ic_Skype{width:16px;height:16px;display:block;position:absolute;top:1px;left:6px;}
+.doubts p,
+.doubts .p{font-size:12px;padding:0;margin:0;display:block;}
+.step3 .doubts,
+.step4 .doubts{margin-top:25px;}
+.step3 .doubts .p,
+.step4 .doubts .p{padding-top:2px;}
+.step1 .doubts p strong{color:#333;}
+.moreSeparation .doubts{margin-top:0;padding:0;padding-left:30px;}
+/*NEW CREATION - STEP STYLES*/
+
+/* STEP 1 */
+.step1 .contentForm{overflow:auto;overflow-x:auto;overflow-y:hidden;}
+
+/*STEP 2*/
+.step2 .columns{padding-top:0;background:none;}
+.step2 .toolbar .Icon{width:auto;line-height:16px;}
+.step2 .toolbar .ic_Skype{width:16px;}
+.step2 .advancedBox .boxPanel p{margin-bottom:10px;}
+
+	/*EXPANDED*/
+	.step2 .expandedContainer{padding-left:320px;}
+	.step2 .expandedContainer .expandedInner{width:100%;}
+	.step2 .expandedContainer .columns{width:100%;float:left;margin:0 0 0 -320px;padding:0;}
+	.step2 .expandedContainer .columns .CL{float:right;width:100%;margin:0 -320px 0 0;padding:0;}
+	.step2 .expandedContainer .columns .CL .dataTable{padding:0 0 0 20px;}
+	.step2 .expandedContainer .columns .CR{float:left;overflow:auto;overflow-x:hidden;overflow-y:auto;width:320px;position:relative;padding:0;}
+	.step2 .expandedContainer .columns .CR .columnContent{float:none;padding:23px 20px 0 20px;width:auto;margin:0;}
+
+    /*SCROLLBAR FIX*/
+    .step2 .dataTable .dataTableInner{overflow:auto;}
+    .step2 .collapsedBar.fixedBar{-moz-box-shadow:0 0 0 0 transparent !important;-webkit-box-shadow:0 0 0 0 transparent !important;box-shadow:0 0 0 0 transparent !important;}
+
+	/*LEFT COLUMN*/
+	.step2 .columns .CL .toolbar{padding-top:15px;background:url(../../images/common/sb_CL620.png) no-repeat center 0;}
+	.step2 .columns .CL .toolbar strong{margin-right:7px;}
+	.step2 .columns .CL .toolbar a{font-size:11px;}
+	
+	/*RIGHT COLUMN*/
+	.step2 .columns .CR{margin-top:0;background-position:right 0;}
+	.step2 .columns .CR .cv{left:auto;right:0;}
+	.step2 .columns .CR .tl{display:none;}
+	.step2 .boxCR .boxTitle h4{background:url(../../images/common/ic_flechaDesplegable.gif) no-repeat 286px -21px;}
+	.step2 .boxCR .boxTitle h4.collapsed{background-position:286px 17px;}
+	
+		/*WARNING TOOLTIP*/
+		.CR .warning{position:relative;top:-10px;left:auto;right:auto;bottom:auto;font-size:14px;height:auto;-moz-border-radius:2px;-webkit-border-radius:2px;-border-radius:2px;margin-bottom:12px;z-index:1;}
+		.CR .warning{font-size:11px;padding:5px 0;line-height:normal;background-position:12px 11px;} 
+		.CR .warning div{padding-right:10px;}
+	
+		/*ACTIONS BOX*/
+		.step2 .actionsBox li{padding:10px 0 6px;background:url(../../images/common/bd_helpBoxSeparator.gif) no-repeat center top;color:#333;}
+		.step2 .actionsBox li:first-child{background:none;padding-top:5px;}
+		.step2 .actionsBox .padding{padding-left:22px;}
+		.step2 .actionsBox li dt{padding-bottom:6px;}
+		.step2 .actionsBox li dd{margin:0 0 0 22px;font-size:11px;color:#333;border-top:1px dashed #ccc;padding:8px 0 6px;position:relative;top:2px;}
+		.step2 .actionsBox li dd .IcArrow{background-position:0 6px;}
+		.step2 .actionsBox li dd a{margin-right:3px;}
+		.step2 .actionsBox li .editButton{width:auto;vertical-align:baseline;float:left;position:relative;padding-left:13px;height:20px;line-height:17px;top:0;}
+		.step2 .actionsBox li .editButton .sep{padding:0 4px;vertical-align:baseline;top:0;position:absolute;left:0;}
+		.step2 .actionsBox li .editButton .editText{position:relative;top:1px;}
+		.step2 .actionsBox li dd a.ic_RemoveItem{margin:0;position:relative;top:-1px;}
+		
+		/*HELP & TIPS*/
+		/*.step2 .helpAndTipsBox .boxInner .boxTxt p{float:left;width:190px;}*/
+		.step2 .helpAndTipsBox .boxInner .boxTxt img{float:right;width:51px;margin-top:10px;}
+		.step2 .helpAndTipsBox .boxInner p.moreSeparation.disclamerText{padding:0 0 0 10px;font-size:11px;background:url(../../images/homeManager/ic_VM.png) no-repeat 0 5px;margin-top:10px;}
+		.step2 .helpAndTipsBox .divisor{border-top:1px solid #e4e4e4;padding-top:10px;margin-top:10px;}
+		
+		/*ADVANCED BOX*/
+		.step2 .advancedBox .boxPanel{}
+		.step2 .advancedBox li span{display:none;}
+		.step2 .advancedBox li.ao-disabled-item a{display:none;}
+		.step2 .advancedBox li.ao-disabled-item span{display:block;color:#ddd;}
+		.step2 .advancedBox li a:hover{text-decoration:none;}
+		.step2 .advancedBox li a strong{font-weight:normal;}
+		.step2 .advancedBox li a:hover strong{text-decoration:underline;}
+		.step2 .advancedBox li a em{color:#ccc;}
+		.step2 .advancedBox h5{font-size:12px;color:#333;font-weight:bold;padding:10px 0 6px;background:url(../../images/common/bd_helpBoxSeparator.gif) no-repeat center bottom;margin-bottom:10px;}
+		.step2 .advancedBox .ic_Arrow{position:relative;top:-1px;}
+		.step2 .advancedBox .bulletList p .ic_Filter{display:inline-block;width:16px;position:relative;top:7px;}
+		.step2 .advancedBox .fieldMAVG{width:60px;padding:2px;font-size:11px;}
+		.step2 .advancedBox .buttons a{margin:0 5px;}
+		.step2 #id_addFunctionsBox .buttons{padding-top:10px;}
+	
+		/*SLIDER*/
+		.step2 .helpAndTipsBox .panels{margin-top:25px;/*width:280px;*/overflow:hidden;padding-left:0;padding-right:0;padding-top:7px;}
+		.step2 .helpAndTipsBox .panels .panel{/*width:260px;*/height:110px;float:left;overflow:hidden;padding-left:10px;padding-right:10px;}
+		.step2 .helpAndTipsBox .arrowButtons{text-align:center;}
+		.step2 .helpAndTipsBox .arrowButtons li{display:inline;font-size:11px;}
+		.step2 .helpAndTipsBox .arrowButtons .sep{color:#ccc;} 
+		.step2 .helpAndTipsBox .arrowButtons a{font-size:11px;padding:0 7px;background:url(../../images/common/ic_next-prev.gif) no-repeat;}
+		.step2 .helpAndTipsBox .arrowButtons .next{background-position:right -1px;padding-right:14px;}
+		.step2 .helpAndTipsBox .arrowButtons .prev{background-position:0 -16px;padding-left:14px;}
+
+	/*OVERLAY*/
+	.step2 .ao-popup-overlay{width:450px;margin:20px auto 0;}
+	.step2 .ao-popup-overlay p{color:#4d4d4d;font-size:14px;line-height:21px;padding-bottom:0px;padding-top:20px;}
+	.step2 .ao-popup-overlay p span{display:block;width:352px;}
+	.step2 .ao-popup-overlay p img{display:block;}
+	.step2 .ao-popup-overlay p img.tableHelp{margin-top:-7px;}
+	.step2 .ao-popup-overlay p img.tableError{margin-top:15px;margin-left:3px;}
+	.step2 .ao-popup-overlay .buttons{margin:0 auto;width:80px;}
+	.step2 .ao-popup-overlay .buttons a{margin:30px 0 0;}
+	.step2 .ao-popup-overlay .In{position:relative;}
+	
+	/*PICKER*/
+	.ui-selectable-helper{position:absolute;z-index:100002;border:1px dotted #F19030;padding:1px;}
+	.ui-selectable-helper div{background:#F19030;opacity:0.2;filter:alpha(opacity=20);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";width:100%;height:100%;}
+	
+/*STEP 3*/
+/* modules/dataStreamForm.css */
+.step3 fieldset.form{padding-bottom:25px;}
+
+/*STEP 4*/
+.step4 .dataStreamContainer{padding:0;}
+.step4 .dataStreamBox h2{display:block;background:#fff url(../../images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;color:#4d4d4d;overflow:hidden;}
+.step4 .dataStreamBox.errorFix h2{background:#fff url(../../images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom;}
+.step4 .gotosource{display:none;}
+.step4 .dataStreamBox h2 a:hover{text-decoration:none;cursor:default;}
+.step4 .tagsPreview h5{color:#ef7f10;padding:15px 0 6px;font-size:14px;font-weight:normal;}}
+.step4 .tagsPreview p a{cursor:pointer;}
+.step4 .tagsPreview .tagsContent{padding:0 10px;}
+.step4 .tagsPreview .tagInner{height:20px;}
+.step4 .tagsPreview .tagsContent a{display:none;}
+.step4 .tag .tagTxt{border-right:1px solid #E2E0E0;-moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px;}
+.step4 .dataStreamBox{height:192px;}
+.step4 .dataStreamBox h2 .txt .infoDS .dateDS{display:none;}
+.step4 p.tip{padding-top:15px;padding-bottom:0;}
+.step4 .buttons{margin-top:20px;border-top:1px solid #E2E0E0;padding:15px 0 !important;}
+.step4 .collapsedBar .navigationControl{padding-top:5px;}
+
+/*STEP 5 - Last step*/
+.step5 .blockPageTitle .fixedWidth940 .tagsContainer{width:360px;}
+.step5 .dsInfoBox .boxCR.moreActionsBox .boxTitle h4{background:none;}
+.step5 .moreActionsBox ul li{background:url(../../images/homeManager/ic_VM.png) no-repeat 0 6px;padding:0 0 12px 13px;font-size:14px;line-height:17px;}
+.step5 .dsInfoBox .columnContent{background:none;}
+
+	/*DATA STREAM BOX*/
+	.step5 .dataStreamBox{width:618px;margin:0;border:1px solid #e2e0e0;border-bottom:0;position:static;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;overflow:auto;}
+	.step5 .dataStreamBox .Mensaje{width:618px;height:auto;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;overflow:visible;-moz-border-radius:1px 1px 0 0;-webkit-border-radius:1px 1px 0 0;border-radius:1px 1px 0 0;}
+	.step5 .dataStreamBox .Mensaje table{border:0;}
+	.step5 .dataStreamBox .Mensaje .Tabla{height:auto;float:left;}
+	.step5 .dataStreamBox .Mensaje .Texto td,
+	.step5 .dataStreamBox .Mensaje .Numero td,
+	.step5 .dataStreamBox .Mensaje .Nulo td{padding:17px 10px;}
+	.step5 .dataStreamBox .Loading{border:1px solid #e2e0e0;}
+	.step5 .dataStreamBox:hover .Mensaje{overflow:visible;}
+
+		/*HEIGHT*/
+		.step5 .dataStreamBox,
+		.step5 .dataStreamBox .Mensaje .Texto,
+		.step5 .dataStreamBox .Mensaje .Numero,
+		.step5 .dataStreamBox .Mensaje .Nulo,
+		.step5 .dataStreamContainer .Loading td,
+		.step5 .dataStreamContainer .Loading td a{height:177px;}
+		.step5 .dataStreamContainer .Loading td a{line-height:225px;}
+		.step5 .dataStreamBox .Mensaje{min-height:177px;}
+		
+		/*EXPANDED BOX*/
+		.step5 .expandedBox{height:auto;overflow:visible;overflow-x:auto;overflow-y:hidden;}
+		.step5 .expandedBox:hover{overflow:visible;overflow-x:auto;overflow-y:hidden;}
+		
+		/*DS ERROR BOX*/
+		.step5 .dsErrorBox{overflow:hidden;border-bottom:1px solid #E2E0E0;-webkit-border-radius:0 0 5px 5px;-moz-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;}
+		.step5 .dsErrorBox,
+		.step5 .dsErrorBox .Mensaje .Nulo{height:202px;}
+		
+		
+/*LOADING*/
+.bigLoader,
+.step4 .bigLoader{width:100%;}
+.bigLoader td,
+.step4 .bigLoader td{background:url(../../images/common/im_loadingWhite72.gif) no-repeat center center;}
+.step4 .button{margin-right:10px;}
+.step4 .tableContent{margin-bottom:15px;}
+
+/*------------ NEW STYLES*/
+.step4 .dataStreamBox h2 .txt .titleDS{height:22px;}
+.step4 .dataStreamBox h2{height:46px;}
+.step4 .dataStreamBox .dataStreamResult,
+.step4 .dataStreamBox .Mensaje{height:135px}
+.step4 .dataStreamBox .Mensaje .Texto,
+.step4 .dataStreamBox .Mensaje .Numero, 
+.step4 .dataStreamBox .Mensaje .Nulo{height:134px;}
+.step4 .DS_container{width:640px;}
+
+/*PARAMS STEP*/
+.step1 .datasetParamsContainer .collapsedBar{height:33px;}
+.step1 .datasetParamsContainer .collapsedBar .boxTitle{padding-top:0;background:none;}
+.step3 .form .row p.originalArg{line-height:30px;padding-bottom:0;height:30px;overflow:hidden;float:left;font-style:italic;color:#999;}
+.step3 .form .paramBorder{border-bottom:1px solid #eee;padding-bottom:5px;margin-bottom:15px;}
+.step3 .form .paramBorder:last-child{border-bottom:0;padding-bottom:0;margin-bottom:0;}
+.step3 .wsParamsContainer .paramOriginalName{padding-bottom:10px !important;}
+.step3 .wsParamsContainer h5{margin-bottom:10px !important;}
+.step1 .datasetParamsContainer input[disabled=disabled],
+.step3 .wsParamsContainer input[disabled=disabled]{background:#eee;color:gray;text-shadow:0 1px 0 #fff;}
+
+
+.step1 #id_disclaimerContainer {
+background: url(../../images/common/bg_whiteMask.png);
+background: rgba(255, 255, 255, 0.8);
+bottom: 0;
+left:87px;
+right:11px;
+position: fixed;
+border-top:1px solid #ccc;
+}
+.step1 .disclamers .close {
+position: absolute;
+top: 10px;
+right: 8px;
+cursor: pointer;
+outline: none;
+background: url(../../images/common/ic_actions.png) no-repeat 0 -180px;
+display: block;
+height: 20px;
+width: 16px;
+}
+.step1 .disclamers ul > li {
+padding: 0 0 5px 10px;
+font-size: 12px;
+color: #666;
+background: url(../../images/common/ic_VM.png) no-repeat 0 5px;
+}
+.disclaimerContent, .contentTable{padding:15px;}
+.disclaimerContent ul ol li{padding-top:5px;}
+
+.buttons{border-top:1px solid #E2E0E0;padding:15px;background-color:#f6f9ff;text-align:center;
+	-webkit-border-radius: 0 0 3px 3px;
+	-moz-border-radius: 0 0 3px 3px;
+	border-radius: 0 0 3px 3px;
+}
+.buttons .button{display:inline-block;}

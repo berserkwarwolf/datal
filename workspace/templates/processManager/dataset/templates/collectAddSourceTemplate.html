@@ -1,0 +1,10 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_AddSourceTemplate">
+
+	{# Add sources #}
+	<label for="id_source_name">{% trans 'APP-SOURCES-TEXT' %}</label>
+	<input type="text" name="source_name" id="id_source_name" tabindex="0">
+	<p class="tip">{% trans 'EDITDS-SOURCE-TIP1' %} <a id="id_addSourceButton" tabindex="-1">{% trans 'EDITDS-SOURCE-TIP2' %}</a></p>
+
+</script>

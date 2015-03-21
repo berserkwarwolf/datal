@@ -1,0 +1,14 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<div class="box notesBox" id="id_notesSidebar">
+	<header class="title clearfix">
+		<h1 class="FL">{% trans 'VIEWDS-NOTES-TITLE' %}</h1>
+		<a class="FR close" title="{% trans 'APP-CLOSE-TEXT' %}" id="id_closeNotesButton">{% trans 'APP-CLOSE-TEXT' %}</a>
+	</header>
+	<div class="boxContent">
+		<article class="notes WYSIWYG">
+			{{dataset.notes|safe|urlize}}
+		</article>
+	</div>
+</div>

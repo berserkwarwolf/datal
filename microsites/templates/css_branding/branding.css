@@ -1,0 +1,64 @@
+/*TITLE COLOR*/
+
+    /*DS / DB*/
+    .blockPageTitle .titleText strong,
+    .ao-popup-overlay .In h5,
+    .overlayGUID .key,
+    .helpAndTipsBox .boxInner h5,
+    .placeholder h1,
+    .hasSidebar .resources .dbSidebarTitle,
+
+    /*VIEWDATASTREAM*/
+    .dataTable header h1 strong,
+
+    /*SEARCH*/
+    .boxTitle .title,
+
+    /*DEVELOPERS*/
+    .pageTitleContainer h2,
+
+    /*TRANSPARENCY PAGE*/
+    .transparencyPage .title{color:{{preferences.account_title_color|default:"#000"}} !important;}
+
+/*MOUSE OVER FOR DASHBOARDS VIEWS / EMBEDS / CHARTS / CHARTS EMBEDS*/
+    
+    /*BACKGROUND COLOR*/
+    .dataStreamBox h2 a:hover,
+    .chartBox .chartTitle a:hover,
+    .transparencyPage .box:hover h3{background:{{preferences.account_mouseover_bg_color|default:"#ccc"}} !important;}
+
+    /*BORDER COLOR*/
+    .dataStreamBox h2 a:hover,
+    .chartBox .chartTitle a:hover{border-color:{{preferences.account_mouseover_border_color|default:"#999"}} !important;}
+
+    /*TITLE COLOR*/
+    .dataStreamBox h2 a:hover .txt .titleDS strong,
+    .chartBox .chartTitle a:hover,
+    .transparencyPage .box:hover h3{color:{{preferences.account_mouseover_title_color|default:"#fff"}} !important;}
+
+    /*TEXT COLOR*/
+    .dataStreamBox h2 a:hover .txt .infoDS .categoryDS{color:{{preferences.account_mouseover_text_color|default:"#333"}} !important;}
+
+/*BUTTON*/
+    
+    /*BACKGROUND COLOR*/
+    a.genericButton,
+    a.genericButton.moreButton{background:{{preferences.account_button_bg_color|default:"#ccc"}} !important;}
+
+    /*BORDER COLOR*/
+    a.genericButton,
+    a.genericButton.moreButton{border-color:{{preferences.account_button_border_color|default:"#999"}} !important;}
+
+    /*FONT COLOR*/
+    a.genericButton,
+    a.genericButton.moreButton
+    a.genericButton span,
+    a.genericButton.moreButton span{color:{{preferences.account_button_font_color|default:"#fff"}} !important;}
+
+/*HEADER*/
+    
+    /*BACKGROUND COLOR*/
+    .headerAuto{background:{{preferences.account_header_bg_color|default:"#ccc"}} !important;}
+
+    /*BORDER COLOR*/
+    .headerAuto{border-color:{{preferences.account_header_border_color|default:"#ccc"}} !important;}

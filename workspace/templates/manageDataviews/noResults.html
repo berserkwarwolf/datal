@@ -1,0 +1,18 @@
+{% extends 'manageDataviews/index.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block css_hide %}
+display:none;
+{% endblock %}
+
+{% block noresults %}
+<div class="zeroResults">
+  <div class="zeroIcon zeroDataviews"></div>
+  <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>
+</div>
+<div class="startAdding">
+  <div class="startAddingArrows startDataviews"></div>
+  <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+  <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
+</div>
+{% endblock %}

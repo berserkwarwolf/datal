@@ -1,0 +1,168 @@
+[
+{
+    "pk": 1,
+    "model": "core.accountlevel",
+    "fields": {
+        "code": "level_1",
+        "name": "Level 1 (Free User)",
+        "description": ""
+    }
+},
+{
+    "pk": 2,
+    "model": "core.accountlevel",
+    "fields": {
+        "code": "level_2",
+        "name": "Level 2 (Trial)",
+        "description": ""
+    }
+},
+{
+    "pk": 3,
+    "model": "core.accountlevel",
+    "fields": {
+        "code": "level_3",
+        "name": "Level 3 (Pro)",
+        "description": ""
+    }
+},
+{
+    "pk": 4,
+    "model": "core.accountlevel",
+    "fields": {
+        "code": "level_4",
+        "name": "Level 4 (Plus)",
+        "description": ""
+    }
+},
+{
+    "pk": 5,
+    "model": "core.accountlevel",
+    "fields": {
+        "code": "level_5",
+        "name": "Level 5 (Premier)",
+        "description": ""
+    }
+},
+{
+    "pk": 1,
+    "model": "core.account",
+    "fields": {
+        "name": "account 1",
+        "level": "5",
+        "status": "1",
+        "meta_data":"",
+        "created_at": "2014-08-26 00:00:00",
+        "expires_at": "2014-08-26 00:00:00"
+    }
+},
+{
+    "pk": 2,
+    "model": "core.account",
+    "fields": {
+        "name": "account 2",
+        "level": "4",
+        "status": "1",
+        "meta_data":"",
+        "created_at": "2014-08-26 00:00:00",
+        "expires_at": "2014-08-26 00:00:00"
+    }
+},
+
+{
+    "pk": 3,
+    "model": "core.account",
+    "fields": {
+        "name": "account 3",
+        "level": "3",
+        "status": "1",
+        "meta_data":"",
+        "created_at": "2014-08-26 00:00:00",
+        "expires_at": "2014-08-26 00:00:00"
+    }
+
+},
+{
+    "pk": 4,
+    "model": "core.account",
+    "fields": {
+        "name": "account 4",
+        "level": "2",
+        "status": "1",
+        "meta_data":"",
+        "created_at": "2014-08-26 00:00:00",
+        "expires_at": "2014-08-26 00:00:00"
+    }
+
+},
+{
+    "pk": 5,
+    "model": "core.account",
+    "fields": {
+        "name": "account 5",
+        "level": "1",
+        "status": "1",
+        "meta_data":"",
+        "created_at": "2014-08-26 00:00:00",
+        "expires_at": "2014-08-26 00:00:00"
+    }
+},
+{
+    "pk": 1,
+    "model": "core.user",
+    "fields": {
+        "name": "user 1",
+        "nick": "nick 1",
+        "email": "user1@test.com",
+        "password": "pass1",
+        "country": "AR",
+        "ocupation": "",
+        "language": "es",
+        "created_at": "2014-08-24 00:00:00",
+        "last_visit": "2014-08-26 00:00:00",
+        "account": 1
+        }
+},
+
+{
+    "pk": 1,
+    "model": "core.category",
+    "fields":{
+        "id": 1,
+        "account": "1"
+        }
+},
+{
+    "pk":1,
+    "model": "core.categoryi18n",
+    "fields": {
+        "language": "es",
+        "category": 1,
+        "name": "Categoria 1",
+        "slug": "categoria-1",
+        "description": "La categoria 1, cuenta 1",
+        "created_at": "2014-08-20 00:00:00"
+        }
+}
+
+
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

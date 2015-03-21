@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Your First Pivot Table Component</title>
+	</head>
+	<body>
+		<div id="flashContent">
+			<!-- IF SOMETHING WENT WRONG -->
+				<div style="padding: 10px; margin: 10px 0;">
+					<font color="#DD0000"><b>Something went wrong!</b></font><br/><br/>
+					If you see this message, it means you have one of the following problems: 
+					<ol>
+						<li>You did not extract files from downloaded zip archive. Unzip and copy all files to your application folder.</li>
+						<li>You do not have the Flash Player plugin installed (<a href="http://get.adobe.com/flashplayer/">download Flash Player</a>), 
+						or your browser does not support JavaScript (you should enable it)</li> <li>If you use Internet Explorer: 
+							<ul>
+								<li>You may see a warning at the top of your browser<br/><br/><img src="img/ie_restricted.png"/><br/><br/></li>
+								<li>If it happens, click on the warning and choose "Allow Blocked Content"<br/><br/><img src="img/ie_allow.png"/><br/><br/></li>
+							</ul>
+						</li>
+					</ol> 
+					If you still see this page, <a href="http://www.flexmonster.com/flash/help/index.html?file=Contents/installation.html">click here</a> for troubleshooting information.
+				</div>
+			<!-- IF SOMETHING WENT WRONG end -->
+		</div>
+		<script type="text/javascript" src="flexmonster.js"></script> 
+    <script type="text/javascript">
+			flexmonster.embedPivotComponent("", "flashContent", "100%", "600", {configUrl: "report.xml"});
+		</script>
+        <img src='http://www.flexmonster.com/icons.ashx?r=frst-p-js' style="display:none;">
+	</body>
+</html>

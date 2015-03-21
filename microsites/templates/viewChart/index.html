@@ -1,0 +1,135 @@
+{% extends "base_microsites.html" %}
+{% load i18n extra_tags components core_components %}
+
+{% block SEO %}
+    <title>{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}</title>
+    <meta name="description" content="{{ visualization_revision.description }}" />
+    <link rel="canonical" href="{{base_uri}}{{visualization_revision.permalink}}" />
+{% endblock %}
+
+{% if preferences.account_enable_sharing %} 
+    {% block facebook %}
+        <meta property="og:title" content="{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}" />
+        <meta property="og:description" content="{{ visualization_revision.description }}" />
+        <meta property="og:image" content="{{preferences.account_logo}}" />
+        <meta property="og:type" content="article" />
+        <meta property="og:site_name" content="{{preferences.account_name}}" />
+    {% endblock %}
+{% endif %}
+
+{% block meta %}
+
+<!-- CSS -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/plugins/jquery.gritter.css?id={{settings.VERSION_JS_CSS}}" />
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/viewDataStream.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/viewChart.css?id={{settings.VERSION_JS_CSS}}"/>
+
+<!-- JS LIBS -->
+<!--[if lt IE 9]>
+<script type="text/javascript" src="/js_core/plugins/date.toISOString.js?id={{settings.VERSION_JS_CSS}}"></script>
+<![endif]-->
+<script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.gritter.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backbone100/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+<script type="text/javascript" src="/js_core/plugins/multimarker.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{% if preferences.account_enable_sharing %}
+  <script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&amp;login=junar&amp;apiKey=R_4da011b2ee9f2ee2cf80ed8122b73391"></script>
+  <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+  <script type="text/javascript">stLight.options({publisher: "b6aba428-3562-4003-b6a8-018086ce7af4", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+{% endif%}
+
+<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/embedChartModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/embedChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/viewChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/junarChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/mapChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/areaChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/barChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/pieChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/columnChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/lineChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+ 
+<!-- BRANDED CSS -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+
+<!-- BRANDED JS -->
+<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+  
+{% endblock %}
+
+{% block content %}
+  
+<div class="wrapper clearfix" id="id_wrapper">
+  <div class="wrapperInner">
+  
+    <nav class="tabs border-box">
+      {% include "viewChart/tabs.html" %}
+    </nav>
+  
+    <div class="columns clearfix" id="id_columns">
+
+      <aside class="sidebar FL transition">
+        {% include "viewChart/sidebarInfo.html" %}
+        {% include "viewChart/sidebarAPI.html" %}
+        {% if notes and preferences.account_enable_notes %}
+          {% include "viewChart/sidebarNotes.html" %}
+        {% endif %}
+      </aside>
+
+
+        <section class="section transition">
+          {% include "viewChart/dataTable.html" %}
+        </section>
+
+    </div>
+
+  </div>
+</div>
+
+{# check if this is the data we use for visualizations, for now we use the datastream title and others #}
+
+<script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['corechart', 'geomap']});
+
+
+$(document).ready(function(){
+	var chartType = "{{chart_type}}";
+  var visualizationModel = new visualization({
+	  id: "{{datastream.datastreamrevision_id}}",
+	  datastream_id: "{{datastream.datastream_id}}",
+	  visualization_id: "{{visualization_revision.visualization_id}}",
+    title: "{{visualization_revision.title}}" , 
+    description: "{{visualization_revision.description|escapejs}}", 
+    guid: "{{visualization_revision.guid}}",
+	  visualizationJson : '{{result|escapejs}}',
+	  chartJson : '{{visualization_revision.impl_details|escapejs}}',
+	  status : '{{visualization_revision.status}}',
+	  visualizationrevision_id : '{{visualization_revision.visualizationrevision_id}}',
+	  datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
+	  embedUrl: "{{base_uri}}{% url "chart_manager.action_embed" visualization_revision.guid %}?end_point={%if url_query%}&{{url_query}}{%endif%}",
+	  permaLink: "{{base_uri}}{{ visualization_revision.permalink }}",
+	  chart_type: chartType,
+	  joinIntersectedClusters: "{{join_intersected_clusters}}",
+  });
+  var chartView = new viewChartView({model: visualizationModel});
+  if (chartType === "mapchart") chartView.setLoading();
+});
+</script>
+{# <!-- ID {{id}} base uri {{base_uri}} viz rev id {{visualizationrevision_id}} RES TEST {{result}}  --> #}
+{% endblock %}
+
+{% block popupsOverlay %}
+  
+  {% include "viewChart/overlays.html" %}
+
+{% endblock %}

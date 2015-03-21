@@ -1,0 +1,101 @@
+{% extends "base_microsites.html" %}
+{% load i18n extra_tags components %}
+{% url "search.action_search" as search_url %}
+
+{% block SEO %}
+<title>{% trans "APP-SEARCHRESULTS-TEXT" %}{% if query %} {% trans "APP-FOR-TEXT" %} {{query}}{% endif %} {% if category %}{% trans "APP-INCATEGORY-TEXT" %} {{category.name}}{% endif %} &middot; {{preferences.account_page_titles}}</title>
+{% endblock %}
+
+{% block meta %}
+<!-- COMPONENT -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/dataServicesFinder.css?id={{settings.VERSION_JS_CSS}}"/>
+<!-- BRANDED -->
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+
+<script type="text/javascript" src="/js_microsites/search/searchList.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block content %}
+<!-- SECTION TITLE -->
+<div class="sectionTitleContainer">
+    <div class="sectionTitleWrapper">
+        <div class="sectionTitleInner">
+            <h1 class="sectionTitle">{% trans "DSFIND-CATALOG-TITLE" %}</h1>
+        </div>
+    </div>
+</div>
+
+<!-- COLUMNS -->
+<div class="w960 columns clearfix">
+
+    <!-- COLUMN - Left -->
+    <div class="CL">
+        <!-- SEARCH RESULTS -->
+        {% include "search/searchResults.html" %}
+    </div>
+
+    <!-- COLUMN - Right -->
+    <div class="CR">
+
+        <!-- SHADOWS -->
+        <div class="cv tl"></div>
+        <div class="cv bl"></div>
+
+        <!-- COLUMN CONTENT -->
+        <div class="columnContent clearfix">
+
+            <!-- Facets -->
+            <div class="boxCR helpAndTipsBox">
+                <div class="boxTitle">
+                    <h4>{% trans "APP-TOPCATEGORIES-TEXT" %}</h4>
+                </div>
+
+                <div class="boxInner">
+                    {% for name, value in facets.items %}
+                        {% for facet, count in value.items %}
+                        <h5 class="minnorPaddingBottom">
+                            <a href="category/{{name}}:{{facet}}?q={{query}}">{{ facet }}</a> ({{ count }})
+                            </h5>
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="boxCR helpAndTipsBox">
+                <div class="boxTitle">
+                    <h4>{% trans "DSFIND-HELPTIP-TITLE" %}</h4>
+                </div>
+                <div class="boxInner">
+                    <h5 class="minnorPaddingBottom">{% trans "APP-DIDYOUKNOW-TEXT" %}</h5>
+                    <p>{% trans "DSFIND-HELPTIP-SUBTITLE1" %} <em>{{preferences.account_name}}</em> {% trans "DSFIND-HELPTIP-SUBTITLE2" %}</p>
+                    <dl>
+                        <dt>{% trans "DSFIND-HELPTIP-TIP1TITLE" %}:</dt>
+                        <dd>{% trans "DSFIND-HELPTIP-TIP1TEXT" %}.</dd>
+                        <dd class="viewMoreLink clearfix">
+                            <span class="VM">{% trans "APP-EXAMPLE-TEXT" %}: <a href="{{search_url}}?q=apple stock" title="apple stock" rel="nofollow">apple stock</a>.</span>
+                        </dd>
+                        <dt>{% trans "DSFIND-HELPTIP-TIP2TITLE" %}:</dt>
+                        <dd>{% trans "DSFIND-HELPTIP-TIP2TEXT" %}.</dd>
+                        <dd class="viewMoreLink clearfix">
+                            <span class="VM">{% trans "APP-EXAMPLE-TEXT" %}: <a href="{{search_url}}?q=GDP%2BUS" title="GDP+US" rel="nofollow">GDP+US</a>.</span>
+                        </dd>
+                        <dt>{% trans "DSFIND-HELPTIP-TIP3TITLE" %}:</dt>
+                        <dd>{% trans "DSFIND-HELPTIP-TIP3TEXT" %}.</dd>
+                        <dd class="viewMoreLink clearfix">
+                            <span class="VM">{% trans "APP-EXAMPLE-TEXT" %}: <a href="{{search_url}}?q=&quot;NBA Standings&quot;" title="NBA Standings" rel="nofollow">&quot;NBA Standings&quot;</a>.</span>
+                        </dd>
+                    </dt>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

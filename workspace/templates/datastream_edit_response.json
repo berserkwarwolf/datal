@@ -1,0 +1,26 @@
+{
+"datastream_revision_id": "{{datastream_life.datastream_revision.id}}",
+"title": "{{datastream_life.datastream_i18n.title}}",
+"description": "{{datastream_life.datastream_i18n.description}}",
+"allStatus":[
+{% for x, y in allowed_status %}
+    {"value":"{{ x }}","label":"{{ y }}"}
+    {% if not forloop.last %}
+        ,
+    {%endif %}
+{% endfor %}
+],
+"status": "{{status}}",
+"tags": "{{datastream_dict.fields.tags}}",
+"sources": "{{datastream_dict.fields.sources}}",
+"allCategories":[
+{% for category in categories %}
+    {"value":"{{ category.category__id }}","label":"{{ category.name }}"}
+    {% if not forloop.last %}
+        ,
+    {%endif %}
+{% endfor %}
+],
+"category": "{{datastream_life.datastream_revision.category}}",
+"notes": "{{datastream_life.datastream_i18n.notes}}"
+}

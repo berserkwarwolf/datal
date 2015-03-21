@@ -1,0 +1,598 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-VISUALIZATION-TEXT"
+msgstr "Gráfico"
+
+msgid "REPORT-CHART-DATE"
+msgstr "Fecha"
+
+msgid "REPORT-CHART-TOTAL_HITS"
+msgstr "Total de hits"
+
+msgid "EXPLORER-TITLE-CURRENTLY"
+msgstr "Actualmente sobre"
+
+msgid "EXPLORER-TITLE-INCATALOG"
+msgstr "Vistas en nuestro Catálogo"
+
+msgid "DSFIND-CATALOG-TITLE"
+msgstr "Explora nuestro Catálogo"
+
+msgid "APP-VIEWMOREOF-TEXT"
+msgstr "Ver más de"
+
+msgid "APP-VIEWMORE-TEXT"
+msgstr "Ver más"
+
+msgid "APP-VIEWLESS-TEXT"
+msgstr "Ver menos"
+
+msgid "DSDET-GOOGLESPREADSHEETS-TITLE"
+msgstr "Google Spreadsheets"
+
+msgid "DSDET-GOOGLESPREADSHEETS-SUBTITLE"
+msgstr "Agrega esta vista a Google Spreadsheet!"
+
+msgid "DSDET-GOOGLESPREADSHEETS-CONTENT"
+msgstr "Copia y Pega el código de abajo en la celda en la que quiera usar esta Vista."
+
+msgid "APP-DATASET-TEXT"
+msgstr "Conjunto de datos"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "Datos cargados por el usuario"
+
+msgid "APP-PRIVATEDATASOURCE-TEXT"
+msgstr "Fuente privada"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Fuentes"
+
+msgid "DSDET-GUID-TIP"
+msgstr "Úsalo para invocar la vista mediante la <a href='/developers' title='Ver más acerca de la API' target='_blank'>API</a>"
+
+msgid "DSDET-STAT-TEXT"
+msgstr "Estadísticas"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Recargar"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Acciones"
+
+msgid "APP-EXPORTDS-TITLE"
+msgstr "Exporta esta vista a un archivo CSV"
+
+msgid "APP-EXPORTDS-TEXT"
+msgstr "Exportar a CSV"
+
+msgid "DSDET-EMBED-TITLE"
+msgstr "Obtener el código para incrustar esta vista"
+
+msgid "APP-GETEMBEDCODE-TEXT"
+msgstr "Código para incrustar"
+
+msgid "APP-ENTERAVALUEFOR-TEXT"
+msgstr "Ingrese un valor para"
+
+msgid "APP-TAGS-TEXT"
+msgstr "Etiquetas"
+
+msgid "APP-NOTAGS-TEXT"
+msgstr "No hay etiquetas"
+
+msgid "APP-VIEWALL-TEXT"
+msgstr "Ver todo"
+
+msgid "DSDET-FOLLOW-TITLE"
+msgstr "Seguir esta vista"
+
+msgid "APP-FOLLOW-TEXT"
+msgstr "Seguir"
+
+msgid "APP-URL-TEXT"
+msgstr "URL"
+
+msgid "APP-AGO-TEXT"
+msgstr "atras"
+
+msgid "APP-WROTE-TEXT"
+msgstr "escribió"
+
+msgid "APP-COMMENT-REMOVE-BUTTON"
+msgstr "Eliminar comentario"
+
+msgid "APP-REMOVE-TEXT"
+msgstr "Eliminar"
+
+msgid "APP-COMMENT-TITLE"
+msgstr "Comentarios"
+
+msgid "APP-SIGNIN-TEXT"
+msgstr "Inicia Sesión"
+
+msgid "APP-SIGNUP-TEXT"
+msgstr "Regístrate"
+
+msgid "APP-COMMENT-SIGNIN-NOW"
+msgstr "ahora para dejar un comentario!"
+
+msgid "APP-CHARACTERS-LEFT"
+msgstr "caracteres disponibles"
+
+msgid "APP-POST-TEXT"
+msgstr "Postear"
+
+msgid "APP-CLEAR-TEXT"
+msgstr "Limpiar"
+
+msgid "APP-PREVIOUS-TEXT"
+msgstr "Anterior"
+
+msgid "APP-PAGE-TEXT"
+msgstr "Página"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Siguiente"
+
+msgid "APP-EMBED-TEXT"
+msgstr "Incrustar"
+
+msgid "OVERLAY-DSEMBED-TITLE"
+msgstr "¡Agrega esta vista donde quieras!"
+
+msgid "OVERLAY-DSEMBED-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta vista"
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Desarrollado por"
+
+msgid "APP-WIDTH-TEXT"
+msgstr "Ancho"
+
+msgid "APP-HEIGHT-TEXT"
+msgstr "Alto"
+
+msgid "APP-FREEZE-TEXT"
+msgstr "Congelar"
+
+msgid "APP-ROWS-TEXT"
+msgstr "filas"
+
+msgid "APP-COLUMNS-TEXT"
+msgstr "Comentario"
+
+msgid "OVERLAY-CHARTEMBED-TITLE"
+msgstr "¡Agrega esta visualización donde quieras!"
+
+msgid "OVERLAY-CHARTEMBED-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
+
+msgid "OVERLAY-MAXIMIZE-TIP"
+msgstr "Haz Click en las vistas para maximizarlos"
+
+msgid "APP-CLOSEALL-TEXT"
+msgstr "Cerrar todo"
+
+msgid "APP-GETGUID-TEXT"
+msgstr "Obtener GUID"
+
+msgid "APP-DROPHERE-TEXT"
+msgstr "Suelta acá"
+
+msgid "APP-MAXIMIZE-TEXT"
+msgstr "Maximizar"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Datos recolectados de la web"
+
+msgid "DBMAN-CHARTEMBED-TITLE"
+msgstr "Código para incrustar"
+
+msgid "DB-DSGUID-GETGUID"
+msgstr "Obtén el GUID de esta vista"
+
+msgid "DSDET-SHARE-TITLE"
+msgstr "Compartir esta vista"
+
+msgid "APP-SHARE-TEXT"
+msgstr "Compartir"
+
+msgid "APP-GOOGLESPREADSHEETS-TITLE"
+msgstr "Inserta esta vista en Google Spreadsheet"
+
+msgid "APP-EXPORTDB-TITLE"
+msgstr "Exporta esta colección a un archivo CSV"
+
+msgid "APP-EXPORT-TEXT"
+msgstr "Exportar"
+
+msgid "APP-DASHBOARD-TEXT"
+msgstr "Colección"
+
+msgid "FAVDB-TAB-TIP"
+msgstr "Click para cargar"
+
+msgid "APP-NOTES-TITLE"
+msgstr "Notas"
+
+msgid "APP-EXPAND-TEXT"
+msgstr "Expandir"
+
+msgid "APP-COLLAPSE-TEXT"
+msgstr "Colapsar"
+
+msgid "APP-SEARCHRESULTS-TEXT"
+msgstr "Resultados"
+
+msgid "APP-FOR-TEXT"
+msgstr "para"
+
+msgid "APP-INCATEGORY-TEXT"
+msgstr "en la categoría"
+
+msgid "DSFIND-HELPTIP-TITLE"
+msgstr "Tips Útiles"
+
+msgid "APP-DIDYOUKNOW-TEXT"
+msgstr "¿Sabias que?"
+
+msgid "DSFIND-HELPTIP-SUBTITLE1"
+msgstr "Las búsquedas en"
+
+msgid "DSFIND-HELPTIP-SUBTITLE2"
+msgstr "pueden ser <strong>refinadas</strong>. Puedes usar algunas <strong>operaciones</strong> para mejorar los resultados:"
+
+msgid "DSFIND-HELPTIP-TIP1TITLE"
+msgstr "Separa los términos de la búsqueda por espacios en blanco"
+
+msgid "DSFIND-HELPTIP-TIP1TEXT"
+msgstr "Al hacer esto, obtendrás resultados que al menos contengan uno de los términos que espeficaste"
+
+msgid "APP-EXAMPLE-TEXT"
+msgstr "Ejemplo"
+
+msgid "DSFIND-HELPTIP-TIP2TITLE"
+msgstr "Separa los términos de la búsqueda por el signo más +"
+
+msgid "DSFIND-HELPTIP-TIP2TEXT"
+msgstr "Al hacer esto, obtendrás resultados que contengan los dos términos especificados"
+
+msgid "DSFIND-HELPTIP-TIP3TITLE"
+msgstr "Separa los términos de la búsqueda por comillas \"\""
+
+msgid "DSFIND-HELPTIP-TIP3TEXT"
+msgstr "Al hacer esto, obtendrás resultados que contengan exactamente la frase que especificaste"
+
+msgid "APP-MATCHES-TEXT"
+msgstr "resultados"
+
+msgid "APP-TIME-TEXT"
+msgstr "tiempo"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DBMAN-PERSONALIZEDB-NOFOUDERROR1"
+msgstr "Lo sentimos, pero no hubo resultados."
+
+msgid "DEV-MS-DESCRIPTION-TEXT1"
+msgstr "La API permite el acceso directo a los datos publicados en el sitio de datos abiertos de "
+
+msgid "DEV-MS-DESCRIPTION-TEXT2"
+msgstr "desde tu aplicación. Usa una interfaz RESTful y retorna los datos en formato JSON."
+
+msgid "DEV-PAGE-TITLE-MICROSITE1"
+msgstr "Usa la API de "
+
+msgid "DEV-PAGE-TITLE-MICROSITE2"
+msgstr "<span class='DN'>&nbsp;</span>"
+
+msgid "APP-LAST-MODIFIED"
+msgstr "Última modificación"
+
+msgid "APP-OPEN-RESOURCES"
+msgstr "Recursos de datos abiertos"
+
+msgid "APP-OPEN-RESOURCES-PRIVATE"
+msgstr "Recursos de datos privados"
+
+msgid "APP-SEARCH-TEXT"
+msgstr "Buscar"
+
+msgid "HEADERAUTO-SEARCH-PLACEHOLDER"
+msgstr "Buscar datos abiertos"
+
+msgid "APP-SIGNOUT-TEXT"
+msgstr "Cerrar sesión"
+
+msgid "HOME-ENTITY-TITLE"
+msgstr "Ingresar a entidad"
+
+msgid "HOME-ENTITY-OPTION"
+msgstr "Seleccione..."
+
+msgid "HOME-ENTITY-BUTTON"
+msgstr "Ir"
+
+msgid "FILTER-RESOURCES-TITLE"
+msgstr "Filtrar recursos"
+
+msgid "FILTER-ENTITY-LABEL"
+msgstr "Por entidad"
+
+msgid "FILTER-ENTITY-OPTION"
+msgstr "Mostrar todas"
+
+msgid "FILTER-TYPE-LABEL"
+msgstr "Por tipo"
+
+msgid "FILTER-TYPE-OPTION"
+msgstr "Mostrar todos"
+
+msgid "FILTER-CATEGORY-LABEL"
+msgstr "Por categoría"
+
+msgid "FILTER-CATEGORY-OPTION"
+msgstr "Mostrar todas"
+
+msgid "FILTER-RESOURCES-BUTTON"
+msgstr "Aplicar filtros"
+
+msgid "DSDET-PIVOTTABLES-TITLE"
+msgstr "Pivotear tabla - Columnas disponibles"
+
+msgid "DSDET-PIVOTTABLES-CONTENT"
+msgstr "Arrastre y suelte las columnas disponibles a las cajas de abajo, y luego reacomodelas como usted desee"
+
+msgid "DSDET-PIVOTTABLES-CHECKBOX"
+msgstr "La primera fila contiene los encabezados de la tabla"
+
+msgid "DSDET-PIVOTTABLES-GROUPBY"
+msgstr "Agrupar por"
+
+msgid "DSDET-PIVOTTABLES-SUM"
+msgstr "Sumar"
+
+msgid "DSDET-PIVOTTABLES-ACCEPT"
+msgstr "Aceptar"
+
+msgid "DSDET-PIVOTTABLE-ICON"
+msgstr "Pivotear tabla"
+
+msgid "VIEWDS-TABS-INFO"
+msgstr "Info"
+
+msgid "VIEWDS-TABS-REFRESH"
+msgstr "Recargar"
+
+msgid "VIEWDS-TABS-EMBED"
+msgstr "Insertar"
+
+msgid "VIEWDS-TABS-API"
+msgstr "API"
+
+msgid "VIEWDS-TABS-EXPORT"
+msgstr "Exportar"
+
+msgid "VIEWDS-TABS-PARAMS"
+msgstr "Args"
+
+msgid "VIEWDS-TABS-FILTERS"
+msgstr "Filtros"
+
+msgid "VIEWDS-TABS-NOTES"
+msgstr "Notas"
+
+msgid "VIEWDS-TABS-PIVOTTABLE"
+msgstr "Pivotear"
+
+msgid "VIEWDS-INFO-TITLE"
+msgstr "Información"
+
+msgid "VIEWDS-API-TITLE"
+msgstr "API / Desarrolladores"
+
+msgid "VIEWDS-INFO-PERMALINK"
+msgstr "Enlace permanente:"
+
+msgid "VIEWDS-INFO-LASTUPDATE"
+msgstr "Última actualización"
+
+msgid "VIEWDS-INFO-DATACOLLECTEDFROM"
+msgstr "Datos recolectados desde:"
+
+msgid "VIEWDS-INFO-WEBSITE"
+msgstr "Sitio web:"
+
+msgid "VIEWDS-INFO-SOURCES"
+msgstr "Fuentes"
+
+msgid "VIEWDS-INFO-TAGS"
+msgstr "Etiquetas"
+
+msgid "VIEWDS-INFO-VISITORS"
+msgstr "Visitantes en los últimos 30 días:"
+
+msgid "VIEWDS-API-REQUESTKEY-1"
+msgstr "Obtén tu API key "
+
+msgid "VIEWDS-API-REQUESTKEY-2"
+msgstr "aquí"
+
+msgid "VIEWDS-API-DOCUMENTATION-1"
+msgstr "Usalo para solicitar esta vista de datos a través de la API. Aprenda más en la"
+
+msgid "VIEWDS-API-DOCUMENTATION-2"
+msgstr "documentación"
+
+msgid "VIEWDS-API-DOCUMENTATION-TITLE"
+msgstr "Aprenda más en la documentación"
+
+msgid "VIEWDS-API-EXAMPLES"
+msgstr "Ejemplos de solicitudes a la API:"
+
+msgid "VIEWDS-API-EXAMPLES-1"
+msgstr "Una solicitud normal:"
+
+msgid "VIEWDS-API-EXAMPLES-2"
+msgstr "Diferente formato de salida:"
+
+msgid "VIEWDS-API-EXAMPLES-3"
+msgstr "Usando parámetros de una vista de datos:"
+
+msgid "VIEWDS-API-NEEDHELP"
+msgstr "¿Necesita ayuda?"
+
+msgid "VIEWDS-API-NEEDHELP-1"
+msgstr "Envíenos un correo"
+
+msgid "VIEWDS-API-NEEDHELP-2"
+msgstr "¡Siempre estamos dispuestos a ayudarlo!"
+
+msgid "VIEWDS-EXPORT-ALL"
+msgstr "Exportar todo el dataset"
+
+msgid "VIEWDS-EXPORT-VIEWDATA"
+msgstr "Exportar solo esta vista"
+
+msgid "VIEWDS-EXPORT-CSV"
+msgstr "Exportar a CSV"
+
+msgid "VIEWDS-EXPORT-XLS"
+msgstr "Exportar a XLS / XLSx"
+
+msgid "VIEWDS-EXPORT-GS"
+msgstr "Usar en Google Spreadsheet"
+
+msgid "APP-PARAM-TEXT"
+msgstr "Editar Argumentos"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
+
+msgid "VIEWDS-NOTES-TITLE"
+msgstr "Notas"
+
+msgid "APP-FILE-TEXT"
+msgstr "Archivo"
+
+msgid "APP-WEBSERVICE-TEXT"
+msgstr "Servicio Web"
+
+msgid "VIEWDS-PIVOT-TABLE"
+msgstr "Tabla"
+
+msgid "VIEWDS-PIVOT-CHARTS"
+msgstr "Visualización"
+
+msgid "VIEWDS-PIVOT-BAR"
+msgstr "Barra"
+
+msgid "VIEWDS-PIVOT-LINE"
+msgstr "Línea"
+
+msgid "VIEWDS-PIVOT-SCATTER"
+msgstr "Dispersión"
+
+msgid "VIEWDS-PIVOT-PIE"
+msgstr "Torta"
+
+msgid "VIEWDS-PIVOT-BARSTACK"
+msgstr "Barra apilada"
+
+msgid "VIEWDS-PIVOT-BARLINE"
+msgstr "Barra línea"
+
+msgid "VIEWDS-PIVOT-FULLSCREEN"
+msgstr "Pantalla completa"
+
+msgid "VIEWDS-PIVOT-FIELDS"
+msgstr "Campos"
+
+msgid "VIEWDS-PIVOT-HELP"
+msgstr "Ayuda"
+
+msgid "VIEWCHART-TABS-HEATMAP"
+msgstr "Mapa calor"
+
+msgid "VIEWCHART-MINILOADING-TEXT"
+msgstr "Cargando. Por favor espere..."
+
+msgid "HOME-REFENCES-TEXT"
+msgstr "Referencias:"
+
+msgid "HOME-DATASET-TEXT"
+msgstr "Conjunto de datos"
+
+msgid "HOME-DB-TEXT"
+msgstr "Colección"
+
+msgid "HOME-DS-TEXT"
+msgstr "Vista de datos"
+
+msgid "HOME-VZ-TEXT"
+msgstr "Visualización"
+
+msgid "HOME-QUICKACCESS-TEXT"
+msgstr "Accesos rápidos"
+
+msgid "APP-PREVIEWWINDOW-TITLE"
+msgstr "Vista previa de la página de inicio"
+
+msgid "APP-TRANSPARENCY-TITLE"
+msgstr "Transparencia"
+
+msgid "APP-TRANSPARENCY-DESCRIPTION"
+msgstr "Sitio de transparencia de "
+
+msgid "APP-TRANSPARENCY-VIEWMORE"
+msgstr "Ver más"
+
+
+# —————————— New Keys Open Junar
+
+msgid "APP-DOWNLOAD-TEXT"
+msgstr "Descargar"
+
+msgid "APP-RESOURCESCREATED-TEXT"
+msgstr "Recursos creados con este conjunto de datos"
+
+msgid "APP-RESOURCE-TEXT"
+msgstr "Recurso"
+
+msgid "APP-LAST-UPDATE-TEXT"
+msgstr "Última actualización"
+
+msgid "APP-CATEGORY-TEXT"
+msgstr "Categoría"
+
+msgid "APP-CONTACT-EMAIL-FOR-DATASET-TEXT"
+msgstr "E-mail de contacto para este recurso"
+
+msgid "APP-UPDATE-FREQUENCY-TEXT"
+msgstr "Frecuencia de actualización"
+
+msgid "APP-TYPE-TEXT"
+msgstr "Tipo"
+
+msgid "APP-REGION-TEXT"
+msgstr "Región"
+
+msgid "APP-LICENSE-TEXT"
+msgstr "Licencia"

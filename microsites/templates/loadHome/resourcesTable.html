@@ -1,0 +1,38 @@
+{% load i18n humanize extra_tags core_components %}
+<div class="resourcesTable">
+    <div class="resourcesTableInner">
+        <div id="my_datatable" class="columns clearfix relative">
+            <div class="CL sidebar">
+                <div class="sidebarInner referencesContainer">
+                    {% ifequal preferences.account_home_filters 'featured_accounts' %}
+                        {% datatable_filter categories 'home' 'microsites' source_choices choices auth_manager featured_accounts=featured_accounts %}
+                    {% else %}
+                        {% include "loadHome/resources/filter_categories.html" %}
+                    {% endifequal %}
+                    <div class="references">
+                        <strong>{% trans "HOME-REFENCES-TEXT" %}</strong> 
+                        <span class="DB">{% trans "HOME-DB-TEXT" %}</span> 
+                        <span class="DS">{% trans "HOME-DS-TEXT" %}</span> 
+                        <span class="VZ">{% trans "HOME-VZ-TEXT" %}</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="CR grid">
+                <div class="gridInner">
+                    <div class="sectionInfo clearfix">
+                        <div class="sectionInfoInner FL">
+                            <h2>{% if not is_private_site %}{% trans "APP-OPEN-RESOURCES" %} {%else%}{% trans "APP-OPEN-RESOURCES-PRIVATE" %}{%endif%}</h2>
+                        </div>
+                        <div class="searchBox FR">
+                            {% datatable_search 'home' %}
+                        </div>
+                    </div>
+                </div>
+                <div class="gridContainer">
+                    {% datatable revisions categories 'resources' 'home' auth_manager %}
+                </div>
+                {% datatable_pagination revisions 'home' %}
+            </div>
+        </div>
+    </div>
+</div>

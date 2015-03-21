@@ -1,0 +1,32 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+{% block meta %}
+<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<meta name="main-option" content="id_visualizations_option"/>
+{% endblock %}
+{% block sectionTitle %}
+<h1>{% trans "APP-VISUALIZATIONS-TEXT" %}</h1>
+<div class="bulk-actions FL clearfix" style="display:none;">
+   <select id="bulk_slct" class="FL">
+      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
+      <!-- <option value="">{% trans 'APP-EDIT-TEXT' %}</option> -->
+      <option value="">{% trans 'APP-DELETE-TEXT' %}</option>
+   </select>
+   <button id="appl_bulk" class="button black small FL">{% trans 'APP-APPLY-TEXT' %}</button>
+</div>
+<ul class="actions FR">
+   <li><a href="{% url 'manageVisualizations.create' %}" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="zeroResults">
+	<div class="zeroIcon zeroVisualizations"></div>
+  <p>{% trans 'APP-ZERO-VISUALIZATIONS-TEXT' %}</p>
+</div>
+<div class="startAdding">
+	<div class="startAddingArrows startVisualizations"></div>
+	<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+	<p class="second">{% trans 'APP-START-ADDING-NEW-VISUALIZATION-TEXT' %}</p>
+</div>
+{% endblock %}

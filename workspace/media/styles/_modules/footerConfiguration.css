@@ -1,0 +1,8 @@
+html{background:#fff;}
+html, body, .layout{height:100%;}
+body > .layout{height:auto;min-height:100%;}
+.layoutInner{padding-bottom:42px;min-height:100%;
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}  

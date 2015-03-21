@@ -1,0 +1,23 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<ul class="icons">
+	<li>
+		<a class="icon info border-box sidebarIcon" id="id_openInfoButton" rel="id_infoSidebar">
+			<i></i> 
+			<span>{% trans 'VIEWDS-TABS-INFO' %}</span>
+		</a>
+	</li>
+	<li>
+		<a class="icon download border-box sidebarIcon" id="id_openDownloadButton" rel="id_downloadSidebar">
+			<i></i> 
+			<span>{% trans 'APP-DOWNLOAD-TEXT' %}</span>
+		</a>
+	</li>
+	<li>
+		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
+			<i></i> 
+			<span>{% trans 'VIEWDS-TABS-NOTES' %}</span>
+		</a>
+	</li>
+</ul>                                

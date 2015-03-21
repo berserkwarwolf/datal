@@ -1,0 +1,85 @@
+{% load i18n extra_tags components %}
+
+<script type="text/html" id="id_theme4Template">
+	
+	<!-- Cover section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">1</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-COVERTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-COVERDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+    <fieldset class="imageComponent theme4">
+      <div id="carrousel_image" class="row borderForRow">
+      	<label for="id_cover"><%= gettext('ADMIN-HOME-SECTION-FEATUREDLABEL') %></label>    
+      	<div class="clearfix tr">
+					<div class="crop relative clearfix FL">
+						<button class="absolute genericButton actionButton"><%= gettext('ADMIN-HOME-SECTION-BUTTONTEXT') %></button>							
+      			<input type="file" id="id_cover" class="file FL" tabindex="-1"/>
+      		</div>
+      		<input type="button" id="id_btnRemoveCover" class="remove FR" value="<%= gettext('ADMIN-HOME-SECTION-DELETESLIDE')%>" style="display:none;"/>
+      	</div>
+      	<p class="tipText"><%= gettext('ADMIN-HOME-SECTION-THEME4-TIP') %></p>       
+      </div>
+      <div class="row">
+				<label for="id_theme4MainTitle"><%= gettext('ADMIN-HOME-SECTION-WELCOMETITLELABEL') %></label>
+				<input type="text" class="field" id="id_theme4MainTitle" name="id_theme4MainTitle" value="<%=mainTitle%>" data-bind="value:mainTitle,events:['keyup']"/>
+      </div>
+		</fieldset>
+	</div>
+
+	<!-- Main section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">2</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-MAINTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-MAINDESCRIPTION-3') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<textarea cols="20" rows="10" class="field" id="id_theme4MainText" name="id_theme4MainText"data-bind="value:mainSection,events:['keyup']"><%= mainSection%></textarea>
+			</div>
+		</fieldset>
+	</div>
+
+	<!-- Resources Slider section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">3</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-RESOURCETITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-RESOURCEDESCRIPTION') %></h2>
+			</hgroup>       
+		</header>
+  	<fieldset class="form clearfix">
+	    <div class="row clearfix">
+	    	<div>
+	      	<input id="id_theme4nameSuggest" name="id_theme4nameSuggest" type="text" class="field" maxlength="80"/>            
+	    	</div>
+	  	</div>       
+    </fieldset>     
+  </div> 
+
+	<!-- Quick Links section: -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">4</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-QUICKLINKSTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-QUICKLINKSDESCRIPTION') %></h2>
+			</hgroup>       
+		</header>
+  	<fieldset class="form clearfix">
+	    <div class="row clearfix">
+	    	<div>
+	      	<input id="id_theme4nameLinkSuggest" name="id_theme4nameLinkSuggest" type="text" class="field" maxlength="80"/>            
+	    	</div>
+	  	</div>       
+    </fieldset>     
+  </div>
+
+</script>

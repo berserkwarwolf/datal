@@ -1,0 +1,46 @@
+{% load i18n core_components extra_tags %}
+
+<!-- PRIVATE SHARE SETTINGS OVERLAY -->
+{% overlay id_sharePrivateContainer %}
+  <div class="In clearfix">
+        <form id="id_private_share_form" action="{{private_share_form.action}}" method="post">
+            {% csrf_token %}
+            {% for hidden_field in private_share_form.hidden_fields %}{{ hidden_field }}{% endfor %}
+            {{ collaborator_forms.management_form }}
+            <h4>{% trans "OVPRIV-TITLE-TEXT" %}</h4>
+            <div class="shareSettingsContainer">
+                <h5>{% trans "APP-CANVIEW-TEXT" %}</h5>
+                <ul class="colaboratorsContainer">
+                {% for collaborator_form in collaborator_forms.forms %}
+                    <li id="id_{{forloop.counter0}}" class="email clearfix collaborator" data-email="{{collaborator_form.initial.email}}">
+                        <div class="img FL clearfix">
+                            {% gravatar foo 38 "FL" collaborator_form.initial.nick collaborator_form.initial.email %}
+                        </div>
+                        <p class="FL">{{collaborator_form.initial.nick}}</p>
+                        <a href="javascript:;" title="{% trans 'OVPRIV-REMOVEUSER-TEXT' %}" class="icClose FR">{% trans "OVPRIV-REMOVEUSER-TEXT" %}</a>
+                        {{collaborator_form.role}}
+                    </li>
+                {% endfor %}
+                </ul>
+                <div class="row emailRow clearfix formErrorMessageContainer">
+                    <select id="id_private_share_form_collaborators_addEmail" name="private_share_form_collaborators_addEmail">
+                        <option selected="selected" value="">{% trans 'APP-SELECTUSER-TEXT' %}</option>
+                        {% for available_user in available_users %}
+                        <option value="{{available_user.email}}">{{available_user.nick}}</option>
+                        {% endfor %}
+                    </select>
+
+                    <select id="id_private_share_form_collaborators_addRole" name="private_share_form_collaborators_addRole" class="FL">
+                        <option value="ao-viewer">{% trans 'OVPRIV-CANVIEW-TEXT' %}</option>
+                        <option value="ao-user">{% trans 'OVPRIV-CANUSE-TEXT' %}</option>
+                    </select>
+
+                    <a id="id_private_share_form_collaborators_addEmailButton" href="javascript:;" title="{% trans 'APP-ADD-TEXT' %}" class="genericButton moreButton FL"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+                </div>
+                <div class="buttons center border">
+                    <input id="id_private_share_form_collaborators_saveButton" type="submit" value="{% trans 'APP-DONE-TEXT' %}" class="genericButton txt14"/>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endoverlay %}

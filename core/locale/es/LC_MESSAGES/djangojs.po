@@ -1,0 +1,274 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-BY-TEXT"
+msgstr "por"
+
+msgid "SHARE-TWITTER-CHECKDS"
+msgstr "Hey! Revisa esta Vista"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DS-CANTLOADDATA-TEXT"
+msgstr "No pudimos cargar la data"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Por favor"
+
+msgid "APP-TRYAGAIN-TITLE"
+msgstr "Inténtalo Nuevamente"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "inténtalo nuevamente"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "O puedes ir a la"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "fuente"
+
+msgid "DB-REMOVECHART-CONFIRM"
+msgstr "¿Estás seguro que deseas eliminar esta visualización de tu Colección?"
+
+msgid "DB-CHARTREMOVE-SUCCESS"
+msgstr "visualización eliminada satisfactoriamente"
+
+msgid "APP-ACTIONS-SUBMIT"
+msgstr "Enviar"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Aprobar"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Rechazado"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publicar"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "APP-DRAFT-TEXT"
+msgstr "Borrador"
+
+msgid "APP-PENDINGREVIEW-TEXT"
+msgstr "Revisión Pendiente"
+
+msgid "APP-APPROVED-TEXT"
+msgstr "Aprovado"
+
+msgid "APP-PUBLISHED-TEXT"
+msgstr "Publicados"
+
+msgid "APP-UNPUBLISH-TEXT"
+msgstr "Despublicado"
+
+msgid "APP-REJECTED-TEXT"
+msgstr "Rechazado"
+
+msgid "APP-ENTERNAME-TEXT"
+msgstr "Ingrese el nombre"
+
+msgid "APP-SELECTRANGE-TEXT"
+msgstr "Selecciona una Tabla"
+
+msgid "DBMAN-DBTAB-TIP"
+msgstr "Click para cargar"
+
+msgid "DBMAN-DBTAB-CLOSETIP"
+msgstr "Cerrar el tab"
+
+msgid "APP-CLOSE-TEXT"
+msgstr "Cerrar"
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No se encontraron datos"
+
+msgid "APP-TEXT-CONFIRM_DELETE_PLURAL"
+msgstr "¿Estas seguro que deseas eliminar estos recursos?"
+
+msgid "APP-TEXT-CONFIRM_UNPUBLISH_PLURAL"
+msgstr "¿Estás seguro que deseas despublicar este recurso?"
+
+msgid "APP-TEXT-NOCHECKBOXSELECTED"
+msgstr "No se ha seleccionado ningún checkbox"
+
+msgid "APP-NO_RECORDS_FOUND-TEXT"
+msgstr "No se encontraron recursos para tu búsqueda. Intenta de nuevo."
+
+msgid "APP-SELECTROW-TEXT"
+msgstr "Selecciona una Fila"
+
+msgid "APP-SELECTTABLE-TEXT"
+msgstr "Selecciona una Tabla"
+
+msgid "APP-SELECTCOLUMN-TEXT"
+msgstr "Selecciona una Columna"
+
+msgid "APP-SELECTROWSANDCELLS-ERROR"
+msgstr "No puedes hacer esa selección"
+
+msgid "APP-FILTER-TEXT"
+msgstr "Filtro"
+
+msgid "APP-ADDFILTER-TEXT"
+msgstr "Agregar Filtro"
+
+msgid "APP-SELECTFILTER-TEXT"
+msgstr "Selecciona un filtro"
+
+msgid "APP-VALUES-TEXT"
+msgstr "Valores"
+
+msgid "APP-AREEQUALTO-TEXT"
+msgstr "Es igual a"
+
+msgid "APP-ARENOTEQUALTO-TEXT"
+msgstr "Es no es igual a"
+
+msgid "APP-AREGREATERTHAN-TEXT"
+msgstr "Es mayor que"
+
+msgid "APP-ARESMALLERTHAN-TEXT"
+msgstr "Es menor que"
+
+msgid "APP-CONTAINS-TEXT"
+msgstr "Contiene"
+
+msgid "APP-SELECT-TEXT"
+msgstr "Seleccionar..."
+
+msgid "APP-PARAMETER-TEXT"
+msgstr "Parámetro"
+
+msgid "APP-FIXEDVALUE-TEXT"
+msgstr "Valor fijo"
+
+msgid "APP-ENTERA-TEXT"
+msgstr "Ingrese "
+
+msgid "APP-NAME-TEXT"
+msgstr "Nombre"
+
+msgid "APP-DESCRIPTION-TEXT"
+msgstr "Descripción"
+
+msgid "APP-DEFAULTVALUE-TEXT"
+msgstr "Valor por defecto"
+
+msgid "APP-VALUE-TEXT"
+msgstr "Valor"
+
+msgid "APP-SET-TEXT"
+msgstr "Setear"
+
+msgid "APP-CLEARFILTER-TEXT"
+msgstr "Limpiar filtro"
+
+msgid "APP-SETALIAS-TEXT"
+msgstr "estrellas"
+
+msgid "APP-TOTALS-TEXT"
+msgstr "Totales"
+
+msgid "APP-CHANGESELECTION-WARNING"
+msgstr "Cuidado! Si modificas la selección se perderán todas las opciones avanzadas que se han creado, estas seguro que deseas continuar?"
+
+msgid "APP-EDIT-TEXT"
+msgstr "Editar"
+
+msgid "APP-REVIEW-TEXT"
+msgstr "Revisar"
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Desarrollado por"
+
+msgid "APP-DISCOVERINGDATA-TEXT"
+msgstr "Abriendo Datos"
+
+msgid "VALIDATE-REGEX"
+msgstr "Caracteres extraños no permitidos."
+
+msgid "TRANSPARENCY-PREFIX"
+msgstr "transparencia"
+
+msgid "APP-AREYOUSURE-TEXT"
+msgstr "¿Esta seguro?"
+
+msgid "APP-SOAP-TEXT"
+msgstr "Los datos se obtuvieron de un Servicio Web"
+
+msgid "OVPRIV-REMOVEUSER-TEXT"
+msgstr "Quitar acceso a usuario"
+
+msgid "OVPRIV-CANVIEW-TEXT"
+msgstr "Puede ver"
+
+msgid "OVPRIV-CANUSE-TEXT"
+msgstr "Puede usar"
+
+msgid "APP-VIEWMORE-TEXT"
+msgstr "Ver más..."
+
+msgid "CHART-HEATMAP-TOGGLETEXT"
+msgstr "Mostrar Mapa de Calor"
+
+msgid "CHART-HEATMAP-TOGGLEDTEXT"
+msgstr "Ocultar Mapa de Calor"
+
+msgid "DATE-MONTH-1"
+msgstr "Enero"
+
+msgid "DATE-MONTH-2"
+msgstr "Febrero"
+
+msgid "DATE-MONTH-3"
+msgstr "Marzo"
+
+msgid "DATE-MONTH-4"
+msgstr "Abril"
+
+msgid "DATE-MONTH-5"
+msgstr "Mayo"
+
+msgid "DATE-MONTH-6"
+msgstr "Junio"
+
+msgid "DATE-MONTH-7"
+msgstr "Julio"
+
+msgid "DATE-MONTH-8"
+msgstr "Agosto"
+
+msgid "DATE-MONTH-9"
+msgstr "Septiembre"
+
+msgid "DATE-MONTH-10"
+msgstr "Octubre"
+
+msgid "DATE-MONTH-11"
+msgstr "Noviembre"
+
+msgid "DATE-MONTH-12"
+msgstr "Diciembre"
+
+msgid "APP-POWEREDBY-TITLE"
+msgstr "Junar &middot; Platforma de Datos Abiertos"
+
+msgid "APP-A-TEXT"
+msgstr "un"

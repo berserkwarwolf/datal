@@ -1,0 +1,176 @@
+{% extends "base_microsites.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block SEO %}
+    <title>{{preferences.account_page_titles}}</title>
+{% endblock %}
+
+{% block meta %}
+    <!-- DATA STREAM BOX -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- WORKSPACE COMMON -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" />
+    <!-- HOME MODULES -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/homeModules.css?id={{settings.VERSION_JS_CSS}}"/>
+    <!-- COMPONENT -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/homeManager.css?id={{settings.VERSION_JS_CSS}}" />
+    <!-- BRANDED -->
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    
+    {% ifequal LANGUAGE_CODE 'es'%}
+      <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
+    {%endifequal%}
+    
+    <script type="text/javascript" src="/js_core/libs/jquery.stupidtable.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+    <script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableSearchManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatablePaginationManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/base_modules/datatable_manager/datatableHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+    {#TODO Check for diferences between /js_microsites/home_manager/datatableHomeFilterManager.js and js_community (DELETED) version #}
+    {% ifequal preferences.account_home_filters 'featured_accounts' %}
+        <script type="text/javascript" src="/js_microsites/home_manager/datatableHomeFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+        <script type="text/javascript" src="/js_microsites/home_manager/datatableHomeHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+    {% else %}
+        <!-- <script type="text/javascript" src="/js_community/home_manager/datatableHomeFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+        <script type="text/javascript" src="/js_community/home_manager/datatableHomeHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script> -->
+        <script type="text/javascript" src="/js_microsites/home_manager/datatableHomeFilterManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+        <script type="text/javascript" src="/js_microsites/home_manager/datatableHomeHeaderManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+        
+    {% endifequal %}
+    <script type="text/javascript" src="/js_microsites/home_manager/datatableHomeManager.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+    <script type="text/javascript" src="/js_microsites/home_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+    <script type="text/javascript" src="/js_core/base_modules/data_table/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>    
+    
+    {% if not preferences.account_home_noslider %} 
+      <script type="text/javascript" src="/js_microsites/home_manager/slider.js?id={{settings.VERSION_JS_CSS}}"></script>
+	    <script type="text/javascript" src="/js_core/base_modules/chart_manager/junarCharts.js?id={{settings.VERSION_JS_CSS}}"></script>	
+	    <script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
+	    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+	    <script type="text/javascript"
+	          src="http://maps.googleapis.com/maps/api/js?sensor=false">
+	        </script>
+	        
+	    <!-- Quantcast Tag, part 1 -->
+	    <script type="text/javascript">
+	         google.load('visualization', '1', {
+	            packages: ['corechart','geomap']
+	        });
+	    </script>
+    {% endif %}
+    
+{% endblock %}
+
+{% block content %}
+<div class="homeContent w960">
+
+    {% ifnotequal preferences.account_home_featured_content '' %}
+        <div class="featuredContent placeholder">
+            {{preferences.account_home_featured_content|safe}}
+            <div class="shadowSlider" style="display:none;"></div>
+        </div>
+    {% endifnotequal %}
+
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns clearfix">
+
+        <!-- COLUMN - Left -->
+        <div class="CL FL">
+            <div class="homeMainContent placeholder">
+                {{preferences.account_home_main_content|safe}}
+            </div>
+        </div>
+
+        <!-- COLUMN - Right -->
+        <div class="CR FR relative paddingSlider">
+
+            <!-- SLIDER CONTAINER -->  
+            <div class="sliderContainer">
+                <div class="sliderWrapper">
+                    <div class="dataStreamBorder">
+                        <div class="innerBox" id="id_dataservices_container">
+                          {% if not preferences.account_home_noslider %}                        
+                            {% include "home_manager/DSSlider.html" %}
+                          {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEARCH CONTAINER -->
+            <div class="searchContainerContent boxContent">
+                {% with number=paginator.count|intcomma %}
+                <div class="homeSearchContent placeholder">
+                    {{preferences.account_home_search_content|format:number|safe}}
+                </div>
+                {% endwith %}
+                {% datatable_search 'dataset' %}
+            </div>
+        </div>
+    </div>
+
+    <!-- RESOURCES TABLE -->
+    <div class="resourcesTable">
+        <div class="resourcesTableInner">
+            <div id="my_datatable" class="columns clearfix">
+                {% ifequal preferences.account_home_filters 'featured_accounts' %}
+                    {% datatable_filter categories 'home' 'microsites' source_choices choices auth_manager featured_accounts=featured_accounts %}
+                {% else %}
+                    {% include "home_manager/resources/filter_categories.html" %}
+                {% endifequal %}
+                <div class="CR grid">
+                    <div class="gridInner">
+                        <div class="sectionInfo clearfix">
+                            <div class="sectionInfoInner">
+                                <h2>{% if not is_private_site %}{% trans "APP-OPEN-RESOURCES" %} {%else%}{% trans "APP-OPEN-RESOURCES-PRIVATE" %}{%endif%}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gridContainer">
+                        {% datatable revisions categories 'resources' 'home' auth_manager %}
+                    </div>
+                        {% datatable_pagination revisions 'home' %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns clearfix">
+
+        <!-- COLUMN - Left -->
+        <div class="CL FL">
+
+            <div class="placeholder boxContent">
+                <div class="homeFooterLeftContent placeholder">
+                    {{preferences.account_home_footer_left|safe}}
+                </div>
+            </div>
+
+        </div>
+
+        <!-- COLUMN - Right -->
+        <div class="CR FR">
+
+            <div class="linksContainer boxContent">
+                <div class="homeFooterRightContent placeholder">
+                    {{preferences.account_home_footer_right|safe}}
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+</div>
+{% endblock %}

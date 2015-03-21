@@ -1,0 +1,151 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-DESCRIPTION-TEXT"
+msgstr "Description"
+
+msgid "DS-STOP-TITLE"
+msgstr "Stop loading this Data Stream"
+
+msgid "DS-STOP-TEXT"
+msgstr "stop"
+
+msgid "APP-BY-TEXT"
+msgstr "by"
+
+msgid "DBMAN-GETGUID-TITLE"
+msgstr "This is the GUID for this Dashboard:"
+
+msgid "DSDET-GETGUID-TITLE"
+msgstr "This is the GUID for this DataStream:"
+
+msgid "DB-FAVDB-DEFAULTSEARCH"
+msgstr "Search for Data Streams: Try ‘GDP’, ‘soccer’, ‘USA’, ‘Apple’, ‘Economy’"
+
+msgid "DB-FAVDB-SEARCHTIP"
+msgstr "Try ‘Sports’, ‘USA’ or users as ‘betogess’ or ‘birdman’"
+
+msgid "DB-INITDB-CHECKOUT"
+msgstr "Hey! Check out this Dashboard "
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Powered by"
+
+msgid "DBMAN-DSPRIVATE-TITLE"
+msgstr "This Data Stream is private"
+
+msgid "DBMAN-DSPRIVATE-SUBTITLE"
+msgstr "You cannot view this Data Stream because it is private."
+
+msgid "DBMAN-DSPRIVATE-TIP"
+msgstr "Only the owner can view it."
+
+msgid "APP-LASTUPDATE-TEXT"
+msgstr "Last update"
+
+msgid "APP-PRIVATEDS-TEXT"
+msgstr "Private Data Stream"
+
+msgid "DS-ENTERANEWVALUEFOR-TEXT"
+msgstr "enter a new value for"
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No data found"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Please"
+
+msgid "APP-TRYAGAIN-TITLE"
+msgstr "Try Again"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "try again"
+
+msgid "DBMAN-ADDDS-SUCCESS"
+msgstr "Data Stream added successfully!"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DS-CANTLOADDATA-TEXT"
+msgstr "We couldn't load your data"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "Or go to the"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "source"
+
+msgid "DB-REMOVEDS-CONFIRM"
+msgstr "Are you sure you want to remove this Data Stream from your Dashboard?"
+
+msgid "DB-DSREMOVE-SUCCESS"
+msgstr "Data Stream removed successfully!"
+
+msgid "DB-REMOVECOMMENT-CONFIRM"
+msgstr "Are you sure you want to delete the comment?"
+
+msgid "APP-AND-TEXT"
+msgstr "and"
+
+msgid "APP-SEARCHFORDATA-TEXT"
+msgstr "Search for Data"
+
+msgid "SHARE-TWITTER-CHECKDS"
+msgstr "Hey! Check out this Data Stream"
+
+msgid "APP-LOADING-TEXT"
+msgstr "Loading..."
+
+msgid "VIEWDS-FLEXIGRID-ERRORMSG"
+msgstr "Connection Error"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-1"
+msgstr "Displaying"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-2"
+msgstr "to"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-3"
+msgstr "of"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-4"
+msgstr "rows"
+
+msgid "VIEWDS-FLEXIGRID-PAGETEXT"
+msgstr "Page"
+
+msgid "VIEWDS-FLEXIGRID-OUTOF"
+msgstr "of"
+
+msgid "VIEWDS-FLEXIGRID-FINDTEXT"
+msgstr "Find"
+
+msgid "VIEWDS-FLEXIGRID-PROCMSG"
+msgstr "Loading, please wait..."
+
+msgid "VIEWDS-FLEXIGRID-NOMSG"
+msgstr "No rows"
+
+msgid "VIEWDS-WAITMESSAGEDOWNLOAD-TITLE"
+msgstr "Downloading..."
+
+msgid "VIEWDS-WAITMESSAGEDOWNLOAD-TEXT"
+msgstr "Your download will begin in a moment. <br/>If it doesn't, please try again."
+
+msgid "VIEWDS-WAITMESSAGEEXPORT-TITLE"
+msgstr "Exporting..."

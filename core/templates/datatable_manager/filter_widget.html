@@ -1,0 +1,27 @@
+{% load extra_tags %}
+
+{% if override_filters %}
+    {% include filter_template %}
+{% else %}
+    <div class="CL sidebar">
+        <div class="sidebarInner">
+            <div id="{{table_prefix}}_filter" class="sidebarPadding">
+
+                {%if not 'ao-free-user' in auth_manager.roles%}
+                    <div class="accountLogo clearfix center">
+                        {% account_logo auth_manager.get_account "FL" auth_manager.roles %}
+                    </div>
+                {% endif %}
+                
+                {% if filter_button_template %}
+                    {% include filter_button_template %}
+                {% else %}
+                    {% include 'datatable_manager/filter_button.html' %}
+                {% endif %}
+                
+                {% include 'datatable_manager/filters.html' %}
+                
+            </div>
+        </div>
+    </div>
+{% endif %}

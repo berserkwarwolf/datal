@@ -1,0 +1,203 @@
+{% load i18n extra_tags components%}
+{% url "search.action_search" as search_url %}
+
+<div class="blockPageTitle{% if dashboard.is_private %} thisIsPrivate{% endif %}{% if can_share %} sharingDisabled{% endif %}{% if preferences.account_enable_sharing %} sharingEnabled{% endif %}">
+    <div class="titleGradient">
+
+        {% block new_dashboard %}
+        {% endblock %}
+
+        <div class="panel clearfix" itemscope itemtype="http://schema.org/WebPage">
+
+            <!-- LEFT CONTENT -->
+            <div class="leftContent FL">
+
+                <!-- PANEL TITLE CONTAINER -->
+                <div class="panelTitleContainer clearfix">
+
+                    {% block dashboard_panel_title %}
+
+                    <h1 class="titleText">
+                        <strong id="id_maximized_dashboard_name" itemprop="name">{{dashboard.title}}</strong>
+                    </h1>
+
+                    <!-- DROP DOWN MENU -->
+                    <div class="dropDownMenu relativeContainer FL toolbar">
+                        <a title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu" id="id_dashboardMenuButton" href="javascript:;"><span class="DN">{% trans "APP-ACTIONS-TEXT" %}</span></a>
+                        <div id="id_dashboardDropDownMenu" class="dashboard-dataservice-tooltip" style="display: none;">
+                            <div id="" class="menuInner">
+                                <ul class="In">
+                                    <li class="J"><a class="Icon FR ic_Menu open" title="{% trans 'APP-ACTIONS-TEXT' %}" href="javascript:;"><span class="DN">{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
+                                    {% if can_export %}
+                                    <!-- EXPORT -->
+                                    <!-- <li class="Item"><a id="id_exportDashboardCSV" href="javascript:;" title="{% trans 'APP-EXPORTDB-TITLE' %}" class="Icon ic_CSV">{% trans "APP-EXPORT-TEXT" %} <span class="DN">{% trans "APP-DASHBOARD-TEXT" %}</span></a></li>-->
+                                    {% endif %}
+
+                                    <!-- GUID -->
+                                    <li class="Item"><a id="id_guidButton" href="javascript:;" title="{% trans 'APP-GETGUID-TEXT' %}" class="Icon ic_GUID">{% trans "APP-GETGUID-TEXT" %}</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endblock %}
+
+                </div>
+
+                <!-- DESCRIPTION -->
+                <p class="description" id="id_maximized_dashboard_description" itemprop="description">{{dashboard.description}}</p>
+
+                <!-- OTHERS CONTAINER -->
+                <div class="othersContainer clearfix">
+
+                    <!-- TAGS -->
+                    {% if dashboard.get_tags %}
+                    <div class="tagsContainer toolbar FL">
+                    {% else %}
+                    <div class="tagsContainer toolbar FL" style="display:none;">
+                    {% endif %}
+                        <strong class="tagsTitle Icon ic_Tags">{% trans "APP-TAGS-TEXT" %}: </strong>
+                        <div id="id_dashboard_tags_container" itemprop="keywords">
+                            {% for tag in dashboard.get_tags|slice:":5" %}<a href="{{search_url}}?tag={{tag|prepareTagForSearch}}" title="{{tag}}" rel="nofollow">{{tag}}</a>{% if not forloop.last %}, {% endif %}
+                            {% empty %}
+                                {% trans "APP-NOTAGS-TEXT" %}.
+                            {% endfor %}
+                        </div>
+                        <div class="tagsPagination" {% if not dashboard.get_tags|length|isGreaterThan:"5" %}style="display:none;"{% endif %}>
+                            <span id="id_dashboardTagsViewAllButton">
+                                <span><span class="comma">,</span><a href="javascript:;" title="{% trans 'APP-VIEWALL-TEXT' %}">...</a></span>&nbsp;<span class="sep">|</span>
+                                <a href="javascript:;" title="{% trans 'APP-VIEWALL-TEXT' %}">{% trans "APP-VIEWALL-TEXT" %}</a>
+                            </span>
+                            <div id="id_tagsDashboard" class="ao-tag-tooltip" style="display:none">
+                                <div id="id_dashboard_alltags_container" class="In clearfix">
+                                    {% for tag in dashboard.get_tags %}
+                                        <a href="{{search_url}}?tag={{tag|prepareTagForSearch}}" title="{{tag}}" rel="nofollow">{{tag}}</a>{% if not forloop.last %}<span>, </span>{% endif %}
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- OTHER ACTIONS -->
+                    <div id="id_dataservice_toolbar_{{dashboard.dashboard_id}}" class="otherActions clearfix FR">
+                        {% if can_share %}
+                        <!-- SHARE -->
+                        <button id="id_sharePrivateDashboardButton_" class="genericButton actionButton workspaceIcon privateIcon"><span>{% trans "APP-SHARE-TEXT" %}</span></button>
+                        {% endif %}
+
+
+                        {% block followButton %}
+                        {% endblock %}
+
+                        {% if not dashboard.is_private and preferences.account_enable_sharing %}
+                        <!-- SHARE BOX -->
+                        <div class="shareBox toolbar">
+                            <!-- SHARE URL -->
+                            <div class="url FL">{% trans "APP-URL-TEXT" %}: <input type="text" class="share_url_input" readonly="readonly" value="{{base_uri}}{{dashboard.permalink}}"/></div>
+                        </div>
+
+                        <div class="socialBox clearfix FR">
+                          <span class='st_facebook_large' displayText='Facebook'></span>
+                          <span class='st_twitter_large' displayText='Tweet'></span>
+                          <span class='st_googleplus_large' displayText='Google +'></span>
+                          <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                        </div>          
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% block pre_dashboard %}
+        {% endblock %}
+
+    </div>
+
+</div>
+
+{% if showDashboards %}
+<div class="sidebarContainer">
+    <div class="sidebarContainerWrapper clearfix">
+        <div class="sidebarContainerInner">
+
+            <div class="sidebar">
+                <ul>                   
+                    {% for rd in relatedDashboards %}
+                      <li>
+                        <a {% if rd.active %} class="active" {% endif %} href="{{ rd.url}}">{{ rd.title }}</a>
+                      </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="resources">
+                <div class="dbSidebarTitle"></div>
+{% endif %}
+
+
+                {% block post_dashboard %}
+                {% endblock %}
+                <div style="clear:both;"></div>
+
+                <!-- COLUMNS -->
+                <div class="grayContainer">
+                    <a name="comments"></a>
+
+                    <div class="columns clearfix">
+
+                        <!-- COLUMN - Left -->
+                        <div id="id_comment_container" class="CL">
+
+                            {% block help_tips %}
+                            {% endblock %}
+
+                            {% include "datastream_manager/dataServiceNotesPanel.html" %}
+
+                        </div>
+
+                        <!-- COLUMN - Right -->
+                        <div class="CR">
+
+                            <!-- SHADOWS -->
+                            <div class="cv tl"></div>
+                            <div class="cv bl"></div>
+
+                            <!-- COLUMN CONTENT -->
+                            <div class="columnContent clearfix">
+                                {% block topdashboards %}
+
+                                {% endblock %}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                {% block post_comments %}
+                {% endblock %}
+
+                <iframe id="id_exportToCSVContainer" style="display:none">
+                </iframe>
+
+                <script type="text/javascript">
+                    var lDashboard = $("#id_dashboard_container")[0];
+                    jQuery.data(lDashboard, "dashboard_id", "{{dashboard.dashboard_id}}");
+                    jQuery.data(lDashboard, "dashboard_guid", "{{dashboard.guid}}");
+                    jQuery.data(lDashboard, "user_nick", "{{dashboard.user_nick}}");
+                    jQuery.data(lDashboard, "is_private", {{dashboard.is_private|lower}});
+                    jQuery.data(lDashboard, "is_branded", true);
+                </script>
+
+{% if showDashboards %}
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endif %}

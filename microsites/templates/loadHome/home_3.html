@@ -1,0 +1,56 @@
+{% extends "loadHome/index.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block themeMeta %}
+
+{% if config.imageUrlCarrousel %}
+<script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/loadHome/sliderTheme3.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endif %}
+
+{% endblock %}
+
+{% block themeContent %}
+{% with number=paginator.count|intcomma %}
+<div class="homeContent w960 theme3">
+
+    {% if config.imageUrlCarrousel %}
+    <div class="featuredContent placeholder">
+        <div class="featuredSlider slider">
+            <a class="btn izq" title="{% trans 'APP-PREVIOUS-TEXT' %}"><span class="DN">{% trans 'APP-PREVIOUS-TEXT' %}</span></a>
+            <a class="btn der" title="{% trans 'APP-NEXT-TEXT' %}"><span class="DN">{% trans 'APP-NEXT-TEXT' %}</span></a>
+            <div class="sliderHome">
+              {% for source in config.imageUrlCarrousel %}
+                  <div class="panel">
+                    {% if source.href %}<a href="{{source.href}}" target="_blank">{% endif %}
+                        <img src="{{source.image}}" alt=""/>
+                    {% if source.href %}</a>{% endif %}
+                  </div>
+              {%endfor%}
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if config.mainTitle or config.mainSection %}
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns">
+        <div class="homeMainContent placeholder">
+            {% if config.mainTitle %}
+                <h1 class="PNR">{{config.mainTitle|format:number|safe}}</h1>
+            {% endif %}
+
+            {% if config.mainSection %}
+                {{config.mainSection|format:number|safe}}
+            {% endif %}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- RESOURCES TABLE -->
+    {% include "loadHome/resourcesTable.html" %}
+    
+</div>
+{% endwith %}
+{% endblock %}

@@ -1,0 +1,94 @@
+/* Reset */
+html, body, div, p, h1, h2, h3, h4, h5, h6, ul, li, ol, dd, dl, dt, form, legend, label, fieldset, legend, address, center, acronym, iframe, blockquote{margin:0;padding:0;font-style:normal;font-weight:normal;list-style:none;}
+html{background:#707070;}
+body{font:12px/15px Arial, Helvetica, sans-serif;background:#fff;color:#3a3a3a;}
+a, span{word-wrap:break-word;}
+img, fieldset, iframe{border:0;}
+a{text-decoration:none;color:#027fc0;cursor:pointer;}
+a:hover{text-decoration:underline;}
+input, select, textarea{font:12px Arial, Helvetica, sans-serif;outline:none;}
+textarea{margin:0;resize:none;}
+table{border-spacing:0;}
+table, tr, td, th, tbody, thead, tfoot, caption{border:0;margin:0;padding:0;border-collapse:collapse;word-wrap:break-word;}
+blockquote{quotes:none;}
+blockquote:before, blockquote:after{content:'';content:none;}
+
+/* Clearfix */
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.clearfix{display:block;}
+
+/* Common */
+.DN{display:none;}
+.FL{float:left;}
+.FR{float:right;}
+.center{text-align:center;}
+.ao-disabled, /* TODO Nacho: Replace for "disable" */
+.disabled{visibility:hidden;}
+.relativeContainer, /* TODO Nacho: Replace for "relative" */
+.relative{position:relative;}
+.absolute{position:absolute;}
+.imageText{overflow:hidden;text-indent:10000px;}
+.w960{width:960px;padding-left:10px;padding-right:10px;margin:0 auto;} /* TODO Nacho: Check if this is still necessary */
+div,
+header,
+footer,
+article,
+section,
+.border-box{
+  -webkit-box-sizing:border-box;
+     -moz-box-sizing:border-box;
+          box-sizing:border-box;
+}
+.transition{
+  -webkit-transition:all .375s ease-in-out;
+     -moz-transition:all .375s ease-in-out;
+      -ms-transition:all .375s ease-in-out;
+       -o-transition:all .375s ease-in-out;
+          transition:all .375s ease-in-out;
+}
+
+/* Fonts */ 
+/* TODO Nacho: Replace "Proxima Nova" font with "Monserrat" font http://www.google.com/fonts/specimen/Montserrat */
+@font-face {
+  font-family: 'proxima_nova_rgregular';
+  src: url('../fonts/proximanova-regular-webfont.eot');
+  src: url('../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/proximanova-regular-webfont.woff') format('woff'),
+       url('../fonts/proximanova-regular-webfont.ttf') format('truetype'),
+       url('../fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+@font-face {
+  font-family: 'proxima_nova_rgbold';
+  src: url('../fonts/proximanova-bold-webfont.eot');
+  src: url('../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/proximanova-bold-webfont.woff') format('woff'),
+       url('../fonts/proximanova-bold-webfont.ttf') format('truetype'),
+       url('../fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+@font-face {
+    font-family: 'proxima_novasemibold';
+    src: url('../fonts/proximanova-semibold-webfont.eot');
+    src: url('../fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/proximanova-semibold-webfont.woff') format('woff'),
+         url('../fonts/proximanova-semibold-webfont.ttf') format('truetype'),
+         url('../fonts/proximanova-semibold-webfont.svg#proxima_novasemibold') format('svg');
+    font-weight: normal !important;
+    font-style: normal !important;
+}
+@font-face {
+  font-family: 'permanent_marker';
+  src: url('../fonts/permanentmarker-webfont.eot');
+  src: url('../fonts/permanentmarker-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/permanentmarker-webfont.woff') format('woff'),
+       url('../fonts/permanentmarker-webfont.ttf') format('truetype'),
+       url('../fonts/permanentmarker-webfont.svg#permanent_marker') format('svg');
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+.PNR{font-family:'proxima_nova_rgregular';font-weight:normal !important;font-style:normal !important;}
+.PNS{font-family:'proxima_novasemibold';font-weight:normal !important;font-style:normal !important;}
+.PNB{font-family:'proxima_nova_rgbold';font-weight:normal !important;font-style:normal !important;}

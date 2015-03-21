@@ -1,0 +1,11 @@
+{% load i18n local_tags %}
+<!--[if lt IE 8]>
+<div class="ieMsg">
+    <div class="w960 clearfix">
+        {% trans "HEADER-IE-MESSAGES" %}
+    </div>
+</div>
+<![endif]-->
+<div class="brandingHeader">
+    {% microsite_header preferences %}
+</div>

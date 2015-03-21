@@ -1,0 +1,89 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags %}
+
+{% block meta %}
+<link href="/media_workspace/styles/accounts.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/accounts/signUpModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/accounts/signUpView.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="account-box" id="id_signUp">
+  <header class="center">
+    <img src="/media_workspace/images/common/lg_junarAccountPages.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+  </header>
+  <div class="account-box-content">
+    <form action="{{form.action}}" method="post" id="id_signUpForm">
+        {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+        {% csrf_token %}
+        <fieldset>
+            <legend class="PNB">{% trans "APP-SIGNUP-TITLE-TEXT" %}</legend>
+            <div class="row">
+                {{form.account_name.label_tag}}
+                {{form.account_name}}
+                <p class="tip">{% trans "WS-ACCOUNTS-ACCOUNT-NAME-TIP" %}.</p>
+            </div>
+
+            <div class="row domainRow">
+                {{form.admin_url.label_tag}}
+                <label class="fakeField clearfix" for="id_admin_url">
+                    <span class="domainText FL relative"><span>http://{{settings.DOMAINS.workspace}}</span></span>
+                    {{form.admin_url}}
+                </label>
+                <p class="tip">{% trans "WS-ACCOUNTS-ADMIN-URL-TIP" %}.</p>
+            </div>
+
+            <div class="row">
+                {{form.username.label_tag}}
+                {{form.username}}
+            </div>
+
+            <div class="row">
+                {{form.password.label_tag}}
+                <div class="relative">
+                    {{form.password}}
+                    <div class="passwordStrength absolute"><div id="id_passwordStrength" class="is0"></div></div>
+                </div>
+            </div>
+
+            <div class="row">
+                {{form.password_again.label_tag}}
+                {{form.password_again}}
+            </div>
+
+            <div class="row">
+                {{form.email.label_tag}}
+                {{form.email}}
+            </div>
+
+            <div class="row">
+                {{form.language.label_tag}}
+                {{form.language}}
+            </div>
+
+            <div class="row buttons center">
+                <p class="tip">{% trans "APP-BYCLICKINGAGREE-TEXT" %} <a href="http://www.junar.com/privacy-policy" onclick="window.open( this.href, 'Junar - Privacy Policy','width=600,height=500,resizable=yes,scrollbars=yes');return false;" title="{% trans 'APP-PRIVACY-TITLE' %}" target="_blank">{% trans "APP-PRIVACY-TEXT" %}</a>.</p>
+                <input id="id_submitButton" type="submit" class="button small green" value="{% trans 'APP-REGISTER-TEXT' %}" />
+            </div>
+
+        </fieldset>
+    </form>
+  </div>
+  <footer class="account-box-footer">
+    <ul>
+      <li><a href="/signin" title="{% trans 'APP-SIGNIN-TEXT' %}">{% trans 'APP-SIGNIN-TEXT' %}</a></li>
+      <li><a href="http://www.junar.com" title="{% trans 'APP-GOBACKTO-TEXT' %}">{% trans 'APP-GOBACKTO-TEXT' %}</a></li>
+    </ul>
+  </footer>
+</div>
+{% endblock %}
+
+{% block workspace_bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var signUpModel = new SignUpModel();
+  var signUpView = new SignUpView({model: signUpModel});
+});
+</script>
+{% endblock %}

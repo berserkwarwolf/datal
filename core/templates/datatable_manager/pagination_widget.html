@@ -1,0 +1,28 @@
+{% load i18n extra_tags %}
+<div id="{{table_prefix}}_pagination" class="pagButtons clearfix pagination">
+
+<div class="itemsPerPage clearfix FL">
+    <label for="items_per_page_datatable" class="FL">{% trans "ITEMS-PER-PAGE" %}</label>
+    <select id="items_per_page_datatable" class="FL">
+        <option value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value-"100">100</option>
+    </select>
+</div>
+<a href="javascript:;" style="display:none;" id="pagination-previous" class="Btn Ant{% if not revisions.has_prev %} hidden{% endif %}" title="{% trans 'APP-PREVIOUS-TEXT' %}">{% trans "APP-PREVIOUS-TEXT" %}</a>
+<span class="pagination-pages">
+
+{% if revisions|length != 0 %}
+    {% for i in revisions.paginator.page_range %}
+        {% if i < 11 %}
+            <a href="javascript:;" class="number pagination-page {% if revisions.number == i %} act current-page{% endif %}" title="{% trans 'APP-PAGE-TEXT' %} {{i}}">{{i}}</a>
+            {% endif %}
+    {% endfor %}
+{% endif %}
+
+</span>
+
+
+<a href="javascript:;" {% if revisions.paginator.num_pages == 1 %}style="display:none;"{% endif %} id="pagination-next" class="Btn Sig{% if not revisions.has_next %} hidden{% endif %}" title="{% trans 'APP-NEXT-TEXT' %}">{% trans "APP-NEXT-TEXT" %}</a>
+</div>

@@ -1,0 +1,604 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-VISUALIZATION-TEXT"
+msgstr "Visualization"
+
+msgid "REPORT-CHART-DATE"
+msgstr "Date"
+
+msgid "REPORT-CHART-TOTAL_HITS"
+msgstr "Total hits"
+
+msgid "EXPLORER-TITLE-CURRENTLY"
+msgstr "Currently over"
+
+msgid "EXPLORER-TITLE-INCATALOG"
+msgstr "Data Views in our Catalog"
+
+msgid "DSFIND-CATALOG-TITLE"
+msgstr "Explore our Catalog"
+
+msgid "APP-VIEWMOREOF-TEXT"
+msgstr "View more of"
+
+msgid "APP-VIEWMORE-TEXT"
+msgstr "View more"
+
+msgid "APP-VIEWLESS-TEXT"
+msgstr "View less"
+
+msgid "DSDET-GOOGLESPREADSHEETS-TITLE"
+msgstr "Google Spreadsheets"
+
+msgid "DSDET-GOOGLESPREADSHEETS-SUBTITLE"
+msgstr "Add this Data View to your Google Spreadsheets!"
+
+msgid "DSDET-GOOGLESPREADSHEETS-CONTENT"
+msgstr "Copy &amp; Paste the code below in a cell where you want to use this Data View."
+
+msgid "APP-DATASET-TEXT"
+msgstr "Dataset"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "User uploaded data"
+
+msgid "APP-PRIVATEDATASOURCE-TEXT"
+msgstr "Private Data Source"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Sources"
+
+msgid "DSDET-GUID-TIP"
+msgstr "Use it to invoke this data view through the <a href='/developers' title='View more about the API' target='_blank'>API</a>"
+
+msgid "DSDET-STAT-TEXT"
+msgstr "Stats"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Reload"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Actions"
+
+msgid "APP-EXPORTDS-TITLE"
+msgstr "Export this Data View to a CSV file"
+
+msgid "APP-EXPORTDS-TEXT"
+msgstr "Export Data Views"
+
+msgid "DSDET-EMBED-TITLE"
+msgstr "Get this data view embed code"
+
+msgid "APP-GETEMBEDCODE-TEXT"
+msgstr "Get embed code"
+
+msgid "APP-ENTERAVALUEFOR-TEXT"
+msgstr "Enter a value for"
+
+msgid "APP-TAGS-TEXT"
+msgstr "Tags"
+
+msgid "APP-NOTAGS-TEXT"
+msgstr "No tags"
+
+msgid "APP-VIEWALL-TEXT"
+msgstr "View all"
+
+msgid "DSDET-FOLLOW-TITLE"
+msgstr "Follow this Data View"
+
+msgid "APP-FOLLOW-TEXT"
+msgstr "Follow"
+
+msgid "APP-URL-TEXT"
+msgstr "URL"
+
+msgid "APP-AGO-TEXT"
+msgstr "ago"
+
+msgid "APP-WROTE-TEXT"
+msgstr "wrote"
+
+msgid "APP-COMMENT-REMOVE-BUTTON"
+msgstr "Remove comment"
+
+msgid "APP-REMOVE-TEXT"
+msgstr "Remove"
+
+msgid "APP-COMMENT-TITLE"
+msgstr "Comments"
+
+msgid "APP-SIGNIN-TEXT"
+msgstr "Sign In"
+
+msgid "APP-SIGNUP-TEXT"
+msgstr "Sign up"
+
+msgid "APP-COMMENT-SIGNIN-NOW"
+msgstr "now to post a comment!"
+
+msgid "APP-CHARACTERS-LEFT"
+msgstr "characters left"
+
+msgid "APP-POST-TEXT"
+msgstr "Post"
+
+msgid "APP-CLEAR-TEXT"
+msgstr "Clear"
+
+msgid "APP-PREVIOUS-TEXT"
+msgstr "Previous"
+
+msgid "APP-PAGE-TEXT"
+msgstr "Page"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Next"
+
+msgid "APP-EMBED-TEXT"
+msgstr "Embed"
+
+msgid "OVERLAY-DSEMBED-TITLE"
+msgstr "Add this Data View everywhere!"
+
+msgid "OVERLAY-DSEMBED-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Data View"
+
+msgid "APP-POWEREDBY-TEXT"
+msgstr "Powered by"
+
+msgid "APP-WIDTH-TEXT"
+msgstr "Width"
+
+msgid "APP-HEIGHT-TEXT"
+msgstr "Height"
+
+msgid "APP-FREEZE-TEXT"
+msgstr "Freeze"
+
+msgid "APP-ROWS-TEXT"
+msgstr "rows"
+
+msgid "APP-COLUMNS-TEXT"
+msgstr "Comment"
+
+msgid "OVERLAY-CHARTEMBED-TITLE"
+msgstr "Add this Visualization everywhere!"
+
+msgid "OVERLAY-CHARTEMBED-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"
+
+msgid "OVERLAY-MAXIMIZE-TIP"
+msgstr "Click on the data views to maximize them"
+
+msgid "APP-CLOSEALL-TEXT"
+msgstr "Close All"
+
+msgid "APP-GETGUID-TEXT"
+msgstr "Get GUID"
+
+msgid "APP-DROPHERE-TEXT"
+msgstr "Drop Here"
+
+msgid "APP-MAXIMIZE-TEXT"
+msgstr "Maximize"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Web collected data"
+
+msgid "DBMAN-CHARTEMBED-TITLE"
+msgstr "Get this Visualization embed code"
+
+msgid "DB-DSGUID-GETGUID"
+msgstr "Get the GUID for this Data View"
+
+msgid "DSDET-SHARE-TITLE"
+msgstr "Share this Data View"
+
+msgid "APP-SHARE-TEXT"
+msgstr "Share"
+
+msgid "APP-GOOGLESPREADSHEETS-TITLE"
+msgstr "Put this Data View in a Google Spreadsheet"
+
+msgid "APP-EXPORTDB-TITLE"
+msgstr "Export this Dashboard to a CSV file"
+
+msgid "APP-EXPORT-TEXT"
+msgstr "Export"
+
+msgid "APP-DASHBOARD-TEXT"
+msgstr "Dashboard"
+
+msgid "FAVDB-TAB-TIP"
+msgstr "Click to load"
+
+msgid "APP-NOTES-TITLE"
+msgstr "Notes"
+
+msgid "APP-EXPAND-TEXT"
+msgstr "Expand"
+
+msgid "APP-COLLAPSE-TEXT"
+msgstr "Collapse"
+
+msgid "APP-SEARCHRESULTS-TEXT"
+msgstr "Search results"
+
+msgid "APP-FOR-TEXT"
+msgstr "for"
+
+msgid "APP-INCATEGORY-TEXT"
+msgstr "in category"
+
+msgid "DSFIND-HELPTIP-TITLE"
+msgstr "Helpful Tips"
+
+msgid "APP-DIDYOUKNOW-TEXT"
+msgstr "Did you know?"
+
+msgid "DSFIND-HELPTIP-SUBTITLE1"
+msgstr "Searches in"
+
+msgid "DSFIND-HELPTIP-SUBTITLE2"
+msgstr "can be <strong>refined</strong>. You can use some <strong>operations</strong> to improve your results:"
+
+msgid "DSFIND-HELPTIP-TIP1TITLE"
+msgstr "Separate the search terms with spaces"
+
+msgid "DSFIND-HELPTIP-TIP1TEXT"
+msgstr "By doing this, you will get results that has at least one of the terms that you are searching for"
+
+msgid "APP-EXAMPLE-TEXT"
+msgstr "Example"
+
+msgid "DSFIND-HELPTIP-TIP2TITLE"
+msgstr "Separate the search terms with plus +"
+
+msgid "DSFIND-HELPTIP-TIP2TEXT"
+msgstr "By doing this, you will get results that has both terms that you are searching for"
+
+msgid "DSFIND-HELPTIP-TIP3TITLE"
+msgstr "Search for a phase with quotes \"\""
+
+msgid "DSFIND-HELPTIP-TIP3TEXT"
+msgstr "By doing this, you will get results that has the exact phrase that you are searching for"
+
+msgid "APP-MATCHES-TEXT"
+msgstr "matches"
+
+msgid "APP-TIME-TEXT"
+msgstr "time"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DBMAN-PERSONALIZEDB-NOFOUDERROR1"
+msgstr "Sorry, but there were no results."
+
+msgid "DEV-MS-DESCRIPTION-TEXT1"
+msgstr "The API allows direct access to the data published in the "
+
+msgid "DEV-MS-DESCRIPTION-TEXT2"
+msgstr "Open Data site from your applications. It uses a RESTful interface and returns the data in JSON format."
+
+msgid "DEV-MS-DESCRIPTION-TEXT2-PRIVATE"
+msgstr "Private Data site from your applications. It uses a RESTful interface and returns the data in JSON format."
+
+msgid "DEV-PAGE-TITLE-MICROSITE1"
+msgstr "Use the "
+
+msgid "DEV-PAGE-TITLE-MICROSITE2"
+msgstr " API"
+
+msgid "APP-LAST-MODIFIED"
+msgstr "Last modified"
+
+msgid "APP-OPEN-RESOURCES"
+msgstr "Open Data Resources"
+
+msgid "APP-OPEN-RESOURCES-PRIVATE"
+msgstr "Private Data Resources"
+
+msgid "APP-SEARCH-TEXT"
+msgstr "Search"
+
+msgid "HEADERAUTO-SEARCH-PLACEHOLDER"
+msgstr "Search for Open Data"
+
+msgid "HEADERAUTO-SEARCH-PLACEHOLDER-PRIVATE"
+msgstr "Search for Private Data"
+
+msgid "APP-SIGNOUT-TEXT"
+msgstr "Sign out"
+
+msgid "HOME-ENTITY-TITLE"
+msgstr "Go to entity"
+
+msgid "HOME-ENTITY-OPTION"
+msgstr "Select..."
+
+msgid "HOME-ENTITY-BUTTON"
+msgstr "Go"
+
+msgid "FILTER-RESOURCES-TITLE"
+msgstr "Filter resources"
+
+msgid "FILTER-ENTITY-LABEL"
+msgstr "By entity"
+
+msgid "FILTER-ENTITY-OPTION"
+msgstr "Show all"
+
+msgid "FILTER-TYPE-LABEL"
+msgstr "By Type"
+
+msgid "FILTER-TYPE-OPTION"
+msgstr "Show all"
+
+msgid "FILTER-CATEGORY-LABEL"
+msgstr "By category"
+
+msgid "FILTER-CATEGORY-OPTION"
+msgstr "Show all"
+
+msgid "FILTER-RESOURCES-BUTTON"
+msgstr "Apply filters"
+
+msgid "DSDET-PIVOTTABLES-TITLE"
+msgstr "Pivot table - Available columns"
+
+msgid "DSDET-PIVOTTABLES-CONTENT"
+msgstr "Drag & drop the columns to the boxes below, and then re-arrage them as you like"
+
+msgid "DSDET-PIVOTTABLES-CHECKBOX"
+msgstr "First row contains table headers"
+
+msgid "DSDET-PIVOTTABLES-GROUPBY"
+msgstr "Group by"
+
+msgid "DSDET-PIVOTTABLES-SUM"
+msgstr "Sum"
+
+msgid "DSDET-PIVOTTABLES-ACCEPT"
+msgstr "Accept"
+
+msgid "DSDET-PIVOTTABLE-ICON"
+msgstr "Pivot table"
+
+msgid "VIEWDS-TABS-INFO"
+msgstr "Info"
+
+msgid "VIEWDS-TABS-REFRESH"
+msgstr "Refresh"
+
+msgid "VIEWDS-TABS-EMBED"
+msgstr "Embed"
+
+msgid "VIEWDS-TABS-API"
+msgstr "API"
+
+msgid "VIEWDS-TABS-EXPORT"
+msgstr "Export"
+
+msgid "VIEWDS-TABS-PARAMS"
+msgstr "Args"
+
+msgid "VIEWDS-TABS-FILTERS"
+msgstr "Filters"
+
+msgid "VIEWDS-TABS-NOTES"
+msgstr "Notes"
+
+msgid "VIEWDS-TABS-PIVOTTABLE"
+msgstr "Pivot"
+
+msgid "VIEWDS-INFO-TITLE"
+msgstr "Information"
+
+msgid "VIEWDS-API-TITLE"
+msgstr "API / Developers"
+
+msgid "VIEWDS-INFO-PERMALINK"
+msgstr "Permalink:"
+
+msgid "VIEWDS-INFO-LASTUPDATE"
+msgstr "Latest update"
+
+msgid "VIEWDS-INFO-DATACOLLECTEDFROM"
+msgstr "Data collected from:"
+
+msgid "VIEWDS-INFO-WEBSITE"
+msgstr "Website:"
+
+msgid "VIEWDS-INFO-SOURCES"
+msgstr "Sources"
+
+msgid "VIEWDS-INFO-TAGS"
+msgstr "Tags"
+
+msgid "VIEWDS-INFO-VISITORS"
+msgstr "Visitors in the last 30 days:"
+
+msgid "VIEWDS-API-REQUESTKEY-1"
+msgstr "Get your API key"
+
+msgid "VIEWDS-API-REQUESTKEY-2"
+msgstr "here"
+
+msgid "VIEWDS-API-DOCUMENTATION-1"
+msgstr "Use it to invoke this Data View through the API. Learn more in the"
+
+msgid "VIEWDS-API-DOCUMENTATION-2"
+msgstr "documentation"
+
+msgid "VIEWDS-API-DOCUMENTATION-TITLE"
+msgstr "Learn more in the documentation"
+
+msgid "VIEWDS-API-EXAMPLES"
+msgstr "API request examples:"
+
+msgid "VIEWDS-API-EXAMPLES-1"
+msgstr "A normal invoke:"
+
+msgid "VIEWDS-API-EXAMPLES-2"
+msgstr "Change the output format:"
+
+msgid "VIEWDS-API-EXAMPLES-3"
+msgstr "Using Data View parameters:"
+
+msgid "VIEWDS-API-NEEDHELP"
+msgstr "Need help?"
+
+msgid "VIEWDS-API-NEEDHELP-1"
+msgstr "Send us an email"
+
+msgid "VIEWDS-API-NEEDHELP-2"
+msgstr "We are always happy to help!"
+
+msgid "VIEWDS-EXPORT-ALL"
+msgstr "Export all the dataset"
+
+msgid "VIEWDS-EXPORT-VIEWDATA"
+msgstr "Export just this view data"
+
+msgid "VIEWDS-EXPORT-CSV"
+msgstr "Export to CSV"
+
+msgid "VIEWDS-EXPORT-XLS"
+msgstr "Export to XLS / XLSx"
+
+msgid "VIEWDS-EXPORT-GS"
+msgstr "Use in Google Spreadsheet"
+
+msgid "APP-PARAM-TEXT"
+msgstr "Edit Arguments"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Change the values of the arguments in order to interact with the different views of the data:"
+
+msgid "VIEWDS-NOTES-TITLE"
+msgstr "Notes"
+
+msgid "APP-FILE-TEXT"
+msgstr "file"
+
+msgid "APP-WEBSERVICE-TEXT"
+msgstr "Web Service"
+
+msgid "VIEWDS-PIVOT-TABLE"
+msgstr "Table"
+
+msgid "VIEWDS-PIVOT-CHARTS"
+msgstr "Visualizations"
+
+msgid "VIEWDS-PIVOT-BAR"
+msgstr "Bar"
+
+msgid "VIEWDS-PIVOT-LINE"
+msgstr "Line"
+
+msgid "VIEWDS-PIVOT-SCATTER"
+msgstr "Scatter"
+
+msgid "VIEWDS-PIVOT-PIE"
+msgstr "Pie"
+
+msgid "VIEWDS-PIVOT-BARSTACK"
+msgstr "Bar stack"
+
+msgid "VIEWDS-PIVOT-BARLINE"
+msgstr "Bar line"
+
+msgid "VIEWDS-PIVOT-FULLSCREEN"
+msgstr "Full Screen"
+
+msgid "VIEWDS-PIVOT-FIELDS"
+msgstr "Fields"
+
+msgid "VIEWDS-PIVOT-HELP"
+msgstr "Help"
+
+msgid "VIEWCHART-TABS-HEATMAP"
+msgstr "Heatmap"
+
+msgid "VIEWCHART-MINILOADING-TEXT"
+msgstr "Loading. Please wait..."
+
+msgid "HOME-REFENCES-TEXT"
+msgstr "References:"
+
+msgid "HOME-DATASET-TEXT"
+msgstr "Dataset"
+
+msgid "HOME-DB-TEXT"
+msgstr "Dashboard"
+
+msgid "HOME-DS-TEXT"
+msgstr "Data View"
+
+msgid "HOME-VZ-TEXT"
+msgstr "Visualization"
+
+msgid "HOME-QUICKACCESS-TEXT"
+msgstr "Quick Access"
+
+msgid "APP-PREVIEWWINDOW-TITLE"
+msgstr "Home Page Preview"
+
+msgid "APP-TRANSPARENCY-TITLE"
+msgstr "Transparency"
+
+msgid "APP-TRANSPARENCY-DESCRIPTION"
+msgstr "Transparency site for "
+
+msgid "APP-TRANSPARENCY-VIEWMORE"
+msgstr "View more"
+
+
+# —————————— New Keys Open Junar
+
+msgid "APP-DOWNLOAD-TEXT"
+msgstr "Download"
+
+msgid "APP-RESOURCESCREATED-TEXT"
+msgstr "Resources created using this Dataset"
+
+msgid "APP-RESOURCE-TEXT"
+msgstr "Resource"
+
+msgid "APP-LAST-UPDATE-TEXT"
+msgstr "Last update"
+
+msgid "APP-CATEGORY-TEXT"
+msgstr "Category"
+
+msgid "APP-CONTACT-EMAIL-FOR-DATASET-TEXT"
+msgstr "Contact e-mail for this Dataset"
+
+msgid "APP-UPDATE-FREQUENCY-TEXT"
+msgstr "Update frequency"
+
+msgid "APP-TYPE-TEXT"
+msgstr "Type"
+
+msgid "APP-REGION-TEXT"
+msgstr "Region"
+
+msgid "APP-LICENSE-TEXT"
+msgstr "License"

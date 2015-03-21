@@ -1,0 +1,55 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags %}
+
+{% block meta %}
+<link href="/media_workspace/styles/accounts.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/accounts/activateModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/accounts/activateView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="account-box" id="id_activate">
+    <header class="center">
+    <img src="/media_workspace/images/common/lg_junarAccountPages.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    </header>
+    <div class="account-box-content">
+        <form action="{{form.action}}" method="post">
+            {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+            {% csrf_token %}
+            <fieldset>
+                <legend class="PNB">{% trans "APP-ACTIVATION-TITLE-TEXT" %}</legend>
+                <p class="sub">{% trans "APP-ACTIVATION-SUBTITLE-TEXT" %}</p>
+
+                <div class="row clearfix">
+                    {{form.password.label_tag}}
+                    <div class="relative">
+                    {{form.password}}
+                        <div class="passwordStrength absolute"><div id="id_passwordStrength" class="is0"></div></div>
+                    </div>
+                </div>
+
+                <div class="row clearfix">
+                    {{form.password_again.label_tag}}
+                    {{form.password_again}}
+                </div>
+
+                <div class="row buttons center">
+                    <p class="tip">{% trans "APP-BYCLICKINGAGREE-TEXT" %} <a href="http://www.junar.com/privacy-policy" onclick="window.open( this.href, 'Junar - Privacy Policy','width=600,height=500,resizable=yes,scrollbars=yes');return false;" title="{% trans 'APP-PRIVACY-TITLE' %}" target="_blank">{% trans "APP-PRIVACY-TEXT" %}</a>.</p>
+                    <input type="submit" id="id_activateButton" class="button small green" value="{% trans 'APP-START-TEXT' %}" />
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block workspace_bottom_js %}
+<script type="text/javascript">
+$(document).ready(function(){
+  var activateModel = new ActivateModel();
+  var activateView = new ActivateView({model: activateModel});
+});
+</script>
+{% endblock %}

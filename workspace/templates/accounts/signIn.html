@@ -1,0 +1,56 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags %}
+
+{% block meta %}
+<link href="/media_workspace/styles/accounts.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src="/js_workspace/accounts/signInModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/accounts/signInView.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block body %}
+<div class="account-box" id="id_signIn">
+  <header class="center">
+    <img src="/media_workspace/images/common/lg_junarAccountPages.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+  </header>
+  <div class="account-box-content">
+    <form action="{{form.action}}" method="post">
+      {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
+      {% csrf_token %}
+      <fieldset>
+        <div class="row clearfix">
+          <label for="id_username">{% trans "MODEL-USERNAME-TEXT" %}:</label>
+          {{form.username}}
+        </div>
+        <div class="row clearfix">
+          <label for="id_password">{% trans "MODEL-PASSWORD-TEXT" %}:</label>
+          {{form.password}}
+        </div>
+        <div class="row remember clearfix">
+          {{form.remember_me}}
+          <label for="id_remember_me">{% trans "APP-REMEMBERME-TEXT" %}</label>
+          <input id="id_submitButton" type="submit" class="button green small" value="{% trans 'APP-LOGIN-TEXT' %}" />
+        </div>
+      </fieldset>
+    </form>
+  </div>
+  <footer class="account-box-footer">
+    <ul>
+      <li><a href="{% url 'accounts.password_recovery' %}" title="{% trans 'APP-FORGOTPASSWORD-TEXT' %}" class="forgotLink">{% trans "APP-FORGOTPASSWORD-TEXT" %}</a></li>
+      <li><a href="http://www.junar.com" title="{% trans 'APP-GOBACKTO-TEXT' %}">{% trans 'APP-GOBACKTO-TEXT' %}</a></li>
+    </ul>
+  </footer>
+</div>
+{% endblock %}
+
+{% block workspace_bottom_js %}
+<script type="text/javascript">
+var signInMessages = new Array();
+{% for message in messages %}
+  signInMessages.push('{{message}}');
+{% endfor %}
+$(document).ready(function(){
+  var signInModel = new SignInModel();
+  var signInView = new SignInView({model: signInModel});
+});
+</script>
+{% endblock %}

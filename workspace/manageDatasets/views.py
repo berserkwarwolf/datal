@@ -1,0 +1,332 @@
+import json
+import logging
+
+from django.http import HttpResponse
+from django.db import transaction
+from django.views.decorators.http import require_GET, require_http_methods
+from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext
+
+from junar.api.http import JSONHttpResponse
+from junar.core.shortcuts import render_to_response
+from junar.core.auth.decorators import login_required
+from junar.core.choices import *
+from junar.core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from junar.workspace.decorators import *
+from junar.workspace.templates import DatasetList
+from junar.workspace.manageDatasets.forms import *
+from junar.workspace.daos.datasets import DatasetDBDAO
+from junar.core import engine
+
+logger = logging.getLogger(__name__)
+
+@login_required
+@require_privilege("workspace.can_query_collector_dataset")
+@require_GET
+def list(request):
+    """ List all Datasets """
+    account_domain = request.preferences['account.domain']
+
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id, language=request.user.language, page=0)
+
+    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
+        return render_to_response('manageDatasets/noResults.html', locals())
+
+    filters = remove_duplicated_filters(resources)
+    datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
+
+    return render_to_response('manageDatasets/index.html', locals())
+
+@login_required
+@require_GET
+def view(request, revision_id):
+    account_id = request.auth_manager.account_id
+    credentials = request.auth_manager
+    user_id = request.auth_manager.id
+    language = request.auth_manager.language
+    dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
+    datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
+    return render_to_response('viewDataset/index.html', locals())
+
+@login_required
+@require_GET
+def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
+    """ filter resources """
+
+    bb_request = request.GET
+    filters = bb_request.get('filters')
+    filters_dict= ''
+    filter_name= ''
+    sort_by='-id'
+    exclude=None
+
+    if filters is not None and filters != '':
+        filters_dict = unset_dataset_revision_nice(json.loads(bb_request.get('filters')))
+    if bb_request.get('page') is not None and bb_request.get('page') != '':
+        page = int(bb_request.get('page'))
+    if bb_request.get('q') is not None and bb_request.get('q') != '':
+        filter_name = bb_request.get('q')
+    if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
+        itemsxpage = int(bb_request.get('itemxpage'))
+
+
+    if bb_request.get('collect_type', None) is not None:
+        # If File Dataset, set impl_types as valid ones. File = 0
+        if bb_request.get('collect_type') == '0':
+            exclude = {
+                'dataset__type': bb_request.get('collect_type'),
+                'impl_type__in': DATASTREAM_IMPL_NOT_VALID_CHOICES
+            }
+
+    if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
+        if bb_request.get('sort_by') == "category":
+            sort_by ="category__categoryi18n__name"
+        if bb_request.get('sort_by') == "title":
+            sort_by ="dataseti18n__title"
+        if bb_request.get('sort_by') == "author":
+            sort_by ="dataset__user__nick"
+        if bb_request.get('order')=="desc":
+            sort_by = "-"+ sort_by
+
+    resources,total_resources = DatasetDBDAO().query(
+        account_id=request.account.id,
+        language=request.user.language,
+        page=page,
+        itemsxpage=itemsxpage,
+        filters_dict = filters_dict,
+        sort_by=sort_by,
+        filter_name=filter_name,
+        exclude=exclude
+    )
+
+    for resource in resources:
+        resource['url'] = reverse('manageDatasets.view', urlconf='junar.workspace.urls', kwargs={'revision_id': resource['id']})
+
+    data = {'total_resources': total_resources, 'resources': resources}
+    response = DatasetList().render(data)
+
+    mimetype = "application/json"
+ 
+    return HttpResponse(response, mimetype=mimetype)
+    
+@login_required
+@require_privilege("workspace.can_delete_dataset")
+@require_privilege("workspace.can_delete_dataset_revision")
+@transaction.commit_on_success
+def remove(request, id, type="resource"):
+
+    """ remove resource """
+    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
+
+    if type == 'revision':
+        removes = lifecycle.remove()
+        if removes:
+            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
+        else:
+            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT')]}))
+
+    else:
+        removes = lifecycle.remove(killemall=True)
+        if removes:
+            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
+        else:
+            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+
+@login_required
+@require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
+def create(request, collect_type='index'):
+
+    auth_manager = request.auth_manager
+    account_id = auth_manager.account_id
+    language = auth_manager.language
+
+    if request.method == 'GET':
+        form = DatasetFormFactory(collect_type).create(
+            account_id=account_id,
+            language=language,
+            status_choices=auth_manager.get_allowed_actions()
+        )
+        form.label_suffix = ''
+        url = 'createDataset/{0}.html'.format(collect_type)
+        return render_to_response(url, locals())
+
+    elif request.method == 'POST':
+        """update dataset """
+        form = DatasetFormFactory(collect_type).create(request, account_id=account_id, language=language,
+                                                       status_choices=auth_manager.get_allowed_actions())
+
+        if form.is_valid():
+            lifecycle = DatasetLifeCycleManager(user=request.user)
+            dataset_revision = lifecycle.create(collect_type=request.POST.get('collect_type'), language=language,
+                                                **form.cleaned_data)
+
+            # TODO: Create a CreateDatasetResponse object
+            data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+                    dataset_revision_id=dataset_revision.id)
+            return HttpResponse(json.dumps(data), content_type='text/plain')
+        else:
+            raise InvalidFormException(form.errors)
+
+@login_required
+@require_http_methods(['POST', 'GET'])
+def edit(request, dataset_revision_id=None):
+    account_id = request.auth_manager.account_id
+    auth_manager = request.auth_manager
+    language = request.auth_manager.language
+    user_id = request.auth_manager.id
+
+    # TODO: Put line in a common place
+    collect_types = {0: 'file', 1: 'url', 2: 'webservice'}
+
+    # TODO: Review. Category was not loading options from form init.
+    category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
+
+
+    if request.method == 'GET':
+        status_options=auth_manager.get_allowed_actions()
+
+        # Get data set and the right template depending on the collected type
+        dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
+        url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
+
+        # Import the form that we really need
+        if collect_types[dataset['collect_type']] is not 'url':
+            className = [collect_types[dataset['collect_type']].capitalize(), "Form"]
+        else:
+            className = ['Dataset', "Form"]
+
+        className = ''.join(str(elem) for elem in className)
+        mod = __import__('junar.workspace.manageDatasets.forms', fromlist=[className])
+
+        initial_values = dict(
+            # Dataset Form
+            dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
+            category=dataset.get('category_id'), status=dataset.get('status'),
+            notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
+            impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
+            frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
+            tags=dataset.get('tags'),
+
+            # Webservice Form: NO IMPLEMENTADO TODO
+            path_to_headers='path_to_headers', path_to_data='path_to_data', method_name='method_name', namespace='namespace',
+            token='token', algorithm='algorithm', signature='signature', use_cache='use_cache', username='username',
+            password='password',
+
+            # File Form: NO IMPLEMENTADO TODO
+            file_data='file_data',
+        )
+
+        form = getattr(mod, className)(status_options=status_options)
+
+        form.label_suffix = ''
+
+        # TODO: Review. Category was not loading options from form init.
+        form.fields['category'].choices = category_choices
+
+
+        # TODO: Review. Initial values was not loading when creating a form instance in the standard way
+        form.initial = initial_values
+
+        return render_to_response(url, locals())
+    elif request.method == 'POST':
+        """ Update dataset """
+        form = DatasetFormFactory(request.POST.get('collect_type')).create(request, account_id=account_id,
+                                                                           language=language,
+                                                                           status_choices=auth_manager.get_allowed_actions())
+
+        if form.is_valid():
+            lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
+
+            dataset_revision = lifecycle.edit(collect_type=request.POST.get('collect_type'),
+                                              changed_fields=form.changed_data, language=language,  **form.cleaned_data)
+
+            # TODO: Create a CreateDatasetResponse object
+            data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+                    dataset_revision_id=dataset_revision.id)
+            return HttpResponse(json.dumps(data), content_type='text/plain')
+        else:
+            raise InvalidFormException(form.errors)
+
+
+@login_required
+@require_GET
+def related_resources(request):
+    language = request.auth_manager.language
+    dataset_id = request.GET.get('dataset_id', '')
+
+    # For now, we'll fetch datastreams
+    associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
+    list_result = [associated_datastream for associated_datastream in associated_datastreams]
+    return HttpResponse(json.dumps(list_result), mimetype="application/json")
+
+
+@login_required
+@require_privilege("workspace.can_review_dataset_revision")
+@require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
+def review(request, dataset_revision_id=None):
+
+    if request.method == 'POST' and dataset_revision_id != None:
+
+        lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
+
+        action = request.POST.get('action')
+
+        if action == 'approve':
+
+            lifecycle.accept()
+
+            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATASET-APPROVED-TEXT')}
+
+        elif action == 'reject':
+
+            lifecycle.reject()
+
+            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATASET-REJECTED-TEXT')}
+
+        else:
+
+            response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+
+    else:
+
+        response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+    
+
+    return JSONHttpResponse(json.dumps(response))
+
+
+@require_GET
+def action_load(request):
+
+    form = LoadForm(request.GET)
+    if form.is_valid():
+        # check ownership
+        dataset_revision_id = form.cleaned_data['dataset_revision_id']
+        page = form.cleaned_data['page']
+        limit = form.cleaned_data['limit']
+        tableid = form.cleaned_data['tableid']
+        query = {'pId': dataset_revision_id}
+        getdict = request.GET.dict()
+        for k in ['dataset_revision_id', 'page', 'limit', 'tableid']:
+            if getdict.has_key(k): getdict.pop(k)
+        query.update(getdict)
+        if page:
+            query['pPage'] = page
+        if limit:
+            query['pLimit'] = limit
+        if tableid:
+            query['pTableid'] = tableid
+        response, mimetype = engine.load(query)
+
+        #detect error
+        """
+        if response.find("It was not possible to dispatch the request"):
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error("Error finding tables on dataset [%s]" % query)
+        """
+        return HttpResponse(response, mimetype=mimetype)
+    else:
+        raise Http400(form.get_error_description())

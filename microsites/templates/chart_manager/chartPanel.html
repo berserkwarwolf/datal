@@ -1,0 +1,185 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<!-- COLUMNS -->
+<div class="columns clearfix" itemscope itemtype="http://schema.org/WebPage">
+
+    <!-- COLUMN - Right -->
+    <div class="CR dsInfoBox relative">
+
+        <!-- SHADOWS -->
+        <div class="cv tl"></div>
+
+        <!-- COLUMN CONTENT -->
+        <div class="columnContent clearfix">
+
+            <!-- DATA SOURCE BOX -->
+            <div id="" class="boxCR dataSourceBox">
+                <div class="boxTitle">
+                    <h4>{% trans "APP-DATASET-TEXT" %}</h4>
+                </div>
+                <div class="boxInner clearfix">
+                    
+                {% if visualization_revision.datastream_type == 'URL' %}
+                    <div class="img FL clearfix">
+                        <img src="http://open.thumbshots.org/image.pxf?url={{visualization_revision.end_point|urlEncode}}" alt="{{visualization_revision.end_point}}" title="{{visualization_revision.end_point}}" class="FL" width="66"/>
+                    </div>
+                    <div class="text FR">
+                {% elif visualization_revision.datastream_type == 'SELF PUBLISH' %}
+                    <div class="text spImage">
+                {% elif visualization_revision.datastream_type == 'WEBSERVICE' %}
+                    <div class="text spImage soapImage">
+                {% endif %}
+
+                        <div id="id_dataservice_goToSource_{{forloop.counter0}}" class="gotosource">
+                            {% if visualization_revision.datastream_type == 'URL' %}
+                                <div class="gotosourceInner">
+                                    <a id="id_gotosource" href="{{visualization_revision.end_point}}" target="_blank" rel="nofollow" title="{{visualization_revision.end_point}}">{{visualization_revision.end_point}}</a>
+                                </div>
+                            {% elif visualization_revision.datastream_type == 'SELF PUBLISH' %}
+                                <div class="gotosourceInner">
+                                    <p class="userText">{% trans "APP-USERUPLOAD-TEXT" %}</p>
+                                </div>
+                            {% elif visualization_revision.datastream_type == 'WEBSERVICE' %}
+                                <div class="gotosourceInner">
+                                    <p class="userText">{% trans "APP-SOAP-TEXT" %}</p>
+                                </div>
+                            {% endif %}
+                            <span class="transparency">&nbsp;</span>
+                        </div>
+                        {% if visualization_revision.created_at and not preferences.account_hidelastupdate%}
+                            <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br/> {{visualization_revision.created_at}}</p>
+                        {% endif %}
+                        {% if visualization_revision.datastream_type == 'SELF PUBLISH' and can_download%}
+                            <a rel="nofollow" href="{% url "datastream_manager.action_download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="genericButton normalButton" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            {% if visualization_revision.get_sources %}
+             <div id="id_guid_container" class="boxCR GUIDBox sourcesBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_Sources">{% trans "APP-SOURCES-TEXT" %}:</h5>
+                    <ul class="clearfix">
+                    {% for source in visualization_revision.get_sources %}
+                        <li class="FL"><a href="{{source.url|addhttp}}" target="_blank" title="{{source.name}}">{{source.name}}</a>{% if not forloop.last %}<em class="comma">,&nbsp;</em>{% endif %}</li>
+                    {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- GUID BOX -->
+            <div id="id_guid_container" class="boxCR GUIDBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_GUID">GUID:</h5>
+                    <p class="FL textGUID">{{visualization_revision.guid}}</p>
+                    <p class="clear tip">{% trans "DSDET-GUID-TIP" %}</p>
+                </div>
+            </div>
+
+            <!-- STAT BOX -->
+            <div id="id_stat_container" class="boxCR GUIDBox statsBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_Stats">{% trans "DSDET-STAT-TEXT" %}</h5>
+                    <div id="id_statChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLUMN - Left -->
+    <div id="id_dataStreamContainer" class="CL minHeight">
+
+        <!-- ACTIONS TOOLBAR -->
+        <div id="id_dataservice_toolbar_{{visualization_revision.visualizationrevision_id}}" class="actionsToolbar toolbar clearfix DN">
+        
+            {% if chart_type == "mapchart" %}
+            <div class="FR">
+                <a id="id_toggleHeatMapButton" href="javascript:;">{% trans "CHART-HEATMAP-TEXT" %}</a>    
+            </div>        
+            {% endif %}
+       
+            <!-- RELOAD 
+            <a href="javascript:;" id="id_resetDataServiceButton_{{visualization_revision.visualizationrevision_id}}" title="Reload" class="FR Icon ic_Refresh">{% trans "APP-RELOAD-TEXT" %}</a>
+            -->
+<!--             <div id="id_more_markers" class="DN FR"> -->
+<!--                 <span class="sep">|</span> {% trans "APP-TOTALMARKERSLEFT-TEXT" %}: <span id="id_total_markers"></span> <span class="sep">|</span><a id="id_show_more" href="javascript:;">{% trans "APP-NEXTMARKERS-TEXT" %}</a> -->
+<!--             </div> -->
+
+        </div>
+
+        <!-- VISUALIZATION CONTAINER -->
+        <div class="chartContainer" style="width:100%;height:600px;">
+            <div id="id_chartDisplay" class="chartContainerInner clearfix" style="position:relative;height:100%;width:100%"></div>
+        </div>
+
+        <!-- DATA STREAMS ACTIONS - bottom -->
+        <div class="dataStreamActions bottomActions DN">
+            <div class="actionsInner toolbar clearfix">
+
+                <!-- CACHE NOTIFICATION -->
+                <div class="cacheNotification toolbar FL relativeContainer" id="id_notification" style="display:none;">
+                    <span id="id_notificationMessage" class="FL"></span>
+                    <span class="sep FL"><span class="DN">|</span></span>
+                </div>
+
+                <!-- ACTIONS MENU -->
+                <div class="actionsMenu relativeContainer FR">
+                    <a title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu" id="id_menuDataServiceButton_{{visualization_revision.visualizationrevision_id}}" href="javascript:;"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
+                    <div id="id_tooltipDataServiceButton_{{visualization_revision.visualizationrevision_id}}" class="dashboard-dataservice-tooltip">
+                        <div class="menuInner">
+                            <ul class="In">
+                                <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
+                                {% if can_export %}
+                                <li class="Item"><a href="{% url "datastream_manager.action_csv" visualization_revision.datastream_id visualization_revision.slug %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                {% endif %}
+                                {% if not is_private_site %}
+                                <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sep FR"><span class="DN">|</span></div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript">
+          var $datastream = $("#id_dataStreamContainer");
+          $datastream.data("user_nick", "{{visualization_revision.created_by_nick}}");
+          $datastream.data("dataservice_id", "{{visualization_revision.datastream_id}}");
+          {# @todo: Joaco! put the parameters here #}
+          $datastream.data("dataservice_end_point", "{{""|escapejs}}");
+          $datastream.data("dataservice_parameters", "{% for parameter in dataservice.dataservice_parameters %}{% if not forloop.first %}, {% endif %}{{parameter.parameter_name}}{%endfor%}");
+          $datastream.data("datasource_end_point", "{{visualization_revision.filename|escapejs}}");
+          $datastream.data("dataservice_title", "{{visualization_revision.title}}");
+          {# @todo: Joaco! put the parameters here #}
+          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url "chart_manager.action_embed" visualization_revision.guid %}?end_point=&height=0&width=0");
+          $datastream.data("permalink", "{{base_uri}}{{visualization_revision.permalink}}");
+          $datastream.data("guid", "{{visualization_revision.guid}}");
+          $datastream.data("is_private", {{visualization_revision.is_private|lower}});
+          $datastream.data("datastreamrevision_id", "{{visualization_revision.datastreamrevision_id}}");
+          $datastream.data("sov_id", "{{visualization_revision.visualization_id}}");
+        </script>
+
+    </div>
+
+</div>
+
+<!-- GRAY CONTAINER -->
+<div class="grayContainer">
+
+    <!-- COLUMNS -->
+    <div class="columns clearfix">
+
+        <!-- COLUMN - Left -->
+        <div class="CL">
+
+        </div>
+
+    </div>
+</div>

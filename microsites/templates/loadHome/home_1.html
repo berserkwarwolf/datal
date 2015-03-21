@@ -1,0 +1,31 @@
+{% extends "loadHome/index.html" %}
+{% load i18n humanize extra_tags core_components %}
+
+{% block themeMeta %}
+{% endblock %}
+
+{% block themeContent %}
+{% with number=paginator.count|intcomma %}
+<div class="homeContent w960 theme1">
+
+    {% if config.mainTitle %}
+    <div class="featuredContent placeholder">
+        <h1 class="PNR">{{config.mainTitle|format:number|safe}}</h1>
+    </div>
+    {% endif %}
+
+    {% if config.mainSection %}
+    <!-- HOME COLUMNS -->
+    <div class="homeColumns">
+        <div class="homeMainContent placeholder">
+            {{config.mainSection|format:number|safe}}
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- RESOURCES TABLE -->
+    {% include "loadHome/resourcesTable.html" %}
+    
+</div>
+{% endwith %}
+{% endblock %}

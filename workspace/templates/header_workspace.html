@@ -1,0 +1,65 @@
+{% load i18n extra_tags %}
+
+<!--[if lt IE 8]>
+<div class="ieMsg">
+	<div class="w960 clearfix">
+		{% trans "HEADER-IE-MESSAGES" %}
+	</div>
+</div>
+<![endif]-->
+
+<header class="header clearfix">
+
+  <!-- Logo -->
+  <a href="/welcome" title="Junar" class="logo FL clearfix"><img src="/media_workspace/images/common/lg_junar.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/></a>
+
+  {% comment %}
+  <!-- Search -->
+  <div class="searchbox FL clearfix">
+    <input type="text" class="field FL" placeholder="{% trans 'HEADER-SEARCH-TEXT' %}" />
+    <input type="button" class="submit FL" value="{% trans 'HEADER-SEARCH-BUTTON' %}" />
+    <a class="pulldown FL">{% trans 'HEADER-SEARCH-ADVANCED' %}</a>
+  </div>
+  {% endcomment %}
+
+  <!-- ODS Button -->
+  <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button green small FL" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}</a>
+
+  <!-- My Account Tab -->
+  <div class="tab has-separator pulldown FR">
+    <a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">
+      <span class="img clearfix">{% gravatar auth_manager "small" "" %}</span>
+      <strong>{{auth_manager.nick}}</strong>
+    </a>
+    <div class="submenu border-box" style="display:none;">
+        <ul>
+          {% if 'workspace.can_access_ops' in auth_manager.privileges %}
+          {% endif %}
+          <li><a href="{% url 'accounts.my_account' %}" title="{% trans 'HEADER-ACCOUNTDETAILLS-TEXT' %}">{% trans "HEADER-ACCOUNTDETAILLS-TEXT" %}</a></li>
+          <li><a id="id_sign_out" href="/signout" title="{% trans 'HEADER-SIGNOUT-TEXT' %}">{% trans "HEADER-SIGNOUT-TEXT" %}</a></li>
+        </ul>
+    </div>
+  </div>
+
+  <!-- Notifications Tab -->
+  <div class="tab notifications pulldown has-separator has-notifications FR" style="display:none;">
+    <a><span class="notifications-number">8</span></a>
+    <div class="submenu border-box" style="display:none;">
+        <h3>{% trans 'APP-PENDINGACTIONS-TEXT' %}</h3>
+        <ul>
+            <li><a href="#"><i class="icon-dataview"></i> Park locations {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-visualization"></i> May Staff {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-dataset"></i> A two line Dataset named Park Location {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-dataview"></i> Park locations {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-dataview"></i> Park locations {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-visualization"></i> May Staff {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-dataset"></i> A two line Dataset named Park Location {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+            <li><a href="#"><i class="icon-dataview"></i> Park locations {% trans 'APP-ISPENDINGREVIEW-TEXT' %}</a></li>
+        </ul>
+    </div>
+  </div>
+
+  <!-- Online Support -->
+  <a class="button orange small FR" title="{% trans 'HEADER-HELP-TEXT' %}" id="id_help_link">{% trans "HEADER-HELP-TEXT" %}</a>
+
+</header>

@@ -1,0 +1,18 @@
+[
+{% for resources in resources_to_delete %}
+    {
+        {% for key, value in resources.items %}
+        '{{ key }}': {{ value }}
+        ,'datasets':
+        ["is_test":"{{is_test}}"
+        ],
+     'datastreams':
+         [
+         ],
+     'visualizations':
+         [
+         ]
+         {% endfor %}
+    },
+{% endfor %}
+]

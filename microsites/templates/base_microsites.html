@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% block favicon %}
+<link rel="shortcut icon" href="{{preferences.account_favicon}}" />
+{% endblock %}
+
+{% block css_includes %}
+<link href="/media_core/styles/_modules/header.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/_modules/footer.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/stickyFooter.css?id={{settings.VERSION_JS_CSS}}"/>
+<link href="/media_workspace/styles/_modules/buttons_workspace.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% endblock %}
+
+{% block js_includes %}
+	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+	<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
+	<script type="text/javascript" src="/js_core/plugins/json2.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/plugins/jquery.url.packed.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_microsites/modules/base.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_microsites/modules/header.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_microsites/analytics_manager/events.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_microsites/analytics_manager/listener.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script type="text/javascript" src="/js_microsites/analytics_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endblock %}
+
+{% block facebook %}
+    <meta property="og:description" content="Junar delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
+    <meta property="og:image" content="/media_core/images/common/im_defaultAvatar_90x90.jpg" />
+{% endblock %}
+
+{% block body %}
+	<div class="layout">
+		<div class="layoutInner clearfix">
+			{% block header %}
+	    	<!-- HEADER -->
+	    	{% include "header_microsites.html" %}
+			{% endblock %}
+		
+	    <!-- CONTENT -->
+	    <div class="content">
+	      <div class="contentInner">
+	        {% block content %}  {% endblock %}
+	      </div>
+	    </div>
+
+	    <!-- FOOTER -->
+	    {% include "footer_microsites.html" %}
+			<div id="analytics_container" style="display:none;"></div>
+		</div>
+	</div>
+	
+	<!-- MINI FOOTER JUNAR -->
+	{% include "miniFooterJunar.html" %}
+	
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		{% if ga %}
+	        junar_ga = $.parseJSON('{{ga|safe}}');
+	    {% else %}
+	        junar_ga = [];
+	    {% endif %}
+	    {% if tracking_id %}
+	        tracking_id = '{{tracking_id}}';
+	    {% endif %}
+		csrfmiddlewaretoken = '{{ csrf_token }}';
+		
+		{% if auth_manager %}
+		    var authManager = new AuthManager({
+		        id: {{auth_manager.id|default_if_none:"null"}}
+		        , nick: "{{auth_manager.nick}}"
+		        , roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
+		        , privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
+		        , isAuthenticated: {{ auth_manager.is_authenticated|lower }}
+		    });
+	    {% endif %}
+		
+	    var User    = new Object();
+	    User.id     = "{{user_id}}";
+	    User.nick   = "{{nick}}";
+	    User.roles  = [{% for role in roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}];
+
+	    function hasRole(pRole){
+	        return (User.roles.indexOf(pRole) > -1);
+	    }
+    
+	    Configuration = {};
+	    Configuration.baseUri = "{{settings.BASE_URI}}";
+	    Configuration.apiUri = "{{settings.API_URI}}";
+	    Configuration.apiKey = "{{settings.PUBLIC_KEY}}";	    
+	    Configuration.language = "{{LANGUAGE_CODE}}";
+	    Configuration.showLastUpdate = {% if not preferences.account_hidelastupdate %}true{% else %}false{% endif %};
+	    Configuration.chartSize = {"embed":{"width":"{{chartSizes.embed.width}}", "height":"{{chartSizes.embed.height}}" }, "normal":{"width":"{{chartSizes.normal.width}}", "height":"{{chartSizes.normal.height}}" }};
+
+	    {% if preferences.account_embed_powered_by %}
+	    Configuration.embedPoweredBy = ["http://{{preferences.account_domain}}","{{preferences.account_name}}"];
+  		{% else %}
+  		Configuration.embedPoweredBy = ["http://www.junar.com","Junar"];
+  		{% endif %}
+
+		/* ]]> */
+	</script>
+{% endblock %}
+
+{% block ga_code %}
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  if (tracking_id == undefined) {
+      var tracking_id = 'UA-15500152-1'
+  }
+
+  _gaq.push(['_setAccount', tracking_id]);
+  //_gaq.push(['_setDomainName', 'junar.com']);
+  _gaq.push(['_trackPageview']);
+ 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+ 
+</script>
+{% endblock %}

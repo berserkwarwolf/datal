@@ -1,0 +1,176 @@
+﻿<localSettings>
+
+	<fieldsList>
+		<hierarchyBox>Drag Dimensions</hierarchyBox>
+		<filterBox><![CDATA[Drop & Arrange Report Filter]]></filterBox>
+		<rowBox><![CDATA[Drop & Arrange Rows]]></rowBox>
+		<columnBox><![CDATA[Drop & Arrange Columns]]></columnBox>
+		<measureBox><![CDATA[Drop & Arrange Values]]></measureBox>
+		<values>Values</values>
+		<addCalculatedMeasure>Add calculated value</addCalculatedMeasure>
+	</fieldsList>
+	
+	<filter>
+		<all>All</all>
+		<multipleItems>Multiple Items</multipleItems>
+		<selectAll>Select All</selectAll>
+		<top>Top</top>
+		<bottom>Bottom</bottom>
+		<ascSort>Az</ascSort>
+		<descSort>zA</descSort>
+		<topX>Top10</topX>
+		<measuresPrompt>Choose value</measuresPrompt>
+		<search>Search</search>
+		<amountSelected>{0} of {1} selected</amountSelected>
+	</filter>
+	
+	<calculatedView>
+		<measureBox>Drag Values To Formula</measureBox>
+		<measureName>Value name</measureName>
+		<formula>Formula</formula>
+	</calculatedView>
+	
+	<buttons>
+		<ok>OK</ok>
+		<cancel>Cancel</cancel>
+		<save>Save</save>
+		<clear>Clear</clear>
+		<select>Select</select>
+	</buttons>
+	
+	<grid>
+		<total>Total</total><!--total is for OLAP data sources only-->
+		<totals>Totals</totals>
+		<grandTotal>Grand Total</grandTotal>
+	</grid>
+	
+	<charts>
+		<showLegend>show legend</showLegend>
+		<hideLegend>hide legend</hideLegend>
+	</charts>
+	
+	<tooltips>
+		<row>Row:</row>
+		<column>Column:</column>
+		<headerResize>Drag to resize</headerResize>
+		<headerFit>Double click to fit</headerFit>
+		<filterIcon>Click to filter</filterIcon>
+		<filtered>Filtered</filtered>
+		<expandIcon>Click to expand</expandIcon>
+		<collapseIcon>Click to collapse</collapseIcon>
+		<sortIcon>Click to sort Desc</sortIcon>
+		<sortedDescIcon>Click to sort Asc</sortedDescIcon>
+		<sortedAscIcon>Click to sort Desc</sortedAscIcon>
+	</tooltips>
+	
+	<aggregations>
+		<sum>
+			<caption>Sum</caption>
+			<totalCaption><![CDATA[Sum of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Sum of {0}]]></grandTotalCaption>
+		</sum>
+		<count>
+			<caption>Count</caption>
+			<totalCaption><![CDATA[Count of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Count of {0}]]></grandTotalCaption>
+		</count>
+		<distinctCount>
+			<caption>Distinct Count</caption>
+			<totalCaption><![CDATA[Distinct Count of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Distinct Count of {0}]]></grandTotalCaption>
+		</distinctCount>
+		<average>
+			<caption>Average</caption>
+			<totalCaption><![CDATA[Average of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Average of {0}]]></grandTotalCaption>
+		</average>
+		<product>
+			<caption>Product</caption>
+			<totalCaption><![CDATA[Product of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total product of {0}]]></grandTotalCaption>
+		</product>
+		<min>
+			<caption>Minimum</caption>
+			<totalCaption><![CDATA[Minimum of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Minimum of {0}]]></grandTotalCaption>
+		</min>
+		<max>
+			<caption>Maximum</caption>
+			<totalCaption><![CDATA[Maximum of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Maximum of {0}]]></grandTotalCaption>
+		</max>
+		<percent>
+			<caption>Percent</caption>
+			<totalCaption><![CDATA[Percent of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Percent of {0}]]></grandTotalCaption>
+		</percent>
+		<percentOfColumn>
+			<caption>Percent of Column</caption>
+			<totalCaption><![CDATA[Percent of Column {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Total Percent of Column {0}]]></grandTotalCaption>
+		</percentOfColumn>
+		<index>
+			<caption>Index</caption>
+			<totalCaption><![CDATA[Index of {0}]]></totalCaption>
+			<grandTotalCaption><![CDATA[Index of {0}]]></grandTotalCaption>
+		</index>
+	</aggregations>
+	
+	<messages>
+		<error>Error!</error>
+		<warning>Warning</warning>
+		<browse>Browse</browse>
+		<confirmation>Confirmation</confirmation>
+		
+		<loading>Loading...</loading>
+		<loadingConfiguration>Loading configuration...</loadingConfiguration>
+		<loadingData>Loading data...</loadingData>
+		<waiting>Waiting for response {0} sec.</waiting>
+		<progress><![CDATA[{0}К of {1}К]]></progress>
+		<progressUnknown><![CDATA[loaded {0}К]]></progressUnknown>
+		<analyzing>Analyzing data...</analyzing>
+		<analyzingProgress><![CDATA[{0} records of {1} ({2}%)]]></analyzingProgress>
+		<loadingDimensions>Loading dimensions...</loadingDimensions>
+		<loadingHierarchies>Loading hierarchies...</loadingHierarchies>
+		<loadingMeasures>Loading measures...</loadingMeasures>
+		<loadingMembers>Loading members...</loadingMembers>
+		<loadingLevels>Loading levels...</loadingLevels>
+		<loadingSkin><![CDATA[Loading skin... {0}%]]></loadingSkin>
+		<fullscreen>Open report in full screen?</fullscreen>
+		<exportComplete>Export data is created, please click "Save" button to save the data.</exportComplete>
+		<exportProgress>Export in progress...</exportProgress>
+		<generatingPDF>Generating PDF</generatingPDF>
+		<pleaseWait>Please wait.</pleaseWait>
+		<pagesWereGenerated>pages were generated.</pagesWereGenerated>
+		<uploading>Uploading...</uploading>
+		<cantSaveFile>Error: Cannot save file.</cantSaveFile>
+		<cantSaveToClipboard>Error: Cannot write to clipboard.</cantSaveToClipboard>
+		<selectFile>Select .CSV file to upload.</selectFile>
+		<saveReportToFile>Report is ready to be saved to file, please click "Save" button to save the report.</saveReportToFile>
+		<loadReportFromFile>Select report file to be loaded.</loadReportFromFile>
+		<inputNewName>Input new name</inputNewName>
+		<inputReportName>Please input report name</inputReportName>
+	</messages>
+	
+	<quarters>
+		<q1>Q1</q1>
+		<q2>Q2</q2>
+		<q3>Q3</q3>
+		<q4>Q4</q4>
+	</quarters>
+	<months>
+		<january>Jan</january>
+		<february>Feb</february>
+		<march>Mar</march>
+		<april>Apr</april>
+		<may>May</may>
+		<june>Jun</june>
+		<july>Jul</july>
+		<august>Aug</august>
+		<september>Sep</september>
+		<october>Oct</october>
+		<november>Nov</november>
+		<december>Dec</december>
+	</months>
+	
+</localSettings>

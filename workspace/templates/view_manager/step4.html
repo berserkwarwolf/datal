@@ -1,0 +1,66 @@
+{% load i18n extra_tags core_components components %}
+
+<header>
+	<h3 id="id_dataHeader">{% trans "APP-PREVIEWANDSAVE-TEXT" %} <span class="txt">{% trans "CREATE-STEP4-SUBTITLE" %}</span></h3>
+
+	<div class="navigation FR">
+		<a id="id_step3PrevButton" href="javascript:;" title="{% trans 'APP-PREVIOUS-TEXT' %}" class="button alpha small"><i class="left-arrow"></i>{% trans 'APP-PREVIOUS-TEXT' %}</a>
+	</div>	
+</header>
+
+<!-- COLUMNS -->
+	<div class="columns clearfix">
+    <!-- COLUMN - Left -->
+    <div class="CL formContent">
+    <fieldset>
+		
+        <!-- CAJA DATOS -->
+        <div class="DS_container tableContent clearfix">
+			<div id="id_dashboard_dataservice_container" class="dataStreamContainer clearfix"></div>
+			<div id="id_tags" class="tagsPreview clearfix">
+				<h5>{% trans "CREATE-STEP4-TAGTITLE" %}:</h5>
+			</div>
+        </div>
+
+        <p>{% trans "CREATEDS-STEP4-TIP" %}</p>
+		
+
+		</fieldset>
+    </div>
+	
+    <!-- COLUMN - Right -->
+	<div class="CR">
+            <div class="helpBox">
+              <div class="helpBoxInner">
+	
+		<!-- SHADOWS -->
+		<div class="cv tl"></div>
+		<div class="cv bl"></div>
+		
+		<!-- COLUMN CONTENT -->
+		<div class="columnContent clearfix">
+
+			<!-- HELP AND TIPS BOX -->
+			<div class="boxInner">
+				<div class="boxTitle">
+					<h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+				</div>
+				<div class="boxInner">
+					<p><b>{% trans "CREATE-STEP4-HELPTITLE" %}?</b></p>
+					<p>{% trans "CREATE-STEP4-HELPTEXT" %}.</p>
+					<!-- DOUBTS -->
+						<!--<span class="Icon ic_Skype">&nbsp;</span>-->
+						<span class="p"><strong>{% trans "APP-ANYDOUBTS-TEXT2" %}</strong> <a href="mailto:support@junar.com">{% trans "APP-CALLUSONSKYPE-TEXT2" %}</a>.</span>
+
+				</div>
+			</div>
+		
+		</div></div></div>
+		
+	</div>
+	</div>
+
+	<div class="buttons center" style="padding-top:10px;">
+					<!-- <a id="id_step4_cancel" title="{% trans 'APP-CANCEL-TEXT' %}" class="button red small FL">{% trans "APP-CANCEL-TEXT" %}</a> -->
+					<a id="id_step4_save" title="{% trans 'APP-SAVE-TEXT' %}"  class="button green small"><span>{% trans "APP-SAVE-TEXT" %}</span></a>
+		</div>

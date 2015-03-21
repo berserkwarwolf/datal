@@ -1,0 +1,35 @@
+{% load i18n extra_tags %}
+{% url "search.action_search" as search_url %}
+<div id="id_dataservice_container_{{item.datastream_id}}" class="panel clearfix">
+    <h2><a class="ic_Data" id="id_viewDataServiceButton_{{ item.datastream_id }}" rel="{{ item.datastream_id }}" href="{{ item.permalink }}">
+    <strong>{{item.title}}</strong>{% for parameter in item.parameters %}{% if not forloop.first %}, {%else%}({% endif %}{{parameter.name}}{% if forloop.last %}){% endif %}{%endfor%}
+    </a></h2>
+    <p>{{ item.description }}</p>
+
+    <div id="id_dataservice_toolbar_{{dataservice.dataservice_id}}" class="toolbar">
+    </div>
+
+    <div class="tagsContainer">
+    {% if item.tags %}
+        <strong class="tagsTitle">{% trans "APP-TAGS-TEXT" %}: </strong>
+        <div id="id_dataservice_tags_container" class="tagsItems">
+            <div>
+                {% for tag in item.tags|slice:":5" %}<a href="{{search_url}}?tag={{tag|prepareTagForSearch}}" title="{{tag}}" rel="nofollow">{{tag}}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            </div>
+        </div>
+        {% if item.tags|length|isGreaterThan:"5" %}
+            <div class="tagsPagination">
+                <span id="id_dataserviceTagsViewAllButton">
+                    <span><a href="javascript:;" title="{% trans 'APP-VIEWALL-TEXT' %}">...</a></span>&nbsp;<span class="sep">|</span>
+                    <a href="javascript:;" title="{% trans 'APP-VIEWALL-TEXT' %}">{% trans "APP-VIEWALL-TEXT" %}</a>
+                </span>
+                <div class="ao-tag-tooltip" style="display:none">
+                    <div class="In clearfix">
+                        {% for tag in item.tags %}<a href="{{search_url}}?tag={{tag|prepareTagForSearch}}" title="{{tag}}" rel="nofollow">{{tag}}</a>{% if not forloop.last %}<span>, </span>{% endif %}{% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+</div>
+</div>

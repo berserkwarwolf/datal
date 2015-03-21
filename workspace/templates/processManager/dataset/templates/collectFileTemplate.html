@@ -1,0 +1,23 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_collectFileTemplate">
+
+<fieldset>
+	
+	{# file_data #}
+	<div class="row editDataset clearfix">
+		{{ form.file_data.label_tag }}
+		<span class="required">*</span>
+		<div class="input-file">
+			<a title="{% trans 'APP-SELECT-FILE-TEXT' %}" class="button black small FL" tabindex="-1">{% trans 'APP-SELECT-FILE-TEXT' %}</a>
+			{{ form.file_data }}
+			{{ form.file_name }}
+		</div>
+	</div>
+	
+	{# Common Fields #}
+	{% include "processManager/dataset/templates/collectCommonTemplate.html" %}
+
+</fieldset>
+
+</script>

@@ -1,0 +1,3 @@
+
+/*nicer google maps infowindows*/
+.junarinfowindow{margin: 5px; padding:5px; overflow:auto; max-height: 220px;}

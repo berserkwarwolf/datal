@@ -1,0 +1,51 @@
+{% load i18n extra_tags core_components components %}
+<div id="id_pivotDataStream" class="border-box" style="display:none;">
+
+  <!-- Pivot Buttons -->
+  <ul id="id_pivotButtons" class="pivotButtons clearfix border-box">
+    <li>
+      <a id="id_pivotTableButton" class="icon pivotTable border-box active">
+        <i></i>
+        <span>{% trans "VIEWDS-PIVOT-TABLE" %}</span>
+      </a>
+    </li>
+    <li class="relative">
+      <a id="id_pivotChartsButton" class="icon pivotCharts border-box">
+        <i></i>
+        <span>{% trans "VIEWDS-PIVOT-CHARTS" %}</span>
+      </a>
+      <ul id="id_pivotChartsTooltip" class="tooltip border-box pulldown" style="display:none;">
+        <li><a id="id_pivotChartsBarButton" rel="bar"><i></i><span>{% trans "VIEWDS-PIVOT-BAR" %}</span></a></li>
+        <li><a id="id_pivotChartsLineButton" rel="line"><i></i><span>{% trans "VIEWDS-PIVOT-LINE" %}</span></a></li>
+        <li><a id="id_pivotChartsScatterButton" rel="scatter"><i></i><span>{% trans "VIEWDS-PIVOT-SCATTER" %}</span></a></li>
+        <li><a id="id_pivotChartsPieButton" rel="pie"><i></i><span>{% trans "VIEWDS-PIVOT-PIE" %}</span></a></li>
+        <li><a id="id_pivotChartsBarStackButton" rel="bar_stack"><i></i><span>{% trans "VIEWDS-PIVOT-BARSTACK" %}</span></a></li>
+        <li><a id="id_pivotChartsBarLineButton" rel="bar_line"><i></i><span>{% trans "VIEWDS-PIVOT-BARLINE" %}</span></a></li>
+      </ul>
+    </li>
+    <li class="FR">
+      <a id="id_pivotFullScreenButton" class="icon pivotFullScreen border-box">
+        <i></i>
+        <span>{% trans "VIEWDS-PIVOT-FULLSCREEN" %}</span>
+      </a>
+    </li>
+    <li class="FR">
+      <a id="id_pivotFieldsButton" class="icon pivotFields border-box">
+        <i></i>
+        <span>{% trans "VIEWDS-PIVOT-FIELDS" %}</span>
+      </a>
+    </li>
+    {% if preferences.account_pivottable_helplink %}
+    <li class="FR">
+      <a id="id_pivotHelpButton" class="icon pivotHelp border-box" target="_blank" href="{{ preferences.account_pivottable_helplink }}">
+        <i></i>
+        <span>{% trans "VIEWDS-PIVOT-HELP" %}</span>
+      </a>
+    </li>
+    {% endif %}
+  </ul>
+
+  <!-- Pivot Component -->
+  <div id="id_pivotObject" style="display:none;"></div>
+
+</div>

@@ -1,0 +1,412 @@
+var dataTableView = Backbone.View.extend({
+
+	el: '.detail-container',	 
+	
+	template: null,
+	parentView: null,
+	
+	events:{
+		//'click #id_refreshButton, #id_retryButton': 'onRefreshButtonClicked',
+		'click a[id^="id_changeParam"]': 'onChangeParamButtonClicked',
+	},
+
+	$parameters: null,
+	
+	initialize: function() {
+
+		this.parentView = this.options.parentView;
+
+		$parameters = this.$el.find('a[id^="id_changeParam"]');
+		this.template = _.template( $("#id_dataTableTemplate").html() );
+		this.listenTo(this.model, "change:result", this.render);
+	  
+	  //When page, rows or dataStream's arguments change then invoke
+	  this.listenTo(this.model, "change:page", this.invoke); 
+	  this.listenTo(this.model, "change:rows", this.invoke);		
+	  var i=0;
+		while(i < $parameters.size()){
+			var name = 'parameter' + i;
+			this.listenTo(this.options.dataStream, "change:"+name, this.invoke);
+			i++;
+		} 
+	  
+	  this.invoke();
+	},
+	
+	render: function() {
+
+		var dataStream = this.options.dataStream.attributes;
+
+		// Set Template
+		this.$el.find('#id_datastreamResult > div').html(this.template(this.model.attributes));
+
+		// Set Max Width for Title
+		this.setTitleMaxWidth();
+
+		// If Array, Init Flexigrid
+		if(this.model.attributes.result.fType == 'ARRAY'){
+			this.initFlexigrid(this.model.attributes.result);
+		}else{
+			this.setTableHeight();
+		}
+
+    return this;
+
+	},
+
+	setTitleMaxWidth: function(){
+
+		$(document).ready(function(){
+
+			$(window).resize(function(){
+
+				var paramsWidth = 0;
+
+				if( $parameters.length > 0 ){
+					paramsWidth = 
+						parseFloat( $('.dataTable header h1 .parameters').width() )
+			    	- parseFloat( $('.dataTable header h1 .parameters').css('padding-left').split('px')[0] )
+			    	+ 20;// Fix to perfection
+				}
+
+				var maxWidth = 
+					parseFloat( $('.dataTable header h1').width() )
+			    - paramsWidth;
+			    
+			  $('.dataTable header h1 strong').css('max-width',maxWidth+'px');
+
+	  	}).resize();
+
+		});
+
+	},
+	
+	onChangeParamButtonClicked: function(event){
+
+		var button = event.currentTarget;
+
+		// If not disabled
+		if( !$(button).parents('.parameters').hasClass('isDisabled') ){
+			new changeDataStreamParametersView({model: new changeDataStreamParameters(), dataStream: this.options.dataStream});
+		}
+		
+	},
+
+	onRefreshButtonClicked: function(event){
+
+		var button = event.currentTarget;
+
+		// If not disabled
+		if( !$(button).hasClass('isDisabled') ){
+			this.options.dataStream.set('filter', '');
+			this.invoke();
+		}
+
+	},
+
+	updateParametersButtonsValues: function(){
+
+		var dataStream = this.options.dataStream;
+
+		var i=0;
+		while(i < $parameters.size()){
+			var name = 'parameter' + i;
+			if(dataStream.hasChanged(name)){
+				$parameters.eq(i).html(dataStream.get(name).value);
+			}
+			i++;
+		}
+
+	},
+	
+	invoke: function(){
+
+		var dataStream = this.options.dataStream.attributes;
+
+	  var data = "datastream_revision_id=" + dataStream.id + "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
+
+	  // Add DataStream pArguments
+	  var params = [],
+			n = 0;
+
+		while( dataStream['parameter' + n ] != undefined ){
+			params.push('&pArgument' + n + '=' + dataStream['parameter'+n].value);
+			n++;					
+		}
+
+		if(params.length > 0){
+			data += params.join('');
+		}
+	    
+	  var ajax = $.ajax({ 
+			url: '/dataviews/invoke', 
+		  type:'GET', 
+		  data: data, 
+		  dataType: 'json', 
+		  beforeSend: _.bind(this.onInvokeBeforeSend, this),
+		  success: _.bind(this.onInvokeSuccess, this), 
+		  error: _.bind(this.onInvokeError, this)
+	  });
+
+	  // ajaxManager.register( 1, ajax );	
+
+	},
+
+	onInvokeBeforeSend: function(xhr, settings){
+
+		// Prevent override of global beforeSend
+		$.ajaxSettings.beforeSend(xhr, settings);
+
+    this.updateParametersButtonsValues();
+    this.setLoading();
+	},
+	
+	onInvokeSuccess: function(response){
+		//HERE IS SET THE DATA
+		this.model.set('result', response);
+	},
+	
+	onInvokeError: function(){
+
+	},
+
+	setLoading: function(){
+
+		// Loading Template
+		this.$el.find('#id_datastreamResult').html('<div class="result"><div class="loading">'+ gettext( 'APP-LOADING-TEXT' ) + '</div></div>');
+
+		// Set Loading Height
+		this.setLoadingHeight();
+
+	},
+
+	setLoadingHeight: function(){
+		var self = this;
+
+		$(document).ready(function(){
+			
+			var otherHeights =
+				parseFloat( $('.dataTable header').height() )
+				+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
+				+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
+				+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+				+ 2;// Fix to perfection;
+
+			self.parentView.setHeights('#id_datastreamResult .loading', otherHeights);
+
+		});
+	},
+
+	setTableHeight:function(){
+
+		// Set Flexigrid Height
+		var self = this;
+
+	  $(document).ready(function(){
+
+	  	var otherHeights = 
+	  		parseFloat( $('.dataTable header').height() )
+	    	+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
+	    	+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
+	    	+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+				+ 2;// Fix to perfection;
+
+		  self.parentView.setHeights( '#id_datastreamResult .result table', otherHeights );
+
+		});	
+
+	},
+
+	initFlexigrid: function(result){
+
+		var dataStream = this.options.dataStream.attributes,
+			tableWidth = $('#id_datastreamResult > div').width(),
+	    cellWidth = 100,
+	    colModel = [],
+	    searchArray = [],
+	    self = this;
+
+	  // Set cells width 
+	  if( tableWidth / result.fCols > cellWidth ){
+	  	if( !$.client.os == "Mac"){
+	  		var scrollbar = 27; // 27 is the size of the scrollbar in windows XP, test with other browsers and OS
+	  		tableWidth = tableWidth - scrollbar;
+	  	} 	
+	    cellWidth = tableWidth / result.fCols;
+	  }
+
+	  // TODO: CHECK PROBLEM WHEN SIDEBAR IS OPENED
+	  // Remove Horizontal Scroll if not needed
+	  //if( cellWidth * result.fCols <= tableWidth ){
+	    //$('.dataTable .data').addClass('noHorizontalScroll');
+	  //} 
+
+	  // Create Flexigrid colModel
+		if(result.headerCells.length > 0){
+			for (var j = 0; j < result.fCols; j++) {
+				var col = {};
+				col.display = result.headerCells[j];
+				col.name = 'column'+j;
+				col.width = cellWidth;
+				col.sortable = true;
+				col.align = 'center';
+				colModel.push(col);
+			}
+		}else{
+			var charCode 	= 65;
+			for (var j = 0; j < result.fCols; j++) {
+				var col = {};
+				col.display = String.fromCharCode(charCode + j);
+				col.name = 'column'+j;
+				col.width = cellWidth;
+				col.sortable = true;
+				col.align = 'center';
+				colModel.push(col);
+			}
+		}
+
+		// Create Flexigrid search Items
+		if(result.headerCells.length > 0){
+			for (var j = 0; j < result.fCols; j++) {
+				var col = {};
+				if( j == 0 ){
+					col.isdefault = true;
+				}
+				col.display = result.headerCells[j];
+				col.name = 'column'+j;
+				searchArray.push(col);
+			}
+		}else{
+			var charCode 	= 65;
+			for (var j = 0; j < result.fCols; j++) {
+				var col = {};
+				if( j == 0 ){
+					col.isdefault = true;
+				}
+				col.display = String.fromCharCode(charCode + j);
+				col.name = 'column'+j;
+				searchArray.push(col);
+			}
+		}
+
+		// Init Flexigrid
+		$('.dataTable .data .result').flexigrid({
+			url: '/streams/action_updategrid',
+			dataType: 'json',
+			colModel: colModel,
+			searchitems : searchArray,
+			autoload: false,
+			sortname: "",
+			sortorder: "asc",
+			width: 'auto',
+			height: 'auto',
+			minheight: 400,
+			usepager: true,
+			useRp: true,
+			rp: 50,
+			singleSelect: true,
+			resizable: true,
+			total: result.fLength,
+			pages: Math.ceil( result.fLength / 50), //In the future, 50 should come from a Configuration
+			method: 'GET',
+			blockOpacity: 1,
+			errormsg: gettext('VIEWDS-FLEXIGRID-ERRORMSG'),
+			pagestat: gettext('VIEWDS-FLEXIGRID-PAGESTAT-1') + ' {from} ' 
+					+ gettext('VIEWDS-FLEXIGRID-PAGESTAT-2') + ' {to} ' 
+					+ gettext('VIEWDS-FLEXIGRID-PAGESTAT-3') + ' {total} ' + gettext('VIEWDS-FLEXIGRID-PAGESTAT-4'),
+			pagetext: gettext('VIEWDS-FLEXIGRID-PAGETEXT'),
+			outof: gettext('VIEWDS-FLEXIGRID-OUTOF'),
+			findtext: gettext('VIEWDS-FLEXIGRID-FINDTEXT'),
+			procmsg: gettext('VIEWDS-FLEXIGRID-PROCMSG'),
+			nomsg: gettext('VIEWDS-FLEXIGRID-NOMSG'),
+			onBeforeSend: function(settings){
+				
+				self.setFilterParams(settings);
+				
+				return true;
+
+			},
+			onSubmit: function(){
+				
+				var params = [];
+				var n = 0;
+				// Add DataStream pArguments
+				while(!_.isUndefined(dataStream['parameter'+n])){
+					params.push({
+						name: 'pArgument'+n,
+						value: dataStream['parameter'+n].value
+					});
+					n++;					
+				}
+
+				// Add DataStream ID
+				params.push({
+					name: 'datastream_id',
+					value: dataStream.id
+				});
+
+				// Set Flex options
+				$('.dataTable .data .result').flexOptions({
+					params: params
+				});	
+
+				return true;
+
+			},
+			onSuccess: function(result){
+			},
+			onError: function(result){				
+			}
+		});
+	
+		// Set Flexigrid Height
+	  $(document).ready(function(){
+
+	  	var otherHeights = 
+	  		parseFloat( $('.dataTable header').height() )
+	    	+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
+	    	+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
+	    	+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+	  		+ parseFloat( $('.flexigrid .hDiv').height() )
+		    + parseFloat( $('.flexigrid .pDiv').height() )
+		    + parseFloat( $('.flexigrid .pDiv').css('border-top-width').split('px')[0] )
+		    + parseFloat( $('.flexigrid .pDiv').css('border-bottom-width').split('px')[0] )
+				+ 2;// Fix to perfection;
+
+		  self.parentView.setHeights( '.flexigrid div.bDiv', otherHeights );
+
+		});	
+
+	},
+
+	setFilterParams: function(settings){
+
+		var hash = settings.url.split('?')[1],
+			split = hash.split('&'),
+			obj = {};
+
+		for(var i = 0; i < split.length; i++){
+			var kv = split[i].split('=');
+			obj[kv[0]] = kv[1];
+		}
+
+		var url = '';
+
+		if( obj.query != "" ){
+
+			url = 'pFilter0='+encodeURIComponent(obj.qtype)+'[contains]'+encodeURIComponent(obj.query);
+
+			if( $parameters.length > 0 ){
+				url = '&' + url;
+			}else{
+				url = '?' + url;
+			}
+
+		}
+
+		this.options.dataStream.set('filter', url);
+
+
+	},
+
+});

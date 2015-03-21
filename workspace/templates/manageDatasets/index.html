@@ -1,0 +1,105 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+
+{# CSS #}
+<link href="/media_core/styles/plugins/backgrid/backgrid.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-paginator.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-text-cell.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-filter.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/manageDatasets.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+{# JS Libs and Plugins #}
+<script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
+
+{# JS for this screen #}
+<script language="javascript" src="/js_workspace/manageDatasets/filterItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/filtersCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/activeFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/inactiveFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/resourceItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/titleCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/typeCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# Left Navigation Selected Option #}
+<meta name="main-option" content="id_datasets_option"/>
+
+{% endblock %}
+
+{% block sectionTitle %}
+<h1>{% trans "APP-DATASETS-TEXT" %}</h1>
+<div class="bulk-actions FL clearfix" style="display:none;">
+   <select id="id_bulkActions" class="FL">
+      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
+      <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
+      <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
+   </select>
+   <button id="id_applyBulkActions" class="button black small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
+</div>
+<ul class="actions FR">
+   <li><a href="{% url 'manageDatasets.create' %}" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="manager" id="id_manageDatasets" style="{% block css_hide %}{% endblock %}">
+
+  <div class="wrapper1">
+    <div class="wrapper2 clearfix">
+      <div class="wrapper3">
+            
+        <!-- Filters -->
+        {% include "manageDatasets/filters.html" %}
+
+        <!-- List -->
+        {% include "manageDatasets/list.html" %}       
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading -->
+  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+
+</div>
+
+{% block noresults %}{% endblock %}
+
+{% endblock %}
+
+{% block bottom_js %}
+<script type="text/javascript">
+  $(document).ready(function(){
+    var manageDatasetsView =  new ManageDatasetsView({
+      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %}
+    });
+  });
+</script>
+
+{# templates backbone #}
+{% include "manageDatasets/templates.html" %}
+
+{% endblock %}
+
+{% block popupsOverlay %}
+  {% include "manageDatasets/overlays.html" %}
+{% endblock %}

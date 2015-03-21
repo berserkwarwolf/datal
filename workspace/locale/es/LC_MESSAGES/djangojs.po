@@ -1,0 +1,815 @@
+# Junar's English language pack.
+# Copyright  2012 JUNAR'S COPYRIGHT HOLDER
+# Author <emilio.heck@junar.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-05-19 16:34-0500\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Emilio Heck <emilio.heck@junar.com>\n"
+"Language-Team: Spanish\n"
+"Language: Spanish\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "APP-REQUEST-ERROR"
+msgstr "Ha ocurrido un error procesando su solicitud. Por favor inténtelo nuevamente"
+
+msgid "APP-DELETECATEGORYCONFIRM-TEXT"
+msgstr "¿Está seguro que desea eliminar esta categoría?"
+
+msgid "APP-DELETEUSERCONFIRM-TEXT"
+msgstr "¿Estás seguro que deseas eliminar este usuario?"
+
+msgid "APP-ENTERTITLE-TEXT"
+msgstr "Ingresa el Titulo"
+
+msgid "CHRT-SELECTION-WARNING"
+msgstr "Debes seleccionar algún dato de la tabla antes de continuar."
+
+msgid "APP-SELECTRANGE-TEXT"
+msgstr "Seleccionar rango..."
+
+msgid "CHRT-COMPLETE-WARNING"
+msgstr "Debes terminar de crear el Gráfico primero."
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-VISUALIZATION"
+msgstr "¿Estas seguro que deseas eliminar este Gráfico?"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR"
+msgstr "¿Estás seguro que deseas eliminar esta Vista de Datos?"
+
+msgid "APP-TEXT-CONFIRM_UNPUBLISH_SINGULAR"
+msgstr "¿Estás seguro que deseas despublicar esta Vista de Datos?"
+
+msgid "APP-SENDTOREVIEW-TEXT"
+msgstr "Enviar a revisión"
+
+msgid "APP-ACTIONS-EDIT"
+msgstr "Editar"
+
+msgid "APP-DELETE-TEXT"
+msgstr "Borrar"
+
+msgid "APP-TEXT-DELETE_RESOURCE"
+msgstr "Eliminar este recurso"
+
+msgid "APP-TEXT-CANCEL_MODAL"
+msgstr "Cancelar"
+
+msgid "APP-TEXT-DELETE_REVISION"
+msgstr "Eliminar esta revision"
+
+msgid "APP-TEXT-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "APP-BY-TEXT"
+msgstr "por"
+
+msgid "DBMAN-GETGUID-TITLE"
+msgstr "Este es el GUID de la Colección:"
+
+msgid "DSDET-GETGUID-TITLE"
+msgstr "Este es el GUID de la Vista:"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Aprobar"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Rechazar"
+
+msgid "APP-PUBLISH-TEXT"
+msgstr "Publicar"
+
+msgid "APP-ACTIONS-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "APP-DRAFT-TEXT"
+msgstr "Borrador"
+
+msgid "APP-PENDINGREVIEW-TEXT"
+msgstr "Revisión Pendiente"
+
+msgid "APP-APPROVED-TEXT"
+msgstr "Aprovado"
+
+msgid "APP-PUBLISHED-TEXT"
+msgstr "Publicado"
+
+msgid "APP-UNPUBLISH-TEXT"
+msgstr "Despublicado"
+
+msgid "APP-REJECTED-TEXT"
+msgstr "Rechazado"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DASHBOARD"
+msgstr "¿Estas seguro que deseas despublicar esta Colección?"
+
+msgid "DB-FAVDB-DEFAULTSEARCH"
+msgstr "Busca Vistas: Prueba 'GDP', 'futbol', 'USA', 'Apple'"
+
+msgid "DB-FAVDB-SEARCHTIP"
+msgstr "Prueba 'Deportes', 'USA' o usuarios como 'betogess' o 'birdman'"
+
+msgid "DBMAN-ADDDS-SUCCESS"
+msgstr "¡Vista agregada satisfactoriamente!"
+
+msgid "APP-DROPHERE-TEXT"
+msgstr "Suelta acá"
+
+msgid "APP-REMOVE-TEXT"
+msgstr "Eliminar"
+
+msgid "APP-MAXIMIZE-TEXT"
+msgstr "Maximizar"
+
+msgid "APP-RELOAD-TEXT"
+msgstr "Recargar"
+
+msgid "APP-WHERETHISCOMEFROM-TEXT"
+msgstr "Datos recolectados de la web"
+
+msgid "APP-USERUPLOAD-TEXT"
+msgstr "Datos cargados por el usuario"
+
+msgid "APP-ACTIONS-TEXT"
+msgstr "Acciones"
+
+msgid "DB-ACTIONSMENU-REUSESOURCE"
+msgstr "Publicar una nueva Vista de Datos desde la misma fuente"
+
+msgid "APP-REUSESOURCE-TEXT"
+msgstr "Reutilizar fuente"
+
+msgid "APP-SOURCES-TEXT"
+msgstr "Fuentes"
+
+msgid "DBMAN-DSPRIVATE-TITLE"
+msgstr "Esta Vista es privada"
+
+msgid "DBMAN-DSPRIVATE-SUBTITLE"
+msgstr "No puedes ver a esta Vista porque es privada."
+
+msgid "DBMAN-DSPRIVATE-TIP"
+msgstr "Solo el dueño puede verlo."
+
+msgid "DS-STOP-TITLE"
+msgstr "Detener la carga de esta Vista"
+
+msgid "DS-STOP-TEXT"
+msgstr "detener"
+
+msgid "APP-LASTUPDATE-TEXT"
+msgstr "Última actualización"
+
+msgid "DS-ENTERANEWVALUEFOR-TEXT"
+msgstr "ingresa un nuevo valor para"
+
+msgid "APP-AND-TEXT"
+msgstr "y"
+
+msgid "APP-NODATAFOUD-TEXT"
+msgstr "No se encontraron datos"
+
+msgid "APP-PLEASE-TEXT"
+msgstr "Por favor"
+
+msgid "APP-TRYAGAIN-TITLE"
+msgstr "Inténtalo Nuevamente"
+
+msgid "APP-TRYAGAIN-TEXT"
+msgstr "inténtalo nuevamente"
+
+msgid "APP-OOPS-TEXT"
+msgstr "Oops!"
+
+msgid "DS-CANTLOADDATA-TEXT"
+msgstr "No pudimos cargar los datos"
+
+msgid "APP-ORGOTOTHE-TEXT"
+msgstr "O puedes ir a la"
+
+msgid "APP-SOURCE-TEXT"
+msgstr "fuente"
+
+msgid "DB-REMOVEDS-CONFIRM"
+msgstr "¿Estás seguro que deseas eliminar esta Vista de tu Colección?"
+
+msgid "DB-DSREMOVE-SUCCESS"
+msgstr "¡Vista de Datos eliminada satisfactoriamente!"
+
+msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DATASET"
+msgstr "¿Estas seguro que deseas eliminar este Conjunto de Datos?"
+
+msgid "APP-ACTIONS-CREATE_VIEW"
+msgstr "Crear una Vista de Datos"
+
+msgid "APP-TITSUBDES-NOTEQUALS"
+msgstr "¡El título y la descripción no pueden ser iguales!"
+
+msgid "DS-VALIDINPUT-TEXT"
+msgstr "Solo se pueden ingresar letras y números"
+
+msgid "APP-ACTIONS-CREATE_VISUALIZATION"
+msgstr "Crear Visualización"
+
+msgid "APP-TOP_VIEWED_DATA-TEXT"
+msgstr "Datos más vistos"
+
+msgid "APP-USER_VIEWS"
+msgstr "Visitas de usuarios"
+
+msgid "APP-NEXT-TEXT"
+msgstr "Siguiente"
+
+msgid "APP-ACTIONS-REVIEW"
+msgstr "Revisar"
+
+msgid "APP-CHANGESELECTION-WARNING"
+msgstr "Cuidado! Si modificas la selección se perderán todas las opciones avanzadas que se han creado, estas seguro que deseas continuar?"
+
+msgid "APP-SETALIAS-TEXT"
+msgstr "Configurar el Alias"
+
+msgid "COLLECT-LOADURL-ERROR"
+msgstr "No pudimos cargar la fuente. Tal vez se encuentra indisponible. Por favor vuelva a intentarlo mas tarde."
+
+msgid "OVREPAIR-TABLE-NOSELECTED"
+msgstr "¡Debes seleccionar por lo menos una tabla!"
+
+msgid "COLLECT-TWOTABLES-ERROR"
+msgstr "No puedes seleccionar dos tablas al mismo tiempo"
+
+msgid "APP-SELECT-TEXT"
+msgstr "Seleccionar..."
+
+msgid "APP-MINUTESAGO-TEXT"
+msgstr "minutos atrás"
+
+msgid "APP-ENTERNEWVALUE-TEXT"
+msgstr "ingresa un nuevo valor para"
+
+msgid "APP-PUBLISHDS-ERROR"
+msgstr "Ha ocurrido un error procesando su solicitud. Por favor inténtelo nuevamente"
+
+msgid "APP-REMOVETAG-TEXT"
+msgstr "Eliminar Tag"
+
+msgid "NO-MOTD"
+msgstr "En Junar, estamos constantemente trabajando para darles la mejor experiencia posible. Acabamos de actualizar nuestro sistema y esperamos que disfruten de las nuevas funcionalidades."
+
+msgid "VALIDATE-USERNAME"
+msgstr "Este usuario ya existe en el sistema."
+
+msgid "VALIDATE-EMAIL"
+msgstr "Este e-mail ya existe en el sistema."
+
+msgid "VALIDATE-DOMAIN"
+msgstr "Este dominio está ocupado."
+
+msgid "VALIDATE-ADMIN-URL"
+msgstr "La url ya existe."
+
+msgid "ERROR-LOADING-DATASET"
+msgstr "No se pudo cargar el Conjunto de Datos. Por favor reintentelo o contactese con <a href='mailto:support@junar.com'>mailto:support@junar.com</a>"
+
+msgid "WEBSERVICE-ORIGINALARG-TEXT"
+msgstr "Nombre original"
+
+msgid "APP-NAME-TEXT"
+msgstr "Nuevo nombre"
+
+msgid "APP-VALUE-TEXT"
+msgstr "Valor"
+
+msgid "NOTIF-REMOVED-TITLE"
+msgstr "Categoría eliminada"
+
+msgid "NOTIF-REMOVED-DESC-1"
+msgstr "La categoría se ha eliminado correctamente. Los conjuntos de datos y los recursos fueron trasladados a la categoría por defecto."
+
+msgid "NOTIF-SAVED-TITLE"
+msgstr "Guardado"
+
+msgid "NNOTIF-SAVED-DESC-1"
+msgstr "El conjunto de datos se ha guardado correctamente. Ahora, usted puede enviarlo a revisión."
+
+msgid "NOTIF-SAVED-DESC-2"
+msgstr "El conjunto de datos se ha guardado correctamente. Ahora, usted puede crear una vista de datos del mismo."
+
+msgid "NOTIF-SAVED-DESC-3"
+msgstr "La vista de datos se ha guardado correctamente. Ahora, usted puede agregarla en colecciones."
+
+msgid "NOTIF-SAVED-DESC-4"
+msgstr "La colección se ha guardado correctamente. Ahora, usted puede publicarla con el fin de proporcionar los cambios a su sitio de datos abiertos."
+
+msgid "NOTIF-REMEMBER-TITLE"
+msgstr "Recuerde"
+
+msgid "NOTIF-REMEMBER-DESC-1"
+msgstr "Este conjunto de datos está ahora disponible para que los editores creen vistas de datos del mismo."
+
+msgid "NOTIF-REMEMBER-DESC-2"
+msgstr "Usted puede publicar o aprobar este conjunto de datos con el fin de proporcionar los cambios a su sitio de datos abiertos."
+
+msgid "NOTIF-REMEMBER-DESC-3"
+msgstr "Con el fin de proporcionar cambios a su sitio de datos abiertos, usted debe enviar esta vista de datos a revisión."
+
+msgid "NOTIF-REMEMBER-DESC-4"
+msgstr "Usted puede publicar o aprobar esta vista de datos con el fin de proporcionar los cambios a su sitio de datos abiertos."
+
+msgid "NOTIF-APPROVED-TITLE"
+msgstr "Aprobado"
+
+msgid "NOTIF-APPROVED-DESC-1"
+msgstr "La colección se ha aprobado correctamente. Ahora, usted puede publicarla con el fin de proporcionar los cambios a su sitio de datos abiertos."
+
+msgid "NOTIF-PUBLISHED-TITLE"
+msgstr "Publicado"
+
+msgid "NOTIF-PUBLISHED-DESC-1"
+msgstr "La colección se ha publicado correctamente. Ahora, usted puede destacarla con el fin de mostrarla en su sitio de datos abiertos."
+
+msgid "NOTIF-WARNING"
+msgstr "Atención"
+
+msgid "CATEGORY-DELETE-CONFIRMATION"
+msgstr "Está a punto de borrar la categoría, todos los recursos serán movidos a la categoría por defecto. ¿Está seguro?"
+
+msgid "CATEGORY-ADD-TRANSPARENCY"
+msgstr "Se agregaran las siguientes categorias de trasnparencia, esta seguro?"
+
+msgid "CATEGORY-DELETE-INFO"
+msgstr "recurso/s fueron movidos a la categoría por defecto"
+
+msgid "ADMIN-HOME-DESCRIPTION-NOTHEME"
+msgstr "Al seleccionar esta opción, el sitio de datos abiertos no tendrá una página de inicio personalizada, tomando su lugar las colecciones destacadas. <br/> Configure las colecciones destacadas <a href='/review/action_query' target='_blank'>aquí</a>."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME0"
+msgstr "El tema <em>Clasico</em> proporciona una diseño de dos columnas que incluye varios campos de texto, un carrousel de recursos y una lista de recursos."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME1"
+msgstr "El tema <em>Minimalista</em> proporciona un diseño de una columna, con una sección de texto principal y una lista de recursos."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME2"
+msgstr "El tema <em>Recursos</em> proporciona un diseño de una columna, con dos secciones de texto, un carrousel de recursos y una lista de recursos."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME3"
+msgstr "El tema <em>Carrousel</em> proporciona un diseño de una columna, con un carrousel de imagenes, una sección de texto proncipal y una lista de recursos."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME4"
+msgstr "El tema <em>Portada</em> proporciona un diseño de dos columnas, con una imágen destacada de ancho completo en la parte superior, una sección principal de texto, un carrousel de recursos, enlaces rápidos, y una lista de recursos."
+
+
+msgid "ADMIN-HOME-SECTION-MAINTITLE"
+msgstr "Sección principal"
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION"
+msgstr "Éste contenido es mostrado a la izquierda del carrousel de recursos."
+
+msgid "ADMIN-HOME-SECTION-MAINTITLELABEL"
+msgstr "Título principal:"
+
+msgid "ADMIN-HOME-SECTION-MAINTEXTLABEL"
+msgstr "Texto principal:"
+
+msgid "ADMIN-HOME-SECTION-SIDEBARTITLE"
+msgstr "Sección de la barra lateral"
+
+msgid "ADMIN-HOME-SECTION-SIDEBARDESCRIPTION"
+msgstr "Éste contenido es mostrado debajo del carrousel de recursos."
+
+msgid "ADMIN-HOME-SECTION-RESOURCETITLE"
+msgstr "Sección de carrousel de recursos"
+
+msgid "ADMIN-HOME-SECTION-RESOURCEDESCRIPTION"
+msgstr "Comience a escribir el nombre de los recursos que se incluirán en el carrousel, y seleccionelos de la lista."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMTITLE"
+msgstr "Sección inferior izquierda"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMDESCRIPTION"
+msgstr "Éste contenido es mostrado a la izquierda después de la lista de recursos."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMTITLE"
+msgstr "Sección inferior derecha"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMDESCRIPTION"
+msgstr "Éste contenido es mostrado a la derecha después de la lista de recursos."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-1"
+msgstr "Éste contenido es mostrado arriba de la lista de recursos."
+
+msgid "ADMIN-HOME-SECTION-MIDDLETITLE"
+msgstr "Sección intermedia"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEDESCRIPTION"
+msgstr "Éste contenido es mostrado entre el carrousel de recursos y la lista de recursos."
+
+msgid "ADMIN-HOME-SECTION-CARROUSELTITLE"
+msgstr "Sección carrousel de imagenes"
+
+msgid "ADMIN-HOME-SECTION-CARROUSELDESCRIPTION"
+msgstr "Añada imágenes con enlaces opcionales a ellos, y, finalmente ordenelas. <br/> Este contenido se muestra por encima de la sección principal. Tamaño máximo de cada archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-2"
+msgstr "Éste contenido es mostrado entre el carrousel de imagenes destacadas y la tabla de recursos."
+
+msgid "ADMIN-HOME-SECTION-COVERTITLE"
+msgstr "Sección Portada"
+
+msgid "ADMIN-HOME-SECTION-COVERDESCRIPTION"
+msgstr "Éste contenido es mostrado sobre la sección principal y el carrousel de recursos. La imagen tomará el ancho completo de la pantalla. Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-MAINDESCRIPTION-3"
+msgstr "Éste contenido es mostrado entre la portada y la tabla de recursos."
+
+msgid "ADMIN-HOME-SECTION-QUICKLINKSTITLE"
+msgstr "Sección de enlaces rápidos"
+
+msgid "ADMIN-HOME-SECTION-QUICKLINKSDESCRIPTION"
+msgstr "Comience a escribir el nombre de los recursos que se incluirán en la sección de Enlaces rápidos, y seleccionelos de la lista."
+
+msgid "ADMIN-HOME-SECTION-NEWSLIDE"
+msgstr "Agregar imagen"
+
+msgid "ADMIN-HOME-SECTION-THEME3-TIP"
+msgstr "<span>Importante!</span>  El tamaño de las imagenes debe ser de 940 x 300 px, sino pueden deformarse."
+
+msgid "ADMIN-HOME-SECTION-DELETESLIDE"
+msgstr "Borrar"
+
+msgid "ADMIN-HOME-SECTION-LINKTEXT"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-THEME4-TIP"
+msgstr "<span>Importante!</span> El tamaño de las imagenes debe ser de 1920 x 300 px, sino las imagenes pueden distorsionarse."
+
+msgid "ADMIN-HOME-SECTION-LINKPLACEHOLDER"
+msgstr "Enlace de la imagen (opcional)"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDLABEL"
+msgstr "Imagen destacada:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMETITLELABEL"
+msgstr "Título de bienvenida:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONTEXT"
+msgstr "Buscar imagen..."
+
+msgid "ADMIN-HOME-SECTION-SUCCESS-TITLE"
+msgstr "Página de inicio guardada"
+
+msgid "ADMIN-HOME-SECTION-SUCCESS-TEXT"
+msgstr "Sus cambios se pueden ver reflejados en su sitio de datos abiertos."
+
+msgid "ADMIN-HOME-SECTION-ERROR-TITLE"
+msgstr "Ha ocurrido un error"
+
+msgid "ADMIN-HOME-SECTION-ERROR-TEXT"
+msgstr "No pudimos guardar los cambios. </br> Por favor, inténtelo de nuevo más tarde."
+
+msgid "ADMIN-HOME-SECTION-NOTVALIDURL-TITLE"
+msgstr "Error de validación"
+
+msgid "ADMIN-HOME-SECTION-NOTVALIDURL-TEXT"
+msgstr "Los enlaces de las imagenes no son válidos.</br>Por favor, revisa e intenta nuevamente."
+
+msgid "ADMIN-HOME-SECTION-MAXSIZE-TEXT"
+msgstr "El tamaño de cada archivo no puede superar los 5 MB."
+
+msgid "ADMIN-HOME-SECTION-TIMEOUTERROR-TEXT"
+msgstr "El tiempo de espera para esta operación ha sido excedido. </br> Por favor, inténtelo de nuevo más tarde."
+
+
+
+
+
+# NEW WORKSPACE KEYS -----------------------------------------
+
+msgid "VALIDATE-REQUIRED-TEXT"
+msgstr "Ingrese su nombre de usuario o su dirección de correo electrónico."
+
+msgid "VALIDATE-USERNAME-REQUIRED-TEXT"
+msgstr "Ingrese su nombre de usuario."
+
+msgid "VALIDATE-PASSWORD-REQUIRED-TEXT"
+msgstr "Ingrese su contraseña."
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "Este campo es requerido."
+
+msgid "VALIDATE-MAXLENGTH-TEXT-1"
+msgstr "No se deben superar los "
+
+msgid "VALIDATE-MAXLENGTH-TEXT-2"
+msgstr " caracteres."
+
+msgid "VALIDATE-PASSWORDMATCH-TEXT"
+msgstr "Las contraseñas no coinciden."
+
+msgid "VALIDATE-EMAILNOTVALID-TEXT"
+msgstr "Ingrese una dirección de correo electrónico válida."
+
+msgid "SIGNUP-ERRORS-MESSAGE"
+msgstr "Corrija los errores en los campos antes de continuar."
+
+msgid "VALIDATE-URLNOTVALID-TEXT"
+msgstr "Ingrese una URL válida."
+
+msgid "VIEWDS-FLEXIGRID-ERRORMSG"
+msgstr "Error de conexión"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-1"
+msgstr "Mostrando"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-2"
+msgstr "a"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-3"
+msgstr "de"
+
+msgid "VIEWDS-FLEXIGRID-PAGESTAT-4"
+msgstr "filas"
+
+msgid "VIEWDS-FLEXIGRID-PAGETEXT"
+msgstr "Página"
+
+msgid "VIEWDS-FLEXIGRID-OUTOF"
+msgstr "de"
+
+msgid "VIEWDS-FLEXIGRID-FINDTEXT"
+msgstr "Buscar"
+
+msgid "VIEWDS-FLEXIGRID-PROCMSG"
+msgstr "Cargando, por favor espere..."
+
+msgid "VIEWDS-FLEXIGRID-NOMSG"
+msgstr "Sin filas"
+
+msgid "APP-INEXISTENT-DOMAIN-TITLE"
+msgstr "Dominio no configurado"
+
+msgid "APP-INEXISTENT-DOMAIN"
+msgstr "La cuenta no tiene un dominio configurado. Por favor, contacte al administrador de su cuenta."
+
+msgid "APP-INEXISTENT-DOMAIN-ADMIN-1"
+msgstr "La cuenta no tiene un dominio configurado. "
+
+msgid "APP-INEXISTENT-DOMAIN-ADMIN-2"
+msgstr "Configurelo aquí"
+
+msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
+msgstr "Eliminar conjunto de datos "
+
+msgid "APP-DELETE-DATASET-ACTION-TEXT"
+msgstr "El conjunto de datos y los recursos asociados fueron eliminados."
+
+msgid "APP-DELETE-DATASET-ACTION-ERROR-TEXT"
+msgstr "Error al eliminar el conjunto de datos y sus recursos relacionados."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-TEXT"
+msgstr "La revision del conjunto de datos fue eliminada."
+
+msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
+msgstr "Error al borrar la revision del conjunto de datos."
+
+msgid "APP-GRID-CELL-TITLE"
+msgstr "TITULO"
+
+msgid "APP-GRID-CELL-DATASET-NAME"
+msgstr "CONJUNTO DE DATOS"
+
+msgid "APP-GRID-CELL-STATUS"
+msgstr "ESTADO"
+
+msgid "APP-GRID-CELL-CATEGORY"
+msgstr "CATEGORIA"
+
+msgid "APP-GRID-CELL-TYPE"
+msgstr "TIPO"
+
+msgid "APP-GRID-CELL-AUTHOR"
+msgstr "AUTOR"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
+msgstr "Eliminar Vista de Datos"
+
+msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
+msgstr "La vista y sus recusros asociados, han sido eliminados."
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
+msgstr "La revisión ha sido eliminada."
+
+msgid "APP-ERROR-TEXT"
+msgstr "Error"
+
+msgid "APP-CHANGES-SAVED-TEXT"
+msgstr "Cambios guardados"
+
+msgid "APP-NOT-API-DOMAIN-TEXT"
+msgstr "No debe comenzar con &quot;api.&quot;"
+
+msgid "APP-NO-RESOURCES-ALERT-TEXT"
+msgstr "Lo sentimos, no hay recursos coincidentes con su selección de filtros. Por favor inténte otras combinaciones."
+
+msgid "APP-FILTER-TEXT"
+msgstr "Filtrar"
+
+msgid "APP-VALIDATE-FILE-TYPE-TEXT"
+msgstr "El tipo de archivo no es válido, por favor seleccione uno de los siguientes admitidos: CSV, DOC, DOCX, KML, KMZ, TSV, TXT, XLS, XLSX, XML."
+
+msgid "APP-NO-RESOURCES-FOUND-TEXT"
+msgstr "Lo sentimos, sus criterios de búsqueda no arrojaron resultados. Por favor, intente con otros criterios."
+
+msgid "ERROR-TRY-ANOTHER-DATASET"
+msgstr "El conjunto de datos no pudo ser comprobado. Por favor reintentelo o contactese con <a href='mailto:support@junar.com'>mailto:support@junar.com</a>"
+
+msgid "APP-SETTINGS-SAVE-OK-TITLE"
+msgstr "Éxito"
+
+msgid "APP-SETTINGS-SAVE-ERROR-TEXT"
+msgstr "Hubo un error al intentar guardar los cambios. Por favor, intente de nuevo más tarde o póngase en contacto con nosotros."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME5"
+msgstr "Este es un tema personalizado diseñado por la ciudad de Palo Alto para satisfacer sus metas personales para su página de inicio. ¿Necesita un tema personalizado? Pida el suyo <a href='mailto:support@junar.com' title='support@junar.com'>aquí</a>."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME6"
+msgstr "Este es un template personalizado, diseñado por la ciudad de Jackson para satisfacer sus metas personales para su página de inicio. ¿Necesita un tema personalizado? Pida el suyo <a href='mailto:support@junar.com' title='support@junar.com'>aquí</a>."
+
+msgid "ADMIN-HOME-SECTION-SLIDER-TITLE"
+msgstr "Sección slider destacado"
+
+msgid "ADMIN-HOME-SECTION-SLIDERTHEME6-DESCRIPTION"
+msgstr "Añada imágenes con enlaces opcionales a ellos, y, finalmente ordenelas. <br/> Este contenido se muestra por encima de la caja de búsqueda. Tamaño máximo de cada archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-THEME6-TIP"
+msgstr "<span>Importante!</span> El tamaño de las imagenes debe ser de 960 x 320 px, sino pueden deformarse."
+
+msgid "ADMIN-HOME-SECTION-SEARCHBOX-TITLE"
+msgstr "Buscador"
+
+msgid "ADMIN-HOME-SECTION-HINT-TEXT"
+msgstr "Texto de ayuda"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION-TITLE"
+msgstr "Botones de navegación"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION-DESCRIPTION"
+msgstr "Agregue ìconos para la navegación. Agregue links y descripciones para los botones. Tamaño máximo: 5MB."
+
+msgid "APP-DESCRIPTION2-LABEL"
+msgstr "Descripción:"
+
+msgid "APP-DESCRIPTION2-TEXT"
+msgstr "Ingrese una descripción (opcional)"
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBTITLE"
+msgstr "Sección de Ruta de exploración"
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBDESCRIPTION"
+msgstr "Pegue aquí el código HTML para la ruta de exploración. Use etiquetas &lt;ul&gt;, &lt;li&gt; y &lt;a&gt;."
+
+msgid "ADMIN-HOME-SECTION-BREADCRUMBHTML"
+msgstr "HTML:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMETITLE"
+msgstr "Sección de bienvenida"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEDESCRIPTION"
+msgstr "Este contenido es mostrado a la izquierda de la sección de proyectos destacados, entre las secciones de ruta de exploración y botonera. <br/> Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-WELCOMELABEL"
+msgstr "Imágen de bienvenida:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-WELCOMETIP"
+msgstr "<span>Importante!</span> El tamaño de la imagen debe ser de 544 x 340 píxeles, de lo contrario la imagen podría aparecer distorsionada."
+
+msgid "ADMIN-HOME-SECTION-WELCOMEFIRSTTITLELABEL"
+msgstr "Primer título:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMESECONDTITLELABEL"
+msgstr "Segundo título:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPTITLELABEL"
+msgstr "Título del Popup:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPTEXTLABEL"
+msgstr "Texto del Popup:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEPOPUPFOOTERLABEL"
+msgstr "Pie del Popup:"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDTITLE"
+msgstr "Sección de proyecto destacado"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDDESCRIPTION"
+msgstr "Este contenido es mostrado a la derecha de la sección de bienvenida, entre las secciones de ruta de exploración y botonera. <br> Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-THEME5-FEATUREDTIP"
+msgstr "<span>Importante!</span> El tamaño de la imagen debe ser de 356 x 340 píxeles, de lo contrario la imagen podría aparecer distorsionada."
+
+msgid "ADMIN-HOME-SECTION-FEATUREDFIRSTLABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-FEATUREDLINKLABEL"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSTITLE"
+msgstr "Sección botonera"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSDESCRIPTION"
+msgstr "Añada enlaces de botones, configure su texto, enlace, color de fondo, y, finalmente reorganicelos en el orden que quiera. <br/> Este contenido es mostrado en el medio del tema."
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-TEXT-LABEL"
+msgstr "Texto:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-TEXT-PLACEHOLDER"
+msgstr "Ingrese un texto"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-LINK-LABEL"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-LINK-PLACEHOLDER"
+msgstr "Ingrese un enlace"
+
+msgid "ADMIN-HOME-SECTION-BUTTONS-BACKGROUND-LABEL"
+msgstr "Color de fondo:"
+
+msgid "ADMIN-HOME-SECTION-NEWBUTTON"
+msgstr "Agregar botón"
+
+msgid "ADMIN-HOME-SECTION-BUTTONSPERROW"
+msgstr "Botones por fila:"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXTITLE"
+msgstr "Sección de la caja inferior izquierda"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXDESCRIPTION"
+msgstr "Este contenido es mostrado a la izquierda, debajo de la sección botonera. <br/> Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXLABEL"
+msgstr "Imagen:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-LEFTBOTTOMBOXTIP"
+msgstr "<span>Importante!</span> Tamaño de la imagen debe ser 293 x 95 píxeles, de lo contrario la imagen podría aparecer distorsionada."
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXFIRSTLABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-LEFTBOTTOMBOXLINKLABEL"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXTITLE"
+msgstr "Sección de la caja inferior media"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXDESCRIPTION"
+msgstr "Este contenido es mostrado en el medio, debajo de la sección botonera. <br/> Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXLABEL"
+msgstr "Imagen:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-MIDDLEBOTTOMBOXTIP"
+msgstr "<span>Importante!</span> Tamaño de la imagen debe ser 293 x 95 píxeles, de lo contrario la imagen podría aparecer distorsionada."
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXFIRSTLABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-MIDDLEBOTTOMBOXLINKLABEL"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXTITLE"
+msgstr "Sección de la caja inferior derecha"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXDESCRIPTION"
+msgstr "Este contenido es mostrado a la derecha, debajo de la sección botonera. <br/> Tamaño máximo del archivo: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXLABEL"
+msgstr "Imagen:"
+
+msgid "ADMIN-HOME-SECTION-THEME5-RIGHTBOTTOMBOXTIP"
+msgstr "<span>Importante!</span> Tamaño de la imagen debe ser 293 x 95 píxeles, de lo contrario la imagen podría aparecer distorsionada."
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXFIRSTLABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-RIGHTBOTTOMBOXLINKLABEL"
+msgstr "Enlace:"
+
+msgid "ADMIN-HOME-SECTION-LINKSTITLE"
+msgstr "Sección enlaces"
+
+msgid "ADMIN-HOME-SECTION-LINKSDESCRIPTION"
+msgstr "Añada enlaces configurando su texto y enlace, y, finalmente reorganicelos en el orden que quiera. <br/> Este contenido es mostrado debajo de las cajas inferiores."
+
+msgid "ADMIN-HOME-SECTION-NEWLINK"
+msgstr "Agregar enlace"
+
+msgid "ADMIN-HOME-SECTION-DELETE"
+msgstr "Eliminar"
+
+msgid "VALIDATE-SAME-PASS-TEXT"
+msgstr "Por favor ingrese el mismo valor otra vez"

@@ -1,0 +1,112 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components %}
+
+{% block meta %}
+<link href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen">
+<link type="text/css" href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen">
+
+<link href="/media_workspace/styles/createCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_workspace/styles/createDataset.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceParamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceParamView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceParamsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceParamsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_workspace/processManager/stepModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/stepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/finishModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/finishWebserviceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/dataset/finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/processManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManager/processManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<meta name="main-option" content="id_datasets_option"/>
+{% endblock %}
+
+{% block sectionTitle %}
+<h1 class="FL"><a href="{% url 'manageDatasets.list' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
+<h2 class="FL">{% trans 'APP-EDIT-TEXT' %}</h2>
+<h3 class="FL">{{ dataset.title }}</h3>
+<ul class="buttons-bar FR edit" data-step="1">
+	{% include "createDataset/navigation.html" %}
+</ul>
+{% endblock %}
+
+{% block content %}
+
+	<form action="" class="create edit" id="id_createDataset">
+		{% include "processManager/dataset/steps/collectWebservice.html" %}
+		{% include "processManager/dataset/steps/finish.html" %}
+	</form>
+
+{% endblock %}
+
+{% block bottom_js %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+  var collectWebserviceModel = new CollectWebserviceModel({
+    name: 'collect',
+
+    // Initialize Model
+    end_point: '{{ dataset.end_point }}',
+    impl_type: '{{ dataset.impl_type }}',
+    impl_details: '{{ dataset.impl_details }}',
+    path_to_headers: '{{ dataset.path_to_headers }}',
+    path_to_data: '{{ dataset.path_to_data }}',
+    token: '{{ dataset.token }}',
+    algorithm: '{{ dataset.algorithm }}',
+    username: '{{ dataset.username }}',
+    password: '{{ dataset.password }}',
+    signature: '{{ dataset.signature }}',
+    method_name: '{{ dataset.method_name }}',
+    namespace: '{{ dataset.namespace }}',
+    use_cache: '{{ dataset.use_cache }}',
+    mbox: '{{ dataset.mbox }}',
+    license_url: '{{ dataset.license_url }}',
+    spatial: '{{ dataset.spatial }}',
+    frequency: '{{ dataset.frequency }}',
+    params: [{% for param in dataset.params %}{"name":"{{ param.name }}", "default_value":"{{ param.default_value }}","enable_editable":"{{ param.enable_editable }}"},{% endfor %}]
+
+  });
+  var collectWebserviceView = new CollectWebserviceView({model: collectWebserviceModel});
+
+  var finishModel = new FinishWebserviceModel({
+    name: 'finish',
+    saveUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search',
+
+    // Initialize Model
+    title: '{{ dataset.title }}',
+    description: '{{ dataset.description }}',
+    category: '{{ dataset.category_id }}',
+    status: '{{ dataset.status }}',
+    notes: '{{ dataset.notes }}',
+    tags: [{% for tag in dataset.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
+    sources: [{% for source in dataset.sources %}{"name":"{{ source.source__name }}"},{% endfor %}]
+    
+  });
+  var finishView = new FinishView({model: finishModel});
+
+  var processManagerModel = new ProcessManagerModel({
+    startUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
+    finishUrl: "{% url 'manageDatasets.list' %}"
+  });
+  var processManagerView = new ProcessManagerView({model: processManagerModel});
+
+  processManagerView.register( collectWebserviceView );
+  processManagerView.register( finishView );
+
+  processManagerView.start();
+
+});
+</script>
+
+{% endblock %}
