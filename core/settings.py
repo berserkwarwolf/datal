@@ -14,9 +14,9 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'db_name',
-        'USER': 'user_name',
-        'PASSWORD': 'user_pass',
+        'NAME': 'datal',
+        'USER': 'root',
+        'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '3306',
         'SUPPORTS_TRANSACTIONS': True
@@ -40,12 +40,12 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
-    'junar.core',
+    'core',
     'raven.contrib.django'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    "junar.core.context_processors.request_context",
+    "core.context_processors.request_context",
     "django.contrib.messages.context_processors.messages",
     "django.core.context_processors.i18n"
 )
@@ -224,7 +224,7 @@ LOGGING = {
         'file':{
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
-            'filename': '/tmp/junar.log',
+            'filename': '/tmp/datal.log',
         },
         'mail_admins': {
             'filters': ['require_debug_false'],
@@ -264,6 +264,6 @@ LOGGING = {
 IS_WORKSPACE = False
 
 try:
-    from junar.core.local_settings import *
+    from core.local_settings import *
 except ImportError:
     pass
