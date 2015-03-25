@@ -1,23 +1,23 @@
 from django.http import HttpResponse
-from junar.core.shortcuts import render_to_response
+from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
-from junar.core.auth.decorators import login_required,privilege_required
-from junar.core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
-from junar.workspace.decorators import *
-from junar.workspace.settings import *
-from junar.workspace.manageVisualizations.forms import *
-from junar.core.lifecycle.visualizations import VisualizationLifeCycleManager
-from junar.workspace.exceptions import LifeCycleException
-from junar.core.engine import invoke
-from junar.core.helpers import RequestProcessor
+from core.auth.decorators import login_required,privilege_required
+from core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
+from workspace.decorators import *
+from workspace.settings import *
+from workspace.manageVisualizations.forms import *
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from workspace.exceptions import LifeCycleException
+from core.engine import invoke
+from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder
-from junar.core.choices import *
-from junar.core.docs import VZ, DT
-from junar.core.models import VisualizationRevision,DatasetRevision
-from junar.api.http import JSONHttpResponse
-from junar.core import helpers as LocalHelper
+from core.choices import *
+from core.docs import VZ, DT
+from core.models import VisualizationRevision,DatasetRevision
+from api.http import JSONHttpResponse
+from core import helpers as LocalHelper
 
 import json
 import urllib

@@ -1,9 +1,9 @@
 from django import forms
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy
-from junar.core.models import User
+from core.models import User
 import hashlib
-from junar.core import choices
+from core import choices
 
 class SignUpForm(forms.Form):
     account_name   = forms.CharField(required=True, label=ugettext_lazy('APP-ACCOUNT-NAME-TEXT'))

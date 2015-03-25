@@ -1,7 +1,7 @@
-from junar.core.auth.decorators import login_required
-from junar.core.daos import ActivityStreamDAO
-from junar.core.shortcuts import render_to_response
-from junar.workspace.decorators import require_user_stats
+from core.auth.decorators import login_required
+from core.daos import ActivityStreamDAO
+from core.shortcuts import render_to_response
+from workspace.decorators import require_user_stats
 
 @login_required
 @require_user_stats

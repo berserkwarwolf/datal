@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from junar.core.settings import *
+from core.settings import *
 
 IS_WORKSPACE = True
 
@@ -15,15 +15,15 @@ MIDDLEWARE_CLASSES += (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'junar.workspace.middlewares.nocache.NoCacheMiddleware',
-    'junar.workspace.middlewares.auth.AccessManager',
-    'junar.workspace.middlewares.ioc.DependenciesInjector',
-    'junar.workspace.middlewares.catch.ExceptionManager',
+    'workspace.middlewares.nocache.NoCacheMiddleware',
+    'workspace.middlewares.auth.AccessManager',
+    'workspace.middlewares.ioc.DependenciesInjector',
+    'workspace.middlewares.catch.ExceptionManager',
 )
 
 DOMAINS['engine'] = 'workspace'
 
-ROOT_URLCONF = 'junar.workspace.urls'
+ROOT_URLCONF = 'workspace.urls'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'workspace', 'templates'),
@@ -35,7 +35,7 @@ PAGINATION_RESULTS_PER_PAGE = 10
 SECOND_LANGUAGE = 'es'
 
 INSTALLED_APPS += (
-    'junar.workspace',
+    'workspace',
     'django.contrib.sessions',
 )
 
@@ -51,6 +51,6 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 try:
-    from junar.workspace.local_settings import *
+    from workspace.local_settings import *
 except ImportError:
     pass

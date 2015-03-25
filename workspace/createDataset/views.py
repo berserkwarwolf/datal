@@ -2,12 +2,12 @@ from django.conf import settings
 from django.utils.translation import ugettext
 from django.http import HttpResponse
 from django.http import Http404
-from junar.core.models import CategoryI18n
-from junar.core.choices import *
-from junar.core.shortcuts import render_to_response
-from junar.core.auth.decorators import login_required
-from junar.workspace.manageDatasets.forms import CreateDatasetForm
-from junar.core.lifecycle.datasets import DatasetLifeCycleManager
+from core.models import CategoryI18n
+from core.choices import *
+from core.shortcuts import render_to_response
+from core.auth.decorators import login_required
+from workspace.manageDatasets.forms import CreateDatasetForm
+from core.lifecycle.datasets import DatasetLifeCycleManager
 
 @login_required
 def index(request, type="index"):

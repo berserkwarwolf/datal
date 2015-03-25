@@ -1,15 +1,15 @@
 from django import template
-from junar.core.models import *
-from junar.core.docs import DB, DS
+from core.models import *
+from core.docs import DB, DS
 from django.conf import settings
-from junar.core.choices import *
-from junar.core.forms import MetaForm
-from junar.workspace.manageDataviews.forms import CreateDataStreamForm
+from core.choices import *
+from core.forms import MetaForm
+from workspace.manageDataviews.forms import CreateDataStreamForm
 
 register = template.Library()
 
 def workspace_open_data_metrics(auth_manager):
-    from junar.core.cache import Cache
+    from core.cache import Cache
     from datetime import date, timedelta
     from django.db import connection
     cursor = connection.cursor()
@@ -196,7 +196,7 @@ register.inclusion_tag('view_manager/dataStreamForm.html')(dataStreamForm)
 
 def get_activity_type(activity):
 
-    from junar.core.choices import ActionStreams
+    from core.choices import ActionStreams
     activity_name=""
     if int(activity) == (ActionStreams.CREATE):
         activity_name = ugettext_lazy('LANDINGPAGE-ACTIVITY-HASCREATED')

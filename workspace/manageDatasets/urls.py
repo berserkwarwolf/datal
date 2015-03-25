@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, url
-from junar.workspace.manageDatasets.views import *
+from workspace.manageDatasets.views import *
 
 urlpatterns = patterns('',
         url(r'^$', list, name='manageDatasets.list'),

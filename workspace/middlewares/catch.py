@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.http import HttpResponse
-from junar.workspace.exceptions import *
+from workspace.exceptions import *
 import logging
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
@@ -11,7 +11,7 @@ class ExceptionManager(object):
     """ Middleware for error handling """
     def process_exception(self, request, exception):
         logger = logging.getLogger(__name__)
-        from junar.workspace.templates import DefaultWorkspaceError
+        from workspace.templates import DefaultWorkspaceError
 
         if hasattr(exception, 'info'): # detect if it's my type errors
             error_title = exception.info[ERROR_KEY]

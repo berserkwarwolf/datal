@@ -6,8 +6,8 @@ from django.forms.formsets import formset_factory
 from django.forms.util import ErrorDict
 from django.utils.translation import ugettext_lazy
 
-from junar.core import choices
-from junar.core.models import CategoryI18n
+from core import choices
+from core.models import CategoryI18n
 
 logger = logging.getLogger(__name__)
 

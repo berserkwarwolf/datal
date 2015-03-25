@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response
-from junar.core.models import *
-from junar.core.helpers import slugify
+from core.models import *
+from core.helpers import slugify
 from django.http import Http404 # HttpResponse
-from junar.core.communitymanagers import *
-from junar.microsites.home_manager.managers import HomeFinder
+from core.communitymanagers import *
+from microsites.home_manager.managers import HomeFinder
 
 def action_view(request):
     """ show transparency categories """

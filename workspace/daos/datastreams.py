@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 import operator
 from django.db.models import Q, F
-from junar.core.models import DataStreamRevision, DataStream, DatastreamI18n
-from junar.workspace import settings
+from core.models import DataStreamRevision, DataStream, DatastreamI18n
+from workspace import settings
 
 
 class DataStreamDBDAO():
@@ -156,7 +156,7 @@ class DatastreamSearchDAOFactory():
 class DatastreamSearchifyDAO():
     """ class for manage access to datasets' searchify documents """
     def __init__(self):
-        from junar.core.lib.indexers.searchify import SearchifyIndex
+        from core.lib.indexers.searchify import SearchifyIndex
         self.search_index = SearchifyIndex()
         
     def add(self, datastream_revision, language):

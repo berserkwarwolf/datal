@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
-from junar.core.choices import StatusChoices
+from core.choices import StatusChoices
 
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
