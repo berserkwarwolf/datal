@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.db import connection
 from django.core.urlresolvers import reverse
-from junar.core import managers
-from junar.core.models import *
-from junar.core.helpers import slugify
-from junar.core import helpers
+from core import managers
+from core.models import *
+from core.helpers import slugify
+from core import helpers
 
 # CategoryManager
 def get_for_browse(self, category_slug, language):

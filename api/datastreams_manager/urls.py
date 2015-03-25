@@ -1,5 +1,5 @@
 from django.conf.urls import *
-from junar.api.datastreams_manager.views import *
+from api.datastreams_manager.views import *
 
 urlpatterns = patterns('',
     (r'^(?P<guid>[A-Z0-9\-]+)$', action_view),

@@ -1,4 +1,4 @@
-from junar.core.cache import Cache
+from core.cache import Cache
 
 class ResponseStatusMiddleware(object):
 

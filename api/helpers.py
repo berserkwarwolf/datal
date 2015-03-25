@@ -1,5 +1,5 @@
-from junar.core.models import Preference, User
-from junar.core.helpers import get_domain_with_protocol
+from core.models import Preference, User
+from core.helpers import get_domain_with_protocol
 
 def get_domain(account_id):
     """

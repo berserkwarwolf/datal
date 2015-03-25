@@ -3,7 +3,7 @@ from django import template
 # from babel import numbers, dates
 # from core.helpers import format_datetime
 from datetime import datetime
-from junar.core.helpers import format_number_ms
+from core.helpers import format_number_ms
 import re
 
 

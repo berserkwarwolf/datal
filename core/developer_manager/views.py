@@ -3,7 +3,7 @@ import random
 import hashlib
 from django.http import Http404
 from django.shortcuts import render_to_response, HttpResponse
-from junar.core.models import Application, DataStream
+from core.models import Application, DataStream
 from django.conf import settings
 
 def action_query(request):

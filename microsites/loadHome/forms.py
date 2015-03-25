@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import validate_comma_separated_integer_list as vil
-from junar.core.helpers import validate_comma_separated_word_list as vwl
+from core.helpers import validate_comma_separated_word_list as vwl
 
 class QueryDatasetForm(forms.Form):
     all = forms.BooleanField(required=False)

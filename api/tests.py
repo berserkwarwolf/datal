@@ -1,12 +1,12 @@
 import unittest
-from junar.api.test import datastreams_manager
-from junar.api.test import dashboards_manager
-from junar.api.test import sources_manager
-from junar.api.test import authorizations_manager
-from junar.api.test import users_manager
-from junar.api.test import applications
-from junar.api.test import emitters
-from junar.api.test import accounts
+from api.test import datastreams_manager
+from api.test import dashboards_manager
+from api.test import sources_manager
+from api.test import authorizations_manager
+from api.test import users_manager
+from api.test import applications
+from api.test import emitters
+from api.test import accounts
 
 def suite():
     suite = unittest.TestSuite()

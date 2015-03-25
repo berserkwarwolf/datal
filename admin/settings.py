@@ -1,4 +1,4 @@
-from junar.core.settings import *
+from core.settings import *
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
@@ -11,10 +11,10 @@ MIDDLEWARE_CLASSES += (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
 
-ROOT_URLCONF = 'junar.admin.urls'
+ROOT_URLCONF = 'admin.urls'
 
 INSTALLED_APPS += (
-    'junar.admin',
+    'admin',
     'django.contrib.sessions',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -36,6 +36,6 @@ PAGINATION_RESULTS_PER_PAGE = 10
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'
 
 try:
-    from junar.admin.local_settings import *
+    from admin.local_settings import *
 except ImportError:
     pass

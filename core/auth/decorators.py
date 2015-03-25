@@ -26,7 +26,7 @@ def user_passes_test(test_func, login_url=None, redirect_field_name=REDIRECT_FIE
             if ((not login_scheme or login_scheme == current_scheme) and
                 (not login_netloc or login_netloc == current_netloc)):
                 path = request.get_full_path()
-            from junar.core.auth.views import redirect_to_login
+            from core.auth.views import redirect_to_login
             return redirect_to_login(path, login_url, redirect_field_name)
         return _wrapped_view
     return decorator

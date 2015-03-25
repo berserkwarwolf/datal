@@ -1,6 +1,6 @@
 from django.http import HttpResponse
-from junar.core.emitters import CSVEmitter
-from junar.core.engine import invoke
+from core.emitters import CSVEmitter
+from core.engine import invoke
 import json
 import urlparse
 

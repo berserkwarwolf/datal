@@ -1,17 +1,17 @@
 from django.conf.urls import *
-from junar.api.v2.datastreams.views import *
+from api.v2.datastreams.views import *
 
 urlpatterns = patterns('',
-    (r'^datastreams/', include('junar.api.datastreams_manager.urls')),
-    (r'^bigdata/', include('junar.api.bigdata_manager.urls')),
-    (r'^datasets/', include('junar.api.datasets_manager.urls')),
-    (r'^visualizations/', include('junar.api.visualizations_manager.urls')),
-    (r'^dashboards/', include('junar.api.dashboards_manager.urls')),
-    (r'^sources/', include('junar.api.sources_manager.urls')),
-    (r'^users/', include('junar.api.users_manager.urls')),
-    (r'^resources/', include('junar.api.resources_manager.urls')),
-    (r'^messages/', include('junar.api.messages_manager.urls')),
-    (r'^transparency/', include('junar.api.transparency_manager.urls')),
+    (r'^datastreams/', include('api.datastreams_manager.urls')),
+    (r'^bigdata/', include('api.bigdata_manager.urls')),
+    (r'^datasets/', include('api.datasets_manager.urls')),
+    (r'^visualizations/', include('api.visualizations_manager.urls')),
+    (r'^dashboards/', include('api.dashboards_manager.urls')),
+    (r'^sources/', include('api.sources_manager.urls')),
+    (r'^users/', include('api.users_manager.urls')),
+    (r'^resources/', include('api.resources_manager.urls')),
+    (r'^messages/', include('api.messages_manager.urls')),
+    (r'^transparency/', include('api.transparency_manager.urls')),
 
     # -----------------------------------------------------------------------
     # API v2
@@ -23,5 +23,5 @@ urlpatterns = patterns('',
 
 )
 
-handler404 = 'junar.api.exceptions.Http404'
-handler500 = 'junar.api.exceptions.Http500'
+handler404 = 'api.exceptions.Http404'
+handler500 = 'api.exceptions.Http500'

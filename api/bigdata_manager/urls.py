@@ -1,5 +1,5 @@
 from django.conf.urls import *
-from junar.api.bigdata_manager.views import *
+from api.bigdata_manager.views import *
 
 urlpatterns = patterns('',
     (r'^mint/(?P<guid>[A-Z0-9\-]+)$', action_mint),

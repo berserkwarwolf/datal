@@ -1,9 +1,9 @@
-from junar.core.models import *
-from junar.api.http import JSONHttpResponse
-from junar.api.resources_manager import forms
-from junar.api.managers import *
-from junar.api.resources_manager.managers import IndexTankFinder
-from junar.api.helpers import get_domain
+from core.models import *
+from api.http import JSONHttpResponse
+from api.resources_manager import forms
+from api.managers import *
+from api.resources_manager.managers import IndexTankFinder
+from api.helpers import get_domain
 import json
 
 def action_explore(request):

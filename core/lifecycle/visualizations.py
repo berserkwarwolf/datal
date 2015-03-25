@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from junar.core.choices import StatusChoices, ActionStreams
-from junar.workspace.daos.visualizations import VisualizationDBDAO
-from junar.core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
-from junar.core.daos import ActivityStreamDAO, SearchifyDAO
-from junar.workspace.exceptions import *
-from junar.core.helpers import update_dashboard_widgets_and_revisions
+from core.choices import StatusChoices, ActionStreams
+from workspace.daos.visualizations import VisualizationDBDAO
+from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
+from core.daos import ActivityStreamDAO, SearchifyDAO
+from workspace.exceptions import *
+from core.helpers import update_dashboard_widgets_and_revisions
 
 
 class VisualizationLifeCycleManager():
@@ -88,7 +88,7 @@ class VisualizationLifeCycleManager():
 
         # if related resource is StatusChoices.APPROVED, then we publish it
         if publish_backward:
-            from junar.core.lifecycle.datastreams import DatastreamLifeCycleManager
+            from core.lifecycle.datastreams import DatastreamLifeCycleManager
             related = DatastreamLifeCycleManager(user=self.user.id, resource=datastream_revision)
             related.publish_if_accepted(publish_backward=True, publish_forward=False)
 

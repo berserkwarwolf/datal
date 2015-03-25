@@ -1,4 +1,4 @@
-from junar.core.models import *
+from core.models import *
 viewer = Role.objects.get(code='ao-viewer')
 privileges = Privilege.objects.filter(code__in=['privatesite.can_view_datastream', 'privatesite.can_view_visualization', 'privatesite.can_view_dashboard'])
 for privilege in privileges:

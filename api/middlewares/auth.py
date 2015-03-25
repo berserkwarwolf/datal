@@ -1,10 +1,10 @@
 from django.db.models import Q
 from django.conf import settings
-from junar.core.http import get_domain
-from junar.core.models import Application, Account, Threshold, UserPassTickets, User
-from junar.core.cache import Cache
-from junar.api.http import HttpResponseTooManyRequests, HttpResponseUnauthorized, HttpResponseForbidden, HttpResponse
-from junar.api.exceptions import *
+from core.http import get_domain
+from core.models import Application, Account, Threshold, UserPassTickets, User
+from core.cache import Cache
+from api.http import HttpResponseTooManyRequests, HttpResponseUnauthorized, HttpResponseForbidden, HttpResponse
+from api.exceptions import *
 from urlparse import urlparse
 
 import time

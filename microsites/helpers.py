@@ -1,7 +1,7 @@
 from django.db.models import Q
-from junar.core import helpers as CoreHelper
-from junar.core.models import Preference
-from junar.core.choices import SourceImplementationChoices, SOURCE_IMPLEMENTATION_CHOICES
+from core import helpers as CoreHelper
+from core.models import Preference
+from core.choices import SourceImplementationChoices, SOURCE_IMPLEMENTATION_CHOICES
 
 def add_domains_to_permalinks(resources):
 

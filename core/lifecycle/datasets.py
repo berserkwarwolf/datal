@@ -5,13 +5,13 @@ from django.db.models import F, Max
 from django.conf import settings
 from django.db import transaction
 
-from junar.core.choices import ActionStreams, StatusChoices
-from junar.core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
-from junar.core.lifecycle.resource import AbstractLifeCycleManager
-from junar.core.lifecycle.datastreams import DatastreamLifeCycleManager
-from junar.core.lib.datastore import *
-from junar.workspace.exceptions import DatasetNotFoundException, IlegalteStateException
-from junar.workspace.daos.datasets import *
+from core.choices import ActionStreams, StatusChoices
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
+from core.lifecycle.resource import AbstractLifeCycleManager
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.lib.datastore import *
+from workspace.exceptions import DatasetNotFoundException, IlegalteStateException
+from workspace.daos.datasets import *
 
 
 logger = logging.getLogger(__name__)

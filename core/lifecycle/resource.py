@@ -2,10 +2,10 @@
 
 from abc import ABCMeta, abstractmethod
 
-from junar.core.choices import StatusChoices
-from junar.core.daos import ActivityStreamDAO
-from junar.workspace.exceptions import IlegalteStateException
-from junar.core.lib.datastore import *
+from core.choices import StatusChoices
+from core.daos import ActivityStreamDAO
+from workspace.exceptions import IlegalteStateException
+from core.lib.datastore import *
 
 
 class AbstractLifeCycleManager():

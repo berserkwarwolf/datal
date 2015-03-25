@@ -2,7 +2,7 @@ import json as json_module
 import csv
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
-from junar.core.helpers import clean_string
+from core.helpers import clean_string
 
 class Emitter:
 

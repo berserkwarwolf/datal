@@ -4,8 +4,8 @@ from django.db import models, connection
 from django.conf import settings
 from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
-from junar.core.helpers import slugify
-from junar.core import helpers, choices
+from core.helpers import slugify
+from core import helpers, choices
 
 class ResourcesManager(models.Manager):
     def count(self):
@@ -60,7 +60,7 @@ class AccountManager(models.Manager):
     def get_by_domain(self, domain):
         if domain.find("portal.dev.junar.com") > -1:
             dom = domain.split(".")
-            from junar.core.models import Account
+            from core.models import Account
             return Account.objects.get(pk=int(dom[0]))
             # return super(AccountManager, self).get(account__id = dom[0])
         else:
@@ -264,7 +264,7 @@ class CategoryManager(models.Manager):
     def get_for_transparency(self, account):
         """ get categories for transparency microsite on selected account """
         categs = account.get_preference('account.transparency.categories').split()
-        from junar.core.models import Category
+        from core.models import Category
         categories_id = Category.objects.values("id", "categoryi18n__id", "categoryi18n__name").filter(id__in = categs)
 
         categories = []
@@ -725,7 +725,7 @@ class IndexTankFinder(Finder):
             # if 'account.catalog.enabled' preference is enable the show datasets
             if self.account_id:
                 # for resource definition
-                from junar.core.models import Preference
+                from core.models import Preference
                 preference, created = Preference.objects.get_or_create(account_id=self.account_id, key='account.catalog.enabled')
                 if created:
                     preference.value = "False"
@@ -792,7 +792,7 @@ class IndexTankFinder(Finder):
         dataset_id = p_doc['dataset_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
         
         l_dataset = dict (dataset_id=dataset_id
                                 , title=title

@@ -1,10 +1,10 @@
 from django.conf import settings
-from junar.core.models import *
-from junar.api.http import JSONHttpResponse
-from junar.api.exceptions import is_method_get_or_405, Http400
-from junar.api.sources_manager import forms, utils
-from junar.api.decorators import public_access_forbidden
-from junar.core.lib.datastore import *
+from core.models import *
+from api.http import JSONHttpResponse
+from api.exceptions import is_method_get_or_405, Http400
+from api.sources_manager import forms, utils
+from api.decorators import public_access_forbidden
+from core.lib.datastore import *
 
 @public_access_forbidden
 def checkfileUploaded(request):

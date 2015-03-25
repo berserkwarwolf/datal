@@ -1,11 +1,11 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy
 from django.db import IntegrityError
-from junar.core.helpers import slugify
-from junar.core import choices
-from junar.core import managers
-from junar.core.bigdata import Bigdata
-from junar.core.helpers import get_meta_data_dict
+from core.helpers import slugify
+from core import choices
+from core import managers
+from core.bigdata import Bigdata
+from core.helpers import get_meta_data_dict
 from django.shortcuts import get_object_or_404
 import logging
 import json
@@ -160,7 +160,7 @@ class Account(models.Model):
             return None
 
     def get_preferences(self):
-        from junar.core.daos import Preferences
+        from core.daos import Preferences
         return Preferences(self.id)
 
     def is_private(self):
@@ -327,7 +327,7 @@ class DataStreamRevision(models.Model):
 
     def get_dict(self, language = 'en'):
 
-        from junar.core.docs import DS
+        from core.docs import DS
         import time
 
         datastream = DS(self.id, language)
@@ -462,7 +462,7 @@ class DashboardRevision(models.Model):
 
     def get_dict(self, language = 'en'):
 
-        from junar.core.docs import DB
+        from core.docs import DB
         import time
         dashboard = DB(self.id, language)
         account = Account.objects.get(id = dashboard.account_id)
@@ -665,7 +665,7 @@ class DatasetRevision(models.Model):
 
         logger = logging.getLogger(__name__)
 
-        from junar.core.docs import DT
+        from core.docs import DT
         import time
 
         dataset = DT(self.id, language)
@@ -805,7 +805,7 @@ class VisualizationRevision(models.Model):
 
     def get_dict(self, language = 'en'):
 
-        from junar.core.docs import VZ
+        from core.docs import VZ
         import time
         visualization = VZ(self.id, language)
         account = Account.objects.get(id = visualization.account_id)

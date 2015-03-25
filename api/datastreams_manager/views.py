@@ -1,22 +1,22 @@
 from django.utils.translation import ugettext
-from junar.api.models import *
-from junar.api.http import JSONHttpResponse, HttpResponse
-from junar.api.managers import *
-from junar.api.datastreams_manager import forms as formsw #TODO fix moving to core or someting similar
-from junar.workspace.daos.datasets import DatasetDBDAO #TODO fix moving to core or someting similar
-from junar.api.decorators import public_access_forbidden
-from junar.api.helpers import get_domain, add_domain_to_datastream_link
-from junar.core.reports_manager.helpers import create_report
-from junar.api.exceptions import Http400
+from api.models import *
+from api.http import JSONHttpResponse, HttpResponse
+from api.managers import *
+from api.datastreams_manager import forms as formsw #TODO fix moving to core or someting similar
+from workspace.daos.datasets import DatasetDBDAO #TODO fix moving to core or someting similar
+from api.decorators import public_access_forbidden
+from api.helpers import get_domain, add_domain_to_datastream_link
+from core.reports_manager.helpers import create_report
+from api.exceptions import Http400
 from django.db import transaction
-from junar.api.v2.datastreams import forms
-from junar.core.choices import CollectTypeChoices, StatusChoices
-from junar.core.lifecycle.datasets import DatasetLifeCycleManager
-from junar.core.lifecycle.datastreams import DatastreamLifeCycleManager
-from junar.api.sources_manager.utils import *
+from api.v2.datastreams import forms
+from core.choices import CollectTypeChoices, StatusChoices
+from core.lifecycle.datasets import DatasetLifeCycleManager
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from api.sources_manager.utils import *
 from django.views.decorators.http import require_POST
-from junar.core.lib.datastore import *
-from junar.core.builders.datastreams import DatastreamBuilder
+from core.lib.datastore import *
+from core.builders.datastreams import DatastreamBuilder
 
 import json
 import logging

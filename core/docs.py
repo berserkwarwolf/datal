@@ -1,15 +1,15 @@
 from django.core.urlresolvers import reverse
 from django.db import connection
-from junar.core.choices import StatusChoices, CollectTypeChoices, COLLECT_TYPE_CHOICES
-from junar.core.helpers import slugify
-from junar.core.primitives import PrimitiveComputer
+from core.choices import StatusChoices, CollectTypeChoices, COLLECT_TYPE_CHOICES
+from core.helpers import slugify
+from core.primitives import PrimitiveComputer
 from django.http import Http404
 
 # tags
 # sources
 # remove notes from original SQLs
 
-DEFAULT_URLCONF = 'junar.workspace.urls'
+DEFAULT_URLCONF = 'workspace.urls'
 
 class DB:
     def __init__(self, dashboardrevision_id, language, last = True):

@@ -1,8 +1,8 @@
-from junar.core.models import * #Preference, Setting
+from core.models import * #Preference, Setting
 from django.http import HttpResponse
 from django.db import transaction
-# from junar.core.models import Application
-from junar.api.decorators import public_keys_forbidden
+# from core.models import Application
+from api.decorators import public_keys_forbidden
 
 import logging, json
 

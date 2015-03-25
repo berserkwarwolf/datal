@@ -1,6 +1,6 @@
 from django import forms
 from django.core.urlresolvers import reverse
-from junar.core.models import User
+from core.models import User
 import hashlib
 
 class SignInForm(forms.Form):

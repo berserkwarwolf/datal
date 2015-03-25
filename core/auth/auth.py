@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from junar.core.models import *
-from junar.core.choices import StatusChoices
+from core.models import *
+from core.choices import StatusChoices
 from django.utils.translation import ugettext_lazy
 
 class AuthManager:
-    def __init__(self, user = None, language = None):
+    def __init__(self, user=None, language=None):
         if user:
             self.id = user.id
             self.email = user.email

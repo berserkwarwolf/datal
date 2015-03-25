@@ -1,15 +1,15 @@
 from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
-from junar.core.docs import DB
-from junar.core.models import DashboardRevision, Dashboard, Account, DashboardHits
-from junar.core.reports_manager.helpers import create_report
-from junar.core.shortcuts import render_to_response
-from junar.core.helpers import slugify, get_domain_with_protocol
-from junar.core.choices import ChannelTypes
+from core.docs import DB
+from core.models import DashboardRevision, Dashboard, Account, DashboardHits
+from core.reports_manager.helpers import create_report
+from core.shortcuts import render_to_response
+from core.helpers import slugify, get_domain_with_protocol
+from core.choices import ChannelTypes
 from django.conf import settings
 import sys
-from junar.core.communitymanagers import *
-from junar.microsites.dashboard_manager.managers import DashboardFinder
+from core.communitymanagers import *
+from microsites.dashboard_manager.managers import DashboardFinder
 import json
 
 def action_view(request, id, slug):

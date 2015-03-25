@@ -1,4 +1,4 @@
-from junar.api.managers import IndexTankFinder as api_IndexTankFinder
+from api.managers import IndexTankFinder as api_IndexTankFinder
 
 class IndexTankFinder(api_IndexTankFinder):
 

@@ -1,6 +1,6 @@
 from django.conf import settings
-from junar.api.http import *
-from junar.api.exceptions import *
+from api.http import *
+from api.exceptions import *
 
 class ExceptionMiddleware(object):
     """

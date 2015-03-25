@@ -1,16 +1,16 @@
 import json
 import logging
-from junar.api.models import *
-from junar.api.http import JSONHttpResponse, HttpResponse
-from junar.api.managers import *
-from junar.api.bigdata_manager import forms
+from api.models import *
+from api.http import JSONHttpResponse, HttpResponse
+from api.managers import *
+from api.bigdata_manager import forms
 from django.views.decorators.csrf import csrf_exempt
-from junar.api.exceptions import BigdataNamespaceNotDefined
-from junar.core.tasks import mint_process
-from junar.api.decorators import bigdata_cross_namespace_forbidden, public_access_forbidden
-from junar.api.exceptions import is_method_get_or_405
-from junar.api.helpers import get_api_domain
-from junar.api.helpers import get_domain
+from api.exceptions import BigdataNamespaceNotDefined
+from core.tasks import mint_process
+from api.decorators import bigdata_cross_namespace_forbidden, public_access_forbidden
+from api.exceptions import is_method_get_or_405
+from api.helpers import get_api_domain
+from api.helpers import get_domain
 
 @csrf_exempt
 @bigdata_cross_namespace_forbidden

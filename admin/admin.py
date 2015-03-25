@@ -1,5 +1,5 @@
 from django.contrib import admin
-from junar.core.models import *
+from core.models import *
 
 class UserAdmin(admin.ModelAdmin):
     fields = ('name', 'nick', 'email', 'password', 'country', 'ocupation', 'language', 'roles', 'account')

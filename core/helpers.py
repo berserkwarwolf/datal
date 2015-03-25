@@ -6,13 +6,13 @@ from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
 from django.template.defaultfilters import slugify as django_slugify
 from datetime import date
-from junar.core.primitives import PrimitiveComputer
+from core.primitives import PrimitiveComputer
 from babel import numbers, dates
 from django.core.validators import RegexValidator
 from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from junar.core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
+from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 from operator import itemgetter
 
 comma_separated_word_list_re        = re.compile('^[\w,]+$')
@@ -637,7 +637,7 @@ def generate_index_dictionary(resources):
     return index_list
 
 def action_delete_cache_keys(dataset_id):
-    from junar.core.cache import Cache
+    from core.cache import Cache
     keys = []
     datastreams = DataStreamRevision.objects.filter(dataset__id=dataset_id)
     cache = Cache(db=0)

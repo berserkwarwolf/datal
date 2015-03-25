@@ -1,6 +1,6 @@
 from django.shortcuts import *
 from django.views.decorators.clickjacking import xframe_options_exempt
-from junar.microsites.share_manager.forms import LinkedinForm
+from microsites.share_manager.forms import LinkedinForm
 
 @xframe_options_exempt
 def action_linkedin(request):
