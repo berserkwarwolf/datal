@@ -26,7 +26,7 @@ create_env:
 local_settings:
   file.managed:
     - name: {{ pillar['application']['path'] }}/core/local_settings.py
-    - source: salt://apps/datal/local_settings.py
+    - source: salt://apps/datal/local_settings_base.py
     - template: jinja
     - user: {{ pillar['system']['user'] }}
 
