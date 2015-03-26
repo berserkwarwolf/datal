@@ -17,7 +17,7 @@ Quick start
 
 1. git sobmodule init
 2. git submodule update
-3. Get a copy of War file and save it into salt/roots/salt/war/ with the name AgileOfficeServer.war
+3. Get a copy of base Fixtures files and save it into core/fixtures/ 
 4. Add to your local /etc/hosts the line: 
     
     127.0.0.1 microsite admin api workspace microsites
