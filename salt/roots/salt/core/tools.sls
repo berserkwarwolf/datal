@@ -4,3 +4,4 @@ system_tools:
       - vim
       - unzip
       - python-software-properties
+      - gettext
