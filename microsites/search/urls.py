@@ -1,5 +1,5 @@
 from django.conf.urls import *
-from junar.microsites.search.views import *
+from microsites.search.views import *
 
 urlpatterns = patterns('',
     # FOR EXAMPLE http://recursos.datos.gob.cl/search/category/name:Finanzas

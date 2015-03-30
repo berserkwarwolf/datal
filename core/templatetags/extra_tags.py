@@ -128,7 +128,7 @@ def addhttp(url):
 def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
     """ auth_manager param can also be a user object or dict with user nick and email """
     from django.conf import settings
-    from junar.core.helpers import gravatar_url
+    from core.helpers import gravatar_url
 
     if not user_nick:
         email = auth_manager.email

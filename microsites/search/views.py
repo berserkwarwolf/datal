@@ -1,10 +1,10 @@
 from django.core.paginator import InvalidPage, Paginator
 from django.conf import settings
 from django.http import Http404
-from junar.core.shortcuts import render_to_response
-from junar.core.models import Category
-from junar.microsites.search import forms
-from junar.microsites.managers import *
+from core.shortcuts import render_to_response
+from core.models import Category
+from microsites.search import forms
+from microsites.managers import *
 
 def action_browse(request, category_slug=None, page = 1):
     account     = request.account

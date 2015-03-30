@@ -1,14 +1,14 @@
 from functools import wraps
-from junar.core.cache import Cache
-from junar.core.models import Dataset, DataStream, Dashboard, Visualization
+from core.cache import Cache
+from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
-from junar.workspace.exceptions import *
-from junar.core.choices import StatusChoices
-from junar.core.lifecycle.datasets import DatasetLifeCycleManager
-from junar.core.lifecycle.datastreams import DatastreamLifeCycleManager
-from junar.workspace.daos.datasets import DatasetDBDAO
-from junar.workspace.daos.datastreams import DataStreamDBDAO
+from workspace.exceptions import *
+from core.choices import StatusChoices
+from core.lifecycle.datasets import DatasetLifeCycleManager
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from workspace.daos.datasets import DatasetDBDAO
+from workspace.daos.datastreams import DataStreamDBDAO
 
 def require_user_stats(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))

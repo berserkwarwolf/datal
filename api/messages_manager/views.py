@@ -1,9 +1,9 @@
 from django.conf import settings
 from django.http import Http404
-from junar.core.models import *
-from junar.api.models import *
-from junar.api.http import JSONHttpResponse
-from junar.api.exceptions import is_method_get_or_405
+from core.models import *
+from api.models import *
+from api.http import JSONHttpResponse
+from api.exceptions import is_method_get_or_405
 
 import json
 

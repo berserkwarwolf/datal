@@ -2,11 +2,11 @@ import time
 import types
 from django.db import connection
 from django.conf import settings
-from junar.core import helpers
-from junar.core import helpers as LocalHelper
-from junar.core.models import *
-from junar.core import managers
-from junar.core.choices import COLLECT_TYPE_CHOICES
+from core import helpers
+from core import helpers as LocalHelper
+from core.models import *
+from core import managers
+from core.choices import COLLECT_TYPE_CHOICES
 
 class FinderManager(managers.FinderManager):
 
@@ -113,7 +113,7 @@ class SQLFinder(managers.Finder):
 
             if l_resource_type == settings.TYPE_DATASTREAM:
                 # l_permalink = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(l_datastream_revision_id))
-                l_permalink = reverse('manageDataviews.view', urlconf='junar.workspace.urls', kwargs={'revision_id': l_datastream_revision_id})
+                l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': l_datastream_revision_id})
             else:
                 l_permalink = LocalHelper.build_permalink('manageVisualization.view', '&visualization_revision_id=' + str(l_visualization_revision_id))
 

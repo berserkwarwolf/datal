@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
-from junar.core.choices import SourceImplementationChoices
+from core.choices import SourceImplementationChoices
 
 logger = logging.getLogger(__name__)
 

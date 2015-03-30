@@ -6,9 +6,9 @@ from django.utils.translation import ugettext_lazy
 from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, HttpResponsePermanentRedirect
 from django.views.decorators.clickjacking import xframe_options_exempt
-from junar.core.cache import Cache
-from junar.core.helpers import Day
-from junar.core.models import *
+from core.cache import Cache
+from core.helpers import Day
+from core.models import *
 from datetime import date, timedelta
 import json
 import urllib

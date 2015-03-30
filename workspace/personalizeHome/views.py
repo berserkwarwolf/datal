@@ -2,15 +2,15 @@ from django.conf import settings
 from django.http import Http404
 from django.views.decorators.http import require_POST
 from django.utils.translation import ugettext
-from junar.core.models import *
+from core.models import *
 from django.views.decorators.csrf import csrf_exempt
-from junar.core.helpers import get_domain_with_protocol
+from core.helpers import get_domain_with_protocol
 from django.shortcuts import render_to_response, HttpResponse
-from junar.core.auth.decorators import login_required, privilege_required
+from core.auth.decorators import login_required, privilege_required
 
-from junar.workspace.personalizeHome.managers import ThemeFinder
-from junar.core.communitymanagers import * # FinderManager
-from junar.core.lib.datastore import * 
+from workspace.personalizeHome.managers import ThemeFinder
+from core.communitymanagers import * # FinderManager
+from core.lib.datastore import *
 from django.core.exceptions import ValidationError
 
 import re

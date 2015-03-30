@@ -1,10 +1,10 @@
-from junar.core.bigdata import Bigdata
-from junar.core.templates import DataStreamOutputBigDataTemplate, MintTemplateResponse
-from junar.api.models import *
+from core.bigdata import Bigdata
+from core.templates import DataStreamOutputBigDataTemplate, MintTemplateResponse
+from api.models import *
 import urllib2
-from junar.api.helpers import get_domain
-from junar.api.exceptions import MintTemplateURLError, MintTemplateNotFoundError
-from junar.api.exceptions import BigdataNamespaceNotDefined
+from api.helpers import get_domain
+from api.exceptions import MintTemplateURLError, MintTemplateNotFoundError
+from api.exceptions import BigdataNamespaceNotDefined
 from django.shortcuts import get_object_or_404
 
 def _get_logger():

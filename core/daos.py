@@ -1,10 +1,10 @@
-from junar.core import choices
-from junar.core.cache import Cache
+from core import choices
+from core.cache import Cache
 from django.conf import settings
 from django.db import connection
-from junar.core.models import Preference
-from junar.core.models import User
-from junar.core import helpers as LocalHelper
+from core.models import Preference
+from core.models import User
+from core import helpers as LocalHelper
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
 import memcache
@@ -13,7 +13,7 @@ import datetime
 import time
 import json
 
-from junar.core.lib.searchify import SearchifyIndex
+from core.lib.searchify import SearchifyIndex
 
 class DataStreamDBDAO:
     def get_last_published_revision(self, guid):
@@ -49,11 +49,11 @@ class ActivityStreamDAO:
         #TODO check and fix al urls.
         if int(action_id) != int(choices.ActionStreams.DELETE):
             if resource_type == settings.TYPE_DATASTREAM:
-                l_permalink = reverse('manageDataviews.view', urlconf='junar.workspace.urls', kwargs={'revision_id': revision_id})
+                l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_VISUALIZATION:
                 l_permalink = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(revision_id))
             elif resource_type == settings.TYPE_DATASET:
-                l_permalink = reverse('manageDatasets.view', urlconf='junar.workspace.urls', kwargs={'revision_id': revision_id})
+                l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_DASHBOARD:
                 l_permalink = LocalHelper.build_permalink('dashboard_manager.action_view', '&dashboard_revision_id=' + str(revision_id))
 

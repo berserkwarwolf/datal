@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from junar.core.models  import Dataset, Threshold, User
+from core.models  import Dataset, Threshold, User
 from django.utils.translation import ugettext
 import json
 from functools import wraps

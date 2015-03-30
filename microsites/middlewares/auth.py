@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
-from junar.core.auth.auth import AuthManager
+from core.auth.auth import AuthManager
 
 class AccessManager(object):
     """

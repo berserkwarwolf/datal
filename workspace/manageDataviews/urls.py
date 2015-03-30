@@ -1,9 +1,9 @@
 from django.conf.urls import patterns, url
-from junar.workspace.manageDataviews.views import *
-from junar.workspace.manageDatasets.views import filter as filterDataset
-from junar.core.datastream_manager.views import action_invoke
+from workspace.manageDataviews.views import *
+from workspace.manageDatasets.views import filter as filterDataset
+from core.datastream_manager.views import action_invoke
 # Check if we have to use manageDataviews.create or datasream_manger.action_insert
-# from junar.workspace.datastream_manager.views import action_view
+# from workspace.datastream_manager.views import action_view
 
 urlpatterns = patterns('',
 
@@ -19,6 +19,6 @@ urlpatterns = patterns('',
     url(r'^related_resources$', related_resources, name='manageDataviews.related_resources'),
     url(r'^review/(?P<datastream_revision_id>\d+)/$', review, name='manageDataviews.review'),
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
-    url(r'^invoke$', action_invoke, name='junar.core.datastream_manager.views.action_invoke'),
+    url(r'^invoke$', action_invoke, name='core.datastream_manager.views.action_invoke'),
     
 )

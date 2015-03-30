@@ -8,9 +8,9 @@ from django.http import Http404
 
 from django.utils.decorators import available_attrs
 from django.conf import settings
-from junar.core.http import get_domain
-from junar.api.exceptions import BigdataCrossNamespaceForbidden, ApplicationNotAdmin
-from junar.core.models import Application
+from core.http import get_domain
+from api.exceptions import BigdataCrossNamespaceForbidden, ApplicationNotAdmin
+from core.models import Application
 
 def public_access_forbidden(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))

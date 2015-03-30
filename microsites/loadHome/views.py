@@ -2,15 +2,15 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_POST, require_GET
 from django.core.serializers.json import DjangoJSONEncoder
-from junar.core.models import *
-from junar.core.managers import *
-from junar.core.shortcuts import render_to_response
-from junar.microsites.helpers import add_domains_to_permalinks
-from junar.microsites.loadHome.forms import *
-from junar.microsites.loadHome import utils
+from core.models import *
+from core.managers import *
+from core.shortcuts import render_to_response
+from microsites.helpers import add_domains_to_permalinks
+from microsites.loadHome.forms import *
+from microsites.loadHome import utils
 from utils import *
-from junar.core.communitymanagers import *
-from junar.microsites.home_manager.managers import HomeFinder
+from core.communitymanagers import *
+from microsites.home_manager.managers import HomeFinder
 from django.shortcuts import redirect
 from django.utils.translation import ugettext
 

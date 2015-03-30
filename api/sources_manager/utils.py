@@ -1,6 +1,6 @@
 import urllib2
-from junar.core.choices import *
-from junar.core.helpers import get_domain_with_protocol
+from core.choices import *
+from core.helpers import get_domain_with_protocol
 
 def get_impl_type(mimetype, end_point):
     mimetype = mimetype.split(';')[0]

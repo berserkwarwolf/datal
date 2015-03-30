@@ -1,8 +1,8 @@
 __author__ = 'jinfanzon'
 
 from django.conf.urls import patterns, url
-from junar.workspace.manageVisualizations.views import *
-from junar.workspace.manageDataviews.views import filter as filterDataview
+from workspace.manageVisualizations.views import *
+from workspace.manageDataviews.views import filter as filterDataview
 
 urlpatterns = patterns('',
     url(r'^$', list, name='manageVisualizations.list'),

@@ -1,16 +1,16 @@
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.views.decorators.clickjacking import xframe_options_exempt
-from junar.core.helpers import RequestProcessor
-from junar.core.choices import ChannelTypes
-from junar.core.models import *
-from junar.core.docs import VZ, DS
-from junar.core.engine import invoke, invoke_chart
-from junar.core.helpers import get_domain_with_protocol
-from junar.core.shortcuts import render_to_response
-from junar.core.reports_manager.helpers import create_report
-from junar.microsites.viewChart import forms
-from junar.microsites.helpers import set_dataset_impl_type_nice
+from core.helpers import RequestProcessor
+from core.choices import ChannelTypes
+from core.models import *
+from core.docs import VZ, DS
+from core.engine import invoke, invoke_chart
+from core.helpers import get_domain_with_protocol
+from core.shortcuts import render_to_response
+from core.reports_manager.helpers import create_report
+from microsites.viewChart import forms
+from microsites.helpers import set_dataset_impl_type_nice
 import urllib
 import json
 import logging

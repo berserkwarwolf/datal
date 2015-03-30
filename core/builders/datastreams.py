@@ -21,7 +21,7 @@ class DatastreamBuilder:
 
         import urllib
         from bs4 import BeautifulSoup
-        from junar.core.helpers import get_domain_with_protocol
+        from core.helpers import get_domain_with_protocol
 
         params = urllib.urlencode({'pId': dataset_revision_id, 'pLimit': 50})
 

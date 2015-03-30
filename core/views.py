@@ -1,4 +1,4 @@
-from junar.core.shortcuts import render_to_response
+from core.shortcuts import render_to_response
 
 """def receiver(request):
     if request.user.is_anonymous:

@@ -1,11 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.db import connection
-from junar.api.exceptions import Http400
-from junar.core.helpers import slugify, get_mimetype, get_file_type_from_extension
-from junar.core import managers
-from junar.core.models import *
-from junar.core.managers import IndexTankFinder as core_IndexTankFinder
-from junar.api.sources_manager.utils import *
+from api.exceptions import Http400
+from core.helpers import slugify, get_mimetype, get_file_type_from_extension
+from core import managers
+from core.models import *
+from core.managers import IndexTankFinder as core_IndexTankFinder
+from api.sources_manager.utils import *
 
 def resolve_user_id(self, passticket, default_user_id):
     try:
@@ -47,7 +47,7 @@ class IndexTankFinder(core_IndexTankFinder):
         id = doc['visualization_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('chart_manager.action_view', urlconf = 'microsites.urls', kwargs={'id': id, 'slug': slug})
         return {
             "id": guid,
             "title": title,
@@ -64,7 +64,7 @@ class IndexTankFinder(core_IndexTankFinder):
         id = doc['dashboard_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('dashboard_manager.action_view', urlconf = 'microsites.urls', kwargs={'id': id, 'slug': slug})
         return {
             "id": guid,
             "title": title,
@@ -80,7 +80,7 @@ class IndexTankFinder(core_IndexTankFinder):
         id = doc['datastream_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.urls', kwargs={'id': id, 'slug': slug})
         return {
             "id": guid,
             "title": title,
@@ -96,7 +96,7 @@ class IndexTankFinder(core_IndexTankFinder):
         guid = doc['docid'].split('::')[1]
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
 
         return {
             "id": guid,

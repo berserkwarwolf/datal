@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-from junar.core.models import DataStream, DataStreamHits
-from junar.api.models import *
-#from junar.api.managers import *
-from junar.core.choices import ChannelTypes
+from core.models import DataStream, DataStreamHits
+from api.models import *
+#from api.managers import *
+from core.choices import ChannelTypes
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
-from junar.api.exceptions import is_method_get_or_405, Http404, Http400
-from junar.api.v2.datastreams import forms
-from junar.core.reports_manager.helpers import create_report
-from junar.api.http import JSONHttpResponse
+from api.exceptions import is_method_get_or_405, Http404, Http400
+from api.v2.datastreams import forms
+from core.reports_manager.helpers import create_report
+from api.http import JSONHttpResponse
 
 
 @require_http_methods(["GET"])
@@ -22,7 +22,7 @@ def action_view(request, guid):
     response = datastream.as_dict(request.user_id)
     add_domain_to_datastream_link(response)
 
-    from junar.api.v2.templates import *
+    from api.v2.templates import *
     response = DefaultApiResponse(template='api_resource_view.json').render(response)
 
     return JSONHttpResponse(response)

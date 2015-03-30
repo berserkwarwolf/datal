@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 import operator
 from django.db.models import Q, F
-from junar.core.builders.datasets import DatasetImplBuilderWrapper
-from junar.core.models import Dataset, DatasetRevision, DatasetI18n, DataStreamRevision, Category
-from junar.workspace import settings
+from core.builders.datasets import DatasetImplBuilderWrapper
+from core.models import Dataset, DatasetRevision, DatasetI18n, DataStreamRevision, Category
+from workspace import settings
 
 
 class DatasetDBDAO():
@@ -170,7 +170,7 @@ class DatasetSearchDAOFactory():
 class DatasetSearchifyDAO():
     """ class for manage access to datasets' searchify documents """
     def __init__(self):
-        from junar.core.lib.searchify import SearchifyIndex
+        from core.lib.searchify import SearchifyIndex
         self.search_index = SearchifyIndex()
         
     def add(self, dataset_revision, language):

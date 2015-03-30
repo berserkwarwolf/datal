@@ -2,8 +2,8 @@ import json
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 
-from junar.core.auth.decorators import login_required
-from junar.core.models import *
+from core.auth.decorators import login_required
+from core.models import *
 
 
 

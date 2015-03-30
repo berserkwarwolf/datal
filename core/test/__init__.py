@@ -2,8 +2,8 @@ from BeautifulSoup import BeautifulSoup as Soup
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
-from junar.core.test.soupselect.soupselect import select
-from junar.core.models import *
+from core.test.soupselect.soupselect import select
+from core.models import *
 import json
 from django.conf import settings
 from django.contrib.auth import login

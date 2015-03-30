@@ -1,8 +1,8 @@
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
-from junar.core.models import *
-from junar.core.docs import DT
-from junar.core.lib.datastore import *
+from core.models import *
+from core.docs import DT
+from core.lib.datastore import *
 
 import logging
 

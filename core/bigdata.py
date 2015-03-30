@@ -1,6 +1,6 @@
 import requests
 from django.conf import settings
-from junar.api.exceptions import BigDataInsertError, BigDataInvalidQuery, BigDataDeleteError
+from api.exceptions import BigDataInsertError, BigDataInvalidQuery, BigDataDeleteError
 
 class Bigdata:
     lastError = ""

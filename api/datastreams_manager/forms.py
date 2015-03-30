@@ -1,9 +1,9 @@
 from django import forms
 from django.conf import settings
-from junar.core.auth.auth import AuthManager
+from core.auth.auth import AuthManager
 from django.core.validators import validate_comma_separated_integer_list as vil
 # from django.utils.translation import ugettext_lazy
-from junar.core.choices import *
+from core.choices import *
 
 import json
 

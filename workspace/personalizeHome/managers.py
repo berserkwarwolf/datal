@@ -1,4 +1,4 @@
-from junar.core.managers import IndexTankFinder
+from core.managers import IndexTankFinder
 
 class ThemeFinder(IndexTankFinder):
 

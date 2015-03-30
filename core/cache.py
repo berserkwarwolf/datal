@@ -118,7 +118,7 @@ class Cache:
         return key_delete
 
     def refresh_ws_datasets(self):
-        from junar.core.models import DataStreamRevision, DatasetRevision
+        from core.models import DataStreamRevision, DatasetRevision
         cached_datasets = DataStreamRevision.objects.get_guids_with_cache()
         # purge ds from cache
         purge_ds = self.purge_ds(cached_datasets)

@@ -2,7 +2,7 @@
 from django import forms
 from django.core.validators import validate_comma_separated_integer_list as vil
 # from django.utils.translation import ugettext_lazy
-from junar.core.choices import *
+from core.choices import *
 
 class DeleteDataviewForm(forms.Form):
     revision_id = forms.CharField(required=True, validators=[vil])

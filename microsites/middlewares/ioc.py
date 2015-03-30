@@ -3,9 +3,9 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import redirect
-from junar.core.models import Account
-from junar.core.http import get_domain
-from junar.core.helpers import get_domain_with_protocol
+from core.models import Account
+from core.http import get_domain
+from core.helpers import get_domain_with_protocol
 import logging
 
 class DependencyInjector(object):

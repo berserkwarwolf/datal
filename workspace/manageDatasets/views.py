@@ -7,16 +7,16 @@ from django.views.decorators.http import require_GET, require_http_methods
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
 
-from junar.api.http import JSONHttpResponse
-from junar.core.shortcuts import render_to_response
-from junar.core.auth.decorators import login_required
-from junar.core.choices import *
-from junar.core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
-from junar.workspace.decorators import *
-from junar.workspace.templates import DatasetList
-from junar.workspace.manageDatasets.forms import *
-from junar.workspace.daos.datasets import DatasetDBDAO
-from junar.core import engine
+from api.http import JSONHttpResponse
+from core.shortcuts import render_to_response
+from core.auth.decorators import login_required
+from core.choices import *
+from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from workspace.decorators import *
+from workspace.templates import DatasetList
+from workspace.manageDatasets.forms import *
+from workspace.daos.datasets import DatasetDBDAO
+from core import engine
 
 logger = logging.getLogger(__name__)
 
@@ -100,7 +100,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for resource in resources:
-        resource['url'] = reverse('manageDatasets.view', urlconf='junar.workspace.urls', kwargs={'revision_id': resource['id']})
+        resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
     data = {'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
@@ -202,7 +202,7 @@ def edit(request, dataset_revision_id=None):
             className = ['Dataset', "Form"]
 
         className = ''.join(str(elem) for elem in className)
-        mod = __import__('junar.workspace.manageDatasets.forms', fromlist=[className])
+        mod = __import__('workspace.manageDatasets.forms', fromlist=[className])
 
         initial_values = dict(
             # Dataset Form

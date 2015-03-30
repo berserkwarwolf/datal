@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 import operator, logging
 from django.db.models import Q, F
-from junar.core.models import Dataset, DatasetRevision, DataStream, Visualization, DataStreamRevision, VisualizationRevision
+from core.models import Dataset, DatasetRevision, DataStream, Visualization, DataStreamRevision, VisualizationRevision
 
 
 class DatasetDAO():

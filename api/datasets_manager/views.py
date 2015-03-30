@@ -1,8 +1,8 @@
-from junar.core.models import *
-from junar.api.http import JSONHttpResponse
-from junar.api.exceptions import Http400
-from junar.api.datasets_manager import forms
-from junar.core.cache import Cache
+from core.models import *
+from api.http import JSONHttpResponse
+from api.exceptions import Http400
+from api.datasets_manager import forms
+from core.cache import Cache
 import json
 
 def action_refresh(request):

@@ -1,10 +1,10 @@
-from junar.core.models import *
-from junar.api.models import *
-from junar.api.http import JSONHttpResponse
-from junar.api.exceptions import is_method_get_or_405, Http400
-from junar.api.managers import *
-from junar.api.visualizations_manager import forms
-from junar.api.helpers import get_domain
+from core.models import *
+from api.models import *
+from api.http import JSONHttpResponse
+from api.exceptions import is_method_get_or_405, Http400
+from api.managers import *
+from api.visualizations_manager import forms
+from api.helpers import get_domain
 import json
 
 def action_last(request):

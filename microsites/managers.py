@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
-from junar.core.helpers import slugify
-from junar.core import managers
+from core.helpers import slugify
+from core import managers
 
 
 # CategoryManager

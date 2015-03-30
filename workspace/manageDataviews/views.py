@@ -1,24 +1,24 @@
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from junar.core.shortcuts import render_to_response
+from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
-from junar.core.auth.decorators import login_required
-from junar.core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
-from junar.workspace.decorators import *
-from junar.workspace.manageDataviews.forms import *
-from junar.workspace.settings import *
-from junar.workspace.templates import *
-from junar.workspace.daos.datastreams import DataStreamDBDAO
-from junar.core.lifecycle.datastreams import DatastreamLifeCycleManager
-from junar.workspace.exceptions import LifeCycleException
-from junar.core.choices import *
-from junar.core.models import DatasetRevision, Account,CategoryI18n
-from junar.api.http import JSONHttpResponse
-# from junar.core import helpers as LocalHelper
+from core.auth.decorators import login_required
+from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from workspace.decorators import *
+from workspace.manageDataviews.forms import *
+from workspace.settings import *
+from workspace.templates import *
+from workspace.daos.datastreams import DataStreamDBDAO
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from workspace.exceptions import LifeCycleException
+from core.choices import *
+from core.models import DatasetRevision, Account,CategoryI18n
+from api.http import JSONHttpResponse
+# from core import helpers as LocalHelper
 from django.core.urlresolvers import reverse
-from junar.core import engine
+from core import engine
 
 import json
 import logging
@@ -53,7 +53,7 @@ def list(request):
         return render_to_response('manageDataviews/noResults.html', locals())
         
     for resource in resources:
-        resource['url'] = reverse('manageDataviews.view', urlconf='junar.workspace.urls', kwargs={'revision_id': resource['id']})
+        resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
     filters = remove_duplicated_filters(resources)
 
@@ -98,7 +98,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
                                               ,filter_name=filter_name)
     for resource in resources:
         # resources[i]['url'] = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(resources[i]['id']))
-        resource['url'] = reverse('manageDataviews.view', urlconf='junar.workspace.urls', kwargs={'revision_id': resource['id']})
+        resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
     data = {'total_resources': total_resources, 'resources': resources}
     response = DatastreamList().render(data)

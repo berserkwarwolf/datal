@@ -1,7 +1,7 @@
 import factory
-from junar.core.choices import (
+from core.choices import (
     CollectTypeChoices, SourceImplementationChoices, StatusChoices)
-from junar.core.models import *
+from core.models import *
 
 class AccountLevelFactory(factory.Factory):
     FACTORY_FOR = AccountLevel

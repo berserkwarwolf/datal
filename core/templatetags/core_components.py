@@ -1,8 +1,8 @@
 from django import template
 from django.forms.formsets import formset_factory
 from django.template.loader import render_to_string
-from junar.core.auth import forms as auth_forms
-from junar.core.models import ObjectGrant
+from core.auth import forms as auth_forms
+from core.models import ObjectGrant
 
 register = template.Library()
 

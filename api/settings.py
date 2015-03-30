@@ -1,5 +1,5 @@
-from junar.core.settings import *
-from junar.core.emitters import CSVEmitter, TSVEmitter, ExcelEmitter, XMLEmitter
+from core.settings import *
+from core.emitters import CSVEmitter, TSVEmitter, ExcelEmitter, XMLEmitter
 
 USE_I18N = False
 USE_L10N = False
@@ -12,20 +12,20 @@ TEMPLATE_DIRS = (
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'junar.api.middlewares.auth.AuthMiddleware',
-    'junar.api.middlewares.jsonp.JSONPMiddleware',
-    'junar.api.middlewares.response.ResponseStatusMiddleware',
-    'junar.api.middlewares.ioc.DependenciesInjector',
+    'api.middlewares.auth.AuthMiddleware',
+    'api.middlewares.jsonp.JSONPMiddleware',
+    'api.middlewares.response.ResponseStatusMiddleware',
+    'api.middlewares.ioc.DependenciesInjector',
 
-    'junar.api.middlewares.exceptions.ExceptionMiddleware',
-    # 'junar.api.handleRequests.catch.ExceptionManager',
+    'api.middlewares.exceptions.ExceptionMiddleware',
+    # 'api.handleRequests.catch.ExceptionManager',
 
 )
 
-ROOT_URLCONF = 'junar.api.urls'
+ROOT_URLCONF = 'api.urls'
 
 INSTALLED_APPS += (
-    'junar.api',
+    'api',
 )
 
 # exclusion list of words not used at search
@@ -62,6 +62,6 @@ EMITTERS = {'csv': CSVEmitter
            }
 
 try:
-    from junar.api.local_settings import *
+    from api.local_settings import *
 except ImportError:
     pass

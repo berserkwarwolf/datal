@@ -1,6 +1,6 @@
 from django.core.urlresolvers import reverse
-from junar.core.helpers import slugify
-from junar.core.managers import IndexTankFinder
+from core.helpers import slugify
+from core.managers import IndexTankFinder
 import datetime
 
 class DashboardFinder(IndexTankFinder):
@@ -32,7 +32,7 @@ class DashboardFinder(IndexTankFinder):
         dataset_id = doc['dataset_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'junar.microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
 
         created_at = datetime.datetime.fromtimestamp(int(doc['timestamp']))
 

@@ -1,4 +1,4 @@
-from junar.core.models import DataStreamHits, VisualizationHits, DashboardHits
+from core.models import DataStreamHits, VisualizationHits, DashboardHits
 
 def create_report(object_id, model, channel_type):
     if model == DataStreamHits:

@@ -2,8 +2,8 @@ from django import forms
 from django.utils.translation import ugettext_lazy
 from django.core.urlresolvers import reverse
 from django.core.validators import validate_email
-from junar.core import choices
-from junar.core.models import Role
+from core import choices
+from core.models import Role
 
 class AccountInfoForm(forms.Form):
 

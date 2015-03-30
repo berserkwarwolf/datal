@@ -5,12 +5,12 @@ from django.db.models import F, Max
 from django.db import transaction
 from django.conf import settings
 
-from junar.core.choices import ActionStreams, StatusChoices
-from junar.core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
-from junar.core.lifecycle.resource import AbstractLifeCycleManager
-from junar.core.lib.datastore import *
-from junar.workspace.exceptions import IlegalteStateException, DataStreamNotFoundException
-from junar.workspace.daos.datastreams import *
+from core.choices import ActionStreams, StatusChoices
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
+from core.lifecycle.resource import AbstractLifeCycleManager
+from core.lib.datastore import *
+from workspace.exceptions import IlegalteStateException, DataStreamNotFoundException
+from workspace.daos.datastreams import *
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]

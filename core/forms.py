@@ -1,6 +1,6 @@
 from django import forms
 from django.forms.forms import Form
-from junar.core.models import *
+from core.models import *
 
 class MetaForm(Form):
     def __init__(self, *args, **kwargs):

@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse
-from junar.core.models import *
-from junar.core.docs import *
-from junar.core.choices import StatusChoices
-from junar.core.http import get_domain
-from junar.core.shortcuts import render_to_response
+from core.models import *
+from core.docs import *
+from core.choices import StatusChoices
+from core.http import get_domain
+from core.shortcuts import render_to_response
 from django.http import Http404
 from django.template import TemplateDoesNotExist
 from django.views.generic import TemplateView

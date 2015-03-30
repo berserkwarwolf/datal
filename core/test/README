@@ -15,7 +15,7 @@ def suite():
     path = '/'.join(os.path.abspath(__file__).split('/')[:-2]) + '/tests/'+MODULE_NAME+'/test*.py'
     test_file_strings = glob.glob(path)
     
-    module_strings = ['junar.workspace.tests.'+MODULE_NAME+'.'+str.split('/')[-1] for str in test_file_strings]
+    module_strings = ['workspace.tests.'+MODULE_NAME+'.'+str.split('/')[-1] for str in test_file_strings]
 
     suites = [unittest.defaultTestLoader.loadTestsFromName('.'.join(name.split('.')[:-1])) \
               for name in module_strings]

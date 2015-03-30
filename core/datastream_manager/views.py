@@ -7,16 +7,16 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import get_object_or_404, HttpResponsePermanentRedirect
 from django.utils.translation import ugettext_lazy
-from junar.core.lib.datastore import *
-from junar.core.cache import Cache
-from junar.core.datastream_manager import forms
-from junar.core.docs import DS
-from junar.core.emitters import ExcelEmitter
-from junar.core.engine import invoke, invoke_chart
-from junar.core.helpers import jsonToGrid, Day, RequestProcessor, get_domain_with_protocol
-from junar.core.http import EmitterHttpResponse
-from junar.core.models import DataStreamRevision, DataStreamHits, DataStream
-from junar.core.shortcuts import render_to_response
+from core.lib.datastore import *
+from core.cache import Cache
+from core.datastream_manager import forms
+from core.docs import DS
+from core.emitters import ExcelEmitter
+from core.engine import invoke, invoke_chart
+from core.helpers import jsonToGrid, Day, RequestProcessor, get_domain_with_protocol
+from core.http import EmitterHttpResponse
+from core.models import DataStreamRevision, DataStreamHits, DataStream
+from core.shortcuts import render_to_response
 import urllib, urllib2
 import json
 from datetime import date, timedelta

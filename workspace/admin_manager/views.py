@@ -4,17 +4,17 @@ from django.http import HttpResponse, Http404
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
-from junar.core.auth.decorators import login_required, privilege_required
-from junar.core.accounts.decorators import threshold
-from junar.core.choices import TicketChoices, EventChoices, EVENT_CHOICES, StatusChoices
-from junar.core.models import *
-from junar.core.shortcuts import render_to_response
-from junar.core.lib import mailchimp_lib
-from junar.core.lib.datastore import *
-from junar.core.lib.searchify import SearchifyIndex
-from junar.core.helpers import get_domain_with_protocol
-from junar.workspace.admin_manager import forms
-from junar.core.helpers import generate_ajax_form_errors
+from core.auth.decorators import login_required, privilege_required
+from core.accounts.decorators import threshold
+from core.choices import TicketChoices, EventChoices, EVENT_CHOICES, StatusChoices
+from core.models import *
+from core.shortcuts import render_to_response
+from core.lib import mailchimp_lib
+from core.lib.datastore import *
+from core.lib.searchify import SearchifyIndex
+from core.helpers import get_domain_with_protocol
+from workspace.admin_manager import forms
+from core.helpers import generate_ajax_form_errors
 
 import random
 import logging
@@ -608,7 +608,7 @@ def get_resource_dict(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 def create_test_datasets(request, quantity=10):
-    from junar.core.lifecycle.datasets import DatasetLifeCycleManager
+    from core.lifecycle.datasets import DatasetLifeCycleManager
     quantity = int(quantity)
     info = '<h2>Creating %d datasets</h2>' % quantity
     #define any existent category

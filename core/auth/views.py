@@ -3,10 +3,10 @@ from django.forms.formsets import formset_factory
 from django.http import HttpResponseRedirect, QueryDict, HttpResponse, Http404
 from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext
-from junar.core.auth import forms
-from junar.core.auth.decorators import login_required
-from junar.core.helpers import gravatar_url
-from junar.core.models import *
+from core.auth import forms
+from core.auth.decorators import login_required
+from core.helpers import gravatar_url
+from core.models import *
 import urlparse
 import json
 

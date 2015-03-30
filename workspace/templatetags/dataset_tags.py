@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import template
-from junar.core.choices import *
+from core.choices import *
 
 register = template.Library()
 

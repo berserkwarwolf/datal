@@ -1,5 +1,5 @@
 from django.conf.urls import *
-from junar.core.auth.views import *
+from core.auth.views import *
 
 urlpatterns = patterns('',
     url(r'^grant_datastream', action_grant_datastream, name='auth.grant_datastream'),

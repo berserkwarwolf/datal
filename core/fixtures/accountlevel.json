@@ -1,0 +1,47 @@
+[
+{
+    "pk": 1, 
+    "model": "core.accountlevel", 
+    "fields": {
+        "code": "level_1", 
+        "name": "Level 1 (Free User)", 
+        "description": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "core.accountlevel", 
+    "fields": {
+        "code": "level_2", 
+        "name": "Level 2 (Trial)", 
+        "description": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "core.accountlevel", 
+    "fields": {
+        "code": "level_3", 
+        "name": "Level 3 (Pro)", 
+        "description": ""
+    }
+},
+{
+    "pk": 4, 
+    "model": "core.accountlevel", 
+    "fields": {
+        "code": "level_4", 
+        "name": "Level 4 (Plus)", 
+        "description": ""
+    }
+},
+{
+    "pk": 5, 
+    "model": "core.accountlevel", 
+    "fields": {
+        "code": "level_5", 
+        "name": "Level 5 (Premier)", 
+        "description": ""
+    }
+}
+]

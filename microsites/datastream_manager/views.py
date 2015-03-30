@@ -2,14 +2,14 @@ from django.conf import settings
 from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
-from junar.core.choices import ChannelTypes
-from junar.core.docs import DS, DT
-from junar.core.helpers import is_bot, RequestProcessor, get_domain_with_protocol
-from junar.core.models import DataStreamRevision, DataStreamHits, DataStream, Account
-from junar.core.shortcuts import render_to_response
-from junar.core.reports_manager.helpers import create_report
-from junar.core.cache import Cache
-from junar.microsites.helpers import set_dataset_impl_type_nice
+from core.choices import ChannelTypes
+from core.docs import DS, DT
+from core.helpers import is_bot, RequestProcessor, get_domain_with_protocol
+from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
+from core.shortcuts import render_to_response
+from core.reports_manager.helpers import create_report
+from core.cache import Cache
+from microsites.helpers import set_dataset_impl_type_nice
 import urllib
 import logging
 
@@ -57,8 +57,8 @@ def action_view(request, id, slug):
     create_report(id, DataStreamHits, ChannelTypes.WEB)
 #    datastream_html = ''
 #    if is_bot(request):
-#        from junar.core.engine import invoke
-#        from junar.core.emitters import HTMLEmitter
+#        from core.engine import invoke
+#        from core.emitters import HTMLEmitter
 #        json_response, type = invoke({'pId': datastreamrevision_id}, force_cache=True)
 #        loaded_json = json.loads(json_response)
 #        emitter = HTMLEmitter(loaded_json, name = datastream.title)
@@ -73,7 +73,7 @@ def action_flexmonster(request, id, slug):
     if lang not in settings.FLEXMONSTER_LOCALES:
         lang = settings.FLEXMONSTER_DEFAULT_LOCALE
 
-    url = 'http://' + request.preferences['account_domain'] + reverse('junar.core.datastream_manager.views.action_csv', args=(id, slug))
+    url = 'http://' + request.preferences['account_domain'] + reverse('core.datastream_manager.views.action_csv', args=(id, slug))
 
     query = request.REQUEST.get('query', None)
     if query:

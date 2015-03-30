@@ -1,8 +1,8 @@
-from junar.core.shortcuts import render_to_response
-from junar.core.models import Dataset, DatasetRevision
-from junar.core.docs import DT
-from junar.microsites.daos import DatasetDAO
-from junar.microsites.helpers import set_dataset_impl_type_nice
+from core.shortcuts import render_to_response
+from core.models import Dataset, DatasetRevision
+from core.docs import DT
+from microsites.daos import DatasetDAO
+from microsites.helpers import set_dataset_impl_type_nice
 from django.http import Http404
 import logging
 

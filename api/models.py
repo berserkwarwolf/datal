@@ -1,10 +1,10 @@
 from django.conf import settings
 from django.utils.datastructures import SortedDict
-from junar.core.models import *
-from junar.core.docs import DS, DB, VZ
-from junar.core import engine
-from junar.api.exceptions import Http400, Http401
-from junar.api.helpers import add_domain_to_datastream_link
+from core.models import *
+from core.docs import DS, DB, VZ
+from core import engine
+from api.exceptions import Http400, Http401
+from api.helpers import add_domain_to_datastream_link
 
 import memcache
 
@@ -155,7 +155,7 @@ def result_as_json(self, response, user_id):
     json_response = json_response.replace('"{{json_result_response_to_replace}}"', response)
     """
 
-    from junar.api.v2.templates import *
+    from api.v2.templates import *
     data = self.as_dict(user_id)
     add_domain_to_datastream_link(data)
     data['result'] = "json_result_response_to_replace"

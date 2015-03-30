@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from django.shortcuts import redirect
-from junar.core.models import User, Account
-from junar.core.auth.auth import AuthManager
+from core.models import User, Account
+from core.auth.auth import AuthManager
 import datetime
 
 class AccessManager(object):

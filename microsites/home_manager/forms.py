@@ -1,6 +1,6 @@
 from django import forms
 from django.core.validators import validate_comma_separated_integer_list as vil
-from junar.core.helpers import validate_comma_separated_word_list as vwl
+from core.helpers import validate_comma_separated_word_list as vwl
 import json
 
 class HomeForm(forms.Form):

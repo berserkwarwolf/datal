@@ -1,5 +1,5 @@
 from django.test import TestCase
-from junar.core.models import *
+from core.models import *
 
 class ModelTest(TestCase):
 

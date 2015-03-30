@@ -2,11 +2,11 @@ from django.core.urlresolvers import reverse
 from django.contrib import messages
 from django.utils.translation import ugettext
 from django.shortcuts import redirect, get_object_or_404
-from junar.core.auth.auth import AuthManager
-from junar.core.models import UserPassTickets
-from junar.core.choices import TicketChoices
-from junar.core.shortcuts import render_to_response
-from junar.microsites.accounts import forms
+from core.auth.auth import AuthManager
+from core.models import UserPassTickets
+from core.choices import TicketChoices
+from core.shortcuts import render_to_response
+from microsites.accounts import forms
 
 def signin(request):
     auth_manager = request.auth_manager
