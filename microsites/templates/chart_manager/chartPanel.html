@@ -51,7 +51,7 @@
                             <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br/> {{visualization_revision.created_at}}</p>
                         {% endif %}
                         {% if visualization_revision.datastream_type == 'SELF PUBLISH' and can_download%}
-                            <a rel="nofollow" href="{% url "datastream_manager.action_download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="genericButton normalButton" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
+                            <a rel="nofollow" href="{% url "datastream_manager.action_download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
                         {% endif %}
                     </div>
                 </div>
@@ -120,13 +120,13 @@
             <div class="actionsInner toolbar clearfix">
 
                 <!-- CACHE NOTIFICATION -->
-                <div class="cacheNotification toolbar FL relativeContainer" id="id_notification" style="display:none;">
+                <div class="cacheNotification toolbar FL relative" id="id_notification" style="display:none;">
                     <span id="id_notificationMessage" class="FL"></span>
                     <span class="sep FL"><span class="DN">|</span></span>
                 </div>
 
                 <!-- ACTIONS MENU -->
-                <div class="actionsMenu relativeContainer FR">
+                <div class="actionsMenu relative FR">
                     <a title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu" id="id_menuDataServiceButton_{{visualization_revision.visualizationrevision_id}}" href="javascript:;"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
                     <div id="id_tooltipDataServiceButton_{{visualization_revision.visualizationrevision_id}}" class="dashboard-dataservice-tooltip">
                         <div class="menuInner">

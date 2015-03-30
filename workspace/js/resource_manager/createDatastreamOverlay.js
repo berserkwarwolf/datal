@@ -618,7 +618,7 @@ var OverlayDatatableDatasetManager = DatatableManager.extend({
             }
         templ += "<td class='itemActions'>";
         if (msg.status != '2' && $.inArray('workspace.can_create_datastream', authManager.get("privileges")) != -1) {
-            templ += "<button class='enhance genericButton actionButton'>" + gettext('APP-NEXT-TEXT') + "</button> ";
+            templ += "<button class='enhance button small'>" + gettext('APP-NEXT-TEXT') + "</button> ";
         }
         templ +="</td>\
             </tr>";

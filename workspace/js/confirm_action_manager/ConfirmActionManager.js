@@ -10,16 +10,16 @@ var ConfirmActionManager = Backbone.Model.extend({
 
         if ((action_type == 'delete') && ($.inArray('workspace.can_delete_' + resource_type, authManager.get("privileges")))) {
             if($.inArray('ao-free-user', authManager.get("roles")) != -1){
-                buttons = '<button class="delete_resource genericButton actionButton workspaceIcon deleteIcon"><span class="delete_resource">' + gettext('APP-TEXT-DELETE_RESOURCE') + '</span></button> <button class="cancel_modal genericButton actionButton">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
+                buttons = '<button class="delete_resource button small"><span class="delete_resource">' + gettext('APP-TEXT-DELETE_RESOURCE') + '</span></button> <button class="cancel_modal button small">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
             }else{
-                buttons = '<button class="delete_resource genericButton actionButton workspaceIcon deleteIcon"><span class="delete_resource">' + gettext('APP-TEXT-DELETE_RESOURCE') + '</span></button> <button class="delete_revision genericButton actionButton workspaceIcon deleteIcon"><span>' + gettext('APP-TEXT-DELETE_REVISION') + '</span></button> <button class="cancel_modal genericButton actionButton">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
+                buttons = '<button class="delete_resource button small"><span class="delete_resource">' + gettext('APP-TEXT-DELETE_RESOURCE') + '</span></button> <button class="delete_revision button small"><span>' + gettext('APP-TEXT-DELETE_REVISION') + '</span></button> <button class="cancel_modal button small">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
             }
         }
         else if ((action_type == 'delete') && (! $.inArray('workspace.can_delete_' + resource_type, authManager.get("privileges"))))  {
-            buttons = '<button class="delete_revision genericButton actionButton workspaceIcon deleteIcon"><span class="delete_revision">' + gettext('APP-TEXT-DELETE_REVISION') + '</span></button> <button class="cancel_modal genericButton actionButton">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
+            buttons = '<button class="delete_revision button small"><span class="delete_revision">' + gettext('APP-TEXT-DELETE_REVISION') + '</span></button> <button class="cancel_modal button small">' + gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
         }
         else if (action_type == 'unpublish') {
-            var buttons = '<button class="unpublish genericButton actionButton workspaceIcon unpublishIcon"><span class="unpublish">'+ gettext('APP-TEXT-UNPUBLISH') + '</span></button> <button class="cancel_modal genericButton actionButton">'+ gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
+            var buttons = '<button class="unpublish button small"><span class="unpublish">'+ gettext('APP-TEXT-UNPUBLISH') + '</span></button> <button class="cancel_modal button small">'+ gettext('APP-TEXT-CANCEL_MODAL') + '</button>';
         }
 
         $(".buttons", this.get("selector")).html(buttons);

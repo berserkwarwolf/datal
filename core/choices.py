@@ -321,6 +321,7 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.transparency.categories', 'account.transparency.categories')
     ,('account.catalog.enabled', 'account.catalog.enabled')
     ,('account.contact.dataperson.email', 'account.contact.dataperson.email')
+    ,('account.dataset.showhome', 'account.dataset.showhome')
 )
 
 API_APPLICATION_TYPE_CHOICES = (

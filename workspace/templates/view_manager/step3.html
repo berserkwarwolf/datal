@@ -60,7 +60,7 @@
     <a id="id_step2NextButtonBottom" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button small green">{% trans "APP-NEXT-TEXT" %}</a>
     {% if is_update and not is_update_selection %}
         {% if 'workspace.can_create_datastream_as_draft' in auth_manager.privileges  or 'ao-free-user' in auth_manager.roles %}
-            <button id="id_save" class="genericButton actionButton workspaceIcon saveIcon"><span>{% trans "APP-SAVE-TEXT" %}</span></button>
+            <a id="id_save" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans "APP-SAVE-TEXT" %}</a>
         {% endif %}
     {% endif %}
 </div>

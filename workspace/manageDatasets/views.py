@@ -141,8 +141,13 @@ def create(request, collect_type='index'):
     account_id = auth_manager.account_id
     language = auth_manager.language
 
+    # TODO: Put line in a common place
+    collect_types = {'index': -1, 'file': 0, 'url': 1, 'webservice': 2}
+
+    collect_type_id = collect_types[collect_type]
+
     if request.method == 'GET':
-        form = DatasetFormFactory(collect_type).create(
+        form = DatasetFormFactory(collect_type_id).create(
             account_id=account_id,
             language=language,
             status_choices=auth_manager.get_allowed_actions()
@@ -153,7 +158,7 @@ def create(request, collect_type='index'):
 
     elif request.method == 'POST':
         """update dataset """
-        form = DatasetFormFactory(collect_type).create(request, account_id=account_id, language=language,
+        form = DatasetFormFactory(collect_type_id).create(request, account_id=account_id, language=language,
                                                        status_choices=auth_manager.get_allowed_actions())
 
         if form.is_valid():

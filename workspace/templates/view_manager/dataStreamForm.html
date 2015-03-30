@@ -81,20 +81,20 @@
                                 {% endfor %}
                             </div>
                             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a id="id_displayAddSources" title="" href="javascript:;" class="">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
-                            <div id="id_addMoreSources" style="display:none;" class="addNewSource">
-                                <h6>{% trans "APP-ADDNEWSOURCE-TEXT" %}</h6>
-                                <div class="row clearfix">
-                                    <label for="">{% trans "MODEL-NAME-TEXT" %}:</label>
-                                    <input id="id_source_name" name="" type="text" maxlength="80"/>
-                                </div>
-                                <div class="row clearfix">
-                                    <label for="">{% trans "MODEL-URL-TEXT" %}:</label>
-                                    <input id="id_source_url" name="source-url" type="text"/>
-                                </div>
-                                <a id="id_addSource" title="{% trans 'APP-ADD-TEXT' %}" href="javascript:;" class="genericButton moreButton followButton"><span>{% trans "APP-ADD-TEXT" %}</span></a>
-                            </div>
                         </div>
                     </div>
+                    <div id="id_addMoreSources" style="display:none;" class="addNewSource">
+                      <h6>{% trans "APP-ADDNEWSOURCE-TEXT" %}</h6>
+                      <div class="row clearfix">
+                          <label for="">{% trans "MODEL-NAME-TEXT" %}:</label>
+                          <input id="id_source_name" name="" type="text" maxlength="80"/>
+                      </div>
+                      <div class="row clearfix">
+                          <label for="">{% trans "MODEL-URL-TEXT" %}:</label>
+                          <input id="id_source_url" name="source-url" type="text"/>
+                      </div>
+                      <a id="id_addSource" title="{% trans 'APP-ADD-TEXT' %}" href="javascript:;" class="button green small"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+                  </div>
                 </fieldset>
 
                 <div id="id_webservice_container" class="wsParamsContainer DN">

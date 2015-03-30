@@ -10,7 +10,7 @@
     <script type="text/javascript" src="/js_microsites/developer_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
 
     <!-- COMPONENT -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/developerManager.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/developers.css?id={{settings.VERSION_JS_CSS}}"/>
 
     <!-- BRANDED -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
@@ -27,7 +27,7 @@
         <div class="sectionTitleInner clearfix">
             <h1 class="sectionTitle FL">{% trans "DEV-PAGE-TITLE" %}</h1>
             <div class="onlineSupport FL">
-                <a href="javascript:;" title="{% trans 'APP-HELP-TEXT' %}" class="genericButton" id="id_help_link"><span>{% trans "APP-HELP-TEXT" %}</span></a>
+                <a href="javascript:;" title="{% trans 'APP-HELP-TEXT' %}" class="button" id="id_help_link"><span>{% trans "APP-HELP-TEXT" %}</span></a>
             </div>
             <div class="shareContainer FR clearfix">
 
@@ -86,8 +86,8 @@
             <p>{% trans "DEV-MS-DESCRIPTION-TEXT1" %}{{preferences.account_name}} {% if not is_private_site %}{% trans "DEV-MS-DESCRIPTION-TEXT2" %} {% else %}{% trans "DEV-MS-DESCRIPTION-TEXT2-PRIVATE" %}{%endif%}</p>
             <p>{% trans "DEV-DESCRIPTION-TEXT2" %}</p>
         </div>
-        <div class="rightContent relativeContainer FR">
-            <a id="id_try_button" href="javascript:;" title="{% trans 'APP-TRYITNOW-TEX' %}" class="genericButton buttonBig"><span>{% trans "APP-TRYITNOW-TEX" %}</span></a>
+        <div class="rightContent relative FR">
+            <a id="id_try_button" href="javascript:;" title="{% trans 'APP-TRYITNOW-TEX' %}" class="button"><span>{% trans "APP-TRYITNOW-TEX" %}</span></a>
         </div>
     </div>
 

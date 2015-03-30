@@ -2931,3 +2931,9 @@ msgstr "This Data View has been rejected and set as draft."
 
 msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
 msgstr "The Data View has not been reviewed."
+
+msgid "APP-START-FROM-HERE-TEXT"
+msgstr "You can start from here!"
+
+msgid "APP-CREATE-FIRST-DATASET-TEXT"
+msgstr "In order to start using Junar, create your first dataset."

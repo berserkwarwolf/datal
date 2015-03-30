@@ -19,7 +19,7 @@
 
 {% block meta %}
     <!-- BLOCK PAGE TITLE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- DATA STREAM BOX -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- DATA STREAM FORM -->
@@ -32,10 +32,6 @@
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/liquidWidth.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- COMPONENT -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/dataServicesManager.css?id={{settings.VERSION_JS_CSS}}"/>
-    {% if can_share %}
-    <!-- PRIVATE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/privateBox.css?id={{settings.VERSION_JS_CSS}}"/>
-    {% endif %}
 
     <!-- BRANDED -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
@@ -128,12 +124,6 @@
 
                         <!-- OTHER ACTIONS -->
                         <div id="id_dataservice_toolbar_{{datastream.datastream_id}}" class="otherActions clearfix FR">
-                        {% if can_share %}
-                        <!-- SHARE -->
-                        <button id="id_sharePrivateDataStreamButton_" class="genericButton actionButton workspaceIcon privateIcon"><span>{% trans "APP-SHARE-TEXT" %}</span></button>
-                        {% endif %}
-                            {# <!-- FOLLOW --> #}
-                            {#<a href="{{settings.BASE_URI}}{_% url DataStreams.actionFollow dataservice.guid %_}" id="id_followDS" class="genericButton moreButton followButton FR" title="{% trans 'DSDET-FOLLOW-TITLE' %}"><span>{% trans "APP-FOLLOW-TEXT" %}</span></a>#}
                         </div>
 
                     </div>

@@ -12,23 +12,17 @@
         <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     {%endif%}
     <!-- BLOCK PAGE TITLE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- DATA STREAM BOX -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- DATA STREAM FORM -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- LIQUID WIDTH -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/liquidWidth.css?id={{settings.VERSION_JS_CSS}}"/>
-    <!-- PRIVATE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/private.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- TAGS CONTAINER -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
     <!-- COMPONENT -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/dashboardManager.css?id={{settings.VERSION_JS_CSS}}"/>
-    {% if can_share %}
-    <!-- PRIVATE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/privateBox.css?id={{settings.VERSION_JS_CSS}}"/>
-    {% endif %}
     <!-- BRANDED -->
     <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>

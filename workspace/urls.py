@@ -41,6 +41,7 @@ urlpatterns = patterns('',
 	(r'^source_manager/', include('junar.workspace.source_manager.urls')),
 	(r'^viewLandingPage/', include('junar.workspace.viewLandingPage.urls')),
 	(r'^admin/', include('junar.workspace.admin_manager.urls')),
+	(r'^reports/', include('junar.workspace.reports_manager.urls')),
 	(r'^auth/', include('junar.core.auth.urls')),
 	(r'^personalizeHome/', include('junar.workspace.personalizeHome.urls')),
 

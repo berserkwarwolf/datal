@@ -8,10 +8,9 @@ logger = logging.getLogger(__name__)
 class DatasetImplBuilderWrapper:
 
     def __init__(self, **fields):
-
-        if fields['impl_type'] == SourceImplementationChoices.REST:
+        if int(fields['impl_type']) == SourceImplementationChoices.REST:
             self.builder = RESTImplBuilder(**fields)
-        elif fields['impl_type'] == SourceImplementationChoices.SOAP:
+        elif int(fields['impl_type']) == SourceImplementationChoices.SOAP:
             self.builder = SOAPImplBuilder(**fields)
         else:
             self.builder = DefaultImplBuilder(**fields)
@@ -21,7 +20,7 @@ class DatasetImplBuilderWrapper:
         return self.builder is None and '' or self.builder.build()
 
 
-class DefaultImplBuilder:
+class DefaultImplBuilder(object):
     required_fields = []
 
     def __init__(self, changed_fields=None, **fields):
@@ -47,15 +46,15 @@ class RESTImplBuilder(DefaultImplBuilder):
         """ build for SourceImplementationChoices = 14 (REST)
         Sometimes impl_details is defined on JS. On API call it's necesary to build it
         """
-        path_to_headers = self.fields['path_to_headers']
-        path_to_data=self.fields['path_to_data']
-        token=self.fields['token']
-        algorithm=self.fields['algorithm']
-        username=self.fields['username']
-        password=self.fields['password']
-        useCache=self.fields['useCache']
-        parameters=self.fields['parameters']
-        signature=self.fields['signature']
+        path_to_headers = self.fields.get('path_to_headers')
+        path_to_data = self.fields.get('path_to_data')
+        token = self.fields.get('token')
+        algorithm = self.fields.get('algorithm')
+        username = self.fields.get('username')
+        password = self.fields.get('password')
+        useCache = self.fields.get('useCache')
+        parameters = self.fields.get('parameters')
+        signature = self.fields.get('signature')
 
         impl_details = '<wsOperation useCache="%s"><pathToHeaders>%s</pathToHeaders><pathToData>%s</pathToData>' % (useCache, path_to_headers, path_to_data)
 
@@ -65,12 +64,12 @@ class RESTImplBuilder(DefaultImplBuilder):
             impl_details += '<%s>' % signature
             impl_details += '<token>%s</token>' % token
             impl_details += '<algorithm>%s</algorithm>' % algorithm
-            impl_details += '</%s>' % sign_name
+            impl_details += '</%s>' % signature
             impl_details += '</uriSignatures>'
         else:
             impl_details += '<uriSignatures/>'
 
-        if len(parameters) > 0:
+        if parameters and len(parameters) > 0:
             impl_details += '<fields>'
             for argue in parameters:
                 impl_details += '<%s editable="%s">%s</%s>' % (argue['param_name'], argue['editable'], argue['default_value'], argue['param_name'])
@@ -99,16 +98,16 @@ class SOAPImplBuilder(DefaultImplBuilder):
     def build(self):
         """ build for SourceImplementationChoices = 1 (SOAP) """
 
-        method_name=self.fields['method_name']
-        namespace=self.fields['namespace']
-        useCache=self.fields['useCache']
-        parameters=self.fields['parameters']
+        method_name = self.fields.get('method_name')
+        namespace = self.fields.get('namespace')
+        useCache = self.fields.get('useCache')
+        parameters = self.fields.get('parameters')
 
         impl_details = '<wsOperation useCache="%s">' % useCache
         impl_details += '<methodName>%s</methodName>' % method_name
         impl_details += '<targetNamespace>%s</targetNamespace>' % namespace
 
-        if len(parameters) > 0:
+        if parameters and len(parameters) > 0:
             impl_details += '<fields>'
             for argue in parameters:
                 impl_details += '<%s editable="%s">%s</%s>' % (argue['param_name'], argue['editable'], argue['default_value'], argue['param_name'])

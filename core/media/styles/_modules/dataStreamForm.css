@@ -54,9 +54,11 @@
 .recomendedTags li.selected a:hover{text-decoration:none;}
 
 /*SOURCES*/
+.dataStreamForm .form .addNewSource{margin-top:0;margin-left:115px;}
+.dataStreamForm .form .addNewSource h6{font-size:12px;font-weight:bold;padding-bottom:10px;}
 .dataStreamForm .form .addNewSource .row label{width:60px;}
 .dataStreamForm .form .addNewSource .row input{width:440px;}
-.dataStreamForm .form .addNewSource .genericButton{margin-left:68px;}
+.dataStreamForm .form .addNewSource .button{margin-left:68px;}
 
 /*CREATE DASHBOARD FORM*/
 .createDBForm .errorBox .msg{margin-bottom:15px;}

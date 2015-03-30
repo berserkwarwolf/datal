@@ -37,11 +37,11 @@ body,
 	#home_filter .optionFilter dd.row{padding-top:12px;}
 	#home_filter .optionFilter dd label{display:block;padding:10px 7px 5px;font-size:11px;color:#3a3a3a;font-weight:bold;}
 	#home_filter .optionFilter dd select{width:100%;font-size:11px;padding:5px 4px 4px;}
-	#home_filter .optionFilter dd a.genericButton{display:block;text-align:center;margin-top:15px;height:25px;line-height:25px;}
+	#home_filter .optionFilter dd a.button{display:block;text-align:center;margin-top:15px;height:25px;line-height:25px;}
 		
 		/*SHORTER*/
 		#home_filter .optionFilter dd select.shorter{width:112px;}
-		#home_filter .optionFilter dd a.genericButton.shorter{width:22px;margin-top:0;padding-left:0;padding-right:0;}
+		#home_filter .optionFilter dd a.button.shorter{width:22px;margin-top:0;padding-left:0;padding-right:0;}
 
 /*PLACEHOLDERS*/
 .placeholder{}
@@ -80,35 +80,3 @@ body,
 .featuredSlider .img{height:300px;width:940px;}
 
 .shadowSlider {height: 18px;background: url(http://www.junar.com/media_website/images/common/sh-slider.png) no-repeat;}
-
-/* Fonts */
-@font-face {
-  font-family: 'proxima_nova_rgbold';
-  src: url('../../fonts/proximanova-bold-webfont.eot');
-  src: url('../../fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/proximanova-bold-webfont.woff') format('woff'),
-       url('../../fonts/proximanova-bold-webfont.ttf') format('truetype'),
-       url('../../fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
-  font-weight: normal !important;
-  font-style: normal !important;
-}
-@font-face {
-  font-family: 'proxima_nova_rgregular';
-  src: url('../../fonts/proximanova-regular-webfont.eot');
-  src: url('../../fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/proximanova-regular-webfont.woff') format('woff'),
-       url('../../fonts/proximanova-regular-webfont.ttf') format('truetype'),
-       url('../../fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
-  font-weight: normal !important;
-  font-style: normal !important;
-}
-@font-face {
-    font-family: 'league_gothicregular';
-    src: url('../../fonts/league_gothic-webfont-webfont.eot');
-    src: url('../../fonts/league_gothic-webfont-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/league_gothic-webfont-webfont.woff') format('woff'),
-         url('../../fonts/league_gothic-webfont-webfont.ttf') format('truetype'),
-         url('../../fonts/league_gothic-webfont-webfont.svg#league_gothicregular') format('svg');
-    font-weight: normal !important;
-    font-style: normal !important;
-}

@@ -5,14 +5,14 @@
 
    <!-- Active filters -->
    <div class="activeFilters" id="activeFilters" style="display:none;">
-      <h3 class="PNB">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
       <ul id="active-filters-list"></ul>
    </div>
 
    <!-- Author -->
    {% if filters.author_filter %}
    <div class="filters" id="author_filter">
-      <h3 class="PNB">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
       <ul>
          {% for filter in filters.author_filter %}
          <li><a class="filter_link" title="">{{ filter }}</a></li>
@@ -23,7 +23,7 @@
    <!-- Status -->
    {% if filters.status_filter %}
    <div class="filters" id="status_filter">
-      <h3 class="PNB">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
       <ul>
          {% for filter in filters.status_filter %}
          <li><a class="filter_link" title="">{{ filter|status_str }}</a></li>

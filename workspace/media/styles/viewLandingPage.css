@@ -51,7 +51,7 @@
 .activity .text time{color:#999;}
 
 /* News */
-.news article h4{font:13px/18px 'proxima_nova_rgbold';padding-bottom:8px;text-transform:uppercase;}
+.news article h4{font:13px/18px 'montserratbold', arial, helvetica, sans-serif;padding-bottom:8px;text-transform:uppercase;}
 .news article p{line-height:18px;}
 
 /* Pending Actions */

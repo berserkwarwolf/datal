@@ -2921,3 +2921,9 @@ msgstr "La vista ha sido rechazada y establecida como borrador."
 
 msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
 msgstr "La vista no ha sido revisada."
+
+msgid "APP-START-FROM-HERE-TEXT"
+msgstr "Puede comenzar desde aquí!"
+
+msgid "APP-CREATE-FIRST-DATASET-TEXT"
+msgstr "Para empezar a utilizar Junar, cree su primer conjunto de datos."

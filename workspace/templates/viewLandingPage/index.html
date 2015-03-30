@@ -12,185 +12,213 @@
 {% block content %}
 <div class="columns equal-width clearfix">
 
-  <!-- Column - Left -->
-  <div class="column CL">
+	<!-- Column - Left -->
+	<div class="column CL">
 
-    <!-- Getting Started -->
-    <section class="box orange getting-started">
-      <header>
-        <h3 class="title">{% trans "LANDINGPAGE-GETTINGSTARTED-TITLE" %} <span>{% trans "LANDINGPAGE-GETTINGSTARTED-SUBTITLE" %}</span></h3>
-      </header>
-      <div class="box-content">
+		<!-- Getting Started -->
+		<section class="box orange getting-started">
+			<header>
+				<h3 class="title">{% trans "LANDINGPAGE-GETTINGSTARTED-TITLE" %} <span>{% trans "LANDINGPAGE-GETTINGSTARTED-SUBTITLE" %}</span></h3>
+			</header>
+			<div class="box-content">
 
-        <article class="settings">
-          <header>
-            <h4>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE" %}</h4>
-          </header>
-          <p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT" %}</p>
-          <footer class="clearfix">
-            <h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-            <p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP" %}</p>
-          </footer>
-        </article>
+				<article class="settings">
+					<header>
+						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE" %}</h4>
+					</header>
+					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT" %}</p>
+					<footer class="clearfix">
+						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
+						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP" %}</p>
+					</footer>
+				</article>
 
-        <article class="resources">
-          <header>
-            <h4>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE" %}</h4>
-          </header>
-          <p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT" %}</p>
-          <footer class="clearfix">
-            <h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-            <p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP" %}</p>
-          </footer>
-        </article>
+				<article class="resources">
+					<header>
+						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE" %}</h4>
+					</header>
+					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT" %}</p>
+					<footer class="clearfix">
+						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
+						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP" %}</p>
+					</footer>
+				</article>
 
-        <article class="revisions">
-          <header>
-            <h4>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE" %}</h4>
-          </header>
-          <p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT" %}</p>
-          <footer class="clearfix">
-            <h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-            <p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP" %}</p>
-          </footer>
-        </article>
+				<article class="revisions">
+					<header>
+						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE" %}</h4>
+					</header>
+					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT" %}</p>
+					<footer class="clearfix">
+						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
+						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP" %}</p>
+					</footer>
+				</article>
 
-      </div>
-    </section>
+			</div>
+		</section>
+		
+		{% if my_total_datasets != 0 %}
+		<!-- Numbers -->
+		<section class="box numbers">
+			<header class="clearfix">
+				<h3 class="title FL">{% trans "LANDINGPAGE-NUMBERS-TITLE" %}</h3>
+				{% if 'workspace.can_access_report' in auth_manager.privileges %}
+				<a href="/reports/action_query" class="button small green FR" title="{% trans 'LANDINGPAGE-NUMBERS-REPORTS' %}" style="display:none;">{% trans "LANDINGPAGE-NUMBERS-REPORTS" %}</a>
+				{% endif %}
+			</header>
+			<div class="box-content">
+				<table class="graph">
+					<tbody>
+						<tr>
+							<td class="data">
+								<i class="icon-resources dataset"></i>
+								<strong>{{my_total_datasets}}</strong>
+								{% trans "APP-DATASETS-TEXT" %}
+							</td>
+							<td class="bar">
+								<div><div style="width:{{my_total_perc_datasets}}%;"></div></div>
+							</td>
+						</tr>
+						<tr>
+							<td class="data">
+								<i class="icon-resources dataview"></i>
+								<strong>{{my_total_datastreams}}</strong>
+								{% trans "APP-DATAVIEWS-TEXT" %}
+							</td>
+							<td class="bar">
+								<div><div style="width:{{my_total_perc_datastreams}}%;"></div></div>
+							</td>
+						</tr>
+						<tr style="display:none;">
+							<td class="data">
+								<i class="icon-resources visualization"></i>
+								<strong>{{my_total_visualizations}}</strong>
+								{% trans "APP-VISUALIZATIONS-TEXT" %}
+							</td>
+							<td class="bar">
+								<div><div style="width:{{my_total_perc_visualizations}}%;"></div></div>
+							</td>
+						</tr>
+						<tr style="display:none;">
+							<td class="data">
+								<i class="icon-resources dashboard"></i>
+								<strong>{{my_total_dashboards}}</strong>
+								{% trans "APP-DASHBOARDS-TEXT" %}
+							</td>
+							<td class="bar">
+								<div><div style="width:{{my_total_perc_dashboards}}%;"></div></div>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+		{% endif %}
 
-    <!-- Numbers -->
-    <section class="box numbers">
-      <header class="clearfix">
-        <h3 class="title FL">{% trans "LANDINGPAGE-NUMBERS-TITLE" %}</h3>
-        {% if 'workspace.can_access_report' in auth_manager.privileges %}
-        <a href="/reports/action_query" class="button small green FR" title="{% trans 'LANDINGPAGE-NUMBERS-REPORTS' %}" style="display:none;">{% trans "LANDINGPAGE-NUMBERS-REPORTS" %}</a>
-        {% endif %}
-      </header>
-      <div class="box-content">
-        <table class="graph">
-          <tbody>
-            <tr>
-              <td class="data">
-                <i class="icon-resources dataset"></i>
-                <strong>{{my_total_datasets}}</strong>
-                {% trans "APP-DATASETS-TEXT" %}
-              </td>
-              <td class="bar">
-                <div><div style="width:{{my_total_perc_datasets}}%;"></div></div>
-              </td>
-            </tr>
-            <tr>
-              <td class="data">
-                <i class="icon-resources dataview"></i>
-                <strong>{{my_total_datastreams}}</strong>
-                {% trans "APP-DATAVIEWS-TEXT" %}
-              </td>
-              <td class="bar">
-                <div><div style="width:{{my_total_perc_datastreams}}%;"></div></div>
-              </td>
-            </tr>
-            <tr style="display:none;">
-              <td class="data">
-                <i class="icon-resources visualization"></i>
-                <strong>{{my_total_visualizations}}</strong>
-                {% trans "APP-VISUALIZATIONS-TEXT" %}
-              </td>
-              <td class="bar">
-                <div><div style="width:{{my_total_perc_visualizations}}%;"></div></div>
-              </td>
-            </tr>
-            <tr style="display:none;">
-              <td class="data">
-                <i class="icon-resources dashboard"></i>
-                <strong>{{my_total_dashboards}}</strong>
-                {% trans "APP-DASHBOARDS-TEXT" %}
-              </td>
-              <td class="bar">
-                <div><div style="width:{{my_total_perc_dashboards}}%;"></div></div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+		<!-- Follow us -->
+		<section class="box numbers">
+			<header class="clearfix">
+				<h3 class="title FL">{% trans "LANDINGPAGE-NEWS-FOLLOWUS-TITLE" %}</h3>
+			</header>
+			<div class="box-content">
+				<p>{% trans "LANDINGPAGE-NEWS-FOLLOWUS-TEXT" %}</p>
+			</div>
+		</section>
 
-    <!-- Follow us -->
-    <section class="box numbers">
-      <header class="clearfix">
-        <h3 class="title FL">{% trans "LANDINGPAGE-NEWS-FOLLOWUS-TITLE" %}</h3>
-      </header>
-      <div class="box-content">
-        <p>{% trans "LANDINGPAGE-NEWS-FOLLOWUS-TEXT" %}</p>
-      </div>
-    </section>
+	</div>
 
-  </div>
+	<!-- Column - Right -->
+	<div class="column CR">
 
-  <!-- Column - Right -->
-  <div class="column CR">
+		{% if my_total_datasets == 0 %}
+		<section class="box activity">
+			<header>
+				<h3 class="title">{% trans "APP-START-FROM-HERE-TEXT" %}</h3>
+			</header>
+			<div class="box-content clearfix">
+				<p>{% trans "APP-CREATE-FIRST-DATASET-TEXT" %}</p>
+				<a title="{% trans "APP-ADD-NEW-DATASET-TEXT" %}" class="button black small FL" href="/datasets/create"><i class="new"></i>{% trans "APP-ADD-NEW-DATASET-TEXT" %}</a>
+			</div>
+		</section>
+		{% endif %}
+		
+		{% if my_total_datasets != 0 %}
+	
+		{% comment %}
+		<!-- Pending Actions -->
+		<section class="box pending-actions" style="display:none;">
+			<header class="clearfix">
+				<h3 class="title FL">{% trans 'APP-PENDINGACTIONS-TEXT' %}</h3>
+			</header>
+			<div class="box-content">
+				<p>
+					<i class="icon-warning"></i>
+					{% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-1' %} <strong>8</strong> {% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-2' %}
+				</p>
+				<ul>
+					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
+					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
+					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
+					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
+					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
+					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
+					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
+					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
+				</ul>
+			</div>
+		</section>
+		{% endcomment %}
 
-    <!-- Activity -->
-    <section class="box activity">
-      <header>
-        <h3 class="title">{% trans "LANDINGPAGE-ACTIVITY-TITLE" %}</h3>
-      </header>
-      <div class="box-content">
-        {% for activity in account_activities %}
-            <article class="clearfix">
-                {% gravatar None "small" "FL" activity.user_nick activity.user_email %}
-                <div class="text">
-                <p><strong>{{activity.user_nick}}</strong>
-                    {% get_activity_type activity.action_id as the_activity %}
-                    {{the_activity}}
-            {% if activity.resource_link %}
-                <a href={{activity.resource_link}} title={{activity.title}}>
-            {% else %}
-                <a href="#" title={{activity.title}}>
-            {% endif%}
+		<!-- Activity -->
+		<section class="box activity">
+			<header>
+				<h3 class="title">{% trans "LANDINGPAGE-ACTIVITY-TITLE" %}</h3>
+			</header>
+			<div class="box-content">
+				{% for activity in account_activities %}
+					<article class="clearfix">
+						{% gravatar None "small" "FL" activity.user_nick activity.user_email %}
+						<div class="text">
+							<p><strong>{{activity.user_nick}}</strong>
+							{% get_activity_type activity.action_id as the_activity %}
+							{{the_activity}}
 
-             {% if activity.type == 'dt' %}
-                <i class="icon-dataset">
-             {% elif activity.type == 'db' %}
-                <i class="icon-dashboard">
-             {% elif activity.type == 'ds' %}
-                <i class="icon-dataview">
-             {% elif activity.type == 'vs' %}
-                <i class="icon-visualization">
-            {% endif%}
-             </i>{{activity.title}}
-                </a>
-             </p>
-             <time>{{activity.time}}</time>
-              </div>
-            </article>
-        {% endfor %}
-      </div>
-    </section>
+							{% if activity.resource_link %}
+								<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
+							{% else %}
+								<span class="resource">
+							{% endif%}
 
-    <!-- Pending Actions -->
-    <section class="box pending-actions" style="display:none;">
-      <header class="clearfix">
-        <h3 class="title FL">{% trans 'APP-PENDINGACTIONS-TEXT' %}</h3>
-      </header>
-      <div class="box-content">
-        <p>
-          <i class="icon-warning"></i>
-          {% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-1' %} <strong>8</strong> {% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-2' %}
-        </p>
-        <ul>
-          <li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-          <li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-          <li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-          <li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-          <li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-          <li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-          <li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-          <li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-        </ul>
-      </div>
-    </section>
+							{% if activity.type == 'dt' %}
+								<i class="icon-dataset"></i>
+							{% elif activity.type == 'db' %}
+								<i class="icon-dashboard"></i>
+							{% elif activity.type == 'ds' %}
+								<i class="icon-dataview"></i>
+							{% elif activity.type == 'vs' %}
+								<i class="icon-visualization"></i>
+							{% endif%}
 
-  </div>
+							{{activity.title}}
+
+							{% if activity.resource_link %}
+								</a>
+							{% else %}
+								</span>
+							{% endif%}
+
+							</p>
+							<time>{{activity.time}}</time>
+						</div>
+					</article>
+				{% endfor %}
+			</div>
+		</section>
+
+		{% endif %}
+
+	</div>
 
 </div>
 

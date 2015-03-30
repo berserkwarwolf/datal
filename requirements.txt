@@ -28,3 +28,6 @@ requests==2.3.0
 uWSGI==2.0.5.1
 wsgiref==0.1.2
 zope.interface==4.1.1
+libsass==0.7.0
+django-compressor==1.4
+django-sass-processor==0.2.2

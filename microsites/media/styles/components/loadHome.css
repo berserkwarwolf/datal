@@ -40,17 +40,17 @@ body,
 /*HOME FILTERS*/
 #home_filter .filters dd{cursor:pointer;}
 
-  /*OPTION FILTER*/
-  #home_filter .optionFilter dt span{padding-top:10px;padding-bottom:10px;}
-  #home_filter .optionFilter dd{border:0;}
-  #home_filter .optionFilter dd.row{padding-top:12px;}
-  #home_filter .optionFilter dd label{display:block;padding:10px 7px 5px;font-size:11px;color:#3a3a3a;font-weight:bold;}
-  #home_filter .optionFilter dd select{width:100%;font-size:11px;padding:5px 4px 4px;}
-  #home_filter .optionFilter dd a.genericButton{display:block;text-align:center;margin-top:15px;height:25px;line-height:25px;}
-    
-    /*SHORTER*/
-    #home_filter .optionFilter dd select.shorter{width:112px;}
-    #home_filter .optionFilter dd a.genericButton.shorter{width:22px;margin-top:0;padding-left:0;padding-right:0;}
+	/*OPTION FILTER*/
+	#home_filter .optionFilter dt span{padding-top:10px;padding-bottom:10px;}
+	#home_filter .optionFilter dd{border:0;}
+	#home_filter .optionFilter dd.row{padding-top:12px;}
+	#home_filter .optionFilter dd label{display:block;padding:10px 7px 5px;font-size:11px;color:#3a3a3a;font-weight:bold;}
+	#home_filter .optionFilter dd select{width:100%;font-size:11px;padding:5px 4px 4px;}
+	#home_filter .optionFilter dd a.button{display:block;text-align:center;margin-top:15px;height:25px;line-height:25px;}
+		
+		/*SHORTER*/
+		#home_filter .optionFilter dd select.shorter{width:112px;}
+		#home_filter .optionFilter dd a.button.shorter{width:22px;margin-top:0;padding-left:0;padding-right:0;}
 
 /* REFERENCES */
 .columns .sidebar .sidebarPadding{padding-bottom:110px;}
@@ -98,41 +98,6 @@ body,
 .featuredSlider .img{height:300px;width:940px;}
 
 .shadowSlider {height: 18px;background: url(http://www.junar.com/media_website/images/common/sh-slider.png) no-repeat;}
-
-/* Fonts */
-@font-face {
-    font-family: 'league_gothicregular';
-    src: url('../../fonts/league_gothic-webfont-webfont.eot');
-    src: url('../../fonts/league_gothic-webfont-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../../fonts/league_gothic-webfont-webfont.woff') format('woff'),
-         url('../../fonts/league_gothic-webfont-webfont.ttf') format('truetype'),
-         url('../../fonts/league_gothic-webfont-webfont.svg#league_gothicregular') format('svg');
-    font-weight: normal !important;
-    font-style: normal !important;
-}
-@font-face {
-  font-family: 'Gotham-Book';
-  src: url('../../fonts/Gotham-Book.eot?#iefix') format('embedded-opentype'),
-       url('../../fonts/Gotham-Book.otf') format('opentype'),
-       url('../../fonts/Gotham-Book.woff') format('woff'), 
-       url('../../fonts/Gotham-Book.ttf') format('truetype'),
-       url('../../fonts/Gotham-Book.svg#Gotham-Book') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-@font-face {
-  font-family: 'Gotham-Medium';
-  src: url('../../fonts/Gotham-Medium.eot?#iefix') format('embedded-opentype'),  
-       url('../../fonts/Gotham-Medium.otf') format('opentype'),
-       url('../../fonts/Gotham-Medium.woff') format('woff'), 
-       url('../../fonts/Gotham-Medium.ttf') format('truetype'), 
-       url('../../fonts/Gotham-Medium.svg#Gotham-Medium') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-.LG{font-family:'league_gothicregular';font-weight:normal !important;font-style:normal !important;}
-.GB{font-family:'Gotham-Book';font-weight:normal !important;font-style:normal !important;}
-.GM{font-family:'Gotham-Medium';font-weight:normal !important;font-style:normal !important;}
 
 /* Theme 0 */
 .theme0{}
@@ -206,21 +171,6 @@ body .theme2 .caroufredsel_wrapper{border:0 !important;}
   .theme5 .breadcrumb li:before{content:">";padding:0 5px;}
   .theme5 .breadcrumb li:first-child:before{display:none;}
   .theme5 .breadcrumb li a{display:inline-block;height:34px;line-height:34px;color:#fff;}
-
-    /* Code for Palo Alto home's preference */
-    /*
-    body, .layout, .content{background:#fff;}
-    .theme5 .breadcrumb{border-color:#6eab28;background-image:url(http://junar-cdn-brandings.s3.amazonaws.com/files/cityofpaloalto/crumb_bg.png);background-repeat:no-repeat;background-position:center 0;padding:0;}
-    .theme5 .breadcrumb li:first-child a{padding-left:40px;background:url(http://junar-cdn-brandings.s3.amazonaws.com/files/cityofpaloalto/home-icon.png) 9px center no-repeat;}
-    .theme5 .breadcrumb li a{text-decoration:underline;}
-    .theme5 .breadcrumb li a:hover{color:#00FF14;}
-    .theme5 .breadcrumb .email,
-    .theme5 .breadcrumb .print{float:left;background-position:0 -40px;height:34px;width:50px;text-indent:-10000px;overflow:hidden;display:block;}
-    .theme5 .breadcrumb .email:hover,
-    .theme5 .breadcrumb .print:hover{background-position:0 0;}
-    .theme5 .breadcrumb .email{background-image:url(http://junar-cdn-brandings.s3.amazonaws.com/files/cityofpaloalto/email-icon.png);}
-    .theme5 .breadcrumb .print{background-image:url(http://junar-cdn-brandings.s3.amazonaws.com/files/cityofpaloalto/print-icon.png);}
-    */
 
   /* Top section */
   .theme5 .topSection{padding:0 20px 20px;}

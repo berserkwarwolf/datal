@@ -152,7 +152,7 @@ def view(request):
 
             status = STATUS_CHOICES[int(visualization_revision.status)][1]
 
-            return render_to_response('chart_manager/chartDetail.html', locals())
+            return render_to_response('viewChart/index.html', locals())
     else:
         raise Http404
 

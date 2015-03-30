@@ -42,18 +42,13 @@
 /*BUTTON*/
     
     /*BACKGROUND COLOR*/
-    a.genericButton,
-    a.genericButton.moreButton{background:{{preferences.account_button_bg_color|default:"#ccc"}} !important;}
+    .button{background:{{preferences.account_button_bg_color|default:"#ccc"}} !important;}
 
     /*BORDER COLOR*/
-    a.genericButton,
-    a.genericButton.moreButton{border-color:{{preferences.account_button_border_color|default:"#999"}} !important;}
+    .button{border-color:{{preferences.account_button_border_color|default:"#999"}} !important;}
 
     /*FONT COLOR*/
-    a.genericButton,
-    a.genericButton.moreButton
-    a.genericButton span,
-    a.genericButton.moreButton span{color:{{preferences.account_button_font_color|default:"#fff"}} !important;}
+    .button{color:{{preferences.account_button_font_color|default:"#fff"}} !important;}
 
 /*HEADER*/
     

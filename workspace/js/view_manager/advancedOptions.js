@@ -57,7 +57,7 @@ var SideBar = Backbone.Model.extend({
 					this.resetLockSelection();
 				}
 			}else{
-				advanceOptions.attributes.$Container.find('li').addClass('ao-disabled-item');
+				advanceOptions.attributes.$Container.find('li').addClass('disabled-item');
 				DataTableObj.clearSelection();
 			}
 		}else{
@@ -68,7 +68,7 @@ var SideBar = Backbone.Model.extend({
 		$('#id_addFunctionsBox').hide();
 	},
 	resetLockSelection : function(){
-		advanceOptions.attributes.$Container.find('li').addClass('ao-disabled-item');
+		advanceOptions.attributes.$Container.find('li').addClass('disabled-item');
 		advanceOptions.reset();
 		DataTableObj.clearSelection();
 		this.attributes.lockSelection = false;
@@ -157,31 +157,31 @@ var AdvanceOptions = Backbone.Model.extend({
 		
 		var $lOptions = this.attributes.$Container.find('li');
 		if(lColumns == 0 && lRows == 0 && lCells == 0 && !DataTableObj.attributes.$Table.hasClass('ao-table-selected')){
-			$lOptions.addClass('ao-disabled-item');
+			$lOptions.addClass('disabled-item');
 		}
 		if(lColumns == 0 && lRows == 0 && lCells > 0){
-			$lOptions.addClass('ao-disabled-item');
-			$('#id_aliasesMenuItem').parent().removeClass('ao-disabled-item');
+			$lOptions.addClass('disabled-item');
+			$('#id_aliasesMenuItem').parent().removeClass('disabled-item');
 		}
 		if(lColumns == 0 && lRows == 1 && lCells == 0){
-			$lOptions.addClass('ao-disabled-item');
-			$('#id_headerMenuItem').parent().removeClass('ao-disabled-item');
-			$('#id_functionMenuItem').parent().removeClass('ao-disabled-item');
+			$lOptions.addClass('disabled-item');
+			$('#id_headerMenuItem').parent().removeClass('disabled-item');
+			$('#id_functionMenuItem').parent().removeClass('disabled-item');
 		}
 		if(lColumns == 0 && lRows > 1 && lCells == 0){
-			$lOptions.removeClass('ao-disabled-item');
-			$('#id_filterMenuItem').parent().addClass('ao-disabled-item');
+			$lOptions.removeClass('disabled-item');
+			$('#id_filterMenuItem').parent().addClass('disabled-item');
 		}
 		if(lColumns > 0 && lRows == 0 && lCells == 0){
-			$lOptions.removeClass('ao-disabled-item');
+			$lOptions.removeClass('disabled-item');
 		}
 		if(lColumns > 0 && lRows > 0 && lCells == 0){
-			$lOptions.addClass('ao-disabled-item');
-			$('#id_headerMenuItem').parent().removeClass('ao-disabled-item');
-			$('#id_aliasesMenuItem').parent().removeClass('ao-disabled-item');
+			$lOptions.addClass('disabled-item');
+			$('#id_headerMenuItem').parent().removeClass('disabled-item');
+			$('#id_aliasesMenuItem').parent().removeClass('disabled-item');
 		}
 		if(DataTableObj.attributes.$Table.hasClass('ao-table-selected')){
-			$lOptions.removeClass('ao-disabled-item');
+			$lOptions.removeClass('disabled-item');
 		}
 	},
 	reset : function(){

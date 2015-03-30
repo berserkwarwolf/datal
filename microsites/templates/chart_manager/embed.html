@@ -5,7 +5,7 @@
 	<title>{{preferences.account_name}} &middot; {{preferences.account_page_titles}}</title>
 	<meta charset="utf-8">
 	<!-- RESET -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/reset.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/reset.css?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- ACTIONS -->
 	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/actions.css?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- DATA STREAM BOX -->
@@ -13,7 +13,7 @@
 	<!-- COMMON MODULES -->
 	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/commonModules.css?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- BUTTONS -->
-	<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/_modules/buttons.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/buttons.css?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- COMPONENT -->
 	<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/_modules/embed.css?id={{settings.VERSION_JS_CSS}}"/>
 
@@ -154,7 +154,7 @@
 		    {% endif %}
 
 			    <!-- ACTIONS MENU -->
-			    <div class="actionsMenu relativeContainer FR">
+			    <div class="actionsMenu relative FR">
 			        <a href="javascript:;" id="id_menuDataServiceButton_" class="Icon FR ic_Menu" title="{% trans 'APP-ACTIONS-TEXT' %}" ><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
 			        <div id="id_tooltipDataServiceButton_" class="dashboard-dataservice-tooltip">
 			            <div class="menuInner">
@@ -172,7 +172,7 @@
 			    <div class="sep FR"><span class="DN">|</span></div>
 			
 			    <!-- SHARE MENU -->
-<!-- 			    <div class="shareMenu relativeContainer FR"> -->
+<!-- 			    <div class="shareMenu relative FR"> -->
 <!-- 			        <a href="javascript:;" id="id_menuShareDataServiceButton_" class="Icon FR ic_Menu" title="{% trans 'DSDET-SHARE-TITLE' %}"><span>{% trans "APP-SHARE-TEXT" %}</span></a> -->
 <!-- 			        <div class="dashboard-dataservice-tooltip" id="id_tooltipShareDataServiceButton_  "> -->
 <!-- 			            <div class="menuInner"> -->
@@ -217,7 +217,7 @@
 				<textarea id="id_embedDatastreamTextarea" cols="" rows="" readonly="readonly"></textarea>
 			</div>
 			<div class="buttons">
-				<button class="genericButton normalButton" title="Close" id="id_closeEmbedButton"><span>{% trans "APP-CLOSE-TEXT" %}</span></button>
+				<button class="button" title="Close" id="id_closeEmbedButton"><span>{% trans "APP-CLOSE-TEXT" %}</span></button>
 			</div>
 		</div>
 	</div>

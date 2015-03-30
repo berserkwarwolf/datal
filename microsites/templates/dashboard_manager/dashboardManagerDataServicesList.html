@@ -61,13 +61,13 @@
         {% endif %}
 
         <!-- CACHE NOTIFICATION -->
-        <div id="id_notification_{{forloop.counter0}}" style="display:none;" class="cacheNotification toolbar FL relativeContainer">
+        <div id="id_notification_{{forloop.counter0}}" style="display:none;" class="cacheNotification toolbar FL relative">
             <span id="id_notificationMessage_{{forloop.counter0}}" class="FL"></span>
             <span class="sep FL"><span class="DN">|</span></span>
         </div>
 
         <!-- ACTIONS MENU -->
-        <div class="actionsMenu relativeContainer FR">
+        <div class="actionsMenu relative FR">
             <a href="javascript:;" id="id_menuDashboardDataServiceButton_{{forloop.counter0}}" class="Icon FR ic_Menu" title="{% trans 'APP-ACTIONS-TEXT' %}" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
             <div class="dashboard-dataservice-tooltip" id="id_tooltipDashboardDataServiceButton_{{forloop.counter0}}">
                 <div class="menuInner">
@@ -89,7 +89,7 @@
         {% if preferences.account_enable_sharing %}
             <div class="sep FR"><span class="DN">|</span></div>
             <!-- SHARE MENU -->
-            <div class="shareMenu relativeContainer FR">
+            <div class="shareMenu relative FR">
                 <a href="javascript:;" id="id_menuShareDataServiceButton_{{forloop.counter0}}" class="Icon FR ic_Menu" title="{% trans 'DSDET-SHARE-TITLE' %}"><span>{% trans "APP-SHARE-TEXT" %}</span></a>
                 <div class="dashboard-dataservice-tooltip" id="id_tooltipShareDataServiceButton_{{forloop.counter0}}">
                     <div class="menuInner">
@@ -146,13 +146,13 @@
         {% endif %}
 
         <!-- CACHE NOTIFICATION -->
-        <div id="id_notification_{{forloop.counter0}}" style="display:none;" class="cacheNotification toolbar FL relativeContainer">
+        <div id="id_notification_{{forloop.counter0}}" style="display:none;" class="cacheNotification toolbar FL relative">
             <span id="id_notificationMessage_{{forloop.counter0}}" class="FL"></span>
             <span class="sep FL"><span class="DN">|</span></span>
         </div>
 
         <!-- ACTIONS MENU -->
-        <div class="actionsMenu relativeContainer FR">
+        <div class="actionsMenu relative FR">
             <a href="javascript:;" id="id_menuDashboardDataServiceButton_{{forloop.counter0}}" class="Icon FR ic_Menu" title="{% trans 'APP-ACTIONS-TEXT' %}"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
             <div class="dashboard-dataservice-tooltip" id="id_tooltipDashboardDataServiceButton_{{forloop.counter0}}">
                 <div class="menuInner">
@@ -177,7 +177,7 @@
             {% if not dashboard_dataservice.is_private and preferences.account_enable_sharing %}
                 <div class="sep FR"><span class="DN">|</span></div>
                 <!-- SHARE MENU -->
-                <div class="shareMenu relativeContainer FR">
+                <div class="shareMenu relative FR">
                     <a href="javascript:;" id="id_menuShareDataServiceButton_{{forloop.counter0}}" class="Icon FR ic_Menu" title="{% trans 'DSDET-SHARE-TITLE' %}"><span>{% trans "APP-SHARE-TEXT" %}</span></a>
                     <div class="dashboard-dataservice-tooltip" id="id_tooltipShareDataServiceButton_{{forloop.counter0}}">
                         <div class="menuInner">

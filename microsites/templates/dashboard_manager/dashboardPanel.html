@@ -22,7 +22,7 @@
                     </h1>
 
                     <!-- DROP DOWN MENU -->
-                    <div class="dropDownMenu relativeContainer FL toolbar">
+                    <div class="dropDownMenu relative FL toolbar">
                         <a title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu" id="id_dashboardMenuButton" href="javascript:;"><span class="DN">{% trans "APP-ACTIONS-TEXT" %}</span></a>
                         <div id="id_dashboardDropDownMenu" class="dashboard-dataservice-tooltip" style="display: none;">
                             <div id="" class="menuInner">
@@ -80,10 +80,6 @@
 
                     <!-- OTHER ACTIONS -->
                     <div id="id_dataservice_toolbar_{{dashboard.dashboard_id}}" class="otherActions clearfix FR">
-                        {% if can_share %}
-                        <!-- SHARE -->
-                        <button id="id_sharePrivateDashboardButton_" class="genericButton actionButton workspaceIcon privateIcon"><span>{% trans "APP-SHARE-TEXT" %}</span></button>
-                        {% endif %}
 
 
                         {% block followButton %}

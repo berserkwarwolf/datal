@@ -77,7 +77,7 @@
 /* List */
 .list-container{padding:0 15px 15px;}
 .list-container table{width:100%;font-size:12px;text-shadow:0 1px 0 #fff;}
-.list-container table th{text-align:left;color:#999;font-family:'proxima_novasemibold';text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
+.list-container table th{text-align:left;color:#999;font-family:'montserratregular', arial, helvetica, sans-serif;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
 .list-container table .select-all-header-cell input[type=checkbox]{position:relative;top:3px;}
 .list-container table tr{}
 .list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:12px 10px 12px 10px;line-height:18px;
@@ -132,11 +132,16 @@
 .pagination .backgrid-paginator ul{margin:0;}
 .pagination li.disabled, .pagination .backgrid-paginator li.disabled{visibility:visible;}
 .pagination li.disabled a:hover, .pagination .backgrid-paginator li.disabled a:hover{background-color:inherit;color:#999;}
-.pagination .pager li, .pagination .backgrid-paginator li{display:inline-block;border-left:1px solid #fff;border-right:1px solid #d7d7d7;font-size:0;min-width:30px;}
-.pagination .pager li:first-child, .pagination .backgrid-paginator li:first-child{border-left:0;}
-.pagination .pager li:last-child, .pagination .backgrid-paginator li:last-child{border-right:0;}
-.pagination .pager li a, .pagination .backgrid-paginator li a{display:block;color:#726869;text-shadow:0 1px 0 #fff;height:27px;line-height:29px;font-family:'proxima_nova_rgbold';font-size:15px;overflow:hidden;}
-.pagination .pager li a:hover, .pagination .backgrid-paginator li a:hover{text-decoration:none;background-color:#efeded;background-color:rgba(0,0,0,.04);}
+.pagination .pager li, 
+.pagination .backgrid-paginator li{display:inline-block;border-left:1px solid #fff;border-right:1px solid #d7d7d7;font-size:0;min-width:30px;}
+.pagination .pager li:first-child, 
+.pagination .backgrid-paginator li:first-child{border-left:0;}
+.pagination .pager li:last-child, 
+.pagination .backgrid-paginator li:last-child{border-right:0;}
+.pagination .pager li a, 
+.pagination .backgrid-paginator li a{display:block;color:#726869;text-shadow:0 1px 0 #fff;height:27px;line-height:29px;font-family:'montserratbold', arial, helvetica, sans-serif;font-size:15px;overflow:hidden;}
+.pagination .pager li a:hover, 
+.pagination .backgrid-paginator li a:hover{text-decoration:none;background-color:#efeded;background-color:rgba(0,0,0,.04);}
 .pagination .pager .pagination-page{width:32px;padding-right:1px;text-align:center;}
 .pagination .pager .pagination-page.active, .pagination .pager li.active a, .pagination .backgrid-paginator li.active a{color:#fff;text-shadow:0 1px 0 #033e97;background-color:#407fde;cursor:default;
     -webkit-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);

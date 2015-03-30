@@ -91,7 +91,7 @@ body > .layout{height:auto;min-height:100%;}
 .settingsBoxes .CL,
 .settingsBoxes .CR{width:270px;}
 .settingsBoxes .settingsBox, .api, .configs .formBox fieldset{margin:0 20px 20px 0;padding:15px;background-color:#f0f0f2;border:1px solid #eaeaea;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;box-shadow:0 1px 0 #fff;}
-.settingsBoxes .settingsBox h4{font-family:"proxima_nova_rgbold";text-transform:uppercase;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.settingsBoxes .settingsBox h4{font-family:"montserratbold";text-transform:uppercase;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .settingsBoxes .settingsBox .noPadding{padding:0 !important;}
 .settingsBoxes .settingsBox .colorPicker div{top:4px;left:4px;width:28px;height:28px;}
 

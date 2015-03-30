@@ -1,20 +1,3 @@
-/*ACTIONS*/
-.ao-actions li{margin:0 5px;}
-.ao-actions li a{display:inline-block;}
-.ao-actions li.ao-wink a{background:url(../../images/common/ic_actions.png) no-repeat;padding-left:20px;}
-.ao-actions li.ao-wink{margin-top:2px;}
-.ao-actions li.facebook{margin-top:1px}
-.ao-actions li.twitter{margin-right:0}
-.ao-actions li.twitter iframe{width:96px !important;}
-.ao-actions .ao-wink a.like{background-position:0 -735px;}
-.ao-actions .ao-wink a.like:hover{background-position:0 -750px;}
-.ao-actions .ao-wink a.unlike{background-position:0 -705px;}
-.ao-actions .ao-wink a.unlike:hover{background-position:0 -720px;}
-.ao-actions li span{color:#b5b5b5;}
-.ao-actions li.url input {-moz-border-radius:2px 2px 2px 2px;border:1px solid #CCCCCC;font-size:11px;padding:3px;width:99px;margin-left:26px;}
-.ao-actions li.url {background:url(../../images/common/ic_actions.png) no-repeat 8px -680px;}
-.ao-actions .ao-comments{background:url(../../images/common/ic_actions.png) no-repeat 0 0;width:16px;height:20px;display:block;}
-
 /*GO TO SOURCE*/
 .gotosource{font-size:11px;margin-top:7px;position:relative;width:70%;overflow:hidden;}
 .gotosource .gotosourceInner{width:100000px;}
@@ -112,21 +95,21 @@
 .toolbar .ic_Website{background-position:0 -1373px;width:auto;height:auto;padding-left:22px;}
 .toolbar .ic_Selection{background-position:0 -1400px;width:auto;height:auto;padding-left:22px;}
 .toolbar .ic_Header{background-position:0 -1425px;width:auto;height:auto;padding-left:22px;}
-.toolbar .ao-disabled-item .ic_Header{background-position:0 -1450px;}
+.toolbar .disabled-item .ic_Header{background-position:0 -1450px;}
 .toolbar .ic_Filters{background-position:0 -1475px;width:auto;height:auto;padding-left:22px;}
-.toolbar .ao-disabled-item .ic_Filters{background-position:0 -1500px;}
+.toolbar .disabled-item .ic_Filters{background-position:0 -1500px;}
 .toolbar .ic_Function{background-position:0 -1525px;width:auto;height:auto;padding-left:22px;}
-.toolbar .ao-disabled-item .ic_Function{background-position:0 -1550px;}
+.toolbar .disabled-item .ic_Function{background-position:0 -1550px;}
 .toolbar .ic_MAVG{background-position:0 -1575px;width:auto;height:auto;padding-left:46px;}
-.toolbar .ao-disabled-item .ic_MAVG{background-position:0 -1600px;}
+.toolbar .disabled-item .ic_MAVG{background-position:0 -1600px;}
 .toolbar .ic_AVG{background-position:0 -1625px;width:auto;height:auto;padding-left:46px;}
-.toolbar .ao-disabled-item .ic_AVG{background-position:0 -1650px;}
+.toolbar .disabled-item .ic_AVG{background-position:0 -1650px;}
 .toolbar .ic_SUM{background-position:0 -1675px;width:auto;height:auto;padding-left:46px;}
-.toolbar .ao-disabled-item .ic_SUM{background-position:0 -1700px;}
+.toolbar .disabled-item .ic_SUM{background-position:0 -1700px;}
 .toolbar .ic_Totals{background-position:0 -1725px;width:auto;height:auto;padding-left:22px;}
-.toolbar .ao-disabled-item .ic_Totals{background-position:0 -1750px;}
+.toolbar .disabled-item .ic_Totals{background-position:0 -1750px;}
 .toolbar .ic_Aliases{background-position:0 -1775px;width:auto;height:auto;padding-left:22px;}
-.toolbar .ao-disabled-item .ic_Aliases{background-position:0 -1800px;}
+.toolbar .disabled-item .ic_Aliases{background-position:0 -1800px;}
 .toolbar .ic_RemoveItem{width:8px;height:16px;overflow:hidden;background:url(../../images/dashboardManager/ic_Tabs.gif) no-repeat 0 -3px;}
 .toolbar .ic_RemoveItem:hover{background-position:0 -28px;}
 .toolbar .ic_Skype{background-position:0 -2025px;}

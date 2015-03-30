@@ -2,15 +2,15 @@
 
 <div id="{{table_prefix}}_massive" class="massive">
     {% if 'workspace.can_delete_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}
-    <button class="mass_delete genericButton actionButton workspaceIcon deleteIcon"><span class="mass_delete">{% trans "APP-DELETE-TEXT" %}</span></button> 
+    <button class="mass_delete button small"><span class="mass_delete">{% trans "APP-DELETE-TEXT" %}</span></button> 
     {% endif %}
     {% if 'workspace.can_submit_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}                
-    <button class="mass_submit genericButton actionButton workspaceIcon sendToReviewIcon"><span class="mass_submit">{% trans "APP-ACTIONS-SUBMIT" %}</span></button>
+    <button class="mass_submit button small"><span class="mass_submit">{% trans "APP-ACTIONS-SUBMIT" %}</span></button>
     {% endif %}
     {% if 'workspace.can_publish_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}                
-    <button class="mass_publish genericButton actionButton workspaceIcon publishIcon"><span class="mass_publish">{% trans "APP-PUBLISH-TEXT" %}</span></button>
+    <button class="mass_publish button small"><span class="mass_publish">{% trans "APP-PUBLISH-TEXT" %}</span></button>
     {% endif %}
     {% if 'workspace.can_unpublish_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}                
-    <button class="mass_unpublish genericButton actionButton workspaceIcon unpublishIcon"><span class="mass_unpublish">{% trans "APP-ACTIONS-UNPUBLISH" %}</span></button>
+    <button class="mass_unpublish button small"><span class="mass_unpublish">{% trans "APP-ACTIONS-UNPUBLISH" %}</span></button>
     {% endif %}
 </div>

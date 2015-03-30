@@ -80,11 +80,12 @@ class DatasetDBDAO():
     def update(self, dataset_revision, changed_fields, **fields):
         builder = DatasetImplBuilderWrapper(changed_fields=changed_fields, **fields).builder
 
-        if builder.has_changed(changed_fields):
-            # Build impl_details if necessary
-            fields['impl_details'] = builder.build()
+        # TODO: Fix that
+        #if builder.has_changed(changed_fields):
+        #    # Build impl_details if necessary
+        fields['impl_details'] = builder.build()
 
-            changed_fields.append('impl_details')
+        changed_fields.append('impl_details')
 
         dataset_revision.update(changed_fields, **fields)
 

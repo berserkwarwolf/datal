@@ -48,7 +48,7 @@
 	.ao-popup-overlay .addPopup{padding-bottom:0;width:608px;border-top:0;}
 	.ao-popup-overlay .addPopup .Txt{padding:15px 20px 0;}
 	.ao-popup-overlay .addPopup .Txt p{color:#898888;}
-	.ao-popup-overlay .addPopup .genericButton{margin-bottom:10px;margin-left:10px;margin-right:10px;}
+	.ao-popup-overlay .addPopup .button{margin-bottom:10px;margin-left:10px;margin-right:10px;}
 
 		/*PARAMETER CONTAINER*/
 		.ao-popup-overlay .addPopup .parameterContainer{margin:20px 20px 0;padding-bottom:8px;background:url(../../images/dashboardManager/sb_stepByStep.gif) no-repeat center bottom;}
@@ -62,8 +62,8 @@
 		.addPopup .dashboardMultipleList{width:568px;margin:0 auto;}
 		.addPopup .dashboardMultipleList select{width:568px;font-size:12px;}
 		.addPopup .listDashboards .center{margin-top:0;margin-bottom:10px;}
-		.addPopup .listDashboards .relativeContainer p.tip{position:absolute;top:0;left:28px;}
-		.addPopup .listDashboards .moreButton{position:relative;top:-3px;left:10px;}
+		.addPopup .listDashboards .relative p.tip{position:absolute;top:0;left:28px;}
+		.addPopup .listDashboards .button{position:relative;top:-3px;left:10px;}
 
 		/*NEW DASHBOARD*/
 		.addPopup .newDashboardBox .backLink{position:absolute;bottom:40px;left:190px;background-position:0 -14px;}
@@ -130,7 +130,7 @@
 	.shareSettingsContainer .emailRow .field{float:left;width:319px;}
 	.shareSettingsContainer .emailRow .field.es{width:296px;}
 	.shareSettingsContainer .emailRow .field.textShadow{color:#A0A0A0;font-style:italic;}
-	.shareSettingsContainer .emailRow .genericButton{float:right;margin-top:3px;}
+	.shareSettingsContainer .emailRow .button{float:right;margin-top:3px;}
 
 	.shareSettingsContainer .workGroupRow .checkbox{position:relative;top:4px;}
 	.shareSettingsContainer .workGroupRow label{padding:5px 8px 0 4px;}

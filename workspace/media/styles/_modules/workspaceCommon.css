@@ -34,7 +34,7 @@ body > .layout{height:auto;min-height:100%;}
         .sidebar .accountLogo{padding-bottom:14px;max-height:300px;overflow:hidden;}
         .sidebar .accountLogo img{width:136px;border:1px solid #fff;}
         .sidebar .buttons{padding-bottom:12px;}
-        .sidebar .buttons .genericButton{width:100%;padding:0;}
+        .sidebar .buttons .button{width:100%;padding:0;}
 
         /*FILTERS*/
         .sidebar .filters dd,

@@ -341,11 +341,14 @@ class DatasetFormFactory:
         self.collect_type = collect_type
 
     def create(self, request=None, *args, **kwargs):
-
-        forms = {'webservice': WebserviceForm, 'file': FileForm}
-
-        form = forms.get(self.collect_type, DatasetForm)
-
+        if int(self.collect_type) == choices.CollectTypeChoices().WEBSERVICE:
+            form = WebserviceForm
+        elif int(self.collect_type) == choices.CollectTypeChoices().SELF_PUBLISH:
+            form = FileForm
+        elif int(self.collect_type) == choices.CollectTypeChoices().URL:
+            form = DatasetForm
+        else:
+            form = DatasetForm
         return request is None and form(*args, **kwargs) or form(request.POST, request.FILES, *args, **kwargs)
 
 
