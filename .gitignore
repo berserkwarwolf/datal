@@ -67,8 +67,7 @@ coverage.xml
 docs/_build/
 .vagrant/
 
-# Ignore sql dumps 
-salt/roots/salt/sql/*
-
-# Ignore downloaded Wars
-salt/roots/salt/war/*
+# Ignore extra fixtures
+core/fixtures/account.json
+core/fixtures/grant.json
+core/fixtures/user.json
