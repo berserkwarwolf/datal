@@ -3,10 +3,10 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models import Count
 from django.http import HttpResponse
 from django.utils.translation import ugettext_lazy
-from junar.core.auth.decorators import login_required
-from junar.core.cache import Cache
-from junar.core.helpers import Day
-from junar.core.models import *
+from core.auth.decorators import login_required
+from core.cache import Cache
+from core.helpers import Day
+from core.models import *
 from datetime import date, timedelta, datetime
 import json
 

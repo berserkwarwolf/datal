@@ -36,14 +36,14 @@ urlpatterns = patterns('',
 
 	# TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
 	
-	(r'^accounts/', include('junar.workspace.accounts.urls')),
-	(r'^tag_manager/', include('junar.workspace.tag_manager.urls')),
-	(r'^source_manager/', include('junar.workspace.source_manager.urls')),
-	(r'^viewLandingPage/', include('junar.workspace.viewLandingPage.urls')),
-	(r'^admin/', include('junar.workspace.admin_manager.urls')),
-	(r'^reports/', include('junar.workspace.reports_manager.urls')),
-	(r'^auth/', include('junar.core.auth.urls')),
-	(r'^personalizeHome/', include('junar.workspace.personalizeHome.urls')),
+	(r'^accounts/', include('workspace.accounts.urls')),
+	(r'^tag_manager/', include('workspace.tag_manager.urls')),
+	(r'^source_manager/', include('workspace.source_manager.urls')),
+	(r'^viewLandingPage/', include('workspace.viewLandingPage.urls')),
+	(r'^admin/', include('workspace.admin_manager.urls')),
+	(r'^reports/', include('workspace.reports_manager.urls')),
+	(r'^auth/', include('core.auth.urls')),
+	(r'^personalizeHome/', include('workspace.personalizeHome.urls')),
 
 	(r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
 	(r'^js_workspace/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'workspace', 'js')}),
