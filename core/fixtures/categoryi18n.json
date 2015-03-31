@@ -1,0 +1,26 @@
+[
+  {
+    "pk": 3,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 3,
+      "description": "Educacion",
+      "language": "en",
+      "created_at": "2015-03-31T13:01:20",
+      "slug": "educacion",
+      "name": "Educacion"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 4,
+      "description": "Salud",
+      "language": "en",
+      "created_at": "2015-03-31T13:03:20",
+      "slug": "salud",
+      "name": "Salud"
+    }
+  }
+]
