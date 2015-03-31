@@ -11,6 +11,9 @@ application:
 
     pagination_results_per_page: 10
 
+    domains:
+      engine: 'http://workspace'
+
 virtualenv:
   path: /home/vagrant/env
   requirements: /home/vagrant/app/requirements.txt

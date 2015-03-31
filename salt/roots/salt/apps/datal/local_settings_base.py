@@ -25,7 +25,7 @@ DOMAINS = {'api': 'api',
            'microsites': 'microsite',
            'workspace': 'workspace',
            'website': 'website',
-           'engine': '',
+           'engine': '{{  pillar["application"]["settings"]["domains"]["engine"] }}',
            'cdn': '{{  pillar["application"]["cdn"] }}',
 }
 
