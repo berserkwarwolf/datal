@@ -3,3 +3,5 @@ local_hosts:
     - ip: 127.0.0.1
     - names:
       - workspace
+      - microsites
+      - microsite
