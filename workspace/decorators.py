@@ -129,7 +129,7 @@ def requires_any_dataset():
         @wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
             dao = DatasetDBDAO()
-            query, total_resources = dao.query(account_id=request.account.id)
+            query, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
             if total_resources == 0 or request.GET.get('test-no-datasets', False) == '1':
                 raise AnyDatasetRequiredException()
             return view_func(request, *args, **kwargs)
