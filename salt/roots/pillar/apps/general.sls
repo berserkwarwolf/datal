@@ -14,5 +14,9 @@ amazon:
   S3:
     bucket: ''
     temporary_bucket: ''
+    cdn_bucket: ''
     accesskey: ''
     secretkey: ''
+
+queues:
+  request_queue: ''
