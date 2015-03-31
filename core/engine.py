@@ -119,10 +119,15 @@ def _request(query, url, method = 'GET'):
 
         params = urllib.urlencode(query)
 
-        if method == 'GET':
-            response = urllib.urlopen(url + '?' + params)
-        elif method == 'POST':
-            response = urllib.urlopen(url, params)
+        try:
+            if method == 'GET':
+                response = urllib.urlopen(url + '?' + params)
+            elif method == 'POST':
+                response = urllib.urlopen(url, params)
+        except Exception, e:
+            logger = logging.getLogger(__name__)
+            logger.error('Error trying to access to %s | %s (%s) ' %(url, str(params), str(e)))
+            raise
 
         if response:
             if response.getcode() == 200:
