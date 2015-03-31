@@ -1,6 +1,7 @@
 base:
   '*':
     - core.users
+    - core.system
     - core.python
     - core.mysql
     - core.redis
