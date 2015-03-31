@@ -241,18 +241,18 @@ LOGGING = {
         'django': {
             'handlers':['file'],
             'propagate': True,
-            'level':'INFO',
+            'level': 'INFO',
         },
         'django.request': {
-            'handlers':['file'],
-            'propagate': False,
-            'level':'INFO',
-        },
-        'junar': {
             'handlers': ['file'],
-            # 'propagate': False,
-            'level': 'INFO'
+            'propagate': False,
+            'level': 'INFO',
         },
+        'workspace': {'handlers': ['file'], 'level': 'INFO'},
+        'api': {'handlers': ['file'], 'level': 'INFO'},
+        'admin': {'handlers': ['file'], 'level': 'INFO'},
+        'core': {'handlers': ['file'], 'level': 'INFO'},
+
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['file'],

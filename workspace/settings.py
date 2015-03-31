@@ -43,8 +43,8 @@ BASE_URI = 'workspace'
 MEDIA_URI = BASE_URI
 
 DEFAULT_CATEGORIES = {
-  'en': [u'Education', u'Entertainment', u'World', u'Business', u'Economy', u'Technology', u'Culture', u'Health', u'Sports', u'Weather', u'Earth', u'Science'],
-  'es': [u'Educación', u'Entretenimiento', u'Mundo', u'Negocios', u'Economía', u'Tecnología', u'Cultura', u'Salud', u'Deportes', u'Clima', u'Planeta', u'Ciencia'],
+    'en': [u'Education', u'Entertainment', u'World', u'Business', u'Economy', u'Technology', u'Culture', u'Health', u'Sports', u'Weather', u'Earth', u'Science'],
+    'es': [u'Educación', u'Entretenimiento', u'Mundo', u'Negocios', u'Economía', u'Tecnología', u'Cultura', u'Salud', u'Deportes', u'Clima', u'Planeta', u'Ciencia'],
 }
 
 SESSION_COOKIE_SECURE = False

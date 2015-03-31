@@ -29,6 +29,7 @@ class JunarException(Exception):
     def convert_json(self):
         return json.dumps(self.info)
 
+
 class Http400(JunarException):
     """ Bad Request Exception """
 

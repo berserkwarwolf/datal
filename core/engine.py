@@ -126,7 +126,7 @@ def _request(query, url, method = 'GET'):
                 response = urllib.urlopen(url, params)
         except Exception, e:
             logger = logging.getLogger(__name__)
-            logger.error('Error trying to access to %s | %s (%s) ' %(url, str(params), str(e)))
+            logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
             raise
 
         if response:
@@ -135,7 +135,7 @@ def _request(query, url, method = 'GET'):
                 mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
                 return ret, mimetype
 
-        raise IOError('Error code %d' % response.getcode())
+        raise IOError('Error code %d at %s+%s' % (response.getcode(), url, str(params)))
     finally:
         if response:
             response.close()

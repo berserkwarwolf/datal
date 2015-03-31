@@ -12,8 +12,7 @@ class DefaultWorkspaceError(Template):
         super(DefaultWorkspaceError, self).__init__(tmpl)
 
     def render(self, title, description, request, extras={}):
-        context = {"error_title": title,"error_description": description,"extras": extras}
-        context['auth_manager'] = request.auth_manager
+        context = {"error_title": title, "error_description": description, "extras": extras, "auth_manager": request.auth_manager}
         ctx = Context(context)
         return super(DefaultWorkspaceError, self).render(ctx)
 

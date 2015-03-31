@@ -123,6 +123,7 @@ class IlegalteStateException(LifeCycleException):
         self.info[EXTRAS_KEY] = {"allowed_states": allowed_states}
         super(IlegalteStateException, self).__init__(description)
 
+
 class ParentNotPublishedException(IlegalteStateException):
 
     def __init__(self, description='Parent resource must be published'):
@@ -133,6 +134,7 @@ class ParentNotPublishedException(IlegalteStateException):
         super(IlegalteStateException, self).__init__(description)
 
 # -----------------------------------------------------------------------------
+
 
 class SecurityException(JunarWorkspaceException):
 

@@ -14,5 +14,5 @@ urlpatterns = patterns('',
         url(r'^related_resources$', related_resources, name='manageDatasets.related_resources'),
         url(r'^review/(?P<dataset_revision_id>\d+)/$', review, name='manageDatasets.review'),
         url(r'^action_load$', action_load, name='manageDatasets.action_load'),
-        
-       )
+        )
+
