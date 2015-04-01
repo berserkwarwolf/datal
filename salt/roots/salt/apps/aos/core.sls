@@ -1,4 +1,4 @@
-download_war:
+extract_war:
   archive.extracted:
     - names:
       - /var/lib/tomcat7/webapps/microsites/AgileOfficeServer/
@@ -8,6 +8,16 @@ download_war:
     - user: tomcat7
     - group: tomcat7
     - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer
+
+extract_services_war:
+  archive.extracted:
+    - names:
+      - /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices/
+    - source: salt://apps/aos/war/AgileOfficeScraperServices.war
+    - archive_format: zip
+    - user: tomcat7
+    - group: tomcat7
+    - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices
 
 microsites_config:
   file.managed:
