@@ -1,26 +1,12 @@
 # -*- coding: utf-8 -*-
-import json
-from core.choices import StatusChoices
+from core.exceptions import *
 
-ERROR_KEY = 'error'
-DESCRIPTION_KEY = 'message'
-EXTRAS_KEY = 'extras'
 
-class JunarWorkspaceException(Exception):
+class DatalWorkspaceException(DatalException):
     """Junar Workspace Exception class: Base class for handling exceptions."""
     info = {}
     def __init__(self, info):
-        self.info = info
-        if self.info.get(ERROR_KEY, False) == False:
-            self.info[ERROR_KEY] = 'Workspace Error'
-
-        if self.info.get(DESCRIPTION_KEY, False) == False:
-            self.info[DESCRIPTION_KEY] = ""
-
-        if self.info.get(EXTRAS_KEY, False) == False:
-            self.info[EXTRAS_KEY] = {}
-
-        super(JunarWorkspaceException, self).__init__(self.info[DESCRIPTION_KEY])
+        super(DatalWorkspaceException, self).__init__(self.info[DESCRIPTION_KEY])
 
     def __str__(self):
         return str(self.info)
@@ -32,7 +18,7 @@ class JunarWorkspaceException(Exception):
 # -----------------------------------------------------------------------------
 
 
-class BadRequestException(JunarWorkspaceException):
+class BadRequestException(DatalWorkspaceException):
 
     def __init__(self, description=''):
         self.info[ERROR_KEY] = 'Bad Request. ' + self.info.get(ERROR_KEY, "")
@@ -50,7 +36,7 @@ class InvalidFormException(BadRequestException):
 
 # -----------------------------------------------------------------------------
 
-class ApplicationException(JunarWorkspaceException):
+class ApplicationException(DatalWorkspaceException):
 
     def __init__(self, description=""):
         self.info[ERROR_KEY] = 'Application error. ' + self.info.get(ERROR_KEY, "")
@@ -136,7 +122,7 @@ class ParentNotPublishedException(IlegalteStateException):
 # -----------------------------------------------------------------------------
 
 
-class SecurityException(JunarWorkspaceException):
+class SecurityException(DatalWorkspaceException):
 
     def __init__(self, description=""):
         self.info[ERROR_KEY] = 'Security error. ' + self.info.get(ERROR_KEY, "")

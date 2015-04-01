@@ -3,7 +3,8 @@
 Templates for errors
 """
 
-from django.template import Context, Template
+from core.templates import *
+
 
 class DefaultWorkspaceError(Template):
 
@@ -15,6 +16,7 @@ class DefaultWorkspaceError(Template):
         context = {"error_title": title, "error_description": description, "extras": extras, "auth_manager": request.auth_manager}
         ctx = Context(context)
         return super(DefaultWorkspaceError, self).render(ctx)
+
 
 class DefaultDataViewEdit(Template):
 

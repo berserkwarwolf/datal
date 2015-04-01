@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
-from django.conf import settings
 from django.http import HttpResponse
+from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
+from workspace.templates import DefaultWorkspaceError
 import logging
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
@@ -19,32 +20,52 @@ class ExceptionManager(object):
         elif 'HTTP_CONTENT_TYPE' in request.META:
             content_type = request.META['HTTP_CONTENT_TYPE']
 
-        # HTML for all and JSON for JSON requests
-        template_error_extension = 'html' if content_type != 'application/json' else 'json'
+        # detect response format
+        if content_type.lower().startswith('application/json'):
+            template_error_extension = 'json'
+            mimetype = 'application/json'
+        elif content_type.lower().startswith('multipart/form-data') and request.method == 'POST':
+            template_error_extension = 'json'
+            mimetype = 'application/json'
+        else:  # HTML for all and JSON for JSON requests
+            template_error_extension = 'html'
+            mimetype = "text/html"
 
-        from workspace.templates import DefaultWorkspaceError
-
-        if hasattr(exception, 'info'): # detect if it's my type errors
+        # TODO Join the error classes
+        if hasattr(exception, 'info'):  # detect if it's my type errors
             error_title = exception.info[ERROR_KEY]
             error_description = exception.info[DESCRIPTION_KEY]
-
-            # template file must be called as the exception class
+            status_code = 400
             exception_name = type(exception).__name__
-            # (downcase the first letter)
-            exception_name = exception_name[:1].lower() + exception_name[1:]
-            template = "workspace_errors/%s.%s" % (exception_name, template_error_extension)
-            response = DefaultWorkspaceError(template=template).render(error_title, error_description
-                , request, exception.info[EXTRAS_KEY])
+            extras = exception.info[EXTRAS_KEY]
+        elif hasattr(exception, 'title'):  # detect if it's my type errors
+            error_title = exception.title
+            error_description = exception.description
+            status_code = exception.status_code
+            exception_name = type(exception).__name__
+            extras = exception.extras
         else:
-            if settings.DEBUG:
-                raise
-            else:
-                error_title = str(exception)
-                error_description = repr(exception)
+            status_code = 400
+            error_title = str(exception)
+            error_description = repr(exception)
+            exception_name = 'workspace_error'
+            extras = {}
 
-                # default error
-                response = DefaultWorkspaceError().render( "Unexpected Workspace error", "Error. %s (%s)" % (repr(exception), str(exception)))
+        # (downcase the first letter)
+        exception_name = exception_name[:1].lower() + exception_name[1:]
+        template1 = "workspace_errors/%s.%s" % (exception_name, template_error_extension)
+        template2 = "core_errors/%s.%s" % (exception_name, template_error_extension)
+        template3 = "core_errors/core_error.%s" % (template_error_extension)
 
-        logger.error('%s. %s' % ("[EM] " + error_title, error_description))
-        return HttpResponse(response, mimetype="text/html")
+        templates = [template1, template2, template3]
+        for t in templates:
+            try:
+                tpl = DefaultWorkspaceError(template=t)
+            except TemplateDoesNotExist:
+                pass
+
+        response = tpl.render(title=error_title, description=error_description, request=request, extras=extras)
+
+        logger.error('%s. %s' % ("[CatchError] " + error_title, error_description))
+        return HttpResponse(response, mimetype=mimetype, status=status_code)
 

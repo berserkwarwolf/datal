@@ -1,8 +1,3 @@
-'''
-Created on 13/02/2014
-
-@author: junar
-'''
 from django.template import Context, Template
 import json
 import datetime
@@ -60,7 +55,7 @@ class DataStreamOutputBigDataTemplate(Template):
 
         try:
             res = super(DataStreamOutputBigDataTemplate, self).render(Context({"rows": rows, "owner": owner, "publisher": publisher, "author" : author}))
-        except Exception,e:
+        except Exception, e:
             self.render_errors = str(e)
             res = False
 
@@ -73,3 +68,15 @@ class MintTemplateResponse(Template):
 
     def render(self, rdf, template, errors, result, fail_type):
         return super(MintTemplateResponse, self).render(Context({"rdf": rdf, "template": template, "errors": errors, "result": result, "fail_type": fail_type}))
+
+
+class DefaultCoreError(Template):
+
+    def __init__(self, template="core_errors/core_error.html"):
+        tmpl = "{%% include '%s' %%}" % template
+        super(DefaultCoreError, self).__init__(tmpl)
+
+    def render(self, title, description, request, extras={}):
+        context = {"error_title": title, "error_description": description, "extras": extras, "auth_manager": request.auth_manager}
+        ctx = Context(context)
+        return super(DefaultCoreError, self).render(ctx)
