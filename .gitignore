@@ -1,3 +1,4 @@
+/salt/roots/pillar/local.sls
 *.log
 *.pot
 *.pyc
