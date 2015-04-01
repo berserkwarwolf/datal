@@ -1,11 +1,10 @@
-import json
-import logging
-
 from django.http import HttpResponse
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
+from django.http import Http404, HttpResponse
+from core.helpers import get_mimetype
 
 from api.http import JSONHttpResponse
 from core.shortcuts import render_to_response
@@ -17,6 +16,7 @@ from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from workspace.daos.datasets import DatasetDBDAO
 from core import engine
+
 
 logger = logging.getLogger(__name__)
 
@@ -333,4 +333,21 @@ def action_load(request):
         """
         return HttpResponse(response, mimetype=mimetype)
     else:
-        raise Http400(form.get_error_description())
+        raise Http404(form.get_error_description())
+
+@login_required
+@require_privilege("workspace.can_create_datastream")
+@require_http_methods(["GET"])
+def check_source_url(request):
+
+    mimetype_form = MimeTypeForm(request.GET)
+    status = ''
+
+    if mimetype_form.is_valid():
+        url = mimetype_form.cleaned_data['url']
+        mimetype, status, url = get_mimetype(url)
+        sources = {"mimetype" : mimetype, "status" : status, "url" : url }
+
+        return HttpResponse(json.dumps(sources), content_type='application/json')
+    else:
+        raise Http404

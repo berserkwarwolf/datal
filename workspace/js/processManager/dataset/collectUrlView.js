@@ -59,7 +59,7 @@ var CollectUrlView = StepView.extend({
 		if(this.model.isValid(true)){
 
 			var self = this,
-				ajaxUrl  = '/streams/check_source_url',
+				ajaxUrl  = '/datasets/check_source_url',
 				ajaxData = "url="+ encodeURI(this.model.get('end_point'));
 
 			$.when(

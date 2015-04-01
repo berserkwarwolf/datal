@@ -48,6 +48,13 @@ fixtures:
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  core/fixtures/* --settings=core.settings
 
+language:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
+
 /tmp/junar.log:
   file.managed:
     - user: {{ pillar['system']['user'] }}

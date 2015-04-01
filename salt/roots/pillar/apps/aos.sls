@@ -6,7 +6,7 @@ jaxer:
   endpoint: ''
 
 scrapper:
-  proxy_scrapers_domain: ''
+  proxy_scrapers_domain: 'http://microsite'
 
 crawler:
   media: http://workspace/media_core/styles/components
