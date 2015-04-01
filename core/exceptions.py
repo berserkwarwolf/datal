@@ -1,11 +1,6 @@
 import json
 from core.choices import StatusChoices
 
-ERROR_KEY = 'error'
-DESCRIPTION_KEY = 'message'
-EXTRAS_KEY = 'extras'
-
-
 class DatalException(Exception):
     """Datal Exception class: Base class for handling exceptions."""
     title = 'Datal Error'
@@ -22,19 +17,19 @@ class DatalException(Exception):
     def __str__(self):
         return '%s: %s' % (self.title, self.description)
 
+    def as_dict(self):
+        return {"error": self.title, "message": self.description, "extras": self.extras, "status_code": self.status_code}
+
+    def convert_json(self):
+        return json.dumps(self.as_dict())
+
 
 class ApplicationException(DatalException):
     title = 'Application error'
 
-    def __init__(self, description=""):
-        super(ApplicationException, self).__init__(description=description)
-
 
 class LifeCycleException(ApplicationException):
     title = 'Life cycle error'
-
-    def __init__(self, description=""):
-        super(LifeCycleException, self).__init__(description=description)
 
 
 class DatasetNotFoundException(LifeCycleException):
@@ -59,28 +54,28 @@ class ParentNotPublishedException(LifeCycleException):
         super(ParentNotPublishedException, self).__init__(description)
 
 class S3CreateException(DatalException):
-    title='S3 Create error'
+    title = 'S3 Create error'
 
     def __init__(self, description):
         super(S3CreateException, self).__init__(description=description, status_code=503)
 
 
 class S3UpdateException(DatalException):
-    title='S3 Update error'
+    title = 'S3 Update error'
 
     def __init__(self, description):
         super(S3UpdateException, self).__init__(description=description, status_code=503)
 
 
 class SFTPCreateException(DatalException):
-    title='SFTP Create error'
+    title = 'SFTP Create error'
 
     def __init__(self, description):
         super(SFTPCreateException, self).__init__(description=description, status_code=503)
 
 
 class SFTPUpdateException(DatalException):
-    title='SFTP Update error'
+    title = 'SFTP Update error'
 
     def __init__(self, description):
         super(SFTPUpdateException, self).__init__(description=description, status_code=503)
