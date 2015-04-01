@@ -10,7 +10,7 @@ from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
-from workspace.exceptions import DatasetNotFoundException, IlegalteStateException
+from core.exceptions import DatasetNotFoundException, IlegalStateException
 from workspace.daos.datasets import *
 
 
@@ -62,7 +62,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         status = fields.get('status', StatusChoices.DRAFT)
 
         if int(status) not in allowed_states:
-            raise IlegalteStateException(allowed_states)
+            raise IlegalStateException(allowed_states)
 
         language = fields.get('language', language)
 
@@ -93,12 +93,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Publica una revision de dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         status = StatusChoices.PUBLISHED
         try:
             self._publish_childs()
-        except IlegalteStateException:
+        except IlegalStateException:
             # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
             status = StatusChoices.APPROVED
 
@@ -126,7 +126,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica la revision de un dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if killemall:
             self._unpublish_all()
@@ -161,7 +161,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision un dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         self._send_childs_to_review()
 
@@ -181,7 +181,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ accept a dataset revision """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         self.dataset_revision.status = StatusChoices.APPROVED
         self.dataset_revision.save()
@@ -190,7 +190,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ reject a dataset revision """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision )
+            raise IlegalStateException(allowed_states, self.dataset_revision )
 
         self.dataset_revision.status = StatusChoices.DRAFT
         self.dataset_revision.save()
@@ -199,7 +199,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if self.dataset_revision.status == StatusChoices.PUBLISHED:
             search_dao = DatasetSearchDAOFactory().create()
@@ -228,7 +228,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         old_status = self.dataset_revision.status
         if old_status  not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:

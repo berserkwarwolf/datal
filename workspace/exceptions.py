@@ -15,9 +15,6 @@ class DatalWorkspaceException(DatalException):
         return json.dumps(self.info)
 
 
-# -----------------------------------------------------------------------------
-
-
 class BadRequestException(DatalWorkspaceException):
 
     def __init__(self, description=''):
@@ -32,32 +29,6 @@ class InvalidFormException(BadRequestException):
         self.info[DESCRIPTION_KEY] = description
         self.info[EXTRAS_KEY] = {"form": form}
         super(InvalidFormException, self).__init__(description)
-
-
-# -----------------------------------------------------------------------------
-
-class ApplicationException(DatalWorkspaceException):
-
-    def __init__(self, description=""):
-        self.info[ERROR_KEY] = 'Application error. ' + self.info.get(ERROR_KEY, "")
-        self.info[DESCRIPTION_KEY] = description
-        super(ApplicationException, self).__init__(self.info)
-
-class LifeCycleException(ApplicationException):
-
-    def __init__(self, description=""):
-        self.info[ERROR_KEY] = 'Life cycle error. ' + self.info.get(ERROR_KEY, "")
-        self.info[DESCRIPTION_KEY] = description
-        super(LifeCycleException, self).__init__(description)
-
-
-class DatasetNotFoundException(LifeCycleException):
-
-    def __init__(self, description=''):
-        self.info = {}
-        self.info[ERROR_KEY] = 'Dataset not found'
-        self.info[DESCRIPTION_KEY] = description
-        super(DatasetRequiredException, self).__init__(description)
 
 
 class DatasetRequiredException(LifeCycleException):
@@ -99,27 +70,6 @@ class VisualizationRequiredException(LifeCycleException):
         self.info[ERROR_KEY] = 'Visualization required'
         self.info[DESCRIPTION_KEY] = description
         super(VisualizationRequiredException, self).__init__(description)
-
-class IlegalteStateException(LifeCycleException):
-
-    def __init__(self, allowed_states, description=''):
-        self.info = {}
-        self.info[ERROR_KEY] = 'Ilegal state'
-        self.info[DESCRIPTION_KEY] = description
-        self.info[EXTRAS_KEY] = {"allowed_states": allowed_states}
-        super(IlegalteStateException, self).__init__(description)
-
-
-class ParentNotPublishedException(IlegalteStateException):
-
-    def __init__(self, description='Parent resource must be published'):
-        self.info = {}
-        self.info[ERROR_KEY] = 'Ilegal state'
-        self.info[DESCRIPTION_KEY] = description
-        self.info[EXTRAS_KEY] = {"allowed_states": [StatusChoices.PUBLISHED]}
-        super(IlegalteStateException, self).__init__(description)
-
-# -----------------------------------------------------------------------------
 
 
 class SecurityException(DatalWorkspaceException):
