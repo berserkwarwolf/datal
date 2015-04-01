@@ -18,7 +18,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 3018, host: 8018 # API
   config.vm.network "forwarded_port", guest: 3017, host: 8017 # Microsite
   config.vm.network "forwarded_port", guest: 3015, host: 8015 # Workspace Application
-  config.vm.network :forwarded_port, guest: 3306, host: 8306 # MySQL
+  config.vm.network "forwarded_port", guest: 3306, host: 8306 # MySQL
+  config.vm.network "forwarded_port", guest: 8080, host: 8081 # Tomcat
 
   # Share an additional folder to the guest VM. The first argument is
   # the path on the host to the actual folder. The second argument is
