@@ -3,13 +3,11 @@ download_war:
     - names:
       - /var/lib/tomcat7/webapps/microsites/AgileOfficeServer/
       - /var/lib/tomcat7/webapps/workspace/AgileOfficeServer/
-    - source: http://www.googledrive.com/host/0B9saNutQ5ZYhflp1aUpfQW5JeVZINnk2LXc4TWJrMF9sSWtXc2RRdU8za3hHYmtpV0dIVmM/Junar-engine-2015-02-07.war
+    - source: salt://apps/aos/war/AgileOfficeServer.war
     - archive_format: zip
-    - source_hash: md5=a6ca7cc5751ccdd65bb63e643df68b73
     - user: tomcat7
     - group: tomcat7
     - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer
-    - keep: True
 
 microsites_config:
   file.managed:
