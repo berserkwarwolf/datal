@@ -159,7 +159,7 @@ def create(request, collect_type='index'):
     elif request.method == 'POST':
         """update dataset """
         form = DatasetFormFactory(collect_type_id).create(request, account_id=account_id, language=language,
-                                                       status_choices=auth_manager.get_allowed_actions())
+                                                          status_choices=auth_manager.get_allowed_actions())
 
         if form.is_valid():
             lifecycle = DatasetLifeCycleManager(user=request.user)
@@ -168,7 +168,7 @@ def create(request, collect_type='index'):
 
             # TODO: Create a CreateDatasetResponse object
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-                    dataset_revision_id=dataset_revision.id)
+                        dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
             raise InvalidFormException(form.errors)
@@ -325,8 +325,7 @@ def action_load(request):
             query['pTableid'] = tableid
         response, mimetype = engine.load(query)
 
-        #detect error
-        """
+        """ detect error
         if response.find("It was not possible to dispatch the request"):
             import logging
             logger = logging.getLogger(__name__)

@@ -9,7 +9,7 @@ from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
-from workspace.exceptions import IlegalteStateException, DataStreamNotFoundException
+from workspace.exceptions import IlegalStateException, DataStreamNotFoundException
 from workspace.daos.datastreams import *
 
 logger = logging.getLogger(__name__)
@@ -56,7 +56,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         status = fields.get('status', StatusChoices.DRAFT)
 
         if int(status) not in allowed_states:
-            raise IlegalteStateException(allowed_states)
+            raise IlegalStateException(allowed_states)
 
         language = fields.get('language', self.user.language)
         category = Category.objects.get(pk=fields['category_id'])
@@ -76,12 +76,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Publica una revision de dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         status = StatusChoices.PUBLISHED
         try:
             self._publish_childs()
-        except IlegalteStateException:
+        except IlegalStateException:
             # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
             status = StatusChoices.APPROVED
 
@@ -109,7 +109,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica la revision de un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if killemall:
             self._unpublish_all()
@@ -148,7 +148,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         self._send_childs_to_review()
 
@@ -171,7 +171,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ accept a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         self.datastream_revision.status = StatusChoices.APPROVED
         self.datastream_revision.save()
@@ -180,7 +180,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ reject a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision )
+            raise IlegalStateException(allowed_states, self.datastream_revision )
 
         self.datastream_revision.status = StatusChoices.DRAFT
         self.datastream_revision.save()
@@ -189,7 +189,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if self.datastream_revision.status == StatusChoices.PUBLISHED:
             self.unindex_resource()
@@ -217,7 +217,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         old_status = self.datastream_revision.status
         if old_status  not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.datastream_revision)
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:

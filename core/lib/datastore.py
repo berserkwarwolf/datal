@@ -5,10 +5,11 @@ Si quiere agregar el suyo extienda la clase datastore e implemente los metodos a
 y asignelo a la variable active
 """
 from django.conf import settings
-
+from core.exceptions import *
 from abc import ABCMeta, abstractmethod
 from uuid import uuid4 as UUID
 import logging
+
 
 class Datastore:
     """ Clase abstracta de la cual todos los tipos de datastore deben heredar """

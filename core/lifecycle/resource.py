@@ -4,7 +4,7 @@ from abc import ABCMeta, abstractmethod
 
 from core.choices import StatusChoices
 from core.daos import ActivityStreamDAO
-from workspace.exceptions import IlegalteStateException
+from workspace.exceptions import IlegalStateException
 from core.lib.datastore import *
 
 
@@ -32,7 +32,7 @@ class AbstractLifeCycleManager():
         status = fields.get('status', StatusChoices.DRAFT)
         
         if status not in allowed_states:
-            raise IlegalteStateException(allowed_states)
+            raise IlegalStateException(allowed_states)
 
 
     @abstractmethod
@@ -41,7 +41,7 @@ class AbstractLifeCycleManager():
 
         if self.dataset_revision.status not in allowed_states:
             ## Trying to publish a published revision? Uhmmm, something is wrong.
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
     @abstractmethod
     def _publish_childs(self):
@@ -52,7 +52,7 @@ class AbstractLifeCycleManager():
         """ unpublish dataset revision"""
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
 
     @abstractmethod
@@ -64,7 +64,7 @@ class AbstractLifeCycleManager():
         """ send a dataset revision to review"""
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
     
     @abstractmethod
     def _send_childs_to_review(self):
@@ -74,21 +74,21 @@ class AbstractLifeCycleManager():
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
     @abstractmethod
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a resource revision """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision )
+            raise IlegalStateException(allowed_states, self.dataset_revision )
 
     @abstractmethod
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Remove a revision or the entire dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
     @abstractmethod
     def _remove_all(self):
@@ -100,7 +100,7 @@ class AbstractLifeCycleManager():
 
         old_status = self.dataset_revision.status
         if old_status  not in allowed_states:
-            raise IlegalteStateException(allowed_states, self.dataset_revision)
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
     @abstractmethod
     def _move_childs_to_draft(self):
