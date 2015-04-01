@@ -406,3 +406,7 @@ class LoadForm(forms.Form):
     page = forms.CharField(required=False)
     limit = forms.CharField(required=False)
     tableid = forms.CharField(required=False)
+
+
+class MimeTypeForm(forms.Form):
+    url = forms.CharField(required=True)

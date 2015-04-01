@@ -168,7 +168,7 @@ var CreateDatastreamURLManager = CreateDatastreamManager.extend({
         }
     },
     checkMimeType : function(){
-        var url  = '/streams/check_source_url';
+        var url  = '/datasets/check_source_url';
         var data = "url="+ $.URLEncode(this.attributes.data.url);
 
         $.ajax({ url: url,
