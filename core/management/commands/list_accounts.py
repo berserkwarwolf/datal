@@ -2,8 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from optparse import make_option
 
-from core.models import Account, User, Category, CategoryI18n, Threshold, Preference, Application, UserPassTickets, \
-    DashboardComment, DataStreamComment, Alert
+from core.models import Account
 
 
 class Command(BaseCommand):
