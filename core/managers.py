@@ -406,7 +406,7 @@ class DatasetRevisionManager(models.Manager):
     def get_last_revision(self, resource_id):
         revision_id = self.get_last_revision_id(resource_id)
         return super(DatasetRevisionManager, self).get(pk=revision_id)
-        
+
 class FinderManager:
 
     def __init__(self):
@@ -567,6 +567,7 @@ class IndexTankFinder(Finder):
         from indextank.client import ApiClient
         self.api_client = ApiClient(settings.SEARCHIFY['api_url'])
         self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
+
         Finder.__init__(self)
 
     def search(self, *args, **kwargs):
@@ -600,7 +601,7 @@ class IndexTankFinder(Finder):
             self._get_category_filters(category_filters, 'name', kwargs.get('category_name'))
 
         scoring = kwargs.get('scoring', 1)
-        
+
         #TODO define a search function in the right place
         results = self.index.search(query
                                     , start=start
@@ -793,7 +794,7 @@ class IndexTankFinder(Finder):
         title = p_doc['title']
         slug = slugify(title)
         permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
-        
+
         l_dataset = dict (dataset_id=dataset_id
                                 , title=title
                                 , description=p_doc['description']

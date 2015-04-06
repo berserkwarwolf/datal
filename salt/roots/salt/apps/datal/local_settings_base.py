@@ -17,12 +17,12 @@ DATABASES = {
 
 SEARCHIFY = {
     'api_url': '{{  pillar["searchers"]["searchify"]["api_url"] }}',
-    ' index': '{{  pillar["searchers"]["searchify"]["index"] }}'
+    'index': '{{  pillar["searchers"]["searchify"]["index"] }}'
 }
 
 DOMAINS = {'api': 'api',
            'community': 'community',
-           'microsites': 'microsites',
+           'microsites': 'microsites:8080',
            'workspace': 'workspace',
            'website': 'website',
            'engine': '{{  pillar["application"]["settings"]["domains"]["engine"] }}',

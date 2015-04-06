@@ -250,6 +250,7 @@ LOGGING = {
         },
         'workspace': {'handlers': ['file'], 'level': 'INFO'},
         'api': {'handlers': ['file'], 'level': 'INFO'},
+        'microsites': {'handlers': ['file'], 'level': 'INFO'},
         'admin': {'handlers': ['file'], 'level': 'INFO'},
         'core': {'handlers': ['file'], 'level': 'INFO'},
 

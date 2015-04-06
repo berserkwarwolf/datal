@@ -12,48 +12,48 @@ class DependencyInjector(object):
     """ Gets the current site & account """
 
     def process_request(self, request):
-        logger = logging.getLogger(__name__)
         domain = get_domain(request)
-        logger.error("process ms request for %s -- %s" % (domain, settings.DOMAINS['microsites']))
+        request.bucket_name = settings.AWS_BUCKET_NAME
 
-
-        if settings.DOMAINS['microsites'] != domain:
-
-            try:
-                # check for develop domains
-                logger.debug("Check domain")
+        try:
+            # check for develop domains
+            if settings.DOMAINS['microsites'] != domain:
                 account = Account.objects.get_by_domain(domain)
-                logger.debug("domain checked")
-                request.account = account
+            else:
+                # use default account if exists
+                account = Account.objects.get(pk=1)
+        except Account.DoesNotExist:
+            logger = logging.getLogger(__name__)
+            logger.error('The account do not exists: %s' % domain)
+            raise Http404
 
-                preferences = account.get_preferences()
-                preferences.load_all()
-                request.preferences = preferences
-                request.is_private_site = False
+        request.account = account
 
-                bucket_name = preferences['account_bucket_name']
-                if not bucket_name:
-                    bucket_name = settings.AWS_BUCKET_NAME
+        preferences = account.get_preferences()
+        preferences.load_all()
+        request.preferences = preferences
+        request.is_private_site = False
 
-                request.bucket_name = bucket_name
+        bucket_name = preferences['account_bucket_name']
+        if bucket_name:
+            request.bucket_name = bucket_name
 
-                is_signin = request.path.startswith(reverse('accounts.signin'))
-                is_login = request.path.startswith(reverse('accounts.login'))
-                is_activate = request.path.startswith(reverse('accounts.activate'))
-                is_jsi18n = request.path.startswith('/jsi18n')
+        is_signin = request.path.startswith(reverse('accounts.signin'))
+        is_login = request.path.startswith(reverse('accounts.login'))
+        is_activate = request.path.startswith(reverse('accounts.activate'))
+        is_jsi18n = request.path.startswith('/jsi18n')
 
-            except Account.DoesNotExist:
-                logger.error('The account do not exists: %s' % domain)
-                raise Http404
 
-            language = request.preferences['account_language']
-            if language:
-                request.session['django_language'] = language
-                request.auth_manager.language = language
-        else:
-            request.bucket_name = settings.AWS_BUCKET_NAME
 
+        language = request.preferences['account_language']
+        if language:
+            request.session['django_language'] = language
+            request.auth_manager.language = language
+
+
+
+        if settings.DOMAINS['microsites'] == domain:
             if request.META.get('REQUEST_URI') == '/':
-                return redirect(get_domain_with_protocol('microsites'))
+                return redirect(get_domain_with_protocol('microsites') + "/home")
 
         return None

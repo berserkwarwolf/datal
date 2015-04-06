@@ -15,10 +15,10 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    url(r'^$', 'microsites.views.home', name='microsites.home'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
-    url(r'^$', 'microsites.views.home', name='microsites.home'),
     url(r'^a/(\w+)$', 'microsites.views.custom_pages'),
     (r'^dashboards/', include('microsites.dashboard_manager.urls')),
 
