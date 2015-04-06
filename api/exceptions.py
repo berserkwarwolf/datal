@@ -84,7 +84,7 @@ class Http404(JunarException):
 
     def __init__(self, description='Resource not found'):
         self.info = dict()
-        self.info[ERROR_KEY] = 'Not found'
+        self.info[ERROR_KEY] = 'Not found error'
         self.info[DESCRIPTION_KEY] = description
         super(Http404, self).__init__(self.info)
 

@@ -14,7 +14,7 @@ class DependencyInjector(object):
     def process_request(self, request):
         logger = logging.getLogger(__name__)
         domain = get_domain(request)
-        logger.debug("process ms request for %s -- %s" % (domain, settings.DOMAINS['microsites']))
+        logger.error("process ms request for %s -- %s" % (domain, settings.DOMAINS['microsites']))
 
 
         if settings.DOMAINS['microsites'] != domain:
@@ -54,6 +54,6 @@ class DependencyInjector(object):
             request.bucket_name = settings.AWS_BUCKET_NAME
 
             if request.META.get('REQUEST_URI') == '/':
-                return redirect(get_domain_with_protocol('website'))
+                return redirect(get_domain_with_protocol('microsites'))
 
         return None

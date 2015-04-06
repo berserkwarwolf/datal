@@ -130,7 +130,7 @@ PRIVATE_ACCOUNT         = 'private'
 ACCOUNT_DOMAIN_PREFERENCE_NAME = 'account.domain'
 
 DOMAINS = { 'api': 'api',
-            'microsites': 'microsite',
+            'microsites': 'microsites',
             'workspace': 'workspace',
             'engine': '',
             'website': 'website',

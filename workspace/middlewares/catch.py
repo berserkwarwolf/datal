@@ -17,6 +17,8 @@ class ExceptionManager(object):
         content_type = None
         if 'CONTENT_TYPE' in request.META:
             content_type = request.META['CONTENT_TYPE']
+        elif 'HTTP_ACCEPT' in request.META:
+            content_type = request.META['HTTP_ACCEPT']
         elif 'HTTP_CONTENT_TYPE' in request.META:
             content_type = request.META['HTTP_CONTENT_TYPE']
 

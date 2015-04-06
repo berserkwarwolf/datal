@@ -55,7 +55,7 @@ language:
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
 
-/tmp/junar.log:
+/tmp/datal.log:
   file.managed:
     - user: {{ pillar['system']['user'] }}
     - group: {{ pillar['system']['group'] }}

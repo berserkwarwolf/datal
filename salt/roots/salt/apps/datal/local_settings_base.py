@@ -22,7 +22,7 @@ SEARCHIFY = {
 
 DOMAINS = {'api': 'api',
            'community': 'community',
-           'microsites': 'microsite',
+           'microsites': 'microsites',
            'workspace': 'workspace',
            'website': 'website',
            'engine': '{{  pillar["application"]["settings"]["domains"]["engine"] }}',
