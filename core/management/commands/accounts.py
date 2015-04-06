@@ -8,11 +8,11 @@ from core.models import *
 
 class Command(BaseCommand):
     option_list = BaseCommand.option_list + (
-        make_option('--dry-run',
+        make_option('--delete',
             action='store_true',
-            dest='dry_run',
+            dest='delete',
             default=False,
-            help='Perform a trial run with no changes made'),
+            help='Delete selected Accounts'),
 
         make_option('--just-ids',
             dest='just_ids',
@@ -37,6 +37,11 @@ class Command(BaseCommand):
             queryset = queryset.exclude(id__in=options['exclude_ids'].split(','))
 
         for account in queryset:
+            try:
+                self.stdout.write('Account ID {}: {}. Parent: {}'.format(account.id, account.name, account.parent))
+            except:
+                self.stdout.write('Account ID {}.'.format(account.id))
+
 
             # Remove users from account
             for user in User.objects.filter(account=account):
@@ -46,28 +51,28 @@ class Command(BaseCommand):
 
                     # Remove VisualizationHits
                     for visualizationhits in VisualizationHits.objects.filter(visualization=visualization):
-                        self.stdout.write('VisualizationHits ID {} removed.'.format(visualizationhits.id))
+                        self.stdout.write('\tVisualizationHits ID {}.'.format(visualizationhits.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             visualizationhits.delete()
 
                     # Remove ObjectGrant
                     for objectgrant in ObjectGrant.objects.filter(visualization=visualization):
-                        self.stdout.write('ObjectGrant ID {} removed.'.format(objectgrant.id))
+                        self.stdout.write('\tObjectGrant ID {}.'.format(objectgrant.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             objectgrant.delete()
 
                     # Remove Log
                     for log in Log.objects.filter(visualization=visualization):
-                        self.stdout.write('Log ID {} removed.'.format(log.id))
+                        self.stdout.write('\tLog ID {}.'.format(log.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             log.delete()
 
-                    self.stdout.write('Visualization ID {} removed.'.format(visualization.id))
+                    self.stdout.write('\tVisualization ID {}.'.format(visualization.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         visualization.delete()
 
 
@@ -76,53 +81,53 @@ class Command(BaseCommand):
 
                     # Remove VisualizationI18n
                     for visualizationi18n in VisualizationI18n.objects.filter(visualization_revision=visualizationrevision):
-                        self.stdout.write('VisualizationI18n ID {} removed.'.format(visualizationi18n.id))
+                        self.stdout.write('\tVisualizationI18n ID {}.'.format(visualizationi18n.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             visualizationi18n.delete()
 
                     # Remove TagVisualization
                     for tagvisualization in TagVisualization.objects.filter(visualizationrevision=visualizationrevision):
-                        self.stdout.write('TagVisualization ID {} removed.'.format(tagvisualization.id))
+                        self.stdout.write('\tTagVisualization ID {}.'.format(tagvisualization.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             tagvisualization.delete()
 
-                    self.stdout.write('VisualizationRevision ID {} removed.'.format(visualizationrevision.id))
+                    self.stdout.write('\tVisualizationRevision ID {}.'.format(visualizationrevision.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         visualizationrevision.delete()
 
                 # Remove UserPassTickets
                 for userpasstickets in UserPassTickets.objects.filter(user=user):
                     try:
-                        self.stdout.write('UserPassTickets {} removed.'.format(userpasstickets.type))
+                        self.stdout.write('\tUserPassTickets {}.'.format(userpasstickets.type))
                     except:
-                        self.stdout.write('UserPassTickets ID {} removed.'.format(userpasstickets.id))
+                        self.stdout.write('\tUserPassTickets ID {}.'.format(userpasstickets.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         userpasstickets.delete()
 
                 # Remove DashboardComment
                 for dashboardcomment in DashboardComment.objects.filter(user=user):
-                    self.stdout.write('DashboardComment ID {} removed.'.format(dashboardcomment.id))
+                    self.stdout.write('\tDashboardComment ID {}.'.format(dashboardcomment.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         dashboardcomment.delete()
 
 
                 # Remove DataStreamComment
                 for datastreamcomment in DataStreamComment.objects.filter(user=user):
-                    self.stdout.write('DataStreamComment ID {} removed.'.format(datastreamcomment.id))
+                    self.stdout.write('\tDataStreamComment ID {}.'.format(datastreamcomment.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         datastreamcomment.delete()
 
                 # Remove Dataset
                 for dataset in Dataset.objects.filter(user=user):
-                    self.stdout.write('Dataset ID {} removed.'.format(dataset.id))
+                    self.stdout.write('\tDataset ID {}.'.format(dataset.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         dataset.delete()
 
                 # Remove DatasetRevision
@@ -130,29 +135,29 @@ class Command(BaseCommand):
 
                     # Remove SourceDataset
                     for sourcedataset in SourceDataset.objects.filter(datasetrevision=datasetrevision):
-                        self.stdout.write('SourceDataset ID {} removed.'.format(sourcedataset.id))
+                        self.stdout.write('\tSourceDataset ID {}.'.format(sourcedataset.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             sourcedataset.delete()
 
                     # Remove DatasetI18n
                     for dataseti18n in DatasetI18n.objects.filter(dataset_revision=datasetrevision):
-                        self.stdout.write('DatasetI18n ID {} removed.'.format(dataseti18n.id))
+                        self.stdout.write('\tDatasetI18n ID {}.'.format(dataseti18n.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dataseti18n.delete()
 
                     # Remove TagDataset
                     for tagdataset in TagDataset.objects.filter(datasetrevision=datasetrevision):
-                        self.stdout.write('TagDataset ID {} removed.'.format(tagdataset.id))
+                        self.stdout.write('\tTagDataset ID {}.'.format(tagdataset.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             tagdataset.delete()
 
 
-                    self.stdout.write('DatasetRevision ID {} removed.'.format(datasetrevision.id))
+                    self.stdout.write('\tDatasetRevision ID {}.'.format(datasetrevision.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         datasetrevision.delete()
 
                 # Remove DataStream
@@ -160,35 +165,35 @@ class Command(BaseCommand):
 
                     # Remove Log
                     for log in Log.objects.filter(datastream=datastream):
-                        self.stdout.write('Log ID {} removed.'.format(log.id))
+                        self.stdout.write('\tLog ID {}.'.format(log.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             log.delete()
 
                     # Remove DataStreamHits
                     for dataStreamhits in DataStreamHits.objects.filter(datastream=datastream):
-                        self.stdout.write('DataStreamHits ID {} removed.'.format(dataStreamhits.id))
+                        self.stdout.write('\tDataStreamHits ID {}.'.format(dataStreamhits.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dataStreamhits.delete()
 
                     # Remove ObjectGrant
                     for objectgrant in ObjectGrant.objects.filter(datastream=datastream):
-                        self.stdout.write('ObjectGrant ID {} removed.'.format(objectgrant.id))
+                        self.stdout.write('\tObjectGrant ID {}.'.format(objectgrant.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             objectgrant.delete()
 
                     # Remove DataStreamRank
                     for datastreamrank in DataStreamRank.objects.filter(datastream=datastream):
-                        self.stdout.write('DataStreamRank ID {} removed.'.format(datastreamrank.id))
+                        self.stdout.write('\tDataStreamRank ID {}.'.format(datastreamrank.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             datastreamrank.delete()
 
-                    self.stdout.write('DataStream ID {} removed.'.format(datastream.id))
+                    self.stdout.write('\tDataStream ID {}.'.format(datastream.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         datastream.delete()
 
                 # Remove DataStreamRevision
@@ -196,35 +201,35 @@ class Command(BaseCommand):
 
                     # Remove SourceDatastream
                     for sourcedatastream in SourceDatastream.objects.filter(datastreamrevision=datastreamrevision):
-                        self.stdout.write('SourceDatastream ID {} removed.'.format(sourcedatastream.id))
+                        self.stdout.write('\tSourceDatastream ID {}.'.format(sourcedatastream.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             sourcedatastream.delete()
 
                     # Remove TagDatastream
                     for tagdatastream in TagDatastream.objects.filter(datastreamrevision=datastreamrevision):
-                        self.stdout.write('TagDatastream ID {} removed.'.format(tagdatastream.id))
+                        self.stdout.write('\tTagDatastream ID {}.'.format(tagdatastream.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             tagdatastream.delete()
 
                     # Remove DataStreamParameter
                     for datastreamparameter in DataStreamParameter.objects.filter(datastream_revision=datastreamrevision):
-                        self.stdout.write('DataStreamParameter ID {} removed.'.format(datastreamparameter.id))
+                        self.stdout.write('\tDataStreamParameter ID {}.'.format(datastreamparameter.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             datastreamparameter.delete()
 
-                    self.stdout.write('DataStreamRevision ID {} removed.'.format(datastreamrevision.id))
+                    self.stdout.write('\tDataStreamRevision ID {}.'.format(datastreamrevision.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         datastreamrevision.delete()
 
                     # Remove DatastreamI18n
                     for datastreami18n in DatastreamI18n.objects.filter(datastream_revision=datastreamrevision):
-                        self.stdout.write('DatastreamI18n ID {} removed.'.format(datastreami18n.id))
+                        self.stdout.write('\tDatastreamI18n ID {}.'.format(datastreami18n.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             datastreami18n.delete()
 
                 # Remove Dashboard
@@ -232,35 +237,35 @@ class Command(BaseCommand):
 
                     # Remove DashboardHits
                     for dashboardhits in DashboardHits.objects.filter(dashboard=dashboard):
-                        self.stdout.write('DashboardHits ID {} removed.'.format(dashboardhits.id))
+                        self.stdout.write('\tDashboardHits ID {}.'.format(dashboardhits.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dashboardhits.delete()
 
                     # Remove ObjectGrant
                     for objectgrant in ObjectGrant.objects.filter(dashboard=dashboard):
-                        self.stdout.write('ObjectGrant ID {} removed.'.format(objectgrant.id))
+                        self.stdout.write('\tObjectGrant ID {}.'.format(objectgrant.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             objectgrant.delete()
 
                     # Remove DashboardRank
                     for dashboardrank in DashboardRank.objects.filter(dashboard=dashboard):
-                        self.stdout.write('DashboardRank ID {} removed.'.format(dashboardrank.id))
+                        self.stdout.write('\tDashboardRank ID {}.'.format(dashboardrank.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dashboardrank.delete()
 
                     # Remove Log
                     for log in Log.objects.filter(dashboard=dashboard):
-                        self.stdout.write('Log ID {} removed.'.format(log.id))
+                        self.stdout.write('\tLog ID {}.'.format(log.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             log.delete()
 
-                    self.stdout.write('Dashboard ID {} removed.'.format(dashboard.id))
+                    self.stdout.write('\tDashboard ID {}.'.format(dashboard.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         dashboard.delete()
 
                 # Remove DashboardRevision
@@ -268,50 +273,50 @@ class Command(BaseCommand):
 
                     # Remove DashboardI18n
                     for dashboardi18n in DashboardI18n.objects.filter(dashboard_revision=dashboardrevision):
-                        self.stdout.write('DashboardI18n ID {} removed.'.format(dashboardi18n.id))
+                        self.stdout.write('\tDashboardI18n ID {}.'.format(dashboardi18n.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dashboardi18n.delete()
 
                     # Remove TagDashboard
                     for tagdashboard in TagDashboard.objects.filter(dashboardrevision=dashboardrevision):
-                        self.stdout.write('TagDashboard ID {} removed.'.format(tagdashboard.id))
+                        self.stdout.write('\tTagDashboard ID {}.'.format(tagdashboard.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             tagdashboard.delete()
 
                     # Remove DashboardWidget
                     for dashboardwidget in DashboardWidget.objects.filter(dashboard_revision=dashboardrevision):
-                        self.stdout.write('DashboardWidget ID {} removed.'.format(dashboardwidget.id))
+                        self.stdout.write('\tDashboardWidget ID {}.'.format(dashboardwidget.id))
 
-                        if not options['dry_run']:
+                        if options['delete']:
                             dashboardwidget.delete()
 
-                    self.stdout.write('DashboardRevision ID {} removed.'.format(dashboardrevision.id))
+                    self.stdout.write('\tDashboardRevision ID {}.'.format(dashboardrevision.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         dashboardrevision.delete()
 
                 # Remove Log
                 for log in Log.objects.filter(user=user):
-                    self.stdout.write('Log ID {} removed.'.format(log.id))
+                    self.stdout.write('\tLog ID {}.'.format(log.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         log.delete()
 
                 # Remove Grant
                 for grant in Grant.objects.filter(user=user):
-                    self.stdout.write('Grant ID {} removed.'.format(grant.id))
+                    self.stdout.write('\tGrant ID {}.'.format(grant.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         grant.delete()
 
                 try:
-                    self.stdout.write('User {} removed.'.format(user.name))
+                    self.stdout.write('\tUser {}.'.format(user.name))
                 except:
-                    self.stdout.write('User ID {} removed.'.format(user.id))
+                    self.stdout.write('\tUser ID {}.'.format(user.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     user.delete()
 
             # Remove categories and CategoryI18n from Account
@@ -319,67 +324,62 @@ class Command(BaseCommand):
                 for categoryi18n in CategoryI18n.objects.filter(category=category):
 
                     try:
-                        self.stdout.write('CategoryI18N {} removed.'.format(categoryi18n.name))
+                        self.stdout.write('\tCategoryI18N {}.'.format(categoryi18n.name))
                     except:
-                        self.stdout.write('CategoryI18N ID {} removed.'.format(categoryi18n.id))
+                        self.stdout.write('\tCategoryI18N ID {}.'.format(categoryi18n.id))
 
-                    if not options['dry_run']:
+                    if options['delete']:
                         categoryi18n.delete()
 
-                self.stdout.write('Category ID {} removed.'.format(category.id))
+                self.stdout.write('\tCategory ID {}.'.format(category.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     category.delete()
 
             # Remove Thresholds
             for threshold in Threshold.objects.filter(account=account):
                 try:
-                    self.stdout.write('Thresholds {} removed.'.format(threshold.name))
+                    self.stdout.write('\tThresholds {}.'.format(threshold.name))
                 except:
-                    self.stdout.write('Thresholds ID {} removed.'.format(threshold.id))
+                    self.stdout.write('\tThresholds ID {}.'.format(threshold.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     threshold.delete()
 
 
             # Remove Preferences
             for preference in Preference.objects.filter(account=account):
                 try:
-                    self.stdout.write('Preference {} removed.'.format(preference.key))
+                    self.stdout.write('\tPreference {}.'.format(preference.key))
                 except:
-                    self.stdout.write('Preference ID {} removed.'.format(preference.id))
+                    self.stdout.write('\tPreference ID {}.'.format(preference.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     preference.delete()
 
 
             # Remove Application
             for application in Application.objects.filter(account=account):
                 try:
-                    self.stdout.write('Application {} removed.'.format(application.key))
+                    self.stdout.write('\tApplication {}.'.format(application.key))
                 except:
-                    self.stdout.write('Application ID {} removed.'.format(application.id))
+                    self.stdout.write('\tApplication ID {}.'.format(application.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     application.delete()
 
             # Remove Alert
             for alert in Alert.objects.filter(account=account):
                 try:
-                    self.stdout.write('Alert {} removed.'.format(alert.key))
+                    self.stdout.write('\tAlert {}.'.format(alert.key))
                 except:
-                    self.stdout.write('Alert ID {} removed.'.format(alert.id))
+                    self.stdout.write('\tAlert ID {}.'.format(alert.id))
 
-                if not options['dry_run']:
+                if options['delete']:
                     alert.delete()
 
             # Remove account
-            try:
-                self.stdout.write('Account {} removed.'.format(account.name))
-            except:
-                self.stdout.write('Account ID {} removed.'.format(account.id))
-
-            if not options['dry_run']:
+            if options['delete']:
                 try:
                     account.delete()
                 except ProtectedError:
@@ -388,7 +388,7 @@ class Command(BaseCommand):
         # Remove protected accounts
         for account in retry:
             try:
-                self.stdout.write('Retried account {} removed.'.format(account.name))
+                self.stdout.write('Retried account {}.'.format(account.name))
             except:
-                self.stdout.write('Retried account ID {} removed.'.format(account.id))
+                self.stdout.write('Retried account ID {}.'.format(account.id))
             account.delete()
