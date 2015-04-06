@@ -15,7 +15,6 @@ MIDDLEWARE_CLASSES += (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
-    #TODO CHECK WHERE IS NOW! 'core.auth.middleware.AuthMiddleware',
     'microsites.middlewares.auth.AccessManager',
     'microsites.middlewares.ioc.DependencyInjector',
     'django.middleware.locale.LocaleMiddleware',
@@ -45,8 +44,6 @@ BASE_URI = 'http://microsites'
 MEDIA_URI = BASE_URI
 WORKSPACE_URI = 'http://workspace'
 MEMCACHED_ENGINE_END_POINT = ['127.0.0.1:11211']
-
-DOMAINS['engine'] = 'microsite'
 
 FLEXMONSTER_LOCALES = ['ch', 'en', 'es', 'fr', 'pt', 'ua']
 FLEXMONSTER_DEFAULT_LOCALE = 'en'

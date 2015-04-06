@@ -2,6 +2,7 @@
 
 from django.conf import settings
 from core.auth.auth import AuthManager
+import logging
 
 class AccessManager(object):
     """

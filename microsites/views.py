@@ -24,6 +24,7 @@ def custom_pages(request, page):
 
 # aka dispatcher
 def home(request):
+    logger = logging.getLogger(__name__)
     try:
         account = request.account
         preferences = request.preferences
@@ -36,7 +37,8 @@ def home(request):
             return HttpResponseRedirect(url)
         else:
             return HttpResponseRedirect('/home/')
-    except (Dashboard.DoesNotExist, ValueError, IndexError):
+    except (Dashboard.DoesNotExist, ValueError, IndexError), e:
+        logger.error('Microsites not found %s' % str(e))
         raise Http404
 
 def action_dashboards(request):

@@ -106,9 +106,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     response = DatasetList().render(data)
 
     mimetype = "application/json"
- 
+
     return HttpResponse(response, mimetype=mimetype)
-    
+
 @login_required
 @require_privilege("workspace.can_delete_dataset")
 @require_privilege("workspace.can_delete_dataset_revision")
@@ -297,7 +297,7 @@ def review(request, dataset_revision_id=None):
     else:
 
         response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
-    
+
 
     return JSONHttpResponse(json.dumps(response))
 
