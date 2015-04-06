@@ -74,13 +74,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             fields['end_point'] = 'file://' + active_datastore.create(self.user.account.id, self.user.id,
                                                                       settings.AWS_BUCKET_NAME, file_data)
 
+        impl_details = DatasetImplBuilderWrapper(**fields).build()
+
         self.dataset, self.dataset_revision = DatasetDBDAO().create(user=self.user,
             collect_type=collect_type, title=fields['title'], description=fields['description'],
             language=language, status=status, category=fields['category'], impl_type=fields['impl_type'],
             file_name=fields['file_name'], end_point=fields['end_point'], file_size=fields.get('file_size', 0),
             notes=fields['notes'], license_url=fields['license_url'], spatial=fields['spatial'],
             frequency=fields['frequency'], mbox=fields['mbox'], tags=fields['tags'], sources=fields['sources'],
-            params=fields.get('params', []))
+            params=fields.get('params', []), impl_details=impl_details)
 
         self.dataseti18n = DatasetI18n.objects.get(dataset_revision=self.dataset_revision, language=self.dataset.user.language)
 

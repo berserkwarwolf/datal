@@ -47,7 +47,7 @@ class DatasetDBDAO():
         
         return dataset
 
-    def create(self, dataset=None, user=None, collect_type='', **fields):
+    def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):
         """create a new dataset if needed and a dataset_revision"""
 
         if dataset is None:
@@ -57,8 +57,6 @@ class DatasetDBDAO():
         # meta_text = '{"field_values": [{"cust-dataid": "dataid-%s"}]}' % dataset.id
         if not fields.get('language', None):
             fields['language'] = user.language
-            
-        impl_details = DatasetImplBuilderWrapper(**fields).build()
 
         dataset_revision = DatasetRevision.objects.create(dataset=dataset,
                 user_id=user.id, status=fields['status'],

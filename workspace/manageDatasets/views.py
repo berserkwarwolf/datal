@@ -211,15 +211,7 @@ def edit(request, dataset_revision_id=None):
             notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
             impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
             frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
-            tags=dataset.get('tags'),
-
-            # Webservice Form: NO IMPLEMENTADO TODO
-            path_to_headers='path_to_headers', path_to_data='path_to_data', method_name='method_name', namespace='namespace',
-            token='token', algorithm='algorithm', signature='signature', use_cache='use_cache', username='username',
-            password='password',
-
-            # File Form: NO IMPLEMENTADO TODO
-            file_data='file_data',
+            tags=dataset.get('tags')
         )
 
         form = getattr(mod, className)(status_options=status_options)
