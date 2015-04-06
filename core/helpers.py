@@ -584,7 +584,7 @@ def remove_duplicated_filters(list_of_resources):
     removed['status_filter'] = set([x.get('status') for x in list_of_resources])
     removed['type_filter'] = set([x.get('impl_type') for x in list_of_resources])
     removed['author_filter'] = set([x.get('dataset__user__nick') for x in list_of_resources])
-    removed['author_filter'] = set([x.get('datastream__user__nick') for x in list_of_resources])
+    removed['author_filter'].union(set([x.get('datastream__user__nick') for x in list_of_resources]))
     removed['category_filter'] = set([x.get('category__categoryi18n__name') for x in list_of_resources])
 
     return removed
