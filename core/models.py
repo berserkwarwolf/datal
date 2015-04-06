@@ -196,6 +196,7 @@ class User(models.Model):
     def __unicode__(self):
         return self.nick
 
+
 class DataStream(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     guid                = models.CharField(max_length=29, unique=True)
@@ -213,6 +214,7 @@ class DataStream(GuidModel):
     @property
     def current(self):
         return self.datastreamrevision_set.all()[0]
+
 
 class DataStreamRevision(models.Model):
     datastream          = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
@@ -378,6 +380,7 @@ class DataStreamRevision(models.Model):
 
         return indexable_dict
 
+
 class DatastreamI18n(models.Model):
     language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
     datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
@@ -397,7 +400,8 @@ class DatastreamI18n(models.Model):
         if 'description' in changed_fields: self.description = fields['description']
         if 'notes' in changed_fields: self.notes = fields['notes']
         self.save()
-        
+
+
 class DataStreamParameter(models.Model):
     datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
     name                = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
@@ -413,6 +417,7 @@ class DataStreamParameter(models.Model):
 
     def __unicode__(self):
         return  unicode(self.id)
+
 
 class Dashboard(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
@@ -435,6 +440,7 @@ class Dashboard(GuidModel):
         dbr = self.dashboardrevision_set.filter(status=choices.StatusChoices.PUBLISHED).order_by('-id')[0]
         title = dbr.dashboardi18n_set.all()[0].title
         return '/dashboards/%d/%s/' % (self.id, slugify(title))
+
 
 class DashboardRevision(models.Model):
     dashboard           = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'))
@@ -500,6 +506,7 @@ class DashboardRevision(models.Model):
 
         return indexable_dict
 
+
 class DashboardI18n(models.Model):
     language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
     dashboard_revision  = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
@@ -513,6 +520,7 @@ class DashboardI18n(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class DashboardWidget(models.Model):
     order               = models.IntegerField(verbose_name=ugettext_lazy( 'MODEL-ORDER-TEXT' ))
@@ -715,6 +723,7 @@ class DatasetRevision(models.Model):
 
         return indexable_dict
 
+
 class DatasetI18n(models.Model):
     language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
     dataset_revision    = models.ForeignKey('DatasetRevision', verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_LABEL'))
@@ -755,6 +764,7 @@ class Visualization(GuidModel):
     @property
     def current(self):
         return self.visualizationrevision_set.all()[0]
+
 
 class VisualizationRevision(models.Model):
     visualization       = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
@@ -846,6 +856,7 @@ class VisualizationRevision(models.Model):
 
         return indexable_dict
 
+
 class VisualizationI18n(models.Model):
     language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
     visualization_revision = models.ForeignKey('VisualizationRevision', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_REVISION_LABEL'))
@@ -860,6 +871,7 @@ class VisualizationI18n(models.Model):
     def __unicode__(self):
         return self.title
 
+
 class Category(models.Model):
     account = models.ForeignKey('Account', null=True)
     objects = managers.CategoryManager()
@@ -869,6 +881,7 @@ class Category(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class CategoryI18n(models.Model):
     language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
@@ -888,6 +901,7 @@ class CategoryI18n(models.Model):
         self.slug = slugify(self.name)
         super(CategoryI18n, self).save(*args, **kwargs)
 
+
 class Tag(models.Model):
     name                = models.CharField(unique=True, max_length=40, verbose_name=ugettext_lazy('MODEL_TAG_TEXT'))
     status              = models.SmallIntegerField(default=0, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
@@ -897,6 +911,7 @@ class Tag(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class TagDataset(models.Model):
     tag = models.ForeignKey('Tag', null=True)
@@ -908,6 +923,7 @@ class TagDataset(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class TagDatastream(models.Model):
     tag = models.ForeignKey('Tag', null=True)
     datastreamrevision = models.ForeignKey('DataStreamRevision', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
@@ -917,6 +933,7 @@ class TagDatastream(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class TagDashboard(models.Model):
     tag = models.ForeignKey('Tag', null=True)
@@ -928,6 +945,7 @@ class TagDashboard(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class TagVisualization(models.Model):
     tag = models.ForeignKey('Tag', null=True)
     visualizationrevision = models.ForeignKey('VisualizationRevision', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_REVISION_LABEL'))
@@ -937,6 +955,7 @@ class TagVisualization(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class Role(models.Model):
     name            = models.CharField(max_length=63, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
@@ -951,6 +970,7 @@ class Role(models.Model):
     def __unicode__(self):
         return '%d %s' % (self.id, self.name)
 
+
 class Privilege(models.Model):
     name            = models.CharField(max_length=63, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
     code            = models.CharField(max_length=63, verbose_name=ugettext_lazy('MODEL_CODE_LABEL'))
@@ -962,6 +982,7 @@ class Privilege(models.Model):
 
     def __unicode__(self):
         return '%d %s' % (self.id, self.name)
+
 
 class Grant(models.Model):
     user            = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), null=True, on_delete=models.PROTECT)
@@ -975,6 +996,7 @@ class Grant(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class ObjectGrant(models.Model):
     grant           = models.ForeignKey('Grant', verbose_name=ugettext_lazy('MODEL_GRANT_LABEL'))
@@ -1002,6 +1024,7 @@ class Guest( models.Model ):
     def __unicode__( self ):
         return unicode(self.id)
 
+
 class Threshold(models.Model):
     account_level = models.ForeignKey('AccountLevel', null=True, blank=True)
     account       = models.ForeignKey('Account', null=True, blank=True)
@@ -1016,6 +1039,7 @@ class Threshold(models.Model):
     def __unicode__(self):
         return '%s - %s' % (self.account_level, self.name)
 
+
 class Preference(models.Model):
     account    = models.ForeignKey('Account')
     key        = models.CharField(max_length=50, choices=choices.ACCOUNT_PREFERENCES_AVAILABLE_KEYS)
@@ -1027,6 +1051,7 @@ class Preference(models.Model):
 
     def __unicode__(self):
         return '%d - %s' % (self.id, self.account)
+
 
 class Application(models.Model):
     user            = models.ForeignKey('User', null=True, blank=True)
@@ -1062,6 +1087,7 @@ class Application(models.Model):
     def get_name(self):
         return self.name and self.name or 'No name'
 
+
 class Setting(models.Model):
     key           = models.CharField(primary_key=True, max_length=40)
     value         = models.TextField()
@@ -1072,6 +1098,7 @@ class Setting(models.Model):
 
     def __unicode__(self):
         return self.key
+
 
 class UserPassTickets(models.Model):
     uuid            = models.CharField(max_length=38)
@@ -1086,6 +1113,7 @@ class UserPassTickets(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class Source(models.Model):
     name                = models.CharField(unique=True, max_length=40, blank=False)
     url                 = models.CharField(max_length=2048, blank=False)
@@ -1096,6 +1124,7 @@ class Source(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class SourceDataset(models.Model):
     source = models.ForeignKey('Source', null=True)
     datasetrevision = models.ForeignKey('DatasetRevision', null=True)
@@ -1103,12 +1132,14 @@ class SourceDataset(models.Model):
     class Meta:
         db_table = 'ao_sources_dataset_revision'
 
+
 class SourceDatastream(models.Model):
     source = models.ForeignKey('Source')
     datastreamrevision = models.ForeignKey('DataStreamRevision')
 
     class Meta:
         db_table = 'ao_sources_datastream_revision'
+
 
 class VisualizationHits(models.Model):
     visualization   = models.ForeignKey('Visualization')
@@ -1121,6 +1152,7 @@ class VisualizationHits(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class DataStreamHits(models.Model):
     datastream      = models.ForeignKey('Datastream')
     created_at      = models.DateTimeField(editable=False, auto_now_add=True)
@@ -1131,6 +1163,7 @@ class DataStreamHits(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class DashboardHits(models.Model):
     dashboard       = models.ForeignKey('Dashboard')
@@ -1143,6 +1176,7 @@ class DashboardHits(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class SearchTerm(models.Model):
     search          = models.TextField()
     created_at      = models.DateTimeField(editable=False, auto_now_add=True)
@@ -1152,6 +1186,7 @@ class SearchTerm(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class DashboardRank(models.Model):
     dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
@@ -1164,6 +1199,7 @@ class DashboardRank(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class DataStreamRank(models.Model):
     datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
     position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
@@ -1174,6 +1210,7 @@ class DataStreamRank(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class DashboardComment(models.Model):
     dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
@@ -1187,6 +1224,7 @@ class DashboardComment(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+
 class DataStreamComment(models.Model):
     datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
     user            = models.ForeignKey('User', verbose_name=ugettext_lazy( 'MODEL-USER-TEXT' ))
@@ -1198,6 +1236,7 @@ class DataStreamComment(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class Task(models.Model):
     guid = models.CharField(max_length=29, unique=True)
@@ -1218,6 +1257,7 @@ class Task(models.Model):
     def __unicode__(self):
         return unicode(self.guid)
 
+
 class Alert(models.Model):
     task = models.ForeignKey('Task')
     account = models.ForeignKey('Account')
@@ -1229,6 +1269,7 @@ class Alert(models.Model):
     class Meta:
         db_table = 'ao_alerts'
 
+
 class Message(models.Model):
     alert = models.ForeignKey('Alert')
     message = models.TextField()
@@ -1237,6 +1278,7 @@ class Message(models.Model):
 
     class Meta:
         db_table = 'ao_messages'
+
 
 class Log(models.Model):
     user = models.ForeignKey('User',  on_delete=models.DO_NOTHING)
