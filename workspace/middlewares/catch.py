@@ -34,14 +34,7 @@ class ExceptionManager(object):
             template_error_extension = 'html'
             mimetype = "text/html"
 
-        # TODO Join the error classes
-        if hasattr(exception, 'info'):  # detect if it's my type errors
-            error_title = exception.info[ERROR_KEY]
-            error_description = exception.info[DESCRIPTION_KEY]
-            status_code = 400
-            exception_name = type(exception).__name__
-            extras = exception.info[EXTRAS_KEY]
-        elif hasattr(exception, 'title'):  # detect if it's my type errors
+        if hasattr(exception, 'title'):  # detect if it's my type errors
             error_title = exception.title
             error_description = exception.description
             status_code = exception.status_code
@@ -64,6 +57,7 @@ class ExceptionManager(object):
         for t in templates:
             try:
                 tpl = DefaultWorkspaceError(template=t)
+                break
             except TemplateDoesNotExist:
                 pass
 
