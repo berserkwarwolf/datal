@@ -54,7 +54,7 @@ def mint_process(mint_request):
 
         except Exception, e:
             logger.error(e)
-            raise MintTemplateURLError("Unexpected error reading template. %s" % e.reason)
+            raise MintTemplateURLError("Unexpected error reading template. %s" % str(e))
 
 
         DataStreamRevision.objects.filter(pk = datastreamrevision_id).update(rdf_template = template)
