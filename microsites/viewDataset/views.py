@@ -9,6 +9,7 @@ import logging
 def action_view(request, dataset_id, slug):
     """ show dataset """
     logger = logging.getLogger(__name__)
+    logger.error("001 %s" % dataset_id)
     account = request.account
     preferences = request.preferences
     try:
