@@ -3,7 +3,7 @@
     "pk": 1, 
     "model": "core.preference", 
     "fields": {
-        "account": 2, 
+        "account": 1,
         "value": "Organizaci\u00f3n de ejemplo", 
         "key": "account.name"
     }
@@ -12,9 +12,54 @@
     "pk": 2, 
     "model": "core.preference", 
     "fields": {
-        "account": 2, 
+        "account": 1,
         "value": "CL", 
         "key": "account.contact.person.country"
     }
+},
+{
+   "pk": 3,
+   "model": "core.preference",
+   "fields": {
+       "account": 1,
+       "value": "False",
+       "key": "account.catalog.enabled"
+   }
+},
+{
+   "pk": 4,
+   "model": "core.preference",
+   "fields": {
+       "account": 1,
+       "value": "microsite:8080",
+       "key": "account.domain"
+   }
+},
+{
+   "pk": 5,
+   "model": "core.preference",
+   "fields": {
+       "account": 1,
+       "value": "True",
+       "key": "account.has.home"
+   }
+},
+{
+   "pk": 6,
+   "model": "core.preference",
+   "fields": {
+       "account": 1,
+       "value": "api",
+       "key": "account.api.domain"
+   }
+},
+{
+   "pk": 7,
+   "model": "core.preference",
+   "fields": {
+       "account": 1,
+       "value": "es",
+       "key": " account.language"
+   }
 }
 ]

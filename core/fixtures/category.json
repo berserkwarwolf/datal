@@ -3,14 +3,14 @@
     "pk": 5, 
     "model": "core.category", 
     "fields": {
-        "account": 2
+        "account": 1
     }
 },
 {
     "pk": 6, 
     "model": "core.category", 
     "fields": {
-        "account": 2
+        "account": 1
     }
 }
 ]

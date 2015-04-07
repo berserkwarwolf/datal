@@ -3,7 +3,7 @@
     "pk": 1472, 
     "model": "core.user", 
     "fields": {
-        "account": 2, 
+        "account": 1,
         "name": "Publisher User", 
         "language": "es", 
         "country": "CL", 
@@ -22,7 +22,7 @@
     "pk": 1647, 
     "model": "core.user", 
     "fields": {
-        "account": 2, 
+        "account": 1,
         "name": "Administrator User", 
         "language": "es", 
         "country": "CL", 
