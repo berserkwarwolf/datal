@@ -10,6 +10,7 @@ from django.http import Http404
 # remove notes from original SQLs
 
 DEFAULT_URLCONF = 'workspace.urls'
+MS_URLCONF = 'microsites.urls'
 
 class DB:
     def __init__(self, dashboardrevision_id, language, last = True):
@@ -455,7 +456,7 @@ class VZ:
     def is_private(self):
         return False
         
-# Before called Dataset (bad idea posible name conflict)
+
 class DT:
     def __init__(self, datasetrevision_id, language):
         self.language = language
@@ -567,8 +568,9 @@ class DT:
                 row = cursor.fetchone()
         return self.tags
 
-    def permalink(self, urlconf = DEFAULT_URLCONF):
-        return reverse('datastream_manager.action_view', urlconf, kwargs={'id': self.dataset_id, 'slug': self.slug})
+    def permalink(self, urlconf=MS_URLCONF):
+        return reverse('manageDatasets.action_view', urlconf, kwargs={'dataset_id': self.dataset_id, 'slug': self.slug})
+
 
 class DBWidget:
     def __init__(self, row, language, last = True):
