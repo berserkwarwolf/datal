@@ -1,5 +1,6 @@
 import re
 import types
+import logging
 from django.db import models, connection
 from django.conf import settings
 from django.core.paginator import InvalidPage
@@ -649,12 +650,14 @@ class IndexTankFinder(Finder):
                 results.append(to_add)
                 # TODO, I can't find the problem
                 """
+                logger = logging.getLogger(__name__)
                 if doc['category_name'] == "":
                     logger.error("Can't find category on index -- %s" % str(doc))
                 else:
                     logger.error("OK find category on index -- %s" % str(doc))
                 """
             except Exception, e:
+                logger = logging.getLogger(__name__)
                 logger.error('Search IndexTank [ERROR(%s--%s)] with doc = %s [TRACE:%s]' % (doc['type'], doc['title'], unicode(doc), repr(e)))
 
         return results, search_time, facets
@@ -793,7 +796,8 @@ class IndexTankFinder(Finder):
         dataset_id = p_doc['dataset_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
+                                                                                               'slug': slug})
 
         l_dataset = dict (dataset_id=dataset_id
                                 , title=title
