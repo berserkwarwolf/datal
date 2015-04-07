@@ -80,7 +80,7 @@ class IndexTankFinder(core_IndexTankFinder):
         id = doc['datastream_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.urls', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('datastream_manager.action_view', urlconf='microsites.urls', kwargs={'id': id, 'slug': slug})
         return {
             "id": guid,
             "title": title,

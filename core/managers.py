@@ -725,19 +725,7 @@ class IndexTankFinder(Finder):
 
         # curating resource types
         if self.resource == 'all':
-            self.resource = ['ds', 'db', 'chart']
-            # if 'account.catalog.enabled' preference is enable the show datasets
-            if self.account_id:
-                # for resource definition
-                from core.models import Preference
-                preference, created = Preference.objects.get_or_create(account_id=self.account_id, key='account.catalog.enabled')
-                if created:
-                    preference.value = "False"
-                    preference.save()
-                else:
-                    if preference.value == "True":
-                        self.resource = ['ds', 'db', 'chart', 'dt']
-
+            self.resource = ['ds', 'db', 'chart', 'dt']
 
 #        elif self.resource in resource_types:
 #            self.resource = [self.resource]

@@ -29,7 +29,7 @@ def load(request):
     language = request.auth_manager.language
     account = request.account
     preferences = request.preferences
-    ds_enabled = True if preferences['account.catalog.enabled'] == "True" else False
+    ds_enabled = True
 
     if(('preview' in request.GET and request.GET['preview']== 'true') or preferences["account_home"]):
         """ shows the home page new version"""
@@ -134,12 +134,7 @@ def action_update_list(request):
         order       = form.cleaned_data.get('order')
         order_type  = form.cleaned_data.get('order_type')
 
-        resources = ["ds", "db", "chart"]
-        try:
-            if preferences['account.catalog.enabled'] == "True":
-                resources = ['ds', 'db', 'chart', 'dt']
-        except:
-            pass
+        resources = ['ds', 'db', 'chart', 'dt']
 
         if preferences['account_home_filters'] == 'featured_accounts':
 

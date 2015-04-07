@@ -39,10 +39,7 @@ def do_search(request, category_filters = None, datasets = None):
             accounts_ids = account.id
 
         try:
-            if datasets or preferences['account.catalog.enabled'] == "True":
-                resources = ["ds", "db", "chart", "dt"]
-            else:
-                resources = ["ds", "db", "chart"]
+            resources = ["ds", "db", "chart", "dt"]
 
             results, search_time, facets = FinderManager().search(query = query
                                                                   , account_id = accounts_ids
