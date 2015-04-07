@@ -27,7 +27,7 @@ class Command(BaseCommand):
             queryset = queryset.filter(code__in=options['codes'].split(','))
 
         for role in queryset:
-            self.stdout.write('Role {}:\n\tCode: {}\n\tNum of users using it: {}\n\tGrants:'.format(
+            self.stdout.write('Role {}:\n\tCode: {}\n\tNum of users using it: {}\n\tPrivileges:'.format(
                 role.name,
                 role.code,
                 User.objects.filter(roles__id=role.id).count()
