@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 
 from optparse import make_option
 
-from core.models import Role
+from core.models import Role, User
 
 
 class Command(BaseCommand):
@@ -27,7 +27,12 @@ class Command(BaseCommand):
             queryset = queryset.filter(code__in=options['codes'].split(','))
 
         for role in queryset:
-            self.stdout.write('Role {}:\n\tCode: {}\n\tGrants:'.format(role.name, role.code))
+            self.stdout.write('Role {}:\n\tCode: {}\n\tNum of users using it: {}\n\tGrants:'.format(
+                role.name,
+                role.code,
+                User.objects.filter(roles__id=role.id).count()
+            ))
+
             for grant in role.grants.all():
                 self.stdout.write('\t\t{}\n'.format(grant))
 
