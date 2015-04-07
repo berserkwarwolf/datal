@@ -96,7 +96,7 @@ class IndexTankFinder(core_IndexTankFinder):
         guid = doc['docid'].split('::')[1]
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf='microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
 
         return {
             "id": guid,

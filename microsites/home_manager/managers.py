@@ -32,7 +32,8 @@ class HomeFinder(IndexTankFinder):
         dataset_id = doc['dataset_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'id': dataset_id, 'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf='microsites.urls', kwargs={'dataset_id': dataset_id,
+                                                                                               'slug': slug})
         created_at = datetime.datetime.fromtimestamp(int(doc['timestamp']))
 
         return dict(id=dataset_id
