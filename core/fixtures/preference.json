@@ -1,0 +1,20 @@
+[
+{
+    "pk": 1, 
+    "model": "core.preference", 
+    "fields": {
+        "account": 2, 
+        "value": "Organizaci\u00f3n de ejemplo", 
+        "key": "account.name"
+    }
+},
+{
+    "pk": 2, 
+    "model": "core.preference", 
+    "fields": {
+        "account": 2, 
+        "value": "CL", 
+        "key": "account.contact.person.country"
+    }
+}
+]

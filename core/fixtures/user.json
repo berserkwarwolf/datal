@@ -1,0 +1,40 @@
+[
+{
+    "pk": 1472, 
+    "model": "core.user", 
+    "fields": {
+        "account": 2, 
+        "name": "Publisher User", 
+        "language": "es", 
+        "country": "CL", 
+        "created_at": "2011-10-20T00:36:51", 
+        "last_visit": "2013-02-09T12:44:32", 
+        "email": "publisher@test.com", 
+        "nick": "publisher", 
+        "roles": [
+            8
+        ], 
+        "password": "e10adc3949ba59abbe56e057f20f883e", 
+        "ocupation": "03"
+    }
+},
+{
+    "pk": 1647, 
+    "model": "core.user", 
+    "fields": {
+        "account": 2, 
+        "name": "Administrator User", 
+        "language": "es", 
+        "country": "CL", 
+        "created_at": "2011-12-06T12:20:30", 
+        "last_visit": "2015-04-07T14:35:08", 
+        "email": "administrator@test.com", 
+        "nick": "administrator", 
+        "roles": [
+            1
+        ], 
+        "password": "e10adc3949ba59abbe56e057f20f883e", 
+        "ocupation": "04"
+    }
+}
+]

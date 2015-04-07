@@ -1,19 +1,5 @@
 [
 {
-    "pk": 3, 
-    "model": "core.category", 
-    "fields": {
-        "account": 2492
-    }
-},
-{
-    "pk": 4, 
-    "model": "core.category", 
-    "fields": {
-        "account": 2492
-    }
-},
-{
     "pk": 5, 
     "model": "core.category", 
     "fields": {

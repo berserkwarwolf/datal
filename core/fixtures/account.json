@@ -1,0 +1,15 @@
+[
+{
+    "pk": 2, 
+    "model": "core.account", 
+    "fields": {
+        "status": 1, 
+        "name": "Gobierno de Chile",
+        "parent": null, 
+        "level": 4, 
+        "created_at": "2014-08-26T00:00:00", 
+        "expires_at": "2014-08-26T00:00:00", 
+        "meta_data": ""
+    }
+}
+]

@@ -67,8 +67,3 @@ coverage.xml
 # Sphinx documentation
 docs/_build/
 .vagrant/
-
-# Ignore extra fixtures
-core/fixtures/account.json
-core/fixtures/grant.json
-core/fixtures/user.json
