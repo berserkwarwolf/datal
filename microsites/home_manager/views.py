@@ -28,12 +28,8 @@ def action_update_list(request):
         order       = form.cleaned_data.get('order')
         order_type  = form.cleaned_data.get('order_type')
 
-        resources = ["ds", "db", "chart"]
-        try:
-            if preferences['account.catalog.enabled'] == "True":
-                self.resource = ['ds', 'db', 'chart', 'dt']
-        except:
-            pass
+        resources = ['ds', 'db', 'chart', 'dt']
+
         if preferences['account_home_filters'] == 'featured_accounts':
 
             entity = form.cleaned_data.get('entity_filters')
@@ -43,19 +39,19 @@ def action_update_list(request):
                 featured_accounts = account.account_set.values('id').all()
                 accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
 
-            type  = form.cleaned_data.get('type_filters')
+            type = form.cleaned_data.get('type_filters')
             if type:
                 resources = [type]
 
             category_id = form.cleaned_data.get('category_filters')
             results, search_time, facets = FinderManager(HomeFinder).search(
-                                                                    query = query,
-                                                                    max_results = 250,
-                                                                    account_id = accounts_ids,
-                                                                    resource = resources,
-                                                                    category_id = category_id,
-                                                                    order = order,
-                                                                    order_type = order_type)
+                                                                    query=query,
+                                                                    max_results=250,
+                                                                    account_id=accounts_ids,
+                                                                    resource=resources,
+                                                                    category_id=category_id,
+                                                                    order=order,
+                                                                    order_type=order_type)
         else:
             all_resources = form.cleaned_data.get('all')
             if not all_resources:

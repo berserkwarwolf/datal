@@ -22,21 +22,12 @@
    "model": "core.preference",
    "fields": {
        "account": 1,
-       "value": "False",
-       "key": "account.catalog.enabled"
-   }
-},
-{
-   "pk": 4,
-   "model": "core.preference",
-   "fields": {
-       "account": 1,
        "value": "microsite:8080",
        "key": "account.domain"
    }
 },
 {
-   "pk": 5,
+   "pk": 4,
    "model": "core.preference",
    "fields": {
        "account": 1,
