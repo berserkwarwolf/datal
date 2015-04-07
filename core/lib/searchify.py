@@ -87,7 +87,7 @@ class SearchifyIndex():
             ids_found = []
             for docid in search_result['results']:
                 if docid in resources:
-                    ids_found.append[docid]
+                    ids_found.append(docid)
             return (True, ids_found)
         else:
             return (False, None) 

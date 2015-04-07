@@ -4,7 +4,7 @@ from core.choices import StatusChoices, ActionStreams
 from workspace.daos.visualizations import VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
 from core.daos import ActivityStreamDAO, SearchifyDAO
-from workspace.exceptions import *
+from core.exceptions import *
 from core.helpers import update_dashboard_widgets_and_revisions
 
 
@@ -35,15 +35,15 @@ class VisualizationLifeCycleManager():
 
         allowed_states = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
         if status not in allowed_states:
-            raise IlegateStateException(allowed_states)
-            
+            raise IlegalStateException(allowed_states)
+
         self.dao.create(datastream=datastream, title=title, is_private=False
             , description=description, language=language, status=status
             , meta_text=meta_text, notes=notes, impl_details=impl_details)
         self.visualization_revision = self.dao.visualization_revision
         self.visualization = self.dao.visualization
         self.visualization_i18n = self.dao.visualization_i18n
-        
+
         if status == StatusChoices.PUBLISHED:
             self.publish()
 
@@ -56,10 +56,10 @@ class VisualizationLifeCycleManager():
     def send_to_review(self, fromEdition=False):
         """ send a dataset to review
         fromEdition: If we send to review in the edition time we don't use allowed_states"""
-        
+
         allowed_states = [StatusChoices.DRAFT]
         if fromEdition and self.visualization_revision.status not in allowed_states:
-            raise IlegateStateException(allowed_states, "Can't send to review %d (%s)" % (self.visualization_revision.status, str(fromEdition)))
+            raise IlegalStateException(allowed_states, "Can't send to review %d (%s)" % (self.visualization_revision.status, str(fromEdition)))
 
         self.visualization_revision.status = StatusChoices.PENDING_REVIEW
         self.visualization_revision.save()
@@ -68,15 +68,15 @@ class VisualizationLifeCycleManager():
         """ accept a review """
         allowed_states = [StatusChoices.PENDING_REVIEW]
         if self.visualization_revision.status not in allowed_states:
-            raise IlegateStateException(allowed_states)
-            
+            raise IlegalStateException(allowed_states)
+
         self.visualization_revision.status = StatusChoices.APPROVED
         self.visualization_revision.save()
-            
+
 
     def publish(self, ignore_errors=False, publish_backward=True):
         # all previous states are valid
-        
+
         # check for status on related datastream
         allowed_states = [StatusChoices.PUBLISHED, StatusChoices.APPROVED]
         datastream_revision = DataStreamRevision.objects.get(pk=self.visualization.datastream.last_revision_id)
@@ -84,7 +84,7 @@ class VisualizationLifeCycleManager():
             #APPROVED for future references
             self.visualization_revision.status = StatusChoices.APPROVED
             self.visualization_revision.save()
-            raise IlegateStateException(allowed_states, "Related resource (DS) nos published (%d)" % self.visualization_revision.status)
+            raise IlegalStateException(allowed_states, "Related resource (DS) nos published (%d)" % self.visualization_revision.status)
 
         # if related resource is StatusChoices.APPROVED, then we publish it
         if publish_backward:
@@ -97,8 +97,8 @@ class VisualizationLifeCycleManager():
 
         self.update_last_revisions()
         self.index_resource()
-        
-        
+
+
         self.log_activity(action_id=ActionStreams.PUBLISH)
         return True
 
@@ -106,11 +106,11 @@ class VisualizationLifeCycleManager():
         """ reject a review """
         allowed_states = [StatusChoices.PENDING_REVIEW]
         if self.visualization_revision.status not in allowed_states:
-            raise IlegateStateException(allowed_states)
+            raise IlegalStateException(allowed_states)
 
         self.visualization_revision.status = StatusChoices.DRAFT
         self.visualization_revision.save()
-            
+
     def unpublish(self, ignore_errors=False):
         """ unpublish resource (there's no related resources)
         ignore_errors: sometimes we draft a dataset and we dont know about related states
@@ -118,7 +118,7 @@ class VisualizationLifeCycleManager():
 
         allowed_states = [StatusChoices.PUBLISHED]
         if ignore_errors==False and self.visualization_revision.status not in allowed_states:
-            raise IlegateStateException(allowed_states)
+            raise IlegalStateException(allowed_states)
 
         self.visualization_revision.status = StatusChoices.DRAFT
         self.visualization_revision.save()
