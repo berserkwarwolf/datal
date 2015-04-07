@@ -39,6 +39,14 @@ class DatasetNotFoundException(LifeCycleException):
         super(DatasetNotFoundException, self).__init__(description=description, status_code=404)
 
 
+class DataStreamNotFoundException(LifeCycleException):
+    title = 'Datastream not found'
+
+
+class VisualizationRequiredException(LifeCycleException):
+    title = 'Visualization not found'
+
+
 class IlegalStateException(LifeCycleException):
     title = 'Ilegal state'
 

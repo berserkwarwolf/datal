@@ -48,8 +48,5 @@ class InsufficientPrivilegesException(SecurityException):
     title = 'Privileges required'
 
     def __init__(self, description='', required_privileges={}):
-        super(InsufficientPrivilegesException, self).__init__(description=description, extras={"required_privileges": required_privileges})
-
-
-class DataStreamNotFoundException(LifeCycleException):
-    title = 'Datastream not found'
+        super(InsufficientPrivilegesException, self).__init__(description=description,
+                                                              extras={"required_privileges": required_privileges})

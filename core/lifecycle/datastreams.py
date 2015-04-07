@@ -9,7 +9,7 @@ from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
-from workspace.exceptions import IlegalStateException, DataStreamNotFoundException
+from core.exceptions import IlegalStateException, DataStreamNotFoundException
 from workspace.daos.datastreams import *
 
 logger = logging.getLogger(__name__)
