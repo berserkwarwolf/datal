@@ -52,7 +52,6 @@ def view(request, revision_id):
 @require_GET
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
-
     bb_request = request.GET
     filters = bb_request.get('filters')
     filters_dict= ''

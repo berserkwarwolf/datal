@@ -4,7 +4,7 @@ Templates for errors
 """
 
 from core.templates import *
-
+import json
 
 class DefaultWorkspaceError(Template):
 
@@ -13,7 +13,7 @@ class DefaultWorkspaceError(Template):
         super(DefaultWorkspaceError, self).__init__(tmpl)
 
     def render(self, title, description, request, extras={}):
-        context = {"error_title": title, "error_description": description, "extras": extras, "auth_manager": request.auth_manager}
+        context = {"error_title": title, "error_description": description, "extras": json.dumps(extras), "auth_manager": request.auth_manager}
         ctx = Context(context)
         return super(DefaultWorkspaceError, self).render(ctx)
 

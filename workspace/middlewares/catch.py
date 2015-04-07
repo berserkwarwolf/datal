@@ -15,12 +15,13 @@ class ExceptionManager(object):
         logger = logging.getLogger(__name__)
 
         content_type = None
-        if 'CONTENT_TYPE' in request.META:
+        if request.META.get('CONTENT_TYPE', False):
             content_type = request.META['CONTENT_TYPE']
-        elif 'HTTP_ACCEPT' in request.META:
+        elif request.META.get('HTTP_ACCEPT', False):
             content_type = request.META['HTTP_ACCEPT']
-        elif 'HTTP_CONTENT_TYPE' in request.META:
+        elif request.META.get('HTTP_CONTENT_TYPE', False):
             content_type = request.META['HTTP_CONTENT_TYPE']
+
 
         # detect response format
         if content_type.lower().startswith('application/json'):
@@ -66,8 +67,9 @@ class ExceptionManager(object):
             except TemplateDoesNotExist:
                 pass
 
+
         response = tpl.render(title=error_title, description=error_description, request=request, extras=extras)
 
-        logger.error('%s. %s' % ("[CatchError] " + error_title, error_description))
+        logger.error('%s. %s -extras=%s ' % ("[CatchError] " + error_title, error_description, json.dumps(extras)))
         return HttpResponse(response, mimetype=mimetype, status=status_code)
 

@@ -1,5 +1,5 @@
 {"status": false
     , "error": "{{error_title}}"
     , "description": "{{error_description}}"
-    , 'extras': {{extras}}
+    , "extras": {{extras|safe}}
 }
