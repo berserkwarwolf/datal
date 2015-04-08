@@ -9,7 +9,11 @@
 
     <!-- Data Views -->
     <li>
-      <a id="id_dataviews_option" href="{% url 'manageDataviews.list' %}" class="nav-dataviews"><i></i><span>{% trans 'APP-DATAVIEWS-TEXT' %}</span></a>
+      {% if stats.my_total_datasets != 0 %}
+        <a id="id_dataviews_option" href="{% url 'manageDataviews.list' %}" class="nav-dataviews"><i></i><span>{% trans 'APP-DATAVIEWS-TEXT' %}</span></a>
+      {% else %}
+        <a id="id_dataviews_option" class="nav-dataviews disabled"><i></i></a>
+      {% endif %}
     </li>
     
     {% comment %}
