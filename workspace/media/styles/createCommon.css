@@ -46,6 +46,9 @@
      -moz-box-shadow:0 0 5px rgba(208,208,208,1);
           box-shadow:0 0 5px rgba(208,208,208,1);
  }
+ .create .button{
+  display:block;
+ }
  .create .box:hover .button.green{
     background:#b9ce44;
     background:-moz-linear-gradient(top,  #b9ce44 0%, #a8c732 8%, #72aa00 100%);
