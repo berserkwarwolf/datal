@@ -71,7 +71,7 @@ def action_info_update(request):
 def action_users(request):
     auth_manager = request.auth_manager
     preferences = auth_manager.get_account().get_preferences()
-    roles = ['ao-publisher', 'ao-enhancer', 'ao-account-admin']
+    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
     form = forms.UserForm(roles)
     users = User.objects.values('id', 'name', 'nick', 'last_visit', 'email', 'roles__name', 'roles__code').filter(account = auth_manager.account_id, roles__code__in = roles).all()
     users = [ user for user in users if user['roles__code'] in roles ]
@@ -83,7 +83,7 @@ def action_users(request):
 @require_POST
 def action_create_user(request):
     logger = logging.getLogger(__name__)
-    roles = ['ao-publisher', 'ao-enhancer', 'ao-account-admin']
+    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -98,7 +98,7 @@ def action_create_user(request):
         role = Role.objects.get(code = role_code)
         user.roles.add(role)
 
-        if role_code in ['ao-enhancer', 'ao-publisher']:
+        if role_code in ['ao-editor', 'ao-publisher']:
             if auth_manager.is_level('level_4'):
                 role = Role.objects.get(code = role_code+'-plus')
                 user.roles.add(role)
@@ -145,7 +145,7 @@ def action_create_user(request):
 @privilege_required('workspace.can_access_admin')
 @require_POST
 def action_edit_user(request):
-    roles = ['ao-publisher', 'ao-enhancer', 'ao-account-admin']
+    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -162,7 +162,7 @@ def action_edit_user(request):
         role = Role.objects.get(code = role_code)
         user.roles.add(role)
 
-        if role_code in ['ao-enhancer', 'ao-publisher']:
+        if role_code in ['ao-editor', 'ao-publisher']:
             if auth_manager.is_level('level_4'):
                 role = Role.objects.get(code = role_code+'-plus')
                 user.roles.add(role)

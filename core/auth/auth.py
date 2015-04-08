@@ -36,8 +36,8 @@ class AuthManager:
     def is_admin(self):
         return self.has_role('ao-account-admin')
 
-    def is_enhancer(self):
-        return self.has_role('ao-enhancer')
+    def is_editor(self):
+        return self.has_role('ao-editor')
 
     def is_publisher(self):
         return self.has_role('ao-publisher')
@@ -92,7 +92,7 @@ class AuthManager:
                     (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
                     (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
                     (StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
-            elif self.is_enhancer():
+            elif self.is_editor():
                 actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
                     (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')))
         elif current_status==ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'):
@@ -101,7 +101,7 @@ class AuthManager:
                     (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
                     (StatusChoices.ACCEPTED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
                 return actions
-            if self.is_enhancer():
+            if self.is_editor():
                 actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')))
                 return actions
         elif current_status== ugettext_lazy('MODEL_STATUS_PUBLISHED'):
@@ -109,11 +109,11 @@ class AuthManager:
                 actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
                     (StatusChoices.ACCEPTED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
                 return actions
-            if self.is_enhancer():
+            if self.is_editor():
                 actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')))
                 return actions
         elif current_status==ugettext_lazy('MODEL_STATUS_DRAFT'):
-            if self.is_enhancer():
+            if self.is_editor():
                 actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
                     (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')))
                 return actions
