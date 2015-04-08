@@ -31,28 +31,29 @@ class DependenciesInjector(object):
     def read_stats(self, request):
         user_id = request.auth_manager.id
         c = Cache(db=0)
+        request.stats = {}
 
         my_total_datasets = c.get('my_total_datasets_' + str(user_id))
         if not my_total_datasets:
             my_total_datasets =  Dataset.objects.filter(user=user_id).count()
             c.set('my_total_datasets_' + str(user_id), my_total_datasets, settings.REDIS_STATS_TTL)
-        request.my_total_datasets = my_total_datasets
+        request.stats['my_total_datasets'] = my_total_datasets
 
         my_total_datastreams = c.get('my_total_datastreams_' + str(user_id))
         if not my_total_datastreams:
             my_total_datastreams = DataStream.objects.filter(user=user_id).count()
             c.set('my_total_datastreams_' + str(user_id), my_total_datastreams, settings.REDIS_STATS_TTL)
-        request.my_total_datastreams = my_total_datastreams
+        request.stats['my_total_datastreams'] = my_total_datastreams
 
         my_total_dashboards = c.get('my_total_dashboards_' + str(user_id))
         if not my_total_dashboards:
             my_total_dashboards = Dashboard.objects.filter(user=user_id).count()
             c.set('my_total_dashboards_' + str(user_id), my_total_dashboards, settings.REDIS_STATS_TTL)
-        request.my_total_dashboards = my_total_dashboards
+        request.stats['my_total_dashboards'] = my_total_dashboards
 
         my_total_visualizations = c.get('my_total_visualizations_' + str(user_id))
         if not my_total_visualizations:
             my_total_visualizations = Visualization.objects.filter(user=user_id).count()
             c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
 
-        request.my_total_visualizations = my_total_visualizations
+        request.stats['my_total_visualizations'] = my_total_visualizations

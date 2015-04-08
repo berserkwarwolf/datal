@@ -12,8 +12,7 @@ def request_context(request):
                   'DOMAINS': settings.DOMAINS}
     d['settings'] = my_settings
     d['preference'] = request.preferences
-    d['stats'] = {'my_total_datasets': request.my_total_datasets,
-                  'my_total_datastreams': request.my_total_datastreams,
-                  'my_total_dashboards': request.my_total_dashboards,
-                  'my_total_visualizations': request.my_total_visualizations}
+    if hasattr(request, 'stats'):
+        d['stats'] = request.stats
+
     return d
