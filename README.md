@@ -4,7 +4,7 @@ Datal
 Plataforma de publicación de Datos Abiertos de código abierto.
 
 
-Requirements
+Herramientas
 ------------
 
 Vangrant: https://www.vagrantup.com/
@@ -12,34 +12,40 @@ Vangrant: https://www.vagrantup.com/
 VirtualBox: https://www.virtualbox.org/
 
 
-Quick start
+Instalacion
 -----------
 
 1. git sobmodule init
 2. git submodule update
-3. Get a copy of base Fixtures files and save it into core/fixtures/ 
-4. Add to your local /etc/hosts the line: 
+3. Crear un archivo en salt/roots/pillar/local.sls con el formato igual a salt/roots/pillar/local_demo.sls completando los datos necesarios.
+4. Agregar los siguientes hosts a nuestro archivo de hosts: 
     
     127.0.0.1 microsite admin api workspace microsites
 
-5. Start the machine with the command: 
+5. Iniciar la virtual con el comando:
 
         vagrant up --provision
 
-6. Access to the web in your local 8080 port. Example: http://workspace:8080
+6. Acceder a la web en tu navegador local, puerto 8080. Ejemplo: http://workspace:8080
 
 
-VM access
----------
+Usuarios y claves para workspace
+--------------------------------
+
+Administrador: administrador/administrador
+
+Editor:
+
+Publicador: publicador/publicador
 
 
-In order to access by SSH to the virtual machine you may run
+Acceso a la virtual
+-------------------
+
+
+Para acceder a la virtual via SSH
 
     vagrant ssh
-
-
-In order to access to MySQL you may access to the port 8306 and for websites 8080
-
 
 
 Logs
@@ -49,10 +55,10 @@ Logs
     tail -f /var/log/uwsgi/uwsgi-workspace.log (or other logs)
     
 
-Workarounds
------------
+Problemas
+---------
 
-If the website is not up:
+Reiniciar los servicios Web:
 
     vagrant ssh
     sudo supervisorctl restart all

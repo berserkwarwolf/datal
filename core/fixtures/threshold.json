@@ -1,0 +1,22 @@
+[{
+    "pk": 1,
+    "model": "core.threshold",
+    "fields": {
+        "account": 1,
+        "description": "",
+        "limit": -1,
+        "name": "api.account_monthly_calls",
+        "account_level": null
+    }
+},
+{
+    "pk": 2,
+    "model": "core.threshold",
+    "fields": {
+        "account": 1,
+        "description": "dataset limit",
+        "limit": 500,
+        "name": "workspace.create_dataset_limit",
+        "account_level": null
+    }
+}]
