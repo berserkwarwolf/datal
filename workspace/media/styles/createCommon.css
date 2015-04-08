@@ -10,7 +10,7 @@
 }
 .create header h3{font-size:18px;font-weight:bold;color:#303030;display:inline-block;}
 .create header h3 span{font-size:14px;font-weight:normal;color:#999;}
-.create .insetFormTitle{font-size:14px;margin:15px 0;font-family:'proxima_nova_rgbold';text-transform:uppercase;}
+.create .insetFormTitle{font-size:14px;margin:15px 0;font-family:'montserratbold';text-transform:uppercase;}
 
 .create .navigation{margin-top:-5px;}
 .create .navigation a{float:left;margin-left:10px;}
