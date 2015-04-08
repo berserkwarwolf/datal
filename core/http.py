@@ -9,13 +9,3 @@ def get_domain(request, default_domain = ''):
         if domain is None:
             domain = default_domain
     return domain
-
-class EmitterHttpResponse(HttpResponse):
-    """ A custom HttpResponse """
-
-    def __init__(self, emitter):
-        HttpResponse.__init__(self, emitter.render())
-
-        headers = emitter.get_headers()
-        for key in headers:
-            self[key] = headers[key]

@@ -3,21 +3,6 @@ from django.core.validators import validate_comma_separated_integer_list as vil
 from core.helpers import validate_comma_separated_word_list as vwl
 import json
 
-class HomeForm(forms.Form):
-    resources = forms.CharField(required=True)
-    categories_names = forms.CharField(required=True)
-
-    def clean_resources(self):
-        try:
-            return json.loads(self.cleaned_data.get('resources'))
-        except ValueError:
-            raise forms.ValidationError("The field must be JSON")
-
-    def clean_categories_names(self):
-        try: 
-            return json.loads(self.cleaned_data.get('categories_names'))
-        except ValueError:
-            raise forms.ValidationError("The field must be JSON")
 
 class QueryDatasetForm(forms.Form):
     all = forms.BooleanField(required=False)

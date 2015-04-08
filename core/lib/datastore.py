@@ -82,7 +82,7 @@ class sftp(Datastore):
         self.tmp_folder = settings.SFTP_DATASTORE_LOCALTMPFOLDER # local base folder for saving temporary files before upload
         self.public_base_url = settings.SFTP_PUBLIC_BASE_URL # url for donwloading resources
 
-    def _connect(self):
+    def connect(self):
         """ don't use at INIT because it hangs all application"""
 
         self.connection = sftp.Connection(host=settings.SFTP_DATASTORE_HOSTNAME, port=settings.SFTP_DATASTORE_PORT, username=settings.SFTP_DATASTORE_USER, password=settings.SFTP_DATASTORE_PASSWORD, log=True)
@@ -97,20 +97,12 @@ class sftp(Datastore):
         try:
             #we save as buket_name / account_id / user_id / UUID
             folder = '%s/%s' % (str(account_id)[::-1], str(user_id)[::-1])
-            
             remote_path = '%s/%s/%s' % (self.base_folder, bucket_name, folder)
-
-            if not self.connection:
-                self.connect()
-
+            self.connect()
             self.connection.execute('mkdir -p %s' % remote_path)
-
             file_name = UUID()
-
             remote_path += '/'.join(file_name)
-
             local_path = file_data.path
-
             self._put(local_path=local_path, remote_path=remote_path)
 
             return '%s/%s' % (folder, file_name)
@@ -128,18 +120,14 @@ class sftp(Datastore):
 
         try:
             remote_path = "%s/%s/%s" % (self.base_folder, bucket_name, end_point)
-
             local_path = file_data.path
-
             self._put(local_path=local_path, remote_path = remote_path)
         except:
             raise SFTPUpdateException(e)
 
     def _put(self, local_path, remote_folder):
         """ ensure path and save """
-        if not self.connection:
-            self.connect()
-
+        self.connect()
         self.connection.put(local_path, remotepath = remote_path)
 
 active_datastore = None

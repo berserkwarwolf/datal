@@ -130,7 +130,6 @@ def action_create_user(request):
         extradata = {'country': country, 'company': company}
         suscription = mailchimp_lib.workspace_users_list_subscribe(user, language, extradata)
 
-        # workspace_user_activation_email_campaign_send(user.email, user.name, adminname, company, link, language)
         mergetags = {'FNAME': user.name, 'ADMINNAME': adminname, 'COMPANY': company}
         mailchimp_lib.account_administrators_welcome_email_campaign_send(user, link, mergetags)
 
