@@ -15,24 +15,6 @@ import json
 
 from core.lib.searchify import SearchifyIndex
 
-class DataStreamDBDAO:
-    def get_last_published_revision(self, guid):
-        sql = """   SELECT  MAX(dsr.`id`) AS `datastream_revision_id`,
-                        `ao_datastream_revisions`.`datastream_id`
-                    FROM `ao_datastream_revisions` dsr
-                    INNER JOIN `ao_datastreams` ds ON (ds.`id` = dsr.`datastream_id`)
-                    WHERE dsr.`status` = %s AND ds.`guid` = %s
-                    GROUP BY dsr.`datastream_id`
-                    ORDER BY dsr.`created_at` DESC
-                    LIMIT 1"""
-
-        params = [choices.StatusChoices.PUBLISHED, guid]
-
-        cursor = connection.cursor()
-        cursor.execute(sql, params)
-
-        return cursor.fetchone()
-
 
 class ActivityStreamDAO:
     """ class for integrated managment of resource ativities """

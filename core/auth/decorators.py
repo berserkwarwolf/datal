@@ -53,17 +53,3 @@ def privilege_required(privilege, login_url=None):
     enabled, redirecting to the log-in page if necessary.
     """
     return user_passes_test(lambda auth_manager: auth_manager.has_privilege(privilege), login_url=login_url)
-
-def rol_required(role, login_url=None):
-    """
-    Decorator for views that checks whether a user has a particular rol
-    enabled, redirecting to the log-in page if necessary.
-    """
-    return user_passes_test(lambda auth_manager: auth_manager.has_role(role), login_url=login_url)
-
-def roles_required(roles, login_url=None):
-    """
-    Decorator for views that checks whether a user has a particular rol
-    enabled, redirecting to the log-in page if necessary.
-    """
-    return user_passes_test(lambda auth_manager: auth_manager.has_roles(roles), login_url=login_url)

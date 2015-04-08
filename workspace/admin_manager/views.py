@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from core.auth.decorators import login_required, privilege_required
 from core.accounts.decorators import threshold
-from core.choices import TicketChoices, EventChoices, EVENT_CHOICES, StatusChoices
+from core.choices import TicketChoices, StatusChoices
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib import mailchimp_lib

@@ -133,7 +133,6 @@ class LastForm(forms.Form):
 
 class DeleteDatasetForm(forms.Form):
     revision_id = forms.CharField(required=True, validators=[vil])
-    #TODO DOESN'T WORK. Always return 'false' and delete resources! is_test = forms.BooleanField(required=False, initial='True')
 
 
 class CreateDatasetForm(forms.Form):

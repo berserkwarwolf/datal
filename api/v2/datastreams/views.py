@@ -22,7 +22,7 @@ def action_view(request, guid):
     response = datastream.as_dict(request.user_id)
     add_domain_to_datastream_link(response)
 
-    from api.v2.templates import *
+    from api.v2.templates import DefaultApiResponse
     response = DefaultApiResponse(template='api_resource_view.json').render(response)
 
     return JSONHttpResponse(response)

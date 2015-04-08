@@ -5,7 +5,6 @@ except ImportError:
     from django.utils.functional import wraps  # Python 2.4 fallback.
 
 from django.http import Http404
-
 from django.utils.decorators import available_attrs
 from django.conf import settings
 from core.http import get_domain

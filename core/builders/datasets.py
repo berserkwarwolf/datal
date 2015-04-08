@@ -130,20 +130,3 @@ class SOAPImplBuilder(DefaultImplBuilder):
                     <AnioHasta editable="true">2012</AnioHasta>
                 </fields>
             </wsOperation>"""
-
-class WebPageImplBuilder(DefaultImplBuilder):
-
-    def __init__(self, **fields):
-        super(self.__class__, self).__init__(**fields)
-
-    def build(self):
-        """ SourceImplementationChoices=0 (HTML) (#TODO since 2012 we don't use impl_details for websites (?) #TODO"""
-        """ probably defined at JS, someting like this:"""
-        """
-        ret = "<webPage><javascript>false</javascript><xpathStructure><xpath><elementType>table</elementType>"
-        ret +="<expr>//DIV[@class='itemListContent']</expr></xpath><xpath><elementType>row</elementType>"
-        ret +="<expr>.//DIV[@class='li first row clearfix'] | .//DIV[@class='li even row clearfix'] | .//DIV[@class='li odd row clearfix']</expr>"
-        ret +="</xpath><xpath><elementType>cell</elementType><expr>.//DIV[@class='second-column-container table-cell']</expr>"
-        ret +="</xpath></xpathStructure></webPage>"
-        """
-        return ''

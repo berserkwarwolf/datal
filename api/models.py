@@ -155,7 +155,7 @@ def result_as_json(self, response, user_id):
     json_response = json_response.replace('"{{json_result_response_to_replace}}"', response)
     """
 
-    from api.v2.templates import *
+    from api.v2.templates import DefaultApiResponse
     data = self.as_dict(user_id)
     add_domain_to_datastream_link(data)
     data['result'] = "json_result_response_to_replace"

@@ -28,7 +28,7 @@ def action_csv(request):
         loaded_json = json.loads(json_response)
         csv_emitter = CSVEmitter(loaded_json, name = u'')
         csvfile += str(csv_emitter.render()) + '\n\n\n\n\n\n'
-        i = i + 1
+        i += 1
 
     filename = '%s.csv' % (dashboard_name)
     response = HttpResponse(mimetype='text/csv')
