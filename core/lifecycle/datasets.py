@@ -80,9 +80,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             collect_type=collect_type, title=fields['title'], description=fields['description'],
             language=language, status=status, category=fields['category'], impl_type=fields['impl_type'],
             file_name=fields['file_name'], end_point=fields['end_point'], file_size=fields.get('file_size', 0),
-            notes=fields['notes'], license_url=fields['license_url'], spatial=fields['spatial'],
-            frequency=fields['frequency'], mbox=fields['mbox'], tags=fields['tags'], sources=fields['sources'],
-            params=fields.get('params', []), impl_details=impl_details)
+            notes=fields.get('notes', ''), license_url=fields.get('license_url',''), spatial=fields.get('spatial', ''),
+            frequency=fields.get('frequency', ''), mbox=fields.get('mbox', ''), tags=fields.get('tags', []),
+            sources=fields.get('sources', []), params=fields.get('params', []), impl_details=impl_details)
 
         self.dataseti18n = DatasetI18n.objects.get(dataset_revision=self.dataset_revision, language=self.dataset.user.language)
 

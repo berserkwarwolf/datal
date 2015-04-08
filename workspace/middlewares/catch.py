@@ -4,6 +4,8 @@ from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
 from workspace.templates import DefaultWorkspaceError
 import logging
+import sys, traceback
+
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
 EXTRAS_KEY = 'extras'
@@ -13,6 +15,9 @@ class ExceptionManager(object):
     """ Middleware for error handling """
     def process_exception(self, request, exception):
         logger = logging.getLogger(__name__)
+
+        exc_info = sys.exc_info()
+        trace = '\n'.join(traceback.format_exception(*(exc_info or sys.exc_info())))
 
         content_type = None
         if request.META.get('CONTENT_TYPE', False):
@@ -64,6 +69,7 @@ class ExceptionManager(object):
 
         response = tpl.render(title=error_title, description=error_description, request=request, extras=extras)
 
-        logger.error('%s. %s -extras=%s ' % ("[CatchError] " + error_title, error_description, json.dumps(extras)))
+        logger.error('%s. %s -extras=%s %s' % ("[CatchError] " + error_title, error_description,
+                                                   json.dumps(extras), trace))
         return HttpResponse(response, mimetype=mimetype, status=status_code)
 

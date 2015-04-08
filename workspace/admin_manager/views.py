@@ -620,12 +620,11 @@ def create_test_datasets(request, quantity=10):
     logger.error("Categoy %d" % category_id)
     
     for x in range(0, quantity):
-        dt = DatasetLifeCycleManager(user_id=request.user.id)
+        dt = DatasetLifeCycleManager(user=request.user.id)
         typec = choices.CollectTypeChoices.SELF_PUBLISH
         typefile = choices.SourceImplementationChoices.CSV
-        newdataset = dt.create(title='Datset %d' % x, collect_type=typec
-            , description="Descripcion del dataset %d" % x
-            , end_point="/home/junar/Downloads/file-%d.csv" % x
-            ,filename="resource-%d.csv" % x, category_id=category_id, impl_type=typefile)
+        newdataset = dt.create(title='Datset %d' % x, collect_type=typec, description="Descripcion del dataset %d" % x,
+                               end_point="/home/junar/Downloads/file-%d.csv" % x, notes='',
+                               file_name="resource-%d.csv" % x, category=category_id, impl_type=typefile)
         info += '<br />Created Dataset %d' % x
     return HttpResponse(info)

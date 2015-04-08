@@ -6,6 +6,7 @@ from core.choices import StatusChoices
 from core.daos import ActivityStreamDAO
 from workspace.exceptions import IlegalStateException
 from core.lib.datastore import *
+from core.models import User
 
 
 class AbstractLifeCycleManager():
