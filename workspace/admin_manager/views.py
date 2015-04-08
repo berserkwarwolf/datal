@@ -618,9 +618,10 @@ def create_test_datasets(request, quantity=10):
     
     logger = logging.getLogger(__name__)
     logger.error("Categoy %d" % category_id)
-    
+    user = User.objects.get(pk=request.user.id)
+
     for x in range(0, quantity):
-        dt = DatasetLifeCycleManager(user=request.user.id)
+        dt = DatasetLifeCycleManager(user=user)
         typec = choices.CollectTypeChoices.SELF_PUBLISH
         typefile = choices.SourceImplementationChoices.CSV
         newdataset = dt.create(title='Datset %d' % x, collect_type=typec, description="Descripcion del dataset %d" % x,
