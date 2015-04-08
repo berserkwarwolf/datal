@@ -36,24 +36,28 @@ class DependenciesInjector(object):
         my_total_datasets = c.get('my_total_datasets_' + str(user_id))
         if not my_total_datasets:
             my_total_datasets =  Dataset.objects.filter(user=user_id).count()
-            c.set('my_total_datasets_' + str(user_id), my_total_datasets, settings.REDIS_STATS_TTL)
+            if my_total_datasets > 0:
+                c.set('my_total_datasets_' + str(user_id), my_total_datasets, settings.REDIS_STATS_TTL)
         request.stats['my_total_datasets'] = my_total_datasets
 
         my_total_datastreams = c.get('my_total_datastreams_' + str(user_id))
         if not my_total_datastreams:
             my_total_datastreams = DataStream.objects.filter(user=user_id).count()
-            c.set('my_total_datastreams_' + str(user_id), my_total_datastreams, settings.REDIS_STATS_TTL)
+            if my_total_datastreams > 0:
+                c.set('my_total_datastreams_' + str(user_id), my_total_datastreams, settings.REDIS_STATS_TTL)
         request.stats['my_total_datastreams'] = my_total_datastreams
 
         my_total_dashboards = c.get('my_total_dashboards_' + str(user_id))
         if not my_total_dashboards:
             my_total_dashboards = Dashboard.objects.filter(user=user_id).count()
-            c.set('my_total_dashboards_' + str(user_id), my_total_dashboards, settings.REDIS_STATS_TTL)
+            if my_total_dashboards > 0:
+                c.set('my_total_dashboards_' + str(user_id), my_total_dashboards, settings.REDIS_STATS_TTL)
         request.stats['my_total_dashboards'] = my_total_dashboards
 
         my_total_visualizations = c.get('my_total_visualizations_' + str(user_id))
         if not my_total_visualizations:
             my_total_visualizations = Visualization.objects.filter(user=user_id).count()
-            c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
+            if my_total_visualizations > 0:
+                c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
 
         request.stats['my_total_visualizations'] = my_total_visualizations
