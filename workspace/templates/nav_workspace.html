@@ -42,11 +42,5 @@
     </li>
     {% endif %}
 
-    <!-- Feedback -->
-    {% get_current_language as LANGUAGE_CODE %}
-    <li>
-      <a href="https://junar.zendesk.com/entries/new?forum_id={% ifequal LANGUAGE_CODE 'en' %}20733822{% endifequal %}{% ifequal LANGUAGE_CODE 'es' %}21185063{% endifequal %}" class="nav-feedback" target="_blank"><i></i><span>{% trans 'APP-FEEDBACK-TEXT' %}</span></a>
-    </li>
-
   </ul>
 </nav>
