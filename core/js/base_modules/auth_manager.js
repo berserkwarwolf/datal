@@ -31,7 +31,8 @@ var AuthManager = Backbone.Model.extend({
         return this.hasRole('ao-account-admin');
     }
     , isEditor: function() {
-        return (this.hasRole('ao-enhancer'));
+        return (this.hasRole('ao-editor'));
     }
 
 });
+
