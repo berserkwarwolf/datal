@@ -415,11 +415,11 @@ def set_role(user):
             Role.objects.get(user=user['id'], code='ao-publisher')
         except Role.DoesNotExist:
             try:
-                Role.objects.get(user=user['id'], code='ao-enhancer')
+                Role.objects.get(user=user['id'], code='ao-editor')
             except Role.DoesNotExist:
                 pass
             else:
-                user['role'] = 'ao-enhancer'
+                user['role'] = 'ao-editor'
         else:
             user['role'] = 'ao-publisher'
     else:

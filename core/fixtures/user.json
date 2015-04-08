@@ -1,9 +1,9 @@
 [
 {
-    "pk": 1472, 
+    "pk": 1472,
     "model": "core.user", 
     "fields": {
-        "account": 1, 
+        "account": 1,
         "name": "Publicador", 
         "language": "es", 
         "country": "CL", 
@@ -12,14 +12,14 @@
         "email": "publicador@test.com", 
         "nick": "publicador", 
         "roles": [
-            8
+            3
         ], 
         "password": "925ccfdd6aaf753167f3eb0b9c06a692", 
         "ocupation": "03"
     }
 },
 {
-    "pk": 1647, 
+    "pk": 1647,
     "model": "core.user", 
     "fields": {
         "account": 1, 
@@ -35,6 +35,25 @@
         ], 
         "password": "91f5167c34c400758115c2a6826ec2e3", 
         "ocupation": "04"
+    }
+},
+{
+    "pk": 3, 
+    "model": "core.user", 
+    "fields": {
+        "account": 1, 
+        "name": "Editor", 
+        "language": "es", 
+        "country": "CL", 
+        "created_at": "2011-10-20T00:36:51", 
+        "last_visit": "2013-02-09T12:44:32", 
+        "email": "editor@test.com", 
+        "nick": "editor", 
+        "roles": [
+            2
+        ], 
+        "password": "5aee9dbd2a188839105073571bee1b1f", 
+        "ocupation": "03"
     }
 }
 ]
