@@ -3,129 +3,29 @@
     "pk": 1, 
     "model": "core.role", 
     "fields": {
-        "created_at": "2012-06-19T17:21:46",
+        "created_at": "2012-06-19T17:21:46", 
         "code": "ao-account-admin", 
         "name": "Account Administrators", 
         "description": ""
     }
 },
 {
-    "pk": 6, 
+    "pk": 2,
     "model": "core.role", 
     "fields": {
-        "created_at": "2012-06-19T17:21:46",
-        "code": "ao-collector", 
-        "name": "Collectors", 
-        "description": ""
-    }
-},
-{
-    "pk": 7, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46",
-        "code": "ao-enhancer", 
+        "created_at": "2012-06-19T17:21:46", 
+        "code": "ao-editor",
         "name": "Enhancers", 
         "description": ""
     }
 },
 {
-    "pk": 8, 
+    "pk": 3,
     "model": "core.role", 
     "fields": {
-        "created_at": "2012-06-19T17:21:46",
+        "created_at": "2012-06-19T17:21:46", 
         "code": "ao-publisher", 
         "name": "Publishers", 
-        "description": ""
-    }
-},
-{
-    "pk": 9, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-free-user", 
-        "name": "Free User", 
-        "description": ""
-    }
-},
-{
-    "pk": 10, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-collector-plus", 
-        "name": "Collector", 
-        "description": ""
-    }
-},
-{
-    "pk": 11, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-collector-premier", 
-        "name": "Collector", 
-        "description": ""
-    }
-},
-{
-    "pk": 12, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-enhancer-plus", 
-        "name": "Enhancer", 
-        "description": ""
-    }
-},
-{
-    "pk": 13, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-enhancer-premier", 
-        "name": "Enhancer", 
-        "description": ""
-    }
-},
-{
-    "pk": 14, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-publisher-plus", 
-        "name": "Publisher", 
-        "description": ""
-    }
-},
-{
-    "pk": 15, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-06-19T17:21:46", 
-        "code": "ao-publisher-premier", 
-        "name": "Publisher", 
-        "description": ""
-    }
-},
-{
-    "pk": 16, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-07-31T18:28:36", 
-        "code": "ao-ops", 
-        "name": "Ops", 
-        "description": ""
-    }
-},
-{
-    "pk": 17, 
-    "model": "core.role", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "ao-member", 
-        "name": "Members", 
         "description": ""
     }
 }
