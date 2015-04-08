@@ -273,3 +273,5 @@
 .argumentsOverlay .form label{display:block;font-weight:bold;height:auto;line-height:normal;padding-bottom:10px;}
 .argumentsOverlay .form .field{height:28px;width:306px;margin-bottom:15px;}
 .argumentsOverlay .buttons a{margin:0 5px;cursor:pointer;}
+
+#id_addDataview #dataset_grid{height:280px;overflow:auto;overflow-x:hidden;}

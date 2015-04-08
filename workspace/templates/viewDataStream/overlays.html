@@ -1,0 +1,23 @@
+{% load i18n extra_tags core_components components %}
+
+<!-- Add Dataview -->
+{% overlay id_addDataview %}
+<div class="In clearfix">
+	<h4>{% trans 'APP-ADD-NEW-DATAVIEW-TEXT' %}</h4>
+	<div class="ov-content">
+		<p>{% trans 'APP-ADD-DATAVIEW-HINT' %}</p>
+	</div>
+	<section>
+		<div id="dataset_list">
+			<div id="dataset_grid"></div>
+		</div>
+	</section>
+	<div class="ov-bottom">
+		<div id="id_filter_dataSets"></div>
+		<!-- Pagination -->
+		<div class="pagination FR clearfix" id="id_pagination">
+			<div id="dataset_paginator"></div>
+		</div>
+	</div>
+</div>
+{% endoverlay %}

@@ -640,3 +640,52 @@ border-color: #ccc;}
 
 /* Hide default cancel button from backgrid-filter.js search input */
 .backgrid-filter input[type="search"]::-webkit-search-cancel-button{display:none;}
+
+/* Pagination */
+.pagination{background:#f6f9ff;padding:15px;/*position:relative;*/
+    -webkit-border-radius:0 0 3px 3px;
+       -moz-border-radius:0 0 3px 3px;
+            border-radius:0 0 3px 3px;
+}
+.pagination .items-per-page{font-size:0;padding-right:15px;/*position:absolute;top:15px;left:15px;*/}
+.pagination .items-per-page label{padding-right:9px;line-height:30px;display:inline-block;font-size:12px;color:#666;text-shadow:0 1px 0 #fff;}
+.pagination .items-per-page select{display:inline-block;height:30px;font-size:12px;}
+.pagination .pager, .pagination .backgrid-paginator{display:inline-block;border:1px solid #d7d7d7;padding-top:1px;font-size:0;background:#f6f4f4;height:27px;
+    -webkit-box-shadow:inset 0 1px 0 0 #fff,inset 0 0 5px 0 rgba(21,21,21,.1);
+       -moz-box-shadow:inset 0 1px 0 0 #fff,inset 0 0 5px 0 rgba(21,21,21,.1);
+            box-shadow:inset 0 1px 0 0 #fff,inset 0 0 5px 0 rgba(21,21,21,.1);
+    -webkit-border-radius:3px;
+       -moz-border-radius:3px;
+            border-radius:3px;
+}
+.pagination .backgrid-paginator{height:30px;}
+.pagination .backgrid-paginator ul{margin:0;}
+.pagination li.disabled, .pagination .backgrid-paginator li.disabled{visibility:visible;}
+.pagination li.disabled a:hover, .pagination .backgrid-paginator li.disabled a:hover{background-color:inherit;color:#999;}
+.pagination .pager li, 
+.pagination .backgrid-paginator li{display:inline-block;border-left:1px solid #fff;border-right:1px solid #d7d7d7;font-size:0;min-width:30px;}
+.pagination .pager li:first-child, 
+.pagination .backgrid-paginator li:first-child{border-left:0;}
+.pagination .pager li:last-child, 
+.pagination .backgrid-paginator li:last-child{border-right:0;}
+.pagination .pager li a, 
+.pagination .backgrid-paginator li a{display:block;color:#726869;text-shadow:0 1px 0 #fff;height:27px;line-height:29px;font-family:'montserratbold', arial, helvetica, sans-serif;font-size:15px;overflow:hidden;}
+.pagination .pager li a:hover, 
+.pagination .backgrid-paginator li a:hover{text-decoration:none;background-color:#efeded;background-color:rgba(0,0,0,.04);}
+.pagination .pager .pagination-page{width:32px;padding-right:1px;text-align:center;}
+.pagination .pager .pagination-page.active, .pagination .pager li.active a, .pagination .backgrid-paginator li.active a{color:#fff;text-shadow:0 1px 0 #033e97;background-color:#407fde;cursor:default;
+    -webkit-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
+       -moz-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
+            box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
+}
+.pagination .pager .pagination-button,{text-indent:-10000px;width:30px;background-image:url(../images/common/ic_paginationButtons.png);background-repeat:no-repeat;
+    -webkit-transition:background-position .1s ease-in-out;
+       -moz-transition:background-position .1s ease-in-out;
+        -ms-transition:background-position .1s ease-in-out;
+         -o-transition:background-position .1s ease-in-out;
+            transition:background-position .1s ease-in-out;
+}
+.pagination .pager .pagination-button.previous{background-position:11px 0;}
+.pagination .pager .pagination-button.previous:hover{background-position:9px 0;}
+.pagination .pager .pagination-button.next{background-position:11px -30px;}
+.pagination .pager .pagination-button.next:hover{background-position:13px -30px;}

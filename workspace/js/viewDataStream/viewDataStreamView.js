@@ -3,10 +3,12 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	el: '.main-section',
 
 	theDataTable: null,
+    listResources: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
 		'click #id_approve, #id_reject': 'review',
+        "click #id_addNewButton": "onAddNewButtonClicked",
 	},
 
 	bindings: {
@@ -16,6 +18,9 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
+
+		// Init Filters
+        this.initFilters();
 	},
 
 	render: function(){
@@ -190,5 +195,20 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		this.theDataTable.setLoadingHeight();
 
 	},
+
+	initFilters: function(){
+
+        // Init Backbone PageableCollection
+        this.listResources = new ListResources({
+            filters: this.filters
+        });
+
+    },
+
+	onAddNewButtonClicked: function() {
+        var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
+            dataViewCreationStepsUrl: this.options.dataViewCreationStepsUrl,
+        });
+    },
 
 });
