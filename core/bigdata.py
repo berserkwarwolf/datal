@@ -2,6 +2,7 @@ import requests
 from django.conf import settings
 from api.exceptions import BigDataInsertError, BigDataInvalidQuery, BigDataDeleteError
 
+
 class Bigdata:
     lastError = ""
     def insert(self, body, namespace='', context='', mimetype="text/turtle", create_if_not_exists = False):
@@ -64,7 +65,7 @@ class Bigdata:
             query = query + " LIMIT " + str(limit)
 
         # check if the query is secure
-        if self.check_secure(query) == False:
+        if not self.check_secure(query):
             raise BigDataInvalidQuery("Just SELECT allowed")
 
         url = url + "query=" + query # IF I PUT THIS on params DOESN'T WORK (?) TODO
@@ -226,6 +227,6 @@ class Bigdata:
 
     def namespace_propierties(self):
         """ get propierties """
-        # /bigdata/namespace/NS/properties returns an XML
+        #TODO /bigdata/namespace/NS/properties returns an XML
 
 

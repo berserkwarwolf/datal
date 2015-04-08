@@ -25,56 +25,6 @@ class ActionStreams():
     PUBLISH = 2
     UNPUBLISH = 3
 
-ACTION_STREAM_CHIOCES = (
-                        (ActionStreams.CREATE, ugettext_lazy('ACTION_STREAM_CREATE'))
-                        ,(ActionStreams.DELETE, ugettext_lazy('ACTION_STREAM_DELETE'))
-                        ,(ActionStreams.PUBLISH, ugettext_lazy('ACTION_STREAM_PUBLISH'))
-                        ,(ActionStreams.UNPUBLISH, ugettext_lazy('ACTION_STREAM_UNPUBLISH'))
-                        )
-
-class EventChoices():
-    DASHBOARD_CSV = 0
-    DASHBOARD_GUID = 1
-    DASHBOARD_DV_EMBED = 2
-    DASHBOARD_SPREADSHEET = 3
-    DASHBOARD_SOURCE = 4
-    DASHBOARD_SEARCH = 5
-    DASHBOARD_CHART_RELOAD = 6
-    DASHBOARD_DETAILS = 7
-    DATAVIEW_CSV = 8
-    DATAVIEW_EMBED = 9
-    DATAVIEW_SPREADSHEET = 10
-    DATAVIEW_SOURCE = 11
-    DATAVIEW_SEARCH = 12
-    DATAVIEW_RELOAD = 13
-    DASHBOARD_DV_CSV = 14
-    DASHBOARD_DV_GUID = 15
-    DASHBOARD_DV_RELOAD = 16
-    DASHBOARD_CHART_EMBED = 17
-    SEARCH = 18
-
-EVENT_CHOICES = (
-    (EventChoices.DASHBOARD_CSV, '#id_exportDashboardCSV')
-    ,(EventChoices.DASHBOARD_GUID, '#id_guidButton')
-    ,(EventChoices.DASHBOARD_DV_EMBED, 'a[id*=id_addEmbedDataServiceButton_]')
-    ,(EventChoices.DASHBOARD_SPREADSHEET, 'a[id*=id_googlespreadsheetDataStreamButton_]')
-    ,(EventChoices.DASHBOARD_SOURCE, 'div[id*=id_dashboard_dataservice_goToSource_]')
-    ,(EventChoices.DASHBOARD_SEARCH, '#junar_search_button')
-    ,(EventChoices.DASHBOARD_CHART_RELOAD, 'a[id*=id_refreshChartButton_]')
-    ,(EventChoices.DASHBOARD_DETAILS, 'a[id*=dashboard_widget_link_]')
-    ,(EventChoices.DATAVIEW_CSV, '.ic_CSV')
-    ,(EventChoices.DATAVIEW_EMBED, 'a[id*=id_addEmbedDataServiceButton_]')
-    ,(EventChoices.DATAVIEW_SPREADSHEET, 'a[id*=id_googlespreadsheetDataStreamButton_]')
-    ,(EventChoices.DATAVIEW_SOURCE, '.sourcesBox a')
-    ,(EventChoices.DATAVIEW_SEARCH, '#junar_search_button')
-    ,(EventChoices.DATAVIEW_RELOAD, 'a[id*=id_resetDataServiceButton_]')
-    ,(EventChoices.DASHBOARD_DV_CSV, 'a[id*=id_exportToCSV_]')
-    ,(EventChoices.DASHBOARD_DV_GUID, 'a[id*=id_guidDataStreamButton_]')
-    ,(EventChoices.DASHBOARD_DV_RELOAD, 'a[id*=id_resetDashboardDataServiceButton_]')
-    ,(EventChoices.DASHBOARD_CHART_EMBED, 'a[id*=id_embedChartButton_]')
-    ,(EventChoices.SEARCH, '#junar_search_button')
-
-)
 
 # TODO: Create just one STATUS_CHOICES after we remove in a clean way UNDER_REVIEW and REJECTED choices
 STATUS_CHOICES = (
@@ -221,12 +171,6 @@ OCUPATION_CHOICES = (
     ,('04', ugettext_lazy( 'MODEL-OCUPATION-OT' ))
 )
 
-ACCOUNT_STATUS_CHOICES = (
-     ('00', 'ACTIVE')
-    ,('01', 'CLOSED')
-    ,('02', 'BLOCKED')
-)
-
 THRESHOLD_NAME_CHOICES = (
      ('self_publish.can_upload', 'self_publish.can_upload')
     ,('private_dashboard.can_create', 'private_dashboard.can_create')
@@ -331,15 +275,8 @@ API_APPLICATION_TYPE_CHOICES = (
     ,('04', 'UNLIMITED - 04')
 )
 
+
 class TicketChoices():
     PASSWORD_RECOVERY = 'PASS'
     API_AUTHORIZATION = 'API'
     USER_ACTIVATION = 'USER_ACTIVATION'
-
-class AccountLevels():
-    FREE = 'level_1'
-    TRIAL = 'level_2'
-    PRO = 'level_3'
-    PLUS = 'level_4'
-    PREMIER = 'level_5'
-    UNLIMITED = 'level_6'

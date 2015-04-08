@@ -4,6 +4,7 @@ from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
 from core.helpers import clean_string
 
+
 class Emitter:
 
     """ Junar speaks different formats """
@@ -42,8 +43,8 @@ class Emitter:
         if self.loaded_json.has_key('fLength'):
             self.length = self.loaded_json['fLength']
 
-class JSONEmitter(Emitter):
 
+class JSONEmitter(Emitter):
     """ Native Javascript / JSON array of arrays or number or string """
 
     def __init__(self, json):

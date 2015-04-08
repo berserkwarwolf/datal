@@ -131,10 +131,6 @@ class LastForm(forms.Form):
     def clean_max_results(self):
         return self.cleaned_data['max_results'] or 5
 
-class DeleteDatasetForm(forms.Form):
-    revision_id = forms.CharField(required=True, validators=[vil])
-    #TODO DOESN'T WORK. Always return 'false' and delete resources! is_test = forms.BooleanField(required=False, initial='True')
-
 
 class CreateDatasetForm(forms.Form):
     title = forms.CharField(required=True, label=ugettext_lazy('APP-TITLE-TEXT'))
@@ -196,9 +192,6 @@ class CreateDatasetFileForm(CreateDatasetForm):
             c=c+1
         return error_description
 
-class EditFileDataSetForm(CreateDatasetFileForm):
-    revision_id = forms.IntegerField(required=True)
-    status= forms.CharField(required=True)
 
 class CreateDatasetURLForm(CreateDatasetForm):
     title = forms.CharField(required=True, label=ugettext_lazy('APP-TITLE-TEXT'))
@@ -218,8 +211,6 @@ class CreateDatasetURLForm(CreateDatasetForm):
     mbox= forms.CharField(required=False, max_length=90)
     pass
 
-class EditURLDataSetForm(CreateDatasetURLForm):
-    revision_id = forms.IntegerField(required=True)
 
 class CreateDatasetWebserviceForm(CreateDatasetForm):
     path_to_headers = forms.CharField(required=False, label=ugettext_lazy('WORKSPACE-PATHTOHEADERS-TEXT'))

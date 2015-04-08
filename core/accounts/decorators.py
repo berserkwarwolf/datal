@@ -4,6 +4,7 @@ from django.utils.translation import ugettext
 import json
 from functools import wraps
 
+
 def threshold(code):
     def decorator(func):
         def inner_decorator(request, *args, **kwargs):
@@ -22,6 +23,7 @@ def threshold(code):
 
     return decorator
 
+
 def calculate_dataset_limit(request, code):
     account_id = request.auth_manager.account_id
     datasets_count = Dataset.objects.filter(user__account__id=account_id).count()
@@ -32,6 +34,7 @@ def calculate_dataset_limit(request, code):
         return response
     else:
         return ''
+
 
 def calculate_user_limit(request, code):
     account_id = request.auth_manager.account_id

@@ -166,24 +166,6 @@ def i18nize(l_cell, return_just_value = True):
         ret = l_cell
     return ret
 
-def jsonParseFormats(p_response, p_page = '', p_limit =''):
-    """ apply format as data_source says"""
-
-    try:
-        p_response = json.loads(p_response)
-    except:
-        return p_response
-
-    if p_response['fType']=='ARRAY':
-        l_i = 0
-        for l_row_number in range(0, p_response['fRows']):
-            for l_column_number in range(0, p_response['fCols']):
-                l_cell = p_response['fArray'][l_i]
-                # TRANSFORM DE DATA
-                p_response['fArray'][l_i] = i18nize(l_cell, False)
-                l_i = l_i + 1
-
-    return json.dumps(p_response)
 
 def jsonToGrid(p_response, p_page = '', p_limit =''):
     """ p_response is a core.engine.invoke resultset """
@@ -219,7 +201,7 @@ def jsonToGrid(p_response, p_page = '', p_limit =''):
 
             l_row_i = l_row_i + 1
 
-            if l_hasHeader == False:
+            if not l_hasHeader:
                 l_lists["rows"].append(l_row)
             else:
                 l_hasHeader = False
@@ -266,12 +248,6 @@ class RequestProcessor:
             value = self.request.REQUEST.get(key, None)
         return args
 
-def is_bot(request):
-    user_agent = request.META.get('HTTP_USER_AGENT', '')
-    for bot in settings.BOTS:
-        if bot in user_agent:
-            return True
-    return False
 
 def get_meta_data_dict(metadata):
     if metadata:
@@ -407,110 +383,6 @@ def get_domain_by_account_id(account_id):
     return account_domain
 
 
-def set_role(user):
-    try:
-        Role.objects.get(user=user['id'], code='ao-account-admin')
-    except Role.DoesNotExist:
-        try:
-            Role.objects.get(user=user['id'], code='ao-publisher')
-        except Role.DoesNotExist:
-            try:
-                Role.objects.get(user=user['id'], code='ao-editor')
-            except Role.DoesNotExist:
-                pass
-            else:
-                user['role'] = 'ao-editor'
-        else:
-            user['role'] = 'ao-publisher'
-    else:
-        user['role'] = 'ao-account-admin'
-
-    return user
-
-def source_choice_filter(query, form):
-    if form.cleaned_data['source_choice_filters'] != '':
-        filters = form.cleaned_data['source_choice_filters']
-        filter_list = []
-        for filter_name in filters.split(','):
-            filter_list.append(int(filter_name))
-        query = query.filter(impl_type__in=filter_list)
-    return query
-
-def order_filter(query, form, order_columns, ascending):
-    if form.cleaned_data['order'] != '':
-        query = datatable_ordering_helper(query=query, col_number=form.cleaned_data['order'], ascending=ascending, order_columns=order_columns)
-    return query
-
-def ascending_filter(form):
-    if form.cleaned_data['order_type'] == 'ascending':
-        return True
-    else:
-        return False
-
-def list_order_filter(query, form, order_columns, ascending):
-    if form.cleaned_data['order'] != '':
-        col_number=form.cleaned_data['order']
-        col_name = order_columns[col_number]
-        if col_name:
-            query = sorted(query, key=itemgetter(col_name), reverse=not ascending)
-    return query
-
-def status_filter(query, form):
-    if form.cleaned_data['status_filters'] != '':
-        filters = form.cleaned_data['status_filters']
-        filter_list = []
-        for filter_name in filters.split(','):
-            filter_list.append(filter_name)
-        query = query.filter(status__in=filter_list)
-    return query
-
-def visualization_category_filter(query, form):
-    if form.cleaned_data['category_filters'] != '':
-        filters = form.cleaned_data['category_filters']
-        filter_list = []
-        for filter_name in filters.split(','):
-            filter_list.append(filter_name)
-        query = query.filter(visualization__datastream__datastreamrevision__category__in=filter_list)
-    return query
-
-def category_filter(query, form):
-    if form.cleaned_data['category_filters'] != '':
-        filters = form.cleaned_data['category_filters']
-        filter_list = []
-        for filter_name in filters.split(','):
-            filter_list.append(filter_name)
-        query = query.filter(category__in=filter_list)
-    return query
-
-def time_filter(query, form):
-    end_date = date.today()
-    if form.cleaned_data['week_time']:
-        start_date = end_date - timedelta(days=7)
-        query = query.filter(created_at__gte=start_date)
-    elif form.cleaned_data['month_time']:
-        start_date = end_date - timedelta(days=30)
-        query = query.filter(created_at__gte=start_date)
-    return query
-
-#ugly hack, django 1.4 has not DISTINCT ON 'field' for MySQL
-def unique_keys(items, field):
-    seen    = set()
-    uniques = []
-    for item in items:
-        key = item[field]
-        if key not in seen:
-            seen.add(key)
-            uniques.append(item)
-
-    return uniques
-
-def try_utf8(data):
-    "Returns a Unicode object on success, or None on failure"
-    try:
-       return data.decode('utf-8')
-    except UnicodeDecodeError:
-       return None
-
 def update_dashboard_widgets_and_revisions(widgets):
 
    for wdgt in widgets:
@@ -523,32 +395,6 @@ def update_dashboard_widgets_and_revisions(widgets):
 
    widgets.delete()
 
-def set_featured_dashboards_nice(item):
-    item['title'] = item['dashboardrevision__dashboardi18n__title']
-    del item['dashboardrevision__dashboardi18n__title']
-    return item
-
-def set_datastream_report_query_nice(item):
-    item['title'] = item['datastreami18n__title']
-    item['channel_type'] = unicode(CHANNEL_TYPES[int(item['datastream__datastreamhits__channel_type'])][1])
-    del item['datastreami18n__title']
-    del item['datastream__datastreamhits__channel_type']
-    return item
-
-def set_visualization_report_query_nice(item):
-    item['title'] = item['visualization__visualizationrevision__visualizationi18n__title']
-    item['channel_type'] = unicode(CHANNEL_TYPES[int(item['visualization__visualizationhits__channel_type'])][1])
-    del item['visualization__visualizationrevision__visualizationi18n__title']
-    del item['visualization__visualizationhits__channel_type']
-    return item
-
-def activity_stream_append_resources(user, query, field):
-    for u in query:
-        if user['id'] == u['id'] and field in u:
-            user[field] = u[field]
-            if user[field] > 0:
-                user['has_resource'] = True
-    return user
 
 def set_dataset_impl_type_nice(item):
     impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])
@@ -621,29 +467,3 @@ def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
     l_url = reverse(p_view_name)
 
     return l_domain + l_url + l_query
-
-def generate_index_dictionary(resources):
-    index_list = []
-    for resource in resources:
-        if not isinstance(resource, DatasetRevision):
-            if isinstance(resource, DataStreamRevision):
-                key = 'DS::' + resource.datastream.guid
-            elif isinstance(resource, DashboardRevision):
-                key = 'DB::' + resource.dashboard.guid
-            elif isinstance(resource, VisualizationRevision):
-                key = 'VZ::' + resource.visualization.guid
-            index_list.append(key)
-
-    return index_list
-
-def action_delete_cache_keys(dataset_id):
-    from core.cache import Cache
-    keys = []
-    datastreams = DataStreamRevision.objects.filter(dataset__id=dataset_id)
-    cache = Cache(db=0)
-    for ds in datastreams:
-        keys = cache.keys(str(ds.id) + '::*')
-        keys.append(str(ds.id))
-        if len(keys) > 0:
-            for key in keys:
-                cache.delete(key)

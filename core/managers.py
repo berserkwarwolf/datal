@@ -8,22 +8,8 @@ from django.core.urlresolvers import reverse
 from core.helpers import slugify
 from core import helpers, choices
 
-class ResourcesManager(models.Manager):
-    def count(self):
-        return SearchifyIndex().get().count()
 
 class ThresholdManager(models.Manager):
-
-    def get_limit_by_code_and_user_id(self, code, user_id):
-        try:
-            return super(ThresholdManager, self).values('limit').get( account_level__account__user__id = user_id, name = code)['limit']
-        except self.model.DoesNotExist:
-            # we dont have a relationship between every common user an a level 1 account, that would be stupid
-            # so instead, we only check for level 1 threshold
-            try:
-                return super(ThresholdManager, self).values('limit').get( account_level__code = 'level_1', name = code)['limit']
-            except self.model.DoesNotExist:
-                return 0
 
     def get_limit_by_code_and_account_id(self, code, account_id):
 
@@ -135,10 +121,6 @@ class PreferenceManager(models.Manager):
 
     def get_value_by_account_id_and_key(self, account_id, key):
         return super(PreferenceManager, self).values('value').get( account = account_id, key = key )['value']
-
-    def get_value_by_known_key_and_value(self, known_key, known_value, key):
-        account_id = self.get_account_id_by_known_key_and_value(known_key, known_value)
-        return self.get_value_by_account_id_and_key(account_id, key)
 
     def get_account_id_by_known_key_and_value(self, known_key, known_value):
         return super(PreferenceManager, self).values('account_id').get(value = known_value, key = known_key)['account_id']

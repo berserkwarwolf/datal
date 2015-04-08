@@ -9,7 +9,6 @@ from api.exceptions import BigdataNamespaceNotDefined
 from core.tasks import mint_process
 from api.decorators import bigdata_cross_namespace_forbidden, public_access_forbidden
 from api.exceptions import is_method_get_or_405
-from api.helpers import get_api_domain
 from api.helpers import get_domain
 
 @csrf_exempt

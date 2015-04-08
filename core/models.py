@@ -12,21 +12,6 @@ import json
 
 logger = logging.getLogger(__name__)
 
-# Helper function to get I18n model
-def get_i18n(instance, lang, i18nset = None):
-    assert(isinstance(instance, models.Model))
-
-    # Get set method name (ie. Category instance into 'categoryi18n_set'
-    if i18nset is None:
-        i18nset = instance.__class__.__name__.lower() + 'i18n_set'
-
-    try:
-        i18n = getattr(instance, i18nset).filter(language = lang)[0]
-    except IndexError:
-        # Not available, fallback to first entry
-        i18n = getattr(instance, i18nset).all()[0]
-    return i18n
-
 def add_facets_to_doc(resource, account, doc):
     faceted = account.faceted_fields()
     try:
@@ -1177,17 +1162,6 @@ class DashboardHits(models.Model):
         return unicode(self.id)
 
 
-class SearchTerm(models.Model):
-    search          = models.TextField()
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_search_terms'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class DashboardRank(models.Model):
     dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
     position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
@@ -1236,26 +1210,6 @@ class DataStreamComment(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
-
-
-class Task(models.Model):
-    guid = models.CharField(max_length=29, unique=True)
-    action = models.CharField(max_length=20)
-    state = models.CharField(max_length=20, null=True)
-    year = models.CharField(max_length=20, null=True)
-    month = models.CharField(max_length=20, null=True)
-    day = models.CharField(max_length=20, null=True)
-    week = models.CharField(max_length=20, null=True)
-    day_of_week = models.CharField(max_length=20, null=True)
-    hour = models.CharField(max_length=20, null=True)
-    minute = models.CharField(max_length=20, null=True)
-    second = models.CharField(max_length=20, null=True)
-
-    class Meta:
-        db_table = 'ao_tasks'
-
-    def __unicode__(self):
-        return unicode(self.guid)
 
 
 class Alert(models.Model):

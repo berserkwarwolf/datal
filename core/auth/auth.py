@@ -4,6 +4,7 @@ from core.models import *
 from core.choices import StatusChoices
 from django.utils.translation import ugettext_lazy
 
+
 class AuthManager:
     def __init__(self, user=None, language=None):
         if user:
@@ -45,17 +46,11 @@ class AuthManager:
     def has_privilege(self, p_privilege = ''):
         return p_privilege in self.privileges
 
-    def has_privileges(self, p_privileges = []):
-        return set(p_privileges).issubset(set(self.privileges))
-
     def has_role(self, role = ''):
         return role in self.roles
 
     def has_roles(self, roles = []):
         return set(roles).issubset(set(self.roles))
-
-    def get_user(self):
-        return User.objects.get(pk = self.id)
 
     def is_level(self, p_level):
         account_id = self.account_id

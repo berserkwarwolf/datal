@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from core.auth.decorators import login_required, privilege_required
 from core.accounts.decorators import threshold
-from core.choices import TicketChoices, EventChoices, EVENT_CHOICES, StatusChoices
+from core.choices import TicketChoices, StatusChoices
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib import mailchimp_lib
@@ -130,7 +130,6 @@ def action_create_user(request):
         extradata = {'country': country, 'company': company}
         suscription = mailchimp_lib.workspace_users_list_subscribe(user, language, extradata)
 
-        # workspace_user_activation_email_campaign_send(user.email, user.name, adminname, company, link, language)
         mergetags = {'FNAME': user.name, 'ADMINNAME': adminname, 'COMPANY': company}
         mailchimp_lib.account_administrators_welcome_email_campaign_send(user, link, mergetags)
 

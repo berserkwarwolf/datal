@@ -14,7 +14,6 @@ from core.docs import DS
 from core.emitters import ExcelEmitter
 from core.engine import invoke, invoke_chart
 from core.helpers import jsonToGrid, Day, RequestProcessor, get_domain_with_protocol
-from core.http import EmitterHttpResponse
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 import urllib, urllib2

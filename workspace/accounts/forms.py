@@ -20,18 +20,6 @@ class SignUpForm(forms.Form):
     def clean_password(self):
         return hashlib.md5(self.cleaned_data.get('password')).hexdigest()
 
-class SignUpFreeForm(forms.Form):
-    username       = forms.CharField(required=True, label=ugettext_lazy('APP-USERNAME-TEXT'))
-    password       = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('APP-PASSWORD-TEXT'))
-    password_again = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-CONFIRMPSW'))
-    email          = forms.CharField(required=True, label=ugettext_lazy('APP-EMAIL-TEXT'))
-    language       = forms.ChoiceField(required=True, choices=choices.LANGUAGE_CHOICES, label=ugettext_lazy('APP-LANGUAGE-TEXT'))
-    
-    def action(self):
-        return reverse('accounts.create_free')
-
-    def clean_password(self):
-        return hashlib.md5(self.cleaned_data.get('password')).hexdigest()
 
 class SignInForm(forms.Form):
     admin_url      = forms.CharField(required=False, widget=forms.HiddenInput())

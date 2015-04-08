@@ -117,7 +117,6 @@ END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
 
 BASE_URI                = 'localhost'
 MEDIA_URI               = BASE_URI
-WORKSPACE_URI           = 'workspace'
 API_URI                 = 'http://api'
 WORKSPACE_URI           = 'http://workspace'
 API_KEY                 = ''
