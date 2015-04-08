@@ -2,22 +2,41 @@
 {% load i18n extra_tags components datastream_tags %}
 
 {% block meta %}
-<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css?id={{settings.VERSION_JS_CSS}}" />
 
+{# CSS #}
+<link href="/media_core/styles/plugins/backgrid/backgrid.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-paginator.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-text-cell.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="/media_core/styles/plugins/backgrid/backgrid-filter.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css?id={{settings.VERSION_JS_CSS}}" />
 <link href="/media_workspace/styles/detailCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="/media_workspace/styles/viewDataStream.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
 
+{# JS Libs and Plugins #}
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
 
+{# JS for this screen #}
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datasetItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/listDatasets.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
 {% endblock %}
@@ -36,7 +55,7 @@
   <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
 
   <!-- Add New -->
-  <li class="has-separator"><a id="id_addNew" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+  <li class="has-separator"><a id="id_addNewButton" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
 
 </ul>
 {% endblock %}
@@ -95,7 +114,14 @@ $(document).ready(function(){
     {% endfor %}
     filter: "",
   });
-  var viewDataStreamView = new ViewDataStreamView({model: viewDataStreamModel});
+  var viewDataStreamView = new ViewDataStreamView({
+    model: viewDataStreamModel,
+    dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}"
+  });
 });
 </script>
+{% endblock %}
+
+{% block popupsOverlay %}
+{% include "viewDataStream/overlays.html" %}
 {% endblock %}
