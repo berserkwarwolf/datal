@@ -1212,28 +1212,6 @@ class DataStreamComment(models.Model):
         return unicode(self.id)
 
 
-class Alert(models.Model):
-    task = models.ForeignKey('Task')
-    account = models.ForeignKey('Account')
-    datastream = models.CharField(max_length=29)
-    parameters = models.TextField()
-    rule = models.TextField()
-    family = models.CharField(max_length=32)
-
-    class Meta:
-        db_table = 'ao_alerts'
-
-
-class Message(models.Model):
-    alert = models.ForeignKey('Alert')
-    message = models.TextField()
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
-    objects = managers.MessageManager()
-
-    class Meta:
-        db_table = 'ao_messages'
-
-
 class Log(models.Model):
     user = models.ForeignKey('User',  on_delete=models.DO_NOTHING)
     dashboard = models.ForeignKey('Dashboard', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'), on_delete=models.DO_NOTHING)

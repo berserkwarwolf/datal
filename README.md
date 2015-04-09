@@ -53,6 +53,7 @@ Logs
 
     vagrant ssh
     tail -f /var/log/uwsgi/uwsgi-workspace.log (or other logs)
+    tail -f /tmp/datal.log
     
 
 Problemas
