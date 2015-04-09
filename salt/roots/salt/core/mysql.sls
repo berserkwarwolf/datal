@@ -14,8 +14,18 @@ mysql:
 {{ pillar['database']['name'] }}:
   mysql_database.present
 
+test_{{ pillar['database']['name'] }}:
+  mysql_database.present
+
 db_perms:
   mysql_grants.present:
     - grant: all privileges
     - database: {{ pillar['database']['name'] }}.*
     - user: {{ pillar['database']['user'] }}
+
+test_db_perms:
+  mysql_grants.present:
+    - grant: all privileges
+    - database: test_{{ pillar['database']['name'] }}.*
+    - user: {{ pillar['database']['user'] }}
+

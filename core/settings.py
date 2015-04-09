@@ -41,6 +41,7 @@ SECRET_KEY = ''
 
 INSTALLED_APPS = (
     'django_extensions',
+    'django_nose',
     'core',
     'raven.contrib.django'
 )
@@ -263,6 +264,9 @@ LOGGING = {
 }
 
 IS_WORKSPACE = False
+
+# Django Nose
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 try:
     from core.local_settings import *
