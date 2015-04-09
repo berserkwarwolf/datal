@@ -22,3 +22,5 @@
 .edit .editDataset span.required,
 .edit .collect .backButton,
 ul.edit li.step0{display:none;}
+
+ .create .button{display:block;}
