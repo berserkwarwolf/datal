@@ -115,29 +115,3 @@ class FinderManager(managers.FinderManager):
         self.finder_class = finder_class
         self.failback_finder_class = failback_finder_class
         managers.FinderManager.__init__(self)
-
-
-
-def get_messages_by_account(self, account_id, date):
-
-    sql = """SELECT `ao_tasks`.`guid`,
-                    `ao_messages`.`message`,
-                    `ao_messages`.`created_at`
-             FROM `ao_tasks`
-             INNER JOIN `ao_alerts` ON (`ao_alerts`.`task_id` = `ao_tasks`.`id`)
-             INNER JOIN `ao_messages` ON (`ao_messages`.`alert_id` = `ao_alerts`.`id`)
-             WHERE `ao_alerts`.`account_id` = %s AND `ao_messages`.`created_at` > %s"""
-
-    cursor = connection.cursor()
-    cursor.execute(sql, (account_id, date))
-    row = cursor.fetchone()
-    messages = []
-    while row:
-        messages.append({'guid': row[0],
-                         'message': row[1],
-                         'created_at': str(row[2])
-                       })
-        row = cursor.fetchone()
-
-    return messages
-managers.MessageManager.get_by_account = get_messages_by_account

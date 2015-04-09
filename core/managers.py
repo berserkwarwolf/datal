@@ -842,9 +842,6 @@ class IndexTankFinder(Finder):
         if boolean_operator not in boolean_operators:
             raise Exception('Boolean operator used, does not exists')
 
-class MessageManager(models.Manager):
-    pass
-
 class ObjectGrantManager(models.Manager):
 
     def get_collaborators(self, object_id, object_type):
