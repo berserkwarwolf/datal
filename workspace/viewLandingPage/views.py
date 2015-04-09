@@ -24,9 +24,8 @@ def load(request):
     
     return render_to_response('viewLandingPage/index.html', locals())
 
+
 def calc_resource_perc(my_total_resource,max_resource):
-    if max_resource == 0:
-        result = 0
-    else:
-        result = ((float(my_total_resource))/(float(max_resource)))*100
+    perc = lambda a, b: b > 0 and float(a)/float(b) or 0
+    result = perc(my_total_resource, max_resource) * 100
     return result
