@@ -1,6 +1,6 @@
 from django.test import TransactionTestCase
 
-from core.choices import CollectTypeChoices, SourceImplementationChoices
+from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 
@@ -15,17 +15,14 @@ class LifeCycleManagerTestCase(TransactionTestCase):
 
         self.user = User.objects.get(nick=self.user_nick)
         self.category = Category.objects.filter(account_id=self.user.account.id).order_by('-id')[0]
-        self.life_cycle = DatasetLifeCycleManager(user=self.user)
         self.collect_type = CollectTypeChoices.SELF_PUBLISH
         self.source_type = SourceImplementationChoices.HTML
 
 
-    def test_create_dataset(self):
-        """
-        Testing Lifecycle Manager Create Dataset Method
-        """
+    def create_dataset(self):
+        life_cycle = DatasetLifeCycleManager(user=self.user)
 
-        self.dataset = self.life_cycle.create(
+        self.dataset = life_cycle.create(
             title='Test Dataset',
             collect_type=self.collect_type,
             description="Descripcion del dataset",
@@ -36,6 +33,23 @@ class LifeCycleManagerTestCase(TransactionTestCase):
             file_name=''
         )
 
+    def send_to_review(self):
+        # Send to review
+        lifecycle = DatasetLifeCycleManager(user=self.user, dataset_revision_id=self.dataset.last_revision.get().id)
+        dataset_revision = lifecycle.edit(changed_fields=['status'],
+                                          language=self.user.language,  status=StatusChoices.PENDING_REVIEW,
+                                          title='Test Dataset', collect_type=self.collect_type,
+                                          description="Descripcion del dataset", end_point=self.end_point, notes='',
+                                          category=self.category.id, impl_type=self.source_type, file_name='', tags=[],
+                                          sources=[])
+
+
+    def test_create_dataset(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        self.create_dataset()
+
         new_dataset = Dataset.objects.get(id=self.dataset.id)
 
         # Verifico los campos del dataset
@@ -45,3 +59,17 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_send_to_review(self):
+        """
+        Testing Lifecycle Manager Send to Review Dataset Method
+        """
+        self.create_dataset()
+        self.send_to_review()
+
+
+    def test_remove_dataset(self):
+        """
+        Testing Lifecycle Manager Remove Dataset Method
+        """
+        self.create_dataset()
