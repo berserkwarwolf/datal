@@ -1,7 +1,7 @@
 [
 {
-    "pk": 1, 
-    "model": "core.preference", 
+    "pk": 1,
+    "model": "core.preference",
     "fields": {
         "account": 1,
         "value": "Datos.gob.cl",
@@ -9,11 +9,11 @@
     }
 },
 {
-    "pk": 2, 
-    "model": "core.preference", 
+    "pk": 2,
+    "model": "core.preference",
     "fields": {
         "account": 1,
-        "value": "CL", 
+        "value": "CL",
         "key": "account.contact.person.country"
     }
 },
@@ -50,7 +50,7 @@
    "fields": {
        "account": 1,
        "value": "es",
-       "key": " account.language"
+       "key": "account.language"
    }
 },
   {
