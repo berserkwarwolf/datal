@@ -11,6 +11,7 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.exceptions import LifeCycleException
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
@@ -123,14 +124,14 @@ def remove(request, id, type="resource"):
         if removes:
             return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
         else:
-            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT')]}))
+            raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
 
     else:
         removes = lifecycle.remove(killemall=True)
         if removes:
             return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
         else:
-            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+            raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
 
 @login_required
 @require_privilege("workspace.can_create_dataset")
