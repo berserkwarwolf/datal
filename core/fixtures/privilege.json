@@ -1,1301 +1,1141 @@
 [
 {
-    "pk": 529, 
-    "model": "core.privilege", 
+    "pk": 529,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_dataset_url_as_approved", 
-        "name": "workspace.can_create_dataset_url_as_approved", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_create_dataset",
+        "name": "workspace.can_create_dataset",
         "description": ""
     }
 },
 {
-    "pk": 530, 
-    "model": "core.privilege", 
+    "pk": 533,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_dataset_url_as_published", 
-        "name": "workspace.can_create_dataset_url_as_published", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_edit_dataset",
+        "name": "workspace.can_edit_dataset",
         "description": ""
     }
 },
 {
-    "pk": 531, 
-    "model": "core.privilege", 
+    "pk": 537,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_dataset_file_as_approved", 
-        "name": "workspace.can_create_dataset_file_as_approved", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_delete_dataset",
+        "name": "workspace.can_delete_dataset",
         "description": ""
     }
 },
 {
-    "pk": 532, 
-    "model": "core.privilege", 
+    "pk": 538,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_dataset_file_as_published", 
-        "name": "workspace.can_create_dataset_file_as_published", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_load_featured_dashboard",
+        "name": "workspace.can_load_featured_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 533, 
-    "model": "core.privilege", 
+    "pk": 539,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_dataset_url_as_approved", 
-        "name": "workspace.can_edit_dataset_url_as_approved", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_save_featured_dashboard",
+        "name": "workspace.can_save_featured_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 534, 
-    "model": "core.privilege", 
+    "pk": 540,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_dataset_url_as_published", 
-        "name": "workspace.can_edit_dataset_url_as_published", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_publish_dataset_revision",
+        "name": "workspace.can_publish_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 535, 
-    "model": "core.privilege", 
+    "pk": 541,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_dataset_file_as_approved", 
-        "name": "workspace.can_edit_dataset_file_as_approved", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_publish_datastream_revision",
+        "name": "workspace.can_publish_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 536, 
-    "model": "core.privilege", 
+    "pk": 542,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_dataset_file_as_published", 
-        "name": "workspace.can_edit_dataset_file_as_published", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_publish_dashboard_revision",
+        "name": "workspace.can_publish_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 537, 
-    "model": "core.privilege", 
+    "pk": 543,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_delete_dataset", 
-        "name": "workspace.can_delete_dataset", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_publish_visualization_revision",
+        "name": "workspace.can_publish_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 538, 
-    "model": "core.privilege", 
+    "pk": 544,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_load_featured_dashboard", 
-        "name": "workspace.can_load_featured_dashboard", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_unpublish_dataset_revision",
+        "name": "workspace.can_unpublish_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 539, 
-    "model": "core.privilege", 
+    "pk": 545,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_save_featured_dashboard", 
-        "name": "workspace.can_save_featured_dashboard", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_unpublish_datastream_revision",
+        "name": "workspace.can_unpublish_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 540, 
-    "model": "core.privilege", 
+    "pk": 546,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_publish_dataset_revision", 
-        "name": "workspace.can_publish_dataset_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_unpublish_dashboard_revision",
+        "name": "workspace.can_unpublish_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 541, 
-    "model": "core.privilege", 
+    "pk": 547,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_publish_datastream_revision", 
-        "name": "workspace.can_publish_datastream_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_unpublish_visualization_revision",
+        "name": "workspace.can_unpublish_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 542, 
-    "model": "core.privilege", 
+    "pk": 548,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_publish_dashboard_revision", 
-        "name": "workspace.can_publish_dashboard_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_approve_dataset_revision",
+        "name": "workspace.can_approve_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 543, 
-    "model": "core.privilege", 
+    "pk": 549,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_publish_visualization_revision", 
-        "name": "workspace.can_publish_visualization_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_approve_datastream_revision",
+        "name": "workspace.can_approve_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 544, 
-    "model": "core.privilege", 
+    "pk": 550,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_unpublish_dataset_revision", 
-        "name": "workspace.can_unpublish_dataset_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_approve_dashboard_revision",
+        "name": "workspace.can_approve_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 545, 
-    "model": "core.privilege", 
+    "pk": 551,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_unpublish_datastream_revision", 
-        "name": "workspace.can_unpublish_datastream_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_approve_visualization_revision",
+        "name": "workspace.can_approve_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 546, 
-    "model": "core.privilege", 
+    "pk": 552,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_unpublish_dashboard_revision", 
-        "name": "workspace.can_unpublish_dashboard_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_reject_dataset_revision",
+        "name": "workspace.can_reject_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 547, 
-    "model": "core.privilege", 
+    "pk": 553,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_unpublish_visualization_revision", 
-        "name": "workspace.can_unpublish_visualization_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_reject_datastream_revision",
+        "name": "workspace.can_reject_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 548, 
-    "model": "core.privilege", 
+    "pk": 554,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_approve_dataset_revision", 
-        "name": "workspace.can_approve_dataset_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_reject_dashboard_revision",
+        "name": "workspace.can_reject_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 549, 
-    "model": "core.privilege", 
+    "pk": 555,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_approve_datastream_revision", 
-        "name": "workspace.can_approve_datastream_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_reject_visualization_revision",
+        "name": "workspace.can_reject_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 550, 
-    "model": "core.privilege", 
+    "pk": 556,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_approve_dashboard_revision", 
-        "name": "workspace.can_approve_dashboard_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_query_dataset",
+        "name": "workspace.can_query_dataset",
         "description": ""
     }
 },
 {
-    "pk": 551, 
-    "model": "core.privilege", 
+    "pk": 557,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_approve_visualization_revision", 
-        "name": "workspace.can_approve_visualization_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_query_publisher_datastream",
+        "name": "workspace.can_query_publisher_datastream",
         "description": ""
     }
 },
 {
-    "pk": 552, 
-    "model": "core.privilege", 
+    "pk": 558,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_reject_dataset_revision", 
-        "name": "workspace.can_reject_dataset_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_query_publisher_dashboard",
+        "name": "workspace.can_query_publisher_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 553, 
-    "model": "core.privilege", 
+    "pk": 559,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_reject_datastream_revision", 
-        "name": "workspace.can_reject_datastream_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_query_publisher_visualization",
+        "name": "workspace.can_query_publisher_visualization",
         "description": ""
     }
 },
 {
-    "pk": 554, 
-    "model": "core.privilege", 
+    "pk": 560,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_reject_dashboard_revision", 
-        "name": "workspace.can_reject_dashboard_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_review_dashboard_revision",
+        "name": "workspace.can_review_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 555, 
-    "model": "core.privilege", 
+    "pk": 561,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_reject_visualization_revision", 
-        "name": "workspace.can_reject_visualization_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_review_datastream_revision",
+        "name": "workspace.can_review_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 556, 
-    "model": "core.privilege", 
+    "pk": 562,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_query_publisher_dataset", 
-        "name": "workspace.can_query_publisher_dataset", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_review_visualization_revision",
+        "name": "workspace.can_review_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 557, 
-    "model": "core.privilege", 
+    "pk": 563,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_query_publisher_datastream", 
-        "name": "workspace.can_query_publisher_datastream", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_review_dataset_revision",
+        "name": "workspace.can_review_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 558, 
-    "model": "core.privilege", 
+    "pk": 565,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_query_publisher_dashboard", 
-        "name": "workspace.can_query_publisher_dashboard", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_access_publisher",
+        "name": "workspace.can_access_publisher",
         "description": ""
     }
 },
 {
-    "pk": 559, 
-    "model": "core.privilege", 
+    "pk": 566,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_query_publisher_visualization", 
-        "name": "workspace.can_query_publisher_visualization", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_access_report",
+        "name": "workspace.can_access_report",
         "description": ""
     }
 },
 {
-    "pk": 560, 
-    "model": "core.privilege", 
+    "pk": 567,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_review_dashboard_revision", 
-        "name": "workspace.can_review_dashboard_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_create_visualization_as_approved",
+        "name": "workspace.can_create_visualization_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 561, 
-    "model": "core.privilege", 
+    "pk": 568,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_review_datastream_revision", 
-        "name": "workspace.can_review_datastream_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_create_visualization_as_published",
+        "name": "workspace.can_create_visualization_as_published",
         "description": ""
     }
 },
 {
-    "pk": 562, 
-    "model": "core.privilege", 
+    "pk": 569,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_review_visualization_revision", 
-        "name": "workspace.can_review_visualization_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_edit_visualization_as_approved",
+        "name": "workspace.can_edit_visualization_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 563, 
-    "model": "core.privilege", 
+    "pk": 570,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_review_dataset_revision", 
-        "name": "workspace.can_review_dataset_revision", 
+        "created_at": "2012-06-04T09:55:12",
+        "code": "workspace.can_edit_visualization_as_published",
+        "name": "workspace.can_edit_visualization_as_published",
         "description": ""
     }
 },
 {
-    "pk": 565, 
-    "model": "core.privilege", 
+    "pk": 571,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_access_publisher", 
-        "name": "workspace.can_access_publisher", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_create_datastream_as_approved",
+        "name": "workspace.can_create_datastream_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 566, 
-    "model": "core.privilege", 
+    "pk": 572,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_access_report", 
-        "name": "workspace.can_access_report", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_create_datastream_as_published",
+        "name": "workspace.can_create_datastream_as_published",
         "description": ""
     }
 },
 {
-    "pk": 567, 
-    "model": "core.privilege", 
+    "pk": 573,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_visualization_as_approved", 
-        "name": "workspace.can_create_visualization_as_approved", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_edit_datastream_as_approved",
+        "name": "workspace.can_edit_datastream_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 568, 
-    "model": "core.privilege", 
+    "pk": 574,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_create_visualization_as_published", 
-        "name": "workspace.can_create_visualization_as_published", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_edit_datastream_as_published",
+        "name": "workspace.can_edit_datastream_as_published",
         "description": ""
     }
 },
 {
-    "pk": 569, 
-    "model": "core.privilege", 
+    "pk": 575,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_visualization_as_approved", 
-        "name": "workspace.can_edit_visualization_as_approved", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_delete_datastream",
+        "name": "workspace.can_delete_datastream",
         "description": ""
     }
 },
 {
-    "pk": 570, 
-    "model": "core.privilege", 
+    "pk": 576,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:12", 
-        "code": "workspace.can_edit_visualization_as_published", 
-        "name": "workspace.can_edit_visualization_as_published", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_delete_dashboard",
+        "name": "workspace.can_delete_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 571, 
-    "model": "core.privilege", 
+    "pk": 577,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_create_datastream_as_approved", 
-        "name": "workspace.can_create_datastream_as_approved", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_delete_visualization",
+        "name": "workspace.can_delete_visualization",
         "description": ""
     }
 },
 {
-    "pk": 572, 
-    "model": "core.privilege", 
+    "pk": 578,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_create_datastream_as_published", 
-        "name": "workspace.can_create_datastream_as_published", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_create_dashboard_as_approved",
+        "name": "workspace.can_create_dashboard_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 573, 
-    "model": "core.privilege", 
+    "pk": 579,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_edit_datastream_as_approved", 
-        "name": "workspace.can_edit_datastream_as_approved", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_create_dashboard_as_published",
+        "name": "workspace.can_create_dashboard_as_published",
         "description": ""
     }
 },
 {
-    "pk": 574, 
-    "model": "core.privilege", 
+    "pk": 580,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_edit_datastream_as_published", 
-        "name": "workspace.can_edit_datastream_as_published", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_edit_dashboard_as_approved",
+        "name": "workspace.can_edit_dashboard_as_approved",
         "description": ""
     }
 },
 {
-    "pk": 575, 
-    "model": "core.privilege", 
+    "pk": 581,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_delete_datastream", 
-        "name": "workspace.can_delete_datastream", 
+        "created_at": "2012-06-04T09:55:13",
+        "code": "workspace.can_edit_dashboard_as_published",
+        "name": "workspace.can_edit_dashboard_as_published",
         "description": ""
     }
 },
 {
-    "pk": 576, 
-    "model": "core.privilege", 
+    "pk": 582,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_delete_dashboard", 
-        "name": "workspace.can_delete_dashboard", 
+        "created_at": "2012-06-04T09:55:24",
+        "code": "workspace.can_access_admin",
+        "name": "workspace.can_access_admin",
         "description": ""
     }
 },
 {
-    "pk": 577, 
-    "model": "core.privilege", 
+    "pk": 638,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_delete_visualization", 
-        "name": "workspace.can_delete_visualization", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_submit_dataset_revision",
+        "name": "workspace.can_submit_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 578, 
-    "model": "core.privilege", 
+    "pk": 639,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_create_dashboard_as_approved", 
-        "name": "workspace.can_create_dashboard_as_approved", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_delete_dataset_revision",
+        "name": "workspace.can_delete_dataset_revision",
         "description": ""
     }
 },
 {
-    "pk": 579, 
-    "model": "core.privilege", 
+    "pk": 640,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_create_dashboard_as_published", 
-        "name": "workspace.can_create_dashboard_as_published", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_query_enhancer_datastream",
+        "name": "workspace.can_query_enhancer_datastream",
         "description": ""
     }
 },
 {
-    "pk": 580, 
-    "model": "core.privilege", 
+    "pk": 641,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_edit_dashboard_as_approved", 
-        "name": "workspace.can_edit_dashboard_as_approved", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_query_enhancer_visualization",
+        "name": "workspace.can_query_enhancer_visualization",
         "description": ""
     }
 },
 {
-    "pk": 581, 
-    "model": "core.privilege", 
+    "pk": 642,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:13", 
-        "code": "workspace.can_edit_dashboard_as_published", 
-        "name": "workspace.can_edit_dashboard_as_published", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_query_enhancer_dashboard",
+        "name": "workspace.can_query_enhancer_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 582, 
-    "model": "core.privilege", 
+    "pk": 643,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T09:55:24", 
-        "code": "workspace.can_access_admin", 
-        "name": "workspace.can_access_admin", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_delete_datastream_revision",
+        "name": "workspace.can_delete_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 629, 
-    "model": "core.privilege", 
+    "pk": 644,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_create_dataset_url_as_draft", 
-        "name": "workspace.can_create_dataset_url_as_draft", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_delete_dashboard_revision",
+        "name": "workspace.can_delete_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 630, 
-    "model": "core.privilege", 
+    "pk": 645,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_create_dataset_url_as_pending_review", 
-        "name": "workspace.can_create_dataset_url_as_pending_review", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_delete_visualization_revision",
+        "name": "workspace.can_delete_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 631, 
-    "model": "core.privilege", 
+    "pk": 646,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_create_dataset_file_as_draft", 
-        "name": "workspace.can_create_dataset_file_as_draft", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_submit_datastream_revision",
+        "name": "workspace.can_submit_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 632, 
-    "model": "core.privilege", 
+    "pk": 647,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_create_dataset_file_as_pending_review", 
-        "name": "workspace.can_create_dataset_file_as_pending_review", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_submit_dashboard_revision",
+        "name": "workspace.can_submit_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 633, 
-    "model": "core.privilege", 
+    "pk": 648,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_dataset_url_as_draft", 
-        "name": "workspace.can_edit_dataset_url_as_draft", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_submit_visualization_revision",
+        "name": "workspace.can_submit_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 634, 
-    "model": "core.privilege", 
+    "pk": 649,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_dataset_url_as_pending_review", 
-        "name": "workspace.can_edit_dataset_url_as_pending_review", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_edit_datastream_revision",
+        "name": "workspace.can_edit_datastream_revision",
         "description": ""
     }
 },
 {
-    "pk": 635, 
-    "model": "core.privilege", 
+    "pk": 650,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_dataset_file_as_draft", 
-        "name": "workspace.can_edit_dataset_file_as_draft", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_create_visualization",
+        "name": "workspace.can_create_visualization",
         "description": ""
     }
 },
 {
-    "pk": 636, 
-    "model": "core.privilege", 
+    "pk": 651,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_dataset_file_as_pending_review", 
-        "name": "workspace.can_edit_dataset_file_as_pending_review", 
+        "created_at": "2012-06-04T14:08:57",
+        "code": "workspace.can_edit_visualization_revision",
+        "name": "workspace.can_edit_visualization_revision",
         "description": ""
     }
 },
 {
-    "pk": 637, 
-    "model": "core.privilege", 
+    "pk": 653,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_query_collector_dataset", 
-        "name": "workspace.can_query_collector_dataset", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_access_collector",
+        "name": "workspace.can_access_collector",
         "description": ""
     }
 },
 {
-    "pk": 638, 
-    "model": "core.privilege", 
+    "pk": 654,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_submit_dataset_revision", 
-        "name": "workspace.can_submit_dataset_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_access_enhancer",
+        "name": "workspace.can_access_enhancer",
         "description": ""
     }
 },
 {
-    "pk": 639, 
-    "model": "core.privilege", 
+    "pk": 655,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_delete_dataset_revision", 
-        "name": "workspace.can_delete_dataset_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_view_visualization",
+        "name": "workspace.can_view_visualization",
         "description": ""
     }
 },
 {
-    "pk": 640, 
-    "model": "core.privilege", 
+    "pk": 656,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_query_enhancer_datastream", 
-        "name": "workspace.can_query_enhancer_datastream", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_visualization_as_draft",
+        "name": "workspace.can_create_visualization_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 641, 
-    "model": "core.privilege", 
+    "pk": 657,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_query_enhancer_visualization", 
-        "name": "workspace.can_query_enhancer_visualization", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_visualization_as_pending_review",
+        "name": "workspace.can_create_visualization_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 642, 
-    "model": "core.privilege", 
+    "pk": 658,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_query_enhancer_dashboard", 
-        "name": "workspace.can_query_enhancer_dashboard", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_visualization",
+        "name": "workspace.can_edit_visualization",
         "description": ""
     }
 },
 {
-    "pk": 643, 
-    "model": "core.privilege", 
+    "pk": 659,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_delete_datastream_revision", 
-        "name": "workspace.can_delete_datastream_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_visualization_as_draft",
+        "name": "workspace.can_edit_visualization_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 644, 
-    "model": "core.privilege", 
+    "pk": 660,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_delete_dashboard_revision", 
-        "name": "workspace.can_delete_dashboard_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_visualization_as_pending_review",
+        "name": "workspace.can_edit_visualization_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 645, 
-    "model": "core.privilege", 
+    "pk": 661,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_delete_visualization_revision", 
-        "name": "workspace.can_delete_visualization_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_view_datastream",
+        "name": "workspace.can_view_datastream",
         "description": ""
     }
 },
 {
-    "pk": 646, 
-    "model": "core.privilege", 
+    "pk": 662,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_submit_datastream_revision", 
-        "name": "workspace.can_submit_datastream_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_datastream",
+        "name": "workspace.can_create_datastream",
         "description": ""
     }
 },
 {
-    "pk": 647, 
-    "model": "core.privilege", 
+    "pk": 663,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_submit_dashboard_revision", 
-        "name": "workspace.can_submit_dashboard_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_datastream_as_draft",
+        "name": "workspace.can_create_datastream_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 648, 
-    "model": "core.privilege", 
+    "pk": 664,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_submit_visualization_revision", 
-        "name": "workspace.can_submit_visualization_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_datastream_as_pending_review",
+        "name": "workspace.can_create_datastream_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 649, 
-    "model": "core.privilege", 
+    "pk": 665,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_datastream_revision", 
-        "name": "workspace.can_edit_datastream_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_datastream",
+        "name": "workspace.can_edit_datastream",
         "description": ""
     }
 },
 {
-    "pk": 650, 
-    "model": "core.privilege", 
+    "pk": 666,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_create_visualization", 
-        "name": "workspace.can_create_visualization", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_datastream_as_draft",
+        "name": "workspace.can_edit_datastream_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 651, 
-    "model": "core.privilege", 
+    "pk": 667,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:57", 
-        "code": "workspace.can_edit_visualization_revision", 
-        "name": "workspace.can_edit_visualization_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_datastream_as_pending_review",
+        "name": "workspace.can_edit_datastream_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 652, 
-    "model": "core.privilege", 
+    "pk": 668,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_dataset_revision", 
-        "name": "workspace.can_edit_dataset_revision", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_view_dashboard",
+        "name": "workspace.can_view_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 653, 
-    "model": "core.privilege", 
+    "pk": 669,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_access_collector", 
-        "name": "workspace.can_access_collector", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_dashboard_as_draft",
+        "name": "workspace.can_create_dashboard_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 654, 
-    "model": "core.privilege", 
+    "pk": 670,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_access_enhancer", 
-        "name": "workspace.can_access_enhancer", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_dashboard_as_pending_review",
+        "name": "workspace.can_create_dashboard_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 655, 
-    "model": "core.privilege", 
+    "pk": 671,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_view_visualization", 
-        "name": "workspace.can_view_visualization", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_dashboard_revision",
+        "name": "workspace.can_edit_dashboard_revision",
         "description": ""
     }
 },
 {
-    "pk": 656, 
-    "model": "core.privilege", 
+    "pk": 672,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_visualization_as_draft", 
-        "name": "workspace.can_create_visualization_as_draft", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_dashboard_as_draft",
+        "name": "workspace.can_edit_dashboard_as_draft",
         "description": ""
     }
 },
 {
-    "pk": 657, 
-    "model": "core.privilege", 
+    "pk": 673,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_visualization_as_pending_review", 
-        "name": "workspace.can_create_visualization_as_pending_review", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_edit_dashboard_as_pending_review",
+        "name": "workspace.can_edit_dashboard_as_pending_review",
         "description": ""
     }
 },
 {
-    "pk": 658, 
-    "model": "core.privilege", 
+    "pk": 674,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_visualization", 
-        "name": "workspace.can_edit_visualization", 
+        "created_at": "2012-06-04T14:08:58",
+        "code": "workspace.can_create_dashboard",
+        "name": "workspace.can_create_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 659, 
-    "model": "core.privilege", 
+    "pk": 675,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_visualization_as_draft", 
-        "name": "workspace.can_edit_visualization_as_draft", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_create_private_dashboard",
+        "name": "workspace.can_create_private_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 660, 
-    "model": "core.privilege", 
+    "pk": 676,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_visualization_as_pending_review", 
-        "name": "workspace.can_edit_visualization_as_pending_review", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_create_private_datastream",
+        "name": "workspace.can_create_private_datastream",
         "description": ""
     }
 },
 {
-    "pk": 661, 
-    "model": "core.privilege", 
+    "pk": 677,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_view_datastream", 
-        "name": "workspace.can_view_datastream", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_create_dashboard_notes",
+        "name": "workspace.can_create_dashboard_notes",
         "description": ""
     }
 },
 {
-    "pk": 662, 
-    "model": "core.privilege", 
+    "pk": 678,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_datastream", 
-        "name": "workspace.can_create_datastream", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_create_datastream_notes",
+        "name": "workspace.can_create_datastream_notes",
         "description": ""
     }
 },
 {
-    "pk": 663, 
-    "model": "core.privilege", 
+    "pk": 679,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_datastream_as_draft", 
-        "name": "workspace.can_create_datastream_as_draft", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_edit_dashboard_notes",
+        "name": "workspace.can_edit_dashboard_notes",
         "description": ""
     }
 },
 {
-    "pk": 664, 
-    "model": "core.privilege", 
+    "pk": 680,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_datastream_as_pending_review", 
-        "name": "workspace.can_create_datastream_as_pending_review", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_edit_datastream_notes",
+        "name": "workspace.can_edit_datastream_notes",
         "description": ""
     }
 },
 {
-    "pk": 665, 
-    "model": "core.privilege", 
+    "pk": 681,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_datastream", 
-        "name": "workspace.can_edit_datastream", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_add_widgets_dashboard",
+        "name": "workspace.can_add_widgets_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 666, 
-    "model": "core.privilege", 
+    "pk": 682,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_datastream_as_draft", 
-        "name": "workspace.can_edit_datastream_as_draft", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_move_widgets_dashboard",
+        "name": "workspace.can_move_widgets_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 667, 
-    "model": "core.privilege", 
+    "pk": 683,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_datastream_as_pending_review", 
-        "name": "workspace.can_edit_datastream_as_pending_review", 
+        "created_at": "2012-07-06T12:00:24",
+        "code": "workspace.can_access_advanced_visualizations",
+        "name": "workspace.can_access_advanced_visualizations",
         "description": ""
     }
 },
 {
-    "pk": 668, 
-    "model": "core.privilege", 
+    "pk": 684,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_view_dashboard", 
-        "name": "workspace.can_view_dashboard", 
+        "created_at": "2012-07-31T18:29:03",
+        "code": "workspace.can_access_ops",
+        "name": "Can access ops",
         "description": ""
     }
 },
 {
-    "pk": 669, 
-    "model": "core.privilege", 
+    "pk": 685,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_dashboard_as_draft", 
-        "name": "workspace.can_create_dashboard_as_draft", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_view_datastream",
+        "name": "privatesite.can_view_datastream",
         "description": ""
     }
 },
 {
-    "pk": 670, 
-    "model": "core.privilege", 
+    "pk": 686,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_dashboard_as_pending_review", 
-        "name": "workspace.can_create_dashboard_as_pending_review", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_view_visualization",
+        "name": "privatesite.can_view_visualization",
         "description": ""
     }
 },
 {
-    "pk": 671, 
-    "model": "core.privilege", 
+    "pk": 687,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_dashboard_revision", 
-        "name": "workspace.can_edit_dashboard_revision", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_view_dashboard",
+        "name": "privatesite.can_view_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 672, 
-    "model": "core.privilege", 
+    "pk": 688,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_dashboard_as_draft", 
-        "name": "workspace.can_edit_dashboard_as_draft", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_export_datastream",
+        "name": "privatesite.can_export_datastream",
         "description": ""
     }
 },
 {
-    "pk": 673, 
-    "model": "core.privilege", 
+    "pk": 689,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_edit_dashboard_as_pending_review", 
-        "name": "workspace.can_edit_dashboard_as_pending_review", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_export_dashboard",
+        "name": "privatesite.can_export_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 674, 
-    "model": "core.privilege", 
+    "pk": 690,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-06-04T14:08:58", 
-        "code": "workspace.can_create_dashboard", 
-        "name": "workspace.can_create_dashboard", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_share_datastream",
+        "name": "privatesite.can_share_datastream",
         "description": ""
     }
 },
 {
-    "pk": 675, 
-    "model": "core.privilege", 
+    "pk": 691,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_create_private_dashboard", 
-        "name": "workspace.can_create_private_dashboard", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_share_visualization",
+        "name": "privatesite.can_share_visualization",
         "description": ""
     }
 },
 {
-    "pk": 676, 
-    "model": "core.privilege", 
+    "pk": 692,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_create_private_datastream", 
-        "name": "workspace.can_create_private_datastream", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_share_dashboard",
+        "name": "privatesite.can_share_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 677, 
-    "model": "core.privilege", 
+    "pk": 693,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_create_dashboard_notes", 
-        "name": "workspace.can_create_dashboard_notes", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "workspace.can_share_datastream",
+        "name": "workspace.can_share_datastream",
         "description": ""
     }
 },
 {
-    "pk": 678, 
-    "model": "core.privilege", 
+    "pk": 694,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_create_datastream_notes", 
-        "name": "workspace.can_create_datastream_notes", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "workspace.can_share_visualization",
+        "name": "workspace.can_share_visualization",
         "description": ""
     }
 },
 {
-    "pk": 679, 
-    "model": "core.privilege", 
+    "pk": 695,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_edit_dashboard_notes", 
-        "name": "workspace.can_edit_dashboard_notes", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "workspace.can_share_dashboard",
+        "name": "workspace.can_share_dashboard",
         "description": ""
     }
 },
 {
-    "pk": 680, 
-    "model": "core.privilege", 
+    "pk": 696,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_edit_datastream_notes", 
-        "name": "workspace.can_edit_datastream_notes", 
+        "created_at": "2012-12-22T05:19:21",
+        "code": "privatesite.can_view_datastreams",
+        "name": "privatesite.can_view_datastreams",
         "description": ""
     }
 },
 {
-    "pk": 681, 
-    "model": "core.privilege", 
+    "pk": 697,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_add_widgets_dashboard", 
-        "name": "workspace.can_add_widgets_dashboard", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_view_visualizations",
+        "name": "privatesite.can_view_visualizations",
         "description": ""
     }
 },
 {
-    "pk": 682, 
-    "model": "core.privilege", 
+    "pk": 698,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_move_widgets_dashboard", 
-        "name": "workspace.can_move_widgets_dashboard", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_view_dashboards",
+        "name": "privatesite.can_view_dashboards",
         "description": ""
     }
 },
 {
-    "pk": 683, 
-    "model": "core.privilege", 
+    "pk": 699,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-06T12:00:24", 
-        "code": "workspace.can_access_advanced_visualizations", 
-        "name": "workspace.can_access_advanced_visualizations", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_export_datastreams",
+        "name": "privatesite.can_export_datastreams",
         "description": ""
     }
 },
 {
-    "pk": 684, 
-    "model": "core.privilege", 
+    "pk": 700,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-07-31T18:29:03", 
-        "code": "workspace.can_access_ops", 
-        "name": "Can access ops", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_export_dashboards",
+        "name": "privatesite.can_export_dashboards",
         "description": ""
     }
 },
 {
-    "pk": 685, 
-    "model": "core.privilege", 
+    "pk": 701,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_view_datastream", 
-        "name": "privatesite.can_view_datastream", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_share_datastreams",
+        "name": "privatesite.can_share_datastreams",
         "description": ""
     }
 },
 {
-    "pk": 686, 
-    "model": "core.privilege", 
+    "pk": 702,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_view_visualization", 
-        "name": "privatesite.can_view_visualization", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_share_visualizations",
+        "name": "privatesite.can_share_visualizations",
         "description": ""
     }
 },
 {
-    "pk": 687, 
-    "model": "core.privilege", 
+    "pk": 703,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_view_dashboard", 
-        "name": "privatesite.can_view_dashboard", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_share_dashboards",
+        "name": "privatesite.can_share_dashboards",
         "description": ""
     }
 },
 {
-    "pk": 688, 
-    "model": "core.privilege", 
+    "pk": 704,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_export_datastream", 
-        "name": "privatesite.can_export_datastream", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "workspace.can_signin",
+        "name": "workspace.can_signin",
         "description": ""
     }
 },
 {
-    "pk": 689, 
-    "model": "core.privilege", 
+    "pk": 705,
+    "model": "core.privilege",
     "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_export_dashboard", 
-        "name": "privatesite.can_export_dashboard", 
-        "description": ""
-    }
-},
-{
-    "pk": 690, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_share_datastream", 
-        "name": "privatesite.can_share_datastream", 
-        "description": ""
-    }
-},
-{
-    "pk": 691, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_share_visualization", 
-        "name": "privatesite.can_share_visualization", 
-        "description": ""
-    }
-},
-{
-    "pk": 692, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_share_dashboard", 
-        "name": "privatesite.can_share_dashboard", 
-        "description": ""
-    }
-},
-{
-    "pk": 693, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "workspace.can_share_datastream", 
-        "name": "workspace.can_share_datastream", 
-        "description": ""
-    }
-},
-{
-    "pk": 694, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "workspace.can_share_visualization", 
-        "name": "workspace.can_share_visualization", 
-        "description": ""
-    }
-},
-{
-    "pk": 695, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "workspace.can_share_dashboard", 
-        "name": "workspace.can_share_dashboard", 
-        "description": ""
-    }
-},
-{
-    "pk": 696, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:21", 
-        "code": "privatesite.can_view_datastreams", 
-        "name": "privatesite.can_view_datastreams", 
-        "description": ""
-    }
-},
-{
-    "pk": 697, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_view_visualizations", 
-        "name": "privatesite.can_view_visualizations", 
-        "description": ""
-    }
-},
-{
-    "pk": 698, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_view_dashboards", 
-        "name": "privatesite.can_view_dashboards", 
-        "description": ""
-    }
-},
-{
-    "pk": 699, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_export_datastreams", 
-        "name": "privatesite.can_export_datastreams", 
-        "description": ""
-    }
-},
-{
-    "pk": 700, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_export_dashboards", 
-        "name": "privatesite.can_export_dashboards", 
-        "description": ""
-    }
-},
-{
-    "pk": 701, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_share_datastreams", 
-        "name": "privatesite.can_share_datastreams", 
-        "description": ""
-    }
-},
-{
-    "pk": 702, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_share_visualizations", 
-        "name": "privatesite.can_share_visualizations", 
-        "description": ""
-    }
-},
-{
-    "pk": 703, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_share_dashboards", 
-        "name": "privatesite.can_share_dashboards", 
-        "description": ""
-    }
-},
-{
-    "pk": 704, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "workspace.can_signin", 
-        "name": "workspace.can_signin", 
-        "description": ""
-    }
-},
-{
-    "pk": 705, 
-    "model": "core.privilege", 
-    "fields": {
-        "created_at": "2012-12-22T05:19:22", 
-        "code": "privatesite.can_signin", 
-        "name": "privatesite.can_signin", 
+        "created_at": "2012-12-22T05:19:22",
+        "code": "privatesite.can_signin",
+        "name": "privatesite.can_signin",
         "description": ""
     }
 }

@@ -21,7 +21,7 @@ from core import engine
 logger = logging.getLogger(__name__)
 
 @login_required
-@require_privilege("workspace.can_query_collector_dataset")
+@require_privilege("workspace.can_query_dataset")
 @require_GET
 def list(request):
     """ List all Datasets """
@@ -49,6 +49,7 @@ def view(request, revision_id):
     return render_to_response('viewDataset/index.html', locals())
 
 @login_required
+@require_privilege("workspace.can_query_dataset")
 @require_GET
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
@@ -132,6 +133,7 @@ def remove(request, id, type="resource"):
             return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT')]}), content_type='text/plain')
 
 @login_required
+@require_privilege("workspace.can_create_dataset")
 @require_http_methods(['POST', 'GET'])
 @transaction.commit_on_success
 def create(request, collect_type='index'):
@@ -173,6 +175,7 @@ def create(request, collect_type='index'):
             raise InvalidFormException(form.errors)
 
 @login_required
+@require_privilege("workspace.can_edit_dataset")
 @require_http_methods(['POST', 'GET'])
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
