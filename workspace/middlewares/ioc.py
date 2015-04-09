@@ -23,8 +23,9 @@ class DependenciesInjector(object):
         if not bucket_name:
             bucket_name = settings.AWS_BUCKET_NAME
 
-        self.read_stats(request)
         request.bucket_name = bucket_name
+        self.read_stats(request)
+        self.calculate_perc(request)
 
         return None
 
@@ -61,3 +62,14 @@ class DependenciesInjector(object):
                 c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
 
         request.stats['my_total_visualizations'] = my_total_visualizations
+
+    def calculate_perc(self, request):
+        request.stats['max_resource'] = max( [ request.stats['my_total_datasets'],
+                                              request.stats['my_total_datastreams'],
+                                              request.stats['my_total_dashboards'],
+                                              request.stats['my_total_visualizations'] ] )
+        perc = lambda a, b: b > 0 and str(float(a)/float(b) * 100).replace(',', '.') or 0
+        request.stats['my_total_perc_datasets']=perc(request.stats['my_total_datasets'], request.stats['max_resource'])
+        request.stats['my_total_perc_datastreams']=perc(request.stats['my_total_datastreams'], request.stats['max_resource'])
+        request.stats['my_total_perc_dashboards']=perc(request.stats['my_total_dashboards'], request.stats['max_resource'])
+        request.stats['my_total_perc_visualizations']=perc(request.stats['my_total_visualizations'], request.stats['max_resource'])
