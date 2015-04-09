@@ -1,43 +1,75 @@
-from django.test import TestCase
-from core.models import *
+from django.test import TransactionTestCase
 
-class ModelTest(TestCase):
+from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
+from core.models import User, Category, Dataset, DatasetRevision
+from core.lifecycle.datasets import DatasetLifeCycleManager
 
-    def test_model(self):
 
-        print '  -- testing guid generation for data streams'
-        title = u'this is a title to compute the guid'
-        expected_guid = u'THIS-IS-A-TITLE-TO'
+class LifeCycleManagerTestCase(TransactionTestCase):
+    fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
+                'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
 
-        datastream = DataStream()
-        datastream.user_id = 1
-        datastream.title = title
-        datastream.save()
-        assert datastream.guid == expected_guid, 'Generating incorrectly the 1st guid of a data stream'
+    def setUp(self):
+        self.end_point = 'www.example.com'
+        self.user_nick = 'administrador'
 
-        datastream1 = DataStream.objects.create(title = title, user_id = 1)
-        assert datastream1.guid != expected_guid, 'Generating incorrectly the 2nd guid of a data stream'
+        self.user = User.objects.get(nick=self.user_nick)
+        self.category = Category.objects.filter(account_id=self.user.account.id).order_by('-id')[0]
+        self.collect_type = CollectTypeChoices.SELF_PUBLISH
+        self.source_type = SourceImplementationChoices.HTML
 
-        print '  -- testing guid generation for dashboards'
-        dashboard = Dashboard()
-        dashboard.user_id = 1
-        dashboard.title = title
-        dashboard.save()
-        assert dashboard.guid == expected_guid, 'Generating incorrectly the 1st guid of a dashboard'
 
-        dashboard1 = Dashboard.objects.create(title = title, user_id = 1)
-        assert dashboard1.guid != expected_guid, 'Generating incorrectly the 2nd guid of a dashboard'
+    def create_dataset(self):
+        life_cycle = DatasetLifeCycleManager(user=self.user)
 
-        print '  -- testing correct slug generation'
-        name = 'lorem ipsum dolor sit amet'
-        slug = 'lorem-ipsum-dolor-sit-amet'
+        self.dataset = life_cycle.create(
+            title='Test Dataset',
+            collect_type=self.collect_type,
+            description="Descripcion del dataset",
+            end_point=self.end_point,
+            notes='',
+            category=self.category.id,
+            impl_type=self.source_type,
+            file_name=''
+        )
 
-        category = Category()
-        category.save()
+    def send_to_review(self):
+        # Send to review
+        lifecycle = DatasetLifeCycleManager(user=self.user, dataset_revision_id=self.dataset.last_revision.get().id)
+        dataset_revision = lifecycle.edit(changed_fields=['status'],
+                                          language=self.user.language,  status=StatusChoices.PENDING_REVIEW,
+                                          title='Test Dataset', collect_type=self.collect_type,
+                                          description="Descripcion del dataset", end_point=self.end_point, notes='',
+                                          category=self.category.id, impl_type=self.source_type, file_name='', tags=[],
+                                          sources=[])
 
-        ci18n = CategoryI18n()
-        ci18n.name = name
-        ci18n.category = category
-        ci18n.language = 'en'
-        ci18n.save()
-        assert ci18n.slug == slug, 'Generating incorrectly the category slug'
+
+    def test_create_dataset(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        self.create_dataset()
+
+        new_dataset = Dataset.objects.get(id=self.dataset.id)
+
+        # Verifico los campos del dataset
+        self.assertEqual(new_dataset.user, self.user)
+        self.assertEqual(new_dataset.type, self.source_type)
+        self.assertFalse(new_dataset.is_dead)
+        self.assertIsNot(new_dataset.guid, '')
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_send_to_review(self):
+        """
+        Testing Lifecycle Manager Send to Review Dataset Method
+        """
+        self.create_dataset()
+        self.send_to_review()
+
+
+    def test_remove_dataset(self):
+        """
+        Testing Lifecycle Manager Remove Dataset Method
+        """
+        self.create_dataset()

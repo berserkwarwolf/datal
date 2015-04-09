@@ -368,15 +368,6 @@ class Command(BaseCommand):
                 if options['delete']:
                     application.delete()
 
-            # Remove Alert
-            for alert in Alert.objects.filter(account=account):
-                try:
-                    self.stdout.write('\tAlert {}.'.format(alert.key))
-                except:
-                    self.stdout.write('\tAlert ID {}.'.format(alert.id))
-
-                if options['delete']:
-                    alert.delete()
 
             # Remove account
             if options['delete']:

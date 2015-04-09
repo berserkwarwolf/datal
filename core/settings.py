@@ -41,6 +41,7 @@ SECRET_KEY = ''
 
 INSTALLED_APPS = (
     'django_extensions',
+    'django_nose',
     'core',
     'raven.contrib.django'
 )
