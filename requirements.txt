@@ -34,4 +34,3 @@ django-compressor==1.4
 django-sass-processor==0.2.2
 django-extensions==1.5.2
 Werkzeug==0.10.4
-django-nose==1.3

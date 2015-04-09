@@ -265,9 +265,6 @@ LOGGING = {
 
 IS_WORKSPACE = False
 
-# Django Nose
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
-
 try:
     from core.local_settings import *
 except ImportError:
