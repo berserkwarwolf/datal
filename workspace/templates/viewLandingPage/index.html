@@ -60,7 +60,7 @@
 			</div>
 		</section>
 		
-		{% if my_total_datasets != 0 %}
+		{% if stats.my_total_datasets != 0 %}
 		<!-- Numbers -->
 		<section class="box numbers">
 			<header class="clearfix">
@@ -75,7 +75,7 @@
 						<tr>
 							<td class="data">
 								<i class="icon-resources dataset"></i>
-								<strong>{{my_total_datasets}}</strong>
+								<strong>{{stats.my_total_datasets}}</strong>
 								{% trans "APP-DATASETS-TEXT" %}
 							</td>
 							<td class="bar">
@@ -85,7 +85,7 @@
 						<tr>
 							<td class="data">
 								<i class="icon-resources dataview"></i>
-								<strong>{{my_total_datastreams}}</strong>
+								<strong>{{stats.my_total_datastreams}}</strong>
 								{% trans "APP-DATAVIEWS-TEXT" %}
 							</td>
 							<td class="bar">
@@ -95,7 +95,7 @@
 						<tr style="display:none;">
 							<td class="data">
 								<i class="icon-resources visualization"></i>
-								<strong>{{my_total_visualizations}}</strong>
+								<strong>{{stats.my_total_visualizations}}</strong>
 								{% trans "APP-VISUALIZATIONS-TEXT" %}
 							</td>
 							<td class="bar">
@@ -105,7 +105,7 @@
 						<tr style="display:none;">
 							<td class="data">
 								<i class="icon-resources dashboard"></i>
-								<strong>{{my_total_dashboards}}</strong>
+								<strong>{{stats.my_total_dashboards}}</strong>
 								{% trans "APP-DASHBOARDS-TEXT" %}
 							</td>
 							<td class="bar">
@@ -133,7 +133,7 @@
 	<!-- Column - Right -->
 	<div class="column CR">
 
-		{% if my_total_datasets == 0 %}
+		{% if stats.my_total_datasets == 0 %}
 		<section class="box activity">
 			<header>
 				<h3 class="title">{% trans "APP-START-FROM-HERE-TEXT" %}</h3>
@@ -145,7 +145,7 @@
 		</section>
 		{% endif %}
 		
-		{% if my_total_datasets != 0 %}
+		{% if stats.my_total_datasets != 0 %}
 	
 		{% comment %}
 		<!-- Pending Actions -->

@@ -10,42 +10,6 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.daos.datasets import DatasetDBDAO
 from workspace.daos.datastreams import DataStreamDBDAO
 
-def require_user_stats(view_func):
-    @wraps(view_func, assigned=available_attrs(view_func))
-    def _wrapped_view(request, *args, **kwargs):
-        user_id = request.auth_manager.id
-        c = Cache(db=0)
-
-        my_total_datasets = c.get('my_total_datasets_' + str(user_id))
-        if not my_total_datasets:
-            my_total_datasets =  Dataset.objects.filter(user=user_id).count()
-            c.set('my_total_datasets_' + str(user_id), my_total_datasets, settings.REDIS_STATS_TTL)
-        request.my_total_datasets = my_total_datasets
-
-        my_total_datastreams = c.get('my_total_datastreams_' + str(user_id))
-        if not my_total_datastreams:
-            my_total_datastreams = DataStream.objects.filter(user=user_id).count()
-            c.set('my_total_datastreams_' + str(user_id), my_total_datastreams, settings.REDIS_STATS_TTL)
-        request.my_total_datastreams = my_total_datastreams
-
-        my_total_dashboards = c.get('my_total_dashboards_' + str(user_id))
-        if not my_total_dashboards:
-            my_total_dashboards = Dashboard.objects.filter(user=user_id).count()
-            c.set('my_total_dashboards_' + str(user_id), my_total_dashboards, settings.REDIS_STATS_TTL)
-        request.my_total_dashboards = my_total_dashboards
-
-
-        my_total_visualizations = c.get('my_total_visualizations_' + str(user_id))
-        if not my_total_visualizations:
-            my_total_visualizations = Visualization.objects.filter(user=user_id).count()
-            c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
-
-        request.my_total_visualizations = my_total_visualizations
-
-        return view_func(request, *args, **kwargs)
-
-    return _wrapped_view
-
 def require_child_accepted(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))
     def _wrapped_view(request, *args, **kwargs):
@@ -101,9 +65,9 @@ def requires_published_parent():
                         raise ParentNotPublishedException()
                 else:
                     raise ParentNotPublishedException('Parent resource not found')
-            
+
             return view_func(request, *args, **kwargs)
-            
+
         return _wrapped_view
     return decorator
 
@@ -113,12 +77,12 @@ def requires_dataset():
         """ for registred and logged user. NO redirect to login"""
         @wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
-            if request.method == 'POST':    
+            if request.method == 'POST':
                 if not request.POST.get('dataset_revision_id', request.POST.get('datastream-dataset_revision_id', None)):
                     raise DatasetRequiredException()
-                
+
             return view_func(request, *args, **kwargs)
-            
+
         return _wrapped_view
     return decorator
 
@@ -133,7 +97,7 @@ def requires_any_dataset():
             if total_resources == 0 or request.GET.get('test-no-datasets', False) == '1':
                 raise AnyDatasetRequiredException()
             return view_func(request, *args, **kwargs)
-            
+
         return _wrapped_view
     return decorator
 
@@ -148,7 +112,7 @@ def requires_any_datastream():
             if total_resources == 0 or request.GET.get('test-no-dataviews', False) == '1':
                 raise AnyDatastreamRequiredException()
             return view_func(request, *args, **kwargs)
-            
+
         return _wrapped_view
     return decorator
 
