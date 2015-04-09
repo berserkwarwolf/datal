@@ -23,5 +23,9 @@ supervisor:
       - file: /etc/uwsgi/api.ini
       - file: /etc/uwsgi/microsite.ini
       - file: /etc/uwsgi/workspace.ini
-      - file: /tmp/junar.log
+      - file: /tmp/datal.log
 
+uwsgi_service:
+  supervisord.running:
+    - name: uwsgi
+    - restart: True
