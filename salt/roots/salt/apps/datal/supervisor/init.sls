@@ -24,3 +24,4 @@ supervisor:
       - file: /etc/uwsgi/microsite.ini
       - file: /etc/uwsgi/workspace.ini
       - file: /tmp/junar.log
+
