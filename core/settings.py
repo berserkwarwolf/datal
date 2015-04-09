@@ -40,6 +40,7 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
+    'django_extensions',
     'core',
     'raven.contrib.django'
 )
