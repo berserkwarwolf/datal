@@ -120,18 +120,13 @@ def remove(request, id, type="resource"):
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
 
     if type == 'revision':
-        removes = lifecycle.remove()
-        if removes:
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
-        else:
-            raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
-
+        lifecycle.remove()
+        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
     else:
-        removes = lifecycle.remove(killemall=True)
-        if removes:
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
-        else:
-            raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
 
 @login_required
 @require_privilege("workspace.can_create_dataset")
