@@ -13,7 +13,7 @@ class SignUpForm(forms.Form):
     password_again = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-CONFIRMPSW'))
     email          = forms.CharField(required=True, label=ugettext_lazy('APP-EMAIL-TEXT'))
     language       = forms.ChoiceField(required=True, choices=choices.LANGUAGE_CHOICES, label=ugettext_lazy('APP-LANGUAGE-TEXT'))
-    
+
     def action(self):
         return reverse('accounts.create')
 
@@ -45,6 +45,7 @@ class SignInForm(forms.Form):
             raise forms.ValidationError("User does not exist")
 
         if self.user.password != password:
+            self.user = None
             raise forms.ValidationError("Invalid data")
 
         return cleaned_data
@@ -93,7 +94,7 @@ class MyAccountForm(forms.ModelForm):
         if new_password:
             return hashlib.md5(new_password).hexdigest()
         return new_password
-        
+
     def clean_new_password_again(self):
         new_password_again = self.cleaned_data.get('new_password_again')
         if new_password_again:
@@ -113,7 +114,7 @@ class MyAccountForm(forms.ModelForm):
         else:
             if user2.id != user.id:
                 raise forms.ValidationError(ugettext_lazy('EMAIL-EXISTS'))
-            
+
         if new_password:
             old_password = cleaned_data.get("old_password")
             if user.password != old_password:

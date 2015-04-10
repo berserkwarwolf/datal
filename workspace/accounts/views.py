@@ -124,6 +124,7 @@ def login(request):
                 return redirect('accounts.signin')
 
             request.session['user_id'] = form.user.id
+            request.session['django_language'] = form.user.language
             if not form.cleaned_data['remember_me']:
                 request.session.set_expiry(0)
 

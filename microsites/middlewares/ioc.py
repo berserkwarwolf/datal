@@ -38,9 +38,9 @@ class DependencyInjector(object):
         if bucket_name:
             request.bucket_name = bucket_name
 
-        is_signin = request.path.startswith(reverse('accounts.signin'))
-        is_login = request.path.startswith(reverse('accounts.login'))
-        is_activate = request.path.startswith(reverse('accounts.activate'))
+        is_signin = False #Deprecado
+        is_login = False #Deprecado
+        is_activate = False #Deprecado
         is_jsi18n = request.path.startswith('/jsi18n')
 
 
