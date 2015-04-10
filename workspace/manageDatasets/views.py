@@ -172,6 +172,7 @@ def create(request, collect_type='index'):
 
 @login_required
 @require_privilege("workspace.can_edit_dataset")
+@requires_published('dataset')
 @require_http_methods(['POST', 'GET'])
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
