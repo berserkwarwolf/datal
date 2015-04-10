@@ -231,8 +231,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """create new revision or update it"""
 
         old_status = self.dataset_revision.status
+
         if old_status  not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
+
+        if 'status' in fields.keys():
+            form_status = fields.pop('status', None)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -243,22 +247,17 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:
-
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision, changed_fields, **fields)
-
         else:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields)
 
             self._move_childs_to_draft()
 
-
-        status = fields['status']
-
-        if status == StatusChoices.PUBLISHED:
+        if form_status == StatusChoices.PUBLISHED:
             self.publish()
-        elif old_status == StatusChoices.PUBLISHED and status == StatusChoices.DRAFT:
+        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
             self.unpublish()
         else:
             self._update_last_revisions()
@@ -285,19 +284,18 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
 
-        last_revision = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))
+        last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))['id__max']
 
-        if last_revision['id__max']:
-            self.dataset.last_revision_id = last_revision['id__max']
-            last_published_revision = DatasetRevision.objects.filter(
+        if last_revision_id:
+            self.dataset.last_revision = DatasetRevision.objects.get(id=last_revision_id)
+            last_published_revision_id = DatasetRevision.objects.filter(
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
-            )
+            )['id__max']
 
-            last_published_revision_id = last_published_revision is not None and last_published_revision['id__max'] or None
-
-            if last_published_revision_id != self.dataset.last_published_revision_id:
-                    self.dataset.last_published_revision_id = last_published_revision_id
+            if last_published_revision_id and self.dataset.last_published_revision \
+                    and last_published_revision_id != self.dataset.last_published_revision.id:
+                    self.dataset.last_published_revision = DatasetRevision.objects.get(id=last_published_revision_id)
 
             self.dataset.save()
         else:

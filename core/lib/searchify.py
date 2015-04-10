@@ -61,7 +61,7 @@ class SearchifyIndex():
     
         logger.error("some documents failed to delete")
 
-        return self.check_deleted_documents_from_index((docs,))
+        return self.check_deleted_documents_from_index(docs)
 
     def check_deleted_documents_from_index(self, docs):
         logger = logging.getLogger(__name__)
@@ -93,8 +93,7 @@ class SearchifyIndex():
             return (False, None) 
 
     def _get_search_result(self, resources):
-
-        if type(resources) == types.ListType:
+        if isinstance(resources, (types.ListType, types.TupleType)):
             local_resources = []
             local_types = []
 
@@ -106,11 +105,12 @@ class SearchifyIndex():
         else:
             local_types, new_str = self._clean_docid_str(resources)
             search_result = self.index.search(self._clean_docid_str(new_str))
+
         return (search_result, local_types)
 
     def _clean_docid_str(self, docs):
         try:
-            match = re.search('^(DS|DB|VZ)(::)(.+)', docs)
+            match = re.search('^(DS|DB|VZ|DT)(::)(.+)', docs)
             if match:
                 ret_type = match.group(1)
                 ret_str = match.group(3)
