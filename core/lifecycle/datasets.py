@@ -101,7 +101,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         try:
             self._publish_childs()
         except IlegalStateException:
-            # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
+            # Si alguno de los hijos no se encuentra al menos aprobado,
+            # entonces el dataset no es publicado quedando en estado aprobado
             status = StatusChoices.APPROVED
 
         self.dataset_revision.status = status
@@ -122,7 +123,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                                 id=F('datastream__last_revision__id'))
 
             for datastream in datastreams:
-                DatastreamLifeCycleManager(user=self.user, datastream_id=datastream.id).publish(allowed_states=[StatusChoices.APPROVED])
+                DatastreamLifeCycleManager(user=self.user, datastream_id=datastream.id).publish(
+                    allowed_states=[StatusChoices.APPROVED])
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
@@ -285,7 +287,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         last_revision = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))
 
-        if last_revision is not None:
+        if last_revision['id__max']:
             self.dataset.last_revision_id = last_revision['id__max']
             last_published_revision = DatasetRevision.objects.filter(
                 dataset=self.dataset.id,
@@ -298,3 +300,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     self.dataset.last_published_revision_id = last_published_revision_id
 
             self.dataset.save()
+        else:
+            # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
+            if self.dataset.id:
+                self.dataset.delete()

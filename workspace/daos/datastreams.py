@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import operator
 from django.db.models import Q, F
+from core.exceptions import SearchIndexNotFoundException
 from core.models import DataStreamRevision, DataStream, DatastreamI18n
 from workspace import settings
 
