@@ -58,10 +58,28 @@
 		</fieldset>
 	</div>
 
-	<!-- Left Bottom section -->
+	<!-- Resources table -->
 	<div class="formBox">
 		<header class="clearfix">
 			<div class="num">4</div>
+			<hgroup>
+				<h1><%= gettext('ADMIN-HOME-SECTION-RESOURCESTITLE') %></h1>
+				<h2><%= gettext('ADMIN-HOME-SECTION-RESOURCESDESCRIPTION') %></h2>
+			</hgroup>
+		</header>
+		<fieldset>
+			<div class="row">
+				<input type="checkbox" id="id_theme0ResourcesTable" name="id_theme0ResourcesTable" data-bind="checked:resourcesTable" checked="checked" />
+				<%= gettext('ADMIN-HOME-SECTION-RESOURCESCHECKBOX') %>
+			</div>
+		</fieldset>
+	</div>
+
+
+	<!-- Left Bottom section -->
+	<div class="formBox">
+		<header class="clearfix">
+			<div class="num">5</div>
 			<hgroup>
 				<h1><%= gettext('ADMIN-HOME-SECTION-LEFTBOTTOMTITLE') %></h1>
 				<h2><%= gettext('ADMIN-HOME-SECTION-LEFTBOTTOMDESCRIPTION') %></h2>
@@ -76,7 +94,7 @@
 	<!-- Right Bottom section -->
 	<div class="formBox">
 		<header class="clearfix">
-			<div class="num">5</div>
+			<div class="num">6</div>
 			<hgroup>
 				<h1><%= gettext('ADMIN-HOME-SECTION-RIGHTBOTTOMTITLE') %></h1>
 				<h2><%= gettext('ADMIN-HOME-SECTION-RIGHTBOTTOMDESCRIPTION') %></h2>

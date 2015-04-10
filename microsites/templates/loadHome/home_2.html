@@ -71,7 +71,9 @@
     {% endif %}
 
     <!-- RESOURCES TABLE -->
-    {% include "loadHome/resourcesTable.html" %}
+    {% if config.resourcesTable %}
+        {% include "loadHome/resourcesTable.html" %}
+    {% endif %}
     
 </div>
 {% endwith %}

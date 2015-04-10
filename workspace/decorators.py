@@ -45,9 +45,27 @@ def require_privilege(privilege):
         return _wrapped_view
     return decorator
 
+def requires_if_publish(resource):
+    """ En la edicion de recursos quizas se intente publicar, en esos casos
+    es necesario validar si el usuario tiene permiso de publicacion """
+    def decorator(view_func):
+        @wraps(view_func, assigned=available_attrs(view_func))
+        def _wrapped_view(request, *args, **kwargs):
+            # check for new status
+            if request.POST.get('status', StatusChoices.DRAFT) == StatusChoices.PUBLISHED:
+                privilege = 'can_publish_%s_revision' % resource
+                if request.auth_manager.has_privilege(privilege):
+                    return view_func(request, *args, **kwargs)
+                else:
+                    raise InsufficientPrivilegesException(required_privileges=[privilege])
+            return view_func(request, *args, **kwargs)
+
+        return _wrapped_view
+    return decorator
+
+
 def requires_published_parent():
     def decorator(view_func):
-        """ for registred and logged user. NO redirect to login"""
         @wraps(view_func, assigned=available_attrs(view_func))
         def _wrapped_view(request, *args, **kwargs):
             # check for new status

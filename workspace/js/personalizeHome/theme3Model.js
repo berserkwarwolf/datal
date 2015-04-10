@@ -4,6 +4,7 @@ var theme3Model = Backbone.Epoxy.Model.extend({
 		mainTitle:'',
 		mainSection:'',		
 		imageUrlCarrousel:false,
+		resourcesTable:true,
 	},	
 
 	initialize: function(attr){		
@@ -17,6 +18,9 @@ var theme3Model = Backbone.Epoxy.Model.extend({
 				}
 				if (!_.isUndefined(themeConfig.imageUrlCarrousel)){
 					this.set('imageUrlCarrousel', themeConfig.imageUrlCarrousel )
+				}
+				if (!_.isUndefined(themeConfig.resourcesTable)){
+					this.set('resourcesTable', themeConfig.resourcesTable)
 				}
 			}
 			else{

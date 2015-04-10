@@ -3,7 +3,8 @@ var theme2Model = Backbone.Epoxy.Model.extend({
 		mainTitle:'',
 		mainSection:'',		
 		sliderSection:[],
-		middleSection:''		
+		middleSection:'',
+		resourcesTable:true,	
 	},	
 	 
 	initialize: function(attr){	
@@ -23,8 +24,10 @@ var theme2Model = Backbone.Epoxy.Model.extend({
 				if (!_.isUndefined(themeConfig.middleSection)){
 					this.set('middleSection', themeConfig.middleSection)
 				}
-				
-				
+
+				if (!_.isUndefined(themeConfig.resourcesTable)){
+					this.set('resourcesTable', themeConfig.resourcesTable)
+				}
 			
 			}
 	},

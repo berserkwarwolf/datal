@@ -930,86 +930,6 @@
     }
 },
 {
-    "pk": 685,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_view_datastream",
-        "name": "privatesite.can_view_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 686,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_view_visualization",
-        "name": "privatesite.can_view_visualization",
-        "description": ""
-    }
-},
-{
-    "pk": 687,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_view_dashboard",
-        "name": "privatesite.can_view_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 688,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_export_datastream",
-        "name": "privatesite.can_export_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 689,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_export_dashboard",
-        "name": "privatesite.can_export_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 690,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_share_datastream",
-        "name": "privatesite.can_share_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 691,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_share_visualization",
-        "name": "privatesite.can_share_visualization",
-        "description": ""
-    }
-},
-{
-    "pk": 692,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_share_dashboard",
-        "name": "privatesite.can_share_dashboard",
-        "description": ""
-    }
-},
-{
     "pk": 693,
     "model": "core.privilege",
     "fields": {
@@ -1040,102 +960,12 @@
     }
 },
 {
-    "pk": 696,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:21",
-        "code": "privatesite.can_view_datastreams",
-        "name": "privatesite.can_view_datastreams",
-        "description": ""
-    }
-},
-{
-    "pk": 697,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_view_visualizations",
-        "name": "privatesite.can_view_visualizations",
-        "description": ""
-    }
-},
-{
-    "pk": 698,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_view_dashboards",
-        "name": "privatesite.can_view_dashboards",
-        "description": ""
-    }
-},
-{
-    "pk": 699,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_export_datastreams",
-        "name": "privatesite.can_export_datastreams",
-        "description": ""
-    }
-},
-{
-    "pk": 700,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_export_dashboards",
-        "name": "privatesite.can_export_dashboards",
-        "description": ""
-    }
-},
-{
-    "pk": 701,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_share_datastreams",
-        "name": "privatesite.can_share_datastreams",
-        "description": ""
-    }
-},
-{
-    "pk": 702,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_share_visualizations",
-        "name": "privatesite.can_share_visualizations",
-        "description": ""
-    }
-},
-{
-    "pk": 703,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_share_dashboards",
-        "name": "privatesite.can_share_dashboards",
-        "description": ""
-    }
-},
-{
     "pk": 704,
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-12-22T05:19:22",
         "code": "workspace.can_signin",
         "name": "workspace.can_signin",
-        "description": ""
-    }
-},
-{
-    "pk": 705,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-12-22T05:19:22",
-        "code": "privatesite.can_signin",
-        "name": "privatesite.can_signin",
         "description": ""
     }
 }

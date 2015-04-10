@@ -14,6 +14,7 @@ var theme6Model = Backbone.Model.extend({
         rightBottomSectionImageUrl:'',
         rightBottomSectionTitle:'',
         rightBottomSectionLink:'',
+        resourcesTable:false,
     },
     initialize: function(attr){ 
         if (!_.isUndefined(attr)){
@@ -56,6 +57,9 @@ var theme6Model = Backbone.Model.extend({
             }                           
             if (!_.isUndefined(themeConfig.rightBottomSectionLink)){
                 this.set('rightBottomSectionLink', themeConfig.rightBottomSectionLink)
+            }
+            if (!_.isUndefined(themeConfig.resourcesTable)){
+                this.set('resourcesTable', themeConfig.resourcesTable)
             }
         }
         else{
