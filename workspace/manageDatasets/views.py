@@ -120,20 +120,17 @@ def remove(request, id, type="resource"):
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
 
     if type == 'revision':
-        try:
-            lifecycle.remove()
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
-        except:
-            raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
+        lifecycle.remove()
+        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
     else:
-        try:
-            lifecycle.remove(killemall=True)
-            return HttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
-        except:
-            raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
 
 @login_required
 @require_privilege("workspace.can_create_dataset")
+@requires_if_publish('dataset') #
 @require_http_methods(['POST', 'GET'])
 @transaction.commit_on_success
 def create(request, collect_type='index'):
@@ -176,7 +173,7 @@ def create(request, collect_type='index'):
 
 @login_required
 @require_privilege("workspace.can_edit_dataset")
-@requires_published('dataset')
+@requires_if_publish('dataset')
 @require_http_methods(['POST', 'GET'])
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id

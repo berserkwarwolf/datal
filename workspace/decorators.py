@@ -45,7 +45,7 @@ def require_privilege(privilege):
         return _wrapped_view
     return decorator
 
-def requires_published(resource):
+def requires_if_publish(resource):
     """ En la edicion de recursos quizas se intente publicar, en esos casos
     es necesario validar si el usuario tiene permiso de publicacion """
     def decorator(view_func):
