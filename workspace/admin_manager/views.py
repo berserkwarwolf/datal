@@ -232,20 +232,20 @@ def action_branding_update(request):
             value   = form.cleaned_data[field_key]
             account.set_preference(key, value)
 
+        accountid = str(request.auth_manager.account_id)
+            
         if request.FILES.has_key('account_favicon'):
             data = request.FILES['account_favicon']
-            accountid = str(request.auth_manager.account_id)
             keyname = "%s/%s" %(accountid[::-1], 'favicon')
-            active_datastore.save_to_s3(settings.AWS_CDN_BUCKET_NAME, keyname, data)
+            active_datastore.update(settings.AWS_CDN_BUCKET_NAME, keyname, data)
             value = get_domain_with_protocol('cdn') + '/' + keyname
             account.set_preference('account.favicon', value)
             urls['id_account_favicon'] = value
 
         if request.FILES.has_key('account_logo'):
             data = request.FILES['account_logo']
-            accountid = str(request.auth_manager.account_id)
             keyname = "%s/%s" %(accountid[::-1], 'logo')
-            active_datastore.save_to_s3(settings.AWS_CDN_BUCKET_NAME, keyname, data)
+            active_datastore.update(settings.AWS_CDN_BUCKET_NAME, keyname, data)
             value = get_domain_with_protocol('cdn') + '/' + keyname
             account.set_preference('account.logo', value)
             urls['id_account_logo'] = value
