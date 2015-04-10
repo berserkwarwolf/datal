@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-import operator
+import operator, time
+
 from django.db.models import Q, F
+
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.models import Dataset, DatasetRevision, DatasetI18n, DataStreamRevision, Category
 from core.exceptions import SearchIndexNotFoundException
+from core.lib.searchify import SearchifyIndex
 from workspace import settings
 
 
@@ -154,6 +157,7 @@ class DatasetDBDAO():
 
         return related
 
+
 class DatasetSearchDAOFactory():
     """ select Search engine"""
     
@@ -161,7 +165,7 @@ class DatasetSearchDAOFactory():
         if settings.USE_SEARCHINDEX == 'searchify':
             self.search_dao = DatasetSearchifyDAO()
         else:
-            raise SearchIndexNotFoundException() #TODO define this error
+            raise SearchIndexNotFoundException()
 
         return self.search_dao
         
@@ -169,13 +173,10 @@ class DatasetSearchDAOFactory():
 class DatasetSearchifyDAO():
     """ class for manage access to datasets' searchify documents """
     def __init__(self):
-        from core.lib.searchify import SearchifyIndex
+
         self.search_index = SearchifyIndex()
         
     def add(self, dataset_revision, language):
-
-        import time
-
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
@@ -192,16 +193,16 @@ class DatasetSearchifyDAO():
                 'fields' :
                     {'type' : 'dt',
                      'dataset_id': dataset_revision.dataset.id,
-                     'datasetrevision_id': datasetrevision.id,
+                     'datasetrevision_id': dataset_revision.id,
                      'title': dataseti18n.title,
                      'text': text,
                      'description': dataseti18n.description,
                      'owner_nick' : dataset_revision.user.nick,
                      'tags' : ','.join(tags),
-                     'account_id' : dataset_revision.dataset.account_id,
+                     'account_id' : dataset_revision.dataset.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(dataset_revision.created_at.timetuple())),
-                     'end_point': dataset_revision.dataset.end_point,
+                     'end_point': dataset_revision.end_point,
                      'is_private': 0,
                     },
                 'categories': {'id': unicode(category.id), 'name': category.name}
