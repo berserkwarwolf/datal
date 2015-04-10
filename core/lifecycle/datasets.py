@@ -284,19 +284,18 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
 
-        last_revision = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))
+        last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))['id__max']
 
-        if last_revision['id__max']:
-            self.dataset.last_revision_id = last_revision['id__max']
-            last_published_revision = DatasetRevision.objects.filter(
+        if last_revision_id:
+            self.dataset.last_revision = DatasetRevision.objects.get(id=last_revision_id)
+            last_published_revision_id = DatasetRevision.objects.filter(
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
-            )
+            )['id__max']
 
-            last_published_revision_id = last_published_revision is not None and last_published_revision['id__max'] or None
-
-            if last_published_revision_id != self.dataset.last_published_revision_id:
-                    self.dataset.last_published_revision_id = last_published_revision_id
+            if last_published_revision_id and self.dataset.last_published_revision \
+                    and last_published_revision_id != self.dataset.last_published_revision.id:
+                    self.dataset.last_published_revision = DatasetRevision.objects.get(id=last_published_revision_id)
 
             self.dataset.save()
         else:
