@@ -23,6 +23,7 @@ var theme5Model = Backbone.Model.extend({
         rightBottomSectionTitle:'',
         rightBottomSectionLink:'',
         links:[],
+        resourcesTable:false,
 
     },
     initialize: function(attr){ 
@@ -96,7 +97,10 @@ var theme5Model = Backbone.Model.extend({
                 }
                 if (!_.isUndefined(themeConfig.links)){
                     this.set('links', themeConfig.links)
-                }           
+                }    
+                if (!_.isUndefined(themeConfig.resourcesTable)){
+                    this.set('resourcesTable', themeConfig.resourcesTable)
+                }       
         }
 
     },

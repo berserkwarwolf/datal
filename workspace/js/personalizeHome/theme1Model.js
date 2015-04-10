@@ -2,6 +2,7 @@ var theme1Model = Backbone.Epoxy.Model.extend({
 	defaults: {
 		mainTitle:'',
 		mainSection:'',
+		resourcesTable:true,
 	},
 
 	initialize: function(attr){		
@@ -13,6 +14,10 @@ var theme1Model = Backbone.Epoxy.Model.extend({
 			
 			if (!_.isUndefined(themeConfig.mainSection)){
 				this.set('mainSection', themeConfig.mainSection )
+			}
+
+			if (!_.isUndefined(themeConfig.resourcesTable)){
+				this.set('resourcesTable', themeConfig.resourcesTable)
 			}
 		
 		}

@@ -17,7 +17,7 @@
 		</div>
 		<div class="row clearfix bottomRow">
 			<a id="id_new_slide" class="button small FL"><span><%= gettext('ADMIN-HOME-SECTION-NEWSLIDE') %></span></a>
-			<p class="tipText FR"><%= gettext('ADMIN-HOME-SECTION-THEME6-TIP') %></p>    
+			<p class="tipText FL"><%= gettext('ADMIN-HOME-SECTION-THEME6-TIP') %></p>    
 		</div>
 	</fieldset>
 </div>
@@ -169,6 +169,23 @@
         <div class="formErrorMessageContainer">
           <input type="url" class="field FL urlLink complete_url" id="id_theme5RightBottomLink" name="id_theme5RightBottomLink" value="<%=rightBottomSectionLink%>" data-bind="value:rightBottomSectionLink,events:['keyup']"/>
         </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <!-- Resources table -->
+  <div class="formBox">
+    <header class="clearfix">
+      <div class="num">7</div>
+      <hgroup>
+        <h1><%= gettext('ADMIN-HOME-SECTION-RESOURCESTITLE') %></h1>
+        <h2><%= gettext('ADMIN-HOME-SECTION-RESOURCESDESCRIPTION') %></h2>
+      </hgroup>
+    </header>
+    <fieldset>
+      <div class="row">
+        <input type="checkbox" id="id_theme0ResourcesTable" name="id_theme0ResourcesTable" data-bind="checked:resourcesTable" />
+        <%= gettext('ADMIN-HOME-SECTION-RESOURCESCHECKBOX') %>
       </div>
     </fieldset>
   </div>

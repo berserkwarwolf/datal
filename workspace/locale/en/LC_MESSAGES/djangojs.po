@@ -831,3 +831,12 @@ msgstr "Delete"
 
 msgid "VALIDATE-SAME-PASS-TEXT"
 msgstr "Please enter the same value again"
+
+msgid "ADMIN-HOME-SECTION-RESOURCESTITLE"
+msgstr "Resources catalog"
+
+msgid "ADMIN-HOME-SECTION-RESOURCESDESCRIPTION"
+msgstr "You can show or hide the resources catalog in the theme."
+
+msgid "ADMIN-HOME-SECTION-RESOURCESCHECKBOX"
+msgstr "Show resources catalog."

@@ -6,6 +6,7 @@ var theme0Model = Backbone.Epoxy.Model.extend({
 		sliderSection:[],
 		leftBottomSection:'',
 		rightBottomSection:'',
+		resourcesTable:true,
 	},
 	 
 	initialize: function(attr){			
@@ -36,6 +37,10 @@ var theme0Model = Backbone.Epoxy.Model.extend({
 				
 				if (!_.isUndefined(themeConfig.rightBottomSection)){
 					this.set('rightBottomSection', themeConfig.rightBottomSection)
+				}
+
+				if (!_.isUndefined(themeConfig.resourcesTable)){
+					this.set('resourcesTable', themeConfig.resourcesTable)
 				}
 				
 			}

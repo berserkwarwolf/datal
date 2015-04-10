@@ -5,6 +5,7 @@ var theme4Model = Backbone.Model.extend({
 		coverUrl:'',
 		sliderSection:[],
 		linkSection:[],
+		resourcesTable:true,
 	},
 	initialize: function(attr){	
 		if (!_.isUndefined(attr)){
@@ -27,6 +28,10 @@ var theme4Model = Backbone.Model.extend({
 			if (!_.isUndefined(themeConfig.linkSection)){
 				this.set('linkSection', themeConfig.linkSection)
 			}		
+
+			if (!_.isUndefined(themeConfig.resourcesTable)){
+				this.set('resourcesTable', themeConfig.resourcesTable)
+			}
 		}
 	},
 
