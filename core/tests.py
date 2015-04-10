@@ -33,16 +33,6 @@ class LifeCycleManagerTestCase(TransactionTestCase):
             file_name=''
         )
 
-    def send_to_review(self):
-        # Send to review
-        lifecycle = DatasetLifeCycleManager(user=self.user, dataset_revision_id=self.dataset.last_revision.get().id)
-        dataset_revision = lifecycle.edit(changed_fields=['status'],
-                                          language=self.user.language,  status=StatusChoices.PENDING_REVIEW,
-                                          title='Test Dataset', collect_type=self.collect_type,
-                                          description="Descripcion del dataset", end_point=self.end_point, notes='',
-                                          category=self.category.id, impl_type=self.source_type, file_name='', tags=[],
-                                          sources=[])
-
     def test_create_dataset(self):
         """
         Testing Lifecycle Manager Create Dataset Method
@@ -58,14 +48,6 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
-
-    def test_send_to_review(self):
-        """
-        Testing Lifecycle Manager Send to Review Dataset Method
-        """
-        self.create_dataset()
-        self.send_to_review()
-
 
     def test_remove_last_revision(self):
         """
@@ -85,18 +67,37 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         # Verifico que elimine la revision
         self.assertIs(DatasetRevision.objects.filter(id=old_dataset_revision.id).count(), 0)
 
-    def test_send_to_review_dataset(self):
+    def test_send_to_review(self):
         """
         Testing Lifecycle Manager send to review
         """
         self.create_dataset()
-        self.send_to_review()
+        lifecycle = DatasetLifeCycleManager(user=self.user, dataset_revision_id=self.dataset.last_revision.get().id)
+        lifecycle.send_to_review()
 
         queryset = DatasetRevision.objects.filter(dataset=self.dataset)
 
-        # Debe tener solo un Dataset Revision
+        # Debe tener solo una Revision
         self.assertEqual(queryset.count(), 1)
 
         # El estado de la ultima revision debe ser PENDING REVIEW
         self.assertEqual(queryset[0].status, StatusChoices.PENDING_REVIEW)
-    
+
+    def test_accept(self):
+        """
+        Testing Lifecycle Manager accept Method
+        """
+        self.create_dataset()
+
+        lifecycle = DatasetLifeCycleManager(user=self.user, dataset_revision_id=self.dataset.last_revision.get().id)
+        lifecycle.send_to_review()
+        lifecycle.accept()
+
+        queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+
+        # Debe tener solo una Revision
+        self.assertEqual(queryset.count(), 1)
+
+        # El estado de la ultima revision debe ser APPROVED
+        self.assertEqual(queryset[0].status, StatusChoices.APPROVED)
+
