@@ -231,8 +231,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """create new revision or update it"""
 
         old_status = self.dataset_revision.status
+
         if old_status  not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
+
+        if 'status' in fields.keys():
+            form_status = fields.pop('status', None)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -243,22 +247,17 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:
-
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision, changed_fields, **fields)
-
         else:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields)
 
             self._move_childs_to_draft()
 
-
-        status = fields['status']
-
-        if status == StatusChoices.PUBLISHED:
+        if form_status == StatusChoices.PUBLISHED:
             self.publish()
-        elif old_status == StatusChoices.PUBLISHED and status == StatusChoices.DRAFT:
+        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
             self.unpublish()
         else:
             self._update_last_revisions()
