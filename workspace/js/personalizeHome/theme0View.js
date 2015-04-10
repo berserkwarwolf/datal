@@ -44,7 +44,6 @@ var theme0View = Backbone.Epoxy.View.extend({
 				'jsonString': saferStringify(ob)
 			}, 
 			dataType: 'json',
-			contentType:'application/json; charset=utf-8',
 			beforeSend: function(){
 				$("#ajax_loading_overlay").show();
 			},
