@@ -110,7 +110,7 @@ class SearchifyIndex():
 
     def _clean_docid_str(self, docs):
         try:
-            match = re.search('^(DS|DB|VZ)(::)(.+)', docs)
+            match = re.search('^(DS|DB|VZ|DT)(::)(.+)', docs)
             if match:
                 ret_type = match.group(1)
                 ret_str = match.group(3)
