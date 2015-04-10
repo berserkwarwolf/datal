@@ -53,11 +53,7 @@ urlpatterns = patterns('',
     url(r'^catalog.xml$', 'microsites.views.action_catalog_xml'),
     (r'^auth/', include('core.auth.urls')),
 
-    url(r'^signout', 'microsites.accounts.views.signout', name='accounts.signout'),
-    url(r'^signin', 'microsites.accounts.views.signin', name='accounts.signin'),
-    url(r'^login', 'microsites.accounts.views.login', name='accounts.login'),
-    (r'^accounts/', include('microsites.accounts.urls')),
-
+    
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
     (r'^js_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'js')}),
     (r'^media_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'media')}),
