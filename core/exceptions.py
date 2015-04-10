@@ -32,6 +32,10 @@ class LifeCycleException(ApplicationException):
     title = 'Life cycle error'
 
 
+class SearchIndexNotFoundException(ApplicationException):
+    title = 'Search index not found exception'
+
+
 class DatasetNotFoundException(LifeCycleException):
     title = 'Dataset not found'
 

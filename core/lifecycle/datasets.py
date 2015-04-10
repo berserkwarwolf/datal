@@ -101,7 +101,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         try:
             self._publish_childs()
         except IlegalStateException:
-            # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
+            # Si alguno de los hijos no se encuentra al menos aprobado,
+            # entonces el dataset no es publicado quedando en estado aprobado
             status = StatusChoices.APPROVED
 
         self.dataset_revision.status = status
@@ -122,7 +123,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                                 id=F('datastream__last_revision__id'))
 
             for datastream in datastreams:
-                DatastreamLifeCycleManager(user=self.user, datastream_id=datastream.id).publish(allowed_states=[StatusChoices.APPROVED])
+                DatastreamLifeCycleManager(user=self.user, datastream_id=datastream.id).publish(
+                    allowed_states=[StatusChoices.APPROVED])
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """

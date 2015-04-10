@@ -3,6 +3,7 @@ import operator
 from django.db.models import Q, F
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.models import Dataset, DatasetRevision, DatasetI18n, DataStreamRevision, Category
+from core.exceptions import SearchIndexNotFoundException
 from workspace import settings
 
 
