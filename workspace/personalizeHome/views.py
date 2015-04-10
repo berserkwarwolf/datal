@@ -94,14 +94,11 @@ def upload( request ):
             data = val
             name = data.name
 
-            bucket = active_datastore.get_bucket(settings.AWS_CDN_BUCKET_NAME)
             accountid = str(request.auth_manager.account_id)
             keyname = "%s/%s" %(accountid[::-1], name)
 
-            k = Key(bucket)
-            k.key = keyname
-            k.set_contents_from_file(data)
-            value = get_domain_with_protocol('cdn') + '/' + k.key
+            active_datastore.update(settings.AWS_CDN_BUCKET_NAME, keyname, data)
+            value = get_domain_with_protocol('cdn') + '/' + keyname
 
     if request.FILES is None:
         response_data = [{"error": 'Must have files attached!'}]
