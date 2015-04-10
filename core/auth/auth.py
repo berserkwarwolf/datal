@@ -73,11 +73,7 @@ class AuthManager:
         if is_workspace:
             return self.has_privilege('workspace.can_'+privilege+'_'+object_type)
         else:
-            # private site
-            if self.has_privilege('privatesite.can_'+privilege+'_'+object_type+'s'):
-                return True
-            else:
-                return ObjectGrant.objects.has_privilege_on_object(object_id, object_type, self.id, 'privatesite.can_'+privilege+'_'+object_type)
+            return True # no more private sites
 
     def get_allowed_actions(self, current_status=None):
         actions = ()
