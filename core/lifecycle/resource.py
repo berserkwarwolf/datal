@@ -7,6 +7,7 @@ from core.daos import ActivityStreamDAO
 from workspace.exceptions import IlegalStateException
 from core.lib.datastore import *
 from core.models import User
+from core.cache import Cache
 
 
 class AbstractLifeCycleManager():
@@ -28,10 +29,10 @@ class AbstractLifeCycleManager():
         """ create a new dataset """
         """ collect_type is COLLECT_TYPE_CHOICES (0, 1, 2) """
 
-   
+
         # Check for allowed states
         status = fields.get('status', StatusChoices.DRAFT)
-        
+
         if status not in allowed_states:
             raise IlegalStateException(allowed_states)
 
@@ -46,7 +47,7 @@ class AbstractLifeCycleManager():
 
     @abstractmethod
     def _publish_childs(self):
-        pass        
+        pass
 
     @abstractmethod
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
@@ -66,10 +67,10 @@ class AbstractLifeCycleManager():
 
         if self.dataset_revision.status not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
-    
+
     @abstractmethod
     def _send_childs_to_review(self):
-        pass  
+        pass
 
     @abstractmethod
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
@@ -124,3 +125,11 @@ class AbstractLifeCycleManager():
     def __init__(self, user, language):
         self.user = type(user) is not int and user or User.objects.get(pk=user)
         self.language = language
+
+    @abstractmethod
+    def _delete_cache(self, cache_key, cache_db=0):
+        """ limpiar un cache específico
+        cache_db=0 es el cache principal (CACHE_DATABASES)
+        usado para actualizar luego de modificar recursos que requieren actualización rápida"""
+        c = Cache(db=cache_db)
+        c.delete(cache_key)

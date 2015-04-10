@@ -32,7 +32,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
-            
+
         try:
             if type(resource) == Dataset:
                 self.dataset = resource
@@ -223,9 +223,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.DELETE)
+        self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
 
     def _remove_all(self):
         self.dataset.delete()
+        self._log_activity(ActionStreams.DELETE)
+        self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """create new revision or update it"""
@@ -280,6 +283,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _log_activity(self, action_id):
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
                                                                   self.dataset_revision.id, self.dataseti18n.title)
+    def _delete_cache(self, cache_key, cache_db=0):
+        return super(DatasetLifeCycleManager, self)._delete_cache(cache_key=cache_key, cache_db=cache_db)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
