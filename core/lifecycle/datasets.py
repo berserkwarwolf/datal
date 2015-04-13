@@ -153,10 +153,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
-        DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).exclude(id=self.dataset_revision.id).update(changed_fields=['status'], status=StatusChoices.DRAFT)
+        DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED)\
+            .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id, id=F('datastream__last_published_revision__id'), status=StatusChoices.PUBLISHED)
+            datastreams = DataStreamRevision.objects.select_for_update().filter(
+                dataset=self.dataset.id,
+                id=F('datastream__last_published_revision__id'),
+                status=StatusChoices.PUBLISHED
+            )
 
             for datastream in datastreams:
                 DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).unpublish(killemall=True)
@@ -201,6 +206,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
+
+        # Tener en cuenta que si es necesario ejecutar varios delete, debemos crear un nuevo objecto LifeCycle
 
         if self.dataset_revision.status not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
