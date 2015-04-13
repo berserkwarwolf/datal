@@ -19,7 +19,7 @@ body > .layout{height:auto;min-height:100%;}
 .main-section .section-content{background-color:#FFF;padding:0;}
 .list-container{padding:0 15px 15px;margin:0;}
 
-/*ACCOUNT ADMIN*/
+/*FORMS*/
 .dataStreamForm{padding:20px 0 20px 20px;}
 .dataStreamForm .form .row label{font-size:12px;width:160px;float:left;text-shadow:0 1px 0 #fff;}
 .dataStreamForm .form .row input, 
@@ -74,6 +74,7 @@ body > .layout{height:auto;min-height:100%;}
 .formContainer .contentForm .row input[type="file"]{padding:0;}
 .formContainer .contentForm .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;}
 
+/*OVERLAY*/
 .ao-popup-overlay .columns .CL{width:440px;}
 .ao-popup-overlay .columns .CR{width:240px;}
 .ao-popup-overlay .dataStreamForm .form .row input, 
@@ -108,21 +109,3 @@ body > .layout{height:auto;min-height:100%;}
 .dataStreamForm .imgContainer .textContainer input[type="file"]{width:350px !important;}
 .imgContainer .textContainer div.formErrorMessageContainer{float:none !important;}
 .imgContainer .textContainer p.tip{padding-left:0 !important;clear:none !important;}
-
-/*OPEN DATA SITE BUTTON*/
-.ODSButton{top:-2px !important;right:10px;}
-
-/*HOME PAGE*/
-.hasHomePage .dataStreamForm .form .row label{padding-right:0;padding-bottom:5px;width:auto;display:block;float:none;text-align:left;font-size:14px;}
-.hasHomePage .dataStreamForm .form .row label .num{font-size:14px;font-weight:bold;text-shadow:0 1px 0 #763001;-moz-border-radius:15px;-webkit-border-radius:15px;border-radius:15px;background:#ff6600;margin-right:5px;padding:2px 5px;color:#fff;}
-.hasHomePage .dataStreamForm .form .row textarea{float:none;width:100%;height:150px;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;}
-.hasHomePage .dataStreamForm .form .row p.tip{padding-left:0;}
-.hasHomePage .dataStreamForm .form .formErrorMessageContainer{float:none;}
-
-/*CATEGORIES*/
-.ao-popup-overlay .In.categoriesForm{-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;}
-.categoriesForm .dataStreamForm .form .row.checkbox {padding-left: 110px;}
-.categoriesForm .smallLoader{top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,.8);-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;z-index:110000;}
-.categoriesForm .smallLoader img{top:50%;left:50%;margin-top:-16px;margin-left:-16px;width:32px;height:32px;position:absolute;z-index:120000;}
-.categoriesForm h4{-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
-#id_categoryFormContainer .close{z-index:120000;}
