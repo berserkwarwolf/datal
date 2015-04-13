@@ -527,9 +527,9 @@ class Dataset(GuidModel):
     type = models.IntegerField(choices=choices.COLLECT_TYPE_CHOICES)
     is_dead = models.SmallIntegerField(blank=False, verbose_name=ugettext_lazy('MODEL_IS_DEAD_LABEL'), default=0)
     guid = models.CharField(max_length=29, unique=True)
-    last_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_revision')
+    last_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_revision', on_delete=models.SET_NULL)
     last_published_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_published_revision',
-                                                blank=True)
+                                                blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     objects = managers.DataSetManager()
 
