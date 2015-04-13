@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from core.choices import StatusChoices, ActionStreams
-from workspace.daos.visualizations import VisualizationDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
 from core.daos.activity_stream import ActivityStreamDAO
 from core.daos.searchify import SearchifyDAO
