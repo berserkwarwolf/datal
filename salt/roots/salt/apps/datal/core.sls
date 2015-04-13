@@ -66,6 +66,27 @@ language:
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
 
+core_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=core.settings --noinput
+
+microsites_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=microsites.settings --noinput
+
+workspace_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=workspace.settings --noinput
+
 /tmp/datal.log:
   file.managed:
     - user: {{ pillar['system']['user'] }}

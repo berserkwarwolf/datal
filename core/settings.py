@@ -270,6 +270,11 @@ STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(PROJECT_PATH,'core/media/'),)
 
+# Django Compress y SASS
+COMPRESS_PRECOMPILERS = (
+    ('text/scss', 'sass --scss {infile} {outfile}'),
+)
+
 try:
     from core.local_settings import *
 except ImportError:
