@@ -224,8 +224,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
-            else:
-                self.dataset_revision.delete()
+
+            self.dataset_revision.delete()
 
         self._update_last_revisions()
 
