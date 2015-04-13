@@ -109,3 +109,6 @@ body > .layout{height:auto;min-height:100%;}
 .dataStreamForm .imgContainer .textContainer input[type="file"]{width:350px !important;}
 .imgContainer .textContainer div.formErrorMessageContainer{float:none !important;}
 .imgContainer .textContainer p.tip{padding-left:0 !important;clear:none !important;}
+
+/*MY ACCOUNT*/
+.dataStreamForm .row .passwordStrength{position:absolute;top:11px;right:11px;}
