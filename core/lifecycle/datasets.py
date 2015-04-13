@@ -4,14 +4,14 @@ import logging
 from django.db.models import F, Max
 from django.conf import settings
 from django.db import transaction
-
+from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IlegalStateException
-from workspace.daos.datasets import *
+from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
 logger = logging.getLogger(__name__)

@@ -191,6 +191,7 @@ HOT_DATASTREAMS = 'HOT_DATASTREAMS'
 HOT_DASHBOARDS  = 'HOT_DASHBOARDS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
 DOC_API_URL = 'http://wiki.junar.com/index.php/API'
+PAGINATION_RESULTS_PER_PAGE = 10
 
 # develop & staging sentry
 SENTRY_DSN = 'http://sentrydsn@sentry.com/1'
