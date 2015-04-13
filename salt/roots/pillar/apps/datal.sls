@@ -1,5 +1,6 @@
 application:
   path: /home/vagrant/app
+  statics_dir: /home/vagrant/static
   cdn: ''
   api_key: ''
   public_key: ''

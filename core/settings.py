@@ -40,9 +40,11 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
+    'django.contrib.staticfiles',
     'django_extensions',
     'core',
-    'raven.contrib.django'
+    'raven.contrib.django',
+    "compressor",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -263,6 +265,10 @@ LOGGING = {
 }
 
 IS_WORKSPACE = False
+
+STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH,'core/media/'),)
 
 try:
     from core.local_settings import *

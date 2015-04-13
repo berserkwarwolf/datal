@@ -40,11 +40,6 @@ nginx:
               - proxy_buffers: 4 256k
               - proxy_busy_buffers_size: 256k
 
-              # TODO: Review
-              #- location /lb:
-              #  - alias:
-              #    - /var/www/lb
-
               - location /media:
                 - alias:
                   - {{ pillar['virtualenv']['path'] }}/lib/python2.7/site-packages/django/contrib/admin/static
@@ -67,21 +62,11 @@ nginx:
               - proxy_read_timeout: 180s
               - proxy_send_timeout: 180s
 
-              # TODO: Review
-              #- location /lb:
-              #  - alias:
-              #    - /var/www/lb
-
               - location /:
                 - uwsgi_pass: 127.0.0.1:3018
                 - uwsgi_read_timeout: 300
                 - uwsgi_send_timeout: 300
                 - include: /etc/nginx/uwsgi_params
-
-              # TODO: Review
-              #- location /robots.txt:
-              #  - alias:
-              #    - /var/www/microsite/robots.txt
 
         microsite:
           enabled: True
@@ -97,34 +82,21 @@ nginx:
               - proxy_read_timeout: 120s
               - proxy_send_timeout: 120s
 
-              # TODO: Review
-              #- location /robots.txt:
-              #  - alias:
-              #    - /var/www/microsite/robots.txt
-
               - location /js_core:
                 - alias:
                   - {{ pillar['application']['path'] }}/core/js
-
-              - location /media_core:
-                - alias:
-                  - {{ pillar['application']['path'] }}/core/media
 
               - location /js_microsites:
                 - alias:
                   - {{ pillar['application']['path'] }}/microsites/js
 
-              - location /media_microsites:
-                - alias:
-                  - {{ pillar['application']['path'] }}/microsites/media
-
               - location /js_workspace:
                 - alias:
                   - {{ pillar['application']['path'] }}/workspace/js
 
-              - location /media_workspace:
+              - location /static:
                 - alias:
-                  - {{ pillar['application']['path'] }}/workspace/media
+                  - {{ pillar['application']['statics_dir'] }}
 
               - location /AgileOfficeServer:
                 - proxy_pass: http://127.0.0.1:8080/AgileOfficeServer
@@ -162,9 +134,9 @@ nginx:
                 - alias:
                   - {{ pillar['application']['path'] }}/core/js
 
-              - location /media_core:
+              - location /static:
                 - alias:
-                  - {{ pillar['application']['path'] }}/core/media
+                  - {{ pillar['application']['statics_dir'] }}
 
               - location /AgileOfficeServer:
                 - proxy_pass: 'http://127.0.0.1:8080/AgileOfficeServer'

@@ -1,3 +1,14 @@
+sass_install:
+  gem.installed:
+    - name: sass
+
+{{ pillar['application']['statics_dir'] }}:
+  file.directory:
+    - user: {{ pillar['system']['user'] }}
+    - group: {{ pillar['system']['group'] }}
+    - mode: 755
+    - makedirs: True
+
 # Set directory owner
 directory_structure:
   file.directory:
