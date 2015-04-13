@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 
 from core.choices import StatusChoices
-from core.daos import ActivityStreamDAO
+from core.daos.activity_stream import ActivityStreamDAO
 from workspace.exceptions import IlegalStateException
 from core.lib.datastore import *
 from core.models import User

@@ -145,7 +145,7 @@ class Account(models.Model):
             return None
 
     def get_preferences(self):
-        from core.daos import Preferences
+        from core.daos.preferences import Preferences
         return Preferences(self.id)
 
     def is_private(self):
