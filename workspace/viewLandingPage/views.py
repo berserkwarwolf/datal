@@ -1,5 +1,5 @@
 from core.auth.decorators import login_required
-from core.daos import ActivityStreamDAO
+from core.daos.activity_stream import ActivityStreamDAO
 from core.shortcuts import render_to_response
 
 @login_required

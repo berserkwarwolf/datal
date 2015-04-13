@@ -28,7 +28,8 @@ def list(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
 
-    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id, language=request.user.language, page=0)
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id, 
+                                                      language=request.user.language, page=0)
 
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDatasets/noResults.html', locals())
@@ -112,7 +113,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 
 @login_required
 @require_privilege("workspace.can_delete_dataset")
-@require_privilege("workspace.can_delete_dataset_revision")
 @transaction.commit_on_success
 def remove(request, id, type="resource"):
 

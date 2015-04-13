@@ -53,7 +53,7 @@ def requires_if_publish(resource):
         def _wrapped_view(request, *args, **kwargs):
             # check for new status
             if request.POST.get('status', StatusChoices.DRAFT) == StatusChoices.PUBLISHED:
-                privilege = 'can_publish_%s_revision' % resource
+                privilege = 'can_publish_%s' % resource
                 if request.auth_manager.has_privilege(privilege):
                     return view_func(request, *args, **kwargs)
                 else:

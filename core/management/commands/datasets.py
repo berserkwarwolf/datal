@@ -2,8 +2,8 @@ from django.core.management.base import BaseCommand, CommandError
 
 from optparse import make_option
 
-from core.choices import CollectTypeChoices, SourceImplementationChoices
-from core.models import Dataset, User, Category
+from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
+from core.models import User, Category
 from core.lifecycle.datasets import DatasetLifeCycleManager
 
 
@@ -20,6 +20,12 @@ class Command(BaseCommand):
             dest='user',
             default='',
             help='Assign datasets to user given'),
+
+        make_option('--with-revisions',
+            action='store_true',
+            dest='with_revisions',
+            default=False,
+            help='Add revisions to Dataset'),
     )
 
     def handle(self, *args, **options):
@@ -51,7 +57,7 @@ class Command(BaseCommand):
             source_type = SourceImplementationChoices.HTML
 
             for x in range(0, create_count):
-                life_cycle.create(
+                dataset_revision = life_cycle.create(
                     title='Dummy Dataset',
                     collect_type=collect_type,
                     description="Descripcion del dataset",
@@ -61,5 +67,33 @@ class Command(BaseCommand):
                     impl_type=source_type,
                     file_name=''
                 )
+
+                if options['with_revisions']:
+                    lifecycle = DatasetLifeCycleManager(user=user, language=user.language,
+                                                        dataset_revision_id=dataset_revision.id)
+                    lifecycle.send_to_review()
+                    lifecycle.accept()
+                    lifecycle.publish()
+
+                    # Edito el recurso
+                    lifecycle.edit(collect_type=collect_type, changed_fields=['title'], language=user.language,
+                                   title='Nuevo titulo', category=category.id, file_name='', end_point=end_point,
+                                   impl_type=source_type, file_size=0, license_url='', spatial='', frequency='monthly',
+                                   mbox='', impl_details='', description='Nueva descripcion', notes='', tags=[],
+                                   sources=[], status=StatusChoices.PUBLISHED)
+
+                    # Edito el recurso
+                    lifecycle.edit(collect_type=collect_type, changed_fields=['title'], language=user.language,
+                                   title='Nuevo titulo 1', category=category.id, file_name='', end_point=end_point,
+                                   impl_type=source_type, file_size=0, license_url='', spatial='', frequency='monthly',
+                                   mbox='', impl_details='', description='Nueva descripcion', notes='', tags=[],
+                                   sources=[], status=StatusChoices.PUBLISHED)
+
+                    # Edito el recurso
+                    lifecycle.edit(collect_type=collect_type, changed_fields=['title'], language=user.language,
+                                   title='Nuevo titulo 2', category=category.id, file_name='', end_point=end_point,
+                                   impl_type=source_type, file_size=0, license_url='', spatial='', frequency='monthly',
+                                   mbox='', impl_details='', description='Nueva descripcion', notes='', tags=[],
+                                   sources=[], status=StatusChoices.PUBLISHED)
 
             self.stdout.write('Datasets created successfully')

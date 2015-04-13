@@ -145,7 +145,7 @@ class Account(models.Model):
             return None
 
     def get_preferences(self):
-        from core.daos import Preferences
+        from core.daos.preferences import Preferences
         return Preferences(self.id)
 
     def is_private(self):
@@ -527,9 +527,9 @@ class Dataset(GuidModel):
     type = models.IntegerField(choices=choices.COLLECT_TYPE_CHOICES)
     is_dead = models.SmallIntegerField(blank=False, verbose_name=ugettext_lazy('MODEL_IS_DEAD_LABEL'), default=0)
     guid = models.CharField(max_length=29, unique=True)
-    last_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_revision')
+    last_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_revision', on_delete=models.SET_NULL)
     last_published_revision = models.ForeignKey('DatasetRevision', null=True, related_name='last_published_revision',
-                                                blank=True)
+                                                blank=True, on_delete=models.SET_NULL)
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     objects = managers.DataSetManager()
 
@@ -550,7 +550,8 @@ class DatasetRevision(models.Model):
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     end_point = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_END_POINT_LABEL'))
     filename = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_FILENAME_LABEL'))
-    impl_details = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'), blank=True)
+    impl_details = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'), blank=True,
+                                    null=True)
     impl_type = models.IntegerField(choices=choices.SOURCE_IMPLEMENTATION_CHOICES,
                                     verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_TYPE_LABEL'))
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))

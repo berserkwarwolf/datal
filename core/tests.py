@@ -161,8 +161,6 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         # La ultima revision no debe ser la primera que creamos
         self.assertIsNot(self.dataset.last_revision, self.dataset_revision)
 
-        print('TODO: Falta verificar la ultima revision publicada que seguramente, falla')
-
     def test_remove_last_revision_with_revisions(self):
         """
         Testing Lifecycle Manager remove revisions
@@ -194,7 +192,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
                                               description='Nueva descripcion 1', notes='', tags=[], sources=[],
                                               status=StatusChoices.PUBLISHED)
 
-        # Debe tener 4 Revisiones
+        # Debe tener 3 Revisiones
         revision_count = DatasetRevision.objects.filter(dataset=self.dataset).count()
         self.assertEqual(revision_count, 3)
 
@@ -202,48 +200,40 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
         self.assertEqual(last_revision_id, Dataset.objects.get(id=self.dataset.id).last_revision.id)
 
-        print(DatasetRevision.objects.filter(dataset=self.dataset))
         lifecycle.remove()
-        print(DatasetRevision.objects.filter(dataset=self.dataset))
-        
-        # Debe tener 3 Revisiones
-        #revision_count = DatasetRevision.objects.filter(dataset=self.dataset).count()
-        #self.assertEqual(revision_count, 2)
-
-        # Verifico el last revision ID
-        #last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
-        #self.assertEqual(last_revision_id, Dataset.objects.get(id=self.dataset.id).last_revision.id)
-
-        #lifecycle.remove()
-        #queryset = DatasetRevision.objects.filter(dataset=self.dataset).count()
-        #print(queryset)
 
         # Debe tener 2 Revisiones
-        #self.assertEqual(queryset.count(), 2)
+        revision_count = DatasetRevision.objects.filter(dataset=self.dataset).count()
+        self.assertEqual(revision_count, 2)
 
         # Verifico el last revision ID
-        #last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
-        #self.assertEqual(last_revision_id, self.dataset.last_revision.id)
+        last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
+        self.assertEqual(last_revision_id, Dataset.objects.get(id=self.dataset.id).last_revision.id)
 
-        #lifecycle.remove()
-        #queryset = DatasetRevision.objects.filter(dataset=self.dataset).count()
-        #print(queryset)
+        # Remove
+        self.dataset = Dataset.objects.get(id=self.dataset.id)
+        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+                                            dataset_revision_id=self.dataset.last_revision.id)
+        lifecycle.remove()
+        self.dataset = Dataset.objects.get(id=self.dataset.id)
 
         # Debe tener 1 Revisiones
-        #self.assertEqual(queryset.count(), 1)
+        revision_count = DatasetRevision.objects.filter(dataset=self.dataset).count()
+        self.assertEqual(revision_count, 1)
 
         # Verifico el last revision ID
-        #last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
-        #self.assertEqual(last_revision_id, self.dataset.last_revision.id)
+        last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
+        self.assertEqual(last_revision_id, self.dataset.last_revision.id)
 
-        #lifecycle.remove()
-        #queryset = DatasetRevision.objects.filter(dataset=self.dataset).count()
-        #print(queryset)
+        # Remove
+        self.dataset = Dataset.objects.get(id=self.dataset.id)
+        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+                                            dataset_revision_id=self.dataset.last_revision.id)
+        lifecycle.remove()
 
         # Debe tener 0 Revisiones
-        #self.assertEqual(queryset.count(), 0)
+        revision_count = DatasetRevision.objects.filter(dataset=self.dataset).count()
+        self.assertEqual(revision_count, 0)
 
         # Verifico que elimine el dataset
-        #self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
-
-        #print('TODO: Falta verificar la ultima revision publicada que seguramente, falla')
+        self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)

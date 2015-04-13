@@ -12,7 +12,7 @@
 {% endif %}
 {% endif %}
 {% if revision.status != 2 and revision.status != 3 %}
-{% if 'workspace.can_delete_visualization_revision' in auth_manager.privileges %}
+{% if 'workspace.can_delete_visualization' in auth_manager.privileges %}
 <button class="delete genericButton actionButton workspaceIcon deleteIcon"><span class="delete">{% trans "APP-DELETE-TEXT" %}</span></button>
 {% endif %}
 {% endif %}

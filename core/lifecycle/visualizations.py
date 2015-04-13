@@ -3,7 +3,8 @@ from django.conf import settings
 from core.choices import StatusChoices, ActionStreams
 from workspace.daos.visualizations import VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
-from core.daos import ActivityStreamDAO, SearchifyDAO
+from core.daos.activity_stream import ActivityStreamDAO
+from core.daos.searchify import SearchifyDAO
 from core.exceptions import *
 from core.helpers import update_dashboard_widgets_and_revisions
 

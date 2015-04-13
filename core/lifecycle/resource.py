@@ -3,7 +3,7 @@
 from abc import ABCMeta, abstractmethod
 
 from core.choices import StatusChoices
-from core.daos import ActivityStreamDAO
+from core.daos.activity_stream import ActivityStreamDAO
 from workspace.exceptions import IlegalStateException
 from core.lib.datastore import *
 from core.models import User
@@ -126,7 +126,6 @@ class AbstractLifeCycleManager():
         self.user = type(user) is not int and user or User.objects.get(pk=user)
         self.language = language
 
-    @abstractmethod
     def _delete_cache(self, cache_key, cache_db=0):
         """ limpiar un cache específico
         cache_db=0 es el cache principal (CACHE_DATABASES)

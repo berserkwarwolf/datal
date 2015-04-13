@@ -4,14 +4,14 @@ import logging
 from django.db.models import F, Max
 from django.conf import settings
 from django.db import transaction
-
+from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IlegalStateException
-from workspace.daos.datasets import *
+from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
 logger = logging.getLogger(__name__)
@@ -153,10 +153,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
-        DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).exclude(id=self.dataset_revision.id).update(changed_fields=['status'], status=StatusChoices.DRAFT)
+        DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED)\
+            .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id, id=F('datastream__last_published_revision__id'), status=StatusChoices.PUBLISHED)
+            datastreams = DataStreamRevision.objects.select_for_update().filter(
+                dataset=self.dataset.id,
+                id=F('datastream__last_published_revision__id'),
+                status=StatusChoices.PUBLISHED
+            )
 
             for datastream in datastreams:
                 DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).unpublish(killemall=True)
@@ -202,6 +207,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
+        # Tener en cuenta que si es necesario ejecutar varios delete, debemos crear un nuevo objecto LifeCycle
+
         if self.dataset_revision.status not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
@@ -217,8 +224,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
-            else:
-                self.dataset_revision.delete()
+
+            self.dataset_revision.delete()
 
         self._update_last_revisions()
 
@@ -283,8 +290,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _log_activity(self, action_id):
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
                                                                   self.dataset_revision.id, self.dataseti18n.title)
-    def _delete_cache(self, cache_key, cache_db=0):
-        return super(DatasetLifeCycleManager, self)._delete_cache(cache_key=cache_key, cache_db=cache_db)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
