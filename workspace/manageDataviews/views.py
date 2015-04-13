@@ -21,9 +21,6 @@ from django.core.urlresolvers import reverse
 from core import engine
 
 import json
-import logging
-import re
-import urllib
 
 
 @login_required
@@ -119,7 +116,6 @@ def related_resources(request):
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
-@require_privilege("workspace.can_delete_datastream_revision")
 @transaction.commit_on_success
 def remove(request, id,type="resource"):
     """ remove resource """
@@ -141,8 +137,8 @@ def remove(request, id,type="resource"):
 @login_required
 @require_http_methods(['POST', 'GET'])
 @require_privilege("workspace.can_create_datastream")
-@requires_published_parent()
 @requires_dataset()
+@requires_published_parent()
 @transaction.commit_on_success
 def create(request):
     auth_manager = request.auth_manager

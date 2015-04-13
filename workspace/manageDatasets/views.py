@@ -112,7 +112,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 
 @login_required
 @require_privilege("workspace.can_delete_dataset")
-@require_privilege("workspace.can_delete_dataset_revision")
 @transaction.commit_on_success
 def remove(request, id, type="resource"):
 
