@@ -290,8 +290,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _log_activity(self, action_id):
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
                                                                   self.dataset_revision.id, self.dataseti18n.title)
-    def _delete_cache(self, cache_key, cache_db=0):
-        return super(DatasetLifeCycleManager, self)._delete_cache(cache_key=cache_key, cache_db=cache_db)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

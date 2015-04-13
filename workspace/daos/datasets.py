@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.daos.datasets import AbstractDatasetDBDAO
-from core import settings
+from workspace import settings
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
     """ class for manage access to datasets' database tables """

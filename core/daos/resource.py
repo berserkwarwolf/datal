@@ -3,7 +3,8 @@ from abc import ABCMeta, abstractmethod
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.models import Dataset, DatasetRevision, DatasetI18n, DataStreamRevision, Category
 from core import settings
-
+from django.db.models import Q, F
+import operator
 
 class AbstractDatasetDBDAO():
     """ class for manage access to datasets' database tables """
