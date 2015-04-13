@@ -1,7 +1,7 @@
 {% load i18n %}
 
 <div id="{{table_prefix}}_massive" class="massive">
-    {% if 'workspace.can_delete_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}
+    {% if 'workspace.can_delete_'|add:table_prefix in auth_manager.privileges %}
     <button class="mass_delete button small"><span class="mass_delete">{% trans "APP-DELETE-TEXT" %}</span></button> 
     {% endif %}
     {% if 'workspace.can_submit_'|add:table_prefix|add:'_revision' in auth_manager.privileges %}                

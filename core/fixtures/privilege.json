@@ -54,8 +54,8 @@
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_publish_dataset_revision",
-        "name": "workspace.can_publish_dataset_revision",
+        "code": "workspace.can_publish_dataset",
+        "name": "workspace.can_publish_dataset",
         "description": ""
     }
 },
@@ -64,8 +64,8 @@
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_publish_datastream_revision",
-        "name": "workspace.can_publish_datastream_revision",
+        "code": "workspace.can_publish_datastream",
+        "name": "workspace.can_publish_datastream",
         "description": ""
     }
 },
@@ -74,8 +74,8 @@
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_publish_dashboard_revision",
-        "name": "workspace.can_publish_dashboard_revision",
+        "code": "workspace.can_publish_dashboard",
+        "name": "workspace.can_publish_dashboard",
         "description": ""
     }
 },
@@ -84,8 +84,8 @@
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_publish_visualization_revision",
-        "name": "workspace.can_publish_visualization_revision",
+        "code": "workspace.can_publish_visualization",
+        "name": "workspace.can_publish_visualization",
         "description": ""
     }
 },
@@ -480,16 +480,6 @@
     }
 },
 {
-    "pk": 639,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_delete_dataset_revision",
-        "name": "workspace.can_delete_dataset_revision",
-        "description": ""
-    }
-},
-{
     "pk": 640,
     "model": "core.privilege",
     "fields": {
@@ -516,36 +506,6 @@
         "created_at": "2012-06-04T14:08:57",
         "code": "workspace.can_query_enhancer_dashboard",
         "name": "workspace.can_query_enhancer_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 643,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_delete_datastream_revision",
-        "name": "workspace.can_delete_datastream_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 644,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_delete_dashboard_revision",
-        "name": "workspace.can_delete_dashboard_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 645,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_delete_visualization_revision",
-        "name": "workspace.can_delete_visualization_revision",
         "description": ""
     }
 },
