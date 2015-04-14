@@ -40,6 +40,7 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
+    'south',
     'django.contrib.staticfiles',
     'django_extensions',
     'core',
