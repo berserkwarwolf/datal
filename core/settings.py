@@ -269,7 +269,7 @@ IS_WORKSPACE = False
 
 STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
 STATIC_URL = '/static/'
-STATICFILES_DIRS = (os.path.join(PROJECT_PATH,'core/media/'),)
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
 
 # Django Compress y SASS
 COMPRESS_PRECOMPILERS = (
@@ -277,7 +277,9 @@ COMPRESS_PRECOMPILERS = (
 )
 
 STATICFILES_FINDERS = (
-    ('compressor.finders.CompressorFinder'),
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
 )
 
 try:
