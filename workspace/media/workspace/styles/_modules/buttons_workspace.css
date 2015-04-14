@@ -1,6 +1,6 @@
 /*WORKSPACE ICONS*/
 
-.workspaceIcon span{background:url(../../images/_workspace/ic_workspaceIcons.png) no-repeat;padding-left:16px;line-height:20px;display:inline-block;}
+.workspaceIcon span{background:url(/static/workspace/images/_workspace/ic_workspaceIcons.png) no-repeat;padding-left:16px;line-height:20px;display:inline-block;}
 
 .genericButton.actionButton{height:22px !important;padding: 0 3px 0 2px;}
 button.genericButton.normalButton{height:22px !important;}

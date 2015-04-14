@@ -5,7 +5,7 @@
 .file .ao-table-selectable, .select-table-styles .ao-table-selectable{border-collapse:collapse !important;cursor:pointer !important;}
 
 /*BORDER DASHED*/
-.file .ao-border, .select-table-styles .ao-border{background:url(../../images/dataServicePublisher/im_animatedBorder.gif) repeat 0 0 !important;padding:2px !important;}
+.file .ao-border, .select-table-styles .ao-border{background:url(/static/core/images/dataServicePublisher/im_animatedBorder.gif) repeat 0 0 !important;padding:2px !important;}
 .file .ao-border table,.select-table-styles .ao-border table{background:white !important;margin:0 !important;border:2px solid #fff !important;}
 
 /*STYLES FOR SELF PUBLISHING AND PDF*/

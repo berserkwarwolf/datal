@@ -2,7 +2,7 @@
 .sliderContainer{position:absolute;right:-7px;top:28px;}
 
     /*DATA STREAM SLIDER*/
-    .sliderWrapper{overflow:hidden;padding:0 9px 8px;background:url(../../images/homeManager/sh_sliderWrapper.png) no-repeat;}
+    .sliderWrapper{overflow:hidden;padding:0 9px 8px;background:url(/static/core/images/homeManager/sh_sliderWrapper.png) no-repeat;}
     .sliderWrapper .dataStreamBorder{border:1px solid #e2e0e0;background:#fff;}
     .sliderWrapper .dataStreamContainer{float:left;overflow:hidden;}
     .sliderWrapper .caroufredsel_wrapper{border:1px solid #fff;}

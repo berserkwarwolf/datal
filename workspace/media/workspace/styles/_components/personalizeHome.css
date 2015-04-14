@@ -79,7 +79,7 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:13px 0;background:none;border-bottom:none;box-shadow:none;margin:0;}
-.configs .formBox header .num{background:url(../../images/personalizeHome/ic_num.png) 0 0 no-repeat;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:18px;}
+.configs .formBox header .num{background:url(/static/workspace/images/personalizeHome/ic_num.png) 0 0 no-repeat;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:18px;}
 .configs .formBox header hgroup{padding-left:30px;}
 .configs .formBox header h1{color:#827676;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}
@@ -103,7 +103,7 @@
 .configs input.errorFormValidation[type=url]{-webkit-box-shadow:0 0 3px 0 #fa4848;-moz-box-shadow:0 0 3px 0 #fa4848;box-shadow:0 0 3px 0 #fa4848;border:1px solid #fa4848;}
 .configs .formErrorMessageContainer div.errorFormValidation{display:none !important;}
 .configs .formBox fieldset.imageComponent.theme3{padding-top:0;}
-.configs .formBox fieldset.imageComponent .arrangeIcon{display:block;margin-right:13px;width:13px;height:33px;background:url(../../images/personalizeHome/ic_arrange.gif) no-repeat 0 center;}
+.configs .formBox fieldset.imageComponent .arrangeIcon{display:block;margin-right:13px;width:13px;height:33px;background:url(/static/workspace/images/personalizeHome/ic_arrange.gif) no-repeat 0 center;}
 .configs .formBox fieldset.imageComponent .arrangeIcon:hover{cursor:move;cursor:url(/static/core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
 {cursor:move;cursor:url(/static/core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
 .configs .formBox fieldset.imageComponent table img,

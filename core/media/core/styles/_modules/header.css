@@ -1,5 +1,5 @@
 /*HEADER*/
-.header{background:#ef7f10 url(../../images/common/gr_header.gif) repeat-x 0 0;border-bottom:4px solid #c56b12;width:100%;position:relative;z-index:2000;}
+.header{background:#ef7f10 url(/static/core/images/common/gr_header.gif) repeat-x 0 0;border-bottom:4px solid #c56b12;width:100%;position:relative;z-index:2000;}
 .header .innerHeader{width:950px;margin:0 auto;padding-right:10px;height:41px;}
 
 	/*LOGO*/
@@ -8,13 +8,13 @@
 
 	/*SEARCH BOX*/
 	.header .searchBar{padding-top:5px;margin-right:20px;}
-	.header .searchBar fieldset{display:block;background:url(../../images/common/bg_searchBar.gif) no-repeat 0 0;float:left;width:232px;height:31px;}
+	.header .searchBar fieldset{display:block;background:url(/static/core/images/common/bg_searchBar.gif) no-repeat 0 0;float:left;width:232px;height:31px;}
 	.header .searchBar .field{background:transparent;border:0;height:auto;color:#a0a0a0;font-size:14px;font-style:italic;width:185px;padding:7px 0 7px 10px;float:left;}
 	.header .searchBar .searchButton{opacity:0;filter:alpha(opacity=0);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";width:35px;height:31px;overflow:hidden;cursor:pointer;float:right;border:0;padding:0;}
 
 	/*TABS*/
 	.header .headerTabs, 
-	.header .headerTabs .tab{background:url(../../images/common/gr_tabSeparator.gif) no-repeat right 0;padding-right:2px;}
+	.header .headerTabs .tab{background:url(/static/core/images/common/gr_tabSeparator.gif) no-repeat right 0;padding-right:2px;}
 	.header .headerTabs li a{padding:0 12px;margin-top:1px;height:40px;line-height:40px;display:block;
         -webkit-transition:all 0.30s ease-in-out;
            -moz-transition:all 0.30s ease-in-out;
@@ -39,18 +39,18 @@
 	.header .headerTabs .tab .img img{width:22px;height:22px;padding:1px;background:#fff;}
 	.header .headerTabs .arrow .imgTxt{padding-left:33px;white-space:nowrap;text-overflow:ellipsis;max-width:120px;overflow: hidden;}
 	.header .headerTabs .tab .tabInner .arrow,  
-	.header .headerTabs .tab .subMenu dt .arrow{padding-right:13px;display:block;background:url(../../images/common/ic_tabArrow.gif) no-repeat right -1px;}
+	.header .headerTabs .tab .subMenu dt .arrow{padding-right:13px;display:block;background:url(/static/core/images/common/ic_tabArrow.gif) no-repeat right -1px;}
 	.header .headerTabs .tab .tabInner:hover .arrow{background-position:right -42px;}
 	.header .headerTabs .tab.active .tabInner .arrow,
 	.header .headerTabs .tab.active .tabInner:hover .arrow{background-position:right -165px;} 
 	.header .headerTabs .tab .subMenu dt .arrow{background-position:right -83px;}
 
     /*ICONS*/
-    .header .headerTabs .accountAdminTab .tabInner{background:url(../../images/common/ic_settings.png) no-repeat center center;width:20px;}
+    .header .headerTabs .accountAdminTab .tabInner{background:url(/static/core/images/common/ic_settings.png) no-repeat center center;width:20px;}
 	
 	/*SUB MENU*/
-	.header .headerTabs .tab .subMenu{display:none;position:absolute;top:41px;left:0;border:1px solid #ef7f10;border-top:0;background:#e57b12 url(../../images/common/gr_submenu.gif) 0 bottom repeat-x;-moz-border-radius:0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;-moz-box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);-webkit-box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);}
-	.header .headerTabs .tab .subMenu dl{background:#e57b12 url(../../images/common/gr_submenuInner.gif) 0 bottom repeat-x;margin:0 1px 1px;padding:3px 0;}
+	.header .headerTabs .tab .subMenu{display:none;position:absolute;top:41px;left:0;border:1px solid #ef7f10;border-top:0;background:#e57b12 url(/static/core/images/common/gr_submenu.gif) 0 bottom repeat-x;-moz-border-radius:0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;-moz-box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);-webkit-box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);box-shadow:0 1px 1px rgba(202, 76, 12, 0.54);}
+	.header .headerTabs .tab .subMenu dl{background:#e57b12 url(/static/core/images/common/gr_submenuInner.gif) 0 bottom repeat-x;margin:0 1px 1px;padding:3px 0;}
 	.header .headerTabs .tab .subMenu dt{background:#e57a12;padding:0 12px;height:40px;line-height:40px;display:block;float:left;position:absolute;top:-41px;left:0;margin-top:1px;}
 	.header .headerTabs .tab .subMenu dt .arrow{font-size:14px;color:#fff;text-shadow:0 1px 0 #c56b12;}
 	.header .headerTabs .tab.active .subMenu dt .arrow{font-weight:bold;}
@@ -67,7 +67,7 @@
 	/*SUB MENU - SIGN IN*/
 	.header .headerTabs .signInForm{padding-top:2px;}
 	.header .headerTabs .signInForm .row{margin-bottom:10px;}
-	.header .headerTabs .signInForm .rowField{background:url(../../images/common/fd_inputSignInHeader.gif) no-repeat 0 0;height:31px;width:162px;}
+	.header .headerTabs .signInForm .rowField{background:url(/static/core/images/common/fd_inputSignInHeader.gif) no-repeat 0 0;height:31px;width:162px;}
 	.header .headerTabs .signInForm .rowField .field{border:0;background:transparent;color:#a0a0a0;font-size:12px;font-style:italic;padding-top:7px;width:140px;padding-bottom:7px;}
 	.header .headerTabs .signInForm .rowField .formErrorMessageContainer{position:relative;}
 	.header .headerTabs .signInForm .rowActions .genericButton{float:left;width:57px;height:24px;font-size:12px;font-weight:normal;background-position:0 -2px;padding-left:0;padding-right:0;margin-right:5px;}

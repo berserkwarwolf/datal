@@ -74,7 +74,7 @@ label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:norma
 .pageFormContainer .row input, 
 .pageFormContainer .row select{float:left;position:relative;z-index:1;}
 .pageFormContainer .row input[type=text],
-.pageFormContainer .row input[type=password]{width:168px;border:1px solid #d5d2d2;padding:0 10px;height:28px;background:url(../../images/common/dg_forms.gif) repeat-x 0 0;line-height:28px;vertical-align:baseline;}
+.pageFormContainer .row input[type=password]{width:168px;border:1px solid #d5d2d2;padding:0 10px;height:28px;background:url(/static/core/images/common/dg_forms.gif) repeat-x 0 0;line-height:28px;vertical-align:baseline;}
 .pageFormContainer .row input[type=password]{padding:0 100px 0 10px;width:78px;}
 .pageFormContainer .row select{width:190px;padding:8px 8px 8px 10px;}
 
@@ -93,7 +93,7 @@ label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:norma
 	.pageFormContainer .row .formErrorMessageContainer div.errorFormValidation{top:1px;}
 	
 /*PASSWORD STRENGTH*/
-.is0{background:url(../../images/common/fd_passwordStrength.gif) no-repeat 0 0;width:68px;height:7px;overflow:hidden;}
+.is0{background:url(/static/core/images/common/fd_passwordStrength.gif) no-repeat 0 0;width:68px;height:7px;overflow:hidden;}
 .is10{background-position:0 0;} 
 .is20,
 .is30{background-position:0 -7px;}
@@ -110,20 +110,20 @@ body .ui-autocomplete{border:0;-moz-border-radius:0 0 4px 4px;-webkit-border-rad
 body .ui-autocomplete .ui-menu-item{padding:0;}
 body .ui-autocomplete .ui-menu-item a{padding:2px 3px;color:#767676;margin:0;}
 body .ui-autocomplete .ui-menu-item a.ui-state-hover,
-body .ui-autocomplete .ui-menu-item a.ui-state-focus{border:0;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;color:#fff;padding:2px 3px;margin:0;background:#a4c531 url(../../images/common/dg_genericButton.gif) repeat-x 0 -3px;}
-body .ui-widget-content{background:#fff url(../../images/common/dg_Tooltip.gif) repeat-x 0 bottom;}
-body .ui-draggable .ui-dialog-titlebar{cursor:url(../../images/cursors/cu_openhand.cur);cursor:-moz-grab;}
-body .ui-draggable.ui-draggable-dragging .ui-dialog-titlebar{cursor:url(../../images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
+body .ui-autocomplete .ui-menu-item a.ui-state-focus{border:0;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;color:#fff;padding:2px 3px;margin:0;background:#a4c531 url(/static/core/images/common/dg_genericButton.gif) repeat-x 0 -3px;}
+body .ui-widget-content{background:#fff url(/static/core/images/common/dg_Tooltip.gif) repeat-x 0 bottom;}
+body .ui-draggable .ui-dialog-titlebar{cursor:url(/static/core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
+body .ui-draggable.ui-draggable-dragging .ui-dialog-titlebar{cursor:url(/static/core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
 
 /*ERROR AND INFO MESSAGES*/
-.errorBox .msg{background:#fff1af url(../../images/common/ic_error.gif) no-repeat 12px 12px;padding:12px 20px 12px 55px;color:#e18211;font-size:12px;line-height:29px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
-.errorBox li{padding:3px 20px 3px 20px;background:#fff1af url(../../images/common/ic_errorList_bullet.gif) no-repeat 5px 8px;line-height:16px;color:#e18211;font-size:12px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.errorBox .msg{background:#fff1af url(/static/core/images/common/ic_error.gif) no-repeat 12px 12px;padding:12px 20px 12px 55px;color:#e18211;font-size:12px;line-height:29px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
+.errorBox li{padding:3px 20px 3px 20px;background:#fff1af url(/static/core/images/common/ic_errorList_bullet.gif) no-repeat 5px 8px;line-height:16px;color:#e18211;font-size:12px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;}
 .errorBox ul{padding:0;margin:0;}
 .errorBox .msg .gray{color:#999;font-style:italic;}
 .errorBox .marginTop{margin-top:20px;}
 
 	/*INFO MESSAGE*/
-	.infoBox .msg{background-color:#f3f3f4;color:#898888;background-image:url(../../images/common/ic_info.gif);}
+	.infoBox .msg{background-color:#f3f3f4;color:#898888;background-image:url(/static/core/images/common/ic_info.gif);}
 	
 	/*OVERLAY ERROR*/
 	.ao-popup-overlay .errorBox .msg{margin:20px 20px 0;}

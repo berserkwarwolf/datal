@@ -114,7 +114,7 @@
 .dataTable table .ao-cell-button{background:#8cb311;}
 .dataTable table .ao-table-button, 
 .dataTable table .ao-column-button, 
-.dataTable table .ao-row-button{background:#cec8ca url(../../images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:pointer;}
+.dataTable table .ao-row-button{background:#cec8ca url(/static/core/images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:pointer;}
 .dataTable table .ao-table-button,
 .dataTable table .ao-row-button{width:54px;padding-left:0;padding-right:0;}
 .dataTable table th.ao-no-select,
@@ -126,7 +126,7 @@
 	.dataTable table .ao-row-button:hover,
 	.dataTable table .ao-table-selected.ao-table-button, 
 	.dataTable table th.ao-column-selected.ao-column-button, 
-	.dataTable table th.ao-row-selected.ao-row-button{background:#fff url(../../images/dataServicePublisher/dg_cell_over.gif) 0 0 repeat-x;color:#010101;border:1px solid #d7d6d1;font-weight:bold;}
+	.dataTable table th.ao-row-selected.ao-row-button{background:#fff url(/static/core/images/dataServicePublisher/dg_cell_over.gif) 0 0 repeat-x;color:#010101;border:1px solid #d7d6d1;font-weight:bold;}
 
 	/*ADVANCED MODE - BUTTONS*/
 	.dataTable table.ao-advanced-mode .ao-table-button.ao-table-selected, 
@@ -140,9 +140,9 @@
 	.dataTable table.ao-advanced-mode .ao-row-button.ao-column-selected, 
 	
 		/*HEADERS MODE - BUTTONS*/
-		.dataTable table.ao-headers-mode th.ao-row-button.ao-row-selected{background:#cec8ca url(../../images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:pointer;}
+		.dataTable table.ao-headers-mode th.ao-row-button.ao-row-selected{background:#cec8ca url(/static/core/images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:pointer;}
 		.dataTable table.ao-headers-mode th.ao-row-button:hover, 
-		.dataTable table.ao-headers-mode th.ao-headers-row-selected.ao-row-button{background:#fff url(../../images/dataServicePublisher/dg_cell_over.gif) 0 0 repeat-x;color:#010101;border:1px solid #d7d6d1;font-weight:bold;}
+		.dataTable table.ao-headers-mode th.ao-headers-row-selected.ao-row-button{background:#fff url(/static/core/images/dataServicePublisher/dg_cell_over.gif) 0 0 repeat-x;color:#010101;border:1px solid #d7d6d1;font-weight:bold;}
 		
 			/*HEADERS MODE - NO HOVERS*/
 			.dataTable table.ao-headers-mode .ao-table-button, 
@@ -230,7 +230,7 @@
 /*FILTERS*/
 .dataTable table .ao-filter-row{border:0;}
 .dataTable table .ao-filter-row th{border-top:1px solid #fff;border-right:1px solid #fff;border-left:1px solid #fff;height:23px;vertical-align:top;}
-.dataTable table .ao-filter-row th a{background:url(../../images/common/ic_actions.png) no-repeat 0 -640px;display:block;height:20px;width:21px;margin:0 auto;text-indent:10000px;overflow:hidden;}
+.dataTable table .ao-filter-row th a{background:url(/static/core/images/common/ic_actions.png) no-repeat 0 -640px;display:block;height:20px;width:21px;margin:0 auto;text-indent:10000px;overflow:hidden;}
 .dataTable table .ao-filter-row th a:hover{background-position:0 -660px;}
 
 	/*ALIAS FIELD*/
@@ -239,14 +239,14 @@
 	
 	/*Filter Tooltip*/
 	.ao-filter-tooltip{display:none;z-index:13000;width:230px;position:relative;border:5px solid #f3f3f3;margin:0;-moz-border-radius:10px;-webkit-border-radius:10px;}
-	.ao-filter-tooltip .In{border:1px solid #dfdddd;-moz-border-radius:5px;-webkit-border-radius:5px;background:#fff url(../../images/common/dg_Tooltip.gif) repeat-x 0 bottom;padding:11px 10px 7px;position:relative;line-height:14px;font-size:12px;word-wrap:break-word;}
+	.ao-filter-tooltip .In{border:1px solid #dfdddd;-moz-border-radius:5px;-webkit-border-radius:5px;background:#fff url(/static/core/images/common/dg_Tooltip.gif) repeat-x 0 bottom;padding:11px 10px 7px;position:relative;line-height:14px;font-size:12px;word-wrap:break-word;}
 	.ao-filter-tooltip h3{color:#4d4d4d;font-weight:bold;font-size:12px;text-decoration:none;padding-bottom:4px;}
 	.ao-filter-tooltip .close{position:absolute;top:3px;right:3px;}                   
 	.ao-filter-tooltip p{color:#5b5a5a;padding-bottom:4px;}
-	.ao-filter-tooltip .Punta{width:20px;height:19px;background:url(../../images/common/fd_PuntaTooltipBottom.png) no-repeat 0 0;position:absolute;bottom:-18px;left:104px;}
+	.ao-filter-tooltip .Punta{width:20px;height:19px;background:url(/static/core/images/common/fd_PuntaTooltipBottom.png) no-repeat 0 0;position:absolute;bottom:-18px;left:104px;}
 					 
 	/*Filter Row*/
-	.ao-filter-row .Icon{background:url(../../images/common/ic_actions.png) no-repeat 0 0;width:16px;height:20px;display:block;}
+	.ao-filter-row .Icon{background:url(/static/core/images/common/ic_actions.png) no-repeat 0 0;width:16px;height:20px;display:block;}
 	.ao-filter-row .ic_Menu{background-position:0 -640px;width:21px;/*margin:0 auto;*/}
 	.ao-filter-row .FR{float:right;}
 	.ao-filter-row .ic_Menu:hover{background-position:0 -660px;text-decoration:none;}
@@ -255,9 +255,9 @@
 	/*Add Filter*/
 	.ao-filter-tooltip{width:auto;border:7px solid #989898;border:7px solid rgba(0, 0, 0, .4);-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;position:absolute;}
 	.ao-filter-tooltip .ao-inner{border:1px solid #e2e0e0;-moz-border-radius:5px;-webkit-border-radius:5px;background:#fff;padding:0;position:relative;}
-	.ao-filter-tooltip .CLose{position:absolute;background:url(../../images/common/ic_Cerrar.png) no-repeat 0 0;width:30px;height:30px;top:-14px;right:-12px;cursor:pointer;}
+	.ao-filter-tooltip .CLose{position:absolute;background:url(/static/core/images/common/ic_Cerrar.png) no-repeat 0 0;width:30px;height:30px;top:-14px;right:-12px;cursor:pointer;}
 	.ao-filter-tooltip .ao-inner:first-child h2, 
-	body div table tr.ao-filter-row td .ao-filter-tooltip .ao-inner:first-child h2{padding:0 18px;height:48px;line-height:48px;font-size:20px;font-weight:bold;color:#4d4d4d;background:url(../../images/common/dg_CajaSlider.gif) repeat-x 0 bottom;border-bottom:1px solid #ccc;text-transform:normal;font-family:Arial, Helvetica, sans-serif;}
+	body div table tr.ao-filter-row td .ao-filter-tooltip .ao-inner:first-child h2{padding:0 18px;height:48px;line-height:48px;font-size:20px;font-weight:bold;color:#4d4d4d;background:url(/static/core/images/common/dg_CajaSlider.gif) repeat-x 0 bottom;border-bottom:1px solid #ccc;text-transform:normal;font-family:Arial, Helvetica, sans-serif;}
 	.ao-filter-tooltip .ao-wrapper{padding:10px 15px;}
 	.ao-filter-tooltip h3{font-size:12px;font-weight:bold;color:#4d4d4d;padding-bottom:10px;}
 	.ao-filter-tooltip table{margin-bottom:15px;font-family:Arial, Helvetica, sans-serif;font-size:12px;}
@@ -269,9 +269,9 @@
 	.ao-filter-tooltip input.ao-field{height:22px;padding:1px 5px 0 5px;}
 	.ao-filter-tooltip select.ao-field{padding:4px;width:125px;}
 	.ao-filter-tooltip select.ao-field.second{width:98px;}
-	.ao-filter-tooltip .ao-punta{background:url(../../images/common/fd_puntaTolltipFiltro.png) no-repeat 0 0;width:21px;height:30px;position:absolute;top:10px;left:-21px;}
-	/*.ao-filter-tooltip.lastFilter .ao-punta{background:url(../../images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}*/
-	.ao-filter-tooltip .ao-punta{background:url(../../images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}
-	.ao-filter-tooltip .close{position:absolute;background:url(../../images/common/ic_Cerrar.png) no-repeat 0 0;width:30px;height:30px;top:10px;right:8px;cursor:pointer;text-indent:10000px;line-height:500px;overflow:hidden;outline:none;}
+	.ao-filter-tooltip .ao-punta{background:url(/static/core/images/common/fd_puntaTolltipFiltro.png) no-repeat 0 0;width:21px;height:30px;position:absolute;top:10px;left:-21px;}
+	/*.ao-filter-tooltip.lastFilter .ao-punta{background:url(/static/core/images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}*/
+	.ao-filter-tooltip .ao-punta{background:url(/static/core/images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}
+	.ao-filter-tooltip .close{position:absolute;background:url(/static/core/images/common/ic_Cerrar.png) no-repeat 0 0;width:30px;height:30px;top:10px;right:8px;cursor:pointer;text-indent:10000px;line-height:500px;overflow:hidden;outline:none;}
 	.ao-filter-tooltip .center a{margin:0 5px;}
 	.ao-filter-tooltip .center a.link{height:28px;line-height:28px;}

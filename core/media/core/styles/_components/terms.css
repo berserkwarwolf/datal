@@ -8,7 +8,7 @@ dt{font-size:14px;line-height:21px;color:#666;padding-bottom:21px;}
 dt{font-weight:bold;display:block;}
 p.gray{font-size:11px;color:gray;}
 ol li, 
-ul li{background:url(../../images/homeManager/ic_VM.png) no-repeat left 8px;font-size: 14px;padding: 0 0 9px 10px;line-height:21px;}
+ul li{background:url(/static/core/images/homeManager/ic_VM.png) no-repeat left 8px;font-size: 14px;padding: 0 0 9px 10px;line-height:21px;}
 ul,
 ol, 
 dl{padding-bottom:21px;}
