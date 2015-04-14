@@ -176,7 +176,7 @@ def action_sitemap(request):
     domain = get_domain(request)
     now = datetime.datetime.now()
 
-    datastreams = DataStream.objects.filter(user__account_id=account.id, datastreamrevision__status=3, is_private=False).order_by('-id').distinct()
+    datastreams = DataStream.objects.filter(user__account_id=account.id, datastreamrevision__status=3).order_by('-id').distinct()
 
     dss = []
     for ds in datastreams:
@@ -189,7 +189,7 @@ def action_sitemap(request):
         dic["date"] = datetime.datetime.strptime(dic["created_at"], "%Y-%m-%d %H:%M:%S").date()
         dss.append(dic) #(user_id = request.auth_manager.id, language = language))
 
-    visualizations = Visualization.objects.filter(user__account_id=account.id, visualizationrevision__status=3, is_private=False).order_by('-id').distinct()
+    visualizations = Visualization.objects.filter(user__account_id=account.id, visualizationrevision__status=3).order_by('-id').distinct()
 
     vss = []
     for vs in visualizations:
@@ -202,7 +202,7 @@ def action_sitemap(request):
         dic ["date"] = datetime.datetime.strptime(dic["created_at"], "%Y-%m-%d %H:%M:%S").date()
         vss.append(dic) #(user_id = request.auth_manager.id, language = language))
 
-    dashboards = Dashboard.objects.filter(user__account_id=account.id, dashboardrevision__status=3, is_private=False).order_by('-id').distinct()
+    dashboards = Dashboard.objects.filter(user__account_id=account.id, dashboardrevision__status=3).order_by('-id').distinct()
 
     dshs = []
     for dsh in dashboards:

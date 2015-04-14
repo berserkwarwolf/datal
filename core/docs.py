@@ -27,21 +27,21 @@ class DB:
         self.dashboard_id = row[0]
         self.created_by_id = row[1]
         self.guid = row[2]
-        self.dashboardrevision_id = row[4]
-        self.created_at = row[5]
-        self.metadata = row[6]
-        self.title = row[7]
-        self.description = row[8]
-        self.notes = row[9]
-        self.created_by_nick = row[10]
-        self.created_by_email = row[11]
-        self.edited_by_id = row[12]
-        self.edited_by_nick = row[13]
-        self.edited_by_email = row[14]
-        self.account_id = row[15]
-        self.category_id = row[16]
-        self.category_name = row[17]
-        self.status = row[18]
+        self.dashboardrevision_id = row[3]
+        self.created_at = row[4]
+        self.metadata = row[5]
+        self.title = row[6]
+        self.description = row[7]
+        self.notes = row[8]
+        self.created_by_nick = row[9]
+        self.created_by_email = row[10]
+        self.edited_by_id = row[11]
+        self.edited_by_nick = row[12]
+        self.edited_by_email = row[13]
+        self.account_id = row[14]
+        self.category_id = row[15]
+        self.category_name = row[16]
+        self.status = row[17]
         self.widgets = []
         self.tags = None
         self.slug = slugify(self.title)
@@ -50,7 +50,6 @@ class DB:
         sql = """SELECT `ao_dashboards`.`id` AS `dashboard_id`
                     , `ao_dashboards`.`user_id` AS `created_by_id`
                     , `ao_dashboards`.`guid`
-                    , `ao_dashboards`.`is_private`
                     , `ao_dashboard_revisions`.`id` AS `dashboardrevision_id`
                     , `ao_dashboard_revisions`.`created_at`
                     , `ao_dashboard_revisions`.`meta_text`
@@ -119,9 +118,6 @@ class DB:
     def permalink(self, urlconf = DEFAULT_URLCONF):
         return reverse('dashboard_manager.action_view', urlconf, kwargs={'id': self.dashboard_id, 'slug': self.slug})
 
-    def is_private(self):
-        return False
-
 class Parameter:
     def __init__(self, row):
         self.name = row[12]
@@ -144,33 +140,32 @@ class DS:
         self.datastream_id = row[0]
         self.created_by_id = row[1]
         self.guid = row[2]
-        #self.is_private = row[3]
-        self.datastreamrevision_id = row[4]
-        self.created_at = row[5]
-        self.status = row[6]
-        self.metadata = row[7]
-        self.datastreami18n_id = row[8]
-        self.title = row[9]
-        self.description = row[10]
-        self.notes = row[11]
-        self.type = row[16]
-        self.filename = row[17]
-        self.end_point = row[18]
-        self.dataset_revision_id = row[19]
-        self.created_by_nick = row[20]
-        self.created_by_email = row[21]
-        self.edited_by_id = row[22]
-        self.edited_by_nick = row[23]
-        self.edited_by_email = row[24]
-        self.account_id = row[25]
-        self.category_id = row[26]
-        self.category_name = row[27]
-        self.dataset_id = row[28]
+        self.datastreamrevision_id = row[3]
+        self.created_at = row[4]
+        self.status = row[5]
+        self.metadata = row[6]
+        self.datastreami18n_id = row[7]
+        self.title = row[8]
+        self.description = row[9]
+        self.notes = row[10]
+        self.type = row[15]
+        self.filename = row[16]
+        self.end_point = row[17]
+        self.dataset_revision_id = row[18]
+        self.created_by_nick = row[19]
+        self.created_by_email = row[20]
+        self.edited_by_id = row[21]
+        self.edited_by_nick = row[22]
+        self.edited_by_email = row[23]
+        self.account_id = row[24]
+        self.category_id = row[25]
+        self.category_name = row[26]
+        self.dataset_id = row[27]
         self.tags = None
         self.sources = None
         self.slug = slugify(self.title)
-        self.impl_type = row[29]
-        self.rdf_template = row[30]
+        self.impl_type = row[28]
+        self.rdf_template = row[29]
 
         # parameters!
         self.parameters = []
@@ -184,7 +179,6 @@ class DS:
         sql = """SELECT `ao_datastreams`.`id` AS `datastream_id`
                      , `ao_datastreams`.`user_id` AS `created_by_id`
                      , `ao_datastreams`.`guid`
-                     , `ao_datastreams`.`is_private`
                      , `ao_datastream_revisions`.`id` AS `datastreamrevision_id`
                      , `ao_datastream_revisions`.`created_at`
                      , `ao_datastream_revisions`.`status`
@@ -278,9 +272,6 @@ class DS:
     def datastream_type(self):
         return unicode(COLLECT_TYPE_CHOICES[int(self.type)][1])
 
-    def is_private(self):
-        return False
-
 
 class ParameterVZ:
     def __init__(self, row):
@@ -304,31 +295,30 @@ class VZ:
         self.visualization_id = row[0]
         self.created_by_id = row[1]
         self.datastream_id = row[2]
-        #self.is_private = row[3]
-        self.guid = row[4]
-        self.visualizationrevision_id = row[5]
-        self.impl_details = row[6]
-        self.created_at = row[7]
-        self.status = row[8]
-        self.metadata = row[9]
-        self.created_by_nick = row[10]
-        self.created_by_email = row[11]
-        self.edited_by_id = row[12]
-        self.edited_by_nick = row[13]
-        self.edited_by_email = row[14]
-        self.account_id = row[15]
-        self.datastreamrevision_id = row[16]
-        self.datastreami18n_id = row[17]
-        self.title = row[18]
-        self.description = row[19]
-        self.notes = row[20]
-        self.type = row[25]
-        self.filename = row[26]
-        self.end_point = row[27]
-        self.category_id = row[28]
-        self.category_name = row[29]
-        self.dataset_id = row[30]
-        self.viz_rev_parameters = row[31] # can't repeat "parameters" fields (already used)
+        self.guid = row[3]
+        self.visualizationrevision_id = row[4]
+        self.impl_details = row[5]
+        self.created_at = row[6]
+        self.status = row[7]
+        self.metadata = row[8]
+        self.created_by_nick = row[9]
+        self.created_by_email = row[10]
+        self.edited_by_id = row[11]
+        self.edited_by_nick = row[12]
+        self.edited_by_email = row[13]
+        self.account_id = row[14]
+        self.datastreamrevision_id = row[15]
+        self.datastreami18n_id = row[16]
+        self.title = row[17]
+        self.description = row[18]
+        self.notes = row[19]
+        self.type = row[24]
+        self.filename = row[25]
+        self.end_point = row[26]
+        self.category_id = row[27]
+        self.category_name = row[28]
+        self.dataset_id = row[29]
+        self.viz_rev_parameters = row[30] # can't repeat "parameters" fields (already used)
         self.slug = slugify(self.title)
         self.tags = None
         self.sources = None
@@ -343,7 +333,6 @@ class VZ:
         sql = """SELECT `ao_visualizations`.`id` AS `visualization_id`
                  , `ao_visualizations`.`user_id` AS `created_by_id`
                  , `ao_visualizations`.`datastream_id`
-                 , `ao_visualizations`.`is_private`
                  , `ao_visualizations`.`guid`
                  , `ao_visualizations_revisions`.`id` AS `visualizationrevision_id`
                  , `ao_visualizations_revisions`.`impl_details`
@@ -452,10 +441,7 @@ class VZ:
                 self.tags.append(row[0])
                 row = cursor.fetchone()
         return self.tags
-
-    def is_private(self):
-        return False
-        
+             
 
 class DT:
     def __init__(self, datasetrevision_id, language):
@@ -533,9 +519,6 @@ class DT:
                         AND `ao_categories_i18n`.`language` = %s)
                 ORDER BY `ao_dataset_revisions`.`id` DESC"""
         return _execute_sql(sql, [datasetrevision_id, self.language, self.language])
-
-    def is_private(self):
-        return False
 
     def get_sources(self):
         if self.sources is None:

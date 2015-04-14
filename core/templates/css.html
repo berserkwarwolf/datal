@@ -1,12 +1,19 @@
+{% load compress staticfiles %}
+
+{% compress css %}
+<!-- Emeplo de uso de SCSS -->
+<!-- <link href="{% static 'core/styles/lala.scss' %}" type="text/scss" rel="stylesheet" media="screen"/> -->
+
 <!-- NEW -->
-<link href="/media_core/styles/reset.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/buttons.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/plugins/jquery.gritter.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/reset.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/buttons.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/plugins/jquery.gritter.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 
 <!-- OLD -->
-<link href="/media_core/styles/plugins/jquery-ui-1.8.6.custom.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/structure.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/actions.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/forms.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/overlay.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/commonModules.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/plugins/jquery-ui-1.8.6.custom.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/structure.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/actions.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/overlay.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/commonModules.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}

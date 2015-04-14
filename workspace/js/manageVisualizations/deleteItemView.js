@@ -20,7 +20,7 @@ var DeleteItemView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE'),
                         text: resource + ": "+gettext('APP-DELETE-VISUALIZATION-ACTION-TEXT'),
-                        image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                         sticky: false,
                         time: 3500
                     });
@@ -35,7 +35,7 @@ var DeleteItemView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text: resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
-                        image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                         sticky: true,
                         time: 2500
                     });
@@ -57,7 +57,7 @@ var DeleteItemView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text: resource + ": "+gettext('APP-DELETE-DATASET-ACTION-TEXT'),
-                        image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                         sticky: false,
                         time: 3500
                     });
@@ -72,7 +72,7 @@ var DeleteItemView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text: resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
-                        image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                         sticky: true,
                         time: 2500
                     });

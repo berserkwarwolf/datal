@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags %}
+{% load i18n extra_tags compress staticfiles %}
 {% block meta %}
 <script type="text/javascript">
 
@@ -13,10 +13,10 @@ var my_form_error_messages = new Array();
     my_form_error_messages.push('{{message}}');
 {% endfor %}
 </script>
-
-<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-
+{% compress css %}
+<link href="{% static 'core/styles/_modules/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <script src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
 <script type="text/javascript" src="/js_workspace/accounts/myAccount.js?id={{settings.VERSION_JS_CSS}}"></script>
 <meta name="main-option" content="id_account_option"/>

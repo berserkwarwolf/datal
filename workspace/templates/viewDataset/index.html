@@ -1,9 +1,11 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components dataset_tags %}
+{% load i18n extra_tags components dataset_tags compress staticfiles %}
 
 {% block meta %}
-<link href="/media_workspace/styles/detailCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/viewDataset.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'workspace/styles/detailCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/viewDataset.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <meta name="main-option" content="id_datasets_option"/>

@@ -1,0 +1,16 @@
+/*STRUCTURE*/
+body{color:#777;font:normal 12px/15px Arial, Helvetica, sans-serif;background:#fff;padding:15px 20px;}
+h1{font-size:20px;color:#EF7F10;line-height:normal;padding-bottom:21px;}
+h3{font-size:14px;color:#EF7F10;font-weight:bold;line-height:21px;padding-bottom:21px;}
+p, 
+dd, 
+dt{font-size:14px;line-height:21px;color:#666;padding-bottom:21px;}
+dt{font-weight:bold;display:block;}
+p.gray{font-size:11px;color:gray;}
+ol li, 
+ul li{background:url(/static/core/images/homeManager/ic_VM.png) no-repeat left 8px;font-size: 14px;padding: 0 0 9px 10px;line-height:21px;}
+ul,
+ol, 
+dl{padding-bottom:21px;}
+dd ol,
+dd ul{padding-top:21px;padding-bottom:0;}

@@ -135,10 +135,9 @@
                                 {% if can_export %}
                                 <li class="Item"><a href="{% url "datastream_manager.action_csv" visualization_revision.datastream_id visualization_revision.slug %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                                 {% endif %}
-                                {% if not is_private_site %}
+                                
                                 <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
-                                {% endif %}
-
+                                
                             </ul>
                         </div>
                     </div>
@@ -161,7 +160,6 @@
           $datastream.data("dataservice_embed_url", "{{base_uri}}{% url "chart_manager.action_embed" visualization_revision.guid %}?end_point=&height=0&width=0");
           $datastream.data("permalink", "{{base_uri}}{{visualization_revision.permalink}}");
           $datastream.data("guid", "{{visualization_revision.guid}}");
-          $datastream.data("is_private", {{visualization_revision.is_private|lower}});
           $datastream.data("datastreamrevision_id", "{{visualization_revision.datastreamrevision_id}}");
           $datastream.data("sov_id", "{{visualization_revision.visualization_id}}");
         </script>

@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n components extra_tags %}
+{% load i18n components extra_tags compress staticfiles %}
 
 {% block SEO %}
     <title>{{dashboard.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -11,25 +11,28 @@
     {%if not dashboard_dataservices %}
         <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
     {%endif%}
+
+    {% compress css %}
     <!-- BLOCK PAGE TITLE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/blockPageTitle.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/blockPageTitle.css' %}"/>
     <!-- DATA STREAM BOX -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
     <!-- DATA STREAM FORM -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamForm.css' %}"/>
     <!-- LIQUID WIDTH -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/liquidWidth.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/liquidWidth.css' %}"/>
     <!-- TAGS CONTAINER -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/tagsContainer.css' %}"/>
     <!-- COMPONENT -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/dashboardManager.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/_components/dashboardManager.css' %}"/>
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <!-- DASHBOARD FIX-->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/dashboardfix.css?id={{settings.VERSION_JS_CSS}}"/>
- 
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/dashboardfix.css' %}"/>
+    {% endcompress %}
+
     {% if preferences.account_enable_sharing %}
         <script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&amp;login=junar&amp;apiKey=R_4da011b2ee9f2ee2cf80ed8122b73391"></script>
         <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>

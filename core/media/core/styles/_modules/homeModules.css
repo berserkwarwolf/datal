@@ -1,0 +1,61 @@
+/*SLIDER CONTAINER*/
+.sliderContainer{position:absolute;right:-7px;top:28px;}
+
+    /*DATA STREAM SLIDER*/
+    .sliderWrapper{overflow:hidden;padding:0 9px 8px;background:url(/static/core/images/homeManager/sh_sliderWrapper.png) no-repeat;}
+    .sliderWrapper .dataStreamBorder{border:1px solid #e2e0e0;background:#fff;}
+    .sliderWrapper .dataStreamContainer{float:left;overflow:hidden;}
+    .sliderWrapper .caroufredsel_wrapper{border:1px solid #fff;}
+
+    /*WIDTH AND HEIGHT*/
+    .sliderWrapper,
+    .sliderWrapper .dataStreamContainer,
+    .sliderWrapper .dataStreamBorder,
+    .dataStreamBox{width:400px;height:231px;}
+    .dataStreamBox h2 a .txt{width:318px;}
+    .dataStreamBox .Mensaje,
+    .dataStreamBox .Mensaje .Texto,
+    .dataStreamBox .Mensaje .Numero,
+    .dataStreamBox .Mensaje .Nulo,
+    .dataStreamContainer .Loading td{height:159px;}
+
+    /*DATA STREAM BOX*/
+    .dataStreamBox{float:left;background:#fff;border:0;}
+    .dataStreamBox,
+    .dataStreamBox h2 a,
+    .dataStreamBox .Mensaje{-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}
+    .dataStreamBox .Mensaje .Texto,
+    .dataStreamBox .Mensaje .Numero,
+    .dataStreamBox .Mensaje .Nulo{width:100%;vertical-align:center;}
+    .dataStreamBox h2 a{height:58px;padding:11px 12px 0;border-top:0;border-right:0;border-left:0;}
+    .dataStreamBox h2 a:hover{border-color:#C56B12;}
+    .dataStreamBox h2 a .txt{float:right;}
+    .dataStreamBox h2 a .txt .titleDS{line-height:16px;overflow:hidden;height:16px;}
+    .dataStreamBox h2 a .txt .infoDS{padding-top:0}
+    .dataStreamBox .dataStreamResult {border:0;}
+
+    /*CHARTS*/
+    .chartBox{border:0;}
+    .chartBox .Loading td{height:200px;}
+    .chartBox .chartContainer{height:205px;border:0;}
+    .chartContainerInner{height:100%;width:100%;}
+    .chartBox .chartTitle a{border-top:0;border-right:0;border-left:0;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;padding:0;}
+
+/*RESOURCES CONTAINER*/
+.resourcesTable{background:url(/media_community/images/home/sh_940.png) no-repeat center bottom;padding-bottom:7px;}
+.resourcesTableInner{border:1px solid #ddd;}
+.columns{border:1px solid #fff;border-left:0;border-right:0;background:#fff url(/media_community/images/home/gr_sidebar.gif) repeat-y 0 0;}
+.columns .CL{width:166px;}
+.columns .sidebar .sidebarPadding{padding:0 12px;}
+.columns .sidebar dl{padding:6px 0 11px;}
+.columns .CR{width:744px;padding:7px 10px 0 0;}
+.columns .CR h2{padding-bottom:5px;}
+.gridContainer{padding-right:0;}
+.pagination{padding-bottom:26px;}
+.sidebar .filters dt span{padding-right:0;}
+
+/*RESOURCE ICONS*/
+td.ic_Dset{background-position:0 2px !important;}
+td.ic_Chart{background-position:0 -38px !important;padding-left:20px !important;}
+td.ic_Data{background-position:0 -19px !important;}
+td.ic_Dashboard{background-position:0 -58px !important;padding-left:20px !important;}

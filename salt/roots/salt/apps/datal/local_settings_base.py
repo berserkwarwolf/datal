@@ -55,3 +55,4 @@ PUBLIC_KEY = '{{ pillar["application"]["public_key"] }}'
 
 SENTRY_DSN = '{{ pillar["sentry_dns"] }}'
 
+STATIC_ROOT= "{{ pillar['application']['statics_dir'] }}"

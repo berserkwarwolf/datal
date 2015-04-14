@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from core.choices import StatusChoices, ActionStreams
-from workspace.daos.visualizations import VisualizationDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
 from core.daos.activity_stream import ActivityStreamDAO
 from core.daos.searchify import SearchifyDAO
@@ -28,7 +28,7 @@ class VisualizationLifeCycleManager():
             self.visualization_i18n = None
 
 
-    def create(self, datastream, title, is_private=False, description='', language=None
+    def create(self, datastream, title, description='', language=None
             , status=StatusChoices.DRAFT, meta_text='', notes='', impl_details=''):
         """ create a new visualization """
         if not language:
@@ -38,7 +38,7 @@ class VisualizationLifeCycleManager():
         if status not in allowed_states:
             raise IlegalStateException(allowed_states)
 
-        self.dao.create(datastream=datastream, title=title, is_private=False
+        self.dao.create(datastream=datastream, title=title
             , description=description, language=language, status=status
             , meta_text=meta_text, notes=notes, impl_details=impl_details)
         self.visualization_revision = self.dao.visualization_revision

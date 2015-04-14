@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components %}
+{% load i18n extra_tags components compress staticfiles %}
 {% url "search.action_search" as search_url %}
 
 {% block SEO %}
@@ -7,14 +7,15 @@
 {% endblock %}
 
 {% block meta %}
+{% compress css %}
 <!-- COMPONENT -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/search.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/tagsContainer.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/search.css' %}"/>
 <!-- BRANDED -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-
+{% endcompress %}
 <script type="text/javascript" src="/js_microsites/search/searchList.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}

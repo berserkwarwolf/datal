@@ -9,4 +9,4 @@ scrapper:
   proxy_scrapers_domain: 'http://microsite'
 
 crawler:
-  media: http://workspace/media_core/styles/components
+  media: http://workspace/static/core/styles/components

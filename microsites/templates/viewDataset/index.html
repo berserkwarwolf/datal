@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% block SEO %}
   <title>{{dataset.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -18,12 +18,13 @@
 {% endif %}
 
 {% block meta %}
-
+{% compress css %}
 <!-- CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/common.css?id={{settings.VERSION_JS_CSS}}">
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/plugins/jquery.gritter.css?id={{settings.VERSION_JS_CSS}}" />
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/viewDataStream.css?id={{settings.VERSION_JS_CSS}}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/viewDataset.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/common.css' %}">
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/plugins/jquery.gritter.css' %}" />
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/viewDataStream.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/viewDataset.css' %}"/>
+{% endcompress %}
 
 <!-- JS LIBS -->
 <script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -48,10 +49,11 @@
 <script type="text/javascript" src="/js_microsites/viewDataset/viewDatasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- BRANDED CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
-
+{% compress css %}
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+{% endcompress %}
 <!-- BRANDED JS -->
 <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
 

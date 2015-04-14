@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components core_components %}
+{% load i18n extra_tags components core_components compress staticfiles %}
 
 {% block SEO %}
 <title>{{preferences.account_name}} / API</title>
@@ -8,15 +8,15 @@
 {% block meta %}
     <script type="text/javascript" src="/js_core/base_modules/developer_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_microsites/developer_manager/queryList.js?id={{settings.VERSION_JS_CSS}}"></script>
-
+    {% compress css %}
     <!-- COMPONENT -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/developers.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/developers.css' %}"/>
 
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-
+    {% endcompress %}
 {% endblock %}
 
 
@@ -83,7 +83,7 @@
     <div class="pageTitleContainer clearfix">
         <div class="leftContent FL">
             <h2>{% trans "DEV-PAGE-TITLE-MICROSITE1" %}{{preferences.account_name}}{% trans "DEV-PAGE-TITLE-MICROSITE2" %}.</h2>
-            <p>{% trans "DEV-MS-DESCRIPTION-TEXT1" %}{{preferences.account_name}} {% if not is_private_site %}{% trans "DEV-MS-DESCRIPTION-TEXT2" %} {% else %}{% trans "DEV-MS-DESCRIPTION-TEXT2-PRIVATE" %}{%endif%}</p>
+            <p>{% trans "DEV-MS-DESCRIPTION-TEXT1" %}{{preferences.account_name}} {% trans "DEV-MS-DESCRIPTION-TEXT2" %}</p>
             <p>{% trans "DEV-DESCRIPTION-TEXT2" %}</p>
         </div>
         <div class="rightContent relative FR">

@@ -217,7 +217,7 @@ var CollectFileView = StepView.extend({
 			$.gritter.add({
 				title: 'Error',
 				text: msg,
-				image: '/media_workspace/images/common/ic_validationError32.png',
+				image: '/static/workspace/images/common/ic_validationError32.png',
 				sticky: false,
 				time: 3000
 			});  
@@ -228,7 +228,7 @@ var CollectFileView = StepView.extend({
 			$.gritter.add({
 				title: 'Error',
 				text: gettext('ERROR-LOADING-DATASET'),
-				image: '/media_workspace/images/common/ic_validationError32.png',
+				image: '/static/workspace/images/common/ic_validationError32.png',
 				sticky: false,
 				time: 3000
 			});

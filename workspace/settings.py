@@ -50,6 +50,8 @@ DEFAULT_CATEGORIES = {
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
+STATICFILES_DIRS += (os.path.join(PROJECT_PATH, 'workspace/media/'),)
+
 try:
     from workspace.local_settings import *
 except ImportError:

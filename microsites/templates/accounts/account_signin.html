@@ -1,5 +1,5 @@
 {% extends 'base_microsites.html' %}
-{% load i18n extra_tags %}
+{% load i18n extra_tags compress staticfiles %}
 
 {% block meta %}
 <script type="text/javascript">
@@ -7,16 +7,18 @@
     jQuery.TwitterMessage( { type: 'error', message : '{{message|escapejs}}' } );
 {% endfor %}
 </script>
-<link href="/media_workspace/styles/_components/usersManager.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/_components/signInUp.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/_components/signInLayoutConfig.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_microsites/styles/components/privateSignIn.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'workspace/styles/_components/usersManager.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/signInUp.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/signInLayoutConfig.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'microsites/styles/components/privateSignIn.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <!--[if lt IE 8]>
-<link href="/media_workspace/styles/_components/signInLayoutConfig-IE.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/signInLayoutConfig-IE.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <![endif]-->
 
 <!-- BRANDED -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
+{% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 {% endblock %}

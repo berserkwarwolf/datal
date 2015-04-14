@@ -1,8 +1,10 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components %}
+{% load i18n extra_tags components compress staticfiles %}
 
 {% block meta %}
-<link href="/media_workspace/styles/viewReports.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'workspace/styles/viewReports.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <script language="javascript" src="/js_workspace/viewReports/viewReports.js"></script>
 {% endblock %}
 

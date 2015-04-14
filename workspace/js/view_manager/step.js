@@ -891,7 +891,6 @@ var Step2 = Step.extend({
         att.$Category            = $('#id_datastream-category', att.$Container);
         att.$Description        = $('#id_datastream-description', att.$Container);
         att.$Tags                = $('#id_tags_containerCreation', att.$Container);
-        att.$IsPrivate            = $('#id_datastream-is_private', att.$Container);
         att.$Status                = $('#id_datastream-status', att.$Container);
         att.$Notes               = $('#id_datastream-notes', att.$Container);
 
@@ -994,13 +993,7 @@ var Step2 = Step.extend({
         }).panelInstance('id_datastream-notes');
     },
     serializeDatastreamForm : function(){
-        var is_private = false;
-        if (typeof $('#id_datastream-is_private').val() === 'undefined'){
-            is_private = false;
-        }else{
-            is_private = $('#id_datastream-is_private').val();
-        }
-
+        
         var notes = "";
         if(
             $('.nicEdit-main').length > 0 &&
@@ -1022,7 +1015,6 @@ var Step2 = Step.extend({
             'datastream-rdf_template': CreationManager.attributes.rdfTemplate,
             'datastream-data_source': CreationManager.attributes.dataSourceXML,
             'datastream-end_point': CreationManager.attributes.endPoint,
-            'datastream-is_private': is_private,
             'datastream-status': this.attributes.$Status.val(),
             'datastream-notes': notes,
         });

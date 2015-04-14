@@ -1,6 +1,5 @@
 var fUserNick,
     fDataServiceId,
-    fIsPrivate,
     $fDashboards,
     $fDataService,
     $fDataServiceContainer,
@@ -14,7 +13,6 @@ $(document).ready(function(){
     $fToolBar                           = $("[id*=id_dataservice_toolbar_]");
     fDataServiceId                      = $fDataServiceContainer.data('dataservice_id');
     fUserNick                           = $fDataServiceContainer.data('user_nick');
-    fIsPrivate                          = $fDataServiceContainer.data('is_private');
     $fDataService                       = $fDataServiceContainer.find('#id_datastreamResult');
     $fEditDataServiceCommentsContainer  = $("#id_edit_dataservice_comments_container");
 
@@ -78,7 +76,7 @@ function initDataServicePanel(){
     var lUrl        = $fDataServiceContainer.data("permalink");
     var lName       = $fDataServiceContainer.data('dataservice_title');
 
-    if (!fIsPrivate && $('.sharingDisabled').size() == 0) {
+    if ($('.sharingDisabled').size() == 0) {
         var lInputShareBox = new InputShareBox({
             '$Container': $('.shareBox .share_url_input')
             , 'shortUrl': lUrl

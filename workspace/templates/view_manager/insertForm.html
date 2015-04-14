@@ -1,30 +1,32 @@
 {% extends "base_workspace.html" %}
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% block title %}
 	{% trans "APP-ACTIONS-CREATEVIEW" %}
 {% endblock %}
 
 {% block meta %}
+    {% compress css %}
 	<!-- DATA TABLE -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataTable.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataTable.css' %}"/>
 	<!-- DATA STREAM BOX -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
 	<!-- DATA STREAM FORM -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamForm.css' %}"/>
 	<!-- TAGS CONTAINER -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/tagsContainer.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/tagsContainer.css' %}"/>
 	<!-- COMPONENT -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_workspace/styles/_components/createDataView.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/_components/createDataView.css' %}"/>
 	<!-- COMMON -->
-	<link href="/media_workspace/styles/createCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+	<link href="{% static 'workspace/styles/createCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 	
 	<!--[if IE]>
-		<link href="/media_workspace/styles/_components/ao.tableStyles.css" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="{% static 'workspace/styles/_components/ao.tableStyles.css' %}" media="screen" rel="stylesheet" type="text/css"/>
 	<![endif]-->
 
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/components/ao.tableStyles.css?id={{settings.VERSION_JS_CSS}}"/>
-	
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/components/ao.tableStyles.css' %}"/>
+	{% endcompress %}
+
 	<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script type="text/javascript" src="/js_core/plugins/jquery.url.packed.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>

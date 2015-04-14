@@ -1,0 +1,47 @@
+/*FOOTER*/
+.footer{background:#757575 url(/static/core/images/common/bg_footer.gif);min-width:998px;border-top:1px solid #514f4f;border-bottom:1px solid #514f4f;text-shadow:0 1px 0 #5c5b58;}
+.footer .innerFooter, 
+.footer .siteMap, 
+.footer .bottomFooter{margin:0 auto;width:940px;padding:0;overflow:hidden;}
+
+	.footer .siteMap{height:43px;border-bottom:1px solid #5c5b58;}
+	.footer .siteMap li,
+  .footer dt,
+  .footer dd{float:left;height:43px;line-height:43px;}
+	.footer .siteMap a,
+  .footer dd a, 
+	.footer .siteMap span,
+  .footer dd span{color:#fff;float:left;}
+	.footer .siteMap span,
+  .footer dd span{padding:0 7px;color:#5c5b58;text-shadow:0 1px 0 #8b8c8b;}
+  .footer dt{color:#b1b1af;font-size:11px;}
+	.footer dd{margin-left:10px;}
+  .footer dd a{width:16px;background:url(/static/core/images/homeManager/ic_footer.png) no-repeat 0 0;font-size:11px;height:43px;display:block;}
+	.footer .facebook a{background-position:0 0px;}
+  .footer .twitter a{background-position:0 -50px;}
+  .footer .linkedIn a{background-position:0 -100px;}
+  .footer .googlePlus a{background-position:0 -150px;}
+
+	.footer .innerFooter{line-height:39px;height:39px;border-top:1px solid #919291;}
+	.footer .innerFooter p{color:#c0c0c0;float:left;font-size:11px;line-height:39px;height:39px;}
+	.footer .innerFooter .staticLinks{float:left;}
+	.footer .innerFooter .staticLinks li{float:left;height:39px;line-height:39px;font-size:11px;color:#dcdcdc;}
+	.footer .innerFooter .staticLinks a, 
+	.footer .innerFooter .staticLinks span{color:#dcdcdc;;float:left;}
+	.footer .innerFooter .staticLinks span{padding:0 7px;color:#5c5b58;text-shadow:0 1px 0 #8b8c8b;}
+	.footer .logos{height:38px;line-height:38px;float:right;background:url(/static/core/images/homeManager/lg_footer.png) no-repeat right 0;}
+	.footer .logos li{padding-left:20px;float:left;}
+	.footer .logos li a{display:block;float:left;height:38px;}
+	.footer .logos .mit a{width:49px;}
+	.footer .logos .suc a{width:89px;}
+	.footer .logos .lcp a{width:52px;}
+
+	.footer .bottomFooter{border-top:1px solid #5c5b58;padding:0;}
+	.footer .bottomFooterInner{border-top:1px solid #919291;font-size:11px;color:#c0c0c0;padding:7px 0 15px;}
+	.footer .bottomFooter a{color:#dcdcdc;}
+
+/*FOOTER WORKSPACE*/
+.footerWorkspace{border-top:1px solid #fff;padding-top:0;}
+.footerWorkspace .innerFooter{border-top:1px solid #514f4f;width:auto;margin:0;padding-left:10px;padding-right:10px;}
+
+body > img[width="1"][height="1"]{display:none;}

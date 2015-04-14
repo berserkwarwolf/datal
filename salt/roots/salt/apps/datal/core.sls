@@ -1,3 +1,14 @@
+sass_install:
+  gem.installed:
+    - name: sass
+
+{{ pillar['application']['statics_dir'] }}:
+  file.directory:
+    - user: {{ pillar['system']['user'] }}
+    - group: {{ pillar['system']['group'] }}
+    - mode: 755
+    - makedirs: True
+
 # Set directory owner
 directory_structure:
   file.directory:
@@ -41,6 +52,14 @@ sync_db:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py syncdb --noinput --settings=microsites.settings
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py syncdb --noinput --settings=workspace.settings
 
+migrate_db:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core 0001 --fake --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core --settings=core.settings
+
 fixtures:
   cmd.run:
     - user: {{ pillar['system']['user'] }}
@@ -54,6 +73,27 @@ language:
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
+
+core_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=core.settings --noinput
+
+microsites_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=microsites.settings --noinput
+
+workspace_statics:
+  cmd.run:
+    - user: {{ pillar['system']['user'] }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=workspace.settings --noinput
 
 /tmp/datal.log:
   file.managed:

@@ -148,9 +148,6 @@ class Account(models.Model):
         from core.daos.preferences import Preferences
         return Preferences(self.id)
 
-    def is_private(self):
-        return False
-
     def faceted_fields(self):
         # Add Metadata if exist
         try:
@@ -185,7 +182,6 @@ class User(models.Model):
 class DataStream(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     guid                = models.CharField(max_length=29, unique=True)
-    is_private          = models.SmallIntegerField(verbose_name=ugettext_lazy('MODEL_IS_PRIVATE_LABEL'), default = 0)
     last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision')
     last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision')
     objects             = managers.DataStreamManager()
@@ -320,8 +316,6 @@ class DataStreamRevision(models.Model):
         datastream = DS(self.id, language)
         account = Account.objects.get(id = datastream.account_id)
 
-        is_private = False
-
         text = [datastream.title, datastream.description, datastream.created_by_nick, datastream.guid]
         text.extend(datastream.get_tags())
         text = ' '.join(text)
@@ -354,7 +348,6 @@ class DataStreamRevision(models.Model):
                      'parameters': parameters,
                      'timestamp': int(time.mktime(datastream.created_at.timetuple())),
                      'end_point': datastream.end_point,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(datastream.category_id), 'name': datastream.category_name}
                 }
@@ -407,7 +400,6 @@ class DataStreamParameter(models.Model):
 class Dashboard(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     guid                = models.CharField(max_length=29, unique=True)
-    is_private          = models.SmallIntegerField(verbose_name=ugettext_lazy('MODEL_IS_PRIVATE_LABEL'), default = 0)
     objects             = managers.DashboardManager()
 
     class Meta:
@@ -458,8 +450,6 @@ class DashboardRevision(models.Model):
         dashboard = DB(self.id, language)
         account = Account.objects.get(id = dashboard.account_id)
 
-        is_private = False
-
         text = [dashboard.title, dashboard.description, dashboard.created_by_nick, dashboard.guid]
         text.extend(dashboard.get_tags())
         text = ' '.join(text)
@@ -481,7 +471,6 @@ class DashboardRevision(models.Model):
                      'tags' : ','.join(dashboard.get_tags()),
                      'account_id' : account_id,
                      'timestamp' : int(time.mktime(dashboard.created_at.timetuple())),
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(dashboard.category_id), 'name': dashboard.category_name}
                 }
@@ -665,8 +654,6 @@ class DatasetRevision(models.Model):
         dataset = DT(self.id, language)
         account = Account.objects.get(id = dataset.account_id)
 
-        is_private = False
-
         text = [dataset.title, dataset.description, dataset.created_by_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
         text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
@@ -693,7 +680,6 @@ class DatasetRevision(models.Model):
                      'parameters': parameters,
                      'timestamp': int(time.mktime(dataset.created_at.timetuple())),
                      'end_point': dataset.end_point,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(dataset.category_id), 'name': dataset.category_name}
                 }
@@ -735,7 +721,6 @@ class Visualization(GuidModel):
     datastream          = models.ForeignKey('DataStream')
     guid                = models.CharField(max_length=29, unique=True)
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    is_private          = models.SmallIntegerField(verbose_name=ugettext_lazy('MODEL_IS_PRIVATE_LABEL'), default = 0)
     last_revision    = models.ForeignKey('VisualizationRevision', null=True, related_name='last_revision')
     last_published_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_published_revision')
     objects             = managers.VisualizationManager()
@@ -806,8 +791,6 @@ class VisualizationRevision(models.Model):
         visualization = VZ(self.id, language)
         account = Account.objects.get(id = visualization.account_id)
         
-        is_private = False
-
         text = [visualization.title, visualization.description, visualization.created_by_nick, visualization.guid]
         text.extend(visualization.get_tags())
         text = ' '.join(text)
@@ -832,7 +815,6 @@ class VisualizationRevision(models.Model):
                      'tags' : ','.join(visualization.get_tags()),
                      'account_id' : account_id,
                      'timestamp' : int(time.mktime(visualization.created_at.timetuple())),
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(visualization.category_id), 'name': visualization.category_name}
                 }

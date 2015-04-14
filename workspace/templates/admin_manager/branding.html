@@ -1,10 +1,12 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components %}
+{% load i18n extra_tags components compress staticfiles %}
 
 {% block meta %}
-<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/plugins/colorpicker.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'core/styles/_modules/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/plugins/colorpicker.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 
 <script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.fileupload.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery-file-upload/js/jquery.iframe-transport.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -26,7 +28,7 @@
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
             <div class="titleContainer clearfix">
-                <h3 class="FL">{%if sis_private_site%}{% trans "WORKSPACE-MICROSITE-SETTINGS-PRIVATE" %}{%else%}{% trans "WORKSPACE-MICROSITE-SETTINGS" %}{%endif%}</h3>
+                <h3 class="FL">{% trans "WORKSPACE-MICROSITE-SETTINGS" %}</h3>
             </div>
 
             <div class="columns clearfix">
@@ -92,7 +94,7 @@
                     <div class="helpBox">
                         <div class="helpBoxInner">
                             <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
-                            {%if is_private_site%}{% trans "BRANDED-OPEN-DATA-SITE-TIP-PRIVATE" %}{%else%}{% trans "BRANDED-OPEN-DATA-SITE-TIP" %}{%endif%}
+                            {% trans "BRANDED-OPEN-DATA-SITE-TIP" %}
                         </div>
                     </div>
                 </div>
@@ -191,7 +193,7 @@
                     <div class="helpBox">
                         <div class="helpBoxInner">
                             <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
-                            <p>{%if is_private_site%}{% trans "BRANDED-BRANDINGS-TIP-PRIVATE" %}{%else%}{% trans "BRANDED-BRANDINGS-TIP" %}{%endif%}<p>
+                            <p>{% trans "BRANDED-BRANDINGS-TIP" %}<p>
                         </div>
                     </div>
                 </div>

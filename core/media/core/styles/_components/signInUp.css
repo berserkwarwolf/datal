@@ -1,0 +1,280 @@
+/* Fonts */
+@font-face {
+  font-family: 'proxima_nova_rgregular';
+  src: url('/media_website/fonts/proximanova-regular-webfont.eot');
+  src: url('/media_website/fonts/proximanova-regular-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/media_website/fonts/proximanova-regular-webfont.woff') format('woff'),
+       url('/media_website/fonts/proximanova-regular-webfont.ttf') format('truetype'),
+       url('/media_website/fonts/proximanova-regular-webfont.svg#proxima_nova_rgregular') format('svg');
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+@font-face {
+  font-family: 'proxima_nova_rgbold';
+  src: url('/media_website/fonts/proximanova-bold-webfont.eot');
+  src: url('/media_website/fonts/proximanova-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/media_website/fonts/proximanova-bold-webfont.woff') format('woff'),
+       url('/media_website/fonts/proximanova-bold-webfont.ttf') format('truetype'),
+       url('/media_website/fonts/proximanova-bold-webfont.svg#proxima_nova_rgbold') format('svg');
+  font-weight: normal !important;
+  font-style: normal !important;
+}
+@font-face {
+    font-family: 'proxima_novasemibold';
+    src: url('/media_website/fonts/proximanova-semibold-webfont.eot');
+    src: url('/media_website/fonts/proximanova-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/media_website/fonts/proximanova-semibold-webfont.woff') format('woff'),
+         url('/media_website/fonts/proximanova-semibold-webfont.ttf') format('truetype'),
+         url('/media_website/fonts/proximanova-semibold-webfont.svg#proxima_novasemibold') format('svg');
+    font-weight: normal !important;
+    font-style: normal !important;
+}
+.PNR{font-family:'proxima_nova_rgregular';font-weight:normal !important;font-style:normal !important;}
+.PNS{font-family:'proxima_novasemibold';font-weight:normal !important;font-style:normal !important;}
+.PNB{font-family:'proxima_nova_rgbold';font-weight:normal !important;font-style:normal !important;}
+
+
+/* Button */
+.websiteHeader .button{height:44px;line-height:44px;font-size:18px;padding:0 20px;display:block;border:1px solid transparent;text-transform:uppercase;font-family:'proxima_nova_rgbold';text-align:center;cursor:pointer;
+    -webkit-border-radius:3px;
+       -moz-border-radius:3px;
+            border-radius:3px;
+    -webkit-box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
+         -moz-box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
+                box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
+}
+.websiteHeader .button:hover{text-decoration:none;}
+
+    /* Small */
+    .websiteHeader .button.small{height:26px;line-height:26px;font-size:13px;padding:0 11px;}
+
+    /* Big */
+    .websiteHeader .button.big{height:66px;line-height:66px;font-size:20px;padding:0 40px;}
+
+    /* Green */ 
+    .websiteHeader .button.green{border-color:#1c2802;border-color:rgba(16,23,1,.50);color:#fff;text-shadow:0 -1px 0 #517605;
+        background: #72aa00;
+        background: -moz-linear-gradient(top,  #72aa00 0%, #a8c732 92%, #b9ce44 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#72aa00), color-stop(92%,#a8c732), color-stop(100%,#b9ce44));
+        background: -webkit-linear-gradient(top,  #72aa00 0%,#a8c732 92%,#b9ce44 100%);
+        background: -o-linear-gradient(top,  #72aa00 0%,#a8c732 92%,#b9ce44 100%);
+        background: -ms-linear-gradient(top,  #72aa00 0%,#a8c732 92%,#b9ce44 100%);
+        background: linear-gradient(to bottom,  #72aa00 0%,#a8c732 92%,#b9ce44 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#72aa00', endColorstr='#b9ce44',GradientType=0 );
+    }
+    .websiteHeader .button.green:hover{
+        background: #b9ce44;
+        background: -moz-linear-gradient(top,  #b9ce44 0%, #a8c732 8%, #72aa00 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#b9ce44), color-stop(8%,#a8c732), color-stop(100%,#72aa00));
+        background: -webkit-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
+        background: -o-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
+        background: -ms-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
+        background: linear-gradient(to bottom,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9ce44', endColorstr='#72aa00',GradientType=0 );
+    }
+    /*
+    .websiteHeader .button.green.small{line-height:23px;}
+    .websiteHeader .button.green.big{line-height:63px;}
+    */
+
+    /* Orange */
+    .websiteHeader .button.orange{border-color:#c59a7e;border-color:rgba(140,28,65,.5);color:#ce6425;text-shadow:0 1px 0 #fbddc0;
+        background: #f9c089;
+        background: -moz-linear-gradient(top,  #fbe0c6 0%, #fad6b2 8%, #f9c089 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbe0c6), color-stop(8%,#fad6b2), color-stop(100%,#f9c089));
+        background: -webkit-linear-gradient(top,  #fbe0c6 0%,#fad6b2 8%,#f9c089 100%);
+        background: -o-linear-gradient(top,  #fbe0c6 0%,#fad6b2 8%,#f9c089 100%);
+        background: -ms-linear-gradient(top,  #fbe0c6 0%,#fad6b2 8%,#f9c089 100%);
+        background: linear-gradient(to bottom,  #fbe0c6 0%,#fad6b2 8%,#f9c089 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbe0c6', endColorstr='#f9c089',GradientType=0 );
+    }
+    .websiteHeader .button.orange:hover{
+        background: #fbe0c6;
+        background: -moz-linear-gradient(top,  #f9c089 0%, #fad6b2 92%, #fbe0c6 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9c089), color-stop(92%,#fad6b2), color-stop(100%,#fbe0c6));
+        background: -webkit-linear-gradient(top,  #f9c089 0%,#fad6b2 92%,#fbe0c6 100%);
+        background: -o-linear-gradient(top,  #f9c089 0%,#fad6b2 92%,#fbe0c6 100%);
+        background: -ms-linear-gradient(top,  #f9c089 0%,#fad6b2 92%,#fbe0c6 100%);
+        background: linear-gradient(to bottom,  #f9c089 0%,#fad6b2 92%,#fbe0c6 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c089', endColorstr='#fbe0c6',GradientType=0 );
+    }
+    .websiteHeader .button.orange.dark{border-color:#1c2802;border-color:rgba(16,23,1,.50);}
+
+/*LAYOUT CONFIGURATION*/
+html,
+body,
+.contentInner{background:#f4f3f3 url(/media_website/images/common/bg-body.jpg);}
+.contentInner .gradient{background:url(/media_website/images/common/gr-body.jpg) repeat-x;}
+.contentInner .in{background:url(/media_website/images/common/sh-body.png) repeat-x;}
+.inInner{background:#fff;}
+.cont{padding:0 1px;background:#FFF;}
+
+.content{background:none;padding:0;}
+.accountSignIn{padding:0 20px 20px;}
+.footer{position:static;}
+
+/* WEBSITE HEADER */
+.websiteHeader{height:100px;border-top:1px solid #f6bc83;border-bottom:1px solid #df731e;background:#ff6c00 url(/media_website/images/newHome/bg_headerLights.png) center 0 no-repeat;}
+.websiteHeader .w960{position:relative;}
+.websiteHeader .logo{width:113px;height:98px;background:url(/media_website/images/newHome/lg_junar.png) 0 19px no-repeat;display:block;}
+
+    /* Nav */
+    .websiteHeader .nav{position:absolute;right:-2px;top:39px;z-index:2;}
+    .websiteHeader .nav > ul > li > .button{margin:2px 12px 0;}
+    .websiteHeader .button.green{border-color:#8d5812;border-color:rgba(16,23,1,.50);}
+    .websiteHeader .button.orange.dark{border-color:#8d5812;border-color:rgba(16,23,1,.50);}
+    .websiteHeader .nav > ul li.tab{margin:0 4px;}
+    .websiteHeader .nav > ul li.tab > a{font-size:17px;text-shadow:0 -1px 0 rgba(143,77,12,.5);color:#fef1e4;height:30px;line-height:30px;display:block;padding:0 12px;}
+    .websiteHeader .nav > ul li.tab a{text-decoration:none;}
+    .websiteHeader .nav > ul li.tab:hover,
+    .websiteHeader .nav > ul li.tab.active,
+    .websiteHeader .nav > ul li.tab.hover{color:#fff;background-color:#4c3e33;background-color:rgba(57,57,57,.9);
+        -webkit-border-radius:3px;
+             -moz-border-radius:3px;
+                    border-radius:3px;
+      -webkit-box-shadow:0 0 1px 0 rgba(255,255,255,.50);
+         -moz-box-shadow:0 0 1px 0 rgba(255,255,255,.50);
+                    box-shadow:0 0 1px 0 rgba(255,255,255,.50);
+    }
+    .websiteHeader .nav > ul li.tab.pulldown:hover,
+    .websiteHeader .nav > ul li.tab.pulldown.hover{
+        -webkit-border-radius:3px 3px 0 0;
+             -moz-border-radius:3px 3px 0 0;
+                    border-radius:3px 3px 0 0;
+    }
+
+    /* Pull Down */
+    .websiteHeader .nav > ul li.pulldown{position:relative;}
+    .websiteHeader .nav > ul li.pulldown > a{padding-right:24px;background:transparent url(/media_website/images/newHome/ic_navPullDown.gif) right 0 no-repeat;}
+    .websiteHeader .nav > ul li.pulldown.active > a{background-position:right -30px;}
+    .websiteHeader .nav > ul li.pulldown:hover > a,
+    .websiteHeader .nav > ul li.pulldown.active:hover > a,
+    .websiteHeader .nav > ul li.pulldown.hover > a,
+    .websiteHeader .nav > ul li.pulldown.active.hover > a{background-position:right -60px;cursor:default}
+    .websiteHeader .nav li.pulldown .submenu{display:none !important;}
+    .websiteHeader .nav li.pulldown:hover .submenu,
+    .websiteHeader .nav li.pulldown.hover .submenu{display:block !important;position:absolute;top:30px;left:0;background-color:#4c3e33;background-color:rgba(57,57,57,.9);min-width:110%;
+        -webkit-border-radius:0 3px 3px 3px;
+             -moz-border-radius:0 3px 3px 3px;
+                    border-radius:0 3px 3px 3px;
+      -webkit-box-shadow:-1px 1px 1px -1px rgba(255,255,255,.50), 0 2px 3px -2px rgba(0,0,0,.75);
+         -moz-box-shadow:-1px 1px 1px -1px rgba(255,255,255,.50), 0 2px 3px -2px rgba(0,0,0,.75);
+                    box-shadow:-1px 1px 1px -1px rgba(255,255,255,.50), 0 2px 3px -2px rgba(0,0,0,.75);
+    }
+    .websiteHeader .nav li.pulldown:hover .submenu a,
+    .websiteHeader .nav li.pulldown.hover .submenu a{display:block;height:25px;line-height:25px;white-space:nowrap;padding:0 12px;color:#dbd7d5;font:14px/25px arial, helvetica, sans-serif;text-shadow:0 1px 0 #000;}
+    .websiteHeader .nav li.pulldown:hover .submenu a:hover,
+    .websiteHeader .nav li.pulldown.hover .submenu a:hover{text-decoration:none;color:#fff;text-shadow:0 1px 0 #1452b0;background:#4990fc;}
+    .websiteHeader .nav li.pulldown:hover .submenu > li:first-child a,
+    .websiteHeader .nav li.pulldown.hover .submenu > li:first-child a{
+        -webkit-border-radius:0 3px 0 0;
+             -moz-border-radius:0 3px 0 0;
+                    border-radius:0 3px 0 0;
+    }
+    .websiteHeader .nav li.pulldown:hover .submenu > li:last-child a,
+    .websiteHeader .nav li.pulldown.hover .submenu > li:last-child a{
+        -webkit-border-radius:0 0 3px 3px;
+             -moz-border-radius:0 0 3px 3px;
+                    border-radius:0 0 3px 3px;
+    }
+
+    /* Language Adjustments */
+    html[lang=es-ES] .websiteHeader .nav{right:1px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.tab{margin:0 2px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.tab > a{font-size:16px;padding:0 9px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.tab > a{padding:0 8px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.tab.pulldown > a{padding-right:21px;}
+    html[lang=es-ES] .websiteHeader .nav > ul > li > .button{margin-left:9px;margin-right:9px;}
+    html[lang=es-ES] .websiteHeader .nav > ul > li > .button.small{padding:0 7px;}
+    html[lang=es-ES] .websiteHeader .nav li.pulldown:hover .submenu a,
+    html[lang=es-ES] .websiteHeader .nav li.pulldown.hover .submenu a{padding:0 8px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown > a{background-position:right -90px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown.active > a{background-position:right -120px;}
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown:hover > a,
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown.active:hover > a,
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown.hover > a,
+    html[lang=es-ES] .websiteHeader .nav > ul li.pulldown.active.hover > a{background-position:right -150px;}
+
+/* RESET LAYOUT */
+.contentInner .gradient,
+.content .cols,
+.content .contentInner .sidebar,
+body, 
+html, 
+.contentInner,
+.contentInner .in{background:none;}
+
+body, html{background:#fff;}
+
+.neuton{font-family:'proxima_novasemibold';font-weight:normal !important;}
+
+/*ACCOUNT SIGNIN*/
+    
+    /*TITLE*/
+    .signInTitleBox{padding-bottom:20px;}
+    .signInTitleBox img{width:138px;border:1px solid #ccc;padding:1px;background:#fff;}
+    .signInTitleBox h1{padding:20px 0 0 162px;color:#333;font-size:30px;line-height:40px;}
+    .signInTitleBox h1 span{color:#ef7f10;}
+
+    /*TEXT*/
+    .accountSignIn .signInTextBox{width:565px;border-top:1px solid #ececec;padding-top:20px;color:#666;}
+    .accountSignIn .signInTextBox h2,
+    .accountSignIn .signInTextBox p,
+    .accountSignIn .signInTextBox ul,
+    .accountSignIn .signInTextBox li{font-size:14px;line-height:21px;padding-bottom:21px;}
+    .accountSignIn .signInTextBox li{padding-left:16px;background:url(/media_website/images/common/arrowLi.gif) left 8px no-repeat;}
+
+    /*SIGN IN BOX*/
+    .accountSignIn .individualSignInBox{float:right;width:300px;background:none;padding:0;}
+    .accountSignIn .individualSignInBox .boxShadow{background:none;padding:0;}
+    .accountSignIn .individualSignInBox .signBox .pageFormContainer{padding:16px;height:auto;}
+    .accountSignIn .individualSignInBox .pageFormContainer .row label{width:75px;}
+    .accountSignIn .individualSignInBox .pageFormContainer .row label[for="id_remember_me"], 
+    .accountSignIn .individualSignInBox .pageFormContainer .row label[for="id_new_user-remember_me"]{width:auto;padding-top:2px;}
+    .accountSignIn .individualSignInBox .pageFormContainer .row .formErrorMessageContainer{width:auto;}
+    .accountSignIn .individualSignInBox .pageFormContainer .row.rememberMe{height:20px;}
+    .accountSignIn .individualSignInBox .pageFormContainer .row input[type="text"],
+    .accountSignIn .individualSignInBox .pageFormContainer .row input[type="password"]{width:140px;padding-right:10px;}
+    .accountSignIn .individualSignInBox .pageFormContainer .buttons{border-top:1px solid #e0dddd;}
+    .accountSignIn .individualSignInBox .pageFormContainer .buttonsInner{border-top:1px solid #fff;padding-top:15px;}
+
+/*GENERIC SIGN IN*/
+.genericSignIn .signInTitleBox h1{padding:0;}
+
+/*ACCOUNT SIGN UP*/
+    
+    /*TITLE*/
+    .accountSignUp .signInTitleBox{text-align:center;padding-bottom:30px;}
+    .accountSignUp .signInTitleBox h1{padding:30px 0 16px;color:#ef7f10;font-size:35px;line-height:43px;}
+    .accountSignUp .signInTitleBox p{font-size:16px;color:#333;line-height:23px;}
+
+    /*SIGN UP BOX*/
+    .accountSignUp .individualSignInBox{float:none;width:550px;}
+
+    /*TEXT*/
+    .accountSignUp .signUpTextBox{padding:16px 26px 0;}    
+    .accountSignUp .signUpTextBox p{font-size:12px;color:#666;line-height:15px;padding-bottom:15px;}
+    .accountSignUp .signUpTextBox p strong{display:block;padding-bottom:3px;}
+
+    .accountSignUp .individualSignInBox .pageFormContainer .row label{width:172px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .row label:after{content:":";}
+    .accountSignUp .individualSignInBox .pageFormContainer .row .formErrorMessageContainer{width:auto;}
+    .accountSignUp .individualSignInBox .pageFormContainer .row input[type="text"]{width:210px;} 
+    .accountSignUp .individualSignInBox .pageFormContainer .row input[type="password"]{width:120px;padding-right:100px;} 
+    .accountSignUp .individualSignInBox .pageFormContainer .row p.tip{padding-left:188px;padding-top:3px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .domainRow{position:relative;}
+    .accountSignUp .individualSignInBox .pageFormContainer .domainRow .domainText{font-size:14px;color:#000;padding:10px 3px;display:block;}
+    .accountSignUp .individualSignInBox .pageFormContainer .domainRow input[type="text"]{width:116px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .domainRow .availableBox{width:16px;height:14px;background:url(/static/core/images/homeManager/ic_valid.gif) no-repeat 0 0;display:none;position:absolute;right:-19px;top:8px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .buttons{margin-top:10px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .buttons p{padding-bottom:10px;}
+
+/*ACTIVATE*/
+.activateBox .pageFormContainer .row .passwordStrength,
+.signUpBox .pageFormContainer .row .passwordStrength{right: 104px;}
+
+
+/* Layout Config */
+.footerWorkspace{position:fixed;bottom:0;left:0;width:100%;z-index:201;}
+.accountSignIn{padding:24px 20px 70px;}
+.layoutHeight{padding-top:4px;}

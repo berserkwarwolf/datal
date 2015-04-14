@@ -40,9 +40,12 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
+    'south',
+    'django.contrib.staticfiles',
     'django_extensions',
     'core',
-    'raven.contrib.django'
+    'raven.contrib.django',
+    "compressor",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -264,6 +267,21 @@ LOGGING = {
 }
 
 IS_WORKSPACE = False
+
+STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
+
+# Django Compress y SASS
+COMPRESS_PRECOMPILERS = (
+    ('text/scss', 'sass --scss {infile} {outfile}'),
+)
+
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+    'compressor.finders.CompressorFinder',
+)
 
 try:
     from core.local_settings import *

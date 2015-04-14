@@ -3,7 +3,7 @@ $(document).ready(function(){
         $.gritter.add({
             title: gettext('APP-CHANGES-SAVED-TEXT'),
             text: message,
-            image: '/media_workspace/images/common/ic_validationOk32.png',
+            image: '/static/workspace/images/common/ic_validationOk32.png',
             sticky: false,
             time: 8000
         });
@@ -12,7 +12,7 @@ $(document).ready(function(){
         $.gritter.add({
             title: gettext('APP-ERROR-TEXT'),
             text: message,
-            image: '/media_workspace/images/common/ic_validationError32.png',
+            image: '/static/workspace/images/common/ic_validationError32.png',
             sticky: false,
             time: 8000
         });

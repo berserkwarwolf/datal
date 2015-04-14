@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
+from core.exceptions import SearchIndexNotFoundException
+from core.models import DatastreamI18n, DataStream, DataStreamRevision
+from workspace import settings
+from core.daos.resource import AbstractDataStreamDBDAO
 import operator
 from django.db.models import Q, F
-from core.exceptions import SearchIndexNotFoundException
-from core.models import DataStreamRevision, DataStream, DatastreamI18n
-from workspace import settings
 
-
-class DataStreamDBDAO():
+class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
 
     def get(self, language, datastream_id=None, datastream_revision_id=None):
@@ -56,48 +56,9 @@ class DataStreamDBDAO():
 
         return datastream
 
-    def create(self, datastream=None, user=None, **fields):
-        """create a new datastream if needed and a datastream_revision"""
-
-        if datastream is None:
-            # Create a new datastream (TITLE is for automatic GUID creation)
-            datastream = DataStream.objects.create(user=user, title=fields['title'])
-
-        # meta_text = 
-
-        datastream_revision = DataStreamRevision.objects.create(datastream=datastream
-                                                                , user=user
-                                                                , dataset=fields['dataset']
-                                                                , status=fields['status']
-                                                                , category=fields['category']
-                                                                , data_source=fields['data_source']
-                                                                , select_statement=fields['select_statement'])
-
-        DatastreamI18n.objects.create(datastream_revision=datastream_revision,
-            language=fields['language'], title=fields['title'],
-            description=fields['description'], notes=fields['notes'])
-
-        datastream_revision.add_tags(fields['tags'])
-        datastream_revision.add_sources(fields['sources'])
-        datastream_revision.add_parameters(fields['parameters'])
-
-        return datastream, datastream_revision
-
-
-    def update(self, datastream_revision, changed_fields, **fields):
-
-        datastream_revision.update(changed_fields, **fields)
-
-        DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=fields['language']).update(changed_fields, **fields)
-
-        datastream_revision.add_tags(fields['tags'])
-        datastream_revision.add_sources(fields['sources'])
-
-        return datastream_revision
-
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-              sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(id=F('datastream__last_revision'), datastream__user__account=account_id,
@@ -142,6 +103,14 @@ class DataStreamDBDAO():
 
         return related
 
+    def create(self, datastream=None, user=None, **fields):
+        """create a new datastream if needed and a datastream_revision"""
+        pass
+
+    def update(self, datastream_revision, changed_fields, **fields):
+        pass
+
+
 class DatastreamSearchDAOFactory():
     """ select Search engine"""
     
@@ -167,7 +136,7 @@ class DatastreamSearchifyDAO():
         tags = datastream_revision.tagdataset_set.all().values_list('tag__name')
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)
-        datastreami18n = DataStreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
+        datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
 
 
         text = [datastreami18n.title, datastreami18n.description, datastream_revision.user.nick, datastream_revision.datastream.guid]
@@ -190,7 +159,6 @@ class DatastreamSearchifyDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(datastream_revision.created_at.timetuple())),
                      'end_point': datastream_revision.dataset.end_point,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(category.id), 'name': category.name}
                 }

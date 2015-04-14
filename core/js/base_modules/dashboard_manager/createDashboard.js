@@ -85,7 +85,7 @@ var CreateDashboard = Backbone.Model.extend({
                 $.gritter.add({
                     title: gettext("NOTIF-SAVED-TITLE"),
                     text: gettext("NOTIF-SAVED-DESC-4"),
-                    image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                    image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                     sticky: true,
                     time: ''
                 });
@@ -110,10 +110,6 @@ var CreateDashboard = Backbone.Model.extend({
           , 'dashboard-description': $('#id_dashboard-description', lDashboardForm).val()
 		  , 'dashboard-category': $('#id_dashboard-category', lDashboardForm).val()
 		  , 'csrfmiddlewaretoken': csrfmiddlewaretoken
-        }
-
-        if ($( '#id_dashboard-is_private', lDashboardForm ).is( ':checked' )) {
-            lData['dashboard-is_private'] = 'on';
         }
 
         return $.param(lData);
@@ -146,7 +142,6 @@ var CreateDashboard = Backbone.Model.extend({
 	},
 	resetForm : function(){
 		this.attributes.$Form.find(':input').val("");
-		this.attributes.$Form.find('#id_dashboard-is_private').attr('checked', false);
 		this.attributes.$Form.find('#id_tag_container').html('');
 	}
 });

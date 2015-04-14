@@ -1,19 +1,20 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components core_components %}
+{% load i18n extra_tags components core_components compress staticfiles %}
 
 {% block SEO %}
 <title>Cómo Usarlo - {{preferences.account_page_titles}}</title>
 {% endblock %}
 
 {% block meta %}
+    {% compress css %}
     <!-- CUSTOM -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/custom/opendatalatam/styles/opendatalatam.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/custom/opendatalatam/styles/opendatalatam.css' %}"/>
 
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-
+    {% endcompress %}
 {% endblock %}
 
 {% block content %}
@@ -29,12 +30,12 @@
     <h2>b) <a href="http://www.opendatalatinoamerica.org/search/?q=%">Buscar</a></h2>
     <p>Desde cualquier parte del sitio podrás realizar búsquedas utilizando el formulario presente en la parte superior del sitio, lo que te entregará rápidamente los resultados de acuerdo a las palabras claves utilizadas. Puedes refinar tus búsquedas utilizando comillas para buscar resultados exactos, el signo + para obtener los términos especificados.</p>
     
-    <a href="http://www.opendatalatinoamerica.org/search/?q=%"><img src="/media_microsites/custom/opendatalatam/images/1-b.png" alt="Buscar"/></a>
+    <a href="http://www.opendatalatinoamerica.org/search/?q=%"><img src="{% static 'microsites/custom/opendatalatam/images/1-b.png' %}" alt="Buscar"/></a>
     
     <h2>c) <a href="http://www.opendatalatinoamerica.org/dashboards/">Ir a colecciones destacadas</a></h2>
     <p>Las colecciones destacadas son una selección de nuestro equipo que contiene un conjunto agrupado temáticamente de recursos de datos abiertos para facilitar su descubrimiento por parte de nuestra audiencia. De esta manera, si visitan esta sección podrán encontrar rápidamente distintos recursos del mismo tema concentrados en un solo lugar.</p>
 
-    <a href="http://www.opendatalatinoamerica.org/dashboards/"><img src="/media_microsites/custom/opendatalatam/images/1-c.png" alt="Ir a colecciones destacadas"/></a>
+    <a href="http://www.opendatalatinoamerica.org/dashboards/"><img src="{% static 'microsites/custom/opendatalatam/images/1-c.png' %}" alt="Ir a colecciones destacadas"/></a>
 
     <h1>2) Cómo reusar los datos</h1>
 
@@ -46,12 +47,12 @@
     <h3>i) Desde la ficha de una vista</h3>
     <p>Desde el menú Acciones podrán seleccionar descargar la vista en formato CSV o XLS</p>
     
-    <img src="/media_microsites/custom/opendatalatam/images/2-a-i.png" alt="Descargar - Desde la ficha de una vista"/>
+    <img src="{% static 'microsites/custom/opendatalatam/images/2-a-i.png' %}" alt="Descargar - Desde la ficha de una vista"/>
 
     <h3>ii) Desde una colección</h3>
     <p>Desde el menú ubicado en un costado del título de la colección podrán descargar todas las vistas en formato CSV</p>
 
-    <img src="/media_microsites/custom/opendatalatam/images/2-a-ii.png" alt="Descargar - Desde una colección"/> 
+    <img src="{% static 'microsites/custom/opendatalatam/images/2-a-ii.png' %}" alt="Descargar - Desde una colección"/>
 
     <h2>b) Compartir en redes sociales</h2>
     <p>Podrán compartir vistas, gráficos o colecciones completas a través de Facebook, Google+, Twitter o LinkedIn con solo un par de clicks. Para las vistas o gráficos simplemente hagan click en Compartir y elijan su red social, mientras que para las colecciones utilicen el widget ubicado en la parte superior.</p>
@@ -62,7 +63,7 @@
     <h2>d) Insertar en google spreadsheet</h2>
     <p>A través del menú Acciones de cada vista podrán obtener un código que les permitirá agregar los datos directamente en sus hojas de cálculo de Google Drive, permitiéndoles trabajar con datos vivos que se actualizarán cada vez que la fuente cambie.</p>
 
-    <img src="/media_microsites/custom/opendatalatam/images/2-d.png" alt="Insertar en google spreadsheet"/>
+    <img src="{% static 'microsites/custom/opendatalatam/images/2-d.png' %}" alt="Insertar en google spreadsheet"/>
 
   </div>
 </div>

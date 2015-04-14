@@ -10,7 +10,7 @@ from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IlegalStateException, DataStreamNotFoundException
-from workspace.daos.datastreams import *
+from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]

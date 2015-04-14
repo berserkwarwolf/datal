@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% block SEO %}
   <title>{{datastream.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -18,11 +18,12 @@
 {% endif %}
 
 {% block meta %}
-
+{% compress css %}
 <!-- CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/plugins/jquery.gritter.css?id={{settings.VERSION_JS_CSS}}" />
-<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css?id={{settings.VERSION_JS_CSS}}" />
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/components/viewDataStream.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/plugins/jquery.gritter.css' %}" />
+<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/viewDataStream.css' %}"/>
+{% endcompress %}
 
 <!-- JS LIBS -->
 <!--[if lt IE 9]>
@@ -75,10 +76,12 @@
 <script type="text/javascript" src="/js_microsites/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- BRANDED CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
-
+{% compress css %}
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+{% endcompress %}
+
 <!-- BRANDED JS -->
 <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
 
@@ -126,7 +129,6 @@ $(document).ready(function(){
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
-    isPrivate: {{datastream.is_private|lower}},
     permaLink: "{{base_uri}}{{ datastream.permalink }}{%if url_query%}?{{url_query}}{%endif%}",
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",

@@ -1,17 +1,18 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components datastream_tags %}
+{% load i18n extra_tags components datastream_tags compress staticfiles %}
 
 {% block meta %}
 
 {# CSS #}
-<link href="/media_core/styles/plugins/backgrid/backgrid.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/plugins/backgrid/backgrid-paginator.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/plugins/backgrid/backgrid-text-cell.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/plugins/backgrid/backgrid-filter.min.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css?id={{settings.VERSION_JS_CSS}}" />
-<link href="/media_workspace/styles/detailCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/viewDataStream.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-
+{% compress css %}
+<link href="{% static 'core/styles/plugins/backgrid/backgrid.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/plugins/backgrid/backgrid-paginator.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/plugins/backgrid/backgrid-text-cell.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
+<link href="{% static 'workspace/styles/detailCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/viewDataStream.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 {# JS Libs and Plugins #}
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>

@@ -1,5 +1,4 @@
 {% load i18n core_components components %}
-{% if not is_private_site %}
 <!-- EMBED DataStream-->
 {% overlay id_add_and_embed %}
     <div class="embedPopup">
@@ -37,7 +36,6 @@
     </div>
 {% endoverlay%}
 {% include "embed_code/embedCode.html" %}
-{% endif %}
 
 <!-- MAXIMIZE -->
 <div id="id_dataService_scroll_container" class="maximizeBar DN">

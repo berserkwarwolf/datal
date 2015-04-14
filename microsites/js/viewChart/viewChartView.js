@@ -399,7 +399,7 @@ var viewChartView = Backbone.View.extend({
                         .add({
                             title : titleText,
                             text : gettext("VIEWDS-WAITMESSAGEDOWNLOAD-TEXT"),
-                            image : '/media_microsites/images/microsites/ic_download.gif',
+                            image : '/static/microsites/images/microsites/ic_download.gif',
                             sticky : false,
                             time : ''
                         });
@@ -414,10 +414,10 @@ var viewChartView = Backbone.View.extend({
 
                                     // Images Array
                                     var JSImages = [
-                                            '/media_microsites/images/microsites/ic_download.gif',
-                                            '/media_core/styles/plugins/images/gritter.png',
-                                            '/media_core/styles/plugins/images/ie-spacer.gif',
-                                            '/media_microsites/images/microsites/im_miniLoading.gif'
+                                            '/static/microsites/images/microsites/ic_download.gif',
+                                            '/static/core/styles/plugins/images/gritter.png',
+                                            '/static/core/styles/plugins/images/ie-spacer.gif',
+                                            '/static/microsites/images/microsites/im_miniLoading.gif'
                                             ];
 
                                     // Preload JS Images
