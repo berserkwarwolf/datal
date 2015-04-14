@@ -105,3 +105,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                  'created_at')
 
         return related
+
+    def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):
+        """create a new dataset if needed and a dataset_revision"""
+        pass
+        
+    def update(self, dataset_revision, changed_fields, **fields):
+        pass
