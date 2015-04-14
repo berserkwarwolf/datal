@@ -32,7 +32,7 @@ def home(request):
         if not has_home:
             featured_dashbords = preferences['account_featured_dashboards']
             dashboards = [int(dashboard_id) for dashboard_id in json.loads(featured_dashbords)]
-            url = to_first_featured_dashboard(dashboards, request.is_private_site, request.auth_manager)
+            url = to_first_featured_dashboard(dashboards, request.auth_manager)
 
             return HttpResponseRedirect(url)
         else:
@@ -52,7 +52,7 @@ def action_dashboards(request):
         else:
             query = request.GET.urlencode()
 
-        url = to_first_featured_dashboard(dashboards, request.is_private_site, request.auth_manager)
+        url = to_first_featured_dashboard(dashboards, request.auth_manager)
         if query != None:
             url = url + '?'+ query
 
@@ -141,7 +141,7 @@ def action_is_live(request):
     response = '%s(true)' % callback
     return HttpResponse(response, content_type='text/javascript')
 
-def to_first_featured_dashboard(dashboards, is_private_site = False, auth_manager = None):
+def to_first_featured_dashboard(dashboards, auth_manager = None):
 
     dashboard_id = dashboards[0]
     dashboard = Dashboard.objects.get(pk = dashboard_id)

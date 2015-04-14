@@ -26,9 +26,7 @@ var ActionsMenu = Backbone.Model.extend({
 
     , initOptions: function() {
         // @todo: check for use privileges
-        if (!fIsPrivate) {
-            var lGoogleSpreadSheetMenuOption = new GoogleSpreadSheetMenuOption({ '$Menu': this.attributes.$Menu });
-        }
+        var lGoogleSpreadSheetMenuOption = new GoogleSpreadSheetMenuOption({ '$Menu': this.attributes.$Menu });
     }
 });
 

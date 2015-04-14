@@ -63,11 +63,7 @@
         </ul>
         {% if preferences.account_domain %}
         <div class="ODSButton absolute">
-            {%if is_private_site%}
-            <a href="http://{{ preferences.account_domain }}" title="{% trans 'ACCOUNT-OPENDATASITE-TAB-PRIVATE' %}" class="genericButton arrowButton"><span>{% trans "ACCOUNT-OPENDATASITE-TAB-PRIVATE" %}</span></a>
-            {%else%}
             <a href="http://{{ preferences.account_domain }}" title="{% trans 'ACCOUNT-OPENDATASITE-TAB' %}" class="genericButton arrowButton"><span>{% trans "ACCOUNT-OPENDATASITE-TAB" %}</span></a>
-            {%endif%}
         </div>
         {% endif %}
     </div>

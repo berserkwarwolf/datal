@@ -112,10 +112,6 @@ var CreateDashboard = Backbone.Model.extend({
 		  , 'csrfmiddlewaretoken': csrfmiddlewaretoken
         }
 
-        if ($( '#id_dashboard-is_private', lDashboardForm ).is( ':checked' )) {
-            lData['dashboard-is_private'] = 'on';
-        }
-
         return $.param(lData);
     },
     serializeTags: function(){
@@ -146,7 +142,6 @@ var CreateDashboard = Backbone.Model.extend({
 	},
 	resetForm : function(){
 		this.attributes.$Form.find(':input').val("");
-		this.attributes.$Form.find('#id_dashboard-is_private').attr('checked', false);
 		this.attributes.$Form.find('#id_tag_container').html('');
 	}
 });

@@ -74,7 +74,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="blockPageTitle{% if datastream.is_private %} thisIsPrivate{% endif %} branded{% if not preferences.account_enable_sharing %} sharingDisabled{% endif %}{% if can_share %} sharingDisabled{% endif %}">
+    <div class="blockPageTitle branded{% if not preferences.account_enable_sharing %} sharingDisabled{% endif %}{% if can_share %} sharingDisabled{% endif %}">
         <div class="titleGradient">
             <div class="panel clearfix hreview-aggregate">
 

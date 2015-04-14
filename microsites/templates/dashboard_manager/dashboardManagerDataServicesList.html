@@ -29,13 +29,12 @@
     {% if dashboard_dataservice.sov_id %}
 
         {% if dashboard_dataservice.datastream_type == 'URL' %}
-            {% if not dashboard_dataservice.is_private %}
             <!-- COLLECTED FROM URL -->
             <div class="collectedFrom toolbar FL clearfix">
                 <a id="id_gotosource" href="{{dashboard_dataservice.datasource_end_point}}" target="_blank" rel="nofollow" title="{% trans 'APP-WHERETHISCOMEFROM-TEXT' %}: {{dashboard_dataservice.datasource_end_point}}" class="Icon ic_CollectedFrom FL"><span class="DN">{% trans 'APP-WHERETHISCOMEFROM-TEXT' %}</span></a>
             </div>
             <div class="sep FL"><span class="DN">|</span></div>
-            {% endif %}
+            
         {% endif %}
 
         {% if dashboard_dataservice.datastream_type == 'SELF PUBLISH' %}
@@ -73,9 +72,9 @@
                 <div class="menuInner">
                     <ul class="In">
                         <li class="J"><a href="javascript:;" title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu open" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
-                        {% if not is_private_site %}
+                        
                         <li class="Item"><a href="javascript:;" id="id_embedChartButton_{{forloop.counter0}}" title="{% trans 'DBMAN-CHARTEMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
-                        {% endif %}
+                        
                         {% if can_export %}
                         <li class="Item"><a href="{% url "datastream_manager.action_csv" dashboard_dataservice.dataservice_id dashboard_dataservice.slug %}" id="id_exportToCSV_{{forloop.counter0}}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                         <li class="Item"><a href="{% url "datastream_manager.action_xls" dashboard_dataservice.dataservice_id dashboard_dataservice.slug %}" id="id_exportToXLS_{{forloop.counter0}}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>                        
@@ -109,7 +108,7 @@
     {% else %}
 
         {% if dashboard_dataservice.datastream_type == 'URL' %}
-            {% if not dashboard_dataservice.is_private %}
+            
             <!-- COLLECTED FROM URL -->
             <div class="collectedFrom toolbar FL clearfix">
                 <a id="id_gotosource" href="{{dashboard_dataservice.datasource_end_point}}" target="_blank" rel="nofollow" title="{% trans 'APP-WHERETHISCOMEFROM-TEXT' %}: {{dashboard_dataservice.datasource_end_point}}" class="Icon ic_CollectedFrom FL"><span class="DN">{% trans 'APP-WHERETHISCOMEFROM-TEXT' %}</span></a>
@@ -120,7 +119,7 @@
                 <a id="id_downloadLink" href="" target="_blank" rel="nofollow" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}" class="Icon ic_Download FL"><span class="DN">{% trans 'APP-DOWNLOADDATASET-TEXT' %}</span></a>
             </div>
             <div class="sep FL"><span class="DN">|</span></div>-->
-            {% endif %}
+            
         {% endif %}
 
         {% if dashboard_dataservice.datastream_type == 'SELF PUBLISH' %}
@@ -162,19 +161,19 @@
                             <li class="Item"><a href="{% url "datastream_manager.action_csv" dashboard_dataservice.dataservice_id dashboard_dataservice.slug %}{% if dashboard_dataservice.dataservice_end_point %}?_={{dashboard_dataservice.dataservice_end_point}}{% endif %}" id="id_exportToCSV_{{forloop.counter0}}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                             <li class="Item"><a href="{% url "datastream_manager.action_xls" dashboard_dataservice.dataservice_id dashboard_dataservice.slug %}{% if dashboard_dataservice.dataservice_end_point %}?_={{dashboard_dataservice.dataservice_end_point}}{% endif %}" id="id_exportToXLS_{{forloop.counter0}}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>                            
                             {% endif %}
-                            {% if not dashboard_dataservice.is_private %}
+                            
                             <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_{{forloop.counter0}}" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow"><span>{% trans "APP-GETEMBEDCODE-TEXT" %}</span></a></li>
-                            {% endif %}
+                            
                             <li class="Item"><a href="javascript:;" id="id_guidDataStreamButton_{{forloop.counter0}}" title="{% trans 'DB-DSGUID-GETGUID' %}" class="Icon ic_GUID" rel="nofollow"><span>{% trans "APP-GETGUID-TEXT" %}</span></a></li>
-                            {% if not dashboard_dataservice.is_private %}
-                                <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_{{forloop.counter0}}" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
-                            {% endif %}
+                            
+                            <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_{{forloop.counter0}}" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
+                            
                         </ul>
                     </div>
                 </div>
             </div>
             
-            {% if not dashboard_dataservice.is_private and preferences.account_enable_sharing %}
+            {% if preferences.account_enable_sharing %}
                 <div class="sep FR"><span class="DN">|</span></div>
                 <!-- SHARE MENU -->
                 <div class="shareMenu relative FR">

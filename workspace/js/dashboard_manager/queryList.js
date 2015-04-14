@@ -4,7 +4,6 @@ var fUserNick;
 var fDashboardId;
 var fMoveBeforeIndex;
 var fDataStreamNeedToMove = false;
-var fIsPrivate;
 var fAddingDataservice = false;
 var $fEditParametersContainer;
 var $fDataServicesSearch;
@@ -699,9 +698,7 @@ function onSuccessDashboardDataServiceAdded(pResponse){
 	var sovId   			= jQuery.data(lDataService, "sov_id");
     var sovrevisionId   	= jQuery.data(lDataService, "sov_revision_id");
 	var sov_impl_details   	= jQuery.data(lDataService, "sov_impl_details");
-    var isPrivate           = jQuery.data(lDataService, "is_private");
     var sources             = [];//jQuery.data(lDataService, "sources");
-    
 
 	if(isChart){
 		var lHtml               = '<div id="id_droppable_dashboard_dataservice_container_' + lTo + '" rel="#id_dashboard_dataservice_container_' + lTo + '" class="Drop"' + ' data="' + lTo + '"><div><span>' + gettext( "APP-DROPHERE-TEXT" ) + '</span></div></div>';
@@ -721,7 +718,7 @@ function onSuccessDashboardDataServiceAdded(pResponse){
 	    lHtml                     = lHtml + '<div class="dataStreamActions bottomActions">';
 	    lHtml                     = lHtml + '<div class="actionsInner toolbar clearfix">';
 	
-	    if (!isPrivate || (isPrivate && canChange)) {
+	    if (canChange) {
 		    if (dataSetType == 'URL'){
 		    lHtml                   = lHtml + '<div class="collectedFrom toolbar FL clearfix">';
 		    lHtml                   = lHtml + '<a id="id_gotosource" href="'+lDataSourceEndPoint+'" target="_blank" rel="nofollow" title="' + gettext("APP-WHERETHISCOMEFROM-TEXT") + ': '+lDataSourceEndPoint+'" class="Icon ic_CollectedFrom FL"><span class="DN">' + gettext("APP-WHERETHISCOMEFROM-TEXT") + '</span></a>';
@@ -744,7 +741,7 @@ function onSuccessDashboardDataServiceAdded(pResponse){
 	    lHtml                     = lHtml + '<div class="menuInner">';
 	    lHtml                     = lHtml + '<ul class="In">';
 	    lHtml                     = lHtml + '<li class="J"><a href="javascript:;" title="' + gettext( "APP-ACTIONS-TEXT" ) + '" class="Icon FR ic_Menu open"><span>' + gettext( "APP-ACTIONS-TEXT" ) + '</span></a></li>';
-	    if (!isPrivate || (isPrivate && canChange)) {
+	    if (canChange) {
 	    lHtml                   = lHtml + ( !lIsSelfPublishing ? '<li class="Item"><a href="javascript:;" id="id_sourceDashboardDataServiceButton_' + lTo  + '" title="' + gettext( "DB-ACTIONSMENU-REUSESOURCE" ) + '" class="Icon ic_Src">' + gettext( "APP-REUSESOURCE-TEXT" ) + '</a></li>' : '');
 	    }
 	    lHtml                   = lHtml + '</ul>';
@@ -786,7 +783,7 @@ function onSuccessDashboardDataServiceAdded(pResponse){
 	    lHtml                     = lHtml + '<div class="dataStreamActions bottomActions">';
 	    lHtml                     = lHtml + '<div class="actionsInner toolbar clearfix">';
 	
-	    if (!isPrivate || (isPrivate && canChange)) {
+	    if (canChange) {
 	    if (dataSetType == 'URL'){
 	    lHtml                   = lHtml + '<div class="collectedFrom toolbar FL clearfix">';
 	    lHtml                   = lHtml + '<a id="id_gotosource" href="'+lDataSourceEndPoint+'" target="_blank" rel="nofollow" title="' + gettext("APP-WHERETHISCOMEFROM-TEXT") + ': '+lDataSourceEndPoint+'" class="Icon ic_CollectedFrom FL"><span class="DN">' + gettext("APP-WHERETHISCOMEFROM-TEXT") + '</span></a>';
@@ -809,7 +806,7 @@ function onSuccessDashboardDataServiceAdded(pResponse){
 	    lHtml                     = lHtml + '<div class="menuInner">';
 	    lHtml                     = lHtml + '<ul class="In">';
 	    lHtml                     = lHtml + '<li class="J"><a href="javascript:;" title="' + gettext( "APP-ACTIONS-TEXT" ) + '" class="Icon FR ic_Menu open"><span>' + gettext( "APP-ACTIONS-TEXT" ) + '</span></a></li>';
-	    if (!isPrivate || (isPrivate && canChange)) {
+	    if (canChange) {
 	    lHtml                   = lHtml + ( !lIsSelfPublishing ? '<li class="Item"><a href="javascript:;" id="id_sourceDashboardDataServiceButton_' + lTo  + '" title="' + gettext( "DB-ACTIONSMENU-REUSESOURCE" ) + '" class="Icon ic_Src">' + gettext( "APP-REUSESOURCE-TEXT" ) + '</a></li>' : '');
 	    }
 	    lHtml                   = lHtml + '</ul>';
@@ -897,8 +894,7 @@ function onErrorDashboardDataServiceAdded(pResponse){
 
 function initDashboardDataService(pIndex){
     var $lDashboardDataServiceContainer = $fDashboardsContainers.eq(pIndex);
-    var isPrivate = $lDashboardDataServiceContainer.data('dataservice_is_private');
-
+    
     $lDashboardDataServiceContainer.find('div[id*=id_dashboard_dataservice_goToSource_]').css('visibility','hidden');
     $lDashboardDataServiceContainer.find('div[id*=id_dashboard_dataservice_toolbar_]').css('visibility','hidden');
 
@@ -984,8 +980,8 @@ function closeDashboardDataServiceTooltip(){
 }
 
 function switchDashboardDataServices(pIndex1, pIndex2){
-    var $lDashboardDataServiceContainer1    = $fDashboardsContainers.eq(pIndex1).detach();
-    var $lDashboardDataServiceContainer2    = $fDashboardsContainers.eq(pIndex2).detach();
+    var $lDashboardDataServiceContainer1    = $fDashboardsContainers.eq(pIndex1).detach();
+    var $lDashboardDataServiceContainer2    = $fDashboardsContainers.eq(pIndex2).detach();
     
     var $lDroppableContainter1 =  $('#id_droppable_dashboard_dataservice_container_' + pIndex1);
     var $lDroppableContainter2 =  $('#id_droppable_dashboard_dataservice_container_' + pIndex2);
@@ -1226,8 +1222,7 @@ function onSuccessDataServiceExecute(pResponse){
             +'</strong></span>'
             + '</span>'
             + '</span>';
-    if( $lDashboardDataServiceContainer.data( 'dataservice_is_private' ) )
-        lHtml += '';
+
     lHtml += '</a>'+
         '</h2>';
 

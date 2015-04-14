@@ -57,7 +57,6 @@ class SearchifyDAO:
                  'parameters': parameters ,
                  'timestamp': timestamp,
                  'end_point': dataset['end_point'],
-                 'is_private': 0,
                 },
             'categories': {'id': dataset['category_id'], 'name': dataset['category_name'] }
             }
@@ -100,7 +99,6 @@ class SearchifyDAO:
                  'parameters': parameters,
                  'timestamp': timestamp,
                  'end_point': datastream['end_point'],
-                 'is_private': 0,
                 },
             'categories': {'id': unicode(datastream['category_id']), 'name': datastream['category_name']}
             }
@@ -135,7 +133,6 @@ class SearchifyDAO:
                      'tags' : tags,
                      'account_id' : visualization['account_id'],
                      'timestamp' : timestamp,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(visualization['category_id']), 'name': visualization['category_name']}
                 }

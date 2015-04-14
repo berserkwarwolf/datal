@@ -61,7 +61,6 @@ class DatastreamSearchifyDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(datastream_revision.created_at.timetuple())),
                      'end_point': datastream_revision.dataset.end_point,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(category.id), 'name': category.name}
                 }

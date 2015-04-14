@@ -1,7 +1,7 @@
 {% load i18n extra_tags components%}
 {% url "search.action_search" as search_url %}
 
-<div class="blockPageTitle{% if dashboard.is_private %} thisIsPrivate{% endif %}{% if can_share %} sharingDisabled{% endif %}{% if preferences.account_enable_sharing %} sharingEnabled{% endif %}">
+<div class="blockPageTitle{% if can_share %} sharingDisabled{% endif %}{% if preferences.account_enable_sharing %} sharingEnabled{% endif %}">
     <div class="titleGradient">
 
         {% block new_dashboard %}
@@ -85,7 +85,7 @@
                         {% block followButton %}
                         {% endblock %}
 
-                        {% if not dashboard.is_private and preferences.account_enable_sharing %}
+                        {% if preferences.account_enable_sharing %}
                         <!-- SHARE BOX -->
                         <div class="shareBox toolbar">
                             <!-- SHARE URL -->
@@ -186,7 +186,6 @@
                     jQuery.data(lDashboard, "dashboard_id", "{{dashboard.dashboard_id}}");
                     jQuery.data(lDashboard, "dashboard_guid", "{{dashboard.guid}}");
                     jQuery.data(lDashboard, "user_nick", "{{dashboard.user_nick}}");
-                    jQuery.data(lDashboard, "is_private", {{dashboard.is_private|lower}});
                     jQuery.data(lDashboard, "is_branded", true);
                 </script>
 

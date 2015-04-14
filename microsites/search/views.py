@@ -13,8 +13,7 @@ def action_browse(request, category_slug=None, page = 1):
 
     try:
         results, search_time, facets = FinderManager().search(category_id = category['id']
-                                                              , account_id = account.id
-                                                              , is_private = False)
+                                                              , account_id = account.id)
     except InvalidPage:
         raise Http404
 
@@ -43,7 +42,6 @@ def do_search(request, category_filters = None, datasets = None):
 
             results, search_time, facets = FinderManager().search(query = query
                                                                   , account_id = accounts_ids
-                                                                  , is_private = False
                                                                   , category_filters = category_filters
                                                                   , resource = resources)
         except InvalidPage:

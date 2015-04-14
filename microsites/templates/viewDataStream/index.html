@@ -126,7 +126,6 @@ $(document).ready(function(){
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
-    isPrivate: {{datastream.is_private|lower}},
     permaLink: "{{base_uri}}{{ datastream.permalink }}{%if url_query%}?{{url_query}}{%endif%}",
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",

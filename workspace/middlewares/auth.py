@@ -14,7 +14,6 @@ class AccessManager(object):
         """
         Checks user, role and account
         """
-        request.is_private_site = False
 
         try:
             user_id = request.session.get("user_id")
