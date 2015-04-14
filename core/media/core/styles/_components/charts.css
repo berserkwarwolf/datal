@@ -1,5 +1,5 @@
 /*CHARTS*/
-.CR{position:relative;background:url(../../images/common/sb_CR.gif) repeat-y 0 0;min-height:200px;}
+.CR{position:relative;background:url(/static/core/images/common/sb_CR.gif) repeat-y 0 0;min-height:200px;}
 
 /*STRUCTURE*/
 .content-container{padding-bottom:0;}
@@ -18,17 +18,17 @@
 .CL .tabContent#id_selectChart, 
 .CL .tabContent#id_optionals{padding-bottom:0;}
 
-.CL .buttons{background:url(../../images/dashboardManager/sb_stepByStep.gif) no-repeat center 0;padding:18px 0 15px;margin-top:1px;}
+.CL .buttons{background:url(/static/core/images/dashboardManager/sb_stepByStep.gif) no-repeat center 0;padding:18px 0 15px;margin-top:1px;}
 .CL .buttons a{margin:0 7px;}
 .CL .button button{margin-top:5px;}
 
 .CL .chartList{border-bottom:1px solid #E2E0E0;}
-.CL .chartList li{background:url(../../images/common/dg_forms.gif) repeat-x 0 0;padding:1px 0;border-top:1px solid #E2E0E0;}
+.CL .chartList li{background:url(/static/core/images/common/dg_forms.gif) repeat-x 0 0;padding:1px 0;border-top:1px solid #E2E0E0;}
 .CL .chartList li:first-child{background:none;}
 .CL .chartList li .Icon{width:auto;line-height:22px;padding:3px 3px 3px 30px;display:block;font-size:14px;color:#000;text-shadow:0 1px 0 #fff;}
 .CL .chartList li .Icon:hover{text-decoration:none;font-weight:bold;}
 .CL .chartList li .chartSelected{background-color:#9ec222;color:#fff;text-shadow:0 0 0 transparent;font-weight:bold;}
-.CL .chartList li .chartSelected span{display:block;background:url(../../images/common/fl_genericButtonBig.gif) no-repeat right 4px;padding:0 12px 0 0;margin-right:5px;}
+.CL .chartList li .chartSelected span{display:block;background:url(/static/core/images/common/fl_genericButtonBig.gif) no-repeat right 4px;padding:0 12px 0 0;margin-right:5px;}
 
 /*RANGE SELECTION / FORMS*/
 .selection,
@@ -37,7 +37,7 @@
 .CL label{font-size:12px;color:#333;line-height:26px;height:26px;display:inline-block;float:left;}
 .selection .range, 
 .row .field,
-.regions{border:1px solid #E2E0E0;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;padding:2px;background:url(../../images/common/dg_forms.gif) repeat-x 0 0;margin-left:100px;}
+.regions{border:1px solid #E2E0E0;-moz-border-radius:2px;-webkit-border-radius:2px;border-radius:2px;padding:2px;background:url(/static/core/images/common/dg_forms.gif) repeat-x 0 0;margin-left:100px;}
 .row .field{width:198px;margin:0;float:right;padding:2px 5px;height:18px;}
 .row label{width:90px;text-align:right;}
 .checkbox{padding-left:100px;position:relative;top:-5px;padding-bottom:0;}
@@ -96,7 +96,7 @@
 	.dataTable table .ao-row-button,
 	.dataTable table .ao-table-button:hover, 
 	.dataTable table .ao-column-button:hover,
-	.dataTable table .ao-row-button:hover{background:#cec8ca url(../../images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:default;}
+	.dataTable table .ao-row-button:hover{background:#cec8ca url(/static/core/images/dataServicePublisher/dg_cell.gif) 0 0 repeat-x;color:#929798;text-shadow:0 1px 0 #fff;text-transform:uppercase;vertical-align:center;cursor:default;}
 	.dataTable table .ao-row-button{padding-left:7px;padding-right:7px;}
 
 	/*SELECTIONS*/
@@ -147,7 +147,7 @@
 .Loading td{height:400px;}
 
 /*PREVIEW ERROR*/
-.previewError{width:100%;background:#fff url(../../images/common/sh_sectionTitle.gif) no-repeat center top;padding-top:7px;border-top:1px solid #fff;}
+.previewError{width:100%;background:#fff url(/static/core/images/common/sh_sectionTitle.gif) no-repeat center top;padding-top:7px;border-top:1px solid #fff;}
 .previewError .innerError{width:940px;padding:0 10px;margin:0 auto;}
 .previewError .warning{margin-top:25px;}
 

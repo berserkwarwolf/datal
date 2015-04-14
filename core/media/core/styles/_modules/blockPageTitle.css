@@ -1,13 +1,13 @@
 /*BLOCK PAGE TITLE*/
-.blockPageTitle{background:url(../../images/common/sb_TituloDashBoard.gif) no-repeat center bottom;padding-bottom:7px;}
-.blockPageTitle .titleGradient{background:url(../../images/common/dg_TituloDashBoard.gif) repeat-x 0 bottom;border:1px solid #fff;border-top:0;position:relative;padding:0 10px;}
+.blockPageTitle{background:url(/static/core/images/common/sb_TituloDashBoard.gif) no-repeat center bottom;padding-bottom:7px;}
+.blockPageTitle .titleGradient{background:url(/static/core/images/common/dg_TituloDashBoard.gif) repeat-x 0 bottom;border:1px solid #fff;border-top:0;position:relative;padding:0 10px;}
 .blockPageTitle .leftContent{width:auto;float:none;padding-top:14px;padding-right:320px;}
 .blockPageTitle.sharingDisabled .leftContent,
 .blockPageTitle.sharingEnabled .leftContent{padding-right:10px;}
 .blockPageTitle .panel{overflow:hidden;position:relative;}
 .blockPageTitle .fixedWidth940 .leftContent{width:620px;position:relative;}
 .blockPageTitle .rightContent{width:298px;max-height:122px;float:right;background:#eee;}
-.blockPageTitle .cv{width:11px;height:122px;background-image:url(../../images/common/sb_shareBox.gif);background-color:#fff;}
+.blockPageTitle .cv{width:11px;height:122px;background-image:url(/static/core/images/common/sb_shareBox.gif);background-color:#fff;}
 .blockPageTitle .bl{left:auto;right:-21px;}
 .blockPageTitle .br{right:-332px;}
 
@@ -39,7 +39,7 @@
 .blockPageTitle .description{color:#928989;font-size:14px;min-height:21px;line-height:21px;vertical-align:baseline;padding:6px 0 10px;}
 
 /*OTHER CONTAINER*/
-.blockPageTitle .othersContainer{background:url(../../images/common/sb_CL620border.png) no-repeat center top;padding:11px 0 9px;min-height:24px;}
+.blockPageTitle .othersContainer{background:url(/static/core/images/common/sb_CL620border.png) no-repeat center top;padding:11px 0 9px;min-height:24px;}
 	
 	/*TAGS*/
 	.blockPageTitle .tagsContainer{padding:3px 0 4px;line-height:17px;}
@@ -62,8 +62,8 @@
 .shareBox .innerBox{height:10000px;}
 .shareBox li{float:left;}
 .shareBox .embedLink{float:left;padding-left:8px;}
-.shareBox .url{background:url(../../images/common/ic_actions.png) no-repeat 0 -680px;color:#898888;text-transform:uppercase;padding-left:17px;}
-.shareBox .firstRow{padding:7px 0;background:url(../../images/homeManager/bd_separator.gif) repeat-x 0 bottom;}
+.shareBox .url{background:url(/static/core/images/common/ic_actions.png) no-repeat 0 -680px;color:#898888;text-transform:uppercase;padding-left:17px;}
+.shareBox .firstRow{padding:7px 0;background:url(/static/core/images/homeManager/bd_separator.gif) repeat-x 0 bottom;}
 .shareBox .firstRow .Icon{width:auto;padding-left:23px;position:relative;top:3px;}
 .shareBox .share_url_input{width:80px;}
 .shareBox .secondRow{padding:9px 0 0 12px;}
@@ -74,12 +74,12 @@
 .shareBox .linkedin{width:auto;}
 
 /*BOOKMARLET*/
-.bookmarkletBox{background:#eee url(../../images/dataServicePublisher/fd_bookmarkletBox.jpg) center 0 no-repeat;border-top:1px solid #fff;}
+.bookmarkletBox{background:#eee url(/static/core/images/dataServicePublisher/fd_bookmarkletBox.jpg) center 0 no-repeat;border-top:1px solid #fff;}
 .bookmarkletBox h2{font-size:14px;font-weight:bold;padding-top:11px;color:#ef7e0f;text-shadow:0 1px 0 #fff;}
 .bookmarkletBox p{color:#999;line-height:17px;font-size:12px;padding:6px 0 15px;}
 .bookmarkletBox ul{}
 .bookmarkletBox ul li{float:right;}
-.bookmarkletBox ul li a{background:url(../../images/homeManager/ic_VM.png) no-repeat right 4px;padding-right:10px;font-size:11px;}
+.bookmarkletBox ul li a{background:url(/static/core/images/homeManager/ic_VM.png) no-repeat right 4px;padding-right:10px;font-size:11px;}
 
 /*THIS IS PRIVATE, SHARING DISABLED*/
 .thisIsPrivate .rightContent,
@@ -89,4 +89,4 @@
 .thisIsPrivate .leftContent .cv,
 .sharingDisabled .leftContent .cv{display:none;}
 .thisIsPrivate .othersContainer,
-.sharingDisabled .othersContainer{background-image:url(../../images/common/sb_940border.png);}
+.sharingDisabled .othersContainer{background-image:url(/static/core/images/common/sb_940border.png);}

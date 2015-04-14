@@ -32,19 +32,19 @@ p.tip{font-size:11px;line-height:13px;color:#A2A1A1;padding-top:7px;}
 .relativeContainer,
 .relative{position:relative;}
 .absolute{position:absolute;}
-.backLink{padding-left:15px;background:url(../../images/common/ic_next-prev.gif) no-repeat 0 -15px;font-size:11px;}
+.backLink{padding-left:15px;background:url(/static/core/images/common/ic_next-prev.gif) no-repeat 0 -15px;font-size:11px;}
 .normalLink{font-size:11px;}
 .imageText{overflow:hidden;line-height:500px;text-indent:10000px;}
 .w960{width:940px;padding-left:10px;padding-right:10px;margin:0 auto;}
 .border-box{-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;}
 
 /*TRANSPARENCY FADE - for texts*/
-.transparency{position:absolute;right:0;top:0;background:url(../../images/common/dg_transparency.png) repeat-y 0 0;width:20px;height:15px;}
+.transparency{position:absolute;right:0;top:0;background:url(/static/core/images/common/dg_transparency.png) repeat-y 0 0;width:20px;height:15px;}
 
 /*SHADOWS*/
-.borderShadow{background:url(../../images/dashboardManager/sb_stepByStep.gif) no-repeat center 0;padding:15px 0 0;margin-top:15px;}
-.boxShadow{padding:0 0 30px;background:url(../../images/common/shadow.png) center bottom no-repeat;}
-.backShadow{background:url(../../images/common/sh_boxes.png) no-repeat;}
+.borderShadow{background:url(/static/core/images/dashboardManager/sb_stepByStep.gif) no-repeat center 0;padding:15px 0 0;margin-top:15px;}
+.boxShadow{padding:0 0 30px;background:url(/static/core/images/common/shadow.png) center bottom no-repeat;}
+.backShadow{background:url(/static/core/images/common/sh_boxes.png) no-repeat;}
 
 /*HEADINGS
 h2{font-size:22px;color:gray;font-weight:bold;}

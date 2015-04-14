@@ -34,7 +34,7 @@
     .step2 .collapsedBar.fixedBar{-moz-box-shadow:0 0 0 0 transparent !important;-webkit-box-shadow:0 0 0 0 transparent !important;box-shadow:0 0 0 0 transparent !important;}
 
 	/*LEFT COLUMN*/
-	.step2 .columns .CL .toolbar{padding-top:15px;background:url(../../images/common/sb_CL620.png) no-repeat center 0;}
+	.step2 .columns .CL .toolbar{padding-top:15px;background:url(/static/workspace/images/common/sb_CL620.png) no-repeat center 0;}
 	.step2 .columns .CL .toolbar strong{margin-right:7px;}
 	.step2 .columns .CL .toolbar a{font-size:11px;}
 	
@@ -42,7 +42,7 @@
 	.step2 .columns .CR{margin-top:0;background-position:right 0;}
 	.step2 .columns .CR .cv{left:auto;right:0;}
 	.step2 .columns .CR .tl{display:none;}
-	.step2 .boxCR .boxTitle h4{background:url(../../images/common/ic_flechaDesplegable.gif) no-repeat 286px -21px;}
+	.step2 .boxCR .boxTitle h4{background:url(/static/workspace/images/common/ic_flechaDesplegable.gif) no-repeat 286px -21px;}
 	.step2 .boxCR .boxTitle h4.collapsed{background-position:286px 17px;}
 	
 		/*WARNING TOOLTIP*/
@@ -51,7 +51,7 @@
 		.CR .warning div{padding-right:10px;}
 	
 		/*ACTIONS BOX*/
-		.step2 .actionsBox li{padding:10px 0 6px;background:url(../../images/common/bd_helpBoxSeparator.gif) no-repeat center top;color:#333;}
+		.step2 .actionsBox li{padding:10px 0 6px;background:url(/static/workspace/images/common/bd_helpBoxSeparator.gif) no-repeat center top;color:#333;}
 		.step2 .actionsBox li:first-child{background:none;padding-top:5px;}
 		.step2 .actionsBox .padding{padding-left:22px;}
 		.step2 .actionsBox li dt{padding-bottom:6px;}
@@ -66,7 +66,7 @@
 		/*HELP & TIPS*/
 		/*.step2 .helpAndTipsBox .boxInner .boxTxt p{float:left;width:190px;}*/
 		.step2 .helpAndTipsBox .boxInner .boxTxt img{float:right;width:51px;margin-top:10px;}
-		.step2 .helpAndTipsBox .boxInner p.moreSeparation.disclamerText{padding:0 0 0 10px;font-size:11px;background:url(../../images/homeManager/ic_VM.png) no-repeat 0 5px;margin-top:10px;}
+		.step2 .helpAndTipsBox .boxInner p.moreSeparation.disclamerText{padding:0 0 0 10px;font-size:11px;background:url(/static/workspace/images/homeManager/ic_VM.png) no-repeat 0 5px;margin-top:10px;}
 		.step2 .helpAndTipsBox .divisor{border-top:1px solid #e4e4e4;padding-top:10px;margin-top:10px;}
 		
 		/*ADVANCED BOX*/
@@ -78,7 +78,7 @@
 		.step2 .advancedBox li a strong{font-weight:normal;}
 		.step2 .advancedBox li a:hover strong{text-decoration:underline;}
 		.step2 .advancedBox li a em{color:#ccc;}
-		.step2 .advancedBox h5{font-size:12px;color:#333;font-weight:bold;padding:10px 0 6px;background:url(../../images/common/bd_helpBoxSeparator.gif) no-repeat center bottom;margin-bottom:10px;}
+		.step2 .advancedBox h5{font-size:12px;color:#333;font-weight:bold;padding:10px 0 6px;background:url(/static/workspace/images/common/bd_helpBoxSeparator.gif) no-repeat center bottom;margin-bottom:10px;}
 		.step2 .advancedBox .ic_Arrow{position:relative;top:-1px;}
 		.step2 .advancedBox .bulletList p .ic_Filter{display:inline-block;width:16px;position:relative;top:7px;}
 		.step2 .advancedBox .fieldMAVG{width:60px;padding:2px;font-size:11px;}
@@ -91,7 +91,7 @@
 		.step2 .helpAndTipsBox .arrowButtons{text-align:center;}
 		.step2 .helpAndTipsBox .arrowButtons li{display:inline;font-size:11px;}
 		.step2 .helpAndTipsBox .arrowButtons .sep{color:#ccc;} 
-		.step2 .helpAndTipsBox .arrowButtons a{font-size:11px;padding:0 7px;background:url(../../images/common/ic_next-prev.gif) no-repeat;}
+		.step2 .helpAndTipsBox .arrowButtons a{font-size:11px;padding:0 7px;background:url(/static/workspace/images/common/ic_next-prev.gif) no-repeat;}
 		.step2 .helpAndTipsBox .arrowButtons .next{background-position:right -1px;padding-right:14px;}
 		.step2 .helpAndTipsBox .arrowButtons .prev{background-position:0 -16px;padding-left:14px;}
 
@@ -116,8 +116,8 @@
 
 /*STEP 4*/
 .step4 .dataStreamContainer{padding:0;}
-.step4 .dataStreamBox h2{display:block;background:#fff url(../../images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;color:#4d4d4d;overflow:hidden;}
-.step4 .dataStreamBox.errorFix h2{background:#fff url(../../images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom;}
+.step4 .dataStreamBox h2{display:block;background:#fff url(/static/workspace/images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;color:#4d4d4d;overflow:hidden;}
+.step4 .dataStreamBox.errorFix h2{background:#fff url(/static/workspace/images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom;}
 .step4 .gotosource{display:none;}
 .step4 .dataStreamBox h2 a:hover{text-decoration:none;cursor:default;}
 .step4 .tagsPreview h5{color:#ef7f10;padding:15px 0 6px;font-size:14px;font-weight:normal;}}
@@ -136,7 +136,7 @@
 .bigLoader,
 .step4 .bigLoader{width:100%;}
 .bigLoader td,
-.step4 .bigLoader td{background:url(../../images/common/im_loadingWhite72.gif) no-repeat center center;}
+.step4 .bigLoader td{background:url(/static/workspace/images/common/im_loadingWhite72.gif) no-repeat center center;}
 .step4 .button{margin-right:10px;}
 .step4 .tableContent{margin-bottom:15px;}
 
@@ -163,7 +163,7 @@
 
 
 .step1 #id_disclaimerContainer {
-background: url(../../images/common/bg_whiteMask.png);
+background: url(/static/workspace/images/common/bg_whiteMask.png);
 background: rgba(255, 255, 255, 0.8);
 bottom: 0;
 left:87px;
@@ -177,7 +177,7 @@ top: 10px;
 right: 8px;
 cursor: pointer;
 outline: none;
-background: url(../../images/common/ic_actions.png) no-repeat 0 -180px;
+background: url(/static/workspace/images/common/ic_actions.png) no-repeat 0 -180px;
 display: block;
 height: 20px;
 width: 16px;
@@ -186,7 +186,7 @@ width: 16px;
 padding: 0 0 5px 10px;
 font-size: 12px;
 color: #666;
-background: url(../../images/common/ic_VM.png) no-repeat 0 5px;
+background: url(/static/workspace/images/common/ic_VM.png) no-repeat 0 5px;
 }
 .disclaimerContent, .contentTable{padding:15px;}
 .disclaimerContent ul ol li{padding-top:5px;}

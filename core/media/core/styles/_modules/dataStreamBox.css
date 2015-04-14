@@ -18,8 +18,8 @@
 .dataStreamBox h2 label:hover{text-decoration:underline;}
 .dataStreamBox h2 input[type=text]{background:#fff;width:50px;vertical-align:middle;height:17px;line-height:17px;padding:0 3px;border:1px solid #ccc;font:12px Arial, Helvetica, sans-serif;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}
 
-.dataStreamBox h2 a{display:block;background:#fff url(../../images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;color:#4d4d4d;overflow:hidden;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
-.dataStreamBox h2 img{width:45px;height:45px;border:1px solid #e8e8e7;background:url(../../images/homeManager/im_defaultAvatar45x45.gif) no-repeat center center;overflow:hidden;text-indent:10000px;margin-right:10px;text-shadow:0 1px 0 #fff;}
+.dataStreamBox h2 a{display:block;background:#fff url(/static/core/images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;color:#4d4d4d;overflow:hidden;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
+.dataStreamBox h2 img{width:45px;height:45px;border:1px solid #e8e8e7;background:url(/static/core/images/homeManager/im_defaultAvatar45x45.gif) no-repeat center center;overflow:hidden;text-indent:10000px;margin-right:10px;text-shadow:0 1px 0 #fff;}
 .dataStreamBox h2 .txt{/*width:10000px;*/display:block;}
 .dataStreamBox h2 .txt .titleDS{color:#290302;font-size:14px;display:block;line-height:18px;overflow:hidden;height:36px;text-shadow:0 0 0 transparent;white-space:nowrap;}
 .dataStreamBox h2 .txt .titleDS .sep{color:#dfdddd;padding:0 2px;}
@@ -32,7 +32,7 @@
 .infoDS .dateDS{color:#e28129;}
 .infoDS .dateDS img{width:15px;height:15px;background:none;border:none;}
 
-.dataStreamBox h2 a:hover{background:#ef7f10 url(../../images/common/dg_Servicio.gif) repeat-x 0 -53px;color:#fff;text-decoration:none;border-color:#c87629;}
+.dataStreamBox h2 a:hover{background:#ef7f10 url(/static/core/images/common/dg_Servicio.gif) repeat-x 0 -53px;color:#fff;text-decoration:none;border-color:#c87629;}
 .dataStreamBox h2 a:hover img{border-color:#e0ab4e;}
 .dataStreamBox h2 a:hover .txt{text-shadow:0 1px 0 #C56B12;}
 .dataStreamBox h2 a:hover .txt .titleDS{color:#fff;}
@@ -83,7 +83,7 @@
 .dataStreamBox .Mensaje .Tabla .longText{width:250px;overflow:hidden;white-space:normal;}
 
 .dataStreamBox.errorFix h2 a,
-.dataStreamBox.errorFix h2 a:hover{background:#fff url(../../images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom !important;border-bottom:1px solid #e2e0e0 !important;}
+.dataStreamBox.errorFix h2 a:hover{background:#fff url(/static/core/images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom !important;border-bottom:1px solid #e2e0e0 !important;}
 .dataStreamBox.errorFix h2 a:hover{border-color:#eda99b !important;}
 .dataStreamBox.errorFix h2 a:hover .txt{text-shadow:0 0 0 transparent;}
 
@@ -112,14 +112,14 @@
 
 /*LOADING*/
 .dataStreamContainer .Loading{border:0;margin:0;padding:0;width:100%;}
-.dataStreamContainer .Loading td{background:#fff url(../../images/common/im_smallAjaxLoader.gif) no-repeat center center;width:auto;height:193px;}
+.dataStreamContainer .Loading td{background:#fff url(/static/core/images/common/im_smallAjaxLoader.gif) no-repeat center center;width:auto;height:193px;}
 .dataStreamContainer .Loading td a{height:193px;display:block;line-height:245px;text-align:center;overflow:hidden;width:auto;font-size:11px;}
 .dataStreamContainer .Loading td a:hover{color:#F25665;text-decoration:none;}
 .dataStreamContainer .Loading td a span{position:relative;left:2px;}
 
 /*DATASTREAM ACTIONS*/
 .dataStreamActions{border:1px solid #E2E0E0;}
-.dataStreamActions .actionsInner{background:url(../../images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 0;border:1px solid #fff;border-top:0;}
+.dataStreamActions .actionsInner{background:url(/static/core/images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 0;border:1px solid #fff;border-top:0;}
 .dataStreamActions .sep{border-left:1px solid #E2E0E0;background:#fff;height:23px;display:block;width:1px;overflow:hidden;}
 
     /*TOP ACTIONS*/
@@ -135,7 +135,7 @@
     .dataStreamActions .helpTooltip .helpTxt{text-align:center;float:none;}
     
     /*COLLECTED FROM*/
-    .dataStreamActions .collectedFrom:hover{background:url(../../images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;}
+    .dataStreamActions .collectedFrom:hover{background:url(/static/core/images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;}
     .dataStreamActions .collectedFrom.noHover:hover{background:none;}
     .dataStreamActions .toolbar .ic_CollectedFrom,
     .dataStreamActions .toolbar .ic_File,
@@ -149,7 +149,7 @@
     /*PULLDOWN MENU*/
     .dataStreamActions .dashboard-dataservice-tooltip{-moz-border-radius:10px 10px 0 10px;-webkit-border-radius:10px 10px 0 10px;-border-radius:10px 10px 0 10px;}
     .dataStreamActions .dashboard-dataservice-tooltip .J{background-position:0 -125px;position:absolute;top:auto;bottom:-25px;padding-top:0;}
-    .dataStreamActions .dashboard-dataservice-tooltip .In{background:#fff url(../../images/common/dg_Tooltip_Up.gif) repeat-x 0 0;-moz-border-radius:5px 5px 0 5px;-webkit-border-radius:5px 5px 0 5px;border-radius:5px 5px 0 5px;}
+    .dataStreamActions .dashboard-dataservice-tooltip .In{background:#fff url(/static/core/images/common/dg_Tooltip_Up.gif) repeat-x 0 0;-moz-border-radius:5px 5px 0 5px;-webkit-border-radius:5px 5px 0 5px;border-radius:5px 5px 0 5px;}
 
     /*STARS*/
     .dataStreamActions .stars{margin:4px 3px 0 4px;}
@@ -164,8 +164,8 @@
 /*PULLDOWN MENUS - ACTIONS and SHARE*/
 .dataStreamActions .dashboard-dataservice-tooltip{left:auto;right:-7px;top:auto;bottom:23px;-moz-border-radius:10px 10px 0 0;-webkit-border-radius:10px 10px 0 0;-border-radius:10px 10px 0 0;border-bottom:0;}
 .dataStreamActions .dashboard-dataservice-tooltip .menuInner{border:1px solid #dfdddd;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
-.dataStreamActions .dashboard-dataservice-tooltip .In{border-color:#fff;padding-bottom:0;padding-top:10px;background:#fff url(../../images/dashboardManager/dg_pulldownMenu.gif) repeat-x 0 bottom;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;text-shadow:0 1px 0 #fff;}
-.dataStreamActions .dashboard-dataservice-tooltip .J{width:auto;height:23px;background:url(../../images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;top:auto;bottom:-25px;right:-1px;padding-top:2px;padding-left:0;border:1px solid #fff;border-top:0;border-bottom:0;}
+.dataStreamActions .dashboard-dataservice-tooltip .In{border-color:#fff;padding-bottom:0;padding-top:10px;background:#fff url(/static/core/images/dashboardManager/dg_pulldownMenu.gif) repeat-x 0 bottom;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;border-radius:3px 3px 0 0;text-shadow:0 1px 0 #fff;}
+.dataStreamActions .dashboard-dataservice-tooltip .J{width:auto;height:23px;background:url(/static/core/images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;top:auto;bottom:-25px;right:-1px;padding-top:2px;padding-left:0;border:1px solid #fff;border-top:0;border-bottom:0;}
 
     /*ACTIONS MENU*/
     .dataStreamActions .actionsMenu .dashboard-dataservice-tooltip{right:-2px;border-right:0;-moz-border-radius:10px 0 0 0;-webkit-border-radius:10px 0 0 0;-border-radius:10px 0 0 0;}
@@ -179,7 +179,7 @@
     .dataStreamActions .shareMenu .dashboard-dataservice-tooltip .share .J .ic_Menu span{margin-right:4px;}
     
 /*ICON TABS*/
-.iconTabs li{margin-left:5px;border:1px solid #dbdada;border-bottom:0;position:relative;top:1px;font-size:11px;background:#fff url(../../images/common/dg_iconTabs.gif) repeat-x 0 0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;-border-radius:3px 3px 0 0;}
+.iconTabs li{margin-left:5px;border:1px solid #dbdada;border-bottom:0;position:relative;top:1px;font-size:11px;background:#fff url(/static/core/images/common/dg_iconTabs.gif) repeat-x 0 0;-moz-border-radius:3px 3px 0 0;-webkit-border-radius:3px 3px 0 0;-border-radius:3px 3px 0 0;}
 .iconTabs li a{height:18px;line-height:18px;text-shadow:0 1px 0 #fff;cursor:pointer;}
 .toolbar .iconTabs .Icon,
 .toolbar .iconTabs .ic_Column:hover{width:auto;padding:0 8px 0 22px;}
@@ -192,11 +192,11 @@
 /*CHARTS*/
 .chartBox{overflow:hidden;}
     
-    .chartBox h2 img{height:45px;border:1px solid #e8e8e7;background:url(../../images/homeManager/im_defaultAvatar45x45.gif) no-repeat center center;overflow:hidden;text-indent:10000px;margin-right:10px;text-shadow:0 1px 0 #fff;}
+    .chartBox h2 img{height:45px;border:1px solid #e8e8e7;background:url(/static/core/images/homeManager/im_defaultAvatar45x45.gif) no-repeat center center;overflow:hidden;text-indent:10000px;margin-right:10px;text-shadow:0 1px 0 #fff;}
     
     /*CHART TITLE*/
-    .chartBox .chartTitle a{font-weight:bold;font-size:12px;font-weight:normal;height:20px;overflow:hidden;line-height:20px;text-shadow:0 1px 0 #fff;display:block;padding:0 11px;color:#290302;background:#fff url(../../images/dashboardManager/dg_dashboardCharts.gif) repeat-x 0 bottom;border:1px solid #E2E0E0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
-    .chartBox .chartTitle a:hover{background:#ef7f10 url(../../images/common/dg_Servicio.gif) repeat-x 0 -53px;color:#fff;text-decoration:none;border-color:#c87629;text-shadow:0 1px 0 #C56B12;}
+    .chartBox .chartTitle a{font-weight:bold;font-size:12px;font-weight:normal;height:20px;overflow:hidden;line-height:20px;text-shadow:0 1px 0 #fff;display:block;padding:0 11px;color:#290302;background:#fff url(/static/core/images/dashboardManager/dg_dashboardCharts.gif) repeat-x 0 bottom;border:1px solid #E2E0E0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;}
+    .chartBox .chartTitle a:hover{background:#ef7f10 url(/static/core/images/common/dg_Servicio.gif) repeat-x 0 -53px;color:#fff;text-decoration:none;border-color:#c87629;text-shadow:0 1px 0 #C56B12;}
     .chartBox .chartTitle .txt{padding:0 11px;display:block;height:23px;overflow:hidden;line-height:23px;}
     .chartBox .chartTitle strong{font-weight:bold;}
     .chartBox .chartTitle .sep{color:#e6e0e0;padding:0 3px;}
@@ -208,7 +208,7 @@
 
     /*ERROR*/
     .chartBox.errorFix .chartTitle a,
-    .chartBox.errorFix .chartTitle a:hover{color:#eda99b !important;background:#fff url(../../images/dashboardManager/dg_DSError.gif) repeat-x 0 -10px !important;text-shadow:0 0 0 transparent !important;}
+    .chartBox.errorFix .chartTitle a:hover{color:#eda99b !important;background:#fff url(/static/core/images/dashboardManager/dg_DSError.gif) repeat-x 0 -10px !important;text-shadow:0 0 0 transparent !important;}
     .chartBox.errorFix .chartTitle a:hover{color:#f08080 !important;border-color:#eda99b !important;}
 
 /*VIEW MORE LINK*/

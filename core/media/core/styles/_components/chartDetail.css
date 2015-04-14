@@ -7,7 +7,7 @@
 .blockPageTitle .leftContent{float:none;padding-right:320px;width:auto;}
 .blockPageTitle .bl{right:299px;}
 .blockPageTitle .rightContent{position:absolute;top:0;right:0;border-top:1px solid #fff;}
-.blockPageTitle .othersContainer{background:url(../../images/common/sb_contentAlpha.png) no-repeat center -1px;border-top:1px solid #d6d5d6;}
+.blockPageTitle .othersContainer{background:url(/static/core/images/common/sb_contentAlpha.png) no-repeat center -1px;border-top:1px solid #d6d5d6;}
 .shareBox .firstRow .ao-wink span{position:relative;top:3px;}
 .dropDownMenu{top:4px;}
 .dropDownMenu .dashboard-dataservice-tooltip{width:120px;left:-100px;}

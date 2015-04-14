@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load static from staticfiles %}
+{% load i18n compress staticfiles %}
 <!DOCTYPE html>
 <html lang="{% if auth_manager.language == 'en' %}en-US{% endif %}{% if auth_manager.language == 'es' %}es-ES{% endif %}{% if auth_manager.language == 'pt' %}pt-BR{% endif %}">
 <head>

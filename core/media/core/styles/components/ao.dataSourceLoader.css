@@ -9,7 +9,7 @@ html body  table.ao-table-selected tr.ao-row-selectable th.ao-table-selected{bac
 html body .ao-table-selectable{border-collapse:collapse !important;cursor:pointer !important;}
 
 /*BORDER DASHED*/
-html body .ao-border{background:url(../../images/dataServicePublisher/im_animatedBorder.gif) repeat 0 0 !important;padding:2px !important;}
+html body .ao-border{background:url(/static/core/images/dataServicePublisher/im_animatedBorder.gif) repeat 0 0 !important;padding:2px !important;}
 html body .ao-border table{background:white !important;margin:0 !important;border:2px solid #fff !important;}
 
 	/*DIVS*/

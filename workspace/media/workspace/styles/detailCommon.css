@@ -26,7 +26,7 @@
             border-radius:5px 5px 0 0;
 }
 .sidebar-container .box .title h1{height:30px;line-height:30px;font-size:14px;font-weight:bold;color:#666;padding:0 12px;text-shadow:0 1px 0 #fff;}
-.sidebar-container .box .title .close{width:31px;height:30px;border-left:1px solid #dadada;display:block;background:url(../../images/microsites/ic_buttons.png) no-repeat center 0;text-indent:-10000px;cursor:pointer;}
+.sidebar-container .box .title .close{width:31px;height:30px;border-left:1px solid #dadada;display:block;background:url(/static/workspace/images/microsites/ic_buttons.png) no-repeat center 0;text-indent:-10000px;cursor:pointer;}
 .sidebar-container .box .title .close:hover{background-position:center -30px;}
 .sidebar-container .box .boxContent{/* overflow:auto;overflow-x:hidden;overflow-y:auto; */ padding:0 12px;}
 

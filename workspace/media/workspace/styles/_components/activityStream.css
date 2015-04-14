@@ -20,7 +20,7 @@ body > .layout{height:auto;min-height:100%;}
 
 
 /*ACTIVITY STREAM*/
-.inInner{background:#fff url(../../images/_workspace/bg_sidebar_245.gif) repeat-y 0 0;}
+.inInner{background:#fff url(/static/workspace/images/_workspace/bg_sidebar_245.gif) repeat-y 0 0;}
 .columns .CL{width:220px;padding-bottom:30px;}
 .columns .CR{width:718px;padding-bottom:30px;min-height:550px;}
 
@@ -43,7 +43,7 @@ body > .layout{height:auto;min-height:100%;}
  .username{padding-left:50px;width:120px;}
  .username p{padding:0 0 6px 0;font-weight:bold;color:#000000;font-size:14px;}
  
- .stats{background: url(../../images/_workspace/bg_stats.png) no-repeat center 0;margin-top:10px;font-size:15px;}
+ .stats{background: url(/static/workspace/images/_workspace/bg_stats.png) no-repeat center 0;margin-top:10px;font-size:15px;}
  .stats p{padding:2px 0 10px 0;font-size:11px;}
  .statsLeft{float:left;padding-top:25px;width:72px;}
  .statsRight{float:right;margin:26px 2px 0 0;width:72px;}
@@ -66,13 +66,13 @@ body > .layout{height:auto;min-height:100%;}
  .open_data_metrics table .c1{text-align:left;border-left:0;}
  .open_data_metrics th{background-color:#f1f0f0;color:#918989;min-width:50px;}
  .open_data_metrics .topBorder{border-top:1px solid #ffffff;padding:2px 3px 3px;height:14px;}
- .open_data_metrics .bottomShadow{background:url(../../images/_workspace/bg_bottomShadow.png) no-repeat center bottom ;padding-bottom:6px;}
+ .open_data_metrics .bottomShadow{background:url(/static/workspace/images/_workspace/bg_bottomShadow.png) no-repeat center bottom ;padding-bottom:6px;}
  .open_data_metrics .bottomBorder{border-bottom:1px solid #ffffff;border-radius:4px;}
 
 
 
 
- .leftIcons{background:url(../../images/_workspace/ic_leftcolumn.png) no-repeat;padding:1px 0 0 24px; color:#000000;font-weight:bold;}
+ .leftIcons{background:url(/static/workspace/images/_workspace/ic_leftcolumn.png) no-repeat;padding:1px 0 0 24px; color:#000000;font-weight:bold;}
  .leftIcons.datasets{background-position:0 0;}
  .leftIcons.streams{background-position:0 -20px;}
  .leftIcons.charts{background-position:0 -40px;}
@@ -82,14 +82,14 @@ body > .layout{height:auto;min-height:100%;}
 
  /* Right Column */
 
- .summary{padding:0 15px;background: url(../../images/_workspace/bg_summary.gif) repeat-x;text-shadow:0 1px 0 #FFFFFF;margin-left:1px;height:68px;line-height:68px;}
+ .summary{padding:0 15px;background: url(/static/workspace/images/_workspace/bg_summary.gif) repeat-x;text-shadow:0 1px 0 #FFFFFF;margin-left:1px;height:68px;line-height:68px;}
  .summary .whiteBorder{float:right;}
  .summary h2{display:inline-block;font-weight:bold;font-size:20px;}
  .as_logo{display:inline-block;background-color:#FFFFFF;float:right;margin-top:7px;padding:1px;border:1px solid #918989;max-height:48px;overflow:hidden;}
  .as_logo img{width:82px;}
 
  .main_activity_stream{width:100%;height:100%;}
- .activityShadow{background:url(../../images/_workspace/bg_activityshadow.png) no-repeat center;padding-bottom:9px;}
+ .activityShadow{background:url(/static/workspace/images/_workspace/bg_activityshadow.png) no-repeat center;padding-bottom:9px;}
  .user{padding:24px 20px 0;}
  .user .avatar{background-color:#FFFFFF;float:left;border:1px solid #918989;padding:1px;}
  .user .avatar img{width:88px;}
@@ -99,7 +99,7 @@ body > .layout{height:auto;min-height:100%;}
  .user .as_nick{font-weight:bold;color:#000000;}
  .user .pipe{color:#DDDDDD;padding:0 12px;}
 
- .range{background:url(../../images/_workspace/ic_roles.gif) no-repeat;padding-left: 18px;}
+ .range{background:url(/static/workspace/images/_workspace/ic_roles.gif) no-repeat;padding-left: 18px;}
  .range.admin{background-position:0 0;}
  .range.enhancer{background-position:0 -20px;}
  .range.collector{background-position:0 -40px;}
@@ -115,12 +115,12 @@ body > .layout{height:auto;min-height:100%;}
  .landingTips .title h3{color:#f17f00;font-size:18px;font-weight:bold;vertical-align:baseline;line-height:28px;height:25px;display:inline-block;}
  .landingTips .title p{vertical-align:baseline;color:#333;font-size:14px;line-height:28px;height:25px;display:inline-block;padding-left:6px;}
  .landingTips .border{border-top:1px solid #fcd7ae;}
- .landingTips .borderInner{border-top:1px solid #fffcf7;padding-top:15px;background:url(../../images/_workspace/bg_sepLanding.gif) no-repeat 208px center;}
+ .landingTips .borderInner{border-top:1px solid #fffcf7;padding-top:15px;background:url(/static/workspace/images/_workspace/bg_sepLanding.gif) no-repeat 208px center;}
  .landingTips .boxIcon{width:198px;float:left;}
  .landingTips .margin{margin-right:30px;}
  .landingTips .boxIcon h4{font-size:14px;font-weight:bold;height:24px;line-height:24px;color:#454545;background:url(/media_website/images/howItWorks/ic_howItWorks.png) no-repeat 0 0;padding-left:28px;}
  .landingTips .boxIcon h4 a{color:#333;}
- .landingTips .ic_Config h4{background-image:url(../../images/_workspace/ic_config.png);padding-left:28px;}
+ .landingTips .ic_Config h4{background-image:url(/static/workspace/images/_workspace/ic_config.png);padding-left:28px;}
  .landingTips .ic_Collect h4{background-position:0 -4px;padding-left:26px;}
  .landingTips .ic_Report h4{background-position:0 -122px;}
   .landingTips .ic_Publish h4{background-position:0 -61px;}
