@@ -558,7 +558,6 @@ class IndexTankFinder(Finder):
         self.query      = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
         self.resource   = kwargs.get('resource', 'all')
-        self.is_private = 0
         page            = kwargs.get('page', 0)
         max_results     = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice           = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
@@ -681,10 +680,6 @@ class IndexTankFinder(Finder):
         # user search is here to prevent ORs ANDs bugs we put ()
         if l_indextank_query:
             l_indextank_query = '(' + l_indextank_query + ')'
-
-        # privates
-        subquery = self._get_query({'is_private': self.is_private})
-        l_indextank_query = self._add_query(l_indextank_query, subquery)
 
         # accounts!
         if self.account_id:

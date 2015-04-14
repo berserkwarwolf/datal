@@ -32,7 +32,6 @@ class DependencyInjector(object):
         preferences = account.get_preferences()
         preferences.load_all()
         request.preferences = preferences
-        request.is_private_site = False
 
         bucket_name = preferences['account_bucket_name']
         if bucket_name:

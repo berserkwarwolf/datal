@@ -14,7 +14,6 @@ def workspace_open_data_metrics(auth_manager):
     from django.db import connection
     cursor = connection.cursor()
 
-    is_private_site = auth_manager.get_account().is_private()
     user_id     = auth_manager.id
     account_id  = auth_manager.account_id
     language    = auth_manager.language
@@ -93,8 +92,7 @@ def createDashboard(userId, dashboardId, auth_manager, meta_data = None):
         dashboard_form = UpdateDashboardForm(initial={'dashboard_revision_id' : dashboard_id
                                                       ,'title' : dashboard_revision.title
                                                       , 'description' : dashboard_revision.description
-                                                      , 'category' : dashboard_revision.category_id
-                                                      , 'is_private' : False}, prefix='dashboard')
+                                                      , 'category' : dashboard_revision.category_id}, prefix='dashboard')
 
         if meta_data:
             meta_form = MetaForm(metadata=meta_data)
@@ -152,14 +150,12 @@ def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision
                                                                         ,'datastream_revision_id' : datastream_revision.datastreamrevision_id
                                                                         ,'title' : datastream_revision.title
                                                                         , 'description' : datastream_revision.description
-                                                                        , 'category' : datastream_revision.category_id
-                                                                        , 'is_private' : False}, prefix='datastream')
+                                                                        , 'category' : datastream_revision.category_id}, prefix='datastream')
             else:
                 datastream_form = UpdateDataStreamForm(initial={'datastream_revision_id' : datastream_revision.datastreamrevision_id
                                                                 ,'title' : datastream_revision.title
                                                                 , 'description' : datastream_revision.description
-                                                                , 'category' : datastream_revision.category_id
-                                                                , 'is_private' : False}, prefix='datastream')
+                                                                , 'category' : datastream_revision.category_id}, prefix='datastream')
 
     if dataset_revision_id:
         if auth_manager.is_level('level_5'):

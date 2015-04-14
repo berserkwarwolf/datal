@@ -134,9 +134,8 @@
 			                    <li class="J"><a href="javascript:;" title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu open"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
 			                    <li class="Item"><a href="{% url "datastream_manager.action_csv" datastream.datastream_id datastream.slug %}{%if end_point %}?{{end_point}}{%endif%}" id="id_exportToCSV_" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                             <!--<li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>-->
-	                          {% if not is_private_site %}
+	                          
 		                          <li class="Item"> <a href="javascript:;" id="id_embedButton" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow"><span>{% trans "APP-GETEMBEDCODE-TEXT" %}</span></a></li>
-		                        {% endif %}
 
 			                </ul>
 			            </div>

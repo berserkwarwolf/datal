@@ -109,7 +109,6 @@
         "fields": {
             "user": 1,
             "guid": "SPANI-LFP-TEAM-ON-FIRST",
-            "is_private": 1
         }
     },
     {
@@ -180,7 +179,6 @@
         "fields": {
             "user": 1,
             "guid": "PRIVATE-DS",
-            "is_private": 1
         }
     },
     {
@@ -362,7 +360,6 @@
         "fields": {
             "user": 1,
             "guid": "TOP-OF-SPORT-FOLLO-THE",
-            "is_private": 1
         }
     },
     {

@@ -118,7 +118,6 @@ def action_view(request, id, slug):
             , permalink=widget.permalink()
             , guid=widget.guid
             , is_self_publishing=widget.is_self_publishing()
-            , is_private=False
             , datastreamrevision_id=widget.datastreamrevision_id
             , can_view = True
             , slug = widget.slug

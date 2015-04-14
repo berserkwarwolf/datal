@@ -116,7 +116,6 @@ class DatasetSearchifyDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(dataset_revision.created_at.timetuple())),
                      'end_point': dataset_revision.end_point,
-                     'is_private': 0,
                     },
                 'categories': {'id': unicode(category.id), 'name': category.name}
                 }

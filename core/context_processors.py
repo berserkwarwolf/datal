@@ -2,8 +2,7 @@ from django.conf import settings
 
 def request_context(request):
     d = {'auth_manager': request.auth_manager}
-    d['is_private_site'] = False
-
+    
     my_settings = {'BASE_URI' : settings.BASE_URI,
                   'API_URI' : settings.API_URI,
                   'API_KEY' : settings.API_KEY,

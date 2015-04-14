@@ -17,7 +17,6 @@ class DependenciesInjector(object):
 
         preferences = request.user.account.get_preferences()
         request.preferences = preferences
-        request.is_private_site = False
 
         bucket_name = preferences['account_bucket_name']
         if not bucket_name:

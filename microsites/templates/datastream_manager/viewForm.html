@@ -39,7 +39,6 @@
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     {% endcompress %}
-
     <script type="text/javascript" src="/js_core/base_modules/embed_code/embedCode.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_microsites/datastream_manager/datastreamModules.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_microsites/datastream_manager/viewForm.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -76,7 +75,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="blockPageTitle{% if datastream.is_private %} thisIsPrivate{% endif %} branded{% if not preferences.account_enable_sharing %} sharingDisabled{% endif %}{% if can_share %} sharingDisabled{% endif %}">
+    <div class="blockPageTitle branded{% if not preferences.account_enable_sharing %} sharingDisabled{% endif %}{% if can_share %} sharingDisabled{% endif %}">
         <div class="titleGradient">
             <div class="panel clearfix hreview-aggregate">
 
@@ -190,4 +189,3 @@
 {% block popupsOverlay %}
     {% include "datastream_manager/dataStreamOverlays.html" %}
 {% endblock %}
-

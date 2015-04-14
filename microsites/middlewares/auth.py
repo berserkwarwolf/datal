@@ -13,7 +13,6 @@ class AccessManager(object):
         """
         Checks user, role and account
         """
-        request.is_private_site = False
 
         # for anonymous users
         request.session['django_language'] = settings.LANGUAGES[0][0]

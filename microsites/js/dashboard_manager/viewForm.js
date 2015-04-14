@@ -2,7 +2,6 @@ var fDataServiceId;
 var lShareBoxes;
 var fUserNick;
 var fDashboardId;
-var fIsPrivate;
 var fIsBranded;
 var fMoveBeforeIndex;
 var fDataStreamNeedToMove = false;
@@ -84,7 +83,6 @@ $(document).ready(function(){
     $fDashboardContainer                = $("#id_dashboard_container");
     fDashboardId                        = $fDashboardContainer.data('dashboard_id');
     fUserNick                           = $fDashboardContainer.data('user_nick');
-    fIsPrivate                          = $fDashboardContainer.data('is_private');
     fIsBranded                          = $fDashboardContainer.data('is_branded');
 
     $fSwitchDashboardContainer          = $("#id_switch_dashboard_container");
@@ -183,7 +181,7 @@ function initDashboardPanel(){
 
     var lName = $.trim($("#id_maximized_dashboard_name").text());
 
-    if (!fIsPrivate && !fIsSharingDisabled) {
+    if (!fIsSharingDisabled) {
 
         if( typeof(BitlyClient) != 'undefined' ) {
             var lUrl = $('link[rel=canonical]').attr('href');
@@ -476,8 +474,7 @@ function initDashboardDataServices(){
 
 function initDashboardDataService(pIndex){
     var $lDashboardDataServiceContainer = $fDashboardDataServicesContainers.eq(pIndex);
-    var isPrivate = $lDashboardDataServiceContainer.data('dataservice_is_private');
-
+    
     $lDashboardDataServiceContainer.find('div[id*=id_dashboard_dataservice_goToSource_]').css('visibility','hidden');
     $lDashboardDataServiceContainer.find('div[id*=id_dashboard_dataservice_toolbar_]').css('visibility','hidden');
 
@@ -496,10 +493,8 @@ function initDashboardDataService(pIndex){
         });
 
     }
-    if (!isPrivate) {
-        $lDashboardDataServiceContainer.find('a[id*=id_addEmbedDataServiceButton_]').bind('click', {index: pIndex}, onAddAndEmbedDataServiceButtonClicked);
-        $lDashboardDataServiceContainer.find('a[id*=id_googlespreadsheetDataStreamButton_]').bind('click', {index: pIndex}, showGoogleSpreadsheet);
-    }
+    $lDashboardDataServiceContainer.find('a[id*=id_addEmbedDataServiceButton_]').bind('click', {index: pIndex}, onAddAndEmbedDataServiceButtonClicked);
+    $lDashboardDataServiceContainer.find('a[id*=id_googlespreadsheetDataStreamButton_]').bind('click', {index: pIndex}, showGoogleSpreadsheet);
     
     $lDashboardDataServiceContainer.find('a[id*=id_resetDashboardDataServiceButton_]').bind('click', {index: pIndex}, onResetDashboardDataServiceButtonClicked);
     $lDashboardDataServiceContainer.find('a[id*=id_maximizeDashboardDataServiceButton_]').bind('click', {index: pIndex}, onMaximizeDashboardDataServiceButtonClicked);
@@ -747,8 +742,6 @@ function onSuccessDataServiceExecute(pResponse){
     lHtml += '<span class="categoryDS">' + $lDashboardDataServiceContainer.data('dataservice_category_name')
                                 +'</span></span>'
                         + '</span>';
-    if( $lDashboardDataServiceContainer.data( 'dataservice_is_private' ) )
-        lHtml += '<span class="toolbar"><span class="Icon ic_Private"><span class="DN">' + gettext( "APP-PRIVATEDS-TEXT" ) + '</span></span></span>';
     lHtml += '</a>'+
         '</h2>';
 

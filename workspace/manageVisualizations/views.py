@@ -187,7 +187,6 @@ def create(request, viz_type='index'):
         visualization.create(datastream=datastream_revision.datastream, title=form.cleaned_data['title']
                     , data_source=form.cleaned_data['data_source']
                     , select_statement=form.cleaned_data['select_statement']
-                    , is_private=False
                     , category_id=form.cleaned_data['category']
                     , description=form.cleaned_data['description']
                     , status = form.cleaned_data['status'])

@@ -1,7 +1,6 @@
 {% load i18n local_tags %}
 
 {% if preferences.enable_junar_footer %}
-	{% if not is_private_site %}
 		<div class="miniFooterJunar">
 		    <div class="w960 clearfix">
 		    	<ul class="clearfix FL">
@@ -26,14 +25,5 @@
 					</p>
 		    </div>
 		</div>
-	{% else %}
-		<div class="miniFooterJunar">
-	    <div class="w960 clearfix">
-	      <ul class="clearfix FL">
-	      	<li><a href="/signout" title="{% trans 'APP-SIGNOUT-TEXT' %}">{% trans 'APP-SIGNOUT-TEXT' %}</a></li>
-	      </ul>
-	    	<p class="FR"><a href="http://www.junar.com/" title="Junar, the open data platform" class="logoJunar" target="_blank">Powered by <strong>Junar, the open data platform</strong></a></p>
-	    </div>
-		</div>
-	{% endif %}
+	
 {% endif %}

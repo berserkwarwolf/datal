@@ -20,14 +20,12 @@
 </div>
 {% endoverlay %}
 
-{% if not is_private_site %}
 
   <!-- Embed overlay -->
   {% if enable.embed.options %}
     {% include "embed_code/embedCode.html" %}
   {% endif %}
 
-{% endif %}
 
 {% if can_share %}
   {% privateDataStreamShareForm datastream.datastream_id auth_manager %}
