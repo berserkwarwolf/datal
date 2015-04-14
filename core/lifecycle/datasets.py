@@ -4,14 +4,14 @@ import logging
 from django.db.models import F, Max
 from django.conf import settings
 from django.db import transaction
-
+from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IlegalStateException
-from workspace.daos.datasets import *
+from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
 logger = logging.getLogger(__name__)
@@ -290,8 +290,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _log_activity(self, action_id):
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
                                                                   self.dataset_revision.id, self.dataseti18n.title)
-    def _delete_cache(self, cache_key, cache_db=0):
-        return super(DatasetLifeCycleManager, self)._delete_cache(cache_key=cache_key, cache_db=cache_db)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

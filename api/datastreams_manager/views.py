@@ -3,7 +3,7 @@ from api.models import *
 from api.http import JSONHttpResponse, HttpResponse
 from api.managers import *
 from api.datastreams_manager import forms as formsw #TODO fix moving to core or someting similar
-from workspace.daos.datasets import DatasetDBDAO #TODO fix moving to core or someting similar
+from core.daos.datasets import DatasetDBDAO
 from api.decorators import public_access_forbidden
 from api.helpers import get_domain, add_domain_to_datastream_link
 from core.reports_manager.helpers import create_report

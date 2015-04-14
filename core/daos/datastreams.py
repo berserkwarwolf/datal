@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from core.exceptions import SearchIndexNotFoundException
-from core.models import DatastreamI18n
-from workspace import settings
+from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
+from core.models import DatastreamI18n
+
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
