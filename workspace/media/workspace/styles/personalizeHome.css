@@ -145,8 +145,8 @@
 .configs .buttonsSection fieldset.imageComponent,
 .configs .linksSection fieldset.imageComponent{padding-top:0;}
 .configs .formBox fieldset.imageComponent .arrangeIcon{display:block;margin-right:13px;width:13px;height:33px;background:url(../images/personalizeHome/ic_arrange.gif) no-repeat 0 center;}
-.configs .formBox fieldset.imageComponent .arrangeIcon:hover{cursor:move;cursor:url(/media_core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
-{cursor:move;cursor:url(/media_core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
+.configs .formBox fieldset.imageComponent .arrangeIcon:hover{cursor:move;cursor:url(/static/core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
+{cursor:move;cursor:url(/static/core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
 .configs .formBox fieldset.imageComponent .rowSeparation{padding-bottom:5px;}
 .configs .formBox fieldset.imageComponent table img,
 .configs .formBox fieldset.imageComponent img{width:108px;margin:0 10px 5px 0;float:left;border:1px solid #d9d7d7;border-radius:3px;}

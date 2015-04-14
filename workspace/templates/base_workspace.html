@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
+{% load compress staticfiles %}
 
 {% block css_includes %}
-	<link href="/media_workspace/styles/common.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+    {% compress css %}
+	<link href="{% static 'workspace/styles/common.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+    {% endcompress %}
 {% endblock %}
 
 {% block js_includes %}

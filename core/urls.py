@@ -23,7 +23,6 @@ urlpatterns = patterns('',
     (r'^review/', include('workspace.review_manager.urls')),
 
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
-    (r'^media_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'media')}),
 
     # please leave me always as the last url pattern
     url(r'^(?P<admin_url>[A-Za-z0-9\-]+)/$', 'workspace.accounts.views.signin', name='accounts.account_signin'),

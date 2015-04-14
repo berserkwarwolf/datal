@@ -139,7 +139,7 @@ var FinishView = StepView.extend({
 		$.gritter.add({
 			title: 'Error',
 			text: gettext('ERROR-LOADING-DATASET'),
-			image: '/media_workspace/images/common/ic_validationError32.png',
+			image: '/static/workspace/images/common/ic_validationError32.png',
 			sticky: true,
 			time: ''
 		});

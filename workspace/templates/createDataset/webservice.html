@@ -1,13 +1,14 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% block meta %}
-<link href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen">
-<link type="text/css" href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen">
+{% compress css %}
+<link href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css' %}" type="text/css" rel="stylesheet" media="screen">
+<link type="text/css" href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload.css' %}" type="text/css" rel="stylesheet" media="screen">
 
-<link href="/media_workspace/styles/createCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/createDataset.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-
+<link href="{% static 'workspace/styles/createCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/createDataset.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script language="javascript" src="/js_workspace/processManager/dataset/collectWebserviceParamModel.js?id={{settings.VERSION_JS_CSS}}"></script>

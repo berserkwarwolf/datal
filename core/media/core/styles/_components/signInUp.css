@@ -265,7 +265,7 @@ body, html{background:#fff;}
     .accountSignUp .individualSignInBox .pageFormContainer .domainRow{position:relative;}
     .accountSignUp .individualSignInBox .pageFormContainer .domainRow .domainText{font-size:14px;color:#000;padding:10px 3px;display:block;}
     .accountSignUp .individualSignInBox .pageFormContainer .domainRow input[type="text"]{width:116px;}
-    .accountSignUp .individualSignInBox .pageFormContainer .domainRow .availableBox{width:16px;height:14px;background:url(/media_core/images/homeManager/ic_valid.gif) no-repeat 0 0;display:none;position:absolute;right:-19px;top:8px;}
+    .accountSignUp .individualSignInBox .pageFormContainer .domainRow .availableBox{width:16px;height:14px;background:url(/static/core/images/homeManager/ic_valid.gif) no-repeat 0 0;display:none;position:absolute;right:-19px;top:8px;}
     .accountSignUp .individualSignInBox .pageFormContainer .buttons{margin-top:10px;}
     .accountSignUp .individualSignInBox .pageFormContainer .buttons p{padding-bottom:10px;}
 

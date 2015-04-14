@@ -6,14 +6,15 @@
 {% endblock %}
 
 {% block meta %}
+    {% compress css %}
     <!-- CUSTOM -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/custom/opendatalatam/styles/opendatalatam.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/custom/opendatalatam/styles/opendatalatam.css' %}"/>
 
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-
+    {% endcompress %}
 {% endblock %}
 
 {% block content %}

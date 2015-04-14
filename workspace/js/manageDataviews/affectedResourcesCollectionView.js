@@ -87,7 +87,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE'),
                         text:  resource + ": "+ gettext('APP-DELETE-DATASTREAM-ACTION-TEXT'),
-                        image: '/media_workspace/images/common/ic_validationOk32.png',
+                        image: '/static/workspace/images/common/ic_validationOk32.png',
                         sticky: false,
                         time: 3500
                     });
@@ -102,7 +102,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text: resource + ": "+  gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
-                        image: '/media_workspace/images/common/ic_validationError32.png',
+                        image: '/static/workspace/images/common/ic_validationError32.png',
                         sticky: true,
                         time: 2500
                     });

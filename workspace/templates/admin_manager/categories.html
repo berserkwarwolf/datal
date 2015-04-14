@@ -1,11 +1,13 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% block meta %}
-<link href="/media_workspace/styles/_modules/workspaceCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/manageCommon.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_core/styles/_modules/dataStreamForm.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'workspace/styles/_modules/workspaceCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/manageCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'core/styles/_modules/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.cookie.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script src="/js_workspace/admin_manager/categories.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
@@ -106,7 +108,7 @@
             <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
         </div>
     </form>
-    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="/media_core/images/common/im_smallAjaxLoader.gif"/></div>
+    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="{% static 'core/images/common/im_smallAjaxLoader.gif' %}"/></div>
 </div>
 {% endoverlay %}
 
@@ -131,7 +133,7 @@
             <input type="submit" value="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha small" title="{% trans 'APP-CANCEL-TEXT' %}"/>
         </div>
     </form>
-    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="/media_core/images/common/im_smallAjaxLoader.gif"/></div>
+    <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="{% static 'core/images/common/im_smallAjaxLoader.gif' %}"/></div>
 </div>
 {% endoverlay %}
 {% endblock %}

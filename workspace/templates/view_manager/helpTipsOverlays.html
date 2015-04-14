@@ -1,4 +1,4 @@
-{% load i18n extra_tags core_components components %}
+{% load i18n extra_tags core_components components compress staticfiles %}
 
 {% overlay id_selection_tips %}
     <div class="In clearfix">
@@ -7,7 +7,7 @@
         <p>
             <span class="FL">{% trans "DSCRE-SELECTALLTABLE-TIP1" %}
             <strong>&lt; &gt; </strong>{% trans "DSCRE-SELECTALLTABLE-TIP2" %}</span>
-            <img src="/media_core/images/dataServicePublisher/im_selection_example_table.png"  class="FR tableHelp" alt="Example of table selection"/>
+            <img src="{% static 'core/images/dataServicePublisher/im_selection_example_table.png' %}"  class="FR tableHelp" alt="Example of table selection"/>
         </p>
         <div class="buttons">
             <a id="id_continueBtn1" class="button small green" title="{% trans 'APP-CONTINUE-TEXT' %}">{% trans "APP-CONTINUE-TEXT" %}</a>
@@ -20,7 +20,7 @@
         <h4>{% trans "DSCRE-EMPTYSEL-TITLE" %}</h4>
         <p>
     		<span class="FR"><strong>{% trans "DSCRE-EMPTYSEL-TIP1" %}.</strong><br/>{% trans "DSCRE-EMPTYSEL-TIP2" %}.</span>
-            <img src="/media_core/images/common/ic_error.gif" class="FL tableError" alt=""/>
+            <img src="{% static 'core/images/common/ic_error.gif' %}" class="FL tableError" alt=""/>
     	</p>
         <div class="buttons center">
             <a id="id_continueBtn2" class="button small green" title="{% trans 'APP-CLOSE-TEXT' %}">{% trans "APP-CLOSE-TEXT" %}</a>

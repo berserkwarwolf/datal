@@ -11,7 +11,7 @@ body,
 .homeColumns{padding-bottom:15px;}
 
 .homeColumns .CR .boxContent{margin-left:20px;}
-.homeColumns .searchContainer{background:url(/media_core/images/homeManager/sh_sliderWrapper.png) center bottom no-repeat;padding-bottom:6px;}
+.homeColumns .searchContainer{background:url(/static/core/images/homeManager/sh_sliderWrapper.png) center bottom no-repeat;padding-bottom:6px;}
 .homeColumns .searchContainer .FR{float:none;}
 .homeColumns .searchContainer .search{background-color:#fff;}
 .homeColumns .searchContainer .search .field{width:327px;padding:11px 11px 11px 48px;font-size:14px;height:auto;background:url(../../images/homeManager/ic_searchHome.png) 14px center no-repeat;}
@@ -30,7 +30,7 @@ body,
 .resourcesTable{margin-bottom:20px;}
 
   /*DATA SORT ICONS*/
-  .workspaceGrid table th{background-image:url(/media_core/images/common/ic_tableSorter.gif);background-position:5px 0;background-repeat:no-repeat;padding-left:20px;cursor:pointer;}
+  .workspaceGrid table th{background-image:url(/static/core/images/common/ic_tableSorter.gif);background-position:5px 0;background-repeat:no-repeat;padding-left:20px;cursor:pointer;}
   .workspaceGrid table th.sorting-asc{background-position:5px -50px;}
   .workspaceGrid table th.sorting-desc{background-position:5px -100px;}
   .workspaceGrid table td.date{padding-left:20px;width:150px;}
@@ -56,7 +56,7 @@ body,
 .columns .sidebar .sidebarPadding{padding-bottom:110px;}
 .references{position:absolute;font-size:11px;bottom:0;left:0;padding:0 19px 15px;width:142px;text-shadow:0 1px 0 #fff;}
 .references strong{line-height:25px;display:block;color:#918989;}
-.references span{line-height:21px;padding-left:20px;display:block;background: url(/media_workspace/images/_workspace/ic_workspaceIcons.png) no-repeat;}
+.references span{line-height:21px;padding-left:20px;display:block;background: url(/static/workspace/images/_workspace/ic_workspaceIcons.png) no-repeat;}
 .references span.DB{background-position:0 -614px;}
 .references span.DS{background-position:0 -514px;}
 .references span.VZ{background-position:0 -564px;}
@@ -244,7 +244,7 @@ body .theme2 .caroufredsel_wrapper{border:0 !important;}
   }
   #id_welcomePopup .In h4{background:transparent;border:0;height:auto;line-height:normal;}
   #id_welcomePopup .In p{font-size:11px;line-height:18px;}
-  #id_welcomePopup .close{background-image:url(/media_core/images/common/ic_closeGray.png);top:10px;right:10px;}
+  #id_welcomePopup .close{background-image:url(/static/core/images/common/ic_closeGray.png);top:10px;right:10px;}
 
 /* Theme 6 - Jackson */
 .theme6.w960{padding:0;width:960px;background:#f5f5f5;

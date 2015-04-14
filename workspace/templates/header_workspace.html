@@ -1,4 +1,4 @@
-{% load i18n extra_tags %}
+{% load i18n extra_tags compress staticfiles %}
 
 <!--[if lt IE 8]>
 <div class="ieMsg">
@@ -11,7 +11,7 @@
 <header class="header clearfix">
 
   <!-- Logo -->
-  <a href="/welcome" title="Junar" class="logo FL clearfix"><img src="/media_workspace/images/common/lg_junar.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/></a>
+  <a href="/welcome" title="Junar" class="logo FL clearfix"><img src="{% static 'workspace/images/common/lg_junar.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/></a>
 
   {% comment %}
   <!-- Search -->

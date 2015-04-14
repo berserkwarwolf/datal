@@ -49,7 +49,7 @@ var theme4View = Backbone.Epoxy.View.extend({
         			  $.gritter.add({
     					title : gettext('ADMIN-HOME-SECTION-NOTVALIDURL-TITLE'),
     					text : gettext('ADMIN-HOME-SECTION-MAXSIZE-TEXT'),
-    					image : '/media_workspace/images/common/ic_validationError32.png',
+    					image : '/static/workspace/images/common/ic_validationError32.png',
     					sticky : false,
     					time : 3000
         			  });
@@ -84,7 +84,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 				  $.gritter.add({
 						title : gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
 						text : gettext('ADMIN-HOME-SECTION-TIMEOUTERROR-TEXT'),
-						image : '/media_workspace/images/common/ic_validationError32.png',
+						image : '/static/workspace/images/common/ic_validationError32.png',
 						sticky : false,
 						time : 3000
 					});
@@ -93,7 +93,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 				  $.gritter.add({
 						title : gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
 						text : gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-						image : '/media_workspace/images/common/ic_validationError32.png',
+						image : '/static/workspace/images/common/ic_validationError32.png',
 						sticky : false,
 						time : 3000
 					});  
@@ -350,7 +350,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					$.gritter.add({
 						title : gettext('ADMIN-HOME-SECTION-SUCCESS-TITLE'),
 						text : gettext('ADMIN-HOME-SECTION-SUCCESS-TEXT'),
-						image : '/media_workspace/images/common/ic_validationOk32.png',
+						image : '/static/workspace/images/common/ic_validationOk32.png',
 						sticky : false,
 						time : 3500
 					});
@@ -367,7 +367,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 				$.gritter.add({
 					title : gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
 					text : gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image : '/media_workspace/images/common/ic_validationError32.png',
+					image : '/static/workspace/images/common/ic_validationError32.png',
 					sticky : true,
 					time : ''
 				});

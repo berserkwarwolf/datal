@@ -10,7 +10,7 @@ body,
 .homeColumns{padding-bottom:15px;}
 
 .homeColumns .CR .boxContent{margin-left:30px;}
-.homeColumns .searchContainer{background:url(/media_core/images/homeManager/sh_sliderWrapper.png) center bottom no-repeat;padding-bottom:6px;}
+.homeColumns .searchContainer{background:url(/static/core/images/homeManager/sh_sliderWrapper.png) center bottom no-repeat;padding-bottom:6px;}
 .homeColumns .searchContainer .FR{float:none;}
 .homeColumns .searchContainer .search{background-color:#fff;}
 .homeColumns .searchContainer .search .field{width:327px;padding:11px 11px 11px 48px;font-size:14px;height:auto;background:url(../../images/homeManager/ic_searchHome.png) 14px center no-repeat;}
@@ -23,7 +23,7 @@ body,
 .resourcesTable{margin-bottom:31px;}
 
 	/*DATA SORT ICONS*/
-	.workspaceGrid table th{background-image:url(/media_core/images/common/ic_tableSorter.gif);background-position:5px 0;background-repeat:no-repeat;padding-left:20px;cursor:pointer;}
+	.workspaceGrid table th{background-image:url(/static/core/images/common/ic_tableSorter.gif);background-position:5px 0;background-repeat:no-repeat;padding-left:20px;cursor:pointer;}
 	.workspaceGrid table th.sorting-asc{background-position:5px -50px;}
 	.workspaceGrid table th.sorting-desc{background-position:5px -100px;}
 	.workspaceGrid table td.date{padding-left:20px;}

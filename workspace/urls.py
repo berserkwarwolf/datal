@@ -47,9 +47,6 @@ urlpatterns = patterns('',
 
 	(r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
 	(r'^js_workspace/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'workspace', 'js')}),
-	(r'^media_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'media')}),
-	(r'^media_workspace/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'workspace', 'media')}),
-	(r'^media_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'media')}),
 
 	# please leave me always as the last url pattern
 	url(r'^(?P<admin_url>[A-Za-z0-9\-]+)/$', 'workspace.accounts.views.signin', name='accounts.account_signin'),

@@ -70,7 +70,7 @@
 	.DataServiceCarousel .panel .innerPanel{padding:8px 10px 10px;border:2px solid #dfdddd;-moz-border-radius:5px;-webkit-border-radius:5px;border-radius:5px;margin:5px;background:#cacaca url(../../images/common/dg_PersonalizarCaja.gif) repeat-x 0 bottom;position:relative;}
 	.DataServiceCarousel .panel .innerPanel .ic_Add{position:absolute;top:44px;left:10px;background:url(../../images/dashboardManager/ic_AddDs.gif) no-repeat 0 0;width:48px;height:14px;overflow:hidden;padding:0 0 0 20px;font-size:11px;}
 	.DataServiceCarousel .panel .innerPanel .ic_Preview{position:absolute;top:44px;left:78px;background:url(../../images/dashboardManager/ic_PreviewDS.gif) no-repeat 0 0;width:68px;height:14px;overflow:hidden;padding:0 0 0 20px;font-size:11px;}
-    .DataServiceCarousel .panel .innerPanel h2{background:url(/media_workspace/images/_workspace/ic_leftcolumn.png) no-repeat;padding: 0 0 0 20px;line-height:18px;height:18px;overflow:hidden;}
+    .DataServiceCarousel .panel .innerPanel h2{background:url(/static/workspace/images/_workspace/ic_leftcolumn.png) no-repeat;padding: 0 0 0 20px;line-height:18px;height:18px;overflow:hidden;}
     .DataServiceCarousel .panel .innerPanel h2.streams{background-position:0 -19px;}
     .DataServiceCarousel .panel .innerPanel h2.charts{background-position:0 -40px;}
 	.DataServiceCarousel .ui-selected .innerPanel  .ic_Add,

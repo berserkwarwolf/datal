@@ -92,7 +92,7 @@ var BaseView = Backbone.View.extend({
 		$.gritter.add({
 			title: gettext('APP-INEXISTENT-DOMAIN-TITLE'),
 			text: message,
-			image: '/media_workspace/images/common/ic_validationError32.png',
+			image: '/static/workspace/images/common/ic_validationError32.png',
 			sticky: true,
 			time: ''
 		});

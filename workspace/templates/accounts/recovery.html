@@ -1,14 +1,16 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags %}
+{% load i18n extra_tags compress staticfiles %}
 
 {% block meta %}
-<link href="/media_workspace/styles/accounts.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+{% compress css %}
+<link href="{% static 'workspace/styles/accounts.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 {% endblock %}
 
 {% block body %}
 <div class="account-box" id="id_recovery">
   <header class="center">
-    <img src="/media_workspace/images/common/lg_junarAccountPages.png" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    <img src="{% static 'workspace/images/common/lg_junarAccountPages.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
   </header>
   <div class="account-box-content">
     <form action="{% url 'accounts.forgot_password' %}" method="post">

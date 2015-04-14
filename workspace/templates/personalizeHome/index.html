@@ -1,16 +1,17 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components  %}
+{% load i18n extra_tags core_components components  compress staticfiles %}
 
 {% block meta %}
 <meta name="main-option" content="id_account_admin"/>
-
+{% compress css %}
 <!-- CSS LIBS -->
-<link href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"></script>
-<link type="text/css" href="/media_core/styles/plugins/jquery-file-upload/jquery.fileupload.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"></script>
+<link href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
+<link type="text/css" href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
 
 <!-- CSS JUNAR -->
-<link href="/media_workspace/styles/_components/accountAdmin.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="/media_workspace/styles/personalizeHome.css?id={{settings.VERSION_JS_CSS}}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/personalizeHome.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 
 <!-- JS LIBS -->
 <script type="text/javascript" src="/js_core/plugins/saferStringify.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -66,7 +67,7 @@
 				<a id="id_noThemeButton" rel="null">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-NOTHEME-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_noTheme.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_noTheme.gif' %}"/>
 					</span>
 				</a>
 			</li>
@@ -74,7 +75,7 @@
 				<a id="id_theme0Button" rel="0">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME0-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme0.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme0.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 						<i class="i3">3</i>
@@ -88,7 +89,7 @@
 				<a id="id_theme1Button" rel="1">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME1-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme1.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme1.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 					</span>
@@ -98,7 +99,7 @@
 				<a id="id_theme2Button" rel="2">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME2-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme2.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme2.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2a">2</i>
 						<i class="i2b">2</i>
@@ -111,7 +112,7 @@
 				<a id="id_theme3Button" rel="3">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME3-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme3.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme3.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 						<i class="i3">3</i>
@@ -122,7 +123,7 @@
 				<a id="id_theme4Button" rel="4">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME4-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme4.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme4.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 						<i class="i3">3</i>
@@ -135,7 +136,7 @@
 				<a id="id_theme5Button" rel="5">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME5-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme5.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme5.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 						<i class="i3">3</i>
@@ -152,7 +153,7 @@
 				<a id="id_theme6Button" rel="6">
 					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME6-TEXT" %}</span>
 					<span class="img">
-						<img src="/media_workspace/images/personalizeHome/im_theme6.gif"/>
+						<img src="{% static 'workspace/images/personalizeHome/im_theme6.gif' %}"/>
 						<i class="i1">1</i>
 						<i class="i2">2</i>
 						<i class="i3">3</i>

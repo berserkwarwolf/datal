@@ -85,7 +85,7 @@ var CreateDashboard = Backbone.Model.extend({
                 $.gritter.add({
                     title: gettext("NOTIF-SAVED-TITLE"),
                     text: gettext("NOTIF-SAVED-DESC-4"),
-                    image: '/media_core/images/common/im_defaultAvatar_90x90.jpg',
+                    image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
                     sticky: true,
                     time: ''
                 });

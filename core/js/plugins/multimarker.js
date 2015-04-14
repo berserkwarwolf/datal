@@ -9,7 +9,7 @@ function multimarker(latlong, value, map, joinIntersectedClusters) {
   this.value_ = value;
   this.map_ = map;
   this.div_ = null;
-  this.pathImages = "/media_core/images/nicemarkers/";
+  this.pathImages = "/static/core/images/nicemarkers/";
   this.sizes = [53, 56, 66, 78, 90];
   this.iconSelected = null;
   this.boundRatio = 2; //radio in degrees for zoom on click cluster

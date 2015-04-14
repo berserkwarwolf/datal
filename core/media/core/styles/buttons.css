@@ -155,7 +155,7 @@
   .button.alpha:hover{text-decoration:underline;}
 
 /* Button icons */
-.button i{width:12px;position:relative;left:-1px;margin-right:8px;height:26px;vertical-align:bottom;display:inline-block;background:url(/media_workspace/images/common/ic_buttons.png) no-repeat;}
+.button i{width:12px;position:relative;left:-1px;margin-right:8px;height:26px;vertical-align:bottom;display:inline-block;background:url(/static/workspace/images/common/ic_buttons.png) no-repeat;}
 .button i.new{background-position:center 0;}
 .button i.delete{background-position:center -25px;}
 .button i.edit{background-position:center -50px;}
@@ -163,6 +163,6 @@
 
   /* Arrows / Left - Right */
   .button i.left-arrow,
-  .button i.right-arrow{background-image:url(/media_workspace/images/common/ic_navigationArrows.png);width:4px;height:25px;}
+  .button i.right-arrow{background-image:url(/static/workspace/images/common/ic_navigationArrows.png);width:4px;height:25px;}
   .button i.left-arrow{background-position: 0 center;}
   .button i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}

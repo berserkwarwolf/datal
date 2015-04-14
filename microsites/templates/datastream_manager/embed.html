@@ -1,28 +1,33 @@
-{% load i18n extra_tags components%}
+{% load i18n extra_tags components compress staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
 <title>{{preferences.account_name}} &middot; {{preferences.account_page_titles}}</title>
 <meta charset="utf-8">
-<!-- RESET -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/reset.css?id={{settings.VERSION_JS_CSS}}"/>
+{% compress css %}
+    <!-- RESET -->
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/reset.css' %}"/>
 <!-- ACTIONS -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/actions.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/actions.css' %}"/>
 <!-- DATA STREAM BOX -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/dataStreamBox.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
 <!-- COMMON MODULES -->
-<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/commonModules.css?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/commonModules.css' %}"/>
 <!-- BUTTONS -->
-<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/buttons.css?id={{settings.VERSION_JS_CSS}}"/>
+<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/buttons.css' %}"/>
 <!-- COMPONENT -->
-<link rel="stylesheet" media="screen" type="text/css" href="/media_core/styles/_modules/embed.css?id={{settings.VERSION_JS_CSS}}"/>
+<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/_modules/embed.css' %}"/>
+{% endcompress %}
 
 {% if preferences.enable_embed_options %}
-    <link type="text/css" rel="stylesheet" media="screen" href="/media_microsites/styles/modules/brandedFull.css?id={{settings.VERSION_JS_CSS}}"/>
+    {% compress css %}
+    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- OVERLAY -->
-	<link type="text/css" rel="stylesheet" media="screen" href="/media_core/styles/_modules/overlay.css?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/overlay.css' %}"/>
+    {% endcompress %}
+
 	<script type="text/javascript" src="/js_core/libs/underscore/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script type="text/javascript" src="/js_core/libs/backbone/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endif %}

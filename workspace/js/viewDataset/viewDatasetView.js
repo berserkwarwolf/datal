@@ -148,7 +148,7 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 					$.gritter.add({
 						title: gettext('APP-SETTINGS-SAVE-OK-TITLE'),
 						text: response.messages,
-						image: '/media_workspace/images/common/ic_validationOk32.png',
+						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 2500
 					});
@@ -159,7 +159,7 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 					$.gritter.add({
 						title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
 						text: response.messages,
-						image: '/media_workspace/images/common/ic_validationError32.png',
+						image: '/static/workspace/images/common/ic_validationError32.png',
 						sticky: true,
 						time: ''
 					});
@@ -172,7 +172,7 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 				$.gritter.add({
 					title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
 					text: gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image: '/media_workspace/images/common/ic_validationError32.png',
+					image: '/static/workspace/images/common/ic_validationError32.png',
 					sticky: true,
 					time: ''
 				});

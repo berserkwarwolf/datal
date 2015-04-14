@@ -1,4 +1,5 @@
 {% load i18n %}
+{% load static from staticfiles %}
 <!DOCTYPE html>
 <html lang="{% if auth_manager.language == 'en' %}en-US{% endif %}{% if auth_manager.language == 'es' %}es-ES{% endif %}{% if auth_manager.language == 'pt' %}pt-BR{% endif %}">
 <head>
@@ -15,7 +16,7 @@
 	{% block head %}{% endblock %}
 	
     {% block favicon %}
-        <link rel="shortcut icon" href="/media_core/images/favicon/junar.ico" />
+        <link rel="shortcut icon" href="{% static 'core/images/favicon/junar.ico' %}" />
     {% endblock %}
 
 	{% include "css.html" %}

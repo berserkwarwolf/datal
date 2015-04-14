@@ -74,7 +74,7 @@ $(document).ready(function(){
             var messages = response.messages;
                 status = response.status,
                 title = gettext('APP-SETTINGS-SAVE-OK-TITLE'),
-                imageURL = '/media_workspace/images/common/ic_validationOk32.png',
+                imageURL = '/static/workspace/images/common/ic_validationOk32.png',
                 sticky = false,
                 time = 3500;
 
@@ -84,7 +84,7 @@ $(document).ready(function(){
 
             if(status == 'error'){
                 title = 'Error';
-                imageURL = '/media_workspace/images/common/ic_validationError32.png';
+                imageURL = '/static/workspace/images/common/ic_validationError32.png';
                 sticky = true;
                 time = 2500;
             }
@@ -111,7 +111,7 @@ $(document).ready(function(){
             $.gritter.add({
                 title: 'Error',
                 text: messages,
-                image: '/media_workspace/images/common/ic_validationError32.png',
+                image: '/static/workspace/images/common/ic_validationError32.png',
                 sticky: true,
                 time: 2500
             });
