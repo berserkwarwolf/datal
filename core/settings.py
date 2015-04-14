@@ -168,7 +168,7 @@ IMPL_TYPES = {'4': 'xls',
            }
 
 GRAVATAR = { 'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
-             'default_image': '/media_core/images/common/im_avatarNotDefined.gif',
+             'default_image': '/static/core/images/common/im_avatarNotDefined.gif',
              'sizes': { 'small': 22,
                       'medium': 44,
                       'large': 88,
@@ -273,6 +273,10 @@ STATICFILES_DIRS = (os.path.join(PROJECT_PATH,'core/media/'),)
 # Django Compress y SASS
 COMPRESS_PRECOMPILERS = (
     ('text/scss', 'sass --scss {infile} {outfile}'),
+)
+
+STATICFILES_FINDERS = (
+    ('compressor.finders.CompressorFinder'),
 )
 
 try:
