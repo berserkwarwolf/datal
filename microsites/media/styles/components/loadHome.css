@@ -29,6 +29,25 @@ body,
 /*RESOURCES TABLE*/
 .resourcesTable{margin-bottom:20px;}
 
+  /*PAGINATION - ITEMS PER PAGE*/
+  .pagination{padding:26px 13px 0 0;background:none;}
+  .pagination-pages{height:21px;vertical-align:top;display:inline-block;}
+  .itemsPerPage{padding-right:10px;}
+  .itemsPerPage label{font-size:11px;padding:3px 8px 0 0;}
+  .pagButtons .Ant,
+  .pagButtons .Sig{float:none;display:inline-block;}
+  .itemsPerPage select{font-size:11px;}
+
+  /*WORKSPACE GRID*/
+  .gridContainer{padding-right:10px;}
+  .workspaceGrid table{width:100%;}
+  .workspaceGrid table th,
+  .workspaceGrid table td{line-height:18px;padding:2px 5px;border-bottom:1px solid #e0e0e0;background:#fff;color:#333;word-break:break-word;vertical-align:top;}
+  .workspaceGrid table th{text-align:left;background:#f6f5f5;color:#aaa;text-shadow:0 1px 0 #fff;font-weight:bold;}
+  .workspaceGrid table tr:nth-child(even) > td{background:#fcfcfc;}
+  .workspaceGrid .viewInfo .sep{color:#e0e0e0;padding:0 2px;}
+  .workspaceGrid .noneMsg{height:50px;text-align:center;font-size:14px;background:#FEEFDC;color:#A82A1B;text-shadow:0 1px 0 rgba(255,255,255,.5);line-height:50px;border-color:#e1b09e;}
+
   /*DATA SORT ICONS*/
   .workspaceGrid table th{background-image:url(/media_core/images/common/ic_tableSorter.gif);background-position:5px 0;background-repeat:no-repeat;padding-left:20px;cursor:pointer;}
   .workspaceGrid table th.sorting-asc{background-position:5px -50px;}

@@ -580,6 +580,11 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .contentForm input, .ao-popup-overlay .contentForm .row select{width:100%;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:5px;font-size:12px;}
 .ao-popup-overlay input.search{width:200px;color:#999;font-style:italic;background-image:url('../images/common/ic_search.png');background-repeat:no-repeat;background-position:8px 10px;padding:10px 0 10px 30px;}
 
+.ao-popup-overlay .In .dataStreamForm{padding:0;}
+.ao-popup-overlay .dataStreamForm .form{padding:20px;}
+.ao-popup-overlay .buttons{padding:20px 0;border-top:1px solid #E2E0E0;margin:0;}
+.ao-popup-overlay .ao-L{width:680px !important;}
+
 /* Overlays Backgrid */
 .ao-popup-overlay .backgrid tr th{border-top:1px solid #ddd;}
 .ao-popup-overlay .backgrid tr th, 
