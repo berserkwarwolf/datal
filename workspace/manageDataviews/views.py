@@ -40,6 +40,7 @@ def view(request, revision_id):
 
 @login_required
 @requires_any_dataset() #account must have almost one dataset
+@require_privilege("workspace.can_query_datastream")
 @require_GET
 def list(request):
     """ list all dataviews """
@@ -58,6 +59,7 @@ def list(request):
 
 @login_required
 @require_GET
+@require_privilege("workspace.can_query_datastream")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET

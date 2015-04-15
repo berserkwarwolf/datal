@@ -484,6 +484,50 @@
     }
 },
 {
+    "pk": 3960,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 556,
+        "created_at": "2012-06-04T14:13:06",
+        "role": 2,
+        "user": null,
+        "guest": null
+    }
+},
+{
+    "pk": 3961,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 705,
+        "created_at": "2012-06-04T14:12:52",
+        "role": 2,
+        "user": null,
+        "guest": null
+    }
+},
+{
+    "pk": 3962,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 705,
+        "created_at": "2012-06-04T14:12:52",
+        "role": 3,
+        "user": null,
+        "guest": null
+    }
+},
+{
+    "pk": 3963,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 705,
+        "created_at": "2012-06-04T14:13:06",
+        "role": 1,
+        "user": null,
+        "guest": null
+    }
+},
+{
     "pk": 3615,
     "model": "core.grant",
     "fields": {

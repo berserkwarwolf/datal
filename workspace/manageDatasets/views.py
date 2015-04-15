@@ -293,7 +293,7 @@ def review(request, dataset_revision_id=None):
 
     return JSONHttpResponse(json.dumps(response))
 
-
+@login_required
 @require_GET
 def action_load(request):
 
