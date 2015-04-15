@@ -9,7 +9,7 @@ from core.accounts.decorators import threshold
 from core.choices import TicketChoices, StatusChoices
 from core.models import *
 from core.shortcuts import render_to_response
-from core.lib import mailchimp_lib
+from core.lib.mail import mail
 from core.lib.datastore import *
 from core.lib.searchify import SearchifyIndex
 from core.helpers import get_domain_with_protocol
@@ -115,23 +115,20 @@ def action_create_user(request):
         account = auth_manager.get_account()
         preferences = account.get_preferences()
 
-        adminname = auth_manager.nick
         company = preferences['account_name']
-        if preferences['account_purpose'] != 'private':
-            domain = get_domain_with_protocol('workspace')
-        else:
-            domain = 'http://' + preferences['account_domain']
+        domain = 'http://' + preferences['account_domain']
 
         link = domain + reverse('accounts.activate') + '?' + urllib.urlencode({'ticket': user_pass_ticket.uuid})
         language = auth_manager.language
 
-        logger.debug('[mailchimp_workspace_users_list_subscribe] %s', user)
+        logger.debug('[list_subscribe] %s', user)
         country = preferences['account.contact.person.country']
         extradata = {'country': country, 'company': company}
-        suscription = mailchimp_lib.workspace_users_list_subscribe(user, language, extradata)
-
-        mergetags = {'FNAME': user.name, 'ADMINNAME': adminname, 'COMPANY': company}
-        mailchimp_lib.account_administrators_welcome_email_campaign_send(user, link, mergetags)
+        # suscribirlo a la lista de usuarios del workspace
+        mail.mail_service.list_subscribe(user, language, extradata)
+        
+        #enviarle el email de bienvenida
+        mail.mail_service.send_welcome_mail(user, link, company)
 
         response = {'status': 'ok', 'messages': [ugettext('APP-USER-CREATEDSUCCESSFULLY-TEXT')]}
         return HttpResponse(json.dumps(response), content_type='application/json')

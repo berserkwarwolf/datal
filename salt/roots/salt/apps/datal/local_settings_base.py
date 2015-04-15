@@ -56,3 +56,25 @@ PUBLIC_KEY = '{{ pillar["application"]["public_key"] }}'
 SENTRY_DSN = '{{ pillar["sentry_dns"] }}'
 
 STATIC_ROOT= "{{ pillar['application']['statics_dir'] }}"
+
+TWITTER_PROFILE_URL = "{{ pillar['social']['twitter_profile_url'] }}"
+FACEBOOK_PROFILE_URL= "{{ pillar['social']['facebook_profile_url'] }}"
+MAIL_LIST = {'LIST_COMPANY' : "{{ pillar['mail_list']['list_company'] }}", 
+             'LIST_DESCRIPTION': "{{ pillar['mail_list']['list_description'] }}", 
+             'LIST_UNSUBSCRIBE': "{{ pillar['mail_list']['list_unsubscribe'] }}", 
+             'LIST_UPDATE_PROFILE': "{{ pillar['mail_list']['list_update_profile'] }}"
+             'WELCOME_TEMPLATE_ES': "{{ pillar['mail_list']['welcome_template_es'] }}",
+             'WELCOME_TEMPLATE_EN': "{{ pillar['mail_list']['welcome_template_en'] }}"}
+
+MAILCHIMP = {
+            'uri': "{{ pillar['mail_list']['mailchimp']['uri'] }}",
+            'api_key': "{{ pillar['mail_list']['mailchimp']['api_key'] }}",
+            'lists': {'workspace_users_list': 
+                            {
+                             'es': {'id': "{{ pillar['mail_list']['mailchimp']['lsist']['workspace_users_list']['es_id'] }}"},
+                             'en': {'id': "{{ pillar['mail_list']['mailchimp']['lsist']['workspace_users_list']['en_id'] }}"}
+                             }
+                     }
+            }
+
+MANDRILL = {'api_key': "{{ pillar['mail_list']['mandrill']['api_key'] }}"}

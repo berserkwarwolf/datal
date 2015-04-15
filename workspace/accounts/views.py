@@ -15,7 +15,7 @@ from core.choices import TicketChoices
 from core.models import *
 from core.shortcuts import render_to_response
 from workspace.accounts import forms
-from core.lib import mailchimp_lib
+from core.lib.mail import mail
 import hashlib
 from uuid import uuid4
 from random import choice
@@ -86,7 +86,7 @@ def create(request):
         company = account.name
         country = 'Unknown'
         extradata = {'country': country, 'company': company}
-        mailchimp_lib.account_administrators_list_subscribe(user, language, extradata)
+        mail.mail_service.list_subscribe(user, extradata)
 
         # redirect to landing
         return redirect('/')

@@ -199,6 +199,29 @@ PAGINATION_RESULTS_PER_PAGE = 10
 # develop & staging sentry
 SENTRY_DSN = 'http://sentrydsn@sentry.com/1'
 
+TWITTER_PROFILE_URL = 'https://twitter.com/tuCuenta'
+FACEBOOK_PROFILE_URL= 'https://facebook.com/tuFanPage'
+MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '', 
+             'LIST_UNSUBSCRIBE': '', 'LIST_UPDATE_PROFILE': '',
+             'WELCOME_TEMPLATE_ES': 'template_name',
+             'WELCOME_TEMPLATE_EN': 'template_name'}
+
+USE_MAILSERVICE = 'mailchimp' # unico disponible por ahora
+
+# solo si usas mailchimp/mandrill para enviar emails
+MAILCHIMP = {
+            'uri': 'https://us2.api.mailchimp.com/2.0/',
+            'api_key': '',
+            'lists': {'workspace_users_list': 
+                            {
+                             'es': {'id': ''},
+                             'en': {'id': ''}
+                             }
+                     }
+            }
+
+MANDRILL = {'api_key': ''}
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': True,
