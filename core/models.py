@@ -539,8 +539,7 @@ class DatasetRevision(models.Model):
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     end_point = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_END_POINT_LABEL'))
     filename = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_FILENAME_LABEL'))
-    impl_details = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'), blank=True,
-                                    null=True)
+    impl_details = models.TextField(blank=True, null=True, verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'))
     impl_type = models.IntegerField(choices=choices.SOURCE_IMPLEMENTATION_CHOICES,
                                     verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_TYPE_LABEL'))
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
