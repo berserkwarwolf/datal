@@ -242,7 +242,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         old_status = self.dataset_revision.status
 
-        if old_status  not in allowed_states:
+        if old_status not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if 'status' in fields.keys():
@@ -258,7 +258,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         if old_status == StatusChoices.DRAFT:
             self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, **fields)
+                self.dataset_revision, changed_fields, status=form_status, **fields)
         else:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields)
