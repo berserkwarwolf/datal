@@ -21,8 +21,6 @@ MIDDLEWARE_CLASSES += (
     'workspace.middlewares.catch.ExceptionManager',
 )
 
-DOMAINS['engine'] = 'workspace'
-
 ROOT_URLCONF = 'workspace.urls'
 
 TEMPLATE_DIRS = (
