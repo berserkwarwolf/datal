@@ -17,6 +17,7 @@ class SearchifyIndex():
             logger.error("Ningun documento para indexar")
             return False
         else:
+            logger.info('Add to index %s' % str(docs))
             result = self.index.add_documents(docs)
             return result
         
