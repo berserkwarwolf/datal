@@ -390,7 +390,6 @@ def action_create_category(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-@require_POST
 def action_edit_category(request):
     form = forms.CategoryEditForm(request.POST)
     if form.is_valid():
@@ -564,9 +563,10 @@ def reindex_category_resources(category_id, language):
     docs = []
     resources = list(datastreams) + list(dashboards) + list(visualizations)
     for resource in resources:
-        docs.append(resource.get_dict(language))
+        doc=resource.get_dict(language)
+        docs.append(doc)
 
-    SearchifyIndex().get().indexit(docs)
+    SearchifyIndex().indexit(docs)
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -602,7 +602,7 @@ def get_resource_dict(request):
     resp += "<h3>Destino</h3><hr>" + str(dest)
 
     #re-index
-    idx = SearchifyIndex().get().indexit(dest)
+    idx = SearchifyIndex().indexit(dest)
     resp += "<h3>ReIndexado:%s</h3><hr>" % str(idx)
 
     return HttpResponse(resp)

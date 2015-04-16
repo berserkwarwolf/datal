@@ -12,8 +12,13 @@ class SearchifyIndex():
         self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
         
     def indexit(self, docs):
-        result = self.index.add_documents(docs)
-        return result
+        if not docs:
+            logger = logging.getLogger(__name__)
+            logger.error("Ningun documento para indexar")
+            return False
+        else:
+            result = self.index.add_documents(docs)
+            return result
         
     def count(self):
         return self.index.get_size()        

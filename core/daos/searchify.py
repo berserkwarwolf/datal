@@ -16,7 +16,7 @@ class SearchifyDAO:
             doc = self.create_datastream_doc(resource_get)
         elif resource_get['resource_type'] == 'visualization':
             doc = self.create_visualization_doc(resource_get)
-        SearchifyIndex().get().indexit(doc)
+        SearchifyIndex().indexit(doc)
 
     def unindex(self, resource_get):
         """ remove from searchify """
@@ -26,7 +26,7 @@ class SearchifyDAO:
             doc = self.create_datastream_doc(resource_get)
         elif resource_get['resource_type'] == 'visualization':
             doc = self.create_visualization_doc(resource_get)
-        SearchifyIndex().get().delete_documents(doc)
+        SearchifyIndex().delete_documents(doc)
     
     def create_dataset_doc(self, dataset_get):
         
