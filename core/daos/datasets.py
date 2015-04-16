@@ -38,7 +38,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         # Si estoy editando un tipo SELF_PUBLISH, no vienen los datos del archivo entonces lo recupero
         if int(collect_type) == CollectTypeChoices().SELF_PUBLISH and 'file_size' not in fields.keys():
-            prev_revision = DatasetRevision.objects.filter(dataset__id=48).order_by('-id').first()
+            prev_revision = DatasetRevision.objects.filter(dataset=dataset).order_by('-id').first()
             size = prev_revision.size
             file_name = prev_revision.filename
         else:
