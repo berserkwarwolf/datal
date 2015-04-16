@@ -1,8 +1,10 @@
 from django.utils.translation import ugettext_lazy
 
+
 class ChannelTypes():
     WEB = 0
     API = 1
+
 
 class StatusChoices():
     DRAFT = 0
@@ -17,6 +19,7 @@ CHANNEL_TYPES = (
     (ChannelTypes.WEB, ugettext_lazy('CHANNEL_TYPE_WEB'))
     ,(ChannelTypes.API, ugettext_lazy('CHANNEL_TYPE_API'))
 )
+
 
 class ActionStreams():
     """ Actions on resourses for save"""
@@ -74,6 +77,7 @@ ODATA_FREQUENCY = (
     ("ondemand", ugettext_lazy('APP-ONDEMAND-TEXT')),
     ("other", ugettext_lazy('APP-OTHER-TEXT')),
 )
+
 
 class SourceImplementationChoices():
     HTML = 0
@@ -140,6 +144,7 @@ WEBSERVICE_IMPLEMENTATION_CHOICES = (
     (SourceImplementationChoices.REST, 'REST/JSON'),
     (SourceImplementationChoices.SOAP, 'SOAP/XML')
 )
+
 
 class CollectTypeChoices():
     SELF_PUBLISH = 0 # an uploaded file
