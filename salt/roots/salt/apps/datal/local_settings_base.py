@@ -20,7 +20,7 @@ SEARCHIFY = {
     'index': '{{  pillar["searchers"]["searchify"]["index"] }}'
 }
 
-DOMAINS = {'api': 'api:8080',
+DOMAINS = {'api': '{{  pillar["application"]["settings"]["domains"]["api"] }}',
            'microsites': '{{  pillar["application"]["settings"]["domains"]["microsites"] }}',
            'workspace': '{{  pillar["application"]["settings"]["domains"]["workspace"] }}',
            'engine': '{{  pillar["application"]["settings"]["domains"]["engine"] }}',
