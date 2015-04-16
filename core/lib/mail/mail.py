@@ -20,5 +20,7 @@ mail_service = None
 if settings.USE_MAILSERVICE == 'mailchimp':
     from core.lib.mail.mailchimp import MailchimpMailService
     mail_service = MailchimpMailService()
+""" permitir uso sin servicio de correo
 else:
     raise MailServiceNotFoundException()
+"""

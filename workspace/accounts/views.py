@@ -83,10 +83,11 @@ def create(request):
         # login the user
         request.session['user_id'] = user.id
 
-        company = account.name
-        country = 'Unknown'
-        extradata = {'country': country, 'company': company}
-        mail.mail_service.list_subscribe(user, extradata)
+        if mail.mail_service:
+            company = account.name
+            country = 'Unknown'
+            extradata = {'country': country, 'company': company}
+            mail.mail_service.list_subscribe(user, extradata)
 
         # redirect to landing
         return redirect('/')
