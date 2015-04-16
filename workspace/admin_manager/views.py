@@ -116,7 +116,7 @@ def action_create_user(request):
         preferences = account.get_preferences()
 
         company = preferences['account_name']
-        domain = 'http://' + preferences['account_domain']
+        domain = settings.WORKSPACE_URI
 
         link = domain + reverse('accounts.activate') + '?' + urllib.urlencode({'ticket': user_pass_ticket.uuid})
         language = auth_manager.language
@@ -124,11 +124,17 @@ def action_create_user(request):
         logger.debug('[list_subscribe] %s', user)
         country = preferences['account.contact.person.country']
         extradata = {'country': country, 'company': company}
-        # suscribirlo a la lista de usuarios del workspace
-        mail.mail_service.list_subscribe(user, language, extradata)
+        # suscribirlo a la lista de usuarios del workspace (si tiene servicio)
+        if mail.mail_service:
+            mail.mail_service.list_subscribe(user, language, extradata)
         
-        #enviarle el email de bienvenida
-        mail.mail_service.send_welcome_mail(user, link, company)
+            #enviarle el email de bienvenida
+            mail.mail_service.send_welcome_mail(user, link, company)
+        else: # necesita el codigo de activacion al menos, lo redirijo alli
+            response = {'status': 'ok', 
+                        'messages': [ugettext('APP-USER-CREATEDSUCCESSFULLY-TEXT'), 'Activar en %s' % link],
+                        'redirect': link}
+            return HttpResponse(json.dumps(response), content_type='application/json')
 
         response = {'status': 'ok', 'messages': [ugettext('APP-USER-CREATEDSUCCESSFULLY-TEXT')]}
         return HttpResponse(json.dumps(response), content_type='application/json')

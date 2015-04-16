@@ -14,6 +14,10 @@ application:
 
     domains:
       engine: 'http://workspace:8080'
+      microsites: 'microsites:8080'
+      workspace: 'workspace:8080'
+      api: 'api:8080'
+      
 
 virtualenv:
   path: /home/vagrant/env

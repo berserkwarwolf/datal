@@ -20,14 +20,14 @@ SEARCHIFY = {
     'index': '{{  pillar["searchers"]["searchify"]["index"] }}'
 }
 
-DOMAINS = {'api': 'api',
-           'community': 'community',
-           'microsites': 'microsites:8080',
-           'workspace': 'workspace',
-           'website': 'website',
+DOMAINS = {'api': '{{  pillar["application"]["settings"]["domains"]["api"] }}',
+           'microsites': '{{  pillar["application"]["settings"]["domains"]["microsites"] }}',
+           'workspace': '{{  pillar["application"]["settings"]["domains"]["workspace"] }}',
            'engine': '{{  pillar["application"]["settings"]["domains"]["engine"] }}',
            'cdn': '{{  pillar["application"]["cdn"] }}',
 }
+
+WORKSPACE_URI = 'http://{{  pillar["application"]["settings"]["domains"]["workspace"] }}'
 
 EMAIL_HOST = '{{  pillar["email"]["host"] }}'
 EMAIL_HOST_USER = '{{  pillar["email"]["user"] }}'
@@ -62,7 +62,7 @@ FACEBOOK_PROFILE_URL= "{{ pillar['social']['facebook_profile_url'] }}"
 MAIL_LIST = {'LIST_COMPANY' : "{{ pillar['mail_list']['list_company'] }}", 
              'LIST_DESCRIPTION': "{{ pillar['mail_list']['list_description'] }}", 
              'LIST_UNSUBSCRIBE': "{{ pillar['mail_list']['list_unsubscribe'] }}", 
-             'LIST_UPDATE_PROFILE': "{{ pillar['mail_list']['list_update_profile'] }}"
+             'LIST_UPDATE_PROFILE': "{{ pillar['mail_list']['list_update_profile'] }}",
              'WELCOME_TEMPLATE_ES': "{{ pillar['mail_list']['welcome_template_es'] }}",
              'WELCOME_TEMPLATE_EN': "{{ pillar['mail_list']['welcome_template_en'] }}"}
 
@@ -71,8 +71,8 @@ MAILCHIMP = {
             'api_key': "{{ pillar['mail_list']['mailchimp']['api_key'] }}",
             'lists': {'workspace_users_list': 
                             {
-                             'es': {'id': "{{ pillar['mail_list']['mailchimp']['lsist']['workspace_users_list']['es_id'] }}"},
-                             'en': {'id': "{{ pillar['mail_list']['mailchimp']['lsist']['workspace_users_list']['en_id'] }}"}
+                             'es': {'id': "{{ pillar['mail_list']['mailchimp']['lists']['workspace_users_list']['es_id'] }}"},
+                             'en': {'id': "{{ pillar['mail_list']['mailchimp']['lists']['workspace_users_list']['en_id'] }}"}
                              }
                      }
             }
