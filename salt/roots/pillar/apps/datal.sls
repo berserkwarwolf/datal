@@ -13,7 +13,7 @@ application:
     pagination_results_per_page: 10
 
     domains:
-      engine: 'http://workspace'
+      engine: 'http://workspace:8080'
 
 virtualenv:
   path: /home/vagrant/env
