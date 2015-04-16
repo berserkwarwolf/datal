@@ -38,3 +38,24 @@ bigdata:
   endpoint: ''
   hosts:
     - { name: ''}
+
+social:
+  twitter_profile_url: ''
+  facebook_profile_url: ''
+  
+mail_list:
+  list_company: ''
+  list_description: ''
+  list_usubscribe: ''
+  list_update_profile: ''
+  welcome_template_es: ''
+  welcome_template_en: ''
+  mailchimp: 
+    uri: 'https://us2.api.mailchimp.com/2.0/'
+    api_key: ''
+    lists: 
+      workspace_users_list:
+        es_id: ''
+        en_id: ''
+  mandrill:
+    api_key: ''

@@ -212,7 +212,7 @@ USE_MAILSERVICE = 'mailchimp' # unico disponible por ahora
 MAILCHIMP = {
             'uri': 'https://us2.api.mailchimp.com/2.0/',
             'api_key': '',
-            'lists': {'workspace_users_list': 
+            'lists': {'workspace_users_list': # listas a la cual suscribir a los usuarios del sistema
                             {
                              'es': {'id': ''},
                              'en': {'id': ''}
