@@ -6,26 +6,27 @@ from core import choices
 from core import managers
 from core.bigdata import Bigdata
 from core.helpers import get_meta_data_dict
-from django.shortcuts import get_object_or_404
 import logging
 import json
 
 logger = logging.getLogger(__name__)
 
 def add_facets_to_doc(resource, account, doc):
+    logger = logging.getLogger(__name__)
     faceted = account.faceted_fields()
-    try:
-        field_values = json.loads(resource.meta_text)['field_values']
-    except:
-        field_values = []
-        logger = logging.getLogger(__name__)
-        logger.error("BAD FIELDS_VALUES: %s -- %s" % (repr(resource), str(doc)))
-
-    for fv in field_values:
-        # Take only the first key
-        key = fv.keys()[0]
-        if key in faceted:
-            doc['categories'][key] = fv[key]
+    if resource.meta_text:
+        try:
+            meta_text = json.loads(resource.meta_text)
+        except:
+            field_values = []    
+            logger.error("BAD FIELDS_VALUES: %s -- %s -- %s" % (repr(resource), str(doc), resource.meta_text))
+    
+        field_values =  meta_text['field_values']
+        for fv in field_values:
+            # Take only the first key
+            key = fv.keys()[0]
+            if key in faceted:
+                doc['categories'][key] = fv[key]
 
     return doc
 

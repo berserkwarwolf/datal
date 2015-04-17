@@ -12,8 +12,8 @@ class SearchifyIndex():
         self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
         
     def indexit(self, docs):
-        if not docs:
-            logger = logging.getLogger(__name__)
+        logger = logging.getLogger(__name__)
+        if not docs:    
             logger.error("Ningun documento para indexar")
             return False
         else:
