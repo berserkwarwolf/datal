@@ -76,14 +76,14 @@ class DatastreamSearchifyDAO():
         from core.lib.indexers.searchify import SearchifyIndex
         self.search_index = SearchifyIndex()
         
-    def add(self, datastream_revision, language):
+    def add(self, datastream_revision):
 
         import time
 
         tags = datastream_revision.tagdataset_set.all().values_list('tag__name')
         # Get category name
-        category = datastream_revision.category.categoryi18n_set.get(language=language)
-        datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
+        category = datastream_revision.category.categoryi18n_set.all()[0]
+        datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision)
 
 
         text = [datastreami18n.title, datastreami18n.description, datastream_revision.user.nick, datastream_revision.datastream.guid]
@@ -107,7 +107,7 @@ class DatastreamSearchifyDAO():
                      'timestamp': int(time.mktime(datastream_revision.created_at.timetuple())),
                      'end_point': datastream_revision.dataset.end_point,
                     },
-                'categories': {'id': unicode(category.id), 'name': category.name}
+                'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
         # Update dict with facets

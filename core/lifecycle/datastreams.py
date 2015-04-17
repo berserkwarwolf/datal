@@ -89,7 +89,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self.datastream_revision.save()
 
         search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.add(self.datastream_revision, self.language)
+        search_dao.add(self.datastream_revision)
         
         self._update_last_revisions()
 

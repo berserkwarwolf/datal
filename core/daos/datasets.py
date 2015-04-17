@@ -99,9 +99,9 @@ class DatasetSearchifyDAO():
 
         self.search_index = SearchifyIndex()
         
-    def add(self, dataset_revision, language):
-        category = dataset_revision.category.categoryi18n_set.get(language=language)
-        dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
+    def add(self, dataset_revision):
+        category = dataset_revision.category.categoryi18n_set.all()[0]
+        dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision)
 
         # DS uses GUID, but here doesn't exists. We use ID
         text = [dataseti18n.title, dataseti18n.description, dataset_revision.user.nick, str(dataset_revision.dataset.guid)]
@@ -127,7 +127,7 @@ class DatasetSearchifyDAO():
                      'timestamp': int(time.mktime(dataset_revision.created_at.timetuple())),
                      'end_point': dataset_revision.end_point,
                     },
-                'categories': {'id': unicode(category.id), 'name': category.name}
+                'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
         # Update dict with facets
