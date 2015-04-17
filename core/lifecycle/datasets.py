@@ -104,7 +104,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset_revision.save()
 
         search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision, self.language)
+        search_dao.add(self.dataset_revision)
 
         self._update_last_revisions()
 

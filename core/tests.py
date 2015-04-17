@@ -216,6 +216,12 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         # Verifico el last revision ID
         last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset).aggregate(Max('id'))['id__max']
         self.assertEqual(last_revision_id, Dataset.objects.get(id=self.dataset.id).last_revision.id)
+        self.assertEqual(last_revision_id, last_revision.id)
+        
+        
+        # Verifico el last published revision ID
+        last_published_revision_id = DatasetRevision.objects.filter(dataset=self.dataset, status=StatusChoices.PUBLISHED).aggregate(Max('id'))['id__max']
+        self.assertEqual(last_published_revision_id, last_revision.dataset.last_published_revision.id)
 
         lifecycle.remove()
 
