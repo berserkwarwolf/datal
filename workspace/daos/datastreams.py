@@ -56,7 +56,6 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream
 
-
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
         """ Consulta y filtra los datastreams por diversos campos """
