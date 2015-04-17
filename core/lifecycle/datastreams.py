@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from django.db.models import F, Max
 from django.db import transaction
-from django.conf import settings
-
-from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
+from core.choices import ActionStreams
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IlegalStateException, DataStreamNotFoundException
@@ -33,21 +29,30 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         try:
             if type(resource) == DataStream:
                 self.datastream = resource
-                self.datastream_revision = DataStreamRevision.objects.select_related().get(pk=self.datastream.last_revision_id)
+                self.datastream_revision = DataStreamRevision.objects.select_related().get(
+                    pk=self.datastream.last_revision_id)
             elif type(resource) == DataStreamRevision:
                 self.datastream_revision = resource
-                self.datastream=resource.datastream
+                self.datastream = resource.datastream
             elif datastream_id > 0:
-                self.datastream = Dataset.objects.get(pk=datastream_id)
-                self.datastream_revision = DatasetRevision.objects.select_related().get(pk=self.datastream.last_revision_id)
+                self.datastream = DataStream.objects.get(pk=datastream_id)
+                self.datastream_revision = DataStreamRevision.objects.select_related().get(
+                    pk=self.datastream.last_revision_id)
             elif datastream_revision_id > 0:
                 self.datastream_revision = DataStreamRevision.objects.select_related().get(pk=datastream_revision_id)
                 self.datastream = self.datastream_revision.dataset
             else:
                 self.datastream_revision = None
                 self.datastream = None
-        except Dataset.DoesNotExist, DatasetRevision.DoesNotExist:
+        except DataStream.DoesNotExist, DataStreamRevision.DoesNotExist:
             raise DataStreamNotFoundException()
+
+        self.datastreami18n = None
+        if self.datastream and self.datastream_revision:
+            self.datastreami18n = DatastreamI18n.objects.get(
+                datastream_revision=self.datastream_revision,
+                language=self.datastream.user.language
+            )
 
     def create(self,allowed_states=CREATE_ALLOWED_STATES, **fields):
         """ Create a new DataStream """

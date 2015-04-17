@@ -149,17 +149,25 @@ def create(request):
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 
         dataview = DatastreamLifeCycleManager(user=request.user)
-        dataview.create(dataset=dataset_revision.dataset, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , language = request.auth_manager.language
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status']
-                    , tags=[], sources=[], parameters=[])
+        dataview.create(
+            dataset=dataset_revision.dataset,
+            title=form.cleaned_data['title'],
+            data_source=form.cleaned_data['data_source'],
+            select_statement=form.cleaned_data['select_statement'],
+            language = request.auth_manager.language,
+            category_id=form.cleaned_data['category'],
+            description=form.cleaned_data['description'],
+            status = form.cleaned_data['status'],
+            tags=[],
+            sources=[],
+            parameters=[]
+        )
 
-        response = {'status': 'ok', 'datastream_revision_id': dataview.datastream_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            datastream_revision_id=dataview.datastream_revision.id,
+            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]
+        )
 
         return JSONHttpResponse(json.dumps(response))
 
@@ -167,20 +175,20 @@ def create(request):
         form = InitalizeCollectForm(request.GET)
 
         if form.is_valid():
-            is_update       = False
+            is_update = False
             is_update_selection = False
-            data_set_id     = form.cleaned_data['dataset_revision_id']
-            datastream_id   = None
+            data_set_id = form.cleaned_data['dataset_revision_id']
+            datastream_id = None
 
             if auth_manager.is_level('level_5'):
                 meta_data = Account.objects.get(pk = auth_manager.account_id).meta_data
 
-            dataset_revision    = DatasetRevision.objects.get(pk= data_set_id)
-            end_point           = dataset_revision.end_point
-            type                = dataset_revision.dataset.type
-            impl_type           = dataset_revision.impl_type
-            impl_details        = dataset_revision.impl_details
-            bucket_name         = request.bucket_name
+            dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            end_point = dataset_revision.end_point
+            type = dataset_revision.dataset.type
+            impl_type = dataset_revision.impl_type
+            impl_details = dataset_revision.impl_details
+            bucket_name = request.bucket_name
 
             return render_to_response('view_manager/insertForm.html', locals())
         else:
@@ -269,18 +277,23 @@ def edit(request, datastream_revision_id=None):
         account_id = request.auth_manager.account_id
         credentials = request.auth_manager
         language = request.auth_manager.language
-        categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')
-        status_options=credentials.get_allowed_actions()
-        datastream_life = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id,)
-        datastream_dict = datastream_life.datastream_revision.get_dict()
-        status=datastream_life.datastream_revision.status
-        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(categories,status,status_options, datastream_life, datastream_dict)
+        categories = CategoryI18n.objects.filter(
+            language=language,
+            category__account=account_id
+        ).values('category__id', 'name')
+        status_options = credentials.get_allowed_actions()
+        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+        status = lifecycle.datastream_revision.status
+        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
+            categories,status,
+            status_options,
+            lifecycle.datastream_revision,
+            lifecycle.datastreami18n
+        )
 
         return JSONHttpResponse(response)
 
-
     elif request.method == 'POST':
-
         """update dataset """
         form = EditDataStreamForm(request.POST)
 

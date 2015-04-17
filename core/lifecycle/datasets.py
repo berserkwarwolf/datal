@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from django.db.models import F, Max
-from django.conf import settings
 from django.db import transaction
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
@@ -13,8 +10,6 @@ from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IlegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
-
-logger = logging.getLogger(__name__)
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED]
