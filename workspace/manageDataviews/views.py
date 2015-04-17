@@ -104,37 +104,32 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     
     return JSONHttpResponse(response)
 
-
 @login_required
 @require_GET
 def related_resources(request):
-    params = request.GET
-    datastream_id = params.get('datastream_id','')
-    resource_type = params.get('type','all');
-    resource = DatastreamLifeCycleManager(user=request.user.id, resource_id=datastream_id)
+    language = request.auth_manager.language
+    datastream_id = request.GET.get('datastream_id', '')
+    resource_type = request.GET.get('type', 'all')
+    datastreams = DataStreamDBDAO().query_childs(language=language)['datastreams']
 
-    associated_dataStreams =resource.related_resources_simple(types=resource_type)
-    return JSONHttpResponse(json.dumps(associated_dataStreams))
+    list_result = [associated_datastream for associated_datastream in associated_datastreams]
+    return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
 @transaction.commit_on_success
 def remove(request, id,type="resource"):
     """ remove resource """
-    my_resource = DatastreamLifeCycleManager(user=request.user.id, resource_revision_id=id)
+    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=id)
 
     if type == 'revision':
-        removes = my_resource.remove_revision()
-        if removes:
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
-        else:
-            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT')]}))
+        lifecycle.remove()
+        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'))
     else:
-        removes = my_resource.remove(is_test=False)
-        if removes:
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}), content_type='text/plain')
-        else:
-            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+        removes = lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({'status': 'True', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT'))
 
 @login_required
 @require_http_methods(['POST', 'GET'])
