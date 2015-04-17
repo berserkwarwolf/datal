@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
-{% load staticfiles %}
+{% load compress staticfiles %}
 
 {% block favicon %}
 <link rel="shortcut icon" href="{{preferences.account_favicon}}" />
 {% endblock %}
 
 {% block css_includes %}
-{% compress css %}
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/stickyFooter.css' %}"/>
-{% endcompress %}
+	{% compress css %}
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/stickyFooter.css' %}"/>
+	{% endcompress %}
 {% endblock %}
 
 {% block js_includes %}

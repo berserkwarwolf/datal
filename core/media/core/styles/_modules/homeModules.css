@@ -52,7 +52,20 @@
 .columns .CR h2{padding-bottom:5px;}
 .gridContainer{padding-right:0;}
 .pagination{padding-bottom:26px;}
+/*FILTERS*/
 .sidebar .filters dt span{padding-right:0;}
+.sidebar .filters dd,
+.sidebar .filters dt{border-bottom:1px solid #fff;text-shadow:0 1px 0 #fff;}
+.sidebar .filters dd span,
+.sidebar .filters dt span{border-bottom:1px solid #e5e4e4;display:block;padding:2px 7px;line-height:16px;font-size:11px;}
+.sidebar .filters dt span{font-weight:bold;font-size:12px;color:#918989;padding-bottom:4px;}
+.sidebar .filters dd{word-break:break-word;}
+.sidebar .filters dd span{color:#2875bb;padding-right:15px;}
+.sidebar .filters dd span:hover{background:#eee;}
+.sidebar .filters .filter-active,
+.sidebar .filters dd.filter-active span,
+.sidebar .filters dd.filter-active span:hover{background:#eee url(../../images/_workspace/ic_filtersArrow.gif) no-repeat right 7px;font-weight:bold;color:#333;}
+.sidebar .filters dd.filter-active{background:none;}
 
 /*RESOURCE ICONS*/
 td.ic_Dset{background-position:0 2px !important;}
