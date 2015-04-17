@@ -226,8 +226,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self._unpublish_all()
 
             self.dataset_revision.delete()
-
-        self._update_last_revisions()
+            self._update_last_revisions()
+            
 
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
@@ -297,16 +297,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))['id__max']
 
         if last_revision_id:
-            self.dataset.last_revision = DatasetRevision.objects.get(id=last_revision_id)
+            self.dataset.last_revision = DatasetRevision.objects.get(pk=last_revision_id)
             last_published_revision_id = DatasetRevision.objects.filter(
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
-
-            if last_published_revision_id and self.dataset.last_published_revision \
-                    and last_published_revision_id != self.dataset.last_published_revision.id:
-                    self.dataset.last_published_revision = DatasetRevision.objects.get(id=last_published_revision_id)
-
+            
+            if last_published_revision_id:
+                self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                
             self.dataset.save()
         else:
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
