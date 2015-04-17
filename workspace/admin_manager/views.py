@@ -519,49 +519,20 @@ def set_preferences(account, preferences):
         account.set_preference(key, value)
 
 def reindex_category_resources(category_id, language):
+    datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
 
-    cursor = connection.cursor()
-    # top published datastreams
-    sql = """SELECT MAX(`ao_datastream_revisions`.`id`)
-    FROM `ao_datastream_revisions`
-    WHERE `ao_datastream_revisions`.`status` = %s AND `ao_datastream_revisions`.`category_id` = %s
-    GROUP BY `ao_datastream_revisions`.`datastream_id`"""
-    params = [StatusChoices.PUBLISHED, category_id]
-    cursor.execute(sql, params)
-    datastream_revision_ids = [ datastream_revision_id for datastream_revision_id, in cursor.fetchall() ]
+    """
+    logger = logging.getLogger(__name__)
+    logger.info("Datasets %s" % datasets.query)
+    logger.info("Datastreams %s" % datastreams.query)
+    """ 
+    
+    #TODO agregar dashboards agregando previamente los campos last_revision y last_published_revision
+    #TODO agregar visualizaciones cuando se desarrolle el campo categoria para el
 
-    # top published dashboards
-    sql = """SELECT MAX(`ao_dashboard_revisions`.`id`)
-    FROM `ao_dashboard_revisions`
-    WHERE `ao_dashboard_revisions`.`status` = %s AND `ao_dashboard_revisions`.`category_id` = %s
-    GROUP BY `ao_dashboard_revisions`.`dashboard_id`"""
-    params = [StatusChoices.PUBLISHED, category_id]
-    cursor.execute(sql, params)
-    dashboard_revision_ids = [ dashboard_revision_id for dashboard_revision_id, in cursor.fetchall() ]
-
-    # top published visualizations
-    if datastream_revision_ids:
-        ss = ', '.join([ '%s' for i in range(len(datastream_revision_ids))])
-        sql = """SELECT MAX(`ao_visualizations_revisions`.`id`)
-        FROM `ao_visualizations_revisions`
-        INNER JOIN `ao_visualizations` ON (`ao_visualizations_revisions`.`visualization_id` = `ao_visualizations`.`id`)
-        INNER JOIN `ao_datastreams` ON (`ao_datastreams`.`id` = `ao_visualizations`.`datastream_id`)
-        INNER JOIN `ao_datastream_revisions` ON (`ao_datastream_revisions`.`datastream_id` = `ao_datastreams`.`id`)
-        WHERE `ao_visualizations_revisions`.`status` = %s AND `ao_datastream_revisions`.`id` IN (""" + ss + """)
-        GROUP BY `ao_visualizations_revisions`.`visualization_id`"""
-        params = [StatusChoices.PUBLISHED]
-        params.extend(datastream_revision_ids)
-        cursor.execute(sql, params)
-        visualization_revision_ids = [ visualization_revision_id for visualization_revision_id, in cursor.fetchall() ]
-    else:
-        visualization_revision_ids = []
-
-    # reindexing the top published revision
-    datastreams = DataStreamRevision.objects.filter(id__in=datastream_revision_ids)
-    dashboards = DashboardRevision.objects.filter(id__in=dashboard_revision_ids)
-    visualizations = VisualizationRevision.objects.filter(id__in=visualization_revision_ids)
     docs = []
-    resources = list(datastreams) + list(dashboards) + list(visualizations)
+    resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
     for resource in resources:
         doc=resource.get_dict(language)
         docs.append(doc)
