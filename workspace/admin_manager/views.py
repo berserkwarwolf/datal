@@ -522,10 +522,12 @@ def reindex_category_resources(category_id, language):
     datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
     datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
 
+    """
     logger = logging.getLogger(__name__)
     logger.info("Datasets %s" % datasets.query)
     logger.info("Datastreams %s" % datastreams.query)
-        
+    """ 
+    
     #TODO agregar dashboards agregando previamente los campos last_revision y last_published_revision
     #TODO agregar visualizaciones cuando se desarrolle el campo categoria para el
 
