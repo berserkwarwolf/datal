@@ -21,7 +21,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
-        parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+        #parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+        parameters = []
 
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)

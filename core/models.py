@@ -220,18 +220,19 @@ class DataStreamRevision(models.Model):
         return unicode(self.id)
 
     def update(self, changed_fields, **fields):
-        if 'category' in changed_fields:
-            self.category = Category.objects.get(id=fields['category'])
-        if 'status' in changed_fields:
-            self.status = fields['status']
-        if 'data_source' in changed_fields:
-            self.data_source = fields['data_source']
-        if 'select_statement' in changed_fields:
-            self.select_statement = fields['select_statement']
-        if 'meta_text' in changed_fields:
-            self.meta_text = fields['meta_text']
-        if 'rdf_template' in changed_fields:
-            self.rdf_template = fields['rdf_template']
+        if changed_fields:
+            if 'category' in changed_fields:
+                self.category = Category.objects.get(id=fields['category'])
+            if 'status' in changed_fields:
+                self.status = fields['status']
+            if 'data_source' in changed_fields:
+                self.data_source = fields['data_source']
+            if 'select_statement' in changed_fields:
+                self.select_statement = fields['select_statement']
+            if 'meta_text' in changed_fields:
+                self.meta_text = fields['meta_text']
+            if 'rdf_template' in changed_fields:
+                self.rdf_template = fields['rdf_template']
 
         self.save()
 
@@ -375,9 +376,13 @@ class DatastreamI18n(models.Model):
         return self.title
 
     def update(self, changed_fields, **fields):
-        if 'title' in changed_fields: self.title = fields['title']
-        if 'description' in changed_fields: self.description = fields['description']
-        if 'notes' in changed_fields: self.notes = fields['notes']
+        if changed_fields:
+            if 'title' in changed_fields:
+                self.title = fields['title']
+            if 'description' in changed_fields:
+                self.description = fields['description']
+            if 'notes' in changed_fields:
+                self.notes = fields['notes']
         self.save()
 
 

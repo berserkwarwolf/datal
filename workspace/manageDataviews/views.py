@@ -32,9 +32,9 @@ def view(request, revision_id):
     credentials = request.auth_manager
     language = request.auth_manager.language
     categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')
-    status_options=credentials.get_allowed_actions()
+    status_options = credentials.get_allowed_actions()
 
-    datastream = DataStreamDBDAO().get(language, datastream_revision_id = revision_id)
+    datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
 
     return render_to_response('viewDataStream/index.html', locals())
 
@@ -44,9 +44,9 @@ def view(request, revision_id):
 @require_GET
 def list(request):
     """ list all dataviews """
-    ds_dao = DataStreamDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.account.id, language=request.user.language)
-
+    resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
+    print(resources)
+    print(total_resources)
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDataviews/noResults.html', locals())
         
@@ -90,11 +90,15 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     #order = bb_request.get('sortorder')
     #filters_dict=filters_dict
     ds_dao = DataStreamDBDAO()
-    resources,total_resources = ds_dao.query(account_id=request.account.id,
-                                              language=request.user.language,
-                                              page=page, itemsxpage=itemsxpage
-                                              ,filters_dict = filters_dict
-                                              ,filter_name=filter_name)
+    resources,total_resources = ds_dao.query(
+        account_id=request.account.id,
+        language=request.user.language,
+        page=page,
+        itemsxpage=itemsxpage,
+        filters_dict=filters_dict,
+        filter_name=filter_name
+    )
+
     for resource in resources:
         # resources[i]['url'] = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(resources[i]['id']))
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
@@ -301,17 +305,16 @@ def edit(request, datastream_revision_id=None):
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
 
         dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-        dataview.edit(title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'],
-                     is_test=form.cleaned_data['is_test'] )
+        dataview.edit(
+            language=request.auth_manager.language,
+            **form.cleaned_data
+        )
 
-
-        response = {'status': 'ok', 'datastream_revision_id': dataview.datastream_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            datastream_revision_id= dataview.datastream_revision.id,
+            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+        )
 
         return JSONHttpResponse(json.dumps(response))
 

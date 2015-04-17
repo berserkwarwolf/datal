@@ -36,13 +36,14 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         return datastream, datastream_revision
 
     def update(self, datastream_revision, changed_fields, **fields):
-
         datastream_revision.update(changed_fields, **fields)
 
         DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=fields['language']).update(changed_fields, **fields)
 
-        datastream_revision.add_tags(fields['tags'])
-        datastream_revision.add_sources(fields['sources'])
+        if 'tags' in fields:
+            datastream_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            datastream_revision.add_sources(fields['sources'])
 
         return datastream_revision
 

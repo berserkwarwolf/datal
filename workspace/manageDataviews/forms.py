@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 from django import forms
 from django.core.validators import validate_comma_separated_integer_list as vil
-# from django.utils.translation import ugettext_lazy
 from core.choices import *
+from django.core.urlresolvers import reverse
+
 
 class DeleteDataviewForm(forms.Form):
     revision_id = forms.CharField(required=True, validators=[vil])
     #TODO DOESN'T WORK. Always return 'false' and delete resources!
     #is_test = forms.BooleanField(required=False, initial='True')
+
 
 class CreateDataStreamForm(forms.Form):
     dataset_revision_id = forms.IntegerField(label=ugettext_lazy( 'APP-DATASETREVISION-TEXT' ), required=True, widget = forms.HiddenInput)
@@ -19,6 +21,7 @@ class CreateDataStreamForm(forms.Form):
     title               = forms.CharField(label=ugettext_lazy( 'APP-TITLE-TEXT' ), required=True)
     description         = forms.CharField(label=ugettext_lazy( 'APP-DESCRIPTION-TEXT' ), required=True)
     meta_text           = forms.CharField(label=ugettext_lazy( 'APP-METATEXT-TEXT' ), required=False)
+
 
 class EditDataStreamForm(forms.Form):
     datastream_revision_id = forms.IntegerField(required=True, widget = forms.HiddenInput)
@@ -33,9 +36,9 @@ class EditDataStreamForm(forms.Form):
     is_test             = forms.BooleanField(required=False) # evalueate impact or just doit?
 
 
-
 class ViewDataStreamForm(forms.Form):
     datastream_revision_id = forms.IntegerField(label=ugettext_lazy( 'APP-DATASTREAMREVISION-TEXT' ), required=True)
+
 
 class UpdateDataStreamNoteForm(forms.Form):
     datastream_revision_id      = forms.IntegerField(label=ugettext_lazy( 'APP-DATASTREAMREVISION-TEXT' ), required=True, widget = forms.HiddenInput)
@@ -44,8 +47,10 @@ class UpdateDataStreamNoteForm(forms.Form):
     def action(self):
         return reverse('datastream_manager.action_update_note')
 
+
 class InitalizeCollectForm(forms.Form):
     dataset_revision_id        = forms.IntegerField(label=ugettext_lazy( 'APP-DATASETREVISION-TEXT' ), required=True)
+
 
 class PreviewForm(forms.Form):
     end_point = forms.CharField(required=False)

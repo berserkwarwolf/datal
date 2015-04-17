@@ -234,49 +234,17 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:
-
-            self.datastream_revision = DataStreamDBDAO().update(self.datastream_revision
-                                                            , changed_fields
-                                                            , title=fields['title']
-                                                            , description=fields['description']
-                                                            , language=fields['language']
-                                                            , category=fields['category']
-                                                            , impl_type=fields['impl_type']
-                                                            , file_name=fields['file_name']
-                                                            , end_point=fields['end_point']
-                                                            , file_size=fields.get('file_size', 0)
-                                                            , notes=fields['notes']
-                                                            , license_url=fields['license_url']
-                                                            , spatial=fields['spatial']
-                                                            , frequency=fields['frequency']
-                                                            , mbox=fields['mbox']
-                                                            , tags=fields['tags']
-                                                            , sources=fields['sources']
-                                                            , params=fields.get('params', []))
-
+            self.datastream_revision = DataStreamDBDAO().update(
+                self.datastream_revision,
+                changed_fields,**fields
+            )
         else:
-
-            self.datastream, self.datastream_revision = DataStreamDBDAO().create(dataset=self.datastream
-                                                                        , title=fields['title']
-                                                                        , description=fields['description']
-                                                                        , language=language
-                                                                        , status=StatusChoices.DRAFT
-                                                                        , category=fields['category']
-                                                                        , impl_type=fields['impl_type']
-                                                                        , file_name=fields['file_name']
-                                                                        , end_point=fields['end_point']
-                                                                        , file_size=fields.get('file_size', 0)
-                                                                        , notes=fields['notes']
-                                                                        , license_url=fields['license_url']
-                                                                        , spatial=fields['spatial']
-                                                                        , frequency=fields['frequency']
-                                                                        , mbox=fields['mbox']
-                                                                        , tags=fields['tags']
-                                                                        , sources=fields['sources']
-                                                                        , params=fields.get('params', []))
+            self.datastream, self.datastream_revision = DataStreamDBDAO().create(
+                dataset=self.datastream,
+                status=StatusChoices.DRAFT,
+            )
 
             self._move_childs_to_draft()
-
 
         status = fields['status']
 
