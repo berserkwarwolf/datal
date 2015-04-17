@@ -14,20 +14,26 @@
 /* STEP 1 */
 .step1 .contentForm{overflow:auto;overflow-x:auto;overflow-y:hidden;}
 
+	/*TIPS*/
+	.step1 #id_disclaimerContainer{background:rgba(255, 255, 255, 0.8);bottom:0;left:87px;right:11px;position:fixed;border-top:1px solid #ccc;}
+	.step1 .disclamers .close{position:absolute;top:10px;right:8px;cursor:pointer;outline:none;background:url(/static/workspace/images/common/ic_actions.png) no-repeat 0 -180px;display:block;height:20px;width:16px;}
+	.step1 .disclamers ul > li{padding:0 0 5px 10px;font-size:12px;color:#666;background: url(/static/workspace/images/common/ic_VM.png) no-repeat 0 5px;}
+
+	.disclaimerContent, .contentTable{padding:15px;}
+	.disclaimerContent ul ol li{padding-top:5px;}
+
+	.buttons{border-top:1px solid #E2E0E0;padding:15px;background-color:#f6f9ff;text-align:center;
+		-webkit-border-radius: 0 0 3px 3px;
+		-moz-border-radius: 0 0 3px 3px;
+		border-radius: 0 0 3px 3px;
+	}
+	.buttons .button{display:inline-block;}
+
 /*STEP 2*/
 .step2 .columns{padding-top:0;background:none;}
 .step2 .toolbar .Icon{width:auto;line-height:16px;}
 .step2 .toolbar .ic_Skype{width:16px;}
 .step2 .advancedBox .boxPanel p{margin-bottom:10px;}
-
-	/*EXPANDED*/
-	.step2 .expandedContainer{padding-left:320px;}
-	.step2 .expandedContainer .expandedInner{width:100%;}
-	.step2 .expandedContainer .columns{width:100%;float:left;margin:0 0 0 -320px;padding:0;}
-	.step2 .expandedContainer .columns .CL{float:right;width:100%;margin:0 -320px 0 0;padding:0;}
-	.step2 .expandedContainer .columns .CL .dataTable{padding:0 0 0 20px;}
-	.step2 .expandedContainer .columns .CR{float:left;overflow:auto;overflow-x:hidden;overflow-y:auto;width:320px;position:relative;padding:0;}
-	.step2 .expandedContainer .columns .CR .columnContent{float:none;padding:23px 20px 0 20px;width:auto;margin:0;}
 
     /*SCROLLBAR FIX*/
     .step2 .dataTable .dataTableInner{overflow:auto;}
@@ -111,7 +117,6 @@
 	.ui-selectable-helper div{background:#F19030;opacity:0.2;filter:alpha(opacity=20);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";width:100%;height:100%;}
 	
 /*STEP 3*/
-/* modules/dataStreamForm.css */
 .step3 fieldset.form{padding-bottom:25px;}
 
 /*STEP 4*/
@@ -160,40 +165,3 @@
 .step3 .wsParamsContainer h5{margin-bottom:10px !important;}
 .step1 .datasetParamsContainer input[disabled=disabled],
 .step3 .wsParamsContainer input[disabled=disabled]{background:#eee;color:gray;text-shadow:0 1px 0 #fff;}
-
-
-.step1 #id_disclaimerContainer {
-background: url(/static/workspace/images/common/bg_whiteMask.png);
-background: rgba(255, 255, 255, 0.8);
-bottom: 0;
-left:87px;
-right:11px;
-position: fixed;
-border-top:1px solid #ccc;
-}
-.step1 .disclamers .close {
-position: absolute;
-top: 10px;
-right: 8px;
-cursor: pointer;
-outline: none;
-background: url(/static/workspace/images/common/ic_actions.png) no-repeat 0 -180px;
-display: block;
-height: 20px;
-width: 16px;
-}
-.step1 .disclamers ul > li {
-padding: 0 0 5px 10px;
-font-size: 12px;
-color: #666;
-background: url(/static/workspace/images/common/ic_VM.png) no-repeat 0 5px;
-}
-.disclaimerContent, .contentTable{padding:15px;}
-.disclaimerContent ul ol li{padding-top:5px;}
-
-.buttons{border-top:1px solid #E2E0E0;padding:15px;background-color:#f6f9ff;text-align:center;
-	-webkit-border-radius: 0 0 3px 3px;
-	-moz-border-radius: 0 0 3px 3px;
-	border-radius: 0 0 3px 3px;
-}
-.buttons .button{display:inline-block;}

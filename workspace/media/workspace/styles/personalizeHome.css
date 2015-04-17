@@ -1,22 +1,8 @@
-/* Title */
-.title {
-	margin:15px 0 25px;
-	border-bottom:1px solid #e2e0e0;
-}
-	
-.title h1{
-	font-size:18px;line-height:normal;color:#333;height:39px;line-height:39px;}
-
-
 /* Theme Tabs */
 .themeTabs{margin-bottom:15px;}
 .themeTabs > ul{position:relative;z-index:2;border-bottom:1px solid #e2e0e0;padding-bottom:5px;}
 .themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;background:#f4f4f4;}
 .themeTabs > ul li:nth-child(4n){margin-right:0;}
-	/* FIX IE8 */
-	.themeTabs > ul li.theme2,
-	.themeTabs > ul li.theme6,
-	.themeTabs > ul li.theme10{margin-right:0 !important;}
 .themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;border:1px solid #f4f4f4;}
 .themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:#333;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
 .themeTabs > ul li a .img{position:relative;z-index:3;display:block;width:146px;margin:0 auto;}
@@ -93,16 +79,10 @@
 		.themeTabs > ul li.theme6 a .i6{width:30px;height:23px;line-height:23px;top:121px;left:98px;}
 		.themeTabs > ul li.theme6 a .i7{height:28px;line-height:28px;top:152px;}
 
-
-/* Theme Configs */
-.configs{padding-bottom:30px;}
-.configs > .CR{margin-top:15px;}
-
 /* Title and Description */
 .configs .title{margin:0 0 5px;border:0 !important;}
 .configs .description,
 .configs .configDescription{padding-bottom:20px;line-height:21px;font-size:14px;}
-.configs .description{padding-bottom:13px;}
 
 /* Forms */
 .configs form{border-top:1px solid #e2e0e0;padding-top:20px;}
@@ -129,18 +109,7 @@
 .configs .formBox fieldset input.field{height:30px;padding:0 12px;}
 .configs .formBox fieldset textarea.field{padding:12px;height:100px;}
 
-.configs .formBox fieldset .organizer{}
-.configs .formBox fieldset .organizer select{width:252px;height:170px;margin-left:10px;}
-.configs .formBox fieldset .organizer select:first-child{margin-left:0;}
-.configs .formBox fieldset .organizer .organizerButtons{padding-top:56px;}
-.configs .formBox fieldset .organizer .organizerButtons .actionButton{font-weight:bold;font-size:12px;margin:0 0 10px 10px;}
-
 .configs form table td{border:0;}
-.configs textarea.errorFormValidation,
-.configs input.errorFormValidation[type=text],
-.configs input.errorFormValidation[type=url],
-.configs input.errorFormValidation[type=email]{-webkit-box-shadow:0 0 3px 0 #fa4848;-moz-box-shadow:0 0 3px 0 #fa4848;box-shadow:0 0 3px 0 #fa4848;border:1px solid #fa4848;}
-.configs .formErrorMessageContainer div.errorFormValidation{display:none !important;}
 .configs .formBox fieldset.imageComponent.theme3,
 .configs .buttonsSection fieldset.imageComponent,
 .configs .linksSection fieldset.imageComponent{padding-top:0;}
@@ -212,22 +181,7 @@
 .buttons{padding-top:15px;clear:both;border-top:1px solid #E2E0E0;}
 .buttons .button{margin:0 5px;}
 
-/* Tagging 
-body .ui-autocomplete .ui-menu-item a.ui-state-hover{background-color:#7ab33f !important;}
-body .ui-autocomplete .ui-menu-item a.ic_Dset,
-.tag .tagTxt.ic_Data{background-position:5px -464px !important;padding-left:25px !important;}
-body .ui-autocomplete .ui-menu-item a.ic_Data,
-.tag .tagTxt.ic_Data{background-position:5px -514px !important;padding-left:25px !important;}
-body .ui-autocomplete .ui-menu-item a.ic_Chart,
-.tag .tagTxt.ic_Chart{background-position:5px -564px !important;padding-left:25px !important;}
-body .ui-autocomplete .ui-menu-item a.ic_Dashboard,
-.tag .tagTxt.ic_Dashboard{background-position:5px -614px !important;padding-left:25px !important;}
-.tag .tagTxt{background-image:none;}
-.tag .tagTxt,
-.tag .tagTxt.ic_Data,
-.tag .tagTxt.ic_Chart,
-.tag .tagTxt.ic_Dashboard{background-color:#fbfbfb !important;}
-*/
+/* Tagging */
 .tagsContent{margin-left:0;}
 .tag .tagTxt{line-height:22px;}
 .ic_Data{background-position:2px -19px !important;}
