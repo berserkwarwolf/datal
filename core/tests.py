@@ -19,7 +19,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.collect_type = CollectTypeChoices.SELF_PUBLISH
         self.source_type = SourceImplementationChoices.HTML
 
-    def create_dataset(self):
+    def create_dataset(self, status = StatusChoices.DRAFT):
         life_cycle = DatasetLifeCycleManager(user=self.user, language=self.user.language)
 
         self.dataset_revision = life_cycle.create(
@@ -30,7 +30,8 @@ class LifeCycleManagerTestCase(TransactionTestCase):
             notes='',
             category=self.category.id,
             impl_type=self.source_type,
-            file_name=''
+            file_name='',
+            status=status
         )
 
         self.dataset = self.dataset_revision.dataset
@@ -50,6 +51,22 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_create_dataset_published(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        self.create_dataset(status = StatusChoices.PUBLISHED)
+
+        new_dataset = Dataset.objects.get(id=self.dataset.id)
+
+        # Verifico los campos del dataset
+        self.assertEqual(new_dataset.user, self.user)
+        self.assertEqual(new_dataset.type, self.source_type)
+        self.assertFalse(new_dataset.is_dead)
+        self.assertIsNot(new_dataset.guid, '')
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_revision, new_dataset.last_published_revision)
 
     def test_remove_last_revision(self):
         """
