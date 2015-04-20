@@ -524,10 +524,12 @@ i.icon.TNCLIMA{}
      -moz-box-shadow:0 1px 0 #f9f9fb;
           box-shadow:0 1px 0 #f9f9fb;
 }
-.alert p, .alert a{display:inline;color:#FFF;line-height:24px;text-shadow:0 1px #1750b7;font-size:14px;} 
+  .alert p, .alert a{display:inline;color:#FFF;line-height:24px;text-shadow:0 1px #1750b7;font-size:14px;} 
   /* Alerts - Icons */
   .alert i.icon{background-image:url('../images/common/ic_resources.png');background-repeat:no-repeat;width:17px;height:17px;margin:3px 6px 3px 3px;padding:0;float:left;}
   .alert i.icon.info{background-position:0 -81px;}
+  /* Alerts - Buttons */
+  .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
 .helpBox:first-child{background-color:#f6f9ff;background-image:none;padding:15px;float:right;margin:20px;
