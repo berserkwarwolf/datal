@@ -40,7 +40,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                     pk=self.datastream.last_revision_id)
             elif datastream_revision_id > 0:
                 self.datastream_revision = DataStreamRevision.objects.select_related().get(pk=datastream_revision_id)
-                self.datastream = self.datastream_revision.dataset
+                self.datastream = self.datastream_revision.datastream
             else:
                 self.datastream_revision = None
                 self.datastream = None
@@ -284,17 +284,20 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
 
-        last_revision = DataStreamRevision.objects.filter(datastream=self.datastream).aggregate(Max('id'))
+        last_revision_id = DataStreamRevision.objects.filter(datastream=self.datastream).aggregate(Max('id'))['id__max']
 
-        if last_revision is not None:
-            self.datastream.last_revision_id = last_revision['id__max']
-            last_published_revision = DataStreamRevision.objects.filter(datastream=self.datastream,
-                status=StatusChoices.PUBLISHED).aggregate(Max('id')
-            )
+        if last_revision_id:
+            self.datastream.last_revision = DataStreamRevision.objects.get(pk=last_revision_id)
 
-            last_published_revision_id = last_published_revision is not None and last_published_revision['id__max'] or None
+            last_published_revision_id = DataStreamRevision.objects.filter(
+                datastream=self.datastream,
+                status=StatusChoices.PUBLISHED).aggregate(Max('id'))['id__max']
 
-            if last_published_revision_id != self.datastream.last_published_revision_id:
-                    self.datastream.last_published_revision_id = last_published_revision_id
+            if last_published_revision_id:
+                    self.datastream.last_published_revision = DataStreamRevision.objects.get(pk=last_published_revision_id)
 
             self.datastream.save()
+        else:
+            # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
+            if self.datastream.id:
+                self.datastream.delete()
