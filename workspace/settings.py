@@ -50,7 +50,10 @@ CSRF_COOKIE_SECURE = False
 
 STATICFILES_DIRS += (os.path.join(PROJECT_PATH, 'workspace/media/'),)
 
-
+if DEBUG:
+    INSTALLED_APPS += (
+        'selenium',
+)
 
 try:
     from workspace.local_settings import *
