@@ -107,7 +107,15 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 	}, 
 
 	onDeleteButtonClicked: function(){
-		console.log('delete');
+		self = this;
+        this.deleteListResources = new Array();
+        this.deleteListResources.push(this.options.model);
+        var deleteItemView = new DeleteItemView({
+            itemCollection: self.options.itemCollection,
+            models: this.deleteListResources,
+            type: "datastreams",
+            parentView: this.parentView
+        });
 	},
 
 	review: function(event){
