@@ -183,8 +183,10 @@ class User(models.Model):
 class DataStream(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     guid                = models.CharField(max_length=29, unique=True)
-    last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision')
-    last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision')
+    last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision',
+                                            on_delete=models.SET_NULL)
+    last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision',
+                                                on_delete=models.SET_NULL)
     objects             = managers.DataStreamManager()
     class Meta:
         db_table        = 'ao_datastreams'
@@ -199,17 +201,18 @@ class DataStream(GuidModel):
 
 
 class DataStreamRevision(models.Model):
-    datastream          = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
-    dataset             = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    category            = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
-    data_source         = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
-    select_statement    = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
-    status              = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
-    meta_text           = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    rdf_template        = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
-    objects             = managers.DataStreamRevisionManager()
+    datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
+    dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'), on_delete=models.PROTECT)
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
+    data_source = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
+    select_statement = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
+    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    rdf_template = models.TextField(blank=True,
+                                    verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
+    objects = managers.DataStreamRevisionManager()
 
     class Meta:
         db_table        = 'ao_datastream_revisions'
