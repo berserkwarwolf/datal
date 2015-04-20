@@ -236,12 +236,14 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if old_status == StatusChoices.DRAFT:
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
-                changed_fields,**fields
+                changed_fields,
+                **fields
             )
         else:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
-                dataset=self.datastream,
+                datastream=self.datastream,
                 status=StatusChoices.DRAFT,
+                **fields
             )
 
             self._move_childs_to_draft()

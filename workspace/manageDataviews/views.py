@@ -1,39 +1,37 @@
+import json
+
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
+from django.core.urlresolvers import reverse
+
+from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
-from workspace.settings import *
 from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import LifeCycleException
-from core.choices import *
 from core.models import DatasetRevision, Account,CategoryI18n
 from api.http import JSONHttpResponse
-# from core import helpers as LocalHelper
-from django.core.urlresolvers import reverse
 from core import engine
-
-import json
 
 
 @login_required
 @require_GET
 def view(request, revision_id):
-    #TODO use for datastreams
-    # revision_id = request.GET['datastream_revision_id']
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     language = request.auth_manager.language
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values(
+        'category__id',
+        'name'
+    )
     status_options = credentials.get_allowed_actions()
-
     datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
 
     return render_to_response('viewDataStream/index.html', locals())
@@ -45,8 +43,6 @@ def view(request, revision_id):
 def list(request):
     """ list all dataviews """
     resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
-    print(resources)
-    print(total_resources)
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDataviews/noResults.html', locals())
         
@@ -116,7 +112,7 @@ def related_resources(request):
     resource_type = request.GET.get('type', 'all')
     datastreams = DataStreamDBDAO().query_childs(language=language)['datastreams']
 
-    list_result = [associated_datastream for associated_datastream in associated_datastreams]
+    list_result = [associated_datastream for associated_datastream in datastreams]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
 @login_required
@@ -305,8 +301,10 @@ def edit(request, datastream_revision_id=None):
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
 
         dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+
         dataview.edit(
             language=request.auth_manager.language,
+            changed_fields=form.changed_data,
             **form.cleaned_data
         )
 
