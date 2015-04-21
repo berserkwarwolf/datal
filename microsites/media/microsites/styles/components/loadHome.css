@@ -368,89 +368,62 @@ body .theme2 .caroufredsel_wrapper{border:0 !important;}
 
 
 
+/* Imported from workspaceCommon.css. See where it goes then */
 
+/*CL - Sidebar*/
+.liquidWidth .sidebar .sidebarInner{height:100%;margin-right:17px;background:#f6f4f4 url(/static/workspace/images/_workspace/dg_sidebar.gif) repeat-y right 0;overflow:auto;overflow-x:hidden;overflow-y:auto;}
+.liquidWidth .sidebar .sidebarPadding{padding:13px;border-top:1px solid #fff;}
 
-/*WORKSPACE COMMON*/
+    /*ACCOUNT LOGO - CREATE BUTTON*/
+    .sidebar .accountLogo{padding-bottom:14px;max-height:300px;overflow:hidden;}
+    .sidebar .accountLogo img{width:136px;border:1px solid #fff;}
+    .sidebar .buttons{padding-bottom:12px;}
+    .sidebar .buttons .button{width:100%;padding:0;}
 
-/*
-html{background:#fff;}
-html, body, .layout{height:100%;}
-body > .layout{height:auto;min-height:100%;}
-.layoutInner{padding-bottom:42px;min-height:100%;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-}  
-.footer{position:relative;margin-top:-42px;} 
-.content,
-.layout{background:#fff url(/static/workspace/images/_workspace/bg_sidebar.gif) repeat-y 0 0;}
-*/
+    /*FILTERS*/
+    .sidebar .filters dd,
+    .sidebar .filters dt{border-bottom:1px solid #fff;text-shadow:0 1px 0 #fff;}
+    .sidebar .filters dd span,
+    .sidebar .filters dt span{border-bottom:1px solid #e5e4e4;display:block;padding:2px 7px;line-height:16px;font-size:11px;}
+    .sidebar .filters dt span{font-weight:bold;font-size:12px;color:#918989;padding-bottom:4px;}
+    .sidebar .filters dd{word-break:break-word;}
+    .sidebar .filters dd span{color:#2875bb;padding-right:15px;}
+    .sidebar .filters dd span:hover{background:#eee;}
+    .sidebar .filters .filter-active,
+    .sidebar .filters dd.filter-active span,
+    .sidebar .filters dd.filter-active span:hover{background:#eee url(/static/workspace/images/_workspace/ic_filtersArrow.gif) no-repeat right 7px;font-weight:bold;color:#333;}
+    .sidebar .filters dd.filter-active{background:none;}
 
-/*LIQUID DESIGN*/
-.liquidWidth{padding-left:185px;height:100%;padding-bottom:30px;
-    -webkit-box-sizing: border-box;
-       -moz-box-sizing: border-box;
-            box-sizing: border-box;
-}
-.liquidWidth .liquidWidthInner{width:100%;height:100%;}
-.liquidWidth .columns{width:100%;float:left;margin:0 0 0 -185px;padding:0;height:100%;}
-.liquidWidth .CL{float:left;width:185px;}
-.liquidWidth .CR{float:right;width:100%;margin:0 -185px 0 0;height:100%;}
+/*CR - Grid*/
+.liquidWidth .gridInner{padding:7px 10px 10px 0;}
 
-    /*CL - Sidebar*/
-    .liquidWidth .sidebar .sidebarInner{height:100%;margin-right:17px;background:#f6f4f4 url(/static/workspace/images/_workspace/dg_sidebar.gif) repeat-y right 0;overflow:auto;overflow-x:hidden;overflow-y:auto;}
-    .liquidWidth .sidebar .sidebarPadding{padding:13px;border-top:1px solid #fff;}
+    /*SECTION INFO*/
+    .sectionInfo{border-bottom:1px solid #e0e0e0;padding-bottom:7px;}
+    .sectionInfo h2{font-size:18px;color:#333;font-weight:bold;padding-top:8px;display:inline-block;}
+    .sectionInfo .massive{border-left:1px solid #e0e0e0;padding-left:10px;margin:8px 0 0 10px;display:inline-block;}
+    .sectionInfo .massive label{font-size:11px;padding:2px 8px 0 0;}
 
-        /*ACCOUNT LOGO - CREATE BUTTON*/
-        .sidebar .accountLogo{padding-bottom:14px;max-height:300px;overflow:hidden;}
-        .sidebar .accountLogo img{width:136px;border:1px solid #fff;}
-        .sidebar .buttons{padding-bottom:12px;}
-        .sidebar .buttons .button{width:100%;padding:0;}
+    /*SEARCH*/
+    .search{border:1px solid #e0e0e0;background:url(/static/workspace/images/_workspace/dg_inputs.gif) repeat-x 0 0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
+    .search .field{padding:0 5px 0 29px;width:185px;border:1px solid #fff;background:#fff url(/static/workspace/images/_workspace/ic_searchInputs.gif) no-repeat 9px 6px;height:27px;line-height:27px;}
 
-        /*FILTERS*/
-        .sidebar .filters dd,
-        .sidebar .filters dt{border-bottom:1px solid #fff;text-shadow:0 1px 0 #fff;}
-        .sidebar .filters dd span,
-        .sidebar .filters dt span{border-bottom:1px solid #e5e4e4;display:block;padding:2px 7px;line-height:16px;font-size:11px;}
-        .sidebar .filters dt span{font-weight:bold;font-size:12px;color:#918989;padding-bottom:4px;}
-        .sidebar .filters dd{word-break:break-word;}
-        .sidebar .filters dd span{color:#2875bb;padding-right:15px;}
-        .sidebar .filters dd span:hover{background:#eee;}
-        .sidebar .filters .filter-active,
-        .sidebar .filters dd.filter-active span,
-        .sidebar .filters dd.filter-active span:hover{background:#eee url(/static/workspace/images/_workspace/ic_filtersArrow.gif) no-repeat right 7px;font-weight:bold;color:#333;}
-        .sidebar .filters dd.filter-active{background:none;}
+    /*PAGINATION - ITEMS PER PAGE*/
+    .pagination{padding:26px 13px 0 0;background:none;}
+    .pagination-pages{height:21px;vertical-align:top;display:inline-block;}
+    .itemsPerPage{padding-right:10px;}
+    .itemsPerPage label{font-size:11px;padding:3px 8px 0 0;}
+    .pagButtons .Ant,
+    .pagButtons .Sig{float:none;display:inline-block;}
+    .itemsPerPage select{font-size:11px;}
 
-    /*CR - Grid*/
-    .liquidWidth .gridInner{padding:7px 10px 10px 0;}
-
-        /*SECTION INFO*/
-        .sectionInfo{border-bottom:1px solid #e0e0e0;padding-bottom:7px;}
-        .sectionInfo h2{font-size:18px;color:#333;font-weight:bold;padding-top:8px;display:inline-block;}
-        .sectionInfo .massive{border-left:1px solid #e0e0e0;padding-left:10px;margin:8px 0 0 10px;display:inline-block;}
-        .sectionInfo .massive label{font-size:11px;padding:2px 8px 0 0;}
-
-        /*SEARCH*/
-        .search{border:1px solid #e0e0e0;background:url(/static/workspace/images/_workspace/dg_inputs.gif) repeat-x 0 0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
-        .search .field{padding:0 5px 0 29px;width:185px;border:1px solid #fff;background:#fff url(/static/workspace/images/_workspace/ic_searchInputs.gif) no-repeat 9px 6px;height:27px;line-height:27px;}
-
-        /*PAGINATION - ITEMS PER PAGE*/
-        .pagination{padding:26px 13px 0 0;background:none;}
-        .pagination-pages{height:21px;vertical-align:top;display:inline-block;}
-        .itemsPerPage{padding-right:10px;}
-        .itemsPerPage label{font-size:11px;padding:3px 8px 0 0;}
-        .pagButtons .Ant,
-        .pagButtons .Sig{float:none;display:inline-block;}
-        .itemsPerPage select{font-size:11px;}
-
-        /*WORKSPACE GRID*/
-        .workspaceGrid table{width:100%;}
-        .workspaceGrid table th,
-        .workspaceGrid table td{line-height:18px;padding:2px 5px;border-bottom:1px solid #e0e0e0;background:#fff;color:#333;word-break:break-word;vertical-align:top;}
-        .workspaceGrid table th{text-align:left;background:#f6f5f5;color:#aaa;text-shadow:0 1px 0 #fff;font-weight:bold;}
-        .workspaceGrid table tr:nth-child(even) > td{background:#fcfcfc;}
-        .workspaceGrid .viewInfo .sep{color:#e0e0e0;padding:0 2px;}
-        .workspaceGrid .noneMsg{height:50px;text-align:center;font-size:14px;background:#FEEFDC;color:#A82A1B;text-shadow:0 1px 0 rgba(255,255,255,.5);line-height:50px;border-color:#e1b09e;}
+    /*WORKSPACE GRID*/
+    .workspaceGrid table{width:100%;}
+    .workspaceGrid table th,
+    .workspaceGrid table td{line-height:18px;padding:2px 5px;border-bottom:1px solid #e0e0e0;background:#fff;color:#333;word-break:break-word;vertical-align:top;}
+    .workspaceGrid table th{text-align:left;background:#f6f5f5;color:#aaa;text-shadow:0 1px 0 #fff;font-weight:bold;}
+    .workspaceGrid table tr:nth-child(even) > td{background:#fcfcfc;}
+    .workspaceGrid .viewInfo .sep{color:#e0e0e0;padding:0 2px;}
+    .workspaceGrid .noneMsg{height:50px;text-align:center;font-size:14px;background:#FEEFDC;color:#A82A1B;text-shadow:0 1px 0 rgba(255,255,255,.5);line-height:50px;border-color:#e1b09e;}
 
 /*OVERLAY*/
 .ao-popup-overlay .In, 
