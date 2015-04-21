@@ -1,0 +1,34 @@
+{% load i18n extra_tags core_components components %}
+
+<!-- Delete Dataset Overlay -->
+{% overlay id_deleteDataset %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-DELETE-DATASET-TITLE' %}</h4>
+   <div class="ov-content">
+      <p class="text center">{% trans 'APP-OVERLAY-DELETE-DATASET-TEXT' %}</p>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_deleteResource" class="button red small" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
+         <a id="id_deleteRevision" class="button red small" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}
+
+<!-- Delete Dataset Confirm Overlay -->
+{% overlay id_confirmDeleteDataset %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE' %}</h4>
+   <div class="ov-content">
+      <p>{% trans 'APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT' %}</p>
+      <ul id="id_affectedResourcesList"></ul>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_deleteRelatedResources" class="button red small" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
+         <a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}

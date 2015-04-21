@@ -1,7 +1,7 @@
 from core.shortcuts import render_to_response
 from core.models import Dataset, DatasetRevision
 from core.docs import DT
-from microsites.daos import DatasetDAO
+from microsites.daos.datasets import DatasetDAO
 from microsites.helpers import set_dataset_impl_type_nice
 from django.http import Http404
 import logging

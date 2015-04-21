@@ -6,26 +6,27 @@ from core import choices
 from core import managers
 from core.bigdata import Bigdata
 from core.helpers import get_meta_data_dict
-from django.shortcuts import get_object_or_404
 import logging
 import json
 
 logger = logging.getLogger(__name__)
 
 def add_facets_to_doc(resource, account, doc):
+    logger = logging.getLogger(__name__)
     faceted = account.faceted_fields()
-    try:
-        field_values = json.loads(resource.meta_text)['field_values']
-    except:
-        field_values = []
-        logger = logging.getLogger(__name__)
-        logger.error("BAD FIELDS_VALUES: %s -- %s" % (repr(resource), str(doc)))
-
-    for fv in field_values:
-        # Take only the first key
-        key = fv.keys()[0]
-        if key in faceted:
-            doc['categories'][key] = fv[key]
+    if resource.meta_text:
+        try:
+            meta_text = json.loads(resource.meta_text)
+        except:
+            field_values = []    
+            logger.error("BAD FIELDS_VALUES: %s -- %s -- %s" % (repr(resource), str(doc), resource.meta_text))
+    
+        field_values =  meta_text['field_values']
+        for fv in field_values:
+            # Take only the first key
+            key = fv.keys()[0]
+            if key in faceted:
+                doc['categories'][key] = fv[key]
 
     return doc
 
@@ -182,8 +183,10 @@ class User(models.Model):
 class DataStream(GuidModel):
     user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     guid                = models.CharField(max_length=29, unique=True)
-    last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision')
-    last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision')
+    last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision',
+                                            on_delete=models.SET_NULL)
+    last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision',
+                                                on_delete=models.SET_NULL)
     objects             = managers.DataStreamManager()
     class Meta:
         db_table        = 'ao_datastreams'
@@ -198,17 +201,18 @@ class DataStream(GuidModel):
 
 
 class DataStreamRevision(models.Model):
-    datastream          = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
-    dataset             = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    category            = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
-    data_source         = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
-    select_statement    = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
-    status              = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
-    meta_text           = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    rdf_template        = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
-    objects             = managers.DataStreamRevisionManager()
+    datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
+    dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'), on_delete=models.PROTECT)
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
+    data_source = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
+    select_statement = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
+    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    rdf_template = models.TextField(blank=True,
+                                    verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
+    objects = managers.DataStreamRevisionManager()
 
     class Meta:
         db_table        = 'ao_datastream_revisions'
@@ -219,18 +223,19 @@ class DataStreamRevision(models.Model):
         return unicode(self.id)
 
     def update(self, changed_fields, **fields):
-        if 'category' in changed_fields:
-            self.category = Category.objects.get(id=fields['category'])
-        if 'status' in changed_fields:
-            self.status = fields['status']
-        if 'data_source' in changed_fields:
-            self.data_source = fields['data_source']
-        if 'select_statement' in changed_fields:
-            self.select_statement = fields['select_statement']
-        if 'meta_text' in changed_fields:
-            self.meta_text = fields['meta_text']
-        if 'rdf_template' in changed_fields:
-            self.rdf_template = fields['rdf_template']
+        if changed_fields:
+            if 'category' in changed_fields:
+                self.category = Category.objects.get(id=fields['category'])
+            if 'status' in changed_fields:
+                self.status = fields['status']
+            if 'data_source' in changed_fields:
+                self.data_source = fields['data_source']
+            if 'select_statement' in changed_fields:
+                self.select_statement = fields['select_statement']
+            if 'meta_text' in changed_fields:
+                self.meta_text = fields['meta_text']
+            if 'rdf_template' in changed_fields:
+                self.rdf_template = fields['rdf_template']
 
         self.save()
 
@@ -374,9 +379,13 @@ class DatastreamI18n(models.Model):
         return self.title
 
     def update(self, changed_fields, **fields):
-        if 'title' in changed_fields: self.title = fields['title']
-        if 'description' in changed_fields: self.description = fields['description']
-        if 'notes' in changed_fields: self.notes = fields['notes']
+        if changed_fields:
+            if 'title' in changed_fields:
+                self.title = fields['title']
+            if 'description' in changed_fields:
+                self.description = fields['description']
+            if 'notes' in changed_fields:
+                self.notes = fields['notes']
         self.save()
 
 
@@ -539,8 +548,7 @@ class DatasetRevision(models.Model):
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     end_point = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_END_POINT_LABEL'))
     filename = models.CharField(max_length=2048, verbose_name=ugettext_lazy('MODEL_FILENAME_LABEL'))
-    impl_details = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'), blank=True,
-                                    null=True)
+    impl_details = models.TextField(blank=True, null=True, verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'))
     impl_type = models.IntegerField(choices=choices.SOURCE_IMPLEMENTATION_CHOICES,
                                     verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_TYPE_LABEL'))
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))

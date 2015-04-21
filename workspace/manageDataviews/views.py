@@ -1,51 +1,48 @@
+import json
+
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
-from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
+from django.core.urlresolvers import reverse
+
+from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
-from workspace.settings import *
 from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import LifeCycleException
-from core.choices import *
 from core.models import DatasetRevision, Account,CategoryI18n
 from api.http import JSONHttpResponse
-# from core import helpers as LocalHelper
-from django.core.urlresolvers import reverse
 from core import engine
-
-import json
 
 
 @login_required
 @require_GET
 def view(request, revision_id):
-    #TODO use for datastreams
-    # revision_id = request.GET['datastream_revision_id']
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     language = request.auth_manager.language
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')
-    status_options=credentials.get_allowed_actions()
-
-    datastream = DataStreamDBDAO().get(language, datastream_revision_id = revision_id)
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values(
+        'category__id',
+        'name'
+    )
+    status_options = credentials.get_allowed_actions()
+    datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
 
     return render_to_response('viewDataStream/index.html', locals())
 
 @login_required
 @requires_any_dataset() #account must have almost one dataset
+@require_privilege("workspace.can_query_datastream")
 @require_GET
 def list(request):
     """ list all dataviews """
-    ds_dao = DataStreamDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.account.id, language=request.user.language)
-
+    resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDataviews/noResults.html', locals())
         
@@ -58,6 +55,7 @@ def list(request):
 
 @login_required
 @require_GET
+@require_privilege("workspace.can_query_datastream")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
@@ -88,11 +86,15 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     #order = bb_request.get('sortorder')
     #filters_dict=filters_dict
     ds_dao = DataStreamDBDAO()
-    resources,total_resources = ds_dao.query(account_id=request.account.id,
-                                              language=request.user.language,
-                                              page=page, itemsxpage=itemsxpage
-                                              ,filters_dict = filters_dict
-                                              ,filter_name=filter_name)
+    resources,total_resources = ds_dao.query(
+        account_id=request.account.id,
+        language=request.user.language,
+        page=page,
+        itemsxpage=itemsxpage,
+        filters_dict=filters_dict,
+        filter_name=filter_name
+    )
+
     for resource in resources:
         # resources[i]['url'] = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(resources[i]['id']))
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
@@ -102,37 +104,32 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     
     return JSONHttpResponse(response)
 
-
 @login_required
 @require_GET
 def related_resources(request):
-    params = request.GET
-    datastream_id = params.get('datastream_id','')
-    resource_type = params.get('type','all');
-    resource = DatastreamLifeCycleManager(user=request.user.id, resource_id=datastream_id)
+    language = request.auth_manager.language
+    datastream_id = request.GET.get('datastream_id', '')
+    resource_type = request.GET.get('type', 'all')
+    datastreams = DataStreamDBDAO().query_childs(language=language)['datastreams']
 
-    associated_dataStreams =resource.related_resources_simple(types=resource_type)
-    return JSONHttpResponse(json.dumps(associated_dataStreams))
+    list_result = [associated_datastream for associated_datastream in datastreams]
+    return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
 @transaction.commit_on_success
 def remove(request, id,type="resource"):
     """ remove resource """
-    my_resource = DatastreamLifeCycleManager(user=request.user.id, resource_revision_id=id)
+    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=id)
 
     if type == 'revision':
-        removes = my_resource.remove_revision()
-        if removes:
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
-        else:
-            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT')]}))
+        lifecycle.remove()
+        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'))
     else:
-        removes = my_resource.remove(is_test=False)
-        if removes:
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}), content_type='text/plain')
-        else:
-            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+        removes = lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({'status': 'True', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}))
+        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT'))
 
 @login_required
 @require_http_methods(['POST', 'GET'])
@@ -152,17 +149,25 @@ def create(request):
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 
         dataview = DatastreamLifeCycleManager(user=request.user)
-        dataview.create(dataset=dataset_revision.dataset, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , language = request.auth_manager.language
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status']
-                    , tags=[], sources=[], parameters=[])
+        dataview.create(
+            dataset=dataset_revision.dataset,
+            title=form.cleaned_data['title'],
+            data_source=form.cleaned_data['data_source'],
+            select_statement=form.cleaned_data['select_statement'],
+            language = request.auth_manager.language,
+            category_id=form.cleaned_data['category'],
+            description=form.cleaned_data['description'],
+            status = form.cleaned_data['status'],
+            tags=[],
+            sources=[],
+            parameters=[]
+        )
 
-        response = {'status': 'ok', 'datastream_revision_id': dataview.datastream_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            datastream_revision_id=dataview.datastream_revision.id,
+            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]
+        )
 
         return JSONHttpResponse(json.dumps(response))
 
@@ -170,20 +175,20 @@ def create(request):
         form = InitalizeCollectForm(request.GET)
 
         if form.is_valid():
-            is_update       = False
+            is_update = False
             is_update_selection = False
-            data_set_id     = form.cleaned_data['dataset_revision_id']
-            datastream_id   = None
+            data_set_id = form.cleaned_data['dataset_revision_id']
+            datastream_id = None
 
             if auth_manager.is_level('level_5'):
                 meta_data = Account.objects.get(pk = auth_manager.account_id).meta_data
 
-            dataset_revision    = DatasetRevision.objects.get(pk= data_set_id)
-            end_point           = dataset_revision.end_point
-            type                = dataset_revision.dataset.type
-            impl_type           = dataset_revision.impl_type
-            impl_details        = dataset_revision.impl_details
-            bucket_name         = request.bucket_name
+            dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            end_point = dataset_revision.end_point
+            type = dataset_revision.dataset.type
+            impl_type = dataset_revision.impl_type
+            impl_details = dataset_revision.impl_details
+            bucket_name = request.bucket_name
 
             return render_to_response('view_manager/insertForm.html', locals())
         else:
@@ -272,18 +277,23 @@ def edit(request, datastream_revision_id=None):
         account_id = request.auth_manager.account_id
         credentials = request.auth_manager
         language = request.auth_manager.language
-        categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')
-        status_options=credentials.get_allowed_actions()
-        datastream_life = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id,)
-        datastream_dict = datastream_life.datastream_revision.get_dict()
-        status=datastream_life.datastream_revision.status
-        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(categories,status,status_options, datastream_life, datastream_dict)
+        categories = CategoryI18n.objects.filter(
+            language=language,
+            category__account=account_id
+        ).values('category__id', 'name')
+        status_options = credentials.get_allowed_actions()
+        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+        status = lifecycle.datastream_revision.status
+        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
+            categories,status,
+            status_options,
+            lifecycle.datastream_revision,
+            lifecycle.datastreami18n
+        )
 
         return JSONHttpResponse(response)
 
-
     elif request.method == 'POST':
-
         """update dataset """
         form = EditDataStreamForm(request.POST)
 
@@ -291,17 +301,18 @@ def edit(request, datastream_revision_id=None):
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
 
         dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-        dataview.edit(title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'],
-                     is_test=form.cleaned_data['is_test'] )
 
+        dataview.edit(
+            language=request.auth_manager.language,
+            changed_fields=form.changed_data,
+            **form.cleaned_data
+        )
 
-        response = {'status': 'ok', 'datastream_revision_id': dataview.datastream_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            datastream_revision_id= dataview.datastream_revision.id,
+            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+        )
 
         return JSONHttpResponse(json.dumps(response))
 

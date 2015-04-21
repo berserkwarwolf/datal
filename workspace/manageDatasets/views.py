@@ -255,7 +255,12 @@ def related_resources(request):
     # For now, we'll fetch datastreams
     associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
     list_result = [associated_datastream for associated_datastream in associated_datastreams]
-    return HttpResponse(json.dumps(list_result), mimetype="application/json")
+
+    from django.core.serializers.json import DjangoJSONEncoder
+    # dump = json.dumps(list_result) El campo Created_at no es serializable
+    dump = json.dumps(list_result, cls=DjangoJSONEncoder)
+    
+    return HttpResponse(dump, mimetype="application/json")
 
 
 @login_required
@@ -293,7 +298,7 @@ def review(request, dataset_revision_id=None):
 
     return JSONHttpResponse(json.dumps(response))
 
-
+@login_required
 @require_GET
 def action_load(request):
 

@@ -7,6 +7,7 @@ from core.lib.searchify import SearchifyIndex
 from core import settings
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
+from core.choices import CollectTypeChoices
 
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
@@ -35,11 +36,20 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         if not fields.get('language', None):
             fields['language'] = user.language
 
+        # Si estoy editando un tipo SELF_PUBLISH, no vienen los datos del archivo entonces lo recupero
+        if int(collect_type) == CollectTypeChoices().SELF_PUBLISH and 'file_size' not in fields.keys():
+            prev_revision = DatasetRevision.objects.filter(dataset=dataset).order_by('-id').first()
+            size = prev_revision.size
+            file_name = prev_revision.filename
+        else:
+            size = fields['file_size']
+            file_name = fields['file_name']
+
         dataset_revision = DatasetRevision.objects.create(dataset=dataset,
                 user_id=user.id, status=fields['status'],
-                category=Category.objects.get(id=fields['category']), filename=fields['file_name'],
+                category=Category.objects.get(id=fields['category']), filename=file_name,
                 end_point=fields['end_point'], impl_type=fields['impl_type'],
-                impl_details=impl_details, size=fields['file_size'],
+                impl_details=impl_details, size=size,
                 license_url=fields['license_url'], spatial=fields['spatial'],
                 frequency=fields['frequency'], mbox=fields['mbox'])
 
@@ -89,9 +99,9 @@ class DatasetSearchifyDAO():
 
         self.search_index = SearchifyIndex()
         
-    def add(self, dataset_revision, language):
-        category = dataset_revision.category.categoryi18n_set.get(language=language)
-        dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
+    def add(self, dataset_revision):
+        category = dataset_revision.category.categoryi18n_set.all()[0]
+        dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision)
 
         # DS uses GUID, but here doesn't exists. We use ID
         text = [dataseti18n.title, dataseti18n.description, dataset_revision.user.nick, str(dataset_revision.dataset.guid)]
@@ -117,7 +127,7 @@ class DatasetSearchifyDAO():
                      'timestamp': int(time.mktime(dataset_revision.created_at.timetuple())),
                      'end_point': dataset_revision.end_point,
                     },
-                'categories': {'id': unicode(category.id), 'name': category.name}
+                'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
         # Update dict with facets

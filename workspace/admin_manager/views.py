@@ -9,7 +9,7 @@ from core.accounts.decorators import threshold
 from core.choices import TicketChoices, StatusChoices
 from core.models import *
 from core.shortcuts import render_to_response
-from core.lib import mailchimp_lib
+from core.lib.mail import mail
 from core.lib.datastore import *
 from core.lib.searchify import SearchifyIndex
 from core.helpers import get_domain_with_protocol
@@ -115,23 +115,26 @@ def action_create_user(request):
         account = auth_manager.get_account()
         preferences = account.get_preferences()
 
-        adminname = auth_manager.nick
         company = preferences['account_name']
-        if preferences['account_purpose'] != 'private':
-            domain = get_domain_with_protocol('workspace')
-        else:
-            domain = 'http://' + preferences['account_domain']
+        domain = settings.WORKSPACE_URI
 
         link = domain + reverse('accounts.activate') + '?' + urllib.urlencode({'ticket': user_pass_ticket.uuid})
         language = auth_manager.language
 
-        logger.debug('[mailchimp_workspace_users_list_subscribe] %s', user)
+        logger.debug('[list_subscribe] %s', user)
         country = preferences['account.contact.person.country']
         extradata = {'country': country, 'company': company}
-        suscription = mailchimp_lib.workspace_users_list_subscribe(user, language, extradata)
-
-        mergetags = {'FNAME': user.name, 'ADMINNAME': adminname, 'COMPANY': company}
-        mailchimp_lib.account_administrators_welcome_email_campaign_send(user, link, mergetags)
+        # suscribirlo a la lista de usuarios del workspace (si tiene servicio)
+        if mail.mail_service:
+            mail.mail_service.list_subscribe(user, language, extradata)
+        
+            #enviarle el email de bienvenida
+            mail.mail_service.send_welcome_mail(user, link, company)
+        else: # necesita el codigo de activacion al menos, lo redirijo alli
+            response = {'status': 'ok', 
+                        'messages': [ugettext('APP-USER-CREATEDSUCCESSFULLY-TEXT'), 'Activar en %s' % link],
+                        'redirect': link}
+            return HttpResponse(json.dumps(response), content_type='application/json')
 
         response = {'status': 'ok', 'messages': [ugettext('APP-USER-CREATEDSUCCESSFULLY-TEXT')]}
         return HttpResponse(json.dumps(response), content_type='application/json')
@@ -387,7 +390,6 @@ def action_create_category(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-@require_POST
 def action_edit_category(request):
     form = forms.CategoryEditForm(request.POST)
     if form.is_valid():
@@ -517,53 +519,25 @@ def set_preferences(account, preferences):
         account.set_preference(key, value)
 
 def reindex_category_resources(category_id, language):
+    datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
 
-    cursor = connection.cursor()
-    # top published datastreams
-    sql = """SELECT MAX(`ao_datastream_revisions`.`id`)
-    FROM `ao_datastream_revisions`
-    WHERE `ao_datastream_revisions`.`status` = %s AND `ao_datastream_revisions`.`category_id` = %s
-    GROUP BY `ao_datastream_revisions`.`datastream_id`"""
-    params = [StatusChoices.PUBLISHED, category_id]
-    cursor.execute(sql, params)
-    datastream_revision_ids = [ datastream_revision_id for datastream_revision_id, in cursor.fetchall() ]
+    """
+    logger = logging.getLogger(__name__)
+    logger.info("Datasets %s" % datasets.query)
+    logger.info("Datastreams %s" % datastreams.query)
+    """ 
+    
+    #TODO agregar dashboards agregando previamente los campos last_revision y last_published_revision
+    #TODO agregar visualizaciones cuando se desarrolle el campo categoria para el
 
-    # top published dashboards
-    sql = """SELECT MAX(`ao_dashboard_revisions`.`id`)
-    FROM `ao_dashboard_revisions`
-    WHERE `ao_dashboard_revisions`.`status` = %s AND `ao_dashboard_revisions`.`category_id` = %s
-    GROUP BY `ao_dashboard_revisions`.`dashboard_id`"""
-    params = [StatusChoices.PUBLISHED, category_id]
-    cursor.execute(sql, params)
-    dashboard_revision_ids = [ dashboard_revision_id for dashboard_revision_id, in cursor.fetchall() ]
-
-    # top published visualizations
-    if datastream_revision_ids:
-        ss = ', '.join([ '%s' for i in range(len(datastream_revision_ids))])
-        sql = """SELECT MAX(`ao_visualizations_revisions`.`id`)
-        FROM `ao_visualizations_revisions`
-        INNER JOIN `ao_visualizations` ON (`ao_visualizations_revisions`.`visualization_id` = `ao_visualizations`.`id`)
-        INNER JOIN `ao_datastreams` ON (`ao_datastreams`.`id` = `ao_visualizations`.`datastream_id`)
-        INNER JOIN `ao_datastream_revisions` ON (`ao_datastream_revisions`.`datastream_id` = `ao_datastreams`.`id`)
-        WHERE `ao_visualizations_revisions`.`status` = %s AND `ao_datastream_revisions`.`id` IN (""" + ss + """)
-        GROUP BY `ao_visualizations_revisions`.`visualization_id`"""
-        params = [StatusChoices.PUBLISHED]
-        params.extend(datastream_revision_ids)
-        cursor.execute(sql, params)
-        visualization_revision_ids = [ visualization_revision_id for visualization_revision_id, in cursor.fetchall() ]
-    else:
-        visualization_revision_ids = []
-
-    # reindexing the top published revision
-    datastreams = DataStreamRevision.objects.filter(id__in=datastream_revision_ids)
-    dashboards = DashboardRevision.objects.filter(id__in=dashboard_revision_ids)
-    visualizations = VisualizationRevision.objects.filter(id__in=visualization_revision_ids)
     docs = []
-    resources = list(datastreams) + list(dashboards) + list(visualizations)
+    resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
     for resource in resources:
-        docs.append(resource.get_dict(language))
+        doc=resource.get_dict(language)
+        docs.append(doc)
 
-    SearchifyIndex().get().indexit(docs)
+    SearchifyIndex().indexit(docs)
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -599,7 +573,7 @@ def get_resource_dict(request):
     resp += "<h3>Destino</h3><hr>" + str(dest)
 
     #re-index
-    idx = SearchifyIndex().get().indexit(dest)
+    idx = SearchifyIndex().indexit(dest)
     resp += "<h3>ReIndexado:%s</h3><hr>" % str(idx)
 
     return HttpResponse(resp)

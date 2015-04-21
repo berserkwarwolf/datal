@@ -15,7 +15,7 @@ from core.choices import TicketChoices
 from core.models import *
 from core.shortcuts import render_to_response
 from workspace.accounts import forms
-from core.lib import mailchimp_lib
+from core.lib.mail import mail
 import hashlib
 from uuid import uuid4
 from random import choice
@@ -83,10 +83,11 @@ def create(request):
         # login the user
         request.session['user_id'] = user.id
 
-        company = account.name
-        country = 'Unknown'
-        extradata = {'country': country, 'company': company}
-        mailchimp_lib.account_administrators_list_subscribe(user, language, extradata)
+        if mail.mail_service:
+            company = account.name
+            country = 'Unknown'
+            extradata = {'country': country, 'company': company}
+            mail.mail_service.list_subscribe(user, extradata)
 
         # redirect to landing
         return redirect('/')
@@ -118,7 +119,6 @@ def login(request):
         if form.is_valid():
 
             auth_manager = AuthManager(form.user)
-            print(auth_manager.privileges)
             if not auth_manager.has_privilege('workspace.can_signin'):
                 messages.add_message(request, messages.ERROR, ugettext('INVALID-USER-OR-PASS'))
                 return redirect('accounts.signin')

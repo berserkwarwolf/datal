@@ -31,6 +31,11 @@ class ApplicationException(DatalException):
 class LifeCycleException(ApplicationException):
     title = 'Life cycle error'
 
+class DatastoreNotFoundException(ApplicationException):
+    title = 'Data Store not found'
+
+class MailServiceNotFoundException(ApplicationException):
+    title = 'Mail service not found'
 
 class SearchIndexNotFoundException(ApplicationException):
     title = 'Search index not found exception'
