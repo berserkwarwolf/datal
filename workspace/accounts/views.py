@@ -119,7 +119,6 @@ def login(request):
         if form.is_valid():
 
             auth_manager = AuthManager(form.user)
-            print(auth_manager.privileges)
             if not auth_manager.has_privilege('workspace.can_signin'):
                 messages.add_message(request, messages.ERROR, ugettext('INVALID-USER-OR-PASS'))
                 return redirect('accounts.signin')

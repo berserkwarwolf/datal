@@ -1,9 +1,34 @@
-from django.test import TransactionTestCase
+from django.test import TransactionTestCase, LiveServerTestCase
 from django.db.models import F, Max
 
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
+from selenium.webdriver.phantomjs.webdriver import WebDriver
+
+
+class DatalSeleniumTests(LiveServerTestCase):
+    fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
+                'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
+
+    @classmethod
+    def setUpClass(cls):
+        cls.selenium = WebDriver()
+        super(DatalSeleniumTests, cls).setUpClass()
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.selenium.quit()
+        super(DatalSeleniumTests, cls).tearDownClass()
+
+    @classmethod
+    def login(self):
+        self.selenium.get('%s%s' % (self.live_server_url, '/signin/'))
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys('administrador')
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys('administrador')
+        self.selenium.find_element_by_id('id_submitButton').click()
 
 
 class LifeCycleManagerTestCase(TransactionTestCase):
