@@ -72,6 +72,7 @@ language:
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=microsites.settings
 
 core_statics:
   cmd.run:
