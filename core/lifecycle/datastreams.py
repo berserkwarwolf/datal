@@ -1,12 +1,8 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from django.db.models import F, Max
 from django.db import transaction
-from django.conf import settings
-
-from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category
+from core.choices import ActionStreams
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IlegalStateException, DataStreamNotFoundException
@@ -33,21 +29,30 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         try:
             if type(resource) == DataStream:
                 self.datastream = resource
-                self.datastream_revision = DataStreamRevision.objects.select_related().get(pk=self.datastream.last_revision_id)
+                self.datastream_revision = DataStreamRevision.objects.select_related().get(
+                    pk=self.datastream.last_revision_id)
             elif type(resource) == DataStreamRevision:
                 self.datastream_revision = resource
-                self.datastream=resource.datastream
+                self.datastream = resource.datastream
             elif datastream_id > 0:
-                self.datastream = Dataset.objects.get(pk=datastream_id)
-                self.datastream_revision = DatasetRevision.objects.select_related().get(pk=self.datastream.last_revision_id)
+                self.datastream = DataStream.objects.get(pk=datastream_id)
+                self.datastream_revision = DataStreamRevision.objects.select_related().get(
+                    pk=self.datastream.last_revision_id)
             elif datastream_revision_id > 0:
                 self.datastream_revision = DataStreamRevision.objects.select_related().get(pk=datastream_revision_id)
-                self.datastream = self.datastream_revision.dataset
+                self.datastream = self.datastream_revision.datastream
             else:
                 self.datastream_revision = None
                 self.datastream = None
-        except Dataset.DoesNotExist, DatasetRevision.DoesNotExist:
+        except DataStream.DoesNotExist, DataStreamRevision.DoesNotExist:
             raise DataStreamNotFoundException()
+
+        self.datastreami18n = None
+        if self.datastream and self.datastream_revision:
+            self.datastreami18n = DatastreamI18n.objects.get(
+                datastream_revision=self.datastream_revision,
+                language=self.datastream.user.language
+            )
 
     def create(self,allowed_states=CREATE_ALLOWED_STATES, **fields):
         """ Create a new DataStream """
@@ -89,7 +94,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self.datastream_revision.save()
 
         search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.add(self.datastream_revision, self.language)
+        search_dao.add(self.datastream_revision)
         
         self._update_last_revisions()
 
@@ -229,49 +234,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:
-
-            self.datastream_revision = DataStreamDBDAO().update(self.datastream_revision
-                                                            , changed_fields
-                                                            , title=fields['title']
-                                                            , description=fields['description']
-                                                            , language=fields['language']
-                                                            , category=fields['category']
-                                                            , impl_type=fields['impl_type']
-                                                            , file_name=fields['file_name']
-                                                            , end_point=fields['end_point']
-                                                            , file_size=fields.get('file_size', 0)
-                                                            , notes=fields['notes']
-                                                            , license_url=fields['license_url']
-                                                            , spatial=fields['spatial']
-                                                            , frequency=fields['frequency']
-                                                            , mbox=fields['mbox']
-                                                            , tags=fields['tags']
-                                                            , sources=fields['sources']
-                                                            , params=fields.get('params', []))
-
+            self.datastream_revision = DataStreamDBDAO().update(
+                self.datastream_revision,
+                changed_fields,
+                **fields
+            )
         else:
-
-            self.datastream, self.datastream_revision = DataStreamDBDAO().create(dataset=self.datastream
-                                                                        , title=fields['title']
-                                                                        , description=fields['description']
-                                                                        , language=language
-                                                                        , status=StatusChoices.DRAFT
-                                                                        , category=fields['category']
-                                                                        , impl_type=fields['impl_type']
-                                                                        , file_name=fields['file_name']
-                                                                        , end_point=fields['end_point']
-                                                                        , file_size=fields.get('file_size', 0)
-                                                                        , notes=fields['notes']
-                                                                        , license_url=fields['license_url']
-                                                                        , spatial=fields['spatial']
-                                                                        , frequency=fields['frequency']
-                                                                        , mbox=fields['mbox']
-                                                                        , tags=fields['tags']
-                                                                        , sources=fields['sources']
-                                                                        , params=fields.get('params', []))
+            self.datastream, self.datastream_revision = DataStreamDBDAO().create(
+                datastream=self.datastream,
+                status=StatusChoices.DRAFT,
+                **fields
+            )
 
             self._move_childs_to_draft()
-
 
         status = fields['status']
 
@@ -309,17 +284,20 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
 
-        last_revision = DataStreamRevision.objects.filter(datastream=self.datastream).aggregate(Max('id'))
+        last_revision_id = DataStreamRevision.objects.filter(datastream=self.datastream).aggregate(Max('id'))['id__max']
 
-        if last_revision is not None:
-            self.datastream.last_revision_id = last_revision['id__max']
-            last_published_revision = DataStreamRevision.objects.filter(datastream=self.datastream,
-                status=StatusChoices.PUBLISHED).aggregate(Max('id')
-            )
+        if last_revision_id:
+            self.datastream.last_revision = DataStreamRevision.objects.get(pk=last_revision_id)
 
-            last_published_revision_id = last_published_revision is not None and last_published_revision['id__max'] or None
+            last_published_revision_id = DataStreamRevision.objects.filter(
+                datastream=self.datastream,
+                status=StatusChoices.PUBLISHED).aggregate(Max('id'))['id__max']
 
-            if last_published_revision_id != self.datastream.last_published_revision_id:
-                    self.datastream.last_published_revision_id = last_published_revision_id
+            if last_published_revision_id:
+                    self.datastream.last_published_revision = DataStreamRevision.objects.get(pk=last_published_revision_id)
 
             self.datastream.save()
+        else:
+            # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
+            if self.datastream.id:
+                self.datastream.delete()

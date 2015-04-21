@@ -21,8 +21,6 @@ MIDDLEWARE_CLASSES += (
     'workspace.middlewares.catch.ExceptionManager',
 )
 
-DOMAINS['engine'] = 'workspace'
-
 ROOT_URLCONF = 'workspace.urls'
 
 TEMPLATE_DIRS = (
@@ -51,6 +49,11 @@ SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
 STATICFILES_DIRS += (os.path.join(PROJECT_PATH, 'workspace/media/'),)
+
+if DEBUG:
+    INSTALLED_APPS += (
+        'selenium',
+)
 
 try:
     from workspace.local_settings import *

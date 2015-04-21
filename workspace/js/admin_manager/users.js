@@ -106,19 +106,17 @@ $(document).ready(function(){
                     }
 
                     // Notification
-                    $.gritter.add({
-                        title: title,
-                        text: messages,
-                        image: imageURL,
-                        sticky: true
-                    });
+                    $.gritter.add({ title: title, text: messages, image: imageURL, sticky: true });
 
                     if(status == 'ok'){
-                        $('#gritter-notice-wrapper').css({'z-index': 100000001});
-                        $('#ajax_loading_overlay').show();
-                        setTimeout(function(){
-                            window.location.reload(true);
-                        }, 2000);
+                        if (undefined !== response.redirect)
+                            {window.location = response.redirect;}
+                        else{
+                            $('#gritter-notice-wrapper').css({'z-index': 100000001});
+                            $('#ajax_loading_overlay').show();
+                            
+                            setTimeout(function(){ window.location.reload(true); }, 2000);
+                            }
                     }
 
                 },

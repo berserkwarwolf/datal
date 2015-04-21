@@ -9,6 +9,7 @@ local_settings.py
 *.nja
 *~
 .idea/
+otros/
 celerybeat*
 celerybeat-schedule
 celerybeati.pid

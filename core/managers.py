@@ -377,14 +377,19 @@ class DataSetManager(models.Manager):
 class DatasetRevisionManager(models.Manager):
 
     def get_last_published_id(self, dataset_id):
-        return super(DatasetRevisionManager, self).filter(dataset_id = dataset_id, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
+        return super(DatasetRevisionManager, self).filter(
+            dataset_id=dataset_id,
+            status=choices.StatusChoices.PUBLISHED
+        ).aggregate(models.Max('id'))['id__max']
 
     def get_last_published(self, resource_id):
         revision_id = self.get_last_published_id(resource_id)
         return super(DatasetRevisionManager, self).get(pk=revision_id)
 
     def get_last_revision_id(self, dataset_id):
-        return super(DatasetRevisionManager, self).filter(dataset_id = dataset_id).aggregate(models.Max('id'))['id__max']
+        return super(DatasetRevisionManager, self).filter(
+            dataset_id=dataset_id
+        ).aggregate(models.Max('id'))['id__max']
 
     def get_last_revision(self, resource_id):
         revision_id = self.get_last_revision_id(resource_id)

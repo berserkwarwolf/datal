@@ -1,8 +1,5 @@
 # -*- coding: utf-8 -*-
-import logging
-
 from django.db.models import F, Max
-from django.conf import settings
 from django.db import transaction
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
@@ -13,8 +10,6 @@ from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IlegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
-
-logger = logging.getLogger(__name__)
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED]
@@ -109,7 +104,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset_revision.save()
 
         search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision, self.language)
+        search_dao.add(self.dataset_revision)
 
         self._update_last_revisions()
 
@@ -226,8 +221,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self._unpublish_all()
 
             self.dataset_revision.delete()
-
-        self._update_last_revisions()
+            self._update_last_revisions()
+            
 
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
@@ -242,7 +237,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         old_status = self.dataset_revision.status
 
-        if old_status  not in allowed_states:
+        if old_status not in allowed_states:
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if 'status' in fields.keys():
@@ -258,7 +253,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         if old_status == StatusChoices.DRAFT:
             self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, **fields)
+                self.dataset_revision, changed_fields, status=form_status, **fields)
         else:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields)
@@ -297,16 +292,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))['id__max']
 
         if last_revision_id:
-            self.dataset.last_revision = DatasetRevision.objects.get(id=last_revision_id)
+            self.dataset.last_revision = DatasetRevision.objects.get(pk=last_revision_id)
             last_published_revision_id = DatasetRevision.objects.filter(
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
-
-            if last_published_revision_id and self.dataset.last_published_revision \
-                    and last_published_revision_id != self.dataset.last_published_revision.id:
-                    self.dataset.last_published_revision = DatasetRevision.objects.get(id=last_published_revision_id)
-
+            
+            if last_published_revision_id:
+                self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                
             self.dataset.save()
         else:
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente

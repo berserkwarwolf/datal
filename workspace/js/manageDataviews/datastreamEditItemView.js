@@ -5,6 +5,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     parentView: null,
     events: {
         "click #id_edit_cancel": "onEditDataviewCancel",
+        "click .close": "onEditDataviewClose",
         "click #id_edit_save": "onEditDataviewSave",
     },
 
@@ -64,13 +65,17 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     initNotes: function(){
-        new nicEditor({
+        area1 = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
     },
 
     onEditDataviewCancel: function(){
+        this.closeOverlay();
+    },
+
+    onEditDataviewClose: function(){
         this.closeOverlay();
     },
 
@@ -111,6 +116,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     closeOverlay: function(){
+        area1.removeInstance('id_notes');
         this.$el.data('overlay').close();
     },
 

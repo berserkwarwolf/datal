@@ -1,6 +1,7 @@
 {% load datastream_tags %}
-{"total_entries":{{data.total_resources}}
-, "items":
+{
+  "total_entries":{{data.total_resources}},
+  "items":
     [
     {% for resource in data.resources %}
     {
@@ -18,12 +19,11 @@
         , "url": "/dataviews/{{resource.id}}"
         , "created_at": "{{resource.created_at|date:'F d, Y, h:i A'|capfirst}}"
         , "id": {{resource.id}}
-        , "dataset": {{resource.dataset__last_revision__id}}
-        , "dataset_id": {{resource.dataset__last_revision__id}}
+        , "dataset_id": {{resource.datastream__last_revision_id}}
         , "dataset_title": "{{resource.dataset__last_revision__dataseti18n__title|capfirst}}"
         , "dataset_impl_type": "{{resource.dataset__last_revision__impl_type}}"
     }
-        {% if not forloop.last %}, {% endif%}
+    {% if not forloop.last %}, {% endif%}
     {% endfor %}
     ]
 }

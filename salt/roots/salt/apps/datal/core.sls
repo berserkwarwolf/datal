@@ -57,7 +57,6 @@ migrate_db:
     - user: {{ pillar['system']['user'] }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
-      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core 0001 --fake --settings=core.settings
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core --settings=core.settings
 
 fixtures:
@@ -73,6 +72,7 @@ language:
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=microsites.settings
 
 core_statics:
   cmd.run:

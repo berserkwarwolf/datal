@@ -1,7 +1,7 @@
 {
-"datastream_revision_id": "{{datastream_life.datastream_revision.id}}",
-"title": "{{datastream_life.datastream_i18n.title}}",
-"description": "{{datastream_life.datastream_i18n.description}}",
+"datastream_revision_id": "{{ datastream_revision.id }}",
+"title": "{{ datastreami18n.title}}",
+"description": "{{datastreami18n.description}}",
 "allStatus":[
 {% for x, y in allowed_status %}
     {"value":"{{ x }}","label":"{{ y }}"}
@@ -11,8 +11,8 @@
 {% endfor %}
 ],
 "status": "{{status}}",
-"tags": "{{datastream_dict.fields.tags}}",
-"sources": "{{datastream_dict.fields.sources}}",
+"tags": "{{datastream_revision.tags}}",
+"sources": "{{datastream_revision.sources}}",
 "allCategories":[
 {% for category in categories %}
     {"value":"{{ category.category__id }}","label":"{{ category.name }}"}
@@ -21,6 +21,6 @@
     {%endif %}
 {% endfor %}
 ],
-"category": "{{datastream_life.datastream_revision.category}}",
-"notes": "{{datastream_life.datastream_i18n.notes}}"
+"category": "{{datastream_revision.category}}",
+"notes": "{{datastreami18n.notes}}"
 }
