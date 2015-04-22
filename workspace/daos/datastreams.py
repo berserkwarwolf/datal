@@ -1,10 +1,13 @@
 # -*- coding: utf-8 -*-
-from core.exceptions import SearchIndexNotFoundException
-from core.models import DatastreamI18n, DataStream, DataStreamRevision
-from workspace import settings
-from core.daos.resource import AbstractDataStreamDBDAO
 import operator
+
 from django.db.models import Q, F
+
+from core.exceptions import SearchIndexNotFoundException
+from core.models import DatastreamI18n, VisualizationRevision, DataStreamRevision
+from core.daos.resource import AbstractDataStreamDBDAO
+from workspace import settings
+
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
@@ -103,8 +106,9 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
     def query_childs(self, dataset_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = {'visualizations': {}}
-
+        related = dict(
+            visualizations=dict()
+        )
         return related
 
     def create(self, datastream=None, user=None, **fields):
