@@ -1,4 +1,4 @@
-from django.test import TransactionTestCase
+from django.test import TransactionTestCase, LiveServerTestCase
 from django.db.models import F, Max
 
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
@@ -11,7 +11,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
                 'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
 
     def setUp(self):
-        self.end_point = 'www.example.com'
+        self.end_point = 'http://nolaborables.com.ar/API/v1/2013'
         self.user_nick = 'administrador'
 
         self.user = User.objects.get(nick=self.user_nick)
@@ -19,7 +19,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.collect_type = CollectTypeChoices.SELF_PUBLISH
         self.source_type = SourceImplementationChoices.HTML
 
-    def create_dataset(self, status = StatusChoices.DRAFT):
+    def create_dataset(self, status=StatusChoices.DRAFT):
         life_cycle = DatasetLifeCycleManager(user=self.user, language=self.user.language)
 
         self.dataset_revision = life_cycle.create(
@@ -51,6 +51,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
+
 
     def test_create_dataset_published(self):
         """

@@ -224,6 +224,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if old_status  not in allowed_states:
             raise IlegalStateException(allowed_states, self.datastream_revision)
 
+        if 'status' in fields.keys():
+            form_status = fields.pop('status', None)
+
         file_data = fields.get('file_data', None)
         if file_data is not None:
             fields['file_size'] = file_data.size
@@ -237,22 +240,23 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
                 changed_fields,
+                status=form_status,
                 **fields
             )
         else:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
+                dataset=self.datastream_revision.dataset,
+                user=self.datastream_revision.user,
                 status=StatusChoices.DRAFT,
                 **fields
             )
 
             self._move_childs_to_draft()
 
-        status = fields['status']
-
-        if status == StatusChoices.PUBLISHED:
+        if form_status == StatusChoices.PUBLISHED:
             self.publish()
-        elif old_status == StatusChoices.PUBLISHED and status == StatusChoices.DRAFT:
+        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
             self.unpublish()
         else:
             self._update_last_revisions()
