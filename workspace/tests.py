@@ -38,17 +38,13 @@ class DatalSeleniumTests(LiveServerTestCase):
 
         # Creo dataset tipo webservice
         self.login()
-        self.selenium.get_screenshot_as_file('login.png')
         self.selenium.get('%s%s' % (self.live_server_url, '/datasets/create/webservice'))
         self.selenium.find_element_by_id('id_end_point').send_keys(endpoint)
         select_impl_type = Select(self.selenium.find_element_by_id('id_impl_type'))
         select_impl_type.select_by_value(str(impl_type))
         self.selenium.find_element_by_id('id_path_to_data').send_keys(path_to_data)
-        self.selenium.get_screenshot_as_file('step1.png')
         self.selenium.find_element_by_xpath('//*[@id="contentHeder"]/div/a[2]').click()
 
         self.selenium.find_element_by_id('id_title').send_keys(title)
         self.selenium.find_element_by_id('id_description').send_keys(description)
-        self.selenium.get_screenshot_as_file('step2.png')
         self.selenium.find_element_by_xpath('//*[@id="id_createDataset"]/div[2]/header/div/a[2]').click()
-        #self.selenium.get_screenshot_as_file('final.png')
