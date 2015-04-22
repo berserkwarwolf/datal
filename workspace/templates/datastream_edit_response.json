@@ -4,21 +4,22 @@
 "description": "{{datastreami18n.description}}",
 "allStatus":[
 {% for x, y in allowed_status %}
-    {"value":"{{ x }}","label":"{{ y }}"}
-    {% if not forloop.last %}
-        ,
-    {%endif %}
+    {"value":"{{ x }}","label":"{{ y }}"}{% if not forloop.last %},{%endif %}
 {% endfor %}
 ],
 "status": "{{status}}",
-"tags": "{{datastream_revision.tags}}",
-"sources": "{{datastream_revision.sources}}",
+"tags": [
+{% for tagdatastream in datastream_revision.tagdatastream_set.all %}
+    {
+      "name": "{{ tagdatastream.tag.name }}",
+      "value": "{{ tagdatastream.tag.id }}"
+    }{% if not forloop.last %},{%endif %}
+{% endfor %}
+],
+"sources": "{{ datastream_revision.sources }}",
 "allCategories":[
 {% for category in categories %}
-    {"value":"{{ category.category__id }}","label":"{{ category.name }}"}
-    {% if not forloop.last %}
-        ,
-    {%endif %}
+    {"value":"{{ category.category__id }}","label":"{{ category.name }}"}{% if not forloop.last %},{%endif %}
 {% endfor %}
 ],
 "category": "{{datastream_revision.category}}",
