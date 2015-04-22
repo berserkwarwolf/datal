@@ -246,6 +246,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         else:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
+                dataset=self.datastream_revision.dataset,
+                user=self.datastream_revision.user,
                 status=StatusChoices.DRAFT,
                 **fields
             )
