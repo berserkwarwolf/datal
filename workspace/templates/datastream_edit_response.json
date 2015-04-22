@@ -11,12 +11,20 @@
 "tags": [
 {% for tagdatastream in datastream_revision.tagdatastream_set.all %}
     {
-      "name": "{{ tagdatastream.tag.name }}",
-      "value": "{{ tagdatastream.tag.id }}"
+      "value": {{ tagdatastream.tag.id }},
+      "name": "{{ tagdatastream.tag.name }}"
     }{% if not forloop.last %},{%endif %}
 {% endfor %}
 ],
-"sources": "{{ datastream_revision.sources }}",
+"sources": [
+{% for sourcedatastream in datastream_revision.sourcedatastream_set.all %}
+    {
+      "value": {{ sourcedatastream.source.id }},
+      "name": "{{ sourcedatastream.source.name }}",
+      "url": "{{ sourcedatastream.source.url }}"
+    }{% if not forloop.last %},{%endif %}
+{% endfor %}
+],
 "allCategories":[
 {% for category in categories %}
     {"value":"{{ category.category__id }}","label":"{{ category.name }}"}{% if not forloop.last %},{%endif %}
