@@ -12,7 +12,8 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
             allStatus:{},
             sources:[],
             tags:[],
-            notes:""
+            notes:"",
+            data: {}
         };
     },
 
@@ -49,6 +50,58 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
             required: false,
             msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
         }
+    },
+
+    setData: function(){
+
+        // Get Data, tags and sources
+        var data = this.get('data'),
+            tags = this.get('tags'),
+            sources = this.get('sources');
+
+        // Set Data
+        data.title = $.trim( this.get('title') );
+        data.description = $.trim( this.get('description') );
+        data.category = $('#id_category option:selected').val();
+        data.status = $('#id_status option:selected').val();
+        data.datastream_revision_id = this.get('datastream_revision_id');
+        
+        // Prepare Sources for Data
+        data['sources-TOTAL_FORMS'] = sources.length;
+        data['sources-INITIAL_FORMS'] = '0';
+        data['sources-MAX_NUM_FORMS'] = '';
+        for( var i=0;i<sources.length;i++ ){
+            for( var paramName in sources[i] ){
+                data['sources-'+i+'-'+paramName] = sources[i][paramName]
+            }
+        }
+
+        // Prepare tags for Data
+        data['tags-TOTAL_FORMS'] = tags.length;
+        data['tags-INITIAL_FORMS'] = '0';
+        data['tags-MAX_NUM_FORMS'] = '';
+        for( var i=0;i<tags.length;i++ ){
+            for( var paramName in tags[i] ){
+                data['tags-'+i+'-'+paramName] = tags[i][paramName]
+            }
+        }
+
+        // Notes
+        if($('.nicEdit-main').length > 0
+                && $('.nicEdit-main').html() != '<br>' // When notes initialice empty, nicEdit initialice with <br>, so we check if that is the case
+        ){
+                data.notes = $('.nicEdit-main').html();
+        }
+        else{
+                data.notes = $.trim( this.get('notes') );
+        }
+        console.log("Notas ");
+        console.log($.trim( this.get('notes') ));
+        console.log($('.nicEdit-main').html());
+
+        // Set Data
+        this.set('data',data);
+
     }
 
 });

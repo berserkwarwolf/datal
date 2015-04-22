@@ -73,7 +73,7 @@ var FinishModel = StepModel.extend({
 		}
 
 		// Prepare tags for Data
-		data['tags-TOTAL_FORMS'] = sources.length;
+		data['tags-TOTAL_FORMS'] = tags.length;
 		data['tags-INITIAL_FORMS'] = '0';
 		data['tags-MAX_NUM_FORMS'] = '';
 		for( var i=0;i<tags.length;i++ ){

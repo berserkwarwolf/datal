@@ -1,3 +1,3 @@
-var Tags = Backbone.Collection.extend({ 
+var Tags = Backbone.Collection.extend({
   model: TagModel
 });
