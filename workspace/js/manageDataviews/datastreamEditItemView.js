@@ -30,10 +30,6 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
             }
         });
 
-        console.log("Model")
-        console.log(this.sources);
-        console.log(this.tags);
-
         // Render
         this.render();    
 
@@ -45,16 +41,16 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     initSourceList: function(){
-       var sourceModel = new SourceModel();
+        var sourceModel = new SourceModel();
             this.sources = new Sources(this.model.get('sources'));
-       new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
-     },
+        new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
+    },
 
-     initTagList: function(){
-            var tagModel = new TagModel();
-            this.tags = new Tags(this.model.get('tags'));
-            new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
-     },
+    initTagList: function(){
+        var tagModel = new TagModel();
+        this.tags = new Tags(this.model.get('tags'));
+        new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
+    },
 
     initNotes: function(){
         this.notesInstance = new nicEditor({
@@ -74,8 +70,6 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
 
             var self = this,
                 data = this.model.get('data');
-
-            console.log(data);
 
             // NOT WORKING. Need to be done with data and select what is sent to server.
             $.ajax({ 
@@ -120,7 +114,6 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         this.$el.find('#sourceForm .sourcesContent').html('');
         this.$el.find('#tagForm .tagsContent').html('');
         $('.nicEdit-main').html('');
-        console.log($('.nicEdit-main').html());
     }
 
 });

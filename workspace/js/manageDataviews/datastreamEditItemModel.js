@@ -95,9 +95,6 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
         else{
                 data.notes = $.trim( this.get('notes') );
         }
-        console.log("Notas ");
-        console.log($.trim( this.get('notes') ));
-        console.log($('.nicEdit-main').html());
 
         // Set Data
         this.set('data',data);

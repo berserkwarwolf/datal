@@ -78,41 +78,40 @@
 	<div class="formContent">
 		<form>
 			<div class="ov-content">
-				<div class="col-2">
+				<div class="col-1">
 				 <fieldset>
 
 					{# title #}
 					<div class="row clearfix">
 						<label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
-						<span class="required">*</span>
 						<input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
+						<span class="required">*</span>
 					</div>
 
 					{# description #}
 					<div class="row clearfix">
 						<label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
-						<span class="required">*</span>
 						<input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
+						<span class="required">*</span>
 					</div>
 
 					{# category #}
 					<div class="row clearfix">
 						<label for="id_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
-						<span class="required">*</span>
 						<select name="category" id="id_category" data-bind="value:category,options:allCategories" tabindex="0">
 						</select>
+						<span class="required">*</span>
 					</div>
 
 					{# status #}
 					<div class="row clearfix divider">
 						<label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
-						<span class="required">*</span>
-
 						<select name="status" class="FL" id="id_status" data-bind="value:status,options:allStatus">
 						</select>
+						<span class="required">*</span>
 					</div>
 
-					<div class="separator">
+					
 
 					{# Sources #}
 					<div class="row clearfix">
