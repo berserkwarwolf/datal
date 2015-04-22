@@ -17,13 +17,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         # meta_text = 
 
-        datastream_revision = DataStreamRevision.objects.create(datastream=datastream
-                                                                , user=user
-                                                                , dataset=fields['dataset']
-                                                                , status=fields['status']
-                                                                , category=fields['category']
-                                                                , data_source=fields['data_source']
-                                                                , select_statement=fields['select_statement'])
+        datastream_revision = DataStreamRevision.objects.create(
+            datastream=datastream,
+            user=user,
+            dataset=fields['dataset'],
+            status=fields['status'],
+            category=fields['category'],
+            data_source=fields['data_source'],
+            select_statement=fields['select_statement']
+        )
 
         DatastreamI18n.objects.create(datastream_revision=datastream_revision,
             language=fields['language'], title=fields['title'],
