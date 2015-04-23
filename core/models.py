@@ -261,7 +261,8 @@ class DataStreamRevision(models.Model):
         # self.datastreamparameter_set.clear()
         
         for name, default, position, description in parameters:
-            parameters = DataStreamParameter.objects.create(name = name, position = position, default = default, description = description)
+            parameters = DataStreamParameter.objects.create(name=name, position=position, default=default,
+                                                            description=description)
             self.datastreamparameter_set.add(parameters)
 
         self.save()

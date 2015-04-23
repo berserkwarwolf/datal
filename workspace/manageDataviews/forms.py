@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.core.validators import validate_comma_separated_integer_list as vil
-from core.choices import *
 from django.core.urlresolvers import reverse
+from django.core.validators import validate_comma_separated_integer_list as vil
+
+from core.choices import *
+from core.models import Tag, Source, DataStreamParameter
 
 
 class DeleteDataviewForm(forms.Form):
@@ -25,15 +27,19 @@ class CreateDataStreamForm(forms.Form):
 
 class EditDataStreamForm(forms.Form):
     datastream_revision_id = forms.IntegerField(required=True, widget = forms.HiddenInput)
-    category            = forms.IntegerField(label=ugettext_lazy( 'APP-CATEGORY-TEXT' ), required=False)
-    data_source         = forms.CharField(label=ugettext_lazy( 'APP-DATASOURCE-TEXT' ), required=False)
-    select_statement    = forms.CharField(label=ugettext_lazy( 'APP-SELECTSTATEMENT-TEXT' ), required=False)
-    rdf_template        = forms.CharField(label=ugettext_lazy( 'APP-RDFTEMPLATE-TEXT' ), required=False)
-    status              = forms.CharField(required=True)
-    title               = forms.CharField(label=ugettext_lazy( 'APP-TITLE-TEXT' ), required=False)
-    description         = forms.CharField(label=ugettext_lazy( 'APP-DESCRIPTION-TEXT' ), required=False)
-    meta_text           = forms.CharField(label=ugettext_lazy( 'APP-METATEXT-TEXT' ), required=False)
-    is_test             = forms.BooleanField(required=False) # evalueate impact or just doit?
+    category = forms.IntegerField(label=ugettext_lazy( 'APP-CATEGORY-TEXT' ), required=False)
+    data_source = forms.CharField(label=ugettext_lazy( 'APP-DATASOURCE-TEXT' ), required=False)
+    select_statement = forms.CharField(label=ugettext_lazy( 'APP-SELECTSTATEMENT-TEXT' ), required=False)
+    rdf_template = forms.CharField(label=ugettext_lazy( 'APP-RDFTEMPLATE-TEXT' ), required=False)
+    status = forms.CharField(required=True)
+    title = forms.CharField(label=ugettext_lazy( 'APP-TITLE-TEXT' ), required=False)
+    description = forms.CharField(label=ugettext_lazy( 'APP-DESCRIPTION-TEXT' ), required=False)
+    notes = forms.CharField(label=ugettext_lazy( 'APP-NOTES-TEXT' ), required=False)
+    meta_text = forms.CharField(label=ugettext_lazy( 'APP-METATEXT-TEXT' ), required=False)
+    is_test = forms.BooleanField(required=False) # evalueate impact or just doit?
+    tags = forms.ModelMultipleChoiceField(queryset=Tag.objects.all(), required=False)
+    sources = forms.ModelMultipleChoiceField(Source.objects.all(), required=False)
+    parameters = forms.ModelMultipleChoiceField(DataStreamParameter.objects.all(), required=False)
 
 
 class ViewDataStreamForm(forms.Form):
