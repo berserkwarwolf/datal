@@ -46,13 +46,14 @@ class RESTImplBuilder(DefaultImplBuilder):
         """ build for SourceImplementationChoices = 14 (REST)
         Sometimes impl_details is defined on JS. On API call it's necesary to build it
         """
+        print(self.fields)
         path_to_headers = self.fields.get('path_to_headers')
         path_to_data = self.fields.get('path_to_data')
         token = self.fields.get('token')
         algorithm = self.fields.get('algorithm')
         username = self.fields.get('username')
         password = self.fields.get('password')
-        useCache = self.fields.get('useCache')
+        useCache = self.fields.get('use_cache')
         parameters = self.fields.get('parameters')
         signature = self.fields.get('signature')
 

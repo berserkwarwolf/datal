@@ -121,7 +121,7 @@
 
 /*STEP 4*/
 .step4 .dataStreamContainer{padding:0;}
-.step4 .dataStreamBox h2{display:block;background:#fff url(/static/workspace/images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;color:#4d4d4d;overflow:hidden;}
+.step4 .dataStreamBox h2{display:block;background:#fff url(/static/core/images/homeManager/dg_DS.gif) repeat-x 0 10px;height:57px;border:1px solid #e2e0e0;padding:8px 10px 0;-moz-border-radius:5px 5px 0 0;-webkit-border-radius:5px 5px 0 0;border-radius:5px 5px 0 0;color:#4d4d4d;overflow:hidden;}
 .step4 .dataStreamBox.errorFix h2{background:#fff url(/static/workspace/images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom;}
 .step4 .gotosource{display:none;}
 .step4 .dataStreamBox h2 a:hover{text-decoration:none;cursor:default;}

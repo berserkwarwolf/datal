@@ -4,21 +4,30 @@
 "description": "{{datastreami18n.description}}",
 "allStatus":[
 {% for x, y in allowed_status %}
-    {"value":"{{ x }}","label":"{{ y }}"}
-    {% if not forloop.last %}
-        ,
-    {%endif %}
+    {"value":"{{ x }}","label":"{{ y }}"}{% if not forloop.last %},{%endif %}
 {% endfor %}
 ],
 "status": "{{status}}",
-"tags": "{{datastream_revision.tags}}",
-"sources": "{{datastream_revision.sources}}",
+"tags": [
+{% for tagdatastream in datastream_revision.tagdatastream_set.all %}
+    {
+      "value": {{ tagdatastream.tag.id }},
+      "name": "{{ tagdatastream.tag.name }}"
+    }{% if not forloop.last %},{%endif %}
+{% endfor %}
+],
+"sources": [
+{% for sourcedatastream in datastream_revision.sourcedatastream_set.all %}
+    {
+      "value": {{ sourcedatastream.source.id }},
+      "name": "{{ sourcedatastream.source.name }}",
+      "url": "{{ sourcedatastream.source.url }}"
+    }{% if not forloop.last %},{%endif %}
+{% endfor %}
+],
 "allCategories":[
 {% for category in categories %}
-    {"value":"{{ category.category__id }}","label":"{{ category.name }}"}
-    {% if not forloop.last %}
-        ,
-    {%endif %}
+    {"value":"{{ category.category__id }}","label":"{{ category.name }}"}{% if not forloop.last %},{%endif %}
 {% endfor %}
 ],
 "category": "{{datastream_revision.category}}",

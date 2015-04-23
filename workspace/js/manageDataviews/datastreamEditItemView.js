@@ -1,11 +1,11 @@
 var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     el:"#id_editDataview",
-    sourceList: null,
-    tagList: null,
+    sources: null,
+    tags: null,
     parentView: null,
+    notesInstance: null,
     events: {
-        "click #id_edit_cancel": "onEditDataviewCancel",
-        "click .close": "onEditDataviewClose",
+        "click #id_edit_cancel, .close": "closeOverlay",
         "click #id_edit_save": "onEditDataviewSave",
     },
 
@@ -13,6 +13,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         var self = this;
         this.options = options;
         this.parentView = this.options.parentView;
+        this.cleanUpForm();
         this.initSourceList();
         this.initTagList();
         this.initNotes();
@@ -32,8 +33,6 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         // Render
         this.render();    
 
-        console.log(this.model.toJSON());
-
     },
 
     render: function(){
@@ -43,81 +42,78 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
 
     initSourceList: function(){
         var sourceModel = new SourceModel();
-
-        var source = [];
-        var sources = this.model.get('sources');
-
-        for (i = 0; i < sources.length; i++) { 
-            source.push( { name: source.name, source_url: source.url_source } );
-        }
-
-        this.sourceList = new Sources(sources);
-        new SourcesView({collection: this.sourceList, parentView:this, model: sourceModel, parentModel: this.model});
-
-        console.log(source);
-        console.log(sources.length);
-     },
+            this.sources = new Sources(this.model.get('sources'));
+        new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
+    },
 
     initTagList: function(){
         var tagModel = new TagModel();
-        this.tagList = new Tags(this.model.get('tags'));
-        new TagsView({collection: this.tagList, parentView:this, model: tagModel, parentModel: this.model});
+        this.tags = new Tags(this.model.get('tags'));
+        new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
     },
 
     initNotes: function(){
-        area1 = new nicEditor({
+        this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
     },
 
-    onEditDataviewCancel: function(){
-        this.closeOverlay();
-    },
-
-    onEditDataviewClose: function(){
-        this.closeOverlay();
-    },
-
     onEditDataviewSave: function(){
 
-        var self = this,
-            data = this.model.toJSON();
+        if(this.model.isValid(true)){
 
-        // NOT WORKING. Need to be done with data and select what is sent to server.
-        $.ajax({ 
-            url: '/dataviews/edit/'+ this.model.get('datastream_revision_id'), 
-            type:'POST', 
-            data: data, 
-            dataType: 'json',
-            success: function(){
+            // Set sources and tags
+            this.model.set('sources', this.sources.toJSON());
+            this.model.set('tags', this.tags.toJSON());
+            this.model.setData();
 
-                // Old way - Not good. Instead let's try a fetch and reset the grid.
-                // window.location.replace("/dataviews/");
+            var self = this,
+                data = this.model.get('data');
 
-                // Reload Grid
-                self.parentView.listResources.fetch({
-                    reset: true
-                });
+            // NOT WORKING. Need to be done with data and select what is sent to server.
+            $.ajax({ 
+                url: '/dataviews/edit/'+ this.model.get('datastream_revision_id'), 
+                type:'POST', 
+                data: data, 
+                dataType: 'json',
+                success: function(){
 
-                // Gritter OK
-                // Here
+                    // Old way - Not good. Instead let's try a fetch and reset the grid.
+                    // window.location.replace("/dataviews/");
 
-                // Close Overlay
-                self.closeOverlay();
+                    // Reload Grid
+                    self.parentView.listResources.fetch({
+                        reset: true
+                    });
 
-            },
-            error: function(){
-                // Gritter Error
-                // Here
-            }
-        });       
+                    // Gritter OK
+                    // Here
+
+                    // Close Overlay
+                    self.closeOverlay();
+
+                },
+                error: function(){
+                    // Gritter Error
+                    // Here
+                }
+            });      
+
+        } 
 
     },
 
     closeOverlay: function(){
-        area1.removeInstance('id_notes');
+        this.notesInstance.removeInstance('id_notes');
+        this.undelegateEvents();
         this.$el.data('overlay').close();
     },
+
+    cleanUpForm: function(){
+        this.$el.find('#sourceForm .sourcesContent').html('');
+        this.$el.find('#tagForm .tagsContent').html('');
+        $('.nicEdit-main').html('');
+    }
 
 });

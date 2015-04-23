@@ -2,7 +2,7 @@
 from core.exceptions import SearchIndexNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -15,15 +15,18 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             # Create a new datastream (TITLE is for automatic GUID creation)
             datastream = DataStream.objects.create(user=user, title=fields['title'])
 
-        # meta_text = 
+        if isinstance(fields['category'], int):
+            fields['category'] = Category.objects.get(id=fields['category'])
 
-        datastream_revision = DataStreamRevision.objects.create(datastream=datastream
-                                                                , user=user
-                                                                , dataset=fields['dataset']
-                                                                , status=fields['status']
-                                                                , category=fields['category']
-                                                                , data_source=fields['data_source']
-                                                                , select_statement=fields['select_statement'])
+        datastream_revision = DataStreamRevision.objects.create(
+            datastream=datastream,
+            user=user,
+            dataset=fields['dataset'],
+            status=fields['status'],
+            category=fields['category'],
+            data_source=fields['data_source'],
+            select_statement=fields['select_statement']
+        )
 
         DatastreamI18n.objects.create(datastream_revision=datastream_revision,
             language=fields['language'], title=fields['title'],

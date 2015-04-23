@@ -1,43 +1,9 @@
 from django.test import TransactionTestCase, LiveServerTestCase
 from django.db.models import F, Max
 
-import xml.etree.ElementTree as ET
-
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
-from selenium.webdriver.phantomjs.webdriver import WebDriver
-
-
-class DatalSeleniumTests(LiveServerTestCase):
-    fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
-                'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
-
-    @classmethod
-    def setUpClass(cls):
-        cls.selenium = WebDriver()
-        super(DatalSeleniumTests, cls).setUpClass()
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.selenium.quit()
-        super(DatalSeleniumTests, cls).tearDownClass()
-
-    def login(self):
-        self.selenium.get('%s%s' % (self.live_server_url, '/signin/'))
-        username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys('administrador')
-        password_input = self.selenium.find_element_by_name("password")
-        password_input.send_keys('administrador')
-        self.selenium.find_element_by_id('id_submitButton').click()
-
-    def test_create_view(self):
-        endpoint = 'http://nolaborables.com.ar/API/v1/2015'
-        self.login()
-
-        # Creo dataset tipo webservice
-        self.selenium.get('%s%s' % (self.live_server_url, '/datasets/create/webservice'))
-        self.selenium.find_element_by_id('id_end_point').send_keys(endpoint)
 
 
 class LifeCycleManagerTestCase(TransactionTestCase):
@@ -70,23 +36,6 @@ class LifeCycleManagerTestCase(TransactionTestCase):
 
         self.dataset = self.dataset_revision.dataset
 
-    def create_webservice_dataset(self, status=StatusChoices.DRAFT):
-        life_cycle = DatasetLifeCycleManager(user=self.user, language=self.user.language)
-
-        self.dataset_revision = life_cycle.create(
-            title='Feriados 2013 Test',
-            collect_type=CollectTypeChoices().WEBSERVICE,
-            description="Feriados 2013 obtenidos de la api nolaborales.com.ar",
-            end_point=self.end_point,
-            notes='Feriados 2013 obtenidos de la api nolaborales.com.ar',
-            category=self.category.id,
-            impl_type=SourceImplementationChoices.REST,
-            file_name='',
-            status=status
-        )
-
-        self.dataset = self.dataset_revision.dataset
-
     def test_create_dataset(self):
         """
         Testing Lifecycle Manager Create Dataset Method
@@ -102,33 +51,6 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
-
-    def test_create_dataset_webservice(self):
-        """
-        Testing Lifecycle Manager Create Dataset Method
-        """
-        self.create_webservice_dataset()
-
-        new_dataset = Dataset.objects.get(id=self.dataset.id)
-        new_revision = DatasetRevision.objects.get(dataset=new_dataset)
-
-        # Verifico los campos del dataset
-        self.assertEqual(new_dataset.user, self.user)
-        self.assertEqual(new_dataset.type, CollectTypeChoices().WEBSERVICE)
-        self.assertFalse(new_dataset.is_dead)
-        self.assertIsNot(new_dataset.guid, '')
-        self.assertEqual(new_dataset.last_revision, new_revision)
-        self.assertIsNone(new_dataset.last_published_revision)
-
-        print(new_revision.impl_details)
-        root = ET.fromstring(new_revision.impl_details)
-
-        # Debe empezar con wsOperation
-        self.assertEquals(root.tag, 'wsOperation')
-        self.assertEquals(root.get('useCache'), 'false')
-
-        # a.impl_details
-        #  u'<wsOperation useCache="false"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/><fields/><authentication/></wsOperation>'
 
 
     def test_create_dataset_published(self):

@@ -2,6 +2,7 @@ var AddSourceView = Backbone.View.extend({
 
   el: '#addNewSource',
 
+  sources: null,
   template: null,
 
   events: {
@@ -9,13 +10,13 @@ var AddSourceView = Backbone.View.extend({
   },
 
   initialize: function(){
-  	this.template = _.template( $("#id_AddNewSourceTemplate").html() );
-    this.sourceList = this.options.sourceList;
+    this.template = _.template( $("#id_AddNewSourceTemplate").html() );
+    this.sources = this.options.sources;
 
     // Bind model validation to view
     Backbone.Validation.bind(this);
 
-  	this.render();
+    this.render();
   },
 
   render: function(){
@@ -52,13 +53,13 @@ var AddSourceView = Backbone.View.extend({
 
   onAddNewSourceButtonClicked:function(){
     var name = $('#id_name').val(),
-        url_source = $('#id_url_source').val();
+      url_source = $('#id_url_source').val();
 
     this.model.set('name', name);
-    this.model.set('url_source', url_source);
+    this.model.set('url', url_source);
     
     if(this.model.isValid(true)){
-      this.sourceList.add(this.model.toJSON());
+      this.sources.add(this.model.toJSON());
       this.$el.hide();
       this.undelegateEvents();
     }

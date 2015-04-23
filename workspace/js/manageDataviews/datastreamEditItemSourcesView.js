@@ -44,7 +44,7 @@ var SourcesView = Backbone.View.extend({
 		});
 
     return this;
-  },  
+  },
 
   addSource: function(model){
 
@@ -86,7 +86,7 @@ var SourcesView = Backbone.View.extend({
       select: function (e, ui) {
       	e.preventDefault();
       	self.model.set('name', ui.item.value);
-      	self.model.set('url_source', '');
+      	self.model.set('url', '');
       	if(self.model.isValid(true)){
 					self.collection.add(self.model.toJSON());
 					$(e.target).val('');
@@ -97,7 +97,7 @@ var SourcesView = Backbone.View.extend({
 
 	onAddSourceButtonClicked: function(){
     var addSourceModel = new AddSourceModel();
-		new AddSourceView({ model: addSourceModel, sourceList: this.collection });
+		new AddSourceView({ model: addSourceModel, sources: this.collection });
 	}
 
 });

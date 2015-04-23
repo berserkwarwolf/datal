@@ -2,7 +2,7 @@ var AddSourceModel = Backbone.Model.extend({
 	
 	defaults: {
 		name: "",
-		url_source: ""
+		url: ""
 	},
 
 	validation: {
@@ -11,7 +11,7 @@ var AddSourceModel = Backbone.Model.extend({
 			required: true,
 			msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
 		},
-		url_source: [
+		url: [
 			{
 				required: true,
 				msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
