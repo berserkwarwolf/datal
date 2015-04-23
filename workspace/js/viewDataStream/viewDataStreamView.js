@@ -94,10 +94,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},  
 
-	onDeleteButtonClicked: function(){
-		console.log('delete');
-	},
-
 	review: function(event){
 		
 		var action = $(event.currentTarget).attr('data-action'),
@@ -210,5 +206,17 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
             dataViewCreationStepsUrl: this.options.dataViewCreationStepsUrl,
         });
     },
+
+	onDeleteButtonClicked: function(){
+		self = this;
+        this.deleteListResources = new Array();
+        this.deleteListResources.push(this.options.model);
+        var deleteItemView = new DeleteItemView({
+            itemCollection: self.options.itemCollection,
+            models: this.deleteListResources,
+            type: "datastreams",
+            parentView: this.parentView
+        });
+	},
 
 });
