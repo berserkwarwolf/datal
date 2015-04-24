@@ -252,10 +252,15 @@ class DataStreamRevision(models.Model):
         #self.sourcedatastream_set.clear()
         
         for source_field in sources:
-            source, is_new = Source.objects.get_or_create(
-                name=source_field.get('name', ''),
-                url=source_field.get('url', '')
-            )
+            source_with_name = Source.objects.filter(name=source_field.get('name', ''))
+            if source_with_name.count():
+                source = source_with_name[0]
+            else:
+                source = Source.objects.create(
+                    name=source_field.get('name', ''),
+                    url=source_field.get('url', '')
+                )
+
             source_datastream, is_new = SourceDatastream.objects.get_or_create(source=source, datastreamrevision=self)
             self.sourcedatastream_set.add(source_datastream)
         self.save()
