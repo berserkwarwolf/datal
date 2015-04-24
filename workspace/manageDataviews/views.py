@@ -298,16 +298,10 @@ def edit(request, datastream_revision_id=None):
     elif request.method == 'POST':
         """update dataset """
 
-        logger.info('POST:')
-        logger.info(request.POST)
-
         form = EditDataStreamForm(request.POST)
 
         if not form.is_valid():
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
-
-        logger.info('CLEANED:')
-        logger.info(form.cleaned_data)
 
         if form.is_valid():
             dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)

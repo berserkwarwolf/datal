@@ -53,6 +53,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     initNotes: function(){
+        $('#id_notes').val(this.model.get('notes'));
         this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
