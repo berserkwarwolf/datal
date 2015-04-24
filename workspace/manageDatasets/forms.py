@@ -8,6 +8,8 @@ from django.utils.translation import ugettext_lazy
 
 from core import choices
 from core.models import CategoryI18n
+from workspace.common.forms import TagForm, SourceForm
+
 
 logger = logging.getLogger(__name__)
 
@@ -375,31 +377,6 @@ class WebserviceParamForm(forms.Form):
         widget=forms.CheckboxInput()
     )
 
-class TagForm(forms.Form):
-
-    # name
-    name = forms.CharField(
-        required=False,
-        label=ugettext_lazy('APP-NAME-TEXT'),
-        widget=forms.TextInput()
-    )
-
-
-class SourceForm(forms.Form):
-
-    # name
-    name = forms.CharField(
-        required=False,
-        label=ugettext_lazy('APP-NAME-TEXT'),
-        widget=forms.TextInput()
-    )
-
-    # url
-    url = forms.URLField(
-        required=False,
-        label=ugettext_lazy('APP-URL-TEXT'),
-        widget=forms.URLInput()
-    )
 
 class LoadForm(forms.Form):
     dataset_revision_id = forms.IntegerField(required=True)
