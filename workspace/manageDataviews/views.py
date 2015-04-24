@@ -112,7 +112,7 @@ def related_resources(request):
     language = request.auth_manager.language
     datastream_id = request.GET.get('datastream_id', '')
     resource_type = request.GET.get('type', 'all')
-    datastreams = DataStreamDBDAO().query_childs(language=language)['datastreams']
+    datastreams = DataStreamDBDAO().query_childs(datastream_id= datastream_id, language=language)['visualizations']
 
     list_result = [associated_datastream for associated_datastream in datastreams]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
