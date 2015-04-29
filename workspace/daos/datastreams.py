@@ -103,7 +103,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return query, total_resources
 
-    def query_childs(self, dataset_id, language):
+    def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
         related = dict(

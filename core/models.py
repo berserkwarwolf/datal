@@ -240,9 +240,9 @@ class DataStreamRevision(models.Model):
         self.save()
 
     def add_tags(self, tags):
-        self.tagdatastream_set.clear()
-        for name in tags:
-            tag, is_new = Tag.objects.get_or_create(name=name)
+        #self.tagdatastream_set.clear()
+        for tag_field in tags:
+            tag, is_new = Tag.objects.get_or_create(name=tag_field.get('name', ''))
 
             tag_datastream, is_new = TagDatastream.objects.get_or_create(tag=tag, datastreamrevision=self)
             self.tagdatastream_set.add(tag_datastream)
@@ -251,8 +251,16 @@ class DataStreamRevision(models.Model):
     def add_sources(self, sources):
         #self.sourcedatastream_set.clear()
         
-        for url, name in sources:
-            source, is_new = Source.objects.get_or_create(name = name, url = url)
+        for source_field in sources:
+            source_with_name = Source.objects.filter(name=source_field.get('name', ''))
+            if source_with_name.count():
+                source = source_with_name[0]
+            else:
+                source = Source.objects.create(
+                    name=source_field.get('name', ''),
+                    url=source_field.get('url', '')
+                )
+
             source_datastream, is_new = SourceDatastream.objects.get_or_create(source=source, datastreamrevision=self)
             self.sourcedatastream_set.add(source_datastream)
         self.save()
@@ -261,7 +269,8 @@ class DataStreamRevision(models.Model):
         # self.datastreamparameter_set.clear()
         
         for name, default, position, description in parameters:
-            parameters = DataStreamParameter.objects.create(name = name, position = position, default = default, description = description)
+            parameters = DataStreamParameter.objects.create(name=name, position=position, default=default,
+                                                            description=description)
             self.datastreamparameter_set.add(parameters)
 
         self.save()

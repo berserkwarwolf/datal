@@ -1,4 +1,4 @@
-import json
+import json, logging
 
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
@@ -20,6 +20,8 @@ from core.models import DatasetRevision, Account,CategoryI18n
 from api.http import JSONHttpResponse
 from core import engine
 
+
+logger = logging.getLogger(__name__)
 
 @login_required
 @require_GET
@@ -110,7 +112,7 @@ def related_resources(request):
     language = request.auth_manager.language
     datastream_id = request.GET.get('datastream_id', '')
     resource_type = request.GET.get('type', 'all')
-    datastreams = DataStreamDBDAO().query_childs(language=language)['datastreams']
+    datastreams = DataStreamDBDAO().query_childs(datastream_id= datastream_id, language=language)['visualizations']
 
     list_result = [associated_datastream for associated_datastream in datastreams]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
@@ -295,26 +297,28 @@ def edit(request, datastream_revision_id=None):
 
     elif request.method == 'POST':
         """update dataset """
+
         form = EditDataStreamForm(request.POST)
 
         if not form.is_valid():
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+        if form.is_valid():
+            dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
 
-        dataview.edit(
-            language=request.auth_manager.language,
-            changed_fields=form.changed_data,
-            **form.cleaned_data
-        )
+            dataview.edit(
+                language=request.auth_manager.language,
+                changed_fields=form.changed_data,
+                **form.cleaned_data
+            )
 
-        response = dict(
-            status='ok',
-            datastream_revision_id= dataview.datastream_revision.id,
-            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-        )
+            response = dict(
+                status='ok',
+                datastream_revision_id= dataview.datastream_revision.id,
+                messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+            )
 
-        return JSONHttpResponse(json.dumps(response))
+            return JSONHttpResponse(json.dumps(response))
 
 @login_required
 @require_privilege("workspace.can_review_dataset_revision")

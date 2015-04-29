@@ -65,15 +65,14 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
         data.category = $('#id_category option:selected').val();
         data.status = $('#id_status option:selected').val();
         data.datastream_revision_id = this.get('datastream_revision_id');
-        
+
         // Prepare Sources for Data
         data['sources-TOTAL_FORMS'] = sources.length;
         data['sources-INITIAL_FORMS'] = '0';
         data['sources-MAX_NUM_FORMS'] = '';
         for( var i=0;i<sources.length;i++ ){
-            for( var paramName in sources[i] ){
-                data['sources-'+i+'-'+paramName] = sources[i][paramName]
-            }
+            data['sources-' + i + '-name'] = sources[i]['name'];
+            data['sources-' + i + '-url'] = sources[i]['url'];
         }
 
         // Prepare tags for Data
@@ -81,9 +80,7 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
         data['tags-INITIAL_FORMS'] = '0';
         data['tags-MAX_NUM_FORMS'] = '';
         for( var i=0;i<tags.length;i++ ){
-            for( var paramName in tags[i] ){
-                data['tags-'+i+'-'+paramName] = tags[i][paramName]
-            }
+            data['tags-'+i+'-name'] = tags[i]['name'];
         }
 
         // Notes

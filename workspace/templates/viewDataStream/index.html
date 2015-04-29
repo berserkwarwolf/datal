@@ -38,6 +38,7 @@
 <script language="javascript" src="/js_workspace/viewDataStream/listDatasets.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
 {% endblock %}
@@ -49,11 +50,11 @@
   
   {% if datastream.status != 1 %}
   <!-- Edit -->
-  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
+  <!--<li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>-->
   {% endif %}
 
   <!-- Delete -->
-  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+  <!--<li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>-->
 
   <!-- Add New -->
   <li class="has-separator"><a id="id_addNewButton" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
