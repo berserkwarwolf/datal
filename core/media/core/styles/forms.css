@@ -67,30 +67,6 @@ label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:norma
 .formErrorMessageContainerLeft{position:relative;}
 .formErrorMessageContainer div.errorFormValidation,
 .formErrorMessageContainerLeft div.errorFormValidation{background:#FFF1AF;border:1px solid #FFF;color:#E18211;font-size:12px;font-weight:bold;text-align:left;padding:1px 10px !important;position:absolute;top:-2px;left:250px;z-index:200;width:auto;width:-moz-max-content;min-width:144px;height:30px;line-height:30px;overflow:hidden;white-space:nowrap;opacity:0.9;filter:alpha(opacity=90);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-moz-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);-webkit-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);}
-
-/*PAGE FORM CONTAINER*/
-.pageFormContainer .row{padding-bottom:10px;position:relative;}
-.pageFormContainer .row label{float:left;padding:10px 10px 0 0;width:131px;text-align:right;font-size:14px;color:#888;font-weight:normal;}
-.pageFormContainer .row input, 
-.pageFormContainer .row select{float:left;position:relative;z-index:1;}
-.pageFormContainer .row input[type=text],
-.pageFormContainer .row input[type=password]{width:168px;border:1px solid #d5d2d2;padding:0 10px;height:28px;background:url(/static/core/images/common/dg_forms.gif) repeat-x 0 0;line-height:28px;vertical-align:baseline;}
-.pageFormContainer .row input[type=password]{padding:0 100px 0 10px;width:78px;}
-.pageFormContainer .row select{width:190px;padding:8px 8px 8px 10px;}
-
-/*SIGN IN / SIGN UP FORM*/
-.pageFormContainer .row .tip{float:left;}
-.pageFormContainer .row .passwordStrength{position:absolute;top:0;right:10px;width:68px;height:13px;padding:12px 5px 0 10px;z-index:2;}
-.pageFormContainer .row .helpTooltip{z-index:2;}
-
-	/*REMEMBER ME*/
-	.pageFormContainer .row.rememberMe{height:30px;}
-	.pageFormContainer .row label[for=id_remember_me],
-	.pageFormContainer .row label[for=id_new_user-remember_me]{padding:0 0 0 8px;text-align:left;font-size:12px;color:#888;font-weight:normal;width:auto;}
-
-	/*ERROR VALIDATION*/
-	.pageFormContainer .row .formErrorMessageContainer{float:left;width:190px;}
-	.pageFormContainer .row .formErrorMessageContainer div.errorFormValidation{top:1px;}
 	
 /*PASSWORD STRENGTH*/
 .is0{background:url(/static/core/images/common/fd_passwordStrength.gif) no-repeat 0 0;width:68px;height:7px;overflow:hidden;}
