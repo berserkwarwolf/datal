@@ -49,15 +49,3 @@
 .activity .text p * > *{vertical-align:middle;}
 .activity .text p i{position:relative;left:-1px;top:-1px;margin-left:3px;}
 .activity .text time{color:#999;}
-
-/* News */
-.news article h4{font:13px/18px 'montserratbold', arial, helvetica, sans-serif;padding-bottom:8px;text-transform:uppercase;}
-.news article p{line-height:18px;}
-
-/* Pending Actions */
-.pending-actions .icon-warning{background:url(../images/common/ic_warning_orange.png) no-repeat;height:14px;width:18px;display:inline-block;vertical-align:bottom;text-indent:-10000px;display:inline-block;}
-.pending-actions p{vertical-align:bottom;display:inline-block;font-size:14px}
-.pending-actions ul{padding-left:23px;margin-top:5px;}
-.pending-actions ul i{display:inline-block;vertical-align:bottom;margin-right:5px;position:relative;top:1px;}
-.pending-actions li{padding-top:8px;}
-.pending-actions li a{font-size:14px}
