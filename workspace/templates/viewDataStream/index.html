@@ -24,6 +24,7 @@
 <script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
 
 {# JS for this screen #}
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -31,7 +32,6 @@
 <script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -39,6 +39,23 @@
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# JS for Edit #}
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemAddSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemAddSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
 {% endblock %}
@@ -50,7 +67,7 @@
   
   {% if datastream.status != 1 %}
   <!-- Edit -->
-  <!--<li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>-->
+  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
   {% endif %}
 
   <!-- Delete -->
@@ -118,7 +135,9 @@ $(document).ready(function(){
   });
   var viewDataStreamView = new ViewDataStreamView({
     model: viewDataStreamModel,
-    dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}"
+    dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search'
   });
 });
 </script>

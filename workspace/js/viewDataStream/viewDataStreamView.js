@@ -4,11 +4,14 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	theDataTable: null,
     listResources: null,
+    sourceUrl: null,
+    tagUrl: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
 		'click #id_approve, #id_reject': 'review',
         "click #id_addNewButton": "onAddNewButtonClicked",
+        "click #id_edit": "onEditButtonClicked"
 	},
 
 	bindings: {
@@ -18,6 +21,9 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
+
+        this.sourceUrl = this.options.sourceUrl;
+        this.tagUrl = this.options.tagUrl;
 
 		// Init Filters
         this.initFilters();
@@ -191,6 +197,26 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		this.theDataTable.setLoadingHeight();
 
 	},
+
+	onEditButtonClicked: function(event){
+        var datastreamEditItemModel = new DatastreamEditItemModel({
+            sourceUrl: this.sourceUrl,
+            tagUrl: this.tagUrl,
+            id: $(event.currentTarget).data("id"),
+            url: $(event.currentTarget).data("url")
+        });
+
+        var self = this;
+
+        datastreamEditItemModel.fetch({
+            success:function(){
+                var datastreamEditItemView = new DatastreamEditItemView({
+                    model: datastreamEditItemModel,
+                    parentView: self
+                });
+            }
+        });
+    },
 
 	initFilters: function(){
 
