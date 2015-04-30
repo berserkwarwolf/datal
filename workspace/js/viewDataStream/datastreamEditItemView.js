@@ -80,14 +80,6 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                 dataType: 'json',
                 success: function(){
 
-                    // Old way - Not good. Instead let's try a fetch and reset the grid.
-                    // window.location.replace("/dataviews/");
-
-                    // Reload Grid
-                    self.parentView.listResources.fetch({
-                        reset: true
-                    });
-
                     // Gritter OK
                     // Here
 

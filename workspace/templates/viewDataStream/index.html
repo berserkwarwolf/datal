@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components datastream_tags compress staticfiles %}
+{% load i18n extra_tags core_components components datastream_tags compress staticfiles %}
 
 {% block meta %}
 
@@ -11,6 +11,7 @@
 <link href="{% static 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'workspace/styles/detailCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'workspace/styles/viewDataStream.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/manageDataviews.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
 {# JS Libs and Plugins #}
@@ -67,7 +68,7 @@
   
   {% if datastream.status != 1 %}
   <!-- Edit -->
-  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
+  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
   {% endif %}
 
   <!-- Delete -->
@@ -141,6 +142,10 @@ $(document).ready(function(){
   });
 });
 </script>
+
+{# templates backbone #}
+{% include "viewDataStream/templates.html" %}
+
 {% endblock %}
 
 {% block popupsOverlay %}
