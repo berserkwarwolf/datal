@@ -158,6 +158,7 @@ def create(request):
             # TODO: Remove when send from frontend
             tags=[],
             sources=[],
+            parameters=[],
             #
             **form.cleaned_data
 
