@@ -48,7 +48,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             raise DatasetNotFoundException()
 
         if self.dataset and self.dataset_revision:
-            self.dataseti18n = DatasetI18n.objects.get(dataset_revision=self.dataset_revision, language=self.dataset.user.language)
+            self.dataseti18n = DatasetI18n.objects.get(dataset_revision=self.dataset_revision,
+                                                       language=self.dataset.user.language)
 
     def create(self, collect_type='index', allowed_states=CREATE_ALLOWED_STATES, language=None, **fields):
         """ Create a new Dataset """
@@ -79,7 +80,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             frequency=fields.get('frequency', ''), mbox=fields.get('mbox', ''), tags=fields.get('tags', []),
             sources=fields.get('sources', []), params=fields.get('params', []), impl_details=impl_details)
 
-        self.dataseti18n = DatasetI18n.objects.get(dataset_revision=self.dataset_revision, language=self.dataset.user.language)
+        self.dataseti18n = DatasetI18n.objects.get(
+            dataset_revision=self.dataset_revision,
+            language=self.dataset.user.language
+        )
 
         self._update_last_revisions()
         self._log_activity( ActionStreams.CREATE)
@@ -176,7 +180,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision todos los datastreams hijos en cascada """
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id, id=F('datastream__last_revision__id'), status=StatusChoices.DRAFT)
+            datastreams = DataStreamRevision.objects.select_for_update().filter(
+                dataset=self.dataset.id,
+                id=F('datastream__last_revision__id'),
+                status=StatusChoices.DRAFT
+            )
 
             for datastream in datastreams:
                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).send_to_review()
@@ -272,7 +280,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _move_childs_to_draft(self):
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id, id=F('datastream__last_revision__id'), status=StatusChoices.PUBLISHED)
+            datastreams = DataStreamRevision.objects.select_for_update().filter(
+                dataset=self.dataset.id,
+                id=F('datastream__last_revision__id'),
+                status=StatusChoices.PUBLISHED
+            )
 
             for datastream in datastreams:
                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).save_as_draft()

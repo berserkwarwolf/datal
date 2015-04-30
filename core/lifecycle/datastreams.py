@@ -197,7 +197,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if self.datastream_revision.status == StatusChoices.PUBLISHED:
-            self.unindex_resource()
+            search_dao = DatastreamSearchDAOFactory().create()
+            search_dao.remove(self.datastream_revision)
 
         if killemall:
             self._remove_all()
@@ -207,8 +208,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 ## Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
-            else:
-                self.datastream_revision.delete()
+
+            self.datastream_revision.delete()
 
         self._update_last_revisions()
 
@@ -293,10 +294,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         if last_revision_id:
             self.datastream.last_revision = DataStreamRevision.objects.get(pk=last_revision_id)
-
             last_published_revision_id = DataStreamRevision.objects.filter(
                 datastream=self.datastream,
-                status=StatusChoices.PUBLISHED).aggregate(Max('id'))['id__max']
+                status=StatusChoices.PUBLISHED).aggregate(Max('id')
+            )['id__max']
 
             if last_published_revision_id:
                     self.datastream.last_published_revision = DataStreamRevision.objects.get(pk=last_published_revision_id)
