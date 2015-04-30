@@ -63,14 +63,14 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if int(status) not in allowed_states:
             raise IlegalStateException(allowed_states)
 
-        language = fields.get('language', self.user.language)
-        category = Category.objects.get(pk=fields['category_id'])
-        self.datastream, self.datastream_revision = DataStreamDBDAO().create(user=self.user,
-            title=fields['title'], dataset=fields['dataset'], category=category
-            , data_source=fields['data_source'], select_statement=fields['select_statement']
-            , language=language , description=fields['description'] 
-            , notes=fields.get('notes', ''), status=fields['status']
-            , tags=fields['tags'], sources=fields['sources'], parameters=fields['parameters'])
+        #language = fields.get('language', self.user.language)
+        #category = Category.objects.get(pk=fields['category_id'])
+        self.datastream, self.datastream_revision = DataStreamDBDAO().create(
+            user=self.user,
+            #category=category,
+            #language=language,
+            **fields
+        )
 
         self._update_last_revisions()
         self._log_activity(ActionStreams.CREATE)
