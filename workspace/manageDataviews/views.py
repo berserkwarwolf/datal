@@ -155,7 +155,12 @@ def create(request):
             dataset=dataset_revision.dataset,
             language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
+            # TODO: Remove when send from frontend
+            tags=[],
+            sources=[],
+            #
             **form.cleaned_data
+
         )
 
         response = dict(
