@@ -153,16 +153,15 @@ def create(request):
         dataview = DatastreamLifeCycleManager(user=request.user)
         dataview.create(
             dataset=dataset_revision.dataset,
-            title=form.cleaned_data['title'],
-            data_source=form.cleaned_data['data_source'],
-            select_statement=form.cleaned_data['select_statement'],
-            language = request.auth_manager.language,
+            language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
-            description=form.cleaned_data['description'],
-            status = form.cleaned_data['status'],
+            # TODO: Remove when send from frontend
             tags=[],
             sources=[],
-            parameters=[]
+            parameters=[],
+            #
+            **form.cleaned_data
+
         )
 
         response = dict(
