@@ -2,7 +2,7 @@
 from django.conf import settings
 from core.models import *
 from core.choices import StatusChoices
-from django.utils.translation import ugettext_lazy
+from django.utils.translation import ugettext_lazy, ugettext
 
 
 class AuthManager:
@@ -77,41 +77,41 @@ class AuthManager:
 
     def get_allowed_actions(self, current_status=None):
         actions = ()
-        if current_status == None:
+        if not current_status:
             if self.is_publisher() or self.is_admin():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
-                    (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
-                    (StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.PENDING_REVIEW,  ugettext('MODEL_STATUS_PENDING_REVIEW')),
+                    (StatusChoices.PUBLISHED,  ugettext('MODEL_STATUS_PUBLISHED')),
+                    (StatusChoices.APPROVED,  ugettext('MODEL_STATUS_APPROVED')))
             elif self.is_editor():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')))
-        elif current_status==ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'):
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.PENDING_REVIEW,  ugettext('MODEL_STATUS_PENDING_REVIEW')))
+        elif current_status==ugettext('MODEL_STATUS_PENDING_REVIEW'):
             if self.is_publisher() or self.is_admin():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
-                    (StatusChoices.ACCEPTED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.PUBLISHED,  ugettext('MODEL_STATUS_PUBLISHED')),
+                    (StatusChoices.ACCEPTED,  ugettext('MODEL_STATUS_APPROVED')))
                 return actions
             if self.is_editor():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')))
                 return actions
-        elif current_status== ugettext_lazy('MODEL_STATUS_PUBLISHED'):
+        elif current_status== ugettext('MODEL_STATUS_PUBLISHED'):
             if self.is_publisher() or self.is_admin():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.ACCEPTED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.ACCEPTED,  ugettext('MODEL_STATUS_APPROVED')))
                 return actions
             if self.is_editor():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')))
                 return actions
-        elif current_status==ugettext_lazy('MODEL_STATUS_DRAFT'):
+        elif current_status==ugettext('MODEL_STATUS_DRAFT'):
             if self.is_editor():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.PENDING_REVIEW,  ugettext('MODEL_STATUS_PENDING_REVIEW')))
                 return actions
             if self.is_publisher() or self.is_admin():
-                actions= actions +((StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-                    (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
-                    (StatusChoices.ACCEPTED,  ugettext_lazy('MODEL_STATUS_APPROVED')))
+                actions= actions +((StatusChoices.DRAFT,  ugettext('MODEL_STATUS_DRAFT')),
+                    (StatusChoices.PUBLISHED,  ugettext('MODEL_STATUS_PUBLISHED')),
+                    (StatusChoices.ACCEPTED,  ugettext('MODEL_STATUS_APPROVED')))
                 return actions
 
         return actions
