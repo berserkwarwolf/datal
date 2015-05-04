@@ -1,28 +1,24 @@
-import json
-import re
-import unicodedata
-import urllib2
+import json, re, unicodedata, urllib2
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
 from django.template.defaultfilters import slugify as django_slugify
-from datetime import date
 from core.primitives import PrimitiveComputer
 from babel import numbers, dates
 from django.core.validators import RegexValidator
-from datetime import timedelta
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
-from operator import itemgetter
 
-comma_separated_word_list_re        = re.compile('^[\w,]+$')
-validate_comma_separated_word_list  = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
+
+comma_separated_word_list_re = re.compile('^[\w,]+$')
+validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
 
 
 def get_domain_with_protocol(app, protocol = 'http'):
     #if app == 'workspace':
     #    protocol = 'https'
     return protocol + '://' + settings.DOMAINS[app]
+
 
 class Day(Aggregate):
     """Custom aggregator
@@ -41,6 +37,7 @@ class Day(Aggregate):
     def add_to_query(self, query, alias, col, source, is_summary):
         super(Day, self).__init__(col, source, is_summary, **self.extra)
         query.aggregate_select[alias] = self
+
 
 def next(p_iterator, p_default=None):
     try:
@@ -429,10 +426,9 @@ def remove_duplicated_filters(list_of_resources):
     removed = dict()
     removed['status_filter'] = set([x.get('status') for x in list_of_resources])
     removed['type_filter'] = set([x.get('impl_type') for x in list_of_resources])
-    removed['author_filter'] = set([x.get('dataset__user__nick') for x in list_of_resources])
-    removed['author_filter'].union(set([x.get('datastream__user__nick') for x in list_of_resources]))
     removed['category_filter'] = set([x.get('category__categoryi18n__name') for x in list_of_resources])
-
+    removed['author_filter'] = set([x.get('dataset__user__nick', '') for x in list_of_resources])
+    removed['author_filter'] = removed['author_filter'].union(set([x.get('datastream__user__nick') for x in list_of_resources]))
     return removed
 
 
