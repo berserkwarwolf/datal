@@ -63,7 +63,7 @@ var DatastreamEditItemModel = Backbone.Epoxy.Model.extend({
         data.title = $.trim( this.get('title') );
         data.description = $.trim( this.get('description') );
         data.category = $('#id_category option:selected').val();
-        data.status = $('#id_status option:selected').val();
+        data.status = $('#id_datastream_status option:selected').val();
         data.datastream_revision_id = this.get('datastream_revision_id');
 
         // Prepare Sources for Data
