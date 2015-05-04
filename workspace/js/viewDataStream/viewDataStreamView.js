@@ -6,6 +6,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
     listResources: null,
     sourceUrl: null,
     tagUrl: null,
+    datastreamEditItemModel: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
@@ -24,6 +25,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
         this.sourceUrl = this.options.sourceUrl;
         this.tagUrl = this.options.tagUrl;
+        this.datastreamEditItemModel = this.options.datastreamEditItemModel;
 
 		// Init Filters
         this.initFilters();
@@ -199,22 +201,9 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	onEditButtonClicked: function(event){
-        var datastreamEditItemModel = new DatastreamEditItemModel({
-            sourceUrl: this.sourceUrl,
-            tagUrl: this.tagUrl,
-            id: $(event.currentTarget).data("id"),
-            url: $(event.currentTarget).data("url")
-        });
-
-        var self = this;
-
-        datastreamEditItemModel.fetch({
-            success:function(){
-                var datastreamEditItemView = new DatastreamEditItemView({
-                    model: datastreamEditItemModel,
-                    parentView: self
-                });
-            }
+    	new DatastreamEditItemView({
+            model: this.datastreamEditItemModel,
+            parentView: this
         });
     },
 

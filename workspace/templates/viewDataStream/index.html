@@ -134,11 +134,27 @@ $(document).ready(function(){
     {% endfor %}
     filter: "",
   });
+  
+  var datastreamEditItemModel = new DatastreamEditItemModel({
+    id: "{{datastream.datastreamrevision_id}}",
+    datastream_revision_id: "{{datastream.datastream_revision_id}}",
+    title: "{{datastream.title}}",
+    category: "{{datastream.category_name}}",
+    allCategories: [{% for category in categories %}{"label":"{{ category.name }}", "value":"{{ category.category__id }}"},{% endfor %}],
+    status: "{{datastream.status}}",
+    allStatus: "{{datastream.allStatus}}",
+    description: "{{datastream.description|escapejs}}",
+    sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
+    tags: [{% for tag in datastream.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
+    notes: "{{datastream.notes}}"
+  });
+
   var viewDataStreamView = new ViewDataStreamView({
     model: viewDataStreamModel,
     dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
     sourceUrl: '/source_manager/action_search',
-    tagUrl: '/tag_manager/action_search'
+    tagUrl: '/tag_manager/action_search',
+    datastreamEditItemModel: datastreamEditItemModel
   });
 });
 </script>
