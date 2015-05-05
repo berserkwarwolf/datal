@@ -263,10 +263,10 @@ class DS:
         return self.sources
 
     def permalink(self, urlconf = DEFAULT_URLCONF):
-        return reverse('datastream_manager.action_view', urlconf, kwargs={'id': self.datastream_id, 'slug': self.slug})
+        return reverse('datastream_manager.action_view', MS_URLCONF, kwargs={'id': self.datastream_id, 'slug': self.slug})
 
     def embedUrl(self, urlconf = DEFAULT_URLCONF):
-        return reverse('datastream_manager.action_embed', urlconf, kwargs={'guid': self.guid})
+        return reverse('datastream_manager.action_embed', MS_URLCONF, kwargs={'guid': self.guid})
 
     def is_self_publishing(self):
         return self.type == CollectTypeChoices.SELF_PUBLISH
