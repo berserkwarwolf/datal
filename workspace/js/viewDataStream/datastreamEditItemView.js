@@ -2,6 +2,8 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     el:"#id_editDataview",
     sources: null,
     tags: null,
+    sourceUrl: null,
+    tagUrl: null,
     parentView: null,
     notesInstance: null,
     events: {
@@ -17,6 +19,9 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         this.initSourceList();
         this.initTagList();
         this.initNotes();
+
+        this.sourceUrl = this.options.sourceUrl;
+        this.tagUrl = this.options.tagUrl;
 
         // Init Overlay
         this.$el.overlay({
@@ -72,26 +77,32 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
             var self = this,
                 data = this.model.get('data');
 
-            // NOT WORKING. Need to be done with data and select what is sent to server.
             $.ajax({ 
                 url: '/dataviews/edit/'+ this.model.get('datastream_revision_id'), 
                 type:'POST', 
                 data: data, 
                 dataType: 'json',
                 success: function(){
-
-                    // Gritter OK
-                    // Here
-
-                    // Close Overlay
+                    $.gritter.add({
+                        title : gettext('APP-CHANGES-SAVED-TEXT'),
+                        text : gettext('APP-DATAVIEW-SAVED-TEXT'),
+                        image : '/static/workspace/images/common/ic_validationOk32.png',
+                        sticky : false,
+                        time : 3500
+                    });
                     self.closeOverlay();
-
                 },
                 error: function(){
-                    // Gritter Error
-                    // Here
+                    $.gritter.add({
+                        title : gettext('APP-ERROR-TEXT'),
+                        text : gettext('APP-REQUEST-ERROR'),
+                        image : '/static/workspace/images/common/ic_validationError32.png',
+                        sticky : true,
+                        time : 3500
+                    });
+                    self.closeOverlay();
                 }
-            });      
+            });     
 
         } 
 

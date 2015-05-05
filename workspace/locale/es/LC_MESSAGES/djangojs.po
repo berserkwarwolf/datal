@@ -822,3 +822,6 @@ msgstr "Usted puede mostrar u ocultar el catálogo de recursos en el template."
 
 msgid "ADMIN-HOME-SECTION-RESOURCESCHECKBOX"
 msgstr "Mostrar catálogo de recursos."
+
+msgid "APP-DATAVIEW-SAVED-TEXT"
+msgstr "La vista de datos se ha guardado correctamente."

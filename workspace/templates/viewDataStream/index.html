@@ -146,9 +146,10 @@ $(document).ready(function(){
     description: "{{datastream.description|escapejs}}",
     sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
     tags: [{% for tag in datastream.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
-    notes: "{{datastream.notes}}"
+    notes: "{{datastream.notes}}",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search',
   });
-  console.log(datastreamEditItemModel.toJSON());
 
   var viewDataStreamView = new ViewDataStreamView({
     model: viewDataStreamModel,
