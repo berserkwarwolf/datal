@@ -1,9 +1,11 @@
 from django.core.urlresolvers import reverse
 from django.db import connection
+from django.http import Http404
+
 from core.choices import StatusChoices, CollectTypeChoices, COLLECT_TYPE_CHOICES
 from core.helpers import slugify
 from core.primitives import PrimitiveComputer
-from django.http import Http404
+
 
 # tags
 # sources
@@ -11,6 +13,7 @@ from django.http import Http404
 
 DEFAULT_URLCONF = 'workspace.urls'
 MS_URLCONF = 'microsites.urls'
+
 
 class DB:
     def __init__(self, dashboardrevision_id, language, last = True):
@@ -118,6 +121,7 @@ class DB:
     def permalink(self, urlconf = DEFAULT_URLCONF):
         return reverse('dashboard_manager.action_view', urlconf, kwargs={'id': self.dashboard_id, 'slug': self.slug})
 
+
 class Parameter:
     def __init__(self, row):
         self.name = row[12]
@@ -125,6 +129,7 @@ class Parameter:
         self.description = row[14]
         self.default = PrimitiveComputer().compute(row[15])
         self.value = ''
+
 
 class DS:
     def __init__(self, datastreamrevision_id, language):
@@ -280,6 +285,7 @@ class ParameterVZ:
         self.description = row[23]
         self.default = row[24]
         self.value = ''
+
 
 class VZ:
     def __init__(self, visualizationrevision_id, language):
@@ -644,10 +650,12 @@ class DBWidget:
         else:
             return bool(self._get_visualizationrevision_id())
 
+
 def _execute_sql(sql, params):
     cursor = connection.cursor()
     cursor.execute(sql, params)
     return cursor
+
 
 class Src:
     def __init__(self, row):

@@ -1,19 +1,17 @@
+import urllib, logging
 from django.conf import settings
 from django.http import Http404, HttpResponse
 from django.core.urlresolvers import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
+
 from core.choices import ChannelTypes
 from core.docs import DS, DT
 from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
 from core.reports_manager.helpers import create_report
-from core.cache import Cache
 from microsites.helpers import set_dataset_impl_type_nice
-import urllib
-import logging
 
-#import json
 
 def action_view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL
