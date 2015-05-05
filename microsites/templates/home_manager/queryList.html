@@ -15,9 +15,10 @@
     <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/homeManager.css' %}" />
     <!-- BRANDED -->
     <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/brandedFull.css' %}"/>
+    {% endcompress %}
+
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-    {% endcompress %}
 
     {% ifequal LANGUAGE_CODE 'es'%}
       <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
