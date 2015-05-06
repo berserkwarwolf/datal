@@ -10,13 +10,13 @@
 <!-- ACTIONS -->
 <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/actions.css' %}"/>
 <!-- DATA STREAM BOX -->
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamBox.css' %}"/>
 <!-- COMMON MODULES -->
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/commonModules.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/commonModules.css' %}"/>
 <!-- BUTTONS -->
 <link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/buttons.css' %}"/>
 <!-- COMPONENT -->
-<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/_modules/embed.css' %}"/>
+<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/embed.css' %}"/>
 {% endcompress %}
 
 {% if preferences.enable_embed_options %}
@@ -25,7 +25,7 @@
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 	<!-- OVERLAY -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/overlay.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/overlay.css' %}"/>
     {% endcompress %}
 
 	<script type="text/javascript" src="/js_core/libs/underscore/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
