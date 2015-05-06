@@ -147,7 +147,7 @@ $(document).ready(function(){
     title: "{{datastream.title}}",
     category: "{{datastream.category_name}}",
     allCategories: [{% for category in categories %}{"label":"{{category.name}}", "value":"{{category.category__id}}"},{% endfor %}],
-    status: "{{datastream.status|status_str}}",
+    status: "{{datastream.status}}",
     allStatus: [{% for key, value in status_options %}{"label":"{{value}}", "value":"{{key}}"},{% endfor %}],
     description: "{{datastream.description|escapejs}}",
     sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],

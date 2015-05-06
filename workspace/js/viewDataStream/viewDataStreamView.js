@@ -16,13 +16,10 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
         "click #id_edit": "onEditButtonClicked",
 	},
 
-	/* bindings: {
+	bindings: {
         '.dataTable header h1 strong': 'text:title',
         '.dataTable header h2': 'text:description',
-		'.sidebar-container #id_status': 'text:status',
-		'.sidebar-container #id_category': 'text:category',
-		'.sidebar-container .notes': 'text:notes',
-	}, */
+	},
 
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
