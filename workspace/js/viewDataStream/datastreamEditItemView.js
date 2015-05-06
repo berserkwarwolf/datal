@@ -91,6 +91,11 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                         time : 3500
                     });
                     self.closeOverlay();
+                    /*self.parentView.model.set('title', self.model.get('title'));
+                    self.parentView.model.set('description', self.model.get('description'));
+                    self.parentView.model.set('status', self.model.get('status'));
+                    self.parentView.model.set('category', self.model.get('category'));
+                    self.parentView.model.set('notes', self.model.get('notes'));*/
                 },
                 error: function(){
                     $.gritter.add({

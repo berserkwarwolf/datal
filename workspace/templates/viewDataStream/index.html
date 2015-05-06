@@ -103,11 +103,7 @@
           {% endif %}
 
           <!-- Sidebar -->
-          <section class="sidebar-container">
-
-            {% include "viewDataStream/sidebar.html" %}
-
-          </section>
+          <section class="sidebar-container"></section>
 
           <!-- Detail -->
           <section class="detail-container">
@@ -127,12 +123,22 @@
 $(document).ready(function(){
   var viewDataStreamModel = new dataStream({
     reviewURL: "{% url 'manageDataviews.review' datastream.datastream_revision_id %}",
-    status: "{{ datastream.status|status_str }}",
     id: "{{datastream.datastream_revision_id}}",
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
     filter: "",
+
+    datastream_revision_id: "{{datastream.datastream_revision_id}}",
+    title: "{{datastream.title}}",
+    status: "{{ datastream.status|status_str }}",
+    modified_at: "{{datastream.modified_at|date:'F d, Y, h:i A'|capfirst}}",
+    impl_type: "{{datastream.impl_type|type_classname}}",
+    category: "{{datastream.category_name}}",
+    description: "{{datastream.description|escapejs}}",
+    sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
+    tags: [{% for tag in datastream.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
+    notes: "{{datastream.notes}}",
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({
@@ -141,7 +147,7 @@ $(document).ready(function(){
     title: "{{datastream.title}}",
     category: "{{datastream.category_name}}",
     allCategories: [{% for category in categories %}{"label":"{{category.name}}", "value":"{{category.category__id}}"},{% endfor %}],
-    status: "{{datastream.status}}",
+    status: "{{datastream.status|status_str}}",
     allStatus: [{% for key, value in status_options %}{"label":"{{value}}", "value":"{{key}}"},{% endfor %}],
     description: "{{datastream.description|escapejs}}",
     sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
