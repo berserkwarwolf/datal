@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components datastream_tags compress staticfiles %}
+{% load i18n extra_tags core_components components datastream_tags compress staticfiles %}
 
 {% block meta %}
 
@@ -11,6 +11,7 @@
 <link href="{% static 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'workspace/styles/detailCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'workspace/styles/viewDataStream.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'workspace/styles/manageDataviews.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
 {# JS Libs and Plugins #}
@@ -24,6 +25,7 @@
 <script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
 
 {# JS for this screen #}
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -31,7 +33,6 @@
 <script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -39,6 +40,23 @@
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# JS for Edit #}
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemSourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemAddSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemAddSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
 {% endblock %}
@@ -50,7 +68,7 @@
   
   {% if datastream.status != 1 %}
   <!-- Edit -->
-  <!--<li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>-->
+  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
   {% endif %}
 
   <!-- Delete -->
@@ -85,11 +103,7 @@
           {% endif %}
 
           <!-- Sidebar -->
-          <section class="sidebar-container">
-
-            {% include "viewDataStream/sidebar.html" %}
-
-          </section>
+          <section class="sidebar-container"></section>
 
           <!-- Detail -->
           <section class="detail-container">
@@ -109,19 +123,53 @@
 $(document).ready(function(){
   var viewDataStreamModel = new dataStream({
     reviewURL: "{% url 'manageDataviews.review' datastream.datastream_revision_id %}",
-    status: "{{ datastream.status|status_str }}",
     id: "{{datastream.datastream_revision_id}}",
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
     filter: "",
+
+    datastream_revision_id: "{{datastream.datastream_revision_id}}",
+    title: "{{datastream.title}}",
+    status: "{{ datastream.status|status_str }}",
+    modified_at: "{{datastream.modified_at|date:'F d, Y, h:i A'|capfirst}}",
+    impl_type: "{{datastream.impl_type|type_classname}}",
+    category: "{{datastream.category_name}}",
+    description: "{{datastream.description|escapejs}}",
+    sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
+    tags: [{% for tag in datastream.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
+    notes: "{{datastream.notes}}",
   });
+  
+  var datastreamEditItemModel = new DatastreamEditItemModel({
+    id: "{{datastream.datastreamrevision_id}}",
+    datastream_revision_id: "{{datastream.datastream_revision_id}}",
+    title: "{{datastream.title}}",
+    category: "{{datastream.category_name}}",
+    allCategories: [{% for category in categories %}{"label":"{{category.name}}", "value":"{{category.category__id}}"},{% endfor %}],
+    status: "{{datastream.status|status_str}}",
+    allStatus: [{% for key, value in status_options %}{"label":"{{value}}", "value":"{{key}}"},{% endfor %}],
+    description: "{{datastream.description|escapejs}}",
+    sources: [{% for source in datastream.sources %}{"name":"{{ source.source__name }}"},{% endfor %}],
+    tags: [{% for tag in datastream.tags %}{"name":"{{ tag.tag__name }}"},{% endfor %}],
+    notes: "{{datastream.notes}}",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search',
+  });
+
   var viewDataStreamView = new ViewDataStreamView({
     model: viewDataStreamModel,
-    dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}"
+    dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search',
+    datastreamEditItemModel: datastreamEditItemModel
   });
 });
 </script>
+
+{# templates backbone #}
+{% include "viewDataStream/templates.html" %}
+
 {% endblock %}
 
 {% block popupsOverlay %}

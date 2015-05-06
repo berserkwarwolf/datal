@@ -21,10 +21,11 @@ class CreateDataStreamForm(forms.Form):
     data_source = forms.CharField(label=ugettext_lazy( 'APP-DATASOURCE-TEXT' ), required=True)
     select_statement = forms.CharField(label=ugettext_lazy( 'APP-SELECTSTATEMENT-TEXT' ), required=True)
     rdf_template = forms.CharField(label=ugettext_lazy( 'APP-RDFTEMPLATE-TEXT' ), required=False)
-    status = forms.IntegerField(label=ugettext_lazy( 'APP-STATUS-TEXT' ), required=False)
+    status = forms.IntegerField(label=ugettext_lazy('APP-STATUS-TEXT'), required=False)
     title = forms.CharField(label=ugettext_lazy( 'APP-TITLE-TEXT' ), required=True)
     description = forms.CharField(label=ugettext_lazy( 'APP-DESCRIPTION-TEXT' ), required=True)
     meta_text = forms.CharField(label=ugettext_lazy( 'APP-METATEXT-TEXT' ), required=False)
+    notes = forms.CharField(label=ugettext_lazy( 'APP-NOTES-TEXT' ), required=False)
 
 
 class EditDataStreamForm(forms.Form):

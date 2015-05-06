@@ -3,6 +3,7 @@ from core.exceptions import SearchIndexNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
+from core.lib.searchify import SearchifyIndex
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -69,7 +70,7 @@ class DatastreamSearchDAOFactory():
         if settings.USE_SEARCHINDEX == 'searchify':
             self.search_dao = DatastreamSearchifyDAO()
         else:
-            raise SearchIndexNotFoundException() #TODO define this error
+            raise SearchIndexNotFoundException()
 
         return self.search_dao
         
@@ -77,7 +78,6 @@ class DatastreamSearchDAOFactory():
 class DatastreamSearchifyDAO():
     """ class for manage access to datasets' searchify documents """
     def __init__(self):
-        from core.lib.indexers.searchify import SearchifyIndex
         self.search_index = SearchifyIndex()
         
     def add(self, datastream_revision):

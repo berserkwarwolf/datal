@@ -2,28 +2,43 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	el: '.main-section',
 
+  	template: null,
 	theDataTable: null,
     listResources: null,
+    sourceUrl: null,
+    tagUrl: null,
+    datastreamEditItemModel: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
 		'click #id_approve, #id_reject': 'review',
         "click #id_addNewButton": "onAddNewButtonClicked",
+        "click #id_edit": "onEditButtonClicked",
 	},
 
-	bindings: {
-		'#id_status': 'text:status',
-	},
+	/* bindings: {
+        '.dataTable header h1 strong': 'text:title',
+        '.dataTable header h2': 'text:description',
+		'.sidebar-container #id_status': 'text:status',
+		'.sidebar-container #id_category': 'text:category',
+		'.sidebar-container .notes': 'text:notes',
+	}, */
 
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
+		this.template = _.template( $("#id_SidebarTemplate").html() );
 		this.render();
+
+        this.sourceUrl = this.options.sourceUrl;
+        this.tagUrl = this.options.tagUrl;
+        this.datastreamEditItemModel = this.options.datastreamEditItemModel;
 
 		// Init Filters
         this.initFilters();
 	},
 
 	render: function(){
+   	 	this.$el.find('.sidebar-container').html( this.template( this.model.toJSON() ) );
 		this.setSidebarHeight();
 		return this;
 	},
@@ -191,6 +206,13 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		this.theDataTable.setLoadingHeight();
 
 	},
+
+	onEditButtonClicked: function(event){
+    	new DatastreamEditItemView({
+            model: this.datastreamEditItemModel,
+            parentView: this
+        });
+    },
 
 	initFilters: function(){
 

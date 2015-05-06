@@ -83,6 +83,7 @@ class GuidModel(models.Model):
         #else:
         #    raise Exception('Please set the title before saving it, we need it to compute the guid.')
 
+
 class AccountLevel(models.Model):
     name        = models.CharField(max_length=30)
     code        = models.CharField(max_length=30)
@@ -181,15 +182,16 @@ class User(models.Model):
 
 
 class DataStream(GuidModel):
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    guid                = models.CharField(max_length=29, unique=True)
-    last_revision       = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision',
-                                            on_delete=models.SET_NULL)
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    guid = models.CharField(max_length=29, unique=True)
+    last_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_revision',
+                                      on_delete=models.SET_NULL)
     last_published_revision = models.ForeignKey('DataStreamRevision', null=True, related_name='last_published_revision',
                                                 on_delete=models.SET_NULL)
-    objects             = managers.DataStreamManager()
+    objects = managers.DataStreamManager()
+
     class Meta:
-        db_table        = 'ao_datastreams'
+        db_table = 'ao_datastreams'
 
     def __unicode__(self):
         return self.guid
