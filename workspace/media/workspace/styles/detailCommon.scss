@@ -1,3 +1,6 @@
+/* Import SASS variables */
+@import 'variables';
+
 /* Structure */
 .main-section .section-content{background:url(/static/microsites/images/microsites/bg_body.gif) repeat;padding:10px;}
 .detail{}
@@ -25,7 +28,7 @@
        -moz-border-radius:5px 5px 0 0;
             border-radius:5px 5px 0 0;
 }
-.sidebar-container .box .title h1{height:30px;line-height:30px;font-size:14px;font-weight:bold;color:#666;padding:0 12px;text-shadow:0 1px 0 #fff;}
+.sidebar-container .box .title h1{height:30px;line-height:30px;font-size:14px;font-weight:bold;color:$color-text-semi-light;padding:0 12px;text-shadow:0 1px 0 #fff;}
 .sidebar-container .box .title .close{width:31px;height:30px;border-left:1px solid #dadada;display:block;background:url(/static/workspace/images/microsites/ic_buttons.png) no-repeat center 0;text-indent:-10000px;cursor:pointer;}
 .sidebar-container .box .title .close:hover{background-position:center -30px;}
 .sidebar-container .box .boxContent{/* overflow:auto;overflow-x:hidden;overflow-y:auto; */ padding:0 12px;}
@@ -33,10 +36,10 @@
     /* Common */
     .sidebar-container article{border-top:1px solid #dadada;padding:13px 0;}
     .sidebar-container article:first-child{border-top:0;}
-    .sidebar-container article header h1{color:#333;font-size:12px;}
+    .sidebar-container article header h1{font-size:12px;}
     .sidebar-container article ul{}
     .sidebar-container article li,
-    .sidebar-container article p{color:#777;font-size:11px;margin-top:6px;}
+    .sidebar-container article p{color:$color-text-light;font-size:11px;margin-top:6px;}
     .sidebar-container article li{background:url(/static/microsites/images/microsites/ic_bulletGray.png) no-repeat 5px 5px;padding-left:16px;}
     .sidebar-container article code{padding:7px 10px;font-size:11px;color:#333;background:#f2f2f2;display:block;word-break:break-word;overflow:hidden;text-shadow:0 1px 0 rgba(255,255,255,.75);
         -webkit-border-radius:3px;
@@ -120,11 +123,11 @@
 
     /* NOTES */
     .sidebar-container .notesBox .boxContent{overflow-x:auto;}
-    .sidebar-container .notes{color:#777;}
+    .sidebar-container .notes{color:$color-text-light;}
 
 /* Detail */
 .detail-container header{margin:0;padding:12px 15px;}
 .detail-container header h1{padding-bottom:8px;}
-.detail-container header h2{color:#999;font-size:14px;}
+.detail-container header h2{color:$color-text-light;font-size:14px;}
 .detail-container .resource-detail.box{margin-top:0;}
 .detail-container .resources-table{overflow-y:auto;position:relative;}

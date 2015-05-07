@@ -1,5 +1,8 @@
+/* Import SASS variables */
+@import 'variables';
+
 /* List */
-.resources-list h4{background-color:#f8f7f7;border-bottom:1px solid #dfdfdf;padding:8px 15px;font-weight:bold;color:#717171;}
+.resources-list h4{background-color:#f8f7f7;border-bottom:1px solid #dfdfdf;padding:8px 15px;font-weight:bold;color:$color-text-semi-light;}
 .api_example{margin-top:5px;font-weight:bold;}
 .resources-list table{width:100%;font-size:12px;text-shadow:0 1px 0 #fff;border-collapse: collapse; }
 .resources-list table th{text-align:left;color:#999;font-family:'montserratregular', arial, helvetica, sans-serif;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 0 0 15px;}
@@ -13,7 +16,7 @@
 .resources-list table h3:first-letter{text-transform:uppercase;}
 .resources-list table .filename{display:block;}
 .resources-list table .filename a{color:#3a3a3a;}
-.resources-list table .date{display:block;color:#999;}
+.resources-list table .date{display:block;color:$color-text-light;}
 .resources-list table .actions{padding-top:10px;}
 .resources-list table .actions li{float:left;visibility:hidden;}
 .resources-list table .actions li:before{content:"|";padding:7px;color:#e1e1e1;display:inline;position:relative;}

@@ -99,14 +99,6 @@ a{color:$color-link;}
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#414040', endColorstr='#525151',GradientType=0 );
   }
 
-  /* Alpha */
-  .button.alpha{text-transform:none;font-family: Arial, Helvetica, sans-serif;border:0;background:none;
-    -webkit-box-shadow:0 0 0 0 transparent;
-       -moz-box-shadow:0 0 0 0 transparent;
-            box-shadow:0 0 0 0 transparent;
-  }
-  .button.alpha:hover{text-decoration:underline;}
-
   /* Disabled */
   .button[disabled=disabled], 
   .button:disabled{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";cursor:default;pointer-events:none;}

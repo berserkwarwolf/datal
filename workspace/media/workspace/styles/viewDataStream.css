@@ -16,11 +16,11 @@
 	}
 	.dataTable header hgroup{text-shadow:0 1px 0 #fff;margin-top:-4px;}
 	.dataTable header h1{font-size:18px;line-height:normal;width:100%;overflow:hidden;}
-	.dataTable header h1 strong{font-weight:bold;color:#333;display:block;float:none !important;}
+	.dataTable header h1 strong{font-weight:bold;display:block;float:none !important;}
 	.dataTable header h1 span{display:block;}
 	.dataTable header h1 .parameters{color:#958989;font-weight:normal;padding:3px 0;font-size:14px;line-height:21px;}
 	.dataTable header h1 .parameters a{cursor:pointer;}
-	.dataTable header h2{color:#958989;font-size:14px;padding-top:3px;}
+	.dataTable header h2{font-size:14px;padding-top:3px;}
 	.dataTable header h1 strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
 	.dataTable header h2{line-height:21px;}
 
