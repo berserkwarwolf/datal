@@ -7,6 +7,8 @@
 .content, .layout{background:none;}
 .main-section .section-content{background-color:#FFF;padding:0;}
 .list-container{padding:0 15px 15px;margin:0;}
+.ao-tabs .tabsList .tab.tab-selected div a, 
+.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$color-text-semi-light;}
 
 /*FORMS*/
 .dataStreamForm{padding:20px 0 20px 20px;}
