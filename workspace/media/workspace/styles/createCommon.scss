@@ -50,7 +50,7 @@
           box-shadow:0 0 5px rgba(208,208,208,1);
  }
  .create .box .button{display:block;}
- .create .box:hover .button.green{
+ .create .box:hover .button.primary{
     background:#b9ce44;
     background:-moz-linear-gradient(top,  #b9ce44 0%, #a8c732 8%, #72aa00 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#b9ce44), color-stop(8%,#a8c732), color-stop(100%,#72aa00));

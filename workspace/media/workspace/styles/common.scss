@@ -7,8 +7,8 @@ body{font-family:$font-family-primary;color:$color-text;}
 a{color:$color-link;}
 
 /* Buttons */
-  /* Green */
-  .button.green{border-color:#1c2802;border-color:rgba(16,23,1,.50);color:#fff;text-shadow:0 -1px 0 #517605;
+  /* primary */
+  .button.primary{border-color:#1c2802;border-color:rgba(16,23,1,.50);color:#fff;text-shadow:0 -1px 0 #517605;
     background:#72aa00;
     background:-moz-linear-gradient(top,  #72aa00 0%, #a8c732 92%, #b9ce44 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#72aa00), color-stop(92%,#a8c732), color-stop(100%,#b9ce44));
@@ -18,7 +18,7 @@ a{color:$color-link;}
     background:linear-gradient(to bottom,  #72aa00 0%,#a8c732 92%,#b9ce44 100%);
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#72aa00', endColorstr='#b9ce44',GradientType=0 );
   }
-  .button.green:hover{
+  .button.primary:hover{
     background:#b9ce44;
     background:-moz-linear-gradient(top,  #b9ce44 0%, #a8c732 8%, #72aa00 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#b9ce44), color-stop(8%,#a8c732), color-stop(100%,#72aa00));
@@ -301,7 +301,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 /* Header */
 .header{border-top:1px solid #fd903d;border-bottom:2px solid #2c2b2b;background:$color-brand;position:relative;}
 .header .logo img{width:auto;height:auto;display:block;}
-.header .button.green,
+.header .button.primary,
 .header .button.orange{border-color:$color-brand-bold;margin-top:8px;}
 
   /* Online Support button */
