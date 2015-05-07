@@ -7,7 +7,7 @@ body{font-family:$font-family-primary;color:$color-text;}
 a{color:$color-link;}
 
 /* Buttons */
-  /* primary */
+  /* Primary button */
   .button.primary{border-color:#1c2802;border-color:rgba(16,23,1,.50);color:#fff;text-shadow:0 -1px 0 #517605;
     background:#72aa00;
     background:-moz-linear-gradient(top,  #72aa00 0%, #a8c732 92%, #b9ce44 100%);
@@ -29,8 +29,8 @@ a{color:$color-link;}
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9ce44', endColorstr='#72aa00',GradientType=0 );
   }
 
-   /* Red */
-  .button.red{border-color:#963222;border-color:rgba(150,50,34,.50);color:#fff;text-shadow:0 -1px 0 #963222;
+   /* Warning button */
+  .button.warning{border-color:#963222;border-color:rgba(150,50,34,.50);color:#fff;text-shadow:0 -1px 0 #963222;
     background:#ffaea7;
     background:-moz-linear-gradient(top,  #ffaea7 0%, #fd6f75 8%, #fb404f 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffaea7), color-stop(8%,#fd6f75), color-stop(100%,#fb404f));
@@ -40,7 +40,7 @@ a{color:$color-link;}
     background:linear-gradient(to bottom,  #ffaea7 0%,#fd6f75 8%,#fb404f 100%);
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffaea7', endColorstr='#fb404f',GradientType=0 );
   }
-  .button.red:hover{
+  .button.warning:hover{
     background:#fb404f;
     background:-moz-linear-gradient(top,  #fb404f 0%, #fd6f75 92%, #ffaea7 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fb404f), color-stop(92%,#fd6f75), color-stop(100%,#ffaea7));
@@ -51,8 +51,8 @@ a{color:$color-link;}
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fb404f', endColorstr='#ffaea7',GradientType=0 );
   }
 
-  /* Orange */
-  .button.orange{border-color:#c59a7e;border-color:rgba(140,28,65,.5);color:#ce6425;text-shadow:0 1px 0 #fbddc0;
+  /* Support button */
+  .button.support{border-color:#c59a7e;border-color:rgba(140,28,65,.5);color:#ce6425;text-shadow:0 1px 0 #fbddc0;
     background:#f9c089;
     background:-moz-linear-gradient(top,  #fbe0c6 0%, #fad6b2 8%, #f9c089 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbe0c6), color-stop(8%,#fad6b2), color-stop(100%,#f9c089));
@@ -62,7 +62,7 @@ a{color:$color-link;}
     background:linear-gradient(to bottom,  #fbe0c6 0%,#fad6b2 8%,#f9c089 100%);
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbe0c6', endColorstr='#f9c089',GradientType=0 );
   }
-  .button.orange:hover{
+  .button.support:hover{
     background:#fbe0c6;
     background:-moz-linear-gradient(top,  #f9c089 0%, #fad6b2 92%, #fbe0c6 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#f9c089), color-stop(92%,#fad6b2), color-stop(100%,#fbe0c6));
@@ -72,7 +72,7 @@ a{color:$color-link;}
     background:linear-gradient(to bottom,  #f9c089 0%,#fad6b2 92%,#fbe0c6 100%);
     filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f9c089', endColorstr='#fbe0c6',GradientType=0 );
   }
-  .button.orange.dark{border-color:#1c2802;border-color:rgba(16,23,1,.50);}
+  .button.support.dark{border-color:#1c2802;border-color:rgba(16,23,1,.50);}
 
   /* Black */
   .button.black{border-color:#282728;color:#fff;text-shadow:0 1px 0 #000;
@@ -302,7 +302,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 .header{border-top:1px solid #fd903d;border-bottom:2px solid #2c2b2b;background:$color-brand;position:relative;}
 .header .logo img{width:auto;height:auto;display:block;}
 .header .button.primary,
-.header .button.orange{border-color:$color-brand-bold;margin-top:8px;}
+.header .button.support{border-color:$color-brand-bold;margin-top:8px;}
 
   /* Online Support button */
   .header #id_help_link{margin-right:10px;}
@@ -537,11 +537,11 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .box.blue{background:#f6f9ff;}
   .box.blue > header{border-color:#dfebfe;}
 
-  /* Orange */
-  .box.orange{background:$color-brand-15;}
-  .box.orange > header{border-color:$color-brand-15;}
-  .box.orange > header .title{color:$color-brand;}
-  .box.orange > header .title > span{color:$color-text;}
+  /* support */
+  .box.support{background:$color-brand-15;}
+  .box.support > header{border-color:$color-brand-15;}
+  .box.support > header .title{color:$color-brand;}
+  .box.support > header .title > span{color:$color-text;}
 
   /* Pink */
   .box.pink{background:#fef1e1;}
