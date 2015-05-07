@@ -1,3 +1,6 @@
+/* Import SASS variables */
+@import 'variables';
+
 /* Theme Tabs */
 .themeTabs{margin-bottom:15px;}
 .themeTabs > ul{position:relative;z-index:2;border-bottom:1px solid #e2e0e0;padding-bottom:5px;}
@@ -25,7 +28,7 @@
 	.themeTabs > ul li.active a i{display:block;}
 
 	/* Theme Numbers on tabs */
-	.themeTabs > ul li a i{color:#ff6600;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
+	.themeTabs > ul li a i{color:$color-brand;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
 
 		/* Theme 0 */
 		.themeTabs > ul li.theme0 a .i1{width:67px;height:49px;line-height:49px;}
@@ -89,7 +92,7 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
-.configs .formBox header .num{background:url(../images/personalizeHome/ic_num.png) 0 0 no-repeat;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:18px;}
+.configs .formBox header .num{background-color:$color-brand;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
 .configs .formBox header h1{color:#827676;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}
@@ -115,7 +118,6 @@
 .configs .linksSection fieldset.imageComponent{padding-top:0;}
 .configs .formBox fieldset.imageComponent .arrangeIcon{display:block;margin-right:13px;width:13px;height:33px;background:url(../images/personalizeHome/ic_arrange.gif) no-repeat 0 center;}
 .configs .formBox fieldset.imageComponent .arrangeIcon:hover{cursor:move;cursor:url(/static/core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
-{cursor:move;cursor:url(/static/core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
 .configs .formBox fieldset.imageComponent .rowSeparation{padding-bottom:5px;}
 .configs .formBox fieldset.imageComponent table img,
 .configs .formBox fieldset.imageComponent img{width:108px;margin:0 10px 5px 0;float:left;border:1px solid #d9d7d7;border-radius:3px;}
@@ -132,7 +134,7 @@
 .configs .formBox fieldset.imageComponent .remove:hover{text-decoration:underline;cursor:pointer;}
 .configs .formBox fieldset.imageComponent .tipText{font-size:11px;color:#333;line-height:16px;padding-top:10px;}
 .configs .formBox fieldset.imageComponent.theme4 .tipText,
-.configs .formBox fieldset.imageComponent.theme5 .tipText{padding:12px 0;}{padding:12px 0;}
+.configs .formBox fieldset.imageComponent.theme5 .tipText{padding:12px 0;}
 .configs .formBox fieldset.imageComponent .tipText span{background:#fbe89a;padding:0 3px;display:inline-block;margin-right:3px;font-weight:bold;color:#666;}
 .configs .formBox fieldset.imageComponent table{width:100%;}
 .configs .formBox fieldset.imageComponent .tr{height:33px;}
