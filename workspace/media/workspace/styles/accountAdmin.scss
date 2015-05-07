@@ -1,3 +1,6 @@
+/* Import SASS variables */
+@import 'variables';
+
 /*STRUCTURE*/
 .columns .CL{width:590px;}
 .content {padding-bottom:30px;background:#fff;}
@@ -30,6 +33,7 @@
 .domainForm .form .row .simulateLabelSpace{padding-left:160px;padding-bottom:10px;}
 .domainForm .form .row .simulateLabelSpace input[type=text]{width:320px;}
 .domainForm .form .radioLabel p.tip{padding:4px 0 10px 26px;}
+.domainForm .form .text14{font-size:14px;}
 .domainForm .form .text14{font-size:14px;}
 .domainForm .form .text14.api{margin:0;}
 .domainForm .form .row input[type=radio]{position:relative;top:2px;margin-left:0;}
