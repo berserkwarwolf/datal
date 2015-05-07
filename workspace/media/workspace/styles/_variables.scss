@@ -1,4 +1,4 @@
-// /* Logo */
+/* Logo */
 // $logo:
 
 /* Color - Brand */
@@ -16,27 +16,15 @@ $color-accent-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity,, for back
 $color-text:#3a3a3a;							/* For body paragraphs, titles */
 $color-text-semi-light:#818181;					/* For subtitles */
 $color-text-light:#999;							/* For descriptions */
-// $color-text-dark:
 
 /* Color - Links */
 $color-link:#027fc0;
 
 /* Color - Buttons */
-// $color-brand-button-top:;
-// $color-brand-button-middle:;
-// $color-brand-button-bottom:;
-
-// $color-brand-button-hover-top:
-// $color-brand-button-hover-middle:
-// $color-brand-button-hover-bottom:
-
-// $color-accent-button-top:
-// $color-accent-button-middle:
-// $color-accent-button-bottom:
-
-// $color-accent-button-hover-top:
-// $color-accent-button-hover-middle:
-// $color-accent-button-hover-bottom:
+$color-button-primary-top:#b9ce44;
+$color-button-primary-bottom:#72aa00;
+$color-button-primary-bottom-shadow:#a8c732;
+$color-button-primary-border:rgba(16, 23, 1, 0.5);
 
 /* Color - Forms */
 $color-form-label:#3a3a3a;
@@ -45,7 +33,7 @@ $color-form-label:#3a3a3a;
 $font-family-primary:Arial,Helvetica,sans-serif;
 // $font-family-secondary:
 
-// /* Font - Size */
+/* Font - Size */
 // $font-size-base:
 // $font-size-large:
 // $font-size-small:
