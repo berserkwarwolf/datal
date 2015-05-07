@@ -16,7 +16,7 @@
   .button.big{height:66px;line-height:66px;font-size:20px;padding:0 40px;}
 
   /* Gray - Normal button */
-  .button{border-color:#DBDADA;color:#333;text-shadow:0 1px 0 #fff;
+  .button{border-color:#DBDADA;text-shadow:0 1px 0 #fff;
     background:#fbfbfb;
     background:-moz-linear-gradient(top,  #fbfbfb 0%, #f3f3f3 100%);
     background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f3f3f3));
@@ -147,7 +147,7 @@
     }
 
   /* Alpha */
-  .button.alpha{text-transform:none;font-family: Arial, Helvetica, sans-serif;color:#027fc0;border:0;background:none;
+  .button.alpha{text-transform:none;font-family: Arial, Helvetica, sans-serif;border:0;background:none;
     -webkit-box-shadow:0 0 0 0 transparent;
        -moz-box-shadow:0 0 0 0 transparent;
             box-shadow:0 0 0 0 transparent;
