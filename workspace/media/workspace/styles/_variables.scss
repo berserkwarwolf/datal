@@ -2,26 +2,23 @@
 // $logo:
 
 /* Color - Brand */
-// $color-brand:#ff6c00;				/* Brand primary color */
-// $color-accent:#4990fc;				/* Brand secondary color */
-$color-brand:#d89d36;					/* Brand primary color */
-$color-accent:#0f4b83;					/* Brand secondary color */
+$color-brand:rgba(255,108,0,1);					/* Brand primary color */
+$color-brand-15:rgba(255,108,0,0.15);			/* Brand color 15% opacity */
+$color-brand-bold:rgba(232,100,2,1);
 
-// $color-brand-bold:#e86402;
-$color-brand-bold:#b17c20;
+/* Color - Accent */
+$color-accent:rgba(72,144,252,1);				/* Brand secondary color */
+$color-accent-05:rgba(72,144,252,0.05);			/* Accent color 5% opacity */
+$color-accent-15:rgba(72,144,252,0.15);			/* Accent color 15% opacity */
+$color-accent-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity */
 
-// $color-brand-10:			/* Brand color 10% opacity */
-// $color-accent-10:			/* Accent color 10% opacity */
-
-// /* Color - Text */
-// $color-text:				/* Content paragraphs */
-// $color-text-light:
+/* Color - Text */
+$color-text:#3a3a3a;							/* Content paragraphs */
+$color-text-light:#999;
 // $color-text-dark:
 
-// /* Color - Links */
-// $color-link:#4990fc;
-$color-link:blue;
-// $color-link-hover:
+/* Color - Links */
+$color-link:rgba(2,127,192,1);
 
 // /* Color - Buttons */
 // $color-brand-button-top:
@@ -40,8 +37,8 @@ $color-link:blue;
 // $color-accent-button-hover-middle:
 // $color-accent-button-hover-bottom:
 
-// /* Font - Family */
-// $font-family-primary:
+/* Font - Family */
+$font-family-primary:Arial,Helvetica,sans-serif;
 // $font-family-secondary:
 
 // /* Font - Size */

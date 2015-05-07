@@ -14,11 +14,11 @@
 	
 	/* Hover */
 	.themeTabs > ul li a:hover{text-decoration:none}
-	.themeTabs > ul li a:hover img{border-color:#e8f5fe;}
+	.themeTabs > ul li a:hover img{border-color:$color-accent-05;}
 
 	/* Active */
 	.themeTabs > ul li.active{}
-	.themeTabs > ul li.active a{background:#e8f5fe;border-color:#c5e5fb;}
+	.themeTabs > ul li.active a{background:$color-accent-05;border-color:$color-accent-15;}
 	.themeTabs > ul li.active a span{font-weight:bold;}
 	.themeTabs > ul li.active a img{border:0;margin:10px 9px;
 		-webkit-box-shadow:0 0 5px 0 rgba(0,0,0,.2);

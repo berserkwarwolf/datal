@@ -1,6 +1,8 @@
 /* Import SASS variables */
 @import 'variables';
 
+body{font-family:$font-family-primary;color:$color-text;}
+
 /* Links */
 a{color:$color-link;}
 
@@ -355,7 +357,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
-	.main-navigation li > a:hover span{display:block;background:$color-accent;background:rgba(73,144,252,.9);height:32px;display:inline-block;font:12px/32px 'montserratbold', arial, helvetica, sans-serif;color:#fff;text-shadow:0 1px 0 #134fab;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
+	.main-navigation li > a:hover span{display:block;background:$color-accent-85;height:32px;display:inline-block;font:12px/32px 'montserratbold', arial, helvetica, sans-serif;color:#fff;text-shadow:0 1px 0 #134fab;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
 		-webkit-border-radius:3px;
 	     -moz-border-radius:3px;
 	          border-radius:3px;
@@ -426,8 +428,8 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .box.blue > header{border-color:#dfebfe;}
 
   /* Orange */
-  .box.orange{background:#ffeed8;}
-  .box.orange > header{border-color:#fcd7ae;}
+  .box.orange{background:$color-brand-15;}
+  .box.orange > header{border-color:$color-brand-15;}
   .box.orange > header .title{color:$color-brand;}
   .box.orange > header .title > span{color:#3a3a3a;}
 
