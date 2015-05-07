@@ -60,7 +60,7 @@ p.has-error{color:#f45f64;padding-top:7px;font-size:12px;text-shadow:0 1px 0 #ff
 
 /*LABEL*/
 label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:normal;padding-top:7px;font-weight:bold;display:block;}
-.form label{color:#545454;font-size:14px;display:inline-block;height:30px;line-height:30px;}
+.form label{font-size:14px;display:inline-block;height:30px;line-height:30px;}
 
 /*ERROR VALIDATION*/
 .formErrorMessageContainer,

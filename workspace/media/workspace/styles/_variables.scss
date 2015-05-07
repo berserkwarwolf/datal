@@ -4,7 +4,7 @@
 /* Color - Brand */
 $color-brand:rgba(255,108,0,1);					/* Brand primary color */
 $color-brand-15:rgba(255,108,0,0.15);			/* Brand color 15% opacity */
-$color-brand-bold:rgba(232,100,2,1);
+$color-brand-bold:rgba(232,100,2,1);			/* For hovers and other staff */
 
 /* Color - Accent */
 $color-accent:rgba(72,144,252,1);				/* Brand secondary color */
@@ -13,12 +13,13 @@ $color-accent-15:rgba(72,144,252,0.15);			/* Accent color 15% opacity */
 $color-accent-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity */
 
 /* Color - Text */
-$color-text:#3a3a3a;							/* Content paragraphs */
+$color-text:#3a3a3a;
+$color-text-semi-light:#818181;
 $color-text-light:#999;
 // $color-text-dark:
 
 /* Color - Links */
-$color-link:rgba(2,127,192,1);
+$color-link:#027fc0;
 
 // /* Color - Buttons */
 // $color-brand-button-top:
@@ -37,6 +38,10 @@ $color-link:rgba(2,127,192,1);
 // $color-accent-button-hover-middle:
 // $color-accent-button-hover-bottom:
 
+/* Color - Forms */
+// $color-form-label:blue;
+// $color-form-inpu:red;
+
 /* Font - Family */
 $font-family-primary:Arial,Helvetica,sans-serif;
 // $font-family-secondary:
@@ -51,3 +56,4 @@ $font-family-primary:Arial,Helvetica,sans-serif;
 // $font-size-h3:
 // $font-size-h4:
 // $font-size-h5:
+

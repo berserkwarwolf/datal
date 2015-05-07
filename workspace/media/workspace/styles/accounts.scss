@@ -14,7 +14,7 @@ body{background:$color-brand;}
 }
 .account-box .row{padding-top:15px;}
 .account-box .row:first-child{padding-top:0;}
-.account-box .row label{display:block;color:#3a3a3a;font-size:14px;line-height:19px;}
+.account-box .row label{display:block;font-size:14px;line-height:19px;}
 .account-box .row input[type=text],
 .account-box .row input[type=password],
 .account-box .row select{width:100%;padding:0 10px;height:30px;font-size:14px;margin-top:5px;
@@ -53,7 +53,7 @@ body{background:$color-brand;}
 #id_signUp, 
 #id_activate{width:400px;margin-top:0;background-position:center -80px;padding-top:20px;}
 #id_signUp .row p.tip,
-#id_activate .row p.tip{padding-top:7px;font-size:11px;}
+#id_activate .row p.tip{padding-top:7px;font-size:11px;color:$color-text-light;}
 #id_signUp .domainRow .fakeField{margin-top:5px;border:1px solid #e2e0e0;padding:0 0 0 10px;background:#fafafa;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
