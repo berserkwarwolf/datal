@@ -1,6 +1,9 @@
 /* Import SASS variables */
 @import 'variables';
 
+/* Links */
+a{color:$color-accent;}
+
 /* Buttons Bar - only support black buttons and 0 to 4 steps at the moment */
 .buttons-bar{border:1px solid #282728;
   -webkit-border-radius:3px;
@@ -600,7 +603,7 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .backgrid tr:hover td, 
 .ao-popup-overlay .backgrid tr:hover td h3, 
 .ao-popup-overlay .backgrid tr:hover td a, 
-.ao-popup-overlay .backgrid tr:hover td p{background-color:#027fc0;color:#FFF;cursor:pointer;text-shadow:0 1px 0 #1452b0;}
+.ao-popup-overlay .backgrid tr:hover td p{background-color:$color-accent;color:#FFF;cursor:pointer;text-shadow:0 1px 0 #1452b0;}
 
 /* Override For Empty */
 .empty{}
@@ -691,7 +694,7 @@ border-color: #ccc;}
 .pagination .pager li a:hover, 
 .pagination .backgrid-paginator li a:hover{text-decoration:none;background-color:#efeded;background-color:rgba(0,0,0,.04);}
 .pagination .pager .pagination-page{width:32px;padding-right:1px;text-align:center;}
-.pagination .pager .pagination-page.active, .pagination .pager li.active a, .pagination .backgrid-paginator li.active a{color:#fff;text-shadow:0 1px 0 #033e97;background-color:#407fde;cursor:default;
+.pagination .pager .pagination-page.active, .pagination .pager li.active a, .pagination .backgrid-paginator li.active a{color:#fff;text-shadow:0 1px 0 #033e97;background-color:$color-accent;cursor:default;
     -webkit-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
        -moz-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
             box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
