@@ -1,3 +1,6 @@
+/* Import SASS variables */
+@import 'variables';
+
 .main-section .section-content{background-color:#f6f4f4;padding:0;}
 .create{padding:0;}
 .create header{background-color:#fff;padding:20px 15px 18px 15px;border-bottom:1px solid #e5e3e3;
@@ -9,7 +12,7 @@
           box-shadow:0 1px 0 #fff;
 }
 .create header h3{font-size:18px;font-weight:bold;color:#303030;display:inline-block;}
-.create header h3 span{font-size:14px;font-weight:normal;color:#999;}
+.create header h3 span{font-size:14px;font-weight:normal;color:$color-text-light;}
 .create .insetFormTitle{font-size:14px;margin:15px 0;font-family:'montserratbold';text-transform:uppercase;}
 
 .create .navigation{margin-top:-5px;}
@@ -111,7 +114,7 @@
 .create .formContent .row .sourcesContent,
 .create .formContent .row .paramContent{margin-left:115px;}
 .formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
-.create p.tip{clear:both;color:#999;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.create p.tip{clear:both;color:$color-text-light;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
 .sticky{position:fixed;width:100%;top:0;z-index:100;border-top:0;} 
