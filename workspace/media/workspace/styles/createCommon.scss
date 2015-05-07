@@ -97,7 +97,7 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;}
+.create .formContent .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;color:$color-form-label;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
 .create .formContent .row textarea{width:440px;
   -webkit-box-sizing:border-box;
