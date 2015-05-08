@@ -301,7 +301,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .columns.equal-width .CR{padding-left:10px;}
 
 /* Header */
-.header{border-top:1px solid #fd903d;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
+.header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
 .header .logo img{width:auto;height:auto;display:block;}
 .header .button.primary,
 .header .button.support{margin-top:8px;}
@@ -313,7 +313,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .header .tab a{color:#fff;text-shadow:0 1px 0 #934c1c;display:block;}
   .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
-  .header .tab .img{border-bottom:1px solid #fd903e;display:block;float:left;margin-right:10px;margin-top:8px;}
+  .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
   .header .tab .img img{border:1px solid $brand-color-bold;float:left;width:24px;height:24px;background:$brand-color-bold;}
   .header .tab strong{font-weight:normal;float:left;display:block;}
 
