@@ -1,5 +1,7 @@
 /* Logo */
-// $logo:
+// $logo-signin-url:															/* URL of logo for Sign in page. Recommended size: 132x70 px */
+// $logo-header-url:															/* URL of logo for Workspace header. Recommended size: 87x43 px */
+
 
 /* Branding */
 
@@ -9,10 +11,10 @@
 	$brand-color-bold:rgba(232,100,2,1);										/* For hovers and other staff */
 
 	/* Accent color */
-	$accent-color:rgba(72,144,252,1);											/* Brand secondary color */
+	$accent-color:rgba(72,144,252,1);											/* Accent secondary color */
 	$accent-color-05:rgba(72,144,252,0.05);										/* Accent color 5% opacity, for backgrounds in tables */
 	$accent-color-15:rgba(72,144,252,0.15);										/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
-	$accent-color-85:rgba(72,144,252,0.85);										/* Accent color 85% opacity,, for backgrounds in tooltips  */
+	$accent-color-85:rgba(72,144,252,0.85);										/* Accent color 85% opacity, for backgrounds in tooltips  */
 
 
 /* Fonts */
@@ -35,7 +37,7 @@
 	$font-color-light:#999;														/* For descriptions */
 
 	/* Color - Links */
-	$link-color:#027fc0;
+	$link-color:#027fc0;														/* Color for links */
 
 
 /* Buttons */
@@ -43,27 +45,27 @@ $buttons-font-family:'montserratregular',arial,helvetica,sans-serif;			/* Font f
 $buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color-top:#b9ce44;
-	$button-primary-color-bottom:#72aa00;
-	$button-primary-color-border:rgba(16, 23, 1, 0.5);
-	$button-primary-color-text:#FFF;
-	$button-primary-color-shadow:0 -1px 0 #517605;
+	$button-primary-color-top:#b9ce44;											/* Top color of gradient */
+	$button-primary-color-bottom:#72aa00;										/* Bottom color of gradient */
+	$button-primary-color-border:rgba(16, 23, 1, 0.5);							/* Border color */
+	$button-primary-color-text:#FFF;											/* Font color */
+	$button-primary-color-shadow:0 -1px 0 #517605;								/* Font shadow color */
 
 	/* Warning button */
-	$button-warning-color-top:#ffaea7;
-	$button-warning-color-bottom:#fb404f;
-	$button-warning-color-border:rgba(150,50,34,0.5);
-	$button-warning-color-text:#FFF;
+	$button-warning-color-top:#ffaea7;											/* Top color of gradient */
+	$button-warning-color-bottom:#fb404f;										/* Bottom color of gradient */
+	$button-warning-color-border:rgba(150,50,34,0.5);							/* Border color */
+	$button-warning-color-text:#FFF;											/* Font color */
 	$button-warning-color-shadow:0 -1px 0 #963222;
 
 	/* Support button */
-	$button-support-color-top:#fbe0c6;
-	$button-support-color-bottom:#f9c089;
-	$button-support-color-border:rgba(140,28,65,0.5);
-	$button-support-color-text:#ce6425;
-	$button-support-color-shadow:0 -1px 0 #fbddc0;
+	$button-support-color-top:#fbe0c6;											/* Top color of gradient */
+	$button-support-color-bottom:#f9c089;										/* Bottom color of gradient */
+	$button-support-color-border:rgba(140,28,65,0.5);							/* Border color */
+	$button-support-color-text:#ce6425;											/* Font color */
+	$button-support-color-shadow:0 -1px 0 #fbddc0;								/* Font shadow color */
 
 
 /* Forms */
-$form-label-color:#3a3a3a;
-$form-label-size:12px;
+$form-label-color:#3a3a3a;														/* Color for form labels */
+$form-label-size:12px;															/* Size for form labels */
