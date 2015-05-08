@@ -2,12 +2,12 @@
 @import 'variables';
 
 html,
-body{background:$color-brand;}
+body{background:$brand-color;}
 
 .account-box{width:320px;margin:0 auto;background:url(../images/common/bg_logoAccountPagesGradient.png) no-repeat center 0;padding-top:100px;margin-top:5%;}
 .account-box > header{height:100px;}
 .account-box > header img{margin-top:15px;}
-.account-box .account-box-content{background:#fff;padding:20px;border:1px solid $color-brand-bold;
+.account-box .account-box-content{background:#fff;padding:20px;border:1px solid $brand-color-bold;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
@@ -36,7 +36,7 @@ body{background:$color-brand;}
 .account-box .row.remember .button{float:right;}
 .account-box .account-box-footer ul{padding:12px 20px 20px;}
 .account-box .account-box-footer li{padding-bottom:8px;}
-.account-box .account-box-footer li a{color:#fff;text-shadow:0 1px 0 $color-brand-bold;}
+.account-box .account-box-footer li a{color:#fff;text-shadow:0 1px 0 $brand-color-bold;}
 .account-box div.has-error{color:#f45f64;padding-top:7px;font-size:12px;}
 
   /* Validation Messages */
@@ -53,7 +53,7 @@ body{background:$color-brand;}
 #id_signUp, 
 #id_activate{width:400px;margin-top:0;background-position:center -80px;padding-top:20px;}
 #id_signUp .row p.tip,
-#id_activate .row p.tip{padding-top:7px;font-size:11px;color:$color-text-light;}
+#id_activate .row p.tip{padding-top:7px;font-size:11px;color:$text-color-light;}
 #id_signUp .domainRow .fakeField{margin-top:5px;border:1px solid #e2e0e0;padding:0 0 0 10px;background:#fafafa;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;

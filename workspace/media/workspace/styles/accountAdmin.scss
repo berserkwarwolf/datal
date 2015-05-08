@@ -8,11 +8,11 @@
 .main-section .section-content{background-color:#FFF;padding:0;}
 .list-container{padding:0 15px 15px;margin:0;}
 .ao-tabs .tabsList .tab.tab-selected div a, 
-.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$color-text-semi-light;}
+.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$text-color-semi-light;}
 
 /*FORMS*/
 .dataStreamForm{padding:20px 0 20px 20px;}
-.dataStreamForm .form .row label{font-size:12px;width:160px;float:left;text-shadow:0 1px 0 #fff;color:$color-form-label;}
+.dataStreamForm .form .row label{font-size:12px;width:160px;float:left;text-shadow:0 1px 0 #fff;color:$form-label-color;}
 .dataStreamForm .form .row input, 
 .dataStreamForm .form .row textarea,
 .dataStreamForm .form .row select{width:350px;}

@@ -1,54 +1,54 @@
 /* Logo */
 // $logo:
 
-/* Color - Brand */
-$color-brand:rgba(255,108,0,1);					/* Brand primary color */
-$color-brand-15:rgba(255,108,0,0.15);			/* Brand color 15% opacity, for backgrounds in landing page */
-$color-brand-bold:rgba(232,100,2,1);			/* For hovers and other staff */
+/* Brand color */
+$brand-color:rgba(255,108,0,1);					/* Brand primary color */
+$brand-color-15:rgba(255,108,0,0.15);			/* Brand color 15% opacity, for backgrounds in landing page */
+$brand-color-bold:rgba(232,100,2,1);			/* For hovers and other staff */
 
-/* Color - Accent */
-$color-accent:rgba(72,144,252,1);				/* Brand secondary color */
-$color-accent-05:rgba(72,144,252,0.05);			/* Accent color 5% opacity, for backgrounds in tables */
-$color-accent-15:rgba(72,144,252,0.15);			/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
-$color-accent-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity,, for backgrounds in tooltips  */
+/* Accent color */
+$accent-color:rgba(72,144,252,1);				/* Brand secondary color */
+$accent-color-05:rgba(72,144,252,0.05);			/* Accent color 5% opacity, for backgrounds in tables */
+$accent-color-15:rgba(72,144,252,0.15);			/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
+$accent-color-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity,, for backgrounds in tooltips  */
 
-/* Color - Text */
-$color-text:#3a3a3a;							/* For body paragraphs, titles */
-$color-text-semi-light:#818181;					/* For subtitles */
-$color-text-light:#999;							/* For descriptions */
+/* Text */
+$text-color:#3a3a3a;							/* For body paragraphs, titles */
+$text-color-semi-light:#818181;					/* For subtitles */
+$text-color-light:#999;							/* For descriptions */
 
-/* Color - Links */
-$color-link:#027fc0;
+/* Links */
+$link-color:#027fc0;
 
-/* Color - Buttons */
+/* Buttons */
 
 	/* Primary button */
-	$color-button-primary-top:#b9ce44;
-	$color-button-primary-bottom:#72aa00;
-	$color-button-primary-border:rgba(16, 23, 1, 0.5);
-	$color-button-primary-text:#FFF;
-	$color-button-primary-shadow:0 -1px 0 #517605;
+	$button-primary-color-top:#b9ce44;
+	$button-primary-color-bottom:#72aa00;
+	$button-primary-color-border:rgba(16, 23, 1, 0.5);
+	$button-primary-color-text:#FFF;
+	$button-primary-color-shadow:0 -1px 0 #517605;
 
 	/* Warning button */
-	$color-button-warning-top:#ffaea7;
-	$color-button-warning-bottom:#fb404f;
-	$color-button-warning-border:rgba(150,50,34,0.5);
-	$color-button-warning-text:#FFF;
-	$color-button-warning-shadow:0 -1px 0 #963222;
+	$button-warning-color-top:#ffaea7;
+	$button-warning-color-bottom:#fb404f;
+	$button-warning-color-border:rgba(150,50,34,0.5);
+	$button-warning-color-text:#FFF;
+	$button-warning-color-shadow:0 -1px 0 #963222;
 
 	/* Support button */
-	$color-button-support-top:#fbe0c6;
-	$color-button-support-bottom:#f9c089;
-	$color-button-support-border:rgba(140,28,65,0.5);
-	$color-button-support-text:#ce6425;
-	$color-button-support-shadow:0 -1px 0 #fbddc0;
+	$button-support-color-top:#fbe0c6;
+	$button-support-color-bottom:#f9c089;
+	$button-support-color-border:rgba(140,28,65,0.5);
+	$button-support-color-text:#ce6425;
+	$button-support-color-shadow:0 -1px 0 #fbddc0;
 
-/* Color - Forms */
-$color-form-label:#3a3a3a;
+/* Forms */
+$form-label-color:#3a3a3a;
 
-/* Font - Family */
-$font-family-primary:Arial,Helvetica,sans-serif;
-// $font-family-secondary:
+/* Fonts */
+$font-primary-family:Arial,Helvetica,sans-serif;
+// $font-secondary-family:
 
 /* Font - Size */
 // $font-size-base:

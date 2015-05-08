@@ -9,7 +9,7 @@
 .getting-started .resources header h4{background-position:0 -24px;}
 .getting-started .revisions header h4{background-position:0 -48px;}
 .getting-started article > p{margin-top:10px;line-height:17px;}
-.getting-started article footer{margin-top:10px;padding:9px 10px 7px;background:$color-brand-15;text-shadow:0 1px 0 #fdf7ea;
+.getting-started article footer{margin-top:10px;padding:9px 10px 7px;background:$brand-color-15;text-shadow:0 1px 0 #fdf7ea;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
@@ -17,7 +17,7 @@
      -moz-box-shadow:inset 0 1px 0 0 #ddcdbb, 0 1px 0 0 #fdf7ea;
           box-shadow:inset 0 1px 0 0 #ddcdbb, 0 1px 0 0 #fdf7ea;
 }
-.getting-started article footer h5{float:left;background:$color-accent;padding:1px 5px;color:#fff;text-shadow:0 1px 0 #1452b0;margin-right:6px;font-size:10px;text-transform:uppercase;
+.getting-started article footer h5{float:left;background:$accent-color;padding:1px 5px;color:#fff;text-shadow:0 1px 0 #1452b0;margin-right:6px;font-size:10px;text-transform:uppercase;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
@@ -34,12 +34,12 @@
 .numbers .graph tr{margin-top:10px;}
 .numbers .graph tr:first-child{margin-top:0;}
 .numbers .graph td{padding:5px 0;}
-.numbers .graph .data{line-height:20px;height:20px;font-size:14px;color:$color-text-light;white-space:nowrap;padding-right:25px;}
+.numbers .graph .data{line-height:20px;height:20px;font-size:14px;color:$text-color-light;white-space:nowrap;padding-right:25px;}
 .numbers .graph .data > *{vertical-align:top;}
 .numbers .graph .data strong{font-size:16px;color:#3a3a3a;padding:0 4px;}
 .numbers .graph .bar{width:100%;}
 .numbers .graph .bar div{height:20px;line-height:20px;background:#e5e3e3;}
-.numbers .graph .bar > div > div{background:$color-accent;}
+.numbers .graph .bar > div > div{background:$accent-color;}
 
 /* Activity */
 .activity article{margin-top:10px;}
@@ -48,7 +48,7 @@
 .activity .text{padding-left:35px;}
 .activity .text p{line-height:20px;font-size:14px;padding:4px 0;margin-bottom:0;}
 .activity .text p a{color:#7199d5;font-style:italic;}
-.activity .text p span{font-style:italic;color:$color-text-light;}
+.activity .text p span{font-style:italic;color:$text-color-light;}
 .activity .text p * > *{vertical-align:middle;}
 .activity .text p i{position:relative;left:-1px;top:-1px;margin-left:3px;}
-.activity .text time{color:$color-text-light;}
+.activity .text time{color:$text-color-light;}

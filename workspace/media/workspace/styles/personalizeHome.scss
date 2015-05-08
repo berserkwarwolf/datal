@@ -7,18 +7,18 @@
 .themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;background:#f4f4f4;}
 .themeTabs > ul li:nth-child(4n){margin-right:0;}
 .themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;border:1px solid #f4f4f4;}
-.themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$color-text;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
+.themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$text-color;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
 .themeTabs > ul li a .img{position:relative;z-index:3;display:block;width:146px;margin:0 auto;}
 .themeTabs > ul li a .img img{width:128px;height:180px;border:10px solid #f4f4f4;position:relative;z-index:3;}
 .themeTabs > ul li a i{position:absolute;display:none;z-index:4;}
 	
 	/* Hover */
 	.themeTabs > ul li a:hover{text-decoration:none}
-	.themeTabs > ul li a:hover img{border-color:$color-accent-05;}
+	.themeTabs > ul li a:hover img{border-color:$accent-color-05;}
 
 	/* Active */
 	.themeTabs > ul li.active{}
-	.themeTabs > ul li.active a{background:$color-accent-05;border-color:$color-accent-15;}
+	.themeTabs > ul li.active a{background:$accent-color-05;border-color:$accent-color-15;}
 	.themeTabs > ul li.active a span{font-weight:bold;}
 	.themeTabs > ul li.active a img{border:0;margin:10px 9px;
 		-webkit-box-shadow:0 0 5px 0 rgba(0,0,0,.2);
@@ -28,7 +28,7 @@
 	.themeTabs > ul li.active a i{display:block;}
 
 	/* Theme Numbers on tabs */
-	.themeTabs > ul li a i{color:$color-brand;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
+	.themeTabs > ul li a i{color:$brand-color;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
 
 		/* Theme 0 */
 		.themeTabs > ul li.theme0 a .i1{width:67px;height:49px;line-height:49px;}
@@ -92,9 +92,9 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
-.configs .formBox header .num{background-color:$color-brand;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
+.configs .formBox header .num{background-color:$brand-color;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
-.configs .formBox header h1{color:$color-text-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
+.configs .formBox header h1{color:$text-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}
 .configs .formBox fieldset{background:#f4f4f4;padding:13px;
 	-webkit-border-radius:3px;
@@ -190,8 +190,8 @@
 .ui-autocomplete .ic_Data{background-position:2px -23px !important;}
 
 /* Help & tips */
-.helpBox .rowTop{padding-bottom:10px;border-bottom:1px solid #ddd;color:$color-text-semi-light;}
-.helpBox .rowBottom{padding-top:10px;border-top:1px solid #fff;color:$color-text-semi-light;}
+.helpBox .rowTop{padding-bottom:10px;border-bottom:1px solid #ddd;color:$text-color-semi-light;}
+.helpBox .rowBottom{padding-top:10px;border-top:1px solid #fff;color:$text-color-semi-light;}
 
 /* Preview */
 #id_previewOverlay{width:98%;height:95%;}

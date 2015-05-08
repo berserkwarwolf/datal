@@ -75,7 +75,7 @@
 
     /* Normal filters */
     .filters-container .filters li a{padding:2px 15px;line-height:16px;display:block;word-break:break-word;}
-    .filters-container .filters li a:hover{background:$color-accent;color:#fff;text-shadow:0 1px 0 #1452b0;text-decoration:none;}
+    .filters-container .filters li a:hover{background:$accent-color;color:#fff;text-shadow:0 1px 0 #1452b0;text-decoration:none;}
 
 /* List */
 .list-container{padding:0 15px 15px;}
@@ -95,7 +95,7 @@
 .list-container table h3 span.sep{color:#e0e0e0;padding:0 2px;}
 .list-container table .filename{display:block;}
 .list-container table .filename a{color:#3a3a3a;}
-.list-container table .date{display:block;color:$color-text-light;}
+.list-container table .date{display:block;color:$text-color-light;}
 .list-container table .actions{padding-top:10px;}
 .list-container table .actions li{float:left;visibility:hidden;}
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
@@ -108,7 +108,7 @@
 .list-container table i{font-style:normal;display:inline-block;}
 .list-container table i.type_nice.icon{display:inline;}
 .list-container table tr:nth-child(odd) td{background:#fbfbfb;}
-.list-container table tr:hover td{background:$color-accent-05 !important;}
+.list-container table tr:hover td{background:$accent-color-05 !important;}
 .list-container table tr:hover li{visibility:visible;}
 
 /* Overlays */

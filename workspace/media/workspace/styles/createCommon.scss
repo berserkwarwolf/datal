@@ -12,7 +12,7 @@
           box-shadow:0 1px 0 #fff;
 }
 .create header h3{font-size:18px;font-weight:bold;display:inline-block;}
-.create header h3 span{font-size:14px;font-weight:normal;color:$color-text-light;}
+.create header h3 span{font-size:14px;font-weight:normal;color:$text-color-light;}
 .create .insetFormTitle{font-size:14px;margin:15px 0;font-family:'montserratbold';text-transform:uppercase;}
 
 .create .navigation{margin-top:-5px;}
@@ -97,7 +97,7 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;color:$color-form-label;}
+.create .formContent .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
 .create .formContent .row textarea{width:440px;
   -webkit-box-sizing:border-box;
@@ -114,7 +114,7 @@
 .create .formContent .row .sourcesContent,
 .create .formContent .row .paramContent{margin-left:115px;}
 .formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
-.create p.tip{clear:both;color:$color-text-light;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.create p.tip{clear:both;color:$text-color-light;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
 .sticky{position:fixed;width:100%;top:0;z-index:100;border-top:0;} 
