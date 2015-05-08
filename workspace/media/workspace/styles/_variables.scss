@@ -1,3 +1,5 @@
+/*** Variables ***/
+
 /* Logo */
 // $logo-signin-url:															/* URL of logo for Sign in page. Recommended size: 132x70 px */
 // $logo-header-url:															/* URL of logo for Workspace header. Recommended size: 87x43 px */
@@ -45,25 +47,16 @@ $buttons-font-family:'montserratregular',arial,helvetica,sans-serif;			/* Font f
 $buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color-top:#b9ce44;											/* Top color of gradient */
-	$button-primary-color-bottom:#72aa00;										/* Bottom color of gradient */
-	$button-primary-color-border:rgba(16, 23, 1, 0.5);							/* Border color */
+	$button-primary-color:#b9ce44;												/* Top color of gradient */
 	$button-primary-color-text:#FFF;											/* Font color */
-	$button-primary-color-shadow:0 -1px 0 #517605;								/* Font shadow color */
 
 	/* Warning button */
-	$button-warning-color-top:#ffaea7;											/* Top color of gradient */
-	$button-warning-color-bottom:#fb404f;										/* Bottom color of gradient */
-	$button-warning-color-border:rgba(150,50,34,0.5);							/* Border color */
+	$button-warning-color:#f95360;												/* Top color of gradient */
 	$button-warning-color-text:#FFF;											/* Font color */
-	$button-warning-color-shadow:0 -1px 0 #963222;
 
 	/* Support button */
-	$button-support-color-top:#fbe0c6;											/* Top color of gradient */
-	$button-support-color-bottom:#f9c089;										/* Bottom color of gradient */
-	$button-support-color-border:rgba(140,28,65,0.5);							/* Border color */
+	$button-support-color:#fff4e9;												/* Top color of gradient */
 	$button-support-color-text:#ce6425;											/* Font color */
-	$button-support-color-shadow:0 -1px 0 #fbddc0;								/* Font shadow color */
 
 
 /* Forms */

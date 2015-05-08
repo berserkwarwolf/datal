@@ -1,0 +1,19 @@
+/*** Functions ***/
+
+/* Buttons */
+
+	/* Primary button */
+	$button-primary-color-gradient:adjust-color($button-primary-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
+	$button-primary-color-border:adjust-color($button-primary-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
+	$button-primary-color-shadow:adjust-color($button-primary-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
+
+	/* Warning button */
+	$button-warning-color-gradient:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
+	$button-warning-color-border:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
+	$button-warning-color-shadow:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
+
+	/* Support button */
+	$button-support-color-gradient:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
+	$button-support-color-border:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
+	$button-support-color-shadow:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
+

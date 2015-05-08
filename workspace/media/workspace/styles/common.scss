@@ -1,5 +1,7 @@
-/* Import SASS variables */
+/* Imports */
 @import 'variables';
+@import 'mixins';
+@import 'functions';
 
 body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
 .font-mb{font-family:$font-secondary-family;}
@@ -11,112 +13,33 @@ a{color:$link-color;}
 .button{font-family:$buttons-font-family;font-size:$buttons-font-size;}
 
   /* Primary button */
-  .button.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:$button-primary-color-shadow;
-    background:$button-primary-color-top;
-    background:-moz-linear-gradient(top,$button-primary-color-top 0%,$button-primary-color-bottom 92%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$button-primary-color-top),color-stop(92%,$button-primary-color-bottom));
-    background:-webkit-linear-gradient(top,$button-primary-color-top 0%,$button-primary-color-bottom 92%);
-    background:-o-linear-gradient(top,$button-primary-color-top 0%,$button-primary-color-bottom 92%);
-    background:-ms-linear-gradient(top,$button-primary-color-top 0%,$button-primary-color-bottom 92%);
-    background:linear-gradient(to bottom,$button-primary-color-top 0%,$button-primary-color-bottom 92%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-primary-color-top',endColorstr='$button-primary-color-bottom',GradientType=0);
+  .button.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:0 -1px 0 $button-primary-color-shadow;@include linear-gradient($button-primary-color,$button-primary-color-gradient);
   }
-  .button.primary:hover{
-    background:$button-primary-color-bottom;
-    background:-moz-linear-gradient(top,$button-primary-color-bottom 8%,$button-primary-color-top 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(8%,$button-primary-color-bottom),color-stop(100%,$button-primary-color-top));
-    background:-webkit-linear-gradient(top,$button-primary-color-bottom 8%,$button-primary-color-top 100%);
-    background:-o-linear-gradient(top,$button-primary-color-bottom 8%,$button-primary-color-top 100%);
-    background:-ms-linear-gradient(top,$button-primary-color-bottom 8%,$button-primary-color-top 100%);
-    background:linear-gradient(to bottom,$button-primary-color-bottom 8%,$button-primary-color-top 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-primary-color-bottom',endColorstr='$button-primary-color-top',GradientType=0);
-  }
+  .button.primary:hover{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
 
    /* Warning button */
-  .button.warning{border-color:$button-warning-color-border;color:$button-warning-color-text;text-shadow:$button-warning-color-shadow;
-    background:$button-warning-color-top;
-    background:-moz-linear-gradient(top,$button-warning-color-top 0%,$button-warning-color-bottom 92%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$button-warning-color-top),color-stop(92%,$button-warning-color-bottom));
-    background:-webkit-linear-gradient(top,$button-warning-color-top 0%,$button-warning-color-bottom 92%);
-    background:-o-linear-gradient(top,$button-warning-color-top 0%,$button-warning-color-bottom 92%);
-    background:-ms-linear-gradient(top,$button-warning-color-top 0%,$button-warning-color-bottom 92%);
-    background:linear-gradient(to bottom,$button-warning-color-top 0%,$button-warning-color-bottom 92%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-warning-color-top',endColorstr='$button-warning-color-bottom',GradientType=0);
+  .button.warning{border-color:$button-warning-color-border;color:$button-warning-color-text;text-shadow:0 -1px 0 $button-warning-color-shadow;@include linear-gradient($button-warning-color,$button-warning-color-gradient);
   }
-  .button.warning:hover{
-    background:$button-warning-color-bottom;
-    background:-moz-linear-gradient(top,$button-warning-color-bottom 8%$button-warning-color-top 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(8%,$button-warning-color-bottom),color-stop(100%,$button-warning-color-top));
-    background:-webkit-linear-gradient(top,$button-warning-color-bottom 8%,$button-warning-color-top 100%);
-    background:-o-linear-gradient(top,$button-warning-color-bottom 8%,$button-warning-color-top 100%);
-    background:-ms-linear-gradient(top,$button-warning-color-bottom 8%,$button-warning-color-top 100%);
-    background:linear-gradient(to bottom,$button-warning-color-bottom 8%,$button-warning-color-top 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='$button-warning-color-bottom',endColorstr='$button-warning-color-top',GradientType=0 );
-  }
+  .button.warning:hover{@include linear-gradient($button-warning-color-gradient,$button-warning-color);}
 
   /* Support button */
-  .button.support{border-color:$button-support-color-border;color:$button-support-color-text;text-shadow:$button-support-color-shadow;
-    background:$button-support-color-bottom;
-    background:-moz-linear-gradient(top,$button-support-color-top 0%,$button-support-color-bottom 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$button-support-color-top)color-stop(100%,$button-support-color-bottom));
-    background:-webkit-linear-gradient(top,$button-support-color-top 0%,$button-support-color-bottom 100%);
-    background:-o-linear-gradient(top,$button-support-color-top 0%,$button-support-color-bottom 100%);
-    background:-ms-linear-gradient(top,$button-support-color-top 0%,$button-support-color-bottom 100%);
-    background:linear-gradient(to bottom,$button-support-color-top 0%,$button-support-color-bottom 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-support-color-top',endColorstr='$button-support-color-bottom',GradientType=0);
+  .button.support{border-color:$button-support-color-border;color:$button-support-color-text;text-shadow:0 -1px 0 $button-support-color-shadow;@include linear-gradient($button-support-color,$button-support-color-gradient);
   }
-  .button.support:hover{
-    background:$button-support-color-top;
-    background:-moz-linear-gradient(top,$button-support-color-bottom 0%,$button-support-color-top 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$button-support-color-bottom),color-stop(100%,$button-support-color-top));
-    background:-webkit-linear-gradient(top,$button-support-color-bottom 0%,$button-support-color-top 100%);
-    background:-o-linear-gradient(top,$button-support-color-bottom 0%,$button-support-color-top 100%);
-    background:-ms-linear-gradient(top,$button-support-color-bottom 0%,$button-support-color-top 100%);
-    background:linear-gradient(to bottom,$button-support-color-bottom 0%,$button-support-color-top 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$button-support-color-bottom',endColorstr='$button-support-color-top',GradientType=0);
-  }
+  .button.support:hover{@include linear-gradient($button-support-color-gradient,$button-support-color);}
 
   /* Black */
-  .button.black{border-color:#282728;color:#fff;text-shadow:0 1px 0 #000;
-    background:#525151;
-    background:-moz-linear-gradient(top,#525151 0%, #414040 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#525151),color-stop(100%,#414040));
-    background:-webkit-linear-gradient(top,#525151 0%,#414040 100%);
-    background:-o-linear-gradient(top,#525151 0%,#414040 100%);
-    background:-ms-linear-gradient(top,#525151 0%,#414040 100%);
-    background:linear-gradient(to bottom,#525151 0%,#414040 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#525151',endColorstr='#414040',GradientType=0);
-    -webkit-box-shadow:inset 0 1px 0 0 #737272, 0 1px 0 0 #535353;
-       -moz-box-shadow:inset 0 1px 0 0 #737272, 0 1px 0 0 #535353;
-            box-shadow:inset 0 1px 0 0 #737272, 0 1px 0 0 #535353;
+  .button.black{border-color:#282728;color:#fff;text-shadow:0 1px 0 #000;@include linear-gradient(#525151,#414040);
   }
-  .button.black:hover{
-    background:#414040;
-    background:-moz-linear-gradient(top,#414040 0%,#525151 100%);
-    background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,#414040),color-stop(100%,#525151));
-    background:-webkit-linear-gradient(top,#414040 0%,#525151 100%);
-    background:-o-linear-gradient(top,#414040 0%,#525151 100%);
-    background:-ms-linear-gradient(top,#414040 0%,#525151 100%);
-    background:linear-gradient(to bottom,#414040 0%,#525151 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#414040',endColorstr='#525151',GradientType=0);
-  }
+  .button.black:hover{@include linear-gradient(#414040,#525151);}
 
   /* Disabled */
   .button[disabled=disabled], 
   .button:disabled{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";cursor:default;pointer-events:none;}
 
-  /* Black */
-  .button[disabled=disabled]:hover, 
-  .button:disabled:hover{
-    background:#525151;
-    background:-moz-linear-gradient(top,  #525151 0%, #414040 100%);
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#525151), color-stop(100%,#414040));
-    background:-webkit-linear-gradient(top,  #525151 0%,#414040 100%);
-    background:-o-linear-gradient(top,  #525151 0%,#414040 100%);
-    background:-ms-linear-gradient(top,  #525151 0%,#414040 100%);
-    background:linear-gradient(to bottom,  #525151 0%,#414040 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#525151', endColorstr='#414040',GradientType=0 );
-  }
+    /* Black */
+    .button[disabled=disabled]:hover, 
+    .button:disabled:hover{@include linear-gradient(#525151,#414040);
+    }
 
 /* Buttons Bar - only support black buttons and 0 to 4 steps at the moment */
 .buttons-bar{border:1px solid #282728;
