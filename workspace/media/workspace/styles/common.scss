@@ -1,12 +1,15 @@
 /* Import SASS variables */
 @import 'variables';
 
-body{font-family:$font-primary-family;color:$text-color;}
+body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
+.font-mb{font-family:$font-secondary-family;}
 
 /* Links */
 a{color:$link-color;}
 
 /* Buttons */
+.button{font-family:$buttons-font-family;font-size:$buttons-font-size;}
+
   /* Primary button */
   .button.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:$button-primary-color-shadow;
     background:$button-primary-color-top;
@@ -102,18 +105,18 @@ a{color:$link-color;}
   .button[disabled=disabled], 
   .button:disabled{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";cursor:default;pointer-events:none;}
 
-    /* Black */
-    .button[disabled=disabled]:hover, 
-    .button:disabled:hover{
-      background:#525151;
-      background:-moz-linear-gradient(top,  #525151 0%, #414040 100%);
-      background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#525151), color-stop(100%,#414040));
-      background:-webkit-linear-gradient(top,  #525151 0%,#414040 100%);
-      background:-o-linear-gradient(top,  #525151 0%,#414040 100%);
-      background:-ms-linear-gradient(top,  #525151 0%,#414040 100%);
-      background:linear-gradient(to bottom,  #525151 0%,#414040 100%);
-      filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#525151', endColorstr='#414040',GradientType=0 );
-    }
+  /* Black */
+  .button[disabled=disabled]:hover, 
+  .button:disabled:hover{
+    background:#525151;
+    background:-moz-linear-gradient(top,  #525151 0%, #414040 100%);
+    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#525151), color-stop(100%,#414040));
+    background:-webkit-linear-gradient(top,  #525151 0%,#414040 100%);
+    background:-o-linear-gradient(top,  #525151 0%,#414040 100%);
+    background:-ms-linear-gradient(top,  #525151 0%,#414040 100%);
+    background:linear-gradient(to bottom,  #525151 0%,#414040 100%);
+    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#525151', endColorstr='#414040',GradientType=0 );
+  }
 
 /* Buttons Bar - only support black buttons and 0 to 4 steps at the moment */
 .buttons-bar{border:1px solid #282728;
@@ -466,7 +469,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
-	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px 'montserratbold', arial, helvetica, sans-serif;color:#fff;text-shadow:0 1px 0 #134fab;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
+	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px $font-secondary-family;color:#fff;text-shadow:0 1px 0 #134fab;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
 		-webkit-border-radius:3px;
 	     -moz-border-radius:3px;
 	          border-radius:3px;
@@ -484,9 +487,9 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 .main-section .section-title h1,
 .main-section .section-title h2,
 .main-section .section-title h3{float:left;text-shadow:0 1px 0 #000;line-height:39px;}
-.main-section .section-title h1{padding-left:15px;font-weight:bold;color:#fff;font-size:20px;}
+.main-section .section-title h1{padding-left:15px;font-weight:bold;color:#fff;font-size:$font-size-xl;}
 .main-section .section-title h1 a{color:#fff;}
-.main-section .section-title h2, .main-section .section-title h3{color:#bbb;font-size:18px;}
+.main-section .section-title h2, .main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
 .main-section .section-title h2:before, .main-section .section-title h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
 
   /* Actions */
@@ -517,8 +520,8 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
      -moz-box-shadow:0 1px 0 0 #fff;
           box-shadow:0 1px 0 0 #fff;
 }
-.box > header .title{font-size:18px;font-weight:bold;line-height:20px;padding:14px 0 11px;}
-.box > header .title > span{padding-left:5px;font-size:14px;font-weight:normal;}
+.box > header .title{font-size:$font-size-l;font-weight:bold;line-height:20px;padding:14px 0 11px;}
+.box > header .title > span{padding-left:5px;font-size:$font-size-m;font-weight:normal;}
 .box > header .button{margin-top:10px;}
 .box .box-content{padding:15px}
 .box .box-content p{margin-bottom:15px;}
@@ -540,7 +543,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .box.support{background:$brand-color-15;}
   .box.support > header{border-color:$brand-color-15;}
   .box.support > header .title{color:$brand-color;}
-  .box.support > header .title > span{color:$text-color;}
+  .box.support > header .title > span{color:$font-color-base;}
 
   /* Pink */
   .box.pink{background:#fef1e1;}
@@ -657,10 +660,10 @@ i.icon.TNCLIMA{}
      -moz-box-shadow:0 0 8px rgba(0, 0, 0, 0.1) inset;
           box-shadow:0 0 8px rgba(0, 0, 0, 0.1) inset;
 }
-.helpBox h6{font-family:'montserratbold', arial, helvetica, sans-serif;font-size:13px;text-transform:uppercase;padding-bottom:5px;color:$accent-color;}
-.helpBox p{font-size:11px;font-weight:normal;margin-bottom:10px;color:$text-color-semi-light;}
+.helpBox h6{font-family:$font-secondary-family;font-size:$font-size-m;text-transform:uppercase;padding-bottom:5px;color:$accent-color;}
+.helpBox p{font-size:$font-size-s;font-weight:normal;margin-bottom:10px;color:$font-color-semi-light;}
 .helpBox ul{margin:10px 10px 10px 20px}
-.helpBox ul li{list-style-type:disc;margin-bottom:8px;font-size:10px;color:$text-color-semi-light;}
+.helpBox ul li{list-style-type:disc;margin-bottom:8px;font-size:10px;color:$font-color-semi-light;}
 .helpBox ul li:last-child{margin-bottom:0;}
 
 /* Backgrid - Empty text */
@@ -700,6 +703,8 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay input.search{width:200px;color:#999;font-style:italic;background-image:url('../images/common/ic_search.png');background-repeat:no-repeat;background-position:8px 10px;padding:10px 0 10px 30px;}
 
 .ao-popup-overlay .In .dataStreamForm{padding:0;}
+.ao-popup-overlay .In h4, 
+.ao-popup-overlay .Inner h4{font-size:$font-size-xl;color:$font-color-base;}
 .ao-popup-overlay .dataStreamForm .form{padding:20px;}
 .ao-popup-overlay .buttons{padding:20px 0;border-top:1px solid #E2E0E0;margin:0;}
 .ao-popup-overlay .ao-L{width:680px !important;}
@@ -801,7 +806,7 @@ border-color: #ccc;}
 .pagination .pager li:last-child, 
 .pagination .backgrid-paginator li:last-child{border-right:0;}
 .pagination .pager li a, 
-.pagination .backgrid-paginator li a{display:block;color:#726869;text-shadow:0 1px 0 #fff;height:27px;line-height:29px;font-family:'montserratbold', arial, helvetica, sans-serif;font-size:15px;overflow:hidden;}
+.pagination .backgrid-paginator li a{display:block;color:#726869;text-shadow:0 1px 0 #fff;height:27px;line-height:29px;font-family:$font-secondary-family;font-size:15px;overflow:hidden;}
 .pagination .pager li a:hover, 
 .pagination .backgrid-paginator li a:hover{text-decoration:none;background-color:#efeded;background-color:rgba(0,0,0,.04);}
 .pagination .pager .pagination-page{width:32px;padding-right:1px;text-align:center;}

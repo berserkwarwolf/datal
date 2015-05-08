@@ -4,7 +4,7 @@
 /* Getting Started */
 .getting-started article{margin-top:15px;}
 .getting-started article:first-child{margin-top:0;}
-.getting-started article header h4{font-size:14px;font-weight:bold;height:24px;line-height:26px;padding-left:31px;background:url(../images/viewLandingPage/ic_gettingStarted.png) no-repeat;}
+.getting-started article header h4{font-size:$font-size-m;font-weight:bold;height:24px;line-height:26px;padding-left:31px;background:url(../images/viewLandingPage/ic_gettingStarted.png) no-repeat;}
 .getting-started .settings header h4{background-position:0 0;}
 .getting-started .resources header h4{background-position:0 -24px;}
 .getting-started .revisions header h4{background-position:0 -48px;}
@@ -34,7 +34,7 @@
 .numbers .graph tr{margin-top:10px;}
 .numbers .graph tr:first-child{margin-top:0;}
 .numbers .graph td{padding:5px 0;}
-.numbers .graph .data{line-height:20px;height:20px;font-size:14px;color:$text-color-light;white-space:nowrap;padding-right:25px;}
+.numbers .graph .data{line-height:20px;height:20px;font-size:$font-size-m;color:$font-color-light;white-space:nowrap;padding-right:25px;}
 .numbers .graph .data > *{vertical-align:top;}
 .numbers .graph .data strong{font-size:16px;color:#3a3a3a;padding:0 4px;}
 .numbers .graph .bar{width:100%;}
@@ -46,9 +46,9 @@
 .activity article:first-child{margin-top:0;}
 .activity article > img{width:24px;height:24px;border:1px solid #e5e3e3;padding:1px;background:#fff;}
 .activity .text{padding-left:35px;}
-.activity .text p{line-height:20px;font-size:14px;padding:4px 0;margin-bottom:0;}
+.activity .text p{line-height:20px;padding:4px 0;margin-bottom:0;font-size:$font-size-m;}
 .activity .text p a{color:#7199d5;font-style:italic;}
-.activity .text p span{font-style:italic;color:$text-color-light;}
+.activity .text p span{font-style:italic;color:$font-color-light;}
 .activity .text p * > *{vertical-align:middle;}
 .activity .text p i{position:relative;left:-1px;top:-1px;margin-left:3px;}
-.activity .text time{color:$text-color-light;}
+.activity .text time{color:$font-color-light;}

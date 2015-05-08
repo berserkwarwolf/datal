@@ -1,3 +1,6 @@
+/* Import SASS variables */
+@import 'variables';
+
 .ao-popup-overlay .formContent .ov-content{width:inherit;padding:0;overflow-y:auto;max-height:380px;}
 .ao-popup-overlay .In form{width:915px;}
 .col-1, .col-2{width:51%;padding:0 15px;margin:15px 0 0;float:left;}
@@ -25,5 +28,5 @@
 .formContent p.tip{font-size:11px;color:#999;clear:both;float:left;margin:5px 0 0 90px;padding-bottom:10px;text-shadow:0 1px 0 #fff;}
 .formContent .required {float:left;margin-left:5px;width:5px;}
 .formContent .divider{margin-bottom:15px;width:100%;border-bottom:1px solid #e3e3e3;}
-.formContent .insetFormTitle{font-size:14px;margin:15px 0;font-family:'montserratbold';text-transform:uppercase;}
+.formContent .insetFormTitle{font-size:14px;margin:15px 0;font-family:$font-secondary-family;text-transform:uppercase;}
 .formContent .row p.has-error{padding:7px 0 0 90px;clear:both;color:#f45f64;}

@@ -52,7 +52,7 @@
             border-radius:3px 0 0 3px;
 }
 .filters-container > div{padding-bottom:9px;}
-.filters-container > div h3{font-size:12px;line-height:16px;padding:9px 15px 5px;text-transform:uppercase;border-bottom:1px solid #e5e5e5;word-break:break-word;
+.filters-container > div h3{font-size:$font-size-base;line-height:16px;padding:9px 15px 5px;text-transform:uppercase;border-bottom:1px solid #e5e5e5;word-break:break-word;
     -webkit-box-shadow:0 1px 0 0 #fff;
        -moz-box-shadow:0 1px 0 0 #fff;
             box-shadow:0 1px 0 0 #fff;
@@ -79,8 +79,8 @@
 
 /* List */
 .list-container{padding:0 15px 15px;}
-.list-container table{width:100%;font-size:12px;text-shadow:0 1px 0 #fff;}
-.list-container table th{text-align:left;color:#999;font-family:'montserratregular', arial, helvetica, sans-serif;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
+.list-container table{width:100%;text-shadow:0 1px 0 #fff;}
+.list-container table th{text-align:left;color:#999;font-family:$font-extra-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
 .list-container table .select-all-header-cell input[type=checkbox]{position:relative;top:3px;}
 .list-container table tr{}
 .list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:12px 10px 12px 10px;line-height:18px;
@@ -90,12 +90,12 @@
 }
 .list-container table th.select-all-header-cell,
 .list-container table td.select-row-cell{width:25px;padding-left:0;padding-right:0;text-align:right !important;}
-.list-container table h3{font-size:14px;}
+.list-container table h3{font-size:$font-size-m;}
 .list-container table h3:first-letter{text-transform:uppercase;}
 .list-container table h3 span.sep{color:#e0e0e0;padding:0 2px;}
 .list-container table .filename{display:block;}
 .list-container table .filename a{color:#3a3a3a;}
-.list-container table .date{display:block;color:$text-color-light;}
+.list-container table .date{display:block;color:$font-color-light;}
 .list-container table .actions{padding-top:10px;}
 .list-container table .actions li{float:left;visibility:hidden;}
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
@@ -112,7 +112,7 @@
 .list-container table tr:hover li{visibility:visible;}
 
 /* Overlays */
-.ao-popup-overlay table th{text-transform:uppercase;font-family:"montserratbold";line-height:25px;color:#999;font-weight:normal;}
+.ao-popup-overlay table th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}
 
 #id_addDataview #dataset_grid, 
 #id_addVisualization #dataview_grid {height:280px;overflow:auto;overflow-x:hidden;}

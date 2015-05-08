@@ -1,5 +1,5 @@
 /* Button */
-.button{height:44px;line-height:44px;font-size:18px;padding:0 20px;display:inline-block;border:1px solid transparent;text-transform:uppercase;font-family:'montserratregular', arial, helvetica, sans-serif;text-align:center;cursor:pointer;
+.button{height:44px;line-height:44px;font-size:18px;padding:0 20px;display:inline-block;border:1px solid transparent;text-transform:uppercase;font-family:'montserratregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;

@@ -14,7 +14,7 @@ body{background:$brand-color;}
 }
 .account-box .row{padding-top:15px;}
 .account-box .row:first-child{padding-top:0;}
-.account-box .row label{display:block;font-size:14px;line-height:19px;}
+.account-box .row label{display:block;font-size:$form-label-size;line-height:19px;color:$form-label-color;}
 .account-box .row input[type=text],
 .account-box .row input[type=password],
 .account-box .row select{width:100%;padding:0 10px;height:30px;font-size:14px;margin-top:5px;
@@ -32,7 +32,7 @@ body{background:$brand-color;}
 .account-box .row.buttons{}
 .account-box .row.buttons .button{display:inline-block;} 
 .account-box .row.remember input[type=checkbox]{float:left;position:relative;top:3px;}
-.account-box .row.remember label{float:left;padding:5px 0 0 4px;font-size:12px;line-height:15px;}
+.account-box .row.remember label{float:left;padding:5px 0 0 4px;font-size:$font-size-base;line-height:15px;}
 .account-box .row.remember .button{float:right;}
 .account-box .account-box-footer ul{padding:12px 20px 20px;}
 .account-box .account-box-footer li{padding-bottom:8px;}
@@ -53,7 +53,7 @@ body{background:$brand-color;}
 #id_signUp, 
 #id_activate{width:400px;margin-top:0;background-position:center -80px;padding-top:20px;}
 #id_signUp .row p.tip,
-#id_activate .row p.tip{padding-top:7px;font-size:11px;color:$text-color-light;}
+#id_activate .row p.tip{padding-top:7px;font-size:$font-size-s;color:$font-color-light;}
 #id_signUp .domainRow .fakeField{margin-top:5px;border:1px solid #e2e0e0;padding:0 0 0 10px;background:#fafafa;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
@@ -64,7 +64,7 @@ body{background:$brand-color;}
 #id_signUp .domainRow .domainText:after{content:"/";display:block;position:absolute;top:0;right:-4px;}
 #id_signUp .domainRow input[type=text]{width:48%;float:right;margin:1px;height:28px;}
 #id_signUp legend,
-#id_activate legend{font-size:14px;text-transform:uppercase;}
+#id_activate legend{font-size:$font-size-m;text-transform:uppercase;}
 #id_signUp .sub,
 #id_activate .sub{margin-top:10px;color:#999;}
 #id_signUp .buttons,

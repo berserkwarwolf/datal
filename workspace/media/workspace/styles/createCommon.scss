@@ -11,9 +11,9 @@
      -moz-box-shadow:0 1px 0 #fff;
           box-shadow:0 1px 0 #fff;
 }
-.create header h3{font-size:18px;font-weight:bold;display:inline-block;}
-.create header h3 span{font-size:14px;font-weight:normal;color:$text-color-light;}
-.create .insetFormTitle{font-size:14px;margin:15px 0;font-family:'montserratbold';text-transform:uppercase;}
+.create header h3{font-size:$font-size-l;font-weight:bold;display:inline-block;}
+.create header h3 span{font-size:$font-size-m;font-weight:normal;color:$font-color-light;}
+.create .insetFormTitle{font-size:$font-size-m;margin:15px 0;font-family:$font-secondary-family;text-transform:uppercase;}
 
 .create .navigation{margin-top:-5px;}
 .create .navigation a{float:left;margin-left:10px;}
@@ -21,7 +21,7 @@
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
-.create .title{font-family:'montserratbold', arial, helvetica, sans-serif;text-transform:uppercase;font-size:12px;padding:15px 15px 10px 15px;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;}
+.create .title{font-family:$font-secondary-family;text-transform:uppercase;font-size:$font-size-base;padding:15px 15px 10px 15px;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;}
 .create .required{color:#d21717;padding-left:5px;}
 .create header .required{padding-left:0;}
 .create .formContent .required{float:right;padding-right:12px;}
@@ -97,7 +97,7 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
+.create .formContent .row label{font-size:$form-label-size;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
 .create .formContent .row textarea{width:440px;
   -webkit-box-sizing:border-box;
@@ -114,7 +114,7 @@
 .create .formContent .row .sourcesContent,
 .create .formContent .row .paramContent{margin-left:115px;}
 .formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
-.create p.tip{clear:both;color:$text-color-light;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
 .sticky{position:fixed;width:100%;top:0;z-index:100;border-top:0;} 

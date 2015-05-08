@@ -7,7 +7,7 @@
 .themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;background:#f4f4f4;}
 .themeTabs > ul li:nth-child(4n){margin-right:0;}
 .themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;border:1px solid #f4f4f4;}
-.themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$text-color;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
+.themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$font-color-base;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
 .themeTabs > ul li a .img{position:relative;z-index:3;display:block;width:146px;margin:0 auto;}
 .themeTabs > ul li a .img img{width:128px;height:180px;border:10px solid #f4f4f4;position:relative;z-index:3;}
 .themeTabs > ul li a i{position:absolute;display:none;z-index:4;}
@@ -94,7 +94,7 @@
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
 .configs .formBox header .num{background-color:$brand-color;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
-.configs .formBox header h1{color:$text-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
+.configs .formBox header h1{color:$font-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}
 .configs .formBox fieldset{background:#f4f4f4;padding:13px;
 	-webkit-border-radius:3px;
@@ -103,7 +103,7 @@
 }
 .configs .formBox fieldset .row{padding-top:15px;}
 .configs .formBox fieldset .row:first-child{padding-top:0;}
-.configs .formBox fieldset label{padding-bottom:8px;display:inline-block;height:17px;line-height:17px;font-size:12px;font-weight:bold;color:#333;padding-left:12px;}
+.configs .formBox fieldset label{padding-bottom:8px;display:inline-block;height:17px;line-height:17px;font-size:$form-label-size;color:$form-label-color;padding-left:12px;}
 .configs .formBox fieldset .field{border:1px solid #d9d7d7;width:100%;
 	-webkit-box-sizing:border-box;
 	-moz-box-sizing:border-box;
@@ -190,8 +190,8 @@
 .ui-autocomplete .ic_Data{background-position:2px -23px !important;}
 
 /* Help & tips */
-.helpBox .rowTop{padding-bottom:10px;border-bottom:1px solid #ddd;color:$text-color-semi-light;}
-.helpBox .rowBottom{padding-top:10px;border-top:1px solid #fff;color:$text-color-semi-light;}
+.helpBox .rowTop{padding-bottom:10px;border-bottom:1px solid #ddd;color:$font-color-semi-light;}
+.helpBox .rowBottom{padding-top:10px;border-top:1px solid #fff;color:$font-color-semi-light;}
 
 /* Preview */
 #id_previewOverlay{width:98%;height:95%;}

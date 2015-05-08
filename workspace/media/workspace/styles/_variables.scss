@@ -1,26 +1,46 @@
 /* Logo */
 // $logo:
 
-/* Brand color */
-$brand-color:rgba(255,108,0,1);					/* Brand primary color */
-$brand-color-15:rgba(255,108,0,0.15);			/* Brand color 15% opacity, for backgrounds in landing page */
-$brand-color-bold:rgba(232,100,2,1);			/* For hovers and other staff */
+/* Branding */
 
-/* Accent color */
-$accent-color:rgba(72,144,252,1);				/* Brand secondary color */
-$accent-color-05:rgba(72,144,252,0.05);			/* Accent color 5% opacity, for backgrounds in tables */
-$accent-color-15:rgba(72,144,252,0.15);			/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
-$accent-color-85:rgba(72,144,252,0.85);			/* Accent color 85% opacity,, for backgrounds in tooltips  */
+	/* Brand color */
+	$brand-color:rgba(255,108,0,1);												/* Brand primary color */
+	$brand-color-15:rgba(255,108,0,0.15);										/* Brand color 15% opacity, for backgrounds in landing page */
+	$brand-color-bold:rgba(232,100,2,1);										/* For hovers and other staff */
 
-/* Text */
-$text-color:#3a3a3a;							/* For body paragraphs, titles */
-$text-color-semi-light:#818181;					/* For subtitles */
-$text-color-light:#999;							/* For descriptions */
+	/* Accent color */
+	$accent-color:rgba(72,144,252,1);											/* Brand secondary color */
+	$accent-color-05:rgba(72,144,252,0.05);										/* Accent color 5% opacity, for backgrounds in tables */
+	$accent-color-15:rgba(72,144,252,0.15);										/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
+	$accent-color-85:rgba(72,144,252,0.85);										/* Accent color 85% opacity,, for backgrounds in tooltips  */
 
-/* Links */
-$link-color:#027fc0;
+
+/* Fonts */
+
+	/* Family */
+	$font-primary-family:Arial,Helvetica,sans-serif;							/* For fonts in general */
+	$font-secondary-family:'montserratbold',arial,helvetica,sans-serif;			/* For some subtitles */
+	$font-extra-family:'montserratregular',arial,helvetica,sans-serif;			/* For table titles */
+
+	/* Size */
+	$font-size-base:12px !important;											/* For body paragraphs and text in general */
+	$font-size-m:14px !important;												/* For subtitles */
+	$font-size-l:18px !important;												/* For content titles */
+	$font-size-xl:20px !important;												/* For section titles and overlay titles */
+	$font-size-s:11px !important;												/* For some descriptions and tips */
+
+	/* Color */
+	$font-color-base:#3a3a3a;													/* For body paragraphs and titles */
+	$font-color-semi-light:#818181;												/* For subtitles */
+	$font-color-light:#999;														/* For descriptions */
+
+	/* Color - Links */
+	$link-color:#027fc0;
+
 
 /* Buttons */
+$buttons-font-family:'montserratregular',arial,helvetica,sans-serif;			/* Font family for all buttons */
+$buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
 	$button-primary-color-top:#b9ce44;
@@ -43,12 +63,12 @@ $link-color:#027fc0;
 	$button-support-color-text:#ce6425;
 	$button-support-color-shadow:0 -1px 0 #fbddc0;
 
-/* Forms */
-$form-label-color:#3a3a3a;
 
-/* Fonts */
-$font-primary-family:Arial,Helvetica,sans-serif;
-// $font-secondary-family:
+/* Forms */
+// $form-label-color:#3a3a3a;
+$form-label-color:red;
+$form-label-size:17px;
+
 
 /* Font - Size */
 // $font-size-base:
