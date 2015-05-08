@@ -21,10 +21,27 @@ $color-text-light:#999;							/* For descriptions */
 $color-link:#027fc0;
 
 /* Color - Buttons */
-$color-button-primary-top:#b9ce44;
-$color-button-primary-bottom:#72aa00;
-$color-button-primary-bottom-shadow:#a8c732;
-$color-button-primary-border:rgba(16, 23, 1, 0.5);
+
+	/* Primary button */
+	$color-button-primary-top:#b9ce44;
+	$color-button-primary-bottom:#72aa00;
+	$color-button-primary-border:rgba(16, 23, 1, 0.5);
+	$color-button-primary-text:#FFF;
+	$color-button-primary-shadow:0 -1px 0 #517605;
+
+	/* Warning button */
+	$color-button-warning-top:#ffaea7;
+	$color-button-warning-bottom:#fb404f;
+	$color-button-warning-border:rgba(150,50,34,0.5);
+	$color-button-warning-text:#FFF;
+	$color-button-warning-shadow:0 -1px 0 #963222;
+
+	/* Support button */
+	$color-button-support-top:#fbe0c6;
+	$color-button-support-bottom:#f9c089;
+	$color-button-support-border:rgba(140,28,65,0.5);
+	$color-button-support-text:#ce6425;
+	$color-button-support-shadow:0 -1px 0 #fbddc0;
 
 /* Color - Forms */
 $color-form-label:#3a3a3a;
