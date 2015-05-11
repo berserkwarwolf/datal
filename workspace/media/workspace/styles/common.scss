@@ -392,7 +392,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
-	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px $font-secondary-family;color:#fff;text-shadow:0 1px 0 #134fab;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
+	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px $font-secondary-family;color:#fff;text-shadow:0 1px 0 $brand-color-bold;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
 		-webkit-border-radius:3px;
 	     -moz-border-radius:3px;
 	          border-radius:3px;
@@ -400,7 +400,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 	     -moz-box-shadow:1px 1px 3px 0 rgba(45,45,45,.15);
 	          box-shadow:1px 1px 3px 0 rgba(45,45,45,.15);
 	}
-  .main-navigation li > a:hover span:after{content:"";width:0;height:0;padding:0;border:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:6px solid $accent-color;border-right-color:rgba(73,144,252,.9);position:absolute;top:50%;margin-top:-6px;left:-6px;}
+  .main-navigation li > a:hover span:after{content:"";width:0;height:0;padding:0;border:0;border-top:6px solid transparent;border-bottom:6px solid transparent;border-right:6px solid $accent-color;border-right-color:$accent-color-85;position:absolute;top:50%;margin-top:-6px;left:-6px;}
 
 /* Main Section */
 .main-section{}
