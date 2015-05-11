@@ -22,10 +22,10 @@
 
 	/* Size */
 	$font-size-base:12px !important;											/* For body paragraphs and text in general */
+	$font-size-s:11px !important;												/* For some descriptions and tips */
 	$font-size-m:14px !important;												/* For subtitles */
 	$font-size-l:18px !important;												/* For content titles */
 	$font-size-xl:20px !important;												/* For section titles and overlay titles */
-	$font-size-s:11px !important;												/* For some descriptions and tips */
 
 	/* Color */
 	$font-color-base:#3a3a3a;													/* For body paragraphs and titles */
@@ -41,15 +41,15 @@ $buttons-font-family:'montserratregular',arial,helvetica,sans-serif;			/* Font f
 $buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color:#b9ce44;												/* Top color of gradient */
+	$button-primary-color:#b9ce44;												/* Background color */
 	$button-primary-color-text:#FFF;											/* Font color */
 
 	/* Warning button */
-	$button-warning-color:#f95360;												/* Top color of gradient */
+	$button-warning-color:#f95360;												/* Background color */
 	$button-warning-color-text:#FFF;											/* Font color */
 
 	/* Support button */
-	$button-support-color:#fff4e9;												/* Top color of gradient */
+	$button-support-color:#fff4e9;												/* Background color */
 	$button-support-color-text:#ce6425;											/* Font color */
 
 

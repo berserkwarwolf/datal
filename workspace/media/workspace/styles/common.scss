@@ -392,7 +392,7 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
-	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px $font-secondary-family;color:#fff;text-shadow:0 1px 0 $brand-color-bold;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
+	.main-navigation li > a:hover span{display:block;background:$accent-color-85;height:32px;display:inline-block;font:12px/32px $font-secondary-family;color:#fff;text-shadow:0 1px 0 $accent-color;text-transform:uppercase;padding:0 11px;position:absolute;left:90%;top:50%;margin-top:-16px;white-space:nowrap;
 		-webkit-border-radius:3px;
 	     -moz-border-radius:3px;
 	          border-radius:3px;
