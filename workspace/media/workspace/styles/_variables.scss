@@ -9,15 +9,9 @@
 
 	/* Brand color */
 	$brand-color:rgba(255,108,0,1);												/* Brand primary color */
-	$brand-color-15:rgba(255,108,0,0.15);										/* Brand color 15% opacity, for backgrounds in landing page */
-	$brand-color-bold:rgba(232,100,2,1);										/* For hovers and other staff */
 
 	/* Accent color */
-	$accent-color:rgba(72,144,252,1);											/* Accent secondary color */
-	$accent-color-05:rgba(72,144,252,0.05);										/* Accent color 5% opacity, for backgrounds in tables */
-	$accent-color-15:rgba(72,144,252,0.15);										/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
-	$accent-color-85:rgba(72,144,252,0.85);										/* Accent color 85% opacity, for backgrounds in tooltips  */
-
+	$accent-color:rgba(72,144,252,1);											/* Brand secondary color */
 
 /* Fonts */
 
@@ -62,3 +56,7 @@ $buttons-font-size:12px !important;												/* Font size for all buttons */
 /* Forms */
 $form-label-color:#3a3a3a;														/* Color for form labels */
 $form-label-size:12px;															/* Size for form labels */
+
+
+/* Loader */
+// $loader-url:																	/* URL of loader image */

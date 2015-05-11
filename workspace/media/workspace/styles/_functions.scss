@@ -1,5 +1,17 @@
 /*** Functions ***/
 
+/* Branding */
+
+	/* Brand color */
+	$brand-color-15:rgba($brand-color,.15);																							/* Brand color 15% opacity, for backgrounds in landing page */
+	$brand-color-bold:adjust-color($brand-color,$hue:0deg,$saturation:0%,$lightness:-5%);;											/* For hovers and other staff */
+
+	/* Accent color */
+	$accent-color-05:rgba($accent-color,.05);																						/* Accent color 5% opacity, for backgrounds in tables */
+	$accent-color-15:rgba($accent-color,.15);																						/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
+	$accent-color-85:rgba($accent-color,.85);																						/* Accent color 85% opacity, for backgrounds in tooltips  */
+
+
 /* Buttons */
 
 	/* Primary button */
@@ -16,4 +28,7 @@
 	$button-support-color-gradient:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
 	$button-support-color-border:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
 	$button-support-color-shadow:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
+
+
+
 
