@@ -1,5 +1,7 @@
 /* Import SASS variables */
 @import 'variables';
+@import 'functions';
+@import 'mixins';
 
 .main-section .section-content{background-color:#f6f4f4;padding:0;}
 .create{padding:0;}
@@ -50,16 +52,7 @@
           box-shadow:0 0 5px rgba(208,208,208,1);
  }
  .create .box .button{display:block;}
- .create .box:hover .button.primary{
-    background:#b9ce44;
-    background:-moz-linear-gradient(top,  #b9ce44 0%, #a8c732 8%, #72aa00 100%);
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#b9ce44), color-stop(8%,#a8c732), color-stop(100%,#72aa00));
-    background:-webkit-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
-    background:-o-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
-    background:-ms-linear-gradient(top,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
-    background:linear-gradient(to bottom,  #b9ce44 0%,#a8c732 8%,#72aa00 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#b9ce44', endColorstr='#72aa00',GradientType=0 );
- }
+ .create .box:hover .button.primary{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
 .create .box .boxCreate{display:block;background-size:cover;background-position:center center;background-repeat:no-repeat;height:170px;border-bottom:1px solid #e5e3e3;}
 .create .box h3{color:#3a3a3a;font-size:18px;font-weight:bold;padding-bottom:12px;}
 .create .box p{color:#999;font-size:14px;padding-bottom:18px;}
