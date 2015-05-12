@@ -41,7 +41,19 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     render: function(){
+        var self = this;
         this.$el.data('overlay').load();
+
+        // Bind custom model validation callbacks
+        Backbone.Validation.bind(this, {
+            valid: function (view, attr, selector) {
+                self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
+            },
+            invalid: function (view, attr, error, selector) {
+                self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
+            }
+        });
+        
         return this;
     },
 
@@ -82,6 +94,12 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                 type:'POST', 
                 data: data, 
                 dataType: 'json',
+                beforeSend: function(xhr, settings){
+                    // Prevent override of global beforeSend
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    // Show Loading
+                    $("#ajax_loading_overlay").show();
+                },
                 success: function(response){
                     $.gritter.add({
                         title : gettext('APP-CHANGES-SAVED-TEXT'),
@@ -104,6 +122,8 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                     }, 2000);
                 },
                 error: function(){
+                    // Hide Loading
+                    $("#ajax_loading_overlay").hide();
                     $.gritter.add({
                         title : gettext('APP-ERROR-TEXT'),
                         text : gettext('APP-REQUEST-ERROR'),
@@ -129,6 +149,22 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         this.$el.find('#sourceForm .sourcesContent').html('');
         this.$el.find('#tagForm .tagsContent').html('');
         $('.nicEdit-main').html('');
-    }
+    },
+
+    setIndividualError: function(element, name, error){
+
+        // If not valid
+        if( error != ''){
+            element.addClass('has-error');
+            element.next('span').next().remove();
+            element.next().after('<p class="has-error">'+error+'</p>');
+
+        // If valid
+        }else{
+            element.removeClass('has-error');
+            element.next('span').next().remove();
+        }
+
+    },
 
 });
