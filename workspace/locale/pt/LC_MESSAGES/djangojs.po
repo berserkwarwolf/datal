@@ -840,5 +840,5 @@ msgstr "You can show or hide the resources catalog in the theme."
 msgid "ADMIN-HOME-SECTION-RESOURCESCHECKBOX"
 msgstr "Show resources catalog."
 
-msgid "APP-DATAVIEW-SAVED-TEXT"
-msgstr "The Data View was successfully saved."
+msgid "APP-REDIRECTING-TEXT"
+msgstr "Redirecting..."

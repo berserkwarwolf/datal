@@ -65,6 +65,9 @@
     /* Last Update */
     .sidebar-container .infoBox .lastUpdate > i{background-position:0 -20px;}
 
+    /* Category */
+    .sidebar-container .infoBox .category > i{background-position:0 -240px;}
+
     /* Frequency */
     .sidebar-container .infoBox .frequency > i{background-position:0 -160px;}
 

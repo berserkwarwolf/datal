@@ -2,7 +2,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	el: '.main-section',
 
-  	template: null,
 	theDataTable: null,
     listResources: null,
     sourceUrl: null,
@@ -17,13 +16,11 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	bindings: {
-        '.dataTable header h1 strong': 'text:title',
-        '.dataTable header h2': 'text:description',
+        '#id_status': 'text:status',
 	},
 
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
-		this.template = _.template( $("#id_SidebarTemplate").html() );
 		this.render();
 
         this.sourceUrl = this.options.sourceUrl;
@@ -35,7 +32,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
-   	 	this.$el.find('.sidebar-container').html( this.template( this.model.toJSON() ) );
 		this.setSidebarHeight();
 		return this;
 	},

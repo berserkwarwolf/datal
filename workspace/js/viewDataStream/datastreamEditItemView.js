@@ -82,17 +82,26 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                 type:'POST', 
                 data: data, 
                 dataType: 'json',
-                success: function(){
+                success: function(response){
                     $.gritter.add({
                         title : gettext('APP-CHANGES-SAVED-TEXT'),
-                        text : gettext('APP-DATAVIEW-SAVED-TEXT'),
+                        text : gettext('APP-REDIRECTING-TEXT'),
                         image : '/static/workspace/images/common/ic_validationOk32.png',
                         sticky : false,
                         time : 3500
                     });
                     self.closeOverlay();
-                    self.parentView.model.set('title', self.model.get('title'));
-                    self.parentView.model.set('description', self.model.get('description'));
+
+                    var newRevisionID = response['datastream_revision_id'],
+                        location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/"),
+                        setURL = joinURL + "/" + newRevisionID;
+
+                    setTimeout(function () {
+                           window.location = setURL;
+                    }, 2000);
                 },
                 error: function(){
                     $.gritter.add({
