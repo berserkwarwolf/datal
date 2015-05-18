@@ -4,6 +4,9 @@ maven:
 git:
   pkg:
     - installed
+python-git:
+  pkg:
+    - installed
 
 Clone Indextank-engine Github:
   git.latest:
@@ -18,3 +21,14 @@ indextank:
     - require:
       - git: Clone Indextank-engine Github
 
+
+indextank_initd:
+   file.managed:
+     - source: salt://core/indextank/indextank-engine.sh
+     - name: /etc/init.d/indextank-engine.sh
+     - mode: 755
+     - user: root
+     - group: root
+   cmd.run:
+    - cwd: /usr/share/indextank-engine
+    - name: /etc/init.d/indextank-engine.sh
