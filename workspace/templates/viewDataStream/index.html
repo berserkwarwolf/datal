@@ -139,7 +139,7 @@ $(document).ready(function(){
     id: "{{datastream.datastreamrevision_id}}",
     datastream_revision_id: "{{datastream.datastream_revision_id}}",
     title: "{{datastream.title}}",
-    category: "{{datastream.category_name}}",
+    category: "{{datastream.category_id}}",
     allCategories: [{% for category in categories %}{"label":"{{category.name}}", "value":"{{category.category__id}}"},{% endfor %}],
     status: "{{datastream.status}}",
     allStatus: [{% for key, value in status_options %}{"label":"{{value}}", "value":"{{key}}"},{% endfor %}],
