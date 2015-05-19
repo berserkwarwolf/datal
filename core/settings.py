@@ -188,7 +188,7 @@ SEARCH_TERMS_EXCLUSION_LIST     = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIS
 BLOCKED_USERNAMES               = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home', 'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support', 'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams', 'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams', 'data.stream', 'dashboards', 'dashboard', 'data']
 
 #SEARCHIFY = {'api_url': 'http://:11111@11111.api.searchify.com', 'index': 'TEST'}
-SEARCHIFY = {'api_url': 'http://localhost:20220', 'index': 'idx'}
+SEARCHIFY = {'api_url': 'http://:aa@localhost:20220', 'index': 'idx'}
 
 # Settings Keys
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'

@@ -84,6 +84,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
         self._log_activity( ActionStreams.CREATE)
 
+        search_dao = DatasetSearchDAOFactory().create()
+        search_dao.add(self.dataset_revision)
+
+        
         return self.dataset_revision
 
     def publish(self, allowed_states=PUBLISH_ALLOWED_STATES):
