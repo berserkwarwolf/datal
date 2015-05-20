@@ -42,7 +42,7 @@
 								{% for datastream in dataset.datastreams %}
 								<tr>
 									<td>
-										<h3><a href="" title="May staff">{{ datastream.datastreami18n__title }}</a></h3>
+										<h3><a href="" title="{{ datastream.datastreami18n__title }}">{{ datastream.datastreami18n__title }}</a></h3>
 										<span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ datastream.created_at|date:'F d, Y, h:i A'|capfirst }}</span>
 									</td>
 									<td><i class="icon-resources icon-dataview">{% trans "APP-DATASTREAM-TEXT" %}</i></td>

@@ -11,7 +11,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		// this.parentView = this.options.parentView;
 
 		// init Overlay
 		this.$el.overlay({
@@ -27,7 +27,6 @@ var DeleteItemView = Backbone.View.extend({
 		
 		// Render
 		this.render();
-
 	},
 
 	render: function(){
@@ -81,7 +80,6 @@ var DeleteItemView = Backbone.View.extend({
 			});
 
 		});
-
 	},
 
 	closeOverlay: function() {

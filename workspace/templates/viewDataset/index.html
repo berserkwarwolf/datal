@@ -102,7 +102,10 @@
 $(document).ready(function(){
   var viewDatasetModel = new ViewDatasetModel({
     reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
-    status: "{{ dataset.status|status_str }}"
+    status: "{{ dataset.status|status_str }}",
+    id: "{{ dataset.last_revision_id }}",
+    dataset_id: " {{ dataset.dataset_id }}",
+    title: "{{ dataset.title }}"
   });
   var viewDatasetView = new ViewDatasetView({model: viewDatasetModel});
 });

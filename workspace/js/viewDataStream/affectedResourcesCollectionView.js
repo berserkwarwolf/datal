@@ -1,6 +1,6 @@
 var AffectedResourcesCollectionView = Backbone.View.extend({
 
-    el: '#id_confirmDeleteDataset',
+    el: '#id_confirmDeleteDataview',
 
     affectedResourcesHTML: '',
 
@@ -9,7 +9,8 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
         "click .close, .cancel": "closeOverlay",
     },
 
-    initialize: function(options) {        
+    initialize: function(options) {
+        
         this.options = options;
 
         // init Overlay
@@ -33,11 +34,11 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
-                    dataset_id: model.get('dataset_id'),
+                    dataset_id: model.get('datastream__id'),
                     type: self.options.type
                 }),
                 success: function(model, response) {
-                    
+
                     if (self.collection.length > 0) {
                         _(self.collection.models).each(function(model) {
                             self.addResource(model);
@@ -59,8 +60,8 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
 
         });
 
-        this.collection.bind('reset', this.render);
-        
+        this.collection.bind('reset', this.render)
+
     },
 
     render: function() {
@@ -79,13 +80,13 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
     deleteRelatedResources: function() {
         var self = this;
         _.each(this.options.models, function(model) {
-            resource = model.get('title');
+            resource = model.get('title')
             model.remove({
 
                 success: function() {
                     $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text:  resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-TEXT'),
+                        title: gettext('APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE'),
+                        text:  resource + ": "+ gettext('APP-DELETE-DATASTREAM-ACTION-TEXT'),
                         image: '/static/workspace/images/common/ic_validationOk32.png',
                         sticky: false,
                         time: 3500

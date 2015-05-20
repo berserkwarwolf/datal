@@ -40,6 +40,10 @@
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# JS for Edit #}
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -56,6 +60,7 @@
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
@@ -125,7 +130,7 @@
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var viewDataStreamModel = new dataStream({
+  var viewDataStreamModel = new ViewDataStreamModel({
     reviewURL: "{% url 'manageDataviews.review' datastream.datastream_revision_id %}",
     status: "{{ datastream.status|status_str }}",
     id: "{{datastream.datastream_revision_id}}",
@@ -133,6 +138,7 @@ $(document).ready(function(){
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
     filter: "",
+    title: "{{datastream.title}}"
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({

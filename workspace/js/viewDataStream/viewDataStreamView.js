@@ -223,13 +223,13 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
     },
 
 	onDeleteButtonClicked: function(){
-		self = this;
+        self = this;
         this.deleteListResources = new Array();
         this.deleteListResources.push(this.options.model);
         var deleteItemView = new DeleteItemView({
-            itemCollection: self.options.itemCollection,
             models: this.deleteListResources,
-            type: "datastreams",
+            //type: "datastreams",
+            type: "visualizations",
             parentView: this.parentView
         });
 	},
