@@ -7,7 +7,7 @@ var affectedResourcesView = Backbone.View.extend({
     },
 
     render: function() {
-        this.$el.html(this.model.get('datastreami18n__title'));
+        this.$el.html(this.model.get('title'));
         this.$el.prepend('<span class=icon-' + this.model.get('type') + '></span>');
         return this;
     }

@@ -11,7 +11,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		// this.parentView = this.options.parentView;
 
 		// init Overlay
 		this.$el.overlay({
@@ -38,7 +38,6 @@ var DeleteItemView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
 			collection: affectedResourcesCollection,
-			itemCollection: this.options.itemCollection,
 			models: this.options.models,
 			type: this.options.type
 		});
@@ -64,6 +63,7 @@ var DeleteItemView = Backbone.View.extend({
 					});
 					self.closeOverlay();
 					self.undelegateEvents();
+					// window.location = url 'manageDataviews.review' datastream.datastream_revision_id;
 				},
 
 				error: function() {
@@ -87,4 +87,5 @@ var DeleteItemView = Backbone.View.extend({
 	closeOverlay: function() {
 		this.$el.data('overlay').close();
 	}
+
 });
