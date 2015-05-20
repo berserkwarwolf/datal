@@ -209,6 +209,11 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 ## Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
 
+            # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
+            # completa el valor correspondiente.
+            self.datastream.last_published_revision=None
+            self.datastream.save()
+            
             self.datastream_revision.delete()
 
         self._update_last_revisions()
