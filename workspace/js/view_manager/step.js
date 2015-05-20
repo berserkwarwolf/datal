@@ -1007,16 +1007,16 @@ var Step2 = Step.extend({
 
         return $.param({
             'csrfmiddlewaretoken' : csrfmiddlewaretoken,
-            'datastream-dataset_revision_id' : $('#id_datastream-dataset_revision_id').val(),
-            'datastream-title': this.attributes.$Title.val(),
-            'datastream-description': this.attributes.$Description.val(),
-            'datastream-category': this.attributes.$Category.val(),
-            'datastream-select_statement': CreationManager.attributes.selectStatementXML,
-            'datastream-rdf_template': CreationManager.attributes.rdfTemplate,
-            'datastream-data_source': CreationManager.attributes.dataSourceXML,
-            'datastream-end_point': CreationManager.attributes.endPoint,
-            'datastream-status': this.attributes.$Status.val(),
-            'datastream-notes': notes,
+            'dataset_revision_id' : $('#id_datastream-dataset_revision_id').val(),
+            'title': this.attributes.$Title.val(),
+            'description': this.attributes.$Description.val(),
+            'category': this.attributes.$Category.val(),
+            'select_statement': CreationManager.attributes.selectStatementXML,
+            'rdf_template': CreationManager.attributes.rdfTemplate,
+            'data_source': CreationManager.attributes.dataSourceXML,
+            'end_point': CreationManager.attributes.endPoint,
+            'status': this.attributes.$Status.val(),
+            'notes': notes,
         });
     },
     serializeTagForm :  function(){

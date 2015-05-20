@@ -143,7 +143,7 @@ def create(request):
     auth_manager = request.auth_manager
     if request.method == 'POST':
         """ save new or update dataset """
-        form = CreateDataStreamForm(request.POST, prefix='datastream')
+        form = CreateDataStreamForm(request.POST)
 
         if not form.is_valid():
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
@@ -155,13 +155,8 @@ def create(request):
             dataset=dataset_revision.dataset,
             language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
-            # TODO: Remove when send from frontend
-            tags=[],
-            sources=[],
-            parameters=[],
-            #
+            parameters=[], #TODO: Add parameters to UI
             **form.cleaned_data
-
         )
 
         response = dict(
