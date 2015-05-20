@@ -887,12 +887,12 @@ var Step2 = Step.extend({
         att.$PreviousButton     = $('#id_step2PrevButton', att.$Container).click(_.bind(this.onPrevStepButtonClicked, this));
 
         att.$Form                = $('#id_dataStreamForm', att.$Container);
-        att.$Title                = $('#id_datastream-title', att.$Container);
-        att.$Category            = $('#id_datastream-category', att.$Container);
-        att.$Description        = $('#id_datastream-description', att.$Container);
+        att.$Title                = $('#id_title', att.$Container);
+        att.$Category            = $('#id_category', att.$Container);
+        att.$Description        = $('#id_description', att.$Container);
         att.$Tags                = $('#id_tags_containerCreation', att.$Container);
-        att.$Status                = $('#id_datastream-status', att.$Container);
-        att.$Notes               = $('#id_datastream-notes', att.$Container);
+        att.$Status                = $('#id_status', att.$Container);
+        att.$Notes               = $('#id_notes', att.$Container);
 
         this.initNotes();
 
@@ -906,8 +906,8 @@ var Step2 = Step.extend({
         });
 
         jQuery.validator.addMethod("equalFields", function(value, element){
-            var lTitle = $.trim($('#id_datastream-title').val());
-            var lDesc = $.trim($('#id_datastream-description').val());
+            var lTitle = $.trim($('#id_title').val());
+            var lDesc = $.trim($('#id_description').val());
             if( ( lTitle != '' && lDesc != '' ) && ( lTitle == lDesc ) ) {
                 return lTitle != value && lDesc != value;
             }
@@ -917,18 +917,18 @@ var Step2 = Step.extend({
 
         this.attributes.$Form.validate({
             rules: {
-              'datastream-title':  {'required'  : true
+              'title':  {'required'  : true
                                 , 'maxlength' : 80
                                 , 'regex'     : /.*[a-zA-Z0-9]+.*$/
                                 ,'equalFields' : true
                                }
-              , 'datastream-description': {'required':true,'maxlength': 140,'equalFields' : true}
-              , 'datastream-status': {'required': true}
+              , 'description': {'required':true,'maxlength': 140,'equalFields' : true}
+              , 'status': {'required': true}
             }
             , messages: {
-              'datastream-title': {regex: gettext( "DS-VALIDINPUT-TEXT" ), required: gettext ("VALIDATE-REQUIREDFIELD-TEXT")},
-              'datastream-description': gettext ("VALIDATE-REQUIREDFIELD-TEXT"),
-              'datastream-status': gettext ("VALIDATE-REQUIREDFIELD-TEXT")
+              'title': {regex: gettext( "DS-VALIDINPUT-TEXT" ), required: gettext ("VALIDATE-REQUIREDFIELD-TEXT")},
+              'description': gettext ("VALIDATE-REQUIREDFIELD-TEXT"),
+              'status': gettext ("VALIDATE-REQUIREDFIELD-TEXT")
             }
         });
 
@@ -990,7 +990,7 @@ var Step2 = Step.extend({
         new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'],
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
-        }).panelInstance('id_datastream-notes');
+        }).panelInstance('id_notes');
     },
     serializeDatastreamForm : function(){
         
