@@ -213,7 +213,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.datastream.last_published_revision=None
             self.datastream.save()
-            
+
             self.datastream_revision.delete()
 
         self._update_last_revisions()
