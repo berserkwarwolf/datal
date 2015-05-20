@@ -68,8 +68,8 @@ var DeleteItemView = Backbone.View.extend({
 
 				error: function() {
 					$.gritter.add({
-						title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-						text: resource + ": " + gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
+						title: gettext('APP-OVERLAY-DELETE-DATASTREAM-TITLE'),
+						text: resource + ": " + gettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'),
 						image: '/static/workspace/images/common/ic_validationError32.png',
 						sticky: true,
 						time: 2500
