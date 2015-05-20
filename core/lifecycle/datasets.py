@@ -230,12 +230,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             self.dataset_revision.delete()
             self._update_last_revisions()
-            
 
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
 
     def _remove_all(self):
+        # Remove all asociated datastreams revisions
+        for datastream_revision in DataStreamRevision.objects.filter(dataset=self.dataset.id):
+            datastream_revision.delete()
         self.dataset.delete()
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
