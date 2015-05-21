@@ -20,3 +20,16 @@ amazon:
 
 queues:
   request_queue: ''
+
+datastore:
+  use: 'sftp'
+  sftp:
+    host: 'localhost'
+    port: 22
+    user: vagrant
+    password: datal
+    privateKey:
+    passphrase:
+    remote_base_folder: datastore/resources/
+    local_tmp_folder: datastore/tmp/
+    public_base_url:
