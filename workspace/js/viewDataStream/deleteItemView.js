@@ -52,6 +52,13 @@ var DeleteItemView = Backbone.View.extend({
 			var resource = model.get('title');
 
 			model.remove_revision({
+				
+                beforeSend: function(xhr, settings){
+                    // Prevent override of global beforeSend
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    // Show Loading
+                    $("#ajax_loading_overlay").show();
+                },
 
 				success: function(response, a) {
 					$.gritter.add({
@@ -63,10 +70,6 @@ var DeleteItemView = Backbone.View.extend({
 					});
 					self.closeOverlay();
 					self.undelegateEvents();
-
-					console.log(response);
-					console.log(a);
-					console.log(a['revision_id']);
 
                     var deleteRevisionID = a['revision_id'],
                         location = window.location.href,
@@ -82,7 +85,7 @@ var DeleteItemView = Backbone.View.extend({
 
                     setTimeout(function () {
                            window.location = setURL;
-                    }, 2000000000);
+                    }, 2000);
 				},
 
 				error: function() {

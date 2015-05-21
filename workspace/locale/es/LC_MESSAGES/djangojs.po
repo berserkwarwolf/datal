@@ -825,3 +825,9 @@ msgstr "Mostrar catálogo de recursos."
 
 msgid "APP-REDIRECTING-TEXT"
 msgstr "Redireccionando..."
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
+msgstr "Eliminar vistas"
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT"
+msgstr "Error al eliminar la revisión de la vista."
