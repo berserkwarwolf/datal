@@ -53,7 +53,7 @@ var DeleteItemView = Backbone.View.extend({
 
 			model.remove_revision({
 
-				success: function() {
+				success: function(response, a) {
 					$.gritter.add({
 						title: gettext('APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE'),
 						text: resource + ": " + gettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT'),
@@ -63,7 +63,26 @@ var DeleteItemView = Backbone.View.extend({
 					});
 					self.closeOverlay();
 					self.undelegateEvents();
-					// window.location = url 'manageDataviews.review' datastream.datastream_revision_id;
+
+					console.log(response);
+					console.log(a);
+					console.log(a['revision_id']);
+
+                    var deleteRevisionID = a['revision_id'],
+                        location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/");
+
+                    if(deleteRevisionID == -1){
+                        setURL = joinURL;
+                    }else{
+                        setURL = joinURL + "/" + deleteRevisionID;
+                    }
+
+                    setTimeout(function () {
+                           window.location = setURL;
+                    }, 2000000000);
 				},
 
 				error: function() {

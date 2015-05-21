@@ -82,7 +82,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
             resource = model.get('title');
             model.remove({
 
-                success: function() {
+                success: function(response, a) {
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text:  resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-TEXT'),
@@ -92,6 +92,16 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     });
                     self.closeOverlay();
                     self.undelegateEvents();
+
+                    var location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/");
+
+                    setTimeout(function () {
+                        window.location = joinURL;
+                    }, 2000);
+                    
                 },
 
                 error: function() {
