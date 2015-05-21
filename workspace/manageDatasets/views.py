@@ -121,12 +121,26 @@ def remove(request, id, type="resource"):
 
     if type == 'revision':
         lifecycle.remove()
-        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')]}))
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT'))
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.dataset.last_revision:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+                'revision_id': lifecycle.dataset.last_revision.id,
+            }))
+        else:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+                'revision_id': -1,
+            }))
     else:
         lifecycle.remove(killemall=True)
-        return HttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')]}), content_type='text/plain')
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'))
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
 
 @login_required
 @require_privilege("workspace.can_create_dataset")
