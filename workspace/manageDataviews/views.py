@@ -126,12 +126,26 @@ def remove(request, id,type="resource"):
 
     if type == 'revision':
         lifecycle.remove()
-        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'))
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.datastream.last_revision:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
+                'revision_id': lifecycle.datastream.last_revision.id,
+            }))
+        else:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
+                'revision_id': -1,
+            }))
     else:
-        removes = lifecycle.remove(killemall=True)
-        return HttpResponse(json.dumps({'status': 'True', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}))
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT'))
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
 
 @login_required
 @require_http_methods(['POST', 'GET'])
