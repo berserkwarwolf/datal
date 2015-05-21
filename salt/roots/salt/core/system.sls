@@ -5,3 +5,4 @@ local_hosts:
       - workspace
       - microsites
       - microsite
+      - datastore
