@@ -13,7 +13,6 @@ sass_install:
     - mode: 755
     - makedirs: True
 
-{% if pillar['datastore']['sftp']['remote_base_folder']%}
 # Create data store resources directory
 {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
   file.directory:
@@ -22,9 +21,6 @@ sass_install:
     - mode: 755
     - makedirs: True
 
-{% endif %}
-
-{% if pillar['datastore']['sftp']['local_tmp_folder']%}
 # Create data store temporary directory
 {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['local_tmp_folder'] }}:
   file.directory:
@@ -32,8 +28,6 @@ sass_install:
     - group: {{ group }}
     - mode: 755
     - makedirs: True
-
-{% endif %}
 
 # Set directory owner
 directory_structure:
