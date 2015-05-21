@@ -33,6 +33,7 @@ PAGINATION_RESULTS_PER_PAGE = 10
 SECOND_LANGUAGE = 'es'
 
 INSTALLED_APPS += (
+    'django.contrib.messages',
     'workspace',
     'django.contrib.sessions',
 )
@@ -53,6 +54,10 @@ STATICFILES_DIRS += (os.path.join(PROJECT_PATH, 'workspace/media/'),)
 if DEBUG:
     INSTALLED_APPS += (
         'selenium',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS += (
+    'django.contrib.messages.context_processors.messages',
 )
 
 try:
