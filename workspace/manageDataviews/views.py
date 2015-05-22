@@ -127,11 +127,11 @@ def remove(request, id,type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.datastream.last_revision:
+        if lifecycle.datastream.last_revision_id:
             return JSONHttpResponse(json.dumps({
                 'status': True,
                 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
-                'revision_id': lifecycle.datastream.last_revision.id,
+                'revision_id': lifecycle.datastream.last_revision_id,
             }))
         else:
             return JSONHttpResponse(json.dumps({
