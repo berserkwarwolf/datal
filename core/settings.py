@@ -40,6 +40,7 @@ USE_L10N = True
 SECRET_KEY = ''
 
 INSTALLED_APPS = (
+    'sass_processor',
     'south',
     'django.contrib.staticfiles',
     'django_extensions',
@@ -297,13 +298,21 @@ STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
 
 # Django Compress y SASS
 COMPRESS_PRECOMPILERS = (
-    ('text/scss', 'sass --scss {infile} {outfile}'),
+    #('text/x-scss', 'core.lib.SCSSPreCompiler.PatchedSCSSCompiler'),
+    #('text/scss', 'sass --scss {infile} {outfile}'),
 )
 
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'sass_processor.finders.CssFinder',
+)
+
+SASS_PROCESSOR_INCLUDE_DIRS = (
+    os.path.join(PROJECT_PATH, 'core/media/styles'),
+    os.path.join(PROJECT_PATH, 'microsites/media/styles'),
+    os.path.join(PROJECT_PATH, 'workspace/media/styles'),
 )
 
 try:
