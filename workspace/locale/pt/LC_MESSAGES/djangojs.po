@@ -842,3 +842,9 @@ msgstr "Show resources catalog."
 
 msgid "APP-REDIRECTING-TEXT"
 msgstr "Redirecting..."
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
+msgstr "Delete Datastream"
+
+msgid "APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT"
+msgstr "Error on deleteing the datastream revision."

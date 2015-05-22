@@ -82,6 +82,13 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
         _.each(this.options.models, function(model) {
             resource = model.get('title')
             model.remove({
+                
+                beforeSend: function(xhr, settings){
+                    // Prevent override of global beforeSend
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    // Show Loading
+                    $("#ajax_loading_overlay").show();
+                },
 
                 success: function() {
                     $.gritter.add({
@@ -93,6 +100,15 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     });
                     self.closeOverlay();
                     self.undelegateEvents();
+
+                    var location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/");
+
+                    setTimeout(function () {
+                        window.location = joinURL;
+                    }, 2000);
                 },
 
                 error: function() {

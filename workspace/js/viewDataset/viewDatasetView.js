@@ -14,6 +14,8 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.render();
+
+        console.log(this.model.toJSON());
 	},
 
 	render: function(){
