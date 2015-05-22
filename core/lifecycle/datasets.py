@@ -228,9 +228,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
 
-            self.dataset_revision.delete()
-            self._update_last_revisions()
+            # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
+            # completa el valor correspondiente.
+            self.dataset.last_published_revision=None
+            self.dataset.save()
 
+            self.dataset_revision.delete()
+
+        self._update_last_revisions()
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
 
