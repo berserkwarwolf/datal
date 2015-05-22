@@ -71,10 +71,8 @@
 <h2 class="FL">{{datastream.title|capfirst}}</h2>
 <ul class="actions FR">
   
-  {% if datastream.status != 1 %}
   <!-- Edit -->
-  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
-  {% endif %}
+  <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}" style="display:{% if datastream.status != 1 %}block{% else %}none;{% endif %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
 
   <!-- Delete -->
   <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>

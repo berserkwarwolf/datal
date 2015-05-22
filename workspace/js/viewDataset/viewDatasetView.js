@@ -148,6 +148,9 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 					// Hide Review Bar
 					self.$el.find('#id_reviewBar').hide();
 
+					// Show Edit button
+					self.$el.find('#id_edit').show();
+
 					// Update Heights
 					setTimeout(function(){
 						self.setSidebarHeight();

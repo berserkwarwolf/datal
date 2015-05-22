@@ -130,6 +130,12 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 					// Hide Review Bar
 					self.$el.find('#id_reviewBar').hide();
 
+					// Show Edit button
+					self.$el.find('#id_edit').show();
+
+					// Update overlay Edit status
+					// self.options.datastreamEditItemModel.set('status',response.datastream_status_id);
+
 					// Update Heights
 					setTimeout(function(){
 						self.updateHeights();
