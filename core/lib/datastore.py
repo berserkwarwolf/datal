@@ -11,6 +11,20 @@ from abc import ABCMeta, abstractmethod
 from uuid import uuid4 as UUID
 
 
+class datastore:
+    """ save and recovery files from another services"""
+    def create(self, bucket_name, data, account_id, user_id):
+        pass
+
+    def build_url(self, bucket_name, key, response_headers=None, force_http=False):
+        pass
+
+    def update_s3_file(self, request, generated_name):
+        pass
+
+    def save_to_s3(self, bucket_name, keyname, data):
+        pass
+
 
 class Datastore:
     """ Clase abstracta de la cual todos los tipos de datastore deben heredar """
@@ -74,63 +88,75 @@ class s3(Datastore):
         k.set_contents_from_file(File)
         
         
-class sftp(Datastore):
-    """ creates and updates files on sftp """
-
-    connection = None
-
+class datastore_sftp(datastore):
+    """ collect of independent functions, not really a Class """
     def __init__(self):
         self.base_folder = settings.SFTP_DATASTORE_REMOTEBASEFOLDER # remote path for saving all resources
         self.tmp_folder = settings.SFTP_DATASTORE_LOCALTMPFOLDER # local base folder for saving temporary files before upload
         self.public_base_url = settings.SFTP_PUBLIC_BASE_URL # url for donwloading resources
+        self.buckets = []
+        self.connection = None
 
     def connect(self):
         """ don't use at INIT because it hangs all application"""
+        logger = logging.getLogger(__name__)
+        logger.error('Connecting SFTP %s:%s (%s, %s)' %(settings.SFTP_DATASTORE_HOSTNAME, settings.SFTP_DATASTORE_PORT, settings.SFTP_DATASTORE_USER, settings.SFTP_DATASTORE_PASSWORD) )
 
-        self.connection = sftp.Connection(host=settings.SFTP_DATASTORE_HOSTNAME, port=settings.SFTP_DATASTORE_PORT, username=settings.SFTP_DATASTORE_USER, password=settings.SFTP_DATASTORE_PASSWORD, log=True)
+        con = sftp.Connection(host=settings.SFTP_DATASTORE_HOSTNAME, port=settings.SFTP_DATASTORE_PORT, username=settings.SFTP_DATASTORE_USER, password=settings.SFTP_DATASTORE_PASSWORD, log=True)
+
+        self.connection = con
 
         # list all buckets (folders)
-        self.buckets = self.connection.listdir(path=self.base_folder)
+        try:
+            self.buckets = self.connection.listdir(path=self.base_folder)
+            logger.error('Buckets: %s' %str(self.buckets))
+        except Exception, e:
+            logger.error('Error Connecting SFTP %s' % str(e))
+            self.connection = None
 
-    def create(self, account_id, user_id, bucket_name, file_data):
+    def create(self, bucket_name, data, account_id, user_id):
         """ upload data (file) to the bueck_name folder, Return a key for identify this file
         data is a file_name
         """
-        try:
-            #we save as buket_name / account_id / user_id / UUID
-            folder = '%s/%s' % (str(account_id)[::-1], str(user_id)[::-1])
-            remote_path = '%s/%s/%s' % (self.base_folder, bucket_name, folder)
-            self.connect()
-            self.connection.execute('mkdir -p %s' % remote_path)
-            file_name = UUID()
-            remote_path += '/'.join(file_name)
-            local_path = file_data.path
-            self._put(local_path=local_path, remote_path=remote_path)
+        self.connect()
+        #we save as buket_name / account_id / user_id / UUID
+        folder = "%s/%s" % (str(account_id)[::-1], str(user_id)[::-1])
+        uuid = UUID()
+        key = "%s/%d" % (folder, uuid)
+        final_remote_folder = '%s/%s/%s' % (self.base_folder, bucket_name, folder)
+        self.save_checking_path(local_path=data, folder=final_remote_folder, file_name=str(uuid))
+        return key
 
-            return '%s/%s' % (folder, file_name)
-        except Exception, e:
-            raise SFTPCreateException(e)
-
+    def save_checking_path(self, local_path, folder, file_name):
+        """ ensure path and save """
+        self.connect()
+        self.connection.execute('mkdir -p %s' % folder)
+        final_path = '%s/%s' % (folder, file_name)
+        self.connection.put(local_path, remotepath = final_path)
 
     def build_url(self, bucket_name, key, response_headers=None, force_http=True):
         """ return an URL for downloading resource
         S3 allows expire seconds if it's a private resource, we don't #TODO """
         return '%s/%s/%s' % (self.public_base_url, bucket_name, key)
 
-    def update(self, bucket_name, end_point, file_data):
-        """ update file for existing resource """        
-
-        try:
-            remote_path = "%s/%s/%s" % (self.base_folder, bucket_name, end_point)
-            local_path = file_data.path
-            self._put(local_path=local_path, remote_path = remote_path)
-        except:
-            raise SFTPUpdateException(e)
-
-    def _put(self, local_path, remote_folder):
-        """ ensure path and save """
+    def update_s3_file(self, request, generated_name):
+        """ update file for existing resource """
         self.connect()
-        self.connection.put(local_path, remotepath = remote_path)
+        data = request.FILES['Filedata']
+        final_remote_folder = "%s/%s/%s" % (self.base_folder, request.bucket_name, generated_name)
+        self.connection.put(data.temporary_file_path(), remotepath = final_remote_folder)
+
+    def save_to_s3(self, bucket_name, keyname, data):
+        """ save file to server, like 'create' function """
+        self.connect()
+        import os
+        file_name = os.path.basename(keyname)
+        folder_name = os.path.dirname(keyname)
+        final_remote_folder = '%s/%s/%s' % (self.base_folder, bucket_name, folder_name)
+        #save uploaded file (if file is small DJANGO save it in memory, not at temporary folder)
+        logger = logging.getLogger(__name__)
+        logger.info('Saving uploaded at %s (%s - %s)' % (data.temporary_file_path(),final_remote_folder, file_name ))
+        self.save_checking_path(local_path=data.temporary_file_path(), folder=final_remote_folder, file_name=file_name)
 
 active_datastore = None
 if settings.USE_DATASTORE == 's3':
@@ -141,6 +167,6 @@ if settings.USE_DATASTORE == 's3':
     active_datastore = s3()
 
 elif settings.USE_DATASTORE == 'sftp':
-    active_datastore = sftp()
+    active_datastore = datastore_sftp()
 else:
     raise DatastoreNotFoundException() #TODO define this error
