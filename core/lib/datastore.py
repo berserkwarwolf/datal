@@ -4,7 +4,7 @@ Wrappers para sftp y s3
 Si quiere agregar el suyo extienda la clase datastore e implemente los metodos abstractos. Luego definalo en core/settings.py, instancielo 
 y asignelo a la variable active
 """
-import logging, pysftp as sftp
+import logging, sftp
 from django.conf import settings
 from core.exceptions import *
 from abc import ABCMeta, abstractmethod
