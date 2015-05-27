@@ -78,7 +78,7 @@ var FinishView = StepView.extend({
 
 			// Get Output and Data
 			var output = this.model.get('output'),
-				data = this.model.get('data');			
+				data = this.model.get('data');
 
 			// If output.files has a file, then upload and send data
 			if( !_.isUndefined( output.inputFileId ) && output.files.length > 0 ){
@@ -96,7 +96,12 @@ var FinishView = StepView.extend({
 					$(output.inputFileId).fileupload('send', {
 						files: output.files
 					})
-				).then(function(){
+				).then(function(response){
+					var response = jQuery.parseJSON(response);
+					var output = self.model.get('output');
+					output.revision_id = response.dataset_revision_id;
+					self.model.set('output',output);
+					
 					self.next();
 				});
 
@@ -127,6 +132,10 @@ var FinishView = StepView.extend({
 	},
 
 	onSaveSuccess: function(response){
+		var output = this.model.get('output');
+		output.revision_id = response.dataset_revision_id;
+		this.model.set('output',output);
+
 		this.next();
 	},
 
