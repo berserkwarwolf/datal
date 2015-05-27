@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+
 from workspace.manageDatasets.views import *
 
 urlpatterns = patterns('',
@@ -14,6 +15,7 @@ urlpatterns = patterns('',
         url(r'^related_resources$', related_resources, name='manageDatasets.related_resources'),
         url(r'^review/(?P<dataset_revision_id>\d+)/$', review, name='manageDatasets.review'),
         url(r'^action_load$', action_load, name='manageDatasets.action_load'),
+        url(r'^action_request_file$', action_request_file, name='dataset_manager.action_request_file'),
         url(r'^check_source_url$', check_source_url, name='check_source_url'),
         )
 
