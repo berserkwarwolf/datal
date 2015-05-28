@@ -158,10 +158,10 @@ class datastore_sftp(datastore):
         """
         # We save as buket_name / account_id / user_id / UUID
         folder = "%s/%s" % (str(account_id)[::-1], str(user_id)[::-1])
-        uuid = UUID()
-        key = "%s/%d" % (folder, uuid)
+        uuid = str(UUID())
+        key = "%s/%s" % (folder, uuid)
         final_remote_folder = '%s/%s/%s' % (self.base_folder, bucket_name, folder)
-        self.save_checking_path(uploaded_file=data, folder=final_remote_folder, file_name=str(uuid))
+        self.save_checking_path(uploaded_file=data, folder=final_remote_folder, file_name=uuid)
         return key
 
     def save_checking_path(self, uploaded_file, folder, file_name):
