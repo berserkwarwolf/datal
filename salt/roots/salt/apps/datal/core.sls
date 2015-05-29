@@ -46,7 +46,6 @@ create_env:
     - system_site_packages: False
     - requirements: {{ pillar['virtualenv']['requirements'] }}
     - user: {{ user }}
-    - group: {{ group }}
 
 # Activate virtualenv on login
 /home/{{ user }}/.bashrc:
@@ -54,8 +53,6 @@ create_env:
     - text:
       - "source {{ pillar['virtualenv']['path'] }}/bin/activate"
       - "cd {{ pillar['application']['path'] }}"
-    - user: {{ user }}
-    - group: {{ group }}
 
 local_settings:
   file.managed:

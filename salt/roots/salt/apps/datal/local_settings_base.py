@@ -21,6 +21,7 @@ SEARCHIFY = {
     'api_url': '{{  pillar["searchers"]["searchify"]["api_url"] }}',
     'index': '{{  pillar["searchers"]["searchify"]["index"] }}'
 }
+SEARCH_MAX_RESULTS = 100
 
 DOMAINS = {'api': '{{  pillar["application"]["settings"]["domains"]["api"] }}',
            'microsites': '{{  pillar["application"]["settings"]["domains"]["microsites"] }}',

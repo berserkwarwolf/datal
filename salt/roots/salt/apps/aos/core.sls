@@ -5,8 +5,6 @@ extract_war:
       - /var/lib/tomcat7/webapps/workspace/AgileOfficeServer/
     - source: salt://apps/aos/war/AgileOfficeServer.war
     - archive_format: zip
-    - user: tomcat7
-    - group: tomcat7
     - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer
 
 extract_services_war:
@@ -15,8 +13,6 @@ extract_services_war:
       - /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices/
     - source: salt://apps/aos/war/AgileOfficeScraperServices.war
     - archive_format: zip
-    - user: tomcat7
-    - group: tomcat7
     - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices
 
 microsites_config:

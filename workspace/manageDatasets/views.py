@@ -1,4 +1,5 @@
-from django.http import HttpResponse
+import urllib2
+
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
 from django.core.urlresolvers import reverse
@@ -7,19 +8,47 @@ from django.http import Http404, HttpResponse
 from core.helpers import get_mimetype
 
 from api.http import JSONHttpResponse
+from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
-from core.exceptions import LifeCycleException
+from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from workspace.daos.datasets import DatasetDBDAO
-from core import engine
 
 
 logger = logging.getLogger(__name__)
+
+@login_required
+@require_privilege("workspace.can_query_dataset")
+@require_GET
+def action_request_file(request):
+    from boto.s3.connection import S3Connection
+
+    form = RequestFileForm(request.GET)
+
+    if form.is_valid():
+        dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
+        file_name = dataset_revision.end_point[+6:]
+
+        s3 = S3Connection(settings.AWS_ACCESS_KEY, settings.AWS_SECRET_KEY, is_secure=False)
+        url = s3.generate_url(300, 'GET', bucket=request.bucket_name, key=file_name, force_http=True)
+
+        try:
+            response = HttpResponse(mimetype='application/force-download')
+            response['Content-Disposition'] = 'attachment; filename=' + dataset_revision.filename.encode('utf-8')
+            response.write(urllib2.urlopen(url).read())
+        except:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(url)
+    else:
+        response = {'status' : 'error', 'messages' : [ugettext('URL-RETRIEVE-ERROR')] }
+
+    return response
 
 @login_required
 @require_privilege("workspace.can_query_dataset")

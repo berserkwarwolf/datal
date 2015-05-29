@@ -66,8 +66,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         if file_data is not None:
             fields['file_size'] = file_data.size
             fields['file_name'] = file_data.name
-            fields['end_point'] = 'file://' + active_datastore.create(self.user.account.id, self.user.id,
-                                                                      settings.AWS_BUCKET_NAME, file_data)
+            fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data.file,
+                                                                      self.user.account.id, self.user.id)
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
@@ -87,7 +87,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         search_dao = DatasetSearchDAOFactory().create()
         search_dao.add(self.dataset_revision)
 
-        
         return self.dataset_revision
 
     def publish(self, allowed_states=PUBLISH_ALLOWED_STATES):
