@@ -88,8 +88,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
         self._log_activity( ActionStreams.CREATE)
 
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision)
+	# solo se debe ejecutar esto al publicar
+        #search_dao = DatasetSearchDAOFactory().create()
+        #search_dao.add(self.dataset_revision)
 
         return self.dataset_revision
 
