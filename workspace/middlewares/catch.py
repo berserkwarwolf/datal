@@ -69,7 +69,7 @@ class ExceptionManager(object):
 
         response = tpl.render(title=error_title, description=error_description, request=request, extras=extras)
 
-        logger.error('%s. %s -extras=%s %s' % ("[CatchError] " + error_title, error_description,
+        logger.error('%s. %s -extras=%s %s' % ("[CatchError] " + str(error_title), str(error_description),
                                                    json.dumps(extras), trace))
         return HttpResponse(response, mimetype=mimetype, status=status_code)
 

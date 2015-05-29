@@ -15,7 +15,7 @@ VirtualBox: https://www.virtualbox.org/
 Instalacion
 -----------
 
-1. git sobmodule init
+1. git submodule init
 2. git submodule update
 3. Crear un archivo en salt/roots/pillar/local.sls con el formato igual a salt/roots/pillar/local_demo.sls completando los datos necesarios.
 4. Agregar los siguientes hosts a nuestro archivo de hosts: 

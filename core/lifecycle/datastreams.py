@@ -54,7 +54,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 language=self.datastream.user.language
             )
 
-    def create(self,allowed_states=CREATE_ALLOWED_STATES, **fields):
+    def create(self, allowed_states=CREATE_ALLOWED_STATES, **fields):
         """ Create a new DataStream """
 
         # Check for allowed states

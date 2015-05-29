@@ -1,3 +1,5 @@
+{% set user = pillar['system']['user'] %}
+
 SECRET_KEY = '{{ pillar["application"]["settings"]["secret_key"] }}'
 ROOT_URLCONF = '{{ pillar["application"]["settings"]["root_urlconf"] }}'
 
@@ -19,6 +21,7 @@ SEARCHIFY = {
     'api_url': '{{  pillar["searchers"]["searchify"]["api_url"] }}',
     'index': '{{  pillar["searchers"]["searchify"]["index"] }}'
 }
+SEARCH_MAX_RESULTS = 100
 
 DOMAINS = {'api': '{{  pillar["application"]["settings"]["domains"]["api"] }}',
            'microsites': '{{  pillar["application"]["settings"]["domains"]["microsites"] }}',
@@ -78,3 +81,12 @@ MAILCHIMP = {
             }
 
 MANDRILL = {'api_key': "{{ pillar['mail_list']['mandrill']['api_key'] }}"}
+
+USE_DATASTORE = "{{ pillar['datastore']['use'] }}"
+SFTP_DATASTORE_REMOTEBASEFOLDER = "{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}" # remote path for saving all resources
+SFTP_DATASTORE_LOCALTMPFOLDER = "{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['local_tmp_folder'] }}" # local base folder for saving temporary files before upload
+SFTP_PUBLIC_BASE_URL = "{{ pillar['datastore']['sftp']['public_base_url'] }}" # url for donwloading resources
+SFTP_DATASTORE_HOSTNAME = "{{ pillar['datastore']['sftp']['host'] }}"
+SFTP_DATASTORE_PORT = {{ pillar['datastore']['sftp']['port'] }}
+SFTP_DATASTORE_USER = "{{ pillar['datastore']['sftp']['user'] }}"
+SFTP_DATASTORE_PASSWORD = "{{ pillar['datastore']['sftp']['password'] }}"

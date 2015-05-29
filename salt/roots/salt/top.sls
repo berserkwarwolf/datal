@@ -14,3 +14,4 @@ base:
     - core.selenium
     - apps.aos.core
     - apps.datal.core
+    - core.indextank
