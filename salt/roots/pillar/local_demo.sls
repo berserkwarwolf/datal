@@ -6,11 +6,6 @@ amazon:
     accesskey: ''
     secretkey: ''
 
-searchers:
-  searchify:
-    api_url: ''
-    index: ''
-
 application:
   cdn: ''
   api_key: ''
