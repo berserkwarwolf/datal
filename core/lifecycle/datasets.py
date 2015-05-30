@@ -28,6 +28,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
 
+	#self.logger = logging.getLogger(__name__)
+
         try:
             if type(resource) == Dataset:
                 self.dataset = resource
@@ -74,7 +76,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset, self.dataset_revision = DatasetDBDAO().create(user=self.user,
             collect_type=collect_type, title=fields['title'], description=fields['description'],
-            language=language, status=status, category=fields['category'], impl_type=fields['impl_type'],
+            language=language, status=int(status), category=fields['category'], impl_type=fields['impl_type'],
             file_name=fields['file_name'], end_point=fields['end_point'], file_size=fields.get('file_size', 0),
             notes=fields.get('notes', ''), license_url=fields.get('license_url',''), spatial=fields.get('spatial', ''),
             frequency=fields.get('frequency', ''), mbox=fields.get('mbox', ''), tags=fields.get('tags', []),
@@ -260,7 +262,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if 'status' in fields.keys():
-            form_status = fields.pop('status', None)
+	    # el fields.pop trae un unicode y falla al comparar con los Status
+            form_status = int(fields.pop('status', None))
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
