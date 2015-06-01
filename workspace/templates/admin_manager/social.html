@@ -1,10 +1,10 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components compress staticfiles %}
+{% load i18n extra_tags components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/accountAdmin.scss' %}" type="text/scss" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script src="/js_workspace/admin_manager/social.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
 <meta name="main-option" content="id_settings_option"/>

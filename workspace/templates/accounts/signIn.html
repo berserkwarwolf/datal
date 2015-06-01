@@ -1,10 +1,15 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags compress staticfiles %}
+{% load i18n extra_tags compress staticfiles sass_tags %}
 
 {% block meta %}
-{% compress css %}
-<link href="{% static 'workspace/styles/accounts.scss' %}" type="text/scss" rel="stylesheet" media="screen"/>
-{% endcompress %}
+
+{% block css_includes %}
+  {% compress css %}
+    <link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
+  <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+  {% endcompress %}
+{% endblock %}
+
 <script type="text/javascript" src="/js_workspace/accounts/signInModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/accounts/signInView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}

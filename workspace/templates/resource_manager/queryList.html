@@ -1,9 +1,9 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
 <script type="text/javascript" src="/js_core/plugins/jquery.url.packed.js?id={{settings.VERSION_JS_CSS}}"></script>

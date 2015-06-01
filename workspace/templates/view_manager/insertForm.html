@@ -1,5 +1,5 @@
 {% extends "base_workspace.html" %}
-{% load i18n extra_tags core_components components compress staticfiles %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block title %}
 	{% trans "APP-ACTIONS-CREATEVIEW" %}
@@ -8,23 +8,23 @@
 {% block meta %}
     {% compress css %}
 	<!-- DATA TABLE -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataTable.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataTable.css' %}"/>
 	<!-- DATA STREAM BOX -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamBox.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
 	<!-- DATA STREAM FORM -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamForm.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamForm.css' %}"/>
 	<!-- TAGS CONTAINER -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/tagsContainer.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/tagsContainer.css' %}"/>
 	<!-- COMPONENT -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/createDataView.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'workspace/styles/createDataView.css' %}"/>
 	<!-- COMMON -->
-	<link href="{% static 'workspace/styles/createCommon.scss' %}" type="text/scss" rel="stylesheet" media="screen"/>
+	<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/scss" rel="stylesheet" media="screen"/>
 	
 	<!--[if IE]>
-		<link href="{% static 'workspace/styles/ao.tableStyles.css' %}" media="screen" rel="stylesheet" type="text/css"/>
+		<link href="{% sass_src 'workspace/styles/ao.tableStyles.css' %}" media="screen" rel="stylesheet" type="text/css"/>
 	<![endif]-->
 
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/ao.tableStyles.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/ao.tableStyles.css' %}"/>
 	{% endcompress %}
 
 	<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>

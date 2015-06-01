@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n humanize extra_tags core_components compress staticfiles %}
+{% load i18n humanize extra_tags core_components compress staticfiles sass_tags %}
 
 {% block SEO %}
 	<title>{% if pageTitle %}{{pageTitle}}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
@@ -8,12 +8,12 @@
 {% block meta %}
     {% compress css %}
 	<!-- CSS -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamBox.css' %}"/>
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/homeModules.css' %}"/>
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/loadHome.css' %}" />
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/homeModules.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/loadHome.css' %}" />
 
 	<!-- BRANDED CSS -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/brandedFull.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
     {% endcompress %}
 
 	<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>

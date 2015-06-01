@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n components extra_tags compress staticfiles %}
+{% load i18n components extra_tags compress staticfiles sass_tags %}
 
 {% block SEO %}
     <title>{{dashboard.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -14,20 +14,20 @@
 
     {% compress css %}
     <!-- BLOCK PAGE TITLE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/blockPageTitle.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/modules/blockPageTitle.css' %}"/>
     <!-- DATA STREAM BOX -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamBox.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
     <!-- DATA STREAM FORM -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamForm.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamForm.css' %}"/>
     <!-- TAGS CONTAINER -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/tagsContainer.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/tagsContainer.css' %}"/>
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/brandedFull.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
+    <!-- DASHBOARD FIX-->
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/components/dashboardfix.css' %}"/>
+    {% endcompress %}
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-    <!-- DASHBOARD FIX-->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/dashboardfix.css' %}"/>
-    {% endcompress %}
 
     {% if preferences.account_enable_sharing %}
         <script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&amp;login=junar&amp;apiKey=R_4da011b2ee9f2ee2cf80ed8122b73391"></script>

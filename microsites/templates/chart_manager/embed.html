@@ -1,4 +1,4 @@
-{% load i18n extra_tags components compress staticfiles %}
+{% load i18n extra_tags components compress staticfiles sass_tags %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,22 +6,22 @@
 	<meta charset="utf-8">
     {% compress css %}
 	<!-- RESET -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/reset.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/reset.css' %}"/>
 	<!-- DATA STREAM BOX -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/dataStreamBox.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
 	<!-- COMMON MODULES -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/commonModules.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/commonModules.css' %}"/>
 	<!-- BUTTONS -->
-	<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/buttons.css' %}"/>
+	<link rel="stylesheet" media="screen" type="text/css" href="{% sass_src 'core/styles/buttons.css' %}"/>
 	<!-- COMPONENT -->
-	<link rel="stylesheet" media="screen" type="text/css" href="{% static 'core/styles/embed.css' %}"/>
+	<link rel="stylesheet" media="screen" type="text/css" href="{% sass_src 'core/styles/embed.css' %}"/>
 
 	{% if preferences.enable_embed_options %}
 		<!-- BRANDED -->
-		<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/brandedFull.css' %}"/>
-        <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-        <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+		<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
 	{% endif %}
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 
     {% endcompress %}
 
