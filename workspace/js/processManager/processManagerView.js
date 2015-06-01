@@ -51,6 +51,14 @@ var ProcessManagerView = Backbone.View.extend({
 
 		// Save
 		}else if( this.index == (this.steps.length-1) ){
+
+			var newRevisionId = output.revision_id;
+
+			if( !_.isUndefined(newRevisionId) ){
+				var newURL = this.model.get('finishUrl') + newRevisionId;
+				this.model.set('finishUrl',  newURL);	
+			};
+
 			this.finish();
 		}
 

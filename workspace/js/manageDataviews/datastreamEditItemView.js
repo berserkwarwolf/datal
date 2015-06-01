@@ -36,7 +36,19 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     render: function(){
+        var self = this;
         this.$el.data('overlay').load();
+
+        // Bind custom model validation callbacks
+        Backbone.Validation.bind(this, {
+            valid: function (view, attr, selector) {
+                self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
+            },
+            invalid: function (view, attr, error, selector) {
+                self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
+            }
+        });
+
         return this;
     },
 
@@ -115,6 +127,22 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
         this.$el.find('#sourceForm .sourcesContent').html('');
         this.$el.find('#tagForm .tagsContent').html('');
         $('.nicEdit-main').html('');
-    }
+    },
+
+    setIndividualError: function(element, name, error){
+
+        // If not valid
+        if( error != ''){
+            element.addClass('has-error');
+            element.next('span').next().remove();
+            element.next().after('<p class="has-error">'+error+'</p>');
+
+        // If valid
+        }else{
+            element.removeClass('has-error');
+            element.next('span').next().remove();
+        }
+
+    },
 
 });

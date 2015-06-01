@@ -1,11 +1,31 @@
+{% set user = pillar['system']['user'] %}
+{% set group = pillar['system']['group'] %}
+
 sass_install:
   gem.installed:
     - name: sass
 
+# Create static files directory
 {{ pillar['application']['statics_dir'] }}:
   file.directory:
-    - user: {{ pillar['system']['user'] }}
-    - group: {{ pillar['system']['group'] }}
+    - user: {{ user }}
+    - group: {{ group }}
+    - mode: 755
+    - makedirs: True
+
+# Create data store resources directory
+{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ group }}
+    - mode: 755
+    - makedirs: True
+
+# Create data store temporary directory
+{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['local_tmp_folder'] }}:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ group }}
     - mode: 755
     - makedirs: True
 
@@ -13,7 +33,8 @@ sass_install:
 directory_structure:
   file.directory:
     - name: {{ pillar['virtualenv']['path'] }}
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - follow_symlinks: False
     - recurse:
       - user
@@ -24,26 +45,27 @@ create_env:
     - name: {{ pillar['virtualenv']['path'] }}
     - system_site_packages: False
     - requirements: {{ pillar['virtualenv']['requirements'] }}
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
 
 # Activate virtualenv on login
-/home/{{ pillar['system']['user'] }}/.bashrc:
+/home/{{ user }}/.bashrc:
   file.append:
     - text:
       - "source {{ pillar['virtualenv']['path'] }}/bin/activate"
       - "cd {{ pillar['application']['path'] }}"
-    - user: {{ pillar['system']['user'] }}
 
 local_settings:
   file.managed:
     - name: {{ pillar['application']['path'] }}/core/local_settings.py
     - source: salt://apps/datal/local_settings_base.py
     - template: jinja
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
 
 sync_db:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py syncdb --noinput --settings=core.settings
@@ -54,21 +76,24 @@ sync_db:
 
 migrate_db:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core --settings=core.settings
 
 fixtures:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  core/fixtures/* --settings=core.settings
 
 language:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py compilemessages --settings=workspace.settings
@@ -76,29 +101,32 @@ language:
 
 core_statics:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=core.settings --noinput
 
 microsites_statics:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=microsites.settings --noinput
 
 workspace_statics:
   cmd.run:
-    - user: {{ pillar['system']['user'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py collectstatic --settings=workspace.settings --noinput
 
 /tmp/datal.log:
   file.managed:
-    - user: {{ pillar['system']['user'] }}
-    - group: {{ pillar['system']['group'] }}
+    - user: {{ user }}
+    - group: {{ group }}
     - mode: 777
 
 include:

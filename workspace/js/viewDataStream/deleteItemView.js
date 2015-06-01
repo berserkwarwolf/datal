@@ -11,7 +11,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		// this.parentView = this.options.parentView;
 
 		// init Overlay
 		this.$el.overlay({
@@ -38,7 +38,6 @@ var DeleteItemView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
 			collection: affectedResourcesCollection,
-			itemCollection: this.options.itemCollection,
 			models: this.options.models,
 			type: this.options.type
 		});
@@ -53,8 +52,15 @@ var DeleteItemView = Backbone.View.extend({
 			var resource = model.get('title');
 
 			model.remove_revision({
+				
+                beforeSend: function(xhr, settings){
+                    // Prevent override of global beforeSend
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    // Show Loading
+                    $("#ajax_loading_overlay").show();
+                },
 
-				success: function() {
+				success: function(response, a) {
 					$.gritter.add({
 						title: gettext('APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE'),
 						text: resource + ": " + gettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT'),
@@ -64,12 +70,28 @@ var DeleteItemView = Backbone.View.extend({
 					});
 					self.closeOverlay();
 					self.undelegateEvents();
+
+                    var deleteRevisionID = a['revision_id'],
+                        location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/");
+
+                    if(deleteRevisionID == -1){
+                        setURL = joinURL;
+                    }else{
+                        setURL = joinURL + "/" + deleteRevisionID;
+                    }
+
+                    setTimeout(function () {
+                           window.location = setURL;
+                    }, 2000);
 				},
 
 				error: function() {
 					$.gritter.add({
-						title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-						text: resource + ": " + gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
+						title: gettext('APP-OVERLAY-DELETE-DATASTREAM-TITLE'),
+						text: resource + ": " + gettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'),
 						image: '/static/workspace/images/common/ic_validationError32.png',
 						sticky: true,
 						time: 2500
@@ -87,4 +109,5 @@ var DeleteItemView = Backbone.View.extend({
 	closeOverlay: function() {
 		this.$el.data('overlay').close();
 	}
+
 });

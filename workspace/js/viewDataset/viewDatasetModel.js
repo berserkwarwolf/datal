@@ -1,7 +1,10 @@
 var ViewDatasetModel = Backbone.Model.extend({
 
 	defaults: {
-		reviewURL: "/"
+		reviewURL: "/",
+        id: "",
+        dataset_id: "",
+        title: ""
 	},
 
 	remove: function (options) {

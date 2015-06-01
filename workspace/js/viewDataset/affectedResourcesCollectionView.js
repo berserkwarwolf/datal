@@ -9,8 +9,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
         "click .close, .cancel": "closeOverlay",
     },
 
-    initialize: function(options) {
-        
+    initialize: function(options) {        
         this.options = options;
 
         // init Overlay
@@ -38,7 +37,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     type: self.options.type
                 }),
                 success: function(model, response) {
-
+                    
                     if (self.collection.length > 0) {
                         _(self.collection.models).each(function(model) {
                             self.addResource(model);
@@ -60,7 +59,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
 
         });
 
-        this.collection.bind('reset', this.render)
+        this.collection.bind('reset', this.render);
         
     },
 
@@ -80,10 +79,17 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
     deleteRelatedResources: function() {
         var self = this;
         _.each(this.options.models, function(model) {
-            resource = model.get('title')
+            resource = model.get('title');
             model.remove({
+                
+                beforeSend: function(xhr, settings){
+                    // Prevent override of global beforeSend
+                    $.ajaxSettings.beforeSend(xhr, settings);
+                    // Show Loading
+                    $("#ajax_loading_overlay").show();
+                },
 
-                success: function() {
+                success: function(response, a) {
                     $.gritter.add({
                         title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
                         text:  resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-TEXT'),
@@ -93,9 +99,16 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     });
                     self.closeOverlay();
                     self.undelegateEvents();
-                    self.options.itemCollection.fetch({
-                        reset: true
-                    });
+
+                    var location = window.location.href,
+                        splitURL = location.split("/"),
+                        cutURL = splitURL.slice(0, -1),
+                        joinURL = cutURL.join("/");
+
+                    setTimeout(function () {
+                        window.location = joinURL;
+                    }, 2000);
+                    
                 },
 
                 error: function() {

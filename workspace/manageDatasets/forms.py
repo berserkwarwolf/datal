@@ -14,6 +14,10 @@ from workspace.common.forms import TagForm, SourceForm
 logger = logging.getLogger(__name__)
 
 
+class RequestFileForm(forms.Form):
+    dataset_revision_id = forms.IntegerField(required=True)
+
+
 class DatasetForm(forms.Form):
 
     # Id

@@ -2,7 +2,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	el: '.main-section',
 
-  	template: null,
 	theDataTable: null,
     listResources: null,
     sourceUrl: null,
@@ -16,17 +15,12 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
         "click #id_edit": "onEditButtonClicked",
 	},
 
-	/* bindings: {
-        '.dataTable header h1 strong': 'text:title',
-        '.dataTable header h2': 'text:description',
-		'.sidebar-container #id_status': 'text:status',
-		'.sidebar-container #id_category': 'text:category',
-		'.sidebar-container .notes': 'text:notes',
-	}, */
+	bindings: {
+        '#id_status': 'text:status',
+	},
 
 	initialize: function(){
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
-		this.template = _.template( $("#id_SidebarTemplate").html() );
 		this.render();
 
         this.sourceUrl = this.options.sourceUrl;
@@ -38,7 +32,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
-   	 	this.$el.find('.sidebar-container').html( this.template( this.model.toJSON() ) );
 		this.setSidebarHeight();
 		return this;
 	},
@@ -137,6 +130,12 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 					// Hide Review Bar
 					self.$el.find('#id_reviewBar').hide();
 
+					// Show Edit button
+					self.$el.find('#id_edit').show();
+
+					// Update overlay Edit status
+					// self.options.datastreamEditItemModel.set('status',response.datastream_status_id);
+
 					// Update Heights
 					setTimeout(function(){
 						self.updateHeights();
@@ -230,13 +229,13 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
     },
 
 	onDeleteButtonClicked: function(){
-		self = this;
+        self = this;
         this.deleteListResources = new Array();
         this.deleteListResources.push(this.options.model);
         var deleteItemView = new DeleteItemView({
-            itemCollection: self.options.itemCollection,
             models: this.deleteListResources,
-            type: "datastreams",
+            //type: "datastreams",
+            type: "visualizations",
             parentView: this.parentView
         });
 	},

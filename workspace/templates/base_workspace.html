@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
-{% load compress staticfiles %}
+{% load compress staticfiles sass_tags %}
 
 {% block css_includes %}
     {% compress css %}
-	<link href="{% static 'workspace/styles/common.scss' %}" type="text/scss" rel="stylesheet" media="screen"/>
+    <link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
     {% endcompress %}
 {% endblock %}
 

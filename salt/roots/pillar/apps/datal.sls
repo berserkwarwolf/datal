@@ -25,8 +25,8 @@ virtualenv:
 
 searchers:
   searchify:
-    api_url: ''
-    index: ''
+    api_url: 'http://localhost:20220'
+    index: 'idx'
 
 email:
     host: ''

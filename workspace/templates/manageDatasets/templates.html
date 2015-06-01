@@ -79,7 +79,7 @@
 				// If FILE
 				if(collect_type == 0){
 			%>
-				<a rel="nofollow" href="/dataset/action_request_file?dataset_revision_id=<%=id%>" id="id_downloadLink" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
+				<a rel="nofollow" href="/datasets/action_request_file?dataset_revision_id=<%=id%>" id="id_downloadLink" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
 			<% 
 				// Else, if URL or WEBSERVICE
 				} else if( collect_type == 1 || collect_type == 2 ){

@@ -1,6 +1,7 @@
 var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 	el: '.main-section',
+    deleteListResources: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
@@ -13,6 +14,8 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.render();
+
+        console.log(this.model.toJSON());
 	},
 
 	render: function(){
@@ -107,11 +110,10 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 	}, 
 
 	onDeleteButtonClicked: function(){
-		self = this;
+        self = this;
         this.deleteListResources = new Array();
         this.deleteListResources.push(this.options.model);
         var deleteItemView = new DeleteItemView({
-            itemCollection: self.options.itemCollection,
             models: this.deleteListResources,
             type: "datastreams",
             parentView: this.parentView
@@ -145,6 +147,9 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 					// Hide Review Bar
 					self.$el.find('#id_reviewBar').hide();
+
+					// Show Edit button
+					self.$el.find('#id_edit').show();
 
 					// Update Heights
 					setTimeout(function(){

@@ -30,9 +30,7 @@
   {% endif %}
 
   <!-- Edit -->
-  {% if dataset.status != 1 %}
-  <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
-  {% endif %}
+  <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
 
   <!-- Delete -->
   <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
@@ -102,7 +100,10 @@
 $(document).ready(function(){
   var viewDatasetModel = new ViewDatasetModel({
     reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
-    status: "{{ dataset.status|status_str }}"
+    status: "{{ dataset.status|status_str }}",
+    id: "{{ dataset.last_revision_id }}",
+    dataset_id: " {{ dataset.dataset_id }}",
+    title: "{{ dataset.title }}"
   });
   var viewDatasetView = new ViewDatasetView({model: viewDatasetModel});
 });

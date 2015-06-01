@@ -1,12 +1,13 @@
 # User and Group settings
-junar_group:
+datal_group:
   group.present:
     - name: {{ pillar['system']['group'] }}
 
-junar_user:
+datal_user:
   user.present:
     - name: {{ pillar['system']['user'] }}
     - fullname: {{ pillar['system']['user'] }}
     - shell: /bin/bash
+    - password: {{ pillar['system']['user_password_hash'] }}
     - groups:
       - {{ pillar['system']['group'] }}

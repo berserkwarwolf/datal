@@ -13,21 +13,21 @@
               {{datastream_form.dataset_revision_id}}
               {{datastream_form.datastream_revision_id}}
               <div class="row clearfix">
-                  <label for="id_datastream-title">{{datastream_form.title.label_tag}}</label>
+                  <label for="id_title">{{datastream_form.title.label_tag}}</label>
                   <div class="formErrorMessageContainer">{{datastream_form.title}}</div>
                   <span class="required">*</span>
                   <p class="tip">{% trans "OVEDITDS-NAME-TIP" %}.</p>
               </div>
               <div class="row clearfix">
-                  <label for="id_datastream-description">{{datastream_form.description.label}}:</label>
+                  <label for="id_description">{{datastream_form.description.label}}:</label>
                   <div class="formErrorMessageContainer">{{datastream_form.description}}</div>
                   <span class="required">*</span>
               </div>
                
 
               <div class="row clearfix">
-                <label for="id_datastream-category">{{datastream_form.category.label}}:</label>
-                <select id="id_datastream-category" class="FL">
+                <label for="id_category">{{datastream_form.category.label}}:</label>
+                <select id="id_category" class="FL">
                     {% for category in categories %}
                                         {% if category.category__id == datastream_revision.category_id %}
                                 <option value="{{category.category__id}}" selected="selected">{{category.name}}</option>
@@ -39,9 +39,9 @@
                 <!-- <span class="required">*</span> -->
             </div>
             <div class="row clearfix">
-                <label for="id_datastream-status">{{datastream_form.status.label}}:</label>
+                <label for="id_status">{{datastream_form.status.label}}:</label>
                 <div class="formErrorMessageContainer">
-                  <select id="id_datastream-status" class="FL" name="datastream-status">
+                  <select id="id_status" class="FL" name="status">
                     <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>
                     {% for choice_id, choice_name in choices %}
                       {# temporary fix #}
@@ -131,9 +131,9 @@
   
                 {# notes #}
                 <div class="row clearfix">
-                  <label for="id_datastream-notes">{% trans 'APP-NOTES-TEXT' %}:</label>
+                  <label for="id_notes">{% trans 'APP-NOTES-TEXT' %}:</label>
                   <div class="textarea clearfix FL">
-                    <textarea name="datastream-notes" id="id_datastream-notes" rows="" cols=""></textarea>
+                    <textarea name="notes" id="id_notes" rows="" cols=""></textarea>
                   </div>
                 </div>
 

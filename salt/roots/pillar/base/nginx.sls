@@ -68,6 +68,15 @@ nginx:
                 - uwsgi_send_timeout: 300
                 - include: /etc/nginx/uwsgi_params
 
+        datastore:
+          enabled: True
+          config:
+            - server:
+              - server_name: 'datastore'
+              - access_log: /var/log/nginx/datastore-access.log
+              - error_log: /var/log/nginx/datastore-error.log
+              - root: /home/vagrant/datastore/
+
         microsite:
           enabled: True
           config:

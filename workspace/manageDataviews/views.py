@@ -126,12 +126,26 @@ def remove(request, id,type="resource"):
 
     if type == 'revision':
         lifecycle.remove()
-        return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')]}))
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT'))
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.datastream.last_revision_id:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
+                'revision_id': lifecycle.datastream.last_revision_id,
+            }))
+        else:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
+                'revision_id': -1,
+            }))
     else:
-        removes = lifecycle.remove(killemall=True)
-        return HttpResponse(json.dumps({'status': 'True', 'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')]}))
-        # raise LifeCycleException(ugettext('APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT'))
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
 
 @login_required
 @require_http_methods(['POST', 'GET'])
@@ -143,7 +157,7 @@ def create(request):
     auth_manager = request.auth_manager
     if request.method == 'POST':
         """ save new or update dataset """
-        form = CreateDataStreamForm(request.POST, prefix='datastream')
+        form = CreateDataStreamForm(request.POST)
 
         if not form.is_valid():
             raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
@@ -155,13 +169,8 @@ def create(request):
             dataset=dataset_revision.dataset,
             language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
-            # TODO: Remove when send from frontend
-            tags=[],
-            sources=[],
-            parameters=[],
-            #
+            parameters=[], #TODO: Add parameters to UI
             **form.cleaned_data
-
         )
 
         response = dict(
