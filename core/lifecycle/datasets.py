@@ -89,11 +89,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity( ActionStreams.CREATE)
 
-	# En caso de seleccionar que este publicado
+        # En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:
-		self.publish(allowed_states=CREATE_ALLOWED_STATES)
+	    self.publish(allowed_states=CREATE_ALLOWED_STATES)
 	else:
-        	self._update_last_revisions()
+            self._update_last_revisions()
 
         return self.dataset_revision
 
