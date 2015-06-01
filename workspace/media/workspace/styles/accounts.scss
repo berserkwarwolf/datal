@@ -1,13 +1,13 @@
 /* Import SASS variables */
 @import 'variables';
+@import 'mixins';
 @import 'functions';
 
 html,
 body{background:$brand-color;}
 
-.account-box{width:320px;margin:0 auto;background:url(../images/common/bg_logoAccountPagesGradient.png) no-repeat center 0;padding-top:100px;margin-top:5%;}
-.account-box > header{height:100px;}
-.account-box > header img{margin-top:15px;}
+.account-box{width:320px;margin:0 auto;padding-top:5%;}
+.account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;width:320px;height:130px;margin:0 auto;}
 .account-box .account-box-content{background:#fff;padding:20px;border:1px solid $brand-color-bold;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;

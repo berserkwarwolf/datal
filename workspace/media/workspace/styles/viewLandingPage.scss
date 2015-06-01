@@ -14,11 +14,11 @@
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
-  -webkit-box-shadow:inset 0 1px 0 0 #ddcdbb, 0 1px 0 0 #fdf7ea;
-     -moz-box-shadow:inset 0 1px 0 0 #ddcdbb, 0 1px 0 0 #fdf7ea;
-          box-shadow:inset 0 1px 0 0 #ddcdbb, 0 1px 0 0 #fdf7ea;
+  -webkit-box-shadow:0 1px 0 0 #fdf7ea;
+     -moz-box-shadow:0 1px 0 0 #fdf7ea;
+          box-shadow:0 1px 0 0 #fdf7ea;
 }
-.getting-started article footer h5{float:left;background:$accent-color;padding:1px 5px;color:#fff;text-shadow:0 1px 0 #1452b0;margin-right:6px;font-size:10px;text-transform:uppercase;
+.getting-started article footer h5{float:left;background:$accent-color;padding:1px 5px;color:#fff;text-shadow:0 1px 0 $accent-color-bold;margin-right:6px;font-size:10px;text-transform:uppercase;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;

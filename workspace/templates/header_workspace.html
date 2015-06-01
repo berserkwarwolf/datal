@@ -11,7 +11,14 @@
 <header class="header clearfix">
 
   <!-- Logo -->
-  <a href="/welcome" title="Junar" class="logo FL clearfix"><img src="{% static 'workspace/images/common/lg_junar.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/></a>
+  <a href="/welcome" title="Junar" class="logo FL clearfix">
+    <div class="radial-gradient">
+      <div class="logo-header-brand"></div>
+    </div>
+    <!--
+    <img src="{% static 'workspace/images/common/lg_junar.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/>
+    -->
+  </a>
 
   {% comment %}
   <!-- Search -->

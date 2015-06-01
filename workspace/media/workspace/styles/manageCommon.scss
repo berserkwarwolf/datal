@@ -15,7 +15,7 @@
 .list-container{width:100%;margin-right:-210px;height:100%;float:left;}
 
 /* Loading */
-.manager > .loading{background:rgba(255,255,255,.4) url(../images/common/im_loadingWhite72.gif) no-repeat center center;left:0;position:absolute;right:0;top:0;bottom:0;text-indent:-10000px;}
+.manager > .loading{background:rgba(255,255,255,.4) url(#{$loader-url-light}) no-repeat center center;left:0;position:absolute;right:0;top:0;bottom:0;text-indent:-10000px;}
 
 /* Title */
 .main-section .section-title h1{width:195px;}

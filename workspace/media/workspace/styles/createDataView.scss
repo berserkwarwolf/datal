@@ -1,3 +1,7 @@
+/* Imports */
+@import 'variables';
+@import 'functions';
+
 /*DOUBTS TIP*/
 .doubts{margin-top:15px;margin-bottom:10px;position:relative;display:block;}
 .doubts .ic_Skype{width:16px;height:16px;display:block;position:absolute;top:1px;left:6px;}
@@ -141,7 +145,7 @@
 .bigLoader,
 .step4 .bigLoader{width:100%;}
 .bigLoader td,
-.step4 .bigLoader td{background:url(/static/workspace/images/common/im_loadingWhite72.gif) no-repeat center center;}
+.step4 .bigLoader td{background:url(#{$loader-url-light}) no-repeat center center;}
 .step4 .button{margin-right:10px;}
 .step4 .tableContent{margin-bottom:15px;}
 

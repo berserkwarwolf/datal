@@ -197,7 +197,7 @@ a{color:$link-color;}
 /* Layout */
 html,
 body{background:#393939;height:100%;min-width:998px;}
-body{background-image:url(../images/common/im_loadingGrey72.gif);background-repeat:no-repeat;background-position:center center;}/* TODO Nacho: Generate new loading image to match bg color */
+body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;background-position:center center;}
 .layout{overflow:hidden;}
 .workspace{padding:0 11px;}
 .workspace > .wrapper1{padding-left:65px;}
@@ -224,8 +224,9 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
   .columns.equal-width .CR{padding-left:10px;}
 
 /* Header */
+.radial-gradient{@include radial-gradient($brand-color-light,$brand-color);}
 .header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
-.header .logo img{width:auto;height:auto;display:block;}
+.header .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:87px;height:43px;}
 .header .button.primary,
 .header .button.support{margin-top:8px;}
 
@@ -280,7 +281,11 @@ body{background-image:url(../images/common/im_loadingGrey72.gif);background-repe
 
   /* Separator */
   .header .has-separator{position:relative;margin-left:2px;}
-  .header .has-separator:after{content:"";background:url(../images/common/bg_headerTabSep.png) no-repeat 0 0;display:block;width:2px;height:43px;top:0;left:-2px;position:absolute;}
+  .header .has-separator:after{content:"";display:block;width:2px;height:43px;top:0;left:-2px;position:absolute;border-left:1px solid $brand-color-bold;
+    -webkit-box-shadow:inset 1px 0 0 $brand-color-light;
+       -moz-box-shadow:inset 1px 0 0 $brand-color-light;
+            box-shadow:inset 1px 0 0 $brand-color-light;
+  }
 
   /* Notifications Tab */
   .header .tab.notifications{}
@@ -749,3 +754,6 @@ border-color: #ccc;}
 .pagination .pager .pagination-button.previous:hover{background-position:9px 0;}
 .pagination .pager .pagination-button.next{background-position:11px -30px;}
 .pagination .pager .pagination-button.next:hover{background-position:13px -30px;}
+
+/* Ajax loading */
+.ajaxLoadingOverlay{background:#fff url(#{$loader-url-light}) center center no-repeat;}

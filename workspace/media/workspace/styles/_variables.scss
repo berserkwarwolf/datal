@@ -1,8 +1,8 @@
 /*** Variables ***/
 
 /* Logo */
-// $logo-signin-url:															/* URL of logo for Sign in page. Recommended size: 132x70 px */
-// $logo-header-url:															/* URL of logo for Workspace header. Recommended size: 87x43 px */
+$logo-signin-url:"../images/common/lg_junarAccountPages.png";					/* URL of logo for Sign in page. Recommended size: 132x70 px */
+$logo-header-url:"../images/common/lg_junar.png";								/* URL of logo for Workspace header. Recommended size: 87x43 px */
 
 
 /* Branding */
@@ -59,4 +59,5 @@ $form-label-size:12px;															/* Size for form labels */
 
 
 /* Loader */
-// $loader-url:																	/* URL of loader image */
+$loader-url-dark:"../images/common/im_loadingGrey72.gif";						/* URL of loader image. Background must be #393939. For sections with dark backgrounds. */
+$loader-url-light:"../images/common/im_loadingWhite72.gif";						/* URL of loader image. Background must be #FFFFFF. For sections with light backgrounds. */

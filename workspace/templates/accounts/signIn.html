@@ -6,7 +6,7 @@
 {% block css_includes %}
   {% compress css %}
     <link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
-  <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+    <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
   {% endcompress %}
 {% endblock %}
 
@@ -17,7 +17,9 @@
 {% block body %}
 <div class="account-box" id="id_signIn">
   <header class="center">
-    <img src="{% static 'workspace/images/common/lg_junarAccountPages.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    <div class="radial-gradient">
+      <div class="logo-signin-brand"></div>
+    </div>
   </header>
   <div class="account-box-content">
     <form action="{{form.action}}" method="post">
