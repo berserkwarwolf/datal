@@ -87,14 +87,13 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             language=self.dataset.user.language
         )
 
-        self._update_last_revisions()
         self._log_activity( ActionStreams.CREATE)
 
+	# En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:
 		self.publish(allowed_states=CREATE_ALLOWED_STATES)
-	# solo se debe ejecutar esto al publicar
-        #search_dao = DatasetSearchDAOFactory().create()
-        #search_dao.add(self.dataset_revision)
+	else:
+        	self._update_last_revisions()
 
         return self.dataset_revision
 
