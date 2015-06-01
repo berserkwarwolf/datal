@@ -553,6 +553,8 @@ class IndexTankFinder(Finder):
 
     def __init__(self):
         from indextank.client import ApiClient
+        logger = logging.getLogger(__name__)
+        logger.info('INIT searchify %s AT %s' % (settings.SEARCHIFY['api_url'], settings.SEARCHIFY['index']))
         self.api_client = ApiClient(settings.SEARCHIFY['api_url'])
         self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
 
@@ -595,6 +597,7 @@ class IndexTankFinder(Finder):
                                     , length=end
                                     , snippet_fields=['title','text']
                                     , fetch_fields="*"
+                                    , fetch_categories="*"
                                     """
                                     , fetch_fields=['datastream_id'
                                                     , 'title'
@@ -635,13 +638,10 @@ class IndexTankFinder(Finder):
                 to_add = self.get_dictionary(doc)
                 results.append(to_add)
                 # TODO, I can't find the problem
-                """
-                logger = logging.getLogger(__name__)
-                if doc['category_name'] == "":
+                if doc['category_name'] == "UNCATEGORIZED":
+                    logger = logging.getLogger(__name__)
                     logger.error("Can't find category on index -- %s" % str(doc))
-                else:
-                    logger.error("OK find category on index -- %s" % str(doc))
-                """
+                    
             except Exception, e:
                 logger = logging.getLogger(__name__)
                 logger.error('Search IndexTank [ERROR(%s--%s)] with doc = %s [TRACE:%s]' % (doc['type'], doc['title'], unicode(doc), repr(e)))
