@@ -57,9 +57,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Create a new Dataset """
 
         # Check for allowed states
-        status = fields.get('status', StatusChoices.DRAFT)
+        status = int(fields.get('status', StatusChoices.DRAFT))
 
-        if int(status) not in allowed_states:
+        if status not in allowed_states:
             raise IlegalStateException(allowed_states)
 
         language = fields.get('language', language)
@@ -90,6 +90,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
         self._log_activity( ActionStreams.CREATE)
 
+        if status == StatusChoices.PUBLISHED:
+		self.publish(allowed_states=CREATE_ALLOWED_STATES)
 	# solo se debe ejecutar esto al publicar
         #search_dao = DatasetSearchDAOFactory().create()
         #search_dao.add(self.dataset_revision)
