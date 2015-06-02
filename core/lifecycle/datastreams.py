@@ -58,7 +58,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Create a new DataStream """
 
         # Check for allowed states
-        status = fields.get('status', StatusChoices.DRAFT)
+        status = int(fields.get('status', StatusChoices.DRAFT))
 
         if int(status) not in allowed_states:
             raise IlegalStateException(allowed_states)
@@ -72,8 +72,13 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             **fields
         )
 
-        self._update_last_revisions()
         self._log_activity(ActionStreams.CREATE)
+
+	# permite publicar al crear
+        if status == StatusChoices.PUBLISHED:
+            self.publish(allowed_status=CREATE_ALLOWED_STATES)
+        else:
+            self._update_last_revisions()
 
         return self.datastream_revision
 
