@@ -5,7 +5,7 @@
 	/* Brand color */
 	$brand-color-15:rgba($brand-color,.15);																							/* Brand color 15% opacity, for backgrounds in landing page */
 	$brand-color-bold:adjust-color($brand-color,$hue:0deg,$saturation:0%,$lightness:-8%);											/* For hovers and other staff */
-	$brand-color-light:adjust-color($brand-color,$hue:0deg,$saturation:35%,$lightness:10%);											/* For radial gradients */
+	$brand-color-light:adjust-color($brand-color,$hue:0deg,$saturation:35%,$lightness:8%);											/* For radial gradients */
 
 	/* Accent color */
 	$accent-color-05:rgba($accent-color,.05);																						/* Accent color 5% opacity, for backgrounds in tables */
@@ -21,7 +21,7 @@
 	$button-primary-color-border:adjust-color($button-primary-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
 	$button-primary-color-shadow:adjust-color($button-primary-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
 
-	/* Warning button */
+	/* Warning button */ 
 	$button-warning-color-gradient:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
 	$button-warning-color-border:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
 	$button-warning-color-shadow:adjust-color($button-warning-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
@@ -30,7 +30,3 @@
 	$button-support-color-gradient:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-20%);					/* Bottom color of gradient */
 	$button-support-color-border:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Border color */
 	$button-support-color-shadow:adjust-color($button-support-color,$hue:10deg,$saturation:50%,$lightness:-30%);					/* Font shadow color */
-
-
-
-

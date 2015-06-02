@@ -1,24 +1,24 @@
 /*** Variables ***/
 
 /* Logo */
-$logo-signin-url:"../images/common/lg_junarAccountPages.png";					/* URL of logo for Sign in page. Recommended size: 132x70 px */
-$logo-header-url:"../images/common/lg_junar.png";								/* URL of logo for Workspace header. Recommended size: 87x43 px */
+$logo-signin-url:"../images/common/logo_datal_signin.png";						/* URL of logo for Sign in page. Recommended size: 132x70 px */
+$logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo for Workspace header. Recommended size: 87x43 px */
 
 
 /* Branding */
 
 	/* Brand color */
-	$brand-color:#ff6c00;														/* Brand primary color */
+	$brand-color:#B68A4A;														/* Brand primary color */
 
 	/* Accent color */
-	$accent-color:#4890fc;														/* Brand secondary color */
+	$accent-color:#D16280;														/* Brand secondary color */
 
 /* Fonts */
 
 	/* Family */
 	$font-primary-family:Arial,Helvetica,sans-serif;							/* For fonts in general */
-	$font-secondary-family:'montserratbold',arial,helvetica,sans-serif;			/* For some subtitles */
-	$font-extra-family:'montserratregular',arial,helvetica,sans-serif;			/* For table titles */
+	$font-secondary-family:'Roboto Condensed',arial,helvetica,sans-serif;		/* For some subtitles */
+	$font-extra-family:'Roboto Condensed',arial,helvetica,sans-serif;			/* For table titles */
 
 	/* Size */
 	$font-size-base:12px !important;											/* For body paragraphs and text in general */
@@ -28,8 +28,8 @@ $logo-header-url:"../images/common/lg_junar.png";								/* URL of logo for Work
 	$font-size-xl:20px !important;												/* For section titles and overlay titles */
 
 	/* Color */
-	$font-color-base:#3a3a3a;													/* For body paragraphs and titles */
-	$font-color-semi-light:#818181;												/* For subtitles and tips */
+	$font-color-base:#333F4F;													/* For body paragraphs and titles */
+	$font-color-semi-light:#717463;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */
 
 	/* Links */
@@ -59,5 +59,5 @@ $form-label-size:12px;															/* Size for form labels */
 
 
 /* Loader */
-$loader-url-dark:"../images/common/im_loadingGrey72.gif";						/* URL of loader image. Background must be #393939. For sections with dark backgrounds. */
-$loader-url-light:"../images/common/im_loadingWhite72.gif";						/* URL of loader image. Background must be #FFFFFF. For sections with light backgrounds. */
+$loader-url-dark:"../images/common/loader_datal_dark.gif";						/* URL of loader image. Background must be #393939. For sections with dark backgrounds. */
+$loader-url-light:"../images/common/loader_datal_light.gif";					/* URL of loader image. Background must be #FFFFFF. For sections with light backgrounds. */

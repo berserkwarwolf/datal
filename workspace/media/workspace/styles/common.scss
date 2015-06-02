@@ -224,7 +224,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .columns.equal-width .CR{padding-left:10px;}
 
 /* Header */
-.radial-gradient{@include radial-gradient($brand-color-light,$brand-color);}
+/* .radial-gradient{@include radial-gradient($brand-color-light,$brand-color);} */
 .header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
 .header .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:87px;height:43px;}
 .header .button.primary,
@@ -234,7 +234,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header #id_help_link{margin-right:10px;}
 
   /* Tab */
-  .header .tab a{color:#fff;text-shadow:0 1px 0 #934c1c;display:block;}
+  .header .tab a{color:#fff;text-shadow:0 1px 0 $brand-color-bold;display:block;}
   .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
   .header .tab > a:after{content:"";border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid $brand-color-bold;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;}
