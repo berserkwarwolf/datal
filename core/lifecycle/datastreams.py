@@ -76,7 +76,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
 	# permite publicar al crear
         if status == StatusChoices.PUBLISHED:
-            self.publish(allowed_status=CREATE_ALLOWED_STATES)
+            self.publish(allowed_states=CREATE_ALLOWED_STATES)
         else:
             self._update_last_revisions()
 
