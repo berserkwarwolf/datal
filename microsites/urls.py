@@ -36,6 +36,7 @@ urlpatterns = patterns('',
 
 
     (r'^search/', include('microsites.search.urls')),
+    (r'^search$', include('microsites.search.urls')),
     url(r'^developers/$', 'core.developer_manager.views.action_query', name='developer_manager.action_query'),
     url(r'^developers$', 'core.developer_manager.views.action_query', name='developer_manager.action_query'),
     url(r'^developer_manager/action_insert$', 'core.developer_manager.views.action_insert', name='developer_manager.action_insert'),
