@@ -237,16 +237,17 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header .tab a{color:#fff;text-shadow:0 1px 0 #934c1c;display:block;}
   .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
+  .header .tab > a:after{content:"";border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid $brand-color-bold;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;}
   .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
   .header .tab .img img{border:1px solid $brand-color-bold;float:left;width:24px;height:24px;background:$brand-color-bold;}
   .header .tab strong{font-weight:normal;float:left;display:block;}
 
   /* Tab Pulldown */
-  .header .tab.pulldown{position:relative;}
-  .header .tab.pulldown > a{background:url(../images/common/ic_pulldownHeader.gif) no-repeat right 0;padding-right:28px;}
+  .header .tab.pulldown{position:relative;padding-right:28px;}
   .header .tab.pulldown:hover,
   .header .tab.pulldown.active,
   .header .tab.pulldown.active:hover{background-color:$brand-color-bold;}
+  .header .tab.pulldown:hover a:after{border-top:6px solid $brand-color-light;}
   .header .tab.pulldown.active > a{background-position:right -45px;}
 
     /* Submenu */
@@ -374,8 +375,8 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .main-navigation li > a.disabled{opacity:0.3;cursor:pointer;visibility:visible;}
   .main-navigation li > a.disabled:hover{background:none;border:1px solid rgba(0,0,0,0);cursor:auto;
     -webkit-box-shadow:none;
-      -moz-box-shadow:none;
-           box-shadow:none;
+       -moz-box-shadow:none;
+            box-shadow:none;
   }
 
 	/* Icons */
@@ -580,7 +581,7 @@ i.icon.TNCLIMA{}
   .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
-.helpBox:first-child{background-color:#f6f9ff;background-image:none;padding:15px;float:right;margin:20px;
+.helpBox:first-child{background-color:$brand-color-15;background-image:none;padding:15px;float:right;margin:20px;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;

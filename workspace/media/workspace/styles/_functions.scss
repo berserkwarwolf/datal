@@ -4,7 +4,7 @@
 
 	/* Brand color */
 	$brand-color-15:rgba($brand-color,.15);																							/* Brand color 15% opacity, for backgrounds in landing page */
-	$brand-color-bold:adjust-color($brand-color,$hue:0deg,$saturation:0%,$lightness:-5%);											/* For hovers and other staff */
+	$brand-color-bold:adjust-color($brand-color,$hue:0deg,$saturation:0%,$lightness:-8%);											/* For hovers and other staff */
 	$brand-color-light:adjust-color($brand-color,$hue:0deg,$saturation:35%,$lightness:10%);											/* For radial gradients */
 
 	/* Accent color */
