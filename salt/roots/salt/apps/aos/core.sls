@@ -1,3 +1,9 @@
+remove_wars:
+  file.absent:
+    - names:
+      - /var/lib/tomcat7/webapps/microsites/
+      - /var/lib/tomcat7/webapps/workspace/
+
 extract_war:
   archive.extracted:
     - names:
