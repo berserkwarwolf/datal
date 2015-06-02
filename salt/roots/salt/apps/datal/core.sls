@@ -6,11 +6,8 @@ sass_install:
     - name: sass
 
 ensure_new_indextank:
-  pip.removed:
-    - require:
-      - pkg: python-pip
-    - names:
-      - indextank
+  file.absent:
+    - name: {{ pillar['virtualenv']['path'] }}/lib/python2.7/site-packages/indextank
 
 # Create static files directory
 {{ pillar['application']['statics_dir'] }}:
