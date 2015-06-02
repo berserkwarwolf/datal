@@ -4,7 +4,7 @@
     "model": "core.preference",
     "fields": {
         "account": 1,
-        "value": "Datos.gob.cl",
+        "value": "Datos Chile",
         "key": "account.name"
     }
 },
@@ -40,7 +40,7 @@
    "model": "core.preference",
    "fields": {
        "account": 1,
-       "value": "api",
+       "value": "api:8080",
        "key": "account.api.domain"
    }
 },
@@ -57,7 +57,7 @@
         "fields": {
             "account": 1,
             "key": "account.bio",
-            "value": "<p>El portal <a href=\"http://www.datos.gob.cl/\">www.datos.gob.cl</a> es un sitio din\u00e1mico en constante crecimiento, por lo que seguir\u00e1 expandi\u00e9ndose e incorporando la informaci\u00f3n de otros servicios y m\u00e1s datos de los organismos p\u00fablicos.</p>\r\n<p>El objetivo de esta herramienta es que las personas tengan acceso a la informaci\u00f3n en base a la cual el gobierno toma decisiones para las pol\u00edticas p\u00fablicas y que tambi\u00e9n la puedan utilizar para sus propias investigaciones e intereses. Por ejemplo, construir aplicaciones y conducir an\u00e1lisis.</p>\r\n<p>Creemos que el acceso a la informaci\u00f3n y la transparencia beneficia a la democracia y la rendici\u00f3n de cuentas por parte de las autoridades.</p>"
+            "value": "<p>Este portal de datos es un sitio din\u00e1mico en constante crecimiento, por lo que seguir\u00e1 expandi\u00e9ndose e incorporando la informaci\u00f3n de otros servicios y m\u00e1s datos de los organismos p\u00fablicos.</p>\r\n<p>El objetivo de esta herramienta es que las personas tengan acceso a la informaci\u00f3n en base a la cual el gobierno toma decisiones para las pol\u00edticas p\u00fablicas y que tambi\u00e9n la puedan utilizar para sus propias investigaciones e intereses. Por ejemplo, construir aplicaciones y conducir an\u00e1lisis.</p>\r\n<p>Creemos que el acceso a la informaci\u00f3n y la transparencia beneficia a la democracia y la rendici\u00f3n de cuentas por parte de las autoridades.</p>"
         },
         "model": "core.preference",
         "pk": 8
@@ -66,7 +66,7 @@
         "fields": {
             "account": 1,
             "key": "account.link",
-            "value": "http://www.datos.gob.cl/"
+            "value": "http://microsites:8080/"
         },
         "model": "core.preference",
         "pk": 9
@@ -138,7 +138,7 @@
         "fields": {
             "account": 1,
             "key": "branding.footer",
-            "value": "<iframe src=\"http://datos.gob.cl/assets/junar/footer.html\" style=\"width:100%;height:316px;border:0;overflow:hidden;\" frameborder=\"0\" scrolling=\"no\"></iframe>\r\n\r\n\r\n"
+            "value": ""
         },
         "model": "core.preference",
         "pk": 17
@@ -147,7 +147,7 @@
         "fields": {
             "account": 1,
             "key": "branding.header",
-            "value": "<iframe src=\"http://datos.gob.cl/assets/junar/header.html\" style=\"width:100%;height:167px;border:0;overflow:hidden;\" frameborder=\"0\" scrolling=\"no\"></iframe>\r\n<META NAME=\"ROBOTS\" CONTENT=\"NOINDEX, NOFOLLOW\">"
+            "value": ""
         },
         "model": "core.preference",
         "pk": 18
@@ -165,7 +165,7 @@
         "fields": {
             "account": 1,
             "key": "account.header.uri",
-            "value": "http://datos.gob.cl/junar/header"
+            "value": "http://microsites:8080/static/microsites/html/header.html"
         },
         "model": "core.preference",
         "pk": 20
@@ -264,7 +264,7 @@
         "fields": {
             "account": 1,
             "key": "account.footer.uri",
-            "value": "http://datos.gob.cl/junar/footer"
+            "value": "http://microsites:8080/static/microsites/html/footer.html"
         },
         "model": "core.preference",
         "pk": 31
