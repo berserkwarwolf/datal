@@ -5,6 +5,13 @@ sass_install:
   gem.installed:
     - name: sass
 
+ensure_new_indextank:
+  pip.removed:
+    - require:
+      - pkg: python-pip
+    - names:
+      - indextank
+
 # Create static files directory
 {{ pillar['application']['statics_dir'] }}:
   file.directory:
