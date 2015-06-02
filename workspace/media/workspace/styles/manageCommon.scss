@@ -104,7 +104,7 @@
 .list-container table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}
 .list-container table .actions li.review{visibility:visible;}
 .list-container table .actions li.review a{padding-left:23px;background:url(../images/common/ic_warning_orange.png) no-repeat 0 1px;}
-.list-container table .actions li.delete a, .list-container table button.delete{color:#c00202;}
+.list-container table .actions li.delete a, .list-container table button.delete{color:$button-warning-color;}
 .list-container table button.small{float:left;padding:0;background:none;}
 .list-container table i{font-style:normal;display:inline-block;}
 .list-container table i.type_nice.icon{display:inline;}

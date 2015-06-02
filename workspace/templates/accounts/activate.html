@@ -14,7 +14,9 @@
 {% block body %}
 <div class="account-box" id="id_activate">
     <header class="center">
-    <img src="{% static 'workspace/images/common/lg_junarAccountPages.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    <div class="radial-gradient">
+      <div class="logo-signin-brand"></div>
+    </div>
     </header>
     <div class="account-box-content">
         <form action="{{form.action}}" method="post">

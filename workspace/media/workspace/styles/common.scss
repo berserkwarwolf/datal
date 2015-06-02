@@ -415,7 +415,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 .main-section .section-title{height:42px;}
 .main-section .section-title h1,
 .main-section .section-title h2,
-.main-section .section-title h3{float:left;text-shadow:0 1px 0 #000;line-height:39px;}
+.main-section .section-title h3{float:left;text-shadow:0 1px 0 #000;line-height:39px;font-family:$font-titles-family;}
 .main-section .section-title h1{padding-left:15px;font-weight:bold;color:#fff;font-size:$font-size-xl;}
 .main-section .section-title h1 a{color:#fff;}
 .main-section .section-title h2, .main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
@@ -449,7 +449,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
      -moz-box-shadow:0 1px 0 0 #fff;
           box-shadow:0 1px 0 0 #fff;
 }
-.box > header .title{font-size:$font-size-l;font-weight:bold;line-height:20px;padding:14px 0 11px;}
+.box > header .title{font-size:$font-size-l;font-weight:bold;line-height:20px;padding:14px 0 11px;font-family:$font-titles-family;}
 .box > header .title > span{padding-left:5px;font-size:$font-size-m;font-weight:normal;}
 .box > header .button{margin-top:10px;}
 .box .box-content{padding:15px}
@@ -475,8 +475,8 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .box.support > header .title > span{color:$font-color-base;}
 
   /* Pink */
-  .box.pink{background:#fef1e1;}
-  .box.pink > header{border-color:#f9d6d2;}
+  .box.pink{background:$brand-color-15;}
+  .box.pink > header{border-color:$brand-color-15;}
   .box.pink > header .title{color:$brand-color;}
   .box.pink > header .title > span{color:#dc211c;}
 
@@ -633,7 +633,7 @@ i.icon.TNCLIMA{}
 
 .ao-popup-overlay .In .dataStreamForm{padding:0;}
 .ao-popup-overlay .In h4, 
-.ao-popup-overlay .Inner h4{font-size:$font-size-xl;color:$font-color-base;}
+.ao-popup-overlay .Inner h4{font-size:$font-size-xl;color:$font-color-base;font-family:$font-titles-family;}
 .ao-popup-overlay .dataStreamForm .form{padding:20px;}
 .ao-popup-overlay .buttons{padding:20px 0;border-top:1px solid #E2E0E0;margin:0;}
 .ao-popup-overlay .ao-L{width:680px !important;}

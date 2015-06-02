@@ -8,7 +8,7 @@ $logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo f
 /* Branding */
 
 	/* Brand color */
-	$brand-color:#B68A4A;														/* Brand primary color */
+	$brand-color:#333F4F;														/* Brand primary color */
 
 	/* Accent color */
 	$accent-color:#D16280;														/* Brand secondary color */
@@ -18,6 +18,7 @@ $logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo f
 	/* Family */
 	$font-primary-family:Arial,Helvetica,sans-serif;							/* For fonts in general */
 	$font-secondary-family:'Roboto Condensed',arial,helvetica,sans-serif;		/* For some subtitles */
+	$font-titles-family:'Roboto Condensed',Helvetica,sans-serif;				/* For titles in general */
 	$font-extra-family:'Roboto Condensed',arial,helvetica,sans-serif;			/* For table titles */
 
 	/* Size */
@@ -29,7 +30,7 @@ $logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo f
 
 	/* Color */
 	$font-color-base:#333F4F;													/* For body paragraphs and titles */
-	$font-color-semi-light:#717463;												/* For subtitles and tips */
+	$font-color-semi-light:#333F4F;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */
 
 	/* Links */
@@ -37,20 +38,20 @@ $logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo f
 
 
 /* Buttons */
-$buttons-font-family:'montserratregular',arial,helvetica,sans-serif;			/* Font family for all buttons */
+$buttons-font-family:Arial,Helvetica,sans-serif;							/* Font family for all buttons */
 $buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color:#b9ce44;												/* Background color */
+	$button-primary-color:#93A394;												/* Background color */
 	$button-primary-color-text:#FFF;											/* Font color */
 
 	/* Warning button */
-	$button-warning-color:#f95360;												/* Background color */
+	$button-warning-color:#D16280;												/* Background color */
 	$button-warning-color-text:#FFF;											/* Font color */
 
 	/* Support button */
-	$button-support-color:#fff4e9;												/* Background color */
-	$button-support-color-text:#ce6425;											/* Font color */
+	$button-support-color:#717463;												/* Background color */
+	$button-support-color-text:#FFF;											/* Font color */
 
 
 /* Forms */

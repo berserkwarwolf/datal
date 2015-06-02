@@ -49,7 +49,7 @@
      -moz-box-shadow:0 1px 0 #fff;
           box-shadow:0 1px 0 #fff;
 }
-.formContainer header h3, .formContainer .titleContainer h3{font-size:$font-size-l;font-weight:bold;display:inline-block;}
+.formContainer header h3, .formContainer .titleContainer h3{font-size:$font-size-l;font-weight:bold;display:inline-block;font-family:$font-titles-family;}
 .formContainer header h3 span, .formContainer .titleContainer h3 span{color:#999;}
 .formContainer header h3 span{font-size:14px;font-weight:normal;color:#999;}
 .buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:#f6f9ff;margin:0 15px;
