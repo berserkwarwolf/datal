@@ -38,13 +38,9 @@ EMAIL_HOST_PASSWORD = '{{  pillar["email"]["password"] }}'
 EMAIL_PORT = '{{ pillar["email"]["port"] }}'
 EMAIL_USE_TLS = {{ pillar["email"]["tls"] }}
 
-BIGDATA_HOSTS = (
-    {% for host in pillar["bigdata"]["hosts"] %}
-    "{{ host.name }}",
-    {% endfor %}
-)
-BIGDATA_PORT = '{{ pillar["bigdata"]["port"] }}'
-BIGDATA_API_ENDPOINT = '{{ pillar["bigdata"]["endpoint"] }}'
+BIGDATA_HOSTS = ()
+BIGDATA_PORT = ''
+BIGDATA_API_ENDPOINT = ''
 
 AWS_ACCESS_KEY = '{{ pillar["amazon"]["S3"]["accesskey"] }}'
 AWS_SECRET_KEY = '{{ pillar["amazon"]["S3"]["secretkey"] }}'

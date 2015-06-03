@@ -1,11 +1,3 @@
-amazon:
-  S3:
-    bucket: ''
-    temporary_bucket: ''
-    cdn_bucket: ''
-    accesskey: ''
-    secretkey: ''
-
 email:
     host: ''
     port: ''
