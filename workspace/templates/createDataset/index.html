@@ -4,7 +4,7 @@
 {% block meta %}
 {% compress css %}
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createDataset.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createDataset.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}
@@ -31,6 +31,7 @@
 
 			<a href="{% url 'manageDatasets.create_type' 'file' %}" class="box" title="{% trans 'APP-UPLOAD-FILE-TEXT' %}">
 				<span class="boxCreate datasetUploadFile">
+          			{% include 'icons/create-dataset-file.html' %}
 				</span>
 				<span class="boxCreateDesc">
 					<span class="button primary small">{% trans 'APP-UPLOAD-FILE-TEXT' %}</span>
@@ -39,6 +40,7 @@
 
 			<a href="{% url 'manageDatasets.create_type' 'url' %}" class="box" title="{% trans 'APP-WEBSITE-TEXT' %}">
 				<span class="boxCreate datasetWebsite">
+          			{% include 'icons/create-dataset-url.html' %}
 				</span>
 				<span class="boxCreateDesc">
 					<span class="button primary small">{% trans 'APP-WEBSITE-TEXT' %}</span>
@@ -47,6 +49,7 @@
 
 			<a href="{% url 'manageDatasets.create_type' 'webservice' %}" class="box" title="{% trans 'APP-WEBSERVICE-TEXT' %}">
 				<span class="boxCreate datasetWebService">
+          			{% include 'icons/create-dataset-webservice.html' %}
 				</span>
 				<span class="boxCreateDesc">
 					<span class="button primary small">{% trans 'APP-WEBSERVICE-TEXT' %}</span>

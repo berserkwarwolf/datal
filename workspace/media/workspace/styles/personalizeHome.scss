@@ -93,7 +93,7 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
-.configs .formBox header .num{background-color:$brand-color;color:#fff;text-shadow:0 1px 0 #763001;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
+.configs .formBox header .num{background-color:$brand-color;color:$color-base;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
 .configs .formBox header h1{color:$font-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}

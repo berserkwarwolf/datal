@@ -1,5 +1,6 @@
 /* Import SASS variables */
 @import 'variables';
+@import 'functions';
 
 /*STRUCTURE*/
 .columns .CL{width:590px;}
@@ -52,7 +53,7 @@
 .formContainer header h3, .formContainer .titleContainer h3{font-size:$font-size-l;font-weight:bold;display:inline-block;font-family:$font-titles-family;}
 .formContainer header h3 span, .formContainer .titleContainer h3 span{color:#999;}
 .formContainer header h3 span{font-size:14px;font-weight:normal;color:#999;}
-.buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:#f6f9ff;margin:0 15px;
+.buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:$accent-color-05;margin:0 15px;
   -webkit-box-shadow:1px 0 0 #fff;
      -moz-box-shadow:1px 0 0 #fff;
           box-shadow:1px 0 0 #fff;

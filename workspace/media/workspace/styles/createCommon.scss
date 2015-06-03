@@ -53,7 +53,7 @@
  }
  .create .box .button{display:block;}
  .create .box:hover .button.primary{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
-.create .box .boxCreate{display:block;background-size:cover;background-position:center center;background-repeat:no-repeat;height:170px;border-bottom:1px solid #e5e3e3;}
+.create .box .boxCreate{display:block;background-size:cover;background-position:center center;background-repeat:no-repeat;height:170px;border-bottom:1px solid #e5e3e3;text-align:center;background:$accent-color-05;}
 .create .box h3{color:#3a3a3a;font-size:18px;font-weight:bold;padding-bottom:12px;}
 .create .box p{color:#999;font-size:14px;padding-bottom:18px;}
 .create .box .boxCreateDesc{display:block;padding:15px;}
