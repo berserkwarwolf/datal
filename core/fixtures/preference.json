@@ -164,24 +164,6 @@
     {
         "fields": {
             "account": 1,
-            "key": "account.header.uri",
-            "value": "http://microsites:8080/static/microsites/html/header.html"
-        },
-        "model": "core.preference",
-        "pk": 20
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.header.height",
-            "value": "280"
-        },
-        "model": "core.preference",
-        "pk": 21
-    },
-    {
-        "fields": {
-            "account": 1,
             "key": "account.logo",
             "value": "http://junar-cdn-portal.s3-website-us-east-1.amazonaws.com/2/logo"
         },
@@ -259,24 +241,6 @@
         },
         "model": "core.preference",
         "pk": 30
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.footer.uri",
-            "value": "http://microsites:8080/static/microsites/html/footer.html"
-        },
-        "model": "core.preference",
-        "pk": 31
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.footer.height",
-            "value": "304"
-        },
-        "model": "core.preference",
-        "pk": 32
     },
     {
         "fields": {
