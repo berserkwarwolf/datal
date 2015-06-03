@@ -3,7 +3,7 @@ tomcat-manager:
   passwd: datal
 
 jaxer:
-  endpoint: ''
+  endpoint: 'http://jaxer-balancer-383544228.us-west-1.elb.amazonaws.com:8081/agileoffice/AjaxScraper.html'
 
 scrapper:
   proxy_scrapers_domain: 'http://workspace'
