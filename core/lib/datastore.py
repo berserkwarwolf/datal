@@ -164,6 +164,17 @@ class datastore_sftp(datastore):
         self.save_checking_path(uploaded_file=data, folder=final_remote_folder, file_name=uuid)
         return key
 
+    def upload(self, bucket_name, file_name, file_data, account_id):
+        """ update file for existing resource """
+        logger.info(file_name)
+        remote_path = "%s/%s/%s/" % (self.base_folder, bucket_name, str(account_id))
+        remote_file = "%s/%s" % (remote_path, file_name)
+        self.connect()
+        self.ssh_client.exec_command('mkdir -p %s' % remote_path)
+        logger.info(remote_path)
+        logger.info(remote_file)
+        self.sftp.putfo(file_data, remotepath=remote_file)
+
     def save_checking_path(self, uploaded_file, folder, file_name):
         """ ensure path and save """
         self.connect()

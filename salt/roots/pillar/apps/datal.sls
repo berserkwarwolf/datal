@@ -1,7 +1,7 @@
 application:
   path: /home/vagrant/app
   statics_dir: /home/vagrant/static
-  cdn: ''
+  cdn: 'datastore:8080/resources/datal_cdn/'
   api_key: ''
   public_key: ''
 

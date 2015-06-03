@@ -239,17 +239,17 @@ def action_branding_update(request):
             
         if request.FILES.has_key('account_favicon'):
             data = request.FILES['account_favicon']
-            keyname = "%s/%s" %(accountid[::-1], 'favicon')
-            active_datastore.update(settings.AWS_CDN_BUCKET_NAME, keyname, data)
-            value = get_domain_with_protocol('cdn') + '/' + keyname
+            keyname = 'favicon'
+            active_datastore.upload(settings.AWS_CDN_BUCKET_NAME, keyname, data, account_id=accountid)
+            value = '{}/{}/{}'.format(get_domain_with_protocol('cdn'), accountid, keyname)
             account.set_preference('account.favicon', value)
             urls['id_account_favicon'] = value
 
         if request.FILES.has_key('account_logo'):
             data = request.FILES['account_logo']
-            keyname = "%s/%s" %(accountid[::-1], 'logo')
-            active_datastore.update(settings.AWS_CDN_BUCKET_NAME, keyname, data)
-            value = get_domain_with_protocol('cdn') + '/' + keyname
+            keyname = 'logo'
+            active_datastore.upload(settings.AWS_CDN_BUCKET_NAME, keyname, data, account_id=accountid)
+            value = '{}/{}/{}'.format(get_domain_with_protocol('cdn'), accountid, keyname)
             account.set_preference('account.logo', value)
             urls['id_account_logo'] = value
 
