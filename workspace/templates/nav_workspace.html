@@ -35,7 +35,7 @@
     {% endcomment %}
 
     <!-- Dashboards -->
-    <li style="display:block;">
+    <li style="display:none;">
       <a id="id_dashboards_option" href="#" class="nav-dashboards">
         {% include 'icons/nav-dashboards.html' %}
         <span>{% trans 'APP-DASHBOARDS-TEXT' %}</span>
@@ -44,7 +44,7 @@
 
     {% if 'workspace.can_access_report' in auth_manager.privileges %}
     <!-- Reports -->
-    <li style="display:block;">
+    <li style="display:none;">
       <a id="id_reports_option" href="/reports/action_query" class="nav-reports">
         {% include 'icons/nav-reports.html' %}
         <span>{% trans 'APP-REPORTS-TEXT' %}</span>
