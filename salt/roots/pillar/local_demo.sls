@@ -6,26 +6,12 @@ amazon:
     accesskey: ''
     secretkey: ''
 
-application:
-  cdn: ''
-  api_key: ''
-  public_key: ''
-
 email:
     host: ''
     port: ''
     user: ''
     password: ''
     tls: True
-
-bigdata:
-  port: ''
-  endpoint: ''
-  hosts:
-    - { name: ''}
-
-queues:
-  request_queue: ''
 
 social:
   twitter_profile_url: ''
