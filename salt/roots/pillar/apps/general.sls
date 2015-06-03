@@ -12,9 +12,9 @@ redis:
 
 amazon:
   S3:
-    bucket: ''
-    temporary_bucket: ''
-    cdn_bucket: ''
+    bucket: 'datal'
+    temporary_bucket: 'datal_temp'
+    cdn_bucket: 'datal_cdn'
     accesskey: ''
     secretkey: ''
 
