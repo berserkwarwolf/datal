@@ -5,7 +5,7 @@
 
     <div class="navigation FR">
         <a id="id_step2PrevButton" href="javascript:;" title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small"><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
-        <a id="id_step2NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button green small">{% trans "APP-NEXT-TEXT" %}<i class="right-arrow"></i></a>
+        <a id="id_step2NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button primary small">{% trans "APP-NEXT-TEXT" %}<i class="right-arrow"></i></a>
     </div>  
 </header>
 
@@ -57,10 +57,10 @@
 
 <!-- BUTTONS -->
 <div class="buttons navigationControl center">
-    <a id="id_step2NextButtonBottom" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button small green">{% trans "APP-NEXT-TEXT" %}</a>
+    <a id="id_step2NextButtonBottom" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button small primary">{% trans "APP-NEXT-TEXT" %}</a>
     {% if is_update and not is_update_selection %}
         {% if 'workspace.can_create_datastream_as_draft' in auth_manager.privileges  or 'ao-free-user' in auth_manager.roles %}
-            <a id="id_save" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans "APP-SAVE-TEXT" %}</a>
+            <a id="id_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans "APP-SAVE-TEXT" %}</a>
         {% endif %}
     {% endif %}
 </div>

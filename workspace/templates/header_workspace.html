@@ -11,7 +11,11 @@
 <header class="header clearfix">
 
   <!-- Logo -->
-  <a href="/welcome" title="Junar" class="logo FL clearfix"><img src="{% static 'workspace/images/common/lg_junar.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}" class="FL"/></a>
+  <a href="/welcome" title="Junar" class="logo FL clearfix">
+    <div class="radial-gradient">
+      <div class="logo-header-brand"></div>
+    </div>
+  </a>
 
   {% comment %}
   <!-- Search -->
@@ -23,7 +27,7 @@
   {% endcomment %}
 
   <!-- ODS Button -->
-  <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button green small FL" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}</a>
+  <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button primary small FL" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}</a>
 
   <!-- My Account Tab -->
   <div class="tab has-separator pulldown FR">
@@ -60,6 +64,6 @@
   </div>
 
   <!-- Online Support -->
-  <a class="button orange small FR" title="{% trans 'HEADER-HELP-TEXT' %}" id="id_help_link">{% trans "HEADER-HELP-TEXT" %}</a>
+  <a class="button support small FR" title="{% trans 'HEADER-HELP-TEXT' %}" id="id_help_link">{% trans "HEADER-HELP-TEXT" %}</a>
 
 </header>

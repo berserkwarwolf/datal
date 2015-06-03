@@ -1,0 +1,49 @@
+/*** Functions ***/
+
+/* Branding */
+
+	/* Brand color */																												/* Brand color 15% opacity, for backgrounds in landing page */
+	$brand-color-bold:adjust-color($brand-color,$hue:0deg,$saturation:0%,$lightness:-8%);											/* For hovers and other staff */
+	$brand-color-light:adjust-color($brand-color,$hue:0deg,$saturation:35%,$lightness:8%);											/* For radial gradients */
+
+	/* Accent color */
+	$accent-color-05:rgba($accent-color,.05);																						/* Accent color 5% opacity, for backgrounds in tables */
+	$accent-color-15:rgba($accent-color,.15);																						/* Accent color 15% opacity, for backgrounds in 'Home page settings' */
+	$accent-color-85:rgba($accent-color,.85);																						/* Accent color 85% opacity, for backgrounds in tooltips  */
+	$accent-color-bold:adjust-color($accent-color,$hue:0deg,$saturation:0%,$lightness:-5%);	
+
+
+/* Nav icons */
+	
+	/* Active */						
+	$button-nav-active-background:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:-5%);								/* Background color */
+	$button-nav-active-border:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:-3%);									/* Border color */
+	$button-nav-active-inset-shadow:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:-12%);								/* Box shadow color */
+	
+	/* Hover */						
+	$button-nav-hover-background:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:7%);									/* Background color */
+	$button-nav-hover-border:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:-8%);										/* Border color */
+	$button-nav-hover-shadow:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:12%);										/* Box shadow color */
+
+
+/* Buttons */
+
+	/* Primary button */
+	$button-primary-color-gradient:adjust-color($button-primary-color,$hue:0deg,$saturation:10%,$lightness:-10%);					/* Bottom color of gradient */
+	$button-primary-color-border:adjust-color($button-primary-color,$hue:0deg,$saturation:10%,$lightness:-20%);						/* Border color */
+	$button-primary-color-shadow:adjust-color($button-primary-color,$hue:0deg,$saturation:10%,$lightness:-30%);						/* Font shadow color */
+
+	/* Base button */ 		
+	$button-base-color-gradient:adjust-color($button-base-color,$hue:0deg,$saturation:2%,$lightness:-2%);							/* Bottom color of gradient */
+	$button-base-color-border:adjust-color($button-base-color,$hue:0deg,$saturation:10%,$lightness:-10%);							/* Border color */
+	$button-base-color-shadow:adjust-color($button-base-color,$hue:0deg,$saturation:10%,$lightness:-20%);							/* Font shadow color */
+
+	/* Warning button */ 
+	$button-warning-color-gradient:adjust-color($button-warning-color,$hue:0deg,$saturation:10%,$lightness:-10%);					/* Bottom color of gradient */
+	$button-warning-color-border:adjust-color($button-warning-color,$hue:0deg,$saturation:10%,$lightness:-10%);						/* Border color */
+	$button-warning-color-shadow:adjust-color($button-warning-color,$hue:0deg,$saturation:10%,$lightness:-30%);						/* Font shadow color */
+
+	/* Support button */
+	$button-support-color-gradient:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-20%);					/* Bottom color of gradient */
+	$button-support-color-border:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-20%);						/* Border color */
+	$button-support-color-shadow:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-30%);						/* Font shadow color */

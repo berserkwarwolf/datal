@@ -1,12 +1,11 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'workspace/styles/_modules/workspaceCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/manageCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'core/styles/_modules/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/manageCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.cookie.js?id={{settings.VERSION_JS_CSS}}"></script>
 
@@ -25,7 +24,7 @@
         <div class="titleContainer clearfix">
             <h3 class="FL">{% trans "APP-CATEGORIES-TEXT" %}</h3>
             <div class="actionButtons FR">
-                <button class="button green small" title="{% trans 'WORKSPACE-CREATE-CATEGORY' %}" id="id_create_category">{% trans "WORKSPACE-CREATE-CATEGORY" %}</button>
+                <button class="button primary small" title="{% trans 'WORKSPACE-CREATE-CATEGORY' %}" id="id_create_category">{% trans "WORKSPACE-CREATE-CATEGORY" %}</button>
             </div>
         </div>
 
@@ -105,7 +104,7 @@
         </div>
         
         <div class="buttons center">
-            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
         </div>
     </form>
     <div class="smallLoader absolute" id="id_imLoader" style="display:none;"><img src="{% static 'core/images/common/im_smallAjaxLoader.gif' %}"/></div>
@@ -129,7 +128,7 @@
         </div>
         
         <div class="buttons center">
-            <input type="submit" value="{% trans 'APP-DELETE-TEXT' %}" class="button red small" title="{% trans 'APP-DELETE-TEXT' %}"/>
+            <input type="submit" value="{% trans 'APP-DELETE-TEXT' %}" class="button warning small" title="{% trans 'APP-DELETE-TEXT' %}"/>
             <input type="submit" value="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha small" title="{% trans 'APP-CANCEL-TEXT' %}"/>
         </div>
     </form>

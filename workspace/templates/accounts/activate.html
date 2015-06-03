@@ -1,9 +1,9 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags compress staticfiles %}
+{% load i18n extra_tags compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'workspace/styles/accounts.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script type="text/javascript" src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/accounts/activateModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -14,7 +14,9 @@
 {% block body %}
 <div class="account-box" id="id_activate">
     <header class="center">
-    <img src="{% static 'workspace/images/common/lg_junarAccountPages.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    <div class="radial-gradient">
+      <div class="logo-signin-brand"></div>
+    </div>
     </header>
     <div class="account-box-content">
         <form action="{{form.action}}" method="post">
@@ -39,7 +41,7 @@
 
                 <div class="row buttons center">
                     <p class="tip">{% trans "APP-BYCLICKINGAGREE-TEXT" %} <a href="http://www.junar.com/privacy-policy" onclick="window.open( this.href, 'Junar - Privacy Policy','width=600,height=500,resizable=yes,scrollbars=yes');return false;" title="{% trans 'APP-PRIVACY-TITLE' %}" target="_blank">{% trans "APP-PRIVACY-TEXT" %}</a>.</p>
-                    <input type="submit" id="id_activateButton" class="button small green" value="{% trans 'APP-START-TEXT' %}" />
+                    <input type="submit" id="id_activateButton" class="button small primary" value="{% trans 'APP-START-TEXT' %}" />
                 </div>
             </fieldset>
         </form>

@@ -1,9 +1,9 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components compress staticfiles %}
+{% load i18n extra_tags components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'workspace/styles/viewLandingPage.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/viewLandingPage.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 {% endblock %}
 
@@ -20,7 +20,7 @@
 	<div class="column CL">
 
 		<!-- Getting Started -->
-		<section class="box orange getting-started">
+		<section class="box support getting-started">
 			<header>
 				<h3 class="title">{% trans "LANDINGPAGE-GETTINGSTARTED-TITLE" %} <span>{% trans "LANDINGPAGE-GETTINGSTARTED-SUBTITLE" %}</span></h3>
 			</header>
@@ -68,7 +68,7 @@
 			<header class="clearfix">
 				<h3 class="title FL">{% trans "LANDINGPAGE-NUMBERS-TITLE" %}</h3>
 				{% if 'workspace.can_access_report' in auth_manager.privileges %}
-				<a href="/reports/action_query" class="button small green FR" title="{% trans 'LANDINGPAGE-NUMBERS-REPORTS' %}" style="display:none;">{% trans "LANDINGPAGE-NUMBERS-REPORTS" %}</a>
+				<a href="/reports/action_query" class="button small primary FR" title="{% trans 'LANDINGPAGE-NUMBERS-REPORTS' %}" style="display:none;">{% trans "LANDINGPAGE-NUMBERS-REPORTS" %}</a>
 				{% endif %}
 			</header>
 			<div class="box-content">

@@ -1,0 +1,21 @@
+/*** Mixins ***/     
+
+/* Gradient */
+@mixin linear-gradient($fromColor, $toColor) {
+	background:$fromColor;
+  background:-moz-linear-gradient(top,$fromColor 0%,$toColor 92%);
+  background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$fromColor),color-stop(92%,$toColor));
+  background:-webkit-linear-gradient(top,$fromColor 0%,$toColor 92%);
+  background:-o-linear-gradient(top,$fromColor 0%,$toColor 92%);
+  background:-ms-linear-gradient(top,$fromColor 0%,$toColor 92%);
+  background:linear-gradient(to bottom,$fromColor 0%,$toColor 92%);
+  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$fromColor',endColorstr='$toColor',GradientType=0);
+}
+
+@mixin radial-gradient($fromColor, $toColor) {
+  background:$fromColor;
+  background:-webkit-radial-gradient(35% 50%, $fromColor,$toColor);
+  background:-o-radial-gradient(35% 50%, $fromColor,$toColor);
+  background:-moz-radial-gradient(35% 50%, $fromColor,$toColor);
+  background:radial-gradient(35% 50%, $fromColor,$toColor);
+}

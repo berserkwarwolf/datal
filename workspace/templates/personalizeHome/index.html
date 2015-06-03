@@ -1,16 +1,16 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components  compress staticfiles %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
 <meta name="main-option" content="id_account_admin"/>
 {% compress css %}
 <!-- CSS LIBS -->
-<link href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
-<link type="text/css" href="{% static 'core/styles/plugins/jquery-file-upload/jquery.fileupload.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
+<link href="{% sass_src 'core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
+<link type="text/css" href="{% sass_src 'core/styles/plugins/jquery-file-upload/jquery.fileupload.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
 
 <!-- CSS JUNAR -->
-<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/personalizeHome.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/personalizeHome.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
 <!-- JS LIBS -->
@@ -206,7 +206,7 @@
 		<aside class="CR FR">
 			<div class="helpBox">
         <div class="helpBoxInner">
-          <h3>{% trans "DSFIND-HELPTIP-TITLE" %}</h3>
+          <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
             <div class="rowTop">{% trans "ACCOUNT-HOME-HELPTIP" %}</div>
             <div class="rowBottom">{% trans "ACCOUNT-HOME-HELPTIP-2" %}</div>
           </div>
@@ -220,8 +220,8 @@
 
   <section class="formContainer">
   <div class="buttons center">
-    <a id="id_preview" title="{% trans 'APP-PREVIEW-TEXT' %}" class="button small green">{% trans 'APP-PREVIEW-TEXT' %}</a>
-    <a id="id_save" title="{% trans 'APP-SAVE-TEXT' %}" class="button small green">{% trans 'APP-SAVE-TEXT' %}</a>
+    <a id="id_preview" title="{% trans 'APP-PREVIEW-TEXT' %}" class="button small primary">{% trans 'APP-PREVIEW-TEXT' %}</a>
+    <a id="id_save" title="{% trans 'APP-SAVE-TEXT' %}" class="button small primary">{% trans 'APP-SAVE-TEXT' %}</a>
   </div>
   </section>
 

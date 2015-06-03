@@ -1,4 +1,4 @@
-{% load i18n compress staticfiles %}
+{% load i18n compress staticfiles sass_tags %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -16,9 +16,9 @@
 
 {% compress css %}
 <!-- DATA STREAM BOX -->
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
 <!-- COMPONENT -->
-<link type="text/css" rel="stylesheet" media="screen" media="screen" href="{% static 'workspace/styles/errorPages.css' %}" />
+<link type="text/css" rel="stylesheet" media="screen" media="screen" href="{% sass_src 'workspace/styles/errorPages.css' %}" />
 {% endcompress %}
 
 <script type="text/javascript">

@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components core_components compress staticfiles %}
+{% load i18n extra_tags components core_components compress staticfiles sass_tags %}
 
 {% block SEO %}
     <title>{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -20,24 +20,20 @@
 {% block meta %}
     {% compress css %}
     <!-- BLOCK PAGE TITLE -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/blockPageTitle.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/modules/blockPageTitle.css' %}"/>
     <!-- DATA STREAM BOX -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamBox.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
     <!-- DATA STREAM FORM -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/dataStreamForm.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamForm.css' %}"/>
     <!-- TAGS CONTAINER -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/tagsContainer.css' %}"/>
-    <!-- LIQUID WIDTH -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/_modules/liquidWidth.css' %}"/>
-    <!-- COMPONENT -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'workspace/styles/_components/dataServicesManager.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/tagsContainer.css' %}"/>
 
     <!-- BRANDED -->
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
-    <link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/mapcharts.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/components/mapcharts.css' %}"/>
+    {% endcompress %}
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
     <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-    {% endcompress %}
 
     <script type="text/javascript" src="/js_core/base_modules/embed_code/embedCode.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_microsites/datastream_manager/datastreamModules.js?id={{settings.VERSION_JS_CSS}}"></script>

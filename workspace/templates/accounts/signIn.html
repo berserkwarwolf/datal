@@ -1,10 +1,15 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags compress staticfiles %}
+{% load i18n extra_tags compress staticfiles sass_tags %}
 
 {% block meta %}
-{% compress css %}
-<link href="{% static 'workspace/styles/accounts.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-{% endcompress %}
+
+{% block css_includes %}
+  {% compress css %}
+    <link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
+    <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+  {% endcompress %}
+{% endblock %}
+
 <script type="text/javascript" src="/js_workspace/accounts/signInModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/accounts/signInView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}
@@ -12,7 +17,9 @@
 {% block body %}
 <div class="account-box" id="id_signIn">
   <header class="center">
-    <img src="{% static 'workspace/images/common/lg_junarAccountPages.png' %}" alt="{% trans 'HEADER-JUNAR-TITLE' %}" title="{% trans 'HEADER-JUNAR-TITLE' %}"/>
+    <div class="radial-gradient">
+      <div class="logo-signin-brand"></div>
+    </div>
   </header>
   <div class="account-box-content">
     <form action="{{form.action}}" method="post">
@@ -30,7 +37,7 @@
         <div class="row remember clearfix">
           {{form.remember_me}}
           <label for="id_remember_me">{% trans "APP-REMEMBERME-TEXT" %}</label>
-          <input id="id_submitButton" type="submit" class="button green small" value="{% trans 'APP-LOGIN-TEXT' %}" />
+          <input id="id_submitButton" type="submit" class="button primary small" value="{% trans 'APP-LOGIN-TEXT' %}" />
         </div>
       </fieldset>
     </form>

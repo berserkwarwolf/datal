@@ -1,4 +1,4 @@
-.create .box .datasetUploadFile{background-image:url(../images/createDataset/thumb_createNewDatasetUploadFile.svg);}
+.create .box .datasetUploadFile svg{fill:$nav-icon-color;}
 .create .box .datasetWebsite{background-image:url(../images/createDataset/thumb_createNewDatasetWebsite.svg);}
 .create .box .datasetWebService{background-image:url(../images/createDataset/thumb_createNewDatasetWebService.svg);}
 

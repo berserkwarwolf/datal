@@ -1,9 +1,9 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components compress staticfiles %}
+{% load i18n extra_tags components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'workspace/styles/viewReports.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/viewReports.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script language="javascript" src="/js_workspace/viewReports/viewReports.js"></script>
 {% endblock %}
@@ -84,7 +84,7 @@
 
       </div>
       <footer class="box-footer center">
-        <a href="#" class="button small green" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
+        <a href="#" class="button small primary" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
       </footer>
     </section>
 
@@ -99,7 +99,7 @@
 
       </div>
       <footer class="box-footer center">
-        <a href="#" class="button small green" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
+        <a href="#" class="button small primary" title="{% trans 'APP-DOWNLOAD-CSV-TEXT' %}">{% trans 'APP-DOWNLOAD-CSV-TEXT' %}</a>
       </footer>
     </section>
 

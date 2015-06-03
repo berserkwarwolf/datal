@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components core_components compress staticfiles %}
+{% load i18n extra_tags components core_components compress staticfiles sass_tags %}
 
 {% block SEO %}
     <title>{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -21,9 +21,9 @@
 
 {% compress css %}
 <!-- CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'core/styles/plugins/jquery.gritter.css' %}" />
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/viewDataStream.css' %}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/components/viewChart.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/plugins/jquery.gritter.css' %}" />
+<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/viewDataStream.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/viewChart.css' %}"/>
 {% endcompress %}
 
 <!-- JS LIBS -->
@@ -59,10 +59,10 @@
 <script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% compress css %}
 <!-- BRANDED CSS -->
-<link type="text/css" rel="stylesheet" media="screen" href="{% static 'microsites/styles/modules/brandedFull.css' %}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
+{% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-{% endcompress %}
 <!-- BRANDED JS -->
 <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
   

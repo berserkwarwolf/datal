@@ -1,12 +1,11 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
 {% compress css %}
-<link href="{% static 'workspace/styles/_modules/workspaceCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/manageCommon.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'core/styles/_modules/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'workspace/styles/_components/accountAdmin.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/manageCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script src="/js_workspace/admin_manager/users.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
 <meta name="main-option" content="id_settings_option"/>
@@ -23,7 +22,7 @@
         <div class="titleContainer clearfix">
             <h3 class="FL">{% trans "APP-USERS-TEXT" %}</h3>
             <div class="actionButtons FR">
-                <button class="button green small" title="{% trans 'WORKSPACE-CREATE-USER' %}" id="id_create_user">{% trans "WORKSPACE-CREATE-USER" %}</button>
+                <button class="button primary small" title="{% trans 'WORKSPACE-CREATE-USER' %}" id="id_create_user">{% trans "WORKSPACE-CREATE-USER" %}</button>
             </div>
         </div>
         
@@ -122,7 +121,7 @@
             </div>
 
             <div class="buttons center">
-                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button green small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
             </div>
         </div>
     </form>
