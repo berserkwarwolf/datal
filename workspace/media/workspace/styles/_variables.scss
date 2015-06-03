@@ -1,25 +1,36 @@
 /*** Variables ***/
 
 /* Logo */
-$logo-signin-url:"../images/common/logo_datal_signin.png";						/* URL of logo for Sign in page. Recommended size: 132x70 px */
-$logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo for Workspace header. Recommended size: 87x43 px */
+
+	/* Signin logo */
+	$logo-signin-url:"../images/common/logo_datal_signin_color.png";			/* URL of logo for Sign in page. Recommended size: 132x70 px */
+	$logo-signin-width:260px;													/* Width of image */
+	$logo-signin-height:180px;													/* Height of image */
+
+	/* Header bar logo */
+	$logo-header-url:"../images/common/logo_datal_header_color.png";			/* URL of logo for Workspace header. Recommended size: 87x43 px */
+	$logo-header-width:186px;													/* Width of image. Height must be 43 px */
 
 
 /* Branding */
 
 	/* Brand color */
-	$brand-color:#333F4F;														/* Brand primary color */
+	$brand-color:#fbfaf5;														/* Brand primary color */
 
 	/* Accent color */
 	$accent-color:#D16280;														/* Brand secondary color */
+
+	/* Base color */
+	$color-base:#042842;														/* Color for backgrounds */
+
 
 /* Fonts */
 
 	/* Family */
 	$font-primary-family:Arial,Helvetica,sans-serif;							/* For fonts in general */
-	$font-secondary-family:'Roboto Condensed',arial,helvetica,sans-serif;		/* For some subtitles */
-	$font-titles-family:'Roboto Condensed',Helvetica,sans-serif;				/* For titles in general */
-	$font-extra-family:'Roboto Condensed',arial,helvetica,sans-serif;			/* For table titles */
+	$font-secondary-family:'Roboto',arial,helvetica,sans-serif;					/* For some subtitles */
+	$font-titles-family:'Roboto',Helvetica,sans-serif;							/* For titles in general */
+	$font-extra-family:'Roboto',arial,helvetica,sans-serif;						/* For table titles */
 
 	/* Size */
 	$font-size-base:12px !important;											/* For body paragraphs and text in general */
@@ -32,26 +43,42 @@ $logo-header-url:"../images/common/logo_datal_header.png";						/* URL of logo f
 	$font-color-base:#333F4F;													/* For body paragraphs and titles */
 	$font-color-semi-light:#333F4F;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */
+	$font-color-highlight:#D16280;												/* For titles on highlighted boxes */
 
 	/* Links */
 	$link-color:#027fc0;														/* Color for links */
+	$link-color-highlight:#042842;												/* Color for some highlighted links */
+
+
+/* Nav icons */
+$nav-icon-color:#d3d3d3;														/* Color for nav icons */
+$nav-icon-color-hover:#00d67e;													/* Color for nav icons on :hover */
 
 
 /* Buttons */
-$buttons-font-family:Arial,Helvetica,sans-serif;							/* Font family for all buttons */
+$buttons-font-family:Arial,Helvetica,sans-serif;								/* Font family for all buttons */
 $buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color:#93A394;												/* Background color */
+	$button-primary-color:#00d67e;												/* Background color */
 	$button-primary-color-text:#FFF;											/* Font color */
+
+	/* Base button */
+	$button-base-color:#042842;													/* Background color */
+	$button-base-color-text:#FFF;												/* Font color */
 
 	/* Warning button */
 	$button-warning-color:#D16280;												/* Background color */
 	$button-warning-color-text:#FFF;											/* Font color */
 
 	/* Support button */
-	$button-support-color:#717463;												/* Background color */
+	$button-support-color:#dbdbdb;												/* Background color */
 	$button-support-color-text:#FFF;											/* Font color */
+
+
+/* Backgrounds */
+$background-color-highlight:#f8eef0;											/* Color for backgrounds on highlighted boxes */
+$background-color-remember-me:#f2dfe3;											/* Color for backgrounds on remember tips */
 
 
 /* Forms */
