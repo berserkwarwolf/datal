@@ -273,11 +273,7 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
 )
 
 API_APPLICATION_TYPE_CHOICES = (
-     ('00', 'TRIAL - 00')
-    ,('01', 'COMMERCIAL - 01')
-    ,('02', 'COMMERCIAL - 02')
-    ,('03', 'COMMERCIAL - 03')
-    ,('04', 'UNLIMITED - 04')
+    ('01', 'UNLIMITED - 01'),
 )
 
 

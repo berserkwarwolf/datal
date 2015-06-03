@@ -2,8 +2,8 @@ application:
   path: /home/vagrant/app
   statics_dir: /home/vagrant/static
   cdn: 'datastore:8080/resources/datal_cdn/'
-  api_key: ''
-  public_key: ''
+  api_key: '576bba0dd5a27df9aaac12d1d7ec25c8411fe29e'
+  public_key: '9d6508cced6919e1a132d47d9c85896132aaf516'
 
   settings:
     # Base Django Settings

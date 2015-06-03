@@ -1041,20 +1041,20 @@ class Preference(models.Model):
 
 
 class Application(models.Model):
-    user            = models.ForeignKey('User', null=True, blank=True)
-    account         = models.ForeignKey('Account', null=True, blank=True)
-    name            = models.CharField(max_length=80, blank=True)
-    description     = models.CharField(max_length=100, blank=True)
-    category        = models.CharField(max_length=40, blank=True)
-    locale          = models.CharField(max_length=10, blank=True)
-    url             = models.URLField(max_length=2048, blank=True)
-    auth_key        = models.CharField(max_length=40)
+    user = models.ForeignKey('User', null=True, blank=True)
+    account = models.ForeignKey('Account', null=True, blank=True)
+    name = models.CharField(max_length=80, blank=True)
+    description = models.CharField(max_length=100, blank=True)
+    category = models.CharField(max_length=40, blank=True)
+    locale = models.CharField(max_length=10, blank=True)
+    url = models.URLField(max_length=2048, blank=True)
+    auth_key = models.CharField(max_length=40)
     public_auth_key = models.CharField(max_length=40)
-    domains         = models.TextField(blank=True)
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    expires_at      = models.DateTimeField()
-    valid           = models.SmallIntegerField(default=0)
-    type            = models.CharField(max_length=2, choices=choices.API_APPLICATION_TYPE_CHOICES)
+    domains = models.TextField(blank=True)
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    expires_at = models.DateTimeField()
+    valid = models.SmallIntegerField(default=0)
+    type = models.CharField(max_length=2, choices=choices.API_APPLICATION_TYPE_CHOICES)
 
     class Meta:
         db_table = 'ao_applications'
@@ -1063,11 +1063,7 @@ class Application(models.Model):
         return self.name
 
     def human_readable_type(self):
-        human_type = {'00': 'Trial'
-             ,'01': 'Commercial Level 01'
-             ,'02': 'Commercial Level 02'
-             ,'03': 'Commercial Level 03'
-             ,'04': 'Unlimited!'}
+        human_type = {'01': 'Unlimited!'}
 
         return human_type[self.type]
 
