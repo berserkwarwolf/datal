@@ -1,5 +1,6 @@
 /* Import SASS variables */
 @import 'variables';
+@import 'functions';
 
 /* List */
 .resources-list h4{background-color:#f8f7f7;border-bottom:1px solid #dfdfdf;padding:8px 15px;font-weight:bold;color:$font-color-semi-light;}
@@ -27,7 +28,7 @@
 .resources-list table .actions li.delete a{color:#c00202;}
 .resources-list table i{font-style:normal;display:inline-block;}
 .resources-list table tr:nth-child(odd) td{background:#fbfbfb;}
-.resources-list table tr:hover td{background:#f6f9ff !important;}
+.resources-list table tr:hover td{background$accent-color-05 !important;}
 .resources-list table tr:hover li{visibility:visible;}
 .resources-list .icon-resources{width:inherit;padding-left:22px;}
 
