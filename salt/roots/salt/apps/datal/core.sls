@@ -137,3 +137,7 @@ include:
   - apps.datal.uwsgi.init
   - apps.datal.supervisor.init
 
+uwsgi_service:
+  supervisord.running:
+    - name: uwsgi
+    - restart: True

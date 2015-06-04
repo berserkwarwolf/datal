@@ -25,7 +25,3 @@ supervisor:
       - file: /etc/uwsgi/workspace.ini
       - file: /tmp/datal.log
 
-uwsgi_service:
-  supervisord.running:
-    - name: uwsgi
-    - restart: True
