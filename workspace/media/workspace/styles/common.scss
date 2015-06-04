@@ -632,7 +632,7 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .backgrid tr:hover td, 
 .ao-popup-overlay .backgrid tr:hover td h3, 
 .ao-popup-overlay .backgrid tr:hover td a, 
-.ao-popup-overlay .backgrid tr:hover td p{background-color:$accent-color;color:#FFF;cursor:pointer;text-shadow:0 1px 0 #1452b0;}
+.ao-popup-overlay .backgrid tr:hover td p{background-color:$accent-color;color:#FFF;cursor:pointer;text-shadow:0 1px 0 $accent-color-bold;}
 
 /* Override For Empty */
 .empty{}
