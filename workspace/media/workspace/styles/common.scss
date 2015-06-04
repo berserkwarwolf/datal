@@ -438,7 +438,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 .box > header .button{margin-top:10px;}
 .box .box-content{padding:15px}
 .box .box-content p{margin-bottom:15px;}
-.box .box-footer{background:#f6f9ff;border-top:1px solid #e5e3e3;padding:9px;
+.box .box-footer{background:$accent-color-05;border-top:1px solid #e5e3e3;padding:9px;
   -webkit-box-shadow:inset 0 1px 0 0 #fff;
      -moz-box-shadow:inset 0 1px 0 0 #fff;
           box-shadow:inset 0 1px 0 0 #fff;
@@ -565,7 +565,7 @@ i.icon.TNCLIMA{}
   .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
-.helpBox:first-child{background-color:$background-color-remember-me;background-image:none;padding:15px;float:right;margin:20px;
+.helpBox:first-child{background-color:$accent-color-05;background-image:none;padding:15px;float:right;margin:20px;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
@@ -602,7 +602,7 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .ov-content p.text{font-size:14px;line-height:18px;}
 .ao-popup-overlay .ov-content p:last-child{padding:0;}
 .ao-popup-overlay .ov-content select{font-size: 12px; width: 100%;}
-.ao-popup-overlay .ov-bottom{background-color: #f6f9ff; border-top: 1px solid #d7d7d7; padding: 15px; min-height: 57px;}
+.ao-popup-overlay .ov-bottom{background-color:$accent-color-05; border-top: 1px solid #d7d7d7; padding: 15px; min-height: 57px;}
 .ao-popup-overlay .ov-bottom form.form-search{width:240px;margin:0;}
 .ao-popup-overlay .ov-buttons{text-align:center;}
 .ao-popup-overlay .ov-buttons .button{margin:0 5px;}
