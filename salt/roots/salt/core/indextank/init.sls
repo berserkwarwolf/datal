@@ -20,7 +20,8 @@ indextank:
     - cwd: /usr/share/indextank-engine/
     - require:
       - git: Clone Indextank-engine Github
-
+    - watch:
+      - git: Clone Indextank-engine Github
 
 indextank_initd:
    file.managed:

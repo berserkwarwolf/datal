@@ -42,7 +42,7 @@ nginx:
 
               - location /media:
                 - alias:
-                  - {{ pillar['virtualenv']['path'] }}/lib/python2.7/site-packages/django/contrib/admin/static
+                  - /home/vagrant/env/lib/python2.7/site-packages/django/contrib/admin/static
 
               - location /:
                 - uwsgi_pass: 127.0.0.1:3016
@@ -93,19 +93,19 @@ nginx:
 
               - location /js_core:
                 - alias:
-                  - {{ pillar['application']['path'] }}/core/js
+                  - /home/vagrant/app/core/js
 
               - location /js_microsites:
                 - alias:
-                  - {{ pillar['application']['path'] }}/microsites/js
+                  - /home/vagrant/app/microsites/js
 
               - location /js_workspace:
                 - alias:
-                  - {{ pillar['application']['path'] }}/workspace/js
+                  - /home/vagrant/app/workspace/js
 
               - location /static:
                 - alias:
-                  - {{ pillar['application']['statics_dir'] }}
+                  - /home/vagrant/static
 
               - location /AgileOfficeServer:
                 - proxy_pass: http://127.0.0.1:8080/AgileOfficeServer
@@ -141,11 +141,11 @@ nginx:
 
               - location /js_core:
                 - alias:
-                  - {{ pillar['application']['path'] }}/core/js
+                  - /home/vagrant/app/core/js
 
               - location /static:
                 - alias:
-                  - {{ pillar['application']['statics_dir'] }}
+                  - /home/vagrant/static
 
               - location /AgileOfficeServer:
                 - proxy_pass: 'http://127.0.0.1:8080/AgileOfficeServer'
