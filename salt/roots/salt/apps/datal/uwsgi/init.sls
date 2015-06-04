@@ -1,14 +1,7 @@
-uwsgi:
+uwsgiinstall:
   pkg:
+    - name: uwsgi
     - installed
-  service.running:
-    - require:
-      - pkg: uwsgi
-    - watch:
-      - file: /etc/uwsgi/admin.ini
-      - file: /etc/uwsgi/api.ini
-      - file: /etc/uwsgi/microsite.ini
-      - file: /etc/uwsgi/workspace.ini
 
 admin_uwsgi_conf:
   file.managed:
@@ -41,3 +34,12 @@ uwsgi_log_dir_structure:
     - name: /var/log/uwsgi
     - mode: 777
 
+uwsgi:
+  service.running:
+    - require:
+      - pkg: uwsgi
+    - watch:
+      - file: /etc/uwsgi/admin.ini
+      - file: /etc/uwsgi/api.ini
+      - file: /etc/uwsgi/microsite.ini
+      - file: /etc/uwsgi/workspace.ini

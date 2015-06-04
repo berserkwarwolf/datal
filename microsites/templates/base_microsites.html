@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load compress staticfiles %}
+{% load compress staticfiles sass_tags %}
 
 {% block favicon %}
 <link rel="shortcut icon" href="{{preferences.account_favicon}}" />
@@ -7,7 +7,7 @@
 
 {% block css_includes %}
 	{% compress css %}
-	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_tags 'microsites/styles/stickyFooter.css' %}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/stickyFooter.css' %}"/>
 	{% endcompress %}
 {% endblock %}
 
