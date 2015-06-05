@@ -28,7 +28,7 @@
 .resources-list table .actions li.delete a{color:#c00202;}
 .resources-list table i{font-style:normal;display:inline-block;}
 .resources-list table tr:nth-child(odd) td{background:#fbfbfb;}
-.resources-list table tr:hover td{background$accent-color-05 !important;}
+.resources-list table tr:hover td{background:$accent-color-05 !important;}
 .resources-list table tr:hover li{visibility:visible;}
 .resources-list .icon-resources{width:inherit;padding-left:22px;}
 

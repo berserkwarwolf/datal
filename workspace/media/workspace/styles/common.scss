@@ -214,7 +214,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header .tab a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;display:block;}
   .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
-  .header .tab > a:after{content:"";border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid $brand-color-bold;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;opacity:.5}
+  .header .tab > a:after{content:"";border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid $color-base;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;opacity:.5}
   .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
   .header .tab .img img{border:1px solid $brand-color-bold;float:left;width:24px;height:24px;background:$brand-color-bold;}
   .header .tab strong{font-weight:normal;float:left;display:block;}
@@ -224,7 +224,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header .tab.pulldown:hover,
   .header .tab.pulldown.active,
   .header .tab.pulldown.active:hover{background-color:$brand-color-bold;}
-  .header .tab.pulldown:hover a:after{border-top:6px solid $color-base;}
+  .header .tab.pulldown:hover a:after{border-top:6px solid $color-base;opacity:1}
   .header .tab.pulldown.active > a{background-position:right -45px;}
 
     /* Submenu */
