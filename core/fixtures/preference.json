@@ -27,7 +27,7 @@
    }
 },
 {
-   "pk": 4,
+   "pk": 5,
    "model": "core.preference",
    "fields": {
        "account": 1,
@@ -57,7 +57,7 @@
         "fields": {
             "account": 1,
             "key": "account.bio",
-            "value": "<p>Este portal de datos es un sitio din\u00e1mico en constante crecimiento, por lo que seguir\u00e1 expandi\u00e9ndose e incorporando la informaci\u00f3n de otros servicios y m\u00e1s datos de los organismos p\u00fablicos.</p>\r\n<p>El objetivo de esta herramienta es que las personas tengan acceso a la informaci\u00f3n en base a la cual el gobierno toma decisiones para las pol\u00edticas p\u00fablicas y que tambi\u00e9n la puedan utilizar para sus propias investigaciones e intereses. Por ejemplo, construir aplicaciones y conducir an\u00e1lisis.</p>\r\n<p>Creemos que el acceso a la informaci\u00f3n y la transparencia beneficia a la democracia y la rendici\u00f3n de cuentas por parte de las autoridades.</p>"
+            "value": ""
         },
         "model": "core.preference",
         "pk": 8
@@ -101,15 +101,6 @@
     {
         "fields": {
             "account": 1,
-            "key": "account.comments",
-            "value": ""
-        },
-        "model": "core.preference",
-        "pk": 13
-    },
-    {
-        "fields": {
-            "account": 1,
             "key": "account.page.titles",
             "value": "Portal de Datos P\u00fablicos"
         },
@@ -133,33 +124,6 @@
         },
         "model": "core.preference",
         "pk": 16
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "branding.footer",
-            "value": ""
-        },
-        "model": "core.preference",
-        "pk": 17
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "branding.header",
-            "value": ""
-        },
-        "model": "core.preference",
-        "pk": 18
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.featured.dashboards",
-            "value": "[\"1\",]"
-        },
-        "model": "core.preference",
-        "pk": 19
     },
     {
         "fields": {
@@ -245,65 +209,11 @@
     {
         "fields": {
             "account": 1,
-            "key": "account.home.main.content",
-            "value": "<p>Los datos abiertos buscan, en una primera l\u00ednea, transparentar el quehacer gubernamental, publicando abierta y libremente informaci\u00f3n del Gobierno, la cual es de inter\u00e9s ciudadano.</p>\r\n<p>En relaci\u00f3n a lo anterior, como Portal de Datos Abiertos nos preocupamos del entendimiento de la informaci\u00f3n publicada por parte de toda la ciudadan\u00eda, para lo cual nos hemos enfocado en facilitar la manera en que esta se muestra. Para esto hemos habilitado la presente secci\u00f3n \u201cRecursos\u201d, donde crearemos visualizaciones de las distintas publicaciones que existen en el portal.</p>\r\n<h2>Visualizaciones</h2>\r\n<p>Las visualizaciones pueden ser encontradas en el listado que se muestra a continuaci\u00f3n, donde existen 2 tipos: vistas, las cuales es una visualizaci\u00f3n como tabla del contenido de la publicaci\u00f3n; y gr\u00e1ficas, las cuales son visualizaciones que muestran el contenido de la informaci\u00f3n en forma de gr\u00e1fico de barras o de torta.</p>\r\n<p>Adicionalmente, hemos creado colecciones donde agrupamos distintas visualizaciones de publicaciones referentes a la misma materia.</p>"
-        },
-        "model": "core.preference",
-        "pk": 33
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.home.featured.content",
-            "value": "<h1 style=\"background: url(http://datos.gob.cl/assets/img/menu/dash.png) 10px top no-repeat; margin-bottom: 30px;font-size: 24px;line-height: 24px;text-transform: uppercase;padding: 0 0 5px 40px;border-bottom: 2px solid #585858;color:#333 !important;\">Recursos</h1>"
-        },
-        "model": "core.preference",
-        "pk": 34
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.home.search.content",
-            "value": "<h2>Visualizaciones a tu disposici\u00f3n</h2>\r\n<p>Adem\u00e1s de generar estas visualizaciones, las hemos habilitado para tu libre uso. Es decir, puedes descargarlas como archivo en formato Excel y CSV, adem\u00e1s de tomar la visualizaci\u00f3n como tal y utilizarla como necesites, como por ejemplo en tu sitio web, o utilizar la <a href=\"http://recursos.datos.gob.cl/developers/\">API</a> para tener libre acceso desde alg\u00fan desarrollo realizado.</p>"
-        },
-        "model": "core.preference",
-        "pk": 35
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.home.footer.right",
-            "value": "<p><strong>\u00bfTe gustar\u00eda ver una visualizaci\u00f3n en particular?</strong> Te invitamos a enviarnos tus comentarios llenando el formulario en la secci\u00f3n <a href=\"http://datos.gob.cl/participa\">\u201cParticipa\u201d</a> solicitando la visualizaci\u00f3n de alguna publicaci\u00f3n.</p>"
-        },
-        "model": "core.preference",
-        "pk": 36
-    },
-    {
-        "fields": {
-            "account": 1,
             "key": "account.favicon",
             "value": "http://junar-cdn-portal.s3-website-us-east-1.amazonaws.com/2/favicon"
         },
         "model": "core.preference",
         "pk": 37
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "account.home.footer.left",
-            "value": "<script type=\"text/javascript\">$(document).ready(function(){\r\n\r\n    $fDataServicesContainer.trigger(\"configuration\", {\r\n        width: 936,\r\n        items: {\r\n            width: 480,\r\n            visible: 2\r\n        },\r\n        scroll: {\r\n            items: 2,\r\n            onEnd:\r\n                function(){\r\n                    $fDataServicesContainer.trigger(\"destroy\");\r\n                    $('.caroufredsel_wrapper').css('border', 0);\r\n                    initNewSlider();\r\n                    restartCharts();\r\n                }\r\n        },\r\n        auto: {\r\n            duration: 800\r\n        }\r\n    });\r\n\r\n});\r\n\r\nfunction initNewSlider(){\r\n      $fDataServicesContainer.carouFredSel({\r\n        circular: true,\r\n        infinite: false,\r\n        width: 936,\r\n        height: 229,\r\n        items: {\r\n            minimum: 1,\r\n            visible: 2,\r\n            width: 480,\r\n            height: 229\r\n        },\r\n        scroll: {\r\n            items: 2,\r\n            duration: 1000,\r\n            pauseOnHover: true,\r\n            onEnd:\r\n                function(){\r\n                    $fDataServicesContainer.trigger(\"destroy\");\r\n                    $('.caroufredsel_wrapper').css('border', 0);\r\n                    initNewSlider();\r\n                    restartCharts();\r\n                }\r\n        },\r\n        auto: {\r\n            pauseDuration: 5000,\r\n            delay: 5000,\r\n            duration: 800,\r\n            easing: \"easeOutExpo\"\r\n        }\r\n      });\r\n}\r\n</script>"
-        },
-        "model": "core.preference",
-        "pk": 38
-    },
-    {
-        "fields": {
-            "account": 1,
-            "key": "home.full.css",
-            "value": ".searchContainerContent{position:relative;}\r\n#dataset_search{position:absolute;right:10px;bottom:-53px;}\r\nbody, .layout, .content{background:#fff;}\r\n.homeColumns .CL,\r\n.homeColumns .CR{float:none !important;width: auto !important;}\r\n.homeColumns .CR .boxContent{margin:0}\r\n\r\n.paddingSlider{padding:0;}\r\n.sliderWrapper{width:940px;padding:0;background:none;}\r\n.sliderContainer{right:auto;position:static;top:0;margin-bottom:20px;}\r\n\r\n.sliderWrapper .dataStreamBorder{width:940px;border:0;}\r\n\r\n.dataStreamBox,\r\n.chartBox{width:456px;border:1px solid #e2e0e0;height:227px !important;}\r\n.sliderWrapper .dataStreamContainer{width:480px;}\r\n.dataStreamBox h2 a .txt{width:auto;float:none}\r\n.dataStreamBox h2 a img{display:none;}\r\n.dataStreamBox h2 a .txt .titleDS{height:auto;white-space:normal;}\r\n.dataStreamBox h2 a .txt .titleDS .infoDS .sep,\r\n.dataStreamBox h2 a .txt .titleDS .infoDS .authorDS,\r\n.dataStreamBox h2 a .txt .titleDS .descriptionDS{display:none}\r\n.dataStreamBox h2 a .txt .titleDS strong{height:32px;display:block;}\r\n#id_dataservices_container{margin-left:12px !important;}\r\n\r\n.chartContainerInner{width:456px;margin:0 auto;background:#fff !important;}\r\n\r\nbody .caroufredsel_wrapper{width:938px !important;border:0;margin:0 !important;}\r\n\r\n.sliderWrapper .dataStreamBorder{background:transparent;}\r\nbody .caroufredsel_wrapper{border:0 !important;}\r\n.sliderWrapper .dataStreamBox{background:#fff;}"
-        },
-        "model": "core.preference",
-        "pk": 39
     },
     {
         "fields": {

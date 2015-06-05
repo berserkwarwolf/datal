@@ -1,7 +1,7 @@
 {% load i18n %}
 <div class="headerAuto">
     <div class="innerHeader w960 clearfix">
-        <a href="{{preferences.account_link}}" title="{{preferences.account_name}}" class="logo"><img src="{{preferences.account_logo}}" alt="{{preferences.account_name}}"/></a>
+        <a href="/" title="{{preferences.account_name}}" class="logo"><img src="{{preferences.account_logo}}" alt="{{preferences.account_name}}"/></a>
         <form method="get" action="/search/" class="search clearfix">
             <input type="text" name="q" class="field" placeholder="{% trans 'HEADERAUTO-SEARCH-PLACEHOLDER' %}"/>
             <input type="submit" value="{% trans 'APP-SEARCH-TEXT' %}" class="button" title="{% trans 'APP-SEARCH-TEXT' %}"/>

@@ -2,7 +2,7 @@ from core.exceptions import *
 
 
 class DatalWorkspaceException(DatalException):
-    """Junar Workspace Exception class: Base class for handling exceptions."""
+    """Datal Workspace Exception class: Base class for handling exceptions."""
     def __init__(self, title=None, description='', status_code=400, extras={}):
         super(DatalWorkspaceException, self).__init__(title=title,
                                                       description=description,

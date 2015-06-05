@@ -1,6 +1,6 @@
 /*
  * jQuery UI Widget Related Dashboards, Visualizations and Data Streams @VERSION
- * Created by : Junar
+ * Created by : Datal
  * 
  * Depends:
  *	jquery.ui.core.js

@@ -80,8 +80,8 @@ var TwitterShareBox = ShareBox.extend({
                      , 'lang'    : 'en'
                      , 'text'    : ''
                      , 'url'     : ''
-                     , 'via'     : 'Junar'
-                     , 'related' : 'Junar'
+                     , 'via'     : 'Datal'
+                     , 'related' : 'Datal'
                      , 'counturl': ''
           }
     }

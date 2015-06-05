@@ -1,4 +1,4 @@
-# Junar's language pack.
+# Datal's language pack.
 # Copyright (C) 2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -452,7 +452,7 @@ msgid "APP-INSTITUTIONAL-TEXT"
 msgstr "Institucional"
 
 msgid "APP-ABOUTUS-TITLE"
-msgstr "Ve quienes están detrás de Junar"
+msgstr "Ve quienes están detrás de Datal"
 
 msgid "APP-ABOUTUS-TEXT"
 msgstr "Sobre nosotros"
@@ -464,16 +464,16 @@ msgid "APP-WIKI-TEXT"
 msgstr "Wiki"
 
 msgid "APP-COMMUNITY-TEXT"
-msgstr "Comunidad Junar"
+msgstr "Comunidad Datal"
 
 msgid "APP-FOLLOWUSON-TEXT"
 msgstr "Síguenos en"
 
 # msgid "HEADER-JUNAR-TITLE"
-# msgstr "Junar es la plataforma de Datos Abiertos más fácil de usar"
+# msgstr "Datal es la plataforma de Datos Abiertos más fácil de usar"
 
 msgid "HEADER-JUNAR-TITLE-PRIVATE"
-msgstr "Junar es la plataforma de distribución de Datos más fácil de usar"
+msgstr "Datal es la plataforma de distribución de Datos más fácil de usar"
 
 msgid "APP-COLLECT-TEXT"
 msgstr "Recolectar"
@@ -500,7 +500,7 @@ msgid "APP-ACCOUNTADMIN-TEXT"
 msgstr "Configuración de la cuenta"
 
 msgid "APP-SIGNINWELCOME-TEXT"
-msgstr "<h2>Bienvenido de nuevo! Ésta es la entrada privada para los clientes actuales de Junar.<br/>Si has llegado aquí por casualidad, por favor <a href='http://www.junar.com'>regrese</a>.</h2><p><strong>Con esta plataforma de datos abiertos, usted puede:</strong></p><ul><li>Administrar sus proyectos de Datos Abiertos de extremo a extremo</li><li>Abrir datos curados a tu audiencia</li><li>Integrar facilmente los datos abiertos a su sitio web</li></ul>"
+msgstr "<h2>Bienvenido de nuevo! Ésta es la entrada privada para los clientes actuales de Datal.<br/>Si has llegado aquí por casualidad, por favor <a href='http://www.junar.com'>regrese</a>.</h2><p><strong>Con esta plataforma de datos abiertos, usted puede:</strong></p><ul><li>Administrar sus proyectos de Datos Abiertos de extremo a extremo</li><li>Abrir datos curados a tu audiencia</li><li>Integrar facilmente los datos abiertos a su sitio web</li></ul>"
 
 msgid "MODEL-USERNAME-TEXT"
 msgstr "Usuario"
@@ -536,7 +536,7 @@ msgid "DSFIND-HELPTIP-TITLE"
 msgstr "Tips Útiles"
 
 msgid "USR-GRAVATAR-TIP1"
-msgstr "Junar usa el poder de"
+msgstr "Datal usa el poder de"
 
 msgid "USR-GRAVATAR-TIP2"
 msgstr "para mostrar tu imagen. Si ya tienes una cuenta en Gravatar, puedes cambiar "
@@ -560,7 +560,7 @@ msgid "FORFOT-PASSWORD-SIGNIN"
 msgstr "Ingresa con la nueva contraseña"
 
 msgid "OV-SIGINCREATE-SIGINSUBMIT"
-msgstr "Ingresa a Junar"
+msgstr "Ingresa a Datal"
 
 msgid "APP-THEOPENDATAPLATFORM-TEXT"
 msgstr "Plataforma de Datos Abiertos"
@@ -590,7 +590,7 @@ msgid "APP-DATAECONOMY-TEXT"
 msgstr "Datos Abiertos"
 
 msgid "APP-WHYJUNAR-TEXT"
-msgstr "¿Por qué Junar?"
+msgstr "¿Por qué Datal?"
 
 msgid "APP-HOWITWORKS-TEXT"
 msgstr "Cómo Funciona"
@@ -692,7 +692,7 @@ msgid "APP-DATASET-ABBR-TEXT"
 msgstr "<abbr title='Conjuntos'>Conj.</abbr> datos"
 
 msgid "APP-ACTIVITYSTREAM-TITLE"
-msgstr "¡Bienvenido a Junar!"
+msgstr "¡Bienvenido a Datal!"
 
 msgid "APP-TOTAL-TEXT"
 msgstr "Total"
@@ -713,10 +713,10 @@ msgid "ACCOUNT-BRANDING-FOOTER-TIP"
 msgstr "Pegue una URL para el pie<br/>Example: http://www.my-organization.com/my-footer.html"
 
 msgid "BRANDED-OPEN-DATA-SITE-TIP"
-msgstr "<p>Los sitios de datos abiertos de Junar te permiten integrar tus colecciones modificadas de Datos Abiertos en tu sitio web. Incluye la opci&oacute;n de agregar un encabeza y pie de página. El sitio de datos abiertos refleja la imagen de tu sitio y le permite a tu audiencia acceso total a tus datos publicados.</p><br />"
+msgstr "<p>Los sitios de datos abiertos de Datal te permiten integrar tus colecciones modificadas de Datos Abiertos en tu sitio web. Incluye la opci&oacute;n de agregar un encabeza y pie de página. El sitio de datos abiertos refleja la imagen de tu sitio y le permite a tu audiencia acceso total a tus datos publicados.</p><br />"
 
 msgid "BRANDED-OPEN-DATA-SITE-TIP-PRIVATE"
-msgstr "<p>Los sitios de datos privados de Junar te permiten integrar tus colecciones modificadas de Datos Abiertos en tu sitio web. Incluye la opci&oacute;n de agregar un encabeza y pie de página. El sitio de datos privados refleja la imagen de tu sitio y le permite a tu audiencia acceso total a tus datos publicados.</p><br />"
+msgstr "<p>Los sitios de datos privados de Datal te permiten integrar tus colecciones modificadas de Datos Abiertos en tu sitio web. Incluye la opci&oacute;n de agregar un encabeza y pie de página. El sitio de datos privados refleja la imagen de tu sitio y le permite a tu audiencia acceso total a tus datos publicados.</p><br />"
 
 msgid "WORKSPACE-CUSTOMIZE-SETTINGS"
 msgstr "Personalizar la visualización"
@@ -764,7 +764,7 @@ msgid "ACCOUNT-DOMAIN-TIP"
 msgstr "Introduzca su dominio aquí.<br/>Es necesario primero configurar un CNAME con tu administrador de sistemas y el apuntarlo a cloud.junar.com"
 
 msgid "WRKSPCE-DOMAIN-TIP"
-msgstr "<p>Junar le permite abrir datos.</p><p>Con el fin de definir en donde se abren los datos, le ofrecemos 2 alternativas:</p><ul><li>Junar puede alojar sus datos en un dominio de datos abiertos</li><li>Usted puede integrar sus datos en su sitio web mediante la creación de un subdominio y apuntarlo a nuestra nube</li></ul><p>Por favor, póngase en contacto con nosotros en <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> para ayudarle a configurar esto en pocos minutos.</p>"
+msgstr "<p>Datal le permite abrir datos.</p><p>Con el fin de definir en donde se abren los datos, le ofrecemos 2 alternativas:</p><ul><li>Datal puede alojar sus datos en un dominio de datos abiertos</li><li>Usted puede integrar sus datos en su sitio web mediante la creación de un subdominio y apuntarlo a nuestra nube</li></ul><p>Por favor, póngase en contacto con nosotros en <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> para ayudarle a configurar esto en pocos minutos.</p>"
 
 msgid "ACCOUNT-CONTACT-INFORMATION-TEXT"
 msgstr "Información de contacto"
@@ -788,7 +788,7 @@ msgid "SOCIAL-NOTES-TIP"
 msgstr "Añade mas contexto a tus Vistas añadiendo notas."
 
 msgid "WRKSPC-SOCIAL-TIP"
-msgstr "<p>Los datos deben ser abiertos para aumentar su valor!</p><br/><p>Junar facilita la optimizacion de tus datos para que sean compartidos en redes sociales e indexados en motores de busqueda mas facilmente.</p>"
+msgstr "<p>Los datos deben ser abiertos para aumentar su valor!</p><br/><p>Datal facilita la optimizacion de tus datos para que sean compartidos en redes sociales e indexados en motores de busqueda mas facilmente.</p>"
 
 msgid "ACCOUNT-USERS-TAB"
 msgstr "Usuarios"
@@ -818,7 +818,7 @@ msgid "APP-USER-TIP"
 msgstr "<h6>TIPS ÚTILES</h6><p>Hay 3 tipos de roles:</p><p><strong>Editores:</strong><br> Recolectar y transformar datos en vistas y visualizaciones, y usarlas en colecciones.</p><p><strong>Publicadores:</strong><br> Mismos privilegios que Editores, más el permiso de publicar el recurso en el sitio de datos abiertos.</p><p><strong>Administradores:</strong><br> Mismos permisos que Editores y Publicadores, más ajustes de la cuenta.</p>"
 
 msgid "APP-USER-TIP-PRIVATE"
-msgstr "<h6>TIPS ÚTILES</h6><p>Hay 4 roles en la plataforma Privada Data Junar:</p><p><strong>Editores:</strong><br> Recolectar y transformar datos en vistas, visualizaciones y colecciones.</p><p><strong>Publicadores:</strong><br> Recolectar y mejorar los conjuntos de datos, y aprobar los datos que se publicarán en el sitio de datos privados.</p><p><strong>Administradores:</strong><br> Recolectar, mejorar, y publicar conjuntos de datos y definir las funciones y ajustes de la cuenta</p><p><strong>Miembros:</strong> Posibilidad de acceder a recursos privados.</p>"
+msgstr "<h6>TIPS ÚTILES</h6><p>Hay 4 roles en la plataforma Privada Data Datal:</p><p><strong>Editores:</strong><br> Recolectar y transformar datos en vistas, visualizaciones y colecciones.</p><p><strong>Publicadores:</strong><br> Recolectar y mejorar los conjuntos de datos, y aprobar los datos que se publicarán en el sitio de datos privados.</p><p><strong>Administradores:</strong><br> Recolectar, mejorar, y publicar conjuntos de datos y definir las funciones y ajustes de la cuenta</p><p><strong>Miembros:</strong> Posibilidad de acceder a recursos privados.</p>"
 
 msgid "CHRT-XAXISNAME-TEXT"
 msgstr "Nombre eje X"
@@ -1712,10 +1712,10 @@ msgid "DATASET-NOT-PUBLISHED"
 msgstr "El Conjunto de Datos relacionado a esta Vista de Datos debe estar publicado"
 
 msgid "ACCOUNT-USERS-USERNAME-TIP"
-msgstr "El <em>usuario</em> debe ser único.<br/>Esta validación se realiza entre todos los usuarios de Junar."
+msgstr "El <em>usuario</em> debe ser único.<br/>Esta validación se realiza entre todos los usuarios de Datal."
 
 msgid "ACCOUNT-USERS-EMAIL-TIP"
-msgstr "El <em>e-mail</em> debe ser único.<br/>Esta validación se realiza entre todos los usuarios de Junar."
+msgstr "El <em>e-mail</em> debe ser único.<br/>Esta validación se realiza entre todos los usuarios de Datal."
 
 msgid "ACCOUNT-USERS-ROLES-TIP"
 msgstr "Compruebe más abajo las diferencias entre los roles."
@@ -1868,7 +1868,7 @@ msgid "APP-ACTIVITYSTREAM-TXT13-PRIVATE"
 msgstr "sitio de datos privado"
 
 msgid "APP-ACTIVITYSTREAM-TXT14"
-msgstr "alojado en la plataforma de Junar"
+msgstr "alojado en la plataforma de Datal"
 
 msgid "APP-ACTIVITYSTREAM-TXT15"
 msgstr "<a href='/accounts/my_account' title='Ajustes de cuenta'>Ajustes de cuenta</a>"
@@ -2048,7 +2048,7 @@ msgid "BRANDED-BRANDINGS-TIP-PRIVATE"
 msgstr "Use el seleccionador de colores para personalizar los colores del sitio de datos privado con sus colores corporativos."
 
 msgid "WRKSPCE-DOMAIN-TIP-PRIVATE"
-msgstr "<ul><li>Junar puede hospedar sus datos en un dominio de datos privado</li><li>Usted puede integrar sus datos en su sitio web creando un subdominio y apuntandolo a nuestra nuve</li></ul><p>Por favor contactenos en <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> para ayudarlo a configurar esto en pocos minutos.</p>"
+msgstr "<ul><li>Datal puede hospedar sus datos en un dominio de datos privado</li><li>Usted puede integrar sus datos en su sitio web creando un subdominio y apuntandolo a nuestra nuve</li></ul><p>Por favor contactenos en <a title='support@junar.com' href='mailto:support@junar.com'>support@junar.com</a> para ayudarlo a configurar esto en pocos minutos.</p>"
 
 msgid "ACCOUNT-HOME-TAB"
 msgstr "Página de inicio"
@@ -2072,7 +2072,7 @@ msgid "ACCOUNT-HOME-RIGHT-FOOTER"
 msgstr "Contenido abajo a la derecha"
 
 msgid "ACCOUNT-HOME-FEATURED-TIP"
-msgstr "Este contenido se muestra debajo del encabezado y por encima del contenido principal y la calesita de recursos.<br/>Si desea agregar una calesita de imagenes en este espacio <a href='http://es.wiki.junar.com/index.php/Agregar_calesita_de_imagenes_en_la_pagina_de_inicio_de_mi_sitio_de_datos_abiertos' title='Junar Wiki' target='_blank'>siga estas instrucciones</a>."
+msgstr "Este contenido se muestra debajo del encabezado y por encima del contenido principal y la calesita de recursos.<br/>Si desea agregar una calesita de imagenes en este espacio <a href='http://es.wiki.junar.com/index.php/Agregar_calesita_de_imagenes_en_la_pagina_de_inicio_de_mi_sitio_de_datos_abiertos' title='Datal Wiki' target='_blank'>siga estas instrucciones</a>."
 
 msgid "ACCOUNT-HOME-MAIN-TIP"
 msgstr "Este contenido se muestra en el lado izquierdo de la calesita"
@@ -2209,7 +2209,7 @@ msgstr "Política de privacidad"
 
 
 msgid "HEADER-JUNAR-TITLE"
-msgstr "Plataforma de Datos Abiertos Junar"
+msgstr "Plataforma de Datos Abiertos Datal"
 
 msgid "HEADER-SEARCH-TEXT"
 msgstr "Buscar recursos"
@@ -2236,7 +2236,7 @@ msgid "FOOTER-INSTITUTIONAL-TEXT"
 msgstr "Institucional"
 
 msgid "FOOTER-ABOUTUS-TITLE"
-msgstr "Ver quien está detrás de Junar"
+msgstr "Ver quien está detrás de Datal"
 
 msgid "FOOTER-ABOUTUS-TEXT"
 msgstr "Sobre nosotros"
@@ -2353,7 +2353,7 @@ msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
 msgstr "Siganos"
 
 msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
-msgstr "Para las últimas novedades y actualizaciones sobre Junar, sigue a <a href='https://twitter.com/junar' title='Sigue a @junar en Twitter' target='_blank'>@junar</a> en Twitter y revisa el <a href='http://blog.junar.com' title='Revisa el blog de Junar' target='_blank'>blog de Junar</a>. Ponganse en contacto con nosotros a <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
+msgstr "Para las últimas novedades y actualizaciones sobre Datal, sigue a <a href='https://twitter.com/junar' title='Sigue a @junar en Twitter' target='_blank'>@junar</a> en Twitter y revisa el <a href='http://blog.junar.com' title='Revisa el blog de Datal' target='_blank'>blog de Datal</a>. Ponganse en contacto con nosotros a <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
 
 msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
 msgstr "Actualizaciones recientes - v1.0"
@@ -2365,7 +2365,7 @@ msgid "APP-DOWNLOAD-CSV-TEXT"
 msgstr "Descargar como CSV"
 
 msgid "APP-GOBACKTO-TEXT"
-msgstr "Volver al sitio web de Junar"
+msgstr "Volver al sitio web de Datal"
 
 msgid "FORGOT-ACTIVATION-EMAIL"
 msgstr "Un enlace para activar su nueva contraseña ha sido enviado a su correo electrónico."
@@ -2926,4 +2926,4 @@ msgid "APP-START-FROM-HERE-TEXT"
 msgstr "Puede comenzar desde aquí!"
 
 msgid "APP-CREATE-FIRST-DATASET-TEXT"
-msgstr "Para empezar a utilizar Junar, cree su primer conjunto de datos."
+msgstr "Para empezar a utilizar Datal, cree su primer conjunto de datos."

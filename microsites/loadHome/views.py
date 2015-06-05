@@ -29,7 +29,6 @@ def load(request):
     language = request.auth_manager.language
     account = request.account
     preferences = request.preferences
-    ds_enabled = True
 
     if(('preview' in request.GET and request.GET['preview']== 'true') or preferences["account_home"]):
         """ shows the home page new version"""
@@ -74,9 +73,16 @@ def load(request):
             return render_to_response('loadHome/home_'+themeid+'.html', locals())
         else:
             # No Home, return to featured Dashboards
-            return redirect('/dashboards/')
+            # return redirect('/dashboards/')
+
+            # For the moment, redirect to search
+            return redirect('/search/')
     else:
-        """ shows a no-home page"""
+
+    	# For the moment, redirect to search, but this needs to be erased
+        return redirect('/search/')
+
+        # """ shows a no-home page"""
         # we first check the account preferences
         # if there are not hots setted, we retrieve the really hot
         #    resources_for_hot = [('account_hot_datastreams', DataStream),
@@ -87,39 +93,39 @@ def load(request):
         #            top = manager.objects.get_top(account.id)
         #            preferences[key] = ','.join([ str(i) for i in top ])
 
-        hot_datastreams = preferences['account_hot_datastreams']
-        hot_visualizations = preferences['account_hot_visualizations']
+        # hot_datastreams = preferences['account_hot_datastreams']
+        # hot_visualizations = preferences['account_hot_visualizations']
 
-        datastreams = []
-        if hot_datastreams:
-            datastreams = DataStream.objects.query_hot_n(10, language, hot = hot_datastreams)
+        # datastreams = []
+        # if hot_datastreams:
+        #     datastreams = DataStream.objects.query_hot_n(10, language, hot = hot_datastreams)
 
-        if hot_visualizations:
-            datastreams += Visualization.objects.query_hot_n(language, hot = hot_visualizations)
-            #random.shuffle(datastreams)
+        # if hot_visualizations:
+        #     datastreams += Visualization.objects.query_hot_n(language, hot = hot_visualizations)
+        #     #random.shuffle(datastreams)
 
-        if preferences['account_home_filters'] == 'featured_accounts':
-            featured_accounts = Account.objects.get_featured_accounts(account.id)
-            account_id = [featured_account['id'] for featured_account in featured_accounts]
-            for index, f in enumerate(featured_accounts):
-                featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
+        # if preferences['account_home_filters'] == 'featured_accounts':
+        #     featured_accounts = Account.objects.get_featured_accounts(account.id)
+        #     account_id = [featured_account['id'] for featured_account in featured_accounts]
+        #     for index, f in enumerate(featured_accounts):
+        #         featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
 
-            categories = Category.objects.get_for_home(language, account_id)
-        else:
-            account_id = account.id
-            categories = Category.objects.get_for_home(language, account_id)
+        #     categories = Category.objects.get_for_home(language, account_id)
+        # else:
+        #     account_id = account.id
+        #     categories = Category.objects.get_for_home(language, account_id)
 
-        results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
-                                                                    order = '1',
-                                                                    account_id = account_id)
+        # results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
+        #                                                             order = '1',
+        #                                                             account_id = account_id)
 
-        paginator = Paginator(results, 25)
-        revisions = paginator.page(1)
+        # paginator = Paginator(results, 25)
+        # revisions = paginator.page(1)
 
-        if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(revisions.object_list + datastreams)
+        # if preferences['account_home_filters'] == 'featured_accounts':
+        #     add_domains_to_permalinks(revisions.object_list + datastreams)
 
-        return render_to_response('home_manager/queryList.html', locals())
+        # return render_to_response('home_manager/queryList.html', locals())
 
 @require_POST
 def action_update_list(request):

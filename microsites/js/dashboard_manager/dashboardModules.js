@@ -276,9 +276,9 @@ var DBManagerGuidMenuOption = GuidMenuOption.extend({
         att.$Container.find('.text').html( gettext( "DBMAN-GETGUID-TITLE" ) );
         att.$Container.find('.key').html(lGUID);
         if (Configuration.isAccountDomain) {
-            var message = gettext( "DBMAN-GETGUID-TITLE" ) + '<a href="' + Configuration.baseUri + '/" title="Junar">Junar.</a>';
+            var message = gettext( "DBMAN-GETGUID-TITLE" ) + '<a href="' + Configuration.baseUri + '/" title="Datal">Datal.</a>';
         } else {
-            var message = gettext( "DBMAN-GETGUID-TITLE" ) + 'Junar.'
+            var message = gettext( "DBMAN-GETGUID-TITLE" ) + 'Datal.'
         }
         att.$Container.find('.tip').html(message);
     }
@@ -313,9 +313,9 @@ var DBManagerDSGuidMenuOption = GuidMenuOption.extend({
         att.$Container.find('.key').html(lGUID);
 
         if (Configuration.isAccountDomain) {
-            var message = gettext( "DBMAN-GETGUID-TITLE" ) + '<a href="' + Configuration.baseUri + '/" title="Junar">Junar.</a>';
+            var message = gettext( "DBMAN-GETGUID-TITLE" ) + '<a href="' + Configuration.baseUri + '/" title="Datal">Datal.</a>';
         } else {
-            var message = gettext( "DBMAN-GETGUID-TITLE" ) + 'Junar.'
+            var message = gettext( "DBMAN-GETGUID-TITLE" ) + 'Datal.'
         }
         att.$Container.find('.tip').html(message);
     }
