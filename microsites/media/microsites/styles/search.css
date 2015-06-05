@@ -56,4 +56,4 @@
 
 /*ERRORS*/
 .DataBox .Errores{padding-top:20px;font-size:18px;font-weight:bold;}
-.errorBox .msg{margin-top:20px;}
+.errorBox .msg{margin-top:20px;margin-right:20px;}

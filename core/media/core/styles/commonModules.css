@@ -176,15 +176,17 @@ div.info{overflow:hidden;z-index:10000000000;width:100%;position:fixed;top:0;lef
 	.sectionTitle .infoData .helpTooltip.twoLines{top:-50px;font-style:normal;right:10px;text-shadow:0 0 0;}
 
 /*BOX TITLE*/
-/*
 .boxTitle .title{position:relative;padding-right:40px;float:left;color:#ef7f10;font-size:20px;font-weight:bold;padding-top:4px;}
-*/
 .CL .boxTitle.shadow{padding-top:28px;background:url(/static/core/images/common/sb_pagination.gif) center 0 no-repeat;}
 .boxTitle.border{background:url(/static/core/images/common/bd_Item_Finder.gif) center bottom no-repeat;padding-bottom:11px;}
 .boxTitle.border .back{padding-top:5px;}
 .boxTitle .back a{padding-left:15px;background:url(/static/core/images/common/ic_next-prev.gif) no-repeat 0 -15px;font-size:11px;}
 
 /*CR BOXES*/
+.boxCR{padding-bottom:20px;}
+.boxCR .boxTitle{padding:0 10px;border:1px solid #e3e3e3;background:#efefef url(/static/core/images/common/dg_titleCR.gif) repeat-x 0 0;-webkit-border-radius:5px;-moz-border-radius:5px;border-radius:5px;}
+.boxCR .boxTitle h2,
+.boxCR .boxTitle h4{background:url(/static/core/images/common/ic_titleCR.gif) no-repeat right 0;height:25px;line-height:25px;color:#848484;text-shadow:0 1px 0 #fff;font-size:12px;font-weight:bold;}
 .boxCR .boxInner{padding:10px 15px 15px 15px;}
 
 	/*HELP AND TIPS - CR BOX*/
