@@ -22,7 +22,7 @@
    "model": "core.preference",
    "fields": {
        "account": 1,
-       "value": "microsite:8080",
+       "value": "microsite.dev:8080",
        "key": "account.domain"
    }
 },
@@ -40,7 +40,7 @@
    "model": "core.preference",
    "fields": {
        "account": 1,
-       "value": "api:8080",
+       "value": "api.dev:8080",
        "key": "account.api.domain"
    }
 },
@@ -66,7 +66,7 @@
         "fields": {
             "account": 1,
             "key": "account.link",
-            "value": "http://microsites:8080/"
+            "value": "http://microsites.dev:8080/"
         },
         "model": "core.preference",
         "pk": 9
