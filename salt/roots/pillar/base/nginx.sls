@@ -27,11 +27,11 @@ nginx:
 
     vhosts:
       managed:
-        admin:
+        admin.dev:
           enabled: True
           config:
             - server:
-              - server_name: admin
+              - server_name: admin.dev
               - listen: 80
               - access_log: /var/log/nginx/admin-access.log
               - error_log: /var/log/nginx/admin-error.log
@@ -48,11 +48,11 @@ nginx:
                 - uwsgi_pass: 127.0.0.1:3016
                 - include: /etc/nginx/uwsgi_params
 
-        api:
+        api.dev:
           enabled: True
           config:
             - server:
-              - server_name: 'api'
+              - server_name: 'api.dev'
               - access_log: /var/log/nginx/api-access.log
               - error_log: /var/log/nginx/api-error.log
               - client_max_body_size: 48m
@@ -68,20 +68,20 @@ nginx:
                 - uwsgi_send_timeout: 300
                 - include: /etc/nginx/uwsgi_params
 
-        datastore:
+        datastore.dev:
           enabled: True
           config:
             - server:
-              - server_name: 'datastore'
+              - server_name: 'datastore.dev'
               - access_log: /var/log/nginx/datastore-access.log
               - error_log: /var/log/nginx/datastore-error.log
               - root: /home/vagrant/datastore/
 
-        microsite:
+        microsite.dev:
           enabled: True
           config:
             - server:
-              - server_name: 'microsites microsite'
+              - server_name: 'microsites.dev microsite.dev'
               - access_log: /var/log/nginx/microsites-access.log
               - error_log /var/log/nginx/microsites-error.log
               - client_max_body_size: 48m
@@ -125,11 +125,11 @@ nginx:
                 - uwsgi_send_timeout: 120
                 - include: /etc/nginx/uwsgi_params
 
-        workspace:
+        workspace.dev:
           enabled: True
           config:
             - server:
-              - server_name: 'workspace'
+              - server_name: 'workspace.dev'
               - access_log: /var/log/nginx/workspace-access.log
               - error_log: /var/log/nginx/workspace-error.log
               - client_max_body_size: 48m

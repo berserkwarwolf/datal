@@ -32,4 +32,4 @@ datastore:
     passphrase:
     remote_base_folder: datastore/resources/
     local_tmp_folder: datastore/tmp/
-    public_base_url: 'http://datastore/resources'
+    public_base_url: 'http://datastore.dev/resources'

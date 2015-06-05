@@ -2,10 +2,12 @@ local_hosts:
   host.present:
     - ip: 127.0.0.1
     - names:
-      - workspace
-      - microsites
-      - microsite
-      - datastore
+      - api.dev
+      - admin.dev
+      - workspace.dev
+      - microsites.dev
+      - microsite.dev
+      - datastore.dev
 
 system_tools:
   pkg.installed:
