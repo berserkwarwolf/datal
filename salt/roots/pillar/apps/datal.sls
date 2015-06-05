@@ -1,7 +1,7 @@
 application:
   path: /home/vagrant/app
   statics_dir: /home/vagrant/static
-  cdn: 'datastore:8080/resources/datal_cdn/'
+  cdn: 'datastore.dev:8080/resources/datal_cdn/'
   api_key: '576bba0dd5a27df9aaac12d1d7ec25c8411fe29e'
   public_key: '9d6508cced6919e1a132d47d9c85896132aaf516'
 
@@ -13,10 +13,10 @@ application:
     pagination_results_per_page: 10
 
     domains:
-      engine: 'workspace:8080'
-      microsites: 'microsites:8080'
-      workspace: 'workspace:8080'
-      api: 'api:8080'
+      engine: 'workspace.dev:8080'
+      microsites: 'microsites.dev:8080'
+      workspace: 'workspace.dev:8080'
+      api: 'api.dev:8080'
       
 
 virtualenv:
