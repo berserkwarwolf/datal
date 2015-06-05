@@ -23,7 +23,7 @@
 
 {% block content %}
     {% include "admin_manager/tabs.html" %}
-    <div class="formContainer">
+    <div class="formContainer settingsContent">
         <form id="id_adminBrandingForm" action="{{form.action}}" method="post">
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
@@ -77,13 +77,13 @@
                             </div>
                             <div class="row imgContainer clearfix">
                                 <label for="{{form.account_favicon.auto_id}}">{{form.account_favicon.label}}:</label>
+                                <div class="textContainer">
+                                    <div class="formErrorMessageContainer">{{form.account_favicon}}</div>
+                                </div>
                                  <div class="img imgFavicon FL" style="display:{% if form.initial.account_favicon %}block{% else %}none{% endif %}">
                                     <span class="clearfix">
                                         <img src="{{ form.initial.account_favicon }}?updateCache={{ updateCache }}" class="FL"/>
                                     </span>
-                                </div>
-                                <div class="textContainer">
-                                    <div class="formErrorMessageContainer">{{form.account_favicon}}</div>
                                 </div>
                             </div>
                         </fieldset>
