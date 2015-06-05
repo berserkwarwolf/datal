@@ -1,4 +1,4 @@
-# Junar's English language pack.
+# Datal's English language pack.
 # Copyright  2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -484,11 +484,11 @@ msgid "DEV-PAGE-TITLE"
 msgstr "Página de Desarrolladores"
 
 msgid "DEV-PAGE-SUBTITLE"
-msgstr "Prueba la API de Junar"
+msgstr "Prueba la API de Datal"
 
 msgid "DEV-DESCRIPTION-TEXT1"
 msgstr ""
-"La API de Junar permite el acceso directo al catálogo de Junar y a su motor "
+"La API de Datal permite el acceso directo al catálogo de Datal y a su motor "
 "desde tu aplicación, para propósitos de <strong>descubrir vistas y "
 "colecciones</strong>,  invocar vistas <strong> y pronto... recolectar y "
 "publicar datos como vistas</strong>. Usa una interfaz RESTful y retorna los "
@@ -510,7 +510,7 @@ msgid "DEV-GETKEY-TITLE"
 msgstr "Obtén una Clave"
 
 msgid "DEV-GETKEY-SUBTITLE"
-msgstr "La API de Junar requiere una <span class='br'>key para operar.</span>"
+msgstr "La API de Datal requiere una <span class='br'>key para operar.</span>"
 
 msgid "DEV-GETKEY-TEXT1"
 msgstr "Obtén una y accede a cualquier recurso a través de ella"
@@ -528,7 +528,7 @@ msgid "DEV-CREATEREQUEST-TITLE"
 msgstr "Crea un Request"
 
 msgid "DEV-CREATEREQUEST-SUBTITLE"
-msgstr "La API de Junar acepta request RESTfuls"
+msgstr "La API de Datal acepta request RESTfuls"
 
 msgid "DEV-CREATEREQUEST-TEX1"
 msgstr "Un request típico luce así"
@@ -590,7 +590,7 @@ msgid "DEV-OV-TITLE"
 msgstr "Confirmación y Key"
 
 msgid "DEV-OV-SUBTITLE"
-msgstr "Gracias por probar la API de Junar"
+msgstr "Gracias por probar la API de Datal"
 
 msgid "DEV-OV-TEXT"
 msgstr "Esta es tu Auth key"
@@ -611,7 +611,7 @@ msgid "EMAIL-EXISTS"
 msgstr "Este email ya existe."
 
 msgid "HEADER-IE-MESSAGES"
-msgstr "<p><strong>Precaución:</strong> Junar funciona correctamente en Internet Explorer 8 o superior y puede no funcionar correctamente en versiones antiguas de este navegador, o en modo <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='vista de compatibilidad' target='_blank'>vista de compatibilidad</a>. Por favor <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Actualice su navegador a la última versión' target='_blank'>actualice su navegador a la última versión</a> o <a href='http://abetterbrowser.org/' title='Use otro navegador' target='_blank'>use otro navegador</a>.</p>"
+msgstr "<p><strong>Precaución:</strong> Datal funciona correctamente en Internet Explorer 8 o superior y puede no funcionar correctamente en versiones antiguas de este navegador, o en modo <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='vista de compatibilidad' target='_blank'>vista de compatibilidad</a>. Por favor <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Actualice su navegador a la última versión' target='_blank'>actualice su navegador a la última versión</a> o <a href='http://abetterbrowser.org/' title='Use otro navegador' target='_blank'>use otro navegador</a>.</p>"
 
 msgid "APP-HELP-TEXT"
 msgstr "Soporte en línea"
@@ -683,7 +683,7 @@ msgid "APP-LOGIN-TEXT"
 msgstr "Entrar"
 
 msgid "APP-ACTIVATION-TITLE-TEXT"
-msgstr "Active su cuenta Junar"
+msgstr "Active su cuenta Datal"
 
 msgid "APP-ACTIVATION-SUBTITLE-TEXT"
 msgstr "Escriba una contraseña con el fin de terminar su activación de la cuenta"

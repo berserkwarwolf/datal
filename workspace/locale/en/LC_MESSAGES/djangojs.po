@@ -1,4 +1,4 @@
-# Junar's English language pack.
+# Datal's English language pack.
 # Copyright  2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -259,7 +259,7 @@ msgid "APP-REMOVETAG-TEXT"
 msgstr "Remove Tag"
 
 msgid "NO-MOTD"
-msgstr "At Junar, we are constantly working behind the scenes to provide you the best experience possible. We just completed a major update and hope you enjoy the added perks."
+msgstr "At Datal, we are constantly working behind the scenes to provide you the best experience possible. We just completed a major update and hope you enjoy the added perks."
 
 msgid "VALIDATE-USERNAME"
 msgstr "The username already exist."

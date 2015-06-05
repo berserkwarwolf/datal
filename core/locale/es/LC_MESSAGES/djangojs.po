@@ -1,4 +1,4 @@
-# Junar's English language pack.
+# Datal's English language pack.
 # Copyright  2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -268,7 +268,7 @@ msgid "DATE-MONTH-12"
 msgstr "Diciembre"
 
 msgid "APP-POWEREDBY-TITLE"
-msgstr "Junar &middot; Platforma de Datos Abiertos"
+msgstr "Datal &middot; Platforma de Datos Abiertos"
 
 msgid "APP-A-TEXT"
 msgstr "un"
