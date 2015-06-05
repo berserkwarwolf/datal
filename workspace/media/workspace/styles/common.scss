@@ -214,7 +214,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header .tab a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;display:block;}
   .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
-  .header .tab > a:after{content:"";border-left:6px solid transparent;border-right:6px solid transparent;border-top:6px solid $brand-color-bold;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;}
+  .header .tab > a:after{content:"";border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid $brand-color-bold;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;opacity:.5}
   .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
   .header .tab .img img{border:1px solid $brand-color-bold;float:left;width:24px;height:24px;background:$brand-color-bold;}
   .header .tab strong{font-weight:normal;float:left;display:block;}
@@ -224,11 +224,11 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .header .tab.pulldown:hover,
   .header .tab.pulldown.active,
   .header .tab.pulldown.active:hover{background-color:$brand-color-bold;}
-  .header .tab.pulldown:hover a:after{border-top:6px solid $brand-color-light;}
+  .header .tab.pulldown:hover a:after{border-top:6px solid $color-base;}
   .header .tab.pulldown.active > a{background-position:right -45px;}
 
     /* Submenu */
-    .header .tab.pulldown .submenu{position:absolute;display:none;top:40px;right:0;min-width:100%;padding:3px;border:1px solid #C7CCD5;background:#f5f8fe;z-index:1;
+    .header .tab.pulldown .submenu{position:absolute;display:none;top:40px;right:0;min-width:100%;padding:3px;border:1px solid #dadada;background:#f8f8f8;z-index:1;
       -webkit-box-sizing:border-box;
          -moz-box-sizing:border-box;
               box-sizing:border-box;
@@ -239,7 +239,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
          -moz-box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
               box-shadow:0 2px 5px 0 rgba(0,0,0,.1);
     }
-    .header .tab.pulldown .submenu:before{content:"";width:0;height:0;border-style:solid;border-width:0 5px 5px 5px;border-color: transparent transparent #f5f8fe transparent;position:absolute;top:-5px;right:18px;}
+    .header .tab.pulldown .submenu:before{content:"";width:0;height:0;border-style:solid;border-width:0 5px 5px 5px;border-color: transparent transparent #dadada transparent;position:absolute;top:-5px;right:18px;}
     .header .tab.pulldown .submenu h3,
     .header .tab.pulldown .submenu ul li a{padding:5px;display:block;font-size:11px;color:rgb(95,95,95);text-shadow:0 1px 0 #fff;white-space:nowrap;}
     .header .tab.pulldown .submenu h3{font-size:12px;font-weight:bold;margin-bottom:1px;border-bottom:1px solid #dfebfe;
@@ -248,7 +248,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
               box-shadow:0 1px 0 0 #fff;
     }
     .header .tab.pulldown .submenu ul li{border-bottom:1px solid #fff;}
-    .header .tab.pulldown .submenu ul li a{border-bottom:1px solid #dfebfe;}
+    .header .tab.pulldown .submenu ul li a{border-bottom:1px solid #f6f5f5;}
     .header .tab.pulldown .submenu ul li:last-child,
     .header .tab.pulldown .submenu ul li:last-child a{border-bottom:0;}
     .header .tab.pulldown .submenu ul li a:hover{background:$accent-color-05;text-decoration:none;
