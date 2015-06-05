@@ -120,7 +120,7 @@ MEDIA_URI               = BASE_URI
 API_URI                 = 'http://api'
 WORKSPACE_URI           = 'http://workspace'
 API_KEY                 = ''
-PUBLIC_KEY              = '' # To be filled with Junar's PUBLIC KEY
+PUBLIC_KEY              = '' # To be filled with Datal's PUBLIC KEY
 
 
 OPENDATA_ACCOUNT        = 'opendata'

@@ -237,11 +237,11 @@ def forgot_password(request):
         l_emailBody += ""+l_url + "\n"
         l_emailBody += "If you did not request a password change, you may ignore this message and your password will remain unchanged. \n\n"
         l_emailBody += "---------\n\n"
-        l_emailBody += "Junar.com - The open data platform\n"
+        l_emailBody += "Datal.com - The open data platform\n"
         l_emailBody += ""
         l_emailBody += ""
 
-        send_mail('Your new Junar password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
+        send_mail('Your new Datal password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
 
         l_message = ugettext( 'FORGOT-ACTIVATION-EMAIL' )
         l_ok = True
@@ -274,11 +274,11 @@ def recovery(request):
         l_emailBody += "New Password : "+ l_newPass +"\n"
         l_emailBody += "\n"
         l_emailBody += "---------\n\n"
-        l_emailBody += "Junar.com - The open data platform\n"
+        l_emailBody += "Datal.com - The open data platform\n"
         l_emailBody += ""
         l_emailBody += ""
 
-        send_mail('Your new Junar password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
+        send_mail('Your new Datal password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
         if not request.auth_manager.is_anonymous():
             request.session.clear()
     else:
