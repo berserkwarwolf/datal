@@ -16,7 +16,7 @@ Clone Indextank-engine Github:
 indextank:
    cmd.run:
     - name: |
-        mvn compile package assembly:single
+        mvn -Dmaven.test.skip=true compile package assembly:single
     - cwd: /usr/share/indextank-engine/
     - require:
       - git: Clone Indextank-engine Github
