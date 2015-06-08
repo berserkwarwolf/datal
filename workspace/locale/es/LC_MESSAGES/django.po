@@ -2311,7 +2311,7 @@ msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
 msgstr "Elija los conjuntos de datos que desea cargar desde su ordenador o la web, transformelos en vistas y visualizaciones de datos, y finalmente publicquelos en su sitio de datos abiertos de forma individual y también organicelos como colecciones."
 
 msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "Se necesita de un conjunto de datos para crear una vista, y de una vista para crear una visualización. <br/> Las colecciones se utilizan para organizar varias vistas y visualizaciones por tema."
+msgstr "Se necesita de un conjunto de datos para crear una vista, y de una vista para crear una visualización. Las colecciones se utilizan para organizar varias vistas y visualizaciones por tema."
 
 msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
 msgstr "El proceso de publicación y las revisiones"
