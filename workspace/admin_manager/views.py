@@ -124,7 +124,7 @@ def action_create_user(request):
         logger.debug('[list_subscribe] %s', user)
         country = preferences['account.contact.person.country']
         extradata = {'country': country, 'company': company}
-        # suscribirlo a la lista de usuarios del workspace (si tiene servicio)
+        # Suscribirlo a la lista de usuarios del workspace (si tiene servicio)
         if mail.mail_service:
             mail.mail_service.list_subscribe(user, language, extradata)
         

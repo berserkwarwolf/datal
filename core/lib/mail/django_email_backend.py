@@ -1,9 +1,3 @@
-"""
-Python library for send mailchimp campaigns
-Mandrill is the 'transactional tool' (few and personalizated emails)
-"""
-import mailchimp
-import mandrill
 import logging
 
 from core.lib.mail.mail import MailService
@@ -12,24 +6,10 @@ from core import settings
 
 class MailchimpMailService(MailService):
 
-    def _get_mandrill(self):
-        """ get the mandrill object """
-        return mandrill.Mandrill(settings.MANDRILL['api_key'])
-
-    def _get_mailchimp(self):
-        """ get the mailchip object """
-        try:
-            m = mailchimp.Mailchimp(settings.MAILCHIMP['api_key'])
-        except Exception, e:
-            logger = logging.getLogger(__name__)
-            logger.error('MailChimp error (%s) (%s)' % ( str(e), repr(e) ) )
-            m = None
-        return m
-            
-    def send_welcome_mail(self, user, link, company): 
+    def send_welcome_mail(self, user, link, company):
         """ Notify new admin """
         ma = self._get_mandrill()
-    
+
         avars = [
             {'name':'FNAME', 'content': user.name},
             {'name': 'ADMINNAME', 'content': user.nick},
@@ -42,9 +22,9 @@ class MailchimpMailService(MailService):
             {'name':'UNSUB', 'content': settings.MAIL_LIST['LIST_UNSUBSCRIBE']},
             {'name':'UPDATE_PROFILE', 'content': settings.MAIL_LIST['LIST_UPDATE_PROFILE']}
         ]
-    
+
         to = [{'email': user.email}]
-    
+
         if user.language == "es":
             tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_ES']
             sbj = 'Nueva cuenta en Datal'
@@ -58,7 +38,7 @@ class MailchimpMailService(MailService):
                    'merge': True,
                    'merge_vars': [{'rcpt': user.email,'vars': avars }]
         }
-    
+
         result = ma.messages.send_template(template_name=tmpl, template_content=[], message=message, async=False,
                                            ip_pool='Main Pool')
         if result[0]["reject_reason"] == None:
@@ -66,31 +46,31 @@ class MailchimpMailService(MailService):
         else:
             logger = logging.getLogger(__name__)
             logger.error("Failed to send email (%s)" % result[0]["reject_reason"])
-            return False    
+            return False
 
     def list_subscribe(self, user, language='es', extradata={}):
         """ add new workspace user to our mail list """
         logger = logging.getLogger(__name__)
-        
+
         list_id = settings.MAILCHIMP['lists']['workspace_users_list'][language]['id']
         email = user.email
-    
+
         try:
             fname  = user.name.split(' ')[0]
             lname  = ' '.join(user.name.split(' ')[1:])
         except:
             fname  = user.name
             lname  = ''
-    
+
         user_type="Workspace"
         mergetags = {'FNAME': fname, 'LNAME': lname, 'MMERGE7': user_type, 'MMERGE6':extradata["country"],
                      'MMERGE3': extradata["company"]}
-    
+
         # add to list
         m=self._get_mailchimp()
         if not m:
             return False
-            
+
         try:
             m.lists.subscribe(list_id, {'email':email}, mergetags)
             return True
@@ -102,57 +82,5 @@ class MailchimpMailService(MailService):
         except mailchimp.Error, e:
             logger.error('An error occurred: %s - %s - %s' % (e.__class__, e, str(mergetags) ) )
             return False
-    
+
         return True
-
-        
-
-
-"""
-Sample usage
-import mailchimp
-m = mailchimp.Mailchimp('xxxxxxxxxxx')
-
-# check if everything is ok
-m.helper.ping()
-{u'msg': u"Everything's Chimpy!"}
-
-# check lists
-lists = m.lists.list()
-lists["total"]
-2
-for l in lists["data"]:
-    lst = l["name"] + " ID:" + l["id"] + " WEB_ID: " + str(l["web_id"])
-    print lst
-
-List1
-List2
-
-add email to a list
-#params list id (no web_id), email, fields (some can be mandatory)
-m.lists.subscribe("xxxxxxx", {'email':'test2@datal.org'}, {'FNAME':'Test name', 'LNAME':'Test Last'})
-
---------------
-
-Mandrill, send template
-
-import mandrill
-m = mandrill..Mandrill('xxxxxxx')
-vars = [{'name':'FNAME', 'content': 'Juan Perez'}
-        , {'name': 'ADMINNAME', 'content': 'Datal Admin'}
-        , {'name': 'COMPANY', 'content': 'Company name'}
-        , {'name': 'LINK', 'content': 'datal.org/link'}
-        , {'name':'TWITTER:PROFILEURL', 'content':'https://twitter.com/dataltt'}
-        , {'name':'FACEBOOK:PROFILEURL', 'content':'https://www.facebook.com/Datal'}
-        , {'name':'LIST:COMPANY', 'content':'Datal'}
-        , {'name':'LIST:DESCRIPTION', 'content':''}
-        , {'name':'UNSUB', 'content':''}
-        , {'name':'UPDATE_PROFILE', 'content':''}
-        , {'name':'', 'content':''}]
-credentials = {'smtp':'smtp.mandrillapp.com', 'port': '587', 'username':'test@datal.org', 'password':'xxxxxx'}
-to = [{'email':'test2@datal.org', 'name':'test'}]
-message = {'subject':'Hola Mandrill', 'to': to, 'merge': True, 'merge_vars': [{'rcpt': 'test2@datal.org','vars': vars }]}
-tmp_es = 'mandrill_template_es'
-tmp_en = 'mandrill_template_en'
-result = m.messages.send_template(template_name=tmp_es, template_content=[], message=message, async=False, ip_pool='Main Pool')
-"""
