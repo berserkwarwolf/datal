@@ -44,10 +44,10 @@ class MailchimpMailService(MailService):
     
         if user.language == "es":
             tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_ES']
-            sbj = 'Nueva cuenta en Datal'
+            sbj = 'Nueva cuenta en DATAL'
         else:
             tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_EN']
-            sbj = 'New Datal account'
+            sbj = 'New DATAL account'
             
     
         message = {'subject':sbj, 'to': to
@@ -134,12 +134,12 @@ Mandrill, send template
 import mandrill
 m = mandrill..Mandrill('xxxxxxx')
 vars = [{'name':'FNAME', 'content': 'Juan Perez'}
-        , {'name': 'ADMINNAME', 'content': 'Datal Admin'}
+        , {'name': 'ADMINNAME', 'content': 'DATAL Admin'}
         , {'name': 'COMPANY', 'content': 'Company name'}
         , {'name': 'LINK', 'content': 'datal.org/link'}
         , {'name':'TWITTER:PROFILEURL', 'content':'https://twitter.com/dataltt'}
-        , {'name':'FACEBOOK:PROFILEURL', 'content':'https://www.facebook.com/Datal'}
-        , {'name':'LIST:COMPANY', 'content':'Datal'}
+        , {'name':'FACEBOOK:PROFILEURL', 'content':'https://www.facebook.com/DATAL'}
+        , {'name':'LIST:COMPANY', 'content':'DATAL'}
         , {'name':'LIST:DESCRIPTION', 'content':''}
         , {'name':'UNSUB', 'content':''}
         , {'name':'UPDATE_PROFILE', 'content':''}

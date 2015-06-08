@@ -1,4 +1,4 @@
-# Datal's English language pack.
+# DATAL's English language pack.
 # Copyright  2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -571,7 +571,7 @@ msgid "APP-TRANSPARENCY-VIEWMORE"
 msgstr "View more"
 
 
-# —————————— New Keys Open Datal
+# —————————— New Keys Open DATAL
 
 msgid "APP-DOWNLOAD-TEXT"
 msgstr "Download"

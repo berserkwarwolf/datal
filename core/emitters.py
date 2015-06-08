@@ -7,7 +7,7 @@ from core.helpers import clean_string
 
 class Emitter:
 
-    """ Datal speaks different formats """
+    """ DATAL speaks different formats """
 
     def __init__(self, json):
         self.loaded_json = json

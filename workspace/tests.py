@@ -7,19 +7,19 @@
 # from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 #
 #
-# class DatalSeleniumTests(LiveServerTestCase):
+# class DATALSeleniumTests(LiveServerTestCase):
 #     fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
 #                 'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
 #
 #     @classmethod
 #     def setUpClass(cls):
 #         cls.selenium = WebDriver()
-#         super(DatalSeleniumTests, cls).setUpClass()
+#         super(DATALSeleniumTests, cls).setUpClass()
 #
 #     @classmethod
 #     def tearDownClass(cls):
 #         cls.selenium.quit()
-#         super(DatalSeleniumTests, cls).tearDownClass()
+#         super(DATALSeleniumTests, cls).tearDownClass()
 #
 #     def login(self):
 #         self.selenium.get('%s%s' % (self.live_server_url, '/signin/'))
