@@ -30,37 +30,10 @@ class MailchimpMailService(MailService):
         """ Notify new admin """
         ma = self._get_mandrill()
     
-        avars = [
-            {'name':'FNAME', 'content': user.name},
-            {'name': 'ADMINNAME', 'content': user.nick},
-            {'name': 'COMPANY', 'content': company},
-            {'name': 'LINK', 'content': link},
-            {'name':'TWITTER:PROFILEURL', 'content': settings.TWITTER_PROFILE_URL},
-            {'name':'FACEBOOK:PROFILEURL', 'content': settings.FACEBOOK_PROFILE_URL},
-            {'name':'LIST:COMPANY', 'content': settings.MAIL_LIST['LIST_COMPANY']},
-            {'name':'LIST:DESCRIPTION', 'content': settings.MAIL_LIST['LIST_DESCRIPTION']},
-            {'name':'UNSUB', 'content': settings.MAIL_LIST['LIST_UNSUBSCRIBE']},
-            {'name':'UPDATE_PROFILE', 'content': settings.MAIL_LIST['LIST_UPDATE_PROFILE']}
-        ]
+        template_name, message = self.get_template_message(user=user, link=link, company=company)
     
-        to = [{'email': user.email}]
-    
-        if user.language == "es":
-            tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_ES']
-            sbj = 'Nueva cuenta en Datal'
-        else:
-            tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_EN']
-            sbj = 'New Datal account'
-
-        message = {'subject':sbj, 'to': to,
-                   'from_name': company,
-                   'from_email':'alguien@datal.org',
-                   'merge': True,
-                   'merge_vars': [{'rcpt': user.email,'vars': avars }]
-        }
-    
-        result = ma.messages.send_template(template_name=tmpl, template_content=[], message=message, async=False,
-                                           ip_pool='Main Pool')
+        result = ma.messages.send_template(template_name=template_name, template_content=[], message=message,
+                                           async=False, ip_pool='Main Pool')
         if result[0]["reject_reason"] == None:
             return True
         else:

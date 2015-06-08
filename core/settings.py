@@ -203,7 +203,8 @@ MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
              'WELCOME_TEMPLATE_EN': 'template_name'}
 
-USE_MAILSERVICE = 'mailchimp' # unico disponible por ahora
+#EMAIL_SERVICE = 'core.lib.mail.mailchimp.MailchimpMailService'
+EMAIL_SERVICE = 'core.lib.mail.django.DjangoMailService'
 
 # solo si usas mailchimp/mandrill para enviar emails
 MAILCHIMP = {

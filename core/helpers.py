@@ -1,18 +1,31 @@
-import json, re, unicodedata, urllib2
+import json, re, unicodedata, urllib2, importlib
+
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
 from django.template.defaultfilters import slugify as django_slugify
-from core.primitives import PrimitiveComputer
-from babel import numbers, dates
 from django.core.validators import RegexValidator
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
+
+from babel import numbers, dates
+
+from core.primitives import PrimitiveComputer
 from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
 
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
 
+def class_for_name(module_name, class_name):
+    """
+    Create an instance of the named path and class name
+    :return: Class instance
+    """
+    # load the module, will raise ImportError if module cannot be loaded
+    m = importlib.import_module(module_name)
+    # get the class, will raise AttributeError if class cannot be found
+    c = getattr(m, class_name)
+    return c
 
 def get_domain_with_protocol(app, protocol = 'http'):
     #if app == 'workspace':
