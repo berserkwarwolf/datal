@@ -47,3 +47,10 @@
 	$button-support-color-gradient:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-20%);					/* Bottom color of gradient */
 	$button-support-color-border:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-20%);						/* Border color */
 	$button-support-color-shadow:adjust-color($button-support-color,$hue:0deg,$saturation:10%,$lightness:-30%);						/* Font shadow color */
+
+
+/* Buttons bar */																													/* Buttons bar for create resources sections */
+$buttons-bar-color-text-active:rgba($buttons-bar-color-text,.5);																	/* Font color for active and pre active buttons */
+$buttons-bar-color-text-visited:rgba($buttons-bar-color-text,.75);																	/* Font color for visited buttons */
+$buttons-bar-border-left-color:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:-5%);									/* Color for left border of the button */
+$buttons-bar-border-right-color:adjust-color($color-base,$hue:0deg,$saturation:0%,$lightness:15%);									/* Color for right border of the button */

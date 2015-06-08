@@ -48,13 +48,13 @@ a{color:$link-color;}
           border-radius:3px;
 }
 .buttons-bar li{float:left;padding:0;}
-.buttons-bar li .button.black{color:#8d8d8d;border-left:1px solid #282728;border-right:1px solid #646363;border-top:0;text-shadow:0 1px 0 #000;
+.buttons-bar li .button.black{color:$buttons-bar-color-text-active;border-left:1px solid $buttons-bar-border-left-color;border-right:1px solid $buttons-bar-border-right-color;border-top:0;text-shadow:0 1px 0 #000;
   -webkit-border-radius:0;
      -moz-border-radius:0;
           border-radius:0;
 }
 .buttons-bar li:first-child .button.black{
-  border-left-color:#646363;
+  border-left-color:$buttons-bar-border-left-color;
   -webkit-border-radius:3px 0 0 3px;
      -moz-border-radius:3px 0 0 3px;
           border-radius:3px 0 0 3px;
@@ -92,7 +92,7 @@ a{color:$link-color;}
     /* Step 0 */
   .buttons-bar[data-step="0"] li.step0 .button.black,
   .buttons-bar[data-step="0"] li.step0 .button.black:hover{
-    border-left:1px solid #282728;
+    border-left:1px solid $buttons-bar-border-left-color;
   }
     /* Step 1 */
   .buttons-bar[data-step="1"] li.step0 .button.black,
@@ -106,7 +106,7 @@ a{color:$link-color;}
     /* Step 4 */
   .buttons-bar[data-step="4"] li.step3 .button.black,
   .buttons-bar[data-step="4"] li.step3 .button.black:hover{
-    border-right:1px solid #282728;
+    border-right:1px solid $buttons-bar-border-right-color;
   }
 
   /* Pre active buttons - normal state */
@@ -124,7 +124,7 @@ a{color:$link-color;}
   .buttons-bar[data-step="4"] li.step1 .button.black,
   .buttons-bar[data-step="4"] li.step2 .button.black,
   .buttons-bar[data-step="4"] li.step3 .button.black{
-    color:#c3c3c3;
+    color:$buttons-bar-color-text-visited;
   }
 
   /* Pre active buttons - hover state */
@@ -142,7 +142,7 @@ a{color:$link-color;}
   .buttons-bar[data-step="4"] li.step1 .button.black:hover,
   .buttons-bar[data-step="4"] li.step2 .button.black:hover,
   .buttons-bar[data-step="4"] li.step3 .button.black:hover{
-    color:#fff;
+    color:$buttons-bar-color-text;
   }
 
   /* Post active buttons - normal and hover states */
@@ -169,7 +169,7 @@ a{color:$link-color;}
   .buttons-bar[data-step="2"] li.step4 .button.black:hover,
     /* Step 3 */
   .buttons-bar[data-step="3"] li.step4 .button.black,
-  .buttons-bar[data-step="3"] li.step4 .button.black:hover{background:$color-base;color:rgba(255,255,255,0.4);cursor:default;}
+  .buttons-bar[data-step="3"] li.step4 .button.black:hover{background:$color-base;color:$buttons-bar-color-text-active;cursor:default;}
 
 /* Layout */
 html,
@@ -400,8 +400,8 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 .main-section .section-title h1,
 .main-section .section-title h2,
 .main-section .section-title h3{float:left;text-shadow:0 1px 0 #000;line-height:39px;font-family:$font-titles-family;}
-.main-section .section-title h1{padding-left:15px;font-weight:bold;color:#fff;font-size:$font-size-xl;}
-.main-section .section-title h1 a{color:#fff;}
+.main-section .section-title h1{padding-left:15px;font-weight:bold;color:$font-color-supreme;font-size:$font-size-xl;}
+.main-section .section-title h1 a{color:$font-color-supreme;}
 .main-section .section-title h2, .main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
 .main-section .section-title h2:before, .main-section .section-title h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
 
