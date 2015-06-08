@@ -65,12 +65,6 @@ TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'core', 'templates'),
 )
 
-EMAIL_HOST = 'smtp.mail'
-EMAIL_HOST_USER = 'define@mail.com'
-EMAIL_HOST_PASSWORD = '111111'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-
 CACHE_DATABASES = {
     'dataviews': 0,
     'alerts': 1,
@@ -203,8 +197,8 @@ MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
              'WELCOME_TEMPLATE_EN': 'template_name'}
 
-#EMAIL_SERVICE = 'core.lib.mail.mailchimp.MailchimpMailService'
-EMAIL_SERVICE = 'core.lib.mail.django.DjangoMailService'
+EMAIL_SERVICE = 'core.lib.mail.mailchimp_backend.MailchimpMailService'
+#EMAIL_SERVICE = 'core.lib.mail.django_backend.DjangoMailService'
 
 # solo si usas mailchimp/mandrill para enviar emails
 MAILCHIMP = {
@@ -311,6 +305,13 @@ SASS_PROCESSOR_INCLUDE_DIRS = (
     os.path.join(PROJECT_PATH, 'microsites/media/styles'),
     os.path.join(PROJECT_PATH, 'workspace/media/styles'),
 )
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/datal-messages.txt'
+
+DEFAULT_FROM_EMAIL = 'noreply@datal.org'
+
+SUBSCRIBE_NEW_USERS_TO_MAIL_LIST = False
 
 try:
     from core.local_settings import *

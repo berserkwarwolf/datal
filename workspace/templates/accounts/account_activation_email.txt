@@ -1,0 +1,11 @@
+Hi {{ name }}!
+
+You are receiving this email because {{ admin_name }}, from {{ company }} has invited you to be a member of its Open Data Platform team.
+
+In order to get started, please click on the link below and follow the instructions to create your password
+
+{{ link }}
+
+Datal is the Easiest-to-Use Open Data Platform and will let you transform your current Datasets into Data Assets !
+
+Team Datal

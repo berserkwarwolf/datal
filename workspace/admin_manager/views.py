@@ -88,11 +88,12 @@ def action_create_user(request):
     if form.is_valid():
         auth_manager = request.auth_manager
 
-        user = User.objects.create(account_id = auth_manager.account_id
-                                   , name = form.cleaned_data['name']
-                                   , nick = form.cleaned_data['username']
-                                   , email = form.cleaned_data['email']
-                                   , language = auth_manager.language)
+        user = User.objects.create(account_id=auth_manager.account_id,
+                                   name=form.cleaned_data['name'],
+                                   nick=form.cleaned_data['username'],
+                                   email=form.cleaned_data['email'],
+                                   language=auth_manager.language
+        )
 
         role_code = form.cleaned_data['role']
         role = Role.objects.get(code = role_code)
@@ -108,9 +109,11 @@ def action_create_user(request):
                 user.roles.add(role)
 
         # to activate the user
-        user_pass_ticket = UserPassTickets.objects.create(uuid = unicode(uuid4())
-                                       , user = user
-                                       , type = TicketChoices.USER_ACTIVATION)
+        user_pass_ticket = UserPassTickets.objects.create(
+            uuid=unicode(uuid4()),
+            user=user,
+            type=TicketChoices.USER_ACTIVATION
+        )
 
         account = auth_manager.get_account()
         preferences = account.get_preferences()
@@ -124,11 +127,13 @@ def action_create_user(request):
         logger.debug('[list_subscribe] %s', user)
         country = preferences['account.contact.person.country']
         extradata = {'country': country, 'company': company}
+
         # Suscribirlo a la lista de usuarios del workspace (si tiene servicio)
         if mail.mail_service:
-            mail.mail_service.list_subscribe(user, language, extradata)
+            if settings.SUBSCRIBE_NEW_USERS_TO_MAIL_LIST:
+                mail.mail_service.list_subscribe(user, language, extradata)
         
-            #enviarle el email de bienvenida
+            # Enviarle el email de bienvenida
             mail.mail_service.send_welcome_mail(user, link, company)
         else: # necesita el codigo de activacion al menos, lo redirijo alli
             response = {'status': 'ok', 
