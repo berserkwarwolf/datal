@@ -1,9 +1,9 @@
 import json
 from core.choices import StatusChoices
 
-class DatalException(Exception):
-    """Datal Exception class: Base class for handling exceptions."""
-    title = 'Datal Error'
+class DATALException(Exception):
+    """DATAL Exception class: Base class for handling exceptions."""
+    title = 'DATAL Error'
 
     def __init__(self, title=None, description='', status_code=400, extras={}):
         if title:
@@ -12,7 +12,7 @@ class DatalException(Exception):
         self.status_code = status_code
         self.extras = extras
         message = '%s. %s' % (self.title, self.description)
-        super(DatalException, self).__init__(message)
+        super(DATALException, self).__init__(message)
 
     def __str__(self):
         return '%s: %s' % (self.title, self.description)
@@ -24,7 +24,7 @@ class DatalException(Exception):
         return json.dumps(self.as_dict())
 
 
-class ApplicationException(DatalException):
+class ApplicationException(DATALException):
     title = 'Application error'
 
 
@@ -70,28 +70,28 @@ class ParentNotPublishedException(LifeCycleException):
     def __init__(self, description='Parent resource must be published'):
         super(ParentNotPublishedException, self).__init__(description)
 
-class S3CreateException(DatalException):
+class S3CreateException(DATALException):
     title = 'S3 Create error'
 
     def __init__(self, description):
         super(S3CreateException, self).__init__(description=description, status_code=503)
 
 
-class S3UpdateException(DatalException):
+class S3UpdateException(DATALException):
     title = 'S3 Update error'
 
     def __init__(self, description):
         super(S3UpdateException, self).__init__(description=description, status_code=503)
 
 
-class SFTPCreateException(DatalException):
+class SFTPCreateException(DATALException):
     title = 'SFTP Create error'
 
     def __init__(self, description):
         super(SFTPCreateException, self).__init__(description=description, status_code=503)
 
 
-class SFTPUpdateException(DatalException):
+class SFTPUpdateException(DATALException):
     title = 'SFTP Update error'
 
     def __init__(self, description):

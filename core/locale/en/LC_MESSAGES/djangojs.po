@@ -1,4 +1,4 @@
-# Datal's English language pack.
+# DATAL's English language pack.
 # Copyright  2012 JUNAR'S COPYRIGHT HOLDER
 # Author <emilio.heck@junar.com>, 2012.
 #
@@ -268,7 +268,7 @@ msgid "DATE-MONTH-12"
 msgstr "December"
 
 msgid "APP-POWEREDBY-TITLE"
-msgstr "Datal &middot; The Open Data Platform"
+msgstr "DATAL &middot; The Open Data Platform"
 
 msgid "APP-A-TEXT"
 msgstr "a"

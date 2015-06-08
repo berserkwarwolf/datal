@@ -1,15 +1,15 @@
 from core.exceptions import *
 
 
-class DatalWorkspaceException(DatalException):
-    """Datal Workspace Exception class: Base class for handling exceptions."""
+class DATALWorkspaceException(DATALException):
+    """DATAL Workspace Exception class: Base class for handling exceptions."""
     def __init__(self, title=None, description='', status_code=400, extras={}):
-        super(DatalWorkspaceException, self).__init__(title=title,
+        super(DATALWorkspaceException, self).__init__(title=title,
                                                       description=description,
                                                       status_code=status_code,
                                                       extras=extras)
 
-class BadRequestException(DatalWorkspaceException):
+class BadRequestException(DATALWorkspaceException):
     title = 'Bad Request'
 
 
@@ -40,7 +40,7 @@ class VisualizationRequiredException(LifeCycleException):
     title = 'Visualization required'
 
 
-class SecurityException(DatalWorkspaceException):
+class SecurityException(DATALWorkspaceException):
     title = 'Security error'
 
 

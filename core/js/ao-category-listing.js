@@ -1,6 +1,6 @@
 /*
  * jQuery UI Widget Categories @VERSION
- * Created by : Datal
+ * Created by : DATAL
  * 
  * Depends:
  *	jquery.ui.core.js
