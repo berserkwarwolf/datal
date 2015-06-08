@@ -14,7 +14,7 @@ class MailService():
         pass
 
     @abstractmethod
-    def list_subscribe(self):
+    def list_subscribe(self, user, language='es', extradata={}):
         """ Suscribir a la lista de usuarios del sistema"""
         pass
 

@@ -47,19 +47,9 @@ class MailchimpMailService(MailService):
     
         if user.language == "es":
             tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_ES']
-            sbj = 'Nueva cuenta en DATAL'
+            sbj = 'Nueva cuenta en Datal'
         else:
             tmpl = settings.MAIL_LIST['WELCOME_TEMPLATE_EN']
-<<<<<<< HEAD
-            sbj = 'New DATAL account'
-            
-    
-        message = {'subject':sbj, 'to': to
-                , 'from_name': company
-                , 'from_email':'alguien@datal.org'
-                , 'merge': True
-                , 'merge_vars': [{'rcpt': user.email,'vars': avars }]}
-=======
             sbj = 'New Datal account'
 
         message = {'subject':sbj, 'to': to,
@@ -68,7 +58,6 @@ class MailchimpMailService(MailService):
                    'merge': True,
                    'merge_vars': [{'rcpt': user.email,'vars': avars }]
         }
->>>>>>> 9b0b48235b9f966064649cd403e87934510430fa
     
         result = ma.messages.send_template(template_name=tmpl, template_content=[], message=message, async=False,
                                            ip_pool='Main Pool')
@@ -115,55 +104,3 @@ class MailchimpMailService(MailService):
             return False
     
         return True
-
-        
-
-
-"""
-Sample usage
-import mailchimp
-m = mailchimp.Mailchimp('xxxxxxxxxxx')
-
-# check if everything is ok
-m.helper.ping()
-{u'msg': u"Everything's Chimpy!"}
-
-# check lists
-lists = m.lists.list()
-lists["total"]
-2
-for l in lists["data"]:
-    lst = l["name"] + " ID:" + l["id"] + " WEB_ID: " + str(l["web_id"])
-    print lst
-
-List1
-List2
-
-add email to a list
-#params list id (no web_id), email, fields (some can be mandatory)
-m.lists.subscribe("xxxxxxx", {'email':'test2@datal.org'}, {'FNAME':'Test name', 'LNAME':'Test Last'})
-
---------------
-
-Mandrill, send template
-
-import mandrill
-m = mandrill..Mandrill('xxxxxxx')
-vars = [{'name':'FNAME', 'content': 'Juan Perez'}
-        , {'name': 'ADMINNAME', 'content': 'DATAL Admin'}
-        , {'name': 'COMPANY', 'content': 'Company name'}
-        , {'name': 'LINK', 'content': 'datal.org/link'}
-        , {'name':'TWITTER:PROFILEURL', 'content':'https://twitter.com/dataltt'}
-        , {'name':'FACEBOOK:PROFILEURL', 'content':'https://www.facebook.com/DATAL'}
-        , {'name':'LIST:COMPANY', 'content':'DATAL'}
-        , {'name':'LIST:DESCRIPTION', 'content':''}
-        , {'name':'UNSUB', 'content':''}
-        , {'name':'UPDATE_PROFILE', 'content':''}
-        , {'name':'', 'content':''}]
-credentials = {'smtp':'smtp.mandrillapp.com', 'port': '587', 'username':'test@datal.org', 'password':'xxxxxx'}
-to = [{'email':'test2@datal.org', 'name':'test'}]
-message = {'subject':'Hola Mandrill', 'to': to, 'merge': True, 'merge_vars': [{'rcpt': 'test2@datal.org','vars': vars }]}
-tmp_es = 'mandrill_template_es'
-tmp_en = 'mandrill_template_en'
-result = m.messages.send_template(template_name=tmp_es, template_content=[], message=message, async=False, ip_pool='Main Pool')
-"""
