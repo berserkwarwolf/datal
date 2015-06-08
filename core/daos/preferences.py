@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-from core import choices
+import memcache, logging
+
 from django.conf import settings
+
+from core import choices
 from core.models import Preference
-import memcache
 
 
 class Preferences():
     def __init__(self, account_id):
-        self.data = {}
+        self.data = dict()
         self.data['account_id'] = account_id
         self.memcached = settings.MEMCACHED_ENGINE_END_POINT
         self.engine_cache = False
@@ -19,7 +21,6 @@ class Preferences():
                 # 'No memcached client could be created.')
                 pass
 
-
     def __getitem__(self, key):
         """ get item from internal data, or cache or readed from database """
         if not self.data.has_key(key):
@@ -30,7 +31,10 @@ class Preferences():
             else:
                 # then try from database
                 try:
-                    self.data[key] = Preference.objects.get_value_by_account_id_and_key(self.data['account_id'], key = key.replace('_', '.'))
+                    self.data[key] = Preference.objects.get_value_by_account_id_and_key(
+                        self.data['account_id'],
+                        key=key.replace('_', '.')
+                    )
                 except Preference.DoesNotExist:
                     self.data[key] = ''
                 else:
@@ -39,7 +43,7 @@ class Preferences():
         return self.data[key]
 
     def load(self, keys):
-        preferences = Preference.objects.filter(key__in=keys, account = self.data['account_id']).values('key', 'value')
+        preferences = Preference.objects.filter(key__in=keys, account=self.data['account_id']).values('key', 'value')
         for preference in preferences:
             key = preference['key']
             self.data[key.replace('.', '_')] = preference['value']

@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
+import logging
+
 from django.conf import settings
-from django.core.urlresolvers import reverse
 from django.http import Http404
 from django.shortcuts import redirect
+
 from core.models import Account
 from core.http import get_domain
 from core.helpers import get_domain_with_protocol
-import logging
+
 
 class DependencyInjector(object):
     """ Gets the current site & account """
@@ -42,14 +44,10 @@ class DependencyInjector(object):
         is_activate = False #Deprecado
         is_jsi18n = request.path.startswith('/jsi18n')
 
-
-
         language = request.preferences['account_language']
         if language:
             request.session['django_language'] = language
             request.auth_manager.language = language
-
-
 
         if settings.DOMAINS['microsites'] == domain:
             if request.META.get('REQUEST_URI') == '/':
