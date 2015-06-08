@@ -2319,8 +2319,7 @@ msgstr "Choose the Datasets that you want to upload from your computer or the we
 # msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and Visualizations, and finally publish them to your Open Data site individually and arrange them as Dashboards collections."
 
 msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "A Dataset is needed to create a Data View."
-# msgstr "A Dataset is needed to create a Data View, and a Data View is needed to create a Visualization. <br/> Dashboard are used to arrange several Data Views and Visualizations by topic."
+msgstr "A Dataset is needed to create a Data View, and a Data View is needed to create a Visualization. Dashboard are used to arrange several Data Views and Visualizations by topic."
 
 msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
 msgstr "The publishing process and revisions"

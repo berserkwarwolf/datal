@@ -41,6 +41,7 @@
 
 	/* Color */
 	$font-color-base:#333F4F;													/* For body paragraphs and titles */
+	$font-color-supreme:#FFF;													/* For titles in general */
 	$font-color-semi-light:#333F4F;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */
 	$font-color-highlight:#D16280;												/* For titles on highlighted boxes */
@@ -75,6 +76,9 @@ $buttons-font-size:12px !important;												/* Font size for all buttons */
 	$button-support-color:#dbdbdb;												/* Background color */
 	$button-support-color-text:#FFF;											/* Font color */
 
+
+/* Buttons bar */																/* Buttons bar for create resources sections */
+$buttons-bar-color-text:#FFF;													/* Font color of button */
 
 /* Backgrounds */
 $background-color-highlight:#f8eef0;											/* Color for backgrounds on highlighted boxes */
