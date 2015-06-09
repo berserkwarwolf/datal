@@ -84,7 +84,7 @@ migrate_db:
     - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
-      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate core --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py migrate --settings=core.settings
 
 fixtures:
   cmd.run:
