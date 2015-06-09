@@ -1,3 +1,8 @@
+remove_old_indextank:
+  file.directory:
+    - name: /usr/share/indextank-engine
+    - clean: True
+
 maven:
   pkg:
     - installed
