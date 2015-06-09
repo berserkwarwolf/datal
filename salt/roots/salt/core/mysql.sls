@@ -11,6 +11,10 @@ mysql:
     - host: localhost
     - password: {{ pillar['database']['password'] }}
 
+temporally_clear_db:
+  mysql_database.absent:
+    - name: {{ pillar['database']['name'] }}
+
 {{ pillar['database']['name'] }}:
   mysql_database.present
 
