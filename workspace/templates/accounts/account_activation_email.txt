@@ -1,11 +1,11 @@
-Hi {{ name }}!
+Hola {{ name }}
 
-You are receiving this email because {{ admin_name }}, from {{ company }} has invited you to be a member of its Open Data Platform team.
+Estas recibiendo este correo porque {{ admin_name }}, de {{ company }} te ha invitado a ser parte como miembro del equipo de la Plataforma de Datos Abiertos de tu organización.
 
-In order to get started, please click on the link below and follow the instructions to create your password
+Para empezar, por favor haz click en el siguiente enlace y sigue las instrucciones para crear tu contraseña
 
 {{ link }}
 
-Datal is the Easiest-to-Use Open Data Platform and will let you transform your current Datasets into Data Assets !
+Junar es la Plataforma de Datos Abiertos de más facil uso con la que podrás agregar valor y vida a tus Bases de Datos !
 
-Team Datal
+Equipo Datal
