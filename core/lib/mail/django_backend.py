@@ -1,14 +1,15 @@
 import logging
 
-from django.core.mail import send_mail
-from django.template.loader import render_to_string
+from post_office import mail
 
 from core.lib.mail.mail import MailService
 from core import settings
 
 
 class DjangoMailService(MailService):
-    def send_welcome_mail(self, user, link, company):
+
+    @staticmethod
+    def send_welcome_mail(user, link, company):
         """ Notify new admin """
 
         email_data = dict(
@@ -17,12 +18,11 @@ class DjangoMailService(MailService):
             company=company,
             link=link,
         )
-        subject = render_to_string('workspace/templates/accounts/account_activation_subject.txt')
-        message = render_to_string('workspace/templates/accounts/account_activation_email.txt', email_data)
         to = [user.email]
 
         try:
-            send_mail(subject, message, settings.DEFAULT_FROM_EMAIL, to, fail_silently=False)
+            mail.send(to, settings.DEFAULT_FROM_EMAIL, template='activate_account_es', context=email_data,
+                      priority='now')
             return True
         except:
             logger = logging.getLogger(__name__)

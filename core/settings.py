@@ -47,6 +47,7 @@ INSTALLED_APPS = (
     'core',
     'raven.contrib.django',
     "compressor",
+    "post_office",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -197,8 +198,8 @@ MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
              'WELCOME_TEMPLATE_EN': 'template_name'}
 
-EMAIL_SERVICE = 'core.lib.mail.mailchimp_backend.MailchimpMailService'
-#EMAIL_SERVICE = 'core.lib.mail.django_backend.DjangoMailService'
+#EMAIL_SERVICE = 'core.lib.mail.mailchimp_backend.MailchimpMailService'
+EMAIL_SERVICE = 'core.lib.mail.django_backend.DjangoMailService'
 
 # solo si usas mailchimp/mandrill para enviar emails
 MAILCHIMP = {
@@ -306,8 +307,14 @@ SASS_PROCESSOR_INCLUDE_DIRS = (
     os.path.join(PROJECT_PATH, 'workspace/media/styles'),
 )
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = '/tmp/datal-messages.txt'
+EMAIL_BACKEND = 'post_office.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/datal-emails'
+POST_OFFICE = {
+    'EMAIL_BACKEND': 'django.core.mail.backends.filebased.EmailBackend'
+}
+SOUTH_MIGRATION_MODULES = {
+    "post_office": "post_office.south_migrations",
+}
 
 DEFAULT_FROM_EMAIL = 'noreply@datal.org'
 

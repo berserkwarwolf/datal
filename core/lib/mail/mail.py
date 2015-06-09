@@ -22,9 +22,6 @@ class MailService():
         pass
 
 mail_service = None
-try:
-    class_name = settings.EMAIL_SERVICE.split('.')[-1]
-    module_name = settings.EMAIL_SERVICE.split('.{}'.format(class_name))[0]
-    mail_service = class_for_name(module_name=module_name, class_name=class_name)
-except:
-    raise MailServiceNotFoundException()
+class_name = settings.EMAIL_SERVICE.split('.')[-1]
+module_name = settings.EMAIL_SERVICE.split('.{}'.format(class_name))[0]
+mail_service = class_for_name(module_name=module_name, class_name=class_name)

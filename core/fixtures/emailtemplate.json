@@ -1,0 +1,15 @@
+[
+{
+    "pk": 1,
+    "model": "post_office.emailtemplate",
+    "fields": {
+        "last_updated": "2015-06-09T11:32:04",
+        "name": "activate_account_es",
+        "created": "2015-06-09T11:26:58",
+        "html_content": "<p>Hola {{ name }}</p><p>Estas recibiendo este correo porque {{ admin_name }}, de {{ company }} te ha invitado a ser parte como miembro del equipo de la Plataforma de Datos Abiertos de tu organización.</p><p>Para empezar, por favor haz click en el siguiente enlace y sigue las instrucciones para crear tu contraseña</p><p>{{ link }}</p><p>Junar es la Plataforma de Datos Abiertos de más facil uso con la que podrás agregar valor y vida a tus Bases de Datos !</p><p>Equipo Datal</p>",
+        "description": "Activate account (ES)",
+        "content": "Hola {{ name }}\n\nEstas recibiendo este correo porque {{ admin_name }}, de {{ company }} te ha invitado a ser parte como miembro del equipo de la Plataforma de Datos Abiertos de tu organización.\n\nPara empezar, por favor haz click en el siguiente enlace y sigue las instrucciones para crear tu contraseña\n\n{{ link }}\n\nJunar es la Plataforma de Datos Abiertos de más facil uso con la que podrás agregar valor y vida a tus Bases de Datos !\n\nEquipo Datal",
+        "subject": "Nueva cuenta en Datal"
+    }
+}
+]
