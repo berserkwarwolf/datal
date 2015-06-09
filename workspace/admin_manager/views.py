@@ -99,15 +99,6 @@ def action_create_user(request):
         role = Role.objects.get(code = role_code)
         user.roles.add(role)
 
-        if role_code in ['ao-editor', 'ao-publisher']:
-            if auth_manager.is_level('level_4'):
-                role = Role.objects.get(code = role_code+'-plus')
-                user.roles.add(role)
-
-            if auth_manager.is_level('level_5'):
-                role = Role.objects.get(code = role_code+'-premier')
-                user.roles.add(role)
-
         # to activate the user
         user_pass_ticket = UserPassTickets.objects.create(
             uuid=unicode(uuid4()),
@@ -156,8 +147,7 @@ def action_edit_user(request):
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
-        user = User.objects.get(id = form.cleaned_data['id']
-                                , account = auth_manager.account_id)
+        user = User.objects.get(id = form.cleaned_data['id'], account = auth_manager.account_id)
 
         user.name = form.cleaned_data['name']
         user.nick = form.cleaned_data['username']
@@ -166,17 +156,8 @@ def action_edit_user(request):
 
         user.roles.clear()
         role_code = form.cleaned_data['role']
-        role = Role.objects.get(code = role_code)
+        role = Role.objects.get(code=role_code)
         user.roles.add(role)
-
-        if role_code in ['ao-editor', 'ao-publisher']:
-            if auth_manager.is_level('level_4'):
-                role = Role.objects.get(code = role_code+'-plus')
-                user.roles.add(role)
-
-            if auth_manager.is_level('level_5'):
-                role = Role.objects.get(code = role_code+'-premier')
-                user.roles.add(role)
 
         response = {'status': 'ok', 'messages': [ugettext('APP-USER-UPDATEDSUCCESSFULLY-TEXT')]}
         return HttpResponse(json.dumps(response), content_type='application/json')
