@@ -33,10 +33,10 @@ def load(request):
     if(('preview' in request.GET and request.GET['preview']== 'true') or preferences["account_home"]):
         """ shows the home page new version"""
         if('preview' in request.GET and request.GET['preview']== 'true'):
-            jsonObject= json.loads(preferences["account_preview"])
+            jsonObject= json.loads(preferences["account_preview"], strict=False)
             pageTitle = ugettext('APP-PREVIEWWINDOW-TITLE')
         elif preferences["account_has_home"]:
-            jsonObject= json.loads(preferences["account_home"])
+            jsonObject= json.loads(preferences["account_home"], strict=False)
 
         if(not(jsonObject is None)):
             themeid = jsonObject['theme']
