@@ -37,7 +37,7 @@
 
   {% if dataset.collect_type == 0 %}
   <!-- Download -->
-  <li><a id="id_download" href="/dataset/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="button black small" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></li>
+  <li><a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="button black small" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></li>
   
   {% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
   <!-- Go to Source -->
