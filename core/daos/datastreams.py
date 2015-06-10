@@ -126,4 +126,3 @@ class DatastreamSearchifyDAO():
         
     def remove(self, datastream_revision):
         self.search_index.delete_documents(["DS::" + str(datastream_revision.datastream.guid)])
-        
