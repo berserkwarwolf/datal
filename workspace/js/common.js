@@ -3,7 +3,6 @@ var BaseView = Backbone.View.extend({
 	el: 'body',
 
 	events: {
-		"click #id_help_link, #id_feedback_option": "onHelpLinkButtonClicked",
 		"click .header .tab.pulldown > a": "onHeaderPulldownButtonClicked",
 	},
 
@@ -99,13 +98,6 @@ var BaseView = Backbone.View.extend({
 
 		return false;
 
-	},
-
-	// Zendesk trigger
-	onHelpLinkButtonClicked: function(event){
-		event.preventDefault();
-		console.log('zendesk');
-		$('#zenbox_tab').trigger('click');
 	},
 
 	// Header tab pulldown menu

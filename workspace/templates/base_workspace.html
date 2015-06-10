@@ -62,24 +62,6 @@
 	</div>
 {% endblock %}
 
-{% block zendesk_chat %}
-<script type="text/javascript" src="//assets.zendesk.com/external/zenbox/v2.5/zenbox.js"></script>
-<style type="text/css" media="screen, projection">
-	@import url(//assets.zendesk.com/external/zenbox/v2.5/zenbox.css);
-</style>
-<script type="text/javascript">
-	if (typeof(Zenbox) !== "undefined") {
-		Zenbox.init({
-			dropboxID:   "20078963",
-			url:         "https://junar.zendesk.com",
-			tabID:       "Help",
-			tabColor:    "#aac550",
-			tabPosition: "Left"
-		});
-	}
-</script>
-{% endblock %}
-
 {% block base_bottom_js %}
 	<script type="text/javascript">
 		
