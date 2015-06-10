@@ -110,16 +110,16 @@ END_POINT_LOADER_SERVLET= '/AgileOfficeServer/DataSourceLoaderServlet'
 END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
 
 
-BASE_URI                = 'localhost'
-MEDIA_URI               = BASE_URI
-API_URI                 = 'http://api'
-WORKSPACE_URI           = 'http://workspace'
-API_KEY                 = ''
-PUBLIC_KEY              = '' # To be filled with DATAL's PUBLIC KEY
+BASE_URI = 'localhost'
+MEDIA_URI = BASE_URI
+API_URI = 'http://api'
+WORKSPACE_URI = 'http://workspace'
+API_KEY = ''
+PUBLIC_KEY = '' # To be filled with DATAL's PUBLIC KEY
 
 
-OPENDATA_ACCOUNT        = 'opendata'
-PRIVATE_ACCOUNT         = 'private'
+OPENDATA_ACCOUNT = 'opendata'
+PRIVATE_ACCOUNT = 'private'
 
 ACCOUNT_DOMAIN_PREFERENCE_NAME = 'account.domain'
 
@@ -128,7 +128,7 @@ DOMAINS = { 'api': 'api',
             'workspace': 'workspace',
             'engine': '',
             'website': 'website',
-            'cdn': 'your-public-bucket.s3-website-us-east|west-1.amazonaws.com',
+            'cdn': '',
            }
 
 CONTENT_TYPES = { 'json': 'application/json;charset=utf-8',
