@@ -364,7 +364,7 @@ msgid "CATEGORY-DELETE-INFO"
 msgstr "resource/s has been moved to default category"
 
 msgid "ADMIN-HOME-DESCRIPTION-NOTHEME"
-msgstr "By selecting this option, your Open Data site will not have a home page, and the landing page will be your Featured Dashboards. <br/> Configure Featured Dashboards <a href='/review/action_query' target='_blank'>here</a>."
+msgstr "By selecting this option, your Open Data site will not have a home page, and the user will be redirected to search page."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME0"
 msgstr "The <em>Classic</em> theme provides a two column layout that includes several text sections, a resources slider, and a resources list."
