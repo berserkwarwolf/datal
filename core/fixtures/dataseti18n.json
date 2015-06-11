@@ -1,0 +1,794 @@
+[
+    {
+        "pk": 69005,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69005,
+            "created_at": "2013-12-16T23:38:54",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 69010,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69010,
+            "created_at": "2013-12-17T11:32:05",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 69429,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69429,
+            "created_at": "2013-12-27T16:35:17",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 69433,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69433,
+            "created_at": "2013-12-28T15:11:22",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 69434,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69434,
+            "created_at": "2013-12-28T15:11:29",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 69474,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69474,
+            "created_at": "2014-01-03T12:04:27",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 69560,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69560,
+            "created_at": "2014-01-10T12:10:21",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 69570,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69570,
+            "created_at": "2014-01-10T15:55:33",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias - Lite"
+        }
+    },
+    {
+        "pk": 69571,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69571,
+            "created_at": "2014-01-10T15:55:59",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 69573,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69573,
+            "created_at": "2014-01-10T17:46:59",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 69887,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69887,
+            "created_at": "2014-02-05T18:23:46",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 69957,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69957,
+            "created_at": "2014-02-10T17:43:57",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes"
+        }
+    },
+    {
+        "pk": 69958,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 69958,
+            "created_at": "2014-02-10T17:44:31",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes"
+        }
+    },
+    {
+        "pk": 70528,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70528,
+            "created_at": "2014-04-01T15:11:14",
+            "description": "data",
+            "language": "es",
+            "title": "API Bencinas"
+        }
+    },
+    {
+        "pk": 70609,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70609,
+            "created_at": "2014-04-07T08:49:53",
+            "description": "data",
+            "language": "es",
+            "title": "API Bencinas"
+        }
+    },
+    {
+        "pk": 70669,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70669,
+            "created_at": "2014-04-08T22:42:59",
+            "description": "datos municipio transparente",
+            "language": "es",
+            "title": "Municipio Transparente"
+        }
+    },
+    {
+        "pk": 70705,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70705,
+            "created_at": "2014-04-10T20:40:29",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Personal a Honorarios"
+        }
+    },
+    {
+        "pk": 70706,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70706,
+            "created_at": "2014-04-10T21:15:42",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Personal a Honorarios"
+        }
+    },
+    {
+        "pk": 70707,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70707,
+            "created_at": "2014-04-10T22:12:14",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Personal de Planta"
+        }
+    },
+    {
+        "pk": 70712,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70712,
+            "created_at": "2014-04-11T07:48:43",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Marco Normativo Aplicable"
+        }
+    },
+    {
+        "pk": 70713,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70713,
+            "created_at": "2014-04-11T07:49:00",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Otras Compras"
+        }
+    },
+    {
+        "pk": 70714,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70714,
+            "created_at": "2014-04-11T08:00:39",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Otras Compras 2"
+        }
+    },
+    {
+        "pk": 70719,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70719,
+            "created_at": "2014-04-11T15:40:06",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Personal de Planta 2"
+        }
+    },
+    {
+        "pk": 70720,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70720,
+            "created_at": "2014-04-11T15:41:20",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Personal a Honorarios 2"
+        }
+    },
+    {
+        "pk": 70738,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70738,
+            "created_at": "2014-04-12T21:27:31",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Personal a Honorarios"
+        }
+    },
+    {
+        "pk": 70739,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70739,
+            "created_at": "2014-04-12T21:27:43",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Personal a Honorarios 3"
+        }
+    },
+    {
+        "pk": 70740,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70740,
+            "created_at": "2014-04-12T21:28:29",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Personal de Planta 3"
+        }
+    },
+    {
+        "pk": 70741,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70741,
+            "created_at": "2014-04-12T21:28:57",
+            "description": "data",
+            "language": "es",
+            "title": "Municipios Transparentes - Otras Compras 3"
+        }
+    },
+    {
+        "pk": 70845,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70845,
+            "created_at": "2014-04-27T21:45:02",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Marco Normativo Aplicable"
+        }
+    },
+    {
+        "pk": 70846,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70846,
+            "created_at": "2014-04-27T22:24:51",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Potestades, competencias..."
+        }
+    },
+    {
+        "pk": 70847,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70847,
+            "created_at": "2014-04-27T22:27:00",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Actos con Efectos a Terceros - Decretos"
+        }
+    },
+    {
+        "pk": 70848,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70848,
+            "created_at": "2014-04-27T22:31:20",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Permisos de Edificaci\u00f3n"
+        }
+    },
+    {
+        "pk": 70849,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70849,
+            "created_at": "2014-04-27T22:31:57",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Permisos"
+        }
+    },
+    {
+        "pk": 70850,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70850,
+            "created_at": "2014-04-27T22:36:58",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Permisos DOM"
+        }
+    },
+    {
+        "pk": 70851,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70851,
+            "created_at": "2014-04-27T22:49:11",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Estructura Org\u00e1nica - Facultades, funciones..."
+        }
+    },
+    {
+        "pk": 70852,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70852,
+            "created_at": "2014-04-27T22:51:44",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Personal a Contrata"
+        }
+    },
+    {
+        "pk": 70853,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70853,
+            "created_at": "2014-04-27T22:56:25",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Personal Codigo del Trabajo"
+        }
+    },
+    {
+        "pk": 70891,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 70891,
+            "created_at": "2014-05-02T10:47:00",
+            "description": "data",
+            "language": "es",
+            "title": "Municipio Transparente - Nomina Beneficiarios Programas Sociales"
+        }
+    },
+    {
+        "pk": 71045,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 71045,
+            "created_at": "2014-05-14T10:19:26",
+            "description": "data",
+            "language": "es",
+            "title": "Precios Consumidor - Frutas y Verduras"
+        }
+    },
+    {
+        "pk": 72754,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 72754,
+            "created_at": "2014-05-23T14:50:58",
+            "description": "Marco normativo aplicable para el Municipio de Corral.",
+            "language": "es",
+            "title": "Municipio de Corral - Marco normativo aplicable"
+        }
+    },
+    {
+        "pk": 74509,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74509,
+            "created_at": "2014-09-18T16:26:00",
+            "description": "data",
+            "language": "es",
+            "title": "API Bencinas"
+        }
+    },
+    {
+        "pk": 74883,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74883,
+            "created_at": "2014-10-13T11:13:00",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado Publico - Licitaciones"
+        }
+    },
+    {
+        "pk": 74884,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74884,
+            "created_at": "2014-10-13T12:58:32",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado Publico - Licitaciones por Fecha"
+        }
+    },
+    {
+        "pk": 74885,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74885,
+            "created_at": "2014-10-13T13:00:34",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Todas las licitaciones para hoy"
+        }
+    },
+    {
+        "pk": 74886,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74886,
+            "created_at": "2014-10-13T13:03:01",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Por c\u00f3digo"
+        }
+    },
+    {
+        "pk": 74887,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74887,
+            "created_at": "2014-10-13T13:04:02",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Por c\u00f3digo"
+        }
+    },
+    {
+        "pk": 74888,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74888,
+            "created_at": "2014-10-13T13:06:29",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Activas al d\u00eda de hoy"
+        }
+    },
+    {
+        "pk": 74889,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74889,
+            "created_at": "2014-10-13T13:08:13",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado Publico - Por estado para hoy"
+        }
+    },
+    {
+        "pk": 74890,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74890,
+            "created_at": "2014-10-13T14:55:24",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Por c\u00f3digo"
+        }
+    },
+    {
+        "pk": 74899,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74899,
+            "created_at": "2014-10-14T11:01:34",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Activas al d\u00eda de hoy"
+        }
+    },
+    {
+        "pk": 74900,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 74900,
+            "created_at": "2014-10-14T11:01:41",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Todas las licitaciones para hoy"
+        }
+    },
+    {
+        "pk": 78515,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78515,
+            "created_at": "2015-04-16T11:19:40",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78516,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78516,
+            "created_at": "2015-04-16T13:06:59",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78517,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78517,
+            "created_at": "2015-04-16T13:10:45",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78518,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78518,
+            "created_at": "2015-04-16T13:11:23",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78519,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78519,
+            "created_at": "2015-04-16T13:12:49",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78520,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78520,
+            "created_at": "2015-04-16T13:13:54",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78521,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78521,
+            "created_at": "2015-04-16T13:14:57",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78522,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78522,
+            "created_at": "2015-04-16T13:15:19",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78523,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78523,
+            "created_at": "2015-04-16T13:16:57",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno - Lite"
+        }
+    },
+    {
+        "pk": 78532,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78532,
+            "created_at": "2015-04-16T20:14:12",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 78533,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78533,
+            "created_at": "2015-04-16T20:18:19",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 78534,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78534,
+            "created_at": "2015-04-16T20:54:20",
+            "description": "data",
+            "language": "es",
+            "title": "API Bencinas"
+        }
+    },
+    {
+        "pk": 78546,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78546,
+            "created_at": "2015-04-17T12:32:13",
+            "description": "asdf",
+            "language": "es",
+            "title": "TEST"
+        }
+    },
+    {
+        "pk": 78673,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78673,
+            "created_at": "2015-04-22T19:08:08",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 78674,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78674,
+            "created_at": "2015-04-22T19:08:42",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias"
+        }
+    },
+    {
+        "pk": 78675,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 78675,
+            "created_at": "2015-04-22T19:09:28",
+            "description": "data",
+            "language": "es",
+            "title": "Farmacias de Turno"
+        }
+    },
+    {
+        "pk": 79408,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 79408,
+            "created_at": "2015-05-13T23:19:16",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Todas las licitaciones para hoy"
+        }
+    },
+    {
+        "pk": 79410,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 79410,
+            "created_at": "2015-05-13T23:21:19",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado Publico - Licitaciones por Fecha"
+        }
+    },
+    {
+        "pk": 79411,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 79411,
+            "created_at": "2015-05-13T23:21:31",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Activas al d\u00eda de hoy"
+        }
+    },
+    {
+        "pk": 79412,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 79412,
+            "created_at": "2015-05-13T23:21:39",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado P\u00fablico - Por c\u00f3digo"
+        }
+    },
+    {
+        "pk": 79413,
+        "model": "core.dataseti18n",
+        "fields": {
+            "dataset_revision": 79413,
+            "created_at": "2015-05-13T23:21:47",
+            "description": "data",
+            "language": "es",
+            "title": "API Mercado Publico - Por estado para hoy"
+        }
+    }
+]

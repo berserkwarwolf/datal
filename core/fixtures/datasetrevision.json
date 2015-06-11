@@ -1,0 +1,1154 @@
+[
+    {
+        "pk": 79413,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 0,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2015-05-13T23:21:47",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70096,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado</pathToData><uriSignatures/><args><ticket editable=\"false\">F8537A18-6766-4DEF-9E59-426B4FEE2844</ticket><estado editable=\"true\">Publicada</estado></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79412,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 0,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2015-05-13T23:21:39",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70094,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado</pathToData><uriSignatures/><args><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket><codigo editable=\"true\">1002-99-L114</codigo></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79411,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 0,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2015-05-13T23:21:31",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70095,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado</pathToData><uriSignatures/><args><ticket editable=\"false\">F8537A18-6766-4DEF-9E59-426B4FEE2844</ticket><estado editable=\"false\">activas</estado></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79410,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 0,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2015-05-13T23:21:19",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70092,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado</pathToData><uriSignatures/><args><fecha editable=\"true\">02102014</fecha><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79408,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 0,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2015-05-13T23:19:16",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70093,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado</pathToData><uriSignatures/><args><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78675,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocalesTurnos",
+            "created_at": "2015-04-22T19:09:28",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66407,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78674,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2015-04-22T19:08:42",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78673,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2015-04-22T19:08:07",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78546,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 0,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2015-04-17T12:32:13",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 71869,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$..</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78534,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://apis.modernizacion.cl/cne/bencinas/index.php",
+            "created_at": "2015-04-16T20:54:20",
+            "filename": "http://apis.modernizacion.cl/cne/bencinas/index.php",
+            "impl_type": 17,
+            "user": 1647,
+            "dataset": 67237,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78533,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales",
+            "created_at": "2015-04-16T20:18:19",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78532,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2015-04-16T20:14:12",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.[*]</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78523,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "created_at": "2015-04-16T13:16:57",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>/</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78522,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "created_at": "2015-04-16T13:15:19",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$..*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78521,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "created_at": "2015-04-16T13:14:57",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>@*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78520,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "created_at": "2015-04-16T13:13:54",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78519,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php",
+            "created_at": "2015-04-16T13:12:49",
+            "filename": "http://farmanet.minsal.cl/maps/index.php",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.ws.getLocalesTurnos.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78518,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php",
+            "created_at": "2015-04-16T13:11:23",
+            "filename": "http://farmanet.minsal.cl/maps/index.php",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$./ws/getLocalesTurnos/</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78517,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php",
+            "created_at": "2015-04-16T13:10:45",
+            "filename": "http://farmanet.minsal.cl/maps/index.php",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>/ws/getLocalesTurnos/</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78516,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "created_at": "2015-04-16T13:06:59",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 78515,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "created_at": "2015-04-16T11:19:40",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74900,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-14T11:01:41",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70093,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74899,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-14T11:01:34",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70095,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket editable=\"false\">F8537A18-6766-4DEF-9E59-426B4FEE2844</ticket><estado editable=\"false\">activas</estado></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74890,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T14:55:24",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70094,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket><codigo editable=\"true\">1002-99-L114</codigo></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74889,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T13:08:13",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70096,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket>F8537A18-6766-4DEF-9E59-426B4FEE2844</ticket><estado editable=\"true\">Publicada</estado></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74888,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T13:06:29",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70095,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket>F8537A18-6766-4DEF-9E59-426B4FEE2844</ticket><estado>activas</estado></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74887,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T13:04:02",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70094,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket><codigo editable=\"true\">1509-5-L114</codigo></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74886,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T13:03:01",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70094,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders>http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json</pathToHeaders><pathToData></pathToData><uriSignatures/><args><ticket>2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket><codigo editable=\"true\">1509-5-L114</codigo></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74885,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T13:00:34",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70093,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><ticket>2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74884,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T12:58:32",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70092,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><fecha editable=\"true\">02102014</fecha><ticket editable=\"false\">2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74883,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 70,
+            "status": 3,
+            "end_point": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "created_at": "2014-10-13T11:13:00",
+            "filename": "http://api.mercadopublico.cl/servicios/v1/publico/licitaciones.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 70092,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.Listado.</pathToData><uriSignatures/><args><fecha editable=\"true\">02102014</fecha><ticket>2C5D0347-F67B-4BC5-ACB1-4400C7590AB6</ticket></args></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 74509,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://apis.modernizacion.cl/cne/bencinas/index.php",
+            "created_at": "2014-09-18T16:26:00",
+            "filename": "http://apis.modernizacion.cl/cne/bencinas/index.php",
+            "impl_type": 17,
+            "user": 1647,
+            "dataset": 67237,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.[*]</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 72754,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40822,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/7/181",
+            "created_at": "2014-05-23T14:50:58",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/7/181",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 68952,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 71045,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://apps.odepa.cl/odepaweb/down/gobierno_abierto/precios_consumidor.json",
+            "created_at": "2014-05-14T10:19:26",
+            "filename": "http://apps.odepa.cl/odepaweb/down/gobierno_abierto/precios_consumidor.json",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67517,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.Semanal</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70891,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/5343",
+            "created_at": "2014-05-02T10:47:00",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/5343",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67407,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70853,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/5270",
+            "created_at": "2014-04-27T22:56:25",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/5270",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67390,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70852,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2515",
+            "created_at": "2014-04-27T22:51:44",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2515",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67389,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70851,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/365",
+            "created_at": "2014-04-27T22:49:11",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/365",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67388,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70850,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/5289",
+            "created_at": "2014-04-27T22:36:58",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/5289",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67387,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70849,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2320",
+            "created_at": "2014-04-27T22:31:57",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2320",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67386,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70848,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2319",
+            "created_at": "2014-04-27T22:31:20",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2319",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67385,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70847,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2263",
+            "created_at": "2014-04-27T22:27:00",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/2263",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67384,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70846,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/362",
+            "created_at": "2014-04-27T22:24:51",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/362",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67383,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70845,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/361",
+            "created_at": "2014-04-27T21:45:02",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/12/361",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67382,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70741,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 41,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/5805",
+            "created_at": "2014-04-12T21:28:57",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/5805",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67356,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70740,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3314",
+            "created_at": "2014-04-12T21:28:29",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3314",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67355,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70739,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3278",
+            "created_at": "2014-04-12T21:27:43",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3278",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67354,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70738,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3278",
+            "created_at": "2014-04-12T21:27:31",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/26/3278",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67354,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70720,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/3879",
+            "created_at": "2014-04-11T15:41:20",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/3879",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67341,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70719,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/5279",
+            "created_at": "2014-04-11T15:40:06",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/5279",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67340,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70714,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/5334",
+            "created_at": "2014-04-11T08:00:39",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/39/5334",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67338,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70713,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/5419",
+            "created_at": "2014-04-11T07:49:00",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/5419",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67337,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70712,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "https://www.google.com/url?q=http://desarrollo.municipiostransparentes.cl/api/contenido/get/7/181&sa=D&usg=ALhdy28vDAEJ1k2htv7Iapv5KYjAZ90kpQ",
+            "created_at": "2014-04-11T07:48:43",
+            "filename": "https://www.google.com/url?q=http://desarrollo.municipiostransparentes.cl/api/contenido/get/7/181&sa=D&usg=ALhdy28vDAEJ1k2htv7Iapv5KYjAZ90kpQ",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67337,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70707,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/2340",
+            "created_at": "2014-04-10T22:12:14",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/2340",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67333,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70706,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/3867",
+            "created_at": "2014-04-10T21:15:42",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/46/3867",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67332,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70705,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/48/4507",
+            "created_at": "2014-04-10T20:40:29",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/48/4507",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67332,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70669,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/cuenta_id/pagina_id",
+            "created_at": "2014-04-08T22:42:59",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/contenido/get/cuenta_id/pagina_id",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67318,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.planilla</pathToData><uriSignatures/><args/><authentication><userName>gobierno</userName><password>digital</password></authentication></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70609,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "https://apis.modernizacion.cl/cne/bencinas/index.php",
+            "created_at": "2014-04-07T08:49:53",
+            "filename": "https://apis.modernizacion.cl/cne/bencinas/index.php",
+            "impl_type": 17,
+            "user": 1647,
+            "dataset": 67237,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.[*]</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 70528,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "https://apis.modernizacion.cl/cne/bencinas/index.php",
+            "created_at": "2014-04-01T15:11:14",
+            "filename": "https://apis.modernizacion.cl/cne/bencinas/index.php",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 67237,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69958,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/cuentas/get",
+            "created_at": "2014-02-10T17:44:31",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/cuentas/get",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66934,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69957,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 67,
+            "status": 3,
+            "end_point": "http://desarrollo.municipiostransparentes.cl/api/cuentas/get",
+            "created_at": "2014-02-10T17:43:57",
+            "filename": "http://desarrollo.municipiostransparentes.cl/api/cuentas/get",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66934,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69887,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2014-02-05T18:23:46",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69573,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "created_at": "2014-01-10T17:46:59",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocalesTurnos/",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69571,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales/",
+            "created_at": "2014-01-10T15:55:59",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales/",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66759,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69570,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales/",
+            "created_at": "2014-01-10T15:55:33",
+            "filename": "http://farmanet.minsal.cl/maps/index.php/ws/getLocales/",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66758,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69560,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2014-01-10T12:10:20",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69474,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://farmanet.minsal.cl/index.php/ws/getLocalesTurnos",
+            "created_at": "2014-01-03T12:04:27",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66407,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69434,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://turnosdefarmacia.cl/index.php/ws/getLocalesTurnos",
+            "created_at": "2013-12-28T15:11:29",
+            "filename": "http://turnosdefarmacia.cl/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66407,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69433,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "hrrp://farmanet.minsal.cl/index.php/ws/getLocales",
+            "created_at": "2013-12-28T15:11:22",
+            "filename": "http://farmanet.minsal.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69429,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://turnosdefarmacia.cl/index.php/ws/getLocales",
+            "created_at": "2013-12-27T16:35:17",
+            "filename": "http://turnosdefarmacia.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66711,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69010,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://turnosdefarmacia.cl/index.php/ws/getLocalesTurnos",
+            "created_at": "2013-12-17T11:32:05",
+            "filename": "http://turnosdefarmacia.cl/index.php/ws/getLocalesTurnos",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66407,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 69005,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 42,
+            "status": 3,
+            "end_point": "http://turnosdefarmacia.cl/index.php/ws/getLocales",
+            "created_at": "2013-12-16T23:38:54",
+            "filename": "http://turnosdefarmacia.cl/index.php/ws/getLocales",
+            "impl_type": 14,
+            "user": 1647,
+            "dataset": 66407,
+            "impl_details": "<wsOperation useCache=\"true\"><pathToHeaders></pathToHeaders><pathToData>$</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    }
+]
