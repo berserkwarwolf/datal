@@ -596,3 +596,6 @@ msgstr "Región"
 
 msgid "APP-LICENSE-TEXT"
 msgstr "Licencia"
+
+msgid "APP-READ-MORE-TEXT"
+msgstr "Leer más"

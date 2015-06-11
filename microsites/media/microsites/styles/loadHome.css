@@ -130,7 +130,7 @@ body,
 .featuredSlider .sliderHome,
 .featuredSlider .caroufredsel_wrapper,
 .featuredSlider .panel{width:940px;height:300px;overflow:hidden;float:left;position:relative;}
-.featuredSlider .btn{display:block;background:url(http://www.junar.com/media_website/images/home/btn-slider.png) no-repeat;height:43px;width:26px;position:absolute;top:128px;cursor:pointer;}
+.featuredSlider .btn{display:block;background:url(http://www.junar.com/media_website/images/home/btn-slider.png) no-repeat;height:43px;width:26px;position:absolute;top:128px;cursor:pointer;z-index:1;}
 .featuredSlider .btn.izq{background-position:0 0;left:-26px;}
 .featuredSlider .btn.der{background-position:-26px 0;right:-26px;}
 .featuredSlider .btn.izq:hover{background-position:0 -43px;}
@@ -284,8 +284,7 @@ body .theme2 .caroufredsel_wrapper{border:0 !important;}
             border-radius:0;
   }
   #id_welcomePopup .In h4{background:transparent;border:0;height:auto;line-height:normal;}
-  #id_welcomePopup .In p{font-size:11px;line-height:18px;}
-  #id_welcomePopup .close{background-image:url(/static/core/images/common/ic_closeGray.png);top:10px;right:10px;}
+  #id_welcomePopup .In p{font-size:11px;line-height:18px;padding:0 18px;}
 
 /* Theme 6 - Jackson */
 .theme6.w960{padding:0;width:960px;background:#f5f5f5;

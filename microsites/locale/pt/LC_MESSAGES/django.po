@@ -602,3 +602,6 @@ msgstr "Region"
 
 msgid "APP-LICENSE-TEXT"
 msgstr "License"
+
+msgid "APP-READ-MORE-TEXT"
+msgstr "Read more"
