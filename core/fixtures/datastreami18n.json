@@ -1,86 +1,386 @@
 [
     {
-        "pk": 3953, 
-        "model": "core.datastreamparameter", 
+        "pk": 72456,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "13102014", 
-            "position": 0, 
-            "datastream_revision": 80695, 
-            "impl_details": "", 
-            "name": "Fecha"
+            "description": "Datos sobre la farmacias de turno para todo el territorio nacional.",
+            "language": "es",
+            "title": "Farmacias de Turno en L\u00ednea",
+            "created_at": "2014-01-13T12:33:33",
+            "datastream_revision": 72378,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 3954, 
-        "model": "core.datastreamparameter", 
+        "pk": 72608,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "Publicada", 
-            "position": 0, 
-            "datastream_revision": 80698, 
-            "impl_details": "", 
-            "name": "estado"
+            "description": "Listado con todas las farmacias que atienden en horario h\u00e1bil al d\u00eda de la consulta",
+            "language": "es",
+            "title": "Farmacias en todo Chile",
+            "created_at": "2014-01-22T17:30:59",
+            "datastream_revision": 72530,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 3958, 
-        "model": "core.datastreamparameter", 
+        "pk": 72609,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "Publicada", 
-            "position": 0, 
-            "datastream_revision": 80711, 
-            "impl_details": "", 
-            "name": "estado"
+            "description": "Datos sobre la farmacias de turno para todo el territorio nacional.",
+            "language": "es",
+            "title": "Farmacias de Turno en L\u00ednea",
+            "created_at": "2014-01-22T17:43:44",
+            "datastream_revision": 72531,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 3963, 
-        "model": "core.datastreamparameter", 
+        "pk": 72782,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "Publicada", 
-            "position": 0, 
-            "datastream_revision": 80761, 
-            "impl_details": "", 
-            "name": "estado"
+            "description": "Listado de todas las farmacias del pa\u00eds para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Farmacias de Chile en L\u00ednea",
+            "created_at": "2014-02-04T15:53:57",
+            "datastream_revision": 72704,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 3964, 
-        "model": "core.datastreamparameter", 
+        "pk": 72804,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "13102014", 
-            "position": 0, 
-            "datastream_revision": 80762, 
-            "impl_details": "", 
-            "name": "Fecha"
+            "description": "Listado de todas las farmacias del pa\u00eds para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Farmacias de Chile en L\u00ednea",
+            "created_at": "2014-02-05T18:23:46",
+            "datastream_revision": 72726,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 4069, 
-        "model": "core.datastreamparameter", 
+        "pk": 73943,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "13102014", 
-            "position": 0, 
-            "datastream_revision": 87874, 
-            "impl_details": "", 
-            "name": "Fecha"
+            "description": "Listado georeferenciado con los precios en l\u00ednea de gasolinas, kerosene y diesel a lo largo de Chile.",
+            "language": "es",
+            "title": "Precios de Bencinas en L\u00ednea",
+            "created_at": "2014-04-07T17:03:52",
+            "datastream_revision": 73854,
+            "notes": ""
         }
-    }, 
+    },
     {
-        "pk": 4070, 
-        "model": "core.datastreamparameter", 
+        "pk": 73944,
+        "model": "core.datastreami18n",
         "fields": {
-            "description": "", 
-            "default": "Publicada", 
-            "position": 0, 
-            "datastream_revision": 87876, 
-            "impl_details": "", 
-            "name": "estado"
+            "description": "Listado georeferenciado con los precios en l\u00ednea de gasolinas, kerosene y diesel a lo largo de Chile.",
+            "language": "es",
+            "title": "Precios de Bencinas en L\u00ednea",
+            "created_at": "2014-04-07T17:08:39",
+            "datastream_revision": 73855,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 74269,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Datos sobre la farmacias de turno para todo el territorio nacional.",
+            "language": "es",
+            "title": "Farmacias de Turno en L\u00ednea",
+            "created_at": "2014-04-14T11:08:54",
+            "datastream_revision": 74180,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 74270,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Listado de todas las farmacias del pa\u00eds para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Farmacias de Chile en L\u00ednea",
+            "created_at": "2014-04-14T11:15:33",
+            "datastream_revision": 74181,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 80050,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Listado georeferenciado con los precios en l\u00ednea de gasolinas, kerosene y diesel a lo largo de Chile.",
+            "language": "es",
+            "title": "Precios de Bencinas en L\u00ednea",
+            "created_at": "2014-09-18T16:26:00",
+            "datastream_revision": 79963,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 80782,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones seg\u00fan el d\u00eda de la consulta. La fecha debe ingresarse en formato ddmmaaaa",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan D\u00eda",
+            "created_at": "2014-10-13T14:48:33",
+            "datastream_revision": 80695,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 80783,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2014-10-13T14:54:24",
+            "datastream_revision": 80696,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 80784,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2014-10-13T14:57:13",
+            "datastream_revision": 80697,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li></ul>"
+        }
+    },
+    {
+        "pk": 80785,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega listado de licitaciones disponibles seg\u00fan el estado.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan Estado",
+            "created_at": "2014-10-13T14:58:20",
+            "datastream_revision": 80698,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 80796,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2014-10-14T10:25:14",
+            "datastream_revision": 80709,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 80797,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2014-10-14T10:35:12",
+            "datastream_revision": 80710,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li></ul>"
+        }
+    },
+    {
+        "pk": 80798,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega listado de licitaciones disponibles seg\u00fan el estado.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan Estado",
+            "created_at": "2014-10-14T10:35:22",
+            "datastream_revision": 80711,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados posibles de las licitaciones son los siguientes:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li><li>Desierta</li><li>Adjudicada</li><li>Revocada</li><li>Suspendida</li><li>Todas</li></ul>"
+        }
+    },
+    {
+        "pk": 80799,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2014-10-14T10:59:19",
+            "datastream_revision": 80712,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 80800,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2014-10-14T10:59:30",
+            "datastream_revision": 80713,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li></ul>"
+        }
+    },
+    {
+        "pk": 80801,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2014-10-14T11:01:34",
+            "datastream_revision": 80714,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li></ul>"
+        }
+    },
+    {
+        "pk": 80802,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2014-10-14T11:01:41",
+            "datastream_revision": 80715,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 80846,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2014-10-15T11:10:15",
+            "datastream_revision": 80759,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 80847,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2014-10-15T11:10:22",
+            "datastream_revision": 80760,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li></ul>"
+        }
+    },
+    {
+        "pk": 80848,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega listado de licitaciones disponibles seg\u00fan el estado.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan Estado",
+            "created_at": "2014-10-15T11:10:29",
+            "datastream_revision": 80761,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados posibles de las licitaciones son los siguientes:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li><li>Desierta</li><li>Adjudicada</li><li>Revocada</li><li>Suspendida</li><li>Todas</li></ul>"
+        }
+    },
+    {
+        "pk": 80849,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones seg\u00fan el d\u00eda de la consulta. La fecha debe ingresarse en formato ddmmaaaa",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan D\u00eda",
+            "created_at": "2014-10-15T11:10:38",
+            "datastream_revision": 80762,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 86426,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Listado de todas las farmacias del pa\u00eds para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Farmacias de Chile en L\u00ednea",
+            "created_at": "2015-04-16T20:14:12",
+            "datastream_revision": 86340,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 86585,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Datos sobre la farmacias de turno para todo el territorio nacional.",
+            "language": "es",
+            "title": "Farmacias de Turno en L\u00ednea",
+            "created_at": "2015-04-22T19:09:28",
+            "datastream_revision": 86499,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 86586,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Listado de todas las farmacias del pa\u00eds para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Farmacias de Chile en L\u00ednea",
+            "created_at": "2015-04-22T19:21:37",
+            "datastream_revision": 86500,
+            "notes": ""
+        }
+    },
+    {
+        "pk": 87958,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones disponibles para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico al d\u00eda de hoy",
+            "created_at": "2015-05-13T23:19:16",
+            "datastream_revision": 87873,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 87959,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Retorna todas las licitaciones seg\u00fan el d\u00eda de la consulta. La fecha debe ingresarse en formato ddmmaaaa",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan D\u00eda",
+            "created_at": "2015-05-13T23:21:19",
+            "datastream_revision": 87874,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados de las licitaciones consultadas ser\u00e1n mostrados por c\u00f3digo, descritos de la siguiente forma:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada (5)</li><li>Cerrada (6)</li><li>Desierta (7)</li><li>Adjudicada (8)</li><li>Revocada (18)</li><li>Suspendida (19)</li></ul>"
+        }
+    },
+    {
+        "pk": 87960,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega informaci\u00f3n sobre las licitaciones activas para el d\u00eda de la consulta.",
+            "language": "es",
+            "title": "Licitaciones Activas Mercado P\u00fablico",
+            "created_at": "2015-05-13T23:21:31",
+            "datastream_revision": 87875,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">La opci\u00f3n estados \"activas\", muestra todas las licitaciones que poseen los siguientes estados:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li></ul>"
+        }
+    },
+    {
+        "pk": 87961,
+        "model": "core.datastreami18n",
+        "fields": {
+            "description": "Entrega listado de licitaciones disponibles seg\u00fan el estado.",
+            "language": "es",
+            "title": "Licitaciones Mercado P\u00fablico seg\u00fan Estado",
+            "created_at": "2015-05-13T23:21:47",
+            "datastream_revision": 87876,
+            "notes": "<p style=\"text-align: justify; color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\">Los estados posibles de las licitaciones son los siguientes:</p><ul style=\"color: rgb(0, 0, 0); font-family: Verdana; font-size: 13px; line-height: normal;\"><li>Publicada</li><li>Cerrada</li><li>Desierta</li><li>Adjudicada</li><li>Revocada</li><li>Suspendida</li><li>Todas</li></ul>"
         }
     }
 ]
