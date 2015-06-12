@@ -10,4 +10,3 @@ scrapper:
 
 crawler:
   media: http://workspace.dev:8080/static/core/styles
- 
