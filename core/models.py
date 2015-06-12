@@ -653,11 +653,13 @@ class DatasetRevision(models.Model):
             dataset_revision.sourcedataset_set.add(source)
 
         for dataseti18n in self.dataseti18n_set.all():
-            dataset_revision.dataseti18n_set.create(language = dataseti18n.language
-                                                        , dataset_revision = dataset_revision
-                                                        , title = dataseti18n.title
-                                                        , description = dataseti18n.description
-                                                        , notes = dataseti18n.notes)
+            dataset_revision.dataseti18n_set.create(
+                language = dataseti18n.language,
+                dataset_revision = dataset_revision,
+                title = dataseti18n.title,
+                description = dataseti18n.description,
+                notes = dataseti18n.notes
+            )
 
         dataset_revision.save()
 
