@@ -4,7 +4,7 @@ import operator
 from django.db.models import Q, F
 
 from core.exceptions import SearchIndexNotFoundException
-from core.models import DatastreamI18n, VisualizationRevision, DataStreamRevision
+from core.models import DatastreamI18n, DataStreamRevision
 from core.daos.resource import AbstractDataStreamDBDAO
 from workspace import settings
 

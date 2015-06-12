@@ -3,408 +3,442 @@
         "pk": 66407, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 69005, 
             "user": 1647, 
-            "guid": "FARMA-DE-TURNO-75665", 
+            "last_published_revision": 69005, 
+            "guid": "FARMA-DE-TURNO-78936", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 66711, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 69429, 
             "user": 1647, 
-            "guid": "FARMA-DE-TURNO-95761", 
+            "last_published_revision": 69429, 
+            "guid": "FARMA-DE-TURNO-26314", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 66758, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 69570, 
             "user": 1647, 
-            "guid": "FARMA-LITE-72409", 
+            "last_published_revision": 69570, 
+            "guid": "FARMA-LITE-69706", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 66759, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 69571, 
             "user": 1647, 
-            "guid": "FARMA-DE-TURNO-LITE-90468", 
+            "last_published_revision": 69571, 
+            "guid": "FARMA-DE-TURNO-LITE-49185", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 66934, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 69957, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-40353", 
+            "last_published_revision": 69957, 
+            "guid": "MUNIC-TRANS-61212", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67237, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70528, 
             "user": 1647, 
-            "guid": "API-BENCI-88350", 
+            "last_published_revision": 70528, 
+            "guid": "API-BENCI-24906", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67318, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70669, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-58296", 
+            "last_published_revision": 70669, 
+            "guid": "MUNIC-TRANS-47888", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67332, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70705, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-A-76793", 
+            "last_published_revision": 70705, 
+            "guid": "MUNIC-TRANS-PERSO-A-54728", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67333, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70707, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-DE-74924", 
+            "last_published_revision": 70707, 
+            "guid": "MUNIC-TRANS-PERSO-DE-62476", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67337, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70712, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-MARCO-NORMA-79643", 
+            "last_published_revision": 70712, 
+            "guid": "MUNIC-TRANS-MARCO-NORMA-65640", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67338, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70714, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-OTRAS-COMPR-46542", 
+            "last_published_revision": 70714, 
+            "guid": "MUNIC-TRANS-OTRAS-COMPR-11621", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67340, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70719, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-DE-80688", 
+            "last_published_revision": 70719, 
+            "guid": "MUNIC-TRANS-PERSO-DE-99504", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67341, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70720, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-A-30717", 
+            "last_published_revision": 70720, 
+            "guid": "MUNIC-TRANS-PERSO-A-90565", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67354, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70738, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-A-29579", 
+            "last_published_revision": 70738, 
+            "guid": "MUNIC-TRANS-PERSO-A-18381", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67355, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70740, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-DE-12245", 
+            "last_published_revision": 70740, 
+            "guid": "MUNIC-TRANS-PERSO-DE-30246", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67356, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70741, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-OTRAS-COMPR-29988", 
+            "last_published_revision": 70741, 
+            "guid": "MUNIC-TRANS-OTRAS-COMPR-60139", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67382, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70845, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-MARCO-NORMA-20738", 
+            "last_published_revision": 70845, 
+            "guid": "MUNIC-TRANS-MARCO-NORMA-99045", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67383, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70846, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-POTES-COMPE-44228", 
+            "last_published_revision": 70846, 
+            "guid": "MUNIC-TRANS-POTES-COMPE-65075", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67384, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70847, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-ACTOS-CON-39618", 
+            "last_published_revision": 70847, 
+            "guid": "MUNIC-TRANS-ACTOS-CON-28632", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67385, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70848, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERMI-DE-65673", 
+            "last_published_revision": 70848, 
+            "guid": "MUNIC-TRANS-PERMI-DE-47298", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67386, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70849, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERMI-16087", 
+            "last_published_revision": 70849, 
+            "guid": "MUNIC-TRANS-PERMI-90573", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67387, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70850, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERMI-DOM-38159", 
+            "last_published_revision": 70850, 
+            "guid": "MUNIC-TRANS-PERMI-DOM-58212", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67388, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70851, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-ESTRU-ORGAN-28235", 
+            "last_published_revision": 70851, 
+            "guid": "MUNIC-TRANS-ESTRU-ORGAN-84837", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67389, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70852, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-A-53571", 
+            "last_published_revision": 70852, 
+            "guid": "MUNIC-TRANS-PERSO-A-96952", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67390, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70853, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-PERSO-CODIG-63684", 
+            "last_published_revision": 70853, 
+            "guid": "MUNIC-TRANS-PERSO-CODIG-24255", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67407, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 70891, 
             "user": 1647, 
-            "guid": "MUNIC-TRANS-NOMIN-BENEF-22131", 
+            "last_published_revision": 70891, 
+            "guid": "MUNIC-TRANS-NOMIN-BENEF-98918", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 67517, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 71045, 
             "user": 1647, 
-            "guid": "PRECI-CONSU-FRUTA-Y-68572", 
+            "last_published_revision": 71045, 
+            "guid": "PRECI-CONSU-FRUTA-Y-48113", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 68952, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 72754, 
             "user": 1647, 
-            "guid": "MUNIC-DE-CORRA-MARCO-38931", 
+            "last_published_revision": 72754, 
+            "guid": "MUNIC-DE-CORRA-MARCO-25586", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 70092, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 74883, 
             "user": 1647, 
-            "guid": "API-MERCA-PUBLI-LICIT-92790", 
+            "last_published_revision": 74883, 
+            "guid": "API-MERCA-PUBLI-LICIT-22196", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 70093, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 74885, 
             "user": 1647, 
-            "guid": "API-MERCA-PUBLI-TODAS-85730", 
+            "last_published_revision": 74885, 
+            "guid": "API-MERCA-PUBLI-TODAS-59829", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 70094, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 74886, 
             "user": 1647, 
-            "guid": "API-MERCA-PUBLI-POR-43731", 
+            "last_published_revision": 74886, 
+            "guid": "API-MERCA-PUBLI-POR-37430", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 70095, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 74888, 
             "user": 1647, 
-            "guid": "API-MERCA-PUBLI-ACTIV-45255", 
+            "last_published_revision": 74888, 
+            "guid": "API-MERCA-PUBLI-ACTIV-88082", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 70096, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 74889, 
             "user": 1647, 
-            "guid": "API-MERCA-PUBLI-POR-60907", 
+            "last_published_revision": 74889, 
+            "guid": "API-MERCA-PUBLI-POR-43643", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }, 
     {
         "pk": 71869, 
         "model": "core.dataset", 
         "fields": {
-            "created_at": "2012-06-04T14:12:52", 
+            "is_dead": 0, 
             "last_revision": 78546, 
             "user": 1647, 
-            "guid": "TEST-10080", 
+            "last_published_revision": null, 
+            "guid": "TEST-24150", 
             "type": 2, 
-            "is_dead": 0
+            "created_at": "2012-06-04T14:12:52"
         }
     }
 ]

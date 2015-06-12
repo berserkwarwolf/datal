@@ -1,0 +1,86 @@
+[
+    {
+        "pk": 3953, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "13102014", 
+            "position": 0, 
+            "datastream_revision": 80695, 
+            "impl_details": "", 
+            "name": "Fecha"
+        }
+    }, 
+    {
+        "pk": 3954, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "Publicada", 
+            "position": 0, 
+            "datastream_revision": 80698, 
+            "impl_details": "", 
+            "name": "estado"
+        }
+    }, 
+    {
+        "pk": 3958, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "Publicada", 
+            "position": 0, 
+            "datastream_revision": 80711, 
+            "impl_details": "", 
+            "name": "estado"
+        }
+    }, 
+    {
+        "pk": 3963, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "Publicada", 
+            "position": 0, 
+            "datastream_revision": 80761, 
+            "impl_details": "", 
+            "name": "estado"
+        }
+    }, 
+    {
+        "pk": 3964, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "13102014", 
+            "position": 0, 
+            "datastream_revision": 80762, 
+            "impl_details": "", 
+            "name": "Fecha"
+        }
+    }, 
+    {
+        "pk": 4069, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "13102014", 
+            "position": 0, 
+            "datastream_revision": 87874, 
+            "impl_details": "", 
+            "name": "Fecha"
+        }
+    }, 
+    {
+        "pk": 4070, 
+        "model": "core.datastreamparameter", 
+        "fields": {
+            "description": "", 
+            "default": "Publicada", 
+            "position": 0, 
+            "datastream_revision": 87876, 
+            "impl_details": "", 
+            "name": "estado"
+        }
+    }
+]

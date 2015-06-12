@@ -16,8 +16,8 @@ class StatusChoices():
     APPROVED = 6
 
 CHANNEL_TYPES = (
-    (ChannelTypes.WEB, ugettext_lazy('CHANNEL_TYPE_WEB'))
-    ,(ChannelTypes.API, ugettext_lazy('CHANNEL_TYPE_API'))
+    (ChannelTypes.WEB, ugettext_lazy('CHANNEL_TYPE_WEB')),
+    (ChannelTypes.API, ugettext_lazy('CHANNEL_TYPE_API'))
 )
 
 

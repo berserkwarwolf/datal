@@ -1,0 +1,5662 @@
+[
+    {
+        "pk": 43445, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "OPERA-DEL-EN-MILLO-DE", 
+            "user": 1472, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69575, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SUCUR-CHILE-A-LO-LARGO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69615, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DEFUN-Y-SEGUN-AREA-86445", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69619, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-SEGUN-SEXO-2002", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69620, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "IEP-PRIME-MINIS-DE-DEFEN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69645, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-BIBLI-DEL-12877", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69650, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-SEGUN-SEXO-49690", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69651, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-RAMA-DE-ACTIV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69654, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SERIE-DE-TASA-1992-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69655, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69656, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-TOTAL-12360", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69657, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-TOTAL-71583", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69661, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-TOTAL-59588", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69662, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-TOTAL-48689", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69667, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69668, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-REGIO-85173", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69669, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-REGIO-39347", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69670, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-REGIO-73138", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69671, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-RENDI-REGIO-22518", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69672, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69673, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-TOTAL-13051", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69674, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-TOTAL-43886", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69676, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-TOTAL-99853", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69677, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-TOTAL-67604", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69678, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69679, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-REGIO-17603", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69680, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-REGIO-17778", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69681, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-REGIO-28781", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69682, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-DE-CALIF-REGIO-22959", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69684, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-RENDI-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69687, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-RENDI-TOTAL-24665", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69688, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-RENDI-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69689, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-RENDI-REGIO-55469", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69690, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69693, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-TOTAL-29583", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69697, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-TOTAL-93174", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69698, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-TOTAL-51464", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69701, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-TOTAL-18206", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69702, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69703, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-REGIO-62223", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69704, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-REGIO-18713", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69705, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-REGIO-18125", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69706, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-DE-CALIF-REGIO-14948", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69712, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-II-REGIO-50278", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69713, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-II-REGIO-80640", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69714, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-8-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69715, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-8-TOTAL-76265", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69716, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-8-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69717, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-8-REGIO-39825", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69718, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69719, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-TOTAL-29909", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69720, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-TOTAL-83048", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69721, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-TOTAL-50835", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69722, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69723, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-REGIO-29083", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69724, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-REGIO-34274", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69725, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUL-SIMCE-4-REGIO-59367", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69727, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2008-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69728, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2009-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69729, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2010-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69730, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2008-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69731, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2009-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69732, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RENDI-PSU-2010-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69733, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DOCEN-2009-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69734, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DOCEN-2010-TOTAL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69735, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DOCEN-2009-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69737, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DOCEN-2010-REGIO-23287", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69739, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-SEGUN-REGIO-2002", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69740, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-PROPO-SEGUN-EDAD", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69741, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-POR-SEGUN-CAUSA-EXTER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69742, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ENO-2000-2010-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69743, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "HOSPI-Y-SAPU-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69744, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VACUN-ANTIR-VACUN-ANTIR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69745, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VACUN-ANTIR-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69746, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VACUN-ANTIR-89818", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69747, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VACUN-POR-TIPO-Y-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69748, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DE-DEFUN-1960-70-80", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69749, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DEFUN-FETAL-POR-REGIO-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69750, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DEFUN-Y-SEGUN-AREA-63891", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69751, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DEFUN-Y-POR-REGIO-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69752, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MORTA-GENER-POR-REGIO-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69753, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "N-VIVOS-SEGUN-AREA-URBAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69755, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2000-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69756, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2000-19610", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69757, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2005-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69759, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2005-86667", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69760, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2009-TOTAL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69761, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-INSCR-2009-11465", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69762, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-SEGUN-EDAD-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69763, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NACID-VIVOS-SEGUN-EDAD-78688", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69765, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NATAL-EN-CHILE-1960-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69768, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SERIE-DE-NACID-2000-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69769, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SERIE-DE-NACID-2000-82064", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69772, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TASA-ESPEC-DE-FECUN-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69773, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PROME-DE-CALIF-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69774, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TASA-GLOBA-DE-FECUN-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69775, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PROME-DE-CALIF-REGIO-24608", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69776, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TASA-NATAL-1990-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69777, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PROME-DE-CALIF-REGIO-83663", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69778, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PROME-DE-CALIF-REGIO-98147", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69779, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PROME-DE-CALIF-REGIO-15078", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69784, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-PRESI-DE-LA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69785, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-CONGR-NACIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69786, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-PODER-JUDIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69787, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-CONTR-GENER-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69788, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DEL-INTER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69789, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-RELAC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69790, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-ECONO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69791, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-HACIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69792, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-EDUCA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69793, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-JUSTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69794, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-DEFEN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69795, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-OBRAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69796, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-AGRIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69797, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-BIENE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69798, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DEL-TRABA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69799, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-SALUD", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69800, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-MINER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69801, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-VIVIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69802, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-TRANS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69803, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-MINIS-SEGEG", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69804, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-PLANI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69805, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-MINIS-SEGPR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69806, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-MINIS-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69807, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DE-ENERG", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69808, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-MINIS-DEL-MEDIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69809, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-EJECU-DE-TESOR-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69815, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-PRESI-DE-LA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69816, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-CONGR-NACIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69817, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-PODER-JUDIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69818, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-CONTR-GENER-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69819, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DEL-66002", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69820, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DEL-12832", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69821, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-RELAC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69822, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-65997", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69823, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-ECONO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69824, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-HACIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69825, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-EDUCA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69826, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-JUSTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69827, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-DEFEN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69828, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-12522", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69829, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-OBRAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69830, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-AGRIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69831, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-BIENE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69832, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DEL-TRABA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69833, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-71939", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69834, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-MINER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69835, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-VIVIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69836, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-TT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69837, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-MINIS-SEGEG", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69838, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-PLANI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69839, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-PARTI-MINSE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69840, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-MINIS-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69841, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DE-ENERG", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69842, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-MINIS-DEL-MEDIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69843, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-TESOR-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69844, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESUM-PRESU-DE-TESOR-91106", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69845, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-TOTAL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69846, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-50596", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69847, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-21626", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69848, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-PRESU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69849, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-82255", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69850, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-43123", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69851, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-EXTRA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69852, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-31203", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69853, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-GOBIE-CENTR-22855", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69854, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-CLASI-FUNCI-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69855, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-CLASI-FUNCI-79863", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69856, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-CLASI-FUNCI-28005", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69858, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-GENER-DE-AL-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69859, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-BIBLI-DEL-20800", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69860, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-CORPO-ADM-DEL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69861, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-CONTR-GENER-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69862, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-DE-GOBIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69863, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-SUBDE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69864, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-PRDUV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69865, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SECRE-DE-ADM", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69866, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-I", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69867, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-II", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69868, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-III", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69869, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-IV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69870, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-V", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69871, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-VI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69872, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-VII", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69873, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-VIII", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69874, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-IX", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69875, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-X", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69876, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-XI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69877, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GORE-XII-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69878, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GORE-XII-94813", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69879, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69880, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-XIV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69881, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GOBIE-REGIO-XV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69882, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MINIS-DE-RELAC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69883, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-CORFO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69884, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MINIS-DE-HACIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69885, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-NACIO-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69886, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-DE-TESOR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69887, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SUPER-DE-CASIN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69888, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SUBSE-DE-EDUCA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69889, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-PROGR-DE-INFRA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69890, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-DIBAM", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69891, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-JUNAE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69892, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-JUNJI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69893, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MINIS-DE-JUSTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69894, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-REGIS-CIVIL-E", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69895, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-GENDA-DE-CHILE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69896, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-SENAM", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69897, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-EJERC-DE-CHILE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69898, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MINIS-DEFEN-ORGAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69899, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-ARMAD-DE-CHILE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69900, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DIREC-GRAL-DEL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69901, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-FUERZ-AEREA-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69902, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-CARAB-DE-CHILE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69903, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-POLIC-DE-INVES", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69904, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MINIS-DE-OBRAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69905, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DGOP-ADM-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69906, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DGOP-DIREC-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69907, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DGOP-ADMIN-SISTE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69908, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DGOP-DIREC-PLANE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69909, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-DIREC-GENER-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69910, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-INDAP", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69911, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-SAG", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69912, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-COMIS-NACIO-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69913, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SUBSE-DE-BIENE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69914, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SUBSE-DE-REDES", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69915, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SUBSE-DE-VIVIE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69916, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-ALDEA-Y-CAMPA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69917, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-RECUP-DE-BARRI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69918, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-PARQU-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69919, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-I-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69920, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-II-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69921, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-III-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69922, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-IV-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69923, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-V-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69924, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-VI-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69925, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-VII-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69926, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-VIII-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69927, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-IX-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69928, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-X-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69929, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-XI-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69930, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-XII-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69931, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69932, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-XIV-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69933, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-SERVI-XV-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69934, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MTT-SECRE-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69935, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-TRANS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69936, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-DE-UOCT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69937, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-PROGR-DE-VIALI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69938, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INSTI-NACIO-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69939, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-INICI-MINIS-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69942, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LEY-DE-PRESU-NIVEL-NACIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69970, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SUCUR-CHILE-POR-CIUDA-EN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69971, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SUCUR-CHILE-EN-TODO-CHILE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 69978, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COLEG-Y-LICEO-POR-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 70230, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FALLO-DE-RECOP-DE-JURIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 70234, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FALLO-CONTR-RECOP-DE-JURIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 70243, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MATRI-2011-CORRE-A-LAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 70244, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TITUL-2010-TITUL-NIVEL-PAIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 70252, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-MATRI-INFO-MATRI-CFT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 72839, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "REPOR-SERNA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75625, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-SEGUN-SEMES", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75627, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-SEGUN-19914", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75629, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-SEGUN-81819", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75714, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-16603", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75716, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-80159", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75718, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-77174", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75720, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-78718", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75722, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-81535", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75724, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-37275", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75726, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-69803", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75728, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-16810", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75731, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-PRODU-BIOEQ", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75737, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-DE-PRESU-PARA-EL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75738, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NUMER-Y-SUPER-DE-PARQU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75740, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NUMER-Y-SUPER-DE-58329", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75752, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75755, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-95890", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75757, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-61814", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75759, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-29745", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75761, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-53136", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75763, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-32312", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75765, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-27738", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75767, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-18449", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75769, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-18544", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75771, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-48255", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75854, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-43040", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75856, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-69574", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75858, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-50281", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75860, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INDIC-DE-GENER-29452", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75865, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-82836", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75870, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-53661", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75872, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-32562", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75884, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-62191", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75886, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-26309", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75888, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-44116", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75890, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-40815", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75892, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-81658", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75894, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-73333", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75896, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-29533", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75898, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-54344", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75900, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-75043", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75902, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-54011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75904, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-81805", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 75906, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRUEB-57874", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 76197, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "OTRA-MAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 76198, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78628, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-ASIST-2009-Y-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78632, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-ASIST-2009-Y-66618", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78635, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-CALIF-2006-AL-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78639, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-CALIF-2006-AL-94177", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78643, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-CALIF-2006-AL-54942", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78647, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-CALIF-2006-AL-22167", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78651, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-CALIF-2006-AL-79982", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78654, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78658, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-87472", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78662, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-15809", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78665, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-ASIST-2008-AL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78667, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-90712", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78673, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-11436", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78675, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-ASIST-2008-50573", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78681, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-21101", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78683, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-ASIST-2008-12114", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78689, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-RENDI-2006-AL-77336", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78693, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-2013", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78694, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-CALIF-2006-AL-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78698, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-37756", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78701, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-ASIST-2009-Y-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78703, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-CALIF-2006-AL-44575", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78706, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78710, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-97000", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78714, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-ASIST-2009-Y-25398", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78716, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-CALIF-2006-AL-67847", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78717, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-2013", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78721, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-73447", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78728, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-CALIF-2006-AL-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78730, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-18180", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78733, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-ASIST-2009-Y-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78735, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-CALIF-2006-AL-64056", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78737, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-83433", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78741, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-96812", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78744, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-VULNE-2007-2008-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78752, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-58684", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78756, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-CALIF-2006-AL-81741", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78758, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-CALIF-2006-AL-57809", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78760, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-85740", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78762, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-ASIST-2009-Y-70805", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78770, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-96157", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78774, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-94839", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78776, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-VULNE-2007-2008-44822", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78780, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-CALIF-2006-AL-96064", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78788, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-56197", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78790, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2006-AL-52917", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78796, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-16014", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78798, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-VULNE-2007-2008-69757", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78804, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-CALIF-2006-AL-13553", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78808, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-36408", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78810, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-29523", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78814, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-VULNE-2007-2008-42528", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78816, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-CALIF-2006-AL-97151", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78820, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-57691", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78830, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-49443", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78836, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-RENDI-2006-AL-88300", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78840, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "GRADO-MATRI-2006-AL-18342", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78845, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-DOCEN-2006-AL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78849, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-DOCEN-2006-47688", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78853, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-DOCEN-2006-27523", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78857, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-DOCEN-2006-34014", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78861, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-DOTAC-DOCEN-2006-81273", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78868, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-EVALU-DOCEN-2009-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78872, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-EVALU-DOCEN-2009-78194", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 78916, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-ASIST-2009-Y-51813", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79176, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79178, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-54880", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79180, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-76857", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79182, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-99480", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79184, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-38527", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79185, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-DEL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79187, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-94375", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79189, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-71990", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79193, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-94157", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79195, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-37264", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79197, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-43777", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79198, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-METRO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79200, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-56651", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79202, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-84734", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79203, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-AEREO-INTER-TOTAL-POR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79204, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-AEREO-INTER-POR-OPERA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79205, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-INTER-POR-PARES-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79206, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-AEREO-INTER-ENTRE-PARES", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79207, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-AEREO-INTER-POR-PAISE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79209, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PASAJ-AEREO-INTER-POR-10831", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79220, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CUMBR-VISIT-POR-MONTA-EXTRA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79221, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "HITOS-LIMIT-CON-ARGEN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79222, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-ANTEN-DE-TELEF", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79223, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-ACCID-DE-TRANS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79224, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-SEGUR-MINER-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79226, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DETEN-POR-LA-PDI-DURAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79227, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DELIT-INVES-2012-POR-PDI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79228, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ENCAR-HALLA-VEHIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79229, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-CONCE-DE-RADIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79230, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ENCUE-DE-PRESU-FAMIL-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79231, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-MONUM-NACIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79232, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RECAU-POR-PERMI-DE-CIRCU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79233, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RECAU-TRANS-DE-VEHIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79234, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VIVER-REGIS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79235, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INSUM-AUTOR-ALIME-ANIMA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79236, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-PRODU-EQUIV-TERAP", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79237, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CENSO-DE-CAMAS-HOSPI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79238, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMIN-DE-PRODU-FARMA-CON", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79258, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-INSPE-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79259, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-INSPE-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79260, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-INSPE-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79261, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-INSPE-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79262, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-INSPE-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79263, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79264, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79265, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79266, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79267, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79268, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79269, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79270, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-MATRI-2013", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79271, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79272, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79273, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79274, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79275, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79276, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79278, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-PSU-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79279, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79280, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79281, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79282, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79283, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79284, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79285, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-RENDI-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79286, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79287, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79288, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79289, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79290, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79291, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-4-BASIC-2012", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79292, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-8-BASIC-2007", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79293, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-8-BASIC-2009", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79294, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-8-BASIC-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79295, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-II-MEDIO-2006", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79296, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-II-MEDIO-2008", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79297, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAB-SIMCE-II-MEDIO-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79398, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DELIT-CONTR-LAS-PERSO-DURAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79400, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "A-84459", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79463, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NIVEL-MATRI-2013-ENSEN-MEDIA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79551, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-PARAM-CONTA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79552, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RED-DE-MONIT-EN-LINEA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79709, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-PERSO-NO-DONAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79711, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-PERSO-NO-35213", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79713, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-PERSO-NO-48395", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79714, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMBR-MAS-COMUN-NINOS-2000", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79721, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CUADR-ESTAD-DE-LLAMA-A", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79725, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PARTE-DE-FUERZ-VOLUN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79727, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-BENEF-EN-INNOV", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79730, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RESTA-O-SIMIL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79731, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MERCA-MAYOR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79732, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "MERCA-MAYOR-AGOST-Y-SEPTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79733, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FISCA-LEY-DE-TABAC-REGIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79735, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMBR-MAS-COMUN-NINOS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79736, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOMBR-MAS-COMUN-NINAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79737, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NO-DONAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79743, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-ESTAD-MATRI-TOTAL-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79773, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PERSO-JURID-SIN-FINES-64124", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79801, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-FARMA-DE-TURNO-2", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79810, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-PUBLI-Y-SUS-97697", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79812, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-PUBLI-Y-SUS-26030", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79814, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-PUBLI-Y-SUS-90730", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79816, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "AGENC-DE-VIAJE-45550", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79818, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TAXIS-Y-BUSES-DE-71901", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79820, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NUMER-DE-BENEF-POR-16698", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79822, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DENUN-REALI-A-LA-44150", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79824, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VICTI-SEGUN-DENUN-REALI-80645", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 79826, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "VISAS-OTORG-2012-68498", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80060, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-SNIT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80062, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-GENER-SNIT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80157, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DESCA-DE-DATAS-2012-ACUMU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80158, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DESCA-DE-DATAS-2013-ACUMU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80274, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-SEMES-DIA-Y-MES", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80317, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LOCAL-DE-VOTAC-EN-SANTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80318, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TURIS-INFOR-ANUAL-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80319, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TURIS-INFOR-ANUAL-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80320, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80321, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80322, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRECI-AL-CONSU-DE-FRUTA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80324, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRECI-AL-CONSU-DE-53635", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80325, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-DE-EXPOR-DE-PRODU", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80327, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-DE-EXPOR-DE-73956", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80329, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-DE-EXPOR-DE-56187", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80503, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EXAME-DIAGN-HOSPI-DR-GUILL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80504, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INTER-QUIRU-HOSPI-DR-GUILL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80505, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ATENC-DE-ESPEC-MEDIC-DR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80506, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "INFOR-DE-LAS-UNIDA-DE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80507, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ATENC-EMERG-HOSPI-ROBER-DEL", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80509, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "APLIC-DE-PESTI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 80510, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ENFER-DE-NOTIF-OBLIG-ARICA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81453, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRECI-DE-LAS-BENCI-POR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81462, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CODIG-COMUN-Y-NOMBR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81463, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CODIG-REGIO-Y-NOMBR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81467, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011-84921", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81469, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011-68318", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81471, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011-48845", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81473, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011-15543", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81475, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2011-92877", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81477, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010-35080", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81479, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010-17846", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81481, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010-72326", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81483, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010-77141", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81485, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMPO-TURIS-RECEP-2010-81846", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81493, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-REGIO-12149", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81585, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-DE-TURNO-EN-LINEA", 
+            "user": 1647, 
+            "last_published_revision": 72378, 
+            "last_revision": 72378
+        }
+    }, 
+    {
+        "pk": 81718, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "COMUN-Y-NOMBR-MINSA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81719, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CODIG-Y-NOMBR-REGIO-MINSA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81721, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-EN-TODO-CHILE", 
+            "user": 1647, 
+            "last_published_revision": 72530, 
+            "last_revision": 72530
+        }
+    }, 
+    {
+        "pk": 81814, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FARMA-EN-CHILE", 
+            "user": 1647, 
+            "last_published_revision": 72704, 
+            "last_revision": 72704
+        }
+    }, 
+    {
+        "pk": 81825, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ASDF", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81905, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FECHA-DE-PUBLI-DE-DATAS", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81907, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FECHA-DE-PUBLI-DE-24018", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81909, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FECHA-DE-PUBLI-DE-51309", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81910, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-PUBLI-Y-SUS-RESPE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81912, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FECHA-DE-PUBLI-DE-23160", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81956, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CONTR-DE-OBRAS-ESTUD-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81957, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-URGEN-HOSPI-SAN-JUAN", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81958, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-MONUM-NACIO", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81959, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TURIS-AVENT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81960, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-SEREM-DE-AGRIC", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81974, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DE-ACUER-ECONO-COMER", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81976, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DE-ACUER-ECONO-72785", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81978, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DE-ACUER-ECONO-13700", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81980, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DE-ACUER-ECONO-84451", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81982, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EVALU-DE-ACUER-ECONO-83778", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81987, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "FISCA-LABOR-Y-PREVI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81989, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ORGAN-SINDI", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81995, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EMPRE-CONDE-DEREC-FUNDA-Y", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81996, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "EMPRE-SERVI-SANIT-COSTO-OPERA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 81997, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "ESTAD-DE-PARTI-Y-DISTR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 82246, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-DE-PRUEB", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 82248, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-DE-PRUEB-74199", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 82249, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "DATAS-DE-PRUEB-HOJA-3", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 82546, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "PRECI-DE-BENCI-EN-10673", 
+            "user": 1647, 
+            "last_published_revision": 73855, 
+            "last_revision": 73854
+        }
+    }, 
+    {
+        "pk": 82741, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TEST-ODEPA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 82742, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TEST-ODEPA-HORTA", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86137, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TEST-ODEPA-SEMAN-20", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86371, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CANTI-DE-DATAS-DESDE-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86372, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CANTI-DE-DESCA-DESDE-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86373, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CANTI-DE-VISIT-DESDE-2011", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86607, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "SOLIC-DE-INFOR-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86608, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-ORGAN-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86609, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "NOTIF-DE-FISCA-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86610, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "RECLA-POR-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86611, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LISTA-DE-RECLA-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86612, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CASOS-CON-SU-ESTAD-HISTR", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86613, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CASOS-MOTIV-E-INFRA-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86614, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CASOS-PRESE-ANTE-EL-CPLT", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86638, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "CONSU-CPLT-SEGUN-ESTAD", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 86639, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "TRANS-RESPU-ENTRE", 
+            "user": 1647, 
+            "last_published_revision": null, 
+            "last_revision": null
+        }
+    }, 
+    {
+        "pk": 88188, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LICIT-MERCA-PUBLI-SEGUN-DIA", 
+            "user": 1647, 
+            "last_published_revision": 80695, 
+            "last_revision": 80695
+        }
+    }, 
+    {
+        "pk": 88189, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LICIT-MERCA-PUBLI-AL-DIA", 
+            "user": 1647, 
+            "last_published_revision": 80709, 
+            "last_revision": 80696
+        }
+    }, 
+    {
+        "pk": 88190, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LICIT-ACTIV-MERCA-PUBLI", 
+            "user": 1647, 
+            "last_published_revision": 80710, 
+            "last_revision": 80697
+        }
+    }, 
+    {
+        "pk": 88191, 
+        "model": "core.datastream", 
+        "fields": {
+            "guid": "LICIT-MERCA-PUBLI-SEGUN-ESTAD", 
+            "user": 1647, 
+            "last_published_revision": 80711, 
+            "last_revision": 80698
+        }
+    }
+]
