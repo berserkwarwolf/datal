@@ -1,3 +1,5 @@
+body{font:12px/15px arial, helvetica, sans-serif;}
+
 /*WHEN A TABLE IS SELECTED*/
 .file .ao-table-selected, .select-table-styles .ao-table-selected {background:#4990fc !important;color:white !important;}
 
