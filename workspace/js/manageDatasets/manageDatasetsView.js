@@ -56,7 +56,7 @@ var ManageDatasetsView = Backbone.View.extend({
         this.$el.find("#grid").show();
         if (this.listResources.state.totalPages !== 1) {
             this.$el.find("#id_pagination").show();
-        };
+        }
     },
 
     onItemsPerPageChanged: function() {
