@@ -502,30 +502,30 @@ class DashboardRevision(models.Model):
 
 
 class DashboardI18n(models.Model):
-    language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    dashboard_revision  = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
-    title               = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description         = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    notes               = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
+    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
+    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
+    description  = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
-        db_table        = 'ao_dashboard_i18n'
+        db_table = 'ao_dashboard_i18n'
 
     def __unicode__(self):
         return unicode(self.id)
 
 
 class DashboardWidget(models.Model):
-    order               = models.IntegerField(verbose_name=ugettext_lazy( 'MODEL-ORDER-TEXT' ))
-    parameters          = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    dashboard_revision  = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    datastream          = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ), blank=True)
-    visualization       = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy( 'MODEL-VISUALIZATION-TEXT' ), blank=True)
+    order = models.IntegerField(verbose_name=ugettext_lazy( 'MODEL-ORDER-TEXT' ))
+    parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
+    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
+    datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ), blank=True)
+    visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy( 'MODEL-VISUALIZATION-TEXT' ), blank=True)
 
     class Meta:
-        db_table        = 'ao_dashboard_widgets'
-        ordering        = ['order']
+        db_table = 'ao_dashboard_widgets'
+        ordering = ['order']
 
     def __unicode__(self):
         return unicode(self.id)
@@ -574,9 +574,9 @@ class DatasetRevision(models.Model):
     objects = managers.DatasetRevisionManager()
 
     class Meta:
-        db_table        = 'ao_dataset_revisions'
-        ordering        = ['-id']
-        get_latest_by   = 'created_at'
+        db_table = 'ao_dataset_revisions'
+        ordering = ['-id']
+        get_latest_by = 'created_at'
 
     def __unicode__(self):
         return  unicode(self.id)
@@ -718,15 +718,15 @@ class DatasetRevision(models.Model):
 
 
 class DatasetI18n(models.Model):
-    language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    dataset_revision    = models.ForeignKey('DatasetRevision', verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_LABEL'))
-    title               = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description         = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    notes               = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
+    dataset_revision = models.ForeignKey('DatasetRevision', verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_LABEL'))
+    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
+    description = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
 
     class Meta:
-        db_table        = 'ao_dataset_i18n'
+        db_table = 'ao_dataset_i18n'
 
     def __unicode__(self):
         return self.title
@@ -739,12 +739,12 @@ class DatasetI18n(models.Model):
 
 
 class Visualization(GuidModel):
-    datastream          = models.ForeignKey('DataStream')
-    guid                = models.CharField(max_length=29, unique=True)
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    last_revision    = models.ForeignKey('VisualizationRevision', null=True, related_name='last_revision')
+    datastream = models.ForeignKey('DataStream')
+    guid = models.CharField(max_length=29, unique=True)
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    last_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_revision')
     last_published_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_published_revision')
-    objects             = managers.VisualizationManager()
+    objects = managers.VisualizationManager()
 
     class Meta:
         db_table = 'ao_visualizations'
@@ -759,19 +759,19 @@ class Visualization(GuidModel):
 
 
 class VisualizationRevision(models.Model):
-    visualization       = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    impl_details        = models.TextField(blank=True)
-    meta_text           = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    status              = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
-    parameters          = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    objects             = managers.VisualizationRevisionManager()
+    visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    impl_details = models.TextField(blank=True)
+    meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
+    objects = managers.VisualizationRevisionManager()
 
     class Meta:
-        db_table        = 'ao_visualizations_revisions'
-        ordering        = ['-id']
-        get_latest_by   = 'created_at'
+        db_table = 'ao_visualizations_revisions'
+        ordering = ['-id']
+        get_latest_by = 'created_at'
 
     def __unicode__(self):
         return unicode(self.id)
@@ -786,24 +786,27 @@ class VisualizationRevision(models.Model):
         return self.visualization.dashboardwidgets_set.order_by('-dashboard_revision').iterator()
 
     def clone(self, status=choices.StatusChoices.DRAFT):
-        visualization_revision = VisualizationRevision(visualization = self.visualization
-                                                       , user = self.user
-                                                       , impl_details = self.impl_details
-                                                       , meta_text = self.meta_text
-                                                       , status = status)
+        visualization_revision = VisualizationRevision(
+            visualization = self.visualization,
+            user = self.user,
+            impl_details = self.impl_details,
+            meta_text = self.meta_text,
+            status = status
+        )
 
         visualization_revision.save()
 
         for visualizationi18n in self.visualizationi18n_set.all():
-            visualization_revision.visualizationi18n_set.create(language = visualizationi18n.language
-                                                        , visualization_revision = visualization_revision
-                                                        , title = visualizationi18n.title
-                                                        , description = visualizationi18n.description
-                                                        , notes = visualizationi18n.notes)
+            visualization_revision.visualizationi18n_set.create(
+                language = visualizationi18n.language,
+                visualization_revision = visualization_revision,
+                title = visualizationi18n.title,
+                description = visualizationi18n.description,
+                notes = visualizationi18n.notes
+            )
 
         visualization_revision.save()
         return visualization_revision
-
 
     def get_dict(self, language = 'en'):
 
@@ -847,15 +850,15 @@ class VisualizationRevision(models.Model):
 
 
 class VisualizationI18n(models.Model):
-    language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
     visualization_revision = models.ForeignKey('VisualizationRevision', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_REVISION_LABEL'))
-    title               = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description         = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    notes               = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
+    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
+    description = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
-        db_table        = 'ao_visualizations_i18n'
+        db_table = 'ao_visualizations_i18n'
 
     def __unicode__(self):
         return self.title
@@ -866,22 +869,22 @@ class Category(models.Model):
     objects = managers.CategoryManager()
 
     class Meta:
-        db_table        = 'ao_categories'
+        db_table = 'ao_categories'
 
     def __unicode__(self):
         return unicode(self.id)
 
 
 class CategoryI18n(models.Model):
-    language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    category            = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
-    name                = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    slug                = models.SlugField(max_length=30, verbose_name=ugettext_lazy('MODEL_SLUG_LABEL'))
-    description         = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
+    category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
+    name = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
+    slug = models.SlugField(max_length=30, verbose_name=ugettext_lazy('MODEL_SLUG_LABEL'))
+    description = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
-        db_table        = 'ao_categories_i18n'
+        db_table = 'ao_categories_i18n'
 
     def __unicode__(self):
         return self.name
