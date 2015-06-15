@@ -141,3 +141,12 @@ uwsgi_service:
   supervisord.running:
     - name: uwsgi
     - restart: True
+
+reindex:
+  cmd.run:
+    - user: {{ user }}
+    - group: {{ group }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py index --settings=workspace.settings --re-index
+
