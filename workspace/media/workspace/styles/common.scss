@@ -409,7 +409,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   .main-section .section-title .actions{padding-top:7px;}
   .main-section .section-title .actions li{float:left;padding-left:10px;}
   .main-section .section-title .actions li.has-separator{padding-left:22px;}
-  .main-section .section-title .actions li.has-separator:before{content:"";float:left;width:1px;height:26px;border-right:1px solid #464646;background:#2e2d2d;position:relative;left:-12px;}
+  .main-section .section-title .actions li.has-separator:before{content:"";float:left;width:1px;height:26px;border-right:1px solid $buttons-bar-border-left-color;background:$buttons-bar-border-right-color;position:relative;left:-12px;}
 
   /* Buttons Bar */
   .main-section .section-title .buttons-bar{margin-top:7px;}
