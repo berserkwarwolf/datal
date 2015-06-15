@@ -238,8 +238,6 @@
         "pk": 32
     },
 
-
-
     {
         "fields": {
             "account": 1,
@@ -266,5 +264,14 @@
         },
         "model": "core.preference",
         "pk": 41
+    },
+    {
+        "fields": {
+            "account": 1,
+            "key": "account.dataset.showhome",
+            "value": "True"
+        },
+        "model": "core.preference",
+        "pk": 42
     }
 ]
