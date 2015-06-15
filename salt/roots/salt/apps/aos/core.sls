@@ -16,10 +16,10 @@ extract_war:
 extract_services_war:
   archive.extracted:
     - names:
-      - /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices/
+      - /var/lib/tomcat7/webapps/workspace/AgileOfficeScraperServices/
     - source: salt://apps/aos/war/AgileOfficeScraperServices.war
     - archive_format: zip
-    - if_missing: /var/lib/tomcat7/webapps/microsites/AgileOfficeScraperServices
+    - if_missing: /var/lib/tomcat7/webapps/workspace/AgileOfficeScraperServices
 
 microsites_config:
   file.managed:

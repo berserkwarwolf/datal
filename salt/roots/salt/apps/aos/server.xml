@@ -141,17 +141,17 @@
                pattern="%h %l %u %t &quot;%r&quot; %s %b" />
 
       </Host>
-<Host name="microsites.dev" appBase="webapps/microsites" unpackWars="true" autoDeploy="true">
-        <Logger className="org.apache.catalina.logger.FileLogger" directory="logs" prefix="microsites_log." suffix=".txt" timestamp="true" />
-        <Context path="" docBase="/var/lib/tomcat7/webapps/microsites" debug="0" reloadable="true" />
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="microsites_log." suffix=".txt" pattern="common" />
-</Host>
+      <Host name="microsites.dev" appBase="webapps/microsites" unpackWars="true" autoDeploy="true">
+          <Logger className="org.apache.catalina.logger.FileLogger" directory="logs" prefix="microsites_log." suffix=".txt" timestamp="true" />
+          <Context path="" docBase="/var/lib/tomcat7/webapps/microsites" debug="0" reloadable="true" />
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="microsites_log." suffix=".txt" pattern="common" />
+      </Host>
 
-<Host name="workspace.dev" appBase="webapps/workspace" unpackWars="true" autoDeploy="true">
-        <Logger className="org.apache.catalina.logger.FileLogger" directory="logs" prefix="workspace_log." suffix=".txt" timestamp="true" />
-        <Context path="" docBase="/var/lib/tomcat7/webapps/workspace" debug="0" reloadable="true" />
-        <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="workspace_log." suffix=".txt" pattern="common" />
-</Host>
+      <Host name="workspace.dev" appBase="webapps/workspace" unpackWars="true" autoDeploy="true">
+          <Logger className="org.apache.catalina.logger.FileLogger" directory="logs" prefix="workspace_log." suffix=".txt" timestamp="true" />
+          <Context path="" docBase="/var/lib/tomcat7/webapps/workspace" debug="0" reloadable="true" />
+          <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" prefix="workspace_log." suffix=".txt" pattern="common" />
+      </Host>
     </Engine>
   </Service>
 </Server>
