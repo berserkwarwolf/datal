@@ -13,7 +13,7 @@
         , "datastream_id": {{resource.datastream__id}}
         , "category":"{{resource.category__categoryi18n__name}}"
         , "title":"{{resource.datastreami18n__title|capfirst}}"
-        , "description":"{{resource.datastreami18n__description|capfirst}}"
+        , "description":"{{resource.datastreami18n__description|capfirst|escapejs}}"
         , "last_revision_id":"{{resource.datastream__last_revision_id}}"
         , "end_point": "{{resource.dataset__datasetrevision__end_point}}"
         , "url": "/dataviews/{{resource.id}}"
