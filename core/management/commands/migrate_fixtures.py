@@ -1,0 +1,99 @@
+import json, re, pprint
+from django.template.defaultfilters import slugify as django_slugify
+from django.core.management.base import BaseCommand, CommandError
+
+from optparse import make_option
+
+from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
+from core.models import User, Category
+from core.lifecycle.datasets import DatasetLifeCycleManager
+
+DATASET_FIXTURES = 'core/fixtures/dataset.json'
+DATASETI18N_FIXTURES = 'core/fixtures/dataseti18n.json'
+DATASETREVISION_FIXTURES = 'core/fixtures/datasetrevision.json'
+
+
+class Command(BaseCommand):
+    help = "Run actions into datasets."
+
+    option_list = BaseCommand.option_list + (
+        make_option('--migrate-datasets',
+            action='store_true',
+            dest='migrate_dataset',
+            default=False,
+            help='Migrate old dataset fixtures'),
+    )
+
+    def _set_guid(self, _title, force_random=False):
+        #if self._title:
+        title_word_list = [ word for word in self.slugify(_title).split('-') if word ][:5]
+        guid = ''
+        # killing duplicates?
+        if not force_random:
+            guid = '-'.join(word[:5] for word in title_word_list).upper()
+        else:
+            import random
+            if len(title_word_list) >= 5:
+                guid = '-'.join(word[:5] for word in title_word_list[:-1] + [str(random.randint(10000, 99999))]).upper()
+            else:
+                guid = '-'.join(word[:5] for word in title_word_list + [str(random.randint(10000, 99999))]).upper()
+        return guid
+
+    def slugify(self, value):
+        value = django_slugify(value)
+        value = value.replace('_', '-')
+        value = re.sub('[^a-zA-Z0-9]+', '-', value.strip())
+        value = re.sub('\-+', '-', value)
+        value = re.sub('\-$', '', value)
+        return value
+
+    def get_title(self, id):
+        title = ''
+        for dataseti18n in self.datasetsi18n:
+            if id == dataseti18n['fields']['dataset_revision']:
+                title = dataseti18n['fields']['title']
+        return title
+
+    def get_last_dataset_revision(self, id):
+        revision_id = None
+        for revision in self.datasetrevision:
+            if id == revision['fields']['dataset']:
+                revision_id = revision['pk']
+        return revision_id
+
+    def get_last_published_dataset_revision(self, id):
+        revision_id = None
+        for revision in self.datasetrevision:
+            if id == revision['fields']['dataset'] and 3 == revision['fields']['status']:
+                revision_id = revision['pk']
+        return revision_id
+
+    def handle(self, *args, **options):
+
+        # Creates dummy Datasets
+        if options['migrate_dataset']:
+            f_dataset = open(DATASET_FIXTURES, 'r')
+            f_datasetsi18n = open(DATASETI18N_FIXTURES, 'r')
+            f_datasetrevision = open(DATASETREVISION_FIXTURES, 'r')
+
+            self.dataset = json.load(f_dataset)
+            self.datasetsi18n = json.load(f_datasetsi18n)
+            self.datasetrevision = json.load(f_datasetrevision)
+
+            f_dataset.close()
+            f_datasetsi18n.close()
+            f_datasetrevision.close()
+
+            datasets = []
+            for row in self.dataset:
+                revision_id = self.get_last_dataset_revision(row['pk'])
+                title = self.get_title(revision_id)
+                row['fields']['guid'] = self._set_guid(title, force_random=True)
+                row['fields']["created_at"] = "2012-06-04T14:12:52"
+                row['fields']["last_revision"] = self.get_last_dataset_revision(row['pk'])
+                row['fields']["last_published_revision"] = self.get_last_published_dataset_revision(row['pk'])
+                datasets.append(row)
+
+            f_dataset = open('{}.migrated'.format(DATASET_FIXTURES), 'r')
+            f_dataset.writelines(json.dumps(datasets, indent=4))
+            f_dataset.close()
