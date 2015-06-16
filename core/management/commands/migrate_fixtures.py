@@ -15,6 +15,7 @@ DATASTREAM_FIXTURES = 'core/fixtures/datastream.json'
 DATASTREAMREVISION_FIXTURES = 'core/fixtures/datastreamrevision.json'
 SOURCE_FIXTURES = 'core/fixtures/source.json'
 SOURCEDATASTREAMREVISION_FIXTURES = 'core/fixtures/sourcedatastream.json'
+TAG_FIXTURES = 'core/fixtures/tag.json'
 
 
 class Command(BaseCommand):
@@ -38,6 +39,12 @@ class Command(BaseCommand):
             dest='migrate_sources',
             default=False,
             help='Migrate old sources fixtures'),
+
+        make_option('--migrate-tags',
+            action='store_true',
+            dest='migrate_tags',
+            default=False,
+            help='Migrate old tags fixtures'),
     )
 
     def _set_guid(self, _title, force_random=False):
@@ -157,11 +164,13 @@ class Command(BaseCommand):
 
             sources = []
             sourcedatastreamrevision = []
+            pk = 0
             for row in self.source:
                 datastream_revisions_id = row['fields'].pop("datastream_revision", None)
                 for datastream_revision_id in datastream_revisions_id:
+                    pk += 1
                     sourcedatastreamrevision.append(dict(
-                        pk=1,
+                        pk=pk,
                         model='core.sourcedatastream',
                         fields=dict(
                             source=row['pk'],
@@ -178,3 +187,14 @@ class Command(BaseCommand):
             f_source.writelines(json.dumps(sourcedatastreamrevision, indent=4))
             f_source.close()
 
+        if options['migrate_tags']:
+            f_tag = open(TAG_FIXTURES, 'r')
+            self.tag = json.load(f_tag)
+            f_tag.close()
+
+            tags = []
+            tagdatasets = []
+            tagdatastreams = []
+
+            for row in self.tag:
+                pass
