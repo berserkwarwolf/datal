@@ -410,6 +410,7 @@ def set_dataset_impl_type_nice(item):
     impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])
     return impl_type_nice
 
+
 def unset_dataset_revision_nice(item):
     new_item = dict()
 
@@ -422,9 +423,13 @@ def unset_dataset_revision_nice(item):
     new_item['dataset__user__nick'] = item.get('author_filter')
 
     if item.get('status_filter'):
-        new_item['status'] = item.get('status_filter')
+        new_item['status'] = []
+        for x in item.get('status_filter'):
+            new_item['status'].append([status[0] for status in STATUS_CHOICES if status[1] == x][0])
 
     return new_item
+
+
 def unset_visualization_revision_nice(item):
     new_item = dict()
     new_item['dataset__user__nick'] = item.get('author_filter')

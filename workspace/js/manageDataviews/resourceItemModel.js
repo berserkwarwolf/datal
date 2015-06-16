@@ -5,6 +5,7 @@ var ResourceItemModel = Backbone.Model.extend({
             title: "",
             id: "",
             dataset__datasetrevision__end_point: "",
+            dataset_url: "",
             created_at: "",
             category: "",
             author: "",

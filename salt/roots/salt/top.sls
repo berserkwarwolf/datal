@@ -9,8 +9,9 @@ base:
     - core.uwsgi
     - core.java
     - core.tomcat
+    - core.indextank
     - nginx.ng
     - core.selenium
     - apps.aos.core
     - apps.datal.core
-    - core.indextank
+    - apps.datastore.core

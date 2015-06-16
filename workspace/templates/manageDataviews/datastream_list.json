@@ -13,13 +13,14 @@
         , "datastream_id": {{resource.datastream__id}}
         , "category":"{{resource.category__categoryi18n__name}}"
         , "title":"{{resource.datastreami18n__title|capfirst}}"
-        , "description":"{{resource.datastreami18n__description|capfirst}}"
+        , "description":"{{resource.datastreami18n__description|capfirst|escapejs}}"
         , "last_revision_id":"{{resource.datastream__last_revision_id}}"
         , "end_point": "{{resource.dataset__datasetrevision__end_point}}"
         , "url": "/dataviews/{{resource.id}}"
         , "created_at": "{{resource.created_at|date:'F d, Y, h:i A'|capfirst}}"
         , "id": {{resource.id}}
         , "dataset_id": {{resource.datastream__last_revision_id}}
+        , "dataset_url": "{{resource.dataset_url}}"
         , "dataset_title": "{{resource.dataset__last_revision__dataseti18n__title|capfirst}}"
         , "dataset_impl_type": "{{resource.dataset__last_revision__impl_type}}"
     }
