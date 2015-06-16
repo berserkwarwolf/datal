@@ -1553,7 +1553,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "&iquest;Donde están los datos"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Indique que datos necesita clickeando en el <strong>recuadro naranja</strong>"
+msgstr "Indique que datos necesita clickeando en el <strong>recuadro azul</strong>"
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "&iquest;Necesitas ayuda"
