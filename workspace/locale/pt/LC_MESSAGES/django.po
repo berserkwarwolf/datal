@@ -1568,7 +1568,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "Where's the data"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Show us what data you want to collect by clicking on the <strong>orange dashed box</strong>"
+msgstr "Show us what data you want to collect by clicking on the <strong>blue dashed box</strong>"
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "Need help"
