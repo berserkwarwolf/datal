@@ -10,12 +10,17 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
 a{color:$link-color;}
 
 /* Buttons */
-.button{font-family:$buttons-font-family;font-size:$buttons-font-size;}
+.button{font-family:$buttons-font-family;font-size:$buttons-font-size;line-height:26px !important;}
 
   /* Primary button */
   .button.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:0 -1px 0 $button-primary-color-shadow;@include linear-gradient($button-primary-color,$button-primary-color-gradient);
   }
   .button.primary:hover{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
+
+  /* Action button */
+  .button.action{border-color:$button-action-color-border;color:$button-action-color-text;text-shadow:0 -1px 0 $button-action-color-shadow;@include linear-gradient($button-action-color,$button-action-color-gradient);
+  }
+  .button.action:hover{@include linear-gradient($button-action-color-gradient,$button-action-color);}
 
    /* Warning button */
   .button.warning{border-color:$button-warning-color-border;color:$button-warning-color-text;text-shadow:0 -1px 0 $button-warning-color-shadow;@include linear-gradient($button-warning-color,$button-warning-color-gradient);
@@ -28,9 +33,9 @@ a{color:$link-color;}
   .button.support:hover{@include linear-gradient($button-support-color-gradient,$button-support-color);}
 
   /* Black */
-  .button.black{border-color:$button-base-color-border;color:$button-base-color-text;text-shadow:0 1px 0 $button-base-color-shadow;@include linear-gradient($button-base-color,$button-base-color-gradient);
+  .button.black{border-color:$button-base-color-border;color:$button-base-color-text;text-shadow:0 1px 0 $button-base-color-shadow;@include linear-gradient($button-base-color-gradient,$button-base-color);
   }
-  .button.black:hover{@include linear-gradient($button-base-color-gradient,$button-base-color);}
+  .button.black:hover{@include linear-gradient($button-base-color,$button-base-color-gradient);}
 
   /* Disabled */
   .button[disabled=disabled], 
@@ -204,8 +209,9 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 /* .radial-gradient{@include radial-gradient($brand-color-light,$brand-color);} */
 .header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
 .header .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:$logo-header-width;height:43px;}
-.header .button.primary,
+.header .button.alpha,
 .header .button.support{margin-top:8px;}
+.header .button.alpha{background:url(../images/common/ic_openPortal.png) no-repeat 0px 5px;padding-left:25px;margin-left:10px;}
 
   /* Online Support button */
   .header #id_help_link{margin-right:10px;}
