@@ -13,6 +13,8 @@ DATASETI18N_FIXTURES = 'core/fixtures/dataseti18n.json'
 DATASETREVISION_FIXTURES = 'core/fixtures/datasetrevision.json'
 DATASTREAM_FIXTURES = 'core/fixtures/datastream.json'
 DATASTREAMREVISION_FIXTURES = 'core/fixtures/datastreamrevision.json'
+SOURCE_FIXTURES = 'core/fixtures/source.json'
+SOURCEDATASTREAMREVISION_FIXTURES = 'core/fixtures/sourcedatastream.json'
 
 
 class Command(BaseCommand):
@@ -30,6 +32,12 @@ class Command(BaseCommand):
             dest='migrate_datastream',
             default=False,
             help='Migrate old datastream fixtures'),
+
+        make_option('--migrate-sources',
+            action='store_true',
+            dest='migrate_sources',
+            default=False,
+            help='Migrate old sources fixtures'),
     )
 
     def _set_guid(self, _title, force_random=False):
@@ -141,3 +149,32 @@ class Command(BaseCommand):
             f_datastream = open('{}.migrated'.format(DATASTREAM_FIXTURES), 'w')
             f_datastream.writelines(json.dumps(datastreams, indent=4))
             f_datastream.close()
+
+        if options['migrate_sources']:
+            f_source = open(SOURCE_FIXTURES, 'r')
+            self.source = json.load(f_source)
+            f_source.close()
+
+            sources = []
+            sourcedatastreamrevision = []
+            for row in self.source:
+                datastream_revisions_id = row['fields'].pop("datastream_revision", None)
+                for datastream_revision_id in datastream_revisions_id:
+                    sourcedatastreamrevision.append(dict(
+                        pk=1,
+                        model='core.sourcedatastream',
+                        fields=dict(
+                            source=row['pk'],
+                            datastreamrevision=datastream_revision_id
+                        )
+                    ))
+                sources.append(row)
+
+            f_source = open('{}.migrated'.format(SOURCE_FIXTURES), 'w')
+            f_source.writelines(json.dumps(sources, indent=4))
+            f_source.close()
+
+            f_source = open('{}.migrated'.format(SOURCEDATASTREAMREVISION_FIXTURES), 'w')
+            f_source.writelines(json.dumps(sourcedatastreamrevision, indent=4))
+            f_source.close()
+
