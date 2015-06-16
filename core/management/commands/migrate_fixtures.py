@@ -11,6 +11,8 @@ from core.lifecycle.datasets import DatasetLifeCycleManager
 DATASET_FIXTURES = 'core/fixtures/dataset.json'
 DATASETI18N_FIXTURES = 'core/fixtures/dataseti18n.json'
 DATASETREVISION_FIXTURES = 'core/fixtures/datasetrevision.json'
+DATASTREAM_FIXTURES = 'core/fixtures/datastream.json'
+DATASTREAMREVISION_FIXTURES = 'core/fixtures/datastreamrevision.json'
 
 
 class Command(BaseCommand):
@@ -22,6 +24,12 @@ class Command(BaseCommand):
             dest='migrate_dataset',
             default=False,
             help='Migrate old dataset fixtures'),
+
+        make_option('--migrate-datastream',
+            action='store_true',
+            dest='migrate_datastream',
+            default=False,
+            help='Migrate old datastream fixtures'),
     )
 
     def _set_guid(self, _title, force_random=False):
@@ -68,9 +76,21 @@ class Command(BaseCommand):
                 revision_id = revision['pk']
         return revision_id
 
-    def handle(self, *args, **options):
+    def get_last_datastream_revision(self, id):
+        revision_id = None
+        for revision in self.datastream_revision:
+            if id == revision['fields']['datastream']:
+                revision_id = revision['pk']
+        return revision_id
 
-        # Creates dummy Datasets
+    def get_last_published_datastream_revision(self, id):
+        revision_id = None
+        for revision in self.datastream_revision:
+            if id == revision['fields']['datastream'] and 3 == revision['fields']['status']:
+                revision_id = revision['pk']
+        return revision_id
+
+    def handle(self, *args, **options):
         if options['migrate_dataset']:
             f_dataset = open(DATASET_FIXTURES, 'r')
             f_datasetsi18n = open(DATASETI18N_FIXTURES, 'r')
@@ -94,6 +114,30 @@ class Command(BaseCommand):
                 row['fields']["last_published_revision"] = self.get_last_published_dataset_revision(row['pk'])
                 datasets.append(row)
 
-            f_dataset = open('{}.migrated'.format(DATASET_FIXTURES), 'r')
+            f_dataset = open('{}.migrated'.format(DATASET_FIXTURES), 'w')
             f_dataset.writelines(json.dumps(datasets, indent=4))
             f_dataset.close()
+
+        if options['migrate_datastream']:
+            f_datastream = open(DATASTREAM_FIXTURES, 'r')
+            f_datastream_revision = open(DATASTREAMREVISION_FIXTURES, 'r')
+
+            self.datastream = json.load(f_datastream)
+            self.datastream_revision = json.load(f_datastream_revision)
+
+            f_datastream.close()
+            f_datastream_revision.close()
+
+            datastreams = []
+            for row in self.datastream:
+                if row['fields'].has_key('is_private'):
+                    row['fields'].pop("is_private", None)
+
+                row['fields']["last_revision"] = self.get_last_datastream_revision(row['pk'])
+                row['fields']["last_published_revision"] = self.get_last_published_datastream_revision(row['pk'])
+
+                datastreams.append(row)
+
+            f_datastream = open('{}.migrated'.format(DATASTREAM_FIXTURES), 'w')
+            f_datastream.writelines(json.dumps(datastreams, indent=4))
+            f_datastream.close()
