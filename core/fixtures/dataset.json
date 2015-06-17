@@ -7,7 +7,7 @@
             "last_revision": 631, 
             "user": 1472, 
             "last_published_revision": 631, 
-            "guid": "ESTAD-DE-OPERA-DE-29844", 
+            "guid": "ESTAD-DE-OPERA-DE-86401", 
             "type": 1, 
             "is_dead": 0
         }
@@ -18,9 +18,9 @@
         "fields": {
             "created_at": "2012-06-04T14:12:52", 
             "last_revision": 899, 
-            "user":1647, 
+            "user": 1472, 
             "last_published_revision": 899, 
-            "guid": "SUCUR-CHILE-19577", 
+            "guid": "SUCUR-CHILE-95241", 
             "type": 1, 
             "is_dead": 0
         }
@@ -33,7 +33,7 @@
             "last_revision": 61699, 
             "user": 1647, 
             "last_published_revision": 61699, 
-            "guid": "DEFUN-Y-MORTA-2009-34970", 
+            "guid": "DEFUN-Y-MORTA-2009-49836", 
             "type": 1, 
             "is_dead": 0
         }
@@ -46,7 +46,7 @@
             "last_revision": 61700, 
             "user": 1647, 
             "last_published_revision": 61700, 
-            "guid": "MORTA-POR-ACCID-DE-44387", 
+            "guid": "MORTA-POR-ACCID-DE-16501", 
             "type": 1, 
             "is_dead": 0
         }
@@ -59,7 +59,7 @@
             "last_revision": 61701, 
             "user": 1647, 
             "last_published_revision": 61701, 
-            "guid": "IEP-PRIME-TRIME-2012-18098", 
+            "guid": "IEP-PRIME-TRIME-2012-21824", 
             "type": 1, 
             "is_dead": 0
         }
@@ -72,7 +72,7 @@
             "last_revision": 61702, 
             "user": 1647, 
             "last_published_revision": 61702, 
-            "guid": "NOMIN-DE-INICI-DE-21088", 
+            "guid": "NOMIN-DE-INICI-DE-57730", 
             "type": 1, 
             "is_dead": 0
         }
@@ -85,7 +85,7 @@
             "last_revision": 61703, 
             "user": 1647, 
             "last_published_revision": 61703, 
-            "guid": "MORTA-POR-ACCID-DE-79586", 
+            "guid": "MORTA-POR-ACCID-DE-69961", 
             "type": 1, 
             "is_dead": 0
         }
@@ -98,7 +98,7 @@
             "last_revision": 61704, 
             "user": 1647, 
             "last_published_revision": 61704, 
-            "guid": "MORTA-POR-ACCID-DEL-37840", 
+            "guid": "MORTA-POR-ACCID-DEL-50153", 
             "type": 1, 
             "is_dead": 0
         }
@@ -111,7 +111,7 @@
             "last_revision": 61705, 
             "user": 1647, 
             "last_published_revision": 61705, 
-            "guid": "SERIE-DE-TASA-GLOBA-18296", 
+            "guid": "SERIE-DE-TASA-GLOBA-42458", 
             "type": 1, 
             "is_dead": 0
         }
@@ -124,7 +124,7 @@
             "last_revision": 61706, 
             "user": 1647, 
             "last_published_revision": 61706, 
-            "guid": "NIVEL-DE-RENDI-2006-54452", 
+            "guid": "NIVEL-DE-RENDI-2006-98861", 
             "type": 1, 
             "is_dead": 0
         }
@@ -137,7 +137,7 @@
             "last_revision": 61707, 
             "user": 1647, 
             "last_published_revision": 61707, 
-            "guid": "NIVEL-DE-RENDI-2007-17429", 
+            "guid": "NIVEL-DE-RENDI-2007-55878", 
             "type": 1, 
             "is_dead": 0
         }
@@ -150,7 +150,7 @@
             "last_revision": 61708, 
             "user": 1647, 
             "last_published_revision": 61708, 
-            "guid": "NIVEL-DE-RENDI-2008-43084", 
+            "guid": "NIVEL-DE-RENDI-2008-55495", 
             "type": 1, 
             "is_dead": 0
         }
@@ -163,7 +163,7 @@
             "last_revision": 61709, 
             "user": 1647, 
             "last_published_revision": 61709, 
-            "guid": "NIVEL-DE-RENDI-2009-47415", 
+            "guid": "NIVEL-DE-RENDI-2009-93922", 
             "type": 1, 
             "is_dead": 0
         }
@@ -176,7 +176,7 @@
             "last_revision": 61710, 
             "user": 1647, 
             "last_published_revision": 61710, 
-            "guid": "NIVEL-DE-RENDI-2010-84890", 
+            "guid": "NIVEL-DE-RENDI-2010-66430", 
             "type": 1, 
             "is_dead": 0
         }
@@ -189,7 +189,7 @@
             "last_revision": 61711, 
             "user": 1647, 
             "last_published_revision": 61711, 
-            "guid": "NIVEL-DE-RENDI-2006-51076", 
+            "guid": "NIVEL-DE-RENDI-2006-35125", 
             "type": 1, 
             "is_dead": 0
         }
@@ -202,7 +202,7 @@
             "last_revision": 61712, 
             "user": 1647, 
             "last_published_revision": 61712, 
-            "guid": "NIVEL-DE-RENDI-2007-36241", 
+            "guid": "NIVEL-DE-RENDI-2007-34918", 
             "type": 1, 
             "is_dead": 0
         }
@@ -215,7 +215,7 @@
             "last_revision": 61713, 
             "user": 1647, 
             "last_published_revision": 61713, 
-            "guid": "NIVEL-DE-RENDI-2008-23690", 
+            "guid": "NIVEL-DE-RENDI-2008-46846", 
             "type": 1, 
             "is_dead": 0
         }
@@ -228,7 +228,7 @@
             "last_revision": 61714, 
             "user": 1647, 
             "last_published_revision": 61714, 
-            "guid": "NIVEL-DE-RENDI-2009-93628", 
+            "guid": "NIVEL-DE-RENDI-2009-13610", 
             "type": 1, 
             "is_dead": 0
         }
@@ -241,7 +241,7 @@
             "last_revision": 61715, 
             "user": 1647, 
             "last_published_revision": 61715, 
-            "guid": "NIVEL-DE-RENDI-2010-81369", 
+            "guid": "NIVEL-DE-RENDI-2010-61010", 
             "type": 1, 
             "is_dead": 0
         }
@@ -254,7 +254,7 @@
             "last_revision": 61716, 
             "user": 1647, 
             "last_published_revision": 61716, 
-            "guid": "NIVEL-DE-CALIF-2006-97386", 
+            "guid": "NIVEL-DE-CALIF-2006-53010", 
             "type": 1, 
             "is_dead": 0
         }

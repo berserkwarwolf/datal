@@ -537,7 +537,7 @@
             "created_at": "2012-05-16T10:40:31",
             "filename": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm",
             "impl_type": 0,
-            "user": 1472,
+            "user": 1647,
             "dataset": 61633,
             "impl_details": null,
             "size": 0
@@ -569,7 +569,7 @@
             "created_at": "2012-05-14T15:27:45",
             "filename": "http://www.chileatiende.cl/oficinas/exportacsv",
             "impl_type": 10,
-            "user":1647,
+            "user": 1472,
             "dataset": 844,
             "impl_details": null,
             "size": 0
