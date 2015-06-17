@@ -84,16 +84,14 @@ class DatastreamSearchifyDAO():
 
         import time
 
-        tags = datastream_revision.tagdataset_set.all().values_list('tag__name')
+        tags = datastream_revision.tagdatastream_set.all().values_list('tag__name', flat=True)
         # Get category name
         category = datastream_revision.category.categoryi18n_set.all()[0]
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision)
 
-
         text = [datastreami18n.title, datastreami18n.description, datastream_revision.user.nick, datastream_revision.datastream.guid]
         text.extend(tags) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
-
 
         document = {
                 'docid' : "DS::" + str(datastream_revision.datastream.guid),
@@ -106,10 +104,10 @@ class DatastreamSearchifyDAO():
                      'description': datastreami18n.description,
                      'owner_nick' :datastream_revision.user.nick,
                      'tags' : ','.join(tags),
-                     'account_id' : datastream_revision.datastream.account.id,
+                     'account_id' : datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(datastream_revision.created_at.timetuple())),
-                     'end_point': datastream_revision.dataset.end_point,
+                     'end_point': datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
