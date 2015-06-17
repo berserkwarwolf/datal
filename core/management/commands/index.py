@@ -30,5 +30,5 @@ class Command(BaseCommand):
                 search_dao.add(datasetrevision)
 
             search_dao = DatastreamSearchDAOFactory().create()
-            #for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
-            #    search_dao.add(datastreamrevision)
+            for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
+                search_dao.add(datastreamrevision)
