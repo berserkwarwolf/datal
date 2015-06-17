@@ -208,10 +208,16 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 /* Header */
 /* .radial-gradient{@include radial-gradient($brand-color-light,$brand-color);} */
 .header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
-.header .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:$logo-header-width;height:43px;}
+.header .logo{border-right:1px solid $brand-color-bold;
+  -webkit-box-shadow:inset -1px 0 0 $brand-color-light;
+     -moz-box-shadow:inset -1px 0 0 $brand-color-light;
+          box-shadow:inset -1px 0 0 $brand-color-light;
+}
+.header .logo .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:$logo-header-width;height:43px;}
 .header .button.alpha,
-.header .button.support{margin-top:8px;}
-.header .button.alpha{background:url(../images/common/ic_openPortal.png) no-repeat 0px 5px;padding-left:25px;margin-left:10px;}
+.header .button.support{margin-top:8px;padding:0 12px;}
+
+.header .button.alpha svg#open-portal{fill:$link-color;width:16px;height:15px;padding:5px 0 0 7px;float:right;}
 
   /* Online Support button */
   .header #id_help_link{margin-right:10px;}
