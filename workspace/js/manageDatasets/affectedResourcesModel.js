@@ -3,6 +3,6 @@ var affectedResourcesModel = Backbone.Model.extend({
       revision_id:'',
       type: '',
       id: '',
-      title:''
+      datastreami18n__title:''
    }
 });
