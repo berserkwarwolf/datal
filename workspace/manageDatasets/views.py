@@ -3,6 +3,7 @@ import urllib2
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
 from django.core.urlresolvers import reverse
+from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 from core.helpers import get_mimetype
@@ -57,7 +58,7 @@ def list(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
 
-    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id, 
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
                                                       language=request.user.language, page=0)
 
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
@@ -171,6 +172,7 @@ def remove(request, id, type="resource"):
             'revision_id': -1,
         }), content_type='text/plain')
 
+
 @login_required
 @require_privilege("workspace.can_create_dataset")
 @requires_if_publish('dataset') #
@@ -213,6 +215,7 @@ def create(request, collect_type='index'):
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
             raise InvalidFormException(form.errors)
+
 
 @login_required
 @require_privilege("workspace.can_edit_dataset")
@@ -283,7 +286,7 @@ def edit(request, dataset_revision_id=None):
 
             # TODO: Create a CreateDatasetResponse object
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-                    dataset_revision_id=dataset_revision.id)
+                        dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
             raise InvalidFormException(form.errors)
@@ -297,12 +300,13 @@ def related_resources(request):
 
     # For now, we'll fetch datastreams
     associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
-    list_result = [associated_datastream for associated_datastream in associated_datastreams]
 
-    from django.core.serializers.json import DjangoJSONEncoder
-    # dump = json.dumps(list_result) El campo Created_at no es serializable
+    list_result = []
+    for associated_datastream in associated_datastreams:
+        associated_datastream['type'] = 'dataview'
+        list_result.append(associated_datastream)
+
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
-    
     return HttpResponse(dump, mimetype="application/json")
 
 
