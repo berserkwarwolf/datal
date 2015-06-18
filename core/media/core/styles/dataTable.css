@@ -264,7 +264,7 @@
 	.ao-filter-tooltip table tbody tr td, 
 	.ao-filter-tooltip table td{border:0;padding:0 5px 10px;vertical-align:top;}
 	.ao-filter-tooltip label{text-align:left;font:normal Arial, Helvetica, sans-serif 12px;color:#767676;padding-top:6px;display:block;width:80px;}
-	.ao-filter-tooltip label.second{width:10px;text-align:center;}
+	.ao-filter-tooltip label.second{width:20px;text-align:center;}
 	.ao-filter-tooltip .ao-field{-moz-border-radius:3px;-webkit-border-radius:3px;background:#fff;border:1px solid #e2e0e0;font:normal 12px Arial, Helvetica, sans-serif;}
 	.ao-filter-tooltip input.ao-field{height:22px;padding:1px 5px 0 5px;}
 	.ao-filter-tooltip select.ao-field{padding:4px;width:125px;}

@@ -52,8 +52,9 @@
 	.step2 .columns .CR{margin-top:0;background-position:right 0;}
 	.step2 .columns .CR .cv{left:auto;right:0;}
 	.step2 .columns .CR .tl{display:none;}
-	.step2 .boxCR .boxTitle h4{background:url(/static/workspace/images/common/ic_flechaDesplegable.gif) no-repeat 286px -21px;}
-	.step2 .boxCR .boxTitle h4.collapsed{background-position:286px 17px;}
+	.step2 .boxCR .boxTitle h4{background:url(/static/workspace/images/common/ic_flechaDesplegable.gif) no-repeat right 24px;float:inherit;margin-right:15px;}
+	.step2 .boxCR .boxTitle h4.collapsed{background-position:right -16px;}
+	.boxCR .boxTitle{border-radius:0;cursor:pointer;padding:0;}
 	
 		/*WARNING TOOLTIP*/
 		.CR .warning{position:relative;top:-10px;left:auto;right:auto;bottom:auto;font-size:14px;height:auto;-moz-border-radius:2px;-webkit-border-radius:2px;-border-radius:2px;margin-bottom:12px;z-index:1;}
@@ -93,7 +94,7 @@
 		.step2 .advancedBox .bulletList p .ic_Filter{display:inline-block;width:16px;position:relative;top:7px;}
 		.step2 .advancedBox .fieldMAVG{width:60px;padding:2px;font-size:11px;}
 		.step2 .advancedBox .buttons a{margin:0 5px;}
-		.step2 #id_addFunctionsBox .buttons{padding-top:10px;}
+		.step2 .advancedBox .buttons{display:flex;}
 	
 		/*SLIDER*/
 		.step2 .helpAndTipsBox .panels{margin-top:25px;/*width:280px;*/overflow:hidden;padding-left:0;padding-right:0;padding-top:7px;}

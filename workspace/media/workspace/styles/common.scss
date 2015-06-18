@@ -224,7 +224,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 
   /* Tab */
   .header .tab a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;display:block;}
-  .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
+  .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:13px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
   .header .tab > a:after{content:"";border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid $color-base;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;opacity:.5}
   .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
