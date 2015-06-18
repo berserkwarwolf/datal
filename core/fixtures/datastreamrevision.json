@@ -11,7 +11,7 @@
             "rdf_template": "", 
             "dataset": 61649, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"924\"}]}"
         }
     }, 
@@ -27,7 +27,7 @@
             "rdf_template": "", 
             "dataset": 61639, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -43,7 +43,7 @@
             "rdf_template": "", 
             "dataset": 61642, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -59,7 +59,7 @@
             "rdf_template": "", 
             "dataset": 61641, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -75,7 +75,7 @@
             "rdf_template": "", 
             "dataset": 61640, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -91,7 +91,7 @@
             "rdf_template": "", 
             "dataset": 61643, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -107,7 +107,7 @@
             "rdf_template": "", 
             "dataset": 61643, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 990}]}"
         }
     }, 
@@ -123,7 +123,7 @@
             "rdf_template": "", 
             "dataset": 61642, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 990}]}"
         }
     }, 
@@ -139,7 +139,7 @@
             "rdf_template": "", 
             "dataset": 61641, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 990}]}"
         }
     }, 
@@ -155,7 +155,7 @@
             "rdf_template": "", 
             "dataset": 61640, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 990}]}"
         }
     }, 
@@ -171,7 +171,7 @@
             "rdf_template": "", 
             "dataset": 61639, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 990}]}"
         }
     }, 
@@ -187,7 +187,7 @@
             "rdf_template": "", 
             "dataset": 61649, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": 924}]}"
         }
     }, 
@@ -203,7 +203,7 @@
             "rdf_template": "", 
             "dataset": 61643, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -219,7 +219,7 @@
             "rdf_template": "", 
             "dataset": 61642, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -235,7 +235,7 @@
             "rdf_template": "", 
             "dataset": 61641, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -251,7 +251,7 @@
             "rdf_template": "", 
             "dataset": 61649, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -267,7 +267,7 @@
             "rdf_template": "", 
             "dataset": 61640, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -283,7 +283,7 @@
             "rdf_template": "", 
             "dataset": 61639, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -299,7 +299,7 @@
             "rdf_template": "", 
             "dataset": 61643, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -315,7 +315,7 @@
             "rdf_template": "", 
             "dataset": 61642, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -331,7 +331,7 @@
             "rdf_template": "", 
             "dataset": 61641, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -347,7 +347,7 @@
             "rdf_template": "", 
             "dataset": 61640, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -363,7 +363,7 @@
             "rdf_template": "", 
             "dataset": 61639, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -379,7 +379,7 @@
             "rdf_template": "", 
             "dataset": 61637, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>13</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>14</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"295\"}]}"
         }
     }, 
@@ -395,7 +395,7 @@
             "rdf_template": "", 
             "dataset": 61649, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"924\"}]}"
         }
     }, 
@@ -411,7 +411,7 @@
             "rdf_template": "", 
             "dataset": 61648, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>METROPOLITANA</Operand1><LogicalOperator>04</LogicalOperator><Operand2>column5</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -425,9 +425,9 @@
             "data_source": "<dataSource><DataStructure><Field id=\"table0\"><Headers><Row>row0</Row></Headers><type></type><format><languaje></languaje><country></country><style></style></format><Table><Field id=\"column0\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column1\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column2\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column3\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column4\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column5\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column6\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column7\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column8\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column9\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column10\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column11\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column12\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column13\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column14\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column15\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column16\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column17\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id=\"column18\"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field></Table></Field></DataStructure></dataSource>", 
             "created_at": "2012-05-18T17:29:55", 
             "rdf_template": "", 
-            "dataset": 61647, 
+            "dataset": 61472, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>METROPOLITANA</Operand1><LogicalOperator>04</LogicalOperator><Operand2>column5</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -443,7 +443,7 @@
             "rdf_template": "", 
             "dataset": 61646, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>METROPOLITANA</Operand1><LogicalOperator>04</LogicalOperator><Operand2>column5</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -459,7 +459,7 @@
             "rdf_template": "", 
             "dataset": 61645, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>METROPOLITANA</Operand1><LogicalOperator>04</LogicalOperator><Operand2>column5</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -475,7 +475,7 @@
             "rdf_template": "", 
             "dataset": 61644, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>METROPOLITANA</Operand1><LogicalOperator>04</LogicalOperator><Operand2>column5</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -491,7 +491,7 @@
             "rdf_template": "", 
             "dataset": 61643, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -507,7 +507,7 @@
             "rdf_template": "", 
             "dataset": 61642, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -523,7 +523,7 @@
             "rdf_template": "", 
             "dataset": 61641, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -539,7 +539,7 @@
             "rdf_template": "", 
             "dataset": 61640, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -555,7 +555,7 @@
             "rdf_template": "", 
             "dataset": 61639, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"990\"}]}"
         }
     }, 
@@ -571,7 +571,7 @@
             "rdf_template": "", 
             "dataset": 61638, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>1</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"279\"}]}"
         }
     }, 
@@ -587,7 +587,7 @@
             "rdf_template": "", 
             "dataset": 61637, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>13</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>14</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"295\"}]}"
         }
     }, 
@@ -603,7 +603,7 @@
             "rdf_template": "", 
             "dataset": 61636, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>3</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"295\"}]}"
         }
     }, 
@@ -619,7 +619,7 @@
             "rdf_template": "", 
             "dataset": 61635, 
             "select_statement": "<selectStatement><Select><Column>column0</Column><Column>column1</Column><Column>column2</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>1</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>3</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
@@ -635,7 +635,7 @@
             "rdf_template": "", 
             "dataset": 61634, 
             "select_statement": "<selectStatement><Select><Column>column1</Column><Column>column2</Column><Column>column3</Column><Column>column4</Column><Column>column5</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>13</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>14</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>15</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>16</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>17</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>18</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>19</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>20</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>21</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>22</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>23</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>24</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>25</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>26</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"9009\"}]}"
         }
     }, 
@@ -651,7 +651,7 @@
             "rdf_template": "", 
             "dataset": 61633, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>3</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": "{\"field_values\": [{\"cust-dataid\": \"http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm\"}]}"
         }
     }, 
@@ -667,7 +667,7 @@
             "rdf_template": "", 
             "dataset": 61632, 
             "select_statement": "<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>2</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>3</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>4</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>5</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>6</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>7</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>8</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>9</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>10</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>11</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>12</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>13</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>14</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>15</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>16</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>17</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>18</Operand2></Filter><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2>19</Operand2></Filter></Where></selectStatement>", 
-            "user": 1647, 
+            "user": 1472, 
             "meta_text": ""
         }
     }, 
