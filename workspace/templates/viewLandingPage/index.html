@@ -5,13 +5,13 @@
 {% compress css %}
 <link href="{% sass_src 'workspace/styles/viewLandingPage.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
+{# Left Navigation Selected Option #}
+<meta name="main-option" content="id_home_option"/>
 {% endblock %}
 
 {% block sectionTitle %}
 <h1>{% trans "LANDINGPAGE-SECTION-TITLE" %} {{auth_manager.nick}}!</h1>
 {% endblock %}
-
-
 
 {% block content %}
 <div class="columns equal-width clearfix">

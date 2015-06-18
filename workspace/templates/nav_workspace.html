@@ -2,6 +2,14 @@
 <nav class="main-navigation border-box">
   <ul>
 
+    <!-- Home -->
+    <li>
+      <a id="id_home_option" href="/welcome" class="nav-home">
+        {% include 'icons/nav-home.html' %}
+        <span>{% trans 'APP-HOME-TEXT' %}</span>
+      </a>
+    </li>
+
     <!-- Datasets -->
     <li>
       <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="nav-datasets">

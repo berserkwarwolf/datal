@@ -361,36 +361,40 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   }
 
 	/* Icons */	
-  .main-navigation a.nav-datasets svg #datasets,
-  .main-navigation a.nav-dataviews svg #dataviews,
-  .main-navigation a.nav-visualizations svg #visualizations,
-  .main-navigation a.nav-dashboards svg #dashboards,
-  .main-navigation a.nav-reports svg #reports,
-  .main-navigation a.nav-settings svg #settings{fill:$nav-icon-color;}
+  .main-navigation a.nav-home svg#home,
+  .main-navigation a.nav-datasets svg#datasets,
+  .main-navigation a.nav-dataviews svg#dataviews,
+  .main-navigation a.nav-visualizations svg#visualizations,
+  .main-navigation a.nav-dashboards svg#dashboards,
+  .main-navigation a.nav-reports svg#reports,
+  .main-navigation a.nav-settings svg#settings{fill:$nav-icon-color;}
 
     /* Active */
-    .main-navigation a.active svg #datasets,
-    .main-navigation a.active svg #dataviews,
-    .main-navigation a.active svg #visualizations,
-    .main-navigation a.active svg #dashboards,
-    .main-navigation a.active svg #reports,
-    .main-navigation a.active svg #settings{fill:$nav-icon-color-hover;}
+    .main-navigation a.active svg#home,
+    .main-navigation a.active svg#datasets,
+    .main-navigation a.active svg#dataviews,
+    .main-navigation a.active svg#visualizations,
+    .main-navigation a.active svg#dashboards,
+    .main-navigation a.active svg#reports,
+    .main-navigation a.active svg#settings{fill:$nav-icon-color-hover;}
 
     /* Hover */
-    .main-navigation a.nav-datasets:hover svg #datasets,
-    .main-navigation a.nav-dataviews:hover svg #dataviews,
-    .main-navigation a.nav-visualizations:hover svg #visualizations,
-    .main-navigation a.nav-dashboards:hover svg #dashboards,
-    .main-navigation a.nav-reports:hover svg #reports,
-    .main-navigation a.nav-settings:hover svg #settings{fill:$nav-icon-color-hover;}
+    .main-navigation a.nav-home:hover svg#home,
+    .main-navigation a.nav-datasets:hover svg#datasets,
+    .main-navigation a.nav-dataviews:hover svg#dataviews,
+    .main-navigation a.nav-visualizations:hover svg#visualizations,
+    .main-navigation a.nav-dashboards:hover svg#dashboards,
+    .main-navigation a.nav-reports:hover svg#reports,
+    .main-navigation a.nav-settings:hover svg#settings{fill:$nav-icon-color-hover;}
 
     /* Disabled */
-    .main-navigation .disabled:hover svg #datasets,
-    .main-navigation .disabled:hover svg #dataviews,
-    .main-navigation .disabled:hover svg #visualizations,
-    .main-navigation .disabled:hover svg #dashboards,
-    .main-navigation .disabled:hover svg #reports,
-    .main-navigation .disabled:hover svg #settings{fill:$nav-icon-color !important;}
+    .main-navigation .disabled:hover svg#home,
+    .main-navigation .disabled:hover svg#datasets,
+    .main-navigation .disabled:hover svg#dataviews,
+    .main-navigation .disabled:hover svg#visualizations,
+    .main-navigation .disabled:hover svg#dashboards,
+    .main-navigation .disabled:hover svg#reports,
+    .main-navigation .disabled:hover svg#settings{fill:$nav-icon-color !important;}
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
