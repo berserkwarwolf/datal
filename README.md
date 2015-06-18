@@ -33,17 +33,10 @@ Luego de haber clonado el repositorio, dentro del mismo ejecutar:
     
     sudo supervisorctl start uwsgi
 
-6. Acceder a la web en tu navegador local, puerto 8080. Ejemplo: http://workspace.dev:8080
+6. Para entrar a la Demo, en tu navegador ingresá a http://workspace.dev:8080/
 
 
-Actualizacion
--------------
-
-1. git pull origin master
-2. vagrant provision (si la virtual esta corriendo) o vagrant up --provision (si la virtual esta apagada)
-
-
-Usuarios y claves para workspace
+Usuarios y claves Demo
 --------------------------------
 
 Administrador: administrador/administrador
@@ -73,6 +66,13 @@ Logs
   CORREOS: /tmp/datal-emails/
   
   NGINX: /var/log/nginx/
+
+
+Actualizacion
+-------------
+
+1. git pull origin master
+2. vagrant provision (si la virtual esta corriendo) o vagrant up --provision (si la virtual esta apagada)
 
 
 Personalización de aspectos gráficos
