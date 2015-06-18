@@ -342,8 +342,8 @@ html, body{background:url(../images/microsites/bg_body.gif) repeat;}
 		.dataTable .data #id_datastreamResult > .result >table.array td{padding:2px 5px;border:1px solid #EFEFEF;border-top:0;}
 
 	/* Loading */
-	.dataTable .data .loading{background:url(/static/core/images/common/im_loadingWhite72.gif) no-repeat center center;height:400px;text-indent:-10000px;overflow:hidden;}
-	body .dataTable #id_datastreamResult .flexigrid > div.gBlock{background:#fff url(/static/core/images/common/im_loadingWhite72.gif) no-repeat center center!important;background-color:rgba(255,255,255,0.5) !important;text-indent:-10000px;overflow:hidden;position:absolute !important;height:100% !important;width:100% !important;}
+	.dataTable .data .loading{background:url(/static/core/images/common/loader_light.gif) no-repeat center center;height:400px;text-indent:-10000px;overflow:hidden;}
+	body .dataTable #id_datastreamResult .flexigrid > div.gBlock{background:#fff url(/static/core/images/common/loader_light.gif) no-repeat center center!important;background-color:rgba(255,255,255,0.5) !important;text-indent:-10000px;overflow:hidden;position:absolute !important;height:100% !important;width:100% !important;}
 
 	/* Pivot Table */
 	.dataTable.pivotEnabled header{border-color:#c9c7c7;}
