@@ -32,7 +32,6 @@ class AccessManager(object):
             request.user = None
             return None
 
-
         user.last_visit = datetime.datetime.now()
         user.save()
 

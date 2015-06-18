@@ -1,13 +1,17 @@
+import logging
+import json
+
 from django.db import models
 from django.utils.translation import ugettext_lazy
 from django.db import IntegrityError
+from django.conf import settings
+
 from core.helpers import slugify
 from core import choices
 from core import managers
-from core.bigdata import Bigdata
 from core.helpers import get_meta_data_dict
-import logging
-import json
+from core.cache import Cache
+
 
 logger = logging.getLogger(__name__)
 
@@ -111,14 +115,14 @@ class Account(models.Model):
         (TRIAL, 'TRIAL')
     )
 
-    name       = models.CharField(max_length=80)
-    level      = models.ForeignKey('AccountLevel')
-    status     = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'), default=TRIAL)
-    meta_data  = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_METADATA_LABEL'))
+    name = models.CharField(max_length=80)
+    level = models.ForeignKey('AccountLevel')
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'), default=TRIAL)
+    meta_data = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_METADATA_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True, verbose_name=ugettext_lazy('MODEL_CREATED_AT_LABEL'))
     expires_at = models.DateTimeField(verbose_name=ugettext_lazy('MODEL_EXPIRES_AT_LABEL'))
-    objects    = managers.AccountManager()
-    parent     = models.ForeignKey('Account', null=True, on_delete=models.PROTECT, blank=True)
+    objects = managers.AccountManager()
+    parent = models.ForeignKey('Account', null=True, on_delete=models.PROTECT, blank=True)
 
     class Meta:
         db_table = 'ao_accounts'
@@ -159,6 +163,46 @@ class Account(models.Model):
         # The cust- prefix is because key are saved like that
         return ["cust-" + field['name'] for field in fields if field.has_key('faceted') and field.has_key('name') and field.has_key('label')]
 
+    def get_total_datasets(self):
+        c = Cache(db=0)
+        users = User.objects.filter(account=self)
+        total_datasets = c.get('account_total_datasets_' + str(self.id))
+        if not total_datasets:
+            total_datasets =  Dataset.objects.filter(user__in=users).count()
+            if total_datasets > 0:
+                c.set('account_total_datasets_' + str(self.id), total_datasets, settings.REDIS_STATS_TTL)
+        return total_datasets
+
+    def get_total_datastreams(self):
+        c = Cache(db=0)
+        users = User.objects.filter(account=self)
+        total_datastreams = c.get('account_total_datastreams_' + str(self.id))
+        if not total_datastreams:
+            total_datastreams = DataStream.objects.filter(user__in=users).count()
+            if total_datastreams > 0:
+                c.set('account_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
+        return total_datastreams
+
+    def get_total_dashboards(self):
+        c = Cache(db=0)
+        users = User.objects.filter(account=self)
+        total_dashboards = c.get('account_total_dashboards_' + str(self.id))
+        if not total_dashboards:
+            total_dashboards =  Dashboard.objects.filter(user__in=users).count()
+            if total_dashboards > 0:
+                c.set('account_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
+        return total_dashboards
+
+    def get_total_visualizations(self):
+        c = Cache(db=0)
+        users = User.objects.filter(account=self)
+        total_visualizations = c.get('account_total_visualizations_' + str(self.id))
+        if not total_visualizations:
+            total_visualizations =  Visualization.objects.filter(user__in=users).count()
+            if total_visualizations > 0:
+                c.set('account_total_visualization_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
+        return total_visualizations
+
 
 class User(models.Model):
     name            = models.CharField(max_length=30, verbose_name=ugettext_lazy( 'MODEL_NAME_LABEL' ))
@@ -179,6 +223,42 @@ class User(models.Model):
 
     def __unicode__(self):
         return self.nick
+
+    def get_total_datasets(self):
+        c = Cache(db=0)
+        total_datasets = c.get('my_total_datasets_' + str(self.id))
+        if not total_datasets:
+            total_datasets =  Dataset.objects.filter(user=self.id).count()
+            if total_datasets > 0:
+                c.set('my_total_datasets_' + str(self.id), total_datasets, settings.REDIS_STATS_TTL)
+        return total_datasets
+
+    def get_total_datastreams(self):
+        c = Cache(db=0)
+        total_datastreams = c.get('my_total_datastreams_' + str(self.id))
+        if not total_datastreams:
+            total_datastreams = DataStream.objects.filter(user=self.id).count()
+            if total_datastreams > 0:
+                c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
+        return total_datastreams
+
+    def get_total_dashboards(self):
+        c = Cache(db=0)
+        total_dashboards = c.get('my_total_dashboards_' + str(self.id))
+        if not total_dashboards:
+            total_dashboards =  Dashboard.objects.filter(user=self.id).count()
+            if total_dashboards > 0:
+                c.set('my_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
+        return total_dashboards
+
+    def get_total_visualizations(self):
+        c = Cache(db=0)
+        total_visualizations = c.get('my_total_visualizations_' + str(self.id))
+        if not total_visualizations:
+            total_visualizations =  Visualization.objects.filter(user=self.id).count()
+            if total_visualizations > 0:
+                c.set('my_total_visualizations_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
+        return total_visualizations
 
 
 class DataStream(GuidModel):

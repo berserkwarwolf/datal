@@ -33,34 +33,17 @@ class DependenciesInjector(object):
         c = Cache(db=0)
         request.stats = {}
 
-        my_total_datasets = c.get('my_total_datasets_' + str(user_id))
-        if not my_total_datasets:
-            my_total_datasets =  Dataset.objects.filter(user=user_id).count()
-            if my_total_datasets > 0:
-                c.set('my_total_datasets_' + str(user_id), my_total_datasets, settings.REDIS_STATS_TTL)
-        request.stats['my_total_datasets'] = my_total_datasets
+        # Stats por usuario
+        request.stats['my_total_datasets'] = request.user.get_total_datasets()
+        request.stats['my_total_datastreams'] = request.user.get_total_datastreams()
+        request.stats['my_total_dashboards'] = request.user.get_total_dashboards()
+        request.stats['my_total_visualizations'] = request.user.get_total_visualizations()
 
-        my_total_datastreams = c.get('my_total_datastreams_' + str(user_id))
-        if not my_total_datastreams:
-            my_total_datastreams = DataStream.objects.filter(user=user_id).count()
-            if my_total_datastreams > 0:
-                c.set('my_total_datastreams_' + str(user_id), my_total_datastreams, settings.REDIS_STATS_TTL)
-        request.stats['my_total_datastreams'] = my_total_datastreams
-
-        my_total_dashboards = c.get('my_total_dashboards_' + str(user_id))
-        if not my_total_dashboards:
-            my_total_dashboards = Dashboard.objects.filter(user=user_id).count()
-            if my_total_dashboards > 0:
-                c.set('my_total_dashboards_' + str(user_id), my_total_dashboards, settings.REDIS_STATS_TTL)
-        request.stats['my_total_dashboards'] = my_total_dashboards
-
-        my_total_visualizations = c.get('my_total_visualizations_' + str(user_id))
-        if not my_total_visualizations:
-            my_total_visualizations = Visualization.objects.filter(user=user_id).count()
-            if my_total_visualizations > 0:
-                c.set('my_total_visualizations_' + str(user_id), my_total_visualizations, settings.REDIS_STATS_TTL)
-
-        request.stats['my_total_visualizations'] = my_total_visualizations
+        # Stats por cuenta
+        request.stats['acount_total_datasets'] = request.account.get_total_datasets()
+        request.stats['account_total_datastreams'] = request.account.get_total_datastreams()
+        request.stats['my_total_dashboards'] = request.account.get_total_dashboards()
+        request.stats['my_total_visualizations'] = request.account.get_total_visualizations()
 
     def calculate_perc(self, request):
         request.stats['max_resource'] = max( [ request.stats['my_total_datasets'],
