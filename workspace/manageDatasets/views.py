@@ -233,7 +233,6 @@ def edit(request, dataset_revision_id=None):
     # TODO: Review. Category was not loading options from form init.
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
-
     if request.method == 'GET':
         status_options=auth_manager.get_allowed_actions()
 
@@ -266,7 +265,6 @@ def edit(request, dataset_revision_id=None):
 
         # TODO: Review. Category was not loading options from form init.
         form.fields['category'].choices = category_choices
-
 
         # TODO: Review. Initial values was not loading when creating a form instance in the standard way
         form.initial = initial_values

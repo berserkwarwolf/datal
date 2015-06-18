@@ -41,6 +41,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             prev_revision = DatasetRevision.objects.filter(dataset=dataset).order_by('-id').first()
             size = prev_revision.size
             file_name = prev_revision.filename
+        elif int(collect_type) == CollectTypeChoices().URL:
+            size = 0
+            file_name = fields['file_name']
         else:
             size = fields['file_size']
             file_name = fields['file_name']

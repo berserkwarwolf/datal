@@ -125,11 +125,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id,
+            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id,
                                                                                 id=F('datastream__last_revision__id'))
 
-            for datastream in datastreams:
-                DatastreamLifeCycleManager(user=self.user, datastream_id=datastream.id).publish(
+            for datastream_revision in datastream_revisions:
+                DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
                     allowed_states=[StatusChoices.APPROVED])
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
@@ -263,7 +263,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if 'status' in fields.keys():
-	    # el fields.pop trae un unicode y falla al comparar con los Status
+            # el fields.pop trae un unicode y falla al comparar con los Status
             form_status = int(fields.pop('status', None))
 
         file_data = fields.get('file_data', None)
@@ -295,19 +295,18 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def _move_childs_to_draft(self):
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
+            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_revision__id'),
                 status=StatusChoices.PUBLISHED
             )
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).save_as_draft()
+            for datastream_revision in datastream_revisions:
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).save_as_draft()
 
     def save_as_draft(self):
         self.dataset_revision.clone()
         self._update_last_revisions()
-
 
     def _log_activity(self, action_id):
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
