@@ -81,6 +81,7 @@
 	/*EMBED OVERLAY*/
 	.embedPopup .In{padding-bottom:0;}
 	.embedPopup .In h5{padding-top:17px;}
+	.embedPopup .In p{padding:15px 20px 0 20px;}
 	.embedPopup .In form{margin:0 auto;float:none;width:460px;}
 	.embedPopup .ao-dialogue{width:400px;margin-top:15px;margin-bottom:0;}
 	.embedPopup .ao-dialogue textarea{width:410px;height:120px;}
