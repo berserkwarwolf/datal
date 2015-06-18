@@ -471,7 +471,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   /* support */
   .box.support{background:$background-color-highlight;}
   .box.support > header{border-color:$background-color-remember-me;}
-  .box.support > header .title{color:$font-color-highlight;}
+  .box.support > header .title{color:$color-base;}
   .box.support > header .title > span{color:$font-color-base;}
 
   /* Pink */
