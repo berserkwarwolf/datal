@@ -33,11 +33,11 @@ Luego de haber clonado el repositorio, dentro del mismo ejecutar:
     
     sudo supervisorctl start uwsgi
 
-6. Para entrar a la Demo, en tu navegador ingresá a http://workspace.dev:8080/
+6. Para probar la demo, en tu navegador ingresá a http://workspace.dev:8080/
 
 
-Usuarios y claves Demo
---------------------------------
+Usuarios y claves para acceder a la demo
+----------------------------------------
 
 Administrador: administrador/administrador
 
