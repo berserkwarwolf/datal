@@ -1,7 +1,7 @@
 
 Datal
 =====
-Plataforma de publicación de Datos Abiertos de código abierto.
+Plataforma de publicación de Datos Abiertos de código abierto bajo licencia BSD 3.
 
 
 Herramientas
