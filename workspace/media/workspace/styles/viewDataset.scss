@@ -36,3 +36,6 @@
 .centeredMessaje{position:absolute;height:180px;width:150px;left:50%;top:50%;margin:-100px 0 0 -75px;text-align:center;}
 .centeredMessaje p{color:#ebe9e9;font-size:20px;font-weight:bold;text-shadow:1px -1px 0 #dfdcdc;margin-top:15px;}
 .centeredIcon{height:125px;width:100%;background-image:url(../images/common/ic_downloadLa.png);background-repeat:no-repeat;}
+
+/* Flex center */
+.flex-center{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;min-height:90%;}

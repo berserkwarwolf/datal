@@ -22,7 +22,7 @@
 				{% if dataset.collect_type == 0 and dataset.impl_type in datastream_impl_not_valid_choices %}
 
 					<h4>{% trans 'APP-DATASETCANTBEUSEDTOCREATECHILD-TEXT' %}</h4>					
-					{% include "viewDataset/download.html" %}
+					{% include "viewDataset/no_resources.html" %}
 
 				{% else %}
 
@@ -59,7 +59,7 @@
 						<h4>{% trans 'APP-NOCHILDRESOURCESYET-TEXT' %}</h4>
 						{% endif %}
 						
-						{% include "viewDataset/download.html" %}
+						{% include "viewDataset/no_resources.html" %}
 
 					{% endif %}
 

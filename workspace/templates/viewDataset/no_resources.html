@@ -1,0 +1,27 @@
+{% load i18n %}
+
+{% if dataset.collect_type == 0 %}
+
+	{% if dataset.impl_type in datastream_impl_not_valid_choices %}
+
+	<div class="centeredMessaje">
+		<div class="centeredIcon"></div>
+	  	<p><a class="button alpha small" href="{{ dataset.end_point }}" title="{% trans 'APP-SOURCE-TEXT' %}" target="_blank">{% trans 'APP-SOURCE-TEXT' %}</a></p>
+	</div>
+
+	{% else %}
+
+	<div class="flex-center">
+		<p>{% trans 'APP-NOCHILDRESOURCESYET-TEXT' %} <a id="id_create" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>.</p>
+	</div>
+
+	{% endif%}
+
+{% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
+
+<div class="centeredMessaje">
+	<div class="centeredIcon"></div>
+  	<p><a class="button alpha small" href="{{ dataset.end_point }}" title="{% trans 'APP-SOURCE-TEXT' %}" target="_blank">{% trans 'APP-SOURCE-TEXT' %}</a></p>
+</div>
+
+{% endif %}
