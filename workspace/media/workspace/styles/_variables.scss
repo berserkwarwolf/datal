@@ -18,10 +18,10 @@
 	$brand-color:#fbfaf5;														/* Brand primary color */
 
 	/* Accent color */
-	$accent-color:#D16280;														/* Brand secondary color */
+	$accent-color:#00d67e;														/* Brand secondary color */
 
 	/* Base color */
-	$color-base:#042842;														/* Color for backgrounds */
+	$color-base:#393939;														/* Color for backgrounds */
 
 
 /* Fonts */
@@ -64,8 +64,12 @@ $buttons-font-size:12px !important;												/* Font size for all buttons */
 	$button-primary-color:#00d67e;												/* Background color */
 	$button-primary-color-text:#FFF;											/* Font color */
 
+	/* Action button */
+	$button-action-color:#027fc0;												/* Background color */
+	$button-action-color-text:#FFF;												/* Font color */
+
 	/* Base button */
-	$button-base-color:#123f68;													/* Background color */
+	$button-base-color:#393939;													/* Background color */
 	$button-base-color-text:#FFF;												/* Font color */
 
 	/* Warning button */
@@ -82,8 +86,8 @@ $buttons-bar-color-text:#FFF;													/* Font color of button */
 
 
 /* Backgrounds */
-$background-color-highlight:#f8eef0;											/* Color for backgrounds on highlighted boxes */
-$background-color-remember-me:#f2dfe3;											/* Color for backgrounds on remember tips */
+$background-color-highlight:#e5e9ec;											/* Color for backgrounds on highlighted boxes */
+$background-color-remember-me:#dae0e5;											/* Color for backgrounds on remember tips */
 
 
 /* Forms */

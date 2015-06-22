@@ -33,8 +33,13 @@
 	$button-primary-color-border:adjust-color($button-primary-color,$hue:0deg,$saturation:10%,$lightness:-20%);						/* Border color */
 	$button-primary-color-shadow:adjust-color($button-primary-color,$hue:0deg,$saturation:10%,$lightness:-30%);						/* Font shadow color */
 
+	/* Action button */
+	$button-action-color-gradient:adjust-color($button-action-color,$hue:0deg,$saturation:10%,$lightness:-12%);					/* Bottom color of gradient */
+	$button-action-color-border:adjust-color($button-action-color,$hue:0deg,$saturation:10%,$lightness:-28%);						/* Border color */
+	$button-action-color-shadow:adjust-color($button-action-color,$hue:0deg,$saturation:10%,$lightness:-15%);						/* Font shadow color */
+
 	/* Base button */ 		
-	$button-base-color-gradient:adjust-color($button-base-color,$hue:0deg,$saturation:2%,$lightness:-4%);							/* Bottom color of gradient */
+	$button-base-color-gradient:adjust-color($button-base-color,$hue:0deg,$saturation:2%,$lightness:10%);							/* Bottom color of gradient */
 	$button-base-color-border:adjust-color($button-base-color,$hue:0deg,$saturation:10%,$lightness:-10%);							/* Border color */
 	$button-base-color-shadow:adjust-color($button-base-color,$hue:0deg,$saturation:10%,$lightness:-20%);							/* Font shadow color */
 

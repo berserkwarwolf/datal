@@ -2,9 +2,13 @@
 
 {% if dataset.collect_type == 0 %}
 <!-- Download -->
-<div class="centeredMessaje">
+<div class="centeredMessaje" style="display:none;">
 	<div class="centeredIcon"></div>
-  <p><a class="button black small" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></p>
+  <p><a class="button alpha small" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a></p>
+</div>
+
+<div style="display: -webkit-flex;display: flex;-webkit-align-items: center;align-items: center;-webkit-justify-content: center;justify-content: center;min-height: 90%;">
+	<p>Aún no hay recursos asociados a este conjunto de datos. <a id="id_create" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">Crear vista</a>.</p>
 </div>
 
 {% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
@@ -13,6 +17,6 @@
 -->
 <div class="centeredMessaje">
 	<div class="centeredIcon"></div>
-  <p><a class="button black small" href="{{ dataset.end_point }}" title="{% trans 'APP-SOURCE-TEXT' %}" target="_blank"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></p>
+  <p><a class="button alpha small" href="{{ dataset.end_point }}" title="{% trans 'APP-SOURCE-TEXT' %}" target="_blank">{% trans 'APP-SOURCE-TEXT' %}</a></p>
 </div>
 {% endif %}

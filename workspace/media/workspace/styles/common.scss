@@ -10,12 +10,17 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
 a{color:$link-color;}
 
 /* Buttons */
-.button{font-family:$buttons-font-family;font-size:$buttons-font-size;}
+.button{font-family:$buttons-font-family;font-size:$buttons-font-size;line-height:26px !important;}
 
   /* Primary button */
   .button.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:0 -1px 0 $button-primary-color-shadow;@include linear-gradient($button-primary-color,$button-primary-color-gradient);
   }
   .button.primary:hover{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
+
+  /* Action button */
+  .button.action{border-color:$button-action-color-border;color:$button-action-color-text;text-shadow:0 -1px 0 $button-action-color-shadow;@include linear-gradient($button-action-color,$button-action-color-gradient);
+  }
+  .button.action:hover{@include linear-gradient($button-action-color-gradient,$button-action-color);}
 
    /* Warning button */
   .button.warning{border-color:$button-warning-color-border;color:$button-warning-color-text;text-shadow:0 -1px 0 $button-warning-color-shadow;@include linear-gradient($button-warning-color,$button-warning-color-gradient);
@@ -28,9 +33,9 @@ a{color:$link-color;}
   .button.support:hover{@include linear-gradient($button-support-color-gradient,$button-support-color);}
 
   /* Black */
-  .button.black{border-color:$button-base-color-border;color:$button-base-color-text;text-shadow:0 1px 0 $button-base-color-shadow;@include linear-gradient($button-base-color,$button-base-color-gradient);
+  .button.black{border-color:$button-base-color-border;color:$button-base-color-text;text-shadow:0 1px 0 $button-base-color-shadow;@include linear-gradient($button-base-color-gradient,$button-base-color);
   }
-  .button.black:hover{@include linear-gradient($button-base-color-gradient,$button-base-color);}
+  .button.black:hover{@include linear-gradient($button-base-color,$button-base-color-gradient);}
 
   /* Disabled */
   .button[disabled=disabled], 
@@ -203,16 +208,23 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
 /* Header */
 /* .radial-gradient{@include radial-gradient($brand-color-light,$brand-color);} */
 .header{border-top:1px solid $brand-color-bold;border-bottom:2px solid #2c2b2b;background:$brand-color;position:relative;}
-.header .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:$logo-header-width;height:43px;}
-.header .button.primary,
-.header .button.support{margin-top:8px;}
+.header .logo{border-right:1px solid $brand-color-bold;
+  -webkit-box-shadow:inset -1px 0 0 $brand-color-light;
+     -moz-box-shadow:inset -1px 0 0 $brand-color-light;
+          box-shadow:inset -1px 0 0 $brand-color-light;
+}
+.header .logo .logo-header-brand{background:url(#{$logo-header-url}) no-repeat center center;width:$logo-header-width;height:43px;}
+.header .button.alpha,
+.header .button.support{margin-top:8px;padding:0 12px;}
+
+.header .button.alpha svg#open-portal{fill:$link-color;width:16px;height:15px;padding:5px 0 0 7px;float:right;}
 
   /* Online Support button */
   .header #id_help_link{margin-right:10px;}
 
   /* Tab */
   .header .tab a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;display:block;}
-  .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:14px;}
+  .header .tab > a{padding:0 12px;height:43px;line-height:40px;font-size:13px;}
   .header .tab > a:hover{background-color:$brand-color-bold;text-decoration:none;}
   .header .tab > a:after{content:"";border-left:5px solid transparent;border-right:5px solid transparent;border-top:5px solid $color-base;margin-top:-3px;position:absolute;right:10px;top:50%;height:0;width:0;opacity:.5}
   .header .tab .img{border-bottom:1px solid $brand-color-bold;display:block;float:left;margin-right:10px;margin-top:8px;}
@@ -349,36 +361,40 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   }
 
 	/* Icons */	
-  .main-navigation a.nav-datasets svg #datasets,
-  .main-navigation a.nav-dataviews svg #dataviews,
-  .main-navigation a.nav-visualizations svg #visualizations,
-  .main-navigation a.nav-dashboards svg #dashboards,
-  .main-navigation a.nav-reports svg #reports,
-  .main-navigation a.nav-settings svg #settings{fill:$nav-icon-color;}
+  .main-navigation a.nav-home svg#home,
+  .main-navigation a.nav-datasets svg#datasets,
+  .main-navigation a.nav-dataviews svg#dataviews,
+  .main-navigation a.nav-visualizations svg#visualizations,
+  .main-navigation a.nav-dashboards svg#dashboards,
+  .main-navigation a.nav-reports svg#reports,
+  .main-navigation a.nav-settings svg#settings{fill:$nav-icon-color;}
 
     /* Active */
-    .main-navigation a.active svg #datasets,
-    .main-navigation a.active svg #dataviews,
-    .main-navigation a.active svg #visualizations,
-    .main-navigation a.active svg #dashboards,
-    .main-navigation a.active svg #reports,
-    .main-navigation a.active svg #settings{fill:$nav-icon-color-hover;}
+    .main-navigation a.active svg#home,
+    .main-navigation a.active svg#datasets,
+    .main-navigation a.active svg#dataviews,
+    .main-navigation a.active svg#visualizations,
+    .main-navigation a.active svg#dashboards,
+    .main-navigation a.active svg#reports,
+    .main-navigation a.active svg#settings{fill:$nav-icon-color-hover;}
 
     /* Hover */
-    .main-navigation a.nav-datasets:hover svg #datasets,
-    .main-navigation a.nav-dataviews:hover svg #dataviews,
-    .main-navigation a.nav-visualizations:hover svg #visualizations,
-    .main-navigation a.nav-dashboards:hover svg #dashboards,
-    .main-navigation a.nav-reports:hover svg #reports,
-    .main-navigation a.nav-settings:hover svg #settings{fill:$nav-icon-color-hover;}
+    .main-navigation a.nav-home:hover svg#home,
+    .main-navigation a.nav-datasets:hover svg#datasets,
+    .main-navigation a.nav-dataviews:hover svg#dataviews,
+    .main-navigation a.nav-visualizations:hover svg#visualizations,
+    .main-navigation a.nav-dashboards:hover svg#dashboards,
+    .main-navigation a.nav-reports:hover svg#reports,
+    .main-navigation a.nav-settings:hover svg#settings{fill:$nav-icon-color-hover;}
 
     /* Disabled */
-    .main-navigation .disabled:hover svg #datasets,
-    .main-navigation .disabled:hover svg #dataviews,
-    .main-navigation .disabled:hover svg #visualizations,
-    .main-navigation .disabled:hover svg #dashboards,
-    .main-navigation .disabled:hover svg #reports,
-    .main-navigation .disabled:hover svg #settings{fill:$nav-icon-color !important;}
+    .main-navigation .disabled:hover svg#home,
+    .main-navigation .disabled:hover svg#datasets,
+    .main-navigation .disabled:hover svg#dataviews,
+    .main-navigation .disabled:hover svg#visualizations,
+    .main-navigation .disabled:hover svg#dashboards,
+    .main-navigation .disabled:hover svg#reports,
+    .main-navigation .disabled:hover svg#settings{fill:$nav-icon-color !important;}
 
 	/* Tooltip */
 	.main-navigation li > a span{display:none;}
@@ -455,7 +471,7 @@ body{background-image:url(#{$loader-url-dark});background-repeat:no-repeat;backg
   /* support */
   .box.support{background:$background-color-highlight;}
   .box.support > header{border-color:$background-color-remember-me;}
-  .box.support > header .title{color:$font-color-highlight;}
+  .box.support > header .title{color:$color-base;}
   .box.support > header .title > span{color:$font-color-base;}
 
   /* Pink */

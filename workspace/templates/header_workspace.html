@@ -27,7 +27,10 @@
   {% endcomment %}
 
   <!-- ODS Button -->
-  <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button primary small FL" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}</a>
+  <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha small FL" title="{% trans 'HEADER-ODS-BUTTON' %}">
+    {% trans 'HEADER-ODS-BUTTON' %}
+    {% include 'icons/open-portal.html' %}
+  </a>
 
   <!-- My Account Tab -->
   <div class="tab has-separator pulldown FR">

@@ -21,7 +21,7 @@
 				{# If impl_type is not allowed to create a Data View #}
 				{% if dataset.collect_type == 0 and dataset.impl_type in datastream_impl_not_valid_choices %}
 
-					<h4>{% trans 'APP-DATASETCANTBEUSEDTOCREATECHILD-TEXT' %}</h4>
+					<h4>{% trans 'APP-DATASETCANTBEUSEDTOCREATECHILD-TEXT' %}</h4>					
 					{% include "viewDataset/download.html" %}
 
 				{% else %}
@@ -55,7 +55,10 @@
 
 					{% else %}
 
+						{% if dataset.collect_type != 0 %}
 						<h4>{% trans 'APP-NOCHILDRESOURCESYET-TEXT' %}</h4>
+						{% endif %}
+						
 						{% include "viewDataset/download.html" %}
 
 					{% endif %}
