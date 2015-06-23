@@ -226,7 +226,7 @@
 		.flexigrid div.pDiv div.pButton:hover,
 		.flexigrid div.pDiv div.pButton.pBtnOver{width:22px !important;height:22px !important;border:0 !important;}
 		.flexigrid div.pDiv div.pButton:hover span,
-		.flexigrid div.pDiv div.pButton.pBtnOver span{border:0;width:20px;height:20px;}
+		.flexigrid div.pDiv div.pButton.pBtnOver span{border:0;width:20px;height:20px;border:none !important;}
 				
 			/* Drop positions */
 			.flexigrid span.cdropleft,
