@@ -224,7 +224,7 @@
 		.flexigrid div.pDiv div.pDiv2:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
 		.flexigrid div.pDiv div.pDiv2{display:block;float:none;width:auto;margin:0;padding:3px;}
 		.flexigrid div.pDiv div.pButton:hover,
-		.flexigrid div.pDiv div.pButton.pBtnOver{width:22px;height:22px;border:0;}
+		.flexigrid div.pDiv div.pButton.pBtnOver{width:22px !important;height:22px !important;border:0 !important;}
 		.flexigrid div.pDiv div.pButton:hover span,
 		.flexigrid div.pDiv div.pButton.pBtnOver span{border:0;width:20px;height:20px;}
 				
@@ -241,20 +241,20 @@
 			.flexigrid .pLast,
 			.flexigrid span.cdropleft,
 			.flexigrid div.hDiv span.cdropright,
-			.flexigrid .pSearch{background:url(/static/microsites/images/microsites/bt_dataTable.png) no-repeat;}
+			.flexigrid .pSearch{background:url(/static/microsites/images/microsites/bt_dataTable.png) no-repeat !important;}
 
-			.flexigrid .pFirst{background-position:0 0;}
-			.flexigrid .pFirst:hover{background-position:0 -22px;}
+			.flexigrid .pFirst{background-position:0 0 !important;}
+			.flexigrid .pFirst:hover{background-position:0 -22px !important;}
 			.flexigrid .pPrev,
-			.flexigrid span.cdropleft{background-position:0 -44px;}
-			.flexigrid .pPrev:hover{background-position:0 -66px;}
+			.flexigrid span.cdropleft{background-position:0 -44px !important;}
+			.flexigrid .pPrev:hover{background-position:0 -66px !important;}
 			.flexigrid .pNext,
-			.flexigrid div.hDiv span.cdropright{background-position:0 -88px;}
-			.flexigrid .pNext:hover{background-position:0 -110px;}
-			.flexigrid .pLast{background-position:0 -132px;}
-			.flexigrid .pLast:hover{background-position:0 -154px;}
-			.flexigrid .pSearch{background-position:0 -175px;}
-			.flexigrid .pSearch:hover{background-position:0 -197px;}
+			.flexigrid div.hDiv span.cdropright{background-position:0 -88px !important;}
+			.flexigrid .pNext:hover{background-position:0 -110px !important;}
+			.flexigrid .pLast{background-position:0 -132px !important;}
+			.flexigrid .pLast:hover{background-position:0 -154px !important;}
+			.flexigrid .pSearch{background-position:0 -175px !important;}
+			.flexigrid .pSearch:hover{background-position:0 -197px !important;}
 
 		/* Search */
 		.flexigrid div.sDiv{border:0;border-top:1px solid #DADADA;background:#fafafa;background:rgba(250,250,250,.85);width:100%;position:absolute;bottom:32px;left:0;}
