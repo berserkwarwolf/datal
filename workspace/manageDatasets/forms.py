@@ -321,7 +321,7 @@ class WebserviceForm(DatasetForm):
                     for error in self.param_formset._errors:
                         self._errors.update(dict(error))
                     self._errors = ErrorDict(self._errors)
-        self.cleaned_data['params'] = [form.cleaned_data for form in self.param_formset]
+        self.cleaned_data['parameters'] = [form.cleaned_data for form in self.param_formset]
 
         return is_valid
 
