@@ -702,7 +702,7 @@ var DataTableCreation = DataTable.extend({
 											'</div>'+
 						      		'</div>'+
 											'<div id="id_buttons_' + lColId + '_' + lTableId + '" class="clearfix buttons DN">'+
-												'<a href="javascript:;" id="id_setFilterTooltipButton_' + lColId + '_' + lTableId + '" class="button green small FL" rel="#id_filter_' + lColId + '_' + lTableId + '" title="' + gettext( "APP-SET-TEXT" ) + '">' + gettext( "APP-SET-TEXT" ) + '</a>'+
+												'<a href="javascript:;" id="id_setFilterTooltipButton_' + lColId + '_' + lTableId + '" class="button primary small FL" rel="#id_filter_' + lColId + '_' + lTableId + '" title="' + gettext( "APP-SET-TEXT" ) + '">' + gettext( "APP-SET-TEXT" ) + '</a>'+
 												'<a href="javascript:;" id="id_cancelFilterTooltipButton_' + lColId + '_' + lTableId + '" class="button alpha small FL" rel="#id_filter_' + lColId + '_' + lTableId + '" title="' + gettext( "APP-CLEARFILTER-TEXT" ) + '">' + gettext( "APP-CLEARFILTER-TEXT" ) + '</a>'+
 											'</div>'+
 						      		'</div>'+
