@@ -234,8 +234,7 @@ def edit(request, dataset_revision_id=None):
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
     if request.method == 'GET':
-        status_options=auth_manager.get_allowed_actions()
-
+        status_options = auth_manager.get_allowed_actions()
         # Get data set and the right template depending on the collected type
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
@@ -262,11 +261,7 @@ def edit(request, dataset_revision_id=None):
         form = getattr(mod, className)(status_options=status_options)
 
         form.label_suffix = ''
-
-        # TODO: Review. Category was not loading options from form init.
         form.fields['category'].choices = category_choices
-
-        # TODO: Review. Initial values was not loading when creating a form instance in the standard way
         form.initial = initial_values
 
         return render_to_response(url, locals())
@@ -282,7 +277,6 @@ def edit(request, dataset_revision_id=None):
             dataset_revision = lifecycle.edit(collect_type=request.POST.get('collect_type'),
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
-            # TODO: Create a CreateDatasetResponse object
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
