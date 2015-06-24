@@ -59,6 +59,7 @@ tomcat_conf:
   file.managed:
     - name: /var/lib/tomcat7/conf/server.xml
     - source: salt://apps/aos/server.xml
+    - template: jinja
 
 tomcat-service:
   service.running:
