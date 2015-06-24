@@ -27,7 +27,6 @@ import re
 @privilege_required('workspace.can_access_admin')
 def action_info(request):
     account = request.auth_manager.get_account()
-    preferences = account.get_preferences()
     keys = [
         'account.name', 
         'account.link',
