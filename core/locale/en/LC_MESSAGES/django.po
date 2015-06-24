@@ -45,9 +45,6 @@ msgstr "Under review"
 msgid "MODEL_STATUS_PUBLISHED"
 msgstr "Published"
 
-msgid "MODEL_STATUS_UNPUBLISHED"
-msgstr "Unpublished"
-
 msgid "MODEL_STATUS_REJECTED"
 msgstr "Rejected"
 

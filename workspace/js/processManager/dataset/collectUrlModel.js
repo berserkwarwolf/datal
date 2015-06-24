@@ -18,7 +18,7 @@ var CollectUrlModel = StepModel.extend({
 				required: true,
 				msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
 			},{
-				pattern: /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/,
+				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}
 		],

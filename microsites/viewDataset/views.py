@@ -9,7 +9,7 @@ from microsites.helpers import set_dataset_impl_type_nice
 
 
 def action_view(request, dataset_id, slug):
-    """ show dataset """
+    """ Show dataset """
     logger = logging.getLogger(__name__)
     account = request.account
     preferences = request.preferences
@@ -30,11 +30,12 @@ def action_view(request, dataset_id, slug):
     dataset = DT(dataset_orig.last_published_revision.id, request.auth_manager.language)
     related_resources = DatasetDAO(resource=dataset_orig).query_related_resources()
 
-    can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
+    can_download = preferences['account_dataset_download'] == 'on' \
+                   or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
     
     tags = dataset.get_tags()
     sources = dataset.get_sources()
     impl_type_nice = set_dataset_impl_type_nice(dataset_orig.last_published_revision.impl_type)
-    permalink = 'http://%s%s' % ( preferences['account_domain'], dataset.permalink())
+    permalink = 'http://%s%s' % (preferences['account_domain'], dataset.permalink())
     
     return render_to_response('viewDataset/index.html', locals())

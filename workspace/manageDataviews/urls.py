@@ -20,5 +20,7 @@ urlpatterns = patterns('',
     url(r'^review/(?P<datastream_revision_id>\d+)/$', review, name='manageDataviews.review'),
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
     url(r'^invoke$', action_invoke, name='core.datastream_manager.views.action_invoke'),
+    url(r'^action_updategrid$', 'core.datastream_manager.views.action_updategrid', name='core.datastream_manager.action_updategrid'),
+    
     
 )

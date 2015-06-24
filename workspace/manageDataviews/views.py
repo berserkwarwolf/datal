@@ -39,11 +39,12 @@ def view(request, revision_id):
     return render_to_response('viewDataStream/index.html', locals())
 
 @login_required
-@requires_any_dataset() #account must have almost one dataset
+# quitarlo por que ya se maneja dentro @requires_any_dataset() #account must have almost one dataset
 @require_privilege("workspace.can_query_datastream")
 @require_GET
 def list(request):
     """ list all dataviews """
+
     resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDataviews/noResults.html', locals())

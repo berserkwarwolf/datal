@@ -11,7 +11,6 @@ class StatusChoices():
     PENDING_REVIEW = 1
     UNDER_REVIEW = 2
     PUBLISHED = 3
-    UNPUBLISHED = 4
     REJECTED = 5
     APPROVED = 6
 
@@ -35,7 +34,6 @@ STATUS_CHOICES = (
     ,(StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'))
     ,(StatusChoices.UNDER_REVIEW,  ugettext_lazy('MODEL_STATUS_UNDER_REVIEW'))
     ,(StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED'))
-    ,(StatusChoices.UNPUBLISHED,  ugettext_lazy('MODEL_STATUS_UNPUBLISHED'))
     ,(StatusChoices.REJECTED,  ugettext_lazy('MODEL_STATUS_REJECTED'))
     ,(StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
 )
@@ -43,7 +41,6 @@ VALID_STATUS_CHOICES = (
      (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT'))
     ,(StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'))
     ,(StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED'))
-    ,(StatusChoices.UNPUBLISHED,  ugettext_lazy('MODEL_STATUS_UNPUBLISHED'))
     ,(StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
 )
 

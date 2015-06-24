@@ -163,7 +163,7 @@ class DatasetForm(forms.Form):
 
         super(DatasetForm, self).__init__(data, *args)
 
-        self.fields['status'].choices = kwargs.get('status_choices', choices.VALID_STATUS_CHOICES)
+        self.fields['status'].choices = kwargs.get('status_options', choices.VALID_STATUS_CHOICES)
         self.fields['impl_type'].choices = kwargs.get('impl_type_choices', choices.SOURCE_IMPLEMENTATION_CHOICES)
 
         account_id = kwargs.get('account_id')
@@ -321,7 +321,7 @@ class WebserviceForm(DatasetForm):
                     for error in self.param_formset._errors:
                         self._errors.update(dict(error))
                     self._errors = ErrorDict(self._errors)
-        self.cleaned_data['params'] = [form.cleaned_data for form in self.param_formset]
+        self.cleaned_data['parameters'] = [form.cleaned_data for form in self.param_formset]
 
         return is_valid
 

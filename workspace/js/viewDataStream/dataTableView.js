@@ -291,7 +291,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/streams/action_updategrid',
+			url: '/dataviews/action_updategrid',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
