@@ -4,11 +4,24 @@
     "model": "core.account", 
     "fields": {
         "status": 1, 
-        "name": "Gobierno de Chile",
+        "name": "Ciudad Abierta",
         "parent": null, 
         "level": 1,
         "created_at": "2014-08-26T00:00:00", 
         "expires_at": "2014-08-26T00:00:00", 
+        "meta_data": ""
+    }
+},
+{
+    "pk": 2,
+    "model": "core.account",
+    "fields": {
+        "status": 1,
+        "name": "Open City",
+        "parent": null,
+        "level": 1,
+        "created_at": "2014-08-26T00:00:00",
+        "expires_at": "2014-08-26T00:00:00",
         "meta_data": ""
     }
 }
