@@ -133,7 +133,7 @@ var CollectWebserviceModel = StepModel.extend({
 		}
 
 		// Params
-		var $args = $parsedXML.find('fields > *'),
+		var $args = $parsedXML.find('args > *'),
 			params = [];
 
 		$args.each(function(){

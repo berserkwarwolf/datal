@@ -57,7 +57,6 @@ class RESTImplBuilder(DefaultImplBuilder):
         signature = self.fields.get('signature')
 
         impl_details = '<wsOperation useCache="%s"><pathToHeaders>%s</pathToHeaders><pathToData>%s</pathToData>' % (useCache, path_to_headers, path_to_data)
-        impl_details += '<args></args>' #TODO: Not implemented
 
         # uriSignatures
         if token != "" or algorithm != "":
@@ -71,12 +70,12 @@ class RESTImplBuilder(DefaultImplBuilder):
             impl_details += '<uriSignatures/>'
 
         if parameters and len(parameters) > 0:
-            impl_details += '<fields>'
+            impl_details += '<args>'
             for argue in parameters:
                 impl_details += '<%s editable="%s">%s</%s>' % (argue['name'], argue['editable'], argue['default_value'], argue['name'])
-            impl_details += '</fields>'
+            impl_details += '</args>'
         else:
-            impl_details += "<fields/>"
+            impl_details += "<args/>"
 
         # user and pass
         if username != "" or password != "":
