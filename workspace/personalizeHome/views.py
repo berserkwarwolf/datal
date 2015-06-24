@@ -21,9 +21,8 @@ import json
 @csrf_exempt
 def load(request):
     auth_manager = request.auth_manager
-    account = request.auth_manager.get_account()
-    preferences = account.get_preferences()
-    jsonContent = preferences["account_home"]
+    preference = request.preferences
+    jsonContent = preference["account_home"]
     home_tab = True
     return render_to_response('personalizeHome/index.html/', locals())
 
