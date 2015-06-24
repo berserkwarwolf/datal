@@ -24,7 +24,11 @@ def action_download(request, dataset_id, slug):
         if dataset.end_point[:7] != "file://":
             return HttpResponse("No downloadable file!")
 
-        url = active_datastore.build_url(request.bucket_name, dataset.end_point.replace("file://", ""), {'response-content-disposition': 'attachment; filename={0}'.format(filename)})
+        url = active_datastore.build_url(
+            request.bucket_name,
+            dataset.end_point.replace("file://", ""),
+            {'response-content-disposition': 'attachment; filename={0}'.format(filename)}
+        )
                 
         content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(dataset.impl_type))
         redirect = HttpResponse(status=302, mimetype=content_type)

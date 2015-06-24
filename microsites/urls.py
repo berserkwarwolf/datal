@@ -33,8 +33,6 @@ urlpatterns = patterns('',
 
     (r'^datasets/', include('microsites.viewDataset.urls')),
 
-
-
     (r'^search/', include('microsites.search.urls')),
     (r'^search$', include('microsites.search.urls')),
     url(r'^developers/$', 'core.developer_manager.views.action_query', name='developer_manager.action_query'),
