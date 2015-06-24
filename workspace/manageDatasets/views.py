@@ -234,8 +234,7 @@ def edit(request, dataset_revision_id=None):
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
     if request.method == 'GET':
-        status_options=auth_manager.get_allowed_actions()
-
+        status_options = auth_manager.get_allowed_actions()
         # Get data set and the right template depending on the collected type
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
