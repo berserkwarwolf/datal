@@ -22,7 +22,7 @@ import json
 def load(request):
     auth_manager = request.auth_manager
     preference = request.preferences
-    stats = request.stats
+    stats = request.stats #TODO this must be loaded at context_procesor but it's not working 
     jsonContent = preference["account_home"]
     home_tab = True
     return render_to_response('personalizeHome/index.html/', locals())
