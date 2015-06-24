@@ -29,8 +29,13 @@ urlpatterns = patterns('',
     url(r'^recovery/$', 'workspace.accounts.views.recovery', name='accounts.recovery'),
     url(r'^password_recovery/$', 'workspace.accounts.views.password_recovery', name='accounts.password_recovery'),
     url(r'^datasets/', include('workspace.manageDatasets.urls')),
+
+    #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
+    url(r'^streams/', include('workspace.manageDataviews.urls')),
+    
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
+   
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
     (r'^accounts/', include('workspace.accounts.urls')),
     (r'^tag_manager/', include('workspace.tag_manager.urls')),
