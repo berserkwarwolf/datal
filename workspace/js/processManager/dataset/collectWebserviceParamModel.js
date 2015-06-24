@@ -1,13 +1,13 @@
 var CollectWebserviceParamModel = Backbone.Model.extend({
 	
 	defaults: {
-		param_name: "",
+		name: "",
 		default_value: "",
-		enable_editable: ""
+		editable: false
 	},
 
 	validation: {
-		param_name:
+		name:
 		{
 			required: true,
 			msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
