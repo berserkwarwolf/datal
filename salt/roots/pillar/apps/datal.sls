@@ -17,6 +17,7 @@ application:
       microsites: 'microsites.dev:8080'
       workspace: 'workspace.dev:8080'
       api: 'api.dev:8080'
+      datastore: 'datastore.dev:8080'
       
 
 virtualenv:
