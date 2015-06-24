@@ -185,10 +185,17 @@ def action_update_list(request):
                                                                      order_type = order_type,
                                                                      account_id = account.id)
 
-        paginator = Paginator(results, 25)
+        # manual temporary fix for indextank fails
+        results2 = []
+        for r in results:
+            if r['category'] in categories or categories==[]:
+                results2.append(r)
+
+            
+        paginator = Paginator(results2, 25)
 
         if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(results)
+            add_domains_to_permalinks(results2)
 
         response = {"number_of_pages": paginator.num_pages,
                      "errors": [],
@@ -200,7 +207,7 @@ def action_update_list(request):
                      "revisions": []
                    }
 
-    response["results_dbg"] = results
+    response["results_dbg"] = results2
     response["categories_asked_dbg"] = categories
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
 
