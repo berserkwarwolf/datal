@@ -45,9 +45,6 @@ msgstr "Bajo revisión"
 msgid "MODEL_STATUS_PUBLISHED"
 msgstr "Publicado"
 
-msgid "MODEL_STATUS_UNPUBLISHED"
-msgstr "No Publicado"
-
 msgid "MODEL_STATUS_REJECTED"
 msgstr "Rechazado"
 

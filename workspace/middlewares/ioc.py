@@ -40,7 +40,7 @@ class DependenciesInjector(object):
         request.stats['my_total_visualizations'] = request.user.get_total_visualizations()
 
         # Stats por cuenta
-        request.stats['acount_total_datasets'] = request.account.get_total_datasets()
+        request.stats['account_total_datasets'] = request.account.get_total_datasets()
         request.stats['account_total_datastreams'] = request.account.get_total_datastreams()
         request.stats['my_total_dashboards'] = request.account.get_total_dashboards()
         request.stats['my_total_visualizations'] = request.account.get_total_visualizations()

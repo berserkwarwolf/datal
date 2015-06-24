@@ -74,13 +74,13 @@ var CollectWebserviceParamsView = Backbone.View.extend({
 	},
 
 	onAddParamButtonClicked:function(){
-		var param_name = $('#id_param_name').val(),
+		var name = $('#id_param_name').val(),
 				default_value = $('#id_default_value').val(),
-				enable_editable = $('#id_enable_editable').is(':checked');
+				editable = $('#id_enable_editable').is(':checked');
 
-		this.model.set('param_name', param_name);
+		this.model.set('name', name);
 		this.model.set('default_value', default_value);
-		this.model.set('enable_editable', enable_editable);
+		this.model.set('editable', editable);
 		
 		if(this.model.isValid(true)){
 			this.collection.add(this.model.toJSON());

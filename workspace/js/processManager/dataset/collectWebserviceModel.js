@@ -83,7 +83,7 @@ var CollectWebserviceModel = StepModel.extend({
 		output.license_url = $.trim( this.get('license_url') );
 		output.frequency = $.trim( this.get('frequency') );
 		output.collect_type = this.get('collect_type');
-		output.params = $.param( this.get('params') );
+		output.params = this.get('params');
 
 		// Check if license is "other"
 		if( output.license_url == 'other' ){
@@ -138,19 +138,19 @@ var CollectWebserviceModel = StepModel.extend({
 
 		$args.each(function(){
 			
-			var param_name = this.nodeName,
+			var name = this.nodeName,
 				element = $(this),
 				default_value = element.text(),
-				enable_editable = false;
+				editable = false;
 
 			if(typeof element.attr('editable') != "undefined" && element.attr('editable') != "false"){
-				enable_editable = true;
+				editable = true;
 			}
 
 			params.push({
-				param_name: param_name,
+				name: name,
 				default_value: default_value,
-				enable_editable: enable_editable
+				editable: editable
 			});
 
 		});
