@@ -6,9 +6,12 @@ remove_old_indextank:
 maven:
   pkg:
     - installed
-git:
+
+git_service:
   pkg:
+    - name: git
     - installed
+
 python-git:
   pkg:
     - installed
