@@ -296,7 +296,7 @@
    "model": "core.preference",
    "fields": {
        "account": 2,
-       "value": "microsite.dev:8080",
+       "value": "en.microsite.dev:8080",
        "key": "account.domain"
    }
 },

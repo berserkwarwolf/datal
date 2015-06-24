@@ -116,7 +116,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
     },
 
     closeOverlay: function() {
-        $("#ajax_loading_overlay").hide();
+        $('.loading').hide();
         this.$el.data('overlay').close();
     }
 
