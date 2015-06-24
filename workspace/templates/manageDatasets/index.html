@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags dataset_tags%}
 
 {% block meta %}
 
@@ -27,7 +27,7 @@
 <script language="javascript" src="/js_workspace/manageDatasets/filterItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/filtersCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDataviews/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/activeFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/inactiveFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/resourceItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -89,6 +89,8 @@
 {% block bottom_js %}
 <script type="text/javascript">
   $(document).ready(function(){
+    var filtersCollection = {{ my_filters|jsonify }};
+
     var manageDatasetsView =  new ManageDatasetsView({
       datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %}
     });

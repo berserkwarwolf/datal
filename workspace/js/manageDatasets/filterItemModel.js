@@ -2,7 +2,8 @@ var FilterItemModel = Backbone.Model.extend({
 
     defaults:{
         filter_name: "",
-        filter_class: ""
+        filter_class: "",
+        active: false
     }
 
 });

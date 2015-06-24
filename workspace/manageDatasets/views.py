@@ -65,6 +65,10 @@ def list(request):
         return render_to_response('manageDatasets/noResults.html', locals())
 
     filters = remove_duplicated_filters(resources)
+
+    my_filters = {k:[valor for valor in v] for k,v in filters.items()}
+    logger.error(my_filters)
+
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
     return render_to_response('manageDatasets/index.html', locals())
