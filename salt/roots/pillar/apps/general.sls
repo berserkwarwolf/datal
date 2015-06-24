@@ -33,3 +33,9 @@ datastore:
     remote_base_folder: datastore/resources/
     local_tmp_folder: datastore/tmp/
     public_base_url: 'http://datastore.dev/resources'
+
+domains:
+  microsites: 'microsites.dev'
+  workspace: 'workspace.dev'
+  api: 'api.dev'
+  admin: 'admin.dev'
