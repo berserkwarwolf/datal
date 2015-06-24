@@ -9,5 +9,6 @@ datal_user:
     - fullname: {{ pillar['system']['user'] }}
     - shell: /bin/bash
     - password: {{ pillar['system']['user_password_hash'] }}
+    - home: {{ pillar['system']['home'] }}
     - groups:
       - {{ pillar['system']['group'] }}

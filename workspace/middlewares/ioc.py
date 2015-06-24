@@ -29,8 +29,6 @@ class DependenciesInjector(object):
         return None
 
     def read_stats(self, request):
-        user_id = request.auth_manager.id
-        c = Cache(db=0)
         request.stats = {}
 
         # Stats por usuario
