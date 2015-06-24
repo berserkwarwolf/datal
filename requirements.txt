@@ -41,5 +41,5 @@ uWSGI==2.0.10
 Werkzeug==0.10.4
 zope.interface==4.1.1
 python-sftp-client==0.2
--e git+https://github.com/flaptor/indextank-py.git#egg=indextank
 django-post-office==1.1.2
+django-haystack==2.1
