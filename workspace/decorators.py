@@ -13,8 +13,6 @@ from workspace.daos.datastreams import DataStreamDBDAO
 def require_child_accepted(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))
     def _wrapped_view(request, *args, **kwargs):
-
-
         return view_func(request, *args, **kwargs)
 
     return _wrapped_view
