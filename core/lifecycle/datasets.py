@@ -2,7 +2,7 @@
 from django.db.models import F, Max
 from django.db import transaction
 from core.builders.datasets import DatasetImplBuilderWrapper
-from core.choices import ActionStreams, StatusChoices
+from core.choices import ActionStreams
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
@@ -115,7 +115,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         
         self._update_last_revisions()
         
-       	search_dao = DatasetSearchDAOFactory().create()
+        search_dao = DatasetSearchDAOFactory().create()
         search_dao.add(self.dataset_revision)
 
         self._log_activity(ActionStreams.PUBLISH)
@@ -135,6 +135,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 except:
                     publish_fail.append(datastream_revision)
 
+            if publish_fail:
+                raise ChildNotApprovedException(publish_fail, '')
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
