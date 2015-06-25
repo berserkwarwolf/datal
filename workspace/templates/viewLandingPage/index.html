@@ -62,7 +62,7 @@
 			</div>
 		</section>
 		
-		{% if stats.my_total_datasets != 0 %}
+		{% if stats.account_total_datasets != 0 %}
 		<!-- Numbers -->
 		<section class="box numbers">
 			<header class="clearfix">
@@ -77,41 +77,41 @@
 						<tr>
 							<td class="data">
 								<i class="icon-resources dataset"></i>
-								<strong>{{stats.my_total_datasets}}</strong>
+								<strong>{{stats.account_total_datasets}}</strong>
 								{% trans "APP-DATASETS-TEXT" %}
 							</td>
 							<td class="bar">
-								<div><div style="width:{{stats.my_total_perc_datasets}}%;"></div></div>
+								<div><div style="width:{{stats.account_total_perc_datasets}}%;"></div></div>
 							</td>
 						</tr>
 						<tr>
 							<td class="data">
 								<i class="icon-resources dataview"></i>
-								<strong>{{stats.my_total_datastreams}}</strong>
+								<strong>{{stats.account_total_datastreams}}</strong>
 								{% trans "APP-DATAVIEWS-TEXT" %}
 							</td>
 							<td class="bar">
-								<div><div style="width:{{stats.my_total_perc_datastreams}}%;"></div></div>
+								<div><div style="width:{{stats.account_total_perc_datastreams}}%;"></div></div>
 							</td>
 						</tr>
 						<tr style="display:none;">
 							<td class="data">
 								<i class="icon-resources visualization"></i>
-								<strong>{{stats.my_total_visualizations}}</strong>
+								<strong>{{stats.account_total_visualizations}}</strong>
 								{% trans "APP-VISUALIZATIONS-TEXT" %}
 							</td>
 							<td class="bar">
-								<div><div style="width:{{stats.my_total_perc_visualizations}}%;"></div></div>
+								<div><div style="width:{{stats.account_total_perc_visualizations}}%;"></div></div>
 							</td>
 						</tr>
 						<tr style="display:none;">
 							<td class="data">
 								<i class="icon-resources dashboard"></i>
-								<strong>{{stats.my_total_dashboards}}</strong>
+								<strong>{{stats.account_total_dashboards}}</strong>
 								{% trans "APP-DASHBOARDS-TEXT" %}
 							</td>
 							<td class="bar">
-								<div><div style="width:{{stats.my_total_perc_dashboards}}%;"></div></div>
+								<div><div style="width:{{stats.account_total_perc_dashboards}}%;"></div></div>
 							</td>
 						</tr>
 					</tbody>
