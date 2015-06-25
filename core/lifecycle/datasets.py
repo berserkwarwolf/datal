@@ -269,8 +269,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         if file_data is not None:
             fields['file_size'] = file_data.size
             fields['file_name'] = file_data.name
-            fields['end_point'] = 'file://' + active_datastore.create(self.user.account.id, self.user.id,
-                                                                      settings.AWS_BUCKET_NAME, file_data)
+            fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data,
+                                                                      self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:
