@@ -98,10 +98,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self.datastream_revision.status = status
         self.datastream_revision.save()
 
+        self._update_last_revisions()
+        
         search_dao = DatastreamSearchDAOFactory().create()
         search_dao.add(self.datastream_revision)
-        
-        self._update_last_revisions()
 
         self._log_activity(ActionStreams.PUBLISH)
 

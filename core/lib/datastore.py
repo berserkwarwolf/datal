@@ -59,23 +59,24 @@ class s3(Datastore):
     def build_url(self, **kwargs):
         pass
 
-    def create(self, account_id, user_id, bucket_name, file_data):
+    def create(self, bucket_name, file_data, account_id, user_id):
         """
         Crea un archivo en S3 dentro de un bucket. La ruta hacia el archivo se genera dando vuelta los ids de la
         cuenta y el usuario. El nombre del archivo con UUID
         """
         logger = logging.getLogger(__name__)
-            
-        try:
-            end_point = "%s/%s/%d" %(str(account_id)[::-1], str(user_id)[::-1], UUID())
-            self._save(bucket_name, end_point, file_data)
-            logger.error('S3 saved to: %s ' % end_point) 
-            
-            return end_point
-        except Exception, e:
-            logger.error('S3CreateException: %s IN %s [%s, %s, %s]' % (str(e), end_point, account_id, user_id,
-                                                                       bucket_name))
-            raise S3CreateException(e)        
+        logger.info(bucket_name)
+        #try:
+        end_point = "%s/%s/%d" %(str(account_id)[::-1], str(user_id)[::-1], UUID())
+        self._save(bucket_name, end_point, file_data)
+
+        logger.error('S3 saved to: %s ' % end_point)
+
+        return end_point
+        #except Exception, e:
+        #    logger.error('S3CreateException: %s IN %s [%s, %s, %s]' % (str(e), end_point, account_id, user_id,
+        #                                                               bucket_name))
+        #    raise S3CreateException(e)
 
     def generate_url(self, bucket_name, **kwargs):
         """ Genera una url para poder acceder a un archivo desde afuera """
