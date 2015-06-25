@@ -56,6 +56,14 @@ class VisualizationRequiredException(LifeCycleException):
     title = 'Visualization not found'
 
 
+class ChildNotApprovedException(LifeCycleException):
+    title = 'Child not approved'
+
+    def __init__(self, failed_revisions, description=''):
+        self.extras = dict(failed_revisions=failed_revisions)
+        super(ChildNotApprovedException, self).__init__(description)
+
+
 class IlegalStateException(LifeCycleException):
     title = 'Ilegal state'
 
