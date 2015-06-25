@@ -834,3 +834,6 @@ msgstr "Error al eliminar la revisión de la vista."
 
 msgid "APP-DATASTREAM-SAVESUCCESS-TEXT"
 msgstr "Vista guardada exitosamente."
+
+msgid "CREATE-STEP4-TAGTITLE"
+msgstr "Etiquetas para esta Vista"

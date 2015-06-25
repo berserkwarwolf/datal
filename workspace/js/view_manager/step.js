@@ -1241,7 +1241,7 @@ var Step3 = Step.extend({
 		var contents 	= "";
 
 		if( $lTags.find('.tag').size() > 0 ){
-			contents = '<h5>Tags for this DS:</h5>';
+			contents = '<div class="title">' + gettext( "CREATE-STEP4-TAGTITLE" ) + '</div>';
 			contents += $lTags.html();
 		}
 
