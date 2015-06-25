@@ -1467,24 +1467,24 @@ var Step3 = Step.extend({
         });
     },
     save : function(){
-        // this.attributes.url = '/streams/edit_datastream_selection';
+        // this.attributes.url = '/dataviews/edit_datastream_selection';
         this.attributes.url = '/dataviews/create';
         this.onSaveButtonClicked();
     },
     // saveDraft : function(){
-    //     this.attributes.url = '/streams/save_datastream_as_draft';
+    //     this.attributes.url = '/dataviews/save_datastream_as_draft';
     //     this.onSaveButtonClicked();
     // },
     // saveReview : function(){
-    //     this.attributes.url = '/streams/save_datastream_as_review';
+    //     this.attributes.url = '/dataviews/save_datastream_as_review';
     //     this.onSaveButtonClicked();
     // },
     // saveApproved : function(){
-    //     this.attributes.url = '/streams/save_datastream_as_approved';
+    //     this.attributes.url = '/dataviews/save_datastream_as_approved';
     //     this.onSaveButtonClicked();
     // },
     // savePublished : function(){
-    //     this.attributes.url = '/streams/save_datastream_as_published';
+    //     this.attributes.url = '/dataviews/save_datastream_as_published';
     //     this.onSaveButtonClicked();
     // },
     onSaveButtonClicked: function(){
@@ -1518,7 +1518,7 @@ var Step3 = Step.extend({
     },
     onSaveSuccess : function(pResponse){
         if(pResponse.status == 'ok'){
-            //window.location.replace('/streams/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
+            //window.location.replace('/dataviews/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
             window.location.replace('/dataviews/'+pResponse.datastream_revision_id);
         }
         else{
