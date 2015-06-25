@@ -126,10 +126,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id,
                                                                                 id=F('datastream__last_revision__id'))
-
+            publish_fail = list()
             for datastream_revision in datastream_revisions:
-                DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
-                    allowed_states=[StatusChoices.APPROVED])
+                try:
+                    DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
+                        allowed_states=[StatusChoices.APPROVED]
+                    )
+                except:
+                    publish_fail.append(datastream_revision)
+
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
