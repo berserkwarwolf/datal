@@ -2938,3 +2938,9 @@ msgstr "You can start from here!"
 
 msgid "APP-CREATE-FIRST-DATASET-TEXT"
 msgstr "In order to start using DATAL, create your first dataset."
+
+msgid "CHILD_NOT_ACCEPTED-1"
+msgstr "It was not posible to publish this Dataset, because you have unapproved Data Views. Check a list of the associated Data Views "
+
+msgid "CHILD_NOT_ACCEPTED-2"
+msgstr "here"

@@ -141,13 +141,27 @@ var FinishView = StepView.extend({
 
 	onSaveError: function(response){
 
+		// Generic error
+		var errorText = gettext('ERROR-LOADING-DATASET');
+
+		// Try catch JSON, to prevent failures
+		var errorJSON;
+		try {
+			errorJSON = $.parseJSON(response.responseText);
+			if( !_.isUndefined( errorJSON.description) ){
+				errorText = errorJSON.description;
+			}
+		} catch (e) {
+			// DO NOTHING
+		}
+
 		// Hide Loadings
 		$("#ajax_loading_overlay").hide();
 
 		// Set error Message
 		$.gritter.add({
 			title: 'Error',
-			text: gettext('ERROR-LOADING-DATASET'),
+			text: errorText,
 			image: '/static/workspace/images/common/ic_validationError32.png',
 			sticky: true,
 			time: ''
@@ -172,15 +186,15 @@ var FinishView = StepView.extend({
 	},
 
 	initSourceList: function(){
-	   var sourceModel = new SourceModel();
-            this.sources = new Sources(this.model.get('sources'));
-	   new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
+		 var sourceModel = new SourceModel();
+						this.sources = new Sources(this.model.get('sources'));
+		 new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
 	 },
 
 	 initTagList: function(){
-            var tagModel = new TagModel();
-            this.tags = new Tags(this.model.get('tags'));
-            new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
+						var tagModel = new TagModel();
+						this.tags = new Tags(this.model.get('tags'));
+						new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
 	 }
 
 });

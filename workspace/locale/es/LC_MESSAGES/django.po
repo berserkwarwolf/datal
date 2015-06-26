@@ -2928,3 +2928,9 @@ msgstr "Puede comenzar desde aquí!"
 
 msgid "APP-CREATE-FIRST-DATASET-TEXT"
 msgstr "Para empezar a utilizar DATAL, cree su primer conjunto de datos."
+
+msgid "CHILD_NOT_ACCEPTED-1"
+msgstr "No es posible publicar este conjunto de datos, debido a que tiene vistas asociadas sin aprobar. Revise la lista de vistas asociadas "
+
+msgid "CHILD_NOT_ACCEPTED-2"
+msgstr "aquí"

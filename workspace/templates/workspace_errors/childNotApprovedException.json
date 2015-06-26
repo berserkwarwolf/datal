@@ -1,6 +1,6 @@
 {
     "status": false,
     "error": "{{error_title}}",
-    "description": "{% trans 'CHILD_NOT_ACCEPTED' %}",
+    "description": "{% trans 'CHILD_NOT_ACCEPTED-1' %} <a href='/dataviews'>{% trans 'CHILD_NOT_ACCEPTED-2' %}</a>",
     "extras": {{ extras|safe }}
 }
