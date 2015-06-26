@@ -42,6 +42,7 @@ SECRET_KEY = ''
 INSTALLED_APPS = (
     'sass_processor',
     'south',
+    'haystack', # motor de indexed y busqueda
     'django.contrib.staticfiles',
     'django_extensions',
     'core',
@@ -180,6 +181,16 @@ BLOCKED_USERNAMES               = ['accounts', 'account', 'blog', 'contact', 'cs
 
 #SEARCHIFY = {'api_url': 'http://:11111@11111.api.searchify.com', 'index': 'TEST'}
 SEARCHIFY = {'api_url': 'http://:aa@localhost:20220', 'index': 'idx'}
+
+### Haystack
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.elasticsearch_backend.ElasticsearchSearchEngine',
+        'URL': 'http://127.0.0.1:9200/',
+        'INDEX_NAME': 'haystack',
+    },
+}
+
 
 # Settings Keys
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'

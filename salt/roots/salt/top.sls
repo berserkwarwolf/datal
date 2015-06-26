@@ -15,3 +15,5 @@ base:
     - apps.datal.core
     - apps.datastore.core
     - core.haystack
+    # solo para la transición 
+    - core.indextank

@@ -44,3 +44,4 @@ python-sftp-client==0.2
 django-post-office==1.1.2
 django-haystack==2.1
 -e git+https://github.com/flaptor/indextank-py.git#egg=indextank
+pyelasticsearch

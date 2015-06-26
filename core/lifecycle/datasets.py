@@ -27,7 +27,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
 
-	#self.logger = logging.getLogger(__name__)
+	self.logger = logging.getLogger(__name__)
 
         try:
             if type(resource) == Dataset:
@@ -115,6 +115,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         
         self._update_last_revisions()
         
+	self.logger.info("voy a indexar")
        	search_dao = DatasetSearchDAOFactory().create()
         search_dao.add(self.dataset_revision)
 

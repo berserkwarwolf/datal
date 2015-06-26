@@ -9,6 +9,9 @@ git:
 python-git:
   pkg:
     - installed
+python-dev:
+  pkg:
+    - installed
 
 elasticsearch-ubuntu:
   pkgrepo.managed:
