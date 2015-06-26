@@ -104,7 +104,7 @@ var CreateDatastreamFileManager = CreateDatastreamManager.extend({
     },
     onFileUploadComplete: function(event, data) {
         var response = JSON.parse( $( 'pre', data.result ).text() );
-        window.location.replace('/streams/action_insert?dataset_revision_id=' + response.dataset_revision_id);
+        window.location.replace('/dataviews/action_insert?dataset_revision_id=' + response.dataset_revision_id);
         $('#id_create_datastream_overlay').data('overlay').close();
     },
     saveAs: function(url) {
@@ -184,7 +184,7 @@ var CreateDatastreamURLManager = CreateDatastreamManager.extend({
         this.setImplementationTypeByMimeType(pResponse.mimetype);
         var self = this;
         $.ajax({url: this.attributes.save_url, type:'POST', data: this.attributes.data, success: function(msg) {
-            window.location.replace('/streams/action_insert?dataset_revision_id=' + msg.dataset_revision_id)
+            window.location.replace('/dataviews/action_insert?dataset_revision_id=' + msg.dataset_revision_id)
             $('#id_create_datastream_overlay').data('overlay').close();
         },
         error: function(response) {
@@ -499,7 +499,7 @@ var DatasetCreateWebserviceManager = CreateDatastreamManager.extend({
                 $("#ajax_loading_overlay").hide();
                 $('#id_create_dataset_form_overlay').data('overlay').close();
                 if(self.attributes.is_enhance){
-                    window.location.replace('/streams/action_insert?dataset_revision_id=' + msg.dataset_revision_id, '_blank')
+                    window.location.replace('/dataviews/action_insert?dataset_revision_id=' + msg.dataset_revision_id, '_blank')
                     self.attributes.is_enhance = false;
                 }else{
                     jQuery.TwitterMessage( { type: 'success', message : msg.messages.join('. ') } );
@@ -524,7 +524,7 @@ var DatasetCreateWebserviceManager = CreateDatastreamManager.extend({
                 $("#ajax_loading_overlay").hide();
                 $('#id_create_dataset_form_overlay').data('overlay').close();
                 if(self.attributes.is_enhance){
-                    window.location.replace('/streams/action_insert?dataset_revision_id=' + msg.dataset_revision_id, '_blank')
+                    window.location.replace('/dataviews/action_insert?dataset_revision_id=' + msg.dataset_revision_id, '_blank')
                     self.attributes.is_enhance = false;
                 }else{
                     jQuery.TwitterMessage( { type: 'success', message : msg.messages.join('. ') } );
@@ -599,7 +599,7 @@ var OverlayDatatableDatasetManager = DatatableManager.extend({
         var $Target = $(event.target);
 
         if($Target.hasClass('enhance')) {
-            window.location.replace('/streams/action_insert?dataset_revision_id=' + $Target.parents('tr').data('id'))
+            window.location.replace('/dataviews/action_insert?dataset_revision_id=' + $Target.parents('tr').data('id'))
         }
     },
     setSourceChoice: function(event, type) {

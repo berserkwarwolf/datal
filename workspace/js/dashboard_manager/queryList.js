@@ -1113,7 +1113,7 @@ function invokeDashboardDataService(pId, pEndPoint, pIndex){
     }
     else {
         var lDashboardDataserviceId = $Container.data("dashboard_dataservice_id");
-        var lUrl = '/streams/invoke';
+        var lUrl = '/dataviews/invoke';
         var lTo = pIndex;
 		var lData = 'datastream_revision_id=' + pId 
 				+ '&pIndex=' + pIndex 
@@ -1153,7 +1153,7 @@ function onSuccessDataServiceExecute(pResponse){
     var lTitle                          = $lDashboardDataServiceContainer.data('dataservice_title');
     var lDescription                    = $lDashboardDataServiceContainer.data('dataservice_description');
     var lParameters                     = $lDashboardDataServiceContainer.data('dataservice_parameters');
-    var lURL                            = '/streams/action_view?datastream_revision_id=' + lDataserviceId + lEndPoint;
+    var lURL                            = '/dataviews/action_view?datastream_revision_id=' + lDataserviceId + lEndPoint;
 
     // hiding the notification button
     $lDashboardDataServiceContainer.find('[id*=id_notificationMessage_]').html('').parent('[id*=id_notification_]').fadeOut();

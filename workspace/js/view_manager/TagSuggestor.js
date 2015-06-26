@@ -16,7 +16,7 @@ var TagSuggestor = Backbone.Model.extend({
 		this.attributes.text = $.trim(step0.attributes.$DataSourceContainer.text().replace(/<.*?>/g, ''));
 	},
 	getTagCloud : function(){
-		var lUrl 	= '/streams/action_get_tag_cloud';
+		var lUrl 	= '/dataviews/action_get_tag_cloud';
         var lData 	= 'text=' + $.URLEncode(this.attributes.text) + '&csrfmiddlewaretoken=' + csrfmiddlewaretoken;
         
 		$.ajax({

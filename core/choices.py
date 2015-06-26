@@ -31,24 +31,25 @@ class ActionStreams():
 
 # TODO: Create just one STATUS_CHOICES after we remove in a clean way UNDER_REVIEW and REJECTED choices
 STATUS_CHOICES = (
-     (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT'))
-    ,(StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'))
-    ,(StatusChoices.UNDER_REVIEW,  ugettext_lazy('MODEL_STATUS_UNDER_REVIEW'))
-    ,(StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED'))
-    ,(StatusChoices.UNPUBLISHED,  '')
-    ,(StatusChoices.REJECTED,  ugettext_lazy('MODEL_STATUS_REJECTED'))
-    ,(StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
+    (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
+    (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
+    (StatusChoices.UNDER_REVIEW,  ugettext_lazy('MODEL_STATUS_UNDER_REVIEW')),
+    (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
+    (StatusChoices.UNPUBLISHED,  ''),
+    (StatusChoices.REJECTED,  ugettext_lazy('MODEL_STATUS_REJECTED')),
+    (StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
 )
+
 VALID_STATUS_CHOICES = (
-     (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT'))
-    ,(StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW'))
-    ,(StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED'))
-    ,(StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
+     (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
+     (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
+     (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
+     (StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
 )
 
 LANGUAGE_CHOICES = (
-     ('en',  ugettext_lazy( 'MODEL-LANGUAJE-EN' ))
-    ,('es',  ugettext_lazy( 'MODEL-LANGUAJE-ES' ))
+     ('en',  ugettext_lazy( 'MODEL-LANGUAJE-EN' )),
+     ('es',  ugettext_lazy( 'MODEL-LANGUAJE-ES' ))
 )
 
 ODATA_LICENSES = (

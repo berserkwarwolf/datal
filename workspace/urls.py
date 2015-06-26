@@ -32,7 +32,6 @@ urlpatterns = patterns('',
 
     #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
-    url(r'^streams/', include('workspace.manageDataviews.urls')),
     
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
    
