@@ -8,6 +8,8 @@ from core import settings
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import CollectTypeChoices
+import logging
+
 
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
@@ -101,10 +103,17 @@ class DatasetSearchifyDAO():
     def __init__(self):
 
         self.search_index = SearchifyIndex()
+	self.logger = logging.getLogger(__name__)
+
         
     def add(self, dataset_revision):
         category = dataset_revision.category.categoryi18n_set.all()[0]
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision)
+
+
+	self.logger.info("Searchify ---------------------------------------")
+	self.logger.info(type(dataset_revision))
+	self.logger.info(category)
 
         # DS uses GUID, but here doesn't exists. We use ID
         text = [dataseti18n.title, dataseti18n.description, dataset_revision.user.nick, str(dataset_revision.dataset.guid)]
