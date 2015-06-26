@@ -130,12 +130,12 @@
 .step4 .dataStreamBox.errorFix h2{background:#fff url(/static/workspace/images/dashboardManager/dg_DSError.gif) repeat-x 0 bottom;}
 .step4 .gotosource{display:none;}
 .step4 .dataStreamBox h2 a:hover{text-decoration:none;cursor:default;}
-.step4 .tagsPreview h5{color:#ef7f10;padding:15px 0 6px;font-size:14px;font-weight:normal;}
+.step4 .tagsPreview .title{border-bottom:none;box-shadow:none;padding-left:0;}
 .step4 .tagsPreview p a{cursor:pointer;}
 .step4 .tagsPreview .tagsContent{padding:0 10px;}
 .step4 .tagsPreview .tagInner{height:20px;}
 .step4 .tagsPreview .tagsContent a{display:none;}
-.step4 .tag .tagTxt{border-right:1px solid #E2E0E0;-moz-border-radius:7px;-webkit-border-radius:7px;border-radius:7px;}
+.step4 .tag .tagTxt{border-right:1px solid #E2E0E0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 .step4 .dataStreamBox{height:192px;}
 .step4 .dataStreamBox h2 .txt .infoDS .dateDS{display:none;}
 .step4 p.tip{padding-top:15px;padding-bottom:0;}

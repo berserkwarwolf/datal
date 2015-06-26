@@ -851,3 +851,6 @@ msgstr "Error on deleteing the datastream revision."
 
 msgid "APP-DATASTREAM-SAVESUCCESS-TEXT"
 msgstr "Data View saved successfully"
+
+msgid "CREATE-STEP4-TAGTITLE"
+msgstr "Tags for this data view"
