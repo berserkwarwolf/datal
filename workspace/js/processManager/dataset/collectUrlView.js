@@ -55,7 +55,11 @@ var CollectUrlView = StepView.extend({
 		this.previous();
 	},
 
-	onNextButtonClicked: function(){		
+	onNextButtonClicked: function(){
+
+		var end_point = $.trim( this.model.get('end_point') );
+		this.model.set('end_point', end_point);
+		
 		if(this.model.isValid(true)){
 
 			var self = this,
