@@ -11,15 +11,14 @@ from core.exceptions import DatasetNotFoundException, IlegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
-CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
-PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED]
+CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
+PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 UNPUBLISH_ALLOWED_STATES = [StatusChoices.PUBLISHED]
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
 ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-
 
 class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
@@ -113,11 +112,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = status
         self.dataset_revision.save()
-
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision)
-
+        
         self._update_last_revisions()
+        
+       	search_dao = DatasetSearchDAOFactory().create()
+        search_dao.add(self.dataset_revision)
 
         self._log_activity(ActionStreams.PUBLISH)
 
@@ -270,8 +269,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         if file_data is not None:
             fields['file_size'] = file_data.size
             fields['file_name'] = file_data.name
-            fields['end_point'] = 'file://' + active_datastore.create(self.user.account.id, self.user.id,
-                                                                      settings.AWS_BUCKET_NAME, file_data)
+            fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data,
+                                                                      self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.DRAFT:

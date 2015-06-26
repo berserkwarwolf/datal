@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from django import template
-from core.choices import *
+from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
 
 register = template.Library()
 
 @register.filter(name='status_str')
 def status_str(status):
-    return  unicode(STATUS_CHOICES[int(status)][1])
+    return unicode(STATUS_CHOICES[int(status)][1])
 
 @register.filter(name='type_str')
 def type_str(impl_type):

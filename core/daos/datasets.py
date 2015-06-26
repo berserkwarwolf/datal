@@ -109,9 +109,9 @@ class DatasetSearchifyDAO():
         # DS uses GUID, but here doesn't exists. We use ID
         text = [dataseti18n.title, dataseti18n.description, dataset_revision.user.nick, str(dataset_revision.dataset.guid)]
 
-        # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
-        tags = dataset_revision.tagdataset_set.all().values_list('tag__name')        
+        tags = dataset_revision.tagdataset_set.all().values_list('tag__name', flat=True)
         text.extend(tags)
+
         text = ' '.join(text)
 
         document = {

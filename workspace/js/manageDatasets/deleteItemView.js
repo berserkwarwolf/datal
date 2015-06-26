@@ -104,7 +104,7 @@ var DeleteItemView = Backbone.View.extend({
 	},
 
 	closeOverlay: function() {
-		$("#ajax_loading_overlay").hide();
+		this.parentView.hideLoading();
 		this.$el.data('overlay').close();
 	}
 });

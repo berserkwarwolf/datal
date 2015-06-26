@@ -18,5 +18,24 @@
         "valid": 1, 
         "name": ""
     }
+},{
+    "pk": 2,
+    "model": "core.application",
+    "fields": {
+        "category": "",
+        "account": 2,
+        "description": "",
+        "auth_key": "576bba0dd5a27df9aaac12d1d7ec25c8411fe29e",
+        "locale": "",
+        "created_at": "2015-06-03T16:36:48",
+        "expires_at": "2011-12-31T23:59:59",
+        "url": "",
+        "public_auth_key": "9d6508cced6919e1a132d47d9c85896132aaf516",
+        "user": 2,
+        "domains": "",
+        "type": "00",
+        "valid": 1,
+        "name": ""
+    }
 }
 ]

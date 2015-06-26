@@ -49,12 +49,14 @@ workspace_commons_xml:
   file.managed:
     - name: /var/lib/tomcat7/webapps/workspace/AgileOfficeServer/WEB-INF/conf/commons.xml
     - source: salt://apps/aos/commons.xml
+    - template: jinja
 
 microsites_commons_xml:
   file.managed:
     - name: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer/WEB-INF/conf/commons.xml
     - source: salt://apps/aos/commons.xml
-
+    - template: jinja
+    
 tomcat_conf:
   file.managed:
     - name: /var/lib/tomcat7/conf/server.xml

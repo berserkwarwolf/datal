@@ -848,3 +848,6 @@ msgstr "Delete Datastream"
 
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-ERROR-TEXT"
 msgstr "Error on deleteing the datastream revision."
+
+msgid "APP-DATASTREAM-SAVESUCCESS-TEXT"
+msgstr "Data View saved successfully"

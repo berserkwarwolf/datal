@@ -79,12 +79,12 @@
     </bean> 
     
     <bean id="fileStorage"
-       parent="SFTP">
+       parent="{% if pillar['datastore']['use'] == 'sftp' %}SFTP{% else %}S3{% endif %}">
        <property name="bucketName" value="${datasets.bucketname}" /> 
     </bean>    
     
     <bean id="tempStorage"
-       parent="SFTP">
+       parent="{% if pillar['datastore']['use'] == 'sftp' %}SFTP{% else %}S3{% endif %}">
        <property name="bucketName" value="${temporary.bucketname}" /> 
     </bean>  
     

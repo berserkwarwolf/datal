@@ -100,16 +100,25 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                         reset: true
                     });
 
-                    // Gritter OK
-                    // Here
-
-                    // Close Overlay
+                    $.gritter.add({
+                        title : gettext('APP-CHANGES-SAVED-TEXT'),
+                        text : gettext('APP-DATASTREAM-SAVESUCCESS-TEXT'),
+                        image : '/static/workspace/images/common/ic_validationOk32.png',
+                        sticky : false,
+                        time : 3500
+                    });
                     self.closeOverlay();
 
                 },
                 error: function(){
-                    // Gritter Error
-                    // Here
+                    $.gritter.add({
+                        title : gettext('APP-ERROR-TEXT'),
+                        text : gettext('APP-REQUEST-ERROR'),
+                        image : '/static/workspace/images/common/ic_validationError32.png',
+                        sticky : true,
+                        time : 3500
+                    });
+                    self.closeOverlay();
                 }
             });      
 

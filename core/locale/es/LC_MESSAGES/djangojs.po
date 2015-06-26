@@ -175,7 +175,7 @@ msgid "APP-VALUE-TEXT"
 msgstr "Valor"
 
 msgid "APP-SET-TEXT"
-msgstr "Setear"
+msgstr "Aceptar"
 
 msgid "APP-CLEARFILTER-TEXT"
 msgstr "Limpiar filtro"
