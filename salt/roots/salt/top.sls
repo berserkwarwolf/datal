@@ -9,6 +9,7 @@ base:
     - core.uwsgi
     - core.java
     - core.tomcat
+    - core.indextank
     - nginx.ng
     - core.selenium
     - apps.aos.core
@@ -16,4 +17,3 @@ base:
     - apps.datastore.core
     - core.haystack
     # solo para la transición 
-    - core.indextank
