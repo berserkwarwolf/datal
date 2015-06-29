@@ -13,7 +13,7 @@ from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-UNPUBLISH_ALLOWED_STATES = [StatusChoices.PUBLISHED]
+UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED]
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
 ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
@@ -26,8 +26,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
-
-	#self.logger = logging.getLogger(__name__)
 
         try:
             if type(resource) == Dataset:
