@@ -32,6 +32,9 @@ var CollectFileModel = StepModel.extend({
 			{
 				required: false
 			},{
+				pattern: /^(?:(ht|f|sf)tp(s?)\:\/\/)/,
+				msg: gettext('VALIDATE-PROTOCOLNOTALLOWED-TEXT')
+			},{
 				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}

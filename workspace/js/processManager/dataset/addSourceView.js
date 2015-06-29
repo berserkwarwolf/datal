@@ -54,8 +54,7 @@ var AddSourceView = Backbone.View.extend({
   onAddNewSourceButtonClicked:function(){
 
     var name = $('#id_name').val(),
-        url_source = $('#id_url_source').val(),
-        url = $.trim( url_source );
+        url = $.trim($('#id_url_source').val());
 
     this.model.set('name', name);
     this.model.set('url', url);
@@ -65,8 +64,7 @@ var AddSourceView = Backbone.View.extend({
       this.$el.hide();
       this.undelegateEvents();
     }
-
-    console.log(this.model.toJSON())
+    
   }
 
 });

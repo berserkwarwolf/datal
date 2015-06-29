@@ -520,6 +520,9 @@ msgstr "Corrija los errores en los campos antes de continuar."
 msgid "VALIDATE-URLNOTVALID-TEXT"
 msgstr "Ingrese una URL válida."
 
+msgid "VALIDATE-PROTOCOLNOTALLOWED-TEXT"
+msgstr "Ingrese un protocolo soportado (http:// https:// ftp:// ftps:// sftp:// sftps://)"
+
 msgid "VIEWDS-FLEXIGRID-ERRORMSG"
 msgstr "Error de conexión"
 
