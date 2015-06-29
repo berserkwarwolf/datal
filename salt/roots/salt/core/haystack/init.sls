@@ -27,11 +27,29 @@ elasticsearch-ubuntu:
     - name: elasticsearch
     - refresh: True
 
+#Instala elasticsearch, crea los init.d y lo mete en todos los rc
 elasticsearch:
   pkg:
     - installed
   cmd.run:
     - cwd: /
-    - name: update-rc.d elasticsearch defaults 95 10
+    - name: update-rc.d elasticsearch defaults 95 10 ; update-rc.d elasticsearch enable
 
+# no sé por qué no puede crear este directorio
+# aunque... al reiniciar se pierde
+/run/elasticsearch/:
+  file.directory:
+    - user: elasticsearch
+    - group: elasticsearch
+    - mode: 755
+    - makedirs: True
+
+#alias para facilitar el debug
+elasticsearch_alias:
+   file.managed:
+     - source: salt://core/haystack/.bash_aliases
+     - name: /home/vagrant/.bash_aliases 
+     - mode: 644
+     - user: vagrant
+     - group: vagrant
 
