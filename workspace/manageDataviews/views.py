@@ -79,7 +79,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('sort_by') == "title":
             sort_by ="datastreami18n__title"
         if bb_request.get('sort_by') == "dataset_title":
-            sort_by ="dataset__datasetrevision__dataseti18n__title"
+            sort_by ="dataset__last_revision__dataseti18n__title"
         if bb_request.get('sort_by') == "author":
             sort_by ="dataset__user__nick"
         if bb_request.get('order')=="desc":
