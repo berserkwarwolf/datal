@@ -238,15 +238,6 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if 'status' in fields.keys():
             form_status = fields.pop('status', None)
 
-        file_data = fields.get('file_data', None)
-        if file_data is not None:
-            fields['file_size'] = file_data.size
-            fields['file_name'] = file_data.name
-            fields['end_point'] = 'file://' + active_datastore.create(self.user.account.id, self.user.id,
-                                                                      settings.AWS_BUCKET_NAME, file_data)
-
-            changed_fields += ['file_size', 'file_name', 'end_point']
-
         if old_status == StatusChoices.DRAFT:
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
