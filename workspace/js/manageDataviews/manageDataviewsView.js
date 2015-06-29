@@ -1,5 +1,5 @@
 var ManageDataviewsView = Backbone.View.extend({
-    
+
     el: ".main-section",
 
     filters: null,
@@ -236,17 +236,18 @@ var ManageDataviewsView = Backbone.View.extend({
             columns: columns,
             emptyText: gettext('APP-NO-RESOURCES-ALERT-TEXT'),
         });
-        
+
         // Init Pagination
         this.paginator = new Backgrid.Extension.Paginator({
-            collection: this.listResources
+            collection: this.listResources,
+            goBackFirstOnSort: false // Default is true
         });
-        
+
         // Fetch List Resources
         this.listResources.fetch({
             reset: true
         });
-        
+
         // ListResources View
         this.listResourcesView = new ListResourcesView({
             resourceCollection: this.listResources,
