@@ -47,7 +47,7 @@ var CollectUrlView = StepView.extend({
 				self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
 			}
 		});
-		
+
 		return this;
 	},
 
@@ -59,7 +59,7 @@ var CollectUrlView = StepView.extend({
 
 		var end_point = $.trim( this.model.get('end_point') );
 		this.model.set('end_point', end_point);
-		
+
 		if(this.model.isValid(true)){
 
 			var self = this,
