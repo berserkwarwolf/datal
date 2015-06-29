@@ -105,7 +105,7 @@
             self._trigger('sourceSelected', pEvent);
 			
 			var l$Name = self.$SourceName;
-			var lUrl = self.$SourceUrl.val();
+			var lUrl = jQuery.trim( self.$SourceUrl.val() );
 			
 			//if(self.$SourceForm.valid()){
 				self._addSource(l$Name, lUrl, '', '');
