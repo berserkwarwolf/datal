@@ -1,4 +1,6 @@
-from django.conf import settings
+import logging
+import urllib
+
 from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.db.models import Count
@@ -11,15 +13,11 @@ from core.lib.datastore import *
 from core.cache import Cache
 from core.datastream_manager import forms
 from core.docs import DS
-from core.emitters import ExcelEmitter
-from core.engine import invoke, invoke_chart
-from core.helpers import jsonToGrid, Day, RequestProcessor, get_domain_with_protocol
+from core.engine import invoke
+from core.helpers import jsonToGrid, Day, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
-import urllib, urllib2
-import json
 from datetime import date, timedelta
-#import logging
 
 # used by all the apps
 @require_http_methods(["GET"])
@@ -33,7 +31,7 @@ def action_invoke(request):
             query['pLimit'] = limit
 
         ivk = invoke(query)
-        #Sometimes there is no answer. Maybe engine is down
+        # Sometimes there is no answer. Maybe engine is down
         if ivk is None:
             contents = '{"Error":"No invoke"}'
             typen = "json"
@@ -78,7 +76,11 @@ def action_download(request, id, slug):
     except:
         raise Http404
     else:
-        url = active_datastore.build_url(request.bucket_name, datastream.end_point.replace("file://", ""), {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))})
+        url = active_datastore.build_url(
+            request.bucket_name,
+            datastream.end_point.replace("file://", ""),
+            {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
+        )
         # type != impl_type [FIXED]
         # dataset.type = COLLECT_TYPE_CHOICES => 'SELF PUBLISH', 'URL', 'WEBSERVICE'
         # dataset_revision.impl_type = SOURCE_IMPLEMENTATION_CHOICES => 'HTML', 'SOAP/XML', 'DALLAS', 'XML'
@@ -126,10 +128,10 @@ def export_to(datastream_id, request, output):
 def action_legacy_embed(request):
     form = forms.LegacyEmbedForm(request.GET)
     if form.is_valid():
-        datastream_id       = form.cleaned_data.get('dataservice_id')
-        end_point           = form.cleaned_data.get('end_point')
-        header_row          = form.cleaned_data.get('header_row', 0)
-        fixed_column        = form.cleaned_data.get('fixed_column', 0)
+        datastream_id = form.cleaned_data.get('dataservice_id')
+        end_point = form.cleaned_data.get('end_point')
+        header_row = form.cleaned_data.get('header_row', 0)
+        fixed_column = form.cleaned_data.get('fixed_column', 0)
 
         datastream = get_object_or_404(DataStream, pk = datastream_id)
         query = urllib.urlencode({'end_point': end_point, 'header_row': header_row, 'fixed_column' : fixed_column})
@@ -147,7 +149,7 @@ def action_updategrid(request):
 
     uri = request.build_absolute_uri()
 
-    query = {}
+    query = dict()
     query['pId'] = datastream_revision_id
     query['pLimit'] = request.REQUEST.get('rp')
     query['pPage'] = int(request.REQUEST.get('page')) - 1
@@ -155,7 +157,6 @@ def action_updategrid(request):
     search = request.REQUEST.get('query', None)
     if search:
         query['pFilter0'] = '%s[contains]%s' % (request.REQUEST.get('qtype', 'column0'), search)
-
 
     sortname = request.REQUEST.get('sortname', None)
     sortorder = request.REQUEST.get('sortorder', None)
