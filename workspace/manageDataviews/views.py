@@ -1,11 +1,10 @@
-import json, logging
+import logging
 
 from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
-from django.core.urlresolvers import reverse
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
@@ -16,7 +15,7 @@ from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import LifeCycleException
-from core.models import DatasetRevision, Account,CategoryI18n
+from core.models import DatasetRevision, Account, CategoryI18n
 from api.http import JSONHttpResponse
 from core import engine
 

@@ -229,10 +229,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self.datastream.delete()
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
-        """create new revision or update it"""
+        """ Create new revision or update it """
 
         old_status = self.datastream_revision.status
-        if old_status  not in allowed_states:
+        if old_status not in allowed_states:
             raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if 'status' in fields.keys():

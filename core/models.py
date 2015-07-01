@@ -322,7 +322,7 @@ class DataStreamRevision(models.Model):
         self.save()
 
     def add_tags(self, tags):
-        #self.tagdatastream_set.clear()
+        self.tagdatastream_set.clear()
         for tag_field in tags:
             tag, is_new = Tag.objects.get_or_create(name=tag_field.get('name', ''))
 
@@ -331,7 +331,7 @@ class DataStreamRevision(models.Model):
         self.save()
 
     def add_sources(self, sources):
-        #self.sourcedatastream_set.clear()
+        self.sourcedatastream_set.clear()
         
         for source_field in sources:
             source_with_name = Source.objects.filter(name=source_field.get('name', ''))
@@ -348,7 +348,7 @@ class DataStreamRevision(models.Model):
         self.save()
 
     def add_parameters(self, parameters):
-        # self.datastreamparameter_set.clear()
+        self.datastreamparameter_set.clear()
         
         for name, default, position, description in parameters:
             parameters = DataStreamParameter.objects.create(name=name, position=position, default=default,
@@ -367,15 +367,17 @@ class DataStreamRevision(models.Model):
         return self.datastream.visualizationrevision_set.latest()
 
     def clone(self, status=choices.StatusChoices.DRAFT):
-        datastream_revision = DataStreamRevision(datastream = self.datastream
-                                        , dataset = self.dataset
-                                        , user = self.user
-                                        , category = self.category
-                                        , data_source = self.data_source
-                                        , select_statement = self.select_statement
-                                        , meta_text = self.meta_text
-                                        , rdf_template = self.rdf_template
-                                        , status = status)
+        datastream_revision = DataStreamRevision(
+            datastream=self.datastream,
+            dataset=self.dataset,
+            user=self.user,
+            category=self.category,
+            data_source=self.data_source,
+            select_statement=self.select_statement,
+            meta_text=self.meta_text,
+            rdf_template=self.rdf_template,
+            status=status
+        )
 
         datastream_revision.save()
 
@@ -386,19 +388,23 @@ class DataStreamRevision(models.Model):
             datastream_revision.sourcedatastream_set.add(source)
 
         for parameter in self.datastreamparameter_set.all():
-            datastream_revision.datastreamparameter_set.create(datastream_revision = datastream_revision
-                                                               , name = parameter.name
-                                                               , default = parameter.default
-                                                               , position = parameter.position
-                                                               , impl_details = parameter.impl_details
-                                                               , description = parameter.description)
+            datastream_revision.datastreamparameter_set.create(
+                datastream_revision=datastream_revision,
+                name=parameter.name,
+                default=parameter.default,
+                position=parameter.position,
+                impl_details=parameter.impl_details,
+                description=parameter.description
+            )
 
         for datastreami8n in self.datastreami18n_set.all():
-            datastream_revision.datastreami18n_set.create(language = datastreami8n.language
-                                                        , datastream_revision = datastream_revision
-                                                        , title = datastreami8n.title
-                                                        , description = datastreami8n.description
-                                                        , notes = datastreami8n.notes)
+            datastream_revision.datastreami18n_set.create(
+                language=datastreami8n.language,
+                datastream_revision=datastream_revision,
+                title=datastreami8n.title,
+                description=datastreami8n.description,
+                notes=datastreami8n.notes
+            )
 
         datastream_revision.save()
 
@@ -975,8 +981,8 @@ class CategoryI18n(models.Model):
 
 
 class Tag(models.Model):
-    name                = models.CharField(unique=True, max_length=40, verbose_name=ugettext_lazy('MODEL_TAG_TEXT'))
-    status              = models.SmallIntegerField(default=0, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    name = models.CharField(unique=True, max_length=40, verbose_name=ugettext_lazy('MODEL_TAG_TEXT'))
+    status = models.SmallIntegerField(default=0, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
 
     class Meta:
         db_table = 'ao_tags'
@@ -1183,8 +1189,8 @@ class UserPassTickets(models.Model):
 
 
 class Source(models.Model):
-    name                = models.CharField(unique=True, max_length=40, blank=False)
-    url                 = models.CharField(max_length=2048, blank=False)
+    name = models.CharField(unique=True, max_length=40, blank=False)
+    url = models.CharField(max_length=2048, blank=False)
 
     class Meta:
         db_table = 'ao_sources'
@@ -1202,7 +1208,7 @@ class SourceDataset(models.Model):
 
 
 class SourceDatastream(models.Model):
-    source = models.ForeignKey('Source')
+    source = models.ForeignKey('Source', null=True)
     datastreamrevision = models.ForeignKey('DataStreamRevision')
 
     class Meta:
