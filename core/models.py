@@ -487,12 +487,16 @@ class DatastreamI18n(models.Model):
 
 
 class DataStreamParameter(models.Model):
-    datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
-    name                = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
-    default             = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
-    position            = models.PositiveSmallIntegerField()
-    impl_details        = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_DETAILS_LABEL'))
-    description         = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    datastream_revision = models.ForeignKey(
+        'DataStreamRevision',
+        verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'),
+        null=True
+    )
+    name = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
+    default = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
+    position = models.PositiveSmallIntegerField()
+    impl_details = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_DETAILS_LABEL'))
+    description = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
 
     class Meta:
         db_table = 'ao_datastream_parameters'
