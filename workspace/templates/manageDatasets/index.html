@@ -38,6 +38,7 @@
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -66,9 +67,10 @@
   <div class="wrapper1">
     <div class="wrapper2 clearfix">
       <div class="wrapper3">
-            
+
         <!-- Filters -->
         {% include "manageDatasets/filters.html" %}
+        <section class="filters-view"></section>
 
         <!-- List -->
         {% include "manageDatasets/list.html" %}
@@ -88,9 +90,8 @@
 
 {% block bottom_js %}
 <script type="text/javascript">
-  $(document).ready(function(){
-    var filtersCollection = {{ my_filters|jsonify }};
 
+  $(document).ready(function(){
     var manageDatasetsView =  new ManageDatasetsView({
       datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %}
     });

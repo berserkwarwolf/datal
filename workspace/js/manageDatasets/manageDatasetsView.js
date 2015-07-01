@@ -139,6 +139,11 @@ var ManageDatasetsView = Backbone.View.extend({
             filters: this.filters
         });
 
+        this.filtersView = new FiltersView({
+            el: '.filters-view',
+            collection: this.listResources
+        });
+
     },
 
     initList: function(){
