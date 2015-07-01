@@ -1004,7 +1004,11 @@ class TagDataset(models.Model):
 
 class TagDatastream(models.Model):
     tag = models.ForeignKey('Tag', null=True)
-    datastreamrevision = models.ForeignKey('DataStreamRevision', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
+    datastreamrevision = models.ForeignKey(
+        'DataStreamRevision',
+        null=True,
+        verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL')
+    )
 
     class Meta:
         db_table = 'ao_tags_datastream'
@@ -1209,7 +1213,7 @@ class SourceDataset(models.Model):
 
 class SourceDatastream(models.Model):
     source = models.ForeignKey('Source', null=True)
-    datastreamrevision = models.ForeignKey('DataStreamRevision')
+    datastreamrevision = models.ForeignKey('DataStreamRevision', null=True)
 
     class Meta:
         db_table = 'ao_sources_datastream_revision'
