@@ -236,9 +236,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if 'status' in fields.keys():
-            form_status = fields.pop('status', None)
+            form_status = int(fields.pop('status', None))
 
-        if old_status == StatusChoices.DRAFT:
+        if old_status == StatusChoices.DRAFT or \
+                (old_status == StatusChoices.APPROVED and form_status == StatusChoices.PUBLISHED):
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
                 changed_fields,
