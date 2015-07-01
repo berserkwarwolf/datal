@@ -462,15 +462,22 @@ class DataStreamRevision(models.Model):
 
 
 class DatastreamI18n(models.Model):
-    language            = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL'))
-    title               = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description         = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    notes               = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
+    language = models.CharField(
+        max_length=2,
+        choices=choices.LANGUAGE_CHOICES,
+        verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL')
+    )
+    datastream_revision = models.ForeignKey(
+        'DataStreamRevision',
+        verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_LABEL')
+    )
+    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
+    description = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
+    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
-        db_table        = 'ao_datastream_i18n'
+        db_table = 'ao_datastream_i18n'
 
     def __unicode__(self):
         return self.title
