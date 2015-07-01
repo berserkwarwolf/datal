@@ -450,6 +450,20 @@ def remove_duplicated_filters(list_of_resources):
     return removed
 
 
+def get_filters(resources):
+    filters = set([])
+
+    for res in resources:
+        filters.add(('status', res.get('status')))
+        filters.add(('type', res.get('impl_type')))
+        filters.add(('category', res.get('category__categoryi18n__name')))
+        filters.add(('author', res.get('dataset__user__nick')))
+        filters.add(('author', res.get('datastream__user__nick')))
+
+    # unicode(SOURCE_IMPLEMENTATION_CHOICES[int(impl_type)][1])
+    return [{'type':k, 'value':v, 'title':v} for k,v in filters]
+
+
 def datatable_ordering_helper(query, col_number, ascending, order_columns):
     col_name = order_columns[col_number]
     if col_name:

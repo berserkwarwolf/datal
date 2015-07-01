@@ -14,6 +14,7 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.helpers import get_filters
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -138,7 +139,10 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    filters = get_filters(resources)
+
+    data = {'total_resources': total_resources, 'resources': resources, 'filters': filters}
+    logger.error(filters)
     response = DatasetList().render(data)
 
     mimetype = "application/json"
