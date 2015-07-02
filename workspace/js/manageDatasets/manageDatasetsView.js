@@ -224,17 +224,6 @@ var ManageDatasetsView = Backbone.View.extend({
         this.listResources.fetch({
             reset: true
         });
-<<<<<<< HEAD
-
-        // ListResources View
-        this.listResourcesView = new ListResourcesView({
-            resourceCollection: this.listResources,
-            filterCollection: this.filters,
-            grid: this.grid,
-            paginator: paginator
-        });
-=======
->>>>>>> quitar codigo no utilizado
 
     }
 
