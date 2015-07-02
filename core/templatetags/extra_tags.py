@@ -1,6 +1,8 @@
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import stringfilter
+from django.utils.safestring import mark_safe
+from django.utils import simplejson
 import hashlib
 import urllib
 import re
@@ -168,7 +170,12 @@ def format(value, arg):
     except:
         return value
 
-import json    
+import json
 @register.filter(name='jsonize')
 def jsonize(obj):
     return json.dumps(obj, skipkeys=True, ensure_ascii=False)
+
+
+@register.filter
+def jsonify(o):
+    return mark_safe(simplejson.dumps(o))

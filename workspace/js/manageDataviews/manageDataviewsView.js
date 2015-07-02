@@ -21,13 +21,13 @@ var ManageDataviewsView = Backbone.View.extend({
         "click .actions .edit a": "onEditButtonClicked"
     },
 
-    initialize: function() {
+    initialize: function(options) {
 
         this.sourceUrl = this.options.sourceUrl;
         this.tagUrl = this.options.tagUrl;
 
         // Init Filters
-        this.initFilters();
+        this.initFilters(options.filters);
 
         // Init List
         this.initList();
@@ -150,10 +150,27 @@ var ManageDataviewsView = Backbone.View.extend({
         });
     },
 
-    initFilters: function(){
+    initFilters: function(filters){
 
         // Init the collection with django view list of datasets.
         this.filters = new FiltersCollection();
+
+        this.filtersCollection = new Backbone.Collection(filters);
+
+        this.filtersView = new FiltersView({
+            el: this.$('.filters-view'),
+            collection: this.filtersCollection
+        });
+
+        this.listenTo(this.filtersView, 'change', function (queryDict) {
+            this.listResources.queryParams.filters = JSON.stringify(queryDict);
+            this.listResources.fetch({reset: true});
+        });
+
+        this.listenTo(this.filtersView, 'clear', function () {
+            this.listResources.queryParams.filters = null;
+            this.listResources.fetch({reset: true});
+        });
 
         // Active Filters View
         this.activeFiltersView = new ActiveFiltersView({

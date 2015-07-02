@@ -9,6 +9,7 @@ from django.views.decorators.http import require_GET, require_http_methods
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.helpers import get_filters
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
@@ -52,6 +53,8 @@ def list(request):
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
     filters = remove_duplicated_filters(resources)
+
+    my_filters = get_filters(resources)
 
     return render_to_response('manageDataviews/index.html', locals())
 

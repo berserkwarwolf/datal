@@ -453,9 +453,15 @@ def get_filters(resources):
 
     for res in resources:
         filters.add(('status', res.get('status'), unicode(STATUS_CHOICES[int(res.get('status'))][1])))
-        filters.add(('type', res.get('impl_type'), unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
-        filters.add(('category', res.get('category__categoryi18n__name'), res.get('category__categoryi18n__name')))
-        filters.add(('author', res.get('dataset__user__nick'), res.get('dataset__user__nick')))
+
+        if 'impl_type' in res:
+            filters.add(('type', res.get('impl_type'), unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+
+        if 'category__categoryi18n__name' in res:
+            filters.add(('category', res.get('category__categoryi18n__name'), res.get('category__categoryi18n__name')))
+
+        if res.get('dataset__user__nick'):
+            filters.add(('author', res.get('dataset__user__nick'), res.get('dataset__user__nick')))
         if res.get('datastream__user__nick'):
             filters.add(('author', res.get('datastream__user__nick'), res.get('datastream__user__nick')))
 

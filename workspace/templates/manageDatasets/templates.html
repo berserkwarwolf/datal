@@ -14,12 +14,10 @@
       <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
       <ul id="active-filters-list">
        	<% _(active).each(function( item ){ %>
-			<% if (item.active) { %>
 				<li>
 					<span><%= item.title %></span> 
 					<a class="remove" data-cid="<%= item.cid %>" title="{% trans 'FILTERS-REMOVE-TEXT' %}">x</a>
 				</li>
-			<% }%>
        	<% }); %>
       </ul>
    </div>
@@ -27,16 +25,14 @@
 
    <% if (category.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-CATEGORY-TEXT' %}</h3>
       <ul>
        	<% _(category).each(function( item ){ %>
-			<% if (!item.active) { %>
 				<li>
 					<a class="filter-add" data-cid="<%= item.cid %>">
 						<%= item.title %>
 					</a>
 				</li>
-			<% }%>
        	<% }); %>
       </ul>
    </div>
@@ -44,16 +40,14 @@
 
    <% if (type.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-TYPE-TEXT' %}</h3>
       <ul>
        	<% _(type).each(function( item ){ %>
-			<% if (!item.active) { %>
 				<li>
 					<a class="filter-add" data-cid="<%= item.cid %>">
 						<%= item.title %>
 					</a>
 				</li>
-			<% }%>
        	<% }); %>
       </ul>
    </div>
@@ -61,16 +55,14 @@
 
    <% if (author.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
       <ul>
        	<% _(author).each(function( item ){ %>
-			<% if (!item.active) { %>
 				<li>
 					<a class="filter-add" data-cid="<%= item.cid %>">
 						<%= item.title %>
 					</a>
 				</li>
-			<% }%>
        	<% }); %>
       </ul>
    </div>
@@ -81,13 +73,11 @@
       <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
       <ul>
        	<% _(status).each(function( item ){ %>
-			<% if (!item.active) { %>
 				<li>
 					<a class="filter-add" data-cid="<%= item.cid %>">
 						<%= item.title %>
 					</a>
 				</li>
-			<% }%>
        	<% }); %>
       </ul>
    </div>
