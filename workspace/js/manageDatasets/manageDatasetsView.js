@@ -18,12 +18,12 @@ var ManageDatasetsView = Backbone.View.extend({
         "click #grid input[type=checkbox]": "onInputCheckboxSelected"
     },
 
-    initialize: function() {
+    initialize: function(options) {
 
         this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
 
         // Init Filters
-        this.initFilters();
+        this.initFilters(options.filters);
 
         // Init List
         this.initList();
@@ -119,7 +119,7 @@ var ManageDatasetsView = Backbone.View.extend({
         }
     },
 
-    initFilters: function(){
+    initFilters: function(filters){
 
         // Init the collection with django view list of datasets.
         this.filters = new FiltersCollection();
@@ -141,7 +141,7 @@ var ManageDatasetsView = Backbone.View.extend({
 
         this.filtersView = new FiltersView({
             el: '.filters-view',
-            collection: this.listResources
+            filters: filters
         });
 
     },

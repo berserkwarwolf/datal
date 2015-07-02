@@ -5,35 +5,13 @@ var FiltersView = Backbone.View.extend({
         'click a.filter-add': 'onClickAdd',
     },
 
-    initialize:  function(){
+    initialize: function(options){
         this.template = _.template($('#filters-template').html());
 
         // this.listenTo(this.collection, 'sync', this.render);
 
-        this.active = new Backbone.Collection();
-
-        this.filters = new Backbone.Collection([{
-                title: 'Publicado',
-                value: 'published',
-                type: 'status',
-                active: true
-            }, {
-                title: 'Borrador',
-                value: 'draft',
-                type: 'status',
-                active: false
-            }, {
-                title: 'Pendiente',
-                value: 'pending',
-                type: 'status',
-                active: true
-            }, {
-                title: 'Bahia',
-                value: 'bahia',
-                type: 'author',
-                active: false
-            }
-            ]);
+        this.filters = new Backbone.Collection(options.filters);
+        // this.render();
     },
 
     render: function () {

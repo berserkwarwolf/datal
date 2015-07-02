@@ -92,10 +92,9 @@
 <script type="text/javascript">
 
   $(document).ready(function(){
-    var availableFilters = {{my_filters|jsonify}};
-
     var manageDatasetsView =  new ManageDatasetsView({
-      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %}
+      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
+      filters: {{my_filters|jsonify}}
     });
   });
 </script>
