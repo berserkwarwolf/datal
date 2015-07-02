@@ -139,9 +139,15 @@ var ManageDatasetsView = Backbone.View.extend({
             filters: this.filters
         });
 
+        this.filtersCollection = new Backbone.Collection(filters);
+
+        this.listenTo(this.filtersCollection, 'change', function (model) {
+            console.log(model);
+        });
+
         this.filtersView = new FiltersView({
-            el: '.filters-view',
-            filters: filters
+            el: this.$('.filters-view'),
+            collection: this.filtersCollection
         });
 
     },
