@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags dataset_tags%}
 
 {% block meta %}
 
@@ -24,13 +24,8 @@
 <script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
 
 {# JS for this screen #}
-<script language="javascript" src="/js_workspace/manageDatasets/filterItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDatasets/filtersCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDataviews/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDatasets/activeFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDatasets/inactiveFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageDatasets/resourceItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/titleCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/typeCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -38,6 +33,7 @@
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -66,9 +62,9 @@
   <div class="wrapper1">
     <div class="wrapper2 clearfix">
       <div class="wrapper3">
-            
+
         <!-- Filters -->
-        {% include "manageDatasets/filters.html" %}
+        <section class="filters-view"></section>
 
         <!-- List -->
         {% include "manageDatasets/list.html" %}
@@ -88,9 +84,11 @@
 
 {% block bottom_js %}
 <script type="text/javascript">
+
   $(document).ready(function(){
     var manageDatasetsView =  new ManageDatasetsView({
-      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %}
+      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
+      filters: {{my_filters|jsonify}}
     });
   });
 </script>

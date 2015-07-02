@@ -21,13 +21,13 @@ var ManageDataviewsView = Backbone.View.extend({
         "click .actions .edit a": "onEditButtonClicked"
     },
 
-    initialize: function() {
+    initialize: function(options) {
 
         this.sourceUrl = this.options.sourceUrl;
         this.tagUrl = this.options.tagUrl;
 
         // Init Filters
-        this.initFilters();
+        this.initFilters(options.filters);
 
         // Init List
         this.initList();
@@ -150,26 +150,33 @@ var ManageDataviewsView = Backbone.View.extend({
         });
     },
 
-    initFilters: function(){
+    initFilters: function(filters){
 
-        // Init the collection with django view list of datasets.
-        this.filters = new FiltersCollection();
+        this.listResources = new ListResources();
 
-        // Active Filters View
-        this.activeFiltersView = new ActiveFiltersView({
-            collection: this.filters,
+        this.filtersCollection = new Backbone.Collection(filters, {
+            url: 'filters.json'
         });
 
-        // Inactive Filters View
-        this.inactiveFiltersView = new InactiveFiltersView({
-            collection: this.filters
+        this.listResources.on('remove', function (event) {
+            this.listResources.queryParams.filters = null;
+            this.filtersCollection.fetch({reset: true});
+        }, this);
+
+        this.filtersView = new FiltersView({
+            el: this.$('.filters-view'),
+            collection: this.filtersCollection
         });
 
-        // Init Backbone PageableCollection
-        this.listResources = new ListResources({
-            filters: this.filters
+        this.listenTo(this.filtersView, 'change', function (queryDict) {
+            this.listResources.queryParams.filters = JSON.stringify(queryDict);
+            this.listResources.fetch({reset: true});
         });
 
+        this.listenTo(this.filtersView, 'clear', function () {
+            this.listResources.queryParams.filters = null;
+            this.listResources.fetch({reset: true});
+        });
     },
 
     initList: function(){
@@ -246,14 +253,6 @@ var ManageDataviewsView = Backbone.View.extend({
         // Fetch List Resources
         this.listResources.fetch({
             reset: true
-        });
-
-        // ListResources View
-        this.listResourcesView = new ListResourcesView({
-            resourceCollection: this.listResources,
-            filterCollection: this.filters,
-            grid: this.grid,
-            paginator: paginator
         });
 
     }

@@ -18,12 +18,12 @@ var ManageDatasetsView = Backbone.View.extend({
         "click #grid input[type=checkbox]": "onInputCheckboxSelected"
     },
 
-    initialize: function() {
+    initialize: function(options) {
 
         this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
 
         // Init Filters
-        this.initFilters();
+        this.initFilters(options.filters);
 
         // Init List
         this.initList();
@@ -119,24 +119,33 @@ var ManageDatasetsView = Backbone.View.extend({
         }
     },
 
-    initFilters: function(){
-
-        // Init the collection with django view list of datasets.
-        this.filters = new FiltersCollection();
-
-        // Active Filters View
-        this.activeFiltersView = new ActiveFiltersView({
-            collection: this.filters,
-        });
-
-        // Inactive Filters View
-        this.inactiveFiltersView = new InactiveFiltersView({
-            collection: this.filters
-        });
+    initFilters: function(filters){
 
         // Init Backbone PageableCollection
-        this.listResources = new ListResources({
-            filters: this.filters
+        this.listResources = new ListResources();
+
+        this.filtersCollection = new Backbone.Collection(filters, {
+            url: 'filters.json'
+        });
+
+        this.listResources.on('remove', function (event) {
+            this.listResources.queryParams.filters = null;
+            this.filtersCollection.fetch({reset: true});
+        }, this);
+
+        this.filtersView = new FiltersView({
+            el: this.$('.filters-view'),
+            collection: this.filtersCollection
+        });
+
+        this.listenTo(this.filtersView, 'change', function (queryDict) {
+            this.listResources.queryParams.filters = JSON.stringify(queryDict);
+            this.listResources.fetch({reset: true});
+        });
+
+        this.listenTo(this.filtersView, 'clear', function () {
+            this.listResources.queryParams.filters = null;
+            this.listResources.fetch({reset: true});
         });
 
     },
@@ -221,14 +230,6 @@ var ManageDatasetsView = Backbone.View.extend({
         // Fetch List Resources
         this.listResources.fetch({
             reset: true
-        });
-
-        // ListResources View
-        this.listResourcesView = new ListResourcesView({
-            resourceCollection: this.listResources,
-            filterCollection: this.filters,
-            grid: this.grid,
-            paginator: paginator
         });
 
     }

@@ -1,4 +1,4 @@
-import json, re, unicodedata, urllib2, importlib
+import json, re, unicodedata, urllib2, importlib, logging
 
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
@@ -12,6 +12,8 @@ from babel import numbers, dates
 from core.primitives import PrimitiveComputer
 from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
+
+logger = logging.getLogger(__name__)
 
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
@@ -411,23 +413,15 @@ def set_dataset_impl_type_nice(item):
     return impl_type_nice
 
 
-def unset_dataset_revision_nice(item):
-    new_item = dict()
+def filters_to_model_fields(filters):
+    result = dict()
 
-    if item.get('type_filter'):
-        new_item['impl_type'] = []
-        for x in item.get('type_filter'):
-            new_item['impl_type'].append([impl_type[0] for impl_type in SOURCE_IMPLEMENTATION_CHOICES if impl_type[1] == x][0])
+    result['impl_type'] = filters.get('type')
+    result['category__categoryi18n__name'] = filters.get('category')
+    result['dataset__user__nick'] = filters.get('author')
+    result['status'] = filters.get('status')
 
-    new_item['category__categoryi18n__name'] = item.get('category_filter')
-    new_item['dataset__user__nick'] = item.get('author_filter')
-
-    if item.get('status_filter'):
-        new_item['status'] = []
-        for x in item.get('status_filter'):
-            new_item['status'].append([status[0] for status in STATUS_CHOICES if status[1] == x][0])
-
-    return new_item
+    return result
 
 
 def unset_visualization_revision_nice(item):
@@ -448,6 +442,30 @@ def remove_duplicated_filters(list_of_resources):
     removed['author_filter'] = set([x.get('dataset__user__nick', '') for x in list_of_resources])
     removed['author_filter'] = removed['author_filter'].union(set([x.get('datastream__user__nick', '') for x in list_of_resources]))
     return removed
+
+
+def get_filters(resources):
+    """
+    Reads available filters from a resource array. Returns an array with objects and their
+    i18n names when available.
+    """
+    filters = set([])
+
+    for res in resources:
+        filters.add(('status', res.get('status'), unicode(STATUS_CHOICES[int(res.get('status'))][1])))
+
+        if 'impl_type' in res:
+            filters.add(('type', res.get('impl_type'), unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+
+        if 'category__categoryi18n__name' in res:
+            filters.add(('category', res.get('category__categoryi18n__name'), res.get('category__categoryi18n__name')))
+
+        if res.get('dataset__user__nick'):
+            filters.add(('author', res.get('dataset__user__nick'), res.get('dataset__user__nick')))
+        if res.get('datastream__user__nick'):
+            filters.add(('author', res.get('datastream__user__nick'), res.get('datastream__user__nick')))
+
+    return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
 
 def datatable_ordering_helper(query, col_number, ascending, order_columns):

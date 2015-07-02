@@ -1,4 +1,4 @@
-import urllib2
+import urllib2, logging
 
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
@@ -13,7 +13,8 @@ from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
-from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.helpers import get_filters
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -65,6 +66,9 @@ def list(request):
         return render_to_response('manageDatasets/noResults.html', locals())
 
     filters = remove_duplicated_filters(resources)
+
+    my_filters = get_filters(resources)
+
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
     return render_to_response('manageDatasets/index.html', locals())
@@ -93,7 +97,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     exclude=None
 
     if filters is not None and filters != '':
-        filters_dict = unset_dataset_revision_nice(json.loads(bb_request.get('filters')))
+        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':
@@ -140,6 +144,18 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     mimetype = "application/json"
 
     return HttpResponse(response, mimetype=mimetype)
+
+
+@login_required
+@require_privilege("workspace.can_query_dataset")
+@require_GET
+def get_filters_json(request):
+    """ List all Filters available """
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
+                                                      language=request.user.language)
+    filters = get_filters(resources)
+    return JSONHttpResponse(json.dumps(filters))
+
 
 @login_required
 @require_privilege("workspace.can_delete_dataset")

@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^$', list, name='manageDataviews.list'),
     url(r'^(?P<revision_id>\d+)$', view, name='manageDataviews.view'),
     url(r'^filter$', filter, name='manageDataviews.filter'),
+    url(r'^filters.json$', get_filters_json, name='manageDataviews.get_filters'),
     url(r'^filter_dataset$', filterDataset, name='manageDatasets.filter'),
     url(r'^remove/(?P<type>[a-z]+)/(?P<id>\d+)$', remove, name='manageDataviews.remove'),
     url(r'^remove/(?P<id>\d+)$', remove, name='manageDataviews.remove'),
@@ -21,6 +22,4 @@ urlpatterns = patterns('',
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
     url(r'^invoke$', action_invoke, name='core.datastream_manager.views.action_invoke'),
     url(r'^action_updategrid$', 'core.datastream_manager.views.action_updategrid', name='core.datastream_manager.action_updategrid'),
-    
-    
 )

@@ -8,7 +8,8 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
-from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.helpers import get_filters
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
@@ -53,6 +54,8 @@ def list(request):
 
     filters = remove_duplicated_filters(resources)
 
+    my_filters = get_filters(resources)
+
     return render_to_response('manageDataviews/index.html', locals())
 
 @login_required
@@ -67,7 +70,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     sort_by='-id'
 
     if filters is not None and filters != '':
-        filters_dict = unset_dataset_revision_nice(json.loads(bb_request.get('filters')))
+        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
@@ -107,6 +110,18 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     response = DatastreamList().render(data)
     
     return JSONHttpResponse(response)
+
+
+@login_required
+@require_privilege("workspace.can_query_dataset")
+@require_GET
+def get_filters_json(request):
+    """ List all Filters available """
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
+                                                      language=request.user.language)
+    filters = get_filters(resources)
+    return JSONHttpResponse(json.dumps(filters))
+
 
 @login_required
 @require_GET
