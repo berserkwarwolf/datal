@@ -68,7 +68,6 @@ def list(request):
     filters = remove_duplicated_filters(resources)
 
     my_filters = get_filters(resources)
-    logger.error(my_filters)
 
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
