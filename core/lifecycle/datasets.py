@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.db.models import F, Max
 from django.db import transaction
+
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
-from core.exceptions import DatasetNotFoundException, IlegalStateException
+from core.exceptions import DatasetNotFoundException, IlegalStateException, LifeCycleException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
@@ -15,7 +16,7 @@ CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, Stat
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED]
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
-ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
+ACCEPT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -88,8 +89,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         # En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:
-	    self.publish(allowed_states=CREATE_ALLOWED_STATES)
-	else:
+            self.publish(allowed_states=CREATE_ALLOWED_STATES)
+        else:
             self._update_last_revisions()
 
         return self.dataset_revision
@@ -259,16 +260,19 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
-        """create new revision or update it"""
-
+        """ Create new revision or update it """
+        form_status = None
         old_status = self.dataset_revision.status
-
-        if old_status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if 'status' in fields.keys():
             # el fields.pop trae un unicode y falla al comparar con los Status
             form_status = int(fields.pop('status', None))
+
+        if old_status not in allowed_states:
+            # Si el estado fallido era publicado, queda aceptado
+            if form_status and form_status == StatusChoices.PUBLISHED:
+                self.accept()
+            raise IlegalStateException(allowed_states, self.dataset_revision)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -280,15 +284,21 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         if old_status == StatusChoices.DRAFT:
             self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, status=form_status, **fields)
+                self.dataset_revision, changed_fields, status=form_status, **fields
+            )
         else:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields)
-
+                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
+            )
             self._move_childs_to_draft()
 
         if form_status == StatusChoices.PUBLISHED:
-            self.publish()
+            # Intento publicar, si falla, queda como publicado
+            try:
+                self.publish()
+            except:
+                self.accept()
+                raise
         elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
             self.unpublish()
         else:

@@ -267,9 +267,9 @@ def edit(request, dataset_revision_id=None):
         return render_to_response(url, locals())
     elif request.method == 'POST':
         """ Update dataset """
-        form = DatasetFormFactory(request.POST.get('collect_type')).create(request, account_id=account_id,
-                                                                           language=language,
-                                                                           status_choices=auth_manager.get_allowed_actions())
+        form = DatasetFormFactory(request.POST.get('collect_type')).create(
+            request, account_id=account_id, language=language, status_choices=auth_manager.get_allowed_actions()
+        )
 
         if form.is_valid():
             lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)

@@ -230,13 +230,17 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """
-
-        old_status = self.datastream_revision.status
-        if old_status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+        form_status = None
 
         if 'status' in fields.keys():
             form_status = int(fields.pop('status', None))
+
+        old_status = self.datastream_revision.status
+        if old_status not in allowed_states:
+            # Si el estado fallido era publicado, queda aceptado
+            if form_status and form_status == StatusChoices.PUBLISHED:
+                self.accept()
+            raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if old_status == StatusChoices.DRAFT or \
                 (old_status == StatusChoices.APPROVED and form_status == StatusChoices.PUBLISHED):
@@ -259,7 +263,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             self._move_childs_to_draft()
 
         if form_status == StatusChoices.PUBLISHED:
-            self.publish()
+            # Intento publicar, si falla, queda como publicado
+            try:
+                self.publish()
+            except:
+                self.accept()
+                raise
         elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
             self.unpublish()
         else:
