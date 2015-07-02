@@ -13,7 +13,7 @@ from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
-from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.helpers import remove_duplicated_filters, filters_to_model_fields
 from core.helpers import get_filters
 from core.models import DatasetRevision
 from workspace.decorators import *
@@ -97,7 +97,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     exclude=None
 
     if filters is not None and filters != '':
-        filters_dict = unset_dataset_revision_nice(json.loads(bb_request.get('filters')))
+        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':

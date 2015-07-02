@@ -413,15 +413,15 @@ def set_dataset_impl_type_nice(item):
     return impl_type_nice
 
 
-def unset_dataset_revision_nice(item):
-    new_item = dict()
+def filters_to_model_fields(filters):
+    result = dict()
 
-    new_item['impl_type'] = item.get('type')
-    new_item['category__categoryi18n__name'] = item.get('category')
-    new_item['dataset__user__nick'] = item.get('author')
-    new_item['status'] = item.get('status')
+    result['impl_type'] = filters.get('type')
+    result['category__categoryi18n__name'] = filters.get('category')
+    result['dataset__user__nick'] = filters.get('author')
+    result['status'] = filters.get('status')
 
-    return new_item
+    return result
 
 
 def unset_visualization_revision_nice(item):
@@ -446,7 +446,7 @@ def remove_duplicated_filters(list_of_resources):
 
 def get_filters(resources):
     """
-    Reads available filters from a resource array. Returns an array with objects and their 
+    Reads available filters from a resource array. Returns an array with objects and their
     i18n names when available.
     """
     filters = set([])

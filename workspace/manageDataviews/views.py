@@ -8,7 +8,7 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
-from core.helpers import remove_duplicated_filters, unset_dataset_revision_nice
+from core.helpers import remove_duplicated_filters, filters_to_model_fields
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
@@ -67,7 +67,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     sort_by='-id'
 
     if filters is not None and filters != '':
-        filters_dict = unset_dataset_revision_nice(json.loads(bb_request.get('filters')))
+        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
