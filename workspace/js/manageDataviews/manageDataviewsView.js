@@ -265,14 +265,6 @@ var ManageDataviewsView = Backbone.View.extend({
             reset: true
         });
 
-        // ListResources View
-        this.listResourcesView = new ListResourcesView({
-            resourceCollection: this.listResources,
-            filterCollection: this.filters,
-            grid: this.grid,
-            paginator: paginator
-        });
-
     }
 
 });
