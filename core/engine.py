@@ -117,6 +117,7 @@ def _request(query, url, method = 'GET'):
                 value = query[key]
                 query[key] = value.encode('utf-8')
 
+        query = fix_params(query)
         params = urllib.urlencode(query)
 
         try:
@@ -139,3 +140,37 @@ def _request(query, url, method = 'GET'):
     finally:
         if response:
             response.close()
+
+
+def fix_params(filters):
+    """ fix filters and other params """
+            
+    for key in filters.keys():
+        if key.startswith('pFilter'):
+            v1 = filters[key]
+            filters[key] = parseOperator(value=v1)
+        if key.startswith('uniqueBy'):
+            num = key[-1:]
+            filters['pUniqueBy%s' % num] = filters.get(key)
+            #del filters[key]
+            
+    return filters
+
+def parseOperator(value):
+    value = value.replace('[==]', '[0]')
+    value = value.replace('[>]', '[1]')
+    value = value.replace('[<]', '[2]')
+    value = value.replace('[!=]', '[3]')
+    value = value.replace('[contains]', '[4]')
+    value = value.replace('[>=]', '[5]')
+    value = value.replace('[<=]', '[6]')
+    value = value.replace('[between]', '[7]')
+    value = value.replace('[inlist]', '[8]')
+    value = value.replace('[notcontains]', '[9]')
+    value = value.replace('[notcontainsall]', '[9]')
+    value = value.replace('[notbetween]', '[10]')
+    value = value.replace('[notinlist]', '[11]')
+    value = value.replace('[notcontainsany]', '[12]')
+    value = value.replace('[containsall]', '[13]')
+            
+    return value
