@@ -8,8 +8,9 @@ var FiltersView = Backbone.View.extend({
     initialize: function(options){
         this.template = _.template($('#filters-template').html());
 
-        this.render();
         this.listenTo(this.collection, 'change', this.onFilterChange, this);
+        this.listenTo(this.collection, 'change sync', this.render);
+        this.render();
     },
 
     render: function () {
@@ -58,7 +59,6 @@ var FiltersView = Backbone.View.extend({
 
         var model = this.collection.get(cid);
         model.set('active', true);
-        this.render();
     },
 
     onClickRemove: function  (e) {
@@ -67,7 +67,6 @@ var FiltersView = Backbone.View.extend({
 
         var model = this.collection.get(cid);
         model.set('active', false);
-        this.render();
     },
 
     onFilterChange: function (model) {

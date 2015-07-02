@@ -124,7 +124,9 @@ var ManageDatasetsView = Backbone.View.extend({
         // Init Backbone PageableCollection
         this.listResources = new ListResources();
 
-        this.filtersCollection = new Backbone.Collection(filters);
+        this.filtersCollection = new Backbone.Collection(filters, {
+            url: 'filters.json'
+        });
 
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
