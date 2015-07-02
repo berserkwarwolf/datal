@@ -152,9 +152,6 @@ var ManageDataviewsView = Backbone.View.extend({
 
     initFilters: function(filters){
 
-        // Init the collection with django view list of datasets.
-        this.filters = new FiltersCollection();
-
         this.filtersCollection = new Backbone.Collection(filters);
 
         this.filtersView = new FiltersView({
@@ -172,20 +169,8 @@ var ManageDataviewsView = Backbone.View.extend({
             this.listResources.fetch({reset: true});
         });
 
-        // Active Filters View
-        this.activeFiltersView = new ActiveFiltersView({
-            collection: this.filters,
-        });
-
-        // Inactive Filters View
-        this.inactiveFiltersView = new InactiveFiltersView({
-            collection: this.filters
-        });
-
         // Init Backbone PageableCollection
-        this.listResources = new ListResources({
-            filters: this.filters
-        });
+        this.listResources = new ListResources();
 
     },
 
