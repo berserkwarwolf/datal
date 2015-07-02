@@ -111,6 +111,18 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     
     return JSONHttpResponse(response)
 
+
+@login_required
+@require_privilege("workspace.can_query_dataset")
+@require_GET
+def get_filters_json(request):
+    """ List all Filters available """
+    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
+                                                      language=request.user.language)
+    filters = get_filters(resources)
+    return JSONHttpResponse(json.dumps(filters))
+
+
 @login_required
 @require_GET
 def related_resources(request):

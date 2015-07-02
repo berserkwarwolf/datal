@@ -152,7 +152,9 @@ var ManageDataviewsView = Backbone.View.extend({
 
     initFilters: function(filters){
 
-        this.filtersCollection = new Backbone.Collection(filters);
+        this.filtersCollection = new Backbone.Collection(filters, {
+            url: 'filters.json'
+        });
 
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
