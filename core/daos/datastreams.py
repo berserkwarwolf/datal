@@ -29,9 +29,13 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             select_statement=fields['select_statement']
         )
 
-        DatastreamI18n.objects.create(datastream_revision=datastream_revision,
-            language=fields['language'], title=fields['title'],
-            description=fields['description'], notes=fields['notes'])
+        DatastreamI18n.objects.create(
+            datastream_revision=datastream_revision,
+            language=fields['language'],
+            title=fields['title'].strip().replace('\n', ' '),
+            description=fields['description'].strip().replace('\n', ' '),
+            notes=fields['notes'].strip()
+        )
 
         datastream_revision.add_tags(fields['tags'])
         datastream_revision.add_sources(fields['sources'])
@@ -40,9 +44,16 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         return datastream, datastream_revision
 
     def update(self, datastream_revision, changed_fields, **fields):
+        fields['title'] = fields['title'].strip().replace('\n', ' ')
+        fields['description'] = fields['description'].strip().replace('\n', ' ')
+        fields['notes'] = fields['notes'].strip()
+        
         datastream_revision.update(changed_fields, **fields)
 
-        DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=fields['language']).update(changed_fields, **fields)
+        DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=fields['language']).update(
+            changed_fields,
+            **fields
+        )
 
         if 'tags' in fields:
             datastream_revision.add_tags(fields['tags'])

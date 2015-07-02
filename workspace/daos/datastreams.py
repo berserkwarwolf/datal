@@ -146,11 +146,9 @@ class DatastreamSearchifyDAO():
         category = datastream_revision.category.categoryi18n_set.all()[0]
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision)
 
-
         text = [datastreami18n.title, datastreami18n.description, datastream_revision.user.nick, datastream_revision.datastream.guid]
         text.extend(tags) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
-
 
         document = {
                 'docid' : "DS::" + str(datastream_revision.datastream.guid),
@@ -183,4 +181,3 @@ class DatastreamSearchifyDAO():
         
     def remove(self, datastream_revision):
         self.search_index.delete_documents(["DS::" + str(datastream_revision.datastream.guid)])
-        

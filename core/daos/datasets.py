@@ -48,17 +48,29 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             size = fields['file_size']
             file_name = fields['file_name']
 
-        dataset_revision = DatasetRevision.objects.create(dataset=dataset,
-                user_id=user.id, status=fields['status'],
-                category=Category.objects.get(id=fields['category']), filename=file_name,
-                end_point=fields['end_point'], impl_type=fields['impl_type'],
-                impl_details=impl_details, size=size,
-                license_url=fields['license_url'], spatial=fields['spatial'],
-                frequency=fields['frequency'], mbox=fields['mbox'])
+        dataset_revision = DatasetRevision.objects.create(
+            dataset=dataset,
+            user_id=user.id,
+            status=fields['status'],
+            category=Category.objects.get(id=fields['category']),
+            filename=file_name,
+            end_point=fields['end_point'],
+            impl_type=fields['impl_type'],
+            impl_details=impl_details,
+            size=size,
+            license_url=fields['license_url'],
+            spatial=fields['spatial'],
+            frequency=fields['frequency'],
+            mbox=fields['mbox']
+        )
 
-        DatasetI18n.objects.create(dataset_revision=dataset_revision,
-            language=fields['language'], title=fields['title'],
-            description=fields['description'], notes=fields['notes'])
+        DatasetI18n.objects.create(
+            dataset_revision=dataset_revision,
+            language=fields['language'],
+            title=fields['title'].strip().replace('\n', ' '),
+            description=fields['description'].strip(),
+            notes=fields['notes'].strip().replace('\n', ' ')
+        )
 
         dataset_revision.add_tags(fields['tags'])
         dataset_revision.add_sources(fields['sources'])
@@ -73,17 +85,24 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         #    # Build impl_details if necessary
         fields['impl_details'] = builder.build()
 
+        fields['title'] = fields['title'].strip().replace('\n', ' ')
+        fields['description'] = fields['description'].strip().replace('\n', ' ')
+        fields['notes'] = fields['notes'].strip()
+
         changed_fields.append('impl_details')
 
         dataset_revision.update(changed_fields, **fields)
 
-        DatasetI18n.objects.get(dataset_revision=dataset_revision, language=fields['language']).update(changed_fields, **fields)
+        DatasetI18n.objects.get(dataset_revision=dataset_revision, language=fields['language']).update(
+            changed_fields, **fields
+        )
 
         dataset_revision.add_tags(fields['tags'])
         dataset_revision.add_sources(fields['sources'])
 
         return dataset_revision
-        
+
+
 class DatasetSearchDAOFactory():
     """ select Search engine"""
     
