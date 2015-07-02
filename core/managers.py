@@ -149,7 +149,6 @@ class DataStreamManager(models.Manager):
 
         return top_datastreams
 
-
     def get_last(self, account_id, limit = 5):
         """ Return the last DSs Ids. """
 
@@ -173,6 +172,7 @@ class DataStreamManager(models.Manager):
             last_datastreams.append(datastream_id)
 
         return last_datastreams
+
 
 class DashboardManager(models.Manager):
     def get_last(self, account_id, limit = 5):
@@ -198,6 +198,7 @@ class DashboardManager(models.Manager):
             last_dashboards.append(dashboard_id)
 
         return last_dashboards
+
 
 class CategoryManager(models.Manager):
     def get_for_home(self, language, account_ids = None, limit = None):
@@ -257,9 +258,9 @@ class CategoryManager(models.Manager):
         return categories
 
 
-
 class UserPassTicketsManager(models.Manager):
     pass
+
 
 class VisualizationManager(models.Manager):
     def get_top(self, account_id, limit = 5):
@@ -283,7 +284,6 @@ class VisualizationManager(models.Manager):
             top_visualizations.append(visualization_id)
 
         return top_visualizations
-
 
     def get_last(self, account_id, limit = 5):
         """ Return the last VZs Ids. """
@@ -309,6 +309,7 @@ class VisualizationManager(models.Manager):
 
         return last_visualizations
 
+
 class DataStreamParameterManager(models.Manager):
 
     def queryByDataStreamRevisionId(self, p_revision_id, p_language=settings.LANGUAGE_CODE[0:2]):
@@ -328,7 +329,6 @@ class DataStreamParameterManager(models.Manager):
                                     WHERE datastream_revision_id = %s
                                     ORDER BY position
                                     """, [p_revision_id])
-
 
         l_parameters_rows    = l_parameter_cursor.fetchall().__iter__()
         l_parameter_row      = helpers.next(l_parameters_rows, None)
@@ -350,6 +350,7 @@ class DataStreamParameterManager(models.Manager):
 
         return l_parameters
 
+
 class DataSetManager(models.Manager):
 
     def getEndPointById(self, p_id):
@@ -365,7 +366,6 @@ class DataSetManager(models.Manager):
                                     ORDER BY id DESC
                                     """, [p_id])
 
-
         l_datasets_rows    = l_dataset_cursor.fetchall().__iter__()
         l_dataset_row      = helpers.next(l_datasets_rows, None)
 
@@ -373,6 +373,7 @@ class DataSetManager(models.Manager):
         l_dataset_end_point   = l_dataset_row[dataset_end_point]
 
         return l_dataset_end_point, l_dataset_end_point.startswith('file://')
+
 
 class DatasetRevisionManager(models.Manager):
 
@@ -394,6 +395,7 @@ class DatasetRevisionManager(models.Manager):
     def get_last_revision(self, resource_id):
         revision_id = self.get_last_revision_id(resource_id)
         return super(DatasetRevisionManager, self).get(pk=revision_id)
+
 
 class FinderManager:
 
@@ -417,6 +419,7 @@ class FinderManager:
             raise
         except Exception, e:
             return self.get_failback_finder().search(*args, **kwargs)
+
 
 class Finder:
     def __init__(self):
@@ -457,6 +460,7 @@ class Finder:
 
         self.terms = [ subquery for subquery in self.terms if subquery ]
 
+
 class DashboardRevisionManager(models.Manager):
 
     def get_last_published_id(self, dashboard_id):
@@ -472,6 +476,7 @@ class DashboardRevisionManager(models.Manager):
     def get_last_revision(self, resource_id):
         revision_id = self.get_last_revision_id(resource_id)
         return super(DashboardRevisionManager, self).get(pk=revision_id)
+
 
 class DataStreamRevisionManager(models.Manager):
     def get_guids_with_cache(self):
@@ -528,6 +533,7 @@ class DataStreamRevisionManager(models.Manager):
         revision_id = self.get_last_revision_id(resource_id)
         return super(DataStreamRevisionManager, self).get(pk=revision_id)
 
+
 class VisualizationRevisionManager(models.Manager):
 
     def get_last_published_id(self, visualization_id):
@@ -546,6 +552,7 @@ class VisualizationRevisionManager(models.Manager):
     def get_last_revision(self, resource_id):
         revision_id = self.get_last_revision_id(resource_id)
         return super(VisualizationRevisionManager, self).get(pk=revision_id)
+
 
 class IndexTankFinder(Finder):
 
