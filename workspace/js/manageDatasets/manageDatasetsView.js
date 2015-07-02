@@ -128,6 +128,11 @@ var ManageDatasetsView = Backbone.View.extend({
             url: 'filters.json'
         });
 
+        this.listResources.on('remove', function (event) {
+            this.listResources.queryParams.filters = null;
+            this.filtersCollection.fetch({reset: true});
+        }, this);
+
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
             collection: this.filtersCollection

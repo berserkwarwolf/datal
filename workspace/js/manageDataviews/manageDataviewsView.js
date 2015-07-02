@@ -152,9 +152,16 @@ var ManageDataviewsView = Backbone.View.extend({
 
     initFilters: function(filters){
 
+        this.listResources = new ListResources();
+
         this.filtersCollection = new Backbone.Collection(filters, {
             url: 'filters.json'
         });
+
+        this.listResources.on('remove', function (event) {
+            this.listResources.queryParams.filters = null;
+            this.filtersCollection.fetch({reset: true});
+        }, this);
 
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
@@ -170,10 +177,6 @@ var ManageDataviewsView = Backbone.View.extend({
             this.listResources.queryParams.filters = null;
             this.listResources.fetch({reset: true});
         });
-
-        // Init Backbone PageableCollection
-        this.listResources = new ListResources();
-
     },
 
     initList: function(){
