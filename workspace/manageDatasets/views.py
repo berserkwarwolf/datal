@@ -67,7 +67,7 @@ def list(request):
 
     filters = remove_duplicated_filters(resources)
 
-    my_filters = {k:[valor for valor in v] for k,v in filters.items()}
+    my_filters = get_filters(resources)
     logger.error(my_filters)
 
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
@@ -139,10 +139,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    filters = get_filters(resources)
-
-    data = {'total_resources': total_resources, 'resources': resources, 'filters': filters}
-    logger.error(filters)
+    data = {'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
     mimetype = "application/json"

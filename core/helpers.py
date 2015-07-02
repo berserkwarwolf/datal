@@ -454,14 +454,14 @@ def get_filters(resources):
     filters = set([])
 
     for res in resources:
-        filters.add(('status', res.get('status')))
-        filters.add(('type', res.get('impl_type')))
-        filters.add(('category', res.get('category__categoryi18n__name')))
-        filters.add(('author', res.get('dataset__user__nick')))
-        filters.add(('author', res.get('datastream__user__nick')))
+        filters.add(('status', res.get('status'), unicode(STATUS_CHOICES[int(res.get('status'))][1])))
+        filters.add(('type', res.get('impl_type'), unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+        filters.add(('category', res.get('category__categoryi18n__name'), res.get('category__categoryi18n__name')))
+        filters.add(('author', res.get('dataset__user__nick'), res.get('dataset__user__nick')))
+        if res.get('datastream__user__nick'):
+            filters.add(('author', res.get('datastream__user__nick'), res.get('datastream__user__nick')))
 
-    # unicode(SOURCE_IMPLEMENTATION_CHOICES[int(impl_type)][1])
-    return [{'type':k, 'value':v, 'title':v} for k,v in filters]
+    return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
 
 def datatable_ordering_helper(query, col_number, ascending, order_columns):
