@@ -47,7 +47,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         fields['title'] = fields['title'].strip().replace('\n', ' ')
         fields['description'] = fields['description'].strip().replace('\n', ' ')
         fields['notes'] = fields['notes'].strip()
-        
+
         datastream_revision.update(changed_fields, **fields)
 
         DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=fields['language']).update(

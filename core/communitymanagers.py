@@ -1,7 +1,5 @@
-from django.conf import settings
 from django.db import connection
 from django.core.urlresolvers import reverse
-from core import managers
 from core.models import *
 from core.helpers import slugify
 from core import helpers
@@ -9,16 +7,13 @@ from core import helpers
 # CategoryManager
 def get_for_browse(self, category_slug, language):
     category_query = super(managers.CategoryManager, self).values('id', 'categoryi18n__name')
-    category_query = category_query.filter(categoryi18n__language = language
-                                        , categoryi18n__slug=category_slug)[0]
+    category_query = category_query.filter(categoryi18n__language=language, categoryi18n__slug=category_slug)[0]
     return {'id': category_query['id'], 'name': category_query['categoryi18n__name']}
 managers.CategoryManager.get_for_browse = get_for_browse
 
+
 class FinderManager(managers.FinderManager):
-
-    def __init__(self, finder_class = managers.IndexTankFinder,
-                 failback_finder_class = managers.IndexTankFinder):
-
+    def __init__(self, finder_class=managers.IndexTankFinder, failback_finder_class=managers.IndexTankFinder):
         self.finder_class = finder_class
         self.failback_finder_class = failback_finder_class
         managers.FinderManager.__init__(self)

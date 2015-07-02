@@ -1,19 +1,16 @@
-from django.conf import settings
-from django.http import Http404
+import re
 from django.views.decorators.http import require_POST
 from django.utils.translation import ugettext
-from core.models import *
 from django.views.decorators.csrf import csrf_exempt
-from core.helpers import get_domain_with_protocol
 from django.shortcuts import render_to_response, HttpResponse
-from core.auth.decorators import login_required, privilege_required
-
-from workspace.personalizeHome.managers import ThemeFinder
-from core.communitymanagers import * # FinderManager
-from core.lib.datastore import *
 from django.core.exceptions import ValidationError
 
-import re
+from core.auth.decorators import login_required, privilege_required
+from core.helpers import get_domain_with_protocol
+from core.communitymanagers import *
+from core.lib.datastore import *
+from workspace.personalizeHome.managers import ThemeFinder
+
 import json
 
 @login_required
@@ -43,19 +40,18 @@ def save(request):
             else:
                 account.set_preference('account.has.home', True)
             account.set_preference('account.home', jsonContent)
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-PREFERENCES-SAVESUCCESSFULLY-TEXT')]}), content_type='application/json')
-
+            return HttpResponse(json.dumps({
+                'status': 'ok',
+                'messages': [ugettext('APP-PREFERENCES-SAVESUCCESSFULLY-TEXT')]}), content_type='application/json')
         else:
             previewHome = 'http://'+preferences['account_domain']+'/home?preview=true'
             account.set_preference('account.preview', jsonContent)
             return HttpResponse(json.dumps({'preview_home':previewHome}), content_type='application/json')
 
-
-
 @csrf_exempt
 def suggest(request):
     auth_manager = request.auth_manager
-    account= auth_manager.get_account()
+    account = auth_manager.get_account()
     preferences = account.get_preferences()
     if preferences['account_home_filters'] == 'featured_accounts':
         featured_accounts = Account.objects.get_featured_accounts(account.id)
@@ -68,19 +64,16 @@ def suggest(request):
     if query:
         resources = request.GET.getlist('resources[]', '')
         fm = FinderManager(ThemeFinder)
-        results, time, facets = fm.search(account_id = account_id,
-                                          query = query,
-                                          resource = resources)
+        results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
 
         # optionally shows extra info
         # results.append({"extras": {"query": fm.get_finder().last_query, "time": time, "facets": facets}})
 
         data = json.dumps(results)
     else:
-        data= ''
+        data = ''
     #else:
     #    data = 'fail'
-
 
     return HttpResponse(data,  content_type='application/json')
 
