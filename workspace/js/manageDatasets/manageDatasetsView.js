@@ -121,26 +121,10 @@ var ManageDatasetsView = Backbone.View.extend({
 
     initFilters: function(filters){
 
-        // Init the collection with django view list of datasets.
-        this.filters = new FiltersCollection();
-
-        // Active Filters View
-        this.activeFiltersView = new ActiveFiltersView({
-            collection: this.filters,
-        });
-
-        // Inactive Filters View
-        this.inactiveFiltersView = new InactiveFiltersView({
-            collection: this.filters
-        });
-
         // Init Backbone PageableCollection
-        this.listResources = new ListResources({
-            filters: this.filters
-        });
+        this.listResources = new ListResources();
 
         this.filtersCollection = new Backbone.Collection(filters);
-
 
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
@@ -148,11 +132,12 @@ var ManageDatasetsView = Backbone.View.extend({
         });
 
         this.listenTo(this.filtersView, 'change', function (queryDict) {
-            if (queryDict !== {}) {
-                this.listResources.queryParams.filters = JSON.stringify(queryDict);
-            } else {
-                this.listResources.queryParams.filters = null;
-            }
+            this.listResources.queryParams.filters = JSON.stringify(queryDict);
+            this.listResources.fetch({reset: true});
+        });
+
+        this.listenTo(this.filtersView, 'clear', function () {
+            this.listResources.queryParams.filters = null;
             this.listResources.fetch({reset: true});
         });
 
@@ -239,6 +224,7 @@ var ManageDatasetsView = Backbone.View.extend({
         this.listResources.fetch({
             reset: true
         });
+<<<<<<< HEAD
 
         // ListResources View
         this.listResourcesView = new ListResourcesView({
@@ -247,6 +233,8 @@ var ManageDatasetsView = Backbone.View.extend({
             grid: this.grid,
             paginator: paginator
         });
+=======
+>>>>>>> quitar codigo no utilizado
 
     }
 
