@@ -21,7 +21,8 @@ var ListResources = Backbone.PageableCollection.extend({
 	queryParams: {
 		totalPages: null,
 		page: null,
-		pageSize: "itemxpage"
+		pageSize: "itemxpage",
+		filters: null
 	},
 
 	parseState: function (resp, queryParams, state, options) {

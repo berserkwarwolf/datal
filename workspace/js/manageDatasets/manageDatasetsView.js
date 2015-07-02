@@ -141,13 +141,19 @@ var ManageDatasetsView = Backbone.View.extend({
 
         this.filtersCollection = new Backbone.Collection(filters);
 
-        this.listenTo(this.filtersCollection, 'change', function (model) {
-            console.log(model);
-        });
 
         this.filtersView = new FiltersView({
             el: this.$('.filters-view'),
             collection: this.filtersCollection
+        });
+
+        this.listenTo(this.filtersView, 'change', function (queryDict) {
+            if (queryDict !== {}) {
+                this.listResources.queryParams.filters = JSON.stringify(queryDict);
+            } else {
+                this.listResources.queryParams.filters = null;
+            }
+            this.listResources.fetch({reset: true});
         });
 
     },

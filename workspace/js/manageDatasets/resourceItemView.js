@@ -10,8 +10,8 @@ var ListResourcesView = Backbone.View.extend({
         this.rows_views = [];
 
         // Listen changes in the active filters collection.
-        this.listenTo(this.filters_col, 'add', this.sendQuery);
-        this.listenTo(this.filters_col, 'remove', this.sendQuery);
+        // this.listenTo(this.filters_col, 'add', this.sendQuery);
+        // this.listenTo(this.filters_col, 'remove', this.sendQuery);
         this.listenTo(this.model, 'reset', this.cleanAll);
 
         this.render();

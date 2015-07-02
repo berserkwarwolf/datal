@@ -9,6 +9,7 @@ var FiltersView = Backbone.View.extend({
         this.template = _.template($('#filters-template').html());
 
         this.render();
+        this.listenTo(this.collection, 'change', this.onFilterChange, this);
     },
 
     render: function () {
@@ -67,6 +68,22 @@ var FiltersView = Backbone.View.extend({
         var model = this.collection.get(cid);
         model.set('active', false);
         this.render();
+    },
+
+    onFilterChange: function (model) {
+        var active = _.filter(this.collection.models, function (item) {
+            return item.get('active');
+        });
+        var queryDict = {};
+        _(active).each(function (item) {
+            if (queryDict[item.get('type')] != undefined){
+                queryDict[item.get('type')].push(item.get('value'));
+            }
+            else{
+                queryDict[item.get('type')] = [item.get('value')];
+            }
+        })
+        this.trigger('change', queryDict);
     }
 
 });

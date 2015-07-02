@@ -1,4 +1,4 @@
-import json, re, unicodedata, urllib2, importlib
+import json, re, unicodedata, urllib2, importlib, logging
 
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
@@ -12,6 +12,8 @@ from babel import numbers, dates
 from core.primitives import PrimitiveComputer
 from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
+
+logger = logging.getLogger(__name__)
 
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
@@ -414,18 +416,10 @@ def set_dataset_impl_type_nice(item):
 def unset_dataset_revision_nice(item):
     new_item = dict()
 
-    if item.get('type_filter'):
-        new_item['impl_type'] = []
-        for x in item.get('type_filter'):
-            new_item['impl_type'].append([impl_type[0] for impl_type in SOURCE_IMPLEMENTATION_CHOICES if impl_type[1] == x][0])
-
-    new_item['category__categoryi18n__name'] = item.get('category_filter')
-    new_item['dataset__user__nick'] = item.get('author_filter')
-
-    if item.get('status_filter'):
-        new_item['status'] = []
-        for x in item.get('status_filter'):
-            new_item['status'].append([status[0] for status in STATUS_CHOICES if status[1] == x][0])
+    new_item['impl_type'] = item.get('type')
+    new_item['category__categoryi18n__name'] = item.get('category')
+    new_item['dataset__user__nick'] = item.get('author')
+    new_item['status'] = item.get('status')
 
     return new_item
 
@@ -451,6 +445,10 @@ def remove_duplicated_filters(list_of_resources):
 
 
 def get_filters(resources):
+    """
+    Reads available filters from a resource array. Returns an array with objects and their 
+    i18n names when available.
+    """
     filters = set([])
 
     for res in resources:

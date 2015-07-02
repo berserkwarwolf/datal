@@ -1,4 +1,4 @@
-import urllib2
+import urllib2, logging
 
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
