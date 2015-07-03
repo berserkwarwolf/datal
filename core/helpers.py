@@ -444,30 +444,6 @@ def remove_duplicated_filters(list_of_resources):
     return removed
 
 
-def get_filters(resources):
-    """
-    Reads available filters from a resource array. Returns an array with objects and their
-    i18n names when available.
-    """
-    filters = set([])
-
-    for res in resources:
-        filters.add(('status', res.get('status'), unicode(STATUS_CHOICES[int(res.get('status'))][1])))
-
-        if 'impl_type' in res:
-            filters.add(('type', res.get('impl_type'), unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
-
-        if 'category__categoryi18n__name' in res:
-            filters.add(('category', res.get('category__categoryi18n__name'), res.get('category__categoryi18n__name')))
-
-        if res.get('dataset__user__nick'):
-            filters.add(('author', res.get('dataset__user__nick'), res.get('dataset__user__nick')))
-        if res.get('datastream__user__nick'):
-            filters.add(('author', res.get('datastream__user__nick'), res.get('datastream__user__nick')))
-
-    return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
-
-
 def datatable_ordering_helper(query, col_number, ascending, order_columns):
     col_name = order_columns[col_number]
     if col_name:

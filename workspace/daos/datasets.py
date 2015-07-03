@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.daos.datasets import AbstractDatasetDBDAO
+from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
 from workspace import settings
 from core.models import DatasetRevision, DatasetI18n, DataStreamRevision
 from django.db.models import Q, F
@@ -71,7 +72,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        
+
         query = query.values('filename', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
                              'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
                              'dataseti18n__title', 'dataseti18n__description', 'created_at', 'size', 'end_point',
@@ -93,6 +94,37 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         query = query[nfrom:nto]
 
         return query, total_resources
+
+    def query_filters(self, account_id=None, language=None):
+        """
+        Reads available filters from a resource array. Returns an array with objects and their
+        i18n names when available.
+        """
+        query = DatasetRevision.objects.filter(
+                                                id=F('dataset__last_revision'),
+                                                dataset__user__account=account_id,
+                                                dataseti18n__language=language,
+                                                category__categoryi18n__language=language)
+
+        query = query.values('dataset__user__nick', 'status', 'impl_type',
+                             'category__categoryi18n__name')
+
+        filters = set([])
+
+        for res in query:
+            filters.add(('status', res.get('status'),
+                unicode(STATUS_CHOICES[int(res.get('status'))][1])))
+            if 'impl_type' in res:
+                filters.add(('type', res.get('impl_type'),
+                    unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+            if 'category__categoryi18n__name' in res:
+                filters.add(('category', res.get('category__categoryi18n__name'),
+                    res.get('category__categoryi18n__name')))
+            if res.get('dataset__user__nick'):
+                filters.add(('author', res.get('dataset__user__nick'),
+                    res.get('dataset__user__nick')))
+
+        return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
     def query_childs(self, dataset_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """

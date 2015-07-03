@@ -6,7 +6,11 @@ from django.db.models import Q, F
 from core.exceptions import SearchIndexNotFoundException
 from core.models import DatastreamI18n, DataStreamRevision
 from core.daos.resource import AbstractDataStreamDBDAO
+from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
 from workspace import settings
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -102,6 +106,34 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         query = query[nfrom:nto]
 
         return query, total_resources
+
+    def query_filters(self, account_id=None, language=None):
+        """
+        Reads available filters from a resource array. Returns an array with objects and their
+        i18n names when available.
+        """
+        query = DataStreamRevision.objects.filter(
+                                                id=F('datastream__last_revision'),
+                                                dataset__user__account=account_id,
+                                                datastreami18n__language=language,
+                                                category__categoryi18n__language=language)
+
+        query = query.values('datastream__user__nick', 'status',
+                             'category__categoryi18n__name')
+
+        filters = set([])
+
+        for res in query:
+            filters.add(('status', res.get('status'),
+                unicode(STATUS_CHOICES[int(res.get('status'))][1])))
+            if 'category__categoryi18n__name' in res:
+                filters.add(('category', res.get('category__categoryi18n__name'),
+                    res.get('category__categoryi18n__name')))
+            if res.get('datastream__user__nick'):
+                filters.add(('author', res.get('datastream__user__nick'),
+                    res.get('datastream__user__nick')))
+
+        return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
     def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """

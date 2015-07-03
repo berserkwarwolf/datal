@@ -88,7 +88,7 @@
   $(document).ready(function(){
     var manageDatasetsView =  new ManageDatasetsView({
       datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
-      filters: {{my_filters|jsonify}}
+      filters: {{filters|jsonify}}
     });
   });
 </script>

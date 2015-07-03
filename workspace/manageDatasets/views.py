@@ -14,7 +14,6 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.helpers import remove_duplicated_filters, filters_to_model_fields
-from core.helpers import get_filters
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -58,16 +57,15 @@ def action_request_file(request):
 def list(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
-
-    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
-                                                      language=request.user.language, page=0)
+    ds_dao = DatasetDBDAO()
+    resources, total_resources = ds_dao.query(account_id=request.user.account.id,
+                                                language=request.user.language)
 
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageDatasets/noResults.html', locals())
 
-    filters = remove_duplicated_filters(resources)
-
-    my_filters = get_filters(resources)
+    filters = ds_dao.query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
 
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
@@ -151,9 +149,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_GET
 def get_filters_json(request):
     """ List all Filters available """
-    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
-                                                      language=request.user.language)
-    filters = get_filters(resources)
+    filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))
 
 

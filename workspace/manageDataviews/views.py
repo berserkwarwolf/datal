@@ -9,7 +9,6 @@ from django.views.decorators.http import require_GET, require_http_methods
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.helpers import remove_duplicated_filters, filters_to_model_fields
-from core.helpers import get_filters
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
@@ -44,6 +43,7 @@ def view(request, revision_id):
 @require_GET
 def list(request):
     """ list all dataviews """
+    ds_dao = DataStreamDBDAO()
 
     resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
@@ -52,9 +52,8 @@ def list(request):
     for resource in resources:
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    filters = remove_duplicated_filters(resources)
-
-    my_filters = get_filters(resources)
+    filters = ds_dao.query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
 
     return render_to_response('manageDataviews/index.html', locals())
 
@@ -117,9 +116,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_GET
 def get_filters_json(request):
     """ List all Filters available """
-    resources, total_resources = DatasetDBDAO().query(account_id=request.user.account.id,
-                                                      language=request.user.language)
-    filters = get_filters(resources)
+    filters = DataStreamDBDAO().query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))
 
 
