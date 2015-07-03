@@ -4,7 +4,7 @@ from workspace.manageDatasets.views import *
 
 urlpatterns = patterns('',
         url(r'^$', list, name='manageDatasets.list'),
-        url(r'^(?P<revision_id>\d+)$', view, name='manageDatasets.view'),
+        url(r'^(?P<revision_id>\d+)$', action_view, name='manageDatasets.view'),
         url(r'^create$', create, name='manageDatasets.create'),
         url(r'^create/(?P<collect_type>[a-z]+)$', create, name='manageDatasets.create_type'),
         url(r'^edit$', edit, name='manageDatasets.edit'),

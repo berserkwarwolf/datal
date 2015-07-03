@@ -73,12 +73,16 @@ def list(request):
 
 @login_required
 @require_GET
-def view(request, revision_id):
+def action_view(request, revision_id):
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     user_id = request.auth_manager.id
     language = request.auth_manager.language
-    dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
+    try:
+        dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
+    except DatasetRevision.DoesNotExist:
+        raise DatasetNotFoundException
+        
     datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
     return render_to_response('viewDataset/index.html', locals())
 
