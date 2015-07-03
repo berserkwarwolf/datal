@@ -14,7 +14,6 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.helpers import remove_duplicated_filters, filters_to_model_fields
-from core.helpers import get_filters
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -150,7 +149,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_GET
 def get_filters_json(request):
     """ List all Filters available """
-    filters = ds_dao.query_filters(account_id=request.user.account.id,
+    filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))
 
