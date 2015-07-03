@@ -51,6 +51,8 @@ class DatasetNotFoundException(LifeCycleException):
 class DataStreamNotFoundException(LifeCycleException):
     title = 'Datastream not found'
 
+    def __init__(self, description=''):
+        super(DataStreamNotFoundException, self).__init__(description=description, status_code=404)
 
 class VisualizationRequiredException(LifeCycleException):
     title = 'Visualization not found'
