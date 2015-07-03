@@ -25,7 +25,6 @@ logger = logging.getLogger(__name__)
 @login_required
 @require_GET
 def action_view(request, revision_id):
-    logger.error('loadin DV %s' % str(revision_id))
     
     language = request.auth_manager.language
     try:
