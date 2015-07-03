@@ -54,3 +54,8 @@ Actualizacion
 2. vagrant provision (si la virtual esta corriendo) o vagrant up --provision (si la virtual esta apagada)
 
 
+Cambiar los host del sistema
+----------------------------
+
+Para Linux y Mac el archivo es /etc/hosts, para Windows es \WINDOWS\system32\drivers\etc y para Windows 8 hay que tener en cuenta este detalle: 
+http://www.howtogeek.com/122404/how-to-block-websites-in-windows-8s-hosts-file/
