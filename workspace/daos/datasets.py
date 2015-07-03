@@ -12,17 +12,14 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
     def get(self, language, dataset_id=None, dataset_revision_id=None):
         """ Get full data """
-        try:
-            dataset_revision = dataset_id is None and \
+        dataset_revision = dataset_id is None and \
                            DatasetRevision.objects.select_related().get(
                                pk=dataset_revision_id, category__categoryi18n__language=language,
                                dataseti18n__language=language) or \
                            DatasetRevision.objects.select_related().get(
                                pk=dataset__last_revision, category__categoryi18n__language=language,
                                dataseti18n__language=language)
-        except DatasetRevision.DoesNotExist:
-            raise
-            
+
         tags = dataset_revision.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = dataset_revision.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
 
