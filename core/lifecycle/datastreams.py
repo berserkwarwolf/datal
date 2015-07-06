@@ -143,7 +143,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
         DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
-            id=self.datastream_revision.id).update(changed_fields=['status'], status=StatusChoices.DRAFT)
+            id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastreams = DataStreamRevision.objects.select_for_update().filter(
