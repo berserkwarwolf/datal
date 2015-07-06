@@ -1,26 +1,27 @@
-from django.conf import settings
+import hashlib
+import string
+import datetime
+
 from django.core.mail import send_mail
-from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponse
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.utils.translation import ugettext
 from django.http import HttpResponseRedirect
-from core.helpers import slugify, get_domain_with_protocol
+
+from uuid import uuid4
+from random import choice
+
+from core.helpers import get_domain_with_protocol
 from core.auth.auth import AuthManager
 from core.auth.decorators import login_required
 from core.choices import TicketChoices
 from core.models import *
 from core.shortcuts import render_to_response
-from workspace.accounts import forms
 from core.lib.mail import mail
-import hashlib
-from uuid import uuid4
-from random import choice
-import string
-import datetime
+from workspace.accounts import forms
 
 def signup(request):
     form = forms.SignUpForm(initial={'language': request.auth_manager.language})
