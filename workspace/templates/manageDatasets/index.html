@@ -57,7 +57,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageDatasets" style="{% block css_hide %}{% endblock %}">
+<div class="manager" id="id_manageDatasets">
 
   <div class="wrapper1">
     <div class="wrapper2 clearfix">
@@ -78,7 +78,18 @@
 
 </div>
 
-{% block noresults %}{% endblock %}
+<!-- No results -->
+<div class="no-results-view hide">
+  <div class="zeroResults">
+    <div class="zeroIcon zeroDatasets"></div>
+    <p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
+  </div>
+  <div class="startAdding">
+    <div class="startAddingArrows startDatasets"></div>
+    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+    <p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+  </div>
+</div>
 
 {% endblock %}
 
