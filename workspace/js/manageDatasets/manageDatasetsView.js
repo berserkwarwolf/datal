@@ -67,6 +67,7 @@ var ManageDatasetsView = Backbone.View.extend({
         if (collection.length === 0) {
             $('.no-results-view').removeClass('hidden');
             $('.manager').addClass('hidden');
+            $('#id_dataviews_option').addClass('disabled');
         }
     },
 
