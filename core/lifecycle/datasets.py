@@ -168,14 +168,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
+            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_published_revision__id'),
                 status=StatusChoices.PUBLISHED
             )
 
-            for datastream in datastreams:
-                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).unpublish(killemall=True)
+            for datastream_revision in datastream_revisions:
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).unpublish(
+                    killemall=True)
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
