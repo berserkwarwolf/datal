@@ -48,8 +48,6 @@ def list(request):
     ds_dao = DataStreamDBDAO()
 
     resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
-    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
-        return render_to_response('manageDataviews/noResults.html', locals())
 
     for resource in resources:
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})

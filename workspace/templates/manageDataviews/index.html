@@ -80,7 +80,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageDataviews" style="{% block css_hide %}{% endblock %}">
+<div class="manager" id="id_manageDataviews">
 
   <div class="wrapper1">
     <div class="wrapper2 clearfix">
@@ -90,7 +90,7 @@
         <section class="filters-view"></section>
 
         <!-- List -->
-        {% include "manageDataviews/list.html" %}   
+        {% include "manageDataviews/list.html" %}
 
       </div>
     </div>
@@ -101,7 +101,18 @@
 
 </div>
 
-{% block noresults %}{% endblock %}
+<!-- No results -->
+<div class="no-results-view hidden">
+  <div class="zeroResults">
+    <div class="zeroIcon zeroDataviews"></div>
+    <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>
+  </div>
+  <div class="startAdding">
+    <div class="startAddingArrows startDataviews"></div>
+    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+    <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
+  </div>
+</div>
 
 {% endblock %}
 
