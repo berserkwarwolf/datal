@@ -50,23 +50,28 @@ def create(request):
         category_name = default_category[language]
         category_description = ''
         category = Category.objects.create(account = account)
-        CategoryI18n.objects.create(language=language, category=category
-        , name=category_name, slug=slugify(category_name)
-        , description=category_description)
+        CategoryI18n.objects.create(
+            language=language,
+            category=category,
+            name=category_name,
+            slug=slugify(category_name),
+            description=category_description
+        )
 
-        initial_preferences = [('account.url', form.cleaned_data.get('admin_url'))
-                               , ('account.name', account.name)
-                               , ('account.language', language)
-                               , ('enable.junar.footer', 'on')
-                               , ('account.page.titles', account.name)
-                               , ('account.default.category', category.id)
-                              ]
+        initial_preferences = [
+            ('account.url', form.cleaned_data.get('admin_url')),
+            ('account.name', account.name),
+            ('account.language', language),
+            ('enable.junar.footer', 'on'),
+            ('account.page.titles', account.name),
+            ('account.default.category', category.id)
+        ]
 
         for ip in initial_preferences:
             preference = Preference()
             preference.account = account
             preference.key = ip[0]
-            preference.value =  ip[1]
+            preference.value = ip[1]
             preference.save()
 
         user = User()
