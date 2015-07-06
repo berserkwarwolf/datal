@@ -15,6 +15,7 @@ from core.cache import Cache
 
 logger = logging.getLogger(__name__)
 
+
 def add_facets_to_doc(resource, account, doc):
     logger = logging.getLogger(__name__)
     faceted = account.faceted_fields()
@@ -283,13 +284,15 @@ class DataStream(GuidModel):
 
 
 class DataStreamRevision(models.Model):
+    STATUS_CHOICES = choices.STATUS_CHOICES
+
     datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'), on_delete=models.PROTECT)
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     data_source = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
     select_statement = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
-    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     rdf_template = models.TextField(blank=True,
@@ -651,6 +654,8 @@ class Dataset(GuidModel):
 
 
 class DatasetRevision(models.Model):
+    STATUS_CHOICES = choices.STATUS_CHOICES
+
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
@@ -659,7 +664,7 @@ class DatasetRevision(models.Model):
     impl_details = models.TextField(blank=True, null=True, verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'))
     impl_type = models.IntegerField(choices=choices.SOURCE_IMPLEMENTATION_CHOICES,
                                     verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_TYPE_LABEL'))
-    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     # Just for resources compatibility
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     size = models.IntegerField(default=0, verbose_name=ugettext_lazy('MODEL_SIZE_LABEL'))
