@@ -3,7 +3,7 @@ from core.choices import StatusChoices
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
 
-class ExceptionAction:
+class ExceptionAction(object):
     description = _('EXCEPTION-ACTION-GENERIC')
     
     def __init__(self, url, description=None):
@@ -18,6 +18,10 @@ class ExceptionAction:
 
 class ViewDatastreamExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASREAM')
+
+    def __init__(self, revision):
+        url = reverse('manageDataviews.view', args=(revision.id,))
+        super(ViewDatastreamExceptionAction, self).__init__(url)
 
 
 class DATALException(Exception):
@@ -65,9 +69,7 @@ class ChildNotApprovedException(LifeCycleException):
             count=str(len(self.failed_revisions)))
 
     def get_actions(self):
-        return map(lambda x: ViewDatastreamExceptionAction(
-                                reverse('manageDataviews.view', args=(x.id,))),
-                self.failed_revisions)
+        return map(lambda x: ViewDatastreamExceptionAction(x))
 
 class ApplicationException(DATALException):
     title = 'Application error'
