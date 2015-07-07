@@ -40,4 +40,4 @@ indextank_initd:
      - group: root
    cmd.run:
     - cwd: /usr/share/indextank-engine
-    - name: /etc/init.d/indextank-engine.sh
+    - name: /etc/init.d/indextank-engine.sh start
