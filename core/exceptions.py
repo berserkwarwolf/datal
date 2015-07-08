@@ -16,6 +16,7 @@ class ExceptionAction(object):
             'description': self.description
         }
 
+
 class ViewDatastreamExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASREAM')
 
@@ -29,12 +30,14 @@ class DATALException(Exception):
     title = _('EXCEPTION-TITLE-GENERIC')
     description = _('EXCEPTION-DESCRIPTION-GENERIC')
     tipo = 'datal-abstract'
+    status_code = 400
 
-    def __init__(self, title=None, description=None, status_code=400, **kwargs):
-        self.context = **kwargs
-        self.title = (title or self.title) % self.context
-        self.description = (description or self.description) % self.context
-        self.status_code = status_code 
+    def __init__(self, *args, **kwargs):
+        for key, value in kwargs.items():
+            setattr(self, key, value)
+        self._context = **kwargs
+        self.title = self.title % self._context
+        self.description = self.description % self._context
         message = '%s. %s' % (self.title, self.description)
         super(DATALException, self).__init__(message)
 
@@ -57,25 +60,78 @@ class DATALException(Exception):
     def convert_json(self):
         return json.dumps(self.as_dict())
 
+
+class LifeCycleException(ApplicationException):
+    title = _('EXCEPTION-TITLE-LIFE-CYCLE')
+    description = _('EXCEPTION-DESCRIPTION-LIFE-CYCLE')
+    tipo = 'life-cycle'
+
+
 class ChildNotApprovedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-CHILD-NOT-APPROVED')
     # Translators: Ejemplo, "Existen %(count)s hijos sin aprobar"
     description = _('EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED')
     tipo = 'child-not-approved'
 
-    def __init__(self, failed_revisions=None):
-        self.failed_revisions = failed_revisions or []
-        super(ChildNotApprovedException, self).__init__(
-            count=str(len(self.failed_revisions)))
 
-    def get_actions(self):
-        return map(lambda x: ViewDatastreamExceptionAction(x))
+class DatasetSaveException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASET-SAVE-ERROR')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR')
+    tipo = 'dataset-save-error'
+
+    def __init__(self, form, dataset):
+        self.dataset = dataset
+        super(DatasetSaveException, self).__init__(form)
+
+
+class DatastreamSaveException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR')
+    description = _('EXCEPTION-DESCRIPTION-DATASTREAM-SAVE-ERROR')
+    tipo = 'datastream-save-error'
+
+
+class VisualizationSaveException(FormErrorException):
+    title = _('EXCEPTION-TITLE-VISUALIZATION-SAVE-ERROR')
+    description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-SAVE-ERROR')
+    tipo = 'visualization-save-error'
+
+
+class DatasetNotFoundException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASET-NOT-FOUND')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND')
+    tipo = 'dataset-not-found'
+    status_code = 404
+
+
+class DataStreamNotFoundException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASTREAM-NOT-FOUND')
+    description = _('EXCEPTION-DESCRIPTION-DATASTREAM-NOT-FOUND')
+    tipo = 'datastream-not-found'
+    status_code = 404
+
+
+class VisualizationRequiredException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-VIZUALIZATION-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED')
+    tipo = 'vizualization-required'
+
+
+class IllegalStateException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-ILLEGAL-STATE')
+    description = _('EXCEPTION-DESCRIPTION-ILLEGAL-STATE')
+    tipo = 'illegal-state'
+
+
+class ParentNotPublishedException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISEHD')
+    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISEHD')
+    tipo = 'parent-not-published'
+
+
+
 
 class ApplicationException(DATALException):
     title = 'Application error'
-
-class LifeCycleException(ApplicationException):
-    title = 'Life cycle error'
 
 class DatastoreNotFoundException(ApplicationException):
     title = 'Data Store not found'
@@ -85,35 +141,6 @@ class MailServiceNotFoundException(ApplicationException):
 
 class SearchIndexNotFoundException(ApplicationException):
     title = 'Search index not found exception'
-
-class DatasetNotFoundException(LifeCycleException):
-    title = 'Dataset not found'
-
-    def __init__(self, description=''):
-        super(DatasetNotFoundException, self).__init__(description=description, status_code=404)
-
-class DataStreamNotFoundException(LifeCycleException):
-    title = 'Datastream not found'
-
-    def __init__(self, description=''):
-        super(DataStreamNotFoundException, self).__init__(description=description, status_code=404)
-
-class VisualizationRequiredException(LifeCycleException):
-    title = 'Visualization not found'
-
-class IlegalStateException(LifeCycleException):
-    title = 'Ilegal state'
-
-    def __init__(self, allowed_states, description=''):
-        self.extras = {"allowed_states": allowed_states}
-        super(IlegalStateException, self).__init__(description)
-
-
-class ParentNotPublishedException(LifeCycleException):
-    title = 'Parent not published'
-
-    def __init__(self, description='Parent resource must be published'):
-        super(ParentNotPublishedException, self).__init__(description)
 
 class S3CreateException(DATALException):
     title = 'S3 Create error'
