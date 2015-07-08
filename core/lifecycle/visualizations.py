@@ -36,7 +36,10 @@ class VisualizationLifeCycleManager():
 
         allowed_states = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
         if status not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=None,
+                                    to_state=status,
+                                    allowed_states=allowed_states)
 
         self.dao.create(datastream=datastream, title=title
             , description=description, language=language, status=status
@@ -60,7 +63,10 @@ class VisualizationLifeCycleManager():
 
         allowed_states = [StatusChoices.DRAFT]
         if fromEdition and self.visualization_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, "Can't send to review %d (%s)" % (self.visualization_revision.status, str(fromEdition)))
+            raise IllegalStateException(
+                                    from_state=self.visualization_revision.status,
+                                    to_state=StatusChoices.PENDING_REVIEW,
+                                    allowed_states=allowed_states)
 
         self.visualization_revision.status = StatusChoices.PENDING_REVIEW
         self.visualization_revision.save()
@@ -69,7 +75,10 @@ class VisualizationLifeCycleManager():
         """ accept a review """
         allowed_states = [StatusChoices.PENDING_REVIEW]
         if self.visualization_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=self.visualization_revision.status,
+                                    to_state=StatusChoices.APPROVED,
+                                    allowed_states=allowed_states)
 
         self.visualization_revision.status = StatusChoices.APPROVED
         self.visualization_revision.save()
@@ -85,7 +94,10 @@ class VisualizationLifeCycleManager():
             #APPROVED for future references
             self.visualization_revision.status = StatusChoices.APPROVED
             self.visualization_revision.save()
-            raise IlegalStateException(allowed_states, "Related resource (DS) nos published (%d)" % self.visualization_revision.status)
+            raise IllegalStateException(
+                                    from_state=self.visualization_revision.status,
+                                    to_state=StatusChoices.PUBLISHED,
+                                    allowed_states=allowed_states)
 
         # if related resource is StatusChoices.APPROVED, then we publish it
         if publish_backward:
@@ -107,7 +119,10 @@ class VisualizationLifeCycleManager():
         """ reject a review """
         allowed_states = [StatusChoices.PENDING_REVIEW]
         if self.visualization_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=self.visualization_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         self.visualization_revision.status = StatusChoices.DRAFT
         self.visualization_revision.save()
@@ -119,7 +134,10 @@ class VisualizationLifeCycleManager():
 
         allowed_states = [StatusChoices.PUBLISHED]
         if ignore_errors==False and self.visualization_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=self.visualization_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         self.visualization_revision.status = StatusChoices.DRAFT
         self.visualization_revision.save()
@@ -152,7 +170,7 @@ class VisualizationLifeCycleManager():
         """
         
         if not self.visualization_revision:
-            raise VisualizationRequiredException('Dataset is not defined')
+            raise VisualizationRequiredException()
         try:
             self.visualization_revision.delete()
             if VisualizationDBDAO(user_id=self.user.id).count_revisions() == 0:

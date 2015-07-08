@@ -8,7 +8,7 @@ from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
-from core.exceptions import DatasetNotFoundException, IlegalStateException, LifeCycleException
+from core.exceptions import DatasetNotFoundException, IllegalStateException, LifeCycleException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
@@ -58,7 +58,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         status = int(fields.get('status', StatusChoices.DRAFT))
 
         if status not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=None,
+                                    to_state=status, 
+                                    allowed_states=allowed_states)
 
         language = fields.get('language', language)
 
@@ -99,16 +102,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Publica una revision de dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=StatusChoices.PUBLISHED,
+                                    allowed_states=allowed_states)
 
         status = StatusChoices.PUBLISHED
-        try:
-            self._publish_childs()
-        except IlegalStateException:
-            # Si alguno de los hijos no se encuentra al menos aprobado,
-            # entonces el dataset no es publicado quedando en estado aprobado
-            status = StatusChoices.APPROVED
-
+        self._publish_childs()
+ 
         self.dataset_revision.status = status
         self.dataset_revision.save()
         
@@ -135,13 +136,16 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(datastream_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(publish_fail, '')
+                raise ChildNotApprovedException(dataset=self.dataset, unapproved=publish_fail)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         if killemall:
             self._unpublish_all()
@@ -182,7 +186,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision un dataset """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=StatusChoices.PENDING_REVIEW,
+                                    allowed_states=allowed_states)
 
         self._send_childs_to_review()
 
@@ -206,7 +213,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ accept a dataset revision """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=StatusChoices.APPROVED,
+                                    allowed_states=allowed_states)
 
         self.dataset_revision.status = StatusChoices.APPROVED
         self.dataset_revision.save()
@@ -215,7 +225,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ reject a dataset revision """
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision )
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         self.dataset_revision.status = StatusChoices.DRAFT
         self.dataset_revision.save()
@@ -226,7 +239,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         # Tener en cuenta que si es necesario ejecutar varios delete, debemos crear un nuevo objecto LifeCycle
 
         if self.dataset_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=self.dataset_revision.status,
+                                    to_state=None,
+                                    allowed_states=allowed_states)
 
         if self.dataset_revision.status == StatusChoices.PUBLISHED:
             search_dao = DatasetSearchDAOFactory().create()
@@ -275,7 +291,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
-            raise IlegalStateException(allowed_states, self.dataset_revision)
+            raise IllegalStateException(
+                                    from_state=old_sattus,
+                                    to_state=form_status,
+                                    allowed_states=allowed_states)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:

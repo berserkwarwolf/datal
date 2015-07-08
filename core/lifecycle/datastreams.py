@@ -5,7 +5,7 @@ from core.choices import ActionStreams
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
-from core.exceptions import IlegalStateException, DataStreamNotFoundException
+from core.exceptions import IllegalStateException, DataStreamNotFoundException
 from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
 
 logger = logging.getLogger(__name__)
@@ -61,7 +61,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         status = int(fields.get('status', StatusChoices.DRAFT))
 
         if int(status) not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=None,
+                                    to_state=status,
+                                    allowed_states=allowed_states)
 
         #language = fields.get('language', self.user.language)
         #category = Category.objects.get(pk=fields['category_id'])
@@ -86,15 +89,14 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Publica una revision de dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.PUBLISHED,
+                                    allowed_states=allowed_states)
 
         status = StatusChoices.PUBLISHED
-        try:
-            self._publish_childs()
-        except IlegalStateException:
-            # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
-            status = StatusChoices.APPROVED
-
+        
+        self._publish_childs()
         self.datastream_revision.status = status
         self.datastream_revision.save()
 
@@ -119,7 +121,11 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica la revision de un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
+
 
         if killemall:
             self._unpublish_all()
@@ -158,7 +164,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.PENDING_REVIEW,
+                                    allowed_states=allowed_states)
 
         self._send_childs_to_review()
 
@@ -181,7 +190,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ accept a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.APPROVED,
+                                    allowed_states=allowed_states)
 
         self.datastream_revision.status = StatusChoices.APPROVED
         self.datastream_revision.save()
@@ -190,7 +202,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ reject a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision )
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         self.datastream_revision.status = StatusChoices.DRAFT
         self.datastream_revision.save()
@@ -199,7 +214,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=None,
+                                    allowed_states=allowed_states)
 
         if self.datastream_revision.status == StatusChoices.PUBLISHED:
             search_dao = DatastreamSearchDAOFactory().create()
@@ -240,7 +258,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=old_status,
+                                    to_state=form_status,
+                                    allowed_states=allowed_states)
 
         if old_status == StatusChoices.DRAFT or \
                 (old_status == StatusChoices.APPROVED and form_status == StatusChoices.PUBLISHED):

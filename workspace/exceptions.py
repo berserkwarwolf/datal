@@ -36,9 +36,6 @@ class DatastreamRequiredException(LifeCycleException):
     title = 'Datastream required'
 
 
-class VisualizationRequiredException(LifeCycleException):
-    title = 'Visualization required'
-
 
 class SecurityException(DATALWorkspaceException):
     title = 'Security error'
