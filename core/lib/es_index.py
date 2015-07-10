@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from elasticsearch import Elasticsearch
+from elasticsearch import Elasticsearch, NotFoundError
 import logging
 
 class ElasticsearchIndex():
@@ -12,56 +12,56 @@ class ElasticsearchIndex():
         self.es = Elasticsearch(settings.SEARCH_INDEX['url'])
 
         # se crea el indice si es que no existe
+        # Ignora que exista el indice
         self.es.indices.create(index=settings.SEARCH_INDEX['index'], ignore=400)
+        self.logger = logging.getLogger(__name__)
 
         
     def indexit(self, document):
-        logger = logging.getLogger(__name__)
+        """add document to index"""
 
         if document:
-            logger.info('Elasticsearch: Agregar al index %s' % str(document))
+            self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
             return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
         return False
         
-    def count(self):
-        return self.index.get_size()
+    def count(self, doc_type=None):
+        """return %d of documents in index, doc_type (opt) filter this document type"""
+
+        if doc_type:
+            return self.es.count(index=settings.SEARCH_INDEX['index'], doc_type=doc_type)['count']
+        else:
+            return self.es.count(index=settings.SEARCH_INDEX['index'])['count']
         
-    def delete_documents(self, docs):
-        if not docs:
-            return None
+    def delete_document(self, document):
+        """delete by ID"""
 
-        # Devuelvo true temporalmente hasta implementar Haystack
-        return True
+        try:
+            output = self.es.delete(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['fields']['type'])
+            return output
+        except NotFoundError:
+            self.logger.error("ERROR NotFound: ID %s not found in index" % document['docid'])
+            return {u'found': False, u'_type': document['fields']['type'], u'_id': document['docid'], u'_version': 2, u'_index': settings.SEARCH_INDEX['index']}
+        except KeyError:
+            self.logger.error("ERROR: Document error (doc: %s)" % str(document))
 
-        # Comantado por falla en indextank al eliminar del indice.
+        return False
 
-        #status_code, response = self.index.delete_documents(docs)
-        #if response:
-        #    failed_documents = []
-        #    for i in xrange(len(response)):
-        #        if not response[i]['deleted']:
-        #            failed_documents.append(response[i])
-                    #TODO podria usarse el metodo individual self.delete_document para un segundo intento
-    
-        #    return len(failed_documents) == 0
-        #else:
-        #    return False
+    def __filterDeleted(self, item):
+        return item['found']
 
-    def delete_document(self, doc):
-        # Devuelvo true temporalmente hasta implementar Haystack
-        return True
+    def __filterNotDeleted(self, item):
+        return not item['found']
 
-        # Comantado por falla en indextank al eliminar del indice.
+    def delete_documents(self, documents):
+        """Delete from a list. Return [list(deleted), list(notdeleted)] """
 
-        # logger = logging.getLogger(__name__)
-        # values = self.index.delete_document(doc)
-        # status, dummy = values or (None, None)
-        # if status != '200':
-            # sometimes returns NONE and was deleted OK (?)
-        #     inf = "ERROR Status %s. Can't delete a searchify doc: {0}" % status
-        #     logger.error(inf.format(unicode(doc)))
+        result = map(self.delete_document, documents)
 
-        # return status == '200'
+        documents_deleted=filter(self.__filterDeleted,result)
+        documents_not_deleted=filter(self.__filterNotDeleted,result)
+
+        return [documents_deleted, documents_not_deleted]
