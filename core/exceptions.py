@@ -79,10 +79,6 @@ class DatasetSaveException(LifeCycleException):
     description = _('EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR')
     tipo = 'dataset-save-error'
 
-    def __init__(self, form, dataset):
-        self.dataset = dataset
-        super(DatasetSaveException, self).__init__(form)
-
 
 class DatastreamSaveException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR')
@@ -123,8 +119,8 @@ class IllegalStateException(LifeCycleException):
 
 
 class ParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISEHD')
-    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISEHD')
+    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
     tipo = 'parent-not-published'
 
 
