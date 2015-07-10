@@ -1,13 +1,19 @@
 # -*- coding: utf-8 -*-
 
 import time
+import logging
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
+from core.lib.es_index import ElasticsearchIndex
 from core import settings
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import CollectTypeChoices
+
+
+# Para usar templates en el campo field para el indexador
+from django.template import loader, Context
 
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
@@ -106,61 +112,99 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 class DatasetSearchDAOFactory():
     """ select Search engine"""
     
-    def create(self):
+    def create(self, dataset_revision):
         if settings.USE_SEARCHINDEX == 'searchify':
-            self.search_dao = DatasetSearchifyDAO()
+            self.search_dao = DatasetSearchifyDAO(dataset_revision)
+        elif settings.USE_SEARCHINDEX == 'elasticsearch':
+            self.search_dao = DatasetElasticsearchDAO(dataset_revision)
+
+        # Dummy test
+        elif settings.USE_SEARCHINDEX == 'test':
+            self.search_dao = DatasetSearchIndexDAO(dataset_revision)
         else:
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
-        
-class DatasetSearchifyDAO():
-    """ class for manage access to datasets' searchify documents """
-    def __init__(self):
 
-        self.search_index = SearchifyIndex()
-        
-    def add(self, dataset_revision):
-        category = dataset_revision.category.categoryi18n_set.all()[0]
-        dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision)
+class DatasetSearchIndexDAO():
+    """clase padre para las Dataset[indexador]DAO"""
 
-        # DS uses GUID, but here doesn't exists. We use ID
-        text = [dataseti18n.title, dataseti18n.description, dataset_revision.user.nick, str(dataset_revision.dataset.guid)]
+    TYPE="dt"
 
-        tags = dataset_revision.tagdataset_set.all().values_list('tag__name', flat=True)
-        text.extend(tags)
+    def __init__(self, dataset_revision):
+        self.dataset_revision=dataset_revision
 
-        text = ' '.join(text)
+    def add(self):
+        return True
+    def delete(self):
+        return True
+
+    def getCategory(self):
+        return self.dataset_revision.category.categoryi18n_set.all()[0]
+
+    def getDatasetI18n(self):
+        return DatasetI18n.objects.get(dataset_revision=self.dataset_revision)
+
+    def getDocumentID(self):
+        return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
+
+    def makeDocument(self):
+
+        category=self.getCategory()
+        dataseti18n = self.getDatasetI18n()
+
+        tags = self.dataset_revision.tagdataset_set.all().values_list('tag__name', flat=True)
+
+        # text esta generado via un template
+        text_template = loader.get_template("daos/dataset.txt")
+        text_context = Context({'category': category, 'dataseti18n': dataseti18n, 'dataset_revision': self.dataset_revision, 'tags': tags})
+
+        # el [:-1] le intenta sacar el ultimo \n que mete el render por default
+        text=text_template.render(text_context)[:-1]
 
         document = {
-                'docid' : "DT::DATASET-ID-" + str(dataset_revision.dataset.id),
+                'docid' : self.getDocumentID(),
                 'fields' :
-                    {'type' : 'dt',
-                     'dataset_id': dataset_revision.dataset.id,
-                     'datasetrevision_id': dataset_revision.id,
+                    {'type' : self.TYPE,
+                     'dataset_id': self.dataset_revision.dataset.id,
+                     'datasetrevision_id': self.dataset_revision.id,
                      'title': dataseti18n.title,
                      'text': text,
                      'description': dataseti18n.description,
-                     'owner_nick' : dataset_revision.user.nick,
+                     'owner_nick' : self.dataset_revision.user.nick,
                      'tags' : ','.join(tags),
-                     'account_id' : dataset_revision.dataset.user.account.id,
+                     'account_id' : self.dataset_revision.dataset.user.account.id,
                      'parameters': "",
-                     'timestamp': int(time.mktime(dataset_revision.created_at.timetuple())),
-                     'end_point': dataset_revision.end_point,
+                     'timestamp': int(time.mktime(self.dataset_revision.created_at.timetuple())),
+                     'end_point': self.dataset_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
-        # Update dict with facets
-        # try:
-        #     document = add_facets_to_doc(self, dataset.user.account, document)
-        # except Exception, e:
-        #     logger.error("indexable_dict ERROR: [%s]" % str(e))
+        return document
 
-        # document['fields'].update(get_meta_data_dict(dataset.meta_text))
-
-        self.search_index.indexit(document)
+ 
+class DatasetSearchifyDAO(DatasetSearchIndexDAO):
+    """ class for manage access to datasets' searchify documents """
+    def __init__(self, dataset_revision):
+        self.dataset_revision=dataset_revision
+        self.search_index = SearchifyIndex()
         
-    def remove(self, dataset_revision):
-        self.search_index.delete_documents(["DT::DATASET-ID-" + str(dataset_revision.dataset.id)])
+    def add(self):
+        self.search_index.indexit(self.makeDocument())
+        
+    def remove(self):
+        self.search_index.delete_documents([self.getDocumentID()])
+
+class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
+    """ class for manage access to datasets' ElasticSearch documents """
+
+    def __init__(self, dataset_revision):
+        self.dataset_revision=dataset_revision
+        self.search_index = ElasticsearchIndex()
+        
+    def add(self):
+        self.search_index.indexit(self.makeDocument())
+        
+    def remove(self):
+        self.search_index.delete_documents([self.getDocumentID()])

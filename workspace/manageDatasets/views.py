@@ -253,6 +253,7 @@ def edit(request, dataset_revision_id=None):
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
 
+
         # Import the form that we really need
         if collect_types[dataset['collect_type']] is not 'url':
             className = [collect_types[dataset['collect_type']].capitalize(), "Form"]

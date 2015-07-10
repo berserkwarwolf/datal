@@ -1,28 +1,33 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from indextank.client import ApiClient
-import types, re
+from elasticsearch import Elasticsearch
 import logging
 
-class SearchifyIndex():
-    """ Gestor para indice searchify"""
+class ElasticsearchIndex():
+    """ Gestor para indice elasticsearch"""
     
     def __init__(self):
-        self.api_client = ApiClient(settings.SEARCHIFY['api_url'][0])
-        self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
+
+        # establecemos conexión
+        self.es = Elasticsearch(settings.SEARCH_INDEX['url'])
+
+        # se crea el indice si es que no existe
+        self.es.indices.create(index=settings.SEARCH_INDEX['index'], ignore=400)
+
         
-    def indexit(self, docs):
+    def indexit(self, document):
         logger = logging.getLogger(__name__)
-        if not docs:    
-            logger.error("Ningun documento para indexar")
-            return False
-        else:
-            logger.info('Add to index %s' % str(docs))
-            result = self.index.add_documents(docs)
-            return result
+
+        if document:
+            logger.info('Elasticsearch: Agregar al index %s' % str(document))
+            return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+
+
+        logger.error(u"Elasticsearch: Ningún documento para indexar")
+        return False
         
     def count(self):
-        return self.index.get_size()        
+        return self.index.get_size()
         
     def delete_documents(self, docs):
         if not docs:
