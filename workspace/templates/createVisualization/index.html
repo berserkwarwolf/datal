@@ -1,13 +1,20 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags%}
 
 {% block meta %}
+
+
 {% compress css %}
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createVisualization.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
+
 <script language="javascript" src="/js_workspace/createVisualization/createVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/createVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/StartStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/DataStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/TypeStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
@@ -26,23 +33,23 @@
 
 {% block content %}
 
-  <div class="createVizualization create" id="id_createVisualization">
+  <div class="createVizualization create main-view" id="id_createVisualization">
 
     {% include "createVisualization/start.html" %}
 
-    {# include "createVisualization/data.html" #}
+    {% include "createVisualization/data.html" %}
 
-    {# include "createVisualization/chart/types.html" #}
+    {% include "createVisualization/chart/types.html" %}
 
-    {# include "createVisualization/chart/customize.html" #}
+    {% include "createVisualization/chart/customize.html" %}
 
-    {# include "createVisualization/map/customizeTrace.html" #}
+    {% include "createVisualization/map/customizeTrace.html" %}
 
-    {# include "createVisualization/map/customizeMarkers.html" #}
+    {% include "createVisualization/map/customizeMarkers.html" %}
 
-    {# include "createVisualization/map/customizeGeo.html" #}
+    {% include "createVisualization/map/customizeGeo.html" %}
 
-    {# include "createVisualization/finish.html" #}
+    {% include "createVisualization/finish.html" %}
 
   </div>
 
@@ -56,5 +63,13 @@ $(document).ready(function(){
   });
   var createVisualizationView = new CreateVisualizationView({model: createVisualizationModel});
 });
+
+  var stateModel = new Backbone.Model({step: 1});
+
+  var mainView = new MainView({
+    el: '.main-view',
+    model: stateModel
+  });
+
 </script>
 {% endblock %}
