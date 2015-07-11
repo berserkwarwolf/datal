@@ -24,11 +24,11 @@ class Command(BaseCommand):
 
         # index resources
         if options['reindex']:
-            search_dao = DatasetSearchDAOFactory().create()
 
             for datasetrevision in DatasetRevision.objects.filter(status=StatusChoices.PUBLISHED):
-                search_dao.add(datasetrevision)
+                search_dao = DatasetSearchDAOFactory().create(datasetrevision)
+                search_dao.add()
 
-            search_dao = DatastreamSearchDAOFactory().create()
-            for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
-                search_dao.add(datastreamrevision)
+#            search_dao = DatastreamSearchDAOFactory().create()
+#            for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
+#                search_dao.add(datastreamrevision)

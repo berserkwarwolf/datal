@@ -5,7 +5,7 @@ import logging
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
-from core.lib.es_index import ElasticsearchIndex
+from core.lib.elastic import ElasticsearchIndex
 from core import settings
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
@@ -148,7 +148,7 @@ class DatasetSearchIndexDAO():
     def getDocumentID(self):
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
-    def makeDocument(self):
+    def _build_document(self):
 
         category=self.getCategory()
         dataseti18n = self.getDatasetI18n()
@@ -191,7 +191,7 @@ class DatasetSearchifyDAO(DatasetSearchIndexDAO):
         self.search_index = SearchifyIndex()
         
     def add(self):
-        self.search_index.indexit(self.makeDocument())
+        self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([self.getDocumentID()])
@@ -204,7 +204,7 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self.makeDocument())
+        self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([self.getDocumentID()])
