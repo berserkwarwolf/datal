@@ -80,7 +80,6 @@ class DatastreamSearchDAOFactory():
     """ select Search engine"""
     
     def create(self, datastream_revision):
-        print settings.USE_SEARCHINDEX
         if settings.USE_SEARCHINDEX == 'searchify':
             self.search_dao = DatastreamSearchifyDAO(datastream_revision)
         elif settings.USE_SEARCHINDEX == 'elasticsearch':
