@@ -17,6 +17,9 @@
 
 	<!-- NEW -->
 	<script type="text/javascript" src="/js_workspace/common.js"></script>
+    <!-- Error Manager Module -->
+    <script language="javascript" src="/js_workspace/errorManager/errorManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+    <script language="javascript" src="/js_workspace/errorManager/errorManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -58,11 +61,13 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 {% endblock %}
 
 {% block base_bottom_js %}
+
+    {% include "errorManager/errorManager.html" %}
+
 	<script type="text/javascript">
 		
 		{% if auth_manager %}
