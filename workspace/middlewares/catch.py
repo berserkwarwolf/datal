@@ -47,14 +47,16 @@ class ExceptionManager(object):
         logger = logging.getLogger(__name__)
 
         mimetype = self.get_mime_type(request)
-        extension = 'json' if self.is_json(mimetypes) else 'html' 
+        extension = 'json' if self.is_json(mimetype) else 'html' 
         templates = ['workspace_error/unexpected_error.%s' % extension]
+        status_code = 400
         
         if isinstance(exception, DATALException):
             templates.append('workspace_errors/%s.%s' % (exception.template, 
                     extension))
             logger.warning('[CatchError] %s. %s' % (exception.title, 
                 exception.description))
+            status_code = exception.status_code
         else:
             trace = '\n'.join(traceback.format_exception(*(sys.exc_info())))
             logger.error('[UnexpectedCatchError] %s. %s %s' % (
