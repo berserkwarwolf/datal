@@ -27,6 +27,7 @@ class ExceptionManager(object):
         return content_type
 
     def get_mime_type(self, request):
+        content_type = self.get_content_type(request)
         if content_type.lower().startswith('application/json'):
             return 'application/json'
 
@@ -46,7 +47,7 @@ class ExceptionManager(object):
         logger = logging.getLogger(__name__)
 
         mimetype = self.get_mime_type(request)
-        extension = 'json' if self.is_json(mimetype) else 'html' 
+        extension = 'json' if self.is_json(mimetypes) else 'html' 
         templates = ['workspace_error/unexpected_error.%s' % extension]
         
         if isinstance(exception, DATALException):
