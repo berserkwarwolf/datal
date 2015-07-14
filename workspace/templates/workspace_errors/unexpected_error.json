@@ -4,6 +4,6 @@
     "error": "{% trans 'EXCEPTION-TITLE-UNEXPECTED' %}",
     "description": "{% trans 'EXCEPTION-DESCRIPTION-UNEXPECTED' %}",
     "status": "400",
-    "type": "{{exception__class}}",
+    "type": "{{exception.__class__}}",
     "actions": []
 }
