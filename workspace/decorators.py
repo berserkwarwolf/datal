@@ -3,7 +3,7 @@ from core.cache import Cache
 from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
-from workspace.exceptions import *
+from core.exceptions import *
 from core.choices import StatusChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager

@@ -1,0 +1,9 @@
+{% load i18n %} 
+
+{
+    "error": "{% trans 'EXCEPTION-TITLE-UNEXPECTED' %}",
+    "description": "{% trans 'EXCEPTION-DESCRIPTION-UNEXPECTED' %}",
+    "status": "400",
+    "type": "{{exception__class}}",
+    "actions": []
+}

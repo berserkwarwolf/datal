@@ -2,27 +2,7 @@ import json
 from core.choices import StatusChoices
 from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
-
-class ExceptionAction(object):
-    description = _('EXCEPTION-ACTION-GENERIC')
-    
-    def __init__(self, url, description=None):
-        self.url = url
-        self.description = (description or self.description) % url
-
-    def as_dict(self):
-        return {
-            'link': url,
-            'description': self.description
-        }
-
-
-class ViewDatastreamExceptionAction(ExceptionAction):
-    description = _('EXCEPTION-ACTION-VIEW-DATASREAM')
-
-    def __init__(self, revision):
-        url = reverse('manageDataviews.view', args=(revision.id,))
-        super(ViewDatastreamExceptionAction, self).__init__(url)
+from core.actions import *
 
 
 class DATALException(Exception):
@@ -31,11 +11,14 @@ class DATALException(Exception):
     description = _('EXCEPTION-DESCRIPTION-GENERIC')
     tipo = 'datal-abstract'
     status_code = 400
+    self._context = {}
+    template = 'datal_exception'
 
     def __init__(self, *args, **kwargs):
         for key, value in kwargs.items():
             setattr(self, key, value)
-        self._context = **kwargs
+        self._context = self._context.copy()
+        self._context.update(kwargs)
         self.title = self.title % self._context
         self.description = self.description % self._context
         message = '%s. %s' % (self.title, self.description)
@@ -50,16 +33,6 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
-    def as_dict(self):
-        return {"error": self.title, 
-                "message": self.description, 
-                "status_code": self.status_code,
-                "actions": self.get_actions()
-        }
-
-    def convert_json(self):
-        return json.dumps(self.as_dict())
-
 
 class LifeCycleException(ApplicationException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
@@ -68,25 +41,44 @@ class LifeCycleException(ApplicationException):
 
 
 class ChildNotApprovedException(LifeCycleException):
+    """ Exception for resources that need approved child to change state """
     title = _('EXCEPTION-TITLE-CHILD-NOT-APPROVED')
     # Translators: Ejemplo, "Existen %(count)s hijos sin aprobar"
     description = _('EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED')
     tipo = 'child-not-approved'
+    _context = {
+        'count': 0,
+    }
 
+    def __init__(self, unapproved):
+        self.unapproved = unapproved
+        super(ChildNotApprovedException, self).__init__(count=len(unapproved))
 
-class DatasetSaveException(LifeCycleException):
+    def get_actions(self):
+        return map(lambda x: ViewDatastreamExceptionAction(x), self.unapproved)
+
+class SaveException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-SAVE-ERROR')
+    description = _('EXCEPTION-DESCRIPTION-SAVE-ERROR')
+    tipo = 'save-error'
+
+    def __init__(self, form):
+        self.form = form
+        super(ChildNotApprovedException, self).__init__()
+
+class DatasetSaveException(SaveException):
     title = _('EXCEPTION-TITLE-DATASET-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR')
     tipo = 'dataset-save-error'
 
 
-class DatastreamSaveException(LifeCycleException):
+class DatastreamSaveException(SaveException):
     title = _('EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-DATASTREAM-SAVE-ERROR')
     tipo = 'datastream-save-error'
 
 
-class VisualizationSaveException(FormErrorException):
+class VisualizationSaveException(SaveException):
     title = _('EXCEPTION-TITLE-VISUALIZATION-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-SAVE-ERROR')
     tipo = 'visualization-save-error'
@@ -116,13 +108,6 @@ class IllegalStateException(LifeCycleException):
     title = _('EXCEPTION-TITLE-ILLEGAL-STATE')
     description = _('EXCEPTION-DESCRIPTION-ILLEGAL-STATE')
     tipo = 'illegal-state'
-
-
-class ParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
-    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
-    tipo = 'parent-not-published'
-
 
 
 

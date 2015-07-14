@@ -253,7 +253,7 @@ def action_publish_file(data):
              
         if not form.is_valid():
             logger.error("Fail to publish dataset[%d]: %s" % (typec, form.get_error_description()))
-            raise DatasetSaveException(form, self.dataset)
+            raise DatasetSaveException(form=form)
         else:
             #merge "cleaned data"
             data = dict(data.items() + form.cleaned_data.items())
@@ -329,7 +329,7 @@ def action_publish_webservice(data):
     form = formsw.CreateDatasetWebserviceForm(data)
     if not form.is_valid():
         logger.error("Fail to publish webservice: %s" % form.get_error_description())
-        raise DatasetSaveException(self.dataset, form)
+        raise DatasetSaveException(form=form)
 
     data['status'] = data.get('status', StatusChoices.PUBLISHED)
     data['impl_type']=data.get('impl_type', SourceImplementationChoices.REST)

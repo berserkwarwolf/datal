@@ -6,18 +6,6 @@ Templates for errors
 from core.templates import *
 import json
 
-class DefaultWorkspaceError(Template):
-
-    def __init__(self, template="workspace_errors/workspace_error.html"):
-        tmpl = "{%% include '%s' %%}" % template
-        super(DefaultWorkspaceError, self).__init__(tmpl)
-
-    def render(self, title, description, request, extras={}):
-        context = {"error_title": title, "error_description": description, "extras": json.dumps(extras), "auth_manager": request.auth_manager}
-        ctx = Context(context)
-        return super(DefaultWorkspaceError, self).render(ctx)
-
-
 class DefaultDataViewEdit(Template):
 
     def __init__(self, template="datastream_edit_response.json"):
