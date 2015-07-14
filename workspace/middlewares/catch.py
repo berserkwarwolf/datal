@@ -2,7 +2,6 @@
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
-from workspace.templates import DefaultWorkspaceError
 from core.exceptions import DATALException
 
 from django.template import Context, Template
@@ -56,6 +55,6 @@ class ExceptionManager(object):
                 str(exception), repr(exception), trace))
 
         tpl = select_template(templates)
-        response = tpl.render(Context({'exception'=exception}))
+        response = tpl.render(Context({'exception':exception}))
         return HttpResponse(response, mimetype=mimetype, status=status_code)
 
