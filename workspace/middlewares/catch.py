@@ -35,7 +35,7 @@ class ExceptionManager(object):
 
         if content_type.lower().startswith('application/x-www-form-urlencoded') and request.method == 'POST':
             return 'application/json'
-        
+
         return "text/html"
 
     def is_json(self, mimetype):
@@ -45,7 +45,8 @@ class ExceptionManager(object):
     def process_exception(self, request, exception):
         logger = logging.getLogger(__name__)
 
-        extension = 'json' if self.is_json(request) else 'html' 
+        mimetype = self.get_mime_type(request)
+        extension = 'json' if self.is_json(mimetype) else 'html' 
         templates = ['workspace_error/unexpected_error.%s' % extension]
         
         if isinstance(exception, DATALException):
