@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+    # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
@@ -32,6 +32,10 @@ class ExceptionManager(object):
 
         if content_type.lower().startswith('multipart/form-data') and request.method == 'POST':
             return 'application/json'
+
+        if content_type.lower().startswith('application/x-www-form-urlencoded') and request.method == 'POST':
+            return 'application/json'
+        
         return "text/html"
 
     def is_json(self, mimetype):
