@@ -1,4 +1,5 @@
 from core.exceptions import *
+from django.utils.translation import ugettext as _
 
 
 class ParentNotPublishedException(LifeCycleException):

@@ -11,7 +11,7 @@ class DATALException(Exception):
     description = _('EXCEPTION-DESCRIPTION-GENERIC')
     tipo = 'datal-abstract'
     status_code = 400
-    self._context = {}
+    _context = {}
     template = 'datal_exception'
 
     def __init__(self, *args, **kwargs):
@@ -34,7 +34,7 @@ class DATALException(Exception):
         return []
 
 
-class LifeCycleException(ApplicationException):
+class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
     description = _('EXCEPTION-DESCRIPTION-LIFE-CYCLE')
     tipo = 'life-cycle'
