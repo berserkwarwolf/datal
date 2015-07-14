@@ -9,7 +9,7 @@ from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from workspace.exceptions import VisualizationSaveException
+from core.exceptions import *
 from core.engine import invoke
 from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder

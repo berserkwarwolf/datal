@@ -8,7 +8,7 @@ from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lib.datastore import *
-from core.exceptions import DatasetNotFoundException, IllegalStateException, LifeCycleException
+from core.exceptions import DatasetNotFoundException, IllegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 
@@ -136,7 +136,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(datastream_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(dataset=self.dataset, unapproved=publish_fail)
+                raise ChildNotApprovedException(unapproved=publish_fail)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """

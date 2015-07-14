@@ -1,49 +1,49 @@
 from core.exceptions import *
 
 
-class DATALWorkspaceException(DATALException):
-    """DATAL Workspace Exception class: Base class for handling exceptions."""
-    def __init__(self, title=None, description='', status_code=400, extras={}):
-        super(DATALWorkspaceException, self).__init__(title=title,
-                                                      description=description,
-                                                      status_code=status_code,
-                                                      extras=extras)
-
-class BadRequestException(DATALWorkspaceException):
-    title = 'Bad Request'
+class ParentNotPublishedException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
+    tipo = 'parent-not-published'
 
 
-class InvalidFormException(BadRequestException):
-    title = 'Invalid Form'
-
-    def __init__(self, form, description=''):
-        super(InvalidFormException, self).__init__(description=description, extras={"form": form})
-
-
-class DatasetRequiredException(LifeCycleException):
-    title = 'Dataset required'
+class ResourceRequiredException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-RESOURCE-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-RESOURCE-REQUIRED')
+    tipo = 'resource-required'
 
 
-class AnyDatasetRequiredException(LifeCycleException):
-    title = 'Almost one dataset required'
+class AnyResourceRequiredException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-ANY-RESOURCE-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-ANY-RESOURCE-REQUIRED')
+    tipo = 'resource-required'
 
 
-class AnyDatastreamRequiredException(LifeCycleException):
-    title = 'Almost one datastream required'
+class DatasetRequiredException(ResourceRequiredException):
+    title = _('EXCEPTION-TITLE-DATASET-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-REQUIRED')
+    tipo = 'dataset-required'
 
 
-class DatastreamRequiredException(LifeCycleException):
-    title = 'Datastream required'
+class DatastreamRequiredException(ResourceRequiredException):
+    title = _('EXCEPTION-TITLE-DATASTREAM-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-DATASTREAM-REQUIRED')
+    tipo = 'datastream-required'
 
 
+class AnyDatasetRequiredException(AnyResourceRequiredException):
+    title = _('EXCEPTION-TITLE-ANY-DATASET-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-ANY-DATASET-REQUIRED')
+    tipo = 'any-dataset-required'
 
-class SecurityException(DATALWorkspaceException):
-    title = 'Security error'
+
+class AnyDatastreamRequiredException(AnyResourceRequiredException):
+    title = _('EXCEPTION-TITLE-ANY-DATASTREAM-REQUIRED')
+    description = _('EXCEPTION-DESCRIPTION-ANY-DATASTREAM-REQUIRED')
+    tipo = 'any-datastream-required'
 
 
-class InsufficientPrivilegesException(SecurityException):
-    title = 'Privileges required'
-
-    def __init__(self, description='', required_privileges={}):
-        super(InsufficientPrivilegesException, self).__init__(description=description,
-                                                              extras={"required_privileges": required_privileges})
+class InsufficientPrivilegesException(DATALException):
+    title = _('EXCEPTION-TITLE-INSUFFICIENT-PRIVILEGES')
+    description = _('EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES')
+    tipo = 'insufficient-priviliges'
