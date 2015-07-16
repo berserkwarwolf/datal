@@ -28,12 +28,12 @@
   <!-- Create Data View -->
   <li><a id="id_create" class="button action small" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}"><i class="new"></i>{% trans 'APP-ACTIONS-CREATEVIEW' %}</a></li>
   {% endif %}
-
+  
   <!-- Edit -->
   <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
 
   <!-- Delete -->
-  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
 
   {% if dataset.collect_type == 0 %}
   <!-- Download -->
