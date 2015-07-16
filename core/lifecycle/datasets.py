@@ -14,7 +14,7 @@ from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED] # Para Dani: tiene sentido draft aca?
+UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED] # Para Dani: tiene sentido publish aca?
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
 ACCEPT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW] # Para Dani: tiene sentido draft aca?
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
