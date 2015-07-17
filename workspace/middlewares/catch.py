@@ -44,11 +44,15 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
+
+        if not hasattr(request, 'user') or not request.user:
+            raise
+
         logger = logging.getLogger(__name__)
 
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
-        templates = ['workspace_error/unexpected_error.%s' % extension]
+        templates = ['workspace_errors/unexpected_error.%s' % extension]
         status_code = 400
         
         if isinstance(exception, DATALException):
@@ -61,8 +65,9 @@ class ExceptionManager(object):
             trace = '\n'.join(traceback.format_exception(*(sys.exc_info())))
             logger.error('[UnexpectedCatchError] %s. %s %s' % (
                 str(exception), repr(exception), trace))
+            raise 
 
         tpl = select_template(templates)
-        response = tpl.render(Context({'exception':exception}))
+        response = tpl.render(Context({'exception':exception, "auth_manager": request.auth_manager}))
         return HttpResponse(response, mimetype=mimetype, status=status_code)
 
