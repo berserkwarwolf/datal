@@ -9,6 +9,7 @@ from core.helpers import slugify
 from core import helpers, choices
 
 from core.search.finder import Finder
+from indextank.client import ApiClient
 
 
 class IndexTankFinder(Finder):
@@ -16,16 +17,16 @@ class IndexTankFinder(Finder):
     order_by = {}
 
     def __init__(self):
-        from indextank.client import ApiClient
-        logger = logging.getLogger(__name__)
-        logger.info('IndexTankFinder INIT searchify %s AT %s' % (settings.SEARCHIFY['api_url'], settings.SEARCHIFY['index']))
-        self.api_client = ApiClient(settings.SEARCHIFY['api_url'])
-        self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
+        self.logger = logging.getLogger(__name__)
+        self.logger.info('New IndexTankFinder INIT searchify %s AT %s' % (settings.SEARCH_INDEX['url'][0], settings.SEARCH_INDEX['index']))
+        self.api_client = ApiClient(settings.SEARCH_INDEX['url'][0])
+        self.index = self.api_client.get_index(settings.SEARCH_INDEX['index'])
 
         Finder.__init__(self)
 
     def search(self, *args, **kwargs):
 
+        self.logger.info('Conectado con el search (args %s) (kwargs %s)' % (args,kwargs))
         self.query      = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
         self.resource   = kwargs.get('resource', 'all')
@@ -56,6 +57,11 @@ class IndexTankFinder(Finder):
         scoring = kwargs.get('scoring', 1)
 
         #TODO define a search function in the right place
+	self.logger.info("QUERY: %s" % query)
+	self.logger.info("START: %s" % start)
+	self.logger.info("END: %s" % end)
+	self.logger.info("category_filters: %s" % category_filters )
+	self.logger.info("Scoring: %s" % scoring)
         results = self.index.search(query
                                     , start=start
                                     , length=end
@@ -101,7 +107,7 @@ class IndexTankFinder(Finder):
                 doc['category_name'] = doc.get("category_name","UNCATEGORIZED")
                 to_add = self.get_dictionary(doc)
                 results.append(to_add)
-                # TODO, I can't find the problem
+                # TODO, I can't ind the problem
                 if doc['category_name'] == "UNCATEGORIZED":
                     logger = logging.getLogger(__name__)
                     logger.error("Can't find category on index -- %s" % str(doc))

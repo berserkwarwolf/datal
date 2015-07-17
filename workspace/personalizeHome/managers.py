@@ -1,10 +1,11 @@
-from core.managers import IndexTankFinder
+from core import search
 
-class ThemeFinder(IndexTankFinder):
+class ThemeFinder(search.elastic.ElasticsearchFinder):
     order_by = {'0': 'title'}
 
     def __init__(self):
-        IndexTankFinder.__init__(self)
+        search.elastic.ElasticsearchFinder.__init__(self)
+	self.logger("iniciando themefinder!!!")
 
     def get_datastream_dictionary(self, doc):
         return dict(id=doc['datastream_id'], label=doc['title'], value=doc['title'], type=doc['type'])

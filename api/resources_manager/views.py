@@ -2,7 +2,7 @@ from core.models import *
 from api.http import JSONHttpResponse
 from api.resources_manager import forms
 from api.managers import *
-from api.resources_manager.managers import IndexTankFinder
+from api.resources_manager.managers import ApiFinder
 from api.helpers import get_domain
 import json
 
@@ -26,7 +26,7 @@ def action_explore(request):
     for category in categories:
         category.pop('id')
         category.pop('slug')
-        results, search_time, facets = FinderManager(IndexTankFinder).search(query = form.cleaned_data['q']
+        results, search_time, facets = FinderManager(ApiFinder).search(query = form.cleaned_data['q']
                                                                              , page = args['page']
                                                                              , slice = args['limit']
                                                                              , meta_data = meta
@@ -62,7 +62,7 @@ def action_search(request):
         raise Http400(e)
 
     account_id = request.account_id
-    response, time, facets = FinderManager(IndexTankFinder).search(query = query
+    response, time, facets = FinderManager(ApiFinder).search(query = query
                                                      , page = args['page']
                                                      , limit = args['limit']
                                                      , meta_data = meta
