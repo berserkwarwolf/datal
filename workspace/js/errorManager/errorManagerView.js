@@ -4,24 +4,26 @@
         initialize: function () {
             this.model.on("change", this.render.bind(this));
 
-            //Manjeador de eventos global de datal
             datalEvents.on('data:application-error', this.onApplicationError.bind(this));
         },
         onApplicationError: function (error) {
-            //Se pasan los mensajes de error al modelo
+            if(typeof(error) !== 'object')
+                error = JSON.parse(error);
             this.model.set(error);
         },
         prepareText: function () {
             return this.template(this.model.toJSON());
         },
         render: function () {
-            this.template = _.template($("#errorManagerView_template").html());
+            if(this.template === null)
+                this.template = _.template($("#errorManagerView_template").html());
             this.addGritterNotification();
         },
         addGritterNotification: function () {
             $.gritter.add({
                 title: this.model.get('error'),
                 text: this.prepareText(),
+                image: '/static/workspace/images/common/ic_validationError32.png',
                 sticky: true
             });
         }
