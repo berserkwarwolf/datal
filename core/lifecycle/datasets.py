@@ -14,9 +14,9 @@ from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED]
+UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED] # Para Dani: tiene sentido publish aca?
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
-ACCEPT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW]
+ACCEPT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW] # Para Dani: tiene sentido draft aca?
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -114,8 +114,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         
         self._update_last_revisions()
         
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision)
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.add()
 
         self._log_activity(ActionStreams.PUBLISH)
 
@@ -154,8 +154,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.status = StatusChoices.DRAFT
                 self.dataset_revision.save()
 
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.remove(self.dataset_revision)
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.remove()
 
         self._update_last_revisions()
 
@@ -168,14 +168,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
+            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_published_revision__id'),
                 status=StatusChoices.PUBLISHED
             )
 
-            for datastream in datastreams:
-                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).unpublish(killemall=True)
+            for datastream_revision in datastream_revisions:
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).unpublish(
+                    killemall=True)
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
@@ -228,7 +229,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if self.dataset_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatasetSearchDAOFactory().create()
+            search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
             search_dao.remove(self.dataset_revision)
 
         if killemall:
@@ -239,10 +240,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
+                # Elimino todos las revisiones que dependen de este Dataset
+                DataStreamRevision.remove_related_to_dataset(self.dataset)
 
             # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
             # completa el valor correspondiente.
-            self.dataset.last_published_revision=None
+            self.dataset.last_published_revision = None
             self.dataset.save()
 
             self.dataset_revision.delete()

@@ -15,7 +15,7 @@ from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import LifeCycleException
-from core.models import DatasetRevision, Account, CategoryI18n
+from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from api.http import JSONHttpResponse
 from core import engine
 
@@ -24,17 +24,19 @@ logger = logging.getLogger(__name__)
 
 @login_required
 @require_GET
-def view(request, revision_id):
+def action_view(request, revision_id):
+    
+    language = request.auth_manager.language
+    try:
+        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
+    except DataStreamRevision.DoesNotExist:
+        raise DataStreamNotFoundException
+
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
-    language = request.auth_manager.language
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values(
-        'category__id',
-        'name'
-    )
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
     status_options = credentials.get_allowed_actions()
-    datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
-
+    
     return render_to_response('viewDataStream/index.html', locals())
 
 @login_required
@@ -46,8 +48,6 @@ def list(request):
     ds_dao = DataStreamDBDAO()
 
     resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
-    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
-        return render_to_response('manageDataviews/noResults.html', locals())
 
     for resource in resources:
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})

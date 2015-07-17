@@ -98,7 +98,12 @@
     <% } %>
 
     {# Delete #}
-    <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a></li>
+    <% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+      <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a></li>
+    <% } %>
 
   </ul>
 </script>
@@ -122,7 +127,7 @@
 
     <div class="row clearfix">
       <label for="id_url_source"></label>
-      <input type="text" name="url_source" id="id_url_source" placeholder="{% trans 'APP-URL-TEXT' %}">
+      <input type="text" name="url" id="id_url_source" placeholder="{% trans 'APP-URL-TEXT' %}">
     </div>
 
     <div class="row clearfix">
@@ -151,4 +156,88 @@
     <span class="tagTxt"><%= name %></span>
     <a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
   </span>
+</script>
+
+{# Edit - Data View #}
+<script type="text/template" id="id_editTemplate">
+<form>
+  <div class="ov-content">
+    <div class="col-1">
+     <fieldset>
+
+      {# title #}
+      <div class="row clearfix">
+        <label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
+        <input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
+        <span class="required">*</span>
+      </div>
+
+      {# description #}
+      <div class="row clearfix">
+        <label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
+        <input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
+        <span class="required">*</span>
+      </div>
+
+      {# category #}
+      <div class="row clearfix">
+        <label for="id_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
+        <select name="category" id="id_category" data-bind="value:category,options:allCategories" tabindex="0">
+        </select>
+        <span class="required">*</span>
+      </div>
+
+      {# status #}
+      <div class="row clearfix divider">
+        <label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
+        <select name="status" class="FL" id="id_status" data-bind="value:status,options:allStatus">
+        </select>
+        <span class="required">*</span>
+      </div>
+
+      
+
+      {# Sources #}
+      <div class="row clearfix">
+        <div id="sourceForm">
+          <div id="addSource"></div>
+          <div class="sourcesContent"></div>
+          <div id="addNewSource"></div>
+        </div>
+      </div>
+
+      {# Tags #}
+      <div class="row clearfix">
+        <div id="tagForm">
+          <div id="addTag"></div>
+          <div class="tagsContent"></div>
+        </div>
+      </div>
+
+     </fieldset>
+    </div>
+
+    <div class="col-2 col-border">
+     <fieldset>
+      {# Notes #}
+      <div class="row clearfix">
+        <label for="id_notes">{% trans 'APP-NOTES-TEXT' %}</label>
+      </div>
+      <div class="row clearfix">
+        <div class="textarea clearfix FL">
+          <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
+        </div>
+      </div>
+     </fieldset>
+    </div>
+  </div>
+
+  <div class="ov-bottom">
+    <div class="ov-buttons">
+      <a id="id_edit_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
+      <a id="id_edit_cancel" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+    </div>
+  </div>
+
+</form>
 </script>

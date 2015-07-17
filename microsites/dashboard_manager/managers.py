@@ -1,14 +1,14 @@
 from django.core.urlresolvers import reverse
 from core.helpers import slugify
-from core.managers import IndexTankFinder
+from core.search import *
 import datetime
 
-class DashboardFinder(IndexTankFinder):
+class DashboardFinder(elastic.ElasticsearchFinder):
 
     order_by = {'0': 'title', '1': 'timestamp'}
 
     def __init__(self):
-        IndexTankFinder.__init__(self)
+        elastic.ElasticsearchFinder.__init__(self)
 
     def get_datastream_dictionary(self, doc):
 

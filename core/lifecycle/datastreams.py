@@ -100,8 +100,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._update_last_revisions()
         
-        search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.add(self.datastream_revision)
+        search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
+        search_dao.add()
 
         self._log_activity(ActionStreams.PUBLISH)
 
@@ -132,8 +132,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.datastream_revision.status = StatusChoices.DRAFT
                 self.datastream_revision.save()
 
-        search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.remove(self.datastream_revision)
+        search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
+        search_dao.remove()
         
         self._update_last_revisions()
 
@@ -143,7 +143,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
         DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
-            id=self.datastream_revision.id).update(changed_fields=['status'], status=StatusChoices.DRAFT)
+            id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastreams = DataStreamRevision.objects.select_for_update().filter(
@@ -202,8 +202,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.datastream_revision)
 
         if self.datastream_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatastreamSearchDAOFactory().create()
-            search_dao.remove(self.datastream_revision)
+            search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
+            search_dao.remove()
 
         if killemall:
             self._remove_all()

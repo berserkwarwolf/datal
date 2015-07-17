@@ -8,7 +8,7 @@ from core.datastream_manager.views import action_invoke
 urlpatterns = patterns('',
 
     url(r'^$', list, name='manageDataviews.list'),
-    url(r'^(?P<revision_id>\d+)$', view, name='manageDataviews.view'),
+    url(r'^(?P<revision_id>\d+)$', action_view, name='manageDataviews.view'),
     url(r'^filter$', filter, name='manageDataviews.filter'),
     url(r'^filters.json$', get_filters_json, name='manageDataviews.get_filters'),
     url(r'^filter_dataset$', filterDataset, name='manageDatasets.filter'),

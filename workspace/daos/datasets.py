@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+
 from core.daos.datasets import AbstractDatasetDBDAO
-from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import SOURCE_IMPLEMENTATION_CHOICES
 from workspace import settings
 from core.models import DatasetRevision, DatasetI18n, DataStreamRevision
 from django.db.models import Q, F
@@ -111,12 +112,19 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         filters = set([])
 
+
         for res in query:
-            filters.add(('status', res.get('status'),
-                unicode(STATUS_CHOICES[int(res.get('status'))][1])))
-            if 'impl_type' in res:
-                filters.add(('type', res.get('impl_type'),
-                    unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+
+            status = res.get('status')
+            impl_type = res.get('impl_type')
+
+            filters.add(('status', status, unicode(DatasetRevision.STATUS_CHOICES[status][1])))
+
+            filters.add(('type', impl_type,
+                unicode(
+                    [x[1] if x else '' for x in SOURCE_IMPLEMENTATION_CHOICES if x[0] == impl_type][0]
+                    )
+                ))
             if 'category__categoryi18n__name' in res:
                 filters.add(('category', res.get('category__categoryi18n__name'),
                     res.get('category__categoryi18n__name')))

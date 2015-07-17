@@ -61,9 +61,6 @@ def list(request):
     resources, total_resources = ds_dao.query(account_id=request.user.account.id,
                                                 language=request.user.language)
 
-    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
-        return render_to_response('manageDatasets/noResults.html', locals())
-
     filters = ds_dao.query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
 
@@ -82,7 +79,7 @@ def action_view(request, revision_id):
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
     except DatasetRevision.DoesNotExist:
         raise DatasetNotFoundException
-        
+
     datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
     return render_to_response('viewDataset/index.html', locals())
 
@@ -255,6 +252,7 @@ def edit(request, dataset_revision_id=None):
         # Get data set and the right template depending on the collected type
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
+
 
         # Import the form that we really need
         if collect_types[dataset['collect_type']] is not 'url':

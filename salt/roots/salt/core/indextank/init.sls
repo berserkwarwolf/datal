@@ -12,10 +12,6 @@ git_service:
     - name: git
     - installed
 
-python-git:
-  pkg:
-    - installed
-
 Clone Indextank-engine Github:
   git.latest:
     - name:  https://github.com/linkedin/indextank-engine.git
@@ -40,4 +36,4 @@ indextank_initd:
      - group: root
    cmd.run:
     - cwd: /usr/share/indextank-engine
-    - name: /etc/init.d/indextank-engine.sh
+    - name: /etc/init.d/indextank-engine.sh start

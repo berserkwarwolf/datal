@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from core.helpers import slugify
 from core import managers
+from core.search import finder
 
 
 # CategoryManager
@@ -12,9 +13,9 @@ def get_for_browse(self, category_slug, account_id, language):
 
 managers.CategoryManager.get_for_browse = get_for_browse
 
-class FinderManager(managers.FinderManager):
+class FinderManager(finder.FinderManager):
 
     def __init__(self):
-        self.finder_class = managers.IndexTankFinder
-        self.failback_finder_class = managers.IndexTankFinder
-        managers.FinderManager.__init__(self)
+        self.finder_class = elastic.ElasticsearchFinder
+        self.failback_finder_class = elastic.ElasticsearchFinder
+        finder.FinderManager.__init__(self)
