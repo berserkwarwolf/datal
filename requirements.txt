@@ -44,3 +44,4 @@ python-sftp-client==0.2
 -e git+https://github.com/flaptor/indextank-py.git#egg=indextank
 django-post-office==1.1.2
 django-model-utils==2.2
+elasticsearch

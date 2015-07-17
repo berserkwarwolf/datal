@@ -8,7 +8,7 @@ class SearchifyIndex():
     """ Gestor para indice searchify"""
     
     def __init__(self):
-        self.api_client = ApiClient(settings.SEARCHIFY['api_url'])
+        self.api_client = ApiClient(settings.SEARCHIFY['api_url'][0])
         self.index = self.api_client.get_index(settings.SEARCHIFY['index'])
         
     def indexit(self, docs):

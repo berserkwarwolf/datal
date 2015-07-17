@@ -114,8 +114,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         
         self._update_last_revisions()
         
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.add(self.dataset_revision)
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.add()
 
         self._log_activity(ActionStreams.PUBLISH)
 
@@ -154,8 +154,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.status = StatusChoices.DRAFT
                 self.dataset_revision.save()
 
-        search_dao = DatasetSearchDAOFactory().create()
-        search_dao.remove(self.dataset_revision)
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.remove()
 
         self._update_last_revisions()
 
@@ -229,7 +229,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             raise IlegalStateException(allowed_states, self.dataset_revision)
 
         if self.dataset_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatasetSearchDAOFactory().create()
+            search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
             search_dao.remove(self.dataset_revision)
 
         if killemall:

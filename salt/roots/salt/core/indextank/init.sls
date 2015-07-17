@@ -12,10 +12,6 @@ git_service:
     - name: git
     - installed
 
-python-git:
-  pkg:
-    - installed
-
 Clone Indextank-engine Github:
   git.latest:
     - name:  https://github.com/linkedin/indextank-engine.git
