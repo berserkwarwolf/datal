@@ -1,0 +1,19 @@
+<script type="text/template" id="errorManagerView_template">
+    <div class="error-description">
+        <%= description %>
+        <% if(actions.length){ %>
+            <span class="description-title">Posibles soluciones: </span>
+            <ul>
+                <% for(var i in actions){ %>
+                    <li>
+                        <% if(actions[i].link){ %>
+                            <a href="<%= actions[i].link %>"><%= actions[i].description %></a>
+                        <% } else { %>
+                            <%= actions[i].description %>
+                        <% } %>
+                    </li>
+                <% } %>
+            </ul>
+        <% } %>
+    </div>
+</script>
