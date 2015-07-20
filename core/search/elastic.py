@@ -61,7 +61,10 @@ class ElasticsearchFinder(Finder):
 	self.logger.info("END: %s" % end)
 	self.logger.info("category_filters: %s" % category_filters )
 	self.logger.info("Scoring: %s" % scoring)
-        results = self.index.es.search(index=settings.SEARCH_INDEX['index'],q=query[:-4], from_=start, size=end)
+	if query[:-4] == "AND":
+		query=query[:-4]
+
+        results = self.index.es.search(index=settings.SEARCH_INDEX['index'],q=query, from_=start, size=end)
 #                                    , start=start
 #                                    #, length=end
 #                                    #, snippet_fields=['title','text']
