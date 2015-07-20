@@ -53,3 +53,7 @@ elasticsearch_alias:
      - user: vagrant
      - group: vagrant
 
+elasticsearch-service:
+  service.running:
+    - name: elasticsearch
+    - enable: True
