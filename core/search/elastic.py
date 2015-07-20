@@ -93,6 +93,8 @@ class ElasticsearchFinder(Finder):
 #                                    )
         docs=[]
         for i in results['hits']['hits']:
+
+            i['_source']['fields']['category']=i['_source']['categories']
             docs.append(i['_source']['fields'])
 
 #        print docs
@@ -112,18 +114,16 @@ class ElasticsearchFinder(Finder):
 
         for doc in docs:
             try:
-                doc['category_name'] = doc.get("category_name","UNCATEGORIZED")
+                doc['category_name'] = doc["category"]['name']
+                doc['category_id'] = doc["category"]['id']
                 to_add = self.get_dictionary(doc)
                 results.append(to_add)
                 # TODO, I can't find the problem
                 if doc['category_name'] == "UNCATEGORIZED":
-                    logger = logging.getLogger(__name__)
-                    logger.error("Can't find category on index -- %s" % str(doc))
+                    self.logger.error("Can't find category on index -- %s" % str(doc))
                     
             except Exception, e:
-                logger = logging.getLogger(__name__)
-                logger.error('Search Elasticsearch [ERROR(%s--%s)] with doc = %s [TRACE:%s]' % (doc['type'], doc['title'], unicode(doc), repr(e)))
-
+                self.logger.error('Search Elasticsearch [ERROR(%s--%s)] with doc = %s [TRACE:%s]' % (doc['type'], doc['title'], unicode(doc), repr(e)))
 
 
         return results, search_time, facets
@@ -233,7 +233,10 @@ class ElasticsearchFinder(Finder):
                                 , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
                                 , permalink=permalink
                                 , type = p_doc['type']
+                                , category = p_doc['category_name']
+                                , category_name = p_doc['category_name']
                                 )
+
         return l_datastream
 
     def get_dataset_dictionary(self, p_doc):
