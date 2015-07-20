@@ -136,7 +136,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(datastream_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(self.dataset.last_revision.id)
+                raise ChildNotApprovedException(self.dataset.last_revision)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """

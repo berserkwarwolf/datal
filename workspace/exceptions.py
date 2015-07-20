@@ -19,7 +19,7 @@ class DatastreamParentNotPublishedException(LifeCycleException):
     tipo = 'parent-not-published'
 
     def get_actions(self):
-        return ViewDatasetExceptionAction(self.revision)
+        return [ViewDatasetExceptionAction(self.revision)]
 
 
 class VisualizationParentNotPublishedException(LifeCycleException):
@@ -28,7 +28,7 @@ class VisualizationParentNotPublishedException(LifeCycleException):
     tipo = 'parent-not-published'
 
     def get_actions(self):
-        return ViewDatastreamExceptionAction(self.revision)
+        return [ViewDatastreamExceptionAction(self.revision)]
 
 class ResourceRequiredException(LifeCycleException):
     title = _('EXCEPTION-TITLE-RESOURCE-REQUIRED')
@@ -36,7 +36,7 @@ class ResourceRequiredException(LifeCycleException):
     tipo = 'resource-required'
 
     def get_actions(self):
-        return ContactUsExceptionAction()
+        return [ContactUsExceptionAction()]
 
 
 class AnyResourceRequiredException(LifeCycleException):
@@ -63,7 +63,7 @@ class AnyDatasetRequiredException(AnyResourceRequiredException):
     tipo = 'any-dataset-required'
 
     def get_actions(self):
-        return ViewDatasetCreateExceptionAction()
+        return [ViewDatasetCreateExceptionAction()]
 
 
 class AnyDatastreamRequiredException(AnyResourceRequiredException):
@@ -72,7 +72,7 @@ class AnyDatastreamRequiredException(AnyResourceRequiredException):
     tipo = 'any-datastream-required'
 
     def get_actions(self):
-        return ViewDatastreamCreateExceptionAction()
+        return [ViewDatastreamCreateExceptionAction()]
 
 
 class InsufficientPrivilegesException(DATALException):

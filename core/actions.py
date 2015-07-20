@@ -8,7 +8,7 @@ class ExceptionAction(object):
     
     def __init__(self, url=None, description=None):
         self.url = url
-        self.description = (description or self.description) % url
+        self.description = (description or self.description) % {'url':url}
 
     def as_dict(self):
         return {
@@ -49,12 +49,12 @@ class ViewDatasetExceptionAction(ExceptionAction):
         super(ViewDatasetExceptionAction, self).__init__(url)
 
 
-class ViewDatassetListExceptionAction(ExceptionAction):
+class ViewDatasetListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASET-LIST')
 
     def __init__(self):
         url = reverse('manageDatasets.list')
-        super(ViewDatassetListExceptionAction, self).__init__(url)
+        super(ViewDatasetListExceptionAction, self).__init__(url)
 
 
 class ViewDatasetCreateExceptionAction(ExceptionAction):
