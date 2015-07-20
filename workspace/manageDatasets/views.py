@@ -13,6 +13,7 @@ from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
+from core.exceptions import DatasetSaveException
 from core.helpers import remove_duplicated_filters, filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
@@ -78,7 +79,7 @@ def action_view(request, revision_id):
     try:
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
     except DatasetRevision.DoesNotExist:
-        raise DatasetNotFoundException
+        raise DatasetNotFoundException()
 
     datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
     return render_to_response('viewDataset/index.html', locals())
@@ -228,7 +229,7 @@ def create(request, collect_type='index'):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise InvalidFormException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required
@@ -296,7 +297,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise InvalidFormException(form.errors)
+            raise DatasetSaveException(form.errors)
 
 
 @login_required

@@ -1,3 +1,8 @@
+if(typeof datalEvents === 'undefined'){
+    var datalEvents = {};
+    _.extend(datalEvents, Backbone.Events);
+}
+
 var BaseView = Backbone.View.extend({
 
 	el: 'body',
