@@ -1,7 +1,7 @@
 from django.core.urlresolvers import reverse
 from core.helpers import slugify
 from core import managers
-from core.search import finder
+from core.search import *
 
 
 # CategoryManager
