@@ -4,6 +4,7 @@ from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
 from core.exceptions import *
+from workspace.exceptions import *
 from core.choices import StatusChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
@@ -73,12 +74,12 @@ def requires_published_parent():
                     dataset_revision_id=request.POST['dataset_revision_id']
                     resource = DatasetLifeCycleManager(user = request.user.id, dataset_revision_id=dataset_revision_id)
                     if resource.dataset_revision.status != StatusChoices.PUBLISHED:
-                        raise ParentNotPublishedException()
+                        raise DatastreamParentNotPublishedException(resource.dataset_revision)
                 elif request.POST.get('datastream_revision_id', False):
                     datastream_revision_id=request.POST['datastream_revision_id']
                     resource = DatastreamLifeCycleManager(user = request.user.id, resource_revision_id=datastream_revision_id)
                     if resource.dataset_revision.status != StatusChoices.PUBLISHED:
-                        raise ParentNotPublishedException()
+                        raise VisualizationParentNotPublishedException(resource.dataset_revision)
                 else:
                     raise ParentNotPublishedException('Parent resource not found')
 

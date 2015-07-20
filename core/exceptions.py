@@ -50,12 +50,12 @@ class ChildNotApprovedException(LifeCycleException):
         'count': 0,
     }
 
-    def __init__(self, unapproved):
-        self.unapproved = unapproved
-        super(ChildNotApprovedException, self).__init__(count=len(unapproved))
+    def __init__(self, revision):
+        self.revision = revision
+        super(ChildNotApprovedException, self).__init__()
 
     def get_actions(self):
-        return map(lambda x: ViewDatastreamExceptionAction(x), self.unapproved)
+        return ViewDatasetExceptionAction(self.revision)
 
 class SaveException(LifeCycleException):
     title = _('EXCEPTION-TITLE-SAVE-ERROR')
@@ -64,7 +64,11 @@ class SaveException(LifeCycleException):
 
     def __init__(self, form):
         self.form = form
-        super(ChildNotApprovedException, self).__init__()
+        super(SaveException, self).__init__()
+
+    def get_actions(self):
+        return ContactUsExceptionAction()
+
 
 class DatasetSaveException(SaveException):
     title = _('EXCEPTION-TITLE-DATASET-SAVE-ERROR')
@@ -90,6 +94,9 @@ class DatasetNotFoundException(LifeCycleException):
     tipo = 'dataset-not-found'
     status_code = 404
 
+    def get_actions(self):
+        return ViewDatasetListExceptionAction(self.unapproved)
+
 
 class DataStreamNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASTREAM-NOT-FOUND')
@@ -97,11 +104,17 @@ class DataStreamNotFoundException(LifeCycleException):
     tipo = 'datastream-not-found'
     status_code = 404
 
+    def get_actions(self):
+        return ViewDatastreamListExceptionAction(self.unapproved)
+
 
 class VisualizationRequiredException(LifeCycleException):
     title = _('EXCEPTION-TITLE-VIZUALIZATION-REQUIRED')
     description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED')
     tipo = 'vizualization-required'
+
+    def get_actions(self):
+        return ViewVisualizationListExceptionAction(self.unapproved)
 
 
 class IllegalStateException(LifeCycleException):
