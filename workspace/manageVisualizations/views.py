@@ -9,7 +9,7 @@ from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from workspace.exceptions import LifeCycleException
+from core.exceptions import *
 from core.engine import invoke
 from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder
@@ -179,7 +179,7 @@ def create(request, viz_type='index'):
         form = CreateVisualizationForm(request.POST, prefix='visualization')
 
         if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         datastream_revision = VisualizationRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 

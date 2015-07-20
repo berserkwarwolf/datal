@@ -140,33 +140,9 @@ var FinishView = StepView.extend({
 	},
 
 	onSaveError: function(response){
-
-		// Generic error
-		var errorText = gettext('ERROR-LOADING-DATASET');
-
-		// Try catch JSON, to prevent failures
-		var errorJSON;
-		try {
-			errorJSON = $.parseJSON(response.responseText);
-			if( !_.isUndefined( errorJSON.description) ){
-				errorText = errorJSON.description;
-			}
-		} catch (e) {
-			// DO NOTHING
-		}
-
-		// Hide Loadings
-		$("#ajax_loading_overlay").hide();
-
-		// Set error Message
-		$.gritter.add({
-			title: 'Error',
-			text: errorText,
-			image: '/static/workspace/images/common/ic_validationError32.png',
-			sticky: true,
-			time: ''
-		});
-
+        // Hide Loadings
+        $("#ajax_loading_overlay").hide();
+        datalEvents.trigger('data:application-error', response.responseText);
 	},
 
 	setIndividualError: function(element, name, error){

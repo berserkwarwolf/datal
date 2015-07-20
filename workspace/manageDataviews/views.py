@@ -14,7 +14,7 @@ from workspace.manageDataviews.forms import *
 from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
-from workspace.exceptions import LifeCycleException
+from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from api.http import JSONHttpResponse
 from core import engine
@@ -30,7 +30,7 @@ def action_view(request, revision_id):
     try:
         datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
     except DataStreamRevision.DoesNotExist:
-        raise DataStreamNotFoundException
+        raise DataStreamNotFoundException()
 
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
@@ -175,7 +175,7 @@ def create(request):
         form = CreateDataStreamForm(request.POST)
 
         if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 
