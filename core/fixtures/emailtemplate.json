@@ -30,7 +30,7 @@
       "last_updated": "2015-06-09T11:32:04",
       "name": "password_recovered_es",
       "created": "2015-06-09T11:26:58",
-      "html_content": "",
+      "html_content": "Hello,<br> Your new password has been reset for you <br><br>UserName: {{ nick }}<br>New Password: {{ password }}<br><br>---------<br><br>DATAL.com - The open data platform<br>",
       "description": "Password Recovered (ES)",
       "content": "Hello,\n Your new password has been reset for you \n\nUserName: {{ nick }}\nNew Password: {{ password }}\n\n---------\n\nDATAL.com - The open data platform\n",
       "subject": "Your new DATAL password awaits!"
