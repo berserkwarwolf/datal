@@ -10,6 +10,8 @@ from django.views.decorators.http import require_POST
 from django.contrib import messages
 from django.utils.translation import ugettext
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.core.urlresolvers import reverse
 
 from uuid import uuid4
 from random import choice
@@ -23,10 +25,12 @@ from core.shortcuts import render_to_response
 from core.lib.mail import mail
 from workspace.accounts import forms
 
+
 def signup(request):
     form = forms.SignUpForm(initial={'language': request.auth_manager.language})
     # return render_to_response('accounts/signup.html', locals())
     return render_to_response('accounts/signUp.html', locals())
+
 
 def create(request):
     form = forms.SignUpForm(request.POST)
@@ -100,6 +104,7 @@ def create(request):
         return redirect('/')
     else:
         return redirect('accounts.signup')
+
 
 def signin(request, admin_url=''):
     auth_manager = request.auth_manager
