@@ -23,6 +23,7 @@ from core.choices import TicketChoices
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
+from core.lib.mail.django_backend import DjangoMailService
 from workspace.accounts import forms
 
 
@@ -91,12 +92,6 @@ def create(request):
 
         # login the user
         request.session['user_id'] = user.id
-
-        if mail.mail_service:
-            company = account.name
-            country = 'Unknown'
-            extradata = {'country': country, 'company': company}
-            mail.mail_service.list_subscribe(user, extradata)
 
         # redirect to landing
         return redirect('/')
@@ -245,18 +240,8 @@ def forgot_password(request):
         if user:
             uuid = uuid4()
             pass_ticket = UserPassTickets.objects.create(uuid=uuid, user_id=user.id, type='PASS')
-
             url = get_domain_with_protocol('workspace') + "/recovery?id=" + str(uuid)
-            email_text = "Hello,\n You recently requested to reset your password. Please click the following link to start the password reset process:\n"
-            email_text += ""+url + "\n"
-            email_text += "If you did not request a password change, you may ignore this message and your password will remain unchanged. \n\n"
-            email_text += "---------\n\n"
-            email_text += "DATAL.com - The open data platform\n"
-            email_text += ""
-            email_text += ""
-
-            send_mail('Your new DATAL password awaits!', email_text, 'noreply@junar.com', [user.email], fail_silently=False)
-
+            DjangoMailService().send_forgot_password_mail(user, url)
             message = ugettext('FORGOT-ACTIVATION-EMAIL')
             ok = True
         else:
@@ -266,34 +251,23 @@ def forgot_password(request):
 
 
 def recovery(request):
-
     try:
-        l_uuid = request.REQUEST['id']
+        uuid = request.REQUEST['id']
     except:
         raise Http404
 
     try:
-        l_passTicket = UserPassTickets.objects.get(uuid=l_uuid, type='PASS')
+        pass_ticket = UserPassTickets.objects.get(uuid=uuid, type='PASS')
     except:
-        l_passTicket  = ''
+        pass_ticket = ''
 
-    if l_passTicket != '' :
-        l_newPass = GeneratePassword()
+    if pass_ticket != '' :
+        new_pass = GeneratePassword()
 
-        l_user  = User.objects.get(pk=l_passTicket.user_id)
-        l_user.password = hashlib.md5(l_newPass).hexdigest()
-        l_user.save()
-
-        l_emailBody = "Hello,\n Your new password has been reset for you \n\n"
-        l_emailBody += "UserName : "+ l_user.nick +"\n"
-        l_emailBody += "New Password : "+ l_newPass +"\n"
-        l_emailBody += "\n"
-        l_emailBody += "---------\n\n"
-        l_emailBody += "DATAL.com - The open data platform\n"
-        l_emailBody += ""
-        l_emailBody += ""
-
-        send_mail('Your new DATAL password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
+        user  = User.objects.get(pk=pass_ticket.user_id)
+        user.password = hashlib.md5(new_pass).hexdigest()
+        user.save()
+        DjangoMailService().send_password_recovered_mail(user, new_pass)
         if not request.auth_manager.is_anonymous():
             request.session.clear()
     else:
