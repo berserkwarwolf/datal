@@ -49,8 +49,6 @@
         <!-- COLUMN CONTENT -->
         <div class="columnContent clearfix">
 
-
-{% comment "Eliminado hasta que haya facets" %}
             <!-- Facets -->
             <div class="boxCR helpAndTipsBox">
                 <div class="boxTitle">
@@ -58,16 +56,13 @@
                 </div>
 
                 <div class="boxInner">
-                    {% for name, value in facets.items %}
-                        {% for facet, count in value.items %}
+                    {% for item in facets %}
                         <h5 class="minnorPaddingBottom">
-                            <a href="category/{{name}}:{{facet}}?q={{query}}">{{ facet }}</a> ({{ count }})
+                            <a href="category/{{item.term}}?q={{query}}">{{ item.term|title}}</a> ({{ item.count }})
                             </h5>
-                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>
-{% endcomment %}
 
 
             <div class="boxCR helpAndTipsBox">
