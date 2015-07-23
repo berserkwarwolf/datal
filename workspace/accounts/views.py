@@ -242,7 +242,7 @@ def forgot_password(request):
         except:
             user = ''
 
-        if user != '':
+        if user:
             uuid = uuid4()
             pass_ticket = UserPassTickets.objects.create(uuid=uuid, user_id=user.id, type='PASS')
 
