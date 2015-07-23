@@ -28,7 +28,6 @@ from workspace.accounts import forms
 
 def signup(request):
     form = forms.SignUpForm(initial={'language': request.auth_manager.language})
-    # return render_to_response('accounts/signup.html', locals())
     return render_to_response('accounts/signUp.html', locals())
 
 
@@ -41,7 +40,6 @@ def create(request):
         account_level = AccountLevel.objects.get_by_code('level_5')
         account.level = account_level
 
-        today = datetime.date.today()
         month = datetime.timedelta(days=30)
         account.expires_at = datetime.date.today() + month
         account.save()
@@ -119,11 +117,10 @@ def signin(request, admin_url=''):
             preferences = account.get_preferences()
         except (Preference.DoesNotExist, Account.DoesNotExist):
             raise Http404
-        # return render_to_response('accounts/account_signin.html', locals())
         return render_to_response('accounts/signIn.html', locals())
     else:
-        # return render_to_response('accounts/signin.html', locals())
         return render_to_response('accounts/signIn.html', locals())
+
 
 def login(request):
     if request.method == 'POST':
@@ -158,15 +155,17 @@ def login(request):
         else:
             return redirect('accounts.signin')
 
+
 def signout(request):
     request.session.clear()
     return redirect('/')
+
 
 def activate(request):
     if request.method == 'GET':
         form = forms.ActivateUserForm(request.GET)
         ticket = request.GET.get('ticket')
-        user_pass_ticket = get_object_or_404(UserPassTickets, type = TicketChoices.USER_ACTIVATION, uuid=ticket)
+        user_pass_ticket = get_object_or_404(UserPassTickets, type=TicketChoices.USER_ACTIVATION, uuid=ticket)
         return render_to_response('accounts/activate.html', locals())
 
     elif request.method == 'POST':
@@ -174,7 +173,7 @@ def activate(request):
         if form.is_valid():
             ticket = form.cleaned_data.get('ticket')
             password = form.cleaned_data.get('password')
-            user_pass_ticket = get_object_or_404(UserPassTickets, type = TicketChoices.USER_ACTIVATION, uuid=ticket)
+            user_pass_ticket = get_object_or_404(UserPassTickets, type=TicketChoices.USER_ACTIVATION, uuid=ticket)
             user = user_pass_ticket.user
             user.password = password
             user.save()
@@ -188,15 +187,16 @@ def activate(request):
         else:
             return render_to_response('accounts/activate.html', locals())
 
+
 @require_POST
 def action_check_admin_url(request):
     admin_url = request.POST.get('admin_url')
-    exists = Preference.objects.filter(key = 'account.url', value=admin_url).exists()
+    exists = Preference.objects.filter(key='account.url', value=admin_url).exists()
     return HttpResponse(str(not exists).lower(), content_type='application/json')
+
 
 @login_required
 def my_account(request):
-
     user = User.objects.get(pk=request.auth_manager.id)
     if request.method == 'GET':
         form = forms.MyAccountForm(instance = user)
@@ -221,9 +221,10 @@ def my_account(request):
 def GeneratePassword(length=8, chars=string.letters + string.digits):
     return ''.join([choice(chars) for i in range(length)])
 
+
 def password_recovery(request):
-    # return render_to_response('accounts/forgot_password.html', locals())
     return render_to_response('accounts/forgotPassword.html', locals())
+
 
 def forgot_password(request):
     l_ok = False
@@ -256,12 +257,13 @@ def forgot_password(request):
 
         send_mail('Your new DATAL password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
 
-        l_message = ugettext( 'FORGOT-ACTIVATION-EMAIL' )
+        l_message = ugettext('FORGOT-ACTIVATION-EMAIL')
         l_ok = True
     else:
-        l_message = ugettext( 'FORGOT-USER-NOFOUND' )
+        l_message = ugettext('FORGOT-USER-NOFOUND')
 
     return HttpResponse('{"p_message":"' + l_message + '", "ok" :"' + str(l_ok) + '" }', content_type='application/json')
+
 
 def recovery(request):
 
@@ -297,5 +299,4 @@ def recovery(request):
     else:
         raise Http404
 
-    # return render_to_response('accounts/recovery.html', locals())
     return render_to_response('accounts/recovery.html', locals())
