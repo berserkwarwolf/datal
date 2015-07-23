@@ -38,7 +38,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             # Create a new dataset (TITLE is for automatic GUID creation)
             dataset = Dataset.objects.create(user=user, type=collect_type, title=fields['title'])
 
-        # meta_text = '{"field_values": [{"cust-dataid": "dataid-%s"}]}' % dataset.id
+        #meta_text = '{"field_values": [{"cust-dataid": "dataid-%s"}]}' % dataset.id
         if not fields.get('language', None):
             fields['language'] = user.language
 
@@ -132,6 +132,7 @@ class DatasetSearchIndexDAO():
     TYPE="dt"
 
     def __init__(self, dataset_revision):
+	self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
 
     def add(self):
@@ -149,6 +150,9 @@ class DatasetSearchIndexDAO():
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
+	# eliminado hasta que haya facets
+	#from core.models import add_facets_to_doc
+	#from core.helpers import get_meta_data_dict
 
         category=self.getCategory()
         dataseti18n = self.getDatasetI18n()
@@ -181,6 +185,15 @@ class DatasetSearchIndexDAO():
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
+# Eliminado hasta que haya facets
+#	# Update dict with facets
+#	try:
+#	    document = add_facets_to_doc(self, self.dataset_revision.dataset.user.account, document)
+#	except Exception, e:
+#	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
+#	
+#	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
+
         return document
 
  
@@ -200,6 +213,7 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
     """ class for manage access to datasets' ElasticSearch documents """
 
     def __init__(self, dataset_revision):
+	self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
         self.search_index = ElasticsearchIndex()
         

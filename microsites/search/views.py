@@ -39,7 +39,6 @@ def do_search(request, category_filters = None, datasets = None):
 
         try:
             resources = ["ds", "db", "chart", "dt"]
-
             results, search_time, facets = FinderManager().search(query = query
                                                                   , account_id = accounts_ids
                                                                   , category_filters = category_filters

@@ -9,20 +9,13 @@ from core.helpers import slugify
 from core import helpers, choices
 
 from core.search.finder import Finder
-from indextank.client import ApiClient
+#from indextank.client import ApiClient
+#from core.lib.searchify import SearchifyIndex
 
 
 class IndexTankFinder(Finder):
 
     order_by = {}
-
-    def __init__(self):
-        self.logger = logging.getLogger(__name__)
-        self.logger.info('New IndexTankFinder INIT searchify %s AT %s' % (settings.SEARCH_INDEX['url'][0], settings.SEARCH_INDEX['index']))
-        self.api_client = ApiClient(settings.SEARCH_INDEX['url'][0])
-        self.index = self.api_client.get_index(settings.SEARCH_INDEX['index'])
-
-        Finder.__init__(self)
 
     def search(self, *args, **kwargs):
 
@@ -57,11 +50,6 @@ class IndexTankFinder(Finder):
         scoring = kwargs.get('scoring', 1)
 
         #TODO define a search function in the right place
-	self.logger.info("QUERY: %s" % query)
-	self.logger.info("START: %s" % start)
-	self.logger.info("END: %s" % end)
-	self.logger.info("category_filters: %s" % category_filters )
-	self.logger.info("Scoring: %s" % scoring)
         results = self.index.search(query
                                     , start=start
                                     , length=end
@@ -117,13 +105,6 @@ class IndexTankFinder(Finder):
                 logger.error('Search IndexTank [ERROR(%s--%s)] with doc = %s [TRACE:%s]' % (doc['type'], doc['title'], unicode(doc), repr(e)))
 
         return results, search_time, facets
-
-    def _get_category_filters(self, category_filters, filter_key, filter_value):
-        if filter_value:
-            if type(filter_value) == types.ListType:
-                category_filters[filter_key] = filter_value
-            else:
-                category_filters[filter_key] = [filter_value]
 
     def make_query(self):
 
@@ -193,121 +174,3 @@ class IndexTankFinder(Finder):
             l_indextank_query = self._add_query(l_indextank_query, resource_type_query)
 
         return l_indextank_query
-
-    def get_dictionary(self, doc):
-        if doc['type'] == 'ds':
-            return self.get_datastream_dictionary(doc)
-        elif doc['type'] == 'db':
-            return self.get_dashboard_dictionary(doc)
-        elif doc['type'] == 'chart':
-            return self.get_visualization_dictionary(doc)
-        elif doc['type'] == 'dt':
-            return self.get_dataset_dictionary(doc)
-
-    def get_datastream_dictionary(self, p_doc):
-
-        l_parameters = []
-        if p_doc['parameters']:
-            import json
-            l_parameters = json.loads(p_doc['parameters'])
-
-        id = p_doc['datastream_id']
-        title = p_doc['title']
-        slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', kwargs={'id': id, 'slug': slug})
-
-        l_datastream = dict (dataservice_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
-        return l_datastream
-
-    def get_dataset_dictionary(self, p_doc):
-
-        l_parameters = []
-        if p_doc['parameters']:
-            import json
-            l_parameters = json.loads(p_doc['parameters'])
-
-        dataset_id = p_doc['dataset_id']
-        title = p_doc['title']
-        slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
-                                                                                               'slug': slug})
-
-        l_dataset = dict (dataset_id=dataset_id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
-        return l_dataset
-
-    def get_visualization_dictionary(self, p_doc):
-
-        try:
-            if p_doc['parameters']:
-                import json
-                l_parameters = json.loads(p_doc['parameters'])
-        except:
-            l_parameters = []
-
-        id = p_doc['visualization_id']
-        title = p_doc['title']
-        slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', kwargs={'id': id, 'slug': slug})
-
-        visualization = dict(visualization_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
-        return visualization
-
-    def get_dashboard_dictionary(self, p_doc):
-
-        id = p_doc['dashboard_id']
-        title = p_doc['title']
-        slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug})
-
-        dashboard_dict = dict (dashboard_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , tags=[ tag.strip() for tag in p_doc['tags'].split(',') ]
-                                , user_nick=p_doc['owner_nick']
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
-        return dashboard_dict
-
-    def _get_query(self, values, boolean_operator = 'AND'):
-        self._validate_boolean_operator(boolean_operator)
-
-        query = []
-        for pair in values.iteritems():
-            query.append('%s:%s' % pair)
-        boolean_operator_query = ' %s ' % boolean_operator
-        return boolean_operator_query.join(query)
-
-    def _add_query(self, query, subquery, boolean_operator = 'AND'):
-        self._validate_boolean_operator(boolean_operator)
-
-        if query:
-            return ' '.join([query, boolean_operator, subquery])
-        else:
-            return subquery
-
-    def _validate_boolean_operator(self, boolean_operator):
-        boolean_operators = ['AND', '+', 'OR', 'NOT', '-']
-        if boolean_operator not in boolean_operators:
-            raise Exception('Boolean operator used, does not exists')
