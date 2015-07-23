@@ -22,4 +22,17 @@
         "content": "Hello,\n You recently requested to reset your password. Please click the following link to start the password reset process:\n\n{{ url }}\n\nIf you did not request a password change, you may ignore this message and your password will remain unchanged.\n\n---------\n\nDATAL.com - The open data platform\n ",
         "subject": "Your new DATAL password awaits!"
     }
+},
+  {
+    "pk": 3,
+    "model": "post_office.emailtemplate",
+    "fields": {
+      "last_updated": "2015-06-09T11:32:04",
+      "name": "password_recovered_es",
+      "created": "2015-06-09T11:26:58",
+      "html_content": "",
+      "description": "Password Recovered (ES)",
+      "content": "Hello,\n Your new password has been reset for you \n\nUserName: {{ nick }}\nNew Password: {{ password }}\n\n---------\n\nDATAL.com - The open data platform\n",
+      "subject": "Your new DATAL password awaits!"
+    }
 }]
