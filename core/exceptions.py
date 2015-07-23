@@ -55,7 +55,7 @@ class ChildNotApprovedException(LifeCycleException):
         super(ChildNotApprovedException, self).__init__()
 
     def get_actions(self):
-        return [ViewDatasetExceptionAction(self.revision)]
+        return [ReviewDatasetStreamsAndPublishExceptionAction(self.revision)]
 
 class SaveException(LifeCycleException):
     title = _('EXCEPTION-TITLE-SAVE-ERROR')

@@ -48,6 +48,8 @@ class ViewDatasetExceptionAction(ExceptionAction):
         url = reverse('manageDatasets.view', args=(revision.id,))
         super(ViewDatasetExceptionAction, self).__init__(url)
 
+class ReviewDatasetStreamsAndPublishExceptionAction(ViewDatasetExceptionAction):
+    description = _('EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH')
 
 class ViewDatasetListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASET-LIST')

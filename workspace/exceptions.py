@@ -14,21 +14,21 @@ class ParentNotPublishedException(LifeCycleException):
 
 
 class DatastreamParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
-    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
+    title = _('EXCEPTION-TITLE-DATASTREM-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-DATASTREM-PARENT-NOT-PUBLISHED')
     tipo = 'parent-not-published'
 
     def get_actions(self):
         return [ViewDatasetExceptionAction(self.revision)]
 
-
 class VisualizationParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
-    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
+    title = _('EXCEPTION-TITLE-DATASET-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-PARENT-NOT-PUBLISHED')
     tipo = 'parent-not-published'
 
     def get_actions(self):
         return [ViewDatastreamExceptionAction(self.revision)]
+
 
 class ResourceRequiredException(LifeCycleException):
     title = _('EXCEPTION-TITLE-RESOURCE-REQUIRED')
@@ -64,7 +64,6 @@ class AnyDatasetRequiredException(AnyResourceRequiredException):
 
     def get_actions(self):
         return [ViewDatasetCreateExceptionAction()]
-
 
 class AnyDatastreamRequiredException(AnyResourceRequiredException):
     title = _('EXCEPTION-TITLE-ANY-DATASTREAM-REQUIRED')
