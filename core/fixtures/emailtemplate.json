@@ -1,5 +1,4 @@
-[
-{
+[{
     "pk": 1,
     "model": "post_office.emailtemplate",
     "fields": {
@@ -11,5 +10,16 @@
         "content": "Hola {{ name }}\n\nEstas recibiendo este correo porque {{ admin_name }}, de {{ company }} te ha invitado a ser parte como miembro del equipo de la Plataforma de Datos Abiertos de tu organización.\n\nPara empezar, por favor haz click en el siguiente enlace y sigue las instrucciones para crear tu contraseña\n\n{{ link }}\n\nDatal es la Plataforma de Datos Abiertos de más facil uso con la que podrás agregar valor y vida a tus Bases de Datos !\n\nEquipo Datal",
         "subject": "Nueva cuenta en Datal"
     }
-}
-]
+},{
+    "pk": 2,
+    "model": "post_office.emailtemplate",
+    "fields": {
+        "last_updated": "2015-06-09T11:32:04",
+        "name": "reset_password_es",
+        "created": "2015-06-09T11:26:58",
+        "html_content": "Hello,<br> You recently requested to reset your password. Please click the following link to start the password reset process:<br><br>{{ url }}<br><br>If you did not request a password change, you may ignore this message and your password will remain unchanged.<br><br>---------<br><br>DATAL.com - The open data platform<br> ",
+        "description": "Reset Password (ES)",
+        "content": "Hello,\n You recently requested to reset your password. Please click the following link to start the password reset process:\n\n{{ url }}\n\nIf you did not request a password change, you may ignore this message and your password will remain unchanged.\n\n---------\n\nDATAL.com - The open data platform\n ",
+        "subject": "Your new DATAL password awaits!"
+    }
+}]
