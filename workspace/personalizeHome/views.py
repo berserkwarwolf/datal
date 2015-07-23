@@ -62,7 +62,7 @@ def suggest(request):
     #if request.is_ajax():
     query = request.GET.get('term', '')
     if query:
-        resources = request.GET.getlist('resources[]', '')
+        resources = request.GET.getlist('resources[]', 'all')
         fm = FinderManager(ThemeFinder)
         results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
 

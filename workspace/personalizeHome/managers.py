@@ -1,11 +1,9 @@
-from core import search
+from core.search import *
 
-class ThemeFinder(search.elastic.ElasticsearchFinder):
-    order_by = {'0': 'title'}
+class ThemeFinder(elastic.ElasticsearchFinder):
 
-    def __init__(self):
-        search.elastic.ElasticsearchFinder.__init__(self)
-	self.logger("iniciando themefinder!!!")
+#    def __init__(self):
+#        elastic.ElasticsearchFinder.__init__(self)
 
     def get_datastream_dictionary(self, doc):
         return dict(id=doc['datastream_id'], label=doc['title'], value=doc['title'], type=doc['type'])
