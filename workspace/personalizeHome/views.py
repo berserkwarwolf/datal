@@ -51,10 +51,10 @@ def save(request):
             return HttpResponse(json.dumps({'preview_home':previewHome}), content_type='application/json')
 
 
+@login_required
 @csrf_exempt
 def suggest(request):
-    auth_manager = request.auth_manager
-    account = auth_manager.get_account()
+    account = request.user.account
     preferences = account.get_preferences()
     if preferences['account_home_filters'] == 'featured_accounts':
         featured_accounts = Account.objects.get_featured_accounts(account.id)
