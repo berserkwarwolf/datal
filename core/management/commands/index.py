@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
 from optparse import make_option
+from core.lib.elastic import ElasticsearchIndex
 
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
 from core.models import Dataset, DatasetRevision, DataStream, DataStreamRevision
@@ -24,6 +25,9 @@ class Command(BaseCommand):
 
         # index resources
         if options['reindex']:
+
+            # destruye el index
+            ElasticsearchIndex().flush_index()
 
             for datasetrevision in DatasetRevision.objects.filter(status=StatusChoices.PUBLISHED):
                 search_dao = DatasetSearchDAOFactory().create(datasetrevision)

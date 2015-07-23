@@ -229,6 +229,9 @@ class ElasticsearchIndex():
     def __filterNotDeleted(self, item):
         return not item['found']
 
+    def flush_index(self):
+        return self.es.indices.delete(index=settings.SEARCH_INDEX['index'], ignore=[400, 404])
+
     def delete_documents(self, documents):
         """Delete from a list. Return [list(deleted), list(notdeleted)] """
 
