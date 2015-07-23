@@ -222,47 +222,47 @@ def GeneratePassword(length=8, chars=string.letters + string.digits):
     return ''.join([choice(chars) for i in range(length)])
 
 
-def password_recovery(request):
-    return render_to_response('accounts/forgotPassword.html', locals())
-
-
 def forgot_password(request):
-    l_ok = False
+    if request.method == 'GET':
+        return render_to_response('accounts/forgotPassword.html', locals())
 
-    try:
-        l_userIdentification = request.REQUEST['identification']
-    except:
-        raise Http404
+    if request.method == 'POST':
+        l_ok = False
 
-    try:
-        l_user = User.objects.get(
-            Q(nick=l_userIdentification) |
-            Q(email=l_userIdentification)
-        )
-    except:
-        l_user = ''
+        try:
+            l_userIdentification = request.REQUEST['identification']
+        except:
+            raise Http404
 
-    if l_user != '':
-        l_uuid = uuid4()
-        l_passTicket = UserPassTickets.objects.create(uuid=l_uuid, user_id=l_user.id, type='PASS')
+        try:
+            l_user = User.objects.get(
+                Q(nick=l_userIdentification) |
+                Q(email=l_userIdentification)
+            )
+        except:
+            l_user = ''
 
-        l_url = get_domain_with_protocol('workspace') + "/recovery?id=" + str(l_uuid)
-        l_emailBody = "Hello,\n You recently requested to reset your password. Please click the following link to start the password reset process:\n"
-        l_emailBody += ""+l_url + "\n"
-        l_emailBody += "If you did not request a password change, you may ignore this message and your password will remain unchanged. \n\n"
-        l_emailBody += "---------\n\n"
-        l_emailBody += "DATAL.com - The open data platform\n"
-        l_emailBody += ""
-        l_emailBody += ""
+        if l_user != '':
+            l_uuid = uuid4()
+            l_passTicket = UserPassTickets.objects.create(uuid=l_uuid, user_id=l_user.id, type='PASS')
 
-        send_mail('Your new DATAL password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
+            l_url = get_domain_with_protocol('workspace') + "/recovery?id=" + str(l_uuid)
+            l_emailBody = "Hello,\n You recently requested to reset your password. Please click the following link to start the password reset process:\n"
+            l_emailBody += ""+l_url + "\n"
+            l_emailBody += "If you did not request a password change, you may ignore this message and your password will remain unchanged. \n\n"
+            l_emailBody += "---------\n\n"
+            l_emailBody += "DATAL.com - The open data platform\n"
+            l_emailBody += ""
+            l_emailBody += ""
 
-        l_message = ugettext('FORGOT-ACTIVATION-EMAIL')
-        l_ok = True
-    else:
-        l_message = ugettext('FORGOT-USER-NOFOUND')
+            send_mail('Your new DATAL password awaits!', l_emailBody, 'noreply@junar.com', [l_user.email], fail_silently=False)
 
-    return HttpResponse('{"p_message":"' + l_message + '", "ok" :"' + str(l_ok) + '" }', content_type='application/json')
+            l_message = ugettext('FORGOT-ACTIVATION-EMAIL')
+            l_ok = True
+        else:
+            l_message = ugettext('FORGOT-USER-NOFOUND')
+
+        return HttpResponse('{"p_message":"' + l_message + '", "ok" :"' + str(l_ok) + '" }', content_type='application/json')
 
 
 def recovery(request):

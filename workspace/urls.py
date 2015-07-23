@@ -27,7 +27,6 @@ urlpatterns = patterns('',
     url(r'^login/$', 'workspace.accounts.views.login', name='accounts.login'),
     url(r'^forgot_password/$', 'workspace.accounts.views.forgot_password', name='accounts.forgot_password'),
     url(r'^recovery/$', 'workspace.accounts.views.recovery', name='accounts.recovery'),
-    url(r'^password_recovery/$', 'workspace.accounts.views.password_recovery', name='accounts.password_recovery'),
     url(r'^datasets/', include('workspace.manageDatasets.urls')),
 
     #TODO fix all urls (streams -> dataviews)
