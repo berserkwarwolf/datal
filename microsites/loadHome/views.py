@@ -61,7 +61,6 @@ def load(request):
                 categories = Category.objects.get_for_home(language, account_id)
 
             results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
-                                                                    order = '1',
                                                                     account_id = account_id)
 
             paginator = Paginator(results, 25)
