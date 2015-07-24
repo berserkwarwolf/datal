@@ -33,10 +33,10 @@ def load(request):
 def save(request):
     if request.method == 'POST':
         account = request.auth_manager.get_account()
-        jsonContent = request.POST['jsonString']
+        jsonContent = request.POST.get('jsonString')
         jsonObj = json.loads(jsonContent)
         preferences = account.get_preferences()
-        if (jsonObj['type'] == 'save'):
+        if jsonObj['type'] == 'save':
             if jsonObj['theme'] is None:
                 account.set_preference('account.has.home', False)
             else:

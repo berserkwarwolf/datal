@@ -14,7 +14,7 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.helpers import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
