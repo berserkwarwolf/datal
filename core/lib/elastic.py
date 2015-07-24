@@ -213,7 +213,7 @@ class ElasticsearchIndex():
         """delete by ID"""
 
         try:
-            output = self.es.delete(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['fields']['type'])
+            output = self.es.delete(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'])
             return output
         except NotFoundError:
             self.logger.error("ERROR NotFound: ID %s not found in index" % document['docid'])
@@ -226,6 +226,7 @@ class ElasticsearchIndex():
         return False
 
     def __filterDeleted(self, item):
+        print "__filterDeleted: %s " % item
         return item['found']
 
     def __filterNotDeleted(self, item):
@@ -237,9 +238,13 @@ class ElasticsearchIndex():
     def delete_documents(self, documents):
         """Delete from a list. Return [list(deleted), list(notdeleted)] """
 
+        print "delete_documents: documents: %s" % documents
+
         result = map(self.delete_document, documents)
 
         documents_deleted=filter(self.__filterDeleted,result)
         documents_not_deleted=filter(self.__filterNotDeleted,result)
+
+        print  [documents_deleted, documents_not_deleted]
 
         return [documents_deleted, documents_not_deleted]

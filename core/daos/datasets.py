@@ -140,13 +140,16 @@ class DatasetSearchIndexDAO():
     def delete(self):
         return True
 
-    def getCategory(self):
+    def _get_category(self):
         return self.dataset_revision.category.categoryi18n_set.all()[0]
 
-    def getDatasetI18n(self):
+    def _get_i18n(self):
         return DatasetI18n.objects.get(dataset_revision=self.dataset_revision)
 
-    def getDocumentID(self):
+    def _get_type(self):
+        return self.TYPE
+
+    def _get_id(self):
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
@@ -154,8 +157,8 @@ class DatasetSearchIndexDAO():
 	#from core.models import add_facets_to_doc
 	#from core.helpers import get_meta_data_dict
 
-        category=self.getCategory()
-        dataseti18n = self.getDatasetI18n()
+        category=self._get_category()
+        dataseti18n = self._get_i18n()
 
         tags = self.dataset_revision.tagdataset_set.all().values_list('tag__name', flat=True)
 
@@ -167,7 +170,7 @@ class DatasetSearchIndexDAO():
         text=text_template.render(text_context)[:-1]
 
         document = {
-                'docid' : self.getDocumentID(),
+                'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
                      'dataset_id': self.dataset_revision.dataset.id,
@@ -207,7 +210,7 @@ class DatasetSearchifyDAO(DatasetSearchIndexDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([self.getDocumentID()])
+        self.search_index.delete_documents([self._get_id()])
 
 class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
     """ class for manage access to datasets' ElasticSearch documents """
@@ -221,4 +224,4 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([self.getDocumentID()])
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
