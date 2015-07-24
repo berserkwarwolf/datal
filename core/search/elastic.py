@@ -58,11 +58,11 @@ class ElasticsearchFinder(Finder):
         docs=[]
         for i in results['hits']['hits']:
             i['_source']['fields']['category']=i['_source']['categories']
+            i['_source']['fields']['docid']=i['_source']['docid']
             docs.append(i['_source']['fields'])
 
         search_time     = float(results['took'])/1000
         facets          = results['facets']['type']['terms']
-        #facets[u'id']   = None
 
         results = []
         for doc in docs:
@@ -79,6 +79,10 @@ class ElasticsearchFinder(Finder):
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
             self.resource=["ds","dt","db","chart","vt"]
+
+        # previene un error al pasarle un string y no un LIST
+        if type(self.resource) == type(str()):
+            self.resource=[self.resource]
 
         query={"query": {
             "filtered":{
