@@ -1,10 +1,10 @@
-from core import search
+from core.search import *
 
 
 class ApiFinder(elastic.ElasticsearchFinder):
 
-    def __init__(self):
-        elastic.ElasticsearchFinder.__init__(self)
+#    def __init__(self):
+#        elastic.ElasticsearchFinder.__init__(self)
 
     def get_visualization_dictionary(self, doc):
         dictionary = elastic.ElasticsearchFinder.get_visualization_dictionary(self, doc)

@@ -39,8 +39,8 @@ managers.CategoryManager.get_ordered = get_ordered
 
 class ApiFinder(elastic.ElasticsearchFinder):
 
-    def __init__(self):
-        elastic.ElasticsearchFinder.__init__(self)
+#    def __init__(self):
+#        elastic.ElasticsearchFinder.__init__(self)
 
     def get_visualization_dictionary(self, doc):
         guid = doc['docid'].split('::')[1]

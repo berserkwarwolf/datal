@@ -219,7 +219,9 @@ class ElasticsearchIndex():
             self.logger.error("ERROR NotFound: ID %s not found in index" % document['docid'])
             return {u'found': False, u'_type': document['fields']['type'], u'_id': document['docid'], u'_version': 2, u'_index': settings.SEARCH_INDEX['index']}
         except KeyError:
-            self.logger.error("ERROR: Document error (doc: %s)" % str(document))
+            self.logger.error("ERROR KeyError: Document error (doc: %s)" % str(document))
+        except TypeError:
+            self.logger.error("ERROR TypeError: Document error (doc: %s)" % str(document))
 
         return False
 

@@ -73,7 +73,7 @@ def action_search(request):
                                                            max_results=max_results,
                                                            account_id=account_id,
                                                            user_id=user_id,
-                                                           resource='ds')
+                                                           resource=['ds'])
 
         account_domain = get_domain(account_id)
         for item in datastreams:
