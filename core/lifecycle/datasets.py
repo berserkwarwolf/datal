@@ -132,7 +132,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
                         allowed_states=[StatusChoices.APPROVED]
                     )
-                except:
+                except IllegalStateException:
                     publish_fail.append(datastream_revision)
 
             if publish_fail:
