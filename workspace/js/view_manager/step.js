@@ -1520,13 +1520,12 @@ var Step3 = Step.extend({
         if(pResponse.status == 'ok'){
             //window.location.replace('/dataviews/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
             window.location.replace('/dataviews/'+pResponse.datastream_revision_id);
-        }
-        else{
-            jQuery.TwitterMessage( { type: 'error', message : pResponse.messages.join('. ') } );
+        }else{
+            datalEvents.trigger('data:application-error', pResponse);
         }
     },
     onSaveError : function(pResponse){
-        jQuery.TwitterMessage( { type: 'error', message : gettext( "APP-PUBLISHDS-ERROR" ) } );
+        datalEvents.trigger('data:application-error', pResponse);
     },
     onPrevStepButtonClicked: function(){
          try{

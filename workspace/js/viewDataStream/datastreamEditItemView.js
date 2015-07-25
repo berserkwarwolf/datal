@@ -127,19 +127,13 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                            window.location = setURL;
                     }, 2000);
                 },
-                error: function(){
+                error: function(response){
                     // Hide Loading
                     $("#ajax_loading_overlay").hide();
-                    $.gritter.add({
-                        title : gettext('APP-ERROR-TEXT'),
-                        text : gettext('APP-REQUEST-ERROR'),
-                        image : '/static/workspace/images/common/ic_validationError32.png',
-                        sticky : true,
-                        time : 3500
-                    });
+                    datalEvents.trigger('data:application-error', response);
                     self.closeOverlay();
                 }
-            });     
+            });
 
         } 
 

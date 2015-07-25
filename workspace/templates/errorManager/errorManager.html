@@ -6,7 +6,7 @@
             <ul>
                 <% for(var i in actions){ %>
                     <li>
-                        <% if(actions[i].link){ %>
+                        <% if(actions[i].link && actions[i].link != "None"){ %>
                             <a href="<%= actions[i].link %>"><%= actions[i].description %></a>
                         <% } else { %>
                             <%= actions[i].description %>

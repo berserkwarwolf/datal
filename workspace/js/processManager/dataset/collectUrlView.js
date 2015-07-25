@@ -83,14 +83,7 @@ var CollectUrlView = StepView.extend({
 						self.model.set('impl_type', impl_type);
 					},
 					error: function(response){
-						// impl_type could not be checked. Proceed to show error
-						$.gritter.add({
-							title: 'Error',
-							text: gettext('ERROR-TRY-ANOTHER-DATASET'),
-							image: '/static/workspace/images/common/ic_validationError32.png',
-							sticky: true,
-							time: ''
-						});
+						datalEvents.trigger('data:application-error', response);
 					},
 					complete: function(){
 						// Hide Loading
