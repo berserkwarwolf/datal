@@ -276,7 +276,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
-                status=StatusChoices.DRAFT,
+                status=form_status,
                 parameters=self.datastream_revision.datastreamparameter_set.all(),
                 **fields
             )
