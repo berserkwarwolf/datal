@@ -202,7 +202,7 @@ var CollectFileView = StepView.extend({
 	onFileUploadFail:function(event, data){
         // Hide Loadings
         $("#ajax_loading_overlay").hide();
-        datalEvents.trigger('data:application-error', data);
+        datalEvents.trigger('datal:application-error', data);
 	},
 
 });

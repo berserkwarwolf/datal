@@ -4,7 +4,7 @@
         initialize: function () {
             this.model.on("change", this.render.bind(this));
 
-            datalEvents.on('data:application-error', this.onApplicationError.bind(this));
+            datalEvents.on('datal:application-error', this.onApplicationError.bind(this));
         },
         /**
          * Captures an object containing data from an error exception

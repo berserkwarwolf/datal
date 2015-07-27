@@ -117,7 +117,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
 
                 },
                 error: function(response){
-                    datalEvents.trigger('data:application-error', response);
+                    datalEvents.trigger('datal:application-error', response);
                     self.closeOverlay();
                 }
             });

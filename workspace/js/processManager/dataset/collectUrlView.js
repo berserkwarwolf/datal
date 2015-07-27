@@ -83,7 +83,7 @@ var CollectUrlView = StepView.extend({
 						self.model.set('impl_type', impl_type);
 					},
 					error: function(response){
-						datalEvents.trigger('data:application-error', response);
+						datalEvents.trigger('datal:application-error', response);
 					},
 					complete: function(){
 						// Hide Loading

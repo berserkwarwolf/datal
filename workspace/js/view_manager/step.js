@@ -1521,11 +1521,11 @@ var Step3 = Step.extend({
             //window.location.replace('/dataviews/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
             window.location.replace('/dataviews/'+pResponse.datastream_revision_id);
         }else{
-            datalEvents.trigger('data:application-error', pResponse);
+            datalEvents.trigger('datal:application-error', pResponse);
         }
     },
     onSaveError : function(pResponse){
-        datalEvents.trigger('data:application-error', pResponse);
+        datalEvents.trigger('datal:application-error', pResponse);
     },
     onPrevStepButtonClicked: function(){
          try{

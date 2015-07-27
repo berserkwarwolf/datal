@@ -142,7 +142,7 @@ var FinishView = StepView.extend({
 	onSaveError: function(response){
         // Hide Loadings
         $("#ajax_loading_overlay").hide();
-        datalEvents.trigger('data:application-error', response);
+        datalEvents.trigger('datal:application-error', response);
 	},
 
 	setIndividualError: function(element, name, error){
