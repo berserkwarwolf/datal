@@ -173,4 +173,4 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([{"type": self.get_type(), "docid": self._get_id()}])
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])

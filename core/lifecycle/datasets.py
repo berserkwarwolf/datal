@@ -246,7 +246,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         if self.dataset_revision.status == StatusChoices.PUBLISHED:
             search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
-            search_dao.remove(self.dataset_revision)
+            search_dao.remove()
 
         if killemall:
             self._remove_all()
