@@ -1,5 +1,4 @@
 from functools import wraps
-from core.cache import Cache
 from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
@@ -11,12 +10,14 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.daos.datasets import DatasetDBDAO
 from workspace.daos.datastreams import DataStreamDBDAO
 
+
 def require_child_accepted(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))
     def _wrapped_view(request, *args, **kwargs):
         return view_func(request, *args, **kwargs)
 
     return _wrapped_view
+
 
 def require_not_pending_review(ids):
     def decorator(view_func):
@@ -31,6 +32,7 @@ def require_not_pending_review(ids):
         return _wrapped_view
     return decorator
 
+
 def require_privilege(privilege):
     def decorator(view_func):
         """ for registred and logged user. NO redirect to login"""
@@ -43,6 +45,7 @@ def require_privilege(privilege):
 
         return _wrapped_view
     return decorator
+
 
 def requires_if_publish(resource):
     """ En la edicion de recursos quizas se intente publicar, en esos casos
@@ -88,6 +91,7 @@ def requires_published_parent():
         return _wrapped_view
     return decorator
 
+
 def requires_dataset():
     """ requiere a dataset_revision_id POST param """
     def decorator(view_func):
@@ -102,6 +106,7 @@ def requires_dataset():
 
         return _wrapped_view
     return decorator
+
 
 def requires_any_dataset():
     """ require account with almost one dataset """
@@ -118,6 +123,7 @@ def requires_any_dataset():
         return _wrapped_view
     return decorator
 
+
 def requires_any_datastream():
     """ require account with almost one dataset """
     def decorator(view_func):
@@ -132,6 +138,21 @@ def requires_any_datastream():
 
         return _wrapped_view
     return decorator
+
+
+def requires_review():
+    """
+    Verifico si el usuario puede editar, estando en estado pendiente de revision
+    """
+    def decorator(view_func):
+        @wraps(view_func, assigned=available_attrs(view_func))
+        def _wrapped_view(request, *args, **kwargs):
+            # Verifico que este en edi
+            return view_func(request, *args, **kwargs)
+
+        return _wrapped_view
+    return decorator
+
 
 #TODO implementar tambien
 """
