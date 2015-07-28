@@ -314,7 +314,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         else:
             # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, **fields
+                self.dataset_revision,
+                status=old_status,
+                changed_fields,
+                **fields
             )
 
             if form_status == StatusChoices.PUBLISHED:
