@@ -36,7 +36,7 @@ class ElasticsearchFinder(Finder):
             end = max_results < slice and max_results or slice
             start = (page - 1) * end
 
-        if self.sort == "":
+        if self.sort == "" or self.sort == "1":
             self.sort=self.order_by
 
         # Tengo que saber para qué se usa esto
