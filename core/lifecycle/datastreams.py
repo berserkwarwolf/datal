@@ -11,7 +11,7 @@ from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-UNPUBLISH_ALLOWED_STATES = [StatusChoices.PUBLISHED]
+UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED]
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
 ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
@@ -25,7 +25,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def __init__(self, user, resource=None, language=None, datastream_id=0, datastream_revision_id=0):
         super(DatastreamLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
-            
+
         try:
             if type(resource) == DataStream:
                 self.datastream = resource
@@ -77,7 +77,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.CREATE)
 
-	# permite publicar al crear
+        # permite publicar al crear
         if status == StatusChoices.PUBLISHED:
             self.publish(allowed_states=CREATE_ALLOWED_STATES)
         else:
@@ -95,13 +95,13 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                                     allowed_states=allowed_states)
 
         status = StatusChoices.PUBLISHED
-        
+
         self._publish_childs()
         self.datastream_revision.status = status
         self.datastream_revision.save()
 
         self._update_last_revisions()
-        
+
         search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
         search_dao.add()
 
@@ -140,7 +140,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
         search_dao.remove()
-        
+
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
@@ -258,20 +258,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
-            raise IllegalStateException(
-                                    from_state=old_status,
-                                    to_state=form_status,
-                                    allowed_states=allowed_states)
+            raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
 
-        if old_status == StatusChoices.DRAFT or \
-                (old_status == StatusChoices.APPROVED and form_status == StatusChoices.PUBLISHED):
-            self.datastream_revision = DataStreamDBDAO().update(
-                self.datastream_revision,
-                changed_fields,
-                status=form_status,
-                **fields
-            )
-        else:
+        if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
@@ -283,17 +272,27 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
             self._move_childs_to_draft()
 
-        if form_status == StatusChoices.PUBLISHED:
-            # Intento publicar, si falla, queda como publicado
-            try:
-                self.publish()
-            except:
-                self.accept()
-                raise
-        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
-            self.unpublish()
+            if form_status == StatusChoices.DRAFT:
+                self.unpublish()
+            else:
+                 self._update_last_revisions()
         else:
-            self._update_last_revisions()
+            self.datastream_revision = DataStreamDBDAO().update(
+                self.datastream_revision,
+                changed_fields,
+                status=form_status,
+                **fields
+            )
+
+            if form_status == StatusChoices.PUBLISHED:
+               # Intento publicar, si falla, queda como publicado
+
+                try:
+                    self.publish()
+                except:
+                    self.accept()
+                    self._update_last_revisions()
+                    raise
 
         return self.datastream_revision
 

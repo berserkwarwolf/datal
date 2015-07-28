@@ -291,10 +291,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
-            raise IllegalStateException(
-                                    from_state=old_sattus,
-                                    to_state=form_status,
-                                    allowed_states=allowed_states)
+            raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -304,27 +301,29 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
 
-        if old_status == StatusChoices.DRAFT:
-            self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, status=form_status, **fields
-            )
-        else:
+        if old_status == StatusChoices.PUBLISHED:
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
             )
             self._move_childs_to_draft()
 
-        if form_status == StatusChoices.PUBLISHED:
-            # Intento publicar, si falla, queda como publicado
-            try:
-                self.publish()
-            except:
-                self.accept()
-                raise
-        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
-            self.unpublish()
+            if form_status == StatusChoices.DRAFT:
+                 self.unpublish()
+            else:
+                 self._update_last_revisions()
         else:
-            self._update_last_revisions()
+            self.dataset_revision = DatasetDBDAO().update(
+                self.dataset_revision, changed_fields, **fields
+            )
+
+            if form_status == StatusChoices.PUBLISHED:
+               # Intento publicar, si falla, queda como publicado
+               try:
+                   self.publish()
+               except:
+                   self.accept()
+                   self._update_last_revisions()
+                   raise
 
         return self.dataset_revision
 
