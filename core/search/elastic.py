@@ -39,6 +39,7 @@ class ElasticsearchFinder(Finder):
         if self.sort == "":
             self.sort=self.order_by
 
+        # Tengo que saber para qué se usa esto
         self.meta_data = kwargs.get('meta_data', {})
 
         ### CATEGORY FILTERS
