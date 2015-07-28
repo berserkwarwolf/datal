@@ -22,7 +22,7 @@
    "model": "core.preference",
    "fields": {
        "account": 1,
-       "value": "microsite.dev:8080",
+       "value": "microsites.dev:8080",
        "key": "account.domain"
    }
 },
@@ -296,7 +296,7 @@
    "model": "core.preference",
    "fields": {
        "account": 2,
-       "value": "en.microsite.dev:8080",
+       "value": "en.microsites.dev:8080",
        "key": "account.domain"
    }
 },
