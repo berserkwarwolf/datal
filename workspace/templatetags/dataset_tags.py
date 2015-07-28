@@ -6,7 +6,7 @@ register = template.Library()
 
 @register.filter(name='status_str')
 def status_str(status):
-    return  unicode(STATUS_CHOICES[int(status)][1])
+    return STATUS_CHOICES[status]
 
 @register.filter(name='type_str')
 def type_str(impl_type):

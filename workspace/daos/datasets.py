@@ -118,7 +118,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             status = res.get('status')
             impl_type = res.get('impl_type')
 
-            filters.add(('status', status, unicode(DatasetRevision.STATUS_CHOICES[status][1])))
+            filters.add(('status', status, unicode(DatasetRevision.STATUS_CHOICES[status])))
 
             filters.add(('type', impl_type,
                 unicode(

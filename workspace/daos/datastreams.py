@@ -127,7 +127,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             status = res.get('status')
 
             filters.add(('status', status,
-                unicode(DataStreamRevision.STATUS_CHOICES[status][1])
+                unicode(DataStreamRevision.STATUS_CHOICES[status])
                 ))
             if 'category__categoryi18n__name' in res:
                 filters.add(('category', res.get('category__categoryi18n__name'),
