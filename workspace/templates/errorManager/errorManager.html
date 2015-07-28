@@ -2,7 +2,7 @@
     <div class="error-description">
         <%= description %>
         <% if(actions.length){ %>
-            <span class="description-title">Posibles soluciones: </span>
+            <span class="description-title">{% trans 'APP-ACTIONS-TEXT' %}: </span>
             <ul>
                 <% for(var i in actions){ %>
                     <li>
