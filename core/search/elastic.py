@@ -16,7 +16,7 @@ from core.lib.elastic import ElasticsearchIndex
 
 class ElasticsearchFinder(Finder):
 
-    order_by = "title_lower_sort:asc,timestamp:asc,_score"
+    order_by = "timestamp:desc,title_lower_sort:asc,_score"
 
     def search(self, *args, **kwargs):
 
