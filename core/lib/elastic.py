@@ -217,7 +217,7 @@ class ElasticsearchIndex():
             return output
         except NotFoundError:
             self.logger.error("ERROR NotFound: ID %s not found in index" % document['docid'])
-            return {u'found': False, u'_type': document['fields']['type'], u'_id': document['docid'], u'_version': 2, u'_index': settings.SEARCH_INDEX['index']}
+            return {u'found': False, u'documment': document, u'index': settings.SEARCH_INDEX['index']}
         except KeyError:
             self.logger.error("ERROR KeyError: Document error (doc: %s)" % str(document))
         except TypeError:
@@ -226,7 +226,6 @@ class ElasticsearchIndex():
         return False
 
     def __filterDeleted(self, item):
-        print "__filterDeleted: %s " % item
         return item['found']
 
     def __filterNotDeleted(self, item):
@@ -238,13 +237,11 @@ class ElasticsearchIndex():
     def delete_documents(self, documents):
         """Delete from a list. Return [list(deleted), list(notdeleted)] """
 
-        print "delete_documents: documents: %s" % documents
 
         result = map(self.delete_document, documents)
 
         documents_deleted=filter(self.__filterDeleted,result)
         documents_not_deleted=filter(self.__filterNotDeleted,result)
 
-        print  [documents_deleted, documents_not_deleted]
 
         return [documents_deleted, documents_not_deleted]
