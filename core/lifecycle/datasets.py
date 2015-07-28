@@ -316,7 +316,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision,
                 status=old_status,
-                changed_fields,
+                changed_fields=changed_fields,
                 **fields
             )
 
