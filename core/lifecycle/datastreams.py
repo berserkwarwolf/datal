@@ -277,22 +277,24 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             else:
                  self._update_last_revisions()
         else:
+            # Actualizo sin el estado
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
                 changed_fields,
-                status=form_status,
                 **fields
             )
 
             if form_status == StatusChoices.PUBLISHED:
-               # Intento publicar, si falla, queda como publicado
+               # Intento publicar, si falla, queda aceptado
 
                 try:
                     self.publish()
                 except:
                     self.accept()
-                    self._update_last_revisions()
                     raise
+            else:
+                self.datastream_revision.status = form_status
+                self.datastream_revision.save()
 
         return self.datastream_revision
 

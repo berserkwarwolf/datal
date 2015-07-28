@@ -312,18 +312,23 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             else:
                  self._update_last_revisions()
         else:
+            # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
-                self.dataset_revision, changed_fields, status=form_status, **fields
+                self.dataset_revision, changed_fields, **fields
             )
 
             if form_status == StatusChoices.PUBLISHED:
-               # Intento publicar, si falla, queda como publicado
+               # Intento publicar, si falla, queda aceptado
                try:
                    self.publish()
                except:
                    self.accept()
-                   self._update_last_revisions()
                    raise
+
+            else:
+                # Actualizo el estado segun el valor en formulario
+                self.dataset_revision.status = form_status
+                self.dataset_revision.save()
 
         return self.dataset_revision
 
