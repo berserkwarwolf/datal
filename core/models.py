@@ -206,24 +206,33 @@ class Account(models.Model):
 
 
 class User(models.Model):
-    name            = models.CharField(max_length=30, verbose_name=ugettext_lazy( 'MODEL_NAME_LABEL' ))
-    nick            = models.CharField(max_length=30, unique=True)
-    email           = models.EmailField(max_length=75, unique=True)
-    password        = models.CharField(max_length=155, verbose_name=ugettext_lazy( 'MODEL-PASSWORD-TEXT' ))
-    country         = models.CharField(max_length=3, choices=choices.COUNTRY_CHOICES, blank=True, default='US', verbose_name=ugettext_lazy( 'MODEL-COUNTRY-TEXT' ))
-    ocupation       = models.CharField(max_length=2, choices=choices.OCUPATION_CHOICES, blank=True, verbose_name=ugettext_lazy( 'MODEL-OCUPATION-TEXT' ))
-    language        = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy( 'MODEL-LANGUAGE-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    last_visit      = models.DateTimeField(null=True)
-    roles           = models.ManyToManyField('Role', verbose_name=ugettext_lazy('MODEL-ROLES-TEXT'), db_table='ao_user_role_roles')
-    grants          = models.ManyToManyField('Privilege', through='Grant', verbose_name=ugettext_lazy('MODEL-USER-GRANTS-TEXT'))
-    account         = models.ForeignKey('Account', null=True, on_delete=models.PROTECT)
+    name = models.CharField(max_length=30, verbose_name=ugettext_lazy( 'MODEL_NAME_LABEL' ))
+    nick = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(max_length=75, unique=True)
+    password = models.CharField(max_length=155, verbose_name=ugettext_lazy( 'MODEL-PASSWORD-TEXT' ))
+    country = models.CharField(max_length=3, choices=choices.COUNTRY_CHOICES, blank=True, default='US', verbose_name=ugettext_lazy( 'MODEL-COUNTRY-TEXT' ))
+    ocupation = models.CharField(max_length=2, choices=choices.OCUPATION_CHOICES, blank=True, verbose_name=ugettext_lazy( 'MODEL-OCUPATION-TEXT' ))
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy( 'MODEL-LANGUAGE-TEXT' ))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    last_visit = models.DateTimeField(null=True)
+    roles = models.ManyToManyField('Role', verbose_name=ugettext_lazy('MODEL-ROLES-TEXT'), db_table='ao_user_role_roles')
+    grants = models.ManyToManyField('Privilege', through='Grant', verbose_name=ugettext_lazy('MODEL-USER-GRANTS-TEXT'))
+    account = models.ForeignKey('Account', null=True, on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'ao_users'
 
     def __unicode__(self):
         return self.nick
+
+    def is_admin(self):
+        return True if Role.objects.get(code="ao-account-admin") in self.roles.all() else False
+
+    def is_publisher(self):
+        return True if Role.objects.get(code="ao-publisher") in self.roles.all() else False
+
+    def is_editor(self):
+        return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
 
     def get_total_datasets(self):
         c = Cache(db=0)
@@ -694,6 +703,9 @@ class DatasetRevision(models.Model):
 
     def __unicode__(self):
         return  unicode(self.id)
+
+    def is_pending_review(self):
+        return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
 
     def update(self, changed_fields, **fields):
         if 'category' in changed_fields:
