@@ -36,10 +36,25 @@ class FinderManager:
         except Exception, e:
             return self.get_failback_finder().search(*args, **kwargs)
 
+from core.lib.elastic import ElasticsearchIndex
+from core.lib.searchify import SearchifyIndex
 
 class Finder:
+
+    order_by = {}
+
     def __init__(self):
-        pass
+
+        self.logger = logging.getLogger(__name__)
+        self.logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
+	if settings.USE_SEARCHINDEX == 'searchify':
+            self.index = SearchifyIndex()
+        elif settings.USE_SEARCHINDEX == 'elasticsearch':
+            self.index = ElasticsearchIndex()
+#        elif settings.USE_SEARCHINDEX == 'test':
+#            self.search_dao = DatastreamSearchDAO(datastream_revision)
+        else:
+            raise SearchIndexNotFoundException()
 
     def extract_terms_from_query(self):
         l_subqueries = re.split('\+', self.query.strip())
@@ -75,4 +90,131 @@ class Finder:
             self.terms = l_query_terms
 
         self.terms = [ subquery for subquery in self.terms if subquery ]
+
+    def get_dictionary(self, doc):
+        if doc['type'] == 'ds':
+            return self.get_datastream_dictionary(doc)
+        elif doc['type'] == 'db':
+            return self.get_dashboard_dictionary(doc)
+        elif doc['type'] == 'chart':
+            return self.get_visualization_dictionary(doc)
+        elif doc['type'] == 'dt':
+            return self.get_dataset_dictionary(doc)
+
+    def get_datastream_dictionary(self, p_doc):
+
+        l_parameters = []
+        if p_doc['parameters']:
+            import json
+            l_parameters = json.loads(p_doc['parameters'])
+
+        id = p_doc['datastream_id']
+        title = p_doc['title']
+        slug = slugify(title)
+        permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.datastream_manager.urls', kwargs={'id': id, 'slug': slug})
+
+        l_datastream = dict (dataservice_id=id
+                                , title=title
+                                , description=p_doc['description']
+                                , parameters=l_parameters
+                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
+                                , permalink=permalink
+                                , type = p_doc['type']
+                                , category = p_doc['category_name']
+                                , category_name = p_doc['category_name']
+                                )
+
+        return l_datastream
+
+    def get_dataset_dictionary(self, p_doc):
+
+        l_parameters = []
+        if p_doc['parameters']:
+            import json
+            l_parameters = json.loads(p_doc['parameters'])
+
+        dataset_id = p_doc['dataset_id']
+        title = p_doc['title']
+        slug = slugify(title)
+        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
+                                                                                               'slug': slug})
+
+        l_dataset = dict (dataset_id=dataset_id
+                                , title=title
+                                , description=p_doc['description']
+                                , parameters=l_parameters
+                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
+                                , permalink=permalink
+                                , type = p_doc['type']
+                                )
+        return l_dataset
+
+    def get_visualization_dictionary(self, p_doc):
+
+        try:
+            if p_doc['parameters']:
+                import json
+                l_parameters = json.loads(p_doc['parameters'])
+        except:
+            l_parameters = []
+
+        id = p_doc['visualization_id']
+        title = p_doc['title']
+        slug = slugify(title)
+        permalink = reverse('chart_manager.action_view', kwargs={'id': id, 'slug': slug})
+
+        visualization = dict(visualization_id=id
+                                , title=title
+                                , description=p_doc['description']
+                                , parameters=l_parameters
+                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
+                                , permalink=permalink
+                                , type = p_doc['type']
+                                )
+        return visualization
+
+    def get_dashboard_dictionary(self, p_doc):
+
+        id = p_doc['dashboard_id']
+        title = p_doc['title']
+        slug = slugify(title)
+        permalink = reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug})
+
+        dashboard_dict = dict (dashboard_id=id
+                                , title=title
+                                , description=p_doc['description']
+                                , tags=[ tag.strip() for tag in p_doc['tags'].split(',') ]
+                                , user_nick=p_doc['owner_nick']
+                                , permalink=permalink
+                                , type = p_doc['type']
+                                )
+        return dashboard_dict
+
+    def _get_query(self, values, boolean_operator = 'AND'):
+        self._validate_boolean_operator(boolean_operator)
+
+        query = []
+        for pair in values.iteritems():
+            query.append('%s:%s' % pair)
+        boolean_operator_query = ' %s ' % boolean_operator
+        return boolean_operator_query.join(query)
+
+    def _add_query(self, query, subquery, boolean_operator = 'AND'):
+        self._validate_boolean_operator(boolean_operator)
+
+        if query:
+            return ' '.join([query, boolean_operator, subquery])
+        else:
+            return subquery
+
+    def _validate_boolean_operator(self, boolean_operator):
+        boolean_operators = ['AND', '+', 'OR', 'NOT', '-']
+        if boolean_operator not in boolean_operators:
+            raise Exception('Boolean operator used, does not exists')
+    def _get_category_filters(self, category_filters, filter_key, filter_value):
+        if filter_value:
+            if type(filter_value) == types.ListType:
+                category_filters[filter_key] = filter_value
+            else:
+                category_filters[filter_key] = [filter_value]
 

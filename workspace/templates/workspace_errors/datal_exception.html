@@ -1,8 +1,7 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components %}
 
 {% block sectionTitle %}
-	<h1>{% trans "APP-OOPS-ERROR-TEXT" %}</h1>
+	<h1>{{exception.title}}</h1>
 {% endblock %}
 
 {% block content %}
@@ -11,13 +10,18 @@
 		
 		<header>
     	<h3 class="title">
-  			{% block error_title %}
-				{% endblock %}
+  			{% block error_title %} {{exception.title}} {% endblock %}
 			</h3>
 		</header>
 
 		<div class="box-content clearfix">
 		{% block error_text %}
+            {{exception.description}}
+            <ul>
+            {% for action in exception.get_actions %}
+                <li>{{action.description}}. Hacer click <a href="{{action.url}}">aquí</a></li>
+            {% endfor %}
+            </ul>
 		{% endblock %}
 		</div>
 

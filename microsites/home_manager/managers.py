@@ -5,10 +5,9 @@ import datetime
 
 class HomeFinder(elastic.ElasticsearchFinder):
 
-    order_by = {'0': 'title', '1': 'timestamp'}
 
-    def __init__(self):
-        elastic.ElasticsearchFinder.__init__(self)
+#    def __init__(self):
+#        elastic.ElasticsearchFinder.__init__(self)
 
     def get_datastream_dictionary(self, doc):
 

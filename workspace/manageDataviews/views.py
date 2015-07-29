@@ -14,13 +14,14 @@ from workspace.manageDataviews.forms import *
 from workspace.templates import *
 from workspace.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
-from workspace.exceptions import LifeCycleException
+from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from api.http import JSONHttpResponse
 from core import engine
 
 
 logger = logging.getLogger(__name__)
+
 
 @login_required
 @require_GET
@@ -30,7 +31,7 @@ def action_view(request, revision_id):
     try:
         datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
     except DataStreamRevision.DoesNotExist:
-        raise DataStreamNotFoundException
+        raise DataStreamNotFoundException()
 
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
@@ -38,6 +39,7 @@ def action_view(request, revision_id):
     status_options = credentials.get_allowed_actions()
     
     return render_to_response('viewDataStream/index.html', locals())
+
 
 @login_required
 # quitarlo por que ya se maneja dentro @requires_any_dataset() #account must have almost one dataset
@@ -56,6 +58,7 @@ def list(request):
                                     language=request.user.language)
 
     return render_to_response('manageDataviews/index.html', locals())
+
 
 @login_required
 @require_GET
@@ -116,8 +119,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_GET
 def get_filters_json(request):
     """ List all Filters available """
-    filters = DataStreamDBDAO().query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
+    filters = DataStreamDBDAO().query_filters(account_id=request.user.account.id, language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))
 
 
@@ -132,12 +134,14 @@ def related_resources(request):
     list_result = [associated_datastream for associated_datastream in datastreams]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
+
 @login_required
 @require_privilege("workspace.can_delete_datastream")
+@requires_review
 @transaction.commit_on_success
-def remove(request, id,type="resource"):
+def remove(request, datastream_revision_id, type="resource"):
     """ remove resource """
-    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=id)
+    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
 
     if type == 'revision':
         lifecycle.remove()
@@ -162,6 +166,7 @@ def remove(request, id,type="resource"):
             'revision_id': -1,
         }), content_type='text/plain')
 
+
 @login_required
 @require_http_methods(['POST', 'GET'])
 @require_privilege("workspace.can_create_datastream")
@@ -175,7 +180,7 @@ def create(request):
         form = CreateDataStreamForm(request.POST)
 
         if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 
@@ -218,6 +223,123 @@ def create(request):
             return render_to_response('view_manager/insertForm.html', locals())
         else:
             raise Http404
+
+
+@login_required
+@require_http_methods(['POST', 'GET'])
+@require_privilege("workspace.can_edit_datastream")
+@requires_published_parent()
+@requires_review
+@transaction.commit_on_success
+def edit(request, datastream_revision_id=None):
+    if request.method == 'GET':
+        account_id = request.auth_manager.account_id
+        credentials = request.auth_manager
+        language = request.auth_manager.language
+        categories = CategoryI18n.objects.filter(
+            language=language,
+            category__account=account_id
+        ).values('category__id', 'name')
+        status_options = credentials.get_allowed_actions()
+        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+        status = lifecycle.datastream_revision.status
+        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
+            categories,status,
+            status_options,
+            lifecycle.datastream_revision,
+            lifecycle.datastreami18n
+        )
+
+        return JSONHttpResponse(response)
+
+    elif request.method == 'POST':
+        """update dataset """
+
+        form = EditDataStreamForm(request.POST)
+
+        if not form.is_valid():
+            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
+
+        if form.is_valid():
+            dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+
+            dataview.edit(
+                language=request.auth_manager.language,
+                changed_fields=form.changed_data,
+                **form.cleaned_data
+            )
+
+            response = dict(
+                status='ok',
+                datastream_revision_id= dataview.datastream_revision.id,
+                messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+            )
+
+            return JSONHttpResponse(json.dumps(response))
+
+
+@login_required
+@require_privilege("workspace.can_review_dataset_revision")
+@require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
+def review(request, datastream_revision_id=None):
+
+    if request.method == 'POST' and datastream_revision_id != None:
+
+        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
+
+        action = request.POST.get('action')
+
+        if action == 'approve':
+
+            lifecycle.accept()
+
+            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATAVIEW-APPROVED-TEXT')}
+
+        elif action == 'reject':
+
+            lifecycle.reject()
+
+            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATAVIEW-REJECTED-TEXT')}
+
+        else:
+
+            response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
+
+    else:
+
+        response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
+
+    return JSONHttpResponse(json.dumps(response))
+
+    
+@csrf_exempt
+@require_http_methods(["POST"])
+def action_preview(request):
+    form = PreviewForm(request.POST)
+    if form.is_valid():
+
+        query = { 'pEndPoint': form.cleaned_data['end_point'],
+                  'pImplType': form.cleaned_data['impl_type'],
+                  'pImplDetails': form.cleaned_data['impl_details'],
+                  'pBucketName': form.cleaned_data['bucket_name'],
+                  'pDataSource': form.cleaned_data['datasource'],
+                  'pSelectStatement': form.cleaned_data['select_statement'],
+                  'pRdfTemplate': form.cleaned_data['rdf_template'],
+                  'pUserId': request.auth_manager.id,
+                  'pLimit': form.cleaned_data['limit']
+                }
+
+        getdict = request.POST.dict()
+        for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
+            if getdict.has_key(k): getdict.pop(k)
+        query.update(getdict)
+        response, mimetype = engine.preview(query)
+        # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
+        return HttpResponse(response, mimetype)
+
+    else:
+        raise Http404(form.get_error_description())
 
 #@login_required
 #@privilege_required("workspace.can_create_datastream")
@@ -290,119 +412,4 @@ def create(request):
 
             #return render_to_response('view_manager/insertForm.html', locals())
         #else:
-            #raise Http404
-
-@login_required
-@require_http_methods(['POST', 'GET'])
-@require_privilege("workspace.can_edit_datastream")
-@requires_published_parent()
-@transaction.commit_on_success
-def edit(request, datastream_revision_id=None):
-    if request.method == 'GET':
-        account_id = request.auth_manager.account_id
-        credentials = request.auth_manager
-        language = request.auth_manager.language
-        categories = CategoryI18n.objects.filter(
-            language=language,
-            category__account=account_id
-        ).values('category__id', 'name')
-        status_options = credentials.get_allowed_actions()
-        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-        status = lifecycle.datastream_revision.status
-        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
-            categories,status,
-            status_options,
-            lifecycle.datastream_revision,
-            lifecycle.datastreami18n
-        )
-
-        return JSONHttpResponse(response)
-
-    elif request.method == 'POST':
-        """update dataset """
-
-        form = EditDataStreamForm(request.POST)
-
-        if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
-
-        if form.is_valid():
-            dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-            dataview.edit(
-                language=request.auth_manager.language,
-                changed_fields=form.changed_data,
-                **form.cleaned_data
-            )
-
-            response = dict(
-                status='ok',
-                datastream_revision_id= dataview.datastream_revision.id,
-                messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-            )
-
-            return JSONHttpResponse(json.dumps(response))
-
-@login_required
-@require_privilege("workspace.can_review_dataset_revision")
-@require_http_methods(['POST', 'GET'])
-@transaction.commit_on_success
-def review(request, datastream_revision_id=None):
-
-    if request.method == 'POST' and datastream_revision_id != None:
-
-        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-        action = request.POST.get('action')
-
-        if action == 'approve':
-
-            lifecycle.accept()
-
-            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATAVIEW-APPROVED-TEXT')}
-
-        elif action == 'reject':
-
-            lifecycle.reject()
-
-            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATAVIEW-REJECTED-TEXT')}
-
-        else:
-
-            response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
-
-    else:
-
-        response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
-    
-
-    return JSONHttpResponse(json.dumps(response))
-
-    
-@csrf_exempt
-@require_http_methods(["POST"])
-def action_preview(request):
-    form = PreviewForm(request.POST)
-    if form.is_valid():
-
-        query = { 'pEndPoint': form.cleaned_data['end_point'],
-                  'pImplType': form.cleaned_data['impl_type'],
-                  'pImplDetails': form.cleaned_data['impl_details'],
-                  'pBucketName': form.cleaned_data['bucket_name'],
-                  'pDataSource': form.cleaned_data['datasource'],
-                  'pSelectStatement': form.cleaned_data['select_statement'],
-                  'pRdfTemplate': form.cleaned_data['rdf_template'],
-                  'pUserId': request.auth_manager.id,
-                  'pLimit': form.cleaned_data['limit']
-                }
-
-        getdict = request.POST.dict()
-        for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        response, mimetype = engine.preview(query)
-        # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
-        return HttpResponse(response, mimetype)
-
-    else:
-        raise Http400(form.get_error_description())
+            #raise Http404ans

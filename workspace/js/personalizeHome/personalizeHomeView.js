@@ -232,7 +232,6 @@ var personalizeView = Backbone.View.extend({
 				type: 'POST',
 				data: {'jsonString': saferStringify(ob)}, 
 				dataType: 'json',
-				contentType:'application/json; charset=utf-8',
 				beforeSend: function(){
 					$("#ajax_loading_overlay").show();
 				},

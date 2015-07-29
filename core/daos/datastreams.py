@@ -100,6 +100,8 @@ class DatastreamSearchDAO():
         self.datastream_revision=datastream_revision
         self.search_index = SearchifyIndex()
 
+    def _get_type(self):
+        return self.TYPE
     def _get_id(self):
         """ Get Tags """
         return "%s::%s" %(self.TYPE.upper(),self.datastream_revision.datastream.guid)
@@ -171,4 +173,4 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([self._get_id()])
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])

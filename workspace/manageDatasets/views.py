@@ -13,7 +13,8 @@ from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
-from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.exceptions import DatasetSaveException
+from core.helpers import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -22,6 +23,7 @@ from workspace.daos.datasets import DatasetDBDAO
 
 
 logger = logging.getLogger(__name__)
+
 
 @login_required
 @require_privilege("workspace.can_query_dataset")
@@ -51,6 +53,7 @@ def action_request_file(request):
 
     return response
 
+
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
@@ -68,6 +71,7 @@ def list(request):
 
     return render_to_response('manageDatasets/index.html', locals())
 
+
 @login_required
 @require_GET
 def action_view(request, revision_id):
@@ -78,10 +82,11 @@ def action_view(request, revision_id):
     try:
         dataset = DatasetDBDAO().get(language=language, dataset_revision_id=revision_id)
     except DatasetRevision.DoesNotExist:
-        raise DatasetNotFoundException
+        raise DatasetNotFoundException()
 
     datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
     return render_to_response('viewDataset/index.html', locals())
+
 
 @login_required
 @require_privilege("workspace.can_query_dataset")
@@ -155,13 +160,14 @@ def get_filters_json(request):
     return JSONHttpResponse(json.dumps(filters))
 
 
+@requires_review
 @login_required
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
-def remove(request, id, type="resource"):
+def remove(request, dataset_revision_id, type="resource"):
 
     """ remove resource """
-    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
+    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':
         lifecycle.remove()
@@ -228,12 +234,13 @@ def create(request, collect_type='index'):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise InvalidFormException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required
 @require_privilege("workspace.can_edit_dataset")
 @requires_if_publish('dataset')
+@requires_review
 @require_http_methods(['POST', 'GET'])
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
@@ -296,7 +303,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise InvalidFormException(form.errors)
+            raise DatasetSaveException(form.errors)
 
 
 @login_required
@@ -349,7 +356,6 @@ def review(request, dataset_revision_id=None):
 
         response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
 
-
     return JSONHttpResponse(json.dumps(response))
 
 @login_required
@@ -385,6 +391,7 @@ def action_load(request):
         return HttpResponse(response, mimetype=mimetype)
     else:
         raise Http404(form.get_error_description())
+
 
 @login_required
 @require_privilege("workspace.can_create_datastream")

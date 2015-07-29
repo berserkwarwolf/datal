@@ -38,7 +38,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             # Create a new dataset (TITLE is for automatic GUID creation)
             dataset = Dataset.objects.create(user=user, type=collect_type, title=fields['title'])
 
-        # meta_text = '{"field_values": [{"cust-dataid": "dataid-%s"}]}' % dataset.id
+        #meta_text = '{"field_values": [{"cust-dataid": "dataid-%s"}]}' % dataset.id
         if not fields.get('language', None):
             fields['language'] = user.language
 
@@ -132,6 +132,7 @@ class DatasetSearchIndexDAO():
     TYPE="dt"
 
     def __init__(self, dataset_revision):
+	self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
 
     def add(self):
@@ -139,19 +140,25 @@ class DatasetSearchIndexDAO():
     def delete(self):
         return True
 
-    def getCategory(self):
+    def _get_category(self):
         return self.dataset_revision.category.categoryi18n_set.all()[0]
 
-    def getDatasetI18n(self):
+    def _get_i18n(self):
         return DatasetI18n.objects.get(dataset_revision=self.dataset_revision)
 
-    def getDocumentID(self):
+    def _get_type(self):
+        return self.TYPE
+
+    def _get_id(self):
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
+	# eliminado hasta que haya facets
+	#from core.models import add_facets_to_doc
+	#from core.helpers import get_meta_data_dict
 
-        category=self.getCategory()
-        dataseti18n = self.getDatasetI18n()
+        category=self._get_category()
+        dataseti18n = self._get_i18n()
 
         tags = self.dataset_revision.tagdataset_set.all().values_list('tag__name', flat=True)
 
@@ -163,7 +170,7 @@ class DatasetSearchIndexDAO():
         text=text_template.render(text_context)[:-1]
 
         document = {
-                'docid' : self.getDocumentID(),
+                'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
                      'dataset_id': self.dataset_revision.dataset.id,
@@ -181,6 +188,15 @@ class DatasetSearchIndexDAO():
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
+# Eliminado hasta que haya facets
+#	# Update dict with facets
+#	try:
+#	    document = add_facets_to_doc(self, self.dataset_revision.dataset.user.account, document)
+#	except Exception, e:
+#	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
+#	
+#	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
+
         return document
 
  
@@ -194,12 +210,13 @@ class DatasetSearchifyDAO(DatasetSearchIndexDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([self.getDocumentID()])
+        self.search_index.delete_documents([self._get_id()])
 
 class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
     """ class for manage access to datasets' ElasticSearch documents """
 
     def __init__(self, dataset_revision):
+	self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
         self.search_index = ElasticsearchIndex()
         
@@ -207,4 +224,4 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
         self.search_index.indexit(self._build_document())
         
     def remove(self):
-        self.search_index.delete_documents([self.getDocumentID()])
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
