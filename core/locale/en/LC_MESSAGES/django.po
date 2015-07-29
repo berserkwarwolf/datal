@@ -781,7 +781,7 @@ msgid "EXCEPTION-ACTION-VIEW-DATASREAM-LIST"
 msgstr "Review datastreams."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASREAM-CREATE"
-msgstr "Create dataview."
+msgstr "Create datastream."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET"
 msgstr "Review the dataset."
