@@ -139,9 +139,9 @@ def related_resources(request):
 @require_privilege("workspace.can_delete_datastream")
 @requires_review
 @transaction.commit_on_success
-def remove(request, id, type="resource"):
+def remove(request, datastream_revision_id, type="resource"):
     """ remove resource """
-    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=id)
+    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
 
     if type == 'revision':
         lifecycle.remove()

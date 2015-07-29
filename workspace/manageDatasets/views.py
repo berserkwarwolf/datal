@@ -160,14 +160,14 @@ def get_filters_json(request):
     return JSONHttpResponse(json.dumps(filters))
 
 
+@requires_review
 @login_required
 @require_privilege("workspace.can_delete_dataset")
-@requires_review
 @transaction.commit_on_success
-def remove(request, id, type="resource"):
+def remove(request, dataset_revision_id, type="resource"):
 
     """ remove resource """
-    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
+    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':
         lifecycle.remove()
