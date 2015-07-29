@@ -932,3 +932,9 @@ msgstr "You don't have permissions to perform the requested action."
 
 msgid "EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES"
 msgstr "Contact your account administrator and verify your role permissions."
+
+msgid "EXCEPTION-TITLE-REQUIRES-REVIEW"
+msgstr "Resource needs review."
+
+msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
+msgstr "You cannot edit a resource while waiting for review."

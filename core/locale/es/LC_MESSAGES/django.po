@@ -925,3 +925,8 @@ msgstr "No posees permisos para realizar la acción solicitada."
 msgid "EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES"
 msgstr "Contactese con el administrador de su cuenta y verifique los permisos de su rol"
 
+msgid "EXCEPTION-TITLE-REQUIRES-REVIEW"
+msgstr "El recurso está pendiente de aprobación."
+
+msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
+msgstr "Hasta que no se apruebe el recurso no se puede editar."

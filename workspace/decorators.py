@@ -149,14 +149,12 @@ def requires_review(a_view):
         if "dataset_revision_id" in kwargs:
             if DatasetRevision.objects.get(pk=kwargs["dataset_revision_id"]).is_pending_review() and \
                     request.user.is_editor():
-                #TODO: Usar la nueva forma de tirar excepciones
-                raise Exception("Usuario editor no puede editar ni eliminar un recurso en pendiente de revision")
+                raise RequiresReviewException()
 
         if "datastream_revision_id" in kwargs:
             if DataStreamRevision.objects.get(pk=kwargs["datastream_revision_id"]).is_pending_review() and \
                     request.user.is_editor():
-                #TODO: Usar la nueva forma de tirar excepciones
-                raise Exception("Usuario editor no puede editar ni eliminar un recurso en pendiente de revision")
+                raise RequiresReviewException()
         return a_view(request, *args, **kwargs)
     return _wrapped_view
 
