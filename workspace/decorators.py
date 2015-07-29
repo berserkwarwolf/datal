@@ -1,5 +1,6 @@
+import logging
+
 from functools import wraps
-from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
 from core.exceptions import *
@@ -9,6 +10,7 @@ from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.daos.datasets import DatasetDBDAO
 from workspace.daos.datastreams import DataStreamDBDAO
+from core.models import DatasetRevision, DataStreamRevision
 
 
 def require_child_accepted(view_func):
@@ -140,18 +142,23 @@ def requires_any_datastream():
     return decorator
 
 
-def requires_review():
-    """
-    Verifico si el usuario puede editar, estando en estado pendiente de revision
-    """
-    def decorator(view_func):
-        @wraps(view_func, assigned=available_attrs(view_func))
-        def _wrapped_view(request, *args, **kwargs):
-            # Verifico que este en edi
-            return view_func(request, *args, **kwargs)
+def requires_review(a_view):
+    def _wrapped_view(request, *args, **kwargs):
+        print(kwargs)
 
-        return _wrapped_view
-    return decorator
+        if "dataset_revision_id" in kwargs:
+            if DatasetRevision.objects.get(pk=kwargs["dataset_revision_id"]).is_pending_review() and \
+                    request.user.is_editor():
+                #TODO: Usar la nueva forma de tirar excepciones
+                raise Exception("Usuario editor no puede editar ni eliminar un recurso en pendiente de revision")
+
+        if "datastream_revision_id" in kwargs:
+            if DataStreamRevision.objects.get(pk=kwargs["datastream_revision_id"]).is_pending_review() and \
+                    request.user.is_editor():
+                #TODO: Usar la nueva forma de tirar excepciones
+                raise Exception("Usuario editor no puede editar ni eliminar un recurso en pendiente de revision")
+        return a_view(request, *args, **kwargs)
+    return _wrapped_view
 
 
 #TODO implementar tambien
