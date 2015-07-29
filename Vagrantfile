@@ -34,5 +34,6 @@ Vagrant.configure(2) do |config|
     salt.run_highstate = true
     salt.verbose = true
     salt.colorize = true
+    salt.bootstrap_options = '-P'
   end
 end
