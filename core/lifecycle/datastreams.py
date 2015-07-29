@@ -281,7 +281,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
                 status=old_status,
-                changed_fields,
+                changed_fields=changed_fields,
                 **fields
             )
 
