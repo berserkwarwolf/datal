@@ -137,10 +137,11 @@ def related_resources(request):
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
+@requires_review
 @transaction.commit_on_success
-def remove(request, id, type="resource"):
+def remove(request, datastream_revision_id, type="resource"):
     """ remove resource """
-    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=id)
+    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
 
     if type == 'revision':
         lifecycle.remove()
@@ -228,6 +229,7 @@ def create(request):
 @require_http_methods(['POST', 'GET'])
 @require_privilege("workspace.can_edit_datastream")
 @requires_published_parent()
+@requires_review
 @transaction.commit_on_success
 def edit(request, datastream_revision_id=None):
     if request.method == 'GET':

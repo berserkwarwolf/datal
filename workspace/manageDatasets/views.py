@@ -24,6 +24,7 @@ from workspace.daos.datasets import DatasetDBDAO
 
 logger = logging.getLogger(__name__)
 
+
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
@@ -52,6 +53,7 @@ def action_request_file(request):
 
     return response
 
+
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
@@ -69,6 +71,7 @@ def list(request):
 
     return render_to_response('manageDatasets/index.html', locals())
 
+
 @login_required
 @require_GET
 def action_view(request, revision_id):
@@ -83,6 +86,7 @@ def action_view(request, revision_id):
 
     datastream_impl_not_valid_choices = DATASTREAM_IMPL_NOT_VALID_CHOICES
     return render_to_response('viewDataset/index.html', locals())
+
 
 @login_required
 @require_privilege("workspace.can_query_dataset")
@@ -156,13 +160,14 @@ def get_filters_json(request):
     return JSONHttpResponse(json.dumps(filters))
 
 
+@requires_review
 @login_required
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
-def remove(request, id, type="resource"):
+def remove(request, dataset_revision_id, type="resource"):
 
     """ remove resource """
-    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=id)
+    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':
         lifecycle.remove()
@@ -235,6 +240,7 @@ def create(request, collect_type='index'):
 @login_required
 @require_privilege("workspace.can_edit_dataset")
 @requires_if_publish('dataset')
+@requires_review
 @require_http_methods(['POST', 'GET'])
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
@@ -350,7 +356,6 @@ def review(request, dataset_revision_id=None):
 
         response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
 
-
     return JSONHttpResponse(json.dumps(response))
 
 @login_required
@@ -386,6 +391,7 @@ def action_load(request):
         return HttpResponse(response, mimetype=mimetype)
     else:
         raise Http404(form.get_error_description())
+
 
 @login_required
 @require_privilege("workspace.can_create_datastream")
