@@ -316,6 +316,9 @@ class DataStreamRevision(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
+    def is_pending_review(self):
+        return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
+
     @staticmethod
     def remove_related_to_dataset(dataset):
         """
