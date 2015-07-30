@@ -311,11 +311,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
-        return super(DatastreamLifeCycleManager, self)._log_activity(
-            action_id,
-            self.datastream_revision.dataset.id,
-            self.datastream_revision.dataset.type,
-            self.datastream_revision.id, "#TODO get title")
+        return super(DatastreamLifeCycleManager, self)._log_activity(action_id, self.datastream_revision.dataset.id,
+            self.datastream_revision.dataset.type, self.datastream_revision.id, self.datastreami18n.title)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

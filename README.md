@@ -21,7 +21,7 @@ Luego de haber clonado el repositorio, dentro del mismo ejecutar:
 2. git submodule update
 3. Agregar los siguientes hosts a nuestro archivo de hosts apuntando a localhost. Ejemplo suponiendo que el IP local es 127.0.0.1
 
-    127.0.0.1 admin.dev api.dev datastore.dev microsite.dev  workspace.dev
+    127.0.0.1 admin.dev api.dev datastore.dev microsite.dev microsites.dev  workspace.dev
 
 4. Iniciar la virtual con el comando:
 
