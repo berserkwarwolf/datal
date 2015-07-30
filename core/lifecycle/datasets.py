@@ -357,6 +357,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         last_revision_id = DatasetRevision.objects.filter(dataset=self.dataset.id).aggregate(Max('id'))['id__max']
 
+        self.dataset.last_revision_id = last_revision_id
         if last_revision_id:
             self.dataset.last_revision = DatasetRevision.objects.get(pk=last_revision_id)
             last_published_revision_id = DatasetRevision.objects.filter(
