@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy
 from django.db import IntegrityError
 from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete
 
 from core.helpers import slugify
 from core import choices
@@ -1358,3 +1360,22 @@ class Log(models.Model):
 
     class Meta:
         db_table = 'ao_logs'
+
+
+# Signals
+
+@receiver(pre_delete, sender=DatasetRevision, dispatch_uid="unindex_dataset_revision")
+def unindex_dataset_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.datasets import DatasetSearchDAOFactory
+        search_dao = DatasetSearchDAOFactory().create(instance)
+        search_dao.remove()
+
+@receiver(pre_delete, sender=DataStreamRevision, dispatch_uid="unindex_datastream_revision")
+def unindex_datastream_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.datastreams import DatastreamSearchDAOFactory
+        search_dao = DatastreamSearchDAOFactory().create(instance)
+        search_dao.remove()
