@@ -219,10 +219,6 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=None,
                                     allowed_states=allowed_states)
 
-        if self.datastream_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
-            search_dao.remove()
-
         if killemall:
             self._remove_all()
         else:

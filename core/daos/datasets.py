@@ -216,7 +216,7 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
     """ class for manage access to datasets' ElasticSearch documents """
 
     def __init__(self, dataset_revision):
-	self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
         self.search_index = ElasticsearchIndex()
         

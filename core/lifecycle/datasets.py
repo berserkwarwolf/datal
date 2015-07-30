@@ -244,10 +244,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=None,
                                     allowed_states=allowed_states)
 
-        if self.dataset_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
-            search_dao.remove()
-
         if killemall:
             self._remove_all()
         else:
@@ -264,6 +260,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self.dataset.last_published_revision = None
             self.dataset.save()
 
+            # Elimino revision del dataset
             self.dataset_revision.delete()
 
         self._update_last_revisions()

@@ -101,17 +101,14 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         Reads available filters from a resource array. Returns an array with objects and their
         i18n names when available.
         """
-        query = DatasetRevision.objects.filter(
-                                                id=F('dataset__last_revision'),
-                                                dataset__user__account=account_id,
-                                                dataseti18n__language=language,
-                                                category__categoryi18n__language=language)
+        query = DatasetRevision.objects.filter(id=F('dataset__last_revision'), dataset__user__account=account_id,
+                                               dataseti18n__language=language,
+                                               category__categoryi18n__language=language)
 
         query = query.values('dataset__user__nick', 'status', 'impl_type',
                              'category__categoryi18n__name')
 
         filters = set([])
-
 
         for res in query:
 
@@ -142,8 +139,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset__id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
-                 'created_at')
-
+                 'created_at', 'datastream__last_revision')
         return related
 
     def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):

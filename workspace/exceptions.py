@@ -78,3 +78,9 @@ class InsufficientPrivilegesException(DATALException):
     title = _('EXCEPTION-TITLE-INSUFFICIENT-PRIVILEGES')
     description = _('EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES')
     tipo = 'insufficient-priviliges'
+
+
+class RequiresReviewException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-REQUIRES-REVIEW')
+    description = _('EXCEPTION-DESCRIPTION-REQUIRES-REVIEW')
+    tipo = 'requires-review'
