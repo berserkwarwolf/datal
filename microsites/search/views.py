@@ -22,6 +22,7 @@ def action_browse(request, category_slug=None, page = 1):
 
     return render_to_response('search/search.html', locals())
 
+
 def do_search(request, category_filters = None, datasets = None):
     account = request.account
     preferences = request.preferences
@@ -60,10 +61,11 @@ def do_search(request, category_filters = None, datasets = None):
 def action_search(request):
     return do_search(request)
 
-def action_search_by_query_and_category(request, filter):
+
+def action_search_by_query_and_category(request, filter_param):
     try:
         datasets = request.GET.get("datasets", None)
-        name, category = filter.split(":")
-        return do_search(request, category_filters = {name:category}, datasets = datasets)
+        name, category = filter_param.split(":")
+        return do_search(request, category_filters = {'name':filter_param}, datasets = datasets)
     except:
         return do_search(request)
