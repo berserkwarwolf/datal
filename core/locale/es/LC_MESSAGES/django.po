@@ -767,25 +767,25 @@ msgid "EXCEPTION-ACTION-GENERIC"
 msgstr "Si el problema persiste contactarnos."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASREAM"
-msgstr "Revisar el conjunto de datos."
+msgstr "Revisar la vista."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASREAM-LIST"
-msgstr "Revisar los conjuntos de datos."
+msgstr "Revisar las vistas."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASREAM-CREATE"
-msgstr "Crear un conjunto de datos."
+msgstr "Crear una vista."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET"
-msgstr "Revisar la vista."
+msgstr "Revisar el conjunto de datos."
 
 msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
 msgstr "Revisar vistas, aprobarlas y publicar."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
-msgstr "Revisar las vistas."
+msgstr "Revisar conjuntos de datos."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET-CREATE"
-msgstr "Crear una vista."
+msgstr "Crear un conjunto de datos."
 
 msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION"
 msgstr "Revisar la visualización"
@@ -925,3 +925,8 @@ msgstr "No posees permisos para realizar la acción solicitada."
 msgid "EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES"
 msgstr "Contactese con el administrador de su cuenta y verifique los permisos de su rol"
 
+msgid "EXCEPTION-TITLE-REQUIRES-REVIEW"
+msgstr "El recurso está pendiente de aprobación."
+
+msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
+msgstr "Hasta que no se apruebe el recurso no se puede editar."
