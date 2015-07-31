@@ -41,18 +41,12 @@ class ElasticsearchFinder(Finder):
 
         # Tengo que saber para qué se usa esto
         self.meta_data = kwargs.get('meta_data', {})
-
-        # CATEGORY FILTERS
-        category_filters = kwargs.get('category_filters', None)
-        if category_filters is None:
-            category_filters = {}
-            self._get_category_filters(category_filters, 'id', kwargs.get('category_id'))
-            self._get_category_filters(category_filters, 'name', kwargs.get('category_name'))
-
+        self.category_filters = kwargs.get('category_filters', None)
         scoring = kwargs.get('scoring', 1)
 
         query = self.__build_query()
         self.logger.info("Query arguments: %s (%s)" % (query, self.sort))
+
         results = self.index.es.search(index=settings.SEARCH_INDEX['index'],
                                        body=query,
                                        from_=start,
@@ -86,8 +80,18 @@ class ElasticsearchFinder(Finder):
             self.resource = ["ds", "dt", "db", "chart", "vt"]
 
         # previene un error al pasarle un string y no un LIST
-        if type(self.resource) == type(str()):
+        if isinstance(self.resource, str):
             self.resource = [self.resource]
+
+        filters = [
+            {"term": {"account_id": self.account_id}},
+            {"terms": {"type": self.resource}}
+        ]
+
+        if self.category_filters:
+            filters.append({"terms": {
+                "categories.name": self.category_filters
+            }})
 
         query = {
             "query": {
@@ -100,14 +104,7 @@ class ElasticsearchFinder(Finder):
                     },
                     "filter": {
                         "bool": {
-                            "must": [
-                                {
-                                    "term": {"account_id": self.account_id}
-                                },
-                                {
-                                    "terms": {"type": self.resource}
-                                }
-                            ]
+                            "must": filters
                         }
                     }
                 }
@@ -120,4 +117,5 @@ class ElasticsearchFinder(Finder):
                 }
             }
         }
+
         return query

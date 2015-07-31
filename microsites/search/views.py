@@ -57,15 +57,15 @@ def do_search(request, category_filters = None, datasets = None):
         raise Http404
 
 
-
 def action_search(request):
     return do_search(request)
 
 
-def action_search_by_query_and_category(request, filter_param):
+def action_search_by_query_and_category(request, category):
     try:
         datasets = request.GET.get("datasets", None)
-        name, category = filter_param.split(":")
-        return do_search(request, category_filters = {'name':filter_param}, datasets = datasets)
+        return do_search(request,
+                         category_filters=[category],
+                         datasets=datasets)
     except:
         return do_search(request)
