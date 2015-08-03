@@ -2934,3 +2934,6 @@ msgstr "No es posible publicar este conjunto de datos, debido a que tiene vistas
 
 msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "aquí"
+
+msgid "APP-SELECT-DATASET-TEXT"
+msgstr "Seleccionar un Conjunto de datos"
