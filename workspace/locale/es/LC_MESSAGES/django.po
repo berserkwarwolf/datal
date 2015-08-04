@@ -1220,7 +1220,7 @@ msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Envíanos un correo"
 
 msgid "DSCRE-UPLOAD-TIP"
-msgstr "Estos son los formatos de archivo permitidos: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV, ZIP, RAR, JPG, JPEG, PNG, GIF. <br/> Los archivos deben estar encodeados con UTF-8"
+msgstr "Estos son los formatos de archivo permitidos: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Los archivos deben estar encodeados con UTF-8"
 
 msgid "HOME-SEARCH-TIP"
 msgstr "Para que una URL sea una fuente de datos, debe ser una página web que contenga etiquetas &lt;table&gt;.<br/>Los archivos CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML también pueden ser fuentes de datos."

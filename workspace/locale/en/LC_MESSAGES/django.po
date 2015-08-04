@@ -1236,7 +1236,7 @@ msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Send us an email"
 
 msgid "DSCRE-UPLOAD-TIP"
-msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV, ZIP, RAR, JPG, JPEG, PNG, GIF. <br/> Files must be encoded in UTF-8."
+msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Files must be encoded in UTF-8."
 
 msgid "HOME-SEARCH-TIP"
 msgstr "- For a URL to be a dataset, it must be a webpage that contains HTML &lt;table&gt; tags.<br/> - CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML files can also be used as datasets."
