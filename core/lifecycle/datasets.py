@@ -108,13 +108,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     allowed_states=allowed_states)
 
         status = StatusChoices.PUBLISHED
-        self._publish_childs()
 
         self.dataset_revision.status = status
         self.dataset_revision.save()
-        
+
         self._update_last_revisions()
-        
+
+        self._publish_childs()
+
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
 
