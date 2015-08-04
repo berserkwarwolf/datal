@@ -117,24 +117,34 @@ class VisualizationRequiredException(LifeCycleException):
         return [ViewVisualizationListExceptionAction()]
 
 
+class ParentNotPuslishedException(LifeCycleException):
+    print('PASO1-9')
+    title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
+    tipo = 'illegal-state'
+
+
 class IllegalStateException(LifeCycleException):
     title = _('EXCEPTION-TITLE-ILLEGAL-STATE')
     description = _('EXCEPTION-DESCRIPTION-ILLEGAL-STATE')
     tipo = 'illegal-state'
 
 
-
 class ApplicationException(DATALException):
     title = 'Application error'
+
 
 class DatastoreNotFoundException(ApplicationException):
     title = 'Data Store not found'
 
+
 class MailServiceNotFoundException(ApplicationException):
     title = 'Mail service not found'
 
+
 class SearchIndexNotFoundException(ApplicationException):
     title = 'Search index not found exception'
+
 
 class S3CreateException(DATALException):
     title = 'S3 Create error'
