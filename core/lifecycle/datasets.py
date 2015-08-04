@@ -109,7 +109,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         status = StatusChoices.PUBLISHED
         self._publish_childs()
- 
+
         self.dataset_revision.status = status
         self.dataset_revision.save()
         
@@ -130,7 +130,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             for datastream_revision in datastream_revisions:
                 try:
                     DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
-                        allowed_states=[StatusChoices.APPROVED]
+                        allowed_states=[StatusChoices.APPROVED], parent_status=StatusChoices.PUBLISHED
                     )
                 except IllegalStateException:
                     publish_fail.append(datastream_revision)
@@ -211,15 +211,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
         """ accept a dataset revision """
+        if self.dataset_revision.status != StatusChoices.APPROVED:
+            if self.dataset_revision.status not in allowed_states:
+                raise IllegalStateException(
+                                        from_state=self.dataset_revision.status,
+                                        to_state=StatusChoices.APPROVED,
+                                        allowed_states=allowed_states)
 
-        if self.dataset_revision.status not in allowed_states:
-            raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.APPROVED,
-                                    allowed_states=allowed_states)
-
-        self.dataset_revision.status = StatusChoices.APPROVED
-        self.dataset_revision.save()
+            self.dataset_revision.status = StatusChoices.APPROVED
+            self.dataset_revision.save()
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a dataset revision """
@@ -289,7 +289,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
-
         file_data = fields.get('file_data', None)
         if file_data is not None:
             fields['file_size'] = file_data.size
@@ -305,9 +304,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self._move_childs_to_draft()
 
             if form_status == StatusChoices.DRAFT:
-                 self.unpublish()
+                self.unpublish()
             else:
-                 self._update_last_revisions()
+                self._update_last_revisions()
         else:
             # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
@@ -318,12 +317,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             )
 
             if form_status == StatusChoices.PUBLISHED:
-               # Intento publicar, si falla, queda aceptado
-               try:
-                   self.publish()
-               except:
-                   self.accept()
-                   raise
+                # Intento publicar, si falla, queda aceptado
+                try:
+                    self.publish()
+                except:
+                    self.accept()
+                    raise
 
             else:
                 # Actualizo el estado segun el valor en formulario
