@@ -16,28 +16,35 @@
             console.log('ErrorManager', 'Error Source Object:', errorSource);
 
             //Handling Jquery ajax error data source
-            if(typeof errorSource['jqXHR'] !== 'undefined')
+            if(typeof errorSource['jqXHR'] !== 'undefined'){
                 errorSource = errorSource.jqXHR;
+            }
+
 
             //Get the error message from the ajax response text
-            if(typeof errorSource['responseText'] !== 'undefined')
+            if(typeof errorSource['responseText'] !== 'undefined'){
                 errorMessage = errorSource.responseText;
+            }
 
             //Normalize error message data type
-            if(typeof errorMessage !== 'object')
+            if(typeof errorMessage !== 'object'){
                 errorMessage = JSON.parse(errorMessage);
+            }
 
             //Check if we are handling and old version of the error messages
-            if(typeof errorMessage['messages'] !== 'undefined')
+            if(typeof errorMessage['messages'] !== 'undefined'){
                 errorMessage = this.normalizeOldErrorFormat(errorMessage);
+            }
 
             console.log('ErrorManager', 'Parsed Error Message', errorMessage);
 
             //Validate the format of the error message
-            if(typeof errorMessage['description'] !== 'undefined' && typeof errorMessage['error'] !== 'undefined')
+            if(typeof errorMessage['description'] !== 'undefined' && typeof errorMessage['error'] !== 'undefined'){
                 this.set(errorMessage);
-            else
+            }
+            else{
                 this.setUnexpectedErrorMessage();
+            }
         },
         setUnexpectedErrorMessage: function () {
             console.log('ErrorManager', 'Unexpected Error Message, please report to development team', errorMessage);
