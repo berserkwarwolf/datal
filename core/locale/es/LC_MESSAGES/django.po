@@ -865,6 +865,12 @@ msgstr "Cambio de estado denegado"
 msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
 msgstr "El cambio de estado que estas solicitando no esta permitido."
 
+msgid "EXCEPTION-TITLE-FILE-INVALID"
+msgstr "Archivo no valido"
+
+msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
+msgstr "Ingrese un tipo de archivo valido."
+
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar el recurso"
 
