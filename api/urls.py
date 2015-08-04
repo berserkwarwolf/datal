@@ -17,8 +17,8 @@ urlpatterns = patterns('',
     # API v2
     # -----------------------------------------------------------------------
 
-    (r'^api/v2/datastreams/(?P<guid>[A-Z0-9\-]+)$', action_view), # GET datastreams metadata
-    (r'^api/v2/datastreams/(?P<guid>[A-Z0-9\-]+)/rows(\.)?(?P<data_format>[a-z\_]+)?$', action_invoke), # GET datastreams data & metadata
+    (r'^api/v2/datastreams/(?P<guid>[A-Z0-9\-]+)$', view), # GET datastreams metadata
+    (r'^api/v2/datastreams/(?P<guid>[A-Z0-9\-]+)/rows(\.)?(?P<data_format>[a-z\_]+)?$', invoke), # GET datastreams data & metadata
     (r'^api/v2/datastreams$', action_update), # CREATE | UPDATE | PATCH A DATASTREAM
 
 )

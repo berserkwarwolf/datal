@@ -12,7 +12,7 @@ from api.http import JSONHttpResponse
 
 
 @require_http_methods(["GET"])
-def action_view(request, guid):
+def view(request, guid):
     is_method_get_or_405(request)
     try:
         datastream = DataStream.objects.get(guid=guid)
@@ -28,7 +28,7 @@ def action_view(request, guid):
     return JSONHttpResponse(response)
 
 @require_http_methods(["GET"])
-def action_invoke(request, guid, data_format=None):
+def invoke(request, guid, data_format=None):
     """invoke the datastream data by datastream-GUID"""
     is_method_get_or_405(request)
     form = forms.InvokeForm(request.GET)
