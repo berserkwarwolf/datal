@@ -93,6 +93,7 @@ fixtures:
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  core/fixtures/* --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  admin/fixtures/* --settings=admin.settings
 
 language:
   cmd.run:
