@@ -758,7 +758,7 @@ msgid "APP-LICENSES-DATA"
 msgstr "Licencias de datos"
 
 msgid "APP-ON-TEXT"
-msgstr ""
+msgstr "El"
 
 msgid "APP-AT-TEXT"
 msgstr "a las"
@@ -869,7 +869,7 @@ msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar el recurso"
 
 msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
-msgstr "Es necesario un paso previo."
+msgstr "Es necesario publicar el conjunto de datos asociado"
 
 msgid "EXCEPTION-TITLE-DASTREAM-PARENT-NOT-PUBLISHED"
 msgstr "No se pudo publicar la vista"
