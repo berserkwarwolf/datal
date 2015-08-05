@@ -12,6 +12,7 @@ base:
     - core.elasticsearch
     - nginx.ng
     - core.selenium
+    - core.bower
     - apps.aos.core
     - apps.datal.core
     - apps.datastore.core
