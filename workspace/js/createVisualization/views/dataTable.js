@@ -19,8 +19,8 @@ var DataTableView = Backbone.View.extend({
 
     this.selectionEl = $('#selection');
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
-      console.log('afterSelectionEnd', r1, c1, r2, c2);
-      self.selectionEl.text(String(r1)+String(c1)+String(r2)+String(c2));
+      console.log('afterSelectionEnd', [r1, c1, r2, c2]);
+      self.selectionEl.text([r1, c1, r2, c2].join(', '));
     })
   }
 });

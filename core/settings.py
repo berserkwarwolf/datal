@@ -331,8 +331,9 @@ SUBSCRIBE_NEW_USERS_TO_MAIL_LIST = False
 BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_PATH, 'components')
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'underscore',
+    'jquery#>=2.1.4',
+    'underscore#>= 1.8.3',
+    'handsontable#>=0.16.1'
 )
 
 try:
