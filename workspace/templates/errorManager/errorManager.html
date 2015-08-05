@@ -1,12 +1,13 @@
+{% load i18n %}
 <script type="text/template" id="errorManagerView_template">
     <div class="error-description">
         <%= description %>
         <% if(actions.length){ %>
-            <span class="description-title">Posibles soluciones: </span>
+            <span class="description-title">{% trans 'APP-ACTIONS-TEXT' %}: </span>
             <ul>
                 <% for(var i in actions){ %>
                     <li>
-                        <% if(actions[i].link){ %>
+                        <% if(actions[i].link && actions[i].link != "None"){ %>
                             <a href="<%= actions[i].link %>"><%= actions[i].description %></a>
                         <% } else { %>
                             <%= actions[i].description %>

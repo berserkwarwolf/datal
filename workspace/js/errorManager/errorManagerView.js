@@ -4,12 +4,14 @@
         initialize: function () {
             this.model.on("change", this.render.bind(this));
 
-            datalEvents.on('data:application-error', this.onApplicationError.bind(this));
+            datalEvents.on('datal:application-error', this.onApplicationError.bind(this));
         },
-        onApplicationError: function (error) {
-            if(typeof(error) !== 'object')
-                error = JSON.parse(error);
-            this.model.set(error);
+        /**
+         * Captures an object containing data from an error exception
+         * @param  {Object}
+         */
+        onApplicationError: function (errorSource) {
+            this.model.assignRaw(errorSource);
         },
         prepareText: function () {
             return this.template(this.model.toJSON());

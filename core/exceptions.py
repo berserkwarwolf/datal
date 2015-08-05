@@ -130,6 +130,12 @@ class IllegalStateException(LifeCycleException):
     tipo = 'illegal-state'
 
 
+class FileTypeNotValidException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-FILE-INVALID')
+    description = _('EXCEPTION-DESCRIPTION-FILE-INVALID')
+    tipo = 'illegal-state'
+
+
 class ApplicationException(DATALException):
     title = 'Application error'
 

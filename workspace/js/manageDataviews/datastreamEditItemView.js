@@ -116,17 +116,11 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                     self.closeOverlay();
 
                 },
-                error: function(){
-                    $.gritter.add({
-                        title : gettext('APP-ERROR-TEXT'),
-                        text : gettext('APP-REQUEST-ERROR'),
-                        image : '/static/workspace/images/common/ic_validationError32.png',
-                        sticky : true,
-                        time : 3500
-                    });
+                error: function(response){
+                    datalEvents.trigger('datal:application-error', response);
                     self.closeOverlay();
                 }
-            });      
+            });
 
         } 
 

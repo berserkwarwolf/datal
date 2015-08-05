@@ -2947,3 +2947,9 @@ msgstr "here"
 
 msgid "APP-SELECT-DATASET-TEXT"
 msgstr "Select Dataset"
+
+msgid "EXCEPTION-TITLE-FILE-INVALID"
+msgstr "Invalid file format"
+
+msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
+msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
