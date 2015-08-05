@@ -76,7 +76,7 @@
   <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}" style="display:{% if datastream.status != 1 %}block{% else %}none;{% endif %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
 
   <!-- Delete -->
-  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}" style="display:{% if datastream.status != 1 %}block{% else %}none;{% endif %}"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
 
   <!-- Add New -->
   <li class="has-separator"><a id="id_addNewButton" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
@@ -141,7 +141,6 @@ $(document).ready(function(){
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({
-    id: "{{datastream.datastreamrevision_id}}",
     datastream_revision_id: "{{datastream.datastream_revision_id}}",
     title: "{{datastream.title}}",
     category: "{{datastream.category_id}}",

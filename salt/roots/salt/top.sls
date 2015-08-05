@@ -9,7 +9,7 @@ base:
     - core.uwsgi
     - core.java
     - core.tomcat
-    - core.indextank
+    - core.elasticsearch
     - nginx.ng
     - core.selenium
     - apps.aos.core

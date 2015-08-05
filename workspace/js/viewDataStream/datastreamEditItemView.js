@@ -1,35 +1,34 @@
 var DatastreamEditItemView = Backbone.Epoxy.View.extend({
-    el:"#id_editDataview",
+    el:"body",
     sources: null,
     tags: null,
     sourceUrl: null,
     tagUrl: null,
     parentView: null,
     notesInstance: null,
+    loadSpeed: 200,
+    template: null,
     events: {
-        "click #id_edit_cancel, .close": "closeOverlay",
-        "click #id_edit_save": "onEditDataviewSave",
+        "click #id_editDataview #id_edit_cancel, #id_editDataview .close, #exposeMask": "closeOverlay",
+        "click #id_editDataview #id_edit_save": "onEditDataviewSave",
     },
 
     initialize: function(options) {
         var self = this;
         this.options = options;
         this.parentView = this.options.parentView;
-        this.cleanUpForm();
-        this.initSourceList();
-        this.initTagList();
-        this.initNotes();
+        this.template = _.template( $("#id_editTemplate").html() );
 
         this.sourceUrl = this.options.sourceUrl;
         this.tagUrl = this.options.tagUrl;
 
         // Init Overlay
-        this.$el.overlay({
+        this.$el.find('#id_editDataview').overlay({
             top: 'center',
             left: 'center',
             mask: {
                 color: '#000',
-                loadSpeed: 200,
+                loadSpeed: this.loadSpeed,
                 opacity: 0.5,
                 zIndex: 99999
             }
@@ -42,7 +41,15 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
 
     render: function(){
         var self = this;
-        this.$el.data('overlay').load();
+
+        this.$el.find('#id_editDataview .formContent').html( this.template( this.model.toJSON() ) ); 
+
+        this.cleanUpForm();
+        this.initSourceList();
+        this.initTagList();
+        this.initNotes();
+
+        this.$el.find('#id_editDataview').data('overlay').load();
 
         // Bind custom model validation callbacks
         Backbone.Validation.bind(this, {
@@ -70,10 +77,9 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     initNotes: function(){
-        $('#id_notes').val(this.model.get('notes'));
         this.notesInstance = new nicEditor({
-            buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
-            iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
+             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
+             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
     },
 
@@ -140,14 +146,18 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
     },
 
     closeOverlay: function(){
-        this.notesInstance.removeInstance('id_notes');
         this.undelegateEvents();
-        this.$el.data('overlay').close();
+        this.$el.find('#id_editDataview').data('overlay').close();
+        
+        var self = this;
+        setTimeout(function(){
+            self.notesInstance.removeInstance('id_notes')
+        }, this.loadSpeed);
     },
 
     cleanUpForm: function(){
-        this.$el.find('#sourceForm .sourcesContent').html('');
-        this.$el.find('#tagForm .tagsContent').html('');
+        this.$el.find('#id_editDataview #sourceForm .sourcesContent').html('');
+        this.$el.find('#id_editDataview #tagForm .tagsContent').html('');
         $('.nicEdit-main').html('');
     },
 

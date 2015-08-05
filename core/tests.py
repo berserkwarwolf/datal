@@ -1,9 +1,12 @@
 from django.test import TransactionTestCase, LiveServerTestCase
+from django.test import TestCase
 from django.db.models import F, Max
 
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
+
+from core.search.elastic import ElasticsearchFinder
 
 
 class LifeCycleManagerTestCase(TransactionTestCase):
@@ -261,3 +264,19 @@ class LifeCycleManagerTestCase(TransactionTestCase):
 
         # Verifico que elimine el dataset
         self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
+
+
+class TestElasticSearch(TestCase):
+
+    def test_animals_can_speak(self):
+        es = ElasticsearchFinder()
+        resource = ["ds", "dt", "db", "chart", "vt"]
+
+        query = 'iniciativas'
+        category_filters = ['finanzas']
+        results, searchtime, facets = es.search(query=query,
+                                                account_id=1,
+                                                category_filters=category_filters)
+        for result in results:
+            print result
+        assert len(results) == 2

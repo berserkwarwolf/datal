@@ -22,6 +22,7 @@ def action_browse(request, category_slug=None, page = 1):
 
     return render_to_response('search/search.html', locals())
 
+
 def do_search(request, category_filters = None, datasets = None):
     account = request.account
     preferences = request.preferences
@@ -30,6 +31,7 @@ def do_search(request, category_filters = None, datasets = None):
     if form.is_valid():
         query       = form.get_query()
         page        = form.cleaned_data.get('page')
+        order       = form.cleaned_data.get('order')
 
         featured_accounts = account.account_set.values('id').all()
         if featured_accounts:
@@ -39,10 +41,10 @@ def do_search(request, category_filters = None, datasets = None):
 
         try:
             resources = ["ds", "db", "chart", "dt"]
-
             results, search_time, facets = FinderManager().search(query = query
                                                                   , account_id = accounts_ids
                                                                   , category_filters = category_filters
+                                                                  , order = order 
                                                                   , resource = resources)
         except InvalidPage:
             raise Http404
@@ -55,14 +57,15 @@ def do_search(request, category_filters = None, datasets = None):
         raise Http404
 
 
-
 def action_search(request):
     return do_search(request)
 
-def action_search_by_query_and_category(request, filter):
+
+def action_search_by_query_and_category(request, category):
     try:
         datasets = request.GET.get("datasets", None)
-        name, category = filter.split(":")
-        return do_search(request, category_filters = {name:category}, datasets = datasets)
+        return do_search(request,
+                         category_filters=[category],
+                         datasets=datasets)
     except:
         return do_search(request)

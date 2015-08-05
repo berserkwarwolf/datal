@@ -5,6 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy
 from django.db import IntegrityError
 from django.conf import settings
+from django.dispatch import receiver
+from django.db.models.signals import pre_delete
 
 from core.helpers import slugify
 from core import choices
@@ -14,6 +16,7 @@ from core.cache import Cache
 
 
 logger = logging.getLogger(__name__)
+
 
 def add_facets_to_doc(resource, account, doc):
     logger = logging.getLogger(__name__)
@@ -205,24 +208,33 @@ class Account(models.Model):
 
 
 class User(models.Model):
-    name            = models.CharField(max_length=30, verbose_name=ugettext_lazy( 'MODEL_NAME_LABEL' ))
-    nick            = models.CharField(max_length=30, unique=True)
-    email           = models.EmailField(max_length=75, unique=True)
-    password        = models.CharField(max_length=155, verbose_name=ugettext_lazy( 'MODEL-PASSWORD-TEXT' ))
-    country         = models.CharField(max_length=3, choices=choices.COUNTRY_CHOICES, blank=True, default='US', verbose_name=ugettext_lazy( 'MODEL-COUNTRY-TEXT' ))
-    ocupation       = models.CharField(max_length=2, choices=choices.OCUPATION_CHOICES, blank=True, verbose_name=ugettext_lazy( 'MODEL-OCUPATION-TEXT' ))
-    language        = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy( 'MODEL-LANGUAGE-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    last_visit      = models.DateTimeField(null=True)
-    roles           = models.ManyToManyField('Role', verbose_name=ugettext_lazy('MODEL-ROLES-TEXT'), db_table='ao_user_role_roles')
-    grants          = models.ManyToManyField('Privilege', through='Grant', verbose_name=ugettext_lazy('MODEL-USER-GRANTS-TEXT'))
-    account         = models.ForeignKey('Account', null=True, on_delete=models.PROTECT)
+    name = models.CharField(max_length=30, verbose_name=ugettext_lazy( 'MODEL_NAME_LABEL' ))
+    nick = models.CharField(max_length=30, unique=True)
+    email = models.EmailField(max_length=75, unique=True)
+    password = models.CharField(max_length=155, verbose_name=ugettext_lazy( 'MODEL-PASSWORD-TEXT' ))
+    country = models.CharField(max_length=3, choices=choices.COUNTRY_CHOICES, blank=True, default='US', verbose_name=ugettext_lazy( 'MODEL-COUNTRY-TEXT' ))
+    ocupation = models.CharField(max_length=2, choices=choices.OCUPATION_CHOICES, blank=True, verbose_name=ugettext_lazy( 'MODEL-OCUPATION-TEXT' ))
+    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy( 'MODEL-LANGUAGE-TEXT' ))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    last_visit = models.DateTimeField(null=True)
+    roles = models.ManyToManyField('Role', verbose_name=ugettext_lazy('MODEL-ROLES-TEXT'), db_table='ao_user_role_roles')
+    grants = models.ManyToManyField('Privilege', through='Grant', verbose_name=ugettext_lazy('MODEL-USER-GRANTS-TEXT'))
+    account = models.ForeignKey('Account', null=True, on_delete=models.PROTECT)
 
     class Meta:
         db_table = 'ao_users'
 
     def __unicode__(self):
         return self.nick
+
+    def is_admin(self):
+        return True if Role.objects.get(code="ao-account-admin") in self.roles.all() else False
+
+    def is_publisher(self):
+        return True if Role.objects.get(code="ao-publisher") in self.roles.all() else False
+
+    def is_editor(self):
+        return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
 
     def get_total_datasets(self):
         c = Cache(db=0)
@@ -283,13 +295,15 @@ class DataStream(GuidModel):
 
 
 class DataStreamRevision(models.Model):
+    STATUS_CHOICES = choices.STATUS_CHOICES
+
     datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'), on_delete=models.PROTECT)
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     data_source = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
     select_statement = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_SELECT_STATEMENT_LABEL'))
-    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     rdf_template = models.TextField(blank=True,
@@ -297,12 +311,27 @@ class DataStreamRevision(models.Model):
     objects = managers.DataStreamRevisionManager()
 
     class Meta:
-        db_table        = 'ao_datastream_revisions'
-        ordering        = ['-id']
-        get_latest_by   = 'created_at'
+        db_table = 'ao_datastream_revisions'
+        ordering = ['-id']
+        get_latest_by = 'created_at'
 
     def __unicode__(self):
         return unicode(self.id)
+
+    def is_pending_review(self):
+        return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
+
+    @staticmethod
+    def remove_related_to_dataset(dataset):
+        """
+        Elimino las revisiones de DataStream asociados a un dataset en particular y su DataStream
+        """
+        datastream_ids = set()
+        datastream_revisions = DataStreamRevision.objects.filter(dataset=dataset)
+        for datastreamrevision in datastream_revisions:
+            datastream_ids.add(datastreamrevision.id)
+            datastreamrevision.delete()
+        DataStream.objects.filter(pk__in=datastream_ids).delete()
 
     def update(self, changed_fields, **fields):
         if changed_fields:
@@ -651,6 +680,8 @@ class Dataset(GuidModel):
 
 
 class DatasetRevision(models.Model):
+    STATUS_CHOICES = choices.STATUS_CHOICES
+
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
@@ -659,7 +690,7 @@ class DatasetRevision(models.Model):
     impl_details = models.TextField(blank=True, null=True, verbose_name=ugettext_lazy('MODEL_DATASET_REVISION_IMPL_DETAILS_LABEL'))
     impl_type = models.IntegerField(choices=choices.SOURCE_IMPLEMENTATION_CHOICES,
                                     verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_TYPE_LABEL'))
-    status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
+    status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     # Just for resources compatibility
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     size = models.IntegerField(default=0, verbose_name=ugettext_lazy('MODEL_SIZE_LABEL'))
@@ -677,6 +708,9 @@ class DatasetRevision(models.Model):
 
     def __unicode__(self):
         return  unicode(self.id)
+
+    def is_pending_review(self):
+        return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
 
     def update(self, changed_fields, **fields):
         if 'category' in changed_fields:
@@ -1326,3 +1360,22 @@ class Log(models.Model):
 
     class Meta:
         db_table = 'ao_logs'
+
+
+# Signals
+
+@receiver(pre_delete, sender=DatasetRevision, dispatch_uid="unindex_dataset_revision")
+def unindex_dataset_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.datasets import DatasetSearchDAOFactory
+        search_dao = DatasetSearchDAOFactory().create(instance)
+        search_dao.remove()
+
+@receiver(pre_delete, sender=DataStreamRevision, dispatch_uid="unindex_datastream_revision")
+def unindex_datastream_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.datastreams import DatastreamSearchDAOFactory
+        search_dao = DatastreamSearchDAOFactory().create(instance)
+        search_dao.remove()

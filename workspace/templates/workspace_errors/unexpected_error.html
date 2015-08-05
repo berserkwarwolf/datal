@@ -1,0 +1,31 @@
+{% extends 'base_workspace.html' %}
+{% load i18n %}
+
+{% block sectionTitle %}
+    <h1>{% trans "EXCEPTION-TITLE-UNEXPECTED" %}</h1>
+{% endblock %}
+
+{% block content %}
+{% block error_content %}
+  <section class="box pink">
+        
+        <header>
+        <h3 class="title">
+            {% block error_title %}
+                {% trans "EXCEPTION-TITLE-UNEXPECTED" %}
+            {% endblock %}
+            </h3>
+        </header>
+
+        <div class="box-content clearfix">
+        {% block error_text %}
+            {% trans "EXCEPTION-DESCRIPTION-UNEXPECTED" %}
+        {% endblock %}
+        </div>
+
+  </section>
+{% endblock %}
+{% endblock %}
+
+{% block extras %}
+{% endblock %}

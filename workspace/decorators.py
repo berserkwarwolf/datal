@@ -1,14 +1,17 @@
+import logging
+
 from functools import wraps
-from core.cache import Cache
-from core.models import Dataset, DataStream, Dashboard, Visualization
 from django.utils.decorators import available_attrs
 from django.conf import settings
+from core.exceptions import *
 from workspace.exceptions import *
 from core.choices import StatusChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.daos.datasets import DatasetDBDAO
 from workspace.daos.datastreams import DataStreamDBDAO
+from core.models import DatasetRevision, DataStreamRevision
+
 
 def require_child_accepted(view_func):
     @wraps(view_func, assigned=available_attrs(view_func))
@@ -16,6 +19,7 @@ def require_child_accepted(view_func):
         return view_func(request, *args, **kwargs)
 
     return _wrapped_view
+
 
 def require_not_pending_review(ids):
     def decorator(view_func):
@@ -30,6 +34,7 @@ def require_not_pending_review(ids):
         return _wrapped_view
     return decorator
 
+
 def require_privilege(privilege):
     def decorator(view_func):
         """ for registred and logged user. NO redirect to login"""
@@ -42,6 +47,7 @@ def require_privilege(privilege):
 
         return _wrapped_view
     return decorator
+
 
 def requires_if_publish(resource):
     """ En la edicion de recursos quizas se intente publicar, en esos casos
@@ -73,12 +79,12 @@ def requires_published_parent():
                     dataset_revision_id=request.POST['dataset_revision_id']
                     resource = DatasetLifeCycleManager(user = request.user.id, dataset_revision_id=dataset_revision_id)
                     if resource.dataset_revision.status != StatusChoices.PUBLISHED:
-                        raise ParentNotPublishedException()
+                        raise DatastreamParentNotPublishedException(resource.dataset_revision)
                 elif request.POST.get('datastream_revision_id', False):
                     datastream_revision_id=request.POST['datastream_revision_id']
                     resource = DatastreamLifeCycleManager(user = request.user.id, resource_revision_id=datastream_revision_id)
                     if resource.dataset_revision.status != StatusChoices.PUBLISHED:
-                        raise ParentNotPublishedException()
+                        raise VisualizationParentNotPublishedException(resource.dataset_revision)
                 else:
                     raise ParentNotPublishedException('Parent resource not found')
 
@@ -86,6 +92,7 @@ def requires_published_parent():
 
         return _wrapped_view
     return decorator
+
 
 def requires_dataset():
     """ requiere a dataset_revision_id POST param """
@@ -102,6 +109,7 @@ def requires_dataset():
         return _wrapped_view
     return decorator
 
+
 def requires_any_dataset():
     """ require account with almost one dataset """
     def decorator(view_func):
@@ -117,6 +125,7 @@ def requires_any_dataset():
         return _wrapped_view
     return decorator
 
+
 def requires_any_datastream():
     """ require account with almost one dataset """
     def decorator(view_func):
@@ -131,6 +140,24 @@ def requires_any_datastream():
 
         return _wrapped_view
     return decorator
+
+
+def requires_review(a_view):
+    def _wrapped_view(request, *args, **kwargs):
+        print(kwargs)
+
+        if "dataset_revision_id" in kwargs:
+            if DatasetRevision.objects.get(pk=kwargs["dataset_revision_id"]).is_pending_review() and \
+                    request.user.is_editor():
+                raise RequiresReviewException()
+
+        if "datastream_revision_id" in kwargs:
+            if DataStreamRevision.objects.get(pk=kwargs["datastream_revision_id"]).is_pending_review() and \
+                    request.user.is_editor():
+                raise RequiresReviewException()
+        return a_view(request, *args, **kwargs)
+    return _wrapped_view
+
 
 #TODO implementar tambien
 """

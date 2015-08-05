@@ -35,7 +35,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         category = datastream_revision.category.categoryi18n_set.get(language=language)
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
         dataset_revision = datastream_revision.dataset.last_revision
-        
+
         datastream = dict(
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
@@ -124,8 +124,11 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         filters = set([])
 
         for res in query:
-            filters.add(('status', res.get('status'),
-                unicode(STATUS_CHOICES[int(res.get('status'))][1])))
+            status = res.get('status')
+
+            filters.add(('status', status,
+                unicode(DataStreamRevision.STATUS_CHOICES[status])
+                ))
             if 'category__categoryi18n__name' in res:
                 filters.add(('category', res.get('category__categoryi18n__name'),
                     res.get('category__categoryi18n__name')))

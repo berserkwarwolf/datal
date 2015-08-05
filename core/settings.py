@@ -25,6 +25,7 @@ DATABASES = {
 
 USE_DATASTORE = 's3' # uses s3 | sftp
 USE_SEARCHINDEX = 'searchify'
+USE_SEARCHINDEX = 'elasticsearch'
 
 TIME_ZONE = 'America/Santiago'
 
@@ -178,8 +179,13 @@ SPANISH_EXCLUSION_LIST          = ['a', 'con', 'contra', 'de', 'desde', 'durante
 SEARCH_TERMS_EXCLUSION_LIST     = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIST
 BLOCKED_USERNAMES               = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home', 'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support', 'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams', 'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams', 'data.stream', 'dashboards', 'dashboard', 'data']
 
-#SEARCHIFY = {'api_url': 'http://:11111@11111.api.searchify.com', 'index': 'TEST'}
-SEARCHIFY = {'api_url': 'http://:aa@localhost:20220', 'index': 'idx'}
+# unificamos toda la config de los indexadores en una sola
+# para indextank usamos una sola url
+# pero para ES se puede utilizar una lista de hosts
+SEARCH_INDEX = {
+                'url': ['http://localhost:9200',],
+                'index': 'datal'
+                }
 
 # Settings Keys
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'

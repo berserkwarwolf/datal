@@ -2,9 +2,9 @@ from django.core.urlresolvers import reverse
 from django.db import connection
 from api.exceptions import Http400
 from core.helpers import slugify, get_mimetype, get_file_type_from_extension
-from core import managers
+from core.search import finder
 from core.models import *
-from core.managers import IndexTankFinder as core_IndexTankFinder
+from core.search import *
 from api.sources_manager.utils import *
 
 def resolve_user_id(self, passticket, default_user_id):
@@ -37,10 +37,10 @@ managers.CategoryManager.get_ordered = get_ordered
 
 
 
-class IndexTankFinder(core_IndexTankFinder):
+class ApiFinder(elastic.ElasticsearchFinder):
 
-    def __init__(self):
-        core_IndexTankFinder.__init__(self)
+#    def __init__(self):
+#        elastic.ElasticsearchFinder.__init__(self)
 
     def get_visualization_dictionary(self, doc):
         guid = doc['docid'].split('::')[1]
@@ -107,11 +107,11 @@ class IndexTankFinder(core_IndexTankFinder):
             "link": permalink,
         }
 
-class FinderManager(managers.FinderManager):
+class FinderManager(finder.FinderManager):
 
-    def __init__(self, finder_class = IndexTankFinder,
-                 failback_finder_class = IndexTankFinder):
+    def __init__(self, finder_class = ApiFinder,
+                 failback_finder_class = ApiFinder):
 
         self.finder_class = finder_class
         self.failback_finder_class = failback_finder_class
-        managers.FinderManager.__init__(self)
+        finder.FinderManager.__init__(self)

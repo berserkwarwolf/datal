@@ -25,13 +25,17 @@ class ActivityStreamDAO:
         #TODO check and fix al urls.
         if int(action_id) != int(choices.ActionStreams.DELETE):
             if resource_type == settings.TYPE_DATASTREAM:
-                l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': revision_id})
+                l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls',
+                                      kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_VISUALIZATION:
-                l_permalink = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(revision_id))
+                l_permalink = LocalHelper.build_permalink('manageVisualizations.view',
+                                                          '&visualization_revision_id=' + str(revision_id))
             elif resource_type == settings.TYPE_DATASET:
-                l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': revision_id})
+                l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls',
+                                      kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_DASHBOARD:
-                l_permalink = LocalHelper.build_permalink('dashboard_manager.action_view', '&dashboard_revision_id=' + str(revision_id))
+                l_permalink = LocalHelper.build_permalink('dashboard_manager.action_view',
+                                                          '&dashboard_revision_id=' + str(revision_id))
 
         list_key = 'activity_stream::%s' % str(account_id)
         n=c.incr("%s_counter" % list_key) # count any use of the list indexing hash and never repeat an ID

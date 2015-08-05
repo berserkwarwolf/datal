@@ -1,0 +1,1 @@
+{{ dataseti18n.title }} {{ dataseti18n.description }} {{ dataset_revision.user.nick }} {{ dataset_revision.dataset.guid }} {% for tag in tags %}{{ tag }}{% endfor %}

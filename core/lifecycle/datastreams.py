@@ -5,13 +5,13 @@ from core.choices import ActionStreams
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
-from core.exceptions import IlegalStateException, DataStreamNotFoundException
+from core.exceptions import IllegalStateException, DataStreamNotFoundException
 from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 PUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
-UNPUBLISH_ALLOWED_STATES = [StatusChoices.PUBLISHED]
+UNPUBLISH_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PUBLISHED]
 SEND_TO_REVIEW_ALLOWED_STATES = [StatusChoices.DRAFT]
 ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
@@ -25,7 +25,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def __init__(self, user, resource=None, language=None, datastream_id=0, datastream_revision_id=0):
         super(DatastreamLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
-            
+
         try:
             if type(resource) == DataStream:
                 self.datastream = resource
@@ -61,7 +61,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         status = int(fields.get('status', StatusChoices.DRAFT))
 
         if int(status) not in allowed_states:
-            raise IlegalStateException(allowed_states)
+            raise IllegalStateException(
+                                    from_state=None,
+                                    to_state=status,
+                                    allowed_states=allowed_states)
 
         #language = fields.get('language', self.user.language)
         #category = Category.objects.get(pk=fields['category_id'])
@@ -74,7 +77,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.CREATE)
 
-	# permite publicar al crear
+        # permite publicar al crear
         if status == StatusChoices.PUBLISHED:
             self.publish(allowed_states=CREATE_ALLOWED_STATES)
         else:
@@ -86,22 +89,21 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Publica una revision de dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.PUBLISHED,
+                                    allowed_states=allowed_states)
 
         status = StatusChoices.PUBLISHED
-        try:
-            self._publish_childs()
-        except IlegalStateException:
-            # Si alguno de los hijos no se encuentra al menos aprobado, entonces el dataset no es publicado quedando en estado aprobado
-            status = StatusChoices.APPROVED
 
+        self._publish_childs()
         self.datastream_revision.status = status
         self.datastream_revision.save()
 
         self._update_last_revisions()
-        
-        search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.add(self.datastream_revision)
+
+        search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
+        search_dao.add()
 
         self._log_activity(ActionStreams.PUBLISH)
 
@@ -119,7 +121,11 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica la revision de un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
+
 
         if killemall:
             self._unpublish_all()
@@ -132,9 +138,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.datastream_revision.status = StatusChoices.DRAFT
                 self.datastream_revision.save()
 
-        search_dao = DatastreamSearchDAOFactory().create()
-        search_dao.remove(self.datastream_revision)
-        
+        search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
+        search_dao.remove()
+
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
@@ -158,7 +164,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Envia a revision un dataset """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.PENDING_REVIEW,
+                                    allowed_states=allowed_states)
 
         self._send_childs_to_review()
 
@@ -181,7 +190,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ accept a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.APPROVED,
+                                    allowed_states=allowed_states)
 
         self.datastream_revision.status = StatusChoices.APPROVED
         self.datastream_revision.save()
@@ -190,7 +202,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ reject a dataset revision """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision )
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=StatusChoices.DRAFT,
+                                    allowed_states=allowed_states)
 
         self.datastream_revision.status = StatusChoices.DRAFT
         self.datastream_revision.save()
@@ -199,11 +214,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         if self.datastream_revision.status not in allowed_states:
-            raise IlegalStateException(allowed_states, self.datastream_revision)
-
-        if self.datastream_revision.status == StatusChoices.PUBLISHED:
-            search_dao = DatastreamSearchDAOFactory().create()
-            search_dao.remove(self.datastream_revision)
+            raise IllegalStateException(
+                                    from_state=self.datastream_revision.status,
+                                    to_state=None,
+                                    allowed_states=allowed_states)
 
         if killemall:
             self._remove_all()
@@ -240,39 +254,44 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
-            raise IlegalStateException(allowed_states, self.datastream_revision)
+            raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
 
-        if old_status == StatusChoices.DRAFT or \
-                (old_status == StatusChoices.APPROVED and form_status == StatusChoices.PUBLISHED):
-            self.datastream_revision = DataStreamDBDAO().update(
-                self.datastream_revision,
-                changed_fields,
-                status=form_status,
-                **fields
-            )
-        else:
+        if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
-                status=StatusChoices.DRAFT,
+                status=form_status,
                 parameters=self.datastream_revision.datastreamparameter_set.all(),
                 **fields
             )
 
             self._move_childs_to_draft()
 
-        if form_status == StatusChoices.PUBLISHED:
-            # Intento publicar, si falla, queda como publicado
-            try:
-                self.publish()
-            except:
-                self.accept()
-                raise
-        elif old_status == StatusChoices.PUBLISHED and form_status == StatusChoices.DRAFT:
-            self.unpublish()
+            if form_status == StatusChoices.DRAFT:
+                self.unpublish()
+            else:
+                 self._update_last_revisions()
         else:
-            self._update_last_revisions()
+            # Actualizo sin el estado
+            self.datastream_revision = DataStreamDBDAO().update(
+                self.datastream_revision,
+                status=old_status,
+                changed_fields=changed_fields,
+                **fields
+            )
+
+            if form_status == StatusChoices.PUBLISHED:
+               # Intento publicar, si falla, queda aceptado
+
+                try:
+                    self.publish()
+                except:
+                    self.accept()
+                    raise
+            else:
+                self.datastream_revision.status = form_status
+                self.datastream_revision.save()
 
         return self.datastream_revision
 
@@ -292,11 +311,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
-        return super(DatastreamLifeCycleManager, self)._log_activity(
-            action_id,
-            self.datastream_revision.dataset.id,
-            self.datastream_revision.dataset.type,
-            self.datastream_revision.id, "#TODO get title")
+        title = self.datastreami18n.title if self.datastreami18n else ''
+
+        return super(DatastreamLifeCycleManager, self)._log_activity(action_id, self.datastream_revision.dataset.id,
+            self.datastream_revision.dataset.type, self.datastream_revision.id, title)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

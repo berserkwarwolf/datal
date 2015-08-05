@@ -4,6 +4,8 @@ from core.models import *
 from core.helpers import slugify
 from core import helpers
 
+from core.search import *
+
 # CategoryManager
 def get_for_browse(self, category_slug, language):
     category_query = super(managers.CategoryManager, self).values('id', 'categoryi18n__name')
@@ -12,11 +14,13 @@ def get_for_browse(self, category_slug, language):
 managers.CategoryManager.get_for_browse = get_for_browse
 
 
-class FinderManager(managers.FinderManager):
-    def __init__(self, finder_class=managers.IndexTankFinder, failback_finder_class=managers.IndexTankFinder):
+class FinderManager(finder.FinderManager):
+    def __init__(self, finder_class=searchify.IndexTankFinder, failback_finder_class=searchify.IndexTankFinder):
         self.finder_class = finder_class
+	self.finder = elastic.ElasticsearchFinder
         self.failback_finder_class = failback_finder_class
-        managers.FinderManager.__init__(self)
+        self.failback_finder_class = elastic.ElasticsearchFinder
+        finder.FinderManager.__init__(self)
 
 
 def visualization_query_hot_n(self, lang, hot = None):

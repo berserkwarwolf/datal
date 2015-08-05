@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
+
 from core.daos.datasets import AbstractDatasetDBDAO
-from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import SOURCE_IMPLEMENTATION_CHOICES
 from workspace import settings
 from core.models import DatasetRevision, DatasetI18n, DataStreamRevision
 from django.db.models import Q, F
@@ -100,11 +101,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         Reads available filters from a resource array. Returns an array with objects and their
         i18n names when available.
         """
-        query = DatasetRevision.objects.filter(
-                                                id=F('dataset__last_revision'),
-                                                dataset__user__account=account_id,
-                                                dataseti18n__language=language,
-                                                category__categoryi18n__language=language)
+        query = DatasetRevision.objects.filter(id=F('dataset__last_revision'), dataset__user__account=account_id,
+                                               dataseti18n__language=language,
+                                               category__categoryi18n__language=language)
 
         query = query.values('dataset__user__nick', 'status', 'impl_type',
                              'category__categoryi18n__name')
@@ -112,11 +111,17 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         filters = set([])
 
         for res in query:
-            filters.add(('status', res.get('status'),
-                unicode(STATUS_CHOICES[int(res.get('status'))][1])))
-            if 'impl_type' in res:
-                filters.add(('type', res.get('impl_type'),
-                    unicode(SOURCE_IMPLEMENTATION_CHOICES[int(res.get('impl_type'))][1])))
+
+            status = res.get('status')
+            impl_type = res.get('impl_type')
+
+            filters.add(('status', status, unicode(DatasetRevision.STATUS_CHOICES[status])))
+
+            filters.add(('type', impl_type,
+                unicode(
+                    [x[1] if x else '' for x in SOURCE_IMPLEMENTATION_CHOICES if x[0] == impl_type][0]
+                    )
+                ))
             if 'category__categoryi18n__name' in res:
                 filters.add(('category', res.get('category__categoryi18n__name'),
                     res.get('category__categoryi18n__name')))
@@ -134,8 +139,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset__id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
-                 'created_at')
-
+                 'created_at', 'datastream__last_revision')
         return related
 
     def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):

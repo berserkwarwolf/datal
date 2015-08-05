@@ -1,4 +1,6 @@
+from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from model_utils import Choices
 
 
 class ChannelTypes():
@@ -30,15 +32,15 @@ class ActionStreams():
 
 
 # TODO: Create just one STATUS_CHOICES after we remove in a clean way UNDER_REVIEW and REJECTED choices
-STATUS_CHOICES = (
-    (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
-    (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
-    (StatusChoices.UNDER_REVIEW,  ugettext_lazy('MODEL_STATUS_UNDER_REVIEW')),
-    (StatusChoices.PUBLISHED,  ugettext_lazy('MODEL_STATUS_PUBLISHED')),
-    (StatusChoices.UNPUBLISHED,  ''),
-    (StatusChoices.REJECTED,  ugettext_lazy('MODEL_STATUS_REJECTED')),
-    (StatusChoices.APPROVED,  ugettext_lazy('MODEL_STATUS_APPROVED'))
-)
+STATUS_CHOICES = Choices(
+    (StatusChoices.DRAFT, ugettext_lazy('MODEL_STATUS_DRAFT')),
+    (StatusChoices.PENDING_REVIEW, ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
+    (StatusChoices.UNDER_REVIEW, ugettext_lazy('MODEL_STATUS_UNDER_REVIEW')),
+    (StatusChoices.PUBLISHED, ugettext_lazy('MODEL_STATUS_PUBLISHED')),
+    (StatusChoices.UNPUBLISHED, ugettext_lazy('MODEL_STATUS_UNPUBLISHED')),
+    (StatusChoices.REJECTED, ugettext_lazy('MODEL_STATUS_REJECTED')),
+    (StatusChoices.APPROVED, ugettext_lazy('MODEL_STATUS_APPROVED'))
+    )
 
 VALID_STATUS_CHOICES = (
      (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
@@ -67,7 +69,7 @@ ODATA_LICENSES = (
     ))
 )
 
-ODATA_FREQUENCY = (
+ODATA_FREQUENCY = Choices(
     ('', ugettext_lazy('APP-SELECTOPTION-TEXT')),
     ("yearly", ugettext_lazy('APP-YEARLY-TEXT')),
     ("monthly", ugettext_lazy('APP-MONTHLY-TEXT')),

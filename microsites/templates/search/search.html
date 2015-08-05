@@ -56,15 +56,14 @@
                 </div>
 
                 <div class="boxInner">
-                    {% for name, value in facets.items %}
-                        {% for facet, count in value.items %}
+                    {% for item in facets %}
                         <h5 class="minnorPaddingBottom">
-                            <a href="category/{{name}}:{{facet}}?q={{query}}">{{ facet }}</a> ({{ count }})
+                            <a href="{% url "search.action_search" %}/category/{{item.term}}?q={{query}}">{{ item.term|title}}</a> ({{ item.count }})
                             </h5>
-                        {% endfor %}
                     {% endfor %}
                 </div>
             </div>
+
 
             <div class="boxCR helpAndTipsBox">
                 <div class="boxTitle">

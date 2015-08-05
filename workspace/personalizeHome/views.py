@@ -1,4 +1,6 @@
 import re
+import json
+
 from django.views.decorators.http import require_POST
 from django.utils.translation import ugettext
 from django.views.decorators.csrf import csrf_exempt
@@ -11,7 +13,6 @@ from core.communitymanagers import *
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
 
-import json
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -24,6 +25,7 @@ def load(request):
     home_tab = True
     return render_to_response('personalizeHome/index.html/', locals())
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 @csrf_exempt
@@ -31,10 +33,10 @@ def load(request):
 def save(request):
     if request.method == 'POST':
         account = request.auth_manager.get_account()
-        jsonContent = request.POST['jsonString']
+        jsonContent = request.POST.get('jsonString')
         jsonObj = json.loads(jsonContent)
         preferences = account.get_preferences()
-        if (jsonObj['type'] == 'save'):
+        if jsonObj['type'] == 'save':
             if jsonObj['theme'] is None:
                 account.set_preference('account.has.home', False)
             else:
@@ -48,10 +50,11 @@ def save(request):
             account.set_preference('account.preview', jsonContent)
             return HttpResponse(json.dumps({'preview_home':previewHome}), content_type='application/json')
 
+
+@login_required
 @csrf_exempt
 def suggest(request):
-    auth_manager = request.auth_manager
-    account = auth_manager.get_account()
+    account = request.user.account
     preferences = account.get_preferences()
     if preferences['account_home_filters'] == 'featured_accounts':
         featured_accounts = Account.objects.get_featured_accounts(account.id)
@@ -59,10 +62,9 @@ def suggest(request):
     else:
         account_id = account.id
 
-    #if request.is_ajax():
     query = request.GET.get('term', '')
     if query:
-        resources = request.GET.getlist('resources[]', '')
+        resources = request.GET.getlist('resources[]', 'all')
         fm = FinderManager(ThemeFinder)
         results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
 
@@ -77,9 +79,9 @@ def suggest(request):
 
     return HttpResponse(data,  content_type='application/json')
 
-#@require_POST
+
 @csrf_exempt
-def upload( request ):
+def upload(request):
     value = ''
     for filename, file in request.FILES.iteritems():
         valuelist = request.FILES.getlist(filename)
@@ -105,23 +107,21 @@ def upload( request ):
             match = prog.search(user_agent)
             if match:
                 is_ie = True
-        if is_ie == True:
+        if is_ie:
             return HttpResponse(json.dumps({"url": value}),  content_type='text/plain')
         else:
             return HttpResponse(json.dumps({"url": value}),  content_type='application/json')
 
+
 @csrf_exempt
 def deleteFiles( request ):
-
     if request.method == 'POST':
-
             try:
                 accountid = str(request.auth_manager.account_id)
                 jsonContent = request.POST['deleteFilenames']
                 jsonObj = json.loads(jsonContent)
 
                 bucket = active_datastore.get_bucket(settings.AWS_CDN_BUCKET_NAME)
-                accountid = str(request.auth_manager.account_id)
 
                 if type(jsonObj) is list:
                     for fileName in jsonObj:

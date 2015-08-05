@@ -770,3 +770,171 @@ msgstr "On"
 
 msgid "APP-AT-TEXT"
 msgstr "at"
+
+msgid "EXCEPTION-ACTION-GENERIC"
+msgstr "If the problem persists please contact us."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM"
+msgstr "Review the datastream."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM-LIST"
+msgstr "Review datastreams."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM-CREATE"
+msgstr "Create datastream."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET"
+msgstr "Review the dataset."
+
+msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
+msgstr "Review dataviews, approve them and the publish."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
+msgstr "Review datasets"
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET-CREATE"
+msgstr "Create dataset."
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION"
+msgstr "Review the visualization"
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION-LIST"
+msgstr "Review visualizations."
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION-CREATE"
+msgstr "Create visualization."
+
+msgid "EXCEPTION-ACTION-CONTACT-US"
+msgstr "If the problem persists please contact us."
+
+msgid "EXCEPTION-TITLE-GENERIC"
+msgstr "Error"
+
+msgid "EXCEPTION-DESCRIPTION-GENERIC"
+msgstr "Error."
+
+msgid "EXCEPTION-TITLE-LIFE-CYCLE"
+msgstr "Publication Cycle Error"
+
+msgid "EXCEPTION-DESCRIPTION-LIFE-CYCLE"
+msgstr "We found an error on the publication cycle."
+
+msgid "EXCEPTION-TITLE-CHILD-NOT-APPROVED"
+msgstr "Dataviews need approval."
+
+msgid "EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED"
+msgstr "You need to approve the associated dataviews to publish. "
+
+msgid "EXCEPTION-TITLE-SAVE-ERROR"
+msgstr "Resource could not be saved."
+
+msgid "EXCEPTION-DESCRIPTION-SAVE-ERROR"
+msgstr "Try again in the next 5 minutes"
+
+msgid "EXCEPTION-TITLE-DATASET-SAVE-ERROR"
+msgstr "Dataset could not be saved.."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR"
+msgstr "Dataview could not be saved.."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-SAVE-ERROR"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-SAVE-ERROR"
+msgstr "Visualization could not be saved.."
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-SAVE-ERROR"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-FOUND"
+msgstr "The URL requested is invalid or no longer available."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND"
+msgstr "It might have been removed, or its URL has been changed because of a new revision."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-FOUND"
+msgstr "The URL requested is invalid or no longer available."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-FOUND"
+msgstr "It might have been removed, or its URL has been changed because of a new revision."
+
+msgid "EXCEPTION-TITLE-VIZUALIZATION-REQUIRED"
+msgstr "The URL requested is invalid or no longer available."
+
+msgid "EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED"
+msgstr "It might have been removed, or its URL has been changed because of a new revision."
+
+msgid "EXCEPTION-TITLE-ILLEGAL-STATE"
+msgstr "Change of status denied."
+
+msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
+msgstr "The change of status you are requesting is not allowed.."
+
+msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
+msgstr "Resource can't be published"
+
+msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
+msgstr "A previous step is needed."
+
+msgid "EXCEPTION-TITLE-DASTREAM-PARENT-NOT-PUBLISHED"
+msgstr "You can´t create dataviews yet."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-PARENT-NOT-PUBLISHED"
+msgstr "You must create a dataset first to generate a dataview."
+
+msgid "EXCEPTION-TITLE-DATASET-PARENT-NOT-PUBLISHED"
+msgstr "You can´t create visualizations yet."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-PARENT-NOT-PUBLISHED"
+msgstr "You must create a dataview first to generate a visualization."
+
+msgid "EXCEPTION-TITLE-RESOURCE-REQUIRED"
+msgstr "Servers can´t process your request at the moment."
+
+msgid "EXCEPTION-DESCRIPTION-RESOURCE-REQUIRED"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-ANY-RESOURCE-REQUIRED"
+msgstr "You can´t create resources yet"
+
+msgid "EXCEPTION-DESCRIPTION-ANY-RESOURCE-REQUIRED"
+msgstr "You must create a resource parent first."
+
+msgid "EXCEPTION-TITLE-DATASET-REQUIRED"
+msgstr "Servers can´t process your request at the moment."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-REQUIRED"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-REQUIRED"
+msgstr "Servers can´t process your request at the moment."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-REQUIRED"
+msgstr "Try again in the next 5 minutes."
+
+msgid "EXCEPTION-TITLE-ANY-DATASET-REQUIRED"
+msgstr "You can´t create dataviews yet."
+
+msgid "EXCEPTION-DESCRIPTION-ANY-DATASET-REQUIRED"
+msgstr "You must create a dataset first to generate a dataview."
+
+msgid "EXCEPTION-TITLE-ANY-DATASTREAM-REQUIRED"
+msgstr "You can´t create visualizations yet."
+
+msgid "EXCEPTION-DESCRIPTION-ANY-DATASTREAM-REQUIRED"
+msgstr "You must create a dataview first to generate a visualization."
+
+msgid "EXCEPTION-TITLE-INSUFFICIENT-PRIVILEGES"
+msgstr "You don't have permissions to perform the requested action."
+
+msgid "EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES"
+msgstr "Contact your account administrator and verify your role permissions."
+
+msgid "EXCEPTION-TITLE-REQUIRES-REVIEW"
+msgstr "Resource needs review."
+
+msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
+msgstr "You cannot edit a resource while waiting for review."

@@ -5,6 +5,7 @@ class SearchForm(forms.Form):
     q = forms.RegexField(label='Query', max_length=512, required=False, regex = r'[a-zA-Z0-9]+|%')
     page = forms.IntegerField(label='Page', required=False)
     tag = forms.RegexField(label='Tag', required=False, regex = r'[a-zA-Z0-9]+')
+    order = forms.RegexField(label='Order', required=False, regex = r'[a-zA-Z0-9]+')
 
     def clean_page(self):
         # default page
@@ -21,6 +22,9 @@ class SearchForm(forms.Form):
 
     def clean_tag(self):
         return self.cleaned_data['tag'].strip()
+
+    def clean_order(self):
+        return self.cleaned_data['order'].strip()
 
     def get_query(self):
         query = self.cleaned_data['q'].replace('#', '')

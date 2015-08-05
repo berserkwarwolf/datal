@@ -758,7 +758,175 @@ msgid "APP-LICENSES-DATA"
 msgstr "Licencias de datos"
 
 msgid "APP-ON-TEXT"
-msgstr ""
+msgstr "El"
 
 msgid "APP-AT-TEXT"
 msgstr "a las"
+
+msgid "EXCEPTION-ACTION-GENERIC"
+msgstr "Si el problema persiste contactarnos."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM"
+msgstr "Revisar la vista."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM-LIST"
+msgstr "Revisar las vistas."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASREAM-CREATE"
+msgstr "Crear una vista."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET"
+msgstr "Revisar el conjunto de datos."
+
+msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
+msgstr "Revisar vistas, aprobarlas y publicar."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
+msgstr "Revisar conjuntos de datos."
+
+msgid "EXCEPTION-ACTION-VIEW-DATASET-CREATE"
+msgstr "Crear un conjunto de datos."
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION"
+msgstr "Revisar la visualización"
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION-LIST"
+msgstr "Revisar las visualizaciones"
+
+msgid "EXCEPTION-ACTION-VIEW-VISUALIZATION-CREATE"
+msgstr "Crear una visualización"
+
+msgid "EXCEPTION-ACTION-CONTACT-US"
+msgstr "Si el problema persiste contactarnos."
+
+msgid "EXCEPTION-TITLE-GENERIC"
+msgstr "Error"
+
+msgid "EXCEPTION-DESCRIPTION-GENERIC"
+msgstr "Hubo un error en el sistema DATAL."
+
+msgid "EXCEPTION-TITLE-LIFE-CYCLE"
+msgstr "Error en Ciclo de Publicación"
+
+msgid "EXCEPTION-DESCRIPTION-LIFE-CYCLE"
+msgstr "Hubo un error en el ciclo de publicación de recursos."
+
+msgid "EXCEPTION-TITLE-CHILD-NOT-APPROVED"
+msgstr "Vistas sin aprobar"
+
+msgid "EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED"
+msgstr "Es necesario aprobar las vistas asociadas para poder publicar."
+
+msgid "EXCEPTION-TITLE-SAVE-ERROR"
+msgstr "Error al guardar recurso."
+
+msgid "EXCEPTION-DESCRIPTION-SAVE-ERROR"
+msgstr "Hubo un error al guardar el recurso."
+
+msgid "EXCEPTION-TITLE-DATASET-SAVE-ERROR"
+msgstr "En este momento no pudimos guardar el conjunto de datos."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR"
+msgstr "En este momento no pudimos guardar la vista."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-SAVE-ERROR"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-SAVE-ERROR"
+msgstr "En este momento no pudimos guardar la visualización."
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-SAVE-ERROR"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-FOUND"
+msgstr "La url que éstas solicitando no es válida o ya no está disponible"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND"
+msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-FOUND"
+msgstr "La url que éstas solicitando no es válida o ya no está disponible"
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-FOUND"
+msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
+
+msgid "EXCEPTION-TITLE-VIZUALIZATION-REQUIRED"
+msgstr "La url que éstas solicitando no es válida o ya no está disponible"
+
+msgid "EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED"
+msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
+
+msgid "EXCEPTION-TITLE-ILLEGAL-STATE"
+msgstr "Cambio de estado denegado"
+
+msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
+msgstr "El cambio de estado que estas solicitando no esta permitido."
+
+msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
+msgstr "No se puede publicar el recurso"
+
+msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
+msgstr "Es necesario publicar el conjunto de datos asociado"
+
+msgid "EXCEPTION-TITLE-DASTREAM-PARENT-NOT-PUBLISHED"
+msgstr "No se pudo publicar la vista"
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-PARENT-NOT-PUBLISHED"
+msgstr "Es necesario publicar el conjunto de datos asociado."
+
+msgid "EXCEPTION-TITLE-DATASET-PARENT-NOT-PUBLISHED"
+msgstr "No se pudo publicar la visualización"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-PARENT-NOT-PUBLISHED"
+msgstr "Es necesario publicar la vista asociada."
+
+msgid "EXCEPTION-TITLE-RESOURCE-REQUIRED"
+msgstr "En este momento no es posible procesar tu solicitud."
+
+msgid "EXCEPTION-DESCRIPTION-RESOURCE-REQUIRED"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-ANY-RESOURCE-REQUIRED"
+msgstr "Aún no podés crear recursos"
+
+msgid "EXCEPTION-DESCRIPTION-ANY-RESOURCE-REQUIRED"
+msgstr "Deberás primero crear un recurso padre."
+
+msgid "EXCEPTION-TITLE-DATASET-REQUIRED"
+msgstr "En este momento no es posible procesar tu solicitud."
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-REQUIRED"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-REQUIRED"
+msgstr "En este momento no es posible procesar tu solicitud."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-REQUIRED"
+msgstr "Intentalo nuevamente en los próximos 5 minutos."
+
+msgid "EXCEPTION-TITLE-ANY-DATASET-REQUIRED"
+msgstr "Aún no podés crear vistas"
+
+msgid "EXCEPTION-DESCRIPTION-ANY-DATASET-REQUIRED"
+msgstr "Deberás primero crear un conjunto de datos para generar una vista."
+
+msgid "EXCEPTION-TITLE-ANY-DATASTREAM-REQUIRED"
+msgstr "Aún no podés crear visualizaciones"
+
+msgid "EXCEPTION-DESCRIPTION-ANY-DATASTREAM-REQUIRED"
+msgstr "Deberás primero crear una vista para generar una visualización."
+
+msgid "EXCEPTION-TITLE-INSUFFICIENT-PRIVILEGES"
+msgstr "No posees permisos para realizar la acción solicitada."
+
+msgid "EXCEPTION-DESCRIPTION-INSUFFICIENT-PRIVILEGES"
+msgstr "Contactese con el administrador de su cuenta y verifique los permisos de su rol"
+
+msgid "EXCEPTION-TITLE-REQUIRES-REVIEW"
+msgstr "El recurso está pendiente de aprobación."
+
+msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
+msgstr "Hasta que no se apruebe el recurso no se puede editar."

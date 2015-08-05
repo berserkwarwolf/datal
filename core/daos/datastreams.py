@@ -4,6 +4,8 @@ from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
 from core.lib.searchify import SearchifyIndex
+from core.lib.elastic import ElasticsearchIndex
+import time
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -77,61 +79,98 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 class DatastreamSearchDAOFactory():
     """ select Search engine"""
     
-    def create(self):
+    def create(self, datastream_revision):
         if settings.USE_SEARCHINDEX == 'searchify':
-            self.search_dao = DatastreamSearchifyDAO()
+            self.search_dao = DatastreamSearchifyDAO(datastream_revision)
+        elif settings.USE_SEARCHINDEX == 'elasticsearch':
+            self.search_dao = DatastreamElasticsearchDAO(datastream_revision)
+        elif settings.USE_SEARCHINDEX == 'test':
+            self.search_dao = DatastreamSearchDAO(datastream_revision)
         else:
             raise SearchIndexNotFoundException()
 
         return self.search_dao
         
         
-class DatastreamSearchifyDAO():
+class DatastreamSearchDAO():
     """ class for manage access to datasets' searchify documents """
-    def __init__(self):
+
+    TYPE="ds"
+    def __init__(self, datastream_revision):
+        self.datastream_revision=datastream_revision
         self.search_index = SearchifyIndex()
+
+    def _get_type(self):
+        return self.TYPE
+    def _get_id(self):
+        """ Get Tags """
+        return "%s::%s" %(self.TYPE.upper(),self.datastream_revision.datastream.guid)
+
+    def _get_tags(self):
+        """ Get Tags """
+        return self.datastream_revision.tagdatastream_set.all().values_list('tag__name', flat=True)
+
+    def _get_category(self):
+        """ Get category name """
+        return self.datastream_revision.category.categoryi18n_set.all()[0]
+
+    def _get_i18n(self):
+        """ Get category name """
+        return DatastreamI18n.objects.get(datastream_revision=self.datastream_revision)
         
-    def add(self, datastream_revision):
+    def _build_document(self):
 
-        import time
+        tags = self._get_tags()
 
-        tags = datastream_revision.tagdatastream_set.all().values_list('tag__name', flat=True)
-        # Get category name
-        category = datastream_revision.category.categoryi18n_set.all()[0]
-        datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision)
+        category = self._get_category()
+        datastreami18n = self._get_i18n()
 
-        text = [datastreami18n.title, datastreami18n.description, datastream_revision.user.nick, datastream_revision.datastream.guid]
+        text = [datastreami18n.title, datastreami18n.description, self.datastream_revision.user.nick, self.datastream_revision.datastream.guid]
         text.extend(tags) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
         document = {
-                'docid' : "DS::" + str(datastream_revision.datastream.guid),
+                'docid' : self._get_id(),
                 'fields' :
-                    {'type' : 'ds',
-                     'datastream_id': datastream_revision.datastream.id,
-                     'datastream__revision_id': datastream_revision.id,
+                    {'type' : self.TYPE,
+                     'datastream_id': self.datastream_revision.datastream.id,
+                     'datastream__revision_id': self.datastream_revision.id,
                      'title': datastreami18n.title,
                      'text': text,
                      'description': datastreami18n.description,
-                     'owner_nick' :datastream_revision.user.nick,
+                     'owner_nick' :self.datastream_revision.user.nick,
                      'tags' : ','.join(tags),
-                     'account_id' : datastream_revision.user.account.id,
+                     'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
-                     'timestamp': int(time.mktime(datastream_revision.created_at.timetuple())),
-                     'end_point': datastream_revision.dataset.last_published_revision.end_point,
+                     'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
+                     'end_point': self.datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
-        # Update dict with facets
-        # try:
-        #     document = add_facets_to_doc(self, account, document)
-        # except Exception, e:
-        #     logger.error("indexable_dict ERROR: [%s]" % str(e))
-
-        # document['fields'].update(get_meta_data_dict(datastream.meta_text))
-
-        self.search_index.indexit(document)
+        return document
+        
+class DatastreamSearchifyDAO(DatastreamSearchDAO):
+    """ class for manage access to datasets' searchify documents """
+    def __init__(self, datastream_revision):
+        self.datastream_revision=datastream_revision
+        self.search_index = SearchifyIndex()
+        
+    def add(self):
+        self.search_index.indexit(self._build_document())
         
     def remove(self, datastream_revision):
-        self.search_index.delete_documents(["DS::" + str(datastream_revision.datastream.guid)])
+        self.search_index.delete_documents([self._get_id()])
+
+class DatastreamElasticsearchDAO(DatastreamSearchDAO):
+    """ class for manage access to datasets' elasticsearch documents """
+
+    def __init__(self, datastream_revision):
+        self.datastream_revision=datastream_revision
+        self.search_index = ElasticsearchIndex()
+        
+    def add(self):
+        self.search_index.indexit(self._build_document())
+        
+    def remove(self):
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
