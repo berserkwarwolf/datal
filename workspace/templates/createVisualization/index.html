@@ -1,10 +1,13 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags%}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags static%}
 
 {% block meta %}
 
+ {% load static %}
+<script type="text/javascript" src='{% static 'handsontable/dist/handsontable.full.js' %}'></script>
 
 {% compress css %}
+<link href='{% static 'handsontable/dist/handsontable.full.css' %}' type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
@@ -15,6 +18,7 @@
 <script language="javascript" src="/js_workspace/createVisualization/StartStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/DataStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/TypeStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
 
 <meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
@@ -56,6 +60,7 @@
 {% endblock %}
 
 {% block bottom_js %}
+<script language="javascript" src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var createVisualizationModel = new CreateVisualizationModel({
@@ -71,5 +76,8 @@ $(document).ready(function(){
     model: stateModel
   });
 
+  var myView = new DataTableView({
+    el: '#example'
+  })
 </script>
 {% endblock %}
