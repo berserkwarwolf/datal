@@ -337,7 +337,8 @@ class FileForm(DatasetForm):
             'data-bind':'value:file_data,events:[\'keyup\']',
             'tabindex':0,
             'data-other':'#id_file_name',
-            'autofocus':'autofocus'
+            'autofocus':'autofocus',
+            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
         })
     )
 
