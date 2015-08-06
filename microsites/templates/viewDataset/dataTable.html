@@ -53,7 +53,7 @@
                       		<h3><a href="/dataviews/{{ resource.datastream__id }}/{{ resource.datastream__guid }}" title="{{ resource.datastreami18n__title }}">{{ resource.datastreami18n__title }}</a></h3>
                         	<p>{{ resource.datastreami18n__description }}</p>
                           <div class="api_example">
-                            <p>API request example:</p>
+                            <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
                             <p>http://{{preferences.account_api_domain}}/dataviews/invoke/{{resource.datastream__guid}}?auth_key=YOUR_API_KEY</p>
                           </div>
                       	</i>

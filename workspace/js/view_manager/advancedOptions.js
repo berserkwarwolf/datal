@@ -678,7 +678,15 @@ var FunctionsOption = Backbone.Model.extend({
 		
 		$('.ao-no-select').hide();
 		DataTableObj.attributes.disableSelection = false;
-		DataTableObj.attributes.$Table.customSelectable( "option", "disable", false);
+
+		// El plugin 'customSelectable' asociado a $table parece no estar inicializado al momento 
+		// de llamarse el siguiente método. Meto este try/catch para salir del problema por ahora.
+		try {
+			DataTableObj.attributes.$Table.customSelectable( "option", "disable", false);
+		}
+		catch (err) {
+			console.error(err);
+		}
 		
 		$('#id_functionsNotification').hide();
 	}

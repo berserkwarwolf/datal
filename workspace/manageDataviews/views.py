@@ -211,7 +211,7 @@ def create(request):
             datastream_id = None
 
             if auth_manager.is_level('level_5'):
-                meta_data = Account.objects.get(pk = auth_manager.account_id).meta_data
+                meta_data = Account.objects.get(pk=auth_manager.account_id).meta_data
 
             dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
             end_point = dataset_revision.end_point

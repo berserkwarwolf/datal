@@ -11,6 +11,7 @@ curtsies==0.1.19
 DateTime==4.0.1
 Django==1.6.11
 django-appconf==1.0.1
+django-bower==5.0.4
 django-celery==3.1.16
 django-compressor==1.5
 django-extensions==1.5.2
@@ -44,3 +45,4 @@ python-sftp-client==0.2
 django-post-office==1.1.2
 django-model-utils==2.2
 elasticsearch
+git+https://github.com/flaptor/indextank-py.git#egg=indextank

@@ -85,7 +85,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         return self.datastream_revision
 
-    def publish(self, allowed_states=PUBLISH_ALLOWED_STATES):
+    def publish(self, allowed_states=PUBLISH_ALLOWED_STATES, parent_status=None):
         """ Publica una revision de dataset """
 
         if self.datastream_revision.status not in allowed_states:
@@ -93,11 +93,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PUBLISHED,
                                     allowed_states=allowed_states)
-
-        status = StatusChoices.PUBLISHED
+        if parent_status != StatusChoices.PUBLISHED:
+            if self.datastream_revision.dataset.last_revision.status != StatusChoices.PUBLISHED:
+                raise ParentNotPuslishedException()
 
         self._publish_childs()
-        self.datastream_revision.status = status
+        self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()
 
         self._update_last_revisions()
@@ -109,13 +110,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def _publish_childs(self):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
-        with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(dataset=self.datastream.id,
-                                                                                id=F('datastream__last_revision__id'))
 
-            for datastream in datastreams:
-                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).publish(
-                    allowed_states=[StatusChoices.APPROVED])
+        # Comentado ya que no hay hijos de datastreams hasta que no haya visualizaciones
+        pass
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
@@ -255,7 +252,6 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
-
         if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
@@ -271,7 +267,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if form_status == StatusChoices.DRAFT:
                 self.unpublish()
             else:
-                 self._update_last_revisions()
+                self._update_last_revisions()
         else:
             # Actualizo sin el estado
             self.datastream_revision = DataStreamDBDAO().update(
@@ -311,11 +307,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
-        return super(DatastreamLifeCycleManager, self)._log_activity(
-            action_id,
-            self.datastream_revision.dataset.id,
-            self.datastream_revision.dataset.type,
-            self.datastream_revision.id, "#TODO get title")
+        title = self.datastreami18n.title if self.datastreami18n else ''
+
+        return super(DatastreamLifeCycleManager, self)._log_activity(action_id, self.datastream_revision.dataset.id,
+            self.datastream_revision.dataset.type, self.datastream_revision.id, title)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """
@@ -330,7 +325,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.datastream.last_published_revision = DataStreamRevision.objects.get(pk=last_published_revision_id)
+                    self.datastream.last_published_revision = DataStreamRevision.objects.get(
+                        pk=last_published_revision_id)
 
             self.datastream.save()
         else:
