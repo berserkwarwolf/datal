@@ -344,7 +344,7 @@ class FileForm(DatasetForm):
     def clean(self):
         if 'file_data' in self.cleaned_data.keys():
             if self.cleaned_data['file_data'].content_type in ['image/jpeg', 'application/zip',
-                                                               'application/x-rar']:
+                                                               'application/x-rar', 'application/octet-stream']:
                  raise FileTypeNotValidException()
         return self.cleaned_data
 
