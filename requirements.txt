@@ -44,5 +44,5 @@ zope.interface==4.1.1
 python-sftp-client==0.2
 django-post-office==1.1.2
 django-model-utils==2.2
-elasticsearch
 git+https://github.com/flaptor/indextank-py.git#egg=indextank
+elasticsearch
