@@ -10,6 +10,14 @@
 <link href='{% static 'handsontable/dist/handsontable.full.css' %}' type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<style type="text/css">
+  td.hot-sel-1 {
+    background-color: lightgreen;
+  }
+  td.hot-sel-2 {
+    background-color: lightyellow;
+  }
+</style>
 {% endcompress %}
 
 <script language="javascript" src="/js_workspace/createVisualization/createVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -76,8 +84,17 @@ $(document).ready(function(){
     model: stateModel
   });
 
+  var data = [
+    ["Year", "Ford", "Volvo", "Toyota", "Honda"],
+    ["2014", 10, 11, 12, 13],
+    ["2015", 20, 11, 14, 13],
+    ["2016", 30, 15, 12, 13]
+  ];
+
   var myView = new DataTableView({
     el: '#example'
-  })
+  });
 </script>
+
+
 {% endblock %}
