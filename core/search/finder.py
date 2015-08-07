@@ -7,6 +7,7 @@ from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
 from core.helpers import slugify
 from core import helpers, choices
+from core.exceptions import SearchIndexNotFoundException
 
 
 class FinderManager:
@@ -39,6 +40,7 @@ class FinderManager:
 from core.lib.elastic import ElasticsearchIndex
 from core.lib.searchify import SearchifyIndex
 
+
 class Finder:
 
     order_by = {}
@@ -47,7 +49,7 @@ class Finder:
 
         self.logger = logging.getLogger(__name__)
         self.logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
-	if settings.USE_SEARCHINDEX == 'searchify':
+        if settings.USE_SEARCHINDEX == 'searchify':
             self.index = SearchifyIndex()
         elif settings.USE_SEARCHINDEX == 'elasticsearch':
             self.index = ElasticsearchIndex()
@@ -113,16 +115,9 @@ class Finder:
         slug = slugify(title)
         permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.datastream_manager.urls', kwargs={'id': id, 'slug': slug})
 
-        l_datastream = dict (dataservice_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                , category = p_doc['category_name']
-                                , category_name = p_doc['category_name']
-                                )
+        l_datastream = dict (dataservice_id=id, title=title, description=p_doc['description'], parameters=l_parameters,
+                             tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ], permalink=permalink,
+                             type=p_doc['type'], category=p_doc['category_name'], category_name=p_doc['category_name'])
 
         return l_datastream
 
@@ -139,14 +134,9 @@ class Finder:
         permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
                                                                                                'slug': slug})
 
-        l_dataset = dict (dataset_id=dataset_id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
+        l_dataset = dict (dataset_id=dataset_id, title=title, description=p_doc['description'], parameters=l_parameters,
+                          tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ], permalink=permalink,
+                          type=p_doc['type'])
         return l_dataset
 
     def get_visualization_dictionary(self, p_doc):
@@ -163,14 +153,9 @@ class Finder:
         slug = slugify(title)
         permalink = reverse('chart_manager.action_view', kwargs={'id': id, 'slug': slug})
 
-        visualization = dict(visualization_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
+        visualization = dict(visualization_id=id, title=title, description=p_doc['description'],
+                             parameters=l_parameters, tags=[l_tag.strip() for l_tag in p_doc['tags'].split(',')],
+                             permalink=permalink, type=p_doc['type'])
         return visualization
 
     def get_dashboard_dictionary(self, p_doc):
@@ -180,14 +165,9 @@ class Finder:
         slug = slugify(title)
         permalink = reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug})
 
-        dashboard_dict = dict (dashboard_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , tags=[ tag.strip() for tag in p_doc['tags'].split(',') ]
-                                , user_nick=p_doc['owner_nick']
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
+        dashboard_dict = dict (dashboard_id=id, title=title, description=p_doc['description'],
+                               tags=[tag.strip() for tag in p_doc['tags'].split(',')], user_nick=p_doc['owner_nick'],
+                               permalink=permalink, type = p_doc['type'])
         return dashboard_dict
 
     def _get_query(self, values, boolean_operator = 'AND'):
@@ -211,6 +191,7 @@ class Finder:
         boolean_operators = ['AND', '+', 'OR', 'NOT', '-']
         if boolean_operator not in boolean_operators:
             raise Exception('Boolean operator used, does not exists')
+
     def _get_category_filters(self, category_filters, filter_key, filter_value):
         if filter_value:
             if type(filter_value) == types.ListType:
