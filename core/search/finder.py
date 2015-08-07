@@ -113,7 +113,9 @@ class Finder:
         id = p_doc['datastream_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.datastream_manager.urls', kwargs={'id': id, 'slug': slug})
+        permalink = '/{}{}'.format('dataviews', reverse('datastream_manager.action_view',
+                                                        urlconf='microsites.datastream_manager.urls',
+                                                        kwargs={'id': id, 'slug': slug}))
 
         l_datastream = dict (dataservice_id=id, title=title, description=p_doc['description'], parameters=l_parameters,
                              tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ], permalink=permalink,
@@ -131,8 +133,8 @@ class Finder:
         dataset_id = p_doc['dataset_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
-                                                                                               'slug': slug})
+        permalink = '/{}{}'.format('datasets', reverse('manageDatasets.action_view', urlconf='microsites.urls', kwargs={'dataset_id': dataset_id,
+                                                                                               'slug': slug}))
 
         l_dataset = dict (dataset_id=dataset_id, title=title, description=p_doc['description'], parameters=l_parameters,
                           tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ], permalink=permalink,
@@ -151,7 +153,8 @@ class Finder:
         id = p_doc['visualization_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', kwargs={'id': id, 'slug': slug})
+        permalink = '/{}{}'.format('visualizations', reverse('chart_manager.action_view',
+                                                             kwargs={'id': id, 'slug': slug}))
 
         visualization = dict(visualization_id=id, title=title, description=p_doc['description'],
                              parameters=l_parameters, tags=[l_tag.strip() for l_tag in p_doc['tags'].split(',')],
@@ -163,7 +166,7 @@ class Finder:
         id = p_doc['dashboard_id']
         title = p_doc['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug})
+        permalink = '/{}{}'.format('dashboards', reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug}))
 
         dashboard_dict = dict (dashboard_id=id, title=title, description=p_doc['description'],
                                tags=[tag.strip() for tag in p_doc['tags'].split(',')], user_nick=p_doc['owner_nick'],
