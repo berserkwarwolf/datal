@@ -17,6 +17,15 @@
   td.hot-sel-2 {
     background-color: lightyellow;
   }
+  td.hot-sel-3 {
+    background-color: lightblue;
+  }
+  td.hot-sel-4 {
+    background-color: #aaa;
+  }
+  td.hot-sel-5 {
+    background-color: #f00;
+  }
 </style>
 {% endcompress %}
 
@@ -68,7 +77,12 @@
 {% endblock %}
 
 {% block bottom_js %}
+
+{# templates backbone #}
+{% include "createVisualization/templates.html" %}
+
 <script language="javascript" src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var createVisualizationModel = new CreateVisualizationModel({
@@ -84,6 +98,13 @@ $(document).ready(function(){
     model: stateModel
   });
 
+  var selectedCollection = new Backbone.Collection();
+
+  var selectedRangesView = new SelectedRangesView({
+    el: '.selected-ranges-view',
+    collection: selectedCollection
+  });
+
   var data = [
     ["Year", "Ford", "Volvo", "Toyota", "Honda"],
     ["2014", 10, 11, 12, 13],
@@ -92,9 +113,9 @@ $(document).ready(function(){
   ];
 
   var myView = new DataTableView({
-    el: '#example'
+    el: '#example',
+    collection: selectedCollection
   });
 </script>
-
 
 {% endblock %}

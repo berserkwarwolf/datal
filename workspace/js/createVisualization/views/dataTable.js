@@ -1,13 +1,7 @@
-var SelectionCollection = Backbone.Collection.extend({
-  model: Backbone.Model
-});
-
-
 var DataTableView = Backbone.View.extend({
 
   events: {
-    'click button.add-btn': 'onClickAdd',
-    'click button.add-btn-2': 'onClickAdd2'
+    'click button.add-btn': 'addSelection',
   },
 
   initialize: function () {
@@ -15,10 +9,10 @@ var DataTableView = Backbone.View.extend({
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
       data: data,
-      minSpareRows: 1,
+      // minSpareRows: 1,
       rowHeaders: true,
       colHeaders: true,
-      contextMenu: true,
+      // contextMenu: true,
       renderer: function(instance, TD, row, col, prop, value, cellProperties) {
         if (cellProperties.classname) {
           TD.classList.add(cellProperties.classname);
@@ -27,14 +21,21 @@ var DataTableView = Backbone.View.extend({
       }
     });
 
-    this.selectionCol = new SelectionCollection();
-
     this.selectionEl = this.$('.selected-cells');
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       console.log('afterSelectionEnd: ', [r1, c1, r2, c2]);
-      self.cacheSelection([r1, c1, r2, c2]);
+      self.cacheSelection({
+        from:{
+          row: r1,
+          col: c1
+        },
+        to: {
+          row: r2,
+          col: c2
+        }
+      });
       self.selectionEl.text([r1, c1, r2, c2].join(', '));
     });
 
@@ -49,38 +50,57 @@ var DataTableView = Backbone.View.extend({
         self.selectionEl.text('row ' + coords.row);
       };
     });
+
+    this.listenTo(this.collection, 'add', this.onAddSelected, this);
+    this.listenTo(this.collection, 'remove', this.onRmSelected, this);
   },
 
   cacheSelection: function (coords) {
-    this.selectedCoords = coords;
-    this.range = this.table.getSelectedRange();
+    this._selectedCoordsCache = coords;
+    console.log(this.coordsToCells(coords));
+    this.range = this.coordsToCells(coords);
   },
 
-  addClassToSelection: function (classname) {
-    var cells = this.range.getAll();
-    for (var i = 0; i < cells.length; i++) {
-      this.table.setCellMeta(cells[i].row, cells[i].col, 'classname', classname);
-    };
+  addClassToSelection: function (cells, classname) {
+    this.setCellClass(cells, classname);
     this.table.render();
   },
 
-  onClickAdd: function () {
-    // this.addClassToSelection('hot-sel-1');
-    this.addSelection();
+  coordsToCells: function (coords) {
+    var cells = [],
+      rows = _.range(coords.from.row, coords.to.row + 1),
+      cols = _.range(coords.from.col, coords.to.col + 1);
+    _.each(rows, function (row) {
+      _.each(cols, function (col) {
+        cells.push({row: row, col: col});
+      });
+    });
+    return cells;
   },
 
-  onClickAdd2: function () {
-    this.addSelection();
+  setCellClass: function (cells, classname) {
+    for (var i = 0; i < cells.length; i++) {
+      this.table.setCellMeta(cells[i].row, cells[i].col, 'classname', classname);
+    };
   },
 
   addSelection: function () {
     var newSelection = new Backbone.Model({
-      range: this.selectedCoords,
-      id: this.selectionCol.length + 1
+      range: this._selectedCoordsCache,
+      id: this.collection.length + 1
     });
-    this.addClassToSelection('hot-sel-' + newSelection.get('id'));
-    this.selectionCol.add(newSelection);
-    console.log(newSelection);
+    this.collection.add(newSelection);
+  },
+
+  onAddSelected: function (model) {
+    console.log(model);
+    var cells = this.coordsToCells(model.get('range'));
+    this.addClassToSelection(cells, 'hot-sel-' + model.get('id'));
+  },
+
+  onRmSelected: function (model) {
+    console.log(model);
+    this.table.removeCellMeta()
   }
 });
 
