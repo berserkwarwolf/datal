@@ -758,7 +758,7 @@ msgid "APP-LICENSES-DATA"
 msgstr "Licencias de datos"
 
 msgid "APP-ON-TEXT"
-msgstr ""
+msgstr "El"
 
 msgid "APP-AT-TEXT"
 msgstr "a las"
@@ -865,11 +865,17 @@ msgstr "Cambio de estado denegado"
 msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
 msgstr "El cambio de estado que estas solicitando no esta permitido."
 
+msgid "EXCEPTION-TITLE-FILE-INVALID"
+msgstr "Archivo no valido"
+
+msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
+msgstr "Ingrese un tipo de archivo valido."
+
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar el recurso"
 
 msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
-msgstr "Es necesario un paso previo."
+msgstr "Es necesario publicar el conjunto de datos asociado"
 
 msgid "EXCEPTION-TITLE-DASTREAM-PARENT-NOT-PUBLISHED"
 msgstr "No se pudo publicar la vista"

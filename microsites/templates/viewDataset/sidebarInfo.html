@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load extra_tags components %}
+{% load extra_tags components dataset_tags %}
 
 <div class="box infoBox" id="id_infoSidebar">
 
@@ -44,7 +44,7 @@
             <header>
                 <h1>{% trans 'APP-UPDATE-FREQUENCY-TEXT' %}</h1>
             </header>
-            <p>{{dataset.frequency|capfirst}}</p>
+            <p>{{dataset.frequency|frequency_str|capfirst}}</p>
         </article>
         {% endif %}
 

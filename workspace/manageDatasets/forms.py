@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy
 
 from core import choices
 from core.models import CategoryI18n
+from core.exceptions import FileTypeNotValidException
 from workspace.common.forms import TagForm, SourceForm
 
 
@@ -336,9 +337,17 @@ class FileForm(DatasetForm):
             'data-bind':'value:file_data,events:[\'keyup\']',
             'tabindex':0,
             'data-other':'#id_file_name',
-            'autofocus':'autofocus'
+            'autofocus':'autofocus',
+            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
         })
     )
+
+    def clean(self):
+        if 'file_data' in self.cleaned_data.keys() and self.cleaned_data['file_data']:
+            if self.cleaned_data['file_data'].content_type in ['image/jpeg', 'application/zip',
+                                                               'application/x-rar']:
+                 raise FileTypeNotValidException()
+        return self.cleaned_data
 
 
 class DatasetFormFactory:

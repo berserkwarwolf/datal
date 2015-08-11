@@ -200,44 +200,9 @@ var CollectFileView = StepView.extend({
 	},
 
 	onFileUploadFail:function(event, data){
-
-		// Hide Loadings
-		$("#ajax_loading_overlay").hide();
-
-		var msg = "";
-
-		try {
-			if (data.messages){
-				ks = Object.keys(data.messages);
-				msg = ks;
-			}
-			if (data.jqXHR.responseText != ""){
-					response = JSON.parse(data.jqXHR.responseText);
-					msg = response.messages.join('. ');
-			}
-
-			// Set Error Message
-			$.gritter.add({
-				title: 'Error',
-				text: msg,
-				image: '/static/workspace/images/common/ic_validationError32.png',
-				sticky: false,
-				time: 3000
-			});  
-
-		} catch (error) {
-
-			// Set Error Message
-			$.gritter.add({
-				title: 'Error',
-				text: gettext('ERROR-LOADING-DATASET'),
-				image: '/static/workspace/images/common/ic_validationError32.png',
-				sticky: false,
-				time: 3000
-			});
-
-		}
-
+        // Hide Loadings
+        $("#ajax_loading_overlay").hide();
+        datalEvents.trigger('datal:application-error', data);
 	},
 
 });

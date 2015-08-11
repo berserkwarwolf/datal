@@ -78,6 +78,14 @@ sync_db:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py syncdb --noinput --settings=microsites.settings
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py syncdb --noinput --settings=workspace.settings
 
+bower_install:
+  cmd.run:
+    - user: {{ user }}
+    - group: {{ group }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; CI=true python manage.py bower_install --settings=core.settings
+
 migrate_db:
   cmd.run:
     - user: {{ user }}
@@ -93,6 +101,7 @@ fixtures:
     - cwd: {{ pillar['application']['path'] }}
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  core/fixtures/* --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py loaddata  admin/fixtures/* --settings=admin.settings
 
 language:
   cmd.run:

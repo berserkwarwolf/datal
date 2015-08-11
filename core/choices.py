@@ -69,7 +69,7 @@ ODATA_LICENSES = (
     ))
 )
 
-ODATA_FREQUENCY = (
+ODATA_FREQUENCY = Choices(
     ('', ugettext_lazy('APP-SELECTOPTION-TEXT')),
     ("yearly", ugettext_lazy('APP-YEARLY-TEXT')),
     ("monthly", ugettext_lazy('APP-MONTHLY-TEXT')),

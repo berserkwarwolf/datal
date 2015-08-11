@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'raven.contrib.django',
     "compressor",
     "post_office",
+    'djangobower',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -304,6 +305,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'compressor.finders.CompressorFinder',
+    'djangobower.finders.BowerFinder',
     'sass_processor.finders.CssFinder',
 )
 
@@ -325,6 +327,13 @@ SOUTH_MIGRATION_MODULES = {
 DEFAULT_FROM_EMAIL = 'noreply@datal.org'
 
 SUBSCRIBE_NEW_USERS_TO_MAIL_LIST = False
+
+BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_PATH, 'components')
+
+BOWER_INSTALLED_APPS = (
+    'jquery',
+    'underscore',
+)
 
 try:
     from core.local_settings import *

@@ -37,7 +37,7 @@
 				<header>
 					<h1>{% trans 'APP-FREQUENCY-TEXT' %}</h1>
 				</header>
-				<p>{{dataset.frequency|capfirst}}</p>
+				<p>{{dataset.frequency|frequency_str|capfirst}}</p>
 			</article>
 			{% endif %}
 
