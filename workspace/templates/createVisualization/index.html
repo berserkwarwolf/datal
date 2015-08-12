@@ -1,11 +1,32 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags%}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags static%}
 
 {% block meta %}
 
+ {% load static %}
+<script type="text/javascript" src='{% static 'handsontable/dist/handsontable.full.js' %}'></script>
+
 {% compress css %}
+<link href='{% static 'handsontable/dist/handsontable.full.css' %}' type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<style type="text/css">
+  td.hot-sel-1 {
+    background-color: lightgreen;
+  }
+  td.hot-sel-2 {
+    background-color: lightyellow;
+  }
+  td.hot-sel-3 {
+    background-color: lightblue;
+  }
+  td.hot-sel-4 {
+    background-color: #aaa;
+  }
+  td.hot-sel-5 {
+    background-color: #f00;
+  }
+</style>
 {% endcompress %}
 <meta name="main-option" content="id_visualizations_option"/>
 
@@ -61,6 +82,13 @@
 
 
 {% block bottom_js %}
+
+{# templates backbone #}
+{% include "createVisualization/templates.html" %}
+
+<script src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
 <script type="text/javascript">
 $(document).ready(function(){
 
@@ -107,18 +135,28 @@ $(document).ready(function(){
   //Start
   processManagerViewSPA.start();
 
-});
-  /*var createVisualizationModel = new CreateVisualizationModel({
-    // Complete model here
+
+  // Gaston
+  var selectedCollection = new Backbone.Collection();
+
+  var selectedRangesView = new SelectedRangesView({
+    el: '.selected-ranges-view',
+    collection: selectedCollection
   });
-  var createVisualizationView = new CreateVisualizationView({model: createVisualizationModel});
 
-  var stateModel = new Backbone.Model({step: 1});
+  var data = [
+    ["Year", "Ford", "Volvo", "Toyota", "Honda"],
+    ["2014", 10, 11, 12, 13],
+    ["2015", 20, 11, 14, 13],
+    ["2016", 30, 15, 12, 13]
+  ];
 
-  var mainView = new MainView({
-    el: '.main-view',
-    model: stateModel
-  });*/
-
+  var myView = new DataTableView({
+    el: '#example',
+    data: data,
+    collection: selectedCollection
+  });
+});
 </script>
+
 {% endblock %}
