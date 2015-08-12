@@ -70,7 +70,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         if file_data is not None:
             fields['file_size'] = file_data.size
             fields['file_name'] = file_data.name
-            fields['end_point'] = active_datastore.create(settings.AWS_BUCKET_NAME, file_data.file,
+            fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data.file,
                                                                       self.user.account.id, self.user.id)
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()

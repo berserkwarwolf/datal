@@ -163,7 +163,7 @@ class datastore_sftp(datastore):
         key = "%s/%s" % (folder, uuid)
         final_remote_folder = '%s/%s/%s' % (self.base_folder, bucket_name, folder)
         self.save_checking_path(uploaded_file=data, folder=final_remote_folder, file_name=uuid)
-        return '{}/{}/{}'.format(settings.SFTP_PUBLIC_BASE_URL, settings.AWS_BUCKET_NAME, key)
+        return '/{}'.format(key)
 
     def upload(self, bucket_name, file_name, file_data, account_id):
         """ update file for existing resource """
