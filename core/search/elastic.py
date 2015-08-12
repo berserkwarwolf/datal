@@ -1,17 +1,7 @@
 # -*- coding: utf-8 -*-
-
-import types
-import logging
-from django.db import models, connection
 from django.conf import settings
-from django.core.paginator import InvalidPage
-from django.core.urlresolvers import reverse
-from core.helpers import slugify
-from core import helpers, choices
 
 from core.search.finder import Finder
-#from elasticsearch import Elasticsearch
-from core.lib.elastic import ElasticsearchIndex
 
 
 class ElasticsearchFinder(Finder):
@@ -20,14 +10,14 @@ class ElasticsearchFinder(Finder):
 
     def search(self, *args, **kwargs):
 
-	self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query      = kwargs.get('query', '')
+        self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
+        self.query = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
-        self.resource   = kwargs.get('resource', 'all')
-        page            = kwargs.get('page', 0)
-        max_results     = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
-        slice           = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
-        self.sort      = kwargs.get('order', self.order_by)
+        self.resource = kwargs.get('resource', 'all')
+        page = kwargs.get('page', 0)
+        max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
+        slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
+        self.sort = kwargs.get('order', self.order_by)
 
         if page == 0:
             start = 0

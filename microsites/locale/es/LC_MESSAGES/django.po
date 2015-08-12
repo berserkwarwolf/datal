@@ -599,3 +599,25 @@ msgstr "Licencia"
 
 msgid "APP-READ-MORE-TEXT"
 msgstr "Leer más"
+
+msgid "APP-YEARLY-TEXT"
+msgstr "Anual"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Mensual"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Semanal"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Diaria"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Cada hora"
+
+msgid "APP-MINUTELY-TEXT"
+msgstr "Cada minuto"
+
+msgid "APP-OTHER-TEXT"
+msgstr "Otro"
+
