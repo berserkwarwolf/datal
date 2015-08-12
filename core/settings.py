@@ -161,13 +161,15 @@ IMPL_TYPES = {'4': 'xls',
             '19': 'zip'
            }
 
-GRAVATAR = { 'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
-             'default_image': '/media_core/images/common/im_avatarNotDefined.gif',
-             'sizes': { 'small': 22,
-                      'medium': 44,
-                      'large': 88,
-                    }
-            }
+GRAVATAR = {
+    'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
+    'default_image': 'http://workspace.junar.com/media_core/images/common/im_avatarNotDefined.gif',
+    'sizes': {
+        'small': 22,
+        'medium': 44,
+        'large': 88,
+    }
+}
 
 TYPE_DASHBOARD      = 'db'
 TYPE_DATASET        = 'dt'
