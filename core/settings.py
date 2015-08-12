@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     "compressor",
     "post_office",
     'djangobower',
+    "rest_framework",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

@@ -11,11 +11,11 @@ TEMPLATE_DIRS = (
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'api.middlewares.auth.AuthMiddleware',
-    'api.middlewares.jsonp.JSONPMiddleware',
-    'api.middlewares.response.ResponseStatusMiddleware',
-    'api.middlewares.ioc.DependenciesInjector',
-    'api.middlewares.exceptions.ExceptionMiddleware',
+    #'api.middlewares.auth.AuthMiddleware',
+    #'api.middlewares.jsonp.JSONPMiddleware',
+    #'api.middlewares.response.ResponseStatusMiddleware',
+    #'api.middlewares.ioc.DependenciesInjector',
+    #'api.middlewares.exceptions.ExceptionMiddleware',
     # 'api.handleRequests.catch.ExceptionManager',
 )
 
@@ -63,3 +63,4 @@ try:
     from api.local_settings import *
 except ImportError:
     pass
+
