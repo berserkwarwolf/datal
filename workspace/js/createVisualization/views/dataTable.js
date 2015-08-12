@@ -13,10 +13,8 @@ var DataTableView = Backbone.View.extend({
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
       data: data,
-      // minSpareRows: 1,
       rowHeaders: true,
       colHeaders: true,
-      // contextMenu: true,
       readOnly: true,
       renderer: function(instance, TD, row, col, prop, value, cellProperties) {
         if (cellProperties.classArray) {
@@ -29,24 +27,16 @@ var DataTableView = Backbone.View.extend({
       }
     });
 
-    this.selectionEl = this.$('.selected-cells');
-
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       self.cacheSelection({
         from:{row: r1, col: c1},
         to: {row: r2, col: c2}
       });
-      self.selectionEl.text([r1, c1, r2, c2].join(', '));
     });
 
     // Clicks on a column or row header
     this.table.addHook('afterOnCellMouseDown', function (event, coords, TD) {
-      if (coords.row === -1) {
-        self.selectionEl.text('column ' + coords.col);
-      } else if (coords.col === -1) {
-        self.selectionEl.text('row ' + coords.row);
-      };
       self.cacheSelection({
         from: {row: coords.row, col: coords.col},
         to: {row: coords.row, col: coords.col}
@@ -59,17 +49,7 @@ var DataTableView = Backbone.View.extend({
 
   cacheSelection: function (coords) {
     this._selectedCoordsCache = coords;
-    this.range = this.coordsToCells(coords);
-  },
-
-  addCellsClass: function (cells, selectionID) {
-    this.addCellsMeta(cells, selectionID);
-    this.table.render();
-  },
-
-  rmCellsClass: function (cells, selectionID) {
-    this.rmCellsMeta(cells, selectionID);
-    this.table.render();
+    this.trigger('selected', coords);
   },
 
   coordsToCells: function (coords) {
@@ -79,35 +59,34 @@ var DataTableView = Backbone.View.extend({
 
     if (coords.from.row === -1) {
       rows = _.range(0, this.table.countRows());
-    };
-
+    }
     if (coords.from.col === -1) {
       cols = _.range(0, this.table.countCols());
-    };
+    }
 
-    _.each(rows, function (row) {
-      _.each(cols, function (col) {
-        cells.push({row: row, col: col});
+    _.each(rows, function (r) {
+      _.each(cols, function (c) {
+        cells.push({row: r, col: c});
       });
     });
     return cells;
   },
 
-  addCellsMeta: function (cells, selectionID) {
-    var currentArray;
+  addCellsMeta: function (cells, selId) {
+    var ids;
     for (var i = 0; i < cells.length; i++) {
-      currentArray = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
-      currentArray.push(selectionID);
-      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', currentArray);
+      ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
+      ids.push(selId);
+      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', ids);
     };
   },
 
-  rmCellsMeta: function (cells, selectionID) {
-    var currentArray = [];
+  rmCellsMeta: function (cells, selId) {
+    var ids;
     for (var i = 0; i < cells.length; i++) {
-      currentArray = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
-      currentArray.splice(currentArray.indexOf(selectionID), 1);
-      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', currentArray);
+      ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
+      ids.splice(ids.indexOf(selId), 1);
+      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', ids);
     };
   },
 
@@ -122,13 +101,14 @@ var DataTableView = Backbone.View.extend({
 
   onAddSelected: function (model) {
     var cells = this.coordsToCells(model.get('range'));
-    this.addCellsClass(cells, model.get('id'));
+    this.addCellsMeta(cells, model.get('id'));
+    this.table.render();
   },
 
   onRmSelected: function (model) {
     var cells = this.coordsToCells(model.get('range'));
     this.available.push(model.get('id'));
-    this.rmCellsClass(cells, model.get('id'));
+    this.rmCellsMeta(cells, model.get('id'));
+    this.table.render();
   }
 });
-
