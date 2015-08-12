@@ -9,7 +9,8 @@
       <% _(ranges).each(function(item){ %>
       <li data-cid="<%= item.id %>">
         <button class="btn-remove" data-cid="<%= item.id %>" title="{% trans 'FILTERS-REMOVE-TEXT' %}">x</button>
-        <span class="input-range"><%= item.range %><span/>
+        <span class="input-range">From (col:<%= item.range.from.col %>, row:<%= item.range.from.row %>)<span/>
+        <span class="input-range"> To (col:<%= item.range.to.col %>, row:<%= item.range.to.row %>)<span/>
       </li>
       <% }); %>
     </ul>
