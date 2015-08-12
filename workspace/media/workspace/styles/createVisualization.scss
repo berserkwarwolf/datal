@@ -1,5 +1,54 @@
-/* Start */
+/* Imports */
+@import 'variables';
 
+/* Nav */
+.navCreator{position: relative;}
+.navCreator ul{width: 310px;}
+
+/* Nav titles */
+.navCreator ul li.heading,
+.navCreator ul.navCreatorPicker li.heading{font-size: $font-size-m;text-transform: uppercase;color: $font-color-light;padding:10px;cursor: default;border:0 none;background: none;}
+
+.navCreator ul li.heading:not(:first-child),
+.navCreator ul.navCreatorPicker li.heading:not(:first-child){margin-top: 30px;}
+
+/* Nav items */
+.navCreator ul li{font-family: $font-secondary-family, sans-serif;font-weight:300;font-size: $font-size-xl;padding:30px 10px;cursor: pointer;color: $font-color-base;border-bottom: 1px solid $font-color-light;}
+.navCreator ul li:hover{background:#8fceea;color: #000;}
+
+  /* Nav inset */
+  .navCreator ul li:hover > ul.navCreatorPicker{display: block;cursor: default;}
+   
+  .navCreator ul.navCreatorPicker {display: none;position: absolute;left: 310px;top: 0;min-width: 9999px;min-height: 9999px;overflow:hidden;}
+
+  /* Nav titles */
+  .navCreator ul.navCreatorPicker li.heading{padding-left: 30px;}
+
+  .navCreator ul li.heading:hover,
+  .navCreator ul.navCreatorPicker li.heading:hover{background:inherit;color: inherit;}
+
+  /* Nav items */
+  .navCreator ul.navCreatorPicker li{font-size: $font-size-l;color: $accent-color;float: left;padding:20px 0 20px 108px;background:url(http://www.iconsdb.com/icons/download/dark-gray/area-chart-48.ico) no-repeat 30px 15px;float: left;width: 100%;}
+  .navCreator ul.navCreatorPicker li:hover{background-color:#ededed;}
+  .navCreator ul.navCreatorPicker li:last-child{margin-bottom: 30px;}
+
+  .navCreator ul li p{font-family: Arial, sans-serif;font-size: $font-size-m;color: $font-color-light;font-style: normal;margin-top: 10px;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* 
+Start 
 .createVizualization .box .chart{background-image:url(../images/createVisualization/thumb_createNewChart.svg);}
 .createVizualization .box .mapTrace{background-image:url(../images/createVisualization/thumb_createNewTraceMap.svg);}
 .createVizualization .box .mapMarkers{background-image:url(../images/createVisualization/thumb_createNewMarkersMap.svg);}
@@ -25,7 +74,7 @@
 .createVizualization .wrapper3{float:left;margin-left:-310px;}
 .createVizualization .config-container{float:left;height:100%;width:310px;}
 
-/* Types */
+Types 
 .create .sidebar fieldset{padding:15px;}
 .create .sidebar .subtitle{font-weight:bold;padding-bottom:15px;}
 .create .sidebar label{display:block;margin-bottom:8px;}
@@ -40,7 +89,7 @@
 .create .sidebar .preview-container{padding:15px;float:right;height:100%;margin-right:-310px;width:100%;}
 .create .sidebar .preview-container h4{font-size:16px;}
 
-/* Customize */
+Customize
 .create .sidebar .row{padding-bottom:15px;}
 .create .sidebar .sidebarErrorMessageContainer{float:left;position:relative;}
 .create .sidebar .row input[type=checkbox]{width:inherit;}
@@ -63,3 +112,4 @@
 .create .rangeIcon{background-image:url(../images/common/ic_formsInput.png);background-repeat:no-repeat;width:21px;height:20px;position:absolute;top:4px;right:4px;}
 .create .sidebar .row a.range:hover .rangeIcon, .create .rangeIcon:hover{background-position:0 -20px;}
 .create .sidebar p.tip{padding-bottom:10px;}
+*/

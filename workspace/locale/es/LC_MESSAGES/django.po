@@ -2503,12 +2503,6 @@ msgstr "Tipo"
 msgid "APP-FINISH-TEXT"
 msgstr "Terminar"
 
-msgid "APP-START-TITLE"
-msgstr "Seleccionar visualización"
-
-msgid "APP-START-SUBTITLE"
-msgstr "Elija entre una visualización de gráfio o de mapa."
-
 msgid "LANDINGPAGE-PENDINGACTIONS-TEXT-1"
 msgstr "Usted tiene "
 
@@ -2520,12 +2514,6 @@ msgstr "Acciones pendientes"
 
 msgid "APP-ISPENDINGREVIEW-TEXT"
 msgstr " está pendiente de revisión"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-CHART-TITLE"
-msgstr "Gráfico"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-CHART-DESC"
-msgstr "Barra, columna, linea, torta, área."
 
 msgid "APP-VISUALIZATIONS-CREATE-START-MAP-DESC"
 msgstr "Marcadores, polígonos, geo mapas"
@@ -2589,36 +2577,6 @@ msgstr "Seleccione el rango de celdas deseado. No incluya texto o información a
 
 msgid "APP-DATA-VIEW-TITLE-TEXT"
 msgstr "Título de la vista de datos"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-TITLE"
-msgstr "Mapa de trazado"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-DESC"
-msgstr "Dibuje líneas geométricas o polígonos usando conjuntos de datos GIS."
-
-msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-TITLE"
-msgstr "Mapa de marcadores"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-DESC"
-msgstr "Marque múltiples ubicaciones usando conjuntos de datos GIS."
-
-msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-TITLE"
-msgstr "Mapa geo"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-DESC"
-msgstr "Identifique la densidad de paises, continentes o marcadores con escala de colores."
-
-msgid "APP-CREATE-CHART-TEXT"
-msgstr "Crear gráfico"
-
-msgid "APP-CREATE-TRACE-MAP-TEXT"
-msgstr "Crear mapa de trazado"
-
-msgid "APP-CREATE-MARKERS-MAP-TEXT"
-msgstr "Crear mapa de marcadores"
-
-msgid "APP-CREATE-GEO-MAP-TEXT"
-msgstr "Crear geo map"
 
 msgid "APP-CUSTOMIZE-TRACE-MAP-SUBTITLE"
 msgstr "Seleccionar las coordenadas y la información para cada elemento multigeométrico. Los campos marcados con (<span class='required'>*</span>) son requeridos."
