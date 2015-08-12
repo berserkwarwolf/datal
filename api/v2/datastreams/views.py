@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from core.models import DataStream, DataStreamHits
 from api.models import *
-#from api.managers import *
 from core.choices import ChannelTypes
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods

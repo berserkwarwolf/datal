@@ -118,7 +118,6 @@ class VisualizationRequiredException(LifeCycleException):
 
 
 class ParentNotPuslishedException(LifeCycleException):
-    print('PASO1-9')
     title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
     tipo = 'illegal-state'

@@ -332,7 +332,7 @@ def gravatar_url(email, size):
     import hashlib
     email_hash = hashlib.md5(email.lower()).hexdigest()
     #default_image = urllib.quote(settings.MEDIA_URI + settings.GRAVATAR['default_image'], safe='')
-    default_image = urllib.quote("http://www.junar.com/" + settings.GRAVATAR['default_image'], safe='')
+    default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
 
 def get_file_type_from_extension(extension):

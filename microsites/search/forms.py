@@ -1,6 +1,7 @@
 from django import forms
 from django.conf import settings
 
+
 class SearchForm(forms.Form):
     q = forms.RegexField(label='Query', max_length=512, required=False, regex = r'[a-zA-Z0-9]+|%')
     page = forms.IntegerField(label='Page', required=False)

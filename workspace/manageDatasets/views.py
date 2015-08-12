@@ -29,27 +29,23 @@ logger = logging.getLogger(__name__)
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def action_request_file(request):
-    from boto.s3.connection import S3Connection
-
     form = RequestFileForm(request.GET)
 
     if form.is_valid():
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
-        file_name = dataset_revision.end_point[+6:]
-
-        s3 = S3Connection(settings.AWS_ACCESS_KEY, settings.AWS_SECRET_KEY, is_secure=False)
-        url = s3.generate_url(300, 'GET', bucket=request.bucket_name, key=file_name, force_http=True)
-
         try:
             response = HttpResponse(mimetype='application/force-download')
-            response['Content-Disposition'] = 'attachment; filename=' + dataset_revision.filename.encode('utf-8')
-            response.write(urllib2.urlopen(url).read())
-        except:
+            response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
+            response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
+        except Exception:
             import logging
             logger = logging.getLogger(__name__)
-            logger.error(url)
+            logger.error(dataset_revision.end_point)
     else:
-        response = {'status' : 'error', 'messages' : [ugettext('URL-RETRIEVE-ERROR')] }
+        response = dict(
+            status='error',
+            messages=[ugettext('URL-RETRIEVE-ERROR')]
+        )
 
     return response
 

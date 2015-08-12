@@ -161,13 +161,15 @@ IMPL_TYPES = {'4': 'xls',
             '19': 'zip'
            }
 
-GRAVATAR = { 'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
-             'default_image': '/media_core/images/common/im_avatarNotDefined.gif',
-             'sizes': { 'small': 22,
-                      'medium': 44,
-                      'large': 88,
-                    }
-            }
+GRAVATAR = {
+    'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
+    'default_image': 'http://workspace.junar.com/media_core/images/common/im_avatarNotDefined.gif',
+    'sizes': {
+        'small': 22,
+        'medium': 44,
+        'large': 88,
+    }
+}
 
 TYPE_DASHBOARD      = 'db'
 TYPE_DATASET        = 'dt'
@@ -331,8 +333,9 @@ SUBSCRIBE_NEW_USERS_TO_MAIL_LIST = False
 BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_PATH, 'components')
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'underscore',
+    'jquery#>=2.1.4',
+    'underscore#>= 1.8.3',
+    'handsontable#>=0.16.1'
 )
 
 try:
