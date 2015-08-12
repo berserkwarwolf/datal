@@ -3,73 +3,122 @@
 
 {% block meta %}
 
-
 {% compress css %}
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
-
-<script language="javascript" src="/js_workspace/createVisualization/createVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/createVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/StartStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/DataStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/TypeStepView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
 <meta name="main-option" content="id_visualizations_option"/>
+
+<!-- Process Manager -->
+<script language="javascript" src="/js_workspace/processManagerSPA/processManagerModelSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManagerSPA/processManagerViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManagerSPA/stepViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManagerSPA/buttonsViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Common Chart model -->
+<script language="javascript" src="/js_workspace/createVisualization/visualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Create Viz StepViews -->
+<script language="javascript" src="/js_workspace/createVisualization/steps/0_startView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
 {% endblock %}
 
 {% block sectionTitle %}
 <h1 class="FL"><a href="{% url 'manageVisualizations.list' %}" title="{% trans 'APP-VISUALIZATIONS-TEXT' %}">{% trans "APP-VISUALIZATIONS-TEXT" %}</a></h1>
 <h2 class="FL">{% trans 'APP-VISUALIZATIONS-CREATE-TEXT' %}</h2>
-<ul class="buttons-bar FR" data-step="0">
+
+<!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
+<div id="buttons_view_container"></div>
+
+<!--ul class="buttons-bar FR" data-step="0">
   <li class="step0"><a id="id_step0Button" rel="0" class="button black small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
   <li class="step1"><a id="id_step1Button" rel="1" class="button black small" title="{% trans 'APP-DATA-TEXT' %}">{% trans 'APP-DATA-TEXT' %}</a></li>
   <li class="step2"><a id="id_step2Button" rel="2" class="button black small" title="{% trans 'APP-TYPES-TEXT' %}">{% trans 'APP-TYPES-TEXT' %}</a></li>
   <li class="step3"><a id="id_step3Button" rel="3" class="button black small" title="{% trans 'APP-CUSTOMIZE-TEXT' %}">{% trans 'APP-CUSTOMIZE-TEXT' %}</a></li>
   <li class="step4"><a id="id_step4Button" rel="4" class="button black small" title="{% trans 'APP-FINISH-TEXT' %}">{% trans 'APP-FINISH-TEXT' %}</a></li>
-</ul>
+</ul-->
+
 {% endblock %}
 
 {% block content %}
 
-  <div class="createVizualization create main-view" id="id_createVisualization">
+  
+  <div id="id_createVisualization_container" class="createVizualization create main-view">
 
-    {% include "createVisualization/start.html" %}
-
-    {% include "createVisualization/data.html" %}
-
-    {% include "createVisualization/chart/types.html" %}
-
-    {% include "createVisualization/chart/customize.html" %}
-
-    {% include "createVisualization/map/customizeTrace.html" %}
-
-    {% include "createVisualization/map/customizeMarkers.html" %}
-
-    {% include "createVisualization/map/customizeGeo.html" %}
-
-    {% include "createVisualization/finish.html" %}
+    <!-- Steps will be Rendered here -->
 
   </div>
 
+  <!-- Include templates -->
+  {% include "processManager/buttons_render.html" %}
+  {% include "createVisualization/steps/0_start.html" %}
+  {% include "createVisualization/steps/1_chart.html" %}
+  {% include "createVisualization/steps/2_finish.html" %}
+
 {% endblock %}
+
 
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var createVisualizationModel = new CreateVisualizationModel({
+
+  //PALA
+  var processManagerModelSPA = new ProcessManagerModelSPA();
+
+  var processManagerViewSPA = new ProcessManagerViewSPA({
+      model: processManagerModelSPA,
+      el: '#id_createVisualization_container',
+      buttonsContainer: '#buttons_view_container' 
+    });
+
+  var visualizationModel = new VisualizationModel({
+    // Complete model here
+  });
+
+  //Create views
+  var startView = new StartView(
+    {
+      name: "{% trans 'APP-START-TEXT' %}",
+      model: visualizationModel,
+      el: '#id_vizualization_step_0_start'
+    }).init();
+
+  var chartView = new ChartView(
+    {
+      name: "{% trans 'APP-CUSTOMIZE-TEXT' %}", 
+      model: visualizationModel,
+      el: '#id_vizualization_step_1_chart'
+    }).init();
+
+  var finishView = new FinishView(
+    {
+      name: "{% trans 'APP-FINISH-TEXT' %}",
+      model: visualizationModel,
+      el: '#id_vizualization_step_2_finish'
+    }).init();
+
+  //Register views
+  processManagerViewSPA.register( startView );
+  processManagerViewSPA.register( chartView );
+  processManagerViewSPA.register( finishView );
+
+  //Start
+  processManagerViewSPA.start();
+
+});
+  /*var createVisualizationModel = new CreateVisualizationModel({
     // Complete model here
   });
   var createVisualizationView = new CreateVisualizationView({model: createVisualizationModel});
-});
 
   var stateModel = new Backbone.Model({step: 1});
 
   var mainView = new MainView({
     el: '.main-view',
     model: stateModel
-  });
+  });*/
 
 </script>
 {% endblock %}
