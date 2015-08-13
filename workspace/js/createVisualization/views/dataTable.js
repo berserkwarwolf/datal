@@ -1,3 +1,48 @@
+
+Handsontable.renderers.registerRenderer('selectedTextRenderer', 
+  function selectedTextRenderer (instance, TD, row, col, prop, value, cellProperties) {
+    if (cellProperties.classArray) {
+      TD.className = '';
+      for (var i = 0; i < cellProperties.classArray.length; i++) {
+        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
+      };
+    };
+    return Handsontable.renderers.TextRenderer.apply(this, arguments);
+  });
+
+Handsontable.renderers.registerRenderer('selectedNumericRenderer', 
+  function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
+    if (cellProperties.classArray) {
+      TD.className = '';
+      for (var i = 0; i < cellProperties.classArray.length; i++) {
+        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
+      };
+    };
+    return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+  });
+
+// Handsontable.renderers.registerRenderer('selectedLinkRenderer', 
+//   function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
+//     if (cellProperties.classArray) {
+//       TD.className = '';
+//       for (var i = 0; i < cellProperties.classArray.length; i++) {
+//         TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
+//       };
+//     };
+//     return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+//   });
+
+Handsontable.renderers.registerRenderer('selectedDateRenderer', 
+  function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
+    if (cellProperties.classArray) {
+      TD.className = '';
+      for (var i = 0; i < cellProperties.classArray.length; i++) {
+        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
+      };
+    };
+    return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+  });
+
 var DataTableView = Backbone.View.extend({
 
   // Holds available selection identifiers
@@ -11,36 +56,36 @@ var DataTableView = Backbone.View.extend({
   initialize: function (options) {
     var self = this;
 
-    Handsontable.renderers.registerRenderer('selectionRenderer', 
-      function selectionRenderer (instance, TD, row, col, prop, value, cellProperties) {
-        if (cellProperties.classArray) {
-          TD.className = '';
-          for (var i = 0; i < cellProperties.classArray.length; i++) {
-            TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-          };
-        };
-        // var renderer = instance.getCellRenderer(row, col);
-        // console.log(rende)
-        return Handsontable.renderers.TextRenderer.apply(this, arguments);
-      });
+    this.data = options.data;
+    var columns = [
+        {renderer: 'selectedTextRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedTextRenderer'},
+        {renderer: 'selectedTextRenderer'}
+      ];
+    // this.getCols();
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
-      data: options.data,
-      rowHeaders: true,
-      colHeaders: true,
-      readOnly: true,
-      renderer: 'selectionRenderer',
-      columns: [
-        {data: 'year', type: 'date', dateFormat: 'YYYY', correctFormat: true,},
-        {data: 'brand'},
-        {data: 'value', type: 'numeric'}
-      ]
+      rowHeaders: true, colHeaders: true, readOnly: true,
+      allowInsertRow: false, allowInsertColumn: false,
+      renderer: 'selectedTextRenderer',
+      colWidths: 80,
+      columns: columns,
     });
+
+    window.hot = this.table.getInstance();
+    this.table.loadData(this.data);
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       self.cacheSelection({
-        from:{row: r1, col: c1},
+        from: {row: r1, col: c1},
         to: {row: r2, col: c2}
       });
     });
