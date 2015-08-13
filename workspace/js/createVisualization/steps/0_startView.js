@@ -4,9 +4,9 @@ var StartView = StepViewSPA.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click a.chart-type'] = 'onChooseType';
-		eventsObject['click a.previous'] = 'onPreviousButtonClicked';
-		eventsObject['click a.next'] = 'onNextButtonClicked';
+		eventsObject['click .chart-type'] = 'onChooseType';
+//		eventsObject['click a.previous'] = 'onPreviousButtonClicked';
+//		eventsObject['click a.next'] = 'onNextButtonClicked';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
