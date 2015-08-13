@@ -1,10 +1,10 @@
-var StepViewSPA = function(options) {
+var ModalViewSPA = function(options) {
 	this.inheritedEvents = [];
 
 	Backbone.Epoxy.View.call(this, options);
 }
 
-_.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
+_.extend(ModalViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 		
 	// Extend functions
 
@@ -24,42 +24,33 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 		this.inheritedEvents.push(eventObj);
 	},
 
-	// Step functions
+	// Modal functions
 
-	init: function(){
-		this.$el.addClass('process_manager_step');
-		this.$el.hide();
+	initialize: function(){
 		this.render();
 		return this;
 	},
 
 	render: function(){
+		$('body').append('<div id="'+this.options.id+'" class="process-manager-modal"></div>');
+		this.$el = $('#'+this.options.id);
+		this.$el.html(_.template($('#'+this.options.id+'Template').html()));
 		return this;
 	},
 
-	start: function(output){
+	open: function(){
+		$('.process-manager-modal').hide();
 		this.$el.show();
-	},
-
-	finish: function(){
-		this.$el.hide();
-	},
-
-	next: function(){
-		this.trigger('next');
-	},
-
-	previous: function(){
-		this.trigger('previous');
 	},
 
 	openModal: function(id){
 		this.trigger('openModal',id);
 	},
-	// cancel: function(){},
 
-	// restart: function(){},
+	close: function(){
+		this.$el.hide();
+	},
 
 });
 
-StepViewSPA.extend = Backbone.Epoxy.View.extend;
+ModalViewSPA.extend = Backbone.Epoxy.View.extend;

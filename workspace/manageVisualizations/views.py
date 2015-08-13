@@ -1,26 +1,30 @@
+import json
+import urllib
+
 from django.http import HttpResponse
-from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
+from django.core.serializers.json import DjangoJSONEncoder
+
+from api.http import JSONHttpResponse
+from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
 from core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
-from workspace.decorators import *
-from workspace.settings import *
-from workspace.manageVisualizations.forms import *
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import *
 from core.engine import invoke
 from core.helpers import RequestProcessor
-from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
 from core.docs import VZ, DT
 from core.models import VisualizationRevision,DatasetRevision
-from api.http import JSONHttpResponse
 from core import helpers as LocalHelper
 from microsites.daos.datastreams import DatastreamDAO
-import json
-import urllib
+from workspace.decorators import *
+from workspace.settings import *
+from workspace.manageVisualizations.forms import *
+from workspace.daos.visualizations import VisualizationDBDAO
+
 
 @login_required
 @requires_any_dataset()
@@ -28,18 +32,20 @@ import urllib
 @require_GET
 def list(request):
     """ list all dataviews """
-    vs_dao = VisualizationDAO(user_id=request.user.id)
-    resources, total_resources = vs_dao.query(account_id=request.account.id
-        , language=request.user.language, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE)
+    total_resources = 0
+    #account_domain = request.preferences['account.domain']
+    #vs_dao = VisualizationDAO(user_id=request.user.id)
+    #resources, total_resources = vs_dao.query(account_id=request.account.id
+    #    , language=request.user.language, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE)
 
     if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
         return render_to_response('manageVisualizations/noResults.html', locals())
     
-    for i in xrange(len(resources)):
-        resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
+    #for i in xrange(len(resources)):
+    #    resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
 
-    resources = map(set_visualization_revision_nice, resources)
-    filters = remove_duplicated_filters(resources)
+    #resources = map(set_visualization_revision_nice, resources)
+    #filters = remove_duplicated_filters(resources)
 
     return render_to_response('manageVisualizations/index.html', locals())
 

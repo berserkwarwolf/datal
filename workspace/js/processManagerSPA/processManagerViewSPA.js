@@ -2,6 +2,7 @@
 var ProcessManagerViewSPA = Backbone.View.extend({
 
 	steps: [],
+	modals: {},
 	index: 0,
 
 	events: {
@@ -17,6 +18,7 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		} else {
 			this.buttonsView = false;
 		}
+
 		this.render();
 	},
 
@@ -32,7 +34,13 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		this.steps.push(view);
 		this.listenTo(view,'next',this.next);
 		this.listenTo(view,'previous',this.previous);
+		this.listenTo(view,'openModal',this.openModal);
 		this.render();
+	},
+
+	registerModal: function(view){
+		this.modals[view.id] = view;
+		this.listenTo(view,'openModal',this.openModal);
 	},
 
 	previous: function(output){
@@ -76,6 +84,14 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 
 	},
 
+	openModal: function(id){
+		if(this.modals[id]){
+			this.modals[id].open();
+		} else {
+			console.error('Modal no registrado');
+		}
+	},
+
 	goTo: function(index){
 		this.finish();
 		this.index = index;
@@ -92,8 +108,6 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 	},
 
 	onNavigationButtonClicked: function(event){
-
-		console.log('hola');
 		
 		var button = event.currentTarget,
 			indexToGo = $(button).attr('data-step');

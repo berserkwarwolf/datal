@@ -6,6 +6,7 @@ var ChartView = StepViewSPA.extend({
 		var eventsObject = {}
 		eventsObject['click a.backButton'] = 'onPreviousButtonClicked';
 		eventsObject['click a.nextButton'] = 'onNextButtonClicked';
+		eventsObject['click a.selectData'] = 'onSelectDataClicked';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -20,6 +21,10 @@ var ChartView = StepViewSPA.extend({
 		var self = this;
 		
 		return this;
+	},
+
+	onSelectDataClicked: function(){
+		this.openModal('chartSelectDataModal');
 	},
 
 	onPreviousButtonClicked: function(){

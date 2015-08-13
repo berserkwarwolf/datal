@@ -87,8 +87,13 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def publish(self, allowed_states=PUBLISH_ALLOWED_STATES, parent_status=None):
         """ Publica una revision de dataset """
-
+        logger.info('[LifeCycle - Datastreams - Publish] Publico Rev {}.'.format(
+            self.datastream_revision.id
+        ))
         if self.datastream_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Datastreams - Publish] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.datastream_revision.id, self.datastream_revision.status
+            ))
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PUBLISHED,

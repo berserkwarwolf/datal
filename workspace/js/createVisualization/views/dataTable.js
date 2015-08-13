@@ -11,20 +11,30 @@ var DataTableView = Backbone.View.extend({
   initialize: function (options) {
     var self = this;
 
-    this.table = new Handsontable(this.$('.table-view').get(0), {
-      data: options.data,
-      rowHeaders: true,
-      colHeaders: true,
-      readOnly: true,
-      renderer: function(instance, TD, row, col, prop, value, cellProperties) {
+    Handsontable.renderers.registerRenderer('selectionRenderer', 
+      function selectionRenderer (instance, TD, row, col, prop, value, cellProperties) {
         if (cellProperties.classArray) {
           TD.className = '';
           for (var i = 0; i < cellProperties.classArray.length; i++) {
             TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
           };
         };
-        return Handsontable.renderers.TextRenderer(instance, TD, row, col, prop, value, cellProperties);
-      }
+        // var renderer = instance.getCellRenderer(row, col);
+        // console.log(rende)
+        return Handsontable.renderers.TextRenderer.apply(this, arguments);
+      });
+
+    this.table = new Handsontable(this.$('.table-view').get(0), {
+      data: options.data,
+      rowHeaders: true,
+      colHeaders: true,
+      readOnly: true,
+      renderer: 'selectionRenderer',
+      columns: [
+        {data: 'year', type: 'date', dateFormat: 'YYYY', correctFormat: true,},
+        {data: 'brand'},
+        {data: 'value', type: 'numeric'}
+      ]
     });
 
     // Selects a range
