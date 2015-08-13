@@ -18,7 +18,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                pk=dataset_revision_id, category__categoryi18n__language=language,
                                dataseti18n__language=language) or \
                            DatasetRevision.objects.select_related().get(
-                               pk=dataset__last_revision, category__categoryi18n__language=language,
+                               pk=F('dataset__last_revision'), category__categoryi18n__language=language,
                                dataseti18n__language=language)
 
         tags = dataset_revision.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
