@@ -23,7 +23,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                                pk=datastream_revision_id, category__categoryi18n__language=language,
                                datastreami18n__language=language) or \
                            DataStreamRevision.objects.select_related().get(
-                               pk=datastream__last_revision, category__categoryi18n__language=language,
+                               pk=F('datastream__last_revision'), category__categoryi18n__language=language,
                                datastreami18n__language=language)
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
