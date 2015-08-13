@@ -1,30 +1,31 @@
 from django.utils.translation import ugettext
+from django.views.decorators.http import require_POST
+from django.shortcuts import get_object_or_404
+from django.db import transaction
+from core.reports_manager.helpers import create_report
+from core.daos.datasets import DatasetDBDAO
+from core.lib.datastore import *
+from core.choices import CollectTypeChoices, StatusChoices
+from core.exceptions import *
+from core.lifecycle.datasets import DatasetLifeCycleManager
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.builders.datastreams import DatastreamBuilder
 from api.models import *
 from api.http import JSONHttpResponse, HttpResponse
 from api.managers import *
-from core.exceptions import *
 from api.datastreams_manager import forms as formsw #TODO fix moving to core or someting similar
-from core.daos.datasets import DatasetDBDAO
 from api.decorators import public_access_forbidden
 from api.helpers import get_domain, add_domain_to_datastream_link
-from core.reports_manager.helpers import create_report
-from api.exceptions import Http400
-from django.db import transaction
 from api.v2.datastreams import forms
-from core.choices import CollectTypeChoices, StatusChoices
-from core.lifecycle.datasets import DatasetLifeCycleManager
-from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from api.sources_manager.utils import *
-from django.views.decorators.http import require_POST
-from core.lib.datastore import *
-from core.builders.datastreams import DatastreamBuilder
+from api.exceptions import Http400
 
 import json
 import logging
 
 
 def action_view(request, guid):
-    is_method_get_or_405(request)
+    #is_method_get_or_405(request)
     datastream  = get_object_or_404(DataStream, guid=guid)
     passticket = request.GET.get('passticket', None)
     user_id = UserPassTickets.objects.resolve_user_id(passticket, request.user_id)

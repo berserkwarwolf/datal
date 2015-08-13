@@ -9,7 +9,7 @@ def action404(p_request):
 def action500(p_request):
     return HttpResponseServerError('{"error": 500, "message": "API Internal Server Error"}')
 
-class DataStreamViewSet(viewsets.ModelViewSet):
+class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DataStream.objects.all()
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'

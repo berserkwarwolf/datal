@@ -213,7 +213,7 @@ class AuthMiddleware(object):
                 dom = domain.split(".")
                 account = Account.objects.get(pk=int(dom[0]))
             else:
-                account = Account.objects.get(preference__key = 'account.api.domain', preference__value = domain, status = Account.ACTIVE)
+                account = Account.objects.filter(preference__key = 'account.api.domain', preference__value = domain, status = Account.ACTIVE).first()
 
             return account.id
         except Account.DoesNotExist:
