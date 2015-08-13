@@ -30,19 +30,6 @@ var StartView = StepViewSPA.extend({
 		this.model.set('type', type);
 		this.next();
 		//this.trigger('step', 1);
-	},
-
-	onPreviousButtonClicked: function(){
-		this.previous();
-	},
-
-	onNextButtonClicked: function(){		
-
-		if(this.model.isValid(true)){
-			//this.model.setOutput();
-			this.next();
-		}
-
 	}
 
 });

@@ -4,10 +4,10 @@
 {% block meta %}
 
  {% load static %}
-<script type="text/javascript" src='{% static 'handsontable/dist/handsontable.full.js' %}'></script>
+<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
 
 {% compress css %}
-<link href='{% static 'handsontable/dist/handsontable.full.css' %}' type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <style type="text/css">
@@ -35,6 +35,7 @@
 <script language="javascript" src="/js_workspace/processManagerSPA/processManagerViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/processManagerSPA/stepViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/processManagerSPA/buttonsViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/processManagerSPA/modalViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Common Chart model -->
 <script language="javascript" src="/js_workspace/createVisualization/visualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -43,6 +44,11 @@
 <script language="javascript" src="/js_workspace/createVisualization/steps/0_startView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+
+<!-- Viz modals -->
+<script language="javascript" src="/js_workspace/createVisualization/modals/1_chartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/modals/1_chartSelectLabelModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -85,6 +91,9 @@
 
 {# templates backbone #}
 {% include "createVisualization/templates.html" %}
+
+{% include "createVisualization/modals/1_chartSelectDataModal.html" %}
+{% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
 
 <script src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -132,8 +141,30 @@ $(document).ready(function(){
   processManagerViewSPA.register( chartView );
   processManagerViewSPA.register( finishView );
 
+
+  //Create modals
+  var selectDataModal = new ChartSelectDataModalView(
+    {
+      id: 'chartSelectDataModal',
+      model: visualizationModel,
+      //el: '#id_vizualization_step_2_finish'
+    });
+
+  var selectLabelModal = new ChartSelectLabelModalView(
+    {
+      id: 'chartSelectLabelModal',
+      model: visualizationModel,
+      //el: '#id_vizualization_step_2_finish'
+    });
+
+  //Register modals
+  processManagerViewSPA.registerModal( selectDataModal );
+  processManagerViewSPA.registerModal( selectLabelModal );
+
   //Start
   processManagerViewSPA.start();
+
+
 
 
   // Gaston

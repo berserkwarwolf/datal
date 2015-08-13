@@ -1,6 +1,18 @@
 /* Imports */
 @import 'variables';
 
+/* Modal */
+.process-manager-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: none;  
+}
+
 /* Nav */
 .navCreator{position: relative;}
 .navCreator ul{width: 310px;}
