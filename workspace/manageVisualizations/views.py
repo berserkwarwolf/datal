@@ -1,26 +1,29 @@
+import json
+import urllib
+
 from django.http import HttpResponse
-from core.shortcuts import render_to_response
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
+from django.core.serializers.json import DjangoJSONEncoder
+
+from api.http import JSONHttpResponse
+from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
 from core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
-from workspace.decorators import *
-from workspace.settings import *
-from workspace.manageVisualizations.forms import *
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import *
 from core.engine import invoke
 from core.helpers import RequestProcessor
-from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
 from core.docs import VZ, DT
 from core.models import VisualizationRevision,DatasetRevision
-from api.http import JSONHttpResponse
 from core import helpers as LocalHelper
 from microsites.daos.datastreams import DatastreamDAO
-import json
-import urllib
+from workspace.decorators import *
+from workspace.settings import *
+from workspace.manageVisualizations.forms import *
+
 
 @login_required
 @requires_any_dataset()
