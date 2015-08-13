@@ -1,22 +1,206 @@
 {% load i18n extra_tags components %}
 
-<div id="id_vizualization_step_1_chart">
+<div id="id_vizualization_step_1_chart" class="create">
 
-	Configuro el chart
+	<div class="wrapper1">
+		<div class="wrapper2">
+			<div class="wrapper3">
 
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-		</li>
-	</ul>
+				Configuro el chart
 
-	<!-- Table -->
-	<div class="selected-ranges-view"></div>
-	<div id="example">
-		<button type="button" class="add-btn">Select</button>
-		<div class="table-view"></div>
+				<ul>
+					<li>
+						<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+					</li>
+					<li>
+						<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
+					</li>
+				</ul>
+
+				<div class="sidebar">
+
+					<div class="boxConfig">
+
+						<div class="itemConfig">
+
+							<div class="title">Gráficos</div>
+
+							<div class="boxInner">
+
+								<form>
+
+									<fieldset>
+
+										<div class="btnGroup">
+											<div class="subtitle">Compara en el tiempo</div>
+											<button class="line">&nbsp;</button>
+											<button class="area">&nbsp;</button>
+										</div>
+
+										<div class="btnGroup">
+											<div class="subtitle">Compara entre items</div>
+											<button class="cols">&nbsp;</button>
+											<button class="bars">&nbsp;</button>
+										</div>
+
+										<div class="btnGroup">
+											<div class="subtitle">Composición estática</div>
+											<button class="pie">&nbsp;</button>
+										</div>
+
+										<div>
+											<p>You are using</p>
+											<select>
+												<option>Google visualizations</option>
+												<option>D3</option>
+											</select>
+										</div>
+
+									</fieldset>
+
+								</form>
+
+							</div>
+
+						</div>
+
+						<div class="itemConfig">
+
+							<div class="title">¿No se ve bien?</div>
+
+							<div class="boxInner">
+
+								<form>
+
+									<fieldset>
+										<div class="checkbox">
+											<label>
+												Cambiar columnas/filas <input type="checkbox">
+											</label>
+										</div>
+									</fieldset>
+
+									<fieldset>
+										
+										<div class="subtitle">Reordenar datos</div>
+										
+										<div class="radio">
+											<label>
+												Default <input type="radio">
+											</label>
+											<label>
+												Inverted <input type="radio">
+											</label>
+											<label>
+												Ascendant <input type="radio">
+											</label>
+											<label>
+												Descendant <input type="radio">
+											</label>
+										</div>
+
+									</fieldset>
+
+									<fieldset>
+										
+										<div class="subtitle">Empty cells will be</div>
+										
+										<div class="radio">
+											<label>
+												Excluded from the dataset <input type="radio">
+											</label>
+											<label>
+												Set to previows value in dataset <input type="radio">
+											</label>
+											<label>
+												Set to a given value <input type="radio">
+												<input type="text" class="hide">
+											</label>
+										</div>
+
+									</fieldset>
+
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="preview-container">
+
+					<div class="row">
+						<div class="col-md-12">
+							<div class="title text-center">
+								<input type="text" value="¿Cuál es el título?">
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-2">
+							<div class="axisYName">
+								<input type="text" value="Nombre del eje Y">
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="axisContent">
+								<button class="btn edit plus">&nbsp;</button>
+								<p>Eje Y</p>
+							</div>
+						</div>
+
+						<div class="col-md-6">
+							<div class="chartContent bar">
+								<button class="btn edit plus">&nbsp;</button>
+								<p>Seleccioná los datos a mostrar</p>
+							</div>
+						</div>
+
+						<div class="col-md-2">
+							<div class="chartLeyend">
+								<button class="btn edit plus">&nbsp;</button>
+								<p>Seleccioná referencias</p>
+							</div>
+						</div>
+
+					</div>
+
+					<div class="row">
+
+						<div class="col-md-offset-4 col-md-6">
+
+							<div class="axisXName">
+								<input type="text" value="Nombre del eje X">
+							</div>
+
+							<div class="axisXMaxValue">
+								<input type="text" value="Valor máximo">
+							</div>
+
+						</div>
+
+					</div>
+
+					<!--
+					<div id="example">
+						<button type="button" class="add-btn">Select&nbsp;</button>
+						<div class="table-view"></div>
+					</div>
+					-->
+
+				</div>
+
+				<!-- Table -->
+				<div class="selected-ranges-view"></div>
+
+			</div>
+		</div>
 	</div>
+
 </div>
