@@ -18,6 +18,7 @@ logger = logging.getLogger(__name__)
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
 
+
 def class_for_name(module_name, class_name):
     """
     Create an instance of the named path and class name
@@ -29,9 +30,8 @@ def class_for_name(module_name, class_name):
     c = getattr(m, class_name)
     return c
 
+
 def get_domain_with_protocol(app, protocol = 'http'):
-    #if app == 'workspace':
-    #    protocol = 'https'
     return protocol + '://' + settings.DOMAINS[app]
 
 
@@ -62,12 +62,14 @@ def next(p_iterator, p_default=None):
 
     return l_next
 
+
 def clean_string(p_string):
     p_string = unicodedata.normalize('NFKD', p_string).encode('ascii', 'ignore')
     p_string = re.sub('[^a-zA-Z0-9]+', '-', p_string.strip())
     p_string = re.sub('\-+', '-', p_string)
     p_string = re.sub('\-$', '', p_string)
     return p_string
+
 
 def format_datetime(seconds, strformat="dd/mm/yyyy", strlocale="en_US"):
     try:
@@ -93,6 +95,7 @@ def format_datetime(seconds, strformat="dd/mm/yyyy", strlocale="en_US"):
         res = str(seconds) + " error " + err
 
     return res
+
 
 def format_number_ms(number, strformat="#,###.##", strlocale="en_US", currency="USD"):
     """
@@ -120,6 +123,7 @@ def format_number_ms(number, strformat="#,###.##", strlocale="en_US", currency="
         res = str(number) + " error " + err
 
     return res
+
 
 def i18nize(l_cell, return_just_value = True):
     """
@@ -221,6 +225,7 @@ def jsonToGrid(p_response, p_page = '', p_limit =''):
 
     return json.dumps(l_lists)
 
+
 class RequestProcessor:
 
     def __init__(self, request):
@@ -281,6 +286,7 @@ def get_meta_data_dict(metadata):
             return d
     return {}
 
+
 def slugify(value):
     value = django_slugify(value)
     value = value.replace('_', '-')
@@ -303,6 +309,7 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
         result.status = code
         return result
 
+
 def get_mimetype(url):
     try:
         request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
@@ -322,10 +329,12 @@ def get_mimetype(url):
 
     return (mimetype, status, url)
 
+
 def uniquify(seq):
     seen = set()
     seen_add = seen.add
     return [ x for x in seq if x not in seen and not seen_add(x)]
+
 
 def gravatar_url(email, size):
     import urllib
@@ -334,6 +343,7 @@ def gravatar_url(email, size):
     #default_image = urllib.quote(settings.MEDIA_URI + settings.GRAVATAR['default_image'], safe='')
     default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
+
 
 def get_file_type_from_extension(extension):
 
@@ -364,6 +374,7 @@ def get_file_type_from_extension(extension):
     elif extension.lower() in ["zip", "gz", "tar"]:
         return SourceImplementationChoices.ZIP
 
+
 def get_domain(account_id):
     try:
         account_domain = Preference.objects.values('value').get(key='account.domain', account = account_id)['value']
@@ -383,6 +394,7 @@ def get_domain_by_request(request, default_domain = ''):
         if domain is None:
             domain = default_domain
     return domain
+
 
 def get_domain_by_account_id(account_id):
     """ Copy of api/heplers/get_domain because duplicates name of core/httpy.py/get_domain
@@ -434,6 +446,7 @@ def unset_visualization_revision_nice(item):
 
     return new_item
 
+
 def remove_duplicated_filters(list_of_resources):
     removed = dict()
     removed['status_filter'] = set([x.get('status') for x in list_of_resources])
@@ -452,6 +465,7 @@ def datatable_ordering_helper(query, col_number, ascending, order_columns):
         query = query.order_by(col_name)
     return query
 
+
 def generate_ajax_form_errors(form):
     errors = []
     for (k,v) in form.errors.iteritems():
@@ -461,6 +475,7 @@ def generate_ajax_form_errors(form):
             k = ''
         errors.append("%s%s" % (k, v))
     return errors
+
 
 def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
 

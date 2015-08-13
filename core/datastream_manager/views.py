@@ -19,6 +19,7 @@ from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
 
+
 # used by all the apps
 @require_http_methods(["GET"])
 def action_invoke(request):
@@ -42,6 +43,7 @@ def action_invoke(request):
     else:
         return HttpResponse('Error! No valid form')
 
+
 # Used by Microsites
 @require_http_methods(["GET"])
 def action_csv(request, id, slug):
@@ -49,6 +51,7 @@ def action_csv(request, id, slug):
     contents, type = export_to(id, request, 'csv')
 
     return HttpResponse(contents, mimetype=type)
+
 
 # Used by Microsites
 @require_http_methods(["GET"])
@@ -64,6 +67,7 @@ def action_xls(request, id, slug):
         return redirect
     else:
         return HttpResponse(contents, mimetype=type)
+
 
 @require_http_methods(["GET"])
 def action_download(request, id, slug):
@@ -91,6 +95,7 @@ def action_download(request, id, slug):
         redirect['Location'] = url
 
         return redirect
+
 
 # Used by Microsites
 @require_http_methods(["GET"])
@@ -122,6 +127,7 @@ def export_to(datastream_id, request, output):
 
         return invoke(query, output)
 
+
 # Used by Microsites
 @xframe_options_exempt
 @require_http_methods(["GET"])
@@ -140,17 +146,12 @@ def action_legacy_embed(request):
     else:
         return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request' : request})
 
-# Used by Microsites
+
+# Used by Microsites and Workspace
 @require_http_methods(["GET"])
 def action_updategrid(request):
-
-    datastream_revision_id = request.REQUEST.get('datastream_id')
-    datastream = DS(datastream_revision_id, request.auth_manager.language)
-
-    uri = request.build_absolute_uri()
-
     query = dict()
-    query['pId'] = datastream_revision_id
+    query['pId'] = request.REQUEST.get('datastream_id')
     query['pLimit'] = request.REQUEST.get('rp')
     query['pPage'] = int(request.REQUEST.get('page')) - 1
 
@@ -169,6 +170,7 @@ def action_updategrid(request):
         contents = {"rows": [], "total": 1, "page": 1}
         mimetype = "application/json"
     return HttpResponse(jsonToGrid(contents, query['pPage'] + 1), mimetype=mimetype)
+
 
 # Used by Microsites
 def get_last_30_days_datastream(request, id):

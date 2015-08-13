@@ -238,6 +238,7 @@ def create(request, collect_type='index'):
 @requires_if_publish('dataset')
 @requires_review
 @require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
     auth_manager = request.auth_manager

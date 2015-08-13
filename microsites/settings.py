@@ -38,8 +38,6 @@ INSTALLED_APPS += (
     'django.contrib.humanize',
 )
 
-DOMAINS['engine'] = 'microsites'
-
 BASE_URI = 'http://microsites'
 MEDIA_URI = BASE_URI
 WORKSPACE_URI = 'http://workspace'
