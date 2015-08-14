@@ -147,15 +147,13 @@ $(document).ready(function(){
   var selectDataModal = new ChartSelectDataModalView(
     {
       id: 'chartSelectDataModal',
-      model: visualizationModel,
-      //el: '#id_vizualization_step_2_finish'
+      model: visualizationModel
     });
 
   var selectLabelModal = new ChartSelectLabelModalView(
     {
       id: 'chartSelectLabelModal',
-      model: visualizationModel,
-      //el: '#id_vizualization_step_2_finish'
+      model: visualizationModel
     });
 
   //Register modals
@@ -169,7 +167,7 @@ $(document).ready(function(){
 
 
   // Gaston
-  var selectedCollection = new Backbone.Collection();
+  /*var selectedCollection = new Backbone.Collection();
 
   var selectedRangesView = new SelectedRangesView({
     el: '.selected-ranges-view',
@@ -194,7 +192,9 @@ $(document).ready(function(){
     el: '#example',
     data: data,
     collection: selectedCollection
-  });
+  });*/
+
+
 });
 
 var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {

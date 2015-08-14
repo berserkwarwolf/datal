@@ -17,7 +17,28 @@ var ChartSelectDataModalView = ModalViewSPA.extend({
 
 	render: function(){
 		ModalViewSPA.prototype.render.call(this);
-		//do stuff
+
+		//init table
+		var selectedCollection = new Backbone.Collection();
+
+		var selectedRangesView = new SelectedRangesView({
+			el: '.selected-ranges-view',
+			collection: selectedCollection
+		});
+
+		var data = [
+			{year: 2014, brand: 'Volvo', value: 10},
+			{year: 2014, brand: 'Volvo', value: 10},
+			{year: 2014, brand: 'Volvo', value: 10},
+			{year: 2014, brand: 'Volvo', value: 10},
+		];
+
+		var myView = new DataTableView({
+			el: '#example',
+			data: data,
+			collection: selectedCollection
+		});
+		//this.myView.render();
 		return this;
 	},
 
