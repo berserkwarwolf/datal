@@ -1,10 +1,29 @@
 from django import template
 from django.forms.formsets import formset_factory
 from django.template.loader import render_to_string
+from django.core.urlresolvers import reverse
+
 from core.auth import forms as auth_forms
 from core.models import ObjectGrant
 
 register = template.Library()
+
+
+@register.tag(name="permalink")
+def permalink(pk):
+    url = ''
+    return url
+
+
+@register.filter(name="download")
+def download(dataset_revision):
+    """
+    Devuelve la url de descarga del dataset
+    :param dataset:
+    :return:
+    """
+    return reverse('dataset_manager.action_download', 'microsites.urls',
+                   kwargs={'dataset_id': dataset_revision.dataset_id, 'slug': dataset_revision.slug})
 
 
 def datatable_search(table_prefix=''):
