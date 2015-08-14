@@ -175,6 +175,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.PENDING_REVIEW
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.REVIEW)
 
     def _send_childs_to_review(self):
         """ Envia a revision todos los datastreams hijos en cascada """
@@ -199,6 +200,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.APPROVED
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.ACCEPT)
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a dataset revision """
@@ -211,6 +213,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.DRAFT
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.REJECT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
