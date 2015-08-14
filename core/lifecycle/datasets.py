@@ -119,7 +119,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset_revision.save()
 
         self._update_last_revisions()
-        
+
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
 
