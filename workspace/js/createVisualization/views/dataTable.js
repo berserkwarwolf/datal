@@ -1,47 +1,31 @@
-
-Handsontable.renderers.registerRenderer('selectedTextRenderer', 
-  function selectedTextRenderer (instance, TD, row, col, prop, value, cellProperties) {
-    if (cellProperties.classArray) {
-      TD.className = '';
-      for (var i = 0; i < cellProperties.classArray.length; i++) {
-        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-      };
+function HandsontableClassRendererPatch(TD, cellProperties) {
+  if (cellProperties.classArray) {
+    TD.className = '';
+    for (var i = 0; i < cellProperties.classArray.length; i++) {
+      TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
     };
-    return Handsontable.renderers.TextRenderer.apply(this, arguments);
-  });
+  };
+};
 
-Handsontable.renderers.registerRenderer('selectedNumericRenderer', 
-  function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
-    if (cellProperties.classArray) {
-      TD.className = '';
-      for (var i = 0; i < cellProperties.classArray.length; i++) {
-        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-      };
-    };
-    return Handsontable.renderers.NumericRenderer.apply(this, arguments);
-  });
+Handsontable.renderers.registerRenderer('selectedTextRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.TextRenderer.apply(this, arguments);
+});
 
-// Handsontable.renderers.registerRenderer('selectedLinkRenderer', 
-//   function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
-//     if (cellProperties.classArray) {
-//       TD.className = '';
-//       for (var i = 0; i < cellProperties.classArray.length; i++) {
-//         TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-//       };
-//     };
-//     return Handsontable.renderers.NumericRenderer.apply(this, arguments);
-//   });
+Handsontable.renderers.registerRenderer('selectedNumericRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+});
 
-Handsontable.renderers.registerRenderer('selectedDateRenderer', 
-  function selectedNumericRenderer (instance, TD, row, col, prop, value, cellProperties) {
-    if (cellProperties.classArray) {
-      TD.className = '';
-      for (var i = 0; i < cellProperties.classArray.length; i++) {
-        TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-      };
-    };
-    return Handsontable.renderers.NumericRenderer.apply(this, arguments);
-  });
+Handsontable.renderers.registerRenderer('selectedDateRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.DateRenderer.apply(this, arguments);
+});
+
+Handsontable.renderers.registerRenderer('selectedLinkRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+});
 
 var DataTableView = Backbone.View.extend({
 
@@ -50,13 +34,24 @@ var DataTableView = Backbone.View.extend({
   available: _.range(9, 0, -1),
 
   events: {
-    'click button.add-btn': 'addSelection',
+    'click button.add-btn': 'addSelection'
   },
 
   initialize: function (options) {
     var self = this;
 
-    this.data = options.data;
+
+    var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
+      return col;
+    });
+
+    var rows = _.map(_.range(0, invoke.fRows), function () {
+      var row = invoke.fArray.splice(0, invoke.fCols);
+      return _.pluck(row, 'fStr');
+    });
+
+    this.data = rows;
+
     var columns = [
         {renderer: 'selectedTextRenderer'},
         {renderer: 'selectedNumericRenderer'},
@@ -74,7 +69,6 @@ var DataTableView = Backbone.View.extend({
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true, readOnly: true,
       allowInsertRow: false, allowInsertColumn: false,
-      renderer: 'selectedTextRenderer',
       colWidths: 80,
       columns: columns,
     });
