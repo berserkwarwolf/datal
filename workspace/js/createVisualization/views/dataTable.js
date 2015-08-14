@@ -1,3 +1,32 @@
+function HandsontableClassRendererPatch(TD, cellProperties) {
+  if (cellProperties.classArray) {
+    TD.className = '';
+    for (var i = 0; i < cellProperties.classArray.length; i++) {
+      TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
+    };
+  };
+};
+
+Handsontable.renderers.registerRenderer('selectedTextRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.TextRenderer.apply(this, arguments);
+});
+
+Handsontable.renderers.registerRenderer('selectedNumericRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+});
+
+Handsontable.renderers.registerRenderer('selectedDateRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.DateRenderer.apply(this, arguments);
+});
+
+Handsontable.renderers.registerRenderer('selectedLinkRenderer', function () {
+  HandsontableClassRendererPatch(arguments[1], arguments[6]);
+  return Handsontable.renderers.NumericRenderer.apply(this, arguments);
+});
+
 var DataTableView = Backbone.View.extend({
 
   // Holds available selection identifiers
@@ -5,42 +34,52 @@ var DataTableView = Backbone.View.extend({
   available: _.range(9, 0, -1),
 
   events: {
-    'click button.add-btn': 'addSelection',
+    'click button.add-btn': 'addSelection'
   },
 
   initialize: function (options) {
     var self = this;
 
-    Handsontable.renderers.registerRenderer('selectionRenderer', 
-      function selectionRenderer (instance, TD, row, col, prop, value, cellProperties) {
-        if (cellProperties.classArray) {
-          TD.className = '';
-          for (var i = 0; i < cellProperties.classArray.length; i++) {
-            TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-          };
-        };
-        // var renderer = instance.getCellRenderer(row, col);
-        // console.log(rende)
-        return Handsontable.renderers.TextRenderer.apply(this, arguments);
-      });
+
+    var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
+      return col;
+    });
+
+    var rows = _.map(_.range(0, invoke.fRows), function () {
+      var row = invoke.fArray.splice(0, invoke.fCols);
+      return _.pluck(row, 'fStr');
+    });
+
+    this.data = rows;
+
+    var columns = [
+        {renderer: 'selectedTextRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedNumericRenderer'},
+        {renderer: 'selectedTextRenderer'},
+        {renderer: 'selectedTextRenderer'}
+      ];
+    // this.getCols();
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
-      data: options.data,
-      rowHeaders: true,
-      colHeaders: true,
-      readOnly: true,
-      renderer: 'selectionRenderer',
-      columns: [
-        {data: 'year', type: 'date', dateFormat: 'YYYY', correctFormat: true,},
-        {data: 'brand'},
-        {data: 'value', type: 'numeric'}
-      ]
+      rowHeaders: true, colHeaders: true, readOnly: true,
+      allowInsertRow: false, allowInsertColumn: false,
+      colWidths: 80,
+      columns: columns,
     });
+
+    window.hot = this.table.getInstance();
+    this.table.loadData(this.data);
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       self.cacheSelection({
-        from:{row: r1, col: c1},
+        from: {row: r1, col: c1},
         to: {row: r2, col: c2}
       });
     });

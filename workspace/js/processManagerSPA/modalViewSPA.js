@@ -27,7 +27,7 @@ _.extend(ModalViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 	// Modal functions
 
 	initialize: function(){
-		this.render();
+		//this.render();
 		return this;
 	},
 
@@ -35,11 +35,13 @@ _.extend(ModalViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 		$('body').append('<div id="'+this.options.id+'" class="process-manager-modal"></div>');
 		this.$el = $('#'+this.options.id);
 		this.$el.html(_.template($('#'+this.options.id+'Template').html()));
+		this.delegateEvents();
 		return this;
 	},
 
 	open: function(){
 		$('.process-manager-modal').hide();
+		this.render();
 		this.$el.show();
 	},
 

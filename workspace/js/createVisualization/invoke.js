@@ -3,7 +3,7 @@ var invoke = {
   "fArray": [
     {
       "fStr": "Year",
-      "fType": "TEXT",
+      "fType": "DATE",
       "fHeader": true
     },
     {
