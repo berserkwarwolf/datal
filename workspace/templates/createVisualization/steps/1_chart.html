@@ -32,30 +32,30 @@
 									<fieldset>
 
 										<div class="btnGroup">
-											<div class="subtitle">Compara en el tiempo</div>
-											<button class="line">&nbsp;</button>
-											<button class="area">&nbsp;</button>
+											<p>Compara en el tiempo</p>
+											<button class="line" title="Línea">&nbsp;</button>
+											<button class="area" title="Área">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
-											<div class="subtitle">Compara entre items</div>
-											<button class="cols">&nbsp;</button>
-											<button class="bars">&nbsp;</button>
+											<p>Compara entre items</p>
+											<button class="cols" title="Columnas">&nbsp;</button>
+											<button class="bars active" title="Barras">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
-											<div class="subtitle">Composición estática</div>
-											<button class="pie">&nbsp;</button>
+											<p>Composición estática</p>
+											<button class="pie" title="Torta">&nbsp;</button>
 										</div>
 
-										<div>
-											<p>You are using</p>
-											<select>
-												<option>Google visualizations</option>
-												<option>D3</option>
-											</select>
-										</div>
+									</fieldset>
 
+									<fieldset>
+										<p>You are using</p>
+										<select>
+											<option>Google visualizations</option>
+											<option>D3</option>
+										</select>
 									</fieldset>
 
 								</form>
@@ -133,38 +133,38 @@
 				<div class="preview-container">
 
 					<div class="row">
-						<div class="col-md-12">
-							<div class="title text-center">
-								<input type="text" value="¿Cuál es el título?">
+						<div class="col-md-11 col-md-offset-1">
+							<div class="text-center">
+								<input type="text" placeholder="[  ¿Cuál es el título?  ]">
 							</div>
 						</div>
 					</div>
 
 					<div class="row">
 
-						<div class="col-md-2">
+						<div class="col-md-1">
 							<div class="axisYName">
-								<input type="text" value="Nombre del eje Y">
+								<input type="text" placeholder="[  Nombre del eje Y  ]">
 							</div>
 						</div>
 
 						<div class="col-md-2">
 							<div class="axisContent">
-								<button class="btn edit plus">&nbsp;</button>
+								<button class="btn cube edit plus">&nbsp;</button>
 								<p>Eje Y</p>
 							</div>
 						</div>
 
-						<div class="col-md-6">
-							<div class="chartContent bar">
-								<button class="btn edit plus">&nbsp;</button>
+						<div class="col-md-7">
+							<div class="chartContent">
+								<button class="btn cube edit plus">&nbsp;</button>
 								<p>Seleccioná los datos a mostrar</p>
 							</div>
 						</div>
 
 						<div class="col-md-2">
 							<div class="chartLeyend">
-								<button class="btn edit plus">&nbsp;</button>
+								<button class="btn cube edit plus">&nbsp;</button>
 								<p>Seleccioná referencias</p>
 							</div>
 						</div>
@@ -173,14 +173,14 @@
 
 					<div class="row">
 
-						<div class="col-md-offset-4 col-md-6">
+						<div class="col-md-offset-3 col-md-7">
 
-							<div class="axisXName">
-								<input type="text" value="Nombre del eje X">
+							<div class="axisXName pull-left">
+								<input class="text-left" type="text" placeholder="[  Nombre del eje X  ]">
 							</div>
 
-							<div class="axisXMaxValue">
-								<input type="text" value="Valor máximo">
+							<div class="axisXMaxValue pull-right">
+								<input class="text-right" type="text" placeholder="[  Valor máximo  ]">
 							</div>
 
 						</div>

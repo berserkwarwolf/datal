@@ -770,4 +770,9 @@ border-color: #ccc;}
 .show{display:block;}
 .hide{display:none;}
 
-.text-center{text-align:center;}
+.text-left{text-align:left !important;}
+.text-center{text-align:center !important;}
+.text-right{text-align:right !important;}
+
+.pull-left{float: left;}
+.pull-right{float: right;}
