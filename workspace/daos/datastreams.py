@@ -6,7 +6,7 @@ from django.db.models import Q, F
 from core.exceptions import SearchIndexNotFoundException
 from core.models import DatastreamI18n, DataStreamRevision
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.choices import STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import STATUS_CHOICES
 from workspace import settings
 
 import logging
@@ -16,14 +16,15 @@ logger = logging.getLogger(__name__)
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None):
+    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
         """ Get full data """
+        fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
         datastream_revision = datastream_id is None and \
                            DataStreamRevision.objects.select_related().get(
                                pk=datastream_revision_id, category__categoryi18n__language=language,
                                datastreami18n__language=language) or \
                            DataStreamRevision.objects.select_related().get(
-                               pk=F('datastream__last_revision'), category__categoryi18n__language=language,
+                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
                                datastreami18n__language=language)
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
@@ -127,7 +128,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             status = res.get('status')
 
             filters.add(('status', status,
-                unicode(DataStreamRevision.STATUS_CHOICES[status])
+                unicode(STATUS_CHOICES[status])
                 ))
             if 'category__categoryi18n__name' in res:
                 filters.add(('category', res.get('category__categoryi18n__name'),
