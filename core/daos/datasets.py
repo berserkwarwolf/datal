@@ -126,17 +126,19 @@ class DatasetSearchDAOFactory():
 
         return self.search_dao
 
+
 class DatasetSearchIndexDAO():
     """clase padre para las Dataset[indexador]DAO"""
 
     TYPE="dt"
 
     def __init__(self, dataset_revision):
-	self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger(__name__)
         self.dataset_revision=dataset_revision
 
     def add(self):
         return True
+
     def delete(self):
         return True
 
@@ -153,9 +155,9 @@ class DatasetSearchIndexDAO():
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
-	# eliminado hasta que haya facets
-	#from core.models import add_facets_to_doc
-	#from core.helpers import get_meta_data_dict
+        # eliminado hasta que haya facets
+        #from core.models import add_facets_to_doc
+        #from core.helpers import get_meta_data_dict
 
         category=self._get_category()
         dataseti18n = self._get_i18n()
@@ -188,14 +190,14 @@ class DatasetSearchIndexDAO():
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
-# Eliminado hasta que haya facets
-#	# Update dict with facets
-#	try:
-#	    document = add_facets_to_doc(self, self.dataset_revision.dataset.user.account, document)
-#	except Exception, e:
-#	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
-#	
-#	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
+        # Eliminado hasta que haya facets
+        #	# Update dict with facets
+        #	try:
+        #	    document = add_facets_to_doc(self, self.dataset_revision.dataset.user.account, document)
+        #	except Exception, e:
+        #	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
+        #
+        #	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
 
         return document
 
@@ -211,6 +213,7 @@ class DatasetSearchifyDAO(DatasetSearchIndexDAO):
         
     def remove(self):
         self.search_index.delete_documents([self._get_id()])
+
 
 class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
     """ class for manage access to datasets' ElasticSearch documents """
