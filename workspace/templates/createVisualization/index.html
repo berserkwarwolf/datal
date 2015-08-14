@@ -188,23 +188,23 @@ $(document).ready(function(){
     {year: 2014, brand: 'Volvo', value: 10},
   ];
 
+  var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
+    return col;
+  });
+
+  var rows = _.map(_.range(0, invoke.fRows), function () {
+      var row = invoke.fArray.splice(0, invoke.fCols);
+      return _.pluck(row, 'fStr');
+    });
+
   var myView = new DataTableView({
     el: '#example',
-    data: data,
+    data: rows,
     collection: selectedCollection
   });*/
 
 
 });
-
-var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
-  return col;
-});
-
-var rows = _.map(_.range(0, invoke.fRows), function () {
-    var row = invoke.fArray.splice(0, invoke.fCols);
-    return _.pluck(row, 'fStr');
-  });
 
 </script>
 
