@@ -709,6 +709,17 @@ class DatasetRevision(models.Model):
     def __unicode__(self):
         return  unicode(self.id)
 
+    def get_endpoint_full_url(self):
+        logger.info('LALA')
+        if settings.USE_DATASTORE == 'sftp':
+            # We MUST rewrite all file storage logic very SOON
+            return '{}/{}/{}'.format(
+                settings.SFTP_INTERNAL_BASE_URL,
+                settings.AWS_BUCKET_NAME,
+                self.end_point.replace('file://', '')
+            )
+        return self.end_point
+
     def is_pending_review(self):
         return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
 

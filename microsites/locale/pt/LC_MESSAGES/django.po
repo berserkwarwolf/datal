@@ -605,3 +605,24 @@ msgstr "License"
 
 msgid "APP-READ-MORE-TEXT"
 msgstr "Read more"
+
+msgid "APP-YEARLY-TEXT"
+msgstr "Yearly"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Monthly"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Weekly"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Daily"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Hourly"
+
+msgid "APP-MINUTELY-TEXT"
+msgstr "Minutely"
+
+msgid "APP-OTHER-TEXT"
+msgstr "Other"

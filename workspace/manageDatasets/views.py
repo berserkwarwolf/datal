@@ -33,11 +33,10 @@ def action_request_file(request):
 
     if form.is_valid():
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
-
         try:
             response = HttpResponse(mimetype='application/force-download')
             response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
-            response.write(urllib2.urlopen(dataset_revision.end_point).read())
+            response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
         except Exception:
             import logging
             logger = logging.getLogger(__name__)
@@ -239,6 +238,7 @@ def create(request, collect_type='index'):
 @requires_if_publish('dataset')
 @requires_review
 @require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
     auth_manager = request.auth_manager
