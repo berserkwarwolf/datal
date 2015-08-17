@@ -15,10 +15,6 @@
 					<li>
 						<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
 					</li>
-					<li>
-						<a class="selectData">select data</a>
-					</li>
-
 				</ul>
 
 				<div class="sidebar">
@@ -37,28 +33,28 @@
 
 										<div class="btnGroup">
 											<p>Compara en el tiempo</p>
-											<button class="line" title="Línea">&nbsp;</button>
-											<button class="area" title="Área">&nbsp;</button>
+											<button class="chartType line" data-type="line" title="Línea">&nbsp;</button>
+											<button class="chartType area" data-type="area" title="Área">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Compara entre items</p>
-											<button class="cols" title="Columnas">&nbsp;</button>
-											<button class="bars active" title="Barras">&nbsp;</button>
+											<button class="chartType cols" data-type="cols" title="Columnas">&nbsp;</button>
+											<button class="chartType bars" data-type="bars" title="Barras">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Composición estática</p>
-											<button class="pie" title="Torta">&nbsp;</button>
+											<button class="chartType pie" data-type="pie" title="Torta">&nbsp;</button>
 										</div>
 
 									</fieldset>
 
 									<fieldset>
 										<p>You are using</p>
-										<select>
-											<option>Google visualizations</option>
-											<option>D3</option>
+										<select id="chartLibrary">
+											<option value="google">Google visualizations</option>
+											<option value="d3">D3</option>
 										</select>
 									</fieldset>
 
@@ -161,8 +157,10 @@
 
 						<div class="col-md-7">
 							<div class="chartContent">
-								<button class="btn cube edit plus">&nbsp;</button>
-								<p>Seleccioná los datos a mostrar</p>
+								<button class="btn cube edit plus selectData">&nbsp;</button>
+								<div id="chartContainer">
+									<p>Seleccioná los datos a mostrar</p>
+								</div>
 							</div>
 						</div>
 

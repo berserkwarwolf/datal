@@ -26,7 +26,6 @@ var StartView = StepViewSPA.extend({
 	onChooseType: function (e) {
 		var $target = $(e.currentTarget),
 			type = $target.data('type');
-		console.log('selecionado',type);
 		this.model.set('type', type);
 		this.next();
 		//this.trigger('step', 1);

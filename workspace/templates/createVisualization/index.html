@@ -3,10 +3,24 @@
 
 {% block meta %}
 
- {% load static %}
+{% load static %}
+<!-- Libraries -->
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+
 <script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
+
 
 {% compress css %}
+<link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
@@ -37,6 +51,17 @@
 <script language="javascript" src="/js_workspace/processManagerSPA/buttonsViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/processManagerSPA/modalViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+<!-- Charts types & instances -->
+<script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/barChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/lineChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+
 <!-- Common Chart model -->
 <script language="javascript" src="/js_workspace/createVisualization/visualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 
@@ -45,7 +70,6 @@
 <script language="javascript" src="/js_workspace/createVisualization/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/invoke.js"></script>
-
 
 <!-- Viz modals -->
 <script language="javascript" src="/js_workspace/createVisualization/modals/1_chartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -142,7 +166,6 @@ $(document).ready(function(){
   processManagerViewSPA.register( chartView );
   processManagerViewSPA.register( finishView );
 
-
   //Create modals
   var selectDataModal = new ChartSelectDataModalView(
     {
@@ -162,47 +185,6 @@ $(document).ready(function(){
 
   //Start
   processManagerViewSPA.start();
-
-
-
-
-  // Gaston
-  /*var selectedCollection = new Backbone.Collection();
-
-  var selectedRangesView = new SelectedRangesView({
-    el: '.selected-ranges-view',
-    collection: selectedCollection
-  });
-
-  // var data = [
-  //   ["Year", "Ford", "Volvo", "Toyota", "Honda"],
-  //   ["2014", 10, 11, 12, 13],
-  //   ["2015", 20, 11, 14, 13],
-  //   ["2016", 30, 15, 12, 13]
-  // ];
-
-  var data = [
-    {year: 2014, brand: 'Volvo', value: 10},
-    {year: 2014, brand: 'Volvo', value: 10},
-    {year: 2014, brand: 'Volvo', value: 10},
-    {year: 2014, brand: 'Volvo', value: 10},
-  ];
-
-  var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
-    return col;
-  });
-
-  var rows = _.map(_.range(0, invoke.fRows), function () {
-      var row = invoke.fArray.splice(0, invoke.fCols);
-      return _.pluck(row, 'fStr');
-    });
-
-  var myView = new DataTableView({
-    el: '#example',
-    data: rows,
-    collection: selectedCollection
-  });*/
-
 
 });
 
