@@ -10,15 +10,11 @@ class DataStreamSerializer(serializers.ModelSerializer):
         fields = ()
 
     def to_representation(self, obj):
-        language = 'en'
-        if 'request' in self.context:
-            request = self.context['request']
-            passticket = request.GET.get('passticket', None)
-            if passticket:
-                language = Account.objects.get(pk=request.account_id).get_preference('account.language')
+        request = self.context['request']
         
         datastreamrevision_id =  obj.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
-        doc = DS(datastreamrevision_id, language)
+        
+        doc = DS(datastreamrevision_id, request.auth['language'])
         
         answer = super(DataStreamSerializer, self).to_representation(obj)
 

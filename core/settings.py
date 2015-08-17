@@ -338,6 +338,13 @@ BOWER_INSTALLED_APPS = (
     'underscore',
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'api.auth.DatalApiAuthentication',
+    )
+}
+
 try:
     from core.local_settings import *
 except ImportError:

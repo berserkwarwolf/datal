@@ -39,3 +39,9 @@ class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
             if ivk:
                 return Response(json.loads(ivk[0]))
         return Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
+
+
+    #def list(self, request):
+    #    queryset = User.objects.all()
+    #    serializer = UserSerializer(queryset, many=True)
+    #    return Response(serializer.data)
