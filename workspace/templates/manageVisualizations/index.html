@@ -2,12 +2,16 @@
 {% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
+
+{# CSS #}
 {% compress css %}
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-paginator.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-text-cell.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/visualizationForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/manageCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/manageDataviews.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>

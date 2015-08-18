@@ -1,30 +1,30 @@
-/*DATA STREAM FORM*/
-.dataStreamForm .form .row{padding-bottom:20px;}
-.dataStreamForm .form  .formErrorMessageContainer{float:left;}
-.dataStreamForm .form  .ast{float:left;padding-left:4px;display:block;color:#ff3300;font-size:14px;}
-.dataStreamForm .form p.tip{clear:both;padding-bottom:0;}
+/* VISUALIZATION FORM*/
+.visualizationForm .form .row{padding-bottom:20px;}
+.visualizationForm .form  .formErrorMessageContainer{float:left;}
+.visualizationForm .form  .ast{float:left;padding-left:4px;display:block;color:#ff3300;font-size:14px;}
+.visualizationForm .form p.tip{clear:both;padding-bottom:0;}
 /*
-.dataStreamForm .form .row label{text-align:right;font-size:12px;color:#767676;font-weight:bold;display:block;float:left;width:90px;padding-right:8px;}
+.visualizationForm .form .row label{text-align:right;font-size:12px;color:#767676;font-weight:bold;display:block;float:left;width:90px;padding-right:8px;}
 */
-.dataStreamForm .form .row input, .dataStreamForm .form .row textarea{background: none repeat scroll 0 0 #fff;
+.visualizationForm .form .row input, .visualizationForm .form .row textarea{background: none repeat scroll 0 0 #fff;
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) inset;
     box-sizing: border-box;
     font-size: 12px;
     padding: 5px;
     width: 440px;}
-.dataStreamForm .form .row select{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:6px;font:normal 12px Arial, Helvetica, sans-serif;width:440px;}
-.dataStreamForm .form .row textarea{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:4px;font:normal 12px Arial, Helvetica, sans-serif;width:502px;height:50px;}
-.dataStreamForm .form .row.checkbox{padding-left:98px;}
-.dataStreamForm .form .row.checkbox input{width:auto;-moz-border-radius:0;-webkit-border-radius:0;-border-radius:0;padding:0;float:left;}
-.dataStreamForm .form .row.checkbox label{font-size:12px;font-weight:normal;text-align:left;padding:2px 0 0 5px;width:auto !important;height:auto;line-height:normal;}
-.dataStreamForm h5{font-size:14px;padding:0 0 15px;color:#F19030;font-weight:normal;border-bottom:1px solid #e4e4e4;margin-bottom:25px;}
-.dataStreamForm p.tip{clear:both;color:#999;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.visualizationForm .form .row select{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:6px;font:normal 12px Arial, Helvetica, sans-serif;width:440px;}
+.visualizationForm .form .row textarea{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:4px;font:normal 12px Arial, Helvetica, sans-serif;width:502px;height:50px;}
+.visualizationForm .form .row.checkbox{padding-left:98px;}
+.visualizationForm .form .row.checkbox input{width:auto;-moz-border-radius:0;-webkit-border-radius:0;-border-radius:0;padding:0;float:left;}
+.visualizationForm .form .row.checkbox label{font-size:12px;font-weight:normal;text-align:left;padding:2px 0 0 5px;width:auto !important;height:auto;line-height:normal;}
+.visualizationForm h5{font-size:14px;padding:0 0 15px;color:#F19030;font-weight:normal;border-bottom:1px solid #e4e4e4;margin-bottom:25px;}
+.visualizationForm p.tip{clear:both;color:#999;font-size:11px;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .formContainer .buttons .button {display:inline-block;}
 
 /*TAGS / CURATION*/
-.dataStreamForm .form .row #id_edit_dashboard_tags_container{float:left;width:270px;}
-.dataStreamForm .form .row .tagsContent{padding:0;margin-top:2px;}
-.dataStreamForm .form .row .inputNewTag{float:none;}
+.visualizationForm .form .row #id_edit_dashboard_tags_container{float:left;width:270px;}
+.visualizationForm .form .row .tagsContent{padding:0;margin-top:2px;}
+.visualizationForm .form .row .inputNewTag{float:none;}
 .tag{float:left;display:block;margin:4px 4px 0 0;}
 .tag .tagInner{padding:0;}
 .tag .tagTxt{background:#e9e8e8 url(/static/core/images/common/dg_tagWithOver.gif) repeat-x 0 0;word-wrap:break-word;display:block;float:left;padding:0 8px;color:#767676;font-size:11px;text-shadow:0 1px 0 #fff;line-height:20px;height:20px;-moz-border-radius:7px 0 0 7px;-webkit-border-radius:7px 0 0 7px;border-radious:7px 0 0 7px;border:1px solid #e2e0e0;border-right:0;}
@@ -54,10 +54,10 @@
 .recomendedTags li.selected a:hover{text-decoration:none;}
 
 /*SOURCES*/
-.dataStreamForm .form .addNewSource{margin-top:0;margin-left:115px;}
-.dataStreamForm .form .addNewSource h6{font-size:12px;font-weight:bold;padding-bottom:10px;}
-.dataStreamForm .form .addNewSource .row label{width:60px;}
-.dataStreamForm .form .addNewSource .row input{width:440px;}
+.visualizationForm .form .addNewSource{margin-top:0;margin-left:115px;}
+.visualizationForm .form .addNewSource h6{font-size:12px;font-weight:bold;padding-bottom:10px;}
+.visualizationForm .form .addNewSource .row label{width:60px;}
+.visualizationForm .form .addNewSource .row input{width:440px;}
 
 /*CREATE DASHBOARD FORM*/
 .createDBForm .errorBox .msg{margin-bottom:15px;}
