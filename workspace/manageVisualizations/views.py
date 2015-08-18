@@ -10,7 +10,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from api.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
+from core.helpers import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import *
 from core.engine import invoke
@@ -151,6 +151,7 @@ def view(request):
             return render_to_response('viewChart/index.html', locals())
     else:
         raise Http404
+
 
 @login_required
 @require_http_methods(['POST','GET'])
