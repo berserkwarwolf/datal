@@ -15,4 +15,6 @@ urlpatterns = patterns(
     url(r'^create$', create, name='manageVisualizations.create'),
     url(r'^create/(?P<type>[a-z]+)$', create, name='manageVisualizations.create_type'),
     url(r'^related_resources$', related_resources, name='manageVisualizations.related_resources'),
+    url(r'^edit$', edit, name='manageVisualizations.edit'),
+    url(r'^edit/(?P<visualization_revision_id>\d+)$', edit, name='manageVisualizations.edit'),
 )

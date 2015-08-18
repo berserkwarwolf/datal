@@ -1,0 +1,243 @@
+{% load i18n extra_tags core_components components %}
+
+{# Active Filter #}
+<script type="text/template" id="active-filters-template">
+	<li><span><%= filter_name %></span> <a class="remove" title="{% trans 'FILTERS-REMOVE-TEXT' %}" id="<%= filter_id %>">x</a></li>
+</script>
+
+{# Filters view #}
+<script type="text/template" id="filters-template">
+  <section class="filters-container">
+
+   <% if (active.length !== 0) {%>
+   <div class="activeFilters">
+      <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <ul id="active-filters-list">
+        <% _(active).each(function( item ){ %>
+        <li>
+          <span><%= item.title %></span> 
+          <a class="remove" data-cid="<%= item.cid %>" title="{% trans 'FILTERS-REMOVE-TEXT' %}">x</a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+   <% if (author.length !== 0) {%>
+   <div class="filters">
+      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <ul>
+        <% _(author).each(function( item ){ %>
+        <li>
+          <a class="filter-add" data-cid="<%= item.cid %>">
+            <%= item.title %>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+   <% if (status.length !== 0) {%>
+   <div class="filters">
+      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <ul>
+        <% _(status).each(function( item ){ %>
+        <li>
+          <a class="filter-add" data-cid="<%= item.cid %>">
+            <%= item.title %>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+  </section>
+</script>
+
+{# Grid - Title Cell #}
+<script type="text/template" id="grid-titlecell-template">
+
+	{# Title #}
+  <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
+
+  {# Last Modified #}
+  <% if(created_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% } %>
+
+  {# Actions #}
+  <ul class="actions clearfix">
+
+		{# Review #}
+  	<% if( authManager.isPublisher() || authManager.isAdmin() ){ %>
+    	<% 
+        // Status Pending Review = 1
+        if( status === 1 ){ 
+      %>
+      	<li class="review"><a href="<%=url%>" title=<%= gettext('APP-REVIEW-TEXT') %>><%= gettext('APP-REVIEW-TEXT')%></a></li>
+      <% } %>
+    <% } %>
+
+    {# Create Visualization #}
+    {% comment %}
+    <li class="create">
+    	<a href="{% url 'manageVisualizations.create' %}?visualization_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+    </li>
+    {% endcomment %}
+
+    {# Edit #}
+		<% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+    	<li class="edit">
+    		<a data-id="<%=id%>" data-url="{% url 'manageVisualizations.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+    	</li>
+    <% } %>
+
+    {# Delete #}
+    <% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+      <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a></li>
+    <% } %>
+
+  </ul>
+</script>
+
+{# Grid - visualization Cell #}
+<script type="text/template" id="grid-visualizationcell-template">
+  <a href="<%= visualization_url %>"><%= visualization_title %></a>
+</script>
+
+{# Edit - Add New Source #}
+<script type="text/template" id="id_AddNewSourceTemplate">
+  <div class="FL">  
+    <div class="nolabel">
+      <div class="insetFormTitle">{% trans 'APP-ADDNEW-TEXT' %}</div>
+    </div>
+
+    <div class="row clearfix">
+      <label for="id_name"></label>
+      <input type="text" name="name" id="id_name" placeholder="{% trans 'APP-NAME-TEXT' %}">
+    </div>
+
+    <div class="row clearfix">
+      <label for="id_url_source"></label>
+      <input type="text" name="url" id="id_url_source" placeholder="{% trans 'APP-URL-TEXT' %}">
+    </div>
+
+    <div class="row clearfix">
+      <a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
+    </div>
+  </div>
+</script>
+
+{# Edit - Add Source #}
+<script type="text/template" id="id_AddSourceTemplate">
+  <label for="id_source_name">{% trans 'APP-SOURCES-TEXT' %}</label>
+  <input type="text" name="source_name" id="id_source_name" tabindex="0">
+  <p class="tip">{% trans 'EDITDS-SOURCE-TIP1' %} <a id="id_addSourceButton" tabindex="-1">{% trans 'EDITDS-SOURCE-TIP2' %}</a></p>
+</script>
+
+{# Edit - Add Tag #}
+<script type="text/template" id="id_AddTagTemplate">
+  <label for="id_tag_name">{% trans 'APP-TAGS-TEXT' %}</label>
+  <input type="text" name="tag_name" id="id_tag_name" tabindex="0">
+  <p class="tip">{% trans 'OVEDITDS-TAGS-TIP' %}</p>
+</script>
+
+{# Edit - Tag #}
+<script type="text/template" id="id_TagTemplate">
+  <span class="tagInner clearfix">
+    <span class="tagTxt"><%= name %></span>
+    <a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
+  </span>
+</script>
+
+{# Edit - Data View #}
+<script type="text/template" id="id_editTemplate">
+<form>
+  <div class="ov-content">
+    <div class="col-1">
+     <fieldset>
+
+      {# title #}
+      <div class="row clearfix">
+        <label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
+        <input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
+        <span class="required">*</span>
+      </div>
+
+      {# description #}
+      <div class="row clearfix">
+        <label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
+        <input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
+        <span class="required">*</span>
+      </div>
+
+      {# category #}
+      <div class="row clearfix">
+        <label for="id_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
+        <select name="category" id="id_category" data-bind="value:category,options:allCategories" tabindex="0">
+        </select>
+        <span class="required">*</span>
+      </div>
+
+      {# status #}
+      <div class="row clearfix divider">
+        <label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
+        <select name="status" class="FL" id="id_status" data-bind="value:status,options:allStatus">
+        </select>
+        <span class="required">*</span>
+      </div>
+
+      
+
+      {# Sources #}
+      <div class="row clearfix">
+        <div id="sourceForm">
+          <div id="addSource"></div>
+          <div class="sourcesContent"></div>
+          <div id="addNewSource"></div>
+        </div>
+      </div>
+
+      {# Tags #}
+      <div class="row clearfix">
+        <div id="tagForm">
+          <div id="addTag"></div>
+          <div class="tagsContent"></div>
+        </div>
+      </div>
+
+     </fieldset>
+    </div>
+
+    <div class="col-2 col-border">
+     <fieldset>
+      {# Notes #}
+      <div class="row clearfix">
+        <label for="id_notes">{% trans 'APP-NOTES-TEXT' %}</label>
+      </div>
+      <div class="row clearfix">
+        <div class="textarea clearfix FL">
+          <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
+        </div>
+      </div>
+     </fieldset>
+    </div>
+  </div>
+
+  <div class="ov-bottom">
+    <div class="ov-buttons">
+      <a id="id_edit_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
+      <a id="id_edit_cancel" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+    </div>
+  </div>
+
+</form>
+</script>
