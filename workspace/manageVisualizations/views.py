@@ -32,13 +32,18 @@ from core.daos.visualizations import VisualizationDBDAO
 @require_GET
 def list(request):
     """ list all dataviews """
-    total_resources = 0
-    account_domain = request.preferences['account.domain']
-    #vs_dao = VisualizationDBDAO()
-    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
-        return render_to_response('manageVisualizations/noResults.html', locals())
+    dao = VisualizationDBDAO()
+
+    resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
+
+    for resource in resources:
+        resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
+
+    filters = dao.query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
 
     return render_to_response('manageVisualizations/index.html', locals())
+
 
 @login_required
 @require_GET
@@ -208,3 +213,21 @@ def related_resources(request):
 
     associated_visualizations =resource.related_resources_simple(types=resource_type)
     return JSONHttpResponse(json.dumps(associated_visualizations))
+
+
+@login_required
+@require_GET
+def action_view(request, revision_id):
+
+    language = request.auth_manager.language
+    try:
+        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
+    except DataStreamRevision.DoesNotExist:
+        raise DataStreamNotFoundException()
+
+    account_id = request.auth_manager.account_id
+    credentials = request.auth_manager
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
+    status_options = credentials.get_allowed_actions()
+
+    return render_to_response('viewDataStream/index.html', locals())

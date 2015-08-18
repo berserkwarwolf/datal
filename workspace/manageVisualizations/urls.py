@@ -2,9 +2,11 @@ from django.conf.urls import patterns, url
 from workspace.manageVisualizations.views import *
 from workspace.manageDataviews.views import filter as filterDataview
 
+
 urlpatterns = patterns(
     '',
     url(r'^$', list, name='manageVisualizations.list'),
+    url(r'^(?P<revision_id>\d+)$', action_view, name='manageVisualizations.view'),
     url(r'^filter$', filter, name='manageVisualizations.filter'),
     url(r'^filter_dataview$', filterDataview, name='manageDataviews.filter'),
     url(r'^remove/(?P<type>[a-z]+)/(?P<id>\d+)$', remove, name='manageVisualizations.remove'),
