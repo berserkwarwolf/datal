@@ -23,7 +23,7 @@ from microsites.daos.datastreams import DatastreamDAO
 from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
-from workspace.daos.visualizations import VisualizationDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 
 
 @login_required
