@@ -47,11 +47,13 @@ def list(request):
 
 @login_required
 @require_GET
+@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
     filters = bb_request.get('filters')
     filters_dict = ''
+    filter_name= ''
     sort_by='-id'
 
     if filters is not None and filters != '':
@@ -60,6 +62,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
         itemsxpage = int(bb_request.get('itemxpage'))
+    if bb_request.get('q') is not None and bb_request.get('q') != '':
+        filter_name = bb_request.get('q')
     if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
         if bb_request.get('sort_by') == "title":
             sort_by ="visualizationi18n__title"
@@ -74,19 +78,24 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     #order = bb_request.get('sortorder')
     #filters_dict=filters_dict
 
-    vs_dao = VisualizationDAO(user_id=request.user.id)
-    resources,total_resources = vs_dao.query(account_id=request.account.id,
-                                              language=request.user.language,
-                                              page=page, itemsxpage=itemsxpage
-                                              ,filters_dict = filters_dict, order= sort_by)
+    vs_dao = VisualizationDBDAO()
+    resources,total_resources = vs_dao.query(
+        account_id=request.account.id,
+        language=request.user.language,
+        page=page,
+        itemsxpage=itemsxpage,
+        filters_dict=filters_dict,
+        sort_by=sort_by,
+        filter_name=filter_name
+    )
 
     for i in xrange(len(resources)):
         resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
 
     mimetype = "application/json"
 
-    return HttpResponse(json.dumps({'items':resources,'total_entries':total_resources}
-                        ,cls=DjangoJSONEncoder), mimetype=mimetype)
+    return HttpResponse(json.dumps({'items':resources,'total_entries':total_resources},cls=DjangoJSONEncoder),
+                        mimetype=mimetype)
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
