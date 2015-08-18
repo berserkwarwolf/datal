@@ -19,7 +19,7 @@ from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
-from workspace.daos.datasets import DatasetDBDAO
+from core.daos.datasets import DatasetDBDAO
 
 
 logger = logging.getLogger(__name__)
