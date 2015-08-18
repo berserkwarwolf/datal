@@ -8,6 +8,7 @@ from core.datastream_manager import forms
 from core.engine import invoke
 from core.helpers import RequestProcessor
 from rest_framework import status
+from core.models import Category
 import logging
 import json
 from core import engine
@@ -41,7 +42,19 @@ class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
         return Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
 
 
-    #def list(self, request):
-    #    queryset = User.objects.all()
-    #    serializer = UserSerializer(queryset, many=True)
-    #    return Response(serializer.data)
+    def list(self, request):
+        queryset = User.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+
+        ## Todo ver de donde saco la categoria
+        #account = request.auth['account']
+        #language = request.auth['language'] 
+        #category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
+
+        try:
+            results, search_time, facets = FinderManager().search(category_id = category['id']
+                                                                  , account_id = account.id)
+        except InvalidPage:
+            raise Http404
+
+        return Response(serializer.data)
