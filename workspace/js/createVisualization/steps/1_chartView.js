@@ -14,7 +14,6 @@ var ChartView = StepViewSPA.extend({
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
 
-
 		this.render();
 
 	}, 
@@ -60,8 +59,68 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	createChart: function(){
+		this.chartView = this.factoryChart();
+
+		this.chartRender();
+
 		//chart factory from model?
 		$('#chartContainer').html(this.model.get('type') + ' - '+ this.model.get('lib') );
+
+	},
+
+	factoryChart: function(){
+
+		switch(this.model.get('lib')){
+			case 'd3':
+			
+				switch(this.model.get('type')){
+					case 'line':
+						return charts.views.C3LineChart;
+					break;
+					case 'bars':
+						return charts.views.C3BarChart
+					break;
+					default:
+						return false;
+					break;
+				}
+			
+			break;
+
+			case 'google':
+			
+				switch(this.model.get('type')){
+					case 'line':
+						return charts.views.GoogleLineChart;
+					break;
+					case 'bars':
+						return charts.views.GoogleBarChart;
+					break;
+					default:
+						return false;
+					break;
+				}
+			
+			break;
+			
+			default:
+				return false;
+			break;
+		}
+	},
+
+	chartRender: function(){
+
+
+		if(this.chartView){
+			console.log(this.chartView);
+			this.chartInstance = this.chartView({
+
+			});
+		} else {
+			console.log('There are not class for this');
+		}
+
 	},
 
 	onPreviousButtonClicked: function(){
@@ -80,13 +139,14 @@ var ChartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 
+		// default google
+		this.model.set('lib','google');
+
 		// chart type from first step
 		var initial = this.model.get('type');
 		initial = (initial)?initial:'line';
 		this.selectGraphType(initial);
 
-		// default google
-		this.model.set('lib','google');
 	},
 
 
