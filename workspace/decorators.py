@@ -8,8 +8,8 @@ from workspace.exceptions import *
 from core.choices import StatusChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
-from workspace.daos.datasets import DatasetDBDAO
-from workspace.daos.datastreams import DataStreamDBDAO
+from core.daos.datasets import DatasetDBDAO
+from core.daos.datastreams import DataStreamDBDAO
 from core.models import DatasetRevision, DataStreamRevision
 
 
