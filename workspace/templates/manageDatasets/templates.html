@@ -11,7 +11,7 @@
 
    <% if (active.length !== 0) {%>
    <div class="activeFilters">
-      <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
       <ul id="active-filters-list">
        	<% _(active).each(function( item ){ %>
 				<li>
@@ -25,7 +25,7 @@
 
    <% if (category.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-CATEGORY-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-CATEGORY-TEXT' %}</h3>
       <ul>
        	<% _(category).each(function( item ){ %>
 				<li>
@@ -40,7 +40,7 @@
 
    <% if (type.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-TYPE-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-TYPE-TEXT' %}</h3>
       <ul>
        	<% _(type).each(function( item ){ %>
 				<li>
@@ -55,7 +55,7 @@
 
    <% if (author.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-AUTHOR-TEXT' %}</h3>
       <ul>
        	<% _(author).each(function( item ){ %>
 				<li>
@@ -70,7 +70,7 @@
 
    <% if (status.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-STATUS-TEXT' %}</h3>
       <ul>
        	<% _(status).each(function( item ){ %>
 				<li>

@@ -12,49 +12,20 @@ var BaseView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-		this.resizeContainer();
 		this.showHiddenElements();
 		this.setNavigationActiveTab();
 		this.initOpenDataSiteButton();
+		
+		var self = this;
+		$(window).scroll(function(){
+			self.headerScrollEffect();
+		}); 
 
 		this.render();
 	},
 
 	render: function(){
 		return this;
-	},
-
-	// Calculate height of .content-section to make it cover all the layout and resizable
-	resizeContainer: function(){
-		$(window).resize(function(){
-
-			var windowHeight;
-			if( $(window).height() < 600){
-				// Set window height minimum value to 600
-				windowHeight = 600;
-			}else{
-				windowHeight = $(window).height();
-			}
-
-			var sectionContentHeight =
-				windowHeight
-				- $('.header').height()
-				- parseInt($('.header').css('border-top-width').split('px')[0])
-				- parseInt($('.header').css('border-bottom-width').split('px')[0])
-				- $('.main-section .section-title').height()
-				- $('.footer').height()
-				- 3; // 3 rounds up the number, don't know why.
-
-			$('.main-section .section-content').css('min-height', sectionContentHeight+'px');
-
-			sectionContentHeight = 
-				sectionContentHeight
-				- parseInt($('.main-section .section-content').css('padding-top').split('px')[0])
-				- parseInt($('.main-section .section-content').css('padding-bottom').split('px')[0]);
-
-			$('.main-section .wrapper3').css('min-height', sectionContentHeight+'px');
-
-		}).resize();
 	},
 
 	// Shows up hidden elements
@@ -110,6 +81,30 @@ var BaseView = Backbone.View.extend({
 		event.preventDefault();
 		var button = event.currentTarget;
 		$(button).next('.submenu').toggle().parent().toggleClass('active');
+	},
+
+	// Header Scroll Effect
+	headerScrollEffect: function(){
+		var offset = this.getScrollXY(),
+			header = this.$el.find('.header');
+		offset[1] > 0 ? header.addClass('scrollEffect') : header.removeClass('scrollEffect');
+	},
+	getScrollXY: function(){
+	  var scrOfX = 0, scrOfY = 0;
+	  if( typeof( window.pageYOffset ) == 'number' ) {
+	    //Netscape compliant
+	    scrOfY = window.pageYOffset;
+	    scrOfX = window.pageXOffset;
+	  } else if( document.body && ( document.body.scrollLeft || document.body.scrollTop ) ) {
+	    //DOM compliant
+	    scrOfY = document.body.scrollTop;
+	    scrOfX = document.body.scrollLeft;
+	  } else if( document.documentElement && ( document.documentElement.scrollLeft || document.documentElement.scrollTop ) ) {
+	    //IE6 standards compliant mode
+	    scrOfY = document.documentElement.scrollTop;
+	    scrOfX = document.documentElement.scrollLeft;
+	  }
+	  return [ scrOfX, scrOfY ];
 	}
 
 });

@@ -59,14 +59,14 @@
           <!-- Filters -->
           <section class="filters-container" id="filters-container">
               <div class="activeFilters" id="activeFilters" style="display:none;">
-                  <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+                  <h3 class="">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
                   <ul id="active-filters-list"></ul>
               </div>
         
               <!-- Author -->
               {% if filters.author_filter %}
                 <div class="filters" id="author_filter">
-                  <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+                  <h3 class="">{% trans 'APP-AUTHOR-TEXT' %}</h3>
                   <ul>
                       {% for filter in filters.author_filter %}
                         <li><a class="filter_link" title="">{{ filter }}</a></li>
@@ -78,7 +78,7 @@
               <!-- Status -->
               {% if filters.status_filter %}
                 <div class="filters" id="status_filter">
-                  <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+                  <h3 class="">{% trans 'APP-STATUS-TEXT' %}</h3>
                   <ul>
                       {% for filter in filters.status_filter %}
                         <li><a class="filter_link" title="">{{ filter }}</a></li>
@@ -195,11 +195,11 @@ $(document).ready(function(){
           </ul>
         </div>
         <div class="right">
-          <div class="selectTitle font-mb">{% trans 'APP-OVERLAY-BULKACTIONS-CATEGORY' %}</div>
+          <div class="selectTitle ">{% trans 'APP-OVERLAY-BULKACTIONS-CATEGORY' %}</div>
           <select>
             <option value="">Category name</option>
           </select>
-          <div class="selectTitle font-mb">{% trans 'APP-OVERLAY-BULKACTIONS-STATUS' %}</div>
+          <div class="selectTitle ">{% trans 'APP-OVERLAY-BULKACTIONS-STATUS' %}</div>
           <select>
             <option value="">{% trans 'MODEL_STATUS_DRAFT' %}</option>
             <option value="">{% trans 'MODEL_STATUS_PENDING_REVIEW' %}</option>

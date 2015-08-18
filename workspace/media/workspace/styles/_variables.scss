@@ -8,9 +8,18 @@
 	$logo-signin-height:180px;													/* Height of image */
 
 	/* Header bar logo */
-	$logo-header-url:"../images/common/logo_datal_header_color.png";			/* URL of logo for Workspace header. Recommended size: 87x43 px */
-	$logo-header-width:186px;													/* Width of image. Height must be 43 px */
+	$logo-header-url:"../images/common/lg_datal.svg";			/* URL of logo for Workspace header. Area to work: 200x46 px */
+	$header-height: 46px;
 
+/* Nav */
+$nav-width: 200px;
+$nav-bg: #232831;
+$nav-text: #fff;
+$nav-hover-text: #232831;
+$nav-hover-bg: #fff;
+$nav-active-text: #232831;
+$nav-active-bg: #fff;
+$nav-collapsed-width: 54px;
 
 /* Branding */
 
@@ -21,7 +30,7 @@
 	$accent-color:#00d67e;														/* Brand secondary color */
 
 	/* Base color */
-	$color-base:#393939;														/* Color for backgrounds */
+	$color-base:#fff;														/* Color for backgrounds */
 
 
 /* Fonts */

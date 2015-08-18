@@ -22,7 +22,7 @@
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <fieldset>
-            <legend class="font-mb">{% trans "APP-SIGNUP-TITLE-TEXT" %}</legend>
+            <legend class="">{% trans "APP-SIGNUP-TITLE-TEXT" %}</legend>
             <div class="row">
                 {{form.account_name.label_tag}}
                 {{form.account_name}}
