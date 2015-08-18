@@ -3,7 +3,7 @@
 SECRET_KEY = '{{ pillar["application"]["settings"]["secret_key"] }}'
 ROOT_URLCONF = '{{ pillar["application"]["settings"]["root_urlconf"] }}'
 
-PAGINATION_RESULTS_PER_PAGE = '{{ pillar["application"]["settings"]["pagination_results_per_page"] }}'
+PAGINATION_RESULTS_PER_PAGE = {{ pillar["application"]["settings"]["pagination_results_per_page"] }}
 
 DATABASES = {
     'default': {

@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load extra_tags components %}
+{% load extra_tags components core_components %}
 
 <ul class="icons">
 	<li>
@@ -9,7 +9,7 @@
 		</a>
 	</li>
 	<li>
-		<a href="{{ dataset.downloadlink }}" class="icon download border-box sidebarIcon" id="id_openDownloadButton"
+		<a href="{{ dataset|download }}" class="icon download border-box sidebarIcon" id="id_openDownloadButton"
 		   rel="id_downloadSidebar">
 			<i></i> 
 			<span>{% trans 'APP-DOWNLOAD-TEXT' %}</span>

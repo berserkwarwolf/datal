@@ -12,7 +12,7 @@ from core.helpers import remove_duplicated_filters, filters_to_model_fields
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
-from workspace.daos.datastreams import DataStreamDBDAO
+from core.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision

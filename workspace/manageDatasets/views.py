@@ -19,7 +19,7 @@ from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
-from workspace.daos.datasets import DatasetDBDAO
+from core.daos.datasets import DatasetDBDAO
 
 
 logger = logging.getLogger(__name__)
@@ -57,12 +57,8 @@ def list(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.user.account.id,
-                                                language=request.user.language)
-
-    filters = ds_dao.query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
-
+    resources, total_resources = ds_dao.query(account_id=request.user.account.id, language=request.user.language)
+    filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
     return render_to_response('manageDatasets/index.html', locals())
