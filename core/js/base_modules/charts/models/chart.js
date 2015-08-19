@@ -15,6 +15,9 @@ charts.models.Chart = Backbone.Model.extend({
             yLabel: null
         },
     },
+    initialize: function () {
+        this.data = new charts.models.ChartData();
+    },
     fetchData: function () {
         var urlRoot = this.get('resourceUrl'),
             resourceID = this.get('resourceID');

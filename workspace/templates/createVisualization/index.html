@@ -122,11 +122,9 @@
 <script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script type="text/javascript">
-
-new MainView({
-  el: '.main-section'
-});
-
+  var mainView = new MainView({
+    el: '.main-section'
+  });
 </script>
 
 {% endblock %}
