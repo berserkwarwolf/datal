@@ -71,18 +71,22 @@ var ChartView = StepViewSPA.extend({
 	availableCharts: {
 		'd3':{
 			'line': {
-						'Class': charts.views.C3LineChart
+						'Class': charts.views.C3LineChart,
+						'Model': charts.models.LineChart
 					},
 			'bars': {
-						'Class': charts.views.C3BarChart
+						'Class': charts.views.C3BarChart,
+						'Model': charts.models.BarChart
 					},
 		},
 		'google':{
 			'line': {
-						'Class': charts.views.GoogleLineChart
+						'Class': charts.views.GoogleLineChart,
+						'Model': charts.models.LineChart
 					},
 			'bars': {
-						'Class': charts.views.GoogleBarChart
+						'Class': charts.views.GoogleBarChart,
+						'Model': charts.models.BarChart
 					}
 		}
 	},
@@ -100,10 +104,20 @@ var ChartView = StepViewSPA.extend({
 	chartRender: function(){
 
 		if(this.chartSettings){
-			var model = new Backbone.Model();
+
+			this.chartModel = new this.chartSettings.Model({
+					id:1
+				});
+
+			//this.chartModel.fetchData();
+
 			this.chartInstance = new this.chartSettings.Class({
-				model: model
+				el: '#chartContainer',
+				model: this.chartModel,
 			});
+			
+			//this.chartInstance.render();
+		
 		} else {
 			console.log('There are not class for this');
 		}

@@ -18,3 +18,14 @@
   </div>
 </script>
 
+
+{# ButtonsView #}
+<script type="text/template" id="id_buttons_render_PM">
+
+  <ul class="buttons-bar FR" data-step="0">
+    <% _.each(steps, function(step) { %>
+      <li class="step<%= step.ix %>"><a id="id_step<%= step.ix %>Button" data-step="<%= step.ix %>" rel="<%= step.ix %>" class="button black small" title="<%= step.name %>"><%= step.name %></a></li>
+    <% }); %>
+  </ul>
+
+</script>

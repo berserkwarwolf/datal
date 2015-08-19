@@ -1,21 +1,12 @@
-var ButtonsViewSPA = function(options) {
-	Backbone.Epoxy.View.call(this, options);
-}
-
-_.extend(ButtonsViewSPA.prototype, Backbone.Epoxy.View.prototype, {
-		
-	// Extend functions
-
-	baseEvents: {},
+var ButtonsView = Backbone.View.extend({
 
 	renderSteps: [],
 
-	events: function() {
+	events: {
+		'click a[data-step]': 'onNavigationButtonClicked'
 	},
 
 	initialize: function(){
-		//this.$el = $(this.el);
-
       	this.template = _.template( $('#id_buttons_render_PM').html() );
 	},
 
@@ -35,18 +26,11 @@ _.extend(ButtonsViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 		}
 	},
 
-	start: function(output){
-	},
-
-	finish: function(){
-	},
-
-	next: function(){
-	},
-
-	previous: function(){
+	onNavigationButtonClicked: function(event){
+		var $target = $(event.currentTarget),
+			step = $target.attr('data-step');
+		this.trigger('goTo', step);
+		this.$('.buttons-bar').attr( 'data-step', ( parseFloat(step)+1 ) );
 	}
 
 });
-
-ButtonsViewSPA.extend = Backbone.Epoxy.View.extend;
