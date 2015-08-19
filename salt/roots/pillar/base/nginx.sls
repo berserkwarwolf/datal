@@ -143,6 +143,10 @@ nginx:
                 - alias:
                   - /home/vagrant/app/core/js
 
+              - location /js_workspace:
+                - alias:
+                  - /home/vagrant/app/workspace/js
+
               - location /static:
                 - alias:
                   - /home/vagrant/static
