@@ -5,7 +5,7 @@ from django.http import HttpResponse
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
-from django.core.serializers.json import DjangoJSONEncoder
+from django.template.loader import render_to_string
 
 from api.http import JSONHttpResponse
 from core.shortcuts import render_to_response
@@ -92,10 +92,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     for i in xrange(len(resources)):
         resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
 
-    mimetype = "application/json"
-
-    return HttpResponse(json.dumps({'items':resources,'total_entries':total_resources},cls=DjangoJSONEncoder),
-                        mimetype=mimetype)
+    data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
+    return HttpResponse(data, mimetype="application/json")
 
 @login_required
 @require_privilege("workspace.can_delete_datastream")
