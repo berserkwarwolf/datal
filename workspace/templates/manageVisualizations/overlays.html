@@ -49,23 +49,23 @@
 </div>
 {% endoverlay %}
 
-<!-- Add Dataview -->
-{% overlay id_addDataview %}
+<!-- Add Visualization -->
+{% overlay id_addVisualization %}
 <div class="In clearfix">
-	<h4>{% trans 'APP-SELECT-DATASET-TEXT' %}</h4>
+	<h4>{% trans 'APP-SELECT-DATASTREAM-TEXT' %}</h4>
 	<div class="ov-content">
-		<p>{% trans 'APP-ADD-DATAVIEW-HINT' %}</p>
+		<p>{% trans 'APP-ADD-VISUALIZATION-HINT' %}</p>
 	</div>
 	<section>
-		<div id="dataset_list">
-			<div id="dataset_grid"></div>
+		<div id="visualization_list">
+			<div id="visualization_grid"></div>
 		</div>
 	</section>
 	<div class="ov-bottom">
-		<div id="id_filter_dataSets"></div>
+		<div id="id_filter_visualization"></div>
 		<!-- Pagination -->
 		<div class="pagination FR clearfix" id="id_pagination">
-			<div id="dataset_paginator"></div>
+			<div id="visualization_paginator"></div>
 		</div>
 	</div>
 </div>
@@ -97,9 +97,9 @@
 	<div class="ov-content">
 		<div class="left">
 			<ul>
-				<li><span class="icon-dataview"></span>Anual staff figures</li>
-				<li><span class="icon-dataview"></span>LATAM Scorecard Countries</li>
-				<li><span class="icon-dataview"></span>Europe Scorecard Countries</li>
+				<li><span class="icon-visualization"></span>Anual staff figures</li>
+				<li><span class="icon-visualization"></span>LATAM Scorecard Countries</li>
+				<li><span class="icon-visualization"></span>Europe Scorecard Countries</li>
 			</ul>
 		</div>
 		<div class="right">
@@ -135,7 +135,7 @@
 		<p></p>
 		<p>{% trans 'APP-OVERLAY-ALERT-WARNING-TEXT' %}</p>
 		<ul>
-			<li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
+			<li><span class="icon-visualization"></span><a href="">Anual staff figures</a></li>
 			<li><span class="icon-visualization"></span><a href="">LATAM Scorecard Countries</a></li>
 			<li><span class="icon-dashboard"></span><a href="">Europe Scorecard Countries</a></li>
 		</ul>
@@ -154,7 +154,7 @@
 		<p></p>
 		<p>{% trans 'APP-OVERLAY-ALERT-OK-TEXT' %}</p>
 		<ul>
-			<li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
+			<li><span class="icon-visualization"></span><a href="">Anual staff figures</a></li>
 		</ul>
 	</div>
 </div>
@@ -167,7 +167,7 @@
 	<div class="ov-content">
 		<p>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
 		<ul>
-			<li><span class="icon-dataview"></span>Anual staff figures</li>
+			<li><span class="icon-visualization"></span>Anual staff figures</li>
 			<li><span class="icon-visualization"></span>LATAM Scorecard Countries</li>
 			<li><span class="icon-visualization"></span>Europe Scorecard Countries</li>
 		</ul>
@@ -188,7 +188,7 @@
 	<div class="ov-content">
 		<p>{% trans 'APP-REVISION-DELETED-TEXT' %}</p>
 		<ul>
-			<li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
+			<li><span class="icon-visualization"></span><a href="">Anual staff figures</a></li>
 			<li><span class="icon-visualization"></span><a href="">LATAM Scorecard Countries</a></li>
 			<li><span class="icon-dashboard"></span><a href="">Europe Scorecard Countries</a></li>
 		</ul>

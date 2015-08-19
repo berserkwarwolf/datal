@@ -136,7 +136,7 @@ var ManageVisualizationsView = Backbone.View.extend({
     },
 
     onAddNewButtonClicked: function() {
-        var manageVisualizationsOverlayView = new ManageVisualizationsOverlayView({
+        var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView({
             visualizationCreationStepsUrl: this.options.visualizationCreationStepsUrl,
         });
     },
