@@ -37,7 +37,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 		this.$el.find("#visualization_grid").html(this.grid.render().$el);
 		this.$el.find("#visualization_paginator").html(this.paginator.render().$el);
 		this.$el.find('.backgrid-paginator ul').addClass("pager center");
-		this.$el.find("#id_filter_dataSets").html( this.clientSideFilter.render().el );
+		this.$el.find("#id_filter_visualization").html( this.clientSideFilter.render().el );
 		this.$el.data('overlay').load();
 	},
 
