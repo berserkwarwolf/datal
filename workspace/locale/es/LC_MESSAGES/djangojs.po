@@ -33,6 +33,9 @@ msgstr "Debes seleccionar algún dato de la tabla antes de continuar."
 msgid "APP-SELECTRANGE-TEXT"
 msgstr "Seleccionar rango..."
 
+msgid "APP-START-TEXT"
+msgstr "Inicio"
+
 msgid "CHRT-COMPLETE-WARNING"
 msgstr "Debes terminar de crear el Gráfico primero."
 

@@ -1,5 +1,4 @@
-// SPA: single page application
-var ProcessManagerViewSPA = Backbone.View.extend({
+var MainView = Backbone.View.extend({
 
 	steps: [],
 	modals: {},
@@ -9,17 +8,68 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		'click .section-title .buttons-bar a[data-step]': 'onNavigationButtonClicked',
 	},
 
-	initialize: function(){
-		if(this.options.buttonsContainer){
-			this.buttonsView = new ButtonsViewSPA(
-		    {
-		      el: this.options.buttonsContainer
-		    });
-		} else {
-			this.buttonsView = false;
-		}
+	initialize: function () {
 
-		this.render();
+		this.model = new Backbone.Model();
+
+		this.buttonsView = new ButtonsViewSPA({
+			// TODO: this should be a child element of the main view
+		    el: $('#buttons_view_container')
+		});
+		this.buttonsView.setSteps(this.steps);
+		this.buttonsView.render();
+
+	  var visualizationModel = new VisualizationModel({
+	    // Complete model here
+	  });
+
+	  //Create views
+	  var startView = new StartView(
+	    {
+	      name: gettext('APP-START-TEXT'),
+	      model: visualizationModel,
+	      el: '#id_vizualization_step_0_start'
+	    }).init();
+
+	  var chartView = new ChartView(
+	    {
+	      name: gettext('APP-CUSTOMIZE-TEXT'), 
+	      model: visualizationModel,
+	      el: '#id_vizualization_step_1_chart'
+	    }).init();
+
+	  var finishView = new FinishView(
+	    {
+	      name: gettext('APP-FINISH-TEXT'),
+	      model: visualizationModel,
+	      el: '#id_vizualization_step_2_finish'
+	    }).init();
+
+	  //Register views
+	  this.register( startView );
+	  this.register( chartView );
+	  this.register( finishView );
+
+	  //Create modals
+	  var selectDataModal = new ChartSelectDataModalView(
+	    {
+	      id: 'chartSelectDataModal',
+	      model: visualizationModel
+	    });
+
+	  var selectLabelModal = new ChartSelectLabelModalView(
+	    {
+	      id: 'chartSelectLabelModal',
+	      model: visualizationModel
+	    });
+
+	  //Register modals
+	  this.registerModal( selectDataModal );
+	  this.registerModal( selectLabelModal );
+
+	  //Start
+	  this.start();
+
 	},
 
 	render: function(){
@@ -29,6 +79,7 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		}
 		return this;
 	},
+
 
 	register: function(view){
 		this.steps.push(view);
@@ -124,5 +175,6 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 	},
 
 	// cancel: function(){},
+
 
 });
