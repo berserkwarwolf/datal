@@ -1,7 +1,7 @@
 include:
   - core.nodejs
 
-bower:
+grunt-cli:
   npm.installed:
     - user: root
     - require:
