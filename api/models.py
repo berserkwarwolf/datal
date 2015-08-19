@@ -8,7 +8,8 @@ from api.helpers import add_domain_to_datastream_link
 
 import memcache
 
-def datastream_as_dict(self, user_id = None, language = 'en'):
+
+def datastream_as_dict(self, user_id=None, language='en'):
 
     try:
         datastreamrevision_id =  self.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
@@ -16,26 +17,24 @@ def datastream_as_dict(self, user_id = None, language = 'en'):
     except Exception:
         raise
 
-
     sorted_dict = SortedDict([
-               ('id'          , doc.guid)
-             , ('title'       , doc.title)
-             , ('description' , doc.description)
-             , ('user'        , doc.created_by_nick)
-             , ('tags'        , doc.get_tags())
-             , ('created_at'  , str(doc.created_at))
-             , ('source'      , doc.filename)
-             , ('link'        , doc.permalink())
+        ('id', doc.guid),
+        ('title', doc.title),
+        ('description', doc.description),
+        ('user', doc.created_by_nick),
+        ('tags', doc.get_tags()),
+        ('created_at', str(doc.created_at)),
+        ('source', doc.filename),
+        ('link', doc.permalink())
     ])
 
     if doc.parameters:
         parameters = []
         for param in doc.parameters:
-            parameters.append({
-                               "name": param.name,
+            parameters.append({"name": param.name,
                                "position": param.position,
                                "description": param.description,
-                              })
+            })
         sorted_dict.insert(9, 'parameters', parameters)
 
     return sorted_dict

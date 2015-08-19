@@ -560,9 +560,6 @@ class DT:
     def permalink(self, urlconf=MS_URLCONF):
         return reverse('manageDatasets.action_view', urlconf, kwargs={'dataset_id': self.dataset_id, 'slug': self.slug})
 
-    def downloadlink(self, urlconf=MS_URLCONF):
-        return reverse('dataset_manager.action_download', urlconf, kwargs={'dataset_id': self.dataset_id, 'slug': self.slug})
-
 
 class DBWidget:
     def __init__(self, row, language, last = True):

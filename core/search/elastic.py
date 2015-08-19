@@ -2,6 +2,7 @@
 from django.conf import settings
 
 from core.search.finder import Finder
+import re
 
 
 class ElasticsearchFinder(Finder):
@@ -11,7 +12,7 @@ class ElasticsearchFinder(Finder):
     def search(self, *args, **kwargs):
 
         self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query = kwargs.get('query', '')
+        self.query = re.escape(kwargs.get('query', ''))
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
