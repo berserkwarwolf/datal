@@ -47,7 +47,7 @@ def list(request):
 
 @login_required
 @require_GET
-@require_privilege("workspace.can_query_visualization")
+#@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET

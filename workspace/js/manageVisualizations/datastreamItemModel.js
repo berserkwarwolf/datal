@@ -2,7 +2,6 @@ var DatastreamItemModel = Backbone.Model.extend({
 	defaults: function() {
 		return {
 			title: "",
-			collect_type: "",
 			id: "",
 			end_point: "",
 			created_at: "",

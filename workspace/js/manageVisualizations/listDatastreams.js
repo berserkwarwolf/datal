@@ -22,7 +22,6 @@ var ListDatastreams = Backbone.PageableCollection.extend({
 		totalPages: null,
 		page:null,
 		pageSize:null,
-		collect_type: '0', // Will be used to filter for allowed impl_type of datastreams. 0 = FILE
 	},
 
  parseState: function (resp, queryParams, state, options) {
