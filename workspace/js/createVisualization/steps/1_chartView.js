@@ -59,7 +59,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	createChart: function(){
-		this.chartView = this.factoryChart();
+		this.chartSettings = this.factoryChart();
 
 		this.chartRender();
 
@@ -68,54 +68,41 @@ var ChartView = StepViewSPA.extend({
 
 	},
 
-	factoryChart: function(){
-
-		switch(this.model.get('lib')){
-			case 'd3':
-			
-				switch(this.model.get('type')){
-					case 'line':
-						return charts.views.C3LineChart;
-					break;
-					case 'bars':
-						return charts.views.C3BarChart
-					break;
-					default:
-						return false;
-					break;
-				}
-			
-			break;
-
-			case 'google':
-			
-				switch(this.model.get('type')){
-					case 'line':
-						return charts.views.GoogleLineChart;
-					break;
-					case 'bars':
-						return charts.views.GoogleBarChart;
-					break;
-					default:
-						return false;
-					break;
-				}
-			
-			break;
-			
-			default:
-				return false;
-			break;
+	availableCharts: {
+		'd3':{
+			'line': {
+						'Class': charts.views.C3LineChart
+					},
+			'bars': {
+						'Class': charts.views.C3BarChart
+					},
+		},
+		'google':{
+			'line': {
+						'Class': charts.views.GoogleLineChart
+					},
+			'bars': {
+						'Class': charts.views.GoogleBarChart
+					}
 		}
+	},
+
+	factoryChart: function(){
+		if(_.has(this.availableCharts,this.model.get('lib')) &&
+			_.has(this.availableCharts[this.model.get('lib')],this.model.get('type')) ){
+			return this.availableCharts[this.model.get('lib')][this.model.get('type')];
+		} else {
+			return false;
+		}
+
 	},
 
 	chartRender: function(){
 
-
-		if(this.chartView){
-			console.log(this.chartView);
-			this.chartInstance = this.chartView({
-
+		if(this.chartSettings){
+			var model = new Backbone.Model();
+			this.chartInstance = new this.chartSettings.Class({
+				model: model
 			});
 		} else {
 			console.log('There are not class for this');
