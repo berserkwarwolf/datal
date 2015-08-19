@@ -53,7 +53,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				"click": "rowClicked"
 			},
 			rowClicked: function () {
-				window.location = self.options.dataViewCreationStepsUrl + '?visualization_revision_id=' + this.model.get('id');
+				window.location = self.options.visualizationCreationStepsUrl + '?visualization_revision_id=' + this.model.get('id');
 			}
 		});
 

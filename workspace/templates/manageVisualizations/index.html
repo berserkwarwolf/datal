@@ -97,7 +97,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     var manageVisualizationsView =  new ManageVisualizationsView({
-      dataViewCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
+      visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
       sourceUrl: '/source_manager/action_search',
       tagUrl: '/tag_manager/action_search',
       filters: {{filters|jsonify}}
