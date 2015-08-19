@@ -31,7 +31,7 @@ GET /api/v2/datastreams/:guid
 Trae la información asociada completa (incluye los valores de la vista) a una vista
 
 ```
-GET /api/v2/datastreams/:guid?full=true
+GET /api/v2/datastreams/:guid/data
 ``` 
 
 ### Atributos
