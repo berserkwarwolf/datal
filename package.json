@@ -1,0 +1,26 @@
+{
+  "name": "datal",
+  "version": "1.0.0",
+  "description": "Plataforma de publicación de Datos Abiertos de código abierto bajo licencia BSD 3.",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/datal-org/datal.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/datal-org/datal/issues"
+  },
+  "homepage": "https://github.com/datal-org/datal"
+}
