@@ -19,31 +19,28 @@ var ChartSelectDataModalView = ModalViewSPA.extend({
 		ModalViewSPA.prototype.render.call(this);
 
 		//init table
-		var selectedCollection = new Backbone.Collection();
+		this.collection = new DataTableSelectedCollection();
 
 		var selectedRangesView = new SelectedRangesView({
-			el: '.selected-ranges-view',
-			collection: selectedCollection
+			el: this.$('.selected-ranges-view'),
+			collection: this.collection
 		});
 
-		var data = [
-			{year: 2014, brand: 'Volvo', value: 10},
-			{year: 2014, brand: 'Volvo', value: 10},
-			{year: 2014, brand: 'Volvo', value: 10},
-			{year: 2014, brand: 'Volvo', value: 10},
-		];
+		this.dataCollection = new Backbone.Collection();
 
-		var myView = new DataTableView({
+		this.dataTableView = new DataTableView({
 			el: '#example',
-			data: data,
-			collection: selectedCollection
+			collection: this.collection,
+			dataCollection: this.dataCollection
 		});
-		//this.myView.render();
 		return this;
 	},
 
 	onCloseClicked: function (e) {
 		this.close(); //Close modal
+		var selection = this.collection.getSelection();
+		console.log('selection', selection);
+		console.log(this.dataTableView.getData());
 	},
 
 	onSelectLabelClicked: function(){

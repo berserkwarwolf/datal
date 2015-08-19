@@ -40,6 +40,7 @@ var DataTableView = Backbone.View.extend({
   initialize: function (options) {
     var self = this;
 
+    this.dataCollection = options.dataCollection;
 
     var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
       return col;
@@ -141,10 +142,18 @@ var DataTableView = Backbone.View.extend({
 
   addSelection: function () {
     var newId = this.available.pop(),
+      range = this._selectedCoordsCache,
+      data,
       model = new Backbone.Model({
-        range: this._selectedCoordsCache,
+        range: range,
         id: newId
       });
+    if (range.from.row === -1) {
+      data = this.table.getDataAtCol(range.from.col);
+    } else {
+      data = this.table.getData(range.from.row, range.from.col, range.to.row, range.to.col);
+    }
+    model.set('data', data);
     this.collection.add(model);
   },
 
@@ -159,5 +168,9 @@ var DataTableView = Backbone.View.extend({
     this.available.push(model.get('id'));
     this.rmCellsMeta(cells, model.get('id'));
     this.table.render();
+  },
+
+  getData: function () {
+    return this.collection.toJSON();
   }
 });

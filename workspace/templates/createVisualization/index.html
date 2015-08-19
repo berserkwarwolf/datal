@@ -110,16 +110,19 @@
 
 {% block bottom_js %}
 
+{% block popupsOverlay %}
+  {% include "createVisualization/modals/1_chartSelectDataModal.html" %}
+  {% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
+{% endblock %}
+
 {# templates backbone #}
 {% include "createVisualization/templates.html" %}
 
-{% include "createVisualization/modals/1_chartSelectDataModal.html" %}
-{% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
-
-<script src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/collections/DataTableSelectedCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/DataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/ButtonsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/SelectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script type="text/javascript">
   var mainView = new MainView({
