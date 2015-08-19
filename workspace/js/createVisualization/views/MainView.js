@@ -29,21 +29,21 @@ var MainView = Backbone.View.extend({
 	    {
 	      name: gettext('APP-START-TEXT'),
 	      model: visualizationModel,
-	      el: '#id_vizualization_step_0_start'
+	      el: this.$('.step-0-view')
 	    }).init();
 
 	  var chartView = new ChartView(
 	    {
 	      name: gettext('APP-CUSTOMIZE-TEXT'), 
 	      model: visualizationModel,
-	      el: '#id_vizualization_step_1_chart'
+	      el: this.$('.step-1-view')
 	    }).init();
 
 	  var finishView = new FinishView(
 	    {
 	      name: gettext('APP-FINISH-TEXT'),
 	      model: visualizationModel,
-	      el: '#id_vizualization_step_2_finish'
+	      el: this.$('.step-2-view')
 	    }).init();
 
 	  //Register views
