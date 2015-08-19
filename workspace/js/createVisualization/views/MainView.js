@@ -1,5 +1,4 @@
-// SPA: single page application
-var ProcessManagerViewSPA = Backbone.View.extend({
+var MainView = Backbone.View.extend({
 
 	steps: [],
 	modals: {},
@@ -9,26 +8,77 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		'click .section-title .buttons-bar a[data-step]': 'onNavigationButtonClicked',
 	},
 
-	initialize: function(){
-		if(this.options.buttonsContainer){
-			this.buttonsView = new ButtonsViewSPA(
-		    {
-		      el: this.options.buttonsContainer
-		    });
-		} else {
-			this.buttonsView = false;
-		}
+	initialize: function () {
 
-		this.render();
+		this.model = new Backbone.Model();
+
+		this.buttonsView = new ButtonsView({
+			// TODO: this should be a child element of the main view
+		    el: $('#buttons_view_container')
+		});
+		this.buttonsView.setSteps(this.steps);
+		this.buttonsView.render();
+		this.listenTo(this.buttonsView, 'goTo', this.onGoTo, this);
+
+	  var visualizationModel = new VisualizationModel({
+	    // Complete model here
+	  });
+
+	  //Create views
+	  var startView = new StartView(
+	    {
+	      name: gettext('APP-START-TEXT'),
+	      model: visualizationModel,
+	      el: this.$('.step-0-view')
+	    }).init();
+
+	  var chartView = new ChartView(
+	    {
+	      name: gettext('APP-CUSTOMIZE-TEXT'), 
+	      model: visualizationModel,
+	      el: this.$('.step-1-view')
+	    }).init();
+
+	  var finishView = new FinishView(
+	    {
+	      name: gettext('APP-FINISH-TEXT'),
+	      model: visualizationModel,
+	      el: this.$('.step-2-view')
+	    }).init();
+
+	  //Register views
+	  this.register( startView );
+	  this.register( chartView );
+	  this.register( finishView );
+
+	  //Create modals
+	  var selectDataModal = new ChartSelectDataModalView(
+	    {
+	      id: 'chartSelectDataModal',
+	      model: visualizationModel
+	    });
+
+	  var selectLabelModal = new ChartSelectLabelModalView(
+	    {
+	      id: 'chartSelectLabelModal',
+	      model: visualizationModel
+	    });
+
+	  //Register modals
+	  this.registerModal( selectDataModal );
+	  this.registerModal( selectLabelModal );
+
+	  //Start
+	  this.start();
+
 	},
 
 	render: function(){
-		if(this.buttonsView){
-			this.buttonsView.setSteps(this.steps);
-			this.buttonsView.render();
-		}
+		this.buttonsView.setSteps(this.steps);
+		this.buttonsView.render();
 		return this;
 	},
+
 
 	register: function(view){
 		this.steps.push(view);
@@ -107,22 +157,19 @@ var ProcessManagerViewSPA = Backbone.View.extend({
 		window.location = this.model.get('finishUrl');
 	},
 
-	onNavigationButtonClicked: function(event){
-		
-		var button = event.currentTarget,
-			indexToGo = $(button).attr('data-step');
+	onGoTo: function(index){
 
-		if(indexToGo != this.index){
-			this.goTo(indexToGo);
-			this.selectNavigationTab(indexToGo);
+		if(index != this.index){
+			this.goTo(index);
+			this.selectNavigationTab(index);
 		}
 		
 	},
 
+    // TODO: this should be handled by the ButtonsView
 	selectNavigationTab: function(index){
 		$('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)+1 ) );
-	},
+	}
 
-	// cancel: function(){},
 
 });

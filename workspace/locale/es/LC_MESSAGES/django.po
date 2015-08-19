@@ -2896,6 +2896,9 @@ msgstr "aquí"
 msgid "APP-SELECT-DATASET-TEXT"
 msgstr "Seleccionar un Conjunto de datos"
 
+msgid "APP-SELECT-DATASTREAM-TEXT"
+msgstr "Seleccionar una Vista"
+
 msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Tipo de archivo no soportado"
 

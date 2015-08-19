@@ -2903,6 +2903,9 @@ msgstr "here"
 msgid "APP-SELECT-DATASET-TEXT"
 msgstr "Select Dataset"
 
+msgid "APP-SELECT-DATASTREAM-TEXT"
+msgstr "Select View"
+
 msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Invalid file format"
 

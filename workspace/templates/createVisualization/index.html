@@ -45,11 +45,8 @@
 <meta name="main-option" content="id_visualizations_option"/>
 
 <!-- Process Manager -->
-<script language="javascript" src="/js_workspace/processManagerSPA/processManagerModelSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManagerSPA/processManagerViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManagerSPA/stepViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManagerSPA/buttonsViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManagerSPA/modalViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/stepViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modalViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Charts types & instances -->
 <script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -63,17 +60,17 @@
 <script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Common Chart model -->
-<script language="javascript" src="/js_workspace/createVisualization/visualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/models/visualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Create Viz StepViews -->
-<script language="javascript" src="/js_workspace/createVisualization/steps/0_startView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/0_startView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/invoke.js"></script>
 
 <!-- Viz modals -->
-<script language="javascript" src="/js_workspace/createVisualization/modals/1_chartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/modals/1_chartSelectLabelModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/1_chartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/1_chartSelectLabelModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -82,7 +79,7 @@
 <h2 class="FL">{% trans 'APP-VISUALIZATIONS-CREATE-TEXT' %}</h2>
 
 <!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
-<div id="buttons_view_container"></div>
+<div id="buttons_view_container" class="buttons_view_container"></div>
 
 <!--ul class="buttons-bar FR" data-step="0">
   <li class="step0"><a id="id_step0Button" rel="0" class="button black small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
@@ -101,13 +98,12 @@
 
     <!-- Steps will be Rendered here -->
 
-  </div>
 
-  <!-- Include templates -->
-  {% include "processManager/buttons_render.html" %}
-  {% include "createVisualization/steps/0_start.html" %}
-  {% include "createVisualization/steps/1_chart.html" %}
-  {% include "createVisualization/steps/2_finish.html" %}
+    <!-- Include templates -->
+    {% include "createVisualization/steps/0_start.html" %}
+    {% include "createVisualization/steps/1_chart.html" %}
+    {% include "createVisualization/steps/2_finish.html" %}
+  </div>
 
 {% endblock %}
 
@@ -121,71 +117,14 @@
 {% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
 
 <script src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/ButtonsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
 
-  //PALA
-  var processManagerModelSPA = new ProcessManagerModelSPA();
-
-  var processManagerViewSPA = new ProcessManagerViewSPA({
-      model: processManagerModelSPA,
-      el: '#id_createVisualization_container',
-      buttonsContainer: '#buttons_view_container' 
-    });
-
-  var visualizationModel = new VisualizationModel({
-    // Complete model here
-  });
-
-  //Create views
-  var startView = new StartView(
-    {
-      name: "{% trans 'APP-START-TEXT' %}",
-      model: visualizationModel,
-      el: '#id_vizualization_step_0_start'
-    }).init();
-
-  var chartView = new ChartView(
-    {
-      name: "{% trans 'APP-CUSTOMIZE-TEXT' %}", 
-      model: visualizationModel,
-      el: '#id_vizualization_step_1_chart'
-    }).init();
-
-  var finishView = new FinishView(
-    {
-      name: "{% trans 'APP-FINISH-TEXT' %}",
-      model: visualizationModel,
-      el: '#id_vizualization_step_2_finish'
-    }).init();
-
-  //Register views
-  processManagerViewSPA.register( startView );
-  processManagerViewSPA.register( chartView );
-  processManagerViewSPA.register( finishView );
-
-  //Create modals
-  var selectDataModal = new ChartSelectDataModalView(
-    {
-      id: 'chartSelectDataModal',
-      model: visualizationModel
-    });
-
-  var selectLabelModal = new ChartSelectLabelModalView(
-    {
-      id: 'chartSelectLabelModal',
-      model: visualizationModel
-    });
-
-  //Register modals
-  processManagerViewSPA.registerModal( selectDataModal );
-  processManagerViewSPA.registerModal( selectLabelModal );
-
-  //Start
-  processManagerViewSPA.start();
-
+new MainView({
+  el: '.main-section'
 });
 
 </script>
