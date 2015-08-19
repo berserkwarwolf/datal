@@ -1,35 +1,4 @@
-var ModalViewSPA = function(options) {
-	this.inheritedEvents = [];
-
-	Backbone.Epoxy.View.call(this, options);
-}
-
-_.extend(ModalViewSPA.prototype, Backbone.Epoxy.View.prototype, {
-		
-	// Extend functions
-
-	baseEvents: {},
-
-	events: function() {
-		var e = _.extend({}, this.baseEvents);
-
-		_.each(this.inheritedEvents, function(events) {
-			e = _.extend(e, events);
-		});
-
-		return e;
-	},
-
-	addEvents: function(eventObj) {
-		this.inheritedEvents.push(eventObj);
-	},
-
-	// Modal functions
-
-	initialize: function(){
-		//this.render();
-		return this;
-	},
+var ModalViewSPA = Backbone.View.extend({
 
 	render: function(){
 		$('body').append('<div id="'+this.options.id+'" class="process-manager-modal"></div>');
@@ -54,5 +23,3 @@ _.extend(ModalViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 	},
 
 });
-
-ModalViewSPA.extend = Backbone.Epoxy.View.extend;

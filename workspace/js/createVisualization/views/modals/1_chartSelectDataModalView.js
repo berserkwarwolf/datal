@@ -1,18 +1,7 @@
 var ChartSelectDataModalView = ModalViewSPA.extend({
-
-	initialize: function(){
-
-		ModalViewSPA.prototype.initialize.call(this);
-
-		// Right way to extend events without overriding the parent ones
-		var eventsObject = {}
-		eventsObject['click a.close'] = 'onCloseClicked';
-		eventsObject['click a.openOtherModal'] = 'onSelectLabelClicked';		
-		this.addEvents(eventsObject);
-
-		// Bind model validation to view
-		//Backbone.Validation.bind(this);
-
+	events: {
+		'click a.close':'onCloseClicked',
+		'click a.openOtherModal': 'onSelectLabelClicked'
 	},
 
 	render: function(){
