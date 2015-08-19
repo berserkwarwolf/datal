@@ -1,13 +1,17 @@
-var ChartSelectLabelModalView = ModalViewSPA.extend({
+var ChartSelectLabelModalView = ModalView.extend({
+
+	events: {
+		'click a.close':'onCloseClicked'
+	},
 
 	initialize: function(){
 
-		ModalViewSPA.prototype.initialize.call(this);
+		ModalView.prototype.initialize.call(this);
 
 	},
 
 	render: function(){
-		ModalViewSPA.prototype.render.call(this);
+		ModalView.prototype.render.call(this);
 		//do stuff
 		return this;
 	},

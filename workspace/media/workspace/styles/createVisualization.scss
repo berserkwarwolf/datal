@@ -112,4 +112,12 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
 
 
 /* Modal */
-.process-manager-modal{position: absolute;top: 0;left: 0;background: white;width: 100%;height: 100%;z-index: 1000;display: none;}
+.process-manager-modal{
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: white;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}

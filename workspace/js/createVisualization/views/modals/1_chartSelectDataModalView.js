@@ -1,11 +1,11 @@
-var ChartSelectDataModalView = ModalViewSPA.extend({
+var ChartSelectDataModalView = ModalView.extend({
 	events: {
 		'click a.close':'onCloseClicked',
 		'click a.openOtherModal': 'onSelectLabelClicked'
 	},
 
 	render: function(){
-		ModalViewSPA.prototype.render.call(this);
+		ModalView.prototype.render.call(this);
 
 		//init table
 		this.collection = new DataTableSelectedCollection();

@@ -105,12 +105,12 @@
 {% endblock %}
 
 
-{% block bottom_js %}
-
 {% block popupsOverlay %}
   {% include "createVisualization/modals/1_chartSelectDataModal.html" %}
   {% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
 {% endblock %}
+
+{% block bottom_js %}
 
 {# templates backbone #}
 {% include "createVisualization/templates.html" %}

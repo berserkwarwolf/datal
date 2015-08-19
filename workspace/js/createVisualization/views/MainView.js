@@ -47,11 +47,13 @@ var MainView = Backbone.View.extend({
         //Create modals
         var selectDataModal = new ChartSelectDataModalView({
           id: 'chartSelectDataModal',
+          el: '#chartSelectDataModal',
           model: this.model
         });
 
         var selectLabelModal = new ChartSelectLabelModalView({
           id: 'chartSelectLabelModal',
+          el: '#chartSelectLabelModal',
           model: this.model
         });
 

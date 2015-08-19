@@ -1,17 +1,13 @@
-var ModalViewSPA = Backbone.View.extend({
+var ModalView = Backbone.View.extend({
 
 	render: function(){
-		$('body').append('<div id="'+this.options.id+'" class="process-manager-modal"></div>');
-		this.$el = $('#'+this.options.id);
-		this.$el.html(_.template($('#'+this.options.id+'Template').html()));
-		this.delegateEvents();
 		return this;
 	},
 
 	open: function(){
-		$('.process-manager-modal').hide();
+		$('.process-manager-modal').addClass('hidden');
 		this.render();
-		this.$el.show();
+		this.$el.removeClass('hidden');
 	},
 
 	openModal: function(id){
@@ -19,7 +15,7 @@ var ModalViewSPA = Backbone.View.extend({
 	},
 
 	close: function(){
-		this.$el.hide();
+		this.$el.addClass('hidden');
 	},
 
 });
