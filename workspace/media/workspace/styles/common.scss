@@ -205,11 +205,11 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 .header{position:fixed;z-index:200;width:100%;
   
   /* Scroll Effect */
-  &.scrollEffect .global-navigation{@include box-shadow( inset 0 0 3px 0 rgba(0,0,0,.1) );@include opacity(90);background:#fff;}
+  &.scrollEffect .global-navigation{@include box-shadow( inset 0 0 3px 0 rgba(0,0,0,.2) );@include opacity(90);background:#fff;}
   
   /* Logo */
-  .logo{background:$nav-bg url(#{$logo-header-url}) no-repeat center center;height:$header-height;width:$nav-width;position:relative;z-index:201;}
-  .logo:hover{background-color:$nav-hover-bg;}
+  .logo{background:$nav-bg url(#{$logo-header-url}) no-repeat 0 0;height:$header-height;width:$nav-width;position:relative;z-index:201;}
+  .logo:hover{background-position:0 -#{ $header-height };}
   
   .button.alpha{margin-top:8px;padding:0 12px;}
 
@@ -301,7 +301,7 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 /* Main Nav */
 .main-navigation{padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
   li{@include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));
-    & > a{height:48px;font:15px/24px 'robotolight', arial, helvetica, sans-serif;display:block;color:$nav-text;@include box-sizing(border-box);padding:12px 15px;
+    & > a{height:48px;font:15px/24px 'robotolight', arial, helvetica, sans-serif;display:block;color:$nav-text;@include box-sizing(border-box);padding:12px 15px;@include transition(all, .1s, ease-in-out);
 
       /* Icons */
       .icon{width:24px;height:24px;margin-right:15px;display:inline-block;background:white;padding:0;vertical-align:middle}
@@ -343,7 +343,8 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
   .workspace > .wrapper1 > .wrapper2 > .wrapper3{margin-left:-$nav-collapsed-width;}
   .main-navigation{width:$nav-collapsed-width;}
   .main-section{margin-right:-$nav-collapsed-width;}
-  .header .logo{width:$nav-collapsed-width;background-image:url(../images/common/lg_datalCollapsed.svg);}
+  .header .logo{width:$nav-collapsed-width;background-position:0 -#{ $header-height * 2 };}
+  .header .logo:hover{background-position:0 -#{ $header-height * 3 };}
   .main-navigation{
     li > a{text-indent:-10000px;position:relative;
       .icon{position:absolute;top:12px;left:15px;}
