@@ -12,12 +12,13 @@ var MainView = Backbone.View.extend({
 
 		this.model = new Backbone.Model();
 
-		this.buttonsView = new ButtonsViewSPA({
+		this.buttonsView = new ButtonsView({
 			// TODO: this should be a child element of the main view
 		    el: $('#buttons_view_container')
 		});
 		this.buttonsView.setSteps(this.steps);
 		this.buttonsView.render();
+		this.listenTo(this.buttonsView, 'goTo', this.onGoTo, this);
 
 	  var visualizationModel = new VisualizationModel({
 	    // Complete model here
@@ -73,10 +74,8 @@ var MainView = Backbone.View.extend({
 	},
 
 	render: function(){
-		if(this.buttonsView){
-			this.buttonsView.setSteps(this.steps);
-			this.buttonsView.render();
-		}
+		this.buttonsView.setSteps(this.steps);
+		this.buttonsView.render();
 		return this;
 	},
 
@@ -158,23 +157,19 @@ var MainView = Backbone.View.extend({
 		window.location = this.model.get('finishUrl');
 	},
 
-	onNavigationButtonClicked: function(event){
-		
-		var button = event.currentTarget,
-			indexToGo = $(button).attr('data-step');
+	onGoTo: function(index){
 
-		if(indexToGo != this.index){
-			this.goTo(indexToGo);
-			this.selectNavigationTab(indexToGo);
+		if(index != this.index){
+			this.goTo(index);
+			this.selectNavigationTab(index);
 		}
 		
 	},
 
+    // TODO: this should be handled by the ButtonsView
 	selectNavigationTab: function(index){
 		$('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)+1 ) );
-	},
-
-	// cancel: function(){},
+	}
 
 
 });

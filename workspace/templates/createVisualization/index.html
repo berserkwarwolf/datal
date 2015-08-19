@@ -46,7 +46,6 @@
 
 <!-- Process Manager -->
 <script language="javascript" src="/js_workspace/processManagerSPA/stepViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManagerSPA/buttonsViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/processManagerSPA/modalViewSPA.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Charts types & instances -->
@@ -102,7 +101,6 @@
   </div>
 
   <!-- Include templates -->
-  {% include "processManager/buttons_render.html" %}
   {% include "createVisualization/steps/0_start.html" %}
   {% include "createVisualization/steps/1_chart.html" %}
   {% include "createVisualization/steps/2_finish.html" %}
@@ -119,6 +117,7 @@
 {% include "createVisualization/modals/1_chartSelectLabelModal.html" %}
 
 <script src="/js_workspace/createVisualization/views/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/ButtonsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/views/selectedRangesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
