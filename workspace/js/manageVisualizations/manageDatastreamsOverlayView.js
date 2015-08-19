@@ -34,8 +34,8 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 	},
 
 	render: function(){
-		this.$el.find("#dataset_grid").html(this.grid.render().$el);
-		this.$el.find("#dataset_paginator").html(this.paginator.render().$el);
+		this.$el.find("#visualization_grid").html(this.grid.render().$el);
+		this.$el.find("#visualization_paginator").html(this.paginator.render().$el);
 		this.$el.find('.backgrid-paginator ul').addClass("pager center");
 		this.$el.find("#id_filter_dataSets").html( this.clientSideFilter.render().el );
 		this.$el.data('overlay').load();
@@ -43,7 +43,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 
 	initList: function(){
 
-		// Init the collection with django view list of datasets.
+		// Init the collection with django view list of visualizations.
 		this.listDatastreams = new ListDatastreams({});
 
 		var self = this;
@@ -53,7 +53,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				"click": "rowClicked"
 			},
 			rowClicked: function () {
-				window.location = self.options.dataViewCreationStepsUrl + '?dataset_revision_id=' + this.model.get('id');
+				window.location = self.options.dataViewCreationStepsUrl + '?visualization_revision_id=' + this.model.get('id');
 			}
 		});
 
@@ -69,12 +69,6 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				label: gettext('APP-GRID-CELL-CATEGORY'),
 				cell: "string",
 				sortable: true,
-				editable: false
-			}, {
-				name: "type_nice",
-				label: gettext('APP-GRID-CELL-TYPE'),
-				cell: "text",
-				sortable: false,
 				editable: false
 			}, {
 				name: "author",
@@ -107,7 +101,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 		});
 
 		this.listDatastreamView = new ListDatastreamView({
-			datasetCollection: this.listDatastreams,
+			visualizationCollection: this.listDatastreams,
 			grid: this.grid,
 			paginator: this.paginator
 		});
