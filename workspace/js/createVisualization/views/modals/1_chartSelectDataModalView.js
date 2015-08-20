@@ -10,26 +10,23 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
-		var selectedRangesView = new SelectedRangesView({
+		this.selectedRangesView = new SelectedRangesView({
 			el: this.$('.selected-ranges-view'),
 			collection: this.collection
 		});
 
-		this.dataCollection = new Backbone.Collection();
-
 		this.dataTableView = new DataTableView({
 			el: '#example',
-			collection: this.collection,
-			dataCollection: this.dataCollection
+			collection: this.collection
 		});
 		return this;
 	},
 
 	onCloseClicked: function (e) {
 		this.close(); //Close modal
-		var selection = this.collection.getSelection();
-		console.log('selection', selection);
-		console.log(this.dataTableView.getData());
+		var selectedRows = this.collection.getRows();
+		this.model.data.set('fields', [['number', 'year'], ['number', 'population']]);
+		this.model.data.set('rows', selectedRows);
 	},
 
 	onSelectLabelClicked: function(){

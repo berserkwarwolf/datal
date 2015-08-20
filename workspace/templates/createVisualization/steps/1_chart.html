@@ -33,19 +33,19 @@
 
 										<div class="btnGroup">
 											<p>Compara en el tiempo</p>
-											<button class="chartType line" data-type="line" title="Línea">&nbsp;</button>
-											<button class="chartType area" data-type="area" title="Área">&nbsp;</button>
+											<button class="chartType line linechart" data-type="linechart" title="Línea">&nbsp;</button>
+											<button class="chartType area areachart" data-type="areachart" title="Área">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Compara entre items</p>
-											<button class="chartType cols" data-type="cols" title="Columnas">&nbsp;</button>
-											<button class="chartType bars" data-type="bars" title="Barras">&nbsp;</button>
+											<button class="chartType cols columnchart" data-type="columnchart" title="Columnas">&nbsp;</button>
+											<button class="chartType bars barchart" data-type="barchart" title="Barras">&nbsp;</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Composición estática</p>
-											<button class="chartType pie" data-type="pie" title="Torta">&nbsp;</button>
+											<button class="chartType pie piechart" data-type="piechart" title="Torta">&nbsp;</button>
 										</div>
 
 									</fieldset>
@@ -75,7 +75,7 @@
 									<fieldset>
 										<div class="checkbox">
 											<label>
-												Cambiar columnas/filas <input type="checkbox">
+												Cambiar columnas/filas <input class="checkboxControl" value="traspose" name="traspose" type="checkbox">
 											</label>
 										</div>
 									</fieldset>
@@ -86,16 +86,16 @@
 										
 										<div class="radio">
 											<label>
-												Default <input type="radio">
+												Default <input name="sort" checked="" type="radio" value="default">
 											</label>
 											<label>
-												Inverted <input type="radio">
+												Inverted <input name="sort" type="radio" value="inverted">
 											</label>
 											<label>
-												Ascendant <input type="radio">
+												Ascendant <input name="sort" type="radio" value="asc">
 											</label>
 											<label>
-												Descendant <input type="radio">
+												Descendant <input name="sort" type="radio" value="desc">
 											</label>
 										</div>
 
@@ -107,15 +107,15 @@
 										
 										<div class="radio">
 											<label>
-												Excluded from the dataset <input type="radio">
+												Excluded from the dataset <input name="nullValueAction" value="excluded" type="radio">
 											</label>
 											<label>
-												Set to previows value in dataset <input type="radio">
+												Set to previous value in dataset <input name="nullValueAction" value="previous" type="radio">
 											</label>
 											<label>
-												Set to a given value <input type="radio">
-												<input type="text" class="hide">
+												Set to a given value <input name="nullValueAction" value="given" type="radio">
 											</label>
+											<input id="nullValuePreset" data-ref="nullValuePreset" type="text" class="hide">
 										</div>
 
 									</fieldset>
@@ -134,8 +134,8 @@
 
 					<div class="row">
 						<div class="col-md-11 col-md-offset-1">
-							<div class="text-center">
-								<input type="text" placeholder="[  ¿Cuál es el título?  ]">
+							<div class="center">
+								<input id="chartTitle" data-ref="title" type="text" placeholder="[  ¿Cuál es el título?  ]">
 							</div>
 						</div>
 					</div>
@@ -143,8 +143,8 @@
 					<div class="row">
 
 						<div class="col-md-1">
-							<div class="axisYName">
-								<input type="text" placeholder="[  Nombre del eje Y  ]">
+							<div class="axisYName attributeControl yTitleAttributeControl">
+								<input id="yTitle" data-ref="yTitle" type="text" placeholder="[  Nombre del eje Y  ]">
 							</div>
 						</div>
 
@@ -158,7 +158,7 @@
 						<div class="col-md-7">
 							<div class="chartContent">
 								<button class="btn cube edit plus selectData">&nbsp;</button>
-								<div id="chartContainer">
+								<div id="chartContainer" class="chart-preview-view">
 									<p>Seleccioná los datos a mostrar</p>
 								</div>
 							</div>
@@ -177,12 +177,12 @@
 
 						<div class="col-md-offset-3 col-md-7">
 
-							<div class="axisXName pull-left">
-								<input class="text-left" type="text" placeholder="[  Nombre del eje X  ]">
+							<div class="axisXName pull-left attributeControl xTitleAttributeControl">
+								<input id="xTitle" data-ref="xTitle" class="text-left" type="text" placeholder="[  Nombre del eje X  ]">
 							</div>
 
 							<div class="axisXMaxValue pull-right">
-								<input class="text-right" type="text" placeholder="[  Valor máximo  ]">
+								<input class="right" type="text" placeholder="[  Valor máximo  ]">
 							</div>
 
 						</div>
