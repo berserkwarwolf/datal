@@ -6,6 +6,8 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 		});
 	},
 	getRows: function () {
-		return _.unzip(this.getColumns);
+		return _.map(_.rest(_.unzip(this.getColumns())), function (row) {
+			return [parseInt(row[0]), parseFloat(row[1])];
+		});
 	}
 });

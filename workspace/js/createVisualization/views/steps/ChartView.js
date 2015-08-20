@@ -22,16 +22,16 @@ var ChartView = StepViewSPA.extend({
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
 
-		this.listenTo(this.model.data, 'change', this.onChangeData, this);
-		this.listenTo(this.model, 'change:lib', this.chartChanged, this);
-		this.listenTo(this.model, 'change:type', this.chartChanged, this);
+		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
+		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 
 	}, 
 
 	onChangeData: function (model) {
 		console.log('the data for your chart has changed', model.get('data'));
 		// TODO: should call this.chartView.render();
-		this.chartInstance.render();
+		this.renderChart();
 	},
 
 	onSelectDataClicked: function(){
@@ -75,23 +75,33 @@ var ChartView = StepViewSPA.extend({
 		this.model.set('type',type);
 	},
 
-	chartChanged: function(){
-		this.cleanChart();
-		this.createChart();
+	onChartChanged: function(){
+		console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
+		this.setupChart();
+		this.renderChart();
 	},
 
-	cleanChart: function(){
-		//mejorar
-		$('#chartContainer').html('');
-	},
-
-	createChart: function(){
-		this.chartSettings = this.factoryChart();
-
-		this.chartRender();
+	setupChart: function(){
+		var chartSettings = this.factoryChart();
 
 		//chart factory from model?
-		console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
+
+		if(chartSettings){
+
+			//change visibility of controls
+			$('.attributeControl').hide();
+			_.each(chartSettings.attributes,function(e){
+				$('.attributeControl.'+e+'AttributeControl').show();
+			});
+
+			//Set list of custom attributes for my model
+			this.model.set('attributes',chartSettings.attributes);
+
+			this.ChartViewClass = chartSettings.Class;
+
+		} else {
+			console.log('There are not class for this');
+		}
 
 	},
 
@@ -99,24 +109,20 @@ var ChartView = StepViewSPA.extend({
 		'd3':{
 			'linechart': {
 						'Class': charts.views.C3LineChart,
-						'Model': charts.models.LineChart,
 						'attributes': ['yTitle','xTitle']
 					},
 			'barchart': {
 						'Class': charts.views.C3BarChart,
-						'Model': charts.models.BarChart,
 						'attributes': ['yTitle','xTitle']
 					},
 		},
 		'google':{
 			'linechart': {
 						'Class': charts.views.GoogleLineChart,
-						'Model': charts.models.LineChart,
 						'attributes': ['yTitle','xTitle']
 					},
 			'barchart': {
 						'Class': charts.views.GoogleBarChart,
-						'Model': charts.models.BarChart,
 						'attributes': ['yTitle']
 					}
 		}
@@ -132,30 +138,17 @@ var ChartView = StepViewSPA.extend({
 
 	},
 
-	chartRender: function(){
+	renderChart: function () {
+	
+		if (this.ChartViewClass) {
 
-		if(this.chartSettings){
-
-			//change visibility of controls
-			$('.attributeControl').hide();
-			_.each(this.chartSettings.attributes,function(e){
-				$('.attributeControl.'+e+'AttributeControl').show();
-			});
-
-			//Set list of custom attributes for my model
-			this.model.set('attributes',this.chartSettings.attributes);
-
-			this.chartInstance = new this.chartSettings.Class({
-				el: this.$('#chartContainer'),
+			this.chartInstance = new this.ChartViewClass({
+				el: $('#chartContainer'),
 				model: this.model,
 			});
 			
 			this.chartInstance.render();
-		
-		} else {
-			console.log('There are not class for this');
 		}
-
 	},
 
 	onPreviousButtonClicked: function(){

@@ -24,9 +24,9 @@ var ChartSelectDataModalView = ModalView.extend({
 
 	onCloseClicked: function (e) {
 		this.close(); //Close modal
-		var selectedData = this.collection.getColumns();
-		console.log('selectedData:', selectedData);
-		this.model.data.set('data', selectedData);
+		var selectedRows = this.collection.getRows();
+		this.model.data.set('fields', [['number', 'year'], ['number', 'population']]);
+		this.model.data.set('rows', selectedRows);
 	},
 
 	onSelectLabelClicked: function(){
