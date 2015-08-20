@@ -40,7 +40,10 @@ charts.models.Chart = Backbone.Model.extend({
                 invertedAxis: this.get('invertedAxis'),
                 chartTemplate: '',//?
                 nullValueAction: this.get('nullValueAction'),
-                nullValuePreset: this.get('nullValuePreset')
+                nullValuePreset: this.get('nullValuePreset'),
+                showLegend: this.get('showLegend'),
+                tranpose: this.get('traspose'),
+                sort: this.get('sort')
             },
             title: this.get('title'),
             data: '',
