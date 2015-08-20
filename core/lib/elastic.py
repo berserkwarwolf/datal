@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from elasticsearch import Elasticsearch, NotFoundError
+from elasticsearch import Elasticsearch, NotFoundError, RequestError
 import logging
 
 class ElasticsearchIndex():
@@ -73,6 +73,7 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
+                      "hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -245,3 +246,14 @@ class ElasticsearchIndex():
 
 
         return [documents_deleted, documents_not_deleted]
+
+    def update(self, document):
+        """ update by id"""
+
+        try:
+            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body={"doc":document})
+        except RequestError,e:
+            raise RequestError(e)
+        except NotFoundError,e:
+            raise NotFoundError,(e)
+

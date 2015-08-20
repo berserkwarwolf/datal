@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 import operator
 import time
+import logging
 
 from django.db.models import Q, F
+from django.db import IntegrityError
 
 from core.exceptions import SearchIndexNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
+
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES
+from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -200,6 +203,20 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         )
         return related
 
+    def hit(self, id, channel_type):
+        """agrega un hit al datastream. """
+
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise DataStreamNotFoundException()
+
+        # utilizo el ID del hit porque es confiable como contador,
+        # aunque lo correcto sería hacer un count de los hits que tiene ese ds_id
+        DatastreamHitsDAO(hit.datastream).hit(hit.id)
+    
+
 
 class DatastreamSearchDAOFactory():
     """ select Search engine"""
@@ -218,10 +235,10 @@ class DatastreamSearchDAOFactory():
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
+
         
 class DatastreamSearchDAO():
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastream index"""
 
     TYPE="ds"
     def __init__(self, datastream_revision):
@@ -271,6 +288,7 @@ class DatastreamSearchDAO():
                      'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
+                     'hits': 0,
                      'end_point': self.datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
@@ -280,7 +298,7 @@ class DatastreamSearchDAO():
 
 
 class DatastreamSearchifyDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastreams searchify documents """
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
         self.search_index = SearchifyIndex()
@@ -293,7 +311,7 @@ class DatastreamSearchifyDAO(DatastreamSearchDAO):
 
 
 class DatastreamElasticsearchDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' elasticsearch documents """
+    """ class for manage access to datastreams elasticsearch documents """
 
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
@@ -304,3 +322,21 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+
+class DatastreamHitsDAO():
+    """class for manage access to Hits in DB and index"""
+
+    def __init__(self, datastream):
+        self.datastream=datastream
+        self.search_index = ElasticsearchIndex()
+        self.logger=logging.getLogger(__name__)
+
+    def hit(self, count):
+
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s, hits: %s)" % ( self.datastream.guid,count))
+        # armo el documento para actualizar el index.
+        doc={'docid':"DS::%s" % self.datastream.guid,
+                "type": "ds",
+                "hits": count}
+
+        return self.search_index.update(doc)
