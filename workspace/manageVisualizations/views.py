@@ -171,19 +171,29 @@ def view(request):
 @requires_published_parent()
 @transaction.commit_on_success
 def create(request, viz_type='index'):
-    auth_manager = request.auth_manager
     
     if request.method == 'GET':
-        #if not index the load related view
-        if viz_type != 'index':
-            form = InitializeChartForm(request.GET)
-            if not form.is_valid():
-                raise DatastreamRequiredException("Can't create visualization without related dataview")
-                
-            dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
-            dataview = dao.get()
+        datastream_revision_id = request.GET.get('datastream_revision_id', None)
+        datastream_rev = DataStreamDBDAO().get(
+            request.user.language,
+            datastream_revision_id=datastream_revision_id,
+            published=False
+        )
+
+        # if not index the load related view
+        #if viz_type != 'index':
+        #    form = InitializeChartForm(request.GET)
+        #    if not form.is_valid():
+        #        raise DatastreamRequiredException("Can't create visualization without related dataview")
+        #
+        #    dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
+        #    dataview = dao.get()
             
-        return render_to_response('createVisualization/%s.html' % viz_type, locals())
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev
+        ))
+
     elif request.method == 'POST':
         """ save new or update dataset """
         form = CreateVisualizationForm(request.POST, prefix='visualization')
