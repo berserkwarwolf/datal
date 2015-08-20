@@ -33,15 +33,22 @@ var MainView = Backbone.View.extend({
           el: this.$('.step-1-view')
         }).init();
 
+        var metadataView = new ChartView({
+          name: gettext('APP-METADATA-TEXT'), 
+          model: this.model,
+          el: this.$('.step-2-view')
+        }).init();
+
         var finishView = new FinishView({
           name: gettext('APP-FINISH-TEXT'),
           model: this.model,
-          el: this.$('.step-2-view')
+          el: this.$('.step-3-view')
         }).init();
 
         //Register views
         this.register( startView );
         this.register( chartView );
+        this.register( metadataView );
         this.register( finishView );
 
         //Create modals
@@ -49,7 +56,7 @@ var MainView = Backbone.View.extend({
           id: 'chartSelectDataModal',
           el: '#chartSelectDataModal',
           model: this.model
-        });
+        }).render();
 
         var selectLabelModal = new ChartSelectLabelModalView({
           id: 'chartSelectLabelModal',

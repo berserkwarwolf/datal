@@ -40,8 +40,6 @@ var DataTableView = Backbone.View.extend({
   initialize: function (options) {
     var self = this;
 
-    this.dataCollection = options.dataCollection;
-
     var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
       return col;
     });
@@ -152,6 +150,9 @@ var DataTableView = Backbone.View.extend({
       data = this.table.getDataAtCol(range.from.col);
     } else {
       data = this.table.getData(range.from.row, range.from.col, range.to.row, range.to.col);
+      // TODO: this takes only the first item from the selection. To support many column selection, 
+      // it should do something else, like split the columns into separate series.
+      data = _.map(data, _.first);
     }
     model.set('data', data);
     this.collection.add(model);
@@ -168,9 +169,5 @@ var DataTableView = Backbone.View.extend({
     this.available.push(model.get('id'));
     this.rmCellsMeta(cells, model.get('id'));
     this.table.render();
-  },
-
-  getData: function () {
-    return this.collection.toJSON();
   }
 });
