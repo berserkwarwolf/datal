@@ -107,15 +107,15 @@
 										
 										<div class="radio">
 											<label>
-												Excluded from the dataset <input type="radio">
+												Excluded from the dataset <input name="nullValueAction" value="excluded" type="radio">
 											</label>
 											<label>
-												Set to previows value in dataset <input type="radio">
+												Set to previous value in dataset <input name="nullValueAction" value="previous" type="radio">
 											</label>
 											<label>
-												Set to a given value <input type="radio">
-												<input type="text" class="hide">
+												Set to a given value <input name="nullValueAction" value="given" type="radio">
 											</label>
+											<input id="nullValuePreset" data-ref="nullValuePreset" type="text" class="hide">
 										</div>
 
 									</fieldset>

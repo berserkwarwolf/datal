@@ -9,9 +9,14 @@ var ChartView = StepViewSPA.extend({
 		eventsObject['click button.selectData'] = 'onSelectDataClicked';
 		eventsObject['click button.chartType'] = 'onChartTypeClicked';
 		eventsObject['change select#chartLibrary'] = 'onChartLibraryChanged';
-		eventsObject['keyup input#chartTitle'] = 'onInputTitleChanged';
-		eventsObject['keyup input#yTitle'] = 'onInputTitleChanged';
-		eventsObject['keyup input#xTitle'] = 'onInputTitleChanged';
+		
+		eventsObject['keyup input#chartTitle'] = 'onInputChanged';
+		eventsObject['keyup input#yTitle'] = 'onInputChanged';
+		eventsObject['keyup input#xTitle'] = 'onInputChanged';
+		eventsObject['keyup input#nullValuePreset'] = 'onInputChanged';
+		
+		eventsObject['change input[type=radio]'] = 'onRadioChanged';
+
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -44,9 +49,22 @@ var ChartView = StepViewSPA.extend({
 		this.chartChanged();
 	},
 
-	onInputTitleChanged: function(e){
+	onInputChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.data('ref'),input.val());
+
+		console.log(this.model.getGeneralSettings());
+	},
+
+	onRadioChanged: function(e){
+		var input = $(e.target);
+		this.model.set(input.attr('name'),input.val());
+
+		if(input.val()=='given'){
+			$('#nullValuePreset').show();
+		}else{
+			$('#nullValuePreset').hide();
+		}
 
 		console.log(this.model.getGeneralSettings());
 	},
