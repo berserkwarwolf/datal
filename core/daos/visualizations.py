@@ -32,7 +32,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         query = VisualizationRevision.objects.filter(
             id=F('visualization__last_revision'),
             visualization__user__account=account_id,
-            visualizationi18n__language=language,
+
             visualization__datastream__last_revision__category__categoryi18n__language=language
         )
 

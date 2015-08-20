@@ -1,4 +1,11 @@
 {
   "total_entries": {{total_entries}},
-  "items": {{items}}
+  "items": [
+    {% for item in items %}
+    {
+      "title": "{{ item.visualizationi18n__title }}",
+      "url": ""
+    }{% if not forloop.last %},{% endif %}
+    {% endfor %}
+]
 }
