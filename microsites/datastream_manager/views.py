@@ -9,7 +9,7 @@ from core.docs import DS, DT
 from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
-from core.reports_manager.helpers import create_report
+from core.daos.datastreams import DataStreamDBDAO
 from microsites.helpers import set_dataset_impl_type_nice
 
 
@@ -52,7 +52,9 @@ def action_view(request, id, slug):
     can_export      = True
     can_share       = False
 
-    create_report(id, DataStreamHits, ChannelTypes.WEB)
+    DataStreamDBDAO().hit(id, ChannelTypes.WEB)
+
+
 #    datastream_html = ''
 #    if is_bot(request):
 #        from core.engine import invoke
@@ -117,7 +119,7 @@ def action_embed(request, guid):
     except Http404:
         return render_to_response('datastream_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    create_report(datastream.datastream_id, DataStreamHits, ChannelTypes.WEB)
+    DataStreamDBDAO().hit(datastream.datastream_id, ChannelTypes.WEB)
     end_point = urllib.urlencode(parameters_query)
     header_row = request.REQUEST.get('header_row', False)
     fixed_column = request.REQUEST.get('fixed_column', False)
