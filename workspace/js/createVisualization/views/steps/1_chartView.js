@@ -122,7 +122,7 @@ var ChartView = StepViewSPA.extend({
 			//change visibility of controls
 			$('.attributeControl').hide();
 			_.each(this.chartSettings.attributes,function(e){
-				$('.attributeControl#'+e).show();
+				$('.attributeControl.'+e+'AttributeControl').show();
 			});
 
 			//Set list of custom attributes for my model
