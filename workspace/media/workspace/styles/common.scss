@@ -761,14 +761,17 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 .main-section{}
 
 /* Section Title */
-.main-section .section-title{height:42px;}
+.main-section .section-title{}
 .main-section .section-title h1,
 .main-section .section-title h2,
-.main-section .section-title h3{float:left;text-shadow:0 1px 0 #000;line-height:39px;font-family:$font-titles-family;}
-.main-section .section-title h1{padding-left:15px;font-weight:bold;color:$font-color-supreme;font-size:$font-size-xl;}
+.main-section .section-title h3{font-family:$font-titles-family;}
+.main-section .section-title h1{color:#000;font-size:$font-size-xl;}
 .main-section .section-title h1 a{color:$font-color-supreme;}
-.main-section .section-title h2, .main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
-.main-section .section-title h2:before, .main-section .section-title h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
+.main-section .section-title h2,
+.main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
+
+.main-section .section-title h2:before, 
+.main-section .section-title h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
 
   /* Actions */
   .main-section .section-title .actions{padding-top:7px;}

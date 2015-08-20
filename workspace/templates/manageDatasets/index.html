@@ -42,6 +42,51 @@
 {% endblock %}
 
 {% block sectionTitle %}
+
+<!-- Top Actions -->
+<ul class="top-actions clearfix">
+  <li><a href="" class="button alpha back" title="Volver">Volver</a><li>
+</ul>
+
+<div class="row clearfix">
+  
+  <!-- Column Left -->
+  <div class="col-lg-7">    
+    
+    <h1>#Nombre del conjunto de datos 41el máximo disponible de caracteres que serían 80</h1>
+
+    <div class="status-row">
+      <span class="status">Pendiente de revisión</span>
+      <span class="publish-version">Última versión publicada 30 de Septiembre de 2015, <a href="" title="Ver en sitio">Ver en sitio</a></span>
+      <span class="row-actions"><a href="" title="Despublicar">Despublicar</a></span>
+    </div>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-lg-5 clearfix">
+    
+    <a href="" class="button" title="Crear visualización">Crear visualización</a>
+
+    <a href="" class="button secondary" title="Enviar a revisión">Enviar a revisión</a>
+
+    <div class="more-actions">
+      <div class="more-button">...</div>
+      <ul class="dropdown">
+        <li><a href="" class="button icon edit" title="Edit">Edit</a></li>
+        <li><a href="" class="button icon delete" title="Delete">Delete</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>  
+
+
+
+
+{% comment %}
+
 <h1>{% trans "APP-DATASETS-TEXT" %}</h1>
 <div class="bulk-actions FL clearfix" style="display:none;">
    <select id="id_bulkActions" class="FL">
@@ -54,6 +99,11 @@
 <ul class="actions FR">
    <li><a href="{% url 'manageDatasets.create' %}" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
 </ul>
+
+{% endcomment %}
+
+
+
 {% endblock %}
 
 {% block content %}
