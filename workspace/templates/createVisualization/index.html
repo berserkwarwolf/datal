@@ -61,7 +61,8 @@
 <!-- Create Viz StepViews -->
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/0_startView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/1_chartView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/2_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/2_metadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/3_finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/invoke.js"></script>
 
 <!-- Viz modals -->
@@ -99,7 +100,8 @@
     <!-- Include templates -->
     {% include "createVisualization/steps/0_start.html" %}
     {% include "createVisualization/steps/1_chart.html" %}
-    {% include "createVisualization/steps/2_finish.html" %}
+    {% include "createVisualization/steps/2_metadata.html" %}
+    {% include "createVisualization/steps/3_finish.html" %}
   </div>
 
 {% endblock %}
