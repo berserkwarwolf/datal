@@ -4,8 +4,7 @@
 .icon:hover{cursor:pointer;}
 
 /* Icons with background */
-.icon-background{width:48px;height:48px;background-color:#0066cc;}
-.icon-background:hover{opacity:.5;}
+.fill-background{width:48px;height:48px;background-color:#0066cc;}
 
 /* 48px icons */
 .size-48{
@@ -37,25 +36,20 @@
 
 	/* Actions */
 	.icon-edit{background-position:-12px -264px;}
-	.icon-edit:active,
-	.icon-edit:focus{background-position:-96px -264px;}
-
-	.icon-edit-v2{background-position:0 -290px;}
+	.icon-edit:active{background-position:-96px -264px;}
+	.icon-edit.fill-background{background-position:0 -290px;}
 
 	.icon-add{background-position:-12px -336px;}
-
-	.icon-add-v2{background-position:0 -360px;}
+	.icon-add.fill-background{background-position:0 -360px;}
 
 	.icon-delete{background-position:-12px -408px;}
 	.icon-delete:hover{background-position:-48px -408px;}
 
 	.icon-zoom-in{background-position:-12px -444px;}
-	.icon-zoom-in:active,
-	.icon-zoom-in:focus{background-position:-96px -444px;}
+	.icon-zoom-in:active{background-position:-96px -444px;}
 
 	.icon-zoom-out{background-position:-12px -480px;}
-	.icon-zoom-out:active,
-	.icon-zoom-out:focus{background-position:-96px -480px;}
+	.icon-zoom-out:active{background-position:-96px -480px;}
 
 		/* Hover */
 		.icon-edit:hover,
