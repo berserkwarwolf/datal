@@ -22,7 +22,9 @@ var ChartView = StepViewSPA.extend({
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
 
-		this.render();
+		this.listenTo(this.model.data, 'change', this.onChangeData, this);
+		this.listenTo(this.model, 'change:lib', this.chartChanged, this);
+		this.listenTo(this.model, 'change:type', this.chartChanged, this);
 
 	}, 
 
@@ -46,10 +48,9 @@ var ChartView = StepViewSPA.extend({
 	onChartLibraryChanged: function(e){
 		var lib = $(e.target).val();
 		this.model.set('lib',lib);
-		this.chartChanged();
 	},
 
-	onInputChanged: function(e){
+	onInputTitleChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.data('ref'),input.val());
 
@@ -73,7 +74,6 @@ var ChartView = StepViewSPA.extend({
 		$('.chartType').removeClass('active');
 		$('.chartType.'+type).addClass('active');
 		this.model.set('type',type);
-		this.chartChanged();
 	},
 
 	chartChanged: function(){
@@ -92,7 +92,7 @@ var ChartView = StepViewSPA.extend({
 		this.chartRender();
 
 		//chart factory from model?
-		$('#chartContainer').html(this.model.get('type') + ' - '+ this.model.get('lib') );
+		console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
 
 	},
 
@@ -146,18 +146,12 @@ var ChartView = StepViewSPA.extend({
 			//Set list of custom attributes for my model
 			this.model.set('attributes',this.chartSettings.attributes);
 
-			this.chartModel = new this.chartSettings.Model({
-					id:1
-				});
-
-			//this.chartModel.fetchData();
-
 			this.chartInstance = new this.chartSettings.Class({
-				el: '#chartContainer',
-				model: this.chartModel,
+				el: this.$('#chartContainer'),
+				model: this.model,
 			});
 			
-			//this.chartInstance.render();
+			this.chartInstance.render();
 		
 		} else {
 			console.log('There are not class for this');
