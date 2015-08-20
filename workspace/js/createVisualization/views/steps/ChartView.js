@@ -3,21 +3,25 @@ var ChartView = StepViewSPA.extend({
 	initialize: function(){
 
 		// Right way to extend events without overriding the parent ones
-		var eventsObject = {}
-		eventsObject['click a.backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click a.nextButton'] = 'onNextButtonClicked';
-		eventsObject['click button.selectData'] = 'onSelectDataClicked';
-		eventsObject['click button.chartType'] = 'onChartTypeClicked';
-		eventsObject['change select#chartLibrary'] = 'onChartLibraryChanged';
-		
-		eventsObject['keyup input#chartTitle'] = 'onInputChanged';
-		eventsObject['keyup input#yTitle'] = 'onInputChanged';
-		eventsObject['keyup input#xTitle'] = 'onInputChanged';
-		eventsObject['keyup input#nullValuePreset'] = 'onInputChanged';
-		
-		eventsObject['change input[type=radio]'] = 'onRadioChanged';
+		this.addEvents({
+	
+			'click a.backButton': 			'onPreviousButtonClicked',
+			'click a.nextButton': 			'onNextButtonClicked',
+			'click button.selectData': 		'onSelectDataClicked',
+			'click button.chartType': 		'onChartTypeClicked',
+			'change select#chartLibrary': 	'onChartLibraryChanged',
+			
+			'keyup input#chartTitle': 		'onInputChanged',
+			'keyup input#yTitle': 			'onInputChanged',
+			'keyup input#xTitle': 			'onInputChanged',
+			'keyup input#nullValuePreset': 	'onInputChanged',
+			
+			'change input[type=radio]': 	'onRadioChanged',
+			'click input[type=checkbox]': 	'onCheckboxChanged'//Esto no funciona
 
-		this.addEvents(eventsObject);
+		});
+
+		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
@@ -27,6 +31,23 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 
 	}, 
+
+	onCheckboxChanged: function(e){
+		//Esto no funciona
+		console.log(e);
+		var input = $(e.target);
+
+		console.log(input.val());
+//		this.model.set(input.attr('name'),input.val());
+
+/*		if(input.val()=='given'){
+			$('#nullValuePreset').show();
+		}else{
+			$('#nullValuePreset').hide();
+		}*/
+
+		console.log(this.model.getGeneralSettings());
+	},
 
 	onChangeData: function (model) {
 		console.log('the data for your chart has changed', model.get('data'));
@@ -82,9 +103,8 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	setupChart: function(){
-		var chartSettings = this.factoryChart();
 
-		//chart factory from model?
+		var chartSettings = this.chartsFactory.create(this.model.get('type'),this.model.get('lib'));
 
 		if(chartSettings){
 
@@ -101,39 +121,6 @@ var ChartView = StepViewSPA.extend({
 
 		} else {
 			console.log('There are not class for this');
-		}
-
-	},
-
-	availableCharts: {
-		'd3':{
-			'linechart': {
-						'Class': charts.views.C3LineChart,
-						'attributes': ['yTitle','xTitle']
-					},
-			'barchart': {
-						'Class': charts.views.C3BarChart,
-						'attributes': ['yTitle','xTitle']
-					},
-		},
-		'google':{
-			'linechart': {
-						'Class': charts.views.GoogleLineChart,
-						'attributes': ['yTitle','xTitle']
-					},
-			'barchart': {
-						'Class': charts.views.GoogleBarChart,
-						'attributes': ['yTitle']
-					}
-		}
-	},
-
-	factoryChart: function(){
-		if(_.has(this.availableCharts,this.model.get('lib')) &&
-			_.has(this.availableCharts[this.model.get('lib')],this.model.get('type')) ){
-			return this.availableCharts[this.model.get('lib')][this.model.get('type')];
-		} else {
-			return false;
 		}
 
 	},
