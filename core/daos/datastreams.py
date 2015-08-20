@@ -1,11 +1,19 @@
 # -*- coding: utf-8 -*-
+import operator
+import time
+import logging
+
+from django.db.models import Q, F
+from django.db import IntegrityError
+
 from core.exceptions import SearchIndexNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
+
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-import time
+from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -64,21 +72,158 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream_revision
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None):
-        pass
-        
+    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
+        """ Get full data """
+        fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
+        datastream_revision = datastream_id is None and \
+                           DataStreamRevision.objects.select_related().get(
+                               pk=datastream_revision_id, category__categoryi18n__language=language,
+                               datastreami18n__language=language) or \
+                           DataStreamRevision.objects.select_related().get(
+                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
+                               datastreami18n__language=language)
+
+        tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
+        sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
+        #parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+        parameters = []
+
+        # Get category name
+        category = datastream_revision.category.categoryi18n_set.get(language=language)
+        datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
+        dataset_revision = datastream_revision.dataset.last_revision
+
+        datastream = dict(
+            datastream_revision_id=datastream_revision.id,
+            dataset_id=datastream_revision.dataset.id,
+            user_id=datastream_revision.user.id,
+            author=datastream_revision.user.nick,
+            account_id=datastream_revision.user.account.id,
+            category_id=datastream_revision.category.id,
+            category_name=category.name,
+            end_point=dataset_revision.end_point,
+            collect_type=dataset_revision.impl_type,
+            impl_type=dataset_revision.impl_type,
+            status=datastream_revision.status,
+            modified_at=datastream_revision.created_at,
+            meta_text=datastream_revision.meta_text,
+            guid=datastream_revision.dataset.guid,
+            created_at=datastream_revision.dataset.created_at,
+            last_revision_id=datastream_revision.dataset.last_revision_id,
+            last_published_revision_id=datastream_revision.dataset.last_published_revision_id,
+            title=datastreami18n.title,
+            description=datastreami18n.description,
+            notes=datastreami18n.notes,
+            tags=tags,
+            sources=sources,
+            parameters=parameters,
+        )
+
+        return datastream
+
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-              sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+        """ Consulta y filtra los datastreams por diversos campos """
 
-        pass
+        query = DataStreamRevision.objects.filter(
+            id=F('datastream__last_revision'),
+            datastream__user__account=account_id,
+            datastreami18n__language=language,
+            category__categoryi18n__language=language
+        )
 
-    def query_childs(self, dataset_id, language):
+        if exclude:
+            query.exclude(**exclude)
+
+        if filter_name:
+            query = query.filter(datastreami18n__title__icontains=filter_name)
+
+        if filters_dict:
+            predicates = []
+            for filter_class, filter_value in filters_dict.iteritems():
+                if filter_value:
+                    predicates.append((filter_class + '__in', filter_value))
+            q_list = [Q(x) for x in predicates]
+            if predicates:
+                query = query.filter(reduce(operator.and_, q_list))
+
+        total_resources = query.count()
+        query = query.values('datastream__user__nick', 'status', 'id', 'datastream__guid', 'category__id',
+                             'datastream__id', 'category__categoryi18n__name', 'datastreami18n__title',
+                             'datastreami18n__description', 'created_at', 'datastream__user__id',
+                             'datastream__last_revision_id', 'dataset__last_revision__dataseti18n__title',
+                             'dataset__last_revision__impl_type', 'dataset__last_revision__id'
+                             )
+
+        query = query.order_by(sort_by)
+
+        # Limit the size.
+        nfrom = page * itemsxpage
+        nto = nfrom + itemsxpage
+        query = query[nfrom:nto]
+
+        return query, total_resources
+
+    def query_filters(self, account_id=None, language=None):
+        """
+        Reads available filters from a resource array. Returns an array with objects and their
+        i18n names when available.
+        """
+        query = DataStreamRevision.objects.filter(
+                                                id=F('datastream__last_revision'),
+                                                dataset__user__account=account_id,
+                                                datastreami18n__language=language,
+                                                category__categoryi18n__language=language)
+
+        query = query.values('datastream__user__nick', 'status',
+                             'category__categoryi18n__name')
+
+        filters = set([])
+
+        for res in query:
+            status = res.get('status')
+
+            filters.add(('status', status,
+                unicode(STATUS_CHOICES[status])
+                ))
+            if 'category__categoryi18n__name' in res:
+                filters.add(('category', res.get('category__categoryi18n__name'),
+                    res.get('category__categoryi18n__name')))
+            if res.get('datastream__user__nick'):
+                filters.add(('author', res.get('datastream__user__nick'),
+                    res.get('datastream__user__nick')))
+
+        return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
+
+    def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
-        pass
-        
+
+        related = dict(
+            visualizations=dict()
+        )
+        return related
+
+    def hit(self, id, channel_type):
+        """agrega un hit al datastream. """
+
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise DataStreamNotFoundException()
+
+        # utilizo el ID del hit porque es confiable como contador,
+        # aunque lo correcto sería hacer un count de los hits que tiene ese ds_id
+        DatastreamHitsDAO(hit.datastream).hit(hit.id)
+    
+
+
 class DatastreamSearchDAOFactory():
     """ select Search engine"""
-    
+
+    def __init__(self):
+        pass
+
     def create(self, datastream_revision):
         if settings.USE_SEARCHINDEX == 'searchify':
             self.search_dao = DatastreamSearchifyDAO(datastream_revision)
@@ -90,10 +235,10 @@ class DatastreamSearchDAOFactory():
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
+
         
 class DatastreamSearchDAO():
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastream index"""
 
     TYPE="ds"
     def __init__(self, datastream_revision):
@@ -143,15 +288,17 @@ class DatastreamSearchDAO():
                      'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
+                     'hits': 0,
                      'end_point': self.datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
 
         return document
-        
+
+
 class DatastreamSearchifyDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastreams searchify documents """
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
         self.search_index = SearchifyIndex()
@@ -162,8 +309,9 @@ class DatastreamSearchifyDAO(DatastreamSearchDAO):
     def remove(self, datastream_revision):
         self.search_index.delete_documents([self._get_id()])
 
+
 class DatastreamElasticsearchDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' elasticsearch documents """
+    """ class for manage access to datastreams elasticsearch documents """
 
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
@@ -174,3 +322,21 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+
+class DatastreamHitsDAO():
+    """class for manage access to Hits in DB and index"""
+
+    def __init__(self, datastream):
+        self.datastream=datastream
+        self.search_index = ElasticsearchIndex()
+        self.logger=logging.getLogger(__name__)
+
+    def hit(self, count):
+
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s, hits: %s)" % ( self.datastream.guid,count))
+        # armo el documento para actualizar el index.
+        doc={'docid':"DS::%s" % self.datastream.guid,
+                "type": "ds",
+                "hits": count}
+
+        return self.search_index.update(doc)
