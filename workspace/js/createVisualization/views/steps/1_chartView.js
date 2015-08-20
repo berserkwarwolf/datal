@@ -9,6 +9,9 @@ var ChartView = StepViewSPA.extend({
 		eventsObject['click button.selectData'] = 'onSelectDataClicked';
 		eventsObject['click button.chartType'] = 'onChartTypeClicked';
 		eventsObject['change select#chartLibrary'] = 'onChartLibraryChanged';
+		eventsObject['keyup input#chartTitle'] = 'onInputTitleChanged';
+		eventsObject['keyup input#yTitle'] = 'onInputTitleChanged';
+		eventsObject['keyup input#xTitle'] = 'onInputTitleChanged';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -41,6 +44,13 @@ var ChartView = StepViewSPA.extend({
 		this.chartChanged();
 	},
 
+	onInputTitleChanged: function(e){
+		var input = $(e.target);
+		this.model.set(input.data('ref'),input.val());
+
+		console.log(this.model.getGeneralSettings());
+	},
+
 	selectGraphType: function(type){
 		$('.chartType').removeClass('active');
 		$('.chartType.'+type).addClass('active');
@@ -70,23 +80,27 @@ var ChartView = StepViewSPA.extend({
 
 	availableCharts: {
 		'd3':{
-			'line': {
+			'linechart': {
 						'Class': charts.views.C3LineChart,
-						'Model': charts.models.LineChart
+						'Model': charts.models.LineChart,
+						'attributes': ['yTitle','xTitle']
 					},
-			'bars': {
+			'barchart': {
 						'Class': charts.views.C3BarChart,
-						'Model': charts.models.BarChart
+						'Model': charts.models.BarChart,
+						'attributes': ['yTitle','xTitle']
 					},
 		},
 		'google':{
-			'line': {
+			'linechart': {
 						'Class': charts.views.GoogleLineChart,
-						'Model': charts.models.LineChart
+						'Model': charts.models.LineChart,
+						'attributes': ['yTitle','xTitle']
 					},
-			'bars': {
+			'barchart': {
 						'Class': charts.views.GoogleBarChart,
-						'Model': charts.models.BarChart
+						'Model': charts.models.BarChart,
+						'attributes': ['yTitle']
 					}
 		}
 	},
@@ -104,6 +118,15 @@ var ChartView = StepViewSPA.extend({
 	chartRender: function(){
 
 		if(this.chartSettings){
+
+			//change visibility of controls
+			$('.attributeControl').hide();
+			_.each(this.chartSettings.attributes,function(e){
+				$('.attributeControl#'+e).show();
+			});
+
+			//Set list of custom attributes for my model
+			this.model.set('attributes',this.chartSettings.attributes);
 
 			this.chartModel = new this.chartSettings.Model({
 					id:1

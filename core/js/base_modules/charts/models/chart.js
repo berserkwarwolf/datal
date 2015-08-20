@@ -29,5 +29,33 @@ charts.models.Chart = Backbone.Model.extend({
         });
 
         return this.data.fetch();
+    },
+
+    getGeneralSettings: function(){
+        var settings = {
+            format: {
+                type: this.get('type'),
+                lib: this.get('lib'),
+                showLegend: this.get('showLegend'),
+                invertedAxis: this.get('invertedAxis'),
+                chartTemplate: '',//?
+                nullValueAction: this.get('nullValueAction'),
+                nullValuePreset: this.get('nullValuePreset')
+            },
+            title: this.get('title'),
+            data: '',
+            chart: this.getChartAttributes()
+        };
+        return settings;
+    },
+
+    getChartAttributes: function(){
+        var attr = {};
+        var that = this;
+        _.each(this.get('attributes'),function(e){
+            attr[e] = that.get(e);
+        });
+        return attr;
     }
+
 });
