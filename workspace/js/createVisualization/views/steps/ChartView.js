@@ -28,11 +28,10 @@ var ChartView = StepViewSPA.extend({
 
 	}, 
 
-	render: function(){
-
-		var self = this;
-		
-		return this;
+	onChangeData: function (model) {
+		console.log('the data for your chart has changed', model.get('data'));
+		// TODO: should call this.chartView.render();
+		this.chartInstance.render();
 	},
 
 	onSelectDataClicked: function(){
