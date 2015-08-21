@@ -10,10 +10,11 @@
 
         /* Nav items */
         li{font-family:$font-secondary-family, sans-serif;font-weight:300;font-size:$font-size-xl;padding:30px 10px;cursor:pointer;color:$font-color-base;border-bottom:1px solid $color-base-extra-light;}
-        li:hover{background:#8fceea;color:#000;}
+        li:hover{background:$color-base-extra-light;}
+        li.active{background:#8fceea;}
 
         /* Nav inset */
-        li:hover > ul.navCreatorPicker{display:block;cursor:default;}
+        /* li:hover > ul.navCreatorPicker{display:block;cursor:default;} */
 
         /* Nav titles */
         li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px 10px 10px;cursor:default;border:0 none;background:none;}
@@ -22,7 +23,7 @@
     }
 
     ul.navCreatorPicker{
-      display:none;position:absolute;left:310px;top:0;min-width:9999px;min-height:9999px;overflow:hidden;
+      display:none;position:absolute;left:310px;top:0;min-width:9999px;min-height:9999px;overflow:hidden;cursor:default;
 
         span{float:left;margin-right:20px;}
 
