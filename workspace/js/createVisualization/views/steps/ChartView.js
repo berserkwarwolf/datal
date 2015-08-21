@@ -40,7 +40,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChangeData: function (model) {
-		console.log('the data for your chart has changed', model.get('data'));
+		console.log('the data for your chart has changed', model.toJSON());
 		// TODO: should call this.chartView.render();
 		this.renderChart();
 	},
