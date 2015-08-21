@@ -3,7 +3,6 @@ var charts = charts || {
     views: {}
 };
 
-
 charts.models.LineChart = charts.models.Chart.extend({
     type: 'line',
     defaults: _.extend({},charts.models.Chart.prototype.defaults, {

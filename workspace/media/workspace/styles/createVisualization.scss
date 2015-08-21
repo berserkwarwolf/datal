@@ -3,38 +3,42 @@
 
 /* Nav */
 .navCreator{
-  position: relative;
+  position:relative;
 
     ul{
-      width: 310px;
+      width:310px;
 
         /* Nav items */
-        li{font-family: $font-secondary-family, sans-serif;font-weight:300;font-size: $font-size-xl;padding:30px 10px;cursor: pointer;color: $font-color-base;border-bottom: 1px solid $color-base-extra-light;}
-        li:hover{background:#8fceea;color: #000;}
+        li{font-family:$font-secondary-family, sans-serif;font-weight:300;font-size:$font-size-xl;padding:30px 10px;cursor:pointer;color:$font-color-base;border-bottom:1px solid $color-base-extra-light;}
+        li:hover{background:#8fceea;color:#000;}
 
         /* Nav inset */
-        li:hover > ul.navCreatorPicker{display: block;cursor: default;}
+        li:hover > ul.navCreatorPicker{display:block;cursor:default;}
 
         /* Nav titles */
-        li.heading{font-size: $font-size-m;text-transform: uppercase;color: $font-color-light;padding:10px;cursor: default;border:0 none;background: none;}
+        li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px 10px 10px;cursor:default;border:0 none;background:none;}
 
-        li.heading:not(:first-child){margin-top: 30px;}
+        li.heading:not(:first-child){margin-top:30px;}
     }
 
     ul.navCreatorPicker{
-      display: none;position: absolute;left: 310px;top: 0;min-width: 9999px;min-height: 9999px;overflow:hidden;
+      display:none;position:absolute;left:310px;top:0;min-width:9999px;min-height:9999px;overflow:hidden;
+
+        span{float:left;margin-right:20px;}
 
         /* Nav items */
         li{
-          font-size: $font-size-l;color: $accent-color;float: left;padding:20px 0 20px 108px;background:url(http://www.iconsdb.com/icons/download/dark-gray/area-chart-48.ico) no-repeat 30px 15px;float: left;width: 100%;
+          font-size:$font-size-l;color:$accent-color;float:left;padding:20px 30px;float:left;width:100%;
 
-            p{font-family: Arial, sans-serif;font-size: $font-size-m;color: $font-color-light;font-style: normal;margin-top: 10px;}
+            h4{line-height:1.6;}
+
+            p{font-family:Arial, sans-serif;font-size:$font-size-m;color:$font-color-light;font-style:normal;line-height:1;}
         }
         li:hover{background-color:#ededed;}
-        li:last-child{margin-bottom: 30px;}
+        li:last-child{margin-bottom:30px;}
 
         /* Nav titles */
-        li.heading{padding-left: 30px;background:none;font-size: $font-size-m;color: $font-color-light;}
+        li.heading{padding-left:30px;background:none;font-size:$font-size-m;color:$font-color-light;}
     }
 
 }
@@ -51,7 +55,7 @@
     .boxInner {padding-left:20px;}
   }
 
-  .title{text-decoration:uppercase;margin-bottom: 10px;color:$font-color-light;font-size:$font-size-m;}
+  .title{text-decoration:uppercase;margin-bottom:10px;color:$font-color-light;font-size:$font-size-m;}
   .subtitle{margin-bottom:5px;color:$font-color-light;}
   p{margin-bottom:5px;}
 
@@ -61,28 +65,30 @@
 /* Forms */
 .radio,
 .checkbox{
-  position: relative;padding-left:20px;line-height: 19px;padding-left: 22px;
+  position:relative;padding-left:20px;line-height:19px;padding-left:22px;
 
-    label{display: block;padding: 5px 0;}
+    label{display:block;padding:5px 0;}
 
     input,
     input{position:absolute;left:0;}
 }
 
-fieldset{margin-bottom: 20px;}
+fieldset{margin-bottom:20px;}
 select{font-size:$font-size-m;}
 
 
 /* Buttons */
 button{background:$accent-color;border:none;outline:none;border-radius:none;cursor:pointer;}
 
-  .cube{width:45px;height:45px;}
-
 /* Buttons group */
 .btnGroup {
   margin-bottom:10px;
 
-    button{border:1px solid $color-base-extra-light;border-radius:0;cursor:pointer;background:$brand-color;width:30px;height:30px;margin:3px 10px 3px 0;}
+    button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
+
+      &:hover{opacity:.5;}
+
+    }
 
     button.active{border:2px solid $accent-color;}
 }
@@ -94,30 +100,20 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
 
   .axisContent,
   .chartContent,
-  .chartLeyend{min-height:370px;border:1px solid $color-base-extra-light;position: relative;}
+  .chartLeyend{min-height:370px;border:1px solid $color-base-extra-light;position:relative;}
 
-  .axisYName{-ms-transform: rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top: 240px;}
+  .axisYName{-ms-transform:rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top:240px;}
 
   .chartContent{border-left:4px solid $color-base-light;}
 
   input,
-  input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height: 27px;font-size:$font-size-l;padding:0;}
+  input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height:27px;font-size:$font-size-l;padding:0;}
 
-  button{position: absolute;right:0;top:0;}
+  button{position:absolute;right:0;top:0;}
 
-  p{text-align:center;font-size:$font-size-xl;line-height: 23px; position: absolute;top: 0;bottom: 0;left: 0;right: 0;  width: auto;height: 10%;margin: auto;}
+  p{text-align:center;font-size:$font-size-xl;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;}
 
 } 
 
-
-
 /* Modal */
-.process-manager-modal{
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: white;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-}
+.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;}
