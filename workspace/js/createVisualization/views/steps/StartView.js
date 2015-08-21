@@ -12,6 +12,7 @@ var StartView = StepViewSPA.extend({
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
 
+		this.nav();
 		this.render();
 
 	}, 
@@ -29,6 +30,21 @@ var StartView = StepViewSPA.extend({
 		this.model.set('type', type);
 		this.next();
 		//this.trigger('step', 1);
+	},
+
+	nav: function(){
+		var nav = $('.navCreator'),
+			navLi = $('.navCreator li'),
+			navPicker = $('.navCreatorPicker');
+
+		nav.find('.navCreatorPicker:first').show();
+		
+		navLi.not('.heading').click(function() {
+			nav.find('.active').removeClass('active');
+			$(this).addClass('active');
+			navPicker.hide();
+			$(this).find(navPicker).show();
+		});
 	}
 
 });
