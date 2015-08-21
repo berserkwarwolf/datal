@@ -16,6 +16,12 @@ charts.views.Chart = Backbone.View.extend({
     	// subclass
     },
 
+    valid: function () {
+        // Check if data is correct
+        // specific chart library
+        return true;
+    },
+
     render: function () {
     	// implements rendering of data received from :formatData: for the 
     	// specific chart library
