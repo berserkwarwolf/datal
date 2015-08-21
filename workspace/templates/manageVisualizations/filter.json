@@ -15,6 +15,7 @@
       "category_id": {{ item.visualization__datastream__last_revision__category__id }},
       "category": "{{ item.visualization__datastream__last_revision__category__categoryi18n__name }}",
       "datastream_title": "{{ item.datastream__last_revision__datastreami18n__title }}",
+      "datastream_url": "{{ item.datastream_url }}",
       "visualization_id": {{ item.visualization__id }},
       "last_revision_id": {{ item.visualization__last_revision_id }},
       "guid": "{{ item.visualization__guid }}",

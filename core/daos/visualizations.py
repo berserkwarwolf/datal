@@ -52,18 +52,21 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        query = query.values('visualization__user__nick',
+        query = query.values(
                              'status',
                              'id',
-                             'visualization__guid',
-                             'visualization__datastream__last_revision__category__id',
                              'visualization__id',
+                             'visualization__guid',
+                             'visualization__user__nick',
+                             'visualization__last_revision_id',
+                             'visualization__datastream__id',
+                             'visualization__datastream__last_revision__id',
+                             'visualization__datastream__last_revision__category__id',
                              'visualization__datastream__last_revision__category__categoryi18n__name',
+                             'visualization__datastream__last_revision__datastreami18n__title',
                              'visualizationi18n__title',
                              'visualizationi18n__description', 'created_at', 'visualization__user__id',
-                             'visualization__last_revision_id',
-                             'visualization__datastream__last_revision__datastreami18n__title',
-                             'visualization__last_revision__id'
+
                              )
 
         query = query.order_by(sort_by)

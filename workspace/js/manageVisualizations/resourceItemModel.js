@@ -16,7 +16,8 @@ var ResourceItemModel = Backbone.Model.extend({
             guid: "",
             created_at: "",
             url: "",
-            datastream_title: ""
+            datastream_title: "",
+            datastream_url: ""
         };
     },
 
