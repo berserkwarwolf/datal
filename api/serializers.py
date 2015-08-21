@@ -4,19 +4,32 @@ from core.docs import DS
 from api.helpers import add_domain_to_datastream_link
 
 
-class DataStreamSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = DataStream
-        fields = ()
+class DataStreamSerializer(serializers.Serializer):
+    id = serializers.CharField()
+    title = serializers.CharField()
+    description = serializers.CharField()
+    user = serializers.CharField()
+    tags = serializers.ListField(child=serializers.CharField())
+    created_at = serializers.DateTimeField()
+    source = serializers.CharField()
+    link = serializers.CharField()
+    category_id = serializers.IntegerField()
+    category_name = serializers.CharField()
+    result = serializers.DictField()
+
+    def to_representation_model(self, obj):
+        pass
+
+    def to_representation_search(self, obj):
+        pass
+
+    def to_representation_dao(self, obj):
+        pass
 
     def to_representation(self, obj):
-        request = self.context['request']
-        
-        datastreamrevision_id =  obj.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
-        
-        doc = DS(datastreamrevision_id, request.auth['language'])
-        
         answer = super(DataStreamSerializer, self).to_representation(obj)
+
+        answer['']
 
         answer['id']=doc.guid
         answer['title']=doc.title

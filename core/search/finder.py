@@ -9,7 +9,6 @@ from core.helpers import slugify
 from core import helpers, choices
 from core.exceptions import SearchIndexNotFoundException
 
-
 class FinderManager:
 
     def __init__(self):
@@ -39,7 +38,6 @@ class FinderManager:
 
 from core.lib.elastic import ElasticsearchIndex
 from core.lib.searchify import SearchifyIndex
-
 
 class Finder:
 

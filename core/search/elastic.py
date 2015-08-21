@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 
-from core.search.finder import Finder
+from core.search.finder import Finder, FinderManager
 import re
 
 
@@ -110,3 +110,10 @@ class ElasticsearchFinder(Finder):
         }
 
         return query
+
+class ElasticFinderManager(FinderManager):
+
+    def __init__(self):
+        self.finder_class = ElasticsearchFinder
+        self.failback_finder_class = ElasticsearchFinder
+        FinderManager.__init__(self)

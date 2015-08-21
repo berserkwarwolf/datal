@@ -9,9 +9,12 @@ from core.engine import invoke
 from core.helpers import RequestProcessor
 from rest_framework import status
 from core.models import Category
+from core.search.elastic import ElasticFinderManager
 import logging
 import json
 from core import engine
+
+logger = logging.getLogger(__name__)
 
 def action404(p_request):
     return HttpResponseNotFound('{"error": 404, "message": "API Not Found"}')
@@ -43,18 +46,20 @@ class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
 
 
     def list(self, request):
-        queryset = User.objects.all()
-        serializer = UserSerializer(queryset, many=True)
-
         ## Todo ver de donde saco la categoria
-        #account = request.auth['account']
+        account = request.auth['account']
         #language = request.auth['language'] 
         #category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
 
         try:
-            results, search_time, facets = FinderManager().search(category_id = category['id']
-                                                                  , account_id = account.id)
-        except InvalidPage:
-            raise Http404
+            results, search_time, facets = ElasticFinderManager().search(
+                resource='dt',
+                account_id = account.id)
+            logger.info('aaaaaaaaaa')
+            logger.info(results)
+            logger.info('uuuuuuuu')
+        except :
+            raise 
 
         return Response(serializer.data)
+    
