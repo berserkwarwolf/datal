@@ -589,6 +589,9 @@ msgstr "TITULO"
 msgid "APP-GRID-CELL-DATASET-NAME"
 msgstr "CONJUNTO DE DATOS"
 
+msgid "APP-GRID-CELL-DATASTREAM-NAME"
+msgstr "VISTA"
+
 msgid "APP-GRID-CELL-STATUS"
 msgstr "ESTADO"
 

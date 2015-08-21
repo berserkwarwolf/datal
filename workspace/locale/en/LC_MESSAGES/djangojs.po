@@ -604,6 +604,9 @@ msgstr "TITLE"
 msgid "APP-GRID-CELL-DATASET-NAME"
 msgstr "DATASET"
 
+msgid "APP-GRID-CELL-DATASTREAM-NAME"
+msgstr "DATASTREAM"
+
 msgid "APP-GRID-CELL-STATUS"
 msgstr "STATUS"
 

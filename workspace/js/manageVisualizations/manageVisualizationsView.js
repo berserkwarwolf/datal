@@ -220,8 +220,8 @@ var ManageVisualizationsView = Backbone.View.extend({
             sortable: true,
             editable: false
         },{
-            name: "visualization_title",
-            label: gettext('APP-GRID-CELL-DATASET-NAME'),
+            name: "datastream_title",
+            label: gettext('APP-GRID-CELL-DATASTREAM-NAME'),
             // cell: "text",
             cell: Backgrid.StringCell.extend({
                 render: function() {
