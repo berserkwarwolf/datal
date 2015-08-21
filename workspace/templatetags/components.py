@@ -118,13 +118,12 @@ def createDashboard(userId, dashboardId, auth_manager, meta_data = None):
 register.inclusion_tag('dashboard_manager/createDashboard.html')(createDashboard)
 
 def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision_id, auth_manager, preferences = None, meta_data = None):
+    """ obtener los datos de un datastream para crear o editar uno"""
     is_update = False
     meta_form = ""
     account_id = None
     categories = None
     datastream_form = None
-    datastream_tags = None
-    datastream_sources = None
     datastream_revision = None
 
     if datastream_revision_id:
@@ -144,6 +143,7 @@ def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision
             meta_form.set_values(datastream_revision.metadata)
 
         if datastream_revision:
+            sources = datastream_revision.get_sources()
             if is_update_selection:
                 dataset_revision = DatasetRevision.objects.filter(dataset__id= datastream_revision.dataset_id)[0]
                 datastream_form = UpdateDataStreamSelectionForm(initial={'dataset_revision_id' : dataset_revision.id
@@ -157,7 +157,7 @@ def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision
                                                                 , 'description' : datastream_revision.description
                                                                 , 'category' : datastream_revision.category_id}, prefix='datastream')
 
-    if dataset_revision_id:
+    if dataset_revision_id: # es para una vista nueva basada en este dataset
         if auth_manager.is_level('level_5'):
             meta_data = Account.objects.get(pk = auth_manager.account_id).meta_data
             if meta_data:
@@ -167,25 +167,22 @@ def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision
         end_point = dataset_revision.end_point
         type = dataset_revision.dataset.type
         impl_type = dataset_revision.impl_type
+        sources = dataset_revision.get_sources()
 
         datastream_form = CreateDataStreamForm(initial={'dataset_revision_id' : dataset_revision_id}, prefix='datastream')
         categories = CategoryI18n.objects.filter(language=auth_manager.language, category__account=auth_manager.account_id).values('category__id', 'name')
-
-        datastream_tags = []
-        datastream_sources = []
 
         choices = STATUS_CHOICES
 
     return { 'datastream_revision' : datastream_revision
             , 'datastream_form': datastream_form
-            , 'datastream_tags': datastream_tags
-            , 'datastream_sources': datastream_sources
             , 'auth_manager': auth_manager
             , 'meta_form' : meta_form
             , 'categories' : categories
             , 'is_update' : is_update
             , 'is_update_selection' : is_update_selection
-            , 'choices': choices}
+            , 'choices': choices
+            , 'sources': sources}
 
 register.inclusion_tag('view_manager/dataStreamForm.html')(dataStreamForm)
 
