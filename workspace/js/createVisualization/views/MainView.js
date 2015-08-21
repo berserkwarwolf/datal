@@ -8,9 +8,11 @@ var MainView = Backbone.View.extend({
         'click .section-title .buttons-bar a[data-step]': 'onNavigationButtonClicked',
     },
 
-    initialize: function () {
+    initialize: function (options) {
 
-        this.model = new charts.models.Chart();
+        this.model = new charts.models.Chart({
+            datastream_revision_id: options.datastream_revision_id
+        });
 
         this.buttonsView = new ButtonsView({
             // TODO: this should be a child element of the main view

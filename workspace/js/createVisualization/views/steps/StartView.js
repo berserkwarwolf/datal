@@ -3,11 +3,9 @@ var StartView = StepViewSPA.extend({
 	initialize: function(){
 
 		// Right way to extend events without overriding the parent ones
-		var eventsObject = {}
-		eventsObject['click .chart-type'] = 'onChooseType';
-//		eventsObject['click a.previous'] = 'onPreviousButtonClicked';
-//		eventsObject['click a.next'] = 'onNextButtonClicked';
-		this.addEvents(eventsObject);
+		this.addEvents({
+			'click .chart-type':'onChooseType'
+		});
 
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
@@ -16,13 +14,6 @@ var StartView = StepViewSPA.extend({
 		this.render();
 
 	}, 
-
-	render: function(){
-
-		var self = this;
-		
-		return this;
-	},
 
 	onChooseType: function (e) {
 		var $target = $(e.currentTarget),
