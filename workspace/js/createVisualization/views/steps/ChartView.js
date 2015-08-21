@@ -124,7 +124,10 @@ var ChartView = StepViewSPA.extend({
 				model: this.model,
 			});
 			
-			this.chartInstance.render();
+			if(this.chartInstance.valid()){
+				this.chartInstance.render();
+			};
+
 		}
 	},
 

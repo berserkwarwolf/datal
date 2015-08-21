@@ -2,16 +2,18 @@ var ResourceItemModel = Backbone.Model.extend({
 
     defaults: function() {
         return {
-            title: "",
             id: "",
-            dataset_url: "",
-            created_at: "",
+            title: "",
+            description: "",
+            status: "",
+            user_id: "",
+            user: "",
+            category_id: "",
             category: "",
-            author: "",
-            status_nice: "",
-            dataset_title: "",
-            end_point: "",
-            datastream_id: "",
+            visualization_id: "",
+            last_revision_id: "",
+            guid: "",
+            created_at: "",
             url: ""
         };
     },
