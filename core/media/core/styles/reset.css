@@ -25,7 +25,6 @@ blockquote:before, blockquote:after{content:'';content:none;}
 .center{text-align:center;}
 .left{text-align:left;}
 .right{text-align:right;}
-.disabled{visibility:hidden;}
 .relative{position:relative;}
 .absolute{position:absolute;}
 .imageText{overflow:hidden;text-indent:10000px;}

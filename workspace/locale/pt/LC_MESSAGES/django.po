@@ -2228,7 +2228,7 @@ msgid "HEADER-SEARCH-ADVANCED"
 msgstr "Advanced options"
 
 msgid "HEADER-ODS-BUTTON"
-msgstr "View my Open Data Site"
+msgstr "View Open Data site"
 
 msgid "HEADER-ACCOUNTDETAILLS-TEXT"
 msgstr "Account Details"
@@ -2947,3 +2947,6 @@ msgstr "Invalid file format"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+
+msgid "APP-BACK-TEXT"
+msgstr "Back"

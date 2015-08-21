@@ -9,42 +9,39 @@
 <![endif]-->
 
 <header class="header clearfix">
+  <div class="wrapper1">
+    <div class="wrapper2 clearfix">
+      <div class="wrapper3">
 
-  <!-- Logo -->
-  <a href="/welcome" title="DATAL" class="logo FL clearfix">
-    <div class="logo-header-brand"></div>
-  </a>
+        <!-- Logo -->
+        <a href="/welcome" title="DATAL" class="logo FL clearfix">
+          <div class="logo-header-brand"></div>
+        </a>
 
-  <div class="global-navigation clearfix">
-    
-    {% comment %}
-    <!-- Search -->
-    <div class="searchbox FL clearfix">
-      <input type="text" class="field FL" placeholder="{% trans 'HEADER-SEARCH-TEXT' %}" />
-      <input type="button" class="submit FL" value="{% trans 'HEADER-SEARCH-BUTTON' %}" />
-      <a class="pulldown FL">{% trans 'HEADER-SEARCH-ADVANCED' %}</a>
-    </div>
-    {% endcomment %}
+        <div class="global-navigation">
+          <div class="col-lg-12 clearfix">
+            
+            <!-- Back Link -->
+            <a id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}" style="display:none3;">{% trans 'APP-BACK-TEXT' %}</a>
 
-    <!-- My Account Tab -->
-    <div class="tab has-separator pulldown FR">
-      <a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">
-        <span class="img clearfix">{% gravatar auth_manager "small" "" %}</span>
-        <strong>{{auth_manager.nick}}</strong>
-      </a>
-      <div class="submenu border-box" style="display:none;">
-          <ul>
-            {% if 'workspace.can_access_ops' in auth_manager.privileges %}
-            {% endif %}
-            <li><a href="{% url 'accounts.my_account' %}" title="{% trans 'HEADER-ACCOUNTDETAILLS-TEXT' %}">{% trans "HEADER-ACCOUNTDETAILLS-TEXT" %}</a></li>
-            <li><a id="id_sign_out" href="/signout" title="{% trans 'HEADER-SIGNOUT-TEXT' %}">{% trans "HEADER-SIGNOUT-TEXT" %}</a></li>
-          </ul>
+            <!-- My Account Tab -->
+            <div class="tab pulldown FR">
+              <a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">{% gravatar auth_manager "small" "" %} {{auth_manager.nick}}</a>
+              <div class="submenu border-box" style="display:none;">
+                  <ul>
+                    <li><a href="{% url 'accounts.my_account' %}" title="{% trans 'HEADER-ACCOUNTDETAILLS-TEXT' %}">{% trans "HEADER-ACCOUNTDETAILLS-TEXT" %}</a></li>
+                    <li><a id="id_sign_out" href="/signout" title="{% trans 'HEADER-SIGNOUT-TEXT' %}">{% trans "HEADER-SIGNOUT-TEXT" %}</a></li>
+                  </ul>
+              </div>
+            </div>
+
+            <!-- ODS Button -->
+            <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-view-site icon-right"></span></a>
+
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <!-- ODS Button -->
-    <a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="link FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-edit"></span></a>
-
   </div>
-
 </header>

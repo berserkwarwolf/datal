@@ -30,7 +30,7 @@ var BaseView = Backbone.View.extend({
 
 	// Shows up hidden elements
 	showHiddenElements: function(){
-		$('.footer, .main-section').css('visibility','visible');
+		$('.main-section, .header .global-navigation').css('visibility','visible');
 	},
 
 	// Set navigation active tab
