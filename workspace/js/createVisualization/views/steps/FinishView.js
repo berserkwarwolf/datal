@@ -28,6 +28,8 @@ var FinishView = StepViewSPA.extend({
 
 	onFinishButtonClicked: function(){		
 
+		console.log(this.model.getSettings());
+		this.model.save();
 		alert('TODO: save! & redirect!');
 
 	}

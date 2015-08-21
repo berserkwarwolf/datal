@@ -110,7 +110,7 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
   input,
   input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height:27px;font-size:$font-size-l;padding:0;}
 
-  button{position:absolute;right:0;top:0;}
+  button{position:absolute;right:0;top:0;z-index: 100;}
 
   p{text-align:center;font-size:$font-size-xl;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;}
 

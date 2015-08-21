@@ -35,8 +35,6 @@ var ChartView = StepViewSPA.extend({
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.attr('name'),input.val());
-
-		console.log(this.model.getGeneralSettings());
 	},
 
 	onChangeData: function (model) {
@@ -63,8 +61,6 @@ var ChartView = StepViewSPA.extend({
 	onInputChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.data('ref'),input.val());
-
-		console.log(this.model.getGeneralSettings());
 	},
 
 	onRadioChanged: function(e){
@@ -76,8 +72,6 @@ var ChartView = StepViewSPA.extend({
 		}else{
 			$('#nullValuePreset').hide();
 		}
-
-		console.log(this.model.getGeneralSettings());
 	},
 
 	selectGraphType: function(type){
