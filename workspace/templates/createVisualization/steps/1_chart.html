@@ -33,19 +33,29 @@
 
 										<div class="btnGroup">
 											<p>Compara en el tiempo</p>
-											<button class="chartType line linechart" data-type="linechart" title="Línea">&nbsp;</button>
-											<button class="chartType area areachart" data-type="areachart" title="Área">&nbsp;</button>
+											<button class="chartType line linechart" data-type="linechart" title="Línea">
+												<span class="icon icon-chart-line"></span>
+											</button>
+											<button class="chartType area areachart" data-type="areachart" title="Área">
+												<span class="icon icon-chart-area"></span>
+											</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Compara entre items</p>
-											<button class="chartType cols columnchart" data-type="columnchart" title="Columnas">&nbsp;</button>
-											<button class="chartType bars barchart" data-type="barchart" title="Barras">&nbsp;</button>
+											<button class="chartType column columnchart" data-type="columnchart" title="Columnas">
+												<span class="icon icon-chart-column"></span>
+											</button>
+											<button class="chartType bar barchart" data-type="barchart" title="Barras">
+												<span class="icon icon-chart-bar"></span>
+											</button>
 										</div>
 
 										<div class="btnGroup">
 											<p>Composición estática</p>
-											<button class="chartType pie piechart" data-type="piechart" title="Torta">&nbsp;</button>
+											<button class="chartType pie piechart" data-type="piechart" title="Torta">
+												<span class="icon icon-chart-pie"></span>
+											</button>
 										</div>
 
 									</fieldset>
@@ -150,14 +160,15 @@
 
 						<div class="col-md-2">
 							<div class="axisContent">
-								<button class="btn cube edit plus">&nbsp;</button>
+								<button class="icon icon-edit fill-background">
+								</button>
 								<p>Eje Y</p>
 							</div>
 						</div>
 
 						<div class="col-md-7">
 							<div class="chartContent">
-								<button class="btn cube edit plus selectData">&nbsp;</button>
+								<button class="icon icon-edit fill-background selectData">&nbsp;</button>
 								<div id="chartContainer" class="chart-preview-view">
 									<p>Seleccioná los datos a mostrar</p>
 								</div>
@@ -166,7 +177,7 @@
 
 						<div class="col-md-2">
 							<div class="chartLeyend">
-								<button class="btn cube edit plus">&nbsp;</button>
+								<button class="icon icon-edit fill-background">&nbsp;</button>
 								<p>Seleccioná referencias</p>
 							</div>
 						</div>
@@ -177,11 +188,11 @@
 
 						<div class="col-md-offset-3 col-md-7">
 
-							<div class="axisXName pull-left attributeControl xTitleAttributeControl">
+							<div class="axisXName FL attributeControl xTitleAttributeControl">
 								<input id="xTitle" data-ref="xTitle" class="text-left" type="text" placeholder="[  Nombre del eje X  ]">
 							</div>
 
-							<div class="axisXMaxValue pull-right">
+							<div class="axisXMaxValue FR">
 								<input class="right" type="text" placeholder="[  Valor máximo  ]">
 							</div>
 
