@@ -18,6 +18,7 @@
       "visualization_id": {{ item.visualization__id }},
       "last_revision_id": {{ item.visualization__last_revision_id }},
       "guid": "{{ item.visualization__guid }}",
+      "url": "{{ item.url }}",
       "created_at": "{{ item.created_at }}"
     }{% if not forloop.last %},{% endif %}
     {% endfor %}

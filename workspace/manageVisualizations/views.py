@@ -90,7 +90,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for i in xrange(len(resources)):
-        resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
+        resources[i]['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resources[i]['id']))
 
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")
