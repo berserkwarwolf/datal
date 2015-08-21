@@ -8,6 +8,9 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
 /* Buttons */
 .button{@include transition(all, .1s, ease-in-out);
 
+  /* Active */
+  &.active{cursor:default;@include disable-transition(none !important);}
+
   /* Primary button */
   &.primary{background:$button-primary-color;border-color:transparent;color:$button-primary-text-color;}
   &.primary:hover{background:$button-primary-hover-color;}
@@ -303,10 +306,10 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 /* Main Nav */
 .main-navigation{padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
   li{@include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));
-    & > a{height:48px;font:15px/24px 'robotolight', arial, helvetica, sans-serif;display:block;color:$nav-text;@include box-sizing(border-box);padding:12px 15px;@include transition(all, .1s, ease-in-out);
+    & > a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
 
       /* Icons */
-      .icon{width:24px;height:24px;margin-right:15px;display:inline-block;background:white;padding:0;vertical-align:middle}
+      //.icon{width:24px;height:24px;}
 
       /* Hover */
       &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
@@ -325,8 +328,8 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
   ul.bottom-navigation{position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,.4);
     li{@include box-shadow(inset 0 1px 0 0 rgba(255,255,255,.1));}
     .footer{color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
-      & > a{display:inline;background:none;color:rgba(255,255,255,.7);padding:0;height:auto;line-height:normal;font-size:inherit;font-family:inherit;
-        &:hover{text-decoration:underline;color:#fff}
+      & > a{color:rgba(255,255,255,.7);
+        &:hover{color:#fff}
       }
     }
   }

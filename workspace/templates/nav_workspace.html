@@ -4,28 +4,28 @@
 
     <!-- Home -->
     <li>
-      <a id="id_home_option" href="/welcome" class="nav-home"><i class="icon"></i>{% trans 'APP-HOME-TEXT' %}</a>
+      <a id="id_home_option" href="/welcome" class="button primary nav-home"><span class="icon icon-home"></span>{% trans 'APP-HOME-TEXT' %}</a>
     </li>
 
     <!-- Datasets -->
     <li>
-      <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="nav-datasets"><i class="icon"></i>{% trans 'APP-DATASETS-TEXT' %}</a>
+      <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="button primary nav-datasets"><span class="icon icon-datasets"></span>{% trans 'APP-DATASETS-TEXT' %}</a>
     </li>
 
     <!-- Data Views -->
     <li>
-        <a id="id_dataviews_option" {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.list' %}"{% endif %} class="nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}"><i class="icon"></i>{% trans 'APP-DATAVIEWS-TEXT' %}</a>
+        <a id="id_dataviews_option" {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.list' %}"{% endif %} class="button primary nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}"><span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}</a>
     </li>
 
     <!-- Visualizations -->
     <li>
-      <a id="id_visualizations_option" href="{% url 'manageVisualizations.list' %}" class="nav-visualizations"><i class="icon"></i>{% trans 'APP-VISUALIZATIONS-TEXT' %}</a>
+      <a id="id_visualizations_option" href="{% url 'manageVisualizations.list' %}" class="button primary nav-visualizations"><span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</a>
     </li>
     
     {% comment %}
     <!-- Dashboards -->
     <li>
-      <a id="id_dashboards_option" href="#" class="nav-dashboards"><i class="icon"></i>{% trans 'APP-DASHBOARDS-TEXT' %}</a>
+      <a id="id_dashboards_option" href="#" class="button primary nav-dashboards"><span class="icon icon-dashboards"></span>{% trans 'APP-DASHBOARDS-TEXT' %}</a>
     </li>
     {% endcomment %}
 
@@ -37,7 +37,7 @@
     {% if 'workspace.can_access_report' in auth_manager.privileges %}
     <!-- Reports -->
     <li>
-      <a id="id_reports_option" href="/reports/action_query" class="nav-reports"><i class="icon"></i>{% trans 'APP-REPORTS-TEXT' %}</a>
+      <a id="id_reports_option" href="/reports/action_query" class="button primary nav-reports"><span class="icon icon-reports"></span>{% trans 'APP-REPORTS-TEXT' %}</a>
     </li>
     {% endif %}
     {% endcomment %}
@@ -45,7 +45,7 @@
     {% if 'workspace.can_access_admin' in auth_manager.privileges %}
     <!-- Settings -->
     <li>
-      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="nav-settings"><i class="icon"></i>{% trans 'APP-SETTINGS-TEXT' %}</a>
+      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
     </li>
     {% endif %}
 
