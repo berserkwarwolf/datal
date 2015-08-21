@@ -33,15 +33,25 @@ var DataTableView = Backbone.View.extend({
   // these are maped to classes 'hot-sel-1', 'hot-sel-2', ...
   available: _.range(9, 0, -1),
 
+  typeToRenderer: {
+    TEXT: 'selectedTextRenderer',
+    LINK: 'selectedLinkRenderer',
+    NUMBER: 'selectedNumericRenderer',
+    DATE: 'selectedDateRenderer'
+  },
+
   events: {
     'click button.add-btn': 'addSelection'
   },
 
   initialize: function (options) {
-    var self = this;
+    var self = this,
+      invoke = options.invoke;
 
-    var headers = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
-      return col;
+    var columns = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
+      return {
+        renderer: self.typeToRenderer[col.fType]
+      };
     });
 
     var rows = _.map(_.range(0, invoke.fRows), function () {
@@ -51,29 +61,12 @@ var DataTableView = Backbone.View.extend({
 
     this.data = rows;
 
-    var columns = [
-        {renderer: 'selectedTextRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedNumericRenderer'},
-        {renderer: 'selectedTextRenderer'},
-        {renderer: 'selectedTextRenderer'}
-      ];
-    // this.getCols();
-
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true, readOnly: true,
       allowInsertRow: false, allowInsertColumn: false,
       colWidths: 80,
       columns: columns,
     });
-
-    window.hot = this.table.getInstance();
-    this.table.loadData(this.data);
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
@@ -93,6 +86,10 @@ var DataTableView = Backbone.View.extend({
 
     this.listenTo(this.collection, 'add', this.onAddSelected, this);
     this.listenTo(this.collection, 'remove', this.onRmSelected, this);
+  },
+
+  render: function () {
+    this.table.loadData(this.data);
   },
 
   cacheSelection: function (coords) {
