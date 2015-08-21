@@ -77,7 +77,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				sortable: true,
 				editable: false
 			}, {
-				name: "status_nice",
+				name: "status_name",
 				label:  gettext('APP-GRID-CELL-STATUS'),
 				cell: "text",
 				sortable: false,

@@ -235,13 +235,13 @@ var ManageVisualizationsView = Backbone.View.extend({
             sortable: true,
             editable: false
         }, {
-            name: "author",
+            name: "user",
             label: gettext('APP-GRID-CELL-AUTHOR'),
             cell: "text",
             sortable: true,
             editable: false
         }, {
-            name: "status",
+            name: "status_name",
             label:  gettext('APP-GRID-CELL-STATUS'),
             cell: "text",
             sortable: false,

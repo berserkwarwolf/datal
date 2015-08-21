@@ -6,6 +6,7 @@ var ResourceItemModel = Backbone.Model.extend({
             title: "",
             description: "",
             status: "",
+            status_name: "",
             user_id: "",
             user: "",
             category_id: "",
@@ -14,7 +15,8 @@ var ResourceItemModel = Backbone.Model.extend({
             last_revision_id: "",
             guid: "",
             created_at: "",
-            url: ""
+            url: "",
+            datastream_title: ""
         };
     },
 
