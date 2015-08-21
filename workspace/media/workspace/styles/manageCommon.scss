@@ -3,16 +3,7 @@
 @import 'functions';
 
 /* Structure */
-.main-section .section-content{padding:0;}
 .manager{position:relative;}
-.manager > .wrapper1{padding-left:210px;height:100%;background:url(../images/common/bg_filters.gif) repeat-y 0 0;
-    -webkit-border-radius:3px;
-       -moz-border-radius:3px;
-            border-radius:3px;
-}
-.manager > .wrapper1 > .wrapper2 > .wrapper3{width:100%;float:left;margin-left:-210px;height:100%;}
-.filters-container{width:210px;float:left;height:100%;min-height:1em}
-.list-container{width:100%;margin-right:-210px;height:100%;float:left;}
 
 /* Loading */
 .manager > .loading{background:rgba(255,255,255,.4) url(#{$loader-url-light}) no-repeat center center;left:0;position:absolute;right:0;top:0;bottom:0;text-indent:-10000px;}
@@ -101,7 +92,6 @@
 .list-container table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}
 .list-container table .actions li.review{visibility:visible;}
 .list-container table .actions li.review a{padding-left:23px;background:url(../images/common/ic_warning_orange.png) no-repeat 0 1px;}
-.list-container table .actions li.delete a, .list-container table button.delete{color:$button-warning-color;}
 .list-container table button.small{float:left;padding:0;background:none;}
 .list-container table i{font-style:normal;display:inline-block;}
 .list-container table i.type_nice.icon{display:inline;}

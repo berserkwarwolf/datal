@@ -1,11 +1,5 @@
 /* Button */
-.button{height:44px;line-height:44px;font-size:18px;padding:0 20px;display:inline-block;border:1px solid transparent;text-transform:uppercase;font-family:'montserratregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
-  -webkit-border-radius:3px;
-     -moz-border-radius:3px;
-          border-radius:3px;
-  -webkit-box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
-     -moz-box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
-          box-shadow:inset 0 0 1px 0 rgba(255,255,255,.5);
+.button{height:48px;line-height:48px;font-size:15px;padding:0 15px;display:inline-block;border:1px solid transparent;font-family:'robotoregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
 }
 .button:hover{text-decoration:none;}
 
@@ -16,34 +10,15 @@
   .button.big{height:66px;line-height:66px;font-size:20px;padding:0 40px;}
 
   /* Gray - Normal button */
-  .button{border-color:#DBDADA;text-shadow:0 1px 0 #fff;
-    background:#fbfbfb;
-    background:-moz-linear-gradient(top,  #fbfbfb 0%, #f3f3f3 100%);
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#fbfbfb), color-stop(100%,#f3f3f3));
-    background:-webkit-linear-gradient(top,  #fbfbfb 0%,#f3f3f3 100%);
-    background:-o-linear-gradient(top,  #fbfbfb 0%,#f3f3f3 100%);
-    background:-ms-linear-gradient(top,  #fbfbfb 0%,#f3f3f3 100%);
-    background:linear-gradient(to bottom,  #fbfbfb 0%,#f3f3f3 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fbfbfb', endColorstr='#f3f3f3',GradientType=0 );
-  }
-  .button:hover{
-    background:#f3f3f3;
-    background:-moz-linear-gradient(top,  #f3f3f3 0%, #fbfbfb 100%);
-    background:-webkit-gradient(linear, left top, left bottom, color-stop(0%,#f3f3f3), color-stop(100%,#fbfbfb));
-    background:-webkit-linear-gradient(top,  #f3f3f3 0%,#fbfbfb 100%);
-    background:-o-linear-gradient(top,  #f3f3f3 0%,#fbfbfb 100%);
-    background:-ms-linear-gradient(top,  #f3f3f3 0%,#fbfbfb 100%);
-    background:linear-gradient(to bottom,  #f3f3f3 0%,#fbfbfb 100%);
-    filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f3f3f3', endColorstr='#fbfbfb',GradientType=0 );
-  }
+  .button{border-color:#ccc;background:#fff;color:#0066cc;}
+  .button:hover{color:#0066ff;}
 
   /* Alpha */
-  .button.alpha{text-transform:none;font-family: Arial, Helvetica, sans-serif;border:0;background:none;font-weight:normal;
-    -webkit-box-shadow:0 0 0 0 transparent;
-       -moz-box-shadow:0 0 0 0 transparent;
-            box-shadow:0 0 0 0 transparent;
-  }
-  .button.alpha:hover{text-decoration:underline;}
+  .button.alpha{text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;}
+  .button.alpha:hover{text-decoration:none;}
+    
+    /* Alpha Back */
+    .button.alpha.back:before{content:"< ";}
 
 /* Button icons */
 .button i{width:12px;position:relative;left:-1px;margin-right:8px;height:26px;vertical-align:bottom;display:inline-block;background:url(/static/workspace/images/common/ic_buttons.png) no-repeat;}

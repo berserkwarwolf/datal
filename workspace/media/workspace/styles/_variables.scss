@@ -37,15 +37,15 @@ $nav-collapsed-width: 54px;
 
 	/* Family */
 	$font-primary-family:Arial,Helvetica,sans-serif;							/* For fonts in general */
-	$font-secondary-family:'Roboto',arial,helvetica,sans-serif;					/* For some subtitles */
-	$font-titles-family:'Roboto',Helvetica,sans-serif;							/* For titles in general */
-	$font-extra-family:'Roboto',arial,helvetica,sans-serif;						/* For table titles */
+	$font-secondary-family:robotoregular,arial,helvetica,sans-serif;					/* For some subtitles */
+	$font-titles-family:robotolight,Helvetica,sans-serif;							/* For titles in general */
+	$font-extra-family:robotoregular,arial,helvetica,sans-serif;						/* For table titles */
 
 	/* Size */
 	$font-size-base:12px !important;											/* For body paragraphs and text in general */
 	$font-size-s:11px !important;												/* For some descriptions and tips */
-	$font-size-m:14px !important;												/* For subtitles */
-	$font-size-l:18px !important;												/* For content titles */
+	$font-size-m:15px !important;												/* For subtitles */
+	$font-size-l:20px !important;												/* For content titles */
 	$font-size-xl:25px !important;												/* For section titles and overlay titles */
 
 	/* Color */
@@ -66,28 +66,11 @@ $nav-icon-color-hover:#00d67e;													/* Color for nav icons on :hover */
 
 
 /* Buttons */
-$buttons-font-family:Arial,Helvetica,sans-serif;								/* Font family for all buttons */
-$buttons-font-size:12px !important;												/* Font size for all buttons */
 
 	/* Primary button */
-	$button-primary-color:#00d67e;												/* Background color */
-	$button-primary-color-text:#FFF;											/* Font color */
-
-	/* Action button */
-	$button-action-color:#027fc0;												/* Background color */
-	$button-action-color-text:#FFF;												/* Font color */
-
-	/* Base button */
-	$button-base-color:#393939;													/* Background color */
-	$button-base-color-text:#FFF;												/* Font color */
-
-	/* Warning button */
-	$button-warning-color:#D16280;												/* Background color */
-	$button-warning-color-text:#FFF;											/* Font color */
-
-	/* Support button */
-	$button-support-color:#dbdbdb;												/* Background color */
-	$button-support-color-text:#FFF;											/* Font color */
+	$button-primary-color:#0066cc;												/* Primary button color */
+	$button-primary-hover-color:#0066ff;												/* Primary button Hover color */
+	$button-primary-text-color: #fff; 										/* Primary button text color */
 
 
 /* Buttons bar */																/* Buttons bar for create resources sections */

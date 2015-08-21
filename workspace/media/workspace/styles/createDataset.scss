@@ -9,7 +9,6 @@
 
 /* File Input */
 .create .input-file{position:relative;overflow:hidden;width:440px;height:26px;}
-.create .input-file:hover .button.black{@include linear-gradient($button-base-color-gradient,$button-base-color);}
 .create .input-file .button{height:22px;left:0;position:absolute;top:0;width:80px;z-index:1;}
 .create .input-file input[type=file]{position:absolute;top:0;right:0;width:460px;height:27px;font-size:100px;text-align:right;filter:alpha(opacity=0);opacity:0;background:red;cursor:inherit;display:block;cursor:pointer;left:0;position: absolute;top:0;z-index:2;}
 .create input[readonly]{background-color:white !important;cursor:text !important;}

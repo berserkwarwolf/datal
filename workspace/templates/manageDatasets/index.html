@@ -44,39 +44,39 @@
 {% block sectionTitle %}
 
 <!-- Top Actions -->
-<ul class="top-actions clearfix">
-  <li><a href="" class="button alpha back" title="Volver">Volver</a><li>
+<ul class="top-actions col-lg-12 clearfix">
+  <li><a href="" class="link back" title="Volver">Volver</a><li>
 </ul>
 
-<div class="row clearfix">
+<div class="context-menu clearfix">
   
   <!-- Column Left -->
   <div class="col-lg-7">    
     
     <h1>#Nombre del conjunto de datos 41el máximo disponible de caracteres que serían 80</h1>
 
-    <div class="status-row">
-      <span class="status">Pendiente de revisión</span>
-      <span class="publish-version">Última versión publicada 30 de Septiembre de 2015, <a href="" title="Ver en sitio">Ver en sitio</a></span>
+    <div class="status-row clearfix">
+      <span class="status">En revisión</span>
+      <span class="publish-version">Última versión publicada: 30 de Septiembre de 2015, <a href="" title="Ver en sitio">Ver en sitio</a></span>
       <span class="row-actions"><a href="" title="Despublicar">Despublicar</a></span>
     </div>
 
   </div>
 
   <!-- Column Right -->
-  <div class="col-lg-5 clearfix">
+  <div class="col-lg-5 context-buttons clearfix">
     
-    <a href="" class="button" title="Crear visualización">Crear visualización</a>
+    <a href="" class="button primary FR" title="Crear visualización">Crear visualización</a>
 
-    <a href="" class="button secondary" title="Enviar a revisión">Enviar a revisión</a>
-
-    <div class="more-actions">
-      <div class="more-button">...</div>
-      <ul class="dropdown">
+    <a href="" class="button FR" title="Enviar a revisión">Enviar a revisión</a>
+    
+    <div class="more-actions FR">
+      <div class="button more-button">...</div>
+      <ul class="dropdown" style="display:none;">
         <li><a href="" class="button icon edit" title="Edit">Edit</a></li>
         <li><a href="" class="button icon delete" title="Delete">Delete</a></li>
       </ul>
-    </div>
+    </div>    
 
   </div>
 
@@ -94,10 +94,10 @@
       <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
       <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
    </select>
-   <button id="id_applyBulkActions" class="button black small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
+   <button id="id_applyBulkActions" class="button small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
 </div>
 <ul class="actions FR">
-   <li><a href="{% url 'manageDatasets.create' %}" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
+   <li><a href="{% url 'manageDatasets.create' %}" class="button small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
 </ul>
 
 {% endcomment %}
@@ -109,19 +109,13 @@
 {% block content %}
 <div class="manager" id="id_manageDatasets">
 
-  <div class="wrapper1">
-    <div class="wrapper2 clearfix">
-      <div class="wrapper3">
 
-        <!-- Filters -->
-        <section class="filters-view"></section>
+  <!-- Filters -->
+  <section class="col-lg-2 filters-view"></section>
 
-        <!-- List -->
-        {% include "manageDatasets/list.html" %}
+  <!-- List -->
+  {% include "manageDatasets/list.html" %}
 
-      </div>
-    </div>
-  </div>
 
   <!-- Loading -->
   <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>

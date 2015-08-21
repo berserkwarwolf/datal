@@ -5,62 +5,44 @@
 
 body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
 
-/* Links */
-a{color:$link-color;}
-
 /* Buttons */
-.button{font-family:$buttons-font-family;font-size:$buttons-font-size;line-height:26px !important;
+.button{@include transition(all, .1s, ease-in-out);
 
   /* Primary button */
-  &.primary{border-color:$button-primary-color-border;color:$button-primary-color-text;text-shadow:0 -1px 0 $button-primary-color-shadow;@include linear-gradient($button-primary-color,$button-primary-color-gradient);
-  }
-  &.primary:hover{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
-
-  /* Action button */
-  &.action{border-color:$button-action-color-border;color:$button-action-color-text;text-shadow:0 -1px 0 $button-action-color-shadow;@include linear-gradient($button-action-color,$button-action-color-gradient);
-  }
-  &.action:hover{@include linear-gradient($button-action-color-gradient,$button-action-color);}
-
-   /* Warning button */
-  &.warning{border-color:$button-warning-color-border;color:$button-warning-color-text;text-shadow:0 -1px 0 $button-warning-color-shadow;@include linear-gradient($button-warning-color,$button-warning-color-gradient);
-  }
-  &.warning:hover{@include linear-gradient($button-warning-color-gradient,$button-warning-color);}
-
-  /* Support button */
-  &.support{border-color:$button-support-color-border;color:$button-support-color-text;text-shadow:0 -1px 0 $button-support-color-shadow;@include linear-gradient($button-support-color,$button-support-color-gradient);
-  }
-  &.support:hover{@include linear-gradient($button-support-color-gradient,$button-support-color);}
-
-  /* Black */
-  &.black{border-color:$button-base-color-border;color:$button-base-color-text;text-shadow:0 1px 0 $button-base-color-shadow;@include linear-gradient($button-base-color-gradient,$button-base-color);
-  }
-  &.black:hover{@include linear-gradient($button-base-color,$button-base-color-gradient);}
+  &.primary{background:$button-primary-color;border-color:transparent;color:$button-primary-text-color;}
+  &.primary:hover{background:$button-primary-hover-color;}
 
   /* Disabled */
   &[disabled=disabled], 
   &:disabled{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";cursor:default;pointer-events:none;}
+  
+  /* More Button */
+  &.more-button{padding:0;width:48px;}
 
-    /* Black */
-    &[disabled=disabled]:hover, 
-    &:disabled:hover{@include linear-gradient(#525151,#414040);}
 }
 
-/* Buttons Bar - only support black buttons and 0 to 4 steps at the moment */
+/* Context buttons */
+.context-buttons > *{
+  margin:0 15px 0 0;
+  &:first-child{margin-right:0;}
+}
+
+/* Buttons Bar - only support 0 to 4 steps at the moment */
 .buttons-bar{border:1px solid $button-nav-active-border;@include border-radius(3px);
   
   li{float:left;padding:0;}
-  li .button.black{color:$buttons-bar-color-text-active;border-left:1px solid $buttons-bar-border-left-color;border-right:1px solid $buttons-bar-border-right-color;border-top:0;text-shadow:0 1px 0 #000;
+  li .button{color:$buttons-bar-color-text-active;border-left:1px solid $buttons-bar-border-left-color;border-right:1px solid $buttons-bar-border-right-color;border-top:0;text-shadow:0 1px 0 #000;
     -webkit-border-radius:0;
        -moz-border-radius:0;
             border-radius:0;
   }
-  li:first-child .button.black{
+  li:first-child .button{
     border-left-color:$buttons-bar-border-left-color;
     -webkit-border-radius:3px 0 0 3px;
        -moz-border-radius:3px 0 0 3px;
             border-radius:3px 0 0 3px;
   }
-  li:last-child .button.black{
+  li:last-child .button{
     -webkit-border-radius:0 3px 3px 0;
        -moz-border-radius:0 3px 3px 0;
             border-radius:0 3px 3px 0;
@@ -68,110 +50,128 @@ a{color:$link-color;}
 
   /* Active buttons - normal and hover states */
     
-  &[data-step="0"] li.step0 .button.black,
-  &[data-step="0"] li.step0 .button.black:hover,
+  &[data-step="0"] li.step0 .button,
+  &[data-step="0"] li.step0 .button:hover,
    
-  &[data-step="1"] li.step1 .button.black,
-  &[data-step="1"] li.step1 .button.black:hover,
+  &[data-step="1"] li.step1 .button,
+  &[data-step="1"] li.step1 .button:hover,
     
-  &[data-step="2"] li.step2 .button.black,
-  &[data-step="2"] li.step2 .button.black:hover,
+  &[data-step="2"] li.step2 .button,
+  &[data-step="2"] li.step2 .button:hover,
     
-  &[data-step="3"] li.step3 .button.black,
-  &[data-step="3"] li.step3 .button.black:hover,
+  &[data-step="3"] li.step3 .button,
+  &[data-step="3"] li.step3 .button:hover,
     
-  &[data-step="4"] li.step4 .button.black,
-  &[data-step="4"] li.step4 .button.black:hover{background:$button-nav-active-background;}
+  &[data-step="4"] li.step4 .button,
+  &[data-step="4"] li.step4 .button:hover{background:$button-nav-active-background;}
 
   /* Active Buttons - Border fix */
     
-  &[data-step="0"] li.step0 .button.black,
-  &[data-step="0"] li.step0 .button.black:hover{
+  &[data-step="0"] li.step0 .button,
+  &[data-step="0"] li.step0 .button:hover{
     border-left:1px solid $buttons-bar-border-left-color;
   }
     
-  &[data-step="1"] li.step0 .button.black,
-  &[data-step="1"] li.step0 .button.black:hover,
+  &[data-step="1"] li.step0 .button,
+  &[data-step="1"] li.step0 .button:hover,
     
-  &[data-step="2"] li.step1 .button.black,
-  &[data-step="2"] li.step1 .button.black:hover,
+  &[data-step="2"] li.step1 .button,
+  &[data-step="2"] li.step1 .button:hover,
     
-  &[data-step="3"] li.step2 .button.black,
-  &[data-step="3"] li.step2 .button.black:hover,
+  &[data-step="3"] li.step2 .button,
+  &[data-step="3"] li.step2 .button:hover,
     
-  &[data-step="4"] li.step3 .button.black,
-  &[data-step="4"] li.step3 .button.black:hover{
+  &[data-step="4"] li.step3 .button,
+  &[data-step="4"] li.step3 .button:hover{
     border-right:1px solid $buttons-bar-border-right-color;
   }
 
   /* Pre active buttons - normal state */
    
-  &[data-step="1"] li.step0 .button.black,
+  &[data-step="1"] li.step0 .button,
    
-  &[data-step="2"] li.step0 .button.black,
-  &[data-step="2"] li.step1 .button.black,
+  &[data-step="2"] li.step0 .button,
+  &[data-step="2"] li.step1 .button,
    
-  &[data-step="3"] li.step0 .button.black,
-  &[data-step="3"] li.step1 .button.black,
-  &[data-step="3"] li.step2 .button.black,
+  &[data-step="3"] li.step0 .button,
+  &[data-step="3"] li.step1 .button,
+  &[data-step="3"] li.step2 .button,
    
-  &[data-step="4"] li.step0 .button.black,
-  &[data-step="4"] li.step1 .button.black,
-  &[data-step="4"] li.step2 .button.black,
-  &[data-step="4"] li.step3 .button.black{
+  &[data-step="4"] li.step0 .button,
+  &[data-step="4"] li.step1 .button,
+  &[data-step="4"] li.step2 .button,
+  &[data-step="4"] li.step3 .button{
     color:$buttons-bar-color-text-visited;
   }
 
   /* Pre active buttons - hover state */
    
-  &[data-step="1"] li.step0 .button.black:hover,
+  &[data-step="1"] li.step0 .button:hover,
    
-  &[data-step="2"] li.step0 .button.black:hover,
-  &[data-step="2"] li.step1 .button.black:hover,
+  &[data-step="2"] li.step0 .button:hover,
+  &[data-step="2"] li.step1 .button:hover,
    
-  &[data-step="3"] li.step0 .button.black:hover,
-  &[data-step="3"] li.step1 .button.black:hover,
-  &[data-step="3"] li.step2 .button.black:hover,
+  &[data-step="3"] li.step0 .button:hover,
+  &[data-step="3"] li.step1 .button:hover,
+  &[data-step="3"] li.step2 .button:hover,
    
-  &[data-step="4"] li.step0 .button.black:hover,
-  &[data-step="4"] li.step1 .button.black:hover,
-  &[data-step="4"] li.step2 .button.black:hover,
-  &[data-step="4"] li.step3 .button.black:hover{
+  &[data-step="4"] li.step0 .button:hover,
+  &[data-step="4"] li.step1 .button:hover,
+  &[data-step="4"] li.step2 .button:hover,
+  &[data-step="4"] li.step3 .button:hover{
     color:$buttons-bar-color-text;
   }
 
   /* Post active buttons - normal and hover states */
    
-  &[data-step="0"] li.step1 .button.black,
-  &[data-step="0"] li.step1 .button.black:hover,
-  &[data-step="0"] li.step2 .button.black,
-  &[data-step="0"] li.step2 .button.black:hover,
-  &[data-step="0"] li.step3 .button.black,
-  &[data-step="0"] li.step3 .button.black:hover,
-  &[data-step="0"] li.step4 .button.black,
-  &[data-step="0"] li.step4 .button.black:hover,
+  &[data-step="0"] li.step1 .button,
+  &[data-step="0"] li.step1 .button:hover,
+  &[data-step="0"] li.step2 .button,
+  &[data-step="0"] li.step2 .button:hover,
+  &[data-step="0"] li.step3 .button,
+  &[data-step="0"] li.step3 .button:hover,
+  &[data-step="0"] li.step4 .button,
+  &[data-step="0"] li.step4 .button:hover,
    
-  &[data-step="1"] li.step2 .button.black,
-  &[data-step="1"] li.step2 .button.black:hover,
-  &[data-step="1"] li.step3 .button.black,
-  &[data-step="1"] li.step3 .button.black:hover,
-  &[data-step="1"] li.step4 .button.black,
-  &[data-step="1"] li.step4 .button.black:hover,
+  &[data-step="1"] li.step2 .button,
+  &[data-step="1"] li.step2 .button:hover,
+  &[data-step="1"] li.step3 .button,
+  &[data-step="1"] li.step3 .button:hover,
+  &[data-step="1"] li.step4 .button,
+  &[data-step="1"] li.step4 .button:hover,
    
-  &[data-step="2"] li.step3 .button.black,
-  &[data-step="2"] li.step3 .button.black:hover,
-  &[data-step="2"] li.step4 .button.black,
-  &[data-step="2"] li.step4 .button.black:hover,
+  &[data-step="2"] li.step3 .button,
+  &[data-step="2"] li.step3 .button:hover,
+  &[data-step="2"] li.step4 .button,
+  &[data-step="2"] li.step4 .button:hover,
    
-  &[data-step="3"] li.step4 .button.black,
-  &[data-step="3"] li.step4 .button.black:hover{background:$color-base;color:$buttons-bar-color-text-active;cursor:default;}
+  &[data-step="3"] li.step4 .button,
+  &[data-step="3"] li.step4 .button:hover{background:$color-base;color:$buttons-bar-color-text-active;cursor:default;}
 
 }
 
 /* Active buttons - Edit */
-.edit[data-step="1"] li.step1 .button.black,
-.edit[data-step="1"] li.step1 .button.black:hover{
+.edit[data-step="1"] li.step1 .button,
+.edit[data-step="1"] li.step1 .button:hover{
   border-left:none;
+}
+
+/* Links */
+.link{font-size:13px;@include transition(all, .1s, ease-in-out);
+
+  /* Link Back */
+  &.back:before{content:"< ";}
+
+  /* Link gray */
+  &.gray{color:#999;
+    &:hover{color:#333;}
+  }
+
+  /* Link gray */
+  &.black{color:#333;
+    &:hover{color:#000;}
+  }
+
 }
 
 /* Layout */
@@ -180,418 +180,14 @@ body{background:$color-base;height:100%;min-width:998px;}
 body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;background-position:center center;}
 
 .layout{overflow:hidden;}
-.workspace{padding-top:($header-height+12px);}
+.workspace{padding-top:$header-height;}
 .workspace > .wrapper1{padding-left:$nav-width;}
 .workspace > .wrapper1 > .wrapper2{width:100%;}
 .workspace > .wrapper1 > .wrapper2 > .wrapper3{width:100%;float:left;margin-left:-$nav-width;}
 .main-navigation{width:$nav-width;float:left;height:100%;}
-.main-section{width:100%;float:right;margin-right:-$nav-width;padding-left:11px;visibility:hidden;}
+.main-section{width:100%;float:right;margin-right:-$nav-width;padding:0 2%;visibility:hidden;}
 #zenbox_tab{display:none !important;}
 .preview-container{float:right;height:100%;margin-right:-310px;width:100%;padding:15px;}
-
-/* Grid */
-.row{}
-
-.col-lg-1, 
-.col-lg-10, 
-.col-lg-11, 
-.col-lg-12, 
-.col-lg-2, 
-.col-lg-3, 
-.col-lg-4, 
-.col-lg-5, 
-.col-lg-6, 
-.col-lg-7, 
-.col-lg-8, 
-.col-lg-9, 
-.col-md-1, 
-.col-md-10, 
-.col-md-11, 
-.col-md-12, 
-.col-md-2, 
-.col-md-3, 
-.col-md-4, 
-.col-md-5, 
-.col-md-6, 
-.col-md-7, 
-.col-md-8, 
-.col-md-9, 
-.col-sm-1, 
-.col-sm-10, 
-.col-sm-11, 
-.col-sm-12, 
-.col-sm-2, 
-.col-sm-3, 
-.col-sm-4, 
-.col-sm-5, 
-.col-sm-6, 
-.col-sm-7, 
-.col-sm-8, 
-.col-sm-9, 
-.col-xs-1, 
-.col-xs-10, 
-.col-xs-11, 
-.col-xs-12, 
-.col-xs-2, 
-.col-xs-3, 
-.col-xs-4, 
-.col-xs-5, 
-.col-xs-6, 
-.col-xs-7, 
-.col-xs-8, 
-.col-xs-9{position: relative;min-height: 1px;padding:10px;}
-
-.col-md-1, 
-.col-md-10, 
-.col-md-11, 
-.col-md-12, 
-.col-md-2,
-.col-md-3, 
-.col-md-4, 
-.col-md-5, 
-.col-md-6, 
-.col-md-7, 
-.col-md-8, 
-.col-md-9{float:left;}
-
-@media (min-width: 992px) {
-  .col-md-1, 
-  .col-md-10, 
-  .col-md-11, 
-  .col-md-12, 
-  .col-md-2, 
-  .col-md-3, 
-  .col-md-4, 
-  .col-md-5, 
-  .col-md-6, 
-  .col-md-7, 
-  .col-md-8, 
-  .col-md-9 {
-      float: left;
-  }
-  .col-md-12 {
-      width: 100%;
-  }
-  .col-md-11 {
-      width: 91.6667%;
-  }
-  .col-md-10 {
-      width: 83.3333%;
-  }
-  .col-md-9 {
-      width: 75%;
-  }
-  .col-md-8 {
-      width: 66.6667%;
-  }
-  .col-md-7 {
-      width: 58.3333%;
-  }
-  .col-md-6 {
-      width: 50%;
-  }
-  .col-md-5 {
-      width: 41.6667%;
-  }
-  .col-md-4 {
-      width: 33.3333%;
-  }
-  .col-md-3 {
-      width: 25%;
-  }
-  .col-md-2 {
-      width: 16.6667%;
-  }
-  .col-md-1 {
-      width: 8.33333%;
-  }
-  .col-md-pull-12 {
-      right: 100%;
-  }
-  .col-md-pull-11 {
-      right: 91.6667%;
-  }
-  .col-md-pull-10 {
-      right: 83.3333%;
-  }
-  .col-md-pull-9 {
-      right: 75%;
-  }
-  .col-md-pull-8 {
-      right: 66.6667%;
-  }
-  .col-md-pull-7 {
-      right: 58.3333%;
-  }
-  .col-md-pull-6 {
-      right: 50%;
-  }
-  .col-md-pull-5 {
-      right: 41.6667%;
-  }
-  .col-md-pull-4 {
-      right: 33.3333%;
-  }
-  .col-md-pull-3 {
-      right: 25%;
-  }
-  .col-md-pull-2 {
-      right: 16.6667%;
-  }
-  .col-md-pull-1 {
-      right: 8.33333%;
-  }
-  .col-md-pull-0 {
-      right: auto;
-  }
-  .col-md-push-12 {
-      left: 100%;
-  }
-  .col-md-push-11 {
-      left: 91.6667%;
-  }
-  .col-md-push-10 {
-      left: 83.3333%;
-  }
-  .col-md-push-9 {
-      left: 75%;
-  }
-  .col-md-push-8 {
-      left: 66.6667%;
-  }
-  .col-md-push-7 {
-      left: 58.3333%;
-  }
-  .col-md-push-6 {
-      left: 50%;
-  }
-  .col-md-push-5 {
-      left: 41.6667%;
-  }
-  .col-md-push-4 {
-      left: 33.3333%;
-  }
-  .col-md-push-3 {
-      left: 25%;
-  }
-  .col-md-push-2 {
-      left: 16.6667%;
-  }
-  .col-md-push-1 {
-      left: 8.33333%;
-  }
-  .col-md-push-0 {
-      left: auto;
-  }
-  .col-md-offset-12 {
-      margin-left: 100%;
-  }
-  .col-md-offset-11 {
-      margin-left: 91.6667%;
-  }
-  .col-md-offset-10 {
-      margin-left: 83.3333%;
-  }
-  .col-md-offset-9 {
-      margin-left: 75%;
-  }
-  .col-md-offset-8 {
-      margin-left: 66.6667%;
-  }
-  .col-md-offset-7 {
-      margin-left: 58.3333%;
-  }
-  .col-md-offset-6 {
-      margin-left: 50%;
-  }
-  .col-md-offset-5 {
-      margin-left: 41.6667%;
-  }
-  .col-md-offset-4 {
-      margin-left: 33.3333%;
-  }
-  .col-md-offset-3 {
-      margin-left: 25%;
-  }
-  .col-md-offset-2 {
-      margin-left: 16.6667%;
-  }
-  .col-md-offset-1 {
-      margin-left: 8.33333%;
-  }
-  .col-md-offset-0 {
-      margin-left: 0;
-  }
-}
-@media (min-width: 1200px) {
-  .col-lg-1, 
-  .col-lg-10, 
-  .col-lg-11, 
-  .col-lg-12, 
-  .col-lg-2, 
-  .col-lg-3, 
-  .col-lg-4, 
-  .col-lg-5, 
-  .col-lg-6, 
-  .col-lg-7, 
-  .col-lg-8, 
-  .col-lg-9 {
-      float: left;
-  }
-  .col-lg-12 {
-      width: 100%;
-  }
-  .col-lg-11 {
-      width: 91.6667%;
-  }
-  .col-lg-10 {
-      width: 83.3333%;
-  }
-  .col-lg-9 {
-      width: 75%;
-  }
-  .col-lg-8 {
-      width: 66.6667%;
-  }
-  .col-lg-7 {
-      width: 58.3333%;
-  }
-  .col-lg-6 {
-      width: 50%;
-  }
-  .col-lg-5 {
-      width: 41.6667%;
-  }
-  .col-lg-4 {
-      width: 33.3333%;
-  }
-  .col-lg-3 {
-      width: 25%;
-  }
-  .col-lg-2 {
-      width: 16.6667%;
-  }
-  .col-lg-1 {
-      width: 8.33333%;
-  }
-  .col-lg-pull-12 {
-      right: 100%;
-  }
-  .col-lg-pull-11 {
-      right: 91.6667%;
-  }
-  .col-lg-pull-10 {
-      right: 83.3333%;
-  }
-  .col-lg-pull-9 {
-      right: 75%;
-  }
-  .col-lg-pull-8 {
-      right: 66.6667%;
-  }
-  .col-lg-pull-7 {
-      right: 58.3333%;
-  }
-  .col-lg-pull-6 {
-      right: 50%;
-  }
-  .col-lg-pull-5 {
-      right: 41.6667%;
-  }
-  .col-lg-pull-4 {
-      right: 33.3333%;
-  }
-  .col-lg-pull-3 {
-      right: 25%;
-  }
-  .col-lg-pull-2 {
-      right: 16.6667%;
-  }
-  .col-lg-pull-1 {
-      right: 8.33333%;
-  }
-  .col-lg-pull-0 {
-      right: auto;
-  }
-  .col-lg-push-12 {
-      left: 100%;
-  }
-  .col-lg-push-11 {
-      left: 91.6667%;
-  }
-  .col-lg-push-10 {
-      left: 83.3333%;
-  }
-  .col-lg-push-9 {
-      left: 75%;
-  }
-  .col-lg-push-8 {
-      left: 66.6667%;
-  }
-  .col-lg-push-7 {
-      left: 58.3333%;
-  }
-  .col-lg-push-6 {
-      left: 50%;
-  }
-  .col-lg-push-5 {
-      left: 41.6667%;
-  }
-  .col-lg-push-4 {
-      left: 33.3333%;
-  }
-  .col-lg-push-3 {
-      left: 25%;
-  }
-  .col-lg-push-2 {
-      left: 16.6667%;
-  }
-  .col-lg-push-1 {
-      left: 8.33333%;
-  }
-  .col-lg-push-0 {
-      left: auto;
-  }
-  .col-lg-offset-12 {
-      margin-left: 100%;
-  }
-  .col-lg-offset-11 {
-      margin-left: 91.6667%;
-  }
-  .col-lg-offset-10 {
-      margin-left: 83.3333%;
-  }
-  .col-lg-offset-9 {
-      margin-left: 75%;
-  }
-  .col-lg-offset-8 {
-      margin-left: 66.6667%;
-  }
-  .col-lg-offset-7 {
-      margin-left: 58.3333%;
-  }
-  .col-lg-offset-6 {
-      margin-left: 50%;
-  }
-  .col-lg-offset-5 {
-      margin-left: 41.6667%;
-  }
-  .col-lg-offset-4 {
-      margin-left: 33.3333%;
-  }
-  .col-lg-offset-3 {
-      margin-left: 25%;
-  }
-  .col-lg-offset-2 {
-      margin-left: 16.6667%;
-  }
-  .col-lg-offset-1 {
-      margin-left: 8.33333%;
-  }
-  .col-lg-offset-0 {
-      margin-left: 0;
-  }
-}
 
 /* Columns */
 .columns{}
@@ -615,7 +211,9 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
   .logo{background:$nav-bg url(#{$logo-header-url}) no-repeat 0 0;height:$header-height;width:$nav-width;position:relative;z-index:201;}
   .logo:hover{background-position:0 -#{ $header-height };}
   
-  .button.alpha{margin-top:8px;padding:0 12px;}
+  #id_openDataSiteButton{height:$header-height;line-height:$header-height;padding:0 15px;
+    &:hover{background:$button-primary-color;color:$button-primary-text-color;}
+  }
 
   /* Tab */
   .tab a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;display:block;}
@@ -758,32 +356,52 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 }
 
 /* Main Section */
-.main-section{}
+.main-section{
 
-/* Section Title */
-.main-section .section-title{}
-.main-section .section-title h1,
-.main-section .section-title h2,
-.main-section .section-title h3{font-family:$font-titles-family;}
-.main-section .section-title h1{color:#000;font-size:$font-size-xl;}
-.main-section .section-title h1 a{color:$font-color-supreme;}
-.main-section .section-title h2,
-.main-section .section-title h3{color:$font-color-light;font-size:$font-size-l;}
+  /* Section Title */
+  .section-title{
 
-.main-section .section-title h2:before, 
-.main-section .section-title h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
+    h1,
+    h2,
+    h3{font-family:$font-titles-family;}
+    h1{color:#000;font-size:$font-size-xl;line-height:normal;}
+    h1 a{}
+    h2{font-size:$font-size-l;line-height:normal;}
+    h3{font-size:$font-size-m;line-height:normal;}
 
-  /* Actions */
-  .main-section .section-title .actions{padding-top:7px;}
-  .main-section .section-title .actions li{float:left;padding-left:10px;}
-  .main-section .section-title .actions li.has-separator{padding-left:22px;}
-  .main-section .section-title .actions li.has-separator:before{content:"";float:left;width:1px;height:26px;border-right:1px solid $buttons-bar-border-left-color;background:$buttons-bar-border-right-color;position:relative;left:-12px;}
+    h2:before, 
+    h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
 
-  /* Buttons Bar */
-  .main-section .section-title .buttons-bar{margin-top:7px;}
+    /* Status row */
+    .status-row{padding:15px 0 0;
+      & > span{float:left;}
+      & > span:before{content:"|";padding:0 5px;color:#999;float:left;}
+      & > span:first-child:before{content:"";padding:0;display:none;}
+      .status{color:#333;font-style:italic;}
+      .publish-version,
+      .row-actions{color:#999;
+        a{color:inherit;
+          &:hover{color:#333;}
+        }
+      }
+    }
+
+    /* Actions */
+    .actions{padding-top:7px;
+      li{float:left;padding-left:10px;}
+      li.has-separator{padding-left:22px;}
+      li.has-separator:before{content:"";float:left;width:1px;height:26px;border-right:1px solid $buttons-bar-border-left-color;background:$buttons-bar-border-right-color;position:relative;left:-12px;}
+    }
+
+    /* Buttons Bar */
+    .buttons-bar{margin-top:7px;}
+
+  }
+
+}
 
 /* Section Content */
-.main-section .section-content{background:#fff;padding:20px;overflow:hidden;position:relative;width:100%;height:100%;
+.section-content{background:#fff;overflow:hidden;position:relative;width:100%;height:100%;
 	-webkit-border-radius:3px;
 	   -moz-border-radius:3px;
 	        border-radius:3px;
