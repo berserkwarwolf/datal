@@ -1,0 +1,75 @@
+/* Icons */
+.icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;    height: 24px;display:block;
+}
+.icon:hover{cursor:pointer;}
+
+/* Icons with background */
+.fill-background{width:48px;height:48px;background-color:#0066cc;}
+
+/* 48px icons */
+.size-48{
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
+
+
+	/* Nav local */
+	.icon-home{background-position:-12px -12px;}
+	.icon-home:hover{background-position:-48px -12px;}
+
+	.icon-datasets{background-position:-12px -48px;}
+	.icon-datasets:hover{background-position:-48px -48px;}
+
+	.icon-dataviews{background-position:-12px -84px;}
+	.icon-dataviews:hover{background-position:-48px -84px;}
+
+	.icon-visualizations{background-position:-12px -120px;}
+	.icon-visualizations:hover{background-position:-48px -120px;}
+
+	.icon-dashboards{background-position:-12px -156px;}
+	.icon-dashboards:hover{background-position:-48px -156px;}
+
+	.icon-reports{background-position:-12px -192px;}
+	.icon-reports:hover{background-position:-48px -192px;}
+
+	.icon-config{background-position:-12px -228px;}
+	.icon-config:hover{background-position:-48px -228px;}
+
+
+	/* Actions */
+	.icon-edit{background-position:-12px -264px;}
+	.icon-edit:active{background-position:-96px -264px;}
+	.icon-edit.fill-background{background-position:0 -290px;}
+
+	.icon-add{background-position:-12px -336px;}
+	.icon-add.fill-background{background-position:0 -360px;}
+
+	.icon-delete{background-position:-12px -408px;}
+	.icon-delete:hover{background-position:-48px -408px;}
+
+	.icon-zoom-in{background-position:-12px -444px;}
+	.icon-zoom-in:active{background-position:-96px -444px;}
+
+	.icon-zoom-out{background-position:-12px -480px;}
+	.icon-zoom-out:active{background-position:-96px -480px;}
+
+		/* Hover */
+		.icon-edit:hover,
+		.icon-add:hover,
+		.icon-zoom-in:hover,
+		.icon-zoom-out:hover{opacity:.5;}
+
+
+	/* Charts */
+	.icon-chart-column{background-position:-12px -516px;}
+	.icon-chart-column.size-48{background-position:-24px -1032px;}
+
+	.icon-chart-line{background-position:-12px -552px;}
+	.icon-chart-line.size-48{background-position:-24px -1104px;}
+
+	.icon-chart-area{background-position:-12px -588px;}
+	.icon-chart-area.size-48{background-position:-24px -1176px;}
+
+	.icon-chart-pie{background-position:-12px -624px;}
+	.icon-chart-pie.size-48{background-position:-24px -1248px;}
+
+	.icon-chart-bar{background-position:-12px -660px;}
+	.icon-chart-bar.size-48{background-position:-24px -1320px;}
