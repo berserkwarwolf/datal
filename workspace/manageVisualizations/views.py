@@ -89,8 +89,10 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         filter_name=filter_name
     )
 
-    for i in xrange(len(resources)):
-        resources[i]['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resources[i]['id']))
+    for resource in resources:
+        print(resource)
+        resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
+        resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")

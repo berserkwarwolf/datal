@@ -225,10 +225,10 @@ var ManageVisualizationsView = Backbone.View.extend({
             // cell: "text",
             cell: Backgrid.StringCell.extend({
                 render: function() {
-                    var visualizationCellView = new VisualizationCellView({
+                    var datastreamCellView = new DatastreamCellView({
                         model: this.model
                     });
-                    this.$el.html(visualizationCellView.render().el);
+                    this.$el.html(datastreamCellView.render().el);
                     return this;
                 }
             }),
