@@ -54,7 +54,7 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 	},
 
 	openModal: function(id){
-		this.trigger('openModal',id);
+		this.trigger('openModal', id);
 	},
 	// cancel: function(){},
 

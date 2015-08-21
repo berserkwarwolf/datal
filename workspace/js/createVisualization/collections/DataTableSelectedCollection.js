@@ -3,9 +3,8 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 	getSelectionExcelStyle: function () {
 		var self = this;
 		return _.map(this.models, function (model) {
-			var range = model.get('range');
 			return self.rangeToExcel(model.get('range'));
-		});
+		}).join(';');
 	},
 
 	getColumns: function () {
@@ -29,7 +28,6 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 			result = [this.intToExcelCol(range.from.col + 1), range.from.row, ':',
 					this.intToExcelCol(range.to.col + 1), range.to.row].join('');
 		}
-		console.log(range, result);
 		return result
 	},
 
