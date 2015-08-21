@@ -17,7 +17,7 @@ var ChartView = StepViewSPA.extend({
 			'keyup input#nullValuePreset': 	'onInputChanged',
 			
 			'change input[type=radio]': 	'onRadioChanged',
-			'click input[type=checkbox]': 	'onCheckboxChanged'//Esto no funciona
+			'change input[type=checkbox]': 	'onCheckboxChanged'
 
 		});
 
@@ -33,18 +33,8 @@ var ChartView = StepViewSPA.extend({
 	}, 
 
 	onCheckboxChanged: function(e){
-		//Esto no funciona
-		console.log(e);
 		var input = $(e.target);
-
-		console.log(input.val());
-//		this.model.set(input.attr('name'),input.val());
-
-/*		if(input.val()=='given'){
-			$('#nullValuePreset').show();
-		}else{
-			$('#nullValuePreset').hide();
-		}*/
+		this.model.set(input.attr('name'),input.val());
 
 		console.log(this.model.getGeneralSettings());
 	},
@@ -70,7 +60,7 @@ var ChartView = StepViewSPA.extend({
 		this.model.set('lib',lib);
 	},
 
-	onInputTitleChanged: function(e){
+	onInputChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.data('ref'),input.val());
 
