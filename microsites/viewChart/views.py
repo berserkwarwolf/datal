@@ -15,6 +15,16 @@ import urllib
 import json
 import logging
 
+def action_charttest(request):
+    """
+    Test Show for a chart visualization
+    """
+
+    base_uri = get_domain_with_protocol('microsites')
+    preferences = request.preferences
+
+    return render_to_response('viewChart/chart_test.html', locals())
+
 def action_view(request, id, slug):
     """
     Show a microsite view

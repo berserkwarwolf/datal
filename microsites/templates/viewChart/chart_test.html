@@ -1,0 +1,66 @@
+{% extends "base_microsites.html" %}
+
+{% block SEO %}
+    <title>Test Title</title>
+    <meta name="description" content="" />
+    <link rel="canonical" href="" />
+{% endblock %}
+
+{% block meta %}
+
+{% load static %}
+<!-- TODO: Load only the models and view for the current chart type -->
+<!-- Chart Libraries -->
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
+
+<!-- Charts types & instances -->
+<script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/barChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/lineChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script type="text/javascript" src="/js_microsites/viewChart/viewChartModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/viewChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_workspace/createVisualization/invoke.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="wrapper clearfix" id="id_wrapper">
+    <div class="wrapperInner">
+        <div class="chartContent">
+            <div id="chartContainer" class="chart-view"></div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    // TODO: fetch real data from the visualization endpoint
+    var theData = [[1,0],[0,1],[3,1],[0,1],[4,1],[3,5],[20,19],[5,2],[9,4],[4,10],[3,3],[5,2],[1,3],[1,2],[0,1]];
+    // TODO: Use the data from the visualization object
+    var chartModel = new viewChartModel({
+        visualization_id: 1,
+        lib: 'google',
+        type: 'linechart'
+    });
+    var chartView = new viewChartView({
+        el: '#id_wrapper',
+        model: chartModel
+    });
+</script>
+{% endblock %}

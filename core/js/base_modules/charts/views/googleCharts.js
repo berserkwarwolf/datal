@@ -10,6 +10,7 @@ charts.views.GoogleLineChart = charts.views.LineChart.extend({
     },
 
     formatData: function (data) {
+        console.log('raw data', data);
         var dataTable = new google.visualization.DataTable();
         _.each(data.fields, function (field) {
             dataTable.addColumn(field[0], field[1]);
@@ -19,6 +20,7 @@ charts.views.GoogleLineChart = charts.views.LineChart.extend({
     },
 
     render: function () {
+        console.log('model data', this.model.data);
         var dataTable = this.formatData(this.model.data.toJSON());
 
         var options = this.model.get('options');
