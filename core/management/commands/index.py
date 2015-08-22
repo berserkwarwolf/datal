@@ -8,6 +8,7 @@ from core.models import Dataset, DatasetRevision, DataStream, DataStreamRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datasets import DatasetSearchDAOFactory
 from core.lifecycle.datastreams import DatastreamSearchDAOFactory
+from core.daos.datastreams import DatastreamHitsDAO
 
 
 class Command(BaseCommand):
@@ -28,6 +29,7 @@ class Command(BaseCommand):
 
             # destruye el index
             ElasticsearchIndex().flush_index()
+            es=ElasticsearchIndex()
 
             for datasetrevision in DatasetRevision.objects.filter(status=StatusChoices.PUBLISHED):
                 search_dao = DatasetSearchDAOFactory().create(datasetrevision)
@@ -36,3 +38,12 @@ class Command(BaseCommand):
             for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
                 search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
                 search_dao.add()
+                h=DatastreamHitsDAO(datastreamrevision)
+
+                doc={'docid':"DS::%s" % datastreamrevision.datastream.guid,
+                    "type": "ds",
+                    "doc":{ "fields":{"hits": h.count()}}}
+                try:
+                    es.update(doc)
+                except:
+                    pass
