@@ -5,7 +5,6 @@ from core.shortcuts import render_to_response
 from core.models import Category
 from microsites.search import forms
 from microsites.managers import *
-import logging
 
 
 def action_browse(request, category_slug=None, page=1):
@@ -49,8 +48,6 @@ def do_search(request, category_filters=None, datasets=None):
         except InvalidPage:
             raise Http404
 
-        logger = logging.getLogger(__name__)
-        logger.info("----------> %s " %results)
 
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
         page_results = paginator.page(page).object_list
