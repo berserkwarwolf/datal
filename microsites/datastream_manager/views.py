@@ -9,7 +9,7 @@ from core.docs import DS, DT
 from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
-from core.daos.datastreams import DataStreamDBDAO
+from core.daos.datastreams import DatastreamHitsDAO
 from microsites.helpers import set_dataset_impl_type_nice
 
 
@@ -52,7 +52,7 @@ def action_view(request, id, slug):
     can_export      = True
     can_share       = False
 
-    DataStreamDBDAO().hit(id, ChannelTypes.WEB)
+    DatastreamHitsDAO(datastream).hit(ChannelTypes.WEB)
 
 
 #    datastream_html = ''
@@ -119,7 +119,7 @@ def action_embed(request, guid):
     except Http404:
         return render_to_response('datastream_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    DataStreamDBDAO().hit(datastream.datastream_id, ChannelTypes.WEB)
+    DataStreamHitsDAO(datastream).hit(ChannelTypes.WEB)
     end_point = urllib.urlencode(parameters_query)
     header_row = request.REQUEST.get('header_row', False)
     fixed_column = request.REQUEST.get('fixed_column', False)
