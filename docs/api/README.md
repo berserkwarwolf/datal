@@ -46,10 +46,22 @@ Si se piden los datos asociados a una vista se devuelve
   "user": "cne", 
   "tags": [], 
   "created_at": "2015-07-28 11:20:24", 
-  "source": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
+  "endpoint": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
   "link": "http://datos.energiaabierta.cne.cl/datastreams/94287/indicadores-diarios/", 
   "category_id": 41111, 
-  "category_name": "Internacional"
+  "category_name": "Internacional",
+  "parameters": [
+    {
+      "name": "param0",
+      "position": 0,
+      "description": "Un parametro",
+    },
+    {
+      "name": "param0",
+      "position": 0,
+      "description": "Un parametro",
+    }
+  ]
 }
 ```
 
@@ -59,7 +71,7 @@ Si se piden los datos asociados a una vista se devuelve
 - **user**: Usuario propietario de la vista.
 - **tags**: Tags correspondientes a la vista.
 - **created_at**: Fecha de creacón.
-- **source**: Fuente de los datos de la vista.
+- **endpoint**: Fuente de los datos de la vista.
 - **link**: Link a la vista en el sitio de datos.
 - **category_id**: Id de la categoría de la vista.
 - **category_name**: Nombre de la categoría de la vista.
@@ -75,10 +87,22 @@ Si se piden los datos completos se agrega la propiedad result con los valores de
   "tags": [], 
   "created_at": 
   "2015-07-28 11:20:24", 
-  "source": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
+  "endpoint": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
   "link": "http://datos.energiaabierta.cne.cl/datastreams/94287/indicadores-diarios/", 
   "category_id": 41111, 
   "category_name": "Internacional",
+  "parameters": [
+    {
+      "name": "param0",
+      "position": 0,
+      "description": "Un parametro",
+    },
+    {
+      "name": "param0",
+      "position": 0,
+      "description": "Un parametro",
+    }
+  ],
   "result": {
     "fType":"ARRAY",
     "fArray": [

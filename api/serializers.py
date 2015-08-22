@@ -11,43 +11,30 @@ class DataStreamSerializer(serializers.Serializer):
     user = serializers.CharField()
     tags = serializers.ListField(child=serializers.CharField())
     created_at = serializers.DateTimeField()
-    source = serializers.CharField()
+    endpoint = serializers.CharField()
     link = serializers.CharField()
     category_id = serializers.IntegerField()
     category_name = serializers.CharField()
     result = serializers.DictField()
 
-    def to_representation_model(self, obj):
-        pass
+    def tryKeysOnDict(self, toDict, toKey, fromDict, fromKeys):
+        toDict[toKey] = None
+        for key in fromKeys:
+            if key in fromDict:
+                toDict[toKey]=fromDict[key]
 
-    def to_representation_search(self, obj):
-        pass
-
-    def to_representation_dao(self, obj):
-        pass
 
     def to_representation(self, obj):
-        answer = super(DataStreamSerializer, self).to_representation(obj)
-
-        answer['']
-
-        answer['id']=doc.guid
-        answer['title']=doc.title
-        answer['description']=doc.description
-        answer['user']=doc.created_by_nick
-        answer['tags']=doc.get_tags()
-        answer['created_at']=str(doc.created_at)
-        answer['source']=doc.filename
-        answer['link']=doc.permalink()
-        add_domain_to_datastream_link(answer)
-
-        if doc.parameters:
-            parameters = []
-            for param in doc.parameters:
-                parameters.append({
-                                   "name": param.name,
-                                   "position": param.position,
-                                   "description": param.description,
-                                  })
-            answer['parameters'] = parameters
+        answer={}
+        self.tryKeysOnDict(answer, 'id', obj, ['guid'])
+        self.tryKeysOnDict(answer, 'title', obj, ['title'])
+        self.tryKeysOnDict(answer, 'description', obj, ['description'])
+        self.tryKeysOnDict(answer, 'user', obj, ['author'])
+        self.tryKeysOnDict(answer, 'tags', obj, ['tags'])
+        self.tryKeysOnDict(answer, 'created_at', obj, ['created_at'])
+        self.tryKeysOnDict(answer, 'endpoint', obj, ['endpoint'])
+        self.tryKeysOnDict(answer, 'link', obj, ['permalink'])
+        self.tryKeysOnDict(answer, 'category_id', obj, ['category_id'])
+        self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
+        self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
         return answer

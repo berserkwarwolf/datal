@@ -6,6 +6,7 @@ from api.serializers import DataStreamSerializer
 from rest_framework.decorators import detail_route, list_route
 from core.datastream_manager import forms
 from core.engine import invoke
+from django.shortcuts import get_object_or_404
 from core.helpers import RequestProcessor
 from rest_framework import status
 from core.models import Category
@@ -23,7 +24,7 @@ def action500(p_request):
     return HttpResponseServerError('{"error": 500, "message": "API Internal Server Error"}')
 
 class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = DataStream.objects.all()
+    queryset = DataStream.objects.all() # solo esta para que lo levante el router, no se usa
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'
 
@@ -45,21 +46,24 @@ class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
         return Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
 
 
+    def retrieve(self, request, guid=None, format='json'):
+        datastream = get_object_or_404(self.get_queryset(), guid=guid)
+        datastream = DataStreamDBDAO().get(
+            language='en',
+            datastream_revision_id=datastream.last_published_revision.id)
+        serializer = DataStreamSerializer(datastream)
+        return Response(serializer.data)
+
     def list(self, request):
         ## Todo ver de donde saco la categoria
         account = request.auth['account']
         #language = request.auth['language'] 
         #category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
 
-        try:
-            results, search_time, facets = ElasticFinderManager().search(
-                resource='dt',
-                account_id = account.id)
-            logger.info('aaaaaaaaaa')
-            logger.info(results)
-            logger.info('uuuuuuuu')
-        except :
-            raise 
+        results, search_time, facets = ElasticFinderManager().search(
+            resource='dt',
+            account_id = account.id)
 
+        serializer = DataStreamSerializer(results, many=True)
         return Response(serializer.data)
     
