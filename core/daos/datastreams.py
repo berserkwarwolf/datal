@@ -203,19 +203,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         )
         return related
 
-    def hit(self, id, channel_type):
-        """agrega un hit al datastream. """
-
-        try:
-            hit=DataStreamHits.objects.create(datastream_id=id, channel_type=channel_type)
-        except IntegrityError:
-            # esta correcto esta excepcion?
-            raise DataStreamNotFoundException()
-
-        # utilizo el ID del hit porque es confiable como contador,
-        # aunque lo correcto sería hacer un count de los hits que tiene ese ds_id
-        DatastreamHitsDAO(hit.datastream).hit(hit.id)
-    
+   
 
 
 class DatastreamSearchDAOFactory():
@@ -318,7 +306,7 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
@@ -331,12 +319,23 @@ class DatastreamHitsDAO():
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
 
-    def hit(self, count):
+    def hit(self,  channel_type):
+        """agrega un hit al datastream. """
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s, hits: %s)" % ( self.datastream.guid,count))
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=self.datastream.datastream_id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise DataStreamNotFoundException()
+
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+
         # armo el documento para actualizar el index.
         doc={'docid':"DS::%s" % self.datastream.guid,
                 "type": "ds",
-                "hits": count}
+                "script": "ctx._source.fields.hits+=1"}
 
         return self.search_index.update(doc)
+
+    def count(self):
+        return DataStreamHits.objects.filter(datastream_id=self.datastream.datastream_id).count()
