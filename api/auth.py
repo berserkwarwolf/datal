@@ -38,7 +38,7 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
 
         account = Account.objects.get(pk=account_id)
 
-        language = account.get_preference('account.language') or 'en'
+        languag = account.get_preference('account.language') or 'en'
 
         bucket_name = account.get_preference('account.bucket.name')
         if not bucket_name:
