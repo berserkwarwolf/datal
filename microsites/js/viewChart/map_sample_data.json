@@ -1,0 +1,250 @@
+var theData = {
+    "points": [
+        {
+            "lat": "-33.4261640",
+            "long": "-70.6112010",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO INSTITUTO DE HUMANIDADES LUIS CAMPINO<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA PEDRO DE VALDIVIA<br/>"
+        },
+        {
+            "lat": "-33.4320430",
+            "long": "-70.6023410",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO MANANTIALES<br/><strong>DIR_RBD&nbsp;</strong>AVNIDA LOS LEONES<br/>"
+        },
+        {
+            "lat": "-33.4244180",
+            "long": "-70.6143030",
+            "info": "<strong>NOM_RBD&nbsp;</strong>LICEO DE NIÑAS N 7 LUISA SAAVEDRA DE GONZALEZ<br/><strong>DIR_RBD&nbsp;</strong>M. SOTERO SANZ<br/>"
+        },
+        {
+            "lat": "-33.4434330",
+            "long": "-70.6257530",
+            "info": "<strong>NOM_RBD&nbsp;</strong>LICEO CARMELA CARVAJAL DE PRAT<br/><strong>DIR_RBD&nbsp;</strong>AVDA. ITALIA 980<br/>"
+        },
+        {
+            "lat": "-33.4303050",
+            "long": "-70.6216080",
+            "info": "<strong>NOM_RBD&nbsp;</strong>LICEO JOSE VICTORINO LASTARRIA<br/><strong>DIR_RBD&nbsp;</strong>MIGUEL CLARO<br/>"
+        },
+        {
+            "lat": "-33.4220700",
+            "long": "-70.6048210",
+            "info": "<strong>NOM_RBD&nbsp;</strong>LICEO B 42 TAJAMAR<br/><strong>DIR_RBD&nbsp;</strong>LOS LEONES 238<br/>"
+        },
+        {
+            "lat": "-33.4351600",
+            "long": "-70.6011870",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA BASICA EL VERGEL<br/><strong>DIR_RBD&nbsp;</strong>LOS LEONES<br/>"
+        },
+        {
+            "lat": "-33.4326530",
+            "long": "-70.6179850",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA DE PROVIDENCIA<br/><strong>DIR_RBD&nbsp;</strong>AV. MANUEL MONTT<br/>"
+        },
+        {
+            "lat": "-33.4337900",
+            "long": "-70.6117800",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA ABELARDO ITURRIAGA JAMETT<br/><strong>DIR_RBD&nbsp;</strong>VALENZUELA CASTILLO 1793<br/>"
+        },
+        {
+            "lat": "-33.4396650",
+            "long": "-70.6165760",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO POLIV. PROF. GUILLERMO GONZALEZ HEIN<br/><strong>DIR_RBD&nbsp;</strong>AV. FRANCISCO BILBAO<br/>"
+        },
+        {
+            "lat": "-33.4430500",
+            "long": "-70.5965990",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO PARTICULAR REGINA PACIS<br/><strong>DIR_RBD&nbsp;</strong>EL AGUILUCHO<br/>"
+        },
+        {
+            "lat": "-33.4330230",
+            "long": "-70.6331400",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA Y LICEO PAULINA VON MALLINCKRODT<br/><strong>DIR_RBD&nbsp;</strong>MALLINCKRODT<br/>"
+        },
+        {
+            "lat": "-33.4372310",
+            "long": "-70.6309440",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO COMPANIA DE MARIA-SEMINARIO<br/><strong>DIR_RBD&nbsp;</strong>SEMINARIO<br/>"
+        },
+        {
+            "lat": "-33.4336210",
+            "long": "-70.6329300",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO MARIA INMACULADA<br/><strong>DIR_RBD&nbsp;</strong>MALLICKRODT<br/>"
+        },
+        {
+            "lat": "-33.4320650",
+            "long": "-70.5862650",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SAINT GABRIEL´S SCHOOL ANEXO<br/><strong>DIR_RBD&nbsp;</strong>LOS DIAMELOS<br/>"
+        },
+        {
+            "lat": "-33.4405180",
+            "long": "-70.6144820",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO LATINOAMERICANO DE INTEGRACION<br/><strong>DIR_RBD&nbsp;</strong>PUYEHUE<br/>"
+        },
+        {
+            "lat": "-33.4403150",
+            "long": "-70.6302770",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SUPERIOR CAMBRIDGE<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA SEMINARIO<br/>"
+        },
+        {
+            "lat": "-33.4319850",
+            "long": "-70.5855060",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SAINT GABRIEL´S SCHOOL LOCAL SEDE<br/><strong>DIR_RBD&nbsp;</strong>FRANCISCO BILBAO<br/>"
+        },
+        {
+            "lat": "-33.4274130",
+            "long": "-70.5928150",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SAINT GABRIEL´S SCHOOL ANEXO<br/><strong>DIR_RBD&nbsp;</strong>ELIODORO YAÑEZ<br/>"
+        },
+        {
+            "lat": "-33.4370450",
+            "long": "-70.6146080",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO CAMPVS COLLEGE<br/><strong>DIR_RBD&nbsp;</strong>ANTONIO VARAS<br/>"
+        },
+        {
+            "lat": "-33.4443830",
+            "long": "-70.5947030",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO DE LOS SAGRADOS CORAZONES PROVIDENCIA<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA CHILE-ESPAÑA<br/>"
+        },
+        {
+            "lat": "-33.4225880",
+            "long": "-70.5974170",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO TREWHELA´S ENGLISH SCHOOL<br/><strong>DIR_RBD&nbsp;</strong>LAS CAMELIAS<br/>"
+        },
+        {
+            "lat": "-33.4274790",
+            "long": "-70.6201900",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SAINT GABRIEL´S SCHOOL ANEXO<br/><strong>DIR_RBD&nbsp;</strong>ALMIRANTE PASTENE<br/>"
+        },
+        {
+            "lat": "-33.4344900",
+            "long": "-70.6190000",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA DE PARVULOS N°730 JARDIN INFANTIL MAMPATO<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA MIGUEL CLARO<br/>"
+        },
+        {
+            "lat": "-33.4398310",
+            "long": "-70.5984020",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO MARIANO<br/><strong>DIR_RBD&nbsp;</strong>HOLANDA<br/>"
+        },
+        {
+            "lat": "-33.4263700",
+            "long": "-70.6111160",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO ALEMAN SANKT THOMAS MORUS<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA PEDRO DE VALDIVIA<br/>"
+        },
+        {
+            "lat": "-33.4330740",
+            "long": "-70.5944660",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO SAN IGNACIO EL BOSQUE<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA POCURO<br/>"
+        },
+        {
+            "lat": "-33.4407760",
+            "long": "-70.6265440",
+            "info": "<strong>NOM_RBD&nbsp;</strong>WEXFORD COLLEGE N 2<br/><strong>DIR_RBD&nbsp;</strong>AV.ITALIA<br/>"
+        },
+        {
+            "lat": "-33.4297210",
+            "long": "-70.6170660",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO CAMBRIDGE COLLEGE<br/><strong>DIR_RBD&nbsp;</strong>ANTONIO VARAS<br/>"
+        },
+        {
+            "lat": "-33.4401740",
+            "long": "-70.6029090",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO THE ENGLISH INSTITUTE<br/><strong>DIR_RBD&nbsp;</strong>RICARDO LYON<br/>"
+        },
+        {
+            "lat": "-33.4270660",
+            "long": "-70.6221710",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO UNIVERSITARIO INGLES<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA ANDRES BELLO<br/>"
+        },
+        {
+            "lat": "-33.4425150",
+            "long": "-70.6064450",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO THE KENT SCHOOL<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA PEDRO DE VALDIVIA<br/>"
+        },
+        {
+            "lat": "-33.4406170",
+            "long": "-70.6072400",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO PEDRO DE VALDIVIA<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA PEDRO DE VALDIVIA<br/>"
+        },
+        {
+            "lat": "-33.4323210",
+            "long": "-70.6166850",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO  HOSPITALARIO  RENOVAL<br/><strong>DIR_RBD&nbsp;</strong>CALLE  GENERAL  DEL  CANTO<br/>"
+        },
+        {
+            "lat": "-33.4214010",
+            "long": "-70.6185800",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO HOSPITALARIO  CLINICA INDISA<br/><strong>DIR_RBD&nbsp;</strong>AVDA. SANTA  MARIA<br/>"
+        },
+        {
+            "lat": "-33.4222360",
+            "long": "-70.6047410",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA BASICA MERCEDES MARIN DEL SOLAR<br/><strong>DIR_RBD&nbsp;</strong>AV.LOS LEONES 262<br/>"
+        },
+        {
+            "lat": "-33.4380000",
+            "long": "-70.6070100",
+            "info": "<strong>NOM_RBD&nbsp;</strong>INSTITUTO DE TABANCURA DE PROVIDENCIA<br/><strong>DIR_RBD&nbsp;</strong>AVENIDA PEDRO DE VALDIVIA<br/>"
+        },
+        {
+            "lat": "-33.4351100",
+            "long": "-70.6323550",
+            "info": "<strong>NOM_RBD&nbsp;</strong>INSTITUTO SAN SEBASTIAN DE PROVIDENCIA<br/><strong>DIR_RBD&nbsp;</strong>ALBERTO REYES<br/>"
+        },
+        {
+            "lat": "-33.4330160",
+            "long": "-70.6082350",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO TÉCNICO PROFESIONAL PORTEZUELO<br/><strong>DIR_RBD&nbsp;</strong>MAR DEL PLATA<br/>"
+        },
+        {
+            "lat": "-33.4351910",
+            "long": "-70.5901550",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO KENDAL ENGLISH SCHOOL ANEXO<br/><strong>DIR_RBD&nbsp;</strong>FRANCISCO BILBAO<br/>"
+        },
+        {
+            "lat": "-33.4308880",
+            "long": "-70.6284680",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COL.  PART. SALES. EL PATROCINIO DE SAN JOSE<br/><strong>DIR_RBD&nbsp;</strong>BELLAVISTA<br/>"
+        },
+        {
+            "lat": "-33.4358000",
+            "long": "-70.6190500",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO PART. JOSEFINO SANTISIMA TRINIDAD<br/><strong>DIR_RBD&nbsp;</strong>CALLE MIGUEL CLARO<br/>"
+        },
+        {
+            "lat": "-33.4406220",
+            "long": "-70.6281900",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO  UNITED COLLEGE<br/><strong>DIR_RBD&nbsp;</strong>RANCAGUA<br/>"
+        },
+        {
+            "lat": "-33.4313400",
+            "long": "-70.6282700",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA DE PARVULOS N° 1938 SAN JOSE DE PROVIDENCIA<br/><strong>DIR_RBD&nbsp;</strong>BELLAVISTA<br/>"
+        },
+        {
+            "lat": "-33.4391200",
+            "long": "-70.6268800",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO DE ADULTOS INSTITUTO NUEVO BILBAO<br/><strong>DIR_RBD&nbsp;</strong>RICARDO MATTE PEREZ<br/>"
+        },
+        {
+            "lat": "-33.4351100",
+            "long": "-70.6331600",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO DE AD. INSTITUTO SAN SEBASTIAN DE BEL<br/><strong>DIR_RBD&nbsp;</strong>CALLE ALBERTO REYES Nº075<br/>"
+        },
+        {
+            "lat": "-33.4405850",
+            "long": "-70.6175060",
+            "info": "<strong>NOM_RBD&nbsp;</strong>ESCUELA BAS. MARIA JESUS<br/><strong>DIR_RBD&nbsp;</strong>MANUEL MONTT 1993<br/>"
+        },
+        {
+            "lat": "-33.4297000",
+            "long": "-70.6151100",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO ESPECIAL HOSPITALARIO CON TODO EL COR<br/><strong>DIR_RBD&nbsp;</strong>AV. ANTONIO VARAS 360<br/>"
+        },
+        {
+            "lat": "-33.4327720",
+            "long": "-70.6283240",
+            "info": "<strong>NOM_RBD&nbsp;</strong>COLEGIO AULA CLINICA SANTA MARIA<br/><strong>DIR_RBD&nbsp;</strong>AV.SANTA MARÍA<br/>"
+        }
+    ],
+    "clusters": []
+};

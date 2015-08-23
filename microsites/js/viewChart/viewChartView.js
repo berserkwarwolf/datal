@@ -11,7 +11,7 @@ var viewChartView = Backbone.View.extend({
         this.render();
     },
     setupChart: function () {
-        var chartSettings = this.chartsFactory.create(this.model.get('type'),this.model.get('lib'));
+        var chartSettings = this.chartsFactory.create(this.model.get('chart').type,this.model.get('chart').lib);
 
         this.ChartViewClass = chartSettings.Class;
         this.ChartModelClass = chartSettings.Model;
@@ -31,16 +31,19 @@ var viewChartView = Backbone.View.extend({
     },
     createChartInstance: function () {
         var chartModelInstance = new this.ChartModelClass({
-            type: this.model.get('type')
+            type: this.model.get('chart.type'),
+            options: {
+                zoom: 14,
+                center: {
+                    "lat": "-33.4361640",
+                    "long": "-70.6112010",
+                }
+            }
         });
-        console.log('chartModelInstance', chartModelInstance.toJSON());
 
         //TODO: fetch the data from the server
         // chartModelInstance.fetchData();
-        chartModelInstance.data.set('fields', [['number', 'year'], ['number', 'population']]);
-        chartModelInstance.data.set('rows', theData);
-
-        console.log('chartData', chartModelInstance.data.toJSON());
+        chartModelInstance.data.set('points', theData.points);
 
         this.chartInstance = new this.ChartViewClass({
             el: $('#chartContainer'),
