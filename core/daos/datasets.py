@@ -35,7 +35,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                dataseti18n__language=language)
 
         tags = dataset_revision.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
-        sources = dataset_revision.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
+        sources = dataset_revision.get_sources()
+
 
         # Get category name
         category = dataset_revision.category.categoryi18n_set.get(language=language)

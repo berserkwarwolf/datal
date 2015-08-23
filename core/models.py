@@ -376,6 +376,10 @@ class DataStreamRevision(models.Model):
             self.sourcedatastream_set.add(source_datastream)
         self.save()
 
+    def get_sources(self):
+        """ return sources """
+        return self.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
+
     def add_parameters(self, parameters):
         self.datastreamparameter_set.clear()
         
@@ -772,6 +776,10 @@ class DatasetRevision(models.Model):
                 source_dataset, is_new = SourceDataset.objects.get_or_create(source=source, datasetrevision=self)
                 self.sourcedataset_set.add(source_dataset)
         self.save()
+
+    def get_sources(self):
+        """ return sources """
+        return self.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
 
     def clone(self, status=choices.StatusChoices.DRAFT):
 

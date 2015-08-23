@@ -51,7 +51,7 @@ class ElasticsearchFinder(Finder):
             i['_source']['fields']['docid'] = i['_source']['docid']
             docs.append(i['_source']['fields'])
 
-        search_time = float(results['took'])/1000
+        meta_data={'search_time':float(results['took'])/1000, 'count': results['hits']['total'], 'time_out': results['timed_out']}
         facets = results['facets']['type']['terms']
 
         results = []
@@ -61,7 +61,7 @@ class ElasticsearchFinder(Finder):
             to_add = self.get_dictionary(doc)
             results.append(to_add)
 
-        return results, search_time, facets
+        return results, meta_data, facets
 
     def __build_query(self):
         self.logger.info("El query es: %s" % self.query)
