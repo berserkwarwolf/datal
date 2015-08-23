@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
 from django.db.models import Q
 from django.conf import settings
 from core.http import get_domain
 from core.models import Application, Account, UserPassTickets, User
+from core.models import Preference
+from core.helpers import get_domain_with_protocol
 from urlparse import urlparse
 from rest_framework import authentication
 from rest_framework import exceptions
@@ -18,36 +19,34 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
         current_date = self._get_current_date()
 
         # check if we are at a account domain or at junar
-        domain = get_domain(request)
 
-        if domain and domain != settings.API_BASE_URI:
-            account_id = self.resolve_account(request)
-            if not account_id:
-                raise exceptions.AuthenticationFailed('No account')
-
-        user_id = self.resolve_user(request, account_api=account_id == True)
-        if not user_id:
-            raise exceptions.AuthenticationFailed('No user') 
+        account_id = self.resolve_account(request)
+        #if not account_id:
+        #    raise exceptions.AuthenticationFailed('No account')
 
         passticket = request.GET.get('passticket', None)
         if passticket:
             user_id = UserPassTickets.objects.resolve_user_id(passticket, request.response)
 
-        user = User.objects.get(pk=user_id), 
+        if not user_id:
+            user_id = self.resolve_user(request, account_api=account_id == True)
+            if not user_id:
+                raise exceptions.AuthenticationFailed('No user') 
+
+        user = User.objects.get(pk=user_id)
         account_id = account_id or user.account.id
 
         account = Account.objects.get(pk=account_id)
 
-        ## Todo: Aca porque el lenguaje depende de passtickeT???? lo herede de 
-        # la clase auth d emiddleware y de cuando busco el lenguaje para 
-        # serialier el datastream. pero par ami la seleccion del lenguage va a aca.
-        language = 'en'
-        if passticket:
-            language = account.get_preference('account.language')
+        language = account.get_preference('account.language') or 'en'
 
         bucket_name = account.get_preference('account.bucket.name')
         if not bucket_name:
             bucket_name = settings.AWS_BUCKET_NAME
+
+        preferences = account.get_preferences()
+
+        microsite_domain = self.get_microsite_domain(account.id)
 
         return (
             user, {
@@ -55,8 +54,21 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
                 'bucket_name': bucket_name,
                 'passticket':passticket,
                 'language': language,
+                'preferences': preferences,
+                'microsite_domain': microsite_domain,
             }
         )
+
+    def get_microsite_domain(self, account_id ):
+        """
+        get the account.domain preference by account_id
+        """
+        try:
+            account_domain = Preference.objects.values('value').get(key='account.domain', account = account_id)['value']
+            account_domain = 'http://' + account_domain
+        except Preference.DoesNotExist:
+            account_domain = get_domain_with_protocol('microsites')
+        return account_domain
 
     def resolve_user(self, request, account_api = False):
         try:
@@ -101,7 +113,7 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
                 return True
         return False
 
-    def resolve_account(self, request):
+    def resolve_account(self, request, domain):
         try:
             domain = get_domain(request)
 

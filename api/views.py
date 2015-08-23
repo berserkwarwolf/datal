@@ -8,7 +8,8 @@ from core.datastream_manager import forms
 from core.engine import invoke
 from django.shortcuts import get_object_or_404
 from core.helpers import RequestProcessor
-from rest_framework import status
+from core.daos.datastreams import DataStreamDBDAO
+from rest_framework import status, mixins
 from core.models import Category
 from core.search.elastic import ElasticFinderManager
 import logging
@@ -23,10 +24,47 @@ def action404(p_request):
 def action500(p_request):
     return HttpResponseServerError('{"error": 500, "message": "API Internal Server Error"}')
 
-class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
+class ResourceViewSet(viewsets.GenericViewSet):
+    def list(self, request):
+        search_form = forms.SearchForm(request.GET)
+        if search_form.is_valid():
+            query = search_form.cleaned_data['query']
+            max_results = search_form.cleaned_data['max_results']
+            order = search_form.cleaned_data['order']
+            if order and order=='top':
+                order = "hits: desc"
+            elif order and order=='last':
+                order =  "timestamp:asc"
+
+            user_id = request.user.id
+            account_id = request.auth['account'].id
+            datastreams, time, facets = ElasticFinderManager().search(query=query,
+                                                               max_results=max_results,
+                                                               account_id=account_id,
+                                                               user_id=user_id,
+                                                               resource=[self.data_type],
+                                                               order=order)
+            page = self.paginate_queryset(datastreams)
+            if page is not None:
+                serializer = self.get_serializer(page, many=True)
+                return self.get_paginated_response(serializer.data)
+
+            serializer = self.get_serializer(datastreams, many=True, context={'request':request} )
+
+            return Response(serializer.data)
+        else:
+            raise Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
+
+    def retrieve(self, request, guid=None, format='json'):
+        datastream = get_object_or_404(self.get_queryset(), guid=guid)
+        serializer = self.get_serializer(datastream, context={'request':request})
+        return Response(serializer.data)
+
+class DataStreamViewSet(ResourceViewSet):
     queryset = DataStream.objects.all() # solo esta para que lo levante el router, no se usa
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'
+    data_type = 'ds'
 
     @detail_route(methods=['get'])
     def rows(self, request, guid=None, pk=None, format='json'):
@@ -46,24 +84,12 @@ class DataStreamViewSet(viewsets.ReadOnlyModelViewSet):
         return Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
 
 
-    def retrieve(self, request, guid=None, format='json'):
-        datastream = get_object_or_404(self.get_queryset(), guid=guid)
-        datastream = DataStreamDBDAO().get(
+    def get_queryset(self):
+        datastream = DataStream.objects.get(guid=self.kwargs['guid'])
+        return DataStreamDBDAO().get(
             language='en',
             datastream_revision_id=datastream.last_published_revision.id)
-        serializer = DataStreamSerializer(datastream)
-        return Response(serializer.data)
 
-    def list(self, request):
-        ## Todo ver de donde saco la categoria
-        account = request.auth['account']
-        #language = request.auth['language'] 
-        #category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
+    
 
-        results, search_time, facets = ElasticFinderManager().search(
-            resource='dt',
-            account_id = account.id)
-
-        serializer = DataStreamSerializer(results, many=True)
-        return Response(serializer.data)
     

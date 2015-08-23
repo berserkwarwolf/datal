@@ -26,15 +26,18 @@ class DataStreamSerializer(serializers.Serializer):
 
     def to_representation(self, obj):
         answer={}
+
         self.tryKeysOnDict(answer, 'id', obj, ['guid'])
         self.tryKeysOnDict(answer, 'title', obj, ['title'])
         self.tryKeysOnDict(answer, 'description', obj, ['description'])
-        self.tryKeysOnDict(answer, 'user', obj, ['author'])
+        self.tryKeysOnDict(answer, 'user', obj, ['author', 'owner_nick'])
         self.tryKeysOnDict(answer, 'tags', obj, ['tags'])
-        self.tryKeysOnDict(answer, 'created_at', obj, ['created_at'])
-        self.tryKeysOnDict(answer, 'endpoint', obj, ['endpoint'])
+        self.tryKeysOnDict(answer, 'created_at', obj, ['created_at', 'timestamp'])
+        self.tryKeysOnDict(answer, 'endpoint', obj, ['endpoint', 'end_point'])
         self.tryKeysOnDict(answer, 'link', obj, ['permalink'])
-        self.tryKeysOnDict(answer, 'category_id', obj, ['category_id'])
+        self.tryKeysOnDict(answer, 'category_id', obj, ['category_id', 'category'])
         self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
+
+        answer['link'] = self.context['request'].auth['microsite_domain'] + answer['link']
         return answer

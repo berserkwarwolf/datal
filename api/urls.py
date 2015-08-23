@@ -29,7 +29,7 @@ urlpatterns = patterns('',
     (r'^api/v2/datastreams$', action_update), # CREATE | UPDATE | PATCH A DATASTREAM
 
 
-    (r'^api/v3/', include(router.urls)), 
+    (r'^api/v1/', include(router.urls)), 
 
 )
 

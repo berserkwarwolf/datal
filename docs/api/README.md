@@ -22,6 +22,13 @@ Busca un listado de vistas.
 GET /api/v2/datastreams
 ```
 
+Si no hay parametros GET la API devuelve todos los datastreams que le corresponden a la cuenta 
+y al usuario sino se pueden pasar los siguientes parametros.
+
+- **query**: texto que se busca en todos los parametros del datastream
+- **offset**: a partir de que datastream traer el resultado (se usa para paginar)
+- **limit**: junto con offset se usa para limitar la cantidad de resultados 
+
 Trae la información asociada a una vista
 
 ```

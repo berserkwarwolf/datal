@@ -7,50 +7,6 @@ from core.choices import *
 
 import json
 
-class SearchForm(forms.Form):
-    query       = forms.CharField(required=True)
-    max_results = forms.IntegerField(required=False, max_value=100, min_value=1)
-
-    def clean_max_results(self):
-        l_default_max_results = settings.DEFAULT_SEARCH_MAX_RESULTS
-        try:
-            max_results = int(self.cleaned_data['max_results'])
-            return max_results <= l_default_max_results and max_results or l_default_max_results
-        except:
-            return l_default_max_results
-
-OUTPUTS = (
-    ('json', 'json')
-    ,('prettyjson', 'prettyjson')
-    ,('json_array', 'json_array')
-    ,('csv', 'csv')
-    ,('xls', 'xls')
-    ,('html', 'html')
-    ,('xml', 'xml')
-    ,('', '')
-)
-
-class InvokeForm(forms.Form):
-    invalid_choice_message = 'The output option is not valid, please use one of the following: %s.' % ', '.join([ tup[0] for tup in OUTPUTS if tup[0] ])
-    output = forms.ChoiceField(required=False, choices=OUTPUTS, error_messages={'invalid_choice': invalid_choice_message})
-    passticket = forms.CharField(required=False)
-    page = forms.IntegerField(required=False)
-    limit = forms.IntegerField(required=False)
-    if_modified_since = forms.IntegerField(required=False)
-
-    def clean_output(self):
-        output = self.cleaned_data['output'].strip()
-        if not output:
-            return 'json'
-        else:
-            return output
-
-    def get_error_description(self):
-        error_description = ''
-        for error in self.errors:
-            error_description = error_description + "%s" % ("\n".join([ message for message in self.errors[error]]))
-        return error_description
-
 class PublishForm(forms.Form):
     title = forms.CharField(required=True, max_length=80)
     description = forms.CharField(required=False, max_length=140)

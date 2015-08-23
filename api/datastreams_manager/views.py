@@ -15,138 +15,13 @@ from api.http import JSONHttpResponse, HttpResponse
 from api.managers import *
 from api.datastreams_manager import forms as formsw #TODO fix moving to core or someting similar
 from api.decorators import public_access_forbidden
-from api.helpers import get_domain, add_domain_to_datastream_link
+from api.helpers import add_domain_to_datastream_link
 from api.v2.datastreams import forms
 from api.sources_manager.utils import *
 from api.exceptions import Http400
 
 import json
 import logging
-
-
-def action_view(request, guid):
-    #is_method_get_or_405(request)
-    datastream  = get_object_or_404(DataStream, guid=guid)
-    passticket = request.GET.get('passticket', None)
-    user_id = UserPassTickets.objects.resolve_user_id(passticket, request.user_id)
-    language = Account.objects.get(pk=request.account_id).get_preference('account.language')
-    response = datastream.as_dict(user_id, language)
-    add_domain_to_datastream_link(response)
-    return JSONHttpResponse(json.dumps(response))
-
-def action_invoke(request, guid):
-    """invoke the datastream data by datastream-GUID"""
-    is_method_get_or_405(request)
-    form = forms.InvokeForm(request.GET)
-
-    if form.is_valid():
-        output = form.cleaned_data['output']
-        passticket = form.cleaned_data['passticket']
-        user_id = UserPassTickets.objects.resolve_user_id(passticket, request.user_id)
-        # (andres) always returns None, maybe we need the following lines
-        # if not user_id:
-        #     user_id = request.user_id
-
-        page = form.cleaned_data['page']
-        limit = form.cleaned_data['limit']
-        if_modified_since = form.cleaned_data['if_modified_since']
-        # get the related datastream (by GUID)
-        datastream = get_object_or_404(DataStream, guid=guid)
-
-        # count this HITS (? it's a new DataStreamHits)
-        create_report(datastream.id, DataStreamHits, ChannelTypes.API)
-        # get the data
-        contents, mimetype = datastream.invoke(request, output, user_id, page, limit, if_modified_since)
-        return HttpResponse(contents, mimetype=mimetype)
-
-    else:
-        raise Http400(form.get_error_description())
-
-def action_search(request):
-    is_method_get_or_405(request)
-    search_form = forms.SearchForm(request.GET)
-    if search_form.is_valid():
-        query = search_form.cleaned_data['query']
-        max_results = search_form.cleaned_data['max_results']
-        user_id = request.user_id
-        account_id = request.account_id
-        datastreams, time, facets = FinderManager().search(query=query,
-                                                           max_results=max_results,
-                                                           account_id=account_id,
-                                                           user_id=user_id,
-                                                           resource=['ds'])
-
-        account_domain = get_domain(account_id)
-        for item in datastreams:
-            link = item['link']
-            item['link'] = account_domain + link
-
-        return JSONHttpResponse(json.dumps(datastreams))
-    else:
-        raise Http400
-
-def action_last(request):
-    is_method_get_or_405(request)
-    form = forms.LastForm(request.GET)
-    if form.is_valid():
-        max_results = form.cleaned_data['max_results']
-        account_id = request.account_id
-
-        datastream_ids = DataStream.objects.get_last(account_id = account_id
-                                                     , limit = max_results)
-
-        datastreams_objects = DataStream.objects.filter(id__in = datastream_ids).order_by('-id')
-        datastreams = []
-        account_domain = get_domain(account_id)
-        language = Account.objects.get(pk=account_id).get_preference('account.language')
-        for datastream in datastreams_objects:
-            datastream_dict = datastream.as_dict(language)
-            link = datastream_dict['link']
-            datastream_dict['link'] = account_domain + link
-            datastreams.append(datastream_dict)
-
-        return JSONHttpResponse(json.dumps(datastreams))
-    else:
-        raise Http400
-
-def action_top(request):
-    is_method_get_or_405(request)
-    form = forms.TopForm(request.GET)
-    if form.is_valid():
-        max_results = form.cleaned_data['max_results']
-        account_id = request.account_id
-
-        datastream_ids = DataStream.objects.get_top(account_id = account_id
-                                                     , limit = max_results)
-
-        datastreams_objects = DataStream.objects.filter(id__in = datastream_ids)
-        datastreams = []
-        account_domain = get_domain(account_id)
-        language = Account.objects.get(pk=account_id).get_preference('account.language')
-        for datastream in datastreams_objects:
-            datastream_dict = datastream.as_dict(language = language)
-            link = datastream_dict['link']
-            datastream_dict['link'] = account_domain + link
-            datastreams.append(datastream_dict)
-
-        return JSONHttpResponse(json.dumps(datastreams))
-    else:
-        raise Http400
-
-
-@public_access_forbidden
-def action_history(request, guid):
-    is_method_get_or_405(request)
-    alert = get_object_or_404(Alert, task__guid = guid)
-
-    return JSONHttpResponse(json.dumps(alert.get_history()))
-
-@public_access_forbidden
-def action_history_list(request, guid, uid):
-    is_method_get_or_405(request)
-    history_list = HistoryManager().get_history_list(guid, uid)
-    return JSONHttpResponse(json.dumps(history_list))
-
 
 @require_POST
 @transaction.autocommit
