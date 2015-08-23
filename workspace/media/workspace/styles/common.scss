@@ -43,7 +43,7 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
   &.active{
     & > .button.primary{background-color:$button-primary-hover-color;}
   }
-  .dropdown{display:none;position:absolute;top:47px;right:0;z-index:300;background:#fff;
+  .dropdown{display:none;position:absolute;top:47px;right:0;z-index:300;background:#fff;min-width:100%;
     li{border-top:1px solid #3580cc;
       &:first-child{border:0;}
       .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
@@ -377,8 +377,10 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
     h1,
     h2,
     h3{font-family:$font-titles-family;}
-    h1{font-size:$font-size-xl;line-height:normal;}
-    h1 a{}
+    h1{font-size:$font-size-xl;line-height:normal;
+      a{}
+      .total-resources{color:#808080;}
+    }
     h2{font-size:$font-size-l;line-height:normal;}
     h3{font-size:$font-size-m;line-height:normal;}
 

@@ -2648,10 +2648,10 @@ msgid "APP-COLLECT-SUBTITLE"
 msgstr "Elija una opción para continuar."
 
 msgid "APP-WEBSITE-TEXT"
-msgstr "Website / Archivo remoto"
+msgstr "Desde una url o sitio web..."
 
 msgid "APP-WEBSERVICE-TEXT"
-msgstr "Servicio web"
+msgstr "Desde un servicio web..."
 
 msgid "APP-COLLECT-UPLOAD-TITLE"
 msgstr "Subir desde su computadora"
@@ -2660,7 +2660,7 @@ msgid "APP-MANDATORY-FIELDS-TEXT"
 msgstr "Los campos que contienen (<span class='required'>*</span>) son requeridos."
 
 msgid "APP-UPLOAD-FILE-TEXT"
-msgstr "Subir archivo"
+msgstr "Desde un archivo..."
 
 msgid "APP-SELECT-FILE-TEXT"
 msgstr "Seleccionar"
@@ -2946,3 +2946,6 @@ msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM
 
 msgid "APP-BACK-TEXT"
 msgstr "Volver"
+
+msgid "APP-ADDNEWDATASET-TEXT"
+msgstr "Nuevo conjunto de datos"

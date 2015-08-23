@@ -48,13 +48,7 @@
   <!-- Column Left -->
   <div class="col-lg-7">    
     
-    <h1>#Nombre del conjunto de datos 41el máximo disponible de caracteres que serían 80</h1>
-
-    <div class="status-row clearfix">
-      <span class="status">En revisión</span>
-      <span class="publish-version">Última versión publicada: 30 de Septiembre de 2015, <a href="" class="link black" title="Ver en sitio">Ver en sitio</a></span>
-      <span class="row-actions"><a href="" class="link black" title="Despublicar">Despublicar</a></span>
-    </div>
+    <h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datasets }})</span></h1>
 
   </div>
 
@@ -62,51 +56,17 @@
   <div class="col-lg-5 context-buttons clearfix">
     
     <div class="button-pulldown FR">
-      <a class="button primary" title="Crear visualización">Crear visualización<span class="icon icon-right icon-pulldown"></span></a>
+      <a class="button primary" title="{% trans 'APP-ADDNEWDATASET-TEXT' %}">{% trans 'APP-ADDNEWDATASET-TEXT' %}<span class="icon icon-right icon-pulldown"></span></a>
       <ul class="dropdown" style="display:none;">
-        <li><a class="button primary" title="Desde un archivo...">Desde un archivo...</a></li>
-        <li><a class="button primary" title="Desde una url o sitio web...">Desde una url o sitio web...</a></li>
-        <li><a class="button primary" title="Desde un servicio web...">Desde un servicio web...</a></li>
+        <li><a  href="{% url 'manageDatasets.create_type' 'file' %}" class="button primary" title="{% trans 'APP-UPLOAD-FILE-TEXT' %}">{% trans 'APP-UPLOAD-FILE-TEXT' %}</a></li>
+        <li><a href="{% url 'manageDatasets.create_type' 'url' %}" class="button primary" title="{% trans 'APP-WEBSITE-TEXT' %}">{% trans 'APP-WEBSITE-TEXT' %}</a></li>
+        <li><a href="{% url 'manageDatasets.create_type' 'webservice' %}" class="button primary" title="{% trans 'APP-WEBSERVICE-TEXT' %}">{% trans 'APP-WEBSERVICE-TEXT' %}</a></li>
       </ul>
     </div>
 
-    <a href="" class="button FR" title="Enviar a revisión">Enviar a revisión</a>
-    
-    <div class="more-actions button-pulldown FR">
-      <div class="button more-button">
-        <span class="icon icon-more"></span>
-      </div>
-      <ul class="dropdown" style="display:none;">
-        <li><a class="button" title="Edit"><span class="icon icon-edit"></span>Edit</a></li>
-        <li><a class="button red" title="Delete"><span class="icon icon-delete"></span>Delete</a></li>
-      </ul>
-    </div>    
-
   </div>
 
-</div>  
-
-
-
-
-{% comment %}
-
-<h1>{% trans "APP-DATASETS-TEXT" %}</h1>
-<div class="bulk-actions FL clearfix" style="display:none;">
-   <select id="id_bulkActions" class="FL">
-      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
-      <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
-      <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
-   </select>
-   <button id="id_applyBulkActions" class="button small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
 </div>
-<ul class="actions FR">
-   <li><a href="{% url 'manageDatasets.create' %}" class="button small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-</ul>
-
-{% endcomment %}
-
-
 
 {% endblock %}
 

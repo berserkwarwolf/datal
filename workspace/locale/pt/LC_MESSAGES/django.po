@@ -2655,10 +2655,10 @@ msgid "APP-COLLECT-SUBTITLE"
 msgstr "Choose an option to continue."
 
 msgid "APP-WEBSITE-TEXT"
-msgstr "Website / web-hosted file"
+msgstr "From an url or website... "
 
 msgid "APP-WEBSERVICE-TEXT"
-msgstr "Web service"
+msgstr "From a web service..."
 
 msgid "APP-COLLECT-UPLOAD-TITLE"
 msgstr "Collect from your computer"
@@ -2667,7 +2667,7 @@ msgid "APP-MANDATORY-FIELDS-TEXT"
 msgstr "Fields marked with (<span class='required'>*</span>) are mandatory."
 
 msgid "APP-UPLOAD-FILE-TEXT"
-msgstr "Upload file"
+msgstr "From a file..."
 
 msgid "APP-SELECT-FILE-TEXT"
 msgstr "Select file"
@@ -2950,3 +2950,6 @@ msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM,
 
 msgid "APP-BACK-TEXT"
 msgstr "Back"
+
+msgid "APP-ADDNEWDATASET-TEXT"
+msgstr "New Dataset"
