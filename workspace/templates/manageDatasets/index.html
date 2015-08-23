@@ -61,17 +61,24 @@
   <!-- Column Right -->
   <div class="col-lg-5 context-buttons clearfix">
     
-    <a href="" class="button primary FR" title="Crear visualización">Crear visualización</a>
+    <div class="button-pulldown FR">
+      <a class="button primary" title="Crear visualización">Crear visualización<span class="icon icon-right icon-pulldown"></span></a>
+      <ul class="dropdown" style="display:none;">
+        <li><a class="button primary" title="Desde un archivo...">Desde un archivo...</a></li>
+        <li><a class="button primary" title="Desde una url o sitio web...">Desde una url o sitio web...</a></li>
+        <li><a class="button primary" title="Desde un servicio web...">Desde un servicio web...</a></li>
+      </ul>
+    </div>
 
     <a href="" class="button FR" title="Enviar a revisión">Enviar a revisión</a>
     
-    <div class="more-actions FR">
+    <div class="more-actions button-pulldown FR">
       <div class="button more-button">
         <span class="icon icon-more"></span>
       </div>
       <ul class="dropdown" style="display:none;">
-        <li><a href="" class="button icon edit" title="Edit">Edit</a></li>
-        <li><a href="" class="button icon delete" title="Delete">Delete</a></li>
+        <li><a class="button" title="Edit"><span class="icon icon-edit"></span>Edit</a></li>
+        <li><a class="button red" title="Delete"><span class="icon icon-delete"></span>Delete</a></li>
       </ul>
     </div>    
 

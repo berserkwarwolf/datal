@@ -9,6 +9,7 @@ var BaseView = Backbone.View.extend({
 
 	events: {
 		"click .header .tab.pulldown > a": "onHeaderPulldownButtonClicked",
+		"click .button-pulldown .button": "toggleDropDownMenu"
 	},
 
 	initialize: function(){
@@ -105,6 +106,18 @@ var BaseView = Backbone.View.extend({
 	    scrOfX = document.documentElement.scrollLeft;
 	  }
 	  return [ scrOfX, scrOfY ];
+	},
+
+	// Toogle More Actions Dropdown menu
+	toggleDropDownMenu: function(event){
+
+		var button = $(event.currentTarget);
+
+		if( button.hasClass('more-button') && $('body').width() >= 1400 ){
+			return false;
+		}
+
+		button.parents('.button-pulldown').toggleClass('active').find('.dropdown').toggle();
 	}
 
 });

@@ -15,6 +15,13 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
   &.primary{background:$button-primary-color;border-color:transparent;color:$button-primary-text-color;}
   &.primary:hover{background:$button-primary-hover-color;}
 
+  /* Active state - Normal and Primary */
+  &:active{@include box-shadow(0 5px 5px rgba(0,0,0,.35));}
+
+  /* Dont apply active state to these */
+  &.alpha:active,
+  &.more-button{@include box-shadow(0 0 0 transparent);}
+  
   /* Disabled */
   &[disabled=disabled], 
   &:disabled,
@@ -28,6 +35,47 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
     .icon-more{margin:0;}
   }
 
+}
+
+/* Button pulldown */
+.button-pulldown{position:relative;
+  & > .button.primary{@include box-shadow(0 0 0 transparent);}
+  &.active{
+    & > .button.primary{background-color:$button-primary-hover-color;}
+  }
+  .dropdown{display:none;position:absolute;top:47px;right:0;z-index:300;background:#fff;
+    li{border-top:1px solid #3580cc;
+      &:first-child{border:0;}
+      .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
+        &:hover{background-color:$button-primary-hover-color;}
+      }
+    }
+  }
+}
+
+/* More Actions */
+.more-actions{
+  .dropdown{border:1px solid #ccc;
+    li{border-top:1px solid #ccc;
+      &:first-child{border:0;}
+      a.button{width:auto;min-width:120px;display:block;border:0;text-align:left;@include box-shadow(0 0 0 transparent);
+        .icon{display:none;}
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .more-actions{
+    .more-button{display:none;}
+    .dropdown{border:0;display:block !important;position:static;
+      li{border:0;float:left;margin-left:15px;
+        a.button{width:48px;min-width:0;border:1px solid #ccc;text-indent:-10000px;line-height:48px;overflow:hidden;position:relative;
+          .icon{display:block;width:24px;height:24px;position:absolute;top:11px;left:11px;margin:0;}
+        }
+      }
+    }
+  }
 }
 
 /* Links */
@@ -45,6 +93,10 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
   &:disabled{color:#999 !important;cursor:default;}
 
 }
+
+/* Red text */
+.red{color:#c1272d;}
+a.red:hover{color:#ea3442;}
 
 /* Context buttons */
 .context-buttons > *{
@@ -225,9 +277,10 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
   .logo:hover{background-position:0 -#{ $header-height };}
   
   #id_openDataSiteButton,
-  #id_backLink{height:$header-height;font:13px/$header-height arial,helvetica,sans-serif;}
+  #id_backLink{height:$header-height;font:13px/#{ $header-height } arial,helvetica,sans-serif;}
   #id_openDataSiteButton{border-color:transparent;
     &:hover{background:$button-primary-color;color:$button-primary-text-color;}
+    .icon-right{margin-left:4px;}
   }
   #id_backLink{padding:0;}
 
@@ -236,6 +289,19 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
     & > a{display:block;line-height:46px;padding:0 15px;line-height:46px;@include transition(all, .1s, ease-in-out);
       &:hover{background:$nav-bg;color:$nav-text;}
       img{width:36px;height:36px;display:inline-block;margin-right:12px;vertical-align:middle;position:relative;top:-2px;}
+    }
+    &.pulldown{
+      &.active{
+        & > a{background:$nav-bg;color:$nav-text;}
+      }
+      .submenu ul{background:$nav-bg;
+        li{border-top:1px solid #2f3643;
+          &:first-child{border:0;}
+          a{color:$nav-text;display:block;padding:0 15px;height:48px;line-height:48px;
+            &:hover{background:$button-primary-color;color:$button-primary-text-color;}
+          }
+        }
+      }
     }
   }
   

@@ -59,6 +59,7 @@
 
 	/* Actions */
 	.icon-edit{background-position:-12px -264px;}
+	.button:hover .icon-edit{background-position:-48px -264px;}
 	.icon-edit:active{background-position:-84px -264px;}
 	.icon-edit.fill-background{background-position:0 -290px;}
 
@@ -66,7 +67,8 @@
 	.icon-add.fill-background{background-position:0 -360px;}
 
 	.icon-delete{background-position:-12px -408px;}
-	.icon-delete:hover{background-position:-48px -408px;}
+	.icon-delete:hover,
+	.button:hover .icon-delete{background-position:-48px -408px;}
 
 	.icon-zoom-in{background-position:-12px -444px;}
 	.icon-zoom-in:active{background-position:-84px -444px;}
@@ -78,7 +80,24 @@
 		.icon-edit:hover,
 		.icon-add:hover,
 		.icon-zoom-in:hover,
-		.icon-zoom-out:hover{opacity:.5;}
+		.icon-zoom-out:hover{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50";}
+		.button:hover .icon-edit{opacity:1;filter:alpha(opacity=100);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100";}
+
+	/* Pull down */
+	.icon-pulldown,
+	.button-pulldown .button .icon-pulldown{background-position:-12px -804px;top:-1px;}
+		/* Tab - Header */
+		.tab.pulldown .icon-pulldown{background-position:-12px -768px;display:inline-block;vertical-align:middle;position:relative;}
+		.tab.pulldown:hover .icon-pulldown{background-position:-12px -804px;}
+		/* Active / hover */
+		.button-pulldown.active .button .icon-pulldown,
+		.tab.pulldown.active .icon-pulldown{background-position:-12px -876px;}
+
+		/* Remove margin */
+		.button .icon-pulldown,
+		.button .icon-pulldown.icon-right,
+		.tab.pulldown .icon-pulldown,
+		.tab.pulldown .icon-pulldown.icon-right{margin:0;}
 
 
 	/* Charts */
