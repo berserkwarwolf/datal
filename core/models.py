@@ -777,6 +777,9 @@ class DatasetRevision(models.Model):
                 self.sourcedataset_set.add(source_dataset)
         self.save()
 
+    def get_tags(self):
+        return self.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
+
     def get_sources(self):
         """ return sources """
         return self.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
