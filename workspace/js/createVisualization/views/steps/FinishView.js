@@ -2,11 +2,10 @@ var FinishView = StepViewSPA.extend({
 
 	initialize: function(){
 
-		// Right way to extend events without overriding the parent ones
-		var eventsObject = {}
-		eventsObject['click a.backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click a.finishButton'] = 'onFinishButtonClicked';
-		this.addEvents(eventsObject);
+		this.addEvents({
+			'click a.backButton': 'onPreviousButtonClicked',
+			'click a.finishButton': 'onFinishButtonClicked'
+		});
 
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
@@ -28,9 +27,16 @@ var FinishView = StepViewSPA.extend({
 
 	onFinishButtonClicked: function(){		
 
-		console.log(this.model.getSettings());
-		this.model.save();
-		alert('TODO: save! & redirect!');
+		var data = this.model.getSettings();
+		$.ajax({
+			url: '/visualizations/create?datastream_revision_id='+ this.model.get('datastream_revision_id'),
+			type:'POST',
+			data: data,
+			dataType: 'json'
+		}).then(function (response) {
+			console.log(response);
+			alert('TODO: save! & redirect!');
+		});
 
 	}
 
