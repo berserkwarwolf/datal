@@ -20,12 +20,12 @@ def datastream_as_dict(self, user_id=None, language='en'):
         raise
 
     sorted_dict = SortedDict([
-        ('id', dao['guid']),
-        ('title', dao['title']),
-        ('description', dao['description']),
-        ('user', dao['author']),
-        ('tags', doc.get_tags()),
-        ('created_at', str(dao['created_at'])),
+        ('id', dao.guid),
+        ('title', dao.title),
+        ('description', dao.description),
+        ('user', dao.author),
+        ('tags', doc.tags),
+        ('created_at', str(dao.created_at)),
         ('source', doc.filename),
         ('link', doc.permalink())
     ])
@@ -143,19 +143,6 @@ DataStream.invoke = invoke
 
 def result_as_json(self, response, user_id):
     """ Returns the information  as a dictionary """
-
-    """
-    sorted_dict = self.as_dict(user_id)
-
-        # @XXX this is a funky hack used to keep the order in the JSON
-        # response from engine, if there is a way to translate JSON strings
-        # into SortedDict, delete this hack
-    sorted_dict.insert(4, 'result', "{{json_result_response_to_replace}}")
-    add_domain_to_datastream_link(sorted_dict)
-    json_response = json.dumps(sorted_dict)
-    json_response = json_response.replace('"{{json_result_response_to_replace}}"', response)
-    """
-
     from api.v2.templates import DefaultApiResponse
     data = self.as_dict(user_id)
     add_domain_to_datastream_link(data)

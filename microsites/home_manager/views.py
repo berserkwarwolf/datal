@@ -12,26 +12,25 @@ from microsites.home_manager.managers import HomeFinder
 from core.http import get_domain
 import json
 import logging
-#import random
+
 
 @require_POST
 def action_update_list(request):
-    account         = request.account
-    auth_manager    = request.auth_manager
-    language        = auth_manager.language
-    preferences     = account.get_preferences()
+    account = request.account
+    auth_manager = request.auth_manager
+    language = auth_manager.language
+    preferences = account.get_preferences()
 
     form = forms.QueryDatasetForm(request.POST)
     if form.is_valid():
-        query       = form.cleaned_data.get('search')
-        page        = form.cleaned_data.get('page')
-        order       = form.cleaned_data.get('order')
-        order_type  = form.cleaned_data.get('order_type')
+        query = form.cleaned_data.get('search')
+        page = form.cleaned_data.get('page')
+        order = form.cleaned_data.get('order')
+        order_type = form.cleaned_data.get('order_type')
 
         resources = ['ds', 'db', 'chart', 'dt']
 
         if preferences['account_home_filters'] == 'featured_accounts':
-
             entity = form.cleaned_data.get('entity_filters')
             if entity:
                 accounts_ids = [int(entity)]
@@ -66,30 +65,33 @@ def action_update_list(request):
                 for category_name in category_filters.split(','):
                     categories.append(category_name)
 
-            results, search_time, facets = FinderManager(HomeFinder).search(category_name = categories,
-                                                                     query = query,
-                                                                     resource = resources,
-                                                                     max_results = 250,
-                                                                     order = order,
-                                                                     order_type = order_type,
-                                                                     account_id = account.id)
+            results, search_time, facets = FinderManager(HomeFinder).search(category_name=categories,
+                                                                     query=query,
+                                                                     resource=resources,
+                                                                     max_results=250,
+                                                                     order=order,
+                                                                     order_type=order_type,
+                                                                     account_id=account.id)
 
         paginator = Paginator(results, 25)
 
         if preferences['account_home_filters'] == 'featured_accounts':
             add_domains_to_permalinks(results)
 
-        response = {"number_of_pages": paginator.num_pages,
-                     "errors": [],
-                     "revisions": paginator.page(page and page or 1).object_list
-                   }
+        response = {
+            "number_of_pages": paginator.num_pages,
+            "errors": [],
+            "revisions": paginator.page(page and page or 1).object_list
+        }
     else:
-        response = {"number_of_pages": 0,
-                     "errors": ['Invalid data'],
-                     "revisions": []
-                   }
+        response = {
+            "number_of_pages": 0,
+            "errors": ['Invalid data'],
+            "revisions": []
+        }
 
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
+
 
 @require_GET
 def action_update_categories(request):
@@ -100,9 +102,9 @@ def action_update_categories(request):
     categories = Category.objects.get_for_home(language, account_id)
 
     return render_to_response(
-            'home_manager/categories.js',
-            locals(),
-            mimetype="text/javascript"
+        'home_manager/categories.js',
+        locals(),
+        mimetype="text/javascript"
     )
 
 
@@ -153,9 +155,11 @@ def action_query(request):
             account_id = account.id
             categories = Category.objects.get_for_home(language, account_id)
 
-        results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
-                                                                    order = '1',
-                                                                    account_id = account_id)
+        results, search_time, facets = FinderManager(HomeFinder).search(
+            max_results=250,
+            order='1',
+            account_id=account_id
+        )
 
         paginator = Paginator(results, 25)
         revisions = paginator.page(1)
@@ -164,6 +168,7 @@ def action_query(request):
             add_domains_to_permalinks(revisions.object_list + datastreams)
 
         return render_to_response('home_manager/queryList.html', locals())
+
 
 def action_sitemap(request):
     import datetime
@@ -176,7 +181,10 @@ def action_sitemap(request):
     domain = get_domain(request)
     now = datetime.datetime.now()
 
-    datastreams = DataStream.objects.filter(user__account_id=account.id, datastreamrevision__status=3).order_by('-id').distinct()
+    datastreams = DataStream.objects.filter(
+        user__account_id=account.id,
+        datastreamrevision__status=3
+    ).order_by('-id').distinct()
 
     dss = []
     for ds in datastreams:
@@ -187,9 +195,12 @@ def action_sitemap(request):
             continue
 
         dic["date"] = datetime.datetime.strptime(dic["created_at"], "%Y-%m-%d %H:%M:%S").date()
-        dss.append(dic) #(user_id = request.auth_manager.id, language = language))
+        dss.append(dic)
 
-    visualizations = Visualization.objects.filter(user__account_id=account.id, visualizationrevision__status=3).order_by('-id').distinct()
+    visualizations = Visualization.objects.filter(
+        user__account_id=account.id,
+        visualizationrevision__status=3
+    ).order_by('-id').distinct()
 
     vss = []
     for vs in visualizations:
@@ -200,9 +211,12 @@ def action_sitemap(request):
             continue
 
         dic ["date"] = datetime.datetime.strptime(dic["created_at"], "%Y-%m-%d %H:%M:%S").date()
-        vss.append(dic) #(user_id = request.auth_manager.id, language = language))
+        vss.append(dic)
 
-    dashboards = Dashboard.objects.filter(user__account_id=account.id, dashboardrevision__status=3).order_by('-id').distinct()
+    dashboards = Dashboard.objects.filter(
+        user__account_id=account.id,
+        dashboardrevision__status=3
+    ).order_by('-id').distinct()
 
     dshs = []
     for dsh in dashboards:
@@ -213,7 +227,6 @@ def action_sitemap(request):
             continue
 
         dic ["date"] = datetime.datetime.strptime(dic["created_at"], "%Y-%m-%d %H:%M:%S").date()
-        dshs.append(dic) #(user_id = request.auth_manager.id, language = language))
-
+        dshs.append(dic)
 
     return render_to_response('sitemap.xml',locals(),mimetype="application/xml")
