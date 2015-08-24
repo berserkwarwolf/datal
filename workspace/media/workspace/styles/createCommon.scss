@@ -26,7 +26,6 @@
 .create .title{text-transform:uppercase;font-size:$font-size-base;padding:15px 0 10px;}
 .create .required{color:#d21717;padding-left:5px;}
 .create header .required{padding-left:0;}
-.create .formContent .required{float:right;padding-right:12px;}
 
 .create .wrapper1, .create .wrapper2, .create .wrapper3{height:100%;width:100%;
   -webkit-border-radius:3px;
@@ -68,7 +67,7 @@
   .create .box .boxCreate{height:142px;}
 }
 
-.create .row label{font-size:12px;display:block;float:left;width:34%;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;
+.create .row label{font-size:12px;display:block;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -90,7 +89,7 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:$form-label-size;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
+.create .formContent .row label{font-size:$form-label-size;line-height:inherit;height:inherit;color:$form-label-color;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
 .create .formContent .row textarea{width:440px;
   -webkit-box-sizing:border-box;
@@ -103,10 +102,6 @@
 .create .formContent .row.checkbox{}
 .create .formContent .row.checkbox input[type=checkbox]{width:auto;float:left;position:relative;top:6px;}
 .create .formContent .row.checkbox p.tip{margin-left:0;float:left;clear:none;margin-top:8px;}
-.create .formContent .row .tagsContent,
-.create .formContent .row .sourcesContent,
-.create .formContent .row .paramContent{margin-left:115px;}
-.formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
 .create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
