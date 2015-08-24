@@ -36,7 +36,8 @@ var ChartSelectDataModalView = ModalView.extend({
 	onCloseClicked: function (e) {
 		this.close(); //Close modal
 		var selectedRows = this.collection.getRows();
-		this.model.data.set('fields', [['number', 'year'], ['number', 'population']]);
+		var selectedFields = this.collection.getFields();
+		this.model.data.set('fields', selectedFields);
 		this.model.data.set('rows', selectedRows);
 		this.model.set('selection', this.collection.getSelectionExcelStyle());
 	},

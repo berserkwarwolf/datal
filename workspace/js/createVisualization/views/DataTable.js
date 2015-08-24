@@ -60,6 +60,7 @@ var DataTableView = Backbone.View.extend({
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true, readOnly: true,
       allowInsertRow: false, allowInsertColumn: false,
+      disableVisualSelection: ['current'],
       colWidths: 80,
       columns: columns,
     });

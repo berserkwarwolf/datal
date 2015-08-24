@@ -49,22 +49,22 @@ var ChartView = StepViewSPA.extend({
 
 	onChartTypeClicked: function(e){
 		e.preventDefault();
-		var type = $(e.target).data('type');
+		var type = $(e.currentTarget).data('type');
 		this.selectGraphType(type);
 	},
 
 	onChartLibraryChanged: function(e){
-		var lib = $(e.target).val();
+		var lib = $(e.currentTarget).val();
 		this.model.set('lib',lib);
 	},
 
 	onInputChanged: function(e){
-		var input = $(e.target);
+		var input = $(e.currentTarget);
 		this.model.set(input.data('ref'),input.val());
 	},
 
 	onRadioChanged: function(e){
-		var input = $(e.target);
+		var input = $(e.currentTarget);
 		this.model.set(input.attr('name'),input.val());
 
 		if(input.val()=='given'){
@@ -104,6 +104,7 @@ var ChartView = StepViewSPA.extend({
 			this.ChartViewClass = chartSettings.Class;
 
 		} else {
+			delete this.ChartViewClass;
 			console.log('There are not class for this');
 		}
 
@@ -141,12 +142,8 @@ var ChartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 
-		// default google
-		this.model.set('lib','google');
-
 		// chart type from first step
 		var initial = this.model.get('type');
-		initial = (initial)?initial:'line';
 		this.selectGraphType(initial);
 
 	},

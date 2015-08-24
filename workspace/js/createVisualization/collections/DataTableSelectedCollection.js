@@ -12,9 +12,15 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 		});
 	},
 
+	getFields: function () {
+		return _.map(this.getColumns(), function (col) {
+			return ['number', _.first(col)];
+		});
+	},
+
 	getRows: function () {
 		return _.map(_.rest(_.unzip(this.getColumns())), function (row) {
-			return [parseInt(row[0]), parseFloat(row[1])];
+			return _.map(row, parseFloat);
 		});
 	}
 });
