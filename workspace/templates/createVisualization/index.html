@@ -61,10 +61,17 @@
 
 <!-- Create Viz StepViews -->
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/StartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Create Chats StepViews -->
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/ChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/MetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/FinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/invoke.js"></script>
+
+<!-- Create Map StepViews -->
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapMetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Viz modals -->
 <script language="javascript" src="/js_workspace/createVisualization/views/ModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -98,11 +105,17 @@
     <!-- Steps will be Rendered here -->
 
 
-    <!-- Include templates -->
+    <!-- Include charts templates -->
     {% include "createVisualization/steps/0_start.html" %}
     {% include "createVisualization/steps/1_chart.html" %}
     {% include "createVisualization/steps/2_metadata.html" %}
     {% include "createVisualization/steps/3_finish.html" %}
+  
+    <!-- Include map templates -->  
+    {% include "createVisualization/steps/map/1_map.html" %}
+    {% include "createVisualization/steps/map/2_map_metadata.html" %}
+    {% include "createVisualization/steps/map/3_map_finish.html" %}
+
   </div>
 
 {% endblock %}

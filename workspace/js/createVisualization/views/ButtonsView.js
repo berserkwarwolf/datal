@@ -16,13 +16,15 @@ var ButtonsView = Backbone.View.extend({
 	},
 
 	setSteps: function(steps){
-		if(steps.length){
+		if(steps && steps.length){
 			this.steps = steps;
 			this.renderSteps = [];
 			var self = this;
 			_.each(steps,function(step,i){
 				self.renderSteps.push({ix:i, name:step.options.name, el: step.options.el});
 			});
+		} else {
+			this.renderSteps = [];
 		}
 	},
 

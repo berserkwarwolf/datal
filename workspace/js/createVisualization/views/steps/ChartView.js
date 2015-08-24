@@ -81,9 +81,11 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChartChanged: function(){
-		console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
-		this.setupChart();
-		this.renderChart();
+		if(!this.model.get('isMap')){
+			console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
+			this.setupChart();
+			this.renderChart();
+		}
 	},
 
 	setupChart: function(){
@@ -126,7 +128,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onPreviousButtonClicked: function(){
-		this.previous();
+		this.goTo(0);
 	},
 
 	onNextButtonClicked: function(){		

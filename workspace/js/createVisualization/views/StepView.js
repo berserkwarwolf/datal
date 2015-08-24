@@ -45,6 +45,10 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 		this.$el.hide();
 	},
 
+	goTo: function(index){
+		this.trigger('goTo',index);
+	},
+
 	next: function(){
 		this.trigger('next');
 	},
@@ -55,6 +59,10 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 
 	openModal: function(id){
 		this.trigger('openModal', id);
+	},
+
+	setFlow: function(id){
+		this.trigger('setFlow', id);
 	},
 	// cancel: function(){},
 
