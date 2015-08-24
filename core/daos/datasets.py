@@ -34,7 +34,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                pk=F(fld_revision_to_get), category__categoryi18n__language=language,
                                dataseti18n__language=language)
 
-        tags = dataset_revision.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
+        tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 
 
