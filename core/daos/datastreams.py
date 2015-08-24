@@ -319,7 +319,7 @@ class DatastreamHitsDAO():
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
 
-    def hit(self,  channel_type):
+    def add(self,  channel_type):
         """agrega un hit al datastream. """
 
         try:

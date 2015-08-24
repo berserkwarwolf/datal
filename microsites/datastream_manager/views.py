@@ -52,7 +52,7 @@ def action_view(request, id, slug):
     can_export      = True
     can_share       = False
 
-    DatastreamHitsDAO(datastream).hit(ChannelTypes.WEB)
+    DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
 
 
 #    datastream_html = ''
@@ -119,7 +119,7 @@ def action_embed(request, guid):
     except Http404:
         return render_to_response('datastream_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    DataStreamHitsDAO(datastream).hit(ChannelTypes.WEB)
+    DataStreamHitsDAO(datastream).add(ChannelTypes.WEB)
     end_point = urllib.urlencode(parameters_query)
     header_row = request.REQUEST.get('header_row', False)
     fixed_column = request.REQUEST.get('fixed_column', False)
