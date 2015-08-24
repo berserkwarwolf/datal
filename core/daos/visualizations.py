@@ -5,7 +5,7 @@ from django.db.models import Q, F
 
 from core import settings
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits,
+from core.models import VisualizationRevision, VisualizationHits
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
