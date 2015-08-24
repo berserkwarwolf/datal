@@ -2,7 +2,6 @@ var MainView = Backbone.View.extend({
 
     steps: {},
     currentFlow: 'charts',
-    modals: {},
     index: 0,
 
     events: {
@@ -57,23 +56,6 @@ var MainView = Backbone.View.extend({
         this.register( metadataView, 'charts' );
         this.register( finishView, 'charts' );
 
-        //Create charts modals
-        var selectDataModal = new ChartSelectDataModalView({
-          id: 'chartSelectDataModal',
-          el: '#chartSelectDataModal',
-          model: this.model
-        }).render();
-
-        var selectLabelModal = new ChartSelectLabelModalView({
-          id: 'chartSelectLabelModal',
-          el: '#chartSelectLabelModal',
-          model: this.model
-        });
-
-        //Register charts modals
-        this.registerModal( selectDataModal, 'charts'  );
-        this.registerModal( selectLabelModal, 'charts'  );
-
         //Create maps steps
         var mapView = new MapView({
           name: gettext('APP-CUSTOMIZE-TEXT'), 
@@ -103,12 +85,8 @@ var MainView = Backbone.View.extend({
           id: 'mapSelectDataModal',
           el: '#mapSelectDataModal',
           model: this.model
-        }).render();
+        });*/
 
-        //Register maps modals
-        this.registerModal( mapSelectDataModal, 'maps' );*/
-
-        //Start
         this.start();
 
     },
@@ -136,11 +114,6 @@ var MainView = Backbone.View.extend({
         }
 
         this.render();
-    },
-
-    registerModal: function(view){
-        this.modals[view.id] = view;
-        this.listenTo(view,'openModal',this.openModal);
     },
 
     setFlow: function(flow){
@@ -193,14 +166,6 @@ var MainView = Backbone.View.extend({
             this.finish();
         }
 
-    },
-
-    openModal: function(id){
-        if(this.modals[id]){
-            this.modals[id].open();
-        } else {
-            console.error('Modal no registrado');
-        }
     },
 
     goTo: function(index){

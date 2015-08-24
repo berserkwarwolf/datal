@@ -3,7 +3,7 @@ var MapSelectDataModalView = ModalView.extend({
 		'click a.close':'onCloseClicked'
 	},
 
-	render: function(){
+	initialize: function(){
 		var self = this;
 		ModalView.prototype.render.call(this);
 

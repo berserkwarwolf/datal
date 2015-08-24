@@ -23,14 +23,17 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-		// Bind model validation to view
-		//Backbone.Validation.bind(this);
+        this.selectDataModalView = new ChartSelectDataModalView({
+          el: '#chartSelectDataModal',
+          model: this.model
+        });
 
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 
-	}, 
+		this.setupChart();
+	},
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
@@ -44,7 +47,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onSelectDataClicked: function(){
-		this.openModal('chartSelectDataModal');
+		this.selectDataModalView.open();
 	},
 
 	onChartTypeClicked: function(e){

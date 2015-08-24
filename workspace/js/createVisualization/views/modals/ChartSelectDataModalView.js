@@ -4,9 +4,8 @@ var ChartSelectDataModalView = ModalView.extend({
 		'click button.btn-add-serie': 'addSelection'
 	},
 
-	render: function(){
+	initialize: function(){
 		var self = this;
-		ModalView.prototype.render.call(this);
 
 		//init table
 		this.collection = new DataTableSelectedCollection();
