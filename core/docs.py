@@ -227,12 +227,6 @@ class DS:
                  ORDER BY `ao_dataset_revisions`.`id` DESC, `ao_datastream_parameters`.`position` ASC"""
         return _execute_sql(sql, [datastreamrevision_id, self.language, self.language])
 
-    def is_vz(self):
-        return False
-
-    def is_ds(self):
-        return True
-
     def get_tags(self):
         if self.tags is None:
             sql = """SELECT `ao_tags`.`name`
@@ -385,12 +379,6 @@ class VZ:
                             AND `ao_categories_i18n`.`language` = %s)
                     ORDER BY `ao_datastream_revisions`.`id` DESC, `ao_dataset_revisions`.`id` DESC, `ao_datastream_parameters`.`position` ASC"""
         return _execute_sql(sql, [visualizationrevision_id, self.language, self.language])
-
-    def is_vz(self):
-        return True
-
-    def is_ds(self):
-        return False
 
     def permalink(self, urlconf = DEFAULT_URLCONF):
         return reverse('chart_manager.action_view', urlconf, kwargs={'id': self.visualization_id, 'slug': self.slug})
