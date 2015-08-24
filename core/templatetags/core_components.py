@@ -10,9 +10,13 @@ register = template.Library()
 
 
 @register.tag(name="permalink")
-def permalink(pk):
-    url = ''
-    return url
+def permalink(pk, obj_type):
+    if obj_type == 'dataset':
+        return reverse(
+            'manageDatasets.action_view',
+            'microsites.urls',
+            kwargs={'dataset_id': pk, 'slug': ''}
+        )
 
 
 @register.filter(name="download")
