@@ -5,10 +5,6 @@ var ModalView = Backbone.View.extend({
 		this.$el.removeClass('hidden');
 	},
 
-	openModal: function(id){
-		this.trigger('openModal',id);
-	},
-
 	close: function(){
 		this.$el.addClass('hidden');
 	},

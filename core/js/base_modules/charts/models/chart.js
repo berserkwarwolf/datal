@@ -10,7 +10,8 @@ charts.models.Chart = Backbone.Model.extend({
         resourceUrl: '',
         resourceID: null,
         resourceIdAttribute: null,
-        type: null,
+        type: 'linechart',
+        lib: 'google',
         options: {}
     },
     initialize: function () {

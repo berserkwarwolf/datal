@@ -23,14 +23,17 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-		// Bind model validation to view
-		//Backbone.Validation.bind(this);
+        this.selectDataModalView = new ChartSelectDataModalView({
+          el: '#chartSelectDataModal',
+          model: this.model
+        });
 
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 
-	}, 
+		this.setupChart();
+	},
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
@@ -44,27 +47,27 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onSelectDataClicked: function(){
-		this.openModal('chartSelectDataModal');
+		this.selectDataModalView.open();
 	},
 
 	onChartTypeClicked: function(e){
 		e.preventDefault();
-		var type = $(e.target).data('type');
+		var type = $(e.currentTarget).data('type');
 		this.selectGraphType(type);
 	},
 
 	onChartLibraryChanged: function(e){
-		var lib = $(e.target).val();
+		var lib = $(e.currentTarget).val();
 		this.model.set('lib',lib);
 	},
 
 	onInputChanged: function(e){
-		var input = $(e.target);
+		var input = $(e.currentTarget);
 		this.model.set(input.data('ref'),input.val());
 	},
 
 	onRadioChanged: function(e){
-		var input = $(e.target);
+		var input = $(e.currentTarget);
 		this.model.set(input.attr('name'),input.val());
 
 		if(input.val()=='given'){
@@ -81,9 +84,11 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChartChanged: function(){
-		console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
-		this.setupChart();
-		this.renderChart();
+		if(!this.model.get('isMap')){
+			console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
+			this.setupChart();
+			this.renderChart();
+		}
 	},
 
 	setupChart: function(){
@@ -104,6 +109,7 @@ var ChartView = StepViewSPA.extend({
 			this.ChartViewClass = chartSettings.Class;
 
 		} else {
+			delete this.ChartViewClass;
 			console.log('There are not class for this');
 		}
 
@@ -126,7 +132,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onPreviousButtonClicked: function(){
-		this.previous();
+		this.goTo(0);
 	},
 
 	onNextButtonClicked: function(){		
@@ -141,12 +147,8 @@ var ChartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 
-		// default google
-		this.model.set('lib','google');
-
 		// chart type from first step
 		var initial = this.model.get('type');
-		initial = (initial)?initial:'line';
 		this.selectGraphType(initial);
 
 	},
