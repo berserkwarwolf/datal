@@ -15,7 +15,7 @@ def permalink(pk, obj_type):
         return reverse(
             'manageDatasets.action_view',
             'microsites.urls',
-            kwargs={'dataset_id': pk, 'slug': ''}
+            kwargs={'dataset_id': pk, 'slug': '-'}
         )
 
 
@@ -27,7 +27,7 @@ def download(dataset_revision):
     :return:
     """
     return reverse('dataset_manager.action_download', 'microsites.urls',
-                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': ''})
+                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': '-'})
 
 
 def datatable_search(table_prefix=''):

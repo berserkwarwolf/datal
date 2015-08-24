@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 from core.choices import ChannelTypes
-from core.docs import DS, DT
+from core.docs import DS
 from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response

@@ -822,13 +822,13 @@ class DatasetRevision(models.Model):
 
         logger = logging.getLogger(__name__)
 
-        from core.docs import DT
+        from core.daos.datasets import DatasetDBDAO
         import time
 
-        dataset = DT(self.id, language)
-        account = Account.objects.get(id = dataset.account_id)
+        dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
+        account = Account.objects.get(id=self.user.account.id)
 
-        text = [dataset.title, dataset.description, dataset.created_by_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
+        text = [dataset.title, dataset.description, dataset.user_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
         text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
@@ -844,11 +844,11 @@ class DatasetRevision(models.Model):
                 'fields' :
                     {'type' : 'dt',
                      'dataset_id': dataset.dataset_id,
-                     'datasetrevision_id': dataset.datasetrevision_id,
+                     'datasetrevision_id': dataset.dataset_revision_id,
                      'title': dataset.title,
                      'text': text,
                      'description': dataset.description,
-                     'owner_nick' : dataset.created_by_nick,
+                     'owner_nick' : dataset.user_nick,
                      'tags' : ','.join(dataset.get_tags()),
                      'account_id' : account_id,
                      'parameters': parameters,
@@ -865,7 +865,7 @@ class DatasetRevision(models.Model):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(get_meta_data_dict(dataset.metadata))
+        indexable_dict['fields'].update(get_meta_data_dict(dataset.meta_text))
 
         return indexable_dict
 

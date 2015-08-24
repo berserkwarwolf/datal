@@ -439,80 +439,7 @@ class VZ:
 
 class DT:
     def __init__(self, datasetrevision_id, language):
-        self.language = language
-        cursor = self.get_from_db(datasetrevision_id)
-        row = cursor.fetchone()
-        if row is None:
-            self.language = self.language == 'en' and 'es' or 'en'
-            cursor = self.get_from_db(datasetrevision_id)
-            row = cursor.fetchone()
-            if row is None:
-                raise Http404
-        self.dataset_id = row[0]
-        self.datasetrevision_id = row[1]
-        self.title = row[2]
-        self.description = row[3]
-        self.type = row[4]
-        self.filename = row[5]
-        self.end_point = row[6]
-        self.category_id = row[7]
-        self.category_name = row[8]
-        self.status = row[9]
-        self.created_by_id = row[10]
-        self.created_by_nick = row[11]
-        self.edited_by_id = row[12]
-        self.edited_by_nick = row[13]
-        self.created_at = row[14]
-        self.account_id = row[15]
-        self.dataseti18n_id = row[16]
-        self.impl_type = row[17]
-        self.metadata = row[18]
-        self.notes = row[19]
-        self.license_url = row[20]
-        self.spatial = row[21]
-        self.frequency = row[22]
-        self.mbox = row[23]
-        self.tags = None 
-        self.sources = None
-        self.slug = slugify(self.title)
-
-    def get_from_db(self, datasetrevision_id):
-        sql = """SELECT `ao_datasets`.`id` AS `dataset_id`
-                        , `ao_dataset_revisions`.`id` AS `datasetrevision_id`
-                        , `ao_dataset_i18n`.`title`
-                        , `ao_dataset_i18n`.`description`
-                        , `ao_datasets`.`type`
-                        , `ao_dataset_revisions`.`filename`
-                        , `ao_dataset_revisions`.`end_point`
-                        , `ao_categories`.`id` AS `category_id`
-                        , `ao_categories_i18n`.`name` AS `category_name`
-                        , `ao_dataset_revisions`.`status`
-                        , `ao_datasets`.`user_id` AS `created_by_id`
-                        , `resource_user`.`nick` AS `created_by_nick`
-                        , `revision_user`.`id` AS `edited_by_id`
-                        , `revision_user`.`nick` AS `edited_by_nick`
-                        , `ao_dataset_revisions`.`created_at`
-                        , `resource_user`.`account_id` AS `account_id`
-                        , `ao_dataset_i18n`.`id` AS `dataseti18n_id`
-                        , `ao_dataset_revisions`.`impl_type`
-                        , `ao_dataset_revisions`.`meta_text`
-                        , `ao_dataset_i18n`.`notes`
-                        , `ao_dataset_revisions`.`license_url`
-                        , `ao_dataset_revisions`.`spatial`
-                        , `ao_dataset_revisions`.`frequency`
-                        , `ao_dataset_revisions`.`mbox`
-                FROM `ao_datasets`
-                INNER JOIN `ao_dataset_revisions` ON (`ao_datasets`.`id` = `ao_dataset_revisions`.`dataset_id`)
-                INNER JOIN `ao_users` AS `resource_user` ON (`ao_datasets`.`user_id` = `resource_user`.`id`)
-                INNER JOIN `ao_users` AS `revision_user` ON (`ao_dataset_revisions`.`user_id` = `revision_user`.`id`)
-                INNER JOIN `ao_dataset_i18n` ON (`ao_dataset_revisions`.`id` = `ao_dataset_i18n`.`dataset_revision_id`)
-                INNER JOIN `ao_categories` ON (`ao_dataset_revisions`.`category_id` = `ao_categories`.`id`)
-                INNER JOIN `ao_categories_i18n` ON (`ao_categories`.`id` = `ao_categories_i18n`.`category_id`)
-                WHERE (`ao_dataset_revisions`.`id` = %s
-                        AND `ao_dataset_i18n`.`language` = %s
-                        AND `ao_categories_i18n`.`language` = %s)
-                ORDER BY `ao_dataset_revisions`.`id` DESC"""
-        return _execute_sql(sql, [datasetrevision_id, self.language, self.language])
+        pass
 
     def get_sources(self):
         if self.sources is None:
@@ -544,9 +471,6 @@ class DT:
                 self.tags.append(row[0])
                 row = cursor.fetchone()
         return self.tags
-
-    def permalink(self, urlconf=MS_URLCONF):
-        return reverse('manageDatasets.action_view', urlconf, kwargs={'dataset_id': self.dataset_id, 'slug': self.slug})
 
 
 class DBWidget:
