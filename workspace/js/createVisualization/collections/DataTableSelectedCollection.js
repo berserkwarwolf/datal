@@ -1,4 +1,5 @@
 var DataTableSelectedCollection = Backbone.Collection.extend({
+	model: DataTableSelectionModel,
 
 	getSelectionExcelStyle: function () {
 		return _.map(this.models, function (model) {

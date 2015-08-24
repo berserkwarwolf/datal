@@ -136,10 +136,7 @@ var DataTableView = Backbone.View.extend({
     var newId = this.available.pop(),
       range = this._selectedCoordsCache,
       data,
-      model = new Backbone.Model({
-        range: range,
-        id: newId
-      });
+      model;
     if (range.from.row === -1) {
       data = this.table.getDataAtCol(range.from.col);
     } else {
@@ -148,9 +145,17 @@ var DataTableView = Backbone.View.extend({
       // it should do something else, like split the columns into separate series.
       data = _.map(data, _.first);
     }
-    model.set('data', data);
-    model.set('selection', this.rangeToExcel(range));
-    this.collection.add(model);
+    model = new DataTableSelectionModel({
+      id: newId,
+      range: range,
+      selection: this.rangeToExcel(range),
+      data: data
+    });
+    if (model.isValid()) {
+      this.collection.add(model);
+    } else {
+      alert(model.validationError)
+    }
   },
 
   onAddSelected: function (model) {
