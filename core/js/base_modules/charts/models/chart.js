@@ -4,16 +4,14 @@ var charts = charts || {
 };
 
 charts.models.Chart = Backbone.Model.extend({
+    url: '',
     urlRoot: '/api/charts/',
     defaults: {
         resourceUrl: '',
         resourceID: null,
+        resourceIdAttribute: null,
         type: null,
-        options: {
-            title: 'Title',
-            xLabel: null,
-            yLabel: null
-        },
+        options: {}
     },
     initialize: function () {
         this.data = new charts.models.ChartData();
@@ -32,6 +30,10 @@ charts.models.Chart = Backbone.Model.extend({
         });
 
         return this.data.fetch();
+    },
+
+    getDataUrl: function () {
+        return this.get('resourceUrl') + this.get('resourceIdAttribute') + '=' + this.get('resourceID');
     },
 
     getSettings: function(){
