@@ -14,7 +14,8 @@ from core.engine import invoke
 from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
-from core.docs import VZ, DT
+from core.docs import VZ
+from core.daos.datasets import DatasetDBDAO
 from core.models import VisualizationRevision,DatasetRevision
 from api.http import JSONHttpResponse
 from core import helpers as LocalHelper
@@ -147,7 +148,7 @@ def view(request):
             else:
                 raise Http404
 
-            dataset_revision = DT(ds_revision.id, auth_manager.language)
+            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
 
             status = STATUS_CHOICES[int(visualization_revision.status)][1]
 

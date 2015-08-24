@@ -1,29 +1,31 @@
+import memcache
+
 from django.conf import settings
 from django.utils.datastructures import SortedDict
-from core.models import *
-from core.docs import DS, DB, VZ
-from core import engine
+
 from api.exceptions import Http400, Http401
 from api.helpers import add_domain_to_datastream_link
-
-import memcache
+from core.models import *
+from core.docs import DS, DB, VZ
+from core.daos.datastreams import DataStreamDBDAO
+from core import engine
 
 
 def datastream_as_dict(self, user_id=None, language='en'):
 
     try:
         datastreamrevision_id =  self.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
-        doc = DS(datastreamrevision_id, language)
+        dao = DataStreamDBDAO().get(language, datastream_revision_id=datastreamrevision_id, published=True)
     except Exception:
         raise
 
     sorted_dict = SortedDict([
-        ('id', doc.guid),
-        ('title', doc.title),
-        ('description', doc.description),
-        ('user', doc.created_by_nick),
+        ('id', dao['guid']),
+        ('title', dao['title']),
+        ('description', dao['description']),
+        ('user', dao['author']),
         ('tags', doc.get_tags()),
-        ('created_at', str(doc.created_at)),
+        ('created_at', str(dao['created_at'])),
         ('source', doc.filename),
         ('link', doc.permalink())
     ])

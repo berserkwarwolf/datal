@@ -4,7 +4,7 @@
 {% block SEO %}
   <title>{{dataset.title}} &middot; {{preferences.account_page_titles}}</title>
   <meta name="description" content="{{ dataset.description }}" />
-  <link rel="canonical" href="{{base_uri}}{{dataset.permalink}}" />
+  <link rel="canonical" href="{{base_uri}}{{dataset.dataset_revision_id|permalink:'dataset'}}" />
 {% endblock %}
 
 {% if preferences.account_enable_sharing %}
@@ -91,14 +91,14 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var datasetModel = new dataset({
-    id: "{{dataset.datasetrevision_id}}",
+    id: "{{dataset.dataset_revision_id}}",
     dataset_id: "{{dataset.dataset_id}}",
     title: "{{dataset.title}}",
     description: "{{dataset.description|escapejs}}",
     guid: "{{dataset.guid}}",
-    type: "{{dataset.type}}",
+    type: "{{dataset.impl_type}}",
     source: "{{dataset.end_point|escapejs}}",
-    permaLink: "{{base_uri}}{{ dataset.permalink }}{%if url_query%}?{{url_query}}{%endif%}",
+    permaLink: "{{base_uri}}{{ dataset.dataset_revision_id|permalink:'dataset' }}{%if url_query%}?{{url_query}}{%endif%}",
     embedUrl: "{{base_uri}}{{ dataset.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{dataset.created_at|date:'c'}}"
   });
