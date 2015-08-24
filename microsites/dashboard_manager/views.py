@@ -12,6 +12,7 @@ from core.communitymanagers import *
 from microsites.dashboard_manager.managers import DashboardFinder
 import json
 
+
 def action_view(request, id, slug):
 
     enable_comments = False
@@ -43,10 +44,17 @@ def action_view(request, id, slug):
 
     try:
         dashboardrevision_id = DashboardRevision.objects.get_last_published_id(id)
-        dashboard = DB(dashboardrevision_id = dashboardrevision_id, language = preferences['account_language'], last = False)
+        dashboard = DB(
+            dashboardrevision_id=dashboardrevision_id,
+            language=preferences['account_language'],
+            last=False
+        )
     except:
         if settings.DEBUG:
-            return HttpResponse("404 - Error con el dashboard %s. <br/><br/>Error: %s " % (str(id), str(sys.exc_info())), mimetype="text/html")
+            return HttpResponse("404 - Error con el dashboard %s. <br/><br/>Error: %s " % (
+                str(id),
+                str(sys.exc_info())
+            ), mimetype="text/html")
         else:
             raise Http404
 
@@ -65,12 +73,19 @@ def action_view(request, id, slug):
            
     if len(featured_dashboards) > 0:
         try:            
-            featured_dashboards = Account.objects.get_featured_dashboards(featured_dashboards, preferences['account_language'], account.id)
+            featured_dashboards = Account.objects.get_featured_dashboards(
+                featured_dashboards,
+                preferences['account_language'],
+                account.id
+            )
         except ValueError:
             featured_dashboards = []
 
         for fd in featured_dashboards:
-            fd['permalink'] = reverse('dashboard_manager.action_view', kwargs={'id': fd['id'], 'slug': slugify(fd['title'])})
+            fd['permalink'] = reverse('dashboard_manager.action_view', kwargs={
+                'id': fd['id'],
+                'slug': slugify(fd['title'])
+            })
 
     if dashboard.account_id != account.id:
         if settings.DEBUG:
@@ -84,45 +99,49 @@ def action_view(request, id, slug):
         categoriesWithSidebar = preferences['account_has_db_sidebar'].split(',')
         if str(dashboard.category_id) in categoriesWithSidebar:
             showDashboards = True
-            results, search_time, facets = FinderManager(DashboardFinder).search(max_results = 30,
-                                                                    order = '1',
-                                                                    category_id = dashboard.category_id,
-                                                                    account_id = dashboard.account_id,
-                                                                    resource = ['db'])
+            results, search_time, facets = FinderManager(DashboardFinder).search(
+                max_results=30,
+                order='1',
+                category_id=dashboard.category_id,
+                account_id=dashboard.account_id,
+                resource=['db']
+            )
             relatedDashboards =[]
             for dss in results:
                 rdactive = str(id) == str(dss["id"])
-                relatedDashboards.append({"id": dss["id"], "url": dss["permalink"], "title": dss["title"], "active": rdactive})
+                relatedDashboards.append({"id": dss["id"], "url": dss["permalink"], "title": dss["title"],
+                                          "active": rdactive})
 
 
     dashboard_dataservices = []
 
     for dashboard_widget in dashboard.get_widgets():
         widget = dashboard_widget.get()
-        dashboard_dataservice = dict(dashboard_dataservice_id=dashboard_widget.id
-            , dataservice_id= widget.is_vz() and widget.datastream_id or dashboard_widget.datastream_id
-            , sov_id=dashboard_widget.visualization_id
-            , sov_revision_id=dashboard_widget.visualizationrevision_id
-            , sov_impl_details = widget.is_vz() and widget.impl_details or ''
-            , sov_user_id = widget.is_vz() and widget.created_by_nick or ''
-            , dataservice_title=widget.title
-            , dataservice_description=widget.description
-            , dataservice_end_point=dashboard_widget.parameters
-            , datasource_end_point=widget.end_point
-            , dataservice_qualification=''
-            , dataservice_parameters=widget.parameters
-            , dataservice_sources= widget.get_sources()
-            , user_nick=widget.created_by_nick
-            , category_name=widget.category_name
-            , dataservice_created_at=widget.created_at
-            , permalink=widget.permalink()
-            , guid=widget.guid
-            , is_self_publishing=widget.is_self_publishing()
-            , datastreamrevision_id=widget.datastreamrevision_id
-            , can_view = True
-            , slug = widget.slug
-            , datastream_type = widget.datastream_type()
-            )
+        dashboard_dataservice = dict(
+            dashboard_dataservice_id=dashboard_widget.id,
+            dataservice_id= widget.is_vz() and widget.datastream_id or dashboard_widget.datastream_id,
+            sov_id=dashboard_widget.visualization_id,
+            sov_revision_id=dashboard_widget.visualizationrevision_id,
+            sov_impl_details = widget.is_vz() and widget.impl_details or '',
+            sov_user_id = widget.is_vz() and widget.created_by_nick or '',
+            dataservice_title=widget.title,
+            dataservice_description=widget.description,
+            dataservice_end_point=dashboard_widget.parameters,
+            datasource_end_point=widget.end_point,
+            dataservice_qualification='',
+            dataservice_parameters=widget.parameters,
+            dataservice_sources= widget.get_sources(),
+            user_nick=widget.created_by_nick,
+            category_name=widget.category_name,
+            dataservice_created_at=widget.created_at,
+            permalink=widget.permalink(),
+            guid=widget.guid,
+            is_self_publishing=widget.is_self_publishing(),
+            datastreamrevision_id=widget.datastreamrevision_id,
+            can_view=True,
+            slug=widget.slug,
+            datastream_type = widget.datastream_type()
+        )
         dashboard_dataservices.append(dashboard_dataservice)
 
     notes = dashboard.notes
