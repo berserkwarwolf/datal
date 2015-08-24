@@ -8,7 +8,7 @@ from core.docs import VZ
 from core.engine import invoke, invoke_chart
 from core.helpers import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.reports_manager.helpers import create_report
+from core.daos.visualizations import VisualizationHitsDAO
 from microsites.chart_manager import forms
 import urllib
 import json
@@ -42,7 +42,7 @@ def action_view(request, id, slug):
         can_export      = True
         can_share       = False
         
-        create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters) 
         
@@ -79,7 +79,7 @@ def action_embed(request, guid):
     except:
         return render_to_response('chart_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
     width     = request.REQUEST.get('width', False)
     height    = request.REQUEST.get('height', False)
 
