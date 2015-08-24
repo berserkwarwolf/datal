@@ -31,17 +31,13 @@ var DataTableView = Backbone.View.extend({
 
   // Holds available selection identifiers
   // these are maped to classes 'hot-sel-1', 'hot-sel-2', ...
-  available: _.range(9, 0, -1),
+  available: _.range(12, 0, -1),
 
   typeToRenderer: {
     TEXT: 'selectedTextRenderer',
     LINK: 'selectedLinkRenderer',
     NUMBER: 'selectedNumericRenderer',
     DATE: 'selectedDateRenderer'
-  },
-
-  events: {
-    'click button.add-btn': 'addSelection'
   },
 
   initialize: function (options) {
@@ -64,6 +60,7 @@ var DataTableView = Backbone.View.extend({
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true, readOnly: true,
       allowInsertRow: false, allowInsertColumn: false,
+      disableVisualSelection: ['current'],
       colWidths: 80,
       columns: columns,
     });
@@ -152,6 +149,7 @@ var DataTableView = Backbone.View.extend({
       data = _.map(data, _.first);
     }
     model.set('data', data);
+    model.set('selection', this.rangeToExcel(range));
     this.collection.add(model);
   },
 
@@ -166,5 +164,30 @@ var DataTableView = Backbone.View.extend({
     this.available.push(model.get('id'));
     this.rmCellsMeta(cells, model.get('id'));
     this.table.render();
+  },
+
+  rangeToExcel: function (range) {
+    var result;
+    if (range.from.row === -1) {
+      result = [this.intToExcelCol(range.from.col + 1), ':',
+          this.intToExcelCol(range.to.col + 1)].join('');
+    } else {
+      result = [this.intToExcelCol(range.from.col + 1), range.from.row, ':',
+          this.intToExcelCol(range.to.col + 1), range.to.row].join('');
+    }
+    return result
+  },
+
+  intToExcelCol: function (number) {
+    var colName = '',
+    dividend = Math.floor(Math.abs(number)),
+    rest;
+
+    while (dividend > 0) {
+      rest = (dividend - 1) % 26;
+      colName = String.fromCharCode(65 + rest) + colName;
+      dividend = parseInt((dividend - rest)/26);
+    }
+    return colName;
   }
 });

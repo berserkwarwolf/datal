@@ -5,9 +5,12 @@ from django.db.models import Q, F
 
 from core import settings
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision
+from core.models import VisualizationRevision, VisualizationHits,
+from core.exceptions import SearchIndexNotFoundException
+from core.lib.searchify import SearchifyIndex
+from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES
-
+from datetime import date, timedelta
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def __init__(self):
@@ -109,3 +112,32 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                     res.get('visualization__user__nick')))
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
+
+class VisualizationHitsDAO():
+    """class for manage access to Hits in DB and index"""
+
+    def __init__(self, visualization):
+        self.visualization=visualization
+        self.search_index = ElasticsearchIndex()
+        self.logger=logging.getLogger(__name__)
+
+    def add(self,  channel_type):
+        """agrega un hit al datastream. """
+
+        try:
+            hit=VisualizationHits.objects.create(visualization_id=self.visualization.visualization_id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise VisualizationNotFoundException()
+
+        self.logger.info("VisualizationHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+
+        # armo el documento para actualizar el index.
+        doc={'docid':"DS::%s" % self.visualization.guid,
+                "type": "ds",
+                "script": "ctx._source.fields.hits+=1"}
+
+        return self.search_index.update(doc)
+
+    def count(self):
+        return VisualizationHits.objects.filter(visualization_id=self.visualization.visualization_id).count()

@@ -1,7 +1,7 @@
 var ChartSelectDataModalView = ModalView.extend({
 	events: {
-		'click a.close':'onCloseClicked',
-		'click a.openOtherModal': 'onSelectLabelClicked'
+		'click button.btn-close':'onCloseClicked',
+		'click button.btn-add-serie': 'addSelection'
 	},
 
 	render: function(){
@@ -23,12 +23,12 @@ var ChartSelectDataModalView = ModalView.extend({
 		// TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
 		// request when it fails.
 		$.getJSON(dataUrl).then(function (payload) {
-			this.dataTableView = new DataTableView({
+			self.dataTableView = new DataTableView({
 				el: '.data-table-view',
 				collection: self.collection,
 				invoke: payload
 			});
-			this.dataTableView.render();
+			self.dataTableView.render();
 		})
 		return this;
 	},
@@ -36,14 +36,14 @@ var ChartSelectDataModalView = ModalView.extend({
 	onCloseClicked: function (e) {
 		this.close(); //Close modal
 		var selectedRows = this.collection.getRows();
-		this.model.data.set('fields', [['number', 'year'], ['number', 'population']]);
+		var selectedFields = this.collection.getFields();
+		this.model.data.set('fields', selectedFields);
 		this.model.data.set('rows', selectedRows);
 		this.model.set('selection', this.collection.getSelectionExcelStyle());
-		console.log(this.collection.getSelectionExcelStyle());
 	},
 
-	onSelectLabelClicked: function(){
-		this.openModal('chartSelectLabelModal');
+	addSelection: function () {
+		this.dataTableView.addSelection();
 	}
 
 });
