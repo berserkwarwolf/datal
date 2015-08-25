@@ -148,12 +148,23 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        query = query.values('datastream__user__nick', 'status', 'id', 'datastream__guid', 'category__id',
-                             'datastream__id', 'category__categoryi18n__name', 'datastreami18n__title',
-                             'datastreami18n__description', 'created_at', 'datastream__user__id',
-                             'datastream__last_revision_id', 'dataset__last_revision__dataseti18n__title',
-                             'dataset__last_revision__impl_type', 'dataset__last_revision__id'
-                             )
+        query = query.values(
+            'datastream__user__nick',
+            'status',
+            'id',
+            'datastream__guid',
+            'category__id',
+            'datastream__id',
+            'category__categoryi18n__name',
+            'datastreami18n__title',
+            'datastreami18n__description',
+            'created_at',
+            'datastream__user__id',
+            'datastream__last_revision_id',
+            'dataset__last_revision__dataseti18n__title',
+            'dataset__last_revision__impl_type',
+            'dataset__last_revision__id'
+        )
 
         query = query.order_by(sort_by)
 

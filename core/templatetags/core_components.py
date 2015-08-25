@@ -17,6 +17,20 @@ def permalink(pk, obj_type):
             'microsites.urls',
             kwargs={'dataset_id': pk, 'slug': '-'}
         )
+    elif obj_type == 'datastream':
+        return reverse(
+            'datastream_manager.action_view',
+            'microsites.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    elif obj_type == 'visualization':
+        return reverse(
+            'chart_manager.action_view',
+            'workspace.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    else:
+        return None
 
 
 @register.filter(name="download")
