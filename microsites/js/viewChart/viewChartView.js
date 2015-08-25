@@ -23,14 +23,13 @@ var viewChartView = Backbone.View.extend({
         return this;
     },
     renderChart: function () {
+        this.chartInstance.model.set('this', 'that');
         this.chartInstance.render();
     },
     initializeChart: function () {
         if(typeof this.chartInstance === 'undefined'){
             this.createChartInstance();
         }
-
-        this.chartInstance.model.fetchData();
     },
     createChartInstance: function () {
         var chartModelInstance = new this.ChartModelClass({

@@ -4,7 +4,6 @@ var charts = charts || {
 };
 
 charts.models.Chart = Backbone.Model.extend({
-    url: '',
     urlRoot: '/api/charts/',
     defaults: {
         resourceUrl: '',
@@ -21,27 +20,34 @@ charts.models.Chart = Backbone.Model.extend({
         meta_notes: null
 
     },
-    initialize: function () {
-        this.data = new charts.models.ChartData();
-    },
-    render: function(){
-        return true;
-    },
-    fetchData: function () {
-        var urlRoot = this.get('resourceUrl'),
-            resourceID = this.get('resourceID');
 
+    initialize: function () {
+        //Initialize data model with fetch filters
         this.data = new charts.models.ChartData({
-            id: resourceID
-        }, {
-            urlRoot: urlRoot
+            visualization_revision_id: this.get('resourceID')
         });
 
+        //Update the fetch filters every time we change the options
+        this.on('change:options', this.updateFetchFilters);
+    },
+
+    /**
+     * Default fetch filter updater
+     */
+    updateFetchFilters: function () {
+        this.data.set('fetchFilters', this.get('options'));
+    },
+
+    /**
+     * Fetch data for the chart
+     * @return {promise}
+     */
+    fetchData: function () {
         return this.data.fetch();
     },
 
-    getDataUrl: function () {
-        return this.get('resourceUrl') + this.get('resourceIdAttribute') + '=' + this.get('resourceID');
+    render: function(){
+        return true;
     },
 
     getFormData: function(){

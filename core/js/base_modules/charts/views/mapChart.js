@@ -21,8 +21,15 @@ charts.views.MapChart = charts.views.Chart.extend({
         if(this.model.data.get('points') && !this.mapMarkers.length){
             this.createMapMarkers();
         }
-
         return this;
+    },
+
+    /**
+     * Add event handlers to the map events
+     */
+    addMapEventListeners: function () {
+        this.mapInstance.addListener('dragend', this.getBoundsByCenterAndZoom.bind(this));
+        this.mapInstance.addListener('zoom_changed', this.getBoundsByCenterAndZoom.bind(this));
     },
 
     /**
@@ -35,6 +42,7 @@ charts.views.MapChart = charts.views.Chart.extend({
         });
         this.infoWindow = new google.maps.InfoWindow();
         this.getBoundsByCenterAndZoom(this.el);
+        this.addMapEventListeners();
     },
 
     /**
@@ -79,22 +87,29 @@ charts.views.MapChart = charts.views.Chart.extend({
             this.mapMarkers[index].events = {click: clickHandler};
         }
     },
+
     /**
      * Get the boundaries of the current map
      * @param  {HTMLelement} div Container of the map
      */
     getBoundsByCenterAndZoom: function(div){
-        var d = $(div);
-        var zf = Math.pow(2, this.model.get('options').zoom) * 2;
-        var dw = d.width()  / zf;
-        var dh = d.height() / zf;
-        var map_bounds = [];
+        var d = $(div),
+            zf = Math.pow(2, this.model.get('options').zoom) * 2,
+            dw = d.width()  / zf,
+            dh = d.height() / zf,
+            center = this.mapInstance.getCenter(),
+            NELat = center.lat() + dh,
+            NELong = center.lng() + dw,
+            SWLat = center.lat() - dh,
+            SWLong = center.lng() - dw;
 
-        map_bounds[0] = this.model.get('options').center.lat + dh; //NE lat
-        map_bounds[1] = this.model.get('options').center.long + dw; //NE lng
-        map_bounds[2] = this.model.get('options').center.lat - dh; //SW lat
-        map_bounds[3] = this.model.get('options').center.long - dw; //SW lng
-
-        this.model.set('options', _.extend(this.model.get('options'), {bounds: map_bounds}));
+        this.model.set('options', {
+            center: {
+                lat: center.lat(),
+                long: center.lng(),
+            },
+            zoom: this.mapInstance.getZoom(),
+            bounds: [NELat, NELong, SWLat, SWLong]
+        });
     }
 });
