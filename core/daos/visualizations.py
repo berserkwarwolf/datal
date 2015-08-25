@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import operator
+import time
 
 from django.db.models import Q, F
 
 from core import settings
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits
+from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
@@ -181,7 +182,8 @@ class VisualizationSearchDAO():
 
     def _get_category(self):
         """ Get category name """
-        return self.visualization_revision.category.categoryi18n_set.all()[0]
+        #al final quedó cortito el método, eh!
+        return self.visualization_revision.visualization.datastream.last_published_revision.category.categoryi18n_set.all()[0]
 
     def _get_i18n(self):
         """ Get category name """
@@ -197,6 +199,11 @@ class VisualizationSearchDAO():
         text = [visualizationi18n.title, visualizationi18n.description, self.visualization_revision.user.nick, self.visualization_revision.visualization.guid]
         text.extend(tags) # visualization has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
+        try:
+            p = Preference.objects.get(account_id=self.visualization_revision.visualization.user.account_id, key='account.purpose')
+            is_private = p.value == 'private'
+        except Preference.DoesNotExist, e:
+            is_private = False
 
         document = {
                 'docid' : self._get_id(),
@@ -204,6 +211,7 @@ class VisualizationSearchDAO():
                     {'type' : self.TYPE,
                      'visualization_id': self.visualization_revision.visualization.id,
                      'visualization_revision_id': self.visualization_revision.id,
+                     'datastream_id': self.visualization_revision.visualization.datastream.id,
                      'title': visualizationi18n.title,
                      'text': text,
                      'description': visualizationi18n.description,
@@ -212,7 +220,8 @@ class VisualizationSearchDAO():
                      'account_id' : self.visualization_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
-                     'end_point': self.visualization_revision.dataset.last_published_revision.end_point,
+                     'hits': 0,
+                     'is_private': is_private and 1 or 0,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
