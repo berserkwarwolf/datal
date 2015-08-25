@@ -5,6 +5,7 @@
 
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
+.fill-background:hover{background-color:#0066ff;}
 
 /* 48px icons */
 .size-48{

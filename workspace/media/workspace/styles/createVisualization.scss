@@ -97,6 +97,7 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
   padding:15px 40px 15px 0;
 
   .chartContent{border:1px solid $color-base-extra-light;float:left;width:100%;padding:15px;cursor:pointer;
+    &:hover .icon{background-color:$accent-shine;}
     &:hover .chartContentPreview p{color:$font-color-base;}
   }
 
