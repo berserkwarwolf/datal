@@ -58,6 +58,8 @@ var ChartView = StepViewSPA.extend({
 
 	onChartLibraryChanged: function(e){
 		var lib = $(e.currentTarget).val();
+		$('.chartType').hide();
+		$('.chartType.'+lib+'Chart').show();
 		this.model.set('lib',lib);
 	},
 
