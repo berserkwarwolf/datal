@@ -1,7 +1,6 @@
 /* Icons */
 .icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;    height: 24px;display:block;
 }
-.icon:hover{cursor:pointer;}
 
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
@@ -56,7 +55,6 @@
 	/* Charts */
 	.icon-chart-column{background-position:-12px -516px;}
 	.icon-chart-column.size-48{background-position:-24px -1032px;}
-	.icon-chart-column.size-350{background-position:-24px -1032px;}
 
 	.icon-chart-line{background-position:-12px -552px;}
 	.icon-chart-line.size-48{background-position:-24px -1104px;}

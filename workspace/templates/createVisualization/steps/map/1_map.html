@@ -2,14 +2,107 @@
 
 <div class="create step-1-view-map">
 
-	<h2>Editar mapa</h2>
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-		</li>
-	</ul>
+	<div class="wrapper1">
+		<div class="wrapper2">
+			<div class="wrapper3">
+
+				<h2>Editar mapa</h2>
+				<ul>
+					<li>
+						<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+					</li>
+					<li>
+						<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
+					</li>
+				</ul>
+
+				<div class="sidebar">
+
+					<div class="boxConfig">
+
+						<div class="itemConfig">
+
+							<div class="title">Elige un mapa <span class="required"></span></div>
+
+							<div class="boxInner">
+
+								<div class="patch" id="">
+									<span class="icon icon-chart-column size-48"></span>
+									<a href="#">Roadmap</a>
+									<p>The default road map view</p>
+								</div>
+
+								<div class="patch" id="">
+									<span class="icon icon-chart-column size-48"></span>
+									<a href="#">Satellite</a>
+									<p>Google Earth satellite images</p>
+								</div>
+
+								<div class="patch" id="">
+									<span class="icon icon-chart-column size-48"></span>
+									<a href="#">Hybrid</a>
+									<p>A mixture of normal and satellite views</p>
+								</div>
+
+								<div class="patch" id="">
+									<span class="icon icon-chart-column size-48"></span>
+									<a href="#">Terrain</a>
+									<p>a physical map based on terrain information</p>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="itemConfig">
+
+							<div class="title">Define el zoom inicial</div>
+
+							<div class="boxInner">
+
+								<p>El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación.
+
+								<form>
+									<fieldset>
+										<div class="btnGroup">
+											<button><span class="icon icon-zoom-in"></span></button>
+											<button><span class="icon icon-zoom-out"></span></button>
+										</div>
+									</fieldset>
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="preview-container">
+
+					<div class="row">
+
+						<div class="col-md-12 col-lg-offset-1 col-lg-10">
+
+							<div class="mapContent">
+
+								<div id="mapContainer" class="chart-preview-view">
+
+									<button class="icon icon-add fill-background corner-position selectData"></button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			
+			</div>
+		</div>
+	</div>
 
 </div>
