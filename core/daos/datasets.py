@@ -23,16 +23,28 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
     def __init__(self):
         pass
 
-    def get(self, language, dataset_id=None, dataset_revision_id=None, published=True):
+    def get(self, language, dataset_id=None, dataset_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'dataset__last_published_revision' if published else 'dataset__last_revision'
-        dataset_revision = dataset_id is None and \
-                           DatasetRevision.objects.select_related().get(
-                               pk=dataset_revision_id, category__categoryi18n__language=language,
-                               dataseti18n__language=language) or \
-                           DatasetRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               dataseti18n__language=language)
+
+        if guid:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                dataset__guid=guid,
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
+        elif not dataset_id:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                pk=dataset_revision_id,
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
+        else:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
 
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
