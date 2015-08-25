@@ -47,7 +47,7 @@ charts.models.Chart = Backbone.Model.extend({
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
             showLegend: this.get('showLegend'),
-            tranpose: this.get('traspose'),
+            traspose: this.get('traspose'),
             sort: this.get('sort'),
             title: this.get('title')
         };
