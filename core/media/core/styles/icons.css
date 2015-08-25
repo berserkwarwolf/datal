@@ -51,16 +51,11 @@
 	.icon-zoom-out{background-position:-12px -480px;}
 	.icon-zoom-out:active{background-position:-96px -480px;}
 
-		/* Hover */
-		.icon-edit:hover,
-		.icon-add:hover,
-		.icon-zoom-in:hover,
-		.icon-zoom-out:hover{opacity:.5;}
-
 
 	/* Charts */
 	.icon-chart-column{background-position:-12px -516px;}
 	.icon-chart-column.size-48{background-position:-24px -1032px;}
+	.icon-chart-column.size-350{background-position:-24px -1032px;}
 
 	.icon-chart-line{background-position:-12px -552px;}
 	.icon-chart-line.size-48{background-position:-24px -1104px;}
@@ -73,3 +68,8 @@
 
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
+
+
+/* 350px icons */
+.size-350{
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 500px auto;width:350px;height:350px;}
