@@ -1,30 +1,32 @@
 # -*- coding: utf-8 -*-
-from core.models import DataStream, DataStreamHits
-from api.models import *
-from core.choices import ChannelTypes
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
+
+from api.models import *
 from api.exceptions import is_method_get_or_405, Http404, Http400
 from api.v2.datastreams import forms
-from core.reports_manager.helpers import create_report
 from api.http import JSONHttpResponse
+from core.models import DataStream, DataStreamHits
+from core.choices import ChannelTypes
+from core.reports_manager.helpers import create_report
+from core.daos.datastreams import DataStreamDBDAO
 
 
 @require_http_methods(["GET"])
 def action_view(request, guid):
     is_method_get_or_405(request)
     try:
-        datastream = DataStream.objects.get(guid=guid)
-    except DataStream.DoesNotExist:
+        datastream = DataStreamDBDAO().get(request.user.language, guid=guid)
+    except Exception:
         raise Http404("The guid does not exist")
 
-    response = datastream.as_dict(request.user_id)
-    add_domain_to_datastream_link(response)
+    add_domain_to_datastream_link(datastream)
 
     from api.v2.templates import DefaultApiResponse
-    response = DefaultApiResponse(template='api_resource_view.json').render(response)
+    response = DefaultApiResponse(template='api_resource_view.json').render(datastream)
 
     return JSONHttpResponse(response)
+
 
 @require_http_methods(["GET"])
 def action_invoke(request, guid, data_format=None):
@@ -58,6 +60,7 @@ def action_invoke(request, guid, data_format=None):
         return HttpResponse(contents, mimetype=mimetype)
     else:
         raise Http400(form.get_error_description())
+
 
 @require_http_methods(["POST", "PUT", "PATCH"])
 def action_update(request):

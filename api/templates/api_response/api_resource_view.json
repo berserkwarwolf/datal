@@ -1,10 +1,10 @@
 {
-"id": "{{data.id}}",
-"title": "{{data.title}}",
-"description": "{{data.description}}",
-"user": "{{data.user}}",
-"tags": {{data.tags}},
-"created_at": "{{data.created_at}}",
-"source": "{{data.source}}",
-"link": "{{data.link}}",
+  "id": "{{ data.guid }}",
+  "title": "{{ data.title }}",
+  "description": "{{ data.description }}",
+  "user": "{{ data.author }}",
+  "tags": {{ data.tags }},
+  "created_at": "{{ data.created_at }}",
+  "source": {{ data.sources }},
+  "link": "{{ data.link }}",
 }

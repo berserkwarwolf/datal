@@ -1246,11 +1246,11 @@ class Setting(models.Model):
 
 
 class UserPassTickets(models.Model):
-    uuid            = models.CharField(max_length=38)
-    user            = models.ForeignKey('User')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    type            = models.CharField(max_length=38)
-    objects         = managers.UserPassTicketsManager()
+    uuid = models.CharField(max_length=38)
+    user = models.ForeignKey('User')
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    type = models.CharField(max_length=38)
+    objects = managers.UserPassTicketsManager()
 
     class Meta:
         db_table = 'ao_user_passtickets'
