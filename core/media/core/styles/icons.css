@@ -5,6 +5,7 @@
 
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
+.fill-background:hover{background-color:#0066ff;}
 
 /* 48px icons */
 .size-48{
@@ -51,16 +52,11 @@
 	.icon-zoom-out{background-position:-12px -480px;}
 	.icon-zoom-out:active{background-position:-96px -480px;}
 
-		/* Hover */
-		.icon-edit:hover,
-		.icon-add:hover,
-		.icon-zoom-in:hover,
-		.icon-zoom-out:hover{opacity:.5;}
-
 
 	/* Charts */
 	.icon-chart-column{background-position:-12px -516px;}
 	.icon-chart-column.size-48{background-position:-24px -1032px;}
+	.icon-chart-column.size-350{background-position:-24px -1032px;}
 
 	.icon-chart-line{background-position:-12px -552px;}
 	.icon-chart-line.size-48{background-position:-24px -1104px;}
@@ -73,3 +69,7 @@
 
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
+
+
+/* Corner position */
+.corner-position{position:absolute;top:10px;right:10px;z-index:100;}

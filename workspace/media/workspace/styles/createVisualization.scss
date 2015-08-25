@@ -13,9 +13,6 @@
         li:hover{background:$color-base-extra-light;}
         li.active{background:#8fceea;}
 
-        /* Nav inset */
-        /* li:hover > ul.navCreatorPicker{display:block;cursor:default;} */
-
         /* Nav titles */
         li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px 10px 10px;cursor:default;border:0 none;background:none;}
 
@@ -87,7 +84,7 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
 
     button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
 
-      &:hover{opacity:.5;}
+      &:hover{border-color:$accent-shine;}
 
     }
 
@@ -99,20 +96,35 @@ button{background:$accent-color;border:none;outline:none;border-radius:none;curs
 .preview-container {
   padding:15px 40px 15px 0;
 
-  .axisContent,
-  .chartContent,
-  .chartLeyend{min-height:370px;border:1px solid $color-base-extra-light;position:relative;}
+  .chartContent{border:1px solid $color-base-extra-light;float:left;width:100%;padding:15px;cursor:pointer;
+    &:hover .icon{background-color:$accent-shine;}
+    &:hover .chartContentPreview p{color:$font-color-base;}
+  }
 
-  .axisYName{-ms-transform:rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top:240px;}
+  .chartContentPreview,
+  .chartLeyendPreview{min-height:370px;position:relative;}
 
-  .chartContent{border-left:4px solid $color-base-light;}
+  .axisYNamePreview p{-ms-transform:rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top:190px;}
+
+  .chartContentPreview{
+    background:url(/static/workspace/images/createVisualization/previewColumn.png) no-repeat center center / auto 90%;border-left:1px solid $color-base-extra-light;border-bottom:1px solid $color-base-extra-light;
+
+    p{font-size:$font-size-xl;}
+  }
+
+  .axisXNamePreview{height:40px;}
+
+  .chartLeyendPreview{
+    padding-top:150px;position:relative;
+
+    p{position:relative;text-align:left;}
+    .leyend{width:30px;height:15px;display:block;background:#f6f5f3;margin:15px 0;}
+  }
 
   input,
   input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height:27px;font-size:$font-size-l;padding:0;}
 
-  button{position:absolute;right:0;top:0;z-index: 100;}
-
-  p{text-align:center;font-size:$font-size-xl;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;}
+  p{text-align:center;font-size:$font-size-m;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;color:$font-color-light;}
 
 } 
 

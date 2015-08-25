@@ -61,7 +61,7 @@
 									</fieldset>
 
 									<fieldset>
-										<p>You are using</p>
+										<p>Se está usando</p>
 										<select id="chartLibrary">
 											<option value="google">Google visualizations</option>
 											<option value="d3">D3</option>
@@ -143,72 +143,60 @@
 				<div class="preview-container">
 
 					<div class="row">
-						<div class="col-md-11 col-md-offset-1">
-							<div class="center">
-								<input id="chartTitle" data-ref="title" type="text" placeholder="[  ¿Cuál es el título?  ]">
-							</div>
-						</div>
-					</div>
 
-					<div class="row">
+						<div class="col-md-12 col-lg-offset-1 col-lg-10">
 
-						<div class="col-md-1">
-							<div class="axisYName attributeControl yTitleAttributeControl">
-								<input id="yTitle" data-ref="yTitle" type="text" placeholder="[  Nombre del eje Y  ]">
-							</div>
-						</div>
-
-						<div class="col-md-2">
-							<div class="axisContent">
-								<button class="icon icon-edit fill-background">
-								</button>
-								<p>Eje Y</p>
-							</div>
-						</div>
-
-						<div class="col-md-7">
 							<div class="chartContent">
-								<button class="icon icon-edit fill-background selectData">&nbsp;</button>
+
 								<div id="chartContainer" class="chart-preview-view">
-									<p>Seleccioná los datos a mostrar</p>
+
+									<button class="icon icon-add fill-background corner-position selectData"></button>
+
+									<div class="row">
+
+										<div class="col-md-1">
+											<div class="axisYNamePreview">
+												<p>Eje Y</p>
+											</div>
+										</div>
+
+										<div class="col-md-9">
+											<div class="chartContentPreview">
+												<p>Seleccione los datos que desee representar</p>
+											</div>
+										</div>
+
+										<div class="col-md-2">
+											<div class="chartLeyendPreview">
+												<p>Referencias</p>
+												<div class="leyend"></div>
+												<div class="leyend"></div>
+												<div class="leyend"></div>
+											</div>
+										</div>
+
+									</div>
+
+									<div class="row">
+
+										<div class="col-md-offset-1 col-md-9">
+											<div class="axisXNamePreview">
+												<p>Eje X</p>
+											</div>
+										</div>
+
+									</div>
+
 								</div>
-							</div>
-						</div>
 
-						<div class="col-md-2">
-							<div class="chartLeyend">
-								<button class="icon icon-edit fill-background">&nbsp;</button>
-								<p>Seleccioná referencias</p>
-							</div>
-						</div>
-
-					</div>
-
-					<div class="row">
-
-						<div class="col-md-offset-3 col-md-7">
-
-							<div class="axisXName FL attributeControl xTitleAttributeControl">
-								<input id="xTitle" data-ref="xTitle" class="text-left" type="text" placeholder="[  Nombre del eje X  ]">
-							</div>
-
-							<div class="axisXMaxValue FR">
-								<input class="right" type="text" placeholder="[  Valor máximo  ]">
 							</div>
 
 						</div>
 
 					</div>
-
-					<!--
-					<div id="example">
-						<button type="button" class="add-btn">Select&nbsp;</button>
-						<div class="table-view"></div>
-					</div>
-					-->
 
 				</div>
-
+			
 			</div>
 		</div>
 	</div>

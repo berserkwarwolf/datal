@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 import operator
+import time
 
 from django.db.models import Q, F
 
 from core import settings
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits
+from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
@@ -141,3 +142,115 @@ class VisualizationHitsDAO():
 
     def count(self):
         return VisualizationHits.objects.filter(visualization_id=self.visualization.visualization_id).count()
+
+class VisualizationSearchDAOFactory():
+    """ select Search engine"""
+
+    def __init__(self):
+        pass
+
+    def create(self, visualization_revision):
+        if settings.USE_SEARCHINDEX == 'searchify':
+            self.search_dao = VisualizationSearchifyDAO(visualization_revision)
+        elif settings.USE_SEARCHINDEX == 'elasticsearch':
+            self.search_dao = VisualizationElasticsearchDAO(visualization_revision)
+        elif settings.USE_SEARCHINDEX == 'test':
+            self.search_dao = VisualizationSearchDAO(visualization_revision)
+        else:
+            raise SearchIndexNotFoundException()
+
+        return self.search_dao
+        
+        
+class VisualizationSearchDAO():
+    """ class for manage access to datasets' searchify documents """
+
+    TYPE="vz"
+    def __init__(self, visualization_revision):
+        self.visualization_revision=visualization_revision
+        self.search_index = SearchifyIndex()
+
+    def _get_type(self):
+        return self.TYPE
+    def _get_id(self):
+        """ Get Tags """
+        return "%s::%s" %(self.TYPE.upper(),self.visualization_revision.visualization.guid)
+
+    def _get_tags(self):
+        """ Get Tags """
+        return self.visualization_revision.tagvisualization_set.all().values_list('tag__name', flat=True)
+
+    def _get_category(self):
+        """ Get category name """
+        #al final quedó cortito el método, eh!
+        return self.visualization_revision.visualization.datastream.last_published_revision.category.categoryi18n_set.all()[0]
+
+    def _get_i18n(self):
+        """ Get category name """
+        return VisualizationI18n.objects.get(visualization_revision=self.visualization_revision)
+        
+    def _build_document(self):
+
+        tags = self._get_tags()
+
+        category = self._get_category()
+        visualizationi18n = self._get_i18n()
+
+        text = [visualizationi18n.title, visualizationi18n.description, self.visualization_revision.user.nick, self.visualization_revision.visualization.guid]
+        text.extend(tags) # visualization has a table for tags but seems unused. I define get_tags funcion for dataset.
+        text = ' '.join(text)
+        try:
+            p = Preference.objects.get(account_id=self.visualization_revision.visualization.user.account_id, key='account.purpose')
+            is_private = p.value == 'private'
+        except Preference.DoesNotExist, e:
+            is_private = False
+
+        document = {
+                'docid' : self._get_id(),
+                'fields' :
+                    {'type' : self.TYPE,
+                     'visualization_id': self.visualization_revision.visualization.id,
+                     'visualization_revision_id': self.visualization_revision.id,
+                     'datastream_id': self.visualization_revision.visualization.datastream.id,
+                     'title': visualizationi18n.title,
+                     'text': text,
+                     'description': visualizationi18n.description,
+                     'owner_nick' :self.visualization_revision.user.nick,
+                     'tags' : ','.join(tags),
+                     'account_id' : self.visualization_revision.user.account.id,
+                     'parameters': "",
+                     'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
+                     'hits': 0,
+                     'is_private': is_private and 1 or 0,
+                    },
+                'categories': {'id': unicode(category.category_id), 'name': category.name}
+                }
+
+        return document
+
+
+class VisualizationSearchifyDAO(VisualizationSearchDAO):
+    """ class for manage access to datasets' searchify documents """
+    def __init__(self, visualization_revision):
+        self.visualization_revision=visualization_revision
+        self.search_index = SearchifyIndex()
+        
+    def add(self):
+        self.search_index.indexit(self._build_document())
+        
+    def remove(self, visualization_revision):
+        self.search_index.delete_documents([self._get_id()])
+
+
+class VisualizationElasticsearchDAO(VisualizationSearchDAO):
+    """ class for manage access to datasets' elasticsearch documents """
+
+    def __init__(self, visualization_revision):
+        self.visualization_revision=visualization_revision
+        self.search_index = ElasticsearchIndex()
+        
+    def add(self):
+        self.search_index.indexit(self._build_document())
+        
+    def remove(self):
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
