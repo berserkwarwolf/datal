@@ -12,7 +12,14 @@ charts.models.Chart = Backbone.Model.extend({
         resourceIdAttribute: null,
         type: 'linechart',
         lib: 'google',
-        options: {}
+        options: {
+        },
+        //metadata
+        meta_title: null,
+        meta_description: null,
+        meta_category: null,
+        meta_notes: null
+
     },
     initialize: function () {
         this.data = new charts.models.ChartData();
@@ -35,6 +42,21 @@ charts.models.Chart = Backbone.Model.extend({
 
     getDataUrl: function () {
         return this.get('resourceUrl') + this.get('resourceIdAttribute') + '=' + this.get('resourceID');
+    },
+
+    getFormData: function(){
+        return false; //return form data, 
+    },
+
+    getMeta: function(){
+        var metadata = {
+            title: this.get('meta_title'),
+            description: this.get('meta_description'),
+            notes: this.get('meta_notes'),
+            category: this.get('meta_category')
+        };
+
+        return metadata;
     },
 
     getSettings: function(){

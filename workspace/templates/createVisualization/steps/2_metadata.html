@@ -21,20 +21,20 @@
 	
 				<div class="row clearfix">
 					<label for="title">Título<span class="required">*</span></label>
-					<input type="text" name="title" maxlength="80" data-bind="" autofocus="autofocus">
+					<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
 				</div>
 	
 				<div class="row clearfix">
 					<label for="title">Descripción<span class="required">*</span></label>
-					<input type="text" name="title" maxlength="140" data-bind="">
+					<input type="text" class="description" name="description" maxlength="140" data-bind="">
 				</div>
 
 				<div class="row clearfix">
 					<label for="category">Categoría</label>
-					<select name="category" id="id_category" data-bind="">
-						<option selected="selected" value="">Categoría uno</option>
-						<option value="">Categoría dos</option>
-						<option value="">Categoría tres</option>
+					<select class="category" name="category" id="id_category" data-bind="">
+						<option selected="selected" value="cat1">Categoría uno</option>
+						<option value="cat2">Categoría dos</option>
+						<option value="cat3">Categoría tres</option>
 					</select>
 				</div>
 	
@@ -98,7 +98,7 @@
 
 				<div class="row clearfix">
 					<label for="id_notes">Notas</label>
-					<textarea></textarea>
+					<textarea class="notes"></textarea>
 				</div>
 
 			</fieldset>
