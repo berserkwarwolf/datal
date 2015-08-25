@@ -72,16 +72,28 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream_revision
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
+    def get(self, language, datastream_id=None, datastream_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
-        datastream_revision = datastream_id is None and \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=datastream_revision_id, category__categoryi18n__language=language,
-                               datastreami18n__language=language) or \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               datastreami18n__language=language)
+
+        if guid:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                datastream__guid=guid,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        elif not datastream_id:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=datastream_revision_id,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        else:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
