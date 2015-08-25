@@ -20,7 +20,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def create(self, visualization=None, user=None, collect_type='', impl_details=None, **fields):
         pass
 
-    def get(self, language, visualization_id=None, visualization_revision_id=None):
+    def get(self, language, visualization_id=None, visualization_revision_id=None, guid=None, published=True):
         pass
 
     def query_childs(self, visualization_id, language):
