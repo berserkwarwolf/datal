@@ -27,8 +27,13 @@ charts.models.Chart = Backbone.Model.extend({
             visualization_revision_id: this.get('resourceID')
         });
 
-        //Update the fetch filters every time we change the options
+        this.bindEvents();
+    },
+
+    bindEvents: function () {
+        //Se actualizan los filtros de los datos cuando se cambian las options
         this.on('change:options', this.updateFetchFilters);
+        this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
 
     /**
@@ -36,6 +41,15 @@ charts.models.Chart = Backbone.Model.extend({
      */
     updateFetchFilters: function () {
         this.data.set('fetchFilters', this.get('options'));
+    },
+
+    /**
+     * Handler para manejar las actualizaciones a los datos
+     * @return {[type]} [description]
+     */
+    handleDataUpdate: function () {
+        console.log("ChartModel data updated:");
+        this.trigger('data_updated');
     },
 
     /**

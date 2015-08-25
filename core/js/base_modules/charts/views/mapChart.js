@@ -11,38 +11,49 @@ charts.views.MapChart = charts.views.Chart.extend({
         if (this.model.get('type') !== 'map') {
             console.error('A Map model must be suplied');
         }
-        //TODO: for now we need to create a first render of the map to get the boundaries for the api call
+        this.bindEvents();
         this.createCoogleMapInstance();
     },
 
     render: function () {
+        console.log("render");
         //Check if there is any points on the model data to be rendered and that the current
         //points haven't been rendered
-        if(this.model.data.get('points') && !this.mapMarkers.length){
+        if(this.model.data.get('points') && this.model.data.get('points').length && !this.mapMarkers.length){
             this.createMapMarkers();
         }
         return this;
     },
 
+    clearAndRender: function () {
+        this.clearMapMarkers();
+        console.log("data points:", this.model.data.get('points'));
+        this.render();
+    },
+
+    bindEvents: function () {
+        this.model.on('change', this.render, this);
+        this.model.on('data_updated', this.clearAndRender, this);
+    },
+
     /**
      * Add event handlers to the map events
      */
-    addMapEventListeners: function () {
-        this.mapInstance.addListener('dragend', this.getBoundsByCenterAndZoom.bind(this));
-        this.mapInstance.addListener('zoom_changed', this.getBoundsByCenterAndZoom.bind(this));
+    bindMapEvents: function () {
+        this.mapInstance.addListener('idle', this.handleBoundChanges.bind(this));
     },
 
     /**
      * Creates a new map google map instance
      */
     createCoogleMapInstance: function () {
+        console.log("create map:");
         this.mapInstance = new google.maps.Map(this.el, {
             zoom: this.model.get('options').zoom,
             center: new google.maps.LatLng(this.model.get('options').center.lat, this.model.get('options').center.long)
         });
         this.infoWindow = new google.maps.InfoWindow();
-        this.getBoundsByCenterAndZoom(this.el);
-        this.addMapEventListeners();
+        this.bindMapEvents();
     },
 
     /**
@@ -51,7 +62,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     clearMapMarkers: function () {
         _.each(this.mapMarkers, function (marker, index) {
             marker.setMap(null);
-            google.maps.events.removeListener(marker.events.click);
+            google.maps.event.removeListener(marker.events.click);
         }, this);
         this.mapMarkers = [];
     },
@@ -61,6 +72,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapMarkers: function () {
         var self = this;
+        console.log("create map markers:");
         _.each(this.model.data.get('points'), this.createMapMarker, this);
     },
 
@@ -92,24 +104,24 @@ charts.views.MapChart = charts.views.Chart.extend({
      * Get the boundaries of the current map
      * @param  {HTMLelement} div Container of the map
      */
-    getBoundsByCenterAndZoom: function(div){
-        var d = $(div),
-            zf = Math.pow(2, this.model.get('options').zoom) * 2,
-            dw = d.width()  / zf,
-            dh = d.height() / zf,
-            center = this.mapInstance.getCenter(),
-            NELat = center.lat() + dh,
-            NELong = center.lng() + dw,
-            SWLat = center.lat() - dh,
-            SWLong = center.lng() - dw;
+    handleBoundChanges: function(div){
+        var center = this.mapInstance.getCenter(),
+            bounds = this.mapInstance.getBounds(),
+            zoom = this.mapInstance.getZoom();
 
+        console.log("set bounds, center and zoom:");
         this.model.set('options', {
             center: {
                 lat: center.lat(),
                 long: center.lng(),
             },
-            zoom: this.mapInstance.getZoom(),
-            bounds: [NELat, NELong, SWLat, SWLong]
+            zoom: zoom,
+            bounds: [
+                bounds.getNorthEast().lat(), 
+                bounds.getNorthEast().lng(), 
+                bounds.getSouthWest().lat(), 
+                bounds.getSouthWest().lng()
+            ]
         });
     }
 });

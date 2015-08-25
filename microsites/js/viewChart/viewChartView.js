@@ -18,13 +18,7 @@ var viewChartView = Backbone.View.extend({
     },
     render: function () {
         this.initializeChart();
-
-        this.chartInstance.model.data.bind('change', this.renderChart, this);
         return this;
-    },
-    renderChart: function () {
-        this.chartInstance.model.set('this', 'that');
-        this.chartInstance.render();
     },
     initializeChart: function () {
         if(typeof this.chartInstance === 'undefined'){
@@ -32,14 +26,15 @@ var viewChartView = Backbone.View.extend({
         }
     },
     createChartInstance: function () {
+        console.log("create chart:");
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
-            resourceID: 7856,
+            resourceID: 6879,
             options: {
                 zoom: 17,
                 center: {
-                    lat: 38.58267175145875,
-                    long: -121.4893537031936
+                    lat: 38.5806808485,
+                    long: -121.4826359602
                 }
             }
         });
