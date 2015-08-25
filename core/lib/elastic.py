@@ -167,7 +167,7 @@ class ElasticsearchIndex():
                   "fields" : {
                     "properties" : {
                       "account_id" : { "type" : "long" },
-                      "visualizationrevision_id" : { "type" : "long" },
+                      "visualization_revision_id" : { "type" : "long" },
                       "visualization_id" : { "type" : "long" },
                       "description" : { "type" : "string" },
                       "end_point" : { "type" : "string" },
