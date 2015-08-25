@@ -19,6 +19,7 @@
 
 	/* Accent color */
 	$accent-color:#0066cc;														/* Brand secondary color */
+	$accent-shine:#0066ff;														/* Brand secondary color :hover */
 
 	/* Base color */
 	$color-base:#393939;														/* Color for backgrounds */
@@ -42,7 +43,7 @@
 	$font-size-xl:20px;															/* For section titles and overlay titles */
 
 	/* Color */
-	$font-color-base:#333F4F;													/* For body paragraphs and titles */
+	$font-color-base:#000;													/* For body paragraphs and titles */
 	$font-color-supreme:#FFF;													/* For titles in general */
 	$font-color-semi-light:#333F4F;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */

@@ -26,11 +26,26 @@ charts.ChartsFactory = function(){
 							'Model': charts.models.LineChart,
 							'attributes': ['yTitle','xTitle']
 						},
+				'areachart': {
+							'Class': charts.views.GoogleAreaChart,
+							'Model': charts.models.LineChart,
+							'attributes': ['yTitle','xTitle']
+						},
 				'barchart': {
 							'Class': charts.views.GoogleBarChart,
 							'Model': charts.models.BarChart,
 							'attributes': ['yTitle']
 						},
+				'columnchart': {
+							'Class': charts.views.GoogleColumnChart,
+							'Model': charts.models.BarChart,
+							'attributes': ['yTitle']
+						},
+				'piechart': {
+							'Class': charts.views.GooglePieChart,
+							'Model': charts.models.PieChart,
+							'attributes': ['yTitle']
+						},				
                 'map': {
                         'Class': charts.views.MapChart,
                         'Model': charts.models.MapChart,
