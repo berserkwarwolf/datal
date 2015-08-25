@@ -233,3 +233,15 @@ class VisualizationSearchifyDAO(VisualizationSearchDAO):
         self.search_index.delete_documents([self._get_id()])
 
 
+class VisualizationElasticsearchDAO(VisualizationSearchDAO):
+    """ class for manage access to datasets' elasticsearch documents """
+
+    def __init__(self, visualization_revision):
+        self.visualization_revision=visualization_revision
+        self.search_index = ElasticsearchIndex()
+        
+    def add(self):
+        self.search_index.indexit(self._build_document())
+        
+    def remove(self):
+        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
