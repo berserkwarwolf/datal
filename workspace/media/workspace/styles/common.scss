@@ -248,7 +248,7 @@ a.green:hover,
 /* Layout */
 html,
 body{background:$color-base;height:100%;min-width:998px;}
-body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;background-position:center center;}
+/* body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;background-position:center center;} */
 
 .layout{overflow:hidden;}
 .workspace{padding-top:$header-height;}
