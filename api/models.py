@@ -154,48 +154,6 @@ def result_as_json(self, response, user_id):
 
 DataStream.result_as_json = result_as_json
 
-def dashboard_as_dict(self, user_id = None):
-
-    dashboardrevision_id = DashboardRevision.objects.get_last_published_id(self.id)
-    doc = DB(dashboardrevision_id, 'en')
-
-    datastreams = []
-    for widget in doc.get_widgets():
-        data = widget.get()
-        datastream = SortedDict([
-                   ('id', data.guid)
-                 , ('title', data.title)
-                 , ('link', data.permalink())
-        ])
-        datastreams.append(datastream)
-
-    sorted_dict = SortedDict([
-               ('id'          , doc.guid)
-             , ('title'       , doc.title)
-             , ('description' , doc.description)
-             , ('user'        , doc.created_by_nick)
-             , ('tags'        , doc.get_tags())
-             , ('datastreams' , datastreams)
-             , ('created_at'  , str(doc.created_at))
-             , ('link'        , doc.permalink())
-    ])
-
-    return sorted_dict
-
-Dashboard.as_dict = dashboard_as_dict
-
-def dashboard_is_user_allowed(self, user_id):
-    if user_id and self.user_id == user_id:
-        return True
-
-    # are you a user with use?
-    qset = ObjectGrant.objects.values('id')
-    qset = qset.filter(dashboard = self.id, grant__privilege__code='private_dashboard.can_use', grant__user = user_id)
-    return qset.exists()
-
-Dashboard.is_user_allowed = dashboard_is_user_allowed
-
-
 
 def generate_hash(string, length = 40, use_random = True):
     import hashlib
@@ -209,7 +167,6 @@ def get_auth_key(self):
     string = str(self.id) + self.guid
     return generate_hash(string, use_random = False)
 
-Dashboard.get_auth_key = get_auth_key
 DataStream.get_auth_key = get_auth_key
 
 
