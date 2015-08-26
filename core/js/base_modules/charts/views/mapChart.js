@@ -6,6 +6,7 @@ var charts = charts || {
 charts.views.MapChart = charts.views.Chart.extend({
     mapInstance: null,
     mapMarkers: [],
+    mapClusters: [],
     styles: {},
     initialize: function(){
         if (this.model.get('type') !== 'map') {
@@ -16,18 +17,23 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
-        console.log("render");
         //Check if there is any points on the model data to be rendered and that the current
         //points haven't been rendered
         if(this.model.data.get('points') && this.model.data.get('points').length && !this.mapMarkers.length){
             this.createMapMarkers();
         }
+        if(this.model.data.get('clusters') && this.model.data.get('clusters').length && !this.mapClusters.length){
+            this.createMapClusters();
+        }
         return this;
     },
 
     clearAndRender: function () {
-        this.clearMapMarkers();
+        this.clearMapOverlays();
+        console.log("cleared map markers:", this.mapMarkers);
+        console.log("cleared map clusters:", this.mapClusters);
         console.log("data points:", this.model.data.get('points'));
+        console.log("data clusters:", this.model.data.get('clusters'));
         this.render();
     },
 
@@ -57,14 +63,30 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     /**
-     * Clear and remove listeners for all the markers from the current instance of the map
+     * Remueve los elementos del mapa y elimina cualquier evento asociado a estos
      */
-    clearMapMarkers: function () {
-        _.each(this.mapMarkers, function (marker, index) {
-            marker.setMap(null);
-            google.maps.event.removeListener(marker.events.click);
+    clearMapOverlays: function () {
+        //Markers
+        this.mapMarkers = this.clearOverlay(this.mapMarkers);
+        //Clusters
+        this.mapClusters = this.clearOverlay(this.mapClusters);
+    },
+
+    /**
+     * Elimina una coleccion especifica de elementos sobre el mapa
+     * @param  {array} overlayCollection
+     */
+    clearOverlay: function (overlayCollection) {
+        _.each(overlayCollection, function (overlayElement, index) {
+            overlayElement.setMap(null);
+            //Elimina los eventos asociados al elemento
+            if(overlayElement.events){
+                _.each(overlayElement.events, function (event) {
+                    google.maps.event.removeListener(event);
+                });
+            }
         }, this);
-        this.mapMarkers = [];
+        return [];
     },
 
     /**
@@ -98,6 +120,22 @@ charts.views.MapChart = charts.views.Chart.extend({
             })(self.mapMarkers[index], point.info));
             this.mapMarkers[index].events = {click: clickHandler};
         }
+    },
+
+    /**
+     * Crea clusters de puntos
+     */
+    createMapClusters: function () {
+        var self = this;
+        console.log("create map clusters:");
+        _.each(this.model.data.get('clusters'), this.createMapCluster, this);
+    },
+
+    createMapCluster: function (cluster, index) {
+        cluster.noWrap = true;
+        cluster.counter = parseInt(cluster.info);
+
+        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('joinIntersectedClusters'));
     },
 
     /**

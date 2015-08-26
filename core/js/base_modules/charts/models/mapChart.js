@@ -8,6 +8,7 @@ charts.models.MapChart = charts.models.Chart.extend({
     urlRoot: '/api/charts/',
     defaults: _.extend({},charts.models.Chart.prototype.defaults, {
         type: 'map',
+        joinIntersectedClusters: false,
         options: {
             zoom: 5,
             center: {

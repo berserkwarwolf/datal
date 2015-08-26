@@ -29,9 +29,11 @@ var viewChartView = Backbone.View.extend({
         console.log("create chart:");
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
+            resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
+            resourceIdAttribute: 'visualization_revision_id',
             resourceID: 6879,
             options: {
-                zoom: 17,
+                zoom: 15,
                 center: {
                     lat: 38.5806808485,
                     long: -121.4826359602

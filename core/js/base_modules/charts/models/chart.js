@@ -18,15 +18,13 @@ charts.models.Chart = Backbone.Model.extend({
         meta_description: null,
         meta_category: null,
         meta_notes: null
-
     },
-
     initialize: function () {
-        //Initialize data model with fetch filters
         this.data = new charts.models.ChartData({
-            visualization_revision_id: this.get('resourceID')
+            urlRoot: this.get('resourceUrl'),
+            idAttribute: this.get('resourceIdAttribute'),
+            id: this.get('resourceID')
         });
-
         this.bindEvents();
     },
 
@@ -88,7 +86,6 @@ charts.models.Chart = Backbone.Model.extend({
             chartTemplate: '¿?',
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
-            showLegend: this.get('showLegend'),
             traspose: this.get('traspose'),
             sort: this.get('sort'),
             title: this.get('title')
