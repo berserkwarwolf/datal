@@ -970,9 +970,6 @@ msgstr "Guardar"
 msgid "APP-SENDTOREVIEW-TEXT"
 msgstr "Enviar a revisión"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Aprobar"
-
 msgid "APP-CANCEL-TEXT"
 msgstr "Cancelar"
 
@@ -1005,9 +1002,6 @@ msgstr "Estado actual"
 
 msgid "APP-CHANGE_STATUS-TEXT"
 msgstr "Cambiar estado"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Rechazado"
 
 msgid "APP-ACTIONS-UNPUBLISH"
 msgstr "Despublicar"
@@ -2952,3 +2946,9 @@ msgstr "Nuevo conjunto de datos"
 
 msgid "APP-ADDNEWDATAVIEW-TEXT"
 msgstr "Nueva vista"
+
+msgid "APP-LASTPUBLISHDATE-TEXT"
+msgstr "Última versión publicada:"
+
+msgid "APP-VIEWONSITE-TEXT"
+msgstr "Ver en sitio"

@@ -75,36 +75,6 @@ msgstr "This is the GUID for this Dashboard:"
 msgid "DSDET-GETGUID-TITLE"
 msgstr "This is the GUID for this Data View:"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Approve"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Reject"
-
-msgid "APP-PUBLISH-TEXT"
-msgstr "Publish"
-
-msgid "APP-ACTIONS-UNPUBLISH"
-msgstr "Unpublish"
-
-msgid "APP-DRAFT-TEXT"
-msgstr "Draft"
-
-msgid "APP-PENDINGREVIEW-TEXT"
-msgstr "Pending Review"
-
-msgid "APP-APPROVED-TEXT"
-msgstr "Approved"
-
-msgid "APP-PUBLISHED-TEXT"
-msgstr "Published"
-
-msgid "APP-UNPUBLISH-TEXT"
-msgstr "Unpublish"
-
-msgid "APP-REJECTED-TEXT"
-msgstr "Rejected"
-
 msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DASHBOARD"
 msgstr "Are you sure you want to unpublish this Dashboard?"
 

@@ -16,10 +16,11 @@
 	<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 	<!-- NEW -->
+	<script type="text/javascript" src="/js_workspace/constants.js"></script>
 	<script type="text/javascript" src="/js_workspace/common.js"></script>
-		<!-- Error Manager Module -->
-		<script language="javascript" src="/js_workspace/errorManager/errorManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-		<script language="javascript" src="/js_workspace/errorManager/errorManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<!-- Error Manager Module -->
+	<script language="javascript" src="/js_workspace/errorManager/errorManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script language="javascript" src="/js_workspace/errorManager/errorManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}
 
 {% block body %}
@@ -114,13 +115,13 @@
 		
 		{% if auth_manager %}
 		var authManager = new AuthManager({
-			id: {{auth_manager.id|default_if_none:"null"}}
-			, nick: "{{auth_manager.nick}}"
-			, roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
-			, privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
-			, account_level : "{{ auth_manager.account_level }}"
-			, isAuthenticated: {{ auth_manager.is_authenticated|lower }}
-			, email: "{{ auth_manager.email|lower }}"
+			id: {{auth_manager.id|default_if_none:"null"}}, 
+			nick: "{{auth_manager.nick}}", 
+			roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
+			privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
+			account_level : "{{ auth_manager.account_level }}", 
+			isAuthenticated: {{ auth_manager.is_authenticated|lower }}, 
+			email: "{{ auth_manager.email|lower }}"
 		});
 		{% endif %}
 
@@ -129,7 +130,7 @@
 		Configuration.apiUri = "{{settings.API_URI}}";
 		Configuration.apiKey = "{{settings.PUBLIC_KEY}}";
 		Configuration.language = "{{LANGUAGE_CODE}}";
-		
+
 		csrfmiddlewaretoken = '{{ csrf_token }}';
 		
 		function csrfSafeMethod(method) {

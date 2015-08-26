@@ -985,9 +985,6 @@ msgstr "Save"
 msgid "APP-SENDTOREVIEW-TEXT"
 msgstr "Send to review"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Approve"
-
 msgid "APP-CANCEL-TEXT"
 msgstr "Cancel"
 
@@ -1020,9 +1017,6 @@ msgstr "Current status"
 
 msgid "APP-CHANGE_STATUS-TEXT"
 msgstr "Change status"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Reject"
 
 msgid "APP-ACTIONS-UNPUBLISH"
 msgstr "Unpublish"
@@ -2956,3 +2950,9 @@ msgstr "New Dataset"
 
 msgid "APP-ADDNEWDATAVIEW-TEXT"
 msgstr "New Data View"
+
+msgid "APP-LASTPUBLISHDATE-TEXT"
+msgstr "Last published version:"
+
+msgid "APP-VIEWONSITE-TEXT"
+msgstr "View on site"

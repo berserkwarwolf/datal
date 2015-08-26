@@ -51,6 +51,12 @@ msgstr "Rejected"
 msgid "MODEL_STATUS_APPROVED"
 msgstr "Accepted"
 
+msgid "APP-APPROVE-TEXT"
+msgstr "Accept"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Reject"
+
 msgid "MODEL-LANGUAJE-EN"
 msgstr "English "
 

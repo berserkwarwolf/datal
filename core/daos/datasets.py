@@ -67,6 +67,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             created_at=dataset_revision.dataset.created_at,
             last_revision_id=dataset_revision.dataset.last_revision_id,
             last_published_revision_id=dataset_revision.dataset.last_published_revision_id,
+            last_published_date=dataset_revision.dataset.last_published_revision.created_at,
             title=dataseti18n.title,
             description=dataseti18n.description,
             notes=dataseti18n.notes,

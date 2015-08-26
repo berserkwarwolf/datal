@@ -6,7 +6,7 @@
 body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
 
 /* Buttons */
-.button{@include transition(all, .1s, ease-in-out);min-width:150px;
+.button{@include transition(all, .1s, ease-in-out);
 
   /* Active */
   &.active{cursor:default;@include disable-transition(none !important);}
@@ -63,6 +63,10 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
       }
     }
   }
+}
+
+@media screen and (min-width: 1250px) {
+  .button{min-width:150px;}
 }
 
 @media screen and (min-width: 1440px) {

@@ -10,12 +10,9 @@
 
     <div class="status-row clearfix">
 
-      {# status 5 -> Rejected #}
-      {# status 6 -> Approved #}
-      <span class="status <% if(status == 5){ %> red <% }else if(status == 6){ %> green <% } %>">
+      <span class="status <% if(status == StatusChoices.REJECTED){ %> red <% }else if(status == StatusChoices.APPROVED){ %> green <% } %>">
 
-        {# status 3 -> Published #}
-        <% if(status == 3){ %> 
+        <% if(status == StatusChoices.PUBLISHED){ %> 
         <span class="icon icon-inline icon-published"></span>
         <% } %>
 
@@ -23,10 +20,15 @@
 
       </span>
 
-      <% if(status != 3){ %>
-      <span class="publish-version">Última versión publicada: <span id="id_lastPublishDate">30 de Septiembre de 2015, <a href="<%= micrositeUrl %>" class="link black" title="Ver en sitio">Ver en sitio</a></span>
+      <% if(status != StatusChoices.PUBLISHED){ %>
+      <span class="publish-version">{% trans 'APP-LASTPUBLISHDATE-TEXT' %} <span id="id_lastPublishDate"><%= lastPublishDate %></span>, <a href="<%= micrositeUrl %>" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}">{% trans 'APP-VIEWONSITE-TEXT' %}</a></span>
       <% } %>
-      <span class="row-actions"><a class="link black" title="Despublicar" id="id_unpublish">Despublicar</a></span>
+
+      <% if(status != StatusChoices.UNPUBLISHED){ %>
+      <span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+     	<% } %>
+
+
     </div>
 
   </div>
@@ -34,36 +36,44 @@
   <!-- Column Right -->
   <div class="col-lg-5 context-buttons clearfix">
     
-    {# status 1 -> Pending review #}
-    <% if(status != 1){ %>
+    <% if(status != StatusChoices.PENDING_REVIEW){ %>
 
       {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
       {% if collect_type == 1 or collect_type == 2 or impl_type not in datastream_impl_not_valid_choices %}
 
-        <!-- Main Action -->
-        <a id="id_create" class="button primary FR" href="<% url 'manageDataviews.create' %>?dataset_revision_id={{ dataset_revision_id }}" title="<% trans 'APP-ACTIONS-CREATEVIEW' %>"><% trans 'APP-ACTIONS-CREATEVIEW' %></a>
+        <!-- Main Action - Create Data View -->
+        <a id="id_create" class="button primary FR" href="<%= createDataViewUrl %>" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>
 
       {% endif %}
       
-      <!-- Secondary Action -->
-      <a href="" class="button FR" title="<% trans 'APP-PUBLISH-TEXT' %>"><% trans 'APP-PUBLISH-TEXT' %></a>
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+	      <!-- Secondary Action - Publish -->
+	      <a id="id_publish" class="button FR" title="{% trans 'APP-PUBLISH-TEXT' %}" data-action="publish">{% trans 'APP-PUBLISH-TEXT' %}</a>
+
+      {% elif auth_manager.is_editor %}
+
+      	<!-- Secondary Action - Send to review -->
+        <a id="id_sendToReview" class="button FR" title="{% trans 'APP-SENDTOREVIEW-TEXT' %}" data-action="review">{% trans 'APP-SENDTOREVIEW-TEXT' %}</a>
+
+      {% endif %}
 
     <% }else{ %>
 
-      <% if(auth_manager.is_publisher or auth_manager.is_admin %>
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
 
         <!-- Accept -->
-        <a id="id_approve" class="button green FR" title="<% trans 'APP-APPROVE-TEXT' %>" data-action="approve"><% trans 'APP-APPROVE-TEXT' %></a>
+        <a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
         
         <!-- Reject -->
-        <a id="id_reject" class="button red FR" title="<% trans 'APP-REJECT-TEXT' %>" data-action="reject"><% trans 'APP-REJECT-TEXT' %></a>
+        <a id="id_reject" class="button red FR" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
 
-      <% } %>
+      {% endif %}
 
     <% } %>
 
     <!-- More Actions -->    
-    <div class="more-actions button-pulldown FR" style="display:<% if(status != 1){ %>block<% }else{ %>none<% } %>;">
+    <div class="more-actions button-pulldown FR" style="display:<% if(status != StatusChoices.PENDING_REVIEW){ %>block<% }else{ %>none<% } %>;">
       <div class="button more-button">
         <span class="icon icon-more"></span>
       </div>

@@ -7,13 +7,13 @@
 <link href="{% sass_src 'workspace/styles/viewDataset.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
-<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/datasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}
@@ -25,29 +25,9 @@
 
 {% block sectionTitle %}
 
+{{ dataset }}
+
 <div class="context-menu clearfix"></div>
-
-
-
-
-
-
-{% comment %}
-
-<ul class="actions FR">
-
-  {% if dataset.collect_type == 0 %}
-  <!-- Download -->
-  <li><a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="button small" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></li>
-  
-  {% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
-  <!-- Go to Source -->
-  <li><a id="id_gotosource" class="button small" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></li>
-  {% endif %}
-
-</ul>
-
-{% endcomment %}
 
 {% endblock %}
 
@@ -76,22 +56,27 @@
       </div>
     </div>
   </div>
+
+  {% include "viewDataset/templates.html" %}
+
 {% endblock %}
 
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var viewDatasetModel = new ViewDatasetModel({
+  var Dataset = new dataset({
     id: "{{ dataset.last_revision_id }}",
     dataset_id: " {{ dataset.dataset_id }}",
     status: "{{ dataset.status }}",
     status_str: "{{ dataset.status|status_str|capfirst }}",
     title: "{{ dataset.title|capfirst }}",
-    createUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
-    reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
-    editUrl: "{% url 'manageDataviews.edit' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
+    createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
+    changeStatusURL: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
+    editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
+    micrositeUrl: "TODO",
+    lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
   });
-  var viewDatasetView = new ViewDatasetView({model: viewDatasetModel});
+  var DatasetView = new datasetView({model: Dataset});
 });
 </script>
 {% endblock %}

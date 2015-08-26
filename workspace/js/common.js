@@ -113,7 +113,7 @@ var BaseView = Backbone.View.extend({
 
 		var button = $(event.currentTarget);
 
-		if( button.hasClass('more-button') && $('body').width() >= 1400 ){
+		if( button.hasClass('more-button') && $('body').width() >= 1440 ){
 			return false;
 		}
 
