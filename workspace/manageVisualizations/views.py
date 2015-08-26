@@ -14,7 +14,6 @@ from core.engine import invoke
 from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
-from core.docs import VZ
 from core.daos.datasets import DatasetDBDAO
 from core.models import VisualizationRevision,DatasetRevision
 from api.http import JSONHttpResponse

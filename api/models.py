@@ -6,7 +6,6 @@ from django.utils.datastructures import SortedDict
 from api.exceptions import Http400, Http401
 from api.helpers import add_domain_to_datastream_link
 from core.models import *
-from core.docs import DS, DB, VZ
 from core.daos.datastreams import DataStreamDBDAO
 from core import engine
 
