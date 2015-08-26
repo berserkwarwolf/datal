@@ -6,18 +6,29 @@ var charts = charts || {
 charts.models.Chart = Backbone.Model.extend({
     urlRoot: '/api/charts/',
     defaults: {
-        resourceUrl: '',
-        resourceID: null,
-        resourceIdAttribute: null,
         type: 'linechart',
         lib: 'google',
-        options: {
-        },
+
+        showLegend: true,
+        invertedAxis: null,
+        chartTemplate: '¿?',
+        nullValueAction: '',
+        nullValuePreset: '',
+        traspose: false,
+
         //metadata
         meta_title: null,
         meta_description: null,
         meta_category: null,
-        meta_notes: null
+        meta_notes: null,
+        meta_source: null,
+        meta_tags: null,
+
+        //data selection
+        range_headline:null,
+        range_data:null,
+        range_label:null
+
     },
     initialize: function () {
         this.data = new charts.models.ChartData({
@@ -63,7 +74,9 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     getFormData: function(){
-        return false; //return form data, 
+        var formData = this.getMeta();
+        formData = _.extend( formData,this.getSettings() );
+        return formData; 
     },
 
     getMeta: function(){
@@ -71,7 +84,9 @@ charts.models.Chart = Backbone.Model.extend({
             title: this.get('meta_title'),
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
-            category: this.get('meta_category')
+            category: this.get('meta_category'),
+            source: this.get('meta_source'),
+            tags: this.get('meta_tags')
         };
 
         return metadata;
@@ -87,8 +102,11 @@ charts.models.Chart = Backbone.Model.extend({
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
             traspose: this.get('traspose'),
-            sort: this.get('sort'),
-            title: this.get('title')
+
+            //data selection
+            range_headline: this.get('range_headline'),
+            range_data: this.get('range_data'),
+            range_label: this.get('range_label')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
