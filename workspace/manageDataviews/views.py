@@ -45,7 +45,7 @@ def action_view(request, revision_id):
 # quitarlo por que ya se maneja dentro @requires_any_dataset() #account must have almost one dataset
 @require_privilege("workspace.can_query_datastream")
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     ds_dao = DataStreamDBDAO()
 

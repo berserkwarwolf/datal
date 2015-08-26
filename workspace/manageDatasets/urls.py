@@ -1,10 +1,11 @@
 from django.conf.urls import patterns, url
 
-from workspace.manageDatasets.views import *
+from workspace.manageDatasets.views import index, action_view, create, edit, get_filters_json, remove, \
+    related_resources, review, action_load, action_request_file, check_source_url
 
 urlpatterns = patterns(
     '',
-    url(r'^$', list, name='manageDatasets.list'),
+    url(r'^$', index, name='manageDatasets.index'),
     url(r'^(?P<revision_id>\d+)$', action_view, name='manageDatasets.view'),
     url(r'^create$', create, name='manageDatasets.create'),
     url(r'^create/(?P<collect_type>[a-z]+)$', create, name='manageDatasets.create_type'),

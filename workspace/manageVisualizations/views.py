@@ -45,7 +45,7 @@ def action_view(request, revision_id):
 @requires_any_dataset()
 @requires_any_datastream()
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     vs_dao = VisualizationDAO(user_id=request.user.id)
     resources, total_resources = vs_dao.query(account_id=request.account.id
