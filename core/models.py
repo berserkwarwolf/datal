@@ -186,16 +186,6 @@ class Account(models.Model):
                 c.set('account_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-    def get_total_dashboards(self):
-        c = Cache(db=0)
-        users = User.objects.filter(account=self)
-        total_dashboards = c.get('account_total_dashboards_' + str(self.id))
-        if not total_dashboards:
-            total_dashboards =  Dashboard.objects.filter(user__in=users).count()
-            if total_dashboards > 0:
-                c.set('account_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
-        return total_dashboards
-
     def get_total_visualizations(self):
         c = Cache(db=0)
         users = User.objects.filter(account=self)
@@ -254,14 +244,6 @@ class User(models.Model):
                 c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-    def get_total_dashboards(self):
-        c = Cache(db=0)
-        total_dashboards = c.get('my_total_dashboards_' + str(self.id))
-        if not total_dashboards:
-            total_dashboards =  Dashboard.objects.filter(user=self.id).count()
-            if total_dashboards > 0:
-                c.set('my_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
-        return total_dashboards
 
     def get_total_visualizations(self):
         c = Cache(db=0)
@@ -392,9 +374,6 @@ class DataStreamRevision(models.Model):
 
     def get_guid(self):
         return self.datastream.guid
-
-    def get_dashboard_widgets(self):
-        return self.datastream.dashboardwidgets_set.order_by('-dashboard_revision').iterator()
 
     def get_latest_revision(self):
         return self.datastream.visualizationrevision_set.latest()
@@ -545,120 +524,6 @@ class DataStreamParameter(models.Model):
 
     def __unicode__(self):
         return  unicode(self.id)
-
-
-class Dashboard(GuidModel):
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    guid                = models.CharField(max_length=29, unique=True)
-    objects             = managers.DashboardManager()
-
-    class Meta:
-        db_table        = 'ao_dashboards'
-
-    def __unicode__(self):
-        return self.guid
-
-    # Returns the current revision
-    @property
-    def current(self):
-        return self.dashboardrevision_set.all()[0]
-
-    def get_absolute_url(self):
-        dbr = self.dashboardrevision_set.filter(status=choices.StatusChoices.PUBLISHED).order_by('-id')[0]
-        title = dbr.dashboardi18n_set.all()[0].title
-        return '/dashboards/%d/%s/' % (self.id, slugify(title))
-
-
-class DashboardRevision(models.Model):
-    dashboard           = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'))
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    category            = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
-    status              = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
-    meta_text           = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
-    widgets             = models.ManyToManyField('DataStream', through='DashboardWidget', verbose_name=ugettext_lazy( 'MODEL_DASHBOARD_WIDGET_TEXT' ))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    objects             = managers.DashboardRevisionManager()
-
-    class Meta:
-        db_table        = 'ao_dashboard_revisions'
-        ordering        = ['-id']
-        get_latest_by   = 'created_at'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-    def get_guid(self):
-        return self.dashboard.guid
-
-    def get_latest_revision(self):
-        return self.dashboard.dashboardrevision_set.latest()
-
-    def get_dict(self, language = 'en'):
-
-        from core.docs import DB
-        import time
-        dashboard = DB(self.id, language)
-        account = Account.objects.get(id = dashboard.account_id)
-
-        text = [dashboard.title, dashboard.description, dashboard.created_by_nick, dashboard.guid]
-        text.extend(dashboard.get_tags())
-        text = ' '.join(text)
-
-        account_id = dashboard.account_id
-        if account_id is None:
-            account_id = ''
-
-        indexable_dict = {
-                'docid' : "DB::" + dashboard.guid,
-                'fields' :
-                    {'type' : 'db',
-                     'dashboard_id': dashboard.dashboard_id,
-                     'dashboardrevision_id': dashboard.dashboardrevision_id,
-                     'title': dashboard.title,
-                     'text': text,
-                     'description': dashboard.description,
-                     'owner_nick' : dashboard.created_by_nick,
-                     'tags' : ','.join(dashboard.get_tags()),
-                     'account_id' : account_id,
-                     'timestamp' : int(time.mktime(dashboard.created_at.timetuple())),
-                    },
-                'categories': {'id': unicode(dashboard.category_id), 'name': dashboard.category_name}
-                }
-
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(dashboard.metadata))
-
-        return indexable_dict
-
-
-class DashboardI18n(models.Model):
-    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
-    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description  = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_i18n'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardWidget(models.Model):
-    order = models.IntegerField(verbose_name=ugettext_lazy( 'MODEL-ORDER-TEXT' ))
-    parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ), blank=True)
-    visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy( 'MODEL-VISUALIZATION-TEXT' ), blank=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_widgets'
-        ordering = ['order']
-
-    def __unicode__(self):
-        return unicode(self.id)
 
 
 class Dataset(GuidModel):
@@ -935,9 +800,6 @@ class VisualizationRevision(models.Model):
     def get_latest_revision(self):
         return self.visualization.visualizationrevision_set.latest()
 
-    def get_dashboard_widgets(self):
-        return self.visualization.dashboardwidgets_set.order_by('-dashboard_revision').iterator()
-
     def clone(self, status=choices.StatusChoices.DRAFT):
         visualization_revision = VisualizationRevision(
             visualization = self.visualization,
@@ -1084,17 +946,6 @@ class TagDatastream(models.Model):
         return unicode(self.id)
 
 
-class TagDashboard(models.Model):
-    tag = models.ForeignKey('Tag', null=True)
-    dashboardrevision = models.ForeignKey('DashboardRevision', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
-
-    class Meta:
-        db_table = 'ao_tags_dashboard'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class TagVisualization(models.Model):
     tag = models.ForeignKey('Tag', null=True)
     visualizationrevision = models.ForeignKey('VisualizationRevision', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_REVISION_LABEL'))
@@ -1149,7 +1000,6 @@ class Grant(models.Model):
 
 class ObjectGrant(models.Model):
     grant           = models.ForeignKey('Grant', verbose_name=ugettext_lazy('MODEL_GRANT_LABEL'))
-    dashboard       = models.ForeignKey('Dashboard', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'))
     datastream      = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
     visualization   = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
     type            = models.CharField(max_length=63, verbose_name=ugettext_lazy('MODEL_TYPE_LABEL'))
@@ -1310,30 +1160,6 @@ class DataStreamHits(models.Model):
         return unicode(self.id)
 
 
-class DashboardHits(models.Model):
-    dashboard       = models.ForeignKey('Dashboard')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    channel_type    = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
-
-    class Meta:
-        db_table = 'ao_dashboard_hits'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardRank(models.Model):
-    dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_ranks'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class DataStreamRank(models.Model):
     datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
     position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
@@ -1341,19 +1167,6 @@ class DataStreamRank(models.Model):
 
     class Meta:
         db_table = 'ao_datastream_ranks'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardComment(models.Model):
-    dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    user            = models.ForeignKey('User', verbose_name=ugettext_lazy( 'MODEL-AUTHOR-TEXT' ))
-    comment         = models.CharField(max_length=500, verbose_name=ugettext_lazy( 'MODEL-COMMENT-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_comments'
 
     def __unicode__(self):
         return unicode(self.id)
@@ -1374,7 +1187,6 @@ class DataStreamComment(models.Model):
 
 class Log(models.Model):
     user = models.ForeignKey('User',  on_delete=models.DO_NOTHING)
-    dashboard = models.ForeignKey('Dashboard', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'), on_delete=models.DO_NOTHING)
     datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'), on_delete=models.DO_NOTHING)
     visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'), on_delete=models.DO_NOTHING)
     content = models.TextField()
