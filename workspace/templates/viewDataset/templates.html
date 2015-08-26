@@ -1,0 +1,77 @@
+{% load i18n extra_tags core_components components %}
+
+{# Context Menu #}
+<script type="text/template" id="context-menu-template">
+	
+  <!-- Column Left -->
+  <div class="col-lg-7">    
+    
+    <h1><%= title %></h1>
+
+    <div class="status-row clearfix">
+
+      {# status 5 -> Rejected #}
+      {# status 6 -> Approved #}
+      <span class="status <% if(status == 5){ %> red <% }else if(status == 6){ %> green <% } %>">
+
+        {# status 3 -> Published #}
+        <% if(status == 3){ %> 
+        <span class="icon icon-inline icon-published"></span>
+        <% } %>
+
+        <em id="id_status"><%= status_str %></em>
+
+      </span>
+
+      <% if(status != 3){ %>
+      <span class="publish-version">Última versión publicada: <span id="id_lastPublishDate">30 de Septiembre de 2015, <a href="<%= micrositeUrl %>" class="link black" title="Ver en sitio">Ver en sitio</a></span>
+      <% } %>
+      <span class="row-actions"><a class="link black" title="Despublicar" id="id_unpublish">Despublicar</a></span>
+    </div>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-lg-5 context-buttons clearfix">
+    
+    {# status 1 -> Pending review #}
+    <% if(status != 1){ %>
+
+      {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
+      {% if collect_type == 1 or collect_type == 2 or impl_type not in datastream_impl_not_valid_choices %}
+
+        <!-- Main Action -->
+        <a id="id_create" class="button primary FR" href="<% url 'manageDataviews.create' %>?dataset_revision_id={{ dataset_revision_id }}" title="<% trans 'APP-ACTIONS-CREATEVIEW' %>"><% trans 'APP-ACTIONS-CREATEVIEW' %></a>
+
+      {% endif %}
+      
+      <!-- Secondary Action -->
+      <a href="" class="button FR" title="<% trans 'APP-PUBLISH-TEXT' %>"><% trans 'APP-PUBLISH-TEXT' %></a>
+
+    <% }else{ %>
+
+      <% if(auth_manager.is_publisher or auth_manager.is_admin %>
+
+        <!-- Accept -->
+        <a id="id_approve" class="button green FR" title="<% trans 'APP-APPROVE-TEXT' %>" data-action="approve"><% trans 'APP-APPROVE-TEXT' %></a>
+        
+        <!-- Reject -->
+        <a id="id_reject" class="button red FR" title="<% trans 'APP-REJECT-TEXT' %>" data-action="reject"><% trans 'APP-REJECT-TEXT' %></a>
+
+      <% } %>
+
+    <% } %>
+
+    <!-- More Actions -->    
+    <div class="more-actions button-pulldown FR" style="display:<% if(status != 1){ %>block<% }else{ %>none<% } %>;">
+      <div class="button more-button">
+        <span class="icon icon-more"></span>
+      </div>
+      <ul class="dropdown" style="display:none;">
+        <li id="id_edit"><a href="<%= editUrl %>" class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+        <li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
+      </ul>
+    </div>    
+
+  </div>
+</script>
