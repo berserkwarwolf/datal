@@ -2949,3 +2949,6 @@ msgstr "Volver"
 
 msgid "APP-ADDNEWDATASET-TEXT"
 msgstr "Nuevo conjunto de datos"
+
+msgid "APP-ADDNEWDATAVIEW-TEXT"
+msgstr "Nueva vista"

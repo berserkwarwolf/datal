@@ -18,22 +18,98 @@
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}
 
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageDatasets.list' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+{% endblock %}
+
 {% block sectionTitle %}
-<h1 class="FL"><a href="{% url 'manageDatasets.list' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
-<h2 class="FL">{{ dataset.title|capfirst }}</h2>
-<ul class="actions FR">
 
-  {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
-  {% if dataset.collect_type == 1 or dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
-  <!-- Create Data View -->
-  <li><a id="id_create" class="button small" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}"><i class="new"></i>{% trans 'APP-ACTIONS-CREATEVIEW' %}</a></li>
-  {% endif %}
+<div class="context-menu clearfix">
   
-  <!-- Edit -->
-  <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button small" title="{% trans 'APP-EDIT-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
+  <!-- Column Left -->
+  <div class="col-lg-7">    
+    
+    <h1>{{ dataset.title|capfirst }}</h1>
 
-  <!-- Delete -->
-  <li><a id="id_delete" class="button small" title="{% trans 'APP-DELETE-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
+    <div class="status-row clearfix">
+
+      {# status 5 -> Rejected #}
+      {# status 6 -> Approved #}
+      <span class="status {% if dataset.status == 5 %} red {% elif dataset.status == 6 %} green {% endif %}">
+
+        {# status 3 -> Published #}
+        {% if dataset.status == 3 %} 
+        <span class="icon icon-inline icon-published"></span>
+        {% endif %}
+
+        <em id="id_status"></em>
+
+      </span>
+
+      {% if dataset.status != 3 %}
+      <span class="publish-version">Última versión publicada: 30 de Septiembre de 2015, <a href="" class="link black" title="Ver en sitio">Ver en sitio</a></span>
+      {% endif %}
+      <span class="row-actions"><a href="" class="link black" title="Despublicar">Despublicar</a></span>
+    </div>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-lg-5 context-buttons clearfix">
+    
+    {# status 1 -> Pending review  #}
+    {% if dataset.status != 1 %}
+
+      {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
+      {% if dataset.collect_type == 1 or dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
+
+        <!-- Main Action -->
+        <a id="id_create" class="button primary FR" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>
+
+      {% endif %}
+      
+      <!-- Secondary Action -->
+      <a href="" class="button FR" title="{% trans 'APP-PUBLISH-TEXT' %}">{% trans 'APP-PUBLISH-TEXT' %}</a>
+
+    {% else %}
+
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+        <!-- Accept -->
+        <a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+        
+        <!-- Reject -->
+        <a id="id_reject" class="button red FR" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+
+      {% endif %}
+
+    {% endif %}
+
+    <!-- More Actions -->    
+    <div class="more-actions button-pulldown FR" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};">
+      <div class="button more-button">
+        <span class="icon icon-more"></span>
+      </div>
+      <ul class="dropdown" style="display:none;">
+        <li id="id_edit" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><a href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+        <li id="id_delete" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
+      </ul>
+    </div>    
+
+  </div>
+
+</div>
+
+
+
+
+
+
+
+{% comment %}
+
+<ul class="actions FR">
 
   {% if dataset.collect_type == 0 %}
   <!-- Download -->
@@ -44,12 +120,10 @@
   <li><a id="id_gotosource" class="button small" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></li>
   {% endif %}
 
-  <!-- Add New -->
-  <li class="has-separator"><a href="{% url 'manageDatasets.create' %}" id="id_addNew" class="button small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-
 </ul>
-<script>
-</script>
+
+{% endcomment %}
+
 {% endblock %}
 
 {% block content %}
@@ -58,22 +132,6 @@
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
         <div class="wrapper3">
-          
-          {# Pending review = 1  #}
-          {% if dataset.status == 1 %}
-            <!-- Review -->
-            <div class="alert alert-info clearfix" id="id_reviewBar">
-              {% if auth_manager.is_publisher or auth_manager.is_admin %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
-                <div class="navigation FR">
-                  <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
-                  <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
-                </div>
-              {% else %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
-              {% endif %}
-            </div>
-          {% endif %}
 
           <!-- Sidebar -->
           <section class="sidebar-container">
@@ -100,7 +158,7 @@
 $(document).ready(function(){
   var viewDatasetModel = new ViewDatasetModel({
     reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
-    status: "{{ dataset.status|status_str }}",
+    status: "{{ dataset.status|status_str|capfirst }}",
     id: "{{ dataset.last_revision_id }}",
     dataset_id: " {{ dataset.dataset_id }}",
     title: "{{ dataset.title }}"

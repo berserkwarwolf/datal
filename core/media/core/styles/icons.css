@@ -1,9 +1,19 @@
 /* Icons */
 .icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;height:24px;display:block;cursor:pointer;}
 
-/* When used inline with .button */
-.button .icon{margin-right:15px;display:inline-block;vertical-align:middle;position:relative;top:-2px;}
-.button .icon.icon-right{margin-right:0;margin-left:15px;}
+/* Inline common */
+.icon-inline,
+.button .icon{display:inline-block;vertical-align:middle;position:relative;top:-2px;}
+.button .icon.icon-right,
+.icon-inline.icon-right{margin-right:0;}
+
+	/* When used inline in text - Apply to small icons (16x16px in the 24x24px space for icon sprite) */
+	.icon-inline{width:16px;height:16px;margin-right:3px;}
+	.icon-inline.icon-right{margin-left:3px;}
+
+	/* When used inline in button */
+	.button .icon{margin-right:15px;}
+	.button .icon.icon-right{margin-left:15px;}
 
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
@@ -49,12 +59,16 @@
 	.icon-settings:hover,
 	.button.active .icon-settings{background-position:-48px -228px;}
 
+	/* General icons */
 	.icon-view-site{background-position:-12px -696px;}
 	.button:hover .icon-view-site{background-position:-48px -696px;}
 
 	.icon-more{background-position:-12px -732px;}
 	.icon-more:hover,
 	.button:hover .icon-more{background-position:-48px -732px;}
+
+	.icon-published{background-position:-12px -912px;}
+	.icon-published.icon-inline{background-position:-16px -916px;}
 
 
 	/* Actions */

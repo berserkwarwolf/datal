@@ -1,5 +1,5 @@
 /* Button */
-.button{height:48px;line-height:48px;font-size:15px;padding:0 15px;display:inline-block;border:1px solid transparent;font-family:'robotoregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
+.button{height:48px;line-height:46px;font-size:15px;padding:0 15px;display:inline-block;border:1px solid transparent;font-family:'robotoregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -7,10 +7,10 @@
 .button:hover{text-decoration:none;}
 
   /* Small */
-  .button.small{height:24px;line-height:24px;font-size:12px;padding:0 11px;}
+  .button.small{height:24px;line-height:22px;font-size:12px;padding:0 11px;}
 
   /* Big */
-  .button.big{height:66px;line-height:66px;font-size:20px;padding:0 40px;}
+  .button.big{height:66px;line-height:64px;font-size:20px;padding:0 40px;}
 
   /* Gray - Normal button */
   .button{border-color:#ccc;background:#fff;color:#0066cc;}

@@ -6,7 +6,7 @@
 body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
 
 /* Buttons */
-.button{@include transition(all, .1s, ease-in-out);
+.button{@include transition(all, .1s, ease-in-out);min-width:150px;
 
   /* Active */
   &.active{cursor:default;@include disable-transition(none !important);}
@@ -31,7 +31,7 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
   &.primary.disabled{color:#fff;background:#999;cursor:default;pointer-events:none;}
   
   /* More Button */
-  &.more-button{padding:0;width:48px;
+  &.more-button{padding:0;width:48px;min-width:0;
     .icon-more{margin:0;}
   }
 
@@ -94,9 +94,17 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
 
 }
 
-/* Red text */
-.red{color:#c1272d;}
-a.red:hover{color:#ea3442;}
+/* Red text, button or link - Delete / Reject */
+.red,
+.button.red{color:#c1272d !important;}
+a.red:hover,
+.button.red:hover{color:#ea3442 !important;}
+
+/* Green text, button or link - Accept */
+.green,
+.button.green{color:#009245 !important;}
+a.green:hover,
+.button.green:hover{color:#02c159 !important;}
 
 /* Context buttons */
 .context-buttons > *{
@@ -277,7 +285,7 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
   .logo:hover{background-position:0 -#{ $header-height };}
   
   #id_openDataSiteButton,
-  #id_backLink{height:$header-height;font:13px/#{ $header-height } arial,helvetica,sans-serif;}
+  #id_backLink{height:$header-height;font:13px/#{ $header-height } arial,helvetica,sans-serif;min-width:0;}
   #id_openDataSiteButton{border-color:transparent;
     &:hover{background:$button-primary-color;color:$button-primary-text-color;}
     .icon-right{margin-left:4px;}
@@ -377,7 +385,7 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
     h1,
     h2,
     h3{font-family:$font-titles-family;}
-    h1{font-size:$font-size-xl;line-height:normal;
+    h1{font-size:$font-size-xl;line-height:normal;padding:7px 0;
       a{}
       .total-resources{color:#808080;}
     }
@@ -388,11 +396,11 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
     h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
 
     /* Status row */
-    .status-row{padding:15px 0 0;
+    .status-row{padding:8px 0 0;
       & > span{float:left;}
       & > span:before{content:"|";padding:0 5px;color:#333;float:left;}
       & > span:first-child:before{content:"";padding:0;display:none;}
-      .status{font-style:italic;}
+      .status{}
     }
 
     /* Actions */
@@ -410,18 +418,10 @@ body{background-image:url(#{$loader-url-light});background-repeat:no-repeat;back
 }
 
 /* Section Content */
-.section-content{background:#fff;overflow:hidden;position:relative;width:100%;height:100%;
-	-webkit-border-radius:3px;
-	   -moz-border-radius:3px;
-	        border-radius:3px;
-}
+.section-content{background:#fff;overflow:hidden;position:relative;width:100%;height:100%;}
 
 /* Box */
-.box{background:#f6f4f4;margin-top:20px;text-shadow:0 1px 0 #fff;
-  -webkit-border-radius:3px;
-     -moz-border-radius:3px;
-          border-radius:3px;
-}
+.box{background:#f6f4f4;margin-top:20px;text-shadow:0 1px 0 #fff;}
 .box:first-child{margin-top:0;}
 .box > header{border-bottom:1px solid #e5e3e3;margin:0 15px;
   -webkit-box-shadow:0 1px 0 0 #fff;

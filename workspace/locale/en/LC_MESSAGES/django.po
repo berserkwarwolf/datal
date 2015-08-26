@@ -2959,3 +2959,9 @@ msgstr "Back"
 
 msgid "APP-ADDNEWDATASET-TEXT"
 msgstr "New Dataset"
+
+msgid "APP-ADDNEWDATAVIEW-TEXT"
+msgstr "New Data View"
+
+msgid "APP-STATUS-UNDERREVIEW"
+msgstr "In review"
