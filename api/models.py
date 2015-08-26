@@ -10,39 +10,6 @@ from core.daos.datastreams import DataStreamDBDAO
 from core import engine
 
 
-def datastream_as_dict(self, user_id=None, language='en'):
-
-    try:
-        datastreamrevision_id =  self.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
-        dao = DataStreamDBDAO().get(language, datastream_revision_id=datastreamrevision_id, published=True)
-    except Exception:
-        raise
-
-    sorted_dict = SortedDict([
-        ('id', dao.guid),
-        ('title', dao.title),
-        ('description', dao.description),
-        ('user', dao.author),
-        ('tags', doc.tags),
-        ('created_at', str(dao.created_at)),
-        ('source', doc.filename),
-        ('link', doc.permalink())
-    ])
-
-    if doc.parameters:
-        parameters = []
-        for param in doc.parameters:
-            parameters.append({"name": param.name,
-                               "position": param.position,
-                               "description": param.description,
-            })
-        sorted_dict.insert(9, 'parameters', parameters)
-
-    return sorted_dict
-
-DataStream.as_dict = datastream_as_dict
-
-
 def datastream_is_user_allowed(self, user_id):
     if user_id and self.user_id == user_id:
         return True
@@ -179,34 +146,3 @@ def user_as_dict(self):
     return l_sorted_dict
 
 User.as_dict = user_as_dict
-
-
-
-def visualization_as_dict(self, user_id = None):
-
-    visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(self.id)
-    doc = VZ(visualizationrevision_id, 'en')
-
-    sorted_dict = SortedDict([
-               ('id'          , doc.guid)
-             , ('title'       , doc.title)
-             , ('description' , doc.description)
-             , ('user'        , doc.created_by_nick)
-             , ('tags'        , doc.get_tags())
-             , ('created_at'  , str(doc.created_at))
-             , ('source'      , doc.end_point)
-             , ('link'        , doc.permalink())
-    ])
-
-    if doc.parameters:
-        parameters = []
-        for param in doc.parameters:
-            parameters.append({
-                               "name": param.name,
-                               "position": param.position,
-                               "description": param.description,
-                              })
-        sorted_dict.insert(9, 'parameters', parameters)
-    return sorted_dict
-
-Visualization.as_dict = visualization_as_dict
