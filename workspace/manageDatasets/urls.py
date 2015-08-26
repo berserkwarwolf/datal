@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, url
 
-from workspace.manageDatasets.views import index, action_view, create, edit, get_filters_json, remove, \
-    related_resources, review, action_load, action_request_file, check_source_url
+from workspace.manageDatasets.views import *
 
 urlpatterns = patterns(
     '',

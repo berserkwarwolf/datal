@@ -12,7 +12,7 @@
 
     <!-- Datasets -->
     <li>
-      <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="nav-datasets">
+      <a id="id_datasets_option" href="{% url 'manageDatasets.index' %}" class="nav-datasets">
         {% include 'icons/nav-datasets.html' %}
         <span>{% trans 'APP-DATASETS-TEXT' %}</span>
       </a>
@@ -21,7 +21,7 @@
     <!-- Data Views -->
     <li>
         <a id="id_dataviews_option" 
-            {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.list' %}"{% endif %} 
+            {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.index' %}"{% endif %}
             class="nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}">
           {% include 'icons/nav-dataviews.html' %}
           {% if stats.my_total_datasets != 0 %}<span>{% trans 'APP-DATAVIEWS-TEXT' %}</span>{% endif %}
@@ -32,7 +32,7 @@
 
     <!-- Visualizations -->
     <li>
-      <a id="id_visualizations_option" href="{% url 'manageVisualizations.list' %}" class="nav-visualizations">
+      <a id="id_visualizations_option" href="{% url 'manageVisualizations.index' %}" class="nav-visualizations">
         {% include 'icons/nav-visualizations.html' %}
         <span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</span>
       </a>

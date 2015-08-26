@@ -48,12 +48,6 @@ def action_view(request, revision_id):
 def index(request):
     """ list all dataviews """
     ds_dao = DataStreamDBDAO()
-
-    resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
-
-    for resource in resources:
-        resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
-
     filters = ds_dao.query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
 
