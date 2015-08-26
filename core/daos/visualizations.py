@@ -21,6 +21,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         pass
 
     def get(self, language, visualization_id=None, visualization_revision_id=None, guid=None, published=True):
+        # Campos datastream_revision_id, visualization_id, impl_details, title, id, datastream_type, end_point, datastream_id, slug
         pass
 
     def query_childs(self, visualization_id, language):

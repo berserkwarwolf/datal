@@ -106,6 +106,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         dataset_revision = datastream_revision.dataset.last_revision
 
         datastream = dict(
+            datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
             user_id=datastream_revision.user.id,
@@ -114,6 +115,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_id=datastream_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            filename=dataset_revision.filename,
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,

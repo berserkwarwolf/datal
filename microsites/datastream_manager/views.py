@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 from core.choices import ChannelTypes
-from core.docs import DS
+from core.daos.datastreams import DataStreamDBDAO
 from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
@@ -36,16 +36,8 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-    datastream = DS(datastreamrevision_id, preferences['account_language'])
+    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_revision_id=datastreamrevision_id)
     impl_type_nice = set_dataset_impl_type_nice(datastream.impl_type).replace('/',' ')
-
-    """ #TODO this must be at middleware
-    # verify if this account is the owner of this viz
-    dats = DataStream.objects.get(pk=id)
-    if account.id != dats.user.account.id:
-        logger.debug('Can\'t show. Not owner [%s|%s]=%s' % (id, str(account.id), str(dats.user.account.id), "Not owner"))
-        raise Http404
-    """
     url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
 
     can_download    = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
@@ -53,20 +45,10 @@ def action_view(request, id, slug):
     can_share       = False
 
     DataStreamDBDAO().hit(id, ChannelTypes.WEB)
-
-
-#    datastream_html = ''
-#    if is_bot(request):
-#        from core.engine import invoke
-#        from core.emitters import HTMLEmitter
-#        json_response, type = invoke({'pId': datastreamrevision_id}, force_cache=True)
-#        loaded_json = json.loads(json_response)
-#        emitter = HTMLEmitter(loaded_json, name = datastream.title)
-#        datastream_html = emitter.render()
-
     notes = datastream.notes
 
     return render_to_response('viewDataStream/index.html', locals())
+
 
 def action_flexmonster(request, id, slug):
     lang = request.preferences['account_language']
@@ -105,16 +87,19 @@ def action_flexmonster(request, id, slug):
         </config>""" % (url, lang)
     return HttpResponse(xml, content_type="text/xhtml+xml")
 
+
 @xframe_options_exempt
 def action_embed(request, guid):
-
     account = request.account
     preferences = request.preferences
     base_uri = 'http://' + preferences['account_domain']
 
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_by_guid(guid)
-        datastream = DS(datastreamrevision_id, preferences['account_language'])
+        datastream = DataStreamDBDAO().get(
+            preferences['account_language'],
+            datastream_revision_id=datastreamrevision_id
+        )
         parameters_query = RequestProcessor(request).get_arguments(datastream.parameters)
     except Http404:
         return render_to_response('datastream_manager/embed404.html',{'settings': settings, 'request' : request})

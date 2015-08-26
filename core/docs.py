@@ -6,14 +6,7 @@ from core.choices import StatusChoices, CollectTypeChoices, COLLECT_TYPE_CHOICES
 from core.helpers import slugify
 from core.primitives import PrimitiveComputer
 
-
-# tags
-# sources
-# remove notes from original SQLs
-
-DEFAULT_URLCONF = 'workspace.urls'
-MS_URLCONF = 'microsites.urls'
-
+DEFAULT_URLCONF = ''
 
 class DB:
     def __init__(self, dashboardrevision_id, language, last = True):
@@ -227,38 +220,6 @@ class DS:
                  ORDER BY `ao_dataset_revisions`.`id` DESC, `ao_datastream_parameters`.`position` ASC"""
         return _execute_sql(sql, [datastreamrevision_id, self.language, self.language])
 
-    def get_tags(self):
-        if self.tags is None:
-            sql = """SELECT `ao_tags`.`name`
-                     FROM `ao_tags`
-                     INNER JOIN `ao_tags_datastream` ON (`ao_tags_datastream`.`tag_id` = `ao_tags`.`id`)
-                     WHERE (`ao_tags_datastream`.`datastreamrevision_id` = %s)"""
-            cursor = _execute_sql(sql, [self.datastreamrevision_id])
-            row = cursor.fetchone()
-            self.tags = []
-            while row:
-                self.tags.append(row[0])
-                row = cursor.fetchone()
-        return self.tags
-
-    def get_sources(self):
-        if self.sources is None:
-            sql = """SELECT `ao_sources`.`name`
-                            , `ao_sources`.`url`
-                     FROM `ao_sources`
-                     INNER JOIN `ao_sources_datastream_revision` ON (`ao_sources`.`id` = `ao_sources_datastream_revision`.`source_id`)
-                     WHERE (`ao_sources_datastream_revision`.`datastreamrevision_id` = %s)"""
-            cursor = _execute_sql(sql, [self.datastreamrevision_id])
-            row = cursor.fetchone()
-            self.sources = []
-            while row:
-                self.sources.append(Src(row))
-                row = cursor.fetchone()
-        return self.sources
-
-    def permalink(self, urlconf = DEFAULT_URLCONF):
-        return reverse('datastream_manager.action_view', MS_URLCONF, kwargs={'id': self.datastream_id, 'slug': self.slug})
-
     def embedUrl(self, urlconf = DEFAULT_URLCONF):
         return reverse('datastream_manager.action_embed', MS_URLCONF, kwargs={'guid': self.guid})
 
@@ -270,15 +231,6 @@ class DS:
 
     def datastream_type(self):
         return unicode(COLLECT_TYPE_CHOICES[int(self.type)][1])
-
-
-class ParameterVZ:
-    def __init__(self, row):
-        self.name = row[21]
-        self.position = row[22]
-        self.description = row[23]
-        self.default = row[24]
-        self.value = ''
 
 
 class VZ:
@@ -435,132 +387,6 @@ class VZ:
                 self.tags.append(row[0])
                 row = cursor.fetchone()
         return self.tags
-             
-
-class DT:
-    def __init__(self, datasetrevision_id, language):
-        pass
-
-    def get_sources(self):
-        if self.sources is None:
-            sql = """SELECT `ao_sources`.`name`
-                            , `ao_sources`.`url`
-                     FROM `ao_sources`
-                     INNER JOIN `ao_sources_dataset_revision` 
-                     ON (`ao_sources`.`id` = `ao_sources_dataset_revision`.`source_id`)
-                     WHERE (`ao_sources_dataset_revision`.`datasetrevision_id` = %s)"""
-            cursor = _execute_sql(sql, [self.datasetrevision_id])
-            row = cursor.fetchone()
-            self.sources = []
-            while row:
-                self.sources.append(Src(row))
-                row = cursor.fetchone()
-        return self.sources
-
-    def get_tags(self):
-        """ copy of DB get_tags. Database has the ao_tags_dataset and seems unused """
-        if self.tags is None:
-            sql = """SELECT `ao_tags`.`name`
-                    FROM `ao_tags`
-                    INNER JOIN `ao_tags_dataset` ON (`ao_tags`.`id` = `ao_tags_dataset`.`tag_id`)
-                    WHERE (`ao_tags_dataset`.`datasetrevision_id` = %s)"""
-            cursor = _execute_sql(sql, [self.datasetrevision_id])
-            row = cursor.fetchone()
-            self.tags = []
-            while row:
-                self.tags.append(row[0])
-                row = cursor.fetchone()
-        return self.tags
-
-
-class DBWidget:
-    def __init__(self, row, language, last = True):
-        self.last = last
-        self.language = language
-        self.id = row[0]
-        self.dashboard_revision_id = row[1]
-        self.datastream_id = row[2]
-        self.visualization_id = row[3]
-        self.order = row[4]
-        self.parameters = self.compute(row[5])
-        self.ds = None
-        self.vz = None
-        self.datastreamrevision_id = None
-        self.visualizationrevision_id = None
-
-    def compute(self, parameters):
-        if not parameters:
-            return parameters
-
-        args        = parameters.split("&")
-        query       = ''
-        primitive   = PrimitiveComputer()
-        for arg in args:
-            parameter = arg.split("=")
-            if len(parameter) > 1:
-                query += '&' + parameter[0] + '=' + str(primitive.compute(parameter[1]))
-
-        return query
-
-    def is_ds(self):
-        return not self.is_vz()
-
-    def is_vz(self):
-        return bool(self.visualization_id)
-
-    def get_ds(self):
-        if not self.ds:
-            self.ds = DS(datastreamrevision_id = self._get_datastreamrevision_id(), language = self.language)
-        return self.ds
-
-    def _get_datastreamrevision_id(self):
-        if self.datastreamrevision_id is None:
-            sql = """SELECT MAX(`ao_datastream_revisions`.`id`) AS `datastreamrevision_id`
-            FROM `ao_datastream_revisions`
-            WHERE `ao_datastream_revisions`.`datastream_id` = %s"""
-            params = [self.datastream_id]
-
-            if not self.last:
-                sql += """ AND `ao_datastream_revisions`.`status` = %s"""
-                params.append(StatusChoices.PUBLISHED)
-
-            cursor = _execute_sql(sql, params)
-            row = cursor.fetchone()
-            self.datastreamrevision_id = row[0]
-        return self.datastreamrevision_id
-
-    def _get_visualizationrevision_id(self):
-        if self.visualizationrevision_id is None:
-            sql = """SELECT MAX(`ao_visualizations_revisions`.`id`) AS `visualizationrevision_id`
-            FROM `ao_visualizations_revisions`
-            WHERE `ao_visualizations_revisions`.`visualization_id` = %s"""
-            params = [self.visualization_id]
-
-            if not self.last:
-                sql += """ AND `ao_visualizations_revisions`.`status` = %s"""
-                params.append(StatusChoices.PUBLISHED)
-
-            cursor = _execute_sql(sql, params)
-            row = cursor.fetchone()
-            self.visualizationrevision_id = row[0]
-        return self.visualizationrevision_id
-
-    def get_vz(self):
-        if not self.vz:
-            self.vz = VZ(visualizationrevision_id = self._get_visualizationrevision_id(), language = self.language)
-        return self.vz
-
-    def get(self):
-        if self.is_ds():
-            return self.get_ds()
-        else:
-            return self.get_vz()
-
-    def has_revision(self):
-        if self.is_ds():
-            return bool(self._get_datastreamrevision_id())
-        else:
-            return bool(self._get_visualizationrevision_id())
 
 
 def _execute_sql(sql, params):

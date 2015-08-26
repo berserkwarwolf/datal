@@ -23,6 +23,25 @@ from microsites.daos.datastreams import DatastreamDAO
 import json
 import urllib
 
+
+@login_required
+@require_GET
+def action_view(request, revision_id):
+
+    language = request.auth_manager.language
+    try:
+        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
+    except DataStreamRevision.DoesNotExist:
+        raise DataStreamNotFoundException()
+
+    account_id = request.auth_manager.account_id
+    credentials = request.auth_manager
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
+    status_options = credentials.get_allowed_actions()
+
+    return render_to_response('viewDataStream/index.html', locals())
+
+
 @login_required
 @requires_any_dataset()
 @requires_any_datastream()

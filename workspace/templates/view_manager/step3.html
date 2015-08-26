@@ -16,12 +16,13 @@
 
         <!-- CAJA DATOS -->
 		<div id="id_operation_container" class="dataStreamForm">
+
 			{% if datastream_id %}
 				{% dataStreamForm  is_update_selection datastream_id '' auth_manager preferences meta_data %}
 			{% else %}
-				{% dataStreamForm is_update_selection '' data_set_id auth_manager preferences meta_data %}				
+				{% dataStreamForm is_update_selection '' data_set_id auth_manager preferences meta_data %}
 			{% endif %}
-			
+
 		</div>
 
     </div>
