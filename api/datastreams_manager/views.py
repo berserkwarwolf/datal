@@ -108,30 +108,6 @@ def action_last(request):
     else:
         raise Http400
 
-def action_top(request):
-    is_method_get_or_405(request)
-    form = forms.TopForm(request.GET)
-    if form.is_valid():
-        max_results = form.cleaned_data['max_results']
-        account_id = request.account_id
-
-        datastream_ids = DataStream.objects.get_top(account_id = account_id
-                                                     , limit = max_results)
-
-        datastreams_objects = DataStream.objects.filter(id__in = datastream_ids)
-        datastreams = []
-        account_domain = get_domain(account_id)
-        language = Account.objects.get(pk=account_id).get_preference('account.language')
-        for datastream in datastreams_objects:
-            datastream_dict = datastream.as_dict(language = language)
-            link = datastream_dict['link']
-            datastream_dict['link'] = account_domain + link
-            datastreams.append(datastream_dict)
-
-        return JSONHttpResponse(json.dumps(datastreams))
-    else:
-        raise Http400
-
 
 @public_access_forbidden
 def action_history(request, guid):
