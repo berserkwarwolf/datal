@@ -7,7 +7,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject, #id_publish, #id_review, #id_unpublish': 'changeStatus',
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview, #id_unpublish': 'changeStatus',
 	},
 
 	initialize: function(){

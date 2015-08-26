@@ -24,9 +24,11 @@
       <span class="publish-version">{% trans 'APP-LASTPUBLISHDATE-TEXT' %} <span id="id_lastPublishDate"><%= lastPublishDate %></span>, <a href="<%= micrositeUrl %>" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}">{% trans 'APP-VIEWONSITE-TEXT' %}</a></span>
       <% } %>
 
-      <% if(status != StatusChoices.UNPUBLISHED){ %>
-      <span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
-     	<% } %>
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+	      <% if(status != StatusChoices.UNPUBLISHED){ %>
+	      <span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+	     	<% } %>
+	    {% endif %}
 
 
     </div>
