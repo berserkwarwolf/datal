@@ -422,56 +422,6 @@ class DataStreamRevision(models.Model):
 
         return datastream_revision
 
-    def get_dict(self, language = 'en'):
-
-        from core.docs import DS
-        import time
-
-        datastream = DS(self.id, language)
-        account = Account.objects.get(id = datastream.account_id)
-
-        text = [datastream.title, datastream.description, datastream.created_by_nick, datastream.guid]
-        text.extend(datastream.get_tags())
-        text = ' '.join(text)
-
-        account_id = datastream.account_id
-        if account_id is None:
-            account_id = ''
-
-        parameters = []
-        for parameter in datastream.parameters:
-            parameters.append({'name': parameter.name
-                               , 'description': parameter.description})
-        if parameters:
-            parameters = json.dumps(parameters)
-        else:
-            parameters = ''
-
-        indexable_dict = {
-                'docid' : "DS::" + datastream.guid,
-                'fields' :
-                    {'type' : 'ds',
-                     'datastream_id': datastream.datastream_id,
-                     'datastreamrevision_id': datastream.datastreamrevision_id,
-                     'title': datastream.title,
-                     'text': text,
-                     'description': datastream.description,
-                     'owner_nick' : datastream.created_by_nick,
-                     'tags' : ','.join(datastream.get_tags()),
-                     'account_id' : account_id,
-                     'parameters': parameters,
-                     'timestamp': int(time.mktime(datastream.created_at.timetuple())),
-                     'end_point': datastream.end_point,
-                    },
-                'categories': {'id': unicode(datastream.category_id), 'name': datastream.category_name}
-                }
-
-        # Update dict with facets
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(datastream.metadata))
-
-        return indexable_dict
-
 
 class DatastreamI18n(models.Model):
     language = models.CharField(
