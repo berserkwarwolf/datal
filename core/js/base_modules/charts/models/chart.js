@@ -4,7 +4,6 @@ var charts = charts || {
 };
 
 charts.models.Chart = Backbone.Model.extend({
-    url: '',
     urlRoot: '/api/charts/',
     defaults: {
         resourceUrl: '',
@@ -19,29 +18,48 @@ charts.models.Chart = Backbone.Model.extend({
         meta_description: null,
         meta_category: null,
         meta_notes: null
-
     },
     initialize: function () {
-        this.data = new charts.models.ChartData();
-    },
-    render: function(){
-        return true;
-    },
-    fetchData: function () {
-        var urlRoot = this.get('resourceUrl'),
-            resourceID = this.get('resourceID');
-
         this.data = new charts.models.ChartData({
-            id: resourceID
-        }, {
-            urlRoot: urlRoot
+            urlRoot: this.get('resourceUrl'),
+            idAttribute: this.get('resourceIdAttribute'),
+            id: this.get('resourceID')
         });
+        this.bindEvents();
+    },
 
+    bindEvents: function () {
+        //Se actualizan los filtros de los datos cuando se cambian las options
+        this.on('change:options', this.updateFetchFilters);
+        this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
+    },
+
+    /**
+     * Default fetch filter updater
+     */
+    updateFetchFilters: function () {
+        this.data.set('fetchFilters', this.get('options'));
+    },
+
+    /**
+     * Handler para manejar las actualizaciones a los datos
+     * @return {[type]} [description]
+     */
+    handleDataUpdate: function () {
+        console.log("ChartModel data updated:");
+        this.trigger('data_updated');
+    },
+
+    /**
+     * Fetch data for the chart
+     * @return {promise}
+     */
+    fetchData: function () {
         return this.data.fetch();
     },
 
-    getDataUrl: function () {
-        return this.get('resourceUrl') + this.get('resourceIdAttribute') + '=' + this.get('resourceID');
+    render: function(){
+        return true;
     },
 
     getFormData: function(){
@@ -68,7 +86,6 @@ charts.models.Chart = Backbone.Model.extend({
             chartTemplate: '¿?',
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
-            showLegend: this.get('showLegend'),
             traspose: this.get('traspose'),
             sort: this.get('sort'),
             title: this.get('title')
