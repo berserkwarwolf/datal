@@ -1,17 +1,17 @@
-/* Icons */
+/* Íconos */
 .icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;    height: 24px;display:block;
 }
 
-/* Icons with background */
+/* Íconos con fondo */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
 .fill-background:hover{background-color:#0066ff;}
 
-/* 48px icons */
+/* Íconos 48px */
 .size-48{
-	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 240px auto;width:48px;height:48px;}
 
 
-	/* Nav local */
+	/* Navegación local */
 	.icon-home{background-position:-12px -12px;}
 	.icon-home:hover{background-position:-48px -12px;}
 
@@ -34,7 +34,7 @@
 	.icon-config:hover{background-position:-48px -228px;}
 
 
-	/* Actions */
+	/* Accionables */
 	.icon-edit{background-position:-12px -264px;}
 	.icon-edit:active{background-position:-96px -264px;}
 	.icon-edit.fill-background{background-position:0 -290px;}
@@ -52,7 +52,7 @@
 	.icon-zoom-out:active{background-position:-96px -480px;}
 
 
-	/* Charts */
+	/* Gráficos */
 	.icon-chart-column{background-position:-12px -516px;}
 	.icon-chart-column.size-48{background-position:-24px -1032px;}
 
@@ -68,6 +68,16 @@
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
 
+	/* Mapas */
+	.icon-map-marker{background-position:-12px -948px;}
+	.icon-map-marker.size-48{background-position:-24px -1896px;}
 
-/* Corner position */
+	.icon-map-trace{background-position:-12px -984px;}
+	.icon-map-trace.size-48{background-position:-24px -1968px;}
+
+	.icon-map-geo{background-position:-12px -1020px;}
+	.icon-map-geo.size-48{background-position:-24px -2040px;}
+
+
+/* Posicionamiento */
 .corner-position{position:absolute;top:10px;right:10px;z-index:100;}
