@@ -10,9 +10,13 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
-		this.selectedRangesView = new SelectedRangesView({
+		this.selectedCellRangeView = new SelectedCellRangeView({
 			el: this.$('.selected-ranges-view'),
 			collection: this.collection
+		});
+		this.listenTo(this.selectedCellRangeView, 'focusout', function (name) {
+			console.log(name)
+			// this.addSelection(name);
 		});
 
 		var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
@@ -22,13 +26,9 @@ var ChartSelectDataModalView = ModalView.extend({
 		// TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
 		// request when it fails.
 		$.getJSON(dataUrl).then(function (payload) {
-			self.dataTableView = new DataTableView({
-				el: '.data-table-view',
-				collection: self.collection,
-				invoke: payload
-			});
-			self.dataTableView.render();
-		})
+			self.createDataTableView(payload);
+		});
+
 		return this;
 	},
 
@@ -39,6 +39,20 @@ var ChartSelectDataModalView = ModalView.extend({
 		this.model.data.set('fields', selectedFields);
 		this.model.data.set('rows', selectedRows);
 		this.model.set('selection', this.collection.getSelectionExcelStyle());
+	},
+
+	createDataTableView: function (payload) {
+		this.dataTableView = new DataTableView({
+			el: this.$('.data-table-view'),
+			collection: this.collection,
+			invoke: payload
+		});
+		this.dataTableView.render();
+		this.listenTo(this.dataTableView, 'selected', function (range) {
+			this.selectedCellRangeView.select(range);
+			// this.selectedCellRangeView.selectedFieldName
+			// this.dataTableView.addSelection();
+		}, this);
 	},
 
 	addSelection: function () {

@@ -1,4 +1,4 @@
-var SelectedRangesView = Backbone.View.extend({
+var SelectedCellsCollectionView = Backbone.View.extend({
 	events: {
 		'click .btn-remove': 'onClickRemove'
 	},

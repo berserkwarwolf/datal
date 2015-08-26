@@ -91,7 +91,7 @@ var DataTableView = Backbone.View.extend({
 
   cacheSelection: function (coords) {
     this._selectedCoordsCache = coords;
-    this.trigger('selected', coords);
+    this.trigger('selected', this.rangeToExcel(coords));
   },
 
   coordsToCells: function (coords) {
@@ -132,7 +132,7 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  addSelection: function () {
+  addSelection: function (name) {
     var newId = this.available.pop(),
       range = this._selectedCoordsCache,
       data,
@@ -145,6 +145,7 @@ var DataTableView = Backbone.View.extend({
       // it should do something else, like split the columns into separate series.
       data = _.map(data, _.first);
     }
+    console.log(name);
     model = new DataTableSelectionModel({
       id: newId,
       range: range,
