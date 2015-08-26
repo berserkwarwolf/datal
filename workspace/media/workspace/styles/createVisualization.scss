@@ -1,19 +1,19 @@
-/* Imports */
+/* Importar */
 @import 'variables';
 
-/* Nav */
+/* Navegación */
 .navCreator{
   position:relative;
 
     ul{
       width:310px;
 
-        /* Nav items */
+        /* Items */
         li{font-family:$font-secondary-family, sans-serif;font-weight:300;font-size:$font-size-xl;padding:30px 10px;cursor:pointer;color:$font-color-base;border-bottom:1px solid $color-base-extra-light;}
         li:hover{background:$color-base-extra-light;}
         li.active{background:#8fceea;}
 
-        /* Nav titles */
+        /* Títulos */
         li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px 10px 10px;cursor:default;border:0 none;background:none;}
 
         li.heading:not(:first-child){margin-top:30px;}
@@ -24,7 +24,7 @@
 
         span{float:left;margin-right:20px;}
 
-        /* Nav items */
+        /* Items */
         li{
           font-size:$font-size-l;color:$accent-color;float:left;padding:20px 30px;float:left;width:100%;
 
@@ -35,14 +35,14 @@
         li:hover{background-color:#ededed;}
         li:last-child{margin-bottom:30px;}
 
-        /* Nav titles */
+        /* Títulos */
         li.heading{padding-left:30px;background:none;font-size:$font-size-m;color:$font-color-light;}
     }
 
 }
 
 
-/* Layout */
+/* Estructura */
 .sidebar{
   padding-left:40px;
   color:$font-color-base;
@@ -60,7 +60,7 @@
 }
 
 
-/* Forms */
+/* Formularios */
 .radio,
 .checkbox{
   position:relative;padding-left:20px;line-height:19px;padding-left:22px;
@@ -75,33 +75,46 @@ fieldset{margin-bottom:20px;}
 select{font-size:$font-size-m;}
 
 
-/* Buttons */
+/* Botones */
 button{background-color:$accent-color;border:none;outline:none;border-radius:none;cursor:pointer;}
 
-/* Buttons group */
-.btnGroup {
-  margin-bottom:10px;
+  /* Grupo de botones */
+  .btnGroup {
+    margin-bottom:10px;
 
-    button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background-color:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
+      button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background-color:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
 
-      &:hover{border-color:$accent-shine;}
+        &:hover{border-color:$accent-shine;}
 
-    }
+      }
 
-    button.active{border:2px solid $accent-color;}
-}
+      button.active{border:2px solid $accent-color;}
+  }
+    
+  /* Grupo de botones inline
+  /* Usar como complemento a .btnGroup 
+  */
+  .btnInlineGroup{
+    button{float:left;margin:3px 0;}
+  }
 
 
-/* Patchs */
+/* Cuadros
+/* Botones con ícono, títuo y descripción
+*/
 .patch{
-  cursor:pointer;margin-bottom:15px;display:inline-block;
+  cursor:pointer;margin-bottom:15px;display:inline-block;border:2px solid $color-base-extra-light;width:100%;padding:15px;
+
+  &:hover{border:2px solid $accent-shine;}
 
   span{float:left;margin-right:15px;}
   p{color:$font-color-light;}
+  a:hover{text-decoration:none;}
 }
+.patch.active{border-color:$accent-color;}
 
 
-/* Charts */
+/* Gráficos */
 .preview-container {
   padding:15px 40px 15px 0;
 
