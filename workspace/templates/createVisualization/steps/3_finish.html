@@ -2,48 +2,36 @@
 
 <div class="step-3-view">
 
-	Reviso y Termino el chart
-	
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="finishButton">{% trans 'APP-FINISH-TEXT' %}</a>
-		</li>
-	</ul>
-
 	<div class="wrapper1">
 		<div class="wrapper2">
 			<div class="wrapper3">
 
-				Configuro el chart
+				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
 
-				<ul>
-					<li>
-						<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-					</li>
-					<li>
-						<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-					</li>
-				</ul>
+				<ol>
+					<li>{% trans "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+				</ol>
+
+				<a class="button primary finishButton">{% trans 'APP-FINISH-TEXT' %}</a>
 
 				<div class="sidebar">
 
 					<button class="icon icon-edit fill-background corner-position">&nbsp;</button>
 
 					<div class="row">
-						<div class="title">Descripción<span class="required">*</span></div>
+						<div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum nisi et neque scelerisque porta.</p>
 					</div>
 
 					<div class="row">
-						<div class="title">Categoría</div>
+						<div class="title">{% trans "APP-CATEGORY-TEXT" %}</div>
 						<p>Educación</p>
 					</div>
 
 					<div class="row">
-						<div class="title">Etiquetas</div>
+						<div class="title">{% trans "APP-LABEL-TEXT" %}</div>
 						<div class="sourcesContent">
 							<div class="tag">
 								<span class="tagInner clearfix">
@@ -60,7 +48,7 @@
 					</div>
 
 					<div class="row">
-						<div class="title">Origen de fuente de metadatos</div>
+						<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT" %}</div>
 						<p>Ministerio de educación</p>
 					</div>
 

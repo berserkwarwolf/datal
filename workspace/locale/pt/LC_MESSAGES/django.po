@@ -3049,3 +3049,6 @@ msgstr "Seleccione los datos que desee representar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-REFERENCES-TEXT"
 msgstr "Referencias"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
+msgstr "Origen de la fuente de datos"
