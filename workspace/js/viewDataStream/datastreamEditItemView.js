@@ -96,7 +96,7 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
                 data = this.model.get('data');
 
             $.ajax({ 
-                url: '/dataviews/edit/'+ this.model.get('datastream_revision_id'), 
+                url: this.model.get('editUrl'), 
                 type:'POST', 
                 data: data, 
                 dataType: 'json',

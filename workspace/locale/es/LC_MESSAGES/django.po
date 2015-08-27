@@ -2952,3 +2952,9 @@ msgstr "Última versión publicada:"
 
 msgid "APP-VIEWONSITE-TEXT"
 msgstr "Ver en sitio"
+
+msgid "APP-SENDREJECTEDNOTE-TEXT"
+msgstr "¿Motivo del rechazo?"
+
+msgid "APP-VIEWREJECTEDNOTE-TEXT"
+msgstr "Ver motivo del rechazo"

@@ -36,7 +36,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 		
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
-			url = this.model.get('changeStatusURL'),
+			url = this.model.get('changeStatusUrl'),
 			self = this;
 
 		$.ajax({

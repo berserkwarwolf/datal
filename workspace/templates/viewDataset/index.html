@@ -24,9 +24,7 @@
 {% endblock %}
 
 {% block sectionTitle %}
-
 <div class="context-menu clearfix"></div>
-
 {% endblock %}
 
 {% block content %}
@@ -69,7 +67,7 @@ $(document).ready(function(){
     status_str: "{{ dataset.status|status_str|capfirst }}",
     title: "{{ dataset.title|capfirst }}",
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
-    changeStatusURL: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
+    changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
     micrositeUrl: "TODO",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",

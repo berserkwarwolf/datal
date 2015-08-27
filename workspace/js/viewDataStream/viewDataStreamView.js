@@ -3,23 +3,20 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	el: '.main-section',
 
 	theDataTable: null,
-		listResources: null,
-		sourceUrl: null,
-		tagUrl: null,
-		datastreamEditItemModel: null,
+	listResources: null,
+	sourceUrl: null,
+	tagUrl: null,
+	datastreamEditItemModel: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject': 'review',
-		"click #id_addNewButton": "onAddNewButtonClicked",
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview, #id_unpublish': 'changeStatus',
 		"click #id_edit": "onEditButtonClicked",
 	},
 
-	bindings: {
-		'#id_status': 'text:status',
-	},
-
 	initialize: function(){
+		this.template = _.template( $("#context-menu-template").html() );
+		this.listenTo(this.model, "change:status", this.render);
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
 
@@ -32,6 +29,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
+		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
 		this.setSidebarHeight();
 		return this;
 	},
@@ -102,11 +100,11 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},  
 
-	review: function(event){
+	changeStatus: function(event){
 		
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
-			url = this.model.get('reviewURL'),
+			url = this.model.get('changeStatusUrl'),
 			self = this;
 
 		$.ajax({
@@ -125,22 +123,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				if(response.status == 'ok'){
 					
 					// Set Status
-					self.model.set('status',response.datastream_status)
-
-					// Hide Review Bar
-					self.$el.find('#id_reviewBar').hide();
-
-					// Show hidden buttons
-					self.$el.find('#id_edit').show();
-					self.$el.find('#id_delete').show();
-
-					// Update overlay Edit status
-					// self.options.datastreamEditItemModel.set('status',response.datastream_status_id);
-
-					// Update Heights
-					setTimeout(function(){
-						self.updateHeights();
-					}, 0);
+					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
+					self.model.set('status',response.dataset_status);
 
 					// Set OK Message
 					$.gritter.add({
@@ -181,7 +165,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			}
 		});
 
-	},  
+	},
 
 	updateHeights: function(){
 			
@@ -222,12 +206,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		});
 
 	},
-
-	onAddNewButtonClicked: function() {
-		var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
-			dataViewCreationStepsUrl: this.options.dataViewCreationStepsUrl,
-		});
-		},
 
 	onDeleteButtonClicked: function(){
 		self = this;

@@ -110,7 +110,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             guid=datastream_revision.dataset.guid,
             created_at=datastream_revision.dataset.created_at,
             last_revision_id=datastream_revision.dataset.last_revision_id,
-            last_published_revision_id=datastream_revision.dataset.last_published_revision_id,
+            last_published_date=datastream_revision.dataset.last_published_revision.created_at,
             title=datastreami18n.title,
             description=datastreami18n.description,
             notes=datastreami18n.notes,

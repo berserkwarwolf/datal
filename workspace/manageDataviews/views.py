@@ -282,7 +282,7 @@ def edit(request, datastream_revision_id=None):
 @require_privilege("workspace.can_review_dataset_revision")
 @require_http_methods(['POST', 'GET'])
 @transaction.commit_on_success
-def review(request, datastream_revision_id=None):
+def change_status(request, datastream_revision_id=None):
 
     if request.method == 'POST' and datastream_revision_id != None:
 
@@ -301,6 +301,24 @@ def review(request, datastream_revision_id=None):
             lifecycle.reject()
 
             response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATAVIEW-REJECTED-TEXT')}
+
+        elif action == 'publish':
+
+            lifecycle.publish()
+
+            response = {'status': 'ok', 'datastream_status':StatusChoices.PUBLISHED, 'messages': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')}
+
+        elif action == 'unpublish':
+
+            lifecycle.unpublish()
+
+            response = {'status': 'ok', 'datastream_status':StatusChoices.UNPUBLISHED, 'messages': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')}
+
+        elif action == 'send_to_review':
+
+            lifecycle.send_to_review()
+
+            response = {'status': 'ok', 'datastream_status':StatusChoices.PENDING_REVIEW, 'messages': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')}
 
         else:
 
