@@ -2914,3 +2914,72 @@ msgstr "Create visualization"
 
 msgid "APP-CREATE-VISUALIZATION-TITLE"
 msgstr "¿Qué necesitas mostrar?"
+
+msgid "APP-CREATE-VISUALIZATION-START-CHARTS-TEXT"
+msgstr "Charts"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-TEXT"
+msgstr "Una comparación"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPOSITION-TEXT"
+msgstr "Una composición estática"
+
+msgid "APP-CREATE-VISUALIZATION-START-MAPS-TEXT"
+msgstr "Maps"
+
+msgid "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT"
+msgstr "Elementos en un mapa"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-IN-TIME-TEXT"
+msgstr "En el tiempo"
+
+msgid "APP-LINE-CHART-TEXT"
+msgstr "Line chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-LINE-COMMENT-TEXT"
+msgstr "Cómo evoluciona uno o varios items a lo largo del tiempo"
+
+msgid "APP-AREA-CHART-TEXT"
+msgstr "Area chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-AREA-COMMENT-TEXT"
+msgstr "Como evolucionan varios ítems a lo largo del tiempo"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-BETWEEN-ITEMS-TEXT"
+msgstr "Entre ítems"
+
+msgid "APP-BAR-CHART-TEXT"
+msgstr "Bar chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
+msgstr "Una variable por barra, pocas categorías muchos ítems"
+
+msgid "APP-COLUMN-CHART-TEXT"
+msgstr "Column chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-COLUMN-COMMENT-TEXT"
+msgstr "Una o pocas categorías/ítems"
+
+msgid "APP-PIE-CHART-TEXT"
+msgstr "Pie chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-PIE-COMMENT-TEXT"
+msgstr "Porcentajes que componen un total"
+
+msgid "APP-TRACE-MAP-TEXT"
+msgstr "Trazado"
+
+msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
+msgstr "Draw geometries, lines or polygons usign GIS datasets"
+
+msgid "APP-MARKERS-MAP-TEXT"
+msgstr "Markers"
+
+msgid "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
+
+msgid "APP-GEO-MAP-TEXT"
+msgstr "Geo"
+
+msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
