@@ -26,12 +26,11 @@ var viewChartView = Backbone.View.extend({
         }
     },
     createChartInstance: function () {
-        console.log("create chart:");
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
             resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
             resourceIdAttribute: 'visualization_revision_id',
-            resourceID: 6879,
+            resourceID: 6741,
             options: {
                 zoom: 15,
                 center: {
