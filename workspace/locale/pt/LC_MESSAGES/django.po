@@ -2501,9 +2501,6 @@ msgstr "The following resources, that are associated to this Dataset, will also 
 msgid "APP-OVERLAY-UNPUBLISH"
 msgstr "Unpublish"
 
-msgid "APP-VISUALIZATIONS-CREATE-TEXT"
-msgstr "Create Visualization"
-
 msgid "APP-TYPES-TEXT"
 msgstr "Types"
 
@@ -2911,3 +2908,9 @@ msgstr "Invalid file format"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+
+msgid "APP-CREATE-VISUALIZATION-TEXT"
+msgstr "Create visualization"
+
+msgid "APP-CREATE-VISUALIZATION-TITLE"
+msgstr "¿Qué necesitas mostrar?"

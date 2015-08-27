@@ -2482,9 +2482,6 @@ msgstr "Los siguientes recursos están asociados a este conjunto de datos y tamb
 msgid "APP-OVERLAY-UNPUBLISH"
 msgstr "Despublicar"
 
-msgid "APP-VISUALIZATIONS-CREATE-TEXT"
-msgstr "Crear Visualización"
-
 msgid "APP-DELETE-DATASET-ACTION-TEXT"
 msgstr "El conjunto de datos y los recursos asociados fueron eliminados."
 
@@ -2904,3 +2901,9 @@ msgstr "Tipo de archivo no soportado"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+
+msgid "APP-CREATE-VISUALIZATION-TEXT"
+msgstr "Crea una visualización"
+
+msgid "APP-CREATE-VISUALIZATION-TITLE"
+msgstr "¿Qué necesitas mostrar?"
