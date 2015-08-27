@@ -1078,6 +1078,9 @@ msgstr "Híbrido"
 msgid "CHRT-SATELLITE-TEXT"
 msgstr "Satelital"
 
+msgid "CHRT-TERRAIN-TEXT"
+msgstr "Terrestre"
+
 msgid "APP-TRACE-TEXT"
 msgstr "Rastro"
 
@@ -3045,3 +3048,30 @@ msgstr "Referencias"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
 msgstr "Origen de la fuente de datos"
+
+msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
+msgstr "Elige un mapa"
+
+msgid "APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT"
+msgstr "The default road map view"
+
+msgid "APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT"
+msgstr "Google Earth satellite images"
+
+msgid "APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT"
+msgstr "A mixture of normal and satellite views"
+
+msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
+msgstr "A physical map based on terrain information"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
+msgstr "Define el zoom inicial"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT"
+msgstr "El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación."
+
+msgid "APP-CREATE-MAP-TITLE"
+msgstr "Crea un mapa de puntos"
+
+msgid "APP-CREATE-MAP-DATA-TITLE"
+msgstr "Datos del mapa"
