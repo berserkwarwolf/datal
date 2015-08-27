@@ -72,6 +72,12 @@ var DataTableView = Backbone.View.extend({
         to: {row: r2, col: c2}
       });
     });
+    this.table.addHook('afterDeselect', function () {
+      self.trigger('afterDeselect');
+    });
+    this.table.addHook('afterSelectionEnd', function () {
+      self.trigger('afterSelectionEnd');
+    });
 
     // Clicks on a column or row header
     this.table.addHook('afterOnCellMouseDown', function (event, coords, TD) {
@@ -91,7 +97,10 @@ var DataTableView = Backbone.View.extend({
 
   cacheSelection: function (coords) {
     this._selectedCoordsCache = coords;
-    this.trigger('selected', this.rangeToExcel(coords));
+    this.trigger('afterSelection', {
+      coords: coords,
+      range: this.rangeToExcel(coords)
+    });
   },
 
   coordsToCells: function (coords) {
@@ -132,11 +141,10 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  addSelection: function (name) {
-    var newId = this.available.pop(),
-      range = this._selectedCoordsCache,
-      data,
-      model;
+  getSelection: function (name) {
+    var range = this._selectedCoordsCache,
+      data;
+
     if (range.from.row === -1) {
       data = this.table.getDataAtCol(range.from.col);
     } else {
@@ -145,18 +153,12 @@ var DataTableView = Backbone.View.extend({
       // it should do something else, like split the columns into separate series.
       data = _.map(data, _.first);
     }
-    console.log(name);
-    model = new DataTableSelectionModel({
-      id: newId,
-      range: range,
-      selection: this.rangeToExcel(range),
-      data: data
-    });
-    if (model.isValid()) {
-      this.collection.add(model);
-    } else {
-      alert(model.validationError)
-    }
+
+    return {
+        range: range,
+        selection: this.rangeToExcel(range),
+        data: data
+      };
   },
 
   onAddSelected: function (model) {
