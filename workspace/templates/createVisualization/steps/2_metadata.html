@@ -2,16 +2,15 @@
 
 <div class="step-2-view">
 
-	Completo la metadata
-	
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-		</li>
-	</ul>
+	<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+
+	<ol>
+		<li>{% trans "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+	</ol>
+
+	<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
 
 	<div class="columns clearfix">
 		
@@ -20,17 +19,17 @@
 			<fieldset>
 	
 				<div class="row clearfix">
-					<label for="title">Título<span class="required">*</span></label>
+					<label for="title">{% trans "APP-TITLE-TEXT" %}<span class="required">*</span></label>
 					<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
 				</div>
 	
 				<div class="row clearfix">
-					<label for="title">Descripción<span class="required">*</span></label>
+					<label for="title">{% trans "APP-DESCRIPTION-TEXT" %}<span class="required">*</span></label>
 					<input type="text" class="description" name="description" maxlength="140" data-bind="">
 				</div>
 
 				<div class="row clearfix">
-					<label for="id_notes">Notas</label>
+					<label for="id_notes">{% trans "APP-NOTES-TEXT" %}</label>
 					<textarea class="notes"></textarea>
 				</div>
 
