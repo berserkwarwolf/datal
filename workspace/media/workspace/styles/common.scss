@@ -73,7 +73,8 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
   .more-actions{
     .more-button{display:none;}
     .dropdown{border:0;display:block !important;position:static;
-      li{border:0;float:left;margin-left:15px;
+      li{border:0;float:left;margin-right:15px;
+        &:last-child{margin-right:0;}
         a.button{width:48px;min-width:0;border:1px solid #ccc;text-indent:-10000px;line-height:48px;overflow:hidden;position:relative;
           .icon{display:block;width:24px;height:24px;position:absolute;top:11px;left:11px;margin:0;}
         }
@@ -113,6 +114,7 @@ a.green:hover,
 /* Context buttons */
 .context-buttons > *{
   margin:0 15px 0 0;
+  &.button.alpha,
   &:first-child{margin-right:0;}
 }
 
@@ -404,7 +406,6 @@ body{background:$color-base;height:100%;min-width:998px;}
       & > span{float:left;}
       & > span:before{content:"|";padding:0 5px;color:#333;float:left;}
       & > span:first-child:before{content:"";padding:0;display:none;}
-      .status{}
     }
 
     /* Actions */
