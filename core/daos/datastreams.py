@@ -72,16 +72,28 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream_revision
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
+    def get(self, language, datastream_id=None, datastream_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
-        datastream_revision = datastream_id is None and \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=datastream_revision_id, category__categoryi18n__language=language,
-                               datastreami18n__language=language) or \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               datastreami18n__language=language)
+
+        if guid:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                datastream__guid=guid,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        elif not datastream_id:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=datastream_revision_id,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        else:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
@@ -94,6 +106,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         dataset_revision = datastream_revision.dataset.last_revision
 
         datastream = dict(
+            datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
             user_id=datastream_revision.user.id,
@@ -102,6 +115,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_id=datastream_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            filename=dataset_revision.filename,
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
@@ -148,12 +162,23 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        query = query.values('datastream__user__nick', 'status', 'id', 'datastream__guid', 'category__id',
-                             'datastream__id', 'category__categoryi18n__name', 'datastreami18n__title',
-                             'datastreami18n__description', 'created_at', 'datastream__user__id',
-                             'datastream__last_revision_id', 'dataset__last_revision__dataseti18n__title',
-                             'dataset__last_revision__impl_type', 'dataset__last_revision__id'
-                             )
+        query = query.values(
+            'datastream__user__nick',
+            'status',
+            'id',
+            'datastream__guid',
+            'category__id',
+            'datastream__id',
+            'category__categoryi18n__name',
+            'datastreami18n__title',
+            'datastreami18n__description',
+            'created_at',
+            'datastream__user__id',
+            'datastream__last_revision_id',
+            'dataset__last_revision__dataseti18n__title',
+            'dataset__last_revision__impl_type',
+            'dataset__last_revision__id'
+        )
 
         query = query.order_by(sort_by)
 

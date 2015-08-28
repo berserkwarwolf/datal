@@ -2,11 +2,10 @@
 from django.conf import settings
 from core.choices import StatusChoices, ActionStreams
 from core.daos.visualizations import VisualizationDBDAO
-from core.models import VisualizationRevision, Visualization, DashboardWidget, DataStreamRevision, VisualizationI18n
+from core.models import VisualizationRevision, Visualization, DataStreamRevision, VisualizationI18n
 from core.daos.activity_stream import ActivityStreamDAO
 from core.daos.searchify import SearchifyDAO
 from core.exceptions import *
-from core.helpers import update_dashboard_widgets_and_revisions
 
 
 class VisualizationLifeCycleManager():
@@ -226,10 +225,6 @@ class VisualizationLifeCycleManager():
 
     def apply_cascade_unpublish(self, ignore_errors=False, is_test=True):
         pass
-
-    def remove_from_widgets(self):
-        widgets = DashboardWidget.objects.filter(visualization=self.visualization)
-        update_dashboard_widgets_and_revisions(widgets)
 
     def log_activity(self, action_id):
         d18n = self.visualization_revision.visualizationi18n_set.all()[0]

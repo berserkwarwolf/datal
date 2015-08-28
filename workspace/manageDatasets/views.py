@@ -53,11 +53,10 @@ def action_request_file(request):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def list(request):
+def index(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.user.account.id, language=request.user.language)
     filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 

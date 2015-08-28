@@ -14,7 +14,7 @@ from core.engine import invoke
 from core.helpers import RequestProcessor
 from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
-from core.docs import VZ, DT
+from core.daos.datasets import DatasetDBDAO
 from core.models import VisualizationRevision,DatasetRevision
 from api.http import JSONHttpResponse
 from core import helpers as LocalHelper
@@ -22,11 +22,30 @@ from microsites.daos.datastreams import DatastreamDAO
 import json
 import urllib
 
+
+@login_required
+@require_GET
+def action_view(request, revision_id):
+
+    language = request.auth_manager.language
+    try:
+        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
+    except DataStreamRevision.DoesNotExist:
+        raise DataStreamNotFoundException()
+
+    account_id = request.auth_manager.account_id
+    credentials = request.auth_manager
+    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
+    status_options = credentials.get_allowed_actions()
+
+    return render_to_response('viewDataStream/index.html', locals())
+
+
 @login_required
 @requires_any_dataset()
 @requires_any_datastream()
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     vs_dao = VisualizationDAO(user_id=request.user.id)
     resources, total_resources = vs_dao.query(account_id=request.account.id
@@ -147,7 +166,7 @@ def view(request):
             else:
                 raise Http404
 
-            dataset_revision = DT(ds_revision.id, auth_manager.language)
+            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
 
             status = STATUS_CHOICES[int(visualization_revision.status)][1]
 

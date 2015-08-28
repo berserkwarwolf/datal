@@ -1,45 +1,13 @@
-from django.conf import settings
-from django.utils.datastructures import SortedDict
-from core.models import *
-from core.docs import DS, DB, VZ
-from core import engine
-from api.exceptions import Http400, Http401
-from api.helpers import add_domain_to_datastream_link
-
 import memcache
 
+from django.conf import settings
+from django.utils.datastructures import SortedDict
 
-def datastream_as_dict(self, user_id=None, language='en'):
-
-    try:
-        datastreamrevision_id =  self.datastreamrevision_set.latest().id #DataStreamRevision.objects.get_last_published_id(self.id)
-        doc = DS(datastreamrevision_id, language)
-    except Exception:
-        raise
-
-    sorted_dict = SortedDict([
-        ('id', doc.guid),
-        ('title', doc.title),
-        ('description', doc.description),
-        ('user', doc.created_by_nick),
-        ('tags', doc.get_tags()),
-        ('created_at', str(doc.created_at)),
-        ('source', doc.filename),
-        ('link', doc.permalink())
-    ])
-
-    if doc.parameters:
-        parameters = []
-        for param in doc.parameters:
-            parameters.append({"name": param.name,
-                               "position": param.position,
-                               "description": param.description,
-            })
-        sorted_dict.insert(9, 'parameters', parameters)
-
-    return sorted_dict
-
-DataStream.as_dict = datastream_as_dict
+from api.exceptions import Http400, Http401
+from api.helpers import add_domain_to_datastream_link
+from core.models import *
+from core.daos.datastreams import DataStreamDBDAO
+from core import engine
 
 
 def datastream_is_user_allowed(self, user_id):
@@ -141,19 +109,6 @@ DataStream.invoke = invoke
 
 def result_as_json(self, response, user_id):
     """ Returns the information  as a dictionary """
-
-    """
-    sorted_dict = self.as_dict(user_id)
-
-        # @XXX this is a funky hack used to keep the order in the JSON
-        # response from engine, if there is a way to translate JSON strings
-        # into SortedDict, delete this hack
-    sorted_dict.insert(4, 'result', "{{json_result_response_to_replace}}")
-    add_domain_to_datastream_link(sorted_dict)
-    json_response = json.dumps(sorted_dict)
-    json_response = json_response.replace('"{{json_result_response_to_replace}}"', response)
-    """
-
     from api.v2.templates import DefaultApiResponse
     data = self.as_dict(user_id)
     add_domain_to_datastream_link(data)
@@ -164,48 +119,6 @@ def result_as_json(self, response, user_id):
     return json_response
 
 DataStream.result_as_json = result_as_json
-
-def dashboard_as_dict(self, user_id = None):
-
-    dashboardrevision_id = DashboardRevision.objects.get_last_published_id(self.id)
-    doc = DB(dashboardrevision_id, 'en')
-
-    datastreams = []
-    for widget in doc.get_widgets():
-        data = widget.get()
-        datastream = SortedDict([
-                   ('id', data.guid)
-                 , ('title', data.title)
-                 , ('link', data.permalink())
-        ])
-        datastreams.append(datastream)
-
-    sorted_dict = SortedDict([
-               ('id'          , doc.guid)
-             , ('title'       , doc.title)
-             , ('description' , doc.description)
-             , ('user'        , doc.created_by_nick)
-             , ('tags'        , doc.get_tags())
-             , ('datastreams' , datastreams)
-             , ('created_at'  , str(doc.created_at))
-             , ('link'        , doc.permalink())
-    ])
-
-    return sorted_dict
-
-Dashboard.as_dict = dashboard_as_dict
-
-def dashboard_is_user_allowed(self, user_id):
-    if user_id and self.user_id == user_id:
-        return True
-
-    # are you a user with use?
-    qset = ObjectGrant.objects.values('id')
-    qset = qset.filter(dashboard = self.id, grant__privilege__code='private_dashboard.can_use', grant__user = user_id)
-    return qset.exists()
-
-Dashboard.is_user_allowed = dashboard_is_user_allowed
-
 
 
 def generate_hash(string, length = 40, use_random = True):
@@ -220,7 +133,6 @@ def get_auth_key(self):
     string = str(self.id) + self.guid
     return generate_hash(string, use_random = False)
 
-Dashboard.get_auth_key = get_auth_key
 DataStream.get_auth_key = get_auth_key
 
 
@@ -234,34 +146,3 @@ def user_as_dict(self):
     return l_sorted_dict
 
 User.as_dict = user_as_dict
-
-
-
-def visualization_as_dict(self, user_id = None):
-
-    visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(self.id)
-    doc = VZ(visualizationrevision_id, 'en')
-
-    sorted_dict = SortedDict([
-               ('id'          , doc.guid)
-             , ('title'       , doc.title)
-             , ('description' , doc.description)
-             , ('user'        , doc.created_by_nick)
-             , ('tags'        , doc.get_tags())
-             , ('created_at'  , str(doc.created_at))
-             , ('source'      , doc.end_point)
-             , ('link'        , doc.permalink())
-    ])
-
-    if doc.parameters:
-        parameters = []
-        for param in doc.parameters:
-            parameters.append({
-                               "name": param.name,
-                               "position": param.position,
-                               "description": param.description,
-                              })
-        sorted_dict.insert(9, 'parameters', parameters)
-    return sorted_dict
-
-Visualization.as_dict = visualization_as_dict

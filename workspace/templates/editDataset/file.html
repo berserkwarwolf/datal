@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1 class="FL"><a href="{% url 'manageDatasets.list' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
+<h1 class="FL"><a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
 <h2 class="FL">{% trans 'APP-EDIT-TEXT' %}</h2>
 <h3 class="FL">{{ dataset.title }}</h3>
 <ul class="buttons-bar FR edit" data-step="1">
@@ -81,7 +81,7 @@ $(document).ready(function(){
 
 	var processManagerModel = new ProcessManagerModel({
 		startUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
-		finishUrl: "{% url 'manageDatasets.list' %}"
+		finishUrl: "{% url 'manageDatasets.index' %}"
 	});
 	var processManagerView = new ProcessManagerView({model: processManagerModel});
 

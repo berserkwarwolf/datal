@@ -5,7 +5,7 @@ from workspace.manageVisualizations.views import *
 from workspace.manageDataviews.views import filter as filterDataview
 
 urlpatterns = patterns('',
-    url(r'^$', list, name='manageVisualizations.list'),
+    url(r'^$', index, name='manageVisualizations.index'),
     url(r'^filter$', filter, name='manageVisualizations.filter'),
     url(r'^filter_dataview$', filterDataview, name='manageDataviews.filter'),
     url(r'^remove/(?P<type>[a-z]+)/(?P<id>\d+)$', remove, name='manageVisualizations.remove'),
