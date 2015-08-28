@@ -1,7 +1,6 @@
 var ChartSelectDataModalView = ModalView.extend({
 	events: {
-		'click button.btn-close':'onCloseClicked',
-		'click button.btn-add-serie': 'addSelection'
+		'click button.btn-close':'onCloseClicked'
 	},
 
 	initialize: function(){
@@ -19,6 +18,11 @@ var ChartSelectDataModalView = ModalView.extend({
             this._cacheFocusedInput = name;
         });
 
+        this.listenTo(this.selectedCellRangeView, 'edit-input', function (name, val) {
+            console.log('edit-input', name, val);
+            // this.dataTableView.selectRange(val);
+        });
+
         var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
             this.model.get('datastream_revision_id'),
             '&limit=50&page=0'].join('');
@@ -28,6 +32,10 @@ var ChartSelectDataModalView = ModalView.extend({
         $.getJSON(dataUrl).then(function (payload) {
             self.createDataTableView(payload);
         });
+
+        this.on('open', function () {
+            this.selectedCellRangeView.focus();
+        }, this);
 
         return this;
     },
@@ -65,8 +73,6 @@ var ChartSelectDataModalView = ModalView.extend({
     addSelection: function (name) {
         var selection = this.dataTableView.getSelection(name);
 
-        console.log(selection);
-
         if (_.isString(name)) {
           // When name is defined, the selection mode only allows setting selection to certain models
           // with fixed id (so that the color is stable)
@@ -85,7 +91,6 @@ var ChartSelectDataModalView = ModalView.extend({
         if (model.isValid()) {
             this.collection.remove(model.get('id'));
             this.collection.add(model);
-            console.log(this.collection);
         } else {
             alert(model.validationError)
         }

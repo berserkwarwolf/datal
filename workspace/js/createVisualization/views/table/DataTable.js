@@ -92,7 +92,11 @@ var DataTableView = Backbone.View.extend({
   },
 
   render: function () {
+    var self = this;
     this.table.loadData(this.data);
+    _.each(this.collection.models, function (model) {
+      self.onAddSelected(model);
+    });
   },
 
   cacheSelection: function (coords) {
@@ -174,6 +178,15 @@ var DataTableView = Backbone.View.extend({
     this.table.render();
   },
 
+  selectRange: function (excelRange) {
+    var range = this.excelToRange(excelRange),
+      from = range.from,
+      to = range.to;
+
+    this.table.selectCell(from.row, from.col, to.row, to.col);
+  },
+
+  // excel ranges tools
   rangeToExcel: function (range) {
     var result;
     if (range.from.row === -1) {
@@ -184,6 +197,24 @@ var DataTableView = Backbone.View.extend({
           this.intToExcelCol(range.to.col + 1), range.to.row].join('');
     }
     return result
+  },
+
+  excelToRange: function (excelRange) {
+    var result,
+      parts = excelRange.split(':'),
+      fromCoords = this.excelCellToCoords(parts[0]),
+      toCoords = this.excelCellToCoords(parts[1])
+    return {
+      from: fromCoords,
+      to: toCoords
+    }
+  },
+
+  excelCellToCoords: function (cellStr) {
+    return {
+      col: this.excelColToInt(cellStr.replace(/\d+/g, '')) - 1,
+      row: parseInt(cellStr.replace(/\D/g,'')) - 1
+    }
   },
 
   intToExcelCol: function (number) {
@@ -197,5 +228,16 @@ var DataTableView = Backbone.View.extend({
       dividend = parseInt((dividend - rest)/26);
     }
     return colName;
+  },
+
+  excelColToInt: function (colName) {
+    var digits = colName.toUpperCase().split(''),
+      number = 0;
+
+    for (var i = 0; i < digits.length; i++) {
+      number += (digits[i].charCodeAt(0) - 64)*Math.pow(26, digits.length - i - 1);
+    }
+
+    return number;    
   }
 });

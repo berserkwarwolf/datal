@@ -1,11 +1,17 @@
 var SelectedCellRangeView = Backbone.View.extend({
 	events: {
 		'focusin input[@type="text"]': 'onFocusInput',
-		'focusout input[@type="text"]': 'onFocusOutInput'
+		'focusout input[@type="text"]': 'onFocusOutInput',
+		'keyup input[@type="text"]': 'onKeyupInput'
+
 	},
 
 	select: function (dataTableSelection) {
 		this.selectedInput.val(dataTableSelection.range);
+	},
+
+	focus: function  () {
+		this.$('input[type="text"]').first().focus();
 	},
 
 	onFocusInput: function (event) {
@@ -21,5 +27,12 @@ var SelectedCellRangeView = Backbone.View.extend({
 		var $target = $(event.currentTarget),
 			name = $target.attr('name');
 		this.trigger('focusout', name);
+	},
+
+	onKeyupInput: function (event) {
+		var $target = $(event.currentTarget),
+			name = $target.attr('name');
+		console.log('input', name, $target.val());
+		this.trigger('edit-input', name, $target.val());
 	}
 })

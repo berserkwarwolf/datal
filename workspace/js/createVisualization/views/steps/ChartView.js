@@ -27,6 +27,9 @@ var ChartView = StepViewSPA.extend({
           el: '#chartSelectDataModal',
           model: this.model
         });
+        this.chartSelectDataModalView.on('open', function () {
+        	this.dataTableView.render();
+        });
 
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
