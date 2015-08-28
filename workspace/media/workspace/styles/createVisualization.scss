@@ -199,7 +199,13 @@ input.hot-sel-12, td.hot-sel-12 {
   background-color: rgb(177,89,40);
 }
 
+$table-selected-color: rgba(227, 250, 41, 0.24);
+
 input.active {
   line-height: 2em;
-  background-color: rgba(227, 250, 41, 0.24);
+  font-weight: bold;
+  background-color: $table-selected-color;
+}
+.handsontable td.area {
+  background: $table-selected-color;
 }

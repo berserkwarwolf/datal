@@ -1,4 +1,6 @@
 var SelectedCellRangeView = Backbone.View.extend({
+	skipFocusFlag: 0,
+
 	events: {
 		'focusin input[@type="text"]': 'onFocusInput',
 		'focusout input[@type="text"]': 'onFocusOutInput',
@@ -12,6 +14,16 @@ var SelectedCellRangeView = Backbone.View.extend({
 
 	select: function (dataTableSelection) {
 		this.selectedInput.val(dataTableSelection.range);
+	},
+
+	focusNext: function () {
+		if (this.skipFocusFlag >= 2) return;
+		if (this.selectedInput.attr('name') === 'range_data') {
+			this.$('input[name="range_labels"]').focus();
+		} else if (this.selectedInput.attr('name') === 'range_labels') {
+			this.$('input[name="range_headers"]').focus();
+		}
+		this.skipFocusFlag += 1;
 	},
 
 	focus: function  () {

@@ -38,6 +38,8 @@ var ChartSelectDataModalView = ModalView.extend({
             this.selectedCellRangeView.focus();
         }, this);
 
+        this.listenTo(this.collection, 'add change remove reset', this.validate, this);
+
         return this;
     },
 
@@ -65,10 +67,10 @@ var ChartSelectDataModalView = ModalView.extend({
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
             this.selectedCellRangeView.select(range);
-
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
+            this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },
@@ -96,6 +98,14 @@ var ChartSelectDataModalView = ModalView.extend({
             this.collection.add(model);
         } else {
             alert(model.validationError)
+        }
+    },
+
+    validate: function () {
+        if (this.collection.length < 3) {
+            this.$('button.btn-done').attr('disabled', 'disabled');
+        } else {
+            this.$('button.btn-done').removeAttr('disabled');
         }
     }
 
