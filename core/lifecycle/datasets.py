@@ -220,8 +220,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 status=StatusChoices.DRAFT
             )
 
-            logger.info(datastreams_revisions)
-
             for datastream_revision in datastreams_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).send_to_review()
 

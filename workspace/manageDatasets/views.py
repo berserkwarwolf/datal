@@ -333,23 +333,43 @@ def change_status(request, dataset_revision_id=None):
 
         if action == 'approve':
             lifecycle.accept()
-            response = {'status': 'ok', 'dataset_status':StatusChoices.APPROVED, 'messages': ugettext('APP-DATASET-APPROVED-TEXT')}
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.APPROVED,
+                messages=ugettext('APP-DATASET-APPROVED-TEXT')
+            )
         elif action == 'reject':
             lifecycle.reject()
-            response = {'status': 'ok', 'dataset_status':StatusChoices.DRAFT, 'messages': ugettext('APP-DATASET-REJECTED-TEXT')}
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.DRAFT,
+                messages=ugettext('APP-DATASET-REJECTED-TEXT')
+            )
         elif action == 'publish':
             lifecycle.publish()
-            response = {'status': 'ok', 'dataset_status':StatusChoices.PUBLISHED, 'messages': ugettext('APP-DATASET-PUBLISHED-TEXT')}
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PUBLISHED,
+                messages=ugettext('APP-DATASET-PUBLISHED-TEXT')
+            )
         elif action == 'unpublish':
             lifecycle.unpublish()
-            response = {'status': 'ok', 'dataset_status':StatusChoices.UNPUBLISHED, 'messages': ugettext('APP-DATASET-UNPUBLISH-TEXT')}
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.UNPUBLISHED,
+                messages=ugettext('APP-DATASET-UNPUBLISH-TEXT')
+            )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-            response = {'status': 'ok', 'dataset_status':StatusChoices.PENDING_REVIEW, 'messages': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')}
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PENDING_REVIEW,
+                messages=ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+            )
         else:
-            response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+            response = dict(status='error', messages=ugettext('APP-DATASET-NOT-REVIEWED-TEXT'))
     else:
-        response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+        response = dict(status='error', messages=ugettext('APP-DATASET-NOT-REVIEWED-TEXT'))
 
     return JSONHttpResponse(json.dumps(response))
 
