@@ -2,11 +2,13 @@
 from django.db.models import F, Max
 from django.db import transaction
 from core.choices import ActionStreams
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IllegalStateException, DataStreamNotFoundException
 from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
+
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -17,6 +19,8 @@ ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
+
+logger = logging.getLogger(__name__)
 
 
 class DatastreamLifeCycleManager(AbstractLifeCycleManager):
@@ -164,8 +168,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
-
         if self.datastream_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Datastreams - Send to review] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.datastream_revision.id, self.datastream_revision.status
+            ))
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PENDING_REVIEW,
@@ -177,16 +183,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self.datastream_revision.save()
 
     def _send_childs_to_review(self):
-        """ Envia a revision todos los datastreams hijos en cascada """
+        """ Envia a revision todos las visualizaciones hijas en cascada """
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
-                id=F('datastream__last_revision__id'),
+            visualizations_revisions = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_revision__id'),
                 status=StatusChoices.DRAFT)
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).send_to_review()
+            for visualization_revision in visualizations_revisions:
+               VisualizationLifeCycleManager(
+                   self.user,
+                   visualization_revision_id=visualization_revision.id
+               ).send_to_review()
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
         """ accept a dataset revision """

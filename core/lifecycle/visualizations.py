@@ -12,21 +12,8 @@ from core.helpers import update_dashboard_widgets_and_revisions
 class VisualizationLifeCycleManager():
     """ Manage a visualization Life Cycle"""
 
-    def __init__(self, user_id, resource=None, resource_id=0, resource_revision_id=0):
-        self.resource_type = 'visualization'
-        self.dao = VisualizationDBDAO(user_id=user_id, resource=resource, resource_id = resource_id, resource_revision_id=resource_revision_id)
-        self.user = self.dao.user
-        
-        if self.dao.visualization:
-            self.visualization = self.dao.visualization
-            self.visualization_revision = self.dao.visualization_revision
-            self.visualization_i18n = VisualizationI18n.objects.filter(visualization_revision=self.visualization_revision)[0]
-            # , language=self.user.language
-        else:
-            self.visualization = None
-            self.visualization_revision = None
-            self.visualization_i18n = None
-
+    def __init__(self, user_id, resource=None, resource_id=0, visualization_revision_id=0):
+        pass
 
     def create(self, datastream, title, description='', language=None
             , status=StatusChoices.DRAFT, meta_text='', notes='', impl_details=''):
@@ -58,18 +45,7 @@ class VisualizationLifeCycleManager():
 
 
     def send_to_review(self, fromEdition=False):
-        """ send a dataset to review
-        fromEdition: If we send to review in the edition time we don't use allowed_states"""
-
-        allowed_states = [StatusChoices.DRAFT]
-        if fromEdition and self.visualization_revision.status not in allowed_states:
-            raise IllegalStateException(
-                                    from_state=self.visualization_revision.status,
-                                    to_state=StatusChoices.PENDING_REVIEW,
-                                    allowed_states=allowed_states)
-
-        self.visualization_revision.status = StatusChoices.PENDING_REVIEW
-        self.visualization_revision.save()
+        pass
 
     def accept(self):
         """ accept a review """

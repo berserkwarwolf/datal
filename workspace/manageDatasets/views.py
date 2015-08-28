@@ -318,7 +318,6 @@ def related_resources(request):
 
 
 @login_required
-@require_privilege("workspace.can_review_dataset_revision")
 @require_http_methods(['POST', 'GET'])
 @transaction.commit_on_success
 def change_status(request, dataset_revision_id=None):
