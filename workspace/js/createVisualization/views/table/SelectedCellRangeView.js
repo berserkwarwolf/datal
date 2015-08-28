@@ -6,6 +6,10 @@ var SelectedCellRangeView = Backbone.View.extend({
 
 	},
 
+	clear: function () {
+		this.$('input[type="text"]').val('');
+	},
+
 	select: function (dataTableSelection) {
 		this.selectedInput.val(dataTableSelection.range);
 	},
@@ -32,7 +36,6 @@ var SelectedCellRangeView = Backbone.View.extend({
 	onKeyupInput: function (event) {
 		var $target = $(event.currentTarget),
 			name = $target.attr('name');
-		console.log('input', name, $target.val());
 		this.trigger('edit-input', name, $target.val());
 	}
 })

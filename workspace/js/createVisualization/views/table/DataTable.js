@@ -44,6 +44,8 @@ var DataTableView = Backbone.View.extend({
     var self = this,
       invoke = options.invoke;
 
+    this.utils = DataTableUtils;
+
     var columns = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
       return {
         renderer: self.typeToRenderer[col.fType]
@@ -58,7 +60,9 @@ var DataTableView = Backbone.View.extend({
     this.data = rows;
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
-      rowHeaders: true, colHeaders: true, readOnly: true,
+      rowHeaders: true, colHeaders: true,
+      readOnly: true,
+      readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
       allowInsertRow: false, allowInsertColumn: false,
       disableVisualSelection: ['current'],
       colWidths: 80,
@@ -103,7 +107,7 @@ var DataTableView = Backbone.View.extend({
     this._selectedCoordsCache = coords;
     this.trigger('afterSelection', {
       coords: coords,
-      range: this.rangeToExcel(coords)
+      range: this.utils.rangeToExcel(coords)
     });
   },
 
@@ -160,7 +164,7 @@ var DataTableView = Backbone.View.extend({
 
     return {
         range: range,
-        selection: this.rangeToExcel(range),
+        selection: this.utils.rangeToExcel(range),
         data: data
       };
   },
@@ -179,65 +183,11 @@ var DataTableView = Backbone.View.extend({
   },
 
   selectRange: function (excelRange) {
-    var range = this.excelToRange(excelRange),
+    var range = this.utils.excelToRange(excelRange),
       from = range.from,
       to = range.to;
 
     this.table.selectCell(from.row, from.col, to.row, to.col);
-  },
-
-  // excel ranges tools
-  rangeToExcel: function (range) {
-    var result;
-    if (range.from.row === -1) {
-      result = [this.intToExcelCol(range.from.col + 1), ':',
-          this.intToExcelCol(range.to.col + 1)].join('');
-    } else {
-      result = [this.intToExcelCol(range.from.col + 1), range.from.row, ':',
-          this.intToExcelCol(range.to.col + 1), range.to.row].join('');
-    }
-    return result
-  },
-
-  excelToRange: function (excelRange) {
-    var result,
-      parts = excelRange.split(':'),
-      fromCoords = this.excelCellToCoords(parts[0]),
-      toCoords = this.excelCellToCoords(parts[1])
-    return {
-      from: fromCoords,
-      to: toCoords
-    }
-  },
-
-  excelCellToCoords: function (cellStr) {
-    return {
-      col: this.excelColToInt(cellStr.replace(/\d+/g, '')) - 1,
-      row: parseInt(cellStr.replace(/\D/g,'')) - 1
-    }
-  },
-
-  intToExcelCol: function (number) {
-    var colName = '',
-    dividend = Math.floor(Math.abs(number)),
-    rest;
-
-    while (dividend > 0) {
-      rest = (dividend - 1) % 26;
-      colName = String.fromCharCode(65 + rest) + colName;
-      dividend = parseInt((dividend - rest)/26);
-    }
-    return colName;
-  },
-
-  excelColToInt: function (colName) {
-    var digits = colName.toUpperCase().split(''),
-      number = 0;
-
-    for (var i = 0; i < digits.length; i++) {
-      number += (digits[i].charCodeAt(0) - 64)*Math.pow(26, digits.length - i - 1);
-    }
-
-    return number;    
   }
+
 });

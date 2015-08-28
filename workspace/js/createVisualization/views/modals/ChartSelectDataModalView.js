@@ -1,6 +1,7 @@
 var ChartSelectDataModalView = ModalView.extend({
 	events: {
-		'click button.btn-close':'onCloseClicked'
+        'click button.btn-done':'onClickDone',
+		'click button.btn-cancel':'onClickCancel'
 	},
 
 	initialize: function(){
@@ -40,17 +41,19 @@ var ChartSelectDataModalView = ModalView.extend({
         return this;
     },
 
-    render: function () {
-        
-    },
-
-    onCloseClicked: function (e) {
+    onClickDone: function (e) {
         this.close(); //Close modal
         var selectedRows = this.collection.getRows();
         var selectedFields = this.collection.getFields();
         this.model.data.set('fields', selectedFields);
         this.model.data.set('rows', selectedRows);
         this.model.set('selection', this.collection.getSelectionExcelStyle());
+    },
+
+    onClickCancel: function (e) {
+        this.collection.reset();
+        this.selectedCellRangeView.clear();
+        this.close(); //Close modal
     },
 
     createDataTableView: function (payload) {
