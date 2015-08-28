@@ -10,39 +10,85 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
-		this.selectedRangesView = new SelectedRangesView({
-			el: this.$('.selected-ranges-view'),
-			collection: this.collection
-		});
+        this.selectedCellRangeView = new SelectedCellRangeView({
+            el: this.$('.selected-ranges-view'),
+            collection: this.collection
+        });
 
-		var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-			this.model.get('datastream_revision_id'),
-			'&limit=50&page=0'].join('');
+        this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
+            this._cacheFocusedInput = name;
+        });
 
-		// TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
-		// request when it fails.
-		$.getJSON(dataUrl).then(function (payload) {
-			self.dataTableView = new DataTableView({
-				el: '.data-table-view',
-				collection: self.collection,
-				invoke: payload
-			});
-			self.dataTableView.render();
-		})
-		return this;
-	},
+        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
+            this.model.get('datastream_revision_id'),
+            '&limit=50&page=0'].join('');
 
-	onCloseClicked: function (e) {
-		this.close(); //Close modal
-		var selectedRows = this.collection.getRows();
-		var selectedFields = this.collection.getFields();
-		this.model.data.set('fields', selectedFields);
-		this.model.data.set('rows', selectedRows);
-		this.model.set('selection', this.collection.getSelectionExcelStyle());
-	},
+        // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
+        // request when it fails.
+        $.getJSON(dataUrl).then(function (payload) {
+            self.createDataTableView(payload);
+        });
 
-	addSelection: function () {
-		this.dataTableView.addSelection();
-	}
+        return this;
+    },
+
+    render: function () {
+        
+    },
+
+    onCloseClicked: function (e) {
+        this.close(); //Close modal
+        var selectedRows = this.collection.getRows();
+        var selectedFields = this.collection.getFields();
+        this.model.data.set('fields', selectedFields);
+        this.model.data.set('rows', selectedRows);
+        this.model.set('selection', this.collection.getSelectionExcelStyle());
+    },
+
+    createDataTableView: function (payload) {
+        this.dataTableView = new DataTableView({
+            el: this.$('.data-table-view'),
+            collection: this.collection,
+            invoke: payload
+        });
+        this.dataTableView.render();
+        this.listenTo(this.dataTableView, 'afterSelection', function (range) {
+            this.selectedCellRangeView.select(range);
+
+        }, this);
+        this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
+            this.addSelection(this._cacheFocusedInput);
+        }, this);
+        this.dataTableView.table.render();
+    },
+
+    addSelection: function (name) {
+        var selection = this.dataTableView.getSelection(name);
+
+        console.log(selection);
+
+        if (_.isString(name)) {
+          // When name is defined, the selection mode only allows setting selection to certain models
+          // with fixed id (so that the color is stable)
+          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
+          model = new DataTableSelectionModel(_.extend(selection, {
+            id: names[name],
+            name: name
+          }));
+        } else {
+          // when no name is provided, the selection is a multiselection collection.
+          // model = new DataTableSelectionModel(_.extend(selection, {
+          //   id: newId,
+          // }));
+        }
+
+        if (model.isValid()) {
+            this.collection.remove(model.get('id'));
+            this.collection.add(model);
+            console.log(this.collection);
+        } else {
+            alert(model.validationError)
+        }
+    }
 
 });

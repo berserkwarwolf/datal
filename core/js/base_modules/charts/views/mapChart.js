@@ -7,6 +7,9 @@ charts.views.MapChart = charts.views.Chart.extend({
     mapInstance: null,
     mapMarkers: [],
     mapClusters: [],
+    mapTraces: [],
+    latestDataUpdate: null,
+    latestDataRender: null,
     styles: {},
     initialize: function(){
         if (this.model.get('type') !== 'map') {
@@ -17,29 +20,28 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
-        //Check if there is any points on the model data to be rendered and that the current
-        //points haven't been rendered
-        if(this.model.data.get('points') && this.model.data.get('points').length && !this.mapMarkers.length){
-            this.createMapMarkers();
-        }
-        if(this.model.data.get('clusters') && this.model.data.get('clusters').length && !this.mapClusters.length){
-            this.createMapClusters();
+        //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
+        if(this.latestDataUpdate != this.latestDataRender){
+            if(this.model.data.get('points') && this.model.data.get('points').length){
+                this.createMapPoints();
+            }
+            if(this.model.data.get('clusters') && this.model.data.get('clusters').length){
+                this.createMapClusters();
+            }
+            this.latestDataRender = this.latestDataUpdate;
         }
         return this;
     },
 
-    clearAndRender: function () {
+    handleDataUpdated: function () {
+        this.latestDataUpdate = Date.now();
         this.clearMapOverlays();
-        console.log("cleared map markers:", this.mapMarkers);
-        console.log("cleared map clusters:", this.mapClusters);
-        console.log("data points:", this.model.data.get('points'));
-        console.log("data clusters:", this.model.data.get('clusters'));
         this.render();
     },
 
     bindEvents: function () {
         this.model.on('change', this.render, this);
-        this.model.on('data_updated', this.clearAndRender, this);
+        this.model.on('data_updated', this.handleDataUpdated, this);
     },
 
     /**
@@ -53,7 +55,6 @@ charts.views.MapChart = charts.views.Chart.extend({
      * Creates a new map google map instance
      */
     createCoogleMapInstance: function () {
-        console.log("create map:");
         this.mapInstance = new google.maps.Map(this.el, {
             zoom: this.model.get('options').zoom,
             center: new google.maps.LatLng(this.model.get('options').center.lat, this.model.get('options').center.long)
@@ -70,6 +71,8 @@ charts.views.MapChart = charts.views.Chart.extend({
         this.mapMarkers = this.clearOverlay(this.mapMarkers);
         //Clusters
         this.mapClusters = this.clearOverlay(this.mapClusters);
+        //Traces
+        this.mapTraces = this.clearOverlay(this.mapTraces);
     },
 
     /**
@@ -90,25 +93,80 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     /**
-     * Create the markers with the data on the model
+     * Crea puntos en el mapa, pueden ser de tipo traces o markers
      */
-    createMapMarkers: function () {
-        var self = this;
-        console.log("create map markers:");
-        _.each(this.model.data.get('points'), this.createMapMarker, this);
+    createMapPoints: function () {
+        var self = this,
+            styles = this.model.get('styles');
+        _.each(this.model.data.get('points'), function (point, index) {
+            if(point.trace){
+                this.createMapTrace(point, index, styles);
+            } else {
+                this.createMapMarker(point, index, styles);
+            }
+        }, this);
     },
 
     /**
-     * Create a single marker with the given point
-     * @param  {object} point   Point with the position of the marker in the form of lat and long and optionally
-     *                          some info text that can be displayed on an inofobox
-     * @param  {int}    index   Position of the marker on the mapMarkers array
+     * Crea un trace de puntos dentro del mapa
+     * @param  {object} point   Objeto con el trace de los puntos en el mapa
+     * @param  {int} index      Indice del trace en el arreglo local de traces
+     * @param  {object} styles  Estilos para dibujar el trace
      */
-    createMapMarker: function (point, index) {
-        var self = this;
+    createMapTrace: function (point, index, styles) {
+        var paths = _.map(point.trace, function (tracePoint, index) {
+            return {lat: parseFloat(tracePoint.lat), lng: parseFloat(tracePoint.long)};
+        });
+
+        var isPolygon = (paths[0].lat == paths[paths.length-1].lat && paths[0].lng == paths[paths.length-1].lng);
+
+        if(isPolygon){
+            this.mapTraces.push(this.createMapPolygon(paths, styles.polyStyle));
+        } else {
+            this.mapTraces.push(this.createMapPolyline(paths, styles.lineStyle))
+        }
+        this.mapTraces[index].setMap(this.mapInstance);
+    },
+
+    createMapPolygon: function (paths, styles) {
+        return new google.maps.Polygon({
+            paths: paths,
+            strokeColor: styles.strokeColor,
+            strokeOpacity: styles.strokeOpacity,
+            strokeWeight: styles.strokeWeight,
+            fillColor: styles.fillColor,
+            fillOpacity: styles.fillOpacity
+        });
+    },
+
+    createMapPolyline: function (paths, styles) {
+        //  return new google.maps.Polyline({
+        //     paths: paths,
+        //     strokeColor: polyStyle.strokeColor,
+        //     strokeOpacity: polyStyle.strokeOpacity,
+        //     strokeWeight: polyStyle.strokeWeight
+        // });
+    },
+
+    /**
+     * Crea un marker dentro del mapa
+     * @param  {object} point   Objeto con las coordenadas del punto en el mapa
+     * @param  {int}    index   Indice del punto en el arreglo local de markers
+     * @param  {object} styles  Estilos para dibujar el marker
+     */
+    createMapMarker: function (point, index, styles) {
+        var self = this,
+            markerIcon = this.model.get('stylesDefault').marker.icon;
+
+        //Obtiene el estilo del marcador
+        if(styles && styles.iconStyle){
+            markerIcon = styles.iconStyle.href;
+        }
+
         this.mapMarkers[index] = new google.maps.Marker({
             position: new google.maps.LatLng(point.lat, point.long),
-            map: this.mapInstance
+            map: this.mapInstance,
+            icon: markerIcon
         });
 
         if(point.info){
@@ -127,15 +185,19 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapClusters: function () {
         var self = this;
-        console.log("create map clusters:");
         _.each(this.model.data.get('clusters'), this.createMapCluster, this);
     },
 
+    /**
+     * Crea un cluster de puntos 
+     * @param  {object} cluster
+     * @param  {int} index
+     */
     createMapCluster: function (cluster, index) {
         cluster.noWrap = true;
         cluster.counter = parseInt(cluster.info);
 
-        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('joinIntersectedClusters'));
+        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('options').joinIntersectedClusters);
     },
 
     /**
@@ -147,7 +209,6 @@ charts.views.MapChart = charts.views.Chart.extend({
             bounds = this.mapInstance.getBounds(),
             zoom = this.mapInstance.getZoom();
 
-        console.log("set bounds, center and zoom:");
         this.model.set('options', {
             center: {
                 lat: center.lat(),

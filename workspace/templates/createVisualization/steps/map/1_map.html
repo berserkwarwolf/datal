@@ -6,15 +6,17 @@
 		<div class="wrapper2">
 			<div class="wrapper3">
 
-				<h2>Editar mapa</h2>
-				<ul>
-					<li>
-						<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-					</li>
-					<li>
-						<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-					</li>
-				</ul>
+                <h2 class="FL">{% trans 'APP-CREATE-MAP-TITLE' %}</h2>
+
+				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+
+				<ol>
+					<li>{% trans "APP-CREATE-MAP-DATA-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+				</ol>
+
+				<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
 
 				<div class="sidebar">
 
@@ -22,32 +24,28 @@
 
 						<div class="itemConfig">
 
-							<div class="title">Elige un mapa <span class="required"></span></div>
+							<div class="title">{% trans 'APP-CONTINUE-TEXT' %} <span class="required"></span></div>
 
 							<div class="boxInner">
 
 								<div class="patch active" id="">
-									<span class="icon icon-chart-column size-48"></span>
-									<a href="#">Roadmap</a>
-									<p>The default road map view</p>
+									<a href="#">{% trans 'CHRT-ROADMAP-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT' %}</p>
 								</div>
 
 								<div class="patch" id="">
-									<span class="icon icon-chart-column size-48"></span>
-									<a href="#">Satellite</a>
-									<p>Google Earth satellite images</p>
+									<a href="#">{% trans 'CHRT-SATELLITE-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT' %}s</p>
 								</div>
 
 								<div class="patch" id="">
-									<span class="icon icon-chart-column size-48"></span>
-									<a href="#">Hybrid</a>
-									<p>A mixture of normal and satellite views</p>
+									<a href="#">{% trans 'CHRT-HYBRID-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT' %}</p>
 								</div>
 
 								<div class="patch" id="">
-									<span class="icon icon-chart-column size-48"></span>
-									<a href="#">Terrain</a>
-									<p>a physical map based on terrain information</p>
+									<a href="#">{% trans 'CHRT-TERRAIN-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT' %}</p>
 								</div>
 
 							</div>
@@ -56,11 +54,11 @@
 
 						<div class="itemConfig">
 
-							<div class="title">Define el zoom inicial</div>
+							<div class="title">{% trans 'APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT' %}</div>
 
 							<div class="boxInner">
 
-								<p>El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación.
+								<p>{% trans 'APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT' %}</p>
 
 								<form>
 									<fieldset>

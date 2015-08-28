@@ -34,7 +34,8 @@ charts.models.Chart = Backbone.Model.extend({
         this.data = new charts.models.ChartData({
             urlRoot: this.get('resourceUrl'),
             idAttribute: this.get('resourceIdAttribute'),
-            id: this.get('resourceID')
+            id: this.get('resourceID'),
+            type: this.get('type')
         });
         this.bindEvents();
     },
@@ -57,7 +58,6 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
-        console.log("ChartModel data updated:");
         this.trigger('data_updated');
     },
 

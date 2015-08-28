@@ -30,8 +30,6 @@ charts.models.ChartData = Backbone.Model.extend({
     },
 
     initialize: function () {
-        // this.urlRoot = this.get('resourceUrl');
-        // this.idAttribute = this.get('resourceIdAttribute');
         this.on('change:fetchFilters', this.handleFetchFiltersChange, this);
     },
 
