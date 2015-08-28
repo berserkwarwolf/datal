@@ -2,16 +2,17 @@
 
 <div class="step-2-view">
 
-	Completo la metadata
-	
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-		</li>
-	</ul>
+	<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+    
+    <h2 class="FL">{% trans 'APP-CREATE-VISUALIZATION-TEXT' %}</h2>
+
+	<ol>
+		<li>{% trans "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+	</ol>
+
+	<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
 
 	<div class="columns clearfix">
 		
@@ -20,85 +21,18 @@
 			<fieldset>
 	
 				<div class="row clearfix">
-					<label for="title">Título<span class="required">*</span></label>
-					<input type="text" name="title" maxlength="80" data-bind="" autofocus="autofocus">
+					<label for="title">{% trans "APP-TITLE-TEXT" %}<span class="required">*</span></label>
+					<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
 				</div>
 	
 				<div class="row clearfix">
-					<label for="title">Descripción<span class="required">*</span></label>
-					<input type="text" name="title" maxlength="140" data-bind="">
+					<label for="title">{% trans "APP-DESCRIPTION-TEXT" %}<span class="required">*</span></label>
+					<input type="text" class="description" name="description" maxlength="140" data-bind="">
 				</div>
 
 				<div class="row clearfix">
-					<label for="category">Categoría</label>
-					<select name="category" id="id_category" data-bind="">
-						<option selected="selected" value="">Categoría uno</option>
-						<option value="">Categoría dos</option>
-						<option value="">Categoría tres</option>
-					</select>
-				</div>
-	
-				<div class="row clearfix">
-					<div id="tagForm">
-
-						<div id="addTag">
-							<label for="tag_name">Fuentes</label>
-							<input type="text" name="tag_name" data-bind="">
-							<a class="button small">Agregar</a>
-						</div>
-
-						<div class="tagsContent">
-							
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">fuente1</span>
-									<a class="remove"><span class="DN">Eliminar</span></a>
-								</span>
-							</div>
-
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">fuente2</span>
-									<a class="remove"><span class="DN">Eliminar</span></a>
-								</span>
-							</div>
-						</div>
-
-					</div>
-				</div>
-
-				<div class="row clearfix">
-					<div id="sourceForm">
-
-						<div id="addSource">
-							<label for="source_name">¿Cuál es el origen de la fuente de datos?</label>
-							<input type="text" name="source_name" data-bind="">
-							<p class="tip">¿No encontrás la fuente? <a href="#">Crear una nueva fuente</a></p>
-						</div>
-
-						<div class="sourcesContent">
-							
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">fuente1</span>
-									<a class="remove"><span class="DN">Eliminar</span></a>
-								</span>
-							</div>
-
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">fuente2</span>
-									<a class="remove"><span class="DN">Eliminar</span></a>
-								</span>
-							</div>
-						</div>
-					
-					</div>
-				</div>
-
-				<div class="row clearfix">
-					<label for="id_notes">Notas</label>
-					<textarea></textarea>
+					<label for="id_notes">{% trans "APP-NOTES-TEXT" %}</label>
+					<textarea class="notes"></textarea>
 				</div>
 
 			</fieldset>

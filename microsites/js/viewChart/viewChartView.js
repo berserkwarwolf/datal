@@ -18,29 +18,24 @@ var viewChartView = Backbone.View.extend({
     },
     render: function () {
         this.initializeChart();
-
-        this.chartInstance.model.data.bind('change', this.renderChart, this);
         return this;
-    },
-    renderChart: function () {
-        this.chartInstance.render();
     },
     initializeChart: function () {
         if(typeof this.chartInstance === 'undefined'){
             this.createChartInstance();
         }
-
-        this.chartInstance.model.fetchData();
     },
     createChartInstance: function () {
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
-            resourceID: 7856,
+            resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
+            resourceIdAttribute: 'visualization_revision_id',
+            resourceID: 6741,
             options: {
-                zoom: 17,
+                zoom: 15,
                 center: {
-                    lat: 38.58267175145875,
-                    long: -121.4893537031936
+                    lat: 38.5806808485,
+                    long: -121.4826359602
                 }
             }
         });

@@ -1078,6 +1078,9 @@ msgstr "Híbrido"
 msgid "CHRT-SATELLITE-TEXT"
 msgstr "Satelital"
 
+msgid "CHRT-TERRAIN-TEXT"
+msgstr "Terrestre"
+
 msgid "APP-TRACE-TEXT"
 msgstr "Rastro"
 
@@ -2482,9 +2485,6 @@ msgstr "Los siguientes recursos están asociados a este conjunto de datos y tamb
 msgid "APP-OVERLAY-UNPUBLISH"
 msgstr "Despublicar"
 
-msgid "APP-VISUALIZATIONS-CREATE-TEXT"
-msgstr "Crear Visualización"
-
 msgid "APP-DELETE-DATASET-ACTION-TEXT"
 msgstr "El conjunto de datos y los recursos asociados fueron eliminados."
 
@@ -2904,3 +2904,174 @@ msgstr "Tipo de archivo no soportado"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+
+msgid "APP-CREATE-VISUALIZATION-TEXT"
+msgstr "Crea una visualización"
+
+msgid "APP-CREATE-VISUALIZATION-TITLE"
+msgstr "¿Qué necesitas mostrar?"
+
+msgid "APP-CREATE-CHARTS-TEXT"
+msgstr "Gráficos"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-TEXT"
+msgstr "Una comparación"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPOSITION-TEXT"
+msgstr "Una composición estática"
+
+msgid "APP-CREATE-MAPS-TEXT"
+msgstr "Mapas"
+
+msgid "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT"
+msgstr "Elementos en un mapa"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-IN-TIME-TEXT"
+msgstr "En el tiempo"
+
+msgid "APP-LINE-CHART-TEXT"
+msgstr "Gráfico de línea"
+
+msgid "APP-CREATE-VISUALIZATION-START-LINE-COMMENT-TEXT"
+msgstr "Cómo evoluciona uno o varios items a lo largo del tiempo"
+
+msgid "APP-AREA-CHART-TEXT"
+msgstr "Gráfico de áreas"
+
+msgid "APP-CREATE-VISUALIZATION-START-AREA-COMMENT-TEXT"
+msgstr "Como evolucionan varios ítems a lo largo del tiempo"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-BETWEEN-ITEMS-TEXT"
+msgstr "Entre ítems"
+
+msgid "APP-BAR-CHART-TEXT"
+msgstr "Gráfico de barras"
+
+msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
+msgstr "Una variable por barra, pocas categorías muchos ítems"
+
+msgid "APP-COLUMN-CHART-TEXT"
+msgstr "Gráfico de columnas"
+
+msgid "APP-CREATE-VISUALIZATION-START-COLUMN-COMMENT-TEXT"
+msgstr "Una o pocas categorías/ítems"
+
+msgid "APP-PIE-CHART-TEXT"
+msgstr "Gráfico de torta"
+
+msgid "APP-CREATE-VISUALIZATION-START-PIE-COMMENT-TEXT"
+msgstr "Porcentajes que componen un total"
+
+msgid "APP-TRACE-MAP-TEXT"
+msgstr "Trazado"
+
+msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
+msgstr "Draw geometries, lines or polygons usign GIS datasets"
+
+msgid "APP-MARKERS-MAP-TEXT"
+msgstr "Marcadores"
+
+msgid "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
+
+msgid "APP-GEO-MAP-TEXT"
+msgstr "Marcadores"
+
+msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
+
+msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
+msgstr "Visualización"
+
+msgid "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE"
+msgstr "Descripción"
+
+msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
+msgstr "Revisión"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
+msgstr "Compara en el tiempo"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT"
+msgstr "Compara entre items"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT"
+msgstr "Composición estática"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT"
+msgstr "Se está usando"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT"
+msgstr "Google visualizations"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT"
+msgstr "D3"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE"
+msgstr "¿No se ve bien?"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
+msgstr "Cambiar filas/columnas"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
+msgstr "Reordenar datos"
+
+msgid "APP-DEFAULT-TEXT"
+msgstr "Por defecto"
+
+msgid "APP-INVERTED-TEXT"
+msgstr "Invertido"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-TEXT"
+msgstr "Las celdas vacías se tratan como"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT"
+msgstr "Excluídas del conjunto de datos"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT"
+msgstr "Asignado a un valor previo"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
+msgstr "Asignado a un valor dado"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-Y-AXIS-TEXT"
+msgstr "Eje Y"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-X-AXIS-TEXT"
+msgstr "Eje X"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
+msgstr "Seleccione los datos que desee representar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-REFERENCES-TEXT"
+msgstr "Referencias"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
+msgstr "Origen de la fuente de datos"
+
+msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
+msgstr "Elige un mapa"
+
+msgid "APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT"
+msgstr "The default road map view"
+
+msgid "APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT"
+msgstr "Google Earth satellite images"
+
+msgid "APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT"
+msgstr "A mixture of normal and satellite views"
+
+msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
+msgstr "A physical map based on terrain information"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
+msgstr "Define el zoom inicial"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT"
+msgstr "El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación."
+
+msgid "APP-CREATE-MAP-TITLE"
+msgstr "Crea un mapa de puntos"
+
+msgid "APP-CREATE-MAP-DATA-TITLE"
+msgstr "Datos del mapa"

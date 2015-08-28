@@ -6,23 +6,49 @@ var charts = charts || {
 charts.views.MapChart = charts.views.Chart.extend({
     mapInstance: null,
     mapMarkers: [],
+    mapClusters: [],
+    mapTraces: [],
+    latestDataUpdate: null,
+    latestDataRender: null,
     styles: {},
     initialize: function(){
         if (this.model.get('type') !== 'map') {
             console.error('A Map model must be suplied');
         }
-        //TODO: for now we need to create a first render of the map to get the boundaries for the api call
+        this.bindEvents();
         this.createCoogleMapInstance();
     },
 
     render: function () {
-        //Check if there is any points on the model data to be rendered and that the current
-        //points haven't been rendered
-        if(this.model.data.get('points') && !this.mapMarkers.length){
-            this.createMapMarkers();
+        //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
+        if(this.latestDataUpdate != this.latestDataRender){
+            if(this.model.data.get('points') && this.model.data.get('points').length){
+                this.createMapPoints();
+            }
+            if(this.model.data.get('clusters') && this.model.data.get('clusters').length){
+                this.createMapClusters();
+            }
+            this.latestDataRender = this.latestDataUpdate;
         }
-
         return this;
+    },
+
+    handleDataUpdated: function () {
+        this.latestDataUpdate = Date.now();
+        this.clearMapOverlays();
+        this.render();
+    },
+
+    bindEvents: function () {
+        this.model.on('change', this.render, this);
+        this.model.on('data_updated', this.handleDataUpdated, this);
+    },
+
+    /**
+     * Add event handlers to the map events
+     */
+    bindMapEvents: function () {
+        this.mapInstance.addListener('idle', this.handleBoundChanges.bind(this));
     },
 
     /**
@@ -34,39 +60,113 @@ charts.views.MapChart = charts.views.Chart.extend({
             center: new google.maps.LatLng(this.model.get('options').center.lat, this.model.get('options').center.long)
         });
         this.infoWindow = new google.maps.InfoWindow();
-        this.getBoundsByCenterAndZoom(this.el);
+        this.bindMapEvents();
     },
 
     /**
-     * Clear and remove listeners for all the markers from the current instance of the map
+     * Remueve los elementos del mapa y elimina cualquier evento asociado a estos
      */
-    clearMapMarkers: function () {
-        _.each(this.mapMarkers, function (marker, index) {
-            marker.setMap(null);
-            google.maps.events.removeListener(marker.events.click);
+    clearMapOverlays: function () {
+        //Markers
+        this.mapMarkers = this.clearOverlay(this.mapMarkers);
+        //Clusters
+        this.mapClusters = this.clearOverlay(this.mapClusters);
+        //Traces
+        this.mapTraces = this.clearOverlay(this.mapTraces);
+    },
+
+    /**
+     * Elimina una coleccion especifica de elementos sobre el mapa
+     * @param  {array} overlayCollection
+     */
+    clearOverlay: function (overlayCollection) {
+        _.each(overlayCollection, function (overlayElement, index) {
+            overlayElement.setMap(null);
+            //Elimina los eventos asociados al elemento
+            if(overlayElement.events){
+                _.each(overlayElement.events, function (event) {
+                    google.maps.event.removeListener(event);
+                });
+            }
         }, this);
-        this.mapMarkers = [];
+        return [];
     },
 
     /**
-     * Create the markers with the data on the model
+     * Crea puntos en el mapa, pueden ser de tipo traces o markers
      */
-    createMapMarkers: function () {
-        var self = this;
-        _.each(this.model.data.get('points'), this.createMapMarker, this);
+    createMapPoints: function () {
+        var self = this,
+            styles = this.model.get('styles');
+        _.each(this.model.data.get('points'), function (point, index) {
+            if(point.trace){
+                this.createMapTrace(point, index, styles);
+            } else {
+                this.createMapMarker(point, index, styles);
+            }
+        }, this);
     },
 
     /**
-     * Create a single marker with the given point
-     * @param  {object} point   Point with the position of the marker in the form of lat and long and optionally
-     *                          some info text that can be displayed on an inofobox
-     * @param  {int}    index   Position of the marker on the mapMarkers array
+     * Crea un trace de puntos dentro del mapa
+     * @param  {object} point   Objeto con el trace de los puntos en el mapa
+     * @param  {int} index      Indice del trace en el arreglo local de traces
+     * @param  {object} styles  Estilos para dibujar el trace
      */
-    createMapMarker: function (point, index) {
-        var self = this;
+    createMapTrace: function (point, index, styles) {
+        var paths = _.map(point.trace, function (tracePoint, index) {
+            return {lat: parseFloat(tracePoint.lat), lng: parseFloat(tracePoint.long)};
+        });
+
+        var isPolygon = (paths[0].lat == paths[paths.length-1].lat && paths[0].lng == paths[paths.length-1].lng);
+
+        if(isPolygon){
+            this.mapTraces.push(this.createMapPolygon(paths, styles.polyStyle));
+        } else {
+            this.mapTraces.push(this.createMapPolyline(paths, styles.lineStyle))
+        }
+        this.mapTraces[index].setMap(this.mapInstance);
+    },
+
+    createMapPolygon: function (paths, styles) {
+        return new google.maps.Polygon({
+            paths: paths,
+            strokeColor: styles.strokeColor,
+            strokeOpacity: styles.strokeOpacity,
+            strokeWeight: styles.strokeWeight,
+            fillColor: styles.fillColor,
+            fillOpacity: styles.fillOpacity
+        });
+    },
+
+    createMapPolyline: function (paths, styles) {
+        //  return new google.maps.Polyline({
+        //     paths: paths,
+        //     strokeColor: polyStyle.strokeColor,
+        //     strokeOpacity: polyStyle.strokeOpacity,
+        //     strokeWeight: polyStyle.strokeWeight
+        // });
+    },
+
+    /**
+     * Crea un marker dentro del mapa
+     * @param  {object} point   Objeto con las coordenadas del punto en el mapa
+     * @param  {int}    index   Indice del punto en el arreglo local de markers
+     * @param  {object} styles  Estilos para dibujar el marker
+     */
+    createMapMarker: function (point, index, styles) {
+        var self = this,
+            markerIcon = this.model.get('stylesDefault').marker.icon;
+
+        //Obtiene el estilo del marcador
+        if(styles && styles.iconStyle){
+            markerIcon = styles.iconStyle.href;
+        }
+
         this.mapMarkers[index] = new google.maps.Marker({
             position: new google.maps.LatLng(point.lat, point.long),
-            map: this.mapInstance
+            map: this.mapInstance,
+            icon: markerIcon
         });
 
         if(point.info){
@@ -79,22 +179,48 @@ charts.views.MapChart = charts.views.Chart.extend({
             this.mapMarkers[index].events = {click: clickHandler};
         }
     },
+
+    /**
+     * Crea clusters de puntos
+     */
+    createMapClusters: function () {
+        var self = this;
+        _.each(this.model.data.get('clusters'), this.createMapCluster, this);
+    },
+
+    /**
+     * Crea un cluster de puntos 
+     * @param  {object} cluster
+     * @param  {int} index
+     */
+    createMapCluster: function (cluster, index) {
+        cluster.noWrap = true;
+        cluster.counter = parseInt(cluster.info);
+
+        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('options').joinIntersectedClusters);
+    },
+
     /**
      * Get the boundaries of the current map
      * @param  {HTMLelement} div Container of the map
      */
-    getBoundsByCenterAndZoom: function(div){
-        var d = $(div);
-        var zf = Math.pow(2, this.model.get('options').zoom) * 2;
-        var dw = d.width()  / zf;
-        var dh = d.height() / zf;
-        var map_bounds = [];
+    handleBoundChanges: function(div){
+        var center = this.mapInstance.getCenter(),
+            bounds = this.mapInstance.getBounds(),
+            zoom = this.mapInstance.getZoom();
 
-        map_bounds[0] = this.model.get('options').center.lat + dh; //NE lat
-        map_bounds[1] = this.model.get('options').center.long + dw; //NE lng
-        map_bounds[2] = this.model.get('options').center.lat - dh; //SW lat
-        map_bounds[3] = this.model.get('options').center.long - dw; //SW lng
-
-        this.model.set('options', _.extend(this.model.get('options'), {bounds: map_bounds}));
+        this.model.set('options', {
+            center: {
+                lat: center.lat(),
+                long: center.lng(),
+            },
+            zoom: zoom,
+            bounds: [
+                bounds.getNorthEast().lat(), 
+                bounds.getNorthEast().lng(), 
+                bounds.getSouthWest().lat(), 
+                bounds.getSouthWest().lng()
+            ]
+        });
     }
 });

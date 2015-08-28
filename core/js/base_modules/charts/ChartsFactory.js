@@ -14,11 +14,26 @@ charts.ChartsFactory = function(){
 							'Model': charts.models.LineChart,
 							'attributes': ['yTitle','xTitle']
 						},
+				'areachart': {
+							'Class': charts.views.C3AreaChart,
+							'Model': charts.models.LineChart,
+							'attributes': ['yTitle','xTitle']
+						},
 				'barchart': {
 							'Class': charts.views.C3BarChart,
 							'Model': charts.models.BarChart,
 							'attributes': ['yTitle','xTitle']
 						},
+				'columnchart': {
+							'Class': charts.views.C3ColumnChart,
+							'Model': charts.models.BarChart,
+							'attributes': ['yTitle','xTitle']
+						},
+				'piechart': {
+							'Class': charts.views.C3PieChart,
+							'Model': charts.models.BarChart,
+							'attributes': ['yTitle','xTitle']
+						}						
 			},
 			'google':{
 				'linechart': {

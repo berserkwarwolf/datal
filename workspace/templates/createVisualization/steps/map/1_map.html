@@ -2,14 +2,105 @@
 
 <div class="create step-1-view-map">
 
-	<h2>Editar mapa</h2>
-	<ul>
-		<li>
-			<a class="backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-		</li>
-		<li>
-			<a class="nextButton">{% trans 'APP-NEXT-TEXT' %}</a>
-		</li>
-	</ul>
+	<div class="wrapper1">
+		<div class="wrapper2">
+			<div class="wrapper3">
+
+                <h2 class="FL">{% trans 'APP-CREATE-MAP-TITLE' %}</h2>
+
+				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+
+				<ol>
+					<li>{% trans "APP-CREATE-MAP-DATA-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+				</ol>
+
+				<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
+
+				<div class="sidebar">
+
+					<div class="boxConfig">
+
+						<div class="itemConfig">
+
+							<div class="title">{% trans 'APP-CONTINUE-TEXT' %} <span class="required"></span></div>
+
+							<div class="boxInner">
+
+								<div class="patch active" id="">
+									<a href="#">{% trans 'CHRT-ROADMAP-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT' %}</p>
+								</div>
+
+								<div class="patch" id="">
+									<a href="#">{% trans 'CHRT-SATELLITE-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT' %}s</p>
+								</div>
+
+								<div class="patch" id="">
+									<a href="#">{% trans 'CHRT-HYBRID-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT' %}</p>
+								</div>
+
+								<div class="patch" id="">
+									<a href="#">{% trans 'CHRT-TERRAIN-TEXT' %}</a>
+									<p>{% trans 'APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT' %}</p>
+								</div>
+
+							</div>
+
+						</div>
+
+						<div class="itemConfig">
+
+							<div class="title">{% trans 'APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT' %}</div>
+
+							<div class="boxInner">
+
+								<p>{% trans 'APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT' %}</p>
+
+								<form>
+									<fieldset>
+										<div class="btnGroup btnInlineGroup">
+											<button><span class="icon icon-zoom-in"></span></button>
+											<button><span class="icon icon-zoom-out"></span></button>
+										</div>
+									</fieldset>
+								</form>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+
+				<div class="preview-container">
+
+					<div class="row">
+
+						<div class="col-md-12 col-lg-offset-1 col-lg-10">
+
+							<div class="mapContent">
+
+								<div id="mapContainer" class="chart-preview-view">
+
+									<button class="icon icon-add fill-background corner-position selectData"></button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			
+			</div>
+		</div>
+	</div>
 
 </div>

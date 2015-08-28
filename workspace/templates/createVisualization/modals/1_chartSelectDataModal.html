@@ -3,18 +3,31 @@
 <div id="chartSelectDataModal" class="process-manager-modal hidden modal">
 
 	<div class="row">
-		<h1>Select the desired columns for your chart</h1>
-		<button class="btn">Cancel</button>
-		<button class="btn btn-close">Done</button>
+		<div class="col-md-12">
+			<h1>Seleccione los datos que desee representar</h1>
+			<div class="FR">
+				<button class="button default btn-cancel">Cancelar</button>
+				<button class="button primary btn-done" disabled="disabled">Graficar</button>
+			</div>
+		</div>
 	</div>
 
 	<div class="row">
 
 		<div class="col-md-3">
-			<h2>Selected series</h2>
 			<div class="selected-ranges-view">
+			<form class="form">
+				<h4>Intervalos</h4>
+				<input name="range_data" type="text" />
+
+				<h4>Etiquetas (Eje X)</h4>
+				<input name="range_labels" type="text" />
+
+				<h4>Encabezado/s</h4>
+				<input name="range_headers" type="text" />
+
+			</form>
 			</div>
-			<button type="button" class="btn-add-serie">Add another serie</button>
 		</div>
 
 		<div class="col-md-9">
