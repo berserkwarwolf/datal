@@ -161,19 +161,21 @@ class VisualizationHitsDAO():
 
         return self.cache.set(cache_key, value, self.TTL)
 
-    def count_by_day(self,date):
+    def count_by_day(self,day):
         """retorna los hits de un día determinado"""
 
         # si es datetime, usar solo date
-        if type(date) == type(datetime.today()):
-            date=date.date()
+        if type(day) == type(datetime.today()):
+            day=day.date()
 
-        cache_key="%s_hits_%s_by_date_%s" % ( self.doc_type, self.visualization.guid, str(date))
+        cache_key="%s_hits_%s_by_date_%s" % ( self.doc_type, self.visualization.guid, str(day))
 
         hits = self._get_cache(cache_key)
 
-        if not hits:
-            hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=date).count()
+        # si el día particular no esta en el caché, lo guarda
+        # salvo que sea el parametro pasado sea de hoy, lo guarda en el cache pero usa siempre el de la DB
+        if not hits or day == date.today():
+            hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=day).count()
 
             self._set_cache(cache_key, hits)
 
