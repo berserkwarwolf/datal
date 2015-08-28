@@ -55,7 +55,7 @@ class ViewDatasetListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASET-LIST')
 
     def __init__(self):
-        url = reverse('manageDatasets.list')
+        url = reverse('manageDatasets.index')
         super(ViewDatasetListExceptionAction, self).__init__(url)
 
 

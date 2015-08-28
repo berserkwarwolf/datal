@@ -53,7 +53,7 @@ def action_request_file(request):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def list(request):
+def index(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
