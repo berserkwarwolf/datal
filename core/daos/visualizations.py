@@ -153,7 +153,9 @@ class VisualizationHitsDAO():
 
     def _get_cache(self, cache_key):
 
-        return self.cache.get(cache_key)
+        cache=self.cache.get(cache_key)
+
+        return cache
 
     def _set_cache(self, cache_key, value):
 
@@ -167,7 +169,15 @@ class VisualizationHitsDAO():
             date=date.date()
 
         cache_key="%s_hits_%s_by_date_%s" % ( self.doc_type, self.visualization.guid, str(date))
-        return (date,VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=date).count())
+
+        hits = self._get_cache(cache_key)
+
+        if not hits:
+            hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=date).count()
+
+            self._set_cache(cache_key, hits)
+
+        return (date,hits)
 
     def count_by_days(self, day=30):
         """trae un dict con los hits totales de los ultimos day y los hits particulares de los días desde day hasta today"""
