@@ -128,6 +128,7 @@ class VisualizationHitsDAO():
         self.visualization=visualization
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
+        self.cache=Cache()
 
     def add(self,  channel_type):
         """agrega un hit al datastream. """
@@ -150,6 +151,10 @@ class VisualizationHitsDAO():
     def count(self):
         return VisualizationHits.objects.filter(visualization_id=self.visualization.visualization_id).count()
 
+    def _get_cache(self, cache_key):
+
+        return self.cache.get(cache_key)
+
     def count_by_day(self,date):
         """retorna los hits de un día determinado"""
 
@@ -157,6 +162,7 @@ class VisualizationHitsDAO():
         if type(date) == type(datetime.today()):
             date=date.date()
 
+        cache_key="%s_hits_%s_by_date_%s" % ( self.doc_type, self.visualization.guid, str(date))
         return (date,VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=date).count())
 
     def count_by_days(self, day=30):
@@ -168,21 +174,23 @@ class VisualizationHitsDAO():
 
         cache_key="%s_hits_%s_%s" % ( self.doc_type, self.visualization.guid, day)
 
-        cache=Cache()
 
-        hits = cache.get(cache_key)
+        hits = self._get_cache(cache_key)
 
         # me cachendié! no esta en la cache
         if not hits:
 
+            print "no cache"
             # tenemos la fecha de inicio
             start_date=datetime.today()-timedelta(days=30)
             hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__gt=start_date).count()
 
             # lo dejamos, amablemente, en la cache!
             cache.set(cache_key, hits, self.TTL)
+        else:
+            print "cache vieja"
 
-        map(self.count_by_day, [datetime.today()-timedelta(day=x) for x in range(day-1,-1, -1)])
+        map(self.count_by_day, [datetime.today()-timedelta(days=x) for x in range(day-1,-1, -1)])
         return hits
 
 class VisualizationSearchDAOFactory():
