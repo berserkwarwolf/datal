@@ -155,6 +155,10 @@ class VisualizationHitsDAO():
 
         return self.cache.get(cache_key)
 
+    def _set_cache(self, cache_key, value):
+
+        return self.cache.set(cache_key, value, self.TTL)
+
     def count_by_day(self,date):
         """retorna los hits de un día determinado"""
 
@@ -174,24 +178,19 @@ class VisualizationHitsDAO():
 
         cache_key="%s_hits_%s_%s" % ( self.doc_type, self.visualization.guid, day)
 
-
         hits = self._get_cache(cache_key)
 
         # me cachendié! no esta en la cache
         if not hits:
-
-            print "no cache"
             # tenemos la fecha de inicio
             start_date=datetime.today()-timedelta(days=30)
             hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__gt=start_date).count()
 
             # lo dejamos, amablemente, en la cache!
-            cache.set(cache_key, hits, self.TTL)
-        else:
-            print "cache vieja"
+            self._set_cache(cache_key, hits)
 
-        map(self.count_by_day, [datetime.today()-timedelta(days=x) for x in range(day-1,-1, -1)])
-        return hits
+        by_days=map(self.count_by_day, [datetime.today()-timedelta(days=x) for x in range(day-1,-1, -1)])
+        return {"total":hits, "days": by_days}
 
 class VisualizationSearchDAOFactory():
     """ select Search engine"""
