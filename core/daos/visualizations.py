@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 import operator
 import time
+import logging
 
 from django.db.models import Q, F
 
 from core import settings
+from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
 from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES
-from datetime import date, timedelta
+from datetime import datetime, date, timedelta
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def __init__(self):
@@ -117,6 +119,11 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 class VisualizationHitsDAO():
     """class for manage access to Hits in DB and index"""
 
+    doc_type = "vz"
+
+    # cache ttl, 1 hora
+    TTL=3600 
+
     def __init__(self, visualization):
         self.visualization=visualization
         self.search_index = ElasticsearchIndex()
@@ -134,14 +141,49 @@ class VisualizationHitsDAO():
         self.logger.info("VisualizationHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
 
         # armo el documento para actualizar el index.
-        doc={'docid':"DS::%s" % self.visualization.guid,
-                "type": "ds",
+        doc={'docid':"%s::%s" % (self.doc_type.upper(), self.visualization.guid),
+                "type": self.doc_type,
                 "script": "ctx._source.fields.hits+=1"}
 
         return self.search_index.update(doc)
 
     def count(self):
         return VisualizationHits.objects.filter(visualization_id=self.visualization.visualization_id).count()
+
+    def count_by_day(self,date):
+        """retorna los hits de un día determinado"""
+
+        # si es datetime, usar solo date
+        if type(date) == type(datetime.today()):
+            date=date.date()
+
+        return (date,VisualizationHits.objects.filter(visualization=self.visualization, created_at__startswith=date).count())
+
+    def count_by_days(self, day=30):
+        """trae un dict con los hits totales de los ultimos day y los hits particulares de los días desde day hasta today"""
+
+        # no sé si es necesario esto
+        if day < 1:
+            return {}
+
+        cache_key="%s_hits_%s_%s" % ( self.doc_type, self.visualization.guid, day)
+
+        cache=Cache()
+
+        hits = cache.get(cache_key)
+
+        # me cachendié! no esta en la cache
+        if not hits:
+
+            # tenemos la fecha de inicio
+            start_date=datetime.today()-timedelta(days=30)
+            hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__gt=start_date).count()
+
+            # lo dejamos, amablemente, en la cache!
+            cache.set(cache_key, hits, self.TTL)
+
+        map(self.count_by_day, [datetime.today()-timedelta(day=x) for x in range(day-1,-1, -1)])
+        return hits
 
 class VisualizationSearchDAOFactory():
     """ select Search engine"""
