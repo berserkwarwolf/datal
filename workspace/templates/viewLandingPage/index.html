@@ -10,159 +10,42 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %} {{auth_manager.nick}}!</h1>
+<div class="context-menu clearfix">
+	
+	<!-- Column Left -->
+	<div class="col-md-7">    
+		
+		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %} {{auth_manager.nick}}!</h1>
+
+	</div>
+
+	<!-- Column Right -->
+	<div class="col-md-5 context-buttons clearfix"> 
+
+		<div class="button-pulldown FR">
+			<a class="button primary" title="{% trans 'APP-ADDNEWDATASET-TEXT' %}">{% trans 'APP-ADDNEWDATASET-TEXT' %}<span class="icon icon-right icon-pulldown"></span></a>
+			<ul class="dropdown" style="display:none;">
+				<li><a  href="{% url 'manageDatasets.create_type' 'file' %}" class="button primary" title="{% trans 'APP-UPLOAD-FILE-TEXT' %}">{% trans 'APP-UPLOAD-FILE-TEXT' %}</a></li>
+				<li><a href="{% url 'manageDatasets.create_type' 'url' %}" class="button primary" title="{% trans 'APP-WEBSITE-TEXT' %}">{% trans 'APP-WEBSITE-TEXT' %}</a></li>
+				<li><a href="{% url 'manageDatasets.create_type' 'webservice' %}" class="button primary" title="{% trans 'APP-WEBSERVICE-TEXT' %}">{% trans 'APP-WEBSERVICE-TEXT' %}</a></li>
+			</ul>
+		</div>
+
+	</div>
+
+</div>
 {% endblock %}
 
 {% block content %}
 <div class="columns equal-width clearfix">
 
-	<!-- Column - Left -->
-	<div class="column CL">
+	<div class="container">
 
-		<!-- Getting Started -->
-		<section class="box support getting-started">
-			<header>
-				<h3 class="title">{% trans "LANDINGPAGE-GETTINGSTARTED-TITLE" %} <span>{% trans "LANDINGPAGE-GETTINGSTARTED-SUBTITLE" %}</span></h3>
-			</header>
-			<div class="box-content">
+		<div class="row">
 
-				<article class="settings">
-					<header>
-						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE" %}</h4>
-					</header>
-					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT" %}</p>
-					<footer class="clearfix">
-						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP" %}</p>
-					</footer>
-				</article>
-
-				<article class="resources">
-					<header>
-						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE" %}</h4>
-					</header>
-					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT" %}</p>
-					<footer class="clearfix">
-						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP" %}</p>
-					</footer>
-				</article>
-
-				<article class="revisions">
-					<header>
-						<h4>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE" %}</h4>
-					</header>
-					<p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT" %}</p>
-					<footer class="clearfix">
-						<h5>{% trans "LANDINGPAGE-GETTINGSTARTED-REMEMBER" %}</h5>
-						<p>{% trans "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP" %}</p>
-					</footer>
-				</article>
-
-			</div>
-		</section>
-		
-		{% if stats.account_total_datasets != 0 %}
-		<!-- Numbers -->
-		<section class="box numbers">
-			<header class="clearfix">
-				<h3 class="title FL">{% trans "LANDINGPAGE-NUMBERS-TITLE" %}</h3>
-				{% if 'workspace.can_access_report' in auth_manager.privileges %}
-				<a href="/reports/action_query" class="button small primary FR" title="{% trans 'LANDINGPAGE-NUMBERS-REPORTS' %}" style="display:none;">{% trans "LANDINGPAGE-NUMBERS-REPORTS" %}</a>
-				{% endif %}
-			</header>
-			<div class="box-content">
-				<table class="graph">
-					<tbody>
-						<tr>
-							<td class="data">
-								<i class="icon-resources dataset"></i>
-								<strong>{{stats.account_total_datasets}}</strong>
-								{% trans "APP-DATASETS-TEXT" %}
-							</td>
-							<td class="bar">
-								<div><div style="width:{{stats.account_total_perc_datasets}}%;"></div></div>
-							</td>
-						</tr>
-						<tr>
-							<td class="data">
-								<i class="icon-resources dataview"></i>
-								<strong>{{stats.account_total_datastreams}}</strong>
-								{% trans "APP-DATAVIEWS-TEXT" %}
-							</td>
-							<td class="bar">
-								<div><div style="width:{{stats.account_total_perc_datastreams}}%;"></div></div>
-							</td>
-						</tr>
-						<tr style="display:none;">
-							<td class="data">
-								<i class="icon-resources visualization"></i>
-								<strong>{{stats.account_total_visualizations}}</strong>
-								{% trans "APP-VISUALIZATIONS-TEXT" %}
-							</td>
-							<td class="bar">
-								<div><div style="width:{{stats.account_total_perc_visualizations}}%;"></div></div>
-							</td>
-						</tr>
-						<tr style="display:none;">
-							<td class="data">
-								<i class="icon-resources dashboard"></i>
-								<strong>{{stats.account_total_dashboards}}</strong>
-								{% trans "APP-DASHBOARDS-TEXT" %}
-							</td>
-							<td class="bar">
-								<div><div style="width:{{stats.account_total_perc_dashboards}}%;"></div></div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-		</section>
-		{% endif %}
-
-	</div>
-
-	<!-- Column - Right -->
-	<div class="column CR">
-
-		{% if stats.max_resource == 0 %}
-		<section class="box activity">
-			<header>
-				<h3 class="title">{% trans "APP-START-FROM-HERE-TEXT" %}</h3>
-			</header>
-			<div class="box-content clearfix">
-				<p>{% trans "APP-CREATE-FIRST-DATASET-TEXT" %}</p>
-				<a title="{% trans "APP-ADD-NEW-DATASET-TEXT" %}" class="button small FL" href="/datasets/create"><i class="new"></i>{% trans "APP-ADD-NEW-DATASET-TEXT" %}</a>
-			</div>
-		</section>
-		{% endif %}
+			<div class="col-xs-12">
 		
 		{% if stats.max_resource != 0 %}
-	
-		{% comment %}
-		<!-- Pending Actions -->
-		<section class="box pending-actions" style="display:none;">
-			<header class="clearfix">
-				<h3 class="title FL">{% trans 'APP-PENDINGACTIONS-TEXT' %}</h3>
-			</header>
-			<div class="box-content">
-				<p>
-					<i class="icon-warning"></i>
-					{% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-1' %} <strong>8</strong> {% trans 'LANDINGPAGE-PENDINGACTIONS-TEXT-2' %}
-				</p>
-				<ul>
-					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-					<li><a href="#" target="_blank"><i class="icon-dataview"></i>Park Locations</a></li>
-					<li><a href="#" target="_blank"><i class="icon-visualization"></i>May Staff</a></li>
-				</ul>
-			</div>
-		</section>
-		{% endcomment %}
 
 		<!-- Activity -->
 		<section class="box activity">
@@ -211,6 +94,10 @@
 		</section>
 
 		{% endif %}
+
+			</div>
+
+		</div>
 
 	</div>
 
