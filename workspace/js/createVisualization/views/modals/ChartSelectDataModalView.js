@@ -45,11 +45,12 @@ var ChartSelectDataModalView = ModalView.extend({
 
     onClickDone: function (e) {
         this.close(); //Close modal
-        var selectedRows = this.collection.getRows();
-        var selectedFields = this.collection.getFields();
-        this.model.data.set('fields', selectedFields);
-        this.model.data.set('rows', selectedRows);
-        this.model.set('selection', this.collection.getSelectionExcelStyle());
+        console.log('result of the selection to be posted to the API', this.collection.getSelectionChartStyle());
+        // var selectedRows = this.collection.getRows();
+        // var selectedFields = this.collection.getFields();
+        // this.model.data.set('fields', selectedFields);
+        // this.model.data.set('rows', selectedRows);
+        // this.model.set('selection', this.collection.getSelectionExcelStyle());
     },
 
     onClickCancel: function (e) {
