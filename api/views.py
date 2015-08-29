@@ -20,13 +20,13 @@ import json
 
 logger = logging.getLogger(__name__)
 
-class ResourceViewSet(viewsets.GenericViewSet):
+class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     queryset = GuidModel
     lookup_field = 'guid'
     serializer_class = ResourceSerializer
     data_types = ['dt', 'ds', 'vt']
 
-    def list(self, request):
+    def list(self, request, format='json'):
         limit = self.request.query_params.get('limit', None)
         offset = self.request.query_params.get('offset', '0')
         page_num = int(offset)/int(limit) + 1 if limit else 0
@@ -58,7 +58,7 @@ class ResourceViewSet(viewsets.GenericViewSet):
 
     def get_queryset(self):
         return super(ResourceViewSet, self).get_queryset().get(
-            language=request.auth['language'],
+            language=self.request.auth['language'],
             guid=self.kwargs['guid']
         )
 
