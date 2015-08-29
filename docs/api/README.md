@@ -136,6 +136,53 @@ y sino se pueden pasar los siguientes parametros para ordenar o filtrar la búsq
 - **limit**: junto con offset se usa para limitar la cantidad de resultados 
 - **order**: pudiendo ser su valor *top* o *last* y ordenando el resultado según esos criterios.
 
+Cuando se aplican limites a las busquedas el resultado se devuelve encapsulando los objetos en otros paramteros.
+
+- **count**: el total de los resultados si no hubiera paginado
+- **next**: un link a la próxima petición de la api según el paginado
+- **previous**: un lina a la previa petición de la api según el paginado
+- **result**: un array con el resultado final
+
+Un ejemplo de resultados con limit igual a 2 sería asi
+
+```
+{
+    "count": 20,
+    "next": "http://api.dev:8080/api/v1/datasets/?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e&limit=2&offset=2",
+    "previous": null,
+    "results": [
+        {
+            "endpoint": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
+            "description": "Descripcion del conjuto de datos",
+            "parameters": [],
+            "tags": [
+                ""
+            ],
+            "created_at": 1337611920,
+            "title": "Nivel de Calificaciones 2006",
+            "link": "http://microsites.dev:8080/datasets/61649/nivel-de-calificaciones-2006",
+            "user": "publicador",
+            "guid": "DATASET-ID-61649",
+            "category_name": "Educación"
+        },
+        {
+            "endpoint": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
+            "description": "Descripcion del conjuto de datos",
+            "parameters": [],
+            "tags": [
+                ""
+            ],
+            "created_at": 1337611453,
+            "title": "Nivel de Rendimiento 2010",
+            "link": "http://microsites.dev:8080/datasets/61648/nivel-de-rendimiento-2010",
+            "user": "publicador",
+            "guid": "DATASET-ID-61648",
+            "category_name": "Educación"
+        }
+    ]
+}
+```
+
 ## Get
 
 Trae la información asociada a una vista
@@ -161,3 +208,20 @@ Trae la información asociada a una visualización
 ```
 GET /api/v2/visualizations/:guid
 ``` 
+
+Un ejemplo de resultado de un datastream sería así
+
+```
+{
+    "endpoint": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
+    "description": "Contiene indicadores para promedio anual de calificaciones (para Enseñanza Básica de Niños y Enseñanza Media de Jóvenes).",
+    "parameters": [],
+    "tags": [],
+    "created_at": "2012-06-04T14:12:52",
+    "title": "Nivel Calificaciones 2006",
+    "link": null,
+    "user": "publicador",
+    "guid": "NIVEL-DE-CALIF-2006-53010",
+    "category_name": "Educación"
+}
+```
