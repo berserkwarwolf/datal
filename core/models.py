@@ -226,6 +226,9 @@ class User(models.Model):
     def is_editor(self):
         return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
 
+    def is_authenticated(self):
+        return True
+
     def get_total_datasets(self):
         c = Cache(db=0)
         total_datasets = c.get('my_total_datasets_' + str(self.id))
@@ -1031,6 +1034,9 @@ class Application(models.Model):
 
     def get_name(self):
         return self.name and self.name or 'No name'
+
+    def is_public_auth_key(self, auth_key):
+        return self.public_auth_key == auth_key
 
 
 class Setting(models.Model):

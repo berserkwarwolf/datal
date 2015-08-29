@@ -343,7 +343,11 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'api.auth.DatalApiAuthentication',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination'
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'api.permissions.DatalApiPermission',
+    ),
 }
 
 CACHES = {

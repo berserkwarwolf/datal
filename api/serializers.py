@@ -1,10 +1,8 @@
 from rest_framework import serializers
 from core.models import DataStream
-from core.docs import DS
-from api.helpers import add_domain_to_datastream_link
+from rest_framework.compat import OrderedDict
 
-
-class DataStreamSerializer(serializers.Serializer):
+class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()
     title = serializers.CharField()
     description = serializers.CharField()
@@ -13,9 +11,7 @@ class DataStreamSerializer(serializers.Serializer):
     created_at = serializers.DateTimeField()
     endpoint = serializers.CharField()
     link = serializers.CharField()
-    category_id = serializers.IntegerField()
     category_name = serializers.CharField()
-    result = serializers.DictField()
 
     def tryKeysOnDict(self, toDict, toKey, fromDict, fromKeys):
         toDict[toKey] = None
@@ -35,9 +31,23 @@ class DataStreamSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'created_at', obj, ['created_at', 'timestamp'])
         self.tryKeysOnDict(answer, 'endpoint', obj, ['endpoint', 'end_point'])
         self.tryKeysOnDict(answer, 'link', obj, ['permalink'])
-        self.tryKeysOnDict(answer, 'category_id', obj, ['category_id', 'category'])
         self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
 
         answer['link'] = self.context['request'].auth['microsite_domain'] + answer['link']
+        return OrderedDict(answer)
+
+class DataStreamSerializer(ResourceSerializer):
+    result = serializers.DictField()
+
+    def to_representation(self, obj):
+        answer= super(DataStreamSerializer, self).to_representation(obj)
+        self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
+
         return answer
+
+class DataSetSerializer(ResourceSerializer):
+    pass
+
+class VisualizationSerializer(ResourceSerializer):
+    pass

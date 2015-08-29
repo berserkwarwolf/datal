@@ -18,7 +18,15 @@ class ElasticsearchFinder(Finder):
         page = kwargs.get('page', 0)
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
-        self.sort = kwargs.get('order', self.order_by)
+        
+        self.order =  kwargs.get('order')
+
+        if self.order and self.order=='top':
+            self.sort = "hits: desc"
+        elif self.order and self.order=='last':
+            self.sort =  "timestamp:asc"
+        else:
+            self.sort = self.order_by        
 
         if page == 0:
             start = 0

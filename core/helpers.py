@@ -12,7 +12,6 @@ from babel import numbers, dates
 from core.primitives import PrimitiveComputer
 from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
-
 logger = logging.getLogger(__name__)
 
 comma_separated_word_list_re = re.compile('^[\w,]+$')
@@ -376,6 +375,7 @@ def get_file_type_from_extension(extension):
 
 
 def get_domain(account_id):
+    from core.models import Preference
     try:
         account_domain = Preference.objects.values('value').get(key='account.domain', account = account_id)['value']
         account_domain = 'http://' + account_domain
@@ -394,17 +394,6 @@ def get_domain_by_request(request, default_domain = ''):
         if domain is None:
             domain = default_domain
     return domain
-
-
-def get_domain_by_account_id(account_id):
-    """ Copy of api/heplers/get_domain because duplicates name of core/httpy.py/get_domain
-    get the domain of this request """
-    try:
-        account_domain = Preference.objects.values('value').get(key='account.domain', account = account_id)['value']
-        account_domain = 'http://' + account_domain
-    except Preference.DoesNotExist:
-        account_domain = get_domain_with_protocol('microsites')
-    return account_domain
 
 
 def update_dashboard_widgets_and_revisions(widgets):
