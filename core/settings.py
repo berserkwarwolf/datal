@@ -344,6 +344,7 @@ REST_FRAMEWORK = {
         'api.auth.DatalApiAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'EXCEPTION_HANDLER': 'api.exceptions.datal_exception_handler',
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
         'api.permissions.DatalApiPermission',
