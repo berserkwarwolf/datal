@@ -16,7 +16,7 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import engine
 
 

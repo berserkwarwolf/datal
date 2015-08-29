@@ -8,7 +8,7 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 from core.helpers import get_mimetype
 
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required

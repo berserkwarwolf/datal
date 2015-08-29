@@ -16,7 +16,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from core.choices import *
 from core.daos.datasets import DatasetDBDAO
 from core.models import VisualizationRevision,DatasetRevision
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import helpers as LocalHelper
 from microsites.daos.datastreams import DatastreamDAO
 import json
