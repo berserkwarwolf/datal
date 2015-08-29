@@ -34,7 +34,9 @@ class ResourceSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
 
-        answer['link'] = self.context['request'].auth['microsite_domain'] + answer['link']
+        if answer['link']:
+            domain = self.context['request'].auth['microsite_domain']
+            answer['link'] = domain + answer['link']
         return OrderedDict(answer)
 
 class DataStreamSerializer(ResourceSerializer):

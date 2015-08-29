@@ -1,4 +1,4 @@
-from django.shortcuts import get_object_or_404
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
@@ -62,6 +62,14 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
             guid=self.kwargs['guid']
         )
 
+    def get_object(self):
+        obj = self.get_queryset()
+        if not obj:
+            raise Http404
+
+        self.check_object_permissions(self.request, obj)
+        return obj
+
 class DataStreamViewSet(ResourceViewSet):
     queryset = DataStreamDBDAO() 
     serializer_class = DataStreamSerializer
@@ -82,8 +90,10 @@ class DataStreamViewSet(ResourceViewSet):
 
             ivk = invoke(query)
             if ivk:
-                return Response(json.loads(ivk[0]))
-        return Response('{"Error":"No invoke"}', status=status.HTTP_400_BAD_REQUEST)
+                datastream['result'] = json.loads(ivk[0])
+                serializer = self.get_serializer(datastream)
+        return Response(serializer.data)
+        
 
 
 class DataSetViewSet(ResourceViewSet):
