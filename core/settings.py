@@ -348,6 +348,12 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
         'api.permissions.DatalApiPermission',
     ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.UserRateThrottle'
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '20/minute'
+    }
 }
 
 CACHES = {
