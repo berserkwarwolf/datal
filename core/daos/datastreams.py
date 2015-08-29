@@ -6,14 +6,14 @@ import logging
 from django.db.models import Q, F
 from django.db import IntegrityError
 
-from core.exceptions import SearchIndexNotFoundException
+from .resource import AbstractDataStreamDBDAO
 from core import settings
-from core.daos.resource import AbstractDataStreamDBDAO
+from core.choices import StatusChoices, STATUS_CHOICES
+from core.exceptions import SearchIndexNotFoundException
+from core.helpers import slugify
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
-
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -93,6 +93,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
         dataset_revision = datastream_revision.dataset.last_revision
 
+        # Muestro el link del micrositio solo si esta publicada la revision
+        public_url = ''
+        if datastream_revision.status == StatusChoices.PUBLISHED:
+            domain = datastream_revision.user.account.get_preference('account.domain')
+            if not domain.startswith('http'):
+                domain = 'http://' + domain
+            public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+
+
         datastream = dict(
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
@@ -117,6 +126,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
+            public_url=public_url,
         )
 
         return datastream

@@ -69,7 +69,6 @@ $(document).ready(function(){
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
     changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
-    micrositeUrl: "TODO",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
   });
   var DatasetView = new datasetView({model: Dataset});
