@@ -12,67 +12,10 @@ para solicitar un dataset identificado por el ID 12345 en formato JSON.
 
 # Recursos
 
-## Vistas 
+Todos los recursos de la api salvo que aparezca alguna excepción retornan una objeto con los siguientes atributos
 
-### Métodos
 
-Busca un listado de vistas.
-
-```
-GET /api/v2/datastreams
-```
-
-Si no hay parametros GET la API devuelve todos los datastreams que le corresponden a la cuenta 
-y al usuario sino se pueden pasar los siguientes parametros.
-
-- **query**: texto que se busca en todos los parametros del datastream
-- **offset**: a partir de que datastream traer el resultado (se usa para paginar)
-- **limit**: junto con offset se usa para limitar la cantidad de resultados 
-
-Trae la información asociada a una vista
-
-```
-GET /api/v2/datastreams/:guid
-``` 
-
-Trae la información asociada completa (incluye los valores de la vista) a una vista
-
-```
-GET /api/v2/datastreams/:guid/data
-``` 
-
-### Atributos
-
-Si se piden los datos asociados a una vista se devuelve
-
-```
-{
-  "id": "INDIC-DIARI", 
-  "title": "Indicadores Diarios", 
-  "description": "Datos obtenidos en l\u00ednea del Banco Central de Chile.", 
-  "user": "cne", 
-  "tags": [], 
-  "created_at": "2015-07-28 11:20:24", 
-  "endpoint": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
-  "link": "http://datos.energiaabierta.cne.cl/datastreams/94287/indicadores-diarios/", 
-  "category_id": 41111, 
-  "category_name": "Internacional",
-  "parameters": [
-    {
-      "name": "param0",
-      "position": 0,
-      "description": "Un parametro",
-    },
-    {
-      "name": "param0",
-      "position": 0,
-      "description": "Un parametro",
-    }
-  ]
-}
-```
-
-- **id**: Id de la vista.
+- **guid**: Id de la vista.
 - **title**: Titulo de la vista.
 - **description**: Descripción de la vista.
 - **user**: Usuario propietario de la vista.
@@ -80,20 +23,18 @@ Si se piden los datos asociados a una vista se devuelve
 - **created_at**: Fecha de creacón.
 - **endpoint**: Fuente de los datos de la vista.
 - **link**: Link a la vista en el sitio de datos.
-- **category_id**: Id de la categoría de la vista.
 - **category_name**: Nombre de la categoría de la vista.
-
-Si se piden los datos completos se agrega la propiedad result con los valores de la vista
+- **parameters (solo en datastreams)** : parametros dinámicos para el contenido de un datastream
+- **result (solo en datastreams)** : cuando se llama al metodo data de un datastream
 
 ```
 {
-  "id": "INDIC-DIARI", 
+  "guid": "INDIC-DIARI", 
   "title": "Indicadores Diarios", 
   "description": "Datos obtenidos en l\u00ednea del Banco Central de Chile.", 
   "user": "cne", 
   "tags": [], 
-  "created_at": 
-  "2015-07-28 11:20:24", 
+  "created_at": "2015-07-28 11:20:24", 
   "endpoint": "https://docs.google.com/spreadsheets/d/1wiUQlRiIPMbTWFDVn3Ug8Rp15yHuXwsCU3ZGz39xJhg/pub?gid=0&single=true&output=csv", 
   "link": "http://datos.energiaabierta.cne.cl/datastreams/94287/indicadores-diarios/", 
   "category_id": 41111, 
@@ -157,7 +98,66 @@ Si se piden los datos completos se agrega la propiedad result con los valores de
     "fLength":0
   }, 
 }
+```
 
+Los recursos que maneja la API son:
 
+- datasets
+- datastreams
+- visualizations
 
+# Métodos 
 
+# Listados
+
+Busca un listado de datastreams.
+
+```
+GET /api/v2/datastreams
+```
+
+Busca un listado de datasets.
+
+```
+GET /api/v2/datasets
+```
+
+Busca un listado de visualizaciones.
+
+```
+GET /api/v2/visualizations
+```
+
+Si no hay parametros GET la API devuelve todos los recursos que le corresponden a la cuenta 
+y sino se pueden pasar los siguientes parametros para ordenar o filtrar la búsqueda.
+
+- **query**: texto que se busca en todos los parametros del datastream
+- **offset**: a partir de que datastream traer el resultado (se usa para paginar)
+- **limit**: junto con offset se usa para limitar la cantidad de resultados 
+- **order**: pudiendo ser su valor *top* o *last* y ordenando el resultado según esos criterios.
+
+## Get
+
+Trae la información asociada a una vista
+
+```
+GET /api/v2/datastreams/:guid
+``` 
+
+Trae la información asociada completa (incluye los valores de la vista) a una vista
+
+```
+GET /api/v2/datastreams/:guid/data
+``` 
+
+Trae la información asociada a un dataset
+
+```
+GET /api/v2/datasets/:guid
+``` 
+
+Trae la información asociada a una visualización
+
+```
+GET /api/v2/visualizations/:guid
+``` 

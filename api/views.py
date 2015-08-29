@@ -69,7 +69,7 @@ class DataStreamViewSet(ResourceViewSet):
     data_types = ['ds']
 
     @detail_route(methods=['get'])
-    def rows(self, request, guid=None, pk=None, format='json'):
+    def data(self, request, guid=None, pk=None, format='json'):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
         mutable_get['datastream_revision_id'] = datastream['last_published_revision_id']

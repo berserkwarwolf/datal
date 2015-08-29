@@ -23,7 +23,7 @@ class ResourceSerializer(serializers.Serializer):
     def to_representation(self, obj):
         answer={}
 
-        self.tryKeysOnDict(answer, 'id', obj, ['guid'])
+        self.tryKeysOnDict(answer, 'guid', obj, ['guid'])
         self.tryKeysOnDict(answer, 'title', obj, ['title'])
         self.tryKeysOnDict(answer, 'description', obj, ['description'])
         self.tryKeysOnDict(answer, 'user', obj, ['author', 'owner_nick'])
