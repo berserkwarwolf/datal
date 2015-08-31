@@ -32,3 +32,36 @@
    </div>
 </div>
 {% endoverlay %}
+
+<!-- Unpublish Dataset Overlay -->
+{% overlay id_unpublishDataset %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TITLE' %}</h4>
+   <div class="ov-content">
+      <p class="text center">{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_unpublishResource" class="button small" title="{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}">{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}</a>
+         <a id="id_unpublishRevision" class="button small" title="{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}">{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}
+
+<!-- Unpublish Dataset Confirm Overlay -->
+{% overlay id_confirmUnpublishDataset %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE' %}</h4>
+   <div class="ov-content">
+      <p>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT' %}</p>
+      <ul id="id_affectedResourcesList"></ul>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_unpublishRelatedResources" class="button small" title="{% trans 'APP-OVERLAY-UNPUBLISH' %}">{% trans 'APP-OVERLAY-UNPUBLISH' %}</a>
+         <a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}

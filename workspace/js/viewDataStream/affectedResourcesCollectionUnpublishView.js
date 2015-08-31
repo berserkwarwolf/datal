@@ -1,15 +1,16 @@
-var AffectedResourcesCollectionView = Backbone.View.extend({
+var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
 
-    el: '#id_confirmDeleteDataset',
+    el: '#id_confirmUnpublishDataview',
 
     affectedResourcesHTML: '',
 
     events: {
-        "click #id_deleteRelatedResources": "deleteRelatedResources",
+        "click #id_unpublishRelatedResources": "unpublishRelatedResources",
         "click .close, .cancel": "closeOverlay",
     },
 
-    initialize: function(options) {        
+    initialize: function(options) {
+        
         this.options = options;
 
         // init Overlay
@@ -33,23 +34,23 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
-                    dataset_id: model.get('dataset_id'),
+                    dataset_id: model.get('datastream__id'),
                     type: self.options.type
                 }),
                 success: function(model, response) {
-                    
+
                     if (self.collection.length > 0) {
                         _(self.collection.models).each(function(model) {
                             self.addResource(model);
                         }, self);
                     }
 
-                    // If last model iterated, check if related resources in all model iterations, have been fetched and render, else delete resources without prompting an overlay
+                    // If last model iterated, check if related resources in all model iterations, have been fetched and render, else unpublish resources without prompting an overlay
                     if (index === total - 1) {
                         if (self.affectedResourcesHTML) {
                             self.render();
                         } else {
-                            self.deleteRelatedResources();
+                            self.unpublishRelatedResources();
                         }
                     }
 
@@ -59,8 +60,8 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
 
         });
 
-        this.collection.bind('reset', this.render);
-        
+        this.collection.bind('reset', this.render)
+
     },
 
     render: function() {
@@ -76,10 +77,10 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
         this.affectedResourcesHTML += theView.render().el.outerHTML;
     },
 
-    deleteRelatedResources: function() {
+    unpublishRelatedResources: function() {
         var self = this;
         _.each(this.options.models, function(model) {
-            resource = model.get('title');
+            resource = model.get('title')
             model.remove({
                 
                 beforeSend: function(xhr, settings){
@@ -89,10 +90,10 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     $("#ajax_loading_overlay").show();
                 },
 
-                success: function(response, a) {
+                success: function() {
                     $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text:  resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-TEXT'),
+                        title: gettext('APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE'),
+                        text:  resource + ": "+ gettext('APP-UNPUBLISH-DATASTREAM-ACTION-TEXT'),
                         image: '/static/workspace/images/common/ic_validationOk32.png',
                         sticky: false,
                         time: 3500
@@ -108,13 +109,12 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     setTimeout(function () {
                         window.location = joinURL;
                     }, 2000);
-                    
                 },
 
                 error: function() {
                     $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text: resource + ": "+  gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
+                        title: gettext('APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE'),
+                        text: resource + ": "+  gettext('APP-UNPUBLISH-DATASTREAM-ACTION-ERROR-TEXT'),
                         image: '/static/workspace/images/common/ic_validationError32.png',
                         sticky: true,
                         time: 2500

@@ -8,7 +8,7 @@
 .icon-inline.icon-right{margin-right:0;}
 
 	/* When used inline in text - Apply to small icons (16x16px in the 24x24px space for icon sprite) */
-	.icon-inline{width:16px;height:16px;margin-right:3px;}
+	.icon-inline{width:16px;height:16px;margin-right:3px;top:-1px;}
 	.icon-inline.icon-right{margin-left:3px;}
 
 	/* When used inline in button */
@@ -21,7 +21,6 @@
 /* 48px icons */
 .size-48{
 	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
-
 
 	/* Nav local */
 	.icon-home,
@@ -59,9 +58,11 @@
 	.icon-settings:hover,
 	.button.active .icon-settings{background-position:-48px -228px;}
 
+
 	/* General icons */
 	.icon-view-site{background-position:-12px -696px;}
 	.button:hover .icon-view-site{background-position:-48px -696px;}
+	.icon-view-site.icon-inline{background-position:-16px -700px;}
 
 	.icon-more{background-position:-12px -732px;}
 	.icon-more:hover,

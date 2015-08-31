@@ -7,7 +7,8 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject, #id_publish, #id_sendToReview, #id_unpublish': 'changeStatus',
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
+		'click #id_unpublish': 'onUnpublishButtonClicked'
 	},
 
 	initialize: function(){
@@ -22,13 +23,20 @@ var datasetView = Backbone.Epoxy.View.extend({
 	},
 
 	onDeleteButtonClicked: function(){
-		self = this;
 		this.deleteListResources = new Array();
 		this.deleteListResources.push(this.options.model);
-		var deleteItemView = new DeleteItemView({
+		var deleteView = new DeleteView({
 				models: this.deleteListResources,
-				type: "datastreams",
-				parentView: this.parentView
+				type: "datastreams"
+		});
+	},
+
+	onUnpublishButtonClicked: function(){
+		this.unpublishListResources = new Array();
+		this.unpublishListResources.push(this.options.model);
+		var unpublishView = new UnpublishView({
+				models: this.unpublishListResources,
+				type: "datastreams"
 		});
 	},
 

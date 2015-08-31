@@ -3,9 +3,17 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="200px"
 	 height="184px" viewBox="0 -45.918 200 184" enable-background="new 0 -45.918 200 184" xml:space="preserve">
-<g id="BG_white">
+<g id="BG_white" display="none">
+	<rect x="0.334" display="inline" fill="#FFFFFF" width="199.666" height="46"/>
+	<rect x="0.334" y="-46" display="inline" fill="#FFFFFF" width="199.666" height="46"/>
+	<rect x="0.017" y="46.082" display="inline" fill="#FFFFFF" width="54" height="46"/>
+	<rect x="0.017" y="92.082" display="inline" fill="#FFFFFF" width="54" height="46"/>
 </g>
-<g id="BG">
+<g id="BG" display="none">
+	<rect x="0.017" y="0.082" display="inline" fill="#232831" width="200" height="46"/>
+	<rect x="0.017" y="-45.918" display="inline" fill="#232831" width="200" height="46"/>
+	<rect x="0.017" y="46.082" display="inline" fill="#232831" width="54" height="46"/>
+	<rect x="0.017" y="92.082" display="inline" fill="#232831" width="54" height="46"/>
 </g>
 <g id="Logos">
 	<g id="Layer_2_1_">
@@ -74,7 +82,18 @@
 				C32.433,30.51,32.522,30.625,32.633,30.725z"/>
 		</g>
 		<g id="Layer_2_5_">
-			<text transform="matrix(1 0 0 1 53.5088 34.0029)" enable-background="new    "><tspan x="0" y="0" fill="#FFFFFF" font-family="'Roboto-Thin'" font-size="28.9621">D</tspan><tspan x="18.66" y="0" fill="#FFFFFF" font-family="'Roboto-Thin'" font-size="28.9621">AT</tspan><tspan x="52.106" y="0" fill="#FFFFFF" font-family="'Roboto-Thin'" font-size="28.9621">A</tspan><tspan x="69.98" y="0" fill="#FFFFFF" font-family="'Roboto-Thin'" font-size="28.9621">L</tspan></text>
+			<g enable-background="new    ">
+				<path fill="#FFFFFF" d="M56.111,34.002v-20.59h5.756c1.688,0,3.201,0.384,4.539,1.152c1.339,0.769,2.383,1.869,3.133,3.302
+					c0.75,1.434,1.124,3.064,1.124,4.894v1.895c0,1.839-0.373,3.47-1.117,4.893c-0.745,1.424-1.794,2.522-3.146,3.296
+					c-1.353,0.772-2.906,1.159-4.66,1.159H56.111z M57.85,14.883v17.648h3.903c2.168,0,3.908-0.72,5.218-2.158
+					c1.31-1.439,1.966-3.385,1.966-5.838v-1.812c0-2.367-0.646-4.264-1.938-5.688c-1.292-1.425-2.994-2.143-5.105-2.151H57.85z"/>
+				<path fill="#FFFFFF" d="M85.604,28.218h-9.349l-2.121,5.784h-1.824l7.792-20.59h1.654l7.793,20.59h-1.811L85.604,28.218z
+					 M76.793,26.747h8.258l-4.129-11.214L76.793,26.747z"/>
+				<path fill="#FFFFFF" d="M104.144,14.883h-7.057v19.119h-1.739V14.883h-7.043v-1.471h15.839V14.883z"/>
+				<path fill="#FFFFFF" d="M116.887,28.218h-9.348l-2.122,5.784h-1.824l7.792-20.59h1.655l7.792,20.59h-1.811L116.887,28.218z
+					 M108.076,26.747h8.259l-4.13-11.214L108.076,26.747z"/>
+				<path fill="#FFFFFF" d="M126.19,32.531h10.168v1.471h-11.921v-20.59h1.753V32.531z"/>
+			</g>
 		</g>
 	</g>
 	<g id="Layer_2_3_">
@@ -130,7 +149,18 @@
 			</g>
 		</g>
 		<g id="Layer_2_2_">
-			<text transform="matrix(1 0 0 1 53.5088 -12.0625)" enable-background="new    "><tspan x="0" y="0" fill="#898976" font-family="'Roboto-Thin'" font-size="28.9621">D</tspan><tspan x="18.66" y="0" fill="#898976" font-family="'Roboto-Thin'" font-size="28.9621">AT</tspan><tspan x="52.106" y="0" fill="#898976" font-family="'Roboto-Thin'" font-size="28.9621">A</tspan><tspan x="69.98" y="0" fill="#898976" font-family="'Roboto-Thin'" font-size="28.9621">L</tspan></text>
+			<g enable-background="new    ">
+				<path fill="#898976" d="M56.111-12.062v-20.59h5.756c1.688,0,3.201,0.384,4.539,1.152c1.339,0.769,2.383,1.869,3.133,3.302
+					c0.75,1.434,1.124,3.064,1.124,4.894v1.895c0,1.839-0.373,3.47-1.117,4.893c-0.745,1.424-1.794,2.522-3.146,3.296
+					c-1.353,0.772-2.906,1.159-4.66,1.159H56.111z M57.85-31.182v17.648h3.903c2.168,0,3.908-0.72,5.218-2.158
+					c1.31-1.439,1.966-3.385,1.966-5.838v-1.812c0-2.367-0.646-4.264-1.938-5.688c-1.292-1.425-2.994-2.143-5.105-2.151H57.85z"/>
+				<path fill="#898976" d="M85.604-17.847h-9.349l-2.121,5.784h-1.824l7.792-20.59h1.654l7.793,20.59h-1.811L85.604-17.847z
+					 M76.793-19.317h8.258l-4.129-11.214L76.793-19.317z"/>
+				<path fill="#898976" d="M104.144-31.182h-7.057v19.119h-1.739v-19.119h-7.043v-1.471h15.839V-31.182z"/>
+				<path fill="#898976" d="M116.887-17.847h-9.348l-2.122,5.784h-1.824l7.792-20.59h1.655l7.792,20.59h-1.811L116.887-17.847z
+					 M108.076-19.317h8.259l-4.13-11.214L108.076-19.317z"/>
+				<path fill="#898976" d="M126.19-13.533h10.168v1.471h-11.921v-20.59h1.753V-13.533z"/>
+			</g>
 		</g>
 	</g>
 	<g>

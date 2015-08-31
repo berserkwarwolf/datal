@@ -10,7 +10,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject, #id_publish, #id_sendToReview, #id_unpublish': 'changeStatus',
+		'click #id_unpublish': 'onUnpublishButtonClicked',
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
 		"click #id_edit": "onEditButtonClicked",
 	},
 
@@ -179,13 +180,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},
 
-	onEditButtonClicked: function(event){
-		new DatastreamEditItemView({
-			model: this.datastreamEditItemModel,
-			parentView: this
-		});
-		},
-
 	initFilters: function(){
 
 		// Init Backbone PageableCollection
@@ -199,10 +193,25 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		self = this;
 		this.deleteListResources = new Array();
 		this.deleteListResources.push(this.options.model);
-		var deleteItemView = new DeleteItemView({
+		var deleteView = new DeleteView({
 			models: this.deleteListResources,
-			type: "visualizations",
-			parentView: this.parentView
+			type: "visualizations"
+		});
+	},
+
+	onUnpublishButtonClicked: function(){
+		this.unpublishListResources = new Array();
+		this.unpublishListResources.push(this.options.model);
+		var unpublishView = new UnpublishView({
+				models: this.unpublishListResources,
+				type: "visualizations"
+		});
+	},
+
+	onEditButtonClicked: function(event){
+		new DatastreamEditItemView({
+			model: this.datastreamEditItemModel,
+			parentView: this
 		});
 	},
 

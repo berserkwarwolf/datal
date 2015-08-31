@@ -4,6 +4,8 @@
 {% block meta %}
 
 {# CSS #}
+
+<link href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" type="text/css" rel="stylesheet" media="screen"/>
 {% compress css %}
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-paginator.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
@@ -14,37 +16,39 @@
 <link href="{% sass_src 'workspace/styles/viewDataStream.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/manageDataviews.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
-<link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
+
 {# JS Libs and Plugins #}
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
-<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# JS for this screen #}
-<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/dataTableModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/dataTableView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/listDatasets.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datasetItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/manageDatasetsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/viewDataStream/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/deleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/unpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollectionDeleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/affectedResourcesCollectionUnpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# JS for Edit #}
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -59,10 +63,10 @@
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewDataStream/datastreamEditItemTagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/viewDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_dataviews_option"/>
 {% endblock %}
@@ -134,6 +138,7 @@ $(document).ready(function(){
     createVizUrl: "TODO",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+    publicUrl: "{{ datastream.public_url }}"
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({

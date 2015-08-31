@@ -1,4 +1,4 @@
-var DeleteItemView = Backbone.View.extend({
+var DeleteView = Backbone.View.extend({
 	
 	el: '#id_deleteDataview',
 
@@ -36,7 +36,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	deleteDataview: function() {
 		var affectedResourcesCollection = new AffectedResourcesCollection();
-		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
+		var affectedResourcesCollectionDeleteView = new AffectedResourcesCollectionDeleteView({
 			collection: affectedResourcesCollection,
 			models: this.options.models,
 			type: this.options.type
