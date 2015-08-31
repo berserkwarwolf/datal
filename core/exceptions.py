@@ -108,6 +108,16 @@ class DataStreamNotFoundException(LifeCycleException):
         return [ViewDatastreamListExceptionAction()]
 
 
+class VisualizationNotFoundException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND')
+    description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND')
+    tipo = 'visualization-not-found'
+    status_code = 404
+
+    def get_actions(self):
+        return [ViewVisualizationListExceptionAction()]
+
+
 class VisualizationRequiredException(LifeCycleException):
     title = _('EXCEPTION-TITLE-VIZUALIZATION-REQUIRED')
     description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED')
