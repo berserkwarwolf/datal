@@ -7,7 +7,7 @@ from django.db.models import Q, F
 from core.exceptions import SearchIndexNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES
@@ -15,6 +15,8 @@ from core.choices import STATUS_CHOICES
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
+    def __init__(self):
+        pass
 
     def create(self, datastream=None, user=None, **fields):
         """create a new datastream if needed and a datastream_revision"""
@@ -195,9 +197,12 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
     def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = dict(
-            visualizations=dict()
-        )
+        related = dict()
+        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+            visualization__datastream__id=datastream_id,
+            datastreami18n__language=language
+        ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
+                 'visualization__user__nick', 'created_at', 'visualization__last_revision')
         return related
 
 
