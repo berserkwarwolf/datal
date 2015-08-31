@@ -3,7 +3,7 @@ var TitleCellView = Backbone.View.extend({
     deleteListResources: null,
     parentView: null,
     events: {
-        "click .delete": "deleteDataset",
+        "click .delete": "deleteVisualization",
     },
 
     initialize: function(options) {

@@ -223,16 +223,15 @@ def create(request, viz_type='index'):
 @login_required
 @require_GET
 def related_resources(request):
-    params = request.GET
-    visualization_revision_id = params.get('revision_id','')
-    visualization_id = params.get('visualization_id','')
-    resource_type = params.get('type','all');
-    resource = VisualizationLifeCycleManager(user_id=request.user.id
-                , visualization_id=visualization_id, visualization_revision_id=visualization_revision_id)
+    visualization_revision_id = request.GET.get('revision_id', '')
+    visualization_id = request.GET.get('visualization_id', '')
+    visualizations = VisualizationDBDAO().query_childs(
+        visualization_id=visualization_id,
+        language=request.auth_manager.language
+    )['dashboards']
 
-    associated_visualizations =resource.related_resources_simple(types=resource_type)
-    return JSONHttpResponse(json.dumps(associated_visualizations))
-
+    list_result = [associated_visualization for associated_visualization in visualizations]
+    return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
 @login_required
 @require_GET
