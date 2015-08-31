@@ -13,16 +13,8 @@ var MapView = StepViewSPA.extend({
 		
 		});
 
-		// Bind model validation to view
-		//Backbone.Validation.bind(this);
-
-/*		this.listenTo(this.model.data, 'change:markers', this.onChangeData, this);
-		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
-		this.listenTo(this.model, 'change:type', this.onChartChanged, this);*/
-
-
         this.mapSelectDataModalView = new MapSelectDataModalView({
-          el: '#chartSelectDataModal',
+          el: '#MapSelectDataModal',
           model: this.model
         });
 

@@ -24,7 +24,7 @@ var ChartView = StepViewSPA.extend({
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
         this.chartSelectDataModalView = new ChartSelectDataModalView({
-          el: '#chartSelectDataModal',
+          el: '#ChartSelectDataModal',
           model: this.model
         });
         this.chartSelectDataModalView.on('open', function () {
