@@ -95,7 +95,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         # Muestro el link del micrositio solo si esta publicada la revision
         public_url = ''
-        if datastream_revision.status == StatusChoices.PUBLISHED:
+        if datastream_revision.datastream.last_published_revision:
             domain = datastream_revision.user.account.get_preference('account.domain')
             if not domain.startswith('http'):
                 domain = 'http://' + domain

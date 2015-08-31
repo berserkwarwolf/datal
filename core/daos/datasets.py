@@ -44,7 +44,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         # Muestro el link del micrositio solo si esta publicada la revision
         public_url = ''
-        if dataset_revision.status == StatusChoices.PUBLISHED:
+        if dataset_revision.dataset.last_published_revision:
             domain = dataset_revision.user.account.get_preference('account.domain')
             if not domain.startswith('http'):
                 domain = 'http://' + domain
