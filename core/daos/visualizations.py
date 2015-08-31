@@ -13,6 +13,9 @@ from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES
+from django.db import connection
+from django.db.models import Count
+
 from datetime import datetime, date, timedelta
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
@@ -196,13 +199,18 @@ class VisualizationHitsDAO():
         if not hits:
             # tenemos la fecha de inicio
             start_date=datetime.today()-timedelta(days=30)
-            hits=VisualizationHits.objects.filter(visualization=self.visualization, created_at__gt=start_date).count()
+
+            # tomamos solo la parte date
+            truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
+
+            hits={"days":VisualizationHits.objects.filter(visualization=self.visualization,created_at__range=(start_date, datetime.today()))
+                .extra(select={'_date': truncate_date}).values("_date").annotate(hits=Count("created_at"))}
+            hits['total']=sum([x['hits'] for x in hits['days']])
 
             # lo dejamos, amablemente, en la cache!
             self._set_cache(cache_key, hits)
 
-        by_days=map(self.count_by_day, [datetime.today()-timedelta(days=x) for x in range(day-1,-1, -1)])
-        return {"total":hits, "days": by_days}
+        return hits
 
 class VisualizationSearchDAOFactory():
     """ select Search engine"""
