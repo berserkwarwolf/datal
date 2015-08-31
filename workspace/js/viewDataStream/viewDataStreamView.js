@@ -123,13 +123,13 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				if(response.status == 'ok'){
 					
 					// Set Status
-					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
-					self.model.set('status',response.dataset_status);
+					self.model.set('status_str',STATUS_CHOICES( response.datastream_status ));
+					self.model.set('status',response.datastream_status);
 
 					// Set OK Message
 					$.gritter.add({
-						title: gettext('APP-SETTINGS-SAVE-OK-TITLE'),
-						text: response.messages,
+						title: response.messages.title,
+						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 2500
@@ -137,27 +137,15 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 				}else{
 
-					// Set Error Message
-					$.gritter.add({
-						title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-						text: response.messages,
-						image: '/static/workspace/images/common/ic_validationError32.png',
-						sticky: true,
-						time: ''
-					});
+					datalEvents.trigger('datal:application-error', response);
 
 				}
 
 			},
 			error:function(response){
-				// Set Error Message
-				$.gritter.add({
-					title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-					text: gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image: '/static/workspace/images/common/ic_validationError32.png',
-					sticky: true,
-					time: ''
-				});
+
+				datalEvents.trigger('datal:application-error', response);
+
 			},
 			complete:function(response){
 				// Hide Loading

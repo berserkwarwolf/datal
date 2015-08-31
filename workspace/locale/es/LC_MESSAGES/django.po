@@ -2899,24 +2899,6 @@ msgstr "Este Conjunto de Datos no puede ser usado para crear una Vista de Datos.
 msgid "APP-NOCHILDRESOURCESYET-TEXT"
 msgstr "Aún no hay recursos asociados a este Dataset."
 
-msgid "APP-DATASET-APPROVED-TEXT"
-msgstr "El conjunto de datos ha sido aprobado."
-
-msgid "APP-DATASET-REJECTED-TEXT"
-msgstr "El conjunto de datos ha sido rechazado y establecido como borrador."
-
-msgid "APP-DATASET-NOT-REVIEWED-TEXT"
-msgstr "El conjunto de datos no ha sido revisado."
-
-msgid "APP-DATAVIEW-APPROVED-TEXT"
-msgstr "La vista ha sido aprobada."
-
-msgid "APP-DATAVIEW-REJECTED-TEXT"
-msgstr "La vista ha sido rechazada y establecida como borrador."
-
-msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
-msgstr "La vista no ha sido revisada."
-
 msgid "APP-START-FROM-HERE-TEXT"
 msgstr "Puede comenzar desde aquí!"
 
@@ -2958,3 +2940,99 @@ msgstr "¿Motivo del rechazo?"
 
 msgid "APP-VIEWREJECTEDNOTE-TEXT"
 msgstr "Ver motivo del rechazo"
+
+msgid "APP-DATASET-APPROVED-TITLE"
+msgstr "Conjunto de datos aceptado"
+
+msgid "APP-DATASET-APPROVED-TEXT"
+msgstr "Publiquelo para verlo en el sitio de datos."
+
+msgid "APP-DATASET-REJECTED-TITLE"
+msgstr "Conjunto de datos rechazado"
+
+msgid "APP-DATASET-REJECTED-TEXT"
+msgstr "El conjunto de datos ha sido puesto como borrador. Digale al dueño que lo revise."
+
+msgid "APP-DATASET-PUBLISHED-TITLE"
+msgstr "Conjunto de datos publicado"
+
+msgid "APP-DATASET-PUBLISHED-TEXT"
+msgstr "Puedes verlo ahora en el sitio de datos."
+
+msgid "APP-DATASET-UNPUBLISH-TITLE"
+msgstr "Conjunto de datos despublicado"
+
+msgid "APP-DATASET-UNPUBLISH-TEXT"
+msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-DATASET-SENDTOREVIEW-TITLE"
+msgstr "Conjunto de datos enviado a revisión"
+
+msgid "APP-DATASET-SENDTOREVIEW-TEXT"
+msgstr "Un publicador lo revisará."
+
+msgid "APP-DATAVIEW-APPROVED-TITLE"
+msgstr "Vista aceptada"
+
+msgid "APP-DATAVIEW-APPROVED-TEXT"
+msgstr "Publiquela para verla en el sitio de datos."
+
+msgid "APP-DATAVIEW-REJECTED-TITLE"
+msgstr "Vista rechazada"
+
+msgid "APP-DATAVIEW-REJECTED-TEXT"
+msgstr "La vista ha sido puesta como borrador. Digale al dueño que la revise."
+
+msgid "APP-DATAVIEW-PUBLISHED-TITLE"
+msgstr "Vista publicada"
+
+msgid "APP-DATAVIEW-PUBLISHED-TEXT"
+msgstr "Puedes verla ahora en el sitio de datos."
+
+msgid "APP-DATAVIEW-UNPUBLISH-TITLE"
+msgstr "Vista despublicada"
+
+msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
+msgstr "La vista ha sido puesta como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
+msgstr "Vista enviada a revisión"
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TEXT"
+msgstr "Un publicador la revisará."
+
+msgid "APP-VISUALIZATION-APPROVED-TITLE"
+msgstr "Visualización aceptada"
+
+msgid "APP-VISUALIZATION-APPROVED-TEXT"
+msgstr "Publiquela para verla en el sitio de datos."
+
+msgid "APP-VISUALIZATION-REJECTED-TITLE"
+msgstr "Visualización rechazada"
+
+msgid "APP-VISUALIZATION-REJECTED-TEXT"
+msgstr "La visualización ha sido puesta como borrador. Digale al dueño que la revise."
+
+msgid "APP-VISUALIZATION-PUBLISHED-TITLE"
+msgstr "Visualización publicada"
+
+msgid "APP-VISUALIZATION-PUBLISHED-TEXT"
+msgstr "Puedes verla ahora en el sitio de datos."
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TITLE"
+msgstr "Visualización despublicada"
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TEXT"
+msgstr "La visualización ha sido puesta como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TITLE"
+msgstr "Visualización enviada a revisión"
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TEXT"
+msgstr "Un publicador la revisará."
+
+msgid "EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR"
+msgstr "Error de sistema: Estado no proporcionado"
+
+msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
+msgstr "Para cambiar el estado actual del recurso, el sistema debe proporcionar un estado en el pedido POST."

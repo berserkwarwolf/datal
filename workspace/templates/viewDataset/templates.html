@@ -4,7 +4,7 @@
 <script type="text/template" id="context-menu-template">
 	
 	<!-- Column Left -->
-	<div class="col-lg-7">    
+	<div class="col-md-7">    
 		
 		<h1><%= title %></h1>
 
@@ -22,7 +22,7 @@
 
 			<span class="publish-version">
 
-				<% if(lastPublishDate != ''){ %> 
+				<% if(publicUrl != ''){ %> 
 
 					<% if(status != StatusChoices.PUBLISHED){ %> 
 						{% trans 'APP-LASTPUBLISHDATE-TEXT' %}
@@ -30,7 +30,7 @@
 
 					<%= lastPublishDate %>, 
 
-					<a href="{{ dataset.public_url }}" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}">{% trans 'APP-VIEWONSITE-TEXT' %}</a>
+					<a href="<%= publicUrl %>" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}">{% trans 'APP-VIEWONSITE-TEXT' %}</a>
 
 				<% }else{ %>
 
@@ -52,7 +52,7 @@
 	</div>
 
 	<!-- Column Right -->
-	<div class="col-lg-5 context-buttons clearfix">
+	<div class="col-md-5 context-buttons clearfix">
 
 		<% if( status != StatusChoices.REJECTED ){ %>
 

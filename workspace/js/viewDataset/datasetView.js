@@ -52,8 +52,6 @@ var datasetView = Backbone.Epoxy.View.extend({
 			},
 			success: function(response){
 
-				console.log(response);
-
 				if(response.status == 'ok'){
 					
 					// Set Status
@@ -62,8 +60,8 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 					// Set OK Message
 					$.gritter.add({
-						title: gettext('APP-SETTINGS-SAVE-OK-TITLE'),
-						text: response.messages,
+						title: response.messages.title,
+						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 2500
@@ -87,6 +85,6 @@ var datasetView = Backbone.Epoxy.View.extend({
 			}
 		});
 
-	},
+	}
 
 });

@@ -2909,24 +2909,6 @@ msgstr "This Dataset cannot be used to create a Data View."
 msgid "APP-NOCHILDRESOURCESYET-TEXT"
 msgstr "There are not associated resources to this Dataset."
 
-msgid "APP-DATASET-APPROVED-TEXT"
-msgstr "This Dataset has been approved."
-
-msgid "APP-DATASET-REJECTED-TEXT"
-msgstr "This Dataset has been rejected and set as draft."
-
-msgid "APP-DATASET-NOT-REVIEWED-TEXT"
-msgstr "This Dataset has not been reviewed."
-
-msgid "APP-DATAVIEW-APPROVED-TEXT"
-msgstr "This Data View has been approved."
-
-msgid "APP-DATAVIEW-REJECTED-TEXT"
-msgstr "This Data View has been rejected and set as draft."
-
-msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
-msgstr "The Data View has not been reviewed."
-
 msgid "APP-START-FROM-HERE-TEXT"
 msgstr "You can start from here!"
 
@@ -2971,3 +2953,105 @@ msgstr "Rejection reason?"
 
 msgid "APP-VIEWREJECTEDNOTE-TEXT"
 msgstr "View reason for rejection"
+
+
+
+
+
+
+
+msgid "APP-DATASET-APPROVED-TITLE"
+msgstr "Dataset has been accepted"
+
+msgid "APP-DATASET-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-DATASET-REJECTED-TITLE"
+msgstr "Dataset has been rejected"
+
+msgid "APP-DATASET-REJECTED-TEXT"
+msgstr "The Dataset has been set as draft. Tell the owner to review it."
+
+msgid "APP-DATASET-PUBLISHED-TITLE"
+msgstr "Dataset has been published"
+
+msgid "APP-DATASET-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-DATASET-UNPUBLISH-TITLE"
+msgstr "Dataset has been unpublished"
+
+msgid "APP-DATASET-UNPUBLISH-TEXT"
+msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATASET-SENDTOREVIEW-TITLE"
+msgstr "Dataset has been sent to review"
+
+msgid "APP-DATASET-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "APP-DATAVIEW-APPROVED-TITLE"
+msgstr "Data View has been accepted"
+
+msgid "APP-DATAVIEW-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-DATAVIEW-REJECTED-TITLE"
+msgstr "Data View has been rejected"
+
+msgid "APP-DATAVIEW-REJECTED-TEXT"
+msgstr "The Data View has been set as draft. Tell the owner to review it."
+
+msgid "APP-DATAVIEW-PUBLISHED-TITLE"
+msgstr "Data View has been published"
+
+msgid "APP-DATAVIEW-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-DATAVIEW-UNPUBLISH-TITLE"
+msgstr "Data View has been unpublished"
+
+msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
+msgstr "The Data View has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
+msgstr "Data View has been sent to review"
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "APP-VISUALIZATION-APPROVED-TITLE"
+msgstr "Visualization has been accepted"
+
+msgid "APP-VISUALIZATION-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-VISUALIZATION-REJECTED-TITLE"
+msgstr "Visualization has been rejected"
+
+msgid "APP-VISUALIZATION-REJECTED-TEXT"
+msgstr "The Visualization has been set as draft. Tell the owner to review it."
+
+msgid "APP-VISUALIZATION-PUBLISHED-TITLE"
+msgstr "Visualization has been published"
+
+msgid "APP-VISUALIZATION-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TITLE"
+msgstr "Visualization has been unpublished"
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TEXT"
+msgstr "The Visualization has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TITLE"
+msgstr "Visualization has been sent to review"
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR"
+msgstr "System error: No status provided"
+
+msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
+msgstr "To change actual status of this resource, the system must provide a status in the POST request."

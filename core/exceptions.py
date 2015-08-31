@@ -1,7 +1,7 @@
-import json
-from core.choices import StatusChoices
+# import json
+# from core.choices import StatusChoices
 from django.utils.translation import ugettext_lazy as _
-from django.core.urlresolvers import reverse
+# from django.core.urlresolvers import reverse
 from core.actions import *
 
 
@@ -56,6 +56,7 @@ class ChildNotApprovedException(LifeCycleException):
 
     def get_actions(self):
         return [ReviewDatasetStreamsAndPublishExceptionAction(self.revision)]
+
 
 class SaveException(LifeCycleException):
     title = _('EXCEPTION-TITLE-SAVE-ERROR')
@@ -155,28 +156,41 @@ class S3CreateException(DATALException):
     title = 'S3 Create error'
 
     def __init__(self, description):
-        super(S3CreateException, self).__init__(description=description, status_code=503)
+        super(S3CreateException, self).__init__(
+            description=description,
+            status_code=503
+        )
 
 
 class S3UpdateException(DATALException):
     title = 'S3 Update error'
 
     def __init__(self, description):
-        super(S3UpdateException, self).__init__(description=description, status_code=503)
+        super(S3UpdateException, self).__init__(
+            description=description,
+            status_code=503
+        )
 
 
 class SFTPCreateException(DATALException):
     title = 'SFTP Create error'
 
     def __init__(self, description):
-        super(SFTPCreateException, self).__init__(description=description, status_code=503)
+        super(SFTPCreateException, self).__init__(
+            description=description,
+            status_code=503
+        )
 
 
 class SFTPUpdateException(DATALException):
     title = 'SFTP Update error'
 
     def __init__(self, description):
-        super(SFTPUpdateException, self).__init__(description=description, status_code=503)
+        super(SFTPUpdateException, self).__init__(
+            description=description,
+            status_code=503
+        )
+
 
 class NoStatusProvidedException(DATALException):
     title = _('EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR')

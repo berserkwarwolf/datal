@@ -9,7 +9,7 @@ var StatusChoices = {
 };
 
 function STATUS_CHOICES(choice){
-	console.log(choice)
+	
 	switch(choice){
 		case 0:
 			return gettext('APP-DRAFT-TEXT');
