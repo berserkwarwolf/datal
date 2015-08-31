@@ -133,7 +133,6 @@ $(document).ready(function(){
     changeStatusUrl: "{% url 'manageDataviews.change_status' datastream.datastream_revision_id %}",
     createVizUrl: "TODO",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
-    micrositeUrl: "TODO",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
   });
   
