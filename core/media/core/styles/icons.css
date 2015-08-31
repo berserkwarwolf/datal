@@ -64,6 +64,11 @@
 	.button:hover .icon-view-site{background-position:-48px -696px;}
 	.icon-view-site.icon-inline{background-position:-16px -700px;}
 
+	.icon-new-tab{background-position:-12px -1056px;}
+	.button:hover .icon-new-tab{background-position:-48px -1056px;}
+	.icon-new-tab.icon-inline{background-position:-16px -1060px;}
+	.link.black:hover .icon-new-tab.icon-inline{background-position:-52px -1060px;}
+
 	.icon-more{background-position:-12px -732px;}
 	.icon-more:hover,
 	.button:hover .icon-more{background-position:-48px -732px;}
