@@ -18,7 +18,9 @@ from django.db.models import Count
 
 from datetime import datetime, date, timedelta
 
+
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
+    """ class for manage access to visualizations database tables """
     def __init__(self):
         pass
 
@@ -29,7 +31,12 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         pass
 
     def query_childs(self, visualization_id, language):
-        pass
+        """ Devuelve la jerarquia completa para medir el impacto """
+
+        related = dict(
+            dashboards=dict()
+        )
+        return related
 
     def update(self, visualization_revision, changed_fields, **fields):
         pass
