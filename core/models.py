@@ -293,6 +293,10 @@ class DataStream(GuidModel):
     def current(self):
         return self.datastreamrevision_set.all()[0]
 
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
+
 
 class DataStreamRevision(models.Model):
     STATUS_CHOICES = choices.STATUS_CHOICES
@@ -677,6 +681,10 @@ class Dataset(GuidModel):
     @property
     def current(self):
         return self.datasetrevision_set.all()[0]
+
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
 
 
 class DatasetRevision(models.Model):
