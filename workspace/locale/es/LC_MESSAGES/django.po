@@ -2437,9 +2437,6 @@ msgstr "Eliminar conjunto de datos "
 msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
 
-msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a la vista y también serán eliminados."
-
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "La vista y sus recusros asociados, han sido eliminados."
 
@@ -2729,12 +2726,6 @@ msgid "APP-OVERLAY-DELETE-DATASET-TITLE"
 msgstr "Eliminar conjunto de datos"
 
 msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
-msgstr "Eliminar vistas"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TEXT"
@@ -3049,26 +3040,26 @@ msgstr "Los siguientes recursos están asociados a este conjunto de datos y tamb
 msgid "APP-OVERLAY-UNPUBLISH"
 msgstr "Despublicar"
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-TITLE"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Eliminar vista"
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-TEXT"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TITLE"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Eliminar vista"
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TEXT"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TITLE"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Despublicar vista"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TEXT"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TITLE"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Despublicar vista"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TEXT"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."

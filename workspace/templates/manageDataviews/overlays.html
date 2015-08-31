@@ -16,22 +16,6 @@
 </div>
 {% endoverlay %}
 
-<!-- Bulk Actions Delete Dataview Overlay -->
-{% overlay id_bulkDeleteDataview %}
-<div class="In clearfix">
-	<h4>{% trans 'APP-OVERLAY-BULK-DELETE-DATASTREAM-TITLE' %}</h4>
-	<div class="ov-content">
-		<p class="text center">{% trans 'APP-OVERLAY-BULK-DELETE-DATASTREAM-TEXT' %}</p>
-	</div>
-	<div class="ov-bottom">
-		<div class="ov-buttons">
-			<a id="id_deleteResource" class="button small" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
-			<a id="id_deleteRevision" class="button small" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
-		</div>
-	</div>
-</div>
-{% endoverlay %}
-
 <!-- Delete Dataview Confirm Overlay -->
 {% overlay id_confirmDeleteDataview %}
 <div class="In clearfix">
@@ -44,6 +28,22 @@
 		<div class="ov-buttons">
 			<a id="id_deleteRelatedResources" class="button small" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
 			<a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+		</div>
+	</div>
+</div>
+{% endoverlay %}
+
+<!-- Bulk Actions Delete Dataview Overlay -->
+{% overlay id_bulkDeleteDataview %}
+<div class="In clearfix">
+	<h4>{% trans 'APP-OVERLAY-BULK-DELETE-DATASTREAM-TITLE' %}</h4>
+	<div class="ov-content">
+		<p class="text center">{% trans 'APP-OVERLAY-BULK-DELETE-DATASTREAM-TEXT' %}</p>
+	</div>
+	<div class="ov-bottom">
+		<div class="ov-buttons">
+			<a id="id_deleteResource" class="button small" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
+			<a id="id_deleteRevision" class="button small" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
 		</div>
 	</div>
 </div>
@@ -155,42 +155,6 @@
 		<p>{% trans 'APP-OVERLAY-ALERT-OK-TEXT' %}</p>
 		<ul>
 			<li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
-		</ul>
-	</div>
-</div>
-{% endoverlay %}
-
-<!-- Unpublish Dataview Overlay -->
-{% overlay id_unpublishDataview %}
-<div class="In clearfix">
-	<h4>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TITLE' %}</h4>
-	<div class="ov-content">
-		<p>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
-		<ul>
-			<li><span class="icon-dataview"></span>Anual staff figures</li>
-			<li><span class="icon-visualization"></span>LATAM Scorecard Countries</li>
-			<li><span class="icon-visualization"></span>Europe Scorecard Countries</li>
-		</ul>
-	</div>
-	<div class="ov-bottom">
-		<div class="ov-buttons">
-			<a href="#" class="button primary small" title="{% trans 'APP-OVERLAY-UNPUBLISH' %}">{% trans 'APP-OVERLAY-UNPUBLISH' %}</a>
-			<a href="#" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
-		</div>
-	</div>
-</div>
-{% endoverlay %}
-
-<!-- Revision Deleted Overlay -->
-{% overlay id_revisionDeleted %}
-<div class="In clearfix">
-	<h4>{% trans 'APP-REVISION-DELETED-TITLE' %}</h4>
-	<div class="ov-content">
-		<p>{% trans 'APP-REVISION-DELETED-TEXT' %}</p>
-		<ul>
-			<li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
-			<li><span class="icon-visualization"></span><a href="">LATAM Scorecard Countries</a></li>
-			<li><span class="icon-dashboard"></span><a href="">Europe Scorecard Countries</a></li>
 		</ul>
 	</div>
 </div>

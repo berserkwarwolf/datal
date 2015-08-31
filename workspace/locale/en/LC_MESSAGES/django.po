@@ -2459,9 +2459,6 @@ msgstr "The dataset revision has been deleted."
 msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
 msgstr "Error on deleteing the dataset revision."
 
-msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources are associated to this Datastream, and they will also delete."
-
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
 
@@ -2739,12 +2736,6 @@ msgid "APP-OVERLAY-DELETE-DATASET-TITLE"
 msgstr "Delete Dataset"
 
 msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
-msgstr "This action cannot be undone. Please, confirm how to proceed:"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
-msgstr "Delete Datastream"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TITLE"
@@ -3068,40 +3059,26 @@ msgstr "The following resources, that are associated to this Dataset, will also 
 msgid "APP-OVERLAY-UNPUBLISH"
 msgstr "Unpublish"
 
-
-
-
-
-
-msgid "APP-OVERLAY-DELETE-DATAVIEW-TITLE"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Delete Dataview "
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-TEXT"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TITLE"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Delete Dataview "
 
-msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TEXT"
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataview, will also delete."
 
-
-
-
-
-
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TITLE"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Unpublish Dataview "
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TEXT"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TITLE"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Unpublish Dataview "
 
-msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TEXT"
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataview, will also unpublish."
-
-
-
-
