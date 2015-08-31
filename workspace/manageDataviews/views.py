@@ -312,7 +312,7 @@ def change_status(request, datastream_revision_id=None):
 
             lifecycle.unpublish()
 
-            response = {'status': 'ok', 'datastream_status':StatusChoices.UNPUBLISHED, 'messages': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')}
+            response = {'status': 'ok', 'datastream_status':StatusChoices.DRAFT, 'messages': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')}
 
         elif action == 'send_to_review':
 

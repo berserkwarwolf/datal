@@ -177,3 +177,8 @@ class SFTPUpdateException(DATALException):
 
     def __init__(self, description):
         super(SFTPUpdateException, self).__init__(description=description, status_code=503)
+
+class NoStatusProvidedException(DATALException):
+    title = _('EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR')
+    description = _('EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR')
+    tipo = 'change-resource-status-error'

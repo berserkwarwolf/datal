@@ -52,6 +52,8 @@ var datasetView = Backbone.Epoxy.View.extend({
 			},
 			success: function(response){
 
+				console.log(response);
+
 				if(response.status == 'ok'){
 					
 					// Set Status
@@ -69,27 +71,15 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 				}else{
 
-					// Set Error Message
-					$.gritter.add({
-						title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-						text: response.messages,
-						image: '/static/workspace/images/common/ic_validationError32.png',
-						sticky: true,
-						time: ''
-					});
+					datalEvents.trigger('datal:application-error', response);
 
 				}
 
 			},
 			error:function(response){
-				// Set Error Message
-				$.gritter.add({
-					title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-					text: gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image: '/static/workspace/images/common/ic_validationError32.png',
-					sticky: true,
-					time: ''
-				});
+
+				datalEvents.trigger('datal:application-error', response);
+
 			},
 			complete:function(response){
 				// Hide Loading

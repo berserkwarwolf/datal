@@ -13,7 +13,7 @@ from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
-from core.exceptions import DatasetSaveException
+from core.exceptions import DatasetSaveException, NoStatusProvidedException
 from core.helpers import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
@@ -356,7 +356,7 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.unpublish()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.UNPUBLISHED,
+                dataset_status=StatusChoices.DRAFT,
                 messages=ugettext('APP-DATASET-UNPUBLISH-TEXT')
             )
         elif action == 'send_to_review':
@@ -367,7 +367,7 @@ def change_status(request, dataset_revision_id=None):
                 messages=ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
             )
         else:
-            response = dict(status='error', messages=ugettext('APP-DATASET-NOT-REVIEWED-TEXT'))
+            raise NoStatusProvidedException()
     else:
         response = dict(status='error', messages=ugettext('APP-DATASET-NOT-REVIEWED-TEXT'))
 
