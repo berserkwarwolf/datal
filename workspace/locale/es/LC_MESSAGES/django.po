@@ -2435,10 +2435,10 @@ msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
 msgstr "Eliminar conjunto de datos "
 
 msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados de la colección."
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a la vista y también serán eliminados de la colección."
+msgstr "Los siguientes recursos están asociados a la vista y también serán eliminados."
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "La vista y sus recusros asociados, han sido eliminados."
@@ -2459,22 +2459,13 @@ msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
 msgstr "Error al eliminar la visualización."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
-msgstr "La revisión de la visualización ha sido eliminada ."
+msgstr "La revisión de la visualización ha sido eliminada."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT"
 msgstr "Error al eliminar la revisión de la visualización."
 
 msgid "APP-OVERLAY-DELETE"
 msgstr "Eliminar"
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
-msgstr "Despublicar "
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados y eliminados de la colección."
-
-msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Despublicar"
 
 msgid "APP-VISUALIZATIONS-CREATE-TEXT"
 msgstr "Crear Visualización"
@@ -3036,3 +3027,48 @@ msgstr "Error de sistema: Estado no proporcionado"
 
 msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
 msgstr "Para cambiar el estado actual del recurso, el sistema debe proporcionar un estado en el pedido POST."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
+msgstr "Despublicar conjunto de datos"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-UNPUBLISH-RESOURCE-TEXT"
+msgstr "Despublicar todas las revisiones"
+
+msgid "APP-UNPUBLISH-REVISION-TEXT"
+msgstr "Despublicar revisión actual"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
+msgstr "Despublicar conjunto de datos"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
+
+msgid "APP-OVERLAY-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-TITLE"
+msgstr "Eliminar vista"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TITLE"
+msgstr "Eliminar vista"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TITLE"
+msgstr "Despublicar vista"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TITLE"
+msgstr "Despublicar vista"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."

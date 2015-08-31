@@ -2442,7 +2442,7 @@ msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
 msgstr "Delete Dataset "
 
 msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
-msgstr "The following resources are associated to this Dataset, and they will also delete and will be removed from dashboards."
+msgstr "The following resources are associated to this Dataset, and they will also delete."
 
 msgid "APP-OVERLAY-DELETE"
 msgstr "Delete"
@@ -2460,7 +2460,7 @@ msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
 msgstr "Error on deleting the dataset revision."
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources are associated to this Datastream, and they will also delete and will be removed from dashboards."
+msgstr "The following resources are associated to this Datastream, and they will also delete."
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
@@ -2485,15 +2485,6 @@ msgstr "The visualization revision has been deleted."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT"
 msgstr "Error on deleteing the visualization revision."
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
-msgstr "Unpublish Dataset "
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
-msgstr "The following resources, that are associated to this Dataset, will also unpublish and will be removed from dashboards."
-
-msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Unpublish"
 
 msgid "APP-VISUALIZATIONS-CREATE-TEXT"
 msgstr "Create Visualization"
@@ -3040,3 +3031,48 @@ msgstr "System error: No status provided"
 
 msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
 msgstr "To change actual status of this resource, the system must provide a status in the POST request."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-UNPUBLISH-RESOURCE-TEXT"
+msgstr "Delete all revisions"
+
+msgid "APP-UNPUBLISH-REVISION-TEXT"
+msgstr "Delete actual revision"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataset, will also unpublish."
+
+msgid "APP-OVERLAY-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-TITLE"
+msgstr "Delete Dataview "
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TITLE"
+msgstr "Delete Dataview "
+
+msgid "APP-OVERLAY-DELETE-DATAVIEW-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataview, will also delete."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TITLE"
+msgstr "Unpublish Dataview "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TITLE"
+msgstr "Unpublish Dataview "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATAVIEW-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataview, will also unpublish."
