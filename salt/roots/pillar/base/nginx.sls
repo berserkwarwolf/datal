@@ -19,7 +19,7 @@ nginx:
         events:
           worker_connections: 768
         http:
-          sendfile: 'on'
+          sendfile: 'off'
           include:
             - /etc/nginx/mime.types
             - /etc/nginx/conf.d/*.conf
