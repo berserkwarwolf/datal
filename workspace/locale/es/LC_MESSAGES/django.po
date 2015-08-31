@@ -2455,6 +2455,9 @@ msgstr "La vista y sus recusros asociados, han sido eliminados."
 msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
 msgstr "Error al eliminar la vista y sus recursos asociados."
 
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error al eliminar la visualización y sus recursos asociados."
+
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
 msgstr "La revisión de la vista ha sido eliminada."
 
@@ -2463,9 +2466,6 @@ msgstr "Error al eliminar la revisión de la vista."
 
 msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
 msgstr "La visualización ha sido eliminada."
-
-msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
-msgstr "Error al eliminar la visualización."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
 msgstr "La revisión de la visualización ha sido eliminada ."

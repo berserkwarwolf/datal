@@ -607,6 +607,9 @@ msgstr "AUTOR"
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Eliminar Vista de Datos"
 
+msgid "APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE"
+msgstr "Eliminar Visualización de Datos"
+
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "La vista y sus recusros asociados, han sido eliminados."
 

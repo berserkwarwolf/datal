@@ -621,6 +621,9 @@ msgstr "AUTHOR"
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Delete Data View"
 
+msgid "APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE"
+msgstr "Delete Visualization"
+
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
 

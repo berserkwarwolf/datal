@@ -2477,6 +2477,9 @@ msgstr "The datastream and the associated resources have been deleted."
 msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
 msgstr "Error on deleting the datastream and the associated resources."
 
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the visualization and the associated resources."
+
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
 msgstr "The datastream revision have been deleted."
 
@@ -2485,9 +2488,6 @@ msgstr "Error on deleteing the datastream revision."
 
 msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
 msgstr "The visualization has been deleted."
-
-msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
-msgstr "Error on deleting visualization."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
 msgstr "The visualization revision has been deleted."
