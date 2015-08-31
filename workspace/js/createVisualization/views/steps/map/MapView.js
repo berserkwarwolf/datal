@@ -14,6 +14,10 @@ var MapView = StepViewSPA.extend({
 		
 		});
 
+        this.model.set({lib:'google'});
+
+        this.chartsFactory = new charts.ChartsFactory();
+
         this.modalView = new MapSelectDataModalView({
           el: '#MapSelectDataModal',
           model: this.model
@@ -22,7 +26,9 @@ var MapView = StepViewSPA.extend({
             this.dataTableView.render();
         });
 
-	}, 
+        // Event binding
+        this.listenTo(this.model, 'change:type', this.onChartChanged, this);
+    }, 
 
 	onSelectDataClicked: function(){
 		this.modalView.open();
@@ -45,22 +51,43 @@ var MapView = StepViewSPA.extend({
 		this.model.set('type',type);
 	},
 
-	onMapChanged: function(){
+	onChartChanged: function(){
 		if(this.model.get('isMap')){
 			console.log('you selected type: ', this.model.get('type') );
-			this.setupMap();
-			this.renderMap();
+			this.setupChart();
+			this.renderChart();
 		}
 	},
 
-	setupMap: function(){
+	setupChart: function(){
+        var chartSettings = this.chartsFactory.create(this.model.get('type'), this.model.get('lib'));
 
-		console.log('setupMap');
+        if(chartSettings){
+
+            //Set list of custom attributes for my model
+            this.model.set('attributes', chartSettings.attributes);
+
+            this.ChartViewClass = chartSettings.Class;
+
+        } else {
+            delete this.ChartViewClass;
+            console.log('There are not class for this');
+        }
 	},
 
-	renderMap: function () {
-	
-		console.log('renderMap');
+	renderChart: function () {
+        if (this.ChartViewClass) {
+
+            this.chartInstance = new this.ChartViewClass({
+                el: $('#chartContainer'),
+                model: this.model,
+            });
+            
+            if(this.chartInstance.valid()){
+                this.chartInstance.render();
+            };
+
+        }   
 	},
 
 	onPreviousButtonClicked: function(){

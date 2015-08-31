@@ -13,6 +13,8 @@
               'packages':['corechart']
             }]
     }"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+
 
 <script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
 <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
@@ -41,10 +43,12 @@
 <script language="javascript" src="/js_core/base_modules/charts/models/barChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/models/lineChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/models/pieChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Create Viz StepViews -->
