@@ -11,18 +11,20 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+<div class="context-menu clearfix">
+    <div class="col-md-12">
+        <h1>{% trans "WORKSPACE-SOCIAL-SETTINGS" %}</h1>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
     {% include "admin_manager/tabs.html" %}
-    <div class="formContainer">
+    <div class="formContainer col-md-12">
         <form action="{{form.action}}" method="post" id="id_adminSocialForm">
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
-            <div class="titleContainer clearfix">
-                <h3 class="FL">{% trans "WORKSPACE-SOCIAL-SETTINGS" %}</h3>
-            </div>
+            
             <div class="columns clearfix">
                 <div class="CL">
                     <div class="dataStreamForm socialForm" id="id_update_user_container">
@@ -79,7 +81,7 @@
             </div>
             
             <div class="buttons center">
-                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}"/>
             </div>
             
         </div>

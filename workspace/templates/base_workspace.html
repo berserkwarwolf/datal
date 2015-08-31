@@ -47,9 +47,12 @@
 							</a>
 
 							<div class="global-navigation">
-								<div class="col-md-12 clearfix">
-									
+
+								<div class="header-navigation col-md-3 clearfix">
 									{% block header_navigation %}{% endblock %}
+								</div>
+
+								<div class="global-actions col-md-9 clearfix">
 
 									<!-- My Account Tab -->
 									<div class="tab pulldown FR">
@@ -66,6 +69,7 @@
 									<a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-view-site icon-right"></span></a>
 
 								</div>
+
 							</div>
 
 						</div>

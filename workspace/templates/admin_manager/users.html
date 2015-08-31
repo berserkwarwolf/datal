@@ -12,19 +12,19 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+<div class="context-menu">
+    <div class="col-md-10">
+        <h1>{% trans "APP-USERS-TEXT" %}</h1>
+    </div>
+    <div class="col-md-2 context-buttons clearfix">
+        <button class="button primary FR" title="{% trans 'WORKSPACE-CREATE-USER' %}" id="id_create_user">{% trans "WORKSPACE-CREATE-USER" %}</button>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
     {% include "admin_manager/tabs.html" %}
-    <div class="formContainer">
-
-        <div class="titleContainer clearfix">
-            <h3 class="FL">{% trans "APP-USERS-TEXT" %}</h3>
-            <div class="actionButtons FR">
-                <button class="button primary small" title="{% trans 'WORKSPACE-CREATE-USER' %}" id="id_create_user">{% trans "WORKSPACE-CREATE-USER" %}</button>
-            </div>
-        </div>
+    <div class="formContainer col-md-12">
         
         <div class="list-container">
             <div class="workspaceGrid">
@@ -121,7 +121,7 @@
             </div>
 
             <div class="buttons center">
-                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}"/>
             </div>
         </div>
     </form>

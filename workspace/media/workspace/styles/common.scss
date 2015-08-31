@@ -264,7 +264,8 @@ body{background:$color-base;height:100%;min-width:998px;}
 .header > .logo{width:$nav-width;float:left;height:100%;}
 .main-section,
 .header .global-navigation{width:100%;float:right;margin-right:-$nav-width;padding:0 2%;visibility:hidden;}
-.header .global-navigation > .col-md-12{padding-top:0 !important;padding-bottom:0 !important;}
+.header .global-navigation > .header-navigation,
+.header .global-navigation > .global-actions{padding-top:0 !important;padding-bottom:0 !important;}
 #zenbox_tab{display:none !important;}
 .preview-container{float:right;height:100%;margin-right:-310px;width:100%;padding:15px;}
 
@@ -289,7 +290,7 @@ body{background:$color-base;height:100%;min-width:998px;}
   /* Logo */
   .logo{background:$nav-bg url(#{$logo-header-url}) no-repeat 0 0;background-image:url(#{$logo-header-svg-url});height:$header-height;width:$nav-width;position:relative;z-index:201;}
   .logo:hover{background-position:0 -#{ $header-height };}
-  
+
   #id_openDataSiteButton,
   #id_backLink{height:$header-height;font:13px/#{ $header-height } arial,helvetica,sans-serif;min-width:0;}
   #id_openDataSiteButton{border-color:transparent;

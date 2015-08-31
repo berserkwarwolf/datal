@@ -1,7 +1,7 @@
 {% load i18n %}
-<div class="ao-tabs clearfix">
+<div class="ao-tabs col-md-12">
     <div class="tabs-in relative">
-        <ul class="tabsList">
+        <ul class="tabsList clearfix">
             <li class="tab{% if account_info %} tab-selected{% endif %}">
                 <div class="clearfix">
                     <a href="{% url 'admin_manager.action_info' %}">{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</a>
