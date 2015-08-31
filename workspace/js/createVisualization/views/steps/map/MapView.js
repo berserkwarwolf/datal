@@ -20,10 +20,16 @@ var MapView = StepViewSPA.extend({
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);*/
 
+
+        this.mapSelectDataModalView = new MapSelectDataModalView({
+          el: '#chartSelectDataModal',
+          model: this.model
+        });
+
 	}, 
 
 	onSelectDataClicked: function(){
-		this.openModal('mapSelectDataModal');
+		this.mapSelectDataModalView.open();
 	},
 
 	onInputChanged: function(e){

@@ -60,9 +60,6 @@
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapMetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<!-- Viz modals -->
-<script language="javascript" src="/js_workspace/createVisualization/views/ModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/modals/ChartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -114,6 +111,11 @@
 
 {# templates backbone #}
 {% include "createVisualization/templates.html" %}
+
+<!-- Viz modals -->
+<script language="javascript" src="/js_workspace/createVisualization/views/ModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/ChartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/map/MapSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script src="/js_workspace/createVisualization/models/DataTableSelectionModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_workspace/createVisualization/collections/DataTableSelectedCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
