@@ -8,25 +8,41 @@ var MapView = StepViewSPA.extend({
 			'click a.backButton': 			'onPreviousButtonClicked',
 			'click a.nextButton': 			'onNextButtonClicked',
 			'click button.selectData': 		'onSelectDataClicked',
+			'click .chartType': 		'onChartTypeClicked',
 			
 			'keyup input#chartTitle': 		'onInputChanged'
 		
 		});
 
-        this.mapSelectDataModalView = new MapSelectDataModalView({
+        this.modalView = new MapSelectDataModalView({
           el: '#MapSelectDataModal',
           model: this.model
+        });
+        this.modalView.on('open', function () {
+            this.dataTableView.render();
         });
 
 	}, 
 
 	onSelectDataClicked: function(){
-		this.mapSelectDataModalView.open();
+		this.modalView.open();
 	},
 
 	onInputChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.data('ref'),input.val());
+	},
+
+	onChartTypeClicked: function(e){
+		e.preventDefault();
+		var type = $(e.currentTarget).data('type');
+		this.selectGraphType(type);
+	},
+
+	selectGraphType: function(type){
+		this.$('.chartType').removeClass('active');
+		this.$('[data-type="' + type + '"].chartType').addClass('active');
+		this.model.set('type',type);
 	},
 
 	onMapChanged: function(){
