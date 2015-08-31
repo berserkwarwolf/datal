@@ -1,0 +1,42 @@
+{% load i18n extra_tags components %}
+
+<div id="MapSelectDataModal" class="process-manager-modal hidden modal">
+
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Seleccione los datos que desee representar</h1>
+			<div class="FR">
+				<button class="button default btn-cancel">Cancelar</button>
+				<button class="button primary btn-done" disabled="disabled">Graficar</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-md-3">
+			<div class="selected-ranges-view">
+			<form class="form">
+				<h4>Latitud</h4>
+				<input name="range_data" type="text" />
+
+				<h4>Longitud</h4>
+				<input name="range_labels" type="text" />
+
+				<h4>Informacion del marker</h4>
+				<input name="range_headers" type="text" />
+
+			</form>
+			</div>
+		</div>
+
+		<div class="col-md-9">
+			<div class="data-table-view">
+				<div class="table-view">
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>

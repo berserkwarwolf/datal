@@ -92,6 +92,14 @@ charts.models.Chart = Backbone.Model.extend({
         return metadata;
     },
 
+    isMetadataValid: function(){
+        return (
+                !_.isEmpty(this.get('meta_title'))
+            &&  !_.isEmpty(this.get('meta_description'))
+            &&  !_.isEmpty(this.get('meta_notes'))
+            );
+    },
+
     getSettings: function(){
         var settings = {
             type: this.get('type'),

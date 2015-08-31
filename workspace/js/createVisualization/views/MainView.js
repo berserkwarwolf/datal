@@ -63,11 +63,11 @@ var MainView = Backbone.View.extend({
           el: this.$('.step-1-view-map')
         }).init();
 
-        var mapMetadataView = new MapMetadataView({
+       /* var mapMetadataView = new MapMetadataView({
           name: gettext('APP-METADATA-TEXT'), 
           model: this.model,
           el: this.$('.step-2-view-map')
-        }).init();
+        }).init();*/
 
         var mapFinishView = new MapFinishView({
           name: gettext('APP-FINISH-TEXT'),
@@ -77,7 +77,7 @@ var MainView = Backbone.View.extend({
 
         //Register maps views
         this.register( mapView, 'maps'  );
-        this.register( mapMetadataView, 'maps'  );
+        this.register( metadataView, 'maps'  );
         this.register( mapFinishView, 'maps'  );
 
         //Create maps modals
@@ -127,14 +127,14 @@ var MainView = Backbone.View.extend({
         this.buttonsView.render();
     },
 
-    previous: function(output){
+    previous: function(){
 
         // Previous
         if(this.index > 0){
             this.steps[this.currentFlow][this.index].finish();
             this.index--;
             this.selectNavigationTab(this.index);
-            this.steps[this.currentFlow][this.index].start( this.model.get('output') );
+            this.steps[this.currentFlow][this.index].start();
 
         // Go to first "Static" Step
         }else{
@@ -143,25 +143,25 @@ var MainView = Backbone.View.extend({
 
     },
 
-    next: function(output){
+    next: function(){
 
         // Next
         if( this.index < (this.steps[this.currentFlow].length-1) ){
-            this.model.set('output',output);
+            //this.model.set('output',output);
             this.steps[this.currentFlow][this.index].finish();
             this.index++;
             this.selectNavigationTab(this.index);
-            this.steps[this.currentFlow][this.index].start( this.model.get('output') );
+            this.steps[this.currentFlow][this.index].start();
 
         // Save
         }else if( this.index == (this.steps[this.currentFlow].length-1) ){
 
-            var newRevisionId = output.revision_id;
+            /*var newRevisionId = output.revision_id;
 
             if( !_.isUndefined(newRevisionId) ){
                 var newURL = this.model.get('finishUrl') + newRevisionId;
                 this.model.set('finishUrl',  newURL);   
-            };
+            };*/
 
             this.finish();
         }
