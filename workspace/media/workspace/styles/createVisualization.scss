@@ -128,24 +128,24 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
   /* Vistas previas */
   .previewArea{
-    background-image:url(/static/workspace/images/createVisualization/previewArea.svg);
     background-image:url(/static/workspace/images/createVisualization/previewArea.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewArea.svg);
   }
   .previewLine{
-    background-image:url(/static/workspace/images/createVisualization/previewLine.svg);
     background-image:url(/static/workspace/images/createVisualization/previewLine.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewLine.svg);
   }
   .previewColumn{
-    background-image:url(/static/workspace/images/createVisualization/previewColumn.svg);
     background-image:url(/static/workspace/images/createVisualization/previewColumn.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewColumn.svg);
   }
   .previewBar{
-    background-image:url(/static/workspace/images/createVisualization/previewBar.svg);
     background-image:url(/static/workspace/images/createVisualization/previewBar.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewBar.svg);
   }
   .previewPie{
-    background-image:url(/static/workspace/images/createVisualization/previewPie.svg);
     background-image:url(/static/workspace/images/createVisualization/previewPie.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewPie.svg);
   }
 } 
 
