@@ -30,13 +30,13 @@ def hits_stats(request, vz_id, channel_type=None):
 
 
     dao=VisualizationHitsDAO(vz)
-    hits=dao.count_by_days(31, channel_type)
+    hits=dao.count_by_days(30, channel_type)
 
     field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
 
 
     t = loader.get_template('viewChart/chart_hits_stats.html') 
-    c = Context({'data':hits, 'field_names': field_names, "request": request})
+    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
     return HttpResponse(t.render(c), content_type="application/json")
 
 
