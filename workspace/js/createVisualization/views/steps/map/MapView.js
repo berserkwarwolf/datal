@@ -14,7 +14,17 @@ var MapView = StepViewSPA.extend({
 		
 		});
 
-        this.model.set({lib:'google'});
+        this.model.set({
+            lib: 'google',
+            options: {
+                zoom: 5,
+                center: {
+                    lat: 0, 
+                    long: 0
+                },
+                bounds: []
+            }
+        });
 
         this.chartsFactory = new charts.ChartsFactory();
 
