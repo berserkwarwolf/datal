@@ -3041,17 +3041,8 @@ msgstr "Set to previous value in dataset"
 msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
 msgstr "Set to a given value"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-Y-AXIS-TEXT"
-msgstr "Y axis"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-X-AXIS-TEXT"
-msgstr "X axis"
-
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
 msgstr "Seleccione los datos que desee representar"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-REFERENCES-TEXT"
-msgstr "Referencias"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
 msgstr "Origen de la fuente de datos"
