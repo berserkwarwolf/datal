@@ -3067,3 +3067,18 @@ msgstr "Unpublish Dataview "
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataview, will also unpublish."
+
+msgid "DS-STEP1-TEXT"
+msgstr "Selection"
+
+msgid "DS-STEP2-TEXT"
+msgstr "Data"
+
+msgid "DS-STEP3-TEXT"
+msgstr "Description"
+
+msgid "DS-STEP4-TEXT"
+msgstr "Review"
+
+msgid "APP-CREATE-A-DATAVIEW-TEXT"
+msgstr "Create a Data View"

@@ -35,6 +35,11 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
     .icon-more{margin:0;}
   }
 
+  @include media-query(min-width, 1250px) { 
+    &{min-width:150px;}
+    &.small{min-width:0;}
+  }
+
 }
 
 /* Button pulldown */
@@ -63,15 +68,7 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
       }
     }
   }
-}
-
-@media screen and (min-width: 1250px) {
-  .button{min-width:150px;}
-  .button.small{min-width:0;}
-}
-
-@media screen and (min-width: 1440px) {
-  .more-actions{
+  @include media-query(min-width, 1440px) { 
     .more-button{display:none;}
     .dropdown{border:0;display:block !important;position:static;
       li{border:0;float:left;margin-right:15px;
@@ -102,15 +99,15 @@ body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-siz
 
 /* Red text, button or link - Delete / Reject */
 .red,
-.button.red{color:#c1272d !important;}
+.button.red{color:$red !important;}
 a.red:hover,
-.button.red:hover{color:#ea3442 !important;}
+.button.red:hover{color:$red-hover !important;}
 
 /* Green text, button or link - Accept */
 .green,
-.button.green{color:#009245 !important;}
+.button.green{color:$green !important;}
 a.green:hover,
-.button.green:hover{color:#02c159 !important;}
+.button.green:hover{color:$green-hover !important;}
 
 /* Context buttons */
 .context-buttons > *{
@@ -120,133 +117,45 @@ a.green:hover,
 }
 
 /* Buttons Bar - only support 0 to 4 steps at the moment */
-.buttons-bar{border:1px solid $button-nav-active-border;@include border-radius(3px);
+.buttons-bar{
   
-  li{float:left;padding:0;}
-  li .button{color:$buttons-bar-color-text-active;border-left:1px solid $buttons-bar-border-left-color;border-right:1px solid $buttons-bar-border-right-color;border-top:0;text-shadow:0 1px 0 #000;
-    -webkit-border-radius:0;
-       -moz-border-radius:0;
-            border-radius:0;
-  }
-  li:first-child .button{
-    border-left-color:$buttons-bar-border-left-color;
-    -webkit-border-radius:3px 0 0 3px;
-       -moz-border-radius:3px 0 0 3px;
-            border-radius:3px 0 0 3px;
-  }
-  li:last-child .button{
-    -webkit-border-radius:0 3px 3px 0;
-       -moz-border-radius:0 3px 3px 0;
-            border-radius:0 3px 3px 0;
+  li{float:left;padding-left:25px;
+    &:first-child{padding-left:0;}
+    a{padding:0;font-family:$font-titles-family;line-height:normal;font-size:$font-size-xl;color:#000;}
+    &.step0 a:before{content:"1. ";}
+    &.step1 a:before{content:"2. ";}
+    &.step2 a:before{content:"3. ";}
+    &.step3 a:before{content:"4. ";}
+    &.step4 a:before{content:"5. ";}
   }
 
-  /* Active buttons - normal and hover states */
-    
-  &[data-step="0"] li.step0 .button,
-  &[data-step="0"] li.step0 .button:hover,
-   
-  &[data-step="1"] li.step1 .button,
-  &[data-step="1"] li.step1 .button:hover,
-    
-  &[data-step="2"] li.step2 .button,
-  &[data-step="2"] li.step2 .button:hover,
-    
-  &[data-step="3"] li.step3 .button,
-  &[data-step="3"] li.step3 .button:hover,
-    
-  &[data-step="4"] li.step4 .button,
-  &[data-step="4"] li.step4 .button:hover{background:$button-nav-active-background;}
+  /* Completed steps */
+  &[data-step="1"] li.step0 a,
+  &[data-step="1"] li.step0 a:hover,
 
-  /* Active Buttons - Border fix */
-    
-  &[data-step="0"] li.step0 .button,
-  &[data-step="0"] li.step0 .button:hover{
-    border-left:1px solid $buttons-bar-border-left-color;
-  }
-    
-  &[data-step="1"] li.step0 .button,
-  &[data-step="1"] li.step0 .button:hover,
-    
-  &[data-step="2"] li.step1 .button,
-  &[data-step="2"] li.step1 .button:hover,
-    
-  &[data-step="3"] li.step2 .button,
-  &[data-step="3"] li.step2 .button:hover,
-    
-  &[data-step="4"] li.step3 .button,
-  &[data-step="4"] li.step3 .button:hover{
-    border-right:1px solid $buttons-bar-border-right-color;
-  }
+  &[data-step="2"] li.step0 a,
+  &[data-step="2"] li.step0 a:hover,
+  &[data-step="2"] li.step1 a,
+  &[data-step="2"] li.step1 a:hover,
 
-  /* Pre active buttons - normal state */
-   
-  &[data-step="1"] li.step0 .button,
-   
-  &[data-step="2"] li.step0 .button,
-  &[data-step="2"] li.step1 .button,
-   
-  &[data-step="3"] li.step0 .button,
-  &[data-step="3"] li.step1 .button,
-  &[data-step="3"] li.step2 .button,
-   
-  &[data-step="4"] li.step0 .button,
-  &[data-step="4"] li.step1 .button,
-  &[data-step="4"] li.step2 .button,
-  &[data-step="4"] li.step3 .button{
-    color:$buttons-bar-color-text-visited;
-  }
+  &[data-step="3"] li.step0 a,
+  &[data-step="3"] li.step0 a:hover,
+  &[data-step="3"] li.step1 a,
+  &[data-step="3"] li.step1 a:hover,
+  &[data-step="3"] li.step2 a,
+  &[data-step="3"] li.step2 a:hover,
 
-  /* Pre active buttons - hover state */
-   
-  &[data-step="1"] li.step0 .button:hover,
-   
-  &[data-step="2"] li.step0 .button:hover,
-  &[data-step="2"] li.step1 .button:hover,
-   
-  &[data-step="3"] li.step0 .button:hover,
-  &[data-step="3"] li.step1 .button:hover,
-  &[data-step="3"] li.step2 .button:hover,
-   
-  &[data-step="4"] li.step0 .button:hover,
-  &[data-step="4"] li.step1 .button:hover,
-  &[data-step="4"] li.step2 .button:hover,
-  &[data-step="4"] li.step3 .button:hover{
-    color:$buttons-bar-color-text;
-  }
-
-  /* Post active buttons - normal and hover states */
-   
-  &[data-step="0"] li.step1 .button,
-  &[data-step="0"] li.step1 .button:hover,
-  &[data-step="0"] li.step2 .button,
-  &[data-step="0"] li.step2 .button:hover,
-  &[data-step="0"] li.step3 .button,
-  &[data-step="0"] li.step3 .button:hover,
-  &[data-step="0"] li.step4 .button,
-  &[data-step="0"] li.step4 .button:hover,
-   
-  &[data-step="1"] li.step2 .button,
-  &[data-step="1"] li.step2 .button:hover,
-  &[data-step="1"] li.step3 .button,
-  &[data-step="1"] li.step3 .button:hover,
-  &[data-step="1"] li.step4 .button,
-  &[data-step="1"] li.step4 .button:hover,
-   
-  &[data-step="2"] li.step3 .button,
-  &[data-step="2"] li.step3 .button:hover,
-  &[data-step="2"] li.step4 .button,
-  &[data-step="2"] li.step4 .button:hover,
-   
-  &[data-step="3"] li.step4 .button,
-  &[data-step="3"] li.step4 .button:hover{background:$color-base;color:$buttons-bar-color-text-active;cursor:default;}
+  &[data-step="4"] li.step0 a,
+  &[data-step="4"] li.step0 a:hover,
+  &[data-step="4"] li.step1 a,
+  &[data-step="4"] li.step1 a:hover,
+  &[data-step="4"] li.step2 a,
+  &[data-step="4"] li.step2 a:hover,
+  &[data-step="4"] li.step3 a,
+  &[data-step="4"] li.step3 a:hover{color:$green;}
 
 }
 
-/* Active buttons - Edit */
-.edit[data-step="1"] li.step1 .button,
-.edit[data-step="1"] li.step1 .button:hover{
-  border-left:none;
-}
 
 /* Layout */
 html,
@@ -352,7 +261,7 @@ body{background:$color-base;height:100%;min-width:998px;}
   }
 }
 
-@media screen and (max-width: 1200px) {
+@include media-query(max-width, $break-lg) { 
   .header{position:static;}
   .workspace{padding-top:0;}
   .main-navigation{position:absolute;}
@@ -366,11 +275,12 @@ body{background:$color-base;height:100%;min-width:998px;}
     & > .wrapper1 > .wrapper2 > .wrapper3{@include transition(margin-left, .375s, ease-in-out);}
   }
   .main-navigation,
-  .header > .logo{@include transition(width, .375s, ease-in-out);}
+  .header .logo,
+  .main-navigation li > a.button.active{@include transition(width, .375s, ease-in-out);}
   .main-section,
   .header .global-navigation{@include transition(margin-right, .375s, ease-in-out);}
 }
-.collapsed-navigation{
+@mixin collapsed-navigation{
   .workspace,
   .header{
     & > .wrapper1{padding-left:$nav-collapsed-width;}
@@ -390,42 +300,56 @@ body{background:$color-base;height:100%;min-width:998px;}
     ul.bottom-navigation .footer{display:none;}
   }
 }
+.collapsed-navigation{
+  @include collapsed-navigation;
+}
+@include media-query(max-width, $break-lg) { 
+  @include collapsed-navigation;
+}
 
 /* Main Section */
 .main-section{
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6{font-family:$font-titles-family;line-height:normal;}
+  h1{font-size:$font-size-xl;}
+  h2{font-size:$font-size-l;}
+  h3,
+  h4,
+  h5,
+  h6{font-size:$font-size-m;}
 
   /* Section Title */
-  .section-title{padding:10px 0;
+  .section-title{
+    
+    /* Context menu */
+    .context-menu{
+    
+      h1{padding:20px 0;
+        &.sub-heading{font-size:15px !important;text-transform:uppercase;padding:0;}
+        .total-resources{color:#808080;}
+      }
 
-    h1,
-    h2,
-    h3{font-family:$font-titles-family;}
-    h1{font-size:$font-size-xl;line-height:normal;padding:7px 0;
-      a{}
-      .total-resources{color:#808080;}
+      /* Buttons Bar */
+      .buttons-bar{
+
+      }
+      
+      /* Context Buttons */
+      .context-buttons > *{margin-top:10px;}
+
+      /* Status row */
+      .status-row{padding:8px 0 0;
+        & > span{float:left;}
+        & > span:before{content:"|";padding:0 5px;color:#333;float:left;}
+        & > span:first-child:before{content:"";padding:0;display:none;}
+      }
+
     }
-    h2{font-size:$font-size-l;line-height:normal;}
-    h3{font-size:$font-size-m;line-height:normal;}
-
-    h2:before, 
-    h3:before{content:"";background:url(../images/common/ic_breadcrum.png) no-repeat center center;width:28px;display:block;height:39px;float:left;}
-
-    /* Status row */
-    .status-row{padding:8px 0 0;
-      & > span{float:left;}
-      & > span:before{content:"|";padding:0 5px;color:#333;float:left;}
-      & > span:first-child:before{content:"";padding:0;display:none;}
-    }
-
-    /* Actions */
-    .actions{padding-top:7px;
-      li{float:left;padding-left:10px;}
-      li.has-separator{padding-left:22px;}
-      li.has-separator:before{content:"";float:left;width:1px;height:26px;border-right:1px solid $buttons-bar-border-left-color;background:$buttons-bar-border-right-color;position:relative;left:-12px;}
-    }
-
-    /* Buttons Bar */
-    .buttons-bar{margin-top:7px;}
 
   }
 

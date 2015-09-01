@@ -1,66 +1,60 @@
 {% load i18n extra_tags core_components components %}
 
-<header>
-    <h3 id="id_dataHeader">{% trans "CREATE-STEP3-TITLE" %} <span class="txt">{% trans "CREATE-STEP3-SUBTITLE" %}</span></h3>
+<div class="col-xs-12">
 
-    <div class="navigation FR">
-        <a id="id_step2PrevButton" href="javascript:;" title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small"><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
-        <a id="id_step2NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button primary small">{% trans "APP-NEXT-TEXT" %}<i class="right-arrow"></i></a>
-    </div>  
-</header>
+    <header>
+        <h3 id="id_dataHeader">{% trans "CREATE-STEP3-TITLE" %} <span class="txt">{% trans "CREATE-STEP3-SUBTITLE" %}</span></h3>
 
-<!-- COLUMNS -->
-<div class="columns clearfix">
+        <div class="navigation FR">
+            <a id="id_step2PrevButton" href="javascript:;" title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha back">{% trans 'BTN-BACK-TEXT' %}</a>
+            <a id="id_step2NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button primary">{% trans "APP-NEXT-TEXT" %}</a>
+        </div>  
+    </header>
 
-    <div class="CL formContent">
+    <!-- COLUMNS -->
+    <div class="columns clearfix">
 
-        <!-- CAJA DATOS -->
-		<div id="id_operation_container" class="dataStreamForm">
-			{% if datastream_id %}
-				{% dataStreamForm  is_update_selection datastream_id '' auth_manager preferences meta_data %}
-			{% else %}
-				{% dataStreamForm is_update_selection '' data_set_id auth_manager preferences meta_data %}				
-			{% endif %}
-			
-		</div>
+        <div class="CL formContent">
 
-    </div>
+            <!-- CAJA DATOS -->
+    		<div id="id_operation_container" class="dataStreamForm">
+    			{% if datastream_id %}
+    				{% dataStreamForm  is_update_selection datastream_id '' auth_manager preferences meta_data %}
+    			{% else %}
+    				{% dataStreamForm is_update_selection '' data_set_id auth_manager preferences meta_data %}				
+    			{% endif %}
+    			
+    		</div>
+
+        </div>
 
 
-    <!-- COLUMN - Right -->
-    <div class="CR">
-        <div class="helpBox">
-            <div class="helpBoxInner">
+        <!-- COLUMN - Right -->
+        <div class="CR">
+            <div class="helpBox">
+                <div class="helpBoxInner">
 
-            <!-- SHADOWS -->
-            <div class="cv tl"></div>
-            <div class="cv bl"></div>
+                <!-- SHADOWS -->
+                <div class="cv tl"></div>
+                <div class="cv bl"></div>
 
-            <!-- COLUMN CONTENT -->
-            <div class="columnContent clearfix">
+                <!-- COLUMN CONTENT -->
+                <div class="columnContent clearfix">
 
-                <!-- HELP AND TIPS BOX -->
+                    <!-- HELP AND TIPS BOX -->
 
-                    <div class="boxInner">
-                        <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
-                        <p><b>{% trans "CREATION-STEP3-HELPTITLE" %}</b></p>
-                        <p>{% trans "CREATION-STEP3-HELPTIP" %}</p>
-    					<p><strong>{% trans "APP-ANYDOUBTS-TEXT2" %}</strong> <a href="mailto:support@junar.com">{% trans "APP-CALLUSONSKYPE-TEXT2" %}</a>.</p>
+                        <div class="boxInner">
+                            <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
+                            <p><b>{% trans "CREATION-STEP3-HELPTITLE" %}</b></p>
+                            <p>{% trans "CREATION-STEP3-HELPTIP" %}</p>
+        					<p><strong>{% trans "APP-ANYDOUBTS-TEXT2" %}</strong> <a href="mailto:support@junar.com">{% trans "APP-CALLUSONSKYPE-TEXT2" %}</a>.</p>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-</div>
-
-<!-- BUTTONS -->
-<div class="buttons navigationControl center">
-    <a id="id_step2NextButtonBottom" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button small primary">{% trans "APP-NEXT-TEXT" %}</a>
-    {% if is_update and not is_update_selection %}
-        {% if 'workspace.can_create_datastream_as_draft' in auth_manager.privileges  or 'ao-free-user' in auth_manager.roles %}
-            <a id="id_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans "APP-SAVE-TEXT" %}</a>
-        {% endif %}
-    {% endif %}
 </div>

@@ -1,42 +1,46 @@
 {% load i18n extra_tags core_components components %}
 
-<header>
-	<h3 id="id_dataHeader">{% trans "CREATE-STEP2-TITLE" %}? <span class="txt">{% trans "CREATE-STEP2-SUBTITLE" %}</span></h3>
+<div class="col-xs-12">
 
-	<div class="navigation FR">
-		<a id="id_step1PrevButton" href="javascript:;" title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small"><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
-		<a id="id_step1NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button primary small">{% trans "APP-NEXT-TEXT" %}<i class="right-arrow"></i></a>
-	</div>	
-</header>
+	<header>
+		<h3 id="id_dataHeader">{% trans "CREATE-STEP2-TITLE" %}? <span class="txt">{% trans "CREATE-STEP2-SUBTITLE" %}</span></h3>
 
-<div class="wrapper1">
-  <div class="wrapper2 clearfix">
-    <div class="wrapper3">
+		<div class="navigation FR">
+			<a id="id_step1PrevButton" href="javascript:;" title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha back">{% trans 'BTN-BACK-TEXT' %}</a>
+			<a id="id_step1NextButton" title="{% trans 'APP-NEXT-TEXT' %}" href="javascript:;" class="button primary">{% trans "APP-NEXT-TEXT" %}</a>
+		</div>	
+	</header>
 
-			<section class="sidebar">
-        <div class="boxConfig">
+	<div class="wrapper1">
+	  <div class="wrapper2 clearfix">
+	    <div class="wrapper3">
 
-		        <!-- SHADOWS -->
-		        <div class="cv tl"></div>
-		        <div class="cv bl"></div>
+				<section class="sidebar">
+	        <div class="boxConfig">
+
+			        <!-- SHADOWS -->
+			        <div class="cv tl"></div>
+			        <div class="cv bl"></div>
+			
+			        <!-- COLUMN CONTENT -->
+			        <div id="id_sideBarContainer" class="columnContent clearfix">
+								{% include "view_manager/sidebar.html" %}
+			        </div>
 		
-		        <!-- COLUMN CONTENT -->
-		        <div id="id_sideBarContainer" class="columnContent clearfix">
-							{% include "view_manager/sidebar.html" %}
-		        </div>
-	
-				</div>
-			</section>
+					</div>
+				</section>
 
-			<section class="preview-container">
+				<section class="preview-container">
 
-        <!-- CAJA DATOS -->
-        <div class="dataTable">
-            <div id="id_selectedTable_container" class="dataTableInner"></div>
-        </div>
+	        <!-- CAJA DATOS -->
+	        <div class="dataTable">
+	            <div id="id_selectedTable_container" class="dataTableInner"></div>
+	        </div>
 
-			</section>
+				</section>
 
+			</div>
 		</div>
 	</div>
+
 </div>

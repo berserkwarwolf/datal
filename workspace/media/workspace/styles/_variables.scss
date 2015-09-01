@@ -92,3 +92,15 @@ $form-label-size:12px;															/* Size for form labels */
 $loader-url-dark:"../images/common/loader_datal_dark.gif";						/* URL of loader image. Background must be #393939. For sections with dark backgrounds. */
 $loader-url-semi-light:"../images/common/loader_datal_semi_light.gif";			/* URL of loader image. Background must be #F6F4F4. For sections with light backgrounds. */
 $loader-url-light:"../images/common/loader_datal_light.gif";					/* URL of loader image. Background must be #FFFFFF. For sections with light backgrounds. */
+
+
+/* Media queries */
+$break-sm:768px;
+$break-md:992px;
+$break-lg:1200px;
+
+/* Colors accept / reject */
+$red:#c1272d;
+$red-hover:#ea3442;
+$green:#009245;
+$green-hover:#02c159;

@@ -3,7 +3,7 @@
 @import 'functions';
 @import 'mixins';
 
-.main-section .section-content{background-color:#f6f4f4;padding:0;}
+.main-section .section-content{background-color:#f6f4f4;padding:0;overflow:visible;}
 .create{padding:0;}
 .create header{background-color:#fff;padding:20px 15px 18px 15px;border-bottom:1px solid #e5e3e3;
   -webkit-border-radius:3px 3px 0 0;
@@ -17,7 +17,7 @@
 .create header h3 span{font-size:$font-size-m;font-weight:normal;color:$font-color-light;}
 .create .insetFormTitle{font-size:$font-size-m;margin:15px 0;font-family:$font-secondary-family;text-transform:uppercase;}
 
-.create .navigation{margin-top:-5px;}
+.create .navigation{position:absolute;top:-53px;right:0;}
 .create .navigation a{float:left;margin-left:10px;}
 .create .navigation a.alpha{font-family:Arial,Helvetica,sans-serif;}
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
@@ -57,11 +57,11 @@
 .create .box p{color:#999;font-size:14px;padding-bottom:18px;}
 .create .box .boxCreateDesc{display:block;padding:15px;}
 
-@media all and (min-width:1337px){
+@include media-query(min-width, 1337px) { 
   .create .box{width:320px;margin:0 20px 20px;}
   .create .box .boxCreate{height:227px;}
 }
-@media all and (max-width:1024px){
+@include media-query(max-width, 1024px) { 
   .create .boxContent{padding:20px 0;}
   .create .box{width:200px;}
   .create .box .boxCreate{height:142px;}

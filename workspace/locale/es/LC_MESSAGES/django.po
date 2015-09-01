@@ -2519,7 +2519,7 @@ msgid "APP-CHART-TYPES-SUBTITLE"
 msgstr "Seleccione el tipo de gráfico que se adapte a sus necesidades, y cómo se manejarán los datos. Pruebe diferentes combinaciones."
 
 msgid "BTN-BACK-TEXT"
-msgstr "Atrás"
+msgstr "Retroceder"
 
 msgid "BTN-NEXT-TEXT"
 msgstr "Siguiente"
@@ -3063,3 +3063,18 @@ msgstr "Despublicar vista"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
+
+msgid "DS-STEP1-TEXT"
+msgstr "Selección"
+
+msgid "DS-STEP2-TEXT"
+msgstr "Datos"
+
+msgid "DS-STEP3-TEXT"
+msgstr "Descripción"
+
+msgid "DS-STEP4-TEXT"
+msgstr "Revisión"
+
+msgid "APP-CREATE-A-DATAVIEW-TEXT"
+msgstr "Crea una vista"
