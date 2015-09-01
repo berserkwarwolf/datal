@@ -38,8 +38,6 @@ def hits_stats(request, vz_id, channel_type=None):
     t = loader.get_template('viewChart/chart_hits_stats.html') 
     c = Context({'data':hits, 'field_names': field_names, "request": request})
     return HttpResponse(t.render(c), content_type="application/json")
-    #return render_to_response('viewChart/chart_hits_stats.html', {'data':hits, 'field_names': field_names, "request": request}, content_type="application/json")
-
 
 
 def action_charttest(request):
