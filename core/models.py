@@ -884,8 +884,10 @@ class Visualization(GuidModel):
     datastream = models.ForeignKey('DataStream')
     guid = models.CharField(max_length=29, unique=True)
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    last_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_revision')
-    last_published_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_published_revision')
+    last_revision = models.ForeignKey('VisualizationRevision', null=True, related_name='last_revision',
+                                      on_delete=models.SET_NULL)
+    last_published_revision = models.ForeignKey('VisualizationRevision', null=True,
+                                                related_name='last_published_revision', on_delete=models.SET_NULL)
     objects = managers.VisualizationManager()
 
     class Meta:
