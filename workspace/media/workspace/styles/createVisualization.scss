@@ -116,39 +116,23 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
 /* Gráficos */
 .preview-container {
-  padding:15px 40px 15px 0;
 
+  /* Contenedor de vista previa */
   .chartContent,
-  .mapContent{border:1px solid $color-base-extra-light;float:left;width:100%;padding:15px;cursor:pointer;
+  .mapContent{border:1px solid $color-base-extra-light;width:600px;height:480px;cursor:pointer;position:relative;margin:0 auto;
+    &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
-    &:hover .chartContentPreview p{color:$font-color-base;}
   }
 
-  .chartContentPreview,
-  .chartLeyendPreview{min-height:370px;position:relative;}
+  p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
-  .axisYNamePreview p{-ms-transform:rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top:190px;}
-
-  .chartContentPreview{
-    background:url(/static/workspace/images/createVisualization/previewColumn.png) no-repeat center center / auto 90%;border-left:1px solid $color-base-extra-light;border-bottom:1px solid $color-base-extra-light;
-
-    p{font-size:$font-size-xl;}
+  /* Vistas previas */
+  .previewArea{background-image:url(/static/workspace/images/createVisualization/previewArea.gif);
+  .previewLine{background-image:url(/static/workspace/images/createVisualization/previewLine.gif);
+  .previewColumn{background-image:url(/static/workspace/images/createVisualization/previewColumn.gif);
+  .previewBar{background-image:url(/static/workspace/images/createVisualization/previewBar.gif);
+  .previewPie{background-image:url(/static/workspace/images/createVisualization/previewPie.gif);
   }
-
-  .axisXNamePreview{height:40px;}
-
-  .chartLeyendPreview{
-    padding-top:150px;position:relative;
-
-    p{position:relative;text-align:left;}
-    .leyend{width:30px;height:15px;display:block;background:#f6f5f3;margin:15px 0;}
-  }
-
-  input,
-  input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height:27px;font-size:$font-size-l;padding:0;}
-
-  p{text-align:center;font-size:$font-size-m;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;color:$font-color-light;}
-
 } 
 
 /* Modal */

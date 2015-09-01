@@ -27,6 +27,7 @@
 <link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <meta name="main-option" content="id_visualizations_option"/>
 
@@ -61,7 +62,6 @@
 
 <!-- Create Map StepViews -->
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapMetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 
@@ -98,7 +98,6 @@
   
     <!-- Include map templates -->  
     {% include "createVisualization/steps/map/1_map.html" %}
-    {% include "createVisualization/steps/map/2_map_metadata.html" %}
     {% include "createVisualization/steps/map/3_map_finish.html" %}
 
   </div>
