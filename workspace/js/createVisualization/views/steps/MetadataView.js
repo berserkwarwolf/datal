@@ -12,7 +12,7 @@ var MetadataView = StepViewSPA.extend({
 		"input.title": 			"value:meta_title,		events:['keyup']",
 		"input.description": 	"value:meta_description,events:['keyup']",
 		"select.category": 		"value:meta_category,	events:['change']",
-		//"textarea.notes": 		"value:meta_notes,		events:['change']"
+		//"textarea.notes": 		"value:meta_notes,		events:['keyup']"
 	},
 
 	onPreviousButtonClicked: function(){
