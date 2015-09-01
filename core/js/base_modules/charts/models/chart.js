@@ -92,12 +92,15 @@ charts.models.Chart = Backbone.Model.extend({
         return metadata;
     },
 
-    isMetadataValid: function(){
-        return (
-                !_.isEmpty(this.get('meta_title'))
-            &&  !_.isEmpty(this.get('meta_description'))
-            &&  !_.isEmpty(this.get('meta_notes'))
-            );
+    validateMetadata: function(){
+        var validation = {
+            valid: (  !_.isEmpty(this.get('meta_title')) &&  !_.isEmpty(this.get('meta_description'))  ),
+            fields:{
+                'title':  _.isEmpty(this.get('meta_title')),
+                'description':  _.isEmpty(this.get('meta_description'))
+            }    
+        }
+        return validation
     },
 
     getSettings: function(){

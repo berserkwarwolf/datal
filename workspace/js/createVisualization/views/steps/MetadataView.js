@@ -1,6 +1,7 @@
 var MetadataView = StepViewSPA.extend({
 
 	initialize: function(){
+		this.$el.find('.validate-msg').hide();
 		this.addEvents({
 			'click a.backButton': 'onPreviousButtonClicked',
 			'click a.nextButton': 'onNextButtonClicked'
@@ -22,13 +23,21 @@ var MetadataView = StepViewSPA.extend({
 
 	onNextButtonClicked: function(){
 //		this.notesInstance.instanceById('id_notes').saveContent()
-
+		this.$el.find('input').removeClass('has-error');
+		this.$el.find('.validate-msg').hide();
 		//hago set aquí porque Epoxy no se banca nicedit
 		this.model.set('meta_notes',this.notesInstance.instanceById('id_notes').getContent());
-		if(this.model.isMetadataValid() ){
+		var validation = this.model.validateMetadata();
+		if( validation.valid ){
 			this.next();
 		}else{
-			console.error('error de validate!');
+			var that = this;
+			_.each(validation.fields,function(invalid,field){
+				if(invalid){
+					that.$el.find('input.'+field).addClass('has-error');
+					that.$el.find('input.'+field).siblings('.validate-msg').show();
+				}
+			});
 		};
 		console.log(this.model.getMeta());
 	},
