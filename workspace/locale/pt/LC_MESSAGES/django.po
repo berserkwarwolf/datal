@@ -3073,3 +3073,21 @@ msgstr "Crea un mapa de puntos"
 
 msgid "APP-CREATE-MAP-DATA-TITLE"
 msgstr "Datos del mapa"
+
+msgid "APP-GRAPH-TEXT"
+msgstr "Graph"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
+msgstr "1. ¿Cuáles son los intervalos con datos?"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
+msgstr "2. Etiquetas (Eje X)"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
+msgstr "Las categorías a comparar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
+msgstr "3. Encabezado/s"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
+msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
