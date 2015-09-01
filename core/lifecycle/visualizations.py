@@ -125,7 +125,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         pass
 
     def _remove_all(self):
-        self.datastream.delete()
+        self.visualization.delete()
 
     def _log_activity(self, action_id):
         title = self.visualizationi18n.title if self.visualizationi18n else ''
