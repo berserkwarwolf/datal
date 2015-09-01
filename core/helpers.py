@@ -385,9 +385,6 @@ def get_domain(account_id):
 
 
 def get_domain_by_request(request, default_domain = ''):
-    """ Copy of core/httpy.py/get_domain because duplicates name of api/heplers/get_domain
-    get the domain of this request """
-
     domain = request.META.get('HTTP_HOST', None)
     if domain is None:
         domain = request.META.get('SERVER_NAME', None)
@@ -483,7 +480,7 @@ def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
 def add_domains_to_permalinks(resources):
     from core.models import Preference
     accounts_ids = [ item['account_id'] for item in resources ]
-    accounts_ids = CoreHelper.uniquify(accounts_ids)
+    accounts_ids = uniquify(accounts_ids)
     accounts_domains = Preference.objects.values_list('account_id', 'value', 'key').filter(Q(key='account.domain') | Q(key='account.name'), account__in = accounts_ids)
 
     r = {}
