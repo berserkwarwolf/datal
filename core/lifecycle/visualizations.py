@@ -5,7 +5,7 @@ from django.db.models import F, Max
 from django.conf import settings
 
 from core.daos.visualizations import VisualizationDBDAO, VisualizationSearchDAOFactory
-from core.models import VisualizationRevision, Visualization, VisualizationI18n
+from core.models import VisualizationRevision, Visualization, VisualizationI18n, DataStreamRevision
 from core.daos.activity_stream import ActivityStreamDAO
 from core.choices import StatusChoices, ActionStreams
 from core.exceptions import VisualizationNotFoundException, IllegalStateException
@@ -142,21 +142,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         pass
 
     def _unpublish_all(self):
-        """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
-
-        VisualizationRevision.objects.filter(
-            visualization=self.visualization.id,
-            status=StatusChoices.PUBLISHED
-        ).exclude(id=self.visualization_revision.id).update(status=StatusChoices.DRAFT)
-
-        with transaction.atomic():
-            visualizations = VisualizationRevision.objects.select_for_update().filter(
-                visualization=self.visualization.id,
-                id=F('visualization__last_published_revision__id'),
-                status=StatusChoices.PUBLISHED)
-
-            for visualization in visualizations:
-                VisualizationLifeCycleManager(self.user, visualization_id=visualization.id).unpublish(killemall=True)
+        """ Despublica todas las revisiones de la visualizacion y la de todos sus dashboards hijos en cascada """
+        pass
 
     def create(self, allowed_states=CREATE_ALLOWED_STATES, **fields):
         pass

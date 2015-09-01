@@ -172,12 +172,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
-        DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
+        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
             id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
+                datastream=self.datastream.id,
                 id=F('datastream__last_published_revision__id'),
                 status=StatusChoices.PUBLISHED)
 
