@@ -23,7 +23,7 @@
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
-.create .title{text-transform:uppercase;font-size:$font-size-base;padding:15px 0 10px;}
+.create .title{text-transform:uppercase;font-size:$font-size-base;padding:15px 0 10px;display:inline-block;}
 .create .required{color:#d21717;padding-left:5px;float:right;}
 .create header .required{padding-left:0;}
 
