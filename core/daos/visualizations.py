@@ -126,6 +126,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
+
 class VisualizationHitsDAO():
     """class for manage access to Hits in DB and index"""
 
@@ -191,7 +192,7 @@ class VisualizationHitsDAO():
 
         return (date,hits)
 
-    def count_by_days(self, day=30):
+    def count_by_days(self, day=30, channel_type=None):
         """trae un dict con los hits totales de los ultimos day y los hits particulares de los días desde day hasta today"""
 
         # no sé si es necesario esto
@@ -200,24 +201,48 @@ class VisualizationHitsDAO():
 
         cache_key="%s_hits_%s_%s" % ( self.doc_type, self.visualization.guid, day)
 
+        if channel_type:
+            cache_key+="_channel_type_%s" % channel_type
+
         hits = self._get_cache(cache_key)
 
         # me cachendié! no esta en la cache
         if not hits:
             # tenemos la fecha de inicio
-            start_date=datetime.today()-timedelta(days=30)
+            start_date=datetime.today()-timedelta(days=day)
 
             # tomamos solo la parte date
             truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
 
-            hits={"days":VisualizationHits.objects.filter(visualization=self.visualization,created_at__range=(start_date, datetime.today()))
-                .extra(select={'_date': truncate_date}).values("_date").annotate(hits=Count("created_at"))}
-            hits['total']=sum([x['hits'] for x in hits['days']])
+            qs=VisualizationHits.objects.filter(visualization=self.visualization,created_at__gte=start_date)
+
+            if channel_type:
+                qs=qs.filter(channel_type=channel_type)
+
+            hits=qs.extra(select={'_date': truncate_date, "fecha": 'DATE(created_at)'}).values("fecha").order_by("created_at").annotate(hits=Count("created_at"))
+
+            control=[ date.today()-timedelta(days=x) for x in range(day-1,0,-1)]
+            control.append(date.today())
+
+            
+            for i in hits:
+                try:
+                    control.remove(i['fecha'])
+                except ValueError:
+                    pass
+
+            hits=list(hits)
+                
+            for i in control:
+                hits.append({"fecha": i, "hits": 0})
+
+            hits = sorted(hits, key=lambda k: k['fecha']) 
 
             # lo dejamos, amablemente, en la cache!
             self._set_cache(cache_key, hits)
 
         return hits
+
 
 class VisualizationSearchDAOFactory():
     """ select Search engine"""
@@ -236,8 +261,8 @@ class VisualizationSearchDAOFactory():
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
-        
+
+
 class VisualizationSearchDAO():
     """ class for manage access to datasets' searchify documents """
 

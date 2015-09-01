@@ -11,5 +11,6 @@ urlpatterns = patterns('',
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).xls(?:$|x$)', 'core.datastream_manager.views.action_xls', name='datastream_manager.action_xls'),
     
     url(r'^invoke$', 'microsites.viewChart.views.action_invoke', name='chart_manager.action_invoke'),
-    url(r'^get_last_30_days_visualization/(?P<id>\d+)$', 'core.chart_manager.views.get_last_30_days_visualization', name='chart_manager.get_last_30_days_visualization'),
+
+    url(r'^get_last_30_days_visualization/(?P<vz_id>\d+)$', hits_stats, name='chart_manager.get_last_30_days_visualization'),
 )

@@ -2,11 +2,13 @@
 from django.db.models import F, Max
 from django.db import transaction
 from core.choices import ActionStreams
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
+from core.models import DatasetRevision, DataStreamRevision, DataStream, DatastreamI18n, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IllegalStateException, DataStreamNotFoundException
 from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
+from .visualizations import VisualizationLifeCycleManager
+
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -115,9 +117,29 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def _publish_childs(self):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
+        with transaction.atomic():
+            visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_revision__id')
+            )
+            publish_fail = list()
+            for visualization_revision in visualization_revisions:
+                logger.info('[LifeCycle - Datastream - Publish Childs] Datastream {} Publico Visualization Rev. hijo {}.'.format(
+                    self.datastream.id, visualization_revision.id
+                ))
+                try:
+                    VisualizationLifeCycleManager(
+                        user=self.user,
+                        visualization_revision_id=visualization_revision.id
+                    ).publish(
+                        allowed_states=[StatusChoices.APPROVED],
+                        parent_status=StatusChoices.PUBLISHED
+                    )
+                except IllegalStateException:
+                    publish_fail.append(visualization_revision)
 
-        # Comentado ya que no hay hijos de datastreams hasta que no haya visualizaciones
-        pass
+            if publish_fail:
+                raise ChildNotApprovedException(self.datastream.last_revision)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
@@ -150,12 +172,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
-        DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
+        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
             id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
+                datastream=self.datastream.id,
                 id=F('datastream__last_published_revision__id'),
                 status=StatusChoices.PUBLISHED)
 

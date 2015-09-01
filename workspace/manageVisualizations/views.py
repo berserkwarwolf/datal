@@ -19,7 +19,7 @@ from core.choices import *
 from core.docs import VZ, DT
 from core.models import VisualizationRevision,DatasetRevision
 from core import helpers as LocalHelper
-from microsites.daos.datastreams import DatastreamDAO
+from microsites.daos.visualizations import VisualizationDAO
 from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
@@ -98,24 +98,35 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     return HttpResponse(data, mimetype="application/json")
 
 @login_required
-@require_privilege("workspace.can_delete_datastream")
+#@require_privilege("workspace.can_delete_datastream")
+#@requires_review
 @transaction.commit_on_success
-def remove(request, id,type="resource"):
-
+def remove(request, visualization_revision_id, type="resource"):
     """ remove resource """
-    my_resource = VisualizationLifeCycleManager(user_id=request.user.id, resource_revision_id=id)
+    lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
+
     if type == 'revision':
-        removes = my_resource.remove_revision()
-        if removes:
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')]}))
+        lifecycle.remove()
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.visualization.last_revision_id:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
+                'revision_id': lifecycle.visualization.last_revision_id,
+            }))
         else:
-            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT')]}))
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
+                'revision_id': -1,
+            }))
     else:
-        removes = my_resource.remove()
-        if removes:
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')]}), content_type='text/plain')
-        else:
-            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
 
 @login_required
 @privilege_required("workspace.can_view_visualization")

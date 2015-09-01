@@ -144,8 +144,6 @@ def requires_any_datastream():
 
 def requires_review(a_view):
     def _wrapped_view(request, *args, **kwargs):
-        print(kwargs)
-
         if "dataset_revision_id" in kwargs:
             if DatasetRevision.objects.get(pk=kwargs["dataset_revision_id"]).is_pending_review() and \
                     request.user.is_editor():
