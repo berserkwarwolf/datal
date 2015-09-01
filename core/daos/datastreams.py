@@ -6,7 +6,7 @@ import logging
 from django.db.models import Q, F
 from django.db import IntegrityError
 
-from core.exceptions import SearchIndexNotFoundException
+from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
@@ -335,6 +335,7 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+
 
 class DatastreamHitsDAO():
     """class for manage access to Hits in DB and index"""
