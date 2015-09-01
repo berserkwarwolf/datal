@@ -127,11 +127,25 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
   /* Vistas previas */
-  .previewArea{background-image:url(/static/workspace/images/createVisualization/previewArea.gif);
-  .previewLine{background-image:url(/static/workspace/images/createVisualization/previewLine.gif);
-  .previewColumn{background-image:url(/static/workspace/images/createVisualization/previewColumn.gif);
-  .previewBar{background-image:url(/static/workspace/images/createVisualization/previewBar.gif);
-  .previewPie{background-image:url(/static/workspace/images/createVisualization/previewPie.gif);
+  .previewArea{
+    background-image:url(/static/workspace/images/createVisualization/previewArea.svg);
+    background-image:url(/static/workspace/images/createVisualization/previewArea.png);
+  }
+  .previewLine{
+    background-image:url(/static/workspace/images/createVisualization/previewLine.svg);
+    background-image:url(/static/workspace/images/createVisualization/previewLine.png);
+  }
+  .previewColumn{
+    background-image:url(/static/workspace/images/createVisualization/previewColumn.svg);
+    background-image:url(/static/workspace/images/createVisualization/previewColumn.png);
+  }
+  .previewBar{
+    background-image:url(/static/workspace/images/createVisualization/previewBar.svg);
+    background-image:url(/static/workspace/images/createVisualization/previewBar.png);
+  }
+  .previewPie{
+    background-image:url(/static/workspace/images/createVisualization/previewPie.svg);
+    background-image:url(/static/workspace/images/createVisualization/previewPie.png);
   }
 } 
 
