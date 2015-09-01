@@ -5,4 +5,5 @@ class RequestForm(forms.Form):
     limit = forms.IntegerField(required=False)
     page = forms.IntegerField(required=False)
     bounds = forms.CharField(required=False)
-    zoom = forms.IntegerField(required=False)     
+    zoom = forms.IntegerField(required=False)
+

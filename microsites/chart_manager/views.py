@@ -125,5 +125,5 @@ def action_invoke(request):
     
             return HttpResponse(result, mimetype=content_type)
     else:
-        return HttpResponse('Error!') 
-    
+        return HttpResponse('Error!')
+

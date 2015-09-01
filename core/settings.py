@@ -110,6 +110,7 @@ END_POINT_SERVLET       = '/AgileOfficeServer/DataStreamRequesterServlet'
 END_POINT_CHART_SERVLET = '/AgileOfficeServer/ChartInvokeServlet'
 END_POINT_LOADER_SERVLET= '/AgileOfficeServer/DataSourceLoaderServlet'
 END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
+END_POINT_CHART_PREVIEWER_SERVLET = '/AgileOfficeServer/ChartPreviewerServlet'
 
 
 BASE_URI = 'localhost'
