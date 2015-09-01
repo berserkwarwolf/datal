@@ -5,7 +5,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from core.models import *
 from core.managers import *
 from core.shortcuts import render_to_response
-from microsites.helpers import add_domains_to_permalinks
+from core.helpers import add_domains_to_permalinks
 from microsites.loadHome.forms import *
 from microsites.loadHome import utils
 from utils import *

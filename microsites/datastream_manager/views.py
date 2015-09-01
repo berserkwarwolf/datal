@@ -10,7 +10,7 @@ from core.helpers import RequestProcessor, get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
 from core.daos.datastreams import DatastreamHitsDAO
-from microsites.helpers import set_dataset_impl_type_nice
+from core.helpers import set_dataset_impl_type_nice
 
 
 def action_view(request, id, slug):

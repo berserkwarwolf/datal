@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify as django_slugify
 from django.core.validators import RegexValidator
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-
+from django.db.models import Q
 from babel import numbers, dates
 
 from core.primitives import PrimitiveComputer
@@ -479,3 +479,23 @@ def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
     l_url = reverse(p_view_name)
 
     return l_domain + l_url + l_query
+
+def add_domains_to_permalinks(resources):
+    from core.models import Preference
+    accounts_ids = [ item['account_id'] for item in resources ]
+    accounts_ids = CoreHelper.uniquify(accounts_ids)
+    accounts_domains = Preference.objects.values_list('account_id', 'value', 'key').filter(Q(key='account.domain') | Q(key='account.name'), account__in = accounts_ids)
+
+    r = {}
+    for account_id, value, key in accounts_domains:
+        if r.has_key(account_id):
+            r[account_id][key] = value
+        else:
+            r[account_id] = {key: value}
+
+    for resource in resources:
+        account_id = resource['account_id']
+        if r.has_key(account_id):
+            account_domain = r[account_id]['account.domain']
+            resource['permalink'] = 'http://' + account_domain + resource['permalink']
+            resource['account_name'] = r[account_id]['account.name']
