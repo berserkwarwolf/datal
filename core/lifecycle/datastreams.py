@@ -147,7 +147,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.UNPUBLISH)
 
-    def _unpublish_all(self):
+    def publish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
         DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(

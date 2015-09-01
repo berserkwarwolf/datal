@@ -126,6 +126,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
+
 class VisualizationHitsDAO():
     """class for manage access to Hits in DB and index"""
 
@@ -242,6 +243,7 @@ class VisualizationHitsDAO():
 
         return hits
 
+
 class VisualizationSearchDAOFactory():
     """ select Search engine"""
 
@@ -259,8 +261,8 @@ class VisualizationSearchDAOFactory():
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
-        
+
+
 class VisualizationSearchDAO():
     """ class for manage access to datasets' searchify documents """
 

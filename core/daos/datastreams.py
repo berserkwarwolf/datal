@@ -200,7 +200,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         related = dict()
         related['visualizations'] = VisualizationRevision.objects.select_related().filter(
             visualization__datastream__id=datastream_id,
-            datastreami18n__language=language
+            visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__nick', 'created_at', 'visualization__last_revision')
         return related
