@@ -99,6 +99,21 @@ def invoke_chart(query):
     nr = '{"fType":"ARRAY","fArray":[{"fStr":"Error","fType":"TEXT","fHeader":true},{"fStr":"URL","fType":"TEXT","fHeader":true},{"fStr":"%s","fType":"TEXT"},{"fStr":"%s","fType":"TEXT"}],"fRows":2,"fCols":2,"fTimestamp":1349165269247,"fLength":75}' % (er, url)
     return nr, "json"
 
+def preview_chart(query):
+
+    content_type = settings.CONTENT_TYPES.get("json")
+
+    try:
+        engine_domain = get_domain_with_protocol('engine')
+        url = engine_domain + settings.END_POINT_CHART_PREVIEWER_SERVLET
+
+        value, content_type = _request(query, url)
+        return value, content_type
+
+    except Exception, e:
+        logger = logging.getLogger(__name__)
+        logger.debug(e)
+        raise e
 
 def load(query):
     engine_domain = get_domain_with_protocol('engine')
