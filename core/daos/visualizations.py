@@ -207,7 +207,7 @@ class VisualizationHitsDAO():
         hits = self._get_cache(cache_key)
 
         # me cachendié! no esta en la cache
-        if not hits or True:
+        if not hits:
             # tenemos la fecha de inicio
             start_date=datetime.today()-timedelta(days=day)
 
