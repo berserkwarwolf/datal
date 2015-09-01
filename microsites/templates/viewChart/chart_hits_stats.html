@@ -1,0 +1,6 @@
+{"status": "ok",
+"chart": [["{{ names.0 }}", "{{ names.1 }}"],
+{% for item in data%}
+["{{item.fecha.isoformat}}", {{ item.hits }}],
+{% endfor %}
+]}
