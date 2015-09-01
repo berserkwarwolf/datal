@@ -17,273 +17,146 @@ logger = logging.getLogger(__name__)
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
 
-
-def class_for_name(module_name, class_name):
-    """
-    Create an instance of the named path and class name
-    :return: Class instance
-    """
-    # load the module, will raise ImportError if module cannot be loaded
-    m = importlib.import_module(module_name)
-    # get the class, will raise AttributeError if class cannot be found
-    c = getattr(m, class_name)
-    return c
-
-
 def get_domain_with_protocol(app, protocol = 'http'):
     return protocol + '://' + settings.DOMAINS[app]
 
 
-class Day(Aggregate):
-    """Custom aggregator
-    """
-    sql_function = 'DATE'
-    sql_template = "%(function)s(%(field)s)"
+# Lo borro porque me explicaron que no se va usar mas
+# /home/mativs/Projects/datal/core/chart_manager/views.py
+# /home/mativs/Projects/datal/core/datastream_manager/views.py:
+# /home/mativs/Projects/datal/workspace/reports_manager/views.py:
 
-    def __init__(self, lookup, **extra):
-        self.lookup = lookup
-        self.extra = extra
+# class Day(Aggregate):
+#     """Custom aggregator
+#     """
+#     sql_function = 'DATE'
+#     sql_template = "%(function)s(%(field)s)"
+# 
+#     def __init__(self, lookup, **extra):
+#         self.lookup = lookup
+#         self.extra = extra
+# 
+#     def _default_alias(self):
+#         return '%s__%s' % (self.lookup, self.__class__.__name__.lower())
+#     default_alias = property(_default_alias)
+# 
+#     def add_to_query(self, query, alias, col, source, is_summary):
+#         super(Day, self).__init__(col, source, is_summary, **self.extra)
+#         query.aggregate_select[alias] = self
 
-    def _default_alias(self):
-        return '%s__%s' % (self.lookup, self.__class__.__name__.lower())
-    default_alias = property(_default_alias)
+# Lo comento porque supuestamente no se va a uar mas
+# /home/mativs/Projects/datal/workspace/managers.py
+# /home/mativs/Projects/datal/core/managers.py
 
-    def add_to_query(self, query, alias, col, source, is_summary):
-        super(Day, self).__init__(col, source, is_summary, **self.extra)
-        query.aggregate_select[alias] = self
-
-
-def next(p_iterator, p_default=None):
-    try:
-        l_next = p_iterator.next()
-    except StopIteration, l_error:
-        l_next = p_default
-
-    return l_next
-
-
-def clean_string(p_string):
-    p_string = unicodedata.normalize('NFKD', p_string).encode('ascii', 'ignore')
-    p_string = re.sub('[^a-zA-Z0-9]+', '-', p_string.strip())
-    p_string = re.sub('\-+', '-', p_string)
-    p_string = re.sub('\-$', '', p_string)
-    return p_string
-
-
-#def format_datetime(seconds, strformat="dd/mm/yyyy", strlocale="en_US"):
-#    try:
-#        # We need MILISECONDS but sometimes we receive seconds
-#        if seconds > 1000000000000: #ejemplos 1.399.488.910 | 1.399.047.696.818
-#            seconds = seconds/1000
-#        import datetime
-#        #REQUIRE sudo pip install babel
-#        myutc = datetime.datetime.utcfromtimestamp(seconds)
-#        #some patterns are differents from JS to python babel
-#        strformat = strformat.replace("DD", "EEEE").replace("D", "E").replace("yy", "Y")
-#        if strformat.find("MM") > -1:
-#            strformat = strformat.replace("MM", "MMMM")
-#        elif strformat.find("M") > -1:
-#            strformat = strformat.replace("M", "MMM")
-#        else:
-#            strformat = strformat.replace("m", "L")
-#        res = dates.format_datetime(myutc, format=strformat, locale=strlocale)
-#    except:
-#        #maybe TODO datetime.datetime.utcfromtimestamp(seconds/1000).strftime(strformat)
-#        import sys
-#        err = str(sys.exc_info())
-#        res = str(seconds) + " error " + err
-#
-#    return res
+# def next(p_iterator, p_default=None):
+#     try:
+#         l_next = p_iterator.next()
+#     except StopIteration, l_error:
+#         l_next = p_default
+# 
+#     return l_next
 
 
-#def format_number_ms(number, strformat="#,###.##", strlocale="en_US", currency="USD"):
-#    """
-#    Apply the Locale Data Markup Language Specification: http://unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns
-#    Just Babel library do that on python: http://babel.pocoo.org/docs/numbers/ / https://github.com/mitsuhiko/babel
-#    """
-#    #REQUIRE sudo pip install babel
-#    #if not unicode(number).isnumeric():
-#    #    return number #False
-#
-#    if number == "": # empty strings are BAD
-#        return 0
-#    if strformat == "":
-#        return number
-#    #maybe babe is not installed
-#    try:
-#        if (strformat.find("$") > -1 or strformat.find(u"\u00A4") > -1 or currency == ""):
-#            # strformat = unicode(strformat.replace("$", u"\u00A4"))
-#            res = numbers.format_currency(float(number), currency, format=strformat, locale=strlocale)
-#        else:
-#            res = numbers.format_decimal(float(number), format=strformat, locale=strlocale)
-#    except:
-#        import sys
-#        err = str(sys.exc_info())
-#        res = str(number) + " error " + err
-#
-#    return res
+
+# Se va porque se va a refactorear
+# /home/mativs/Projects/datal/core/datastream_manager/views.py
+
+# def jsonToGrid(p_response, p_page = '', p_limit =''):
+#     """ p_response is a core.engine.invoke resultset """
+#     l_lists = {}
+#     l_hasHeader = False
+#     l_noMoreHeaders = False
+# 
+#     try:
+#         p_response = json.loads(p_response)
+#     except:
+#         return '{"page": 1, "rows": [], "total":1}'
+# 
+#     l_lists["page"] = p_page
+#     l_lists["total"] = p_response['fLength']
+#     l_lists["rows"] = []
+# 
+#     if p_response['fType']=='ARRAY':
+#         l_i = 0
+#         l_row_i = 0
+#         for l_row_number in range(0, p_response['fRows']):
+#             l_row  = {}
+#             l_row["id"] = str(l_i)
+#             l_row["cell"] = []
+#             for l_column_number in range(0, p_response['fCols']):
+#                 l_cell = p_response['fArray'][l_i]
+# 
+#                 # TRANSFORM DE DATA
+#                 l_row["cell"].append(i18nize(l_cell))
+# 
+#                 if l_cell.has_key('fHeader') and l_noMoreHeaders == False:
+#                     l_hasHeader = True
+#                 l_i = l_i + 1
+# 
+#             l_row_i = l_row_i + 1
+# 
+#             if not l_hasHeader:
+#                 l_lists["rows"].append(l_row)
+#             else:
+#                 l_hasHeader = False
+#                 l_noMoreHeaders = True
+# 
+#     return json.dumps(l_lists)
 
 
-#def i18nize(l_cell, return_just_value = True):
-#    """
-#    apply the format requested. Cell is a common element from core.engine.invoke array
-#    Sometimes returns just the value of the cell o full cell
-#    """
-#
-#    #On numbers and dates always check
-#    #l_cell['fLocale'] and l_cell['fPattern']
-#    has_display_format = False
-#    fPattern = None # "#,###.00"
-#    fLocale = None
-#    fCurrency = None
-#
-#    if l_cell.get('fDisplayFormat', False):
-#        has_display_format = True
-#        if l_cell['fDisplayFormat'].get('fPattern',False):
-#            fPattern = l_cell['fDisplayFormat']['fPattern']
-#        if l_cell['fDisplayFormat'].get('fLocale',False):
-#            #sometimes locale come as en,us and it's wrong. We need en_US
-#            fLocale = l_cell['fDisplayFormat']['fLocale'].replace(",","_")
-#        if l_cell['fDisplayFormat'].get('fCurrency',False):
-#            fCurrency = l_cell['fDisplayFormat']['fCurrency']
-#
-#    if l_cell.get('fStr', False) and unicode(l_cell['fStr']).isnumeric() and has_display_format:
-#        l_cell['fNum'] = l_cell['fStr']
-#        l_cell['fType'] = 'NUMBER'
-#
-#    if l_cell['fType'] == 'NUMBER':
-#        dat = l_cell['fNum'] #.encode('utf-8', 'ignore')
-#        #dat = str(dat) + " // " + fPattern + " // " + fLocale + " // " + str(format_number_ms(fPattern, dat, fLocale))
-#        if has_display_format:
-#            dat = format_number_ms(dat, fPattern, fLocale, fCurrency)
-#        else:
-#            dat = format_number_ms(dat)
-#        ret = dat
-#    elif l_cell['fType'] == 'DATE':
-#        #transform seconds to real date in expected format
-#        if has_display_format:
-#            vdate = format_datetime(l_cell['fNum'], fPattern, fLocale)
-#        else:
-#            vdate = l_cell['fNum']
-#        ret = vdate
-#
-#    elif l_cell['fType'] == 'LINK':
-#        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
-#        cellval = "<a target='_blank' href='%s'>%s</a>" % (l_cell['fUri'].encode('utf-8', 'ignore'), cellval)
-#        ret = cellval
-#
-#    else:
-#        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
-#        cellval = re.sub(r'(<([^>]+)>)',' ', cellval) # in javascript was /(<([^>]+)>)/ig
-#        ret = cellval
-#
-#    if not return_just_value:
-#        ret = l_cell
-#    return ret
+# class RequestProcessor:
+# 
+#     def __init__(self, request):
+#         self.request = request
+# 
+#     def get_arguments(self, paramaters):
+# 
+#         args = {}
+# 
+#         for parameter in paramaters:
+#             key = 'pArgument%d' % parameter.position
+#             value = self.request.REQUEST.get(key, '')
+#             if value == '':
+#                 parameter.value = parameter.default
+#                 args[key] = parameter.value
+#             else:
+#                 parameter.value = unicode(value).encode('utf-8')
+#                 args[key] = parameter.value
+#                 parameter.default = parameter.value
+# 
+#         return args
+# 
+#     def get_arguments_no_validation(self, query = None):
+#         counter = 0
+# 
+#         if not query:
+#             args = {}
+#         else:
+#             args = dict(query)
+# 
+#         key = 'pArgument%d' % counter
+#         value = self.request.REQUEST.get(key, None)
+#         while value:
+#             args[key] = PrimitiveComputer().compute(value)
+#             counter += 1
+#             key = 'pArgument%d' % counter
+#             value = self.request.REQUEST.get(key, None)
+#         return args
 
-
-def jsonToGrid(p_response, p_page = '', p_limit =''):
-    """ p_response is a core.engine.invoke resultset """
-    l_lists = {}
-    l_hasHeader = False
-    l_noMoreHeaders = False
-
-    try:
-        p_response = json.loads(p_response)
-    except:
-        return '{"page": 1, "rows": [], "total":1}'
-
-    l_lists["page"] = p_page
-    l_lists["total"] = p_response['fLength']
-    l_lists["rows"] = []
-
-    if p_response['fType']=='ARRAY':
-        l_i = 0
-        l_row_i = 0
-        for l_row_number in range(0, p_response['fRows']):
-            l_row  = {}
-            l_row["id"] = str(l_i)
-            l_row["cell"] = []
-            for l_column_number in range(0, p_response['fCols']):
-                l_cell = p_response['fArray'][l_i]
-
-                # TRANSFORM DE DATA
-                l_row["cell"].append(i18nize(l_cell))
-
-                if l_cell.has_key('fHeader') and l_noMoreHeaders == False:
-                    l_hasHeader = True
-                l_i = l_i + 1
-
-            l_row_i = l_row_i + 1
-
-            if not l_hasHeader:
-                l_lists["rows"].append(l_row)
-            else:
-                l_hasHeader = False
-                l_noMoreHeaders = True
-
-    return json.dumps(l_lists)
-
-
-class RequestProcessor:
-
-    def __init__(self, request):
-        self.request = request
-
-    def get_arguments(self, paramaters):
-
-        args = {}
-
-        for parameter in paramaters:
-            key = 'pArgument%d' % parameter.position
-            value = self.request.REQUEST.get(key, '')
-            if value == '':
-                parameter.value = parameter.default
-                args[key] = parameter.value
-            else:
-                parameter.value = unicode(value).encode('utf-8')
-                args[key] = parameter.value
-                parameter.default = parameter.value
-
-        return args
-
-    def get_arguments_no_validation(self, query = None):
-        counter = 0
-
-        if not query:
-            args = {}
-        else:
-            args = dict(query)
-
-        key = 'pArgument%d' % counter
-        value = self.request.REQUEST.get(key, None)
-        while value:
-            args[key] = PrimitiveComputer().compute(value)
-            counter += 1
-            key = 'pArgument%d' % counter
-            value = self.request.REQUEST.get(key, None)
-        return args
-
-
+# Este metodo està comentado en todos lados salvo en dos revisiones
+# quizás podríamos hacer uqe una clase padre de las revisiones lo tenga y que
+# cada uno lo use.
 def get_meta_data_dict(metadata):
+    answer = {}
     if metadata:
         try:
             meta = json.loads(metadata)
+            meta = meta['field_values'] if 'field_values' in meta else []
+            for item in meta:
+                answer.update(item)
         except ValueError:
             pass
-        else:
-            try:
-                meta = meta['field_values']
-            except:
-                #import logging
-                #logger = logging.getLogger(__name__)
-                #logger.error("Fail to get field values %s -- %s" % (metadata, str(meta)))
-                meta = []
-            d = {}
-            for item in meta:
-                d.update(item)
-            return d
-    return {}
+    return answer
 
 
 def slugify(value):
