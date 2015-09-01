@@ -29,7 +29,7 @@
 	.themeTabs > ul li.active a i{display:block;}
 
 	/* Theme Numbers on tabs */
-	.themeTabs > ul li a i{color:$brand-color;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
+	.themeTabs > ul li a i{color:#333;font-size:12px;font-weight:bold;width:108px;text-shadow:0 1px 0 #fff;left:19px;top:20px;text-align:center;font-style:normal;}
 
 		/* Theme 0 */
 		.themeTabs > ul li.theme0 a .i1{width:67px;height:49px;line-height:49px;}
@@ -93,7 +93,7 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
-.configs .formBox header .num{background-color:$brand-color;color:$color-base;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
+.configs .formBox header .num{color:#333;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
 .configs .formBox header h1{color:$font-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
 .configs .formBox header h2{font-size:11px;color:#a2a1a1;}
@@ -168,7 +168,7 @@
 
 /* Buttons Section */
 .configs .buttonsSection fieldset .bottomRow{padding-top:11px;}
-.configs .buttonsSection fieldset .bottomRow .button{margin-top:4px;color:#3a3a3a;}
+.configs .buttonsSection fieldset .bottomRow .button{margin-top:4px;}
 .configs .buttonsSection fieldset .buttonsPerRow label{padding:9px 8px 0;}
 .configs .buttonsSection fieldset .buttonsPerRow input.field{width:40px;text-align:center;font-size:12px;}
 

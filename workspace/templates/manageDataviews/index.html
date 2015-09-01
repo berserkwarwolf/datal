@@ -69,14 +69,14 @@
 <div class="context-menu clearfix">
   
   <!-- Column Left -->
-  <div class="col-md-7">    
+  <div class="col-xs-7">    
     
     <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datastreams }})</span></h1>
 
   </div>
 
   <!-- Column Right -->
-  <div class="col-md-5 context-buttons clearfix">
+  <div class="col-xs-5 context-buttons clearfix">
     
     <a class="button primary FR" title="{% trans 'APP-ADDNEWDATAVIEW-TEXT' %}">{% trans 'APP-ADDNEWDATAVIEW-TEXT' %}</a>
 
@@ -94,7 +94,7 @@
       <div class="wrapper3">
 
         <!-- Filters -->
-        <section class="filters-view col-md-2"></section>
+        <section class="filters-view col-xs-2"></section>
 
         <!-- List -->
         {% include "manageDataviews/list.html" %}
@@ -109,7 +109,7 @@
 </div>
 
 <!-- No results -->
-<div class="no-results-view hidden col-md-12">
+<div class="no-results-view hidden col-xs-12">
   <div class="zeroResults">
     <div class="zeroIcon zeroDataviews"></div>
     <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>

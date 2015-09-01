@@ -19,7 +19,7 @@
 
 {% block sectionTitle %}
 <div class="context-menu clearfix">
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <h1>{% trans "APP-BRANDING-TEXT" %}</h1>
     </div>
 </div>
@@ -29,7 +29,7 @@
 
     {% include "admin_manager/tabs.html" %}
 
-    <div class="formContainer settingsContent col-md-12 clearfix">
+    <div class="formContainer settingsContent col-xs-12 clearfix">
         <form id="id_adminBrandingForm" action="{{form.action}}" method="post">
 
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
@@ -211,7 +211,7 @@
 
             </div>
 
-            <div class="buttons center col-md-12">
+            <div class="buttons center col-xs-12">
                 <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}"/>
             </div>
 

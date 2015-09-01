@@ -12,7 +12,7 @@
 
 {% block sectionTitle %}
 <div class="context-menu clearfix">
-    <div class="col-md-12">
+    <div class="col-xs-12">
         <h1>{% trans "WORKSPACE-SOCIAL-SETTINGS" %}</h1>
     </div>
 </div>
@@ -20,7 +20,7 @@
 
 {% block content %}
     {% include "admin_manager/tabs.html" %}
-    <div class="formContainer col-md-12">
+    <div class="formContainer col-xs-12">
         <form action="{{form.action}}" method="post" id="id_adminSocialForm">
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
