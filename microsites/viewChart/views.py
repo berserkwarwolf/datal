@@ -12,6 +12,8 @@ from core.daos.visualizations import VisualizationHitsDAO
 from microsites.viewChart import forms
 from microsites.helpers import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
+from django.template import loader, Context
+
 import urllib
 import json
 import logging
@@ -28,12 +30,15 @@ def hits_stats(request, vz_id, channel_type=None):
 
 
     dao=VisualizationHitsDAO(vz)
-    hits=dao.count_by_days(30, channel_type)
+    hits=dao.count_by_days(31, channel_type)
 
     field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
 
 
-    return render_to_response('viewChart/chart_hits_stats.html', {'data':hits, 'field_names': field_names, "request": request})
+    t = loader.get_template('viewChart/chart_hits_stats.html') 
+    c = Context({'data':hits, 'field_names': field_names, "request": request})
+    return HttpResponse(t.render(c), content_type="application/json")
+    #return render_to_response('viewChart/chart_hits_stats.html', {'data':hits, 'field_names': field_names, "request": request}, content_type="application/json")
 
 
 

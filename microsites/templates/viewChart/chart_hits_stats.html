@@ -1,6 +1,1 @@
-{"status": "ok",
-"chart": [["{{ names.0 }}", "{{ names.1 }}"],
-{% for item in data%}
-["{{item.fecha.isoformat}}", {{ item.hits }}],
-{% endfor %}
-]}
+{"status": "ok", "chart": [["{{ field_names.0 }}", "{{ field_names.1 }}"]{% for item in data%}, ["{{item.fecha.isoformat}}", {{ item.hits }}]{% endfor %}]}
