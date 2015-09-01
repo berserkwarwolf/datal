@@ -3084,3 +3084,21 @@ msgstr "3. Encabezado/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
 msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
+msgstr "Seleccione los valores para el mapa (columnas o filas)"
+
+msgid "APP-CREATE-MAP-TEXT"
+msgstr "Crear mapa"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT"
+msgstr "1. Latitud"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT"
+msgstr "2. Longitud"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
+msgstr "3. Información de marcadores"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
+msgstr "Es lo que verás en el tooltip del mapa"
