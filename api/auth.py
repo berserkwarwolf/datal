@@ -1,8 +1,7 @@
 from django.db.models import Q
 from django.conf import settings
-from core.http import get_domain
 from core.models import Application, Account, User
-from core.helpers import get_domain as get_domain_by_account_id
+from core.helpers import get_domain, get_domain_by_request
 from urlparse import urlparse
 from rest_framework import authentication
 from rest_framework import exceptions
@@ -40,7 +39,7 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
                 'account': account,
                 'preferences': preferences,
                 'language': preferences['account.language'],
-                'microsite_domain': get_domain_by_account_id(account.id),
+                'microsite_domain': get_domain(account.id),
             }
         )
     
@@ -68,7 +67,7 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
         try:
             return Account.objects.filter(
                 preference__key='account.api.domain', 
-                preference__value=get_domain(request), 
+                preference__value=get_domain_by_request(request), 
                 status = Account.ACTIVE).first()
         except Account.DoesNotExist:
             return None

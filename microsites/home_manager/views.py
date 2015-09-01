@@ -1,5 +1,5 @@
 from core.shortcuts import render_to_response
-from core.http import get_domain
+from core.helpers import get_domain_by_request
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 
@@ -11,7 +11,7 @@ def action_sitemap(request):
     account = request.account
     params = request.GET
 
-    domain = get_domain(request)
+    domain = get_domain_by_request(request)
     now = datetime.datetime.now()
     dss = DataStreamDBDAO().query(account_id=account.id, language=language, filters_dict=dict(status=[3]))
     vss = VisualizationDBDAO().query(account_id=account.id, language=language, filters_dict=dict(status=[3]))

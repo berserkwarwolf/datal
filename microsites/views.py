@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.choices import StatusChoices
-from core.http import get_domain
+from core.helpers import get_domain_by_request
 from core.shortcuts import render_to_response
 
 import re
@@ -107,7 +107,7 @@ def action_catalog_xml(request):
     language = request.auth_manager.language
     preferences = request.preferences
 
-    domain = get_domain(request)
+    domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
     developers_link = 'http://' + domain + reverse('developer_manager.action_query')

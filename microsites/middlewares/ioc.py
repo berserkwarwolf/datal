@@ -6,15 +6,14 @@ from django.http import Http404
 from django.shortcuts import redirect
 
 from core.models import Account
-from core.http import get_domain
-from core.helpers import get_domain_with_protocol
+from core.helpers import get_domain, get_domain_with_protocol
 
 
 class DependencyInjector(object):
     """ Gets the current site & account """
 
     def process_request(self, request):
-        domain = get_domain(request)
+        domain = get_domain_by_request(request)
         request.bucket_name = settings.AWS_BUCKET_NAME
 
         try:

@@ -70,116 +70,116 @@ def clean_string(p_string):
     return p_string
 
 
-def format_datetime(seconds, strformat="dd/mm/yyyy", strlocale="en_US"):
-    try:
-        # We need MILISECONDS but sometimes we receive seconds
-        if seconds > 1000000000000: #ejemplos 1.399.488.910 | 1.399.047.696.818
-            seconds = seconds/1000
-        import datetime
-        #REQUIRE sudo pip install babel
-        myutc = datetime.datetime.utcfromtimestamp(seconds)
-        #some patterns are differents from JS to python babel
-        strformat = strformat.replace("DD", "EEEE").replace("D", "E").replace("yy", "Y")
-        if strformat.find("MM") > -1:
-            strformat = strformat.replace("MM", "MMMM")
-        elif strformat.find("M") > -1:
-            strformat = strformat.replace("M", "MMM")
-        else:
-            strformat = strformat.replace("m", "L")
-        res = dates.format_datetime(myutc, format=strformat, locale=strlocale)
-    except:
-        #maybe TODO datetime.datetime.utcfromtimestamp(seconds/1000).strftime(strformat)
-        import sys
-        err = str(sys.exc_info())
-        res = str(seconds) + " error " + err
-
-    return res
-
-
-def format_number_ms(number, strformat="#,###.##", strlocale="en_US", currency="USD"):
-    """
-    Apply the Locale Data Markup Language Specification: http://unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns
-    Just Babel library do that on python: http://babel.pocoo.org/docs/numbers/ / https://github.com/mitsuhiko/babel
-    """
-    #REQUIRE sudo pip install babel
-    #if not unicode(number).isnumeric():
-    #    return number #False
-
-    if number == "": # empty strings are BAD
-        return 0
-    if strformat == "":
-        return number
-    #maybe babe is not installed
-    try:
-        if (strformat.find("$") > -1 or strformat.find(u"\u00A4") > -1 or currency == ""):
-            # strformat = unicode(strformat.replace("$", u"\u00A4"))
-            res = numbers.format_currency(float(number), currency, format=strformat, locale=strlocale)
-        else:
-            res = numbers.format_decimal(float(number), format=strformat, locale=strlocale)
-    except:
-        import sys
-        err = str(sys.exc_info())
-        res = str(number) + " error " + err
-
-    return res
+#def format_datetime(seconds, strformat="dd/mm/yyyy", strlocale="en_US"):
+#    try:
+#        # We need MILISECONDS but sometimes we receive seconds
+#        if seconds > 1000000000000: #ejemplos 1.399.488.910 | 1.399.047.696.818
+#            seconds = seconds/1000
+#        import datetime
+#        #REQUIRE sudo pip install babel
+#        myutc = datetime.datetime.utcfromtimestamp(seconds)
+#        #some patterns are differents from JS to python babel
+#        strformat = strformat.replace("DD", "EEEE").replace("D", "E").replace("yy", "Y")
+#        if strformat.find("MM") > -1:
+#            strformat = strformat.replace("MM", "MMMM")
+#        elif strformat.find("M") > -1:
+#            strformat = strformat.replace("M", "MMM")
+#        else:
+#            strformat = strformat.replace("m", "L")
+#        res = dates.format_datetime(myutc, format=strformat, locale=strlocale)
+#    except:
+#        #maybe TODO datetime.datetime.utcfromtimestamp(seconds/1000).strftime(strformat)
+#        import sys
+#        err = str(sys.exc_info())
+#        res = str(seconds) + " error " + err
+#
+#    return res
 
 
-def i18nize(l_cell, return_just_value = True):
-    """
-    apply the format requested. Cell is a common element from core.engine.invoke array
-    Sometimes returns just the value of the cell o full cell
-    """
+#def format_number_ms(number, strformat="#,###.##", strlocale="en_US", currency="USD"):
+#    """
+#    Apply the Locale Data Markup Language Specification: http://unicode.org/reports/tr35/tr35-numbers.html#Number_Format_Patterns
+#    Just Babel library do that on python: http://babel.pocoo.org/docs/numbers/ / https://github.com/mitsuhiko/babel
+#    """
+#    #REQUIRE sudo pip install babel
+#    #if not unicode(number).isnumeric():
+#    #    return number #False
+#
+#    if number == "": # empty strings are BAD
+#        return 0
+#    if strformat == "":
+#        return number
+#    #maybe babe is not installed
+#    try:
+#        if (strformat.find("$") > -1 or strformat.find(u"\u00A4") > -1 or currency == ""):
+#            # strformat = unicode(strformat.replace("$", u"\u00A4"))
+#            res = numbers.format_currency(float(number), currency, format=strformat, locale=strlocale)
+#        else:
+#            res = numbers.format_decimal(float(number), format=strformat, locale=strlocale)
+#    except:
+#        import sys
+#        err = str(sys.exc_info())
+#        res = str(number) + " error " + err
+#
+#    return res
 
-    #On numbers and dates always check
-    #l_cell['fLocale'] and l_cell['fPattern']
-    has_display_format = False
-    fPattern = None # "#,###.00"
-    fLocale = None
-    fCurrency = None
 
-    if l_cell.get('fDisplayFormat', False):
-        has_display_format = True
-        if l_cell['fDisplayFormat'].get('fPattern',False):
-            fPattern = l_cell['fDisplayFormat']['fPattern']
-        if l_cell['fDisplayFormat'].get('fLocale',False):
-            #sometimes locale come as en,us and it's wrong. We need en_US
-            fLocale = l_cell['fDisplayFormat']['fLocale'].replace(",","_")
-        if l_cell['fDisplayFormat'].get('fCurrency',False):
-            fCurrency = l_cell['fDisplayFormat']['fCurrency']
-
-    if l_cell.get('fStr', False) and unicode(l_cell['fStr']).isnumeric() and has_display_format:
-        l_cell['fNum'] = l_cell['fStr']
-        l_cell['fType'] = 'NUMBER'
-
-    if l_cell['fType'] == 'NUMBER':
-        dat = l_cell['fNum'] #.encode('utf-8', 'ignore')
-        #dat = str(dat) + " // " + fPattern + " // " + fLocale + " // " + str(format_number_ms(fPattern, dat, fLocale))
-        if has_display_format:
-            dat = format_number_ms(dat, fPattern, fLocale, fCurrency)
-        else:
-            dat = format_number_ms(dat)
-        ret = dat
-    elif l_cell['fType'] == 'DATE':
-        #transform seconds to real date in expected format
-        if has_display_format:
-            vdate = format_datetime(l_cell['fNum'], fPattern, fLocale)
-        else:
-            vdate = l_cell['fNum']
-        ret = vdate
-
-    elif l_cell['fType'] == 'LINK':
-        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
-        cellval = "<a target='_blank' href='%s'>%s</a>" % (l_cell['fUri'].encode('utf-8', 'ignore'), cellval)
-        ret = cellval
-
-    else:
-        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
-        cellval = re.sub(r'(<([^>]+)>)',' ', cellval) # in javascript was /(<([^>]+)>)/ig
-        ret = cellval
-
-    if not return_just_value:
-        ret = l_cell
-    return ret
+#def i18nize(l_cell, return_just_value = True):
+#    """
+#    apply the format requested. Cell is a common element from core.engine.invoke array
+#    Sometimes returns just the value of the cell o full cell
+#    """
+#
+#    #On numbers and dates always check
+#    #l_cell['fLocale'] and l_cell['fPattern']
+#    has_display_format = False
+#    fPattern = None # "#,###.00"
+#    fLocale = None
+#    fCurrency = None
+#
+#    if l_cell.get('fDisplayFormat', False):
+#        has_display_format = True
+#        if l_cell['fDisplayFormat'].get('fPattern',False):
+#            fPattern = l_cell['fDisplayFormat']['fPattern']
+#        if l_cell['fDisplayFormat'].get('fLocale',False):
+#            #sometimes locale come as en,us and it's wrong. We need en_US
+#            fLocale = l_cell['fDisplayFormat']['fLocale'].replace(",","_")
+#        if l_cell['fDisplayFormat'].get('fCurrency',False):
+#            fCurrency = l_cell['fDisplayFormat']['fCurrency']
+#
+#    if l_cell.get('fStr', False) and unicode(l_cell['fStr']).isnumeric() and has_display_format:
+#        l_cell['fNum'] = l_cell['fStr']
+#        l_cell['fType'] = 'NUMBER'
+#
+#    if l_cell['fType'] == 'NUMBER':
+#        dat = l_cell['fNum'] #.encode('utf-8', 'ignore')
+#        #dat = str(dat) + " // " + fPattern + " // " + fLocale + " // " + str(format_number_ms(fPattern, dat, fLocale))
+#        if has_display_format:
+#            dat = format_number_ms(dat, fPattern, fLocale, fCurrency)
+#        else:
+#            dat = format_number_ms(dat)
+#        ret = dat
+#    elif l_cell['fType'] == 'DATE':
+#        #transform seconds to real date in expected format
+#        if has_display_format:
+#            vdate = format_datetime(l_cell['fNum'], fPattern, fLocale)
+#        else:
+#            vdate = l_cell['fNum']
+#        ret = vdate
+#
+#    elif l_cell['fType'] == 'LINK':
+#        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
+#        cellval = "<a target='_blank' href='%s'>%s</a>" % (l_cell['fUri'].encode('utf-8', 'ignore'), cellval)
+#        ret = cellval
+#
+#    else:
+#        cellval = l_cell['fStr'].encode('utf-8', 'ignore')
+#        cellval = re.sub(r'(<([^>]+)>)',' ', cellval) # in javascript was /(<([^>]+)>)/ig
+#        ret = cellval
+#
+#    if not return_just_value:
+#        ret = l_cell
+#    return ret
 
 
 def jsonToGrid(p_response, p_page = '', p_limit =''):
@@ -344,34 +344,34 @@ def gravatar_url(email, size):
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
 
 
-def get_file_type_from_extension(extension):
-
-    if extension.lower() in ["doc", "docx", "docm", "dotx", "dotm"]:
-        return SourceImplementationChoices.DOC
-    elif extension.lower() in ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"]:
-        return SourceImplementationChoices.XLS
-    elif extension.lower() in ["odt"]:
-        return SourceImplementationChoices.ODT
-    elif extension.lower() in ["ods"]:
-        return SourceImplementationChoices.ODS
-    elif extension.lower() in ["pdf"]:
-        return SourceImplementationChoices.PDF
-    elif extension.lower() in ["html", "htm"]:
-        return SourceImplementationChoices.HTML
-    elif extension.lower() in ["txt"]:
-        return SourceImplementationChoices.TXT
-    elif extension.lower() in ["csv"]:
-        return SourceImplementationChoices.CSV
-    elif extension.lower() in ["xml"]:
-        return SourceImplementationChoices.XML
-    elif extension.lower() in ["kml"]:
-        return SourceImplementationChoices.KML
-    elif extension.lower() in ["kmz"]:
-        return SourceImplementationChoices.KMZ
-    elif extension.lower() in ["png", "jpg", "jpeg", "gif"]:
-        return SourceImplementationChoices.IMAGE
-    elif extension.lower() in ["zip", "gz", "tar"]:
-        return SourceImplementationChoices.ZIP
+#def get_file_type_from_extension(extension):
+#
+#    if extension.lower() in ["doc", "docx", "docm", "dotx", "dotm"]:
+#        return SourceImplementationChoices.DOC
+#    elif extension.lower() in ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"]:
+#        return SourceImplementationChoices.XLS
+#    elif extension.lower() in ["odt"]:
+#        return SourceImplementationChoices.ODT
+#    elif extension.lower() in ["ods"]:
+#        return SourceImplementationChoices.ODS
+#    elif extension.lower() in ["pdf"]:
+#        return SourceImplementationChoices.PDF
+#    elif extension.lower() in ["html", "htm"]:
+#        return SourceImplementationChoices.HTML
+#    elif extension.lower() in ["txt"]:
+#        return SourceImplementationChoices.TXT
+#    elif extension.lower() in ["csv"]:
+#        return SourceImplementationChoices.CSV
+#    elif extension.lower() in ["xml"]:
+#        return SourceImplementationChoices.XML
+#    elif extension.lower() in ["kml"]:
+#        return SourceImplementationChoices.KML
+#    elif extension.lower() in ["kmz"]:
+#        return SourceImplementationChoices.KMZ
+#    elif extension.lower() in ["png", "jpg", "jpeg", "gif"]:
+#        return SourceImplementationChoices.IMAGE
+#    elif extension.lower() in ["zip", "gz", "tar"]:
+#        return SourceImplementationChoices.ZIP
 
 
 def get_domain(account_id):
@@ -396,17 +396,17 @@ def get_domain_by_request(request, default_domain = ''):
     return domain
 
 
-def update_dashboard_widgets_and_revisions(widgets):
-
-   for wdgt in widgets:
-       order = wdgt.order
-       dashboard_widgets = DashboardWidget.objects.filter(order__gt=order, dashboard_revision__id=wdgt.dashboard_revision.id)
-       for widget in dashboard_widgets:
-           order = widget.order - 1
-           widget.order   = order
-           widget.save()
-
-   widgets.delete()
+#def update_dashboard_widgets_and_revisions(widgets):
+#
+#   for wdgt in widgets:
+#       order = wdgt.order
+#       dashboard_widgets = DashboardWidget.objects.filter(order__gt=order, dashboard_revision__id=wdgt.dashboard_revision.id)
+#       for widget in dashboard_widgets:
+#           order = widget.order - 1
+#           widget.order   = order
+#           widget.save()
+#
+#   widgets.delete()
 
 
 def set_dataset_impl_type_nice(item):
@@ -446,13 +446,13 @@ def remove_duplicated_filters(list_of_resources):
     return removed
 
 
-def datatable_ordering_helper(query, col_number, ascending, order_columns):
-    col_name = order_columns[col_number]
-    if col_name:
-        if not ascending:
-            col_name = '-'+order_columns[col_number]
-        query = query.order_by(col_name)
-    return query
+#def datatable_ordering_helper(query, col_number, ascending, order_columns):
+#    col_name = order_columns[col_number]
+#    if col_name:
+#        if not ascending:
+#            col_name = '-'+order_columns[col_number]
+#        query = query.order_by(col_name)
+#    return query
 
 
 def generate_ajax_form_errors(form):

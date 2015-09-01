@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
-# from babel import numbers, dates
-# from core.helpers import format_datetime
 from datetime import datetime
-from core.helpers import format_number_ms
+#from core.helpers import format_number_ms
 import re
 
 
@@ -23,49 +21,49 @@ def datefy(value, arg="%Y-%m-%d"):
     return dat
 
 
-@register.filter(name='monefy', arg="")
-def monefy(value, arg=''):
-    strformat="#,###.##"
-    strlocale="en_US"
-    currency="USD"
-    vals = arg.split("|")
-    count = 0
-    for val in vals:
-        if count == 0 and val != "":
-            strformat = val
-        if count == 1 and val != "":
-            strlocale = val
-        if count == 2 and val != "":
-            currency = val
+#@register.filter(name='monefy', arg="")
+#def monefy(value, arg=''):
+#    strformat="#,###.##"
+#    strlocale="en_US"
+#    currency="USD"
+#    vals = arg.split("|")
+#    count = 0
+#    for val in vals:
+#        if count == 0 and val != "":
+#            strformat = val
+#        if count == 1 and val != "":
+#            strlocale = val
+#        if count == 2 and val != "":
+#            currency = val
+#
+#        count = count + 1
+#
+#    value = format_number_ms(value, strformat, strlocale, currency)
+#    return value
 
-        count = count + 1
 
-    value = format_number_ms(value, strformat, strlocale, currency)
-    return value
-
-
-@register.filter(name='numberfy', arg="")
-def numberfy(value, arg=''):
-    """
-    it's the same on moneyfy but last paramater "currency" is empty
-    """
-    strformat="#,###.##"
-    strlocale="en_US"
-
-    vals = arg.split("|")
-    count = 0
-    for val in vals:
-        if count == 0 and val != "":
-            strformat = val
-        if count == 1 and val != "":
-            strlocale = val
-
-        count = count + 1
-    try:
-        value = format_number_ms(value, strformat, strlocale, "")
-    except ValueError:
-        value = 0
-    return value
+#@register.filter(name='numberfy', arg="")
+#def numberfy(value, arg=''):
+#    """
+#    it's the same on moneyfy but last paramater "currency" is empty
+#    """
+#    strformat="#,###.##"
+#    strlocale="en_US"
+#
+#    vals = arg.split("|")
+#    count = 0
+#    for val in vals:
+#        if count == 0 and val != "":
+#            strformat = val
+#        if count == 1 and val != "":
+#            strlocale = val
+#
+#        count = count + 1
+#    try:
+#        value = format_number_ms(value, strformat, strlocale, "")
+#    except ValueError:
+#        value = 0
+#    return value
 
 
 @register.filter(name='isMoney')
