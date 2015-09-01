@@ -116,96 +116,67 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
 /* Gráficos */
 .preview-container {
-  padding:15px 40px 15px 0;
 
+  /* Contenedor de vista previa */
   .chartContent,
-  .mapContent{border:1px solid $color-base-extra-light;float:left;width:100%;padding:15px;cursor:pointer;
+  .mapContent{border:1px solid $color-base-extra-light;width:600px;height:480px;cursor:pointer;position:relative;margin:0 auto;
+    &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
-    &:hover .chartContentPreview p{color:$font-color-base;}
   }
 
-  .chartContentPreview,
-  .chartLeyendPreview{min-height:370px;position:relative;}
+  p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
-  .axisYNamePreview p{-ms-transform:rotate(270deg);-webkit-transform:rotate(270deg);transform:rotate(270deg);margin-top:190px;}
-
-  .chartContentPreview{
-    background:url(/static/workspace/images/createVisualization/previewColumn.png) no-repeat center center / auto 90%;border-left:1px solid $color-base-extra-light;border-bottom:1px solid $color-base-extra-light;
-
-    p{font-size:$font-size-xl;}
+  /* Vistas previas */
+  .previewArea{
+    background-image:url(/static/workspace/images/createVisualization/previewArea.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewArea.svg);
   }
-
-  .axisXNamePreview{height:40px;}
-
-  .chartLeyendPreview{
-    padding-top:150px;position:relative;
-
-    p{position:relative;text-align:left;}
-    .leyend{width:30px;height:15px;display:block;background:#f6f5f3;margin:15px 0;}
+  .previewLine{
+    background-image:url(/static/workspace/images/createVisualization/previewLine.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewLine.svg);
   }
-
-  input,
-  input:focus{background:none;border:none;outline:none;box-shadow:none;text-align:center;line-height:27px;font-size:$font-size-l;padding:0;}
-
-  p{text-align:center;font-size:$font-size-m;line-height:23px; position:absolute;top:0;bottom:0;left:0;right:0;  width:auto;height:10%;margin:auto;color:$font-color-light;}
-
+  .previewColumn{
+    background-image:url(/static/workspace/images/createVisualization/previewColumn.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewColumn.svg);
+  }
+  .previewBar{
+    background-image:url(/static/workspace/images/createVisualization/previewBar.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewBar.svg);
+  }
+  .previewPie{
+    background-image:url(/static/workspace/images/createVisualization/previewPie.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewPie.svg);
+  }
 } 
 
 /* Modal */
-.modal{position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;}
+.modal{
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
 
+  /* Sidebar */
+  input.hot-sel-1,
+  td.hot-sel-1{background-color:#86ad7f;}
 
-/* DataTable View */
-.table-view {
-  height: 600px;
-  overflow: hidden;
-  width: 900px;
-}
+  input.hot-sel-2,
+  td.hot-sel-2{background-color:#ffb796;}
 
-input.hot-sel-1, td.hot-sel-1 {
-  background-color: #86ad7f;
-}
-input.hot-sel-2, td.hot-sel-2 {
-  background-color: #ffb796;
-}
-input.hot-sel-3, td.hot-sel-3 {
-  background-color: #d6ebff;
-}
-input.hot-sel-4, td.hot-sel-4 {
-  background-color: rgb(51,160,44);
-}
-input.hot-sel-5, td.hot-sel-5 {
-  background-color: rgb(251,154,153);
-}
-input.hot-sel-6, td.hot-sel-6 {
-  background-color: rgb(227,26,28);
-}
-input.hot-sel-7, td.hot-sel-7 {
-  background-color: rgb(253,191,111);
-}
-input.hot-sel-8, td.hot-sel-8 {
-  background-color: rgb(255,127,0);
-}
-input.hot-sel-9, td.hot-sel-9 {
-  background-color: rgb(202,178,214);
-}
-input.hot-sel-10, td.hot-sel-10 {
-  background-color: rgb(106,61,154);
-}
-input.hot-sel-11, td.hot-sel-11 {
-  background-color: rgb(255,255,153);
-}
-input.hot-sel-12, td.hot-sel-12 {
-  background-color: rgb(177,89,40);
-}
+  input.hot-sel-3, 
+  td.hot-sel-3{background-color:#d6ebff;}
 
-$table-selected-color: rgba(227, 250, 41, 0.24);
+  input.active {
+    line-height: 2em;
+    font-weight: bold;
+    background-color: $modal-table-selected-color;
+  }
+  .handsontable td.area {
+    background: $modal-table-selected-color;
+  }
 
-input.active {
-  line-height: 2em;
-  font-weight: bold;
-  background-color: $table-selected-color;
-}
-.handsontable td.area {
-  background: $table-selected-color;
+  /* Tabla */
+  .table-view {
+    height: 600px;
+    overflow: hidden;
+    width: 900px;
+  }
+
 }

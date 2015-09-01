@@ -3034,17 +3034,8 @@ msgstr "Asignado a un valor previo"
 msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
 msgstr "Asignado a un valor dado"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-Y-AXIS-TEXT"
-msgstr "Eje Y"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-X-AXIS-TEXT"
-msgstr "Eje X"
-
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
 msgstr "Seleccione los datos que desee representar"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-REFERENCES-TEXT"
-msgstr "Referencias"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
 msgstr "Origen de la fuente de datos"
@@ -3075,3 +3066,39 @@ msgstr "Crea un mapa de puntos"
 
 msgid "APP-CREATE-MAP-DATA-TITLE"
 msgstr "Datos del mapa"
+
+msgid "APP-GRAPH-TEXT"
+msgstr "Graficar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
+msgstr "1. ¿Cuáles son los intervalos con datos?"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
+msgstr "2. Etiquetas (Eje X)"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
+msgstr "Las categorías a comparar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
+msgstr "3. Encabezado/s"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
+msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
+msgstr "Seleccione los valores para el mapa (columnas o filas)"
+
+msgid "APP-CREATE-MAP-TEXT"
+msgstr "Crear mapa"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT"
+msgstr "1. Latitud"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT"
+msgstr "2. Longitud"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
+msgstr "3. Información de marcadores"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
+msgstr "Es lo que verás en el tooltip del mapa"
