@@ -1,5 +1,6 @@
 /*DATA STREAM FORM*/
 .dataStreamForm .form .row{padding-bottom:20px;}
+.dataStreamForm .title{padding-left:20px !important;}
 .dataStreamForm .form  .formErrorMessageContainer{float:left;}
 .dataStreamForm .form  .ast{float:left;padding-left:4px;display:block;color:#ff3300;font-size:14px;}
 .dataStreamForm .form p.tip{clear:both;padding-bottom:0;}
