@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.views.decorators.clickjacking import xframe_options_exempt
-from core.helpers import RequestProcessor, PreviewProcessor
+from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
 from core.docs import VZ
@@ -127,35 +127,3 @@ def action_invoke(request):
     else:
         return HttpResponse('Error!')
 
-def action_preview(request):
-
-    form = forms.PreviewForm(request.GET)
-    if form.is_valid():
-        preferences = request.preferences
-
-        query = PreviewProcessor(request).get_arguments(visualization_revision.parameters)
-
-        query['pId'] = form.cleaned_data.get('visualization_revision_id')
-
-        limit = form.cleaned_data.get('limit')
-        if limit is not None:
-            query['pLimit'] = limit
-
-        page = form.cleaned_data.get('page')
-        if page is not None:
-            query['pPage'] = page
-
-        bounds = form.cleaned_data.get('bounds')
-        if bounds is not None:
-            query['pBounds'] = bounds
-
-        zoom = form.cleaned_data.get('zoom')
-        if zoom is not None:
-            query['pZoom'] = zoom
-
-        result, content_type = preview_chart(query)
-
-        return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Error!')
-    

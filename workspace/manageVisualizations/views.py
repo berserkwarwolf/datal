@@ -13,7 +13,7 @@ from core.auth.decorators import login_required,privilege_required
 from core.helpers import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import *
-from core.engine import invoke
+from core.engine import invoke, preview_chart
 from core.helpers import RequestProcessor
 from core.choices import *
 from core.docs import VZ, DT
@@ -302,3 +302,70 @@ def edit(request, datastream_revision_id=None):
             )
 
             return JSONHttpResponse(json.dumps(response))
+
+
+def preview(request):
+
+    form = forms.PreviewForm(request.GET)
+    if form.is_valid():
+        preferences = request.preferences
+
+        datastreamrevision_id  = form.cleaned_data.get('id')
+
+        try:
+            datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        except:
+            raise Http404
+        else:
+
+            query = RequestProcessor(request).get_arguments(datastream.parameters)
+
+            query['pId'] = datastreamrevision_id
+
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = limit
+
+            page = form.cleaned_data.get('page')
+            if page is not None:
+                query['pPage'] = page
+
+            bounds = form.cleaned_data.get('bounds')
+            if bounds is not None:
+                query['pBounds'] = bounds
+
+            zoom = form.cleaned_data.get('zoom')
+            if zoom is not None:
+                query['pZoom'] = zoom
+
+            query['pNullValueAction'] = forms.cleaned_data.get('null_action')
+            query['pNullValuePreset'] = forms.cleaned_data.get('null_preset')
+
+            query['pData'] = forms.cleaned_data.get('data')
+
+            labels = forms.cleaned_data.get('labels')
+            if lables is not None:
+                query['pLabelSelection'] = labels
+
+            headers = forms.cleaned_data.get('headers')
+            if headers is not None:
+                query['pHeaderSelection'] = headers
+
+            lat = forms.cleaned_data.get('lat')
+            if lat is not None:
+                query['pLatitudSelection'] = lat
+
+            long = forms.cleaned_data.get('long')
+            if long is not None:
+                query['pLongitudSelection'] = long
+
+            traces = forms.cleaned_data.get('traces')
+            if traces is not None:
+                query['pTraceSelection'] = traces
+
+            result, content_type = preview_chart(query)
+
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Error!')
+
