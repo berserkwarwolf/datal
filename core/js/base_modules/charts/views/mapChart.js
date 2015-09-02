@@ -12,9 +12,6 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataRender: null,
     styles: {},
     initialize: function(){
-        if (this.model.get('type') !== 'map') {
-            console.error('A Map model must be suplied');
-        }
         this.bindEvents();
         this.createCoogleMapInstance();
     },
@@ -149,12 +146,12 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     createMapPolyline: function (paths, styles) {
-        //  return new google.maps.Polyline({
-        //     paths: paths,
-        //     strokeColor: polyStyle.strokeColor,
-        //     strokeOpacity: polyStyle.strokeOpacity,
-        //     strokeWeight: polyStyle.strokeWeight
-        // });
+        return new google.maps.Polyline({
+            paths: paths,
+            strokeColor: styles.strokeColor,
+            strokeOpacity: styles.strokeOpacity,
+            strokeWeight: styles.strokeWeight
+        });
     },
 
     /**

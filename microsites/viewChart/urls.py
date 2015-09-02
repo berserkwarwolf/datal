@@ -2,7 +2,6 @@ from django.conf.urls import *
 from microsites.viewChart.views import *
 
 urlpatterns = patterns('',
-    url(r'^chart_test/$', 'microsites.viewChart.views.action_charttest', name='chart_manager.action_charttest'),
     url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.viewChart.views.action_view', name='chart_manager.action_view'),
 
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.datastream_manager.views.action_download', name='datastream_manager.action_download'),

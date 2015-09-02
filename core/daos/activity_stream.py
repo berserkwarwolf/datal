@@ -28,8 +28,8 @@ class ActivityStreamDAO:
                 l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_VISUALIZATION:
-                l_permalink = LocalHelper.build_permalink('manageVisualizations.view',
-                                                          '&visualization_revision_id=' + str(revision_id))
+                l_permalink = reverse('manageVisualizations.view', urlconf='workspace.urls',
+                                      kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_DATASET:
                 l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})

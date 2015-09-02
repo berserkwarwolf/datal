@@ -25,6 +25,8 @@ from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.daos.visualizations import VisualizationDBDAO
 
+logger = logging.getLogger(__name__)
+
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +40,7 @@ def list(request):
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
-    print(resources)
+    logger.info(resources)
     for resource in resources:
         resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -196,15 +198,6 @@ def create(request, viz_type='index'):
             published=False
         )
 
-        # if not index the load related view
-        #if viz_type != 'index':
-        #    form = InitializeChartForm(request.GET)
-        #    if not form.is_valid():
-        #        raise DatastreamRequiredException("Can't create visualization without related dataview")
-        #
-        #    dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
-        #    dataview = dao.get()
-            
         return render_to_response('createVisualization/index.html', dict(
             request=request,
             datastream_revision=datastream_rev
@@ -212,26 +205,31 @@ def create(request, viz_type='index'):
 
     elif request.method == 'POST':
         """ save new or update dataset """
-        form = CreateVisualizationForm(request.POST, prefix='visualization')
+        # Valido que llegue el ID de la revision del datastream
+        datastream_rev_id = request.GET.get('datastream_revision_id', None)
+        if not datastream_rev_id:
+            raise Http404
+        datastream_rev = DataStreamRevision.objects.get(pk=datastream_rev_id)
 
+        # Formulario
+        form = VisualizationForm(request.POST)
         if not form.is_valid():
-            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        datastream_revision = VisualizationRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
+        lifecycle = VisualizationLifeCycleManager(user=request.user)
+        visualization_rev = lifecycle.create(
+            datastream_rev=datastream_rev,
+            language=request.auth_manager.language,
+            **form.cleaned_data
+        )
 
-        visualization = VisualizationLifeCycleManager(user_id=request.user.id)
-        visualization.create(datastream=datastream_revision.datastream, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'])
-
-        response = {'status': 'ok', 'visualization_revision_id': visualization.visualization_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            revision_id=visualization_rev.id,
+            messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
+        )
 
         return JSONHttpResponse(json.dumps(response))
-
     
 
 @login_required

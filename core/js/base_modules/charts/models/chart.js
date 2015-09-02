@@ -198,7 +198,7 @@ charts.models.Chart = Backbone.Model.extend({
      */
     handleDataUpdate: function () {
         this.set('styles', this.parseKmlStyles(this.data.get('styles')));
-        charts.models.Chart.prototype.handleDataUpdate.apply(this, arguments);
+        this.trigger('data_updated');
     },
 
     /**
