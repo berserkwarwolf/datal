@@ -80,13 +80,6 @@ var MainView = Backbone.View.extend({
         this.register( metadataView, 'maps'  );
         this.register( mapFinishView, 'maps'  );
 
-        //Create maps modals
-        /*var mapSelectDataModal = new MapSelectDataModalView({
-          id: 'mapSelectDataModal',
-          el: '#mapSelectDataModal',
-          model: this.model
-        });*/
-
         this.start();
 
     },
