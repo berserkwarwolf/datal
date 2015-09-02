@@ -140,12 +140,12 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     createMapPolyline: function (paths, styles) {
-        //  return new google.maps.Polyline({
-        //     paths: paths,
-        //     strokeColor: polyStyle.strokeColor,
-        //     strokeOpacity: polyStyle.strokeOpacity,
-        //     strokeWeight: polyStyle.strokeWeight
-        // });
+        return new google.maps.Polyline({
+            paths: paths,
+            strokeColor: styles.strokeColor,
+            strokeOpacity: styles.strokeOpacity,
+            strokeWeight: styles.strokeWeight
+        });
     },
 
     /**
