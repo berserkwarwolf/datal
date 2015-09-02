@@ -572,7 +572,7 @@ msgid "APP-TRYJUNARFREE-TEXT"
 msgstr "Request a demo"
 
 msgid "APP-SIGNUP-TITLE-TEXT"
-msgstr "Create a new account"
+msgstr "Create an account"
 
 msgid "WS-ACCOUNTS-ACCOUNT-NAME-TIP"
 msgstr "Enter your organization name"
@@ -3079,3 +3079,6 @@ msgstr "Review"
 
 msgid "APP-CREATE-A-DATAVIEW-TEXT"
 msgstr "Create a Data View"
+
+msgid "APP-SIGNIN-TITLE-TEXT"
+msgstr "Sign in"

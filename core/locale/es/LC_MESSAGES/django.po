@@ -683,7 +683,7 @@ msgid "APP-SIGNINTO-TEXT"
 msgstr "Ingrese a"
 
 msgid "APP-LOGIN-TEXT"
-msgstr "Entrar"
+msgstr "Ingresar"
 
 msgid "APP-ACTIVATION-TITLE-TEXT"
 msgstr "Active su cuenta DATAL"

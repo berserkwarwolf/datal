@@ -508,9 +508,6 @@ msgstr "Usuario"
 msgid "MODEL-PASSWORD-TEXT"
 msgstr "Contraseña"
 
-msgid "APP-LOGIN-TEXT"
-msgstr "Entrar"
-
 msgid "APP-FORGOTPASSWORD-TEXT"
 msgstr "¿Olvidaste tu clave?"
 
@@ -569,7 +566,7 @@ msgid "APP-TRYJUNARFREE-TEXT"
 msgstr "Solicitar una demo"
 
 msgid "APP-SIGNUP-TITLE-TEXT"
-msgstr "Creación de nueva cuenta"
+msgstr "Crear una cuenta"
 
 msgid "WS-ACCOUNTS-ACCOUNT-NAME-TIP"
 msgstr "Ingresa el nombre de tu organización"
@@ -1601,7 +1598,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Nómbralo"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Cuéntanos sobre que se trata tu Vista. Los campos con (<span class='required'>*</span>) son obligatorios."
+msgstr "Cuéntanos sobre que se trata tu vista. Los campos con (<span class='required'>*</span>) son obligatorios."
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Nombres: Buenas prácticas y uso correcto"
@@ -3075,3 +3072,6 @@ msgstr "Revisión"
 
 msgid "APP-CREATE-A-DATAVIEW-TEXT"
 msgstr "Crea una vista"
+
+msgid "APP-SIGNIN-TITLE-TEXT"
+msgstr "Iniciar sesión"

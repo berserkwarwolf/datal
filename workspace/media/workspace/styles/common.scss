@@ -5,6 +5,10 @@
 
 body{font-family:$font-primary-family;color:$font-color-base;font-size:$font-size-base;}
 
+/* Links */
+a{color:$link-color;}
+a:hover{color:$link-hover-color;}
+
 /* Buttons */
 .button{@include transition(all, .1s, ease-in-out);
 

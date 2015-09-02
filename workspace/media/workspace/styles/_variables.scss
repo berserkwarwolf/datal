@@ -4,7 +4,7 @@
 
 	/* Signin logo */
 	$logo-signin-url:"../images/common/logo_datal_signin_color.png";			/* URL of logo for Sign in page. Recommended size: 132x70 px */
-	$logo-signin-width:260px;													/* Width of image */
+	$logo-signin-svg-url:"../images/common/logo_datal_signin_color.svg";			/* URL of logo for Sign in page. Recommended size: 132x70 px */
 	$logo-signin-height:180px;													/* Height of image */
 
 	/* Header bar logo */
@@ -57,9 +57,8 @@ $nav-collapsed-width: 54px;
 	$font-color-highlight:#000;												/* For titles on highlighted boxes */
 
 	/* Links */
-	$link-color:#027fc0;														/* Color for links */
-	$link-color-highlight:#042842;												/* Color for some highlighted links */
-
+	$link-color:#0066cc;														/* Color for links */
+	$link-hover-color:#0066ff;														/* Hover Color for links */
 
 /* Nav icons */
 $nav-icon-color:#d3d3d3;														/* Color for nav icons */

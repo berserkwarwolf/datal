@@ -21,32 +21,34 @@
       <div class="logo-signin-brand"></div>
     </div>
   </header>
-  <div class="account-box-content">
+  <div class="account-box-content relative">
+    <a href="/signin" title="{% trans 'APP-SIGNUP-TITLE-TEXT' %}" class="signInLink link absolute">{% trans 'APP-SIGNUP-TITLE-TEXT' %}</a>
     <form action="{{form.action}}" method="post">
       {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
       {% csrf_token %}
       <fieldset>
+        <legend class="">{% trans "APP-SIGNIN-TITLE-TEXT" %}</legend>
         <div class="row clearfix">
           <label for="id_username">{% trans "MODEL-USERNAME-TEXT" %}:</label>
           {{form.username}}
         </div>
         <div class="row clearfix">
-          <label for="id_password">{% trans "MODEL-PASSWORD-TEXT" %}:</label>
+          <div class="clearfix">
+            <label class="FL" for="id_password">{% trans "MODEL-PASSWORD-TEXT" %}:</label>
+            <a href="{% url 'accounts.forgot_password' %}" title="{% trans 'APP-FORGOTPASSWORD-TEXT' %}" class="link FR">{% trans "APP-FORGOTPASSWORD-TEXT" %}</a>
+          </div>
           {{form.password}}
         </div>
-        <div class="row remember clearfix">
+        <div class="row remember center clearfix">
           {{form.remember_me}}
           <label for="id_remember_me">{% trans "APP-REMEMBERME-TEXT" %}</label>
-          <input id="id_submitButton" type="submit" class="button primary small" value="{% trans 'APP-LOGIN-TEXT' %}" />
+        </div>
+        <div class="row buttons center">
+          <input id="id_submitButton" type="submit" class="button primary" value="{% trans 'APP-LOGIN-TEXT' %}" />
         </div>
       </fieldset>
     </form>
   </div>
-  <footer class="account-box-footer">
-    <ul>
-      <li><a href="{% url 'accounts.forgot_password' %}" title="{% trans 'APP-FORGOTPASSWORD-TEXT' %}" class="forgotLink">{% trans "APP-FORGOTPASSWORD-TEXT" %}</a></li>
-    </ul>
-  </footer>
 </div>
 {% endblock %}
 
