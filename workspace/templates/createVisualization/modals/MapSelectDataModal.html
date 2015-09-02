@@ -17,16 +17,30 @@
 		<div class="col-xs-3">
 			<div class="selected-ranges-view">
 			<form class="form">
-				<h4>{% trans "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT" %}</h4>
-				<input name="range_data" type="text" />
+				<div class="row">
+					<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT" %}</label>
+					<div class="hot-sel-1">
+						<span class="color"></span>
+						<input name="range_data" type="text" />
+					</div>
+				</div>
 
-				<h4>{% trans "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT" %}</h4>
-				<input name="range_labels" type="text" />
+				<div class="row">
+					<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT" %}</label>
+					<div class="hot-sel-2">
+						<span class="color"></span>
+						<input name="range_labels" type="text" />
+					</div>
+				</div>
 
-				<h4>{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT" %}</h4>
-				<p>{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT" %}</p>
-				<input name="range_headers" type="text" />
-
+				<div class="row">
+					<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT" %}</label>
+					<p class="tip">{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT" %}</p>
+					<div class="hot-sel-3">
+						<span class="color"></span>
+						<input name="range_headers" type="text" />
+					</div>
+				</div>
 			</form>
 			</div>
 		</div>
