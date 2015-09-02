@@ -352,6 +352,7 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
         'LOCATION': '127.0.0.1:11211',
         'TIMEOUT': 60,
+        'KEY_FUNCTION': 'core.decorators.datal_make_key',
         'OPTIONS': {
             'MAX_ENTRIES': 300, # Default
         }

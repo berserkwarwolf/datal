@@ -22,6 +22,12 @@ from django.views.decorators.cache import cache_page
 #        )
 #
 
+def datal_make_key(key, key_prefix, version):
+    print "key_p: %s, version: %s, key: %s" %(key_prefix, str(version), key)
+    k=":".join([key_prefix, str(version), key])
+    print "eameo, dame la key (%s)" % k
+    return k
+
 def datal_cache_page(**kwargs):
     def _cache_page(viewfunc):
         @wraps(viewfunc, assigned=available_attrs(viewfunc))
