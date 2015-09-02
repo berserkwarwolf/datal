@@ -35,6 +35,8 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 
+		this.chartContent = this.$el.find('.chartContent');
+
 		this.setupChart();
 	},
 
@@ -85,7 +87,27 @@ var ChartView = StepViewSPA.extend({
 	selectGraphType: function(type){
 		$('.chartType').removeClass('active');
 		$('.chartType.'+type).addClass('active');
+		this.changeClass(type);
 		this.model.set('type',type);
+	},
+
+	changeClass: function(type){
+
+		var clases = {
+			'barchart': 'previewBar',
+			'columnchart': 'previewColumn',
+			'areachart': 'previewArea',
+			'linechart': 'previewLine',
+			'piechart': 'previewPie'
+		};
+
+		var that = this;
+		_.each(clases,function(clase,ix){
+			that.chartContent.removeClass(clase);			
+		});
+
+		this.chartContent.addClass(clases[type]);
+
 	},
 
 	onChartChanged: function(){

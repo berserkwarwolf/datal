@@ -122,6 +122,9 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .mapContent{border:1px solid $color-base-extra-light;width:600px;height:480px;cursor:pointer;position:relative;margin:0 auto;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
+    .chart-preview-view {
+      height: 100%;
+    }
   }
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
@@ -153,30 +156,46 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 .modal{
   position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
 
-  /* Sidebar */
-  input.hot-sel-1,
+  .row{
+    padding-bottom:25px;
+
+    /* Sidebar */
+    label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;}
+
+    /* Tip */
+    p{color:$font-color-light;margin-left:15px;}
+
+    input{
+      height:28px;border-radius:0;border-color:$color-base;width:75%;padding-bottom:0;padding-top:0;
+      
+      &:focus,
+      .active{box-shadow:0;border-color:#0091fe;}
+    }
+  }
+
+  /* Identificador por color */
+  .hot-sel-1,
+  .hot-sel-2,
+  .hot-sel-3{
+    margin-top:10px;
+
+    span.color{
+      float:left;height:30px;margin-right:10px;width:5px;}
+  }
+
+  .hot-sel-1 span.color,
   td.hot-sel-1{background-color:#86ad7f;}
 
-  input.hot-sel-2,
+  .hot-sel-2 span.color,
   td.hot-sel-2{background-color:#ffb796;}
 
-  input.hot-sel-3, 
+  .hot-sel-3 span.color, 
   td.hot-sel-3{background-color:#d6ebff;}
 
-  input.active {
-    line-height: 2em;
-    font-weight: bold;
-    background-color: $modal-table-selected-color;
-  }
-  .handsontable td.area {
-    background: $modal-table-selected-color;
-  }
+  input.active{font-weight:bold;background-color:$modal-table-selected-color;}
+  .handsontable td.area{background:$modal-table-selected-color;}
 
   /* Tabla */
-  .table-view {
-    height: 600px;
-    overflow: hidden;
-    width: 900px;
-  }
+  .table-view{height:600px;overflow:hidden;width:100%;}
 
 }

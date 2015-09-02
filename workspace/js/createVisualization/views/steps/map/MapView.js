@@ -1,29 +1,17 @@
 var MapView = StepViewSPA.extend({
-	
-	initialize: function(){
+    
+    initialize: function(){
 
-		// Right way to extend events without overriding the parent ones
-		this.addEvents({
-	
-			'click a.backButton': 			'onPreviousButtonClicked',
-			'click a.nextButton': 			'onNextButtonClicked',
-			'click button.selectData': 		'onSelectDataClicked',
-			'click .chartType': 		'onChartTypeClicked',
-			
-			'keyup input#chartTitle': 		'onInputChanged'
-		
-		});
-
-        this.model.set({
-            lib: 'google',
-            options: {
-                zoom: 5,
-                center: {
-                    lat: 0, 
-                    long: 0
-                },
-                bounds: []
-            }
+        // Right way to extend events without overriding the parent ones
+        this.addEvents({
+    
+            'click a.backButton':           'onPreviousButtonClicked',
+            'click a.nextButton':           'onNextButtonClicked',
+            'click button.selectData':      'onSelectDataClicked',
+            'click .mapTypeId':             'onClickMapTypeId',
+            
+            'keyup input#chartTitle':       'onInputChanged'
+        
         });
 
         this.chartsFactory = new charts.ChartsFactory();
@@ -40,36 +28,32 @@ var MapView = StepViewSPA.extend({
         this.listenTo(this.model, 'change:type', this.onChartChanged, this);
     }, 
 
-	onSelectDataClicked: function(){
-		this.modalView.open();
-	},
+    onSelectDataClicked: function(){
+        this.modalView.open();
+    },
 
-	onInputChanged: function(e){
-		var input = $(e.target);
-		this.model.set(input.data('ref'),input.val());
-	},
+    onInputChanged: function(e){
+        var input = $(e.target);
+        this.model.set(input.data('ref'),input.val());
+    },
 
-	onChartTypeClicked: function(e){
-		e.preventDefault();
-		var type = $(e.currentTarget).data('type');
-		this.selectGraphType(type);
-	},
+    onClickMapTypeId: function(e){
+        e.preventDefault();
+        var type = $(e.currentTarget).data('type');
+        this.$('.mapTypeId').removeClass('active');
+        this.$('[data-type="' + type + '"].mapTypeId').addClass('active');
+        this.model.set('mapType',type);
+    },
 
-	selectGraphType: function(type){
-		this.$('.chartType').removeClass('active');
-		this.$('[data-type="' + type + '"].chartType').addClass('active');
-		this.model.set('type',type);
-	},
+    onChartChanged: function(){
+        if(this.model.get('isMap')){
+            console.log('you selected type: ', this.model.get('type') );
+            this.setupChart();
+            this.renderChart();
+        }
+    },
 
-	onChartChanged: function(){
-		if(this.model.get('isMap')){
-			console.log('you selected type: ', this.model.get('type') );
-			this.setupChart();
-			this.renderChart();
-		}
-	},
-
-	setupChart: function(){
+    setupChart: function(){
         var chartSettings = this.chartsFactory.create(this.model.get('type'), this.model.get('lib'));
 
         if(chartSettings){
@@ -83,13 +67,13 @@ var MapView = StepViewSPA.extend({
             delete this.ChartViewClass;
             console.log('There are not class for this');
         }
-	},
+    },
 
-	renderChart: function () {
+    renderChart: function () {
         if (this.ChartViewClass) {
 
             this.chartInstance = new this.ChartViewClass({
-                el: $('#chartContainer'),
+                el: this.$('#mapContainer'),
                 model: this.model,
             });
             
@@ -98,19 +82,24 @@ var MapView = StepViewSPA.extend({
             };
 
         }   
-	},
+    },
 
-	onPreviousButtonClicked: function(){
-		this.goTo(0);
-	},
+    onPreviousButtonClicked: function(){
+        this.goTo(0);
+    },
 
-	onNextButtonClicked: function(){		
-		this.next();
-	},
+    onNextButtonClicked: function(){        
+        this.next();
+    },
 
-	start: function(){
-		this.constructor.__super__.start.apply(this);
-	}
+    start: function(){
+        this.constructor.__super__.start.apply(this);
+
+        this.model.set({
+            lib: 'google',
+            type: 'map'
+        });
+    }
 
 
 });

@@ -98,7 +98,6 @@ def create(request):
     else:
         return redirect('accounts.signup')
 
-
 def signin(request, admin_url=''):
     auth_manager = request.auth_manager
     if not auth_manager.is_anonymous():

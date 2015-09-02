@@ -8,11 +8,11 @@ from django.db.models import Q, F
 from core import settings
 from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference
+from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES
+from core.choices import STATUS_CHOICES, StatusChoices
 from django.db import connection
 from django.db.models import Count
 
@@ -21,14 +21,38 @@ import json
 from django.core.serializers.json import DjangoJSONEncoder
 
 
-
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
     """ class for manage access to visualizations database tables """
     def __init__(self):
         pass
 
-    def create(self, visualization=None, user=None, collect_type='', impl_details=None, **fields):
-        pass
+    def create(self, visualization=None, datastream_rev=None, user=None, language=None, **fields):
+        """create a new visualization if needed and a visualization_revision"""
+
+        if visualization is None:
+            # Create a new datastream (TITLE is for automatic GUID creation)
+            visualization = Visualization.objects.create(
+                user=user,
+                title=fields['title'],
+                datastream=datastream_rev.datastream
+            )
+
+        visualization_rev = VisualizationRevision.objects.create(
+            visualization=visualization,
+            user=user,
+            status=StatusChoices.DRAFT,
+        )
+
+        VisualizationI18n.objects.create(
+            visualization_revision=visualization_rev,
+            language=language,
+            title=fields['title'].strip().replace('\n', ' '),
+            description=fields['description'].strip().replace('\n', ' '),
+            notes=fields['notes'].strip()
+        )
+
+
+        return visualization, visualization_rev
 
     def get(self, language, visualization_id=None, visualization_revision_id=None):
         pass
