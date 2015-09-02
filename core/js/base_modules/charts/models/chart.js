@@ -25,9 +25,9 @@ charts.models.Chart = Backbone.Model.extend({
         meta_tags: null,
 
         //data selection
-        range_headline:null,
-        range_data:null,
-        range_label:null,
+        range_headers: undefined,
+        range_data: undefined,
+        range_labels: undefined,
 
         // Map defaults
         joinIntersectedClusters: false,
@@ -80,6 +80,24 @@ charts.models.Chart = Backbone.Model.extend({
         this.on('change:options', this.updateFetchFilters);
         this.on('change:type', this.onChangeType);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
+    },
+
+    fetchPreviewData: function () {
+        var self = this;
+
+        return $.getJSON('/visualizations/preview', {
+            datastream_revision_id: self.get('datastream_revision_id'),
+            data: this.get('range_data'),
+            headers: this.get('range_headers'),
+            labels: this.get('range_labels'),
+            null_action: 'exclude',
+            null_preset: undefined,
+        }).then(function (response) {
+            self.data.set('fields', _.map(response.series, function (item) {
+                return ['number', item.name];
+            }));
+            self.data.set('rows', _.unzip(response.values));
+        });
     },
 
     onChangeType: function (model, type) {

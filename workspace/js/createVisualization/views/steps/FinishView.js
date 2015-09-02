@@ -24,7 +24,7 @@ var FinishView = StepViewSPA.extend({
 			dataType: 'json'
 		}).then(function (response) {
 			console.log(response);
-			alert('TODO: save! & redirect!');
+			window.location = '/visualizations/';
 		});
 	}
 

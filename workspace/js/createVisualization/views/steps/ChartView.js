@@ -34,10 +34,18 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
+		this.listenTo(this.chartSelectDataModalView, 'close',
+			this.onCloseModal, this);
 
 		this.chartContent = this.$el.find('.chartContent');
 
 		this.setupChart();
+	},
+
+	onCloseModal: function () {
+		this.model.fetchPreviewData().then(function () {
+			console.log('done retrieving data, should close loading spinner');
+		});
 	},
 
 	onCheckboxChanged: function(e){
@@ -147,7 +155,7 @@ var ChartView = StepViewSPA.extend({
 		if (this.ChartViewClass) {
 
 			this.chartInstance = new this.ChartViewClass({
-				el: $('#chartContainer'),
+				el: this.$('.chartContent'),
 				model: this.model,
 			});
 			
