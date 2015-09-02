@@ -10,7 +10,7 @@ class ViewChartForm(forms.Form):
     visualization_revision_id = forms.IntegerField(label=ugettext_lazy( 'APP-VISUALIZATIONREVISION-TEXT' ), required=True)
 
 class RequestForm(forms.Form):
-    visualization_revision_id = forms.IntegerField(required=True)
+    visualization_revision_id = forms.IntegerField(required=False)
     limit = forms.IntegerField(required=False)
     page = forms.IntegerField(required=False)
     bounds = forms.CharField(required=False)
