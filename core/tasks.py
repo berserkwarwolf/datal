@@ -2,7 +2,7 @@ from core.bigdata import Bigdata
 from core.templates import DataStreamOutputBigDataTemplate, MintTemplateResponse
 from core.models import *
 import urllib2
-from core.helpers import get_domain
+from core.http import get_domain
 from core.exceptions import MintTemplateURLError, MintTemplateNotFoundError
 from core.exceptions import BigdataNamespaceNotDefined
 from django.shortcuts import get_object_or_404

@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.choices import StatusChoices
-from core.helpers import get_domain_by_request
+from core.http import get_domain_by_request
 from core.shortcuts import render_to_response
 
 import re

@@ -6,7 +6,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 
 from core.models import Account
-from core.helpers import get_domain_by_request
+from core.http import get_domain_by_request
 from core.http import get_domain_with_protocol
 
 

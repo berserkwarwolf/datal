@@ -1,5 +1,5 @@
 from core.shortcuts import render_to_response
-from core.helpers import get_domain_by_request
+from core.http import get_domain_by_request
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 
