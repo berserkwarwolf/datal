@@ -336,7 +336,7 @@ def preview(request):
 
             query = RequestProcessor(request).get_arguments(datastream.parameters)
 
-            query['pId'] = datastreamrevision_id
+            query['pId'] = int(datastreamrevision_id)
 
             limit = form.cleaned_data.get('limit')
             if limit is not None:
@@ -379,6 +379,8 @@ def preview(request):
             if traces is not None:
                 query['pTraceSelection'] = traces
 
+            query['pType'] = 'chart'
+            logger.error(query)
             result, content_type = preview_chart(query)
 
             return HttpResponse(result, mimetype=content_type)
