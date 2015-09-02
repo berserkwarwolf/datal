@@ -122,6 +122,9 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .mapContent{border:1px solid $color-base-extra-light;width:600px;height:480px;cursor:pointer;position:relative;margin:0 auto;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
+    .chart-preview-view {
+      height: 100%;
+    }
   }
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}

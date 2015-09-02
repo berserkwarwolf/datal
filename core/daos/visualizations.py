@@ -8,11 +8,11 @@ from django.db.models import Q, F
 from core import settings
 from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference
+from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES
+from core.choices import STATUS_CHOICES, StatusChoices
 from django.db import connection
 from django.db.models import Count
 
@@ -20,6 +20,7 @@ from datetime import datetime, date, timedelta
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
+logger = logging.getLogger(__name__)
 
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
@@ -27,8 +28,34 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def __init__(self):
         pass
 
-    def create(self, visualization=None, user=None, collect_type='', impl_details=None, **fields):
-        pass
+    def create(self, visualization=None, datastream_rev=None, user=None, language=None, **fields):
+        """create a new visualization if needed and a visualization_revision"""
+
+        if not visualization:
+            # Create a new datastream (TITLE is for automatic GUID creation)
+            visualization = Visualization.objects.create(
+                user=user,
+                title=fields['title'],
+                datastream=datastream_rev.datastream
+            )
+            logger.info(visualization)
+
+        visualization_rev = VisualizationRevision.objects.create(
+            visualization=visualization,
+            user=user,
+            status=StatusChoices.DRAFT,
+        )
+        logger.info(visualization_rev)
+        visualization_i18n = VisualizationI18n.objects.create(
+            visualization_revision=visualization_rev,
+            language=language,
+            title=fields['title'].strip().replace('\n', ' '),
+            description=fields['description'].strip().replace('\n', ' '),
+            notes=fields['notes'].strip()
+        )
+        logger.info(visualization_i18n)
+
+        return visualization, visualization_rev
 
     def get(self, language, visualization_id=None, visualization_revision_id=None):
         pass
@@ -51,8 +78,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         query = VisualizationRevision.objects.filter(
             id=F('visualization__last_revision'),
             visualization__user__account=account_id,
-
-            visualization__datastream__last_revision__category__categoryi18n__language=language
+            visualization__user__language=language
         )
 
         if exclude:
@@ -72,21 +98,20 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         total_resources = query.count()
         query = query.values(
-                             'status',
-                             'id',
-                             'visualization__id',
-                             'visualization__guid',
-                             'visualization__user__nick',
-                             'visualization__last_revision_id',
-                             'visualization__datastream__id',
-                             'visualization__datastream__last_revision__id',
-                             'visualization__datastream__last_revision__category__id',
-                             'visualization__datastream__last_revision__category__categoryi18n__name',
-                             'visualization__datastream__last_revision__datastreami18n__title',
-                             'visualizationi18n__title',
-                             'visualizationi18n__description', 'created_at', 'visualization__user__id',
-
-                             )
+            'status',
+            'id',
+            'visualization__id',
+            'visualization__guid',
+            'visualization__user__nick',
+            'visualization__last_revision_id',
+            'visualization__datastream__id',
+            'visualization__datastream__last_revision__id',
+            'visualization__datastream__last_revision__category__id',
+            'visualization__datastream__last_revision__category__categoryi18n__name',
+            'visualization__datastream__last_revision__datastreami18n__title',
+            'visualizationi18n__title',
+            'visualizationi18n__description', 'created_at', 'visualization__user__id',
+        )
 
         query = query.order_by(sort_by)
 

@@ -1,7 +1,7 @@
 import json
 import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
@@ -16,7 +16,7 @@ from core.exceptions import *
 from core.engine import invoke, preview_chart
 from core.helpers import RequestProcessor
 from core.choices import *
-from core.docs import VZ, DT
+from core.docs import VZ, DT, DS
 from core.models import VisualizationRevision,DatasetRevision
 from core import helpers as LocalHelper
 from microsites.daos.visualizations import VisualizationDAO
@@ -25,17 +25,19 @@ from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.daos.visualizations import VisualizationDBDAO
 
+logger = logging.getLogger(__name__)
+
 
 @login_required
 @requires_any_dataset()
 @requires_any_datastream()
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
-    print(resources)
+    logger.info(resources)
     for resource in resources:
         resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -193,15 +195,6 @@ def create(request, viz_type='index'):
             published=False
         )
 
-        # if not index the load related view
-        #if viz_type != 'index':
-        #    form = InitializeChartForm(request.GET)
-        #    if not form.is_valid():
-        #        raise DatastreamRequiredException("Can't create visualization without related dataview")
-        #
-        #    dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
-        #    dataview = dao.get()
-            
         return render_to_response('createVisualization/index.html', dict(
             request=request,
             datastream_revision=datastream_rev
@@ -209,26 +202,31 @@ def create(request, viz_type='index'):
 
     elif request.method == 'POST':
         """ save new or update dataset """
-        form = CreateVisualizationForm(request.POST, prefix='visualization')
+        # Valido que llegue el ID de la revision del datastream
+        datastream_rev_id = request.GET.get('datastream_revision_id', None)
+        if not datastream_rev_id:
+            raise Http404
+        datastream_rev = DataStreamRevision.objects.get(pk=datastream_rev_id)
 
+        # Formulario
+        form = VisualizationForm(request.POST)
         if not form.is_valid():
-            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        datastream_revision = VisualizationRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
+        lifecycle = VisualizationLifeCycleManager(user=request.user)
+        visualization_rev = lifecycle.create(
+            datastream_rev=datastream_rev,
+            language=request.auth_manager.language,
+            **form.cleaned_data
+        )
 
-        visualization = VisualizationLifeCycleManager(user_id=request.user.id)
-        visualization.create(datastream=datastream_revision.datastream, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'])
-
-        response = {'status': 'ok', 'visualization_revision_id': visualization.visualization_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            revision_id=visualization_rev.id,
+            messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
+        )
 
         return JSONHttpResponse(json.dumps(response))
-
     
 
 @login_required
@@ -247,19 +245,8 @@ def related_resources(request):
 @login_required
 @require_GET
 def action_view(request, revision_id):
-
-    language = request.auth_manager.language
-    try:
-        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
-    except DataStreamRevision.DoesNotExist:
-        raise DataStreamNotFoundException()
-
-    account_id = request.auth_manager.account_id
-    credentials = request.auth_manager
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
-    status_options = credentials.get_allowed_actions()
-
-    return render_to_response('viewDataStream/index.html', locals())
+    datastream_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
+    return render_to_response('viewVisualization/index.html', locals())
 
 
 @login_required
@@ -269,69 +256,30 @@ def action_view(request, revision_id):
 @requires_review
 @transaction.commit_on_success
 def edit(request, datastream_revision_id=None):
-    if request.method == 'GET':
-        account_id = request.auth_manager.account_id
-        credentials = request.auth_manager
-        language = request.auth_manager.language
-        categories = CategoryI18n.objects.filter(
-            language=language,
-            category__account=account_id
-        ).values('category__id', 'name')
-        status_options = credentials.get_allowed_actions()
-        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-        status = lifecycle.datastream_revision.status
-        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
-            categories,status,
-            status_options,
-            lifecycle.datastream_revision,
-            lifecycle.datastreami18n
-        )
-
-        return JSONHttpResponse(response)
-
-    elif request.method == 'POST':
-        """update dataset """
-
-        form = EditDataStreamForm(request.POST)
-
-        if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
-
-        if form.is_valid():
-            dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-            dataview.edit(
-                language=request.auth_manager.language,
-                changed_fields=form.changed_data,
-                **form.cleaned_data
-            )
-
-            response = dict(
-                status='ok',
-                datastream_revision_id= dataview.datastream_revision.id,
-                messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-            )
-
-            return JSONHttpResponse(json.dumps(response))
+    pass
 
 
+@login_required
 def preview(request):
 
-    form = forms.PreviewForm(request.GET)
+    form = PreviewForm(request.GET)
+    logger.error("entering preview handler")
     if form.is_valid():
+        logger.error("form is valid")
         preferences = request.preferences
 
-        datastreamrevision_id  = form.cleaned_data.get('id')
+        datastreamrevision_id  = request.GET.get('datastream_revision_id', None)
 
         try:
             datastream = DS(datastreamrevision_id, request.auth_manager.language)
-        except:
+        except Exception, e:
+            logger.debug(e)
             raise Http404
         else:
 
             query = RequestProcessor(request).get_arguments(datastream.parameters)
 
-            query['pId'] = datastreamrevision_id
+            query['pId'] = int(datastreamrevision_id)
 
             limit = form.cleaned_data.get('limit')
             if limit is not None:
@@ -349,31 +297,33 @@ def preview(request):
             if zoom is not None:
                 query['pZoom'] = zoom
 
-            query['pNullValueAction'] = forms.cleaned_data.get('null_action')
-            query['pNullValuePreset'] = forms.cleaned_data.get('null_preset')
+            query['pNullValueAction'] = form.cleaned_data.get('null_action')
+            query['pNullValuePreset'] = form.cleaned_data.get('null_preset')
 
-            query['pData'] = forms.cleaned_data.get('data')
+            query['pData'] = form.cleaned_data.get('data')
 
-            labels = forms.cleaned_data.get('labels')
-            if lables is not None:
+            labels = form.cleaned_data.get('labels')
+            if labels is not None:
                 query['pLabelSelection'] = labels
 
-            headers = forms.cleaned_data.get('headers')
+            headers = form.cleaned_data.get('headers')
             if headers is not None:
                 query['pHeaderSelection'] = headers
 
-            lat = forms.cleaned_data.get('lat')
+            lat = form.cleaned_data.get('lat')
             if lat is not None:
                 query['pLatitudSelection'] = lat
 
-            long = forms.cleaned_data.get('long')
-            if long is not None:
-                query['pLongitudSelection'] = long
+            lon = form.cleaned_data.get('long')
+            if lon is not None:
+                query['pLongitudSelection'] = lon
 
-            traces = forms.cleaned_data.get('traces')
+            traces = form.cleaned_data.get('traces')
             if traces is not None:
                 query['pTraceSelection'] = traces
 
+            query['pType'] = 'chart'
+            logger.error(query)
             result, content_type = preview_chart(query)
 
             return HttpResponse(result, mimetype=content_type)

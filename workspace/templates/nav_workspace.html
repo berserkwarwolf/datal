@@ -31,7 +31,7 @@
     <!-- Visualizations -->
     <li>
       <a id="id_visualizations_option"
-        {% if stats.account_total_datastreams != 0 %}href="{% url 'manageVisualizations.list' %}"{% endif %}
+        {% if stats.account_total_datastreams != 0 %}href="{% url 'manageVisualizations.index' %}"{% endif %}
         class="nav-visualizations{% if stats.account_total_datastreams == 0 %} disabled {% endif %}">
         {% include 'icons/nav-visualizations.html' %}
         <span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</span>
