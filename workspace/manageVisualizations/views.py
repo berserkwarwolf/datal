@@ -25,6 +25,8 @@ from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.daos.visualizations import VisualizationDBDAO
 
+logger = logging.getLogger(__name__)
+
 
 @login_required
 @requires_any_dataset()
@@ -35,7 +37,7 @@ def list(request):
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
-    print(resources)
+    logger.info(resources)
     for resource in resources:
         resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -193,15 +195,6 @@ def create(request, viz_type='index'):
             published=False
         )
 
-        # if not index the load related view
-        #if viz_type != 'index':
-        #    form = InitializeChartForm(request.GET)
-        #    if not form.is_valid():
-        #        raise DatastreamRequiredException("Can't create visualization without related dataview")
-        #
-        #    dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
-        #    dataview = dao.get()
-            
         return render_to_response('createVisualization/index.html', dict(
             request=request,
             datastream_revision=datastream_rev

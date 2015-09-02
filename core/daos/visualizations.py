@@ -20,6 +20,8 @@ from datetime import datetime, date, timedelta
 import json
 from django.core.serializers.json import DjangoJSONEncoder
 
+logger = logging.getLogger(__name__)
+
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
     """ class for manage access to visualizations database tables """
@@ -29,28 +31,29 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def create(self, visualization=None, datastream_rev=None, user=None, language=None, **fields):
         """create a new visualization if needed and a visualization_revision"""
 
-        if visualization is None:
+        if not visualization:
             # Create a new datastream (TITLE is for automatic GUID creation)
             visualization = Visualization.objects.create(
                 user=user,
                 title=fields['title'],
                 datastream=datastream_rev.datastream
             )
+            logger.info(visualization)
 
         visualization_rev = VisualizationRevision.objects.create(
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
         )
-
-        VisualizationI18n.objects.create(
+        logger.info(visualization_rev)
+        visualization_i18n = VisualizationI18n.objects.create(
             visualization_revision=visualization_rev,
             language=language,
             title=fields['title'].strip().replace('\n', ' '),
             description=fields['description'].strip().replace('\n', ' '),
             notes=fields['notes'].strip()
         )
-
+        logger.info(visualization_i18n)
 
         return visualization, visualization_rev
 
@@ -75,9 +78,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         query = VisualizationRevision.objects.filter(
             id=F('visualization__last_revision'),
             visualization__user__account=account_id,
-
-            visualization__datastream__last_revision__category__categoryi18n__language=language
+            visualization__user__language=language
         )
+
+
 
         if exclude:
             query.exclude(**exclude)

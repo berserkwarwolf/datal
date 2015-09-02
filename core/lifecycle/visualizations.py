@@ -94,6 +94,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         )
 
         self._log_activity(ActionStreams.CREATE)
+        self._update_last_revisions()
         return self.visualization_revision
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
