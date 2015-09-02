@@ -3,7 +3,7 @@ import logging
 from django.db.models import F, Max
 from django.conf import settings
 
-from core.daos.visualizations import VisualizationSearchDAOFactory
+from core.daos.visualizations import VisualizationSearchDAOFactory, VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, VisualizationI18n
 from core.choices import StatusChoices, ActionStreams
 from core.exceptions import VisualizationNotFoundException, IllegalStateException, ParentNotPuslishedException
@@ -83,8 +83,18 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 language=self.visualization.user.language
             )
 
-    def create(self, allowed_states=CREATE_ALLOWED_STATES, **fields):
-        pass
+    def create(self, datastream_rev=None, language=None, **fields):
+        """ Create a new Visualization """
+
+        self.visualization, self.visualization_revision = VisualizationDBDAO().create(
+            datastream_rev=datastream_rev,
+            user=self.user,
+            language=language,
+            **fields
+        )
+
+        self._log_activity(ActionStreams.CREATE)
+        return self.visualization_revision
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         pass

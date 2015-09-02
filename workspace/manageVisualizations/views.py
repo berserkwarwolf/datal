@@ -1,7 +1,7 @@
 import json
 import urllib
 
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
@@ -209,26 +209,31 @@ def create(request, viz_type='index'):
 
     elif request.method == 'POST':
         """ save new or update dataset """
-        form = CreateVisualizationForm(request.POST, prefix='visualization')
+        # Valido que llegue el ID de la revision del datastream
+        datastream_rev_id = request.GET.get('datastream_revision_id', None)
+        if not datastream_rev_id:
+            raise Http404
+        datastream_rev = DataStreamRevision.objects.get(pk=datastream_rev_id)
 
+        # Formulario
+        form = VisualizationForm(request.POST)
         if not form.is_valid():
-            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        datastream_revision = VisualizationRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
+        lifecycle = VisualizationLifeCycleManager(user=request.user)
+        visualization_rev = lifecycle.create(
+            datastream_rev=datastream_rev,
+            language=request.auth_manager.language,
+            **form.cleaned_data
+        )
 
-        visualization = VisualizationLifeCycleManager(user_id=request.user.id)
-        visualization.create(datastream=datastream_revision.datastream, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'])
-
-        response = {'status': 'ok', 'visualization_revision_id': visualization.visualization_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = dict(
+            status='ok',
+            revision_id=visualization_rev.id,
+            messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
+        )
 
         return JSONHttpResponse(json.dumps(response))
-
     
 
 @login_required
