@@ -13,10 +13,12 @@ var viewChartView = Backbone.View.extend({
         this.render();
     },
     setupChart: function () {
-        var chartSettings = this.chartsFactory.create(this.model.get('chart').type,this.model.get('chart').lib);
+        this.chartOptions = JSON.parse(this.model.get('chartJson')).chart;
+
+        var chartSettings = this.chartsFactory.create(this.chartOptions.type,this.chartOptions.lib);
 
         this.ChartViewClass = chartSettings.Class;
-        this.ChartModelClass = chartSettings.Model;
+        this.ChartModelClass = charts.models.Chart;
     },
     render: function () {
         this.initializeChart();
@@ -29,8 +31,6 @@ var viewChartView = Backbone.View.extend({
     },
     createChartInstance: function () {
         this.setChartContainerHeight();
-
-        this.chartOptions = JSON.parse(this.model.get('chartJson')).chart;
 
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),

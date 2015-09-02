@@ -12,9 +12,6 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataRender: null,
     styles: {},
     initialize: function(){
-        if (this.model.get('type') !== 'map') {
-            console.error('A Map model must be suplied');
-        }
         this.bindEvents();
         this.createCoogleMapInstance();
     },
