@@ -28,9 +28,6 @@ from core.daos.visualizations import VisualizationDBDAO
 logger = logging.getLogger(__name__)
 
 
-logger = logging.getLogger(__name__)
-
-
 @login_required
 @requires_any_dataset()
 @requires_any_datastream()
@@ -248,19 +245,8 @@ def related_resources(request):
 @login_required
 @require_GET
 def action_view(request, revision_id):
-
-    language = request.auth_manager.language
-    try:
-        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
-    except DataStreamRevision.DoesNotExist:
-        raise DataStreamNotFoundException()
-
-    account_id = request.auth_manager.account_id
-    credentials = request.auth_manager
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
-    status_options = credentials.get_allowed_actions()
-
-    return render_to_response('viewDataStream/index.html', locals())
+    datastream_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
+    return render_to_response('viewVisualization/index.html', locals())
 
 
 @login_required
@@ -270,50 +256,7 @@ def action_view(request, revision_id):
 @requires_review
 @transaction.commit_on_success
 def edit(request, datastream_revision_id=None):
-    if request.method == 'GET':
-        account_id = request.auth_manager.account_id
-        credentials = request.auth_manager
-        language = request.auth_manager.language
-        categories = CategoryI18n.objects.filter(
-            language=language,
-            category__account=account_id
-        ).values('category__id', 'name')
-        status_options = credentials.get_allowed_actions()
-        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-        status = lifecycle.datastream_revision.status
-        response = DefaultDataViewEdit(template='datastream_edit_response.json').render(
-            categories,status,
-            status_options,
-            lifecycle.datastream_revision,
-            lifecycle.datastreami18n
-        )
-
-        return JSONHttpResponse(response)
-
-    elif request.method == 'POST':
-        """update dataset """
-
-        form = EditDataStreamForm(request.POST)
-
-        if not form.is_valid():
-            raise LifeCycleException('Invalid form data: %s' % str(form.errors.as_text()))
-
-        if form.is_valid():
-            dataview = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-            dataview.edit(
-                language=request.auth_manager.language,
-                changed_fields=form.changed_data,
-                **form.cleaned_data
-            )
-
-            response = dict(
-                status='ok',
-                datastream_revision_id= dataview.datastream_revision.id,
-                messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-            )
-
-            return JSONHttpResponse(json.dumps(response))
+    pass
 
 
 @login_required
