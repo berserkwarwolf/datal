@@ -28,7 +28,7 @@ def datal_make_key(key, key_prefix, version):
         Ignora key, espera en key_prefix list[path, parametros(get,post)]
     """
 
-    parametros=str(hash(frozenset(sorted(["%s=%s" %(x,key_prefix[0][x]) for x in key_prefix[0].keys()]))))
+    parametros=str(hash(frozenset(sorted(key_prefix[0].items()))))
     hash_key="%s:%s:%s" % (str(version),key_prefix[1],parametros)
     return hash_key
 
