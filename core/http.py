@@ -37,3 +37,39 @@ def gravatar_url(email, size):
     #default_image = urllib.quote(settings.MEDIA_URI + settings.GRAVATAR['default_image'], safe='')
     default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
+
+def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
+
+    l_query = ''
+    if p_end_point.startswith('&'):
+        l_query = '?' + p_end_point[1:]
+
+    l_domain = ''
+    if p_is_absolute:
+        l_domain = settings.BASE_URI
+
+    l_url = reverse(p_view_name)
+
+    return l_domain + l_url + l_query
+
+def add_domains_to_permalinks(resources):
+    from core.models import Preference
+    accounts_ids = [ item['account_id'] for item in resources ]
+    seen = set()
+    seen_add = seen.add
+    accounts_ids = [ x for x in accounts_ids if x not in seen and not seen_add(x)]
+    accounts_domains = Preference.objects.values_list('account_id', 'value', 'key').filter(Q(key='account.domain') | Q(key='account.name'), account__in = accounts_ids)
+
+    r = {}
+    for account_id, value, key in accounts_domains:
+        if r.has_key(account_id):
+            r[account_id][key] = value
+        else:
+            r[account_id] = {key: value}
+
+    for resource in resources:
+        account_id = resource['account_id']
+        if r.has_key(account_id):
+            account_domain = r[account_id]['account.domain']
+            resource['permalink'] = 'http://' + account_domain + resource['permalink']
+            resource['account_name'] = r[account_id]['account.name']

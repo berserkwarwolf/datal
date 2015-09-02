@@ -1,6 +1,6 @@
 from core.models import *
 from core.communitymanagers import *
-from core.helpers import add_domains_to_permalinks
+from core.http import add_domains_to_permalinks
 
 
 def retrieveDatastreams(resourceIds, language):

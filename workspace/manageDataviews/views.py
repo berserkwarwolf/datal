@@ -8,7 +8,7 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
-from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.utils import filters_to_model_fields
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *

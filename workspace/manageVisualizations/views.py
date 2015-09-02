@@ -4,7 +4,7 @@ from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
 from core.auth.decorators import login_required,privilege_required
-from core.helpers import remove_duplicated_filters, unset_visualization_revision_nice
+from core.utils import remove_duplicated_filters, unset_visualization_revision_nice
 from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
@@ -17,7 +17,7 @@ from core.choices import *
 from core.daos.datasets import DatasetDBDAO
 from core.models import VisualizationRevision,DatasetRevision
 from core.http import JSONHttpResponse
-from core import helpers as LocalHelper
+from core import http as LocalHelper
 from microsites.daos.datastreams import DatastreamDAO
 import json
 import urllib

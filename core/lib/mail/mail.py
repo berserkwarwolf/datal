@@ -1,6 +1,5 @@
 from abc import ABCMeta, abstractmethod
 
-from core.helpers import class_for_name
 from core import settings
 from core.exceptions import MailServiceNotFoundException
 

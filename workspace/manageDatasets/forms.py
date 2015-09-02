@@ -414,7 +414,7 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
 class MimeTypeForm(forms.Form):
     url = forms.CharField(required=True)
 
-    def get_mimetype(url):
+    def get_mimetype(self, url):
         try:
             request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
             connection = urllib2.urlopen(request)

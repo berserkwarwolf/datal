@@ -2,7 +2,6 @@ import json as json_module
 import csv
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
-from core.helpers import clean_string
 import re, unicodedata
 
 class Emitter:

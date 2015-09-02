@@ -11,7 +11,6 @@ from django.db.models.signals import pre_delete
 from core.utils import slugify
 from core import choices
 from core import managers
-from core.helpers import get_meta_data_dict
 from core.cache import Cache
 
 
