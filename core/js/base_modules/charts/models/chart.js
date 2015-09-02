@@ -34,7 +34,7 @@ charts.models.Chart = Backbone.Model.extend({
         heatMap: null,
         onHeatMap: false,
         needToReloadData: false, //special case where I zoom on a heatMap
-        mapType : 'roadmap',
+        mapType : 'ROADMAP',
         styles: {},
         stylesDefault: {
             "marker": {
