@@ -10,19 +10,19 @@ charts.models.Chart = Backbone.Model.extend({
         lib: 'google',
 
         showLegend: true,
-        invertedAxis: null,
-        chartTemplate: '¿?',
+        invertedAxis: undefined,
+        chartTemplate: undefined,
         nullValueAction: '',
         nullValuePreset: '',
         traspose: false,
 
         //metadata
-        meta_title: null,
-        meta_description: null,
-        meta_category: null,
-        meta_notes: null,
-        meta_source: null,
-        meta_tags: null,
+        meta_title: undefined,
+        meta_description: undefined,
+        meta_category: undefined,
+        meta_notes: undefined,
+        meta_source: undefined,
+        meta_tags: undefined,
 
         //data selection
         range_headers: undefined,
@@ -31,7 +31,7 @@ charts.models.Chart = Backbone.Model.extend({
 
         // Map defaults
         joinIntersectedClusters: false,
-        heatMap: null,
+        heatMap: undefined,
         onHeatMap: false,
         needToReloadData: false, //special case where I zoom on a heatMap
         mapType : 'ROADMAP',
