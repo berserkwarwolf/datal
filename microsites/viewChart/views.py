@@ -11,7 +11,7 @@ from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.reports_manager.helpers import create_report
 from microsites.viewChart import forms
-from core.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
 import urllib
 import json
 import logging

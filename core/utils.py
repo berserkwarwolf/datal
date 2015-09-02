@@ -1,6 +1,7 @@
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify as django_slugify
+from core.choices import SOURCE_IMPLEMENTATION_CHOICES
 import re
 
 validate_comma_separated_word_list = RegexValidator(
@@ -14,3 +15,7 @@ def slugify(value):
     value = re.sub('\-+', '-', value)
     value = re.sub('\-$', '', value)
     return value
+
+
+def set_dataset_impl_type_nice(item):
+    return unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])

@@ -151,73 +151,6 @@ class RequestProcessor:
 
 
 
-
-def uniquify(seq):
-    seen = set()
-    seen_add = seen.add
-    return [ x for x in seq if x not in seen and not seen_add(x)]
-
-
-def gravatar_url(email, size):
-    import urllib
-    import hashlib
-    email_hash = hashlib.md5(email.lower()).hexdigest()
-    #default_image = urllib.quote(settings.MEDIA_URI + settings.GRAVATAR['default_image'], safe='')
-    default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
-    return settings.GRAVATAR['url'] % (email_hash, size, default_image)
-
-
-#def get_file_type_from_extension(extension):
-#
-#    if extension.lower() in ["doc", "docx", "docm", "dotx", "dotm"]:
-#        return SourceImplementationChoices.DOC
-#    elif extension.lower() in ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"]:
-#        return SourceImplementationChoices.XLS
-#    elif extension.lower() in ["odt"]:
-#        return SourceImplementationChoices.ODT
-#    elif extension.lower() in ["ods"]:
-#        return SourceImplementationChoices.ODS
-#    elif extension.lower() in ["pdf"]:
-#        return SourceImplementationChoices.PDF
-#    elif extension.lower() in ["html", "htm"]:
-#        return SourceImplementationChoices.HTML
-#    elif extension.lower() in ["txt"]:
-#        return SourceImplementationChoices.TXT
-#    elif extension.lower() in ["csv"]:
-#        return SourceImplementationChoices.CSV
-#    elif extension.lower() in ["xml"]:
-#        return SourceImplementationChoices.XML
-#    elif extension.lower() in ["kml"]:
-#        return SourceImplementationChoices.KML
-#    elif extension.lower() in ["kmz"]:
-#        return SourceImplementationChoices.KMZ
-#    elif extension.lower() in ["png", "jpg", "jpeg", "gif"]:
-#        return SourceImplementationChoices.IMAGE
-#    elif extension.lower() in ["zip", "gz", "tar"]:
-#        return SourceImplementationChoices.ZIP
-
-
-
-
-
-#def update_dashboard_widgets_and_revisions(widgets):
-#
-#   for wdgt in widgets:
-#       order = wdgt.order
-#       dashboard_widgets = DashboardWidget.objects.filter(order__gt=order, dashboard_revision__id=wdgt.dashboard_revision.id)
-#       for widget in dashboard_widgets:
-#           order = widget.order - 1
-#           widget.order   = order
-#           widget.save()
-#
-#   widgets.delete()
-
-
-def set_dataset_impl_type_nice(item):
-    impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])
-    return impl_type_nice
-
-
 def filters_to_model_fields(filters):
     result = dict()
 
@@ -287,7 +220,9 @@ def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
 def add_domains_to_permalinks(resources):
     from core.models import Preference
     accounts_ids = [ item['account_id'] for item in resources ]
-    accounts_ids = uniquify(accounts_ids)
+    seen = set()
+    seen_add = seen.add
+    accounts_ids = [ x for x in accounts_ids if x not in seen and not seen_add(x)]
     accounts_domains = Preference.objects.values_list('account_id', 'value', 'key').filter(Q(key='account.domain') | Q(key='account.name'), account__in = accounts_ids)
 
     r = {}

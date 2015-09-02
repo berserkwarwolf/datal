@@ -11,7 +11,7 @@ from core.http import get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
 from core.daos.datastreams import DatastreamHitsDAO
-from core.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
 
 
 def action_view(request, id, slug):

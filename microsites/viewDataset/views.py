@@ -6,7 +6,7 @@ from core.models import Dataset, DatasetRevision
 from core.daos.datasets import DatasetDBDAO
 from core.templatetags.core_components import permalink as get_permalink
 from microsites.daos.datasets import DatasetDAO
-from core.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
 
 
 def action_view(request, dataset_id, slug):

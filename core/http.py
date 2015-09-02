@@ -29,3 +29,11 @@ def get_domain_by_request(request, default_domain = ''):
         if domain is None:
             domain = default_domain
     return domain
+
+def gravatar_url(email, size):
+    import urllib
+    import hashlib
+    email_hash = hashlib.md5(email.lower()).hexdigest()
+    #default_image = urllib.quote(settings.MEDIA_URI + settings.GRAVATAR['default_image'], safe='')
+    default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
+    return settings.GRAVATAR['url'] % (email_hash, size, default_image)
