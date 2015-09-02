@@ -24,19 +24,18 @@ from django.views.decorators.cache import cache_page
 
 def datal_make_key(key, key_prefix, version):
     """
-        sobre escribe el metodo make_key del cache para generar la key
-        Ignora key, espera en key_prefix list[path, parametros(get,post)]
+        sobre escribe el metodo make_key del cache para generar la key, ignorando key
     """
 
-    parametros=str(hash(frozenset(sorted(key_prefix[0].items()))))
-    hash_key="%s:%s:%s" % (str(version),key_prefix[1],parametros)
-    return hash_key
+    return ":".join([str(version), key_prefix])
 
 def datal_cache_page(**kwargs):
     def _cache_page(viewfunc):
         @wraps(viewfunc, assigned=available_attrs(viewfunc))
         def _cache_page(request, *args, **kw):
-            response = cache_page(60, cache='engine', key_prefix=[request.REQUEST, request.path])(viewfunc)
+            params=str(hash(frozenset(sorted(request.REQUEST.items()))))
+            key_prefix=":".join([request.path,params])
+            response = cache_page(60, cache='engine', key_prefix=key_prefix)(viewfunc)
             return response(request, *args, **kw)
         return _cache_page
     return _cache_page
