@@ -14,9 +14,6 @@ from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMP
 
 logger = logging.getLogger(__name__)
 
-comma_separated_word_list_re = re.compile('^[\w,]+$')
-validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
-
 
 
 
@@ -102,45 +99,52 @@ validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re
 # 
 #     return json.dumps(l_lists)
 
+# Se va porque se va a refactorear
+# /home/mativs/Projects/datal/api/views.py
+# /home/mativs/Projects/datal/core/datastream_manager/views.py
+# /home/mativs/Projects/datal/microsites/chart_manager/views.py
+# /home/mativs/Projects/datal/microsites/datastream_manager/views.py
+# /home/mativs/Projects/datal/microsites/viewChart/views.py
+# /home/mativs/Projects/datal/workspace/manageVisualizations/views.py
 
-# class RequestProcessor:
-# 
-#     def __init__(self, request):
-#         self.request = request
-# 
-#     def get_arguments(self, paramaters):
-# 
-#         args = {}
-# 
-#         for parameter in paramaters:
-#             key = 'pArgument%d' % parameter.position
-#             value = self.request.REQUEST.get(key, '')
-#             if value == '':
-#                 parameter.value = parameter.default
-#                 args[key] = parameter.value
-#             else:
-#                 parameter.value = unicode(value).encode('utf-8')
-#                 args[key] = parameter.value
-#                 parameter.default = parameter.value
-# 
-#         return args
-# 
-#     def get_arguments_no_validation(self, query = None):
-#         counter = 0
-# 
-#         if not query:
-#             args = {}
-#         else:
-#             args = dict(query)
-# 
-#         key = 'pArgument%d' % counter
-#         value = self.request.REQUEST.get(key, None)
-#         while value:
-#             args[key] = PrimitiveComputer().compute(value)
-#             counter += 1
-#             key = 'pArgument%d' % counter
-#             value = self.request.REQUEST.get(key, None)
-#         return args
+class RequestProcessor:
+
+    def __init__(self, request):
+        self.request = request
+
+    def get_arguments(self, paramaters):
+
+        args = {}
+
+        for parameter in paramaters:
+            key = 'pArgument%d' % parameter.position
+            value = self.request.REQUEST.get(key, '')
+            if value == '':
+                parameter.value = parameter.default
+                args[key] = parameter.value
+            else:
+                parameter.value = unicode(value).encode('utf-8')
+                args[key] = parameter.value
+                parameter.default = parameter.value
+
+        return args
+
+    def get_arguments_no_validation(self, query = None):
+        counter = 0
+
+        if not query:
+            args = {}
+        else:
+            args = dict(query)
+
+        key = 'pArgument%d' % counter
+        value = self.request.REQUEST.get(key, None)
+        while value:
+            args[key] = PrimitiveComputer().compute(value)
+            counter += 1
+            key = 'pArgument%d' % counter
+            value = self.request.REQUEST.get(key, None)
+        return args
 
 # Este metodo està comentado en todos lados salvo en dos revisiones
 # quizás podríamos hacer uqe una clase padre de las revisiones lo tenga y que
