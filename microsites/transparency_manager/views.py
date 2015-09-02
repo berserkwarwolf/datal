@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from core.models import *
-from core.helpers import slugify
+from core.utils import slugify
 from django.http import Http404 # HttpResponse
 from core.communitymanagers import *
 from microsites.home_manager.managers import HomeFinder

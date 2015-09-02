@@ -311,7 +311,6 @@ class DatasetSearchIndexDAO():
     def _build_document(self):
         # eliminado hasta que haya facets
         #from core.models import add_facets_to_doc
-        #from core.helpers import get_meta_data_dict
 
         category=self._get_category()
         dataseti18n = self._get_i18n()
@@ -351,7 +350,7 @@ class DatasetSearchIndexDAO():
         #	except Exception, e:
         #	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
         #
-        #	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
+        #	#document['fields'].update(self.dataset_revision.get_meta_data_dict(self.dataset_revision.dataset.meta_text))
 
         return document
 

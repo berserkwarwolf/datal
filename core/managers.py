@@ -5,7 +5,7 @@ from django.db import models, connection
 from django.conf import settings
 from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
-from core.helpers import slugify
+from core.utils import slugify
 from core import helpers, choices
 
 
