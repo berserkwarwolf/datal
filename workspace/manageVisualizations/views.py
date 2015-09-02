@@ -16,7 +16,7 @@ from core.exceptions import *
 from core.engine import invoke, preview_chart
 from core.helpers import RequestProcessor
 from core.choices import *
-from core.docs import VZ, DT
+from core.docs import VZ, DT, DS
 from core.models import VisualizationRevision,DatasetRevision
 from core import helpers as LocalHelper
 from microsites.daos.visualizations import VisualizationDAO
@@ -24,6 +24,9 @@ from workspace.decorators import *
 from workspace.settings import *
 from workspace.manageVisualizations.forms import *
 from core.daos.visualizations import VisualizationDBDAO
+
+logger = logging.getLogger(__name__)
+
 
 logger = logging.getLogger(__name__)
 
@@ -313,23 +316,27 @@ def edit(request, datastream_revision_id=None):
             return JSONHttpResponse(json.dumps(response))
 
 
+@login_required
 def preview(request):
 
-    form = forms.PreviewForm(request.GET)
+    form = PreviewForm(request.GET)
+    logger.error("entering preview handler")
     if form.is_valid():
+        logger.error("form is valid")
         preferences = request.preferences
 
-        datastreamrevision_id  = form.cleaned_data.get('id')
+        datastreamrevision_id  = request.GET.get('datastream_revision_id', None)
 
         try:
             datastream = DS(datastreamrevision_id, request.auth_manager.language)
-        except:
+        except Exception, e:
+            logger.debug(e)
             raise Http404
         else:
 
             query = RequestProcessor(request).get_arguments(datastream.parameters)
 
-            query['pId'] = datastreamrevision_id
+            query['pId'] = int(datastreamrevision_id)
 
             limit = form.cleaned_data.get('limit')
             if limit is not None:
@@ -347,31 +354,33 @@ def preview(request):
             if zoom is not None:
                 query['pZoom'] = zoom
 
-            query['pNullValueAction'] = forms.cleaned_data.get('null_action')
-            query['pNullValuePreset'] = forms.cleaned_data.get('null_preset')
+            query['pNullValueAction'] = form.cleaned_data.get('null_action')
+            query['pNullValuePreset'] = form.cleaned_data.get('null_preset')
 
-            query['pData'] = forms.cleaned_data.get('data')
+            query['pData'] = form.cleaned_data.get('data')
 
-            labels = forms.cleaned_data.get('labels')
-            if lables is not None:
+            labels = form.cleaned_data.get('labels')
+            if labels is not None:
                 query['pLabelSelection'] = labels
 
-            headers = forms.cleaned_data.get('headers')
+            headers = form.cleaned_data.get('headers')
             if headers is not None:
                 query['pHeaderSelection'] = headers
 
-            lat = forms.cleaned_data.get('lat')
+            lat = form.cleaned_data.get('lat')
             if lat is not None:
                 query['pLatitudSelection'] = lat
 
-            long = forms.cleaned_data.get('long')
-            if long is not None:
-                query['pLongitudSelection'] = long
+            lon = form.cleaned_data.get('long')
+            if lon is not None:
+                query['pLongitudSelection'] = lon
 
-            traces = forms.cleaned_data.get('traces')
+            traces = form.cleaned_data.get('traces')
             if traces is not None:
                 query['pTraceSelection'] = traces
 
+            query['pType'] = 'chart'
+            logger.error(query)
             result, content_type = preview_chart(query)
 
             return HttpResponse(result, mimetype=content_type)

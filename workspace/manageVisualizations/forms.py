@@ -19,7 +19,7 @@ class ViewChartForm(forms.Form):
 
 
 class RequestForm(forms.Form):
-    visualization_revision_id = forms.IntegerField(required=True)
+    visualization_revision_id = forms.IntegerField(required=False)
     limit = forms.IntegerField(required=False)
     page = forms.IntegerField(required=False)
     bounds = forms.CharField(required=False)
@@ -28,7 +28,7 @@ class RequestForm(forms.Form):
 
 class PreviewForm(RequestForm):
     null_action = forms.CharField(required=True)
-    null_preset = forms.CharField(required=True)
+    null_preset = forms.CharField(required=False)
     data = forms.CharField(required=True)
     labels = forms.CharField(required=False)
     headers = forms.CharField(required=False)
