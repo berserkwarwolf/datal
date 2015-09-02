@@ -1,5 +1,5 @@
 from django.conf import settings
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.cache import Cache
 import memcache
 import urllib

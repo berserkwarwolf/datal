@@ -6,7 +6,8 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 
 from core.choices import ChannelTypes
 from core.daos.datastreams import DataStreamDBDAO
-from core.helpers import RequestProcessor, get_domain_with_protocol
+from core.helpers import RequestProcessor
+from core.http import get_domain_with_protocol
 from core.models import DataStreamRevision, DataStreamHits, DataStream, Account
 from core.shortcuts import render_to_response
 from core.daos.datastreams import DatastreamHitsDAO

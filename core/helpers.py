@@ -17,8 +17,7 @@ logger = logging.getLogger(__name__)
 comma_separated_word_list_re = re.compile('^[\w,]+$')
 validate_comma_separated_word_list = RegexValidator(comma_separated_word_list_re, _(u'Enter only words separated by commas.'), 'invalid')
 
-def get_domain_with_protocol(app, protocol = 'http'):
-    return protocol + '://' + settings.DOMAINS[app]
+
 
 
 # Lo borro porque me explicaron que no se va usar mas

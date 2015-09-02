@@ -7,7 +7,7 @@ from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 from core.engine import invoke, invoke_chart
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.reports_manager.helpers import create_report
 from microsites.viewChart import forms

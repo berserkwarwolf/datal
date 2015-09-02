@@ -16,7 +16,7 @@ from django.core.urlresolvers import reverse
 from uuid import uuid4
 from random import choice
 
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.auth.auth import AuthManager
 from core.auth.decorators import login_required
 from core.choices import TicketChoices
