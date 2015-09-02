@@ -1562,7 +1562,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "Where's the data"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Show us what data you want to collect by clicking on the <strong>blue dashed box</strong>"
+msgstr "Click on the data you want to use"
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "Need help"
@@ -1625,10 +1625,10 @@ msgid "CREATION-STEP3-HELPTIP"
 msgstr "A good data view clearly communicates what it is about."
 
 msgid "APP-PREVIEWANDSAVE-TEXT"
-msgstr "Preview &amp; Save"
+msgstr "Make sure that all is going well with your Data View."
 
 msgid "CREATE-STEP4-SUBTITLE"
-msgstr "Here is a preview of your data view. If everything is fine, click <strong>&quot;Save&quot;</strong>"
+msgstr "For large files we show here up to 100 rows. You can see it completely at the end."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Tags for this data view"
@@ -1731,9 +1731,6 @@ msgstr "Check below the differences between roles."
 
 msgid "MISSING-TRACKING-ID"
 msgstr "To add any event, you need to set the property ID of your Google Analytics account."
-
-msgid "CREATEDS-STEP4-TIP"
-msgstr "<em>Note:</em> This is just a preview of the data view, and may not contain the actual number of rows."
 
 msgid "ANALYTICS-FORM-TIP"
 msgstr "You can track only one account."

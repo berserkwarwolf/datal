@@ -182,13 +182,8 @@ var Step0 = Step.extend({
             $('#id_step0NextButton').show();
             $('#id_step0CancelButton').show();
             $('#id_tables_container').show();
-            $('#id_disclaimerButton').show();
-            $('#id_disclaimerContainer').show();
 
             this.setHeader();
-            $('#id_disclaimerButton').click(function(){
-                $('html, body').animate({scrollTop: $('body').height()}, 800)
-            });
 
             if(CreationManager.attributes.is_update_selection){
                 this.loadDatastreamData();
@@ -203,8 +198,7 @@ var Step0 = Step.extend({
             $('#id_step0NextButton').hide();
             $('#id_step0CancelButton').hide();
             $('#id_noDataHeader').show();
-            $('#id_disclaimerButton').hide();
-            $('#id_disclaimerContainer').hide();
+
             $('body').removeClass('fixedBar');
             $('.header').removeClass('fixedBar');
             $('.sectionTitleContainer').removeClass('fixedBar');
@@ -508,14 +502,6 @@ var Step1 = Step.extend({
         att.$NextButton                    = $('#id_step1NextButton', att.$Container).click(_.bind(this.onNextStepButtonClicked, this));
         att.$PreviousButton                = $('#id_step1PrevButton', att.$Container).click(_.bind(this.onPrevStepButtonClicked, this));
         att.$SelectedTableContainer        = $('#id_selectedTable_container', att.$Container);
-
-        $('#id_disclaimerContainer .close').click(function(){
-            $('#id_disclaimerContainer').fadeOut('normal', function(){
-                $('.step1 .DS_container').css({
-                    "padding-bottom" : 0
-                });
-            });
-        });
 
         $('#id_goToStep1Button').click(function(){
             CreationManager.goToStep(0);

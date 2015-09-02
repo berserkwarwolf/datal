@@ -1547,7 +1547,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "&iquest;Donde están los datos"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Indique que datos necesita clickeando en el <strong>recuadro azul</strong>"
+msgstr "Hace click sobre los datos que deseas utilizar para seleccionarlos."
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "&iquest;Necesitas ayuda"
@@ -1610,10 +1610,10 @@ msgid "CREATION-STEP3-HELPTIP"
 msgstr "Una buena Vista comunica claramente sobre que trata."
 
 msgid "APP-PREVIEWANDSAVE-TEXT"
-msgstr "Vista Previa y Guardar"
+msgstr "Asegurate que todo va bien con tu vista."
 
 msgid "CREATE-STEP4-SUBTITLE"
-msgstr "Asegurate que todo esta bien en tu Vista y haz click en <strong>&quot;Guardar&quot;</strong>"
+msgstr "Para archivos extensos mostramos aquí sólo hasta 100 filas. Podrás verlo completo al finalizar."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Etiquetas para esta Vista"
@@ -1716,9 +1716,6 @@ msgstr "Compruebe más abajo las diferencias entre los roles."
 
 msgid "MISSING-TRACKING-ID"
 msgstr "Para agregar cualquier evento, es necesario especificar el ID de propiedad de la cuenta de Google Analytics."
-
-msgid "CREATEDS-STEP4-TIP"
-msgstr "<em>Nota:</em> Esto es sólo una vista previa de la vista de datos, y puede no contener la cantidad real de filas."
 
 msgid "ANALYTICS-FORM-TIP"
 msgstr "Usted puede realizar el seguimiento de una sola cuenta."
@@ -2522,7 +2519,7 @@ msgid "BTN-BACK-TEXT"
 msgstr "Retroceder"
 
 msgid "BTN-NEXT-TEXT"
-msgstr "Siguiente"
+msgstr "Continuar"
 
 msgid "APP-CHART-TYPES-QUEST1"
 msgstr "Qué tipo de gráfico necesita?"
