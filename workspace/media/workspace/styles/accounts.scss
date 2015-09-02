@@ -6,7 +6,7 @@
 html,
 body{background:$nav-bg;}
 
-.account-box{width:320px;margin:0 auto;padding-top:5%;}
+.account-box{width:320px;margin:0 auto;padding-top:30px;}
 .account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;background-image:url(#{$logo-signin-svg-url});height:$logo-signin-height;margin-bottom:30px;}
 .account-box .account-box-content{background:#fff;padding:20px;border:1px solid $brand-color-bold;
   -webkit-border-radius:3px;
@@ -41,6 +41,7 @@ body{background:$nav-bg;}
 .account-box .account-box-footer li{padding-bottom:8px;}
 .account-box .account-box-footer li a{color:#fff;}
 .account-box div.has-error{color:#f45f64;padding-top:7px;font-size:12px;}
+.account-box-content fieldset legend{font-family:$font-titles-family;font-size:$font-size-xl;margin-bottom:20px;}
 
   /* Validation Messages */
   .account-box .account-box-message{background:rgba(66,52,45,.9) url(../images/common/ic_validationInfo32.png) no-repeat 13px center;border:1px solid #000;margin-bottom:20px;padding:19px 15px 19px 56px;color:#fff;text-shadow:0 1px 0 #000;min-height:60px;
@@ -66,13 +67,12 @@ body{background:$nav-bg;}
 #id_signUp .domainRow .domainText > span{max-width:100%;text-overflow:ellipsis;overflow:hidden;display:block;white-space:nowrap;}
 #id_signUp .domainRow .domainText:after{content:"/";display:block;position:absolute;top:0;right:-4px;}
 #id_signUp .domainRow input[type=text]{width:48%;float:right;margin:1px;height:28px;}
-#id_signIn legend,
-#id_signUp legend,
-#id_activate legend{font-size:$font-size-m;text-transform:uppercase;}
 #id_signUp .sub,
 #id_activate .sub{margin-top:10px;color:#999;}
 #id_signUp .buttons,
-#id_activate .buttons{border-top:1px solid #e2e0e0;margin-top:15px;}
+#id_activate .buttons,
+#id_forgotPassword .buttons,
+#id_recovery .buttons{border-top:1px solid #e2e0e0;margin-top:15px;}
 #id_signUp .buttons p.tip,
 #id_activate .buttons p.tip{padding:0 0 10px;}
 #id_signUp .buttons p.tip a,
@@ -82,4 +82,4 @@ body{background:$nav-bg;}
 #id_signUp #id_password,
 #id_activate #id_password{padding-right:100px;}
 
-.signInLink{right:20px;top:20px;}
+.signInLink{right:20px;top:26px;}

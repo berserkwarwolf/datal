@@ -512,7 +512,7 @@ msgid "APP-FORGOTPASSWORD-TEXT"
 msgstr "¿Olvidaste tu clave?"
 
 msgid "FORGOT-PASSWORD-LABEL"
-msgstr "Por favor, ingrese su nombre de usuario o su dirección de correo electrónico:"
+msgstr "Usuario o E-mail"
 
 msgid "FORGOT-PASSWORD-TIP"
 msgstr "Recibirás instrucciones para obtener una nueva contraseña por correo electrónico."
@@ -3075,3 +3075,6 @@ msgstr "Crea una vista"
 
 msgid "APP-SIGNIN-TITLE-TEXT"
 msgstr "Iniciar sesión"
+
+msgid "APP-RECOVER-TITLE-TEXT"
+msgstr "Recuperar contraseña"

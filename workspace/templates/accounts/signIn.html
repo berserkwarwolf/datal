@@ -22,7 +22,7 @@
     </div>
   </header>
   <div class="account-box-content relative">
-    <a href="/signin" title="{% trans 'APP-SIGNUP-TITLE-TEXT' %}" class="signInLink link absolute">{% trans 'APP-SIGNUP-TITLE-TEXT' %}</a>
+    <a href="/signup" title="{% trans 'APP-SIGNUP-TITLE-TEXT' %}" class="signInLink link absolute">{% trans 'APP-SIGNUP-TITLE-TEXT' %}</a>
     <form action="{{form.action}}" method="post">
       {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
       {% csrf_token %}

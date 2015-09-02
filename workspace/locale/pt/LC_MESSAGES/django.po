@@ -518,7 +518,7 @@ msgid "APP-FORGOTPASSWORD-TEXT"
 msgstr "Forgot your password?"
 
 msgid "FORGOT-PASSWORD-LABEL"
-msgstr "Please enter your username or email address:"
+msgstr "Username or E-mail"
 
 msgid "FORGOT-PASSWORD-TIP"
 msgstr "You will receive instructions to get a new password via email."
@@ -3082,3 +3082,6 @@ msgstr "Create a Data View"
 
 msgid "APP-SIGNIN-TITLE-TEXT"
 msgstr "Sign in"
+
+msgid "APP-RECOVER-TITLE-TEXT"
+msgstr "Recover password"
