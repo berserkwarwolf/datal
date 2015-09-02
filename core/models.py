@@ -279,7 +279,7 @@ class DataStream(GuidModel):
         return self.datastreamrevision_set.all()[0]
 
 
-class DataStreamRevision(models.Model):
+class DataStreamRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
 
     datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
@@ -500,8 +500,24 @@ class Dataset(GuidModel):
     def current(self):
         return self.datasetrevision_set.all()[0]
 
+class RevisionModel(models.Model):
+    def get_meta_data_dict(self, metadata):
+        answer = {}
+        if metadata:
+            try:
+                meta = json.loads(metadata)
+                meta = meta['field_values'] if 'field_values' in meta else []
+                for item in meta:
+                    answer.update(item)
+            except ValueError:
+                pass
+        return answer
 
-class DatasetRevision(models.Model):
+    class Meta:
+        abstract = True
+
+
+class DatasetRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
 
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
@@ -683,7 +699,7 @@ class DatasetRevision(models.Model):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(get_meta_data_dict(dataset.meta_text))
+        indexable_dict['fields'].update(self.get_meta_data_dict(dataset.meta_text))
 
         return indexable_dict
 
@@ -729,7 +745,7 @@ class Visualization(GuidModel):
         return self.visualizationrevision_set.all()[0]
 
 
-class VisualizationRevision(models.Model):
+class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     impl_details = models.TextField(blank=True)
@@ -812,7 +828,7 @@ class VisualizationRevision(models.Model):
                 }
 
         indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(visualization.metadata))
+        indexable_dict['fields'].update(self.get_meta_data_dict(visualization.metadata))
 
         return indexable_dict
 

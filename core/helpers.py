@@ -146,22 +146,6 @@ class RequestProcessor:
             value = self.request.REQUEST.get(key, None)
         return args
 
-# Este metodo està comentado en todos lados salvo en dos revisiones
-# quizás podríamos hacer uqe una clase padre de las revisiones lo tenga y que
-# cada uno lo use.
-def get_meta_data_dict(metadata):
-    answer = {}
-    if metadata:
-        try:
-            meta = json.loads(metadata)
-            meta = meta['field_values'] if 'field_values' in meta else []
-            for item in meta:
-                answer.update(item)
-        except ValueError:
-            pass
-    return answer
-
-
 def slugify(value):
     value = django_slugify(value)
     value = value.replace('_', '-')
