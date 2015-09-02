@@ -277,6 +277,22 @@ class DataStream(GuidModel):
     def current(self):
         return self.datastreamrevision_set.all()[0]
 
+class RevisionModel(models.Model):
+    def get_meta_data_dict(self, metadata):
+        answer = {}
+        if metadata:
+            try:
+                meta = json.loads(metadata)
+                meta = meta['field_values'] if 'field_values' in meta else []
+                for item in meta:
+                    answer.update(item)
+            except ValueError:
+                pass
+        return answer
+
+    class Meta:
+        abstract = True
+
 
 class DataStreamRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
@@ -498,22 +514,6 @@ class Dataset(GuidModel):
     @property
     def current(self):
         return self.datasetrevision_set.all()[0]
-
-class RevisionModel(models.Model):
-    def get_meta_data_dict(self, metadata):
-        answer = {}
-        if metadata:
-            try:
-                meta = json.loads(metadata)
-                meta = meta['field_values'] if 'field_values' in meta else []
-                for item in meta:
-                    answer.update(item)
-            except ValueError:
-                pass
-        return answer
-
-    class Meta:
-        abstract = True
 
 
 class DatasetRevision(RevisionModel):

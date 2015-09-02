@@ -17,7 +17,7 @@ def slugify(value):
     return value
 
 
-# Esto deberà estar implementado en las revisiones y a su vez devuelto
+# Esto debera estar implementado en las revisiones y a su vez devuelto
 # en el DAO, ahora una vez devuelto el resulado del dao se calculo el 
 # impl_type_nice sobre el impl_type de la respuesta del DAO
 def set_dataset_impl_type_nice(item):
@@ -25,7 +25,7 @@ def set_dataset_impl_type_nice(item):
 
 
 # Esto se usa en dos vistas para pasarle parametros de filtro al query de 
-# los dao, no estoy seguro donde deberìa ir este còdigo.
+# los dao, no estoy seguro donde deberia ir este codigo.
 def filters_to_model_fields(filters):
     result = dict()
 
@@ -36,7 +36,7 @@ def filters_to_model_fields(filters):
 
     return result
 
-# Esto solo se usa en un lugar no se si vale la pena que eté aca
+# Esto solo se usa en un lugar no se si vale la pena que ete aca
 def remove_duplicated_filters(list_of_resources):
     removed = dict()
     removed['status_filter'] = set([x.get('status') for x in list_of_resources])
@@ -46,7 +46,7 @@ def remove_duplicated_filters(list_of_resources):
     removed['author_filter'] = removed['author_filter'].union(set([x.get('datastream__user__nick', '') for x in list_of_resources]))
     return removed
 
-# esto se usa exactamente en el mismo lugar que la funciòn de arriba
+# esto se usa exactamente en el mismo lugar que la funcion de arriba
 def unset_visualization_revision_nice(item):
     new_item = dict()
     new_item['dataset__user__nick'] = item.get('author_filter')
