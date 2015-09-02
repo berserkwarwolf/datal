@@ -4,10 +4,10 @@
 
 	<div class="row">
 		<div class="col-xs-12">
-			<h1>Seleccione los datos que desee representar</h1>
+			<h1>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT" %}</h1>
 			<div class="FR">
-				<button class="button default btn-cancel">Cancelar</button>
-				<button class="button primary btn-done" disabled="disabled">Graficar</button>
+				<button class="button default btn-cancel">{% trans "APP-CANCEL-TEXT" %}</button>
+				<button class="button primary btn-done" disabled="disabled">{% trans "APP-GRAPH-TEXT" %}</button>
 			</div>
 		</div>
 	</div>
@@ -17,13 +17,15 @@
 		<div class="col-xs-3">
 			<div class="selected-ranges-view">
 			<form class="form">
-				<h4>Intervalos</h4>
+				<h4>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT" %}</h4>
 				<input name="range_data" type="text" />
 
-				<h4>Etiquetas (Eje X)</h4>
+				<h4>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT" %}</h4>
+				<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT" %}</p>
 				<input name="range_labels" type="text" />
 
-				<h4>Encabezado/s</h4>
+				<h4>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT" %}</h4>
+				<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT" %}</p>
 				<input name="range_headers" type="text" />
 
 			</form>

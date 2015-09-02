@@ -17,6 +17,9 @@ from django.db import connection
 from django.db.models import Count
 
 from datetime import datetime, date, timedelta
+import json
+from django.core.serializers.json import DjangoJSONEncoder
+
 
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
@@ -131,6 +134,7 @@ class VisualizationHitsDAO():
     """class for manage access to Hits in DB and index"""
 
     doc_type = "vz"
+    from_cache = False
 
     # cache ttl, 1 hora
     TTL=3600 
@@ -207,7 +211,7 @@ class VisualizationHitsDAO():
         hits = self._get_cache(cache_key)
 
         # me cachendié! no esta en la cache
-        if not hits:
+        if not hits :
             # tenemos la fecha de inicio
             start_date=datetime.today()-timedelta(days=day)
 
@@ -238,10 +242,22 @@ class VisualizationHitsDAO():
 
             hits = sorted(hits, key=lambda k: k['fecha']) 
 
+            # transformamos las fechas en isoformat
+            hits=map(self._date_isoformat, hits)
+
             # lo dejamos, amablemente, en la cache!
-            self._set_cache(cache_key, hits)
+            self._set_cache(cache_key, json.dumps(hits, cls=DjangoJSONEncoder))
+
+            self.from_cache=False
+        else:
+            hits=json.loads(hits)
+            self.from_cache=True
 
         return hits
+
+    def _date_isoformat(self, row):
+        row['fecha']=row['fecha'].isoformat()
+        return row
 
 
 class VisualizationSearchDAOFactory():

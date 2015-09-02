@@ -687,16 +687,8 @@ i.icon.TNCLIMA{}
 .tagsContent, .sourcesContent, .paramContent{float:left;width:100%;padding:0;}
 .tag, .param{margin:5px 5px 0 0;float:left;}
 .tag .tagTxt, .param .paramTxt {
-  background:#fff;
-  background:-webkit-linear-gradient(to bottom, #fff 50%, #f0f0f0 0%, #f0e3f0 100%);
-  background:-o-linear-gradient(to bottom, #fff 50%, #f0f0f0 0%, #f0e3f0 100%);
-  background:-ms-linear-gradient(to bottom, #fff 50%, #f0f0f0 0%, #f0e3f0 100%);
-  background:linear-gradient(to bottom, #fff 50%, #f0f0f0 0%, #f0e3f0 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#fff', endColorstr='#f0f0f0',GradientType=0 );
-  -webkit-border-radius: 7px 0 0 7px;
-     -moz-border-radius: 7px 0 0 7px;
-         border-radius: 7px 0 0 7px;
-  word-wrap:break-word;display:block;float:left;padding:0 8px;color:#767676;font-size:11px;text-shadow:0 1px 0 #fff;  line-height:20px;height:20px;border:1px solid #e2e0e0;border-right:0;border-top-left-radius:3px;border-bottom-left-radius:3px;}
+  background:#e2e2e2;
+  word-wrap:break-word;display:block;float:left;padding:2px 8px;color:#767676;font-size:11px;line-height:20px;height:20px;}
 
 .tag .tagInner a:hover, .tag .tagTxt.isEditing, .param .paramInner a:hover{background-position: 0 bottom;
 border-color: #ccc;}
