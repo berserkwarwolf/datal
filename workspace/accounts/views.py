@@ -24,6 +24,7 @@ from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
 from core.lib.mail.django_backend import DjangoMailService
+from core.decorators import *
 from workspace.accounts import forms
 
 
@@ -97,7 +98,6 @@ def create(request):
         return redirect('/')
     else:
         return redirect('accounts.signup')
-
 
 def signin(request, admin_url=''):
     auth_manager = request.auth_manager

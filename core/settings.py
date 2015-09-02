@@ -339,6 +339,26 @@ BOWER_INSTALLED_APPS = (
     'handsontable#>=0.16.1'
 )
 
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 600,
+        'OPTIONS': {
+            'MAX_ENTRIES': 300, # Default
+        }
+    },
+    'engine': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 60,
+        'OPTIONS': {
+            'MAX_ENTRIES': 300, # Default
+        }
+    }
+
+}
+
 try:
     from core.local_settings import *
 except ImportError:
