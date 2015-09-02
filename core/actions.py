@@ -79,7 +79,7 @@ class ViewVisualizationListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-VISUALIZATION-LIST')
 
     def __init__(self):
-        url = reverse('manageVisualizations.list')
+        url = reverse('manageVisualizations.index')
         super(ViewVisualizationListExceptionAction, self).__init__(url)
 
 

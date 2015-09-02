@@ -81,8 +81,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization__user__language=language
         )
 
-
-
         if exclude:
             query.exclude(**exclude)
 
@@ -100,21 +98,20 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         total_resources = query.count()
         query = query.values(
-                             'status',
-                             'id',
-                             'visualization__id',
-                             'visualization__guid',
-                             'visualization__user__nick',
-                             'visualization__last_revision_id',
-                             'visualization__datastream__id',
-                             'visualization__datastream__last_revision__id',
-                             'visualization__datastream__last_revision__category__id',
-                             'visualization__datastream__last_revision__category__categoryi18n__name',
-                             'visualization__datastream__last_revision__datastreami18n__title',
-                             'visualizationi18n__title',
-                             'visualizationi18n__description', 'created_at', 'visualization__user__id',
-
-                             )
+            'status',
+            'id',
+            'visualization__id',
+            'visualization__guid',
+            'visualization__user__nick',
+            'visualization__last_revision_id',
+            'visualization__datastream__id',
+            'visualization__datastream__last_revision__id',
+            'visualization__datastream__last_revision__category__id',
+            'visualization__datastream__last_revision__category__categoryi18n__name',
+            'visualization__datastream__last_revision__datastreami18n__title',
+            'visualizationi18n__title',
+            'visualizationi18n__description', 'created_at', 'visualization__user__id',
+        )
 
         query = query.order_by(sort_by)
 

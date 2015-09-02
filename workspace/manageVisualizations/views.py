@@ -32,7 +32,7 @@ logger = logging.getLogger(__name__)
 @requires_any_dataset()
 @requires_any_datastream()
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     dao = VisualizationDBDAO()
 

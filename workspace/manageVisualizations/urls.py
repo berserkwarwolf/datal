@@ -6,7 +6,7 @@ from workspace.manageDataviews.views import filter as filterDatastreams
 urlpatterns = patterns(
     '',
     # Confirmados
-    url(r'^$', list, name='manageVisualizations.list'),
+    url(r'^$', index, name='manageVisualizations.index'),
     url(r'^filter_datastream$', filterDatastreams, name='manageDatastream.filter'),
     url(r'^create$', create, name='manageVisualizations.create'),
     url(r'^(?P<revision_id>\d+)$', action_view, name='manageVisualizations.view'),
