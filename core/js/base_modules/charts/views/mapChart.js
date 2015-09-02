@@ -41,7 +41,14 @@ charts.views.MapChart = charts.views.Chart.extend({
 
     bindEvents: function () {
         this.model.on('change', this.render, this);
+        this.listenTo(this.model, 'change:mapType', this.onChangeMapType, this);
         this.model.on('data_updated', this.handleDataUpdated, this);
+    },
+
+    onChangeMapType: function (model, type) {
+        if (this.mapInstance) {
+            this.mapInstance.setMapTypeId(google.maps.MapTypeId[type]);
+        }
     },
 
     /**
@@ -57,7 +64,9 @@ charts.views.MapChart = charts.views.Chart.extend({
     createCoogleMapInstance: function () {
         this.mapInstance = new google.maps.Map(this.el, {
             zoom: this.model.get('options').zoom,
-            center: new google.maps.LatLng(this.model.get('options').center.lat, this.model.get('options').center.long)
+            center: new google.maps.LatLng(this.model.get('options').center.lat,
+                this.model.get('options').center.long),
+            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
         });
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
