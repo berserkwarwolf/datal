@@ -5,15 +5,15 @@ import logging
 
 from django.db.models import Q, F
 from django.db import IntegrityError
-
-from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
-from core import settings
+from core.utils import slugify
 from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
+from core import settings
+from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -107,6 +107,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
         dataset_revision = datastream_revision.dataset.last_revision
 
+        # Muestro el link del micrositio solo si esta publicada la revision
+        public_url = ''
+        if datastream_revision.datastream.last_published_revision:
+            domain = datastream_revision.user.account.get_preference('account.domain')
+            if not domain.startswith('http'):
+                domain = 'http://' + domain
+            public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+
+
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
@@ -126,13 +135,14 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             guid=datastream_revision.dataset.guid,
             created_at=datastream_revision.dataset.created_at,
             last_revision_id=datastream_revision.dataset.last_revision_id,
-            last_published_revision_id=datastream_revision.dataset.last_published_revision_id,
+            last_published_date=datastream_revision.datastream.last_published_revision_date,
             title=datastreami18n.title,
             description=datastreami18n.description,
             notes=datastreami18n.notes,
             tags=tags,
             sources=sources,
             parameters=parameters,
+            public_url=public_url,
         )
 
         return datastream

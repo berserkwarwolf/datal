@@ -4,7 +4,7 @@ from django.http import HttpResponse, Http404
 from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.utils.translation import ugettext
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
@@ -273,37 +273,76 @@ def edit(request, datastream_revision_id=None):
 
 @login_required
 @require_privilege("workspace.can_review_dataset_revision")
-@require_http_methods(['POST', 'GET'])
+@require_POST
 @transaction.commit_on_success
-def review(request, datastream_revision_id=None):
-
-    if request.method == 'POST' and datastream_revision_id != None:
-
-        lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
+def change_status(request, datastream_revision_id=None):
+    """
+    Change dataview status
+    :param request:
+    :param datastream_revision_id:
+    :return: JSON Object
+    """
+    if request.method == 'POST' and datastream_revision_id:
+        lifecycle = DatastreamLifeCycleManager(
+            user=request.user,
+            datastream_revision_id=datastream_revision_id
+        )
         action = request.POST.get('action')
 
         if action == 'approve':
-
             lifecycle.accept()
-
-            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATAVIEW-APPROVED-TEXT')}
-
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.APPROVED,
+                messages={
+                    'title': ugettext('APP-DATAVIEW-APPROVED-TITLE'),
+                    'description': ugettext('APP-DATAVIEW-APPROVED-TEXT')
+                }
+            )
         elif action == 'reject':
-
             lifecycle.reject()
-
-            response = {'status': 'ok', 'datastream_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATAVIEW-REJECTED-TEXT')}
-
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATAVIEW-REJECTED-TITLE'),
+                    'description': ugettext('APP-DATAVIEW-REJECTED-TEXT')
+                }
+            )
+        elif action == 'publish':
+            lifecycle.publish()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.PUBLISHED,
+                messages={
+                    'title': ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
+                    'description': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
+                }
+            )
+        elif action == 'unpublish':
+            lifecycle.unpublish()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
+                    'description': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
+                }
+            )
+        elif action == 'send_to_review':
+            lifecycle.send_to_review()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.PENDING_REVIEW,
+                messages={
+                    'title': ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
+                    'description': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')
+                }
+            )
         else:
+            raise NoStatusProvidedException()
 
-            response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
-
-    else:
-
-        response = {'status': 'error', 'messages': ugettext('APP-DATAVIEW-NOT-REVIEWED-TEXT')}
-
-    return JSONHttpResponse(json.dumps(response))
+        return JSONHttpResponse(json.dumps(response))
 
     
 @csrf_exempt

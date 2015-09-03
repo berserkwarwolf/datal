@@ -52,7 +52,7 @@ msgid "APP-ACTIONS-SUBMIT"
 msgstr "Submit"
 
 msgid "APP-APPROVE-TEXT"
-msgstr "Approve"
+msgstr "Accept"
 
 msgid "APP-REJECT-TEXT"
 msgstr "Rejected"
@@ -67,10 +67,10 @@ msgid "APP-DRAFT-TEXT"
 msgstr "Draft"
 
 msgid "APP-PENDINGREVIEW-TEXT"
-msgstr "Pending Review"
+msgstr "Under review"
 
 msgid "APP-APPROVED-TEXT"
-msgstr "Approved"
+msgstr "Accepted"
 
 msgid "APP-PUBLISHED-TEXT"
 msgstr "Published"

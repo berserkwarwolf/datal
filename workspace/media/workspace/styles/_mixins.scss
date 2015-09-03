@@ -104,3 +104,17 @@
   -ms-transform:$value;
   transform:$value;
 }
+@mixin media-query($property, $media) {
+  @if $media == sm {
+    @media only screen and ($property: $break-sm) { @content; }
+  }
+  @else if $media == md {
+    @media only screen and ($property: $break-md ) { @content; }
+  }
+  @else if $media == lg {
+    @media only screen and ($property: $break-lg) { @content; }
+  }
+  @else{
+    @media only screen and ($property: $media) { @content; }
+  }
+}

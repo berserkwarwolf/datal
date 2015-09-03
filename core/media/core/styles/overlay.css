@@ -1,10 +1,10 @@
 /*OVERLAY*/
-.ao-popup-overlay{border:7px solid #989898;border:7px solid rgba(0, 0, 0, .4);-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;z-index:10001;}
+.ao-popup-overlay{z-index:10001;}
 .ao-popup-overlay .In, 
-.ao-popup-overlay .Inner{border:1px solid #e2e0e0;-moz-border-radius:5px;-webkit-border-radius:5px;background:#fff;}
+.ao-popup-overlay .Inner{background:#fff;}
 .ao-popup-overlay .Inner .In{border:0;-moz-border-radius:0;-webkit-border-radius:0;background:#fff;padding:0;}
 .ao-popup-overlay .In h4, 
-.ao-popup-overlay .Inner h4{padding:0 18px;height:48px;line-height:48px;font-size:20px;font-weight:bold;color:#4d4d4d;background:url(/static/core/images/common/dg_CajaSlider.gif) repeat-x 0 bottom;border-bottom:1px solid #ccc;}
+.ao-popup-overlay .Inner h4{padding:25px;font-size:20px;color:#000;line-height:20px;}
 .ao-popup-overlay .In h4 span{color:#999;font-size:14px;font-weight:normal;}
 .ao-popup-overlay .In span.required{color:#d21717;}
 .ao-popup-overlay .ao-dialogue{margin:30px 20px 8px;width:333px;}
@@ -20,11 +20,13 @@
 .ao-popup-overlay .ao-dialogue .tagsContent{height:auto;max-height:78px;overflow:auto;width:270px;overflow-x:hidden;overflow-y:auto;padding:0;margin-top:2px;}
 .ao-popup-overlay .ao-dialogue .inputNewTag{float:none;}
 .ao-popup-overlay .ao-dialogue .tag{float:left;display:block;border:1px solid #e2e0e0;background:#e9e8e8 url(/static/core/images/common/dg_tag.gif) repeat-x 0 0;-moz-border-radius:7px;-webkit-border-radius:7px;margin:4px 4px 0 0;}
-.ao-popup-overlay .ao-dialogue  .tag .tagInner{padding:0 5px 0 8px;}
-.ao-popup-overlay .ao-dialogue  .tag .tagTxt{word-wrap:break-word;display:block;float:left;padding-right:3px;color:#767676;font-size:11px;text-shadow:0 1px 0 #fff;padding-top:2px;}
-.ao-popup-overlay .ao-dialogue  .tag a{display:block;float:left;width:7px;height:20px;background:url(/static/core/images/common/ic_tagClose.gif) no-repeat 0 0;}
-.ao-popup-overlay .ao-dialogue  .tag a:hover{background-position:0 bottom;}
-.ao-popup-overlay .close{position:absolute;background:url(/static/core/images/common/ic_Cerrar.png) no-repeat 0 0;width:30px;height:30px;top:-14px;right:-12px;cursor:pointer;}
+.ao-popup-overlay .ao-dialogue .tag .tagInner{padding:0 5px 0 8px;}
+.ao-popup-overlay .ao-dialogue .tag .tagTxt{word-wrap:break-word;display:block;float:left;padding-right:3px;color:#767676;font-size:11px;text-shadow:0 1px 0 #fff;padding-top:2px;}
+.ao-popup-overlay .ao-dialogue .tag a{display:block;float:left;width:7px;height:20px;background:url(/static/core/images/common/ic_tagClose.gif) no-repeat 0 0;}
+.ao-popup-overlay .ao-dialogue .tag a:hover{background-position:0 bottom;}
+.ao-popup-overlay .close{position:absolute;width:24px;height:24px;top:20px;right:20px;cursor:pointer;color:#000 !important;}
+.ao-popup-overlay .close:after{content:"x";font-family:robotolight;font-size:20px;line-height:24px;text-align:center;width:24px;height:24px;display:block;}
+.ao-popup-overlay .close:hover:after{color:#0066ff;}
 .ao-popup-overlay .Datos{font-size:14px;color:#4d4d4d;padding:20px 20px 0;font-weight:normal;line-height:25px;}
 .ao-popup-overlay .Datos label{color:blue;font-weight:normal;cursor:pointer;font-size:12px;}
 .ao-popup-overlay .Datos input[type=text]{background:#fff;width:150px;vertical-align:middle;height:23px;line-height:23px;padding:0 3px;border:1px solid #ccc;font:12px Arial, Helvetica, sans-serif;-moz-border-radius:3px;-webkit-border-radius:3px;}

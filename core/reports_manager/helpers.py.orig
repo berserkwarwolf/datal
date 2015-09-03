@@ -1,9 +1,6 @@
 from core.models import DataStreamHits, VisualizationHits
-<<<<<<< Updated upstream
-import logging
-=======
 
->>>>>>> Stashed changes
+import logging
 
 def create_report(object_id, model, channel_type):
     logger = logging.getLogger(__name__)

@@ -277,6 +277,11 @@ class DataStream(GuidModel):
     def current(self):
         return self.datastreamrevision_set.all()[0]
 
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
+
+
 class RevisionModel(models.Model):
     def get_meta_data_dict(self, metadata):
         answer = {}
@@ -514,6 +519,10 @@ class Dataset(GuidModel):
     @property
     def current(self):
         return self.datasetrevision_set.all()[0]
+
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
 
 
 class DatasetRevision(RevisionModel):

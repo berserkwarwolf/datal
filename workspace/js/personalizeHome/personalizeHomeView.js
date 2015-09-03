@@ -1,11 +1,12 @@
 var personalizeView = Backbone.View.extend({
 	
-	el: '#id_personalizeHome',
+	//el: '#id_personalizeHome',
+	el: '.main-section',
 	pivotView: null,
 	themeToSet : null,
 	themeModel : null,
 	events:{
-		'click #id_save, #id_preview': 'save',
+		'click #id_save, id_save_top, #id_preview, #id_preview_top': 'save',
 		'click #id_noThemeButton, #id_theme0Button, #id_theme1Button, #id_theme2Button, #id_theme3Button, #id_theme4Button, #id_theme5Button, #id_theme6Button': 'onSwitchThemeButtonClicked',
 	},
 
@@ -65,7 +66,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme0Button');
 		this.setThemeDescriptions(0);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme0Model( {config: this.model.get('config')});
@@ -84,7 +85,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme1Button');
 		this.setThemeDescriptions(1);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme1Model({config: this.model.get('config')});
@@ -103,7 +104,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme2Button');
 		this.setThemeDescriptions(2);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme2Model({config: this.model.get('config')});
@@ -122,7 +123,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme3Button');
 		this.setThemeDescriptions(3);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme3Model( {config: this.model.get('config')});
@@ -140,7 +141,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme4Button');
 		this.setThemeDescriptions(4);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme4Model({config: this.model.get('config')});
@@ -158,7 +159,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme5Button');
 		this.setThemeDescriptions(5);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme5Model({config: this.model.get('config')});
@@ -176,7 +177,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_theme6Button');
 		this.setThemeDescriptions(6);
 		$('#id_themeConfigs').show().removeClass('noThemeSelected');
-		$('#id_preview').show();
+		$('#id_preview, #id_preview_top').show();
 		if(themeToSet == this.model.get('themeID'))
 		{
 			themeModel= new theme6Model({config: this.model.get('config')});
@@ -194,7 +195,7 @@ var personalizeView = Backbone.View.extend({
 		this.selectTab('id_noThemeButton');
 		this.setThemeDescriptions(null);
 		$('#id_themeConfigs').show().addClass('noThemeSelected');
-		$('#id_preview').hide();
+		$('#id_preview, #id_preview_top').hide();
 		$('#id_themeForm').html();
 		this.pivotView = null;
 	},

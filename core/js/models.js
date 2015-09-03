@@ -711,4 +711,8 @@ var mapChart2 = junarChart2.extend({
 
 var dataset = Backbone.Model.extend({
 
+    defaults: {
+
+    },
+
 });

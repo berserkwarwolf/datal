@@ -18,7 +18,7 @@
     </div>
 
     <div class="row clearfix">
-      <a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
+      <a title="{% trans 'APP-ADD-TEXT' %}" class="button small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
     </div>
   </div>
 </script>
@@ -127,4 +127,144 @@
          </div>
 
       </form>
+</script>
+
+{# Context Menu #}
+<script type="text/template" id="context-menu-template">
+  
+  <!-- Column Left -->
+  <div class="col-xs-7">    
+    
+    <h1><%= title %></h1>
+
+    <div class="status-row clearfix">
+
+      <span class="status">
+
+        <% if(status == StatusChoices.PUBLISHED){ %> 
+          <span class="icon icon-inline icon-published"></span>
+        <% } %>
+
+        <em id="id_status" class="<% if(status == StatusChoices.REJECTED){ %> red <% }else if(status == StatusChoices.APPROVED){ %> green <% } %>"><%= status_str %></em>
+
+      </span>
+
+      <span class="publish-version">
+
+        <% if(publicUrl != ''){ %> 
+
+          <% if(status != StatusChoices.PUBLISHED){ %> 
+            {% trans 'APP-LASTPUBLISHDATE-TEXT' %}
+          <% } %>
+
+          <%= lastPublishDate %>, 
+
+          <a href="<%= publicUrl %>" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}" target="_blank">{% trans 'APP-VIEWONSITE-TEXT' %}<span class="icon icon-inline icon-new-tab icon-right"></span></a>
+
+        <% }else{ %>
+
+          <%= createdAt %>
+
+        <% } %>
+
+      </span>
+
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+        <% if(status != StatusChoices.UNPUBLISHED){ %>
+        <span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+        <% } %>
+      {% endif %}
+
+
+    </div>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-xs-5 context-buttons clearfix">
+
+    <% if( status != StatusChoices.REJECTED ){ %>
+
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+        <% if( status == StatusChoices.PENDING_REVIEW || status == StatusChoices.UNDER_REVIEW ){ %>
+
+          <!-- Accept -->
+          <a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+          
+          <!-- Reject -->
+          <a id="id_reject" class="button red FR" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+
+        <% }else{ %>
+
+          {% comment %}
+
+          <!-- Main Action - Create Viz -->
+          <a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+
+          {% endcomment %}
+
+          <% if(status != StatusChoices.PUBLISHED){ %>
+
+            <!-- Secondary Action - Publish -->
+            <a id="id_publish" class="button FR" title="{% trans 'APP-PUBLISH-TEXT' %}" data-action="publish">{% trans 'APP-PUBLISH-TEXT' %}</a>
+
+          <% } %>
+
+        <% } %>
+
+      {% elif auth_manager.is_editor %}
+
+        {% comment %}
+
+        <!-- Main Action - Create Viz -->
+        <a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+
+        {% endcomment %}
+
+        <% if( status == StatusChoices.DRAFT  ){ %>
+
+          <!-- Secondary Action - Send to review -->
+          <a id="id_sendToReview" class="button FR" title="{% trans 'APP-SENDTOREVIEW-TEXT' %}" data-action="review">{% trans 'APP-SENDTOREVIEW-TEXT' %}</a>
+
+        <% } %>
+
+      {% endif %}
+
+    <% } %> 
+
+    <% if(status != StatusChoices.PENDING_REVIEW || status != StatusChoices.UNDER_REVIEW){ %>
+
+      <!-- More Actions -->    
+      <div class="more-actions button-pulldown FR">
+        <div class="button more-button">
+          <span class="icon icon-more"></span>
+        </div>
+        <ul class="dropdown" style="display:none;">
+          <li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+          <li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
+        </ul>
+      </div>   
+
+    <% } %>
+
+    {% comment %}
+    
+    <% if( status == StatusChoices.REJECTED ){ %>
+
+      {% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+        <a id="id_sendRejectedNote" class="button alpha FR" title="{% trans 'APP-SENDREJECTEDNOTE-TEXT' %}">{% trans 'APP-SENDREJECTEDNOTE-TEXT' %}</a> 
+
+      {% elif auth_manager.is_editor %}
+
+        <a id="id_viewRejectedNote" class="button alpha FR" title="{% trans 'APP-VIEWREJECTEDNOTE-TEXT' %}">{% trans 'APP-VIEWREJECTEDNOTE-TEXT' %}</a>
+
+      {% endif %}
+
+    <% } %> 
+
+    {% endcomment %}
+
+  </div>
 </script>

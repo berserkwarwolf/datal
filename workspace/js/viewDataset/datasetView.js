@@ -1,24 +1,24 @@
-var ViewDatasetView = Backbone.Epoxy.View.extend({
+var datasetView = Backbone.Epoxy.View.extend({
 
 	el: '.main-section',
-    deleteListResources: null,
+	deleteListResources: null,
+
+	template: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject': 'review',
-	},
-
-	bindings: {
-		'#id_status': 'text:status',
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
+		'click #id_unpublish': 'onUnpublishButtonClicked'
 	},
 
 	initialize: function(){
+		this.template = _.template( $("#context-menu-template").html() );
+		this.listenTo(this.model, "change:status", this.render);
 		this.render();
-
-        console.log(this.model.toJSON());
 	},
 
-	render: function(){
+	render: function() {
+		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
 		this.setSidebarHeight();
 		this.setContentHeight();
 		return this;
@@ -67,7 +67,7 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 			otherHeight = theHeight,
 			minHeight = tabsHeight - otherHeight;
 
-		$(heightContainer).css('min-height', minHeight+ 'px');
+		// $(heightContainer).css('min-height', minHeight+ 'px');
 
 		$(window).resize(function(){
 
@@ -79,29 +79,14 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 				windowHeight = $(window).height();
 			}
 
-			var alertHeight = 0;
-			if($('.section-content .alert').length > 0){
-				if($('.section-content .alert').css('display') != 'none'){
-					alertHeight =
-						parseFloat( $('.section-content .alert').height() )
-						+ parseFloat( $('.section-content .alert').css('padding-top').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('padding-bottom').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('margin-bottom').split('px')[0] );
-				}
-			}
-
 			var sectionContentHeight =
 			windowHeight
 			- parseFloat( otherHeight )
-			- ( alertHeight )
 			- $('.header').height()
-			- parseInt($('.header').css('border-top-width').split('px')[0])
-			- parseInt($('.header').css('border-bottom-width').split('px')[0])
 			- $('.main-section .section-title').height()
-			- parseInt($('.main-section .section-content').css('padding-top').split('px')[0])
-			- parseInt($('.main-section .section-content').css('padding-bottom').split('px')[0])
-			- $('.footer').height()
-			- 3; // 3 rounds up the number, don't know why.
+			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
+			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
+			- 20; // to set some space at the bottom
 
 			$(heightContainer).css('height', sectionContentHeight+'px');
 
@@ -110,21 +95,28 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 	}, 
 
 	onDeleteButtonClicked: function(){
-        self = this;
-        this.deleteListResources = new Array();
-        this.deleteListResources.push(this.options.model);
-        var deleteItemView = new DeleteItemView({
-            models: this.deleteListResources,
-            type: "datastreams",
-            parentView: this.parentView
-        });
+		this.deleteListResources = new Array();
+		this.deleteListResources.push(this.options.model);
+		var deleteItemView = new DeleteItemView({
+				models: this.deleteListResources,
+				type: "datastreams"
+		});
 	},
 
-	review: function(event){
+	onUnpublishButtonClicked: function(){
+		this.unpublishListResources = new Array();
+		this.unpublishListResources.push(this.options.model);
+		var unpublishView = new UnpublishView({
+				models: this.unpublishListResources,
+				type: "datastreams"
+		});
+	},
+
+	changeStatus: function(event){
 		
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
-			url = this.model.get('reviewURL'),
+			url = this.model.get('changeStatusUrl'),
 			self = this;
 
 		$.ajax({
@@ -143,14 +135,8 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 				if(response.status == 'ok'){
 					
 					// Set Status
-					self.model.set('status',response.dataset_status)
-
-					// Hide Review Bar
-					self.$el.find('#id_reviewBar').hide();
-
-					// Show hidden buttons
-					self.$el.find('#id_edit').show();
-					self.$el.find('#id_delete').show();
+					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
+					self.model.set('status',response.dataset_status);
 
 					// Update Heights
 					setTimeout(function(){
@@ -160,8 +146,8 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 					// Set OK Message
 					$.gritter.add({
-						title: gettext('APP-SETTINGS-SAVE-OK-TITLE'),
-						text: response.messages,
+						title: response.messages.title,
+						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 2500
@@ -169,27 +155,15 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 
 				}else{
 
-					// Set Error Message
-					$.gritter.add({
-						title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-						text: response.messages,
-						image: '/static/workspace/images/common/ic_validationError32.png',
-						sticky: true,
-						time: ''
-					});
+					datalEvents.trigger('datal:application-error', response);
 
 				}
 
 			},
 			error:function(response){
-				// Set Error Message
-				$.gritter.add({
-					title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-					text: gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image: '/static/workspace/images/common/ic_validationError32.png',
-					sticky: true,
-					time: ''
-				});
+
+				datalEvents.trigger('datal:application-error', response);
+
 			},
 			complete:function(response){
 				// Hide Loading
@@ -197,6 +171,6 @@ var ViewDatasetView = Backbone.Epoxy.View.extend({
 			}
 		});
 
-	},
+	}
 
 });

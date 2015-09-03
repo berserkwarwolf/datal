@@ -1,72 +1,55 @@
 {% load i18n staticfiles %}
-<nav class="main-navigation border-box">
+<nav class="main-navigation border-box collapsed">
   <ul>
 
     <!-- Home -->
     <li>
-      <a id="id_home_option" href="/welcome" class="nav-home">
-        {% include 'icons/nav-home.html' %}
-        <span>{% trans 'APP-HOME-TEXT' %}</span>
-      </a>
+      <a id="id_home_option" href="/welcome" class="button primary nav-home"><span class="icon icon-home"></span>{% trans 'APP-HOME-TEXT' %}</a>
     </li>
 
     <!-- Datasets -->
     <li>
-      <a id="id_datasets_option" href="{% url 'manageDatasets.index' %}" class="nav-datasets">
-        {% include 'icons/nav-datasets.html' %}
-        <span>{% trans 'APP-DATASETS-TEXT' %}</span>
-      </a>
+      <a id="id_datasets_option" href="{% url 'manageDatasets.list' %}" class="button primary nav-datasets"><span class="icon icon-datasets"></span>{% trans 'APP-DATASETS-TEXT' %}</a>
     </li>
 
     <!-- Data Views -->
     <li>
-        <a id="id_dataviews_option" 
-            {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.index' %}"{% endif %} 
-            class="nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}">
-          {% include 'icons/nav-dataviews.html' %}
-          {% if stats.my_total_datasets != 0 %}<span>{% trans 'APP-DATAVIEWS-TEXT' %}</span>{% endif %}
-      </a>
+        <a id="id_dataviews_option" {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.list' %}"{% endif %} class="button primary nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}"><span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}</a>
     </li>
-    
+
     <!-- Visualizations -->
     <li>
-      <a id="id_visualizations_option"
-        {% if stats.account_total_datastreams != 0 %}href="{% url 'manageVisualizations.index' %}"{% endif %}
-        class="nav-visualizations{% if stats.account_total_datastreams == 0 %} disabled {% endif %}">
-        {% include 'icons/nav-visualizations.html' %}
-        <span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</span>
-      </a>
+      <a id="id_visualizations_option" href="{% url 'manageVisualizations.list' %}" class="button primary nav-visualizations"><span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}</a>
     </li>
+    
     {% comment %}
     <!-- Dashboards -->
     <li>
-      <a id="id_dashboards_option" href="#" class="nav-dashboards">
-        {% include 'icons/nav-dashboards.html' %}
-        <span>{% trans 'APP-DASHBOARDS-TEXT' %}</span>
-      </a>
+      <a id="id_dashboards_option" href="#" class="button primary nav-dashboards"><span class="icon icon-dashboards"></span>{% trans 'APP-DASHBOARDS-TEXT' %}</a>
     </li>
+    {% endcomment %}
 
+  </ul>
+
+  <ul class="bottom-navigation">
+
+    {% comment %}
     {% if 'workspace.can_access_report' in auth_manager.privileges %}
     <!-- Reports -->
     <li>
-      <a id="id_reports_option" href="/reports/action_query" class="nav-reports">
-        {% include 'icons/nav-reports.html' %}
-        <span>{% trans 'APP-REPORTS-TEXT' %}</span>
-      </a>
+      <a id="id_reports_option" href="/reports/action_query" class="button primary nav-reports"><span class="icon icon-reports"></span>{% trans 'APP-REPORTS-TEXT' %}</a>
     </li>
     {% endif %}
-
     {% endcomment %}
 
     {% if 'workspace.can_access_admin' in auth_manager.privileges %}
     <!-- Settings -->
     <li>
-      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="nav-settings">
-        {% include 'icons/nav-settings.html' %}
-        <span>{% trans 'APP-SETTINGS-TEXT' %}</span>
-      </a>
+      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
     </li>
     {% endif %}
+
+    <li class="footer">&copy; 2009-{%now "Y" %}, <a href="http://www.datal.org" title="DATAL" target="_blank">DATAL</a></li>
 
   </ul>
 </nav>

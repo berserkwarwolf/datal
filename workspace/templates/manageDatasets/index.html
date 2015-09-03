@@ -42,53 +42,60 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-DATASETS-TEXT" %}</h1>
-<div class="bulk-actions FL clearfix" style="display:none;">
-   <select id="id_bulkActions" class="FL">
-      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
-      <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
-      <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
-   </select>
-   <button id="id_applyBulkActions" class="button black small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
+
+<div class="context-menu clearfix">
+	
+	<!-- Column Left -->
+	<div class="col-xs-7">    
+		
+		<h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datasets }})</span></h1>
+
+	</div>
+
+	<!-- Column Right -->
+	<div class="col-xs-5 context-buttons clearfix"> 
+
+		<div class="button-pulldown FR">
+			<a class="button primary" title="{% trans 'APP-ADDNEWDATASET-TEXT' %}">{% trans 'APP-ADDNEWDATASET-TEXT' %}<span class="icon icon-right icon-pulldown"></span></a>
+			<ul class="dropdown" style="display:none;">
+				<li><a  href="{% url 'manageDatasets.create_type' 'file' %}" class="button primary" title="{% trans 'APP-UPLOAD-FILE-TEXT' %}">{% trans 'APP-UPLOAD-FILE-TEXT' %}</a></li>
+				<li><a href="{% url 'manageDatasets.create_type' 'url' %}" class="button primary" title="{% trans 'APP-WEBSITE-TEXT' %}">{% trans 'APP-WEBSITE-TEXT' %}</a></li>
+				<li><a href="{% url 'manageDatasets.create_type' 'webservice' %}" class="button primary" title="{% trans 'APP-WEBSERVICE-TEXT' %}">{% trans 'APP-WEBSERVICE-TEXT' %}</a></li>
+			</ul>
+		</div>
+
+	</div>
+
 </div>
-<ul class="actions FR">
-   <li><a href="{% url 'manageDatasets.create' %}" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-</ul>
+
 {% endblock %}
 
 {% block content %}
 <div class="manager" id="id_manageDatasets">
 
-  <div class="wrapper1">
-    <div class="wrapper2 clearfix">
-      <div class="wrapper3">
+	<!-- Filters -->
+	<section class="col-xs-2 filters-view"></section>
 
-        <!-- Filters -->
-        <section class="filters-view"></section>
+	<!-- List -->
+	{% include "manageDatasets/list.html" %}
 
-        <!-- List -->
-        {% include "manageDatasets/list.html" %}
 
-      </div>
-    </div>
-  </div>
-
-  <!-- Loading -->
-  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+	<!-- Loading -->
+	<div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
 
 </div>
 
 <!-- No results -->
-<div class="no-results-view hidden">
-  <div class="zeroResults">
-    <div class="zeroIcon zeroDatasets"></div>
-    <p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
-  </div>
-  <div class="startAdding">
-    <div class="startAddingArrows startDatasets"></div>
-    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-    <p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
-  </div>
+<div class="no-results-view hidden col-xs-12">
+	<div class="zeroResults">
+		<div class="zeroIcon zeroDatasets"></div>
+		<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
+	</div>
+	<div class="startAdding">
+		<div class="startAddingArrows startDatasets"></div>
+		<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+		<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+	</div>
 </div>
 
 {% endblock %}
@@ -96,12 +103,12 @@
 {% block bottom_js %}
 <script type="text/javascript">
 
-  $(document).ready(function(){
-    var manageDatasetsView =  new ManageDatasetsView({
-      datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
-      filters: {{filters|jsonify}}
-    });
-  });
+	$(document).ready(function(){
+		var manageDatasetsView =  new ManageDatasetsView({
+			datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
+			filters: {{filters|jsonify}}
+		});
+	});
 </script>
 
 {# templates backbone #}
@@ -110,5 +117,5 @@
 {% endblock %}
 
 {% block popupsOverlay %}
-  {% include "manageDatasets/overlays.html" %}
+	{% include "manageDatasets/overlays.html" %}
 {% endblock %}

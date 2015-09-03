@@ -35,7 +35,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	deleteDataset: function() {
 		var affectedResourcesCollection = new AffectedResourcesCollection();
-		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
+		var affectedResourcesCollectionDeleteItemView = new AffectedResourcesCollectionDeleteItemView({
 			collection: affectedResourcesCollection,
 			itemCollection: this.options.itemCollection,
 			models: this.options.models,

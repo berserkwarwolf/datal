@@ -7,6 +7,7 @@ import operator
 from django.template import loader, Context
 from django.db.models import Q, F
 
+from core.utils import slugify
 from core import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
@@ -14,7 +15,7 @@ from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
-from core.choices import CollectTypeChoices, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import CollectTypeChoices, SOURCE_IMPLEMENTATION_CHOICES, StatusChoices
 from core.models import DataStreamRevision
 
 
@@ -54,6 +55,15 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
+        # Muestro el link del micrositio solo si esta publicada la revision
+        public_url = ''
+        if dataset_revision.dataset.last_published_revision:
+            domain = dataset_revision.user.account.get_preference('account.domain')
+            if not domain.startswith('http'):
+                domain = 'http://' + domain
+            public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
+
+
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
@@ -80,11 +90,13 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             created_at=dataset_revision.dataset.created_at,
             last_revision_id=dataset_revision.dataset.last_revision_id,
             last_published_revision_id=dataset_revision.dataset.last_published_revision_id,
+            last_published_date=dataset_revision.dataset.last_published_revision_date,
             title=dataseti18n.title,
             description=dataseti18n.description,
             notes=dataseti18n.notes,
             tags=tags,
-            sources=sources
+            sources=sources,
+            public_url=public_url
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
