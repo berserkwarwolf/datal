@@ -7,16 +7,14 @@ from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
 from django.template.loader import render_to_string
 
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.helpers import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import *
 from core.engine import invoke, preview_chart
 from core.helpers import RequestProcessor
 from core.choices import *
-from core.docs import VZ, DT, DS
 from core.models import VisualizationRevision,DatasetRevision
 from core import helpers as LocalHelper
 from microsites.daos.visualizations import VisualizationDAO

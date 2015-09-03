@@ -8,6 +8,7 @@ from core.models import Dataset, DatasetRevision, DataStream, DataStreamRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datasets import DatasetSearchDAOFactory
 from core.lifecycle.datastreams import DatastreamSearchDAOFactory
+from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 
 
 class Command(BaseCommand):
@@ -28,11 +29,33 @@ class Command(BaseCommand):
 
             # destruye el index
             ElasticsearchIndex().flush_index()
+            es = ElasticsearchIndex()
 
             for datasetrevision in DatasetRevision.objects.filter(status=StatusChoices.PUBLISHED):
                 search_dao = DatasetSearchDAOFactory().create(datasetrevision)
                 search_dao.add()
 
+            # TODO Hay que usar el metodo query del DAO
             for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
+                datastream_rev = DataStreamDBDAO().get(
+                    datastreamrevision.user.language,
+                    datastream_revision_id=datastreamrevision.id,
+                    published=True
+                )
                 search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
                 search_dao.add()
+                h = DatastreamHitsDAO(datastream_rev)
+
+                doc={
+                    'docid': "DS::%s" % datastreamrevision.datastream.guid,
+                    "type": "ds",
+                    "doc": {
+                        "fields": {
+                            "hits": h.count()
+                        }
+                    }
+                }
+                try:
+                    es.update(doc)
+                except:
+                    pass

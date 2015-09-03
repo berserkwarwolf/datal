@@ -15,12 +15,10 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'^$', 'microsites.views.home', name='microsites.home'),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
     url(r'^a/(\w+)$', 'microsites.views.custom_pages'),
-    (r'^dashboards/', include('microsites.dashboard_manager.urls')),
 
     (r'^visualizations/', include('microsites.viewChart.urls')),
     url(r'^visualizations/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.viewChart.views.action_embed', name='chart_manager.action_embed'),
@@ -66,7 +64,6 @@ urlpatterns = patterns('',
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
 
-    url(r'^(?P<nick>[A-Za-z0-9\-_\.]+)$', 'microsites.views.action_user'),
 
 )
 

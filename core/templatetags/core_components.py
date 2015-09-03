@@ -9,10 +9,28 @@ from core.models import ObjectGrant
 register = template.Library()
 
 
-@register.tag(name="permalink")
-def permalink(pk):
-    url = ''
-    return url
+@register.filter(name="permalink")
+def permalink(pk, obj_type):
+    if obj_type == 'dataset':
+        return reverse(
+            'manageDatasets.action_view',
+            'microsites.urls',
+            kwargs={'dataset_id': pk, 'slug': '-'}
+        )
+    elif obj_type == 'datastream':
+        return reverse(
+            'manageDataviews.action_view',
+            'microsites.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    elif obj_type == 'visualization':
+        return reverse(
+            'manageVisualizations.action_view',
+            'workspace.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    else:
+        return None
 
 
 @register.filter(name="download")
@@ -23,7 +41,7 @@ def download(dataset_revision):
     :return:
     """
     return reverse('dataset_manager.action_download', 'microsites.urls',
-                   kwargs={'dataset_id': dataset_revision.dataset_id, 'slug': dataset_revision.slug})
+                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': '-'})
 
 
 def datatable_search(table_prefix=''):

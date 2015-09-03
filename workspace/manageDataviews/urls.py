@@ -2,12 +2,10 @@ from django.conf.urls import patterns, url
 from workspace.manageDataviews.views import *
 from workspace.manageDatasets.views import filter as filterDataset
 from core.datastream_manager.views import action_invoke
-# Check if we have to use manageDataviews.create or datasream_manger.action_insert
-# from workspace.datastream_manager.views import action_view
 
-urlpatterns = patterns('',
-
-    url(r'^$', list, name='manageDataviews.list'),
+urlpatterns = patterns(
+    '',
+    url(r'^$', index, name='manageDataviews.index'),
     url(r'^(?P<revision_id>\d+)$', action_view, name='manageDataviews.view'),
     url(r'^filter$', filter, name='manageDataviews.filter'),
     url(r'^filters.json$', get_filters_json, name='manageDataviews.get_filters'),

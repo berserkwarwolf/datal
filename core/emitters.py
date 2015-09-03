@@ -2,8 +2,7 @@ import json as json_module
 import csv
 from openpyxl import Workbook
 from openpyxl.writer.excel import save_virtual_workbook
-from core.helpers import clean_string
-
+import re, unicodedata
 
 class Emitter:
 
@@ -16,6 +15,13 @@ class Emitter:
         self.is_array = False
         self.length = 0
         self._parse_junar_json()
+
+    def clean_string(self, p_string):
+        p_string = unicodedata.normalize('NFKD', p_string).encode('ascii', 'ignore')
+        p_string = re.sub('[^a-zA-Z0-9]+', '-', p_string.strip())
+        p_string = re.sub('\-+', '-', p_string)
+        p_string = re.sub('\-$', '', p_string)
+        return p_string
 
     def _parse_junar_json(self):
 
@@ -63,7 +69,7 @@ class CSVEmitter(Emitter):
         self.quotechar  = '"'
         self.csv_writer = None
         self.dialect    = csv.excel
-        self.filename   = clean_string(name).replace(' ', '_')
+        self.filename   = self.clean_string(name).replace(' ', '_')
         self.headers    = {'Content-Type': 'text/csv;charset=utf-8'
                            , 'Content-Disposition': 'attachment; filename=%s.csv' % self.filename
                           }
@@ -104,7 +110,7 @@ class ExcelEmitter(Emitter):
 
     def __init__(self, json, name):
         self.workbook = None
-        self.name     = clean_string(name)
+        self.name     = self.clean_string(name)
         self.filename = self.name.replace(' ', '_')
         self.headers  = {'Content-Type': 'application/vnd.ms-excel;charset=utf-8'
                          , 'Content-Disposition': 'attachment; filename=%s.xlsx' % self.filename

@@ -7,6 +7,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
+    v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
   end
 
   # Create a forwarded port mapping which allows access to a specific port

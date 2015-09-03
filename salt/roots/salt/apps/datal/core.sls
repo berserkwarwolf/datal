@@ -17,6 +17,13 @@ ensure_new_indextank:
     - mode: 755
     - makedirs: True
 
+# Create static components files directory
+{{ pillar['application']['path'] }}/components/components:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ group }}
+    - makedirs: True
+
 # Create data store resources directory
 {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
   file.directory:

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from core.models import Dataset, DataStream, Visualization, Dashboard
+from core.models import Dataset, DataStream, Visualization
 from core.cache import Cache
 """Inversion Of Control """
 
@@ -34,33 +34,27 @@ class DependenciesInjector(object):
         # Stats por usuario
         request.stats['my_total_datasets'] = request.user.get_total_datasets()
         request.stats['my_total_datastreams'] = request.user.get_total_datastreams()
-        request.stats['my_total_dashboards'] = request.user.get_total_dashboards()
         request.stats['my_total_visualizations'] = request.user.get_total_visualizations()
 
         # Stats por cuenta
         request.stats['account_total_datasets'] = request.account.get_total_datasets()
         request.stats['account_total_datastreams'] = request.account.get_total_datastreams()
-        request.stats['account_total_dashboards'] = request.account.get_total_dashboards()
         request.stats['account_total_visualizations'] = request.account.get_total_visualizations()
 
     def calculate_perc(self, request):
         request.stats['max_resource'] = max( [ request.stats['my_total_datasets'],
                                               request.stats['my_total_datastreams'],
-                                              request.stats['my_total_dashboards'],
                                               request.stats['my_total_visualizations'] ] )
 
         request.stats['account_max_resource'] = max( [ request.stats['account_total_datasets'],
                                               request.stats['account_total_datastreams'],
-                                              request.stats['account_total_dashboards'],
                                               request.stats['account_total_visualizations'] ] )
 
         perc = lambda a, b: b > 0 and str(float(a)/float(b) * 100).replace(',', '.') or 0
         request.stats['my_total_perc_datasets']=perc(request.stats['my_total_datasets'], request.stats['max_resource'])
         request.stats['my_total_perc_datastreams']=perc(request.stats['my_total_datastreams'], request.stats['max_resource'])
-        request.stats['my_total_perc_dashboards']=perc(request.stats['my_total_dashboards'], request.stats['max_resource'])
         request.stats['my_total_perc_visualizations']=perc(request.stats['my_total_visualizations'], request.stats['max_resource'])
 
         request.stats['account_total_perc_datasets']=perc(request.stats['account_total_datasets'], request.stats['account_max_resource'])
         request.stats['account_total_perc_datastreams']=perc(request.stats['account_total_datastreams'], request.stats['account_max_resource'])
-        request.stats['account_total_perc_dashboards']=perc(request.stats['account_total_dashboards'], request.stats['account_max_resource'])
         request.stats['account_total_perc_visualizations']=perc(request.stats['account_total_visualizations'], request.stats['account_max_resource'])

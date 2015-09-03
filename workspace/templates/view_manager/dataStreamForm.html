@@ -75,11 +75,12 @@
                         <div>
                             <input id="id_sourceNameSuggest" name="source-name" type="text" class="inputNewTag" maxlength="80"/>
                             <div id="id_source_container" class="tagsContent">
-                                {% for source in datastream_revision.get_sources %}
-                                    <span id="id_sources-{{forloop.counter0}}-name">{{source.name}}</span>
-                                    <span id="id_sources-{{forloop.counter0}}-url">{{source.url}}</span>
+                                {% for source in sources %}
+                                    <span id="id_sources-{{forloop.counter0}}-name">{{source.source__name}}</span>
+                                    <span id="id_sources-{{forloop.counter0}}-url">{{source.source__url}}</span>
                                 {% endfor %}
                             </div>
+
                             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a id="id_displayAddSources" title="" href="javascript:;" class="">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
                         </div>
                     </div>
