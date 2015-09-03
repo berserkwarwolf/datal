@@ -2,8 +2,14 @@
 import operator
 import time
 import logging
+import json
 
 from django.db.models import Q, F
+from django.db import connection
+from django.db.models import Count
+from django.core.serializers.json import DjangoJSONEncoder
+
+from datetime import datetime, date, timedelta
 
 from core import settings
 from core.cache import Cache
@@ -13,12 +19,7 @@ from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
-from django.db import connection
-from django.db.models import Count
-
-from datetime import datetime, date, timedelta
-import json
-from django.core.serializers.json import DjangoJSONEncoder
+from core.helpers import VisualizationsHelpers
 
 logger = logging.getLogger(__name__)
 
@@ -44,6 +45,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
+            impl_details=''
         )
         logger.info(visualization_rev)
         visualization_i18n = VisualizationI18n.objects.create(
