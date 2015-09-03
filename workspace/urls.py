@@ -35,7 +35,7 @@ urlpatterns = patterns('',
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
    
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
-    (r'^accounts/', include('workspace.accounts.urls')),
+    (r'^accounts/', include('workspace.manageMyAccount.urls')),
     (r'^tag_manager/', include('workspace.searchTags.urls')),
     (r'^source_manager/', include('workspace.searchSources.urls')),
     (r'^viewLandingPage/', include('workspace.viewLandingPage.urls')),

@@ -5,14 +5,15 @@ from core.models import User
 import hashlib
 from core import choices
 
+
 class SignUpForm(forms.Form):
-    account_name   = forms.CharField(required=True, label=ugettext_lazy('APP-ACCOUNT-NAME-TEXT'))
-    admin_url      = forms.CharField(required=True, label=ugettext_lazy('APP-ADMIN-URL-TEXT'))
-    username       = forms.CharField(required=True, label=ugettext_lazy('APP-USERNAME-TEXT'))
-    password       = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('APP-PASSWORD-TEXT'))
+    account_name = forms.CharField(required=True, label=ugettext_lazy('APP-ACCOUNT-NAME-TEXT'))
+    admin_url = forms.CharField(required=True, label=ugettext_lazy('APP-ADMIN-URL-TEXT'))
+    username = forms.CharField(required=True, label=ugettext_lazy('APP-USERNAME-TEXT'))
+    password = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('APP-PASSWORD-TEXT'))
     password_again = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-CONFIRMPSW'))
-    email          = forms.CharField(required=True, label=ugettext_lazy('APP-EMAIL-TEXT'))
-    language       = forms.ChoiceField(required=True, choices=choices.LANGUAGE_CHOICES, label=ugettext_lazy('APP-LANGUAGE-TEXT'))
+    email = forms.CharField(required=True, label=ugettext_lazy('APP-EMAIL-TEXT'))
+    language = forms.ChoiceField(required=True, choices=choices.LANGUAGE_CHOICES, label=ugettext_lazy('APP-LANGUAGE-TEXT'))
 
     def action(self):
         return reverse('accounts.create')
@@ -22,11 +23,11 @@ class SignUpForm(forms.Form):
 
 
 class SignInForm(forms.Form):
-    admin_url      = forms.CharField(required=False, widget=forms.HiddenInput())
-    username       = forms.CharField(required=True)
-    password       = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False))
-    remember_me    = forms.BooleanField(label=ugettext_lazy('APP-REMEMBERME-TEXT'), required=False)
-    next           = forms.CharField(required=False, widget=forms.HiddenInput())
+    admin_url = forms.CharField(required=False, widget=forms.HiddenInput())
+    username = forms.CharField(required=True)
+    password = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False))
+    remember_me = forms.BooleanField(label=ugettext_lazy('APP-REMEMBERME-TEXT'), required=False)
+    next = forms.CharField(required=False, widget=forms.HiddenInput())
 
     def action(self):
         return reverse('accounts.login')
@@ -50,9 +51,10 @@ class SignInForm(forms.Form):
 
         return cleaned_data
 
+
 class ActivateUserForm(forms.Form):
-    ticket         = forms.CharField(required=True, widget=forms.HiddenInput())
-    password       = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False))
+    ticket = forms.CharField(required=True, widget=forms.HiddenInput())
+    password = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False))
     password_again = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False))
 
     def clean_password(self):
@@ -74,9 +76,10 @@ class ActivateUserForm(forms.Form):
     def action(self):
         return reverse('accounts.activate')
 
+
 class MyAccountForm(forms.ModelForm):
-    old_password       = forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-OLDPSW'))
-    new_password       = forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-NEWPSW'))
+    old_password = forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-OLDPSW'))
+    new_password = forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-NEWPSW'))
     new_password_again = forms.CharField(required=False, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-CONFIRMPSW'))
 
     class Meta:
