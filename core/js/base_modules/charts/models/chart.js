@@ -85,13 +85,13 @@ charts.models.Chart = Backbone.Model.extend({
 
         return $.getJSON('/visualizations/preview', {
             datastream_revision_id: self.get('datastream_revision_id'),
-            data: this.get('range_data'),
-            headers: this.get('range_headers'),
-            labels: this.get('range_labels'),
+            data: self.get('range_data'),
+            headers: self.get('range_headers'),
+            labels: self.get('range_labels'),
             null_action: 'exclude',
             null_preset: undefined,
         }).then(function (response) {
-            self.formatResponseData(response.series, response.values, response.labels).bind(this);
+            self.formatResponseData(response.series, response.values, response.labels);
         });
     },
 
