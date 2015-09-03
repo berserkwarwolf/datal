@@ -15,7 +15,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %} {{auth_manager.nick}}!</h1>
+		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %}, #{{auth_manager.nick}}</h1>
 
 	</div>
 
@@ -50,43 +50,42 @@
 		<!-- Activity -->
 		<section class="box activity">
 			<header>
-				<h3 class="title">{% trans "LANDINGPAGE-ACTIVITY-TITLE" %}</h3>
+				<div class="row">
+					<div class="col-xs-9">
+						<h3 class="title">{% trans "LANDINGPAGE-ACTIVITY-TITLE" %}</h3>
+					</div>
+					<div class="col-xs-3">
+						<h3 class="title">{% trans "LANDINGPAGE-ACTIVITY-TIME" %}</h3>
+					</div>
+				</div>
 			</header>
 			<div class="box-content">
 				{% for activity in account_activities %}
 					<article class="clearfix">
-						{% gravatar None "small" "FL" activity.user_nick activity.user_email %}
-						<div class="text">
-							<p><strong>{{activity.user_nick}}</strong>
+						<div class="row">
+						<div class="col-xs-9">
+							<p>
+							{{activity.user_nick}}
 							{% get_activity_type activity.action_id as the_activity %}
 							{{the_activity}}
 
 							{% if activity.resource_link %}
-								<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
+							<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
 							{% else %}
-								<span class="resource">
 							{% endif%}
 
-							{% if activity.type == 'dt' %}
-								<i class="icon-dataset"></i>
-							{% elif activity.type == 'db' %}
-								<i class="icon-dashboard"></i>
-							{% elif activity.type == 'ds' %}
-								<i class="icon-dataview"></i>
-							{% elif activity.type == 'vs' %}
-								<i class="icon-visualization"></i>
-							{% endif%}
-
-							{{activity.title}}
-
+							<span class="noLink">#{{activity.title}}</span>
 							{% if activity.resource_link %}
-								</a>
-							{% else %}
-								</span>
-							{% endif%}
+							</a>
 
+							{% else %}
+							{% endif%}
 							</p>
-							<time>{{activity.time}}</time>
+						</div>
+
+						<div class="col-xs-3">
+							<p><time>{{activity.time}}</time></p>
+						</div>
 						</div>
 					</article>
 				{% endfor %}
