@@ -96,6 +96,17 @@ charts.views.GoogleBarChart = charts.views.BarChart.extend({
 charts.views.GoogleColumnChart = charts.views.ColumnChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
+        this.bindEvents();
+        this.model.fetchData();
+    },
+
+    bindEvents: function () {
+        this.model.on('change', this.render, this);
+        this.model.on('data_updated', this.handleDataUpdated, this);
+    },
+
+    handleDataUpdated: function () {
+        this.render();
     },
 
     formatData: function (data) {
@@ -109,6 +120,7 @@ charts.views.GoogleColumnChart = charts.views.ColumnChart.extend({
 
     render: function () {
         var dataTable = this.formatData(this.model.data.toJSON());
+        console.log("dataTable:", dataTable);
 
         var options = this.model.get('options');
 
