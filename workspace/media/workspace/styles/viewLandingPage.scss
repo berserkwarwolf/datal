@@ -3,11 +3,19 @@
 @import 'functions';
 
 /* Activity */
-.activity article{float:left;width:100%;}
-.activity article:nth-child(2n+1){background:$background-color-list;}
-.activity article:first-child{margin-top:0;}
-.activity p{line-height:20px;margin-bottom:0;font-size:$font-size-m;margin-top:15px;}
-.activity p:first-letter{text-transform:uppercase;}
-.activity p a{color:$link-color;}
-.activity span.noLink{color:$font-color-light;}
-.activity p * > *{vertical-align:middle;}
+.activity {
+	
+	article{float:left;width:100%;
+
+		&:nth-child(2n+1){background:$background-color-list;}
+		&:first-child{margin-top:0;}
+
+		p{line-height:20px;margin-bottom:0;font-size:$font-size-m;margin-top:15px;
+			
+			&:first-letter{text-transform:uppercase;}
+			a{color:$link-color;}
+			span.noLink{color:$font-color-light;}
+			* > *{vertical-align:middle;}
+		}
+	}
+}
