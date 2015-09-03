@@ -45,7 +45,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
-            impl_details=VisualizationsHelpers().get_details_json(**fields)
+            impl_details=''
         )
         logger.info(visualization_rev)
         visualization_i18n = VisualizationI18n.objects.create(

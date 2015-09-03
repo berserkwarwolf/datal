@@ -46,8 +46,10 @@ class VisualizationForm(forms.Form):
     yTitle = forms.CharField(required=False, max_length=200)
     labelSelection = forms.CharField(required=False, max_length=200)
     headerSelection = forms.CharField(required=False, max_length=200)
-    # transpose ?
+    # pInvertData ?
     # lib?
+    # pInvertedAxis
+    # pCorrelative
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
