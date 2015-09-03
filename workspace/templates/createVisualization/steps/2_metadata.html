@@ -1,0 +1,50 @@
+{% load i18n extra_tags components %}
+
+<div class="step-2-view">
+
+	<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+    
+    <h2 class="FL">{% trans 'APP-CREATE-VISUALIZATION-TEXT' %}</h2>
+
+	<ol>
+		<li>{% trans "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+		<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+	</ol>
+
+	<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
+
+	<div class="columns clearfix">
+		
+		<div class="CL formContent">
+
+			<fieldset>
+	
+				<div class="row clearfix">
+					<label for="title">{% trans "APP-TITLE-TEXT" %}</label>
+					<span class="required">*</span>
+					<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
+					<p class="has-error validate-msg">Este campo es requerido.</p>
+				</div>
+	
+				<div class="row clearfix">
+					<label for="title">{% trans "APP-DESCRIPTION-TEXT" %}</label>
+					<span class="required">*</span>
+					<input type="text" class="description" name="description" maxlength="140" data-bind="">
+					<p class="has-error validate-msg">Este campo es requerido.</p>
+				</div>
+
+				<div class="row clearfix">
+					<label for="id_notes">{% trans "APP-NOTES-TEXT" %}</label>
+					<div class="textarea clearfix FL">
+						<textarea id="id_notes" class="notes"></textarea>
+					</div>
+				</div>
+
+			</fieldset>
+
+		</div>
+
+	</div>
+
+</div>

@@ -9,8 +9,7 @@ from django.db import IntegrityError
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
-
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES 
@@ -18,6 +17,8 @@ from core.choices import STATUS_CHOICES
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
+    def __init__(self):
+        pass
 
     def create(self, datastream=None, user=None, **fields):
         """create a new datastream if needed and a datastream_revision"""
@@ -223,12 +224,13 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
     def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = dict(
-            visualizations=dict()
-        )
+        related = dict()
+        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+            visualization__datastream__id=datastream_id,
+            visualizationi18n__language=language
+        ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
+                 'visualization__user__nick', 'created_at', 'visualization__last_revision')
         return related
-
-   
 
 
 class DatastreamSearchDAOFactory():
@@ -364,4 +366,4 @@ class DatastreamHitsDAO():
         return self.search_index.update(doc)
 
     def count(self):
-        return DataStreamHits.objects.filter(datastream_id=self.datastream.datastream_id).count()
+        return DataStreamHits.objects.filter(datastream_id=self.datastream['datastream_id']).count()

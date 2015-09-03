@@ -113,12 +113,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         status = StatusChoices.PUBLISHED
 
-        self._publish_childs()
-
         self.dataset_revision.status = status
         self.dataset_revision.save()
 
         self._update_last_revisions()
+
+        self._publish_childs()
 
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
@@ -205,6 +205,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = StatusChoices.PENDING_REVIEW
         self.dataset_revision.save()
+        self._log_activity(ActionStreams.REVIEW)
 
     def _send_childs_to_review(self):
         """ Envia a revision todos los datastreams hijos en cascada """
@@ -230,6 +231,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             self.dataset_revision.status = StatusChoices.APPROVED
             self.dataset_revision.save()
+            self._log_activity(ActionStreams.ACCEPT)
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a dataset revision """
@@ -242,6 +244,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = StatusChoices.DRAFT
         self.dataset_revision.save()
+        self._log_activity(ActionStreams.REJECT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
@@ -315,23 +318,23 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.PUBLISHED:
-            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Creo nueva revision por estar PUBLISHED.'.format(
-                self.dataset_revision.id
-            ))
-            self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
-            )
-            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
-                self.dataset_revision.id
-            ))
-            self._move_childs_to_draft()
-
             if form_status == StatusChoices.DRAFT:
                 logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
                     self.dataset_revision.id
                 ))
                 self.unpublish()
             else:
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Creo nueva revision por estar PUBLISHED.'.format(
+                    self.dataset_revision.id
+                ))
+                self.dataset, self.dataset_revision = DatasetDBDAO().create(
+                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
+                )
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
+                    self.dataset_revision.id
+                ))
+                self._move_childs_to_draft()
+
                 self._update_last_revisions()
         else:
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} Actualizo sin crear nueva revision por su estado {}.'.format(

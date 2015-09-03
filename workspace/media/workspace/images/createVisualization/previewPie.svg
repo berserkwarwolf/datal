@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="600px"
+	 height="480px" viewBox="0 0 600 480" enable-background="new 0 0 600 480" xml:space="preserve">
+<g id="Column" display="none">
+	<g display="inline">
+		<rect x="86.469" y="72.469" fill="#ECECEC" width="1" height="334.938"/>
+		<rect x="86.969" y="406.406" fill="#ECECEC" width="388.484" height="1"/>
+		<g>
+			<rect x="123.711" y="181.28" fill="#F7F5F3" width="80" height="225.673"/>
+			<rect x="243.711" y="73.047" fill="#F7F5F3" width="80" height="333.906"/>
+			<rect x="358.711" y="240" fill="#F7F5F3" width="80" height="166.954"/>
+		</g>
+		<g>
+			<rect x="486.531" y="207" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="234" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="261" fill="#F7F5F3" width="27" height="12"/>
+		</g>
+	</g>
+</g>
+<g id="Bar" display="none">
+	<g display="inline">
+		<rect x="86.469" y="72.469" fill="#ECECEC" width="1" height="334.938"/>
+		<rect x="86.969" y="406.406" fill="#ECECEC" width="388.484" height="1"/>
+		<g>
+			<rect x="87.469" y="104.5" fill="#F7F5F3" width="235.896" height="68.825"/>
+			<rect x="87.469" y="207.738" fill="#F7F5F3" width="349.031" height="68.825"/>
+			<rect x="87.469" y="306.675" fill="#F7F5F3" width="174.516" height="68.825"/>
+		</g>
+		<g>
+			<rect x="486.531" y="207" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="234" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="261" fill="#F7F5F3" width="27" height="12"/>
+		</g>
+	</g>
+</g>
+<g id="Line" display="none">
+	<g display="inline">
+		<g>
+			<rect x="86.469" y="72.469" fill="#ECECEC" width="1" height="334.938"/>
+			<rect x="86.969" y="406.406" fill="#ECECEC" width="388.484" height="1"/>
+		</g>
+		<g>
+			<rect x="486.531" y="207" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="234" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="261" fill="#F7F5F3" width="27" height="12"/>
+		</g>
+		<g>
+			<polygon fill="#F7F5F3" points="368.743,254.008 385.101,235.086 247.149,108.244 132,209.782 132,243.119 246.794,141.886 			
+				"/>
+			<polygon fill="#F7F5F3" points="403.508,252.006 387.151,270.926 432,312.162 432,278.201 			"/>
+			<polygon fill="#F7F5F3" points="299.999,371.756 387.151,270.926 368.743,254.008 301.757,331.498 230.944,233.475 132,296.244 
+				132,325.846 224.462,267.178 			"/>
+			<polygon fill="#F7F5F3" points="403.508,252.006 432,219.047 432,180.827 385.101,235.086 			"/>
+			<polygon fill="#F7F5F3" points="368.743,254.008 387.151,270.926 403.508,252.006 385.101,235.086 			"/>
+		</g>
+	</g>
+</g>
+<g id="Area" display="none">
+	<g display="inline">
+		<g>
+			<rect x="86.469" y="72.469" fill="#ECECEC" width="1" height="334.938"/>
+			<rect x="86.969" y="406.406" fill="#ECECEC" width="388.484" height="1"/>
+		</g>
+		<g>
+			<rect x="486.531" y="207" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="234" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="261" fill="#F7F5F3" width="27" height="12"/>
+		</g>
+		<g>
+			<polygon fill="#F7F5F3" points="398.078,273.862 332.9,355.49 199.259,250.852 87.469,349.729 87.469,406.406 435.5,406.406 
+				435.5,296.396 			"/>
+			<polygon fill="#F7F5F3" points="198.028,216.123 327.831,317.734 390.743,238.95 435.5,265.903 435.5,187.644 377.487,139.219 
+				319.497,200.156 208.911,106.406 87.469,203.281 87.469,313.914 			"/>
+		</g>
+	</g>
+</g>
+<g id="Pie">
+	<g>
+		<g>
+			<rect x="486.531" y="207" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="234" fill="#F7F5F3" width="27" height="12"/>
+			<rect x="486.531" y="261" fill="#F7F5F3" width="27" height="12"/>
+		</g>
+		<path fill="#F7F5F3" d="M300,90c-82.843,0-150,67.163-150,150s67.157,150,150,150s150-67.163,150-150S382.843,90,300,90z M300,240
+			V121.262c72.485,0,118.744,46.252,118.744,118.738H300z"/>
+	</g>
+</g>
+</svg>

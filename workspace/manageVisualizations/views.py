@@ -1,44 +1,29 @@
-from django.http import HttpResponse
-from core.shortcuts import render_to_response
-from django.db import transaction
-from django.utils.translation import ugettext
-from django.views.decorators.http import require_GET, require_http_methods
-from core.auth.decorators import login_required,privilege_required
-from core.utils import remove_duplicated_filters, unset_visualization_revision_nice
-from workspace.decorators import *
-from workspace.settings import *
-from workspace.manageVisualizations.forms import *
-from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.exceptions import *
-from core.engine import invoke
-from core.helpers import RequestProcessor
-from django.core.serializers.json import DjangoJSONEncoder
-from core.choices import *
-from core.daos.datasets import DatasetDBDAO
-from core.models import VisualizationRevision,DatasetRevision
-from core.http import JSONHttpResponse
-from core import http as LocalHelper
-from microsites.daos.datastreams import DatastreamDAO
 import json
 import urllib
 
+from django.http import HttpResponse, Http404
+from django.db import transaction
+from django.utils.translation import ugettext
+from django.views.decorators.http import require_GET, require_http_methods
+from django.template.loader import render_to_string
 
-@login_required
-@require_GET
-def action_view(request, revision_id):
+from core.http import JSONHttpResponse
+from core.shortcuts import render_to_response
+from core.auth.decorators import login_required,privilege_required
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from core.exceptions import *
+from core.engine import invoke, preview_chart
+from core.helpers import RequestProcessor
+from core.choices import *
+from core.models import VisualizationRevision,DatasetRevision
+from core import helpers as LocalHelper
+from microsites.daos.visualizations import VisualizationDAO
+from workspace.decorators import *
+from workspace.settings import *
+from workspace.manageVisualizations.forms import *
+from core.daos.visualizations import VisualizationDBDAO
 
-    language = request.auth_manager.language
-    try:
-        datastream = DataStreamDBDAO().get(language, datastream_revision_id=revision_id)
-    except DataStreamRevision.DoesNotExist:
-        raise DataStreamNotFoundException()
-
-    account_id = request.auth_manager.account_id
-    credentials = request.auth_manager
-    categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
-    status_options = credentials.get_allowed_actions()
-
-    return render_to_response('viewDataStream/index.html', locals())
+logger = logging.getLogger(__name__)
 
 
 @login_required
@@ -47,28 +32,28 @@ def action_view(request, revision_id):
 @require_GET
 def index(request):
     """ list all dataviews """
-    vs_dao = VisualizationDAO(user_id=request.user.id)
-    resources, total_resources = vs_dao.query(account_id=request.account.id
-        , language=request.user.language, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE)
+    dao = VisualizationDBDAO()
 
-    if total_resources == 0 or request.GET.get('test-no-results', None) == '1':
-        return render_to_response('manageVisualizations/noResults.html', locals())
-    
-    for i in xrange(len(resources)):
-        resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
+    resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
+    logger.info(resources)
+    for resource in resources:
+        resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    resources = map(set_visualization_revision_nice, resources)
-    filters = remove_duplicated_filters(resources)
+    filters = dao.query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
 
     return render_to_response('manageVisualizations/index.html', locals())
 
+
 @login_required
 @require_GET
+#@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
     filters = bb_request.get('filters')
     filters_dict = ''
+    filter_name= ''
     sort_by='-id'
 
     if filters is not None and filters != '':
@@ -77,6 +62,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
         itemsxpage = int(bb_request.get('itemxpage'))
+    if bb_request.get('q') is not None and bb_request.get('q') != '':
+        filter_name = bb_request.get('q')
     if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
         if bb_request.get('sort_by') == "title":
             sort_by ="visualizationi18n__title"
@@ -91,39 +78,55 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     #order = bb_request.get('sortorder')
     #filters_dict=filters_dict
 
-    vs_dao = VisualizationDAO(user_id=request.user.id)
-    resources,total_resources = vs_dao.query(account_id=request.account.id,
-                                              language=request.user.language,
-                                              page=page, itemsxpage=itemsxpage
-                                              ,filters_dict = filters_dict, order= sort_by)
+    vs_dao = VisualizationDBDAO()
+    resources,total_resources = vs_dao.query(
+        account_id=request.account.id,
+        language=request.user.language,
+        page=page,
+        itemsxpage=itemsxpage,
+        filters_dict=filters_dict,
+        sort_by=sort_by,
+        filter_name=filter_name
+    )
 
-    for i in xrange(len(resources)):
-        resources[i]['url'] = LocalHelper.build_permalink('manageVisualizations.view', '&visualization_revision_id=' + str(resources[i]['id']))
+    for resource in resources:
+        print(resource)
+        resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
+        resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
-    mimetype = "application/json"
-
-    return HttpResponse(json.dumps({'items':resources,'total_entries':total_resources}
-                        ,cls=DjangoJSONEncoder), mimetype=mimetype)
+    data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
+    return HttpResponse(data, mimetype="application/json")
 
 @login_required
-@require_privilege("workspace.can_delete_datastream")
+#@require_privilege("workspace.can_delete_datastream")
+#@requires_review
 @transaction.commit_on_success
-def remove(request, id,type="resource"):
-
+def remove(request, visualization_revision_id, type="resource"):
     """ remove resource """
-    my_resource = VisualizationLifeCycleManager(user_id=request.user.id, resource_revision_id=id)
+    lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
+
     if type == 'revision':
-        removes = my_resource.remove_revision()
-        if removes:
-            return JSONHttpResponse(json.dumps({'status': True, 'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')]}))
+        lifecycle.remove()
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.visualization.last_revision_id:
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
+                'revision_id': lifecycle.visualization.last_revision_id,
+            }))
         else:
-            return JSONHttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT')]}))
+            return JSONHttpResponse(json.dumps({
+                'status': True,
+                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
+                'revision_id': -1,
+            }))
     else:
-        removes = my_resource.remove()
-        if removes:
-            return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')]}), content_type='text/plain')
-        else:
-            return HttpResponse(json.dumps({'status': False, 'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT')]}), content_type='text/plain')
+        lifecycle.remove(killemall=True)
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
 
 @login_required
 @privilege_required("workspace.can_view_visualization")
@@ -166,7 +169,7 @@ def view(request):
             else:
                 raise Http404
 
-            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
+            dataset_revision = DT(ds_revision.id, auth_manager.language)
 
             status = STATUS_CHOICES[int(visualization_revision.status)][1]
 
@@ -174,58 +177,144 @@ def view(request):
     else:
         raise Http404
 
+
 @login_required
 @require_http_methods(['POST','GET'])
 @require_privilege("workspace.can_create_visualization")
 @requires_published_parent()
 @transaction.commit_on_success
 def create(request, viz_type='index'):
-    auth_manager = request.auth_manager
     
     if request.method == 'GET':
-        #if not index the load related view
-        if viz_type != 'index':
-            form = InitializeChartForm(request.GET)
-            if not form.is_valid():
-                raise DatastreamRequiredException("Can't create visualization without related dataview")
-                
-            dao = DatastreamDAO(user_id=reques.user.id, datastream_revision_id=request.GET['datastream_revision_id'])
-            dataview = dao.get()
-            
-        return render_to_response('createVisualization/%s.html' % viz_type, locals())
+        datastream_revision_id = request.GET.get('datastream_revision_id', None)
+        datastream_rev = DataStreamDBDAO().get(
+            request.user.language,
+            datastream_revision_id=datastream_revision_id,
+            published=False
+        )
+
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev
+        ))
+
     elif request.method == 'POST':
         """ save new or update dataset """
-        form = CreateVisualizationForm(request.POST, prefix='visualization')
+        # Valido que llegue el ID de la revision del datastream
+        datastream_rev_id = request.GET.get('datastream_revision_id', None)
+        if not datastream_rev_id:
+            raise Http404
+        datastream_rev = DataStreamRevision.objects.get(pk=datastream_rev_id)
 
+        # Formulario
+        form = VisualizationForm(request.POST)
         if not form.is_valid():
-            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            logger.info(form.errors)
+            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        datastream_revision = VisualizationRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
-
-        visualization = VisualizationLifeCycleManager(user_id=request.user.id)
-        visualization.create(datastream=datastream_revision.datastream, title=form.cleaned_data['title']
-                    , data_source=form.cleaned_data['data_source']
-                    , select_statement=form.cleaned_data['select_statement']
-                    , category_id=form.cleaned_data['category']
-                    , description=form.cleaned_data['description']
-                    , status = form.cleaned_data['status'])
-
-        response = {'status': 'ok', 'visualization_revision_id': visualization.visualization_revision.id
-            , 'messages': [ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')]}
+        response = form.save(request, datastream_rev)
 
         return JSONHttpResponse(json.dumps(response))
-
     
 
 @login_required
 @require_GET
 def related_resources(request):
-    params = request.GET
-    visualization_revision_id = params.get('revision_id','')
-    visualization_id = params.get('visualization_id','')
-    resource_type = params.get('type','all');
-    resource = VisualizationLifeCycleManager(user_id=request.user.id
-                , visualization_id=visualization_id, visualization_revision_id=visualization_revision_id)
+    visualization_revision_id = request.GET.get('revision_id', '')
+    visualization_id = request.GET.get('visualization_id', '')
+    visualizations = VisualizationDBDAO().query_childs(
+        visualization_id=visualization_id,
+        language=request.auth_manager.language
+    )['dashboards']
 
-    associated_visualizations =resource.related_resources_simple(types=resource_type)
-    return JSONHttpResponse(json.dumps(associated_visualizations))
+    list_result = [associated_visualization for associated_visualization in visualizations]
+    return HttpResponse(json.dumps(list_result), mimetype="application/json")
+
+@login_required
+@require_GET
+def action_view(request, revision_id):
+    datastream_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
+    return render_to_response('viewVisualization/index.html', locals())
+
+
+@login_required
+@require_http_methods(['POST', 'GET'])
+@require_privilege("workspace.can_edit_datastream")
+@requires_published_parent()
+@requires_review
+@transaction.commit_on_success
+def edit(request, datastream_revision_id=None):
+    pass
+
+
+@login_required
+def preview(request):
+
+    form = PreviewForm(request.GET)
+    logger.error("entering preview handler")
+    if form.is_valid():
+        logger.error("form is valid")
+        preferences = request.preferences
+
+        datastreamrevision_id  = request.GET.get('datastream_revision_id', None)
+
+        try:
+            datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        except Exception, e:
+            logger.debug(e)
+            raise Http404
+        else:
+
+            query = RequestProcessor(request).get_arguments(datastream.parameters)
+
+            query['pId'] = int(datastreamrevision_id)
+
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = limit
+
+            page = form.cleaned_data.get('page')
+            if page is not None:
+                query['pPage'] = page
+
+            bounds = form.cleaned_data.get('bounds')
+            if bounds is not None:
+                query['pBounds'] = bounds
+
+            zoom = form.cleaned_data.get('zoom')
+            if zoom is not None:
+                query['pZoom'] = zoom
+
+            query['pNullValueAction'] = form.cleaned_data.get('null_action')
+            query['pNullValuePreset'] = form.cleaned_data.get('null_preset')
+
+            query['pData'] = form.cleaned_data.get('data')
+
+            labels = form.cleaned_data.get('labels')
+            if labels is not None:
+                query['pLabelSelection'] = labels
+
+            headers = form.cleaned_data.get('headers')
+            if headers is not None:
+                query['pHeaderSelection'] = headers
+
+            lat = form.cleaned_data.get('lat')
+            if lat is not None:
+                query['pLatitudSelection'] = lat
+
+            lon = form.cleaned_data.get('long')
+            if lon is not None:
+                query['pLongitudSelection'] = lon
+
+            traces = form.cleaned_data.get('traces')
+            if traces is not None:
+                query['pTraceSelection'] = traces
+
+            query['pType'] = 'chart'
+            logger.error(query)
+            result, content_type = preview_chart(query)
+
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Error!')
+

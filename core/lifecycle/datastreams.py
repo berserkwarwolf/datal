@@ -2,11 +2,13 @@
 from django.db.models import F, Max
 from django.db import transaction
 from core.choices import ActionStreams
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DataStream, Category, DatastreamI18n
+from core.models import DatasetRevision, DataStreamRevision, DataStream, DatastreamI18n, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import IllegalStateException, DataStreamNotFoundException
 from core.daos.datastreams import DataStreamDBDAO, DatastreamSearchDAOFactory
+from .visualizations import VisualizationLifeCycleManager
+
 
 logger = logging.getLogger(__name__)
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -115,9 +117,29 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def _publish_childs(self):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
+        with transaction.atomic():
+            visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_revision__id')
+            )
+            publish_fail = list()
+            for visualization_revision in visualization_revisions:
+                logger.info('[LifeCycle - Datastream - Publish Childs] Datastream {} Publico Visualization Rev. hijo {}.'.format(
+                    self.datastream.id, visualization_revision.id
+                ))
+                try:
+                    VisualizationLifeCycleManager(
+                        user=self.user,
+                        visualization_revision_id=visualization_revision.id
+                    ).publish(
+                        allowed_states=[StatusChoices.APPROVED],
+                        parent_status=StatusChoices.PUBLISHED
+                    )
+                except IllegalStateException:
+                    publish_fail.append(visualization_revision)
 
-        # Comentado ya que no hay hijos de datastreams hasta que no haya visualizaciones
-        pass
+            if publish_fail:
+                raise ChildNotApprovedException(self.datastream.last_revision)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
@@ -148,22 +170,24 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.UNPUBLISH)
 
     def _unpublish_all(self):
-        """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
+        """ Despublica todas las revisiones del datastream y la de todos sus visualization hijos en cascada """
 
-        DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
+        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
             id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
-                id=F('datastream__last_published_revision__id'),
+            visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_published_revision__id'),
                 status=StatusChoices.PUBLISHED)
 
-            for datastream in datastreams:
-                DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).unpublish(killemall=True)
+            for visualization_rev in visualization_revisions:
+                VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization_rev.id).unpublish(
+                    killemall=True
+                )
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
-        """ Envia a revision un dataset """
+        """ Envia a revision un datastream """
 
         if self.datastream_revision.status not in allowed_states:
             raise IllegalStateException(
@@ -175,18 +199,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.PENDING_REVIEW
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.REVIEW)
 
     def _send_childs_to_review(self):
         """ Envia a revision todos los datastreams hijos en cascada """
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
-                id=F('datastream__last_revision__id'),
+            visualization_revs = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_revision__id'),
                 status=StatusChoices.DRAFT)
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).send_to_review()
+            for visualization_rev in visualization_revs:
+               VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization_rev.id).send_to_review()
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
         """ accept a dataset revision """
@@ -199,6 +224,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.APPROVED
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.ACCEPT)
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a dataset revision """
@@ -211,6 +237,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self.datastream_revision.status = StatusChoices.DRAFT
         self.datastream_revision.save()
+        self._log_activity(ActionStreams.REJECT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """

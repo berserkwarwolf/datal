@@ -9,13 +9,47 @@ from core.daos.visualizations import VisualizationDBDAO
 from core.engine import invoke, invoke_chart
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.reports_manager.helpers import create_report
+from core.daos.visualizations import VisualizationHitsDAO
 from microsites.viewChart import forms
-from core.utils import set_dataset_impl_type_nice
+from microsites.helpers import set_dataset_impl_type_nice
+from core.daos.visualizations import VisualizationHitsDAO
+from django.template import loader, Context
+
 import urllib
 import json
 import logging
 
+def hits_stats(request, vz_id, channel_type=None):
+    """
+    hits stats for chart visualization
+    """
+
+    try:
+        vz = Visualization.objects.get(pk=int(vz_id))
+    except Visualization.DoesNotExist:
+        raise Http404
+
+
+    dao=VisualizationHitsDAO(vz)
+    hits=dao.count_by_days(30, channel_type)
+
+    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
+
+
+    t = loader.get_template('viewChart/chart_hits_stats.html') 
+    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
+    return HttpResponse(t.render(c), content_type="application/json")
+
+
+def action_charttest(request):
+    """
+    Test Show for a chart visualization
+    """
+
+    base_uri = get_domain_with_protocol('microsites')
+    preferences = request.preferences
+
+    return render_to_response('viewChart/chart_test.html', locals())
 
 def action_view(request, id, slug):
     """
@@ -70,7 +104,8 @@ def action_view(request, id, slug):
         can_export = True
         can_share = False
 
-        create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
 
@@ -121,7 +156,7 @@ def action_embed(request, guid):
     except:
         return render_to_response('viewChart/embed404.html',{'settings': settings, 'request' : request})
 
-    create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
     width = request.REQUEST.get('width', False) # TODO get default value from somewhere
     height = request.REQUEST.get('height', False) # TODO get default value from somewhere
 

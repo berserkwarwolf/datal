@@ -18,9 +18,12 @@ from core.helpers import jsonToGrid, Day, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
+from core.decorators import *
+
 
 
 @require_http_methods(["GET"])
+@datal_cache_page()
 def action_invoke(request):
     form = forms.RequestForm(request.GET)
     if form.is_valid():

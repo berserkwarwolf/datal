@@ -1,0 +1,85 @@
+{% load i18n extra_tags components %}
+
+<div class="step-3-view">
+
+	<div class="wrapper1">
+		<div class="wrapper2">
+			<div class="wrapper3">
+
+				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+    
+    			<h2 class="FL">{% trans 'APP-CREATE-VISUALIZATION-TEXT' %}</h2>
+
+				<ol>
+					<li>{% trans "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
+					<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
+				</ol>
+
+				<a class="button primary finishButton">{% trans 'APP-FINISH-TEXT' %}</a>
+
+				<div class="sidebar">
+
+					<button class="icon icon-edit fill-background corner-position">&nbsp;</button>
+
+					<div class="row">
+						<div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec rutrum nisi et neque scelerisque porta.</p>
+					</div>
+
+					<div class="row">
+						<div class="title">{% trans "APP-CATEGORY-TEXT" %}</div>
+						<p>Educación</p>
+					</div>
+
+					<div class="row">
+						<div class="title">{% trans "APP-LABEL-TEXT" %}</div>
+						<div class="sourcesContent">
+							<div class="tag">
+								<span class="tagInner clearfix">
+									<span class="tagTxt">fuente1</span>
+								</span>
+							</div>
+
+							<div class="tag">
+								<span class="tagInner clearfix">
+									<span class="tagTxt">fuente2</span>
+								</span>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT" %}</div>
+						<p>Ministerio de educación</p>
+					</div>
+
+				</div>
+
+				<div class="preview-container">
+
+					<div class="row">
+
+						<div class="col-xs-12 col-lg-offset-1 col-lg-10">
+
+							<div class="chartContent">
+
+								<div id="chartContainer" class="chart-preview-view">
+
+									<button class="icon icon-edit fill-background corner-position"></button>
+
+								</div>
+
+							</div>
+
+						</div>
+
+					</div>
+
+				</div>
+			
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -29,7 +29,6 @@ class VisualizationDAO():
         elif self.visualization:
             self.language = self.visualization.user.language
 
-
     def get(self):
         """ get a full datastream data """
 

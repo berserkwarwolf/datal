@@ -91,7 +91,7 @@ bower_install:
     - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
-      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; CI=true python manage.py bower_install --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; CI=true bower install
 
 migrate_db:
   cmd.run:

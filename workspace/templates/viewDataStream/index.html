@@ -72,6 +72,9 @@
 <h2 class="FL">{{datastream.title|capfirst}}</h2>
 <ul class="actions FR">
   
+  <!-- Create Chart -->
+  <li><a class="button black small" href="{% url 'manageVisualizations.create' %}?datastream_revision_id={{datastream.datastream_revision_id}}"><i class="new"></i>{% trans 'APP-CREATECHART-TEXT' %}</a></li>
+
   <!-- Edit -->
   <li><a id="id_edit" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" data-url="{% url 'manageDataviews.edit' %}" data-id="{{datastream.datastream_revision_id}}" style="display:{% if datastream.status != 1 %}block{% else %}none;{% endif %}"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
 
