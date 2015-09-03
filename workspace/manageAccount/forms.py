@@ -5,9 +5,8 @@ from django.core.validators import validate_email
 from core import choices
 from core.models import Role
 
+
 class AccountInfoForm(forms.Form):
-
-
     account_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-NAME-LABEL'), required=True)
     account_link = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-LINK-LABEL'), required=False)
     account_contact_person_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL'), required=False)
@@ -44,6 +43,7 @@ class AccountBrandingForm(forms.Form):
     def action(self):
         return reverse('admin_manager.action_branding_update')
 
+
 class AccountSocialForm(forms.Form):
     account_comments = forms.BooleanField(label=ugettext_lazy('ACCOUNT-ENABLE-COMMENTS-LABEL'), required=False)
     enable_embed_options = forms.BooleanField(label=ugettext_lazy('ACCOUNT-ENABLE-EMBED-OPTIONS-LABEL'), required=False)
@@ -53,6 +53,7 @@ class AccountSocialForm(forms.Form):
 
     def action(self):
         return reverse('admin_manager.action_social_update')
+
 
 class AccountDomainForm(forms.Form):
     account_domain = forms.CharField(required=True, widget=forms.HiddenInput())
@@ -66,10 +67,12 @@ class AccountDomainForm(forms.Form):
     def action(self):
         return reverse('admin_manager.action_domain_update')
 
+
 class CategoryCreateForm(forms.Form):
     name = forms.CharField(label=ugettext_lazy('WORKSPACE-CATEGORY-NAME-LABEL'), required=True, max_length=45)
     description = forms.CharField(label=ugettext_lazy('WORKSPACE-CATEGORY-DESCRIPTION-LABEL'), required=False, widget=forms.Textarea(), max_length=140)
     is_default = forms.BooleanField(label=ugettext_lazy('ACCOUNT-DEFAULT-CATEGORY-LABEL'), required=False)
+
 
 class CategoryEditForm(forms.Form):
     id = forms.IntegerField(required=True, widget=forms.HiddenInput())
@@ -77,8 +80,10 @@ class CategoryEditForm(forms.Form):
     description = forms.CharField(label=ugettext_lazy('APP-DESCRIPTION-TEXT'), required=False, widget=forms.Textarea())
     is_default = forms.BooleanField(label=ugettext_lazy('ACCOUNT-DEFAULT-CATEGORY-LABEL'), required=False)
 
+
 class CategoryDeleteForm(forms.Form):
     id = forms.IntegerField(required=True)
+
 
 class UserForm(forms.Form):
     def __init__(self, role_codes, *args, **kwargs):
@@ -104,6 +109,7 @@ class UserForm(forms.Form):
             raise forms.ValidationError(ugettext_lazy('APP-EMAILS-MUST-MATCH'))
 
         return cleaned_data
+
 
 class UserDeleteForm(forms.Form):
     id = forms.IntegerField(required=True)
