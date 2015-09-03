@@ -3045,3 +3045,15 @@ msgstr "Sign in"
 
 msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recover password"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP1"
+msgstr "Create a dataset"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP2"
+msgstr "Create data views"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP3"
+msgstr "Create visualizations"
+
+msgid "LANDINGPAGE-NOACTIVITY-START"
+msgstr "Create a new dataset to begin"

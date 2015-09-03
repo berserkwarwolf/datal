@@ -3023,3 +3023,15 @@ msgstr "Iniciar sesión"
 
 msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recuperar contraseña"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP1"
+msgstr "Crea un conjunto de datos"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP2"
+msgstr "Crea vistas"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP3"
+msgstr "Crea visualizaciones"
+
+msgid "LANDINGPAGE-NOACTIVITY-START"
+msgstr "Crea un nuevo conjunto de datos para comenzar"

@@ -4,6 +4,7 @@
 
 /* Activity */
 .activity {
+	min-height:680px;
 	
 	article{float:left;width:100%;
 
@@ -18,4 +19,24 @@
 			* > *{vertical-align:middle;}
 		}
 	}
+
+	.step1,
+	.step2,
+	.step3{position:relative;
+		h2{padding:29px 0 15px 25px;color:#adadad;}
+
+		@media(max-width:$break-md){
+			img{width:85%;}
+		}
+	}
+
+	.step1,
+	.step2{border-right:2px dashed #dbdbdb;
+		.arrowRight{background:url(/static/workspace/images/viewLandingPage/arrowRight.gif);width:22px;height:45px;position:absolute;top:22px;right:-22px;}
+	}
+
+	.start{
+		h2{margin:10px 0 20px 0;}
+	}
+
 }

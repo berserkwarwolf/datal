@@ -47,7 +47,7 @@ a:hover{color:$link-hover-color;}
 }
 
 /* Button pulldown */
-.button-pulldown{position:relative;
+.button-pulldown{position:relative;display:inline-block;
   & > .button.primary{@include box-shadow(0 0 0 transparent);}
   &.active{
     & > .button.primary{background-color:$button-primary-hover-color;}
