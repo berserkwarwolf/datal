@@ -91,7 +91,7 @@ charts.models.Chart = Backbone.Model.extend({
             null_action: 'exclude',
             null_preset: undefined,
         }).then(function (response) {
-            this.formatResponseData(response.series, response.values, self);
+            self.formatResponseData(response.series, response.values, self);
         });
     },
 
