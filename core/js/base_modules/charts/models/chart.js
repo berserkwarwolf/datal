@@ -152,7 +152,6 @@ charts.models.Chart = Backbone.Model.extend({
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
             this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
-            console.log("this.toJSON():", this.toJSON());
         }
 
         this.trigger('data_updated');
