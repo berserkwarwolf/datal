@@ -127,3 +127,21 @@ def action_embed(request, guid):
     fixed_column = request.REQUEST.get('fixed_column', False)
 
     return render_to_response('datastream_manager/embed.html', locals())
+
+def hits_stats(request, ds_id, channel_type=None):
+    """ hits stats for chart datastreams """
+    
+    try:
+        ds = Datastream.objects.get(pk=int(ds_id))
+    except Visualization.DoesNotExist:
+        raise Http404
+
+    dao=DatastreamHitsDAO(ds)
+    hits=dao.count_by_days(30, channel_type)
+    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
+    
+    
+    t = loader.get_template('datastream_manager/hits_stats.json')
+    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
+    return HttpResponse(t.render(c), content_type="application/json")
+
