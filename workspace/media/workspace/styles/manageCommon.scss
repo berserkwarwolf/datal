@@ -35,13 +35,8 @@
 .bulk-actions button{margin-left:5px;}
 
 /* Filters */
-.filters-container{background:#f6f4f4;border-right:1px solid #e5e5e5;text-shadow:0 1px 0 #fff;
-    -webkit-border-radius:3px 0 0 3px;
-       -moz-border-radius:3px 0 0 3px;
-            border-radius:3px 0 0 3px;
-}
 .filters-container > div{padding-bottom:9px;}
-.filters-container > div h3{font-size:$font-size-base;line-height:16px;padding:9px 15px 5px;text-transform:uppercase;border-bottom:1px solid #e5e5e5;word-break:break-word;
+.filters-container > div h3{font-size:$font-size-m;font-family:$font-titles-family;line-height:30px;min-height:30px;padding: 0 0 15px;text-transform:uppercase;word-break:break-word;color:#999;
     -webkit-box-shadow:0 1px 0 0 #fff;
        -moz-box-shadow:0 1px 0 0 #fff;
             box-shadow:0 1px 0 0 #fff;
@@ -63,13 +58,13 @@
     .filters-container .activeFilters li a:hover{color:#c00202;text-decoration:none;}
 
     /* Normal filters */
-    .filters-container .filters li a{padding:2px 15px;line-height:16px;display:block;word-break:break-word;}
-    .filters-container .filters li a:hover{background:$accent-color;color:#fff;text-shadow:0 1px 0 #1452b0;text-decoration:none;}
+    .filters-container .filters li{padding:0 0 15px 15px;}
+    .filters-container .filters li a{word-break:break-word;}
 
 /* List */
-.list-container{padding:0 15px 15px;}
+.list-container{}
 .list-container table{width:100%;text-shadow:0 1px 0 #fff;}
-.list-container table th{text-align:left;color:#999;font-family:$font-extra-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
+.list-container table th{text-align:left;color:#999;font-size:$font-size-m;font-family:$font-titles-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
 .list-container table .select-all-header-cell input[type=checkbox]{position:relative;top:3px;}
 .list-container table tr{}
 .list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:12px 10px 12px 10px;line-height:18px;
@@ -95,9 +90,12 @@
 .list-container table button.small{float:left;padding:0;background:none;}
 .list-container table i{font-style:normal;display:inline-block;}
 .list-container table i.type_nice.icon{display:inline;}
-.list-container table tr:nth-child(odd) td{background:#fbfbfb;}
+.list-container table tr:nth-child(odd) td{background:#f4f4f4;}
 .list-container table tr:hover td{background:$accent-color-05 !important;}
 .list-container table tr:hover li{visibility:visible;}
+
+.list-container .backgrid th, 
+.list-container .backgrid td{border:0;}
 
 /* Overlays */
 .ao-popup-overlay table th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}

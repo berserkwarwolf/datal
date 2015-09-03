@@ -630,7 +630,7 @@ border-color: #ccc;}
 .backgrid-filter input[type="search"]::-webkit-search-cancel-button{display:none;}
 
 /* Pagination */
-.pagination{background:$accent-color-05;padding:15px;/*position:relative;*/
+.pagination{background:none;padding:15px;/*position:relative;*/
     -webkit-border-radius:0 0 3px 3px;
        -moz-border-radius:0 0 3px 3px;
             border-radius:0 0 3px 3px;
