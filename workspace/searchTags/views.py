@@ -2,8 +2,9 @@ from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 from core.auth.decorators import login_required
 from core.models import *
-from workspace.tag_manager.forms import *
+from .forms import *
 import json
+
 
 @login_required
 @require_http_methods(["GET"])
