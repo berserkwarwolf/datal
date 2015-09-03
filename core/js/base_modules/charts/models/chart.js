@@ -91,7 +91,7 @@ charts.models.Chart = Backbone.Model.extend({
             null_action: 'exclude',
             null_preset: undefined,
         }).then(function (response) {
-            self.formatResponseData(response.series, response.values, response.labels);
+            self.formatResponseData(response.series, response.values, response.labels).bind(this);
         });
     },
 
@@ -105,10 +105,12 @@ charts.models.Chart = Backbone.Model.extend({
         var columns = [],
             fields =[];
 
-        if (labels.length !== 0) {
-            columns.push(labels);
-            fields.push(['string', 'labels'])
-        }
+        if (!labels.length)
+            labels = new Array(values[0].length);
+
+        columns.push(labels);
+        fields.push(['string', 'labels'])
+
         columns = columns.concat(values);
         fields = fields.concat(_.map(series, function (item) {
             return ['number', item.name];
@@ -149,7 +151,7 @@ charts.models.Chart = Backbone.Model.extend({
         if(this.get('type') == 'map'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
-            this.formatResponseData(this.data.get('series'), this.data.get('values'));
+            this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
             console.log("this.toJSON():", this.toJSON());
         }
 
