@@ -8,6 +8,7 @@ from django.db import IntegrityError
 
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from core import settings
+from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
