@@ -1,4 +1,5 @@
 from django.conf.urls import *
+from microsites.datastream_manager.views import hits_stats
 
 urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.datastream_manager.views.action_view',
@@ -15,7 +16,7 @@ urlpatterns = patterns('',
         'microsites.datastream_manager.views.action_flexmonster', name='datastream_manager.action_flexmonster'),
     url(r'^updategrid$', 'core.datastream_manager.views.action_updategrid',
         name='datastream_manager.action_updategrid'),
-    url(r'^get_last_30_days_datastream/(?P<id>\d+)$', 'core.datastream_manager.views.get_last_30_days_datastream',
+    url(r'^get_last_30_days_datastream/(?P<id>\d+)$', hits_stats,
         name='datastream_manager.get_last_30_days_datastream'),
     url(r'^category/(?P<category_slug>[A-Za-z0-9\-]+)/$', 'microsites.search.views.action_browse',
         name='search.action_browse'),
