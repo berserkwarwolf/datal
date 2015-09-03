@@ -10,10 +10,11 @@ charts.models.Chart = Backbone.Model.extend({
         lib: 'google',
 
         showLegend: true,
+        invertData: undefined,
         invertedAxis: undefined,
         chartTemplate: undefined,
-        nullValueAction: '',
-        nullValuePreset: '',
+        nullValueAction: 'exclude',
+        nullValuePreset: undefined,
         traspose: false,
 
         //metadata
@@ -88,8 +89,10 @@ charts.models.Chart = Backbone.Model.extend({
             data: self.get('range_data'),
             headers: self.get('range_headers'),
             labels: self.get('range_labels'),
-            null_action: 'exclude',
-            null_preset: undefined,
+            nullValueAction: self.get('nullValueAction'),
+            nullValuePreset:  self.get('nullValuePreset'),
+            invertData:  self.get('invertData'),
+            invertedAxis:  self.get('invertedAxis')
         }).then(function (response) {
             self.formatResponseData(response.series, response.values, response.labels);
         });

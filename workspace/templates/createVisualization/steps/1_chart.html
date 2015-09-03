@@ -86,7 +86,7 @@
 									<fieldset>
 										<div class="checkbox">
 											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %} <input class="checkboxControl" value="traspose" name="traspose" type="checkbox">
+												{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %} <input class="checkboxControl" value="checked" name="invertData" type="checkbox">
 											</label>
 										</div>
 									</fieldset>
@@ -97,10 +97,10 @@
 										
 										<div class="radio">
 											<label>
-												{% trans "APP-DEFAULT-TEXT" %} <input name="sort" checked="" type="radio" value="default">
+												{% trans "APP-DEFAULT-TEXT" %} <input name="invertedAxis" checked="" type="radio" value="default">
 											</label>
 											<label>
-												{% trans "APP-INVERTED-TEXT" %} <input name="sort" type="radio" value="inverted">
+												{% trans "APP-INVERTED-TEXT" %} <input name="invertedAxis" type="radio" value="inverted">
 											</label>
 										</div>
 
@@ -112,7 +112,7 @@
 										
 										<div class="radio">
 											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %} <input name="nullValueAction" value="excluded" type="radio">
+												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %} <input name="nullValueAction" value="exclude" type="radio">
 											</label>
 											<label>
 												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT" %} <input name="nullValueAction" value="previous" type="radio">
