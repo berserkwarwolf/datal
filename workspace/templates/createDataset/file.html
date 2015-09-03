@@ -26,20 +26,32 @@
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}
 
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageDatasets.list' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+{% endblock %}
+
 {% block sectionTitle %}
-<h1 class="FL"><a href="{% url 'manageDatasets.list' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
-<h2 class="FL">{% trans 'APP-ADDNEW-TEXT' %}</h2>
-<ul class="buttons-bar FR" data-step="1">
-	{% include "createDataset/navigation.html" %}
-</ul>
+	<div class="context-menu clearfix">
+    <div class="col-xs-8">
+        <h1 class="sub-heading">{% trans "APP-CREATE-A-DATASET-TEXT" %}</h1>
+        <ul class="buttons-bar" data-step="0">
+					{% include "createDataset/navigation.html" %}
+				</ul>
+    </div>
+    <div class="col-xs-4 context-buttons clearfix">
+    	
+    </div>
+	</div>
 {% endblock %}
 
 {% block content %}
-
-	<form action="" class="create" id="id_createDataset">
-		{% include "processManager/dataset/steps/collectFile.html" %}
-		{% include "processManager/dataset/steps/finish.html" %}
-	</form>
+	<div class="col-xs-12">
+		<form action="" class="create relative" id="id_createDataset">
+			{% include "processManager/dataset/steps/collectFile.html" %}
+			{% include "processManager/dataset/steps/finish.html" %}
+		</form>
+	</div>
 
 {% endblock %}
 
@@ -62,7 +74,6 @@ $(document).ready(function(){
 	var finishView = new FinishView({model: finishModel});
 
 	var processManagerModel = new ProcessManagerModel({
-		startUrl: "{% url 'manageDatasets.create' %}",
 		finishUrl: "{% url 'manageDatasets.list' %}"
 	});
 	var processManagerView = new ProcessManagerView({model: processManagerModel});

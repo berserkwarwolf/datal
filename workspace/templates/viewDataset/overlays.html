@@ -5,12 +5,12 @@
 <div class="In clearfix">
    <h4>{% trans 'APP-OVERLAY-DELETE-DATASET-TITLE' %}</h4>
    <div class="ov-content">
-      <p class="text center">{% trans 'APP-OVERLAY-DELETE-DATASET-TEXT' %}</p>
+      <p class="text center more-padding">{% trans 'APP-OVERLAY-DELETE-DATASET-TEXT' %}</p>
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
-         <a id="id_deleteResource" class="button small" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
-         <a id="id_deleteRevision" class="button small" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
+         <a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
+         <a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
       </div>
    </div>
 </div>
@@ -26,8 +26,8 @@
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
-         <a id="id_deleteRelatedResources" class="button small" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
-         <a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+         <a class="button cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+         <a id="id_deleteRelatedResources" class="button delete" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
       </div>
    </div>
 </div>
@@ -38,12 +38,12 @@
 <div class="In clearfix">
    <h4>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TITLE' %}</h4>
    <div class="ov-content">
-      <p class="text center">{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
+      <p class="text center more-padding">{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
-         <a id="id_unpublishResource" class="button small" title="{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}">{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}</a>
-         <a id="id_unpublishRevision" class="button small" title="{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}">{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}</a>
+         <a id="id_unpublishResource" class="button" title="{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}">{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}</a>
+         <a id="id_unpublishRevision" class="button primary" title="{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}">{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}</a>
       </div>
    </div>
 </div>
@@ -59,8 +59,8 @@
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
-         <a id="id_unpublishRelatedResources" class="button small" title="{% trans 'APP-OVERLAY-UNPUBLISH' %}">{% trans 'APP-OVERLAY-UNPUBLISH' %}</a>
-         <a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+         <a class="button cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+         <a id="id_unpublishRelatedResources" class="button primary" title="{% trans 'APP-OVERLAY-UNPUBLISH' %}">{% trans 'APP-OVERLAY-UNPUBLISH' %}</a>
       </div>
    </div>
 </div>

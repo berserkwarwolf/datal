@@ -3078,3 +3078,9 @@ msgstr "Iniciar sesión"
 
 msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recuperar contraseña"
+
+msgid "APP-CREATE-A-DATASET-TEXT"
+msgstr "Crea un conjunto de datos"
+
+msgid "APP-EDIT-DATASET-TEXT"
+msgstr "Editar conjunto de datos"

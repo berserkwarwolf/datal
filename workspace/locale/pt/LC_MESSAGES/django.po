@@ -3085,3 +3085,9 @@ msgstr "Sign in"
 
 msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recover password"
+
+msgid "APP-CREATE-A-DATASET-TEXT"
+msgstr "Create a Dataset"
+
+msgid "APP-EDIT-DATASET-TEXT"
+msgstr "Edit Dataset"

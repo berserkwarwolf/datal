@@ -59,7 +59,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			otherHeight = theHeight,
 			minHeight = tabsHeight - otherHeight;
 
-		$(heightContainer).css('min-height', minHeight+ 'px');
+		// $(heightContainer).css('min-height', minHeight+ 'px');
 
 		$(window).resize(function(){
 
@@ -71,29 +71,14 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				windowHeight = $(window).height();
 		 	}
 
-		 	var alertHeight = 0;
-			if($('.section-content .alert').length > 0){
-				if($('.section-content .alert').css('display') != 'none'){
-					alertHeight =
-						parseFloat( $('.section-content .alert').height() )
-						+ parseFloat( $('.section-content .alert').css('padding-top').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('padding-bottom').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('margin-bottom').split('px')[0] );
-				}
-			}
-
 			var sectionContentHeight =
 				windowHeight
 				- parseFloat( otherHeight	)
-				- ( alertHeight )
 				- $('.header').height()
-				- parseInt($('.header').css('border-top-width').split('px')[0])
-				- parseInt($('.header').css('border-bottom-width').split('px')[0])
 				- $('.main-section .section-title').height()
-				- parseInt($('.main-section .section-content').css('padding-top').split('px')[0])
-				- parseInt($('.main-section .section-content').css('padding-bottom').split('px')[0])
-				- $('.footer').height()
-				- 3; // 3 rounds up the number, don't know why.
+				- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
+				- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
+				- 20; // to set some space at the bottom
 
 			$(heightContainer).css('height', sectionContentHeight+'px');
 
@@ -193,7 +178,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		self = this;
 		this.deleteListResources = new Array();
 		this.deleteListResources.push(this.options.model);
-		var deleteView = new DeleteView({
+		var deleteItemView = new DeleteItemView({
 			models: this.deleteListResources,
 			type: "visualizations"
 		});

@@ -75,9 +75,8 @@ var CollectFileView = StepView.extend({
 			
 		}
 
-		this.model.set('impl_type',this.model.checkExtension(filename));
-
 		if(this.model.isValid(true)){
+			this.model.set('impl_type',this.model.checkExtension(filename));
 			this.model.setOutput();
 			this.next();
 		}

@@ -1,4 +1,4 @@
-var AffectedResourcesCollectionDeleteView = Backbone.View.extend({
+var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
 
     el: '#id_confirmDeleteDataset',
 

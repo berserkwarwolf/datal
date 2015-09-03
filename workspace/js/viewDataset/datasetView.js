@@ -19,13 +19,85 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	render: function() {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
+		this.setSidebarHeight();
+		this.setContentHeight();
 		return this;
 	},
+
+	setSidebarHeight: function(){
+
+		var self = this;
+
+		$(document).ready(function(){
+
+			var otherHeights = 0;
+			self.setHeights( '.sidebar-container .box', otherHeights );
+
+		});
+
+	},
+
+	setContentHeight: function(){
+
+		var self = this;
+
+		$(document).ready(function(){
+
+			var otherHeights = 
+			parseFloat( $('.detail-container header').height() )
+			+ parseFloat( $('.detail-container header').css('padding-top').split('px')[0] )
+			+ parseFloat( $('.detail-container header').css('padding-bottom').split('px')[0] )
+			+ parseFloat( $('.detail-container header').css('border-bottom-width').split('px')[0] )
+			+ 2;// Fix to perfection;
+
+			self.setHeights( '.resources-table', otherHeights );
+
+		});
+
+	},
+
+	setHeights: function(theContainer, theHeight){
+
+		if(typeof theHeight == 'undefined'){
+			theHeight = 0;
+		}
+
+		var heightContainer = String(theContainer),
+			tabsHeight = parseFloat( $('.main-navigation').height() ),
+			otherHeight = theHeight,
+			minHeight = tabsHeight - otherHeight;
+
+		// $(heightContainer).css('min-height', minHeight+ 'px');
+
+		$(window).resize(function(){
+
+			var windowHeight;
+			if( $(window).height() < 600){
+			// Set window height minimum value to 600
+				windowHeight = 600;
+			}else{
+				windowHeight = $(window).height();
+			}
+
+			var sectionContentHeight =
+			windowHeight
+			- parseFloat( otherHeight )
+			- $('.header').height()
+			- $('.main-section .section-title').height()
+			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
+			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
+			- 20; // to set some space at the bottom
+
+			$(heightContainer).css('height', sectionContentHeight+'px');
+
+		}).resize();
+
+	}, 
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
 		this.deleteListResources.push(this.options.model);
-		var deleteView = new DeleteView({
+		var deleteItemView = new DeleteItemView({
 				models: this.deleteListResources,
 				type: "datastreams"
 		});
@@ -65,6 +137,12 @@ var datasetView = Backbone.Epoxy.View.extend({
 					// Set Status
 					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
 					self.model.set('status',response.dataset_status);
+
+					// Update Heights
+					setTimeout(function(){
+						self.setSidebarHeight();
+						self.setContentHeight();
+					}, 0);
 
 					// Set OK Message
 					$.gritter.add({

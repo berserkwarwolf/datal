@@ -23,7 +23,7 @@
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
-.create .title{font-family:$font-secondary-family;text-transform:uppercase;font-size:$font-size-base;padding:15px 0 10px 0;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;}
+.create .title{font-family:$font-titles-family;font-size:$font-size-l;padding:15px 0 15px 0;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;margin-bottom:30px;line-height:normal;}
 .create .required{color:#d21717;padding-left:5px;}
 .create header .required{padding-left:0;}
 .create .formContent .required{float:right;padding-right:12px;}
@@ -75,7 +75,6 @@
 .create .row p.has-error{padding-left:34%;clear:both;}
 
 /* Form */
-.create .formContent fieldset{padding:20px;}
 .create .formContent .separator{height:1px;background:#d7d7d7;margin:5px 0 20px 0;border:0;padding:0;}
 .create .formContent .row{padding-bottom:15px;}
 .create .formContent .row input[type="text"],
@@ -83,7 +82,7 @@
 .create .formContent .row input[type="file"], 
 .create .formContent .row input[type="url"],
 .create .formContent .row input[type="email"],
-.create .formContent .row select{width:440px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;
+.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -91,7 +90,7 @@
 .create .formContent .row input[type="file"]{padding:0;}
 .create .formContent .row label{font-size:$form-label-size;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
-.create .formContent .row textarea{width:440px;
+.create .formContent .row textarea{width:480px;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;

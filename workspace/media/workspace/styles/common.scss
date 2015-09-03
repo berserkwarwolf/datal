@@ -19,6 +19,10 @@ a:hover{color:$link-hover-color;}
   &.primary{background:$button-primary-color;border-color:transparent;color:$button-primary-text-color;}
   &.primary:hover{background:$button-primary-hover-color;}
 
+  /* Delete button */
+  &.delete{background:$red;border-color:transparent;color:$button-primary-text-color;}
+  &.delete:hover{background:$red-hover;}
+
   /* Active state - Normal and Primary */
   &:active{@include box-shadow(0 5px 5px rgba(0,0,0,.35));}
 
@@ -125,7 +129,7 @@ a.green:hover,
   
   li{float:left;padding-left:25px;
     &:first-child{padding-left:0;}
-    a{padding:0;font-family:$font-titles-family;line-height:normal;font-size:$font-size-xl;color:#000;}
+    a{padding:0;font-family:$font-titles-family;line-height:normal;font-size:$font-size-xl;color:#000;cursor:default;}
     &.step0 a:before{content:"1. ";}
     &.step1 a:before{content:"2. ";}
     &.step2 a:before{content:"3. ";}
@@ -156,7 +160,7 @@ a.green:hover,
   &[data-step="4"] li.step2 a,
   &[data-step="4"] li.step2 a:hover,
   &[data-step="4"] li.step3 a,
-  &[data-step="4"] li.step3 a:hover{color:$green;}
+  &[data-step="4"] li.step3 a:hover{color:$green;cursor:pointer;}
 
 }
 
@@ -248,6 +252,9 @@ body{background:$color-base;height:100%;min-width:998px;}
       &.active,
       &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
 
+      /* Erase button active state */
+      &:active{@include box-shadow(0 0 0 transparent);}
+
       /* Disabled */
       &.disabled{@include opacity(30);cursor:default;
         &:hover{background:none;}
@@ -331,9 +338,9 @@ body{background:$color-base;height:100%;min-width:998px;}
   .section-title{
     
     /* Context menu */
-    .context-menu{
+    .context-menu{min-height:100px;
     
-      h1{padding:20px 0;
+      h1{padding:20px 0 0;
         &.sub-heading{font-size:15px !important;text-transform:uppercase;padding:0;}
         .total-resources{color:#808080;}
       }
@@ -502,7 +509,7 @@ i.icon.TNCLIMA{}
   .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
-.helpBox:first-child{background-color:$accent-color-05;background-image:none;padding:15px;float:right;margin:20px;
+.helpBox:first-child{background-color:$accent-color-05;background-image:none;padding:15px;float:right;margin-bottom:20px;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
@@ -510,7 +517,7 @@ i.icon.TNCLIMA{}
      -moz-box-shadow:0 0 8px rgba(0, 0, 0, 0.1) inset;
           box-shadow:0 0 8px rgba(0, 0, 0, 0.1) inset;
 }
-.helpBox h6{font-family:$font-secondary-family;font-size:$font-size-m;text-transform:uppercase;padding-bottom:5px;color:$accent-color;}
+.helpBox h6{font-family:$font-secondary-family;font-size:$font-size-m;text-transform:uppercase;padding-bottom:5px;color:#000;}
 .helpBox p{font-size:$font-size-s;font-weight:normal;margin-bottom:10px;color:$font-color-semi-light;}
 .helpBox ul{margin:10px 10px 10px 20px}
 .helpBox ul li{list-style-type:disc;margin-bottom:8px;font-size:10px;color:$font-color-semi-light;}
@@ -535,9 +542,10 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .ov-content ul li:last-child{border-bottom:none; padding-bottom:0;}
 .ao-popup-overlay .ov-content ul li span, .ao-popup-overlay .ov-alert span{margin: 0 5px -5px 0;}
 .ao-popup-overlay .ov-content .selectTitle{text-transform: uppercase; font-weight: bold; padding: 0 10px 5px 10px;}
-.ao-popup-overlay .ov-content p{padding: 0 0 15px 0;}
+.ao-popup-overlay .ov-content p{padding:0 0 15px 0;}
 .ao-popup-overlay .ov-content p.text{font-size:14px;line-height:18px;}
 .ao-popup-overlay .ov-content p:last-child{padding:0;}
+.ao-popup-overlay .ov-content p.more-padding{padding:15px 0 !important;}
 .ao-popup-overlay .ov-content select{font-size: 12px; width: 100%;}
 .ao-popup-overlay .ov-bottom{background-color:$accent-color-05; border-top: 1px solid #d7d7d7; padding: 15px; min-height: 57px;}
 .ao-popup-overlay .ov-bottom form.form-search{width:240px;margin:0;}
@@ -545,7 +553,6 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .ov-buttons .button{margin:0 5px;}
 .ao-popup-overlay .ov-alert{background-color: $accent-color; padding: 10px; border-radius: 3px; color: #fff; text-shadow: 1px 1px 0 #1452b0;}
 .ao-popup-overlay .button{display: inline-block;}
-.ao-popup-overlay .ov-buttons a.cancel{padding: 6px 15px;}
 .ao-popup-overlay .ov-content fieldset{padding:0;}
 .ao-popup-overlay .ov-content input{width:100px;}
 .ao-popup-overlay .contentForm .row{padding-bottom:15px;}
@@ -554,7 +561,7 @@ i.icon.TNCLIMA{}
 
 .ao-popup-overlay .In .dataStreamForm{padding:0;}
 .ao-popup-overlay .In h4, 
-.ao-popup-overlay .Inner h4{font-size:$font-size-xl;color:$font-color-base;font-family:$font-titles-family;}
+.ao-popup-overlay .Inner h4{font-size:$font-size-l;color:$font-color-base;font-family:$font-titles-family;}
 .ao-popup-overlay .dataStreamForm .form{padding:20px;}
 .ao-popup-overlay .buttons{padding:20px 0;border-top:1px solid #E2E0E0;margin:0;}
 .ao-popup-overlay .ao-L{width:680px !important;}
