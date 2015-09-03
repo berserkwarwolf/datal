@@ -5,9 +5,8 @@ import logging
 
 from django.db.models import Q, F
 from django.db import IntegrityError
-
-
 from core.helpers import slugify
+from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
 from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
