@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models import F, Max
 from django.db import transaction
-from core.choices import ActionStreams
+from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, DataStreamRevision, DataStream, DatastreamI18n, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *

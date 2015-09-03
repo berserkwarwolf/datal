@@ -7,7 +7,7 @@ import operator
 from django.template import loader, Context
 from django.db.models import Q, F
 
-from core.helpers import slugify
+from core.utils import slugify
 from core import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException

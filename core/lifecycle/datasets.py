@@ -3,7 +3,7 @@ from django.db.models import F, Max
 from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
-from core.choices import ActionStreams, STATUS_CHOICES
+from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
