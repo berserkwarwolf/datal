@@ -23,18 +23,23 @@ var my_form_error_messages = new Array();
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-MYACCOUNT-TEXT" %}</h1>
+<div class="context-menu clearfix">
+    
+    <!-- Column Left -->
+    <div class="col-xs-7">    
+        
+        <h1>{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</h1>
+
+    </div>
+
+</div>
 {% endblock %}
 
 {% block content %}
-<div class="formContainer" id="id_update_user_container">
+<div class="formContainer col-xs-12" id="id_update_user_container">
     <form action="{{form.action}}" method="post" id="id_myAccountForm">
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
-
-            <header>
-                <h3>{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</h3>
-            </header>
 
         <div class="columns clearfix">
             <div class="CL">
@@ -58,7 +63,7 @@ var my_form_error_messages = new Array();
                             </div>
 
                             <div class="row clearfix">
-                                <div class="formErrorMessageContainer">
+                                <div class="formErrorMessageContainer relative">
                                     <label for="{{form.new_password.auto_id}}">{{form.new_password.label}}:</label>
                                     {{form.new_password}}
                                     <div class="passwordStrength">
@@ -110,7 +115,7 @@ var my_form_error_messages = new Array();
         </div>
 
         <div class="buttons center">
-            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}"/>
         </div>
 
     </form>
