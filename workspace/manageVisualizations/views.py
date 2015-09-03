@@ -211,20 +211,10 @@ def create(request, viz_type='index'):
         # Formulario
         form = VisualizationForm(request.POST)
         if not form.is_valid():
+            logger.info(form.errors)
             raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        lifecycle = VisualizationLifeCycleManager(user=request.user)
-        visualization_rev = lifecycle.create(
-            datastream_rev=datastream_rev,
-            language=request.auth_manager.language,
-            **form.cleaned_data
-        )
-
-        response = dict(
-            status='ok',
-            revision_id=visualization_rev.id,
-            messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
-        )
+        response = form.save(request, datastream_rev)
 
         return JSONHttpResponse(json.dumps(response))
     

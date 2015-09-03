@@ -13,15 +13,16 @@ var viewChartView = Backbone.View.extend({
         this.render();
     },
     setupChart: function () {
-        this.chartOptions = JSON.parse(this.model.get('chartJson')).chart;
+        this.chartFormat = JSON.parse(this.model.get('chartJson')).format;
 
-        var chartSettings = this.chartsFactory.create(this.chartOptions.type,this.chartOptions.lib);
+        var chartSettings = this.chartsFactory.create(this.chartFormat.type,this.chartFormat.lib);
 
         this.ChartViewClass = chartSettings.Class;
         this.ChartModelClass = charts.models.Chart;
     },
     render: function () {
         this.initializeChart();
+        this.chartInstance.render();
         return this;
     },
     initializeChart: function () {
@@ -34,16 +35,7 @@ var viewChartView = Backbone.View.extend({
 
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
-            resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
-            resourceIdAttribute: 'visualization_revision_id',
-            resourceID: 6741,
-            options: {
-                zoom: parseInt(this.chartOptions.zoom, 10),
-                center: {
-                    lat: this.chartOptions.center.lat,
-                    long: this.chartOptions.center.long
-                }
-            }
+            resourceID: 3610
         });
 
         this.chartInstance = new this.ChartViewClass({
