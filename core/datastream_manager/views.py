@@ -162,48 +162,67 @@ def action_updategrid(request):
     return HttpResponse(jsonToGrid(contents, query['pPage'] + 1), mimetype=mimetype)
 
 
-def get_last_30_days_datastream(request, id):
+def hits_stats(request, ds_id, channel_type=None):
+    """ hits stats for chart datastreams """
+
     try:
-        int(id)
-    except ValueError:
-        response = {'status': 'error'}
-    else:
-        redis_key = 'get_last_30_days_datastream_' + str(id)
-        c = Cache(db=0)
-        first_chart = c.get(redis_key)
-        if not first_chart:
-            last_30_days = date.today() - timedelta(days=30)
-            total_datastream_hits = DataStreamHits.objects.filter(
-                created_at__gte=last_30_days,
-                datastream__id=id).annotate(
-                date=Day('created_at')).annotate(
-                count=Count('created_at')).values(
-                'date', 'count')
+        ds = Datastream.objects.get(pk=int(ds_id))
+    except Visualization.DoesNotExist:
+        raise Http404
+    
+    
+    dao=DatastreamHitsDAO(ds)
+    hits=dao.count_by_days(30, channel_type)
+    
+    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
+    
+    
+    t = loader.get_template('datastream_manager/hits_stats.json')
+    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
+    return HttpResponse(t.render(c), content_type="application/json")
 
-            total_datastream_hits.query.group_by = ['date']
-            first_chart = []
-            new_item = []
-            new_item.insert(0, unicode(ugettext_lazy('REPORT-CHART-DATE')))
-            new_item.insert(1, unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS')))
-            first_chart.append(new_item)
-            base = date.today()
-            dateList = [ base - timedelta(days=x) for x in range(0, 31) ]
-            dateList.reverse()
-            for day in dateList:
-                new_item = []
-                new_item.insert(0, day.isoformat())
-                new_item.insert(1, 0)
-                for item in list(total_datastream_hits):
-                    if item['date'] == day:
-                        new_item[1] = new_item[1] + item['count']
-                        break
-                first_chart.append(new_item)
-
-            c.set(redis_key, json.dumps(first_chart, cls=DjangoJSONEncoder), settings.REDIS_STATS_TTL)
-            from_redis = False
-        else:
-            first_chart = json.loads(first_chart)
-            from_redis = True
-        response = {'status': 'ok', 'chart': first_chart, 'from_redis': from_redis}
-
-    return HttpResponse(json.dumps(response), mimetype='application/json')
+#def get_last_30_days_datastream(request, id):
+#    try:
+#        int(id)
+#    except ValueError:
+#        response = {'status': 'error'}
+#    else:
+#        redis_key = 'get_last_30_days_datastream_' + str(id)
+#        c = Cache(db=0)
+#        first_chart = c.get(redis_key)
+#        if not first_chart:
+#            last_30_days = date.today() - timedelta(days=30)
+#            total_datastream_hits = DataStreamHits.objects.filter(
+#                created_at__gte=last_30_days,
+#                datastream__id=id).annotate(
+#                date=Day('created_at')).annotate(
+#                count=Count('created_at')).values(
+#                'date', 'count')
+#
+#            total_datastream_hits.query.group_by = ['date']
+#            first_chart = []
+#            new_item = []
+#            new_item.insert(0, unicode(ugettext_lazy('REPORT-CHART-DATE')))
+#            new_item.insert(1, unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS')))
+#            first_chart.append(new_item)
+#            base = date.today()
+#            dateList = [ base - timedelta(days=x) for x in range(0, 31) ]
+#            dateList.reverse()
+#            for day in dateList:
+#                new_item = []
+#                new_item.insert(0, day.isoformat())
+#                new_item.insert(1, 0)
+#                for item in list(total_datastream_hits):
+#                    if item['date'] == day:
+#                        new_item[1] = new_item[1] + item['count']
+#                        break
+#                first_chart.append(new_item)
+#
+#            c.set(redis_key, json.dumps(first_chart, cls=DjangoJSONEncoder), settings.REDIS_STATS_TTL)
+#            from_redis = False
+#        else:
+#            first_chart = json.loads(first_chart)
+#            from_redis = True
+#        response = {'status': 'ok', 'chart': first_chart, 'from_redis': from_redis}
+#
+#    return HttpResponse(json.dumps(response), mimetype='application/json')

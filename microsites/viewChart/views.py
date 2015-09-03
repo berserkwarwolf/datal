@@ -36,7 +36,7 @@ def hits_stats(request, vz_id, channel_type=None):
     field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
 
 
-    t = loader.get_template('viewChart/chart_hits_stats.html') 
+    t = loader.get_template('viewChart/hits_stats.json') 
     c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
     return HttpResponse(t.render(c), content_type="application/json")
 
