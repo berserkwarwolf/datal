@@ -23,9 +23,12 @@ from core.decorators import *
 
 
 @require_http_methods(["GET"])
-@datal_cache_page()
+#@datal_cache_page()
 def action_invoke(request):
     form = forms.RequestForm(request.GET)
+    query = RequestProcessor(request).get_arguments_no_validation()
+    o={'get': request.REQUEST.items(), "query": query.items()}
+    return HttpResponse(o.items(), mimetype="json")
     if form.is_valid():
         query = RequestProcessor(request).get_arguments_no_validation()
         query['pId'] = form.cleaned_data.get('datastream_revision_id')
