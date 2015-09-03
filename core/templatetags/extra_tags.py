@@ -10,6 +10,7 @@ from urlparse import urlparse
 
 register = template.Library()
 
+
 @register.filter(name='split')
 @stringfilter
 def split(p_source, p_args):
@@ -29,6 +30,7 @@ def split(p_source, p_args):
 
     return l_name
 
+
 @register.filter(name='md5')
 @stringfilter
 def md5(p_value):
@@ -36,6 +38,7 @@ def md5(p_value):
         return hashlib.md5(p_value.lower()).hexdigest()
     except:
         return ""
+
 
 @register.filter(name='truncate')
 def truncate(p_value, p_args):
@@ -54,6 +57,7 @@ def truncate(p_value, p_args):
     else:
         return p_value
 
+
 @register.filter(name='twitterUrlEncode')
 @stringfilter
 def twitterUrlEncode(p_url):
@@ -63,6 +67,7 @@ def twitterUrlEncode(p_url):
     except:
         return ""
 
+
 @register.filter(name='urlEncode')
 @stringfilter
 def urlEncode(p_url):
@@ -70,6 +75,7 @@ def urlEncode(p_url):
         return urllib.quote(p_url, safe='')
     except:
         return ""
+
 
 @register.filter(name='unquote')
 @stringfilter
@@ -79,6 +85,7 @@ def unquote(p_url):
         return urllib.unquote(p_url)
     except:
         return ""
+
 
 @register.filter(name='prepareTagForSearch')
 @stringfilter
@@ -107,6 +114,7 @@ def truncateUrlLeavingDomain(p_url):
         else:
             return l_base_url + l_parsed_url.path
 
+
 @register.filter(name='isGreaterThan')
 def isGreaterThan(p_value, p_number):
     """evaluates if the number is greater compared with the parameter"""
@@ -126,11 +134,12 @@ def addhttp(url):
     else:
         return '#'
 
+
 @register.simple_tag
 def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
     """ auth_manager param can also be a user object or dict with user nick and email """
     from django.conf import settings
-    from core.helpers import gravatar_url
+    from core.http import gravatar_url
 
     if not user_nick:
         email = auth_manager.email
@@ -143,6 +152,7 @@ def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
         size = settings.GRAVATAR['sizes'][size]
     url = gravatar_url(email, size)
     return '<img src="%s" alt="%s" title="%s" class="%s"/>' % (url, nick, nick, klass)
+
 
 @register.simple_tag
 def account_logo(account, klass, roles):
@@ -163,6 +173,7 @@ def account_logo(account, klass, roles):
     img_string = '<a title="%s" href="%s"><img src="%s" alt="%s" title="%s" class="%s"/></a>' % (account_name, account_domain, account_logo, account_name, account_name, klass)
     return img_string
 
+
 @register.filter(name='format')
 def format(value, arg):
     try:
@@ -171,6 +182,8 @@ def format(value, arg):
         return value
 
 import json
+
+
 @register.filter(name='jsonize')
 def jsonize(obj):
     return json.dumps(obj, skipkeys=True, ensure_ascii=False)

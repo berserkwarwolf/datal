@@ -358,17 +358,7 @@
             "last_published_revision": 61456, 
             "last_revision": 61456
         }
-    }, 
-    {
-        "pk": 69651, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "MORTA-POR-RAMA-DE-ACTIV", 
-            "user": 1472, 
-            "last_published_revision": 61455, 
-            "last_revision": 61455
-        }
-    }, 
+    },
     {
         "pk": 69650, 
         "model": "core.datastream", 

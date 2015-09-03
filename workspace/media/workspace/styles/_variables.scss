@@ -18,10 +18,13 @@
 	$brand-color:#fbfaf5;														/* Brand primary color */
 
 	/* Accent color */
-	$accent-color:#00d67e;														/* Brand secondary color */
+	$accent-color:#0066cc;														/* Brand secondary color */
+	$accent-shine:#0066ff;														/* Brand secondary color :hover */
 
 	/* Base color */
 	$color-base:#393939;														/* Color for backgrounds */
+	$color-base-light:#999;
+	$color-base-extra-light:#e6e6e6;
 
 
 /* Fonts */
@@ -33,14 +36,14 @@
 	$font-extra-family:'Roboto',arial,helvetica,sans-serif;						/* For table titles */
 
 	/* Size */
-	$font-size-base:12px !important;											/* For body paragraphs and text in general */
-	$font-size-s:11px !important;												/* For some descriptions and tips */
-	$font-size-m:14px !important;												/* For subtitles */
-	$font-size-l:18px !important;												/* For content titles */
-	$font-size-xl:20px !important;												/* For section titles and overlay titles */
+	$font-size-base:12px;														/* For body paragraphs and text in general */
+	$font-size-s:11px;															/* For some descriptions and tips */
+	$font-size-m:14px;															/* For subtitles */
+	$font-size-l:18px;															/* For content titles */
+	$font-size-xl:20px;															/* For section titles and overlay titles */
 
 	/* Color */
-	$font-color-base:#333F4F;													/* For body paragraphs and titles */
+	$font-color-base:#000;													/* For body paragraphs and titles */
 	$font-color-supreme:#FFF;													/* For titles in general */
 	$font-color-semi-light:#333F4F;												/* For subtitles and tips */
 	$font-color-light:#999;														/* For descriptions */
@@ -99,3 +102,7 @@ $form-label-size:12px;															/* Size for form labels */
 $loader-url-dark:"../images/common/loader_datal_dark.gif";						/* URL of loader image. Background must be #393939. For sections with dark backgrounds. */
 $loader-url-semi-light:"../images/common/loader_datal_semi_light.gif";			/* URL of loader image. Background must be #F6F4F4. For sections with light backgrounds. */
 $loader-url-light:"../images/common/loader_datal_light.gif";					/* URL of loader image. Background must be #FFFFFF. For sections with light backgrounds. */
+
+
+/* Modal */
+$modal-table-selected-color: rgba(227, 250, 41, 0.24);							/* Background color for selected data in tables */

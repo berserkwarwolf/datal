@@ -1,5 +1,7 @@
 /salt/roots/pillar/local.sls
+src/
 *.swp
+*.swo
 *.log
 *.pot
 *.pyc
@@ -74,3 +76,4 @@ docs/_build/
 .sass-cache/
 
 components/
+node_modules/

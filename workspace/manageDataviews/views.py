@@ -8,15 +8,15 @@ from django.views.decorators.http import require_GET, require_http_methods
 
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
-from core.helpers import remove_duplicated_filters, filters_to_model_fields
+from core.utils import filters_to_model_fields
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
-from workspace.daos.datastreams import DataStreamDBDAO
+from core.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import engine
 
 
@@ -45,15 +45,9 @@ def action_view(request, revision_id):
 # quitarlo por que ya se maneja dentro @requires_any_dataset() #account must have almost one dataset
 @require_privilege("workspace.can_query_datastream")
 @require_GET
-def list(request):
+def index(request):
     """ list all dataviews """
     ds_dao = DataStreamDBDAO()
-
-    resources, total_resources = DataStreamDBDAO().query(account_id=request.account.id, language=request.user.language)
-
-    for resource in resources:
-        resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
-
     filters = ds_dao.query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
 
@@ -127,9 +121,8 @@ def get_filters_json(request):
 @require_GET
 def related_resources(request):
     language = request.auth_manager.language
-    datastream_id = request.GET.get('datastream_id', '')
-    resource_type = request.GET.get('type', 'all')
-    datastreams = DataStreamDBDAO().query_childs(datastream_id= datastream_id, language=language)['visualizations']
+    revision_id = request.GET.get('revision_id', '')
+    datastreams = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']
 
     list_result = [associated_datastream for associated_datastream in datastreams]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
@@ -340,76 +333,3 @@ def action_preview(request):
 
     else:
         raise Http404(form.get_error_description())
-
-#@login_required
-#@privilege_required("workspace.can_create_datastream")
-#@require_http_methods(["GET", "POST"])
-#def create_steps(request, status=None):
-
-    #auth_manager = request.auth_manager
-    #meta_form = None
-
-    #if request.method == 'POST':
-        #datastream_form     = CreateDataStreamForm(request.POST, prefix='datastream')
-        #ParameterFormSet    = formset_factory(DataStreamParameterForm)
-        #parameter_forms     = ParameterFormSet(request.POST, prefix='parameters')
-        #TagFormSet          = formset_factory(CreateTagsForm)
-        #tag_forms           = TagFormSet(request.POST, prefix='tags')
-        #SourceFormSet       = formset_factory(CreateSourcesForm)
-        #source_forms        = SourceFormSet(request.POST, prefix='sources')
-
-        #if request.auth_manager.is_level('level_5'):
-            #meta_data = Account.objects.get(pk = request.auth_manager.account_id).meta_data
-            #if meta_data:
-                #meta_form = MetaForm(request.POST, metadata = meta_data)
-
-        #if datastream_form.is_valid():
-            #if parameter_forms.is_valid():
-                #if tag_forms.is_valid():
-                    #if request.auth_manager.is_level('level_5'):
-                        #if meta_form and not meta_form.is_valid():
-                            #errors      = generate_ajax_form_errors(meta_form)
-                            #response    = {'status': 'error', 'messages': errors}
-                            #return HttpResponse(json.dumps(response), content_type='application/json')
-                        #if source_forms and not source_forms.is_valid():
-                            #errors      = generate_ajax_form_errors(source_forms)
-                            #response    = {'status': 'error', 'messages': errors}
-                            #return HttpResponse(json.dumps(response), content_type='application/json')
-
-                    #response = saveDataStream(datastream_form, parameter_forms, tag_forms, meta_form, source_forms, auth_manager, status)
-                #else:
-                    #errors      = generate_ajax_form_errors(tag_forms)
-                    #response    = {'status': 'error', 'messages': errors}
-            #else:
-                #errors      = generate_ajax_form_errors(parameter_forms)
-                #response    = {'status': 'error', 'messages': errors}
-        #else:
-            #errors      = generate_ajax_form_errors(datastream_form)
-            #response    = {'status': 'error', 'messages': errors}
-
-        #from django.contrib import messages
-        #messages.add_message(request, messages.INFO, "save")
-
-        #return HttpResponse(json.dumps(response), content_type='application/json')
-    #else:
-        #form = InitalizeCollectForm(request.GET)
-
-        #if form.is_valid():
-            #is_update       = False
-            #is_update_selection = False
-            #data_set_id     = form.cleaned_data['dataset_revision_id']
-            #datastream_id   = None
-
-            #if auth_manager.is_level('level_5'):
-                #meta_data = Account.objects.get(pk = auth_manager.account_id).meta_data
-
-            #dataset_revision    = DatasetRevision.objects.get(pk= data_set_id)
-            #end_point           = dataset_revision.end_point
-            #type                = dataset_revision.dataset.type
-            #impl_type           = dataset_revision.impl_type
-            #impl_details        = dataset_revision.impl_details
-            #bucket_name         = request.bucket_name
-
-            #return render_to_response('view_manager/insertForm.html', locals())
-        #else:
-            #raise Http404ans

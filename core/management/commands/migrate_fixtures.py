@@ -1,5 +1,4 @@
 import json, re, pprint
-from django.template.defaultfilters import slugify as django_slugify
 from django.core.management.base import BaseCommand, CommandError
 
 from optparse import make_option
@@ -7,6 +6,7 @@ from optparse import make_option
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
 from core.models import User, Category
 from core.lifecycle.datasets import DatasetLifeCycleManager
+from core.utils import slugify
 
 DATASET_FIXTURES = 'core/fixtures/dataset.json'
 DATASETI18N_FIXTURES = 'core/fixtures/dataseti18n.json'
@@ -30,7 +30,7 @@ class Command(BaseCommand):
 
     def _set_guid(self, _title, force_random=False):
         #if self._title:
-        title_word_list = [ word for word in self.slugify(_title).split('-') if word ][:5]
+        title_word_list = [ word for word in slugify(_title).split('-') if word ][:5]
         guid = ''
         # killing duplicates?
         if not force_random:
@@ -42,14 +42,6 @@ class Command(BaseCommand):
             else:
                 guid = '-'.join(word[:5] for word in title_word_list + [str(random.randint(10000, 99999))]).upper()
         return guid
-
-    def slugify(self, value):
-        value = django_slugify(value)
-        value = value.replace('_', '-')
-        value = re.sub('[^a-zA-Z0-9]+', '-', value.strip())
-        value = re.sub('\-+', '-', value)
-        value = re.sub('\-$', '', value)
-        return value
 
     def get_title(self, id):
         title = ''

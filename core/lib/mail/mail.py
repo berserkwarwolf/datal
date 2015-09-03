@@ -1,9 +1,8 @@
 from abc import ABCMeta, abstractmethod
 
-from core.helpers import class_for_name
 from core import settings
 from core.exceptions import MailServiceNotFoundException
-
+import importlib
 
 class MailService():
     __metaclass__ = ABCMeta
@@ -24,4 +23,4 @@ class MailService():
 mail_service = None
 class_name = settings.EMAIL_SERVICE.split('.')[-1]
 module_name = settings.EMAIL_SERVICE.split('.{}'.format(class_name))[0]
-mail_service = class_for_name(module_name=module_name, class_name=class_name)
+mail_service = getattr(importlib.import_module(module_name), class_name)

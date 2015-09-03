@@ -36,8 +36,6 @@
                 errorMessage = this.normalizeOldErrorFormat(errorMessage);
             }
 
-            console.log('ErrorManager', 'Parsed Error Message', errorMessage);
-
             //Validate the format of the error message
             if(typeof errorMessage['description'] !== 'undefined' && typeof errorMessage['error'] !== 'undefined'){
                 this.set(errorMessage);

@@ -1,0 +1,29 @@
+{% load i18n extra_tags core_components components %}
+
+{# Selection view #}
+<script type="text/template" id="selected-ranges-template">
+  <div>
+
+    <ul>
+      <% _(ranges).each(function(item){ %>
+      <li data-cid="<%= item.id %>">
+        <input class="hot-sel-<%= item.id %>" value="<%= item.selection %>">
+        <button class="btn-remove" data-cid="<%= item.id %>" title="{% trans 'FILTERS-REMOVE-TEXT' %}">x</button>
+      </li>
+      <% }); %>
+    </ul>
+
+  </div>
+</script>
+
+
+{# ButtonsView #}
+<script type="text/template" id="id_buttons_render_PM">
+
+  <ul class="buttons-bar FR" data-step="0">
+    <% _.each(steps, function(step) { %>
+      <li class="step<%= step.ix %>"><a id="id_step<%= step.ix %>Button" data-step="<%= step.ix %>" rel="<%= step.ix %>" class="button black small" title="<%= step.name %>"><%= step.name %></a></li>
+    <% }); %>
+  </ul>
+
+</script>

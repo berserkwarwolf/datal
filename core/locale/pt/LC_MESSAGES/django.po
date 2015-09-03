@@ -761,3 +761,18 @@ msgstr "On"
 
 msgid "APP-AT-TEXT"
 msgstr "at"
+
+msgid "APP-ONDEMAND-TEXT"
+msgstr "On demand"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Daily"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Hourly"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Weekly"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Monthly"

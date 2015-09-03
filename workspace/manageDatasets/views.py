@@ -6,20 +6,19 @@ from django.core.urlresolvers import reverse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
-from core.helpers import get_mimetype
 
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.helpers import filters_to_model_fields
+from core.utils import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
-from workspace.daos.datasets import DatasetDBDAO
+from core.daos.datasets import DatasetDBDAO
 
 
 logger = logging.getLogger(__name__)
@@ -33,11 +32,10 @@ def action_request_file(request):
 
     if form.is_valid():
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
-
         try:
             response = HttpResponse(mimetype='application/force-download')
             response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
-            response.write(urllib2.urlopen(dataset_revision.end_point).read())
+            response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
         except Exception:
             import logging
             logger = logging.getLogger(__name__)
@@ -54,16 +52,11 @@ def action_request_file(request):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def list(request):
+def index(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.user.account.id,
-                                                language=request.user.language)
-
-    filters = ds_dao.query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
-
+    filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
     return render_to_response('manageDatasets/index.html', locals())
@@ -239,6 +232,7 @@ def create(request, collect_type='index'):
 @requires_if_publish('dataset')
 @requires_review
 @require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
     auth_manager = request.auth_manager
@@ -400,7 +394,7 @@ def check_source_url(request):
 
     if mimetype_form.is_valid():
         url = mimetype_form.cleaned_data['url']
-        mimetype, status, url = get_mimetype(url)
+        mimetype, status, url = mimetype_form.get_mimetype(url)
         sources = {"mimetype" : mimetype, "status" : status, "url" : url }
 
         return HttpResponse(json.dumps(sources), content_type='application/json')

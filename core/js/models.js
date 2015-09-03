@@ -62,13 +62,15 @@ var visualization = Backbone.Model.extend({
         datastreamrevision_id: '',
         chartJson : '',
         //$DataTableObject : null,
-        chartObject : null, //mapChart or another junarChart object
         url : '',
         totalPages : 0,
         currentPage : 0,
         embedUrl: "" ,
         joinIntersectedClusters: true,
-
+        chart: {
+            lib: 'google',
+            type: 'barchart'
+        }
     },
 
 });

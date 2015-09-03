@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 
-from core.search.finder import Finder
+from core.search.finder import Finder, FinderManager
+import re
 
 
 class ElasticsearchFinder(Finder):
@@ -11,13 +12,21 @@ class ElasticsearchFinder(Finder):
     def search(self, *args, **kwargs):
 
         self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query = kwargs.get('query', '')
+        self.query = re.escape(kwargs.get('query', ''))
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
-        self.sort = kwargs.get('order', self.order_by)
+        
+        self.order =  kwargs.get('order')
+
+        if self.order and self.order=='top':
+            self.sort = "hits: desc"
+        elif self.order and self.order=='last':
+            self.sort =  "timestamp:asc"
+        else:
+            self.sort = self.order_by        
 
         if page == 0:
             start = 0
@@ -50,7 +59,7 @@ class ElasticsearchFinder(Finder):
             i['_source']['fields']['docid'] = i['_source']['docid']
             docs.append(i['_source']['fields'])
 
-        search_time = float(results['took'])/1000
+        meta_data={'search_time':float(results['took'])/1000, 'count': results['hits']['total'], 'time_out': results['timed_out']}
         facets = results['facets']['type']['terms']
 
         results = []
@@ -60,7 +69,7 @@ class ElasticsearchFinder(Finder):
             to_add = self.get_dictionary(doc)
             results.append(to_add)
 
-        return results, search_time, facets
+        return results, meta_data, facets
 
     def __build_query(self):
         self.logger.info("El query es: %s" % self.query)
@@ -109,3 +118,10 @@ class ElasticsearchFinder(Finder):
         }
 
         return query
+
+class ElasticFinderManager(FinderManager):
+
+    def __init__(self):
+        self.finder_class = ElasticsearchFinder
+        self.failback_finder_class = ElasticsearchFinder
+        FinderManager.__init__(self)

@@ -12,15 +12,18 @@ from django.utils.translation import ugettext_lazy
 from core.lib.datastore import *
 from core.cache import Cache
 from core.datastream_manager import forms
-from core.docs import DS
+from core.daos.datastreams import DataStreamDBDAO
 from core.engine import invoke
 from core.helpers import jsonToGrid, Day, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
+from core.decorators import *
 
-# used by all the apps
+
+
 @require_http_methods(["GET"])
+@datal_cache_page()
 def action_invoke(request):
     form = forms.RequestForm(request.GET)
     if form.is_valid():
@@ -42,7 +45,7 @@ def action_invoke(request):
     else:
         return HttpResponse('Error! No valid form')
 
-# Used by Microsites
+
 @require_http_methods(["GET"])
 def action_csv(request, id, slug):
 
@@ -50,7 +53,7 @@ def action_csv(request, id, slug):
 
     return HttpResponse(contents, mimetype=type)
 
-# Used by Microsites
+
 @require_http_methods(["GET"])
 def action_xls(request, id, slug):
 
@@ -65,14 +68,13 @@ def action_xls(request, id, slug):
     else:
         return HttpResponse(contents, mimetype=type)
 
+
 @require_http_methods(["GET"])
 def action_download(request, id, slug):
     """ download internal dataset file """
-
-    # get public url for datastream id
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-        datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
         raise Http404
     else:
@@ -81,10 +83,6 @@ def action_download(request, id, slug):
             datastream.end_point.replace("file://", ""),
             {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
         )
-        # type != impl_type [FIXED]
-        # dataset.type = COLLECT_TYPE_CHOICES => 'SELF PUBLISH', 'URL', 'WEBSERVICE'
-        # dataset_revision.impl_type = SOURCE_IMPLEMENTATION_CHOICES => 'HTML', 'SOAP/XML', 'DALLAS', 'XML'
-        #     , 'XLS', 'PDF', 'DOC', 'ODT', 'ODP', 'ODS', 'CSV', 'KML', etcatera
 
         content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream.impl_type))
         redirect = HttpResponse(status=302, mimetype=content_type)
@@ -92,19 +90,18 @@ def action_download(request, id, slug):
 
         return redirect
 
-# Used by Microsites
+
 @require_http_methods(["GET"])
 def action_html(request, id, slug):
-
     contents, type = export_to(id, request, 'html')
-
     return HttpResponse(contents)
+
 
 def export_to(datastream_id, request, output):
 
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream_id)
-        datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
         raise Http404
     else:
@@ -122,7 +119,7 @@ def export_to(datastream_id, request, output):
 
         return invoke(query, output)
 
-# Used by Microsites
+
 @xframe_options_exempt
 @require_http_methods(["GET"])
 def action_legacy_embed(request):
@@ -140,17 +137,11 @@ def action_legacy_embed(request):
     else:
         return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request' : request})
 
-# Used by Microsites
+
 @require_http_methods(["GET"])
 def action_updategrid(request):
-
-    datastream_revision_id = request.REQUEST.get('datastream_id')
-    datastream = DS(datastream_revision_id, request.auth_manager.language)
-
-    uri = request.build_absolute_uri()
-
     query = dict()
-    query['pId'] = datastream_revision_id
+    query['pId'] = request.REQUEST.get('datastream_id')
     query['pLimit'] = request.REQUEST.get('rp')
     query['pPage'] = int(request.REQUEST.get('page')) - 1
 
@@ -170,49 +161,4 @@ def action_updategrid(request):
         mimetype = "application/json"
     return HttpResponse(jsonToGrid(contents, query['pPage'] + 1), mimetype=mimetype)
 
-# Used by Microsites
-def get_last_30_days_datastream(request, id):
-    try:
-        int(id)
-    except ValueError:
-        response = {'status': 'error'}
-    else:
-        redis_key = 'get_last_30_days_datastream_' + str(id)
-        c = Cache(db=0)
-        first_chart = c.get(redis_key)
-        if not first_chart:
-            last_30_days = date.today() - timedelta(days=30)
-            total_datastream_hits = DataStreamHits.objects.filter(
-                created_at__gte=last_30_days,
-                datastream__id=id).annotate(
-                date=Day('created_at')).annotate(
-                count=Count('created_at')).values(
-                'date', 'count')
 
-            total_datastream_hits.query.group_by = ['date']
-            first_chart = []
-            new_item = []
-            new_item.insert(0, unicode(ugettext_lazy('REPORT-CHART-DATE')))
-            new_item.insert(1, unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS')))
-            first_chart.append(new_item)
-            base = date.today()
-            dateList = [ base - timedelta(days=x) for x in range(0, 31) ]
-            dateList.reverse()
-            for day in dateList:
-                new_item = []
-                new_item.insert(0, day.isoformat())
-                new_item.insert(1, 0)
-                for item in list(total_datastream_hits):
-                    if item['date'] == day:
-                        new_item[1] = new_item[1] + item['count']
-                        break
-                first_chart.append(new_item)
-
-            c.set(redis_key, json.dumps(first_chart, cls=DjangoJSONEncoder), settings.REDIS_STATS_TTL)
-            from_redis = False
-        else:
-            first_chart = json.loads(first_chart)
-            from_redis = True
-        response = {'status': 'ok', 'chart': first_chart, 'from_redis': from_redis}
-
-    return HttpResponse(json.dumps(response), mimetype='application/json')

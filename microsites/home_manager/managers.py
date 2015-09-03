@@ -1,5 +1,5 @@
 from django.core.urlresolvers import reverse
-from core.helpers import slugify
+from core.utils import slugify
 from core.search import *
 import datetime
 

@@ -1,25 +1,66 @@
 from django import template
 from django.forms.formsets import formset_factory
 from django.template.loader import render_to_string
+from django.core.urlresolvers import reverse
+
 from core.auth import forms as auth_forms
 from core.models import ObjectGrant
 
 register = template.Library()
 
+
+@register.filter(name="permalink")
+def permalink(pk, obj_type):
+    if obj_type == 'dataset':
+        return reverse(
+            'manageDatasets.action_view',
+            'microsites.urls',
+            kwargs={'dataset_id': pk, 'slug': '-'}
+        )
+    elif obj_type == 'datastream':
+        return reverse(
+            'manageDataviews.action_view',
+            'microsites.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    elif obj_type == 'visualization':
+        return reverse(
+            'manageVisualizations.action_view',
+            'workspace.urls',
+            kwargs={'id': pk, 'slug': '-'}
+        )
+    else:
+        return None
+
+
+@register.filter(name="download")
+def download(dataset_revision):
+    """
+    Devuelve la url de descarga del dataset
+    :param dataset:
+    :return:
+    """
+    return reverse('dataset_manager.action_download', 'microsites.urls',
+                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': '-'})
+
+
 def datatable_search(table_prefix=''):
     return {'table_prefix': table_prefix}
 register.inclusion_tag('datatable_manager/search_widget.html')(datatable_search)
+
 
 def datatable_mass(auth_manager=None, table_prefix=''):
     return {'auth_manager': auth_manager, 'table_prefix': table_prefix}
 register.inclusion_tag('datatable_manager/mass_widget.html')(datatable_mass)
 
+
 def datatable_pagination(revisions=None, table_prefix=''):
     return {'revisions': revisions, 'table_prefix': table_prefix}
 register.inclusion_tag('datatable_manager/pagination_widget.html')(datatable_pagination)
 
-def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_choices=None, choices=None, auth_manager=None,
-                    **kwargs):
+
+def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_choices=None, choices=None,
+                     auth_manager=None, **kwargs):
     filter_button_template = None
     filter_button_file = 'filter_button.html'
     extra_filters_template = None
@@ -65,8 +106,8 @@ def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_cho
         extra_filters_template = base_route + extra_filters_file
 
     return locals()
-
 register.inclusion_tag('datatable_manager/filter_widget.html')(datatable_filter)
+
 
 def datatable(revisions=None, categories=None, table_prefix='', tab_prefix='', auth_manager=None):
 
@@ -124,8 +165,8 @@ def datatable(revisions=None, categories=None, table_prefix='', tab_prefix='', a
         row_data_template = base_route + row_data_file
 
     return locals()
-
 register.inclusion_tag('datatable_manager/datatable.html')(datatable)
+
 
 def overlayDialog(parser, token):
 
@@ -139,18 +180,19 @@ def overlayDialog(parser, token):
 
     return OverlayNode(nodelist, l_overlayId)
 
+
 class OverlayNode(template.Node):
     def __init__(self, nodelist, pName):
         self.nodelist = nodelist
         self.name = pName
+
     def render(self, context):
         output = self.nodelist.render(context)
         return render_to_string('overlays/overlay.html', {'content': output, 'overlayId' : self.name})
-
 register.tag('overlay', overlayDialog)
 
 
-def privateDataStreamShareForm(datastream_id = None, auth_manager = None):
+def privateDataStreamShareForm(datastream_id=None, auth_manager=None):
 
     private_share_form = auth_forms.PrivateDataStreamShareForm(prefix='private_share_form', initial={'id': datastream_id})
     collaborators = ObjectGrant.objects.get_collaborators(datastream_id, 'datastream')
@@ -158,10 +200,10 @@ def privateDataStreamShareForm(datastream_id = None, auth_manager = None):
     collaborator_forms = collaborator_formset(prefix='private_share_form_collaborators', initial=collaborators)
     available_users = ObjectGrant.objects.get_available_users(datastream_id, 'datastream', auth_manager.account_id)
     return locals()
-
 register.inclusion_tag('auth/privateShareForm.html')(privateDataStreamShareForm)
 
-def privateDashboardShareForm(dashboard_id = None, auth_manager = None):
+
+def privateDashboardShareForm(dashboard_id=None, auth_manager=None):
 
     private_share_form = auth_forms.PrivateDashboardShareForm(prefix='private_share_form', initial={'id': dashboard_id})
     collaborators = ObjectGrant.objects.get_collaborators(dashboard_id, 'dashboard')
@@ -169,11 +211,10 @@ def privateDashboardShareForm(dashboard_id = None, auth_manager = None):
     collaborator_forms = collaborator_formset(prefix='private_share_form_collaborators', initial=collaborators)
     available_users = ObjectGrant.objects.get_available_users(dashboard_id, 'dashboard', auth_manager.account_id)
     return locals()
-
 register.inclusion_tag('auth/privateShareForm.html')(privateDashboardShareForm)
 
 
-def privateVisualizationShareForm(visualization_id = None, auth_manager = None):
+def privateVisualizationShareForm(visualization_id=None, auth_manager=None):
 
     private_share_form = auth_forms.PrivateVisualizationShareForm(prefix='private_share_form', initial={'id': visualization_id})
     collaborators = ObjectGrant.objects.get_collaborators(visualization_id, 'visualization')
@@ -181,5 +222,4 @@ def privateVisualizationShareForm(visualization_id = None, auth_manager = None):
     collaborator_forms = collaborator_formset(prefix='private_share_form_collaborators', initial=collaborators)
     available_users = ObjectGrant.objects.get_available_users(visualization_id, 'visualization', auth_manager.account_id)
     return locals()
-
 register.inclusion_tag('auth/privateShareForm.html')(privateVisualizationShareForm)
