@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.conf import settings
+from django.core.urlresolvers import reverse
+from django.db.models import Q
 
 class JSONHttpResponse(HttpResponse):
     """ A custom HttpResponse that handles the headers for our JSON responses """
