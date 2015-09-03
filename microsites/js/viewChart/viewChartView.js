@@ -35,13 +35,15 @@ var viewChartView = Backbone.View.extend({
 
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
-            resourceID: 3610
+            resourceID: 1533
         });
 
         this.chartInstance = new this.ChartViewClass({
             el: this.chartContainer,
             model: chartModelInstance
         });
+
+        this.chartInstance.model.fetchData();
     },
     setLoading: function () {
         
