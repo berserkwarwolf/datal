@@ -42,9 +42,18 @@ var ChartView = StepViewSPA.extend({
 		this.setupChart();
 	},
 
+	bgClasses: {
+			'barchart': 'previewBar',
+			'columnchart': 'previewColumn',
+			'areachart': 'previewArea',
+			'linechart': 'previewLine',
+			'piechart': 'previewPie'
+	},	
+
 	onCloseModal: function () {
+		$("#ajax_loading_overlay").show();
 		this.model.fetchPreviewData().then(function () {
-			console.log('done retrieving data, should close loading spinner');
+			$("#ajax_loading_overlay").hide();
 		});
 	},
 
@@ -99,23 +108,21 @@ var ChartView = StepViewSPA.extend({
 		this.model.set('type',type);
 	},
 
+
+
 	changeClass: function(type){
 
-		var clases = {
-			'barchart': 'previewBar',
-			'columnchart': 'previewColumn',
-			'areachart': 'previewArea',
-			'linechart': 'previewLine',
-			'piechart': 'previewPie'
-		};
+		this.clearClassesChartBg();
 
+		this.chartContent.addClass(this.bgClasses[type]);
+
+	},
+
+	clearClassesChartBg: function(){
 		var that = this;
-		_.each(clases,function(clase,ix){
+		_.each(this.bgClasses,function(clase,ix){
 			that.chartContent.removeClass(clase);			
 		});
-
-		this.chartContent.addClass(clases[type]);
-
 	},
 
 	onChartChanged: function(){
@@ -160,6 +167,7 @@ var ChartView = StepViewSPA.extend({
 			});
 			
 			if(this.chartInstance.valid()){
+				this.clearClassesChartBg();
 				this.chartInstance.render();
 			};
 

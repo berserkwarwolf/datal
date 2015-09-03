@@ -9,6 +9,16 @@ charts.views.Chart = Backbone.View.extend({
         if (this.model.get('type') === null) {
             console.error('Chart models must define a type property');
         }
+        this.bindEvents();
+    },
+
+    bindEvents: function () {
+        this.model.on('change', this.render, this);
+        this.model.on('data_updated', this.handleDataUpdated, this);
+    },
+
+    handleDataUpdated: function () {
+        this.render();
     },
 
     formatData: function () {

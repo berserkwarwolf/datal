@@ -59,6 +59,8 @@ charts.ChartsFactory = function(){
         },
     
         create: function(type,lib){
+            type = type || 'linechart';
+            lib = lib || 'google';
 
             console.log('Chart Factory:', type, lib);
 

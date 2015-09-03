@@ -67,8 +67,6 @@ charts.models.Chart = Backbone.Model.extend({
     },
     initialize: function () {
         this.data = new charts.models.ChartData({
-            urlRoot: this.get('resourceUrl'),
-            idAttribute: this.get('resourceIdAttribute'),
             id: this.get('resourceID'),
             type: this.get('type')
         });
@@ -93,11 +91,33 @@ charts.models.Chart = Backbone.Model.extend({
             null_action: 'exclude',
             null_preset: undefined,
         }).then(function (response) {
-            self.data.set('fields', _.map(response.series, function (item) {
-                return ['number', item.name];
-            }));
-            self.data.set('rows', _.unzip(response.values));
+            self.formatResponseData(response.series, response.values, response.labels).bind(this);
         });
+    },
+
+    /**
+     * Ajusta el formato de los datos obtenidos por el preview o el invoke
+     * @param  {array} series
+     * @param  {array} values
+     * @param  {array} labels
+     */
+    formatResponseData: function (series, values, labels) {
+        var columns = [],
+            fields =[];
+
+        if (!labels.length)
+            labels = new Array(values[0].length);
+
+        columns.push(labels);
+        fields.push(['string', 'labels'])
+
+        columns = columns.concat(values);
+        fields = fields.concat(_.map(series, function (item) {
+            return ['number', item.name];
+        }));
+
+        this.data.set('fields', fields);
+        this.data.set('rows', _.unzip(columns));
     },
 
     onChangeType: function (model, type) {
@@ -111,7 +131,16 @@ charts.models.Chart = Backbone.Model.extend({
      * Default fetch filter updater
      */
     updateFetchFilters: function () {
-        this.data.set('fetchFilters', this.get('options'));
+        var filters = this.get('options');
+
+        if(this.get('type') == 'map'){
+            filters = {
+                zoom: this.get('options').zoom,
+                bounds: this.get('options').bounds.join(';')
+            };
+        }
+
+        this.data.set('fetchFilters', filters);
     },
 
     /**
@@ -119,6 +148,12 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
+        if(this.get('type') == 'map'){
+            this.set('styles', this.parseKmlStyles(this.data.get('styles')));
+        } else {
+            this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
+        }
+
         this.trigger('data_updated');
     },
 
@@ -200,26 +235,6 @@ charts.models.Chart = Backbone.Model.extend({
      */
 
     /**
-     * Prepare fetch filter from the options
-     */
-    updateFetchFilters: function () {
-        var filters = {
-            zoom: this.get('options').zoom,
-            bounds: this.get('options').bounds.join(';')
-        };
-        this.data.set('fetchFilters', filters);
-    },
-
-    /**
-     * Handler para manejar las actualizaciones a los datos
-     * @return {[type]} [description]
-     */
-    handleDataUpdate: function () {
-        this.set('styles', this.parseKmlStyles(this.data.get('styles')));
-        this.trigger('data_updated');
-    },
-
-    /**
      * Convierte estilos de tipo kml al necesario para usar en los mapas
      * @param  {object} styles
      * @return {object}
@@ -293,6 +308,6 @@ charts.models.Chart = Backbone.Model.extend({
             return parseInt(style.substring(0, 2), 16) / 256;
 
         return style;
-    },
+    }
 
 });

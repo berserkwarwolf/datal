@@ -109,6 +109,7 @@ charts.views.GoogleColumnChart = charts.views.ColumnChart.extend({
 
     render: function () {
         var dataTable = this.formatData(this.model.data.toJSON());
+        console.log("dataTable:", dataTable);
 
         var options = this.model.get('options');
 
