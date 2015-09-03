@@ -19,7 +19,6 @@ from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
-from core.helpers import VisualizationsHelpers
 from datetime import date, timedelta
 
 logger = logging.getLogger(__name__)

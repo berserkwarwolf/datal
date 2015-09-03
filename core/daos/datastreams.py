@@ -366,4 +366,4 @@ class DatastreamHitsDAO():
         return self.search_index.update(doc)
 
     def count(self):
-        return DataStreamHits.objects.filter(datastream_id=self.datastream.datastream_id).count()
+        return DataStreamHits.objects.filter(datastream_id=self.datastream['datastream_id']).count()
