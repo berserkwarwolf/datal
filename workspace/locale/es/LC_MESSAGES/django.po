@@ -2274,51 +2274,11 @@ msgstr "Feedback"
 msgid "LANDINGPAGE-SECTION-TITLE"
 msgstr "Bienvenido "
 
-msgid "LANDINGPAGE-GETTINGSTARTED-TITLE"
-msgstr "Abra sus datos facilmente"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SUBTITLE"
-msgstr "Siga estos pasos:"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REMEMBER"
-msgstr "Recuerde"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE"
-msgstr "Configure la cuenta"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT"
-msgstr "En la sección de configuración, los administradores pueden asignar usuarios con diferentes roles, crear las categorías, configurar la página de inicio y la marca del sitio de datos abiertos, entre varias cosas más."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP"
-msgstr "La página principal de su sitio de datos abiertos puede ser totalmente personalizado, eligiendo entre diferentes temas."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE"
-msgstr "Recolecte, mejore y publique datos"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
-msgstr "Elija los conjuntos de datos que desea cargar desde su ordenador o la web, y transformelos en vistas de datos, y finalmente publíquelos en su sitio de datos abiertos, pudiendo gestionarlos con revisiones."
-# msgstr "Elija los conjuntos de datos que desea cargar desde su ordenador o la web, transformelos en vistas y visualizaciones de datos, y finalmente publicquelos en su sitio de datos abiertos de forma individual y también organicelos como colecciones."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "Se necesita de un conjunto de datos para crear una vista, y de una vista para crear una visualización. Las colecciones se utilizan para organizar varias vistas y visualizaciones por tema."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
-msgstr "El proceso de publicación y las revisiones"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT"
-msgstr "Cuando se crea un recurso, se crea también su primera revisión. Por lo tanto, cada vez que se guarda un nuevo cambio en él (ya sea borrador, enviar a revisión, publicar o despublicar) usted está creando una nueva revisión. Esto le permite trabajar el recurso previo a la publicación en su sitio de datos abiertos."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP"
-msgstr "Su sitio de datos abiertos mostrará siempre la última revisión publicada de un recurso, a menos que usted lo despublique."
-
-msgid "LANDINGPAGE-NUMBERS-TITLE"
-msgstr "Datos abiertos en números"
-
-msgid "LANDINGPAGE-NUMBERS-REPORTS"
-msgstr "Ver reportes"
-
 msgid "LANDINGPAGE-ACTIVITY-TITLE"
-msgstr "Última actividad"
+msgstr "Actividad reciente de la cuenta"
+
+msgid "LANDINGPAGE-ACTIVITY-TIME"
+msgstr "Modificación"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
 msgstr "ha creado"
@@ -2334,21 +2294,6 @@ msgstr "Hoy"
 
 msgid "LANDINGPAGE-ACTIVITY-YESTERDAY"
 msgstr "Ayer"
-
-msgid "LANDINGPAGE-NEWS-TITLE"
-msgstr "Novedades"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
-msgstr "Siganos"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
-msgstr "Para las últimas novedades y actualizaciones sobre DATAL, sigue a <a href='https://twitter.com/junar' title='Sigue a @junar en Twitter' target='_blank'>@junar</a> en Twitter y revisa el <a href='http://blog.junar.com' title='Revisa el blog de DATAL' target='_blank'>blog de DATAL</a>. Ponganse en contacto con nosotros a <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
-msgstr "Actualizaciones recientes - v1.0"
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TEXT"
-msgstr "Mejora de los detalles de las vistas y visualizaciones, rediseño del espacio de trabajo, nueva herramienta de selección de diseño para la página de inicio, y mucho más! Lea todos los detalles en la página de <a href='#' title='Ver página de actualizaciones recientes'>actualizaciones recientes</a>."
 
 msgid "APP-DOWNLOAD-CSV-TEXT"
 msgstr "Descargar como CSV"

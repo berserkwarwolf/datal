@@ -2287,51 +2287,11 @@ msgstr "Feedback"
 msgid "LANDINGPAGE-SECTION-TITLE"
 msgstr "Welcome "
 
-msgid "LANDINGPAGE-GETTINGSTARTED-TITLE"
-msgstr "Open Data made easy"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SUBTITLE"
-msgstr "Follow these simple steps to get started:"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REMEMBER"
-msgstr "Remember"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE"
-msgstr "Set up account"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT"
-msgstr "In the settings section, administrators can assign users with different roles, create Open Data categories, set up home page and branding for the Open Data site, among much more things."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP"
-msgstr "The home page of your Open Data site can be fully customized, choosing between different themes."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE"
-msgstr "Collect, Enhance & Publish data"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
-msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and finally publish them to your Open Data site."
-# msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and Visualizations, and finally publish them to your Open Data site individually and arrange them as Dashboards collections."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "A Dataset is needed to create a Data View, and a Data View is needed to create a Visualization. Dashboard are used to arrange several Data Views and Visualizations by topic."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
-msgstr "The publishing process and revisions"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT"
-msgstr "When you create a resource, you are creating its first revision. So, every time you save a change to it (draft, send to review, publish, or unpublish) you are creating a new revision. This allows you to work out the resource prior publishing it to your Open Data site."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP"
-msgstr "Your Open Data site will always show the last published revision of a resource, unless you unpublish it."
-
-msgid "LANDINGPAGE-NUMBERS-TITLE"
-msgstr "Open Data numbers"
-
-msgid "LANDINGPAGE-NUMBERS-REPORTS"
-msgstr "View reports"
-
 msgid "LANDINGPAGE-ACTIVITY-TITLE"
-msgstr "Latest activity"
+msgstr "Recent account activity"
+
+msgid "LANDINGPAGE-ACTIVITY-TIME"
+msgstr "Modification"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
 msgstr "has created"
@@ -2347,21 +2307,6 @@ msgstr "Today"
 
 msgid "LANDINGPAGE-ACTIVITY-YESTERDAY"
 msgstr "Yesterday"
-
-msgid "LANDINGPAGE-NEWS-TITLE"
-msgstr "News"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
-msgstr "Follow us"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
-msgstr "For the latest news and updates on DATAL, follow <a href='https://twitter.com/junar' title='Follow @junar on Twitter' target='_blank'>@junar</a> on Twitter and check out the <a href='http://blog.junar.com' title='Check out the DATAL blog' target='_blank'>DATAL blog</a>. Contact us on <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
-msgstr "Recent Updates - v1.0"
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TEXT"
-msgstr "Improved Dataviews and Visualization details, workspace redesign, new home page theme tool, and more! Read all the details on the <a href='#' title='View recent updates page' target='_blank'>recent updates</a> page."
 
 msgid "APP-DOWNLOAD-CSV-TEXT"
 msgstr "Download as CSV"
