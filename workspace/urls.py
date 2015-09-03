@@ -37,7 +37,7 @@ urlpatterns = patterns('',
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
     (r'^accounts/', include('workspace.accounts.urls')),
     (r'^tag_manager/', include('workspace.searchTags.urls')),
-    (r'^source_manager/', include('workspace.source_manager.urls')),
+    (r'^source_manager/', include('workspace.searchSources.urls')),
     (r'^viewLandingPage/', include('workspace.viewLandingPage.urls')),
     (r'^admin/', include('workspace.admin_manager.urls')),
     (r'^reports/', include('workspace.reports_manager.urls')),
