@@ -91,7 +91,7 @@ charts.models.Chart = Backbone.Model.extend({
             null_action: 'exclude',
             null_preset: undefined,
         }).then(function (response) {
-            self.formatResponseData(response.series, response.values, self);
+            self.formatResponseData(response.series, response.values, response.labels);
         });
     },
 
@@ -99,13 +99,23 @@ charts.models.Chart = Backbone.Model.extend({
      * Ajusta el formato de los datos obtenidos por el preview o el invoke
      * @param  {array} series
      * @param  {array} values
-     * @param  {object} context
+     * @param  {array} labels
      */
-    formatResponseData: function (series, values, context) {
-        context.data.set('fields', _.map(series, function (item) {
+    formatResponseData: function (series, values, labels) {
+        var columns = [],
+            fields =[];
+
+        if (labels.length !== 0) {
+            columns.push(labels);
+            fields.push(['string', 'labels'])
+        }
+        columns = columns.concat(values);
+        fields = fields.concat(_.map(series, function (item) {
             return ['number', item.name];
         }));
-        context.data.set('rows', _.unzip(values));
+
+        this.data.set('fields', fields);
+        this.data.set('rows', _.unzip(columns));
     },
 
     onChangeType: function (model, type) {
@@ -139,7 +149,7 @@ charts.models.Chart = Backbone.Model.extend({
         if(this.get('type') == 'map'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
-            this.formatResponseData(this.data.get('series'), this.data.get('values'), this);
+            this.formatResponseData(this.data.get('series'), this.data.get('values'));
             console.log("this.toJSON():", this.toJSON());
         }
 
