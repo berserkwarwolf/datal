@@ -2705,7 +2705,7 @@ msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
-msgstr "Eliminar vistas"
+msgstr "Eliminar vista"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"

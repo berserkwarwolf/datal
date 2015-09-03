@@ -2,25 +2,25 @@ from functools import wraps
 
 from django.utils.decorators import ( available_attrs, decorator_from_middleware_with_args,)
 from django.views.decorators.cache import cache_page
+from core.exceptions import ApplicationNotAdmin
+from core.models import Application
 
-#from django.middleware.cache import CacheMiddleware
-#from django.utils.cache import add_never_cache_headers, patch_cache_control
-#
-#
-#def micache(*args, **kwargs):
-#    print "cache vieja!!!"
-#    if len(args) != 1 or callable(args[0]):
-#        raise TypeError("cache_page has a single mandatory positional argument: timeout")
-#    cache_timeout = args[0]
-#    cache_alias = kwargs.pop('cache', None)
-#    key_prefix = kwargs.pop('key_prefix', None)
-#    if kwargs:
-#        raise TypeError("cache_page has two optional keyword arguments: cache and key_prefix")
-#    
-#    return decorator_from_middleware_with_args(CacheMiddleware)(
-#        cache_timeout=cache_timeout, cache_alias=cache_alias, key_prefix=key_prefix
-#        )
-#
+def public_keys_forbidden(view_func):
+    """ 'application' means users by auth_key access """
+    @wraps(view_func, assigned=available_attrs(view_func))
+    def _wrapped_view(request, *args, **kwargs):
+        try:
+            auth_key = request.REQUEST.get('auth_key')
+            app = Application.objects.get(auth_key = auth_key)
+            request.app = app
+            if app.type == "04":
+                return view_func(request, *args, **kwargs)
+            else:
+                raise ApplicationNotAdmin("Invalid Authorization Key")
+        except:
+            raise ApplicationNotAdmin("Invalid Authorization Key")
+
+    return _wrapped_view
 
 def datal_make_key(key, key_prefix, version):
     """

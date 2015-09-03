@@ -1,6 +1,6 @@
 import requests
 from django.conf import settings
-from api.exceptions import BigDataInsertError, BigDataInvalidQuery, BigDataDeleteError
+from core.exceptions import BigDataInsertError, BigDataInvalidQuery, BigDataDeleteError
 
 
 class Bigdata:

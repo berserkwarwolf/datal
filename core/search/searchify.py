@@ -1,16 +1,10 @@
-import re
 import types
 import logging
-from django.db import models, connection
+
 from django.conf import settings
-from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
-from core.helpers import slugify
-from core import helpers, choices
 
 from core.search.finder import Finder
-#from indextank.client import ApiClient
-#from core.lib.searchify import SearchifyIndex
 
 
 class IndexTankFinder(Finder):
@@ -20,26 +14,27 @@ class IndexTankFinder(Finder):
     def search(self, *args, **kwargs):
 
         self.logger.info('Conectado con el search (args %s) (kwargs %s)' % (args,kwargs))
-        self.query      = kwargs.get('query', '')
+        self.query = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
-        self.resource   = kwargs.get('resource', 'all')
-        page            = kwargs.get('page', 0)
-        max_results     = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
-        slice           = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
+        self.resource = kwargs.get('resource', 'all')
+        page = kwargs.get('page', 0)
+        max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
+        slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
 
         if page == 0:
-            start   = 0
-            end     = max_results
+            start = 0
+            end = max_results
         else:
-            end     = max_results < slice and max_results or slice
-            start   = (page - 1) * end
+            end = max_results < slice and max_results or slice
+            start = (page - 1) * end
 
         self.meta_data = kwargs.get('meta_data', {})
 
         self.extract_terms_from_query()
 
         query = self.make_query()
-        self.last_query = query # for test queries
+        self.last_query = query
+
         ### CATEGORY FILTERS
         category_filters = kwargs.get('category_filters', None)
         if category_filters is None:
@@ -50,42 +45,18 @@ class IndexTankFinder(Finder):
         scoring = kwargs.get('scoring', 1)
 
         #TODO define a search function in the right place
-        results = self.index.search(query
-                                    , start=start
-                                    , length=end
-                                    , snippet_fields=['title','text']
-                                    , fetch_fields="*"
-                                    , fetch_categories="*"
-                                    """
-                                    , fetch_fields=['datastream_id'
-                                                    , 'title'
-                                                    , 'category_name'
-                                                    , 'owner_nick'
-                                                    , 'tags'
-                                                    , 'dataset_id'
-                                                    , 'end_point'
-                                                    , 'type'
-                                                    , 'text'
-                                                    , 'description'
-                                                    , 'dashboard_id'
-                                                    , 'datastreamrevision_id'
-                                                    , 'parameters'
-                                                    , 'visualization_id'
-                                                    , 'timestamp'
-                                                    , 'account_id']
-                                    """
-                                    , category_filters = category_filters
-                                    , scoring_function = scoring
-                                    )
+        results = self.index.search(query, start=start, length=end, snippet_fields=['title','text'], fetch_fields="*",
+                                    fetch_categories="*", category_filters=category_filters, scoring_function=scoring)
 
-        search_time     = results['search_time']
-        facets          = results['facets']
-        facets[u'id']   = None
-        docs            = results['results']
+        search_time = results['search_time']
+        facets = results['facets']
+        facets[u'id'] = None
+        docs = results['results']
 
         order = kwargs.get('order', None)
         if order:
-            docs = sorted(docs, key=lambda x: x[self.order_by.get(order)], reverse=(kwargs.get('order_type', 'descending') == 'descending'))
+            docs = sorted(docs, key=lambda x: x[self.order_by.get(order)],
+                          reverse=(kwargs.get('order_type', 'descending') == 'descending'))
 
         results = []
         # for check the real results ==> results.append(docs)

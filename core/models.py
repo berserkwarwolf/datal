@@ -8,10 +8,9 @@ from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 
-from core.helpers import slugify
+from core.utils import slugify
 from core import choices
 from core import managers
-from core.helpers import get_meta_data_dict
 from core.cache import Cache
 
 
@@ -186,16 +185,6 @@ class Account(models.Model):
                 c.set('account_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-    def get_total_dashboards(self):
-        c = Cache(db=0)
-        users = User.objects.filter(account=self)
-        total_dashboards = c.get('account_total_dashboards_' + str(self.id))
-        if not total_dashboards:
-            total_dashboards =  Dashboard.objects.filter(user__in=users).count()
-            if total_dashboards > 0:
-                c.set('account_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
-        return total_dashboards
-
     def get_total_visualizations(self):
         c = Cache(db=0)
         users = User.objects.filter(account=self)
@@ -236,6 +225,9 @@ class User(models.Model):
     def is_editor(self):
         return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
 
+    def is_authenticated(self):
+        return True
+
     def get_total_datasets(self):
         c = Cache(db=0)
         total_datasets = c.get('my_total_datasets_' + str(self.id))
@@ -254,14 +246,6 @@ class User(models.Model):
                 c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-    def get_total_dashboards(self):
-        c = Cache(db=0)
-        total_dashboards = c.get('my_total_dashboards_' + str(self.id))
-        if not total_dashboards:
-            total_dashboards =  Dashboard.objects.filter(user=self.id).count()
-            if total_dashboards > 0:
-                c.set('my_total_dashboards_' + str(self.id), total_dashboards, settings.REDIS_STATS_TTL)
-        return total_dashboards
 
     def get_total_visualizations(self):
         c = Cache(db=0)
@@ -293,8 +277,24 @@ class DataStream(GuidModel):
     def current(self):
         return self.datastreamrevision_set.all()[0]
 
+class RevisionModel(models.Model):
+    def get_meta_data_dict(self, metadata):
+        answer = {}
+        if metadata:
+            try:
+                meta = json.loads(metadata)
+                meta = meta['field_values'] if 'field_values' in meta else []
+                for item in meta:
+                    answer.update(item)
+            except ValueError:
+                pass
+        return answer
 
-class DataStreamRevision(models.Model):
+    class Meta:
+        abstract = True
+
+
+class DataStreamRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
 
     datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
@@ -376,6 +376,10 @@ class DataStreamRevision(models.Model):
             self.sourcedatastream_set.add(source_datastream)
         self.save()
 
+    def get_sources(self):
+        """ return sources """
+        return self.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
+
     def add_parameters(self, parameters):
         self.datastreamparameter_set.clear()
         
@@ -388,9 +392,6 @@ class DataStreamRevision(models.Model):
 
     def get_guid(self):
         return self.datastream.guid
-
-    def get_dashboard_widgets(self):
-        return self.datastream.dashboardwidgets_set.order_by('-dashboard_revision').iterator()
 
     def get_latest_revision(self):
         return self.datastream.visualizationrevision_set.latest()
@@ -438,56 +439,6 @@ class DataStreamRevision(models.Model):
         datastream_revision.save()
 
         return datastream_revision
-
-    def get_dict(self, language = 'en'):
-
-        from core.docs import DS
-        import time
-
-        datastream = DS(self.id, language)
-        account = Account.objects.get(id = datastream.account_id)
-
-        text = [datastream.title, datastream.description, datastream.created_by_nick, datastream.guid]
-        text.extend(datastream.get_tags())
-        text = ' '.join(text)
-
-        account_id = datastream.account_id
-        if account_id is None:
-            account_id = ''
-
-        parameters = []
-        for parameter in datastream.parameters:
-            parameters.append({'name': parameter.name
-                               , 'description': parameter.description})
-        if parameters:
-            parameters = json.dumps(parameters)
-        else:
-            parameters = ''
-
-        indexable_dict = {
-                'docid' : "DS::" + datastream.guid,
-                'fields' :
-                    {'type' : 'ds',
-                     'datastream_id': datastream.datastream_id,
-                     'datastreamrevision_id': datastream.datastreamrevision_id,
-                     'title': datastream.title,
-                     'text': text,
-                     'description': datastream.description,
-                     'owner_nick' : datastream.created_by_nick,
-                     'tags' : ','.join(datastream.get_tags()),
-                     'account_id' : account_id,
-                     'parameters': parameters,
-                     'timestamp': int(time.mktime(datastream.created_at.timetuple())),
-                     'end_point': datastream.end_point,
-                    },
-                'categories': {'id': unicode(datastream.category_id), 'name': datastream.category_name}
-                }
-
-        # Update dict with facets
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(datastream.metadata))
-
-        return indexable_dict
 
 
 class DatastreamI18n(models.Model):
@@ -543,120 +494,6 @@ class DataStreamParameter(models.Model):
         return  unicode(self.id)
 
 
-class Dashboard(GuidModel):
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    guid                = models.CharField(max_length=29, unique=True)
-    objects             = managers.DashboardManager()
-
-    class Meta:
-        db_table        = 'ao_dashboards'
-
-    def __unicode__(self):
-        return self.guid
-
-    # Returns the current revision
-    @property
-    def current(self):
-        return self.dashboardrevision_set.all()[0]
-
-    def get_absolute_url(self):
-        dbr = self.dashboardrevision_set.filter(status=choices.StatusChoices.PUBLISHED).order_by('-id')[0]
-        title = dbr.dashboardi18n_set.all()[0].title
-        return '/dashboards/%d/%s/' % (self.id, slugify(title))
-
-
-class DashboardRevision(models.Model):
-    dashboard           = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'))
-    user                = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
-    category            = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
-    status              = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
-    meta_text           = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
-    widgets             = models.ManyToManyField('DataStream', through='DashboardWidget', verbose_name=ugettext_lazy( 'MODEL_DASHBOARD_WIDGET_TEXT' ))
-    created_at          = models.DateTimeField(editable=False, auto_now_add=True)
-    objects             = managers.DashboardRevisionManager()
-
-    class Meta:
-        db_table        = 'ao_dashboard_revisions'
-        ordering        = ['-id']
-        get_latest_by   = 'created_at'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-    def get_guid(self):
-        return self.dashboard.guid
-
-    def get_latest_revision(self):
-        return self.dashboard.dashboardrevision_set.latest()
-
-    def get_dict(self, language = 'en'):
-
-        from core.docs import DB
-        import time
-        dashboard = DB(self.id, language)
-        account = Account.objects.get(id = dashboard.account_id)
-
-        text = [dashboard.title, dashboard.description, dashboard.created_by_nick, dashboard.guid]
-        text.extend(dashboard.get_tags())
-        text = ' '.join(text)
-
-        account_id = dashboard.account_id
-        if account_id is None:
-            account_id = ''
-
-        indexable_dict = {
-                'docid' : "DB::" + dashboard.guid,
-                'fields' :
-                    {'type' : 'db',
-                     'dashboard_id': dashboard.dashboard_id,
-                     'dashboardrevision_id': dashboard.dashboardrevision_id,
-                     'title': dashboard.title,
-                     'text': text,
-                     'description': dashboard.description,
-                     'owner_nick' : dashboard.created_by_nick,
-                     'tags' : ','.join(dashboard.get_tags()),
-                     'account_id' : account_id,
-                     'timestamp' : int(time.mktime(dashboard.created_at.timetuple())),
-                    },
-                'categories': {'id': unicode(dashboard.category_id), 'name': dashboard.category_name}
-                }
-
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(dashboard.metadata))
-
-        return indexable_dict
-
-
-class DashboardI18n(models.Model):
-    language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
-    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
-    title = models.CharField(max_length=80, verbose_name=ugettext_lazy('MODEL_TITLE_LABEL'))
-    description  = models.CharField(max_length=140, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
-    notes = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_NOTE_LABEL'))
-    created_at = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_i18n'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardWidget(models.Model):
-    order = models.IntegerField(verbose_name=ugettext_lazy( 'MODEL-ORDER-TEXT' ))
-    parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    dashboard_revision = models.ForeignKey('DashboardRevision', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ), blank=True)
-    visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy( 'MODEL-VISUALIZATION-TEXT' ), blank=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_widgets'
-        ordering = ['order']
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class Dataset(GuidModel):
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     type = models.IntegerField(choices=choices.COLLECT_TYPE_CHOICES)
@@ -679,7 +516,7 @@ class Dataset(GuidModel):
         return self.datasetrevision_set.all()[0]
 
 
-class DatasetRevision(models.Model):
+class DatasetRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
 
     dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
@@ -773,6 +610,13 @@ class DatasetRevision(models.Model):
                 self.sourcedataset_set.add(source_dataset)
         self.save()
 
+    def get_tags(self):
+        return self.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
+
+    def get_sources(self):
+        """ return sources """
+        return self.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
+
     def clone(self, status=choices.StatusChoices.DRAFT):
 
         dataset_revision = DatasetRevision(dataset=self.dataset, user=self.user)
@@ -811,13 +655,13 @@ class DatasetRevision(models.Model):
 
         logger = logging.getLogger(__name__)
 
-        from core.docs import DT
+        from core.daos.datasets import DatasetDBDAO
         import time
 
-        dataset = DT(self.id, language)
-        account = Account.objects.get(id = dataset.account_id)
+        dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
+        account = Account.objects.get(id=self.user.account.id)
 
-        text = [dataset.title, dataset.description, dataset.created_by_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
+        text = [dataset.title, dataset.description, dataset.user_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
         text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
@@ -833,11 +677,11 @@ class DatasetRevision(models.Model):
                 'fields' :
                     {'type' : 'dt',
                      'dataset_id': dataset.dataset_id,
-                     'datasetrevision_id': dataset.datasetrevision_id,
+                     'datasetrevision_id': dataset.dataset_revision_id,
                      'title': dataset.title,
                      'text': text,
                      'description': dataset.description,
-                     'owner_nick' : dataset.created_by_nick,
+                     'owner_nick' : dataset.user_nick,
                      'tags' : ','.join(dataset.get_tags()),
                      'account_id' : account_id,
                      'parameters': parameters,
@@ -854,7 +698,7 @@ class DatasetRevision(models.Model):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(get_meta_data_dict(dataset.metadata))
+        indexable_dict['fields'].update(self.get_meta_data_dict(dataset.meta_text))
 
         return indexable_dict
 
@@ -902,7 +746,7 @@ class Visualization(GuidModel):
         return self.visualizationrevision_set.all()[0]
 
 
-class VisualizationRevision(models.Model):
+class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     impl_details = models.TextField(blank=True)
@@ -925,9 +769,6 @@ class VisualizationRevision(models.Model):
 
     def get_latest_revision(self):
         return self.visualization.visualizationrevision_set.latest()
-
-    def get_dashboard_widgets(self):
-        return self.visualization.dashboardwidgets_set.order_by('-dashboard_revision').iterator()
 
     def clone(self, status=choices.StatusChoices.DRAFT):
         visualization_revision = VisualizationRevision(
@@ -988,7 +829,7 @@ class VisualizationRevision(models.Model):
                 }
 
         indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(get_meta_data_dict(visualization.metadata))
+        indexable_dict['fields'].update(self.get_meta_data_dict(visualization.metadata))
 
         return indexable_dict
 
@@ -1075,17 +916,6 @@ class TagDatastream(models.Model):
         return unicode(self.id)
 
 
-class TagDashboard(models.Model):
-    tag = models.ForeignKey('Tag', null=True)
-    dashboardrevision = models.ForeignKey('DashboardRevision', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_REVISION_LABEL'))
-
-    class Meta:
-        db_table = 'ao_tags_dashboard'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class TagVisualization(models.Model):
     tag = models.ForeignKey('Tag', null=True)
     visualizationrevision = models.ForeignKey('VisualizationRevision', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_REVISION_LABEL'))
@@ -1140,7 +970,6 @@ class Grant(models.Model):
 
 class ObjectGrant(models.Model):
     grant           = models.ForeignKey('Grant', verbose_name=ugettext_lazy('MODEL_GRANT_LABEL'))
-    dashboard       = models.ForeignKey('Dashboard', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'))
     datastream      = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
     visualization   = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
     type            = models.CharField(max_length=63, verbose_name=ugettext_lazy('MODEL_TYPE_LABEL'))
@@ -1223,6 +1052,9 @@ class Application(models.Model):
     def get_name(self):
         return self.name and self.name or 'No name'
 
+    def is_public_auth_key(self, auth_key):
+        return self.public_auth_key == auth_key
+
 
 class Setting(models.Model):
     key           = models.CharField(primary_key=True, max_length=40)
@@ -1237,11 +1069,11 @@ class Setting(models.Model):
 
 
 class UserPassTickets(models.Model):
-    uuid            = models.CharField(max_length=38)
-    user            = models.ForeignKey('User')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    type            = models.CharField(max_length=38)
-    objects         = managers.UserPassTicketsManager()
+    uuid = models.CharField(max_length=38)
+    user = models.ForeignKey('User')
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    type = models.CharField(max_length=38)
+    objects = managers.UserPassTicketsManager()
 
     class Meta:
         db_table = 'ao_user_passtickets'
@@ -1301,30 +1133,6 @@ class DataStreamHits(models.Model):
         return unicode(self.id)
 
 
-class DashboardHits(models.Model):
-    dashboard       = models.ForeignKey('Dashboard')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    channel_type    = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
-
-    class Meta:
-        db_table = 'ao_dashboard_hits'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardRank(models.Model):
-    dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_ranks'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
 class DataStreamRank(models.Model):
     datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
     position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
@@ -1332,19 +1140,6 @@ class DataStreamRank(models.Model):
 
     class Meta:
         db_table = 'ao_datastream_ranks'
-
-    def __unicode__(self):
-        return unicode(self.id)
-
-
-class DashboardComment(models.Model):
-    dashboard       = models.ForeignKey('Dashboard', verbose_name=ugettext_lazy( 'MODEL-DASHBOARD-TEXT' ))
-    user            = models.ForeignKey('User', verbose_name=ugettext_lazy( 'MODEL-AUTHOR-TEXT' ))
-    comment         = models.CharField(max_length=500, verbose_name=ugettext_lazy( 'MODEL-COMMENT-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-
-    class Meta:
-        db_table = 'ao_dashboard_comments'
 
     def __unicode__(self):
         return unicode(self.id)
@@ -1365,7 +1160,6 @@ class DataStreamComment(models.Model):
 
 class Log(models.Model):
     user = models.ForeignKey('User',  on_delete=models.DO_NOTHING)
-    dashboard = models.ForeignKey('Dashboard', null=True, verbose_name=ugettext_lazy('MODEL_DASHBOARD_LABEL'), on_delete=models.DO_NOTHING)
     datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'), on_delete=models.DO_NOTHING)
     visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'), on_delete=models.DO_NOTHING)
     content = models.TextField()

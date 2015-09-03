@@ -12,7 +12,7 @@ from django.utils.translation import ugettext_lazy
 from core.lib.datastore import *
 from core.cache import Cache
 from core.datastream_manager import forms
-from core.docs import DS
+from core.daos.datastreams import DataStreamDBDAO
 from core.engine import invoke
 from core.helpers import jsonToGrid, Day, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
@@ -22,7 +22,6 @@ from core.decorators import *
 
 
 
-# used by all the apps
 @require_http_methods(["GET"])
 @datal_cache_page()
 def action_invoke(request):
@@ -47,7 +46,6 @@ def action_invoke(request):
         return HttpResponse('Error! No valid form')
 
 
-# Used by Microsites
 @require_http_methods(["GET"])
 def action_csv(request, id, slug):
 
@@ -56,7 +54,6 @@ def action_csv(request, id, slug):
     return HttpResponse(contents, mimetype=type)
 
 
-# Used by Microsites
 @require_http_methods(["GET"])
 def action_xls(request, id, slug):
 
@@ -75,11 +72,9 @@ def action_xls(request, id, slug):
 @require_http_methods(["GET"])
 def action_download(request, id, slug):
     """ download internal dataset file """
-
-    # get public url for datastream id
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-        datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
         raise Http404
     else:
@@ -88,10 +83,6 @@ def action_download(request, id, slug):
             datastream.end_point.replace("file://", ""),
             {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
         )
-        # type != impl_type [FIXED]
-        # dataset.type = COLLECT_TYPE_CHOICES => 'SELF PUBLISH', 'URL', 'WEBSERVICE'
-        # dataset_revision.impl_type = SOURCE_IMPLEMENTATION_CHOICES => 'HTML', 'SOAP/XML', 'DALLAS', 'XML'
-        #     , 'XLS', 'PDF', 'DOC', 'ODT', 'ODP', 'ODS', 'CSV', 'KML', etcatera
 
         content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream.impl_type))
         redirect = HttpResponse(status=302, mimetype=content_type)
@@ -100,19 +91,17 @@ def action_download(request, id, slug):
         return redirect
 
 
-# Used by Microsites
 @require_http_methods(["GET"])
 def action_html(request, id, slug):
-
     contents, type = export_to(id, request, 'html')
-
     return HttpResponse(contents)
+
 
 def export_to(datastream_id, request, output):
 
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream_id)
-        datastream = DS(datastreamrevision_id, request.auth_manager.language)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
         raise Http404
     else:
@@ -131,7 +120,6 @@ def export_to(datastream_id, request, output):
         return invoke(query, output)
 
 
-# Used by Microsites
 @xframe_options_exempt
 @require_http_methods(["GET"])
 def action_legacy_embed(request):
@@ -150,7 +138,6 @@ def action_legacy_embed(request):
         return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request' : request})
 
 
-# Used by Microsites and Workspace
 @require_http_methods(["GET"])
 def action_updategrid(request):
     query = dict()
@@ -175,7 +162,6 @@ def action_updategrid(request):
     return HttpResponse(jsonToGrid(contents, query['pPage'] + 1), mimetype=mimetype)
 
 
-# Used by Microsites
 def get_last_30_days_datastream(request, id):
     try:
         int(id)

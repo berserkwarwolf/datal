@@ -3,7 +3,7 @@ import types
 from django.db import connection
 from django.conf import settings
 from core import helpers
-from core import helpers as LocalHelper
+from core import http as LocalHelper
 from core.models import *
 from core import managers
 from core.choices import COLLECT_TYPE_CHOICES

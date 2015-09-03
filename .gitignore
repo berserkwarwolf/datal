@@ -1,6 +1,7 @@
 /salt/roots/pillar/local.sls
 src/
 *.swp
+*.swo
 *.log
 *.pot
 *.pyc

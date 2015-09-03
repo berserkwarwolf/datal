@@ -1,16 +1,18 @@
 # -*- coding: utf-8 -*-
 import operator
 import time
+import logging
 
 from django.db.models import Q, F
+from django.db import IntegrityError
 
-from core.exceptions import SearchIndexNotFoundException
+from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from core import settings
 from core.daos.resource import AbstractDataStreamDBDAO
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES
+from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -71,16 +73,28 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream_revision
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
+    def get(self, language, datastream_id=None, datastream_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
-        datastream_revision = datastream_id is None and \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=datastream_revision_id, category__categoryi18n__language=language,
-                               datastreami18n__language=language) or \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               datastreami18n__language=language)
+
+        if guid:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                datastream__guid=guid,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        elif not datastream_id:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=datastream_revision_id,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        else:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
@@ -93,6 +107,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         dataset_revision = datastream_revision.dataset.last_revision
 
         datastream = dict(
+            datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
             user_id=datastream_revision.user.id,
@@ -101,6 +116,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_id=datastream_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            filename=dataset_revision.filename,
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
@@ -147,12 +163,23 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        query = query.values('datastream__user__nick', 'status', 'id', 'datastream__guid', 'category__id',
-                             'datastream__id', 'category__categoryi18n__name', 'datastreami18n__title',
-                             'datastreami18n__description', 'created_at', 'datastream__user__id',
-                             'datastream__last_revision_id', 'dataset__last_revision__dataseti18n__title',
-                             'dataset__last_revision__impl_type', 'dataset__last_revision__id'
-                             )
+        query = query.values(
+            'datastream__user__nick',
+            'status',
+            'id',
+            'datastream__guid',
+            'category__id',
+            'datastream__id',
+            'category__categoryi18n__name',
+            'datastreami18n__title',
+            'datastreami18n__description',
+            'created_at',
+            'datastream__user__id',
+            'datastream__last_revision_id',
+            'dataset__last_revision__dataseti18n__title',
+            'dataset__last_revision__impl_type',
+            'dataset__last_revision__id'
+        )
 
         query = query.order_by(sort_by)
 
@@ -223,10 +250,10 @@ class DatastreamSearchDAOFactory():
             raise SearchIndexNotFoundException()
 
         return self.search_dao
-        
+
         
 class DatastreamSearchDAO():
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastream index"""
 
     TYPE="ds"
     def __init__(self, datastream_revision):
@@ -276,6 +303,7 @@ class DatastreamSearchDAO():
                      'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
+                     'hits': 0,
                      'end_point': self.datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
@@ -285,7 +313,7 @@ class DatastreamSearchDAO():
 
 
 class DatastreamSearchifyDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' searchify documents """
+    """ class for manage access to datastreams searchify documents """
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
         self.search_index = SearchifyIndex()
@@ -298,14 +326,44 @@ class DatastreamSearchifyDAO(DatastreamSearchDAO):
 
 
 class DatastreamElasticsearchDAO(DatastreamSearchDAO):
-    """ class for manage access to datasets' elasticsearch documents """
+    """ class for manage access to datastreams elasticsearch documents """
 
     def __init__(self, datastream_revision):
         self.datastream_revision=datastream_revision
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+
+
+class DatastreamHitsDAO():
+    """class for manage access to Hits in DB and index"""
+
+    def __init__(self, datastream):
+        self.datastream=datastream
+        self.search_index = ElasticsearchIndex()
+        self.logger=logging.getLogger(__name__)
+
+    def add(self,  channel_type):
+        """agrega un hit al datastream. """
+
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=self.datastream.datastream_id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise DataStreamNotFoundException()
+
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+
+        # armo el documento para actualizar el index.
+        doc={'docid':"DS::%s" % self.datastream.guid,
+                "type": "ds",
+                "script": "ctx._source.fields.hits+=1"}
+
+        return self.search_index.update(doc)
+
+    def count(self):
+        return DataStreamHits.objects.filter(datastream_id=self.datastream.datastream_id).count()

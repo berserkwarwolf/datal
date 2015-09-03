@@ -1,40 +1,63 @@
-/* Íconos */
-.icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;    height: 24px;display:block;
-}
+/* Icons */
+.icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;height:24px;display:block;cursor:pointer;}
 
-/* Íconos con fondo */
+/* When used inline with .button */
+.button .icon{margin-right:15px;display:inline-block;vertical-align:middle;}
+.button .icon.icon-right{margin-right:0;margin-left:15px;}
+
+/* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
-.fill-background:hover{background-color:#0066ff;}
 
-/* Íconos 48px */
+/* 48px icons */
 .size-48{
-	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 240px auto;width:48px;height:48px;}
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
 
 
-	/* Navegación local */
-	.icon-home{background-position:-12px -12px;}
-	.icon-home:hover{background-position:-48px -12px;}
+	/* Nav local */
+	.icon-home,
+	.button.icon-home:hover{background-position:-12px -12px;}
+	.icon-home:hover,
+	.button.active .icon-home,
+	.button.active .icon-home:hover{background-position:-48px -12px;}
 
-	.icon-datasets{background-position:-12px -48px;}
-	.icon-datasets:hover{background-position:-48px -48px;}
+	.icon-datasets,
+	.button.icon-datasets:hover{background-position:-12px -48px;}
+	.icon-datasets:hover,
+	.button.active .icon-datasets,
+	.button.active .icon-datasets:hover{background-position:-48px -48px;}
 
-	.icon-dataviews{background-position:-12px -84px;}
-	.icon-dataviews:hover{background-position:-48px -84px;}
+	.icon-dataviews,
+	.button.icon-dataviews:hover{background-position:-12px -84px;}
+	.icon-dataviews:hover,
+	.button.active .icon-dataviews,
+	.button.active .icon-dataviews:hover{background-position:-48px -84px;}
+	
+	.icon-visualizations,
+	.button.icon-visualizations:hover{background-position:-12px -120px;}
+	.icon-visualizations:hover,
+	.button.active .icon-visualizations,
+	.button.active .icon-visualizations:hover{background-position:-48px -120px;}
+	
+	.icon-dashboards,
+	.button.icon-dashboards:hover{background-position:-12px -156px;}
+	.icon-dashboards:hover,
+	.button.active .icon-dashboards,
+	.button.active .icon-dashboards:hover{background-position:-48px -156px;}
 
-	.icon-visualizations{background-position:-12px -120px;}
-	.icon-visualizations:hover{background-position:-48px -120px;}
+	.icon-reports,
+	.button.icon-reports:hover{background-position:-12px -192px;}
+	.icon-reports:hover,
+	.button.active .icon-reports,
+	.button.active .icon-reports:hover{background-position:-48px -192px;}
 
-	.icon-dashboards{background-position:-12px -156px;}
-	.icon-dashboards:hover{background-position:-48px -156px;}
-
-	.icon-reports{background-position:-12px -192px;}
-	.icon-reports:hover{background-position:-48px -192px;}
-
-	.icon-config{background-position:-12px -228px;}
-	.icon-config:hover{background-position:-48px -228px;}
+	.icon-settings,
+	.button.icon-settings:hover{background-position:-12px -228px;}
+	.icon-settings:hover,
+	.button.active .icon-settings,
+	.button.active .icon-settings:hover{background-position:-48px -228px;}
 
 
-	/* Accionables */
+	/* Actions */
 	.icon-edit{background-position:-12px -264px;}
 	.icon-edit:active{background-position:-96px -264px;}
 	.icon-edit.fill-background{background-position:0 -290px;}
@@ -51,8 +74,14 @@
 	.icon-zoom-out{background-position:-12px -480px;}
 	.icon-zoom-out:active{background-position:-96px -480px;}
 
+		/* Hover */
+		.icon-edit:hover,
+		.icon-add:hover,
+		.icon-zoom-in:hover,
+		.icon-zoom-out:hover{opacity:.5;}
 
-	/* Gráficos */
+
+	/* Charts */
 	.icon-chart-column{background-position:-12px -516px;}
 	.icon-chart-column.size-48{background-position:-24px -1032px;}
 
@@ -67,17 +96,3 @@
 
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
-
-	/* Mapas */
-	.icon-map-marker{background-position:-12px -948px;}
-	.icon-map-marker.size-48{background-position:-24px -1896px;}
-
-	.icon-map-trace{background-position:-12px -984px;}
-	.icon-map-trace.size-48{background-position:-24px -1968px;}
-
-	.icon-map-geo{background-position:-12px -1020px;}
-	.icon-map-geo.size-48{background-position:-24px -2040px;}
-
-
-/* Posicionamiento */
-.corner-position{position:absolute;top:0;right:0;z-index:1;}

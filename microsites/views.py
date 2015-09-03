@@ -1,17 +1,19 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect, Http404, HttpResponse
-from core.models import *
-from core.docs import *
-from core.choices import StatusChoices
-from core.http import get_domain
-from core.shortcuts import render_to_response
 from django.http import Http404
 from django.template import TemplateDoesNotExist
 from django.views.generic import TemplateView
 
+from core.models import *
+from core.daos.datastreams import DataStreamDBDAO
+from core.choices import StatusChoices
+from core.http import get_domain_by_request
+from core.shortcuts import render_to_response
+
 import re
 import json
 import logging
+
 
 def custom_pages(request, page):
     try:
@@ -22,54 +24,6 @@ def custom_pages(request, page):
     except TemplateDoesNotExist:
         raise Http404()
 
-# aka dispatcher
-def home(request):
-    logger = logging.getLogger(__name__)
-    try:
-        account = request.account
-        preferences = request.preferences
-        has_home = preferences['account_has_home']
-        if not has_home:
-            featured_dashbords = preferences['account_featured_dashboards']
-            dashboards = [int(dashboard_id) for dashboard_id in json.loads(featured_dashbords)]
-            url = to_first_featured_dashboard(dashboards, request.auth_manager)
-
-            return HttpResponseRedirect(url)
-        else:
-            return HttpResponseRedirect('/home/')
-    except (Dashboard.DoesNotExist, ValueError, IndexError), e:
-        logger.error('Microsites not found %s' % str(e))
-        raise Http404
-
-def action_dashboards(request):
-    try:
-        query = None
-        dashboards = request.GET.getlist('ids')
-        if len(dashboards) == 0:
-            preferences = request.preferences
-            featured_dashbords = preferences['account_featured_dashboards']
-            dashboards = [int(dashboard_id) for dashboard_id in json.loads(featured_dashbords)]
-        else:
-            query = request.GET.urlencode()
-
-        url = to_first_featured_dashboard(dashboards, request.auth_manager)
-        if query != None:
-            url = url + '?'+ query
-
-        return HttpResponseRedirect(url)
-    except (Dashboard.DoesNotExist, ValueError, IndexError):
-        raise Http404
-
-def action_user(request, nick):
-    try:
-        account = Account.objects.get(user__nick=nick, level__code='level_1')
-        preferences = account.get_preferences()
-        return to_first_featured_dashboard(account, preferences)
-    except (Dashboard.DoesNotExist, ValueError, IndexError, Account.DoesNotExist), e:
-        # ValueError, no preference has been setted
-        # IndexError, the preference is empty
-        # we should show a explanatory page, for now displaying a 404
-        raise Http404
 
 def action_css(request, id):
     http_referer = request.META.get('HTTP_REFERER')
@@ -80,6 +34,7 @@ def action_css(request, id):
         css = ''
     return HttpResponse(css, content_type='text/css')
 
+
 def action_js(request, id):
     http_referer = request.META.get('HTTP_REFERER')
     key = get_key(http_referer)
@@ -88,6 +43,7 @@ def action_js(request, id):
     except Preference.DoesNotExist:
         javascript = ''
     return HttpResponse(javascript, content_type='text/javascript')
+
 
 def get_key(http_referer):
 
@@ -115,6 +71,7 @@ def get_key(http_referer):
 
     return key + '.full'
 
+
 def action_new_css(request, id):
     try:
         account = request.account
@@ -136,17 +93,12 @@ def action_new_css(request, id):
     except AttributeError:
         return HttpResponse('', content_type='text/css')
 
+
 def action_is_live(request):
     callback = request.GET.get('callback')
     response = '%s(true)' % callback
     return HttpResponse(response, content_type='text/javascript')
 
-def to_first_featured_dashboard(dashboards, auth_manager = None):
-
-    dashboard_id = dashboards[0]
-    dashboard = Dashboard.objects.get(pk = dashboard_id)
-    url = dashboard.get_absolute_url()
-    return url
 
 def action_catalog_xml(request):
     logger = logging.getLogger(__name__)
@@ -155,25 +107,37 @@ def action_catalog_xml(request):
     language = request.auth_manager.language
     preferences = request.preferences
 
-    domain = get_domain(request)
+    domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
     developers_link = 'http://' + domain + reverse('developer_manager.action_query')
-    datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(datastream__user__account_id = account_id, status = StatusChoices.PUBLISHED)
+    datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(
+        datastream__user__account_id=account_id, status=StatusChoices.PUBLISHED
+    )
     resources = []
     for datastream_revision_id, in datastreams_revision_ids:
         try:
-            ds = DS(datastream_revision_id, language)
+            ds = DataStreamDBDAO().get(language, datastream_revision_id=datastream_revision_id)
         except:
             logger.error('catalog ERROR %s %s' % (datastream_revision_id, language))
             continue
 
-        ds.link = 'http://' + domain + ds.permalink()
-        ds.export_csv_link = 'http://' + domain + reverse('datastream_manager.action_csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
-        ds.export_html_link = 'http://' + domain + reverse('datastream_manager.action_html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+        ds.link = 'http://{}{}'.format(domain, ds.permalink())
+        ds.export_csv_link = 'http://{}{}'.format(
+            domain,
+            reverse('datastream_manager.action_csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+        )
+        ds.export_html_link = 'http://{}{}'.format(
+            domain,
+            reverse('datastream_manager.action_html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+        )
         ds.api_link = 'http://' + api_domain + '/dataviews/invoke/' + ds.guid + '?auth_key=your_authkey'
+
         ds.visualizations = []
-        visualization_revision_ids = VisualizationRevision.objects.values_list('id').filter(visualization__datastream_id = ds.datastream_id, status = StatusChoices.PUBLISHED)
+        visualization_revision_ids = VisualizationRevision.objects.values_list('id').filter(
+            visualization__datastream_id=ds.datastream_id,
+            status=StatusChoices.PUBLISHED
+        )
         for visualization_revision_id, in visualization_revision_ids:
             try:
                 vz = VZ(visualization_revision_id, language)
@@ -183,19 +147,6 @@ def action_catalog_xml(request):
             vz.link = 'http://' + domain + vz.permalink()
             ds.visualizations.append(vz)
         resources.append(ds)
-
-    dashboards_revision_ids = DashboardRevision.objects.values_list('id').filter(dashboard__user__account_id = account_id, status = StatusChoices.PUBLISHED)
-    dashboards = []
-    for dashboard_revision_id, in dashboards_revision_ids:
-        try:
-            db = DB(dashboard_revision_id, language)
-        except:
-            logger.error('catalog DASH ERROR %s %s' % (dashboard_revision_id, language))
-            continue
-
-        db.link = 'http://' + domain + db.permalink()
-        db.api_link = 'http://' + api_domain + '/dashboards/' + db.guid + '?auth_key=your_authkey'
-        dashboards.append(db)
 
     return render_to_response('catalog.xml', locals(), mimetype='application/xml')
 

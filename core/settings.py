@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     "compressor",
     "post_office",
     'djangobower',
+    "rest_framework",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -339,6 +340,29 @@ BOWER_INSTALLED_APPS = (
     'handsontable#>=0.16.1'
 )
 
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'api.auth.DatalApiAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'EXCEPTION_HANDLER': 'api.exceptions.datal_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'api.permissions.DatalApiPermission',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '20/minute'
+    }
+}
+
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
@@ -357,7 +381,6 @@ CACHES = {
             'MAX_ENTRIES': 300, # Default
         }
     }
-
 }
 
 try:

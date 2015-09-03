@@ -1,10 +1,12 @@
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
+
 from core.models import *
-from core.docs import DT
+from core.daos.datasets import DatasetDBDAO
 from core.lib.datastore import *
 
 import logging
+
 
 @require_http_methods(["GET"])
 def action_download(request, dataset_id, slug):
@@ -14,7 +16,7 @@ def action_download(request, dataset_id, slug):
     # get public url for datastream id
     try:
         dataset_revision_id = DatasetRevision.objects.get_last_published_id(dataset_id)
-        dataset = DT(dataset_revision_id, request.auth_manager.language)
+        dataset = DatasetDBDAO().get(request.auth_manager.language, dataset_revision_id=dataset_revision_id)
     except Exception, e:
         logger.info("Can't find the dataset: %s [%s]" % (dataset_id, str(e)))
         raise Http404

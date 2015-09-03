@@ -1,6 +1,7 @@
 from django.contrib import admin
 from core.models import *
 
+
 class UserAdmin(admin.ModelAdmin):
     fields = ('name', 'nick', 'email', 'password', 'country', 'ocupation', 'language', 'roles', 'account')
     list_display = ('id', 'name', 'nick', 'language', 'created_at')
@@ -8,6 +9,7 @@ class UserAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(User, UserAdmin)
+
 
 class ThresholdAdmin(admin.ModelAdmin):
     fields = ('name', 'account_level', 'account', 'description', 'limit')
@@ -17,12 +19,14 @@ class ThresholdAdmin(admin.ModelAdmin):
 
 admin.site.register(Threshold, ThresholdAdmin)
 
+
 class TagAdmin(admin.ModelAdmin):
     list_display = ('id', 'name',)
     search_fields = ('name', )
     list_per_page = 25
 
 admin.site.register(Tag, TagAdmin)
+
 
 class SettingAdmin(admin.ModelAdmin):
     fields = ('key', 'description', 'value')
@@ -32,6 +36,7 @@ class SettingAdmin(admin.ModelAdmin):
 
 admin.site.register(Setting, SettingAdmin)
 
+
 class RoleAdmin(admin.ModelAdmin):
     fields = ('name', 'code', 'description')
     list_display = ('name', 'code', 'description', 'created_at')
@@ -39,6 +44,7 @@ class RoleAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(Role, RoleAdmin)
+
 
 class PrivilegeAdmin(admin.ModelAdmin):
     fields = ('name', 'code', 'description')
@@ -48,12 +54,14 @@ class PrivilegeAdmin(admin.ModelAdmin):
 
 admin.site.register(Privilege, PrivilegeAdmin)
 
+
 class ApplicationAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'user', 'auth_key', 'created_at', 'expires_at', 'valid', 'type')
     search_fields = ('name','user', 'type')
     list_per_page = 25
 
 admin.site.register(Application, ApplicationAdmin)
+
 
 class AccountLevelAdmin(admin.ModelAdmin):
     fields = ('name', 'code', 'description')
@@ -63,12 +71,14 @@ class AccountLevelAdmin(admin.ModelAdmin):
 
 admin.site.register(AccountLevel, AccountLevelAdmin)
 
+
 class AccountAdmin(admin.ModelAdmin):
     list_display = ('name', 'level', 'status')
     search_fields = ('name', 'level', 'status')
     list_per_page = 25
 
 admin.site.register(Account, AccountAdmin)
+
 
 class PreferenceAdmin(admin.ModelAdmin):
     list_display = ('account', 'key')
@@ -77,12 +87,14 @@ class PreferenceAdmin(admin.ModelAdmin):
 
 admin.site.register(Preference, PreferenceAdmin)
 
+
 class DataStreamAdmin(admin.ModelAdmin):
     list_display = ('user', 'guid')
     list_filter = ('user',)
     list_per_page = 25
 
 admin.site.register(DataStream, DataStreamAdmin)
+
 
 class DataStreamRevisionAdmin(admin.ModelAdmin):
     list_display = ('datastream', 'user', 'status')
@@ -91,12 +103,14 @@ class DataStreamRevisionAdmin(admin.ModelAdmin):
 
 admin.site.register(DataStreamRevision, DataStreamRevisionAdmin)
 
+
 class DatastreamI18nAdmin(admin.ModelAdmin):
     list_display = ('datastream_revision', 'title')
     search_fields = ('title',)
     list_per_page = 25
 
 admin.site.register(DatastreamI18n, DatastreamI18nAdmin)
+
 
 class VisualizationI18nAdmin(admin.ModelAdmin):
     list_display = ('visualization_revision', 'title')
@@ -105,6 +119,7 @@ class VisualizationI18nAdmin(admin.ModelAdmin):
 
 admin.site.register(VisualizationI18n, VisualizationI18nAdmin)
 
+
 class DataStreamParameterAdmin(admin.ModelAdmin):
     list_display = ('datastream_revision', 'name')
     search_fields = ('name',)
@@ -112,26 +127,6 @@ class DataStreamParameterAdmin(admin.ModelAdmin):
 
 admin.site.register(DataStreamParameter, DataStreamParameterAdmin)
 
-class DashboardAdmin(admin.ModelAdmin):
-    list_display = ('user', 'guid')
-    search_fields = ('user',)
-    list_per_page = 25
-
-admin.site.register(Dashboard, DashboardAdmin)
-
-class DashboardRevisionAdmin(admin.ModelAdmin):
-    list_display = ('dashboard', 'user', 'status')
-    search_fields = ('user', 'dashboard', 'status')
-    list_per_page = 25
-
-admin.site.register(DashboardRevision, DashboardRevisionAdmin)
-
-class DashboardI18nAdmin(admin.ModelAdmin):
-    list_display = ('dashboard_revision', 'title')
-    search_fields = ('dashboard_revision', 'title')
-    list_per_page = 25
-
-admin.site.register(DashboardI18n, DashboardI18nAdmin)
 
 class DatasetAdmin(admin.ModelAdmin):
     list_display = ('user', 'type', 'is_dead')
@@ -140,12 +135,14 @@ class DatasetAdmin(admin.ModelAdmin):
 
 admin.site.register(Dataset, DatasetAdmin)
 
+
 class DatasetRevisionAdmin(admin.ModelAdmin):
     list_display = ('dataset', 'user', 'category', 'status')
     search_fields = ('user', 'dataset', 'category')
     list_per_page = 25
 
 admin.site.register(DatasetRevision, DatasetRevisionAdmin)
+
 
 class DatasetI18nAdmin(admin.ModelAdmin):
     list_display = ('dataset_revision', 'title')
@@ -154,12 +151,14 @@ class DatasetI18nAdmin(admin.ModelAdmin):
 
 admin.site.register(DatasetI18n, DatasetI18nAdmin)
 
+
 class VisualizationAdmin(admin.ModelAdmin):
     list_display = ('datastream', 'user')
     search_fields = ('datastream', 'user')
     list_per_page = 25
 
 admin.site.register(Visualization, VisualizationAdmin)
+
 
 class VisualizationRevisionAdmin(admin.ModelAdmin):
     list_display = ('visualization', 'user', 'status')
@@ -168,10 +167,12 @@ class VisualizationRevisionAdmin(admin.ModelAdmin):
 
 admin.site.register(VisualizationRevision, VisualizationRevisionAdmin)
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(Category, CategoryAdmin)
+
 
 class CategoryI18nAdmin(admin.ModelAdmin):
     list_display = ('category', 'name')
@@ -180,12 +181,14 @@ class CategoryI18nAdmin(admin.ModelAdmin):
 
 admin.site.register(CategoryI18n, CategoryI18nAdmin)
 
+
 class SourceAdmin(admin.ModelAdmin):
     list_display = ('name', 'url')
     search_fields = ('name', 'url')
     list_per_page = 25
 
 admin.site.register(Source, SourceAdmin)
+
 
 class DataStreamHitsAdmin(admin.ModelAdmin):
     list_display = ('datastream', 'created_at')
@@ -194,12 +197,6 @@ class DataStreamHitsAdmin(admin.ModelAdmin):
 
 admin.site.register(DataStreamHits, DataStreamHitsAdmin)
 
-class DashboardCommentAdmin(admin.ModelAdmin):
-    list_display = ('dashboard', 'user')
-    search_fields = ('dashboard', 'user')
-    list_per_page = 25
-
-admin.site.register(DashboardComment, DashboardCommentAdmin)
 
 class DataStreamCommentAdmin(admin.ModelAdmin):
     list_display = ('datastream', 'user')
@@ -207,6 +204,3 @@ class DataStreamCommentAdmin(admin.ModelAdmin):
     list_per_page = 25
 
 admin.site.register(DataStreamComment, DataStreamCommentAdmin)
-
-
-admin.site.register(DashboardWidget)

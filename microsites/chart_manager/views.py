@@ -6,7 +6,7 @@ from core.choices import ChannelTypes
 from core.models import *
 from core.docs import VZ
 from core.engine import invoke, invoke_chart
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.daos.visualizations import VisualizationHitsDAO
 from microsites.chart_manager import forms

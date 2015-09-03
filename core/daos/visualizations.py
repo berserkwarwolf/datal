@@ -20,6 +20,7 @@ from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
 from core.helpers import VisualizationsHelpers
+from datetime import date, timedelta
 
 logger = logging.getLogger(__name__)
 
@@ -59,7 +60,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         return visualization, visualization_rev
 
-    def get(self, language, visualization_id=None, visualization_revision_id=None):
+    def get(self, language, visualization_id=None, visualization_revision_id=None, guid=None, published=True):
+        # Campos datastream_revision_id, visualization_id, impl_details, title, id, datastream_type, end_point, datastream_id, slug
         pass
 
     def query_childs(self, visualization_id, language):
