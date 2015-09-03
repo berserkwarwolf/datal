@@ -490,3 +490,57 @@ def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
     l_url = reverse(p_view_name)
 
     return l_domain + l_url + l_query
+
+
+class VisualizationsHelpers:
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def get_details_json(self, **fields):
+        """
+        Genero el campo impl_details para cada tipo de grafico
+        :param fields:
+        :return: JSON string
+        """
+
+        # Campos comunes
+        field = dict()
+        field['title'] = fields['title']
+        field['format'] = dict()
+        field['data'] = fields['range_data']
+        field['chart'] = dict()
+        field['format']['type'] = fields['type']
+        field['format']['chartTemplate'] = fields['chartTemplate']
+        if 'showLegend' in fields:
+            if fields['showLegend'] == 'true':
+                field['format']['showLegend'] = 'checked'
+        if 'nullValueAction' in fields:
+            field['format']['nullValueAction'] = fields['nullValueAction']
+        if 'nullValuePreset' in fields:
+            field['format']['nullValuePreset'] = fields['nullValuePreset']
+
+        # Campos particulares por grafico
+        if fields['type'] == 'columnchart':
+            pass
+        elif fields['type'] == 'barchart':
+            pass
+        elif fields['type'] == 'linechart':
+            if 'xTitle' in fields:
+                field['chart']['xTitle'] = fields['xTitle']
+            if 'yTitle' in fields:
+                field['chart']['yTitle'] = fields['yTitle']
+            if 'labelSelection' in fields:
+                field['chart']['labelSelection'] = fields['labelSelection']
+            if 'headerSelection' in fields:
+                field['chart']['headerSelection'] = fields['headerSelection']
+        elif fields['type'] == 'piechart':
+            pass
+        elif fields['type'] == 'areachart':
+            pass
+        elif fields['type'] == 'mapchart':
+            pass
+        else:
+            pass
+
+        return json.dumps(field)
