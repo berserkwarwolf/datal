@@ -39,8 +39,10 @@ INSTALLED_APPS += (
 )
 
 BASE_URI = 'http://microsites'
+BASE_URI = 'microsites'
 MEDIA_URI = BASE_URI
 WORKSPACE_URI = 'http://workspace'
+WORKSPACE_URI = 'workspace'
 MEMCACHED_ENGINE_END_POINT = ['127.0.0.1:11211']
 
 FLEXMONSTER_LOCALES = ['ch', 'en', 'es', 'fr', 'pt', 'ua']

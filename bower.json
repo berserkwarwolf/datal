@@ -27,6 +27,12 @@
     "handsontable": "~0.16.1",
     "jquery.cookie": "~1.4.1",
     "jquery": ">=2.1.4",
+    "underscore": ">= 1.8.3",
+    "c3": "~0.4.10"
+  },
+  "resolutions": {
+    "jquery": ">=2.1.4",
+    "backbone": "~1.2.1",
     "underscore": ">= 1.8.3"
   }
 }

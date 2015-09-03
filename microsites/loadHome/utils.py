@@ -1,8 +1,6 @@
-from api.datastreams_manager import forms
 from core.models import *
-from api.models import *
 from core.communitymanagers import *
-from microsites.helpers import add_domains_to_permalinks
+from core.http import add_domains_to_permalinks
 
 
 def retrieveDatastreams(resourceIds, language):

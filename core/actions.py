@@ -1,7 +1,7 @@
 import json
-from core.choices import StatusChoices
 from django.utils.translation import ugettext_lazy as _
 from django.core.urlresolvers import reverse
+
 
 class ExceptionAction(object):
     description = _('EXCEPTION-ACTION-GENERIC')
@@ -29,7 +29,7 @@ class ViewDatastreamListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASREAM-LIST')
 
     def __init__(self):
-        url = reverse('manageDataviews.list')
+        url = reverse('manageDataviews.index')
         super(ViewDatastreamListExceptionAction, self).__init__(url)
 
 
@@ -48,14 +48,16 @@ class ViewDatasetExceptionAction(ExceptionAction):
         url = reverse('manageDatasets.view', args=(revision.id,))
         super(ViewDatasetExceptionAction, self).__init__(url)
 
+
 class ReviewDatasetStreamsAndPublishExceptionAction(ViewDatasetExceptionAction):
     description = _('EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH')
+
 
 class ViewDatasetListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASET-LIST')
 
     def __init__(self):
-        url = reverse('manageDatasets.list')
+        url = reverse('manageDatasets.index')
         super(ViewDatasetListExceptionAction, self).__init__(url)
 
 
@@ -79,7 +81,7 @@ class ViewVisualizationListExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-VISUALIZATION-LIST')
 
     def __init__(self):
-        url = reverse('manageVisualizations.list')
+        url = reverse('manageVisualizations.index')
         super(ViewVisualizationListExceptionAction, self).__init__(url)
 
 
@@ -89,6 +91,7 @@ class ViewVisualizationCreateExceptionAction(ExceptionAction):
     def __init__(self):
         url = reverse('manageDatasets.create')
         super(ViewVisualizationCreateExceptionAction, self).__init__(url)
+
 
 class ContactUsExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-CONTACT-US')

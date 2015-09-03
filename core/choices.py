@@ -29,7 +29,9 @@ class ActionStreams():
     DELETE = 1
     PUBLISH = 2
     UNPUBLISH = 3
-
+    REJECT = 4
+    ACCEPT = 5
+    REVIEW = 6
 
 # TODO: Create just one STATUS_CHOICES after we remove in a clean way UNDER_REVIEW and REJECTED choices
 STATUS_CHOICES = Choices(

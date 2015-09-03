@@ -1,0 +1,42 @@
+[
+  {
+    "pk": 1639,
+    "model": "core.visualization",
+    "fields": {
+      "datastream": 69575,
+      "guid": "38509",
+      "user": 1472,
+      "last_revision": 225
+    }
+  },
+  {
+    "pk": 1732,
+    "model": "core.visualization",
+    "fields": {
+      "datastream": 69650,
+      "guid": "SEGUN-SEXO-2002-2009",
+      "user": 1472,
+      "last_revision": 3610
+    }
+  },
+  {
+    "pk": 1733,
+    "model": "core.visualization",
+    "fields": {
+      "datastream": 69651,
+      "guid": "RAMA-DE-ACTIV-ECONO-2005",
+      "user": 1472,
+      "last_revision": 5602
+    }
+  },
+  {
+    "pk": 1727,
+    "model": "core.visualization",
+    "fields": {
+      "datastream": 69654,
+      "guid": "1992-2009",
+      "user": 1472,
+      "last_revision": 1533
+    }
+  }
+]

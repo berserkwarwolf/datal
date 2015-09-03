@@ -19,7 +19,8 @@ blockquote:before, blockquote:after{content:'';content:none;}
 
 /* Common */
 .DN{display:none;}
-.hidden{display:none !important;}
+.hidden{display: none !important;}
+.show{display:block !important;}
 .FL{float:left;}
 .FR{float:right;}
 .center{text-align:center;}

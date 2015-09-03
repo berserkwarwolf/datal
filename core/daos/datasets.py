@@ -24,19 +24,32 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
     def __init__(self):
         pass
 
-    def get(self, language, dataset_id=None, dataset_revision_id=None, published=True):
+    def get(self, language, dataset_id=None, dataset_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'dataset__last_published_revision' if published else 'dataset__last_revision'
-        dataset_revision = dataset_id is None and \
-                           DatasetRevision.objects.select_related().get(
-                               pk=dataset_revision_id, category__categoryi18n__language=language,
-                               dataseti18n__language=language) or \
-                           DatasetRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               dataseti18n__language=language)
 
-        tags = dataset_revision.tagdataset_set.all().values('tag__name', 'tag__status', 'tag__id')
-        sources = dataset_revision.sourcedataset_set.all().values('source__name', 'source__url', 'source__id')
+        if guid:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                dataset__guid=guid,
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
+        elif not dataset_id:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                pk=dataset_revision_id,
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
+        else:
+            dataset_revision = DatasetRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                dataseti18n__language=language
+            )
+
+        tags = dataset_revision.get_tags()
+        sources = dataset_revision.get_sources()
+
 
         # Get category name
         category = dataset_revision.category.categoryi18n_set.get(language=language)
@@ -310,7 +323,6 @@ class DatasetSearchIndexDAO():
     def _build_document(self):
         # eliminado hasta que haya facets
         #from core.models import add_facets_to_doc
-        #from core.helpers import get_meta_data_dict
 
         category=self._get_category()
         dataseti18n = self._get_i18n()
@@ -350,7 +362,7 @@ class DatasetSearchIndexDAO():
         #	except Exception, e:
         #	    self.logger.error("\n\n\n------------------------------- indexable_dict ERROR: [%s]\n\n\n" % str(e))
         #
-        #	#document['fields'].update(get_meta_data_dict(self.dataset_revision.dataset.meta_text))
+        #	#document['fields'].update(self.dataset_revision.get_meta_data_dict(self.dataset_revision.dataset.meta_text))
 
         return document
 

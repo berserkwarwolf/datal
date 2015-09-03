@@ -168,7 +168,7 @@ class ElasticsearchIndex():
                   "fields" : {
                     "properties" : {
                       "account_id" : { "type" : "long" },
-                      "visualizationrevision_id" : { "type" : "long" },
+                      "visualization_revision_id" : { "type" : "long" },
                       "visualization_id" : { "type" : "long" },
                       "description" : { "type" : "string" },
                       "end_point" : { "type" : "string" },
@@ -251,7 +251,7 @@ class ElasticsearchIndex():
         """ update by id"""
 
         try:
-            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body={"doc":document})
+            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
         except RequestError,e:
             raise RequestError(e)
         except NotFoundError,e:

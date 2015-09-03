@@ -1,7 +1,7 @@
 from django.db import connection
 from django.core.urlresolvers import reverse
 from core.models import *
-from core.helpers import slugify
+from core.utils import slugify
 from core import helpers
 
 from core.search import *

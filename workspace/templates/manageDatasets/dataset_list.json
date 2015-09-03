@@ -15,6 +15,7 @@
         , "title":"{{resource.dataseti18n__title|capfirst}}"
         , "description":"{{resource.dataseti18n__description|escapejs|capfirst}}"
         , "last_revision_id":"{{resource.dataset__last_revision_id}}"
+        , "last_published_revision_id":"{{resource.dataset__last_published_revision.id}}"
         , "end_point": "{{resource.end_point}}"
         , "filename": "{{resource.filename}}"
         , "impl_type": {{resource.impl_type}}

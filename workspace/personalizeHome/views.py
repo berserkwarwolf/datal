@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, HttpResponse
 from django.core.exceptions import ValidationError
 
 from core.auth.decorators import login_required, privilege_required
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.communitymanagers import *
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder

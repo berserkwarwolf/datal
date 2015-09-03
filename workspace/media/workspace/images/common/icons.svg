@@ -2,7 +2,7 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 width="120px" height="1092px" viewBox="0 0 120 1092" enable-background="new 0 0 120 1092" xml:space="preserve">
+	 width="120px" height="1128px" viewBox="0 0 120 1128" enable-background="new 0 0 120 1128" xml:space="preserve">
 <symbol  id="New_Symbol_2">
 </symbol>
 <g>
@@ -455,4 +455,10 @@
 	c-0.142,0-0.271-0.037-0.398-0.08c-0.492-0.168-0.852-0.621-0.852-1.17c0-0.69,0.559-1.25,1.25-1.25
 	c0.084,0,0.158,0.032,0.237,0.048c0.515,0.103,0.901,0.506,0.978,1.03c0.008,0.059,0.035,0.11,0.035,0.172
 	c0,0.284-0.112,0.534-0.272,0.744C106.237,1000.408,105.893,1000.614,105.487,1000.614z"/>
+<circle fill="#999999" cx="96" cy="1104.104" r="8"/>
+<text transform="matrix(1 0 0 1 92.248 1109.3633)" fill="#FFFFFF" font-family="'Roboto-Bold'" font-size="14">?</text>
+<circle fill="#0066FF" cx="60.053" cy="1104.104" r="8"/>
+<text transform="matrix(1 0 0 1 56.3003 1109.3633)" fill="#FFFFFF" font-family="'Roboto-Bold'" font-size="14">?</text>
+<circle fill="#0066CC" cx="24" cy="1104.104" r="8"/>
+<text transform="matrix(1 0 0 1 20.2476 1109.3633)" fill="#FFFFFF" font-family="'Roboto-Bold'" font-size="14">?</text>
 </svg>

@@ -1,60 +1,136 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags static%}
 
 {% block meta %}
-{% compress css %}
-<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createVisualization.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-{% endcompress %}
-<script language="javascript" src="/js_workspace/createVisualization/createVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/createVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+{% load static %}
+<!-- Libraries -->
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+
+
+<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
+
+
+{% compress css %}
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
 <meta name="main-option" content="id_visualizations_option"/>
+
+<!-- Libs -->
+<script language="javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Process Manager -->
+<script language="javascript" src="/js_workspace/createVisualization/views/StepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Charts types & instances -->
+<script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Create Viz StepViews -->
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/StartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Create Chats StepViews -->
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/ChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/MetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/FinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Create Map StepViews -->
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+
 {% endblock %}
 
 {% block sectionTitle %}
-<h1 class="FL"><a href="{% url 'manageVisualizations.list' %}" title="{% trans 'APP-VISUALIZATIONS-TEXT' %}">{% trans "APP-VISUALIZATIONS-TEXT" %}</a></h1>
-<h2 class="FL">{% trans 'APP-VISUALIZATIONS-CREATE-TEXT' %}</h2>
-<ul class="buttons-bar FR" data-step="0">
-  <li class="step0"><a id="id_step0Button" rel="0" class="button small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
-  <li class="step1"><a id="id_step1Button" rel="1" class="button small" title="{% trans 'APP-DATA-TEXT' %}">{% trans 'APP-DATA-TEXT' %}</a></li>
-  <li class="step2"><a id="id_step2Button" rel="2" class="button small" title="{% trans 'APP-TYPES-TEXT' %}">{% trans 'APP-TYPES-TEXT' %}</a></li>
-  <li class="step3"><a id="id_step3Button" rel="3" class="button small" title="{% trans 'APP-CUSTOMIZE-TEXT' %}">{% trans 'APP-CUSTOMIZE-TEXT' %}</a></li>
-  <li class="step4"><a id="id_step4Button" rel="4" class="button small" title="{% trans 'APP-FINISH-TEXT' %}">{% trans 'APP-FINISH-TEXT' %}</a></li>
-</ul>
+
+<!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
+<div id="buttons_view_container" class="buttons_view_container"></div>
+
+<!--ul class="buttons-bar FR" data-step="0">
+  <li class="step0"><a id="id_step0Button" rel="0" class="button black small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
+  <li class="step1"><a id="id_step1Button" rel="1" class="button black small" title="{% trans 'APP-DATA-TEXT' %}">{% trans 'APP-DATA-TEXT' %}</a></li>
+  <li class="step2"><a id="id_step2Button" rel="2" class="button black small" title="{% trans 'APP-TYPES-TEXT' %}">{% trans 'APP-TYPES-TEXT' %}</a></li>
+  <li class="step3"><a id="id_step3Button" rel="3" class="button black small" title="{% trans 'APP-CUSTOMIZE-TEXT' %}">{% trans 'APP-CUSTOMIZE-TEXT' %}</a></li>
+  <li class="step4"><a id="id_step4Button" rel="4" class="button black small" title="{% trans 'APP-FINISH-TEXT' %}">{% trans 'APP-FINISH-TEXT' %}</a></li>
+</ul-->
+
 {% endblock %}
 
 {% block content %}
 
-  <div class="createVizualization create" id="id_createVisualization">
+  
+  <div id="id_createVisualization_container" class="createVizualization create main-view">
 
-    {% include "createVisualization/start.html" %}
+    <!-- Steps will be Rendered here -->
 
-    {# include "createVisualization/data.html" #}
 
-    {# include "createVisualization/chart/types.html" #}
-
-    {# include "createVisualization/chart/customize.html" #}
-
-    {# include "createVisualization/map/customizeTrace.html" #}
-
-    {# include "createVisualization/map/customizeMarkers.html" #}
-
-    {# include "createVisualization/map/customizeGeo.html" #}
-
-    {# include "createVisualization/finish.html" #}
+    <!-- Include charts templates -->
+    {% include "createVisualization/steps/0_start.html" %}
+    {% include "createVisualization/steps/1_chart.html" %}
+    {% include "createVisualization/steps/2_metadata.html" %}
+    {% include "createVisualization/steps/3_finish.html" %}
+  
+    <!-- Include map templates -->  
+    {% include "createVisualization/steps/map/1_map.html" %}
+    {% include "createVisualization/steps/map/3_map_finish.html" %}
 
   </div>
 
 {% endblock %}
 
+
+{% block popupsOverlay %}
+  {% include "createVisualization/modals/ChartSelectDataModal.html" %}
+  {% include "createVisualization/modals/MapSelectDataModal.html" %}
+{% endblock %}
+
 {% block bottom_js %}
+
+{# templates backbone #}
+{% include "createVisualization/templates.html" %}
+
+<!-- Viz modals -->
+<script language="javascript" src="/js_workspace/createVisualization/views/ModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/ChartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/createVisualization/views/modals/MapSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script src="/js_workspace/createVisualization/models/DataTableSelectionModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/collections/DataTableSelectedCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/table/DataTableUtils.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/table/DataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/ButtonsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_workspace/createVisualization/views/table/SelectedCellRangeView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
 <script type="text/javascript">
-$(document).ready(function(){
-  var createVisualizationModel = new CreateVisualizationModel({
-    // Complete model here
+  var mainView = new MainView({
+    el: '.main-section',
+    datastream_revision_id: '{{ datastream_revision.datastream_revision_id }}',
+   // datastream_metadata: ''
+
   });
-  var createVisualizationView = new CreateVisualizationView({model: createVisualizationModel});
-});
 </script>
+
 {% endblock %}

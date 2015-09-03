@@ -942,3 +942,18 @@ msgstr "El recurso está pendiente de aprobación."
 
 msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
 msgstr "Hasta que no se apruebe el recurso no se puede editar."
+
+msgid "APP-ONDEMAND-TEXT"
+msgstr "Bajo demanda"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Diaria"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Cada hora"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Semanal"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Mensual"

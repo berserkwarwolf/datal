@@ -48,6 +48,7 @@ def do_search(request, category_filters=None, datasets=None):
         except InvalidPage:
             raise Http404
 
+
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
         page_results = paginator.page(page).object_list
 

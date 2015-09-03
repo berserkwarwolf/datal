@@ -29,9 +29,12 @@ $nav-collapsed-width: 54px;
 
 	/* Accent color */
 	$accent-color:#0066cc;														/* Brand secondary color */
+	$accent-shine:#0066ff;														/* Brand secondary color :hover */
 
 	/* Base color */
 	$color-base:#fff;														/* Color for backgrounds */
+	$color-base-light:#999;
+	$color-base-extra-light:#e6e6e6;
 
 
 /* Fonts */
@@ -99,8 +102,13 @@ $break-sm:768px;
 $break-md:992px;
 $break-lg:1200px;
 
+
 /* Colors accept / reject */
 $red:#c1272d;
 $red-hover:#ea3442;
 $green:#009245;
 $green-hover:#02c159;
+
+
+/* Modal */
+$modal-table-selected-color: rgba(227, 250, 41, 0.24);							/* Background color for selected data in tables */

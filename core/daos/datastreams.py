@@ -6,18 +6,21 @@ import logging
 from django.db.models import Q, F
 from django.db import IntegrityError
 
-from .resource import AbstractDataStreamDBDAO
-from core import settings
-from core.choices import StatusChoices, STATUS_CHOICES
-from core.exceptions import SearchIndexNotFoundException
+
 from core.helpers import slugify
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, DataStreamHits
+from core.daos.resource import AbstractDataStreamDBDAO
+from core import settings
+from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from core.choices import STATUS_CHOICES
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
+    def __init__(self):
+        pass
 
     def create(self, datastream=None, user=None, **fields):
         """create a new datastream if needed and a datastream_revision"""
@@ -72,16 +75,28 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return datastream_revision
 
-    def get(self, language, datastream_id=None, datastream_revision_id=None, published=True):
+    def get(self, language, datastream_id=None, datastream_revision_id=None, guid=None, published=True):
         """ Get full data """
         fld_revision_to_get = 'datastream__last_published_revision' if published else 'datastream__last_revision'
-        datastream_revision = datastream_id is None and \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=datastream_revision_id, category__categoryi18n__language=language,
-                               datastreami18n__language=language) or \
-                           DataStreamRevision.objects.select_related().get(
-                               pk=F(fld_revision_to_get), category__categoryi18n__language=language,
-                               datastreami18n__language=language)
+
+        if guid:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                datastream__guid=guid,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        elif not datastream_id:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=datastream_revision_id,
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
+        else:
+            datastream_revision = DataStreamRevision.objects.select_related().get(
+                pk=F(fld_revision_to_get),
+                category__categoryi18n__language=language,
+                datastreami18n__language=language
+            )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
@@ -103,6 +118,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
 
         datastream = dict(
+            datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
             user_id=datastream_revision.user.id,
@@ -111,6 +127,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_id=datastream_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            filename=dataset_revision.filename,
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
@@ -158,12 +175,23 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 query = query.filter(reduce(operator.and_, q_list))
 
         total_resources = query.count()
-        query = query.values('datastream__user__nick', 'status', 'id', 'datastream__guid', 'category__id',
-                             'datastream__id', 'category__categoryi18n__name', 'datastreami18n__title',
-                             'datastreami18n__description', 'created_at', 'datastream__user__id',
-                             'datastream__last_revision_id', 'dataset__last_revision__dataseti18n__title',
-                             'dataset__last_revision__impl_type', 'dataset__last_revision__id'
-                             )
+        query = query.values(
+            'datastream__user__nick',
+            'status',
+            'id',
+            'datastream__guid',
+            'category__id',
+            'datastream__id',
+            'category__categoryi18n__name',
+            'datastreami18n__title',
+            'datastreami18n__description',
+            'created_at',
+            'datastream__user__id',
+            'datastream__last_revision_id',
+            'dataset__last_revision__dataseti18n__title',
+            'dataset__last_revision__impl_type',
+            'dataset__last_revision__id'
+        )
 
         query = query.order_by(sort_by)
 
@@ -208,24 +236,13 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
     def query_childs(self, datastream_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = dict(
-            visualizations=dict()
-        )
+        related = dict()
+        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+            visualization__datastream__id=datastream_id,
+            visualizationi18n__language=language
+        ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
+                 'visualization__user__nick', 'created_at', 'visualization__last_revision')
         return related
-
-    def hit(self, id, channel_type):
-        """agrega un hit al datastream. """
-
-        try:
-            hit=DataStreamHits.objects.create(datastream_id=id, channel_type=channel_type)
-        except IntegrityError:
-            # esta correcto esta excepcion?
-            raise DataStreamNotFoundException()
-
-        # utilizo el ID del hit porque es confiable como contador,
-        # aunque lo correcto sería hacer un count de los hits que tiene ese ds_id
-        DatastreamHitsDAO(hit.datastream).hit(hit.id)
-    
 
 
 class DatastreamSearchDAOFactory():
@@ -328,10 +345,11 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+
 
 class DatastreamHitsDAO():
     """class for manage access to Hits in DB and index"""
@@ -341,12 +359,23 @@ class DatastreamHitsDAO():
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
 
-    def hit(self, count):
+    def add(self,  channel_type):
+        """agrega un hit al datastream. """
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s, hits: %s)" % ( self.datastream.guid,count))
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=self.datastream.datastream_id, channel_type=channel_type)
+        except IntegrityError:
+            # esta correcto esta excepcion?
+            raise DataStreamNotFoundException()
+
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+
         # armo el documento para actualizar el index.
         doc={'docid':"DS::%s" % self.datastream.guid,
                 "type": "ds",
-                "hits": count}
+                "script": "ctx._source.fields.hits+=1"}
 
         return self.search_index.update(doc)
+
+    def count(self):
+        return DataStreamHits.objects.filter(datastream_id=self.datastream['datastream_id']).count()

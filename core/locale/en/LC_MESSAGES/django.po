@@ -944,3 +944,18 @@ msgstr "Resource needs review."
 
 msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
 msgstr "You cannot edit a resource while waiting for review."
+
+msgid "APP-ONDEMAND-TEXT"
+msgstr "On demand"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Daily"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Hourly"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Weekly"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Monthly"

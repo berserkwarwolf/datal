@@ -3,7 +3,7 @@ from core import choices
 from core.cache import Cache
 from django.conf import settings
 from core.models import User
-from core import helpers as LocalHelper
+from core import http as LocalHelper
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
 import redis
@@ -28,8 +28,8 @@ class ActivityStreamDAO:
                 l_permalink = reverse('manageDataviews.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_VISUALIZATION:
-                l_permalink = LocalHelper.build_permalink('manageVisualizations.view',
-                                                          '&visualization_revision_id=' + str(revision_id))
+                l_permalink = reverse('manageVisualizations.view', urlconf='workspace.urls',
+                                      kwargs={'revision_id': revision_id})
             elif resource_type == settings.TYPE_DATASET:
                 l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})

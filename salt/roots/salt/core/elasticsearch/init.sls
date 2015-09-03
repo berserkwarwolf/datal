@@ -53,6 +53,12 @@ elasticsearch_alias:
      - user: vagrant
      - group: vagrant
 
+/etc/elasticsearch/elasticsearch.yml:
+ file.append:
+    - text: 
+        - "script.inline: on"
+        - "script.indexed: on"
+
 elasticsearch-service:
   service.running:
     - name: elasticsearch

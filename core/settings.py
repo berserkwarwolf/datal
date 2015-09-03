@@ -50,6 +50,7 @@ INSTALLED_APPS = (
     "compressor",
     "post_office",
     'djangobower',
+    "rest_framework",
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -110,6 +111,7 @@ END_POINT_SERVLET       = '/AgileOfficeServer/DataStreamRequesterServlet'
 END_POINT_CHART_SERVLET = '/AgileOfficeServer/ChartInvokeServlet'
 END_POINT_LOADER_SERVLET= '/AgileOfficeServer/DataSourceLoaderServlet'
 END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
+END_POINT_CHART_PREVIEWER_SERVLET = '/AgileOfficeServer/ChartPreviewerServlet'
 
 
 BASE_URI = 'localhost'
@@ -333,9 +335,53 @@ SUBSCRIBE_NEW_USERS_TO_MAIL_LIST = False
 BOWER_COMPONENTS_ROOT = os.path.join(PROJECT_PATH, 'components')
 
 BOWER_INSTALLED_APPS = (
-    'jquery',
-    'underscore',
+    'jquery#>=2.1.4',
+    'underscore#>= 1.8.3',
+    'handsontable#>=0.16.1'
 )
+
+REST_FRAMEWORK = {
+    'DEFAULT_RENDERER_CLASSES': (
+        'rest_framework.renderers.JSONRenderer',
+        'rest_framework.renderers.BrowsableAPIRenderer',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        'api.auth.DatalApiAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'EXCEPTION_HANDLER': 'api.exceptions.datal_exception_handler',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+        'api.permissions.DatalApiPermission',
+    ),
+    'DEFAULT_THROTTLE_CLASSES': (
+        'rest_framework.throttling.UserRateThrottle',
+    ),
+    'DEFAULT_THROTTLE_RATES': {
+        'user': '20/minute'
+    }
+}
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 600,
+        'OPTIONS': {
+            'MAX_ENTRIES': 300, # Default
+        }
+    },
+    'engine': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+        'TIMEOUT': 60,
+        'KEY_FUNCTION': 'core.decorators.datal_make_key',
+        'OPTIONS': {
+            'MAX_ENTRIES': 300, # Default
+        }
+    }
+}
 
 try:
     from core.local_settings import *

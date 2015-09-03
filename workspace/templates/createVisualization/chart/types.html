@@ -1,21 +1,31 @@
 {% load i18n extra_tags components %}
 
-<div class="step types" id="id_step2">
+<div class="step types type-step-view hidden" id="id_step2">
 
-	<header>
-		<h3>{% trans 'APP-CHART-TYPES-TITLE' %} <span>{% trans 'APP-CHART-TYPES-SUBTITLE' %}</span></h3>
-		<div class="navigation FR">
-			<a title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small" href="#" id=""><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
-			<a title="{% trans 'BTN-NEXT-TEXT' %}" class="button primary small" href="#" id="">{% trans 'BTN-NEXT-TEXT' %}<i class="right-arrow"></i></a>
-		</div>
-	</header>
-	
-	<div class="wrapper1">
+  <header>
+    <h3>{% trans 'APP-CHART-TYPES-TITLE' %} <span>{% trans 'APP-CHART-TYPES-SUBTITLE' %}</span></h3>
+    <div class="navigation FR">
+      <a title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small btn-prev" href="#" id=""><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
+      <a title="{% trans 'BTN-NEXT-TEXT' %}" class="button green small btn-next" href="#" id="">{% trans 'BTN-NEXT-TEXT' %}<i class="right-arrow"></i></a>
+    </div>
+  </header>
+  
+  <div class="wrapper1">
     <div class="wrapper2 clearfix">
       <div class="wrapper3">
 
-				<section class="sidebar">
+        <section class="sidebar">
           <div class="boxConfig">
+
+            <div class="itemConfig">
+              <div class="title">{% trans 'APP-CHART-TYPES-QUEST0' %}</div>
+              <fieldset>
+                <select id="id_library" class="">
+                  <option value="google" selected="selected">{% trans 'APP-GOOGLE-VISUALIZATIONS-TEXT' %}</option>
+                  <option value="d3">{% trans 'APP-D3JS-TEXT' %}</option>
+                </select>
+              </fieldset>
+            </div>
 
             <div class="itemConfig">
               <div class="title">{% trans 'APP-CHART-TYPES-QUEST1' %}</div>
@@ -25,17 +35,17 @@
                 <label><input type="radio" name="" value="" /><i class="radio line"></i>{% trans 'CHRT-TYPE-LINE' %}</label>
                 <label><input type="radio" name="" value="" /><i class="radio pie"></i>{% trans 'CHRT-TYPE-PIE' %}</label>
                 <label><input type="radio" name="" value="" /><i class="radio area"></i>{% trans 'CHRT-TYPE-AREA' %}</label>
-          		</fieldset>
+              </fieldset>
             </div>
 
             <div class="itemConfig">
-          		<div class="title">{% trans 'APP-CHART-TYPES-QUEST2' %}</div>
+              <div class="title">{% trans 'APP-CHART-TYPES-QUEST2' %}</div>
               <fieldset>
                 <p class="subtitle">{% trans 'CHRT-EMPTYCELL-TITLE' %}</p>
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-EMPTYCELL-OPT1' %}</label>
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-EMPTYCELL-OPT2' %}</label>
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-EMPTYCELL-OPT3' %}</label>
-          		</fieldset>
+              </fieldset>
 
               <fieldset> 
                 <p class="subtitle">{% trans 'CHRT-SELECTION-TITLE' %}</p>
@@ -44,22 +54,22 @@
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-SELECTION-OPT3' %}</label>
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-SELECTION-OPT4' %}</label>
                 <label><input type="radio" name="" value="" />{% trans 'CHRT-SELECTION-OPT5' %}</label>
-          		</fieldset>
+              </fieldset>
             </div>
 
           </div>
         </section>
 
         <section class="preview-container">
-        	<h4>{% trans 'APP-PREVIEW-TEXT' %}</h4>
-        	<div></div>
+          <h4>{% trans 'APP-PREVIEW-TEXT' %}</h4>
+          <div></div>
         </section>
 
       </div>
     </div>
   </div>
 
-	</div>
+  </div>
 
 </div>
 

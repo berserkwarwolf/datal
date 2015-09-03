@@ -1088,6 +1088,9 @@ msgstr "Hybrid"
 msgid "CHRT-SATELLITE-TEXT"
 msgstr "Satellite"
 
+msgid "CHRT-TERRAIN-TEXT"
+msgstr "Terrain"
+
 msgid "APP-TRACE-TEXT"
 msgstr "Trace"
 
@@ -2407,6 +2410,9 @@ msgstr "The datastream and the associated resources have been deleted."
 msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
 msgstr "Error on deleting the datastream and the associated resources."
 
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the visualization and the associated resources."
+
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
 msgstr "The datastream revision has been deleted."
 
@@ -2415,9 +2421,6 @@ msgstr "Error on deleteing the datastream revision."
 
 msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
 msgstr "The visualization has been deleted."
-
-msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
-msgstr "Error on deleting visualization."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
 msgstr "The visualization revision has been deleted."
@@ -2437,12 +2440,6 @@ msgstr "Types"
 msgid "APP-FINISH-TEXT"
 msgstr "Finish"
 
-msgid "APP-START-TITLE"
-msgstr "Select Visualization"
-
-msgid "APP-START-SUBTITLE"
-msgstr "Choose between chart or map visualization."
-
 msgid "LANDINGPAGE-PENDINGACTIONS-TEXT-1"
 msgstr "You have "
 
@@ -2454,12 +2451,6 @@ msgstr "Pending actions"
 
 msgid "APP-ISPENDINGREVIEW-TEXT"
 msgstr " is pending review"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-CHART-TITLE"
-msgstr "Chart"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-CHART-DESC"
-msgstr "Bar, column, line, pie, area."
 
 msgid "APP-VISUALIZATIONS-CREATE-START-MAP-DESC"
 msgstr "Markers, poligons, geochart"
@@ -2523,36 +2514,6 @@ msgstr "Select the desired range of cells. Do not include text or extra informat
 
 msgid "APP-DATA-VIEW-TITLE-TEXT"
 msgstr "Data view title"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-TITLE"
-msgstr "Trace map"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-TRACE-MAP-DESC"
-msgstr "Draw geometries, lines or polygons using GIS datasets."
-
-msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-TITLE"
-msgstr "Markers map"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-MARKERS-MAP-DESC"
-msgstr "Pinpoint multiple locations using GIS datasets."
-
-msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-TITLE"
-msgstr "Geo map"
-
-msgid "APP-VISUALIZATIONS-CREATE-START-GEO-MAP-DESC"
-msgstr "Identify countries, continents or markers with color-scaled density."
-
-msgid "APP-CREATE-CHART-TEXT"
-msgstr "Create new chart"
-
-msgid "APP-CREATE-TRACE-MAP-TEXT"
-msgstr "Create new trace map"
-
-msgid "APP-CREATE-MARKERS-MAP-TEXT"
-msgstr "Create new markers map"
-
-msgid "APP-CREATE-GEO-MAP-TEXT"
-msgstr "Create new geo map"
 
 msgid "APP-CUSTOMIZE-TRACE-MAP-SUBTITLE"
 msgstr "Select the coordinates and information for each multigeometry element. Fields marked with <span class='ast'>(<span>*</span>)</span> are mandatory."
@@ -2848,6 +2809,9 @@ msgstr "here"
 msgid "APP-SELECT-DATASET-TEXT"
 msgstr "Select Dataset"
 
+msgid "APP-SELECT-DATASTREAM-TEXT"
+msgstr "Select View"
+
 msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Invalid file format"
 
@@ -2877,12 +2841,6 @@ msgstr "Rejection reason?"
 
 msgid "APP-VIEWREJECTEDNOTE-TEXT"
 msgstr "View reason for rejection"
-
-
-
-
-
-
 
 msgid "APP-DATASET-APPROVED-TITLE"
 msgstr "Dataset has been accepted"
@@ -3063,3 +3021,218 @@ msgstr "Create visualizations"
 
 msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Create a new dataset to begin"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+msgid "APP-CREATE-VISUALIZATION-TEXT"
+msgstr "Create visualization"
+
+msgid "APP-CREATE-VISUALIZATION-TITLE"
+msgstr "¿Qué necesitas mostrar?"
+
+msgid "APP-CREATE-CHARTS-TEXT"
+msgstr "Charts"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-TEXT"
+msgstr "Una comparación"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPOSITION-TEXT"
+msgstr "Una composición estática"
+
+msgid "APP-CREATE-MAPS-TEXT"
+msgstr "Maps"
+
+msgid "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT"
+msgstr "Elementos en un mapa"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-IN-TIME-TEXT"
+msgstr "En el tiempo"
+
+msgid "APP-LINE-CHART-TEXT"
+msgstr "Line chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-LINE-COMMENT-TEXT"
+msgstr "Cómo evoluciona uno o varios items a lo largo del tiempo"
+
+msgid "APP-AREA-CHART-TEXT"
+msgstr "Area chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-AREA-COMMENT-TEXT"
+msgstr "Como evolucionan varios ítems a lo largo del tiempo"
+
+msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-BETWEEN-ITEMS-TEXT"
+msgstr "Entre ítems"
+
+msgid "APP-BAR-CHART-TEXT"
+msgstr "Bar chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
+msgstr "Una variable por barra, pocas categorías muchos ítems"
+
+msgid "APP-COLUMN-CHART-TEXT"
+msgstr "Column chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-COLUMN-COMMENT-TEXT"
+msgstr "Una o pocas categorías/ítems"
+
+msgid "APP-PIE-CHART-TEXT"
+msgstr "Pie chart"
+
+msgid "APP-CREATE-VISUALIZATION-START-PIE-COMMENT-TEXT"
+msgstr "Porcentajes que componen un total"
+
+msgid "APP-TRACE-MAP-TEXT"
+msgstr "Trazado"
+
+msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
+msgstr "Draw geometries, lines or polygons usign GIS datasets"
+
+msgid "APP-MARKERS-MAP-TEXT"
+msgstr "Markers"
+
+msgid "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
+
+msgid "APP-GEO-MAP-TEXT"
+msgstr "Geo"
+
+msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
+msgstr "Pinpoint multiple locations using GIS datasets"
+
+msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
+msgstr "Visualization"
+
+msgid "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE"
+msgstr "Description"
+
+msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
+msgstr "Revision"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
+msgstr "Compara en el tiempo"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT"
+msgstr "Compara entre items"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT"
+msgstr "Composición estática"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT"
+msgstr "Se está usando"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT"
+msgstr "Google visualizations"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT"
+msgstr "D3"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE"
+msgstr "¿No se ve bien?"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
+msgstr "Cambiar filas/columnas"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
+msgstr "Reordenar datos"
+
+msgid "APP-DEFAULT-TEXT"
+msgstr "Default"
+
+msgid "APP-INVERTED-TEXT"
+msgstr "Inverted"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-TEXT"
+msgstr "Empty cells will be"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT"
+msgstr "Excluded from the dataset "
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT"
+msgstr "Set to previous value in dataset"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
+msgstr "Set to a given value"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
+msgstr "Seleccione los datos que desee representar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
+msgstr "Origen de la fuente de datos"
+
+msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
+msgstr "Choose a map"
+
+msgid "APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT"
+msgstr "The default road map view"
+
+msgid "APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT"
+msgstr "Google Earth satellite images"
+
+msgid "APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT"
+msgstr "A mixture of normal and satellite views"
+
+msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
+msgstr "A physical map based on terrain information"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
+msgstr "Define el zoom inicial"
+
+msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT"
+msgstr "El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación."
+
+msgid "APP-CREATE-MAP-TITLE"
+msgstr "Crea un mapa de puntos"
+
+msgid "APP-CREATE-MAP-DATA-TITLE"
+msgstr "Datos del mapa"
+
+msgid "APP-GRAPH-TEXT"
+msgstr "Graph"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
+msgstr "1. ¿Cuáles son los intervalos con datos?"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
+msgstr "2. Etiquetas (Eje X)"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
+msgstr "Las categorías a comparar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
+msgstr "3. Encabezado/s"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
+msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
+msgstr "Seleccione los valores para el mapa (columnas o filas)"
+
+msgid "APP-CREATE-MAP-TEXT"
+msgstr "Create map"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT"
+msgstr "1. Latitude"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT"
+msgstr "2. Longitude"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
+msgstr "3. Markers information"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
+msgstr "Es lo que verás en el tooltip del mapa"

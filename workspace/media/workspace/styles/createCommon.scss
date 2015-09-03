@@ -26,7 +26,6 @@
 .create .title{font-family:$font-titles-family;font-size:$font-size-l;padding:15px 0 15px 0;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;margin-bottom:30px;line-height:normal;}
 .create .required{color:#d21717;padding-left:5px;}
 .create header .required{padding-left:0;}
-.create .formContent .required{float:right;padding-right:12px;}
 
 .create .wrapper1, .create .wrapper2, .create .wrapper3{height:100%;width:100%;
   -webkit-border-radius:3px;
@@ -36,7 +35,7 @@
 .create .wrapper1{/*background-color:#f6f4f4;*/height:100%;padding-left:310px;}
 .create .wrapper2{/*border-left:1px solid #e5e5e5;*/background-color:#fff;}
 .create .wrapper3{float:left;margin-left:-310px;}
-.create .sidebar{float:left;height:100%;width:310px;}
+.create .sidebar{float:left;height:100%;width:310px;position:relative;}
 .create .helpBox p{margin-bottom:5px;}
 
 /* Start */
@@ -67,7 +66,7 @@
   .create .box .boxCreate{height:142px;}
 }
 
-.create .row label{font-size:12px;display:block;float:left;width:34%;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;
+.create .row label{font-size:12px;display:inline-block;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;float:left;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -88,7 +87,7 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:$form-label-size;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
+.create .formContent .row label{font-size:$form-label-size;line-height:inherit;height:inherit;color:$form-label-color;width:115px;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;}
 .create .formContent .row textarea{width:480px;
   -webkit-box-sizing:border-box;
@@ -101,11 +100,7 @@
 .create .formContent .row.checkbox{}
 .create .formContent .row.checkbox input[type=checkbox]{width:auto;float:left;position:relative;top:6px;}
 .create .formContent .row.checkbox p.tip{margin-left:0;float:left;clear:none;margin-top:8px;}
-.create .formContent .row .tagsContent,
-.create .formContent .row .sourcesContent,
-.create .formContent .row .paramContent{margin-left:115px;}
-.formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
-.create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding:5px 0 10px 115px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
 .sticky{position:fixed;width:100%;top:0;z-index:100;border-top:0;} 
