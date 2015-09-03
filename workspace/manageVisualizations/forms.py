@@ -83,8 +83,8 @@ class RequestForm(forms.Form):
 
 
 class PreviewForm(RequestForm):
-    null_action = forms.CharField(required=True)
-    null_preset = forms.CharField(required=False)
+    nullValueAction = forms.CharField(required=True)
+    nullValuePreset = forms.CharField(required=False)
     data = forms.CharField(required=True)
     labels = forms.CharField(required=False)
     headers = forms.CharField(required=False)

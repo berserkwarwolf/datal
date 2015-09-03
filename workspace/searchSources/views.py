@@ -6,7 +6,6 @@ from core.auth.decorators import login_required
 from core.models import *
 
 
-
 @login_required
 @require_http_methods(["GET", "POST"])
 def action_search_source(request):

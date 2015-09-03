@@ -256,18 +256,23 @@ def preview(request):
         logger.error("form is valid")
         preferences = request.preferences
 
-        datastreamrevision_id  = request.GET.get('datastream_revision_id', None)
+        datastream_revision_id  = request.GET.get('datastream_revision_id', None)
 
         try:
-            datastream = DS(datastreamrevision_id, request.auth_manager.language)
+            datastream = DataStreamDBDAO().get(
+                request.user.language,
+                datastream_revision_id=datastream_revision_id,
+                published=False
+            )
+            logger.error(datastream)
         except Exception, e:
-            logger.debug(e)
+            logger.error(e)
             raise Http404
         else:
 
-            query = RequestProcessor(request).get_arguments(datastream.parameters)
+            query = RequestProcessor(request).get_arguments(datastream["parameters"])
 
-            query['pId'] = int(datastreamrevision_id)
+            query['pId'] = int(datastream_revision_id)
 
             limit = form.cleaned_data.get('limit')
             if limit is not None:
@@ -285,8 +290,8 @@ def preview(request):
             if zoom is not None:
                 query['pZoom'] = zoom
 
-            query['pNullValueAction'] = form.cleaned_data.get('null_action')
-            query['pNullValuePreset'] = form.cleaned_data.get('null_preset')
+            query['pNullValueAction'] = form.cleaned_data.get('nullValueAction')
+            query['pNullValuePreset'] = form.cleaned_data.get('nullValuePreset')
 
             query['pData'] = form.cleaned_data.get('data')
 
