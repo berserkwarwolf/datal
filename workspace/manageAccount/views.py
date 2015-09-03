@@ -13,7 +13,7 @@ from core.lib.mail import mail
 from core.lib.datastore import *
 from core.lib.searchify import SearchifyIndex
 from core.http import get_domain_with_protocol
-from workspace.admin_manager import forms
+from workspace.manageAccount import forms
 from core.utils import generate_ajax_form_errors
 
 import random
