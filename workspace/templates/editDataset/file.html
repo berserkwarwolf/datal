@@ -92,7 +92,7 @@ $(document).ready(function(){
 	var finishView = new FinishView({model: finishModel});
 
 	var processManagerModel = new ProcessManagerModel({
-		finishUrl: "{% url 'manageDatasets.list' %}"
+		finishUrl: "{% url 'manageDatasets.index' %}"
 	});
 	var processManagerView = new ProcessManagerView({model: processManagerModel});
 

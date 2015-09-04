@@ -32,7 +32,7 @@
 
 {% block header_navigation %}
 <!-- Back Link -->
-<a href="{% url 'manageDatasets.list' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+<a href="{% url 'manageDatasets.index' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
 {% endblock %}
 
 {% block sectionTitle %}
@@ -78,7 +78,7 @@ $(document).ready(function(){
   var finishView = new FinishView({model: finishModel});
 
   var processManagerModel = new ProcessManagerModel({
-    finishUrl: "{% url 'manageDatasets.list' %}"
+    finishUrl: "{% url 'manageDatasets.index' %}"
   });
   var processManagerView = new ProcessManagerView({model: processManagerModel});
 
