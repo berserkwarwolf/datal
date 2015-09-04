@@ -2677,9 +2677,6 @@ msgstr "Filter Datasets"
 msgid "APP-ADD-NEW-VISUALIZATION-TEXT"
 msgstr "Add new Visualization"
 
-msgid "APP-ADD-VISUALIZATION-HINT"
-msgstr "Select a Data view to continue."
-
 msgid "APP-FILTER-VISUALIZATIONS-TEXT"
 msgstr "Filter Visualizations"
 
@@ -3015,6 +3012,9 @@ msgstr "Create visualizations"
 
 msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Create a new dataset to begin"
+
+msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "Which dataview you want to use?"
 
 
 
