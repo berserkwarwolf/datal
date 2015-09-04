@@ -1,27 +1,22 @@
 import json
 import urllib
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.db import transaction
-from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
 from django.template.loader import render_to_string
 
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.exceptions import *
-from core.engine import invoke, preview_chart
+from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
 from core.choices import *
-from core.models import VisualizationRevision,DatasetRevision
-from core import helpers as LocalHelper
-from microsites.daos.visualizations import VisualizationDAO
-from workspace.decorators import *
-from workspace.settings import *
-from workspace.manageVisualizations.forms import *
+from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
+from core.utils import unset_visualization_revision_nice
+from workspace.manageVisualizations.forms import *
+from workspace.decorators import *
 
 logger = logging.getLogger(__name__)
 
@@ -169,7 +164,7 @@ def view(request):
             else:
                 raise Http404
 
-            dataset_revision = DT(ds_revision.id, auth_manager.language)
+            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
 
             status = STATUS_CHOICES[int(visualization_revision.status)][1]
 

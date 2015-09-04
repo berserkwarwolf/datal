@@ -166,3 +166,10 @@ reindex:
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py index --settings=workspace.settings --re-index
 
+log_activity:
+  cmd.run:
+    - user: {{ user }}
+    - group: {{ group }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py log_activity --settings=workspace.settings
