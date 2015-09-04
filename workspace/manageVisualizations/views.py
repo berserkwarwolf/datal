@@ -307,13 +307,21 @@ def preview(request):
             if lat is not None:
                 query['pLatitudSelection'] = lat
 
-            lon = form.cleaned_data.get('long')
+            lon = form.cleaned_data.get('lon')
             if lon is not None:
                 query['pLongitudSelection'] = lon
 
             traces = form.cleaned_data.get('traces')
             if traces is not None:
                 query['pTraceSelection'] = traces
+
+            invertedAxis = form.cleaned_data.get('invertedAxis')
+            if invertedAxis is not None:
+                query['pInvertedAxis'] = invertedAxis
+
+            invertData = form.cleaned_data.get('invertData')
+            if invertData is not None:
+                query['pInvertData'] = invertData
 
             query['pType'] = 'chart'
             logger.error(query)

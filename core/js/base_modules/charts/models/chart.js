@@ -93,8 +93,8 @@ charts.models.Chart = Backbone.Model.extend({
             nullValuePreset:  self.get('nullValuePreset')
         };
 
-        if(self.get('invertData')=="checked"){
-            params['invertData'] = self.get('invertData');
+        if(self.get('invertData') && self.get('invertData')!=''){
+            params['invertData'] = "checked";
         }
 
         if(self.get('invertedAxis')){
@@ -124,7 +124,7 @@ charts.models.Chart = Backbone.Model.extend({
             labels = new Array(values[0].length);
 
         columns.push(labels);
-        fields.push(['string', 'labels'])
+        fields.push(['string', 'labels']);
 
         columns = columns.concat(values);
         fields = fields.concat(_.map(series, function (item) {

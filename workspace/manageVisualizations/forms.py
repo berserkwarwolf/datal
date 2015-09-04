@@ -85,9 +85,11 @@ class RequestForm(forms.Form):
 class PreviewForm(RequestForm):
     nullValueAction = forms.CharField(required=True)
     nullValuePreset = forms.CharField(required=False)
+    invertData = forms.CharField(required=False)
+    invertedAxis = forms.CharField(required=False)
     data = forms.CharField(required=True)
     labels = forms.CharField(required=False)
     headers = forms.CharField(required=False)
     lat = forms.CharField(required=False)
-    long = forms.CharField(required=False)
+    lon = forms.CharField(required=False)
     traces = forms.CharField(required=False)
