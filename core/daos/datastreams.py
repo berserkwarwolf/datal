@@ -81,6 +81,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         if guid:
             datastream_revision = DataStreamRevision.objects.select_related().get(
                 datastream__guid=guid,
+                pk=F(fld_revision_to_get),
                 category__categoryi18n__language=language,
                 datastreami18n__language=language
             )
@@ -360,7 +361,7 @@ class DatastreamHitsDAO():
     TTL=3600 
 
     def __init__(self, datastream):
-        self.datastream=datastream
+        self.datastream = datastream
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
         self.cache=Cache()
@@ -368,16 +369,29 @@ class DatastreamHitsDAO():
     def add(self,  channel_type):
         """agrega un hit al datastream. """
 
+        # TODO: Fix temporal por el paso de DT a DAO.
+        # Es problema es que por momentos el datastream viene de un queryset y otras veces de un DAO y son objetos
+        # distintos
         try:
-            hit=DataStreamHits.objects.create(datastream_id=self.datastream.datastream_id, channel_type=channel_type)
+            datastream_id = self.datastream.datastream_id
+        except:
+            datastream_id = self.datastream['datastream_id']
+
+        try:
+            guid = self.datastream.guid
+        except:
+            guid = self.datastream['guid']
+
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=datastream_id, channel_type=channel_type)
         except IntegrityError:
             # esta correcto esta excepcion?
             raise DataStreamNotFoundException()
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
 
         # armo el documento para actualizar el index.
-        doc={'docid':"DS::%s" % self.datastream.guid,
+        doc={'docid':"DS::%s" % guid,
                 "type": "ds",
                 "script": "ctx._source.fields.hits+=1"}
 
