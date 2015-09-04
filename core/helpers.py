@@ -1,44 +1,10 @@
-import json, re, unicodedata, urllib2, importlib, logging
-
+import json, re, logging
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
-from django.template.defaultfilters import slugify as django_slugify
-from django.core.validators import RegexValidator
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
-from babel import numbers, dates
-
 from core.primitives import PrimitiveComputer
-from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
 logger = logging.getLogger(__name__)
-
-
-
-
-# Lo borro porque me explicaron que no se va usar mas
-# /home/mativs/Projects/datal/core/chart_manager/views.py
-# /home/mativs/Projects/datal/core/datastream_manager/views.py:
-# /home/mativs/Projects/datal/workspace/reports_manager/views.py:
-
-class Day(Aggregate):
-    """Custom aggregator
-    """
-    sql_function = 'DATE'
-    sql_template = "%(function)s(%(field)s)"
-
-    def __init__(self, lookup, **extra):
-        self.lookup = lookup
-        self.extra = extra
-
-    def _default_alias(self):
-        return '%s__%s' % (self.lookup, self.__class__.__name__.lower())
-    default_alias = property(_default_alias)
-
-    def add_to_query(self, query, alias, col, source, is_summary):
-        super(Day, self).__init__(col, source, is_summary, **self.extra)
-        query.aggregate_select[alias] = self
 
 # Lo comento porque supuestamente no se va a uar mas
 # /home/mativs/Projects/datal/workspace/managers.py
