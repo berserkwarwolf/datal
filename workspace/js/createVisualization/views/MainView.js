@@ -10,6 +10,9 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
+        console.log( 'start' );
+        console.log( this.index );
+
         this.model = new charts.models.Chart({
             datastream_revision_id: options.datastream_revision_id,
             // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
@@ -27,7 +30,7 @@ var MainView = Backbone.View.extend({
         //Buttons views
         this.buttonsView = new ButtonsView({
             // TODO: this should be a child element of the main view
-            el: this.$('.buttons_view_container')
+            el: this.$('.section-title .buttons_view_container')
         });
         this.buttonsView.setSteps(this.steps[this.currentFlow]);
         this.buttonsView.render();
@@ -132,10 +135,18 @@ var MainView = Backbone.View.extend({
 
     previous: function(){
 
+        console.log( 'previous' );
+        console.log( this.index );
+
         // Previous
         if(this.index > 0){
             this.steps[this.currentFlow][this.index].finish();
             this.index--;
+            if( this.index == 0 ){
+                this.hideNavigation();
+            }else{
+                this.showNavigation();
+            }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
 
@@ -148,11 +159,20 @@ var MainView = Backbone.View.extend({
 
     next: function(){
 
+        console.log( 'next' );
+        console.log( this.index );
+
         // Next
         if( this.index < (this.steps[this.currentFlow].length-1) ){
+
             //this.model.set('output',output);
             this.steps[this.currentFlow][this.index].finish();
             this.index++;
+            if( this.index == 0 ){
+                this.hideNavigation();
+            }else{
+                this.showNavigation();
+            }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
 
@@ -197,7 +217,17 @@ var MainView = Backbone.View.extend({
 
     // TODO: this should be handled by the ButtonsView
     selectNavigationTab: function(index){
-        $('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)+1 ) );
+        $('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)-1 ) );
+    },
+
+    showNavigation: function(){
+        $('#buttons_view_container').show();
+        $('#start-title').hide();
+    },
+
+    hideNavigation: function(){
+        $('#buttons_view_container').hide();
+        $('#start-title').show();
     }
 
 
