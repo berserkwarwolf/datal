@@ -31,6 +31,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         if guid:
             dataset_revision = DatasetRevision.objects.select_related().get(
                 dataset__guid=guid,
+                pk=F(fld_revision_to_get),
                 category__categoryi18n__language=language,
                 dataseti18n__language=language
             )
