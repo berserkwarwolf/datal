@@ -84,17 +84,29 @@ charts.models.Chart = Backbone.Model.extend({
     fetchPreviewData: function () {
         var self = this;
 
-        return $.getJSON('/visualizations/preview', {
+        var params = {
             datastream_revision_id: self.get('datastream_revision_id'),
             data: self.get('range_data'),
             headers: self.get('range_headers'),
             labels: self.get('range_labels'),
             nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset'),
-            invertData:  self.get('invertData'),
-            invertedAxis:  self.get('invertedAxis')
-        }).then(function (response) {
+            nullValuePreset:  self.get('nullValuePreset')
+        };
+
+        if(self.get('invertData')=="checked"){
+            params['invertData'] = self.get('invertData');
+        }
+
+        if(self.get('invertedAxis')){
+            params['invertedAxis'] = "checked";
+        }
+
+        return $.getJSON('/visualizations/preview', params)
+        .then(function (response) {
             self.formatResponseData(response.series, response.values, response.labels);
+        })
+        .error(function(response){
+            console.error('error en fetch');
         });
     },
 
