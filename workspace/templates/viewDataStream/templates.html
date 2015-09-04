@@ -197,12 +197,8 @@
 
         <% }else{ %>
 
-          {% comment %}
-
           <!-- Main Action - Create Viz -->
           <a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
-
-          {% endcomment %}
 
           <% if(status != StatusChoices.PUBLISHED){ %>
 
@@ -215,12 +211,8 @@
 
       {% elif auth_manager.is_editor %}
 
-        {% comment %}
-
         <!-- Main Action - Create Viz -->
         <a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
-
-        {% endcomment %}
 
         <% if( status == StatusChoices.DRAFT  ){ %>
 
