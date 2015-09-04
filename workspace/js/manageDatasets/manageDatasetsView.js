@@ -68,6 +68,7 @@ var ManageDatasetsView = Backbone.View.extend({
             $('.no-results-view').removeClass('hidden');
             $('.manager').addClass('hidden');
             $('#id_dataviews_option').addClass('disabled').removeAttr('href');
+            $('#id_visualizations_option').addClass('disabled').removeAttr('href');
         }
     },
 

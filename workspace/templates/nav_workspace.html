@@ -14,7 +14,7 @@
 
     <!-- Data Views -->
     <li>
-        <a id="id_dataviews_option" {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.index' %}"{% endif %} class="button primary nav-dataviews {% if stats.account_total_datasets == 0 %} disabled {% endif %}">
+        <a id="id_dataviews_option" {% if stats.account_total_datasets != 0 %}href="{% url 'manageDataviews.index' %}"{% endif %} class="button primary nav-dataviews {% if not stats.account_total_datasets %} disabled {% endif %}">
           <span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}
         </a>
     </li>
@@ -23,8 +23,8 @@
     <li>
       <a id="id_visualizations_option" 
         {% if stats.account_total_datastreams != 0 %}href="{% url 'manageVisualizations.index' %}"{% endif %}
-        class="button primary nav-visualizations">
-        <span class="icon icon-visualizations {% if stats.account_total_datastreams == 0 %} disabled {% endif %}"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %} {{stats.account_total_datastreams}}
+        class="button primary nav-visualizations {% if not stats.account_total_datastreams %} disabled {% endif %}">
+        <span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}
       </a>
     </li>
     
