@@ -132,22 +132,23 @@ charts.views.GooglePieChart = charts.views.PieChart.extend({
     formatData: function (data) {
         var dataTable = new google.visualization.DataTable();
 
-        // view parse data
+//        var rows = data.rows;
+            /*fieldnames = [_.map(data.fields, function (field) {
+                return field[1];
+            })];*/
 
-          dataTable.addColumn('string', 'Demo Data');
-          dataTable.addColumn('number', 'Demo');
-          dataTable.addRows([
-            ['Demo1', 33],
-            ['Demo2', 26],
-            ['Demo3', 22]
-          ]);
+        var graphData = [];
 
-       /* _.each(data.fields, function (field,i) {
-            dataTable.addColumn((i==0)?'string':field[0], field[1]);
+        _.each(data.rows,function(e,i){
+            graphData.push([e[0],e[1]]);
         });
 
-        console.log(data.rows);
-        dataTable.addRows(data.rows);*/
+        console.log(graphData);
+
+        dataTable.addColumn('string', 'Label');
+        dataTable.addColumn('number', 'Data');
+
+        dataTable.addRows(graphData);
 
         return dataTable;
     },
