@@ -11,9 +11,6 @@ var ChartView = StepViewSPA.extend({
 			'click button.chartType': 		'onChartTypeClicked',
 			'change select#chartLibrary': 	'onChartLibraryChanged',
 			
-			'keyup input#chartTitle': 		'onInputChanged',
-			'keyup input#yTitle': 			'onInputChanged',
-			'keyup input#xTitle': 			'onInputChanged',
 			'keyup input#nullValuePreset': 	'onInputChanged',
 			
 			'change input[type=radio]': 	'onRadioChanged',
@@ -51,15 +48,25 @@ var ChartView = StepViewSPA.extend({
 	},	
 
 	onCloseModal: function () {
+		this.fetchPreviewData();
+	},
+
+	fetchPreviewData: function(){
 		$("#ajax_loading_overlay").show();
-		this.model.fetchPreviewData().then(function () {
+		this.model.fetchPreviewData()
+		.then(function () {
 			$("#ajax_loading_overlay").hide();
-		});
+		})
+		.error(function(response){
+			$("#ajax_loading_overlay").hide();
+        });;
 	},
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.attr('name'), input.prop('checked'));
+		console.log(input.attr('name'));
+		this.fetchPreviewData();
 	},
 
 	onChangeData: function (model) {
@@ -88,6 +95,7 @@ var ChartView = StepViewSPA.extend({
 	onInputChanged: function(e){
 		var input = $(e.currentTarget);
 		this.model.set(input.data('ref'), input.val());
+		this.fetchPreviewData();
 	},
 
 	onRadioChanged: function(e){
@@ -97,6 +105,7 @@ var ChartView = StepViewSPA.extend({
 		if(input.val()=='given'){
 			$('#nullValuePreset').show();
 		}else{
+			this.fetchPreviewData();
 			$('#nullValuePreset').hide();
 		}
 	},
