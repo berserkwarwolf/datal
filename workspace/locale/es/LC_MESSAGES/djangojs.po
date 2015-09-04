@@ -819,3 +819,12 @@ msgstr "Vista guardada exitosamente."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Etiquetas para esta Vista"
+
+msgid "APP-VIZ-CUSTOMIZE-TEXT"
+msgstr "Personalización"
+
+msgid "APP-VIZ-METADATA-TEXT"
+msgstr "Descripción"
+
+msgid "APP-VIZ-FINISH-TEXT"
+msgstr "Revisión"

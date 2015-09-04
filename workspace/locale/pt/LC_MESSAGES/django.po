@@ -3091,15 +3091,6 @@ msgstr "Geo"
 msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
 msgstr "Identify countries, continents or markers with color scale density"
 
-msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
-msgstr "Visualization"
-
-msgid "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE"
-msgstr "Description"
-
-msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
-msgstr "Revision"
-
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
 msgstr "Compare over time"
 
@@ -3216,3 +3207,12 @@ msgstr "It's what you will see in the tooltip map"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
+
+msgid "APP-VIZ-CUSTOMIZE-TEXT"
+msgstr "Personalización"
+
+msgid "APP-VIZ-METADATA-TEXT"
+msgstr "Descripción"
+
+msgid "APP-VIZ-FINISH-TEXT"
+msgstr "Revisión"

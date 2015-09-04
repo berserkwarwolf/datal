@@ -11,8 +11,32 @@ from core.exceptions import *
 class VisualizationLifeCycleManager():
     """ Manage a visualization Life Cycle"""
 
-    def __init__(self, user_id, resource=None, resource_id=0, visualization_revision_id=0):
-        pass
+    def __init__(self, user, resource=None, language=None, visualization_id=0, visualization_revision_id=0):
+        super(VisualizationLifeCycleManager, self).__init__(user, language)
+        # Internal used resources (optional). You could start by dataset or revision
+
+        try:
+            if type(resource) == Visualization:
+                self.visualization = resource
+                self.visualization_revision = VisualizationRevision.objects.select_related().get(pk=self.visualization.last_revision_id)
+            elif type(resource) == VisualizationRevision:
+                self.visualization_revision = resource
+                self.visualization = resource.visualization
+            elif visualization_id > 0:
+                self.visualization = Visualization.objects.get(pk=visualization_id)
+                self.visualization_revision = VisualizationRevision.objects.select_related().get(pk=self.visualization.last_revision_id)
+            elif visualization_revision_id > 0:
+                self.visualization_revision = VisualizationRevision.objects.select_related().get(pk=visualization_revision_id)
+                self.visualization = self.visualization_revision.visualization
+            else:
+                self.visualization_revision = None
+                self.visualization = None
+        except Visualization.DoesNotExist, VisualizationRevision.DoesNotExist:
+            raise VisualizationNotFoundException()
+
+        if self.visualization and self.visualization_revision:
+            self.visualizationi18n = VisualizationI18n.objects.get(visualization_revision=self.visualization_revision,
+                                                       language=self.visualization.user.language)
 
     def create(self, datastream, title, description='', language=None
             , status=StatusChoices.DRAFT, meta_text='', notes='', impl_details=''):
@@ -41,7 +65,6 @@ class VisualizationLifeCycleManager():
         self.log_activity(action_id=ActionStreams.CREATE)
 
         return self.dao
-
 
     def send_to_review(self, fromEdition=False):
         pass
@@ -243,3 +266,14 @@ class VisualizationLifeCycleManager():
 
     def unindex_resource(self):
         SearchifyDAO().unindex(self.dao.visualization_dict)
+
+    def _log_activity(self, action_id):
+        title = self.visualization_i18n.title if self.visualization_i18n else ''
+
+        return super(VisualizationLifeCycleManager, self)._log_activity(
+            action_id,
+            self.visualization_revision.dataset.id,
+            self.visualization_revision.dataset.type,
+            self.visualization_revision.id,
+            title
+        )

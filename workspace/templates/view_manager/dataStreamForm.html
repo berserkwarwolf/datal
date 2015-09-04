@@ -38,15 +38,15 @@
                 </select>
                 <!-- <span class="required">*</span> -->
             </div>
-            <div class="row clearfix">
+            <div class="row clearfix" style="display:none;">
                 <label for="id_status">{{datastream_form.status.label}}:</label>
                 <div class="formErrorMessageContainer">
                   <select id="id_status" name="status">
-                    <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>
+                    <!-- <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>-->
                     {% for choice_id, choice_name in choices %}
-                      {# temporary fix #}
-                      {% if choice_id == 0 or choice_id == 1 or choice_id == 3 or choice_id == 6 %}
-                      <option value="{{ choice_id }}">{{ choice_name }}</option>
+                      {# temporary fix - Just show draft status = 0 #}
+                      {% if choice_id == 0 %}
+                      <option value="{{ choice_id }}" {% if choice_id == 0 %}selected="selected"{% endif %}>{{ choice_name }}</option>
                       {% endif %}
                     {% endfor %}
                   </select>

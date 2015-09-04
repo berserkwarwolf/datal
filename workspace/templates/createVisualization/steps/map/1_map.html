@@ -10,12 +10,6 @@
 
 				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
 
-				<ol>
-					<li>{% trans "APP-CREATE-MAP-DATA-TITLE" %}</li>
-					<li>{% trans "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE" %}</li>
-					<li>{% trans "APP-CREATE-VISUALIZATION-REVISION-TITLE" %}</li>
-				</ol>
-
 				<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
 
 				<div class="sidebar">
@@ -29,21 +23,25 @@
 							<div class="boxInner">
 
 								<div class="patch active mapTypeId" data-type="ROADMAP">
+									<span><img src="/static/workspace/images/createVisualization/thumbnail_roadmap.gif"></span>
 									<a href="#">{% trans 'CHRT-ROADMAP-TEXT' %}</a>
 									<p>{% trans 'APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT' %}</p>
 								</div>
 
 								<div class="patch mapTypeId" data-type="SATELLITE">
+									<span><img src="/static/workspace/images/createVisualization/thumbnail_satellite.gif"></span>
 									<a href="#">{% trans 'CHRT-SATELLITE-TEXT' %}</a>
 									<p>{% trans 'APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT' %}s</p>
 								</div>
 
 								<div class="patch mapTypeId" data-type="HYBRID">
+									<span><img src="/static/workspace/images/createVisualization/thumbnail_hybrid.gif"></span>
 									<a href="#">{% trans 'CHRT-HYBRID-TEXT' %}</a>
 									<p>{% trans 'APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT' %}</p>
 								</div>
 
 								<div class="patch mapTypeId" data-type="TERRAIN">
+									<span><img src="/static/workspace/images/createVisualization/thumbnail_terrain.gif"></span>
 									<a href="#">{% trans 'CHRT-TERRAIN-TEXT' %}</a>
 									<p>{% trans 'APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT' %}</p>
 								</div>

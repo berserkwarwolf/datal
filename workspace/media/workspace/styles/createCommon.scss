@@ -17,15 +17,16 @@
 .create header h3 span{font-size:$font-size-m;font-weight:normal;color:$font-color-light;}
 .create .insetFormTitle{font-size:$font-size-m;margin:15px 0;font-family:$font-secondary-family;text-transform:uppercase;}
 
-.create .navigation{position:absolute;top:-53px;right:0;}
+.create .navigation,
+.edit .navigation{position:absolute;top:-90px;right:0;}
 .create .navigation a{float:left;margin-left:10px;}
 .create .navigation a.alpha{font-family:Arial,Helvetica,sans-serif;}
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
 .create .title{font-family:$font-titles-family;font-size:$font-size-l;padding:15px 0 15px 0;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;margin-bottom:30px;line-height:normal;}
-.create .required{color:#d21717;padding-left:5px;}
-.create header .required{padding-left:0;}
+.create .required{color:#d21717;padding-left:5px;font-size:16px;vertical-align:top;}
+.create header .required{padding-left:0;vertical-align:baseline;font-size:inherit;}
 
 .create .wrapper1, .create .wrapper2, .create .wrapper3{height:100%;width:100%;
   -webkit-border-radius:3px;
@@ -81,7 +82,7 @@
 .create .formContent .row input[type="file"], 
 .create .formContent .row input[type="url"],
 .create .formContent .row input[type="email"],
-.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;
+.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;display:inline-block;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;

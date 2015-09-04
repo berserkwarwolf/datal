@@ -9,15 +9,14 @@ from core.daos.visualizations import VisualizationDBDAO
 from core.engine import invoke, invoke_chart
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.daos.visualizations import VisualizationHitsDAO
 from microsites.viewChart import forms
-from microsites.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
 
 import urllib
 import json
-import logging
+
 
 def hits_stats(request, vz_id, channel_type=None):
     """
@@ -50,6 +49,7 @@ def action_charttest(request):
     preferences = request.preferences
 
     return render_to_response('viewChart/chart_test.html', locals())
+
 
 def action_view(request, id, slug):
     """
@@ -115,9 +115,6 @@ def action_view(request, id, slug):
             if chart_type != "mapchart":
                 visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
                 result, content_type = invoke(visualization_revision_parameters)
-                #logger = logging.getLogger(__name__)
-                #logger.debug(result)
-
             else:
                 join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
                 #visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
