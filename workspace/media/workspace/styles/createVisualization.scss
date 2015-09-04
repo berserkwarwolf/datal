@@ -10,7 +10,7 @@
     position:relative;margin-top:20px;
 
       ul{
-        width:310px;border-right:1px solid $color-base-extra-light;padding-bottom:50px;
+        width:310px;border-right:1px solid $color-base-extra-light;min-height:500px;
 
           /* Items */
           li{font-family:$font-titles-family, sans-serif;font-weight:300;font-size:$font-size-l;padding:30px 10px;cursor:pointer;color:$font-color-semi-light;border-bottom:1px solid $color-base-extra-light;}
@@ -20,7 +20,7 @@
           /* Títulos */
           li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px;cursor:default;border:0 none;background:none;}
 
-          li.heading:not(:first-child){margin-top:30px;}
+          li.heading:not(:first-child){margin-top:20px;}
       }
 
       ul.navCreatorPicker{
