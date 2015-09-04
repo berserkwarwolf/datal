@@ -1,21 +1,10 @@
-import json, re, unicodedata, urllib2, importlib, logging
-
+import json, re, logging
 from django.conf import settings
 from django.db.models.sql.aggregates import Aggregate
-from django.template.defaultfilters import slugify as django_slugify
-from django.core.validators import RegexValidator
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.db.models import Q
-from babel import numbers, dates
-
 from core.primitives import PrimitiveComputer
-from core.choices import SourceImplementationChoices, STATUS_CHOICES, SOURCE_IMPLEMENTATION_CHOICES, CHANNEL_TYPES
 
 logger = logging.getLogger(__name__)
-
-
-
 
 # Lo borro porque me explicaron que no se va usar mas
 # /home/mativs/Projects/datal/core/chart_manager/views.py
