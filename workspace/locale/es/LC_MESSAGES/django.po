@@ -2667,9 +2667,6 @@ msgstr "Filtrar conjuntos de datos"
 msgid "APP-ADD-NEW-VISUALIZATION-TEXT"
 msgstr "Agregar nueva Visualización"
 
-msgid "APP-ADD-VISUALIZATION-HINT"
-msgstr "Para continuar, seleccione una Vista de datos."
-
 msgid "APP-FILTER-VISUALIZATIONS-TEXT"
 msgstr "Filtrar visualizaciónes"
 
@@ -3006,6 +3003,8 @@ msgstr "Crea visualizaciones"
 msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Crea un nuevo conjunto de datos para comenzar"
 
+msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "¿Qué vista quieres usar?"
 
 
 

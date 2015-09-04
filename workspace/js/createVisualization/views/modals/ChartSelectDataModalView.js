@@ -52,7 +52,7 @@ var ChartSelectDataModalView = ModalView.extend({
     onClickCancel: function (e) {
         this.collection.reset();
         this.selectedCellRangeView.clear();
-        this.close(); //Close modal
+        this.close();
     },
 
     createDataTableView: function (payload) {

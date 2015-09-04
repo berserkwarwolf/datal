@@ -20,7 +20,7 @@
 
 /* 48px icons */
 .size-48{
-	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 240px auto;width:48px;height:48px;}
 
 	/* Nav local */
 	.icon-home,
@@ -139,3 +139,14 @@
 
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
+
+
+	/* Maps */
+	.icon-map-marker{background-position:-12px -948px;}
+	.icon-map-marker.size-48{background-position:-24px -1896px;}
+
+	.icon-map-trace{background-position:-12px -984px;}
+	.icon-map-trace.size-48{background-position:-24px -1968px;}
+
+	.icon-map-geo{background-position:-12px -1020px;}
+	.icon-map-geo.size-48{background-position:-24px -2040px;}
