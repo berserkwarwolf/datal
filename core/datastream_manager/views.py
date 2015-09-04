@@ -14,7 +14,7 @@ from core.cache import Cache
 from core.datastream_manager import forms
 from core.daos.datastreams import DataStreamDBDAO
 from core.engine import invoke
-from core.helpers import jsonToGrid, Day, RequestProcessor
+from core.helpers import jsonToGrid, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
