@@ -72,7 +72,8 @@ $(document).ready(function(){
     changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ dataset.public_url }}"
+    publicUrl: "{{ dataset.public_url }}",
+    createdAt: "{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}"
   });
   var DatasetView = new datasetView({model: Dataset});
 });
