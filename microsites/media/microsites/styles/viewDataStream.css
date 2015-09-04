@@ -90,7 +90,7 @@ html, body{background:url(../images/microsites/bg_body.gif) repeat;}
 .tabs .icons > li{border-bottom:1px solid #d1cfd0;border-top:1px solid #ededee;padding:6px 0;}
 .tabs .icons > li:first-child{border-top:0;padding-top:0;}
 .tabs .icons > li:last-child{border-bottom:0;padding-bottom:0;}
-.tabs .icon{height:65px;display:block;color:#8e8f91;text-shadow:0 1px 0 rgba(255,255,255,.75);font-size:10px;text-transform:uppercase;text-align:center;font-weight:bold;padding-top:9px;}
+.tabs .icon{height:65px;display:block;color:#8e8f91;text-shadow:0 1px 0 rgba(255,255,255,.75);font-size:10px;text-transform:uppercase;text-align:center;font-weight:bold;padding-top:9px;background:none;width:inherit;}
 .tabs .icon > i{display:block;height:33px;background:url(../images/microsites/ic_sidebarTabs.png) no-repeat;}
 .tabs .icon > span{height:22px;line-height:22px;white-space:nowrap;}
 
