@@ -50,18 +50,25 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-VISUALIZATIONS-TEXT" %}</h1>
-<div class="bulk-actions FL clearfix " style="display:none;">
-   <select id="id_bulkActions" class="FL">
-      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
-      <!-- <option value="edit">{% trans 'APP-EDIT-TEXT' %}</option> -->
-      <option value="delete">{% trans 'APP-DELETE-TEXT' %}</option>
-   </select>
-   <button id="id_applyBulkActions" class="button black small FL" disabled>{% trans 'APP-APPLY-TEXT' %}</button>
+
+<div class="context-menu clearfix">
+  
+  <!-- Column Left -->
+  <div class="col-xs-7">    
+    
+    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_visualizations }})</span></h1>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-xs-5 context-buttons clearfix">
+    
+    <a id="id_addNewButton" class="button primary FR" title="{% trans 'APP-ADDNEWVISUALIZATIONTEXT' %}">{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}</a>
+
+  </div>
+
 </div>
-<ul class="actions FR">
-   <li><a id="id_addNewButton" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-</ul>
+
 {% endblock %}
 
 {% block content %}
@@ -72,7 +79,7 @@
       <div class="wrapper3">
 
         <!-- Filters -->
-        <section class="filters-view"></section>
+        <section class="filters-view col-xs-2"></section>
 
         <!-- List -->
         {% include "manageVisualizations/list.html" %}

@@ -135,7 +135,7 @@ $(document).ready(function(){
     status_str: "{{ datastream.status|status_str|capfirst }}",
     title: "{{datastream.title|capfirst}}",
     changeStatusUrl: "{% url 'manageDataviews.change_status' datastream.datastream_revision_id %}",
-    createVizUrl: "TODO",
+    createVizUrl: "{% url 'manageVisualizations.create' %}?datastream_revision_id={{datastream.datastream_revision_id}}",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     publicUrl: "{{ datastream.public_url }}"
