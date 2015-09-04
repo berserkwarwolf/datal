@@ -65,7 +65,6 @@ var ChartView = StepViewSPA.extend({
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.attr('name'), input.prop('checked'));
-		console.log(input.attr('name'));
 		this.fetchPreviewData();
 	},
 

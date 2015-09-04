@@ -3016,77 +3016,68 @@ msgstr "Create a new dataset to begin"
 msgid "APP-SELECT-VISUALIZATION-TEXT"
 msgstr "Which dataview you want to use?"
 
-
-
-
-
-
-
-
-
-
 msgid "APP-CREATE-VISUALIZATION-TEXT"
 msgstr "Create visualization"
 
 msgid "APP-CREATE-VISUALIZATION-TITLE"
-msgstr "¿Qué necesitas mostrar?"
+msgstr "What do you need to show?"
 
 msgid "APP-CREATE-CHARTS-TEXT"
 msgstr "Charts"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-TEXT"
-msgstr "Una comparación"
+msgstr "A comparison"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPOSITION-TEXT"
-msgstr "Una composición estática"
+msgstr "A static composition"
 
 msgid "APP-CREATE-MAPS-TEXT"
 msgstr "Maps"
 
 msgid "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT"
-msgstr "Elementos en un mapa"
+msgstr "Elements on a map"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-IN-TIME-TEXT"
-msgstr "En el tiempo"
+msgstr "In the time"
 
 msgid "APP-LINE-CHART-TEXT"
 msgstr "Line chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-LINE-COMMENT-TEXT"
-msgstr "Cómo evoluciona uno o varios items a lo largo del tiempo"
+msgstr "How one or more items evolves over time"
 
 msgid "APP-AREA-CHART-TEXT"
 msgstr "Area chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-AREA-COMMENT-TEXT"
-msgstr "Como evolucionan varios ítems a lo largo del tiempo"
+msgstr "How many items evolve over time"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-BETWEEN-ITEMS-TEXT"
-msgstr "Entre ítems"
+msgstr "Among items"
 
 msgid "APP-BAR-CHART-TEXT"
 msgstr "Bar chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
-msgstr "Una variable por barra, pocas categorías muchos ítems"
+msgstr "One variable for each bar, few categories, many items"
 
 msgid "APP-COLUMN-CHART-TEXT"
 msgstr "Column chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-COLUMN-COMMENT-TEXT"
-msgstr "Una o pocas categorías/ítems"
+msgstr "One or a few categories/items"
 
 msgid "APP-PIE-CHART-TEXT"
 msgstr "Pie chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-PIE-COMMENT-TEXT"
-msgstr "Porcentajes que componen un total"
+msgstr "Percentages making up a total"
 
 msgid "APP-TRACE-MAP-TEXT"
-msgstr "Trazado"
+msgstr "Trace"
 
 msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
-msgstr "Draw geometries, lines or polygons usign GIS datasets"
+msgstr "Draw geometric, lines or polygons using GIS datasets"
 
 msgid "APP-MARKERS-MAP-TEXT"
 msgstr "Markers"
@@ -3098,7 +3089,7 @@ msgid "APP-GEO-MAP-TEXT"
 msgstr "Geo"
 
 msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
+msgstr "Identify countries, continents or markers with color scale density"
 
 msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
 msgstr "Visualization"
@@ -3110,16 +3101,16 @@ msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
 msgstr "Revision"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
-msgstr "Compara en el tiempo"
+msgstr "Compare over time"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT"
-msgstr "Compara entre items"
+msgstr "Compare between items"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT"
-msgstr "Composición estática"
+msgstr "Static composition"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT"
-msgstr "Se está usando"
+msgstr "You are using"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT"
 msgstr "Google visualizations"
@@ -3128,13 +3119,13 @@ msgid "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT"
 msgstr "D3"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE"
-msgstr "¿No se ve bien?"
+msgstr "Doesn't look good?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
-msgstr "Cambiar filas/columnas"
+msgstr "Change rows/columns"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reordenar datos"
+msgstr "Reorder data"
 
 msgid "APP-DEFAULT-TEXT"
 msgstr "Default"
@@ -3155,10 +3146,10 @@ msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
 msgstr "Set to a given value"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
-msgstr "Seleccione los datos que desee representar"
+msgstr "Select the data you want to represent"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
-msgstr "Origen de la fuente de datos"
+msgstr "Origin of the data source"
 
 msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
 msgstr "Choose a map"
@@ -3176,37 +3167,37 @@ msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
 msgstr "A physical map based on terrain information"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
-msgstr "Define el zoom inicial"
+msgstr "Set initial zoom"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT"
-msgstr "El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación."
+msgstr "The user can anyway, zoom the map in the publication."
 
 msgid "APP-CREATE-MAP-TITLE"
-msgstr "Crea un mapa de puntos"
+msgstr "Create map"
 
 msgid "APP-CREATE-MAP-DATA-TITLE"
-msgstr "Datos del mapa"
+msgstr "Map data"
 
 msgid "APP-GRAPH-TEXT"
 msgstr "Graph"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "1. ¿Cuáles son los intervalos con datos?"
+msgstr "1. Which are the data intervals?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "2. Etiquetas (Eje X)"
+msgstr "2. Tags (X axis)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
-msgstr "Las categorías a comparar"
+msgstr "Categories to compare"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "3. Encabezado/s"
+msgstr "3. Header/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
-msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+msgstr "You can compare data from various categories in parallel. They shall be specified in the referencais or legends."
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
-msgstr "Seleccione los valores para el mapa (columnas o filas)"
+msgstr "Select values for the map (columns or rows)"
 
 msgid "APP-CREATE-MAP-TEXT"
 msgstr "Create map"
@@ -3221,4 +3212,7 @@ msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
 msgstr "3. Markers information"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
-msgstr "Es lo que verás en el tooltip del mapa"
+msgstr "It's what you will see in the tooltip map"
+
+msgid "APP-ADDNEWVISUALIZATION-TEXT"
+msgstr "New Visualization"

@@ -3006,16 +3006,6 @@ msgstr "Crea un nuevo conjunto de datos para comenzar"
 msgid "APP-SELECT-VISUALIZATION-TEXT"
 msgstr "¿Qué vista quieres usar?"
 
-
-
-
-
-
-
-
-
-
-
 msgid "APP-CREATE-VISUALIZATION-TEXT"
 msgstr "Crea una visualización"
 
@@ -3059,7 +3049,7 @@ msgid "APP-BAR-CHART-TEXT"
 msgstr "Gráfico de barras"
 
 msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
-msgstr "Una variable por barra, pocas categorías muchos ítems"
+msgstr "Una variable por barra, pocas categorías, muchos ítems"
 
 msgid "APP-COLUMN-CHART-TEXT"
 msgstr "Gráfico de columnas"
@@ -3077,19 +3067,19 @@ msgid "APP-TRACE-MAP-TEXT"
 msgstr "Trazado"
 
 msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
-msgstr "Draw geometries, lines or polygons usign GIS datasets"
+msgstr "Dibuja geométricas, líneas o polígonos utilizando conjuntos de datos GIS"
 
 msgid "APP-MARKERS-MAP-TEXT"
 msgstr "Marcadores"
 
 msgid "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
+msgstr "Identifica varias ubicaciones utilizando conjuntos de datos GIS"
 
 msgid "APP-GEO-MAP-TEXT"
 msgstr "Marcadores"
 
 msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
+msgstr "Identifica países, continentes o marcadores con densidad de escala de colores"
 
 msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
 msgstr "Visualización"
@@ -3155,16 +3145,16 @@ msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
 msgstr "Elige un mapa"
 
 msgid "APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT"
-msgstr "The default road map view"
+msgstr "La hoja de ruta predeterminada"
 
 msgid "APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT"
-msgstr "Google Earth satellite images"
+msgstr "Imágenes satelitales de Google Earth"
 
 msgid "APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT"
-msgstr "A mixture of normal and satellite views"
+msgstr "Combinación de vistas normales y satelitales"
 
 msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
-msgstr "A physical map based on terrain information"
+msgstr "Un mapa físico basado en información del terreno"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
 msgstr "Define el zoom inicial"
@@ -3213,3 +3203,6 @@ msgstr "3. Información de marcadores"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
 msgstr "Es lo que verás en el tooltip del mapa"
+
+msgid "APP-ADDNEWVISUALIZATION-TEXT"
+msgstr "Nueva visualización"
