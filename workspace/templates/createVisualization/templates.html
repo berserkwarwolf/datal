@@ -22,7 +22,10 @@
 
   <ul class="buttons-bar" data-step="0">
     <% _.each(steps, function(step) { %>
-      <li class="step<%= (step.ix) %>"><a id="id_step<%= (step.ix) %>Button" data-step="<%= (step.ix) %>" rel="<%= (step.ix) %>" class="" title="<%= step.name %>"><%= step.name %></a></li>
+      <li class="step<%= (step.ix)-1 %>">
+        <a id="id_step<%= (step.ix) %>Button" data-step="<%= (step.ix) %>" rel="<%= (step.ix) %>" class="" title="<%= step.name %>">
+          <%= step.name %></a>
+        </li>
     <% }); %>
   </ul>
 
