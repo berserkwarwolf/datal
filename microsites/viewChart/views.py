@@ -11,7 +11,7 @@ from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.daos.visualizations import VisualizationHitsDAO
 from microsites.viewChart import forms
-from microsites.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
 
