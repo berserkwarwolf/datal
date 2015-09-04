@@ -44,19 +44,19 @@ var MainView = Backbone.View.extend({
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view')
         }).init();
 
         var metadataView = new MetadataView({
-          name: gettext('APP-METADATA-TEXT'), 
+          name: gettext('APP-VIZ-METADATA-TEXT'), 
           model: this.model,
           el: this.$('.step-2-view')
         }).init();
 
         var finishView = new FinishView({
-          name: gettext('APP-FINISH-TEXT'),
+          name: gettext('APP-VIZ-FINISH-TEXT'),
           model: this.model,
           el: this.$('.step-3-view')
         }).init();
@@ -68,19 +68,19 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view-map')
         }).init();
 
        /* var mapMetadataView = new MapMetadataView({
-          name: gettext('APP-METADATA-TEXT'), 
+          name: gettext('APP-VIZ-METADATA-TEXT'), 
           model: this.model,
           el: this.$('.step-2-view-map')
         }).init();*/
 
         var mapFinishView = new MapFinishView({
-          name: gettext('APP-FINISH-TEXT'),
+          name: gettext('APP-VIZ-FINISH-TEXT'),
           model: this.model,
           el: this.$('.step-3-view-map')
         }).init();

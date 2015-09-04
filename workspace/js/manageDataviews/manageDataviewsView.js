@@ -71,6 +71,7 @@ var ManageDataviewsView = Backbone.View.extend({
         if (collection.length === 0) {
             $('.no-results-view').removeClass('hidden');
             $('.manager').addClass('hidden');
+            $('#id_visualizations_option').addClass('disabled').removeAttr('href');
         }
     },
 
