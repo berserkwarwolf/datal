@@ -2275,7 +2275,7 @@ msgid "APP-FEEDBACK-TEXT"
 msgstr "Feedback"
 
 msgid "LANDINGPAGE-SECTION-TITLE"
-msgstr "Bienvenido "
+msgstr "Bienvenido"
 
 msgid "LANDINGPAGE-ACTIVITY-TITLE"
 msgstr "Actividad reciente de la cuenta"
