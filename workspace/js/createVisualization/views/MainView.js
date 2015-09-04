@@ -27,7 +27,7 @@ var MainView = Backbone.View.extend({
         //Buttons views
         this.buttonsView = new ButtonsView({
             // TODO: this should be a child element of the main view
-            el: $('#buttons_view_container')
+            el: this.$('.buttons_view_container')
         });
         this.buttonsView.setSteps(this.steps[this.currentFlow]);
         this.buttonsView.render();
