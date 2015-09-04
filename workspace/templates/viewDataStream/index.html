@@ -138,7 +138,8 @@ $(document).ready(function(){
     createVizUrl: "{% url 'manageVisualizations.create' %}?datastream_revision_id={{datastream.datastream_revision_id}}",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ datastream.public_url }}"
+    publicUrl: "{{ datastream.public_url }}",
+    createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst }}"
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({
