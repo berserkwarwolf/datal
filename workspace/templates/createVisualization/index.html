@@ -65,9 +65,6 @@
 
 {% block sectionTitle %}
 
-<!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
-<div id="buttons_view_container" class="buttons_view_container"></div>
-
 {% endblock %}
 
 {% block content %}
@@ -77,6 +74,8 @@
 
     <!-- Steps will be Rendered here -->
 
+    <!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
+    <div class="buttons_view_container"></div>
 
     <!-- Include charts templates -->
     {% include "createVisualization/steps/0_start.html" %}

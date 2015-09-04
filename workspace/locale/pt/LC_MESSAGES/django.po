@@ -3207,3 +3207,12 @@ msgstr "It's what you will see in the tooltip map"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
+
+msgid "APP-VIZ-CUSTOMIZE-TEXT"
+msgstr "Personalización"
+
+msgid "APP-VIZ-METADATA-TEXT"
+msgstr "Descripción"
+
+msgid "APP-VIZ-FINISH-TEXT"
+msgstr "Revisión"
