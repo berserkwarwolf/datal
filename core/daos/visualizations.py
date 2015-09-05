@@ -5,7 +5,7 @@ import logging
 import json
 
 from django.db.models import Q, F
-from django.db import connection
+from django.db import connection, IntegrityError
 from django.db.models import Count
 from django.core.serializers.json import DjangoJSONEncoder
 
@@ -112,6 +112,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             public_url = '{}/visualizations/{}/{}'.format(domain, visualization_revision.visualization.id, slugify(visualizationi18n.title))
 
         visualization = dict(
+            visualization=visualization_revision.visualization,
             visualization_id=visualization_revision.visualization.id,
             visualization_revision_id=visualization_revision.id,
             user_id=visualization_revision.user.id,
@@ -122,6 +123,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             status=visualization_revision.status,
             meta_text=visualization_revision.meta_text,
             guid=visualization_revision.visualization.guid,
+            impl_details=visualization_revision.impl_details,
             created_at=visualization_revision.created_at,
             last_revision_id=visualization_revision.visualization.last_revision_id,
             last_published_date=visualization_revision.visualization.last_published_revision_date,
@@ -133,7 +135,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             parameters=parameters,
             public_url=public_url,
             slug=slugify(visualizationi18n.title),
-            lib=visualization_revision.lib
+            lib=visualization_revision.lib,
+            datastream_revision_id=visualization_revision.datastream_revision_id
         )
 
         return visualization

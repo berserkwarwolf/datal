@@ -33,6 +33,7 @@ class ResourceSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'link', obj, ['permalink'])
         self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
+        self.tryKeysOnDict(answer, 'result', obj, ['result'])
 
         if answer['link']:
             domain = self.context['request'].auth['microsite_domain']

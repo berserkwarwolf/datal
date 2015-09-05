@@ -16,7 +16,8 @@ from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
-from workspace.manageVisualizations.forms import *
+from workspace.manageVisualizations import forms
+from core.docs import VZ
 from workspace.decorators import *
 
 logger = logging.getLogger(__name__)
@@ -332,3 +333,43 @@ def preview(request):
     else:
         return HttpResponse('Error!')
 
+def action_invoke(request):
+    form = forms.RequestForm(request.GET)
+    if form.is_valid():
+        preferences = request.preferences
+        try:
+            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
+            visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
+        except VisualizationRevision.DoesNotExist:
+            return HttpResponse("Viz doesn't exist!") # TODO
+        else:
+            query = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+            query['pId'] = visualizationrevision_id
+
+            zoom = form.cleaned_data.get('zoom')
+            if zoom is not None:
+                query['pZoom'] = zoom
+
+            bounds = form.cleaned_data.get('bounds')
+            if bounds is not None:
+                query['pBounds'] = bounds
+            else:
+                query['pBounds'] = ""
+
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = limit
+
+            page = form.cleaned_data.get('page')
+            if page is not None:
+                query['pPage'] = page
+
+            #query["ver"] = 6
+            #return HttpResponse(str(query) + str(request.GET), "json")
+
+            result, content_type = invoke_chart(query)
+            if not result:
+                result = "SIN RESULTADO para %s" % query
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Form Error!')
