@@ -12,9 +12,6 @@ class VisualizationLifeCycleManager():
     """ Manage a visualization Life Cycle"""
 
     def __init__(self, user, resource=None, language=None, visualization_id=0, visualization_revision_id=0):
-        super(VisualizationLifeCycleManager, self).__init__(user, language)
-        # Internal used resources (optional). You could start by dataset or revision
-
         try:
             if type(resource) == Visualization:
                 self.visualization = resource
@@ -38,33 +35,36 @@ class VisualizationLifeCycleManager():
             self.visualizationi18n = VisualizationI18n.objects.get(visualization_revision=self.visualization_revision,
                                                        language=self.visualization.user.language)
 
-    def create(self, datastream, title, description='', language=None
-            , status=StatusChoices.DRAFT, meta_text='', notes='', impl_details=''):
-        """ create a new visualization """
-        if not language:
-            language = self.user.language
+    def create(self, datastream_rev, allowed_states=CREATE_ALLOWED_STATES, **fields):
+        """ Create a new DataStream """
 
-        allowed_states = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.PUBLISHED]
-        if status not in allowed_states:
+        # Check for allowed states
+        status = int(fields.get('status', StatusChoices.DRAFT))
+
+        if int(status) not in allowed_states:
             raise IllegalStateException(
                                     from_state=None,
                                     to_state=status,
                                     allowed_states=allowed_states)
 
-        self.dao.create(datastream=datastream, title=title
-            , description=description, language=language, status=status
-            , meta_text=meta_text, notes=notes, impl_details=impl_details)
-        self.visualization_revision = self.dao.visualization_revision
-        self.visualization = self.dao.visualization
-        self.visualization_i18n = self.dao.visualization_i18n
+        #language = fields.get('language', self.user.language)
+        #category = Category.objects.get(pk=fields['category_id'])
+        self.datastream, self.datastream_revision = DataStreamDBDAO().create(
+            user=self.user,
+            #category=category,
+            #language=language,
+            **fields
+        )
 
+        self._log_activity(ActionStreams.CREATE)
+
+        # permite publicar al crear
         if status == StatusChoices.PUBLISHED:
-            self.publish()
+            self.publish(allowed_states=CREATE_ALLOWED_STATES)
+        else:
+            self._update_last_revisions()
 
-        self.update_last_revisions()
-        self.log_activity(action_id=ActionStreams.CREATE)
-
-        return self.dao
+        return self.datastream_revision
 
     def send_to_review(self, fromEdition=False):
         pass
