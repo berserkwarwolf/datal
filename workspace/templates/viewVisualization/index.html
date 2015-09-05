@@ -9,7 +9,7 @@
 <link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/detailCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
@@ -62,15 +62,39 @@
 {% endblock %}
 
 {% block content %}
-<div class="wrapper1">
-    <div class="wrapper2 clearfix">
-        <div class="wrapper3">
-            <section class="visualization-view col-xs-12">
-                <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
-            </section>
+<div class="col-xs-12 detail" id="id_viewVisualization">
+    <div class="wrapper1">
+        <div class="wrapper2 clearfix">
+            <div class="wrapper3">
+                {# Pending review = 1  #}
+                {% if visualization_revision.status == 1 %}
+                <!-- Review -->
+                    <div class="alert alert-info clearfix" id="id_reviewBar">
+                    {% if auth_manager.is_publisher or auth_manager.is_admin %}
+                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
+                        <div class="navigation FR">
+                            <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+                            <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+                        </div>
+                    {% else %}
+                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Sidebar -->
+                <section class="sidebar-container">
+                    {% include "viewVisualization/sidebar.html" %}
+                </section>
+                <!-- Detail -->
+                <section class="detail-container">
+                    {% include "viewVisualization/detail.html" %}
+                </section>
+            </div>
         </div>
     </div>
 </div>
+
 
 <script type="text/javascript">
 
