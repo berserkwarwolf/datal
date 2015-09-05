@@ -17,7 +17,6 @@ from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
 from workspace.manageVisualizations import forms
-from core.docs import VZ
 from workspace.decorators import *
 
 logger = logging.getLogger(__name__)
