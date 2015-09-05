@@ -31,12 +31,14 @@ class Command(BaseCommand):
             ElasticsearchIndex().flush_index()
             es = ElasticsearchIndex()
 
-            for datasetrevision in DatasetRevision.objects.filter(status=StatusChoices.PUBLISHED):
+            for dataset in Dataset.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
+                datasetrevision=dataset.last_published_revision
                 search_dao = DatasetSearchDAOFactory().create(datasetrevision)
                 search_dao.add()
 
             # TODO Hay que usar el metodo query del DAO
-            for datastreamrevision in DataStreamRevision.objects.filter(status=StatusChoices.PUBLISHED):
+            for datastream in DataStream.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
+                datastreamrevision=datastream.last_published_revision
                 datastream_rev = DataStreamDBDAO().get(
                     datastreamrevision.user.language,
                     datastream_revision_id=datastreamrevision.id,
@@ -44,6 +46,7 @@ class Command(BaseCommand):
                 )
                 search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
                 search_dao.add()
+
                 h = DatastreamHitsDAO(datastream_rev)
 
                 doc={

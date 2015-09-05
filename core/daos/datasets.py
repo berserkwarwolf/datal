@@ -319,6 +319,7 @@ class DatasetSearchIndexDAO():
         return self.TYPE
 
     def _get_id(self):
+        #return "%s::%s" % (self.TYPE.upper(),self.dataset_revision.dataset.guid)
         return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
@@ -375,7 +376,7 @@ class DatasetSearchifyDAO(DatasetSearchIndexDAO):
         self.search_index = SearchifyIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([self._get_id()])
@@ -390,7 +391,7 @@ class DatasetElasticsearchDAO(DatasetSearchIndexDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
