@@ -65,8 +65,8 @@ def action_view(request, id, slug):
         visualization_revision = VisualizationDBDAO().get(
             preferences['account_language'],
             visualization_revision_id=visualizationrevision_id
-
         )
+
         # verify if this account is the owner of this viz
         visualization = Visualization.objects.get(pk=id)
         if account.id != visualization.user.account.id:
@@ -144,11 +144,15 @@ def action_invoke(request):
         preferences = request.preferences
         try:
             visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
+            visualization_revision = VisualizationDBDAO().get(
+                preferences['account_language'],
+                visualization_revision_id=visualizationrevision_id
+
+            )
         except VisualizationRevision.DoesNotExist:
             return HttpResponse("Viz doesn't exist!") # TODO
         else:
-            query = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+            query = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
             query['pId'] = visualizationrevision_id
 
             zoom = form.cleaned_data.get('zoom')

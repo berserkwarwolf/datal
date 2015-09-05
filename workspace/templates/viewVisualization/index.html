@@ -82,17 +82,19 @@ $(document).ready(function(){
         chartLib = "{{chart_lib}}";
 
     var visualizationModel = new visualization({
-        id: "1733",
-        datastream_id: "2222",
-        visualization_id: "1733",
-        title: "Title" , 
-        description: "descripción", 
-        guid: "RAMA-DE-ACTIV-ECONO-2005",
-        chartJson : '{"format":{"lib":"d3","type":"columnchart","chartTemplate":"basicchart","showLegend":"checked","invertedAxis":"checked","nullValueAction":"exclude","nullValuePreset":""},"title":"Mortalidad Seg\u00fan Sexo","data":"B 4 : B 6, D 4 : D 6, F 4 : F 6, H 4 : H 6, J 4 : J 6, L 4 : L 6, N 4 : N 6, P 4 : P 6","chart":{"xTitle":"A\u00f1os","yTitle":"N\u00famero","scale":0,"labelSelection":"B 1, D 1, F 1, H 1, J 1, L 1, N 1, P 1","headerSelection":"A 4 : A 6"}}',
-        status : 'published',
-        visualizationrevision_id : '3610',
-        datastreamrevision_id : '1'
+        id: "{{datastream.datastreamrevision_id}}",
+        datastream_id: "{{datastream.datastream_id}}",
+        visualization_id: "{{visualization_revision.visualization_id}}",
+        title: "{{visualization_revision.title}}" , 
+        description: "{{visualization_revision.description|escapejs}}", 
+        guid: "{{visualization_revision.guid}}",
+        visualizationJson : '{{result|escapejs}}',
+        chartJson : '{{visualization_revision.impl_details|escapejs}}',
+        status : '{{visualization_revision.status}}',
+        visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
+        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}'
     });
+
     var chartView = new viewVisualizationView({
         model: visualizationModel
     });
