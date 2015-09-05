@@ -115,8 +115,6 @@ var ChartView = StepViewSPA.extend({
 		this.model.set('type',type);
 	},
 
-
-
 	changeClass: function(type){
 
 		this.clearClassesChartBg();
@@ -168,8 +166,12 @@ var ChartView = StepViewSPA.extend({
 	
 		if (this.ChartViewClass) {
 
+			if(this.chartInstance){
+				this.chartInstance = this.chartInstance.destroy();
+			}
+
 			this.chartInstance = new this.ChartViewClass({
-				el: this.$('.chartContent'),
+				el: this.chartContent,
 				model: this.model,
 			});
 			
@@ -177,7 +179,6 @@ var ChartView = StepViewSPA.extend({
 				this.clearClassesChartBg();
 				this.chartInstance.render();
 			};
-
 		}
 	},
 

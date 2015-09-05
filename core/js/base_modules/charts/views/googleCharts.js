@@ -3,7 +3,6 @@ var charts = charts || {
     views: {}
 };
 
-
 charts.views.GoogleLineChart = charts.views.LineChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);

@@ -122,7 +122,7 @@ charts.models.Chart = Backbone.Model.extend({
 
         //TODO: arreglar este hack para crear labels vacios
         if (!labels.length)
-            labels = Array(values[0].length).join(',').split(',');
+            labels = Array(values.length).join(',').split(',');
 
         columns.push(labels);
         fields.push(['string', 'labels']);
