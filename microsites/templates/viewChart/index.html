@@ -120,7 +120,7 @@ $(document).ready(function(){
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
         status : '{{visualization_revision.status}}',
-        visualizationrevision_id : '{{visualization_revision.visualizationrevision_id}}',
+        visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
         datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
         embedUrl: "{{base_uri}}{% url "chart_manager.action_embed" visualization_revision.guid %}?end_point={%if url_query%}&{{url_query}}{%endif%}",
         permaLink: "{{base_uri}}{{ visualization_revision.permalink }}",
