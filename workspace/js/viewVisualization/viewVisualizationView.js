@@ -8,18 +8,19 @@ var viewVisualizationView = Backbone.View.extend({
     initialize : function() {
 
         this.template = _.template( $("#context-menu-template").html() );
-        this.listenTo(this.model, "change", this.render);
-
         this.chartsFactory = new charts.ChartsFactory();
 
         this.setupChart();
         this.render();
+        this.listenTo(this.model, "change", this.render);
     },
     setupChart: function () {
-        var type = JSON.parse(this.model.get('chartJson')).format.type,
-            lib = this.model.get('chartLib');
+        this.model.set('chart', {
+            lib: this.model.get('chartLib'),
+            type: JSON.parse(this.model.get('chartJson')).format.type
+        });
 
-        var chartSettings = this.chartsFactory.create(type, lib);
+        var chartSettings = this.chartsFactory.create(this.model.get('chart').type, this.model.get('chart').lib);
 
         this.ChartViewClass = chartSettings.Class;
         this.ChartModelClass = charts.models.Chart;
@@ -37,7 +38,7 @@ var viewVisualizationView = Backbone.View.extend({
     },
     createChartInstance: function () {
         var chartModelInstance = new this.ChartModelClass({
-            type: this.model.get('chart.type'),
+            type: this.model.get('chart').type,
             resourceID: this.model.get('visualizationrevision_id')
         });
 

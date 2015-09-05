@@ -256,6 +256,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {object}
      */
     parseKmlStyles: function (styles) {
+        styles = styles || [];
         var parsedStyles = this.get('stylesDefault');
 
         if(styles.length && styles[0].styles){
