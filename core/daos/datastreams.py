@@ -116,7 +116,6 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 domain = 'http://' + domain
             public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
 
-
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
@@ -144,6 +143,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             sources=sources,
             parameters=parameters,
             public_url=public_url,
+            slug= slugify(datastreami18n.title),
         )
 
         return datastream
