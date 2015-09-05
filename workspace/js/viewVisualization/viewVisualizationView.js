@@ -16,17 +16,15 @@ var viewVisualizationView = Backbone.View.extend({
         this.render();
     },
     setupChart: function () {
-        this.chartFormat = JSON.parse(this.model.get('chartJson')).format;
+        var type = JSON.parse(this.model.get('chartJson')).format.type,
+            lib = this.model.get('chartLib');
 
-        console.log("this.chartFormat:", this.chartFormat);
-
-        var chartSettings = this.chartsFactory.create(this.chartFormat.type,this.chartFormat.lib);
+        var chartSettings = this.chartsFactory.create(type, lib);
 
         this.ChartViewClass = chartSettings.Class;
         this.ChartModelClass = charts.models.Chart;
     },
     render: function () {
-        console.log("this.model:", this.model.toJSON());
         this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
         this.initializeChart();
         this.chartInstance.render();
@@ -38,8 +36,6 @@ var viewVisualizationView = Backbone.View.extend({
         }
     },
     createChartInstance: function () {
-        this.setChartContainerSize();
-
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart.type'),
             resourceID: this.model.get('visualizationrevision_id')
@@ -50,6 +46,8 @@ var viewVisualizationView = Backbone.View.extend({
             model: chartModelInstance
         });
 
+        this.setChartContainerSize();
+
         this.chartInstance.model.fetchData();
     },
     setLoading: function () {
@@ -57,24 +55,35 @@ var viewVisualizationView = Backbone.View.extend({
     },
 
     setChartContainerSize:function(){
-        var $window = $(window),
+        var chartInstance = this.chartInstance,
             container = $(this.chartContainer),
-            $header = $('header.header'),
+            $window = $(window),
+            $mainHeader = $('header.header'),
             $title = $('.main-section .section-title'),
-            $sidebar = $('.main-navigation');
+            $chartHeader = $('header.header');
+
+        var handleResizeEnd = function () {
+            //Calcula el alto de los headers
+            var otherHeights = $mainHeader.outerHeight(true) 
+                             + $title.outerHeight(true)
+                             + $chartHeader.outerHeight(true);
+            //Calucla el alto que deberá tener el contenedor del chart
+            var minHeight = $window.height() - otherHeights - 70;
+            container.css({
+                height: minHeight + 'px'
+            });
+            chartInstance.render();
+        }
+
+        //Calcula el tamaño inicial
+        handleResizeEnd();
 
         //Asigna listener al resize de la ventana para ajustar tamaño del chart
         $window.on('resize', function () {
-            //Calcula el alto de los headers
-            var otherHeights = $header.outerHeight(true) + $title.outerHeight(true)
-                minHeight = $window.height() - otherHeights - 40;
-            //Calcula el ancho de los sidebars
-            var otherWidths = $sidebar.outerWidth(true),
-                minWidth = $window.width() - otherWidths - 80;
-            container.css({
-                height: minHeight + 'px',
-                width: minWidth + 'px'
-            });
-        }).trigger('resize');
+            if(this.resizeTo) clearTimeout(this.resizeTo);
+            this.resizeTO = setTimeout(function() {
+                handleResizeEnd();
+            }, 500);
+        });
     }
 });

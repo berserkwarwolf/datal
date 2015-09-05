@@ -102,8 +102,6 @@ google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 
 
 $(document).ready(function(){
-    var chartType = "{{chart_type}}",
-        chartLib = "{{chart_lib}}";
 
     var visualizationModel = new visualization({
         id: "{{datastream.datastreamrevision_id}}",
@@ -114,6 +112,7 @@ $(document).ready(function(){
         guid: "{{visualization_revision.guid}}",
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
+        chartLib: "{{visualization_revision.lib}}",
         status : '{{visualization_revision.status}}',
         status_str: "{{ visualization_revision.status|status_str|capfirst }}",
         visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
