@@ -256,7 +256,7 @@ def edit(request, datastream_revision_id=None):
 @login_required
 def preview(request):
 
-    form = PreviewForm(request.GET)
+    form = forms.PreviewForm(request.GET)
     logger.error("entering preview handler")
     if form.is_valid():
         logger.error("form is valid")
