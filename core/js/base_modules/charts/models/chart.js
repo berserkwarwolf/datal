@@ -121,11 +121,14 @@ charts.models.Chart = Backbone.Model.extend({
             fields =[];
 
         //TODO: arreglar este hack para crear labels vacios
-        if (!labels.length)
-            labels = Array(values[0].length).join(',').split(',');
-
+        if (!labels.length) {
+            labels = Array.apply(null, {length: values[0].length}).map(Number.call, Number);
+            fields.push(['number', 'labels']);
+        } else {
+            //TODO: revisar el formato del lable
+            fields.push(['string', 'labels']);
+        }
         columns.push(labels);
-        fields.push(['string', 'labels']);
 
         columns = columns.concat(values);
         fields = fields.concat(_.map(series, function (item) {
