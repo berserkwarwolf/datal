@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags static%}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags datastream_tags static%}
 
 {% block meta %}
 
@@ -91,8 +91,11 @@ $(document).ready(function(){
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
         status : '{{visualization_revision.status}}',
+        status_str: "{{ visualization_revision.status|status_str|capfirst }}",
         visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
-        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}'
+        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
+        publicUrl: "{{ visualization_revision.public_url }}",
+        lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     });
 
     var chartView = new viewVisualizationView({
@@ -102,4 +105,7 @@ $(document).ready(function(){
     chartView.setLoading();
 });
 </script>
+
+{# templates backbone #}
+{% include "viewVisualization/templates.html" %}
 {% endblock %}

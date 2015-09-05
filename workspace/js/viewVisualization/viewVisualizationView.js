@@ -2,9 +2,12 @@
  * Backbone View for charts and maps
  */
 var viewVisualizationView = Backbone.View.extend({
-    el : "body",
+    el : ".main-section",
+
     chartContainer: "#id_visualizationResult",
     initialize : function() {
+
+        this.template = _.template( $("#context-menu-template").html() );
         this.listenTo(this.model, "change", this.render);
 
         this.chartsFactory = new charts.ChartsFactory();
@@ -23,6 +26,8 @@ var viewVisualizationView = Backbone.View.extend({
         this.ChartModelClass = charts.models.Chart;
     },
     render: function () {
+        console.log("this.model:", this.model.toJSON());
+        this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
         this.initializeChart();
         this.chartInstance.render();
         return this;
@@ -71,5 +76,5 @@ var viewVisualizationView = Backbone.View.extend({
                 width: minWidth + 'px'
             });
         }).trigger('resize');
-    },
+    }
 });
