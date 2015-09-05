@@ -80,7 +80,7 @@ class DataStreamViewSet(ResourceViewSet):
     def data(self, request, guid=None, pk=None, format='json'):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
-        mutable_get['datastream_revision_id'] = datastream['last_published_revision_id']
+        mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
         form = forms.RequestForm(mutable_get)
         if form.is_valid():
             query = RequestProcessor(request).get_arguments_no_validation()
