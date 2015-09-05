@@ -3,8 +3,8 @@ var MetadataView = StepViewSPA.extend({
 	initialize: function(){
 		this.$el.find('.validate-msg').hide();
 		this.addEvents({
-			'click a.backButton': 'onPreviousButtonClicked',
-			'click a.nextButton': 'onNextButtonClicked'
+			'click .step-2-view a.backButton': 'onPreviousButtonClicked',
+			'click .step-2-view a.nextButton': 'onNextButtonClicked'
 		});
 		this.initNotes();
 	},
@@ -16,8 +16,7 @@ var MetadataView = StepViewSPA.extend({
 		//"textarea.notes": 		"value:meta_notes,		events:['keyup']"
 	},
 
-	onPreviousButtonClicked: function(){
-		console.log(this.model.getMeta());
+	onPreviousButtonClicked: function(e){
 		this.previous();
 	},
 
@@ -39,7 +38,6 @@ var MetadataView = StepViewSPA.extend({
 				}
 			});
 		};
-		console.log(this.model.getMeta());
 	},
 
 	initNotes: function(){
@@ -49,7 +47,6 @@ var MetadataView = StepViewSPA.extend({
         }).panelInstance('id_notes');
 
         this.notesInstance.addEvent('add', function() {
-        	console.log('hola');
 			alert( this.notesInstance.getContent() );
 		});
 

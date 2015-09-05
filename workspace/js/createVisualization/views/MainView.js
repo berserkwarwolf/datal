@@ -10,9 +10,6 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        console.log( 'start' );
-        console.log( this.index );
-
         this.model = new charts.models.Chart({
             datastream_revision_id: options.datastream_revision_id,
             // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
@@ -103,13 +100,15 @@ var MainView = Backbone.View.extend({
         return this;
     },
 
-
     register: function(view, flow){
-        this.listenTo(view,'next',this.next);
-        this.listenTo(view,'previous',this.previous);
-        this.listenTo(view,'openModal',this.openModal);
-        this.listenTo(view,'goTo',this.goTo);
-        this.listenTo(view,'setFlow',this.setFlow);
+        if(!view.initializedEvents){
+            view.initializedEvents = true;
+            this.listenTo(view,'next',this.next);
+            this.listenTo(view,'previous',this.previous);
+            this.listenTo(view,'openModal',this.openModal);
+            this.listenTo(view,'goTo',this.goTo);
+            this.listenTo(view,'setFlow',this.setFlow);
+        }
 
         if(flow){
             this.steps[flow].push(view);
@@ -135,9 +134,6 @@ var MainView = Backbone.View.extend({
 
     previous: function(){
 
-        console.log( 'previous' );
-        console.log( this.index );
-
         // Previous
         if(this.index > 0){
             this.steps[this.currentFlow][this.index].finish();
@@ -149,7 +145,7 @@ var MainView = Backbone.View.extend({
             }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
-
+    
         // Go to first "Static" Step
         }else{
             window.location = this.model.get('startUrl');
@@ -158,9 +154,6 @@ var MainView = Backbone.View.extend({
     },
 
     next: function(){
-
-        console.log( 'next' );
-        console.log( this.index );
 
         // Next
         if( this.index < (this.steps[this.currentFlow].length-1) ){

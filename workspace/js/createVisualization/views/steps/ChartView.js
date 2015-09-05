@@ -5,8 +5,8 @@ var ChartView = StepViewSPA.extend({
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
-			'click a.backButton': 			'onPreviousButtonClicked',
-			'click a.nextButton': 			'onNextButtonClicked',
+			'click .step-1-view a.backButton': 			'onPreviousButtonClicked',
+			'click .step-1-view a.nextButton': 			'onNextButtonClicked',
 			'click button.selectData': 		'onSelectDataClicked',
 			'click button.chartType': 		'onChartTypeClicked',
 			'change select#chartLibrary': 	'onChartLibraryChanged',
@@ -31,8 +31,7 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-		this.listenTo(this.chartSelectDataModalView, 'close',
-			this.onCloseModal, this);
+		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
 
 		this.chartContent = this.$el.find('.chartContent');
 
@@ -183,7 +182,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onPreviousButtonClicked: function(){
-		this.goTo(0);
+		this.previous();
 	},
 
 	onNextButtonClicked: function(){		

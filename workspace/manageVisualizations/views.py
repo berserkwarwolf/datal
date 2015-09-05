@@ -233,7 +233,7 @@ def related_resources(request):
 @login_required
 @require_GET
 def action_view(request, revision_id):
-    datastream_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
+    visualization_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
     return render_to_response('viewVisualization/index.html', locals())
 
 

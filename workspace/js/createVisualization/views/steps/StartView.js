@@ -17,17 +17,20 @@ var StartView = StepViewSPA.extend({
 	}, 
 
 	onChooseType: function (e) {
+		e.stopPropagation();
 		var $target = $(e.currentTarget),
 			type = $target.data('type');
 		this.model.set('isMap', false);
 		this.model.set('type', type);
 		this.setFlow('charts');
+
 		this.next();
 		//this.goTo(1);
 		//this.trigger('step', 1);
 	},
 
 	onChooseMap: function (e) {
+		e.stopPropagation();
 		var $target = $(e.currentTarget),
 			type = $target.data('type');
 		this.model.set('isMap', true);
