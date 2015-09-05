@@ -61,7 +61,8 @@ def action_view(request, id, slug):
     can_export = True
     can_share = False
 
-    DataStreamDBDAO().hit(id, ChannelTypes.WEB)
+    # esto no debería estar????? :) dpadula y la c.... de tu....
+    #DataStreamDBDAO().hit(id, ChannelTypes.WEB)
     notes = datastream['notes']
 
     return render_to_response('viewDataStream/index.html', locals())

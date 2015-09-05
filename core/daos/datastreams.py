@@ -133,7 +133,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             status=datastream_revision.status,
             modified_at=datastream_revision.created_at,
             meta_text=datastream_revision.meta_text,
-            guid=datastream_revision.dataset.guid,
+            guid=datastream_revision.datastream.guid,
             created_at=datastream_revision.dataset.created_at,
             last_revision_id=datastream_revision.dataset.last_revision_id,
             last_published_date=datastream_revision.datastream.last_published_revision_date,
@@ -345,7 +345,9 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        return self.search_index.indexit(self._build_document())
+        output=self.search_index.indexit(self._build_document())
+
+        return (self.datastream_revision.id, self.datastream_revision.datastream.id, output)
         
     def remove(self):
         return self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
@@ -362,6 +364,7 @@ class DatastreamHitsDAO():
 
     def __init__(self, datastream):
         self.datastream = datastream
+        #self.datastream_revision = datastream.last_published_revision
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
         self.cache=Cache()
