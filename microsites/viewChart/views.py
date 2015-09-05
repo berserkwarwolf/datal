@@ -80,16 +80,18 @@ def action_view(request, id, slug):
 
         )
         # verify if this account is the owner of this viz
-        vis = Visualization.objects.get(pk=id)
-        if account.id != vis.user.account.id:
+        visualization = Visualization.objects.get(pk=id)
+        if account.id != visualization.user.account.id:
             raise Http404
+
+        logger.error(visualization_revision)
 
         #for datastream sidebar functions (downloads and others)
         datastream = DataStreamDBDAO().get(
             preferences['account_language'],
-            datastream_revision_id=visualization_revision.datastream_revision_id
+            datastream_revision_id=visualization_revision["datastream_revision_id"]
         )
-        impl_type_nice = set_dataset_impl_type_nice(datastream.impl_type).replace('/', ' ')
+        impl_type_nice = set_dataset_impl_type_nice(datastream["impl_type"]).replace('/', ' ')
     except VisualizationRevision.DoesNotExist:
         return HttpResponse("Viz-Rev doesn't exist!")  # TODO
     else:
@@ -104,26 +106,11 @@ def action_view(request, id, slug):
         can_export = True
         can_share = False
 
-        VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
 
+        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
 
-        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
-
-        chart_type = json.loads(visualization_revision.impl_details).get('format').get('type')
-
-        try:
-            if chart_type != "mapchart":
-                visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-                result, content_type = invoke(visualization_revision_parameters)
-            else:
-                join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
-                #visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
-                #visualization_revision_parameters['pLimit'] = 1000
-                #visualization_revision_parameters['pPage'] = 0
-                # mapCharts are loaded by ajax after
-                # result, content_type = invoke_chart(visualization_revision_parameters)
-        except:
-            result = '{fType="ERROR"}'
+        chart_type = json.loads(visualization_revision["impl_details"]).get('format').get('type')
 
         visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 

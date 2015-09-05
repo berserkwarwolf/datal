@@ -1,1 +1,103 @@
 {% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags static%}
+
+{% block meta %}
+
+{% load static %}
+
+{% compress css %}
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
+
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+
+<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+<script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
+
+<!-- Process Manager -->
+<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Charts types & instances -->
+<script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{% endblock %}
+
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageVisualizations.index' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+{% endblock %}
+
+{% block sectionTitle %}
+
+<div class="context-menu clearfix">
+  <!-- Column Left -->
+  <div class="col-xs-12">    
+    <h1>{% trans "APP-VISUALIZATION-TEXT" %}</h1>
+  </div>
+</div>
+
+{% endblock %}
+
+{% block content %}
+<div class="wrapper1">
+    <div class="wrapper2 clearfix">
+        <div class="wrapper3">
+            <section class="visualization-view col-xs-12">
+                <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['corechart', 'geomap']});
+
+
+$(document).ready(function(){
+    var chartType = "{{chart_type}}",
+        chartLib = "{{chart_lib}}";
+
+    var visualizationModel = new visualization({
+        id: "1733",
+        datastream_id: "2222",
+        visualization_id: "1733",
+        title: "Title" , 
+        description: "descripción", 
+        guid: "RAMA-DE-ACTIV-ECONO-2005",
+        chartJson : '{"format":{"lib":"d3","type":"columnchart","chartTemplate":"basicchart","showLegend":"checked","invertedAxis":"checked","nullValueAction":"exclude","nullValuePreset":""},"title":"Mortalidad Seg\u00fan Sexo","data":"B 4 : B 6, D 4 : D 6, F 4 : F 6, H 4 : H 6, J 4 : J 6, L 4 : L 6, N 4 : N 6, P 4 : P 6","chart":{"xTitle":"A\u00f1os","yTitle":"N\u00famero","scale":0,"labelSelection":"B 1, D 1, F 1, H 1, J 1, L 1, N 1, P 1","headerSelection":"A 4 : A 6"}}',
+        status : 'published',
+        visualizationrevision_id : '3610',
+        datastreamrevision_id : '1'
+    });
+    var chartView = new viewVisualizationView({
+        model: visualizationModel
+    });
+
+    chartView.setLoading();
+});
+</script>
+{% endblock %}

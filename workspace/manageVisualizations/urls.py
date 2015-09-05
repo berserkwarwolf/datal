@@ -13,6 +13,7 @@ urlpatterns = patterns(
     url(r'^(?P<revision_id>\d+)$', action_view, name='manageVisualizations.view'),
     url(r'^remove/(?P<type>[a-z]+)/(?P<visualization_revision_id>\d+)$', remove, name='manageVisualizations.remove'),
     url(r'^remove/(?P<visualization_revision_id>\d+)$', remove, name='manageVisualizations.remove'),
+    url(r'^invoke$', action_invoke, name='manageVisualizations.action_invoke'),
 
     # Pendientes de revision
 
