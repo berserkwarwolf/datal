@@ -46,6 +46,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
+            lib=fields['lib'],
             impl_details=''
         )
         logger.info(visualization_rev)

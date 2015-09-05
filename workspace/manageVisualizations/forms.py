@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy, ugettext
 
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-
+from core.choices import VISUALIZATION_LIBS
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -46,6 +46,7 @@ class VisualizationForm(forms.Form):
     yTitle = forms.CharField(required=False, max_length=200)
     labelSelection = forms.CharField(required=False, max_length=200)
     headerSelection = forms.CharField(required=False, max_length=200)
+    lib = forms.ChoiceField(required=True, choices=VISUALIZATION_LIBS)
     # pInvertData ?
     # lib?
     # pInvertedAxis
