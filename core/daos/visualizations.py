@@ -5,7 +5,7 @@ import logging
 import json
 
 from django.db.models import Q, F
-from django.db import connection
+from django.db import connection, IntegrityError
 from django.db.models import Count
 from django.core.serializers.json import DjangoJSONEncoder
 
