@@ -110,6 +110,7 @@ $(document).ready(function(){
         title: "{{visualization_revision.title}}" , 
         description: "{{visualization_revision.description|escapejs}}", 
         guid: "{{visualization_revision.guid}}",
+        createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
         chartLib: "{{visualization_revision.lib}}",
