@@ -53,7 +53,7 @@ class VisualizationForm(forms.Form):
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
-        visualization_rev = lifecycle.create(revision, **self.cleaned_data)
+        visualization_rev = lifecycle.create(revision, language=request.user.language,  **self.cleaned_data)
 
         return dict(
             status='ok',

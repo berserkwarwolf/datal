@@ -42,6 +42,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             logger.info(visualization)
 
         visualization_rev = VisualizationRevision.objects.create(
+            datastream_revision=datastream_rev,
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,

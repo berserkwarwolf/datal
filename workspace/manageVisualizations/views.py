@@ -18,6 +18,7 @@ from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
+from .forms import VisualizationForm
 
 logger = logging.getLogger(__name__)
 
@@ -86,7 +87,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for resource in resources:
-        print(resource)
         resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
         resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
