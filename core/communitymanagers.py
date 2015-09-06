@@ -118,7 +118,7 @@ def datastream_query_hot_n(self, limit, lang, hot = None):
         datastream_id = row[1]
         title = row[2]
         slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', kwargs={'id': datastream_id, 'slug': slug})
+        permalink = reverse('exportDataStream.action_view', kwargs={'id': datastream_id, 'slug': slug})
         datastreams.append({'id'          : row[0],
                             'title'        : title,
                             'description'  : row[3],

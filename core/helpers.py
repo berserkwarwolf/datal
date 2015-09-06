@@ -21,7 +21,7 @@ def next(p_iterator, p_default=None):
 
 
 # Se va porque se va a refactorear
-# /home/mativs/Projects/datal/core/datastream_manager/views.py
+# /home/mativs/Projects/datal/core/exportDataStream/views.py
 
 def jsonToGrid(p_response, p_page = '', p_limit =''):
     """ p_response is a core.engine.invoke resultset """
@@ -67,9 +67,9 @@ def jsonToGrid(p_response, p_page = '', p_limit =''):
 
 # Se va porque se va a refactorear
 # /home/mativs/Projects/datal/api/views.py
-# /home/mativs/Projects/datal/core/datastream_manager/views.py
+# /home/mativs/Projects/datal/core/exportDataStream/views.py
 # /home/mativs/Projects/datal/microsites/chart_manager/views.py
-# /home/mativs/Projects/datal/microsites/datastream_manager/views.py
+# /home/mativs/Projects/datal/microsites/exportDataStream/views.py
 # /home/mativs/Projects/datal/microsites/viewChart/views.py
 # /home/mativs/Projects/datal/workspace/manageVisualizations/views.py
 

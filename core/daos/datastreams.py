@@ -2,9 +2,16 @@
 import operator
 import time
 import logging
+import json
 
-from django.db.models import Q, F
+from django.db.models import Q, F, Count
 from django.db import IntegrityError
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db import connection
+
+
+from datetime import datetime, timedelta, date
+
 from core.utils import slugify
 from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
@@ -435,7 +442,7 @@ class DatastreamHitsDAO():
             # tomamos solo la parte date
             truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
 
-            qs=DatastreamHits.objects.filter(datastream=self.datastream,created_at__gte=start_date)
+            qs=DataStreamHits.objects.filter(datastream=self.datastream,created_at__gte=start_date)
 
             if channel_type:
                 qs=qs.filter(channel_type=channel_type)
@@ -467,7 +474,7 @@ class DatastreamHitsDAO():
             self.from_cache=False
         else:
             hits=json.loads(hits)
-            self.from_cache=True
+            self.from_cache = True
 
         return hits
 

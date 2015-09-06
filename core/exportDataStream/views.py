@@ -1,7 +1,5 @@
-import logging
 import urllib
 
-from django.core.serializers.json import DjangoJSONEncoder
 from django.core.urlresolvers import reverse
 from django.db.models import Count
 from django.http import HttpResponse, Http404
@@ -70,28 +68,6 @@ def action_xls(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_download(request, id, slug):
-    """ download internal dataset file """
-    try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
-    except:
-        raise Http404
-    else:
-        url = active_datastore.build_url(
-            request.bucket_name,
-            datastream.end_point.replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
-        )
-
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream.impl_type))
-        redirect = HttpResponse(status=302, mimetype=content_type)
-        redirect['Location'] = url
-
-        return redirect
-
-
-@require_http_methods(["GET"])
 def action_html(request, id, slug):
     contents, type = export_to(id, request, 'html')
     return HttpResponse(contents)
@@ -132,7 +108,7 @@ def action_legacy_embed(request):
 
         datastream = get_object_or_404(DataStream, pk = datastream_id)
         query = urllib.urlencode({'end_point': end_point, 'header_row': header_row, 'fixed_column' : fixed_column})
-        url = reverse('datastream_manager.action_embed', kwargs={'guid' : datastream.guid}) + '?' + query
+        url = reverse('exportDataStream.action_embed', kwargs={'guid' : datastream.guid}) + '?' + query
         return HttpResponsePermanentRedirect(url)
     else:
         return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request' : request})

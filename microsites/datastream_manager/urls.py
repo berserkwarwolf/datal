@@ -4,7 +4,7 @@ from microsites.datastream_manager.views import hits_stats
 urlpatterns = patterns('',
     url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.datastream_manager.views.action_view',
         name='datastream_manager.action_view'),
-    url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.exportDataStream.views.action_download',
+    url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.downloadDatastream.views.action_download',
         name='datastream_manager.action_download'),
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).csv$', 'core.exportDataStream.views.action_csv',
         name='datastream_manager.action_csv'),

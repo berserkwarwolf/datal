@@ -3,12 +3,8 @@ from core.utils import slugify
 from core.search import *
 import datetime
 
+
 class HomeFinder(elastic.ElasticsearchFinder):
-
-
-#    def __init__(self):
-#        elastic.ElasticsearchFinder.__init__(self)
-
     def get_datastream_dictionary(self, doc):
 
         id = doc['datastream_id']
@@ -17,14 +13,15 @@ class HomeFinder(elastic.ElasticsearchFinder):
         permalink = reverse('datastream_manager.action_view', kwargs={'id': id, 'slug': slug})
         created_at = datetime.datetime.fromtimestamp(int(doc['timestamp']))
 
-        return dict(id=id
-                    , title = title
-                    , category = doc['category_name']
-                    , created_at = created_at
-                    , permalink = permalink
-                    , type=doc['type'].upper()
-                    , account_id = int(doc['account_id'])
-                   )
+        return dict(
+            id=id,
+            title=title,
+            category=doc['category_name'],
+            created_at=created_at,
+            permalink=permalink,
+            type=doc['type'].upper(),
+            account_id=int(doc['account_id'])
+        )
 
     def get_dataset_dictionary(self, doc):
 
