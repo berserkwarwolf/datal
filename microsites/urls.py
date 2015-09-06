@@ -43,7 +43,7 @@ urlpatterns = patterns('',
     url(r'^branded/js/(?P<id>\d+).js$', 'microsites.views.action_js', name='microsites.action_js'),
     url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
 
-    url(r'^portal/DataServicesManager/actionEmbed/$', 'core.datastream_manager.views.action_legacy_embed', name='datastream_manager.action_legacy_embed'),
+    url(r'^portal/DataServicesManager/actionEmbed/$', 'core.exportDataStream.views.action_legacy_embed', name='datastream_manager.action_legacy_embed'),
     url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
 
     url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),

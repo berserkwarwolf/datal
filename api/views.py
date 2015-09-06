@@ -6,7 +6,7 @@ from rest_framework import status, mixins
 from rest_framework.settings import api_settings
 from core.models import DataStream, DataStreamRevision, DataStreamParameter
 from core.models import GuidModel
-from core.datastream_manager import forms
+from core.exportDataStream import forms
 from core.engine import invoke
 from core.helpers import RequestProcessor
 from core.daos.datasets import DatasetDBDAO

@@ -75,7 +75,7 @@ def action_flexmonster(request, id, slug):
     if lang not in settings.FLEXMONSTER_LOCALES:
         lang = settings.FLEXMONSTER_DEFAULT_LOCALE
 
-    url = 'http://' + request.preferences['account_domain'] + reverse('core.datastream_manager.views.action_csv', args=(id, slug))
+    url = 'http://' + request.preferences['account_domain'] + reverse('core.exportDataStream.views.action_csv', args=(id, slug))
 
     query = request.REQUEST.get('query', None)
     if query:

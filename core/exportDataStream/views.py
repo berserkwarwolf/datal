@@ -11,7 +11,7 @@ from django.shortcuts import get_object_or_404, HttpResponsePermanentRedirect
 from django.utils.translation import ugettext_lazy
 from core.lib.datastore import *
 from core.cache import Cache
-from core.datastream_manager import forms
+from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
 from core.engine import invoke
 from core.helpers import jsonToGrid, RequestProcessor

@@ -141,7 +141,7 @@ $(document).ready(function(){
 
     /* maybe you'll fine many ways to do the same '*/
     pivotTableLicense: "{{preferences.account_pivottable|linebreaksbr|replacetext:'<br />|'}}",
-    pivotTableDataSource: "{{base_uri}}{% url "core.datastream_manager.views.action_csv" id=id slug=slug%}"
+    pivotTableDataSource: "{{base_uri}}{% url "core.exportDataStream.views.action_csv" id=id slug=slug%}"
      {% endif %}
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
