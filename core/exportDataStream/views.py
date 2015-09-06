@@ -19,7 +19,6 @@ from datetime import date, timedelta
 from core.decorators import *
 
 
-
 @require_http_methods(["GET"])
 @datal_cache_page()
 def action_invoke(request):
