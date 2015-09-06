@@ -5,17 +5,87 @@ var viewChartView = Backbone.View.extend({
     el : "body",
     chartContainer: "#id_visualizationResult",
     initialize : function() {
-        this.listenTo(this.model, "change", this.render);
 
         this.chartsFactory = new charts.ChartsFactory();
 
+        // init Sidebars
+        this.initSidebarTabs();
+        this.initInfoSidebar();
+        this.initAPISidebar();
+        this.initNotesSidebar();
+
         this.setupChart();
         this.render();
+        this.listenTo(this.model, "change", this.render);
+        this.bindEvents();
+    },
+    /**
+     * Inicializa la barra lateral con los tabs
+     */
+    initSidebarTabs: function () {
+        this.tabIcons = $('.tabs .icons');
+        this.columnsContainer = $('#id_columns');
+    },
+    /**
+     * Amarra eventos de la vista principal
+     */
+    bindEvents: function () {
+        var self = this;
+        this.tabIcons.on('click', 'a', function (e) {
+            e.preventDefault();
+            self.handleSidebarClick.call(self, $(this));
+        });
+    },
+    /**
+     * Maneja el evento click del sidebar
+     * @param  {object} $tab
+     */
+    handleSidebarClick: function ($tab) {
+        var sidebarContentId = $tab.attr('rel');
+
+        if($tab.hasClass('active')){
+            $tab.removeClass('active');
+            this.hideSidebar();
+        } else {
+            this.tabIcons.find('.active').removeClass('active');
+            if(typeof sidebarContentId == 'undefined'){
+                this.hideSidebar();
+            } else {
+                this.showSidebar(sidebarContentId);
+            }
+            $tab.addClass('active');
+        }
+    },
+    showSidebar: function (sidebarContentId) {
+        var $sidebarContent = $('#' + sidebarContentId);
+        console.log($sidebarContent);
+        $sidebarContent.show();
+        this.columnsContainer.addClass('showSidebar');
+    },
+    hideSidebar: function () {
+        this.columnsContainer.find('.sidebar div').hide();
+        this.columnsContainer.removeClass('showSidebar');
+    },
+    initInfoSidebar: function () {
+        // Permalink
+        // this.permalinkHelper();
+
+        // Hits
+        new visualizationHitsView({model: new visualizationHits(), visualization: this.model});
+    },
+    initAPISidebar: function () {
+        
+    },
+    initNotesSidebar: function () {
+        
     },
     setupChart: function () {
-        this.chartFormat = JSON.parse(this.model.get('chartJson')).format;
+        this.model.set('chart', {
+            lib: this.model.get('chartLib'),
+            type: JSON.parse(this.model.get('chartJson')).format.type
+        });
 
-        var chartSettings = this.chartsFactory.create(this.chartFormat.type,this.chartFormat.lib);
+        var chartSettings = this.chartsFactory.create(this.model.get('chart').type, this.model.get('chart').lib);
 
         this.ChartViewClass = chartSettings.Class;
         this.ChartModelClass = charts.models.Chart;
@@ -31,10 +101,8 @@ var viewChartView = Backbone.View.extend({
         }
     },
     createChartInstance: function () {
-        this.setChartContainerHeight();
-
         var chartModelInstance = new this.ChartModelClass({
-            type: this.model.get('chart.type'),
+            type: this.model.get('chart').type,
             resourceID: this.model.get('visualizationrevision_id')
         });
 
@@ -43,46 +111,46 @@ var viewChartView = Backbone.View.extend({
             model: chartModelInstance
         });
 
+        this.setContainersSize();
+
         this.chartInstance.model.fetchData();
     },
     setLoading: function () {
         
     },
-    setHeights : function(theContainer, theHeight) {
-        if (typeof theHeight == 'undefined') {theHeight = 0;}
+    setContainersSize:function(){
+        var chartInstance = this.chartInstance,
+            $chartContainer = $(this.chartContainer),
+            $sidebarContainer = $('#id_columns .sidebar'),
+            $window = $(window),
+            $mainHeader = $('.brandingHeader'),
+            $chartHeader = $('.dataTable header');
 
-        var heightContainer = String(theContainer);
-        var tabsHeight = parseFloat($('.tabs').height());
-        var otherHeight = theHeight;
-        var minHeight = tabsHeight - otherHeight;
+        var handleResizeEnd = function () {
+            //Calcula el alto de los headers
+            var otherHeights = $mainHeader.outerHeight(true) 
+                             + $chartHeader.outerHeight(true);
+            //Calucla el alto que deberá tener el contenedor del chart
+            var minHeight = $window.height() - otherHeights - 70;
+            $chartContainer.css({
+                height: minHeight + 'px'
+            });
+            $sidebarContainer.css({
+                height: minHeight + 'px'
+            })
+            chartInstance.render();
+        }
 
-        $(heightContainer).css('min-height', minHeight + 'px');
+        //Calcula el tamaño inicial
+        handleResizeEnd();
 
-        $(window).resize(function() {
-            var height = parseFloat($(window).height())
-                - parseFloat(otherHeight)
-                - parseFloat($('.brandingHeader').height())
-                - parseFloat($('.content').css('padding-top').split('px')[0])
-                - parseFloat($('.content').css('padding-bottom').split('px')[0])
-                // - parseFloat($('.brandingFooter').height() )
-                - parseFloat($('.miniFooterJunar').height());
-            $(heightContainer).height(height);
-        }).resize();
-
-    },
-    setChartContainerHeight:function(){
-        var otherHeights =
-              parseFloat( $('.dataTable header').height() )
-            + parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-            + parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-            + parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-            + 2;// Fix to perfection;
-
-        this.setHeights( this.chartContainer, otherHeights );
-
-        $(this.chartContainer).css({
-            overflow: 'auto'
-        })
+        //Asigna listener al resize de la ventana para ajustar tamaño del chart
+        $window.on('resize', function () {
+            if(this.resizeTo) clearTimeout(this.resizeTo);
+            this.resizeTO = setTimeout(function() {
+                handleResizeEnd();
+            }, 500);
+        });
 
     },
 });

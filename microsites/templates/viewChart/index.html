@@ -85,7 +85,7 @@
         {% include "viewChart/sidebarInfo.html" %}
         {% include "viewChart/sidebarAPI.html" %}
         {% if notes and preferences.account_enable_notes %}
-          {% include "viewChart/sidebarNotes.html" %}
+        {% include "viewChart/sidebarNotes.html" %}
         {% endif %}
       </aside>
 
@@ -119,6 +119,7 @@ $(document).ready(function(){
         guid: "{{visualization_revision.guid}}",
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
+        chartLib : '{{visualization_revision.lib}}',
         status : '{{visualization_revision.status}}',
         visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
         datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
