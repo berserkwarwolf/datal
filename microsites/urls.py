@@ -56,12 +56,6 @@ urlpatterns = patterns('',
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
     (r'^js_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'js')}),
 
-    (r'^transparencia/', include('microsites.transparency_manager.urls')),
-    (r'^transparencia', include('microsites.transparency_manager.urls')),
-
-    (r'^transparency/', include('microsites.transparency_manager.urls')),
-    (r'^transparency', include('microsites.transparency_manager.urls')),
-
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
 
 
