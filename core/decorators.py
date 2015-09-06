@@ -1,9 +1,16 @@
+import json
+
+from django.http import HttpResponse
+from django.utils.decorators import available_attrs
+from django.utils.translation import ugettext
+from django.views.decorators.cache import cache_page
+
 from functools import wraps
 
-from django.utils.decorators import ( available_attrs, decorator_from_middleware_with_args,)
-from django.views.decorators.cache import cache_page
+from core.models import Dataset, Threshold, User
 from core.exceptions import ApplicationNotAdmin
 from core.models import Application
+
 
 def public_keys_forbidden(view_func):
     """ 'application' means users by auth_key access """
@@ -39,3 +46,48 @@ def datal_cache_page(**kwargs):
             return response(request, *args, **kw)
         return _cache_page
     return _cache_page
+
+
+
+def threshold(code):
+    def decorator(func):
+        def inner_decorator(request, *args, **kwargs):
+            if code == 'workspace.create_dataset_limit':
+                response = calculate_dataset_limit(request, code)
+
+            if code == 'workspace.create_user_limit':
+                response = calculate_user_limit(request, code)
+
+            if response == '':
+                return func(request, *args, **kwargs)
+            else:
+                return HttpResponse(json.dumps(response), mimetype='application/json', status=400)
+
+        return wraps(func)(inner_decorator)
+
+    return decorator
+
+
+def calculate_dataset_limit(request, code):
+    account_id = request.auth_manager.account_id
+    datasets_count = Dataset.objects.filter(user__account__id=account_id).count()
+    limit = Threshold.objects.get_limit_by_code_and_account_id(code, account_id)
+
+    if datasets_count >= limit:
+        response = {'status': 'error', 'messages': [ugettext('APP-EXCEDEDDATASET-LIMIT')]}
+        return response
+    else:
+        return ''
+
+
+def calculate_user_limit(request, code):
+    account_id = request.auth_manager.account_id
+    users_count = User.objects.filter(account=account_id).count()
+    limit = Threshold.objects.get_limit_by_code_and_account_id(code, account_id)
+
+    if users_count >= limit:
+        response = {'status': 'error', 'messages': [ugettext('APP-EXCEDEDUSERS-LIMIT')]}
+        return response
+    else:
+        return ''
+
