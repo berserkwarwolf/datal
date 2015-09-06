@@ -51,7 +51,7 @@ charts.ChartsFactory = function(){
                             'Class': charts.views.GooglePieChart,
                             'attributes': ['yTitle']
                         },              
-                'map': {
+                'mapchart': {
                         'Class': charts.views.MapChart,
                         'attributes': []
                     }

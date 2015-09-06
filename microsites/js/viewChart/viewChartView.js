@@ -58,7 +58,6 @@ var viewChartView = Backbone.View.extend({
     },
     showSidebar: function (sidebarContentId) {
         var $sidebarContent = $('#' + sidebarContentId);
-        console.log($sidebarContent);
         $sidebarContent.show();
         this.columnsContainer.addClass('showSidebar');
     },

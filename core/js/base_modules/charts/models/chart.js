@@ -141,7 +141,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     onChangeType: function (model, type) {
         console.log('type has changed to:', type);
-        if (type === 'map') {
+        if (type === 'mapchart') {
 
         };
     },
@@ -152,7 +152,7 @@ charts.models.Chart = Backbone.Model.extend({
     updateFetchFilters: function () {
         var filters = this.get('options');
 
-        if(this.get('type') == 'map'){
+        if(this.get('type') == 'mapchart'){
             filters = {
                 zoom: this.get('options').zoom,
                 bounds: this.get('options').bounds.join(';')
@@ -167,7 +167,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
-        if(this.get('type') == 'map'){
+        if(this.get('type') == 'mapchart'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
             this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
