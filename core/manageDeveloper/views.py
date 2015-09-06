@@ -23,7 +23,7 @@ def action_query(request):
             example_guid = 'GUID'
     auth_manager = request.auth_manager
         
-    return render_to_response('developer_manager/query_list.html', locals())
+    return render_to_response('manageDeveloper/query_list.html', locals())
 
 
 def action_insert(request):
