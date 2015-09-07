@@ -1,4 +1,6 @@
 import logging
+from django.conf import settings
+
 from core.v8.engine import Engine
 
 class EngineCommand(object):
