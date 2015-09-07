@@ -97,7 +97,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             notes=dataseti18n.notes,
             tags=tags,
             sources=sources,
-            public_url=public_url
+            public_url=public_url,
+            slug=slugify(dataseti18n.title),
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 

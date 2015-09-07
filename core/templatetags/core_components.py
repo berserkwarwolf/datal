@@ -41,7 +41,7 @@ def download(dataset_revision):
     :return:
     """
     return reverse('dataset_manager.action_download', 'microsites.urls',
-                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': '-'})
+                   kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': dataset_revision['slug']})
 
 
 def datatable_search(table_prefix=''):
