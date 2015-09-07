@@ -18,20 +18,44 @@ from core.shortcuts import render_to_response
 from datetime import date, timedelta
 from core.decorators import *
 
+from core.v8.factories import *
+
+from django.forms.formsets import formset_factory
+
+
 
 @require_http_methods(["GET"])
 #@datal_cache_page()
 def action_invoke(request):
-    form = forms.RequestForm(request.GET)
-    query = RequestProcessor(request).get_arguments_no_validation()
-    o={'get': request.REQUEST.items(), "query": query.items()}
-    return HttpResponse(o.items(), mimetype="json")
+    #form.is_valid()
+
+    #query = RequestProcessor(request).get_arguments_no_validation()
+    #query['pId'] = form.cleaned_data.get('datastream_revision_id')
+    #try:
+    #    query['pId'] = form.cleaned_data.get('datastream_revision_id')
+    #    limit = form.cleaned_data.get('limit')
+    #    query['pLimit'] = limit
+    #except:
+    #    pass
+    #return HttpResponse(query.items(), mimetype="json")
+
+    formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
+    form = formset(request.REQUEST)
+    #query.is_valid()
+    #print "get_data: ", query.get_data()
+    #return HttpResponse(query.get_data(), mimetype="json")
+
+    #form = forms.RequestForm(request.GET)
     if form.is_valid():
-        query = RequestProcessor(request).get_arguments_no_validation()
-        query['pId'] = form.cleaned_data.get('datastream_revision_id')
-        limit = form.cleaned_data.get('limit')
-        if limit:
-            query['pLimit'] = limit
+        #query = RequestProcessor(request).get_arguments_no_validation()
+        #query['pId'] = form.cleaned_data.get('datastream_revision_id')
+        #limit = form.cleaned_data.get('limit')
+        #if limit:
+        #    query['pLimit'] = limit
+        print "CC: ", form.cleaned_data
+
+        query = dict(form.get_data())
+        print query.items()
 
         ivk = invoke(query)
         # Sometimes there is no answer. Maybe engine is down
