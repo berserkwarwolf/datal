@@ -20,18 +20,18 @@ class EngineCommand(object):
             self.onException(e)
 
 
-class EngineDataCommand(EngineCommand)
+class EngineDataCommand(EngineCommand):
     endpoint = settings.MEMCACHED_ENGINE_END_POINT
 
-class EngineChartCommand(EngineCommand)
+class EngineChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_SERVLET
 
-class EnginePreviewChartCommand(EngineCommand)
+class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
 
-class EngineLoadCommand(EngineCommand)
+class EngineLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_LOADER_SERVLET
 
-class PreviewLoadCommand(EngineCommand)
+class PreviewLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_PREVIEWER_SERVLET
 
