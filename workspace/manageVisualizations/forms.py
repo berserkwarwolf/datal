@@ -41,7 +41,7 @@ class VisualizationForm(forms.Form):
     showLegend = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     nullValueAction = forms.ChoiceField(required=False, choices=INCLUDE_EXCLUDE)
     nullValuePreset = forms.CharField(required=False, max_length=200)
-    range_data = forms.CharField(max_length=300, required=True)
+    data = forms.CharField(max_length=300, required=True)
     xTitle = forms.CharField(required=False, max_length=200)
     yTitle = forms.CharField(required=False, max_length=200)
     labelSelection = forms.CharField(required=False, max_length=200)
