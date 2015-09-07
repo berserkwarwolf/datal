@@ -41,11 +41,9 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
             bindto: this.el,
             data: {
                 x: 'x',
-                rows: data.labels.concat(data.values)
+                rows: data.labels.concat(data.values),
+                groups: data.categories
             },
-            groups: [
-                data.categories[0]
-            ],
             type: 'line',
             axis: {
                 x: {
@@ -90,17 +88,22 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
     },
     
     render: function () {
-        var data = this.formatData(this.model.data.toJSON());
+       var data = this.formatData(this.model.data.toJSON());
+
+        var types = {};
+
+        _.each(data.labels[0],function(e){
+            types[e] = 'area'
+        });
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
                 x: 'x',
-                rows: data.labels.concat(data.values)
+                types:types,
+                rows: data.labels.concat(data.values),
+                groups: data.categories
             },
-            groups: [
-                data.categories[0]
-            ],
             type: 'line',
             axis: {
                 x: {
