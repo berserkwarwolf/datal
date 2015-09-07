@@ -84,7 +84,7 @@ class DataStreamViewSet(ResourceViewSet):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
         mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
-        command = EngineDataCommand(form.get_data())
+        command = EngineDataCommand(request, mutable_get)
         ivk = command.run()
         if ivk:
             datastream['result'] = json.loads(ivk[0])

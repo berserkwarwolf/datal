@@ -3,6 +3,8 @@ from core.http import get_domain_with_protocol, get_key_prefix
 from django.core.cache import cache
 from django.conf import settings
 from core.v8.factories import *
+
+from django.forms.formsets import formset_factory
 import memcache
 import urllib
 import logging
@@ -13,10 +15,9 @@ logger = logging.getLogger(__name__)
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
     
-    def __init__(self, request_items):
-        self.engine = Engine(self.endpoint)
+    def __init__(self, request, request_items):
         self.request_items = request_items
-        self.key_prefix = get_key_prefix(self.request_items)
+        self.key_prefix = get_key_prefix(request, self.request_items)
 
     def get_url(self):
         return get_domain_with_protocol('engine') + self.endpoint
@@ -107,7 +108,7 @@ class EngineCommand(object):
             return '{"Error":"No invoke"}', "json"
         except Exception, e:
             logger.debug(e)
-            return '{"Error":"Unexcpected error"}', "json"
+            raise
 
 
 class EngineDataCommand(EngineCommand):

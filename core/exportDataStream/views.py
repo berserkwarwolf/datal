@@ -27,7 +27,7 @@ from django.forms.formsets import formset_factory
 @require_http_methods(["GET"])
 #@datal_cache_page()
 def action_invoke(request):
-    command = EngineDataCommand(request.REQUEST)
+    command = EngineDataCommand(request, request.REQUEST)
     contents, typen = command.run()
     return HttpResponse(contents, mimetype=typen)
 

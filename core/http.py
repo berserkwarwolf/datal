@@ -24,7 +24,7 @@ def get_domain(account_id):
     return account_domain
 
 
-def get_key_prefix(items):
+def get_key_prefix(request, items):
     params=str(hash(frozenset(sorted(items))))
     return ":".join([request.path, params])
 
