@@ -20,18 +20,22 @@ class EngineCommand(object):
         self.key_prefix = get_key_prefix(request, self.request_items)
 
     def get_url(self):
-        return get_domain_with_protocol('engine') + self.endpoint
+        return "http://localhost:8080/"
+        return get_domain_with_protocol('engine')
+        return "http://"+self.endpoint[0]
+        return get_domain_with_protocol('engine') + self.endpoint[0]
 
     def fix_params(self, filters):
         """ fix filters and other params """
        
-        for key in filters.keys():
-            if key.startswith('pFilter'):
-                v1 = filters[key]
-                filters[key] = self.parseOperator(value=v1)
-            if key.startswith('uniqueBy'):
+        new=[]
+        for item in filters:
+            if item[0].startswith('pFilter'):
+                v1 = item[1]
+                new.append((item[0],self.parseOperator(value=v1)))
+            if item[0].startswith('uniqueBy'):
                 num = key[-1:]
-                filters['pUniqueBy%s' % num] = filters.get(key)
+                filters['pUniqueBy%s' % num] = item[1]
                 #del filters[key]
                 
         return filters
@@ -58,16 +62,24 @@ class EngineCommand(object):
     def request(self, query, method = 'GET'):
         url = self.get_url()
         response = None
-        try:
-            for key in query.keys():
-                if key.startswith('pArgument') or key.startswith('pFilter'):
-                    value = query[key]
-                    query[key] = value.encode('utf-8')
 
-            query = self.fix_params(query)
+        print "-----------------------------------------"
+        print url
+        print "-----------------------------------------"
+        try:
+            post_query=[]
+            for item in query:
+                if item[0].startswith('pArgument') or item[0].startswith('pFilter'):
+                    value = item[1]
+                    post_query.append((item[0],value.encode('utf-8')))
+
+            query = self.fix_params(post_query)
             params = urllib.urlencode(query)
 
             try:
+                print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+                print url+"?"+params
+                print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
                 if method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
                 elif method == 'POST':
