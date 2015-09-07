@@ -38,11 +38,11 @@ charts.views.Chart = Backbone.View.extend({
     },
 
     destroy: function(){
-        if(this.chart.destroy){
+        if(this.chart.destroy){ //c3
             this.chart.destroy();
         };
-        if(this.chart.clearChart){
+        if(this.chart.clearChart){ //google
             this.chart.clearChart();
-        }
+        };
     }
 });
