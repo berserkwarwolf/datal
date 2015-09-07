@@ -92,7 +92,8 @@ charts.models.Chart = Backbone.Model.extend({
             headers: self.get('range_headers'),
             labels: self.get('range_labels'),
             nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset')
+            nullValuePreset:  self.get('nullValuePreset'),
+            type: self.get('type')
         };
 
         if(self.get('invertData') && self.get('invertData')!=''){

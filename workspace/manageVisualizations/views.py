@@ -272,72 +272,64 @@ def preview(request):
                 datastream_revision_id=datastream_revision_id,
                 published=False
             )
-            logger.error(datastream)
         except Exception, e:
             logger.error(e)
             raise Http404
         else:
 
             query = RequestProcessor(request).get_arguments(datastream["parameters"])
+            chart_type = form.cleaned_data.get('type')
 
-            query['pId'] = int(datastream_revision_id)
+            query.update({
+                'pId': int(datastream_revision_id),
+                'pType': chart_type
+            })
 
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = limit
+            if chart_type in ['mapchart']:
 
-            page = form.cleaned_data.get('page')
-            if page is not None:
-                query['pPage'] = page
+                # Mandatory
+                query.update({
+                    'pLatitudSelection': form.cleaned_data.get('lat'),
+                    'pLongitudSelection': form.cleaned_data.get('lon'),
+                    'pHeaderSelection': form.cleaned_data.get('headers'),
+                    'pTraceSelection': form.cleaned_data.get('traces')
+                })
 
-            bounds = form.cleaned_data.get('bounds')
-            if bounds is not None:
-                query['pBounds'] = bounds
+                # Optional
+                bounds = form.cleaned_data.get('bounds')
+                if bounds is not None:
+                    query['pBounds'] = bounds
 
-            zoom = form.cleaned_data.get('zoom')
-            if zoom is not None:
-                query['pZoom'] = zoom
+                zoom = form.cleaned_data.get('zoom')
+                if zoom is not None:
+                    query['pZoom'] = zoom
+            else:
 
-            query['pNullValueAction'] = form.cleaned_data.get('nullValueAction')
-            query['pNullValuePreset'] = form.cleaned_data.get('nullValuePreset')
+                page = form.cleaned_data.get('page')
+                if page is not None:
+                    query['pPage'] = page
 
-            query['pData'] = form.cleaned_data.get('data')
+                limit = form.cleaned_data.get('limit')
+                if limit is not None:
+                    query['pLimit'] = form.cleaned_data.get('limit')
 
-            labels = form.cleaned_data.get('labels')
-            if labels is not None:
-                query['pLabelSelection'] = labels
+                query.update({
+                    'pNullValueAction': form.cleaned_data.get('nullValueAction'),
+                    'pNullValuePreset': form.cleaned_data.get('nullValuePreset'),
+                    'pData': form.cleaned_data.get('data'),
+                    'pLabelSelection': form.cleaned_data.get('labels'),
+                    'pHeaderSelection': form.cleaned_data.get('headers'),
+                    'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
+                    'pInvertData': form.cleaned_data.get('invertData')
+                })
 
-            headers = form.cleaned_data.get('headers')
-            if headers is not None:
-                query['pHeaderSelection'] = headers
-
-            lat = form.cleaned_data.get('lat')
-            if lat is not None:
-                query['pLatitudSelection'] = lat
-
-            lon = form.cleaned_data.get('lon')
-            if lon is not None:
-                query['pLongitudSelection'] = lon
-
-            traces = form.cleaned_data.get('traces')
-            if traces is not None:
-                query['pTraceSelection'] = traces
-
-            invertedAxis = form.cleaned_data.get('invertedAxis')
-            if invertedAxis is not None:
-                query['pInvertedAxis'] = invertedAxis
-
-            invertData = form.cleaned_data.get('invertData')
-            if invertData is not None:
-                query['pInvertData'] = invertData
-
-            query['pType'] = 'chart'
             logger.error(query)
             result, content_type = preview_chart(query)
 
             return HttpResponse(result, mimetype=content_type)
     else:
         return HttpResponse('Error!')
+
 
 def action_invoke(request):
     form = forms.RequestForm(request.GET)

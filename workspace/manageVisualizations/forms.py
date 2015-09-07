@@ -61,6 +61,7 @@ class RequestForm(forms.Form):
 
 
 class PreviewForm(RequestForm):
+    type = forms.ChoiceField(required=True, choices=VISUALIZATION_TYPES)
     nullValueAction = forms.CharField(required=True)
     nullValuePreset = forms.CharField(required=False)
     invertData = forms.CharField(required=False)
