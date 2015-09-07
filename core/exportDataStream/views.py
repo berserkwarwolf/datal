@@ -11,7 +11,7 @@ from core.lib.datastore import *
 from core.cache import Cache
 from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
-from core.engine import invoke
+from core.v8.commands import EngineDataCommand
 from core.helpers import jsonToGrid, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
@@ -54,10 +54,9 @@ def action_invoke(request):
         #    query['pLimit'] = limit
         print "CC: ", form.cleaned_data
 
-        query = dict(form.get_data())
-        print query.items()
+        command = EngineDataCommand(form.get_data())
+        ivk = command.run()
 
-        ivk = invoke(query)
         # Sometimes there is no answer. Maybe engine is down
         if ivk is None:
             contents = '{"Error":"No invoke"}'

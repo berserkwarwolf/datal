@@ -4,19 +4,16 @@ from core.v8.engine import Engine
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
 
-    def __init__(self, form):
+    def __init__(self, data):
         self.engine = Engine(self.endpoint)
-        self.form = form
-
-    def formToQuery(self):
-        return 'query'
+        self.data = data
 
     def onException(self, exc):
         pass
 
     def run(self):
         try:
-            value, content_type = self.engine.request(self.formToQuery())
+            return self.engine.request(dict(self.data))
         except Exception, e:
             logger = logging.getLogger(__name__)
             logger.debug(e)
