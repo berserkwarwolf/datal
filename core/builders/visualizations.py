@@ -17,9 +17,10 @@ class VisualizationImplBuilder:
         field['format']['nullValueAction'] = self.fields['nullValueAction'] if self.fields['nullValueAction'] else 'exclude'
         field['format']['nullValuePreset'] = self.fields['nullValuePreset']
         field['title'] = self.fields['title']
-        field['data'] = self.fields['range_data']
+        field['data'] = self.fields['data']
         field['chart'] = dict()
         field['chart']['labelSelection'] = self.fields['labelSelection']
+        field['chart']['headerSelection'] = self.fields['headerSelection']
         field['chart']['is3D'] = self.fields['is3D'] if self.fields['is3D'] else 'false'
 
         return json.dumps(field)

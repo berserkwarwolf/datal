@@ -213,7 +213,6 @@ def create(request, viz_type='index'):
         # Formulario
         form = VisualizationForm(request.POST)
         if not form.is_valid():
-            logger.info(form.errors)
             raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         response = form.save(request, datastream_rev)
