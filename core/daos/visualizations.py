@@ -138,6 +138,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             public_url=public_url,
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
+            datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id
         )
 
