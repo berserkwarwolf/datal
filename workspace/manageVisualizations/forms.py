@@ -3,33 +3,8 @@ from django import forms
 from django.utils.translation import ugettext_lazy, ugettext
 
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.choices import VISUALIZATION_LIBS
-
-VISUALIZATION_TYPES = (
-    ('columnchart', 'columnchart'),
-    ('barchart', 'barchart'),
-    ('linechart', 'linechart'),
-    ('piechart', 'piechart'),
-    ('areachart', 'areachart'),
-    ('mapchart', 'mapchart')
-)
-
-VISUALIZATION_TEMPLATES = (
-    ('basicchart', 'basicchart'),
-    ('piechart', 'piechart'),
-    ('mapchart', 'mapchart'),
-    ('geochart', 'geochart')
-)
-
-BOOLEAN_FIELD = (
-    ('true', 'true'),
-    ('false', 'false')
-)
-
-INCLUDE_EXCLUDE = (
-    ('include', 'include'),
-    ('exclude', 'exclude')
-)
+from core.choices import VISUALIZATION_LIBS, VISUALIZATION_TYPES, VISUALIZATION_TEMPLATES, BOOLEAN_FIELD, \
+    INCLUDE_EXCLUDE, MAP_TYPE_FIELD
 
 
 class VisualizationForm(forms.Form):
@@ -51,6 +26,12 @@ class VisualizationForm(forms.Form):
     invertedAxis = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     correlativeData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     is3D = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+
+    # Mapas
+    latitudSelection = forms.CharField(required=False, max_length=200)
+    longitudSelection = forms.CharField(required=False, max_length=200)
+    traceSelection = forms.CharField(required=False, max_length=200)
+    mapType = forms.ChoiceField(required=True, choices=MAP_TYPE_FIELD)
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)

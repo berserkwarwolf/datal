@@ -3,6 +3,38 @@ from django.utils.translation import ugettext_lazy
 from model_utils import Choices
 
 
+VISUALIZATION_TYPES = (
+    ('columnchart', 'columnchart'),
+    ('barchart', 'barchart'),
+    ('linechart', 'linechart'),
+    ('piechart', 'piechart'),
+    ('areachart', 'areachart'),
+    ('mapchart', 'mapchart')
+)
+
+VISUALIZATION_TEMPLATES = (
+    ('basicchart', 'basicchart'),
+    ('piechart', 'piechart'),
+    ('mapchart', 'mapchart'),
+    ('geochart', 'geochart')
+)
+
+BOOLEAN_FIELD = (
+    ('true', 'true'),
+    ('false', 'false')
+)
+
+INCLUDE_EXCLUDE = (
+    ('include', 'include'),
+    ('exclude', 'exclude')
+)
+
+MAP_TYPE_FIELD = (
+    ('hybrid', 'hybrid'),
+    ('satellite', 'satellite'),
+    ('map', 'map')
+)
+
 VISUALIZATION_LIBS = (
     ('google', 'Google Charts'),
     ('d3', 'D3')
