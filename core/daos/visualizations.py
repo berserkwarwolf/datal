@@ -41,7 +41,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                 title=fields['title'],
                 datastream=datastream_rev.datastream
             )
-            logger.info(visualization)
 
         visualization_rev = VisualizationRevision.objects.create(
             datastream_revision=datastream_rev,
@@ -51,7 +50,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             lib=fields['lib'],
             impl_details=VisualizationImplBuilder(**fields).build()
         )
-        logger.info(visualization_rev)
+        logger.info(visualization_rev.impl_details)
+
         visualization_i18n = VisualizationI18n.objects.create(
             visualization_revision=visualization_rev,
             language=language,
@@ -59,7 +59,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             description=fields['description'].strip().replace('\n', ' '),
             notes=fields['notes'].strip()
         )
-        logger.info(visualization_i18n)
 
         return visualization, visualization_rev
 
