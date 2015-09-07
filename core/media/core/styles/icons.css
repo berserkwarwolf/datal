@@ -1,84 +1,127 @@
 /* Icons */
 .icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;height:24px;display:block;cursor:pointer;}
 
-/* When used inline with .button */
-.button .icon{margin-right:15px;display:inline-block;vertical-align:middle;}
-.button .icon.icon-right{margin-right:0;margin-left:15px;}
+/* Inline common */
+.icon-inline,
+.button .icon{display:inline-block;vertical-align:middle;position:relative;top:-2px;}
+.button .icon.icon-right,
+.icon-inline.icon-right{margin-right:0;}
+
+	/* When used inline in text - Apply to small icons (16x16px in the 24x24px space for icon sprite) */
+	.icon-inline{width:16px;height:16px;margin-right:3px;top:-1px;}
+	.icon-inline.icon-right{margin-left:3px;}
+
+	/* When used inline in button */
+	.button .icon{margin-right:15px;}
+	.button .icon.icon-right{margin-left:15px;}
 
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
 
 /* 48px icons */
 .size-48{
-	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 264px auto;width:48px;height:48px;}
-
+	background:url(/static/workspace/images/common/icons-48.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat scroll 0 0 / 240px auto;width:48px;height:48px;}
 
 	/* Nav local */
 	.icon-home,
-	.button.icon-home:hover{background-position:-12px -12px;}
+	.button:hover .icon-home{background-position:-12px -12px;}
 	.icon-home:hover,
-	.button.active .icon-home,
-	.button.active .icon-home:hover{background-position:-48px -12px;}
+	.button.active .icon-home{background-position:-48px -12px;}
 
 	.icon-datasets,
-	.button.icon-datasets:hover{background-position:-12px -48px;}
+	.button:hover .icon-datasets{background-position:-12px -48px;}
 	.icon-datasets:hover,
-	.button.active .icon-datasets,
-	.button.active .icon-datasets:hover{background-position:-48px -48px;}
+	.button.active .icon-datasets{background-position:-48px -48px;}
 
 	.icon-dataviews,
-	.button.icon-dataviews:hover{background-position:-12px -84px;}
+	.button:hover .icon-dataviews{background-position:-12px -84px;}
 	.icon-dataviews:hover,
-	.button.active .icon-dataviews,
-	.button.active .icon-dataviews:hover{background-position:-48px -84px;}
+	.button.active .icon-dataviews{background-position:-48px -84px;}
 	
 	.icon-visualizations,
-	.button.icon-visualizations:hover{background-position:-12px -120px;}
+	.button:hover .icon-visualizations{background-position:-12px -120px;}
 	.icon-visualizations:hover,
-	.button.active .icon-visualizations,
-	.button.active .icon-visualizations:hover{background-position:-48px -120px;}
+	.button.active .icon-visualizations{background-position:-48px -120px;}
 	
 	.icon-dashboards,
-	.button.icon-dashboards:hover{background-position:-12px -156px;}
+	.button:hover .icon-dashboards{background-position:-12px -156px;}
 	.icon-dashboards:hover,
-	.button.active .icon-dashboards,
-	.button.active .icon-dashboards:hover{background-position:-48px -156px;}
+	.button.active .icon-dashboards{background-position:-48px -156px;}
 
 	.icon-reports,
-	.button.icon-reports:hover{background-position:-12px -192px;}
+	.button:hover .icon-reports{background-position:-12px -192px;}
 	.icon-reports:hover,
-	.button.active .icon-reports,
-	.button.active .icon-reports:hover{background-position:-48px -192px;}
+	.button.active .icon-reports{background-position:-48px -192px;}
 
 	.icon-settings,
-	.button.icon-settings:hover{background-position:-12px -228px;}
+	.button:hover .icon-settings{background-position:-12px -228px;}
 	.icon-settings:hover,
-	.button.active .icon-settings,
-	.button.active .icon-settings:hover{background-position:-48px -228px;}
+	.button.active .icon-settings{background-position:-48px -228px;}
+
+
+	/* General icons */
+	.icon-view-site{background-position:-12px -696px;}
+	.button:hover .icon-view-site{background-position:-48px -696px;}
+	.icon-view-site.icon-inline{background-position:-16px -700px;}
+
+	.icon-new-tab{background-position:-12px -1056px;}
+	.button:hover .icon-new-tab{background-position:-48px -1056px;}
+	.icon-new-tab.icon-inline{background-position:-16px -1060px;}
+	.link.black:hover .icon-new-tab.icon-inline{background-position:-52px -1060px;}
+
+	.icon-more{background-position:-12px -732px;}
+	.icon-more:hover,
+	.button:hover .icon-more{background-position:-48px -732px;}
+
+	.icon-published{background-position:-12px -912px;}
+	.icon-published.icon-inline{background-position:-16px -916px;}
+
+	.icon-help{background-position:-12px -1092px;}
+	.button:hover .icon-help{background-position:-48px -1092px;}
+	.icon-help.icon-inline{background-position:-16px -1096px;}
 
 
 	/* Actions */
 	.icon-edit{background-position:-12px -264px;}
-	.icon-edit:active{background-position:-96px -264px;}
+	.button:hover .icon-edit{background-position:-48px -264px;}
+	.icon-edit:active{background-position:-84px -264px;}
 	.icon-edit.fill-background{background-position:0 -290px;}
 
 	.icon-add{background-position:-12px -336px;}
 	.icon-add.fill-background{background-position:0 -360px;}
 
 	.icon-delete{background-position:-12px -408px;}
-	.icon-delete:hover{background-position:-48px -408px;}
+	.icon-delete:hover,
+	.button:hover .icon-delete{background-position:-48px -408px;}
 
 	.icon-zoom-in{background-position:-12px -444px;}
-	.icon-zoom-in:active{background-position:-96px -444px;}
+	.icon-zoom-in:active{background-position:-84px -444px;}
 
 	.icon-zoom-out{background-position:-12px -480px;}
-	.icon-zoom-out:active{background-position:-96px -480px;}
+	.icon-zoom-out:active{background-position:-84px -480px;}
 
 		/* Hover */
 		.icon-edit:hover,
 		.icon-add:hover,
 		.icon-zoom-in:hover,
-		.icon-zoom-out:hover{opacity:.5;}
+		.icon-zoom-out:hover{opacity:.5;filter:alpha(opacity=50);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=50";}
+		.button:hover .icon-edit{opacity:1;filter:alpha(opacity=100);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=100";}
+
+	/* Pull down */
+	.icon-pulldown,
+	.button-pulldown .button .icon-pulldown{background-position:-12px -804px;top:-1px;}
+		/* Tab - Header */
+		.tab.pulldown .icon-pulldown{background-position:-12px -768px;display:inline-block;vertical-align:middle;position:relative;}
+		.tab.pulldown:hover .icon-pulldown{background-position:-12px -804px;}
+		/* Active / hover */
+		.button-pulldown.active .button .icon-pulldown,
+		.tab.pulldown.active .icon-pulldown{background-position:-12px -876px;}
+
+		/* Remove margin */
+		.button .icon-pulldown,
+		.button .icon-pulldown.icon-right,
+		.tab.pulldown .icon-pulldown,
+		.tab.pulldown .icon-pulldown.icon-right{margin:0;}
 
 
 	/* Charts */
@@ -96,3 +139,14 @@
 
 	.icon-chart-bar{background-position:-12px -660px;}
 	.icon-chart-bar.size-48{background-position:-24px -1320px;}
+
+
+	/* Maps */
+	.icon-map-marker{background-position:-12px -948px;}
+	.icon-map-marker.size-48{background-position:-24px -1896px;}
+
+	.icon-map-trace{background-position:-12px -984px;}
+	.icon-map-trace.size-48{background-position:-24px -1968px;}
+
+	.icon-map-geo{background-position:-12px -1020px;}
+	.icon-map-geo.size-48{background-position:-24px -2040px;}

@@ -60,31 +60,32 @@
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+{% endblock %}
 
+
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageVisualizations.index' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
 {% endblock %}
 
 {% block sectionTitle %}
-
-<!-- Dynamic buttons will use this container. Check buttonsViewSPA on processManangerSPA -->
-<div id="buttons_view_container" class="buttons_view_container"></div>
-
-<!--ul class="buttons-bar FR" data-step="0">
-  <li class="step0"><a id="id_step0Button" rel="0" class="button black small" title="{% trans 'APP-START-TEXT' %}">{% trans 'APP-START-TEXT' %}</a></li>
-  <li class="step1"><a id="id_step1Button" rel="1" class="button black small" title="{% trans 'APP-DATA-TEXT' %}">{% trans 'APP-DATA-TEXT' %}</a></li>
-  <li class="step2"><a id="id_step2Button" rel="2" class="button black small" title="{% trans 'APP-TYPES-TEXT' %}">{% trans 'APP-TYPES-TEXT' %}</a></li>
-  <li class="step3"><a id="id_step3Button" rel="3" class="button black small" title="{% trans 'APP-CUSTOMIZE-TEXT' %}">{% trans 'APP-CUSTOMIZE-TEXT' %}</a></li>
-  <li class="step4"><a id="id_step4Button" rel="4" class="button black small" title="{% trans 'APP-FINISH-TEXT' %}">{% trans 'APP-FINISH-TEXT' %}</a></li>
-</ul-->
-
+  <div class="context-menu clearfix">
+    <div class="col-xs-8">
+        <h1 class="sub-heading">{% trans "APP-CREATE-VISUALIZATION-TEXT" %}</h1>
+        <ul id="start-title" class="buttons-bar"><li><a>{% trans "APP-CREATE-VISUALIZATION-TITLE" %}</a></li></ul>
+        <div class="buttons_view_container"><ul class="buttons-bar" data-step="0"></ul></div>
+    </div>
+    <div class="col-xs-4 context-buttons clearfix">
+      
+    </div>
+  </div>
 {% endblock %}
 
 {% block content %}
 
-  
-  <div id="id_createVisualization_container" class="createVizualization create main-view">
+<div class="col-xs-12">
 
-    <!-- Steps will be Rendered here -->
-
+  <div id="id_createVisualization_container" class="createVizualization create main-view relative">  
 
     <!-- Include charts templates -->
     {% include "createVisualization/steps/0_start.html" %}
@@ -97,6 +98,8 @@
     {% include "createVisualization/steps/map/3_map_finish.html" %}
 
   </div>
+
+</div>
 
 {% endblock %}
 

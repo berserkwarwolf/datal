@@ -35,5 +35,12 @@ charts.views.Chart = Backbone.View.extend({
     render: function () {
     	// implements rendering of data received from :formatData: for the 
     	// specific chart library
+    },
+
+    destroy: function(){
+        if(this.chart.destroy){
+            this.chart.destroy();
+            console.log('destruyo porque tiene el método!!');
+        };
     }
 });

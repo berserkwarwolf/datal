@@ -7,73 +7,34 @@
 <link href="{% sass_src 'workspace/styles/viewDataset.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
-<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/viewDatasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/unpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionDeleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionUnpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/datasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}
 
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageDatasets.index' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+{% endblock %}
+
 {% block sectionTitle %}
-<h1 class="FL"><a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-DATASETS-TEXT' %}">{% trans "APP-DATASETS-TEXT" %}</a></h1>
-<h2 class="FL">{{ dataset.title|capfirst }}</h2>
-<ul class="actions FR">
-
-  {# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
-  {% if dataset.collect_type == 1 or dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
-  <!-- Create Data View -->
-  <li><a id="id_create" class="button action small" href="{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}"><i class="new"></i>{% trans 'APP-ACTIONS-CREATEVIEW' %}</a></li>
-  {% endif %}
-  
-  <!-- Edit -->
-  <li><a id="id_edit" href="{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/" class="button black small" title="{% trans 'APP-EDIT-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="edit"></i>{% trans 'APP-EDIT-TEXT' %}</a></li>
-
-  <!-- Delete -->
-  <li><a id="id_delete" class="button black small" title="{% trans 'APP-DELETE-TEXT' %}" style="display:{% if dataset.status != 1 %}block{% else %}none{% endif %};"><i class="delete"></i>{% trans 'APP-DELETE-TEXT' %}</a></li>
-
-  {% if dataset.collect_type == 0 %}
-  <!-- Download -->
-  <li><a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="button black small" title="{% trans 'APP-DOWNLOAD-TEXT' %}"><i class="download"></i>{% trans 'APP-DOWNLOAD-TEXT' %}</a></li>
-  
-  {% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
-  <!-- Go to Source -->
-  <li><a id="id_gotosource" class="button black small" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}"><i class="download"></i>{% trans 'APP-SOURCE-TEXT' %}</a></li>
-  {% endif %}
-
-  <!-- Add New -->
-  <li class="has-separator"><a href="{% url 'manageDatasets.create' %}" id="id_addNew" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-
-</ul>
-<script>
-</script>
+<div class="context-menu clearfix"></div>
 {% endblock %}
 
 {% block content %}
-  <div class="detail" id="id_viewDataset">
+  <div class="detail col-xs-12" id="id_viewDataset">
 
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
         <div class="wrapper3">
-          
-          {# Pending review = 1  #}
-          {% if dataset.status == 1 %}
-            <!-- Review -->
-            <div class="alert alert-info clearfix" id="id_reviewBar">
-              {% if auth_manager.is_publisher or auth_manager.is_admin %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
-                <div class="navigation FR">
-                  <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
-                  <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
-                </div>
-              {% else %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
-              {% endif %}
-            </div>
-          {% endif %}
 
           <!-- Sidebar -->
           <section class="sidebar-container">
@@ -93,19 +54,28 @@
       </div>
     </div>
   </div>
+
+  {% include "viewDataset/templates.html" %}
+
 {% endblock %}
 
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var viewDatasetModel = new ViewDatasetModel({
-    reviewURL: "{% url 'manageDatasets.review' dataset.dataset_revision_id %}",
-    status: "{{ dataset.status|status_str }}",
+  var Dataset = new dataset({
     id: "{{ dataset.last_revision_id }}",
     dataset_id: " {{ dataset.dataset_id }}",
-    title: "{{ dataset.title }}"
+    status: "{{ dataset.status }}",
+    status_str: "{{ dataset.status|status_str|capfirst }}",
+    title: "{{ dataset.title|capfirst }}",
+    createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
+    changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
+    editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
+    lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+    publicUrl: "{{ dataset.public_url }}",
+    createdAt: "{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}"
   });
-  var viewDatasetView = new ViewDatasetView({model: viewDatasetModel});
+  var DatasetView = new datasetView({model: Dataset});
 });
 </script>
 {% endblock %}

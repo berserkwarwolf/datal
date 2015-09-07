@@ -3,7 +3,7 @@ from django import forms
 from django.utils.translation import ugettext_lazy, ugettext
 
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-
+from core.choices import VISUALIZATION_LIBS
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -46,18 +46,15 @@ class VisualizationForm(forms.Form):
     yTitle = forms.CharField(required=False, max_length=200)
     labelSelection = forms.CharField(required=False, max_length=200)
     headerSelection = forms.CharField(required=False, max_length=200)
-    # pInvertData ?
-    # lib?
-    # pInvertedAxis
-    # pCorrelative
+    lib = forms.ChoiceField(required=True, choices=VISUALIZATION_LIBS)
+    invertData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    invertedAxis = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    correlativeData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    is3D = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
-        visualization_rev = lifecycle.create(
-            datastream_rev=revision,
-            language=request.auth_manager.language,
-            **self.cleaned_data
-        )
+        visualization_rev = lifecycle.create(revision, language=request.user.language,  **self.cleaned_data)
 
         return dict(
             status='ok',
@@ -85,9 +82,11 @@ class RequestForm(forms.Form):
 class PreviewForm(RequestForm):
     nullValueAction = forms.CharField(required=True)
     nullValuePreset = forms.CharField(required=False)
+    invertData = forms.CharField(required=False)
+    invertedAxis = forms.CharField(required=False)
     data = forms.CharField(required=True)
     labels = forms.CharField(required=False)
     headers = forms.CharField(required=False)
     lat = forms.CharField(required=False)
-    long = forms.CharField(required=False)
+    lon = forms.CharField(required=False)
     traces = forms.CharField(required=False)

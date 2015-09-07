@@ -3,6 +3,12 @@ from django.utils.translation import ugettext_lazy
 from model_utils import Choices
 
 
+VISUALIZATION_LIBS = (
+    ('google', 'Google Charts'),
+    ('d3', 'D3')
+)
+
+
 class ChannelTypes():
     WEB = 0
     API = 1

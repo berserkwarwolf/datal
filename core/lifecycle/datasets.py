@@ -3,7 +3,7 @@ from django.db.models import F, Max
 from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
-from core.choices import ActionStreams, STATUS_CHOICES
+from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
@@ -20,6 +20,9 @@ ACCEPT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW] # Pa
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
+
+logger = logging.getLogger(__name__)
+
 
 class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
@@ -194,13 +197,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
-
         if self.dataset_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Dataset - Send to review] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.dataset_revision.id, self.dataset_revision.status
+            ))
             raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.PENDING_REVIEW,
-                                    allowed_states=allowed_states)
-
+                from_state=self.dataset_revision.status,
+                to_state=StatusChoices.PENDING_REVIEW,
+                allowed_states=allowed_states
+            )
         self._send_childs_to_review()
 
         self.dataset_revision.status = StatusChoices.PENDING_REVIEW
@@ -209,16 +214,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def _send_childs_to_review(self):
         """ Envia a revision todos los datastreams hijos en cascada """
-
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
+            datastreams_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_revision__id'),
                 status=StatusChoices.DRAFT
             )
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).send_to_review()
+            for datastream_revision in datastreams_revisions:
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).send_to_review()
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
         """ accept a dataset revision """

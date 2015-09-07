@@ -78,36 +78,6 @@ msgstr "Este es el GUID de la Colección:"
 msgid "DSDET-GETGUID-TITLE"
 msgstr "Este es el GUID de la Vista:"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Aprobar"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Rechazar"
-
-msgid "APP-PUBLISH-TEXT"
-msgstr "Publicar"
-
-msgid "APP-ACTIONS-UNPUBLISH"
-msgstr "Despublicar"
-
-msgid "APP-DRAFT-TEXT"
-msgstr "Borrador"
-
-msgid "APP-PENDINGREVIEW-TEXT"
-msgstr "Revisión Pendiente"
-
-msgid "APP-APPROVED-TEXT"
-msgstr "Aprovado"
-
-msgid "APP-PUBLISHED-TEXT"
-msgstr "Publicado"
-
-msgid "APP-UNPUBLISH-TEXT"
-msgstr "Despublicado"
-
-msgid "APP-REJECTED-TEXT"
-msgstr "Rechazado"
-
 msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DASHBOARD"
 msgstr "¿Estas seguro que deseas despublicar esta Colección?"
 
@@ -849,3 +819,12 @@ msgstr "Vista guardada exitosamente."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Etiquetas para esta Vista"
+
+msgid "APP-VIZ-CUSTOMIZE-TEXT"
+msgstr "Personalización"
+
+msgid "APP-VIZ-METADATA-TEXT"
+msgstr "Descripción"
+
+msgid "APP-VIZ-FINISH-TEXT"
+msgstr "Revisión"

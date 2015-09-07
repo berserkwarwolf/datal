@@ -7,7 +7,6 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import get_object_or_404, HttpResponsePermanentRedirect
 from django.views.decorators.clickjacking import xframe_options_exempt
 from core.cache import Cache
-from core.helpers import Day
 from core.models import *
 from datetime import date, timedelta
 import json

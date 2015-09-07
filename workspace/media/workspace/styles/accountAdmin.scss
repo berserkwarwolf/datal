@@ -7,9 +7,14 @@
 .content {padding-bottom:30px;background:#fff;}
 .content, .layout{background:none;}
 .main-section .section-content{background-color:#FFF;padding:0;}
-.list-container{padding:0 15px 15px;margin:0;}
+.list-container{padding:0;margin:0;}
+.ao-tabs{padding:0 10px;background:none;border:0;}
 .ao-tabs .tabsList .tab.tab-selected div a, 
 .ao-tabs .tabsList .tab.tab-selected:hover div a{color:$font-color-semi-light;}
+.ao-tabs .tabsList .tab.tab-selected, 
+.ao-tabs .tabsList .tab.tab-selected:hover{background:#E4E4E4;}
+.ao-tabs .tabs-in ul{border-bottom:1px solid #E4E4E4;display:block;}
+.ao-tabs .tabs-in li{position:relative;top:1px;}
 
 /*FORMS*/
 .dataStreamForm{padding:20px 0 20px 20px;}
@@ -42,7 +47,8 @@
 .domainForm .form .row input[type=radio]{position:relative;top:2px;margin-left:0;}
 
 /*FORM CONTAINER*/
-.formContainer header, .formContainer .titleContainer{background-color:#fff;padding:20px 10px 18px 10px;border-bottom:1px solid #e5e3e3;margin:0 15px;
+.formContainer header, 
+.formContainer .titleContainer{background-color:#fff;padding:20px 10px 18px 10px;border-bottom:1px solid #e5e3e3;
   -webkit-border-radius:3px 3px 0 0;
      -moz-border-radius:3px 3px 0 0;
           border-radius:3px 3px 0 0;
@@ -53,12 +59,12 @@
 .formContainer header h3, .formContainer .titleContainer h3{font-size:$font-size-l;font-weight:bold;display:inline-block;font-family:$font-titles-family;}
 .formContainer header h3 span, .formContainer .titleContainer h3 span{color:#999;}
 .formContainer header h3 span{font-size:14px;font-weight:normal;color:#999;}
-.buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:$accent-color-05;margin:0 15px;
+.buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:$accent-color-05;
   -webkit-box-shadow:1px 0 0 #fff;
      -moz-box-shadow:1px 0 0 #fff;
           box-shadow:1px 0 0 #fff;
 }
-.formContainer .columns{background-color: #f6f4f4;margin:0 15px;}
+.formContainer .columns{background-color: #f6f4f4;}
 
 .formContainer .contentForm fieldset{padding:20px;}
 .formContainer .separator{height:1px;background:#d7d7d7;margin:5px 0 20px 0;}

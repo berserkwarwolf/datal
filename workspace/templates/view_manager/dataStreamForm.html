@@ -27,26 +27,26 @@
 
               <div class="row clearfix">
                 <label for="id_category">{{datastream_form.category.label}}:</label>
-                <select id="id_category" class="FL">
-                    {% for category in categories %}
-                                        {% if category.category__id == datastream_revision.category_id %}
-                                <option value="{{category.category__id}}" selected="selected">{{category.name}}</option>
-                                        {% else %}
-                                            <option value="{{category.category__id}}">{{category.name}}</option>
-                                        {% endif %}
-                    {% endfor %}
+                <select id="id_category">
+                  {% for category in categories %}
+                    {% if category.category__id == datastream_revision.category_id %}
+                      <option value="{{category.category__id}}" selected="selected">{{category.name}}</option>
+                    {% else %}
+                      <option value="{{category.category__id}}">{{category.name}}</option>
+                    {% endif %}
+                  {% endfor %}
                 </select>
                 <!-- <span class="required">*</span> -->
             </div>
-            <div class="row clearfix">
+            <div class="row clearfix" style="display:none;">
                 <label for="id_status">{{datastream_form.status.label}}:</label>
                 <div class="formErrorMessageContainer">
-                  <select id="id_status" class="FL" name="status">
-                    <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>
+                  <select id="id_status" name="status">
+                    <!-- <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>-->
                     {% for choice_id, choice_name in choices %}
-                      {# temporary fix #}
-                      {% if choice_id == 0 or choice_id == 1 or choice_id == 3 or choice_id == 6 %}
-                      <option value="{{ choice_id }}">{{ choice_name }}</option>
+                      {# temporary fix - Just show draft status = 0 #}
+                      {% if choice_id == 0 %}
+                      <option value="{{ choice_id }}" {% if choice_id == 0 %}selected="selected"{% endif %}>{{ choice_name }}</option>
                       {% endif %}
                     {% endfor %}
                   </select>

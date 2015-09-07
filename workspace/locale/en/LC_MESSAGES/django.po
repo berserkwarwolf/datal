@@ -518,7 +518,7 @@ msgid "APP-FORGOTPASSWORD-TEXT"
 msgstr "Forgot your password?"
 
 msgid "FORGOT-PASSWORD-LABEL"
-msgstr "Please enter your username or email address:"
+msgstr "Username or E-mail"
 
 msgid "FORGOT-PASSWORD-TIP"
 msgstr "You will receive instructions to get a new password via email."
@@ -572,7 +572,7 @@ msgid "APP-TRYJUNARFREE-TEXT"
 msgstr "Request a demo"
 
 msgid "APP-SIGNUP-TITLE-TEXT"
-msgstr "Create a new account"
+msgstr "Create an account"
 
 msgid "WS-ACCOUNTS-ACCOUNT-NAME-TIP"
 msgstr "Enter your organization name"
@@ -986,9 +986,6 @@ msgstr "Save"
 msgid "APP-SENDTOREVIEW-TEXT"
 msgstr "Send to review"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Approve"
-
 msgid "APP-CANCEL-TEXT"
 msgstr "Cancel"
 
@@ -1021,9 +1018,6 @@ msgstr "Current status"
 
 msgid "APP-CHANGE_STATUS-TEXT"
 msgstr "Change status"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Reject"
 
 msgid "APP-ACTIONS-UNPUBLISH"
 msgstr "Unpublish"
@@ -1575,7 +1569,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "Where's the data"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Show us what data you want to collect by clicking on the <strong>blue dashed box</strong>"
+msgstr "Click on the data you want to use"
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "Need help"
@@ -1638,10 +1632,10 @@ msgid "CREATION-STEP3-HELPTIP"
 msgstr "A good data view clearly communicates what it is about."
 
 msgid "APP-PREVIEWANDSAVE-TEXT"
-msgstr "Preview &amp; Save"
+msgstr "Make sure that all is going well with your Data View."
 
 msgid "CREATE-STEP4-SUBTITLE"
-msgstr "Here is a preview of your data view. If everything is fine, click <strong>&quot;Save&quot;</strong>"
+msgstr "For large files we show here up to 100 rows. You can see it completely at the end."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Tags for this data view"
@@ -1744,9 +1738,6 @@ msgstr "Check below the differences between roles."
 
 msgid "MISSING-TRACKING-ID"
 msgstr "To add any event, you need to set the property ID of your Google Analytics account."
-
-msgid "CREATEDS-STEP4-TIP"
-msgstr "<em>Note:</em> This is just a preview of the data view, and may not contain the actual number of rows."
 
 msgid "ANALYTICS-FORM-TIP"
 msgstr "You can track only one account."
@@ -2234,7 +2225,7 @@ msgid "HEADER-SEARCH-ADVANCED"
 msgstr "Advanced options"
 
 msgid "HEADER-ODS-BUTTON"
-msgstr "View my Open Data Site"
+msgstr "View Open Data site"
 
 msgid "HEADER-ACCOUNTDETAILLS-TEXT"
 msgstr "Account Details"
@@ -2297,53 +2288,13 @@ msgid "APP-FEEDBACK-TEXT"
 msgstr "Feedback"
 
 msgid "LANDINGPAGE-SECTION-TITLE"
-msgstr "Welcome "
-
-msgid "LANDINGPAGE-GETTINGSTARTED-TITLE"
-msgstr "Open Data made easy"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SUBTITLE"
-msgstr "Follow these simple steps to get started:"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REMEMBER"
-msgstr "Remember"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE"
-msgstr "Set up account"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT"
-msgstr "In the settings section, administrators can assign users with different roles, create Open Data categories, set up home page and branding for the Open Data site, among much more things."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP"
-msgstr "The home page of your Open Data site can be fully customized, choosing between different themes."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE"
-msgstr "Collect, Enhance & Publish data"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
-msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and finally publish them to your Open Data site."
-# msgstr "Choose the Datasets that you want to upload from your computer or the web, transform them into Data Views and Visualizations, and finally publish them to your Open Data site individually and arrange them as Dashboards collections."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "A Dataset is needed to create a Data View, and a Data View is needed to create a Visualization. Dashboard are used to arrange several Data Views and Visualizations by topic."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
-msgstr "The publishing process and revisions"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT"
-msgstr "When you create a resource, you are creating its first revision. So, every time you save a change to it (draft, send to review, publish, or unpublish) you are creating a new revision. This allows you to work out the resource prior publishing it to your Open Data site."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP"
-msgstr "Your Open Data site will always show the last published revision of a resource, unless you unpublish it."
-
-msgid "LANDINGPAGE-NUMBERS-TITLE"
-msgstr "Open Data numbers"
-
-msgid "LANDINGPAGE-NUMBERS-REPORTS"
-msgstr "View reports"
+msgstr "Welcome"
 
 msgid "LANDINGPAGE-ACTIVITY-TITLE"
-msgstr "Latest activity"
+msgstr "Recent account activity"
+
+msgid "LANDINGPAGE-ACTIVITY-TIME"
+msgstr "Modification"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
 msgstr "has created"
@@ -2359,21 +2310,6 @@ msgstr "Today"
 
 msgid "LANDINGPAGE-ACTIVITY-YESTERDAY"
 msgstr "Yesterday"
-
-msgid "LANDINGPAGE-NEWS-TITLE"
-msgstr "News"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
-msgstr "Follow us"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
-msgstr "For the latest news and updates on DATAL, follow <a href='https://twitter.com/junar' title='Follow @junar on Twitter' target='_blank'>@junar</a> on Twitter and check out the <a href='http://blog.junar.com' title='Check out the DATAL blog' target='_blank'>DATAL blog</a>. Contact us on <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
-msgstr "Recent Updates - v1.0"
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TEXT"
-msgstr "Improved Dataviews and Visualization details, workspace redesign, new home page theme tool, and more! Read all the details on the <a href='#' title='View recent updates page' target='_blank'>recent updates</a> page."
 
 msgid "APP-DOWNLOAD-CSV-TEXT"
 msgstr "Download as CSV"
@@ -2454,7 +2390,7 @@ msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
 msgstr "Delete Dataset "
 
 msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
-msgstr "The following resources are associated to this Dataset, and they will also delete and will be removed from dashboards."
+msgstr "The following resources are associated to this Dataset, and they will also delete."
 
 msgid "APP-DELETE-DATASET-ACTION-TEXT"
 msgstr "The dataset and the associated resources have been deleted."
@@ -2467,9 +2403,6 @@ msgstr "The dataset revision has been deleted."
 
 msgid "APP-DELETE-DATASET-REV-ACTION-ERROR-TEXT"
 msgstr "Error on deleteing the dataset revision."
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources are associated to this Datastream, and they will also delete and will be removed from dashboards."
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
@@ -2498,14 +2431,8 @@ msgstr "Error on deleteing the visualization revision."
 msgid "APP-OVERLAY-DELETE"
 msgstr "Delete"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
-msgstr "Unpublish Dataset "
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
-msgstr "The following resources, that are associated to this Dataset, will also unpublish and will be removed from dashboards."
-
-msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Unpublish"
+msgid "APP-VISUALIZATIONS-CREATE-TEXT"
+msgstr "Create Visualization"
 
 msgid "APP-TYPES-TEXT"
 msgstr "Types"
@@ -2616,10 +2543,10 @@ msgid "APP-COLLECT-SUBTITLE"
 msgstr "Choose an option to continue."
 
 msgid "APP-WEBSITE-TEXT"
-msgstr "Website / web-hosted file"
+msgstr "From an url or website... "
 
 msgid "APP-WEBSERVICE-TEXT"
-msgstr "Web service"
+msgstr "From a web service..."
 
 msgid "APP-COLLECT-UPLOAD-TITLE"
 msgstr "Collect from your computer"
@@ -2628,7 +2555,7 @@ msgid "APP-MANDATORY-FIELDS-TEXT"
 msgstr "Fields marked with (<span class='required'>*</span>) are mandatory."
 
 msgid "APP-UPLOAD-FILE-TEXT"
-msgstr "Upload file"
+msgstr "From a file..."
 
 msgid "APP-SELECT-FILE-TEXT"
 msgstr "Select file"
@@ -2714,12 +2641,6 @@ msgstr "Delete Dataset"
 msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
-msgstr "Delete Datastream"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
-msgstr "This action cannot be undone. Please, confirm how to proceed:"
-
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TITLE"
 msgstr "Delete Visualization"
 
@@ -2758,9 +2679,6 @@ msgstr "Filter Datasets"
 
 msgid "APP-ADD-NEW-VISUALIZATION-TEXT"
 msgstr "Add new Visualization"
-
-msgid "APP-ADD-VISUALIZATION-HINT"
-msgstr "Select a Data view to continue."
 
 msgid "APP-FILTER-VISUALIZATIONS-TEXT"
 msgstr "Filter Visualizations"
@@ -2873,24 +2791,6 @@ msgstr "This Dataset cannot be used to create a Data View."
 msgid "APP-NOCHILDRESOURCESYET-TEXT"
 msgstr "There are not associated resources to this Dataset."
 
-msgid "APP-DATASET-APPROVED-TEXT"
-msgstr "This Dataset has been approved."
-
-msgid "APP-DATASET-REJECTED-TEXT"
-msgstr "This Dataset has been rejected and set as draft."
-
-msgid "APP-DATASET-NOT-REVIEWED-TEXT"
-msgstr "This Dataset has not been reviewed."
-
-msgid "APP-DATAVIEW-APPROVED-TEXT"
-msgstr "This Data View has been approved."
-
-msgid "APP-DATAVIEW-REJECTED-TEXT"
-msgstr "This Data View has been rejected and set as draft."
-
-msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
-msgstr "The Data View has not been reviewed."
-
 msgid "APP-START-FROM-HERE-TEXT"
 msgstr "You can start from here!"
 
@@ -2915,68 +2815,275 @@ msgstr "Invalid file format"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
 
+msgid "APP-BACK-TEXT"
+msgstr "Back"
+
+msgid "APP-ADDNEWDATASET-TEXT"
+msgstr "New Dataset"
+
+msgid "APP-ADDNEWDATAVIEW-TEXT"
+msgstr "New Data View"
+
+msgid "APP-STATUS-UNDERREVIEW"
+msgstr "In review"
+
+msgid "APP-LASTPUBLISHDATE-TEXT"
+msgstr "Last published version:"
+
+msgid "APP-VIEWONSITE-TEXT"
+msgstr "View on site"
+
+msgid "APP-SENDREJECTEDNOTE-TEXT"
+msgstr "Rejection reason?"
+
+msgid "APP-VIEWREJECTEDNOTE-TEXT"
+msgstr "View reason for rejection"
+
+msgid "APP-DATASET-APPROVED-TITLE"
+msgstr "Dataset has been accepted"
+
+msgid "APP-DATASET-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-DATASET-REJECTED-TITLE"
+msgstr "Dataset has been rejected"
+
+msgid "APP-DATASET-REJECTED-TEXT"
+msgstr "The Dataset has been set as draft. Tell the owner to review it."
+
+msgid "APP-DATASET-PUBLISHED-TITLE"
+msgstr "Dataset has been published"
+
+msgid "APP-DATASET-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-DATASET-UNPUBLISH-TITLE"
+msgstr "Dataset has been unpublished"
+
+msgid "APP-DATASET-UNPUBLISH-TEXT"
+msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATASET-SENDTOREVIEW-TITLE"
+msgstr "Dataset has been sent to review"
+
+msgid "APP-DATASET-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "APP-DATAVIEW-APPROVED-TITLE"
+msgstr "Data View has been accepted"
+
+msgid "APP-DATAVIEW-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-DATAVIEW-REJECTED-TITLE"
+msgstr "Data View has been rejected"
+
+msgid "APP-DATAVIEW-REJECTED-TEXT"
+msgstr "The Data View has been set as draft. Tell the owner to review it."
+
+msgid "APP-DATAVIEW-PUBLISHED-TITLE"
+msgstr "Data View has been published"
+
+msgid "APP-DATAVIEW-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-DATAVIEW-UNPUBLISH-TITLE"
+msgstr "Data View has been unpublished"
+
+msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
+msgstr "The Data View has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
+msgstr "Data View has been sent to review"
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "APP-VISUALIZATION-APPROVED-TITLE"
+msgstr "Visualization has been accepted"
+
+msgid "APP-VISUALIZATION-APPROVED-TEXT"
+msgstr "Publish it to view it on Open Data site."
+
+msgid "APP-VISUALIZATION-REJECTED-TITLE"
+msgstr "Visualization has been rejected"
+
+msgid "APP-VISUALIZATION-REJECTED-TEXT"
+msgstr "The Visualization has been set as draft. Tell the owner to review it."
+
+msgid "APP-VISUALIZATION-PUBLISHED-TITLE"
+msgstr "Visualization has been published"
+
+msgid "APP-VISUALIZATION-PUBLISHED-TEXT"
+msgstr "You can now view it on your Open Data site."
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TITLE"
+msgstr "Visualization has been unpublished"
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TEXT"
+msgstr "The Visualization has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TITLE"
+msgstr "Visualization has been sent to review"
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TEXT"
+msgstr "A publisher will review it."
+
+msgid "EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR"
+msgstr "System error: No status provided"
+
+msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
+msgstr "To change actual status of this resource, the system must provide a status in the POST request."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-UNPUBLISH-RESOURCE-TEXT"
+msgstr "Delete all revisions"
+
+msgid "APP-UNPUBLISH-REVISION-TEXT"
+msgstr "Delete actual revision"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataset, will also unpublish."
+
+msgid "APP-OVERLAY-UNPUBLISH"
+msgstr "Unpublish"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
+msgstr "Delete Dataview "
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
+msgstr "Delete Dataview "
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataview, will also delete."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
+msgstr "Unpublish Dataview "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
+msgstr "Unpublish Dataview "
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
+msgstr "The following resources, that are associated to this Dataview, will also unpublish."
+
+msgid "DS-STEP1-TEXT"
+msgstr "Selection"
+
+msgid "DS-STEP2-TEXT"
+msgstr "Data"
+
+msgid "DS-STEP3-TEXT"
+msgstr "Description"
+
+msgid "DS-STEP4-TEXT"
+msgstr "Review"
+
+msgid "APP-CREATE-A-DATAVIEW-TEXT"
+msgstr "Create a Data View"
+
+msgid "APP-SIGNIN-TITLE-TEXT"
+msgstr "Sign in"
+
+msgid "APP-RECOVER-TITLE-TEXT"
+msgstr "Recover password"
+
+msgid "APP-CREATE-A-DATASET-TEXT"
+msgstr "Create a Dataset"
+
+msgid "APP-EDIT-DATASET-TEXT"
+msgstr "Edit Dataset"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP1"
+msgstr "Create a dataset"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP2"
+msgstr "Create data views"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP3"
+msgstr "Create visualizations"
+
+msgid "LANDINGPAGE-NOACTIVITY-START"
+msgstr "Create a new dataset to begin"
+
+msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "Which dataview you want to use?"
+
 msgid "APP-CREATE-VISUALIZATION-TEXT"
 msgstr "Create visualization"
 
 msgid "APP-CREATE-VISUALIZATION-TITLE"
-msgstr "¿Qué necesitas mostrar?"
+msgstr "What do you need to show?"
 
 msgid "APP-CREATE-CHARTS-TEXT"
 msgstr "Charts"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-TEXT"
-msgstr "Una comparación"
+msgstr "A comparison"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPOSITION-TEXT"
-msgstr "Una composición estática"
+msgstr "A static composition"
 
 msgid "APP-CREATE-MAPS-TEXT"
 msgstr "Maps"
 
 msgid "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT"
-msgstr "Elementos en un mapa"
+msgstr "Elements on a map"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-IN-TIME-TEXT"
-msgstr "En el tiempo"
+msgstr "In the time"
 
 msgid "APP-LINE-CHART-TEXT"
 msgstr "Line chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-LINE-COMMENT-TEXT"
-msgstr "Cómo evoluciona uno o varios items a lo largo del tiempo"
+msgstr "How one or more items evolves over time"
 
 msgid "APP-AREA-CHART-TEXT"
 msgstr "Area chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-AREA-COMMENT-TEXT"
-msgstr "Como evolucionan varios ítems a lo largo del tiempo"
+msgstr "How many items evolve over time"
 
 msgid "APP-CREATE-VISUALIZATION-START-COMPARISON-BETWEEN-ITEMS-TEXT"
-msgstr "Entre ítems"
+msgstr "Among items"
 
 msgid "APP-BAR-CHART-TEXT"
 msgstr "Bar chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
-msgstr "Una variable por barra, pocas categorías muchos ítems"
+msgstr "One variable for each bar, few categories, many items"
 
 msgid "APP-COLUMN-CHART-TEXT"
 msgstr "Column chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-COLUMN-COMMENT-TEXT"
-msgstr "Una o pocas categorías/ítems"
+msgstr "One or a few categories/items"
 
 msgid "APP-PIE-CHART-TEXT"
 msgstr "Pie chart"
 
 msgid "APP-CREATE-VISUALIZATION-START-PIE-COMMENT-TEXT"
-msgstr "Porcentajes que componen un total"
+msgstr "Percentages making up a total"
 
 msgid "APP-TRACE-MAP-TEXT"
-msgstr "Trazado"
+msgstr "Trace"
 
 msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
-msgstr "Draw geometries, lines or polygons usign GIS datasets"
+msgstr "Draw geometric, lines or polygons using GIS datasets"
 
 msgid "APP-MARKERS-MAP-TEXT"
 msgstr "Markers"
@@ -2988,28 +3095,19 @@ msgid "APP-GEO-MAP-TEXT"
 msgstr "Geo"
 
 msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
-
-msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
-msgstr "Visualization"
-
-msgid "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE"
-msgstr "Description"
-
-msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
-msgstr "Revision"
+msgstr "Identify countries, continents or markers with color scale density"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
-msgstr "Compara en el tiempo"
+msgstr "Compare over time"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT"
-msgstr "Compara entre items"
+msgstr "Compare between items"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT"
-msgstr "Composición estática"
+msgstr "Static composition"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT"
-msgstr "Se está usando"
+msgstr "You are using"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT"
 msgstr "Google visualizations"
@@ -3018,13 +3116,13 @@ msgid "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT"
 msgstr "D3"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE"
-msgstr "¿No se ve bien?"
+msgstr "Doesn't look good?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
-msgstr "Cambiar filas/columnas"
+msgstr "Change rows/columns"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reordenar datos"
+msgstr "Reorder data"
 
 msgid "APP-DEFAULT-TEXT"
 msgstr "Default"
@@ -3045,10 +3143,10 @@ msgid "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT"
 msgstr "Set to a given value"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
-msgstr "Seleccione los datos que desee representar"
+msgstr "Select the data you want to represent"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT"
-msgstr "Origen de la fuente de datos"
+msgstr "Origin of the data source"
 
 msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
 msgstr "Choose a map"
@@ -3066,37 +3164,37 @@ msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
 msgstr "A physical map based on terrain information"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
-msgstr "Define el zoom inicial"
+msgstr "Set initial zoom"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-CLARIFICATION-TEXT"
-msgstr "El usuario podrá de todas maneras, ampliar o reducir el mapa en la publicación."
+msgstr "The user can anyway, zoom the map in the publication."
 
 msgid "APP-CREATE-MAP-TITLE"
-msgstr "Crea un mapa de puntos"
+msgstr "Create map"
 
 msgid "APP-CREATE-MAP-DATA-TITLE"
-msgstr "Datos del mapa"
+msgstr "Map data"
 
 msgid "APP-GRAPH-TEXT"
 msgstr "Graph"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "1. ¿Cuáles son los intervalos con datos?"
+msgstr "1. Which are the data intervals?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "2. Etiquetas (Eje X)"
+msgstr "2. Tags (X axis)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
-msgstr "Las categorías a comparar"
+msgstr "Categories to compare"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "3. Encabezado/s"
+msgstr "3. Header/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
-msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+msgstr "You can compare data from various categories in parallel. They shall be specified in the referencais or legends."
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
-msgstr "Seleccione los valores para el mapa (columnas o filas)"
+msgstr "Select values for the map (columns or rows)"
 
 msgid "APP-CREATE-MAP-TEXT"
 msgstr "Create map"
@@ -3111,4 +3209,7 @@ msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
 msgstr "3. Markers information"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
-msgstr "Es lo que verás en el tooltip del mapa"
+msgstr "It's what you will see in the tooltip map"
+
+msgid "APP-ADDNEWVISUALIZATION-TEXT"
+msgstr "New Visualization"

@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load compress staticfiles sass_tags %}
+{% load i18n extra_tags compress staticfiles sass_tags %}
 
 {% block css_includes %}
-    {% compress css %}
-    <link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
-    <link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
-    {% endcompress %}
+		{% compress css %}
+		<link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
+		<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
+		{% endcompress %}
 {% endblock %}
 
 {% block js_includes %}
@@ -17,17 +17,66 @@
 
 	<!-- NEW -->
 	<script type="text/javascript" src="/js_workspace/common.js"></script>
-    <!-- Error Manager Module -->
-    <script language="javascript" src="/js_workspace/errorManager/errorManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-    <script language="javascript" src="/js_workspace/errorManager/errorManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<!-- Error Manager Module -->
+	<script language="javascript" src="/js_workspace/errorManager/errorManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+	<script language="javascript" src="/js_workspace/errorManager/errorManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}
 
 {% block body %}
 	<div class="layout">
 
 		{% block header %}
+			
+			<!--[if lt IE 8]>
+			<div class="ieMsg">
+				<div class="w960 clearfix">
+					{% trans "HEADER-IE-MESSAGES" %}
+				</div>
+			</div>
+			<![endif]-->
+
 			<!-- Header -->
-			{% include "header_workspace.html" %}
+			<header class="header clearfix">
+				<div class="wrapper1">
+					<div class="wrapper2 clearfix">
+						<div class="wrapper3">
+
+							<!-- Logo -->
+							<a href="/welcome" title="DATAL" class="logo FL clearfix">
+								<div class="logo-header-brand"></div>
+							</a>
+
+							<div class="global-navigation">
+
+								<div class="header-navigation col-xs-3 clearfix">
+									{% block header_navigation %}{% endblock %}
+								</div>
+
+								<div class="global-actions col-xs-9 clearfix">
+
+									<!-- My Account Tab -->
+									<div class="tab pulldown FR">
+										<a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">{% gravatar auth_manager "small" "" %} {{auth_manager.nick}}<span class="icon icon-right icon-pulldown"></span></a>
+										<div class="submenu border-box" style="display:none;">
+												<ul>
+													<li><a href="{% url 'accounts.my_account' %}" title="{% trans 'HEADER-ACCOUNTDETAILLS-TEXT' %}">{% trans "HEADER-ACCOUNTDETAILLS-TEXT" %}</a></li>
+													<li><a id="id_sign_out" href="/signout" title="{% trans 'HEADER-SIGNOUT-TEXT' %}">{% trans "HEADER-SIGNOUT-TEXT" %}</a></li>
+												</ul>
+										</div>
+									</div>
+
+									<!-- ODS Button -->
+									<a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-view-site icon-right"></span></a>
+
+								</div>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</header>
+
 		{% endblock %}
 
 		<!-- Workspace -->
@@ -52,9 +101,6 @@
 								{% block content %}{% endblock %}
 							</div>
 
-							<!-- Footer -->
-							{% include "footer_workspace.html" %}
-
 						</div>
 
 					</div>
@@ -66,19 +112,19 @@
 
 {% block base_bottom_js %}
 
-    {% include "errorManager/errorManager.html" %}
+		{% include "errorManager/errorManager.html" %}
 
 	<script type="text/javascript">
 		
 		{% if auth_manager %}
 		var authManager = new AuthManager({
-			id: {{auth_manager.id|default_if_none:"null"}}
-			, nick: "{{auth_manager.nick}}"
-			, roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
-			, privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}]
-			, account_level : "{{ auth_manager.account_level }}"
-			, isAuthenticated: {{ auth_manager.is_authenticated|lower }}
-			, email: "{{ auth_manager.email|lower }}"
+			id: {{auth_manager.id|default_if_none:"null"}}, 
+			nick: "{{auth_manager.nick}}", 
+			roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
+			privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
+			account_level : "{{ auth_manager.account_level }}", 
+			isAuthenticated: {{ auth_manager.is_authenticated|lower }}, 
+			email: "{{ auth_manager.email|lower }}"
 		});
 		{% endif %}
 
@@ -87,7 +133,7 @@
 		Configuration.apiUri = "{{settings.API_URI}}";
 		Configuration.apiKey = "{{settings.PUBLIC_KEY}}";
 		Configuration.language = "{{LANGUAGE_CODE}}";
-		
+
 		csrfmiddlewaretoken = '{{ csrf_token }}';
 		
 		function csrfSafeMethod(method) {

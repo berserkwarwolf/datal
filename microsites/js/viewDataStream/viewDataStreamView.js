@@ -284,25 +284,6 @@ var viewDataStreamView = Backbone.View.extend({
   	// Update Export href Values
   	$('#id_exportToCSVButton').attr('href',CSV+paramsQuery+filter);
   	$('#id_exportToXLSButton').attr('href',XLS+paramsQuery+filter);
-
-  	// Erase Pivot tables if Url has changed
-  	cfgURL = "";
-  	if (typeof(flexmonster) != "undefined"){ //_.isUndefined work just if I use flexmonster = undefined (???)
-      	    if (!_.isUndefined(flexmonster.flashVarsArray[flexmonster.id]))
-      	        {
-                    if (!_.isUndefined(flexmonster.flashVarsArray[flexmonster.id].configUrl))
-                        {
-                        cfgURL = flexmonster.flashVarsArray[flexmonster.id].configUrl;
-                        }
-                    }
-  	
-  	if( this.model.getPivotTableConfig() != cfgURL){
-    	$('#id_pivotDataStream #'+flexmonster.id).remove();
-    	$('#id_pivotDataStream').append('<div id="id_pivotObject" style="display:none;"></div>')
-    	this.theDataTable.pivot = null;
-  	}
-  	}
-
   },
 
   onParamChanged: function(){

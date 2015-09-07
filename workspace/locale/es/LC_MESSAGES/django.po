@@ -508,14 +508,11 @@ msgstr "Usuario"
 msgid "MODEL-PASSWORD-TEXT"
 msgstr "Contraseña"
 
-msgid "APP-LOGIN-TEXT"
-msgstr "Entrar"
-
 msgid "APP-FORGOTPASSWORD-TEXT"
 msgstr "¿Olvidaste tu clave?"
 
 msgid "FORGOT-PASSWORD-LABEL"
-msgstr "Por favor, ingrese su nombre de usuario o su dirección de correo electrónico:"
+msgstr "Usuario o E-mail"
 
 msgid "FORGOT-PASSWORD-TIP"
 msgstr "Recibirás instrucciones para obtener una nueva contraseña por correo electrónico."
@@ -569,7 +566,7 @@ msgid "APP-TRYJUNARFREE-TEXT"
 msgstr "Solicitar una demo"
 
 msgid "APP-SIGNUP-TITLE-TEXT"
-msgstr "Creación de nueva cuenta"
+msgstr "Crear una cuenta"
 
 msgid "WS-ACCOUNTS-ACCOUNT-NAME-TIP"
 msgstr "Ingresa el nombre de tu organización"
@@ -970,9 +967,6 @@ msgstr "Guardar"
 msgid "APP-SENDTOREVIEW-TEXT"
 msgstr "Enviar a revisión"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Aprobar"
-
 msgid "APP-CANCEL-TEXT"
 msgstr "Cancelar"
 
@@ -1005,9 +999,6 @@ msgstr "Estado actual"
 
 msgid "APP-CHANGE_STATUS-TEXT"
 msgstr "Cambiar estado"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Rechazado"
 
 msgid "APP-ACTIONS-UNPUBLISH"
 msgstr "Despublicar"
@@ -1556,7 +1547,7 @@ msgid "CREATE-STEP1-TITLE"
 msgstr "&iquest;Donde están los datos"
 
 msgid "CREATE-STEP1-SUBTITLE"
-msgstr "Indique que datos necesita clickeando en el <strong>recuadro azul</strong>"
+msgstr "Hace click sobre los datos que deseas utilizar para seleccionarlos."
 
 msgid "APP-NEEDHELP-TEXT"
 msgstr "&iquest;Necesitas ayuda"
@@ -1610,7 +1601,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Nómbralo"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Cuéntanos sobre que se trata tu Vista. Los campos con (<span class='required'>*</span>) son obligatorios."
+msgstr "Cuéntanos sobre que se trata tu vista. Los campos con (<span class='required'>*</span>) son obligatorios."
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Nombres: Buenas prácticas y uso correcto"
@@ -1619,10 +1610,10 @@ msgid "CREATION-STEP3-HELPTIP"
 msgstr "Una buena Vista comunica claramente sobre que trata."
 
 msgid "APP-PREVIEWANDSAVE-TEXT"
-msgstr "Vista Previa y Guardar"
+msgstr "Asegurate que todo va bien con tu vista."
 
 msgid "CREATE-STEP4-SUBTITLE"
-msgstr "Asegurate que todo esta bien en tu Vista y haz click en <strong>&quot;Guardar&quot;</strong>"
+msgstr "Para archivos extensos mostramos aquí sólo hasta 100 filas. Podrás verlo completo al finalizar."
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Etiquetas para esta Vista"
@@ -1725,9 +1716,6 @@ msgstr "Compruebe más abajo las diferencias entre los roles."
 
 msgid "MISSING-TRACKING-ID"
 msgstr "Para agregar cualquier evento, es necesario especificar el ID de propiedad de la cuenta de Google Analytics."
-
-msgid "CREATEDS-STEP4-TIP"
-msgstr "<em>Nota:</em> Esto es sólo una vista previa de la vista de datos, y puede no contener la cantidad real de filas."
 
 msgid "ANALYTICS-FORM-TIP"
 msgstr "Usted puede realizar el seguimiento de una sola cuenta."
@@ -2224,7 +2212,7 @@ msgid "HEADER-SEARCH-ADVANCED"
 msgstr "Opciones avanzadas"
 
 msgid "HEADER-ODS-BUTTON"
-msgstr "Ver mi sitio de datos abiertos"
+msgstr "Ver sitio de datos"
 
 msgid "HEADER-ACCOUNTDETAILLS-TEXT"
 msgstr "Detalles de la cuenta"
@@ -2287,53 +2275,13 @@ msgid "APP-FEEDBACK-TEXT"
 msgstr "Feedback"
 
 msgid "LANDINGPAGE-SECTION-TITLE"
-msgstr "Bienvenido "
-
-msgid "LANDINGPAGE-GETTINGSTARTED-TITLE"
-msgstr "Abra sus datos facilmente"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SUBTITLE"
-msgstr "Siga estos pasos:"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REMEMBER"
-msgstr "Recuerde"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TITLE"
-msgstr "Configure la cuenta"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TEXT"
-msgstr "En la sección de configuración, los administradores pueden asignar usuarios con diferentes roles, crear las categorías, configurar la página de inicio y la marca del sitio de datos abiertos, entre varias cosas más."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-SETTINGS-TIP"
-msgstr "La página principal de su sitio de datos abiertos puede ser totalmente personalizado, eligiendo entre diferentes temas."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TITLE"
-msgstr "Recolecte, mejore y publique datos"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TEXT"
-msgstr "Elija los conjuntos de datos que desea cargar desde su ordenador o la web, y transformelos en vistas de datos, y finalmente publíquelos en su sitio de datos abiertos, pudiendo gestionarlos con revisiones."
-# msgstr "Elija los conjuntos de datos que desea cargar desde su ordenador o la web, transformelos en vistas y visualizaciones de datos, y finalmente publicquelos en su sitio de datos abiertos de forma individual y también organicelos como colecciones."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-RESOURCES-TIP"
-msgstr "Se necesita de un conjunto de datos para crear una vista, y de una vista para crear una visualización. Las colecciones se utilizan para organizar varias vistas y visualizaciones por tema."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TITLE"
-msgstr "El proceso de publicación y las revisiones"
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TEXT"
-msgstr "Cuando se crea un recurso, se crea también su primera revisión. Por lo tanto, cada vez que se guarda un nuevo cambio en él (ya sea borrador, enviar a revisión, publicar o despublicar) usted está creando una nueva revisión. Esto le permite trabajar el recurso previo a la publicación en su sitio de datos abiertos."
-
-msgid "LANDINGPAGE-GETTINGSTARTED-REVISIONS-TIP"
-msgstr "Su sitio de datos abiertos mostrará siempre la última revisión publicada de un recurso, a menos que usted lo despublique."
-
-msgid "LANDINGPAGE-NUMBERS-TITLE"
-msgstr "Datos abiertos en números"
-
-msgid "LANDINGPAGE-NUMBERS-REPORTS"
-msgstr "Ver reportes"
+msgstr "Bienvenido"
 
 msgid "LANDINGPAGE-ACTIVITY-TITLE"
-msgstr "Última actividad"
+msgstr "Actividad reciente de la cuenta"
+
+msgid "LANDINGPAGE-ACTIVITY-TIME"
+msgstr "Modificación"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
 msgstr "ha creado"
@@ -2349,21 +2297,6 @@ msgstr "Hoy"
 
 msgid "LANDINGPAGE-ACTIVITY-YESTERDAY"
 msgstr "Ayer"
-
-msgid "LANDINGPAGE-NEWS-TITLE"
-msgstr "Novedades"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TITLE"
-msgstr "Siganos"
-
-msgid "LANDINGPAGE-NEWS-FOLLOWUS-TEXT"
-msgstr "Para las últimas novedades y actualizaciones sobre DATAL, sigue a <a href='https://twitter.com/junar' title='Sigue a @junar en Twitter' target='_blank'>@junar</a> en Twitter y revisa el <a href='http://blog.junar.com' title='Revisa el blog de DATAL' target='_blank'>blog de DATAL</a>. Ponganse en contacto con nosotros a <a href='mailto:support@junar.com' title='support@junar.com'>support@junar.com</a>."
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TITLE"
-msgstr "Actualizaciones recientes - v1.0"
-
-msgid "LANDINGPAGE-NEWS-RECENTUPDATES-TEXT"
-msgstr "Mejora de los detalles de las vistas y visualizaciones, rediseño del espacio de trabajo, nueva herramienta de selección de diseño para la página de inicio, y mucho más! Lea todos los detalles en la página de <a href='#' title='Ver página de actualizaciones recientes'>actualizaciones recientes</a>."
 
 msgid "APP-DOWNLOAD-CSV-TEXT"
 msgstr "Descargar como CSV"
@@ -2444,10 +2377,7 @@ msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE"
 msgstr "Eliminar conjunto de datos "
 
 msgid "APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados de la colección."
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a la vista y también serán eliminados de la colección."
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "La vista y sus recusros asociados, han sido eliminados."
@@ -2468,7 +2398,7 @@ msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
 msgstr "La visualización ha sido eliminada."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-TEXT"
-msgstr "La revisión de la visualización ha sido eliminada ."
+msgstr "La revisión de la visualización ha sido eliminada."
 
 msgid "APP-DELETE-VISUALIZATION-REV-ACTION-ERROR-TEXT"
 msgstr "Error al eliminar la revisión de la visualización."
@@ -2476,14 +2406,8 @@ msgstr "Error al eliminar la revisión de la visualización."
 msgid "APP-OVERLAY-DELETE"
 msgstr "Eliminar"
 
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
-msgstr "Despublicar "
-
-msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados y eliminados de la colección."
-
-msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Despublicar"
+msgid "APP-VISUALIZATIONS-CREATE-TEXT"
+msgstr "Crear Visualización"
 
 msgid "APP-DELETE-DATASET-ACTION-TEXT"
 msgstr "El conjunto de datos y los recursos asociados fueron eliminados."
@@ -2525,10 +2449,10 @@ msgid "APP-CHART-TYPES-SUBTITLE"
 msgstr "Seleccione el tipo de gráfico que se adapte a sus necesidades, y cómo se manejarán los datos. Pruebe diferentes combinaciones."
 
 msgid "BTN-BACK-TEXT"
-msgstr "Atrás"
+msgstr "Retroceder"
 
 msgid "BTN-NEXT-TEXT"
-msgstr "Siguiente"
+msgstr "Continuar"
 
 msgid "APP-CHART-TYPES-QUEST1"
 msgstr "Qué tipo de gráfico necesita?"
@@ -2606,10 +2530,10 @@ msgid "APP-COLLECT-SUBTITLE"
 msgstr "Elija una opción para continuar."
 
 msgid "APP-WEBSITE-TEXT"
-msgstr "Website / Archivo remoto"
+msgstr "Desde una url o sitio web..."
 
 msgid "APP-WEBSERVICE-TEXT"
-msgstr "Servicio web"
+msgstr "Desde un servicio web..."
 
 msgid "APP-COLLECT-UPLOAD-TITLE"
 msgstr "Subir desde su computadora"
@@ -2618,7 +2542,7 @@ msgid "APP-MANDATORY-FIELDS-TEXT"
 msgstr "Los campos que contienen (<span class='required'>*</span>) son requeridos."
 
 msgid "APP-UPLOAD-FILE-TEXT"
-msgstr "Subir archivo"
+msgstr "Desde un archivo..."
 
 msgid "APP-SELECT-FILE-TEXT"
 msgstr "Seleccionar"
@@ -2704,12 +2628,6 @@ msgstr "Eliminar conjunto de datos"
 msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
-msgstr "Eliminar vista"
-
-msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
-
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
@@ -2748,9 +2666,6 @@ msgstr "Filtrar conjuntos de datos"
 
 msgid "APP-ADD-NEW-VISUALIZATION-TEXT"
 msgstr "Agregar nueva Visualización"
-
-msgid "APP-ADD-VISUALIZATION-HINT"
-msgstr "Para continuar, seleccione una Vista de datos."
 
 msgid "APP-FILTER-VISUALIZATIONS-TEXT"
 msgstr "Filtrar visualizaciónes"
@@ -2863,24 +2778,6 @@ msgstr "Este Conjunto de Datos no puede ser usado para crear una Vista de Datos.
 msgid "APP-NOCHILDRESOURCESYET-TEXT"
 msgstr "Aún no hay recursos asociados a este Dataset."
 
-msgid "APP-DATASET-APPROVED-TEXT"
-msgstr "El conjunto de datos ha sido aprobado."
-
-msgid "APP-DATASET-REJECTED-TEXT"
-msgstr "El conjunto de datos ha sido rechazado y establecido como borrador."
-
-msgid "APP-DATASET-NOT-REVIEWED-TEXT"
-msgstr "El conjunto de datos no ha sido revisado."
-
-msgid "APP-DATAVIEW-APPROVED-TEXT"
-msgstr "La vista ha sido aprobada."
-
-msgid "APP-DATAVIEW-REJECTED-TEXT"
-msgstr "La vista ha sido rechazada y establecida como borrador."
-
-msgid "APP-DATAVIEW-NOT-REVIEWED-TEXT"
-msgstr "La vista no ha sido revisada."
-
 msgid "APP-START-FROM-HERE-TEXT"
 msgstr "Puede comenzar desde aquí!"
 
@@ -2904,6 +2801,210 @@ msgstr "Tipo de archivo no soportado"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+
+msgid "APP-BACK-TEXT"
+msgstr "Volver"
+
+msgid "APP-ADDNEWDATASET-TEXT"
+msgstr "Nuevo conjunto de datos"
+
+msgid "APP-ADDNEWDATAVIEW-TEXT"
+msgstr "Nueva vista"
+
+msgid "APP-LASTPUBLISHDATE-TEXT"
+msgstr "Última versión publicada:"
+
+msgid "APP-VIEWONSITE-TEXT"
+msgstr "Ver en sitio"
+
+msgid "APP-SENDREJECTEDNOTE-TEXT"
+msgstr "¿Motivo del rechazo?"
+
+msgid "APP-VIEWREJECTEDNOTE-TEXT"
+msgstr "Ver motivo del rechazo"
+
+msgid "APP-DATASET-APPROVED-TITLE"
+msgstr "Conjunto de datos aceptado"
+
+msgid "APP-DATASET-APPROVED-TEXT"
+msgstr "Publiquelo para verlo en el sitio de datos."
+
+msgid "APP-DATASET-REJECTED-TITLE"
+msgstr "Conjunto de datos rechazado"
+
+msgid "APP-DATASET-REJECTED-TEXT"
+msgstr "El conjunto de datos ha sido puesto como borrador. Digale al dueño que lo revise."
+
+msgid "APP-DATASET-PUBLISHED-TITLE"
+msgstr "Conjunto de datos publicado"
+
+msgid "APP-DATASET-PUBLISHED-TEXT"
+msgstr "Puedes verlo ahora en el sitio de datos."
+
+msgid "APP-DATASET-UNPUBLISH-TITLE"
+msgstr "Conjunto de datos despublicado"
+
+msgid "APP-DATASET-UNPUBLISH-TEXT"
+msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-DATASET-SENDTOREVIEW-TITLE"
+msgstr "Conjunto de datos enviado a revisión"
+
+msgid "APP-DATASET-SENDTOREVIEW-TEXT"
+msgstr "Un publicador lo revisará."
+
+msgid "APP-DATAVIEW-APPROVED-TITLE"
+msgstr "Vista aceptada"
+
+msgid "APP-DATAVIEW-APPROVED-TEXT"
+msgstr "Publiquela para verla en el sitio de datos."
+
+msgid "APP-DATAVIEW-REJECTED-TITLE"
+msgstr "Vista rechazada"
+
+msgid "APP-DATAVIEW-REJECTED-TEXT"
+msgstr "La vista ha sido puesta como borrador. Digale al dueño que la revise."
+
+msgid "APP-DATAVIEW-PUBLISHED-TITLE"
+msgstr "Vista publicada"
+
+msgid "APP-DATAVIEW-PUBLISHED-TEXT"
+msgstr "Puedes verla ahora en el sitio de datos."
+
+msgid "APP-DATAVIEW-UNPUBLISH-TITLE"
+msgstr "Vista despublicada"
+
+msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
+msgstr "La vista ha sido puesta como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
+msgstr "Vista enviada a revisión"
+
+msgid "APP-DATAVIEW-SENDTOREVIEW-TEXT"
+msgstr "Un publicador la revisará."
+
+msgid "APP-VISUALIZATION-APPROVED-TITLE"
+msgstr "Visualización aceptada"
+
+msgid "APP-VISUALIZATION-APPROVED-TEXT"
+msgstr "Publiquela para verla en el sitio de datos."
+
+msgid "APP-VISUALIZATION-REJECTED-TITLE"
+msgstr "Visualización rechazada"
+
+msgid "APP-VISUALIZATION-REJECTED-TEXT"
+msgstr "La visualización ha sido puesta como borrador. Digale al dueño que la revise."
+
+msgid "APP-VISUALIZATION-PUBLISHED-TITLE"
+msgstr "Visualización publicada"
+
+msgid "APP-VISUALIZATION-PUBLISHED-TEXT"
+msgstr "Puedes verla ahora en el sitio de datos."
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TITLE"
+msgstr "Visualización despublicada"
+
+msgid "APP-VISUALIZATION-UNPUBLISH-TEXT"
+msgstr "La visualización ha sido puesta como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TITLE"
+msgstr "Visualización enviada a revisión"
+
+msgid "APP-VISUALIZATION-SENDTOREVIEW-TEXT"
+msgstr "Un publicador la revisará."
+
+msgid "EXCEPTION-TITLE-NO-STATUS-PROVIDED-ERROR"
+msgstr "Error de sistema: Estado no proporcionado"
+
+msgid "EXCEPTION-DESCRIPTION-NO-STATUS-PROVIDED-ERROR"
+msgstr "Para cambiar el estado actual del recurso, el sistema debe proporcionar un estado en el pedido POST."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
+msgstr "Despublicar conjunto de datos"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-UNPUBLISH-RESOURCE-TEXT"
+msgstr "Despublicar todas las revisiones"
+
+msgid "APP-UNPUBLISH-REVISION-TEXT"
+msgstr "Despublicar revisión actual"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
+msgstr "Despublicar conjunto de datos"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
+
+msgid "APP-OVERLAY-UNPUBLISH"
+msgstr "Despublicar"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
+msgstr "Eliminar vista"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
+msgstr "Eliminar vista"
+
+msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
+msgstr "Despublicar vista"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
+msgstr "Despublicar vista"
+
+msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
+msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
+
+msgid "DS-STEP1-TEXT"
+msgstr "Selección"
+
+msgid "DS-STEP2-TEXT"
+msgstr "Datos"
+
+msgid "DS-STEP3-TEXT"
+msgstr "Descripción"
+
+msgid "DS-STEP4-TEXT"
+msgstr "Revisión"
+
+msgid "APP-CREATE-A-DATAVIEW-TEXT"
+msgstr "Crea una vista"
+
+msgid "APP-SIGNIN-TITLE-TEXT"
+msgstr "Iniciar sesión"
+
+msgid "APP-RECOVER-TITLE-TEXT"
+msgstr "Recuperar contraseña"
+
+msgid "APP-CREATE-A-DATASET-TEXT"
+msgstr "Crea un conjunto de datos"
+
+msgid "APP-EDIT-DATASET-TEXT"
+msgstr "Editar conjunto de datos"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP1"
+msgstr "Crea un conjunto de datos"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP2"
+msgstr "Crea vistas"
+
+msgid "LANDINGPAGE-NOACTIVITY-STEP3"
+msgstr "Crea visualizaciones"
+
+msgid "LANDINGPAGE-NOACTIVITY-START"
+msgstr "Crea un nuevo conjunto de datos para comenzar"
+
+msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "¿Qué vista quieres usar?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"
 msgstr "Crea una visualización"
@@ -2948,7 +3049,7 @@ msgid "APP-BAR-CHART-TEXT"
 msgstr "Gráfico de barras"
 
 msgid "APP-CREATE-VISUALIZATION-START-BAR-COMMENT-TEXT"
-msgstr "Una variable por barra, pocas categorías muchos ítems"
+msgstr "Una variable por barra, pocas categorías, muchos ítems"
 
 msgid "APP-COLUMN-CHART-TEXT"
 msgstr "Gráfico de columnas"
@@ -2966,28 +3067,19 @@ msgid "APP-TRACE-MAP-TEXT"
 msgstr "Trazado"
 
 msgid "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT"
-msgstr "Draw geometries, lines or polygons usign GIS datasets"
+msgstr "Dibuja geométricas, líneas o polígonos utilizando conjuntos de datos GIS"
 
 msgid "APP-MARKERS-MAP-TEXT"
 msgstr "Marcadores"
 
 msgid "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
+msgstr "Identifica varias ubicaciones utilizando conjuntos de datos GIS"
 
 msgid "APP-GEO-MAP-TEXT"
 msgstr "Marcadores"
 
 msgid "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT"
-msgstr "Pinpoint multiple locations using GIS datasets"
-
-msgid "APP-CREATE-VISUALIZATION-VISUALIZATION-TITLE"
-msgstr "Visualización"
-
-msgid "APP-CREATE-VISUALIZATION-DESCRIPTION-TITLE"
-msgstr "Descripción"
-
-msgid "APP-CREATE-VISUALIZATION-REVISION-TITLE"
-msgstr "Revisión"
+msgstr "Identifica países, continentes o marcadores con densidad de escala de colores"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT"
 msgstr "Compara en el tiempo"
@@ -3044,16 +3136,16 @@ msgid "APP-CUSTOMIZE-MAP-CHOOSE-TEXT"
 msgstr "Elige un mapa"
 
 msgid "APP-CUSTOMIZE-MAP-ROADMAP-DESCRIPTION-TEXT"
-msgstr "The default road map view"
+msgstr "La hoja de ruta predeterminada"
 
 msgid "APP-CUSTOMIZE-MAP-SATELLITE-DESCRIPTION-TEXT"
-msgstr "Google Earth satellite images"
+msgstr "Imágenes satelitales de Google Earth"
 
 msgid "APP-CUSTOMIZE-MAP-HYBRID-DESCRIPTION-TEXT"
-msgstr "A mixture of normal and satellite views"
+msgstr "Combinación de vistas normales y satelitales"
 
 msgid "APP-CUSTOMIZE-MAP-TERRAIN-DESCRIPTION-TEXT"
-msgstr "A physical map based on terrain information"
+msgstr "Un mapa físico basado en información del terreno"
 
 msgid "APP-CUSTOMIZE-MAP-DEFINE-ZOOM-TEXT"
 msgstr "Define el zoom inicial"
@@ -3102,3 +3194,6 @@ msgstr "3. Información de marcadores"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
 msgstr "Es lo que verás en el tooltip del mapa"
+
+msgid "APP-ADDNEWVISUALIZATION-TEXT"
+msgstr "Nueva visualización"

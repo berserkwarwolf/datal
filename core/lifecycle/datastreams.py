@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.db.models import F, Max
 from django.db import transaction
-from core.choices import ActionStreams
+from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, DataStreamRevision, DataStream, DatastreamI18n, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lib.datastore import *
@@ -19,6 +19,8 @@ ACCEPT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
+
+logger = logging.getLogger(__name__)
 
 
 class DatastreamLifeCycleManager(AbstractLifeCycleManager):
@@ -188,8 +190,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un datastream """
-
         if self.datastream_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Datastreams - Send to review] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.datastream_revision.id, self.datastream_revision.status
+            ))
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PENDING_REVIEW,
@@ -202,7 +206,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.REVIEW)
 
     def _send_childs_to_review(self):
-        """ Envia a revision todos los datastreams hijos en cascada """
+        """ Envia a revision todos las visualizaciones hijas en cascada """
 
         with transaction.atomic():
             visualization_revs = VisualizationRevision.objects.select_for_update().filter(

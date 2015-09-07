@@ -1,0 +1,37 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<!-- Resource Detail -->
+<div class="resource-detail box dataTable" id="id_visualizationContainer">
+        
+    <!-- Header -->
+    <header class="border-box">
+
+        <!-- Title and Description -->
+        <hgroup>
+            <h1>
+                <strong>{{visualization_revision.title|capfirst}}</strong>
+                {% if visualization_revision.parameters %}
+                <span class="parameters">
+                    (
+                    {% for parameter in visualization_revision.parameters %}
+                        {{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-PARAM-TEXT' %}">{{parameter.value}}</a> {% if not forloop.last %}, {%endif%}
+                    {%endfor%}
+                    )
+                </span>
+                {%endif%}
+            </h1>
+            <h2>{{visualization_revision.description|capfirst}}</h2>
+        </hgroup>
+
+    </header>
+
+    <!-- Data -->
+    <div class="data">
+
+        <!-- Data Stream Result -->
+        <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
+
+    </div>
+
+</div>

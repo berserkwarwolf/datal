@@ -27,7 +27,7 @@ var MainView = Backbone.View.extend({
         //Buttons views
         this.buttonsView = new ButtonsView({
             // TODO: this should be a child element of the main view
-            el: $('#buttons_view_container')
+            el: this.$('.section-title .buttons_view_container')
         });
         this.buttonsView.setSteps(this.steps[this.currentFlow]);
         this.buttonsView.render();
@@ -44,19 +44,19 @@ var MainView = Backbone.View.extend({
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view')
         }).init();
 
         var metadataView = new MetadataView({
-          name: gettext('APP-METADATA-TEXT'), 
+          name: gettext('APP-VIZ-METADATA-TEXT'), 
           model: this.model,
           el: this.$('.step-2-view')
         }).init();
 
         var finishView = new FinishView({
-          name: gettext('APP-FINISH-TEXT'),
+          name: gettext('APP-VIZ-FINISH-TEXT'),
           model: this.model,
           el: this.$('.step-3-view')
         }).init();
@@ -68,19 +68,19 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view-map')
         }).init();
 
        /* var mapMetadataView = new MapMetadataView({
-          name: gettext('APP-METADATA-TEXT'), 
+          name: gettext('APP-VIZ-METADATA-TEXT'), 
           model: this.model,
           el: this.$('.step-2-view-map')
         }).init();*/
 
         var mapFinishView = new MapFinishView({
-          name: gettext('APP-FINISH-TEXT'),
+          name: gettext('APP-VIZ-FINISH-TEXT'),
           model: this.model,
           el: this.$('.step-3-view-map')
         }).init();
@@ -100,13 +100,15 @@ var MainView = Backbone.View.extend({
         return this;
     },
 
-
     register: function(view, flow){
-        this.listenTo(view,'next',this.next);
-        this.listenTo(view,'previous',this.previous);
-        this.listenTo(view,'openModal',this.openModal);
-        this.listenTo(view,'goTo',this.goTo);
-        this.listenTo(view,'setFlow',this.setFlow);
+        if(!view.initializedEvents){
+            view.initializedEvents = true;
+            this.listenTo(view,'next',this.next);
+            this.listenTo(view,'previous',this.previous);
+            this.listenTo(view,'openModal',this.openModal);
+            this.listenTo(view,'goTo',this.goTo);
+            this.listenTo(view,'setFlow',this.setFlow);
+        }
 
         if(flow){
             this.steps[flow].push(view);
@@ -136,9 +138,14 @@ var MainView = Backbone.View.extend({
         if(this.index > 0){
             this.steps[this.currentFlow][this.index].finish();
             this.index--;
+            if( this.index == 0 ){
+                this.hideNavigation();
+            }else{
+                this.showNavigation();
+            }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
-
+    
         // Go to first "Static" Step
         }else{
             window.location = this.model.get('startUrl');
@@ -150,9 +157,15 @@ var MainView = Backbone.View.extend({
 
         // Next
         if( this.index < (this.steps[this.currentFlow].length-1) ){
+
             //this.model.set('output',output);
             this.steps[this.currentFlow][this.index].finish();
             this.index++;
+            if( this.index == 0 ){
+                this.hideNavigation();
+            }else{
+                this.showNavigation();
+            }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
 
@@ -197,7 +210,17 @@ var MainView = Backbone.View.extend({
 
     // TODO: this should be handled by the ButtonsView
     selectNavigationTab: function(index){
-        $('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)+1 ) );
+        $('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)-1 ) );
+    },
+
+    showNavigation: function(){
+        $('#buttons_view_container').show();
+        $('#start-title').hide();
+    },
+
+    hideNavigation: function(){
+        $('#buttons_view_container').hide();
+        $('#start-title').show();
     }
 
 

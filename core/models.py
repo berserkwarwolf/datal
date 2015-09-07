@@ -277,6 +277,11 @@ class DataStream(GuidModel):
     def current(self):
         return self.datastreamrevision_set.all()[0]
 
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
+
+
 class RevisionModel(models.Model):
     def get_meta_data_dict(self, metadata):
         answer = {}
@@ -515,6 +520,10 @@ class Dataset(GuidModel):
     def current(self):
         return self.datasetrevision_set.all()[0]
 
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
+
 
 class DatasetRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
@@ -745,10 +754,16 @@ class Visualization(GuidModel):
     def current(self):
         return self.visualizationrevision_set.all()[0]
 
+    @property
+    def last_published_revision_date(self):
+        return self.last_published_revision.created_at if self.last_published_revision else None
+
 
 class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
+    datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
+    lib = models.CharField(max_length=10, choices=choices.VISUALIZATION_LIBS)
     impl_details = models.TextField(blank=True)
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)

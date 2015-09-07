@@ -1,27 +1,27 @@
+# -*- coding: utf-8 -*-
 import json
 import urllib
 
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.db import transaction
-from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_http_methods
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext
+
 
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.exceptions import *
-from core.engine import invoke, preview_chart
+from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
 from core.choices import *
-from core.models import VisualizationRevision,DatasetRevision
-from core import helpers as LocalHelper
-from microsites.daos.visualizations import VisualizationDAO
-from workspace.decorators import *
-from workspace.settings import *
-from workspace.manageVisualizations.forms import *
+from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
+from core.utils import unset_visualization_revision_nice
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from workspace.manageVisualizations import forms
+from workspace.decorators import *
+from .forms import VisualizationForm, ViewChartForm
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +35,7 @@ def index(request):
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
-    logger.info(resources)
+
     for resource in resources:
         resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -90,7 +90,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for resource in resources:
-        print(resource)
         resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
         resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
@@ -138,21 +137,26 @@ def view(request):
 
     if form.is_valid():
         try:
-            visualization_revision = VZ(form.cleaned_data['visualization_revision_id'], auth_manager.language)
-            if visualization_revision.account_id != auth_manager.account_id:
+            visualization_revision = VisualizationDBDAO().get(
+                auth_manager.language,
+                visualization_revision_id=form.cleaned_data['visualization_revision_id']
+            )
+            if visualization_revision['account_id'] != auth_manager.account_id:
                 raise Http404
         except VisualizationRevision.DoesNotExist:
             raise Http404
         else:
-            visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
-            visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
+            visualization_revision_parameters = RequestProcessor(request).get_arguments(
+                visualization_revision['parameters']
+            )
+            visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
 
-            impl_details = json.loads(visualization_revision.impl_details)
+            impl_details = json.loads(visualization_revision['impl_details'])
             format = impl_details.get('format')
             if format.get('type') != 'mapchart':
                 contents, content_type = invoke(visualization_revision_parameters)
             else:
-                visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
+                visualization_revision_parameters['pId'] = visualization_revision['visualizationrevision_id']
                 # visualization_revision_parameters['pLimit'] = 10000
                 # visualization_revision_parameters['pPage'] = 0
                 visualization_revision_parameters['pBounds'] = ""
@@ -161,17 +165,17 @@ def view(request):
 
             visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
-            ds_revision = DatasetRevision.objects.filter(dataset=visualization_revision.dataset_id)[0]
+            ds_revision = DatasetRevision.objects.filter(dataset=visualization_revision['dataset_id'])[0]
             if ds_revision.user.account.id == auth_manager.account_id:
                 editing = True
-            elif visualization_revision.status == StatusChoices.PUBLISHED:
+            elif visualization_revision['status'] == StatusChoices.PUBLISHED:
                 editing = False
             else:
                 raise Http404
 
-            dataset_revision = DT(ds_revision.id, auth_manager.language)
+            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
 
-            status = STATUS_CHOICES[int(visualization_revision.status)][1]
+            status = STATUS_CHOICES[int(visualization_revision['status'])][1]
 
             return render_to_response('viewChart/index.html', locals())
     else:
@@ -233,7 +237,12 @@ def related_resources(request):
 @login_required
 @require_GET
 def action_view(request, revision_id):
-    datastream_rev = VisualizationDBDAO().get(request.auth_manager.language, visualization_revision_id=revision_id)
+
+    visualization_revision = VisualizationDBDAO().get(
+        request.auth_manager.language,
+        visualization_revision_id=revision_id
+    )
+
     return render_to_response('viewVisualization/index.html', locals())
 
 
@@ -250,7 +259,7 @@ def edit(request, datastream_revision_id=None):
 @login_required
 def preview(request):
 
-    form = PreviewForm(request.GET)
+    form = forms.PreviewForm(request.GET)
     logger.error("entering preview handler")
     if form.is_valid():
         logger.error("form is valid")
@@ -307,13 +316,21 @@ def preview(request):
             if lat is not None:
                 query['pLatitudSelection'] = lat
 
-            lon = form.cleaned_data.get('long')
+            lon = form.cleaned_data.get('lon')
             if lon is not None:
                 query['pLongitudSelection'] = lon
 
             traces = form.cleaned_data.get('traces')
             if traces is not None:
                 query['pTraceSelection'] = traces
+
+            invertedAxis = form.cleaned_data.get('invertedAxis')
+            if invertedAxis is not None:
+                query['pInvertedAxis'] = invertedAxis
+
+            invertData = form.cleaned_data.get('invertData')
+            if invertData is not None:
+                query['pInvertData'] = invertData
 
             query['pType'] = 'chart'
             logger.error(query)
@@ -323,3 +340,46 @@ def preview(request):
     else:
         return HttpResponse('Error!')
 
+def action_invoke(request):
+    form = forms.RequestForm(request.GET)
+    if form.is_valid():
+        preferences = request.preferences
+        try:
+            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
+            visualization_revision = VisualizationDBDAO().get(
+                preferences['account_language'],
+                visualization_revision_id=visualizationrevision_id
+            )
+        except VisualizationRevision.DoesNotExist:
+            return HttpResponse("Viz doesn't exist!") # TODO
+        else:
+            query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
+            query['pId'] = visualizationrevision_id
+
+            zoom = form.cleaned_data.get('zoom')
+            if zoom is not None:
+                query['pZoom'] = zoom
+
+            bounds = form.cleaned_data.get('bounds')
+            if bounds is not None:
+                query['pBounds'] = bounds
+            else:
+                query['pBounds'] = ""
+
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = limit
+
+            page = form.cleaned_data.get('page')
+            if page is not None:
+                query['pPage'] = page
+
+            #query["ver"] = 6
+            #return HttpResponse(str(query) + str(request.GET), "json")
+
+            result, content_type = invoke_chart(query)
+            if not result:
+                result = "SIN RESULTADO para %s" % query
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Form Error!')

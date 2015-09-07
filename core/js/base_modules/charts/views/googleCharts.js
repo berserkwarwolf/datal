@@ -3,14 +3,12 @@ var charts = charts || {
     views: {}
 };
 
-
 charts.views.GoogleLineChart = charts.views.LineChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
     formatData: function (data) {
-        console.log('raw data', data);
         var dataTable = new google.visualization.DataTable();
         _.each(data.fields, function (field) {
             dataTable.addColumn(field[0], field[1]);
@@ -20,7 +18,6 @@ charts.views.GoogleLineChart = charts.views.LineChart.extend({
     },
 
     render: function () {
-        console.log('model data', this.model.data);
         var dataTable = this.formatData(this.model.data.toJSON());
 
         var options = this.model.get('options');
@@ -109,7 +106,6 @@ charts.views.GoogleColumnChart = charts.views.ColumnChart.extend({
 
     render: function () {
         var dataTable = this.formatData(this.model.data.toJSON());
-        console.log("dataTable:", dataTable);
 
         var options = this.model.get('options');
 
@@ -132,22 +128,21 @@ charts.views.GooglePieChart = charts.views.PieChart.extend({
     formatData: function (data) {
         var dataTable = new google.visualization.DataTable();
 
-        // view parse data
+//        var rows = data.rows;
+            /*fieldnames = [_.map(data.fields, function (field) {
+                return field[1];
+            })];*/
 
-          dataTable.addColumn('string', 'Demo Data');
-          dataTable.addColumn('number', 'Demo');
-          dataTable.addRows([
-            ['Demo1', 33],
-            ['Demo2', 26],
-            ['Demo3', 22]
-          ]);
+        var graphData = [];
 
-       /* _.each(data.fields, function (field,i) {
-            dataTable.addColumn((i==0)?'string':field[0], field[1]);
+        _.each(data.rows,function(e,i){
+            graphData.push([e[0],e[1]]);
         });
 
-        console.log(data.rows);
-        dataTable.addRows(data.rows);*/
+        dataTable.addColumn('string', 'Label');
+        dataTable.addColumn('number', 'Data');
+
+        dataTable.addRows(graphData);
 
         return dataTable;
     },

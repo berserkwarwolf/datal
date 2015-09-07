@@ -5,15 +5,12 @@ var ChartView = StepViewSPA.extend({
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
-			'click a.backButton': 			'onPreviousButtonClicked',
-			'click a.nextButton': 			'onNextButtonClicked',
+			'click .step-1-view a.backButton': 			'onPreviousButtonClicked',
+			'click .step-1-view a.nextButton': 			'onNextButtonClicked',
 			'click button.selectData': 		'onSelectDataClicked',
 			'click button.chartType': 		'onChartTypeClicked',
 			'change select#chartLibrary': 	'onChartLibraryChanged',
 			
-			'keyup input#chartTitle': 		'onInputChanged',
-			'keyup input#yTitle': 			'onInputChanged',
-			'keyup input#xTitle': 			'onInputChanged',
 			'keyup input#nullValuePreset': 	'onInputChanged',
 			
 			'change input[type=radio]': 	'onRadioChanged',
@@ -34,8 +31,7 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-		this.listenTo(this.chartSelectDataModalView, 'close',
-			this.onCloseModal, this);
+		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
 
 		this.chartContent = this.$el.find('.chartContent');
 
@@ -51,15 +47,24 @@ var ChartView = StepViewSPA.extend({
 	},	
 
 	onCloseModal: function () {
+		this.fetchPreviewData();
+	},
+
+	fetchPreviewData: function(){
 		$("#ajax_loading_overlay").show();
-		this.model.fetchPreviewData().then(function () {
+		this.model.fetchPreviewData()
+		.then(function () {
 			$("#ajax_loading_overlay").hide();
-		});
+		})
+		.error(function(response){
+			$("#ajax_loading_overlay").hide();
+        });;
 	},
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
 		this.model.set(input.attr('name'), input.prop('checked'));
+		this.fetchPreviewData();
 	},
 
 	onChangeData: function (model) {
@@ -88,6 +93,7 @@ var ChartView = StepViewSPA.extend({
 	onInputChanged: function(e){
 		var input = $(e.currentTarget);
 		this.model.set(input.data('ref'), input.val());
+		this.fetchPreviewData();
 	},
 
 	onRadioChanged: function(e){
@@ -97,6 +103,7 @@ var ChartView = StepViewSPA.extend({
 		if(input.val()=='given'){
 			$('#nullValuePreset').show();
 		}else{
+			this.fetchPreviewData();
 			$('#nullValuePreset').hide();
 		}
 	},
@@ -107,8 +114,6 @@ var ChartView = StepViewSPA.extend({
 		this.changeClass(type);
 		this.model.set('type',type);
 	},
-
-
 
 	changeClass: function(type){
 
@@ -161,8 +166,12 @@ var ChartView = StepViewSPA.extend({
 	
 		if (this.ChartViewClass) {
 
+			if(this.chartInstance){
+				this.chartInstance = this.chartInstance.destroy();
+			}
+
 			this.chartInstance = new this.ChartViewClass({
-				el: this.$('.chartContent'),
+				el: this.chartContent,
 				model: this.model,
 			});
 			
@@ -170,12 +179,11 @@ var ChartView = StepViewSPA.extend({
 				this.clearClassesChartBg();
 				this.chartInstance.render();
 			};
-
 		}
 	},
 
 	onPreviousButtonClicked: function(){
-		this.goTo(0);
+		this.previous();
 	},
 
 	onNextButtonClicked: function(){		

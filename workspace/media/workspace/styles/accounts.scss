@@ -4,10 +4,10 @@
 @import 'functions';
 
 html,
-body{background:$brand-color;}
+body{background:$nav-bg;}
 
-.account-box{width:320px;margin:0 auto;padding-top:5%;}
-.account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;width:$logo-signin-width;height:$logo-signin-height;margin:0 auto 30px;}
+.account-box{width:320px;margin:0 auto;padding-top:30px;}
+.account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;background-image:url(#{$logo-signin-svg-url});height:$logo-signin-height;margin-bottom:30px;}
 .account-box .account-box-content{background:#fff;padding:20px;border:1px solid $brand-color-bold;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
@@ -15,7 +15,9 @@ body{background:$brand-color;}
 }
 .account-box .row{padding-top:15px;}
 .account-box .row:first-child{padding-top:0;}
-.account-box .row label{display:block;font-size:$form-label-size;line-height:19px;color:$form-label-color;}
+.account-box .row label,
+.account-box .row .link{display:block;font-size:$form-label-size;line-height:19px;}
+.account-box .row label{color:$form-label-color;}
 .account-box .row input[type=text],
 .account-box .row input[type=password],
 .account-box .row select{width:100%;padding:0 10px;height:30px;font-size:14px;margin-top:5px;
@@ -32,13 +34,14 @@ body{background:$brand-color;}
 .account-box .row h2{font-size:14px;line-height:21px;padding-bottom:8px;}
 .account-box .row.buttons{}
 .account-box .row.buttons .button{display:inline-block;} 
-.account-box .row.remember input[type=checkbox]{float:left;position:relative;top:3px;}
-.account-box .row.remember label{float:left;padding:5px 0 0 4px;font-size:$font-size-base;line-height:15px;}
-.account-box .row.remember .button{float:right;}
+.account-box .row.remember{border-top:1px solid #e2e0e0;margin-top:20px;}
+.account-box .row.remember input[type=checkbox]{float:none;}
+.account-box .row.remember label{float:none;font-size:$font-size-base;line-height:15px;display:inline-block;}
 .account-box .account-box-footer ul{padding:12px 20px 20px;}
 .account-box .account-box-footer li{padding-bottom:8px;}
-.account-box .account-box-footer li a{color:$link-color-highlight;text-shadow:0 1px 0 $brand-color-bold;}
+.account-box .account-box-footer li a{color:#fff;}
 .account-box div.has-error{color:#f45f64;padding-top:7px;font-size:12px;}
+.account-box-content fieldset legend{font-family:$font-titles-family;font-size:$font-size-xl;margin-bottom:20px;}
 
   /* Validation Messages */
   .account-box .account-box-message{background:rgba(66,52,45,.9) url(../images/common/ic_validationInfo32.png) no-repeat 13px center;border:1px solid #000;margin-bottom:20px;padding:19px 15px 19px 56px;color:#fff;text-shadow:0 1px 0 #000;min-height:60px;
@@ -64,12 +67,12 @@ body{background:$brand-color;}
 #id_signUp .domainRow .domainText > span{max-width:100%;text-overflow:ellipsis;overflow:hidden;display:block;white-space:nowrap;}
 #id_signUp .domainRow .domainText:after{content:"/";display:block;position:absolute;top:0;right:-4px;}
 #id_signUp .domainRow input[type=text]{width:48%;float:right;margin:1px;height:28px;}
-#id_signUp legend,
-#id_activate legend{font-size:$font-size-m;text-transform:uppercase;}
 #id_signUp .sub,
 #id_activate .sub{margin-top:10px;color:#999;}
 #id_signUp .buttons,
-#id_activate .buttons{border-top:1px solid #e2e0e0;margin-top:15px;}
+#id_activate .buttons,
+#id_forgotPassword .buttons,
+#id_recovery .buttons{border-top:1px solid #e2e0e0;margin-top:15px;}
 #id_signUp .buttons p.tip,
 #id_activate .buttons p.tip{padding:0 0 10px;}
 #id_signUp .buttons p.tip a,
@@ -78,3 +81,5 @@ body{background:$brand-color;}
 #id_activate .passwordStrength{top:16px;right:11px;}
 #id_signUp #id_password,
 #id_activate #id_password{padding-right:100px;}
+
+.signInLink{right:20px;top:26px;}

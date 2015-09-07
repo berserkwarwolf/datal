@@ -1,7 +1,7 @@
 import urllib2, logging
 
 from django.db import transaction
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.core.urlresolvers import reverse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext
@@ -309,45 +309,84 @@ def related_resources(request):
     list_result = []
     for associated_datastream in associated_datastreams:
         associated_datastream['type'] = 'dataview'
-        list_result.append(associated_datastream)
+        list_result.append(associated_datastream) 
 
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
     return HttpResponse(dump, mimetype="application/json")
 
 
 @login_required
-@require_privilege("workspace.can_review_dataset_revision")
-@require_http_methods(['POST', 'GET'])
+@require_POST
 @transaction.commit_on_success
-def review(request, dataset_revision_id=None):
-
-    if request.method == 'POST' and dataset_revision_id != None:
-
-        lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
-
+def change_status(request, dataset_revision_id=None):
+    """
+    Change dataset status
+    :param request:
+    :param dataset_revision_id:
+    :return: JSON Object
+    """
+    if request.method == 'POST' and dataset_revision_id:
+        lifecycle = DatasetLifeCycleManager(
+            user=request.user,
+            dataset_revision_id=dataset_revision_id
+        )
         action = request.POST.get('action')
 
         if action == 'approve':
-
             lifecycle.accept()
-
-            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATASET-APPROVED-TEXT')}
-
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.APPROVED,
+                messages={
+                    'title': ugettext('APP-DATASET-APPROVED-TITLE'),
+                    'description': ugettext('APP-DATASET-APPROVED-TEXT')
+                }
+            )
         elif action == 'reject':
-
             lifecycle.reject()
-
-            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATASET-REJECTED-TEXT')}
-
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATASET-REJECTED-TITLE'),
+                    'description': ugettext('APP-DATASET-REJECTED-TEXT')
+                }
+            )
+        elif action == 'publish':
+            lifecycle.publish()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PUBLISHED,
+                messages={
+                    'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
+                    'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
+                }
+            )
+        elif action == 'unpublish':
+            lifecycle.unpublish()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
+                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                }
+            )
+        elif action == 'send_to_review':
+            lifecycle.send_to_review()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PENDING_REVIEW,
+                messages={
+                    'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
+                    'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+                }
+            )
         else:
+            raise NoStatusProvidedException()
 
-            response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+        return JSONHttpResponse(json.dumps(response))
 
-    else:
-
-        response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
-
-    return JSONHttpResponse(json.dumps(response))
 
 @login_required
 @require_GET

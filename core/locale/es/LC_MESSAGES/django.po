@@ -37,10 +37,10 @@ msgid "MODEL_STATUS_DRAFT"
 msgstr "Borrador"
 
 msgid "MODEL_STATUS_PENDING_REVIEW"
-msgstr "Revisión pendiente"
+msgstr "En revisión"
 
 msgid "MODEL_STATUS_UNDER_REVIEW"
-msgstr "Bajo revisión"
+msgstr "En revisión"
 
 msgid "MODEL_STATUS_PUBLISHED"
 msgstr "Publicado"
@@ -49,7 +49,13 @@ msgid "MODEL_STATUS_REJECTED"
 msgstr "Rechazado"
 
 msgid "MODEL_STATUS_APPROVED"
-msgstr "Aprobado"
+msgstr "Aceptado"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Aceptar"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Rechazar"
 
 msgid "MODEL-LANGUAJE-EN"
 msgstr "Inglés "
@@ -677,7 +683,7 @@ msgid "APP-SIGNINTO-TEXT"
 msgstr "Ingrese a"
 
 msgid "APP-LOGIN-TEXT"
-msgstr "Entrar"
+msgstr "Ingresar"
 
 msgid "APP-ACTIVATION-TITLE-TEXT"
 msgstr "Active su cuenta DATAL"

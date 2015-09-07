@@ -110,7 +110,7 @@ def action_catalog_xml(request):
     domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
-    developers_link = 'http://' + domain + reverse('developer_manager.action_query')
+    developers_link = 'http://' + domain + reverse('manageDeveloper.action_query')
     datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(
         datastream__user__account_id=account_id, status=StatusChoices.PUBLISHED
     )

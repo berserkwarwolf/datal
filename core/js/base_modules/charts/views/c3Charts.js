@@ -228,11 +228,15 @@ charts.views.C3PieChart = charts.views.PieChart.extend({
     },
 
     formatData: function (dataModel) {
-        var data = dataModel.get('rows'),
-            fieldnames = [_.map(dataModel.get('fields'), function (field) {
-                return field[1];
-            })];
-        return fieldnames.concat(data);
+        var data = dataModel.get('rows');
+
+        var graphData = [];
+
+        _.each(data,function(e,i){
+            graphData.push([e[0],e[1]]);
+        });
+
+        return graphData;
     },
 
     render: function () {
@@ -242,7 +246,7 @@ charts.views.C3PieChart = charts.views.PieChart.extend({
             bindto: this.el,
             data: {
                 type: 'pie',
-                rows: rows,
+                columns: rows,
             }
         });
     }

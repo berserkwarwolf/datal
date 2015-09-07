@@ -17,12 +17,13 @@
       <div class="logo-signin-brand"></div>
     </div>
   </header>
-  <div class="account-box-content">
+  <div class="account-box-content relative">
+    <a href="/signin" title="{% trans 'APP-SIGNIN-TEXT' %}" class="signInLink link absolute">{% trans 'APP-SIGNIN-TEXT' %}</a>
     <form action="{{form.action}}" method="post" id="id_signUpForm">
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <fieldset>
-            <legend class="font-mb">{% trans "APP-SIGNUP-TITLE-TEXT" %}</legend>
+            <legend class="">{% trans "APP-SIGNUP-TITLE-TEXT" %}</legend>
             <div class="row">
                 {{form.account_name.label_tag}}
                 {{form.account_name}}
@@ -67,17 +68,12 @@
             </div>
 
             <div class="row buttons center">
-                <input id="id_submitButton" type="submit" class="button small primary" value="{% trans 'APP-REGISTER-TEXT' %}" />
+                <input id="id_submitButton" type="submit" class="button primary" value="{% trans 'APP-REGISTER-TEXT' %}" />
             </div>
 
         </fieldset>
     </form>
   </div>
-  <footer class="account-box-footer">
-    <ul>
-      <li><a href="/signin" title="{% trans 'APP-SIGNIN-TEXT' %}">{% trans 'APP-SIGNIN-TEXT' %}</a></li>
-    </ul>
-  </footer>
 </div>
 {% endblock %}
 

@@ -97,7 +97,7 @@ var MapView = StepViewSPA.extend({
 
         this.model.set({
             lib: 'google',
-            type: 'map'
+            type: 'mapchart'
         });
     }
 

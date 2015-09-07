@@ -196,7 +196,7 @@ class ElasticsearchIndex():
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
-            return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+            return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")

@@ -11,7 +11,7 @@
 
    <% if (active.length !== 0) {%>
    <div class="activeFilters">
-      <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
       <ul id="active-filters-list">
         <% _(active).each(function( item ){ %>
         <li>
@@ -25,11 +25,11 @@
 
    <% if (author.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-AUTHOR-TEXT' %}</h3>
       <ul>
         <% _(author).each(function( item ){ %>
         <li>
-          <a class="filter-add" data-cid="<%= item.cid %>">
+          <a class="filter-add link black" data-cid="<%= item.cid %>">
             <%= item.title %>
           </a>
         </li>
@@ -40,11 +40,11 @@
 
    <% if (status.length !== 0) {%>
    <div class="filters">
-      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-STATUS-TEXT' %}</h3>
       <ul>
         <% _(status).each(function( item ){ %>
         <li>
-          <a class="filter-add" data-cid="<%= item.cid %>">
+          <a class="filter-add link black" data-cid="<%= item.cid %>">
             <%= item.title %>
           </a>
         </li>
@@ -102,7 +102,7 @@
       // Status Pending Review = 1
       if( status !== 1 ){ 
     %>
-      <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a></li>
+      <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %> class="red"><%= gettext('APP-DELETE-TEXT') %></a></li>
     <% } %>
 
   </ul>
@@ -131,7 +131,7 @@
     </div>
 
     <div class="row clearfix">
-      <a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
+      <a title="{% trans 'APP-ADD-TEXT' %}" class="button small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
     </div>
   </div>
 </script>
@@ -195,8 +195,6 @@
         <span class="required">*</span>
       </div>
 
-      
-
       {# Sources #}
       <div class="row clearfix">
         <div id="sourceForm">
@@ -234,8 +232,8 @@
 
   <div class="ov-bottom">
     <div class="ov-buttons">
-      <a id="id_edit_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
-      <a id="id_edit_cancel" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+      <a id="id_edit_cancel" class="button cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+      <a id="id_edit_save" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
     </div>
   </div>
 

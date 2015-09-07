@@ -118,40 +118,6 @@
         <!-- DATA STREAM CONTAINER -->
         <div class="dataStreamContainer" id="id_datastreamResult">{{datastream_html|safe}}</div>
 
-        <!-- FLEXMONSTER PIVOT TABLE -->
-        {% if preferences.account_pivottable %}
-        <div id="pivotContainer"></div>
-        <script type="text/javascript" src="/js_core/libs/flexmonster/flexmonster.js"></script>
-        <script>
-          onPivotCreation = function() {
-            $("#" + flexmonster.id).css("height", 0);
-          }
-
-          flexmonster.embedPivotComponent("/js_core/libs/flexmonster/", 
-        		"pivotContainer",
-        		"100%", 
-        		"500", 
-        	{
-            configUrl: '{% url "microsites.datastream_manager.views.action_flexmonster" id=id slug=slug %}',
-            licenseKey: '{{preferences.account_pivottable}}',
-            jsPivotCreationCompleteHandler: "onPivotCreation"
-          });
-
-          flexmonster_toggle = function() {
-            var fobj = $("#" + flexmonster.id);
-            // If we are showing pivotttable
-            if (fobj.height() > 0) {
-              $btn.html("Pivot table");
-              fobj.height(0);
-              // Or pivottable is 'hidden'
-              } else {
-              $btn.html("Data stream");
-              fobj.height(500);
-            }
-          }
-        </script>
-        {% endif %}
-
         <!-- DATA STREAMS ACTIONS - bottom -->
         <div class="dataStreamActions bottomActions DN">
             <div class="actionsInner toolbar clearfix">

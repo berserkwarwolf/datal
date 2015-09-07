@@ -6,7 +6,7 @@ from rest_framework import status, mixins
 from rest_framework.settings import api_settings
 from core.models import DataStream, DataStreamRevision, DataStreamParameter
 from core.models import GuidModel
-from core.datastream_manager import forms
+from core.exportDataStream import forms
 from core.engine import invoke
 from core.helpers import RequestProcessor
 from core.daos.datasets import DatasetDBDAO
@@ -80,7 +80,7 @@ class DataStreamViewSet(ResourceViewSet):
     def data(self, request, guid=None, pk=None, format='json'):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
-        mutable_get['datastream_revision_id'] = datastream['last_published_revision_id']
+        mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
         form = forms.RequestForm(mutable_get)
         if form.is_valid():
             query = RequestProcessor(request).get_arguments_no_validation()

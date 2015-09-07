@@ -2,17 +2,25 @@
 import operator
 import time
 import logging
+import json
 
-from django.db.models import Q, F
+from django.db.models import Q, F, Count
 from django.db import IntegrityError
+from django.core.serializers.json import DjangoJSONEncoder
+from django.db import connection
 
-from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
-from core import settings
+
+from datetime import datetime, timedelta, date
+
+from core.utils import slugify
+from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
+from core import settings
+from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES 
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -80,6 +88,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         if guid:
             datastream_revision = DataStreamRevision.objects.select_related().get(
                 datastream__guid=guid,
+                pk=F(fld_revision_to_get),
                 category__categoryi18n__language=language,
                 datastreami18n__language=language
             )
@@ -106,6 +115,14 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
         dataset_revision = datastream_revision.dataset.last_revision
 
+        # Muestro el link del micrositio solo si esta publicada la revision
+        public_url = ''
+        if datastream_revision.datastream.last_published_revision:
+            domain = datastream_revision.user.account.get_preference('account.domain')
+            if not domain.startswith('http'):
+                domain = 'http://' + domain
+            public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
@@ -122,16 +139,18 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             status=datastream_revision.status,
             modified_at=datastream_revision.created_at,
             meta_text=datastream_revision.meta_text,
-            guid=datastream_revision.dataset.guid,
+            guid=datastream_revision.datastream.guid,
             created_at=datastream_revision.dataset.created_at,
             last_revision_id=datastream_revision.dataset.last_revision_id,
-            last_published_revision_id=datastream_revision.dataset.last_published_revision_id,
+            last_published_date=datastream_revision.datastream.last_published_revision_date,
             title=datastreami18n.title,
             description=datastreami18n.description,
             notes=datastreami18n.notes,
             tags=tags,
             sources=sources,
             parameters=parameters,
+            public_url=public_url,
+            slug= slugify(datastreami18n.title),
         )
 
         return datastream
@@ -333,10 +352,12 @@ class DatastreamElasticsearchDAO(DatastreamSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        return self.search_index.indexit(self._build_document())
+        output=self.search_index.indexit(self._build_document())
+
+        return (self.datastream_revision.id, self.datastream_revision.datastream.id, output)
         
     def remove(self):
-        self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
+        return self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
 
 
 class DatastreamHitsDAO():
@@ -349,7 +370,8 @@ class DatastreamHitsDAO():
     TTL=3600 
 
     def __init__(self, datastream):
-        self.datastream=datastream
+        self.datastream = datastream
+        #self.datastream_revision = datastream.last_published_revision
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
         self.cache=Cache()
@@ -357,16 +379,29 @@ class DatastreamHitsDAO():
     def add(self,  channel_type):
         """agrega un hit al datastream. """
 
+        # TODO: Fix temporal por el paso de DT a DAO.
+        # Es problema es que por momentos el datastream viene de un queryset y otras veces de un DAO y son objetos
+        # distintos
         try:
-            hit=DataStreamHits.objects.create(datastream_id=self.datastream.datastream_id, channel_type=channel_type)
+            datastream_id = self.datastream.datastream_id
+        except:
+            datastream_id = self.datastream['datastream_id']
+
+        try:
+            guid = self.datastream.guid
+        except:
+            guid = self.datastream['guid']
+
+        try:
+            hit=DataStreamHits.objects.create(datastream_id=datastream_id, channel_type=channel_type)
         except IntegrityError:
             # esta correcto esta excepcion?
             raise DataStreamNotFoundException()
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
 
         # armo el documento para actualizar el index.
-        doc={'docid':"DS::%s" % self.datastream.guid,
+        doc={'docid':"DS::%s" % guid,
                 "type": "ds",
                 "script": "ctx._source.fields.hits+=1"}
 
@@ -407,7 +442,7 @@ class DatastreamHitsDAO():
             # tomamos solo la parte date
             truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
 
-            qs=DatastreamHits.objects.filter(datastream=self.datastream,created_at__gte=start_date)
+            qs=DataStreamHits.objects.filter(datastream=self.datastream,created_at__gte=start_date)
 
             if channel_type:
                 qs=qs.filter(channel_type=channel_type)
@@ -439,7 +474,7 @@ class DatastreamHitsDAO():
             self.from_cache=False
         else:
             hits=json.loads(hits)
-            self.from_cache=True
+            self.from_cache = True
 
         return hits
 

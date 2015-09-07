@@ -84,17 +84,29 @@ charts.models.Chart = Backbone.Model.extend({
     fetchPreviewData: function () {
         var self = this;
 
-        return $.getJSON('/visualizations/preview', {
+        var params = {
             datastream_revision_id: self.get('datastream_revision_id'),
             data: self.get('range_data'),
             headers: self.get('range_headers'),
             labels: self.get('range_labels'),
             nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset'),
-            invertData:  self.get('invertData'),
-            invertedAxis:  self.get('invertedAxis')
-        }).then(function (response) {
+            nullValuePreset:  self.get('nullValuePreset')
+        };
+
+        if(self.get('invertData') && self.get('invertData')!=''){
+            params['invertData'] = "checked";
+        }
+
+        if(self.get('invertedAxis')){
+            params['invertedAxis'] = "checked";
+        }
+
+        return $.getJSON('/visualizations/preview', params)
+        .then(function (response) {
             self.formatResponseData(response.series, response.values, response.labels);
+        })
+        .error(function(response){
+            console.error('error en fetch');
         });
     },
 
@@ -108,11 +120,15 @@ charts.models.Chart = Backbone.Model.extend({
         var columns = [],
             fields =[];
 
-        if (!labels.length)
-            labels = new Array(values[0].length);
-
+        //TODO: arreglar este hack para crear labels vacios
+        if (!labels.length) {
+            labels = Array.apply(null, {length: values[0].length}).map(Number.call, Number);
+            fields.push(['number', 'labels']);
+        } else {
+            //TODO: revisar el formato del lable
+            fields.push(['string', 'labels']);
+        }
         columns.push(labels);
-        fields.push(['string', 'labels'])
 
         columns = columns.concat(values);
         fields = fields.concat(_.map(series, function (item) {
@@ -125,7 +141,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     onChangeType: function (model, type) {
         console.log('type has changed to:', type);
-        if (type === 'map') {
+        if (type === 'mapchart') {
 
         };
     },
@@ -136,7 +152,7 @@ charts.models.Chart = Backbone.Model.extend({
     updateFetchFilters: function () {
         var filters = this.get('options');
 
-        if(this.get('type') == 'map'){
+        if(this.get('type') == 'mapchart'){
             filters = {
                 zoom: this.get('options').zoom,
                 bounds: this.get('options').bounds.join(';')
@@ -151,7 +167,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
-        if(this.get('type') == 'map'){
+        if(this.get('type') == 'mapchart'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
             this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
@@ -208,7 +224,7 @@ charts.models.Chart = Backbone.Model.extend({
             lib: this.get('lib'),
             showLegend: this.get('showLegend'),
             invertedAxis: this.get('invertedAxis'),
-            chartTemplate: '¿?',
+            chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
             traspose: this.get('traspose'),
@@ -243,6 +259,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {object}
      */
     parseKmlStyles: function (styles) {
+        styles = styles || [];
         var parsedStyles = this.get('stylesDefault');
 
         if(styles.length && styles[0].styles){

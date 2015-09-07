@@ -223,7 +223,7 @@ div.info{overflow:hidden;z-index:10000000000;width:100%;position:fixed;top:0;lef
 /*HELP & PROMOTIONAL BOXES*/
 .helpTips{padding-bottom:12px;position:relative;}
 .helpBox,
-.gradientBox{padding-bottom:8px;background:url(/static/core/images/common/sb_helpBox.gif) no-repeat center bottom;}
+.gradientBox{padding-bottom:8px;}
 .helpBox{margin-left:22px;float:left;position:relative;}
 .helpBox .cv{background:url(/static/core/images/common/ic_helpBox.gif) no-repeat 0 0;top:-8px;right:-8px;position:absolute;overflow:hidden;}
 .helpBox:first-child{margin:0;}
