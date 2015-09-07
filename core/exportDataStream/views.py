@@ -18,7 +18,7 @@ from core.shortcuts import render_to_response
 from datetime import date, timedelta
 from core.decorators import *
 
-from core.v8.factories import *
+
 
 from django.forms.formsets import formset_factory
 
@@ -27,47 +27,9 @@ from django.forms.formsets import formset_factory
 @require_http_methods(["GET"])
 #@datal_cache_page()
 def action_invoke(request):
-    #form.is_valid()
-
-    #query = RequestProcessor(request).get_arguments_no_validation()
-    #query['pId'] = form.cleaned_data.get('datastream_revision_id')
-    #try:
-    #    query['pId'] = form.cleaned_data.get('datastream_revision_id')
-    #    limit = form.cleaned_data.get('limit')
-    #    query['pLimit'] = limit
-    #except:
-    #    pass
-    #return HttpResponse(query.items(), mimetype="json")
-
-    formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
-    form = formset(request.REQUEST)
-    #query.is_valid()
-    #print "get_data: ", query.get_data()
-    #return HttpResponse(query.get_data(), mimetype="json")
-
-    #form = forms.RequestForm(request.GET)
-    if form.is_valid():
-        #query = RequestProcessor(request).get_arguments_no_validation()
-        #query['pId'] = form.cleaned_data.get('datastream_revision_id')
-        #limit = form.cleaned_data.get('limit')
-        #if limit:
-        #    query['pLimit'] = limit
-        print "CC: ", form.cleaned_data
-
-        command = EngineDataCommand(form.get_data())
-        ivk = command.run()
-
-        # Sometimes there is no answer. Maybe engine is down
-        if ivk is None:
-            contents = '{"Error":"No invoke"}'
-            typen = "json"
-        else:
-            contents, typen = ivk
-
-        return HttpResponse(contents, mimetype=typen)
-    else:
-        return HttpResponse('Error! No valid form')
-
+    command = EngineDataCommand(request.REQUEST)
+    contents, typen = command.run()
+    return HttpResponse(contents, mimetype=typen)
 
 @require_http_methods(["GET"])
 def action_csv(request, id, slug):

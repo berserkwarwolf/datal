@@ -24,6 +24,10 @@ def get_domain(account_id):
     return account_domain
 
 
+def get_key_prefix(items):
+    params=str(hash(frozenset(sorted(items))))
+    return ":".join([request.path, params])
+
 def get_domain_by_request(request, default_domain = ''):
     domain = request.META.get('HTTP_HOST', None)
     if domain is None:

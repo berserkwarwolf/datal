@@ -10,6 +10,7 @@ from functools import wraps
 from core.models import Dataset, Threshold, User
 from core.exceptions import ApplicationNotAdmin
 from core.models import Application
+from core.http import get_key_prefix
 
 
 def public_keys_forbidden(view_func):
@@ -40,8 +41,7 @@ def datal_cache_page(**kwargs):
     def _cache_page(viewfunc):
         @wraps(viewfunc, assigned=available_attrs(viewfunc))
         def _cache_page(request, *args, **kw):
-            params=str(hash(frozenset(sorted(request.REQUEST.items()))))
-            key_prefix=":".join([request.path,params])
+            key_prefix = get_key_prefix(request.REQUEST.items())
             response = cache_page(60, cache='engine', key_prefix=key_prefix)(viewfunc)
             return response(request, *args, **kw)
         return _cache_page

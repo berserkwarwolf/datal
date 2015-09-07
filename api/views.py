@@ -1,4 +1,5 @@
 from django.http import Http404
+from django.forms.formsets import formset_factory
 from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework.decorators import detail_route, list_route
@@ -14,6 +15,8 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 from core.search.elastic import ElasticFinderManager
 from api.serializers import *
+from core.v8.factories import *
+from core.v8.commands import EngineDataCommand
 
 import logging
 import json
@@ -81,21 +84,13 @@ class DataStreamViewSet(ResourceViewSet):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
         mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
-        form = forms.RequestForm(mutable_get)
-        if form.is_valid():
-            query = RequestProcessor(request).get_arguments_no_validation()
-            query['pId'] = form.cleaned_data.get('datastream_revision_id')
-            limit = form.cleaned_data.get('limit')
-            query['pLimit'] = limit or 50
-
-            ivk = invoke(query)
-            if ivk:
-                datastream['result'] = json.loads(ivk[0])
-                serializer = self.get_serializer(datastream)
+        command = EngineDataCommand(form.get_data())
+        ivk = command.run()
+        if ivk:
+            datastream['result'] = json.loads(ivk[0])
+            serializer = self.get_serializer(datastream)
         return Response(serializer.data)
         
-
-
 class DataSetViewSet(ResourceViewSet):
     queryset = DatasetDBDAO()
     serializer_class = DataSetSerializer
