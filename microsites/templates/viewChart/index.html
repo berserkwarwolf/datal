@@ -55,6 +55,8 @@
 <script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+<script type="text/javascript" src="/js_microsites/viewChart/embedChartModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/embedChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewChart/viewChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -107,8 +109,6 @@ google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 
 
 $(document).ready(function(){
-	var chartType = "{{chart_type}}",
-        chartLib = "{{chart_lib}}";
 
     var visualizationModel = new visualization({
         id: "{{datastream.datastreamrevision_id}}",
