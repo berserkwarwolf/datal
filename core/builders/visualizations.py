@@ -20,6 +20,7 @@ class VisualizationImplBuilder:
         field['data'] = self.fields['range_data']
         field['chart'] = dict()
         field['chart']['labelSelection'] = self.fields['labelSelection']
+        field['chart']['headerSelection'] = self.fields['headerSelection']
         field['chart']['is3D'] = self.fields['is3D'] if self.fields['is3D'] else 'false'
 
         return json.dumps(field)
