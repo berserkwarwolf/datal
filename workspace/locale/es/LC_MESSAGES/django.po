@@ -1601,7 +1601,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Nómbralo"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Cuéntanos sobre que se trata tu vista. Los campos con (<span class='required'>*</span>) son obligatorios."
+msgstr "Cuéntanos sobre que se trata tu vista. <span>Los campos con (<span class='required'>*</span>) son obligatorios.</span>"
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Nombres: Buenas prácticas y uso correcto"

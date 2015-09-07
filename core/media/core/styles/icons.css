@@ -15,8 +15,10 @@
 	.button .icon{margin-right:15px;}
 	.button .icon.icon-right{margin-left:15px;}
 
+
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
+
 
 /* 48px icons */
 .size-48{
@@ -150,3 +152,7 @@
 
 	.icon-map-geo{background-position:-12px -1020px;}
 	.icon-map-geo.size-48{background-position:-24px -2040px;}
+
+
+/* Position */
+.corner-position{position:absolute;top:0;right:0;z-index:100;}
