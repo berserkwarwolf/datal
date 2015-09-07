@@ -31,7 +31,8 @@ urlpatterns = patterns('',
 
     # TODO ANDRES: REVISAR
     (r'^dataviews/', include('microsites.datastream_manager.urls')),
-    url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.datastream_manager.views.action_embed', name='datastream_manager.action_embed'),
+    url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.embedDataStream.views.action_embed',
+        name='datastream_manager.action_embed'),
 
     (r'^datasets/', include('microsites.viewDataset.urls')),
 

@@ -49,9 +49,6 @@
 <script type="text/javascript">
   google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 </script>
-{% if preferences.account_pivottable %}
-  <script type="text/javascript" src="/js_core/libs/flexmonster/flexmonster.js"></script>
-{% endif %}
 
 <!-- JS JUNAR -->
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -135,14 +132,6 @@ $(document).ready(function(){
     filter: "",
     exportCSVURL: "{% url "datastream_manager.action_csv" datastream.datastream_id 'la' %}",
     exportXLSURL: "{% url "datastream_manager.action_xls" datastream.datastream_id 'la' %}",
-    {% if preferences.account_pivottable %}
-    pivotTablePath: "{{base_uri}}/js_core/libs/flexmonster/",
-    pivotTableConfig: "{{base_uri}}{% url "microsites.datastream_manager.views.action_flexmonster" id=id slug=slug%}",
-
-    /* maybe you'll fine many ways to do the same '*/
-    pivotTableLicense: "{{preferences.account_pivottable|linebreaksbr|replacetext:'<br />|'}}",
-    pivotTableDataSource: "{{base_uri}}{% url "core.exportDataStream.views.action_csv" id=id slug=slug%}"
-     {% endif %}
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 
