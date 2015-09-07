@@ -9,12 +9,12 @@ var MainView = Backbone.View.extend({
     },
 
     initialize: function (options) {
-        
+
         this.model = new charts.models.Chart({
             datastream_revision_id: options.datastream_revision_id,
             meta_tags:  options.datastream_tags,
-
             meta_sources: options.datastream_sources,
+            meta_category: options.datastream_category,
             // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
             // resourceIdAttribute: 'visualization_revision_id',
             // resourceID: 6741,
