@@ -40,7 +40,9 @@ charts.views.Chart = Backbone.View.extend({
     destroy: function(){
         if(this.chart.destroy){
             this.chart.destroy();
-            console.log('destruyo porque tiene el método!!');
         };
+        if(this.chart.clearChart){
+            this.chart.clearChart();
+        }
     }
 });

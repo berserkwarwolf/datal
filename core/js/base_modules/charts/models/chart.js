@@ -199,8 +199,9 @@ charts.models.Chart = Backbone.Model.extend({
             title: this.get('meta_title'),
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
+            
             category: this.get('meta_category'),
-            source: this.get('meta_source'),
+            source: this.get('meta_sources'),
             tags: this.get('meta_tags')
         };
 
@@ -227,12 +228,12 @@ charts.models.Chart = Backbone.Model.extend({
             chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
-            traspose: this.get('traspose'),
+            invertData: this.get('invertData'),
 
             //data selection
-            range_headline: this.get('range_headline'),
-            range_data: this.get('range_data'),
-            range_label: this.get('range_label')
+            headerSelection: this.get('range_headers'),
+            data: this.get('range_data'),
+            labelSelection: this.get('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );

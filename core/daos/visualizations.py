@@ -50,7 +50,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             lib=fields['lib'],
             impl_details=VisualizationImplBuilder(**fields).build()
         )
-        logger.info(visualization_rev.impl_details)
 
         visualization_i18n = VisualizationI18n.objects.create(
             visualization_revision=visualization_rev,
