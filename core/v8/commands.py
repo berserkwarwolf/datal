@@ -22,9 +22,7 @@ class EngineCommand(object):
         self.key_prefix = get_key_prefix(request, self.request_items)
 
     def get_url(self):
-        # REVISAR URGENTE!!!
-        return get_domain_with_protocol('engine') + settings.END_POINT_SERVLET
-        return get_domain_with_protocol('engine') + self.endpoint[0]
+        return get_domain_with_protocol('engine') + self.endpoint
 
     def fix_params(self, filters):
         """ fix filters and other params """
@@ -113,13 +111,7 @@ class EngineCommand(object):
         try:
             answer = self.non_cached_run()
             if answer:
-
-
-                # Revisar esto:
-                # unicode?!?!?! why?!!?!?
-                # y por qué tira que Key length is > 250
-                #????
-                cache.set(unicode(answer[0], encoding="utf-8"), 60)
+                cache.set(self.key_prefix, answer[0], 60)
                 return answer
             return '{"Error":"No invoke"}', "json"
         except Exception, e:
@@ -128,7 +120,7 @@ class EngineCommand(object):
 
 
 class EngineDataCommand(EngineCommand):
-    endpoint = settings.MEMCACHED_ENGINE_END_POINT
+    endpoint = settings.END_POINT_SERVLET
 
 class EngineChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_SERVLET
