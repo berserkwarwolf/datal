@@ -121,7 +121,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 /* Gráficos */
 .preview-container {
 
-  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;height:480px;
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
@@ -131,8 +131,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .chartContent,
   .chartContentFinish,
   .mapContent,
-  .mapContentFinish,
-  {}
+  .mapContentFinish{height:480px;background-position:center center;background-repeat:no-repeat;}
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
