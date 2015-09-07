@@ -84,7 +84,7 @@ def export_to(datastream_id, request, output):
         
         query = {'pId': datastreamrevision_id, 'pOutput': output.upper()}
 
-        arguments = RequestProcessor(request).get_arguments(datastream.parameters)
+        arguments = RequestProcessor(request).get_arguments(datastream["parameters"])
         if arguments:
             query.update(arguments)
 

@@ -39,9 +39,10 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 		this.$el.find('.backgrid-paginator ul').addClass("pager center");
 		this.$el.find("#id_filter_visualization").html( this.clientSideFilter.render().el );
 		
-		var self = this;
-		setInterval(function(){
+		var self = this,
+			myTimeer = setInterval(function(){
 			self.$el.data('overlay').load();
+			clearInterval(myTimeer);
 		},200);
 
 	},
