@@ -199,8 +199,9 @@ charts.models.Chart = Backbone.Model.extend({
             title: this.get('meta_title'),
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
+            
             category: this.get('meta_category'),
-            source: this.get('meta_source'),
+            source: this.get('meta_sources'),
             tags: this.get('meta_tags')
         };
 
@@ -230,9 +231,9 @@ charts.models.Chart = Backbone.Model.extend({
             invertData: this.get('invertData'),
 
             //data selection
-            range_headers: this.get('range_headers'),
-            range_data: this.get('range_data'),
-            range_labels: this.get('range_labels')
+            headerSelection: this.get('range_headers'),
+            data: this.get('range_data'),
+            labelSelection: this.get('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );

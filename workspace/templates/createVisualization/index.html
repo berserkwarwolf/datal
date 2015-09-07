@@ -128,9 +128,30 @@
 <script src="/js_workspace/createVisualization/views/table/SelectedCellRangeView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <script type="text/javascript">
+  var tags = [];
+  {% for tag in datastream_revision.tags %}
+    tags.push({
+        id:'{{ tag.tag__id }}',
+        name:'{{ tag.tag__name }}',
+        status:'{{ tag.tag__status }}'
+      });
+  {% endfor %}
+
+  var sources = [];
+  {% for source in datastream_revision.sources %}
+    sources.push({
+        id:'{{ source.source__id }}',
+        name:'{{ source.source__name }}',
+        url:'{{ source.source__url }}'
+      });
+  {% endfor %}
+
   var mainView = new MainView({
     el: '.main-section',
     datastream_revision_id: '{{ datastream_revision.datastream_revision_id }}',
+    datastream_tags: tags,
+    datastream_category: '{{ datastream_revision.category }}',
+    datastream_sources: sources,
    // datastream_metadata: ''
 
   });
