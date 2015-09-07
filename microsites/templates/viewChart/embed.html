@@ -101,7 +101,7 @@
 	{% if preferences.enable_embed_options %}<div class="enabledOptions">{% endif %}
 		<div id="id_chartBox" class="chartBox">
 			<h2 class="chartTitle">
-				<a target="_blank" class="clearfix" title="{{visualization_revision.title}}" href="{{base_uri}}{{visualization_revision.id|permalink:'visualization'}}{%if parameters_query%}?{{parameters_query}}{%endif%}">
+				<a target="_blank" class="clearfix" title="{{visualization_revision.title}}" href="{{base_uri}}{{visualization_revision.permalink}}{%if parameters_query%}?{{parameters_query}}{%endif%}">
 					<img src="{{preferences.account_logo}}" alt="{{preferences.account_name}}" title="{{preferences.account_name}}" class="FL" style="width:45px; !important"/>
 					<span class="txt"><strong>{{ visualization_revision.title }}</strong></span>
 				</a>
@@ -221,7 +221,7 @@
 	      $chartContainer.data("dataservice_end_point", "{{end_point|escapejs}}");
 	      $chartContainer.data("dataservice_title", "{{visualization_revision.title}}");
 	      $chartContainer.data("dataservice_description", "{{visualization_revision.description}}");
-	      $chartContainer.data("permalink", "{{base_uri}}{{visualization_revision.id|permalink:'visualization'}}{%if parameters_query%}?{{parameters_query}}{%endif%}");
+	      $chartContainer.data("permalink", "{{base_uri}}{{visualization_revision.permalink}}{%if parameters_query%}?{{parameters_query}}{%endif%}");
 	</script>
 
 	<div id="id_dataStreamTable" class="dataTable DN" style="display:none;"></div>

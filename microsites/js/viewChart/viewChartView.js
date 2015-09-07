@@ -12,9 +12,6 @@ var viewChartView = Backbone.View.extend({
 
         // init Sidebars
         this.initSidebarTabs();
-        this.initInfoSidebar();
-        this.initAPISidebar();
-        this.initNotesSidebar();
 
         this.setupChart();
         this.render();

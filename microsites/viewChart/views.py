@@ -121,21 +121,21 @@ def action_embed(request, guid):
 
         datastream = DataStreamDBDAO().get(
             preferences['account_language'],
-            datastream_revision_id=visualization_revision.datastream_revision_id
+            datastream_revision_id=visualization_revision["datastream_revision_id"]
         )
     except:
         return render_to_response('viewChart/embed404.html',{'settings': settings, 'request' : request})
 
-    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+    # VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
     width = request.REQUEST.get('width', False) # TODO get default value from somewhere
     height = request.REQUEST.get('height', False) # TODO get default value from somewhere
 
-    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
-    visualization_revision_parameters['pId'] = visualization_revision.datastream_revision_id
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
+    visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
     json, type = invoke(visualization_revision_parameters)
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
-    return render_to_response('viewChart/embed.html', locals())
+    return render_to_response('viewChart/embedNew.html', locals())
 
 
 def action_invoke(request):
