@@ -19,37 +19,38 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
     },
 
     formatData: function (data) {
-        var result = [];
-        result.push(_.map(data.fields, function (field) {return field[1];}));
-        var dataArray = result.concat(data.rows);
+        var labels = [];
+        labels.push(_.map(data.fields, function (field) {return field[1];}));
+        
+        labels[0][0] = 'x';
 
-        return dataArray;
+        var categories = [];
+        categories.push(_.map(data.rows, function (r) {return r[0];}));
+
+        return {
+            labels:labels,
+            categories:categories,
+            values:data.rows
+        };
     },
     
     render: function () {
-        var rows = this.formatData(this.model.data.toJSON()),
-            options = this.model.get('options'),
-            fieldnames = rows[0];
+        var data = this.formatData(this.model.data.toJSON());
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
-                x: fieldnames[0] || 'x',
-                rows: rows
+                x: 'x',
+                rows: data.labels.concat(data.values)
             },
+            groups: [
+                data.categories[0]
+            ],
+            type: 'line',
             axis: {
-              y: {
-                label: {
-                  text: fieldnames[1],
-                  position: 'outer-middle'
+                x: {
+                    type: 'category' // this needed to load string x value
                 }
-              },
-              x: {
-                label: {
-                  text: fieldnames[0],
-                  position: 'outer-center'
-                }
-              }
             },
             legend: {
                 position: 'right'
@@ -73,45 +74,38 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
     },
 
     formatData: function (data) {
-        var result = [];
-        result.push(_.map(data.fields, function (field) {return field[1];}));
-        var dataArray = result.concat(data.rows);
+        var labels = [];
+        labels.push(_.map(data.fields, function (field) {return field[1];}));
+        
+        labels[0][0] = 'x';
 
-        return dataArray;
+        var categories = [];
+        categories.push(_.map(data.rows, function (r) {return r[0];}));
+
+        return {
+            labels:labels,
+            categories:categories,
+            values:data.rows
+        };
     },
     
     render: function () {
-        var rows = this.formatData(this.model.data.toJSON()),
-            options = this.model.get('options'),
-            fieldnames = rows[0];
-
-        var types = {};
-
-        _.each(fieldnames,function(e){
-            types[e] = 'area'
-        });
+        var data = this.formatData(this.model.data.toJSON());
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
-                x: fieldnames[0] || 'x',
-                rows: rows,
-                types: types,
-                groups: [fieldnames]
+                x: 'x',
+                rows: data.labels.concat(data.values)
             },
+            groups: [
+                data.categories[0]
+            ],
+            type: 'line',
             axis: {
-              y: {
-                label: {
-                  text: fieldnames[1],
-                  position: 'outer-middle'
+                x: {
+                    type: 'category' // this needed to load string x value
                 }
-              },
-              x: {
-                label: {
-                  text: fieldnames[0],
-                  position: 'outer-center'
-                }
-              }
             },
             legend: {
                 position: 'right'
