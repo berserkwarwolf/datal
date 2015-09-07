@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from django.conf import settings
 from core.http import get_domain_with_protocol, get_key_prefix
 from django.core.cache import cache
@@ -20,9 +22,8 @@ class EngineCommand(object):
         self.key_prefix = get_key_prefix(request, self.request_items)
 
     def get_url(self):
-        return "http://localhost:8080/"
-        return get_domain_with_protocol('engine')
-        return "http://"+self.endpoint[0]
+        # REVISAR URGENTE!!!
+        return get_domain_with_protocol('engine') + settings.END_POINT_SERVLET
         return get_domain_with_protocol('engine') + self.endpoint[0]
 
     def fix_params(self, filters):
@@ -36,7 +37,6 @@ class EngineCommand(object):
             if item[0].startswith('uniqueBy'):
                 num = key[-1:]
                 filters['pUniqueBy%s' % num] = item[1]
-                #del filters[key]
                 
         return filters
 
@@ -63,9 +63,6 @@ class EngineCommand(object):
         url = self.get_url()
         response = None
 
-        print "-----------------------------------------"
-        print url
-        print "-----------------------------------------"
         try:
             post_query=[]
             for item in query:
@@ -73,13 +70,14 @@ class EngineCommand(object):
                     value = item[1]
                     post_query.append((item[0],value.encode('utf-8')))
 
+                # filtra los parametros vacios
+                elif item[1]:
+                    post_query.append(item)
+
             query = self.fix_params(post_query)
             params = urllib.urlencode(query)
 
             try:
-                print ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
-                print url+"?"+params
-                print "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<"
                 if method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
                 elif method == 'POST':
@@ -115,7 +113,13 @@ class EngineCommand(object):
         try:
             answer = self.non_cached_run()
             if answer:
-                cache.set(answer[0], 60)
+
+
+                # Revisar esto:
+                # unicode?!?!?! why?!!?!?
+                # y por qué tira que Key length is > 250
+                #????
+                cache.set(unicode(answer[0], encoding="utf-8"), 60)
                 return answer
             return '{"Error":"No invoke"}', "json"
         except Exception, e:
