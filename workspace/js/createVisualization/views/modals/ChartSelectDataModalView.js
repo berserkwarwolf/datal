@@ -40,6 +40,8 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
 
+        this.setHeights();
+
         return this;
     },
 
@@ -104,6 +106,20 @@ var ChartSelectDataModalView = ModalView.extend({
         } else {
             this.$('button.btn-done').removeAttr('disabled');
         }
-    }
+    },
+
+    setHeights: function(t){
+
+        var contextMenuHeight = parseFloat( $('.context-menu').height() );
+
+        $(window).resize(function(){
+
+            windowHeight = $(window).height();
+            var sidebarHeight = windowHeight - contextMenuHeight;
+            $('.sidebar').css('height', sidebarHeight+'px');
+
+        }).resize();
+
+    }, 
 
 });

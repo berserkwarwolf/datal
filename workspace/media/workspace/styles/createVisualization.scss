@@ -5,7 +5,7 @@
 
   /* Navegación */
   .navCreator{
-    position:relative;margin-top:20px;
+    position:relative;
 
       ul{
         width:310px;border-right:1px solid $color-base-extra-light;min-height:500px;
@@ -57,7 +57,7 @@
     .boxInner {padding-left:20px;}
   }
 
-  .title{text-decoration:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding-bottom:10px;}
+  .title{text-decoration:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding-bottom:10px;line-height:21px;}
   .subtitle{margin-bottom:5px;color:$font-color-light;}
   p{margin-bottom:5px;}
 
@@ -121,22 +121,17 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 /* Gráficos */
 .preview-container {
 
-  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;height:490px;
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
-  }
-
-  @media(min-width:$break-lg){
-    .visualizationContainer{height:650px;}
   }
 
   /* Contenedor de vista previa */
   .chartContent,
   .chartContentFinish,
   .mapContent,
-  .mapContentFinish,
-  {}
+  .mapContentFinish{height:480px;background-position:center center;background-repeat:no-repeat;}
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
@@ -167,20 +162,25 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 .modal{
   position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
 
-  .row{
-    padding-bottom:25px;
+  .main-section{margin:0;}
 
-    /* Sidebar */
-    label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;}
+  .sidebar{overflow-y:auto;margin-right:20px;
 
-    /* Tip */
-    p{color:$font-color-light;margin-left:15px;}
+    .row{
+      padding-bottom:25px;
 
-    input{
-      height:28px;border-radius:0;border-color:$color-base;width:75%;padding-bottom:0;padding-top:0;
-      
-      &:focus,
-      .active{box-shadow:0;border-color:#0091fe;}
+      /* Sidebar */
+      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;}
+
+      /* Tip */
+      p{color:$font-color-light;margin-left:15px;}
+
+      input{
+        height:28px;border-radius:0;border-color:$color-base;width:75%;padding-bottom:0;padding-top:0;
+        
+        &:focus,
+        .active{box-shadow:0;border-color:#0091fe;}
+      }
     }
   }
 
