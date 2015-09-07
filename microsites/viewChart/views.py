@@ -135,7 +135,7 @@ def action_embed(request, guid):
     json, type = invoke(visualization_revision_parameters)
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
-    return render_to_response('viewChart/embedNew.html', locals())
+    return render_to_response('viewChart/embed.html', locals())
 
 
 def action_invoke(request):
