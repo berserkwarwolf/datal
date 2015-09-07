@@ -230,9 +230,9 @@ charts.models.Chart = Backbone.Model.extend({
             invertData: this.get('invertData'),
 
             //data selection
-            range_headline: this.get('range_headline'),
+            range_headers: this.get('range_headers'),
             range_data: this.get('range_data'),
-            range_label: this.get('range_label')
+            range_labels: this.get('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );

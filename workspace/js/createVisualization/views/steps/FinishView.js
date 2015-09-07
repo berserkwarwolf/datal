@@ -33,8 +33,11 @@ var FinishView = StepViewSPA.extend({
 			data: data,
 			dataType: 'json'
 		}).then(function (response) {
-			console.log(response);
-			window.location = '/visualizations/';
+			if(response.status=='ok'){
+				window.location = '/visualizations/'+response.revision_id;
+			} else {
+				console.error(response);
+			}
 		});
 	},
 
@@ -44,8 +47,6 @@ var FinishView = StepViewSPA.extend({
 		this.setupChart();
 		this.renderChart();
 
-		console.log('start');
-		console.log(this.model.get('meta_title'));
 	},
 
 	finish: function(){
@@ -53,7 +54,6 @@ var FinishView = StepViewSPA.extend({
 		if(this.chartInstance){
 			this.chartInstance.destroy();
 		}
-		console.log('finishView','finish');
 	},
 
 	setupChart: function(){

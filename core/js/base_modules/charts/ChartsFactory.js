@@ -11,45 +11,45 @@ charts.ChartsFactory = function(){
             'd3':{
                 'linechart': {
                             'Class': charts.views.C3LineChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'areachart': {
                             'Class': charts.views.C3AreaChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'barchart': {
                             'Class': charts.views.C3BarChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'columnchart': {
                             'Class': charts.views.C3ColumnChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'piechart': {
                             'Class': charts.views.C3PieChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         }                       
             },
             'google':{
                 'linechart': {
                             'Class': charts.views.GoogleLineChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'areachart': {
                             'Class': charts.views.GoogleAreaChart,
-                            'attributes': ['yTitle','xTitle']
+                            'attributes': []
                         },
                 'barchart': {
                             'Class': charts.views.GoogleBarChart,
-                            'attributes': ['yTitle']
+                            'attributes': []
                         },
                 'columnchart': {
                             'Class': charts.views.GoogleColumnChart,
-                            'attributes': ['yTitle']
+                            'attributes': []
                         },
                 'piechart': {
                             'Class': charts.views.GooglePieChart,
-                            'attributes': ['yTitle']
+                            'attributes': []
                         },              
                 'mapchart': {
                         'Class': charts.views.MapChart,
