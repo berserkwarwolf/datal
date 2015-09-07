@@ -185,7 +185,7 @@ body{background:$color-base;height:100%;min-width:998px;}
 .header .global-navigation > .header-navigation,
 .header .global-navigation > .global-actions{padding-top:0 !important;padding-bottom:0 !important;}
 #zenbox_tab{display:none !important;}
-.preview-container{float:right;height:100%;margin-right:-310px;width:100%;padding:15px;}
+.preview-container{float:right;height:100%;margin-right:-310px;width:100%;}
 
 /* Columns */
 .columns{}
@@ -602,8 +602,7 @@ i.icon.TNCLIMA{}
 
 
 /* Tags */
-.tagsContent, .sourcesContent, .paramContent{float:left;width:100%;padding:0;}
-.tag, .param{margin:5px 5px 0 0;float:left;}
+.tag, .param{margin:5px 5px 0 0;display:inline-block;}
 .tag .tagTxt, .param .paramTxt {
   background:#e2e2e2;
   word-wrap:break-word;display:block;float:left;padding:2px 8px;color:#767676;font-size:11px;line-height:20px;height:20px;}

@@ -24,7 +24,7 @@
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
-.create .title{font-family:$font-titles-family;font-size:$font-size-l;padding:15px 0 15px 0;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;margin-bottom:30px;line-height:normal;}
+.create .title{font-family:$font-titles-family;font-size:$font-size-l;padding:15px 0 15px 0;margin-bottom:30px;line-height:normal;text-transform:uppercase;}
 .create .required{color:#d21717;padding-left:5px;font-size:16px;vertical-align:top;}
 .create header .required{padding-left:0;vertical-align:baseline;font-size:inherit;}
 
@@ -82,14 +82,14 @@
 .create .formContent .row input[type="file"], 
 .create .formContent .row input[type="url"],
 .create .formContent .row input[type="email"],
-.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;display:inline-block;
+.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;margin:0;display:inline-block;font-size:$font-size-base;text-transform:none;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
 .create .formContent .row label{font-size:$form-label-size;line-height:inherit;height:inherit;color:$form-label-color;width:115px;}
-.create .formContent .row p.has-error{padding-left:115px;clear:both;}
+.create .formContent .row p.has-error{padding-left:115px;clear:both;float:left;}
 .create .formContent .row textarea{width:480px;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;

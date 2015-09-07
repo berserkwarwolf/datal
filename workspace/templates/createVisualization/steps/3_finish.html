@@ -13,31 +13,39 @@
 
 				<div class="sidebar">
 
-					<button class="icon icon-edit fill-background corner-position editMetadata">&nbsp;</button>
-
 					<div class="row">
-						<div class="title">{% trans "APP-TITLE-TEXT" %}</div>
-						<p data-bind="text:meta_title"></p>
-					</div>
 
-					<div class="row">
-						<div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
-						<p data-bind="text:meta_description"></p>
-					</div>
+						<div class="col-xs-12">
 
-					<div class="row">
-						<div class="title">{% trans "APP-CATEGORY-TEXT" %}</div>
-						<p data-bind="text:meta_category"></p>
-					</div>
+							<button class="icon icon-edit fill-background corner-position editMetadata">&nbsp;</button>
 
-					<div class="row">
-						<div class="title">{% trans "APP-LABEL-TEXT" %}</div>
-						<div class="sourcesContent" data-bind="listTags:meta_tags"></div>
-					</div>
+							<div class="row">
+								<div class="title">{% trans "APP-TITLE-TEXT" %}</div>
+								<p data-bind="text:meta_title"></p>
+							</div>
 
-					<div class="row">
-						<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT" %}</div>
-						<div class="sourcesContent" data-bind="listSources:meta_sources"></div>
+							<div class="row">
+								<div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+								<p data-bind="text:meta_description"></p>
+							</div>
+
+							<div class="row">
+								<div class="title">{% trans "APP-CATEGORY-TEXT" %}</div>
+								<p data-bind="text:meta_category"></p>
+							</div>
+
+							<div class="row">
+								<div class="title">{% trans "APP-LABEL-TEXT" %}</div>
+								<div class="sourcesContent" data-bind="listTags:meta_tags"></div>
+							</div>
+
+							<div class="row">
+								<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT" %}</div>
+								<div class="sourcesContent" data-bind="listSources:meta_sources"></div>
+							</div>
+
+						</div>
+
 					</div>
 
 				</div>
@@ -50,8 +58,15 @@
 
 							<div class="visualizationContainer">
 
-								<button class="icon icon-edit fill-background corner-position editChart"></button>
-								<div class="chartContentFinish">
+								<div class="chartContent">
+
+									<div id="chartContainer" class="chart-preview-view">
+
+										<button class="icon icon-edit fill-background corner-position editChart"></button>
+
+										<div class="chartContentFinish"></div>
+
+									</div>
 
 								</div>
 

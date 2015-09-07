@@ -64,7 +64,7 @@
 /* List */
 .list-container{}
 .list-container table{width:100%;text-shadow:0 1px 0 #fff;}
-.list-container table th{text-align:left;color:#999;font-size:$font-size-m;font-family:$font-titles-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;}
+.list-container table th{text-align:left;color:#999;font-size:$font-size-m;font-family:$font-titles-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;font-weight:normal;}
 .list-container table .select-all-header-cell input[type=checkbox]{position:relative;top:3px;}
 .list-container table tr{}
 .list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:12px 10px 12px 10px;line-height:18px;

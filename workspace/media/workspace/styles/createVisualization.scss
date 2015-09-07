@@ -47,8 +47,9 @@
 
 /* Estructura */
 .sidebar{
-  padding-left:40px;
   color:$font-color-base;
+
+  .row{margin-bottom:20px;}
 
   .itemConfig{
     margin-bottom:40px;
@@ -56,7 +57,7 @@
     .boxInner {padding-left:20px;}
   }
 
-  .title{text-decoration:uppercase;margin-bottom:10px;color:$font-color-light;font-size:$font-size-m;}
+  .title{text-decoration:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding-bottom:10px;}
   .subtitle{margin-bottom:5px;color:$font-color-light;}
   p{margin-bottom:5px;}
 

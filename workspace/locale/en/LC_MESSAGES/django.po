@@ -1623,7 +1623,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Name it"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Let us know what is your data view about. Fields with (<span class='required'>*</span>) are mandatory."
+msgstr "Let us know what is your data view about. <span>Fields with (<span class='required'>*</span>) are mandatory.</span>"
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Names: Best practices and correct uses"

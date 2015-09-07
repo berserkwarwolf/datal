@@ -26,7 +26,6 @@
 .dataStreamForm .form .row #id_edit_dashboard_tags_container{float:left;width:270px;}
 .dataStreamForm .form .row .tagsContent{padding:0;margin-top:2px;}
 .dataStreamForm .form .row .inputNewTag{float:none;}
-.tag{float:left;display:block;margin:4px 4px 0 0;}
 .tag .tagInner{padding:0;}
 .tag .tagTxt{background:#e2e2e2;word-wrap:break-word;display:block;float:left;padding:2px 10px;color:#000;font-size:11px;line-height:20px;height:20px;}
 .tag .tagInner a, .param .paramInner a{display:block;float:left;width:17px;height:20px;background:#e2e2e2 url(/static/core/images/common/ic_tagCloseCuration.png) no-repeat 0 1px;padding:2px;cursor:pointer;}
