@@ -113,11 +113,11 @@ var ChartView = StepViewSPA.extend({
 	selectGraphType: function(type){
 		$('.chartType').removeClass('active');
 		$('.chartType.'+type).addClass('active');
-		this.changeClass(type);
+		this.updatePreviewClass(type);
 		this.model.set('type',type);
 	},
 
-	changeClass: function(type){
+	updatePreviewClass: function(type){
 
 		this.clearClassesChartBg();
 		if(!this.ChartViewClass){
@@ -128,7 +128,7 @@ var ChartView = StepViewSPA.extend({
 
 	clearClassesChartBg: function(){
 		var that = this;
-		_.each(this.bgClasses,function(clase,ix){
+		_.each(this.bgClasses, function(clase){
 			that.chartContent.removeClass(clase);			
 		});
 	},
@@ -180,8 +180,13 @@ var ChartView = StepViewSPA.extend({
 			
 			if(this.chartInstance.valid()){
 				this.clearClassesChartBg();
-				this.chartInstance.render();
-			};
+				// this could me moved into the chart view class VALID method
+				if (this.model.get('range_data')) {
+					this.chartInstance.render();
+				} else {
+					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
+				}
+			}
 		}
 	},
 
