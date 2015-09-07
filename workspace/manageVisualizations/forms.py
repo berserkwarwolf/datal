@@ -47,10 +47,10 @@ class VisualizationForm(forms.Form):
     labelSelection = forms.CharField(required=False, max_length=200)
     headerSelection = forms.CharField(required=False, max_length=200)
     lib = forms.ChoiceField(required=True, choices=VISUALIZATION_LIBS)
-    # pInvertData ?
-    # lib?
-    # pInvertedAxis
-    # pCorrelative
+    invertData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    invertedAxis = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    correlativeData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+    is3D = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)

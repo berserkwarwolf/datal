@@ -19,6 +19,8 @@ from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
+from core.builders.visualizations import VisualizationImplBuilder
+
 from datetime import date, timedelta
 
 logger = logging.getLogger(__name__)
@@ -47,7 +49,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             user=user,
             status=StatusChoices.DRAFT,
             lib=fields['lib'],
-            impl_details=''
+            impl_details=VisualizationImplBuilder(**fields).build()
         )
         logger.info(visualization_rev)
         visualization_i18n = VisualizationI18n.objects.create(

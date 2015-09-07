@@ -6,6 +6,8 @@ from django.http import HttpResponse
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_http_methods
 from django.template.loader import render_to_string
+from django.utils.translation import ugettext
+
 
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
@@ -16,9 +18,10 @@ from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
-from .forms import VisualizationForm
+from .forms import VisualizationForm, ViewChartForm
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +35,7 @@ def index(request):
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
-    logger.info(resources)
+
     for resource in resources:
         resource['url'] = reverse('manageVisualizations.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 

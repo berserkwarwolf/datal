@@ -1,15 +1,12 @@
-import json, re, logging
-from django.conf import settings
-from django.db.models.sql.aggregates import Aggregate
-from django.utils.translation import ugettext_lazy as _
+import json, logging
 from core.primitives import PrimitiveComputer
 
 logger = logging.getLogger(__name__)
 
+
 # Lo comento porque supuestamente no se va a uar mas
 # /home/mativs/Projects/datal/workspace/managers.py
 # /home/mativs/Projects/datal/core/managers.py
-
 def next(p_iterator, p_default=None):
     try:
         l_next = p_iterator.next()
@@ -19,10 +16,8 @@ def next(p_iterator, p_default=None):
     return l_next
 
 
-
 # Se va porque se va a refactorear
 # /home/mativs/Projects/datal/core/exportDataStream/views.py
-
 def jsonToGrid(p_response, p_page = '', p_limit =''):
     """ p_response is a core.engine.invoke resultset """
     l_lists = {}
@@ -72,6 +67,7 @@ def jsonToGrid(p_response, p_page = '', p_limit =''):
 # /home/mativs/Projects/datal/microsites/exportDataStream/views.py
 # /home/mativs/Projects/datal/microsites/viewChart/views.py
 # /home/mativs/Projects/datal/workspace/manageVisualizations/views.py
+
 
 class RequestProcessor:
 
