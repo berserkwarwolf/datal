@@ -128,7 +128,10 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
   /* Contenedor de vista previa */
   .chartContent,
-  .mapContent{width:600px;height:480px;}
+  .chartContentFinish,
+  .mapContent,
+  .mapContentFinish,
+  {width:600px;height:480px;}
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 

@@ -196,6 +196,7 @@ var MainView = Backbone.View.extend({
     },
 
     finish: function(){
+        this.steps[this.currentFlow][this.index].finish();
         //window.location = this.model.get('finishUrl');
     },
 

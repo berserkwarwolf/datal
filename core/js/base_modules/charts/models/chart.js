@@ -227,7 +227,7 @@ charts.models.Chart = Backbone.Model.extend({
             chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
-            traspose: this.get('traspose'),
+            invertData: this.get('invertData'),
 
             //data selection
             range_headline: this.get('range_headline'),

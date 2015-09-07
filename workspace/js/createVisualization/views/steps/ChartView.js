@@ -118,8 +118,9 @@ var ChartView = StepViewSPA.extend({
 	changeClass: function(type){
 
 		this.clearClassesChartBg();
-
-		this.chartContent.addClass(this.bgClasses[type]);
+		if(!this.ChartViewClass){
+			this.chartContent.addClass(this.bgClasses[type]);
+		}
 
 	},
 
@@ -202,6 +203,17 @@ var ChartView = StepViewSPA.extend({
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
 
+		this.onChartChanged();
+
+	},
+
+	finish: function(){
+		this.constructor.__super__.finish.apply(this);
+
+		if(this.chartInstance){
+			this.chartInstance.destroy();
+		}
+		console.log('chartView','finish');
 	},
 
 
