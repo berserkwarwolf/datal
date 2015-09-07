@@ -13,7 +13,7 @@ charts.views.Chart = Backbone.View.extend({
     },
 
     bindEvents: function () {
-        this.model.on('change', this.render, this);
+        // this.model.on('change', this.render, this);
         this.model.on('data_updated', this.handleDataUpdated, this);
     },
 
