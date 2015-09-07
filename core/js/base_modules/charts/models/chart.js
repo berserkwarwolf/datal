@@ -20,9 +20,9 @@ charts.models.Chart = Backbone.Model.extend({
         //metadata
         meta_title: undefined,
         meta_description: undefined,
-        meta_category: undefined,
         meta_notes: undefined,
-        meta_source: undefined,
+        meta_category: undefined,
+        meta_sources: undefined,
         meta_tags: undefined,
 
         //data selection
@@ -67,6 +67,8 @@ charts.models.Chart = Backbone.Model.extend({
 
     },
     initialize: function () {
+        console.log(this.get('meta_sources'));
+        console.log(this.get('meta_tags'));
         this.data = new charts.models.ChartData({
             id: this.get('resourceID'),
             type: this.get('type')
@@ -200,9 +202,9 @@ charts.models.Chart = Backbone.Model.extend({
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
             
-            category: this.get('meta_category'),
+/*            category: this.get('meta_category'),
             source: this.get('meta_sources'),
-            tags: this.get('meta_tags')
+            tags: this.get('meta_tags')*/
         };
 
         return metadata;
