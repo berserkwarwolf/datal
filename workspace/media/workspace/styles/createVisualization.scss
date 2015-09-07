@@ -121,10 +121,14 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 /* Gráficos */
 .preview-container {
 
-  .visualizationContainer{border:1px solid $color-base-extra-light;width:602px;height:482px;cursor:pointer;position:relative;margin:0 auto;
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;height:490px;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
+  }
+
+  @media(min-width:$break-lg){
+    .visualizationContainer{height:650px;}
   }
 
   /* Contenedor de vista previa */
@@ -132,7 +136,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .chartContentFinish,
   .mapContent,
   .mapContentFinish,
-  {width:600px;height:480px;}
+  {}
 
   p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
