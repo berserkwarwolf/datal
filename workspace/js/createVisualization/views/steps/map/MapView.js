@@ -26,7 +26,23 @@ var MapView = StepViewSPA.extend({
 
         // Event binding
         this.listenTo(this.model, 'change:type', this.onChartChanged, this);
+        this.listenTo(this.modalView, 'close', this.onCloseModal, this);
     }, 
+
+    onCloseModal: function () {
+        this.fetchPreviewData();
+    },
+
+    fetchPreviewData: function(){
+        $("#ajax_loading_overlay").show();
+        this.model.fetchPreviewData()
+        .then(function () {
+            $("#ajax_loading_overlay").hide();
+        })
+        .error(function(response){
+            $("#ajax_loading_overlay").hide();
+        });;
+    },
 
     onSelectDataClicked: function(){
         this.modalView.open();

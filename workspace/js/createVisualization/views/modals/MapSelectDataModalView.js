@@ -44,13 +44,10 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        this.close(); //Close modal
         console.log('result of the selection to be posted to the API', this.collection.getSelectionChartStyle());
-        // var selectedRows = this.collection.getRows();
-        // var selectedFields = this.collection.getFields();
-        // this.model.data.set('fields', selectedFields);
-        // this.model.data.set('rows', selectedRows);
-        // this.model.set('selection', this.collection.getSelectionExcelStyle());
+        var selection = this.collection.getSelectionChartStyle();
+        this.model.set(selection);
+        this.close();
     },
 
     onClickCancel: function (e) {
