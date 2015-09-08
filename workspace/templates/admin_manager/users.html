@@ -66,7 +66,7 @@
 {% block popupsOverlay %}
 {% overlay id_userFormContainer %}
 <div class="In clearfix">
-    <form action="{{form.action}}" method="POST" id="id_userForm" class="ao-L">
+    <form action="{{form.action}}" method="POST" id="id_userForm" class="ao-L" novalidate>
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <h4>{% trans "WORKSPACE-CREATE-USER" %}</h4>

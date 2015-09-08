@@ -15,7 +15,7 @@
     </div>
   </header>
   <div class="account-box-content">
-    <form action="{% url 'accounts.forgot_password' %}" method="post">
+    <form action="{% url 'accounts.forgot_password' %}" method="post" novalidate>
         <fieldset>
           <legend class="">{% trans "FORGOT-PASSWORD-RESET" %}</legend>
             <div class="row center">

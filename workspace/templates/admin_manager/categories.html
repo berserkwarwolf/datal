@@ -73,7 +73,7 @@
 {% block popupsOverlay %}
 {% overlay id_categoryFormContainer %}
 <div class="In clearfix categoriesForm">
-    <form action="{{form.action}}" method="post" id="id_categoryForm">
+    <form action="{{form.action}}" method="post" id="id_categoryForm" novalidate>
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <h4>{% trans "WORKSPACE-CREATE-CATEGORY" %}</h4>
@@ -113,7 +113,7 @@
 
 {% overlay id_deleteCategoryFormContainer %}
 <div class="In clearfix categoriesForm">
-    <form action="{{form.action}}" method="post" id="id_categoryForm">
+    <form action="{{form.action}}" method="post" id="id_categoryForm" novalidate>
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <h4>{% trans "APP-DELETE-CATEGORY-TITLE" %}</h4>

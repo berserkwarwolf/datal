@@ -21,7 +21,7 @@
 {% block content %}
     {% include "admin_manager/tabs.html" %}
     <div class="formContainer col-xs-12">
-        <form action="{{form.action}}" method="post" id="id_adminSocialForm">
+        <form action="{{form.action}}" method="post" id="id_adminSocialForm" novalidate>
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
             
