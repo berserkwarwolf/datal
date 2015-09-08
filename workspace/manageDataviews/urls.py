@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from workspace.manageDataviews.views import *
 from workspace.manageDatasets.views import filter as filterDataset
-from core.exportDataStream.views import action_invoke
+from core.exportDataStream.views import invoke
 
 urlpatterns = patterns(
     '',
@@ -18,6 +18,6 @@ urlpatterns = patterns(
     url(r'^related_resources$', related_resources, name='manageDataviews.related_resources'),
     url(r'^change_status/(?P<datastream_revision_id>\d+)/$', change_status, name='manageDataviews.change_status'),
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
-    url(r'^invoke$', action_invoke, name='core.exportDataStream.views.action_invoke'),
-    url(r'^action_updategrid$', 'core.exportDataStream.views.action_updategrid', name='core.datastream_manager.updategrid'),
+    url(r'^invoke$', action_invoke, name='core.exportDataStream.views.invoke'),
+    url(r'^action_updategrid$', 'core.exportDataStream.views.updategrid', name='core.datastream_manager.updategrid'),
 )

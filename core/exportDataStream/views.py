@@ -11,7 +11,7 @@ from core.lib.datastore import *
 from core.cache import Cache
 from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
-from core.engine import invoke
+from core.engine import invoke as engine_invoke
 from core.helpers import jsonToGrid, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
@@ -30,7 +30,7 @@ def invoke(request):
         if limit:
             query['pLimit'] = limit
 
-        ivk = invoke(query)
+        ivk = engine_invoke(query)
         # Sometimes there is no answer. Maybe engine is down
         if ivk is None:
             contents = '{"Error":"No invoke"}'
@@ -92,7 +92,7 @@ def export_to(datastream_id, request, output):
         if filter:
             query['pFilter0'] = unicode(filter).encode('utf-8')
 
-        return invoke(query, output)
+        return engine_invoke(query, output)
 
 
 @xframe_options_exempt
@@ -130,7 +130,7 @@ def updategrid(request):
         query['pOrderBy'] = sortname
         query['pOrderType'] = {None: 'A', 'asc': 'A', 'desc': 'D'}[sortorder]
 
-    contents, mimetype = invoke(RequestProcessor(request).get_arguments_no_validation(query))
+    contents, mimetype = engine_invoke(RequestProcessor(request).get_arguments_no_validation(query))
     if not contents:
         contents = {"rows": [], "total": 1, "page": 1}
         mimetype = "application/json"
