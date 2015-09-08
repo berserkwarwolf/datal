@@ -1,4 +1,4 @@
-var DatasetModel = dataset.extend({
+var VisualizationModel = visualization.extend({
   remove: function (options) {
       var opts = _.extend({url: 'remove/' + this.id}, options || {});
 

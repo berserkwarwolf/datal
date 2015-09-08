@@ -29,9 +29,6 @@
 <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
 
-<!-- Process Manager -->
-<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
 <!-- Charts types & instances -->
 <script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -42,6 +39,12 @@
 <script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Screen JS -->
+<script language="javascript" src="/js_workspace/viewVisualization/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/unpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -66,22 +69,6 @@
     <div class="wrapper1">
         <div class="wrapper2 clearfix">
             <div class="wrapper3">
-                {# Pending review = 1  #}
-                {% if visualization_revision.status == 1 %}
-                <!-- Review -->
-                    <div class="alert alert-info clearfix" id="id_reviewBar">
-                    {% if auth_manager.is_publisher or auth_manager.is_admin %}
-                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
-                        <div class="navigation FR">
-                            <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
-                            <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
-                        </div>
-                    {% else %}
-                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
-                    {% endif %}
-                </div>
-                {% endif %}
-
                 <!-- Sidebar -->
                 <section class="sidebar-container">
                     {% include "viewVisualization/sidebar.html" %}
@@ -95,15 +82,19 @@
     </div>
 </div>
 
+{# templates backbone #}
+{% include "viewVisualization/templates.html" %}
 
+{% endblock %}
+
+{% block bottom_js %}
 <script type="text/javascript">
 
 google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 
-
 $(document).ready(function(){
 
-    var visualizationModel = new visualization({
+    var visualizationModel = new VisualizationModel({
         id: "{{datastream.datastreamrevision_id}}",
         datastream_id: "{{datastream.datastream_id}}",
         visualization_id: "{{visualization_revision.visualization_id}}",
@@ -129,7 +120,8 @@ $(document).ready(function(){
     chartView.setLoading();
 });
 </script>
+{% endblock %}
 
-{# templates backbone #}
-{% include "viewVisualization/templates.html" %}
+{% block popupsOverlay %}
+  {% include "viewVisualization/overlays.html" %}
 {% endblock %}
