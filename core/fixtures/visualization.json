@@ -22,14 +22,14 @@
     }
 },
 {
-    "pk": 1733, 
+    "pk": 1734, 
     "model": "core.visualization", 
     "fields": {
         "datastream": 69651, 
-        "guid": "RAMA-DE-ACTIV-ECONO-2005", 
-        "user": 1472, 
-        "last_published_revision": 5602, 
-        "last_revision": 5602
+        "guid": "MORTA-POR-ACCID-DEL-TRABA", 
+        "user": 1647, 
+        "last_published_revision": null, 
+        "last_revision": 5603
     }
 }
 ]
