@@ -26,11 +26,12 @@ urlpatterns = patterns('',
     #(r'^visualizationsb/', include('microsites.chart_manager.urls')),
     #url(r'^visualizationsb/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.chart_manager.views.action_embed', name='chart_manager.action_embedb'),
 
-    (r'^datastreams/', include('microsites.datastream_manager.urls')),
-    (r'^datastreams/', include('microsites.viewDataStream.urls')),
 
-    # TODO ANDRES: REVISAR
+    # dejamos datastreams para no romper,
+    # dataviews como deberia quedar definitivamente
+    (r'^datastreams/', include('microsites.viewDataStream.urls')),
     (r'^dataviews/', include('microsites.datastream_manager.urls')),
+
     url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.embedDataStream.views.action_embed',
         name='datastream_manager.action_embed'),
 

@@ -2,6 +2,14 @@ from django.conf.urls import *
 from microsites.datastream_manager.views import hits_stats
 
 urlpatterns = patterns('',
+
+    # Agregado por ignacio feijoo
+    # este url lo saque de microsites/viewDataStream/urls.py
+    # ya que como /dataviews/ID/GUID/ no resolvia
+    url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.viewDataStream.views.action_view',
+        name='viewDataStream.action_view'),
+
+
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.downloadDatastream.views.action_download',
         name='datastream_manager.action_download'),
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).csv$', 'core.exportDataStream.views.action_csv',
