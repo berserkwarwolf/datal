@@ -9,7 +9,7 @@ from microsites.daos.datasets import DatasetDAO
 from core.utils import set_dataset_impl_type_nice
 
 
-def action_view(request, dataset_id, slug):
+def view(request, dataset_id, slug):
     """ Show dataset """
     logger = logging.getLogger(__name__)
     account = request.account
