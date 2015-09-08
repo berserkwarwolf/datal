@@ -88,6 +88,15 @@
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
+
+.create{
+  .formContent{
+    .input-button{position:relative;overflow:hidden;width:480px;height:28px;cursor:pointer;display:inline-block;
+      .button{height:28px;line-height:25px;right:0;position:absolute;top:0;width:95px;z-index:1;@include border-radius(3px 0 0 3px);border-top-color:transparent;border-right-color:transparent;border-bottom-color:transparent;border-left-color:#e2e0e0;background:none;@include transition(border-right, 0.30s, ease-in-out);}
+    }
+  }
+}
+
 .create .formContent .row label{font-size:$form-label-size;line-height:inherit;height:inherit;color:$form-label-color;width:115px;}
 .create .formContent .row p.has-error{padding-left:115px;clear:both;float:left;}
 .create .formContent .row textarea{width:480px;

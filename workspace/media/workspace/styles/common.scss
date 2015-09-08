@@ -602,7 +602,7 @@ i.icon.TNCLIMA{}
 
 
 /* Tags */
-.tag, .param{margin:5px 5px 0 0;display:inline-block;}
+.tag, .param{margin:0 10px 10px 0;float:left;}
 .tag .tagTxt, .param .paramTxt {
   background:#e2e2e2;
   word-wrap:break-word;display:block;float:left;padding:2px 8px;color:#767676;font-size:11px;line-height:20px;height:20px;}
