@@ -2,7 +2,7 @@
 import operator, logging
 from django.db.models import Q, F
 from core.models import Dataset, DatasetRevision, DataStream, Visualization, DataStreamRevision, VisualizationRevision
-
+from core.daos.visualizations import VisualizationDBDAO
 
 class DatastreamDAO():
     """ class for integrated managment of datastream + datastream_revision + datastream_i18n """
@@ -99,6 +99,6 @@ class DatastreamDAO():
         visualizations = Visualization.objects.filter(last_revision__visualization__datastream=self.datastream)
         ret['visualizations'] = []
         for visualization in visualizations:
-            vz = VisualizationDAO(resource=visualization)
-            ret['visualizations'].append(vz.get())
+            vz = VisualizationDBDAO().get(self.language, visualization_revision_id=visualization.last_published_revision.id, published=True)
+            ret['visualizations'].append(vz)
         return ret
