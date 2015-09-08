@@ -3197,3 +3197,6 @@ msgstr "Es lo que verás en el tooltip del mapa"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "Nueva visualización"
+
+msgid "APP-LABELS-TIP-TEXT"
+msgstr "Palabras clave para ayudar a identificar el contenido de tu visualización."
