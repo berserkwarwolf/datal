@@ -4,11 +4,13 @@ from optparse import make_option
 from core.lib.elastic import ElasticsearchIndex
 
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices
-from core.models import Dataset, DatasetRevision, DataStream, DataStreamRevision
+from core.models import Dataset, DatasetRevision, DataStream, DataStreamRevision, Visualization, VisualizationRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datasets import DatasetSearchDAOFactory
+from core.lifecycle.visualizations import VisualizationSearchDAOFactory
 from core.lifecycle.datastreams import DatastreamSearchDAOFactory
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
+from core.daos.visualizations import *
 
 
 class Command(BaseCommand):
@@ -34,6 +36,11 @@ class Command(BaseCommand):
             for dataset in Dataset.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
                 datasetrevision=dataset.last_published_revision
                 search_dao = DatasetSearchDAOFactory().create(datasetrevision)
+                search_dao.add()
+
+            for vz in Visualization.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
+                vz_revision=vz.last_published_revision
+                search_dao = VisualizationSearchDAOFactory().create(vz_revision)
                 search_dao.add()
 
             # TODO Hay que usar el metodo query del DAO

@@ -6,7 +6,8 @@
       "datastream": 69575,
       "guid": "38509",
       "user": 1472,
-      "last_revision": 225
+      "last_revision": 225,
+      "last_published_revision": 225
     }
   },
   {
@@ -16,7 +17,8 @@
       "datastream": 69650,
       "guid": "SEGUN-SEXO-2002-2009",
       "user": 1472,
-      "last_revision": 3610
+      "last_revision": 3610,
+      "last_published_revision": 3610
     }
   },
   {
@@ -26,7 +28,8 @@
       "datastream": 69651,
       "guid": "RAMA-DE-ACTIV-ECONO-2005",
       "user": 1472,
-      "last_revision": 5602
+      "last_revision": 5602,
+      "last_published_revision": 5602
     }
   },
   {
@@ -36,7 +39,8 @@
       "datastream": 69654,
       "guid": "1992-2009",
       "user": 1472,
-      "last_revision": 1533
+      "last_revision": 1533,
+      "last_published_revision": 1533
     }
   }
 ]
