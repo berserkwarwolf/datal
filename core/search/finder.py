@@ -111,7 +111,7 @@ class Finder:
         id = document['datastream_id']
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('viewDataStream.action_view', urlconf='microsites.urls',
+        permalink = reverse('viewDataStream.view', urlconf='microsites.urls',
                             kwargs={'id': id, 'slug': slug})
 
         data = dict (id=id, revision_id=document['datastream__revision_id'], title=title, description=document['description'], parameters=parameters,

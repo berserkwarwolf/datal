@@ -11,7 +11,7 @@ from core.lib.datastore import active_datastore
 
 
 @require_http_methods(["GET"])
-def action_download(request, dataset_id, slug):
+def download(request, dataset_id, slug):
     """ download dataset file directly """
     logger = logging.getLogger(__name__)
 

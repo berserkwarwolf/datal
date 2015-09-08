@@ -51,7 +51,7 @@
                             <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br/> {{visualization_revision.created_at}}</p>
                         {% endif %}
                         {% if visualization_revision.datastream_type == 'SELF PUBLISH' and can_download%}
-                            <a rel="nofollow" href="{% url "datastream_manager.action_download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
+                            <a rel="nofollow" href="{% url "datastream_manager.download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
                         {% endif %}
                     </div>
                 </div>
@@ -133,7 +133,7 @@
                             <ul class="In">
                                 <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
                                 {% if can_export %}
-                                <li class="Item"><a href="{% url "datastream_manager.action_csv" visualization_revision.datastream_id visualization_revision.slug %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                <li class="Item"><a href="{% url "datastream_manager.csv" visualization_revision.datastream_id visualization_revision.slug %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                                 {% endif %}
                                 
                                 <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>

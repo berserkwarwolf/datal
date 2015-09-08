@@ -8,7 +8,7 @@ from core.lib.datastore import *
 
 
 @require_http_methods(["GET"])
-def action_download(request, id, slug):
+def download(request, id, slug):
     """ download internal dataset file """
     try:
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)

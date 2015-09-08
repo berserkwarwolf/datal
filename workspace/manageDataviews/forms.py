@@ -121,7 +121,7 @@ class UpdateDataStreamNoteForm(forms.Form):
     notes = forms.CharField(label=ugettext_lazy( 'APP-NOTES-TEXT' ), required=False, widget=forms.Textarea(attrs={'id':'id_notes', 'class': 'required', 'style' : 'width:620px;'}))
 
     def action(self):
-        return reverse('datastream_manager.action_update_note')
+        return reverse('datastream_manager.update_note')
 
 
 class InitalizeCollectForm(forms.Form):
