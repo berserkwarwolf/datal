@@ -9,24 +9,8 @@
 	</div>
 	<div class="ov-bottom">
 		<div class="ov-buttons">
-			<a id="id_deleteResource" class="button warning small" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
-			<a id="id_deleteRevision" class="button warning small" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
-		</div>
-	</div>
-</div>
-{% endoverlay %}
-
-<!-- Bulk Actions Delete Dataview Overlay -->
-{% overlay id_bulkDeleteDataview %}
-<div class="In clearfix">
-	<h4>{% trans 'APP-OVERLAY-BULK-DELETE-VISUALIZATION-TITLE' %}</h4>
-	<div class="ov-content">
-		<p class="text center">{% trans 'APP-OVERLAY-BULK-DELETE-VISUALIZATION-TEXT' %}</p>
-	</div>
-	<div class="ov-bottom">
-		<div class="ov-buttons">
-			<a id="id_deleteResource" class="button warning small" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
-			<a id="id_deleteRevision" class="button warning small" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
+			<a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
+			<a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
 		</div>
 	</div>
 </div>
@@ -42,8 +26,24 @@
 	</div>
 	<div class="ov-bottom">
 		<div class="ov-buttons">
-			<a id="id_deleteRelatedResources" class="button warning small" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
-			<a class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+			<a class="cancel button" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+			<a id="id_deleteRelatedResources" class="button delete" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
+		</div>
+	</div>
+</div>
+{% endoverlay %}
+
+<!-- Bulk Actions Delete Dataview Overlay -->
+{% overlay id_bulkDeleteDataview %}
+<div class="In clearfix">
+	<h4>{% trans 'APP-OVERLAY-BULK-DELETE-VISUALIZATION-TITLE' %}</h4>
+	<div class="ov-content">
+		<p class="text center">{% trans 'APP-OVERLAY-BULK-DELETE-VISUALIZATION-TEXT' %}</p>
+	</div>
+	<div class="ov-bottom">
+		<div class="ov-buttons">
+			<a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
+			<a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
 		</div>
 	</div>
 </div>
@@ -67,21 +67,6 @@
 	</div>
 </div>
 {% endoverlay %}
-
-<!-- Edit Dataview -->
-{% overlay id_editDataview %}
-<div id="id_editDataview" class="In clearfix">
-	<h4>{% trans 'APP-EDIT-DATAVIEW-TEXT' %} <span>{% trans 'APP-MANDATORY-FIELDS-TEXT' %}</span></h4>
-	<div class="formContent">
-		
-	</div>
-</div>
-{% endoverlay %}
-
-
-
-
-
 
 {# NOT IMPLEMENTED YET #}
 {% comment %}

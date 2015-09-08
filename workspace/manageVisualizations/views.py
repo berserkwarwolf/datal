@@ -4,7 +4,7 @@ import urllib
 
 from django.http import HttpResponse
 from django.db import transaction
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext
 
@@ -157,6 +157,80 @@ def unpublish(request, visualization_revision_id, type="resource"):
             'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
+
+
+@login_required
+@require_privilege("workspace.can_review_visualization_revision")
+@require_POST
+@transaction.commit_on_success
+def change_status(request, visualization_revision_id=None):
+    """
+    Change visualization status
+    :param request:
+    :param visualization_revision_id:
+    :return: JSON Object
+    """
+    if request.method == 'POST' and visualization_revision_id:
+        lifecycle = VisualizationLifeCycleManager(
+            user=request.user,
+            visualization_revision_id=visualization_revision_id
+        )
+        action = request.POST.get('action')
+
+        if action == 'approve':
+            lifecycle.accept()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.APPROVED,
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
+                }
+            )
+        elif action == 'reject':
+            lifecycle.reject()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
+                }
+            )
+        elif action == 'publish':
+            lifecycle.publish()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.PUBLISHED,
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
+                }
+            )
+        elif action == 'unpublish':
+            lifecycle.unpublish()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
+                }
+            )
+        elif action == 'send_to_review':
+            lifecycle.send_to_review()
+            response = dict(
+                status='ok',
+                datastream_status=StatusChoices.PENDING_REVIEW,
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
+                }
+            )
+        else:
+            raise NoStatusProvidedException()
+
+        return JSONHttpResponse(json.dumps(response))
                
 
 @login_required
