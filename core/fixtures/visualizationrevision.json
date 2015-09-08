@@ -3,7 +3,7 @@
     "pk": 5603, 
     "model": "core.visualizationrevision", 
     "fields": {
-        "status": 0, 
+        "status": 3,
         "visualization": 1734, 
         "parameters": "", 
         "lib": "google", 
@@ -18,7 +18,7 @@
     "pk": 5604, 
     "model": "core.visualizationrevision", 
     "fields": {
-        "status": 0, 
+        "status": 3,
         "visualization": 1735, 
         "parameters": "", 
         "lib": "google", 
