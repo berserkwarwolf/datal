@@ -18,6 +18,6 @@ urlpatterns = patterns(
     url(r'^related_resources$', related_resources, name='manageDataviews.related_resources'),
     url(r'^change_status/(?P<datastream_revision_id>\d+)/$', change_status, name='manageDataviews.change_status'),
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
-    url(r'^invoke$', action_invoke, name='core.exportDataStream.views.invoke'),
+    url(r'^invoke$', invoke, name='core.exportDataStream.views.invoke'),
     url(r'^action_updategrid$', 'core.exportDataStream.views.updategrid', name='core.datastream_manager.updategrid'),
 )
