@@ -7,11 +7,11 @@ urlpatterns = patterns('',
     # este url lo saque de microsites/viewDataStream/urls.py
     # ya que como /dataviews/ID/GUID/ no resolvia
     url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.viewDataStream.views.view',
-        name='viewDataStream.action_view'),
+        name='viewDataStream.view'),
 
 
-    url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.downloadDatastream.views.action_download',
-        name='datastream_manager.action_download'),
+    url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).download$', 'core.downloadDatastream.views.download',
+        name='datastream_manager.download'),
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).csv$', 'core.exportDataStream.views.action_csv',
         name='datastream_manager.action_csv'),
     url(r'^(?P<id>\d+)-(?P<slug>[A-Za-z0-9\-]+).html$', 'core.exportDataStream.views.action_html',

@@ -51,7 +51,7 @@
                             <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br/> {{visualization_revision.created_at}}</p>
                         {% endif %}
                         {% if visualization_revision.datastream_type == 'SELF PUBLISH' and can_download%}
-                            <a rel="nofollow" href="{% url "datastream_manager.action_download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
+                            <a rel="nofollow" href="{% url "datastream_manager.download" visualization_revision.datastream_id visualization_revision.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
                         {% endif %}
                     </div>
                 </div>
