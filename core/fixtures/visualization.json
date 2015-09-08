@@ -1,16 +1,5 @@
 [
 {
-    "pk": 1727, 
-    "model": "core.visualization", 
-    "fields": {
-        "datastream": 69654, 
-        "guid": "1992-2009", 
-        "user": 1472, 
-        "last_published_revision": 1533, 
-        "last_revision": 1533
-    }
-},
-{
     "pk": 1732, 
     "model": "core.visualization", 
     "fields": {
@@ -30,6 +19,17 @@
         "user": 1647, 
         "last_published_revision": null, 
         "last_revision": 5603
+    }
+},
+{
+    "pk": 1735, 
+    "model": "core.visualization", 
+    "fields": {
+        "datastream": 69654, 
+        "guid": "SERIE-DE-TASA-GLOBA-DE", 
+        "user": 1647, 
+        "last_published_revision": null, 
+        "last_revision": 5604
     }
 }
 ]

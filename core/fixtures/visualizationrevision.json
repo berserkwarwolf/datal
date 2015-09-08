@@ -1,20 +1,5 @@
 [
 {
-    "pk": 1533, 
-    "model": "core.visualizationrevision", 
-    "fields": {
-        "status": 3, 
-        "visualization": 1727, 
-        "parameters": "", 
-        "lib": "google", 
-        "created_at": "2012-07-07T00:58:49", 
-        "user": 1472, 
-        "meta_text": "", 
-        "datastream_revision": 61456, 
-        "impl_details": "{\"format\":{\"type\":\"linechart\",\"chartTemplate\":\"basicchart\",\"showLegend\":true,\"invertData\":false,\"invertedAxis\":\"checked\",\"correlativeData\":false,\"nullValueAction\":\"exclude\",\"nullValuePreset\":\"\"},\"title\":\"Tasa Global de Fecundidad en Chile 1992-2009\",\"data\":\"B 2 : S 2\",\"chart\":{\"xTitle\":\"A\\u00f1os\",\"yTitle\":\"Tasa\",\"labelSelection\":\"B 1 : S 1\",\"headerSelection\":\"A 2\"}}"
-    }
-},
-{
     "pk": 1536, 
     "model": "core.visualizationrevision", 
     "fields": {
@@ -57,6 +42,21 @@
         "meta_text": "", 
         "datastream_revision": 61455, 
         "impl_details": "{\"title\": \"Mortalidad por Accidentes del Trabajo Rama de actividad econ\\u00f3mica 2005-2009\", \"data\": \"B3:K12\", \"chart\": {\"headerSelection\": \"B1:K1\", \"is3D\": \"false\", \"labelSelection\": \"A3:A12\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertedAxis\": \"\", \"correlativeData\": \"false\", \"type\": \"piechart\", \"nullValueAction\": \"exclude\"}}"
+    }
+},
+{
+    "pk": 5604, 
+    "model": "core.visualizationrevision", 
+    "fields": {
+        "status": 0, 
+        "visualization": 1735, 
+        "parameters": "", 
+        "lib": "google", 
+        "created_at": "2015-09-08T13:28:46", 
+        "user": 1647, 
+        "meta_text": "", 
+        "datastream_revision": 61456, 
+        "impl_details": "{\"title\": \" Serie de tasa global de fecundidad 1992-2009 \", \"data\": \"B2:S2\", \"chart\": {\"headerSelection\": \"B1:S1\", \"is3D\": \"false\", \"labelSelection\": \"A2:A2\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertedAxis\": \"checked\", \"correlativeData\": \"false\", \"type\": \"linechart\", \"nullValueAction\": \"exclude\"}}"
     }
 }
 ]
