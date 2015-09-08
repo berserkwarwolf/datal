@@ -66,7 +66,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-xs-12 detail" id="id_viewVisualization">
+<div class="detail" id="id_viewVisualization">
     <div class="wrapper1">
         <div class="wrapper2 clearfix">
             <div class="wrapper3">
@@ -76,7 +76,9 @@
                 </section>
                 <!-- Detail -->
                 <section class="detail-container">
+                    <div class="col-xs-12">
                     {% include "viewVisualization/detail.html" %}
+                    </div>
                 </section>
             </div>
         </div>

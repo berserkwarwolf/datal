@@ -49,17 +49,20 @@
 .sidebar{
   color:$font-color-base;
 
-  .row{margin-bottom:20px;}
+  .row{margin-bottom:25px;}
 
   .itemConfig{
     margin-bottom:40px;
 
-    .boxInner {padding-left:20px;}
+    .boxInner {padding-left:10px;}
   }
 
-  .title{text-decoration:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding-bottom:10px;line-height:21px;}
+  .title{text-transform:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding:0 0 10px;line-height:21px;}
   .subtitle{margin-bottom:5px;color:$font-color-light;}
-  p{margin-bottom:5px;}
+  p{margin:0 0 5px 10px;}
+
+  .sourcesContent, 
+  .tagsContent{padding-left:10px;display:inline-block;}
 
 }
 
@@ -88,6 +91,8 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   /* Grupo de botones */
   .btnGroup {
     margin-bottom:10px;
+
+      p{margin-left:0;}
 
       button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background-color:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
 
