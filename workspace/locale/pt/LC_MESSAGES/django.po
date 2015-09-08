@@ -3216,3 +3216,6 @@ msgstr "Descripción"
 
 msgid "APP-VIZ-FINISH-TEXT"
 msgstr "Revisión"
+
+msgid "APP-LABELS-TIP-TEXT"
+msgstr "Keywords to help identify Visualization content."
