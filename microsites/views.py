@@ -125,11 +125,11 @@ def action_catalog_xml(request):
         ds.link = 'http://{}{}'.format(domain, ds.permalink())
         ds.export_csv_link = 'http://{}{}'.format(
             domain,
-            reverse('datastream_manager.action_csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+            reverse('datastream_manager.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
         )
         ds.export_html_link = 'http://{}{}'.format(
             domain,
-            reverse('datastream_manager.action_html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+            reverse('datastream_manager.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
         )
         ds.api_link = 'http://' + api_domain + '/dataviews/invoke/' + ds.guid + '?auth_key=your_authkey'
 

@@ -11,7 +11,7 @@ from core.lib.datastore import *
 from core.cache import Cache
 from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
-from core.engine import invoke
+from core.engine import invoke as engine_invoke
 from core.helpers import jsonToGrid, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
@@ -21,7 +21,7 @@ from core.decorators import *
 
 @require_http_methods(["GET"])
 @datal_cache_page()
-def action_invoke(request):
+def invoke(request):
     form = forms.RequestForm(request.GET)
     if form.is_valid():
         query = RequestProcessor(request).get_arguments_no_validation()
@@ -30,7 +30,7 @@ def action_invoke(request):
         if limit:
             query['pLimit'] = limit
 
-        ivk = invoke(query)
+        ivk = engine_invoke(query)
         # Sometimes there is no answer. Maybe engine is down
         if ivk is None:
             contents = '{"Error":"No invoke"}'
@@ -44,7 +44,7 @@ def action_invoke(request):
 
 
 @require_http_methods(["GET"])
-def action_csv(request, id, slug):
+def csv(request, id, slug):
 
     contents, type = export_to(id, request, 'csv')
 
@@ -52,7 +52,7 @@ def action_csv(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_xls(request, id, slug):
+def xls(request, id, slug):
 
     contents, type = export_to(id, request, 'xls')
 
@@ -67,7 +67,7 @@ def action_xls(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_html(request, id, slug):
+def html(request, id, slug):
     contents, type = export_to(id, request, 'html')
     return HttpResponse(contents)
 
@@ -92,12 +92,12 @@ def export_to(datastream_id, request, output):
         if filter:
             query['pFilter0'] = unicode(filter).encode('utf-8')
 
-        return invoke(query, output)
+        return engine_invoke(query, output)
 
 
 @xframe_options_exempt
 @require_http_methods(["GET"])
-def action_legacy_embed(request):
+def legacy_embed(request):
     form = forms.LegacyEmbedForm(request.GET)
     if form.is_valid():
         datastream_id = form.cleaned_data.get('dataservice_id')
@@ -114,7 +114,7 @@ def action_legacy_embed(request):
 
 
 @require_http_methods(["GET"])
-def action_updategrid(request):
+def updategrid(request):
     query = dict()
     query['pId'] = request.REQUEST.get('datastream_id')
     query['pLimit'] = request.REQUEST.get('rp')
@@ -130,7 +130,7 @@ def action_updategrid(request):
         query['pOrderBy'] = sortname
         query['pOrderType'] = {None: 'A', 'asc': 'A', 'desc': 'D'}[sortorder]
 
-    contents, mimetype = invoke(RequestProcessor(request).get_arguments_no_validation(query))
+    contents, mimetype = engine_invoke(RequestProcessor(request).get_arguments_no_validation(query))
     if not contents:
         contents = {"rows": [], "total": 1, "page": 1}
         mimetype = "application/json"

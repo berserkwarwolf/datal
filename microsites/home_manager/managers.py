@@ -10,7 +10,7 @@ class HomeFinder(elastic.ElasticsearchFinder):
         id = doc['datastream_id']
         title = doc['title']
         slug = slugify(title)
-        permalink = reverse('viewDataStream.action_view', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('viewDataStream.view', kwargs={'id': id, 'slug': slug})
         created_at = datetime.datetime.fromtimestamp(int(doc['timestamp']))
 
         return dict(

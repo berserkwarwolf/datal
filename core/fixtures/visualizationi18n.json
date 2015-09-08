@@ -1,69 +1,26 @@
 [
-    {
-        "pk": 1,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales seg\u00fan las grandes ramas de actividades econ\u00f3micas",
-            "language": "es",
-            "title": "Mortalidad por Accidentes del Trabajo Rama de actividad econ\u00f3mica 2005-2009",
-            "notes": "",
-            "visualization_revision": 5602,
-            "created_at": "2011-10-28T12:25:21"
-        }
-    },{
-        "pk": 2,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales y la tasa, seg\u00fan sexo",
-            "language": "es",
-            "title": "Mortalidad  por Accidentes de Trabajo Seg\u00fan sexo 2002-2009",
-            "notes": "",
-            "visualization_revision": 3610,
-            "created_at": "2011-10-28T12:25:21"
-        }
-    },{
-        "pk": 3,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales seg\u00fan las grandes ramas de actividades econ\u00f3micas",
-            "language": "es",
-            "title": "Mortalidad por Accidentes del Trabajo Rama de actividad econ\u00f3mica 2005-2009 1",
-            "notes": "",
-            "visualization_revision": 1537,
-            "created_at": "2011-10-28T12:25:21"
-        }
-    },{
-        "pk": 4,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales y la tasa, seg\u00fan sexo",
-            "language": "es",
-            "title": "Mortalidad  por Accidentes de Trabajo Seg\u00fan sexo 2002-2009 1",
-            "notes": "",
-            "visualization_revision": 1536,
-            "created_at": "2011-10-28T12:25:21"
-        }
-    },{
-        "pk": 5,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Muestra la evoluci\u00f3n de la TGF entre los a\u00f1os 1992-2009",
-            "language": "es",
-            "title": "Serie de tasa global de fecundidad 1992-2009",
-            "notes": "",
-            "visualization_revision": 1533,
-            "created_at": "2011-10-28T12:25:21"
-        }
-    },{
-        "pk": 6,
-        "model": "core.visualizationi18n",
-        "fields": {
-            "description": "Listado total de oficinas geolocalizadas de ChileAtiende a lo largo de Chile",
-            "language": "es",
-            "title": "Sucursales ChileAtiende En todo Chile",
-            "notes": "",
-            "visualization_revision": 225,
-            "created_at": "2011-10-28T12:25:21"
-        }
+{
+    "pk": 1, 
+    "model": "core.visualizationi18n", 
+    "fields": {
+        "description": "Muestra la cantidad de accidentes fatales seg\u00fan las grandes ramas de actividades econ\u00f3micas", 
+        "language": "es", 
+        "title": "Mortalidad por Accidentes del Trabajo Rama de actividad econ\u00f3mica 2005-2009", 
+        "notes": "", 
+        "visualization_revision": 5603, 
+        "created_at": "2011-10-28T12:25:21"
     }
+},
+{
+    "pk": 5, 
+    "model": "core.visualizationi18n", 
+    "fields": {
+        "description": "Muestra la evoluci\u00f3n de la TGF entre los a\u00f1os 1992-2009", 
+        "language": "es", 
+        "title": "Serie de tasa global de fecundidad 1992-2009", 
+        "notes": "", 
+        "visualization_revision": 5604, 
+        "created_at": "2011-10-28T12:25:21"
+    }
+}
 ]

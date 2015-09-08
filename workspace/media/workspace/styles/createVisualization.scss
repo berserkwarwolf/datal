@@ -78,6 +78,9 @@
 fieldset{margin-bottom:20px;}
 select{font-size:$font-size-m;}
 
+.sourcesContent,
+.tagsContent{padding-left:115px;}
+
 
 /* Botones */
 button{background-color:$accent-color;border:none;outline:none;border-radius:none;cursor:pointer;}

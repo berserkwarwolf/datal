@@ -3213,3 +3213,6 @@ msgstr "It's what you will see in the tooltip map"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
+
+msgid "APP-LABELS-TIP-TEXT"
+msgstr "Keywords to help identify Visualization content."
