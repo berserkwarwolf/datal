@@ -99,7 +99,7 @@ exportCSV = {
         var $lExportContainer = $('#id_exportToCSVContainer').contents();
 
         var lHtml = '<html><body>';
-        lHtml = lHtml + '<form action="' + Configuration.baseUri + '/portal/DataServicesManager/actionExportCSV" method="POST">';
+        lHtml = lHtml + '<form action="' + Configuration.baseUri + '/portal/DataServicesManager/actionExportCSV" method="POST" novalidate>';
         lHtml = lHtml + '<input id="id_endPoint" type="hidden" name="end_point" value=""/>';
         lHtml = lHtml + '<input id="id_dataStreamId" type="hidden" name="datastream_id" value=""/>';
         lHtml = lHtml + '</form>';

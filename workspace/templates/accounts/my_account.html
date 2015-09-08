@@ -37,7 +37,7 @@ var my_form_error_messages = new Array();
 
 {% block content %}
 <div class="formContainer col-xs-12" id="id_update_user_container">
-    <form action="{{form.action}}" method="post" id="id_myAccountForm">
+    <form action="{{form.action}}" method="post" id="id_myAccountForm" novalidate>
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
 
