@@ -1,35 +1,5 @@
 [
 {
-    "pk": 1536, 
-    "model": "core.visualizationrevision", 
-    "fields": {
-        "status": 3, 
-        "visualization": 1732, 
-        "parameters": "", 
-        "lib": "google", 
-        "created_at": "2012-07-07T00:58:49", 
-        "user": 1472, 
-        "meta_text": "", 
-        "datastream_revision": 61454, 
-        "impl_details": "{\"format\":{\"type\":\"columnchart\",\"chartTemplate\":\"basicchart\",\"showLegend\":true,\"invertData\":false,\"invertedAxis\":\"checked\",\"correlativeData\":false,\"nullValueAction\":\"exclude\",\"nullValuePreset\":\"\"},\"title\":\"Mortalidad Seg\\u00fan Sexo\",\"data\":\"B 4 : B 6, D 4 : D 6, F 4 : F 6, H 4 : H 6, J 4 : J 6, L 4 : L 6, N 4 : N 6, P 4 : P 6\",\"chart\":{\"xTitle\":\"A\\u00f1os\",\"yTitle\":\"N\\u00famero\",\"labelSelection\":\"B 2, D 2, F 2, H 2, J 2, L 2, N 2, P 2\",\"headerSelection\":\"A 4 : A 6\"}}"
-    }
-},
-{
-    "pk": 3610, 
-    "model": "core.visualizationrevision", 
-    "fields": {
-        "status": 3, 
-        "visualization": 1732, 
-        "parameters": "", 
-        "lib": "google", 
-        "created_at": "2012-11-16T12:48:27", 
-        "user": 1472, 
-        "meta_text": "", 
-        "datastream_revision": 61454, 
-        "impl_details": "{\"format\":{\"type\":\"columnchart\",\"chartTemplate\":\"basicchart\",\"showLegend\":\"checked\",\"invertedAxis\":\"checked\",\"nullValueAction\":\"exclude\",\"nullValuePreset\":\"\"},\"title\":\"Mortalidad Seg\\u00fan Sexo\",\"data\":\"B 4 : B 6, D 4 : D 6, F 4 : F 6, H 4 : H 6, J 4 : J 6, L 4 : L 6, N 4 : N 6, P 4 : P 6\",\"chart\":{\"xTitle\":\"A\\u00f1os\",\"yTitle\":\"N\\u00famero\",\"scale\":0,\"labelSelection\":\"B 1, D 1, F 1, H 1, J 1, L 1, N 1, P 1\",\"headerSelection\":\"A 4 : A 6\"}}"
-    }
-},
-{
     "pk": 5603, 
     "model": "core.visualizationrevision", 
     "fields": {

@@ -1,16 +1,5 @@
 [
 {
-    "pk": 1732, 
-    "model": "core.visualization", 
-    "fields": {
-        "datastream": 69650, 
-        "guid": "SEGUN-SEXO-2002-2009", 
-        "user": 1472, 
-        "last_published_revision": 3610, 
-        "last_revision": 3610
-    }
-},
-{
     "pk": 1734, 
     "model": "core.visualization", 
     "fields": {
