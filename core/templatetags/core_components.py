@@ -40,7 +40,7 @@ def download(dataset_revision):
     :param dataset:
     :return:
     """
-    return reverse('dataset_manager.action_download', 'microsites.urls',
+    return reverse('dataset_manager.download', 'microsites.urls',
                    kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': dataset_revision['slug']})
 
 

@@ -1,8 +1,12 @@
-/**
- * Backbone View for charts and maps
- */
 var viewVisualizationView = Backbone.View.extend({
+
     el : ".main-section",
+
+    events: {
+        'click #id_delete': 'onDeleteButtonClicked',
+        'click #id_unpublish': 'onUnpublishButtonClicked',
+        'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
+    },
 
     chartContainer: "#id_visualizationResult",
     initialize : function() {
@@ -86,5 +90,77 @@ var viewVisualizationView = Backbone.View.extend({
                 handleResizeEnd();
             }, 500);
         });
-    }
+    },
+
+    changeStatus: function(event){
+        
+        var action = $(event.currentTarget).attr('data-action'),
+            data = {'action': action},
+            url = this.model.get('changeStatusUrl'),
+            self = this;
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: data,
+            dataType: 'json',
+            beforeSend: function(xhr, settings){
+                // Prevent override of global beforeSend
+                $.ajaxSettings.beforeSend(xhr, settings);
+                // Show Loading
+                $("#ajax_loading_overlay").show();
+            },
+            success: function(response){
+
+                if(response.status == 'ok'){
+                    
+                    // Set Status
+                    self.model.set('status_str',STATUS_CHOICES( response.datastream_status ));
+                    self.model.set('status',response.datastream_status);
+
+                    // Set OK Message
+                    $.gritter.add({
+                        title: response.messages.title,
+                        text: response.messages.description,
+                        image: '/static/workspace/images/common/ic_validationOk32.png',
+                        sticky: false,
+                        time: 2500
+                    });
+
+                }else{
+
+                    datalEvents.trigger('datal:application-error', response);
+
+                }
+
+            },
+            error:function(response){
+
+                datalEvents.trigger('datal:application-error', response);
+
+            },
+            complete:function(response){
+                // Hide Loading
+                $("#ajax_loading_overlay").hide();
+            }
+        });
+
+    },
+
+    onDeleteButtonClicked: function(){
+        this.deleteListResources = new Array();
+        this.deleteListResources.push(this.options.model);
+        var deleteItemView = new DeleteItemView({
+            models: this.deleteListResources
+        });
+    },
+
+    onUnpublishButtonClicked: function(){
+        this.unpublishListResources = new Array();
+        this.unpublishListResources.push(this.options.model);
+        var unpublishView = new UnpublishView({
+            models: this.unpublishListResources
+        });
+    },
+
 });

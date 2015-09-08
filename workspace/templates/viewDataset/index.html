@@ -15,6 +15,7 @@
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionDeleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionUnpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/datasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/datasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
@@ -62,7 +63,7 @@
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var Dataset = new dataset({
+  var Dataset = new DatasetModel({
     id: "{{ dataset.last_revision_id }}",
     dataset_id: " {{ dataset.dataset_id }}",
     status: "{{ dataset.status }}",
