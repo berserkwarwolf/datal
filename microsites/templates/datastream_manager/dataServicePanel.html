@@ -136,8 +136,8 @@
                             <ul class="In">
                                 <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
                                 {% if can_export %}
-                                <li class="Item"><a href="{% url "datastream_manager.action_csv" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
-                                <li class="Item"><a href="{% url "datastream_manager.action_xls" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
+                                <li class="Item"><a href="{% url "datastream_manager.csv" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                <li class="Item"><a href="{% url "datastream_manager.xls" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
                                 {% endif %}
                                 
                                 <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
@@ -160,7 +160,7 @@
           $datastream.data("dataservice_parameters", "{% for parameter in datastream.parameters %}{% if not forloop.first %}, {% endif %}{{parameter.name}}{%endfor%}");
           $datastream.data("datasource_end_point", "{{datastream.end_point|escapejs}}");
           $datastream.data("dataservice_title", "{{datastream.title}}");
-          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url "datastream_manager.action_embed" datastream.guid %}?header_row=0&fixed_column=0{%if parameters_query%}&{{parameters_query}}{%endif%}");
+          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url "datastream_manager.embed" datastream.guid %}?header_row=0&fixed_column=0{%if parameters_query%}&{{parameters_query}}{%endif%}");
           $datastream.data("permalink", "{{base_uri}}{{ datastream.permalink }}{%if parameters_query%}?{{parameters_query}}{%endif%}");
           $datastream.data("guid", "{{datastream.guid}}");
           $datastream.data("datastreamrevision_id", "{{datastream.datastreamrevision_id}}");

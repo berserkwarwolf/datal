@@ -19,5 +19,5 @@ urlpatterns = patterns(
     url(r'^change_status/(?P<datastream_revision_id>\d+)/$', change_status, name='manageDataviews.change_status'),
     url(r'^action_preview$', action_preview, name='manageDatasets.action_preview'),
     url(r'^invoke$', action_invoke, name='core.exportDataStream.views.action_invoke'),
-    url(r'^action_updategrid$', 'core.exportDataStream.views.action_updategrid', name='core.datastream_manager.action_updategrid'),
+    url(r'^action_updategrid$', 'core.exportDataStream.views.action_updategrid', name='core.datastream_manager.updategrid'),
 )

@@ -21,7 +21,7 @@ from core.decorators import *
 
 @require_http_methods(["GET"])
 @datal_cache_page()
-def action_invoke(request):
+def invoke(request):
     form = forms.RequestForm(request.GET)
     if form.is_valid():
         query = RequestProcessor(request).get_arguments_no_validation()
@@ -44,7 +44,7 @@ def action_invoke(request):
 
 
 @require_http_methods(["GET"])
-def action_csv(request, id, slug):
+def csv(request, id, slug):
 
     contents, type = export_to(id, request, 'csv')
 
@@ -52,7 +52,7 @@ def action_csv(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_xls(request, id, slug):
+def xls(request, id, slug):
 
     contents, type = export_to(id, request, 'xls')
 
@@ -67,7 +67,7 @@ def action_xls(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_html(request, id, slug):
+def html(request, id, slug):
     contents, type = export_to(id, request, 'html')
     return HttpResponse(contents)
 
@@ -97,7 +97,7 @@ def export_to(datastream_id, request, output):
 
 @xframe_options_exempt
 @require_http_methods(["GET"])
-def action_legacy_embed(request):
+def legacy_embed(request):
     form = forms.LegacyEmbedForm(request.GET)
     if form.is_valid():
         datastream_id = form.cleaned_data.get('dataservice_id')
@@ -114,7 +114,7 @@ def action_legacy_embed(request):
 
 
 @require_http_methods(["GET"])
-def action_updategrid(request):
+def updategrid(request):
     query = dict()
     query['pId'] = request.REQUEST.get('datastream_id')
     query['pLimit'] = request.REQUEST.get('rp')
