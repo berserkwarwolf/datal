@@ -6,7 +6,7 @@ urlpatterns = patterns('',
     # Agregado por ignacio feijoo
     # este url lo saque de microsites/viewDataStream/urls.py
     # ya que como /dataviews/ID/GUID/ no resolvia
-    url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.viewDataStream.views.action_view',
+    url(r'^(?P<id>\d+)/(?P<slug>[A-Za-z0-9\-]+)/$', 'microsites.viewDataStream.views.view',
         name='viewDataStream.action_view'),
 
 
