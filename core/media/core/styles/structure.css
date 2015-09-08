@@ -69,7 +69,7 @@
 .col-xs-12, 
 .col-sm-12, 
 .col-md-12, 
-.col-lg-12{position:relative;min-height:1px;float:left;}
+.col-lg-12{position:relative;min-height:1px;padding:10px;float:left;}
 
 /* Extra small devices (less than 768px) */
 .col-xs-12{width:100%;}
