@@ -19,7 +19,7 @@
   </header>
   <div class="account-box-content relative">
     <a href="/signin" title="{% trans 'APP-SIGNIN-TEXT' %}" class="signInLink link absolute">{% trans 'APP-SIGNIN-TEXT' %}</a>
-    <form action="{{form.action}}" method="post" id="id_signUpForm">
+    <form action="{{form.action}}" method="post" id="id_signUpForm" novalidate>
         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
         {% csrf_token %}
         <fieldset>
