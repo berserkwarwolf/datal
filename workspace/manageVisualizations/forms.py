@@ -31,7 +31,7 @@ class VisualizationForm(forms.Form):
     latitudSelection = forms.CharField(required=False, max_length=200)
     longitudSelection = forms.CharField(required=False, max_length=200)
     traceSelection = forms.CharField(required=False, max_length=200)
-    mapType = forms.ChoiceField(required=True, choices=MAP_TYPE_FIELD)
+    mapType = forms.ChoiceField(required=False, choices=MAP_TYPE_FIELD)
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
