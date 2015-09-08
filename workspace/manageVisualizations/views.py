@@ -157,61 +157,6 @@ def unpublish(request, visualization_revision_id, type="resource"):
             'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
-               
-
-@login_required
-@privilege_required("workspace.can_view_visualization")
-@require_http_methods(["GET"])
-def view(request):
-
-    auth_manager = request.auth_manager
-    form = ViewChartForm(request.GET)
-
-    if form.is_valid():
-        try:
-            visualization_revision = VisualizationDBDAO().get(
-                auth_manager.language,
-                visualization_revision_id=form.cleaned_data['visualization_revision_id']
-            )
-            if visualization_revision['account_id'] != auth_manager.account_id:
-                raise Http404
-        except VisualizationRevision.DoesNotExist:
-            raise Http404
-        else:
-            visualization_revision_parameters = RequestProcessor(request).get_arguments(
-                visualization_revision['parameters']
-            )
-            visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
-
-            impl_details = json.loads(visualization_revision['impl_details'])
-            format = impl_details.get('format')
-            if format.get('type') != 'mapchart':
-                contents, content_type = invoke(visualization_revision_parameters)
-            else:
-                visualization_revision_parameters['pId'] = visualization_revision['visualizationrevision_id']
-                # visualization_revision_parameters['pLimit'] = 10000
-                # visualization_revision_parameters['pPage'] = 0
-                visualization_revision_parameters['pBounds'] = ""
-                # visualization_revision_parameters['pZoom'] = 5
-                contents, content_type = invoke_chart(visualization_revision_parameters)
-
-            visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
-
-            ds_revision = DatasetRevision.objects.filter(dataset=visualization_revision['dataset_id'])[0]
-            if ds_revision.user.account.id == auth_manager.account_id:
-                editing = True
-            elif visualization_revision['status'] == StatusChoices.PUBLISHED:
-                editing = False
-            else:
-                raise Http404
-
-            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
-
-            status = STATUS_CHOICES[int(visualization_revision['status'])][1]
-
-            return render_to_response('viewChart/index.html', locals())
-    else:
-        raise Http404
 
 
 @login_required
