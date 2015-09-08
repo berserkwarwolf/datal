@@ -173,13 +173,13 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
       padding-bottom:25px;
 
       /* Sidebar */
-      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;}
+      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;line-height:23px;}
 
       /* Tip */
       p{color:$font-color-light;margin-left:15px;}
 
       input{
-        height:28px;border-radius:0;border-color:$color-base;width:75%;padding-bottom:0;padding-top:0;
+        height:28px;border-radius:0;border-color:$font-color-base;width:75%;padding-bottom:0;padding-top:0;
         
         &:focus,
         .active{box-shadow:0;border-color:#0091fe;}
