@@ -302,7 +302,7 @@ def edit(request, datastream_revision_id=None):
 
 
 @login_required
-@require_privilege("workspace.can_review_dataset_revision")
+@require_privilege("workspace.can_review_datastream_revision")
 @require_POST
 @transaction.commit_on_success
 def change_status(request, datastream_revision_id=None):

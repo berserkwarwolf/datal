@@ -46,6 +46,7 @@
 <script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+<meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
 
 {% block header_navigation %}
@@ -95,22 +96,27 @@ google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 $(document).ready(function(){
 
     var visualizationModel = new VisualizationModel({
-        id: "{{datastream.datastreamrevision_id}}",
-        datastream_id: "{{datastream.datastream_id}}",
-        visualization_id: "{{visualization_revision.visualization_id}}",
-        title: "{{visualization_revision.title}}" , 
+        
+        title: "{{visualization_revision.title}}", 
         description: "{{visualization_revision.description|escapejs}}", 
-        guid: "{{visualization_revision.guid}}",
-        createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
         chartLib: "{{visualization_revision.lib}}",
         status : '{{visualization_revision.status}}',
         status_str: "{{ visualization_revision.status|status_str|capfirst }}",
-        visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
-        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
-        publicUrl: "{{ visualization_revision.public_url }}",
+        createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
         lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+        publicUrl: "{{ visualization_revision.public_url }}",
+        changeStatusUrl: "{% url 'manageVisualizations.change_status' visualization_revision.visualization_revision_id %}",
+        editUrl: "TODO",    
+
+        // Validar si es necesario
+        guid: "{{visualization_revision.guid}}",
+
+        // Revisar
+        id: "{{ visualization_revision.last_revision_id }}",
+        visualization_id: " {{ visualization_revision.visualization_id }}",
+
     });
 
     var chartView = new viewVisualizationView({

@@ -16,8 +16,9 @@ urlpatterns = patterns(
     url(r'^unpublish/(?P<type>[a-z]+)/(?P<visualization_revision_id>\d+)$', unpublish, name='manageVisualizations.unpublish'),
     url(r'^unpublish/(?P<visualization_revision_id>\d+)$', unpublish, name='manageVisualizations.unpublish'),
     url(r'^invoke$', action_invoke, name='manageVisualizations.action_invoke'),
+    url(r'^change_status/(?P<visualization_revision_id>\d+)/$', change_status, name='manageVisualizations.change_status'),
 
-    # Pendientes de revision
+    # TODO: Revisar
 
     url(r'^filter$', filter, name='manageVisualizations.filter'),
 
