@@ -476,7 +476,7 @@ class VisualizationElasticsearchDAO(VisualizationSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])
