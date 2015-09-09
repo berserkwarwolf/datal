@@ -192,11 +192,6 @@ def update_list(request):
         #    if r['category'] in categories or categories==[]:
         #        results2.append(r)
 
-        logger.info("-----------------------------------------------")
-        for r in results:
-            logger.info(r)
-        logger.info("-----------------------------------------------")
-
         paginator = Paginator(results, 25)
 
         if preferences['account_home_filters'] == 'featured_accounts':
