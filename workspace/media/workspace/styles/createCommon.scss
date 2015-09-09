@@ -93,6 +93,8 @@
     .input-button{position:relative;overflow:hidden;width:480px;height:28px;cursor:pointer;display:inline-block;
       .button{height:28px;line-height:25px;right:0;position:absolute;top:0;width:95px;z-index:1;@include border-radius(3px 0 0 3px);border-top-color:transparent;border-right-color:transparent;border-bottom-color:transparent;border-left-color:#e2e0e0;background:none;@include transition(border-right, 0.30s, ease-in-out);}
     }
+    .sourcesContent,
+    .tagsContent{padding-left:115px;}
   }
 }
 
