@@ -81,7 +81,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="col-xs-12 detail" id="id_viewDataStream">
+  <div class="detail" id="id_viewDataStream">
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
         <div class="wrapper3">
@@ -104,16 +104,14 @@
 
           <!-- Sidebar -->
           <section class="sidebar-container">
-
               {% include "viewDataStream/sidebar.html" %}
-
           </section>
 
           <!-- Detail -->
           <section class="detail-container">
-
+            <div class="col-xs-12">
             {% include "viewDataStream/detail.html" %}
-
+            </div>
           </section>
 
         </div>
