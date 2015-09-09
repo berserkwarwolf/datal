@@ -123,29 +123,7 @@ if(result.fType != 'ARRAY'){
 </script>
 
 <!-- Resource Detail -->
-<div class="resource-detail box dataTable" id="id_dataStreamContainer">
-		
-	<!-- Header -->
-	<header class="border-box">
-
-		<!-- Title and Description -->
-		<hgroup>
-			<h1>
-				<strong>{{datastream.title|capfirst}}</strong>
-				{% if datastream.parameters %}
-				<span class="parameters">
-					(
-					{% for parameter in datastream.parameters %}
-						{{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-PARAM-TEXT' %}">{{parameter.value}}</a> {% if not forloop.last %}, {%endif%}
-					{%endfor%}
-					)
-				</span>
-				{%endif%}
-			</h1>
-			<h2>{{datastream.description|capfirst}}</h2>
-		</hgroup>
-
-	</header>
+<div class="resource-detail box dataTable col-xs-12" id="id_dataStreamContainer">
 
 	<!-- Data -->
 	<div class="data">

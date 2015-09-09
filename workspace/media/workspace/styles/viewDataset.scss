@@ -3,7 +3,7 @@
 @import 'functions';
 
 /* List */
-.resources-list h4{background-color:#f8f7f7;border-bottom:1px solid #dfdfdf;padding:8px 15px;font-weight:bold;color:$font-color-semi-light;}
+.resources-list h4{border-bottom:1px solid #dfdfdf;padding:8px 15px 18px;font-weight:bold;color:$font-color-semi-light;}
 .api_example{margin-top:5px;font-weight:bold;}
 .resources-list table{width:100%;font-size:$font-size-base;text-shadow:0 1px 0 #fff;border-collapse: collapse; }
 .resources-list table th{text-align:left;color:#999;font-family:$font-extra-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 0 0 15px;}
