@@ -304,7 +304,7 @@ var DatatableManager = Backbone.Model.extend({
         $(this.get("container")).trigger("datatable:tablesorter");
     },
     refreshWithPagination: function(event) {
-        $(this.get("container")).trigger("pagination:set:page", ['']);
+        $(this.get("container")).trigger("pagination:set:page", [0]);
 
         var msg = this.getServerData();
         this.drawTable(msg);
