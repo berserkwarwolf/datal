@@ -25,7 +25,6 @@ class InvokeFormSet(BaseFormSet):
     is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
     is_id=re.compile("(?P<doc_type>\S+)_id$").match
 
-    data_items=[]
 
     def __init__(self, *args, **kwargs):
         new_args=[]
@@ -35,8 +34,6 @@ class InvokeFormSet(BaseFormSet):
             new_args.append(aux)
         super(InvokeFormSet, self).__init__(*new_args, **kwargs)
 
-    def get_data(self):
-        return self.data_items
 
     def clean(self):
 
@@ -55,7 +52,6 @@ class InvokeFormSet(BaseFormSet):
                 try:
                     f=ArgumentForm({"argument": key, 'value': PrimitiveComputer().compute(self.data[key])})
                     if f.is_valid():
-                        self.data_items.append( (f.cleaned_data['argument'],f.cleaned_data['value']) )
                         self.forms.append(f)
                     else:
                         self.errors.append({'value': [u"argumento no válido"]})
@@ -72,8 +68,6 @@ class InvokeFormSet(BaseFormSet):
             if match:
                 f=DocumentForm({"pId": int(self.data[key]), "doc_type": self._get_doc_dict(match.group("doc_type"))})
                 if f.is_valid():
-                    self.data_items.append( ("pId",f.cleaned_data['pId']))
-                    self.data_items.append( ("doc_type",f.cleaned_data['doc_type']))
                     self.forms.append(f)
                 else:
                     raise forms.ValidationError(u"id (%s/%s) no válido" % (int(self.data[key]),match.group("doc_type")), code="id_not_valid")
@@ -83,9 +77,6 @@ class InvokeFormSet(BaseFormSet):
         # y quitar este de acá abajo
         f=DatastreamRequestForm(self.data)
         if f.is_valid():
-            self.data_items.append( ("pLimit",f.cleaned_data['limit']))
-            self.data_items.append( ("pPage",f.cleaned_data['page']))
-            self.data_items.append( ("pOutput",f.cleaned_data['output']))
             self.forms.append(f)
 
     def _get_doc_dict(self, doc_type):
