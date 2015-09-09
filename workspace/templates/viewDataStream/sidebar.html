@@ -15,7 +15,7 @@
             <p>{{datastream.category_name|capfirst}}</p>
         </div>
     
-        {% if visualization_revision.sources %} 
+        {% if datastream.sources %} 
         <div class="row">
             <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
 			{% for source in datastream.sources %}
@@ -24,11 +24,11 @@
         </div>
         {% endif %}
     
-        {% if visualization_revision.tags %}
+        {% if datastream.tags %}
         <div class="row">
             <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
             <div class="sourcesContent">
-            {% for tag in visualization_revision.tags %}
+            {% for tag in datastream.tags %}
                 <div class="tag">
                     <span class="tagInner clearfix">
                         <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
@@ -39,7 +39,7 @@
         </div>
         {% endif %}
     
-        {% if visualization_revision.notes %}
+        {% if datastream.notes %}
         <div class="row">
             <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
             <p>{{datastream.notes|safe|urlize}}</p>
