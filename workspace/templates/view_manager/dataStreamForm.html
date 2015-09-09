@@ -74,18 +74,13 @@
                         <div>
                             <input id="id_sourceNameSuggest" name="source-name" type="text" class="inputNewTag" maxlength="80"/>
                             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a id="id_displayAddSources" title="" href="javascript:;" class="">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
-                            
-                            <div id="id_source_container" class="sourcesContent">
+                            <div id="id_source_container" class="tagsContent">
+                                <!--
                                 {% for source in sources %}
-                                <div class="tag">
-                                  <span class="tagInner clearfix">
-                                    <span class="tagTxt" id="id_sources-{{forloop.counter0}}-name">{{source.source__name}}</span>
-                                    <a class="remove">
-                                      <span class="DN">{% trans 'APP-DELETE-TEXT' %}</span>
-                                    </a>
-                                  </span>
+                                <span id="id_sources-{{forloop.counter0}}-name">{{source.source__name}}</span>
+                                <span id="id_sources-{{forloop.counter0}}-url">{{source.source__url}}</span>
                                 {% endfor %}
-                                </div>
+                                -->
                             </div>
                         </div>
                     </div>
