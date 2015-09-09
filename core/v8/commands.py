@@ -21,17 +21,17 @@ class EngineCommand(object):
 
         self.query = query
 
-        self.key_prefix = self.get_cache_key()
+        self.key_prefix = self._get_cache_key()
 
-    def get_cache_key(self):
+    def _get_cache_key(self):
         params=str(hash(frozenset(sorted(self.query))))
         return ":".join([type(self).__name__, params]) 
 
-    def get_url(self):
+    def _get_url(self):
         return get_domain_with_protocol('engine') + self.endpoint
 
-    def request(self, query, method = 'GET'):
-        url = self.get_url()
+    def _request(self, query, method = 'GET'):
+        url = self._get_url()
         response = None
 
         try:
@@ -64,7 +64,7 @@ class EngineCommand(object):
             return result, 'json'
 
         try:
-            answer = self.request(self.query)
+            answer = self._request(self.query)
             if answer:
                 cache.set(self.key_prefix, answer[0], 60)
                 return answer
