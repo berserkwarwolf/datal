@@ -9,19 +9,34 @@ from core.v8.commands import *
 
 
 class EngineCommandFactory(object):
+    CONV_DICT={
+        "limit": "pLimit",
+        "id": "pId",
+        "uniqueBy": "pUniqueBy",
+        }
+
     def fix_params(self, filters):
         """ fix filters and other params """
        
         new=[]
         for item in filters:
-            if item[0].startswith('pFilter'):
+            print item
+            if item[0] in self.CONV_DICT:
+                new.append( (self.CONV_DICT[item[0]], item[1]) )
+            elif item[0].startswith('pFilter'):
                 v1 = item[1]
                 new.append((item[0],self.parseOperator(value=v1)))
-            if item[0].startswith('uniqueBy'):
+            elif item[0].startswith('uniqueBy'):
+                #>>>>> estas dos lineas de donde sale?
                 num = key[-1:]
                 filters['pUniqueBy%s' % num] = item[1]
-                
-        return filters
+                # <<<<<
+
+                new.append( ('pUniqueBy%s' % num, item[1]) )
+            else:
+                new.append(item)
+
+        return new
 
     def parseOperator(self, value):
         value = value.replace('[==]', '[0]')
