@@ -96,7 +96,7 @@ class Finder:
             return self.get_datastream_dictionary(doc)
         elif doc['type'] == 'db':
             return self.get_dashboard_dictionary(doc)
-        elif doc['type'] == 'chart':
+        elif doc['type'] == 'vz':
             return self.get_visualization_dictionary(doc)
         elif doc['type'] == 'dt':
             return self.get_dataset_dictionary(doc)

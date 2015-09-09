@@ -124,8 +124,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var viewDataStreamModel = new ViewDataStreamModel({
-    // id: "{{datastream.datastream_revision_id}}",
-    id: "{{ datastream.last_revision_id }}",
+    id: "{{datastream.datastream_revision_id}}",
     datastream_id: " {{ datastream.datastream_id }}",
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
