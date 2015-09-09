@@ -76,7 +76,7 @@ class ElasticsearchFinder(Finder):
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
-            self.resource = ["ds", "dt", "db", "chart", "vt"]
+            self.resource = ["ds", "dt", "db", "vz"]
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
