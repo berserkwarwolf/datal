@@ -127,7 +127,7 @@ def load(request):
         # return render_to_response('home_manager/queryList.html', locals())
 
 @require_POST
-def action_update_list(request):
+def update_list(request):
     account         = request.account
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
@@ -139,7 +139,7 @@ def action_update_list(request):
         order       = form.cleaned_data.get('order')
         order_type  = form.cleaned_data.get('order_type')
 
-        resources = ['ds', 'db', 'chart', 'dt']
+        resources = ['ds', 'db', 'vz', 'dt']
 
         if preferences['account_home_filters'] == 'featured_accounts':
 
@@ -163,6 +163,7 @@ def action_update_list(request):
                                                                     category_id = category_id,
                                                                     order = order,
                                                                     order_type = order_type)
+
         else:
             all_resources = form.cleaned_data.get('all')
             if not all_resources:
@@ -184,17 +185,18 @@ def action_update_list(request):
                                                                      order_type = order_type,
                                                                      account_id = account.id)
 
-        # manual temporary fix for indextank fails
-        results2 = []
-        for r in results:
-            if r['category'] in categories or categories==[]:
-                results2.append(r)
 
-            
-        paginator = Paginator(results2, 25)
+        ## manual temporary fix for indextank fails
+        #results2 = []
+        #for r in results:
+        #    if r['category'] in categories or categories==[]:
+        #        results2.append(r)
+
+
+        paginator = Paginator(results, 25)
 
         if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(results2)
+            add_domains_to_permalinks(results)
 
         response = {"number_of_pages": paginator.num_pages,
                      "errors": [],
@@ -206,7 +208,7 @@ def action_update_list(request):
                      "revisions": []
                    }
 
-    response["results_dbg"] = results2
+    response["results_dbg"] = results
     response["categories_asked_dbg"] = categories
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
 
