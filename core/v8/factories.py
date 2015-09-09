@@ -45,13 +45,14 @@ class EngineCommandFactory(object):
     def process_items(self, items):
         post_query=[]
         for item in items:
-            if item[0].startswith('pArgument') or item[0].startswith('pFilter'):
-                value = item[1]
-                post_query.append((item[0],value.encode('utf-8')))
-
-            # filtra los parametros vacios
-            elif item[1]:
-                post_query.append(item)
+            if "argument" in item.keys():
+                post_query.append((item['argument'],item['value'].encode('utf-8')))
+            else:
+                for i in item.keys():
+                    # filtra los parametros vacios
+                    if item[i]:
+                        post_query.append((i, item[i]))
+    
 
         return self.fix_params(post_query)
 

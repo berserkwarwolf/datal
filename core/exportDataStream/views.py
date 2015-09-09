@@ -29,8 +29,9 @@ def action_invoke(request):
     formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
     form = formset(request.REQUEST)
     if form.is_valid():
+
         command_factory = AbstractCommandFactory().create()
-        ivk = command_factory.create("invoke", form.get_data()).run()
+        ivk = command_factory.create("invoke", form.cleaned_data).run()
         if ivk:
             contents, typen = ivk
         else:

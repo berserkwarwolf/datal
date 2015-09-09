@@ -18,7 +18,9 @@ class EngineCommand(object):
     endpoint = 'defalt_endpoint'
     
     def __init__(self, query):
+
         self.query = query
+
         self.key_prefix = self.get_cache_key()
 
     def get_cache_key(self):
