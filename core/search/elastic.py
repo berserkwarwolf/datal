@@ -93,8 +93,6 @@ class ElasticsearchFinder(Finder):
             #debería ir un raise?!?!?
             account_ids=self.account_id
 
-        self.logger.info(">>>>>>>>>>>>>>>>>: %s" %type(account_ids))
-
         filters = [
             {"terms": {"account_id": account_ids}},
             {"terms": {"type": self.resource}}

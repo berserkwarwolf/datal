@@ -130,6 +130,7 @@ def update_list(request):
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
 
+
     form = QueryDatasetForm(request.POST)
     if form.is_valid():
         query = form.cleaned_data.get('search')
@@ -138,6 +139,7 @@ def update_list(request):
         order_type = form.cleaned_data.get('order_type')
 
         resources = ['ds', 'db', 'vz', 'dt']
+        category_filters = form.cleaned_data.get('category_filters').lower().split(",")
 
         if preferences['account_home_filters'] == 'featured_accounts':
 
@@ -152,13 +154,12 @@ def update_list(request):
             if typef:
                 resources = [typef]
 
-            category_id = form.cleaned_data.get('category_filters')
             results, search_time, facets = FinderManager(HomeFinder).search(
                                                                     query = query,
                                                                     max_results = 250,
                                                                     account_id = accounts_ids,
                                                                     resource = resources,
-                                                                    category_id = category_id,
+                                                                    category_filters=category_filters,
                                                                     order = order,
                                                                     order_type = order_type)
 
@@ -170,13 +171,8 @@ def update_list(request):
                 for resource_name in resources_type.split(','):
                     resources.append(resource_name)
 
-            category_filters = form.cleaned_data.get('category_filters')
-            categories = []
-            if category_filters:
-                for category_name in category_filters.split(','):
-                    categories.append(category_name)
             results, search_time, facets = FinderManager(HomeFinder).search(
-                category_name=categories,
+                category_filters= category_filters,
                 query=query,
                 resource=resources,
                 max_results=250,
@@ -209,10 +205,11 @@ def update_list(request):
             "errores_locos": form.errors,
             "revisions": []
        }
-        returls=[]
+        results=[]
+        categories=[]
 
     response["results_dbg"] = results
-    response["categories_asked_dbg"] = categories
+    response["categories_asked_dbg"] = category_filters
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
 
 
