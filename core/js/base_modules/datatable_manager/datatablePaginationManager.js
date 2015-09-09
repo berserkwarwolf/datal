@@ -9,7 +9,7 @@ var DatatablePaginationManager = Backbone.Model.extend({
         $('#pagination-previous', this.get("selector")).click(_.bind(this.onPrevious, this));
         $('#pagination-next', this.get("selector")).click(_.bind(this.onNext, this));
         $('#items_per_page_datatable', this.get("selector")).change(_.bind(this.itemsPerPage, this));
-            
+
         this.set({page: $('.current-page', this.get("selector")).text()});
         this.updateItemsPerPage();
     },
