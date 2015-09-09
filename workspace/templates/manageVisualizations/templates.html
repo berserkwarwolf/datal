@@ -80,6 +80,7 @@
       <% } %>
     <% } %>
 
+    {% comment %}
     {# Edit #}
 		<% 
       // Status Pending Review = 1
@@ -89,6 +90,7 @@
     		<a data-id="<%=id%>" data-url="{% url 'manageVisualizations.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
     	</li>
     <% } %>
+    {% endcomment %}
 
     {# Delete #}
     <% 

@@ -81,26 +81,10 @@
 {% endblock %}
 
 {% block content %}
-  <div class="detail" id="id_viewDataStream">
+  <div class="detail col-xs-12" id="id_viewDataStream">
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
         <div class="wrapper3">
-
-          {# Pending review = 1  #}
-          {% if datastream.status == 1 %}
-            <!-- Review -->
-            <div class="alert alert-info clearfix" id="id_reviewBar">
-              {% if auth_manager.is_publisher or auth_manager.is_admin %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
-                <div class="navigation FR">
-                  <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
-                  <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
-                </div>
-              {% else %}
-                <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
-              {% endif %}
-            </div>
-          {% endif %}
 
           <!-- Sidebar -->
           <section class="sidebar-container">
@@ -109,9 +93,7 @@
 
           <!-- Detail -->
           <section class="detail-container">
-            <div class="col-xs-12">
             {% include "viewDataStream/detail.html" %}
-            </div>
           </section>
 
         </div>
@@ -154,7 +136,7 @@ $(document).ready(function(){
     notes: "{{datastream.notes}}",
     sourceUrl: '/source_manager/action_search',
     tagUrl: '/tag_manager/action_search',
-    editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
+    editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}",
   });
 
   var viewDataStreamView = new ViewDataStreamView({

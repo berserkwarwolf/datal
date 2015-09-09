@@ -184,13 +184,13 @@ div.info{overflow:hidden;z-index:10000000000;width:100%;position:fixed;top:0;lef
 
 	/*HELP AND TIPS - CR BOX*/
 	.helpAndTipsBox .boxTitle h4{background-position:right -125px;}
-	.helpAndTipsBox .boxInner h5{color:#f19030;font-size:14px;background:url(/static/core/images/common/bd_helpBoxSeparator.gif) no-repeat center bottom;padding:7px 0 12px;font-weight:normal;}
+	.helpAndTipsBox .boxInner h5{color:#f19030;font-size:14px;padding:7px 0 12px;font-weight:normal;}
 	.helpAndTipsBox .boxInner h5.minnorPaddingBottom{padding-bottom:0;background:none;}
 	.helpAndTipsBox .boxInner h5.separation{padding-top:25px;line-height:21px;}
 	.helpAndTipsBox .boxInner p{font-size:12px;color:#868686;line-height:16px;padding:8px 0 4px;}
 	.helpAndTipsBox .boxInner p.moreSeparation{padding-bottom:20px;}
-	.helpAndTipsBox .boxInner .viewMoreLink{background:url(/static/core/images/common/bd_helpBoxSeparator.gif) no-repeat center top;margin-top:7px;}
-	.helpAndTipsBox .boxInner .viewMoreLink  .VM{float:right;padding-left:10px;background:url(/static/core/images/homeManager/ic_VM.png) no-repeat 0 center;font-size:11px;margin-top:8px;}
+	.helpAndTipsBox .boxInner .viewMoreLink{}
+	.helpAndTipsBox .boxInner .viewMoreLink .VM{float:right;padding-left:10px;background:url(/static/core/images/homeManager/ic_VM.png) no-repeat 0 center;font-size:11px;margin-top:8px;}
 	.helpAndTipsBox .boxInner dl{padding-bottom:10px;}
 	.helpAndTipsBox .boxInner dt{color:#000;font-size:10px;text-transform:uppercase;padding-top:15px;}
 	.helpAndTipsBox .boxInner dd{padding-top:3px;font-size:11px;}
