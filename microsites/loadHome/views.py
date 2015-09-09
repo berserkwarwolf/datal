@@ -206,8 +206,10 @@ def update_list(request):
         response = {
             "number_of_pages": 0,
             "errors": ['Invalid data'],
+            "errores_locos": form.errors,
             "revisions": []
        }
+        returls=[]
 
     response["results_dbg"] = results
     response["categories_asked_dbg"] = categories
