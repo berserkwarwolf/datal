@@ -151,33 +151,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)
 
-    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
-        """ Despublica la revision de un dataset """
-
-        if self.dataset_revision.status not in allowed_states:
-            raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.DRAFT,
-                                    allowed_states=allowed_states)
-
-        if killemall:
-            self._unpublish_all()
-        else:
-            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
-
-            if revcount == 1:
-                self._unpublish_all()
-            else:
-                self.dataset_revision.status = StatusChoices.DRAFT
-                self.dataset_revision.save()
-
-        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
-        search_dao.remove()
-
-        self._update_last_revisions()
-
-        self._log_activity(ActionStreams.UNPUBLISH)
-
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 

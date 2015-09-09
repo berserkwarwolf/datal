@@ -12,7 +12,7 @@ var DatasetModel = dataset.extend({
   },
 
   unpublish: function (options) {
-      $.post('unpublish/' + this.id, {})
+      $.post('change_status/' + this.id, {'action': 'unpublish', 'killemall': true})
           .done(function(data){
                console.log(data);
           })
@@ -22,7 +22,7 @@ var DatasetModel = dataset.extend({
   },
 
   unpublish_revision: function (options) {
-      $.post('unpublish/revision/' + this.id, {})
+      $.post('change_status/' + this.id, {'action': 'unpublish', 'killemall': false})
           .done(function(data){
                console.log(data);
           })
