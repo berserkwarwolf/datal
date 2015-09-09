@@ -17,23 +17,41 @@ var FinishView = StepViewSPA.extend({
 
 	bindingHandlers: {
 		listTags: function( $element, value ) {
-			var htmlTemplate =	'<div class="tag"><span class="tagInner clearfix"><span class="tagTxt">[[tag]]</span></span></div>';
-		    var html = [];
-		    _.each(value,function(t){
-		    	html.push(htmlTemplate.replace('[[tag]]',t.name));
-		    });
+			if(value.length > 0){
+			
+				$element.parent().show();
+				
+				var htmlTemplate =	'<div class="tag"><span class="tagInner clearfix"><span class="tagTxt">[[tag]]</span></span></div>';
+			    var html = [];
+			    _.each(value,function(t){
+			    	html.push(htmlTemplate.replace('[[tag]]',t.name));
+			    });
 
-		    $element.html( html.join('') );
+			    $element.html( html.join('') );
+			    
+			};
 		},
 		listSources: function( $element, value ) {
-			var htmlTemplate =	'<p><a href="[[url]]" target="_blank">[[name]]</a></p>';
-		    var html = [];
-		    _.each(value,function(t){
-		    	html.push(htmlTemplate.replace('[[url]]',t.url).replace('[[name]]',t.name));
-		    });
+			if(value.length > 0){
+			
+				$element.parent().show();
 
-		    $element.html( html.join('') );
+				var htmlTemplate =	'<p><a href="[[url]]" target="_blank">[[name]]</a></p>';
+			    var html = [];
+			    _.each(value,function(t){
+			    	html.push(htmlTemplate.replace('[[url]]',t.url).replace('[[name]]',t.name));
+			    });
+
+			    $element.html( html.join('') );
+
+			};
 		},
+		showField: function( $element, value){
+			if(value != '<br>' && value != undefined && value != ''){
+				$element.parent().show();
+				$element.html( value );
+			};
+		}
 	},
 
 	onEditChartButtonClicked: function(){

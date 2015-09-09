@@ -32,19 +32,19 @@
 							<p data-bind="text:meta_category"></p>
 						</div>
 
-						<div class="row">
+						<div class="row" style="display:none;">
 							<div class="title">{% trans "APP-LABEL-TEXT" %}</div>
 							<div class="sourcesContent" data-bind="listTags:meta_tags"></div>
 						</div>
 
-						<div class="row">
+						<div class="row" style="display:none;">
 							<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-DATA-SOURCE-TEXT" %}</div>
 							<div class="sourcesContent" data-bind="listSources:meta_sources"></div>
 						</div>
 
-						<div class="row">
+						<div class="row" style="display:none;">
 							<div class="title">{% trans "APP-NOTES-TEXT" %}</div>
-							<p data-bind="text:meta_notes"></p>
+							<p data-bind="showField:meta_notes"></p>
 						</div>
 
 					</div>

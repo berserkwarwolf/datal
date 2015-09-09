@@ -89,8 +89,8 @@ body .ui-autocomplete{border:0;-moz-border-radius:0 0 4px 4px;-webkit-border-rad
 body .ui-autocomplete .ui-menu-item{padding:0;}
 body .ui-autocomplete .ui-menu-item a{padding:2px 3px;color:#767676;margin:0;}
 body .ui-autocomplete .ui-menu-item a.ui-state-hover,
-body .ui-autocomplete .ui-menu-item a.ui-state-focus{border:0;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;color:#fff;padding:2px 3px;margin:0;background:#a4c531 url(/static/core/images/common/dg_genericButton.gif) repeat-x 0 -3px;}
-body .ui-widget-content{background:#fff url(/static/core/images/common/dg_Tooltip.gif) repeat-x 0 bottom;}
+body .ui-autocomplete .ui-menu-item a.ui-state-focus{border:0;border-radius:0;-moz-border-radius:0;-webkit-border-radius:0;color:#000;padding:2px 3px;margin:0;background:#ededed;font-weight:normal;}
+body .ui-widget-content{background:#fff;}
 body .ui-draggable .ui-dialog-titlebar{cursor:url(/static/core/images/cursors/cu_openhand.cur);cursor:-moz-grab;}
 body .ui-draggable.ui-draggable-dragging .ui-dialog-titlebar{cursor:url(/static/core/images/cursors/cu_closedhand.cur);cursor:-moz-grabbing;}
 

@@ -1324,17 +1324,8 @@ msgstr "Este mes"
 msgid "APP-ACTIONS-REVIEW"
 msgstr "Revisar"
 
-msgid "EDITDS-DSINFO-TITLE"
-msgstr "Información de la Vista"
-
 msgid "OVEDITDS-NAME-TIP"
 msgstr "¿De que se tratan los datos? Escribe un tema general que explique los datos que se muestran"
-
-msgid "EDITDS-METATAGS-TITLE"
-msgstr "Metatags de la Vista"
-
-msgid "EDITDS-SOURCE-TITLE"
-msgstr "Fuentes de la Vista"
 
 msgid "EDITDS-SOURCE-TIP1"
 msgstr "Escribe las primeras 3 letras de la fuente y selecciona una de la lista. Si la fuente no aparece, por favor"
@@ -1350,9 +1341,6 @@ msgstr "Nombre"
 
 msgid "MODEL-URL-TEXT"
 msgstr "URL"
-
-msgid "APP-DSTAGS-TEXT"
-msgstr "Etiquetas de la Vista"
 
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu vista"
