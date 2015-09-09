@@ -15,8 +15,8 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 from core.search.elastic import ElasticFinderManager
 from api.serializers import *
-from core.v8.factories import *
-from core.v8.commands import EngineDataCommand
+from core.v8.factories import AbstractCommandFactory
+from core.v8.forms import ArgumentForm, InvokeFormSet
 
 import logging
 import json
@@ -78,17 +78,28 @@ class DataStreamViewSet(ResourceViewSet):
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'
     data_types = ['ds']
+    command_factory = AbstractCommandFactory().create()
 
     @detail_route(methods=['get'])
     def data(self, request, guid=None, pk=None, format='json'):
         datastream = self.get_object()
         mutable_get = request.GET.copy()
         mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
-        command = EngineDataCommand(request, dict(mutable_get.items()))
-        ivk = command.run()
-        if ivk:
-            datastream['result'] = json.loads(ivk[0])
-            serializer = self.get_serializer(datastream)
+
+        formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
+        form = formset( dict(mutable_get.items()))
+        if not form.is_valid():
+            # TODO: correct handling
+            raise Exception("Wrong arguments")        
+            
+        ivk = self.command_factory.create("invoke", form.get_data()).run()
+        if not ivk:
+            # TODO: correct handling
+            raise Exception('Wrong engine answer')
+            
+        datastream['result'] = json.loads(ivk[0])
+        serializer = self.get_serializer(datastream)
+        
         return Response(serializer.data)
         
 class DataSetViewSet(ResourceViewSet):

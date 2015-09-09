@@ -9,10 +9,6 @@ from core.v8.commands import *
 
 
 class EngineCommandFactory(object):
-    def __init__(self, request, items):
-        self.request = request
-        self.items = items
-
     def fix_params(self, filters):
         """ fix filters and other params """
        
@@ -46,9 +42,9 @@ class EngineCommandFactory(object):
                 
         return value
 
-    def process_items(self):
+    def process_items(self, items):
         post_query=[]
-        for item in self.items():
+        for item in items:
             if item[0].startswith('pArgument') or item[0].startswith('pFilter'):
                 value = item[1]
                 post_query.append((item[0],value.encode('utf-8')))
@@ -59,25 +55,20 @@ class EngineCommandFactory(object):
 
         return self.fix_params(post_query)
 
-    def create(self, command_type):
+    def create(self, command_type, items):
         engine = None
         if command_type == 'invoke':
-            engine = EngineInvokeCommand(self.request, self.process_items())
-        elif command_type == 'load'
-            engine = EngineLoadCommand(self.request, self.process_items())
+            engine = EngineInvokeCommand(self.process_items(items))
+        elif command_type == 'load':
+            engine = EngineLoadCommand(self.process_items(items))
         elif command_type == 'preview':
-            engine = EnginePreviewCommand(self.request, self.process_items())
+            engine = EnginePreviewCommand(self.process_items(items))
         elif command_type == 'chart':
-            engine = EngineChartCommand(self.request, self.process_items())
+            engine = EngineChartCommand(self.process_items(items))
         elif command_type == 'preview_chart':
-            engine = EnginePreviewChartCommand(self.request, self.process_items())
+            engine = EnginePreviewChartCommand(self.process_items(items))
         return engine
 
 class AbstractCommandFactory(object):
-
-    def __init__(self, request, items):
-        self.request = request
-        self.items = items
-
     def create(self):
-        return EngineCommandFactory(self.request, self.items)
+        return EngineCommandFactory()

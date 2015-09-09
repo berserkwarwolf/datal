@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from django.conf import settings
-from core.http import get_domain_with_protocol, get_key_prefix
+from core.http import get_domain_with_protocol
 from django.core.cache import cache
 from django.conf import settings
 from core.v8.factories import *
@@ -17,10 +17,13 @@ logger = logging.getLogger(__name__)
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
     
-    def __init__(self, request, query):
+    def __init__(self, query):
         self.query = query
-        self.request = request
-        self.key_prefix = get_key_prefix(request, self.query)
+        self.key_prefix = self.get_cache_key()
+
+    def get_cache_key(self):
+        params=str(hash(frozenset(sorted(self.query))))
+        return ":".join([type(self).__name__, params]) 
 
     def get_url(self):
         return get_domain_with_protocol('engine') + self.endpoint

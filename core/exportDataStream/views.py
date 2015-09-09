@@ -17,8 +17,7 @@ from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
 from core.decorators import *
-
-
+from core.v8.forms import ArgumentForm, InvokeFormSet
 from django.forms.formsets import formset_factory
 
 
@@ -26,16 +25,21 @@ from django.forms.formsets import formset_factory
 @require_http_methods(["GET"])
 #@datal_cache_page()
 def action_invoke(request):
+    typen = 'json'
     formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
     form = formset(request.REQUEST)
     if form.is_valid():
-        engine_factory = AbstractCommandFactory(request, form.get_data())
-        command_factory = engine_factory.create()
-        contents, typen = command_factory.create("invoke").run()
-        invoke.run()
+        command_factory = AbstractCommandFactory().create()
+        ivk = command_factory.create("invoke", form.get_data()).run()
+        if ivk:
+            contents, typen = ivk
+        else:
+            # TODO: correct handling
+            contents = '{"Error":"Engine error"}'
     else:
+        # TODO: correct handling
         contents = '{"Error":"Wrong aguments"}'
-        mimeype = "json"
+            
     return HttpResponse(contents, mimetype=typen)
 
 @require_http_methods(["GET"])
