@@ -9,7 +9,6 @@ from core.models import DataStream, DataStreamRevision, DataStreamParameter
 from core.models import GuidModel
 from core.exportDataStream import forms
 from core.engine import invoke
-from core.helpers import RequestProcessor
 from core.daos.datasets import DatasetDBDAO
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
@@ -92,7 +91,7 @@ class DataStreamViewSet(ResourceViewSet):
             # TODO: correct handling
             raise Exception("Wrong arguments")        
             
-        ivk = self.command_factory.create("invoke", form.get_data()).run()
+        ivk = self.command_factory.create("invoke", form.cleaned_data).run()
         if not ivk:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
