@@ -6,7 +6,6 @@ var dataTableView = Backbone.View.extend({
 	parentView: null,
 	
 	events:{
-		//'click #id_refreshButton, #id_retryButton': 'onRefreshButtonClicked',
 		'click a[id^="id_changeParam"]': 'onChangeParamButtonClicked',
 	},
 
@@ -40,9 +39,6 @@ var dataTableView = Backbone.View.extend({
 		// Set Template
 		this.$el.find('#id_datastreamResult > div').html(this.template(this.model.attributes));
 
-		// Set Max Width for Title
-		this.setTitleMaxWidth();
-
 		// If Array, Init Flexigrid
 		if(this.model.attributes.result.fType == 'ARRAY'){
 			this.initFlexigrid(this.model.attributes.result);
@@ -51,33 +47,6 @@ var dataTableView = Backbone.View.extend({
 		}
 
     return this;
-
-	},
-
-	setTitleMaxWidth: function(){
-
-		$(document).ready(function(){
-
-			$(window).resize(function(){
-
-				var paramsWidth = 0;
-
-				if( $parameters.length > 0 ){
-					paramsWidth = 
-						parseFloat( $('.dataTable header h1 .parameters').width() )
-			    	- parseFloat( $('.dataTable header h1 .parameters').css('padding-left').split('px')[0] )
-			    	+ 20;// Fix to perfection
-				}
-
-				var maxWidth = 
-					parseFloat( $('.dataTable header h1').width() )
-			    - paramsWidth;
-			    
-			  $('.dataTable header h1 strong').css('max-width',maxWidth+'px');
-
-	  	}).resize();
-
-		});
 
 	},
 	
@@ -148,8 +117,6 @@ var dataTableView = Backbone.View.extend({
 		  error: _.bind(this.onInvokeError, this)
 	  });
 
-	  // ajaxManager.register( 1, ajax );	
-
 	},
 
 	onInvokeBeforeSend: function(xhr, settings){
@@ -185,12 +152,7 @@ var dataTableView = Backbone.View.extend({
 
 		$(document).ready(function(){
 			
-			var otherHeights =
-				parseFloat( $('.dataTable header').height() )
-				+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-				+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-				+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-				+ 2;// Fix to perfection;
+			var otherHeights = parseFloat( $('.section-content').css('padding-top').split('px')[0] );
 
 			self.parentView.setHeights('#id_datastreamResult .loading', otherHeights);
 
@@ -204,12 +166,7 @@ var dataTableView = Backbone.View.extend({
 
 	  $(document).ready(function(){
 
-	  	var otherHeights = 
-	  		parseFloat( $('.dataTable header').height() )
-	    	+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-				+ 2;// Fix to perfection;
+	  	var otherHeights = parseFloat( $('.section-content').css('padding-top').split('px')[0] );
 
 		  self.parentView.setHeights( '#id_datastreamResult .result table', otherHeights );
 
@@ -363,15 +320,11 @@ var dataTableView = Backbone.View.extend({
 	  $(document).ready(function(){
 
 	  	var otherHeights = 
-	  		parseFloat( $('.dataTable header').height() )
-	    	+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+	  		+ parseFloat( $('.section-content').css('padding-top').split('px')[0] )
 	  		+ parseFloat( $('.flexigrid .hDiv').height() )
 		    + parseFloat( $('.flexigrid .pDiv').height() )
 		    + parseFloat( $('.flexigrid .pDiv').css('border-top-width').split('px')[0] )
-		    + parseFloat( $('.flexigrid .pDiv').css('border-bottom-width').split('px')[0] )
-				+ 2;// Fix to perfection;
+		    + parseFloat( $('.flexigrid .pDiv').css('border-bottom-width').split('px')[0] );
 
 		  self.parentView.setHeights( '.flexigrid div.bDiv', otherHeights );
 

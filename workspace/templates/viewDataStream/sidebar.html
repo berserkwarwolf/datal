@@ -2,50 +2,46 @@
 {% load extra_tags components datastream_tags %}
 
 <div class="sidebar">
-
-    <div class="col-xs-12">
     
-        <div class="row">
-            <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
-            <p>{{datastream.description|capfirst}}</p>
-        </div>
-    
-        <div class="row">
-            <div class="title">{% trans 'APP-CATEGORY-TEXT' %}</div>
-            <p>{{datastream.category_name|capfirst}}</p>
-        </div>
-    
-        {% if datastream.sources %} 
-        <div class="row">
-            <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
-			{% for source in datastream.sources %}
-            <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}}</a></p>
-            {% endfor %}
-        </div>
-        {% endif %}
-    
-        {% if datastream.tags %}
-        <div class="row">
-            <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
-            <div class="sourcesContent">
-            {% for tag in datastream.tags %}
-                <div class="tag">
-                    <span class="tagInner clearfix">
-                        <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
-                    </span>
-                </div>
-            {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-    
-        {% if datastream.notes %}
-        <div class="row">
-            <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
-            <p>{{datastream.notes|safe|urlize}}</p>
-        </div>
-        {% endif %}
-
+    <div class="row">
+        <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+        <p>{{datastream.description|capfirst}}</p>
     </div>
+
+    <div class="row">
+        <div class="title">{% trans 'APP-CATEGORY-TEXT' %}</div>
+        <p>{{datastream.category_name|capfirst}}</p>
+    </div>
+
+    {% if datastream.sources %} 
+    <div class="row">
+        <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
+		{% for source in datastream.sources %}
+        <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}}</a></p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if datastream.tags %}
+    <div class="row">
+        <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
+        <div class="sourcesContent">
+        {% for tag in datastream.tags %}
+            <div class="tag">
+                <span class="tagInner clearfix">
+                    <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
+                </span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if datastream.notes %}
+    <div class="row">
+        <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
+        <p>{{datastream.notes|safe|urlize}}</p>
+    </div>
+    {% endif %}
 
 </div>
