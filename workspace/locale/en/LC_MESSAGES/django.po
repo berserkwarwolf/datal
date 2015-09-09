@@ -1346,17 +1346,8 @@ msgstr "This month"
 msgid "APP-ACTIONS-REVIEW"
 msgstr "Review"
 
-msgid "EDITDS-DSINFO-TITLE"
-msgstr "Data view information"
-
 msgid "OVEDITDS-NAME-TIP"
 msgstr "What's the data about? Type a general topic that explains the data you are extracting"
-
-msgid "EDITDS-METATAGS-TITLE"
-msgstr "Data view metatags"
-
-msgid "EDITDS-SOURCE-TITLE"
-msgstr "Data view sources"
 
 msgid "EDITDS-SOURCE-TIP1"
 msgstr "Type the first 3 letters of a source and select one from the autocomplete list. If it doesn't appear, please"
@@ -1372,9 +1363,6 @@ msgstr "Name"
 
 msgid "MODEL-URL-TEXT"
 msgstr "Url"
-
-msgid "APP-DSTAGS-TEXT"
-msgstr "Data view tags"
 
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Keywords to help identify your data view content. Separate the tags with commas"

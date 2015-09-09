@@ -8,7 +8,6 @@
     <div class="clear"></div>
     <div id="id_datastreamEditForm" class="clearfix form">
       <form id="id_dataStreamForm" novalidate>
-            <div class="title">{% trans "EDITDS-DSINFO-TITLE" %}</div>
             <fieldset>
               {{datastream_form.dataset_revision_id}}
               {{datastream_form.datastream_revision_id}}
@@ -55,9 +54,9 @@
             </div>
    
 </fieldset>
+<hr class="separator">
 
           {% if meta_form %}
-                    <div class="title">{% trans "EDITDS-METATAGS-TITLE" %}</div>
                 <fieldset>
                     {% for field in meta_form %}
                         <div class="row clearfix">
@@ -66,9 +65,9 @@
                         </div>
                     {% endfor %}
                 </fieldset>
+                <hr class="separator">
             {% endif %}        
 
-                   <div class="title">{% trans "EDITDS-SOURCE-TITLE" %}</div>
                 <fieldset>
                     <div class="row clearfix">
                         <label for="">{% trans "APP-SOURCES-TEXT" %}:</label>
@@ -111,18 +110,17 @@
                   </fieldset>
                   </div>
 
-                       <div class="title">{% trans "APP-DSTAGS-TEXT" %}</div>
                 <fieldset class="form clearfix">
                     <div class="row clearfix">
                        <label for="id_operation-tag">{% trans "APP-TAGS-TEXT" %}:</label>
                        <div id="id_tags_container">
                           <input id="id_operation-tag" name="operation-tag" type="text" class="inputNewTag" maxlength="40"/>
+                          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
                           <div class="tagsContent clearfix">
                             {% for tag in datastream_revision.get_tags %}
                                 <span id="id_tags_{{forloop.counter0}}">{{tag}}</span>
                             {% endfor %}
                           </div>
-                          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
                           <div class="recomendedTags DN">
                             <h6>{% trans "CREATE-RECOMENDEDTAGS-TEXT" %}: <span>({% trans "APP-CLICKTOADD-TEXT" %})</span></h6>
                                 <ul id="id_recommendedTags" class="clearfix">
@@ -132,8 +130,8 @@
                       </div>
                     </div>
               </fieldset>
+                <hr class="separator">
               
-              <div class="title">{% trans "APP-AS-DATASTREAM-SINGULAR" %} {% trans "APP-NOTES-TEXT" %}</div>
               <fieldset class="form clearfix">
   
                 {# notes #}
