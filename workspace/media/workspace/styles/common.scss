@@ -481,7 +481,7 @@ body{background:$color-base;height:100%;min-width:998px;}
 .tabs-list .tab.tab-selected a:hover{background:#fff;font-weight:bold;color:#999;cursor:default;border-bottom:1px solid #fff;margin-bottom:0;font-size:12px;}
 
 /* Implementation Types Icons */
-i.icon{padding:2px 0 2px 21px;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:inherit;height:inherit;}
+i.icon{display:inline;padding:2px 0 2px 21px;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:inherit;height:inherit;}
 i.icon.WEB{background-position:0 -20px;}
 i.icon.FILE{background-position:0 -40px;}
 i.icon.WB{background-position:0 -60px;}
@@ -625,7 +625,7 @@ i.icon.TNCLIMA{}
 .tag, .param{margin:0 10px 10px 0;float:left;}
 .tag .tagTxt, .param .paramTxt {
   background:#e2e2e2;
-  word-wrap:break-word;display:block;float:left;padding:2px 8px;color:#767676;font-size:11px;line-height:20px;height:20px;}
+  word-wrap:break-word;display:block;float:left;padding:2px 8px;font-size:11px;line-height:20px;height:20px;}
 
 .tag .tagInner a:hover, .tag .tagTxt.isEditing, .param .paramInner a:hover{background-position: 0 bottom;
 border-color: #ccc;}
