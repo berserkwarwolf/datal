@@ -45,28 +45,6 @@
 }
 
 
-/* Estructura */
-.sidebar{
-  color:$font-color-base;
-
-  .row{margin-bottom:25px;}
-
-  .itemConfig{
-    margin-bottom:40px;
-
-    .boxInner {padding-left:10px;}
-  }
-
-  .title{text-transform:uppercase;margin-bottom:0;color:$font-color-light;font-size:$font-size-m;padding:0 0 10px;line-height:21px;}
-  .subtitle{margin-bottom:5px;color:$font-color-light;}
-  p{margin:0 0 5px 10px;}
-
-  .sourcesContent, 
-  .tagsContent{padding-left:10px;display:inline-block;}
-
-}
-
-
 /* Formularios */
 .radio,
 .checkbox{

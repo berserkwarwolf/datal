@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="detail col-xs-12" id="id_viewDataset">
+  <div class="detail" id="id_viewDataset">
 
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
@@ -39,16 +39,14 @@
 
           <!-- Sidebar -->
           <section class="sidebar-container">
-
             {% include "viewDataset/sidebar.html" %}
-
           </section>
 
           <!-- Detail -->
           <section class="detail-container">
-
+            <div class="col-xs-12">
             {% include "viewDataset/detail.html" %}
-
+            </div>
           </section>
 
         </div>
