@@ -82,8 +82,21 @@ class ElasticsearchFinder(Finder):
         if isinstance(self.resource, str):
             self.resource = [self.resource]
 
+        # algunas busquedas, sobre todo las federadas,
+        # buscan en un list de account_id
+        # Asi que si llega solo un account_id, lo mete en un list igual
+        if type(self.account_id) in (type(str()), type(int()), type(long()), type(float())):
+            account_ids=[int(self.account_id)]
+        elif type(self.account_id) == type([]):
+            account_ids=self.account_id
+        else:
+            #debería ir un raise?!?!?
+            account_ids=self.account_id
+
+        self.logger.info(">>>>>>>>>>>>>>>>>: %s" %type(account_ids))
+
         filters = [
-            {"term": {"account_id": self.account_id}},
+            {"terms": {"account_id": account_ids}},
             {"terms": {"type": self.resource}}
         ]
 
