@@ -15,7 +15,7 @@ class EngineCommandFactory(object):
         "uniqueBy": "pUniqueBy",
         }
 
-    def fix_params(self, filters):
+    def _fix_params(self, filters):
         """ fix filters and other params """
        
         new=[]
@@ -25,7 +25,7 @@ class EngineCommandFactory(object):
                 new.append( (self.CONV_DICT[item[0]], item[1]) )
             elif item[0].startswith('pFilter'):
                 v1 = item[1]
-                new.append((item[0],self.parseOperator(value=v1)))
+                new.append((item[0],self._parseOperator(value=v1)))
             elif item[0].startswith('uniqueBy'):
                 #>>>>> estas dos lineas de donde sale?
                 num = key[-1:]
@@ -38,7 +38,7 @@ class EngineCommandFactory(object):
 
         return new
 
-    def parseOperator(self, value):
+    def _parseOperator(self, value):
         value = value.replace('[==]', '[0]')
         value = value.replace('[>]', '[1]')
         value = value.replace('[<]', '[2]')
@@ -57,7 +57,7 @@ class EngineCommandFactory(object):
                 
         return value
 
-    def process_items(self, items):
+    def _process_items(self, items):
         post_query=[]
         for item in items:
             if "argument" in item.keys():
@@ -69,20 +69,20 @@ class EngineCommandFactory(object):
                         post_query.append((i, item[i]))
     
 
-        return self.fix_params(post_query)
+        return self._fix_params(post_query)
 
     def create(self, command_type, items):
         engine = None
         if command_type == 'invoke':
-            engine = EngineInvokeCommand(self.process_items(items))
+            engine = EngineInvokeCommand(self._process_items(items))
         elif command_type == 'load':
-            engine = EngineLoadCommand(self.process_items(items))
+            engine = EngineLoadCommand(self._process_items(items))
         elif command_type == 'preview':
-            engine = EnginePreviewCommand(self.process_items(items))
+            engine = EnginePreviewCommand(self._process_items(items))
         elif command_type == 'chart':
-            engine = EngineChartCommand(self.process_items(items))
+            engine = EngineChartCommand(self._process_items(items))
         elif command_type == 'preview_chart':
-            engine = EnginePreviewChartCommand(self.process_items(items))
+            engine = EnginePreviewChartCommand(self._process_items(items))
         return engine
 
 class AbstractCommandFactory(object):
