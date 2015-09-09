@@ -5,90 +5,79 @@ import re
 from django import forms
 from django.forms.formsets import BaseFormSet
 from core.primitives import PrimitiveComputer
-
-class ArgumentForm(forms.Form):
-    argument=forms.CharField(max_length=16, widget=forms.TextInput(), required=True)
-    value=forms.CharField(max_length=100, widget=forms.TextInput(), required=True)
-
-class DocumentForm(forms.Form):
-    pId=forms.IntegerField(required=True)
-    doc_type=forms.CharField(max_length=2, required=True)
-
-class DatastreamRequestForm(forms.Form):
-    page=forms.IntegerField(required=True)
-    limit=forms.IntegerField(required=True)
-    output=forms.CharField(max_length=100, required=False)
+from core.v8.commands import *
 
 
-class InvokeFormSet(BaseFormSet):
-    is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
-    is_id=re.compile("(?P<doc_type>\S+)_id$").match
+class EngineCommandFactory(object):
+    def __init__(self, request, items):
+        self.request = request
+        self.items = items
 
-    data_items=[]
-
-    def __init__(self, *args, **kwargs):
-        new_args=[]
-        for i,j in enumerate(args):
-            aux=dict(j)
-            aux.update({'form-TOTAL_FORMS': u'1', 'form-INITIAL_FORMS': u'0','form-MAX_NUM_FORMS': u''})
-            new_args.append(aux)
-        super(InvokeFormSet, self).__init__(*new_args, **kwargs)
-
-    def get_data(self):
-        return self.data_items
-
-    def clean(self):
-
-        #self.data = dict(self.data)
-        #self.data.update({'form-TOTAL_FORMS': u'1', 'form-INITIAL_FORMS': u'0','form-MAX_NUM_FORMS': u''})
-
-        if any(self.errors):
-            return
-
-        self.forms=[]
-        for key in self.data.keys():
-            match=self.is_argument(key)
-
-            # si es pAlgoNN
-            if match:
-                try:
-                    f=ArgumentForm({"argument": key, 'value': PrimitiveComputer().compute(self.data[key])})
-                    if f.is_valid():
-                        self.data_items.append( (f.cleaned_data['argument'],f.cleaned_data['value']) )
-                        self.forms.append(f)
-                    else:
-                        self.errors.append({'value': [u"argumento no válido"]})
-                        raise forms.ValidationError(u"argumento no válido", code="argument_not_valid")
-                except TypeError:
-                    self.errors.append({'value': [u"expected string or buffer"]})
-                    raise forms.ValidationError(u"expected string or buffer", code="typeerror")
+    def fix_params(self, filters):
+        """ fix filters and other params """
+       
+        new=[]
+        for item in filters:
+            if item[0].startswith('pFilter'):
+                v1 = item[1]
+                new.append((item[0],self.parseOperator(value=v1)))
+            if item[0].startswith('uniqueBy'):
+                num = key[-1:]
+                filters['pUniqueBy%s' % num] = item[1]
                 
-                #no me gusta, debería tener un map y un filter, refactorear vago!
-                continue
+        return filters
 
-            # Si es el pk
-            match=self.is_id(key)
-            if match:
-                f=DocumentForm({"pId": int(self.data[key]), "doc_type": self._get_doc_dict(match.group("doc_type"))})
-                if f.is_valid():
-                    self.data_items.append( ("pId",f.cleaned_data['pId']))
-                    self.data_items.append( ("doc_type",f.cleaned_data['doc_type']))
-                    self.forms.append(f)
-                else:
-                    raise forms.ValidationError(u"id (%s/%s) no válido" % (int(self.data[key]),match.group("doc_type")), code="id_not_valid")
-                continue
+    def parseOperator(self, value):
+        value = value.replace('[==]', '[0]')
+        value = value.replace('[>]', '[1]')
+        value = value.replace('[<]', '[2]')
+        value = value.replace('[!=]', '[3]')
+        value = value.replace('[contains]', '[4]')
+        value = value.replace('[>=]', '[5]')
+        value = value.replace('[<=]', '[6]')
+        value = value.replace('[between]', '[7]')
+        value = value.replace('[inlist]', '[8]')
+        value = value.replace('[notcontains]', '[9]')
+        value = value.replace('[notcontainsall]', '[9]')
+        value = value.replace('[notbetween]', '[10]')
+        value = value.replace('[notinlist]', '[11]')
+        value = value.replace('[notcontainsany]', '[12]')
+        value = value.replace('[containsall]', '[13]')
+                
+        return value
 
-        # faltaría meter un form generico que tome un arumento y un valor para el resto de los argumentos
-        # y quitar este de acá abajo
-        f=DatastreamRequestForm(self.data)
-        if f.is_valid():
-            self.data_items.append( ("pLimit",f.cleaned_data['limit']))
-            self.data_items.append( ("pPage",f.cleaned_data['page']))
-            self.data_items.append( ("pOutput",f.cleaned_data['output']))
-            self.forms.append(f)
+    def process_items(self):
+        post_query=[]
+        for item in self.items():
+            if item[0].startswith('pArgument') or item[0].startswith('pFilter'):
+                value = item[1]
+                post_query.append((item[0],value.encode('utf-8')))
 
-    def _get_doc_dict(self, doc_type):
-        if doc_type in ["datastream_revision", "datastream"]:
-            return "ds"
-        elif doc_type in ["visualization_revision","visualization"]: 
-            return "vz"
+            # filtra los parametros vacios
+            elif item[1]:
+                post_query.append(item)
+
+        return self.fix_params(post_query)
+
+    def create(self, command_type):
+        engine = None
+        if command_type == 'invoke':
+            engine = EngineInvokeCommand(self.request, self.process_items())
+        elif command_type == 'load'
+            engine = EngineLoadCommand(self.request, self.process_items())
+        elif command_type == 'preview':
+            engine = EnginePreviewCommand(self.request, self.process_items())
+        elif command_type == 'chart':
+            engine = EngineChartCommand(self.request, self.process_items())
+        elif command_type == 'preview_chart':
+            engine = EnginePreviewChartCommand(self.request, self.process_items())
+        return engine
+
+class AbstractCommandFactory(object):
+
+    def __init__(self, request, items):
+        self.request = request
+        self.items = items
+
+    def create(self):
+        return EngineCommandFactory(self.request, self.items)

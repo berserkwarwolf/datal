@@ -11,13 +11,12 @@ from core.lib.datastore import *
 from core.cache import Cache
 from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
-from core.v8.commands import EngineDataCommand
+from core.v8.factories import AbstractCommandFactory
 from core.helpers import jsonToGrid, RequestProcessor
 from core.models import DataStreamRevision, DataStreamHits, DataStream
 from core.shortcuts import render_to_response
 from datetime import date, timedelta
 from core.decorators import *
-
 
 
 from django.forms.formsets import formset_factory
@@ -27,8 +26,16 @@ from django.forms.formsets import formset_factory
 @require_http_methods(["GET"])
 #@datal_cache_page()
 def action_invoke(request):
-    command = EngineDataCommand(request, request.REQUEST)
-    contents, typen = command.run()
+    formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
+    form = formset(request.REQUEST)
+    if form.is_valid():
+        engine_factory = AbstractCommandFactory(request, form.get_data())
+        command_factory = engine_factory.create()
+        contents, typen = command_factory.create("invoke").run()
+        invoke.run()
+    else:
+        contents = '{"Error":"Wrong aguments"}'
+        mimeype = "json"
     return HttpResponse(contents, mimetype=typen)
 
 @require_http_methods(["GET"])
