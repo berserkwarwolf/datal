@@ -139,7 +139,10 @@ def update_list(request):
         order_type = form.cleaned_data.get('order_type')
 
         resources = ['ds', 'db', 'vz', 'dt']
-        category_filters = form.cleaned_data.get('category_filters').lower().split(",")
+        category_filters = form.cleaned_data.get('category_filters')
+        if category_filters:
+            category_filters=category_filters.lower().split(",")
+        
 
         if preferences['account_home_filters'] == 'featured_accounts':
 
