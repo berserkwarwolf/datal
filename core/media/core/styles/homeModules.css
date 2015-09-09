@@ -1,5 +1,5 @@
 /*RESOURCES CONTAINER*/
-.resourcesTable{background:url(/media_community/images/home/sh_940.png) no-repeat center bottom;padding-bottom:7px;}
+.resourcesTable{}
 .resourcesTableInner{border:1px solid #ddd;}
 .columns{border:1px solid #fff;border-left:0;border-right:0;background:#fff url(/static/core/images/homeManager/gr_sidebar.gif) repeat-y 0 0;}
 .columns .CL{width:166px;}

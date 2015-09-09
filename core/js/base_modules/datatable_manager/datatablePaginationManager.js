@@ -33,12 +33,14 @@ var DatatablePaginationManager = Backbone.Model.extend({
     getButtonTemplate: function(i) {
         var templ = '';
         if (i == 1) {
-            templ = '<a href="javascript:;" class="number act" title="<%= page_number %>"><%= page_number %></a>';
+            templ = '<a href="javascript:;" class="number act" title="<%= page_number.i %>"><%= page_number.i %></a>';
         }
         else {
-            templ = '<a href="javascript:;" class="number" title="<%= page_number %>"><%= page_number %></a>';
+            templ = '<a href="javascript:;" class="number" title="<%= page_number.i %>"><%= page_number.i %></a>';
         }
-        return _.template(templ, {page_number: i});
+        return _.template(templ, {variable: 'page_number'})({
+            'i': i
+        });
     },
     drawButton: function(i) {
         $('.pagination-pages', this.get("selector")).append(this.getButtonTemplate(i));
