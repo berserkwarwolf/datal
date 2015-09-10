@@ -140,14 +140,15 @@ var viewVisualizationView = Backbone.View.extend({
 
             },
             error:function(response){
-
                 datalEvents.trigger('datal:application-error', response);
-
+                $("#ajax_loading_overlay").hide();
             },
             complete:function(response){
                 // Hide Loading
                 $("#ajax_loading_overlay").hide();
             }
+        }).fail(function () {
+            $("#ajax_loading_overlay").hide();
         });
 
     },
