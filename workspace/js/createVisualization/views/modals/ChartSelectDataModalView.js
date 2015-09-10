@@ -109,6 +109,7 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     setHeights: function(t){
+        var self = this;
 
         var contextMenuHeight = parseFloat( $('.context-menu').height() );
 
@@ -116,7 +117,7 @@ var ChartSelectDataModalView = ModalView.extend({
 
             windowHeight = $(window).height();
             var sidebarHeight = windowHeight - contextMenuHeight;
-            $('.sidebar').css('height', sidebarHeight+'px');
+            self.$('.sidebar').css('height', sidebarHeight+'px');
 
         }).resize();
 
