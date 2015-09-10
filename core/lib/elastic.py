@@ -252,11 +252,12 @@ class ElasticsearchIndex():
 
     def update(self, document):
         """ update by id"""
-
-        try:
-            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
-        except RequestError,e:
-            raise RequestError(e)
-        except NotFoundError,e:
-            raise NotFoundError,(e)
+        # Me lo pediste vos nacho, despues no me putees
+        return True
+        # try:
+        #     return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
+        # except RequestError,e:
+        #     raise RequestError(e)
+        # except NotFoundError,e:
+        #     raise NotFoundError,(e)
 
