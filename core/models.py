@@ -27,7 +27,7 @@ def add_facets_to_doc(resource, account, doc):
             field_values = []    
             logger.error("BAD FIELDS_VALUES: %s -- %s -- %s" % (repr(resource), str(doc), resource.meta_text))
     
-        field_values =  meta_text['field_values']
+        field_values = meta_text['field_values']
         for fv in field_values:
             # Take only the first key
             key = fv.keys()[0]
@@ -807,46 +807,6 @@ class VisualizationRevision(RevisionModel):
 
         visualization_revision.save()
         return visualization_revision
-
-    def get_dict(self, language = 'en'):
-
-        from core.docs import VZ
-        import time
-        visualization = VZ(self.id, language)
-        account = Account.objects.get(id = visualization.account_id)
-        
-        text = [visualization.title, visualization.description, visualization.created_by_nick, visualization.guid]
-        text.extend(visualization.get_tags())
-        text = ' '.join(text)
-
-        account_id = visualization.account_id
-        if account_id is None:
-            account_id = ''
-
-        indexable_dict = {
-                'docid' : "VZ::" + visualization.guid,
-                'fields' :
-                    {'type' : 'chart',
-                     'visualization_id': visualization.visualization_id,
-                     'visualizationrevision_id': visualization.visualizationrevision_id,
-                     'datastream_id': visualization.datastream_id,
-                     'title': visualization.title,
-                     'text': text,
-                     'description': visualization.description,
-                     'category_id' : visualization.category_id,
-                     'category_name' : visualization.category_name,
-                     'owner_nick' : visualization.created_by_nick,
-                     'tags' : ','.join(visualization.get_tags()),
-                     'account_id' : account_id,
-                     'timestamp' : int(time.mktime(visualization.created_at.timetuple())),
-                    },
-                'categories': {'id': unicode(visualization.category_id), 'name': visualization.category_name}
-                }
-
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(self.get_meta_data_dict(visualization.metadata))
-
-        return indexable_dict
 
 
 class VisualizationI18n(models.Model):
