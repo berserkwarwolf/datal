@@ -9,7 +9,7 @@ from django.shortcuts import get_object_or_404
 
 from core.exceptions import Http400
 from core.models import *
-from core import engine
+from core.v8.factories import AbstractCommandFactory
 
 def _get_logger():
     return logging.getLogger(__name__)
@@ -92,7 +92,8 @@ def mint_process(mint_request):
     datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream.id)
 
     query = datastream.get_query(datastreamrevision_id, request, is_turtle=0)
-    contents, mimetype = engine.invoke(query)
+    command_factory = AbstractCommandFactory().create() 
+    contents, mimetype = command_factory.create("invoke", query).run()
 
     # read the template
     template = None

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from core.emitters import CSVEmitter
-from core.engine import invoke
+from core.v8.factories import AbstractCommandFactory
 import json
 import urlparse
 
@@ -17,6 +17,7 @@ def action_csv(request):
     csvfile += dashboard_name +',,,\n\n'
 
     i = 0
+    command_factory = AbstractCommandFactory().create()
     for row_number in response['datastreams']:
         value = response['datastreams'][i]
         datastreamrevision_id = value['id']
@@ -24,7 +25,8 @@ def action_csv(request):
         query = {'pId': datastreamrevision_id}
         for k, v in urlparse.parse_qs(end_point).items():
             query[k] = v[0]
-        json_response, type = invoke(query)
+
+        json_response, type = command_factory.create("invoke", query).run()
         loaded_json = json.loads(json_response)
         csv_emitter = CSVEmitter(loaded_json, name = u'')
         csvfile += str(csv_emitter.render()) + '\n\n\n\n\n\n'

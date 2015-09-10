@@ -8,7 +8,7 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core import engine
+from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
@@ -410,7 +410,8 @@ def action_load(request):
             query['pLimit'] = limit
         if tableid:
             query['pTableid'] = tableid
-        response, mimetype = engine.load(query)
+        command_factory = AbstractCommandFactory().create() 
+        response, mimetype = command_factory.create("load", query).run()
 
         """ detect error
         if response.find("It was not possible to dispatch the request"):

@@ -12,13 +12,13 @@ from django.utils.translation import ugettext
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from core.v8.factories import AbstractCommandFactory
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
@@ -152,16 +152,19 @@ def view(request):
             visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
 
             impl_details = json.loads(visualization_revision['impl_details'])
+            command_factory = AbstractCommandFactory().create()
             format = impl_details.get('format')
             if format.get('type') != 'mapchart':
-                contents, content_type = invoke(visualization_revision_parameters)
+                contents, content_type = command_factory.create("invoke", 
+                    visualization_revision_parameters).run()
             else:
                 visualization_revision_parameters['pId'] = visualization_revision['visualizationrevision_id']
                 # visualization_revision_parameters['pLimit'] = 10000
                 # visualization_revision_parameters['pPage'] = 0
                 visualization_revision_parameters['pBounds'] = ""
                 # visualization_revision_parameters['pZoom'] = 5
-                contents, content_type = invoke_chart(visualization_revision_parameters)
+                contents, content_type = command_factory.create("chart", 
+                    visualization_revision_parameters).run()
 
             visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
@@ -334,7 +337,8 @@ def preview(request):
 
             query['pType'] = 'chart'
             logger.error(query)
-            result, content_type = preview_chart(query)
+            command_factory = AbstractCommandFactory().create() 
+            result, content_type = command_factory.create("preview_chart", query).run()
 
             return HttpResponse(result, mimetype=content_type)
     else:
@@ -377,7 +381,8 @@ def action_invoke(request):
             #query["ver"] = 6
             #return HttpResponse(str(query) + str(request.GET), "json")
 
-            result, content_type = invoke_chart(query)
+            command_factory = AbstractCommandFactory().create() 
+            result, content_type = command_factory.create("chart", query).run()
             if not result:
                 result = "SIN RESULTADO para %s" % query
             return HttpResponse(result, mimetype=content_type)

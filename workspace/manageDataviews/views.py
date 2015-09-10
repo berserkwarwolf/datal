@@ -17,7 +17,7 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core import engine
+from core.v8.factories import AbstractCommandFactory
 
 
 logger = logging.getLogger(__name__)
@@ -366,7 +366,8 @@ def action_preview(request):
         for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
             if getdict.has_key(k): getdict.pop(k)
         query.update(getdict)
-        response, mimetype = engine.preview(query)
+        command_factory = AbstractCommandFactory().create() 
+        response, mimetype = command_factory.create("preview", query).run()
         # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
         return HttpResponse(response, mimetype)
 

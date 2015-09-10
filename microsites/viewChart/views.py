@@ -6,13 +6,13 @@ from core.choices import ChannelTypes
 from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
-from core.engine import invoke, invoke_chart
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from microsites.viewChart import forms
 from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
+from core.v8.factories import AbstractCommandFactory
 
 import urllib
 import json
@@ -132,7 +132,9 @@ def action_embed(request, guid):
 
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
     visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
-    json, type = invoke(visualization_revision_parameters)
+    command_factory = AbstractCommandFactory().create() 
+    json, type = command_factory.create(
+                    "invoke", visualization_revision_parameters).run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
@@ -176,7 +178,8 @@ def action_invoke(request):
             #query["ver"] = 6
             #return HttpResponse(str(query) + str(request.GET), "json")
 
-            result, content_type = invoke_chart(query)
+            command_factory = AbstractCommandFactory().create() 
+            result, content_type = command_factory.create("chart", query).run()
             if not result:
                 result = "SIN RESULTADO para %s" % query
             return HttpResponse(result, mimetype=content_type)

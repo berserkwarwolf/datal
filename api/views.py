@@ -8,7 +8,6 @@ from rest_framework.settings import api_settings
 from core.models import DataStream, DataStreamRevision, DataStreamParameter
 from core.models import GuidModel
 from core.exportDataStream import forms
-from core.engine import invoke
 from core.daos.datasets import DatasetDBDAO
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO

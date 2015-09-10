@@ -5,10 +5,10 @@ from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
 from core.docs import VZ
-from core.engine import invoke, invoke_chart
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.daos.visualizations import VisualizationHitsDAO
+from core.v8.factories import AbstractCommandFactory
 from microsites.chart_manager import forms
 import urllib
 import json
@@ -47,11 +47,12 @@ def action_view(request, id, slug):
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters) 
         
         chart_type = json.loads(visualization_revision.impl_details).get('format').get('type') 
-        
         try:
             if chart_type != "mapchart":
                 visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-                result, content_type = invoke(visualization_revision_parameters)
+                command_factory = AbstractCommandFactory().create() 
+                result, content_type = command_factory.create(
+                    "invoke", visualization_revision_parameters).run()
             else:
                 join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
 #                visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
@@ -85,7 +86,8 @@ def action_embed(request, guid):
 
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-    json, type = invoke(visualization_revision_parameters)
+    command_factory = AbstractCommandFactory().create() 
+    json, type = command_factory.create("invoke", visualization_revision_parameters).run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('chart_manager/embed.html', locals())
@@ -121,7 +123,8 @@ def action_invoke(request):
             if zoom is not None:
                 query['pZoom'] = zoom                                           
     
-            result, content_type = invoke_chart(query)
+            command_factory = AbstractCommandFactory().create() 
+            result, content_type = command_factory.create("chart", query).run()
     
             return HttpResponse(result, mimetype=content_type)
     else:
