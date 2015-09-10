@@ -9,7 +9,7 @@
 	/*SEARCH*/
 	.headerAuto .search{border:1px solid #e0e0e0;background:url(/static/workspace/images/_workspace/dg_inputs.gif) repeat-x 0 0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;}
 	.headerAuto .search .field{padding:0 5px 0 40px;width:600px;border:1px solid #fff;background:#fff url(/static/workspace/images/_workspace/ic_searchInputs.gif) no-repeat 13px 11px;height:40px;line-height:40px;font-size:16px;}
-	.headerAuto .search .button{filter:alpha(opacity=0);opacity: 0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";position:absolute;top:0;left:0;width:29px;border:0;height:29px;z-index:100;overflow:hidden;}
+	.headerAuto .search .button{filter:alpha(opacity=0);opacity: 0;-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";position:absolute;top:0;left:0;width:43px;border:0;height:43px;z-index:100;overflow:hidden;min-width:inherit;}
 
 /*HEADER - FOOTER*/
 .brandingHeader, 
