@@ -40,7 +40,7 @@ def do_search(request, category_filters=None, datasets=None):
             accounts_ids = account.id
 
         try:
-            resources = ["ds", "db", "chart", "dt"]
+            resources = ["ds", "db", "vz", "dt"]
             results, search_time, facets = FinderManager().search(
                 query=query, account_id=accounts_ids, category_filters=category_filters, order=order,
                 resource=resources
