@@ -19,6 +19,7 @@ from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
@@ -242,11 +243,14 @@ def create(request, viz_type='index'):
     
     if request.method == 'GET':
         datastream_revision_id = request.GET.get('datastream_revision_id', None)
-        datastream_rev = DataStreamDBDAO().get(
-            request.user.language,
-            datastream_revision_id=datastream_revision_id,
-            published=False
-        )
+        try:
+            datastream_rev = DataStreamDBDAO().get(
+                request.user.language,
+                datastream_revision_id=datastream_revision_id,
+                published=False
+            )
+        except DataStreamRevision.DoesNotExist:
+            raise DataStreamNotFoundException()
 
         return render_to_response('createVisualization/index.html', dict(
             request=request,
