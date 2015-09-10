@@ -146,25 +146,30 @@ class Finder:
             if document['parameters']:
                 import json
                 parameters = json.loads(document['parameters'])
+            else:
+                parameters = []
+
         except:
             parameters = []
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', kwargs={'id': document['visualization_id'], 'slug': slug})
+        permalink = reverse('chart_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['visualization_id'], 'slug': slug})
 
         visualization = dict(id=document['visualization_id'], revision_id=document['visualization_revision_id'], title=title, description=document['description'],
                              parameters=parameters, tags=[tag.strip() for tag in document['tags'].split(',')],
                              permalink=permalink,
                              type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
-                             ,end_point=document['end_point'], timestamp=document['timestamp'], owner_nick=document['owner_nick'])
+                             ,end_point=document.get('end_point', None), timestamp=document['timestamp'], owner_nick=document['owner_nick'])
         return visualization
 
     def get_dashboard_dictionary(self, document):
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': document['dashboard_id'], 'slug': slug})
+        permalink = reverse('dashboard_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['dashboard_id'], 'slug': slug})
 
         dashboard_dict = dict (id=document['dashboard_id'], title=title, description=document['description'],
                                tags=[tag.strip() for tag in document['tags'].split(',')], user_nick=document['owner_nick'],

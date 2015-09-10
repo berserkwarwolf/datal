@@ -534,8 +534,8 @@ i.icon.TNCLIMA{}
 }
 
 /* Backgrid - Empty text */
-.backgrid tr.empty td,
-.backgrid tr.empty td:hover{background-color:#fef1e1 !important;border-bottom:1px solid #f2dcd1;padding:15px;text-align:center;color:#b62d1b !important;line-height:24px;text-shadow:0 1px #fff;font-size:14px;font-style:normal;text-shadow:none !important;
+.backgrid .empty td,
+.backgrid .empty td:hover{background-color:#fef1e1 !important;border-bottom:1px solid #f2dcd1;padding:15px;text-align:center;color:#b62d1b !important;line-height:19px;text-shadow:0 1px #fff;font-size:14px;font-style:normal;text-shadow:none !important;display:table-cell !important;cursor:default;white-space:pre-wrap;text-align:left !important;max-width:inherit;
 }
 
 /* Overlays */

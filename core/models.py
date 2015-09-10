@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
+from django.contrib.auth.models import AnonymousUser
 
 from core.utils import slugify
 from core import choices
@@ -194,6 +195,16 @@ class Account(models.Model):
             if total_visualizations > 0:
                 c.set('account_total_visualization_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
+
+
+class AccountAnonymousUser(AnonymousUser):
+
+    def __init__(self, account):
+        super(AccountAnonymousUser, self).__init__()
+        self.account = account
+
+    def is_authenticated(self):
+        return True
 
 
 class User(models.Model):

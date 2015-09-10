@@ -28,7 +28,11 @@
 
             //Normalize error message data type
             if(typeof errorMessage !== 'object'){
-                errorMessage = JSON.parse(errorMessage);
+                try {
+                    errorMessage = JSON.parse(errorMessage);
+                } catch(e){
+                    console.error(e); //error in the above string(in this case,yes)!
+                }
             }
 
             //Check if we are handling and old version of the error messages
@@ -38,7 +42,8 @@
 
             //Validate the format of the error message
             if(typeof errorMessage['description'] !== 'undefined' && typeof errorMessage['error'] !== 'undefined'){
-                this.set(errorMessage);
+                // changed to fire change every time it is set
+                this.set(errorMessage, {silent: true}).trigger('change');
             }
             else{
                 this.setUnexpectedErrorMessage();

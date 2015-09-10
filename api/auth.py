@@ -3,13 +3,14 @@ import re
 
 from django.db.models import Q
 from django.conf import settings
-from core.models import Application, Account, User
+from core.models import Application, Account, User, AccountAnonymousUser
 from core.http import get_domain, get_domain_by_request
 from urlparse import urlparse
 from rest_framework import authentication
 from rest_framework import exceptions
 
 logger = logging.getLogger(__name__)
+
 
 
 class DatalApiAuthentication(authentication.BaseAuthentication):
@@ -28,12 +29,11 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
         application = self.resolve_application(request, auth_key)
         if not application:
             raise exceptions.AuthenticationFailed('Auth Key does not exist.')
-
         if application.is_public_auth_key(auth_key):
             if not self.check_referer(request, application):
                 raise exceptions.AuthenticationFailed('Invalid referer')
 
-        user = self.resolve_user(application)
+        user = self.resolve_user(application, account)
 
         preferences = account.get_preferences()
 
@@ -84,9 +84,10 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
         except Application.DoesNotExist:
             return None
 
-    def resolve_user(self, application):
+    def resolve_user(self, application, account):
         if application.user_id:
             try:
                 return User.objects.get(pk=application.user_id)
             except User.DoesNotExist:
-                return None 
+                return AccountAnonymousUser(account)
+        return AccountAnonymousUser(account)
