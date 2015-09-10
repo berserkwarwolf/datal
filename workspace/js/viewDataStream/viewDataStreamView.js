@@ -46,7 +46,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	// 	});
 
-	},
+	//},
 
 	setHeights: function(theContainer, theHeight){
 
