@@ -27,6 +27,9 @@ from django.forms.formsets import formset_factory
 def action_invoke(request):
     typen = 'json'
     formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
+
+    # a modo de prueba
+    #form = formset(request.REQUEST, default=[{"position": 2, "default": "eameo!"},])
     form = formset(request.REQUEST)
     if form.is_valid():
 

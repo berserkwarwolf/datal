@@ -32,9 +32,20 @@ class InvokeFormSet(BaseFormSet):
             aux=dict(j)
             aux.update({'form-TOTAL_FORMS': u'1', 'form-INITIAL_FORMS': u'0','form-MAX_NUM_FORMS': u''})
             new_args.append(aux)
-        super(InvokeFormSet, self).__init__(*new_args, **kwargs)
 
+        self._defaults=kwargs.get("default",[])
 
+        super(InvokeFormSet, self).__init__(*new_args)
+
+    def _update_defaults(self):
+
+        for arg in self._defaults:
+            key="pArgument%s" % arg["position"]
+            value = self.data.get(key,None)
+
+            if value in (None, ""):
+                self.data[key]=arg["default"]
+                
     def clean(self):
 
         #self.data = dict(self.data)
@@ -42,6 +53,9 @@ class InvokeFormSet(BaseFormSet):
 
         if any(self.errors):
             return
+
+        # aplicamos los valores defaults
+        self._update_defaults()
 
         self.forms=[]
         for key in self.data.keys():
