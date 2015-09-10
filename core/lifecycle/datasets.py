@@ -27,6 +27,9 @@ logger = logging.getLogger(__name__)
 class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
 
+    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
+        pass
+
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
