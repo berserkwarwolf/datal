@@ -1,3 +1,6 @@
+import logging
+import re
+
 from django.db.models import Q
 from django.conf import settings
 from core.models import Application, Account, User
@@ -5,9 +8,9 @@ from core.http import get_domain, get_domain_by_request
 from urlparse import urlparse
 from rest_framework import authentication
 from rest_framework import exceptions
-import logging
 
 logger = logging.getLogger(__name__)
+
 
 class DatalApiAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
