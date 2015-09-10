@@ -146,6 +146,9 @@ class Finder:
             if document['parameters']:
                 import json
                 parameters = json.loads(document['parameters'])
+            else:
+                parameters = []
+
         except:
             parameters = []
 
