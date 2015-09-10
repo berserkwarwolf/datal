@@ -154,7 +154,8 @@ class Finder:
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', kwargs={'id': document['visualization_id'], 'slug': slug})
+        permalink = reverse('chart_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['visualization_id'], 'slug': slug})
 
         visualization = dict(id=document['visualization_id'], revision_id=document['visualization_revision_id'], title=title, description=document['description'],
                              parameters=parameters, tags=[tag.strip() for tag in document['tags'].split(',')],
@@ -167,7 +168,8 @@ class Finder:
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': document['dashboard_id'], 'slug': slug})
+        permalink = reverse('dashboard_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['dashboard_id'], 'slug': slug})
 
         dashboard_dict = dict (id=document['dashboard_id'], title=title, description=document['description'],
                                tags=[tag.strip() for tag in document['tags'].split(',')], user_nick=document['owner_nick'],
