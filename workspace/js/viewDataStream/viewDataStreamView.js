@@ -31,22 +31,22 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	render: function(){
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.setSidebarHeight();
+		// this.setSidebarHeight();
 		return this;
 	},
 
-	setSidebarHeight: function(){
+	// setSidebarHeight: function(){
 
-		var self = this;
+	// 	var self = this;
 
-		$(document).ready(function(){
+	// 	$(document).ready(function(){
 
-			var otherHeights = 0;
-			self.setHeights( '.sidebar-container .box', otherHeights );
+	// 		var otherHeights = 0;
+	// 		self.setHeights( '.sidebar-container .box', otherHeights );
 
-		});
+	// 	});
 
-	},
+	//},
 
 	setHeights: function(theContainer, theHeight){
 
@@ -76,6 +76,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				- parseFloat( otherHeight	)
 				- $('.header').height()
 				- $('.main-section .section-title').height()
+				- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] );
 				- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
 				- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
 				- 20; // to set some space at the bottom

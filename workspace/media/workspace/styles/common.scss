@@ -534,11 +534,8 @@ i.icon.TNCLIMA{}
 }
 
 /* Backgrid - Empty text */
-.backgrid tbody tr.empty td,
-.backgrid tbody tr.empty td:hover{float:left;background-color:#fef1e1 !important;border-bottom:1px solid #f2dcd1;padding:15px;text-align:center;color:#b62d1b;line-height:24px;text-shadow:0 1px #fff;font-size:14px;display:table-cell !important;font-style:normal;
-  -webkit-box-shadow:0 -1px 0 #fff inset;
-     -moz-box-shadow:0 -1px 0 #fff inset;
-          box-shadow:0 -1px 0 #fff inset;
+.backgrid tr.empty td,
+.backgrid tr.empty td:hover{background-color:#fef1e1 !important;border-bottom:1px solid #f2dcd1;padding:15px;text-align:center;color:#b62d1b !important;line-height:24px;text-shadow:0 1px #fff;font-size:14px;font-style:normal;text-shadow:none !important;
 }
 
 /* Overlays */
@@ -580,9 +577,8 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .backgrid tr th{border-top:1px solid #ddd;}
 .ao-popup-overlay .backgrid tr th,
 .ao-popup-overlay .backgrid tr td{padding:8px 15px !important;}
-.ao-popup-overlay .backgrid tr td:first-child,
-.ao-popup-overlay .backgrid tr.empty td{min-width:300px;}
 .ao-popup-overlay .backgrid tr:last-child td{border-bottom:none;}
+.ao-popup-overlay .backgrid tr td:first-child{min-width:300px;}
 .ao-popup-overlay .backgrid tr td p{color:#666;}
 .ao-popup-overlay .backgrid tr:nth-child(2n+1) td{background-color:#fbfbfb;}
 .ao-popup-overlay .backgrid tr:hover td, 
