@@ -3093,9 +3093,6 @@ msgstr "¿No se ve bien?"
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
 msgstr "Cambiar filas/columnas"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reordenar datos"
-
 msgid "APP-DEFAULT-TEXT"
 msgstr "Por defecto"
 
@@ -3188,3 +3185,6 @@ msgstr "Nueva visualización"
 
 msgid "APP-LABELS-TIP-TEXT"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu visualización."
+
+msgid "APP-INVERT-TEXT"
+msgstr "Invertir"
