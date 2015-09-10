@@ -19,7 +19,8 @@ from workspace.personalizeHome.managers import ThemeFinder
 @csrf_exempt
 def load(request):
     auth_manager = request.auth_manager
-    preference = request.preferences
+    account = auth_manager.get_account()
+    preference = account.get_preferences()
     stats = request.stats #TODO this must be loaded at context_procesor but it's not working 
     jsonContent = preference["account_home"]
     home_tab = True
