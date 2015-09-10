@@ -320,8 +320,8 @@ class DatasetSearchIndexDAO():
         return self.TYPE
 
     def _get_id(self):
-        #return "%s::%s" % (self.TYPE.upper(),self.dataset_revision.dataset.guid)
-        return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
+        return "%s::%s" % (self.TYPE.upper(),self.dataset_revision.dataset.guid)
+        #return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
         # eliminado hasta que haya facets
