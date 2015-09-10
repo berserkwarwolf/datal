@@ -95,7 +95,8 @@ def export_to(datastream_id, request, output):
         if filter:
             query['pFilter0'] = unicode(filter).encode('utf-8')
 
-        return invoke(query, output)
+        command_factory = AbstractCommandFactory().create()
+        return command_factory.create("invoke", query).run()
 
 
 @xframe_options_exempt
@@ -133,7 +134,10 @@ def action_updategrid(request):
         query['pOrderBy'] = sortname
         query['pOrderType'] = {None: 'A', 'asc': 'A', 'desc': 'D'}[sortorder]
 
-    contents, mimetype = invoke(RequestProcessor(request).get_arguments_no_validation(query))
+    query = RequestProcessor(request).get_arguments_no_validation(query)    
+
+    command_factory = AbstractCommandFactory().create()
+    contents, mimetype = command_factory.create("invoke", query).run()
     if not contents:
         contents = {"rows": [], "total": 1, "page": 1}
         mimetype = "application/json"
