@@ -152,7 +152,7 @@ var dataTableView = Backbone.View.extend({
 
 		$(document).ready(function(){
 			
-			var otherHeights = parseFloat( $('.section-content').css('padding-top').split('px')[0] );
+			var otherHeights = 0;
 
 			self.parentView.setHeights('#id_datastreamResult .loading', otherHeights);
 
@@ -166,7 +166,7 @@ var dataTableView = Backbone.View.extend({
 
 	  $(document).ready(function(){
 
-	  	var otherHeights = parseFloat( $('.section-content').css('padding-top').split('px')[0] );
+	  	var otherHeights = 0;
 
 		  self.parentView.setHeights( '#id_datastreamResult .result table', otherHeights );
 
