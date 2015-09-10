@@ -57,6 +57,9 @@ var viewVisualizationView = Backbone.View.extend({
     },
     setLoading: function () {
         
+        var height = this.$el.find('#id_visualizationResult').height();
+
+        this.$el.find('#id_visualizationResult .loading').height(height);
     },
 
     setChartContainerSize:function(){
@@ -65,7 +68,8 @@ var viewVisualizationView = Backbone.View.extend({
             $window = $(window),
             $mainHeader = $('header.header'),
             $title = $('.main-section .section-title'),
-            $chartHeader = $('header.header');
+            $chartHeader = $('header.header'),
+            self = this;
 
         var handleResizeEnd = function () {
             //Calcula el alto de los headers
@@ -73,11 +77,12 @@ var viewVisualizationView = Backbone.View.extend({
                              + $title.outerHeight(true)
                              + $chartHeader.outerHeight(true);
             //Calucla el alto que deberá tener el contenedor del chart
-            var minHeight = $window.height() - otherHeights - 70;
+            var minHeight = $window.height() - otherHeights - 30;
             container.css({
                 height: minHeight + 'px'
             });
             chartInstance.render();
+            self.setLoading();
         }
 
         //Calcula el tamaño inicial

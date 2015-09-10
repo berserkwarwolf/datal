@@ -14,6 +14,7 @@ from workspace.manageDataviews.forms import *
 from workspace.templates import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.exceptions import DataStreamNotFoundException, DatasetNotFoundException
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
@@ -236,7 +237,11 @@ def create(request):
             if auth_manager.is_level('level_5'):
                 meta_data = Account.objects.get(pk=auth_manager.account_id).meta_data
 
-            dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            try:
+                dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            except DatasetRevision.DoesNotExist:
+                raise DatasetNotFoundException()
+
             end_point = dataset_revision.end_point
             type = dataset_revision.dataset.type
             impl_type = dataset_revision.impl_type

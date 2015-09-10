@@ -3,49 +3,46 @@
 
 <div class="sidebar">
 
-    <div class="col-xs-12">
-    
-        <div class="row">
-            <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
-            <p>{{visualization_revision.description|capfirst}}</p>
-        </div>
-    
-        <div class="row">
-            <div class="title">{% trans 'APP-CATEGORY-TEXT' %}</div>
-            <p>{{visualization_revision.category_name|capfirst}}</p>
-        </div>
-    
-        {% if visualization_revision.sources %} 
-        <div class="row">
-            <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
-            {% for source in visualization_revision.sources %}
-            <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}}</a></p>
-            {% endfor %}
-        </div>
-        {% endif %}
-    
-        {% if visualization_revision.tags %}
-        <div class="row">
-            <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
-            <div class="sourcesContent">
-            {% for tag in visualization_revision.tags %}
-                <div class="tag">
-                    <span class="tagInner clearfix">
-                        <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
-                    </span>
-                </div>
-            {% endfor %}
-            </div>
-        </div>
-        {% endif %}
-    
-        {% if visualization_revision.notes %}
-        <div class="row">
-            <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
-            <p>{{visualization_revision.notes|safe|urlize}}</p>
-        </div>
-        {% endif %}
-
+    <div class="row">
+        <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+        <p>{{visualization_revision.description|capfirst}}</p>
     </div>
+
+    <div class="row">
+        <div class="title">{% trans 'APP-CATEGORY-TEXT' %}</div>
+        <p>{{visualization_revision.category_name|capfirst}}</p>
+    </div>
+
+    {% if visualization_revision.sources %} 
+    <div class="row">
+        <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
+        {% for source in visualization_revision.sources %}
+        <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}}</a></p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% if visualization_revision.tags %}
+    <div class="row">
+        <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
+        <div class="sourcesContent">
+        {% for tag in visualization_revision.tags %}
+            <div class="tag">
+                <span class="tagInner clearfix">
+                    <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
+                </span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if visualization_revision.notes %}
+    <div class="row">
+        <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
+        <p>{{visualization_revision.notes|safe|urlize}}</p>
+    </div>
+    {% endif %}
+
 
 </div>

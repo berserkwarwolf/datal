@@ -19,23 +19,23 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	render: function() {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.setSidebarHeight();
+		//this.setSidebarHeight();
 		this.setContentHeight();
 		return this;
 	},
 
-	setSidebarHeight: function(){
+	// setSidebarHeight: function(){
 
-		var self = this;
+	// 	var self = this;
 
-		$(document).ready(function(){
+	// 	$(document).ready(function(){
 
-			var otherHeights = 0;
-			self.setHeights( '.sidebar-container .box', otherHeights );
+	// 		var otherHeights = 0;
+	// 		self.setHeights( '.sidebar-container .box', otherHeights );
 
-		});
+	// 	});
 
-	},
+	// },
 
 	setContentHeight: function(){
 
@@ -43,12 +43,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 		$(document).ready(function(){
 
-			var otherHeights = 
-			parseFloat( $('.detail-container header').height() )
-			+ parseFloat( $('.detail-container header').css('padding-top').split('px')[0] )
-			+ parseFloat( $('.detail-container header').css('padding-bottom').split('px')[0] )
-			+ parseFloat( $('.detail-container header').css('border-bottom-width').split('px')[0] )
-			+ 2;// Fix to perfection;
+			var otherHeights = 0;
 
 			self.setHeights( '.resources-table', otherHeights );
 
@@ -84,6 +79,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 			- parseFloat( otherHeight )
 			- $('.header').height()
 			- $('.main-section .section-title').height()
+			- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] )
 			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
 			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
 			- 20; // to set some space at the bottom

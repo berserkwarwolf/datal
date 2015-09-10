@@ -146,6 +146,9 @@ class Finder:
             if document['parameters']:
                 import json
                 parameters = json.loads(document['parameters'])
+            else:
+                parameters = []
+
         except:
             parameters = []
 
@@ -157,7 +160,7 @@ class Finder:
                              parameters=parameters, tags=[tag.strip() for tag in document['tags'].split(',')],
                              permalink=permalink,
                              type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
-                             ,end_point=document['end_point'], timestamp=document['timestamp'], owner_nick=document['owner_nick'])
+                             ,end_point=document.get('end_point', None), timestamp=document['timestamp'], owner_nick=document['owner_nick'])
         return visualization
 
     def get_dashboard_dictionary(self, document):
