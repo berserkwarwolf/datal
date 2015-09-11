@@ -3188,3 +3188,18 @@ msgstr "Palabras clave para ayudar a identificar el contenido de tu visualizaci�
 
 msgid "APP-INVERT-TEXT"
 msgstr "Invertir"
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "Este campo es requerido"
+
+msgid "APP-HOW-TO-SELECT-TITLE"
+msgstr "¿Cómo seleccionar?"
+
+msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
+msgstr "Seleccioná varias celdas de una columna o fila"
+
+msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
+msgstr "La columna completa"
+
+msgid "APP-HOW-TO-SELECT-ROW-TEXT"
+msgstr "O bien, la fila completa"
