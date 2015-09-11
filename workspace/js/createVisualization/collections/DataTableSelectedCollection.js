@@ -26,13 +26,18 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 	},
 
 	getSelectionChartStyle: function () {
-		var range_data = this.findWhere({name: 'range_data'});
-		var range_headers = this.findWhere({name: 'range_headers'});
-		var range_labels = this.findWhere({name: 'range_labels'});
+		var range_data = this.findWhere({name: 'range_data'}),
+			range_headers = this.findWhere({name: 'range_headers'}),
+			range_labels = this.findWhere({name: 'range_labels'}),
+			range_lat = this.findWhere({name: 'range_lat'}),
+			range_lon = this.findWhere({name: 'range_lon'});
+
 		return {
 			range_data: range_data ? range_data.get('selection') : undefined,
 			range_headers: range_headers ? range_headers.get('selection') : undefined,
-			range_labels: range_labels ? range_labels.get('selection') : undefined
+			range_labels: range_labels ? range_labels.get('selection') : undefined,
+			range_lat: range_lat ? range_lat.get('selection') : undefined,
+			range_lon: range_lon ? range_lon.get('selection') : undefined
 		}
 	}
 });

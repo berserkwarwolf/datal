@@ -67,8 +67,6 @@ charts.models.Chart = Backbone.Model.extend({
 
     },
     initialize: function () {
-        console.log(this.get('meta_sources'));
-        console.log(this.get('meta_tags'));
         this.data = new charts.models.ChartData({
             id: this.get('resourceID'),
             type: this.get('type')
@@ -111,6 +109,29 @@ charts.models.Chart = Backbone.Model.extend({
         .error(function(response){
             console.error('error en fetch');
         });
+    },
+
+    fetchMapPreviewData: function () {
+        var self = this;
+
+        var params = {
+                nullValueAction: self.get('nullValueAction'),
+                nullValuePreset:  self.get('nullValuePreset'),
+                data: self.get('range_data'),
+                lat: self.get('range_lat'),
+                lon: self.get('range_lon')
+            },
+            url = '/visualizations/preview/'+self.get('datastream_revision_id') + '/map';
+
+
+        return $.getJSON(url, params)
+            .then(function (response) {
+                console.log('map preview response', response);
+                // self.formatResponseData(response.series, response.values, response.labels);
+            })
+            .error(function(response){
+                console.error('error en fetch');
+            });
     },
 
     /**

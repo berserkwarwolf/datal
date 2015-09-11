@@ -44,8 +44,8 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        console.log('result of the selection to be posted to the API', this.collection.getSelectionChartStyle());
         var selection = this.collection.getSelectionChartStyle();
+        console.log('result of the selection to be posted to the API', selection);
         this.model.set(selection);
         this.close();
     },
@@ -79,7 +79,7 @@ var MapSelectDataModalView = ModalView.extend({
         if (_.isString(name)) {
           // When name is defined, the selection mode only allows setting selection to certain models
           // with fixed id (so that the color is stable)
-          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
+          names = {'range_lat': 1, 'range_lon': 2, 'range_data': 3};
           model = new DataTableSelectionModel(_.extend(selection, {
             id: names[name],
             name: name
