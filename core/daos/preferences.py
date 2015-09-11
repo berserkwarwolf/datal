@@ -15,7 +15,7 @@ class Preferences():
     
     def __init__(self, account_id):
         self.data = dict()
-        self.data['account_id'] = account_id
+        self.data['account.id'] = account_id
         self.memcached = settings.MEMCACHED_ENGINE_END_POINT
         self.engine_cache = False
         if self.memcached:
@@ -40,7 +40,7 @@ class Preferences():
                 # then try from database
                 try:
                     self.data[key] = Preference.objects.get_value_by_account_id_and_key(
-                        self.data['account_id'],
+                        self.data['account.id'],
                         key=key
                     )
                     if settings.DEBUG: logger.info('Get from DB %s=%s' % (key, self.data[key]))
@@ -52,7 +52,7 @@ class Preferences():
         return self.data[key]
 
     def load(self, keys):
-        preferences = Preference.objects.filter(key__in=keys, account_id=self.data['account_id']).values('key', 'value')
+        preferences = Preference.objects.filter(key__in=keys, account_id=self.data['account.id']).values('key', 'value')
         for preference in preferences:
             key = preference['key']
             self.data[key.replace('_', '.')] = preference['value']
@@ -69,7 +69,7 @@ class Preferences():
         self.data[key] = value
 
         if value:
-            pref, is_new = Preference.objects.get_or_create(account_id = self.data['account_id'], key = key, defaults={'value': value})
+            pref, is_new = Preference.objects.get_or_create(account_id = self.data['account.id'], key = key, defaults={'value': value})
             self.save_on_cache(str(key), value)
             if not is_new:
                 pref.value = value
@@ -77,7 +77,7 @@ class Preferences():
             return pref
         else:
             try:
-                Preference.objects.get(account_id = self.data['account_id'], key = key).delete()
+                Preference.objects.get(account_id = self.data['account.id'], key = key).delete()
             except Preference.DoesNotExist:
                 pass
             return None
@@ -89,7 +89,7 @@ class Preferences():
     def get_from_cache(self, key):
         key = key.replace('_', '.')
         if self.engine_cache:
-            key = 'preference_%s_%s' % (str(self.data['account_id']), key)
+            key = 'preference_%s_%s' % (str(self.data['account.id']), key)
             value = self.engine_cache.get(str(key))
             logger = logging.getLogger(__name__)
             if settings.DEBUG: logger.info('Get from cache %s=%s' % (key, value))
@@ -102,7 +102,7 @@ class Preferences():
         if self.engine_cache:
             logger = logging.getLogger(__name__)
             try:
-                key = 'preference_%s_%s' % (str(self.data['account_id']), key)
+                key = 'preference_%s_%s' % (str(self.data['account.id']), key)
                 self.engine_cache.set(key, value, settings.MEMCACHED_DEFAULT_TTL)    
                 if settings.DEBUG: logger.info('Save on cache %s=%s' % (key, value))
                 return True
