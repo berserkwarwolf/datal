@@ -384,6 +384,13 @@ body{background:$color-base;height:100%;min-width:998px;}
 
   .sourcesContent, 
   .tagsContent{padding-left:10px;display:inline-block;}
+
+  ol,
+  ul{padding-left:20px;}
+  ol li,
+  ul li{line-height:19px;}
+  ol li{list-style:inside;list-style-type:decimal;}
+  ul li{list-style:inside;list-style-type:disc;}
 }
 
 /* Section Content */
@@ -629,7 +636,16 @@ i.icon.TNCLIMA{}
 border-color: #ccc;}
 
 /* Rich text editor */
-.nicEdit-main{height:200px;outline:none;}
+.nicEdit-main{
+  height:200px;outline:none;
+
+    ol,
+    ul{padding-left:20px;}
+    ol li,
+    ul li{line-height:19px;}
+    ol li{list-style:inside;list-style-type:decimal;}
+    ul li{list-style:inside;list-style-type:disc;}
+}
 
 /* Hide default cancel button from backgrid-filter.js search input */
 .backgrid-filter input[type="search"]::-webkit-search-cancel-button{display:none;}
