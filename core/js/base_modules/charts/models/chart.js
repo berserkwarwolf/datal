@@ -104,7 +104,7 @@ charts.models.Chart = Backbone.Model.extend({
 
         return $.getJSON('/visualizations/preview', params)
         .then(function (response) {
-            self.formatResponseData(response.series, response.values, response.labels);
+            self.parseChartResponse(response.series, response.values, response.labels);
         })
         .error(function(response){
             console.error('error en fetch');
@@ -126,8 +126,7 @@ charts.models.Chart = Backbone.Model.extend({
 
         return $.getJSON(url, params)
             .then(function (response) {
-                console.log('map preview response', response);
-                // self.formatResponseData(response.series, response.values, response.labels);
+                self.parseMapResponse(response);
             })
             .error(function(response){
                 console.error('error en fetch');
@@ -140,7 +139,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @param  {array} values
      * @param  {array} labels
      */
-    formatResponseData: function (series, values, labels) {
+    parseChartResponse: function (series, values, labels) {
         var columns = [],
             fields =[];
 
@@ -161,6 +160,10 @@ charts.models.Chart = Backbone.Model.extend({
 
         this.data.set('fields', fields);
         this.data.set('rows', _.unzip(columns));
+    },
+
+    parseMapResponse: function (response) {
+        this.data.set(response);
     },
 
     onChangeType: function (model, type) {
@@ -194,7 +197,7 @@ charts.models.Chart = Backbone.Model.extend({
         if(this.get('type') == 'mapchart'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
-            this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
+            this.parseChartResponse(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
         }
 
         this.trigger('data_updated');
