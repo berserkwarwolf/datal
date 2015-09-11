@@ -3219,3 +3219,6 @@ msgstr "The entire column"
 
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "Or the entire row"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Choose a map"
