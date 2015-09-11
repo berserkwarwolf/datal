@@ -75,9 +75,3 @@ tomcat-service:
       - file: /var/lib/tomcat7/webapps/workspace/AgileOfficeServer/WEB-INF/conf/commons.xml
       - file: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer/WEB-INF/conf/commons.xml
       - file: /var/lib/tomcat7/conf/server.xml
-
-wait-for-tomcatmanager:
-  tomcat.wait:
-    - timeout: 300
-    - require:
-      - service: tomcat-service

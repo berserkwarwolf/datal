@@ -5,10 +5,6 @@ sass_install:
   gem.installed:
     - name: sass
 
-ensure_new_indextank:
-  file.absent:
-    - name: {{ pillar['virtualenv']['path'] }}/lib/python2.7/site-packages/indextank
-
 # Create static files directory
 {{ pillar['application']['statics_dir'] }}:
   file.directory:
