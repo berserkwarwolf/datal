@@ -1094,9 +1094,9 @@ var theme6View = Backbone.Epoxy.View.extend({
 	},
 
 	savePreference: function(event) {
-		var btn_id = $(event.currentTarget).attr("id")
+		var btn_id = $(event.currentTarget).attr("id");
 		var ob = {};
-		if (btn_id === 'id_save') {
+		if (btn_id === 'id_save' || btn_id === 'id_save_top') {
 			this.options.currentModel.attributes.config = this.model.toJSON();
 			this.options.currentModel.attributes.themeID = '6';
 			ob['config'] = this.options.currentModel.attributes.config;
@@ -1113,12 +1113,16 @@ var theme6View = Backbone.Epoxy.View.extend({
 				'jsonString': saferStringify(ob)
 			},
 			dataType: 'json',
-			beforeSend: function() {
+			beforeSend: function(xhr, settings) {
+
+				// call global beforeSend func
+				$.ajaxSettings.beforeSend(xhr, settings);
+
 				$("#ajax_loading_overlay").show();
 			},
 			success: function(response) {
 				$("#ajax_loading_overlay").hide();
-				if (btn_id === "id_save") {
+				if (btn_id === "id_save" || btn_id === 'id_save_top') {
 					$.gritter.add({
 						title: gettext('ADMIN-HOME-SECTION-SUCCESS-TITLE'),
 						text: gettext('ADMIN-HOME-SECTION-SUCCESS-TEXT'),
