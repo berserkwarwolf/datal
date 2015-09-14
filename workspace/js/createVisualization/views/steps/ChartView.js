@@ -36,6 +36,8 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
 
+		this.vizContent = this.$el.find('.visualizationContainer');
+
 		this.chartContent = this.$el.find('.chartContent');
 
 		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
@@ -75,6 +77,7 @@ var ChartView = StepViewSPA.extend({
 	onChangeData: function (model) {
 		if(this.selectDataBtn.hasClass('icon-add')){
 			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
+			this.vizContent.addClass('dataSelected');
 		}
 		console.log('the data for your chart has changed', model.toJSON());
 		// TODO: should call this.chartView.render();

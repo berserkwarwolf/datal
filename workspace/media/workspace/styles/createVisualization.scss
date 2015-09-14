@@ -113,6 +113,11 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
     .chart-preview-view{height:100%;}
   }
 
+  .visualizationContainer.dataSelected{cursor:default;
+    &:hover{border-color:$color-base-extra-light;}
+    &:hover .icon{background-color:#0066cc;}
+  }
+
   /* Contenedor de vista previa */
   .chartContent,
   .chartContentFinish,
