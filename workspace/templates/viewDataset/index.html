@@ -27,6 +27,9 @@
 {% endblock %}
 
 {% block sectionTitle %}
+
+{{ dataset }}
+
 <div class="context-menu clearfix"></div>
 {% endblock %}
 
@@ -67,6 +70,10 @@ $(document).ready(function(){
     title: "{{ dataset.title|capfirst }}",
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
     changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
+    lastPublishRevisionId: "{{ dataset.last_published_revision_id }}",
+    {% comment %}
+    unpublishUrl: "{% url 'manageDatasets.change_status' dataset.last_published_revision_id %}",
+    {% endcomment %}
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     publicUrl: "{{ dataset.public_url }}",
