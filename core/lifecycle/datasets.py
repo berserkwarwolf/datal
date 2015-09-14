@@ -28,7 +28,32 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
-        pass
+        """ Despublica la revision de un dataset """
+
+        if self.dataset_revision.status not in allowed_states:
+            raise IllegalStateException(
+                from_state=self.dataset_revision.status,
+                to_state=StatusChoices.DRAFT,
+                allowed_states=allowed_states
+            )
+
+        if killemall:
+            self._unpublish_all()
+        else:
+            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
+
+            if revcount == 1:
+                self._unpublish_all()
+            else:
+                self.dataset_revision.status = StatusChoices.DRAFT
+                self.dataset_revision.save()
+
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.remove()
+
+        self._update_last_revisions()
+
+        self._log_activity(ActionStreams.UNPUBLISH)
 
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
@@ -158,7 +183,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
         DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED)\
-            .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
+            .update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
