@@ -846,3 +846,6 @@ msgstr "Review"
 
 msgid "APP-VALID-PHONE-TEXT"
 msgstr "Specify a valid phone number"
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
+msgstr "The visualization has been deleted."

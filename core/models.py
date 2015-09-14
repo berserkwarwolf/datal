@@ -134,24 +134,17 @@ class Account(models.Model):
         return self.name
 
     def get_preference(self, key):
-        try:
-            return Preference.objects.values('value').get(account = self, key = key)['value']
-        except Preference.DoesNotExist:
-            return ''
-
+        """ use the preferences class with cache """
+        from core.daos.preferences import Preferences
+        p = Preferences(account_id=self.id)
+        return p[key]
+        
     def set_preference(self, key, value):
-        if value:
-            pref, is_new = Preference.objects.get_or_create(account = self, key = key, defaults={'value': value})
-            if not is_new:
-                pref.value = value
-                pref.save()
-            return pref
-        else:
-            try:
-                Preference.objects.get(account = self, key = key).delete()
-            except Preference.DoesNotExist:
-                pass
-            return None
+        """ use the preferences class with cache """
+        from core.daos.preferences import Preferences
+        p = Preferences(account_id=self.id)
+        p[key]=value
+        return p[key]
 
     def get_preferences(self):
         from core.daos.preferences import Preferences
