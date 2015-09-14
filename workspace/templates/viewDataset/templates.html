@@ -42,7 +42,7 @@
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
 				<% if(status != StatusChoices.UNPUBLISHED){ %>
-				<span class="row-actions" style="display:none;"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+				<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
 				<% } %>
 			{% endif %}
 
