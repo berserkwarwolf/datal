@@ -174,8 +174,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del datastream y la de todos sus visualization hijos en cascada """
 
-        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
-            id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
+        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED)\
+            .update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
