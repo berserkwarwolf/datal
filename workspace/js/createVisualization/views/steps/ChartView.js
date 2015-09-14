@@ -14,7 +14,8 @@ var ChartView = StepViewSPA.extend({
 			'keyup input#nullValuePreset': 	'onInputChanged',
 			
 			'change input[type=radio]': 	'onRadioChanged',
-			'change input[type=checkbox]': 	'onCheckboxChanged'
+			'change input[type=checkbox]': 	'onCheckboxChanged',
+			'click div.chartContent': 		'onChartContentClicked'
 
 		});
 
@@ -36,6 +37,8 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
 
 		this.chartContent = this.$el.find('.chartContent');
+
+		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
 
 		this.setupChart();
 	},
@@ -70,9 +73,18 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChangeData: function (model) {
+		if(this.selectDataBtn.hasClass('icon-add')){
+			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
+		}
 		console.log('the data for your chart has changed', model.toJSON());
 		// TODO: should call this.chartView.render();
 		this.renderChart();
+	},
+
+	onChartContentClicked: function(){
+		if(!this.chartInstance.chart){
+			this.chartSelectDataModalView.open();
+		}
 	},
 
 	onSelectDataClicked: function(){

@@ -233,7 +233,7 @@ var personalizeView = Backbone.View.extend({
 				type: 'POST',
 				data: {'jsonString': saferStringify(ob)}, 
 				dataType: 'json',
-				beforeSend: function(){
+				beforeSend: function(xhr, settings){
 
 					// call global beforeSend func
 					$.ajaxSettings.beforeSend(xhr, settings);
