@@ -5,7 +5,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import ugettext
 from core.auth import forms
 from core.auth.decorators import login_required
-from core.helpers import gravatar_url
+from core.http import gravatar_url
 from core.models import *
 import urlparse
 import json

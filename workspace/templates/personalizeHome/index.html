@@ -42,21 +42,25 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+<div class="context-menu clearfix">
+    <div class="col-xs-6">
+        <h1>{% trans "ADMIN-HOME-TITLE" %}</h1>
+    </div>
+    <div class="col-xs-6 context-buttons clearfix">
+    	<a id="id_save_top" title="{% trans 'APP-SAVE-TEXT' %}" class="button primary FR">{% trans 'APP-SAVE-TEXT' %}</a>
+    	<a id="id_preview_top" title="{% trans 'APP-PREVIEW-TEXT' %}" class="button FR">{% trans 'APP-PREVIEW-TEXT' %}</a>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
+
 <!-- Tabs -->
 {% include "admin_manager/tabs.html" %}
 
 <!-- Personalize Home -->
-<div class="personalizeHome" id="id_personalizeHome">
+<div class="personalizeHome col-xs-12" id="id_personalizeHome">
 	<div class="formContainer">
-
-	<!-- Title -->
-	<header class="titleConteiner">
-		<h3>{% trans "ADMIN-HOME-TITLE" %}</h3>
-	</header>
 
 	<!-- Themes Tabs -->
 	<div class="columns">
@@ -220,8 +224,8 @@
 
   <section class="formContainer">
   <div class="buttons center">
-    <a id="id_preview" title="{% trans 'APP-PREVIEW-TEXT' %}" class="button small primary">{% trans 'APP-PREVIEW-TEXT' %}</a>
-    <a id="id_save" title="{% trans 'APP-SAVE-TEXT' %}" class="button small primary">{% trans 'APP-SAVE-TEXT' %}</a>
+    <a id="id_preview" title="{% trans 'APP-PREVIEW-TEXT' %}" class="button">{% trans 'APP-PREVIEW-TEXT' %}</a>
+    <a id="id_save" title="{% trans 'APP-SAVE-TEXT' %}" class="button primary">{% trans 'APP-SAVE-TEXT' %}</a>
   </div>
   </section>
 

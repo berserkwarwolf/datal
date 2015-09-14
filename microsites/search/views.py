@@ -6,14 +6,14 @@ from core.models import Category
 from microsites.search import forms
 from microsites.managers import *
 
-def action_browse(request, category_slug=None, page = 1):
-    account     = request.account
+
+def action_browse(request, category_slug=None, page=1):
+    account = request.account
     preferences = request.preferences
-    category    = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
+    category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
 
     try:
-        results, search_time, facets = FinderManager().search(category_id = category['id']
-                                                              , account_id = account.id)
+        results, search_time, facets = FinderManager().search(category_id=category['id'], account_id=account.id)
     except InvalidPage:
         raise Http404
 
@@ -23,15 +23,15 @@ def action_browse(request, category_slug=None, page = 1):
     return render_to_response('search/search.html', locals())
 
 
-def do_search(request, category_filters = None, datasets = None):
+def do_search(request, category_filters=None, datasets=None):
     account = request.account
     preferences = request.preferences
     form = forms.SearchForm(request.GET)
 
     if form.is_valid():
-        query       = form.get_query()
-        page        = form.cleaned_data.get('page')
-        order       = form.cleaned_data.get('order')
+        query = form.get_query()
+        page = form.cleaned_data.get('page')
+        order = form.cleaned_data.get('order')
 
         featured_accounts = account.account_set.values('id').all()
         if featured_accounts:
@@ -40,14 +40,14 @@ def do_search(request, category_filters = None, datasets = None):
             accounts_ids = account.id
 
         try:
-            resources = ["ds", "db", "chart", "dt"]
-            results, search_time, facets = FinderManager().search(query = query
-                                                                  , account_id = accounts_ids
-                                                                  , category_filters = category_filters
-                                                                  , order = order 
-                                                                  , resource = resources)
+            resources = ["ds", "db", "vz", "dt"]
+            results, search_time, facets = FinderManager().search(
+                query=query, account_id=accounts_ids, category_filters=category_filters, order=order,
+                resource=resources
+            )
         except InvalidPage:
             raise Http404
+
 
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
         page_results = paginator.page(page).object_list
@@ -64,8 +64,6 @@ def action_search(request):
 def action_search_by_query_and_category(request, category):
     try:
         datasets = request.GET.get("datasets", None)
-        return do_search(request,
-                         category_filters=[category],
-                         datasets=datasets)
+        return do_search(request, category_filters=[category], datasets=datasets)
     except:
         return do_search(request)

@@ -3,7 +3,7 @@ from django.db.models import F, Max
 from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
-from core.choices import ActionStreams
+from core.choices import ActionStreams, StatusChoices
 from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
@@ -21,8 +21,14 @@ REJECT_ALLOWED_STATES = [StatusChoices.PENDING_REVIEW]
 REMOVE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED ]
 EDIT_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
 
+logger = logging.getLogger(__name__)
+
+
 class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
+
+    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
+        pass
 
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
@@ -100,8 +106,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def publish(self, allowed_states=PUBLISH_ALLOWED_STATES):
         """ Publica una revision de dataset """
+        logger.info('[LifeCycle - Dataset - Publish] Publico Rev. {}.'.format(self.dataset_revision.id))
 
         if self.dataset_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.dataset_revision.id, self.dataset_revision.status
+            ))
             raise IllegalStateException(
                                     from_state=self.dataset_revision.status,
                                     to_state=StatusChoices.PUBLISHED,
@@ -125,10 +135,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
 
         with transaction.atomic():
-            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(dataset=self.dataset.id,
-                                                                                id=F('datastream__last_revision__id'))
+            datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
+                dataset=self.dataset.id,
+                id=F('datastream__last_revision__id')
+            )
             publish_fail = list()
             for datastream_revision in datastream_revisions:
+                logger.info('[LifeCycle - Dataset - Publish Childs] Dataset {} Publico Datastream Rev. hijo {}.'.format(
+                    self.dataset.id, datastream_revision.id
+                ))
                 try:
                     DatastreamLifeCycleManager(user=self.user, datastream_revision_id=datastream_revision.id).publish(
                         allowed_states=[StatusChoices.APPROVED], parent_status=StatusChoices.PUBLISHED
@@ -138,33 +153,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)
-
-    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
-        """ Despublica la revision de un dataset """
-
-        if self.dataset_revision.status not in allowed_states:
-            raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.DRAFT,
-                                    allowed_states=allowed_states)
-
-        if killemall:
-            self._unpublish_all()
-        else:
-            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
-
-            if revcount == 1:
-                self._unpublish_all()
-            else:
-                self.dataset_revision.status = StatusChoices.DRAFT
-                self.dataset_revision.save()
-
-        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
-        search_dao.remove()
-
-        self._update_last_revisions()
-
-        self._log_activity(ActionStreams.UNPUBLISH)
 
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
@@ -185,30 +173,32 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
-
         if self.dataset_revision.status not in allowed_states:
+            logger.info('[LifeCycle - Dataset - Send to review] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.dataset_revision.id, self.dataset_revision.status
+            ))
             raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.PENDING_REVIEW,
-                                    allowed_states=allowed_states)
-
+                from_state=self.dataset_revision.status,
+                to_state=StatusChoices.PENDING_REVIEW,
+                allowed_states=allowed_states
+            )
         self._send_childs_to_review()
 
         self.dataset_revision.status = StatusChoices.PENDING_REVIEW
         self.dataset_revision.save()
+        self._log_activity(ActionStreams.REVIEW)
 
     def _send_childs_to_review(self):
         """ Envia a revision todos los datastreams hijos en cascada """
-
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
+            datastreams_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_revision__id'),
                 status=StatusChoices.DRAFT
             )
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).send_to_review()
+            for datastream_revision in datastreams_revisions:
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).send_to_review()
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):
         """ accept a dataset revision """
@@ -221,6 +211,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             self.dataset_revision.status = StatusChoices.APPROVED
             self.dataset_revision.save()
+            self._log_activity(ActionStreams.ACCEPT)
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a dataset revision """
@@ -233,6 +224,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = StatusChoices.DRAFT
         self.dataset_revision.save()
+        self._log_activity(ActionStreams.REJECT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
@@ -286,10 +278,17 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             form_status = int(fields.pop('status', None))
 
         if old_status not in allowed_states:
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
+                self.dataset_revision.id, old_status
+            ))
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Queda en estado ACEPTADO.'.format(
+                    self.dataset_revision.id, old_status
+                ))
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
+
         file_data = fields.get('file_data', None)
         if file_data is not None:
             fields['file_size'] = file_data.size
@@ -299,16 +298,29 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             changed_fields += ['file_size', 'file_name', 'end_point']
 
         if old_status == StatusChoices.PUBLISHED:
-            self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
-            )
-            self._move_childs_to_draft()
-
             if form_status == StatusChoices.DRAFT:
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
+                    self.dataset_revision.id
+                ))
                 self.unpublish()
             else:
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Creo nueva revision por estar PUBLISHED.'.format(
+                    self.dataset_revision.id
+                ))
+                self.dataset, self.dataset_revision = DatasetDBDAO().create(
+                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
+                )
+                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
+                    self.dataset_revision.id
+                ))
+                self._move_childs_to_draft()
+
                 self._update_last_revisions()
         else:
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Actualizo sin crear nueva revision por su estado {}.'.format(
+                self.dataset_revision.id, old_status
+            ))
+
             # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision,
@@ -320,8 +332,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if form_status == StatusChoices.PUBLISHED:
                 # Intento publicar, si falla, queda aceptado
                 try:
+                    logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
+                        self.dataset_revision.id
+                    ))
                     self.publish()
                 except:
+                    logger.info('[LifeCycle - Dataset - Edit] Rev. {} Fallo la publicacion. Revision queda como ACEPTADA.'.format(
+                        self.dataset_revision.id
+                    ))
                     self.accept()
                     raise
 

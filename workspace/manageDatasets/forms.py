@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import logging
+import logging, urllib2
 
 from django import forms
 from django.forms.formsets import formset_factory
@@ -337,12 +337,13 @@ class FileForm(DatasetForm):
             'data-bind':'value:file_data,events:[\'keyup\']',
             'tabindex':0,
             'data-other':'#id_file_name',
-            'autofocus':'autofocus'
+            'autofocus':'autofocus',
+            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
         })
     )
 
     def clean(self):
-        if 'file_data' in self.cleaned_data.keys():
+        if 'file_data' in self.cleaned_data.keys() and self.cleaned_data['file_data']:
             if self.cleaned_data['file_data'].content_type in ['image/jpeg', 'application/zip',
                                                                'application/x-rar']:
                  raise FileTypeNotValidException()
@@ -397,5 +398,37 @@ class LoadForm(forms.Form):
     tableid = forms.CharField(required=False)
 
 
+class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
+    def http_error_301(self, req, fp, code, msg, headers):
+        result = urllib2.HTTPRedirectHandler.http_error_301(
+            self, req, fp, code, msg, headers)
+        result.status = code
+        return result
+
+    def http_error_302(self, req, fp, code, msg, headers):
+        result = urllib2.HTTPRedirectHandler.http_error_302(
+            self, req, fp, code, msg, headers)
+        result.status = code
+        return result
+
 class MimeTypeForm(forms.Form):
     url = forms.CharField(required=True)
+
+    def get_mimetype(self, url):
+        try:
+            request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
+            connection = urllib2.urlopen(request)
+            mimetype = connection.info().getheader('Content-Type').strip().replace('"', '')
+            try:
+                opener = urllib2.build_opener(SmartRedirectHandler())
+                f = opener.open(url)
+                status = f.status
+                url = f.url
+            except:
+                status = 200
+                url = url
+        except:
+            mimetype = ''
+            status = ''
+
+        return (mimetype, status, url)

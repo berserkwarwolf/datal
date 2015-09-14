@@ -49,9 +49,6 @@
 <script type="text/javascript">
   google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 </script>
-{% if preferences.account_pivottable %}
-  <script type="text/javascript" src="/js_core/libs/flexmonster/flexmonster.js"></script>
-{% endif %}
 
 <!-- JS JUNAR -->
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -119,7 +116,7 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var dataStreaModel = new dataStream({
-    id: "{{datastream.datastreamrevision_id}}",
+    id: "{{datastream.datastream_revision_id}}",
     datastream_id: "{{datastream.datastream_id}}",
     title: "{{datastream.title}}",
     description: "{{datastream.description|escapejs}}",
@@ -133,16 +130,8 @@ $(document).ready(function(){
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
-    exportCSVURL: "{% url "datastream_manager.action_csv" datastream.datastream_id datastream.slug %}",
-    exportXLSURL: "{% url "datastream_manager.action_xls" datastream.datastream_id datastream.slug %}",
-    {% if preferences.account_pivottable %}
-    pivotTablePath: "{{base_uri}}/js_core/libs/flexmonster/",
-    pivotTableConfig: "{{base_uri}}{% url "microsites.datastream_manager.views.action_flexmonster" id=id slug=slug%}",
-
-    /* maybe you'll fine many ways to do the same '*/
-    pivotTableLicense: "{{preferences.account_pivottable|linebreaksbr|replacetext:'<br />|'}}",
-    pivotTableDataSource: "{{base_uri}}{% url "core.datastream_manager.views.action_csv" id=id slug=slug%}"
-     {% endif %}
+    exportCSVURL: "{% url "datastream_manager.csv" datastream.datastream_id 'la' %}",
+    exportXLSURL: "{% url "datastream_manager.xls" datastream.datastream_id 'la' %}",
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 

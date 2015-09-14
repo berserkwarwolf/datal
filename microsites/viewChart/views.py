@@ -4,16 +4,40 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
-from core.docs import VZ, DS
+from core.daos.datastreams import DataStreamDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 from core.engine import invoke, invoke_chart
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.reports_manager.helpers import create_report
 from microsites.viewChart import forms
-from microsites.helpers import set_dataset_impl_type_nice
+from core.utils import set_dataset_impl_type_nice
+from core.daos.visualizations import VisualizationHitsDAO
+from django.template import loader, Context
+
 import urllib
 import json
-import logging
+
+
+def hits_stats(request, vz_id, channel_type=None):
+    """
+    hits stats for chart visualization
+    """
+
+    try:
+        vz = Visualization.objects.get(pk=int(vz_id))
+    except Visualization.DoesNotExist:
+        raise Http404
+
+
+    dao=VisualizationHitsDAO(vz)
+    hits=dao.count_by_days(30, channel_type)
+
+    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
+
+
+    t = loader.get_template('viewChart/hits_stats.json') 
+    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
+    return HttpResponse(t.render(c), content_type="application/json")
 
 def action_view(request, id, slug):
     """
@@ -37,16 +61,23 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id    = VisualizationRevision.objects.get_last_published_id(id)
-        visualization_revision      = VZ(visualizationrevision_id, preferences['account_language'])
+        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
+        visualization_revision = VisualizationDBDAO().get(
+            preferences['account_language'],
+            visualization_revision_id=visualizationrevision_id
+        )
+
         # verify if this account is the owner of this viz
-        vis = Visualization.objects.get(pk=id)
-        if account.id != vis.user.account.id:
+        visualization = Visualization.objects.get(pk=id)
+        if account.id != visualization.user.account.id:
             raise Http404
 
         #for datastream sidebar functions (downloads and others)
-        datastream = DS(visualization_revision.datastreamrevision_id, preferences['account_language'])
-        impl_type_nice = set_dataset_impl_type_nice(datastream.impl_type).replace('/',' ')
+        datastream = DataStreamDBDAO().get(
+            preferences['account_language'],
+            datastream_revision_id=visualization_revision["datastream_revision_id"]
+        )
+        impl_type_nice = set_dataset_impl_type_nice(datastream["impl_type"]).replace('/', ' ')
     except VisualizationRevision.DoesNotExist:
         return HttpResponse("Viz-Rev doesn't exist!")  # TODO
     else:
@@ -57,76 +88,71 @@ def action_view(request, id, slug):
         chartHeight = chartSizes["embed"]["height"]
         url_query = "width=%d&height=%d" % (chartWidth, chartHeight)
 
-        can_download    = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-        can_export      = True
-        can_share       = False
+        can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
+        can_export = True
+        can_share = False
 
-        create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+        # VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
 
-        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
 
-        chart_type = json.loads(visualization_revision.impl_details).get('format').get('type')
-
-        try:
-            if chart_type != "mapchart":
-                visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-                result, content_type = invoke(visualization_revision_parameters)
-                #logger = logging.getLogger(__name__)
-                #logger.debug(result)
-
-            else:
-                join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
-                #visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
-                #visualization_revision_parameters['pLimit'] = 1000
-                #visualization_revision_parameters['pPage'] = 0
-                # mapCharts are loaded by ajax after
-                # result, content_type = invoke_chart(visualization_revision_parameters)
-        except:
-            result = '{fType="ERROR"}'
+        chart_type = json.loads(visualization_revision["impl_details"]).get('format').get('type')
 
         visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
         return render_to_response('viewChart/index.html', locals())
+
 
 @xframe_options_exempt
 def action_embed(request, guid):
     """
     Show an embed microsite view
     """
-    account     = request.account
+    account = request.account
     preferences = request.preferences
     base_uri = 'http://' + preferences['account_domain']
 
     try:
         visualizationrevision_id = VisualizationRevision.objects.get_last_published_by_guid(guid)
-        visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
+        visualization_revision = VisualizationDBDAO().get(
+            preferences['account_language'],
+            visualization_revision_id=visualizationrevision_id
+        )
 
-        datastream = DS(visualization_revision.datastreamrevision_id, preferences['account_language'])
+        datastream = DataStreamDBDAO().get(
+            preferences['account_language'],
+            datastream_revision_id=visualization_revision["datastream_revision_id"]
+        )
     except:
         return render_to_response('viewChart/embed404.html',{'settings': settings, 'request' : request})
 
-    create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
-    width     = request.REQUEST.get('width', False) # TODO get default value from somewhere
-    height    = request.REQUEST.get('height', False) # TODO get default value from somewhere
+    # VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+    width = request.REQUEST.get('width', False) # TODO get default value from somewhere
+    height = request.REQUEST.get('height', False) # TODO get default value from somewhere
 
-    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
-    visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
+    visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
     json, type = invoke(visualization_revision_parameters)
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
+
 
 def action_invoke(request):
     form = forms.RequestForm(request.GET)
     if form.is_valid():
         preferences = request.preferences
         try:
-            visualizationrevision_id    = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision      = VZ(visualizationrevision_id, preferences['account_language'])
+            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
+            visualization_revision = VisualizationDBDAO().get(
+                preferences['account_language'],
+                visualization_revision_id=visualizationrevision_id
+
+            )
         except VisualizationRevision.DoesNotExist:
             return HttpResponse("Viz doesn't exist!") # TODO
         else:
-            query        = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+            query = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
             query['pId'] = visualizationrevision_id
 
             zoom = form.cleaned_data.get('zoom')

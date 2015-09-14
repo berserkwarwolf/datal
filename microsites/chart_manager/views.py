@@ -1,17 +1,19 @@
+import json
+import urllib
+
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.views.decorators.clickjacking import xframe_options_exempt
+
 from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
-from core.docs import VZ
 from core.engine import invoke, invoke_chart
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.reports_manager.helpers import create_report
+from core.daos.visualizations import VisualizationHitsDAO, VisualizationDBDAO
 from microsites.chart_manager import forms
-import urllib
-import json
+
 
 def action_view(request, id, slug):
     
@@ -33,16 +35,16 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id    = VisualizationRevision.objects.get_last_published_id(id)
-        visualization_revision      = VZ(visualizationrevision_id, preferences['account_language'])
+        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
+        visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
     except VisualizationRevision.DoesNotExist:
         raise Http404
     else:
-        can_download    = preferences['account_dataset_download'] == 'on'
-        can_export      = True
-        can_share       = False
+        can_download = True
+        can_export = True
+        can_share = False
         
-        create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters) 
         
@@ -79,7 +81,7 @@ def action_embed(request, guid):
     except:
         return render_to_response('chart_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    create_report(visualization_revision.visualization_id, VisualizationHits, ChannelTypes.WEB)
+    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
     width     = request.REQUEST.get('width', False)
     height    = request.REQUEST.get('height', False)
 
@@ -125,5 +127,5 @@ def action_invoke(request):
     
             return HttpResponse(result, mimetype=content_type)
     else:
-        return HttpResponse('Error!') 
-    
+        return HttpResponse('Error!')
+

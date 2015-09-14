@@ -2,129 +2,394 @@
 
 {# Edit - Add New Source #}
 <script type="text/template" id="id_AddNewSourceTemplate">
-  <div class="FL">  
-    <div class="nolabel">
-      <div class="insetFormTitle">{% trans 'APP-ADDNEW-TEXT' %}</div>
-    </div>
+	<div class="FL">  
+		<div class="nolabel">
+			<div class="insetFormTitle">{% trans 'APP-ADDNEW-TEXT' %}</div>
+		</div>
 
-    <div class="row clearfix">
-      <label for="id_name"></label>
-      <input type="text" name="name" id="id_name" placeholder="{% trans 'APP-NAME-TEXT' %}">
-    </div>
+		<div class="row clearfix">
+			<label for="id_name"></label>
+			<input type="text" name="name" id="id_name" placeholder="{% trans 'APP-NAME-TEXT' %}">
+		</div>
 
-    <div class="row clearfix">
-      <label for="id_url"></label>
-      <input type="text" name="url" id="id_url" placeholder="{% trans 'APP-URL-TEXT' %}">
-    </div>
+		<div class="row clearfix">
+			<label for="id_url"></label>
+			<input type="text" name="url" id="id_url" placeholder="{% trans 'APP-URL-TEXT' %}">
+		</div>
 
-    <div class="row clearfix">
-      <a title="{% trans 'APP-ADD-TEXT' %}" class="button black small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
-    </div>
-  </div>
+		<div class="row clearfix">
+			<a title="{% trans 'APP-ADD-TEXT' %}" class="button small nolabel FL" id="id_addNewSourceButton">{% trans 'APP-ADD-TEXT' %}</a>
+		</div>
+	</div>
 </script>
 
 {# Edit - Add Source #}
 <script type="text/template" id="id_AddSourceTemplate">
-  <label for="id_source_name">{% trans 'APP-SOURCES-TEXT' %}</label>
-  <input type="text" name="source_name" id="id_source_name" tabindex="0">
-  <p class="tip">{% trans 'EDITDS-SOURCE-TIP1' %} <a id="id_addSourceButton" tabindex="-1">{% trans 'EDITDS-SOURCE-TIP2' %}</a></p>
+	<label for="id_source_name">{% trans 'APP-SOURCES-TEXT' %}</label>
+	<input type="text" name="source_name" id="id_source_name" tabindex="0">
+	<p class="tip">{% trans 'EDITDS-SOURCE-TIP1' %} <a id="id_addSourceButton" tabindex="-1">{% trans 'EDITDS-SOURCE-TIP2' %}</a></p>
 </script>
 
 {# Edit - Add Tag #}
 <script type="text/template" id="id_AddTagTemplate">
-  <label for="id_tag_name">{% trans 'APP-TAGS-TEXT' %}</label>
-  <input type="text" name="tag_name" id="id_tag_name" tabindex="0">
-  <p class="tip">{% trans 'OVEDITDS-TAGS-TIP' %}</p>
+	<label for="id_tag_name">{% trans 'APP-TAGS-TEXT' %}</label>
+	<input type="text" name="tag_name" id="id_tag_name" tabindex="0">
+	<p class="tip">{% trans 'OVEDITDS-TAGS-TIP' %}</p>
 </script>
 
 {# Edit - Tag #}
 <script type="text/template" id="id_TagTemplate">
-  <span class="tagInner clearfix">
-    <span class="tagTxt"><%= name %></span>
-    <a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
-  </span>
+	<span class="tagInner clearfix">
+		<span class="tagTxt"><%= name %></span>
+		<a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
+	</span>
 </script>
 
 {# Edit - Tag #}
 <script type="text/template" id="id_editTemplate">
-  <form>
-         <div class="ov-content">
-            <div class="col-1">
-             <fieldset>
+	<form novalidate>
+				 <div class="ov-content">
+						<div class="col-1">
+						 <fieldset>
 
-               {# title #}
-               <div class="row clearfix">
-                  <label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
-                  <input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
-                  <span class="required">*</span>
-               </div>
+							 {# title #}
+							 <div class="row clearfix">
+									<label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
+									<input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
+									<span class="required">*</span>
+							 </div>
 
-               {# description #}
-               <div class="row clearfix">
-                  <label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
-                  <input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
-                  <span class="required">*</span>
-               </div>
+							 {# description #}
+							 <div class="row clearfix">
+									<label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
+									<input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
+									<span class="required">*</span>
+							 </div>
 
-               {# category #}
-               <div class="row clearfix">
-                  <label for="id_datastream_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
-                  <select name="category" id="id_datastream_category" data-bind="value:category,options:allCategories" tabindex="0">
-                  </select>
-                  <span class="required">*</span>
-               </div>
+							 {# category #}
+							 <div class="row clearfix divider">
+									<label for="id_datastream_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
+									<select name="category" id="id_datastream_category" data-bind="value:category,options:allCategories" tabindex="0">
+									</select>
+							 </div>
 
-               {# status #}
-               <div class="row clearfix divider">
-                  <label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
-                  <select name="status" class="FL" id="id_datastream_status" data-bind="value:status,options:allStatus">
-                  </select>
-                  <span class="required">*</span>
-               </div>
+							 {# status #}
+							 <div class="row clearfix divider" style="display:none;">
+									<label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
+									<select name="status" class="FL" id="id_datastream_status" data-bind="value:status,options:allStatus">
+									</select>
+									<span class="required">*</span>
+							 </div>
 
-               
+							 {# Sources #}
+							 <div class="row clearfix">
+									<div id="sourceForm">
+										 <div id="addSource"></div>
+										 <div class="sourcesContent"></div>
+										 <div id="addNewSource"></div>
+									</div>
+							 </div>
 
-               {# Sources #}
-               <div class="row clearfix">
-                  <div id="sourceForm">
-                     <div id="addSource"></div>
-                     <div class="sourcesContent"></div>
-                     <div id="addNewSource"></div>
-                  </div>
-               </div>
+							 {# Tags #}
+							 <div class="row clearfix">
+									<div id="tagForm">
+										 <div id="addTag"></div>
+										 <div class="tagsContent"></div>
+									</div>
+							 </div>
 
-               {# Tags #}
-               <div class="row clearfix">
-                  <div id="tagForm">
-                     <div id="addTag"></div>
-                     <div class="tagsContent"></div>
-                  </div>
-               </div>
+						 </fieldset>
+						</div>
 
-             </fieldset>
-            </div>
+						<div class="col-2 col-border">
+						 <fieldset>
+							 {# Notes #}
+							 <div class="row clearfix">
+									<label for="id_notes">{% trans 'APP-NOTES-TEXT' %}</label>
+							 </div>
+							 <div class="row clearfix">
+									<div class="textarea clearfix FL">
+										 <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
+									</div>
+							 </div>
+						 </fieldset>
+						</div>
+				 </div>
 
-            <div class="col-2 col-border">
-             <fieldset>
-               {# Notes #}
-               <div class="row clearfix">
-                  <label for="id_notes">{% trans 'APP-NOTES-TEXT' %}</label>
-               </div>
-               <div class="row clearfix">
-                  <div class="textarea clearfix FL">
-                     <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
-                  </div>
-               </div>
-             </fieldset>
-            </div>
-         </div>
+				 <div class="ov-bottom">
+						<div class="ov-buttons">
+							 <a id="id_edit_cancel" class="cancel button" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
+							 <a id="id_edit_save" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
+						</div>
+				 </div>
 
-         <div class="ov-bottom">
-            <div class="ov-buttons">
-               <a id="id_edit_save" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}">{% trans 'APP-SAVE-TEXT' %}</a>
-               <a id="id_edit_cancel" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
-            </div>
-         </div>
+			</form>
+</script>
 
-      </form>
+{# Context Menu #}
+<script type="text/template" id="context-menu-template">
+	
+	<!-- Column Left -->
+	<div class="col-xs-7">    
+		
+		<h1>
+
+		<%= title %>
+		
+		{% if datastream.parameters %}
+			<span class="parameters">
+				(
+				{% for parameter in datastream.parameters %}
+					{{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-PARAM-TEXT' %}">{{parameter.value}}</a> {% if not forloop.last %}, {%endif%}
+				{%endfor%}
+				)
+			</span>
+		{%endif%}
+
+		</h1>
+
+		<div class="status-row clearfix">
+
+			<span class="status">
+
+				<% if(status == StatusChoices.PUBLISHED){ %> 
+					<span class="icon icon-inline icon-published"></span>
+				<% } %>
+
+				<em id="id_status" class="<% if(status == StatusChoices.REJECTED){ %> red <% }else if(status == StatusChoices.APPROVED){ %> green <% } %>"><%= status_str %></em>
+
+			</span>
+
+			<span class="publish-version">
+
+				<% if(publicUrl != ''){ %> 
+
+					<% if(status != StatusChoices.PUBLISHED){ %> 
+						{% trans 'APP-LASTPUBLISHDATE-TEXT' %}
+					<% } %>
+
+					<%= lastPublishDate %>, 
+
+					<a href="<%= publicUrl %>" class="link black" title="{% trans 'APP-VIEWONSITE-TEXT' %}" target="_blank">{% trans 'APP-VIEWONSITE-TEXT' %}<span class="icon icon-inline icon-new-tab icon-right"></span></a>
+
+				<% }else{ %>
+
+					<%= createdAt %>
+
+				<% } %>
+
+			</span>
+
+			{% if auth_manager.is_publisher or auth_manager.is_admin %}
+				<% if(status != StatusChoices.UNPUBLISHED){ %>
+				<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+				<% } %>
+			{% endif %}
+
+
+		</div>
+
+	</div>
+
+	<!-- Column Right -->
+	<div class="col-xs-5 context-buttons clearfix">
+
+		<% if( status != StatusChoices.REJECTED ){ %>
+
+			{% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+				<% if( status == StatusChoices.PENDING_REVIEW || status == StatusChoices.UNDER_REVIEW ){ %>
+
+					<!-- Accept -->
+					<a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
+					
+					<!-- Reject -->
+					<a id="id_reject" class="button red FR" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
+
+				<% }else{ %>
+
+					<!-- Main Action - Create Viz -->
+					<a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+
+					<% if(status != StatusChoices.PUBLISHED){ %>
+
+						<!-- Secondary Action - Publish -->
+						<a id="id_publish" class="button FR" title="{% trans 'APP-PUBLISH-TEXT' %}" data-action="publish">{% trans 'APP-PUBLISH-TEXT' %}</a>
+
+					<% } %>
+
+				<% } %>
+
+			{% elif auth_manager.is_editor %}
+
+				<!-- Main Action - Create Viz -->
+				<a id="id_create" class="button primary FR" href="<%= createVizUrl %>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+
+				<% if( status == StatusChoices.DRAFT  ){ %>
+
+					<!-- Secondary Action - Send to review -->
+					<a id="id_sendToReview" class="button FR" title="{% trans 'APP-SENDTOREVIEW-TEXT' %}" data-action="review">{% trans 'APP-SENDTOREVIEW-TEXT' %}</a>
+
+				<% } %>
+
+			{% endif %}
+
+		<% } %> 
+
+		<% if(status != StatusChoices.PENDING_REVIEW || status != StatusChoices.UNDER_REVIEW){ %>
+
+			<!-- More Actions -->    
+			<div class="more-actions button-pulldown FR">
+				<div class="button more-button">
+					<span class="icon icon-more"></span>
+				</div>
+				<ul class="dropdown" style="display:none;">
+					<li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+					<li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
+				</ul>
+			</div>   
+
+		<% } %>
+
+		{% comment %}
+		
+		<% if( status == StatusChoices.REJECTED ){ %>
+
+			{% if auth_manager.is_publisher or auth_manager.is_admin %}
+
+				<a id="id_sendRejectedNote" class="button alpha FR" title="{% trans 'APP-SENDREJECTEDNOTE-TEXT' %}">{% trans 'APP-SENDREJECTEDNOTE-TEXT' %}</a> 
+
+			{% elif auth_manager.is_editor %}
+
+				<a id="id_viewRejectedNote" class="button alpha FR" title="{% trans 'APP-VIEWREJECTEDNOTE-TEXT' %}">{% trans 'APP-VIEWREJECTEDNOTE-TEXT' %}</a>
+
+			{% endif %}
+
+		<% } %> 
+
+		{% endcomment %}
+
+	</div>
+</script>
+
+{# Data Table #}
+<script type="text/html" id="id_dataTableTemplate">
+<%
+// If Number, Text, Link or Null
+if(result.fType != 'ARRAY'){
+	var value = '';
+	switch(result.fType ){
+		case "TEXT":
+			var str = String(result.fStr);
+			str = str.replace(/(<([^>]+)>)/ig," ");
+			value = '<table class="text"><tr><td>' + str + '</td></tr></table>';
+			break;
+		case "DATE":
+			value = '<table class="number"><tr><td></td></tr></table>';
+			break;
+		case "NUMBER":
+			var format = result.fDisplayFormat;
+			var number = ( _.isUndefined(format) ) ? result.fNum : $.formatNumber( result.fNum, {format:format.fPattern, locale:format.fLocale} );
+			value = '<table class="number"><tr><td>' + String(number) + '</td></tr></table>';
+			break;
+		case "LINK":
+			value = '<table class="text"><tr><td><a target="_blank" href="' + result.fUri + '" rel="nofollow" title="' + result.fStr + '">' + result.fStr + '</a></td></tr></table>';
+			break;
+		case "ERROR":
+			value = '<table class="null"><tr><td> ' + gettext( "APP-NODATAFOUD-TEXT" ) + '. <span>' + gettext( "APP-PLEASE-TEXT" ) + ' <a id="id_retryButton" title="' + gettext( "APP-TRYAGAIN-TITLE" ) + '">' + gettext( "APP-TRYAGAIN-TEXT" ) + '</a>.</span></td></tr></table>';
+			break;
+	}
+%>
+	<%= value %>
+<%
+// If Array
+}else{
+%>
+	<table class="array">
+		<%
+		var firstHeader = false,
+			stopHeaders = false,
+			i = 0;
+		result.headerCells = [];
+
+		for(var row=0; row < result.fRows;row++){
+		%>
+			<tr>
+				<%
+				for(var col=0;col<result.fCols;col++){
+			var cell = result.fArray[i],value = '';
+			if (cell.fType == "TEXT" && ! _.isUndefined(cell.fDisplayFormat))
+				{
+				//console.log("Fixing?");
+				fmt = cell.fDisplayFormat.fPattern;
+				if (fmt.indexOf("#") == -1)
+					{
+				//console.log("Fix==");
+					cell.fType = "DATE";
+					}
+			}
+					switch(cell.fType){
+						case "TEXT":
+							value = ( cell.fStr.length != 1 ) ? cell.fStr : cell.fStr.replace('-', '&nbsp;');
+							value = value.replace(/(<([^>]+)>)/ig," ");
+							break;
+						case "DATE":
+							var format = cell.fDisplayFormat;
+							var number = cell.fNum;
+							if (! _.isUndefined(format))
+								{
+								// sometimes are seconds, sometimes miliseconds
+								if (number < 100000000000) number = number * 1000;
+								var dt = new Date(number);
+								var local = format.fLocale;
+								//(?) if I use "en" doesn't work, I must use "" for "en"
+								if (undefined === local || local === "en" || local.indexOf("en_")) local = "";
+								if (local.indexOf("es_")) local = "es";
+								value = $.datepicker.formatDate(format.fPattern, dt, {
+	dayNamesShort: $.datepicker.regional[local].dayNamesShort,
+	dayNames: $.datepicker.regional[local].dayNames,
+	monthNamesShort: $.datepicker.regional[local].monthNamesShort,
+	monthNames: $.datepicker.regional[local].monthNames
+});
+								}
+							else
+								value = String(number);
+							break;
+						case "NUMBER":
+							var format = cell.fDisplayFormat,
+							number = ( _.isUndefined(format) ) ? cell.fNum : $.formatNumber( cell.fNum, {format:format.fPattern, locale:format.fLocale} );
+							value = String(number);
+							break;
+						case "LINK":
+							value = '<a target="_blank" href="' + cell.fUri + '" rel="nofollow" title="' + cell.fStr + '">' + cell.fStr + '</a>';
+							break;
+					}
+
+					if(cell.fHeader && !stopHeaders){
+						firstHeader = true;
+						result.headerCells.push(value);
+					}
+					else{
+						%>
+						<td><%= value %></td>
+						<%
+					}
+
+					i++;
+
+				}
+
+				if(firstHeader){
+					stopHeaders = true;
+				}
+
+				%>
+			</tr>
+		<%
+		}
+		%>
+	</table>
+<%
+}
+%>
 </script>

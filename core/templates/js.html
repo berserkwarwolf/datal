@@ -1,3 +1,5 @@
+{% load static%}
+
 <!--[if lt IE 9]>
 <script src="/js_core/plugins/html5.js" type="text/javascript"></script>
 <![endif]-->
@@ -14,8 +16,9 @@
 -->
 
 <!-- NEW -->
+<script type="text/javascript" src="/js_core/constants.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.url.packed.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'underscore/underscore-min.js' %}"></script>
 <script type="text/javascript" src="/js_core/libs/backbone100/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/backbone_validation/backbone-validation-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/epoxy/backbone.epoxy.min.js?id={{settings.VERSION_JS_CSS}}"></script>

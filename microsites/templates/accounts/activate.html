@@ -28,7 +28,7 @@
                         <div class="boxShadow">
                             <div class="signBox">
                                 <div class="pageFormContainer">
-                                    <form action="{{form.action}}" method="post" id="id_activateForm">
+                                    <form action="{{form.action}}" method="post" id="id_activateForm" novalidate>
                                         {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
                                         {% csrf_token %}
                                         <fieldset>

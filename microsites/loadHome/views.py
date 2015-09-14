@@ -5,7 +5,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 from core.models import *
 from core.managers import *
 from core.shortcuts import render_to_response
-from microsites.helpers import add_domains_to_permalinks
+from core.http import add_domains_to_permalinks
 from microsites.loadHome.forms import *
 from microsites.loadHome import utils
 from utils import *
@@ -30,38 +30,37 @@ def load(request):
     account = request.account
     preferences = request.preferences
 
-    if(('preview' in request.GET and request.GET['preview']== 'true') or preferences["account_home"]):
+    if('preview' in request.GET and request.GET['preview'] == 'true') or preferences["account_home"]:
         """ shows the home page new version"""
-        if('preview' in request.GET and request.GET['preview']== 'true'):
-            jsonObject= json.loads(preferences["account_preview"], strict=False)
+        if'preview' in request.GET and request.GET['preview'] == 'true':
+            jsonObject = json.loads(preferences["account_preview"], strict=False)
             pageTitle = ugettext('APP-PREVIEWWINDOW-TITLE')
         elif preferences["account_has_home"]:
-            jsonObject= json.loads(preferences["account_home"], strict=False)
+            jsonObject = json.loads(preferences["account_home"], strict=False)
 
-        if(not(jsonObject is None)):
+        if jsonObject:
             themeid = jsonObject['theme']
             config = jsonObject['config']
-            datastreams=[]
-            resources=[]
-            if(not(config is None)):
-                if ( 'sliderSection' in config):
+            datastreams = []
+            resources = []
+            if config:
+                if 'sliderSection' in config:
                     datastreams = retrieveDatastreams(config['sliderSection'], language)
-                if ('linkSection' in config):
+                if 'linkSection' in config:
                     resources = retrieveResourcePermalinks(config['linkSection'], language)
 
             if preferences['account_home_filters'] == 'featured_accounts': # the account have federated accounts (childs)
                 featured_accounts = Account.objects.get_featured_accounts(account.id)
                 account_id = [featured_account['id'] for featured_account in featured_accounts]
                 for index, f in enumerate(featured_accounts):
-                    featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
+                    featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
 
                 categories = Category.objects.get_for_home(language, account_id)
             else:
                 account_id = account.id
                 categories = Category.objects.get_for_home(language, account_id)
 
-            results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
-                                                                    account_id = account_id)
+            results, search_time, facets = FinderManager(HomeFinder).search(max_results=250, account_id=account_id)
 
             paginator = Paginator(results, 25)
             revisions = paginator.page(1)
@@ -77,8 +76,7 @@ def load(request):
             # For the moment, redirect to search
             return redirect('/search/')
     else:
-
-    	# For the moment, redirect to search, but this needs to be erased
+        # For the moment, redirect to search, but this needs to be erased
         return redirect('/search/')
 
         # """ shows a no-home page"""
@@ -127,19 +125,24 @@ def load(request):
         # return render_to_response('home_manager/queryList.html', locals())
 
 @require_POST
-def action_update_list(request):
+def update_list(request):
     account         = request.account
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
 
+
     form = QueryDatasetForm(request.POST)
     if form.is_valid():
-        query       = form.cleaned_data.get('search')
-        page        = form.cleaned_data.get('page')
-        order       = form.cleaned_data.get('order')
-        order_type  = form.cleaned_data.get('order_type')
+        query = form.cleaned_data.get('search')
+        page = form.cleaned_data.get('page')
+        order = form.cleaned_data.get('order')
+        order_type = form.cleaned_data.get('order_type')
 
-        resources = ['ds', 'db', 'chart', 'dt']
+        resources = ['ds', 'db', 'vz', 'dt']
+        category_filters = form.cleaned_data.get('category_filters')
+        if category_filters:
+            category_filters=category_filters.lower().split(",")
+        
 
         if preferences['account_home_filters'] == 'featured_accounts':
 
@@ -150,19 +153,19 @@ def action_update_list(request):
                 featured_accounts = account.account_set.values('id').all()
                 accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
 
-            typef  = form.cleaned_data.get('type_filters')
+            typef = form.cleaned_data.get('type_filters')
             if typef:
                 resources = [typef]
 
-            category_id = form.cleaned_data.get('category_filters')
             results, search_time, facets = FinderManager(HomeFinder).search(
                                                                     query = query,
                                                                     max_results = 250,
                                                                     account_id = accounts_ids,
                                                                     resource = resources,
-                                                                    category_id = category_id,
+                                                                    category_filters=category_filters,
                                                                     order = order,
                                                                     order_type = order_type)
+
         else:
             all_resources = form.cleaned_data.get('all')
             if not all_resources:
@@ -171,44 +174,47 @@ def action_update_list(request):
                 for resource_name in resources_type.split(','):
                     resources.append(resource_name)
 
-            category_filters = form.cleaned_data.get('category_filters')
-            categories = []
-            if category_filters:
-                for category_name in category_filters.split(','):
-                    categories.append(category_name)
-            results, search_time, facets = FinderManager(HomeFinder).search(category_name = categories,
-                                                                     query = query,
-                                                                     resource = resources,
-                                                                     max_results = 250,
-                                                                     order = order,
-                                                                     order_type = order_type,
-                                                                     account_id = account.id)
+            results, search_time, facets = FinderManager(HomeFinder).search(
+                category_filters= category_filters,
+                query=query,
+                resource=resources,
+                max_results=250,
+                order=order,
+                order_type=order_type,
+                account_id=account.id
+            )
 
-        # manual temporary fix for indextank fails
-        results2 = []
-        for r in results:
-            if r['category'] in categories or categories==[]:
-                results2.append(r)
 
-            
-        paginator = Paginator(results2, 25)
+        ## manual temporary fix for indextank fails
+        #results2 = []
+        #for r in results:
+        #    if r['category'] in categories or categories==[]:
+        #        results2.append(r)
+
+        paginator = Paginator(results, 25)
 
         if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(results2)
+            add_domains_to_permalinks(results)
 
-        response = {"number_of_pages": paginator.num_pages,
-                     "errors": [],
-                     "revisions": paginator.page(page and page or 1).object_list
-                   }
+        response = {
+            "number_of_pages": paginator.num_pages,
+             "errors": [],
+             "revisions": paginator.page(page and page or 1).object_list
+       }
     else:
-        response = {"number_of_pages": 0,
-                     "errors": ['Invalid data'],
-                     "revisions": []
-                   }
+        response = {
+            "number_of_pages": 0,
+            "errors": ['Invalid data'],
+            "errores_locos": form.errors,
+            "revisions": []
+       }
+        results=[]
+        categories=[]
 
-    response["results_dbg"] = results2
-    response["categories_asked_dbg"] = categories
+    response["results_dbg"] = results
+    response["categories_asked_dbg"] = category_filters
     return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
+
 
 @require_GET
 def action_update_categories(request):

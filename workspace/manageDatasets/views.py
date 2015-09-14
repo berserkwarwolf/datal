@@ -1,25 +1,24 @@
 import urllib2, logging
 
 from django.db import transaction
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.core.urlresolvers import reverse
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
-from core.helpers import get_mimetype
 
-from api.http import JSONHttpResponse
+from core.http import JSONHttpResponse
 from core import engine
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.helpers import filters_to_model_fields
+from core.utils import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
-from workspace.daos.datasets import DatasetDBDAO
+from core.daos.datasets import DatasetDBDAO
 
 
 logger = logging.getLogger(__name__)
@@ -29,27 +28,23 @@ logger = logging.getLogger(__name__)
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def action_request_file(request):
-    from boto.s3.connection import S3Connection
-
     form = RequestFileForm(request.GET)
 
     if form.is_valid():
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
-        file_name = dataset_revision.end_point[+6:]
-
-        s3 = S3Connection(settings.AWS_ACCESS_KEY, settings.AWS_SECRET_KEY, is_secure=False)
-        url = s3.generate_url(300, 'GET', bucket=request.bucket_name, key=file_name, force_http=True)
-
         try:
             response = HttpResponse(mimetype='application/force-download')
-            response['Content-Disposition'] = 'attachment; filename=' + dataset_revision.filename.encode('utf-8')
-            response.write(urllib2.urlopen(url).read())
-        except:
+            response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
+            response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
+        except Exception:
             import logging
             logger = logging.getLogger(__name__)
-            logger.error(url)
+            logger.error(dataset_revision.end_point)
     else:
-        response = {'status' : 'error', 'messages' : [ugettext('URL-RETRIEVE-ERROR')] }
+        response = dict(
+            status='error',
+            messages=[ugettext('URL-RETRIEVE-ERROR')]
+        )
 
     return response
 
@@ -57,16 +52,11 @@ def action_request_file(request):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def list(request):
+def index(request):
     """ List all Datasets """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
-    resources, total_resources = ds_dao.query(account_id=request.user.account.id,
-                                                language=request.user.language)
-
-    filters = ds_dao.query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
-
+    filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
     datastream_impl_valid_choices = DATASTREAM_IMPL_VALID_CHOICES
 
     return render_to_response('manageDatasets/index.html', locals())
@@ -173,22 +163,53 @@ def remove(request, dataset_revision_id, type="resource"):
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
         if lifecycle.dataset.last_revision_id:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-                'revision_id': lifecycle.dataset.last_revision_id,
-            }))
+            last_revision_id = lifecycle.dataset.last_revision_id
         else:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-                'revision_id': -1,
-            }))
+            last_revision_id = -1
+
+        return JSONHttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+            'revision_id': last_revision_id
+        }))
+
     else:
         lifecycle.remove(killemall=True)
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
+            'revision_id': -1,
+        }), content_type='text/plain')
+
+
+@requires_review
+@login_required
+#@require_privilege("workspace.can_delete_dataset")
+@transaction.commit_on_success
+def unpublish(request, dataset_revision_id, type="resource"):
+
+    """ unpublish resource """
+    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
+
+    if type == 'revision':
+        lifecycle.unpublish()
+        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
+        if lifecycle.dataset.last_revision_id:
+            last_revision_id = lifecycle.dataset.last_revision_id
+        else:
+            last_revision_id = -1
+
+        return JSONHttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-UNPUBLISH-DATASET-REV-ACTION-TEXT')],
+            'revision_id': last_revision_id
+        }))
+
+    else:
+        lifecycle.unpublish(killemall=True)
+        return HttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-UNPUBLISH-DATASET-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
 
@@ -242,6 +263,7 @@ def create(request, collect_type='index'):
 @requires_if_publish('dataset')
 @requires_review
 @require_http_methods(['POST', 'GET'])
+@transaction.commit_on_success
 def edit(request, dataset_revision_id=None):
     account_id = request.auth_manager.account_id
     auth_manager = request.auth_manager
@@ -318,45 +340,84 @@ def related_resources(request):
     list_result = []
     for associated_datastream in associated_datastreams:
         associated_datastream['type'] = 'dataview'
-        list_result.append(associated_datastream)
+        list_result.append(associated_datastream) 
 
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
     return HttpResponse(dump, mimetype="application/json")
 
 
 @login_required
-@require_privilege("workspace.can_review_dataset_revision")
-@require_http_methods(['POST', 'GET'])
+@require_POST
 @transaction.commit_on_success
-def review(request, dataset_revision_id=None):
-
-    if request.method == 'POST' and dataset_revision_id != None:
-
-        lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
-
+def change_status(request, dataset_revision_id=None):
+    """
+    Change dataset status
+    :param request:
+    :param dataset_revision_id:
+    :return: JSON Object
+    """
+    if request.method == 'POST' and dataset_revision_id:
+        lifecycle = DatasetLifeCycleManager(
+            user=request.user,
+            dataset_revision_id=dataset_revision_id
+        )
         action = request.POST.get('action')
 
         if action == 'approve':
-
             lifecycle.accept()
-
-            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_APPROVED'), 'messages': ugettext('APP-DATASET-APPROVED-TEXT')}
-
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.APPROVED,
+                messages={
+                    'title': ugettext('APP-DATASET-APPROVED-TITLE'),
+                    'description': ugettext('APP-DATASET-APPROVED-TEXT')
+                }
+            )
         elif action == 'reject':
-
             lifecycle.reject()
-
-            response = {'status': 'ok', 'dataset_status':ugettext('MODEL_STATUS_DRAFT'), 'messages': ugettext('APP-DATASET-REJECTED-TEXT')}
-
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATASET-REJECTED-TITLE'),
+                    'description': ugettext('APP-DATASET-REJECTED-TEXT')
+                }
+            )
+        elif action == 'publish':
+            lifecycle.publish()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PUBLISHED,
+                messages={
+                    'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
+                    'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
+                }
+            )
+        elif action == 'unpublish':
+            lifecycle.unpublish()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.DRAFT,
+                messages={
+                    'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
+                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                }
+            )
+        elif action == 'send_to_review':
+            lifecycle.send_to_review()
+            response = dict(
+                status='ok',
+                dataset_status=StatusChoices.PENDING_REVIEW,
+                messages={
+                    'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
+                    'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+                }
+            )
         else:
+            raise NoStatusProvidedException()
 
-            response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
+        return JSONHttpResponse(json.dumps(response))
 
-    else:
-
-        response = {'status': 'error', 'messages': ugettext('APP-DATASET-NOT-REVIEWED-TEXT')}
-
-    return JSONHttpResponse(json.dumps(response))
 
 @login_required
 @require_GET
@@ -403,7 +464,7 @@ def check_source_url(request):
 
     if mimetype_form.is_valid():
         url = mimetype_form.cleaned_data['url']
-        mimetype, status, url = get_mimetype(url)
+        mimetype, status, url = mimetype_form.get_mimetype(url)
         sources = {"mimetype" : mimetype, "status" : status, "url" : url }
 
         return HttpResponse(json.dumps(sources), content_type='application/json')

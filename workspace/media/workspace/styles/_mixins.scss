@@ -1,8 +1,6 @@
 /*** Mixins ***/     
-
-/* Gradient */
 @mixin linear-gradient($fromColor, $toColor) {
-	background:$fromColor;
+  background:$fromColor;
   background:-moz-linear-gradient(top,$fromColor 0%,$toColor 92%);
   background:-webkit-gradient(linear,left top,left bottom,color-stop(0%,$fromColor),color-stop(92%,$toColor));
   background:-webkit-linear-gradient(top,$fromColor 0%,$toColor 92%);
@@ -11,11 +9,112 @@
   background:linear-gradient(to bottom,$fromColor 0%,$toColor 92%);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='$fromColor',endColorstr='$toColor',GradientType=0);
 }
-
 @mixin radial-gradient($fromColor, $toColor) {
   background:$fromColor;
   background:-webkit-radial-gradient(35% 50%, $fromColor,$toColor);
   background:-o-radial-gradient(35% 50%, $fromColor,$toColor);
   background:-moz-radial-gradient(35% 50%, $fromColor,$toColor);
   background:radial-gradient(35% 50%, $fromColor,$toColor);
+}
+@mixin clearfix {
+  display:inline-block;
+  &:after {
+    content:".";
+    display:block;
+    height:0;
+    clear:both;
+    visibility:hidden;
+  }
+  display:block;
+  * html &{height:1px;}
+}
+@mixin opacity($range){
+  filter:alpha(opacity=$range);
+  opacity:$range/100;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=#{$range})";
+}
+@mixin border-radius($value){
+  -webkit-border-radius:$value;
+     -moz-border-radius:$value;
+          border-radius:$value;
+}
+@mixin box-shadow($value){
+  -webkit-box-shadow:$value;
+          box-shadow:$value;
+}
+@mixin transition($property, $duration, $easing, $important:""){
+  -webkit-transition:$property $duration $easing #{$important};
+     -moz-transition:$property $duration $easing #{$important};
+      -ms-transition:$property $duration $easing #{$important};
+       -o-transition:$property $duration $easing #{$important};
+          transition:$property $duration $easing #{$important};
+}
+@mixin disable-transition($property, $important:""){
+  -webkit-transition:$property #{$important};
+     -moz-transition:$property #{$important};
+      -ms-transition:$property #{$important};
+       -o-transition:$property #{$important};
+          transition:$property #{$important};
+}
+@mixin box-sizing($value){
+  -webkit-box-sizing:$value;
+     -moz-box-sizing:$value;
+          box-sizing:$value;
+}
+@mixin text-overflow{
+  text-overflow:ellipsis;
+  overflow:hidden;
+  white-space:nowrap;
+  word-wrap:normal;
+}
+@mixin background-size($value){
+  -webkit-background-size: $value;
+     -moz-background-size: $value;
+      -ms-background-size: $value;
+       -o-background-size: $value;
+          background-size: $value;
+}
+@mixin appearance($value){
+  -webkit-appearance:$value;
+     -moz-appearance:$value;
+          appearance:$value;
+}
+@mixin animation($name, $args){
+  -moz-animation:$name $args;
+  -webkit-animation:$name $args;
+  -o-animation:$name $args;
+  animation:$name $args;
+}
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content; 
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  } 
+}
+@mixin transform($value){ 
+  -webkit-transform:$value;
+  -ms-transform:$value;
+  transform:$value;
+}
+@mixin media-query($property, $media) {
+  @if $media == sm {
+    @media only screen and ($property: $break-sm) { @content; }
+  }
+  @else if $media == md {
+    @media only screen and ($property: $break-md ) { @content; }
+  }
+  @else if $media == lg {
+    @media only screen and ($property: $break-lg) { @content; }
+  }
+  @else{
+    @media only screen and ($property: $media) { @content; }
+  }
 }

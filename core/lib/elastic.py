@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
-from elasticsearch import Elasticsearch, NotFoundError
+from elasticsearch import Elasticsearch, NotFoundError, RequestError
 import logging
 
 class ElasticsearchIndex():
@@ -73,6 +73,7 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
+                      "hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -167,7 +168,7 @@ class ElasticsearchIndex():
                   "fields" : {
                     "properties" : {
                       "account_id" : { "type" : "long" },
-                      "visualizationrevision_id" : { "type" : "long" },
+                      "visualization_revision_id" : { "type" : "long" },
                       "visualization_id" : { "type" : "long" },
                       "description" : { "type" : "string" },
                       "end_point" : { "type" : "string" },
@@ -195,7 +196,10 @@ class ElasticsearchIndex():
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
-            return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+            try:
+                return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+            except:
+                return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
@@ -245,3 +249,14 @@ class ElasticsearchIndex():
 
 
         return [documents_deleted, documents_not_deleted]
+
+    def update(self, document):
+        """ update by id"""
+
+        try:
+            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
+        except RequestError,e:
+            raise RequestError(e)
+        except NotFoundError,e:
+            raise NotFoundError,(e)
+

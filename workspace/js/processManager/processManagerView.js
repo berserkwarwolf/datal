@@ -26,15 +26,11 @@ var ProcessManagerView = Backbone.View.extend({
 	previous: function(output){
 
 		// Previous
-		if(this.index > 0){
+		if(this.index >= 0){
 			this.steps[this.index].finish();
 			this.index--;
 			this.selectNavigationTab(this.index);
 			this.steps[this.index].start( this.model.get('output') );
-
-		// Go to first "Static" Step
-		}else{
-			window.location = this.model.get('startUrl');
 		}
 
 	},
@@ -65,9 +61,9 @@ var ProcessManagerView = Backbone.View.extend({
 	},
 
 	goTo: function(index){
-		this.finish();
+		this.steps[this.index].finish();
 		this.index = index;
-		this.start();
+		this.steps[index].start( this.model.get('output') );
 	},
 
 	start: function(){
@@ -79,11 +75,11 @@ var ProcessManagerView = Backbone.View.extend({
 	},
 
 	onNavigationButtonClicked: function(event){
-		
+			
 		var button = event.currentTarget,
 			indexToGo = $(button).attr('data-step');
 
-		if(indexToGo != this.index){
+		if(indexToGo < this.index){
 			this.goTo(indexToGo);
 			this.selectNavigationTab(indexToGo);
 		}
@@ -91,7 +87,7 @@ var ProcessManagerView = Backbone.View.extend({
 	},
 
 	selectNavigationTab: function(index){
-		$('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index)+1 ) );
+		$('.section-title .buttons-bar').attr( 'data-step', ( parseFloat(index) ) );
 	},
 
 	// cancel: function(){},

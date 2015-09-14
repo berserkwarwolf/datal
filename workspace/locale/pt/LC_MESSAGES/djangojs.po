@@ -75,36 +75,6 @@ msgstr "This is the GUID for this Dashboard:"
 msgid "DSDET-GETGUID-TITLE"
 msgstr "This is the GUID for this Data View:"
 
-msgid "APP-APPROVE-TEXT"
-msgstr "Approve"
-
-msgid "APP-REJECT-TEXT"
-msgstr "Reject"
-
-msgid "APP-PUBLISH-TEXT"
-msgstr "Publish"
-
-msgid "APP-ACTIONS-UNPUBLISH"
-msgstr "Unpublish"
-
-msgid "APP-DRAFT-TEXT"
-msgstr "Draft"
-
-msgid "APP-PENDINGREVIEW-TEXT"
-msgstr "Pending Review"
-
-msgid "APP-APPROVED-TEXT"
-msgstr "Approved"
-
-msgid "APP-PUBLISHED-TEXT"
-msgstr "Published"
-
-msgid "APP-UNPUBLISH-TEXT"
-msgstr "Unpublish"
-
-msgid "APP-REJECTED-TEXT"
-msgstr "Rejected"
-
 msgid "APP-TEXT-CONFIRM_DELETE_SINGULAR-DASHBOARD"
 msgstr "Are you sure you want to unpublish this Dashboard?"
 
@@ -603,6 +573,9 @@ msgstr "TITLE"
 msgid "APP-GRID-CELL-DATASET-NAME"
 msgstr "DATASET"
 
+msgid "APP-GRID-CELL-DATASTREAM-NAME"
+msgstr "DATASTREAM"
+
 msgid "APP-GRID-CELL-STATUS"
 msgstr "STATUS"
 
@@ -617,6 +590,9 @@ msgstr "AUTHOR"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Delete Data View"
+
+msgid "APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE"
+msgstr "Delete Visualization"
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
@@ -857,3 +833,12 @@ msgstr "Data View saved successfully"
 
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Tags for this data view"
+
+msgid "APP-VIZ-CUSTOMIZE-TEXT"
+msgstr "Customization"
+
+msgid "APP-VIZ-METADATA-TEXT"
+msgstr "Description"
+
+msgid "APP-VIZ-FINISH-TEXT"
+msgstr "Review"

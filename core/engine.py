@@ -1,9 +1,10 @@
 from django.conf import settings
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.cache import Cache
 import memcache
 import urllib
 import logging
+
 
 def invoke(query, output=None):
 
@@ -58,6 +59,7 @@ def invoke(query, output=None):
 #    nr = '{"fType":"ARRAY","fArray":[{"fStr":"Error","fType":"TEXT","fHeader":true},{"fStr":"URL","fType":"TEXT","fHeader":true},{"fStr":"%s","fType":"TEXT"},{"fStr":"%s","fType":"TEXT"}],"fRows":2,"fCols":2,"fTimestamp":1349165269247,"fLength":75}' % (er, url)
 #    return nr, "json"
 
+
 def invoke_chart(query):
 
     content_type = settings.CONTENT_TYPES.get("json")
@@ -97,16 +99,33 @@ def invoke_chart(query):
     nr = '{"fType":"ARRAY","fArray":[{"fStr":"Error","fType":"TEXT","fHeader":true},{"fStr":"URL","fType":"TEXT","fHeader":true},{"fStr":"%s","fType":"TEXT"},{"fStr":"%s","fType":"TEXT"}],"fRows":2,"fCols":2,"fTimestamp":1349165269247,"fLength":75}' % (er, url)
     return nr, "json"
 
+def preview_chart(query):
+
+    content_type = settings.CONTENT_TYPES.get("json")
+
+    try:
+        engine_domain = get_domain_with_protocol('engine')
+        url = engine_domain + settings.END_POINT_CHART_PREVIEWER_SERVLET
+
+        value, content_type = _request(query, url)
+        return value, content_type
+
+    except Exception, e:
+        logger = logging.getLogger(__name__)
+        logger.debug(e)
+        raise e
 
 def load(query):
     engine_domain = get_domain_with_protocol('engine')
     url = engine_domain + settings.END_POINT_LOADER_SERVLET
     return _request(query, url)
 
+
 def preview(query):
     engine_domain = get_domain_with_protocol('engine')
     url = engine_domain + settings.END_POINT_PREVIEWER_SERVLET
     return _request(query, url, method='POST')
+
 
 def _request(query, url, method = 'GET'):
 
@@ -155,6 +174,7 @@ def fix_params(filters):
             #del filters[key]
             
     return filters
+
 
 def parseOperator(value):
     value = value.replace('[==]', '[0]')

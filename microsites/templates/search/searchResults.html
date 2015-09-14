@@ -8,8 +8,8 @@
           <h4 class="title">
           	<div class="innerTitle clearfix">
 				<strong>{% trans "APP-SEARCHRESULTS-TEXT" %}</strong>
-            	{% if query %}<span class="font">{% trans "APP-FOR-TEXT" %} <em>{{query}} - {{paginator.count}} {% trans "APP-MATCHES-TEXT" %} - {% trans "APP-TIME-TEXT" %}: {{search_time}}</em></span>{% endif %}
-s            	{% if category %}<span class="font">{% trans "APP-INCATEGORY-TEXT" %} <em>{{category.name}} - {{paginator.count}} {% trans "APP-MATCHES-TEXT" %} - {% trans "APP-TIME-TEXT" %}: {{search_time}}</em></span>{% endif %}
+            	{% if query %}<span class="font">{% trans "APP-FOR-TEXT" %} <em>{{query}} - {{paginator.count}} {% trans "APP-MATCHES-TEXT" %} - {% trans "APP-TIME-TEXT" %}: {{search_time.search_time}}</em></span>{% endif %}
+s            	{% if category %}<span class="font">{% trans "APP-INCATEGORY-TEXT" %} <em>{{category.name}} - {{paginator.count}} {% trans "APP-MATCHES-TEXT" %} - {% trans "APP-TIME-TEXT" %}: {{search_time.search_time}}</em></span>{% endif %}
             	<div class="transparency"></div>
 			</div>
           </h4>

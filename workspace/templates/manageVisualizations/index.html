@@ -2,14 +2,19 @@
 {% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
+
+{# CSS #}
 {% compress css %}
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-paginator.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-text-cell.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/visualizationForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/manageCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/manageVisualizations.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
+{# JS Libs and Plugins #}
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -20,332 +25,105 @@
 <script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
 <script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/filterItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
+
+{# JS for this screen #}
 <script language="javascript" src="/js_workspace/manageVisualizations/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/activeFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/inactiveFiltersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/resourceItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/titleGridCellModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/titleGridCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/manageDatastreamsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/datastreamCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/titleCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/visualizationCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/listResources.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/listDatastreams.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/dataviewItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/dataviewItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/manageVisualizations/manageDataviewsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+{# Left Navigation Selected Option #}
 <meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-VISUALIZATIONS-TEXT" %}</h1>
-<div class="bulk-actions FL clearfix " style="display:none;">
-   <select id="bulk_slct" class="FL" >
-      <option selected="selected" value="">{% trans 'APP-BULKACTIONS-TEXT' %}</option>
-      <!-- <option value="">{% trans 'APP-EDIT-TEXT' %}</option> -->
-      <option value="">{% trans 'APP-DELETE-TEXT' %}</option>
-   </select>
-   <button id="appl_bulk" class="button black small FL">{% trans 'APP-APPLY-TEXT' %}</button>
+
+<div class="context-menu clearfix">
+  
+  <!-- Column Left -->
+  <div class="col-xs-7">    
+    
+    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_visualizations }})</span></h1>
+
+  </div>
+
+  <!-- Column Right -->
+  <div class="col-xs-5 context-buttons clearfix">
+    
+    <a id="id_addNewButton" class="button primary FR" title="{% trans 'APP-ADDNEWVISUALIZATIONTEXT' %}">{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}</a>
+
+  </div>
+
 </div>
-<ul class="actions FR">
-   <li><a id="new_visualization" class="button black small" title="{% trans 'APP-ADDNEW-TEXT' %}"><i class="new"></i>{% trans 'APP-ADDNEW-TEXT' %}</a></li>
-</ul>
+
 {% endblock %}
 
 {% block content %}
-  <div class="manager" id="id_manageVisualizations">
-    <div class="wrapper1">
-      <div class="wrapper2 clearfix">
-        <div class="wrapper3">
+<div class="manager" id="id_manageVisualizations">
 
-          <!-- Filters -->
-          <section class="filters-container" id="filters-container">
-              <div class="activeFilters" id="activeFilters" style="display:none;">
-                  <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
-                  <ul id="active-filters-list"></ul>
-              </div>
-        
-              <!-- Author -->
-              {% if filters.author_filter %}
-                <div class="filters" id="author_filter">
-                  <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
-                  <ul>
-                      {% for filter in filters.author_filter %}
-                        <li><a class="filter_link" title="">{{ filter }}</a></li>
-                      {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
+  <div class="wrapper1">
+    <div class="wrapper2 clearfix">
+      <div class="wrapper3">
 
-              <!-- Status -->
-              {% if filters.status_filter %}
-                <div class="filters" id="status_filter">
-                  <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
-                  <ul>
-                      {% for filter in filters.status_filter %}
-                        <li><a class="filter_link" title="">{{ filter }}</a></li>
-                      {% endfor %}
-                  </ul>
-                </div>
-              {% endif %}
-               <div></div>
-          </section>
+        <!-- Filters -->
+        <section class="filters-view col-xs-2"></section>
 
-          <!-- List -->
-          <section class="list-container">
-            <div id="visualization_table_list">
-              <div id="grid">
-              </div>
-                <!-- Pagination -->
-              <div class="pagination clearfix" id="id_pagination">
+        <!-- List -->
+        {% include "manageVisualizations/list.html" %}
 
-                <div class="items-per-page FL">
-                  <label for="id_itemsPerPage">{% trans "ITEMS-PER-PAGE" %}</label>
-                  <select id="id_itemsPerPage">
-                      <option value="10">10</option>
-                      <option value="20">20</option>
-                      <option value="50">50</option>
-                      <option value="100">100</option>
-                  </select>
-                </div>
-                <div id="paginator">
-                </div>
-
-              </div>
-
-            </div>
-          </section>
-
-        </div>
       </div>
     </div>
   </div>
+
+  <!-- Loading -->
+  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+
+</div>
+
+<!-- No results -->
+<div class="no-results-view hidden">
+  <div class="zeroResults">
+    <div class="zeroIcon zeroVisualizations"></div>
+    <p>{% trans 'APP-ZERO-VISUALIZATIONS-TEXT' %}</p>
+  </div>
+  <div class="startAdding">
+    <div class="startAddingArrows startDataviews"></div>
+    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+    <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
+  </div>
+</div>
+
 {% endblock %}
 
 {% block bottom_js %}
-
 <script type="text/javascript">
-$(document).ready(function(){
-
-    // For development instances only, move to backbone then
-    $('#id_bulkActions, #id_pendingNotPublished, #id_pendingPublished, #id_deleteVisualization, #id_confirmDeleteDataview, #id_unpublishDataview, #id_revisionDeleted, #id_addVisualization').overlay({
-      top: 'center',
-      left: 'center',
-      mask: {
-          color: '#000',
-          loadSpeed: 200,
-          opacity: 0.5,
-          zIndex: 99999
-          }
-      });
-
-    //$('#id_bulkActions').data('overlay').load();
-    //$('#id_pendingNotPublished').data('overlay').load();
-    //$('#id_pendingPublished').data('overlay').load();
-    //$('#id_deleteDataview').data('overlay').load();
-    //$('#id_confirmDeleteDataview').data('overlay').load();
-    //$('#id_unpublishDataview').data('overlay').load();
-    //$('#id_revisionDeleted').data('overlay').load();
-    //$('#id_addVisualization').data('overlay').load();
-
-    var manageVisualizationView =  new ManageVisualizationView({visualizationCreationStepsUrl:"{% url 'manageVisualizations.create' %}"});
-});
+  $(document).ready(function(){
+    var manageVisualizationsView =  new ManageVisualizationsView({
+      visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
+      sourceUrl: '/source_manager/action_search',
+      tagUrl: '/tag_manager/action_search',
+      filters: {{filters|jsonify}}
+    });
+  });
 </script>
 
-<script type="text/template" id="active-filters-template">
-    <li><span><%= filter_name %></span> <a class="remove" title="{% trans 'FILTERS-REMOVE-TEXT' %}" id="<%= filter_id %>">x</a></li>
-</script>
-
-<script type="text/template" id="grid-titlecell-template">
-   <h3>
-       <a href="<%=url%>"><%=title%></a> <span class="sep">|</span> <%=category %>
-
-   </h3>
-   <span class="date">{% trans "APP-LAST-MODIFIED" %} <%= created_at %></span>
-   <ul class="actions clearfix">
-       <% if(authManager.isPublisher()||authManager.isAdmin()){ %>
-           <% if(status_nice.toUpperCase()===gettext('APP-PENDINGREVIEW-TEXT').toUpperCase()){ %>
-               <li class="review"><a title=<%= gettext('APP-REVIEW-TEXT') %>><%= gettext('APP-REVIEW-TEXT')%></a></li>
-           <% } %>
-       <% } %>
-       <% if(status_nice.toUpperCase()!=gettext('APP-PENDINGREVIEW-TEXT').toUpperCase()){ %>
-           <li class="edit">
-           <a title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
-       </li>
-       <% } %>
-
-       <li class="delete">
-           <a title=<%= gettext('APP-DELETE-TEXT') %>><%= gettext('APP-DELETE-TEXT') %></a>
-       </li>
-   </ul>
-</script>
-
+{# templates backbone #}
+{% include "manageVisualizations/templates.html" %}
 {% endblock %}
 
 {% block popupsOverlay %}
-
-  <!-- Bulk Actions Overlay -->
-  {% overlay id_bulkActions %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-BULKACTIONS-TITLE' %}</h4>
-      <div class="ov-content">
-        <div class="left">
-          <ul>
-            <li><span class="icon-visualization"></span>Anual staff figures</li>
-            <li><span class="icon-visualization"></span>LATAM Scorecard Countries</li>
-            <li><span class="icon-visualization"></span>Europe Scorecard Countries</li>
-          </ul>
-        </div>
-        <div class="right">
-          <div class="selectTitle font-mb">{% trans 'APP-OVERLAY-BULKACTIONS-CATEGORY' %}</div>
-          <select>
-            <option value="">Category name</option>
-          </select>
-          <div class="selectTitle font-mb">{% trans 'APP-OVERLAY-BULKACTIONS-STATUS' %}</div>
-          <select>
-            <option value="">{% trans 'MODEL_STATUS_DRAFT' %}</option>
-            <option value="">{% trans 'MODEL_STATUS_PENDING_REVIEW' %}</option>
-            <option value="">{% trans 'MODEL_STATUS_PUBLISHED' %}</option>
-          </select>
-        </div>
-      </div>
-      <div class="ov-bottom">
-        <div class="ov-buttons">
-          <a href="#" class="button primary small" title="{% trans 'APP-OVERLAY-SAVE' %}">{% trans 'APP-OVERLAY-SAVE' %}</a>
-          <a href="#" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
-        </div>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Pending Actions Not Published Overlay -->
-  {% overlay id_pendingNotPublished %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-PENDING-TITLE' %}</h4>
-      <div class="ov-content">
-        <div class="ov-alert">
-          <span class="icon-warning"></span>{% trans 'APP-OVERLAY-ALERT-WARNING' %}
-        </div>
-        <p></p>
-        <p>{% trans 'APP-OVERLAY-ALERT-WARNING-TEXT' %}</p>
-        <ul>
-          <li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
-          <li><span class="icon-visualization"></span><a href="">LATAM Scorecard Countries</a></li>
-          <li><span class="icon-dashboard"></span><a href="">Europe Scorecard Countries</a></li>
-        </ul>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Pending Actions Published Overlay -->
-  {% overlay id_pendingPublished %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-PENDING-TITLE' %}</h4>
-      <div class="ov-content">
-        <div class="ov-alert">
-          <span class="icon-check"></span>{% trans 'APP-OVERLAY-ALERT-OK' %}
-        </div>
-        <p></p>
-        <p>{% trans 'APP-OVERLAY-ALERT-OK-TEXT' %}</p>
-        <ul>
-          <li><span class="icon-visualization"></span><a href="">Anual staff figures</a></li>
-        </ul>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Delete Visualization Overlay -->
-  {% overlay id_deleteVisualization %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-DELETE-DATASTREAM-TITLE' %}</h4>
-      <div class="ov-content">
-        <p></p>
-        <p>{% trans 'APP-OVERLAY-DELETE-DATASTREAM-TEXT' %}</p>
-        <p></p>
-      </div>
-      <div class="ov-bottom">
-      <div class="ov-buttons">
-         <a id="del_resource" href="#" class="button warning small" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
-         <a id="del_revision" href="#" class="button warning small" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
-      </div>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Delete Dataview Confirm Overlay -->
-  {% overlay id_confirmDeleteDataview %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE' %}</h4>
-      <div class="ov-content">
-        <p>{% trans 'APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TEXT' %}</p>
-        <ul>
-        </ul>
-      </div>
-      <div class="ov-bottom">
-        <div class="ov-buttons">
-          <a id="del_related_res" href="#" class="button warning small" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
-          <a href="#" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
-        </div>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Unpublish Dataview Overlay -->
-  {% overlay id_unpublishDataview %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TITLE' %}</h4>
-      <div class="ov-content">
-        <p>{% trans 'APP-OVERLAY-UNPUBLISH-DATASET-TEXT' %}</p>
-        <ul>
-          <li><span class="icon-dataview"></span>Anual staff figures</li>
-          <li><span class="icon-visualization"></span>LATAM Scorecard Countries</li>
-          <li><span class="icon-visualization"></span>Europe Scorecard Countries</li>
-        </ul>
-      </div>
-      <div class="ov-bottom">
-        <div class="ov-buttons">
-          <a href="#" class="button primary small" title="{% trans 'APP-OVERLAY-UNPUBLISH' %}">{% trans 'APP-OVERLAY-UNPUBLISH' %}</a>
-          <a href="#" class="cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
-        </div>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Revision Deleted Overlay -->
-  {% overlay id_revisionDeleted %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-REVISION-DELETED-TITLE' %}</h4>
-      <div class="ov-content">
-        <p>{% trans 'APP-REVISION-DELETED-TEXT' %}</p>
-        <ul>
-          <li><span class="icon-dataview"></span><a href="">Anual staff figures</a></li>
-          <li><span class="icon-visualization"></span><a href="">LATAM Scorecard Countries</a></li>
-          <li><span class="icon-dashboard"></span><a href="">Europe Scorecard Countries</a></li>
-        </ul>
-      </div>
-    </div>
-  {% endoverlay %}
-
-  <!-- Add Visualization -->
-  {% overlay id_addVisualization %}
-    <div class="In clearfix">
-      <h4>{% trans 'APP-ADD-NEW-VISUALIZATION-TEXT' %}</h4>
-      <div class="ov-content">
-        <p>{% trans 'APP-ADD-VISUALIZATION-HINT' %}</p>
-      </div>
-      <section>
-        <div id="dataview_list">
-          <div id="dataview_grid">
-          </div>
-        </div>
-      </section>
-      <div class="ov-bottom">
-        <div id="id_filter_dataViews"></div>
-        <!-- Pagination -->
-        <div class="pagination FR clearfix" id="id_pagination">
-          <div id="dataview_paginator">
-          </div>
-        </div>
-      </div>
-    </div>
-  {% endoverlay %}
-
+{% include "manageVisualizations/overlays.html" %}
 {% endblock %}

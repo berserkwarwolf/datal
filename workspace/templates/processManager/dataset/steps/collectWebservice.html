@@ -5,8 +5,8 @@
 	<header id="contentHeder">
 		<h3>{% trans 'APP-COLLECT-WEBSERVICE-TITLE' %} <span>{% trans 'APP-MANDATORY-FIELDS-TEXT' %}</span></h3>
 		<div class="navigation FR">
-			<a title="{% trans 'BTN-BACK-TEXT' %}" class="button alpha small backButton"><i class="left-arrow"></i>{% trans 'BTN-BACK-TEXT' %}</a>
-			<a title="{% trans 'APP-NEXT-TEXT' %}" class="button primary small nextButton">{% trans 'APP-NEXT-TEXT' %}<i class="right-arrow"></i></a>
+			<a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha backButton">{% trans 'APP-CANCEL-TEXT' %}</a>
+			<a title="{% trans 'BTN-NEXT-TEXT' %}" class="button primary next nextButton">{% trans 'BTN-NEXT-TEXT' %}</a>
 		</div>
 	</header>
 	

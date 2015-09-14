@@ -2,22 +2,14 @@
 @import 'variables';
 @import 'functions';
 
+/* Detail Container */
+.detail-container .resource-detail.box{padding:0;}
+
 /* Data Table */
 .dataTable{}
 	
 	/* Header */
-	.dataTable header{min-height:72px;border-bottom:1px solid #e4e4e4;padding:17px 17px 12px;
-		background:#f0f0f0;
-	  background:-webkit-gradient(linear, 0 0, 0 100%, from(#f0f0f0), to(#ffffff));
-	  background:-webkit-linear-gradient(#f0f0f0 0%, #ffffff 100%);
-	  background:-moz-linear-gradient(#f0f0f0 0%, #ffffff 100%);
-	  background:-o-linear-gradient(#f0f0f0 0%, #ffffff 100%);
-	  background:linear-gradient(#f0f0f0 0%, #ffffff 100%);
-	  filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#f0f0f0',endColorstr='#ffffff',GradientType=0);
-	  -webkit-border-radius:4px 4px 0 0;
-		   -moz-border-radius:4px 4px 0 0;
-			      border-radius:4px 4px 0 0;
-	}
+	.dataTable header{min-height:72px;border-bottom:1px solid #e4e4e4;padding:17px 17px 12px;}
 	.dataTable header hgroup{text-shadow:0 1px 0 #fff;margin-top:-4px;}
 	.dataTable header h1{font-size:18px;line-height:normal;width:100%;overflow:hidden;}
 	.dataTable header h1 strong{font-weight:bold;display:block;float:none !important;}

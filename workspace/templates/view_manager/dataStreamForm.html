@@ -7,8 +7,7 @@
     </div>
     <div class="clear"></div>
     <div id="id_datastreamEditForm" class="clearfix form">
-      <form id="id_dataStreamForm">
-            <div class="title">{% trans "EDITDS-DSINFO-TITLE" %}</div>
+      <form id="id_dataStreamForm" novalidate>
             <fieldset>
               {{datastream_form.dataset_revision_id}}
               {{datastream_form.datastream_revision_id}}
@@ -27,26 +26,26 @@
 
               <div class="row clearfix">
                 <label for="id_category">{{datastream_form.category.label}}:</label>
-                <select id="id_category" class="FL">
-                    {% for category in categories %}
-                                        {% if category.category__id == datastream_revision.category_id %}
-                                <option value="{{category.category__id}}" selected="selected">{{category.name}}</option>
-                                        {% else %}
-                                            <option value="{{category.category__id}}">{{category.name}}</option>
-                                        {% endif %}
-                    {% endfor %}
+                <select id="id_category">
+                  {% for category in categories %}
+                    {% if category.category__id == datastream_revision.category_id %}
+                      <option value="{{category.category__id}}" selected="selected">{{category.name}}</option>
+                    {% else %}
+                      <option value="{{category.category__id}}">{{category.name}}</option>
+                    {% endif %}
+                  {% endfor %}
                 </select>
                 <!-- <span class="required">*</span> -->
             </div>
-            <div class="row clearfix">
+            <div class="row clearfix" style="display:none;">
                 <label for="id_status">{{datastream_form.status.label}}:</label>
                 <div class="formErrorMessageContainer">
-                  <select id="id_status" class="FL" name="status">
-                    <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>
+                  <select id="id_status" name="status">
+                    <!-- <option value="" selected="selected">{% trans 'APP-SELECTOPTION-TEXT' %}</option>-->
                     {% for choice_id, choice_name in choices %}
-                      {# temporary fix #}
-                      {% if choice_id == 0 or choice_id == 1 or choice_id == 3 or choice_id == 6 %}
-                      <option value="{{ choice_id }}">{{ choice_name }}</option>
+                      {# temporary fix - Just show draft status = 0 #}
+                      {% if choice_id == 0 %}
+                      <option value="{{ choice_id }}" {% if choice_id == 0 %}selected="selected"{% endif %}>{{ choice_name }}</option>
                       {% endif %}
                     {% endfor %}
                   </select>
@@ -55,9 +54,9 @@
             </div>
    
 </fieldset>
+<hr class="separator">
 
           {% if meta_form %}
-                    <div class="title">{% trans "EDITDS-METATAGS-TITLE" %}</div>
                 <fieldset>
                     {% for field in meta_form %}
                         <div class="row clearfix">
@@ -66,21 +65,23 @@
                         </div>
                     {% endfor %}
                 </fieldset>
+                <hr class="separator">
             {% endif %}        
 
-                   <div class="title">{% trans "EDITDS-SOURCE-TITLE" %}</div>
                 <fieldset>
                     <div class="row clearfix">
                         <label for="">{% trans "APP-SOURCES-TEXT" %}:</label>
                         <div>
                             <input id="id_sourceNameSuggest" name="source-name" type="text" class="inputNewTag" maxlength="80"/>
-                            <div id="id_source_container" class="tagsContent">
-                                {% for source in datastream_revision.get_sources %}
-                                    <span id="id_sources-{{forloop.counter0}}-name">{{source.name}}</span>
-                                    <span id="id_sources-{{forloop.counter0}}-url">{{source.url}}</span>
-                                {% endfor %}
-                            </div>
                             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a id="id_displayAddSources" title="" href="javascript:;" class="">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
+                            <div id="id_source_container" class="tagsContent">
+                                <!--
+                                {% for source in sources %}
+                                <span id="id_sources-{{forloop.counter0}}-name">{{source.source__name}}</span>
+                                <span id="id_sources-{{forloop.counter0}}-url">{{source.source__url}}</span>
+                                {% endfor %}
+                                -->
+                            </div>
                         </div>
                     </div>
                     <div id="id_addMoreSources" style="display:none;" class="addNewSource">
@@ -104,18 +105,17 @@
                   </fieldset>
                   </div>
 
-                       <div class="title">{% trans "APP-DSTAGS-TEXT" %}</div>
                 <fieldset class="form clearfix">
                     <div class="row clearfix">
                        <label for="id_operation-tag">{% trans "APP-TAGS-TEXT" %}:</label>
                        <div id="id_tags_container">
                           <input id="id_operation-tag" name="operation-tag" type="text" class="inputNewTag" maxlength="40"/>
+                          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
                           <div class="tagsContent clearfix">
                             {% for tag in datastream_revision.get_tags %}
                                 <span id="id_tags_{{forloop.counter0}}">{{tag}}</span>
                             {% endfor %}
                           </div>
-                          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
                           <div class="recomendedTags DN">
                             <h6>{% trans "CREATE-RECOMENDEDTAGS-TEXT" %}: <span>({% trans "APP-CLICKTOADD-TEXT" %})</span></h6>
                                 <ul id="id_recommendedTags" class="clearfix">
@@ -125,8 +125,8 @@
                       </div>
                     </div>
               </fieldset>
+                <hr class="separator">
               
-              <div class="title">{% trans "APP-AS-DATASTREAM-SINGULAR" %} {% trans "APP-NOTES-TEXT" %}</div>
               <fieldset class="form clearfix">
   
                 {# notes #}

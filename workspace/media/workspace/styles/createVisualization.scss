@@ -1,0 +1,212 @@
+/* Importar */
+@import 'variables';
+
+.navCreatorContainer{
+
+  /* Navegación */
+  .navCreator{
+    position:relative;
+
+      ul{
+        width:310px;border-right:1px solid $color-base-extra-light;min-height:500px;
+
+          /* Items */
+          li{font-family:$font-titles-family, sans-serif;font-weight:300;font-size:$font-size-l;padding:30px 10px;cursor:pointer;color:$font-color-semi-light;border-bottom:1px solid $color-base-extra-light;}
+          li:hover{background:$color-base-extra-light;}
+          li.active{background:#8fceea;color:$font-color-base;}
+
+          /* Títulos */
+          li.heading{font-size:$font-size-m;text-transform:uppercase;color:$font-color-light;padding:20px 10px;cursor:default;border:0 none;background:none;}
+
+          li.heading:not(:first-child){margin-top:20px;}
+      }
+
+      ul.navCreatorPicker{
+        display:none;position:absolute;left:310px;top:0;min-width:9999px;min-height:9999px;overflow:hidden;cursor:default;
+
+          span{float:left;margin-right:20px;}
+
+          /* Items */
+          li{
+            font-size:$font-size-l;color:$accent-color;float:left;padding:20px 30px;float:left;width:100%;
+
+              h4{line-height:1.6;}
+
+              p{font-family:Arial, sans-serif;font-size:$font-size-m;color:$font-color-light;font-style:normal;line-height:1;}
+          }
+          li:hover{background-color:#ededed;}
+          li:last-child{margin-bottom:30px;}
+
+          /* Títulos */
+          li.heading{padding-left:30px;background:none;font-size:$font-size-m;color:$font-color-light;}
+      }
+
+  }
+}
+
+
+/* Formularios */
+.radio,
+.checkbox{
+  position:relative;padding-left:20px;line-height:19px;padding-left:22px;
+
+    label{display:block;padding:5px 0;}
+
+    input,
+    input{position:absolute;left:0;}
+}
+
+fieldset{margin-bottom:20px;}
+select{font-size:$font-size-m;}
+
+.sourcesContent,
+.tagsContent{padding-left:115px;}
+
+
+/* Botones */
+button{background-color:$accent-color;border:none;outline:none;border-radius:none;cursor:pointer;}
+
+  /* Grupo de botones */
+  .btnGroup {
+    margin-bottom:10px;
+
+      p{margin-left:0;}
+
+      button{border:2px solid $color-base-extra-light;border-radius:0;cursor:pointer;background-color:$brand-color;width:48px;height:48px;margin:3px 10px 3px 0;padding:10px;
+
+        &:hover{border-color:$color-base-light;}
+
+      }
+
+      button.active{border:2px solid $accent-color;}
+  }
+    
+  /* Grupo de botones inline
+  /* Usar como complemento a .btnGroup 
+  */
+  .btnInlineGroup{
+    button{float:left;margin:3px 0;}
+  }
+
+
+/* Cuadros
+/* Botones con ícono, títuo y descripción
+*/
+.patch{
+  cursor:pointer;margin-bottom:15px;display:inline-block;border:2px solid $color-base-extra-light;width:100%;padding:15px;
+
+  &:hover{border:2px solid $color-base-light;}
+
+  span{float:left;margin-right:15px;}
+  p{color:$font-color-light;}
+  a:hover{text-decoration:none;}
+}
+.patch.active{border-color:$accent-color;}
+
+
+/* Gráficos */
+.preview-container {
+
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;
+    &:hover{border-color:$color-base-light;}
+    &:hover .icon{background-color:$accent-shine;}
+    .chart-preview-view{height:100%;}
+  }
+
+  /* Contenedor de vista previa */
+  .chartContent,
+  .chartContentFinish,
+  .mapContent,
+  .mapContentFinish{height:480px;background-position:center center;background-repeat:no-repeat;}
+
+  p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
+
+  /* Vistas previas */
+  .previewArea{
+    background-image:url(/static/workspace/images/createVisualization/previewArea.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewArea.svg);
+  }
+  .previewLine{
+    background-image:url(/static/workspace/images/createVisualization/previewLine.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewLine.svg);
+  }
+  .previewColumn{
+    background-image:url(/static/workspace/images/createVisualization/previewColumn.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewColumn.svg);
+  }
+  .previewBar{
+    background-image:url(/static/workspace/images/createVisualization/previewBar.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewBar.svg);
+  }
+  .previewPie{
+    background-image:url(/static/workspace/images/createVisualization/previewPie.png);
+    background-image:linear-gradient(transparent,transparent),url(/static/workspace/images/createVisualization/previewPie.svg);
+  }
+} 
+
+/* Modal */
+.modal{
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
+
+  .main-section{margin:0;}
+
+  .sidebar{overflow-y:auto;margin-right:20px;
+
+    .row{
+      padding-bottom:25px;
+
+      /* Sidebar */
+      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;line-height:23px;}
+
+      /* Tip */
+      p{color:$font-color-light;margin-left:15px;}
+
+      input{
+        height:28px;border-radius:0;border-color:$font-color-base;width:75%;padding-bottom:0;padding-top:0;
+        
+        &:focus,
+        .active{box-shadow:0;border-color:#0091fe;}
+      }
+    }
+  }
+
+  /* Identificador por color */
+  .hot-sel-1,
+  .hot-sel-2,
+  .hot-sel-3{
+    margin-top:10px;
+
+    span.color{
+      float:left;height:30px;margin-right:10px;width:5px;}
+  }
+
+  .hot-sel-1 span.color,
+  td.hot-sel-1{background-color:#86ad7f;}
+
+  .hot-sel-2 span.color,
+  td.hot-sel-2{background-color:#ffb796;}
+
+  .hot-sel-3 span.color, 
+  td.hot-sel-3{background-color:#d6ebff;}
+
+  input.active{font-weight:bold;background-color:$modal-table-selected-color;}
+  .handsontable td.area{background:$modal-table-selected-color;}
+
+  /* Cómo seleccionar */
+  .helpTips{
+    margin-top:30px;float:left;width:100%;
+
+    div:first-child{margin-top:15px;}
+    div{
+      float:left;width:100%;
+
+      p.select{padding-top:25px;}
+      p.column{padding-top:61px;}
+      p.row{padding-top:42px;}
+    }
+  }
+
+  /* Tabla */
+  .table-view{height:600px;overflow:hidden;width:100%;}
+
+}

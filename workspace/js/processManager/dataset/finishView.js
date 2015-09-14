@@ -65,7 +65,7 @@ var FinishView = StepView.extend({
 		this.previous();
 	},
 
-	onSaveButtonClicked: function(){
+	onSaveButtonClicked: function(){	
 
 		if(this.model.isValid(true)){
 

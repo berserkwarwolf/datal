@@ -1,0 +1,24 @@
+{% load i18n extra_tags core_components components %}
+
+<section class="list-container col-xs-10">
+   <div id="visualization_list">
+      
+      <!-- Grid -->
+      <div id="grid" style="display:none;"></div>
+
+      <!-- Pagination -->
+      <div class="pagination clearfix" id="id_pagination" style="display:none;">
+         <div class="items-per-page FL">
+            <label for="id_itemsPerPage">{% trans "ITEMS-PER-PAGE" %}</label>
+            <select id="id_itemsPerPage">
+               <option value="10">10</option>
+               <option value="20">20</option>
+               <option value="50">50</option>
+               <option value="100">100</option>
+            </select>
+         </div>
+         <div id="paginator"></div>
+      </div>
+
+   </div>
+</section>

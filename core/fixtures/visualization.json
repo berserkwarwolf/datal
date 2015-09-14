@@ -1,0 +1,24 @@
+[
+{
+    "pk": 1734, 
+    "model": "core.visualization", 
+    "fields": {
+        "datastream": 69651, 
+        "guid": "MORTA-POR-ACCID-DEL-TRABA", 
+        "user": 1647, 
+        "last_published_revision": 5603,
+        "last_revision": 5603
+    }
+},
+{
+    "pk": 1735, 
+    "model": "core.visualization", 
+    "fields": {
+        "datastream": 69654, 
+        "guid": "SERIE-DE-TASA-GLOBA-DE", 
+        "user": 1647, 
+        "last_published_revision": 5604,
+        "last_revision": 5604
+    }
+}
+]

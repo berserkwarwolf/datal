@@ -37,7 +37,7 @@ msgid "MODEL_STATUS_DRAFT"
 msgstr "Draft"
 
 msgid "MODEL_STATUS_PENDING_REVIEW"
-msgstr "Pending review"
+msgstr "Under review"
 
 msgid "MODEL_STATUS_UNDER_REVIEW"
 msgstr "Under review"
@@ -49,7 +49,13 @@ msgid "MODEL_STATUS_REJECTED"
 msgstr "Rejected"
 
 msgid "MODEL_STATUS_APPROVED"
-msgstr "Approved"
+msgstr "Accepted"
+
+msgid "APP-APPROVE-TEXT"
+msgstr "Accept"
+
+msgid "APP-REJECT-TEXT"
+msgstr "Reject"
 
 msgid "MODEL-LANGUAJE-EN"
 msgstr "English "
@@ -938,3 +944,18 @@ msgstr "Resource needs review."
 
 msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
 msgstr "You cannot edit a resource while waiting for review."
+
+msgid "APP-ONDEMAND-TEXT"
+msgstr "On demand"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Daily"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Hourly"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Weekly"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Monthly"

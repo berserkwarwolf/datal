@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-
-import types
-import logging
-from django.db import models, connection
 from django.conf import settings
-from django.core.paginator import InvalidPage
-from django.core.urlresolvers import reverse
-from core.helpers import slugify
-from core import helpers, choices
 
-from core.search.finder import Finder
-#from elasticsearch import Elasticsearch
-from core.lib.elastic import ElasticsearchIndex
+from core.search.finder import Finder, FinderManager
+import re
 
 
 class ElasticsearchFinder(Finder):
@@ -20,14 +11,22 @@ class ElasticsearchFinder(Finder):
 
     def search(self, *args, **kwargs):
 
-	self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query      = kwargs.get('query', '')
+        self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
+        self.query = re.escape(kwargs.get('query', ''))
         self.account_id = kwargs.get('account_id')
-        self.resource   = kwargs.get('resource', 'all')
-        page            = kwargs.get('page', 0)
-        max_results     = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
-        slice           = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
-        self.sort      = kwargs.get('order', self.order_by)
+        self.resource = kwargs.get('resource', 'all')
+        page = kwargs.get('page', 0)
+        max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
+        slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
+        
+        self.order =  kwargs.get('order')
+
+        if self.order and self.order=='top':
+            self.sort = "hits: desc"
+        elif self.order and self.order=='last':
+            self.sort =  "timestamp:asc"
+        else:
+            self.sort = self.order_by        
 
         if page == 0:
             start = 0
@@ -60,7 +59,7 @@ class ElasticsearchFinder(Finder):
             i['_source']['fields']['docid'] = i['_source']['docid']
             docs.append(i['_source']['fields'])
 
-        search_time = float(results['took'])/1000
+        meta_data={'search_time':float(results['took'])/1000, 'count': results['hits']['total'], 'time_out': results['timed_out']}
         facets = results['facets']['type']['terms']
 
         results = []
@@ -70,21 +69,32 @@ class ElasticsearchFinder(Finder):
             to_add = self.get_dictionary(doc)
             results.append(to_add)
 
-        return results, search_time, facets
+        return results, meta_data, facets
 
     def __build_query(self):
         self.logger.info("El query es: %s" % self.query)
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
-            self.resource = ["ds", "dt", "db", "chart", "vt"]
+            self.resource = ["ds", "dt", "db", "vz"]
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
             self.resource = [self.resource]
 
+        # algunas busquedas, sobre todo las federadas,
+        # buscan en un list de account_id
+        # Asi que si llega solo un account_id, lo mete en un list igual
+        if type(self.account_id) in (type(str()), type(int()), type(long()), type(float())):
+            account_ids=[int(self.account_id)]
+        elif type(self.account_id) == type([]):
+            account_ids=self.account_id
+        else:
+            #debería ir un raise?!?!?
+            account_ids=self.account_id
+
         filters = [
-            {"term": {"account_id": self.account_id}},
+            {"terms": {"account_id": account_ids}},
             {"terms": {"type": self.resource}}
         ]
 
@@ -119,3 +129,10 @@ class ElasticsearchFinder(Finder):
         }
 
         return query
+
+class ElasticFinderManager(FinderManager):
+
+    def __init__(self):
+        self.finder_class = ElasticsearchFinder
+        self.failback_finder_class = ElasticsearchFinder
+        FinderManager.__init__(self)

@@ -3,23 +3,21 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	el: '.main-section',
 
 	theDataTable: null,
-		listResources: null,
-		sourceUrl: null,
-		tagUrl: null,
-		datastreamEditItemModel: null,
+	listResources: null,
+	sourceUrl: null,
+	tagUrl: null,
+	datastreamEditItemModel: null,
 
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
-		'click #id_approve, #id_reject': 'review',
-		"click #id_addNewButton": "onAddNewButtonClicked",
+		'click #id_unpublish': 'onUnpublishButtonClicked',
+		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
 		"click #id_edit": "onEditButtonClicked",
 	},
 
-	bindings: {
-		'#id_status': 'text:status',
-	},
-
 	initialize: function(){
+		this.template = _.template( $("#context-menu-template").html() );
+		this.listenTo(this.model, "change:status", this.render);
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
 
@@ -32,22 +30,23 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
-		this.setSidebarHeight();
+		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
+		// this.setSidebarHeight();
 		return this;
 	},
 
-	setSidebarHeight: function(){
+	// setSidebarHeight: function(){
 
-		var self = this;
+	// 	var self = this;
 
-		$(document).ready(function(){
+	// 	$(document).ready(function(){
 
-			var otherHeights = 0;
-			self.setHeights( '.sidebar-container .box', otherHeights );
+	// 		var otherHeights = 0;
+	// 		self.setHeights( '.sidebar-container .box', otherHeights );
 
-		});
+	// 	});
 
-	},
+	//},
 
 	setHeights: function(theContainer, theHeight){
 
@@ -60,7 +59,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			otherHeight = theHeight,
 			minHeight = tabsHeight - otherHeight;
 
-		$(heightContainer).css('min-height', minHeight+ 'px');
+		// $(heightContainer).css('min-height', minHeight+ 'px');
 
 		$(window).resize(function(){
 
@@ -72,29 +71,15 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				windowHeight = $(window).height();
 		 	}
 
-		 	var alertHeight = 0;
-			if($('.section-content .alert').length > 0){
-				if($('.section-content .alert').css('display') != 'none'){
-					alertHeight =
-						parseFloat( $('.section-content .alert').height() )
-						+ parseFloat( $('.section-content .alert').css('padding-top').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('padding-bottom').split('px')[0] )
-						+ parseFloat( $('.section-content .alert').css('margin-bottom').split('px')[0] );
-				}
-			}
-
 			var sectionContentHeight =
 				windowHeight
 				- parseFloat( otherHeight	)
-				- ( alertHeight )
 				- $('.header').height()
-				- parseInt($('.header').css('border-top-width').split('px')[0])
-				- parseInt($('.header').css('border-bottom-width').split('px')[0])
 				- $('.main-section .section-title').height()
-				- parseInt($('.main-section .section-content').css('padding-top').split('px')[0])
-				- parseInt($('.main-section .section-content').css('padding-bottom').split('px')[0])
-				- $('.footer').height()
-				- 3; // 3 rounds up the number, don't know why.
+				- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] );
+				- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
+				- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
+				- 20; // to set some space at the bottom
 
 			$(heightContainer).css('height', sectionContentHeight+'px');
 
@@ -102,11 +87,11 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},  
 
-	review: function(event){
+	changeStatus: function(event){
 		
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
-			url = this.model.get('reviewURL'),
+			url = this.model.get('changeStatusUrl'),
 			self = this;
 
 		$.ajax({
@@ -125,27 +110,13 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 				if(response.status == 'ok'){
 					
 					// Set Status
-					self.model.set('status',response.datastream_status)
-
-					// Hide Review Bar
-					self.$el.find('#id_reviewBar').hide();
-
-					// Show hidden buttons
-					self.$el.find('#id_edit').show();
-					self.$el.find('#id_delete').show();
-
-					// Update overlay Edit status
-					// self.options.datastreamEditItemModel.set('status',response.datastream_status_id);
-
-					// Update Heights
-					setTimeout(function(){
-						self.updateHeights();
-					}, 0);
+					self.model.set('status_str',STATUS_CHOICES( response.datastream_status ));
+					self.model.set('status',response.datastream_status);
 
 					// Set OK Message
 					$.gritter.add({
-						title: gettext('APP-SETTINGS-SAVE-OK-TITLE'),
-						text: response.messages,
+						title: response.messages.title,
+						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 2500
@@ -153,27 +124,15 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 				}else{
 
-					// Set Error Message
-					$.gritter.add({
-						title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-						text: response.messages,
-						image: '/static/workspace/images/common/ic_validationError32.png',
-						sticky: true,
-						time: ''
-					});
+					datalEvents.trigger('datal:application-error', response);
 
 				}
 
 			},
 			error:function(response){
-				// Set Error Message
-				$.gritter.add({
-					title: gettext('ADMIN-HOME-SECTION-ERROR-TITLE'),
-					text: gettext('ADMIN-HOME-SECTION-ERROR-TEXT'),
-					image: '/static/workspace/images/common/ic_validationError32.png',
-					sticky: true,
-					time: ''
-				});
+
+				datalEvents.trigger('datal:application-error', response);
+
 			},
 			complete:function(response){
 				// Hide Loading
@@ -181,7 +140,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			}
 		});
 
-	},  
+	},
 
 	updateHeights: function(){
 			
@@ -207,13 +166,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},
 
-	onEditButtonClicked: function(event){
-		new DatastreamEditItemView({
-			model: this.datastreamEditItemModel,
-			parentView: this
-		});
-		},
-
 	initFilters: function(){
 
 		// Init Backbone PageableCollection
@@ -223,20 +175,29 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},
 
-	onAddNewButtonClicked: function() {
-		var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
-			dataViewCreationStepsUrl: this.options.dataViewCreationStepsUrl,
-		});
-		},
-
 	onDeleteButtonClicked: function(){
 		self = this;
 		this.deleteListResources = new Array();
 		this.deleteListResources.push(this.options.model);
 		var deleteItemView = new DeleteItemView({
 			models: this.deleteListResources,
-			type: "visualizations",
-			parentView: this.parentView
+			type: "visualizations"
+		});
+	},
+
+	onUnpublishButtonClicked: function(){
+		this.unpublishListResources = new Array();
+		this.unpublishListResources.push(this.options.model);
+		var unpublishView = new UnpublishView({
+				models: this.unpublishListResources,
+				type: "visualizations"
+		});
+	},
+
+	onEditButtonClicked: function(event){
+		new DatastreamEditItemView({
+			model: this.datastreamEditItemModel,
+			parentView: this
 		});
 	},
 

@@ -182,9 +182,6 @@
                                 <!-- GOOGLE PLUS -->
                                 <li class="google"><div class="g-plusone" data-size="tall" data-count="true"></div></li>
 
-                                <!-- LINKED IN -->
-                                <li class="linkedin"><iframe src="{% url "share_manager.action_linkedin" %}?url={{base_uri|urlEncode}}{{visualization_revision.permalink|urlEncode}}" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:61px; height:90px;"></iframe></li>
-
                             </ul>
                         </div>
                     </div>
@@ -196,7 +193,7 @@
         </div>
     </div>
 
-    <div id="id_edit_dataservice_container" class="branded">
+    <div id="id_edit_dataservice_container" class="branded" novalidate>
         <form id="id_datastreamGrid">
             <input type="hidden" name="datastream_id" value="{{visualization_revision.datastreamrevision_id}}"/>
         </form>

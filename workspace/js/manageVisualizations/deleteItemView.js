@@ -1,91 +1,110 @@
 var DeleteItemView = Backbone.View.extend({
-    el: '#id_deleteVisualization',
 
-    events: {
-        "click #del_resource": "deleteVisualization",
-        "click #del_revision": "deleteRevision"
-    },
+	el: '#id_deleteVisualization',
 
-    initialize: function(options) {
-        $('#id_deleteVisualization').data('overlay').load();
-    },
+	parentView: null,
+	bulkActions: null,
 
-    deleteVisualization: function() {
-        that = this;
-        _.each(this.options.models, function(model) {
-            resource = model.get('title')
+	events: {
+		"click #id_deleteResource": "deleteVisualization",
+		"click #id_deleteRevision": "deleteRevision"
+	},
 
-            model.remove({
-               success: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE'),
-                        text: resource + ": "+gettext('APP-DELETE-VISUALIZATION-ACTION-TEXT'),
-                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
-                        sticky: false,
-                        time: 3500
-                    });
-                    that.undelegateEvents();
-                    $('#id_deleteVisualization').data('overlay').close();
-                    that.options.itemCollection.fetch({
-                        reset: true
-                    });
-                },
+	initialize: function(options) {
 
-                error: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text: resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
-                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
-                        sticky: true,
-                        time: 2500
-                    });
-                    that.undelegateEvents();
-                    $('#id_deleteVisualization').data('overlay').close();
-                }
-            });
+		this.parentView = this.options.parentView;
 
-        });
-    },
+		// Check if is a Bulk Actions Overlay
+		if( _.isUndefined( this.options.bulkActions ) ){
+			this.bulkActions = false;
+		}else{
+			this.bulkActions = this.options.bulkActions;
+		}
 
-    deleteRevision: function() {
-        that = this;
-        _.each(this.options.models, function(model) {
-            resource = model.get('title')
-            model.remove_revision({
+		// Then, if is a Bulk Actions Overlay, change the el and $el
+		if( this.bulkActions ){
+			this.el = '#id_bulkDeleteDataview';
+			this.$el = $( this.el );
+		}
 
-                success: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text: resource + ": "+gettext('APP-DELETE-DATASET-ACTION-TEXT'),
-                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
-                        sticky: false,
-                        time: 3500
-                    });
-                    that.undelegateEvents();
-                    $('#id_deleteVisualization').data('overlay').close();
-                    that.options.itemCollection.fetch({
-                        reset: true
-                    });
-                },
+		// init Overlay
+		this.$el.overlay({
+			top: 'center',
+			left: 'center',
+			mask: {
+				color: '#000',
+				loadSpeed: 200,
+				opacity: 0.5,
+				zIndex: 99999
+			}
+		});
 
-                error: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                        text: resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
-                        image: '/static/core/images/common/im_defaultAvatar_90x90.jpg',
-                        sticky: true,
-                        time: 2500
-                    });
-                    that.undelegateEvents();
-                    $('#id_deleteVisualization').data('overlay').close();
-                }
-            });
+		// Render
+		this.render();
 
-        });
+	},
 
-    },
+	render: function(){
+		this.$el.data('overlay').load();
+	},
 
-    closeOverlay: function() {
-        $('#id_deleteVisualization').data('overlay').close();
-    }
+	deleteVisualization: function() {
+		var affectedResourcesCollection = new AffectedResourcesCollection();
+		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
+			collection: affectedResourcesCollection,
+			itemCollection: this.options.itemCollection,
+			models: this.options.models,
+			type: this.options.type
+		});
+		this.parentView.resetBulkActions();
+		this.closeOverlay();
+		this.undelegateEvents();
+	},
+
+	deleteRevision: function() {
+		self = this;
+		_.each(this.options.models, function(model) {
+
+			var resource = model.get('title');
+
+			model.remove_revision({
+
+				success: function() {
+					$.gritter.add({
+						title: gettext('APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE'),
+						text: resource + ": " + gettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT'),
+						image: '/static/workspace/images/common/ic_validationOk32.png',
+						sticky: false,
+						time: 3500
+					});
+					self.closeOverlay();
+					self.undelegateEvents();
+					self.options.itemCollection.fetch({
+						reset: true
+					});
+				},
+
+				error: function() {
+					$.gritter.add({
+						title: gettext('APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE'),
+						text: resource + ": " + gettext('APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT'),
+						image: '/static/workspace/images/common/ic_validationError32.png',
+						sticky: true,
+						time: 2500
+					});
+					self.closeOverlay();
+					self.undelegateEvents();
+				}
+
+			});
+			self.parentView.resetBulkActions();
+
+		});
+
+	},
+
+	closeOverlay: function() {
+		$("#ajax_loading_overlay").hide();
+		this.$el.data('overlay').close();
+	}
 });

@@ -112,7 +112,7 @@
 
 /*LOADING*/
 .dataStreamContainer .Loading{border:0;margin:0;padding:0;width:100%;}
-.dataStreamContainer .Loading td{background:#fff url(/static/core/images/common/im_smallAjaxLoader.gif) no-repeat center center;width:auto;height:193px;}
+.dataStreamContainer .Loading td{background:#fff url(/static/core/images/common/im_smallAjaxLoader.gif) no-repeat center center;width:auto;height:300px;}
 .dataStreamContainer .Loading td a{height:193px;display:block;line-height:245px;text-align:center;overflow:hidden;width:auto;font-size:11px;}
 .dataStreamContainer .Loading td a:hover{color:#F25665;text-decoration:none;}
 .dataStreamContainer .Loading td a span{position:relative;left:2px;}

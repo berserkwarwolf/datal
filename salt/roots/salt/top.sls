@@ -13,6 +13,7 @@ base:
     - nginx.ng
     - core.selenium
     - core.bower
+    - core.grunt
     - apps.aos.core
     - apps.datal.core
     - apps.datastore.core

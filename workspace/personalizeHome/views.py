@@ -8,7 +8,7 @@ from django.shortcuts import render_to_response, HttpResponse
 from django.core.exceptions import ValidationError
 
 from core.auth.decorators import login_required, privilege_required
-from core.helpers import get_domain_with_protocol
+from core.http import get_domain_with_protocol
 from core.communitymanagers import *
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
@@ -19,7 +19,8 @@ from workspace.personalizeHome.managers import ThemeFinder
 @csrf_exempt
 def load(request):
     auth_manager = request.auth_manager
-    preference = request.preferences
+    account = auth_manager.get_account()
+    preference = account.get_preferences()
     stats = request.stats #TODO this must be loaded at context_procesor but it's not working 
     jsonContent = preference["account_home"]
     home_tab = True
@@ -38,16 +39,16 @@ def save(request):
         preferences = account.get_preferences()
         if jsonObj['type'] == 'save':
             if jsonObj['theme'] is None:
-                account.set_preference('account.has.home', False)
+                preferences['account.has.home'] = False
             else:
-                account.set_preference('account.has.home', True)
+                preferences['account.has.home'] = True
             account.set_preference('account.home', jsonContent)
             return HttpResponse(json.dumps({
                 'status': 'ok',
                 'messages': [ugettext('APP-PREFERENCES-SAVESUCCESSFULLY-TEXT')]}), content_type='application/json')
         else:
             previewHome = 'http://'+preferences['account_domain']+'/home?preview=true'
-            account.set_preference('account.preview', jsonContent)
+            preferences['account.preview'] = jsonContent
             return HttpResponse(json.dumps({'preview_home':previewHome}), content_type='application/json')
 
 

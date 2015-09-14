@@ -1,0 +1,88 @@
+{% load i18n extra_tags components %}
+
+<div id="ChartSelectDataModal" class="process-manager-modal hidden modal">
+	<div class="main-section">
+	<div class="section-title clearfix">
+		<div class="context-menu clearfix">
+	<div class="row">
+		<div class="col-xs-7">
+			<h1>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT" %}</h1>
+		</div>
+		<div class="col-xs-5 context-buttons clearfix">
+			<div class="FR">
+				<button class="button default btn-cancel">{% trans "APP-CANCEL-TEXT" %}</button>
+				<button class="button primary btn-done" disabled="disabled">{% trans "APP-GRAPH-TEXT" %}</button>
+			</div>
+		</div>
+	</div>
+	</div>
+	</div>
+
+	<div class="row">
+
+		<div class="col-xs-3">
+			<div class="sidebar">
+
+				<div class="selected-ranges-view">
+					<form class="form" novalidate>
+						<div class="row">
+							<label>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT" %}</label>
+							<div class="hot-sel-1">
+								<span class="color"></span>
+								<input name="range_data" type="text" />
+							</div>
+						</div>
+
+						<div class="row">
+							<label>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT" %}</label>
+							<p calss="tip">{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT" %}</p>
+							<div class="hot-sel-2">
+								<span class="color"></span>
+								<input name="range_labels" type="text" />
+							</div>
+						</div>
+
+						<div class="row">
+							<label>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT" %}</label>
+							<p class="tip">{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT" %}</p>
+							<div class="hot-sel-3">
+								<span class="color"></span>
+								<input name="range_headers" type="text" />
+							</div>
+						</div>
+					</form>
+				</div>
+
+				<div class="helpTips">
+					<div class="title">¿Cómo seleccionar?</div>
+					
+					<div>
+						<img src="/static/workspace/images/common/howToSelect.gif" class="FL">
+						<p class="select">Seleccioná varias celdas de una columna o fila</p>
+					</div>
+
+					<div>
+						<img src="/static/workspace/images/common/howToSelectCol.gif" class="FL">
+						<p class="column">La columna completa</p>
+					</div>
+
+					<div>
+						<img src="/static/workspace/images/common/howToSelectRow.gif" class="FL">
+						<p class="row">O bien, la fila completa</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-xs-9">
+			<div class="data-table-view">
+				<div class="table-view">
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+</div>

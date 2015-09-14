@@ -2,9 +2,9 @@
     var ErrorManagerView = Backbone.View.extend({
         template: null,
         initialize: function () {
-            this.model.on("change", this.render.bind(this));
+            this.model.on("set change", this.render, this);
 
-            datalEvents.on('datal:application-error', this.onApplicationError.bind(this));
+            datalEvents.on('datal:application-error', this.onApplicationError, this);
         },
         /**
          * Captures an object containing data from an error exception

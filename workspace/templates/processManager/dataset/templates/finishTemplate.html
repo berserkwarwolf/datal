@@ -7,29 +7,29 @@
 	{# title #}
 	<div class="row clearfix">
 		{{ form.title.label_tag }}
-		<span class="required">*</span>
 		{{ form.title }}
+		<span class="required">*</span>
 	</div>
 	
 	{# description #}
 	<div class="row clearfix">
 		{{ form.description.label_tag }}
-		<span class="required">*</span>
 		{{ form.description }}
+		<span class="required">*</span>
 	</div>
 	
 	{# category #}
 	<div class="row clearfix">
 		{{ form.category.label_tag }}
-		{# <span class="required">*</span> #}
 		{{ form.category }}
+		{# <span class="required">*</span> #}
 	</div>
 	
 	{# status #}
-	<div class="row clearfix">
+	<div class="row clearfix" style="display:none;">
 		{{ form.status.label_tag }}
+		{{ form.status }}
 		{# <span class="required">*</span> #}
-	  {{ form.status }}
 	</div>
 	
 	<hr class="separator">

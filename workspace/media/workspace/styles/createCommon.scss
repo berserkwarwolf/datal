@@ -3,9 +3,9 @@
 @import 'functions';
 @import 'mixins';
 
-.main-section .section-content{background-color:#f6f4f4;padding:0;}
+.main-section .section-content{padding:0;overflow:visible;}
 .create{padding:0;}
-.create header{background-color:#fff;padding:20px 15px 18px 15px;border-bottom:1px solid #e5e3e3;
+.create header{background-color:#fff;padding:20px 0;border-bottom:1px solid #e5e3e3;margin-bottom:20px;
   -webkit-border-radius:3px 3px 0 0;
      -moz-border-radius:3px 3px 0 0;
           border-radius:3px 3px 0 0;
@@ -17,26 +17,25 @@
 .create header h3 span{font-size:$font-size-m;font-weight:normal;color:$font-color-light;}
 .create .insetFormTitle{font-size:$font-size-m;margin:15px 0;font-family:$font-secondary-family;text-transform:uppercase;}
 
-.create .navigation{margin-top:-5px;}
+.create .navigation,
+.edit .navigation{position:absolute;top:-90px;right:0;}
 .create .navigation a{float:left;margin-left:10px;}
 .create .navigation a.alpha{font-family:Arial,Helvetica,sans-serif;}
 .create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
-.create .title{font-family:$font-secondary-family;text-transform:uppercase;font-size:$font-size-base;padding:15px 15px 10px 15px;border-bottom:1px solid #e5e5e5;box-shadow:0 1px 0 0 #fff;}
-.create .required{color:#d21717;padding-left:5px;}
-.create header .required{padding-left:0;}
-.create .formContent .required{float:right;padding-right:12px;}
+.create .required{color:#d21717;padding-left:5px;font-size:16px;vertical-align:top;}
+.create header .required{padding-left:0;vertical-align:baseline;font-size:inherit;}
 
 .create .wrapper1, .create .wrapper2, .create .wrapper3{height:100%;width:100%;
   -webkit-border-radius:3px;
      -moz-border-radius:3px;
           border-radius:3px;
 }
-.create .wrapper1{background-color:#f6f4f4;height:100%;padding-left:310px;}
-.create .wrapper2{border-left:1px solid #e5e5e5;background-color:#fff;}
+.create .wrapper1{/*background-color:#f6f4f4;*/height:100%;padding-left:310px;}
+.create .wrapper2{/*border-left:1px solid #e5e5e5;*/background-color:#fff;}
 .create .wrapper3{float:left;margin-left:-310px;}
-.create .sidebar{float:left;height:100%;width:310px;}
+.create .sidebar{float:left;height:100%;width:310px;position:relative;}
 .create .helpBox p{margin-bottom:5px;}
 
 /* Start */
@@ -51,24 +50,23 @@
      -moz-box-shadow:0 0 5px rgba(208,208,208,1);
           box-shadow:0 0 5px rgba(208,208,208,1);
  }
- .create .box .button{display:block;}
- .create .box:hover .button.primary{@include linear-gradient($button-primary-color-gradient,$button-primary-color);}
+.create .box .button{display:block;}
 .create .box .boxCreate{display:block;background-size:cover;background-position:center center;background-repeat:no-repeat;height:170px;border-bottom:1px solid #e5e3e3;text-align:center;background:$accent-color-05;}
 .create .box h3{color:#3a3a3a;font-size:18px;font-weight:bold;padding-bottom:12px;}
 .create .box p{color:#999;font-size:14px;padding-bottom:18px;}
 .create .box .boxCreateDesc{display:block;padding:15px;}
 
-@media all and (min-width:1337px){
+@include media-query(min-width, 1337px) { 
   .create .box{width:320px;margin:0 20px 20px;}
   .create .box .boxCreate{height:227px;}
 }
-@media all and (max-width:1024px){
+@include media-query(max-width, 1024px) { 
   .create .boxContent{padding:20px 0;}
   .create .box{width:200px;}
   .create .box .boxCreate{height:142px;}
 }
 
-.create .row label{font-size:12px;display:block;float:left;width:34%;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;
+.create .row label{font-size:12px;display:inline-block;padding-right:8px;padding-top:7px;text-shadow:0 1px 0 #fff;float:left;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -76,7 +74,6 @@
 .create .row p.has-error{padding-left:34%;clear:both;}
 
 /* Form */
-.create .formContent fieldset{padding:20px;}
 .create .formContent .separator{height:1px;background:#d7d7d7;margin:5px 0 20px 0;border:0;padding:0;}
 .create .formContent .row{padding-bottom:15px;}
 .create .formContent .row input[type="text"],
@@ -84,15 +81,26 @@
 .create .formContent .row input[type="file"], 
 .create .formContent .row input[type="url"],
 .create .formContent .row input[type="email"],
-.create .formContent .row select{width:440px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;
+.create .formContent .row select{width:480px;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;padding:5px;font-size:12px;height:28px;margin:0;display:inline-block;font-size:$font-size-base;text-transform:none;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
 }
 .create .formContent .row input[type="file"]{padding:0;}
-.create .formContent .row label{font-size:$form-label-size;width:115px;line-height:inherit;height:inherit;color:$form-label-color;}
-.create .formContent .row p.has-error{padding-left:115px;clear:both;}
-.create .formContent .row textarea{width:440px;
+
+.create{
+  .formContent{
+    .input-button{position:relative;overflow:hidden;width:480px;height:28px;cursor:pointer;display:inline-block;
+      .button{height:28px;line-height:25px;right:0;position:absolute;top:0;width:95px;z-index:1;@include border-radius(3px 0 0 3px);border-top-color:transparent;border-right-color:transparent;border-bottom-color:transparent;border-left-color:#e2e0e0;background:none;@include transition(border-right, 0.30s, ease-in-out);}
+    }
+    .sourcesContent,
+    .tagsContent{padding-left:115px;}
+  }
+}
+
+.create .formContent .row label{font-size:$form-label-size;line-height:inherit;height:inherit;color:$form-label-color;width:115px;}
+.create .formContent .row p.has-error{padding-left:115px;clear:both;float:left;}
+.create .formContent .row textarea{width:480px;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -103,11 +111,7 @@
 .create .formContent .row.checkbox{}
 .create .formContent .row.checkbox input[type=checkbox]{width:auto;float:left;position:relative;top:6px;}
 .create .formContent .row.checkbox p.tip{margin-left:0;float:left;clear:none;margin-top:8px;}
-.create .formContent .row .tagsContent,
-.create .formContent .row .sourcesContent,
-.create .formContent .row .paramContent{margin-left:115px;}
-.formContent p.tip{float:left;margin:5px 0 0 116px;padding:0;}
-.create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding-bottom:10px;}
+.create p.tip{clear:both;color:$font-color-light;font-size:$font-size-s;text-shadow:0 1px 0 #fff;padding:5px 0 10px 115px;}
 .create .nolabel{margin-left:115px;position:relative;top:3px;}
 
 .sticky{position:fixed;width:100%;top:0;z-index:100;border-top:0;} 

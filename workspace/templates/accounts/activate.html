@@ -19,11 +19,11 @@
     </div>
     </header>
     <div class="account-box-content">
-        <form action="{{form.action}}" method="post">
+        <form action="{{form.action}}" method="post" novalidate>
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
             <fieldset>
-                <legend class="font-mb">{% trans "APP-ACTIVATION-TITLE-TEXT" %}</legend>
+                <legend class="">{% trans "APP-ACTIVATION-TITLE-TEXT" %}</legend>
                 <p class="sub">{% trans "APP-ACTIVATION-SUBTITLE-TEXT" %}</p>
 
                 <div class="row clearfix">
@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="row buttons center">
-                    <input type="submit" id="id_activateButton" class="button small primary" value="{% trans 'APP-START-TEXT' %}" />
+                    <input type="submit" id="id_activateButton" class="button primary" value="{% trans 'APP-START-TEXT' %}" />
                 </div>
             </fieldset>
         </form>

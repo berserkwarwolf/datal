@@ -18,20 +18,30 @@
 {% endblock %}
 
 {% block sectionTitle %}
-<h1>{% trans "APP-SETTINGS-TEXT" %}</h1>
+<div class="context-menu clearfix">
+    <div class="col-xs-12">
+        <h1>{% trans "APP-BRANDING-TEXT" %}</h1>
+    </div>
+</div>
 {% endblock %}
 
 {% block content %}
+
     {% include "admin_manager/tabs.html" %}
-    <div class="formContainer settingsContent">
-        <form id="id_adminBrandingForm" action="{{form.action}}" method="post">
+
+    <div class="formContainer settingsContent col-xs-12 clearfix">
+        <form id="id_adminBrandingForm" action="{{form.action}}" method="post" novalidate>
+
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
+        
+
             <div class="titleContainer clearfix">
                 <h3 class="FL">{% trans "WORKSPACE-MICROSITE-SETTINGS" %}</h3>
             </div>
 
             <div class="columns clearfix">
+
                 <div class="CL">
                     <div class="dataStreamForm">
                         <fieldset class="form">
@@ -104,6 +114,7 @@
             <div class="titleContainer clearfix">
                 <h3 class="FL">{% trans "WORKSPACE-CUSTOMIZE-SETTINGS" %}</h3>
             </div>
+
             <div class="columns clearfix">
                 <div class="CL">
                     <div class="dataStreamForm">
@@ -193,18 +204,17 @@
                     <div class="helpBox">
                         <div class="helpBoxInner">
                             <h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
-                            <p>{% trans "BRANDED-BRANDINGS-TIP" %}<p>
+                            <p>{% trans "BRANDED-BRANDINGS-TIP" %}</p>
                         </div>
                     </div>
                 </div>
 
             </div>
 
-            <div class="buttons center">
-                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary small" title="{% trans 'APP-SAVE-TEXT' %}"/>
+            <div class="buttons center col-xs-12">
+                <input type="submit" value="{% trans 'APP-SAVE-TEXT' %}" class="button primary" title="{% trans 'APP-SAVE-TEXT' %}"/>
             </div>
-            
-        </div>
-    </form>
-</div>
+
+        </form>
+    </div>
 {% endblock %}

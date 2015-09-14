@@ -5,9 +5,9 @@ from django.db import models, connection
 from django.conf import settings
 from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
-from core.helpers import slugify
+from core.utils import slugify
 from core import helpers, choices
-
+from core.exceptions import SearchIndexNotFoundException
 
 class FinderManager:
 
@@ -47,7 +47,7 @@ class Finder:
 
         self.logger = logging.getLogger(__name__)
         self.logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
-	if settings.USE_SEARCHINDEX == 'searchify':
+        if settings.USE_SEARCHINDEX == 'searchify':
             self.index = SearchifyIndex()
         elif settings.USE_SEARCHINDEX == 'elasticsearch':
             self.index = ElasticsearchIndex()
@@ -57,37 +57,37 @@ class Finder:
             raise SearchIndexNotFoundException()
 
     def extract_terms_from_query(self):
-        l_subqueries = re.split('\+', self.query.strip())
-        l_query_terms = []
+        subqueries = re.split('\+', self.query.strip())
+        query_terms = []
 
-        for l_subquery in l_subqueries:
-            if l_subquery:
-                l_terms = re.split('"(.*?)"|', l_subquery.strip())
-                l_subquery_terms = []
-                for l_term in l_terms:
+        for subquery in subqueries:
+            if subquery:
+                terms = re.split('"(.*?)"|', subquery.strip())
+                subquery_terms = []
+                for term in terms:
                     try:
-                        l_clean_term = l_term.strip()
-                        if l_clean_term:
-                            l_subquery_terms.append(l_clean_term)
+                        clean_term = term.strip()
+                        if clean_term:
+                            subquery_terms.append(clean_term)
                     except:
                         pass
-                l_query_terms.append(l_subquery_terms)
+                query_terms.append(subquery_terms)
 
         # cleaning the blocked terms, unless this terms are the only terms
-        l_term_count = 0
-        l_terms_filtered = []
-        for l_query in l_query_terms:
-            l_subquery_terms = []
-            for l_term in l_query:
-                if l_term not in settings.SEARCH_TERMS_EXCLUSION_LIST:
-                    l_subquery_terms.append(l_term)
-                    l_term_count = l_term_count + 1
-            l_terms_filtered.append(l_subquery_terms)
+        term_count = 0
+        terms_filtered = []
+        for query in query_terms:
+            subquery_terms = []
+            for term in query:
+                if term not in settings.SEARCH_TERMS_EXCLUSION_LIST:
+                    subquery_terms.append(term)
+                    term_count = term_count + 1
+            terms_filtered.append(subquery_terms)
 
-        if l_term_count:
-            self.terms = l_terms_filtered
+        if term_count:
+            self.terms = terms_filtered
         else:
-            self.terms = l_query_terms
+            self.terms = query_terms
 
         self.terms = [ subquery for subquery in self.terms if subquery ]
 
@@ -96,98 +96,84 @@ class Finder:
             return self.get_datastream_dictionary(doc)
         elif doc['type'] == 'db':
             return self.get_dashboard_dictionary(doc)
-        elif doc['type'] == 'chart':
+        elif doc['type'] == 'vz':
             return self.get_visualization_dictionary(doc)
         elif doc['type'] == 'dt':
             return self.get_dataset_dictionary(doc)
 
-    def get_datastream_dictionary(self, p_doc):
+    def get_datastream_dictionary(self, document):
 
-        l_parameters = []
-        if p_doc['parameters']:
+        parameters = []
+        if document['parameters']:
             import json
-            l_parameters = json.loads(p_doc['parameters'])
+            parameters = json.loads(document['parameters'])
 
-        id = p_doc['datastream_id']
-        title = p_doc['title']
+        id = document['datastream_id']
+        title = document['title']
         slug = slugify(title)
-        permalink = reverse('datastream_manager.action_view', urlconf = 'microsites.datastream_manager.urls', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('viewDataStream.view', urlconf='microsites.urls',
+                            kwargs={'id': id, 'slug': slug})
 
-        l_datastream = dict (dataservice_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                , category = p_doc['category_name']
-                                , category_name = p_doc['category_name']
-                                )
+        data = dict (id=id, revision_id=document['datastream__revision_id'], title=title, description=document['description'], parameters=parameters,
+                             tags=[ tag.strip() for tag in document['tags'].split(',') ], permalink=permalink,
+                             type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
+                             ,end_point=document['end_point'], timestamp=document['timestamp'], owner_nick=document['owner_nick'])
 
-        return l_datastream
+        return data
 
-    def get_dataset_dictionary(self, p_doc):
+    def get_dataset_dictionary(self, document):
 
-        l_parameters = []
-        if p_doc['parameters']:
+        parameters = []
+        if document['parameters']:
             import json
-            l_parameters = json.loads(p_doc['parameters'])
+            parameters = json.loads(document['parameters'])
 
-        dataset_id = p_doc['dataset_id']
-        title = p_doc['title']
+        dataset_id = document['dataset_id']
+        title = document['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf = 'microsites.urls', kwargs={'dataset_id': dataset_id,
-                                                                                               'slug': slug})
+        permalink = reverse('manageDatasets.action_view', urlconf='microsites.urls', kwargs={'dataset_id': dataset_id,'slug': slug})
 
-        l_dataset = dict (dataset_id=dataset_id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
-        return l_dataset
+        dataset = dict(id=dataset_id, revision_id=document['datasetrevision_id'], title=title, description=document['description'], parameters=parameters,
+                          tags=[ tag.strip() for tag in document['tags'].split(',') ], permalink=permalink,
+                          #type=document['type'],end_point=document['end_point'], timestamp=document['timestamp'])
+                             type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
+                             ,end_point=document['end_point'], timestamp=document['timestamp'], owner_nick=document['owner_nick'])
+        return dataset
 
-    def get_visualization_dictionary(self, p_doc):
+    def get_visualization_dictionary(self, document):
 
         try:
-            if p_doc['parameters']:
+            if document['parameters']:
                 import json
-                l_parameters = json.loads(p_doc['parameters'])
+                parameters = json.loads(document['parameters'])
+            else:
+                parameters = []
+
         except:
-            l_parameters = []
+            parameters = []
 
-        id = p_doc['visualization_id']
-        title = p_doc['title']
+        title = document['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('chart_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['visualization_id'], 'slug': slug})
 
-        visualization = dict(visualization_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , parameters=l_parameters
-                                , tags=[ l_tag.strip() for l_tag in p_doc['tags'].split(',') ]
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
+        visualization = dict(id=document['visualization_id'], revision_id=document['visualization_revision_id'], title=title, description=document['description'],
+                             parameters=parameters, tags=[tag.strip() for tag in document['tags'].split(',')],
+                             permalink=permalink,
+                             type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
+                             ,end_point=document.get('end_point', None), timestamp=document['timestamp'], owner_nick=document['owner_nick'])
         return visualization
 
-    def get_dashboard_dictionary(self, p_doc):
+    def get_dashboard_dictionary(self, document):
 
-        id = p_doc['dashboard_id']
-        title = p_doc['title']
+        title = document['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': id, 'slug': slug})
+        permalink = reverse('dashboard_manager.action_view',  urlconf='microsites.urls',
+            kwargs={'id': document['dashboard_id'], 'slug': slug})
 
-        dashboard_dict = dict (dashboard_id=id
-                                , title=title
-                                , description=p_doc['description']
-                                , tags=[ tag.strip() for tag in p_doc['tags'].split(',') ]
-                                , user_nick=p_doc['owner_nick']
-                                , permalink=permalink
-                                , type = p_doc['type']
-                                )
+        dashboard_dict = dict (id=document['dashboard_id'], title=title, description=document['description'],
+                               tags=[tag.strip() for tag in document['tags'].split(',')], user_nick=document['owner_nick'],
+                               permalink=permalink, type = document['type'])
         return dashboard_dict
 
     def _get_query(self, values, boolean_operator = 'AND'):
@@ -211,6 +197,7 @@ class Finder:
         boolean_operators = ['AND', '+', 'OR', 'NOT', '-']
         if boolean_operator not in boolean_operators:
             raise Exception('Boolean operator used, does not exists')
+
     def _get_category_filters(self, category_filters, filter_key, filter_value):
         if filter_value:
             if type(filter_value) == types.ListType:

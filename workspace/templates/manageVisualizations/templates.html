@@ -1,0 +1,109 @@
+{% load i18n extra_tags core_components components %}
+
+{# Active Filter #}
+<script type="text/template" id="active-filters-template">
+	<li><span><%= filter_name %></span> <a class="remove" title="{% trans 'FILTERS-REMOVE-TEXT' %}" id="<%= filter_id %>">x</a></li>
+</script>
+
+{# Filters view #}
+<script type="text/template" id="filters-template">
+  <section class="filters-container">
+
+   <% if (active.length !== 0) {%>
+   <div class="activeFilters">
+      <h3 class="font-mb">{% trans 'APP-ACTIVEFILTERS-TEXT' %}</h3>
+      <ul id="active-filters-list">
+        <% _(active).each(function( item ){ %>
+        <li>
+          <span><%= item.title %></span> 
+          <a class="remove" data-cid="<%= item.cid %>" title="{% trans 'FILTERS-REMOVE-TEXT' %}">x</a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+   <% if (author.length !== 0) {%>
+   <div class="filters">
+      <h3 class="font-mb">{% trans 'APP-AUTHOR-TEXT' %}</h3>
+      <ul>
+        <% _(author).each(function( item ){ %>
+        <li>
+          <a class="filter-add link black" data-cid="<%= item.cid %>">
+            <%= item.title %>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+   <% if (status.length !== 0) {%>
+   <div class="filters">
+      <h3 class="font-mb">{% trans 'APP-STATUS-TEXT' %}</h3>
+      <ul>
+        <% _(status).each(function( item ){ %>
+        <li>
+          <a class="filter-add link black" data-cid="<%= item.cid %>">
+            <%= item.title %>
+          </a>
+        </li>
+        <% }); %>
+      </ul>
+   </div>
+   <% }%>
+
+  </section>
+</script>
+
+{# Grid - Title Cell #}
+<script type="text/template" id="grid-titlecell-template">
+
+	{# Title #}
+  <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
+
+  {# Last Modified #}
+  <% if(created_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% } %>
+
+  {# Actions #}
+  <ul class="actions clearfix">
+
+		{# Review #}
+  	<% if( authManager.isPublisher() || authManager.isAdmin() ){ %>
+    	<% 
+        // Status Pending Review = 1
+        if( status === 1 ){ 
+      %>
+      	<li class="review"><a href="<%=url%>" title=<%= gettext('APP-REVIEW-TEXT') %>><%= gettext('APP-REVIEW-TEXT')%></a></li>
+      <% } %>
+    <% } %>
+
+    {% comment %}
+    {# Edit #}
+		<% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+    	<li class="edit">
+    		<a data-id="<%=id%>" data-url="{% url 'manageVisualizations.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+    	</li>
+    <% } %>
+    {% endcomment %}
+
+    {# Delete #}
+    <% 
+      // Status Pending Review = 1
+      if( status !== 1 ){ 
+    %>
+      <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %> class="red"><%= gettext('APP-DELETE-TEXT') %></a></li>
+    <% } %>
+
+  </ul>
+</script>
+
+{# Grid - visualization Cell #}
+<script type="text/template" id="grid-datastreamcell-template">
+  <a href="<%= datastream_url %>"><%= title %></a>
+</script>

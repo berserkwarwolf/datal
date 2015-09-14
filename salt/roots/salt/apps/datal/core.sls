@@ -17,6 +17,13 @@ ensure_new_indextank:
     - mode: 755
     - makedirs: True
 
+# Create static components files directory
+{{ pillar['application']['path'] }}/components/components:
+  file.directory:
+    - user: {{ user }}
+    - group: {{ group }}
+    - makedirs: True
+
 # Create data store resources directory
 {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
   file.directory:
@@ -84,7 +91,7 @@ bower_install:
     - group: {{ group }}
     - cwd: {{ pillar['application']['path'] }}
     - names:
-      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; CI=true python manage.py bower_install --settings=core.settings
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; CI=true bower install
 
 migrate_db:
   cmd.run:
@@ -159,3 +166,10 @@ reindex:
     - names:
       - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py index --settings=workspace.settings --re-index
 
+log_activity:
+  cmd.run:
+    - user: {{ user }}
+    - group: {{ group }}
+    - cwd: {{ pillar['application']['path'] }}
+    - names:
+      - PATH="{{ pillar['virtualenv']['path'] }}/bin/:$PATH"; python manage.py log_activity --settings=workspace.settings
