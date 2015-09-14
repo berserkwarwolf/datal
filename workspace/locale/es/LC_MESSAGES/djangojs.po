@@ -828,3 +828,6 @@ msgstr "Descripción"
 
 msgid "APP-VIZ-FINISH-TEXT"
 msgstr "Revisión"
+
+msgid "APP-VALID-PHONE-TEXT"
+msgstr "Ingrese un número de teléfono válido"

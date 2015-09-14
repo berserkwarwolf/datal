@@ -3103,9 +3103,6 @@ msgstr "Doesn't look good?"
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
 msgstr "Change rows/columns"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reorder data"
-
 msgid "APP-DEFAULT-TEXT"
 msgstr "Default"
 
@@ -3207,3 +3204,21 @@ msgstr "Revisión"
 
 msgid "APP-LABELS-TIP-TEXT"
 msgstr "Keywords to help identify Visualization content."
+
+msgid "APP-INVERT-TEXT"
+msgstr "Invert"
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "This field is required"
+
+msgid "APP-HOW-TO-SELECT-TITLE"
+msgstr "How to select?"
+
+msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
+msgstr "Select multiple cells in a column or row"
+
+msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
+msgstr "The entire column"
+
+msgid "APP-HOW-TO-SELECT-ROW-TEXT"
+msgstr "Or the entire row"

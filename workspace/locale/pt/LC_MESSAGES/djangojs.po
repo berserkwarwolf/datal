@@ -842,3 +842,6 @@ msgstr "Description"
 
 msgid "APP-VIZ-FINISH-TEXT"
 msgstr "Review"
+
+msgid "APP-VALID-PHONE-TEXT"
+msgstr "Specify a valid phone number"

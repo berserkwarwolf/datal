@@ -72,3 +72,19 @@ class PreviewForm(RequestForm):
     lat = forms.CharField(required=False)
     lon = forms.CharField(required=False)
     traces = forms.CharField(required=False)
+
+
+class PreviewMapForm(RequestForm):
+    nullValueAction = forms.CharField(required=True)
+    nullValuePreset = forms.CharField(required=False)
+
+    data = forms.CharField(required=True)
+    lat = forms.CharField(required=True)
+    lon = forms.CharField(required=True)
+
+    headers = forms.CharField(required=False)
+    traces = forms.CharField(required=False)
+
+    bounds = forms.CharField(required=False)
+    zoom = forms.IntegerField(required=False)
+

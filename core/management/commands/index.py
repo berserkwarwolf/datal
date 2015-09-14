@@ -41,7 +41,7 @@ class Command(BaseCommand):
             for vz in Visualization.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
                 vz_revision=vz.last_published_revision
                 search_dao = VisualizationSearchDAOFactory().create(vz_revision)
-                print search_dao.add()
+                search_dao.add()
 
             # TODO Hay que usar el metodo query del DAO
             for datastream in DataStream.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):

@@ -117,7 +117,7 @@ ODATA_FREQUENCY = Choices(
     ("daily", ugettext_lazy('APP-DAILY-TEXT')),
     ("hourly", ugettext_lazy('APP-HOURLY-TEXT')),
     ("ondemand", ugettext_lazy('APP-ONDEMAND-TEXT')),
-    ("other", ugettext_lazy('APP-OTHER-TEXT')),
+    # ("other", ugettext_lazy('APP-OTHER-TEXT')),
 )
 
 

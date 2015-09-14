@@ -35,7 +35,7 @@
         <div class="row clearfix">
           <div class="clearfix">
             <label class="FL" for="id_password">{% trans "MODEL-PASSWORD-TEXT" %}:</label>
-            <a href="{% url 'accounts.forgot_password' %}" title="{% trans 'APP-FORGOTPASSWORD-TEXT' %}" class="link FR">{% trans "APP-FORGOTPASSWORD-TEXT" %}</a>
+            <a href="{% url 'accounts.forgot_password' %}" title="{% trans 'APP-FORGOTPASSWORD-TEXT' %}" class="link FR" tabindex="-1">{% trans "APP-FORGOTPASSWORD-TEXT" %}</a>
           </div>
           {{form.password}}
         </div>

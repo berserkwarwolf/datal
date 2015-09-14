@@ -1,6 +1,6 @@
 from django.conf.urls import *
 from django.conf import settings
-
+from django.views.generic import RedirectView
 import os
 
 def jsi18n(request, packages = None, domain = None):
@@ -61,7 +61,7 @@ urlpatterns = patterns('',
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
 
-
+    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
 )
 
 handler404 = 'core.views.action404'

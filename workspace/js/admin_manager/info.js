@@ -1,4 +1,11 @@
 $(document).ready(function(){
+
+    jQuery.validator.addMethod("phoneGlobal", function(phone_number, element) {
+        phone_number = phone_number.replace(/\s+/g, ""); 
+        return this.optional(element) || phone_number.length > 9 &&
+            phone_number.match(/^(?:(?:\(?(?:00|\+)([1-4]\d\d|[1-9]\d?)\)?)?[\-\.\ \\\/]?)?((?:\(?\d{1,}\)?[\-\.\ \\\/]?){0,})(?:[\-\.\ \\\/]?(?:#|ext\.?|extension|x)[\-\.\ \\\/]?(\d+))?$/i);
+    }, gettext('APP-VALID-PHONE-TEXT'));
+
     $form = $('#id_adminInfoForm');
 
     $form.validate({
@@ -6,7 +13,8 @@ $(document).ready(function(){
                 account_name: { required: true },
                 account_link: { uri: true },
                 account_contact_person_email: { email: true },
-                account_contact_dataperson_email: { email: true }
+                account_contact_dataperson_email: { email: true },
+                account_contact_person_phone: { phoneGlobal: true }
           },
         submitHandler: save
     });

@@ -315,11 +315,10 @@ def edit(request, datastream_revision_id=None):
 def preview(request):
 
     form = forms.PreviewForm(request.GET)
-    logger.error("entering preview handler")
-    if form.is_valid():
-        logger.error("form is valid")
-        preferences = request.preferences
 
+    if form.is_valid():
+
+        preferences = request.preferences
         datastream_revision_id  = request.GET.get('datastream_revision_id', None)
 
         try:
@@ -332,54 +331,76 @@ def preview(request):
             logger.error(e)
             raise Http404
         else:
-
             query = RequestProcessor(request).get_arguments(datastream["parameters"])
             chart_type = form.cleaned_data.get('type')
 
             query.update({
                 'pId': int(datastream_revision_id),
-                'pType': chart_type
+                'pType': chart_type,
+                'pNullValueAction': form.cleaned_data.get('nullValueAction'),
+                'pNullValuePreset': form.cleaned_data.get('nullValuePreset'),
+                'pData': form.cleaned_data.get('data'),
+                'pLabelSelection': form.cleaned_data.get('labels'),
+                'pHeaderSelection': form.cleaned_data.get('headers'),
+                'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
+                'pInvertData': form.cleaned_data.get('invertData')
             })
 
-            if chart_type in ['mapchart']:
+            page = form.cleaned_data.get('page')
+            if page is not None:
+                query['pPage'] = page
 
-                # Mandatory
-                query.update({
-                    'pLatitudSelection': form.cleaned_data.get('lat'),
-                    'pLongitudSelection': form.cleaned_data.get('lon'),
-                    'pHeaderSelection': form.cleaned_data.get('headers'),
-                    'pTraceSelection': form.cleaned_data.get('traces')
-                })
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = form.cleaned_data.get('limit')
 
-                # Optional
-                bounds = form.cleaned_data.get('bounds')
-                if bounds is not None:
-                    query['pBounds'] = bounds
+            result, content_type = preview_chart(query)
 
-                zoom = form.cleaned_data.get('zoom')
-                if zoom is not None:
-                    query['pZoom'] = zoom
-            else:
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Error!')
 
-                page = form.cleaned_data.get('page')
-                if page is not None:
-                    query['pPage'] = page
 
-                limit = form.cleaned_data.get('limit')
-                if limit is not None:
-                    query['pLimit'] = form.cleaned_data.get('limit')
+@login_required
+def preview_map(request, datastream_revision_id):
 
-                query.update({
-                    'pNullValueAction': form.cleaned_data.get('nullValueAction'),
-                    'pNullValuePreset': form.cleaned_data.get('nullValuePreset'),
-                    'pData': form.cleaned_data.get('data'),
-                    'pLabelSelection': form.cleaned_data.get('labels'),
-                    'pHeaderSelection': form.cleaned_data.get('headers'),
-                    'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
-                    'pInvertData': form.cleaned_data.get('invertData')
-                })
+    preferences = request.preferences
+    form = forms.PreviewMapForm(request.GET)
 
-            logger.error(query)
+    if form.is_valid():
+        try:
+            datastream = DataStreamDBDAO().get(
+                request.user.language,
+                datastream_revision_id=datastream_revision_id,
+                published=False
+            )
+        except Exception, e:
+            logger.error(e)
+            raise Http404
+        else:
+            query = RequestProcessor(request).get_arguments(datastream["parameters"])
+
+            query.update({
+                'pId': int(datastream_revision_id),
+                'pType': 'mapchart',
+                'pNullValueAction': form.cleaned_data.get('nullValueAction', 'exclude'),
+                'pNullValuePreset': form.cleaned_data.get('nullValuePreset', ''),
+                'pData': form.cleaned_data.get('data', ''),
+                'pLatitudSelection': form.cleaned_data.get('lat', ''),
+                'pLongitudSelection': form.cleaned_data.get('lon', ''),
+                'pHeaderSelection': '',
+                'pTraceSelection': '',
+            })
+
+            # Optional
+            bounds = form.cleaned_data.get('bounds')
+            if bounds is not None:
+                query['pBounds'] = bounds
+
+            zoom = form.cleaned_data.get('zoom')
+            if zoom is not None:
+                query['pZoom'] = zoom
+
             result, content_type = preview_chart(query)
 
             return HttpResponse(result, mimetype=content_type)
@@ -398,7 +419,7 @@ def action_invoke(request):
                 visualization_revision_id=visualizationrevision_id
             )
         except VisualizationRevision.DoesNotExist:
-            return HttpResponse("Viz doesn't exist!") # TODO
+            return VisualizationNotFoundException()
         else:
             query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
             query['pId'] = visualizationrevision_id
