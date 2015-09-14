@@ -394,7 +394,9 @@ def change_status(request, dataset_revision_id=None):
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = request.POST.get('killemall', False)
+            killemall = True if killemall == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
                 dataset_status=StatusChoices.DRAFT,
