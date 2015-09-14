@@ -47,7 +47,7 @@ var MainView = Backbone.View.extend({
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-CHART-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view')
         }).init();
@@ -71,7 +71,7 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-MAP-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view-map')
         }).init();
