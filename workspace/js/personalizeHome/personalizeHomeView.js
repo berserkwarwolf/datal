@@ -6,7 +6,7 @@ var personalizeView = Backbone.View.extend({
 	themeToSet : null,
 	themeModel : null,
 	events:{
-		'click #id_save, id_save_top, #id_preview, #id_preview_top': 'save',
+		'click #id_save, #id_save_top, #id_preview, #id_preview_top': 'save',
 		'click #id_noThemeButton, #id_theme0Button, #id_theme1Button, #id_theme2Button, #id_theme3Button, #id_theme4Button, #id_theme5Button, #id_theme6Button': 'onSwitchThemeButtonClicked',
 	},
 
@@ -234,6 +234,10 @@ var personalizeView = Backbone.View.extend({
 				data: {'jsonString': saferStringify(ob)}, 
 				dataType: 'json',
 				beforeSend: function(){
+
+					// call global beforeSend func
+					$.ajaxSettings.beforeSend(xhr, settings);
+
 					$("#ajax_loading_overlay").show();
 				},
 				success: function(response) {
