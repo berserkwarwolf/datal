@@ -36,11 +36,10 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this.setHeights();
         }, this);
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
-
-        this.setHeights();
 
         return this;
     },
@@ -111,16 +110,23 @@ var ChartSelectDataModalView = ModalView.extend({
     setHeights: function(t){
         var self = this;
 
-        var contextMenuHeight = parseFloat( $('.context-menu').height() );
+        var sidebar = $('.modal').find('.sidebar'),
+            table = $('.modal').find('.table-view');
 
         $(window).resize(function(){
 
             windowHeight = $(window).height();
-            var sidebarHeight = windowHeight - contextMenuHeight;
-            self.$('.sidebar').css('height', sidebarHeight+'px');
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
+            - 30 // As margin bottom
+            ;
+
+            sidebar.css('height', sidebarHeight+'px');
+            table.css('height', sidebarHeight+'px');
 
         }).resize();
-
     }, 
-
 });

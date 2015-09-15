@@ -439,6 +439,7 @@ def action_edit_category(request):
 @privilege_required('workspace.can_access_admin')
 @require_POST
 def action_delete_category(request):
+    logger = logging.getLogger(__name__)
     form = forms.CategoryDeleteForm(request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -447,8 +448,11 @@ def action_delete_category(request):
         try:
             default_category_id = int(account.get_preference('account.default.category'))
         except:
-            default_category_id = None
-
+            # si no hay categoria por defecto entonces no se pueden eliminar estos recursos, no tenemos a
+            # que categoria cambiarlos
+            response = {'status': 'error', 'messages': [ugettext('APP-CATEGORY-DEFAULT-UNDEFINED')]}
+            return HttpResponse(json.dumps(response), content_type='application/json', status=400)
+            
         if category_id != default_category_id:
 
             # check if it's a transparency category
@@ -458,15 +462,21 @@ def action_delete_category(request):
                 return HttpResponse(json.dumps(response), content_type='application/json', status=400)
 
             # moving the resources to the default category
-            total = DataStreamRevision.objects.filter(category=category_id).update(category=default_category_id)
-            total += DatasetRevision.objects.filter(category=category_id).update(category=default_category_id)
+            datasets_to_update = DatasetRevision.objects.filter(category=category_id)
+            datastreams_to_update = DataStreamRevision.objects.filter(category=category_id)
+
+            if settings.DEBUG: logger.info('Resources to update %s %s' % (str(datasets_to_update), str(datastreams_to_update)))
+            
+            total = datastreams_to_update.update(category=default_category_id)
+            total += datasets_to_update.update(category=default_category_id)
+
+            # reindexing
+            if total > 0:
+                reindex_category_resources(default_category_id, auth_manager.language)
 
             # actually, deleting the category
             cat = Category.objects.get(pk=category_id)
             cat.delete()
-
-            # reindexing
-            reindex_category_resources(default_category_id, auth_manager.language)
 
         else:
             response = {'status': 'error', 'messages': [ugettext('APP-CATEGORY-DEFAULT-CANT-BE-DELETED')]}
@@ -527,13 +537,25 @@ def set_preferences(account, preferences):
 
 
 def reindex_category_resources(category_id, language):
+    """ reindex all resurce using given category """
+    logger = logging.getLogger(__name__)
+    
+    if settings.DEBUG: logger.info('Reindexing category resources %d, %s' % (category_id, language))
+    
     datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
     datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
 
     docs = []
     resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
+    
     for resource in resources:
-        doc=resource.get_dict(language)
+        rev = resource.last_published_revision
+        if not rev:
+            
+            logger.error("invalid last pub revision: %d %s" % (category_id, language))
+            return False
+            
+        doc = rev.get_dict(language)
         docs.append(doc)
 
     SearchifyIndex().indexit(docs)
