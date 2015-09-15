@@ -50,6 +50,8 @@ var FinishView = StepViewSPA.extend({
 			if(value != '<br>' && value != undefined && value != ''){
 				$element.parent().show();
 				$element.html( value );
+			}else{
+				$element.parent().hide();
 			};
 		}
 	},
