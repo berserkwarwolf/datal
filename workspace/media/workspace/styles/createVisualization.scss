@@ -151,7 +151,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
 /* Modal */
 .modal{
-  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:300;
 
   .main-section{margin:0;}
 
@@ -212,6 +212,6 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   }
 
   /* Tabla */
-  .table-view{height:600px;overflow:hidden;width:100%;}
+  .table-view{overflow:auto;}
 
 }

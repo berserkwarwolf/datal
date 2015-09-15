@@ -67,6 +67,8 @@ var DataTableView = Backbone.View.extend({
       disableVisualSelection: ['current'],
       colWidths: 80,
       columns: columns,
+      manualColumnResize: true,
+      manualRowResize: true,
     });
 
     // Selects a range
