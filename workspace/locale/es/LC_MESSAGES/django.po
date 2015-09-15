@@ -2089,6 +2089,9 @@ msgstr "Categoría por defecto"
 msgid "APP-YES-TEXT"
 msgstr "Si"
 
+msgid "APP-CATEGORY-DEFAULT-UNDEFINED"
+msgstr "No hay una categoría por defecto"
+
 msgid "APP-CATEGORY-UPDATED-DEFAULT-FAIL"
 msgstr "Categoría actualizada exitosamente. Por favor, seleccione una nueva categoría por defecto"
 
