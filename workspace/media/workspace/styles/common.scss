@@ -272,12 +272,6 @@ body{background:$color-base;height:100%;min-width:998px;}
   }
 }
 
-@include media-query(max-width, $break-lg) { 
-  .header{position:static;}
-  .workspace{padding-top:0;}
-  .main-navigation{position:absolute;}
-}
-
 /* Collapsed Navigation */
 .layout{
   .workspace,
