@@ -26,6 +26,7 @@ var MetadataView = StepViewSPA.extend({
 		this.$el.find('.validate-msg').hide();
 		//hago set aquí porque Epoxy no se banca nicedit
 		this.model.set('meta_notes',this.notesInstance.instanceById('id_notes').getContent());
+
 		var validation = this.model.validateMetadata();
 		if( validation.valid ){
 			this.next();
