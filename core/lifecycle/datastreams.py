@@ -122,7 +122,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         with transaction.atomic():
             visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
                 visualization__datastream__id=self.datastream.id,
-                id=F('visualization__last_revision__id')
+                id=F('visualization__last_revision__id'),
+                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for visualization_revision in visualization_revisions:

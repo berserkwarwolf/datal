@@ -142,9 +142,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=StatusChoices.PUBLISHED,
                                     allowed_states=allowed_states)
 
-        status = StatusChoices.PUBLISHED
-
-        self.dataset_revision.status = status
+        self.dataset_revision.status = StatusChoices.PUBLISHED
         self.dataset_revision.save()
 
         self._update_last_revisions()
@@ -162,7 +160,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
-                id=F('datastream__last_revision__id')
+                id=F('datastream__last_revision__id'),
+                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for datastream_revision in datastream_revisions:
