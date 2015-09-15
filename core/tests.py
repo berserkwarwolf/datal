@@ -114,7 +114,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
 
         new_dataset = Dataset.objects.get(id=dataset.id)
 
-        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life = DatasetLifeCycleManager(self.user_admin, dataset_id=new_dataset.id)
         life.unpublish()
 
         new_dataset = Dataset.objects.get(id=dataset.id)
