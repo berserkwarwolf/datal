@@ -19,7 +19,7 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-
+from core.helpers import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -417,7 +417,13 @@ def change_status(request, dataset_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result'].pop('datastreams')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
+
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 
 @login_required
