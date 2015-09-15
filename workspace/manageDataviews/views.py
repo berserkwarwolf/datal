@@ -19,6 +19,7 @@ from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
 from core import engine
+from core.helpers import DateTimeEncoder
 
 
 logger = logging.getLogger(__name__)
@@ -378,8 +379,13 @@ def change_status(request, datastream_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DataStreamDBDAO.get(request.user.language, datastream_revision_id=datastream_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
 
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
 @csrf_exempt
 @require_http_methods(["POST"])

@@ -13,7 +13,7 @@ from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
 from core.engine import invoke, preview_chart, invoke_chart
-from core.helpers import RequestProcessor
+from core.helpers import RequestProcessor, DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
@@ -199,7 +199,8 @@ def change_status(request, visualization_revision_id=None):
                 }
             )
         elif action == 'publish':
-            lifecycle.publish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
                 datastream_status=StatusChoices.PUBLISHED,
@@ -231,8 +232,13 @@ def change_status(request, visualization_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
 
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 @login_required
 @require_http_methods(['POST','GET'])
