@@ -29,7 +29,8 @@ charts.views.Chart = Backbone.View.extend({
     valid: function () {
         // Check if data is correct
         // specific chart library
-        return true;
+        // TODO validate all charts conditions
+        return (this.model.get('range_headers')&&this.model.get('range_data')&&this.model.get('range_labels'));
     },
 
     render: function () {
