@@ -231,7 +231,7 @@ LOGGING = {
     'disable_existing_loggers': True,
     'formatters': {
         'verbose': {
-            'format': '[%(levelname)s] %(asctime)s %(module)s %(message)s'
+            'format' : "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] %(message)s",
         },
         'simple': {
             'format': '[%(levelname)s] %(message)s'
@@ -256,6 +256,7 @@ LOGGING = {
             'level': 'DEBUG',
             'class': 'logging.FileHandler',
             'filename': '/tmp/datal.log',
+            'formatter': 'verbose'
         },
         'mail_admins': {
             'filters': ['require_debug_false'],
