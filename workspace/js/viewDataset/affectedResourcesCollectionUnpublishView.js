@@ -70,7 +70,11 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
 
     render: function() {
         this.$el.find('#id_affectedResourcesList').html( this.affectedResourcesHTML );
-        this.$el.data('overlay').load();
+        
+        var self = this;
+        setTimeout(function(){
+            self.$el.data('overlay').load();
+        }, 250);
     },
 
     addResource: function(model) {

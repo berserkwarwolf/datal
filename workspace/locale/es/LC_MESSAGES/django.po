@@ -2917,7 +2917,7 @@ msgid "APP-UNPUBLISH-RESOURCE-TEXT"
 msgstr "Despublicar todas las revisiones"
 
 msgid "APP-UNPUBLISH-REVISION-TEXT"
-msgstr "Despublicar revisión actual"
+msgstr "Despublicar última revisión publicada"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
 msgstr "Despublicar conjunto de datos"
@@ -2926,7 +2926,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
 
 msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Despublicar"
+msgstr "Despublicar todo"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Eliminar vista"

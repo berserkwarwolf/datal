@@ -2924,10 +2924,10 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
 msgid "APP-UNPUBLISH-RESOURCE-TEXT"
-msgstr "Delete all revisions"
+msgstr "Unpublish all revisions"
 
 msgid "APP-UNPUBLISH-REVISION-TEXT"
-msgstr "Delete actual revision"
+msgstr "Unpublish last published revision"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
 msgstr "Unpublish Dataset "
@@ -2936,7 +2936,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataset, will also unpublish."
 
 msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Unpublish"
+msgstr "Unpublish all"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Delete Dataview "

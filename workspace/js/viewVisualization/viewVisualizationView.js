@@ -97,12 +97,24 @@ var viewVisualizationView = Backbone.View.extend({
         });
     },
 
-    changeStatus: function(event){
+    changeStatus: function(event, killemall){
         
+        if( _.isUndefined( killemall ) ){
+            var killemall = false;
+        }else{
+            var killemall = killemall;
+        }
+
         var action = $(event.currentTarget).attr('data-action'),
             data = {'action': action},
             url = this.model.get('changeStatusUrl'),
             self = this;
+
+        if(action == 'unpublish'){
+            var lastPublishRevisionId = this.model.get('lastPublishRevisionId');
+            url = 'change_status/'+lastPublishRevisionId+'/';
+            data.killemall = killemall;
+        }
 
         $.ajax({
             url: url,
@@ -165,7 +177,8 @@ var viewVisualizationView = Backbone.View.extend({
         this.unpublishListResources = new Array();
         this.unpublishListResources.push(this.options.model);
         var unpublishView = new UnpublishView({
-            models: this.unpublishListResources
+            models: this.unpublishListResources,
+            parenView: this
         });
     },
 

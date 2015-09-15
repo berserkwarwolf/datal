@@ -94,7 +94,13 @@ var datasetView = Backbone.Epoxy.View.extend({
 	},
 
 	changeStatus: function(event, killemall){
-		
+
+		if( _.isUndefined( killemall ) ){
+			var killemall = false;
+		}else{
+			var killemall = killemall;
+		}
+
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
 			url = this.model.get('changeStatusUrl'),
@@ -103,11 +109,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 		if(action == 'unpublish'){
 			var lastPublishRevisionId = this.model.get('lastPublishRevisionId');
 			url = 'change_status/'+lastPublishRevisionId+'/';
-			if( killemall == true ){
-				data.killemall = true;
-			}else{
-				data.killemall = false;
-			}
+			data.killemall = killemall;
 		}
 
 		$.ajax({

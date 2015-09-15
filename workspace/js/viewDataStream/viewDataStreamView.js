@@ -31,22 +31,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	render: function(){
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		// this.setSidebarHeight();
 		return this;
 	},
-
-	// setSidebarHeight: function(){
-
-	// 	var self = this;
-
-	// 	$(document).ready(function(){
-
-	// 		var otherHeights = 0;
-	// 		self.setHeights( '.sidebar-container .box', otherHeights );
-
-	// 	});
-
-	//},
 
 	setHeights: function(theContainer, theHeight){
 
@@ -55,11 +41,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		}
 
 		var heightContainer = String(theContainer),
-			tabsHeight = parseFloat( $('.main-navigation').height() ),
-			otherHeight = theHeight,
-			minHeight = tabsHeight - otherHeight;
-
-		// $(heightContainer).css('min-height', minHeight+ 'px');
+			otherHeight = theHeight;
 
 		$(window).resize(function(){
 
@@ -87,12 +69,24 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},  
 
-	changeStatus: function(event){
-		
+	changeStatus: function(event, killemall){
+
+		if( _.isUndefined( killemall ) ){
+			var killemall = false;
+		}else{
+			var killemall = killemall;
+		}
+
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
 			url = this.model.get('changeStatusUrl'),
 			self = this;
+
+		if(action == 'unpublish'){
+			var lastPublishRevisionId = this.model.get('lastPublishRevisionId');
+			url = 'change_status/'+lastPublishRevisionId+'/';
+			data.killemall = killemall;
+		}
 
 		$.ajax({
 			url: url,
@@ -190,7 +184,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		this.unpublishListResources.push(this.options.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
-				type: "visualizations"
+				type: "visualizations",
+				parentView: this
 		});
 	},
 
