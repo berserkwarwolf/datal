@@ -67,8 +67,6 @@ charts.models.Chart = Backbone.Model.extend({
 
     },
     initialize: function () {
-        console.log(this.get('meta_sources'));
-        console.log(this.get('meta_tags'));
         this.data = new charts.models.ChartData({
             id: this.get('resourceID'),
             type: this.get('type')
@@ -100,7 +98,7 @@ charts.models.Chart = Backbone.Model.extend({
             params['invertData'] = "checked";
         }
 
-        if(self.get('invertedAxis')){
+        if(self.get('invertedAxis') && self.get('invertedAxis')!=''){
             params['invertedAxis'] = "checked";
         }
 

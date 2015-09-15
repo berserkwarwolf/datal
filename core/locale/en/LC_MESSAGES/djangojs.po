@@ -272,3 +272,9 @@ msgstr "DATAL &middot; The Open Data Platform"
 
 msgid "APP-A-TEXT"
 msgstr "a"
+
+msgid "APP-NO-MORE-THAN-TEXT"
+msgstr "Please enter no more than"
+
+msgid "APP-CHARACTERS-TEXT"
+msgstr "characters"
