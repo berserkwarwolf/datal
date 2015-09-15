@@ -42,6 +42,10 @@ var ChartView = StepViewSPA.extend({
 
 		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
 
+		this.nextBtn = this.$el.find('a.nextButton');
+
+		this.nextBtn.addClass('disabled');
+
 		this.setupChart();
 	},
 
@@ -79,6 +83,7 @@ var ChartView = StepViewSPA.extend({
 			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
 			this.vizContent.addClass('dataSelected');
 		}
+
 		console.log('the data for your chart has changed', model.toJSON());
 		// TODO: should call this.chartView.render();
 		this.renderChart();
@@ -195,12 +200,10 @@ var ChartView = StepViewSPA.extend({
 			
 			if(this.chartInstance.valid()){
 				this.clearClassesChartBg();
-				// this could me moved into the chart view class VALID method
-				if (this.model.get('range_data')) {
-					this.chartInstance.render();
-				} else {
-					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
-				}
+				this.nextBtn.removeClass('disabled');
+				this.chartInstance.render(); 
+			}	else {
+				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 			}
 		}
 	},
@@ -210,10 +213,10 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onNextButtonClicked: function(){		
+		this.next();
 
 		/*if(this.model.isValid(true)){
 			this.model.setOutput();*/
-			this.next();
 		/*}*/
 
 	},
