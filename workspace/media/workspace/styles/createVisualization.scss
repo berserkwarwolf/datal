@@ -107,7 +107,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 /* Gráficos */
 .preview-container {
 
-  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:-10px;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
