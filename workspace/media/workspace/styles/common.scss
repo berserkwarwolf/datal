@@ -703,8 +703,14 @@ border-color: #ccc;}
 .ajaxLoadingOverlay{background:#fff url(#{$loader-url-light}) center center no-repeat;}
 
 /* Error Manager */
-.gritter-item { font-size: 14px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; }
-.gritter-item .error-description { margin-left: 10px; }
-.gritter-item .error-description .description-title { font-size: 14px; font-weight: bold; display: block; margin: 5px 0 5px -10px; text-shadow: 1px 1px 0 #000; }
-.gritter-item .error-description ul { list-style: none; padding: 0; margin: 0; }
-.gritter-item .error-description ul li { padding: 0 0 5px 0; margin: 0; }
+.gritter-item{font-size: 14px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; 
+  .error-description{margin-left: 10px; 
+    .description-title{font-size: 14px; font-weight: bold; display: block; margin: 5px 0 5px -10px; text-shadow: 1px 1px 0 #000;}
+    ul{list-style: none; padding: 0; margin: 0; 
+      li{padding: 0 0 5px 0; margin: 0;}
+    }
+    a{color:#3587f6;
+      &:hover{color:#0d74ff}
+    }
+  }
+}
