@@ -97,6 +97,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")
 
+
 @login_required
 #@require_privilege("workspace.can_delete_datastream")
 #@requires_review
@@ -125,37 +126,6 @@ def remove(request, visualization_revision_id, type="resource"):
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-@login_required
-#@require_privilege("workspace.can_delete_datastream")
-#@requires_review
-@transaction.commit_on_success
-def unpublish(request, visualization_revision_id, type="resource"):
-    """ unpublish resource """
-    lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.visualization.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-        
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
 
@@ -294,6 +264,7 @@ def related_resources(request):
 
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
+
 
 @login_required
 @require_GET
