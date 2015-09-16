@@ -203,6 +203,7 @@ var ChartView = StepViewSPA.extend({
 				this.nextBtn.removeClass('disabled');
 				this.chartInstance.render(); 
 			}	else {
+				this.nextBtn.addClass('disabled');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 			}
 		}

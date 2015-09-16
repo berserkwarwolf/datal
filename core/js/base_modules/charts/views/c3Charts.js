@@ -80,10 +80,16 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
         var categories = [];
         categories.push(_.map(data.rows, function (r) {return r[0];}));
 
+        var finalData = labels.concat(data.rows);
+        console.log(finalData);
+
+        finalData = _.zip.apply(_, finalData);
+        console.log(finalData);
+
         return {
             labels:labels,
             categories:categories,
-            values:data.rows
+            values:finalData
         };
     },
     
@@ -91,20 +97,27 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
        var data = this.formatData(this.model.data.toJSON());
 
         var types = {};
+        var groups = [];
 
         _.each(data.labels[0],function(e){
-            types[e] = 'area'
+            if(e!='x'){
+                types[e] = 'area-spline';
+                groups.push(e);
+            }
         });
+
+        console.log(JSON.stringify(data.values));
+        console.log(JSON.stringify(types));
+        console.log(JSON.stringify(groups));
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
                 x: 'x',
-                types:types,
-                rows: data.labels.concat(data.values),
-                groups: data.categories
+                columns: data.values,
+                types: types,
+                groups: [groups]
             },
-            type: 'line',
             axis: {
                 x: {
                     type: 'category' // this needed to load string x value
