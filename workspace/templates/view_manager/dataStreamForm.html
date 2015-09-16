@@ -1,5 +1,13 @@
 {% load i18n extra_tags core_components components %}
 
+<script type="text/javascript">
+  var suggestedSources = [];
+
+  {% for source in sources %}
+    suggestedSources.push({name:'{{source.source__name}}', url:'{{source.source__url}}'});
+  {% endfor %}
+</script>
+
 <!-- DATA STREAM FORM -->
 <div class="dataStreamForm">
     <div class="errorBox">
@@ -74,14 +82,7 @@
                         <div>
                             <input id="id_sourceNameSuggest" name="source-name" type="text" class="inputNewTag" maxlength="80"/>
                             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a id="id_displayAddSources" title="" href="javascript:;" class="">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
-                            <div id="id_source_container" class="tagsContent">
-                                
-                                {% for source in sources %}
-                                <span id="id_sources-{{forloop.counter0}}-name">{{source.source__name}}</span>
-                                <span id="id_sources-{{forloop.counter0}}-url">{{source.source__url}}</span>
-                                {% endfor %}
-                                
-                            </div>
+                            <div id="id_source_container" class="tagsContent"></div>
                         </div>
                     </div>
                     <div id="id_addMoreSources" style="display:none;" class="addNewSource">
