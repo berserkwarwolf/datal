@@ -535,7 +535,15 @@ def set_preferences(account, preferences):
     for key, value in preferences.items():
         account.set_preference(key, value)
 
+#####################################################
+# creo que todo esto deberia ser refactoreado para que
+# se use el lifecycle en vez de hablar con el indexador
+# de forma directa
+from core.lifecycle.datasets import DatasetSearchDAOFactory
+from core.lifecycle.datastreams import DatastreamSearchDAOFactory
 
+
+# Para que se le pasa el language?
 def reindex_category_resources(category_id, language):
     """ reindex all resurce using given category """
     logger = logging.getLogger(__name__)
@@ -543,19 +551,18 @@ def reindex_category_resources(category_id, language):
     if settings.DEBUG:
         logger.info('Reindexing category resources %d, %s' % (category_id, language))
     
-    datasets = Dataset.objects.filter(last_published_revision__category_id=category_id)
-    datastreams = DataStream.objects.filter(last_published_revision__category_id=category_id)
+    datasets = Dataset.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
 
     for dataset in datasets:
-        if dataset.last_published_revision:
-            # TODO: Pasa al nuevo indexador
-            # SearchifyIndex().indexit(docs)
-            pass
+        datasetrevision=dataset.last_published_revision
+        search_dao = DatasetSearchDAOFactory().create(datasetrevision)
+        search_dao.add()
     for datastream in datastreams:
-        if datastream.last_published_revision:
-            # TODO: Pasa al nuevo indexador
-            # SearchifyIndex().indexit(docs)
-            pass
+        datastreamrevision=datastream.last_published_revision
+        search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
+        search_dao.add()
+#####################################################
 
 @login_required
 @privilege_required('workspace.can_access_admin')
