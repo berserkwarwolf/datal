@@ -4,14 +4,11 @@ var MapView = StepViewSPA.extend({
 
         // Right way to extend events without overriding the parent ones
         this.addEvents({
-    
             'click a.backButton':           'onPreviousButtonClicked',
             'click a.nextButton':           'onNextButtonClicked',
             'click button.selectData':      'onSelectDataClicked',
             'click .mapTypeId':             'onClickMapTypeId',
-            
-            'keyup input#chartTitle':       'onInputChanged'
-        
+            'click button.btn-zoom':        'onClickZoom'
         });
 
         this.chartsFactory = new charts.ChartsFactory();
@@ -69,6 +66,14 @@ var MapView = StepViewSPA.extend({
         }
     },
 
+    onClickZoom: function (event) {
+        var $target = $(event.currentTarget),
+            increment = $target.data('zoom'),
+            currentZoom = this.chartInstance.mapInstance.getZoom();
+        event.preventDefault();
+        this.chartInstance.mapInstance.setZoom(currentZoom + increment);
+    },
+
     setupChart: function(){
         var chartSettings = this.chartsFactory.create(this.model.get('type'), this.model.get('lib'));
 
@@ -95,6 +100,11 @@ var MapView = StepViewSPA.extend({
             
             if(this.chartInstance.valid()){
                 this.chartInstance.render();
+                this.chartInstance.mapInstance.setOptions({
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false
+                });
             };
 
         }   
