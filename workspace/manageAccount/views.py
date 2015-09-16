@@ -540,26 +540,22 @@ def reindex_category_resources(category_id, language):
     """ reindex all resurce using given category """
     logger = logging.getLogger(__name__)
     
-    if settings.DEBUG: logger.info('Reindexing category resources %d, %s' % (category_id, language))
+    if settings.DEBUG:
+        logger.info('Reindexing category resources %d, %s' % (category_id, language))
     
-    datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
-    datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
+    datasets = Dataset.objects.filter(last_published_revision__category_id=category_id)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id=category_id)
 
-    docs = []
-    resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
-    
-    for resource in resources:
-        rev = resource.last_published_revision
-        if not rev:
-            
-            logger.error("invalid last pub revision: %d %s" % (category_id, language))
-            return False
-            
-        doc = rev.get_dict(language)
-        docs.append(doc)
-
-    SearchifyIndex().indexit(docs)
-
+    for dataset in datasets:
+        if dataset.last_published_revision:
+            # TODO: Pasa al nuevo indexador
+            # SearchifyIndex().indexit(docs)
+            pass
+    for datastream in datastreams:
+        if datastream.last_published_revision:
+            # TODO: Pasa al nuevo indexador
+            # SearchifyIndex().indexit(docs)
+            pass
 
 @login_required
 @privilege_required('workspace.can_access_admin')

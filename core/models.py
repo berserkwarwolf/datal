@@ -664,7 +664,7 @@ class DatasetRevision(RevisionModel):
 
         return dataset_revision
 
-    def get_dict(self, language = 'en'):
+    def get_dict(self, language='en'):
 
         logger = logging.getLogger(__name__)
 
@@ -674,11 +674,11 @@ class DatasetRevision(RevisionModel):
         dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
         account = Account.objects.get(id=self.user.account.id)
 
-        text = [dataset.title, dataset.description, dataset.user_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
-        text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
+        text = [dataset['title'], dataset['description'], dataset['user_nick'], str(dataset['dataset_id'])] #DS uses GUID, but here doesn't exists. We use ID
+        text.extend(dataset['tags']) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
-        account_id = dataset.account_id
+        account_id = dataset['account_id']
         if account_id is None:
             account_id = ''
 
@@ -686,22 +686,22 @@ class DatasetRevision(RevisionModel):
         parameters = ""
 
         indexable_dict = {
-                'docid' : "DT::DATASET-ID-" + str(dataset.dataset_id),
+                'docid' : "DT::DATASET-ID-" + str(dataset['dataset_id']),
                 'fields' :
                     {'type' : 'dt',
-                     'dataset_id': dataset.dataset_id,
-                     'datasetrevision_id': dataset.dataset_revision_id,
-                     'title': dataset.title,
+                     'dataset_id': dataset['dataset_id'],
+                     'datasetrevision_id': dataset['dataset_revision_id'],
+                     'title': dataset['title'],
                      'text': text,
-                     'description': dataset.description,
-                     'owner_nick' : dataset.user_nick,
-                     'tags' : ','.join(dataset.get_tags()),
+                     'description': dataset['description'],
+                     'owner_nick' : dataset['user_nick'],
+                     'tags' : ','.join(dataset['tags']),
                      'account_id' : account_id,
                      'parameters': parameters,
-                     'timestamp': int(time.mktime(dataset.created_at.timetuple())),
-                     'end_point': dataset.end_point,
+                     'timestamp': int(time.mktime(dataset['created_at'].timetuple())),
+                     'end_point': dataset['end_point'],
                     },
-                'categories': {'id': unicode(dataset.category_id), 'name': dataset.category_name}
+                'categories': {'id': unicode(dataset['category_id']), 'name': dataset['category_name']}
                 }
 
         # Update dict with facets
@@ -711,7 +711,7 @@ class DatasetRevision(RevisionModel):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(self.get_meta_data_dict(dataset.meta_text))
+        indexable_dict['fields'].update(self.get_meta_data_dict(dataset['meta_text']))
 
         return indexable_dict
 
