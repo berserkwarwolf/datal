@@ -215,7 +215,7 @@ def change_status(request, visualization_revision_id=None):
 @require_privilege("workspace.can_create_visualization")
 @requires_published_parent()
 @transaction.commit_on_success
-def create(request, viz_type='index'):
+def create(request):
     
     if request.method == 'GET':
         datastream_revision_id = request.GET.get('datastream_revision_id', None)
@@ -284,8 +284,23 @@ def action_view(request, revision_id):
 @requires_published_parent()
 @requires_review
 @transaction.commit_on_success
-def edit(request, datastream_revision_id=None):
-    pass
+def edit(request, revision_id=None):
+    if request.method == 'GET':
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        datastream_rev = DataStreamDBDAO().get(
+            request.auth_manager.language,
+            datastream_revision_id=visualization_rev['datastream_revision_id'])
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev,
+            visualization_revision=visualization_rev
+        ))
+
+    elif request.method == 'POST':
+        pass
 
 
 @login_required
