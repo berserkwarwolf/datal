@@ -619,7 +619,6 @@ i.icon.TNCLIMA{}
 .backgrid .ascending .sort-caret:after{border-bottom:4px solid #a3a3a3 !important;}
 .backgrid .descending .sort-caret:before{border-top:4px solid #a3a3a3 !important;}
 
-
 /* Tags */
 .tag, .param{margin:0 10px 10px 0;float:left;}
 .tag .tagTxt, .param .paramTxt {
@@ -628,6 +627,13 @@ i.icon.TNCLIMA{}
 
 .tag .tagInner a:hover, .tag .tagTxt.isEditing, .param .paramInner a:hover{background-position: 0 bottom;
 border-color: #ccc;}
+
+/* Tabs */
+.ao-tabs{padding:0 10px;background:none;border:0;}
+.ao-tabs .tabsList .tab.tab-selected div a, 
+.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$font-color-semi-light;font-weight:normal;}
+.ao-tabs .tabs-in ul{display:block;box-shadow:0 -1px 0 #e4e4e4 inset;padding-left:20px;}
+.ao-tabs .tabs-in li{position:relative;}
 
 /* Rich text editor */
 .nicEdit-main{
