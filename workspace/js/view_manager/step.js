@@ -934,7 +934,7 @@ var Step2 = Step.extend({
 
         if (CreationManager.attributes.is_update_selection == false) {
             var initialTags = [];
-            var initialSources = [];
+            var initialSources = suggestedSources;
 
             $('#id_operation-tag', this.attributes.$Container).tagging({
                 source: '/tag_manager/action_search',
