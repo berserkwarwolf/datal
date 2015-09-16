@@ -9,15 +9,6 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (data) {
         var labels = [];
         labels.push(_.map(data.fields, function (field) {return field[1];}));
@@ -62,15 +53,6 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un areachart de C3');
-        }
-        return false;
-    },
-
     formatData: function (data) {
         var labels = [];
         labels.push(_.map(data.fields, function (field) {return field[1];}));
@@ -80,10 +62,16 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
         var categories = [];
         categories.push(_.map(data.rows, function (r) {return r[0];}));
 
+        var finalData = labels.concat(data.rows);
+        console.log(finalData);
+
+        finalData = _.zip.apply(_, finalData);
+        console.log(finalData);
+
         return {
             labels:labels,
             categories:categories,
-            values:data.rows
+            values:finalData
         };
     },
     
@@ -91,20 +79,27 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
        var data = this.formatData(this.model.data.toJSON());
 
         var types = {};
+        var groups = [];
 
         _.each(data.labels[0],function(e){
-            types[e] = 'area'
+            if(e!='x'){
+                types[e] = 'area-spline';
+                groups.push(e);
+            }
         });
+
+        console.log(JSON.stringify(data.values));
+        console.log(JSON.stringify(types));
+        console.log(JSON.stringify(groups));
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
                 x: 'x',
-                types:types,
-                rows: data.labels.concat(data.values),
-                groups: data.categories
+                columns: data.values,
+                types: types,
+                groups: [groups]
             },
-            type: 'line',
             axis: {
                 x: {
                     type: 'category' // this needed to load string x value
@@ -120,15 +115,6 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
 charts.views.C3BarChart = charts.views.BarChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
     },
 
     formatData: function (dataModel) {
@@ -169,15 +155,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (dataModel) {
         var data = dataModel.get('rows'),
             fieldnames = [_.map(dataModel.get('fields'), function (field) {
@@ -213,15 +190,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
 charts.views.C3PieChart = charts.views.PieChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un piechart de C3');
-        }
-        return false;
     },
 
     formatData: function (dataModel) {

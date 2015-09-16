@@ -2104,6 +2104,9 @@ msgstr "Category succesfully refreshed. Please, select a new default category."
 msgid "APP-CATEGORY-DEFAULT-CANT-BE-DELETED"
 msgstr "The default category can not be deleted"
 
+msgid "APP-CATEGORY-DEFAULT-UNDEFINED"
+msgstr "The default category is not defined"
+
 msgid "APP-CATEGORY-TRANSPARENCY-CANT-BE-DELETED"
 msgstr "Transparency categories can not be deleted"
 

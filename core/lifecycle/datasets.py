@@ -406,10 +406,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
-            
+
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
-                
+            else:
+                self.dataset.last_published_revision = None
+
             self.dataset.save()
         else:
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente

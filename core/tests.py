@@ -16,7 +16,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
     def setUp(self):
         self.end_point = 'http://nolaborables.com.ar/API/v1/2013'
         self.user_nick = 'administrador'
-        self.user_editor = User.objects.get(nick='administrador')
+        self.user_admin = User.objects.get(nick='administrador')
         self.user_editor = User.objects.get(nick='editor')
         self.user_publicador = User.objects.get(nick='publicador')
 
@@ -47,12 +47,12 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         """
         Testing Lifecycle Manager Create Dataset Method
         """
-        dataset, rev = self.create_dataset(user=self.user_editor)
+        dataset, rev = self.create_dataset(user=self.user_admin)
 
         new_dataset = Dataset.objects.get(id=dataset.id)
 
         # Verifico los campos del dataset
-        self.assertEqual(new_dataset.user, self.user_editor)
+        self.assertEqual(new_dataset.user, self.user_admin)
         self.assertEqual(new_dataset.type, self.source_type)
         self.assertFalse(new_dataset.is_dead)
         self.assertIsNot(new_dataset.guid, '')
@@ -74,6 +74,54 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_publish_dataset_as_admin(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        dataset, rev = self.create_dataset(user=self.user_admin)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
+
+    def test_publish_dataset_as_editor(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        dataset, rev = self.create_dataset(user=self.user_editor)
+
+        life = DatasetLifeCycleManager(self.user_editor, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
+
+    def test_unpublish_dataset_as_admin(self):
+        """
+        Testing Lifecycle Manager Create Dataset Method
+        """
+        dataset, rev = self.create_dataset(user=self.user_admin)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_id=new_dataset.id)
+        life.unpublish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertIsNone(new_dataset.last_published_revision)
+
 
     # def test_create_dataset_published(self):
     #     """

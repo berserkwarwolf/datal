@@ -154,6 +154,16 @@
     datastream_sources: sources,
    // datastream_metadata: ''
 
+    {% if visualization_revision %}
+    visualization_id: {{ visualization_revision.visualization_id }},
+    visualization_revision_id: {{ visualization_revision.visualization_revision_id }},
+    visualization_title: '{{ visualization_revision.title }}',
+    visualization_description: '{{ visualization_revision.description }}',
+    visualization_notes: '{{ visualization_revision.notes }}',
+    visualization_author: '{{ visualization_revision.author }}',
+    visualization_status: {{ visualization_revision.status }},
+
+    {% endif %}
   });
 </script>
 

@@ -26,28 +26,43 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
     def get(self, language, dataset_id=None, dataset_revision_id=None, guid=None, published=True):
         """ Get full data """
+        logger = logging.getLogger(__name__)
         fld_revision_to_get = 'dataset__last_published_revision' if published else 'dataset__last_revision'
-
+        if settings.DEBUG: logger.info('Getting Dataset %s' % str(locals()))
+        
         if guid:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                dataset__guid=guid,
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__guid=guid,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('Dataset Not exist GUID %s' % guid)
+                raise
         elif not dataset_id:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=dataset_revision_id,
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    pk=dataset_revision_id,
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist Revision %s' % dataset_revision_id)
+                raise
         else:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
-
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__id=dataset_id,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist dataset_id=%d' % dataset_id)
+                raise
+                
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 

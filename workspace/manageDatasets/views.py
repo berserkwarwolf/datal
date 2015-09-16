@@ -182,38 +182,6 @@ def remove(request, dataset_revision_id, type="resource"):
         }), content_type='text/plain')
 
 
-@requires_review
-@login_required
-#@require_privilege("workspace.can_delete_dataset")
-@transaction.commit_on_success
-def unpublish(request, dataset_revision_id, type="resource"):
-
-    """ unpublish resource """
-    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.dataset.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASET-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASET-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-
 @login_required
 @require_privilege("workspace.can_create_dataset")
 @requires_if_publish('dataset') #

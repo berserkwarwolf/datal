@@ -162,37 +162,6 @@ def remove(request, datastream_revision_id, type="resource"):
 
 
 @login_required
-#@require_privilege("workspace.can_delete_datastream")
-@requires_review
-@transaction.commit_on_success
-def unpublish(request, datastream_revision_id, type="resource"):
-    """ unpublish resource """
-    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.datastream.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASTREAM-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id,
-        }))
-        
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASTREAM-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-
-@login_required
 @require_http_methods(['POST', 'GET'])
 @require_privilege("workspace.can_create_datastream")
 @requires_dataset()
