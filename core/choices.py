@@ -278,7 +278,7 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('enable.embed.options', 'enable.embed.options')
     ,('enable.junar.footer', 'enable.junar.footer')
     ,('account.featured.dashboards', 'account.featured.dashboards')
-    ,('account.enable.sharing', 'account.enable.sharing')
+    ,('account.enable.sharing', 'account.enable.sharing') # BOOLEAN
     ,('account.enable.notes', 'account.enable.notes') # BOOLEAN
     ,('account.title.color', 'account.title.color')
     ,('account.button.bg.color', 'account.button.bg.color')
