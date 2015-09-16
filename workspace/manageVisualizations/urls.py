@@ -17,5 +17,5 @@ urlpatterns = patterns(
     url(r'^change_status/(?P<visualization_revision_id>\d+)/$', change_status, name='manageVisualizations.change_status'),
     url(r'^filter$', filter, name='manageVisualizations.filter'),
     url(r'^related_resources$', related_resources, name='manageVisualizations.related_resources'),
-    url(r'^edit/(?P<visualization_revision_id>\d+)$', edit, name='manageVisualizations.edit'),
+    url(r'^edit/(?P<revision_id>\d+)$', edit, name='manageVisualizations.edit'),
 )
