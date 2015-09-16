@@ -106,11 +106,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if self.datastream_revision.dataset.last_revision.status != StatusChoices.PUBLISHED:
                 raise ParentNotPuslishedException()
 
-        self._publish_childs()
         self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()
 
         self._update_last_revisions()
+
+        self._publish_childs()
 
         search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
         search_dao.add()
