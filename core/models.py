@@ -250,12 +250,11 @@ class User(models.Model):
                 c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-
     def get_total_visualizations(self):
         c = Cache(db=0)
         total_visualizations = c.get('my_total_visualizations_' + str(self.id))
         if not total_visualizations:
-            total_visualizations =  Visualization.objects.filter(user=self.id).count()
+            total_visualizations = Visualization.objects.filter(user=self.id).count()
             if total_visualizations > 0:
                 c.set('my_total_visualizations_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
