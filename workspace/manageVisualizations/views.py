@@ -207,6 +207,7 @@ def change_status(request, visualization_revision_id=None):
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')
+        response['result'].pop('visualization')
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 

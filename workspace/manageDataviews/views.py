@@ -349,7 +349,6 @@ def change_status(request, datastream_revision_id=None):
             raise NoStatusProvidedException()
 
         # Limpio un poco
-        logger.info(">>>>>>>>>>> %s | %s" % ( request.user.language, datastream_revision_id))
         response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
         response['result'].pop('parameters')
         response['result'].pop('tags')
