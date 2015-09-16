@@ -9,15 +9,6 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (data) {
         var labels = [];
         labels.push(_.map(data.fields, function (field) {return field[1];}));
@@ -60,15 +51,6 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
 charts.views.C3AreaChart = charts.views.LineChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un areachart de C3');
-        }
-        return false;
     },
 
     formatData: function (data) {
@@ -135,15 +117,6 @@ charts.views.C3BarChart = charts.views.BarChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (dataModel) {
         var data = dataModel.get('rows'),
             fieldnames = [_.map(dataModel.get('fields'), function (field) {
@@ -182,15 +155,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (dataModel) {
         var data = dataModel.get('rows'),
             fieldnames = [_.map(dataModel.get('fields'), function (field) {
@@ -226,15 +190,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
 charts.views.C3PieChart = charts.views.PieChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un piechart de C3');
-        }
-        return false;
     },
 
     formatData: function (dataModel) {

@@ -20,7 +20,6 @@ charts.views.ColumnChart = charts.views.Chart.extend({
     
 });
 
-
 charts.views.PieChart = charts.views.Chart.extend({
-    
+	
 });

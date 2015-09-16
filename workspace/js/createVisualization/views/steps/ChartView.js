@@ -1,5 +1,9 @@
 var ChartView = StepViewSPA.extend({
-	
+
+	bindings: {
+	    "p.message": "text:message"
+	},
+
 	initialize: function(){
 
 		// Right way to extend events without overriding the parent ones
@@ -26,6 +30,7 @@ var ChartView = StepViewSPA.extend({
           model: this.model
         });
         this.chartSelectDataModalView.on('open', function () {
+        	this.model.set('select_data',true);
         	if(this.dataTableView){
         		this.dataTableView.render();
         	}
@@ -43,6 +48,8 @@ var ChartView = StepViewSPA.extend({
 		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
 
 		this.nextBtn = this.$el.find('a.nextButton');
+		
+		this.message = this.$el.find('p.message');
 
 		this.nextBtn.addClass('disabled');
 
@@ -90,7 +97,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChartContentClicked: function(){
-		if(!this.chartInstance.chart){
+		if(!this.chartInstance || !this.chartInstance.chart){
 			this.chartSelectDataModalView.open();
 		}
 	},
@@ -189,23 +196,35 @@ var ChartView = StepViewSPA.extend({
 	
 		if (this.ChartViewClass) {
 
-			if(this.chartInstance){
-				this.chartInstance = this.chartInstance.destroy();
-			}
+			this.destroyChartInstance();
 
 			this.chartInstance = new this.ChartViewClass({
 				el: this.chartContent,
 				model: this.model,
 			});
 			
-			if(this.chartInstance.valid()){
+			//Validate data
+			var validation = this.model.valid(); //valida datos por tipo de gráfico
+
+			if(validation===true){
 				this.clearClassesChartBg();
 				this.nextBtn.removeClass('disabled');
-				this.chartInstance.render(); 
+				if(this.model.get('select_data')){ //si alguna vez abrió el modal de datos
+					this.message.hide();
+					this.chartInstance.render();
+				}
 			}	else {
+				this.message.show();
+				this.destroyChartInstance();
 				this.nextBtn.addClass('disabled');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 			}
+		}
+	},
+
+	destroyChartInstance: function(){
+		if(this.chartInstance){
+			this.chartInstance = this.chartInstance.destroy();
 		}
 	},
 
@@ -215,11 +234,6 @@ var ChartView = StepViewSPA.extend({
 
 	onNextButtonClicked: function(){		
 		this.next();
-
-		/*if(this.model.isValid(true)){
-			this.model.setOutput();*/
-		/*}*/
-
 	},
 
 	start: function(){
