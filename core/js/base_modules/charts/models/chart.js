@@ -243,6 +243,7 @@ charts.models.Chart = Backbone.Model.extend({
                 switch(this.get('type')){
                     case 'piechart':
                         console.log('is pie chart');
+                        //validar que no haya números negativos en la primer serie que se usa para el pie
                     break;
                 }
             }

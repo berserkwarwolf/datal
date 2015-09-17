@@ -10,22 +10,27 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        this.model = new charts.models.Chart({
+        console.log(options);
+
+        //create
+        var initialOptions = {
             datastream_revision_id: options.datastream_revision_id,
             meta_tags:  options.datastream_tags,
             meta_sources: options.datastream_sources,
-            meta_category: options.datastream_category,
-            // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
-            // resourceIdAttribute: 'visualization_revision_id',
-            // resourceID: 6741,
-            // options: {
-            //     zoom: 15,
-            //     center: {
-            //         lat: 38.5806808485,
-            //         long: -121.4826359602
-            //     }
-            // }
-        });
+            meta_category: options.datastream_category
+        };
+
+        //edit
+        if(options.revision_id){
+            initialOptions = _.extend(initialOptions,{
+                lib: options.lib,
+                meta_notes: _.unescape(options.notes),
+                meta_title: options.title,
+                meta_description: options.description
+            });
+        }
+
+        this.model = new charts.models.Chart(initialOptions);
 
         //Buttons views
         this.buttonsView = new ButtonsView({

@@ -21,9 +21,9 @@ var MetadataView = StepViewSPA.extend({
 	},
 
 	onNextButtonClicked: function(){
-//		this.notesInstance.instanceById('id_notes').saveContent()
 		this.$el.find('input').removeClass('has-error');
 		this.$el.find('.validate-msg').hide();
+
 		//hago set aquí porque Epoxy no se banca nicedit
 		var notes = '';
 		if($('.nicEdit-main').length > 0
@@ -49,14 +49,15 @@ var MetadataView = StepViewSPA.extend({
 	},
 
 	initNotes: function(){
+        
         this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
 
-        this.notesInstance.addEvent('add', function() {
-			alert( this.notesInstance.getContent() );
-		});
+		if(this.model.get('meta_notes')){
+			this.notesInstance.instanceById('id_notes').setContent(this.model.get('meta_notes'));
+		}
 
     },
 

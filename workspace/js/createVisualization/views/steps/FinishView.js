@@ -128,7 +128,7 @@ var FinishView = StepViewSPA.extend({
 				model: this.model,
 			});
 			
-			if(this.chartInstance.valid()){
+			if(this.model.valid()){
 				this.chartInstance.render();
 			};
 		}
