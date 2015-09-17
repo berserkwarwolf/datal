@@ -111,7 +111,7 @@ class SOAPImplBuilder(DefaultImplBuilder):
         if parameters and len(parameters) > 0:
             impl_details += '<fields>'
             for argue in parameters:
-                impl_details += '<%s editable="%s">%s</%s>' % (argue['param_name'], argue['editable'], argue['default_value'], argue['param_name'])
+                impl_details += '<%s editable="%s">%s</%s>' % (argue['name'], argue['editable'], argue['default_value'], argue['name'])
             impl_details += '</fields>'
         else:
             impl_details += "<fields/>"
