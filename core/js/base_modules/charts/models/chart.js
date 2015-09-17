@@ -21,7 +21,7 @@ charts.models.Chart = Backbone.Model.extend({
         select_data: false,
 
         //validation
-        message:"pala",
+        message: gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"),
 
         //metadata
         meta_title: undefined,
@@ -144,6 +144,9 @@ charts.models.Chart = Backbone.Model.extend({
 
         this.data.set('fields', fields);
         this.data.set('rows', _.clone(_.unzip(columns)));
+
+        this.trigger("newDataReceived");
+
     },
 
     onChangeType: function (model, type) {
@@ -216,7 +219,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     valid: function(){
-        console.log('validation from charts.models.Chart');
+        console.log('Validation from charts.models.Chart');
         var valid = true;
 
         //Si alguna vez intentó seleccionar algo de data
@@ -231,11 +234,19 @@ charts.models.Chart = Backbone.Model.extend({
                 }, 0);
 
             if (check!=0){
-                this.set("message","Las columnas deben coincidir con los encabezados"); //reemplazar por locale
+                this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
                 valid = false;
             }
 
-            //TODO specific validation for chart type
+            if(valid){
+                //TODO specific validation for chart type
+                switch(this.get('type')){
+                    case 'piechart':
+                        console.log('is pie chart');
+                    break;
+                }
+            }
+
 
         }
 

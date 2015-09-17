@@ -63,10 +63,8 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
         categories.push(_.map(data.rows, function (r) {return r[0];}));
 
         var finalData = labels.concat(data.rows);
-        console.log(finalData);
 
         finalData = _.zip.apply(_, finalData);
-        console.log(finalData);
 
         return {
             labels:labels,
@@ -87,10 +85,6 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
                 groups.push(e);
             }
         });
-
-        console.log(JSON.stringify(data.values));
-        console.log(JSON.stringify(types));
-        console.log(JSON.stringify(groups));
 
         this.chart = c3.generate({
             bindto: this.el,

@@ -837,3 +837,9 @@ msgstr "Gráfico"
 
 msgid "APP-MAP-TEXT"
 msgstr "Mapa"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
+msgstr "Seleccione los datos que desea representar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES"
+msgstr "La cantidad de columnas deben coincidir con la cantidad de encabezados seleccionados"
