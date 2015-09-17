@@ -79,7 +79,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 domain = 'http://' + domain
             public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
 
-
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
@@ -104,9 +103,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset_is_dead=dataset_revision.dataset.is_dead,
             guid=dataset_revision.dataset.guid,
             created_at=dataset_revision.dataset.created_at,
-            last_revision_id=dataset_revision.dataset.last_revision_id,
-            last_published_revision_id=dataset_revision.dataset.last_published_revision_id,
-            last_published_date=dataset_revision.dataset.last_published_revision_date,
+            last_revision_id=dataset_revision.dataset.last_revision_id if dataset_revision.dataset.last_revision_id else '',
+            last_published_revision_id=dataset_revision.dataset.last_published_revision_id if dataset_revision.dataset.last_published_revision_id else '',
+            last_published_date=dataset_revision.dataset.last_published_revision_date if dataset_revision.dataset.last_published_revision_date else '',
             title=dataseti18n.title,
             description=dataseti18n.description,
             notes=dataseti18n.notes,
