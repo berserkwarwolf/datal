@@ -15,7 +15,6 @@ charts.models.Chart = Backbone.Model.extend({
         chartTemplate: undefined,
         nullValueAction: 'exclude',
         nullValuePreset: undefined,
-        traspose: false,
 
         //flag que indica si alguna vez abrió el modal de datos, es para validación
         select_data: false,
@@ -77,6 +76,11 @@ charts.models.Chart = Backbone.Model.extend({
             id: this.get('resourceID'),
             type: this.get('type')
         });
+
+        if(this.get('isEdit')){
+            this.fetchPreviewData();
+        }
+
         this.bindEvents();
     },
 

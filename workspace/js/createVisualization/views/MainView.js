@@ -10,8 +10,6 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        console.log(options);
-
         //create
         var initialOptions = {
             datastream_revision_id: options.datastream_revision_id,
@@ -23,10 +21,27 @@ var MainView = Backbone.View.extend({
         //edit
         if(options.revision_id){
             initialOptions = _.extend(initialOptions,{
+                select_data:true,
+                isEdit:true,
                 lib: options.lib,
+                type: options.type,
                 meta_notes: _.unescape(options.notes),
                 meta_title: options.title,
-                meta_description: options.description
+                meta_description: options.description,
+
+                //config
+                showLegend: true,
+                invertData: options.invertData,
+                invertedAxis: options.invertedAxis,
+                chartTemplate: options.chartTemplate,
+                nullValueAction: options.nullValueAction,
+                nullValuePreset: options.nullValuePreset,
+
+                //data
+                range_data: options.data,
+                range_headers: options.headerSelection,
+                range_labels: options.labelSelection
+
             });
         }
 
@@ -200,7 +215,17 @@ var MainView = Backbone.View.extend({
 
     start: function(){
         this.$el.find('.process_manager_step').hide();
+
+        //edit
+        if(this.model.get('isEdit')){
+            this.model.set('isMap', false);
+            this.currentFlow = 'charts';
+            this.index++;
+            this.steps[this.currentFlow][this.index].start();
+        }
+        
         this.steps[this.currentFlow][this.index].start();
+        
     },
 
     finish: function(){

@@ -36,6 +36,38 @@ var ChartView = StepViewSPA.extend({
         	}
         });
 
+		//edit
+		if(this.model.get('isEdit')){
+			var that = this;
+			
+			//library
+			this.$el.find('select#chartLibrary').val(this.model.get('lib'));
+			
+			//checkbox
+			this.$el.find('input[type=checkbox]').each(function(){
+				var obj = $(this);
+				var name = obj.attr('name');
+				if(that.model.get(name)=="checked"){
+					obj.prop("checked","checked")
+				}
+			});
+
+			//radio
+			var that = this;
+			this.$el.find('input[type=radio]').each(function(){
+				var obj = $(this);
+				var name = obj.attr('name');
+				if(that.model.get(name)==obj.val()){
+					obj.prop("checked","checked")
+				}
+			});
+
+			//nullValue
+			this.$el.find('input#nullValuePreset').val(this.model.get('nullValuePreset'));
+
+			this.renderChart();
+		}
+
 		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
 		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
@@ -55,6 +87,7 @@ var ChartView = StepViewSPA.extend({
 		this.nextBtn.addClass('disabled');
 
 		this.setupChart();
+
 	},
 
 	bgClasses: {
@@ -259,7 +292,6 @@ var ChartView = StepViewSPA.extend({
 		if(this.chartInstance){
 			this.chartInstance.destroy();
 		}
-		console.log('chartView','finish');
 	},
 
 
