@@ -97,6 +97,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")
 
+
 @login_required
 #@require_privilege("workspace.can_delete_datastream")
 #@requires_review
@@ -125,37 +126,6 @@ def remove(request, visualization_revision_id, type="resource"):
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-@login_required
-#@require_privilege("workspace.can_delete_datastream")
-#@requires_review
-@transaction.commit_on_success
-def unpublish(request, visualization_revision_id, type="resource"):
-    """ unpublish resource """
-    lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.visualization.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-        
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
 
@@ -237,6 +207,7 @@ def change_status(request, visualization_revision_id=None):
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')
+        response['result'].pop('visualization')
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
@@ -245,7 +216,7 @@ def change_status(request, visualization_revision_id=None):
 @require_privilege("workspace.can_create_visualization")
 @requires_published_parent()
 @transaction.commit_on_success
-def create(request, viz_type='index'):
+def create(request):
     
     if request.method == 'GET':
         datastream_revision_id = request.GET.get('datastream_revision_id', None)
@@ -295,6 +266,7 @@ def related_resources(request):
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
+
 @login_required
 @require_GET
 def action_view(request, revision_id):
@@ -313,8 +285,23 @@ def action_view(request, revision_id):
 @requires_published_parent()
 @requires_review
 @transaction.commit_on_success
-def edit(request, datastream_revision_id=None):
-    pass
+def edit(request, revision_id=None):
+    if request.method == 'GET':
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        datastream_rev = DataStreamDBDAO().get(
+            request.auth_manager.language,
+            datastream_revision_id=visualization_rev['datastream_revision_id'])
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev,
+            visualization_revision=visualization_rev
+        ))
+
+    elif request.method == 'POST':
+        pass
 
 
 @login_required

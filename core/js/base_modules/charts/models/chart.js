@@ -17,6 +17,12 @@ charts.models.Chart = Backbone.Model.extend({
         nullValuePreset: undefined,
         traspose: false,
 
+        //flag que indica si alguna vez abrió el modal de datos, es para validación
+        select_data: false,
+
+        //validation
+        message:"pala",
+
         //metadata
         meta_title: undefined,
         meta_description: undefined,
@@ -137,7 +143,7 @@ charts.models.Chart = Backbone.Model.extend({
         }));
 
         this.data.set('fields', fields);
-        this.data.set('rows', _.unzip(columns));
+        this.data.set('rows', _.clone(_.unzip(columns)));
     },
 
     onChangeType: function (model, type) {
@@ -207,6 +213,33 @@ charts.models.Chart = Backbone.Model.extend({
         };
 
         return metadata;
+    },
+
+    valid: function(){
+        console.log('validation from charts.models.Chart');
+        var valid = true;
+
+        //Si alguna vez intentó seleccionar algo de data
+        if(this.get('select_data')){
+
+            //General validation
+            var lFields = this.data.get('fields').length;
+
+            var check = _.reduce(this.data.get('rows'), 
+                function(memo, ar){
+                 return (ar.length==lFields)?memo:memo + 1; 
+                }, 0);
+
+            if (check!=0){
+                this.set("message","Las columnas deben coincidir con los encabezados"); //reemplazar por locale
+                valid = false;
+            }
+
+            //TODO specific validation for chart type
+
+        }
+
+        return valid;
     },
 
     validateMetadata: function(){
