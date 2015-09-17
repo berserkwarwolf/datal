@@ -13,11 +13,14 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
-		this.listenTo(this.model, "change:status", this.render);
+		this.listenTo(this.model, "change", this.render);
 		this.render();
 	},
 
 	render: function() {
+
+		console.log(this.model.toJSON());
+
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
 		this.setContentHeight();
 		return this;
@@ -126,10 +129,30 @@ var datasetView = Backbone.Epoxy.View.extend({
 			success: function(response){
 
 				if(response.status == 'ok'){
-					
-					// Set Status
-					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
-					self.model.set('status',response.dataset_status);
+
+					// Set this variables as equal as they came on the initialize instance of the model, due to compatibility
+					var lastPublishDate = 'None';
+					if(response.result.last_published_date != null){
+						lastPublishDate = response.result.last_published_date;
+					}
+					var lastPublishRevisionId = 'None';
+					if(response.result.last_published_date != null){
+						lastPublishRevisionId = response.result.last_published_revision_id;
+					}
+					var publicUrl = '';
+					if(response.result.last_published_date != ''){
+						publicUrl = response.result.public_url;
+					}
+
+					// Update some model attributes
+					self.model.set({
+						'status_str': STATUS_CHOICES( response.result.status ),
+						'status': response.result.status,
+						'lastPublishRevisionId': lastPublishRevisionId,
+						'lastPublishDate': lastPublishDate,
+						'publicUrl': publicUrl,
+						'createdAt': response.result.created_at,
+					});
 
 					// Update Heights
 					setTimeout(function(){

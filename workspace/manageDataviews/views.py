@@ -298,7 +298,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-APPROVED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-APPROVED-TEXT')
@@ -308,7 +307,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-REJECTED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-REJECTED-TEXT')
@@ -318,7 +316,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
@@ -329,7 +326,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
@@ -339,7 +335,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')

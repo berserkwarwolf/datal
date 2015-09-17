@@ -54,7 +54,8 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
                         if (self.affectedResourcesHTML) {
                             self.render();
                         } else {
-                            self.unpublishRelatedResources();
+                            // We simulate click in order to pass event object to change_status function
+                            self.$el.find('#id_unpublishRelatedResources').click();
                         }
                     }
 
