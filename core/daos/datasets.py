@@ -94,7 +94,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             impl_type=dataset_revision.impl_type,
             status=dataset_revision.status,
             size=dataset_revision.size,
-            modified_at=dataset_revision.created_at,
+            modified_at=dataset_revision.modified_at,
             meta_text=dataset_revision.meta_text,
             license_url=dataset_revision.license_url,
             spatial=dataset_revision.spatial,

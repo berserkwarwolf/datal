@@ -137,7 +137,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
-            modified_at=datastream_revision.created_at,
+            modified_at=datastream_revision.modified_at,
             meta_text=datastream_revision.meta_text,
             guid=datastream_revision.datastream.guid,
             created_at=datastream_revision.dataset.created_at,
