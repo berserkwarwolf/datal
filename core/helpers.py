@@ -10,8 +10,8 @@ from django.db.models.base import ModelState
 
 class DateTimeEncoder(json.JSONEncoder):
     def default(self, obj):
-       if hasattr(obj, 'isoformat'):
-           return obj.isoformat()
+       if hasattr(obj, 'strftime'):
+           return obj.strftime('%B %d, %Y, %I:%M %p')
        elif isinstance(obj, decimal.Decimal):
            return float(obj)
        elif isinstance(obj, ModelState):
