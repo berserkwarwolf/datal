@@ -23,6 +23,8 @@ var MainView = Backbone.View.extend({
             initialOptions = _.extend(initialOptions,{
                 select_data:true,
                 isEdit:true,
+                revision_id: options.revision_id,
+
                 lib: options.lib,
                 type: options.type,
                 meta_notes: _.unescape(options.notes),
