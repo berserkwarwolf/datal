@@ -68,7 +68,7 @@ var ChartSelectDataModalView = ModalView.extend({
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
+            // this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },

@@ -73,24 +73,34 @@ var DataTableView = Backbone.View.extend({
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
-      self.cacheSelection({
-        from: {row: r1, col: c1},
-        to: {row: r2, col: c2}
-      });
+      console.info('afterSelection', r1, c1, r2, c2);
+      if (self._fullRowMode) {
+        self.cacheSelection({
+          from: {row: r1, col: -1},
+          to: {row: r2, col: -1}
+        });
+      } else if (self._fullColumnMode) {
+        self.cacheSelection({
+          from: {row: -1, col: c1},
+          to: {row: -1, col: c2}
+        });
+      } else {
+        self.cacheSelection({
+          from: {row: r1, col: c1},
+          to: {row: r2, col: c2}
+        });
+      }
+      self.triggerAfterSelection();
     });
     this.table.addHook('afterDeselect', function () {
       self.trigger('afterDeselect');
     });
-    this.table.addHook('afterSelectionEnd', function () {
+    this.table.addHook('afterSelectionEnd', function (r, c, r2, c2) {
       self.trigger('afterSelectionEnd');
     });
-
-    // Clicks on a column or row header
-    this.table.addHook('afterOnCellMouseDown', function (event, coords, TD) {
-      self.cacheSelection({
-        from: {row: coords.row, col: coords.col},
-        to: {row: coords.row, col: coords.col}
-      });
+    this.table.addHook('afterOnCellMouseOver', function (event, coords, TD) {
+      self._fullColumnMode = (coords.row === -1);
+      self._fullRowMode = (coords.col === -1);
     });
 
     this.listenTo(this.collection, 'add', this.onAddSelected, this);
@@ -107,9 +117,13 @@ var DataTableView = Backbone.View.extend({
 
   cacheSelection: function (coords) {
     this._selectedCoordsCache = coords;
+  },
+
+  triggerAfterSelection: function () {
+
     this.trigger('afterSelection', {
-      coords: coords,
-      range: this.utils.rangeToExcel(coords)
+      coords: this._selectedCoordsCache,
+      range: this.utils.rangeToExcel(this._selectedCoordsCache)
     });
   },
 
