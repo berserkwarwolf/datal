@@ -56,6 +56,8 @@ class RESTImplBuilder(DefaultImplBuilder):
         parameters = self.fields.get('parameters')
         signature = self.fields.get('signature')
 
+        if not path_to_data or path_to_data == '':
+            path_to_data = '$'
         impl_details = '<wsOperation useCache="%s"><pathToHeaders>%s</pathToHeaders><pathToData>%s</pathToData>' % (useCache, path_to_headers, path_to_data)
 
         # uriSignatures
