@@ -181,7 +181,7 @@
 			</span>
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
-				<% if(lastPublishRevisionId != 'None'){ %>
+				<% if(lastPublishRevisionId != ''){ %>
 				<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
 				<% } %>
 			{% endif %}

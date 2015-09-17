@@ -127,6 +127,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             guid=visualization_revision.visualization.guid,
             impl_details=visualization_revision.impl_details,
             created_at=visualization_revision.created_at,
+            modified_at=visualization_revision.modified_at,
             last_revision_id=visualization_revision.visualization.last_revision_id,
             last_published_date=visualization_revision.visualization.last_published_revision_date,
             title=visualizationi18n.title,

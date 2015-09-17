@@ -121,8 +121,7 @@ $(document).ready(function(){
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst }}",
     publicUrl: "{{ datastream.public_url }}",
-    createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst  }}",
-    notes: "{{ datastream.notes }}"
+    createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst  }}"
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({
