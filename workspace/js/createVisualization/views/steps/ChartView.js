@@ -36,7 +36,8 @@ var ChartView = StepViewSPA.extend({
         	}
         });
 
-		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
@@ -85,13 +86,13 @@ var ChartView = StepViewSPA.extend({
 		this.fetchPreviewData();
 	},
 
-	onChangeData: function (model) {
+	onChangeData: function () {
 		if(this.selectDataBtn.hasClass('icon-add')){
 			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
 			this.vizContent.addClass('dataSelected');
 		}
 
-		console.log('the data for your chart has changed', model.toJSON());
+		console.log('the data for your chart has changed', this.model.data.toJSON());
 		// TODO: should call this.chartView.render();
 		this.renderChart();
 	},
@@ -207,16 +208,21 @@ var ChartView = StepViewSPA.extend({
 			var validation = this.model.valid(); //valida datos por tipo de gráfico
 
 			if(validation===true){
-				this.clearClassesChartBg();
-				this.nextBtn.removeClass('disabled');
 				if(this.model.get('select_data')){ //si alguna vez abrió el modal de datos
+					this.clearClassesChartBg();
+					this.nextBtn.removeClass('disabled');
 					this.message.hide();
 					this.chartInstance.render();
+				} else {
+					this.nextBtn.addClass('disabled');
+					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
+					this.vizContent.removeClass('dataSelected');
 				}
 			}	else {
 				this.message.show();
 				this.destroyChartInstance();
 				this.nextBtn.addClass('disabled');
+				this.vizContent.removeClass('dataSelected');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 			}
 		}
