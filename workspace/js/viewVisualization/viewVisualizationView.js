@@ -134,27 +134,13 @@ var viewVisualizationView = Backbone.View.extend({
 
 				if(response.status == 'ok'){
 					
-					// Set this variables as equal as they came on the initialize instance of the model, due to compatibility
-					var lastPublishDate = '';
-					if(response.result.last_published_date != null){
-						lastPublishDate = response.result.last_published_date;
-					}
-					var lastPublishRevisionId = 'None';
-					if(response.result.last_published_date != null){
-						lastPublishRevisionId = response.result.last_published_revision_id;
-					}
-					var publicUrl = '';
-					if(response.result.last_published_date != ''){
-						publicUrl = response.result.public_url;
-					}
-
 					// Update some model attributes
 					self.model.set({
 						'status_str': STATUS_CHOICES( response.result.status ),
 						'status': response.result.status,
-						'lastPublishRevisionId': lastPublishRevisionId,
-						'lastPublishDate': lastPublishDate,
-						'publicUrl': publicUrl,
+						'lastPublishRevisionId': response.result.last_published_revision_id,
+						'lastPublishDate': response.result.last_published_date,
+						'publicUrl': response.result.public_url,
 						'createdAt': response.result.created_at,
 					});
 
