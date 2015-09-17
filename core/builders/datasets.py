@@ -56,6 +56,8 @@ class RESTImplBuilder(DefaultImplBuilder):
         parameters = self.fields.get('parameters')
         signature = self.fields.get('signature')
 
+        if not path_to_data or path_to_data == '':
+            path_to_data = '$'
         impl_details = '<wsOperation useCache="%s"><pathToHeaders>%s</pathToHeaders><pathToData>%s</pathToData>' % (useCache, path_to_headers, path_to_data)
 
         # uriSignatures
@@ -111,7 +113,7 @@ class SOAPImplBuilder(DefaultImplBuilder):
         if parameters and len(parameters) > 0:
             impl_details += '<fields>'
             for argue in parameters:
-                impl_details += '<%s editable="%s">%s</%s>' % (argue['param_name'], argue['editable'], argue['default_value'], argue['param_name'])
+                impl_details += '<%s editable="%s">%s</%s>' % (argue['name'], argue['editable'], argue['default_value'], argue['name'])
             impl_details += '</fields>'
         else:
             impl_details += "<fields/>"

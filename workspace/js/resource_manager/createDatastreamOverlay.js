@@ -441,6 +441,8 @@ var DatasetCreateWebserviceManager = CreateDatastreamManager.extend({
             dataSource.documentElement.appendChild(pathToHeadersElement);
 
             var pathToDataElement = xml.createElementNS(nameSpace, 'pathToData', dataSource);
+            if (!data.path_to_data) {
+                data.path_to_data = '$';}
             var pathToDataText    = dataSource.createTextNode(data.path_to_data);
             pathToDataElement.appendChild(pathToDataText);
             dataSource.documentElement.appendChild(pathToDataElement);
