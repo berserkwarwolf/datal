@@ -283,7 +283,7 @@ var DataStreamStats = Backbone.Model.extend({
         this.getStatistics();
     },
     getStatistics : function(){
-    	var lUrl  = '/datastreams/get_last_30_days_datastream/'+ this.attributes.id;
+    	var lUrl  = '/dataviews/get_last_30_days_datastream/'+ this.attributes.id;
         
         //TODO add loading gif
         

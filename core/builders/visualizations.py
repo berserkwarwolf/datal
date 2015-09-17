@@ -24,3 +24,6 @@ class VisualizationImplBuilder:
         field['chart']['is3D'] = self.fields['is3D'] if self.fields['is3D'] else 'false'
 
         return json.dumps(field)
+
+    def parse(self, impl_details):
+        return json.loads(impl_details)

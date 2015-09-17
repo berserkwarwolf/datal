@@ -335,7 +335,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATASET-APPROVED-TITLE'),
                     'description': ugettext('APP-DATASET-APPROVED-TEXT')
@@ -345,7 +344,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-REJECTED-TITLE'),
                     'description': ugettext('APP-DATASET-REJECTED-TEXT')
@@ -355,7 +353,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
@@ -366,7 +363,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
@@ -376,7 +372,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')

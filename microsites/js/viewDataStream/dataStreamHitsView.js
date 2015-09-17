@@ -35,7 +35,7 @@ var dataStreamHitsView = Backbone.View.extend({
 
     var dataStream = this.options.dataStream.attributes;
       
-    var url  = '/datastreams/get_last_30_days_datastream/'+ dataStream.datastream_id;
+    var url  = '/dataviews/get_last_30_days_datastream/'+ dataStream.datastream_id;
             
     var ajax = $.ajax({ 
       url: url,

@@ -1,5 +1,8 @@
-import json, logging
+import json
+import logging
+import string
 from core.primitives import PrimitiveComputer
+from django.template.defaultfilters import date as _date
 
 logger = logging.getLogger(__name__)
 
@@ -10,8 +13,8 @@ from django.db.models.base import ModelState
 
 class DateTimeEncoder(json.JSONEncoder):
     def default(self, obj):
-       if hasattr(obj, 'isoformat'):
-           return obj.isoformat()
+       if hasattr(obj, 'strftime'):
+           return string.capitalize(_date(obj, 'F d, Y, h:i A'))
        elif isinstance(obj, decimal.Decimal):
            return float(obj)
        elif isinstance(obj, ModelState):

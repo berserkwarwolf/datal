@@ -141,6 +141,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id
         )
+        visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
         return visualization
 

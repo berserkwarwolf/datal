@@ -1,6 +1,8 @@
 var UnpublishView = Backbone.View.extend({
 	
 	el: '#id_unpublishVisualization',
+
+	parentView: null,
 	
 	events: {
 		"click #id_unpublishResource": "unpublishVisualization",
@@ -20,6 +22,8 @@ var UnpublishView = Backbone.View.extend({
 				zIndex: 99999
 			}
 		});
+
+		this.parentView = this.options.parentView;
 		
 		// Render
 		this.render();

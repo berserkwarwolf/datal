@@ -535,31 +535,34 @@ def set_preferences(account, preferences):
     for key, value in preferences.items():
         account.set_preference(key, value)
 
+#####################################################
+# creo que todo esto deberia ser refactoreado para que
+# se use el lifecycle en vez de hablar con el indexador
+# de forma directa
+from core.lifecycle.datasets import DatasetSearchDAOFactory
+from core.lifecycle.datastreams import DatastreamSearchDAOFactory
 
+
+# Para que se le pasa el language?
 def reindex_category_resources(category_id, language):
     """ reindex all resurce using given category """
     logger = logging.getLogger(__name__)
     
-    if settings.DEBUG: logger.info('Reindexing category resources %d, %s' % (category_id, language))
+    if settings.DEBUG:
+        logger.info('Reindexing category resources %d, %s' % (category_id, language))
     
-    datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
-    datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
+    datasets = Dataset.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
 
-    docs = []
-    resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
-    
-    for resource in resources:
-        rev = resource.last_published_revision
-        if not rev:
-            
-            logger.error("invalid last pub revision: %d %s" % (category_id, language))
-            return False
-            
-        doc = rev.get_dict(language)
-        docs.append(doc)
-
-    SearchifyIndex().indexit(docs)
-
+    for dataset in datasets:
+        datasetrevision=dataset.last_published_revision
+        search_dao = DatasetSearchDAOFactory().create(datasetrevision)
+        search_dao.add()
+    for datastream in datastreams:
+        datastreamrevision=datastream.last_published_revision
+        search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
+        search_dao.add()
+#####################################################
 
 @login_required
 @privilege_required('workspace.can_access_admin')

@@ -16,8 +16,10 @@ class DjangoMailService(MailService):
         email_data = dict(nick=user.nick, password=password)
         to = [user.email]
 
+        template_name = 'password_recovered_{}'.format(user.language)
+
         try:
-            mail.send(to, settings.DEFAULT_FROM_EMAIL, template='password_recovered_es', context=email_data,
+            mail.send(to, settings.DEFAULT_FROM_EMAIL, template=template_name, context=email_data,
                       priority='now')
             return True
         except Exception as e:
@@ -33,8 +35,10 @@ class DjangoMailService(MailService):
         email_data = dict(url=link)
         to = [user.email]
 
+        template_name = 'reset_password_{}'.format(user.language)
+
         try:
-            mail.send(to, settings.DEFAULT_FROM_EMAIL, template='reset_password_es', context=email_data,
+            mail.send(to, settings.DEFAULT_FROM_EMAIL, template=template_name, context=email_data,
                       priority='now')
             return True
         except Exception as e:
@@ -54,8 +58,10 @@ class DjangoMailService(MailService):
         )
         to = [user.email]
 
+        template_name = 'activate_account_{}'.format(user.language)
+
         try:
-            mail.send(to, settings.DEFAULT_FROM_EMAIL, template='activate_account_es', context=email_data,
+            mail.send(to, settings.DEFAULT_FROM_EMAIL, template=template_name, context=email_data,
                       priority='now')
             return True
         except Exception as e:
