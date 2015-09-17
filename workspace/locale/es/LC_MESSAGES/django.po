@@ -3206,3 +3206,9 @@ msgstr "La columna completa"
 
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "O bien, la fila completa"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Despublicar visualización"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
