@@ -60,9 +60,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var Dataset = new DatasetModel({
-    id: "{{ dataset.last_revision_id }}",
-    dataset_id: " {{ dataset.dataset_id }}",
-    status: "{{ dataset.status }}",
+    id: {{ dataset.last_revision_id }},
+    dataset_id: {{ dataset.dataset_id }},
+    status: {{ dataset.status }},
     status_str: "{{ dataset.status|status_str|capfirst }}",
     title: "{{ dataset.title|capfirst }}",
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",

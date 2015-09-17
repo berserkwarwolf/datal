@@ -152,7 +152,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
@@ -162,28 +161,25 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
                 }
             )
         elif action == 'publish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
+            lifecycle.publish()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
@@ -193,7 +189,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')

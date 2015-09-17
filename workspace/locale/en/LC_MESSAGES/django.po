@@ -3222,3 +3222,9 @@ msgstr "The entire column"
 
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "Or the entire row"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"

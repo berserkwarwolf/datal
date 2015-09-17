@@ -35,9 +35,7 @@ var UnpublishView = Backbone.View.extend({
 	},
 
 	unpublishDataset: function() {
-		this.closeOverlay();
-		this.undelegateEvents();
-
+		
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionUnpublishView = new AffectedResourcesCollectionUnpublishView({
 			collection: affectedResourcesCollection,
@@ -47,6 +45,9 @@ var UnpublishView = Backbone.View.extend({
 			parentView: this.parentView
 		});
 
+		this.closeOverlay();
+		this.undelegateEvents();
+		
 	},
 
 	unpublishRevision: function(event) {

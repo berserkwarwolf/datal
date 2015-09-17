@@ -25,7 +25,14 @@ var MetadataView = StepViewSPA.extend({
 		this.$el.find('input').removeClass('has-error');
 		this.$el.find('.validate-msg').hide();
 		//hago set aquí porque Epoxy no se banca nicedit
-		this.model.set('meta_notes',this.notesInstance.instanceById('id_notes').getContent());
+		var notes = '';
+		if($('.nicEdit-main').length > 0
+				&& $('.nicEdit-main').html() != '<br>' // When notes initialice empty, nicEdit initialice with <br>, so we check if that is the case
+		){
+				notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
+		}
+
+		this.model.set('meta_notes',notes);
 
 		var validation = this.model.validateMetadata();
 		if( validation.valid ){
