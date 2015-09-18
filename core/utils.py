@@ -1,12 +1,32 @@
 from django.core.validators import RegexValidator
 from django.utils.translation import ugettext_lazy as _
 from django.template.defaultfilters import slugify as django_slugify
+from django.template.defaultfilters import date as _date
+from django.db.models.base import ModelState
+
 from core.choices import SOURCE_IMPLEMENTATION_CHOICES
+
 import re
+import json
+import string
+import decimal
 
 validate_comma_separated_word_list = RegexValidator(
     re.compile('^[\w,]+$'), _(u'Enter only words separated by commas.'), 
     'invalid')
+
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if hasattr(obj, 'strftime'):
+            return string.capitalize(_date(obj, 'F d, Y, h:i A'))
+        elif isinstance(obj, decimal.Decimal):
+            return float(obj)
+        elif isinstance(obj, ModelState):
+            return None
+        else:
+            return json.JSONEncoder.default(self, obj)
+
 
 def slugify(value):
     value = django_slugify(value)
@@ -36,6 +56,7 @@ def filters_to_model_fields(filters):
 
     return result
 
+
 # Esto solo se usa en un lugar no se si vale la pena que ete aca
 def remove_duplicated_filters(list_of_resources):
     removed = dict()
@@ -45,6 +66,7 @@ def remove_duplicated_filters(list_of_resources):
     removed['author_filter'] = set([x.get('dataset__user__nick', '') for x in list_of_resources])
     removed['author_filter'] = removed['author_filter'].union(set([x.get('datastream__user__nick', '') for x in list_of_resources]))
     return removed    
+
 
 def generate_ajax_form_errors(form):
     errors = []

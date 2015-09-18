@@ -19,7 +19,7 @@ from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
 from core import engine
-from core.helpers import DateTimeEncoder
+from core.utils import DateTimeEncoder
 
 
 logger = logging.getLogger(__name__)

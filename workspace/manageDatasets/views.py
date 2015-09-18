@@ -19,7 +19,7 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-from core.helpers import DateTimeEncoder
+from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
