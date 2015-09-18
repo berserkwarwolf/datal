@@ -13,7 +13,8 @@ from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
 from core.engine import invoke, preview_chart, invoke_chart
-from core.helpers import RequestProcessor, DateTimeEncoder
+from core.helpers import RequestProcessor
+from core.utils import DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
