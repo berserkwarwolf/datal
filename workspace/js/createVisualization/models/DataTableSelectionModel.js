@@ -9,7 +9,12 @@ var DataTableSelectionModel = Backbone.Model.extend({
         }
 	},
     getRange: function () {
-        return DataTableUtils.excelToRange(this.get('excelRange'));
+        var excelRange = this.get('excelRange');
+        if (_.isUndefined(excelRange)) {
+            return false;
+        } else {
+            return DataTableUtils.excelToRange(this.get('excelRange'));
+        }
     },
     getPreviousRange: function () {
         return DataTableUtils.excelToRange(this.previous('excelRange'));

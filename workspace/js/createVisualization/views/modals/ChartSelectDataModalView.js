@@ -42,6 +42,14 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this.rangeDataModel.set('excelRange', this.model.get('range_data'));
+            this.rangeLabelsModel.set('excelRange', this.model.get('range_labels'));
+            this.rangeHeadersModel.set('excelRange', this.model.get('range_headers'));
+            this.collection.add([
+                this.rangeDataModel,
+                this.rangeLabelsModel,
+                this.rangeHeadersModel
+                ]);
             this.setHeights();
         }, this);
 
