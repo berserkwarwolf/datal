@@ -98,6 +98,38 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         return self.visualization_revision
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
+        """
+        Actualiza una visualizacion
+
+        :param allowed_states:
+        :param changed_fields:
+        :param fields:
+        :return: VisualizationRevision Model Object
+        """
+        if self.visualization_revision.status not in allowed_states:
+            raise IllegalStateException(
+                from_state=self.visualization_revision.status,
+                to_state=self.visualization_revision.status,
+                allowed_states=allowed_states
+            )
+
+        if self.visualization_revision.status == StatusChoices.PUBLISHED:
+            self.visualization, self.visualization_revision = VisualizationDBDAO().create(
+                visualization=self.visualization,
+                datastream_rev=self.visualization_revision.datastream_revision,
+                user=self.visualization_revision.user,
+                status=StatusChoices.DRAFT,
+                **fields
+            )
+            self._update_last_revisions()
+        else:
+            # Actualizo sin el estado
+            self.visualization_revision = VisualizationDBDAO().update(
+                self.visualization_revision,
+                changed_fields=changed_fields,
+                **fields
+            )
+        
         return self.visualization_revision
 
     def _move_childs_to_draft(self):
