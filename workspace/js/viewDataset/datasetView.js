@@ -137,7 +137,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 						'lastPublishRevisionId': response.result.last_published_revision_id,
 						'lastPublishDate': response.result.last_published_date,
 						'publicUrl': response.result.public_url,
-						'createdAt': response.result.created_at,
+						'modifiedAt': response.result.modified_at,
 					});
 
 					// Update Heights
