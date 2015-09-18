@@ -36,14 +36,10 @@ var FinishModel = StepModel.extend({
 				}
 			}
 		],
-		// category: {
-		// 	requiraed: false,
-		// 	msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
-		// },
-		// status: {
-		// 	required: false,
-		// 	msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
-		// }
+		notes: {
+			maxLength: 500,
+			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 500 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+		}
 	},
 
 	setData: function(){
@@ -90,6 +86,7 @@ var FinishModel = StepModel.extend({
 		}
 		else{
 				data.notes = $.trim( this.get('notes') );
+				console.log(this.get('notes'))
 		}
 
 		// Set Data
