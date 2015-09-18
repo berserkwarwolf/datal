@@ -33,9 +33,9 @@ class VisualizationForm(forms.Form):
     traceSelection = forms.CharField(required=False, max_length=200)
     mapType = forms.ChoiceField(required=False, choices=MAP_TYPE_FIELD)
 
-    def save(self, request, revision):
+    def save(self, request, datastream_rev=None):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
-        visualization_rev = lifecycle.create(revision, language=request.user.language,  **self.cleaned_data)
+        visualization_rev = lifecycle.create(datastream_rev, language=request.user.language,  **self.cleaned_data)
 
         return dict(
             status='ok',

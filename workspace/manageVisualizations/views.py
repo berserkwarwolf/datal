@@ -252,7 +252,7 @@ def create(request):
             logger.info(form._errors)
             raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        response = form.save(request, datastream_rev)
+        response = form.save(request, datastream_rev=datastream_rev)
 
         return JSONHttpResponse(json.dumps(response))
     
