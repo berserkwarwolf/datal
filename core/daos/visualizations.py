@@ -197,7 +197,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'visualization__datastream__last_revision__category__categoryi18n__name',
             'visualization__datastream__last_revision__datastreami18n__title',
             'visualizationi18n__title',
-            'visualizationi18n__description', 'created_at', 'visualization__user__id',
+            'visualizationi18n__description', 'created_at', 'modified_at', 'visualization__user__id',
         )
 
         query = query.order_by(sort_by)

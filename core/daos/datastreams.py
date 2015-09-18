@@ -194,6 +194,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'datastreami18n__title',
             'datastreami18n__description',
             'created_at',
+            'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
             'dataset__last_revision__dataseti18n__title',

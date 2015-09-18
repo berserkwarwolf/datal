@@ -18,6 +18,7 @@
         , "end_point": "{{resource.dataset__datasetrevision__end_point}}"
         , "url": "/dataviews/{{resource.id}}"
         , "created_at": "{{resource.created_at|date:'F d, Y, h:i A'|capfirst}}"
+        , "modified_at": "{{resource.modified_at|date:'F d, Y, h:i A'|capfirst}}"
         , "id": {{resource.id}}
         , "dataset_id": {{resource.datastream__last_revision_id}}
         , "dataset_url": "{{resource.dataset_url}}"
