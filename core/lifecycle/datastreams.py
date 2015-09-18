@@ -285,17 +285,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             form_status = int(fields.pop('status', None))
 
         old_status = self.datastream_revision.status
+
         if old_status not in allowed_states:
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
+
         if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
-                status=form_status,
+                status=StatusChoices.DRAFT,
                 parameters=self.datastream_revision.datastreamparameter_set.all(),
                 **fields
             )
