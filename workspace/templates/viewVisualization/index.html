@@ -106,14 +106,14 @@ $(document).ready(function(){
         publicUrl: "{{ visualization_revision.public_url }}",
         changeStatusUrl: "{% url 'manageVisualizations.change_status' visualization_revision.visualization_revision_id %}",
         lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
-        editUrl: "TODO",
+        editUrl: "{% url 'manageVisualizations.edit' visualization_revision.last_revision_id %}",
 
         // Validar si es necesario
         guid: "{{visualization_revision.guid}}",
 
         // Revisar
         id: "{{ visualization_revision.last_revision_id }}",
-        visualization_id: " {{ visualization_revision.visualization_id }}",
+        visualization_id: "{{ visualization_revision.visualization_id }}",
 
     });
 
