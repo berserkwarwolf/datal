@@ -185,13 +185,17 @@ var DataTableView = Backbone.View.extend({
   },
 
   onAddSelected: function (model) {
-    var cells = this.coordsToCells(model.getRange());
+    var range = model.getRange();
+    if (!range) return;
+    var cells = this.coordsToCells(range);
     this._addCellsMeta(cells, model.get('id'));
     this.table.render();
   },
 
   onRmSelected: function (model) {
-    var cells = this.coordsToCells(model.getRange());
+    var range = model.getRange();
+    if (!range) return;
+    var cells = this.coordsToCells(range);
     this.available.push(model.get('id'));
     this._rmCellsMeta(cells, model.get('id'));
     this.table.render();

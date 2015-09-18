@@ -33,15 +33,31 @@ class VisualizationForm(forms.Form):
     traceSelection = forms.CharField(required=False, max_length=200)
     mapType = forms.ChoiceField(required=False, choices=MAP_TYPE_FIELD)
 
-    def save(self, request, datastream_rev=None):
-        lifecycle = VisualizationLifeCycleManager(user=request.user)
-        visualization_rev = lifecycle.create(datastream_rev, language=request.user.language,  **self.cleaned_data)
+    def save(self, request, datastream_rev=None, visualization_rev=None):
+        if datastream_rev:
+            lifecycle = VisualizationLifeCycleManager(user=request.user)
+            visualization_rev = lifecycle.create(datastream_rev, language=request.user.language,  **self.cleaned_data)
 
-        return dict(
-            status='ok',
-            revision_id=visualization_rev.id,
-            messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
-        )
+            return dict(
+                status='ok',
+                revision_id=visualization_rev.id,
+                messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
+            )
+        elif visualization_rev:
+            lifecycle = VisualizationLifeCycleManager(
+                user=request.user,
+                visualization_revision_id=visualization_rev['visualization_revision_id']
+            )
+            visualization_rev = lifecycle.edit(
+                language=request.auth_manager.language,
+                changed_fields=self.changed_data,
+                **self.cleaned_data
+            )
+            return dict(
+                status='ok',
+                revision_id=visualization_rev.id,
+                messages=[ugettext('APP-VISUALIZATION-CREATEDSUCCESSFULLY-TEXT')]
+            )
 
 
 class InitializeChartForm(forms.Form):

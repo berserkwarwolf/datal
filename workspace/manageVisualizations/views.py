@@ -250,7 +250,7 @@ def create(request):
         form = VisualizationForm(request.POST)
         if not form.is_valid():
             logger.info(form._errors)
-            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         response = form.save(request, datastream_rev=datastream_rev)
 
@@ -305,7 +305,20 @@ def edit(request, revision_id=None):
         ))
 
     elif request.method == 'POST':
-        pass
+        """ save new or update dataset """
+        # Formulario
+        form = VisualizationForm(request.POST)
+        if not form.is_valid():
+            logger.info(form._errors)
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        response = form.save(request, visualization_rev=visualization_rev)
+
+        return JSONHttpResponse(json.dumps(response))
 
 
 @login_required

@@ -98,7 +98,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         return self.visualization_revision
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
-        pass
+        return self.visualization_revision
 
     def _move_childs_to_draft(self):
         pass
