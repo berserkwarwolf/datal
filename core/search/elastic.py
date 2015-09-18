@@ -12,12 +12,19 @@ class ElasticsearchFinder(Finder):
     def search(self, *args, **kwargs):
 
         self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query = re.escape(kwargs.get('query', ''))
+        self.query = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
+
+        # agrego el "" para evitar que lo intente escapar,
+        # es más barato reasignarle un "" que tratar de escaparlo
+        if self.query in ["%", "*",".",";",""]:
+            self.query=""
+        else:
+            self.query = re.escape(self.query)
         
         self.order =  kwargs.get('order')
 
@@ -76,14 +83,25 @@ class ElasticsearchFinder(Finder):
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
-            self.resource = ["ds", "dt", "db", "chart", "vt"]
+            self.resource = ["ds", "dt", "db", "vz"]
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
             self.resource = [self.resource]
 
+        # algunas busquedas, sobre todo las federadas,
+        # buscan en un list de account_id
+        # Asi que si llega solo un account_id, lo mete en un list igual
+        if type(self.account_id) in (type(str()), type(int()), type(long()), type(float())):
+            account_ids=[int(self.account_id)]
+        elif type(self.account_id) == type([]):
+            account_ids=self.account_id
+        else:
+            #debería ir un raise?!?!?
+            account_ids=self.account_id
+
         filters = [
-            {"term": {"account_id": self.account_id}},
+            {"terms": {"account_id": account_ids}},
             {"terms": {"type": self.resource}}
         ]
 

@@ -37,26 +37,27 @@ var DatatableHomeManager = DatatableManager.extend({
         this.set({source_choice_filters: type});
     },
     getRowTemplate: function(msg) {
-        var templ = "<tr id='id_<%= revision.id %>'>";
+    
+        var className = '';
+
         if(msg.type == 'DT'){
-            templ += "<td class='viewInfo ic_Dset'>\
-                    <a href='<%=revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
+            className = 'ic_Dset';
+        }else if(msg.type == 'DS'){
+            className = 'ic_Data';
+        }else if(msg.type == 'DB'){
+            className = 'ic_Dashboard';
+        }else if(msg.type == 'VZ'){
+            className = 'ic_Chart';
         }
-        if(msg.type == 'DS'){
-            templ += "<td class='viewInfo ic_Data'>\
-                    <a href='<%=revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
-        }
-        if(msg.type == 'DB'){
-            templ += "<td class='viewInfo ic_Dashboard'>\
-                    <a href='<%=revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
-        }
-        if(msg.type == 'CHART'){
-            templ += "<td class='viewInfo ic_Chart'>\
-                    <a href='<%=revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
-        }
+
+
+        var templ = "<tr id='id_<%= revision.id %>'>";
+        
+        templ += "<td class='viewInfo " + className + "'>\
+                <a href='<%= revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
            
         var date = new Date(msg.created_at);
-        templ += "<td class='date' data-sort-value='" + date.getTime() + "'><span class='longDateFormat'>" + $.datepicker.formatDate( (Configuration.language == "en")?"MM d, yy":"d MM, yy" 
+        templ += "<td class='date' data-sort-value='" + date.getTime() + "'><span class='longDateFormat'>" + $.datepicker.formatDate( (Configuration.language == "en")?"MM d, yy":"d 'de' MM 'de' yy" 
         																					, date
         																					, {
         																						monthNames: $.datepicker.regional[ (Configuration.language == "en")? "": Configuration.language ].monthNames
@@ -65,7 +66,7 @@ var DatatableHomeManager = DatatableManager.extend({
 
         templ +="</tr>";
 
-        return _.template(templ, {revision: msg});
+        return _.template(templ, {variable: 'revision'})(msg);
     },
     drawRow: function(msg) {
         $('table tbody', this.get("selector")).append(this.getRowTemplate(msg));

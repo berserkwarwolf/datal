@@ -1346,17 +1346,8 @@ msgstr "This month"
 msgid "APP-ACTIONS-REVIEW"
 msgstr "Review"
 
-msgid "EDITDS-DSINFO-TITLE"
-msgstr "Data view information"
-
 msgid "OVEDITDS-NAME-TIP"
 msgstr "What's the data about? Type a general topic that explains the data you are extracting"
-
-msgid "EDITDS-METATAGS-TITLE"
-msgstr "Data view metatags"
-
-msgid "EDITDS-SOURCE-TITLE"
-msgstr "Data view sources"
 
 msgid "EDITDS-SOURCE-TIP1"
 msgstr "Type the first 3 letters of a source and select one from the autocomplete list. If it doesn't appear, please"
@@ -1372,9 +1363,6 @@ msgstr "Name"
 
 msgid "MODEL-URL-TEXT"
 msgstr "Url"
-
-msgid "APP-DSTAGS-TEXT"
-msgstr "Data view tags"
 
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Keywords to help identify your data view content. Separate the tags with commas"
@@ -1623,7 +1611,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Name it"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Let us know what is your data view about. Fields with (<span class='required'>*</span>) are mandatory."
+msgstr "Let us know what is your data view about. <span>Fields with (<span class='required'>*</span>) are mandatory.</span>"
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Names: Best practices and correct uses"
@@ -2119,6 +2107,9 @@ msgstr "Category succesfully refreshed. Please, select a new default category."
 
 msgid "APP-CATEGORY-DEFAULT-CANT-BE-DELETED"
 msgstr "The default category can not be deleted"
+
+msgid "APP-CATEGORY-DEFAULT-UNDEFINED"
+msgstr "The default category is not defined"
 
 msgid "APP-CATEGORY-TRANSPARENCY-CANT-BE-DELETED"
 msgstr "Transparency categories can not be deleted"
@@ -2942,10 +2933,10 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
 msgid "APP-UNPUBLISH-RESOURCE-TEXT"
-msgstr "Delete all revisions"
+msgstr "Unpublish all revisions"
 
 msgid "APP-UNPUBLISH-REVISION-TEXT"
-msgstr "Delete actual revision"
+msgstr "Unpublish last published revision"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
 msgstr "Unpublish Dataset "
@@ -2954,7 +2945,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataset, will also unpublish."
 
 msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Unpublish"
+msgstr "Unpublish all"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Delete Dataview "
@@ -3121,9 +3112,6 @@ msgstr "Doesn't look good?"
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
 msgstr "Change rows/columns"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reorder data"
-
 msgid "APP-DEFAULT-TEXT"
 msgstr "Default"
 
@@ -3213,3 +3201,30 @@ msgstr "It's what you will see in the tooltip map"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
+
+msgid "APP-LABELS-TIP-TEXT"
+msgstr "Keywords to help identify Visualization content."
+
+msgid "APP-INVERT-TEXT"
+msgstr "Invert"
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "This field is required"
+
+msgid "APP-HOW-TO-SELECT-TITLE"
+msgstr "How to select?"
+
+msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
+msgstr "Select multiple cells in a column or row"
+
+msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
+msgstr "The entire column"
+
+msgid "APP-HOW-TO-SELECT-ROW-TEXT"
+msgstr "Or the entire row"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"

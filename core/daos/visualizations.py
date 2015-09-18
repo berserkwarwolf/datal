@@ -50,7 +50,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             lib=fields['lib'],
             impl_details=VisualizationImplBuilder(**fields).build()
         )
-        logger.info(visualization_rev.impl_details)
 
         visualization_i18n = VisualizationI18n.objects.create(
             visualization_revision=visualization_rev,
@@ -128,8 +127,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             guid=visualization_revision.visualization.guid,
             impl_details=visualization_revision.impl_details,
             created_at=visualization_revision.created_at,
-            last_revision_id=visualization_revision.visualization.last_revision_id,
-            last_published_date=visualization_revision.visualization.last_published_revision_date,
+            modified_at=visualization_revision.modified_at,
+            last_revision_id=visualization_revision.visualization.last_revision_id if visualization_revision.visualization.last_revision_id else '',
+            last_published_revision_id=visualization_revision.visualization.last_published_revision_id if visualization_revision.visualization.last_published_revision_id else '',
+            last_published_date=visualization_revision.visualization.last_published_revision_date if visualization_revision.visualization.last_published_revision_date else '',
             title=visualizationi18n.title,
             description=visualizationi18n.description,
             notes=visualizationi18n.notes,
@@ -142,6 +143,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id
         )
+        visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
         return visualization
 
@@ -477,7 +479,7 @@ class VisualizationElasticsearchDAO(VisualizationSearchDAO):
         self.search_index = ElasticsearchIndex()
         
     def add(self):
-        self.search_index.indexit(self._build_document())
+        return self.search_index.indexit(self._build_document())
         
     def remove(self):
         self.search_index.delete_documents([{"type": self._get_type(), "docid": self._get_id()}])

@@ -1,94 +1,47 @@
 {% load i18n %}
 {% load extra_tags components datastream_tags %}
 
-<div class="box">
+<div class="sidebar">
+    
+    <div class="row">
+        <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+        <p>{{datastream.description|capfirst}}</p>
+    </div>
 
-	<!-- Information -->
-	<div class="section-box infoBox" id="id_infoSidebar">
+    <div class="row">
+        <div class="title">{% trans 'APP-CATEGORY-TEXT' %}</div>
+        <p>{{datastream.category_name|capfirst}}</p>
+    </div>
 
-		<!-- Title -->
-		<header class="title clearfix">
-			<h1 class="FL">{% trans 'APP-INFO-TEXT' %}</h1>
-		</header>
-		<div class="boxContent">
+    {% if datastream.sources %} 
+    <div class="row">
+        <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
+		{% for source in datastream.sources %}
+        <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}}</a></p>
+        {% endfor %}
+    </div>
+    {% endif %}
 
-			<!-- Last Update -->
-			<article class="lastUpdate">
-				<i></i>
-				<header>
-					<h1>{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}</h1>
-				</header>
-				<p id="id_lastUpdate">{{datastream.modified_at|date:'F d, Y, h:i A'|capfirst}}</p>
-			</article>
+    {% if datastream.tags %}
+    <div class="row">
+        <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
+        <div class="sourcesContent">
+        {% for tag in datastream.tags %}
+            <div class="tag">
+                <span class="tagInner clearfix">
+                    <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
+                </span>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+    {% endif %}
 
-			<!-- Category -->
-			<article class="category">
-				<i></i>
-				<header>
-					<h1>{% trans 'APP-CATEGORY-TEXT' %}</h1>
-				</header>
-				<p id="id_category">{{datastream.category_name|capfirst}}</p>
-			</article>
-			
-			{% comment %}
-			<!-- Type -->
-			<article class="type">
-				<i></i>
-				<header>
-					<h1>{% trans 'APP-TYPE-TEXT' %}</h1>
-				</header>
-				<p class="clearfix">
-					<span class="icon {# dataset.impl_type|type_classname #}">{# dataset.impl_type|type_str #}</span>
-				</p>
-			</article>
-			{% endcomment %}
-			
-			{% if datastream.sources %} 
-			<!-- Sources -->
-			<article class="sources">
-				<i></i>
-				<header>
-					<h1>{% trans 'APP-SOURCES-TEXT' %}</h1>
-				</header>
-				<ul class="list">
-					{% for source in datastream.sources %}
-					<li class="clearfix">{{source.source__name|capfirst}}</li>
-					{% endfor %}
-				</ul>
-			</article>
-			{% endif %}
-
-			{% if datastream.tags %}
-			<!-- Tags -->
-			<article class="tags">
-				<i></i>
-				<header>
-					<h1>{% trans 'APP-TAGS-TEXT' %}</h1>
-				</header>
-				<ul class="list">
-					{% for tag in datastream.tags %}
-					<li class="clearfix">{{tag.tag__name|capfirst}}</li>
-					{% endfor %}
-				</ul>
-			</article>
-			{% endif %}
-
-		</div>
-
-	</div>
-
-	{% if datastream.notes %}
-	<!-- Notes -->
-	<div class="section-box notesBox" id="id_notesSidebar">
-		<header class="title">
-			<h1>{% trans 'APP-NOTES-TEXT' %}</h1>
-		</header>
-		<div class="boxContent">
-			<article class="notes WYSIWYG">
-				{{datastream.notes|safe|urlize}}
-			</article>
-		</div>
-	</div>
-	{% endif %}
+    {% if datastream.notes %}
+    <div class="row">
+        <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
+        <p>{{datastream.notes|safe|urlize}}</p>
+    </div>
+    {% endif %}
 
 </div>

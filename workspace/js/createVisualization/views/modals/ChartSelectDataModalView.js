@@ -36,6 +36,7 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this.setHeights();
         }, this);
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
@@ -67,7 +68,7 @@ var ChartSelectDataModalView = ModalView.extend({
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
+            // this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },
@@ -104,6 +105,28 @@ var ChartSelectDataModalView = ModalView.extend({
         } else {
             this.$('button.btn-done').removeAttr('disabled');
         }
-    }
+    },
 
+    setHeights: function(t){
+        var self = this;
+
+        var sidebar = $('.modal').find('.sidebar'),
+            table = $('.modal').find('.table-view');
+
+        $(window).resize(function(){
+
+            windowHeight = $(window).height();
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
+            - 30 // As margin bottom
+            ;
+
+            sidebar.css('height', sidebarHeight+'px');
+            table.css('height', sidebarHeight+'px');
+
+        }).resize();
+    }, 
 });

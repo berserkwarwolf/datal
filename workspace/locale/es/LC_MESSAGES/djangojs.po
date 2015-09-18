@@ -820,11 +820,26 @@ msgstr "Vista guardada exitosamente."
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Etiquetas para esta Vista"
 
-msgid "APP-VIZ-CUSTOMIZE-TEXT"
-msgstr "Personalización"
-
 msgid "APP-VIZ-METADATA-TEXT"
 msgstr "Descripción"
 
 msgid "APP-VIZ-FINISH-TEXT"
 msgstr "Revisión"
+
+msgid "APP-VALID-PHONE-TEXT"
+msgstr "Ingrese un número de teléfono válido"
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
+msgstr "La visualización ha sido eliminada."
+
+msgid "APP-CHART-TEXT"
+msgstr "Gráfico"
+
+msgid "APP-MAP-TEXT"
+msgstr "Mapa"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
+msgstr "Seleccione los datos que desea representar"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES"
+msgstr "La cantidad de columnas deben coincidir con la cantidad de encabezados seleccionados"

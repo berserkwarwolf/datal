@@ -6,7 +6,7 @@ En resumen, se estructurarán las URLs de la API siguiendo el patrón REST, asig
 URLs a recursos, utilizando los verbos GET, POST, PUT, PATCH, DELETE para las correspondientes 
 acciones y la extension del formato en que se recibiran los resultados, por ejemplo:
 
-GET /api/v2/datasets/12345.json
+GET /api/v1/datasets/12345.json
 
 para solicitar un dataset identificado por el ID 12345 en formato JSON.
 
@@ -113,19 +113,19 @@ Los recursos que maneja la API son:
 Busca un listado de datastreams.
 
 ```
-GET /api/v2/datastreams
+GET /api/v1/datastreams
 ```
 
 Busca un listado de datasets.
 
 ```
-GET /api/v2/datasets
+GET /api/v1/datasets
 ```
 
 Busca un listado de visualizaciones.
 
 ```
-GET /api/v2/visualizations
+GET /api/v1/visualizations
 ```
 
 Si no hay parametros GET la API devuelve todos los recursos que le corresponden a la cuenta 
@@ -188,25 +188,25 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 Trae la información asociada a una vista
 
 ```
-GET /api/v2/datastreams/:guid
+GET /api/v1/datastreams/:guid
 ``` 
 
 Trae la información asociada completa (incluye los valores de la vista) a una vista
 
 ```
-GET /api/v2/datastreams/:guid/data
+GET /api/v1/datastreams/:guid/data
 ``` 
 
 Trae la información asociada a un dataset
 
 ```
-GET /api/v2/datasets/:guid
+GET /api/v1/datasets/:guid
 ``` 
 
 Trae la información asociada a una visualización
 
 ```
-GET /api/v2/visualizations/:guid
+GET /api/v1/visualizations/:guid
 ``` 
 
 Un ejemplo de resultado de un datastream sería así

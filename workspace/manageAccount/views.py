@@ -23,6 +23,7 @@ from uuid import uuid4
 import urllib
 import re
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 def action_info(request):
@@ -40,6 +41,7 @@ def action_info(request):
     form = forms.AccountInfoForm(initial=get_initial(account, keys))
     account_info = True
     return render_to_response('admin_manager/info.html', locals())
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -63,7 +65,8 @@ def action_info_update(request):
     else:
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
-        return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+        return HttpResponse(json.dumps(response), content_type='application/json', status=400)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -72,9 +75,11 @@ def action_users(request):
     preferences = auth_manager.get_account().get_preferences()
     roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
     form = forms.UserForm(roles)
-    users = User.objects.values('id', 'name', 'nick', 'last_visit', 'email', 'roles__name', 'roles__code').filter(account = auth_manager.account_id, roles__code__in = roles).all()
+    users = User.objects.values('id', 'name', 'nick', 'last_visit', 'email', 'roles__name', 'roles__code').filter(
+        account=auth_manager.account_id, roles__code__in=roles).all()
     users = [ user for user in users if user['roles__code'] in roles ]
     return render_to_response('admin_manager/users.html', locals())
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -87,15 +92,16 @@ def action_create_user(request):
     if form.is_valid():
         auth_manager = request.auth_manager
 
-        user = User.objects.create(account_id=auth_manager.account_id,
-                                   name=form.cleaned_data['name'],
-                                   nick=form.cleaned_data['username'],
-                                   email=form.cleaned_data['email'],
-                                   language=auth_manager.language
+        user = User.objects.create(
+            account_id=auth_manager.account_id,
+           name=form.cleaned_data['name'],
+           nick=form.cleaned_data['username'],
+           email=form.cleaned_data['email'],
+           language=auth_manager.language
         )
 
         role_code = form.cleaned_data['role']
-        role = Role.objects.get(code = role_code)
+        role = Role.objects.get(code=role_code)
         user.roles.add(role)
 
         # to activate the user
@@ -138,6 +144,7 @@ def action_create_user(request):
         response = {'status': 'error', 'messages': errors}
         return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
@@ -146,7 +153,7 @@ def action_edit_user(request):
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
-        user = User.objects.get(id = form.cleaned_data['id'], account = auth_manager.account_id)
+        user = User.objects.get(id=form.cleaned_data['id'], account=auth_manager.account_id)
 
         user.name = form.cleaned_data['name']
         user.nick = form.cleaned_data['username']
@@ -164,6 +171,7 @@ def action_edit_user(request):
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
         return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -195,29 +203,25 @@ def action_branding(request):
     branding = True
     return render_to_response('admin_manager/branding.html', locals())
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
 @csrf_exempt
 def action_branding_update(request):
-
     logger = logging.getLogger(__name__)
-
     form = forms.AccountBrandingForm(request.POST)
 
     if form.is_valid():
-
         urls = {}
-
         account = request.auth_manager.get_account()
-
         form_fields_keys = form.fields.keys()
         form_fields_keys.remove('account_favicon')
         form_fields_keys.remove('account_logo')
 
         for field_key in form_fields_keys:
-            key     = field_key.replace('_', '.')
-            value   = form.cleaned_data[field_key]
+            key = field_key.replace('_', '.')
+            value = form.cleaned_data[field_key]
             account.set_preference(key, value)
 
         accountid = str(request.auth_manager.account_id)
@@ -247,15 +251,15 @@ def action_branding_update(request):
             if match:
                 is_ie = True
 
-        if is_ie == True:
+        if is_ie:
             return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-SETTINGS-SAVE-OK-TEXT')], 'urls': urls}), content_type='text/plain')
         else:
             return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-SETTINGS-SAVE-OK-TEXT')], 'urls': urls}), content_type='application/json')
-
     else:
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
-        return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+        return HttpResponse(json.dumps(response), content_type='application/json', status=400)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -266,6 +270,7 @@ def action_social(request):
     form = forms.AccountSocialForm(initial=get_initial(account, keys))
     social = True
     return render_to_response('admin_manager/social.html', locals())
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -288,6 +293,7 @@ def action_social_update(request):
         response = {'status': 'error', 'messages': errors}
         return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 def action_domain(request):
@@ -308,6 +314,7 @@ def action_domain(request):
     form = forms.AccountDomainForm(initial)
     return render_to_response('admin_manager/domain.html', locals())
 
+
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
@@ -322,7 +329,10 @@ def action_domain_update(request):
             value = form.cleaned_data[field_key]
             account.set_preference(key, value)
 
-        return HttpResponse(json.dumps({'status': 'ok', 'messages': [ugettext('APP-SETTINGS-SAVE-OK-TEXT')]}), content_type='application/json')
+        return HttpResponse(json.dumps({
+            'status': 'ok',
+            'messages': [ugettext('APP-SETTINGS-SAVE-OK-TEXT')]
+        }), content_type='application/json')
     else:
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
@@ -337,7 +347,10 @@ def action_categories(request):
     account = auth_manager.get_account()
     preferences = account.get_preferences()
     form = forms.CategoryEditForm()
-    categories = Category.objects.values('id', 'categoryi18n__name', 'categoryi18n__description').filter(account = auth_manager.account_id, categoryi18n__language = auth_manager.language)
+    categories = Category.objects.values('id', 'categoryi18n__name', 'categoryi18n__description').filter(
+        account=auth_manager.account_id,
+        categoryi18n__language=auth_manager.language
+    )
 
     # for block the "delete" button on transparency categories
     used_transparency_categories = preferences['account.transparency.categories'].split()
@@ -355,11 +368,13 @@ def action_create_category(request):
     if form.is_valid():
         auth_manager = request.auth_manager
         category_name = form.cleaned_data['name']
-        category = Category.objects.create(account_id = auth_manager.account_id)
-        categoryi18n = CategoryI18n.objects.create(category = category
-                                                   , name = category_name
-                                                   , description = form.cleaned_data['description']
-                                                   , language = auth_manager.language)
+        category = Category.objects.create(account_id=auth_manager.account_id)
+        categoryi18n = CategoryI18n.objects.create(
+            category=category,
+            name=category_name,
+            description=form.cleaned_data['description'],
+            language=auth_manager.language
+        )
 
         is_default = form.cleaned_data['is_default']
         account = auth_manager.get_account()
@@ -372,6 +387,7 @@ def action_create_category(request):
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
         return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -400,8 +416,10 @@ def action_edit_category(request):
 
         is_default = form.cleaned_data['is_default']
 
-        try: default_category = int(account.get_preference('account.default.category'))
-        except: default_category = None
+        try:
+            default_category = int(account.get_preference('account.default.category'))
+        except:
+            default_category = None
         if is_default:
             account.set_preference('account.default.category', category_id)
         elif default_category == category_id:
@@ -414,12 +432,14 @@ def action_edit_category(request):
     else:
         errors = generate_ajax_form_errors(form)
         response = {'status': 'error', 'messages': errors}
-        return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+        return HttpResponse(json.dumps(response), content_type='application/json', status=400)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
 def action_delete_category(request):
+    logger = logging.getLogger(__name__)
     form = forms.CategoryDeleteForm(request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -428,8 +448,11 @@ def action_delete_category(request):
         try:
             default_category_id = int(account.get_preference('account.default.category'))
         except:
-            default_category_id = None
-
+            # si no hay categoria por defecto entonces no se pueden eliminar estos recursos, no tenemos a
+            # que categoria cambiarlos
+            response = {'status': 'error', 'messages': [ugettext('APP-CATEGORY-DEFAULT-UNDEFINED')]}
+            return HttpResponse(json.dumps(response), content_type='application/json', status=400)
+            
         if category_id != default_category_id:
 
             # check if it's a transparency category
@@ -439,16 +462,21 @@ def action_delete_category(request):
                 return HttpResponse(json.dumps(response), content_type='application/json', status=400)
 
             # moving the resources to the default category
-            total = DataStreamRevision.objects.filter(category=category_id).update(category=default_category_id)
-            total += DashboardRevision.objects.filter(category=category_id).update(category=default_category_id)
-            total += DatasetRevision.objects.filter(category=category_id).update(category=default_category_id)
+            datasets_to_update = DatasetRevision.objects.filter(category=category_id)
+            datastreams_to_update = DataStreamRevision.objects.filter(category=category_id)
+
+            if settings.DEBUG: logger.info('Resources to update %s %s' % (str(datasets_to_update), str(datastreams_to_update)))
+            
+            total = datastreams_to_update.update(category=default_category_id)
+            total += datasets_to_update.update(category=default_category_id)
+
+            # reindexing
+            if total > 0:
+                reindex_category_resources(default_category_id, auth_manager.language)
 
             # actually, deleting the category
             cat = Category.objects.get(pk=category_id)
             cat.delete()
-
-            # reindexing
-            reindex_category_resources(default_category_id, auth_manager.language)
 
         else:
             response = {'status': 'error', 'messages': [ugettext('APP-CATEGORY-DEFAULT-CANT-BE-DELETED')]}
@@ -471,6 +499,7 @@ def action_check_email(request):
         query = query.exclude(id=user_id)
     return HttpResponse(str(not query.exists()).lower(), content_type='application/json')
 
+
 @require_POST
 def action_check_username(request):
     nick = request.POST.get('username')
@@ -480,12 +509,14 @@ def action_check_username(request):
         query = query.exclude(id=user_id)
     return HttpResponse(str(not query.exists()).lower(), content_type='application/json')
 
+
 @require_POST
 def action_check_domain(request):
     account_id = request.auth_manager.account_id
     domain = request.POST.get('domain')
     exists = Preference.objects.filter(key='account.domain', value=domain).exclude(account_id=account_id).exists()
     return HttpResponse(str(not exists).lower(), content_type='application/json')
+
 
 def get_initial(account, keys):
     """ change dots for underscores in a set of given preferences """
@@ -499,30 +530,39 @@ def get_initial(account, keys):
         initial[key] = preferences[key]
     return initial
 
+
 def set_preferences(account, preferences):
     for key, value in preferences.items():
         account.set_preference(key, value)
 
+#####################################################
+# creo que todo esto deberia ser refactoreado para que
+# se use el lifecycle en vez de hablar con el indexador
+# de forma directa
+from core.lifecycle.datasets import DatasetSearchDAOFactory
+from core.lifecycle.datastreams import DatastreamSearchDAOFactory
+
+
+# Para que se le pasa el language?
 def reindex_category_resources(category_id, language):
-    datasets = Dataset.objects.filter(last_published_revision__category_id = category_id)
-    datastreams = DataStream.objects.filter(last_published_revision__category_id = category_id)
-
-    """
+    """ reindex all resurce using given category """
     logger = logging.getLogger(__name__)
-    logger.info("Datasets %s" % datasets.query)
-    logger.info("Datastreams %s" % datastreams.query)
-    """ 
     
-    #TODO agregar dashboards agregando previamente los campos last_revision y last_published_revision
-    #TODO agregar visualizaciones cuando se desarrolle el campo categoria para el
+    if settings.DEBUG:
+        logger.info('Reindexing category resources %d, %s' % (category_id, language))
+    
+    datasets = Dataset.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
+    datastreams = DataStream.objects.filter(last_published_revision__category_id=category_id, last_published_revision__status=StatusChoices.PUBLISHED)
 
-    docs = []
-    resources = list(datasets) + list(datastreams) # + list(dashboards) + list(visualizations)
-    for resource in resources:
-        doc=resource.get_dict(language)
-        docs.append(doc)
-
-    SearchifyIndex().indexit(docs)
+    for dataset in datasets:
+        datasetrevision=dataset.last_published_revision
+        search_dao = DatasetSearchDAOFactory().create(datasetrevision)
+        search_dao.add()
+    for datastream in datastreams:
+        datastreamrevision=datastream.last_published_revision
+        search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
+        search_dao.add()
+#####################################################
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -540,8 +580,6 @@ def get_resource_dict(request):
 
     if res_type == "VZ":
         res = VisualizationRevision.objects.get(pk=res_id)
-    elif res_type == "DASH":
-        res = DashboardRevision.objects.get(pk=res_id)
     elif res_type == "DS":
         res = DataStreamRevision.objects.get(pk=res_id)
 
@@ -550,9 +588,12 @@ def get_resource_dict(request):
     resp += "<h3>Origen</h3><hr>" + str(orig)
 
     dest = orig.copy()
-    if update_type == "int": update_value = int(update_value)
-    if update_type == "float": update_value = float(update_value)
-    if update_type == "long": update_value = long(float(update_value))
+    if update_type == "int":
+        update_value = int(update_value)
+    if update_type == "float":
+        update_value = float(update_value)
+    if update_type == "long":
+        update_value = long(float(update_value))
 
     dest["fields"][update_param] = update_value
     resp += "<h3>Destino</h3><hr>" + str(dest)
@@ -562,6 +603,7 @@ def get_resource_dict(request):
     resp += "<h3>ReIndexado:%s</h3><hr>" % str(idx)
 
     return HttpResponse(resp)
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')

@@ -13,28 +13,17 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
-		this.listenTo(this.model, "change:status", this.render);
+		this.listenTo(this.model, "change", this.render);
 		this.render();
 	},
 
 	render: function() {
+
+		console.log(this.model.toJSON());
+
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.setSidebarHeight();
 		this.setContentHeight();
 		return this;
-	},
-
-	setSidebarHeight: function(){
-
-		var self = this;
-
-		$(document).ready(function(){
-
-			var otherHeights = 0;
-			self.setHeights( '.sidebar-container .box', otherHeights );
-
-		});
-
 	},
 
 	setContentHeight: function(){
@@ -43,12 +32,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 		$(document).ready(function(){
 
-			var otherHeights = 
-			parseFloat( $('.detail-container header').height() )
-			+ parseFloat( $('.detail-container header').css('padding-top').split('px')[0] )
-			+ parseFloat( $('.detail-container header').css('padding-bottom').split('px')[0] )
-			+ parseFloat( $('.detail-container header').css('border-bottom-width').split('px')[0] )
-			+ 2;// Fix to perfection;
+			var otherHeights = 0;
 
 			self.setHeights( '.resources-table', otherHeights );
 
@@ -67,8 +51,6 @@ var datasetView = Backbone.Epoxy.View.extend({
 			otherHeight = theHeight,
 			minHeight = tabsHeight - otherHeight;
 
-		// $(heightContainer).css('min-height', minHeight+ 'px');
-
 		$(window).resize(function(){
 
 			var windowHeight;
@@ -84,6 +66,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 			- parseFloat( otherHeight )
 			- $('.header').height()
 			- $('.main-section .section-title').height()
+			- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] )
 			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
 			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
 			- 20; // to set some space at the bottom
@@ -108,16 +91,29 @@ var datasetView = Backbone.Epoxy.View.extend({
 		this.unpublishListResources.push(this.options.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
-				type: "datastreams"
+				type: "datastreams",
+				parentView: this
 		});
 	},
 
-	changeStatus: function(event){
-		
+	changeStatus: function(event, killemall){
+
+		if( _.isUndefined( killemall ) ){
+			var killemall = false;
+		}else{
+			var killemall = killemall;
+		}
+
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
 			url = this.model.get('changeStatusUrl'),
 			self = this;
+
+		if(action == 'unpublish'){
+			var lastPublishRevisionId = this.model.get('lastPublishRevisionId');
+			url = 'change_status/'+lastPublishRevisionId+'/';
+			data.killemall = killemall;
+		}
 
 		$.ajax({
 			url: url,
@@ -133,14 +129,19 @@ var datasetView = Backbone.Epoxy.View.extend({
 			success: function(response){
 
 				if(response.status == 'ok'){
-					
-					// Set Status
-					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
-					self.model.set('status',response.dataset_status);
+
+					// Update some model attributes
+					self.model.set({
+						'status_str': STATUS_CHOICES( response.result.status ),
+						'status': response.result.status,
+						'lastPublishRevisionId': response.result.last_published_revision_id,
+						'lastPublishDate': response.result.last_published_date,
+						'publicUrl': response.result.public_url,
+						'createdAt': response.result.created_at,
+					});
 
 					// Update Heights
 					setTimeout(function(){
-						self.setSidebarHeight();
 						self.setContentHeight();
 					}, 0);
 

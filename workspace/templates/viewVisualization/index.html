@@ -6,12 +6,9 @@
 {% load static %}
 
 {% compress css %}
-<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'workspace/styles/detailCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/viewVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 
 <script type="text/javascript"
@@ -29,9 +26,6 @@
 <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
 
-<!-- Process Manager -->
-<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
 <!-- Charts types & instances -->
 <script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -43,6 +37,13 @@
 <script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
+<!-- Screen JS -->
+<script language="javascript" src="/js_workspace/viewVisualization/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/unpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationModel.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/viewVisualization/viewVisualizationView.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
 
 {% block header_navigation %}
@@ -62,26 +63,10 @@
 {% endblock %}
 
 {% block content %}
-<div class="col-xs-12 detail" id="id_viewVisualization">
+<div class="detail col-xs-12" id="id_viewVisualization">
     <div class="wrapper1">
         <div class="wrapper2 clearfix">
             <div class="wrapper3">
-                {# Pending review = 1  #}
-                {% if visualization_revision.status == 1 %}
-                <!-- Review -->
-                    <div class="alert alert-info clearfix" id="id_reviewBar">
-                    {% if auth_manager.is_publisher or auth_manager.is_admin %}
-                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-YOUR-REVIEW-TEXT' %}</p>
-                        <div class="navigation FR">
-                            <a id="id_approve" class="button primary small FL" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
-                            <a id="id_reject" class="button alpha small FL" title="{% trans 'APP-REJECT-TEXT' %}" data-action="reject">{% trans 'APP-REJECT-TEXT' %}</a>
-                        </div>
-                    {% else %}
-                        <p><i class="icon info"></i>{% trans 'APP-WAITING-FOR-REVIEW-TEXT' %}</p>
-                    {% endif %}
-                </div>
-                {% endif %}
-
                 <!-- Sidebar -->
                 <section class="sidebar-container">
                     {% include "viewVisualization/sidebar.html" %}
@@ -95,31 +80,41 @@
     </div>
 </div>
 
+{# templates backbone #}
+{% include "viewVisualization/templates.html" %}
 
+{% endblock %}
+
+{% block bottom_js %}
 <script type="text/javascript">
 
 google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 
-
 $(document).ready(function(){
 
-    var visualizationModel = new visualization({
-        id: "{{datastream.datastreamrevision_id}}",
-        datastream_id: "{{datastream.datastream_id}}",
-        visualization_id: "{{visualization_revision.visualization_id}}",
-        title: "{{visualization_revision.title}}" , 
+    var visualizationModel = new VisualizationModel({
+        
+        title: "{{visualization_revision.title}}", 
         description: "{{visualization_revision.description|escapejs}}", 
-        guid: "{{visualization_revision.guid}}",
-        createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
         visualizationJson : '{{result|escapejs}}',
         chartJson : '{{visualization_revision.impl_details|escapejs}}',
         chartLib: "{{visualization_revision.lib}}",
         status : '{{visualization_revision.status}}',
         status_str: "{{ visualization_revision.status|status_str|capfirst }}",
-        visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
-        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
-        publicUrl: "{{ visualization_revision.public_url }}",
+        createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
         lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+        publicUrl: "{{ visualization_revision.public_url }}",
+        changeStatusUrl: "{% url 'manageVisualizations.change_status' visualization_revision.visualization_revision_id %}",
+        lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
+        editUrl: "TODO",
+
+        // Validar si es necesario
+        guid: "{{visualization_revision.guid}}",
+
+        // Revisar
+        id: "{{ visualization_revision.last_revision_id }}",
+        visualization_id: " {{ visualization_revision.visualization_id }}",
+
     });
 
     var chartView = new viewVisualizationView({
@@ -129,7 +124,8 @@ $(document).ready(function(){
     chartView.setLoading();
 });
 </script>
+{% endblock %}
 
-{# templates backbone #}
-{% include "viewVisualization/templates.html" %}
+{% block popupsOverlay %}
+  {% include "viewVisualization/overlays.html" %}
 {% endblock %}

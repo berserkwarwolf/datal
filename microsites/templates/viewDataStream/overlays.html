@@ -7,11 +7,11 @@
     <h5><strong>{% trans "DSDET-GOOGLESPREADSHEETS-SUBTITLE" %}</strong></h5>
     <p>{% trans "DSDET-GOOGLESPREADSHEETS-CONTENT" %}</p>
     <div class="form clearfix">
-      <form action="" onsubmit="return false">
+      <form action="" onsubmit="return false" novalidate>
         <table class="ao-dialogue">
           <tr>
             <td>
-              <input id="id_googleSpreadsheetDataStreamInput" readonly="readonly" style="width: 400px;" value="=ImportHtml(&quot;{{base_uri}}{% url "datastream_manager.action_html" datastream.datastream_id "la" %}{%if url_query%}?{{url_query}}{%endif%}&quot; ; &quot;table&quot; ; 1)" />
+              <input id="id_googleSpreadsheetDataStreamInput" readonly="readonly" style="width: 400px;" value="=ImportHtml(&quot;{{base_uri}}{% url "datastream_manager.html" datastream.datastream_id "la" %}{%if url_query%}?{{url_query}}{%endif%}&quot; ; &quot;table&quot; ; 1)" />
             </td>
           </tr>
         </table>

@@ -5,9 +5,9 @@
 /* Theme Tabs */
 .themeTabs{margin-bottom:15px;}
 .themeTabs > ul{position:relative;z-index:2;border-bottom:1px solid #e2e0e0;padding-bottom:5px;}
-.themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;background:#f4f4f4;}
+.themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;}
 .themeTabs > ul li:nth-child(4n){margin-right:0;}
-.themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;border:1px solid #f4f4f4;}
+.themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;}
 .themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$font-color-base;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}
 .themeTabs > ul li a .img{position:relative;z-index:3;display:block;width:146px;margin:0 auto;}
 .themeTabs > ul li a .img img{width:128px;height:180px;border:10px solid #f4f4f4;position:relative;z-index:3;}
@@ -93,10 +93,10 @@
 .configs .formBox{padding-top:20px;}
 .configs .formBox:first-child{padding-top:0;}
 .configs .formBox header{padding:0 0 13px 0;background:none;border-bottom:none;border-radius:0;box-shadow:none;margin:0;}
-.configs .formBox header .num{color:#333;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:20px;height:20px;width:20px;border-radius:50%;}
+.configs .formBox header .num{color:#333;font-weight:bold;font-size:15px;float:left;text-align:center;line-height:24px;height:20px;width:20px;border-radius:50%;}
 .configs .formBox header hgroup{padding-left:30px;}
-.configs .formBox header h1{color:$font-color-semi-light;font-size:15px;font-weight:bold;line-height:normal;padding:1px 0;}
-.configs .formBox header h2{font-size:11px;color:#a2a1a1;}
+.configs .formBox header h1{color:$font-color-semi-light;font-size:$font-size-m;font-weight:bold;line-height:normal;padding:1px 0;}
+.configs .formBox header h2{font-size:$font-size-base;color:#a2a1a1;}
 .configs .formBox fieldset{background:#f4f4f4;padding:13px;
 	-webkit-border-radius:3px;
 	   -moz-border-radius:3px;

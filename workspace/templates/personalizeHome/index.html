@@ -2,7 +2,6 @@
 {% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block meta %}
-<meta name="main-option" content="id_account_admin"/>
 {% compress css %}
 <!-- CSS LIBS -->
 <link href="{% sass_src 'core/styles/plugins/jquery-file-upload/jquery.fileupload-ui.css' %}" type="text/css" rel="stylesheet" media="screen"></script>
@@ -39,6 +38,7 @@
 <script type="text/javascript" src="/js_workspace/personalizeHome/theme6View.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/personalizeHome/personalizeHomeModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/personalizeHome/personalizeHomeView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<meta name="main-option" content="id_settings_option"/>
 {% endblock %}
 
 {% block sectionTitle %}

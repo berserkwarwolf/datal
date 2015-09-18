@@ -25,7 +25,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     queryset = GuidModel
     lookup_field = 'guid'
     serializer_class = ResourceSerializer
-    data_types = ['dt', 'ds', 'vt']
+    data_types = ['dt', 'ds', 'vz']
 
     def list(self, request, format='json'):
         limit = self.request.query_params.get('limit', None)
@@ -110,4 +110,4 @@ class VisualizationViewSet(ResourceViewSet):
     queryset = VisualizationDBDAO()
     serializer_class = VisualizationSerializer
     lookup_field = 'guid'
-    data_types = ['vt']
+    data_types = ['vz']

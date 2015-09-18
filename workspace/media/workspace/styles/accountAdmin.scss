@@ -7,17 +7,14 @@
 .content {padding-bottom:30px;background:#fff;}
 .content, .layout{background:none;}
 .main-section .section-content{background-color:#FFF;padding:0;}
-.list-container{padding:0;margin:0;}
+.list-container{padding:0;margin-top:30px;}
 .ao-tabs{padding:0 10px;background:none;border:0;}
 .ao-tabs .tabsList .tab.tab-selected div a, 
-.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$font-color-semi-light;}
-.ao-tabs .tabsList .tab.tab-selected, 
-.ao-tabs .tabsList .tab.tab-selected:hover{background:#E4E4E4;}
-.ao-tabs .tabs-in ul{border-bottom:1px solid #E4E4E4;display:block;}
-.ao-tabs .tabs-in li{position:relative;top:1px;}
+.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$font-color-semi-light;font-weight:normal;}
+.ao-tabs .tabs-in ul{display:block;box-shadow:0 -1px 0 #e4e4e4 inset;padding-left:20px;}
+.ao-tabs .tabs-in li{position:relative;}
 
 /*FORMS*/
-.dataStreamForm{padding:20px 0 20px 20px;}
 .dataStreamForm .form .row label{font-size:$form-label-size;width:160px;float:left;text-shadow:0 1px 0 #fff;color:$form-label-color;line-height:normal;padding-top:5px;}
 .dataStreamForm .form .row input, 
 .dataStreamForm .form .row textarea,
@@ -49,22 +46,15 @@
 /*FORM CONTAINER*/
 .formContainer header, 
 .formContainer .titleContainer{background-color:#fff;padding:20px 10px 18px 10px;border-bottom:1px solid #e5e3e3;
-  -webkit-border-radius:3px 3px 0 0;
-     -moz-border-radius:3px 3px 0 0;
-          border-radius:3px 3px 0 0;
-  -webkit-box-shadow:0 1px 0 #fff;
-     -moz-box-shadow:0 1px 0 #fff;
-          box-shadow:0 1px 0 #fff;
 }
 .formContainer header h3, .formContainer .titleContainer h3{font-size:$font-size-l;font-weight:bold;display:inline-block;font-family:$font-titles-family;}
 .formContainer header h3 span, .formContainer .titleContainer h3 span{color:#999;}
 .formContainer header h3 span{font-size:14px;font-weight:normal;color:#999;}
-.buttons{border-top:1px solid #E2E0E0;padding:15px 0;background-color:$accent-color-05;
+.buttons{border-top:1px solid #E2E0E0;padding:15px 0;
   -webkit-box-shadow:1px 0 0 #fff;
      -moz-box-shadow:1px 0 0 #fff;
           box-shadow:1px 0 0 #fff;
 }
-.formContainer .columns{background-color: #f6f4f4;}
 
 .formContainer .contentForm fieldset{padding:20px;}
 .formContainer .separator{height:1px;background:#d7d7d7;margin:5px 0 20px 0;}
@@ -73,9 +63,11 @@
 .formContainer .contentForm .row input[type="file"]{padding:0;}
 .formContainer .contentForm .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;}
 
+.formContainer .columns{margin-top:30px;}
+
 /*OVERLAY*/
 .ao-popup-overlay .columns .CL{width:440px;}
-.ao-popup-overlay .columns .CR{width:240px;}
+.ao-popup-overlay .columns .CR{width:220px;margin-right:20px;}
 .ao-popup-overlay .dataStreamForm .form .row input, 
 .ao-popup-overlay .dataStreamForm .form .row textarea,
 .ao-popup-overlay .dataStreamForm .form .row select{width:280px;}
@@ -90,7 +82,7 @@
 /*SETTINGS BOX*/
 .settingsBoxes .CL,
 .settingsBoxes .CR{width:270px;}
-.settingsBoxes .settingsBox, .api, .configs .formBox fieldset{margin:0 20px 20px 0;padding:15px;background-color:#f0f0f2;border:1px solid #eaeaea;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;box-shadow:0 1px 0 #fff;}
+.settingsBoxes .settingsBox, .api, .configs .formBox fieldset{margin:0 20px 20px 0;padding:15px;background-color:#f0f0f2;}
 .settingsBoxes .settingsBox h4{font-family:$font-secondary-family;text-transform:uppercase;text-shadow:0 1px 0 #fff;padding-bottom:15px;}
 .settingsBoxes .settingsBox .noPadding{padding:0 !important;}
 .settingsBoxes .settingsBox .colorPicker div{top:4px;left:4px;width:28px;height:28px;}

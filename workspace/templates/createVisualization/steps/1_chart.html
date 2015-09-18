@@ -12,112 +12,106 @@
 
 				<div class="sidebar">
 
-					<div class="boxConfig">
+					<div class="col-xs-11">
 
-						<div class="itemConfig">
+						<div class="boxConfig">
 
-							<div class="title">{% trans "APP-CREATE-CHARTS-TEXT" %}</div>
+							<div class="itemConfig">
 
-							<div class="boxInner">
+								<div class="title">{% trans "APP-CREATE-CHARTS-TEXT" %}</div>
 
-								<form>
+								<div class="boxInner">
 
-									<fieldset>
+									<form novalidate>
 
-										<div class="btnGroup">
-											<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT" %}</p>
-											<button class="chartType line linechart d3Chart googleChart" data-type="linechart" title="Línea">
-												<span class="icon icon-chart-line"></span>
-											</button>
-											<button class="chartType area areachart d3Chart googleChart" data-type="areachart" title="Área">
-												<span class="icon icon-chart-area"></span>
-											</button>
-										</div>
+										<fieldset>
 
-										<div class="btnGroup">
-											<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT" %}</p>
-											<button class="chartType column columnchart d3Chart googleChart" data-type="columnchart" title="Columnas">
-												<span class="icon icon-chart-column"></span>
-											</button>
-											<button class="chartType bar barchart d3Chart googleChart" data-type="barchart" title="Barras">
-												<span class="icon icon-chart-bar"></span>
-											</button>
-										</div>
+											<div class="btnGroup">
+												<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-IN-TIME-TEXT" %}</p>
+												<button class="chartType line linechart d3Chart googleChart" data-type="linechart" title="Línea">
+													<span class="icon icon-chart-line"></span>
+												</button>
+												<button class="chartType area areachart d3Chart googleChart" data-type="areachart" title="Área">
+													<span class="icon icon-chart-area"></span>
+												</button>
+											</div>
 
-										<div class="btnGroup">
-											<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT" %}</p>
-											<button class="chartType pie piechart d3Chart googleChart" data-type="piechart" title="Torta">
-												<span class="icon icon-chart-pie"></span>
-											</button>
-										</div>
+											<div class="btnGroup">
+												<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPARISON-BETWEEN-ITEMS-TEXT" %}</p>
+												<button class="chartType column columnchart d3Chart googleChart" data-type="columnchart" title="Columnas">
+													<span class="icon icon-chart-column"></span>
+												</button>
+												<button class="chartType bar barchart d3Chart googleChart" data-type="barchart" title="Barras">
+													<span class="icon icon-chart-bar"></span>
+												</button>
+											</div>
 
-									</fieldset>
+											<div class="btnGroup">
+												<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-COMPOSITION-TEXT" %}</p>
+												<button class="chartType pie piechart d3Chart googleChart" data-type="piechart" title="Torta">
+													<span class="icon icon-chart-pie"></span>
+												</button>
+											</div>
 
-									<fieldset>
-										<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT" %}</p>
-										<select id="chartLibrary">
-											<option value="google">{% trans "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT" %}</option>
-											<option value="d3">{% trans "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT" %}</option>
-										</select>
-									</fieldset>
+										</fieldset>
 
-								</form>
+										<fieldset>
+											<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-LIBRARY-LABEL-TEXT" %}</p>
+											<select id="chartLibrary">
+												<option value="google">{% trans "APP-CUSTOMIZE-VISUALIZATION-GOOGLE-LIBRARY-TEXT" %}</option>
+												<option value="d3">{% trans "APP-CUSTOMIZE-VISUALIZATION-D3-LIBRARY-TEXT" %}</option>
+											</select>
+										</fieldset>
+
+									</form>
+
+								</div>
 
 							</div>
 
-						</div>
+							<div class="itemConfig">
 
-						<div class="itemConfig">
+								<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE" %}</div>
 
-							<div class="title">{% trans "APP-CUSTOMIZE-VISUALIZATION-OPTIONS-TITLE" %}</div>
+								<div class="boxInner">
 
-							<div class="boxInner">
+									<form novalidate>
 
-								<form>
+										<fieldset>
+											<div class="checkbox">
+												<label>
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %} <input class="checkboxControl" value="checked" name="invertedAxis" type="checkbox">
+												</label>
+											</div>
+											<div class="checkbox">
+												<label>
+													{% trans "APP-INVERT-TEXT" %} <input class="invertData" value="checked" name="invertData" type="checkbox">
+												</label>
+											</div>
+										</fieldset>
 
-									<fieldset>
-										<div class="checkbox">
-											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %} <input class="checkboxControl" value="checked" name="invertedAxis" type="checkbox">
-											</label>
-										</div>
-									</fieldset>
+										<fieldset>
+											
+											<div class="subtitle">{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-TEXT" %}</div>
+											
+											<div class="radio">
+												<label>
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %} <input name="nullValueAction" value="exclude" type="radio">
+												</label>
+												<label>
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT" %} <input name="nullValueAction" value="previous" type="radio">
+												</label>
+												<label>
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT" %} <input name="nullValueAction" value="given" type="radio">
+												</label>
+												<input id="nullValuePreset" data-ref="nullValuePreset" type="text" class="hide">
+											</div>
 
-									<fieldset>
-										
-										<div class="subtitle">{% trans "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT" %}</div>
-										
-										<div class="radio">
-											<label>
-												{% trans "APP-DEFAULT-TEXT" %} <input name="invertData" checked="" type="radio" value="">
-											</label>
-											<label>
-												{% trans "APP-INVERTED-TEXT" %} <input name="invertData" type="radio" value="inverted">
-											</label>
-										</div>
+										</fieldset>
 
-									</fieldset>
+									</form>
 
-									<fieldset>
-										
-										<div class="subtitle">{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-TEXT" %}</div>
-										
-										<div class="radio">
-											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %} <input name="nullValueAction" value="exclude" type="radio">
-											</label>
-											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT" %} <input name="nullValueAction" value="previous" type="radio">
-											</label>
-											<label>
-												{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT" %} <input name="nullValueAction" value="given" type="radio">
-											</label>
-											<input id="nullValuePreset" data-ref="nullValuePreset" type="text" class="hide">
-										</div>
-
-									</fieldset>
-
-								</form>
+								</div>
 
 							</div>
 
@@ -131,16 +125,16 @@
 
 					<div class="row">
 
-						<div class="col-xs-12 col-lg-offset-1 col-lg-10">
-
+						<div class="col-xs-12">
 							<div class="visualizationContainer">
 
 								<button class="icon icon-add fill-background corner-position selectData"></button>
 								<div class="chartContent previewColumn">
-									<p>{% trans "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT" %}</p>
+									<!-- chart area -->
 								</div>
 
 							</div>
+							<p class="message"></p>
 
 						</div>
 

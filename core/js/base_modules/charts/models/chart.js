@@ -15,14 +15,19 @@ charts.models.Chart = Backbone.Model.extend({
         chartTemplate: undefined,
         nullValueAction: 'exclude',
         nullValuePreset: undefined,
-        traspose: false,
+
+        //flag que indica si alguna vez abrió el modal de datos, es para validación
+        select_data: false,
+
+        //validation
+        message: gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"),
 
         //metadata
         meta_title: undefined,
         meta_description: undefined,
-        meta_category: undefined,
         meta_notes: undefined,
-        meta_source: undefined,
+        meta_category: undefined,
+        meta_sources: undefined,
         meta_tags: undefined,
 
         //data selection
@@ -71,6 +76,11 @@ charts.models.Chart = Backbone.Model.extend({
             id: this.get('resourceID'),
             type: this.get('type')
         });
+
+        if(this.get('isEdit')){
+            this.fetchPreviewData();
+        }
+
         this.bindEvents();
     },
 
@@ -90,14 +100,15 @@ charts.models.Chart = Backbone.Model.extend({
             headers: self.get('range_headers'),
             labels: self.get('range_labels'),
             nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset')
+            nullValuePreset:  self.get('nullValuePreset'),
+            type: self.get('type')
         };
 
         if(self.get('invertData') && self.get('invertData')!=''){
             params['invertData'] = "checked";
         }
 
-        if(self.get('invertedAxis')){
+        if(self.get('invertedAxis') && self.get('invertedAxis')!=''){
             params['invertedAxis'] = "checked";
         }
 
@@ -136,7 +147,10 @@ charts.models.Chart = Backbone.Model.extend({
         }));
 
         this.data.set('fields', fields);
-        this.data.set('rows', _.unzip(columns));
+        this.data.set('rows', _.clone(_.unzip(columns)));
+
+        this.trigger("newDataReceived");
+
     },
 
     onChangeType: function (model, type) {
@@ -199,12 +213,49 @@ charts.models.Chart = Backbone.Model.extend({
             title: this.get('meta_title'),
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
-            category: this.get('meta_category'),
-            source: this.get('meta_source'),
-            tags: this.get('meta_tags')
+            
+/*            category: this.get('meta_category'),
+            source: this.get('meta_sources'),
+            tags: this.get('meta_tags')*/
         };
 
         return metadata;
+    },
+
+    valid: function(){
+        console.log('Validation from charts.models.Chart');
+        var valid = true;
+
+        //Si alguna vez intentó seleccionar algo de data
+        if(this.get('select_data')){
+
+            //General validation
+            var lFields = this.data.get('fields').length;
+
+            var check = _.reduce(this.data.get('rows'), 
+                function(memo, ar){
+                 return (ar.length==lFields)?memo:memo + 1; 
+                }, 0);
+
+            if (check!=0){
+                this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
+                valid = false;
+            }
+
+            if(valid){
+                //TODO specific validation for chart type
+                switch(this.get('type')){
+                    case 'piechart':
+                        console.log('is pie chart');
+                        //validar que no haya números negativos en la primer serie que se usa para el pie
+                    break;
+                }
+            }
+
+
+        }
+
+        return valid;
     },
 
     validateMetadata: function(){
@@ -227,12 +278,12 @@ charts.models.Chart = Backbone.Model.extend({
             chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
-            traspose: this.get('traspose'),
+            invertData: this.get('invertData'),
 
             //data selection
-            range_headline: this.get('range_headline'),
-            range_data: this.get('range_data'),
-            range_label: this.get('range_label')
+            headerSelection: this.get('range_headers'),
+            data: this.get('range_data'),
+            labelSelection: this.get('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );

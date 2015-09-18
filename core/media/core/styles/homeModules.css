@@ -1,5 +1,5 @@
 /*RESOURCES CONTAINER*/
-.resourcesTable{background:url(/media_community/images/home/sh_940.png) no-repeat center bottom;padding-bottom:7px;}
+.resourcesTable{}
 .resourcesTableInner{border:1px solid #ddd;}
 .columns{border:1px solid #fff;border-left:0;border-right:0;background:#fff url(/static/core/images/homeManager/gr_sidebar.gif) repeat-y 0 0;}
 .columns .CL{width:166px;}
@@ -28,7 +28,7 @@
 td.ic_Dset,
 td.ic_Chart,
 td.ic_Data,
-td.ic_Dashboard{background-image:url(/static/workspace/images/common/ic_resources.png);background-repeat:no-repeat;display:block;line-height:21px;padding-left:20px;}
+td.ic_Dashboard{background-image:url(/static/workspace/images/common/ic_resources.png);background-repeat:no-repeat;line-height:21px;padding-left:20px;}
 td.ic_Dset{background-position:0 2px !important;}
 td.ic_Chart{background-position:0 -38px !important}
 td.ic_Data{background-position:0 -19px !important;}

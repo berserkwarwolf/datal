@@ -10,19 +10,44 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        this.model = new charts.models.Chart({
+        //create
+        var initialOptions = {
             datastream_revision_id: options.datastream_revision_id,
-            // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
-            // resourceIdAttribute: 'visualization_revision_id',
-            // resourceID: 6741,
-            // options: {
-            //     zoom: 15,
-            //     center: {
-            //         lat: 38.5806808485,
-            //         long: -121.4826359602
-            //     }
-            // }
-        });
+            meta_tags:  options.datastream_tags,
+            meta_sources: options.datastream_sources,
+            meta_category: options.datastream_category
+        };
+
+        //edit
+        if(options.revision_id){
+            initialOptions = _.extend(initialOptions,{
+                select_data:true,
+                isEdit:true,
+                revision_id: options.revision_id,
+
+                lib: options.lib,
+                type: options.type,
+                meta_notes: _.unescape(options.notes),
+                meta_title: options.title,
+                meta_description: options.description,
+
+                //config
+                showLegend: true,
+                invertData: options.invertData,
+                invertedAxis: options.invertedAxis,
+                chartTemplate: options.chartTemplate,
+                nullValueAction: options.nullValueAction,
+                nullValuePreset: options.nullValuePreset,
+
+                //data
+                range_data: options.data,
+                range_headers: options.headerSelection,
+                range_labels: options.labelSelection
+
+            });
+        }
+
+        this.model = new charts.models.Chart(initialOptions);
 
         //Buttons views
         this.buttonsView = new ButtonsView({
@@ -44,7 +69,7 @@ var MainView = Backbone.View.extend({
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-CHART-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view')
         }).init();
@@ -68,7 +93,7 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-MAP-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view-map')
         }).init();
@@ -192,10 +217,21 @@ var MainView = Backbone.View.extend({
 
     start: function(){
         this.$el.find('.process_manager_step').hide();
+
+        //edit
+        if(this.model.get('isEdit')){
+            this.model.set('isMap', false);
+            this.currentFlow = 'charts';
+            this.index++;
+            this.steps[this.currentFlow][this.index].start();
+        }
+        
         this.steps[this.currentFlow][this.index].start();
+        
     },
 
     finish: function(){
+        this.steps[this.currentFlow][this.index].finish();
         //window.location = this.model.get('finishUrl');
     },
 

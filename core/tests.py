@@ -7,7 +7,7 @@ from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.search.elastic import ElasticsearchFinder
-
+from core.engine import preview_chart
 
 class LifeCycleManagerTestCase(TransactionTestCase):
     fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
@@ -16,25 +16,19 @@ class LifeCycleManagerTestCase(TransactionTestCase):
     def setUp(self):
         self.end_point = 'http://nolaborables.com.ar/API/v1/2013'
         self.user_nick = 'administrador'
+        self.user_admin = User.objects.get(nick='administrador')
+        self.user_editor = User.objects.get(nick='editor')
+        self.user_publicador = User.objects.get(nick='publicador')
 
         self.user = User.objects.get(nick=self.user_nick)
         self.category = Category.objects.filter(account_id=self.user.account.id).order_by('-id')[0]
         self.collect_type = CollectTypeChoices.SELF_PUBLISH
         self.source_type = SourceImplementationChoices.HTML
 
-    def create_datastream(self, status=StatusChoices.DRAFT):
-        lifecicle = DatastreamLifeCycleManager(user=self.user, language=self.user.language)
-        self.datastream_revision = lifecicle.create(
-            title='Test Datastream',
-            category=self.category.id,
-            dataset=self.dataset_revision.dataset,
-            status=status,
-        )
+    def create_dataset(self, status=StatusChoices.DRAFT, user=None):
+        life_cycle = DatasetLifeCycleManager(user=user, language=user.language)
 
-    def create_dataset(self, status=StatusChoices.DRAFT):
-        life_cycle = DatasetLifeCycleManager(user=self.user, language=self.user.language)
-
-        self.dataset_revision = life_cycle.create(
+        dataset_rev = life_cycle.create(
             title='Test Dataset',
             collect_type=self.collect_type,
             description="Descripcion del dataset",
@@ -46,123 +40,182 @@ class LifeCycleManagerTestCase(TransactionTestCase):
             status=status
         )
 
-        self.dataset = self.dataset_revision.dataset
+        dataset = dataset_rev.dataset
+        return dataset, dataset_rev
 
-    def test_create_dataset(self):
+    def test_create_dataset_as_admin(self):
         """
         Testing Lifecycle Manager Create Dataset Method
         """
-        self.create_dataset()
+        dataset, rev = self.create_dataset(user=self.user_admin)
 
-        new_dataset = Dataset.objects.get(id=self.dataset.id)
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
         # Verifico los campos del dataset
-        self.assertEqual(new_dataset.user, self.user)
+        self.assertEqual(new_dataset.user, self.user_admin)
         self.assertEqual(new_dataset.type, self.source_type)
         self.assertFalse(new_dataset.is_dead)
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
 
-
-    def test_create_dataset_published(self):
+    def test_create_dataset_as_editor(self):
         """
         Testing Lifecycle Manager Create Dataset Method
         """
-        self.create_dataset(status = StatusChoices.PUBLISHED)
+        dataset, rev = self.create_dataset(user=self.user_editor)
 
-        new_dataset = Dataset.objects.get(id=self.dataset.id)
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
         # Verifico los campos del dataset
-        self.assertEqual(new_dataset.user, self.user)
+        self.assertEqual(new_dataset.user, self.user_editor)
         self.assertEqual(new_dataset.type, self.source_type)
         self.assertFalse(new_dataset.is_dead)
         self.assertIsNot(new_dataset.guid, '')
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
-        self.assertEqual(new_dataset.last_revision, new_dataset.last_published_revision)
+        self.assertIsNone(new_dataset.last_published_revision)
 
-    def test_remove_last_revision(self):
+    def test_publish_dataset_as_admin(self):
         """
-        Testing Lifecycle Manager Remove Dataset Method
+        Testing Lifecycle Manager Create Dataset Method
         """
-        self.create_dataset()
+        dataset, rev = self.create_dataset(user=self.user_admin)
 
-        old_dataset = self.dataset
-        old_dataset_revision = self.dataset.last_revision
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
 
-        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
-                                            dataset_revision_id=self.dataset.last_revision.id)
-        lifecycle.remove()
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
-        # Verifico que elimine el dataset
-        self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
 
-        # Verifico que elimine la revision
-        self.assertIs(DatasetRevision.objects.filter(id=old_dataset_revision.id).count(), 0)
-
-    def test_send_to_review(self):
+    def test_publish_dataset_as_editor(self):
         """
-        Testing Lifecycle Manager send to review
+        Testing Lifecycle Manager Create Dataset Method
         """
-        self.create_dataset()
-        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
-                                            dataset_revision_id=self.dataset.last_revision.id)
-        lifecycle.send_to_review()
+        dataset, rev = self.create_dataset(user=self.user_editor)
 
-        queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+        life = DatasetLifeCycleManager(self.user_editor, dataset_revision_id=rev.id)
+        life.publish()
 
-        # Debe tener solo una Revision
-        self.assertEqual(queryset.count(), 1)
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
-        # El estado de la ultima revision debe ser PENDING REVIEW
-        self.assertEqual(queryset[0].status, StatusChoices.PENDING_REVIEW)
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
 
-        # Ultima revision es la unica revision
-        self.assertEqual(queryset[0], self.dataset.last_revision)
-
-    def test_accept(self):
+    def test_unpublish_dataset_as_admin(self):
         """
-        Testing Lifecycle Manager accept Method
+        Testing Lifecycle Manager Create Dataset Method
         """
-        self.create_dataset()
+        dataset, rev = self.create_dataset(user=self.user_admin)
 
-        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
-                                            dataset_revision_id=self.dataset.last_revision.id)
-        lifecycle.send_to_review()
-        lifecycle.accept()
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
 
-        queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
-        # Debe tener solo una Revision
-        self.assertEqual(queryset.count(), 1)
+        life = DatasetLifeCycleManager(self.user_admin, dataset_id=new_dataset.id)
+        life.unpublish()
 
-        # El estado de la ultima revision debe ser APPROVED
-        self.assertEqual(queryset[0].status, StatusChoices.APPROVED)
+        new_dataset = Dataset.objects.get(id=dataset.id)
 
-    def test_publish(self):
-        """
-        Testing Lifecycle Manager publish Method
-        """
-        self.create_dataset()
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertIsNone(new_dataset.last_published_revision)
 
-        lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
-                                            dataset_revision_id=self.dataset.last_revision.id)
-        lifecycle.send_to_review()
-        lifecycle.accept()
-        lifecycle.publish()
 
-        queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+    # def test_create_dataset_published(self):
+    #     """
+    #     Testing Lifecycle Manager Create Dataset Method
+    #     """
+    #     self.create_dataset(status = StatusChoices.PUBLISHED)
+    #
+    #     new_dataset = Dataset.objects.get(id=self.dataset.id)
+    #
+    #     # Verifico los campos del dataset
+    #     self.assertEqual(new_dataset.user, self.user)
+    #     self.assertEqual(new_dataset.type, self.source_type)
+    #     self.assertFalse(new_dataset.is_dead)
+    #     self.assertIsNot(new_dataset.guid, '')
+    #     self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+    #     self.assertEqual(new_dataset.last_revision, new_dataset.last_published_revision)
 
-        # Debe tener solo una Revision
-        self.assertEqual(queryset.count(), 1)
+    # def test_remove_last_revision(self):
+    #     """
+    #     Testing Lifecycle Manager Remove Dataset Method
+    #     """
+    #     self.create_dataset()
+    #
+    #     old_dataset = self.dataset
+    #     old_dataset_revision = self.dataset.last_revision
+    #
+    #     lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+    #                                         dataset_revision_id=self.dataset.last_revision.id)
+    #     lifecycle.remove()
+    #
+    #     # Verifico que elimine el dataset
+    #     self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
+    #
+    #     # Verifico que elimine la revision
+    #     self.assertIs(DatasetRevision.objects.filter(id=old_dataset_revision.id).count(), 0)
 
-        # El estado de la ultima revision debe ser PUBLISHED
-        self.assertEqual(queryset[0].status, StatusChoices.PUBLISHED)
+    # def test_send_to_review(self):
+    #     """
+    #     Testing Lifecycle Manager send to review
+    #     """
+    #     self.create_dataset()
+    #     lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+    #                                         dataset_revision_id=self.dataset.last_revision.id)
+    #     lifecycle.send_to_review()
+    #
+    #     queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+    #
+    #     # Debe tener solo una Revision
+    #     self.assertEqual(queryset.count(), 1)
+    #
+    #     # El estado de la ultima revision debe ser PENDING REVIEW
+    #     self.assertEqual(queryset[0].status, StatusChoices.PENDING_REVIEW)
+    #
+    #     # Ultima revision es la unica revision
+    #     self.assertEqual(queryset[0], self.dataset.last_revision)
 
-    def test_lifecycle_1(self):
-        self.create_dataset(status=StatusChoices.DRAFT)
-        #self.create_datastream(status=StatusChoices.DRAFT)
-        print('Test sin terminar!!!')
+    # def test_accept(self):
+    #     """
+    #     Testing Lifecycle Manager accept Method
+    #     """
+    #     self.create_dataset()
+    #
+    #     lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+    #                                         dataset_revision_id=self.dataset.last_revision.id)
+    #     lifecycle.send_to_review()
+    #     lifecycle.accept()
+    #
+    #     queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+    #
+    #     # Debe tener solo una Revision
+    #     self.assertEqual(queryset.count(), 1)
+    #
+    #     # El estado de la ultima revision debe ser APPROVED
+    #     self.assertEqual(queryset[0].status, StatusChoices.APPROVED)
+
+    # def test_publish(self):
+    #     """
+    #     Testing Lifecycle Manager publish Method
+    #     """
+    #     self.create_dataset()
+    #
+    #     lifecycle = DatasetLifeCycleManager(user=self.user, language=self.user.language,
+    #                                         dataset_revision_id=self.dataset.last_revision.id)
+    #     lifecycle.send_to_review()
+    #     lifecycle.accept()
+    #     lifecycle.publish()
+    #
+    #     queryset = DatasetRevision.objects.filter(dataset=self.dataset)
+    #
+    #     # Debe tener solo una Revision
+    #     self.assertEqual(queryset.count(), 1)
+    #
+    #     # El estado de la ultima revision debe ser PUBLISHED
+    #     self.assertEqual(queryset[0].status, StatusChoices.PUBLISHED)
 
     # def test_create_new_revisions(self):
     #     """
@@ -295,3 +348,42 @@ class TestElasticSearch(TestCase):
             pass
             #print result
         assert len(results) == 2
+
+
+class TestEngine(TestCase):
+
+    def test_preview_chart(self):
+        query = {
+            'pInvertedAxis': u'',
+            'pNullValuePreset': u'',
+            'pHeaderSelection': u'K1:K1',
+            'pId': 70703,
+            'pType': u'linechart',
+            'pData': u'K2:K4',
+            'pNullValueAction': u'exclude',
+            'pLabelSelection': u'C2:C4',
+            'pInvertData': u''
+        }
+        result, content_type = preview_chart(query)
+        # print result
+        assert content_type == 'application/json; charset=UTF-8'
+
+
+    def test_preview_map(self):
+        query = {
+            'pId': 70703,
+            'pType': 'mapchart',
+            'pNullValueAction': 'exclude',
+            'pNullValuePreset': '',
+            'pData': 'C2:C12',
+            'pLatitudSelection': 'K2:K12',
+            'pLongitudSelection': 'L2:L12',
+            'pHeaderSelection': '',
+            'pTraceSelection': '',
+            # 'pZoom': '1',
+            # 'pBounds': '-24.237324317659557;-45.949525292619;-42.98732431765956;-95.230775292619'
+        }
+        result, content_type = preview_chart(query)
+        # print result, content_type
+        assert content_type == 'application/json; charset=UTF-8'
+

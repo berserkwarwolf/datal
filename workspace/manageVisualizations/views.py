@@ -4,7 +4,7 @@ import urllib
 
 from django.http import HttpResponse
 from django.db import transaction
-from django.views.decorators.http import require_GET, require_http_methods
+from django.views.decorators.http import require_GET, require_POST, require_http_methods
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext
 
@@ -12,13 +12,14 @@ from django.utils.translation import ugettext
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.helpers import RequestProcessor
+from core.helpers import RequestProcessor, DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.v8.factories import AbstractCommandFactory
+from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
@@ -96,6 +97,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")
 
+
 @login_required
 #@require_privilege("workspace.can_delete_datastream")
 #@requires_review
@@ -107,18 +109,18 @@ def remove(request, visualization_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.visualization.last_revision_id:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
-                'revision_id': lifecycle.visualization.last_revision_id,
-            }))
+
+        if lifecycle.dataset.last_revision_id:
+            last_revision_id = lifecycle.visualization.last_revision_id
         else:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
-                'revision_id': -1,
-            }))
+            last_revision_id = -1
+
+        return JSONHttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
+            'revision_id': last_revision_id
+        }))
+        
     else:
         lifecycle.remove(killemall=True)
         return HttpResponse(json.dumps({
@@ -127,78 +129,100 @@ def remove(request, visualization_revision_id, type="resource"):
             'revision_id': -1,
         }), content_type='text/plain')
 
+
 @login_required
-@privilege_required("workspace.can_view_visualization")
-@require_http_methods(["GET"])
-def view(request):
+@require_privilege("workspace.can_review_visualization_revision")
+@require_POST
+@transaction.commit_on_success
+def change_status(request, visualization_revision_id=None):
+    """
+    Change visualization status
+    :param request:
+    :param visualization_revision_id:
+    :return: JSON Object
+    """
+    if request.method == 'POST' and visualization_revision_id:
+        lifecycle = VisualizationLifeCycleManager(
+            user=request.user,
+            visualization_revision_id=visualization_revision_id
+        )
+        action = request.POST.get('action')
 
-    auth_manager = request.auth_manager
-    form = ViewChartForm(request.GET)
-
-    if form.is_valid():
-        try:
-            visualization_revision = VisualizationDBDAO().get(
-                auth_manager.language,
-                visualization_revision_id=form.cleaned_data['visualization_revision_id']
+        if action == 'approve':
+            lifecycle.accept()
+            response = dict(
+                status='ok',
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
+                }
             )
-            if visualization_revision['account_id'] != auth_manager.account_id:
-                raise Http404
-        except VisualizationRevision.DoesNotExist:
-            raise Http404
+        elif action == 'reject':
+            lifecycle.reject()
+            response = dict(
+                status='ok',
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
+                }
+            )
+        elif action == 'publish':
+            lifecycle.publish()
+            response = dict(
+                status='ok',
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
+                }
+            )
+        elif action == 'unpublish':
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
+            response = dict(
+                status='ok',
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
+                }
+            )
+        elif action == 'send_to_review':
+            lifecycle.send_to_review()
+            response = dict(
+                status='ok',
+                messages={
+                    'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
+                    'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
+                }
+            )
         else:
-            visualization_revision_parameters = RequestProcessor(request).get_arguments(
-                visualization_revision['parameters']
-            )
-            visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
+            raise NoStatusProvidedException()
 
-            impl_details = json.loads(visualization_revision['impl_details'])
-            command_factory = AbstractCommandFactory().create()
-            format = impl_details.get('format')
-            if format.get('type') != 'mapchart':
-                contents, content_type = command_factory.create("invoke", 
-                    visualization_revision_parameters).run()
-            else:
-                visualization_revision_parameters['pId'] = visualization_revision['visualizationrevision_id']
-                # visualization_revision_parameters['pLimit'] = 10000
-                # visualization_revision_parameters['pPage'] = 0
-                visualization_revision_parameters['pBounds'] = ""
-                # visualization_revision_parameters['pZoom'] = 5
-                contents, content_type = command_factory.create("chart", 
-                    visualization_revision_parameters).run()
+        # Limpio un poco
+        response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
+        response['result'].pop('visualization')
 
-            visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
-
-            ds_revision = DatasetRevision.objects.filter(dataset=visualization_revision['dataset_id'])[0]
-            if ds_revision.user.account.id == auth_manager.account_id:
-                editing = True
-            elif visualization_revision['status'] == StatusChoices.PUBLISHED:
-                editing = False
-            else:
-                raise Http404
-
-            dataset_revision = DatasetDBDAO().get(auth_manager.language, dataset_revision_id=ds_revision.id)
-
-            status = STATUS_CHOICES[int(visualization_revision['status'])][1]
-
-            return render_to_response('viewChart/index.html', locals())
-    else:
-        raise Http404
-
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 @login_required
 @require_http_methods(['POST','GET'])
 @require_privilege("workspace.can_create_visualization")
 @requires_published_parent()
 @transaction.commit_on_success
-def create(request, viz_type='index'):
+def create(request):
     
     if request.method == 'GET':
         datastream_revision_id = request.GET.get('datastream_revision_id', None)
-        datastream_rev = DataStreamDBDAO().get(
-            request.user.language,
-            datastream_revision_id=datastream_revision_id,
-            published=False
-        )
+        try:
+            datastream_rev = DataStreamDBDAO().get(
+                request.user.language,
+                datastream_revision_id=datastream_revision_id,
+                published=False
+            )
+        except DataStreamRevision.DoesNotExist:
+            raise DataStreamNotFoundException()
 
         return render_to_response('createVisualization/index.html', dict(
             request=request,
@@ -216,7 +240,7 @@ def create(request, viz_type='index'):
         # Formulario
         form = VisualizationForm(request.POST)
         if not form.is_valid():
-            logger.info(form.errors)
+            logger.info(form._errors)
             raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         response = form.save(request, datastream_rev)
@@ -237,6 +261,7 @@ def related_resources(request):
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
+
 @login_required
 @require_GET
 def action_view(request, revision_id):
@@ -255,19 +280,33 @@ def action_view(request, revision_id):
 @requires_published_parent()
 @requires_review
 @transaction.commit_on_success
-def edit(request, datastream_revision_id=None):
-    pass
+def edit(request, revision_id=None):
+    if request.method == 'GET':
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        datastream_rev = DataStreamDBDAO().get(
+            request.auth_manager.language,
+            datastream_revision_id=visualization_rev['datastream_revision_id'])
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev,
+            visualization_revision=visualization_rev
+        ))
+
+    elif request.method == 'POST':
+        pass
 
 
 @login_required
 def preview(request):
 
     form = forms.PreviewForm(request.GET)
-    logger.error("entering preview handler")
-    if form.is_valid():
-        logger.error("form is valid")
-        preferences = request.preferences
 
+    if form.is_valid():
+
+        preferences = request.preferences
         datastream_revision_id  = request.GET.get('datastream_revision_id', None)
 
         try:
@@ -276,24 +315,74 @@ def preview(request):
                 datastream_revision_id=datastream_revision_id,
                 published=False
             )
-            logger.error(datastream)
         except Exception, e:
             logger.error(e)
             raise Http404
         else:
-
             query = RequestProcessor(request).get_arguments(datastream["parameters"])
+            chart_type = form.cleaned_data.get('type')
 
-            query['pId'] = int(datastream_revision_id)
-
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = limit
+            query.update({
+                'pId': int(datastream_revision_id),
+                'pType': chart_type,
+                'pNullValueAction': form.cleaned_data.get('nullValueAction'),
+                'pNullValuePreset': form.cleaned_data.get('nullValuePreset'),
+                'pData': form.cleaned_data.get('data'),
+                'pLabelSelection': form.cleaned_data.get('labels'),
+                'pHeaderSelection': form.cleaned_data.get('headers'),
+                'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
+                'pInvertData': form.cleaned_data.get('invertData')
+            })
 
             page = form.cleaned_data.get('page')
             if page is not None:
                 query['pPage'] = page
 
+            limit = form.cleaned_data.get('limit')
+            if limit is not None:
+                query['pLimit'] = form.cleaned_data.get('limit')
+
+            command_factory = AbstractCommandFactory().create() 
+            result, content_type = command_factory.create("preview_chart", query).run()
+            return HttpResponse(result, mimetype=content_type)
+
+            return HttpResponse(result, mimetype=content_type)
+    else:
+        return HttpResponse('Error!')
+
+
+@login_required
+def preview_map(request, datastream_revision_id):
+
+    preferences = request.preferences
+    form = forms.PreviewMapForm(request.GET)
+
+    if form.is_valid():
+        try:
+            datastream = DataStreamDBDAO().get(
+                request.user.language,
+                datastream_revision_id=datastream_revision_id,
+                published=False
+            )
+        except Exception, e:
+            logger.error(e)
+            raise Http404
+        else:
+            query = RequestProcessor(request).get_arguments(datastream["parameters"])
+
+            query.update({
+                'pId': int(datastream_revision_id),
+                'pType': 'mapchart',
+                'pNullValueAction': form.cleaned_data.get('nullValueAction', 'exclude'),
+                'pNullValuePreset': form.cleaned_data.get('nullValuePreset', ''),
+                'pData': form.cleaned_data.get('data', ''),
+                'pLatitudSelection': form.cleaned_data.get('lat', ''),
+                'pLongitudSelection': form.cleaned_data.get('lon', ''),
+                'pHeaderSelection': '',
+                'pTraceSelection': '',
+            })
+
+            # Optional
             bounds = form.cleaned_data.get('bounds')
             if bounds is not None:
                 query['pBounds'] = bounds
@@ -302,47 +391,13 @@ def preview(request):
             if zoom is not None:
                 query['pZoom'] = zoom
 
-            query['pNullValueAction'] = form.cleaned_data.get('nullValueAction')
-            query['pNullValuePreset'] = form.cleaned_data.get('nullValuePreset')
-
-            query['pData'] = form.cleaned_data.get('data')
-
-            labels = form.cleaned_data.get('labels')
-            if labels is not None:
-                query['pLabelSelection'] = labels
-
-            headers = form.cleaned_data.get('headers')
-            if headers is not None:
-                query['pHeaderSelection'] = headers
-
-            lat = form.cleaned_data.get('lat')
-            if lat is not None:
-                query['pLatitudSelection'] = lat
-
-            lon = form.cleaned_data.get('lon')
-            if lon is not None:
-                query['pLongitudSelection'] = lon
-
-            traces = form.cleaned_data.get('traces')
-            if traces is not None:
-                query['pTraceSelection'] = traces
-
-            invertedAxis = form.cleaned_data.get('invertedAxis')
-            if invertedAxis is not None:
-                query['pInvertedAxis'] = invertedAxis
-
-            invertData = form.cleaned_data.get('invertData')
-            if invertData is not None:
-                query['pInvertData'] = invertData
-
             query['pType'] = 'chart'
-            logger.error(query)
             command_factory = AbstractCommandFactory().create() 
             result, content_type = command_factory.create("preview_chart", query).run()
-
             return HttpResponse(result, mimetype=content_type)
     else:
         return HttpResponse('Error!')
+
 
 def action_invoke(request):
     form = forms.RequestForm(request.GET)
@@ -355,7 +410,7 @@ def action_invoke(request):
                 visualization_revision_id=visualizationrevision_id
             )
         except VisualizationRevision.DoesNotExist:
-            return HttpResponse("Viz doesn't exist!") # TODO
+            return VisualizationNotFoundException()
         else:
             query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
             query['pId'] = visualizationrevision_id

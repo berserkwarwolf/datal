@@ -15,10 +15,13 @@
 			<span>{% trans 'APP-DOWNLOAD-TEXT' %}</span>
 		</a>
 	</li>
+
+    {% if dataset.notes and preferences.account_enable_notes %}
 	<li>
 		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
 			<i></i> 
 			<span>{% trans 'VIEWDS-TABS-NOTES' %}</span>
 		</a>
 	</li>
+    {% endif %}
 </ul>                                

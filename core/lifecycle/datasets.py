@@ -27,6 +27,34 @@ logger = logging.getLogger(__name__)
 class DatasetLifeCycleManager(AbstractLifeCycleManager):
     """ Manage a Dataset Life Cycle"""
 
+    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
+        """ Despublica la revision de un dataset """
+
+        if self.dataset_revision.status not in allowed_states:
+            raise IllegalStateException(
+                from_state=self.dataset_revision.status,
+                to_state=StatusChoices.DRAFT,
+                allowed_states=allowed_states
+            )
+
+        if killemall:
+            self._unpublish_all()
+        else:
+            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
+
+            if revcount == 1:
+                self._unpublish_all()
+            else:
+                self.dataset_revision.status = StatusChoices.DRAFT
+                self.dataset_revision.save()
+
+        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
+        search_dao.remove()
+
+        self._update_last_revisions()
+
+        self._log_activity(ActionStreams.UNPUBLISH)
+
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
@@ -114,9 +142,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=StatusChoices.PUBLISHED,
                                     allowed_states=allowed_states)
 
-        status = StatusChoices.PUBLISHED
-
-        self.dataset_revision.status = status
+        self.dataset_revision.status = StatusChoices.PUBLISHED
         self.dataset_revision.save()
 
         self._update_last_revisions()
@@ -134,7 +160,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
-                id=F('datastream__last_revision__id')
+                id=F('datastream__last_revision__id'),
+                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for datastream_revision in datastream_revisions:
@@ -151,38 +178,11 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)
 
-    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
-        """ Despublica la revision de un dataset """
-
-        if self.dataset_revision.status not in allowed_states:
-            raise IllegalStateException(
-                                    from_state=self.dataset_revision.status,
-                                    to_state=StatusChoices.DRAFT,
-                                    allowed_states=allowed_states)
-
-        if killemall:
-            self._unpublish_all()
-        else:
-            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
-
-            if revcount == 1:
-                self._unpublish_all()
-            else:
-                self.dataset_revision.status = StatusChoices.DRAFT
-                self.dataset_revision.save()
-
-        search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
-        search_dao.remove()
-
-        self._update_last_revisions()
-
-        self._log_activity(ActionStreams.UNPUBLISH)
-
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
 
         DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED)\
-            .exclude(id=self.dataset_revision.id).update(status=StatusChoices.DRAFT)
+            .update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
@@ -406,10 +406,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 dataset=self.dataset.id,
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
-            
+
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
-                
+            else:
+                self.dataset.last_published_revision = None
+
             self.dataset.save()
         else:
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente

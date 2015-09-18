@@ -19,7 +19,7 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-
+from core.helpers import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -163,17 +163,16 @@ def remove(request, dataset_revision_id, type="resource"):
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
         if lifecycle.dataset.last_revision_id:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-                'revision_id': lifecycle.dataset.last_revision_id,
-            }))
+            last_revision_id = lifecycle.dataset.last_revision_id
         else:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-                'revision_id': -1,
-            }))
+            last_revision_id = -1
+
+        return JSONHttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+            'revision_id': last_revision_id
+        }))
+
     else:
         lifecycle.remove(killemall=True)
         return HttpResponse(json.dumps({
@@ -336,7 +335,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATASET-APPROVED-TITLE'),
                     'description': ugettext('APP-DATASET-APPROVED-TEXT')
@@ -346,7 +344,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-REJECTED-TITLE'),
                     'description': ugettext('APP-DATASET-REJECTED-TEXT')
@@ -356,17 +353,16 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
@@ -376,7 +372,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
@@ -385,7 +380,13 @@ def change_status(request, dataset_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result'].pop('datastreams')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
+
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 
 @login_required

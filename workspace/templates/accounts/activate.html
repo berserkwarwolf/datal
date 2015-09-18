@@ -19,7 +19,7 @@
     </div>
     </header>
     <div class="account-box-content">
-        <form action="{{form.action}}" method="post">
+        <form action="{{form.action}}" method="post" novalidate>
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}
             <fieldset>

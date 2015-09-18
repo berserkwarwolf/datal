@@ -30,7 +30,7 @@
     {% include "admin_manager/tabs.html" %}
 
     <div class="formContainer settingsContent col-xs-12 clearfix">
-        <form id="id_adminBrandingForm" action="{{form.action}}" method="post">
+        <form id="id_adminBrandingForm" action="{{form.action}}" method="post" novalidate>
 
             {% for hidden in form.hidden_fields %}{{ hidden }}{% endfor %}
             {% csrf_token %}

@@ -81,11 +81,9 @@
     <% } %>
 
     {# Create Visualization #}
-    {% comment %}
     <li class="create">
     	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
     </li>
-    {% endcomment %}
 
     {# Edit #}
 		<% 
@@ -160,7 +158,7 @@
 
 {# Edit - Data View #}
 <script type="text/template" id="id_editTemplate">
-<form>
+<form novalidate>
   <div class="ov-content">
     <div class="col-1">
      <fieldset>
@@ -180,15 +178,14 @@
       </div>
 
       {# category #}
-      <div class="row clearfix">
+      <div class="row clearfix divider">
         <label for="id_category">{% trans 'APP-CATEGORY-TEXT' %}</label>
         <select name="category" id="id_category" data-bind="value:category,options:allCategories" tabindex="0">
         </select>
-        <span class="required">*</span>
       </div>
 
       {# status #}
-      <div class="row clearfix divider">
+      <div class="row clearfix" style="display:none;">
         <label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
         <select name="status" class="FL" id="id_status" data-bind="value:status,options:allStatus">
         </select>

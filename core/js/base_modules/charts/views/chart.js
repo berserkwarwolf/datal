@@ -13,7 +13,7 @@ charts.views.Chart = Backbone.View.extend({
     },
 
     bindEvents: function () {
-        this.model.on('change', this.render, this);
+        // this.model.on('change', this.render, this);
         this.model.on('data_updated', this.handleDataUpdated, this);
     },
 
@@ -26,21 +26,17 @@ charts.views.Chart = Backbone.View.extend({
     	// subclass
     },
 
-    valid: function () {
-        // Check if data is correct
-        // specific chart library
-        return true;
-    },
-
     render: function () {
     	// implements rendering of data received from :formatData: for the 
     	// specific chart library
     },
 
     destroy: function(){
-        if(this.chart.destroy){
+        if(this.chart && this.chart.destroy){ //c3
             this.chart.destroy();
-            console.log('destruyo porque tiene el método!!');
-        };
+        }
+        if(this.chart && this.chart.clearChart){ //google
+            this.chart.clearChart();
+        }
     }
 });

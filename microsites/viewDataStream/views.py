@@ -13,7 +13,7 @@ from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
 
 
-def action_view(request, id, slug):
+def view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL
     logger = logging.getLogger(__name__)
 

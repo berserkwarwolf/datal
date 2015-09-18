@@ -26,28 +26,43 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
     def get(self, language, dataset_id=None, dataset_revision_id=None, guid=None, published=True):
         """ Get full data """
+        logger = logging.getLogger(__name__)
         fld_revision_to_get = 'dataset__last_published_revision' if published else 'dataset__last_revision'
-
+        if settings.DEBUG: logger.info('Getting Dataset %s' % str(locals()))
+        
         if guid:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                dataset__guid=guid,
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__guid=guid,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('Dataset Not exist GUID %s' % guid)
+                raise
         elif not dataset_id:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=dataset_revision_id,
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    pk=dataset_revision_id,
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist Revision %s' % dataset_revision_id)
+                raise
         else:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
-
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__id=dataset_id,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist dataset_id=%d' % dataset_id)
+                raise
+                
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 
@@ -64,7 +79,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 domain = 'http://' + domain
             public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
 
-
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
@@ -79,7 +93,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             impl_type=dataset_revision.impl_type,
             status=dataset_revision.status,
             size=dataset_revision.size,
-            modified_at=dataset_revision.created_at,
+            modified_at=dataset_revision.modified_at,
             meta_text=dataset_revision.meta_text,
             license_url=dataset_revision.license_url,
             spatial=dataset_revision.spatial,
@@ -89,15 +103,16 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset_is_dead=dataset_revision.dataset.is_dead,
             guid=dataset_revision.dataset.guid,
             created_at=dataset_revision.dataset.created_at,
-            last_revision_id=dataset_revision.dataset.last_revision_id,
-            last_published_revision_id=dataset_revision.dataset.last_published_revision_id,
-            last_published_date=dataset_revision.dataset.last_published_revision_date,
+            last_revision_id=dataset_revision.dataset.last_revision_id if dataset_revision.dataset.last_revision_id else '',
+            last_published_revision_id=dataset_revision.dataset.last_published_revision_id if dataset_revision.dataset.last_published_revision_id else '',
+            last_published_date=dataset_revision.dataset.last_published_revision_date if dataset_revision.dataset.last_published_revision_date else '',
             title=dataseti18n.title,
             description=dataseti18n.description,
             notes=dataseti18n.notes,
             tags=tags,
             sources=sources,
-            public_url=public_url
+            public_url=public_url,
+            slug=slugify(dataseti18n.title),
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
@@ -319,8 +334,8 @@ class DatasetSearchIndexDAO():
         return self.TYPE
 
     def _get_id(self):
-        #return "%s::%s" % (self.TYPE.upper(),self.dataset_revision.dataset.guid)
-        return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
+        return "%s::%s" % (self.TYPE.upper(),self.dataset_revision.dataset.guid)
+        #return "%s::DATASET-ID-%s" % (self.TYPE.upper(),self.dataset_revision.dataset.id)
 
     def _build_document(self):
         # eliminado hasta que haya facets

@@ -7,6 +7,7 @@ from django.db import IntegrityError
 from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
+from django.contrib.auth.models import AnonymousUser
 
 from core.utils import slugify
 from core import choices
@@ -27,7 +28,7 @@ def add_facets_to_doc(resource, account, doc):
             field_values = []    
             logger.error("BAD FIELDS_VALUES: %s -- %s -- %s" % (repr(resource), str(doc), resource.meta_text))
     
-        field_values =  meta_text['field_values']
+        field_values = meta_text['field_values']
         for fv in field_values:
             # Take only the first key
             key = fv.keys()[0]
@@ -133,24 +134,17 @@ class Account(models.Model):
         return self.name
 
     def get_preference(self, key):
-        try:
-            return Preference.objects.values('value').get(account = self, key = key)['value']
-        except Preference.DoesNotExist:
-            return ''
-
+        """ use the preferences class with cache """
+        from core.daos.preferences import Preferences
+        p = Preferences(account_id=self.id)
+        return p[key]
+        
     def set_preference(self, key, value):
-        if value:
-            pref, is_new = Preference.objects.get_or_create(account = self, key = key, defaults={'value': value})
-            if not is_new:
-                pref.value = value
-                pref.save()
-            return pref
-        else:
-            try:
-                Preference.objects.get(account = self, key = key).delete()
-            except Preference.DoesNotExist:
-                pass
-            return None
+        """ use the preferences class with cache """
+        from core.daos.preferences import Preferences
+        p = Preferences(account_id=self.id)
+        p[key]=value
+        return p[key]
 
     def get_preferences(self):
         from core.daos.preferences import Preferences
@@ -194,6 +188,16 @@ class Account(models.Model):
             if total_visualizations > 0:
                 c.set('account_total_visualization_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
+
+
+class AccountAnonymousUser(AnonymousUser):
+
+    def __init__(self, account):
+        super(AccountAnonymousUser, self).__init__()
+        self.account = account
+
+    def is_authenticated(self):
+        return True
 
 
 class User(models.Model):
@@ -246,12 +250,11 @@ class User(models.Model):
                 c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-
     def get_total_visualizations(self):
         c = Cache(db=0)
         total_visualizations = c.get('my_total_visualizations_' + str(self.id))
         if not total_visualizations:
-            total_visualizations =  Visualization.objects.filter(user=self.id).count()
+            total_visualizations = Visualization.objects.filter(user=self.id).count()
             if total_visualizations > 0:
                 c.set('my_total_visualizations_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
@@ -311,6 +314,7 @@ class DataStreamRevision(RevisionModel):
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     rdf_template = models.TextField(blank=True,
                                     verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
     objects = managers.DataStreamRevisionManager()
@@ -541,6 +545,7 @@ class DatasetRevision(RevisionModel):
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     size = models.IntegerField(default=0, verbose_name=ugettext_lazy('MODEL_SIZE_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
     spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
@@ -660,7 +665,7 @@ class DatasetRevision(RevisionModel):
 
         return dataset_revision
 
-    def get_dict(self, language = 'en'):
+    def get_dict(self, language='en'):
 
         logger = logging.getLogger(__name__)
 
@@ -670,11 +675,11 @@ class DatasetRevision(RevisionModel):
         dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
         account = Account.objects.get(id=self.user.account.id)
 
-        text = [dataset.title, dataset.description, dataset.user_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
-        text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
+        text = [dataset['title'], dataset['description'], dataset['user_nick'], str(dataset['dataset_id'])] #DS uses GUID, but here doesn't exists. We use ID
+        text.extend(dataset['tags']) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
-        account_id = dataset.account_id
+        account_id = dataset['account_id']
         if account_id is None:
             account_id = ''
 
@@ -682,22 +687,22 @@ class DatasetRevision(RevisionModel):
         parameters = ""
 
         indexable_dict = {
-                'docid' : "DT::DATASET-ID-" + str(dataset.dataset_id),
+                'docid' : "DT::DATASET-ID-" + str(dataset['dataset_id']),
                 'fields' :
                     {'type' : 'dt',
-                     'dataset_id': dataset.dataset_id,
-                     'datasetrevision_id': dataset.dataset_revision_id,
-                     'title': dataset.title,
+                     'dataset_id': dataset['dataset_id'],
+                     'datasetrevision_id': dataset['dataset_revision_id'],
+                     'title': dataset['title'],
                      'text': text,
-                     'description': dataset.description,
-                     'owner_nick' : dataset.user_nick,
-                     'tags' : ','.join(dataset.get_tags()),
+                     'description': dataset['description'],
+                     'owner_nick' : dataset['user_nick'],
+                     'tags' : ','.join(dataset['tags']),
                      'account_id' : account_id,
                      'parameters': parameters,
-                     'timestamp': int(time.mktime(dataset.created_at.timetuple())),
-                     'end_point': dataset.end_point,
+                     'timestamp': int(time.mktime(dataset['created_at'].timetuple())),
+                     'end_point': dataset['end_point'],
                     },
-                'categories': {'id': unicode(dataset.category_id), 'name': dataset.category_name}
+                'categories': {'id': unicode(dataset['category_id']), 'name': dataset['category_name']}
                 }
 
         # Update dict with facets
@@ -707,7 +712,7 @@ class DatasetRevision(RevisionModel):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(self.get_meta_data_dict(dataset.meta_text))
+        indexable_dict['fields'].update(self.get_meta_data_dict(dataset['meta_text']))
 
         return indexable_dict
 
@@ -767,6 +772,7 @@ class VisualizationRevision(RevisionModel):
     impl_details = models.TextField(blank=True)
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
     objects = managers.VisualizationRevisionManager()
@@ -807,46 +813,6 @@ class VisualizationRevision(RevisionModel):
 
         visualization_revision.save()
         return visualization_revision
-
-    def get_dict(self, language = 'en'):
-
-        from core.docs import VZ
-        import time
-        visualization = VZ(self.id, language)
-        account = Account.objects.get(id = visualization.account_id)
-        
-        text = [visualization.title, visualization.description, visualization.created_by_nick, visualization.guid]
-        text.extend(visualization.get_tags())
-        text = ' '.join(text)
-
-        account_id = visualization.account_id
-        if account_id is None:
-            account_id = ''
-
-        indexable_dict = {
-                'docid' : "VZ::" + visualization.guid,
-                'fields' :
-                    {'type' : 'chart',
-                     'visualization_id': visualization.visualization_id,
-                     'visualizationrevision_id': visualization.visualizationrevision_id,
-                     'datastream_id': visualization.datastream_id,
-                     'title': visualization.title,
-                     'text': text,
-                     'description': visualization.description,
-                     'category_id' : visualization.category_id,
-                     'category_name' : visualization.category_name,
-                     'owner_nick' : visualization.created_by_nick,
-                     'tags' : ','.join(visualization.get_tags()),
-                     'account_id' : account_id,
-                     'timestamp' : int(time.mktime(visualization.created_at.timetuple())),
-                    },
-                'categories': {'id': unicode(visualization.category_id), 'name': visualization.category_name}
-                }
-
-        indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        indexable_dict['fields'].update(self.get_meta_data_dict(visualization.metadata))
-
-        return indexable_dict
 
 
 class VisualizationI18n(models.Model):

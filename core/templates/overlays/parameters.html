@@ -9,7 +9,7 @@
                 <p class="info">{% trans "OVERLAY-PARAM-TIP" %}</p>
                 
                 <div class="form clearfix">
-                    <form action="" onsubmit="return false" autocomplete="off">
+                    <form action="" onsubmit="return false" autocomplete="off" novalidate>
                         {% for parameter in datastream.parameters %}
                             <div class="row">
                                 <label for="id_param{{forloop.counter0}}">{{parameter.name}}</label>

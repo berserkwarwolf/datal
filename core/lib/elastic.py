@@ -196,7 +196,10 @@ class ElasticsearchIndex():
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
-            return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+            try:
+                return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+            except:
+                return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
@@ -249,11 +252,12 @@ class ElasticsearchIndex():
 
     def update(self, document):
         """ update by id"""
-
-        try:
-            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
-        except RequestError,e:
-            raise RequestError(e)
-        except NotFoundError,e:
-            raise NotFoundError,(e)
+        # Me lo pediste vos nacho, despues no me putees
+        return True
+        # try:
+        #     return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
+        # except RequestError,e:
+        #     raise RequestError(e)
+        # except NotFoundError,e:
+        #     raise NotFoundError,(e)
 

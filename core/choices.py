@@ -3,6 +3,38 @@ from django.utils.translation import ugettext_lazy
 from model_utils import Choices
 
 
+VISUALIZATION_TYPES = (
+    ('columnchart', 'columnchart'),
+    ('barchart', 'barchart'),
+    ('linechart', 'linechart'),
+    ('piechart', 'piechart'),
+    ('areachart', 'areachart'),
+    ('mapchart', 'mapchart')
+)
+
+VISUALIZATION_TEMPLATES = (
+    ('basicchart', 'basicchart'),
+    ('piechart', 'piechart'),
+    ('mapchart', 'mapchart'),
+    ('geochart', 'geochart')
+)
+
+BOOLEAN_FIELD = (
+    ('true', 'true'),
+    ('false', 'false')
+)
+
+INCLUDE_EXCLUDE = (
+    ('include', 'include'),
+    ('exclude', 'exclude')
+)
+
+MAP_TYPE_FIELD = (
+    ('hybrid', 'hybrid'),
+    ('satellite', 'satellite'),
+    ('map', 'map')
+)
+
 VISUALIZATION_LIBS = (
     ('google', 'Google Charts'),
     ('d3', 'D3')
@@ -85,7 +117,7 @@ ODATA_FREQUENCY = Choices(
     ("daily", ugettext_lazy('APP-DAILY-TEXT')),
     ("hourly", ugettext_lazy('APP-HOURLY-TEXT')),
     ("ondemand", ugettext_lazy('APP-ONDEMAND-TEXT')),
-    ("other", ugettext_lazy('APP-OTHER-TEXT')),
+    # ("other", ugettext_lazy('APP-OTHER-TEXT')),
 )
 
 
@@ -196,24 +228,29 @@ THRESHOLD_NAME_CHOICES = (
 )
 
 ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
-     ('ds.detail.full.css', 'ds.detail.full.css')
-    ,('ds.detail.full.javascript', 'ds.detail.full.javascript')
+    #STRING codigo CSS ---------------------------
+     ('ds.detail.full.css', 'ds.detail.full.css') 
     ,('ds.embed.full.css', 'ds.embed.full.css')
-    ,('ds.embed.full.javascript', 'ds.embed.full.javascript')
     ,('chart.detail.full.css', 'chart.detail.full.css')
-    ,('chart.detail.full.javascript', 'chart.detail.full.javascript')
     ,('chart.embed.full.css', 'chart.embed.full.css')
-    ,('chart.embed.full.javascript', 'chart.embed.full.javascript')
     ,('db.detail.full.css', 'db.detail.full.css')
-    ,('db.detail.full.javascript', 'db.detail.full.javascript')
     ,('search.full.css', 'search.full.css')
-    ,('search.full.javascript', 'search.full.javascript')
     ,('home.full.css', 'home.full.css')
-    ,('home.full.javascript', 'home.full.javascript')
     ,('developers.full.css', 'developers.full.css')
+
+    # STRING codigo JS ---------------------------
+    ,('ds.detail.full.javascript', 'ds.detail.full.javascript') 
+    ,('ds.embed.full.javascript', 'ds.embed.full.javascript')
+    ,('chart.detail.full.javascript', 'chart.detail.full.javascript')
+    ,('chart.embed.full.javascript', 'chart.embed.full.javascript')
+    ,('db.detail.full.javascript', 'db.detail.full.javascript')
+    ,('search.full.javascript', 'search.full.javascript')
+    ,('home.full.javascript', 'home.full.javascript')
     ,('developers.full.javascript', 'developers.full.javascript')
-    ,('account.name', 'account.name')
-    ,('account.bio', 'account.bio')
+
+    
+    ,('account.name', 'account.name') 
+    ,('account.bio', 'account.bio') 
     ,('account.link', 'account.link')
     ,('account.logo', 'account.logo')
     ,('account.url', 'account.url')
@@ -241,8 +278,8 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('enable.embed.options', 'enable.embed.options')
     ,('enable.junar.footer', 'enable.junar.footer')
     ,('account.featured.dashboards', 'account.featured.dashboards')
-    ,('account.enable.sharing', 'account.enable.sharing')
-    ,('account.enable.notes', 'account.enable.notes')
+    ,('account.enable.sharing', 'account.enable.sharing') # BOOLEAN
+    ,('account.enable.notes', 'account.enable.notes') # BOOLEAN
     ,('account.title.color', 'account.title.color')
     ,('account.button.bg.color', 'account.button.bg.color')
     ,('account.button.border.color', 'account.button.border.color')

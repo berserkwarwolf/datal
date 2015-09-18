@@ -4,6 +4,8 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
 
     affectedResourcesHTML: '',
 
+    parentView: null,
+
     events: {
         "click #id_unpublishRelatedResources": "unpublishRelatedResources",
         "click .close, .cancel": "closeOverlay",
@@ -12,6 +14,8 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
     initialize: function(options) {
         
         this.options = options;
+
+        this.parentView = this.options.parentView;
 
         // init Overlay
         this.$el.overlay({
@@ -50,7 +54,8 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
                         if (self.affectedResourcesHTML) {
                             self.render();
                         } else {
-                            self.unpublishRelatedResources();
+                            // We simulate click in order to pass event object to change_status function
+                            self.$el.find('#id_unpublishRelatedResources').click();
                         }
                     }
 
@@ -66,7 +71,11 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
 
     render: function() {
         this.$el.find('#id_affectedResourcesList').html( this.affectedResourcesHTML );
-        this.$el.data('overlay').load();
+        
+        var self = this;
+        setTimeout(function(){
+            self.$el.data('overlay').load();
+        }, 250);
     },
 
     addResource: function(model) {
@@ -77,55 +86,11 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
         this.affectedResourcesHTML += theView.render().el.outerHTML;
     },
 
-    unpublishRelatedResources: function() {
-        var self = this;
-        _.each(this.options.models, function(model) {
-            resource = model.get('title')
-            model.remove({
-                
-                beforeSend: function(xhr, settings){
-                    // Prevent override of global beforeSend
-                    $.ajaxSettings.beforeSend(xhr, settings);
-                    // Show Loading
-                    $("#ajax_loading_overlay").show();
-                },
+    unpublishRelatedResources: function(event) {
+        this.parentView.changeStatus(event, true);
 
-                success: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE'),
-                        text:  resource + ": "+ gettext('APP-UNPUBLISH-DATASTREAM-ACTION-TEXT'),
-                        image: '/static/workspace/images/common/ic_validationOk32.png',
-                        sticky: false,
-                        time: 3500
-                    });
-                    self.closeOverlay();
-                    self.undelegateEvents();
-
-                    var location = window.location.href,
-                        splitURL = location.split("/"),
-                        cutURL = splitURL.slice(0, -1),
-                        joinURL = cutURL.join("/");
-
-                    setTimeout(function () {
-                        window.location = joinURL;
-                    }, 2000);
-                },
-
-                error: function() {
-                    $.gritter.add({
-                        title: gettext('APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE'),
-                        text: resource + ": "+  gettext('APP-UNPUBLISH-DATASTREAM-ACTION-ERROR-TEXT'),
-                        image: '/static/workspace/images/common/ic_validationError32.png',
-                        sticky: true,
-                        time: 2500
-                    });
-                    self.closeOverlay();
-                    self.undelegateEvents();
-                }
-            });
-
-        });
-
+        this.closeOverlay();
+        this.undelegateEvents();    
     },
 
     closeOverlay: function() {

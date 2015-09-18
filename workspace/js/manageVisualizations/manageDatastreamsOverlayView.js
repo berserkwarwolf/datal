@@ -39,9 +39,10 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 		this.$el.find('.backgrid-paginator ul').addClass("pager center");
 		this.$el.find("#id_filter_visualization").html( this.clientSideFilter.render().el );
 		
-		var self = this;
-		setInterval(function(){
+		var self = this,
+			myTimeer = setInterval(function(){
 			self.$el.data('overlay').load();
+			clearInterval(myTimeer);
 		},200);
 
 	},
@@ -82,7 +83,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				sortable: true,
 				editable: false
 			}, {
-				name: "status_name",
+				name: "status_nice",
 				label:  gettext('APP-GRID-CELL-STATUS'),
 				cell: "text",
 				sortable: false,

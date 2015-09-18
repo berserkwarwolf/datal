@@ -14,10 +14,12 @@ from workspace.manageDataviews.forms import *
 from workspace.templates import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.exceptions import DataStreamNotFoundException, DatasetNotFoundException
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
 from core.v8.factories import AbstractCommandFactory
+from core.helpers import DateTimeEncoder
 
 
 logger = logging.getLogger(__name__)
@@ -139,18 +141,17 @@ def remove(request, datastream_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.datastream.last_revision_id:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
-                'revision_id': lifecycle.datastream.last_revision_id,
-            }))
+        if lifecycle.dataset.last_revision_id:
+            last_revision_id = lifecycle.datastream.last_revision_id
         else:
-            return JSONHttpResponse(json.dumps({
-                'status': True,
-                'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
-                'revision_id': -1,
-            }))
+            last_revision_id = -1
+
+        return JSONHttpResponse(json.dumps({
+            'status': True,
+            'messages': [ugettext('APP-DELETE-DATASTREAM-REV-ACTION-TEXT')],
+            'revision_id': last_revision_id,
+        }))
+        
     else:
         lifecycle.remove(killemall=True)
         return HttpResponse(json.dumps({
@@ -206,7 +207,11 @@ def create(request):
             if auth_manager.is_level('level_5'):
                 meta_data = Account.objects.get(pk=auth_manager.account_id).meta_data
 
-            dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            try:
+                dataset_revision = DatasetRevision.objects.get(pk= data_set_id)
+            except DatasetRevision.DoesNotExist:
+                raise DatasetNotFoundException()
+
             end_point = dataset_revision.end_point
             type = dataset_revision.dataset.type
             impl_type = dataset_revision.impl_type
@@ -272,7 +277,7 @@ def edit(request, datastream_revision_id=None):
 
 
 @login_required
-@require_privilege("workspace.can_review_dataset_revision")
+@require_privilege("workspace.can_review_datastream_revision")
 @require_POST
 @transaction.commit_on_success
 def change_status(request, datastream_revision_id=None):
@@ -293,7 +298,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-APPROVED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-APPROVED-TEXT')
@@ -303,7 +307,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-REJECTED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-REJECTED-TEXT')
@@ -313,17 +316,16 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
@@ -333,7 +335,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')
@@ -342,8 +343,13 @@ def change_status(request, datastream_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
 
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
 @csrf_exempt
 @require_http_methods(["POST"])

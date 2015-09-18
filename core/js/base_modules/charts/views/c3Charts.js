@@ -9,47 +9,37 @@ charts.views.C3LineChart = charts.views.LineChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (data) {
-        var result = [];
-        result.push(_.map(data.fields, function (field) {return field[1];}));
-        var dataArray = result.concat(data.rows);
+        var labels = [];
+        labels.push(_.map(data.fields, function (field) {return field[1];}));
+        
+        labels[0][0] = 'x';
 
-        return dataArray;
+        var categories = [];
+        categories.push(_.map(data.rows, function (r) {return r[0];}));
+
+        return {
+            labels:labels,
+            categories:categories,
+            values:data.rows
+        };
     },
     
     render: function () {
-        var rows = this.formatData(this.model.data.toJSON()),
-            options = this.model.get('options'),
-            fieldnames = rows[0];
+        var data = this.formatData(this.model.data.toJSON());
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
-                x: fieldnames[0] || 'x',
-                rows: rows
+                x: 'x',
+                rows: data.labels.concat(data.values),
+                groups: data.categories
             },
+            type: 'line',
             axis: {
-              y: {
-                label: {
-                  text: fieldnames[1],
-                  position: 'outer-middle'
+                x: {
+                    type: 'category' // this needed to load string x value
                 }
-              },
-              x: {
-                label: {
-                  text: fieldnames[0],
-                  position: 'outer-center'
-                }
-              }
             },
             legend: {
                 position: 'right'
@@ -63,55 +53,51 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un areachart de C3');
-        }
-        return false;
-    },
-
     formatData: function (data) {
-        var result = [];
-        result.push(_.map(data.fields, function (field) {return field[1];}));
-        var dataArray = result.concat(data.rows);
+        var labels = [];
+        labels.push(_.map(data.fields, function (field) {return field[1];}));
+        
+        labels[0][0] = 'x';
 
-        return dataArray;
+        var categories = [];
+        categories.push(_.map(data.rows, function (r) {return r[0];}));
+
+        var finalData = labels.concat(data.rows);
+
+        finalData = _.zip.apply(_, finalData);
+
+        return {
+            labels:labels,
+            categories:categories,
+            values:finalData
+        };
     },
     
     render: function () {
-        var rows = this.formatData(this.model.data.toJSON()),
-            options = this.model.get('options'),
-            fieldnames = rows[0];
+       var data = this.formatData(this.model.data.toJSON());
 
         var types = {};
+        var groups = [];
 
-        _.each(fieldnames,function(e){
-            types[e] = 'area'
+        _.each(data.labels[0],function(e){
+            if(e!='x'){
+                types[e] = 'area-spline';
+                groups.push(e);
+            }
         });
 
         this.chart = c3.generate({
             bindto: this.el,
             data: {
-                x: fieldnames[0] || 'x',
-                rows: rows,
+                x: 'x',
+                columns: data.values,
                 types: types,
-                groups: [fieldnames]
+                groups: [groups]
             },
             axis: {
-              y: {
-                label: {
-                  text: fieldnames[1],
-                  position: 'outer-middle'
+                x: {
+                    type: 'category' // this needed to load string x value
                 }
-              },
-              x: {
-                label: {
-                  text: fieldnames[0],
-                  position: 'outer-center'
-                }
-              }
             },
             legend: {
                 position: 'right'
@@ -123,15 +109,6 @@ charts.views.C3AreaChart = charts.views.LineChart.extend({
 charts.views.C3BarChart = charts.views.BarChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
     },
 
     formatData: function (dataModel) {
@@ -172,15 +149,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
         this.constructor.__super__.initialize.apply(this, arguments);
     },
 
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un linechart de C3');
-        }
-        return false;
-    },
-
     formatData: function (dataModel) {
         var data = dataModel.get('rows'),
             fieldnames = [_.map(dataModel.get('fields'), function (field) {
@@ -216,15 +184,6 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
 charts.views.C3PieChart = charts.views.PieChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
-    },
-
-    valid: function(){
-        if(this.model.data.toJSON().fields.length && this.model.data.toJSON().rows.length){
-            return true;
-        } else {
-            console.error('La data no sirve para un piechart de C3');
-        }
-        return false;
     },
 
     formatData: function (dataModel) {

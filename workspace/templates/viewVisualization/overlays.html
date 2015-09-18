@@ -1,0 +1,33 @@
+{% load i18n extra_tags core_components components %}
+
+<!-- Delete Visualization Overlay -->
+{% overlay id_deleteVisualization %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-DELETE-VISUALIZATION-TITLE' %}</h4>
+   <div class="ov-content">
+      <p class="text center more-padding">{% trans 'APP-OVERLAY-DELETE-VISUALIZATION-TEXT' %}</p>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
+         <a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}
+
+<!-- Unpublish Visualization Overlay -->
+{% overlay id_unpublishVisualization %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE' %}</h4>
+   <div class="ov-content">
+      <p class="text center more-padding">{% trans 'APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT' %}</p>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_unpublishResource" class="button" title="{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}" data-action="unpublish">{% trans 'APP-UNPUBLISH-RESOURCE-TEXT' %}</a>
+         <a id="id_unpublishRevision" class="button primary" title="{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}" data-action="unpublish">{% trans 'APP-UNPUBLISH-REVISION-TEXT' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}

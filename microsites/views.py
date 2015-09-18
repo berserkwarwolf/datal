@@ -1,18 +1,17 @@
+import re
+import logging
+
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect, Http404, HttpResponse
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.template import TemplateDoesNotExist
 from django.views.generic import TemplateView
 
 from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 from core.choices import StatusChoices
 from core.http import get_domain_by_request
 from core.shortcuts import render_to_response
-
-import re
-import json
-import logging
 
 
 def custom_pages(request, page):
@@ -76,10 +75,16 @@ def action_new_css(request, id):
     try:
         account = request.account
         preferences = account.get_preferences()
-        keys = ['account.title.color', 'account.button.bg.color'
-                , 'account.button.border.color', 'account.button.font.color'
-                , 'account.mouseover.bg.color', 'account.mouseover.border.color'
-                , 'account.mouseover.title.color', 'account.mouseover.text.color']
+        keys = [
+            'account.title.color',
+            'account.button.bg.color',
+            'account.button.border.color',
+            'account.button.font.color',
+            'account.mouseover.bg.color',
+            'account.mouseover.border.color',
+            'account.mouseover.title.color',
+            'account.mouseover.text.color'
+        ]
         keys_copy = list(keys)
         preferences.load(keys)
 
@@ -125,11 +130,11 @@ def action_catalog_xml(request):
         ds.link = 'http://{}{}'.format(domain, ds.permalink())
         ds.export_csv_link = 'http://{}{}'.format(
             domain,
-            reverse('datastream_manager.action_csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+            reverse('datastream_manager.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
         )
         ds.export_html_link = 'http://{}{}'.format(
             domain,
-            reverse('datastream_manager.action_html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
+            reverse('datastream_manager.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
         )
         ds.api_link = 'http://' + api_domain + '/dataviews/invoke/' + ds.guid + '?auth_key=your_authkey'
 
@@ -140,11 +145,11 @@ def action_catalog_xml(request):
         )
         for visualization_revision_id, in visualization_revision_ids:
             try:
-                vz = VZ(visualization_revision_id, language)
+                vz = VisualizationDBDAO().get(language, visualization_revision_id=visualization_revision_id)
             except:
                 logger.error('catalog VIZ ERROR %s %s' % (visualization_revision_id, language))
                 continue
-            vz.link = 'http://' + domain + vz.permalink()
+            vz['link'] = 'http://' + domain + vz.permalink()
             ds.visualizations.append(vz)
         resources.append(ds)
 
@@ -156,6 +161,6 @@ class CustomView(TemplateView):
     extra_content = {}
 
     def get_context_data(self, **kwargs):
-        context = super(DispView, self).get_context_data(**kwargs)
+        context = super(TemplateView, self).get_context_data(**kwargs)
         context.update(self.extra_content)
         return context

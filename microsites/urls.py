@@ -1,6 +1,6 @@
 from django.conf.urls import *
 from django.conf import settings
-
+from django.views.generic import RedirectView
 import os
 
 def jsi18n(request, packages = None, domain = None):
@@ -26,13 +26,14 @@ urlpatterns = patterns('',
     #(r'^visualizationsb/', include('microsites.chart_manager.urls')),
     #url(r'^visualizationsb/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.chart_manager.views.action_embed', name='chart_manager.action_embedb'),
 
-    (r'^datastreams/', include('microsites.datastream_manager.urls')),
-    (r'^datastreams/', include('microsites.viewDataStream.urls')),
 
-    # TODO ANDRES: REVISAR
+    # dejamos datastreams para no romper,
+    # dataviews como deberia quedar definitivamente
+    (r'^datastreams/', include('microsites.viewDataStream.urls')),
     (r'^dataviews/', include('microsites.datastream_manager.urls')),
+
     url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.embedDataStream.views.action_embed',
-        name='datastream_manager.action_embed'),
+        name='datastream_manager.embed'),
 
     (r'^datasets/', include('microsites.viewDataset.urls')),
 
@@ -45,7 +46,7 @@ urlpatterns = patterns('',
     url(r'^branded/js/(?P<id>\d+).js$', 'microsites.views.action_js', name='microsites.action_js'),
     url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
 
-    url(r'^portal/DataServicesManager/actionEmbed/$', 'core.exportDataStream.views.action_legacy_embed', name='datastream_manager.action_legacy_embed'),
+    url(r'^portal/DataServicesManager/actionEmbed/$', 'core.exportDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
     url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
 
     url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),
@@ -60,7 +61,7 @@ urlpatterns = patterns('',
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
 
-
+    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
 )
 
 handler404 = 'core.views.action404'

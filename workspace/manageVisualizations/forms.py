@@ -3,33 +3,8 @@ from django import forms
 from django.utils.translation import ugettext_lazy, ugettext
 
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.choices import VISUALIZATION_LIBS
-
-VISUALIZATION_TYPES = (
-    ('columnchart', 'columnchart'),
-    ('barchart', 'barchart'),
-    ('linechart', 'linechart'),
-    ('piechart', 'piechart'),
-    ('areachart', 'areachart'),
-    ('mapchart', 'mapchart')
-)
-
-VISUALIZATION_TEMPLATES = (
-    ('basicchart', 'basicchart'),
-    ('piechart', 'piechart'),
-    ('mapchart', 'mapchart'),
-    ('geochart', 'geochart')
-)
-
-BOOLEAN_FIELD = (
-    ('true', 'true'),
-    ('false', 'false')
-)
-
-INCLUDE_EXCLUDE = (
-    ('include', 'include'),
-    ('exclude', 'exclude')
-)
+from core.choices import VISUALIZATION_LIBS, VISUALIZATION_TYPES, VISUALIZATION_TEMPLATES, BOOLEAN_FIELD, \
+    INCLUDE_EXCLUDE, MAP_TYPE_FIELD
 
 
 class VisualizationForm(forms.Form):
@@ -41,7 +16,7 @@ class VisualizationForm(forms.Form):
     showLegend = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     nullValueAction = forms.ChoiceField(required=False, choices=INCLUDE_EXCLUDE)
     nullValuePreset = forms.CharField(required=False, max_length=200)
-    range_data = forms.CharField(max_length=300, required=True)
+    data = forms.CharField(max_length=300, required=True)
     xTitle = forms.CharField(required=False, max_length=200)
     yTitle = forms.CharField(required=False, max_length=200)
     labelSelection = forms.CharField(required=False, max_length=200)
@@ -51,6 +26,12 @@ class VisualizationForm(forms.Form):
     invertedAxis = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     correlativeData = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
     is3D = forms.ChoiceField(required=False, choices=BOOLEAN_FIELD)
+
+    # Mapas
+    latitudSelection = forms.CharField(required=False, max_length=200)
+    longitudSelection = forms.CharField(required=False, max_length=200)
+    traceSelection = forms.CharField(required=False, max_length=200)
+    mapType = forms.ChoiceField(required=False, choices=MAP_TYPE_FIELD)
 
     def save(self, request, revision):
         lifecycle = VisualizationLifeCycleManager(user=request.user)
@@ -80,6 +61,7 @@ class RequestForm(forms.Form):
 
 
 class PreviewForm(RequestForm):
+    type = forms.ChoiceField(required=True, choices=VISUALIZATION_TYPES)
     nullValueAction = forms.CharField(required=True)
     nullValuePreset = forms.CharField(required=False)
     invertData = forms.CharField(required=False)
@@ -90,3 +72,19 @@ class PreviewForm(RequestForm):
     lat = forms.CharField(required=False)
     lon = forms.CharField(required=False)
     traces = forms.CharField(required=False)
+
+
+class PreviewMapForm(RequestForm):
+    nullValueAction = forms.CharField(required=True)
+    nullValuePreset = forms.CharField(required=False)
+
+    data = forms.CharField(required=True)
+    lat = forms.CharField(required=True)
+    lon = forms.CharField(required=True)
+
+    headers = forms.CharField(required=False)
+    traces = forms.CharField(required=False)
+
+    bounds = forms.CharField(required=False)
+    zoom = forms.IntegerField(required=False)
+

@@ -1,8 +1,26 @@
-import json, logging
+import json
+import logging
+import string
 from core.primitives import PrimitiveComputer
+from django.template.defaultfilters import date as _date
 
 logger = logging.getLogger(__name__)
 
+
+import datetime
+import decimal
+from django.db.models.base import ModelState
+
+class DateTimeEncoder(json.JSONEncoder):
+    def default(self, obj):
+       if hasattr(obj, 'strftime'):
+           return string.capitalize(_date(obj, 'F d, Y, h:i A'))
+       elif isinstance(obj, decimal.Decimal):
+           return float(obj)
+       elif isinstance(obj, ModelState):
+           return None
+       else:
+           return json.JSONEncoder.default(self, obj)
 
 # Lo comento porque supuestamente no se va a uar mas
 # /home/mativs/Projects/datal/workspace/managers.py

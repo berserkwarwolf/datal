@@ -834,11 +834,20 @@ msgstr "Data View saved successfully"
 msgid "CREATE-STEP4-TAGTITLE"
 msgstr "Tags for this data view"
 
-msgid "APP-VIZ-CUSTOMIZE-TEXT"
-msgstr "Customization"
-
 msgid "APP-VIZ-METADATA-TEXT"
 msgstr "Description"
 
 msgid "APP-VIZ-FINISH-TEXT"
 msgstr "Review"
+
+msgid "APP-VALID-PHONE-TEXT"
+msgstr "Specify a valid phone number"
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-TEXT"
+msgstr "The visualization has been deleted."
+
+msgid "APP-CHART-TEXT"
+msgstr "Chart"
+
+msgid "APP-MAP-TEXT"
+msgstr "Map"

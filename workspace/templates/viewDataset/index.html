@@ -15,6 +15,7 @@
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionDeleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionUnpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_workspace/viewDataset/datasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_workspace/viewDataset/datasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
@@ -38,16 +39,12 @@
 
           <!-- Sidebar -->
           <section class="sidebar-container">
-
             {% include "viewDataset/sidebar.html" %}
-
           </section>
 
           <!-- Detail -->
           <section class="detail-container">
-
             {% include "viewDataset/detail.html" %}
-
           </section>
 
         </div>
@@ -62,14 +59,15 @@
 {% block bottom_js %}
 <script type="text/javascript">
 $(document).ready(function(){
-  var Dataset = new dataset({
-    id: "{{ dataset.last_revision_id }}",
-    dataset_id: " {{ dataset.dataset_id }}",
-    status: "{{ dataset.status }}",
+  var Dataset = new DatasetModel({
+    id: {{ dataset.last_revision_id }},
+    dataset_id: {{ dataset.dataset_id }},
+    status: {{ dataset.status }},
     status_str: "{{ dataset.status|status_str|capfirst }}",
     title: "{{ dataset.title|capfirst }}",
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
     changeStatusUrl: "{% url 'manageDatasets.change_status' dataset.dataset_revision_id %}",
+    lastPublishRevisionId: "{{ dataset.last_published_revision_id }}",
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     publicUrl: "{{ dataset.public_url }}",

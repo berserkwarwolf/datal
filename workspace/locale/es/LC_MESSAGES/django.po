@@ -1324,17 +1324,8 @@ msgstr "Este mes"
 msgid "APP-ACTIONS-REVIEW"
 msgstr "Revisar"
 
-msgid "EDITDS-DSINFO-TITLE"
-msgstr "Información de la Vista"
-
 msgid "OVEDITDS-NAME-TIP"
 msgstr "¿De que se tratan los datos? Escribe un tema general que explique los datos que se muestran"
-
-msgid "EDITDS-METATAGS-TITLE"
-msgstr "Metatags de la Vista"
-
-msgid "EDITDS-SOURCE-TITLE"
-msgstr "Fuentes de la Vista"
 
 msgid "EDITDS-SOURCE-TIP1"
 msgstr "Escribe las primeras 3 letras de la fuente y selecciona una de la lista. Si la fuente no aparece, por favor"
@@ -1350,9 +1341,6 @@ msgstr "Nombre"
 
 msgid "MODEL-URL-TEXT"
 msgstr "URL"
-
-msgid "APP-DSTAGS-TEXT"
-msgstr "Etiquetas de la Vista"
 
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu vista"
@@ -1601,7 +1589,7 @@ msgid "CREATE-STEP3-TITLE"
 msgstr "Nómbralo"
 
 msgid "CREATE-STEP3-SUBTITLE"
-msgstr "Cuéntanos sobre que se trata tu vista. Los campos con (<span class='required'>*</span>) son obligatorios."
+msgstr "Cuéntanos sobre que se trata tu vista. <span>Los campos con (<span class='required'>*</span>) son obligatorios.</span>"
 
 msgid "CREATION-STEP3-HELPTITLE"
 msgstr "Nombres: Buenas prácticas y uso correcto"
@@ -2100,6 +2088,9 @@ msgstr "Categoría por defecto"
 
 msgid "APP-YES-TEXT"
 msgstr "Si"
+
+msgid "APP-CATEGORY-DEFAULT-UNDEFINED"
+msgstr "No hay una categoría por defecto"
 
 msgid "APP-CATEGORY-UPDATED-DEFAULT-FAIL"
 msgstr "Categoría actualizada exitosamente. Por favor, seleccione una nueva categoría por defecto"
@@ -2929,7 +2920,7 @@ msgid "APP-UNPUBLISH-RESOURCE-TEXT"
 msgstr "Despublicar todas las revisiones"
 
 msgid "APP-UNPUBLISH-REVISION-TEXT"
-msgstr "Despublicar revisión actual"
+msgstr "Despublicar última revisión publicada"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
 msgstr "Despublicar conjunto de datos"
@@ -2938,7 +2929,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
 msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
 
 msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Despublicar"
+msgstr "Despublicar todo"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Eliminar vista"
@@ -3105,9 +3096,6 @@ msgstr "¿No se ve bien?"
 msgid "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE"
 msgstr "Cambiar filas/columnas"
 
-msgid "APP-CUSTOMIZE-VISUALIZATION-REORDER-DATA-TEXT"
-msgstr "Reordenar datos"
-
 msgid "APP-DEFAULT-TEXT"
 msgstr "Por defecto"
 
@@ -3197,3 +3185,30 @@ msgstr "Es lo que verás en el tooltip del mapa"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "Nueva visualización"
+
+msgid "APP-LABELS-TIP-TEXT"
+msgstr "Palabras clave para ayudar a identificar el contenido de tu visualización."
+
+msgid "APP-INVERT-TEXT"
+msgstr "Invertir"
+
+msgid "VALIDATE-REQUIREDFIELD-TEXT"
+msgstr "Este campo es requerido"
+
+msgid "APP-HOW-TO-SELECT-TITLE"
+msgstr "¿Cómo seleccionar?"
+
+msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
+msgstr "Seleccioná varias celdas de una columna o fila"
+
+msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
+msgstr "La columna completa"
+
+msgid "APP-HOW-TO-SELECT-ROW-TEXT"
+msgstr "O bien, la fila completa"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Despublicar visualización"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"

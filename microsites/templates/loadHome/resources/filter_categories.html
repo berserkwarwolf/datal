@@ -5,18 +5,16 @@
         <dd class="filter_all filter_who filter-active DN">
             <span title="{% trans 'APP-ALL-TEXT' %}">{% trans 'APP-ALL-TEXT' %}</span>
         </dd>
-        {% if preferences.account_dataset_showhome == 'True' %}
         <dd class="filter_type" data="dt">
             <span title="{% trans 'APP-DATASETS-TEXT' %}">{% trans 'APP-DATASETS-TEXT' %}</span>
         </dd>
-        {% endif %}
         <dd class="filter_type" data="ds">
             <span title="{% trans 'APP-DATAVIEWS-TEXT' %}">{% trans 'APP-DATAVIEWS-TEXT' %}</span>
         </dd>
-        <!--
-        <dd class="filter_type" data="chart">
+        <dd class="filter_type" data="vz">
             <span title="{% trans 'APP-CHARTS-TEXT' %}">{% trans 'APP-CHARTS-TEXT' %}</span>
         </dd>
+        <!--
         <dd class="filter_type" data="db">
             <span title="{% trans 'APP-DASHBOARDS-TEXT' %}">{% trans 'APP-DASHBOARDS-TEXT' %}</span>
         </dd>

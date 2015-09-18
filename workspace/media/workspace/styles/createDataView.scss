@@ -62,7 +62,7 @@
 		.CR .warning div{padding-right:10px;}
 	
 		/*ACTIONS BOX*/
-		.step2 .actionsBox li{padding:10px 0 6px;background:url(/static/workspace/images/common/bd_helpBoxSeparator.gif) no-repeat center top;color:#333;}
+		.step2 .actionsBox li{padding:10px 0 6px;color:#333;list-style:none;}
 		.step2 .actionsBox li:first-child{background:none;padding-top:5px;}
 		.step2 .actionsBox .padding{padding-left:22px;}
 		.step2 .actionsBox li dt{padding-bottom:6px;}
@@ -89,7 +89,7 @@
 		.step2 .advancedBox li a strong{font-weight:normal;}
 		.step2 .advancedBox li a:hover strong{text-decoration:underline;}
 		.step2 .advancedBox li a em{color:#ccc;}
-		.step2 .advancedBox h5{font-size:12px;color:#333;font-weight:bold;padding:10px 0 6px;background:url(/static/workspace/images/common/bd_helpBoxSeparator.gif) no-repeat center bottom;margin-bottom:10px;}
+		.step2 .advancedBox h5{font-size:12px;color:#333;font-weight:bold;padding:10px 0 0;margin-bottom:10px;}
 		.step2 .advancedBox .ic_Arrow{position:relative;top:-1px;}
 		.step2 .advancedBox .bulletList p .ic_Filter{display:inline-block;width:16px;position:relative;top:7px;}
 		.step2 .advancedBox .fieldMAVG{width:60px;padding:2px;font-size:11px;}
@@ -177,26 +177,6 @@
 
 /* Changes Step 1 */
 .step1 .contentForm{position:relative;}
-
-.step1 .contentForm:after{content:"";position:absolute;left:0;top:0;height:100%;width:30px;z-index:100;
-background: -moz-linear-gradient(left,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0)));
-background: -webkit-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: -o-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: -ms-linear-gradient(left,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: linear-gradient(to right,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 );
-}
-
-.step1 .contentForm:before{content:"";position:absolute;top:0;left:0;width:100%;height:30px;z-index:100;
-background: -moz-linear-gradient(top,  rgba(255,255,255,1) 0%, rgba(255,255,255,0) 100%);
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(255,255,255,0)));
-background: -webkit-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: -o-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: -ms-linear-gradient(top,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-background: linear-gradient(to bottom,  rgba(255,255,255,1) 0%,rgba(255,255,255,0) 100%);
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=0 );
-}
 
 .step1 .contentTable:after{content:"";position:absolute;right:0;top:0;height:100%;width:30px;z-index:100;
 background: -moz-linear-gradient(left,  rgba(255,255,255,0) 0%, rgba(255,255,255,1) 100%);

@@ -2,7 +2,7 @@
     var ErrorManagerView = Backbone.View.extend({
         template: null,
         initialize: function () {
-            this.model.on("change", this.render, this);
+            this.model.on("set change", this.render, this);
 
             datalEvents.on('datal:application-error', this.onApplicationError, this);
         },

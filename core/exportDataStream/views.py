@@ -23,18 +23,20 @@ from django.forms.formsets import formset_factory
 
 
 @require_http_methods(["GET"])
-#@datal_cache_page()
-def action_invoke(request):
-    typen = 'json'
-    formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
-
-    # a modo de prueba
-    #form = formset(request.REQUEST, default=[{"position": 2, "default": "eameo!"},])
-    form = formset(request.REQUEST)
+@datal_cache_page()
+def invoke(request):
+    form = forms.RequestForm(request.GET)
     if form.is_valid():
+        query = RequestProcessor(request).get_arguments_no_validation()
+        query['pId'] = form.cleaned_data.get('datastream_revision_id')
+        limit = form.cleaned_data.get('limit')
+        if limit:
+            query['pLimit'] = limit
 
         command_factory = AbstractCommandFactory().create()
-        ivk = command_factory.create("invoke", form.cleaned_data).run()
+        ivk = command_factory.create("invoke", query).run()
+        # Sometimes there is no answer. Maybe engine is down
+       
         if ivk:
             contents, typen = ivk
         else:
@@ -47,7 +49,7 @@ def action_invoke(request):
     return HttpResponse(contents, mimetype=typen)
 
 @require_http_methods(["GET"])
-def action_csv(request, id, slug):
+def csv(request, id, slug):
 
     contents, type = export_to(id, request, 'csv')
 
@@ -55,7 +57,7 @@ def action_csv(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_xls(request, id, slug):
+def xls(request, id, slug):
 
     contents, type = export_to(id, request, 'xls')
 
@@ -70,7 +72,7 @@ def action_xls(request, id, slug):
 
 
 @require_http_methods(["GET"])
-def action_html(request, id, slug):
+def html(request, id, slug):
     contents, type = export_to(id, request, 'html')
     return HttpResponse(contents)
 
@@ -98,10 +100,9 @@ def export_to(datastream_id, request, output):
         command_factory = AbstractCommandFactory().create()
         return command_factory.create("invoke", query).run()
 
-
 @xframe_options_exempt
 @require_http_methods(["GET"])
-def action_legacy_embed(request):
+def legacy_embed(request):
     form = forms.LegacyEmbedForm(request.GET)
     if form.is_valid():
         datastream_id = form.cleaned_data.get('dataservice_id')
@@ -118,7 +119,7 @@ def action_legacy_embed(request):
 
 
 @require_http_methods(["GET"])
-def action_updategrid(request):
+def updategrid(request):
     query = dict()
     query['pId'] = request.REQUEST.get('datastream_id')
     query['pLimit'] = request.REQUEST.get('rp')
@@ -138,6 +139,7 @@ def action_updategrid(request):
 
     command_factory = AbstractCommandFactory().create()
     contents, mimetype = command_factory.create("invoke", query).run()
+
     if not contents:
         contents = {"rows": [], "total": 1, "page": 1}
         mimetype = "application/json"

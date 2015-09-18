@@ -1,17 +1,20 @@
+import json
+import urllib
+
 from django.conf import settings
 from django.http import HttpResponse, Http404
 from django.views.decorators.clickjacking import xframe_options_exempt
+
 from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
 from core.docs import VZ
+from core.v8.factories import AbstractCommandFactory
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.daos.visualizations import VisualizationHitsDAO
-from core.v8.factories import AbstractCommandFactory
+from core.daos.visualizations import VisualizationHitsDAO, VisualizationDBDAO
 from microsites.chart_manager import forms
-import urllib
-import json
+
 
 def action_view(request, id, slug):
     
@@ -33,14 +36,14 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id    = VisualizationRevision.objects.get_last_published_id(id)
-        visualization_revision      = VZ(visualizationrevision_id, preferences['account_language'])
+        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
+        visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
     except VisualizationRevision.DoesNotExist:
         raise Http404
     else:
-        can_download    = preferences['account_dataset_download'] == 'on'
-        can_export      = True
-        can_share       = False
+        can_download = True
+        can_export = True
+        can_share = False
         
         VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
 
