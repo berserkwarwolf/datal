@@ -137,3 +137,7 @@ class PreviewForm(forms.Form):
     rdf_template = forms.CharField(required=False)
     bucket_name = forms.CharField(required=False)
     limit = forms.IntegerField(required=False)
+
+class RequestForm(forms.Form):
+    datastream_revision_id = forms.IntegerField(required=True)
+    limit = forms.IntegerField(required=False)

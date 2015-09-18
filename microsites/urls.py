@@ -31,10 +31,6 @@ urlpatterns = patterns('',
     # dataviews como deberia quedar definitivamente
     (r'^datastreams/', include('microsites.viewDataStream.urls')),
     (r'^dataviews/', include('microsites.datastream_manager.urls')),
-
-    url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.embedDataStream.views.action_embed',
-        name='datastream_manager.embed'),
-
     (r'^datasets/', include('microsites.viewDataset.urls')),
 
     (r'^search/', include('microsites.search.urls')),
