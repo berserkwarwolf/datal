@@ -8,6 +8,9 @@ import logging
 
 def invoke(query, output=None):
 
+    logger = logging.getLogger(__name__)
+    if settings.DEBUG: logger.info('INVOKE {0} | Output {1}'.format(str(query), str(output)))
+        
     if not output:
         output = 'json'
         query['pOutput'] = output.upper()
@@ -27,21 +30,19 @@ def invoke(query, output=None):
                 if value is None:
                     value, content_type = _request(query, url)
                     engine_cache.set(key, value, settings.MEMCACHED_DEFAULT_TTL)
+                    if settings.DEBUG: logger.info('from engine {0} Url {1} value {2}'.format(content_type, url, value))
                     return value, content_type
                 else:
+                    if settings.DEBUG: logger.info('from memcache {0} Url {1} value {2}'.format(content_type, url, value))
                     return value, content_type
             else:
-                logger = logging.getLogger(__name__)
                 logger.debug('No memcached client could be created. Dataview will be retrieved from engine.')
 
         return _request(query, url)
 
     except Exception, e:
-        """ TOO much logging from here
-        logger = logging.getLogger(__name__)
-        logger.debug('{0}. Dataview will be retrieved from redis '.format(str(e)))
-        """
-
+        if settings.DEBUG: logger.info('{0}. Dataview will be retrieved from redis '.format(str(e)))
+        
         if output == 'json':
             if 'pFilter0' not in query:
 
@@ -54,11 +55,6 @@ def invoke(query, output=None):
                 return dataviews_cache.get(key), content_type
 
         return None, content_type
-
-#    er = format(str(e))
-#    nr = '{"fType":"ARRAY","fArray":[{"fStr":"Error","fType":"TEXT","fHeader":true},{"fStr":"URL","fType":"TEXT","fHeader":true},{"fStr":"%s","fType":"TEXT"},{"fStr":"%s","fType":"TEXT"}],"fRows":2,"fCols":2,"fTimestamp":1349165269247,"fLength":75}' % (er, url)
-#    return nr, "json"
-
 
 def invoke_chart(query):
 
@@ -128,7 +124,7 @@ def preview(query):
 
 
 def _request(query, url, method = 'GET'):
-
+    logger = logging.getLogger(__name__)
     response = None
     try:
         for key in query.keys():
@@ -139,13 +135,14 @@ def _request(query, url, method = 'GET'):
         query = fix_params(query)
         params = urllib.urlencode(query)
 
+        if settings.DEBUG: logger.info('_REQUEST %s + %s' % (url, str(params)))
+        
         try:
             if method == 'GET':
                 response = urllib.urlopen(url + '?' + params)
             elif method == 'POST':
                 response = urllib.urlopen(url, params)
         except Exception, e:
-            logger = logging.getLogger(__name__)
             logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
             raise
 
@@ -155,7 +152,9 @@ def _request(query, url, method = 'GET'):
                 mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
                 return ret, mimetype
 
-        raise IOError('Error code %d at %s+%s' % (response.getcode(), url, str(params)))
+        err = 'Error code %d at %s+%s' % (response.getcode(), url, str(params))
+        logger.error(err)
+        raise IOError(err)
     finally:
         if response:
             response.close()
