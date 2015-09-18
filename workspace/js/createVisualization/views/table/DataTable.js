@@ -165,9 +165,8 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  getSelection: function (name) {
-    var range = this._selectedCoordsCache,
-      data;
+  getDataFromRange: function (range) {
+    var data;
 
     if (range.from.row === -1) {
       data = this.table.getDataAtCol(range.from.col);
@@ -178,9 +177,15 @@ var DataTableView = Backbone.View.extend({
       data = _.map(data, _.first);
     }
 
+    return data;
+  },
+
+  getSelection: function () {
+    var range = this._selectedCoordsCache,
+      data = this.getDataFromRange(range);
+
     return {
         range: range,
-        selection: this.utils.rangeToExcel(range),
         data: data
       };
   },

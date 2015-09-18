@@ -4,5 +4,8 @@ var DataTableSelectionModel = Backbone.Model.extend({
 		// if (range.from.col !== range.to.col) {
 		// 	return 'Selecting multiple columns is not supported'
 		// }
-	}
+	},
+    getExcelRange: function () {
+        return DataTableUtils.rangeToExcel(this.get('range'));
+    }
 });

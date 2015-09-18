@@ -10,6 +10,10 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
+        this.rangeDataModel = new DataTableSelectionModel({id: 1});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3});
+
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
             collection: this.collection
@@ -45,8 +49,11 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        var selection = this.collection.getSelectionChartStyle();
-        this.model.set(selection);
+        this.model.set({
+            range_data: this.rangeDataModel.getExcelRange(),
+            range_headers: this.rangeHeadersModel.getExcelRange(),
+            range_labels: this.rangeLabelsModel.getExcelRange()
+        });
         this.close();
     },
 
@@ -74,25 +81,22 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     addSelection: function (name) {
-        var selection = this.dataTableView.getSelection(name);
+        var selection = this.dataTableView.getSelection(),
+            model;
 
-        if (_.isString(name)) {
-          // When name is defined, the selection mode only allows setting selection to certain models
-          // with fixed id (so that the color is stable)
-          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
-          model = new DataTableSelectionModel(_.extend(selection, {
-            id: names[name],
-            name: name
-          }));
-        } else {
-          // when no name is provided, the selection is a multiselection collection.
-          // model = new DataTableSelectionModel(_.extend(selection, {
-          //   id: newId,
-          // }));
+        if (name === 'range_data') {
+            this.collection.remove(1);
+            model = this.rangeDataModel;
+        } else if (name === 'range_labels') {
+            this.collection.remove(2);
+            model = this.rangeLabelsModel;
+        } else if (name === 'range_headers') {
+            this.collection.remove(3);
+            model = this.rangeHeadersModel;
         }
+        model.set(selection);
 
         if (model.isValid()) {
-            this.collection.remove(model.get('id'));
             this.collection.add(model);
         } else {
             alert(model.validationError)
