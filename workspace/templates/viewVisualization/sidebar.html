@@ -40,7 +40,7 @@
     {% if visualization_revision.notes %}
     <div class="row">
         <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
-        <p>{{visualization_revision.notes|safe|urlize}}</p>
+        <div class="notes">{{visualization_revision.notes|safe|urlize}}</div>
     </div>
     {% endif %}
 
