@@ -54,10 +54,20 @@ def csv(request, id, slug):
 @require_http_methods(["GET"])
 def xls(request, id, slug):
 
+    logger = logging.getLogger(__name__)
+        
     contents, type = export_to(id, request, 'xls')
+    if not contents: # probably an engine error
+        logger.error('Error al exportar XLS. No hay archivo')
+        return HttpResponse('No existe el archivo', mimetype='text/html', status=500)
+        
+    try:
+        argument = json.loads(contents)
+    except Exception, e:
+        logger.error('Error al exportar XML %s. Parse: %s' % (str(e), str(contents) ))
+        return HttpResponse('Error parsing', mimetype='text/html', status=500)
 
-    argument = json.loads(contents)
-
+    if settings.DEBUG: logger.info('XLS Arguments %s' % str(argument))
     if argument.get('fType') == 'REDIRECT':
         redirect = HttpResponse(status=302, mimetype='application/vnd.ms-excel')
         redirect['Location'] = argument.get('fUri')
