@@ -73,7 +73,6 @@ var DataTableView = Backbone.View.extend({
 
     // Selects a range
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
-      console.info('afterSelection', r1, c1, r2, c2);
       if (self._fullRowMode) {
         self.cacheSelection({
           from: {row: r1, col: -1},
@@ -105,6 +104,7 @@ var DataTableView = Backbone.View.extend({
 
     this.listenTo(this.collection, 'add', this.onAddSelected, this);
     this.listenTo(this.collection, 'remove', this.onRmSelected, this);
+    this.listenTo(this.collection, 'change', this.onChageSelected, this);
   },
 
   render: function () {
@@ -120,10 +120,8 @@ var DataTableView = Backbone.View.extend({
   },
 
   triggerAfterSelection: function () {
-
     this.trigger('afterSelection', {
-      coords: this._selectedCoordsCache,
-      range: this.utils.rangeToExcel(this._selectedCoordsCache)
+      excelRange: this.utils.rangeToExcel(this._selectedCoordsCache)
     });
   },
 
@@ -147,7 +145,7 @@ var DataTableView = Backbone.View.extend({
     return cells;
   },
 
-  addCellsMeta: function (cells, selId) {
+  _addCellsMeta: function (cells, selId) {
     var ids;
     for (var i = 0; i < cells.length; i++) {
       ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
@@ -156,7 +154,7 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  rmCellsMeta: function (cells, selId) {
+  _rmCellsMeta: function (cells, selId) {
     var ids;
     for (var i = 0; i < cells.length; i++) {
       ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
@@ -181,25 +179,33 @@ var DataTableView = Backbone.View.extend({
   },
 
   getSelection: function () {
-    var range = this._selectedCoordsCache,
-      data = this.getDataFromRange(range);
-
     return {
-        range: range,
-        data: data
-      };
+      excelRange: this.utils.rangeToExcel(this._selectedCoordsCache)
+    };
   },
 
   onAddSelected: function (model) {
-    var cells = this.coordsToCells(model.get('range'));
-    this.addCellsMeta(cells, model.get('id'));
+    var cells = this.coordsToCells(model.getRange());
+    this._addCellsMeta(cells, model.get('id'));
     this.table.render();
   },
 
   onRmSelected: function (model) {
-    var cells = this.coordsToCells(model.get('range'));
+    var cells = this.coordsToCells(model.getRange());
     this.available.push(model.get('id'));
-    this.rmCellsMeta(cells, model.get('id'));
+    this._rmCellsMeta(cells, model.get('id'));
+    this.table.render();
+  },
+
+  onChageSelected: function (model) {
+    var previousCells = this.coordsToCells(model.getPreviousRange()),
+      cells;
+    if (!model.isValid()) {
+      return;
+    }
+    cells = this.coordsToCells(model.getRange());
+    this._rmCellsMeta(previousCells, model.get('id'));
+    this._addCellsMeta(cells, model.get('id'));
     this.table.render();
   },
 

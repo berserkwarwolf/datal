@@ -16,7 +16,9 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            collection: this.collection
+            rangeDataModel: this.rangeDataModel,
+            rangeLabelsModel: this.rangeLabelsModel,
+            rangeHeadersModel: this.rangeHeadersModel
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
@@ -50,9 +52,9 @@ var ChartSelectDataModalView = ModalView.extend({
 
     onClickDone: function (e) {
         this.model.set({
-            range_data: this.rangeDataModel.getExcelRange(),
-            range_headers: this.rangeHeadersModel.getExcelRange(),
-            range_labels: this.rangeLabelsModel.getExcelRange()
+            range_data: this.rangeDataModel.get('excelRange'),
+            range_headers: this.rangeHeadersModel.get('excelRange'),
+            range_labels: this.rangeLabelsModel.get('excelRange')
         });
         this.close();
     },
@@ -70,12 +72,11 @@ var ChartSelectDataModalView = ModalView.extend({
             invoke: payload
         });
         this.dataTableView.render();
-        this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.selectedCellRangeView.select(range);
+        this.listenTo(this.dataTableView, 'afterSelection', function (selection) {
+            this.addSelection(this._cacheFocusedInput);
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            // this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },
@@ -99,12 +100,20 @@ var ChartSelectDataModalView = ModalView.extend({
         if (model.isValid()) {
             this.collection.add(model);
         } else {
-            alert(model.validationError)
+            // alert(model.validationError)
         }
     },
 
     validate: function () {
         if (this.collection.length < 3) {
+            this.enableDoneBtn(true);
+        } else {
+            this.enableDoneBtn(false);
+        }
+    },
+
+    enableDoneBtn: function (enable) {
+        if (enable) {
             this.$('button.btn-done').attr('disabled', 'disabled');
         } else {
             this.$('button.btn-done').removeAttr('disabled');

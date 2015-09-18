@@ -7,17 +7,25 @@ var DataTableUtils = {
   excelToRange: function (excelRange) {
     var parts = excelRange.split(':');
 
-    return {
-      from: this.excelCellToCoords(parts[0]),
-      to: this.excelCellToCoords(parts[1])
+    if (parts.length !== 2) {
+      throw 'InvalidRange';
     }
+
+    var from = this.excelCellToCoords(parts[0]);
+    var to = this.excelCellToCoords(parts[1]);
+
+    return {from: from, to: to};
   },
 
   excelCellToCoords: function (cellStr) {
-    return {
-      col: this.excelColToInt(cellStr.replace(/\d+/g, '')) - 1,
-      row: parseInt(cellStr.replace(/\D/g,'')) - 1
-    }
+    var digits = cellStr.replace(/\D/g,'');
+    var chars = cellStr.replace(/\d+/g, '');
+    var row = (digits === '')? -1 : parseInt(digits) - 1;
+    var col = this.excelColToInt(chars) - 1;
+
+    if (isNaN(row)) throw 'InvalidRange';
+
+    return {col: col, row: row};
   },
 
   coordsToExcelCell: function (coords) {
