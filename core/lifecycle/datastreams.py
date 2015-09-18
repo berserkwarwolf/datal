@@ -367,6 +367,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if last_published_revision_id:
                     self.datastream.last_published_revision = DataStreamRevision.objects.get(
                         pk=last_published_revision_id)
+            else:
+                self.datastream.last_published_revision = None
 
             self.datastream.save()
         else:

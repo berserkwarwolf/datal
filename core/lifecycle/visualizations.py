@@ -134,6 +134,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             if last_published_revision_id:
                     self.visualization.last_published_revision = VisualizationRevision.objects.get(
                         pk=last_published_revision_id)
+            else:
+                self.visualization.last_published_revision = None
 
             self.visualization.save()
         else:
