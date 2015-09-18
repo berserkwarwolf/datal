@@ -65,8 +65,9 @@ class SaveException(LifeCycleException):
 
     def __init__(self, form):
         self.form = form
-        super(SaveException, self).__init__()
-
+        self.description += ' errors: %(errors)s'
+        super(SaveException, self).__init__(errors=form.errors.as_text().replace('\n', ', '))
+        
     def get_actions(self):
         return [ContactUsExceptionAction()]
 

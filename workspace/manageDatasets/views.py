@@ -293,7 +293,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise DatasetSaveException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required
