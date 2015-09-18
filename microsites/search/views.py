@@ -56,7 +56,6 @@ def do_search(request, category_filters=None, datasets=None):
     else:
         raise Http404
 
-
 def action_search(request):
     return do_search(request)
 
