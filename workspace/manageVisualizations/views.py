@@ -17,7 +17,6 @@ from core.helpers import RequestProcessor, DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
-from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
