@@ -134,6 +134,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             if last_published_revision_id:
                     self.visualization.last_published_revision = VisualizationRevision.objects.get(
                         pk=last_published_revision_id)
+            else:
+                self.visualization.last_published_revision = None
 
             self.visualization.save()
         else:
@@ -195,10 +197,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         """
         VisualizationRevision.objects.filter(
             visualization__id=self.visualization.id,
-            status=StatusChoices.PUBLISHED
-        ).exclude(
-            id=self.visualization_revision.id
-        ).update(status=StatusChoices.DRAFT)
+            status=StatusChoices.PUBLISHED)\
+        .update(status=StatusChoices.DRAFT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un visualizacion """
