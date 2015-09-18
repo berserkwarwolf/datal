@@ -58,7 +58,16 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     sort_by='-id'
 
     if filters is not None and filters != '':
-        filters_dict = unset_visualization_revision_nice(json.loads(bb_request.get('filters')))
+        item = json.loads(bb_request.get('filters'))
+        
+        filters_dict = dict()
+        filters_dict['dataset__user__nick'] = item.get('author_filter')
+        if item.get('status_filter'):
+            filters_dict['status'] = []
+            for x in item.get('status_filter'):
+                filters_dict['status'].append([status[0] for status in settings.STATUS_CHOICES if status[1] == x][0])
+
+        
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':

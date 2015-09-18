@@ -44,18 +44,7 @@ def remove_duplicated_filters(list_of_resources):
     removed['category_filter'] = set([x.get('category__categoryi18n__name') for x in list_of_resources])
     removed['author_filter'] = set([x.get('dataset__user__nick', '') for x in list_of_resources])
     removed['author_filter'] = removed['author_filter'].union(set([x.get('datastream__user__nick', '') for x in list_of_resources]))
-    return removed
-
-# esto se usa exactamente en el mismo lugar que la funcion de arriba
-def unset_visualization_revision_nice(item):
-    new_item = dict()
-    new_item['dataset__user__nick'] = item.get('author_filter')
-    if item.get('status_filter'):
-        new_item['status'] = []
-        for x in item.get('status_filter'):
-            new_item['status'].append([status[0] for status in STATUS_CHOICES if status[1] == x][0])
-
-    return new_item
+    return removed    
 
 def generate_ajax_form_errors(form):
     errors = []
