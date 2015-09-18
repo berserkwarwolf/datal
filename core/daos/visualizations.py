@@ -162,6 +162,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         visualizationi18n['notes'] = fields['notes'].strip()
         visualizationi18n['language'] = fields['language']
 
+        # Bastante horrendo. TODO: Hacerlo bien
         fields['impl_details'] = VisualizationImplBuilder(**fields).build()
         fields.pop('type')
         fields.pop('chartTemplate')
@@ -185,8 +186,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         fields.pop('longitudSelection')
         fields.pop('traceSelection')
         fields.pop('mapType')
-
-        print(fields)
 
         VisualizationRevision.objects.filter(id=visualization_revision.id).update(**fields)
 
