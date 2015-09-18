@@ -292,6 +292,14 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
 
+        # al clonar el ds_rev tienen uqe viajar los data_source y selecT_statement
+        # no sé por qué, pero en el form llegan vacíos, para prevenir que en algún
+        # momento viajen via el form (fields) consulto si estan vacíos.
+        if fields['data_source'] == "":
+            fields['data_source'] = self.datastream_revision.data_source
+        if fields['select_statement'] == "":
+            fields['select_statement'] = self.datastream_revision.select_statement
+
         if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
