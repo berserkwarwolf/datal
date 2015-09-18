@@ -378,3 +378,49 @@ def action_preview(request):
 
     else:
         raise Http404(form.get_error_description())
+
+@require_http_methods(["GET"])
+@datal_cache_page()
+def invoke(request):
+    form = forms.RequestForm(request.GET)
+    if form.is_valid():
+        query = RequestProcessor(request).get_arguments_no_validation()
+        query['pId'] = form.cleaned_data.get('datastream_revision_id')
+        limit = form.cleaned_data.get('limit')
+        if limit:
+            query['pLimit'] = limit
+
+        ivk = engine_invoke(query)
+        # Sometimes there is no answer. Maybe engine is down
+        if ivk is None:
+            contents = '{"Error":"No invoke"}'
+            typen = "json"
+        else:
+            contents, typen = ivk
+
+        return HttpResponse(contents, mimetype=typen)
+    else:
+        return HttpResponse('Error! No valid form')
+
+@require_http_methods(["GET"])
+def updategrid(request):
+    query = dict()
+    query['pId'] = request.REQUEST.get('datastream_id')
+    query['pLimit'] = request.REQUEST.get('rp')
+    query['pPage'] = int(request.REQUEST.get('page')) - 1
+
+    search = request.REQUEST.get('query', None)
+    if search:
+        query['pFilter0'] = '%s[contains]%s' % (request.REQUEST.get('qtype', 'column0'), search)
+
+    sortname = request.REQUEST.get('sortname', None)
+    sortorder = request.REQUEST.get('sortorder', None)
+    if sortname:
+        query['pOrderBy'] = sortname
+        query['pOrderType'] = {None: 'A', 'asc': 'A', 'desc': 'D'}[sortorder]
+
+    contents, mimetype = engine_invoke(RequestProcessor(request).get_arguments_no_validation(query))
+    if not contents:
+        contents = {"rows": [], "total": 1, "page": 1}
+        mimetype = "application/json"
+    return HttpResponse(jsonToGrid(contents, query['pPage'] + 1), mimetype=mimetype)

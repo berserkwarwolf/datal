@@ -1,7 +1,6 @@
 from django.conf.urls import patterns, url
 from workspace.manageDataviews.views import *
 from workspace.manageDatasets.views import filter as filterDataset
-from core.exportDataStream.views import invoke
 
 urlpatterns = patterns(
     '',
