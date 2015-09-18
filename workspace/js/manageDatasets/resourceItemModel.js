@@ -7,6 +7,7 @@ var ResourceItemModel = Backbone.Model.extend({
             id: "",
             end_point: "",
             created_at: "",
+            modified_at: "",
             category: "",
             author: "",
             status_nice: "",

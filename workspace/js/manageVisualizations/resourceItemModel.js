@@ -14,6 +14,7 @@ var ResourceItemModel = Backbone.Model.extend({
             visualization_id: "",
             last_revision_id: "",
             guid: "",
+            modified_at: "",
             created_at: "",
             url: "",
             datastream_title: "",

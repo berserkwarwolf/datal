@@ -63,8 +63,8 @@
   <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
 
   {# Last Modified #}
-  <% if(created_at != ""){%>
-    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% if(modified_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= modified_at %></span>
   <% } %>
 
   {# Actions #}
