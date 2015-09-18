@@ -33,7 +33,6 @@
 .tag .tagTxt.isEditing{background-position:0 -18px;border-color:#ccc;}
 .tag .tagTxt.isEditing{border-color:#bbb;}
 .tag .tagTxt.isEditing input{border:0;font-size:11px;padding:0;margin:0;background:0;font-style:italic;}
-.tag .tagInner a:last-child, .param .paramInner a:last-child{-moz-border-radius:0 7px 7px 0;-webkit-border-radius:0 7px 7px 0;border-radious:0 7px 7px 0;border-right:1px solid #e2e0e0;}
 .tag .tagInner a.toApprove,
 .tag .tagInner a.approved{background-image:url(/static/core/images/common/ic_tagApprove.gif);}
 .tag .tagInner a.approved,
