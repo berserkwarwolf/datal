@@ -282,7 +282,7 @@ class DataStream(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class RevisionModel(models.Model):
@@ -761,7 +761,7 @@ class Visualization(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class VisualizationRevision(RevisionModel):
