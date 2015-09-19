@@ -94,11 +94,15 @@ charts.models.Chart = Backbone.Model.extend({
     fetchPreviewData: function () {
         var self = this;
 
+        if(!this.isValid()){
+            console.error('error en valid');
+        }
+
         var params = {
             datastream_revision_id: self.get('datastream_revision_id'),
-            data: self.get('range_data'),
-            headers: self.get('range_headers'),
-            labels: self.get('range_labels'),
+            data: this.dataSelection,
+            headers: this.headerSelection,
+            labels: this.labelSelection,
             nullValueAction: self.get('nullValueAction'),
             nullValuePreset:  self.get('nullValuePreset'),
             type: self.get('type')
@@ -222,6 +226,36 @@ charts.models.Chart = Backbone.Model.extend({
         return metadata;
     },
 
+    validate: function(attrs, options) {
+
+        this.headerSelection = this.validateSelection(attrs.range_headers);
+        this.labelSelection = this.validateSelection(attrs.range_labels);
+        this.dataSelection = this.validateSelection(attrs.range_data);
+
+    },
+
+    validateSelection: function(selection){
+
+        var range = selection.split(":");
+        var left = range[0];
+        var right = range[1];
+
+        // Columna completa o celda
+        if(left == right){
+            var index = left.search(/\d/g);
+
+            // Columna completa
+            if(index == -1){
+                selection = "Column:" + left;
+            }
+        }
+        else{
+            // TO-DO: Validar que no sea un rango de columnas completas
+        }
+
+        return selection;
+    },
+
     valid: function(){
         console.log('Validation from charts.models.Chart');
         var valid = true;
@@ -282,8 +316,8 @@ charts.models.Chart = Backbone.Model.extend({
 
             //data selection
             headerSelection: this.get('range_headers'),
-            data: this.get('range_data'),
-            labelSelection: this.get('range_labels')
+            data: this.getData('range_data'),
+            labelSelection: this.getLabels('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
