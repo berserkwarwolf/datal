@@ -2,6 +2,10 @@ from rest_framework import serializers
 from core.models import DataStream
 from rest_framework.compat import OrderedDict
 
+class EngineSerializer(serializers.Serializer):
+    def to_representation(self, obj):
+        return obj['result']
+
 class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()
     title = serializers.CharField()

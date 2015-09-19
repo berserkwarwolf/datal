@@ -14,7 +14,8 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
-
+from microsites.viewDataStream import forms
+from django.http import HttpResponse
 
 def view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL
