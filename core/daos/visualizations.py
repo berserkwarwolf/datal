@@ -156,7 +156,50 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         return related
 
     def update(self, visualization_revision, changed_fields, **fields):
-        pass
+        visualizationi18n = dict()
+        visualizationi18n['title'] = fields['title'].strip().replace('\n', ' ')
+        visualizationi18n['description'] = fields['description'].strip().replace('\n', ' ')
+        visualizationi18n['notes'] = fields['notes'].strip()
+        visualizationi18n['language'] = fields['language']
+
+        # Bastante horrendo. TODO: Hacerlo bien
+        fields['impl_details'] = VisualizationImplBuilder(**fields).build()
+        fields.pop('type')
+        fields.pop('chartTemplate')
+        fields.pop('showLegend')
+        fields.pop('invertedAxis')
+        fields.pop('correlativeData')
+        fields.pop('nullValueAction')
+        fields.pop('nullValuePreset')
+        fields.pop('data')
+        fields.pop('labelSelection')
+        fields.pop('headerSelection')
+        fields.pop('is3D')
+        fields.pop('description')
+        fields.pop('language')
+        fields.pop('title')
+        fields.pop('notes')
+        fields.pop('latitudSelection')
+        fields.pop('xTitle')
+        fields.pop('yTitle')
+        fields.pop('invertData')
+        fields.pop('longitudSelection')
+        fields.pop('traceSelection')
+        fields.pop('mapType')
+
+        VisualizationRevision.objects.filter(id=visualization_revision.id).update(**fields)
+
+        # Falla, por ahora
+        #visualization_revision.update(changed_fields, **fields)
+
+        VisualizationI18n.objects.filter(
+            visualization_revision=visualization_revision,
+            language=visualizationi18n['language']
+        ).update(
+            **visualizationi18n
+        )
+
+        return visualization_revision
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
@@ -197,7 +240,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'visualization__datastream__last_revision__category__categoryi18n__name',
             'visualization__datastream__last_revision__datastreami18n__title',
             'visualizationi18n__title',
-            'visualizationi18n__description', 'created_at', 'visualization__user__id',
+            'visualizationi18n__description', 'created_at', 'modified_at', 'visualization__user__id',
         )
 
         query = query.order_by(sort_by)

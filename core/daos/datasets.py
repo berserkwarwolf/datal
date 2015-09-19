@@ -145,7 +145,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         query = query.values('filename', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
                              'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
-                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'size', 'end_point',
+                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'modified_at', 'size', 'end_point',
                              'dataset__user__id', 'dataset__last_revision_id')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',

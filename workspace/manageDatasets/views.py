@@ -19,7 +19,7 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-from core.helpers import DateTimeEncoder
+from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -293,7 +293,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise DatasetSaveException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required

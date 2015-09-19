@@ -12,11 +12,12 @@ from django.utils.translation import ugettext
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.helpers import RequestProcessor, DateTimeEncoder
+from core.engine import invoke, preview_chart, invoke_chart
+from core.helpers import RequestProcessor
+from core.utils import DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
-from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.v8.factories import AbstractCommandFactory
 from core.exceptions import DataStreamNotFoundException
@@ -58,7 +59,16 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     sort_by='-id'
 
     if filters is not None and filters != '':
-        filters_dict = unset_visualization_revision_nice(json.loads(bb_request.get('filters')))
+        item = json.loads(bb_request.get('filters'))
+        
+        filters_dict = dict()
+        filters_dict['dataset__user__nick'] = item.get('author_filter')
+        if item.get('status_filter'):
+            filters_dict['status'] = []
+            for x in item.get('status_filter'):
+                filters_dict['status'].append([status[0] for status in settings.STATUS_CHOICES if status[1] == x][0])
+
+        
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
@@ -241,9 +251,9 @@ def create(request):
         form = VisualizationForm(request.POST)
         if not form.is_valid():
             logger.info(form._errors)
-            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        response = form.save(request, datastream_rev)
+        response = form.save(request, datastream_rev=datastream_rev)
 
         return JSONHttpResponse(json.dumps(response))
     
@@ -296,7 +306,20 @@ def edit(request, revision_id=None):
         ))
 
     elif request.method == 'POST':
-        pass
+        """ save new or update dataset """
+        # Formulario
+        form = VisualizationForm(request.POST)
+        if not form.is_valid():
+            logger.info(form._errors)
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        response = form.save(request, visualization_rev=visualization_rev)
+
+        return JSONHttpResponse(json.dumps(response))
 
 
 @login_required

@@ -82,7 +82,7 @@
     {% if dataset.notes %}
     <div class="row">
         <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
-        <p>{{dataset.notes|safe|urlize}}</p>
+        <div class="notes">{{dataset.notes|safe|urlize}}</div>
     </div>
     {% endif %}
 

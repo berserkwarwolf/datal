@@ -37,7 +37,10 @@ def action_view(request, id, slug):
 
     try:
         visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
-        visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
+        visualization_revision = VisualizationDBDAO().get(
+            preferences['account_language'],
+            visualization_revision_id=visualizationrevision_id
+        )
     except VisualizationRevision.DoesNotExist:
         raise Http404
     else:
@@ -45,9 +48,9 @@ def action_view(request, id, slug):
         can_export = True
         can_share = False
         
-        VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision['visualization']).add(ChannelTypes.WEB)
 
-        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters) 
+        visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
         
         chart_type = json.loads(visualization_revision.impl_details).get('format').get('type') 
         try:
@@ -64,7 +67,6 @@ def action_view(request, id, slug):
 #                result, content_type = invoke_chart(visualization_revision_parameters)
         except:
             result = '{fType="ERROR"}'
-            
 
         visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
         
@@ -72,28 +74,37 @@ def action_view(request, id, slug):
 
 @xframe_options_exempt
 def action_embed(request, guid):
-
-    account     = request.account
+    account = request.account
     preferences = request.preferences
     base_uri = 'http://' + preferences['account_domain']
 
     try:
         visualizationrevision_id = VisualizationRevision.objects.get_last_published_by_guid(guid)
-        visualization_revision = VZ(visualizationrevision_id, preferences['account_language'])
+        visualization_revision = VisualizationDBDAO().get(
+            preferences['account_language'],
+            visualization_revision_id=visualizationrevision_id
+        )
     except:
         return render_to_response('chart_manager/embed404.html',{'settings': settings, 'request' : request})
 
-    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
-    width     = request.REQUEST.get('width', False)
-    height    = request.REQUEST.get('height', False)
+    VisualizationHitsDAO(visualization_revision['visualization']).add(ChannelTypes.WEB)
+    width = request.REQUEST.get('width', False)
+    height = request.REQUEST.get('height', False)
 
+<<<<<<< HEAD
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
     command_factory = AbstractCommandFactory().create() 
     json, type = command_factory.create("invoke", visualization_revision_parameters).run()
+=======
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
+    visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
+    json, type = invoke(visualization_revision_parameters)
+>>>>>>> develop
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('chart_manager/embed.html', locals())
+
 
 def action_invoke(request):
 
@@ -102,12 +113,15 @@ def action_invoke(request):
         preferences = request.preferences
         
         try:
-            visualizationrevision_id    = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision      = VZ(visualizationrevision_id, preferences['account_language'])
+            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
+            visualization_revision = VisualizationDBDAO().get(
+                preferences['account_language'],
+                visualization_revision_id=visualizationrevision_id
+            )
         except VisualizationRevision.DoesNotExist:
             raise Http404
         else:
-            query        = RequestProcessor(request).get_arguments(visualization_revision.parameters) 
+            query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
             query['pId'] = visualizationrevision_id
             
             limit = form.cleaned_data.get('limit')

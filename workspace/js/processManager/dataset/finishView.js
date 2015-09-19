@@ -146,17 +146,28 @@ var FinishView = StepView.extend({
 	},
 
 	setIndividualError: function(element, name, error){
+		var textarea = $('.textarea');
 
 		// If not valid
 		if( error != ''){
-			element.addClass('has-error');
-			element.next('p.has-error').remove();
-			element.after('<p class="has-error">'+error+'</p>');
+
+			if(name == 'notes'){
+				textarea.addClass('has-error');
+				textarea.next('p.has-error').remove();
+				textarea.after('<p class="has-error">'+error+'</p>');			
+			}else{
+				element.addClass('has-error');
+				element.next('p.has-error').remove();
+				element.after('<p class="has-error">'+error+'</p>');
+			}
 
 		// If valid
 		}else{
 			element.removeClass('has-error');
 			element.next('p.has-error').remove();
+
+			textarea.removeClass('has-error');
+			textarea.next('p.has-error').remove();			
 		}
 
 	},

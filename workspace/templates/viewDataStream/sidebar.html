@@ -40,7 +40,7 @@
     {% if datastream.notes %}
     <div class="row">
         <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
-        <p>{{datastream.notes|safe|urlize}}</p>
+        <div class="notes">{{datastream.notes|safe|urlize}}</div>
     </div>
     {% endif %}
 

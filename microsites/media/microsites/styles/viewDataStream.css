@@ -264,6 +264,7 @@ html, body{background:url(../images/microsites/bg_body.gif) repeat;}
 
 	/* NOTES */
 	.sidebar .notesBox .boxContent{overflow-x:auto;}
+	.sidebar .notesBox .boxContent img{width:100%;}
 
 /* Data Table */
 .dataTable{}
