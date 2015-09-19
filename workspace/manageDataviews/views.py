@@ -18,6 +18,7 @@ from core.exceptions import DataStreamNotFoundException, DatasetNotFoundExceptio
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
+from core.decorators import datal_cache_page
 from core.v8.factories import AbstractCommandFactory
 from core.helpers import DateTimeEncoder
 

@@ -14,12 +14,15 @@ from core.utils import slugify
 from core import settings
 from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
-from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization
+from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization, Setting
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
 from core.builders.visualizations import VisualizationImplBuilder
+
+from django.core.urlresolvers import reverse
+from core import helpers
 
 from datetime import date, timedelta
 
@@ -251,6 +254,65 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         query = query[nfrom:nto]
 
         return query, total_resources
+
+    def query_hot_n(self, lang, hot = None):
+
+        if not hot:
+            hot = Setting.objects.get(pk = settings.HOT_VISUALIZATIONS).value
+
+        sql = """SELECT `ao_datastream_revisions`.`id` AS `datastream_revision_id`,
+                   `ao_visualizations_revisions`.`id` AS `visualization_revision_id`,
+                   `ao_datastreams`.`id` AS `datastream_id`,
+                   `ao_visualizations`.`id` AS `visualization_id`,
+                   `ao_visualizations_revisions`.`impl_details`,
+                   `ao_datastream_i18n`.`title`,
+                   `ao_datastream_i18n`.`description`,
+                   `ao_categories_i18n`.`name` AS `category_name`,
+                   `ao_users`.`account_id`
+                FROM `ao_visualizations_revisions`
+                INNER JOIN `ao_visualizations` ON (`ao_visualizations_revisions`.`visualization_id` = `ao_visualizations`.`id`)
+                INNER JOIN `ao_datastreams` ON (`ao_visualizations`.`datastream_id` = `ao_datastreams`.`id`)
+                INNER JOIN `ao_datastream_revisions` ON (`ao_datastreams`.`id` = `ao_datastream_revisions`.`datastream_id` AND `ao_datastream_revisions`.`status` = 3)
+                INNER JOIN `ao_datastream_i18n` ON (`ao_datastream_revisions`.`id` = `ao_datastream_i18n`.`datastream_revision_id`)
+                INNER JOIN `ao_categories` ON (`ao_datastream_revisions`.`category_id` = `ao_categories`.`id`)
+                INNER JOIN `ao_categories_i18n` ON (`ao_categories`.`id` = `ao_categories_i18n`.`category_id`)
+                INNER JOIN `ao_users` ON (`ao_visualizations`.`user_id` = `ao_users`.`id`)
+                WHERE `ao_visualizations_revisions`.`id` IN (
+                        SELECT MAX(`ao_visualizations_revisions`.`id`)
+                        FROM `ao_visualizations_revisions`
+                        WHERE `ao_visualizations_revisions`.`visualization_id` IN ("""+ hot +""")
+                              AND `ao_visualizations_revisions`.`status` = 3
+                        GROUP BY `visualization_id`
+                    )
+                 AND `ao_categories_i18n`.`language` = %s
+                ORDER BY `ao_visualizations`.`id` DESC, `ao_datastreams`.`id` DESC, `ao_visualizations_revisions`.`id` DESC, `ao_datastream_revisions`.`id` DESC"""
+
+        cursor = connection.cursor()
+        cursor.execute(sql, (lang,))
+
+        rows    = cursor.fetchall().__iter__()
+        row     = helpers.next(rows, None)
+
+        visualizations = []
+        while row != None:
+            datastream_id = row[2]
+            visualization_id = row[3]
+            title = row[5]
+            permalink = reverse('chart_manager.action_view', kwargs={'id': visualization_id, 'slug': slugify(title)})
+            visualizations.append({'id'           : row[0],
+                                   'sov_id'       : row[1],
+                                   'impl_details' : row[4],
+                                   'title'        : title,
+                                   'description'  : row[6],
+                                   'category'     : row[7],
+                                   'permalink'    : permalink,
+                                   'account_id'   : row[8]
+                                })
+
+            while row != None and datastream_id == row[2] and visualization_id == row[3]:
+                row = helpers.next(rows, None)
+
+        return visualizations
 
     def query_filters(self, account_id=None, language=None):
         """

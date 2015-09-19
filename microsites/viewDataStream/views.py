@@ -8,7 +8,10 @@ from core.http import get_domain_with_protocol
 from core.utils import set_dataset_impl_type_nice
 from core.models import DataStream, Account, DataStreamRevision
 from core.helpers import RequestProcessor
+from core.decorators import datal_cache_page
 from core.choices import ChannelTypes
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.clickjacking import xframe_options_exempt
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
 
@@ -173,25 +176,6 @@ def export_to(datastream_id, request, output):
             query['pFilter0'] = unicode(filter).encode('utf-8')
 
         return engine_invoke(query, output)
-
-
-@xframe_options_exempt
-@require_http_methods(["GET"])
-def legacy_embed(request):
-    form = forms.LegacyEmbedForm(request.GET)
-    if form.is_valid():
-        datastream_id = form.cleaned_data.get('dataservice_id')
-        end_point = form.cleaned_data.get('end_point')
-        header_row = form.cleaned_data.get('header_row', 0)
-        fixed_column = form.cleaned_data.get('fixed_column', 0)
-
-        datastream = get_object_or_404(DataStream, pk = datastream_id)
-        query = urllib.urlencode({'end_point': end_point, 'header_row': header_row, 'fixed_column' : fixed_column})
-        url = reverse('exportDataStream.action_embed', kwargs={'guid' : datastream.guid}) + '?' + query
-        return HttpResponsePermanentRedirect(url)
-    else:
-        return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request' : request})
-
 
 @require_http_methods(["GET"])
 def updategrid(request):

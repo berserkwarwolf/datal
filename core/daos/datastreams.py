@@ -18,9 +18,13 @@ from core.daos.resource import AbstractDataStreamDBDAO
 from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from core.choices import STATUS_CHOICES
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
+
+from django.core.urlresolvers import reverse
+from core import helpers
+
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -213,6 +217,54 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         query = query[nfrom:nto]
 
         return query, total_resources
+
+    def query_hot_n(self, limit, lang, hot = None):
+
+        if not hot:
+            hot = Setting.objects.get(pk = settings.HOT_DATASTREAMS).value
+
+        sql = """SELECT `ao_datastream_revisions`.`id` as 'datastream_revision_id',
+                   `ao_datastream_revisions`.`datastream_id` as 'datastream_id',
+                   `ao_datastream_i18n`.`title`,
+                   `ao_datastream_i18n`.`description`,
+                   `ao_categories_i18n`.`name` AS `category_name`,
+                   `ao_users`.`nick` AS `user_nick`,
+                   `ao_users`.`email` AS `user_email`,
+                   `ao_users`.`account_id`
+            FROM `ao_datastream_revisions`
+            INNER JOIN `ao_datastream_i18n` ON (`ao_datastream_revisions`.`id` = `ao_datastream_i18n`.`datastream_revision_id`)
+            INNER JOIN `ao_categories` ON (`ao_datastream_revisions`.`category_id` = `ao_categories`.`id`)
+            INNER JOIN `ao_categories_i18n` ON (`ao_categories`.`id` = `ao_categories_i18n`.`category_id`)
+            INNER JOIN `ao_datastreams` ON (`ao_datastream_revisions`.`datastream_id` = `ao_datastreams`.`id`)
+            INNER JOIN `ao_users` ON (`ao_datastreams`.`user_id` = `ao_users`.`id`)
+            WHERE `ao_datastream_revisions`.`id` IN (
+                SELECT MAX(`ao_datastream_revisions`.`id`)
+                FROM `ao_datastream_revisions`
+                 WHERE `ao_datastream_revisions`.`datastream_id` IN (""" + hot + """)
+                       AND `ao_datastream_revisions`.`status` = 3
+                GROUP BY `datastream_id`
+            ) -- AND `ao_categories_i18n`.`language` = %s"""
+
+        cursor = connection.cursor()
+        cursor.execute(sql, [lang])
+        row = cursor.fetchone()
+        datastreams = []
+        while row:
+            datastream_id = row[1]
+            title = row[2]
+            slug = slugify(title)
+            permalink = reverse('microsites.viewDataStream.views.invoke', kwargs={'id': datastream_id, 'slug': slug}, urlconf='microsites.urls')
+            datastreams.append({'id'          : row[0],
+                                'title'        : title,
+                                'description'  : row[3],
+                                'category_name': row[4],
+                                'user_nick'    : row[5],
+                                'user_email'   : row[6],
+                                'permalink'    : permalink,
+                                'account_id'   : row[7]
+                                })
+            row = cursor.fetchone()
+        return datastreams
 
     def query_filters(self, account_id=None, language=None):
         """
