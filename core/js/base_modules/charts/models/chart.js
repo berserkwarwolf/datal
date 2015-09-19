@@ -316,8 +316,8 @@ charts.models.Chart = Backbone.Model.extend({
 
             //data selection
             headerSelection: this.get('range_headers'),
-            data: this.getData('range_data'),
-            labelSelection: this.getLabels('range_labels')
+            data: this.get('range_data'),
+            labelSelection: this.get('range_labels')
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
