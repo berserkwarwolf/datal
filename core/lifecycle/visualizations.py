@@ -195,6 +195,12 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _remove_all(self):
+        # aquí debería poner toda la lógica del search_dao para
+        # poder borrar todas las revisiones de elastic.
+        # o  solo con borrar la ultima publicada....
+        search_dao = VisualizationSearchDAOFactory().create(self.visualization.last_published_revision)
+        search_dao.remove()
+
         self.visualization.delete()
 
     def _log_activity(self, action_id):
@@ -259,6 +265,9 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.visualization.last_published_revision=None
             self.visualization.save()
+
+            search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
+            search_dao.remove()
 
             self.visualization_revision.delete()
 
