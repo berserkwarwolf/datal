@@ -76,33 +76,10 @@ def hits_stats(request, id, channel_type=None):
     hits_dao = DatastreamHitsDAO(datastream)
     hits = hits_dao.count_by_days(30, channel_type)
     field_names = [unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
-    t = loader.get_template('datastream_manager/hits_stats.json')
+    t = loader.get_template('viewDataStream/hits_stats.json')
     c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": hits_dao.from_cache})
 
     return HttpResponse(t.render(c), content_type="application/json")
-
-@require_http_methods(["GET"])
-@datal_cache_page()
-def invoke(request):
-    form = forms.RequestForm(request.GET)
-    if form.is_valid():
-        query = RequestProcessor(request).get_arguments_no_validation()
-        query['pId'] = form.cleaned_data.get('datastream_revision_id')
-        limit = form.cleaned_data.get('limit')
-        if limit:
-            query['pLimit'] = limit
-
-        ivk = engine_invoke(query)
-        # Sometimes there is no answer. Maybe engine is down
-        if ivk is None:
-            contents = '{"Error":"No invoke"}'
-            typen = "json"
-        else:
-            contents, typen = ivk
-
-        return HttpResponse(contents, mimetype=typen)
-    else:
-        return HttpResponse('Error! No valid form')
 
 @xframe_options_exempt
 def embed(request, guid):
@@ -118,14 +95,14 @@ def embed(request, guid):
         )
         parameters_query = RequestProcessor(request).get_arguments(datastream.parameters)
     except Http404:
-        return render_to_response('datastream_manager/embed404.html', {'settings': settings, 'request': request})
+        return render_to_response('viewDataStream/embed404.html', {'settings': settings, 'request': request})
 
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
     end_point = urllib.urlencode(parameters_query)
     header_row = request.REQUEST.get('header_row', False)
     fixed_column = request.REQUEST.get('fixed_column', False)
 
-    return render_to_response('datastream_manager/embed.html', locals())
+    return render_to_response('viewDataStream/embed.html', locals())
 
 @require_http_methods(["GET"])
 def csv(request, id, slug):

@@ -52,6 +52,10 @@ BOTS = ['Googlebot', 'AdsBot-Google'] #, 'Googlebot-Mobile', 'Googlebot-Image', 
 
 STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/media/'),)
 
+REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
+    'microsites.middlewares.auth.RestAuthentication',
+)
+
 try:
     from microsites.local_settings import *
 except ImportError:

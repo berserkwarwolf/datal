@@ -25,7 +25,8 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     lookup_field = 'guid'
     serializer_class = ResourceSerializer
     data_types = ['dt', 'ds', 'vz']
-
+    command_factory = AbstractCommandFactory().create()
+    
     def list(self, request, format='json'):
         limit = self.request.query_params.get('limit', None)
         offset = self.request.query_params.get('offset', '0')
@@ -58,7 +59,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
 
     def get_queryset(self):
         params = {'language': self.request.auth['language'] }
-        params[self.dao_param_pk] = self.kwargs[self.lookup_field]
+        params[self.dao_get_param] = self.kwargs[self.lookup_field]
         return super(ResourceViewSet, self).get_queryset().get(**params)
 
     def get_object(self):
@@ -69,16 +70,13 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         self.check_object_permissions(self.request, obj)
         return obj
 
-class DataStreamAbstractViewSet(ResourceViewSet):
-    command_factory = AbstractCommandFactory().create()
-
-    def engine_call(self, request, engine_method, format='json'):
-        datastream = self.get_object()
+    def engine_call(self, request, engine_method, serializer_class=None):
+        resource = self.get_object()
         mutable_get = request.GET.copy()
-        mutable_get['datastream_revision_id'] = datastream['datastream_revision_id']
+        mutable_get[self.engine_pk] = resource[self.dao_pk]
 
         formset=formset_factory(ArgumentForm, formset=InvokeFormSet)
-        form = formset( dict(mutable_get.items()))
+        form = formset(dict(mutable_get.items()) )
         if not form.is_valid():
             # TODO: correct handling
             raise Exception("Wrong arguments")        
@@ -87,33 +85,38 @@ class DataStreamAbstractViewSet(ResourceViewSet):
         if not ivk:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
-            
-        datastream['result'] = json.loads(ivk[0])
-        serializer = self.get_serializer(datastream)
+        
+        resource['result'] = json.loads(ivk[0]) if ivk[0] else {}
+        if serializer_class:
+            serializer = serializer_class(resource)
+        else:
+            serializer = self.get_serializer(resource)
         
         return Response(serializer.data)
 
-class DataStreamViewSet(DataStreamAbstractViewSet):
+class DataStreamViewSet(ResourceViewSet):
     queryset = DataStreamDBDAO() 
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'
     data_types = ['ds']
-    dao_param_pk = 'guid'
+    dao_get_param = 'guid'
+    dao_pk = 'datastream_revision_id'
+    engine_pk = 'datastream_revision_id'
 
     @detail_route(methods=['get'])
-    def data(self, request, pk=None, format='json', *args, **kwargs):
-        return self.engine_call(request, 'invoke', format)
+    def data(self, request, pk=None, *args, **kwargs):
+        return self.engine_call(request, 'invoke')
 
 class DataSetViewSet(ResourceViewSet):
     queryset = DatasetDBDAO()
     serializer_class = DataSetSerializer
     lookup_field = 'guid'
-    dao_param_pk = 'guid'
+    dao_get_param = 'guid'
     data_types = ['dt']
 
 class VisualizationViewSet(ResourceViewSet):
     queryset = VisualizationDBDAO()
     serializer_class = VisualizationSerializer
     lookup_field = 'guid'
-    dao_param_pk = 'guid'
+    dao_get_param = 'guid'
     data_types = ['vz']

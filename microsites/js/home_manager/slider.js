@@ -248,8 +248,8 @@ var HomeChart = Backbone.Model.extend({
     },  
     executeDataStream : function(){
         var att     = this.attributes;
-        var lUrl    = '/datastreams/invoke';
-        var lData   = 'datastream_revision_id=' + att.dataStreamId;
+        var lUrl    = '/rest/datastreams/'+ att.dataStreamId + '/invoke.json';
+        var lData   = '';
         
         startWaitMessage(att.$Container.find('#id_chartDisplay'));
         

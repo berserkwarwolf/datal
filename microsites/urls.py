@@ -1,7 +1,13 @@
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
+from microsites.rest import RestDataStreamViewSet, RestVisualizationViewSet
+from rest_framework import routers
 import os
+
+router = routers.DefaultRouter()
+router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
+router.register(r'visualizations', RestVisualizationViewSet, base_name='visualizations')
 
 def jsi18n(request, packages = None, domain = None):
     if not domain:
@@ -57,6 +63,7 @@ urlpatterns = patterns('',
     (r'^js_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'js')}),
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
+    (r'^rest/', include(router.urls)), 
 
 )
 

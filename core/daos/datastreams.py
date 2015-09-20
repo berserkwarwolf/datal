@@ -105,6 +105,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         else:
             datastream_revision = DataStreamRevision.objects.select_related().get(
                 pk=F(fld_revision_to_get),
+                datastream__id=datastream_id,
                 category__categoryi18n__language=language,
                 datastreami18n__language=language
             )
@@ -253,7 +254,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             datastream_id = row[1]
             title = row[2]
             slug = slugify(title)
-            permalink = reverse('microsites.viewDataStream.views.invoke', kwargs={'id': datastream_id, 'slug': slug}, urlconf='microsites.urls')
+            permalink = reverse('datastreams-invoke', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
             datastreams.append({'id'          : row[0],
                                 'title'        : title,
                                 'description'  : row[3],

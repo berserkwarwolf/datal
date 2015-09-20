@@ -20,15 +20,15 @@ class DatastreamRequestForm(forms.Form):
     limit=forms.IntegerField(required=False)
     output=forms.CharField(max_length=100, required=False)
 
-    def clean(self):
-        cleaned_data = super(DatastreamRequestForm, self).clean()
+    #def clean(self):
+    #    cleaned_data = super(DatastreamRequestForm, self).clean()
 
         # TODO: define default values on settings.py
-        if not cleaned_data['page']:
-            cleaned_data['page'] = 0
-        if not cleaned_data['limit']:
-            cleaned_data['limit'] = 50
-        return cleaned_data
+    #    if not cleaned_data['page']:
+    #        cleaned_data['page'] = 0
+    #    if not cleaned_data['limit']:
+    #        cleaned_data['limit'] = 50
+    #    return cleaned_data
 
 
 class InvokeFormSet(BaseFormSet):

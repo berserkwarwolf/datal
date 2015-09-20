@@ -2,7 +2,14 @@
 
 from django.conf import settings
 from core.auth.auth import AuthManager
+
+from rest_framework import authentication
+from core.http import get_domain
+from core.models import AccountAnonymousUser
+
 import logging
+
+logger = logging.getLogger(__name__)
 
 class AccessManager(object):
     """
@@ -25,3 +32,16 @@ class AccessManager(object):
         request.auth_manager = AuthManager(language = request.session['django_language'])
         request.user = None
         return None
+
+
+class RestAuthentication(authentication.BaseAuthentication):
+    def authenticate(self, request):
+        account = request.account
+        return (
+            AccountAnonymousUser(account), {
+                'account': account,
+                'preferences': None,
+                'language': request.auth_manager.language,
+                'microsite_domain': get_domain(account.id),
+            }
+        )

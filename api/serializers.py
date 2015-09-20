@@ -4,7 +4,9 @@ from rest_framework.compat import OrderedDict
 
 class EngineSerializer(serializers.Serializer):
     def to_representation(self, obj):
-        return obj['result']
+        if 'result' in obj:
+            return obj['result']
+        return {}
 
 class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()

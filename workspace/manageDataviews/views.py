@@ -20,7 +20,7 @@ from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevisi
 from core.http import JSONHttpResponse
 from core.decorators import datal_cache_page
 from core.v8.factories import AbstractCommandFactory
-from core.helpers import DateTimeEncoder
+from core.utils import DateTimeEncoder
 
 
 

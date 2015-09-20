@@ -91,16 +91,11 @@ def action_embed(request, guid):
     width = request.REQUEST.get('width', False)
     height = request.REQUEST.get('height', False)
 
-<<<<<<< HEAD
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
     command_factory = AbstractCommandFactory().create() 
     json, type = command_factory.create("invoke", visualization_revision_parameters).run()
-=======
-    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
-    visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
-    json, type = invoke(visualization_revision_parameters)
->>>>>>> develop
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('chart_manager/embed.html', locals())
