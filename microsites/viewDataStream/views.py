@@ -35,9 +35,7 @@ def view(request, id, slug):
     else:
         base_uri = get_domain_with_protocol('microsites')
 
-    datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-
-    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_revision_id=datastreamrevision_id)
+    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
     impl_type_nice = set_dataset_impl_type_nice(datastream['impl_type']).replace('/',' ')
 
     """ #TODO this must be at middleware

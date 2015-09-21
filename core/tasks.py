@@ -89,9 +89,7 @@ def mint_process(mint_request):
     if not namespace:
         raise BigdataNamespaceNotDefined()
 
-    datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream.id)
-
-    query = datastream.get_query(datastreamrevision_id, request, is_turtle=0)
+    query = datastream.get_query(datastream.last_published_revision.id, request, is_turtle=0)
     contents, mimetype = engine.invoke(query)
 
     # read the template
@@ -114,11 +112,10 @@ def mint_process(mint_request):
             logger.error(e)
             raise MintTemplateURLError("Unexpected error reading template. %s" % str(e))
 
-
-        DataStreamRevision.objects.filter(pk = datastreamrevision_id).update(rdf_template = template)
+        DataStreamRevision.objects.filter(pk=datastream.last_published_revision.id).update(rdf_template=template)
 
     else: # try to read the template
-        dsrs = DataStreamRevision.objects.filter(pk = datastreamrevision_id).values("rdf_template")
+        dsrs = DataStreamRevision.objects.filter(pk=datastream.last_published_revision.id).values("rdf_template")
         template = dsrs[0]["rdf_template"]
         if not template:
             raise MintTemplateNotFoundError("We can't find any template for this datastream revision. %s" % str(dsrs[0]) )
