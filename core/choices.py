@@ -299,7 +299,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.home.footer.left', 'account.home.footer.left')
     ,('account.home.footer.right', 'account.home.footer.right')
     ,('account.home.noslider', 'account.home.noslider')
-    ,('account.purpose', 'account.purpose')
     ,('account.default.category', 'account.default.category')
     ,('account.pivottable', 'account.pivottable')
     ,('account.bucket.name', 'account.bucket.name')
