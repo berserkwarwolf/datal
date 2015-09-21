@@ -108,12 +108,14 @@ charts.models.Chart = Backbone.Model.extend({
             type: self.get('type')
         };
 
-        if(self.get('invertData') && self.get('invertData')!=''){
-            params['invertData'] = "checked";
+        console.log(self.get('invertData'));
+
+        if(self.get('invertData')===true){
+            params['invertData'] = true;
         }
 
-        if(self.get('invertedAxis') && self.get('invertedAxis')!=''){
-            params['invertedAxis'] = "checked";
+        if(self.get('invertedAxis')===true){
+            params['invertedAxis'] = true;
         }
 
         return $.getJSON('/visualizations/preview', params)
@@ -308,11 +310,11 @@ charts.models.Chart = Backbone.Model.extend({
             type: this.get('type'),
             lib: this.get('lib'),
             showLegend: this.get('showLegend'),
-            invertedAxis: this.get('invertedAxis'),
             chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
             invertData: this.get('invertData'),
+            invertedAxis: this.get('invertedAxis'),
 
             //data selection
             headerSelection: this.get('range_headers'),

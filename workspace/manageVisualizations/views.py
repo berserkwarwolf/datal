@@ -352,9 +352,15 @@ def preview(request):
                 'pData': form.cleaned_data.get('data'),
                 'pLabelSelection': form.cleaned_data.get('labels'),
                 'pHeaderSelection': form.cleaned_data.get('headers'),
-                'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
-                'pInvertData': form.cleaned_data.get('invertData')
             })
+
+            invertData = form.cleaned_data.get('invertData')
+            if invertData in ['true',True]:
+                query['pInvertData'] = 'checked'
+
+            invertedAxis = form.cleaned_data.get('invertedAxis')
+            if invertedAxis in ['true', True]:
+                query['pInvertedAxis'] = 'checked'
 
             page = form.cleaned_data.get('page')
             if page is not None:
