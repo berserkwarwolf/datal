@@ -47,15 +47,7 @@ def view(request, id, slug):
     """
     url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream['parameters']))
 
-    can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-    can_export = True
-    can_share = False
-
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
-
-    can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-    can_export = True
-    can_share = False
 
     #DataStreamDBDAO().hit(id, ChannelTypes.WEB)
     notes = datastream['notes']

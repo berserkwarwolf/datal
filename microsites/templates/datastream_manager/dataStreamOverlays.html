@@ -26,10 +26,7 @@
     {% include "embed_code/embedCode.html" %}
   {% endif %}
 
-
-{% if can_share %}
   {% privateDataStreamShareForm datastream.datastream_id auth_manager %}
-{% endif %}
 
 {% if false %}
   {% overlay id_pivotTables %}

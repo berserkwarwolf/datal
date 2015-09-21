@@ -43,10 +43,6 @@ def action_view(request, id, slug):
     except VisualizationRevision.DoesNotExist:
         raise Http404
     else:
-        can_download = True
-        can_export = True
-        can_share = False
-        
         VisualizationHitsDAO(visualization_revision['visualization']).add(ChannelTypes.WEB)
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])

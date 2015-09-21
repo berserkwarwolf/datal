@@ -40,17 +40,8 @@
               <a class="icon URL {{ impl_type_nice.split|join:'-' }}" id="id_gotosource" href="{{datastream.end_point}}" target="_blank" rel="nofollow" title="{{datastream.end_point}}">{{datastream.end_point}}</a>
 
           {% elif datastream.datastream_type == 'SELF PUBLISH' %}
-
-              {% if can_download %}
-
-                   <a rel="nofollow" href="{% url "datastream_manager.download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="icon FILE {{ impl_type_nice.split|join:'-' }}" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</a>
-
-              {% else %}
-
-                  <span class="icon FILE {{ impl_type_nice.split|join:'-' }}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</span>
-
-              {% endif %}
-
+              <a rel="nofollow" href="{% url "datastream_manager.download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="icon FILE {{ impl_type_nice.split|join:'-' }}" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</a>
+              <!-- <span class="icon FILE {{ impl_type_nice.split|join:'-' }}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ impl_type_nice.split|join:"/" }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</span> -->
           {% elif datastream.datastream_type == 'WEBSERVICE' %}
 
               <span class="icon WS {{ impl_type_nice.split|join:'-' }}">{% trans "APP-WEBSERVICE-TEXT" %}</span>
