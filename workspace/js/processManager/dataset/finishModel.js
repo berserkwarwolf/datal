@@ -12,8 +12,9 @@ var FinishModel = StepModel.extend({
 	},
 
     initialize: function(){
-        // this.set('notes_maxlength', $('#notes_reference').data('max_length'));
-        },
+        
+    },
+            
 	validation: {
 		title: [
 			{
@@ -39,17 +40,11 @@ var FinishModel = StepModel.extend({
 				}
 			}
 		],
-		notes: {
-			maxLength: 500,
-			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 500 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
-		}
 	},
 
     // notes use NicEditor, so can't be validated as always (?)
     validate_notes: function(){
         max_length = $("#notes_reference").data('max_length');
-        this.validation.notes.maxLength = max_length;
-        this.validation.notes.msg = gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 140 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2');
         return (this.get('data').notes.length < max_length)
     },
 
