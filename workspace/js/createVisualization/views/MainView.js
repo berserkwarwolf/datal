@@ -10,44 +10,14 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        //create
-        var initialOptions = {
-            datastream_revision_id: options.datastream_revision_id,
-            meta_tags:  options.datastream_tags,
-            meta_sources: options.datastream_sources,
-            meta_category: options.datastream_category
+        this.model = new charts.models.Chart();
+
+        this.model.parseResponse(options.chart_model);
+
+        if (options.chart_model.revision_id) {
+            this.isEdit = true;
+            this.model.fetchPreviewData();
         };
-
-        //edit
-        if(options.revision_id){
-            initialOptions = _.extend(initialOptions,{
-                select_data:true,
-                isEdit:true,
-                revision_id: options.revision_id,
-
-                lib: options.lib,
-                type: options.type,
-                meta_notes: _.unescape(options.notes),
-                meta_title: options.title,
-                meta_description: options.description,
-
-                //config
-                showLegend: true,
-                invertData: options.invertData,
-                invertedAxis: options.invertedAxis,
-                chartTemplate: options.chartTemplate,
-                nullValueAction: options.nullValueAction,
-                nullValuePreset: options.nullValuePreset,
-
-                //data
-                range_data: options.data,
-                range_headers: options.headerSelection,
-                range_labels: options.labelSelection
-
-            });
-        }
-
-        this.model = new charts.models.Chart(initialOptions);
 
         //Buttons views
         this.buttonsView = new ButtonsView({
@@ -219,7 +189,7 @@ var MainView = Backbone.View.extend({
         this.$el.find('.process_manager_step').hide();
 
         //edit
-        if(this.model.get('isEdit')){
+        if(this.isEdit){
             this.model.set('isMap', false);
             this.currentFlow = 'charts';
             this.index++;

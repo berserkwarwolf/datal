@@ -61,10 +61,10 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
         visualization_revision = VisualizationDBDAO().get(
             preferences['account_language'],
-            visualization_revision_id=visualizationrevision_id
+            visualization_id=id,
+            published=True
         )
 
         # verify if this account is the owner of this viz

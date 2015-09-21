@@ -6,6 +6,7 @@ from core import helpers
 
 from core.search import *
 
+
 # CategoryManager
 def get_for_browse(self, category_slug, language):
     category_query = super(managers.CategoryManager, self).values('id', 'categoryi18n__name')
@@ -17,7 +18,7 @@ managers.CategoryManager.get_for_browse = get_for_browse
 class FinderManager(finder.FinderManager):
     def __init__(self, finder_class=searchify.IndexTankFinder, failback_finder_class=searchify.IndexTankFinder):
         self.finder_class = finder_class
-	self.finder = elastic.ElasticsearchFinder
+        self.finder = elastic.ElasticsearchFinder
         self.failback_finder_class = failback_finder_class
         self.failback_finder_class = elastic.ElasticsearchFinder
         finder.FinderManager.__init__(self)
@@ -58,30 +59,31 @@ def visualization_query_hot_n(self, lang, hot = None):
     cursor = connection.cursor()
     cursor.execute(sql, (lang,))
 
-    rows    = cursor.fetchall().__iter__()
-    row     = helpers.next(rows, None)
+    rows = cursor.fetchall().__iter__()
+    row = helpers.next(rows, None)
 
     visualizations = []
-    while row != None:
+    while row is not None:
         datastream_id = row[2]
         visualization_id = row[3]
         title = row[5]
         permalink = reverse('chart_manager.action_view', kwargs={'id': visualization_id, 'slug': slugify(title)})
-        visualizations.append({'id'           : row[0],
-                               'sov_id'       : row[1],
-                               'impl_details' : row[4],
-                               'title'        : title,
-                               'description'  : row[6],
-                               'category'     : row[7],
-                               'permalink'    : permalink,
-                               'account_id'   : row[8]
+        visualizations.append({'id': row[0],
+                               'sov_id': row[1],
+                               'impl_details': row[4],
+                               'title': title,
+                               'description': row[6],
+                               'category': row[7],
+                               'permalink': permalink,
+                               'account_id': row[8]
                             })
 
-        while row != None and datastream_id == row[2] and visualization_id == row[3]:
+        while row is not None and datastream_id == row[2] and visualization_id == row[3]:
             row = helpers.next(rows, None)
 
     return visualizations
 managers.VisualizationManager.query_hot_n = visualization_query_hot_n
+
 
 def datastream_query_hot_n(self, limit, lang, hot = None):
 
@@ -119,64 +121,15 @@ def datastream_query_hot_n(self, limit, lang, hot = None):
         title = row[2]
         slug = slugify(title)
         permalink = reverse('exportDataStream.action_view', kwargs={'id': datastream_id, 'slug': slug})
-        datastreams.append({'id'          : row[0],
-                            'title'        : title,
-                            'description'  : row[3],
+        datastreams.append({'id': row[0],
+                            'title': title,
+                            'description': row[3],
                             'category_name': row[4],
-                            'user_nick'    : row[5],
-                            'user_email'   : row[6],
-                            'permalink'    : permalink,
-                            'account_id'   : row[7]
+                            'user_nick': row[5],
+                            'user_email': row[6],
+                            'permalink': permalink,
+                            'account_id': row[7]
                             })
         row = cursor.fetchone()
     return datastreams
 managers.DataStreamManager.query_hot_n = datastream_query_hot_n
-
-
-def dashboard_query_hot_n(self, lang, hot = None):
-
-    sql = """SELECT `ao_dashboard_revisions`.`id` as 'dashboard_revision_id',
-               `ao_dashboard_revisions`.`dashboard_id` as 'dashboard_id',
-               `ao_dashboard_i18n`.`title`,
-               `ao_dashboard_i18n`.`description`,
-               `ao_categories_i18n`.`name` AS `category_name`,
-               `ao_users`.`nick` AS `user_nick`,
-               `ao_users`.`email` AS `user_email`,
-               `ao_users`.`account_id`
-        FROM `ao_dashboard_revisions`
-        INNER JOIN `ao_dashboard_i18n` ON (`ao_dashboard_revisions`.`id` = `ao_dashboard_i18n`.`dashboard_revision_id`)
-        INNER JOIN `ao_categories` ON (`ao_dashboard_revisions`.`category_id` = `ao_categories`.`id`)
-        INNER JOIN `ao_categories_i18n` ON (`ao_categories`.`id` = `ao_categories_i18n`.`category_id`)
-        INNER JOIN `ao_dashboards` ON (`ao_dashboard_revisions`.`dashboard_id` = `ao_dashboards`.`id`)
-        INNER JOIN `ao_users` ON (`ao_dashboards`.`user_id` = `ao_users`.`id`)
-        WHERE `ao_dashboard_revisions`.`id` IN (
-            SELECT MAX(`ao_dashboard_revisions`.`id`)
-            FROM `ao_dashboard_revisions`
-            WHERE `ao_dashboard_revisions`.`dashboard_id` IN (""" + hot + """)
-                  AND `ao_dashboard_revisions`.`status` = 3
-            GROUP BY `dashboard_id`
-        ) AND `ao_categories_i18n`.`language` = %s"""
-
-    cursor = connection.cursor()
-    cursor.execute(sql, (lang))
-    row = cursor.fetchone()
-    dashboards = []
-    while row:
-        dashboard_id = row[1]
-        title = row[2]
-        slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view', kwargs={'id': dashboard_id, 'slug': slug})
-        dashboards.append({'id'          : row[0],
-                            'title'        : title,
-                            'description'  : row[3],
-                            'category_name': row[4],
-                            'user_nick'    : row[5],
-                            'user_email'   : row[6],
-                            'permalink'    : permalink,
-                            'account_id'   : row[7]
-                            })
-        row = cursor.fetchone()
-
-    return dashboards
-
-managers.DashboardManager.query_hot_n = dashboard_query_hot_n

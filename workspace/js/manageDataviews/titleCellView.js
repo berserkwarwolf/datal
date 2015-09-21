@@ -23,7 +23,6 @@ var TitleCellView = Backbone.View.extend({
         var deleteItemView = new DeleteItemView({
             itemCollection: self.options.itemCollection,
             models: this.deleteListResources,
-            //type: "datastreams",
             type: "visualizations",
             parentView: this.parentView
         });

@@ -29,18 +29,18 @@
 							</thead>
 							<tbody>
 								{% for datastream_revision in dataset.datastreams %}
-                                    {# Muestro solamente si es la ultima revision #}
-								    {% if datastream_revision.id == datastream_revision.datastream__last_revision %}
-                                        <tr>
-                                            <td>
-                                                <h3><a href="/dataviews/{{ datastream_revision.id }}" title="{{ datastream_revision.datastreami18n__title }}">{{ datastream_revision.datastreami18n__title }}</a></h3>
-                                                <span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ datastream_revision.created_at|date:'F d, Y, h:i A'|capfirst }}</span>
-                                            </td>
-                                            <td><i class="icon-resources icon-dataview">{% trans "APP-DATASTREAM-TEXT" %}</i></td>
-                                            <td><i class="user-thumbnail"></i>{{ datastream_revision.datastream__user__nick }}</td>
-                                            <td>{{ datastream_revision.status|status_str }}</td>
-                                        </tr>
-                                    {% endif %}
+									{# Muestro solamente si es la ultima revision #}
+									{% if datastream_revision.id == datastream_revision.datastream__last_revision %}
+										<tr>
+												<td>
+														<h3><a href="/dataviews/{{ datastream_revision.id }}" title="{{ datastream_revision.datastreami18n__title }}">{{ datastream_revision.datastreami18n__title }}</a></h3>
+														<span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ datastream_revision.created_at|date:'F d, Y, h:i A'|capfirst }}</span>
+												</td>
+												<td><i class="icon-resources icon-dataview">{% trans "APP-DATASTREAM-TEXT" %}</i></td>
+												<td><i class="user-thumbnail"></i>{{ datastream_revision.datastream__user__nick }}</td>
+												<td>{{ datastream_revision.status|status_str }}</td>
+										</tr>
+									{% endif %}
 								{% endfor %}
 							</tbody>
 						</table>
