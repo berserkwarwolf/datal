@@ -52,7 +52,7 @@
 		<ul class="tooltip border-box" style="display:none;" id="id_tooltipExport">
 			{% if can_export %}
 			<li><a id="id_exportToCSVButton" rel="id_tooltipExport" 
-			    href="{% url "datastream_manager.csv" datastream.datastream_id "lala" %}{%if url_query%}?{{url_query}}{%endif%}">{% trans 'VIEWDS-EXPORT-CSV' %}</a></li>
+			    href="{% url "datastream_manager.csv" datastream.datastream_id %}{%if url_query%}?{{url_query}}{%endif%}">{% trans 'VIEWDS-EXPORT-CSV' %}</a></li>
 			<li><a id="id_exportToXLSButton" rel="id_tooltipExport" 
 			    href="{% url "datastream_manager.xls" datastream.datastream_id "lala" %}{%if url_query%}?{{url_query}}{%endif%}" 
 			    title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS">{% trans 'VIEWDS-EXPORT-XLS' %}</a></li>
