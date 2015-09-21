@@ -550,7 +550,6 @@ class DatasetRevision(RevisionModel):
     spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
-    objects = managers.DatasetRevisionManager()
 
     class Meta:
         db_table = 'ao_dataset_revisions'

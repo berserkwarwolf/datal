@@ -1,21 +1,17 @@
 import urllib
 
 from django.core.urlresolvers import reverse
-from django.db.models import Count
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
 from django.shortcuts import get_object_or_404, HttpResponsePermanentRedirect
-from django.utils.translation import ugettext_lazy
 from core.lib.datastore import *
-from core.cache import Cache
 from core.exportDataStream import forms
 from core.daos.datastreams import DataStreamDBDAO
 from core.engine import invoke as engine_invoke
 from core.helpers import jsonToGrid, RequestProcessor
-from core.models import DataStreamRevision, DataStreamHits, DataStream
+from core.models import DataStream
 from core.shortcuts import render_to_response
-from datetime import date, timedelta
 from core.decorators import *
 
 
@@ -85,14 +81,13 @@ def html(request, id, slug):
 def export_to(datastream_id, request, output):
 
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream_id)
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_id=datastream_id, published=True)
     except:
         raise Http404
     else:
         uri = request.build_absolute_uri()
         
-        query = {'pId': datastreamrevision_id, 'pOutput': output.upper()}
+        query = {'pId': datastream['datastream_revision_id'], 'pOutput': output.upper()}
 
         arguments = RequestProcessor(request).get_arguments(datastream["parameters"])
         if arguments:
