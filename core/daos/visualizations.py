@@ -472,12 +472,7 @@ class VisualizationSearchDAO():
         text = [visualizationi18n.title, visualizationi18n.description, self.visualization_revision.user.nick, self.visualization_revision.visualization.guid]
         text.extend(tags) # visualization has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
-        try:
-            p = Preference.objects.get(account_id=self.visualization_revision.visualization.user.account_id, key='account.purpose')
-            is_private = p.value == 'private'
-        except Preference.DoesNotExist, e:
-            is_private = False
-
+        
         document = {
                 'docid' : self._get_id(),
                 'fields' :
@@ -494,7 +489,6 @@ class VisualizationSearchDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
                      'hits': 0,
-                     'is_private': is_private and 1 or 0,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
