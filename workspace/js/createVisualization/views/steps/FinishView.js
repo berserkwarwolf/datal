@@ -17,7 +17,7 @@ var FinishView = StepViewSPA.extend({
 
 	bindingHandlers: {
 		listTags: function( $element, value ) {
-			if(value.length > 0){
+			if(value && value.length > 0){
 			
 				$element.parent().show();
 				
@@ -32,7 +32,7 @@ var FinishView = StepViewSPA.extend({
 			};
 		},
 		listSources: function( $element, value ) {
-			if(value.length > 0){
+			if(value && value.length > 0){
 			
 				$element.parent().show();
 
@@ -66,16 +66,8 @@ var FinishView = StepViewSPA.extend({
 
 	onFinishButtonClicked: function(){		
 		var data = this.model.getFormData();
-		//create
-		var url  = '/visualizations/create?datastream_revision_id=' + this.model.get('datastream_revision_id');
-		
-		//edit
-		if(this.model.get('isEdit')){
-			url = '/visualizations/edit/'+this.model.get('revision_id');
-		}
 
 		$.ajax({
-			url: url,
 			type:'POST',
 			data: data,
 			dataType: 'json'

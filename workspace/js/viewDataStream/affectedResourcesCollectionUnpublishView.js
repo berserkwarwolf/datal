@@ -38,7 +38,7 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
-                    dataset_id: model.get('datastream__id'),
+                    datastream_id: model.get('datastream_id'),
                     type: self.options.type
                 }),
                 success: function(model, response) {

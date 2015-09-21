@@ -361,11 +361,15 @@ def change_status(request, dataset_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
+            if( killemall == True ):
+                description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':

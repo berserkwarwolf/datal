@@ -47,6 +47,7 @@ var ChartView = StepViewSPA.extend({
 			this.$el.find('input[type=checkbox]').each(function(){
 				var obj = $(this);
 				var name = obj.attr('name');
+				console.log(name,that.model.get(name));
 				if(that.model.get(name)){
 					obj.prop("checked","checked")
 				}

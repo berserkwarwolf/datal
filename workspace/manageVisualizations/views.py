@@ -23,6 +23,7 @@ from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
+from core.exceptions import VisualizationNotFoundException
 
 logger = logging.getLogger(__name__)
 
@@ -118,8 +119,7 @@ def remove(request, visualization_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-
-        if lifecycle.dataset.last_revision_id:
+        if lifecycle.visualization.last_revision_id:
             last_revision_id = lifecycle.visualization.last_revision_id
         else:
             last_revision_id = -1
@@ -275,10 +275,14 @@ def related_resources(request):
 @require_GET
 def action_view(request, revision_id):
 
-    visualization_revision = VisualizationDBDAO().get(
-        request.auth_manager.language,
-        visualization_revision_id=revision_id
-    )
+    try:
+        visualization_revision = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+    except VisualizationRevision.DoesNotExist:
+        logger.info("VisualizationRevision ID %s does not exist" % revision_id)
+        raise VisualizationNotFoundException()
 
     return render_to_response('viewVisualization/index.html', locals())
 
@@ -312,11 +316,25 @@ def edit(request, revision_id=None):
             logger.info(form._errors)
             raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        visualization_rev = VisualizationDBDAO().get(
-            request.auth_manager.language,
-            visualization_revision_id=revision_id
+        #visualization_rev = VisualizationDBDAO().get(
+        #    request.auth_manager.language,
+        #    visualization_revision_id=revision_id
+        #)
+        #response = form.save(request, visualization_rev=visualization_rev)
+        visualization = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=revision_id)
+        visualization.edit(
+            language=request.auth_manager.language,
+            changed_fields=form.changed_data,
+            **form.cleaned_data
         )
-        response = form.save(request, visualization_rev=visualization_rev)
+
+        response = dict(
+            status='ok',
+            revision_id= visualization.visualization_revision.id,
+            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
+        )
+
+
 
         return JSONHttpResponse(json.dumps(response))
 

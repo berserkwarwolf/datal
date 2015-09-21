@@ -8,6 +8,7 @@ var DataTableSelectionModel = Backbone.Model.extend({
             return 'Invalid range';
         }
 	},
+
     getRange: function () {
         var excelRange = this.get('excelRange');
         if (_.isUndefined(excelRange)) {
@@ -16,6 +17,7 @@ var DataTableSelectionModel = Backbone.Model.extend({
             return DataTableUtils.excelToRange(this.get('excelRange'));
         }
     },
+
     getPreviousRange: function () {
         return DataTableUtils.excelToRange(this.previous('excelRange'));
     }

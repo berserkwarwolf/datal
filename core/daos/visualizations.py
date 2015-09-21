@@ -83,7 +83,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization_revision = VisualizationRevision.objects.select_related().get(
                 pk=F(fld_revision_to_get),
                 user__language=language,
-                visualizationi18n__language=language
+                visualizationi18n__language=language,
+                visualization__id=visualization_id
             )
 
         tags = visualization_revision.datastream_revision.tagdatastream_set.all().values(

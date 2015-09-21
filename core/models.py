@@ -550,7 +550,6 @@ class DatasetRevision(RevisionModel):
     spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
-    objects = managers.DatasetRevisionManager()
 
     class Meta:
         db_table = 'ao_dataset_revisions'
@@ -1166,4 +1165,13 @@ def unindex_datastream_revision(sender, instance, **kwargs):
     if instance.status == choices.StatusChoices.PUBLISHED:
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
+        search_dao.remove()
+
+@receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
+def unindex_visualization_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    logger.info("VZ ID %s STATUS %s" % (instance.id, instance.status))
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.visualizations import VisualizationSearchDAOFactory
+        search_dao = VisualizationSearchDAOFactory().create(instance)
         search_dao.remove()
