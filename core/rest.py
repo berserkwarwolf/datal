@@ -15,7 +15,7 @@ class RestDataSetViewSet(ResourceViewSet):
     engine_pk = 'dataset_revision_id'
 
     @detail_route(methods=['get'])
-    def load(self, request, pk=None, *args, **kwargs):
+    def tables(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'load', EngineSerializer)
 
 class RestDataStreamViewSet(ResourceViewSet):
@@ -45,7 +45,7 @@ class RestVisualizationViewSet(ResourceViewSet):
     engine_pk = 'visualization_revision_id'    
 
     @detail_route(methods=['get'])
-    def chart(self, request, pk=None, *args, **kwargs):
+    def invoke(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'chart',EngineSerializer)
 
     @detail_route(methods=['get'])

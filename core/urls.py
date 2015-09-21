@@ -1,13 +1,6 @@
 from django.conf.urls import *
 from django.conf import settings
-from core.rest import RestDataStreamViewSet, RestVisualizationViewSet, RestDataSetViewSet
-from rest_framework import routers
 import os
-
-router = routers.DefaultRouter()
-router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
-router.register(r'visualizations', RestVisualizationViewSet, base_name='visualizations')
-router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
 
 def jsi18n(request, packages = None, domain = None):
     if not domain:
