@@ -91,6 +91,46 @@ charts.models.Chart = Backbone.Model.extend({
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
 
+    parseResponse: function (res) {
+        var data = {
+            datastream_revision_id: res.datastream_revision_id,
+            meta_tags:  res.datastream_tags,
+            meta_sources: res.datastream_sources,
+            meta_category: res.datastream_category
+        };
+
+        _.extend(data, _.pick(res, [
+            'revision_id',
+            'lib',
+            'type',
+            'invertData',
+            'invertedAxis',
+            'chartTemplate',
+            'nullValueAction',
+            'nullValuePreset'
+            ]));
+
+        //edit
+        if(res.revision_id){
+            data = _.extend(data,{
+                select_data:true,
+                meta_notes: _.unescape(res.notes),
+                meta_title: res.title,
+                meta_description: res.description,
+
+                //config
+                showLegend: true,
+
+                //data
+                range_data: this.parseColumnFormat(res.data),
+                range_headers: this.parseColumnFormat(res.headerSelection),
+                range_labels: this.parseColumnFormat(res.labelSelection)
+
+            });
+        }
+        this.set(data);
+    },
+
     fetchPreviewData: function () {
         var self = this;
 
@@ -100,9 +140,9 @@ charts.models.Chart = Backbone.Model.extend({
 
         var params = {
             datastream_revision_id: self.get('datastream_revision_id'),
-            data: this.dataSelection,
-            headers: this.headerSelection,
-            labels: this.labelSelection,
+            data: this.serializeServerExcelRange(this.get('range_data')),
+            headers: this.serializeServerExcelRange(this.get('range_headers')),
+            labels: this.serializeServerExcelRange(this.get('range_labels')),
             nullValueAction: self.get('nullValueAction'),
             nullValuePreset:  self.get('nullValuePreset'),
             type: self.get('type')
@@ -226,15 +266,7 @@ charts.models.Chart = Backbone.Model.extend({
         return metadata;
     },
 
-    validate: function(attrs, options) {
-
-        this.headerSelection = this.validateSelection(attrs.range_headers);
-        this.labelSelection = this.validateSelection(attrs.range_labels);
-        this.dataSelection = this.validateSelection(attrs.range_data);
-
-    },
-
-    validateSelection: function(selection){
+    serializeServerExcelRange: function(selection){
 
         var range = selection.split(":");
         var left = range[0];
@@ -246,7 +278,7 @@ charts.models.Chart = Backbone.Model.extend({
 
             // Columna completa
             if(index == -1){
-                selection = "Column:" + left;
+                selection = 'Column:' + left;
             }
         }
         else{
@@ -254,6 +286,15 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         return selection;
+    },
+
+    parseColumnFormat: function (serverExcelRange) {
+        var col;
+        if (serverExcelRange.indexOf('Column:') !== -1) {
+            col = serverExcelRange.replace('Column:', '');
+            serverExcelRange = [col, ':', col].join('');
+        }
+        return serverExcelRange;
     },
 
     valid: function(){
@@ -315,9 +356,9 @@ charts.models.Chart = Backbone.Model.extend({
             invertData: this.get('invertData'),
 
             //data selection
-            headerSelection: this.get('range_headers'),
-            data: this.get('range_data'),
-            labelSelection: this.get('range_labels')
+            headerSelection: this.serializeServerExcelRange(this.get('range_headers')),
+            data: this.serializeServerExcelRange(this.get('range_data')),
+            labelSelection: this.serializeServerExcelRange(this.get('range_labels'))
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
