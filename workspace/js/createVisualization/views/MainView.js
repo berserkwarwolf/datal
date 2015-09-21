@@ -15,7 +15,7 @@ var MainView = Backbone.View.extend({
         this.model.parseResponse(options.chart_model);
 
         if (options.chart_model.revision_id) {
-            this.isEdit = true;
+            this.model.set('isEdit', true);
             this.model.fetchPreviewData();
         };
 
@@ -189,7 +189,7 @@ var MainView = Backbone.View.extend({
         this.$el.find('.process_manager_step').hide();
 
         //edit
-        if(this.isEdit){
+        if(this.model.get('isEdit')){
             this.model.set('isMap', false);
             this.currentFlow = 'charts';
             this.index++;

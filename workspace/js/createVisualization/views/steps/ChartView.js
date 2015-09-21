@@ -47,7 +47,8 @@ var ChartView = StepViewSPA.extend({
 			this.$el.find('input[type=checkbox]').each(function(){
 				var obj = $(this);
 				var name = obj.attr('name');
-				if(that.model.get(name)=="checked"){
+				console.log(name,that.model.get(name));
+				if(that.model.get(name)){
 					obj.prop("checked","checked")
 				}
 			});
@@ -115,7 +116,7 @@ var ChartView = StepViewSPA.extend({
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
-		this.model.set(input.attr('name'), input.prop('checked'));
+		this.model.set(input.attr('name'), input.prop('checked') );
 		this.fetchPreviewData();
 	},
 
@@ -179,12 +180,10 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	updatePreviewClass: function(type){
-
 		this.clearClassesChartBg();
 		if(!this.ChartViewClass){
 			this.chartContent.addClass(this.bgClasses[type]);
 		}
-
 	},
 
 	clearClassesChartBg: function(){
