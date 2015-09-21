@@ -1170,6 +1170,7 @@ def unindex_datastream_revision(sender, instance, **kwargs):
 @receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
 def unindex_visualization_revision(sender, instance, **kwargs):
     # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    logger.info("VZ ID %s STATUS %s" % (instance.id, instance.status))
     if instance.status == choices.StatusChoices.PUBLISHED:
         from core.daos.visualizations import VisualizationSearchDAOFactory
         search_dao = VisualizationSearchDAOFactory().create(instance)
