@@ -60,6 +60,14 @@ TEMPLATE_CONTEXT_PROCESSORS += (
     'django.contrib.messages.context_processors.messages',
 )
 
+REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
+    'api.auth.RestAuthentication',
+)
+
+REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
+    'rest_framework.permissions.IsAuthenticated',
+)
+
 try:
     from workspace.local_settings import *
 except ImportError:

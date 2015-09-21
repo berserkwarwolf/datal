@@ -13,6 +13,20 @@ logger = logging.getLogger(__name__)
 
 
 
+class RestAuthentication(authentication.BaseAuthentication):
+    def authenticate(self, request):
+        if hasattr(request, 'account') and request.account:
+            account = request.account
+
+            return (
+                AccountAnonymousUser(account), {
+                    'account': account,
+                    'preferences': None,
+                    'language': request.auth_manager.language,
+                    'microsite_domain': get_domain(account.id),
+                }
+            )
+
 class DatalApiAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
         user_id = None
