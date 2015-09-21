@@ -316,25 +316,11 @@ def edit(request, revision_id=None):
             logger.info(form._errors)
             raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        #visualization_rev = VisualizationDBDAO().get(
-        #    request.auth_manager.language,
-        #    visualization_revision_id=revision_id
-        #)
-        #response = form.save(request, visualization_rev=visualization_rev)
-        visualization = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=revision_id)
-        visualization.edit(
-            language=request.auth_manager.language,
-            changed_fields=form.changed_data,
-            **form.cleaned_data
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
         )
-
-        response = dict(
-            status='ok',
-            visualization_revision_id= visualization.visualization_revision.id,
-            messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
-        )
-
-
+        response = form.save(request, visualization_rev=visualization_rev)
 
         return JSONHttpResponse(json.dumps(response))
 
