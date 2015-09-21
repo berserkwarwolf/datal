@@ -28,11 +28,11 @@ class RestDataStreamViewSet(ResourceViewSet):
     engine_pk = 'datastream_revision_id'
 
     @detail_route(methods=['get'])
-    def invoke(self, request, pk=None, *args, **kwargs):
+    def data(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'invoke', EngineSerializer)
 
     @detail_route(methods=['get'])
-    def preview(self, request, pk=None, *args, **kwargs):
+    def sample(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'preview', EngineSerializer)
 
 class RestVisualizationViewSet(ResourceViewSet):
@@ -45,9 +45,9 @@ class RestVisualizationViewSet(ResourceViewSet):
     engine_pk = 'visualization_revision_id'    
 
     @detail_route(methods=['get'])
-    def invoke(self, request, pk=None, *args, **kwargs):
+    def data(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'chart',EngineSerializer)
 
     @detail_route(methods=['get'])
-    def preview(self, request, pk=None, *args, **kwargs):
+    def sample(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'preview_chart', EngineSerializer)
