@@ -23,6 +23,7 @@ from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
+from core.exceptions import VisualizationNotFoundException
 
 logger = logging.getLogger(__name__)
 
@@ -118,8 +119,7 @@ def remove(request, visualization_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-
-        if lifecycle.dataset.last_revision_id:
+        if lifecycle.visualization.last_revision_id:
             last_revision_id = lifecycle.visualization.last_revision_id
         else:
             last_revision_id = -1
@@ -275,10 +275,14 @@ def related_resources(request):
 @require_GET
 def action_view(request, revision_id):
 
-    visualization_revision = VisualizationDBDAO().get(
-        request.auth_manager.language,
-        visualization_revision_id=revision_id
-    )
+    try:
+        visualization_revision = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+    except VisualizationRevision.DoesNotExist:
+        logger.info("VisualizationRevision ID %s does not exist" % revision_id)
+        raise VisualizationNotFoundException()
 
     return render_to_response('viewVisualization/index.html', locals())
 
@@ -352,9 +356,15 @@ def preview(request):
                 'pData': form.cleaned_data.get('data'),
                 'pLabelSelection': form.cleaned_data.get('labels'),
                 'pHeaderSelection': form.cleaned_data.get('headers'),
-                'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
-                'pInvertData': form.cleaned_data.get('invertData')
             })
+
+            invertData = form.cleaned_data.get('invertData')
+            if invertData in ['true',True]:
+                query['pInvertData'] = 'checked'
+
+            invertedAxis = form.cleaned_data.get('invertedAxis')
+            if invertedAxis in ['true', True]:
+                query['pInvertedAxis'] = 'checked'
 
             page = form.cleaned_data.get('page')
             if page is not None:

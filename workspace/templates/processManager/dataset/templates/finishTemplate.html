@@ -54,7 +54,7 @@
 	<hr class="separator">
 	
 	{# notes #}
-	<div class="row clearfix">
+	<div class="row clearfix" id='notes_reference' data-ver=4 data-max_length='{{form.notes.field.max_length}}'>
 		{{ form.notes.label_tag }}
 		<div class="textarea clearfix FL">
 			{{ form.notes }}

@@ -66,7 +66,8 @@ var FinishView = StepView.extend({
 	},
 
 	onSaveButtonClicked: function(){	
-
+	
+            
 		if(this.model.isValid(true)){
 
 			// Set sources and tags
@@ -75,6 +76,11 @@ var FinishView = StepView.extend({
 				
 			// Set model data attribute
 			this.model.setData();	
+			if (!this.model.validate_notes()){
+			    this.setIndividualError(null, 'notes', this.model.validation.notes.msg);
+			    return false;
+            }
+        
 
 			// Get Output and Data
 			var output = this.model.get('output'),
