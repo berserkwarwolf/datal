@@ -13,7 +13,7 @@ a:hover{color:$link-hover-color;}
 .button{@include transition(all, .1s, ease-in-out);
 
   /* Active */
-  &.active{cursor:default;@include disable-transition(none !important);}
+  &.active{@include disable-transition(none !important);}
 
   /* Primary button */
   &.primary{background:$button-primary-color;border-color:transparent;color:$button-primary-text-color;}
