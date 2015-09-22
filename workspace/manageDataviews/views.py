@@ -146,8 +146,8 @@ def remove(request, datastream_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.datastream.last_revision_id
+        if lifecycle.datastream.last_revision_id:
+            last_revision_id = lifecycle.datastream.last_revision.id
         else:
             last_revision_id = -1
 
