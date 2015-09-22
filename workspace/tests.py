@@ -52,6 +52,9 @@ class DATALSeleniumTests(LiveServerTestCase):
         self.driver.find_element_by_id('id_submitButton').click()
 
     def test_login(self):
+        """
+        [Workspace] Test del inicio de sesion
+        """
         self.login_as_admin()
         self.assertEqual(self.driver.current_url, u'http://workspace.dev/welcome/')
 
