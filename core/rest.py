@@ -23,7 +23,7 @@ class RestDataStreamViewSet(ResourceViewSet):
     serializer_class = DataStreamSerializer
     lookup_field = 'id'
     data_types = ['ds']
-    dao_get_param = 'datastream_id'
+    dao_get_param = 'datastream_revision_id'
     dao_pk = 'datastream_revision_id'
     engine_pk = 'datastream_revision_id'
 
