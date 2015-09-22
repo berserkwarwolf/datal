@@ -250,6 +250,7 @@ class WebserviceForm(DatasetForm):
     token = forms.CharField(
         required=False,
         label=ugettext_lazy('WORKSPACE-TOKEN-TEXT'),
+        max_length=256,
         widget=forms.TextInput(attrs={
             'data-bind':'value:token,events:[\'keyup\']'
         })
@@ -259,6 +260,7 @@ class WebserviceForm(DatasetForm):
     algorithm = forms.CharField(
         required=False,
         label=ugettext_lazy('WORKSPACE-ALGORITHM-TEXT'),
+        max_length=256,
         widget=forms.TextInput(attrs={
             'data-bind':'value:algorithm,events:[\'keyup\']'
         })
