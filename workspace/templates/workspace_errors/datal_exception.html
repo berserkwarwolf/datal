@@ -19,7 +19,7 @@
             {{exception.description}}
             <ul>
             {% for action in exception.get_actions %}
-                <li>{{action.description}}. Hacer click <a href="{{action.url}}">aquí</a></li>
+                <li><a href="{{action.url}}">{{action.description}}</a></li>
             {% endfor %}
             </ul>
 		{% endblock %}
