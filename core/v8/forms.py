@@ -108,3 +108,5 @@ class InvokeFormSet(BaseFormSet):
             return "ds"
         elif doc_type in ["visualization_revision","visualization"]: 
             return "vz"
+        elif doc_type in ["dataset_revision","dataset"]: 
+            return "ds"
