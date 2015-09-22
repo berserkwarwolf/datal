@@ -65,6 +65,14 @@ var CollectWebserviceModel = StepModel.extend({
 			if(value === 'other' && $.trim(computedState.frequency_other) === '' ) {
 				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
 			}
+		},
+		signature: {
+			maxLength: 256,
+			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 256 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+		},
+		token: {
+			maxLength: 256,
+			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 256 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
 		}
 	},
 
