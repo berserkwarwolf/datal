@@ -81,12 +81,12 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
             # TODO: correct handling
             raise Exception("Wrong arguments")        
 
-        ivk = self.command_factory.create(engine_method, form.cleaned_data).run()
-        if not ivk:
+        result = self.command_factory.create(engine_method, form.cleaned_data).run()
+        if not result:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
         
-        resource['result'] = json.loads(ivk[0]) if ivk[0] else {}
+        resource['result'] = json.loads(result[0]) if result[0] else {}
         if serializer_class:
             serializer = serializer_class(resource)
         else:

@@ -11,11 +11,11 @@ import memcache
 import urllib
 import logging
 
-logger = logging.getLogger(__name__)
 
 
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
+    logger = logging.getLogger(__name__)
     
     def __init__(self, query):
 
@@ -37,19 +37,22 @@ class EngineCommand(object):
         try:
             params = urllib.urlencode(query)
 
+            self.logger.info("DEBUG: url(%s) params(%s)" %(url, params))
+
             try:
                 if method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
                 elif method == 'POST':
                     response = urllib.urlopen(url, params)
             except Exception, e:
-                logger = logging.getLogger(__name__)
-                logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
+                self.logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
                 raise
+
 
             if response:
                 if response.getcode() == 200:
                     ret = response.read()
+                    self.logger.info("----------------------------- DEBUG: %s || %s" % ( response.info().gettype(), response.info().getplist()))
                     mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
                     return ret, mimetype
 
@@ -70,7 +73,7 @@ class EngineCommand(object):
                 return answer
             return '{"Error":"No invoke"}', "json"
         except Exception, e:
-            logger.debug(e)
+            self.logger.debug(e)
             raise
 
 
