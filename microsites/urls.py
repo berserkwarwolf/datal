@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.generic import RedirectView
 import os
 
+
 def jsi18n(request, packages = None, domain = None):
     if not domain:
         domain = 'djangojs'

@@ -366,7 +366,7 @@ def change_status(request, dataset_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
-            if( killemall == True ):
+            if killemall:
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
@@ -392,6 +392,7 @@ def change_status(request, dataset_revision_id=None):
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
         response['result'].pop('datastreams')
+        response['result'].pop('visualizations')
         response['result'].pop('tags')
         response['result'].pop('sources')
 
