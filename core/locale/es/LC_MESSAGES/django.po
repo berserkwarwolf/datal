@@ -957,3 +957,9 @@ msgstr "Semanal"
 
 msgid "APP-MONTHLY-TEXT"
 msgstr "Mensual"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND"
+msgstr "La url que éstas solicitando no es válida o ya no está disponible"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND"
+msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."

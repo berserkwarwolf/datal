@@ -6,26 +6,20 @@
 
 {% block content %}
 {% block error_content %}
-  <section class="box">
-		
-		<header>
-    	<h3 class="title">
-  			{% block error_title %} {{exception.title}} {% endblock %}
-			</h3>
-		</header>
+	<section class="box error-container">
 
 		<div class="box-content clearfix">
 		{% block error_text %}
-            {{exception.description}}
-            <ul>
-            {% for action in exception.get_actions %}
-                <li>{{action.description}}. Hacer click <a href="{{action.url}}">aquí</a></li>
-            {% endfor %}
-            </ul>
+			{{exception.description}}
+			<ul>
+				{% for action in exception.get_actions %}
+					<li><a href="{{action.url}}">{{action.description}}</a></li>
+				{% endfor %}
+			</ul>
 		{% endblock %}
 		</div>
 
-  </section>
+	</section>
 {% endblock %}
 {% endblock %}
 

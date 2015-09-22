@@ -43,6 +43,7 @@ SECRET_KEY = ''
 INSTALLED_APPS = (
     'sass_processor',
     'south',
+    'django_nose',
     'django.contrib.staticfiles',
     'django_extensions',
     'core',
@@ -383,6 +384,8 @@ CACHES = {
         }
     }
 }
+
+TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 
 try:
     from core.local_settings import *
