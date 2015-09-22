@@ -37,8 +37,6 @@ class EngineCommand(object):
         try:
             params = urllib.urlencode(query)
 
-            self.logger.info("DEBUG: url(%s) params(%s)" %(url, params))
-
             try:
                 if method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
@@ -52,7 +50,6 @@ class EngineCommand(object):
             if response:
                 if response.getcode() == 200:
                     ret = response.read()
-                    self.logger.info("----------------------------- DEBUG: %s || %s" % ( response.info().gettype(), response.info().getplist()))
                     mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
                     return ret, mimetype
 

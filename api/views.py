@@ -85,13 +85,19 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         if not result:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
+
         
-        resource['result'] = json.loads(result[0]) if result[0] else {}
-        if serializer_class:
-            serializer = serializer_class(resource)
-        else:
-            serializer = self.get_serializer(resource)
+        #resource['result'] = json.loads({result[0]}) if result[0] else {}
+        #resource['result'] = result[0] if result[0] else {}
+
+        #if serializer_class:
+        #    serializer = serializer_class(resource)
+        #else:
+        #    serializer = self.get_serializer(resource)
+
+        #logger.info("DEBUG: (%s)" % dir(serializer))
         
+        return Response(result[0])
         return Response(serializer.data)
 
 class DataStreamViewSet(ResourceViewSet):
