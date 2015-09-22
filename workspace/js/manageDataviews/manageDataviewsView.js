@@ -35,7 +35,6 @@ var ManageDataviewsView = Backbone.View.extend({
         // Listen To
         this.listenTo(this.listResources, 'request', this.showLoading);
         this.listenTo(this.listResources, 'sync', this.hideLoading);
-        this.listenTo(this.listResources, 'sync', this.onNoResults);
         this.listenTo(this.listResources, 'error', this.hideLoading);
             
         this.setHeights();
@@ -63,17 +62,6 @@ var ManageDataviewsView = Backbone.View.extend({
         this.$el.find("#grid").show();
         if (this.listResources.state.totalPages !== 1) {
             this.$el.find("#id_pagination").show();
-        }
-    },
-
-    onNoResults: function (collection) {
-        // oculta la vista principal cuando no hay reslultados y muestra la de no-results.
-        // Necesitará refactor si se sigue moviendo cosas al frontend para manejar estas 
-        // condiciones. G. Avila-2015-07-06
-        if (collection.length === 0) {
-            $('.no-results-view').removeClass('hidden');
-            $('.manager').addClass('hidden');
-            $('#id_visualizations_option').addClass('disabled').removeAttr('href');
         }
     },
 
