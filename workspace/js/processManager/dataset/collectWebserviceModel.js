@@ -37,6 +37,12 @@ var CollectWebserviceModel = StepModel.extend({
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}
 		],
+		path_to_data:[
+			{
+				required: true,
+				msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
+			}
+		],
 		mbox: [
 			{
 				required: false
