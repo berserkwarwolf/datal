@@ -1,5 +1,5 @@
 /* Icons */
-.icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;height:24px;display:block;cursor:pointer;}
+.icon{background:url(/static/workspace/images/common/icons.png) no-repeat;background:rgba(0,0,0,0) url(/static/workspace/images/common/icons.svg) no-repeat;width:24px;height:24px;display:block;}
 
 /* Inline common */
 .icon-inline,

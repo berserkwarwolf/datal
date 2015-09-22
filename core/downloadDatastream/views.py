@@ -1,8 +1,8 @@
 from django.views.decorators.http import require_http_methods
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from django.conf import settings
 
-from core.models import DataStreamRevision
+from core.models import DataStream
 from core.daos.datastreams import DataStreamDBDAO
 from core.lib.datastore import *
 
@@ -11,7 +11,7 @@ from core.lib.datastore import *
 def download(request, id, slug):
     """ download internal dataset file """
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
+        datastreamrevision_id = DataStream.objects.get(pk=id).last_published_revision.id
         datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
         raise Http404

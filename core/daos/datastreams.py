@@ -102,7 +102,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             datastream_revision = DataStreamRevision.objects.select_related().get(
                 pk=F(fld_revision_to_get),
                 category__categoryi18n__language=language,
-                datastreami18n__language=language
+                datastreami18n__language=language,
+                datastream__id=datastream_id
             )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
@@ -137,12 +138,13 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             collect_type=dataset_revision.impl_type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
-            modified_at=datastream_revision.created_at,
+            modified_at=datastream_revision.modified_at,
             meta_text=datastream_revision.meta_text,
             guid=datastream_revision.datastream.guid,
             created_at=datastream_revision.dataset.created_at,
-            last_revision_id=datastream_revision.dataset.last_revision_id,
-            last_published_date=datastream_revision.datastream.last_published_revision_date,
+            last_revision_id=datastream_revision.datastream.last_revision_id if datastream_revision.datastream.last_revision_id else '',
+            last_published_revision_id=datastream_revision.datastream.last_published_revision_id if datastream_revision.datastream.last_published_revision_id else '',
+            last_published_date=datastream_revision.datastream.last_published_revision_date if datastream_revision.datastream.last_published_revision_date else '',
             title=datastreami18n.title,
             description=datastreami18n.description,
             notes=datastreami18n.notes,
@@ -193,6 +195,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'datastreami18n__title',
             'datastreami18n__description',
             'created_at',
+            'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
             'dataset__last_revision__dataseti18n__title',

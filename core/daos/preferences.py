@@ -49,12 +49,29 @@ class Preferences():
                 else:
                     self.save_on_cache(str(key), self.data[key])
 
-        return self.data[key]
+        # fix booleans
+        if type(self.data[key]) == str or type(self.data[key]) == unicode:
+            pref = self.data[key].lower()
+            if pref in ['true', 'on']:
+                self.data[key] = True
+            elif pref in ['false', 'off']:
+                self.data[key] = False
+            
+        return self.data[key] 
 
     def load(self, keys):
         preferences = Preference.objects.filter(key__in=keys, account_id=self.data['account.id']).values('key', 'value')
         for preference in preferences:
             key = preference['key']
+
+            # fix booleans
+            if type(preference['value']) == str or type(preference['value']) == unicode:
+                pref = preference['value'].lower()
+                if pref in ['true', 'on']:
+                    preference['value'] = True
+                elif pref in ['false', 'off']:
+                    preference['value'] = False
+                
             self.data[key.replace('_', '.')] = preference['value']
             keys.remove(key)
 

@@ -63,8 +63,8 @@
   <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
 
   {# Last Modified #}
-  <% if(created_at != ""){%>
-    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= created_at %></span>
+  <% if(modified_at != ""){%>
+    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= modified_at %></span>
   <% } %>
 
   {# Actions #}
@@ -80,17 +80,15 @@
       <% } %>
     <% } %>
 
-    {% comment %}
     {# Edit #}
 		<% 
       // Status Pending Review = 1
       if( status !== 1 ){ 
     %>
     	<li class="edit">
-    		<a data-id="<%=id%>" data-url="{% url 'manageVisualizations.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+    		<a href="{% url 'manageVisualizations.edit' %}/<%=id%>" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
     	</li>
     <% } %>
-    {% endcomment %}
 
     {# Delete #}
     <% 
@@ -105,5 +103,5 @@
 
 {# Grid - visualization Cell #}
 <script type="text/template" id="grid-datastreamcell-template">
-  <a href="<%= datastream_url %>"><%= title %></a>
+  <a href="<%= datastream_url %>"><%= datastream_title%></a>
 </script>

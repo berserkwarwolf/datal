@@ -98,7 +98,39 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         return self.visualization_revision
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
-        pass
+        """
+        Actualiza una visualizacion
+
+        :param allowed_states:
+        :param changed_fields:
+        :param fields:
+        :return: VisualizationRevision Model Object
+        """
+        if self.visualization_revision.status not in allowed_states:
+            raise IllegalStateException(
+                from_state=self.visualization_revision.status,
+                to_state=self.visualization_revision.status,
+                allowed_states=allowed_states
+            )
+
+        if self.visualization_revision.status == StatusChoices.PUBLISHED:
+            self.visualization, self.visualization_revision = VisualizationDBDAO().create(
+                visualization=self.visualization,
+                datastream_rev=self.visualization_revision.datastream_revision,
+                user=self.visualization_revision.user,
+                status=StatusChoices.DRAFT,
+                **fields
+            )
+            self._update_last_revisions()
+        else:
+            # Actualizo sin el estado
+            self.visualization_revision = VisualizationDBDAO().update(
+                self.visualization_revision,
+                changed_fields=changed_fields,
+                **fields
+            )
+        
+        return self.visualization_revision
 
     def _move_childs_to_draft(self):
         pass
@@ -134,6 +166,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             if last_published_revision_id:
                     self.visualization.last_published_revision = VisualizationRevision.objects.get(
                         pk=last_published_revision_id)
+            else:
+                self.visualization.last_published_revision = None
 
             self.visualization.save()
         else:
@@ -195,10 +229,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         """
         VisualizationRevision.objects.filter(
             visualization__id=self.visualization.id,
-            status=StatusChoices.PUBLISHED
-        ).exclude(
-            id=self.visualization_revision.id
-        ).update(status=StatusChoices.DRAFT)
+            status=StatusChoices.PUBLISHED)\
+        .update(status=StatusChoices.DRAFT)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un visualizacion """
@@ -227,6 +259,9 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.visualization.last_published_revision=None
             self.visualization.save()
+
+            search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
+            search_dao.remove()
 
             self.visualization_revision.delete()
 

@@ -2104,6 +2104,9 @@ msgstr "Category succesfully refreshed. Please, select a new default category."
 msgid "APP-CATEGORY-DEFAULT-CANT-BE-DELETED"
 msgstr "The default category can not be deleted"
 
+msgid "APP-CATEGORY-DEFAULT-UNDEFINED"
+msgstr "The default category is not defined"
+
 msgid "APP-CATEGORY-TRANSPARENCY-CANT-BE-DELETED"
 msgstr "Transparency categories can not be deleted"
 
@@ -2845,6 +2848,9 @@ msgstr "Dataset has been unpublished"
 msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
+msgid "APP-DATASET-UNPUBLISHALL-TEXT"
+msgstr "The Dataset and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
+
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
 
@@ -2874,6 +2880,9 @@ msgstr "Data View has been unpublished"
 
 msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
 msgstr "The Data View has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATAVIEW-UNPUBLISHALL-TEXT"
+msgstr "The Data View and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
 
 msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
 msgstr "Data View has been sent to review"
@@ -2924,10 +2933,10 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
 msgid "APP-UNPUBLISH-RESOURCE-TEXT"
-msgstr "Delete all revisions"
+msgstr "Unpublish all revisions"
 
 msgid "APP-UNPUBLISH-REVISION-TEXT"
-msgstr "Delete actual revision"
+msgstr "Unpublish last published revision"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TITLE"
 msgstr "Unpublish Dataset "
@@ -2936,7 +2945,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-CONFIRM-TEXT"
 msgstr "The following resources, that are associated to this Dataset, will also unpublish."
 
 msgid "APP-OVERLAY-UNPUBLISH"
-msgstr "Unpublish"
+msgstr "Unpublish all"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Delete Dataview "
@@ -2948,7 +2957,7 @@ msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Delete Dataview "
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources, that are associated to this Dataview, will also delete."
+msgstr "The following Visualizations, that are associated to this Data View, will also delete."
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Unpublish Dataview "
@@ -2960,7 +2969,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Unpublish Dataview "
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources, that are associated to this Dataview, will also unpublish."
+msgstr "The following Visualizations, that are associated to this Data View, will also unpublish."
 
 msgid "DS-STEP1-TEXT"
 msgstr "Selection"
@@ -3193,9 +3202,6 @@ msgstr "It's what you will see in the tooltip map"
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
 
-msgid "APP-VIZ-CUSTOMIZE-TEXT"
-msgstr "Personalización"
-
 msgid "APP-VIZ-METADATA-TEXT"
 msgstr "Descripción"
 
@@ -3222,3 +3228,9 @@ msgstr "The entire column"
 
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "Or the entire row"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"

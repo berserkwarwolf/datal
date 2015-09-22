@@ -250,12 +250,11 @@ class User(models.Model):
                 c.set('my_total_datastreams_' + str(self.id), total_datastreams, settings.REDIS_STATS_TTL)
         return total_datastreams
 
-
     def get_total_visualizations(self):
         c = Cache(db=0)
         total_visualizations = c.get('my_total_visualizations_' + str(self.id))
         if not total_visualizations:
-            total_visualizations =  Visualization.objects.filter(user=self.id).count()
+            total_visualizations = Visualization.objects.filter(user=self.id).count()
             if total_visualizations > 0:
                 c.set('my_total_visualizations_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
@@ -283,7 +282,7 @@ class DataStream(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class RevisionModel(models.Model):
@@ -315,6 +314,7 @@ class DataStreamRevision(RevisionModel):
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     rdf_template = models.TextField(blank=True,
                                     verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
     objects = managers.DataStreamRevisionManager()
@@ -526,7 +526,7 @@ class Dataset(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class DatasetRevision(RevisionModel):
@@ -545,11 +545,11 @@ class DatasetRevision(RevisionModel):
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     size = models.IntegerField(default=0, verbose_name=ugettext_lazy('MODEL_SIZE_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
     spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
-    objects = managers.DatasetRevisionManager()
 
     class Meta:
         db_table = 'ao_dataset_revisions'
@@ -664,7 +664,7 @@ class DatasetRevision(RevisionModel):
 
         return dataset_revision
 
-    def get_dict(self, language = 'en'):
+    def get_dict(self, language='en'):
 
         logger = logging.getLogger(__name__)
 
@@ -674,11 +674,11 @@ class DatasetRevision(RevisionModel):
         dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
         account = Account.objects.get(id=self.user.account.id)
 
-        text = [dataset.title, dataset.description, dataset.user_nick, str(dataset.dataset_id)] #DS uses GUID, but here doesn't exists. We use ID
-        text.extend(dataset.get_tags()) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
+        text = [dataset['title'], dataset['description'], dataset['user_nick'], str(dataset['dataset_id'])] #DS uses GUID, but here doesn't exists. We use ID
+        text.extend(dataset['tags']) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
 
-        account_id = dataset.account_id
+        account_id = dataset['account_id']
         if account_id is None:
             account_id = ''
 
@@ -686,22 +686,22 @@ class DatasetRevision(RevisionModel):
         parameters = ""
 
         indexable_dict = {
-                'docid' : "DT::DATASET-ID-" + str(dataset.dataset_id),
+                'docid' : "DT::DATASET-ID-" + str(dataset['dataset_id']),
                 'fields' :
                     {'type' : 'dt',
-                     'dataset_id': dataset.dataset_id,
-                     'datasetrevision_id': dataset.dataset_revision_id,
-                     'title': dataset.title,
+                     'dataset_id': dataset['dataset_id'],
+                     'datasetrevision_id': dataset['dataset_revision_id'],
+                     'title': dataset['title'],
                      'text': text,
-                     'description': dataset.description,
-                     'owner_nick' : dataset.user_nick,
-                     'tags' : ','.join(dataset.get_tags()),
+                     'description': dataset['description'],
+                     'owner_nick' : dataset['user_nick'],
+                     'tags' : ','.join(dataset['tags']),
                      'account_id' : account_id,
                      'parameters': parameters,
-                     'timestamp': int(time.mktime(dataset.created_at.timetuple())),
-                     'end_point': dataset.end_point,
+                     'timestamp': int(time.mktime(dataset['created_at'].timetuple())),
+                     'end_point': dataset['end_point'],
                     },
-                'categories': {'id': unicode(dataset.category_id), 'name': dataset.category_name}
+                'categories': {'id': unicode(dataset['category_id']), 'name': dataset['category_name']}
                 }
 
         # Update dict with facets
@@ -711,7 +711,7 @@ class DatasetRevision(RevisionModel):
         except Exception, e:
             logger.error("indexable_dict ERROR: [%s]" % str(e))
 
-        indexable_dict['fields'].update(self.get_meta_data_dict(dataset.meta_text))
+        indexable_dict['fields'].update(self.get_meta_data_dict(dataset['meta_text']))
 
         return indexable_dict
 
@@ -760,7 +760,7 @@ class Visualization(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class VisualizationRevision(RevisionModel):
@@ -771,6 +771,7 @@ class VisualizationRevision(RevisionModel):
     impl_details = models.TextField(blank=True)
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
     objects = managers.VisualizationRevisionManager()
@@ -1164,4 +1165,13 @@ def unindex_datastream_revision(sender, instance, **kwargs):
     if instance.status == choices.StatusChoices.PUBLISHED:
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
+        search_dao.remove()
+
+@receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
+def unindex_visualization_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    logger.info("VZ ID %s STATUS %s" % (instance.id, instance.status))
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.visualizations import VisualizationSearchDAOFactory
+        search_dao = VisualizationSearchDAOFactory().create(instance)
         search_dao.remove()

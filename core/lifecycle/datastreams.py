@@ -106,11 +106,12 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if self.datastream_revision.dataset.last_revision.status != StatusChoices.PUBLISHED:
                 raise ParentNotPuslishedException()
 
-        self._publish_childs()
         self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()
 
         self._update_last_revisions()
+
+        self._publish_childs()
 
         search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
         search_dao.add()
@@ -122,7 +123,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         with transaction.atomic():
             visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
                 visualization__datastream__id=self.datastream.id,
-                id=F('visualization__last_revision__id')
+                id=F('visualization__last_revision__id'),
+                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for visualization_revision in visualization_revisions:
@@ -174,8 +176,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
     def _unpublish_all(self):
         """ Despublica todas las revisiones del datastream y la de todos sus visualization hijos en cascada """
 
-        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).exclude(
-            id=self.datastream_revision.id).update(status=StatusChoices.DRAFT)
+        DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED)\
+            .update(status=StatusChoices.DRAFT)
 
         with transaction.atomic():
             visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
@@ -283,17 +285,27 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             form_status = int(fields.pop('status', None))
 
         old_status = self.datastream_revision.status
+
         if old_status not in allowed_states:
             # Si el estado fallido era publicado, queda aceptado
             if form_status and form_status == StatusChoices.PUBLISHED:
                 self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
+
+        # al clonar el ds_rev tienen uqe viajar los data_source y selecT_statement
+        # no sé por qué, pero en el form llegan vacíos, para prevenir que en algún
+        # momento viajen via el form (fields) consulto si estan vacíos.
+        if fields['data_source'] == "":
+            fields['data_source'] = self.datastream_revision.data_source
+        if fields['select_statement'] == "":
+            fields['select_statement'] = self.datastream_revision.select_statement
+
         if old_status == StatusChoices.PUBLISHED:
             self.datastream, self.datastream_revision = DataStreamDBDAO().create(
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
-                status=form_status,
+                status=StatusChoices.DRAFT,
                 parameters=self.datastream_revision.datastreamparameter_set.all(),
                 **fields
             )
@@ -363,6 +375,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if last_published_revision_id:
                     self.datastream.last_published_revision = DataStreamRevision.objects.get(
                         pk=last_published_revision_id)
+            else:
+                self.datastream.last_published_revision = None
 
             self.datastream.save()
         else:

@@ -16,7 +16,7 @@ from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import CollectTypeChoices, SOURCE_IMPLEMENTATION_CHOICES, StatusChoices
-from core.models import DataStreamRevision
+from core.models import DataStreamRevision, VisualizationRevision
 
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
@@ -26,28 +26,43 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
     def get(self, language, dataset_id=None, dataset_revision_id=None, guid=None, published=True):
         """ Get full data """
+        logger = logging.getLogger(__name__)
         fld_revision_to_get = 'dataset__last_published_revision' if published else 'dataset__last_revision'
-
+        if settings.DEBUG: logger.info('Getting Dataset %s' % str(locals()))
+        
         if guid:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                dataset__guid=guid,
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__guid=guid,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('Dataset Not exist GUID %s' % guid)
+                raise
         elif not dataset_id:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=dataset_revision_id,
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    pk=dataset_revision_id,
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist Revision %s' % dataset_revision_id)
+                raise
         else:
-            dataset_revision = DatasetRevision.objects.select_related().get(
-                pk=F(fld_revision_to_get),
-                category__categoryi18n__language=language,
-                dataseti18n__language=language
-            )
-
+            try:
+                dataset_revision = DatasetRevision.objects.select_related().get(
+                    dataset__id=dataset_id,
+                    pk=F(fld_revision_to_get),
+                    category__categoryi18n__language=language,
+                    dataseti18n__language=language
+                )
+            except DatasetRevision.DoesNotExist:
+                logger.error('DatasetRev Not exist dataset_id=%d' % dataset_id)
+                raise
+                
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 
@@ -64,7 +79,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 domain = 'http://' + domain
             public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
 
-
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
@@ -79,7 +93,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             impl_type=dataset_revision.impl_type,
             status=dataset_revision.status,
             size=dataset_revision.size,
-            modified_at=dataset_revision.created_at,
+            modified_at=dataset_revision.modified_at,
             meta_text=dataset_revision.meta_text,
             license_url=dataset_revision.license_url,
             spatial=dataset_revision.spatial,
@@ -89,9 +103,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset_is_dead=dataset_revision.dataset.is_dead,
             guid=dataset_revision.dataset.guid,
             created_at=dataset_revision.dataset.created_at,
-            last_revision_id=dataset_revision.dataset.last_revision_id,
-            last_published_revision_id=dataset_revision.dataset.last_published_revision_id,
-            last_published_date=dataset_revision.dataset.last_published_revision_date,
+            last_revision_id=dataset_revision.dataset.last_revision_id if dataset_revision.dataset.last_revision_id else '',
+            last_published_revision_id=dataset_revision.dataset.last_published_revision_id if dataset_revision.dataset.last_published_revision_id else '',
+            last_published_date=dataset_revision.dataset.last_published_revision_date if dataset_revision.dataset.last_published_revision_date else '',
             title=dataseti18n.title,
             description=dataseti18n.description,
             notes=dataseti18n.notes,
@@ -131,7 +145,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         query = query.values('filename', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
                              'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
-                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'size', 'end_point',
+                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'modified_at', 'size', 'end_point',
                              'dataset__user__id', 'dataset__last_revision_id')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',
@@ -159,7 +173,14 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset__id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
-                 'created_at', 'datastream__last_revision')
+                 'created_at', 'modified_at', 'datastream__last_revision')
+
+        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+            visualization__datastream__datastreamrevision__dataset__id=dataset_id,
+            visualizationi18n__language=language
+        ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
+                 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision')
+
         return related
 
     def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):

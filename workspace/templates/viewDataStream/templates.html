@@ -174,15 +174,15 @@
 
 				<% }else{ %>
 
-					<%= createdAt %>
+					<%= modifiedAt %>
 
 				<% } %>
 
 			</span>
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
-				<% if(status != StatusChoices.UNPUBLISHED){ %>
-				<span class="row-actions" style="display:none;"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+				<% if(lastPublishRevisionId != ''){ %>
+				<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
 				<% } %>
 			{% endif %}
 
@@ -244,8 +244,8 @@
 					<span class="icon icon-more"></span>
 				</div>
 				<ul class="dropdown" style="display:none;">
-					<li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
 					<li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
+					<li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
 				</ul>
 			</div>   
 

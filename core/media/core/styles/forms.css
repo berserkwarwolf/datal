@@ -50,7 +50,8 @@ input[type=password].has-error,
 input[type=email].has-error, 
 input[type=url].has-error,
 select.has-error,
-textarea.has-error{border-color:#f45f64;
+textarea.has-error,
+.textarea.has-error{border:1px solid #f45f64 !important;padding:0;color:#4d4d4d;
   -webkit-box-shadow:0 0 5px rgba(244,95,100,1);
      -moz-box-shadow:0 0 5px rgba(244,95,100,1);
           box-shadow:0 0 5px rgba(244,95,100,1);
@@ -70,7 +71,7 @@ label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:norma
 .formErrorMessageContainer div.errorFormValidation,
 .formErrorMessageContainerLeft div.errorFormValidation{background:#FFF1AF;border:1px solid #FFF;color:#E18211;font-size:12px;font-weight:bold;text-align:left;padding:1px 10px !important;position:absolute;top:-2px;left:250px;z-index:200;width:auto;width:-moz-max-content;min-width:144px;height:30px;line-height:30px;overflow:hidden;white-space:nowrap;opacity:0.9;filter:alpha(opacity=90);-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;-moz-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);-webkit-box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);box-shadow:2px 2px 5px rgba(0, 0, 0, 0.4);}
 */
-	
+  
 /*PASSWORD STRENGTH*/
 .is0{background:url(/static/core/images/common/fd_passwordStrength.gif) no-repeat 0 0;width:68px;height:7px;overflow:hidden;}
 .is10{background-position:0 0;} 
@@ -83,7 +84,7 @@ label.labelField{text-align:right;font-size:14px;color:#767676;font-weight:norma
 .is80,
 .is90{background-position:0 -28px;}
 .is100{background-position:0 -35px;}
-	
+  
 /*AUTO COMPLETE*/
 body .ui-autocomplete{border:0;-moz-border-radius:0 0 4px 4px;-webkit-border-radius:0 0 4px 4px;border-radius:0 0 4px 4px;-webkit-box-shadow:0 2px 5px rgba(0,0,0,.4);-moz-box-shadow:0 2px 5px rgba(0,0,0,.4);box-shadow:0 2px 5px rgba(0,0,0,.4);font:12px arial, helvetica, sans-serif;}
 body .ui-autocomplete .ui-menu-item{padding:0;}
@@ -101,8 +102,8 @@ body .ui-draggable.ui-draggable-dragging .ui-dialog-titlebar{cursor:url(/static/
 .errorBox .msg .gray{color:#999;font-style:italic;}
 .errorBox .marginTop{margin-top:20px;}
 
-	/*INFO MESSAGE*/
-	.infoBox .msg{background-color:#f3f3f4;color:#898888;background-image:url(/static/core/images/common/ic_info.gif);}
-	
-	/*OVERLAY ERROR*/
-	.ao-popup-overlay .errorBox .msg{margin:20px 20px 0;}
+  /*INFO MESSAGE*/
+  .infoBox .msg{background-color:#f3f3f4;color:#898888;background-image:url(/static/core/images/common/ic_info.gif);}
+  
+  /*OVERLAY ERROR*/
+  .ao-popup-overlay .errorBox .msg{margin:20px 20px 0;}

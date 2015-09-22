@@ -10,22 +10,14 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
-        this.model = new charts.models.Chart({
-            datastream_revision_id: options.datastream_revision_id,
-            meta_tags:  options.datastream_tags,
-            meta_sources: options.datastream_sources,
-            meta_category: options.datastream_category,
-            // resourceUrl: 'http://data.cityofsacramento.org/visualizations/invoke',
-            // resourceIdAttribute: 'visualization_revision_id',
-            // resourceID: 6741,
-            // options: {
-            //     zoom: 15,
-            //     center: {
-            //         lat: 38.5806808485,
-            //         long: -121.4826359602
-            //     }
-            // }
-        });
+        this.model = new charts.models.Chart();
+
+        this.model.parseResponse(options.chart_model);
+
+        if (options.chart_model.revision_id) {
+            this.model.set('isEdit', true);
+            this.model.fetchPreviewData();
+        };
 
         //Buttons views
         this.buttonsView = new ButtonsView({
@@ -47,7 +39,7 @@ var MainView = Backbone.View.extend({
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-CHART-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view')
         }).init();
@@ -71,7 +63,7 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-VIZ-CUSTOMIZE-TEXT'), 
+          name: gettext('APP-MAP-TEXT'), 
           model: this.model,
           el: this.$('.step-1-view-map')
         }).init();
@@ -195,7 +187,17 @@ var MainView = Backbone.View.extend({
 
     start: function(){
         this.$el.find('.process_manager_step').hide();
+
+        //edit
+        if(this.model.get('isEdit')){
+            this.model.set('isMap', false);
+            this.currentFlow = 'charts';
+            this.index++;
+            this.steps[this.currentFlow][this.index].start();
+        }
+        
         this.steps[this.currentFlow][this.index].start();
+        
     },
 
     finish: function(){

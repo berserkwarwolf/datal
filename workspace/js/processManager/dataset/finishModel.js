@@ -8,9 +8,13 @@ var FinishModel = StepModel.extend({
 		sources: [],
 		tags: [],
 		notes: null,
-		data: {}
+		data: {},
 	},
 
+    initialize: function(){
+        
+    },
+            
 	validation: {
 		title: [
 			{
@@ -36,15 +40,13 @@ var FinishModel = StepModel.extend({
 				}
 			}
 		],
-		// category: {
-		// 	requiraed: false,
-		// 	msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
-		// },
-		// status: {
-		// 	required: false,
-		// 	msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
-		// }
 	},
+
+    // notes use NicEditor, so can't be validated as always (?)
+    validate_notes: function(){
+        max_length = $("#notes_reference").data('max_length');
+        return (this.get('data').notes.length < max_length)
+    },
 
 	setData: function(){
 
@@ -90,6 +92,7 @@ var FinishModel = StepModel.extend({
 		}
 		else{
 				data.notes = $.trim( this.get('notes') );
+				console.log(this.get('notes'))
 		}
 
 		// Set Data

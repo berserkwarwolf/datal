@@ -33,6 +33,8 @@ var ManageDatasetsView = Backbone.View.extend({
         this.listenTo(this.listResources, 'sync', this.hideLoading);
         this.listenTo(this.listResources, 'sync', this.onNoResults);
         this.listenTo(this.listResources, 'error', this.hideLoading);
+            
+        this.setHeights();
 
         // Render
         this.render();
@@ -71,6 +73,27 @@ var ManageDatasetsView = Backbone.View.extend({
             $('#id_visualizations_option').addClass('disabled').removeAttr('href');
         }
     },
+
+    setHeights: function(t){
+        var self = this;
+
+        var noContent = $('.no-results-view');
+
+        $(window).resize(function(){
+
+            windowHeight = $(window).height();
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.layout').find('header.header').height() )
+            - parseFloat( $('.main-section').find('.context-menu').height() )
+            - 30 // As margin bottom
+            ;
+
+            noContent.css('height', sidebarHeight+'px');
+
+        }).resize();
+    }, 
 
     onItemsPerPageChanged: function() {
         this.listResources.setPageSize( parseInt( $('#id_itemsPerPage').val() ) );

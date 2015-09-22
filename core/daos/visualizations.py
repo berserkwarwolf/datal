@@ -83,7 +83,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization_revision = VisualizationRevision.objects.select_related().get(
                 pk=F(fld_revision_to_get),
                 user__language=language,
-                visualizationi18n__language=language
+                visualizationi18n__language=language,
+                visualization__id=visualization_id
             )
 
         tags = visualization_revision.datastream_revision.tagdatastream_set.all().values(
@@ -127,8 +128,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             guid=visualization_revision.visualization.guid,
             impl_details=visualization_revision.impl_details,
             created_at=visualization_revision.created_at,
-            last_revision_id=visualization_revision.visualization.last_revision_id,
-            last_published_date=visualization_revision.visualization.last_published_revision_date,
+            modified_at=visualization_revision.modified_at,
+            last_revision_id=visualization_revision.visualization.last_revision_id if visualization_revision.visualization.last_revision_id else '',
+            last_published_revision_id=visualization_revision.visualization.last_published_revision_id if visualization_revision.visualization.last_published_revision_id else '',
+            last_published_date=visualization_revision.visualization.last_published_revision_date if visualization_revision.visualization.last_published_revision_date else '',
             title=visualizationi18n.title,
             description=visualizationi18n.description,
             notes=visualizationi18n.notes,
@@ -141,6 +144,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id
         )
+        visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
         return visualization
 
@@ -153,7 +157,50 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         return related
 
     def update(self, visualization_revision, changed_fields, **fields):
-        pass
+        visualizationi18n = dict()
+        visualizationi18n['title'] = fields['title'].strip().replace('\n', ' ')
+        visualizationi18n['description'] = fields['description'].strip().replace('\n', ' ')
+        visualizationi18n['notes'] = fields['notes'].strip()
+        visualizationi18n['language'] = fields['language']
+
+        # Bastante horrendo. TODO: Hacerlo bien
+        fields['impl_details'] = VisualizationImplBuilder(**fields).build()
+        fields.pop('type')
+        fields.pop('chartTemplate')
+        fields.pop('showLegend')
+        fields.pop('invertedAxis')
+        fields.pop('correlativeData')
+        fields.pop('nullValueAction')
+        fields.pop('nullValuePreset')
+        fields.pop('data')
+        fields.pop('labelSelection')
+        fields.pop('headerSelection')
+        fields.pop('is3D')
+        fields.pop('description')
+        fields.pop('language')
+        fields.pop('title')
+        fields.pop('notes')
+        fields.pop('latitudSelection')
+        fields.pop('xTitle')
+        fields.pop('yTitle')
+        fields.pop('invertData')
+        fields.pop('longitudSelection')
+        fields.pop('traceSelection')
+        fields.pop('mapType')
+
+        VisualizationRevision.objects.filter(id=visualization_revision.id).update(**fields)
+
+        # Falla, por ahora
+        #visualization_revision.update(changed_fields, **fields)
+
+        VisualizationI18n.objects.filter(
+            visualization_revision=visualization_revision,
+            language=visualizationi18n['language']
+        ).update(
+            **visualizationi18n
+        )
+
+        return visualization_revision
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
@@ -194,7 +241,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'visualization__datastream__last_revision__category__categoryi18n__name',
             'visualization__datastream__last_revision__datastreami18n__title',
             'visualizationi18n__title',
-            'visualizationi18n__description', 'created_at', 'visualization__user__id',
+            'visualizationi18n__description', 'created_at', 'modified_at', 'visualization__user__id',
         )
 
         query = query.order_by(sort_by)
@@ -425,12 +472,7 @@ class VisualizationSearchDAO():
         text = [visualizationi18n.title, visualizationi18n.description, self.visualization_revision.user.nick, self.visualization_revision.visualization.guid]
         text.extend(tags) # visualization has a table for tags but seems unused. I define get_tags funcion for dataset.
         text = ' '.join(text)
-        try:
-            p = Preference.objects.get(account_id=self.visualization_revision.visualization.user.account_id, key='account.purpose')
-            is_private = p.value == 'private'
-        except Preference.DoesNotExist, e:
-            is_private = False
-
+        
         document = {
                 'docid' : self._get_id(),
                 'fields' :
@@ -447,7 +489,6 @@ class VisualizationSearchDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
                      'hits': 0,
-                     'is_private': is_private and 1 or 0,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }

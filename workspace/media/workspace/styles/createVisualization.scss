@@ -107,10 +107,15 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 /* Gráficos */
 .preview-container {
 
-  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:0 auto;
+  .visualizationContainer{border:1px solid $color-base-extra-light;cursor:pointer;position:relative;margin:-10px;
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
+  }
+
+  .visualizationContainer.dataSelected{cursor:default;
+    &:hover{border-color:$color-base-extra-light;}
+    &:hover .icon{background-color:#0066cc;}
   }
 
   /* Contenedor de vista previa */
@@ -146,7 +151,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
 
 /* Modal */
 .modal{
-  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:200;
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:300;
 
   .main-section{margin:0;}
 
@@ -207,6 +212,6 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   }
 
   /* Tabla */
-  .table-view{height:600px;overflow:hidden;width:100%;}
+  .table-view{overflow:auto;}
 
 }

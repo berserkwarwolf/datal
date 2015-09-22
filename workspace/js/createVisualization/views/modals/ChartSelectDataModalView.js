@@ -10,9 +10,15 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
+        this.rangeDataModel = new DataTableSelectionModel({id: 1});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3});
+
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            collection: this.collection
+            rangeDataModel: this.rangeDataModel,
+            rangeLabelsModel: this.rangeLabelsModel,
+            rangeHeadersModel: this.rangeHeadersModel
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
@@ -36,18 +42,28 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this.rangeDataModel.set('excelRange', this.model.get('range_data'));
+            this.rangeLabelsModel.set('excelRange', this.model.get('range_labels'));
+            this.rangeHeadersModel.set('excelRange', this.model.get('range_headers'));
+            this.collection.add([
+                this.rangeDataModel,
+                this.rangeLabelsModel,
+                this.rangeHeadersModel
+                ]);
+            this.setHeights();
         }, this);
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
-
-        this.setHeights();
 
         return this;
     },
 
     onClickDone: function (e) {
-        var selection = this.collection.getSelectionChartStyle();
-        this.model.set(selection);
+        this.model.set({
+            range_data: this.rangeDataModel.get('excelRange'),
+            range_headers: this.rangeHeadersModel.get('excelRange'),
+            range_labels: this.rangeLabelsModel.get('excelRange')
+        });
         this.close();
     },
 
@@ -64,44 +80,48 @@ var ChartSelectDataModalView = ModalView.extend({
             invoke: payload
         });
         this.dataTableView.render();
-        this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.selectedCellRangeView.select(range);
+        this.listenTo(this.dataTableView, 'afterSelection', function (selection) {
+            this.addSelection(this._cacheFocusedInput);
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },
 
     addSelection: function (name) {
-        var selection = this.dataTableView.getSelection(name);
+        var selection = this.dataTableView.getSelection(),
+            model;
 
-        if (_.isString(name)) {
-          // When name is defined, the selection mode only allows setting selection to certain models
-          // with fixed id (so that the color is stable)
-          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
-          model = new DataTableSelectionModel(_.extend(selection, {
-            id: names[name],
-            name: name
-          }));
-        } else {
-          // when no name is provided, the selection is a multiselection collection.
-          // model = new DataTableSelectionModel(_.extend(selection, {
-          //   id: newId,
-          // }));
+        if (name === 'range_data') {
+            this.collection.remove(1);
+            model = this.rangeDataModel;
+        } else if (name === 'range_labels') {
+            this.collection.remove(2);
+            model = this.rangeLabelsModel;
+        } else if (name === 'range_headers') {
+            this.collection.remove(3);
+            model = this.rangeHeadersModel;
         }
+        model.set(selection);
 
         if (model.isValid()) {
-            this.collection.remove(model.get('id'));
             this.collection.add(model);
         } else {
-            alert(model.validationError)
+            // alert(model.validationError)
         }
     },
 
     validate: function () {
         if (this.collection.length < 3) {
+            this.enableDoneBtn(true);
+        } else {
+            this.enableDoneBtn(false);
+        }
+    },
+
+    enableDoneBtn: function (enable) {
+        if (enable) {
             this.$('button.btn-done').attr('disabled', 'disabled');
         } else {
             this.$('button.btn-done').removeAttr('disabled');
@@ -111,16 +131,23 @@ var ChartSelectDataModalView = ModalView.extend({
     setHeights: function(t){
         var self = this;
 
-        var contextMenuHeight = parseFloat( $('.context-menu').height() );
+        var sidebar = $('.modal').find('.sidebar'),
+            table = $('.modal').find('.table-view');
 
         $(window).resize(function(){
 
             windowHeight = $(window).height();
-            var sidebarHeight = windowHeight - contextMenuHeight;
-            self.$('.sidebar').css('height', sidebarHeight+'px');
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
+            - 30 // As margin bottom
+            ;
+
+            sidebar.css('height', sidebarHeight+'px');
+            table.css('height', sidebarHeight+'px');
 
         }).resize();
-
     }, 
-
 });
