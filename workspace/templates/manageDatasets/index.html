@@ -34,6 +34,7 @@
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -104,7 +105,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		var manageDatasetsModel =  new ManageDatasetsModel({
+			total_entries: {{ stats.account_total_datasets }}
+		});
 		var manageDatasetsView =  new ManageDatasetsView({
+			model: manageDatasetsModel,
 			datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
 			filters: {{filters|jsonify}}
 		});
