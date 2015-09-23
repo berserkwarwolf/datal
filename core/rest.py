@@ -78,7 +78,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         resource = {}
         if is_detail:
             resource = self.get_object()
-            mutable_get[self.engine_pk] = resource[self.dao_pk]
+            mutable_get['revision_id'] = resource[self.dao_pk]
         items = dict(mutable_get.items())
 
         formset=formset_factory(form_class, formset=RequestFormSet)
