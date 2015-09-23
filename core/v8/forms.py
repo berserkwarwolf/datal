@@ -95,7 +95,10 @@ class RequestFormSet(BaseFormSet):
         """Serializa el cleaned_data para el motor"""
 
         if self.cleaned_data:
-            self.cleaned_data_plain = self.cleaned_data[0]
+            # Obtenemos solo los parametros con valores
+            self.cleaned_data_plain = {k: v for k, v in self.cleaned_data[0].items() if v }
+
+            # luego serializamos los forms de argumentos
             map(self._serialize_data, self.cleaned_data[1:])
             
             return self.cleaned_data_plain
