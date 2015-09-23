@@ -66,7 +66,10 @@ def xls(request, id, slug):
     if settings.DEBUG: logger.info('XLS Arguments %s' % str(argument))
     if argument.get('fType') == 'REDIRECT':
         redirect = HttpResponse(status=302, mimetype='application/vnd.ms-excel')
-        redirect['Location'] = argument.get('fUri')
+        uri = argument.get('fUri')
+        # TODO permitir al motor tener dos URLs de acceso al host sftp,una interna y una externa
+        uri = uri.replace('datastore.dev/resources/', 'datastore.dev:8080/resources/')
+        redirect['Location'] = uri
         return redirect
     else:
         return HttpResponse(contents, mimetype=type)
