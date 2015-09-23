@@ -13,8 +13,9 @@ from core.daos.visualizations import VisualizationDBDAO
 from core.search.elastic import ElasticFinderManager
 from api.serializers import DataStreamSerializer, VisualizationSerializer, DataSetSerializer, ResourceSerializer
 from core.v8.factories import AbstractCommandFactory
-from core.v8.forms import ArgumentForm, InvokeFormSet
+from core.v8.forms import ArgumentForm, RequestFormSet
 from core.serializers import EngineSerializer
+from workspace.v8.forms import *
 
 
 import logging
@@ -80,7 +81,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
             mutable_get[self.engine_pk] = resource[self.dao_pk]
         items = dict(mutable_get.items())
 
-        formset=formset_factory(form_class, formset=InvokeFormSet)
+        formset=formset_factory(form_class, formset=RequestFormSet)
         form = formset( items)
         if not form.is_valid():
             # TODO: correct handling
@@ -127,6 +128,7 @@ class RestDataStreamViewSet(ResourceViewSet):
     @detail_route(methods=['get'])
     def data(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'invoke', 
+            form_class=DatastreamRequestForm,
             serialize=False)
 
 #    @list_route(methods=['get'])

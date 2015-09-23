@@ -7,6 +7,7 @@ from core.v8.forms import RequestForm
 
 class DatastreamRequestForm(RequestForm):
     tableid = forms.CharField(required=False)
+    #datastream_revision_id = forms.IntegerField(required=True)
 
 # es el único que no hereda del RequestForm
 class DatastreamPreviewForm(forms.Form):
