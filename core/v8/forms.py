@@ -8,30 +8,21 @@ from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 
 class ArgumentForm(forms.Form):
-    argument=forms.CharField(max_length=16, widget=forms.TextInput(), required=True)
+    name=forms.CharField(max_length=16, widget=forms.TextInput(), required=True)
     value=forms.CharField(max_length=100, widget=forms.TextInput(), required=True)
-
-class DocumentForm(forms.Form):
-    pId=forms.IntegerField(required=True)
-    doc_type=forms.CharField(max_length=2, required=True)
 
 class DatastreamRequestForm(forms.Form):
     page=forms.IntegerField(required=False)
     limit=forms.IntegerField(required=False)
     output=forms.CharField(max_length=100, required=False)
 
-    #def clean(self):
-    #    cleaned_data = super(DatastreamRequestForm, self).clean()
-
-        # TODO: define default values on settings.py
-    #    if not cleaned_data['page']:
-    #        cleaned_data['page'] = 0
-    #    if not cleaned_data['limit']:
-    #        cleaned_data['limit'] = 50
-    #    return cleaned_data
+class RequestForm(forms.Form):
+    revision_id = forms.IntegerField(required=True)
+    page = forms.IntegerField(required=False)
+    limit = forms.IntegerField(required=False)
 
 
-class InvokeFormSet(BaseFormSet):
+class RequestFormSet(BaseFormSet):
     is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
     is_id=re.compile("(?P<doc_type>\S+)_id$").match
 
@@ -40,12 +31,15 @@ class InvokeFormSet(BaseFormSet):
         new_args=[]
         for i,j in enumerate(args):
             aux=dict(j)
+
+            for key in aux.keys():
+                aux['form-0-%s' % key]=aux[key]
             aux.update({'form-TOTAL_FORMS': u'1', 'form-INITIAL_FORMS': u'0','form-MAX_NUM_FORMS': u''})
             new_args.append(aux)
 
         self._defaults=kwargs.get("default",[])
 
-        super(InvokeFormSet, self).__init__(*new_args)
+        super(RequestFormSet, self).__init__(*new_args)
 
     def _update_defaults(self):
 
@@ -58,50 +52,36 @@ class InvokeFormSet(BaseFormSet):
                 
     def clean(self):
 
-        #self.data = dict(self.data)
-        #self.data.update({'form-TOTAL_FORMS': u'1', 'form-INITIAL_FORMS': u'0','form-MAX_NUM_FORMS': u''})
-
         if any(self.errors):
             return
 
         # aplicamos los valores defaults
         self._update_defaults()
 
-        self.forms=[]
+        #self.forms=[]
         for key in self.data.keys():
+            # evitamos los form-algo
+            if key[0:4] == "form":
+                continue
+
             match=self.is_argument(key)
 
-            # si es pAlgoNN
+            # si es AlgoNN
             if match:
                 try:
-                    f=ArgumentForm({"argument": key, 'value': PrimitiveComputer().compute(self.data[key])})
+
+                    f=ArgumentForm({"name": key, 'value': PrimitiveComputer().compute(self.data[key])})
                     if f.is_valid():
                         self.forms.append(f)
                     else:
-                        self.errors.append({'value': [u"argumento no válido"]})
+                        self.errors.append({key: [u"argumento no válido (%s)", self.data[key]]})
                         raise forms.ValidationError(u"argumento no válido", code="argument_not_valid")
-                except TypeError:
-                    self.errors.append({'value': [u"expected string or buffer"]})
+                except TypeError,e:
+                    self.errors.append({'value': [u"expected string or buffer (%s)" % e]})
                     raise forms.ValidationError(u"expected string or buffer", code="typeerror")
                 
                 #no me gusta, debería tener un map y un filter, refactorear vago!
                 continue
-
-            # Si es el pk
-            match=self.is_id(key)
-            if match:
-                f=DocumentForm({"pId": int(self.data[key]), "doc_type": self._get_doc_dict(match.group("doc_type"))})
-                if f.is_valid():
-                    self.forms.append(f)
-                else:
-                    raise forms.ValidationError(u"id (%s/%s) no válido" % (int(self.data[key]),match.group("doc_type")), code="id_not_valid")
-                continue
-
-        # faltaría meter un form generico que tome un arumento y un valor para el resto de los argumentos
-        # y quitar este de acá abajo
-        f=DatastreamRequestForm(self.data)
-        if f.is_valid():
-            self.forms.append(f)
 
     def _get_doc_dict(self, doc_type):
         if doc_type in ["datastream_revision", "datastream"]:
@@ -110,3 +90,18 @@ class InvokeFormSet(BaseFormSet):
             return "vz"
         elif doc_type in ["dataset_revision","dataset"]: 
             return "ds"
+
+    def _serialize_data(self, l):
+        self.cleaned_data_plain.update({l['name']: l['value']})
+
+    def get_cleaned_data_plain(self):
+        """Serializa el cleaned_data para el motor"""
+
+        if self.cleaned_data:
+            self.cleaned_data_plain = self.cleaned_data[0]
+            map(self._serialize_data, self.cleaned_data[1:])
+            
+            return self.cleaned_data_plain
+            
+        return {}
+            
