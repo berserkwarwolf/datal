@@ -1,12 +1,7 @@
 from rest_framework import serializers
 from core.models import DataStream
 from rest_framework.compat import OrderedDict
-
-class EngineSerializer(serializers.Serializer):
-    def to_representation(self, obj):
-        if 'result' in obj:
-            return obj['result']
-        return {}
+import json
 
 class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()
@@ -40,6 +35,9 @@ class ResourceSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'category_name', obj, ['category_name'])
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
         self.tryKeysOnDict(answer, 'result', obj, ['result'])
+
+        if 'format' in obj and obj['format'].startswith('application/json'):
+            answer['result'] = json.loads({answer['result']}) 
 
         if answer['link']:
             domain = self.context['request'].auth['microsite_domain']

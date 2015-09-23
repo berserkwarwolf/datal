@@ -61,14 +61,15 @@ class EngineCommand(object):
     def run(self):
         result = cache.get(self.key_prefix)
         if result:
-            return result, 'json'
+            return result
 
         try:
             answer = self._request(self.query)
             if answer:
-                cache.set(self.key_prefix, answer[0], 60)
+                cache.set(self.key_prefix, answer, 60)
+
                 return answer
-            return '{"Error":"No invoke"}', "json"
+            return '{"Error":"No invoke"}', "application/json; charset=UTF-8"
         except Exception, e:
             self.logger.debug(e)
             raise

@@ -3,12 +3,15 @@ import os
 from django.conf.urls import *
 from django.conf import settings
 from django.views.i18n import javascript_catalog
-from core.rest import RestDataStreamViewSet, RestVisualizationViewSet, RestDataSetViewSet
+from core.rest import RestDataSetViewSet
+from workspace.rest import RestDataStreamViewSet, RestMapViewSet, RestChartViewSet
 from rest_framework import routers
+
 
 router = routers.DefaultRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
-router.register(r'visualizations', RestVisualizationViewSet, base_name='visualizations')
+router.register(r'maps', RestMapViewSet, base_name='maps')
+router.register(r'charts', RestChartViewSet, base_name='charts')
 router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
 
 def jsi18n(request, packages=None, domain=None):

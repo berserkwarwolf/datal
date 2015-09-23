@@ -1,14 +1,14 @@
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
-from core.rest import RestDataStreamViewSet, RestVisualizationViewSet, RestDataSetViewSet
+from core.rest import RestDataStreamViewSet, RestMapViewSet, RestDataSetViewSet, RestChartViewSet
 from rest_framework import routers
 import os
 
 router = routers.DefaultRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
-router.register(r'visualizations', RestVisualizationViewSet, base_name='visualizations')
-router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
+router.register(r'maps', RestMapViewSet, base_name='maps')
+router.register(r'charts', RestChartViewSet, base_name='charts')
 
 
 def jsi18n(request, packages = None, domain = None):
