@@ -51,13 +51,13 @@
 
 		<!-- COLLAPSED BAR -->
 		<div class="collapsedBar">
-			<div class="boxTitle clearfix border">
-				<h4 class="title">{% trans "WEBSERVICE-STEP1-TITLE" %}</h4>
-				<div class="navigationControl FR">
-					<a id="id_next_args_top" title="{% trans 'BTN-NEXT-TEXT' %}" href="javascript:;" class="button primary small {{auth_manager.language}}">{% trans "BTN-NEXT-TEXT" %}</a>
-					<a id="id_cancel_top" href="javascript:;" title="{% trans 'APP-CANCEL-TEXT' %}">{% trans "APP-CANCEL-TEXT" %}</a>
+			<header>
+				<h3>{% trans "WEBSERVICE-STEP1-TITLE" %}</h3>
+				<div class="navigation FR">
+					<a id="id_cancel_top" href="javascript:;" title="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha">{% trans "APP-CANCEL-TEXT" %}</a>
+					<a id="id_next_args_top" title="{% trans 'BTN-NEXT-TEXT' %}" href="javascript:;" class="button primary {{auth_manager.language}}">{% trans "BTN-NEXT-TEXT" %}</a>
 				</div>	
-			</div>
+			</header>
 		</div>
 
 		<div class="columns clearfix paramsWebservices">
@@ -67,13 +67,10 @@
 
 				<div class="dataStreamForm">
 					<div class="clearfix form">
-						<form id="id_dataStreamForm" novalidate>
+						<form id="id_dataStreamForm" class="formContent" novalidate>
 							<fieldset class="form clearfix">
 								<h5>{% trans "WEBSERVICES-PARAMS-TITLE" %}</h5>
 								<div id="id_parameters_container" class="paramsForm"></div>
-								<div class="navigationControl center">
-									<a id="id_next_args" class="button small primary {{auth_manager.language}}" href="javascript:;" title="{% trans 'BTN-NEXT-TEXT' %}">{% trans "BTN-NEXT-TEXT" %}</a>
-								</div>
 							</fieldset>
 						</form>
 					</div>
@@ -92,12 +89,12 @@
 				<div class="columnContent clearfix">
 
 					<!-- HELP AND TIPS BOX -->
-					<div class="boxCR helpAndTipsBox">
+					<div class="helpBox">
 						<div class="boxTitle">
-							<h4>{% trans "DSFIND-HELPTIP-TITLE" %}</h4>
+							<h6>{% trans "DSFIND-HELPTIP-TITLE" %}</h6>
 						</div>
 					<div class="boxInner">
-						<h5>{% trans "WEBSERVICE-STEP1-HELPTITLE" %}</h5>
+						<p><strong>{% trans "WEBSERVICE-STEP1-HELPTITLE" %}</strong></p>
 						<p>{% trans "WEBSERVICE-STEP1-HELPTEXT" %}.</p>
 						<!-- DOUBTS -->
 						<div class="doubts toolbar">
