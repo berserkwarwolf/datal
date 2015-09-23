@@ -73,7 +73,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         self.check_object_permissions(self.request, obj)
         return obj
 
-    def engine_call(self, request, engine_method, is_detail=True, form_class=ArgumentForm, serialize=True):
+    def engine_call(self, request, engine_method, is_detail=True, form_class=RequestForm, serialize=True):
         mutable_get = request.GET.copy()
         resource = {}
         if is_detail:
@@ -84,8 +84,11 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         formset=formset_factory(form_class, formset=RequestFormSet)
         form = formset( items)
         if not form.is_valid():
+            logger.info("form errors: %s" % form.errors)
             # TODO: correct handling
             raise Exception("Wrong arguments")        
+
+        datos = form.get_cleaned_data_plain()
 
         result = self.command_factory.create(engine_method, form.cleaned_data).run()
         if not result:
