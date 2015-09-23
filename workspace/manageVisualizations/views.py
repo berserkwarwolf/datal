@@ -364,8 +364,8 @@ def preview(request):
             if limit is not None:
                 query['pLimit'] = form.cleaned_data.get('limit')
 
-            command_factory = AbstractCommandFactory().create() 
-            result, content_type = command_factory.create("preview_chart", query).run()
+            command_factory = AbstractCommandFactory().create("preview_chart") 
+            result, content_type = command_factory.create(query).run()
             return HttpResponse(result, mimetype=content_type)
 
             return HttpResponse(result, mimetype=content_type)
@@ -414,8 +414,8 @@ def preview_map(request, datastream_revision_id):
                 query['pZoom'] = zoom
 
             query['pType'] = 'chart'
-            command_factory = AbstractCommandFactory().create() 
-            result, content_type = command_factory.create("preview_chart", query).run()
+            command_factory = AbstractCommandFactory().create("preview_chart") 
+            result, content_type = command_factory.create(query).run()
             return HttpResponse(result, mimetype=content_type)
     else:
         return HttpResponse('Error!')
@@ -458,8 +458,8 @@ def action_invoke(request):
             #query["ver"] = 6
             #return HttpResponse(str(query) + str(request.GET), "json")
 
-            command_factory = AbstractCommandFactory().create() 
-            result, content_type = command_factory.create("chart", query).run()
+            command_factory = AbstractCommandFactory().create("chart") 
+            result, content_type = command_factory.create(query).run()
             if not result:
                 result = "SIN RESULTADO para %s" % query
             return HttpResponse(result, mimetype=content_type)

@@ -29,7 +29,6 @@ class DataStreamViewSet(ResourceViewSet):
     data_types = ['ds']
     dao_get_param = 'guid'
     dao_pk = 'datastream_revision_id'
-    engine_pk = 'datastream_revision_id'
 
     @detail_route(methods=['get'])
     def data(self, request, pk=None, *args, **kwargs):

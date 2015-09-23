@@ -7,8 +7,17 @@ from django.forms.formsets import BaseFormSet
 from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 
+class CommandFactory(object):
+    def __init__(self, command_type):
+        self.command_type = command_type
 
-class EngineCommandFactory(object):
+class LoadCommandFactory(CommandFactory):
+    pass
+
+class PreviewCommandFactory(CommandFactory):
+    pass
+
+class InvokeCommandFactory(CommandFactory):
     CONV_DICT={
         "page": "pPage",
         "limit": "pLimit",
@@ -17,6 +26,8 @@ class EngineCommandFactory(object):
         "uniqueBy": "pUniqueBy",
         "output": "pOutput",
         }
+
+
 
     def _fix_params(self, filters):
         """ fix filters and other params """
@@ -74,20 +85,30 @@ class EngineCommandFactory(object):
 
         return self._fix_params(post_query)
 
-    def create(self, command_type, items):
+    def create(self, items):
         engine = None
-        if command_type == 'invoke':
+        if self.command_type == 'invoke':
             engine = EngineInvokeCommand(self._process_items(items))
-        elif command_type == 'load':
+        elif self.command_type == 'load':
             engine = EngineLoadCommand(self._process_items(items))
-        elif command_type == 'preview':
+        elif self.command_type == 'preview':
             engine = EnginePreviewCommand(self._process_items(items))
-        elif command_type == 'chart':
+        elif self.command_type == 'chart':
             engine = EngineChartCommand(self._process_items(items))
-        elif command_type == 'preview_chart':
+        elif self.command_type == 'preview_chart':
             engine = EnginePreviewChartCommand(self._process_items(items))
         return engine
 
 class AbstractCommandFactory(object):
-    def create(self):
-        return EngineCommandFactory()
+    def create(self, command_type):
+        if command_type == 'invoke':
+            engine = InvokeCommandFactory(command_type)
+        elif command_type == 'load':
+            engine = LoadCommandFactory(command_type)
+        elif command_type == 'preview':
+            engine = PreviewCommandFactory(command_type)
+        elif command_type == 'chart':
+            engine = InvokeCommandFactory(command_type)
+        elif command_type == 'preview_chart':
+            engine = PreviewCommandFactory(command_type)
+        return engine

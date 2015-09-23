@@ -28,8 +28,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
     lookup_field = 'guid'
     serializer_class = ResourceSerializer
     data_types = ['dt', 'ds', 'vz']
-    command_factory = AbstractCommandFactory().create()
-    
+        
     def list(self, request, format='json'):
         limit = self.request.query_params.get('limit', None)
         offset = self.request.query_params.get('offset', '0')
@@ -73,8 +72,9 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         self.check_object_permissions(self.request, obj)
         return obj
 
-    def engine_call(self, request, engine_method, is_detail=True, form_class=RequestForm, serialize=True):
+    def engine_call(self, request, engine_method, format=None, is_detail=True, form_class=RequestForm, serialize=True):
         mutable_get = request.GET.copy()
+        mutable_get['output'] = format or 'json'
         resource = {}
         if is_detail:
             resource = self.get_object()
@@ -90,7 +90,8 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
 
         datos = form.get_cleaned_data_plain()
 
-        result = self.command_factory.create(engine_method, form.cleaned_data).run()
+        command_factory = AbstractCommandFactory().create(engine_method)
+        result = command_factory.create(form.cleaned_data).run()
         if not result:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
@@ -102,7 +103,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         if serialize:
             serializer = self.get_serializer(resource)
             return Response(serializer.data)
-        return Response(result[0])
+        return Response(EngineSerializer(resource).data)
 
 
 class RestDataSetViewSet(ResourceViewSet):
@@ -112,7 +113,6 @@ class RestDataSetViewSet(ResourceViewSet):
     data_types = ['dt']
     dao_get_param = 'dataset_revision_id'
     dao_pk = 'dataset_revision_id'
-    engine_pk = 'dataset_revision_id'
 
     @detail_route(methods=['get'])
     def tables(self, request, pk=None, *args, **kwargs):
@@ -126,11 +126,10 @@ class RestDataStreamViewSet(ResourceViewSet):
     data_types = ['ds']
     dao_get_param = 'datastream_revision_id'
     dao_pk = 'datastream_revision_id'
-    engine_pk = 'datastream_revision_id'
 
     @detail_route(methods=['get'])
-    def data(self, request, pk=None, *args, **kwargs):
-        return self.engine_call( request, 'invoke', 
+    def data(self, request, format=None, *args, **kwargs):
+        return self.engine_call( request, 'invoke', format,
             form_class=DatastreamRequestForm,
             serialize=False)
 
@@ -145,11 +144,11 @@ class RestMapViewSet(ResourceViewSet):
     dao_get_param = 'visualization_revision_id'
     data_types = ['vz']
     dao_pk = 'visualization_revision_id'
-    engine_pk = 'visualization_revision_id'    
 
     @detail_route(methods=['get'])
-    def data(self, request, pk=None, *args, **kwargs):
-        return self.engine_call( request, 'chart', 
+    def data(self, request, format=None, *args, **kwargs):
+        return self.engine_call( request, 'chart', format,
+            form_class=VisualizationPreviewMapForm,
             serialize=False)
 
 #    @detail_route(methods=['get'])
@@ -162,9 +161,10 @@ class RestChartViewSet(ResourceViewSet):
     lookup_field = 'id'
     dao_get_param = 'visualization_revision_id'
     data_types = ['vz']
-    dao_pk = 'visualization_revision_id'
-    engine_pk = 'visualization_revision_id'    
+    dao_pk = 'visualization_revision_id' 
 
     @detail_route(methods=['get'])
-    def data(self, request, pk=None, *args, **kwargs):
-        return self.engine_call( request, 'chart', serialize=False)
+    def data(self, request, format=None, *args, **kwargs):
+        return self.engine_call( request, 'chart', format,
+            form_class=VisualizationRequestForm,
+            serialize=False)

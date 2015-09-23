@@ -56,9 +56,9 @@ def action_view(request, id, slug):
         try:
             if chart_type != "mapchart":
                 visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-                command_factory = AbstractCommandFactory().create() 
+                command_factory = AbstractCommandFactory().create("invoke") 
                 result, content_type = command_factory.create(
-                    "invoke", visualization_revision_parameters).run()
+                    visualization_revision_parameters).run()
             else:
                 join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
 #                visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
@@ -94,8 +94,8 @@ def action_embed(request, guid):
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
     visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
-    command_factory = AbstractCommandFactory().create() 
-    json, type = command_factory.create("invoke", visualization_revision_parameters).run()
+    command_factory = AbstractCommandFactory().create("invoke") 
+    json, type = command_factory.create(visualization_revision_parameters).run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('chart_manager/embed.html', locals())
@@ -135,8 +135,8 @@ def action_invoke(request):
             if zoom is not None:
                 query['pZoom'] = zoom                                           
     
-            command_factory = AbstractCommandFactory().create() 
-            result, content_type = command_factory.create("chart", query).run()
+            command_factory = AbstractCommandFactory().create("chart") 
+            result, content_type = command_factory.create(query).run()
     
             return HttpResponse(result, mimetype=content_type)
     else:

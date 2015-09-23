@@ -92,8 +92,8 @@ def mint_process(mint_request):
     datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(datastream.id)
 
     query = datastream.get_query(datastreamrevision_id, request, is_turtle=0)
-    command_factory = AbstractCommandFactory().create() 
-    contents, mimetype = command_factory.create("invoke", query).run()
+    command_factory = AbstractCommandFactory().create("invoke") 
+    contents, mimetype = command_factory.create(query).run()
 
     # read the template
     template = None

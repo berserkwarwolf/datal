@@ -374,8 +374,8 @@ def action_preview(request):
         for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
             if getdict.has_key(k): getdict.pop(k)
         query.update(getdict)
-        command_factory = AbstractCommandFactory().create() 
-        response, mimetype = command_factory.create("preview", query).run()
+        command_factory = AbstractCommandFactory().create("preview") 
+        response, mimetype = command_factory.create(query).run()
         # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
         return HttpResponse(response, mimetype)
 

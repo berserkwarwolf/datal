@@ -411,8 +411,8 @@ def action_load(request):
             query['pLimit'] = limit
         if tableid:
             query['pTableid'] = tableid
-        command_factory = AbstractCommandFactory().create() 
-        response, mimetype = command_factory.create("load", query).run()
+        command_factory = AbstractCommandFactory().create("load") 
+        response, mimetype = command_factory.create(query).run()
 
         """ detect error
         if response.find("It was not possible to dispatch the request"):
