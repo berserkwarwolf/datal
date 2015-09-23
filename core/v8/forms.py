@@ -11,20 +11,15 @@ class ArgumentForm(forms.Form):
     name=forms.CharField(max_length=16, widget=forms.TextInput(), required=True)
     value=forms.CharField(max_length=100, widget=forms.TextInput(), required=True)
 
-class DatastreamRequestForm(forms.Form):
-    page=forms.IntegerField(required=False)
-    limit=forms.IntegerField(required=False)
-    output=forms.CharField(max_length=100, required=False)
-
 class RequestForm(forms.Form):
     revision_id = forms.IntegerField(required=True)
     page = forms.IntegerField(required=False)
     limit = forms.IntegerField(required=False)
+    output=forms.CharField(max_length=100, required=False)
 
 
 class RequestFormSet(BaseFormSet):
-    is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
-    is_id=re.compile("(?P<doc_type>\S+)_id$").match
+    _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
 
 
     def __init__(self, *args, **kwargs):
@@ -64,7 +59,7 @@ class RequestFormSet(BaseFormSet):
             if key[0:4] == "form":
                 continue
 
-            match=self.is_argument(key)
+            match=self._is_argument(key)
 
             # si es AlgoNN
             if match:

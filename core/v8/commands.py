@@ -36,6 +36,7 @@ class EngineCommand(object):
 
         try:
             params = urllib.urlencode(query)
+            self.logger.info("URL: %s Params: %s" %(url, params))
 
             try:
                 if method == 'GET':

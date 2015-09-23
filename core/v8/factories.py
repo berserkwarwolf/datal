@@ -10,9 +10,12 @@ from core.v8.commands import *
 
 class EngineCommandFactory(object):
     CONV_DICT={
+        "page": "pPage",
         "limit": "pLimit",
         "id": "pId",
+        "revision_id": "pId",
         "uniqueBy": "pUniqueBy",
+        "output": "pOutput",
         }
 
     def _fix_params(self, filters):
