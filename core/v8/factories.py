@@ -8,26 +8,10 @@ from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 
 class CommandFactory(object):
+    """Factory de comandos"""
+
     def __init__(self, command_type):
         self.command_type = command_type
-
-class LoadCommandFactory(CommandFactory):
-    pass
-
-class PreviewCommandFactory(CommandFactory):
-    pass
-
-class InvokeCommandFactory(CommandFactory):
-    CONV_DICT={
-        "page": "pPage",
-        "limit": "pLimit",
-        "id": "pId",
-        "revision_id": "pId",
-        "uniqueBy": "pUniqueBy",
-        "output": "pOutput",
-        }
-
-
 
     def _fix_params(self, filters):
         """ fix filters and other params """
@@ -53,6 +37,8 @@ class InvokeCommandFactory(CommandFactory):
         return new
 
     def _parseOperator(self, value):
+        """deja los operadores como lo espera el engine"""
+
         value = value.replace('[==]', '[0]')
         value = value.replace('[>]', '[1]')
         value = value.replace('[<]', '[2]')
@@ -85,30 +71,47 @@ class InvokeCommandFactory(CommandFactory):
 
         return self._fix_params(post_query)
 
-    def create(self, items):
+    def create(self, resourse_type, items):
         engine = None
         if self.command_type == 'invoke':
-            engine = EngineInvokeCommand(self._process_items(items))
+            engine = EngineInvokeCommand(resourse_type, self._process_items(items))
         elif self.command_type == 'load':
-            engine = EngineLoadCommand(self._process_items(items))
+            engine = EngineLoadCommand(resourse_type, self._process_items(items))
         elif self.command_type == 'preview':
-            engine = EnginePreviewCommand(self._process_items(items))
+            engine = EnginePreviewCommand(resourse_type, self._process_items(items))
         elif self.command_type == 'chart':
-            engine = EngineChartCommand(self._process_items(items))
+            engine = EngineChartCommand(resourse_type, self._process_items(items))
         elif self.command_type == 'preview_chart':
-            engine = EnginePreviewChartCommand(self._process_items(items))
+            engine = EnginePreviewChartCommand(resourse_type, self._process_items(items))
         return engine
 
+class LoadCommandFactory(CommandFactory):
+    pass
+
+class PreviewCommandFactory(CommandFactory):
+    pass
+
+class InvokeCommandFactory(CommandFactory):
+    CONV_DICT={
+        "page": "pPage",
+        "limit": "pLimit",
+        "id": "pId",
+        "revision_id": "pId",
+        "uniqueBy": "pUniqueBy",
+        "output": "pOutput",
+        }
+
 class AbstractCommandFactory(object):
-    def create(self, command_type):
+    def create(self, command_type, resourse_type, data={}):
+        engine = None
         if command_type == 'invoke':
-            engine = InvokeCommandFactory(command_type)
+            engine = InvokeCommandFactory(command_type).create(resourse_type, data)
         elif command_type == 'load':
-            engine = LoadCommandFactory(command_type)
+            engine = LoadCommandFactory(command_type).create(resourse_type, data)
         elif command_type == 'preview':
-            engine = PreviewCommandFactory(command_type)
+            engine = PreviewCommandFactory(command_type).create(resourse_type, data)
         elif command_type == 'chart':
-            engine = InvokeCommandFactory(command_type)
+            engine = InvokeCommandFactory(command_type).create(resourse_type, data)
         elif command_type == 'preview_chart':
-            engine = PreviewCommandFactory(command_type)
+            engine = PreviewCommandFactory(command_type).create(resourse_type, data)
         return engine

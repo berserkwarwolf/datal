@@ -17,8 +17,9 @@ class EngineCommand(object):
     endpoint = 'defalt_endpoint'
     logger = logging.getLogger(__name__)
     
-    def __init__(self, query):
+    def __init__(self, reourse_type, query):
 
+        self.reourse_type = reourse_type
         self.query = query
 
         self.key_prefix = self._get_cache_key()
