@@ -72,32 +72,39 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageDatasets">
 
-	<!-- Filters -->
-	<section class="col-xs-2 filters-view"></section>
+{% if stats.account_total_datasets > 0 %}
 
-	<!-- List -->
-	{% include "manageDatasets/list.html" %}
+	<div class="manager" id="id_manageDatasets">
+
+		<!-- Filters -->
+		<section class="col-xs-2 filters-view"></section>
+
+		<!-- List -->
+		{% include "manageDatasets/list.html" %}
 
 
-	<!-- Loading -->
-	<div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+		<!-- Loading -->
+		<div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
 
-</div>
-
-<!-- No results -->
-<div class="no-results-view hidden col-xs-12">
-	<div class="zeroResults">
-		<div class="zeroIcon zeroDatasets"></div>
-		<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
 	</div>
-	<div class="startAdding">
-		<div class="startAddingArrows startDatasets"></div>
-		<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-		<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+
+{% else %}
+
+	<!-- No results -->
+	<div class="no-results-view col-xs-12">
+		<div class="zeroResults">
+			<div class="zeroIcon zeroDatasets"></div>
+			<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
+		</div>
+		<div class="startAdding">
+			<div class="startAddingArrows startDatasets"></div>
+			<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+			<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+		</div>
 	</div>
-</div>
+
+{% endif %}
 
 {% endblock %}
 
