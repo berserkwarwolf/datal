@@ -31,6 +31,7 @@
 <script language="javascript" src="/js_workspace/manageVisualizations/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/manageDatastreamsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -56,7 +57,7 @@
   <!-- Column Left -->
   <div class="col-xs-7">    
     
-    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_visualizations }})</span></h1>
+    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_visualizations }}</span>) </span></h1>
 
   </div>
 
@@ -111,7 +112,13 @@
 {% block bottom_js %}
 <script type="text/javascript">
   $(document).ready(function(){
+
+    var manageVisualizationsModel =  new ManageVisualizationsModel({
+      total_entries: {{ stats.account_total_visualizations }}
+    });
+
     var manageVisualizationsView =  new ManageVisualizationsView({
+      model: manageVisualizationsModel,
       visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
       sourceUrl: '/source_manager/action_search',
       tagUrl: '/tag_manager/action_search',

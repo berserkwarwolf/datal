@@ -57,6 +57,7 @@
 <script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDataviews/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/manageDataviewsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDataviews/manageDataviewsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -71,7 +72,7 @@
   <!-- Column Left -->
   <div class="col-xs-7">    
     
-    <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datastreams }})</span></h1>
+    <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datastreams }}</span>) </span></h1>
 
   </div>
 
@@ -126,12 +127,19 @@
 {% block bottom_js %}
 <script type="text/javascript">
   $(document).ready(function(){
+
+    var manageDataViewsModel =  new ManageDataViewsModel({
+      total_entries: {{ stats.account_total_datastreams }}
+    });
+
     var manageDataviewsView =  new ManageDataviewsView({
+      model: manageDataViewsModel,
       dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
       sourceUrl: '/source_manager/action_search',
       tagUrl: '/tag_manager/action_search',
       filters: {{filters|jsonify}}
     });
+
   });
 </script>
 
