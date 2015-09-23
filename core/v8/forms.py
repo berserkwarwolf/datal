@@ -23,7 +23,6 @@ class RequestForm(forms.Form):
 class RequestFormSet(BaseFormSet):
     _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
 
-
     def __init__(self, *args, **kwargs):
         new_args=[]
         for i,j in enumerate(args):
@@ -89,7 +88,8 @@ class RequestFormSet(BaseFormSet):
             return "ds"
 
     def _serialize_data(self, l):
-        self.cleaned_data_plain.update({l['name']: l['value']})
+        if l['value']:
+            self.cleaned_data_plain.update({l['name']: l['value']})
 
     def get_cleaned_data_plain(self):
         """Serializa el cleaned_data para el motor"""
