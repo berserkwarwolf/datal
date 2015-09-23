@@ -562,48 +562,6 @@ def reindex_category_resources(category_id, language):
         datastreamrevision=datastream.last_published_revision
         search_dao = DatastreamSearchDAOFactory().create(datastreamrevision)
         search_dao.add()
-#####################################################
-
-@login_required
-@privilege_required('workspace.can_access_admin')
-def get_resource_dict(request):
-    """
-    Change a param value a reindex resource on searchify
-    """
-    res_type=request.GET.get("type")
-    res_id=request.GET.get("id")
-    res_lang=request.GET.get("lang", "es")
-
-    update_param=request.GET.get("param")
-    update_value=request.GET.get("param_value")
-    update_type=request.GET.get("param_type", "string")
-
-    if res_type == "VZ":
-        res = VisualizationRevision.objects.get(pk=res_id)
-    elif res_type == "DS":
-        res = DataStreamRevision.objects.get(pk=res_id)
-
-    resp = "<h2>DICT</h2>"
-    orig = res.get_dict(res_lang)
-    resp += "<h3>Origen</h3><hr>" + str(orig)
-
-    dest = orig.copy()
-    if update_type == "int":
-        update_value = int(update_value)
-    if update_type == "float":
-        update_value = float(update_value)
-    if update_type == "long":
-        update_value = long(float(update_value))
-
-    dest["fields"][update_param] = update_value
-    resp += "<h3>Destino</h3><hr>" + str(dest)
-
-    #re-index
-    idx = SearchifyIndex().indexit(dest)
-    resp += "<h3>ReIndexado:%s</h3><hr>" % str(idx)
-
-    return HttpResponse(resp)
-
 
 @login_required
 @privilege_required('workspace.can_access_admin')

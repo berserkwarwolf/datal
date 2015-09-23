@@ -119,7 +119,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             language=self.dataset.user.language
         )
 
-        self._log_activity( ActionStreams.CREATE)
+        self._log_activity(ActionStreams.CREATE)
 
         # En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:
