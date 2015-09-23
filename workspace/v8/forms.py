@@ -7,7 +7,6 @@ from core.v8.forms import RequestForm
 
 class DatastreamRequestForm(RequestForm):
     tableid = forms.CharField(required=False)
-    #datastream_revision_id = forms.IntegerField(required=True)
 
 # es el único que no hereda del RequestForm
 class DatastreamPreviewForm(forms.Form):
@@ -20,33 +19,24 @@ class DatastreamPreviewForm(forms.Form):
     bucket_name = forms.CharField(required=False)
     limit = forms.IntegerField(required=False)
 
-
 class VisualizationRequestForm(RequestForm):
     bounds = forms.CharField(required=False)
     zoom = forms.IntegerField(required=False)
 
 
-class VisualizationPreviewForm(VisualizationRequestForm):
-    type = forms.ChoiceField(required=True, choices=VISUALIZATION_TYPES)
-    nullValueAction = forms.CharField(required=True)
-    nullValuePreset = forms.CharField(required=False)
-    invertData = forms.CharField(required=False)
-    invertedAxis = forms.CharField(required=False)
-    data = forms.CharField(required=True)
-    labels = forms.CharField(required=False)
-    headers = forms.CharField(required=False)
-    lat = forms.CharField(required=False)
-    lon = forms.CharField(required=False)
-    traces = forms.CharField(required=False)
-
-
 class VisualizationPreviewMapForm(VisualizationRequestForm):
     nullValueAction = forms.CharField(required=True)
     nullValuePreset = forms.CharField(required=False)
-
     data = forms.CharField(required=True)
     lat = forms.CharField(required=True)
     lon = forms.CharField(required=True)
-
     headers = forms.CharField(required=False)
     traces = forms.CharField(required=False)
+
+class VisualizationPreviewForm(VisualizationPreviewMapForm):
+    type = forms.ChoiceField(required=True, choices=VISUALIZATION_TYPES)
+    invertData = forms.CharField(required=False)
+    invertedAxis = forms.CharField(required=False)
+    labels = forms.CharField(required=False)
+
+

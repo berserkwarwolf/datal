@@ -16,7 +16,9 @@ class RequestForm(forms.Form):
     page = forms.IntegerField(required=False)
     limit = forms.IntegerField(required=False)
     output=forms.CharField(max_length=100, required=False)
-
+    passticket = forms.CharField(required=False)
+    if_modified_since = forms.IntegerField(required=False)
+    ttl = forms.IntegerField(required=False)
 
 class RequestFormSet(BaseFormSet):
     _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
