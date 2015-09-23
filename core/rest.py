@@ -90,8 +90,9 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
 
         datos = form.get_cleaned_data_plain()
 
-        command_factory = AbstractCommandFactory().create(engine_method)
-        result = command_factory.create(form.cleaned_data).run()
+        command = AbstractCommandFactory().create(engine_method, 
+            self.data_types[0], form.cleaned_data)
+        result = command.run()
         if not result:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
@@ -103,7 +104,7 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         if serialize:
             serializer = self.get_serializer(resource)
             return Response(serializer.data)
-        return Response(EngineSerializer(resource).data)
+        return Response(EngineSerializer(resource).data['result'])
 
 
 class RestDataSetViewSet(ResourceViewSet):

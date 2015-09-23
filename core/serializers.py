@@ -7,7 +7,7 @@ class EngineSerializer(serializers.Serializer):
             if ('format' in obj 
                 and obj['format'].startswith('application/json') and
                 obj['result']):
-                return json.loads(obj['result'])
+                return {'result': json.loads(obj['result'])}
             else:
-                return obj['result']
+                return {'result': obj['result']}
         return {}
