@@ -21,7 +21,7 @@
 			<p class="tip">{% trans 'WORKSPACE-WSTYPE-TIP' %}</p>
 		</div>
 
-		<div id="id_rest_json">
+		<div id="id_rest_json" style="display:none;">
 
 			{# path_to_headers #}
 			<div class="row clearfix">
@@ -34,6 +34,7 @@
 			<div class="row clearfix">
 				{{ form.path_to_data.label_tag }}
 				{{ form.path_to_data }} 
+				<span class="required">*</span>
 				<p class="tip">{% trans 'WORKSPACE-PATHTODATA-TIP' %}</p>
 			</div>
 
@@ -99,6 +100,8 @@
 
 	</fieldset>
 
+	<hr class="separator">
+
 	<div class="title">{% trans 'WORKSPACE-PARAM-TITLE' %}</div>
 	<fieldset id="paramForm">
 
@@ -106,6 +109,8 @@
 		<div class="paramContent"></div>
 		
 	</fieldset>
+
+	<hr class="separator">
 
 	<div class="title">{% trans 'APP-DATASET-INFORMATION-TEXT' %}</div>
 	<fieldset>

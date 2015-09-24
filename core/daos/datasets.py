@@ -16,7 +16,7 @@ from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import CollectTypeChoices, SOURCE_IMPLEMENTATION_CHOICES, StatusChoices
-from core.models import DataStreamRevision
+from core.models import DataStreamRevision, VisualizationRevision
 
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
@@ -173,7 +173,15 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset__id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
-                 'created_at', 'datastream__last_revision')
+                 'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id')
+
+        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+            visualization__datastream__datastreamrevision__dataset__id=dataset_id,
+            visualizationi18n__language=language
+        ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
+                 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
+                 'visualization__guid', 'visualization__id')
+
         return related
 
     def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):

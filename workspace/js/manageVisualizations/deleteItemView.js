@@ -69,10 +69,10 @@ var DeleteItemView = Backbone.View.extend({
 
 			model.remove_revision({
 
-				success: function() {
+				success: function(response, data) {
 					$.gritter.add({
 						title: gettext('APP-OVERLAY-DELETE-VISUALIZATION-CONFIRM-TITLE'),
-						text: resource + ": " + gettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT'),
+						text: resource + ": " + data.messages[0],
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
 						time: 3500

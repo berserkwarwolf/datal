@@ -57,7 +57,7 @@
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
 
-				<% if( status == StatusChoices.PENDING_REVIEW || status == StatusChoices.UNDER_REVIEW ){ %>
+				<% if( status == StatusChoices.PENDING_REVIEW ){ %>
 
 					<!-- Accept -->
 					<a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
@@ -105,7 +105,7 @@
 
 		<% } %> 
 
-		<% if(status != StatusChoices.PENDING_REVIEW || status != StatusChoices.UNDER_REVIEW){ %>
+		<% if(status != StatusChoices.PENDING_REVIEW){ %>
 
 			<!-- More Actions -->    
 			<div class="more-actions button-pulldown FR">

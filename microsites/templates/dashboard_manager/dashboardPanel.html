@@ -1,7 +1,7 @@
 {% load i18n extra_tags components%}
 {% url "search.action_search" as search_url %}
 
-<div class="blockPageTitle{% if can_share %} sharingDisabled{% endif %}{% if preferences.account_enable_sharing %} sharingEnabled{% endif %}">
+<div class="blockPageTitle sharingEnabled">
     <div class="titleGradient">
 
         {% block new_dashboard %}
@@ -28,11 +28,8 @@
                             <div id="" class="menuInner">
                                 <ul class="In">
                                     <li class="J"><a class="Icon FR ic_Menu open" title="{% trans 'APP-ACTIONS-TEXT' %}" href="javascript:;"><span class="DN">{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
-                                    {% if can_export %}
                                     <!-- EXPORT -->
                                     <!-- <li class="Item"><a id="id_exportDashboardCSV" href="javascript:;" title="{% trans 'APP-EXPORTDB-TITLE' %}" class="Icon ic_CSV">{% trans "APP-EXPORT-TEXT" %} <span class="DN">{% trans "APP-DASHBOARD-TEXT" %}</span></a></li>-->
-                                    {% endif %}
-
                                     <!-- GUID -->
                                     <li class="Item"><a id="id_guidButton" href="javascript:;" title="{% trans 'APP-GETGUID-TEXT' %}" class="Icon ic_GUID">{% trans "APP-GETGUID-TEXT" %}</a></li>
                                 </ul>

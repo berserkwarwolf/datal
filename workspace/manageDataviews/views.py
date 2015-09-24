@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
-
+from django.core.serializers.json import DjangoJSONEncoder
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.utils import filters_to_model_fields
@@ -125,11 +125,16 @@ def get_filters_json(request):
 @require_GET
 def related_resources(request):
     language = request.auth_manager.language
-    revision_id = request.GET.get('revision_id', '')
-    datastreams = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']
+    revision_id = request.GET.get('datastream_id', '')
+    associated_visualizations = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']
 
-    list_result = [associated_datastream for associated_datastream in datastreams]
-    return HttpResponse(json.dumps(list_result), mimetype="application/json")
+    list_result = []
+    for associated_visualization in associated_visualizations:
+        associated_visualization['type'] = 'visualization'
+        list_result.append(associated_visualization) 
+    
+    dump = json.dumps(list_result, cls=DjangoJSONEncoder)
+    return HttpResponse(dump, mimetype="application/json")
 
 
 @login_required
@@ -143,8 +148,8 @@ def remove(request, datastream_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.datastream.last_revision_id
+        if lifecycle.datastream.last_revision_id:
+            last_revision_id = lifecycle.datastream.last_revision.id
         else:
             last_revision_id = -1
 
@@ -326,11 +331,15 @@ def change_status(request, datastream_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
+            if( killemall == True ):
+                description = ugettext('APP-DATAVIEW-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
                 messages={
                     'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':

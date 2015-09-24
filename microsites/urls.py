@@ -5,6 +5,7 @@ from core.rest import RestDataStreamViewSet, RestMapViewSet, RestChartViewSet
 from rest_framework import routers
 import os
 
+
 def jsi18n(request, packages = None, domain = None):
     if not domain:
         domain = 'djangojs'

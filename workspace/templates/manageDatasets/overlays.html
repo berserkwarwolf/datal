@@ -5,7 +5,7 @@
 <div class="In clearfix">
    <h4>{% trans 'APP-OVERLAY-DELETE-DATASET-TITLE' %}</h4>
    <div class="ov-content">
-      <p class="text center more-padding">{% trans 'APP-OVERLAY-DELETE-DATASET-TEXT' %}</p>
+      <p class="text more-padding">{% trans 'APP-OVERLAY-DELETE-DATASET-TEXT' %}</p>
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
@@ -21,29 +21,13 @@
 <div class="In clearfix">
    <h4>{% trans 'APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE' %}</h4>
    <div class="ov-content">
-      <p>{% trans 'APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT' %}</p>
+      <p class="text">{% trans 'APP-OVERLAY-DELETE-DATASET-CONFIRM-TEXT' %}</p>
       <ul id="id_affectedResourcesList"></ul>
    </div>
    <div class="ov-bottom">
       <div class="ov-buttons">
          <a class="button cancel" title="{% trans 'APP-OVERLAY-CANCEL' %}">{% trans 'APP-OVERLAY-CANCEL' %}</a>
          <a id="id_deleteRelatedResources" class="button delete" title="{% trans 'APP-OVERLAY-DELETE' %}">{% trans 'APP-OVERLAY-DELETE' %}</a>
-      </div>
-   </div>
-</div>
-{% endoverlay %}
-
-<!-- Bulk Actions Delete Dataset Overlay -->
-{% overlay id_bulkDeleteDataset %}
-<div class="In clearfix">
-   <h4>{% trans 'APP-OVERLAY-BULK-DELETE-DATASET-TITLE' %}</h4>
-   <div class="ov-content">
-      <p class="text center">{% trans 'APP-OVERLAY-BULK-DELETE-DATASET-TEXT' %}</p>
-   </div>
-   <div class="ov-bottom">
-      <div class="ov-buttons">
-         <a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
-         <a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
       </div>
    </div>
 </div>
@@ -56,6 +40,22 @@
 
 {# NOT IMPLEMENTED YET #}
 {% comment %}
+
+<!-- Bulk Actions Delete Dataset Overlay -->
+{% overlay id_bulkDeleteDataset %}
+<div class="In clearfix">
+   <h4>{% trans 'APP-OVERLAY-BULK-DELETE-DATASET-TITLE' %}</h4>
+   <div class="ov-content">
+      <p class="text">{% trans 'APP-OVERLAY-BULK-DELETE-DATASET-TEXT' %}</p>
+   </div>
+   <div class="ov-bottom">
+      <div class="ov-buttons">
+         <a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}">{% trans 'APP-DELETE-BULK-RESOURCES-TEXT' %}</a>
+         <a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}">{% trans 'APP-DELETE-BULK-REVISIONS-TEXT' %}</a>
+      </div>
+   </div>
+</div>
+{% endoverlay %}
 
 
 <!-- Bulk Actions EDIT Overlay -->

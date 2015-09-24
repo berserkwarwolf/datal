@@ -84,7 +84,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def create(self, collect_type='index', allowed_states=CREATE_ALLOWED_STATES, language=None, **fields):
         """ Create a new Dataset """
-
+        logger.info('Creating datset')
+        
         # Check for allowed states
         status = int(fields.get('status', StatusChoices.DRAFT))
 
@@ -119,7 +120,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             language=self.dataset.user.language
         )
 
-        self._log_activity( ActionStreams.CREATE)
+        self._log_activity(ActionStreams.CREATE)
 
         # En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:

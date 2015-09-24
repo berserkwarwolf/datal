@@ -19,6 +19,7 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
+from core.daos.visualizations import VisualizationDBDAO
 from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
@@ -303,12 +304,16 @@ def related_resources(request):
     dataset_id = request.GET.get('dataset_id', '')
 
     # For now, we'll fetch datastreams
-    associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
+    associated_resources = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)
 
     list_result = []
-    for associated_datastream in associated_datastreams:
-        associated_datastream['type'] = 'dataview'
-        list_result.append(associated_datastream) 
+    for associated_resource in associated_resources['datastreams']:
+        associated_resource['type'] = 'dataview'
+        list_result.append(associated_resource)
+
+    for associated_resource in associated_resources['visualizations']:
+        associated_resource['type'] = 'visualization'
+        list_result.append(associated_resource)
 
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
     return HttpResponse(dump, mimetype="application/json")
@@ -361,11 +366,15 @@ def change_status(request, dataset_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
+            if killemall:
+                description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':
@@ -383,6 +392,7 @@ def change_status(request, dataset_revision_id=None):
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
         response['result'].pop('datastreams')
+        response['result'].pop('visualizations')
         response['result'].pop('tags')
         response['result'].pop('sources')
 

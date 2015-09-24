@@ -107,7 +107,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                 pk=F(fld_revision_to_get),
                 datastream__id=datastream_id,
                 category__categoryi18n__language=language,
-                datastreami18n__language=language
+                datastreami18n__language=language,
+                datastream__id=datastream_id
             )
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')

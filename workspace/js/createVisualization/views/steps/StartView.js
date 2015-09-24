@@ -13,7 +13,6 @@ var StartView = StepViewSPA.extend({
 
 		this.nav();
 		this.render();
-
 	}, 
 
 	onChooseType: function (e) {
@@ -59,6 +58,13 @@ var StartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 		this.setFlow(null);
+
+		if(this.model.get('isEdit')){
+        	this.model.set('isMap', false);
+			this.model.set('type', this.model.get('type'));
+			this.setFlow('charts');
+			this.next();
+        }
 	}
 
 });

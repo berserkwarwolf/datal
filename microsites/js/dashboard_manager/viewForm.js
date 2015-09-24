@@ -120,13 +120,11 @@ $(document).ready(function(){
             load: false
         });
 
-    if(canShare){
         var sharePrivateOverlay = new SharePrivateOverlay({
             '$Button': $('button[id=id_sharePrivateDashboardButton_]')
             , '$Container': $('#id_sharePrivateContainer')
             , '$Form': $('#id_private_share_form')
         });
-    }
 });
 
 function showGoogleSpreadsheet(pEvent){

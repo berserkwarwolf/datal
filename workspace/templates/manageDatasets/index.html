@@ -34,6 +34,7 @@
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/affectedResourcesCollectionView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDatasets/manageDatasetsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -48,7 +49,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datasets }})</span></h1>
+		<h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datasets }}</span>) </span></h1>
 
 	</div>
 
@@ -71,32 +72,33 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageDatasets">
 
-	<!-- Filters -->
-	<section class="col-xs-2 filters-view"></section>
+	<div class="manager" id="id_manageDatasets" style="display: {% if stats.account_total_datasets > 0 %} block {% else %} none; {% endif %}">
 
-	<!-- List -->
-	{% include "manageDatasets/list.html" %}
+		<!-- Filters -->
+		<section class="col-xs-2 filters-view"></section>
+
+		<!-- List -->
+		{% include "manageDatasets/list.html" %}
 
 
-	<!-- Loading -->
-	<div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+		<!-- Loading -->
+		<div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
 
-</div>
-
-<!-- No results -->
-<div class="no-results-view hidden col-xs-12">
-	<div class="zeroResults">
-		<div class="zeroIcon zeroDatasets"></div>
-		<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
 	</div>
-	<div class="startAdding">
-		<div class="startAddingArrows startDatasets"></div>
-		<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-		<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+
+	<!-- No results -->
+	<div class="no-results-view col-xs-12" style="display: {% if stats.account_total_datasets == 0 %} block {% else %} none; {% endif %}">
+		<div class="zeroResults">
+			<div class="zeroIcon zeroDatasets"></div>
+			<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
+		</div>
+		<div class="startAdding">
+			<div class="startAddingArrows startDatasets"></div>
+			<p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+			<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
+		</div>
 	</div>
-</div>
 
 {% endblock %}
 
@@ -104,7 +106,11 @@
 <script type="text/javascript">
 
 	$(document).ready(function(){
+		var manageDatasetsModel =  new ManageDatasetsModel({
+			total_entries: {{ stats.account_total_datasets }}
+		});
 		var manageDatasetsView =  new ManageDatasetsView({
+			model: manageDatasetsModel,
 			datastreamImplValidChoices: {% if datastream_impl_valid_choices %}{{ datastream_impl_valid_choices }}{% else %}[]{% endif %},
 			filters: {{filters|jsonify}}
 		});

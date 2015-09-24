@@ -17,7 +17,7 @@ managers.CategoryManager.get_for_browse = get_for_browse
 class FinderManager(finder.FinderManager):
     def __init__(self, finder_class=searchify.IndexTankFinder, failback_finder_class=searchify.IndexTankFinder):
         self.finder_class = finder_class
-	    
+      
         self.finder = elastic.ElasticsearchFinder
         self.failback_finder_class = failback_finder_class
         self.failback_finder_class = elastic.ElasticsearchFinder

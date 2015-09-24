@@ -198,7 +198,7 @@
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
 
-				<% if( status == StatusChoices.PENDING_REVIEW || status == StatusChoices.UNDER_REVIEW ){ %>
+				<% if( status == StatusChoices.PENDING_REVIEW ){ %>
 
 					<!-- Accept -->
 					<a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
@@ -228,7 +228,7 @@
 				<% if( status == StatusChoices.DRAFT  ){ %>
 
 					<!-- Secondary Action - Send to review -->
-					<a id="id_sendToReview" class="button FR" title="{% trans 'APP-SENDTOREVIEW-TEXT' %}" data-action="review">{% trans 'APP-SENDTOREVIEW-TEXT' %}</a>
+					<a id="id_sendToReview" class="button FR" title="{% trans 'APP-SENDTOREVIEW-TEXT' %}" data-action="send_to_review">{% trans 'APP-SENDTOREVIEW-TEXT' %}</a>
 
 				<% } %>
 
@@ -236,7 +236,7 @@
 
 		<% } %> 
 
-		<% if(status != StatusChoices.PENDING_REVIEW || status != StatusChoices.UNDER_REVIEW){ %>
+		<% if(status != StatusChoices.PENDING_REVIEW){ %>
 
 			<!-- More Actions -->    
 			<div class="more-actions button-pulldown FR">

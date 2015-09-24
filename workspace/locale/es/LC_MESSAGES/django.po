@@ -2838,6 +2838,9 @@ msgstr "Conjunto de datos despublicado"
 msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
 
+msgid "APP-DATASET-UNPUBLISHALL-TEXT"
+msgstr "El conjunto de datos y sus recursos asociados han sido puestos como borrador, y no están más disponibles en el sitio de datos."
+
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Conjunto de datos enviado a revisión"
 
@@ -2867,6 +2870,9 @@ msgstr "Vista despublicada"
 
 msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
 msgstr "La vista ha sido puesta como borrador, y no está más disponible en el sitio de datos."
+
+msgid "APP-DATAVIEW-UNPUBLISHALL-TEXT"
+msgstr "La vista y sus recursos asociados han sido puestos como borrador, y no están más disponibles en el sitio de datos."
 
 msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
 msgstr "Vista enviada a revisión"
@@ -2941,7 +2947,7 @@ msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Eliminar vista"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán eliminados."
+msgstr "Las siguientes visualizaciones están asociadas a esta vista y también serán eliminadas."
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Despublicar vista"
@@ -2953,7 +2959,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Despublicar vista"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
-msgstr "Los siguientes recursos están asociados a este conjunto de datos y también serán despublicados."
+msgstr "Las siguientes visualizaciones están asociadas a este vista y también serán despublicadas."
 
 msgid "DS-STEP1-TEXT"
 msgstr "Selección"
