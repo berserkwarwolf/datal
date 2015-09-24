@@ -73,9 +73,7 @@
 
 {% block content %}
 
-{% if stats.account_total_datasets > 0 %}
-
-	<div class="manager" id="id_manageDatasets">
+	<div class="manager" id="id_manageDatasets" style="display: {% if stats.account_total_datasets > 0 %} block {% else %} none; {% endif %}">
 
 		<!-- Filters -->
 		<section class="col-xs-2 filters-view"></section>
@@ -89,10 +87,8 @@
 
 	</div>
 
-{% else %}
-
 	<!-- No results -->
-	<div class="no-results-view col-xs-12">
+	<div class="no-results-view col-xs-12" style="display: {% if stats.account_total_datasets == 0 %} block {% else %} none; {% endif %}">
 		<div class="zeroResults">
 			<div class="zeroIcon zeroDatasets"></div>
 			<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
@@ -103,8 +99,6 @@
 			<p class="second">{% trans 'APP-START-ADDING-NEW-DATASET-TEXT' %}</p>
 		</div>
 	</div>
-
-{% endif %}
 
 {% endblock %}
 

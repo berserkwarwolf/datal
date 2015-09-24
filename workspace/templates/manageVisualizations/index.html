@@ -74,9 +74,7 @@
 
 {% block content %}
 
-{% if stats.account_total_visualizations > 0 %}
-
-  <div class="manager" id="id_manageVisualizations">
+  <div class="manager" id="id_manageVisualizations" style="display: {% if stats.account_total_visualizations > 0 %} block {% else %} none; {% endif %}">
 
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
@@ -97,10 +95,8 @@
 
   </div>
 
-{% else %}
-
   <!-- No results -->
-  <div class="no-results-view">
+  <div class="no-results-view col-xs-12" style="display: {% if stats.account_total_visualizations == 0 %} block {% else %} none; {% endif %}">
     <div class="zeroResults">
       <div class="zeroIcon zeroVisualizations"></div>
       <p>{% trans 'APP-ZERO-VISUALIZATIONS-TEXT' %}</p>
@@ -111,8 +107,6 @@
       <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
     </div>
   </div>
-
-{% endif %}
 
 {% endblock %}
 
