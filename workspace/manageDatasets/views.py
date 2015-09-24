@@ -88,7 +88,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     filters = bb_request.get('filters')
     filters_dict= ''
     filter_name= ''
-    sort_by='-id'
+    sort_by='id'
     exclude=None
 
     if filters is not None and filters != '':
@@ -136,9 +136,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = {'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
-    mimetype = "application/json"
-
-    return HttpResponse(response, mimetype=mimetype)
+    return HttpResponse(response, mimetype="application/json")
 
 
 @login_required
