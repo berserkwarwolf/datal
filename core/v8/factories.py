@@ -8,6 +8,8 @@ from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 
 class CommandFactory(object):
+    """Factory de comandos"""
+
     CONV_DICT={
         "page": "pPage",
         "limit": "pLimit",
@@ -15,8 +17,20 @@ class CommandFactory(object):
         "revision_id": "pId",
         "uniqueBy": "pUniqueBy",
         "output": "pOutput",
+        'data','pData',
+        'headerSelection','pHeaderSelection',
+        'labelSelection','pLabelSelection',
+        'type','pType',
+        'invertData','pInvertData',
+        'invertedAxis','pInvertedAxis',
+        'nullValueAction','pNullValueAction',
+        'nullValuePreset','pNullValuePreset',
+        'zoom','pZoom',
+        'bounds','pBounds',
+        'traces','pTraceSelection',
+        'lat','pLatitudSelection',
+        'lon','pLongitudSelection',
     }
-    """Factory de comandos"""
 
     def __init__(self, resourse_type):
         self.resourse_type = resourse_type
@@ -92,15 +106,6 @@ class PreviewCommandFactory(CommandFactory):
             return EnginePreviewChartCommand(self._process_items(items))
         
 class InvokeCommandFactory(CommandFactory):
-    CONV_DICT={
-        "page": "pPage",
-        "limit": "pLimit",
-        "id": "pId",
-        "revision_id": "pId",
-        "uniqueBy": "pUniqueBy",
-        "output": "pOutput",
-        }
-
     def create(self, items):
         if self.resourse_type == 'ds':
             return EngineInvokeCommand(self._process_items(items))
