@@ -15,15 +15,12 @@ var MapView = StepViewSPA.extend({
 
         this.modalView = new MapSelectDataModalView({
           el: '#MapSelectDataModal',
-          model: this.model
+          model: this.model,
+          dataStreamModel: this.dataStreamModel
         });
-        this.modalView.on('open', function () {
-            this.dataTableView.render();
-        });
-
+        this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
         // Event binding
         this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-        this.listenTo(this.modalView, 'close', this.onCloseModal, this);
     }, 
 
     onCloseModal: function () {
@@ -98,14 +95,12 @@ var MapView = StepViewSPA.extend({
                 model: this.model,
             });
             
-            if(this.chartInstance.valid()){
-                this.chartInstance.render();
-                this.chartInstance.mapInstance.setOptions({
-                    disableDefaultUI: true,
-                    disableDoubleClickZoom: true,
-                    scrollwheel: false
-                });
-            };
+            this.chartInstance.render();
+            this.chartInstance.mapInstance.setOptions({
+                disableDefaultUI: true,
+                disableDoubleClickZoom: true,
+                scrollwheel: false
+            });
 
         }   
     },

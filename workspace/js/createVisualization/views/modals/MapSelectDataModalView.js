@@ -7,12 +7,18 @@ var MapSelectDataModalView = ModalView.extend({
 	initialize: function(){
 		var self = this;
 
-		//init table
-		this.collection = new DataTableSelectedCollection();
+        //init table
+        this.collection = new DataTableSelectedCollection();
+
+        this.rangeLatModel = new DataTableSelectionModel({id: 1});
+        this.rangeLonModel = new DataTableSelectionModel({id: 2});
+        this.rangeInfoModel = new DataTableSelectionModel({id: 3});
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            collection: this.collection
+            rangeLatModel: this.rangeLatModel,
+            rangeLonModel: this.rangeLonModel,
+            rangeInfoModel: this.rangeInfoModel
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
@@ -64,13 +70,11 @@ var MapSelectDataModalView = ModalView.extend({
         });
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.selectedCellRangeView.select(range);
+            this.addSelection(this._cacheFocusedInput);
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
         }, this);
-        this.dataTableView.table.render();
     },
 
     addSelection: function (name) {
