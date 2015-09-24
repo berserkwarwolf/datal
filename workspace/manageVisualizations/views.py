@@ -15,7 +15,6 @@ from core.auth.decorators import login_required,privilege_required
 from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
 from core.utils import DateTimeEncoder
-from core.utils import filters_to_model_fields
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
