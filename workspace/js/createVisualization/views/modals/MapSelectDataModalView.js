@@ -24,8 +24,9 @@ var MapSelectDataModalView = ModalView.extend({
             // this.dataTableView.selectRange(val);
         });
 
-        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-            this.model.get('datastream_revision_id'),
+        var dataUrl = ['/rest/datastreams/', 
+            this.model.get('datastream_revision_id'), 
+            '/data.json?', 
             '&limit=50&page=0'].join('');
 
         // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the

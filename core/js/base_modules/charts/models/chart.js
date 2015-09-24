@@ -157,7 +157,7 @@ charts.models.Chart = Backbone.Model.extend({
             params['invertedAxis'] = true;
         }
 
-        return $.getJSON('/visualizations/preview', params)
+        return $.getJSON('/rest/charts/sample.json', params)
         .then(function (response) {
             self.formatResponseData(response.series, response.values, response.labels);
         })

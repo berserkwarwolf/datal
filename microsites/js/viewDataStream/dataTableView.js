@@ -123,7 +123,7 @@ var dataTableView = Backbone.View.extend({
 
 		var dataStream = this.options.dataStream.attributes;
 
-	  var data = "datastream_revision_id=" + dataStream.id + "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
+	  var data = "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
 
 	  // Add DataStream pArguments
 	  var params = [],
@@ -139,7 +139,7 @@ var dataTableView = Backbone.View.extend({
 		}
 	    
 	  var ajax = $.ajax({ 
-			url: '/dataviews/invoke', 
+			url: '/rest/datastreams/' + dataStream.id + '/data.json', 
 		  type:'GET', 
 		  data: data, 
 		  dataType: 'json', 

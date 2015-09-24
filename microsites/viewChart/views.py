@@ -129,9 +129,10 @@ def action_embed(request, guid):
 
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
     visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
-    command_factory = AbstractCommandFactory().create("invoke") 
-    json, type = command_factory.create(
-                    visualization_revision_parameters).run()
+    
+    command = AbstractCommandFactory().create("invoke", 
+            "vz", form.visualization_revision_parameters)
+    json, type = command.run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
@@ -174,9 +175,8 @@ def action_invoke(request):
 
             #query["ver"] = 6
             #return HttpResponse(str(query) + str(request.GET), "json")
-
-            command_factory = AbstractCommandFactory().create("chart") 
-            result, content_type = command_factory.create(query).run()
+            command = AbstractCommandFactory().create("invoke", "vz", query)
+            result, content_type = command.run()
             if not result:
                 result = "SIN RESULTADO para %s" % query
             return HttpResponse(result, mimetype=content_type)

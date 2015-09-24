@@ -1097,8 +1097,7 @@ function invokeDashboardDataService(pId, pEndPoint, pIndex){
     var lDashboardDataserviceId = $Container.data("dashboard_dataservice_id");
     var lTo = pIndex;
 
-	var lData = "datastream_revision_id=" + pId 
-			+ '&pIndex=' + pIndex 
+	var lData = '&pIndex=' + pIndex 
 			+ '&limit=50'
 			+ pEndPoint;
 
@@ -1113,10 +1112,9 @@ function invokeDashboardDataService(pId, pEndPoint, pIndex){
     }
     else {
         var lDashboardDataserviceId = $Container.data("dashboard_dataservice_id");
-        var lUrl = '/dataviews/invoke';
+        var lUrl = '/rest/datastreams/' + pId + '/data.json';
         var lTo = pIndex;
-		var lData = 'datastream_revision_id=' + pId 
-				+ '&pIndex=' + pIndex 
+		var lData = '&pIndex=' + pIndex 
 				+ '&limit=50'
 				+ pEndPoint;
 

@@ -1234,7 +1234,7 @@ var Step3 = Step.extend({
 		$('#id_tags').html(contents);
 	},
 	requestDataStreamPreview : function(){
-		var lUrl 	= '/dataviews/action_preview';
+		var lUrl 	= '/rest/datastreams/sample.json';
 	    var lData 	= 'end_point=' + $.URLEncode(CreationManager.attributes.endPoint)
 	    			+ '&impl_type=' + CreationManager.attributes.implType
 	    			+ '&impl_details=' + CreationManager.attributes.implDetails
