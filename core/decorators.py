@@ -29,12 +29,14 @@ def public_keys_forbidden(view_func):
 
     return _wrapped_view
 
+
 def datal_make_key(key, key_prefix, version):
     """
         sobre escribe el metodo make_key del cache para generar la key, ignorando key
     """
 
     return ":".join([str(version), key_prefix])
+
 
 def datal_cache_page(**kwargs):
     def _cache_page(viewfunc):
@@ -46,8 +48,6 @@ def datal_cache_page(**kwargs):
             return response(request, *args, **kw)
         return _cache_page
     return _cache_page
-
-
 
 def threshold(code):
     def decorator(func):
@@ -90,4 +90,3 @@ def calculate_user_limit(request, code):
         return response
     else:
         return ''
-

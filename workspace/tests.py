@@ -9,8 +9,6 @@ class DATALSeleniumTests(LiveServerTestCase):
     display = None
     driver = None
     workspace_url = 'http://workspace.dev'  # Deberiamos traerlo de settings
-    fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
-                'preference.json', 'privilege.json', 'role.json', 'threshold.json', 'user.json', ]
 
     @classmethod
     def setUpClass(cls):
@@ -51,12 +49,28 @@ class DATALSeleniumTests(LiveServerTestCase):
         password_input.send_keys('publicador')
         self.driver.find_element_by_id('id_submitButton').click()
 
-    def test_login(self):
+    def logout(self):
+        self.driver.get(self.workspace_url + '/signout/')
+
+    def test_login_logout(self):
         """
-        [Workspace] Test del inicio de sesion
+        [Workspace] Test del inicio y cerrado de sesion
         """
         self.login_as_admin()
         self.assertEqual(self.driver.current_url, u'http://workspace.dev/welcome/')
+        self.logout()
+        self.assertEqual(self.driver.current_url, u'http://workspace.dev/signin/')
+
+    def test_create_file_dataset_as_editor(self):
+        """
+        [Workspace] Test de creacion de dataset tipo File con usuario editor
+        """
+        self.login_as_editor()
+        self.driver.find_element_by_id('id_datasets_option').click()
+        self.driver.find_element_by_link_text('Nuevo conjunto de datos').click()
+        self.driver.find_element_by_link_text('Desde un archivo...').click()
+        self.driver.save_screenshot('datal.png')
+        self.logout()
 
 #         endpoint = 'http://nolaborables.com.ar/API/v1/2015'
 #         impl_type = SourceImplementationChoices().REST

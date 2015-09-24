@@ -42,7 +42,7 @@ var DataTableView = Backbone.View.extend({
 
   initialize: function (options) {
     var self = this,
-      invoke = options.invoke;
+      invoke = options.datastream;
 
     this.utils = DataTableUtils;
 
@@ -52,8 +52,8 @@ var DataTableView = Backbone.View.extend({
       };
     });
 
-    var rows = _.map(_.range(0, invoke.fRows), function () {
-      var row = invoke.fArray.splice(0, invoke.fCols);
+    var rows = _.map(_.range(0, invoke.fRows), function (i) {
+      var row = invoke.fArray.slice(i*invoke.fCols, (i+1)*invoke.fCols);
       return _.pluck(row, 'fStr');
     });
 
