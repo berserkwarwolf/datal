@@ -53,28 +53,27 @@ def index(request):
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
-    filters = bb_request.get('filters')
-    filters_dict = ''
+    filters_param = bb_request.get('filters')
+    filters_dict = dict()
     filter_name= ''
-    sort_by='-id'
+    sort_by='id'
 
-    if filters is not None and filters != '':
-        item = json.loads(bb_request.get('filters'))
-        
-        filters_dict = dict()
-        filters_dict['dataset__user__nick'] = item.get('author_filter')
-        if item.get('status_filter'):
-            filters_dict['status'] = []
-            for x in item.get('status_filter'):
-                filters_dict['status'].append([status[0] for status in settings.STATUS_CHOICES if status[1] == x][0])
+    if filters_param is not None and filters_param != '':
+        filters = json.loads(filters_param)
 
-        
+        filters_dict['impl_type'] = filters.get('type')
+        filters_dict['category__categoryi18n__name'] = filters.get('category')
+        filters_dict['visualization__user__nick'] = filters.get('author')
+        filters_dict['status'] = filters.get('status')
+
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
-    if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
-        itemsxpage = int(bb_request.get('itemxpage'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':
         filter_name = bb_request.get('q')
+    if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
+        itemsxpage = int(bb_request.get('itemxpage'))
+
+
     if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
         if bb_request.get('sort_by') == "title":
             sort_by ="visualizationi18n__title"
@@ -84,13 +83,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
             sort_by ="visualization__user__nick"
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
-    #limit = int(bb_request.get('rp'))
-    #sort_by = bb_request.get('sortname')
-    #order = bb_request.get('sortorder')
-    #filters_dict=filters_dict
 
-    vs_dao = VisualizationDBDAO()
-    resources,total_resources = vs_dao.query(
+    resources,total_resources = VisualizationDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,

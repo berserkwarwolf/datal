@@ -1,6 +1,6 @@
 var MapView = StepViewSPA.extend({
     
-    initialize: function(){
+    initialize: function(options){
 
         // Right way to extend events without overriding the parent ones
         this.addEvents({
@@ -18,7 +18,8 @@ var MapView = StepViewSPA.extend({
 
         this.modalView = new MapSelectDataModalView({
           el: '#MapSelectDataModal',
-          model: this.model
+          model: this.model,
+          dataStreamModel: options.dataStreamModel
         });
         this.modalView.on('open', function () {
             this.dataTableView.render();
@@ -93,9 +94,12 @@ var MapView = StepViewSPA.extend({
                 model: this.model,
             });
             
-            if(this.chartInstance.valid()){
-                this.chartInstance.render();
-            };
+            this.chartInstance.render();
+            this.chartInstance.mapInstance.setOptions({
+                disableDefaultUI: true,
+                disableDoubleClickZoom: true,
+                scrollwheel: false
+            });
 
         }   
     },

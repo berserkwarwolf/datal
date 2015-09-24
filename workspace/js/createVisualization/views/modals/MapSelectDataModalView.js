@@ -4,15 +4,24 @@ var MapSelectDataModalView = ModalView.extend({
 		'click button.btn-cancel':'onClickCancel'
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		var self = this;
 
-		//init table
-		this.collection = new DataTableSelectedCollection();
+        //init table
+        this.collection = new DataTableSelectedCollection();
+
+        this.rangeLatModel = new DataTableSelectionModel({id: 1});
+        this.rangeLonModel = new DataTableSelectionModel({id: 2});
+        this.rangeInfoModel = new DataTableSelectionModel({id: 3});
+
+        this.dataStreamModel = options.dataStreamModel;
+        console.log('map', this.dataStreamModel)
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            collection: this.collection
+            rangeLatModel: this.rangeLatModel,
+            rangeLonModel: this.rangeLonModel,
+            rangeInfoModel: this.rangeInfoModel
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
@@ -24,15 +33,7 @@ var MapSelectDataModalView = ModalView.extend({
             // this.dataTableView.selectRange(val);
         });
 
-        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-            this.model.get('datastream_revision_id'),
-            '&limit=50&page=0'].join('');
-
-        // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
-        // request when it fails.
-        $.getJSON(dataUrl).then(function (payload) {
-            self.createDataTableView(payload);
-        });
+        this.listenTo(this.dataStreamModel, 'change', this.createDataTableView, this);
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
@@ -44,8 +45,8 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        console.log('result of the selection to be posted to the API', this.collection.getSelectionChartStyle());
         var selection = this.collection.getSelectionChartStyle();
+        console.log('result of the selection to be posted to the API', selection);
         this.model.set(selection);
         this.close();
     },
@@ -56,21 +57,19 @@ var MapSelectDataModalView = ModalView.extend({
         this.close(); //Close modal
     },
 
-    createDataTableView: function (payload) {
+    createDataTableView: function (model) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
-            invoke: payload
+            datastream: model.toJSON()
         });
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.selectedCellRangeView.select(range);
+            this.addSelection(this._cacheFocusedInput);
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
         }, this);
-        this.dataTableView.table.render();
     },
 
     addSelection: function (name) {
@@ -79,7 +78,7 @@ var MapSelectDataModalView = ModalView.extend({
         if (_.isString(name)) {
           // When name is defined, the selection mode only allows setting selection to certain models
           // with fixed id (so that the color is stable)
-          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
+          names = {'range_lat': 1, 'range_lon': 2, 'range_data': 3};
           model = new DataTableSelectionModel(_.extend(selection, {
             id: names[name],
             name: name
