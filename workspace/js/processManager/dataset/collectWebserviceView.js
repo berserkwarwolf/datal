@@ -50,6 +50,9 @@ var CollectWebserviceView = StepView.extend({
 		// Init Param Collection
 		this.initParamsList();
 
+		// Show implementation type form
+		this.onImplTypeRun( this.model.get('impl_type')  );
+
 		// Bind custom model validation callbacks
 		Backbone.Validation.bind(this, {
 			valid: function (view, attr, selector) {
@@ -172,14 +175,19 @@ var CollectWebserviceView = StepView.extend({
 	},
 
 	onImplTypeChange:function(event){
-		if( $(event.currentTarget).val() == '1' ){
-			$('#id_rest_json').hide();
-			$('#id_soap_xml').slideDown();
-		}else{
-			$('#id_soap_xml').hide();
-			$('#id_rest_json').slideDown();
-		}
-	}
+        var impl_type = $(event.currentTarget).val();
+        this.onImplTypeRun(impl_type);
+    },
+
+    onImplTypeRun:function(impl_type){
+        if( impl_type == '1' ){
+            $('#id_rest_json').hide();
+            $('#id_soap_xml').slideDown();
+        }else{
+            $('#id_soap_xml').hide();
+            $('#id_rest_json').slideDown();
+        }
+    }
 
 });
 
