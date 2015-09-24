@@ -31,6 +31,13 @@ class CommandFactory(object):
         'lat','pLatitudSelection',
         'lon','pLongitudSelection',
         'whereExpr','pWhereExpr',
+
+        'end_point','pEndPoint',
+        'datasource','pDataSource',
+        'select_statement','pSelectStatement',
+        'impl_details','pImplDetails',
+        'impl_type','pImplType',
+        'bucket_name','pBucketName',
     }
 
     def __init__(self, resourse_type):

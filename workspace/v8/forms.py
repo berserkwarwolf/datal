@@ -10,14 +10,22 @@ class DatastreamRequestForm(RequestForm):
 
 # es el único que no hereda del RequestForm
 class DatastreamPreviewForm(forms.Form):
-    end_point = forms.CharField(required=False)
+    # pEndPoint: end poibnt del dataset relacionado al ds
+    end_point = forms.CharField(required=True)
+    # pImplType: Tipo de implementacion del dataset relacionado al datastream       
     impl_type = forms.CharField(required=False)
-    impl_details = forms.CharField(required=False)
-    datasource = forms.CharField(required=False)
-    select_statement = forms.CharField(required=False)
-    rdf_template = forms.CharField(required=False)
+    # pImplDetails: XML con detales de implementacion del dataset relacionado al datastream
+    impl_details = forms.CharField(required=True)
+    # pDataSource: XML describiendo la estructura del dataset
+    datasource = forms.CharField(required=True)
+    # pSelectStatement: XML con la sentencia SQL para scrapear los datos desde la fuente
+    select_statement = forms.CharField(required=True)
+    # pBucketName: Nombre del bucket configurado para la cuenta
     bucket_name = forms.CharField(required=False)
+    # pLimit: Cantidad de filas que se quiere previsualizar   
     limit = forms.IntegerField(required=False)
+    page = forms.IntegerField(required=False)
+    rdf_template = forms.CharField(required=False)
 
 class VisualizationRequestForm(RequestForm):
     # pBounds: Limites del mapa para filtrar los puntos
