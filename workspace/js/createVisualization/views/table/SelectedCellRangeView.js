@@ -14,9 +14,9 @@ var SelectedCellRangeView = Backbone.View.extend({
 
         // check because same instance being used in map modal
         if (this.rangeDataModel) {
-        	this.listenTo(this.rangeDataModel, 'change', this.onChangeData);
-        	this.listenTo(this.rangeLabelsModel, 'change', this.onChangeLabels);
-        	this.listenTo(this.rangeHeadersModel, 'change', this.onChangeHeaders);
+        	this.listenTo(this.rangeDataModel, 'change:excelRange', this.onChangeData);
+        	this.listenTo(this.rangeLabelsModel, 'change:excelRange', this.onChangeLabels);
+        	this.listenTo(this.rangeHeadersModel, 'change:excelRange', this.onChangeHeaders);
         };
 	},
 
@@ -67,18 +67,18 @@ var SelectedCellRangeView = Backbone.View.extend({
 		this.showValidations();
 	},
 
-	onChangeData: function (model) {
-		this.$('input[name="range_data"]').val(model.get('excelRange'));
+	onChangeData: function (model, value) {
+		this.$('input[name="range_data"]').val(value);
 		this.showValidations();
 	},
 
-	onChangeLabels: function (model) {
-		this.$('input[name="range_labels"]').val(model.get('excelRange'));
+	onChangeLabels: function (model, value) {
+		this.$('input[name="range_labels"]').val(value);
 		this.showValidations();
 	},
 
-	onChangeHeaders: function (model) {
-		this.$('input[name="range_headers"]').val(model.get('excelRange'));
+	onChangeHeaders: function (model, value) {
+		this.$('input[name="range_headers"]').val(value);
 		this.showValidations();
 	},
 
