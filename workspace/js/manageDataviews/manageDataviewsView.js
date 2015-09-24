@@ -11,6 +11,7 @@ var ManageDataviewsView = Backbone.View.extend({
     paginator: null,
     sourceUrl: null,
     tagUrl: null,
+    template: null,
 
     events: {
         "click #id_itemsPerPage": "onItemsPerPageChanged",
@@ -26,6 +27,9 @@ var ManageDataviewsView = Backbone.View.extend({
         this.sourceUrl = this.options.sourceUrl;
         this.tagUrl = this.options.tagUrl;
 
+        // Init template
+        this.template = _.template($("#total-entries-template").html());
+
         // Init Filters
         this.initFilters(options.filters);
 
@@ -35,8 +39,10 @@ var ManageDataviewsView = Backbone.View.extend({
         // Listen To
         this.listenTo(this.listResources, 'request', this.showLoading);
         this.listenTo(this.listResources, 'sync', this.hideLoading);
-        this.listenTo(this.listResources, 'sync', this.onNoResults);
         this.listenTo(this.listResources, 'error', this.hideLoading);
+        this.listenTo(this.listResources, 'sync', this.updateTotalEntries);
+            
+        this.setHeights();
 
         // Render
         this.render();
@@ -44,9 +50,15 @@ var ManageDataviewsView = Backbone.View.extend({
     },
 
     render: function(){
+        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
         this.$el.find("#grid").html(this.grid.render().$el);
         this.$el.find("#paginator").html(this.paginator.render().$el);
         this.$el.find(".backgrid-paginator").addClass("pager center");
+    },
+
+    updateTotalEntries: function(models, response){
+        this.model.set('total_entries',response.total_entries);
+        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
     },
 
     showLoading: function(){
@@ -64,16 +76,26 @@ var ManageDataviewsView = Backbone.View.extend({
         }
     },
 
-    onNoResults: function (collection) {
-        // oculta la vista principal cuando no hay reslultados y muestra la de no-results.
-        // Necesitará refactor si se sigue moviendo cosas al frontend para manejar estas 
-        // condiciones. G. Avila-2015-07-06
-        if (collection.length === 0) {
-            $('.no-results-view').removeClass('hidden');
-            $('.manager').addClass('hidden');
-            $('#id_visualizations_option').addClass('disabled').removeAttr('href');
-        }
-    },
+    setHeights: function(t){
+        var self = this;
+
+        var noContent = $('.no-results-view');
+
+        $(window).resize(function(){
+
+            windowHeight = $(window).height();
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.layout').find('header.header').height() )
+            - parseFloat( $('.main-section').find('.context-menu').height() )
+            - 30 // As margin bottom
+            ;
+
+            noContent.css('height', sidebarHeight+'px');
+
+        }).resize();
+    }, 
 
     onItemsPerPageChanged: function() {
         this.listResources.setPageSize( parseInt( $('#id_itemsPerPage').val() ) );

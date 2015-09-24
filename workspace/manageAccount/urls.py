@@ -24,6 +24,5 @@ urlpatterns = patterns(
     url(r'^suggest', 'workspace.personalizeHome.views.suggest', name='personalizeHome.suggest'),
     url(r'^upload    ', 'workspace.personalizeHome.views.upload', name='personalizeHome.upload'),
     url(r'^deleteFiles', 'workspace.personalizeHome.views.deleteFiles', name='personalizeHome.deleteFiles'),
-    url(r'^get_resource_dict', 'workspace.manageAccount.views.get_resource_dict', name='admin_manager.get_resource_dict'),
     url(r'^create_test_datasets/(?P<quantity>\d+)', 'workspace.manageAccount.views.create_test_datasets', name='admin_manager.create_test_datasets'),
 )

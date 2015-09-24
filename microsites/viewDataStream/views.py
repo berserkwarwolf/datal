@@ -35,9 +35,7 @@ def view(request, id, slug):
     else:
         base_uri = get_domain_with_protocol('microsites')
 
-    datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-
-    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_revision_id=datastreamrevision_id)
+    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
     impl_type_nice = set_dataset_impl_type_nice(datastream['impl_type']).replace('/',' ')
 
     """ #TODO this must be at middleware
@@ -49,15 +47,7 @@ def view(request, id, slug):
     """
     url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream['parameters']))
 
-    can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-    can_export = True
-    can_share = False
-
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
-
-    can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-    can_export = True
-    can_share = False
 
     #DataStreamDBDAO().hit(id, ChannelTypes.WEB)
     notes = datastream['notes']

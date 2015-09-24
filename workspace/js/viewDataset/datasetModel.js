@@ -9,26 +9,6 @@ var DatasetModel = dataset.extend({
       var opts = _.extend({url: 'remove/revision/' + this.id}, options || {});
 
       return Backbone.Model.prototype.destroy.call(this, opts);
-  },
-
-  unpublish: function (options) {
-      $.post('change_status/' + this.id + '/', {'action': 'unpublish', 'killemall': true})
-          .done(function(data){
-               console.log(data);
-          })
-          .fail(function(data) {
-              console.log(data);
-          });;
-  },
-
-  unpublish_revision: function (options) {
-      $.post('change_status/' + this.id + '/', {'action': 'unpublish', 'killemall': false})
-          .done(function(data){
-               console.log(data);
-          })
-          .fail(function(data) {
-              console.log(data);
-          });
-  },
+  }
 
 });

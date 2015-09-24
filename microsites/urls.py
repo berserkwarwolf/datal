@@ -3,6 +3,7 @@ from django.conf import settings
 from django.views.generic import RedirectView
 import os
 
+
 def jsi18n(request, packages = None, domain = None):
     if not domain:
         domain = 'djangojs'
@@ -15,6 +16,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
@@ -38,7 +40,7 @@ urlpatterns = patterns('',
     (r'^datasets/', include('microsites.viewDataset.urls')),
 
     (r'^search/', include('microsites.search.urls')),
-    (r'^search$', include('microsites.search.urls')),
+    #(r'^search$', include('microsites.search.urls')),
     url(r'^developers/$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
     url(r'^developers$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
     url(r'^manageDeveloper/action_insert$', 'core.manageDeveloper.views.action_insert', name='manageDeveloper.action_insert'),
@@ -61,7 +63,6 @@ urlpatterns = patterns('',
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
 
-    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
 )
 
 handler404 = 'core.views.action404'

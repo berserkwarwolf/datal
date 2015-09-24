@@ -34,7 +34,7 @@ var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
-                    dataset_id: model.get('datastream__id'),
+                    datastream_id: model.get('datastream_id'),
                     type: self.options.type
                 }),
                 success: function(model, response) {
@@ -66,7 +66,11 @@ var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
 
     render: function() {
         this.$el.find('#id_affectedResourcesList').html( this.affectedResourcesHTML );
-        this.$el.data('overlay').load();
+
+        var self = this;
+        setTimeout(function(){
+            self.$el.data('overlay').load();
+        }, 250);
     },
 
     addResource: function(model) {

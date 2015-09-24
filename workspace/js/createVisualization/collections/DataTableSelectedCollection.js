@@ -33,11 +33,9 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 			range_lon = this.findWhere({name: 'range_lon'});
 
 		return {
-			range_data: range_data ? range_data.get('selection') : undefined,
-			range_headers: range_headers ? range_headers.get('selection') : undefined,
-			range_labels: range_labels ? range_labels.get('selection') : undefined,
-			range_lat: range_lat ? range_lat.get('selection') : undefined,
-			range_lon: range_lon ? range_lon.get('selection') : undefined
+			range_data: range_data ? range_data.getExcelRange() : undefined,
+			range_headers: range_headers ? range_headers.getExcelRange() : undefined,
+			range_labels: range_labels ? range_labels.getExcelRange() : undefined
 		}
 	}
 });

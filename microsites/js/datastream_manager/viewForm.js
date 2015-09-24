@@ -47,14 +47,11 @@ $(document).ready(function(){
     //init stat chart
     window.statChart = new DataStreamStats({'$Container' : $('#id_statChart'), 'id' : $("#id_dataStreamContainer").data('dataservice_id')});
 
-    if(canShare){
         var sharePrivateOverlay = new SharePrivateOverlay({
             '$Button': $('button[id=id_sharePrivateDataStreamButton_]')
             , '$Container': $('#id_sharePrivateContainer')
             , '$Form': $('#id_private_share_form')
         });
-    }
-
 });
 
 function initDataServicePanel(){

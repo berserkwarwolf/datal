@@ -61,10 +61,10 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
         visualization_revision = VisualizationDBDAO().get(
             preferences['account_language'],
-            visualization_revision_id=visualizationrevision_id
+            visualization_id=id,
+            published=True
         )
 
         # verify if this account is the owner of this viz
@@ -82,15 +82,12 @@ def action_view(request, id, slug):
         return HttpResponse("Viz-Rev doesn't exist!")  # TODO
     else:
 
-        #url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
+        # url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
         chartSizes = settings.DEFAULT_MICROSITE_CHART_SIZES
         chartWidth = chartSizes["embed"]["width"]
         chartHeight = chartSizes["embed"]["height"]
         url_query = "width=%d&height=%d" % (chartWidth, chartHeight)
 
-        can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-        can_export = True
-        can_share = False
 
         # VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
 

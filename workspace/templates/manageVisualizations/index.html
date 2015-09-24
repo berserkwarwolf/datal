@@ -31,6 +31,7 @@
 <script language="javascript" src="/js_workspace/manageVisualizations/resourceItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/manageVisualizationsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/manageDatastreamsOverlayView.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageVisualizations/datastreamCellView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -56,7 +57,7 @@
   <!-- Column Left -->
   <div class="col-xs-7">    
     
-    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_visualizations }})</span></h1>
+    <h1>{% trans "APP-VISUALIZATIONS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_visualizations }}</span>) </span></h1>
 
   </div>
 
@@ -72,46 +73,59 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageVisualizations">
 
-  <div class="wrapper1">
-    <div class="wrapper2 clearfix">
-      <div class="wrapper3">
+{% if stats.account_total_visualizations > 0 %}
 
-        <!-- Filters -->
-        <section class="filters-view col-xs-2"></section>
+  <div class="manager" id="id_manageVisualizations">
 
-        <!-- List -->
-        {% include "manageVisualizations/list.html" %}
+    <div class="wrapper1">
+      <div class="wrapper2 clearfix">
+        <div class="wrapper3">
 
+          <!-- Filters -->
+          <section class="filters-view col-xs-2"></section>
+
+          <!-- List -->
+          {% include "manageVisualizations/list.html" %}
+
+        </div>
       </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+
+  </div>
+
+{% else %}
+
+  <!-- No results -->
+  <div class="no-results-view">
+    <div class="zeroResults">
+      <div class="zeroIcon zeroVisualizations"></div>
+      <p>{% trans 'APP-ZERO-VISUALIZATIONS-TEXT' %}</p>
+    </div>
+    <div class="startAdding">
+      <div class="startAddingArrows startDataviews"></div>
+      <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+      <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
     </div>
   </div>
 
-  <!-- Loading -->
-  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
-
-</div>
-
-<!-- No results -->
-<div class="no-results-view hidden">
-  <div class="zeroResults">
-    <div class="zeroIcon zeroVisualizations"></div>
-    <p>{% trans 'APP-ZERO-VISUALIZATIONS-TEXT' %}</p>
-  </div>
-  <div class="startAdding">
-    <div class="startAddingArrows startDataviews"></div>
-    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-    <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
-  </div>
-</div>
+{% endif %}
 
 {% endblock %}
 
 {% block bottom_js %}
 <script type="text/javascript">
   $(document).ready(function(){
+
+    var manageVisualizationsModel =  new ManageVisualizationsModel({
+      total_entries: {{ stats.account_total_visualizations }}
+    });
+
     var manageVisualizationsView =  new ManageVisualizationsView({
+      model: manageVisualizationsModel,
       visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
       sourceUrl: '/source_manager/action_search',
       tagUrl: '/tag_manager/action_search',

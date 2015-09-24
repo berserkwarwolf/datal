@@ -57,6 +57,7 @@
 <script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDataviews/filtersView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_workspace/manageDataviews/manageDataviewsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script language="javascript" src="/js_workspace/manageDataviews/manageDataviewsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {# Left Navigation Selected Option #}
@@ -71,8 +72,7 @@
   <!-- Column Left -->
   <div class="col-xs-7">    
     
-    <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> ({{ stats.account_total_datastreams }})</span></h1>
-
+    <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datastreams }}</span>) </span></h1>
   </div>
 
   <!-- Column Right -->
@@ -87,51 +87,65 @@
 {% endblock %}
 
 {% block content %}
-<div class="manager" id="id_manageDataviews">
 
-  <div class="wrapper1">
-    <div class="wrapper2 clearfix">
-      <div class="wrapper3">
+{% if stats.account_total_datastreams > 0 %}
 
-        <!-- Filters -->
-        <section class="filters-view col-xs-2"></section>
+  <div class="manager" id="id_manageDataviews">
 
-        <!-- List -->
-        {% include "manageDataviews/list.html" %}
+    <div class="wrapper1">
+      <div class="wrapper2 clearfix">
+        <div class="wrapper3">
 
+          <!-- Filters -->
+          <section class="filters-view col-xs-2"></section>
+
+          <!-- List -->
+          {% include "manageDataviews/list.html" %}
+
+        </div>
       </div>
+    </div>
+
+    <!-- Loading -->
+    <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
+
+  </div>
+
+{% else %}
+
+  <!-- No results -->
+  <div class="no-results-view col-xs-12">
+    <div class="zeroResults">
+      <div class="zeroIcon zeroDataviews"></div>
+      <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>
+    </div>
+    <div class="startAdding">
+      <div class="startAddingArrows startDataviews"></div>
+      <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
+      <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
     </div>
   </div>
 
-  <!-- Loading -->
-  <div class="loading">{% trans 'APP-LOADING-TEXT' %}</div>
-
-</div>
-
-<!-- No results -->
-<div class="no-results-view hidden col-xs-12">
-  <div class="zeroResults">
-    <div class="zeroIcon zeroDataviews"></div>
-    <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>
-  </div>
-  <div class="startAdding">
-    <div class="startAddingArrows startDataviews"></div>
-    <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-    <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
-  </div>
-</div>
+{% endif %}
 
 {% endblock %}
 
 {% block bottom_js %}
 <script type="text/javascript">
   $(document).ready(function(){
+
+    var manageDataViewsModel =  new ManageDataViewsModel({
+      total_entries: {{ stats.account_total_datastreams }}
+    });
+
     var manageDataviewsView =  new ManageDataviewsView({
+      model: manageDataViewsModel,
       dataViewCreationStepsUrl: "{% url 'manageDataviews.create' %}",
       sourceUrl: '/source_manager/action_search',
       tagUrl: '/tag_manager/action_search',
       filters: {{filters|jsonify}}
     });
+
   });
 </script>
 

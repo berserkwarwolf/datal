@@ -19,7 +19,8 @@ from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-
+from core.daos.visualizations import VisualizationDBDAO
+from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -182,38 +183,6 @@ def remove(request, dataset_revision_id, type="resource"):
         }), content_type='text/plain')
 
 
-@requires_review
-@login_required
-#@require_privilege("workspace.can_delete_dataset")
-@transaction.commit_on_success
-def unpublish(request, dataset_revision_id, type="resource"):
-
-    """ unpublish resource """
-    lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.dataset.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASET-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASET-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-
 @login_required
 @require_privilege("workspace.can_create_dataset")
 @requires_if_publish('dataset') #
@@ -325,7 +294,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise DatasetSaveException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required
@@ -335,12 +304,16 @@ def related_resources(request):
     dataset_id = request.GET.get('dataset_id', '')
 
     # For now, we'll fetch datastreams
-    associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
+    associated_resources = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)
 
     list_result = []
-    for associated_datastream in associated_datastreams:
-        associated_datastream['type'] = 'dataview'
-        list_result.append(associated_datastream) 
+    for associated_resource in associated_resources['datastreams']:
+        associated_resource['type'] = 'dataview'
+        list_result.append(associated_resource)
+
+    for associated_resource in associated_resources['visualizations']:
+        associated_resource['type'] = 'visualization'
+        list_result.append(associated_resource)
 
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
     return HttpResponse(dump, mimetype="application/json")
@@ -367,7 +340,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATASET-APPROVED-TITLE'),
                     'description': ugettext('APP-DATASET-APPROVED-TEXT')
@@ -377,7 +349,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-REJECTED-TITLE'),
                     'description': ugettext('APP-DATASET-REJECTED-TEXT')
@@ -387,27 +358,29 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
+            if killemall:
+                description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
@@ -416,7 +389,14 @@ def change_status(request, dataset_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result'].pop('datastreams')
+        response['result'].pop('visualizations')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
+
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 
 @login_required

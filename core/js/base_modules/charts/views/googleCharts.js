@@ -128,11 +128,6 @@ charts.views.GooglePieChart = charts.views.PieChart.extend({
     formatData: function (data) {
         var dataTable = new google.visualization.DataTable();
 
-//        var rows = data.rows;
-            /*fieldnames = [_.map(data.fields, function (field) {
-                return field[1];
-            })];*/
-
         var graphData = [];
 
         _.each(data.rows,function(e,i){

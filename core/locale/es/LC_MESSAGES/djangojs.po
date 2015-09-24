@@ -272,3 +272,9 @@ msgstr "DATAL &middot; Platforma de Datos Abiertos"
 
 msgid "APP-A-TEXT"
 msgstr "un"
+
+msgid "APP-NO-MORE-THAN-TEXT"
+msgstr "Por favor ingresa no más de"
+
+msgid "APP-CHARACTERS-TEXT"
+msgstr "caracteres"

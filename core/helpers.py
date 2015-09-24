@@ -1,8 +1,8 @@
-import json, logging
+import json
+import logging
 from core.primitives import PrimitiveComputer
 
 logger = logging.getLogger(__name__)
-
 
 # Lo comento porque supuestamente no se va a uar mas
 # /home/mativs/Projects/datal/workspace/managers.py

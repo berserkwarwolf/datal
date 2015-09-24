@@ -913,7 +913,7 @@ var Step2 = Step.extend({
             }
             , messages: {
               'title': {regex: gettext( "DS-VALIDINPUT-TEXT" ), required: gettext ("VALIDATE-REQUIREDFIELD-TEXT")},
-              'description': gettext ("VALIDATE-REQUIREDFIELD-TEXT"),
+              'description': {required: gettext ("VALIDATE-REQUIREDFIELD-TEXT"), maxlength: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 140 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')},
               'status': gettext ("VALIDATE-REQUIREDFIELD-TEXT")
             }
         });
@@ -934,7 +934,7 @@ var Step2 = Step.extend({
 
         if (CreationManager.attributes.is_update_selection == false) {
             var initialTags = [];
-            var initialSources = [];
+            var initialSources = suggestedSources;
 
             $('#id_operation-tag', this.attributes.$Container).tagging({
                 source: '/tag_manager/action_search',

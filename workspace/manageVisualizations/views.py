@@ -14,15 +14,16 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
 from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
+from core.utils import DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
-from core.utils import unset_visualization_revision_nice
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
+from core.exceptions import VisualizationNotFoundException
 
 logger = logging.getLogger(__name__)
 
@@ -58,7 +59,16 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     sort_by='-id'
 
     if filters is not None and filters != '':
-        filters_dict = unset_visualization_revision_nice(json.loads(bb_request.get('filters')))
+        item = json.loads(bb_request.get('filters'))
+        
+        filters_dict = dict()
+        filters_dict['dataset__user__nick'] = item.get('author_filter')
+        if item.get('status_filter'):
+            filters_dict['status'] = []
+            for x in item.get('status_filter'):
+                filters_dict['status'].append([status[0] for status in settings.STATUS_CHOICES if status[1] == x][0])
+
+        
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
@@ -97,6 +107,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
     return HttpResponse(data, mimetype="application/json")
 
+
 @login_required
 #@require_privilege("workspace.can_delete_datastream")
 #@requires_review
@@ -108,8 +119,7 @@ def remove(request, visualization_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-
-        if lifecycle.dataset.last_revision_id:
+        if lifecycle.visualization.last_revision_id:
             last_revision_id = lifecycle.visualization.last_revision_id
         else:
             last_revision_id = -1
@@ -125,37 +135,6 @@ def remove(request, visualization_revision_id, type="resource"):
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-@login_required
-#@require_privilege("workspace.can_delete_datastream")
-#@requires_review
-@transaction.commit_on_success
-def unpublish(request, visualization_revision_id, type="resource"):
-    """ unpublish resource """
-    lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.visualization.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-        
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-VISUALIZATION-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
 
@@ -182,7 +161,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
@@ -192,7 +170,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
@@ -202,17 +179,16 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
@@ -222,7 +198,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
@@ -231,15 +206,21 @@ def change_status(request, visualization_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
+        response['result'].pop('visualization')
 
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
 
 @login_required
 @require_http_methods(['POST','GET'])
 @require_privilege("workspace.can_create_visualization")
 @requires_published_parent()
 @transaction.commit_on_success
-def create(request, viz_type='index'):
+def create(request):
     
     if request.method == 'GET':
         datastream_revision_id = request.GET.get('datastream_revision_id', None)
@@ -269,9 +250,9 @@ def create(request, viz_type='index'):
         form = VisualizationForm(request.POST)
         if not form.is_valid():
             logger.info(form._errors)
-            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
-        response = form.save(request, datastream_rev)
+        response = form.save(request, datastream_rev=datastream_rev)
 
         return JSONHttpResponse(json.dumps(response))
     
@@ -289,14 +270,19 @@ def related_resources(request):
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
 
+
 @login_required
 @require_GET
 def action_view(request, revision_id):
 
-    visualization_revision = VisualizationDBDAO().get(
-        request.auth_manager.language,
-        visualization_revision_id=revision_id
-    )
+    try:
+        visualization_revision = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+    except VisualizationRevision.DoesNotExist:
+        logger.info("VisualizationRevision ID %s does not exist" % revision_id)
+        raise VisualizationNotFoundException()
 
     return render_to_response('viewVisualization/index.html', locals())
 
@@ -307,8 +293,36 @@ def action_view(request, revision_id):
 @requires_published_parent()
 @requires_review
 @transaction.commit_on_success
-def edit(request, datastream_revision_id=None):
-    pass
+def edit(request, revision_id=None):
+    if request.method == 'GET':
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        datastream_rev = DataStreamDBDAO().get(
+            request.auth_manager.language,
+            datastream_revision_id=visualization_rev['datastream_revision_id'])
+        return render_to_response('createVisualization/index.html', dict(
+            request=request,
+            datastream_revision=datastream_rev,
+            visualization_revision=visualization_rev
+        ))
+
+    elif request.method == 'POST':
+        """ save new or update dataset """
+        # Formulario
+        form = VisualizationForm(request.POST)
+        if not form.is_valid():
+            logger.info(form._errors)
+            raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+
+        visualization_rev = VisualizationDBDAO().get(
+            request.auth_manager.language,
+            visualization_revision_id=revision_id
+        )
+        response = form.save(request, visualization_rev=visualization_rev)
+
+        return JSONHttpResponse(json.dumps(response))
 
 
 @login_required
@@ -342,9 +356,15 @@ def preview(request):
                 'pData': form.cleaned_data.get('data'),
                 'pLabelSelection': form.cleaned_data.get('labels'),
                 'pHeaderSelection': form.cleaned_data.get('headers'),
-                'pInvertedAxis': form.cleaned_data.get('invertedAxis'),
-                'pInvertData': form.cleaned_data.get('invertData')
             })
+
+            invertData = form.cleaned_data.get('invertData')
+            if invertData in ['true',True]:
+                query['pInvertData'] = 'checked'
+
+            invertedAxis = form.cleaned_data.get('invertedAxis')
+            if invertedAxis in ['true', True]:
+                query['pInvertedAxis'] = 'checked'
 
             page = form.cleaned_data.get('page')
             if page is not None:

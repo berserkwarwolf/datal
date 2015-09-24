@@ -33,6 +33,7 @@ class DependencyInjector(object):
 
         preferences = account.get_preferences()
         preferences.load_all()
+        preferences['account_id'] = account.id
         request.preferences = preferences
 
         bucket_name = preferences['account_bucket_name']

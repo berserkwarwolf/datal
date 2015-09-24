@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.db import transaction
 from django.utils.translation import ugettext
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
-
+from django.core.serializers.json import DjangoJSONEncoder
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.utils import filters_to_model_fields
@@ -19,6 +19,7 @@ from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
 from core import engine
+from core.utils import DateTimeEncoder
 
 
 logger = logging.getLogger(__name__)
@@ -122,11 +123,16 @@ def get_filters_json(request):
 @require_GET
 def related_resources(request):
     language = request.auth_manager.language
-    revision_id = request.GET.get('revision_id', '')
-    datastreams = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']
+    revision_id = request.GET.get('datastream_id', '')
+    associated_visualizations = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']
 
-    list_result = [associated_datastream for associated_datastream in datastreams]
-    return HttpResponse(json.dumps(list_result), mimetype="application/json")
+    list_result = []
+    for associated_visualization in associated_visualizations:
+        associated_visualization['type'] = 'visualization'
+        list_result.append(associated_visualization) 
+    
+    dump = json.dumps(list_result, cls=DjangoJSONEncoder)
+    return HttpResponse(dump, mimetype="application/json")
 
 
 @login_required
@@ -140,8 +146,8 @@ def remove(request, datastream_revision_id, type="resource"):
     if type == 'revision':
         lifecycle.remove()
         # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.datastream.last_revision_id
+        if lifecycle.datastream.last_revision_id:
+            last_revision_id = lifecycle.datastream.last_revision.id
         else:
             last_revision_id = -1
 
@@ -156,37 +162,6 @@ def remove(request, datastream_revision_id, type="resource"):
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-DATASTREAM-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
-
-
-@login_required
-#@require_privilege("workspace.can_delete_datastream")
-@requires_review
-@transaction.commit_on_success
-def unpublish(request, datastream_revision_id, type="resource"):
-    """ unpublish resource """
-    lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-
-    if type == 'revision':
-        lifecycle.unpublish()
-        # si quedan revisiones, redirect a la ultima revision, si no quedan, redirect a la lista.
-        if lifecycle.dataset.last_revision_id:
-            last_revision_id = lifecycle.datastream.last_revision_id
-        else:
-            last_revision_id = -1
-
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASTREAM-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id,
-        }))
-        
-    else:
-        lifecycle.unpublish(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-UNPUBLISH-DATASTREAM-ACTION-TEXT')],
             'revision_id': -1,
         }), content_type='text/plain')
 
@@ -328,7 +303,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-APPROVED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-APPROVED-TEXT')
@@ -338,7 +312,6 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-REJECTED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-REJECTED-TEXT')
@@ -348,27 +321,29 @@ def change_status(request, datastream_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
                 }
             )
         elif action == 'unpublish':
-            lifecycle.unpublish()
+            killemall = True if request.POST.get('killemall', False) == 'true' else False
+            lifecycle.unpublish(killemall=killemall)
+            if( killemall == True ):
+                description = ugettext('APP-DATAVIEW-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                datastream_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')
@@ -377,8 +352,13 @@ def change_status(request, datastream_revision_id=None):
         else:
             raise NoStatusProvidedException()
 
-        return JSONHttpResponse(json.dumps(response))
+        # Limpio un poco
+        response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
+        response['result'].pop('parameters')
+        response['result'].pop('tags')
+        response['result'].pop('sources')
 
+        return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
 @csrf_exempt
 @require_http_methods(["POST"])

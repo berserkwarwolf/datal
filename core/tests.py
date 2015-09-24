@@ -1,13 +1,12 @@
-from django.test import TransactionTestCase, LiveServerTestCase
-from django.test import TestCase
+from django.test import TestCase, TransactionTestCase, LiveServerTestCase
 from django.db.models import F, Max
 
+from core.search.elastic import ElasticsearchFinder
+from core.engine import preview_chart
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
-from core.lifecycle.datastreams import DatastreamLifeCycleManager
-from core.search.elastic import ElasticsearchFinder
-from core.engine import preview_chart
+
 
 class LifeCycleManagerTestCase(TransactionTestCase):
     fixtures = ['account.json', 'accountlevel.json', 'category.json', 'categoryi18n.json', 'grant.json',
@@ -16,7 +15,7 @@ class LifeCycleManagerTestCase(TransactionTestCase):
     def setUp(self):
         self.end_point = 'http://nolaborables.com.ar/API/v1/2013'
         self.user_nick = 'administrador'
-        self.user_editor = User.objects.get(nick='administrador')
+        self.user_admin = User.objects.get(nick='administrador')
         self.user_editor = User.objects.get(nick='editor')
         self.user_publicador = User.objects.get(nick='publicador')
 
@@ -45,7 +44,23 @@ class LifeCycleManagerTestCase(TransactionTestCase):
 
     def test_create_dataset_as_admin(self):
         """
-        Testing Lifecycle Manager Create Dataset Method
+        [Lifecycle] Test de creacion de dataset como usuario administrador
+        """
+        dataset, rev = self.create_dataset(user=self.user_admin)
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        # Verifico los campos del dataset
+        self.assertEqual(new_dataset.user, self.user_admin)
+        self.assertEqual(new_dataset.type, self.source_type)
+        self.assertFalse(new_dataset.is_dead)
+        self.assertIsNot(new_dataset.guid, '')
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_create_dataset_as_editor(self):
+        """
+        [Lifecycle] Test de creacion de dataset como usuario editor
         """
         dataset, rev = self.create_dataset(user=self.user_editor)
 
@@ -59,19 +74,69 @@ class LifeCycleManagerTestCase(TransactionTestCase):
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
 
-    def test_create_dataset_as_editor(self):
+    def test_publish_dataset_as_admin(self):
         """
-        Testing Lifecycle Manager Create Dataset Method
+        [Lifecycle] Test de publicacion de dataset como usuario administrador
         """
-        dataset, rev = self.create_dataset(user=self.user_editor)
+        dataset, rev = self.create_dataset(user=self.user_admin)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
 
         new_dataset = Dataset.objects.get(id=dataset.id)
 
-        # Verifico los campos del dataset
-        self.assertEqual(new_dataset.user, self.user_editor)
-        self.assertEqual(new_dataset.type, self.source_type)
-        self.assertFalse(new_dataset.is_dead)
-        self.assertIsNot(new_dataset.guid, '')
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
+
+    def test_publish_dataset_as_editor(self):
+        """
+        [Lifecycle] Test de publicacion de dataset como usuario editor
+        """
+        dataset, rev = self.create_dataset(user=self.user_editor)
+
+        life = DatasetLifeCycleManager(self.user_editor, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertEqual(new_dataset.last_published_revision, DatasetRevision.objects.get(dataset=new_dataset))
+
+    def test_unpublish_dataset_as_admin(self):
+        """
+        [Lifecycle] Test de despublicar de dataset como usuario administrador
+        """
+        dataset, rev = self.create_dataset(user=self.user_admin)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        life = DatasetLifeCycleManager(self.user_admin, dataset_id=new_dataset.id)
+        life.unpublish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
+        self.assertIsNone(new_dataset.last_published_revision)
+
+    def test_unpublish_dataset_as_editor(self):
+        """
+        [Lifecycle] Test de despublicar de dataset como usuario editor
+        """
+        dataset, rev = self.create_dataset(user=self.user_editor)
+
+        life = DatasetLifeCycleManager(self.user_editor, dataset_revision_id=rev.id)
+        life.publish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
+        life = DatasetLifeCycleManager(self.user_editor, dataset_id=new_dataset.id)
+        life.unpublish()
+
+        new_dataset = Dataset.objects.get(id=dataset.id)
+
         self.assertEqual(new_dataset.last_revision, DatasetRevision.objects.get(dataset=new_dataset))
         self.assertIsNone(new_dataset.last_published_revision)
 
@@ -285,26 +350,12 @@ class LifeCycleManagerTestCase(TransactionTestCase):
     #     self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
 
 
-class TestElasticSearch(TestCase):
-
-    def test_animals_can_speak(self):
-        es = ElasticsearchFinder()
-        resource = ["ds", "dt", "db", "chart", "vt"]
-
-        query = 'iniciativas'
-        category_filters = ['finanzas']
-        results, searchtime, facets = es.search(query=query,
-                                                account_id=1,
-                                                category_filters=category_filters)
-        for result in results:
-            pass
-            #print result
-        assert len(results) == 2
-
-
 class TestEngine(TestCase):
 
     def test_preview_chart(self):
+        """
+        [Engine] Test de vista previa de graficos
+        """
         query = {
             'pInvertedAxis': u'',
             'pNullValuePreset': u'',
@@ -320,8 +371,10 @@ class TestEngine(TestCase):
         # print result
         assert content_type == 'application/json; charset=UTF-8'
 
-
     def test_preview_map(self):
+        """
+        [Engine] Test de vista previa de mapas
+        """
         query = {
             'pId': 70703,
             'pType': 'mapchart',
@@ -339,3 +392,24 @@ class TestEngine(TestCase):
         # print result, content_type
         assert content_type == 'application/json; charset=UTF-8'
 
+
+class TestElasticSearch(TestCase):
+
+    def test_es_search(self):
+        """
+        [ElasticSearch] Test de busqueda en elastic search
+        """
+        es = ElasticsearchFinder()
+        resource = ["ds", "dt", "db", "chart", "vt"]
+
+        query = 'iniciativas'
+        category_filters = ['finanzas']
+        results, searchtime, facets = es.search(
+            query=query,
+            account_id=1,
+            category_filters=category_filters
+        )
+        for result in results:
+            pass
+
+        assert len(results) == 2

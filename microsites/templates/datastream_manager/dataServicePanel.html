@@ -50,7 +50,7 @@
                         {% if datastream.created_at and not preferences.account_hidelastupdate%}
                             <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br>{{datastream.created_at}}</p>
                         {% endif %}
-                        {% if datastream.datastream_type == 'SELF PUBLISH' and can_download %}
+                        {% if datastream.datastream_type == 'SELF PUBLISH' %}
                             <a rel="nofollow" href="{% url "datastream_manager.download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
                         {% endif %}
                     </div>
@@ -135,11 +135,8 @@
                         <div class="menuInner">
                             <ul class="In">
                                 <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
-                                {% if can_export %}
                                 <li class="Item"><a href="{% url "datastream_manager.csv" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                                 <li class="Item"><a href="{% url "datastream_manager.xls" datastream.datastream_id datastream.slug %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
-                                {% endif %}
-                                
                                 <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
                                 <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
                                 

@@ -17,7 +17,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
-		this.listenTo(this.model, "change:status", this.render);
+		this.listenTo(this.model, "change", this.render);
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
 
@@ -30,23 +30,12 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
+
+		console.log(this.model.toJSON());
+
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		// this.setSidebarHeight();
 		return this;
 	},
-
-	// setSidebarHeight: function(){
-
-	// 	var self = this;
-
-	// 	$(document).ready(function(){
-
-	// 		var otherHeights = 0;
-	// 		self.setHeights( '.sidebar-container .box', otherHeights );
-
-	// 	});
-
-	//},
 
 	setHeights: function(theContainer, theHeight){
 
@@ -55,11 +44,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		}
 
 		var heightContainer = String(theContainer),
-			tabsHeight = parseFloat( $('.main-navigation').height() ),
-			otherHeight = theHeight,
-			minHeight = tabsHeight - otherHeight;
-
-		// $(heightContainer).css('min-height', minHeight+ 'px');
+			otherHeight = theHeight;
 
 		$(window).resize(function(){
 
@@ -87,12 +72,24 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	},  
 
-	changeStatus: function(event){
-		
+	changeStatus: function(event, killemall){
+
+		if( _.isUndefined( killemall ) ){
+			var killemall = false;
+		}else{
+			var killemall = killemall;
+		}
+
 		var action = $(event.currentTarget).attr('data-action'),
 			data = {'action': action},
 			url = this.model.get('changeStatusUrl'),
 			self = this;
+
+		if(action == 'unpublish'){
+			var lastPublishRevisionId = this.model.get('lastPublishRevisionId');
+			url = 'change_status/'+lastPublishRevisionId+'/';
+			data.killemall = killemall;
+		}
 
 		$.ajax({
 			url: url,
@@ -108,10 +105,16 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			success: function(response){
 
 				if(response.status == 'ok'){
-					
-					// Set Status
-					self.model.set('status_str',STATUS_CHOICES( response.datastream_status ));
-					self.model.set('status',response.datastream_status);
+
+					// Update some model attributes
+					self.model.set({
+						'status_str': STATUS_CHOICES( response.result.status ),
+						'status': response.result.status,
+						'lastPublishRevisionId': response.result.last_published_revision_id,
+						'lastPublishDate': response.result.last_published_date,
+						'publicUrl': response.result.public_url,
+						'modifiedAt': response.result.modified_at,
+					});
 
 					// Set OK Message
 					$.gritter.add({
@@ -190,7 +193,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		this.unpublishListResources.push(this.options.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
-				type: "visualizations"
+				type: "visualizations",
+				parentView: this
 		});
 	},
 

@@ -17,7 +17,7 @@ class ActivityStreamDAO:
         """ Create a redis-hash and then addit to a redis-lits"""
         c = Cache(db=settings.CACHE_DATABASES['activity_resources'])
 
-        timeformat = "%s %s %s %s" % (ugettext('APP-ON-TEXT'), "%B %d, %Y", ugettext('APP-AT-TEXT'), "%H:%M")
+        timeformat = "%s %s %s %s" % (ugettext('APP-ON-TEXT'), "%Y-%m-%d,", ugettext('APP-AT-TEXT'), "%H:%M")
         now = datetime.datetime.now()
         time = now.strftime(timeformat)
         l_permalink=""

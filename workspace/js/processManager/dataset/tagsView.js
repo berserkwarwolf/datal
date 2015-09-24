@@ -25,13 +25,13 @@ var TagsView = Backbone.View.extend({
 		this.render();
 	},
 
-  render: function() {
-  	this.collection.forEach(this.addTag, this);
-    this.$el.find('#addTag').html( this.template() );
-  	this.initAutocomplete();
+	render: function() {
+		this.collection.forEach(this.addTag, this);
+		this.$el.find('#addTag').html( this.template() );
+		this.initAutocomplete();
 
-    // Bind custom model validation callbacks
-    var self = this;
+		// Bind custom model validation callbacks
+		var self = this;
 		Backbone.Validation.bind(this, {
 			valid: function (view, attr, selector) {
 				self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
@@ -41,24 +41,27 @@ var TagsView = Backbone.View.extend({
 			}
 		});
 
-    return this;
-  },  
+		return this;
+	},  
 
-  addTag: function(model){
+	addTag: function(model){
 
-  	// Add new active tag to DOM
-    var theView = new TagView({ model: model });
-    this.$el.find('.tagsContent').append( theView.render().el );
+		// Add new active tag to DOM
+		var theView = new TagView({ model: model });
+		this.$el.find('.tagsContent').append( theView.render().el );
 
-    // Clear Add tag form
-    this.clearTagForm();
+		// Clear Add tag form
+		this.clearTagForm();
 
-  },
+	},
 
 	removeTag: function(model){
 	},
 
 	setIndividualError: function(element, name, error){
+		if(name == 'name'){
+			element = $('#id_tag_name')
+		}
 		// If not valid
 		if( error != ''){
 			element.addClass('has-error');
@@ -93,19 +96,19 @@ var TagsView = Backbone.View.extend({
 	},
 
 	initAutocomplete : function(){
-    var self = this;
-    $('#id_tag_name').autocomplete({
-      source: self.parentModel.get('tagUrl'),
-      minLength: 3,
-      select: function (e, ui) {
-      	e.preventDefault();
-      	self.model.set('name', ui.item.value);
-      	if(self.model.isValid(true)){
+	    var self = this;
+	    $('#id_tag_name').autocomplete({
+			source: self.parentModel.get('tagUrl'),
+			minLength: 3,
+			select: function (e, ui) {
+		      	e.preventDefault();
+		      	self.model.set('name', ui.item.value);
+		      	if(self.model.isValid(true)){
 					self.collection.add(self.model.toJSON());
 					$(e.target).val('');
 				}
-	    }
-    });
+		    }
+	    });
 	}
 
 });

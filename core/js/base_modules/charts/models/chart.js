@@ -15,7 +15,12 @@ charts.models.Chart = Backbone.Model.extend({
         chartTemplate: undefined,
         nullValueAction: 'exclude',
         nullValuePreset: undefined,
-        traspose: false,
+
+        //flag que indica si alguna vez abrió el modal de datos, es para validación
+        select_data: false,
+
+        //validation
+        message: gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"),
 
         //metadata
         meta_title: undefined,
@@ -71,6 +76,11 @@ charts.models.Chart = Backbone.Model.extend({
             id: this.get('resourceID'),
             type: this.get('type')
         });
+
+        if(this.get('isEdit')){
+            this.fetchPreviewData();
+        }
+
         this.bindEvents();
     },
 
@@ -81,25 +91,70 @@ charts.models.Chart = Backbone.Model.extend({
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
 
+    parseResponse: function (res) {
+        var data = {
+            datastream_revision_id: res.datastream_revision_id,
+            meta_tags:  res.datastream_tags,
+            meta_sources: res.datastream_sources,
+            meta_category: res.datastream_category
+        };
+
+        _.extend(data, _.pick(res, [
+            'revision_id',
+            'lib',
+            'type',
+            'chartTemplate',
+            'nullValueAction',
+            'nullValuePreset'
+            ]));
+
+        //edit
+        if(res.revision_id){
+            data = _.extend(data,{
+                select_data:true,
+                meta_notes: _.unescape(res.notes),
+                meta_title: res.title,
+                meta_description: res.description,
+
+                //config
+                showLegend: true,
+
+                invertData: (res.invertData=='checked'),
+                invertedAxis: (res.invertedAxis=='checked'),
+
+                //data
+                range_data: this.parseColumnFormat(res.data),
+                range_headers: this.parseColumnFormat(res.headerSelection),
+                range_labels: this.parseColumnFormat(res.labelSelection)
+
+            });
+        }
+        this.set(data);
+    },
+
     fetchPreviewData: function () {
         var self = this;
 
+        if(!this.isValid()){
+            console.error('error en valid');
+        }
+
         var params = {
             datastream_revision_id: self.get('datastream_revision_id'),
-            data: self.get('range_data'),
-            headers: self.get('range_headers'),
-            labels: self.get('range_labels'),
+            data: this.serializeServerExcelRange(this.get('range_data')),
+            headers: this.serializeServerExcelRange(this.get('range_headers')),
+            labels: this.serializeServerExcelRange(this.get('range_labels')),
             nullValueAction: self.get('nullValueAction'),
             nullValuePreset:  self.get('nullValuePreset'),
             type: self.get('type')
         };
 
-        if(self.get('invertData') && self.get('invertData')!=''){
-            params['invertData'] = "checked";
+        if(self.get('invertData')===true){
+            params['invertData'] = true;
         }
 
-        if(self.get('invertedAxis')){
-            params['invertedAxis'] = "checked";
+        if(self.get('invertedAxis')===true){
+            params['invertedAxis'] = true;
         }
 
         return $.getJSON('/visualizations/preview', params)
@@ -159,7 +214,10 @@ charts.models.Chart = Backbone.Model.extend({
         }));
 
         this.data.set('fields', fields);
-        this.data.set('rows', _.unzip(columns));
+        this.data.set('rows', _.clone(_.unzip(columns)));
+
+        this.trigger("newDataReceived");
+
     },
 
     parseMapResponse: function (response) {
@@ -235,6 +293,73 @@ charts.models.Chart = Backbone.Model.extend({
         return metadata;
     },
 
+    serializeServerExcelRange: function(selection){
+
+        var range = selection.split(":");
+        var left = range[0];
+        var right = range[1];
+
+        // Columna completa o celda
+        if(left == right){
+            var index = left.search(/\d/g);
+
+            // Columna completa
+            if(index == -1){
+                selection = 'Column:' + left;
+            }
+        }
+        else{
+            // TO-DO: Validar que no sea un rango de columnas completas
+        }
+
+        return selection;
+    },
+
+    parseColumnFormat: function (serverExcelRange) {
+        var col;
+        if (serverExcelRange.indexOf('Column:') !== -1) {
+            col = serverExcelRange.replace('Column:', '');
+            serverExcelRange = [col, ':', col].join('');
+        }
+        return serverExcelRange;
+    },
+
+    valid: function(){
+        console.log('Validation from charts.models.Chart');
+        var valid = true;
+
+        //Si alguna vez intentó seleccionar algo de data
+        if(this.get('select_data')){
+
+            //General validation
+            var lFields = this.data.get('fields').length;
+
+            var check = _.reduce(this.data.get('rows'), 
+                function(memo, ar){
+                 return (ar.length==lFields)?memo:memo + 1; 
+                }, 0);
+
+            if (check!=0){
+                this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
+                valid = false;
+            }
+
+            if(valid){
+                //TODO specific validation for chart type
+                switch(this.get('type')){
+                    case 'piechart':
+                        console.log('is pie chart');
+                        //validar que no haya números negativos en la primer serie que se usa para el pie
+                    break;
+                }
+            }
+
+
+        }
+
+        return valid;
+    },
+
     validateMetadata: function(){
         var validation = {
             valid: (  !_.isEmpty(this.get('meta_title')) &&  !_.isEmpty(this.get('meta_description'))  ),
@@ -251,16 +376,16 @@ charts.models.Chart = Backbone.Model.extend({
             type: this.get('type'),
             lib: this.get('lib'),
             showLegend: this.get('showLegend'),
-            invertedAxis: this.get('invertedAxis'),
             chartTemplate: 'basicchart', // Muchachos, mando una para probar pero no se el criterio y es viernes por la noche. Las opciones son basicchart, piechart, mapchart, geochart
             nullValueAction: this.get('nullValueAction'),
             nullValuePreset: this.get('nullValuePreset'),
             invertData: this.get('invertData'),
+            invertedAxis: this.get('invertedAxis'),
 
             //data selection
-            headerSelection: this.get('range_headers'),
-            data: this.get('range_data'),
-            labelSelection: this.get('range_labels')
+            headerSelection: this.serializeServerExcelRange(this.get('range_headers')),
+            data: this.serializeServerExcelRange(this.get('range_data')),
+            labelSelection: this.serializeServerExcelRange(this.get('range_labels'))
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
