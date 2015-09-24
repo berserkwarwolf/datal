@@ -4,7 +4,7 @@ var ChartView = StepViewSPA.extend({
 	    "p.message": "text:message"
 	},
 
-	initialize: function(){
+	initialize: function(options){
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
@@ -27,7 +27,8 @@ var ChartView = StepViewSPA.extend({
 
         this.chartSelectDataModalView = new ChartSelectDataModalView({
           el: '#ChartSelectDataModal',
-          model: this.model
+          model: this.model,
+          dataStreamModel: options.dataStreamModel
         });
         this.chartSelectDataModalView.on('open', function () {
         	this.model.set('select_data',true);
