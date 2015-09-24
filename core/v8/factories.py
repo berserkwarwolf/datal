@@ -16,6 +16,7 @@ class CommandFactory(object):
         "id": "pId",
         "revision_id": "pId",
         "uniqueBy": "pUniqueBy",
+        "orderBy": "pOrderBy",
         "output": "pOutput",
         'data','pData',
         'headerSelection','pHeaderSelection',
@@ -31,6 +32,8 @@ class CommandFactory(object):
         'lat','pLatitudSelection',
         'lon','pLongitudSelection',
         'whereExpr','pWhereExpr',
+        'ifModified','pIfModified',
+        'format','pTableFormat',
 
         'end_point','pEndPoint',
         'datasource','pDataSource',
