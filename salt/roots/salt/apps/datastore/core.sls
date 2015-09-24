@@ -26,13 +26,14 @@ datastore_resources_base_dir:
     - mode: 755
     - makedirs: True
 
-
-/{{ pillar['amazon']['S3']['bucket'] }}:
+root_datastore_bucket:
   file.symlink:
+    - name: /{{ pillar['amazon']['S3']['bucket'] }}
     - target: {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['bucket'] }}
 
-/{{ pillar['amazon']['S3']['temporary_bucket'] }}:
+root_tmp_datastore_bucket:
   file.symlink:
+    - name: /{{ pillar['amazon']['S3']['temporary_bucket'] }}
     - target: {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
 
 # For fixed uploaded file for theme
