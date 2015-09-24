@@ -24,6 +24,8 @@ class VisualizationRequestForm(RequestForm):
     bounds = forms.CharField(required=False)
     # pZoom: Nivel de zoom a utilizar para clusterizar        
     zoom = forms.IntegerField(required=False)
+    # pWhereExpr: Condicion logica para unit los filtros
+    whereExpr= forms.CharField(required=False)
 
 
 class VisualizationPreviewForm(VisualizationRequestForm):
