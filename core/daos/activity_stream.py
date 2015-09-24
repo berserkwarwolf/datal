@@ -58,6 +58,8 @@ class ActivityStreamDAO:
 
     def query(self, account_id, limit=21):
         """ query for last 20 records of activity lists"""
+        if settings.DEBUG: logger.info('Query ActivityStreamDAO %d' % account_id)
+
         c = Cache(db=settings.CACHE_DATABASES['activity_resources'])
         list_key = 'activity_stream::%s' % str(account_id)
         activity_keys = c.lrange(str(list_key),0, limit)
@@ -81,4 +83,5 @@ class ActivityStreamDAO:
                 
             activities.append(h)
 
+        # if settings.DEBUG: logger.info('Returned activities %s' % str(activities))
         return activities
