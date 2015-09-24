@@ -42,9 +42,12 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
-            this.rangeDataModel.set('excelRange', this.model.get('range_data'));
-            this.rangeLabelsModel.set('excelRange', this.model.get('range_labels'));
-            this.rangeHeadersModel.set('excelRange', this.model.get('range_headers'));
+            this._cached_range_data = this.model.get('range_data');
+            this._cached_range_labels = this.model.get('range_labels');
+            this._cached_range_headers = this.model.get('range_headers');
+            this.rangeDataModel.set('excelRange', this._cached_range_data);
+            this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+            this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
             this.collection.add([
                 this.rangeDataModel,
                 this.rangeLabelsModel,
@@ -68,8 +71,12 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     onClickCancel: function (e) {
-        this.collection.reset();
-        this.selectedCellRangeView.clear();
+        // this.collection.reset();
+        this.rangeDataModel.set('excelRange', this._cached_range_data);
+        this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+        this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
+        // this.selectedCellRangeView.clear();
+        this.onClickDone();
         this.close();
     },
 
