@@ -30,6 +30,7 @@ class CommandFactory(object):
         'traces','pTraceSelection',
         'lat','pLatitudSelection',
         'lon','pLongitudSelection',
+        'whereExpr','pWhereExpr',
     }
 
     def __init__(self, resourse_type):
