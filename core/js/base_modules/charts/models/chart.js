@@ -159,11 +159,33 @@ charts.models.Chart = Backbone.Model.extend({
 
         return $.getJSON('/visualizations/preview', params)
         .then(function (response) {
-            self.formatResponseData(response.series, response.values, response.labels);
+            self.parseChartResponse(response.series, response.values, response.labels);
         })
         .error(function(response){
             console.error('error en fetch');
         });
+    },
+
+    fetchMapPreviewData: function () {
+        var self = this;
+
+        var params = {
+                nullValueAction: self.get('nullValueAction'),
+                nullValuePreset:  self.get('nullValuePreset'),
+                data: self.get('range_data'),
+                lat: self.get('range_lat'),
+                lon: self.get('range_lon')
+            },
+            url = '/visualizations/preview/'+self.get('datastream_revision_id') + '/map';
+
+
+        return $.getJSON(url, params)
+            .then(function (response) {
+                self.parseMapResponse(response);
+            })
+            .error(function(response){
+                console.error('error en fetch');
+            });
     },
 
     /**
@@ -172,7 +194,7 @@ charts.models.Chart = Backbone.Model.extend({
      * @param  {array} values
      * @param  {array} labels
      */
-    formatResponseData: function (series, values, labels) {
+    parseChartResponse: function (series, values, labels) {
         var columns = [],
             fields =[];
 
@@ -196,6 +218,10 @@ charts.models.Chart = Backbone.Model.extend({
 
         this.trigger("newDataReceived");
 
+    },
+
+    parseMapResponse: function (response) {
+        this.data.set(response);
     },
 
     onChangeType: function (model, type) {
@@ -229,7 +255,7 @@ charts.models.Chart = Backbone.Model.extend({
         if(this.get('type') == 'mapchart'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
         } else {
-            this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
+            this.parseChartResponse(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
         }
 
         this.trigger('data_updated');

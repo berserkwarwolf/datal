@@ -3213,6 +3213,9 @@ msgstr "La columna completa"
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "O bien, la fila completa"
 
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Elige un mapa"
+
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
 msgstr "Despublicar visualización"
 

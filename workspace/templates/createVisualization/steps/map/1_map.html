@@ -1,16 +1,14 @@
 {% load i18n extra_tags components %}
-
 <div class="create step-1-view-map">
+
+	<div class="navigation FR">
+		<a class="button alpha back backButton">{% trans 'BTN-BACK-TEXT' %}</a>
+		<a class="button primary next nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
+	</div>
 
 	<div class="wrapper1">
 		<div class="wrapper2">
 			<div class="wrapper3">
-
-                <h2 class="FL">{% trans 'APP-CREATE-MAP-TITLE' %}</h2>
-
-				<a class="button alpha backButton">{% trans 'BTN-BACK-TEXT' %}</a>
-
-				<a class="button primary nextButton">{% trans 'APP-CONTINUE-TEXT' %}</a>
 
 				<div class="sidebar">
 
@@ -18,7 +16,7 @@
 
 						<div class="itemConfig">
 
-							<div class="title">{% trans 'APP-CONTINUE-TEXT' %} <span class="required"></span></div>
+							<div class="title">{% trans 'APP-CHOOSE-MAP-TEXT' %} <span class="required"></span></div>
 
 							<div class="boxInner">
 
@@ -61,8 +59,8 @@
 								<form>
 									<fieldset>
 										<div class="btnGroup btnInlineGroup">
-											<button><span class="icon icon-zoom-in"></span></button>
-											<button><span class="icon icon-zoom-out"></span></button>
+											<button class="btn-zoom" data-zoom="1"><span class="icon icon-zoom-in"></span></button>
+											<button class="btn-zoom" data-zoom="-1"><span class="icon icon-zoom-out"></span></button>
 										</div>
 									</fieldset>
 								</form>
