@@ -192,8 +192,6 @@ var MainView = Backbone.View.extend({
         if(this.model.get('isEdit')){
             this.model.set('isMap', false);
             this.currentFlow = 'charts';
-            this.index++;
-            this.steps[this.currentFlow][this.index].start();
         }
         
         this.steps[this.currentFlow][this.index].start();
