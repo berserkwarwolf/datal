@@ -37,12 +37,17 @@ var CollectWebserviceModel = StepModel.extend({
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}
 		],
-		path_to_data:[
-			{
-				required: true,
-				msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
+		path_to_data: function(value, attr, computedState){
+
+			var impl_type = parseInt(computedState.impl_type);
+
+			if(impl_type == 14){
+				if($.trim( value != '') ){
+					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+				}
 			}
-		],
+
+		},
 		mbox: [
 			{
 				required: false
