@@ -84,7 +84,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def create(self, collect_type='index', allowed_states=CREATE_ALLOWED_STATES, language=None, **fields):
         """ Create a new Dataset """
-
+        logger.info('Creating datset')
+        
         # Check for allowed states
         status = int(fields.get('status', StatusChoices.DRAFT))
 
