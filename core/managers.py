@@ -26,7 +26,7 @@ class AccountLevelManager(models.Manager):
 
 class AccountManager(models.Manager):
     def get_by_domain(self, domain):
-        if domain.find("portal.dev.junar.com") > -1:
+        if domain.find("microsites.dev") > -1:
             dom = domain.split(".")
             from core.models import Account
             return Account.objects.get(pk=int(dom[0]))

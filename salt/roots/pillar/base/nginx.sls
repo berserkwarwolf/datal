@@ -83,7 +83,7 @@ nginx:
           enabled: True
           config:
             - server:
-              - server_name: 'microsites.dev microsite.dev'
+              - server_name: 'microsites.dev microsite.dev *.microsite.dev'
               - access_log: /var/log/nginx/microsites-access.log
               - error_log /var/log/nginx/microsites-error.log
               - client_max_body_size: 48m
