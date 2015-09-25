@@ -63,8 +63,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
-    filter_name= ''
-    sort_by='id'
+    filter_name = ''
+    sort_by = '-id'
 
     if filters_param is not None and filters_param != '':
         filters = json.loads(filters_param)
