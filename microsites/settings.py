@@ -53,7 +53,7 @@ BOTS = ['Googlebot', 'AdsBot-Google'] #, 'Googlebot-Mobile', 'Googlebot-Image', 
 STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/media/'),)
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
-    'api.auth.RestAuthentication',
+    'core.rest.auth.RestAuthentication',
 )
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (

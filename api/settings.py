@@ -37,12 +37,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
     'rest_framework.authentication.SessionAuthentication',
-    'api.auth.DatalApiAuthentication',
+    'api.rest.auth.DatalApiAuthentication',
 )
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
     'rest_framework.permissions.IsAuthenticated',
-    'api.permissions.DatalApiPermission',
+    'api.rest.permissions.DatalApiPermission',
 )
 
 REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (

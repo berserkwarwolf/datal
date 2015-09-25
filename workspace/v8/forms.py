@@ -5,17 +5,6 @@ from core.choices import VISUALIZATION_TYPES
 from core.v8.forms import RequestForm
 
 
-class DatastreamRequestForm(RequestForm):
-    tableid = forms.CharField(required=False)
-    # pWhereExpr: Condicion logica para unit los filtros
-    whereExpr= forms.CharField(required=False)
-    # pIfModified: Fecha y hora en formato unix que usara el motor para comprobar si el datastream se actualizo desde entonces, y en caso contrario devolver un not modified exception.
-    ifModified= forms.CharField(required=False)
-
-    # pTableFormat: Objeto en notacion json con el formato a aplicar sobre cada columna del datastream. ver http://wiki.junar.com/index.php/API#Formateo_de_Datos
-    format= forms.CharField(required=False)
-
-
 # es el único que no hereda del RequestForm
 class DatastreamPreviewForm(forms.Form):
     # pEndPoint: end poibnt del dataset relacionado al ds

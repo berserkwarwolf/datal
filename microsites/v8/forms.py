@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from django import forms
 from core.v8.forms import RequestForm
 
 class VisualizationRequestForm(RequestForm):

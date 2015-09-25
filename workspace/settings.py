@@ -61,7 +61,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
-    'api.auth.RestAuthentication',
+    'core.rest.auth.RestAuthentication',
 )
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (

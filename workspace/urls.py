@@ -3,8 +3,10 @@ import os
 from django.conf.urls import *
 from django.conf import settings
 from django.views.i18n import javascript_catalog
-from core.rest import RestDataSetViewSet
-from workspace.rest import RestDataStreamViewSet, RestMapViewSet, RestChartViewSet
+from workspace.rest.datasets import RestDataSetViewSet
+from workspace.rest.datastreams import RestDataStreamViewSet
+from workspace.rest.maps import RestMapViewSet
+from workspace.rest.charts import RestChartViewSet
 from rest_framework import routers
 
 

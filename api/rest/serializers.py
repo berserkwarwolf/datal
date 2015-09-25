@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from core.models import DataStream
 from rest_framework.compat import OrderedDict
 import json
 
@@ -44,17 +43,3 @@ class ResourceSerializer(serializers.Serializer):
             answer['link'] = domain + answer['link']
         return OrderedDict(answer)
 
-class DataStreamSerializer(ResourceSerializer):
-    result = serializers.DictField()
-
-    def to_representation(self, obj):
-        answer= super(DataStreamSerializer, self).to_representation(obj)
-        self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
-
-        return answer
-
-class DataSetSerializer(ResourceSerializer):
-    pass
-
-class VisualizationSerializer(ResourceSerializer):
-    pass

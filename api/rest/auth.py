@@ -1,31 +1,14 @@
-import logging
-import re
-
 from django.db.models import Q
-from django.conf import settings
 from core.models import Application, Account, User, AccountAnonymousUser
 from core.http import get_domain, get_domain_by_request
 from urlparse import urlparse
 from rest_framework import authentication
 from rest_framework import exceptions
 
+import logging
+import re
+
 logger = logging.getLogger(__name__)
-
-
-
-class RestAuthentication(authentication.BaseAuthentication):
-    def authenticate(self, request):
-        if hasattr(request, 'account') and request.account:
-            account = request.account
-
-            return (
-                AccountAnonymousUser(account), {
-                    'account': account,
-                    'preferences': None,
-                    'language': request.auth_manager.language,
-                    'microsite_domain': get_domain(account.id),
-                }
-            )
 
 class DatalApiAuthentication(authentication.BaseAuthentication):
     def authenticate(self, request):
