@@ -134,7 +134,6 @@ def remove(request, visualization_revision_id, type="resource"):
 
 
 @login_required
-@require_privilege("workspace.can_review_visualization_revision")
 @require_POST
 @transaction.commit_on_success
 def change_status(request, visualization_revision_id=None):
