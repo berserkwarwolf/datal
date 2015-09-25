@@ -74,7 +74,7 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
                 preference__value=domain, 
                 status = Account.ACTIVE).first()
         except Account.DoesNotExist:
-            if domain.find(".microsites.dev") > -1:
+            if domain.find(".api.dev") > -1:
                 dom = domain.split(".")[0]
                 if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
                 from core.models import Account
