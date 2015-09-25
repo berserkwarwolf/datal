@@ -63,8 +63,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
-    filter_name= ''
-    sort_by='id'
+    filter_name = ''
+    sort_by = '-id'
 
     if filters_param is not None and filters_param != '':
         filters = json.loads(filters_param)
@@ -283,7 +283,6 @@ def edit(request, datastream_revision_id=None):
 
 
 @login_required
-@require_privilege("workspace.can_review_datastream_revision")
 @require_POST
 @transaction.commit_on_success
 def change_status(request, datastream_revision_id=None):
