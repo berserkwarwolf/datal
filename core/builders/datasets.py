@@ -107,16 +107,15 @@ class SOAPImplBuilder(DefaultImplBuilder):
 
         impl_details = '<wsOperation useCache="%s">' % useCache
         impl_details += '<methodName>%s</methodName>' % method_name
-        impl_details += '<args></args>' #TODO: Not implemented
         impl_details += '<targetNamespace>%s</targetNamespace>' % namespace
 
         if parameters and len(parameters) > 0:
-            impl_details += '<fields>'
+            impl_details += '<args>'
             for argue in parameters:
                 impl_details += '<%s editable="%s">%s</%s>' % (argue['name'], argue['editable'], argue['default_value'], argue['name'])
-            impl_details += '</fields>'
+            impl_details += '</args>'
         else:
-            impl_details += "<fields/>"
+            impl_details += "<args/>"
 
         impl_details += '</wsOperation>'
         return impl_details
