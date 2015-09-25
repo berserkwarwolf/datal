@@ -392,8 +392,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
-        return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
-                                                                  self.dataset_revision.id, self.dataseti18n.title)
+        resource_category = self.dataset_revision.category.categoryi18n_set.all()[0].name
+        return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, 
+                                                                  settings.TYPE_DATASET,
+                                                                  self.dataset_revision.id, 
+                                                                  self.dataseti18n.title,
+                                                                  resource_category)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

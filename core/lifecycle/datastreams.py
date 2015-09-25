@@ -78,7 +78,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             #language=language,
             **fields
         )
-
+        self.datastreami18n = self.datastream_revision.datastreami18n_set.all()[0]
+        
         self._log_activity(ActionStreams.CREATE)
 
         # permite publicar al crear
@@ -356,9 +357,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
     def _log_activity(self, action_id):
         title = self.datastreami18n.title if self.datastreami18n else ''
+        resource_category = self.datastream_revision.category.categoryi18n_set.all()[0].name
 
         return super(DatastreamLifeCycleManager, self)._log_activity(action_id, self.datastream_revision.dataset.id,
-            self.datastream_revision.dataset.type, self.datastream_revision.id, title)
+            settings.TYPE_DATASTREAM, self.datastream_revision.id, title, resource_category)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

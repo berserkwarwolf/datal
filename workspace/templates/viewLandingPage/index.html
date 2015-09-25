@@ -73,17 +73,20 @@
 										{% get_activity_type activity.action_id as the_activity %}
 										{{the_activity}}
 
-										{% if activity.resource_link %}
-										<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
-										{% else %}
-										{% endif%}
+{% if activity.resource_link %}
+    <a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
+        <span>{{activity.title}}</span>
+    </a>
 
-										<span class="noLink">{{activity.title}}</span>
-										{% if activity.resource_link %}
-										</a>
+{% else %}
 
-										{% else %}
-										{% endif%}
+    <span class="noLink">{{activity.title}}</span>
+
+{% endif%}
+
+{# las VZ todavia no tienen categorias #}
+{% if activity.category %} | {{activity.category}} {% endif %}
+
 										</p>
 									</div>
 

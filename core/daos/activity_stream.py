@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 class ActivityStreamDAO:
     """ class for integrated managment of resource ativities """
 
-    def create(self, account_id, user_id, revision_id, resource_type, resource_id, action_id, resource_title):
+    def create(self, account_id, user_id, revision_id, resource_type, resource_id, action_id, resource_title, resource_category):
         """ Create a redis-hash and then addit to a redis-lits"""
         if settings.DEBUG: logger.info('Create ActivityStreamDAO %d %s' % (action_id, resource_title))
         c = Cache(db=settings.CACHE_DATABASES['activity_resources'])
@@ -41,7 +41,7 @@ class ActivityStreamDAO:
             elif resource_type == settings.TYPE_DASHBOARD:
                 l_permalink = LocalHelper.build_permalink('dashboard_manager.action_view',
                                                           '&dashboard_revision_id=' + str(revision_id))
-
+            
         list_key = 'activity_stream::%s' % str(account_id)
         n=c.incr("%s_counter" % list_key) # count any use of the list indexing hash and never repeat an ID
         activity_key = 'activity.stream_%s:%s' % (str(account_id), str(n))
@@ -49,7 +49,8 @@ class ActivityStreamDAO:
                         , "type": resource_type, "resource_id": resource_id
                         ,"action_id": action_id
                         , "title": resource_title, "time":time
-                        , "resource_link": l_permalink }
+                        , "resource_link": l_permalink
+                        , "category": resource_category }
 
         r1 = c.hmset(activity_key, activity_value)
         r2 = c.lpush(str(list_key), activity_key)

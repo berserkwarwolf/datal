@@ -83,10 +83,14 @@ class AbstractLifeCycleManager():
         pass
 
     @abstractmethod
-    def _log_activity(self, action_id, resource_id, resource_type, revision_id, resource_title):
+    def _log_activity(self, action_id, resource_id, resource_type, revision_id, resource_title, resource_category):
         return ActivityStreamDAO().create(account_id=self.user.account.id, user_id=self.user.id,
-                                          resource_id=resource_id, revision_id=revision_id, resource_type=resource_type,
-                                          resource_title=resource_title, action_id=action_id)
+                                          resource_id=resource_id, 
+                                          revision_id=revision_id, 
+                                          resource_type=resource_type,
+                                          resource_title=resource_title, 
+                                          action_id=action_id, 
+                                          resource_category=resource_category)
 
     @abstractmethod
     def _update_last_revisions(self):
