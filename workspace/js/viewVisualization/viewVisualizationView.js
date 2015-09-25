@@ -15,8 +15,9 @@ var viewVisualizationView = Backbone.View.extend({
 		this.chartsFactory = new charts.ChartsFactory();
 
 		this.setupChart();
-		this.render();
-		this.listenTo(this.model, "change", this.render);
+		//this.render();
+		this.listenTo(this.model, 'newDataReceived',this.render,this);
+		//this.listenTo(this.model, "change", this.render);
 	},
 	setupChart: function () {
 		this.model.set('chart', {
@@ -28,13 +29,10 @@ var viewVisualizationView = Backbone.View.extend({
 
 		this.ChartViewClass = chartSettings.Class;
 		this.ChartModelClass = charts.models.Chart;
+		this.initializeChart();
 	},
 	render: function () {
-
-		console.log(this.model.toJSON());
-
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.initializeChart();
 		this.chartInstance.render();
 		return this;
 	},
@@ -84,7 +82,7 @@ var viewVisualizationView = Backbone.View.extend({
 			container.css({
 				height: minHeight + 'px'
 			});
-			chartInstance.render();
+			//chartInstance.render();
 			self.setLoading();
 		}
 
