@@ -21,7 +21,7 @@
 				<h1>GUID:</h1>
 				<input type="text" id="id_GUID" value="{{datastream.guid}}" readonly />
 			</header>
-			<p>{% trans 'VIEWDS-API-DOCUMENTATION-1' %} <a href="{% if preferences.account_api_wiki %}{{preferences.account_api_wiki}}{%else%}{{DOC_API_URL}}{% endif %}" title="{% trans 'VIEWDS-API-DOCUMENTATION-TITLE' %}">{% trans 'VIEWDS-API-DOCUMENTATION-2' %}</a>.</p>
+			<p>{% trans 'VIEWDS-API-DOCUMENTATION-1' %} <a href="{{settings.DOC_API_URL}}" target="_blank" title="{% trans 'VIEWDS-API-DOCUMENTATION-TITLE' %}">{% trans 'VIEWDS-API-DOCUMENTATION-2' %}</a>.</p>
 		</article>
 
 		<!-- Examples -->

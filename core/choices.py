@@ -256,7 +256,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.url', 'account.url')
     ,('account.domain', 'account.domain')
     ,('account.api.domain', 'account.api.domain')
-    ,('account.api.wiki', 'account.api.wiki')
     ,('account.hot.dashboards', 'account.hot.dashboards')
     ,('account.hot.datastreams', 'account.hot.datastreams')
     ,('account.hot.visualizations', 'account.hot.visualizations')
