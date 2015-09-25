@@ -42,7 +42,7 @@ var CollectWebserviceModel = StepModel.extend({
 			var impl_type = parseInt(computedState.impl_type);
 
 			if(impl_type == 14){
-				if($.trim( value != '') ){
+				if($.trim(value).length == 0){
 					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
 				}
 			}
