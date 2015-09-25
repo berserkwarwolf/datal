@@ -181,7 +181,11 @@ class datastore_sftp(datastore):
         self.connect()
         self.ssh_client.exec_command('mkdir -p %s' % folder)
         final_path = '%s/%s' % (folder, file_name)
-        self.sftp.putfo(uploaded_file, remotepath=final_path)
+        try:
+            self.sftp.putfo(uploaded_file, remotepath=final_path)
+        except IOError, e:
+            logger.error('Error saving file to SFTP %s' % str(e))
+            raise e
 
     def build_url(self, bucket_name, key, response_headers=None, force_http=True):
         """ return an URL for downloading resource
