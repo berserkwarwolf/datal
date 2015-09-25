@@ -212,7 +212,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .step2 .sidebar .toolbar .ic_RemoveItem:before{content:" | ";left:-10px;top:2px;position:absolute;color:#ccc;}
 
 /* Changes to step 3 */
-.step3.create .title{border:0;padding:0 0 0 20px;font-size:15px !important;color:#000;margin-bottom:20px;padding:0 !important;}
+.step3 .title{text-transform:uppercase;margin-bottom:20px;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;line-height:21px;padding-left:0;}
 .step3.create fieldset{padding-bottom:20px;}
 .step3 .tagsContent{padding-left:115px !important;}
 

@@ -51,7 +51,7 @@ class ExceptionManager(object):
     """ Middleware for error handling """
     def process_exception(self, request, exception):
 
-        if not hasattr(request, 'user' or not request.user or not isinstance(exception, DATALException)):
+        if not hasattr(request, 'user') or not request.user or not isinstance(exception, DATALException):
             self.log_error(exception)
             raise
 
