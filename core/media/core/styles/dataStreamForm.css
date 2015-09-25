@@ -18,7 +18,7 @@
 .dataStreamForm .form .row.checkbox{padding-left:98px;}
 .dataStreamForm .form .row.checkbox input{width:auto;-moz-border-radius:0;-webkit-border-radius:0;-border-radius:0;padding:0;float:left;}
 .dataStreamForm .form .row.checkbox label{font-size:12px;font-weight:normal;text-align:left;padding:2px 0 0 5px;width:auto !important;height:auto;line-height:normal;}
-.dataStreamForm h5{font-size:14px;padding:0 0 15px;color:#F19030;font-weight:normal;border-bottom:1px solid #e4e4e4;margin-bottom:25px;}
+.dataStreamForm h5{font-size:14px;padding:0 0 15px;font-weight:normal;margin-bottom:25px;}
 .dataStreamForm p.tip{clear:both;color:#999;font-size:11px;padding-bottom:10px;}
 .formContainer .buttons .button {display:inline-block;}
 

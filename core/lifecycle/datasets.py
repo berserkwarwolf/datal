@@ -84,7 +84,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def create(self, collect_type='index', allowed_states=CREATE_ALLOWED_STATES, language=None, **fields):
         """ Create a new Dataset """
-
+        logger.info('Creating datset')
+        
         # Check for allowed states
         status = int(fields.get('status', StatusChoices.DRAFT))
 
@@ -119,7 +120,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             language=self.dataset.user.language
         )
 
-        self._log_activity( ActionStreams.CREATE)
+        self._log_activity(ActionStreams.CREATE)
 
         # En caso de seleccionar que este publicado
         if status == StatusChoices.PUBLISHED:
@@ -391,8 +392,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
-        return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, self.dataset.type,
-                                                                  self.dataset_revision.id, self.dataseti18n.title)
+        resource_category = self.dataset_revision.category.categoryi18n_set.all()[0].name
+        return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, 
+                                                                  settings.TYPE_DATASET,
+                                                                  self.dataset_revision.id, 
+                                                                  self.dataseti18n.title,
+                                                                  resource_category)
 
     def _update_last_revisions(self):
         """ update last_revision_id and last_published_revision_id """

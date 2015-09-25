@@ -37,7 +37,7 @@ class ViewDatastreamCreateExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASREAM-CREATE')
 
     def __init__(self):
-        url = reverse('manageDataviews.create')
+        url = reverse('manageDataviews.index')
         super(ViewDatastreamCreateExceptionAction, self).__init__(url)
 
 
@@ -65,7 +65,7 @@ class ViewDatasetCreateExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-DATASET-CREATE')
 
     def __init__(self):
-        url = reverse('manageDatasets.create')
+        url = reverse('manageDatasets.index')
         super(ViewDatasetCreateExceptionAction, self).__init__(url)
 
 
@@ -89,7 +89,7 @@ class ViewVisualizationCreateExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-VIEW-VISUALIZATION-CREATE')
 
     def __init__(self):
-        url = reverse('manageDatasets.create')
+        url = reverse('manageDatasets.index')
         super(ViewVisualizationCreateExceptionAction, self).__init__(url)
 
 

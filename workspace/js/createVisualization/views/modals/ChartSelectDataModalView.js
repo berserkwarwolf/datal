@@ -4,7 +4,7 @@ var ChartSelectDataModalView = ModalView.extend({
 		'click button.btn-cancel':'onClickCancel'
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		var self = this;
 
 		//init table
@@ -13,6 +13,8 @@ var ChartSelectDataModalView = ModalView.extend({
         this.rangeDataModel = new DataTableSelectionModel({id: 1});
         this.rangeLabelsModel = new DataTableSelectionModel({id: 2});
         this.rangeHeadersModel = new DataTableSelectionModel({id: 3});
+
+        this.dataStreamModel = options.dataStreamModel;
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
@@ -30,21 +32,16 @@ var ChartSelectDataModalView = ModalView.extend({
             // this.dataTableView.selectRange(val);
         });
 
-        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-            this.model.get('datastream_revision_id'),
-            '&limit=50&page=0'].join('');
-
-        // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
-        // request when it fails.
-        $.getJSON(dataUrl).then(function (payload) {
-            self.createDataTableView(payload);
-        });
+        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
-            this.rangeDataModel.set('excelRange', this.model.get('range_data'));
-            this.rangeLabelsModel.set('excelRange', this.model.get('range_labels'));
-            this.rangeHeadersModel.set('excelRange', this.model.get('range_headers'));
+            this._cached_range_data = this.model.get('range_data');
+            this._cached_range_labels = this.model.get('range_labels');
+            this._cached_range_headers = this.model.get('range_headers');
+            this.rangeDataModel.set('excelRange', this._cached_range_data);
+            this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+            this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
             this.collection.add([
                 this.rangeDataModel,
                 this.rangeLabelsModel,
@@ -68,16 +65,20 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     onClickCancel: function (e) {
-        this.collection.reset();
-        this.selectedCellRangeView.clear();
+        // this.collection.reset();
+        this.rangeDataModel.set('excelRange', this._cached_range_data);
+        this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+        this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
+        // this.selectedCellRangeView.clear();
+        this.onClickDone();
         this.close();
     },
 
-    createDataTableView: function (payload) {
+    onLoadDataStream: function (model) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
-            invoke: payload
+            datastream: model.toJSON()
         });
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (selection) {

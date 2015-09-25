@@ -44,19 +44,6 @@ def set_dataset_impl_type_nice(item):
     return unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])
 
 
-# Esto se usa en dos vistas para pasarle parametros de filtro al query de 
-# los dao, no estoy seguro donde deberia ir este codigo.
-def filters_to_model_fields(filters):
-    result = dict()
-
-    result['impl_type'] = filters.get('type')
-    result['category__categoryi18n__name'] = filters.get('category')
-    result['dataset__user__nick'] = filters.get('author')
-    result['status'] = filters.get('status')
-
-    return result
-
-
 # Esto solo se usa en un lugar no se si vale la pena que ete aca
 def remove_duplicated_filters(list_of_resources):
     removed = dict()

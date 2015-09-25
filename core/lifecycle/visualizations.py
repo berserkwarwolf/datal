@@ -198,14 +198,19 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self.visualization.delete()
 
     def _log_activity(self, action_id):
-        title = self.visualizationi18n.title if self.visualizationi18n else ''
+        if not self.visualizationi18n:
+            self.visualizationi18n = self.visualization_revision.visualizationi18n_set.all()[0] # TODO at at DAO
 
+        title = self.visualizationi18n.title
+        resource_category = self.visualization_revision.datastream_revision.category.categoryi18n_set.all()[0] # todo add language
+        
         return super(VisualizationLifeCycleManager, self)._log_activity(
             action_id,
             self.visualization_revision.visualization.id,
             settings.TYPE_VISUALIZATION,
             self.visualization_revision.id,
-            title
+            title,
+            resource_category
         )
 
     def accept(self, allowed_states=ACCEPT_ALLOWED_STATES):

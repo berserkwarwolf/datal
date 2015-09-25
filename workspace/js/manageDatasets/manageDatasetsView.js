@@ -10,6 +10,7 @@ var ManageDatasetsView = Backbone.View.extend({
     grid: null,
     paginator: null,
     datastreamImplValidChoices: null,
+    template: null,
 
     events: {
         "click #id_itemsPerPage": "onItemsPerPageChanged",
@@ -22,6 +23,9 @@ var ManageDatasetsView = Backbone.View.extend({
 
         this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
 
+        // Init template
+        this.template = _.template($("#total-entries-template").html());
+
         // Init Filters
         this.initFilters(options.filters);
 
@@ -32,7 +36,8 @@ var ManageDatasetsView = Backbone.View.extend({
         this.listenTo(this.listResources, 'request', this.showLoading);
         this.listenTo(this.listResources, 'sync', this.hideLoading);
         this.listenTo(this.listResources, 'error', this.hideLoading);
-            
+        this.listenTo(this.listResources, 'sync', this.updateTotalEntries);        
+
         this.setHeights();
 
         // Render
@@ -41,9 +46,16 @@ var ManageDatasetsView = Backbone.View.extend({
     },
 
     render: function(){
+
+        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
         this.$el.find("#grid").html(this.grid.render().$el);
         this.$el.find("#paginator").html(this.paginator.render().$el);
         this.$el.find(".backgrid-paginator").addClass("pager center");
+    },
+
+    updateTotalEntries: function(models, response){
+        this.model.set('total_entries',response.total_entries);
+        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
     },
 
     showLoading: function(){

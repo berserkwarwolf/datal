@@ -13,7 +13,6 @@ from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.utils import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -85,14 +84,19 @@ def action_view(request, revision_id):
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
-    filters = bb_request.get('filters')
-    filters_dict= ''
-    filter_name= ''
-    sort_by='-id'
-    exclude=None
+    filters_param = bb_request.get('filters')
+    filters_dict = dict()
+    filter_name = ''
+    sort_by = '-id'
+    exclude = None
 
-    if filters is not None and filters != '':
-        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
+    if filters_param is not None and filters_param != '':
+        filters = json.loads(filters_param)
+        filters_dict['impl_type'] = filters.get('type')
+        filters_dict['category__categoryi18n__name'] = filters.get('category')
+        filters_dict['dataset__user__nick'] = filters.get('author')
+        filters_dict['status'] = filters.get('status')
+
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':
@@ -136,9 +140,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = {'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
-    mimetype = "application/json"
-
-    return HttpResponse(response, mimetype=mimetype)
+    return HttpResponse(response, mimetype="application/json")
 
 
 @login_required

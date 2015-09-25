@@ -14,7 +14,6 @@
 /*DATA STREAM TITLE*/
 .dataStreamBox h2{font-weight:normal;}
 .dataStreamBox h2 label{color:#0862A2;font-weight:normal;cursor:pointer;font-size:12px;}
-.dataStreamBox h2:hover label{color:#c9dbe8;}
 .dataStreamBox h2 label:hover{text-decoration:underline;}
 .dataStreamBox h2 input[type=text]{background:#fff;width:50px;vertical-align:middle;height:17px;line-height:17px;padding:0 3px;border:1px solid #ccc;font:12px Arial, Helvetica, sans-serif;-moz-border-radius:0;-webkit-border-radius:0;border-radius:0;}
 

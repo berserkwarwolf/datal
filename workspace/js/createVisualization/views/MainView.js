@@ -10,7 +10,14 @@ var MainView = Backbone.View.extend({
 
     initialize: function (options) {
 
+        var self = this;
+
         this.model = new charts.models.Chart();
+
+        this.dataStreamModel = new DataStreamModel({
+            datastream_revision_id: options.chart_model.datastream_revision_id
+        });
+        this.dataStreamModel.fetch();
 
         this.model.parseResponse(options.chart_model);
 
@@ -41,6 +48,7 @@ var MainView = Backbone.View.extend({
         var chartView = new ChartView({
           name: gettext('APP-CHART-TEXT'), 
           model: this.model,
+          dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view')
         }).init();
 
@@ -65,6 +73,7 @@ var MainView = Backbone.View.extend({
         var mapView = new MapView({
           name: gettext('APP-MAP-TEXT'), 
           model: this.model,
+          dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view-map')
         }).init();
 
@@ -192,8 +201,6 @@ var MainView = Backbone.View.extend({
         if(this.model.get('isEdit')){
             this.model.set('isMap', false);
             this.currentFlow = 'charts';
-            this.index++;
-            this.steps[this.currentFlow][this.index].start();
         }
         
         this.steps[this.currentFlow][this.index].start();

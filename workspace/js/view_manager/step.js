@@ -1383,9 +1383,9 @@ var Step3 = Step.extend({
         if (lValue != "") {
             $lLabel.text(lValue);
         }else{
-            $lValue.val("Enter a Value");
+            $(pValue).val("Enter a Value");
         }
-        $lValue.hide();
+        $(pValue).hide();
         $lLabel.show();
 
         var lData = '';
