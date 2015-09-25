@@ -51,8 +51,7 @@ class ExceptionManager(object):
     """ Middleware for error handling """
     def process_exception(self, request, exception):
 
-        if (not hasattr(request, 'user') or not request.user or
-            not isinstance(exception, DATALException)):
+        if not hasattr(request, 'user' or not request.user or not isinstance(exception, DATALException)):
             self.log_error(exception)
             raise
 
@@ -68,6 +67,4 @@ class ExceptionManager(object):
             "auth_manager": request.auth_manager
         })
         response = tpl.render(context)
-        return HttpResponse(response, mimetype=mimetype,
-            status=exception.status_code)
-
+        return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
