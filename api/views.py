@@ -12,8 +12,6 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 from core.search.elastic import ElasticFinderManager
 from api.serializers import *
-from core.v8.factories import AbstractCommandFactory
-from core.v8.forms import ArgumentForm, InvokeFormSet
 from core.rest import ResourceViewSet
 
 import logging

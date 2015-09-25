@@ -105,7 +105,6 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         else:
             datastream_revision = DataStreamRevision.objects.select_related().get(
                 pk=F(fld_revision_to_get),
-                datastream__id=datastream_id,
                 category__categoryi18n__language=language,
                 datastreami18n__language=language,
                 datastream__id=datastream_id

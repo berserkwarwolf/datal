@@ -16,10 +16,26 @@ from core.v8.factories import AbstractCommandFactory
 from core.v8.forms import ArgumentForm, RequestFormSet
 from core.serializers import EngineSerializer
 from workspace.v8.forms import *
-
+from rest_framework import renderers
 
 import logging
 import json
+
+class EngineRenderer(renderers.BaseRenderer):
+    def render(self, data, media_type=None, renderer_context=None):
+        return data
+
+class CSVEngineRenderer(EngineRenderer):
+    media_type="text/csv"
+    format = "csv"
+
+class XLSEngineRenderer(EngineRenderer):
+    media_type="application/vnd.ms-excel"
+    format = "xls"
+
+class HTMLEngineRenderer(EngineRenderer):
+    media_type="text/html"
+    format = "html"
 
 logger = logging.getLogger(__name__)
 
@@ -89,7 +105,6 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
             raise Exception("Wrong arguments")        
 
         datos = form.get_cleaned_data_plain()
-
         command = AbstractCommandFactory().create(engine_method, 
             self.data_types[0], form.cleaned_data)
         result = command.run()
@@ -104,7 +119,15 @@ class ResourceViewSet(viewsets.GenericViewSet, mixins.RetrieveModelMixin):
         if serialize:
             serializer = self.get_serializer(resource)
             return Response(serializer.data)
-        return Response(EngineSerializer(resource).data['result'])
+
+        serializer = EngineSerializer(resource)
+        if 'redirect' in serializer.data and serializer.data['redirect']:
+            redirect = Response(serializer.data['result'],
+                status=302, content_type='application/vnd.ms-excel')
+            redirect['Location'] = serializer.data['result']['fUri']
+            return redirect
+
+        return Response(serializer.data['result'], content_type=result[1])
 
 
 class RestDataSetViewSet(ResourceViewSet):
@@ -128,7 +151,12 @@ class RestDataStreamViewSet(ResourceViewSet):
     dao_get_param = 'datastream_revision_id'
     dao_pk = 'datastream_revision_id'
 
-    @detail_route(methods=['get'])
+    @detail_route(methods=['get'], renderer_classes=[
+        renderers.JSONRenderer,
+        renderers.BrowsableAPIRenderer,
+        CSVEngineRenderer,
+        XLSEngineRenderer,
+        HTMLEngineRenderer])
     def data(self, request, format=None, *args, **kwargs):
         return self.engine_call( request, 'invoke', format,
             form_class=DatastreamRequestForm,
@@ -169,3 +197,5 @@ class RestChartViewSet(ResourceViewSet):
         return self.engine_call( request, 'chart', format,
             form_class=VisualizationRequestForm,
             serialize=False)
+
+

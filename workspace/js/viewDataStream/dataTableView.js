@@ -248,7 +248,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/dataviews/action_updategrid',
+			url: '/rest/datastreams/' + dataStream.id + '/data.json',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
@@ -295,12 +295,6 @@ var dataTableView = Backbone.View.extend({
 					});
 					n++;					
 				}
-
-				// Add DataStream ID
-				params.push({
-					name: 'datastream_id',
-					value: dataStream.id
-				});
 
 				// Set Flex options
 				$('.dataTable .data .result').flexOptions({

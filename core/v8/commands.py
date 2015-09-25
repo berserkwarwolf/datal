@@ -68,7 +68,6 @@ class EngineCommand(object):
             answer = self._request(self.query)
             if answer:
                 cache.set(self.key_prefix, answer, 60)
-
                 return answer
             return '{"Error":"No invoke"}', "application/json; charset=UTF-8"
         except Exception, e:
