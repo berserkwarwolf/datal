@@ -560,7 +560,6 @@ class DatasetRevision(RevisionModel):
         return  unicode(self.id)
 
     def get_endpoint_full_url(self):
-        logger.info('LALA')
         if settings.USE_DATASTORE == 'sftp':
             # We MUST rewrite all file storage logic very SOON
             return '{}/{}/{}'.format(
