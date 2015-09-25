@@ -8,7 +8,9 @@ def request_context(request):
                   'API_KEY' : settings.API_KEY,
                   'VERSION_JS_CSS': settings.VERSION_JS_CSS,
                   'WORKSPACE_URI': settings.WORKSPACE_URI,
-                  'DOMAINS': settings.DOMAINS}
+                  'DOMAINS': settings.DOMAINS,
+                  'DOC_API_URL': settings.DOC_API_URL}
+                  
     d['settings'] = my_settings
     d['preference'] = request.preferences
     if hasattr(request, 'stats'):
