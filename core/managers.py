@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from core.utils import slugify
 from core import helpers, choices
 
+logger = logging.getLogger(__name__)
+
 
 class ThresholdManager(models.Manager):
 
@@ -26,10 +28,11 @@ class AccountLevelManager(models.Manager):
 
 class AccountManager(models.Manager):
     def get_by_domain(self, domain):
-        if domain.find("microsites.dev") > -1:
-            dom = domain.split(".")
+        if domain.find(".microsites.dev") > -1:
+            dom = domain.split(".")[0]
+            if settings.DEBUG: logger.info('Test domain (%s)' % dom)
             from core.models import Account
-            return Account.objects.get(pk=int(dom[0]))
+            return Account.objects.get(pk=int(dom))
             # return super(AccountManager, self).get(account__id = dom[0])
         else:
             return super(AccountManager, self).get(preference__key = 'account.domain', preference__value = domain)

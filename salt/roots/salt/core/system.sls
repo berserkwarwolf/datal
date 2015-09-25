@@ -5,7 +5,7 @@ local_hosts:
       - api.dev
       - admin.dev
       - workspace.dev
-      - *.microsites.dev
+      - '*.microsites.dev'
       - microsites.dev
       - microsite.dev
       - datastore.dev

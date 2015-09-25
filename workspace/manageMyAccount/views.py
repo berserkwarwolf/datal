@@ -45,7 +45,7 @@ def create(request):
         month = datetime.timedelta(days=30)
         account.expires_at = datetime.date.today() + month
         account.save()
-
+        new_account_id = account.id
         language = form.cleaned_data.get('language')
 
         default_category = dict(
@@ -65,12 +65,18 @@ def create(request):
         )
 
         initial_preferences = [
-            ('account.url', form.cleaned_data.get('admin_url')),
+            ('account.url', str(new_account_id)), # TODO is for testing accounts
+            ('account.domain', '%d.microsites.dev:8080' % new_account_id), # TODO is for testing accounts
+            ('account.link', 'http://%d.microsites.dev:8080' % new_account_id), # TODO is for testing accounts
+            ('account.api.domain', '%d.api.dev:8080' % new_account_id), # TODO is for testing accounts
             ('account.name', account.name),
             ('account.language', language),
             ('enable.junar.footer', 'on'),
             ('account.page.titles', account.name),
-            ('account.default.category', category.id)
+            ('account.default.category', category.id),
+            ('account.home', '{"config":{"mainTitle":"Bienvenido","mainSection":"Test text","coverUrl":"http:\/\/datastore.dev:8080\/resources\/datal_cdn\/\/1\/datal-portada.jpg","sliderSection":[],"linkSection":[],"resourcesTable":true},"theme":"4","type":"save"}'),
+            ('account.has.home', True),
+            
         ]
 
         for ip in initial_preferences:
