@@ -54,7 +54,7 @@ nginx:
           enabled: True
           config:
             - server:
-              - server_name: 'api.dev'
+              - server_name: 'api.dev *.api.dev'
               - access_log: /var/log/nginx/api-access.log
               - error_log: /var/log/nginx/api-error.log
               - client_max_body_size: 48m
