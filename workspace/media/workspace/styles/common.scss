@@ -380,7 +380,7 @@ body{background:$color-base;height:100%;min-width:998px;}
 
 
   .sourcesContent, 
-  .tagsContent{padding-left:10px;display:inline-block;}
+  .tagsContent{padding-left:10px;}
 
   ol,
   ul{padding-left:20px;}
@@ -623,6 +623,9 @@ i.icon.TNCLIMA{}
 .backgrid .descending .sort-caret:before{border-top:4px solid #a3a3a3 !important;}
 
 /* Tags */
+.sourcesContent, 
+.tagsContent{display:inline-block;}
+
 .tag, .param{margin:0 10px 10px 0;float:left;}
 .tag .tagTxt, .param .paramTxt {
   background:#e2e2e2;

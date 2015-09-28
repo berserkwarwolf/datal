@@ -2,6 +2,18 @@
 @import 'variables';
 @import 'functions';
 
+.row{
+	margin:20px 0;
+	
+	.title{margin-bottom:0;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;padding:0 0 5px;line-height:21px;}
+	p,
+	.sourcesContent,
+	.notes{padding-left:10px;line-height:18px;}
+
+	.sourceName{margin-right:10px;}
+	.size{color:$font-color-light;}
+}
+
 /* List */
 .resources-list h4{border-bottom:1px solid #dfdfdf;padding:8px 15px 18px;font-weight:bold;color:$font-color-semi-light;}
 .api_example{margin-top:5px;font-weight:bold;}
@@ -41,4 +53,15 @@
 .flex-center{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:center;justify-content:center;min-height:90%;}
 
 /* Sidebar */
-.sidebar-view{background:$color-base-extra-light;padding:20px;}
+.sidebar-view{
+	background:#f5f5f5;padding:10px 25px;margin-top:20px;
+
+	.row{
+		padding-bottom:25px;border-bottom:1px solid $color-base-extra-light;
+		&:last-child{border-bottom:none;padding-bottom:0;}
+
+		.title{text-transform:none;}
+		p{padding-left:0;margin-left:0;}
+	}
+
+}

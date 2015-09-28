@@ -1,0 +1,117 @@
+{% load i18n datastream_tags %}
+
+<!-- Description -->
+<div class="row">
+	
+	<div class="col-xs-6">
+
+		<div class="description">
+
+		    <div class="row">
+				<!-- Type -->
+				<i class="icon {{ dataset.impl_type|type_classname }}"></i> 
+
+				<!-- Type file -->
+				{% if dataset.collect_type == 0 %}
+
+					<span class="sourceName">
+						{{dataset.filename}} <span class="size">({{ dataset.size }})</span>
+					</span>
+
+					<a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="link" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
+
+				<!-- Type URL and webservice -->
+				{% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
+
+					<a id="id_gotosource" class="link" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}">{{ dataset.end_point }}</a>
+
+				{% endif %}
+			</div>
+
+		    <div class="row">
+		        <div class="title">{% trans "APP-TITLE-TEXT" %}</div>
+		        <p>{{dataset.title|capfirst}}</p>
+		    </div>
+
+		    <div class="row">
+		        <div class="title">{% trans "APP-DESCRIPTION-TEXT" %}</div>
+		        <p>{{dataset.description|capfirst}}</p>
+		    </div>
+
+			<div class="row">
+		        <div class="title">{% trans "APP-CATEGORY-TEXT" %}</div>
+		        <p>{{dataset.category_name|capfirst}}</p>
+		    </div>
+
+		    {% if dataset.tags %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-TAGS-TEXT' %}</div>
+		        <div class="sourcesContent">
+		        {% for tag in dataset.tags %}
+		            <div class="tag">
+		                <span class="tagInner clearfix">
+		                    <span class="tagTxt">{{tag.tag__name|capfirst}}</span>
+		                </span>
+		            </div>
+		        {% endfor %}
+		        </div>
+		    </div>
+		    {% endif %}
+
+		    {% if dataset.sources %} 
+		    <div class="row">
+		        <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
+		        {% for source in dataset.sources %}
+		        <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}} <span class="icon icon-view-site icon-inline icon-right"></span></a></p>
+		        {% endfor %}
+		    </div>
+		    {% endif %}
+
+		    {% if dataset.notes %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
+		        <div class="notes">{{dataset.notes|safe|urlize}}</div>
+		    </div>
+		    {% endif %}
+
+		</div>
+
+	</div>
+
+	<div class="col-xs-4 col-xs-offset-2">
+
+		<div class="sidebar sidebar-view">
+
+		    {% if dataset.license_url %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-LICENSE-TEXT' %}</div>
+		        <p><a href="{{dataset.license_url}}" target="_blank" title="{{dataset.license_url}}">{{dataset.license_url}}</a></p>
+		    </div>
+		    {% endif %}
+
+			{% if dataset.frequency %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-FREQUENCY-TEXT' %}</div>
+		        <p>{{dataset.frequency|capfirst}}</p>
+		    </div>
+		    {% endif %}
+
+			{% if dataset.mbox %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-CONTACT-EMAIL-TEXT' %}</div>
+		        <p><a href="mailto:{{dataset.mbox}}" title="{{dataset.mbox}}">{{dataset.mbox}}</a></p>
+		    </div>
+		    {% endif %}
+
+			{% if dataset.spatial %}
+		    <div class="row">
+		        <div class="title">{% trans 'APP-REGION-TEXT' %}</div>
+				<p>{{dataset.spatial|capfirst}}</p>
+		    </div>
+		    {% endif %}
+
+		</div>
+		
+	</div>
+
+</div>

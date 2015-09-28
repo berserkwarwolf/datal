@@ -41,24 +41,24 @@
                         <a>Descripción</a>
                     </div>
                 </li>
+                {% if dataset.datastreams or dataset.visualizations %}
                 <li class="tab">
                     <div class="clearfix">
                         <a>Recursos asociados</a>
                     </div>
                 </li>
+                {% endif %}
             </ul>
         </div>
     </div>
 
-    <div class="row">
+    <div class="resource-detail box" id="id_dataStreamContainer">
+      
+      {% include "viewDataset/description.html" %}
 
-      <div class="col-xs-6">
-        {% include "viewDataset/detail.html" %}
-      </div>
-
-      <div class="col-xs-4 col-xs-offset-2">
-        {% include "viewDataset/sidebar.html" %}
-      </div>
+      {% if dataset.datastreams or dataset.visualizations %}
+        {% include "viewDataset/related_resources.html" %}
+      {% endif %}
 
     </div>
 
