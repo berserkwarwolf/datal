@@ -24,7 +24,7 @@ var ManageDatasetsView = Backbone.View.extend({
         this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
 
         // Init template
-        this.template = _.template($("#total-entries-template").html());
+        this.template = _.template($("#total-resources-template").html());
 
         // Init Filters
         this.initFilters(options.filters);
@@ -36,7 +36,7 @@ var ManageDatasetsView = Backbone.View.extend({
         this.listenTo(this.listResources, 'request', this.showLoading);
         this.listenTo(this.listResources, 'sync', this.hideLoading);
         this.listenTo(this.listResources, 'error', this.hideLoading);
-        this.listenTo(this.listResources, 'sync', this.updateTotalEntries);        
+        this.listenTo(this.listResources, 'sync', this.updateTotalResources);        
 
         this.setHeights();
 
@@ -47,15 +47,15 @@ var ManageDatasetsView = Backbone.View.extend({
 
     render: function(){
 
-        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
+        this.$el.find(".total-resources").html(this.template(this.model.toJSON()));
         this.$el.find("#grid").html(this.grid.render().$el);
         this.$el.find("#paginator").html(this.paginator.render().$el);
         this.$el.find(".backgrid-paginator").addClass("pager center");
     },
 
-    updateTotalEntries: function(models, response){
-        this.model.set('total_entries',response.total_entries);
-        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
+    updateTotalResources: function(models, response){
+        this.model.set('total_resources',response.total_resources);
+        this.$el.find(".total-resources").html(this.template(this.model.toJSON()));
     },
 
     showLoading: function(){

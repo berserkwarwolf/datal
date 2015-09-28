@@ -123,7 +123,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    resources,total_resources = DatasetDBDAO().query(
+    total_resources = request.stats['account_total_datasets']
+    
+    resources,total_entries = DatasetDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -137,7 +139,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
     return HttpResponse(response, mimetype="application/json")

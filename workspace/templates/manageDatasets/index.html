@@ -49,7 +49,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datasets }}</span>) </span></h1>
+		<h1>{% trans "APP-DATASETS-TEXT" %} <span class="total-resources"></span></h1>
 
 	</div>
 
@@ -107,7 +107,7 @@
 
 	$(document).ready(function(){
 		var manageDatasetsModel =  new ManageDatasetsModel({
-			total_entries: {{ stats.account_total_datasets }}
+			total_resources: {{ stats.account_total_datasets }}
 		});
 		var manageDatasetsView =  new ManageDatasetsView({
 			model: manageDatasetsModel,
