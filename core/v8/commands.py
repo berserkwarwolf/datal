@@ -15,6 +15,7 @@ import logging
 
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
+    method = 'GET'
     logger = logging.getLogger(__name__)
     
     def __init__(self, query):
@@ -30,7 +31,7 @@ class EngineCommand(object):
     def _get_url(self):
         return get_domain_with_protocol('engine') + self.endpoint
 
-    def _request(self, query, method = 'GET'):
+    def _request(self, query):
         url = self._get_url()
         response = None
 
@@ -39,9 +40,9 @@ class EngineCommand(object):
             self.logger.info("URL: %s Params: %s" %(url, params))
 
             try:
-                if method == 'GET':
+                if self.method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
-                elif method == 'POST':
+                elif self.method == 'POST':
                     response = urllib.urlopen(url, params)
             except Exception, e:
                 self.logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
@@ -83,10 +84,11 @@ class EngineChartCommand(EngineCommand):
 
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
+    method = 'POST'
 
 class EngineLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_LOADER_SERVLET
 
 class EnginePreviewCommand(EngineCommand):
     endpoint = settings.END_POINT_PREVIEWER_SERVLET
-
+    method = 'POST'
