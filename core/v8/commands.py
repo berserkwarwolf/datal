@@ -52,7 +52,10 @@ class EngineCommand(object):
             if response:
                 if response.getcode() == 200:
                     ret = response.read()
-                    mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
+                    if len(response.info().getplist()) > 0:
+                        mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
+                    else:
+                        mimetype = 'application; json'
                     return ret, mimetype
 
             raise IOError('Error code %d at %s+%s' % (response.getcode(), url, str(params)))
