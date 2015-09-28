@@ -174,10 +174,12 @@ charts.models.Chart = Backbone.Model.extend({
                 nullValuePreset:  self.get('nullValuePreset'),
                 data: self.get('range_data'),
                 lat: self.get('range_lat'),
-                lon: self.get('range_lon')
+                lon: self.get('range_lon'),
+                revision_id: self.get('datastream_revision_id')
             },
-            url = '/visualizations/preview/'+self.get('datastream_revision_id') + '/map';
+            url = '/rest/maps/sample.json';
 
+        console.log(params);
 
         return $.getJSON(url, params)
             .then(function (response) {
