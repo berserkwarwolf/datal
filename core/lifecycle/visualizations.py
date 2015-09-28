@@ -196,6 +196,10 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
 
     def _remove_all(self):
         self.visualization.delete()
+        self._log_activity(ActionStreams.DELETE)
+        if settings.DEBUG: logger.info('Clean Caches')
+        self._delete_cache(cache_key='my_total_visualizations_%d' % self.visualization.user.id)
+        self._delete_cache(cache_key='account_total_visualization_%d' % self.visualization.user.account.id)
 
     def _log_activity(self, action_id):
         if not self.visualizationi18n:
@@ -273,6 +277,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.DELETE)
+        self._delete_cache(cache_key='my_total_visualizations_%d' % self.visualization.user.id)
+        self._delete_cache(cache_key='account_total_visualization_%d' % self.visualization.user.account.id)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """

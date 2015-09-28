@@ -275,8 +275,17 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.DELETE)
 
+        if settings.DEBUG: logger.info('Clean Caches')
+        self._delete_cache(cache_key='my_total_datastreams_%d' % self.datastream.user.id)
+        self._delete_cache(cache_key='account_total_datastreams_%d' % self.datastream.user.account.id)
+
+
     def _remove_all(self):
         self.datastream.delete()
+        self._log_activity(ActionStreams.DELETE)
+        if settings.DEBUG: logger.info('Clean Caches')
+        self._delete_cache(cache_key='my_total_datastreams_%d' % self.datastream.user.id)
+        self._delete_cache(cache_key='account_total_datastreams_%d' % self.datastream.user.account.id)
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """

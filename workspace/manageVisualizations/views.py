@@ -84,7 +84,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    resources,total_resources = VisualizationDBDAO().query(
+    total_resources = request.stats['account_total_datastreams']
+    
+    resources,total_entries = VisualizationDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -98,7 +100,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
         resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
-    data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_entries=total_resources))
+    data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_resources=total_resources, total_entries=total_entries))
     return HttpResponse(data, mimetype="application/json")
 
 
