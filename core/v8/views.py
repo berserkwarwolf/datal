@@ -14,7 +14,6 @@ class EngineViewSetMixin(object):
         mutable_get = request.GET.copy()
         mutable_get.update(request.POST.copy())
         mutable_get['output'] = format or 'json'
-        if settings.DEBUG: logger.info('Engine_CALL %s %s' % (str(mutable_get), engine_method))
         
         resource = {}
         if is_detail:
@@ -22,6 +21,8 @@ class EngineViewSetMixin(object):
             mutable_get['revision_id'] = resource[self.dao_pk]
         items = dict(mutable_get.items())
 
+        if settings.DEBUG: logger.info('Engine_CALL %s %s' % (str(mutable_get), engine_method))
+        
         formset=formset_factory(form_class, formset=RequestFormSet)
         form = formset( items)
         if not form.is_valid():
