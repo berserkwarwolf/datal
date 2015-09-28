@@ -24,7 +24,7 @@ var ManageDatasetsView = Backbone.View.extend({
         this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
 
         // Init template
-        this.template = _.template($("#total-entries-template").html());
+        this.template = _.template($("#total-resources-template").html());
 
         // Init Filters
         this.initFilters(options.filters);
@@ -54,8 +54,8 @@ var ManageDatasetsView = Backbone.View.extend({
     },
 
     updateTotalEntries: function(models, response){
-        this.model.set('total_entries',response.total_entries);
-        this.$el.find(".total-entries").html(this.template(this.model.toJSON()));
+        this.model.set('total_resources',response.total_resources);
+        this.$el.find(".total-resources").html(this.template(this.model.toJSON()));
     },
 
     showLoading: function(){
