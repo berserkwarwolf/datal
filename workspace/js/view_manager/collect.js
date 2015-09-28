@@ -114,7 +114,6 @@ var Collect = Backbone.Model.extend({
 		var att = this.attributes;
 		console.log(att);
 		if (jqXHR.status != "") {
-			jQuery.TwitterMessage({type: 'error',message: gettext( "COLLECT-LOADURL-ERROR" ) });
 			CreationManager.attributes.dataSource = "";
 			att.step.newInit();
 		}
