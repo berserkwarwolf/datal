@@ -4,7 +4,7 @@ var MapSelectDataModalView = ModalView.extend({
 		'click button.btn-cancel':'onClickCancel'
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		var self = this;
 
         //init table
@@ -13,6 +13,9 @@ var MapSelectDataModalView = ModalView.extend({
         this.rangeLatModel = new DataTableSelectionModel({id: 1});
         this.rangeLonModel = new DataTableSelectionModel({id: 2});
         this.rangeInfoModel = new DataTableSelectionModel({id: 3});
+
+        this.dataStreamModel = options.dataStreamModel;
+        console.log('map', this.dataStreamModel)
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
@@ -30,15 +33,7 @@ var MapSelectDataModalView = ModalView.extend({
             // this.dataTableView.selectRange(val);
         });
 
-        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-            this.model.get('datastream_revision_id'),
-            '&limit=50&page=0'].join('');
-
-        // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
-        // request when it fails.
-        $.getJSON(dataUrl).then(function (payload) {
-            self.createDataTableView(payload);
-        });
+        this.listenTo(this.dataStreamModel, 'change', this.createDataTableView, this);
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
@@ -62,11 +57,11 @@ var MapSelectDataModalView = ModalView.extend({
         this.close(); //Close modal
     },
 
-    createDataTableView: function (payload) {
+    createDataTableView: function (model) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
-            invoke: payload
+            datastream: model.toJSON()
         });
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {

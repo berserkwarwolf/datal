@@ -115,15 +115,6 @@ class EditDataStreamForm(forms.Form):
 class ViewDataStreamForm(forms.Form):
     datastream_revision_id = forms.IntegerField(label=ugettext_lazy( 'APP-DATASTREAMREVISION-TEXT' ), required=True)
 
-
-class UpdateDataStreamNoteForm(forms.Form):
-    datastream_revision_id = forms.IntegerField(label=ugettext_lazy( 'APP-DATASTREAMREVISION-TEXT' ), required=True, widget = forms.HiddenInput)
-    notes = forms.CharField(label=ugettext_lazy( 'APP-NOTES-TEXT' ), required=False, widget=forms.Textarea(attrs={'id':'id_notes', 'class': 'required', 'style' : 'width:620px;'}))
-
-    def action(self):
-        return reverse('datastream_manager.update_note')
-
-
 class InitalizeCollectForm(forms.Form):
     dataset_revision_id = forms.IntegerField(label=ugettext_lazy('APP-DATASETREVISION-TEXT'), required=True)
 
@@ -136,4 +127,8 @@ class PreviewForm(forms.Form):
     select_statement = forms.CharField(required=False)
     rdf_template = forms.CharField(required=False)
     bucket_name = forms.CharField(required=False)
+    limit = forms.IntegerField(required=False)
+
+class RequestForm(forms.Form):
+    datastream_revision_id = forms.IntegerField(required=True)
     limit = forms.IntegerField(required=False)

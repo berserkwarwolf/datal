@@ -90,9 +90,8 @@ var Collect = Backbone.Model.extend({
 		this.attributes.implType = lImplType;
 	},
 	loadDataSource: function(){
-		var lUrl  = '/datasets/action_load'
-		var lData = "dataset_revision_id=" + $('#id_datastream-dataset_revision_id').val()
-				+ '&limit=100'
+		var lUrl  = '/rest/datasets/' + $('#id_datastream-dataset_revision_id').val() + '/tables.html'
+		var lData = '&limit=100'
 				+ this.attributes.webservice_args;
 
 	    $.ajax({ url: lUrl
@@ -115,7 +114,6 @@ var Collect = Backbone.Model.extend({
 		var att = this.attributes;
 		console.log(att);
 		if (jqXHR.status != "") {
-			jQuery.TwitterMessage({type: 'error',message: gettext( "COLLECT-LOADURL-ERROR" ) });
 			CreationManager.attributes.dataSource = "";
 			att.step.newInit();
 		}

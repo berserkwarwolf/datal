@@ -9,14 +9,16 @@ datastore_resources_dir:
     - group: {{ group }}
     - mode: 755
     - makedirs: True
+    - force: True
 
-datastore_resources_temp_dir:
-  file.directory:
-    - name: {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
-    - user: {{ user }}
-    - group: {{ group }}
-    - mode: 755
-    - makedirs: True
+#datastore_resources_temp_dir:
+#  file.directory:
+#    - name: {{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
+#    - user: {{ user }}
+#    - group: {{ group }}
+#    - mode: 755
+#    - makedirs: True
+#    - force: True
 
 datastore_resources_base_dir:
   file.directory:
@@ -25,6 +27,7 @@ datastore_resources_base_dir:
     - group: {{ group }}
     - mode: 755
     - makedirs: True
+    - force: True
 
 root_datastore_bucket:
   file.symlink:

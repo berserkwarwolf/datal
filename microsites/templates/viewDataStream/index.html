@@ -128,8 +128,8 @@ $(document).ready(function(){
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
-    exportCSVURL: "{% url "datastream_manager.csv" datastream.datastream_id 'la' %}",
-    exportXLSURL: "{% url "datastream_manager.xls" datastream.datastream_id 'la' %}",
+    exportCSVURL: "{% url "datastream-data" datastream.datastream_id 'csv' %}",
+    exportXLSURL: "{% url "datastream-data" datastream.datastream_id 'xls' %}",
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 

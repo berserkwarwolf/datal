@@ -85,11 +85,6 @@
 		<input id="id_data_source" type="hidden" value="{{datastream_revision.data_source}}"/>
 		<input id="id_select_statement" type="hidden" value="{{datastream_revision.select_statement}}"/>
 	           <input id="id_rdf_template" type="hidden" value="{{datastream_revision.rdf_template}}"/>
-		<div id="id_loading">
-			<table class="Loading bigLoader">
-				<tr><td></td></tr>
-			</table>
-		</div>
 		
 		<div id="id_step0_container" class="step1 create clearfix" style="display:none">
 		    {% include "view_manager/step1.html" %}
@@ -102,6 +97,11 @@
 		</div>
 		<div id="id_step3_container" class="step4 create clearfix" style="display:none">
 		    {% include "view_manager/step4.html" %}
+		</div>
+		<div id="id_loading">
+			<table class="Loading bigLoader">
+				<tr><td></td></tr>
+			</table>
 		</div>
 	</div>
 {% endblock %}

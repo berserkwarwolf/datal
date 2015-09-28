@@ -49,7 +49,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "APP-DATASETS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datasets }}</span>) </span></h1>
+		<h1>{% trans "APP-DATASETS-TEXT" %} <span class="total-resources"></span></h1>
 
 	</div>
 
@@ -73,9 +73,7 @@
 
 {% block content %}
 
-{% if stats.account_total_datasets > 0 %}
-
-	<div class="manager" id="id_manageDatasets">
+	<div class="manager" id="id_manageDatasets" style="display: {% if stats.account_total_datasets > 0 %} block {% else %} none; {% endif %}">
 
 		<!-- Filters -->
 		<section class="col-xs-2 filters-view"></section>
@@ -89,10 +87,8 @@
 
 	</div>
 
-{% else %}
-
 	<!-- No results -->
-	<div class="no-results-view col-xs-12">
+	<div class="no-results-view col-xs-12" style="display: {% if stats.account_total_datasets == 0 %} block {% else %} none; {% endif %}">
 		<div class="zeroResults">
 			<div class="zeroIcon zeroDatasets"></div>
 			<p>{% trans 'APP-ZERO-DATASETS-TEXT' %}</p>
@@ -104,8 +100,6 @@
 		</div>
 	</div>
 
-{% endif %}
-
 {% endblock %}
 
 {% block bottom_js %}
@@ -113,7 +107,7 @@
 
 	$(document).ready(function(){
 		var manageDatasetsModel =  new ManageDatasetsModel({
-			total_entries: {{ stats.account_total_datasets }}
+			total_resources: {{ stats.account_total_datasets }}
 		});
 		var manageDatasetsView =  new ManageDatasetsView({
 			model: manageDatasetsModel,

@@ -8,12 +8,11 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core import engine
+from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.utils import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
@@ -85,14 +84,19 @@ def action_view(request, revision_id):
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
-    filters = bb_request.get('filters')
-    filters_dict= ''
-    filter_name= ''
-    sort_by='-id'
-    exclude=None
+    filters_param = bb_request.get('filters')
+    filters_dict = dict()
+    filter_name = ''
+    sort_by = '-id'
+    exclude = None
 
-    if filters is not None and filters != '':
-        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
+    if filters_param is not None and filters_param != '':
+        filters = json.loads(filters_param)
+        filters_dict['impl_type'] = filters.get('type')
+        filters_dict['category__categoryi18n__name'] = filters.get('category')
+        filters_dict['dataset__user__nick'] = filters.get('author')
+        filters_dict['status'] = filters.get('status')
+
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':
@@ -119,7 +123,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    resources,total_resources = DatasetDBDAO().query(
+    total_resources = request.stats['account_total_datasets']
+    
+    resources,total_entries = DatasetDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -133,12 +139,10 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
-    mimetype = "application/json"
-
-    return HttpResponse(response, mimetype=mimetype)
+    return HttpResponse(response, mimetype="application/json")
 
 
 @login_required
@@ -397,41 +401,6 @@ def change_status(request, dataset_revision_id=None):
         response['result'].pop('sources')
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
-
-
-@login_required
-@require_GET
-def action_load(request):
-
-    form = LoadForm(request.GET)
-    if form.is_valid():
-        # check ownership
-        dataset_revision_id = form.cleaned_data['dataset_revision_id']
-        page = form.cleaned_data['page']
-        limit = form.cleaned_data['limit']
-        tableid = form.cleaned_data['tableid']
-        query = {'pId': dataset_revision_id}
-        getdict = request.GET.dict()
-        for k in ['dataset_revision_id', 'page', 'limit', 'tableid']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        if page:
-            query['pPage'] = page
-        if limit:
-            query['pLimit'] = limit
-        if tableid:
-            query['pTableid'] = tableid
-        response, mimetype = engine.load(query)
-
-        """ detect error
-        if response.find("It was not possible to dispatch the request"):
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.error("Error finding tables on dataset [%s]" % query)
-        """
-        return HttpResponse(response, mimetype=mimetype)
-    else:
-        raise Http404(form.get_error_description())
 
 
 @login_required

@@ -72,7 +72,7 @@
   <!-- Column Left -->
   <div class="col-xs-7">    
     
-    <h1>{% trans "APP-DATAVIEWS-TEXT" %}<span class="total-resources"> (<span class="total-entries">{{ stats.account_total_datastreams }}</span>) </span></h1>
+    <h1>{% trans "APP-DATAVIEWS-TEXT" %} <span class="total-resources"></span></h1>
   </div>
 
   <!-- Column Right -->
@@ -88,9 +88,7 @@
 
 {% block content %}
 
-{% if stats.account_total_datastreams > 0 %}
-
-  <div class="manager" id="id_manageDataviews">
+  <div class="manager" id="id_manageDataviews" style="display: {% if stats.account_total_datastreams > 0 %} block {% else %} none; {% endif %}">
 
     <div class="wrapper1">
       <div class="wrapper2 clearfix">
@@ -111,10 +109,8 @@
 
   </div>
 
-{% else %}
-
   <!-- No results -->
-  <div class="no-results-view col-xs-12">
+  <div class="no-results-view col-xs-12" style="display: {% if stats.account_total_datastreams == 0 %} block {% else %} none; {% endif %}">
     <div class="zeroResults">
       <div class="zeroIcon zeroDataviews"></div>
       <p>{% trans 'APP-ZERO-DATAVIEWS-TEXT' %}</p>
@@ -126,8 +122,6 @@
     </div>
   </div>
 
-{% endif %}
-
 {% endblock %}
 
 {% block bottom_js %}
@@ -135,7 +129,7 @@
   $(document).ready(function(){
 
     var manageDataViewsModel =  new ManageDataViewsModel({
-      total_entries: {{ stats.account_total_datastreams }}
+      total_resources: {{ stats.account_total_datastreams }}
     });
 
     var manageDataviewsView =  new ManageDataviewsView({

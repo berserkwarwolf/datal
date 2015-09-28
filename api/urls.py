@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include
-from api.views import DataStreamViewSet, DataSetViewSet, VisualizationViewSet
+from api.rest.datastreams import DataStreamViewSet 
+from api.rest.datasets import DataSetViewSet
+from api.rest.visualizations import VisualizationViewSet
 from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static

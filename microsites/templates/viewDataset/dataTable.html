@@ -47,7 +47,7 @@
                                 <p>{{ datastream_revision.datastreami18n__description }}</p>
                               <div class="api_example">
                                 <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
-                                <p>http://{{preferences.account_api_domain}}/dataviews/invoke/{{datastream_revision.datastream__guid}}?auth_key=YOUR_API_KEY</p>
+                                <p>http://{{preferences.account_api_domain}}/api/v1/datastreams/{{datastream_revision.datastream__guid}}/data.json?auth_key=YOUR_API_KEY</p>
                               </div>
                             </i>
                           </td>
@@ -69,7 +69,7 @@
                                 <p>{{ visualizations_revision.visualizationi18n__description }}</p>
                               <div class="api_example">
                                 <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
-                                <p>http://{{preferences.account_api_domain}}/visualizations/invoke/{{visualizations_revision.visualization__guid}}?auth_key=YOUR_API_KEY</p>
+                                <p>http://{{preferences.account_api_domain}}/api/v1/visualizations/{{visualizations_revision.visualization__guid}}?auth_key=YOUR_API_KEY</p>
                               </div>
                             </i>
                           </td>

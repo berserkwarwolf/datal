@@ -140,7 +140,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         var params = {
-            datastream_revision_id: self.get('datastream_revision_id'),
+            revision_id: self.get('datastream_revision_id'),
             data: this.serializeServerExcelRange(this.get('range_data')),
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),
@@ -157,7 +157,7 @@ charts.models.Chart = Backbone.Model.extend({
             params['invertedAxis'] = true;
         }
 
-        return $.getJSON('/visualizations/preview', params)
+        return $.getJSON('/rest/charts/sample.json', params)
         .then(function (response) {
             self.parseChartResponse(response.series, response.values, response.labels);
         })

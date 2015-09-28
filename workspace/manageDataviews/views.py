@@ -8,7 +8,6 @@ from django.views.decorators.http import require_GET, require_POST, require_http
 from django.core.serializers.json import DjangoJSONEncoder
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
-from core.utils import filters_to_model_fields
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
 from workspace.templates import *
@@ -18,8 +17,10 @@ from core.exceptions import DataStreamNotFoundException, DatasetNotFoundExceptio
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core import engine
+from core.decorators import datal_cache_page
+from core.v8.factories import AbstractCommandFactory
 from core.utils import DateTimeEncoder
+
 
 
 logger = logging.getLogger(__name__)
@@ -62,13 +63,19 @@ def index(request):
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
-    filters = bb_request.get('filters')
-    filters_dict = ''
-    filter_name= ''
-    sort_by='-id'
+    filters_param = bb_request.get('filters')
+    filters_dict = dict()
+    filter_name = ''
+    sort_by = '-id'
 
-    if filters is not None and filters != '':
-        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
+    if filters_param is not None and filters_param != '':
+        filters = json.loads(filters_param)
+
+        filters_dict['impl_type'] = filters.get('type')
+        filters_dict['category__categoryi18n__name'] = filters.get('category')
+        filters_dict['datastream__user__nick'] = filters.get('author')
+        filters_dict['status'] = filters.get('status')
+
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('itemxpage') is not None and bb_request.get('itemxpage') != '':
@@ -81,15 +88,13 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('sort_by') == "dataset_title":
             sort_by ="dataset__last_revision__dataseti18n__title"
         if bb_request.get('sort_by') == "author":
-            sort_by ="dataset__user__nick"
+            sort_by ="datastream__user__nick"
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
-    #limit = int(bb_request.get('rp'))
-    #sort_by = bb_request.get('sortname')
-    #order = bb_request.get('sortorder')
-    #filters_dict=filters_dict
-    ds_dao = DataStreamDBDAO()
-    resources,total_resources = ds_dao.query(
+
+    total_resources = request.stats['account_total_datastreams']
+
+    resources,total_entries = DataStreamDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -104,7 +109,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['dataset__last_revision__id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources}
     response = DatastreamList().render(data)
     
     return JSONHttpResponse(response)
@@ -282,7 +287,6 @@ def edit(request, datastream_revision_id=None):
 
 
 @login_required
-@require_privilege("workspace.can_review_datastream_revision")
 @require_POST
 @transaction.commit_on_success
 def change_status(request, datastream_revision_id=None):
@@ -360,30 +364,3 @@ def change_status(request, datastream_revision_id=None):
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
-@csrf_exempt
-@require_http_methods(["POST"])
-def action_preview(request):
-    form = PreviewForm(request.POST)
-    if form.is_valid():
-
-        query = { 'pEndPoint': form.cleaned_data['end_point'],
-                  'pImplType': form.cleaned_data['impl_type'],
-                  'pImplDetails': form.cleaned_data['impl_details'],
-                  'pBucketName': form.cleaned_data['bucket_name'],
-                  'pDataSource': form.cleaned_data['datasource'],
-                  'pSelectStatement': form.cleaned_data['select_statement'],
-                  'pRdfTemplate': form.cleaned_data['rdf_template'],
-                  'pUserId': request.auth_manager.id,
-                  'pLimit': form.cleaned_data['limit']
-                }
-
-        getdict = request.POST.dict()
-        for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        response, mimetype = engine.preview(query)
-        # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
-        return HttpResponse(response, mimetype)
-
-    else:
-        raise Http404(form.get_error_description())

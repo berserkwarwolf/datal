@@ -197,7 +197,7 @@ SEARCH_INDEX = {
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'
 HOT_DASHBOARDS  = 'HOT_DASHBOARDS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
-DOC_API_URL = 'http://wiki.junar.com/index.php/API'
+DOC_API_URL = 'https://github.com/datal-org/datal/tree/develop/docs/api'
 PAGINATION_RESULTS_PER_PAGE = 10
 
 # develop & staging sentry
@@ -347,22 +347,8 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'api.auth.DatalApiAuthentication',
-    ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'EXCEPTION_HANDLER': 'api.exceptions.datal_exception_handler',
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-        'api.permissions.DatalApiPermission',
-    ),
-    'DEFAULT_THROTTLE_CLASSES': (
-        'rest_framework.throttling.UserRateThrottle',
-    ),
-    'DEFAULT_THROTTLE_RATES': {
-        'user': '20/minute'
-    }
+    'EXCEPTION_HANDLER': 'core.rest.exceptions.datal_exception_handler',
 }
 
 CACHES = {

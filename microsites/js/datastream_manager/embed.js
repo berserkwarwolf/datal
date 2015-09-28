@@ -150,9 +150,8 @@ function startWaitMessage(pHTMLElement){
 
 function invokeDataService(pEndPoint){
 
-    var lUrl     = '/dataviews/invoke';
-    var lData    = "datastream_revision_id=" + fDataStreamRevisionId 
-    			+ '&limit=50'
+    var lUrl     = '/rest/datastreams/' + fDataStreamRevisionId + '/data.json';
+    var lData    = '&limit=50'
     			+ pEndPoint;
 
     $.ajax({ url: lUrl

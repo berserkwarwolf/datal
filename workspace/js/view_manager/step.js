@@ -11,7 +11,7 @@ var Step = Backbone.Model.extend({
         this.resizeContainer();
     },
     init : function(){
-
+        console.log("Size")
     },
     start : function(){
         this.attributes.$Container.show();
@@ -203,6 +203,7 @@ var Step0 = Step.extend({
             $('.header').removeClass('fixedBar');
             $('.sectionTitleContainer').removeClass('fixedBar');
             $('.collapsedBar').removeClass('fixedBar');
+            $('.main-section').find('.context-menu').hide();
         }
     },
     loadDatastreamData : function(){
@@ -1234,7 +1235,7 @@ var Step3 = Step.extend({
 		$('#id_tags').html(contents);
 	},
 	requestDataStreamPreview : function(){
-		var lUrl 	= '/dataviews/action_preview';
+		var lUrl 	= '/rest/datastreams/sample.json';
 	    var lData 	= 'end_point=' + $.URLEncode(CreationManager.attributes.endPoint)
 	    			+ '&impl_type=' + CreationManager.attributes.implType
 	    			+ '&impl_details=' + CreationManager.attributes.implDetails
@@ -1383,9 +1384,9 @@ var Step3 = Step.extend({
         if (lValue != "") {
             $lLabel.text(lValue);
         }else{
-            $lValue.val("Enter a Value");
+            $(pValue).val("Enter a Value");
         }
-        $lValue.hide();
+        $(pValue).hide();
         $lLabel.show();
 
         var lData = '';
