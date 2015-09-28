@@ -123,7 +123,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    total_resources = request.account.get_total_datasets()
+    # total_resources = request.account.get_total_datasets()
+    total_resources = request.stats['account_total_datasets']
     
     resources,total_entries = DatasetDBDAO().query(
         account_id=request.account.id,
