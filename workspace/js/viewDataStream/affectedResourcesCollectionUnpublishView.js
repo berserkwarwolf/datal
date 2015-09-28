@@ -38,7 +38,7 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
-                    dataset_id: model.get('datastream__id'),
+                    datastream_id: model.get('datastream_id'),
                     type: self.options.type
                 }),
                 success: function(model, response) {
@@ -54,7 +54,8 @@ var AffectedResourcesCollectionUnpublishView = Backbone.View.extend({
                         if (self.affectedResourcesHTML) {
                             self.render();
                         } else {
-                            self.unpublishRelatedResources();
+                            // We simulate click in order to pass event object to change_status function
+                            self.$el.find('#id_unpublishRelatedResources').click();
                         }
                     }
 

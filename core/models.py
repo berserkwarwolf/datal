@@ -282,7 +282,7 @@ class DataStream(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class RevisionModel(models.Model):
@@ -306,7 +306,7 @@ class DataStreamRevision(RevisionModel):
     STATUS_CHOICES = choices.STATUS_CHOICES
 
     datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
-    dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'), on_delete=models.PROTECT)
+    dataset = models.ForeignKey('Dataset', verbose_name=ugettext_lazy('MODEL_DATASET_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     category = models.ForeignKey('Category', verbose_name=ugettext_lazy('MODEL_CATEGORY_LABEL'))
     data_source = models.TextField(verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_DATA_SOURCE_LABEL'))
@@ -314,6 +314,7 @@ class DataStreamRevision(RevisionModel):
     status = models.IntegerField(choices=STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     rdf_template = models.TextField(blank=True,
                                     verbose_name=ugettext_lazy('MODEL_DATASTREAM_REVISION_RDF_TEMPLATE_LABEL'))
     objects = managers.DataStreamRevisionManager()
@@ -525,7 +526,7 @@ class Dataset(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class DatasetRevision(RevisionModel):
@@ -544,11 +545,11 @@ class DatasetRevision(RevisionModel):
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     size = models.IntegerField(default=0, verbose_name=ugettext_lazy('MODEL_SIZE_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
     spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
-    objects = managers.DatasetRevisionManager()
 
     class Meta:
         db_table = 'ao_dataset_revisions'
@@ -559,7 +560,6 @@ class DatasetRevision(RevisionModel):
         return  unicode(self.id)
 
     def get_endpoint_full_url(self):
-        logger.info('LALA')
         if settings.USE_DATASTORE == 'sftp':
             # We MUST rewrite all file storage logic very SOON
             return '{}/{}/{}'.format(
@@ -663,57 +663,6 @@ class DatasetRevision(RevisionModel):
 
         return dataset_revision
 
-    def get_dict(self, language='en'):
-
-        logger = logging.getLogger(__name__)
-
-        from core.daos.datasets import DatasetDBDAO
-        import time
-
-        dataset = DatasetDBDAO().get(language, dataset_revision_id=self.id)
-        account = Account.objects.get(id=self.user.account.id)
-
-        text = [dataset['title'], dataset['description'], dataset['user_nick'], str(dataset['dataset_id'])] #DS uses GUID, but here doesn't exists. We use ID
-        text.extend(dataset['tags']) # datastream has a table for tags but seems unused. I define get_tags funcion for dataset.
-        text = ' '.join(text)
-
-        account_id = dataset['account_id']
-        if account_id is None:
-            account_id = ''
-
-        # dataset has no parameters (I left it for compatibility or future upgrades)
-        parameters = ""
-
-        indexable_dict = {
-                'docid' : "DT::DATASET-ID-" + str(dataset['dataset_id']),
-                'fields' :
-                    {'type' : 'dt',
-                     'dataset_id': dataset['dataset_id'],
-                     'datasetrevision_id': dataset['dataset_revision_id'],
-                     'title': dataset['title'],
-                     'text': text,
-                     'description': dataset['description'],
-                     'owner_nick' : dataset['user_nick'],
-                     'tags' : ','.join(dataset['tags']),
-                     'account_id' : account_id,
-                     'parameters': parameters,
-                     'timestamp': int(time.mktime(dataset['created_at'].timetuple())),
-                     'end_point': dataset['end_point'],
-                    },
-                'categories': {'id': unicode(dataset['category_id']), 'name': dataset['category_name']}
-                }
-
-        # Update dict with facets
-
-        try:
-            indexable_dict = add_facets_to_doc(self, account, indexable_dict)
-        except Exception, e:
-            logger.error("indexable_dict ERROR: [%s]" % str(e))
-
-        indexable_dict['fields'].update(self.get_meta_data_dict(dataset['meta_text']))
-
-        return indexable_dict
-
 
 class DatasetI18n(models.Model):
     language = models.CharField(max_length=2, choices=choices.LANGUAGE_CHOICES, verbose_name=ugettext_lazy('MODEL_LANGUAGE_LABEL'))
@@ -759,7 +708,7 @@ class Visualization(GuidModel):
 
     @property
     def last_published_revision_date(self):
-        return self.last_published_revision.created_at if self.last_published_revision else None
+        return self.last_published_revision.modified_at if self.last_published_revision else None
 
 
 class VisualizationRevision(RevisionModel):
@@ -770,6 +719,7 @@ class VisualizationRevision(RevisionModel):
     impl_details = models.TextField(blank=True)
     meta_text = models.TextField( blank=True, verbose_name=ugettext_lazy('MODEL_META_TEXT_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    modified_at = models.DateTimeField(editable=False, auto_now=True)
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
     objects = managers.VisualizationRevisionManager()
@@ -988,10 +938,10 @@ class Threshold(models.Model):
 
 
 class Preference(models.Model):
-    account    = models.ForeignKey('Account')
-    key        = models.CharField(max_length=50, choices=choices.ACCOUNT_PREFERENCES_AVAILABLE_KEYS)
-    value      = models.TextField(blank=True)
-    objects    = managers.PreferenceManager()
+    account = models.ForeignKey('Account')
+    key = models.CharField(max_length=50, choices=choices.ACCOUNT_PREFERENCES_AVAILABLE_KEYS)
+    value = models.TextField(blank=True)
+    objects = managers.PreferenceManager()
 
     class Meta:
         db_table = 'ao_account_preferences'
@@ -1035,9 +985,9 @@ class Application(models.Model):
 
 
 class Setting(models.Model):
-    key           = models.CharField(primary_key=True, max_length=40)
-    value         = models.TextField()
-    description   = models.CharField(max_length=100, blank=True)
+    key = models.CharField(primary_key=True, max_length=40)
+    value = models.TextField()
+    description = models.CharField(max_length=100, blank=True)
 
     class Meta:
         db_table = 'ao_settings'
@@ -1088,9 +1038,9 @@ class SourceDatastream(models.Model):
 
 
 class VisualizationHits(models.Model):
-    visualization   = models.ForeignKey('Visualization')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    channel_type    = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
+    visualization = models.ForeignKey('Visualization')
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    channel_type = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
 
     class Meta:
         db_table = 'ao_visualization_hits'
@@ -1100,9 +1050,9 @@ class VisualizationHits(models.Model):
 
 
 class DataStreamHits(models.Model):
-    datastream      = models.ForeignKey('Datastream')
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
-    channel_type    = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
+    datastream = models.ForeignKey('Datastream')
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
+    channel_type = models.SmallIntegerField(choices=choices.CHANNEL_TYPES)
 
     class Meta:
         db_table = 'ao_datastream_hits'
@@ -1112,9 +1062,9 @@ class DataStreamHits(models.Model):
 
 
 class DataStreamRank(models.Model):
-    datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
-    position        = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
+    datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
+    position = models.SmallIntegerField(verbose_name=ugettext_lazy( 'MODEL-POSITION-TEXT' ))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
         db_table = 'ao_datastream_ranks'
@@ -1124,10 +1074,10 @@ class DataStreamRank(models.Model):
 
 
 class DataStreamComment(models.Model):
-    datastream      = models.ForeignKey('DataStream', verbose_name=ugettext_lazy( 'MODEL-DATASTREAM-TEXT' ))
-    user            = models.ForeignKey('User', verbose_name=ugettext_lazy( 'MODEL-USER-TEXT' ))
-    comment         = models.CharField(max_length=500, verbose_name=ugettext_lazy( 'MODEL-COMMENT-TEXT' ))
-    created_at      = models.DateTimeField(editable=False, auto_now_add=True)
+    datastream = models.ForeignKey('DataStream', verbose_name=ugettext_lazy('MODEL-DATASTREAM-TEXT'))
+    user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL-USER-TEXT'))
+    comment = models.CharField(max_length=500, verbose_name=ugettext_lazy('MODEL-COMMENT-TEXT'))
+    created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
     class Meta:
         db_table = 'ao_datastream_comments'
@@ -1138,8 +1088,11 @@ class DataStreamComment(models.Model):
 
 class Log(models.Model):
     user = models.ForeignKey('User',  on_delete=models.DO_NOTHING)
-    datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'), on_delete=models.DO_NOTHING)
-    visualization = models.ForeignKey('Visualization', null=True, verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'), on_delete=models.DO_NOTHING)
+    datastream = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'),
+                                   on_delete=models.DO_NOTHING)
+    visualization = models.ForeignKey('Visualization', null=True,
+                                      verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'),
+                                      on_delete=models.DO_NOTHING)
     content = models.TextField()
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
 
@@ -1163,4 +1116,13 @@ def unindex_datastream_revision(sender, instance, **kwargs):
     if instance.status == choices.StatusChoices.PUBLISHED:
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
+        search_dao.remove()
+
+@receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
+def unindex_visualization_revision(sender, instance, **kwargs):
+    # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
+    logger.info("VZ ID %s STATUS %s" % (instance.id, instance.status))
+    if instance.status == choices.StatusChoices.PUBLISHED:
+        from core.daos.visualizations import VisualizationSearchDAOFactory
+        search_dao = VisualizationSearchDAOFactory().create(instance)
         search_dao.remove()

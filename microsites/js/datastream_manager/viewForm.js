@@ -47,14 +47,11 @@ $(document).ready(function(){
     //init stat chart
     window.statChart = new DataStreamStats({'$Container' : $('#id_statChart'), 'id' : $("#id_dataStreamContainer").data('dataservice_id')});
 
-    if(canShare){
         var sharePrivateOverlay = new SharePrivateOverlay({
             '$Button': $('button[id=id_sharePrivateDataStreamButton_]')
             , '$Container': $('#id_sharePrivateContainer')
             , '$Form': $('#id_private_share_form')
         });
-    }
-
 });
 
 function initDataServicePanel(){
@@ -144,9 +141,8 @@ function startWaitMessage(pHTMLElement){
 
 function invokeDataService(pEndPoint){
 
-    var lUrl     = '/dataviews/invoke';
-    var lData    = "datastream_revision_id=" + $fDataServiceContainer.data('datastreamrevision_id') 
-    			+ '&limit=50'
+    var lUrl     = '/rest/datastreams/' + $fDataServiceContainer.data('datastreamrevision_id')  + '/data.json';
+    var lData    = '&limit=50'
     			+ pEndPoint;
 
     var ajax = $.ajax({ url: lUrl
@@ -363,7 +359,7 @@ function onSuccessDataServiceExecute(pResponse){
 		$('.dataStreamContainer').addClass('flexibleGridTable');
 		
 		$('.tableDS').flexigrid({
-			url: '/datastreams/updategrid',
+			url: '/rest/datastreams/' + $('#id_datastreamGrid').serializeArray()['datastream_id'] + '/data.json',
 			dataType : 'json',
 			colModel : lColumns,
 			autoload : false,

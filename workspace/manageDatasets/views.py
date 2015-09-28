@@ -8,18 +8,18 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core import engine
+from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.utils import filters_to_model_fields
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
-from core.helpers import DateTimeEncoder
+from core.daos.visualizations import VisualizationDBDAO
+from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
 
@@ -84,14 +84,19 @@ def action_view(request, revision_id):
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources """
     bb_request = request.GET
-    filters = bb_request.get('filters')
-    filters_dict= ''
-    filter_name= ''
-    sort_by='-id'
-    exclude=None
+    filters_param = bb_request.get('filters')
+    filters_dict = dict()
+    filter_name = ''
+    sort_by = '-id'
+    exclude = None
 
-    if filters is not None and filters != '':
-        filters_dict = filters_to_model_fields(json.loads(bb_request.get('filters')))
+    if filters_param is not None and filters_param != '':
+        filters = json.loads(filters_param)
+        filters_dict['impl_type'] = filters.get('type')
+        filters_dict['category__categoryi18n__name'] = filters.get('category')
+        filters_dict['dataset__user__nick'] = filters.get('author')
+        filters_dict['status'] = filters.get('status')
+
     if bb_request.get('page') is not None and bb_request.get('page') != '':
         page = int(bb_request.get('page'))
     if bb_request.get('q') is not None and bb_request.get('q') != '':
@@ -135,9 +140,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     data = {'total_resources': total_resources, 'resources': resources}
     response = DatasetList().render(data)
 
-    mimetype = "application/json"
-
-    return HttpResponse(response, mimetype=mimetype)
+    return HttpResponse(response, mimetype="application/json")
 
 
 @login_required
@@ -293,7 +296,7 @@ def edit(request, dataset_revision_id=None):
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
         else:
-            raise DatasetSaveException(form.errors)
+            raise DatasetSaveException(form)
 
 
 @login_required
@@ -303,12 +306,16 @@ def related_resources(request):
     dataset_id = request.GET.get('dataset_id', '')
 
     # For now, we'll fetch datastreams
-    associated_datastreams = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)['datastreams']
+    associated_resources = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)
 
     list_result = []
-    for associated_datastream in associated_datastreams:
-        associated_datastream['type'] = 'dataview'
-        list_result.append(associated_datastream) 
+    for associated_resource in associated_resources['datastreams']:
+        associated_resource['type'] = 'dataview'
+        list_result.append(associated_resource)
+
+    for associated_resource in associated_resources['visualizations']:
+        associated_resource['type'] = 'visualization'
+        list_result.append(associated_resource)
 
     dump = json.dumps(list_result, cls=DjangoJSONEncoder)
     return HttpResponse(dump, mimetype="application/json")
@@ -335,7 +342,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.accept()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.APPROVED,
                 messages={
                     'title': ugettext('APP-DATASET-APPROVED-TITLE'),
                     'description': ugettext('APP-DATASET-APPROVED-TEXT')
@@ -345,7 +351,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.reject()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-REJECTED-TITLE'),
                     'description': ugettext('APP-DATASET-REJECTED-TEXT')
@@ -355,7 +360,6 @@ def change_status(request, dataset_revision_id=None):
             lifecycle.publish()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PUBLISHED,
                 messages={
                     'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
                     'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
@@ -364,19 +368,21 @@ def change_status(request, dataset_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
+            if killemall:
+                description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
+            else:
+                description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.DRAFT,
                 messages={
                     'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-DATASET-UNPUBLISH-TEXT')
+                    'description': description
                 }
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
             response = dict(
                 status='ok',
-                dataset_status=StatusChoices.PENDING_REVIEW,
                 messages={
                     'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
                     'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
@@ -388,45 +394,11 @@ def change_status(request, dataset_revision_id=None):
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
         response['result'].pop('datastreams')
+        response['result'].pop('visualizations')
         response['result'].pop('tags')
         response['result'].pop('sources')
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
-
-
-@login_required
-@require_GET
-def action_load(request):
-
-    form = LoadForm(request.GET)
-    if form.is_valid():
-        # check ownership
-        dataset_revision_id = form.cleaned_data['dataset_revision_id']
-        page = form.cleaned_data['page']
-        limit = form.cleaned_data['limit']
-        tableid = form.cleaned_data['tableid']
-        query = {'pId': dataset_revision_id}
-        getdict = request.GET.dict()
-        for k in ['dataset_revision_id', 'page', 'limit', 'tableid']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        if page:
-            query['pPage'] = page
-        if limit:
-            query['pLimit'] = limit
-        if tableid:
-            query['pTableid'] = tableid
-        response, mimetype = engine.load(query)
-
-        """ detect error
-        if response.find("It was not possible to dispatch the request"):
-            import logging
-            logger = logging.getLogger(__name__)
-            logger.error("Error finding tables on dataset [%s]" % query)
-        """
-        return HttpResponse(response, mimetype=mimetype)
-    else:
-        raise Http404(form.get_error_description())
 
 
 @login_required

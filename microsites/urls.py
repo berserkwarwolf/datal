@@ -1,7 +1,19 @@
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
+from microsites.rest.datastreams import RestDataStreamViewSet
+from microsites.rest.maps import RestMapViewSet
+from microsites.rest.charts import RestChartViewSet
+from microsites.rest.routers import MicrositeEngineRouter
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
 import os
+
+router = MicrositeEngineRouter()
+router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
+router.register(r'maps', RestMapViewSet, base_name='maps')
+router.register(r'charts', RestChartViewSet, base_name='charts')
+
 
 def jsi18n(request, packages = None, domain = None):
     if not domain:
@@ -15,6 +27,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
@@ -30,15 +43,11 @@ urlpatterns = patterns('',
     # dejamos datastreams para no romper,
     # dataviews como deberia quedar definitivamente
     (r'^datastreams/', include('microsites.viewDataStream.urls')),
-    (r'^dataviews/', include('microsites.datastream_manager.urls')),
-
-    url(r'^datastreams/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.embedDataStream.views.action_embed',
-        name='datastream_manager.embed'),
-
+    (r'^dataviews/', include('microsites.viewDataStream.urls')),
     (r'^datasets/', include('microsites.viewDataset.urls')),
 
     (r'^search/', include('microsites.search.urls')),
-    (r'^search$', include('microsites.search.urls')),
+    #(r'^search$', include('microsites.search.urls')),
     url(r'^developers/$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
     url(r'^developers$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
     url(r'^manageDeveloper/action_insert$', 'core.manageDeveloper.views.action_insert', name='manageDeveloper.action_insert'),
@@ -46,7 +55,7 @@ urlpatterns = patterns('',
     url(r'^branded/js/(?P<id>\d+).js$', 'microsites.views.action_js', name='microsites.action_js'),
     url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
 
-    url(r'^portal/DataServicesManager/actionEmbed/$', 'core.exportDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
+#    url(r'^portal/DataServicesManager/actionEmbed/$', 'microsites.viewDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
     url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
 
     url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),
@@ -60,8 +69,7 @@ urlpatterns = patterns('',
     (r'^js_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'js')}),
 
     url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
-
-    url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
+    (r'^rest/', include(format_suffix_patterns(router.urls))), 
 )
 
 handler404 = 'core.views.action404'

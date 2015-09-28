@@ -50,7 +50,7 @@
 				<!-- Activity -->
 				<section class="box activity">
 		
-				{% if stats.max_resource != 0 %}
+				{% if stats.account_max_resource != 0 %}
 
 					<header>
 						<div class="row">
@@ -73,17 +73,20 @@
 										{% get_activity_type activity.action_id as the_activity %}
 										{{the_activity}}
 
-										{% if activity.resource_link %}
-										<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
-										{% else %}
-										{% endif%}
+{% if activity.resource_link %}
+    <a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
+        <span>{{activity.title}}</span>
+    </a>
 
-										<span class="noLink">{{activity.title}}</span>
-										{% if activity.resource_link %}
-										</a>
+{% else %}
 
-										{% else %}
-										{% endif%}
+    <span class="noLink">{{activity.title}}</span>
+
+{% endif%}
+
+{# las VZ todavia no tienen categorias #}
+{% if activity.category %} | {{activity.category}} {% endif %}
+
 										</p>
 									</div>
 
@@ -97,7 +100,7 @@
 
 				{% else %}
 
-				<div class="row center">
+                <div class="row center">
 					<div class="col-xs-4">
 						<div class="step1">
 							<div class="arrowRight"></div>

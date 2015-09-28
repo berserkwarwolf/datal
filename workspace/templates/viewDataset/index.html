@@ -72,9 +72,9 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var Dataset = new DatasetModel({
-    id: "{{ dataset.last_revision_id }}",
-    dataset_id: " {{ dataset.dataset_id }}",
-    status: "{{ dataset.status }}",
+    id: {{ dataset.last_revision_id }},
+    dataset_id: {{ dataset.dataset_id }},
+    status: {{ dataset.status }},
     status_str: "{{ dataset.status|status_str|capfirst }}",
     title: "{{ dataset.title|capfirst }}",
     createDataViewUrl: "{% url 'manageDataviews.create' %}?dataset_revision_id={{ dataset.dataset_revision_id }}",
@@ -83,7 +83,8 @@ $(document).ready(function(){
     editUrl: "{% url 'manageDatasets.edit' %}/{{dataset.dataset_revision_id}}/",
     lastPublishDate: "{{dataset.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     publicUrl: "{{ dataset.public_url }}",
-    createdAt: "{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}"
+    createdAt: "{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}",
+    modifiedAt: "{{ dataset.modified_at|date:'F d, Y, h:i A'|capfirst }}"
   });
   var DatasetView = new datasetView({model: Dataset});
 });

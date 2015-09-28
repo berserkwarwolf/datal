@@ -715,7 +715,7 @@ var DataTableCreation = DataTable.extend({
 			lOptions['messages'] = new Object();
 			lOptions['rules']['parameter-name_' + lColId + '_' + lTableId] = {'required': true, 'maxlength': 40, 'regex': /^[a-zA-ZñÑ\s\W]/};
 			lOptions['rules']['parameter-description_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 40, 'regex': /^[a-zA-ZñÑ\s\W]/};
-			lOptions['rules']['parameterValue_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 40, 'regex': /^[a-zA-ZñÑ\s\W]/};
+			lOptions['rules']['parameterValue_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 40};
 			
 			lOptions['messages']['parameter-name_' + lColId + '_' + lTableId] = {'regex': gettext( "VALIDATE-REGEX" )};
 			lOptions['messages']['parameter-description_' + lColId + '_' + lTableId] = {'regex': gettext( "VALIDATE-REGEX" )};

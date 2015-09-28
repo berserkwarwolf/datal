@@ -55,17 +55,14 @@
         </script>
     <script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
-    {% if can_share %}
     <script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_core/base_modules/private.js?id={{settings.VERSION_JS_CSS}}"></script>
-    {% endif %}
 
     <script type="text/javascript">
     	var fDashboardIdSelected = "{{dashboard.dashboard_id}}";
         google.load('visualization', '1', {
             packages: ['corechart', 'geomap']
         });
-        var canShare = {{can_share|lower}};
     </script>
 {% endblock %}
 

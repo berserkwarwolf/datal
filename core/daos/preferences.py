@@ -51,9 +51,10 @@ class Preferences():
 
         # fix booleans
         if type(self.data[key]) == str or type(self.data[key]) == unicode:
-            if self.data[key].lower() == 'true' or self.data[key].lower() == 'on':
+            pref = self.data[key].lower()
+            if pref in ['true', 'on']:
                 self.data[key] = True
-            elif self.data[key].lower() == 'false' or self.data[key].lower() == 'off':
+            elif pref in ['false', 'off']:
                 self.data[key] = False
             
         return self.data[key] 
@@ -65,9 +66,10 @@ class Preferences():
 
             # fix booleans
             if type(preference['value']) == str or type(preference['value']) == unicode:
-                if preference['value'].lower() == 'true' or preference['value'].lower() == 'on':
+                pref = preference['value'].lower()
+                if pref in ['true', 'on']:
                     preference['value'] = True
-                elif preference['value'].lower() == 'false' or preference['value'].lower() == 'off':
+                elif pref in ['false', 'off']:
                     preference['value'] = False
                 
             self.data[key.replace('_', '.')] = preference['value']

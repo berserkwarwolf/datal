@@ -1965,7 +1965,7 @@ msgid "WEBSERVICE-STEP1-HELPTEXT"
 msgstr "These parameters has come from the Dataset that you are using to create this Data View. They are used to filter the information that this Dataset can bring.<br/><br/>If the parameters are not editable, you will not be able to change it's original value"
 
 msgid "APP-DSWEBSERVICE-TEXT"
-msgstr "Choose a better name for the parameters (if needed and editable)"
+msgstr "Choose a better name for the parameters <small>(if needed and editable)</small>"
 
 msgid "WEBSERVICE-HELP-TIP"
 msgstr "- The webservice must accept SOAP 1.2 calls<br/>- The response root element must be named 'NewDataSet'. It may have one or more childs representing rows. Rows may have one or more childs representing cells."
@@ -2854,6 +2854,9 @@ msgstr "Dataset has been unpublished"
 msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
+msgid "APP-DATASET-UNPUBLISHALL-TEXT"
+msgstr "The Dataset and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
+
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
 
@@ -2883,6 +2886,9 @@ msgstr "Data View has been unpublished"
 
 msgid "APP-DATAVIEW-UNPUBLISH-TEXT"
 msgstr "The Data View has been set as draft, and is no longer available on your Open Data site."
+
+msgid "APP-DATAVIEW-UNPUBLISHALL-TEXT"
+msgstr "The Data View and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
 
 msgid "APP-DATAVIEW-SENDTOREVIEW-TITLE"
 msgstr "Data View has been sent to review"
@@ -2957,7 +2963,7 @@ msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Delete Dataview "
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources, that are associated to this Dataview, will also delete."
+msgstr "The following Visualizations, that are associated to this Data View, will also delete."
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Unpublish Dataview "
@@ -2969,7 +2975,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Unpublish Dataview "
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TEXT"
-msgstr "The following resources, that are associated to this Dataview, will also unpublish."
+msgstr "The following Visualizations, that are associated to this Data View, will also unpublish."
 
 msgid "DS-STEP1-TEXT"
 msgstr "Selection"
@@ -3222,3 +3228,9 @@ msgstr "The entire column"
 
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "Or the entire row"
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
+msgstr "Unpublish Dataset "
+
+msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
+msgstr "This action cannot be undone. Please, confirm how to proceed:"

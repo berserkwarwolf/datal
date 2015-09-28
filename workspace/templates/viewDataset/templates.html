@@ -34,18 +34,17 @@
 
 				<% }else{ %>
 
-					<%= createdAt %>
+					<%= modifiedAt %>
 
 				<% } %>
 
 			</span>
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
-				<% if(status != StatusChoices.UNPUBLISHED){ %>
-				<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
+				<% if(lastPublishRevisionId != ''){ %>
+					<span class="row-actions"><a class="link black" title="{% trans 'APP-ACTIONS-UNPUBLISH' %}" id="id_unpublish">{% trans 'APP-ACTIONS-UNPUBLISH' %}</a></span>
 				<% } %>
 			{% endif %}
-
 
 		</div>
 
@@ -58,7 +57,7 @@
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
 
-				<% if( status == StatusChoices.PENDING_REVIEW || status == StatusChoices.UNDER_REVIEW ){ %>
+				<% if( status == StatusChoices.PENDING_REVIEW ){ %>
 
 					<!-- Accept -->
 					<a id="id_approve" class="button green FR" title="{% trans 'APP-APPROVE-TEXT' %}" data-action="approve">{% trans 'APP-APPROVE-TEXT' %}</a>
@@ -106,7 +105,7 @@
 
 		<% } %> 
 
-		<% if(status != StatusChoices.PENDING_REVIEW || status != StatusChoices.UNDER_REVIEW){ %>
+		<% if(status != StatusChoices.PENDING_REVIEW){ %>
 
 			<!-- More Actions -->    
 			<div class="more-actions button-pulldown FR">

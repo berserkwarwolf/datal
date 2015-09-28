@@ -13,6 +13,7 @@ class VisualizationImplBuilder:
         field['format']['chartTemplate'] = self.fields['chartTemplate']
         field['format']['showLegend'] = 'checked' if self.fields['showLegend'] == 'true' else ''
         field['format']['invertedAxis'] = 'checked' if self.fields['invertedAxis'] == 'true' else ''
+        field['format']['invertData'] = 'checked' if self.fields['invertData'] == 'true' else ''
         field['format']['correlativeData'] = self.fields['correlativeData'] if self.fields['correlativeData'] else 'false'
         field['format']['nullValueAction'] = self.fields['nullValueAction'] if self.fields['nullValueAction'] else 'exclude'
         field['format']['nullValuePreset'] = self.fields['nullValuePreset']

@@ -8,6 +8,8 @@ from django.core.urlresolvers import reverse
 from core.utils import slugify
 from core import helpers, choices
 
+logger = logging.getLogger(__name__)
+
 
 class ThresholdManager(models.Manager):
 
@@ -23,82 +25,17 @@ class AccountLevelManager(models.Manager):
     def get_by_code(self, code):
         return super(AccountLevelManager, self).get(code = code)
 
-#class SimplePaginator:
-#
-#    def __init__(self, matches = 0, page = 1, per_page = settings.PAGINATION_RESULTS_PER_PAGE, max_results = settings.SEARCH_MAX_RESULTS):
-#
-#        import math
-#        self.per_page = per_page
-#        self.matches = matches > max_results and max_results or matches
-#        self.num_pages = int(math.ceil( self.matches/float(self.per_page)))
-#
-#        if page < 0 or (page > 2 and page > self.num_pages):
-#            raise InvalidPage
-#        else:
-#            self.page = page
-#
-#        self.has_previous = self.page > 1
-#        self.has_next = self.page < self.num_pages
-#        self.previous_page_number = self.page > 1 and self.page - 1 or 1
-#        self.next_page_number = self.page < self.num_pages and self.page + 1 or self.num_pages
-#        self.page_range = range(1, self.num_pages + 1)
 
 class AccountManager(models.Manager):
     def get_by_domain(self, domain):
-        if domain.find("portal.dev.junar.com") > -1:
-            dom = domain.split(".")
+        if domain.find(".microsites.dev") > -1:
+            dom = domain.split(".")[0]
+            if settings.DEBUG: logger.info('Test domain (%s)' % dom)
             from core.models import Account
-            return Account.objects.get(pk=int(dom[0]))
+            return Account.objects.get(pk=int(dom))
             # return super(AccountManager, self).get(account__id = dom[0])
         else:
             return super(AccountManager, self).get(preference__key = 'account.domain', preference__value = domain)
-
-    def get_featured_dashboards(self, dashboard_ids, language, account_id, not_in = False):
-
-        if not dashboard_ids and not not_in:
-            return []
-
-        sql = """SELECT `ao_dashboard_revisions`.`dashboard_id`
-                        , `ao_dashboard_i18n`.`title`
-                 FROM `ao_dashboard_revisions`
-                 INNER JOIN `ao_dashboard_i18n` ON (`ao_dashboard_revisions`.`id` = `ao_dashboard_i18n`.`dashboard_revision_id`)
-                 INNER JOIN `ao_dashboards` ON (`ao_dashboard_revisions`.`dashboard_id` = `ao_dashboards`.`id`)
-                 INNER JOIN `ao_users` ON (`ao_dashboards`.`user_id` = `ao_users`.`id`)
-                 WHERE `ao_dashboard_revisions`.`id` IN (
-                    SELECT MAX(`ao_dashboard_revisions`.`id`)
-                    FROM `ao_dashboard_revisions`
-                    WHERE `ao_dashboard_revisions`.`status` = %s
-                    GROUP BY `ao_dashboard_revisions`.`dashboard_id`
-                    )
-                 AND `ao_dashboard_i18n`.`language` = %s
-                 AND `ao_users`.`account_id` = %s"""
-
-        params = [choices.StatusChoices.PUBLISHED, language, account_id]
-        ss = ', '.join(['%s' for i in dashboard_ids])
-
-        if not_in and dashboard_ids:
-            sql += ' AND `ao_dashboards`.`id` NOT IN ('+ ss +')'
-            params.extend(dashboard_ids)
-        elif dashboard_ids:
-            sql += ' AND `ao_dashboards`.`id` IN ('+ ss +')'
-            params.extend(dashboard_ids)
-
-        cursor = connection.cursor()
-        cursor.execute(sql, params)
-
-        featured_dashboards = []
-        for dashboard_id, dashboard_title in cursor.fetchall():
-            featured_dashboards.append({'id': dashboard_id, 'title': dashboard_title})
-
-        if dashboard_ids and not not_in:
-            order = dashboard_ids
-            for featured_dashboard in featured_dashboards:
-                id = featured_dashboard['id']
-                index = order.index(str(id))
-                order[index] = featured_dashboard
-            return [ featured_dashboard for featured_dashboard in order if isinstance(featured_dashboard, dict)]
-
-        return featured_dashboards
 
     def get_featured_accounts(self, account_id):
 
@@ -117,6 +54,7 @@ class AccountManager(models.Manager):
 
         return featured_accounts
 
+
 class PreferenceManager(models.Manager):
 
     def get_value_by_account_id_and_key(self, account_id, key):
@@ -124,6 +62,7 @@ class PreferenceManager(models.Manager):
 
     def get_account_id_by_known_key_and_value(self, known_key, known_value):
         return super(PreferenceManager, self).values('account_id').get(value = known_value, key = known_key)['account_id']
+
 
 class DataStreamManager(models.Manager):
     def get_top(self, account_id, limit = 5):
@@ -172,32 +111,6 @@ class DataStreamManager(models.Manager):
             last_datastreams.append(datastream_id)
 
         return last_datastreams
-
-
-class DashboardManager(models.Manager):
-    def get_last(self, account_id, limit = 5):
-        """ Return the last DBs Ids. """
-
-        sql = """   SELECT  MAX(`ao_dashboard_revisions`.`id`) AS `dashboard_revision_id`,
-                        `ao_dashboard_revisions`.`dashboard_id`
-                    FROM `ao_dashboard_revisions`
-                    INNER JOIN `ao_dashboards` ON (`ao_dashboards`.`id` = `ao_dashboard_revisions`.`dashboard_id`)
-                    INNER JOIN `ao_users` ON (`ao_users`.`id` = `ao_dashboards`.`user_id`)
-                    WHERE `ao_dashboard_revisions`.`status` = %s AND `ao_users`.`account_id` = %s
-                    GROUP BY `ao_dashboard_revisions`.`dashboard_id`
-                    ORDER BY `ao_dashboard_revisions`.`created_at` DESC
-                    LIMIT %s"""
-
-        params = [choices.StatusChoices.PUBLISHED, account_id, limit]
-
-        cursor = connection.cursor()
-        cursor.execute(sql, params)
-
-        last_dashboards = []
-        for dashboard_revision_id, dashboard_id in cursor.fetchall():
-            last_dashboards.append(dashboard_id)
-
-        return last_dashboards
 
 
 class CategoryManager(models.Manager):
@@ -313,12 +226,12 @@ class VisualizationManager(models.Manager):
 class DataStreamParameterManager(models.Manager):
 
     def queryByDataStreamRevisionId(self, p_revision_id, p_language=settings.LANGUAGE_CODE[0:2]):
-        parameter_id            = 0
-        parameter_position     = 1
-        parameter_name         = 2
-        parameter_description  = 3
+        parameter_id = 0
+        parameter_position = 1
+        parameter_name = 2
+        parameter_description = 3
 
-        l_parameter_cursor  = connection.cursor()
+        l_parameter_cursor = connection.cursor()
 
         l_parameter_cursor.execute("""
                                     SELECT id
@@ -330,8 +243,8 @@ class DataStreamParameterManager(models.Manager):
                                     ORDER BY position
                                     """, [p_revision_id])
 
-        l_parameters_rows    = l_parameter_cursor.fetchall().__iter__()
-        l_parameter_row      = helpers.next(l_parameters_rows, None)
+        l_parameters_rows = l_parameter_cursor.fetchall().__iter__()
+        l_parameter_row = helpers.next(l_parameters_rows, None)
 
         l_parameters = []
         while l_parameter_row != None:
@@ -375,45 +288,6 @@ class DataSetManager(models.Manager):
         return l_dataset_end_point, l_dataset_end_point.startswith('file://')
 
 
-class DatasetRevisionManager(models.Manager):
-
-    def get_last_published_id(self, dataset_id):
-        return super(DatasetRevisionManager, self).filter(
-            dataset_id=dataset_id,
-            status=choices.StatusChoices.PUBLISHED
-        ).aggregate(models.Max('id'))['id__max']
-
-    def get_last_published(self, resource_id):
-        revision_id = self.get_last_published_id(resource_id)
-        return super(DatasetRevisionManager, self).get(pk=revision_id)
-
-    def get_last_revision_id(self, dataset_id):
-        return super(DatasetRevisionManager, self).filter(
-            dataset_id=dataset_id
-        ).aggregate(models.Max('id'))['id__max']
-
-    def get_last_revision(self, resource_id):
-        revision_id = self.get_last_revision_id(resource_id)
-        return super(DatasetRevisionManager, self).get(pk=revision_id)
-
-
-class DashboardRevisionManager(models.Manager):
-
-    def get_last_published_id(self, dashboard_id):
-        return super(DashboardRevisionManager, self).filter(dashboard_id = dashboard_id, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
-
-    def get_last_published(self, resource_id):
-        revision_id = self.get_last_published_id(resource_id)
-        return super(DashboardRevisionManager, self).get(pk=revision_id)
-
-    def get_last_revision_id(self, resource_id):
-        return super(DashboardRevisionManager, self).filter(dashboard_id = resource_id).aggregate(models.Max('id'))['id__max']
-
-    def get_last_revision(self, resource_id):
-        revision_id = self.get_last_revision_id(resource_id)
-        return super(DashboardRevisionManager, self).get(pk=revision_id)
-
-
 class DataStreamRevisionManager(models.Manager):
     def get_guids_with_cache(self):
         sql = """SELECT
@@ -452,42 +326,13 @@ class DataStreamRevisionManager(models.Manager):
 
         return last_guids
 
-    def get_last_published_id(self, datastream_id):
-        return super(DataStreamRevisionManager, self).filter(datastream_id = datastream_id, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
-
-    def get_last_published_by_guid(self, guid):
-        return super(DataStreamRevisionManager, self).filter(datastream__guid = guid, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
-
-    def get_last_published(self, resource_id):
-        revision_id = self.get_last_published_id(resource_id)
-        return super(DataStreamRevisionManager, self).get(pk=revision_id)
-
-    def get_last_revision_id(self, resource_id):
-        return super(DataStreamRevisionManager, self).filter(datastream_id = resource_id).aggregate(models.Max('id'))['id__max']
-
-    def get_last_revision(self, resource_id):
-        revision_id = self.get_last_revision_id(resource_id)
-        return super(DataStreamRevisionManager, self).get(pk=revision_id)
-
 
 class VisualizationRevisionManager(models.Manager):
-
-    def get_last_published_id(self, visualization_id):
-        return super(VisualizationRevisionManager, self).filter(visualization_id = visualization_id, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
-
     def get_last_published_by_guid(self, guid):
-        return super(VisualizationRevisionManager, self).filter(visualization__guid = guid, status = choices.StatusChoices.PUBLISHED).aggregate(models.Max('id'))['id__max']
-
-    def get_last_published(self, resource_id):
-        revision_id = self.get_last_published_id(resource_id)
-        return super(VisualizationRevisionManager, self).get(pk=revision_id)
-
-    def get_last_revision_id(self, resource_id):
-        return super(VisualizationRevisionManager, self).filter(visualization_id = resource_id).aggregate(models.Max('id'))['id__max']
-
-    def get_last_revision(self, resource_id):
-        revision_id = self.get_last_revision_id(resource_id)
-        return super(VisualizationRevisionManager, self).get(pk=revision_id)
+        return super(VisualizationRevisionManager, self).filter(
+            visualization__guid=guid,
+            status=choices.StatusChoices.PUBLISHED
+        ).aggregate(models.Max('id'))['id__max']
 
 
 class ObjectGrantManager(models.Manager):

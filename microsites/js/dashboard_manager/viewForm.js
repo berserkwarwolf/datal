@@ -120,13 +120,11 @@ $(document).ready(function(){
             load: false
         });
 
-    if(canShare){
         var sharePrivateOverlay = new SharePrivateOverlay({
             '$Button': $('button[id=id_sharePrivateDashboardButton_]')
             , '$Container': $('#id_sharePrivateContainer')
             , '$Form': $('#id_private_share_form')
         });
-    }
 });
 
 function showGoogleSpreadsheet(pEvent){
@@ -618,11 +616,10 @@ function invokeDashboardDataService(pId, pEndPoint, pIndex){
 
     var $Container = $("#id_dashboard_dataservice_container_" + pIndex);
     var lDashboardDataserviceId = $Container.data("dashboard_dataservice_id");
-    var lUrl = '/dataviews/invoke';
+    var lUrl = '/rest/datastreams/' + pId + '/data.json';
     var lTo = pIndex;
     
-    var lData = "datastream_revision_id=" + pId 
-    			+ '&pIndex=' + pIndex 
+    var lData = '&pIndex=' + pIndex 
     			+ '&limit=50'
     			+ pEndPoint;
 

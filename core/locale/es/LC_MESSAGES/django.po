@@ -545,7 +545,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "Algunas puntos importantes en el request anterior"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/datastreams/invoke/"
+msgstr "/api/v1/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
@@ -957,3 +957,12 @@ msgstr "Semanal"
 
 msgid "APP-MONTHLY-TEXT"
 msgstr "Mensual"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND"
+msgstr "La url que éstas solicitando no es válida o ya no está disponible"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND"
+msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
+
+msgid "APP-THEOPENDATAPLATFORM-TEXT"
+msgstr "Plataforma de Datos Abiertos"

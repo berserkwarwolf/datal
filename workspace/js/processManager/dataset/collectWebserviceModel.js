@@ -37,6 +37,17 @@ var CollectWebserviceModel = StepModel.extend({
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}
 		],
+		path_to_data: function(value, attr, computedState){
+
+			var impl_type = parseInt(computedState.impl_type);
+
+			if(impl_type == 14){
+				if($.trim(value).length == 0){
+					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+				}
+			}
+
+		},
 		mbox: [
 			{
 				required: false
@@ -65,6 +76,14 @@ var CollectWebserviceModel = StepModel.extend({
 			if(value === 'other' && $.trim(computedState.frequency_other) === '' ) {
 				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
 			}
+		},
+		signature: {
+			maxLength: 256,
+			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 256 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+		},
+		token: {
+			maxLength: 256,
+			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 256 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
 		}
 	},
 

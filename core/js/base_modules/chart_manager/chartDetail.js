@@ -87,7 +87,7 @@ var ChartDetail = Backbone.Model.extend({
     renderMarkers: function(){
 
         var att     = this.attributes;
-        var data     = "visualization_revision_id=" + att.visualizationrevision_id;
+        var data     = "";
         var bounds = att.chartObject.attributes.map_bounds;
         if(!_.isNull(bounds)){
             data += "&bounds=" + encodeURIComponent(bounds[0] + ";" + bounds[1] + ";" + bounds[2] + ";" + bounds[3])
@@ -112,7 +112,7 @@ var ChartDetail = Backbone.Model.extend({
 
         var _self = this;
         $.ajax({
-                    url: '/visualizations/invoke',
+                url: '/rest/charts/' + att.visualizationrevision_id + '/data.json',
                 type: 'GET',
                 data: data,
                 cache: false,

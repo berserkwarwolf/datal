@@ -13,7 +13,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
-		this.listenTo(this.model, "change:status", this.render);
+		this.listenTo(this.model, "change", this.render);
 		this.render();
 	},
 
@@ -126,10 +126,16 @@ var datasetView = Backbone.Epoxy.View.extend({
 			success: function(response){
 
 				if(response.status == 'ok'){
-					
-					// Set Status
-					self.model.set('status_str',STATUS_CHOICES( response.dataset_status ));
-					self.model.set('status',response.dataset_status);
+
+					// Update some model attributes
+					self.model.set({
+						'status_str': STATUS_CHOICES( response.result.status ),
+						'status': response.result.status,
+						'lastPublishRevisionId': response.result.last_published_revision_id,
+						'lastPublishDate': response.result.last_published_date,
+						'publicUrl': response.result.public_url,
+						'modifiedAt': response.result.modified_at,
+					});
 
 					// Update Heights
 					setTimeout(function(){

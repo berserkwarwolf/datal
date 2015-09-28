@@ -106,22 +106,23 @@
 <script type="text/javascript">
 $(document).ready(function(){
   var viewDataStreamModel = new ViewDataStreamModel({
-    id: "{{datastream.datastream_revision_id}}",
-    datastream_id: " {{ datastream.datastream_id }}",
+    id: {{datastream.datastream_revision_id}},
+    datastream_id: {{ datastream.datastream_id }},
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
     {% endfor %}
     filter: "",
-    status: "{{ datastream.status }}",
+    status: {{ datastream.status }},
     status_str: "{{ datastream.status|status_str|capfirst }}",
     title: "{{datastream.title|capfirst}}",
     changeStatusUrl: "{% url 'manageDataviews.change_status' datastream.datastream_revision_id %}",
     lastPublishRevisionId: "{{ datastream.last_published_revision_id }}",
     createVizUrl: "{% url 'manageVisualizations.create' %}?datastream_revision_id={{datastream.datastream_revision_id}}",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
-    lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+    lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst }}",
     publicUrl: "{{ datastream.public_url }}",
-    createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst }}"
+    createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst  }}",
+    modifiedAt: "{{ datastream.modified_at|date:'F d, Y, h:i A'|capfirst  }}"
   });
   
   var datastreamEditItemModel = new DatastreamEditItemModel({

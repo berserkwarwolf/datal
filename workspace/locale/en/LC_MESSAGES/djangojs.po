@@ -852,3 +852,9 @@ msgstr "Chart"
 
 msgid "APP-MAP-TEXT"
 msgstr "Map"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"
+msgstr "Select the data you want to represent"
+
+msgid "APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES"
+msgstr "Headlines and columns length must be the equal"

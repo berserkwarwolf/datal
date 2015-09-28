@@ -12,12 +12,19 @@ class ElasticsearchFinder(Finder):
     def search(self, *args, **kwargs):
 
         self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
-        self.query = re.escape(kwargs.get('query', ''))
+        self.query = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
+
+        # agrego el "" para evitar que lo intente escapar,
+        # es más barato reasignarle un "" que tratar de escaparlo
+        if self.query in ["%", "*",".",";",""]:
+            self.query=""
+        else:
+            self.query = re.escape(self.query)
         
         self.order =  kwargs.get('order')
 

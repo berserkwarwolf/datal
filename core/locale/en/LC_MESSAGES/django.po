@@ -553,7 +553,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "A few things to note in the request above"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/datastreams/invoke/"
+msgstr "/api/v1/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
@@ -959,3 +959,12 @@ msgstr "Weekly"
 
 msgid "APP-MONTHLY-TEXT"
 msgstr "Monthly"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND"
+msgstr "The URL requested is invalid or no longer available"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND"
+msgstr "It might have been removed, or its URL has been changed because of a new revision."
+
+msgid "APP-THEOPENDATAPLATFORM-TEXT"
+msgstr "The Open Data Platform"

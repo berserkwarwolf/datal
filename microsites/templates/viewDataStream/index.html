@@ -60,10 +60,8 @@
 {% endif %}
 <script type="text/javascript" src="/js_microsites/viewDataStream/changeDataStreamParametersModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewDataStream/changeDataStreamParametersView.js?id={{settings.VERSION_JS_CSS}}"></script>
-{% if can_export %}
 <script type="text/javascript" src="/js_microsites/viewDataStream/googleSpreadsheetDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewDataStream/googleSpreadsheetDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
-{% endif %}
 <script type="text/javascript" src="/js_microsites/viewDataStream/dataStreamHitsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewDataStream/dataStreamHitsView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% if preferences.account_pivottable %}
@@ -130,8 +128,8 @@ $(document).ready(function(){
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
-    exportCSVURL: "{% url "datastream_manager.csv" datastream.datastream_id 'la' %}",
-    exportXLSURL: "{% url "datastream_manager.xls" datastream.datastream_id 'la' %}",
+    exportCSVURL: "{% url "datastream-data" datastream.datastream_id 'csv' %}",
+    exportXLSURL: "{% url "datastream-data" datastream.datastream_id 'xls' %}",
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 

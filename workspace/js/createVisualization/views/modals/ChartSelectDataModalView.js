@@ -4,15 +4,23 @@ var ChartSelectDataModalView = ModalView.extend({
 		'click button.btn-cancel':'onClickCancel'
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		var self = this;
 
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
+        this.rangeDataModel = new DataTableSelectionModel({id: 1});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3});
+
+        this.dataStreamModel = options.dataStreamModel;
+
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            collection: this.collection
+            rangeDataModel: this.rangeDataModel,
+            rangeLabelsModel: this.rangeLabelsModel,
+            rangeHeadersModel: this.rangeHeadersModel
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
@@ -24,18 +32,21 @@ var ChartSelectDataModalView = ModalView.extend({
             // this.dataTableView.selectRange(val);
         });
 
-        var dataUrl = ['/dataviews/invoke?datastream_revision_id=', 
-            this.model.get('datastream_revision_id'),
-            '&limit=50&page=0'].join('');
-
-        // TODO: this is fetching data from the invoke endpoint which will be deprecated. Change the
-        // request when it fails.
-        $.getJSON(dataUrl).then(function (payload) {
-            self.createDataTableView(payload);
-        });
+        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this._cached_range_data = this.model.get('range_data');
+            this._cached_range_labels = this.model.get('range_labels');
+            this._cached_range_headers = this.model.get('range_headers');
+            this.rangeDataModel.set('excelRange', this._cached_range_data);
+            this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+            this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
+            this.collection.add([
+                this.rangeDataModel,
+                this.rangeLabelsModel,
+                this.rangeHeadersModel
+                ]);
             this.setHeights();
         }, this);
 
@@ -45,62 +56,73 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        var selection = this.collection.getSelectionChartStyle();
-        this.model.set(selection);
+        this.model.set({
+            range_data: this.rangeDataModel.get('excelRange'),
+            range_headers: this.rangeHeadersModel.get('excelRange'),
+            range_labels: this.rangeLabelsModel.get('excelRange')
+        });
         this.close();
     },
 
     onClickCancel: function (e) {
-        this.collection.reset();
-        this.selectedCellRangeView.clear();
+        // this.collection.reset();
+        this.rangeDataModel.set('excelRange', this._cached_range_data);
+        this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
+        this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
+        // this.selectedCellRangeView.clear();
+        this.onClickDone();
         this.close();
     },
 
-    createDataTableView: function (payload) {
+    onLoadDataStream: function (model) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
-            invoke: payload
+            datastream: model.toJSON()
         });
         this.dataTableView.render();
-        this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.selectedCellRangeView.select(range);
+        this.listenTo(this.dataTableView, 'afterSelection', function (selection) {
+            this.addSelection(this._cacheFocusedInput);
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
             this.addSelection(this._cacheFocusedInput);
-            this.selectedCellRangeView.focusNext();
         }, this);
         this.dataTableView.table.render();
     },
 
     addSelection: function (name) {
-        var selection = this.dataTableView.getSelection(name);
+        var selection = this.dataTableView.getSelection(),
+            model;
 
-        if (_.isString(name)) {
-          // When name is defined, the selection mode only allows setting selection to certain models
-          // with fixed id (so that the color is stable)
-          names = {'range_data': 1, 'range_labels': 2, 'range_headers': 3};
-          model = new DataTableSelectionModel(_.extend(selection, {
-            id: names[name],
-            name: name
-          }));
-        } else {
-          // when no name is provided, the selection is a multiselection collection.
-          // model = new DataTableSelectionModel(_.extend(selection, {
-          //   id: newId,
-          // }));
+        if (name === 'range_data') {
+            this.collection.remove(1);
+            model = this.rangeDataModel;
+        } else if (name === 'range_labels') {
+            this.collection.remove(2);
+            model = this.rangeLabelsModel;
+        } else if (name === 'range_headers') {
+            this.collection.remove(3);
+            model = this.rangeHeadersModel;
         }
+        model.set(selection);
 
         if (model.isValid()) {
-            this.collection.remove(model.get('id'));
             this.collection.add(model);
         } else {
-            alert(model.validationError)
+            // alert(model.validationError)
         }
     },
 
     validate: function () {
         if (this.collection.length < 3) {
+            this.enableDoneBtn(true);
+        } else {
+            this.enableDoneBtn(false);
+        }
+    },
+
+    enableDoneBtn: function (enable) {
+        if (enable) {
             this.$('button.btn-done').attr('disabled', 'disabled');
         } else {
             this.$('button.btn-done').removeAttr('disabled');

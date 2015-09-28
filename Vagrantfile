@@ -37,4 +37,9 @@ Vagrant.configure(2) do |config|
     salt.colorize = true
     salt.bootstrap_options = '-P'
   end
+  if Vagrant.has_plugin?("vagrant-proxyconf")
+    config.proxy.http     = "http://proxy2:8082/"
+    config.proxy.https    = "http://proxy2:8082/"
+    config.proxy.no_proxy = "localhost,127.0.0.1,.example.com"
+  end
 end

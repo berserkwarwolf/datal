@@ -59,10 +59,8 @@
     <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization"></script>
     <script type="text/javascript" src="/js_core/plugins/multimarker.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-    {% if can_share %}
     <script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script type="text/javascript" src="/js_core/base_modules/private.js?id={{settings.VERSION_JS_CSS}}"></script>
-    {% endif %}
 
     <script type="text/javascript">
         google.load('visualization', '1', {
@@ -79,13 +77,11 @@
         $(document).ready(function(){
             chartManager = new ChartDetail({'dataStreamJson':dsJson, 'chartJson' : implDetails, 'visualizationrevision_id': visualization_id});
             chartManager.attributes.joinIntersectedClusters = "{{join_intersected_clusters}}";
-		        if({{can_share|lower}}){
 		            var sharePrivateOverlay = new SharePrivateOverlay({
 		                '$Button': $('button[id=id_sharePrivateChartButton_]')
 		                , '$Container': $('#id_sharePrivateContainer')
 		                , '$Form': $('#id_private_share_form')
 		            });
-		        }
 			chartManagerBackup = chartManager;
         });
 
@@ -98,7 +94,7 @@
 {% endblock %}
 
 {% block content %}
-    <div class="blockPageTitle branded{% if not preferences.account_enable_sharing %} sharingDisabled{% endif %}{% if can_share %} sharingDisabled{% endif %}">
+    <div class="blockPageTitle branded sharingEnabled">
         <div class="titleGradient">
             <div class="panel clearfix hreview-aggregate">
 
@@ -203,7 +199,5 @@
 
 {% block popupsOverlay %}
     {% include "chart_manager/chartOverlays.html" %}
-    {% if can_share%}
     {% privateVisualizationShareForm visualization_revision.visualization_id auth_manager %}
-    {% endif %}
 {% endblock %}

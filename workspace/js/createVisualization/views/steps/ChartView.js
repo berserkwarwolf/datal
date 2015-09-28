@@ -4,7 +4,7 @@ var ChartView = StepViewSPA.extend({
 	    "p.message": "text:message"
 	},
 
-	initialize: function(){
+	initialize: function(options){
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
@@ -27,7 +27,8 @@ var ChartView = StepViewSPA.extend({
 
         this.chartSelectDataModalView = new ChartSelectDataModalView({
           el: '#ChartSelectDataModal',
-          model: this.model
+          model: this.model,
+          dataStreamModel: options.dataStreamModel
         });
         this.chartSelectDataModalView.on('open', function () {
         	this.model.set('select_data',true);
@@ -36,24 +37,59 @@ var ChartView = StepViewSPA.extend({
         	}
         });
 
-		this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.vizContent = this.$el.find('.visualizationContainer');
+		this.chartContent = this.$el.find('.chartContent');
+		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
+		this.nextBtn = this.$el.find('a.nextButton');
+		this.message = this.$el.find('p.message');
+		this.optionsItemConfig = this.$el.find('div.optionsItemConfig');
+
+		//edit
+		if(this.model.get('isEdit')){
+			var that = this;
+			
+			//library
+			this.$el.find('select#chartLibrary').val(this.model.get('lib'));
+			
+			//checkbox
+			this.$el.find('input[type=checkbox]').each(function(){
+				var obj = $(this);
+				var name = obj.attr('name');
+				if(that.model.get(name)){
+					obj.prop("checked","checked")
+				}
+			});
+
+			//radio
+			var that = this;
+			this.$el.find('input[type=radio]').each(function(){
+				var obj = $(this);
+				var name = obj.attr('name');
+				if(that.model.get(name)==obj.val()){
+					obj.prop("checked","checked")
+				}
+			});
+
+			//nullValue
+			this.$el.find('input#nullValuePreset').val(this.model.get('nullValuePreset'));
+
+			$("#ajax_loading_overlay").show();
+
+			//this.renderChart();
+		} else {
+			this.optionsItemConfig.hide();
+		}
+
+		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
 
-		this.vizContent = this.$el.find('.visualizationContainer');
-
-		this.chartContent = this.$el.find('.chartContent');
-
-		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
-
-		this.nextBtn = this.$el.find('a.nextButton');
-		
-		this.message = this.$el.find('p.message');
-
 		this.nextBtn.addClass('disabled');
 
 		this.setupChart();
+
 	},
 
 	bgClasses: {
@@ -81,17 +117,18 @@ var ChartView = StepViewSPA.extend({
 
 	onCheckboxChanged: function(e){
 		var input = $(e.target);
-		this.model.set(input.attr('name'), input.prop('checked'));
+		this.model.set(input.attr('name'), input.prop('checked') );
 		this.fetchPreviewData();
 	},
 
-	onChangeData: function (model) {
+	onChangeData: function () {
 		if(this.selectDataBtn.hasClass('icon-add')){
 			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
 			this.vizContent.addClass('dataSelected');
 		}
-
-		console.log('the data for your chart has changed', model.toJSON());
+		$("#ajax_loading_overlay").hide();
+		console.log('the data for your chart has changed', this.model.data.toJSON());
+		this.optionsItemConfig.show();
 		// TODO: should call this.chartView.render();
 		this.renderChart();
 	},
@@ -145,12 +182,10 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	updatePreviewClass: function(type){
-
 		this.clearClassesChartBg();
 		if(!this.ChartViewClass){
 			this.chartContent.addClass(this.bgClasses[type]);
 		}
-
 	},
 
 	clearClassesChartBg: function(){
@@ -207,16 +242,21 @@ var ChartView = StepViewSPA.extend({
 			var validation = this.model.valid(); //valida datos por tipo de gráfico
 
 			if(validation===true){
-				this.clearClassesChartBg();
-				this.nextBtn.removeClass('disabled');
 				if(this.model.get('select_data')){ //si alguna vez abrió el modal de datos
+					this.clearClassesChartBg();
+					this.nextBtn.removeClass('disabled');
 					this.message.hide();
 					this.chartInstance.render();
+				} else {
+					this.nextBtn.addClass('disabled');
+					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
+					this.vizContent.removeClass('dataSelected');
 				}
 			}	else {
 				this.message.show();
 				this.destroyChartInstance();
 				this.nextBtn.addClass('disabled');
+				this.vizContent.removeClass('dataSelected');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 			}
 		}
@@ -243,7 +283,9 @@ var ChartView = StepViewSPA.extend({
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
 
-		this.onChartChanged();
+		if(this.model.data.get('rows').length){
+			this.onChartChanged();
+		}
 
 	},
 
@@ -253,7 +295,6 @@ var ChartView = StepViewSPA.extend({
 		if(this.chartInstance){
 			this.chartInstance.destroy();
 		}
-		console.log('chartView','finish');
 	},
 
 

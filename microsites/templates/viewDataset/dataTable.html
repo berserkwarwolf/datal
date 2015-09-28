@@ -1,72 +1,86 @@
 {% load i18n %}
 {% load extra_tags components %}
 
-<script type="text/html" id="id_dataTableTemplate">
-
-</script>
+<script type="text/html" id="id_dataTableTemplate"></script>
 
 <div class="dataTable box" id="id_dataStreamContainer">
 	
 	<!-- Header -->
 	<header class="border-box {% if preferences.account_enable_sharing %}sharingEnabled{% endif %}">
-		
-		{% if preferences.account_enable_sharing %}
-    <div class="socialBox clearfix FR">
-      <span class='st_facebook_large' displayText='Facebook'></span>
-      <span class='st_twitter_large' displayText='Tweet'></span>
-      <span class='st_googleplus_large' displayText='Google +'></span>
-      <span class='st_linkedin_large' displayText='LinkedIn'></span>
-    </div>
-		{% endif %}
+        <div class="socialBox clearfix FR">
+          <span class='st_facebook_large' displayText='Facebook'></span>
+          <span class='st_twitter_large' displayText='Tweet'></span>
+          <span class='st_googleplus_large' displayText='Google +'></span>
+          <span class='st_linkedin_large' displayText='LinkedIn'></span>
+        </div>
 
 		<!-- Title and Description -->
 		<hgroup>
-			<h1 class="clearfix">
-				<strong class="FL">{{dataset.title|capfirst}}</strong>
-			</h1>
-			<h2>{{dataset.description|capfirst}}</h2>
-      <h4>{% trans 'APP-RESOURCESCREATED-TEXT' %}</h4>
+            <h1 class="clearfix"><strong class="FL">{{dataset.title|capfirst}}</strong></h1>
+            <h2>{{dataset.description|capfirst}}</h2>
+            <h4>{% trans 'APP-RESOURCESCREATED-TEXT' %}</h4>
 		</hgroup>
-
 	</header>
 
 	<!-- Resources List -->
     <div class="resources-list">
-
         <div id="id_resourcesList">
-            
             <!-- Table -->
-              <table id='dataset_table_list' class='backgrid'>                
+            <table id='dataset_table_list' class='backgrid'>
                 <thead>
-                  <tr>
+                <tr>
                     <th>{% trans 'APP-RESOURCE-TEXT' %}</th>
                     <th>{% trans 'APP-LAST-UPDATE-TEXT' %}</th>
-                  </tr>
+                </tr>
                 </thead>
-                
                 <tbody>
-                  
-                  {% for resource in related_resources.datastreams %} 
-                    <tr>
-                      <td>
-                      	<i class="icon-resources dataview">
-                      		<h3><a href="/dataviews/{{ resource.datastream__id }}/{{ resource.datastream__guid }}" title="{{ resource.datastreami18n__title }}">{{ resource.datastreami18n__title }}</a></h3>
-                        	<p>{{ resource.datastreami18n__description }}</p>
-                          <div class="api_example">
-                            <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
-                            <p>http://{{preferences.account_api_domain}}/dataviews/invoke/{{resource.datastream__guid}}?auth_key=YOUR_API_KEY</p>
-                          </div>
-                      	</i>
-                      </td>
-                      <td>{{ dataset.created_at|date:'F d, Y, h:i A'|capfirst }}</td>
-                    </tr>
-                  {% endfor %}
+                <!-- Vistas -->
 
+                {% if dataset.datastreams %}
+                    {% for datastream_revision in dataset.datastreams %}
+                        {# Muestro solamente si es la ultima revision #}
+                        {% if datastream_revision.id == datastream_revision.datastream__last_revision %}
+                        <tr>
+                          <td>
+                            <i class="icon-resources dataview">
+                                <h3><a href="{% url 'viewDataStream.view' id=datastream_revision.datastream__id slug=datastream_revision.datastream__guid %}" title="{{ datastream_revision.datastreami18n__title }}">{{ datastream_revision.datastreami18n__title }}</a></h3>
+                                <p>{{ datastream_revision.datastreami18n__description }}</p>
+                              <div class="api_example">
+                                <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
+                                <p>http://{{preferences.account_api_domain}}/api/v1/datastreams/{{datastream_revision.datastream__guid}}/data.json?auth_key=YOUR_API_KEY</p>
+                              </div>
+                            </i>
+                          </td>
+                          <td>{{ datastream_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+
+
+                {% if dataset.visualizations %}
+                    {% for visualizations_revision in dataset.visualizations %}
+                        {# Muestro solamente si es la ultima revision #}
+                        {% if visualizations_revision.id == visualizations_revision.visualization__last_revision %}
+                        <tr>
+                          <td>
+                            <i class="icon-resources visualization">
+                                <h3><a href="{% url 'chart_manager.action_view' id=visualizations_revision.visualization__id slug=visualizations_revision.visualization__guid %}" title="{{ visualizations_revision.visualizationi18n__title }}">{{ visualizations_revision.visualizationi18n__title }}</a></h3>
+                                <p>{{ visualizations_revision.visualizationi18n__description }}</p>
+                              <div class="api_example">
+                                <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>
+                                <p>http://{{preferences.account_api_domain}}/api/v1/visualizations/{{visualizations_revision.visualization__guid}}?auth_key=YOUR_API_KEY</p>
+                              </div>
+                            </i>
+                          </td>
+                          <td>{{ visualizations_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}</td>
+                        </tr>
+
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
                 </tbody>
               </table>
-
         </div>
-
     </div>
-
 </div>

@@ -268,7 +268,7 @@
 	.ao-filter-tooltip .ao-field{-moz-border-radius:3px;-webkit-border-radius:3px;background:#fff;border:1px solid #e2e0e0;font:normal 12px Arial, Helvetica, sans-serif;}
 	.ao-filter-tooltip input.ao-field{height:22px;padding:1px 5px 0 5px;}
 	.ao-filter-tooltip select.ao-field{padding:4px;width:125px;}
-	.ao-filter-tooltip select.ao-field.second{width:98px;}
+	.ao-filter-tooltip select.ao-field.second{width:120px;}
 	.ao-filter-tooltip .ao-punta{background:url(/static/core/images/common/fd_puntaTolltipFiltro.png) no-repeat 0 0;width:21px;height:30px;position:absolute;top:10px;left:-21px;}
 	/*.ao-filter-tooltip.lastFilter .ao-punta{background:url(/static/core/images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}*/
 	.ao-filter-tooltip .ao-punta{background:url(/static/core/images/dashboardManager/ic_arrowStepByStep.png) no-repeat right -30px;left:auto;right:-29px;width:29px;}

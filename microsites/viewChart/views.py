@@ -6,13 +6,12 @@ from core.choices import ChannelTypes
 from core.models import *
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
-from core.engine import invoke, invoke_chart
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from microsites.viewChart import forms
 from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
+from core.v8.factories import AbstractCommandFactory
 
 import urllib
 import json
@@ -61,10 +60,10 @@ def action_view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     try:
-        visualizationrevision_id = VisualizationRevision.objects.get_last_published_id(id)
         visualization_revision = VisualizationDBDAO().get(
             preferences['account_language'],
-            visualization_revision_id=visualizationrevision_id
+            visualization_id=id,
+            published=True
         )
 
         # verify if this account is the owner of this viz
@@ -82,15 +81,12 @@ def action_view(request, id, slug):
         return HttpResponse("Viz-Rev doesn't exist!")  # TODO
     else:
 
-        #url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
+        # url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
         chartSizes = settings.DEFAULT_MICROSITE_CHART_SIZES
         chartWidth = chartSizes["embed"]["width"]
         chartHeight = chartSizes["embed"]["height"]
         url_query = "width=%d&height=%d" % (chartWidth, chartHeight)
 
-        can_download = preferences['account_dataset_download'] == 'on' or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-        can_export = True
-        can_share = False
 
         # VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
 
@@ -132,53 +128,10 @@ def action_embed(request, guid):
 
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
     visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
-    json, type = invoke(visualization_revision_parameters)
+    
+    command = AbstractCommandFactory().create("invoke", 
+            "vz", form.visualization_revision_parameters)
+    json, type = command.run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
-
-
-def action_invoke(request):
-    form = forms.RequestForm(request.GET)
-    if form.is_valid():
-        preferences = request.preferences
-        try:
-            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision = VisualizationDBDAO().get(
-                preferences['account_language'],
-                visualization_revision_id=visualizationrevision_id
-
-            )
-        except VisualizationRevision.DoesNotExist:
-            return HttpResponse("Viz doesn't exist!") # TODO
-        else:
-            query = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
-            query['pId'] = visualizationrevision_id
-
-            zoom = form.cleaned_data.get('zoom')
-            if zoom is not None:
-                query['pZoom'] = zoom
-
-            bounds = form.cleaned_data.get('bounds')
-            if bounds is not None:
-                query['pBounds'] = bounds
-            else:
-                query['pBounds'] = ""
-
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = limit
-
-            page = form.cleaned_data.get('page')
-            if page is not None:
-                query['pPage'] = page
-
-            #query["ver"] = 6
-            #return HttpResponse(str(query) + str(request.GET), "json")
-
-            result, content_type = invoke_chart(query)
-            if not result:
-                result = "SIN RESULTADO para %s" % query
-            return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Form Error!')

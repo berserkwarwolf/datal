@@ -33,11 +33,6 @@ def view(request, dataset_id, slug):
         dataset_revision_id=dataset_orig.last_published_revision.id
     )
 
-    related_resources = DatasetDAO(resource=dataset_orig).query_related_resources()
-
-    can_download = preferences['account_dataset_download'] == 'on' \
-                   or preferences['account_dataset_download'] or preferences['account_dataset_download'] == 'True'
-
     impl_type_nice = set_dataset_impl_type_nice(dataset_orig.last_published_revision.impl_type)
     permalink = 'http://%s%s' % (preferences['account_domain'], get_permalink(dataset_id, 'dataset'))
     
