@@ -84,8 +84,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    total_resources = request.stats['account_total_datastreams']
-    
+    total_resources = request.stats['account_total_visualizations']
+
     resources,total_entries = VisualizationDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
@@ -100,7 +100,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageVisualizations.view', kwargs=dict(revision_id=resource['id']))
         resource['datastream_url'] = reverse('manageDataviews.view', kwargs={'revision_id': resource['visualization__datastream__last_revision__id']})
 
-    data = render_to_string('manageVisualizations/filter.json', dict(items=resources, total_resources=total_resources, total_entries=total_entries))
+    data = render_to_string('manageVisualizations/visualization_list.json', dict(items=resources, total_entries=total_entries, total_resources=total_resources))
     return HttpResponse(data, mimetype="application/json")
 
 
@@ -318,3 +318,13 @@ def edit(request, revision_id=None):
         response = form.save(request, visualization_rev=visualization_rev)
 
         return JSONHttpResponse(json.dumps(response))
+
+@login_required
+#@require_privilege("workspace.can_query_visualization")
+@require_privilege("workspace.can_query_dataset")
+@require_GET
+def get_filters_json(request):
+    """ List all Filters available """
+    filters = VisualizationDBDAO().query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
+    return JSONHttpResponse(json.dumps(filters))
