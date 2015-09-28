@@ -43,7 +43,7 @@ def datal_cache_page(**kwargs):
         @wraps(viewfunc, assigned=available_attrs(viewfunc))
         def _cache_page(request, *args, **kw):
             params=str(hash(frozenset(sorted(request.REQUEST.items()))))
-            key_prefix=":".join([request.path,params])
+            key_prefix = ":".join([request.path, params])
             response = cache_page(60, cache='engine', key_prefix=key_prefix)(viewfunc)
             return response(request, *args, **kw)
         return _cache_page

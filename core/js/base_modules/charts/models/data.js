@@ -6,7 +6,8 @@ var charts = charts || {
 charts.models.ChartData = Backbone.Model.extend({
     type: 'line',
     defaults: {
-        urlRoot: '/visualizations/invoke',
+        urlRoot: '/rest/charts/',
+        urlMethod: '/data.json',
         idAttribute: 'visualization_revision_id',
         fetchFilters: {},
         type: 'line',
@@ -62,8 +63,7 @@ charts.models.ChartData = Backbone.Model.extend({
      */
     url: function () {
         var filters = this.get('fetchFilters');
-        filters[this.get('idAttribute')] = this.get('id');
-        var url = this.get('urlRoot') + '?' + $.param(filters);
+        var url = this.get('urlRoot') + this.get('id') + this.get('urlMethod') + '?' + $.param(filters);
         return url;
     }
 });

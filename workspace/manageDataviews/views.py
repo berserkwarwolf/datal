@@ -17,8 +17,10 @@ from core.exceptions import DataStreamNotFoundException, DatasetNotFoundExceptio
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core import engine
+from core.decorators import datal_cache_page
+from core.v8.factories import AbstractCommandFactory
 from core.utils import DateTimeEncoder
+
 
 
 logger = logging.getLogger(__name__)
@@ -360,30 +362,3 @@ def change_status(request, datastream_revision_id=None):
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
-@csrf_exempt
-@require_http_methods(["POST"])
-def action_preview(request):
-    form = PreviewForm(request.POST)
-    if form.is_valid():
-
-        query = { 'pEndPoint': form.cleaned_data['end_point'],
-                  'pImplType': form.cleaned_data['impl_type'],
-                  'pImplDetails': form.cleaned_data['impl_details'],
-                  'pBucketName': form.cleaned_data['bucket_name'],
-                  'pDataSource': form.cleaned_data['datasource'],
-                  'pSelectStatement': form.cleaned_data['select_statement'],
-                  'pRdfTemplate': form.cleaned_data['rdf_template'],
-                  'pUserId': request.auth_manager.id,
-                  'pLimit': form.cleaned_data['limit']
-                }
-
-        getdict = request.POST.dict()
-        for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        response, mimetype = engine.preview(query)
-        # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
-        return HttpResponse(response, mimetype)
-
-    else:
-        raise Http404(form.get_error_description())

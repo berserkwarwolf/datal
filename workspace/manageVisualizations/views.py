@@ -12,13 +12,13 @@ from django.utils.translation import ugettext
 from core.http import JSONHttpResponse
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required,privilege_required
-from core.engine import invoke, preview_chart, invoke_chart
 from core.helpers import RequestProcessor
 from core.utils import DateTimeEncoder
 from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from core.v8.factories import AbstractCommandFactory
 from core.exceptions import DataStreamNotFoundException
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
@@ -316,151 +316,3 @@ def edit(request, revision_id=None):
         response = form.save(request, visualization_rev=visualization_rev)
 
         return JSONHttpResponse(json.dumps(response))
-
-
-@login_required
-def preview(request):
-
-    form = forms.PreviewForm(request.GET)
-
-    if form.is_valid():
-
-        preferences = request.preferences
-        datastream_revision_id  = request.GET.get('datastream_revision_id', None)
-
-        try:
-            datastream = DataStreamDBDAO().get(
-                request.user.language,
-                datastream_revision_id=datastream_revision_id,
-                published=False
-            )
-        except Exception, e:
-            logger.error(e)
-            raise Http404
-        else:
-            query = RequestProcessor(request).get_arguments(datastream["parameters"])
-            chart_type = form.cleaned_data.get('type')
-
-            query.update({
-                'pId': int(datastream_revision_id),
-                'pType': chart_type,
-                'pNullValueAction': form.cleaned_data.get('nullValueAction'),
-                'pNullValuePreset': form.cleaned_data.get('nullValuePreset'),
-                'pData': form.cleaned_data.get('data'),
-                'pLabelSelection': form.cleaned_data.get('labels'),
-                'pHeaderSelection': form.cleaned_data.get('headers'),
-            })
-
-            invertData = form.cleaned_data.get('invertData')
-            if invertData in ['true',True]:
-                query['pInvertData'] = 'checked'
-
-            invertedAxis = form.cleaned_data.get('invertedAxis')
-            if invertedAxis in ['true', True]:
-                query['pInvertedAxis'] = 'checked'
-
-            page = form.cleaned_data.get('page')
-            if page is not None:
-                query['pPage'] = page
-
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = form.cleaned_data.get('limit')
-
-            result, content_type = preview_chart(query)
-
-            return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Error!')
-
-
-@login_required
-def preview_map(request, datastream_revision_id):
-
-    preferences = request.preferences
-    form = forms.PreviewMapForm(request.GET)
-
-    if form.is_valid():
-        try:
-            datastream = DataStreamDBDAO().get(
-                request.user.language,
-                datastream_revision_id=datastream_revision_id,
-                published=False
-            )
-        except Exception, e:
-            logger.error(e)
-            raise Http404
-        else:
-            query = RequestProcessor(request).get_arguments(datastream["parameters"])
-
-            query.update({
-                'pId': int(datastream_revision_id),
-                'pType': 'mapchart',
-                'pNullValueAction': form.cleaned_data.get('nullValueAction', 'exclude'),
-                'pNullValuePreset': form.cleaned_data.get('nullValuePreset', ''),
-                'pData': form.cleaned_data.get('data', ''),
-                'pLatitudSelection': form.cleaned_data.get('lat', ''),
-                'pLongitudSelection': form.cleaned_data.get('lon', ''),
-                'pHeaderSelection': '',
-                'pTraceSelection': '',
-            })
-
-            # Optional
-            bounds = form.cleaned_data.get('bounds')
-            if bounds is not None:
-                query['pBounds'] = bounds
-
-            zoom = form.cleaned_data.get('zoom')
-            if zoom is not None:
-                query['pZoom'] = zoom
-
-            result, content_type = preview_chart(query)
-
-            return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Error!')
-
-
-def action_invoke(request):
-    form = forms.RequestForm(request.GET)
-    if form.is_valid():
-        preferences = request.preferences
-        try:
-            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision = VisualizationDBDAO().get(
-                preferences['account_language'],
-                visualization_revision_id=visualizationrevision_id
-            )
-        except VisualizationRevision.DoesNotExist:
-            return VisualizationNotFoundException()
-        else:
-            query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
-            query['pId'] = visualizationrevision_id
-
-            zoom = form.cleaned_data.get('zoom')
-            if zoom is not None:
-                query['pZoom'] = zoom
-
-            bounds = form.cleaned_data.get('bounds')
-            if bounds is not None:
-                query['pBounds'] = bounds
-            else:
-                query['pBounds'] = ""
-
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = limit
-
-            page = form.cleaned_data.get('page')
-            if page is not None:
-                query['pPage'] = page
-
-            #query["ver"] = 6
-            #return HttpResponse(str(query) + str(request.GET), "json")
-
-            result, content_type = invoke_chart(query)
-            if not result:
-                result = "SIN RESULTADO para %s" % query
-            return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Form Error!')

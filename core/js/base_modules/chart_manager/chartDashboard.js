@@ -26,13 +26,13 @@ var DashboardChart = Backbone.Model.extend({
 		var att 	= this.attributes;
 		var type 	= att.chartJson.format.type;
 		
-		var lData = "datastream_revision_id=" + att.dataStreamId + '&pIndex=' + att.index;
+		var lData = 'pIndex=' + att.index;
 		if(type == "mapchart"){
 			lData += "&pLimit=1000";
 		}
 		
 		var lajaxCall = $.ajax({
-			url: '/dataviews/invoke',
+			url: '/rest/datastreams/' + att.dataStreamId + '/data.json',
 			type: 'GET',
 			data: lData,
 			cache: false,

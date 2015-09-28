@@ -8,7 +8,8 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from core.helpers import RequestProcessor
 from core.choices import ChannelTypes
 from core.models import *
-from core.engine import invoke, invoke_chart
+from core.docs import VZ
+from core.v8.factories import AbstractCommandFactory
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.daos.visualizations import VisualizationHitsDAO, VisualizationDBDAO
@@ -47,12 +48,13 @@ def action_view(request, id, slug):
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
         
-        chart_type = json.loads(visualization_revision['impl_details']).get('format').get('type')
-        
+        chart_type = json.loads(visualization_revision.impl_details).get('format').get('type') 
         try:
             if chart_type != "mapchart":
-                visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
-                result, content_type = invoke(visualization_revision_parameters)
+                visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
+                command = AbstractCommandFactory().create("invoke", 
+                    "dt", visualization_revision_parameters)
+                result, content_type = command.run()
             else:
                 join_intersected_clusters = request.GET.get('joinIntersectedClusters',"1")
 #                visualization_revision_parameters['pId'] = visualization_revision.visualizationrevision_id
@@ -85,51 +87,14 @@ def action_embed(request, guid):
     width = request.REQUEST.get('width', False)
     height = request.REQUEST.get('height', False)
 
-    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
-    visualization_revision_parameters['pId'] = visualization_revision['datastreamrevision_id']
-    json, type = invoke(visualization_revision_parameters)
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+    visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision.parameters)
+    visualization_revision_parameters['pId'] = visualization_revision.datastreamrevision_id
+
+    command = AbstractCommandFactory().create("invoke", 
+            "dt", visualization_revision_parameters)
+    json, type = command.run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('chart_manager/embed.html', locals())
-
-
-def action_invoke(request):
-
-    form = forms.RequestForm(request.GET)
-    if form.is_valid():
-        preferences = request.preferences
-        
-        try:
-            visualizationrevision_id = form.cleaned_data.get('visualization_revision_id')
-            visualization_revision = VisualizationDBDAO().get(
-                preferences['account_language'],
-                visualization_revision_id=visualizationrevision_id
-            )
-        except VisualizationRevision.DoesNotExist:
-            raise Http404
-        else:
-            query = RequestProcessor(request).get_arguments(visualization_revision['parameters'])
-            query['pId'] = visualizationrevision_id
-            
-            limit = form.cleaned_data.get('limit')
-            if limit is not None:
-                query['pLimit'] = limit
-                
-            page = form.cleaned_data.get('page')
-            if page is not None:
-                query['pPage'] = page     
-                
-            bounds = form.cleaned_data.get('bounds')
-            if bounds is not None:
-                query['pBounds'] = bounds   
-                
-            zoom = form.cleaned_data.get('zoom')
-            if zoom is not None:
-                query['pZoom'] = zoom                                           
-    
-            result, content_type = invoke_chart(query)
-    
-            return HttpResponse(result, mimetype=content_type)
-    else:
-        return HttpResponse('Error!')
 
