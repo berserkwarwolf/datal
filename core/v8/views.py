@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.forms.formsets import formset_factory
 from rest_framework.response import Response
 from core.v8.factories import AbstractCommandFactory
@@ -11,7 +12,10 @@ logger = logging.getLogger(__name__)
 class EngineViewSetMixin(object):
     def engine_call(self, request, engine_method, format=None, is_detail=True, form_class=RequestForm, serialize=True):
         mutable_get = request.GET.copy()
+        mutable_get.update(request.POST.copy())
         mutable_get['output'] = format or 'json'
+        if settings.DEBUG: logger.info('Engine_CALL %s %s' % (str(mutable_get), engine_method))
+        
         resource = {}
         if is_detail:
             resource = self.get_object()
