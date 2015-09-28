@@ -11,7 +11,7 @@ var Step = Backbone.Model.extend({
         this.resizeContainer();
     },
     init : function(){
-
+        console.log("Size")
     },
     start : function(){
         this.attributes.$Container.show();
@@ -203,6 +203,7 @@ var Step0 = Step.extend({
             $('.header').removeClass('fixedBar');
             $('.sectionTitleContainer').removeClass('fixedBar');
             $('.collapsedBar').removeClass('fixedBar');
+            $('.main-section').find('.context-menu').hide();
         }
     },
     loadDatastreamData : function(){
