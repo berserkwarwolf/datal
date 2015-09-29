@@ -3234,3 +3234,6 @@ msgstr "Unpublish Dataset "
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-PARAMETERS-TEXT"
+msgstr "Parameters"
