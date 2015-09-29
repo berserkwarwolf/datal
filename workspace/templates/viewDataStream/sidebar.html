@@ -12,7 +12,7 @@
 	<div class="row">
 		<div class="title">{% trans "APP-PARAMETERS-TEXT" %}</div>
 		{% for parameter in datastream.parameters %}
-			<p>{{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-PARAM-TEXT' %}">{{parameter.value}}</a></p>
+			<p>{{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-EDITPARAM-TEXT' %}">{{parameter.value}}</a></p>
 		{%endfor%}
 	</div>
 	{% endif %}

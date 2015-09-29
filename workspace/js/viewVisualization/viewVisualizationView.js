@@ -14,6 +14,8 @@ var viewVisualizationView = Backbone.View.extend({
 		this.template = _.template( $("#context-menu-template").html() );
 		this.chartsFactory = new charts.ChartsFactory();
 
+		this.listenTo(this.model, "change", this.render);
+		
 		this.setupChart();
 		this.render();
 	},

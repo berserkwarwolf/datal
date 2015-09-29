@@ -40,7 +40,7 @@ def action_view(request, revision_id):
     credentials = request.auth_manager
     categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
     status_options = credentials.get_allowed_actions()
-    
+
     return render_to_response('viewDataStream/index.html', locals())
 
 
