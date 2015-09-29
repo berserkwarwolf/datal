@@ -9,12 +9,12 @@ var datasetView = Backbone.Epoxy.View.extend({
 		'click #id_delete': 'onDeleteButtonClicked',
 		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
 		'click #id_unpublish': 'onUnpublishButtonClicked',
-		'click li[data-tab]': 'onTabButtonClicked'
 	},
 
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
 		this.listenTo(this.model, "change", this.render);
+		this.onTabActive();
 		this.render();
 	},
 
@@ -120,15 +120,14 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	},
 
-	onTabButtonClicked: function(event){
-		var $target = $(event.currentTarget),
-			tab = $target.attr('data-tab');
-
-		$target.siblings('li').removeClass('tab-selected');
-		$target.addClass('tab-selected');
-
-		$('.tabContent').hide();
-		$('#'+tab).show();
+	onTabActive:function() {
+		var $dataTabs;
+	    $dataTabs = $(".detail").hashTabs({
+	      smoothScroll: {
+	        enabled: true,
+	        initialTabId: "smooth-scroller"
+	      }
+	    });
 	}
 
 });

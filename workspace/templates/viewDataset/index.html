@@ -31,37 +31,43 @@
 {% endblock %}
 
 {% block content %}
-  <div class="detail" id="id_viewDataset">
+  <div class="detail hash-tabs" id="id_viewDataset">
+    <article class="tab-container">
 
-    <div class="ao-tabs col-xs-12">
+      <div class="ao-tabs col-xs-12">
         <div class="tabs-in relative">
-            <ul class="tabsList clearfix">
-                <li class="tab tab-selected" data-tab="id_descriptionTab">
-                    <div class="clearfix">
-                        <a>{% trans 'APP-DESCRIPTION-TEXT' %}</a>
-                    </div>
-                </li>
-                {% if dataset.datastreams or dataset.visualizations %}
-                <li class="tab" data-tab="id_relatedTab">
-                    <div class="clearfix">
-                        <a>{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
-                    </div>
-                </li>
-                {% endif %}
-            </ul>
+          <ul class="tabsList clearfix">
+            <nav class="tab-nav" role="tablist">
+              <li class="tab">
+                  <div class="clearfix">
+                      <a href="#description" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#description" tab-index="0">{% trans 'APP-DESCRIPTION-TEXT' %}</a>
+                  </div>
+              </li>
+              {% if dataset.datastreams or dataset.visualizations %}
+              <li class="tab">
+                  <div class="clearfix">
+                      <a href="#related-resources" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#related-resources" tab-index="-1">{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
+                  </div>
+              </li>
+              {% endif %}
+            </nav>
+          </ul>
         </div>
-    </div>
+      </div>
 
-    <div class="resource-detail box">
-      
-      {% include "viewDataset/description.html" %}
+      <div class="resource-detail box">
+        <div class="tab-pane-container">
+        
+          {% include "viewDataset/description.html" %}
 
-      {% if dataset.datastreams or dataset.visualizations %}
-        {% include "viewDataset/related_resources.html" %}
-      {% endif %}
+          {% if dataset.datastreams or dataset.visualizations %}
+            {% include "viewDataset/related_resources.html" %}
+          {% endif %}
 
-    </div>
+        </div>
+      </div>
 
+    </article>
   </div>
 
   {% include "viewDataset/templates.html" %}
@@ -69,6 +75,7 @@
 {% endblock %}
 
 {% block bottom_js %}
+<script type="text/javascript" src="/js_core/plugins/jquery.hash-tabs.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var Dataset = new DatasetModel({
