@@ -3220,7 +3220,7 @@ msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
 
 msgid "APP-RELATED-RESOURCES-TEXT"
-msgstr "Recurso asociados"
+msgstr "Recursos asociados"
 
 msgid "APP-VIEW-DATASET-SOURCE-TEXT"
 msgstr "¿Cuál es el origen o fuente de estos datos?"
