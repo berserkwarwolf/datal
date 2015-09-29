@@ -1,4 +1,5 @@
 {% load i18n datastream_tags %}
+{% load extra_tags components dataset_tags %}
 
 <!-- Description -->
 <div class="row tabContent" id="id_descriptionTab">
@@ -93,7 +94,7 @@
 			{% if dataset.frequency %}
 		    <div class="row">
 		        <div class="title">{% trans 'APP-VIEW-DATASET-FREQUENCY-TEXT' %}</div>
-		        <p>{{dataset.frequency|capfirst}}</p>
+		        <p>{{dataset.frequency|frequency_str|capfirst}}</p>
 		    </div>
 		    {% endif %}
 
