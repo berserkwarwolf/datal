@@ -49,8 +49,9 @@ class EngineCommand(object):
         try:
             params = urllib.urlencode(query)
             
-            self.logger.info("URL: %s Params: %s query: %s" %(url, params, query))
+            self.logger.info("URL: %s Params: %s query: %s method: %s" %(url, params, query, self.method))
 
+        
             try:
                 if self.method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
@@ -76,9 +77,9 @@ class EngineCommand(object):
                 response.close()
 
     def run(self):
-        #result = cache.get(self.key_prefix)
-        #if result:
-        #    return result
+        result = cache.get(self.key_prefix)
+        if result:
+            return result
 
         try:
             answer = self._request(self.query)
@@ -131,7 +132,6 @@ class EnginePreviewChartCommand(EngineCommand):
             elif item[1]:
                 new_query.append(item)
                 
-    
         return new_query
 
 class EngineLoadCommand(EngineCommand):
