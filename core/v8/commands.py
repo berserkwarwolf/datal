@@ -97,27 +97,30 @@ class EnginePreviewChartCommand(EngineCommand):
 
     def _set_defaults(self, query):
 
+        print "-----------------------------------------------------------"
+        print query 
+
         new_query=[]
         for item in query:
             if item[0] == 'pInvertData' and item[1] == "true":
-                new_query.append( ('pInvertData', "checked") )
+                new_query.append( (item[0], "checked") )
             # validar el caso contrario de "true"
             elif item[0] == 'pInvertData':
-                new_query.append( ('pInvertData', "") )
+                new_query.append( (item[0], "") )
     
             elif item[0] == 'pInvertedAxis' and item[1] == "true":
-                new_query.append( ('pInvertedAxis', "checked") )
+                new_query.append( (item[0], "checked") )
             elif item[0] == 'pInvertedAxis':
-                new_query.append( ('pInvertedAxis', "") )
+                new_query.append( (item[0], "") )
 
-            elif item[0] == 'pPage' and item[1]:
-                new_query.append( item)
+            #elif item[0] == 'pPage' and item[1]:
+            #    new_query.append( item)
 
-            elif item[0] == 'pLimit' and item[1]:
-                new_query.append(item)
+            #elif item[0] == 'pLimit' and item[1]:
+            #    new_query.append(item)
 
             # param que si o si deben viajar, sean nulos o no
-            elif item[0] in ( 'pId', 'pType', 'pNullValueAction', 'pNullValuePreset', 'pData', 'pLabelSelection', 'pHeaderSelection'):
+            elif item[0] in ( 'pId', 'pType', 'pNullValueAction', 'pNullValuePreset', 'pData', 'pLabelSelection', 'pHeaderSelection','pTraceSelection'):
                 new_query.append(item)
 
             # saliendo de los param que si o si deben viajar,
@@ -125,7 +128,8 @@ class EnginePreviewChartCommand(EngineCommand):
             elif item[1]:
                 new_query.append(item)
                 
-    
+        print new_query 
+        print "-----------------------------------------------------------"
         return new_query
 
 class EngineLoadCommand(EngineCommand):
