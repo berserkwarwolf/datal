@@ -105,16 +105,11 @@ class EnginePreviewChartCommand(EngineCommand):
         new_query=[]
         for item in query:
             if item[0] == 'pInvertData' and item[1] == "true":
-                new_query.append( ('pInvertData', "checked") )
-            # validar el caso contrario de "true"
-            elif item[0] == 'pInvertData':
-                new_query.append( ('pInvertData', "") )
-    
+                new_query.append( (item[0], "checked") )
             elif item[0] == 'pInvertedAxis' and item[1] == "true":
-                new_query.append( ('pInvertedAxis', "checked") )
-            elif item[0] == 'pInvertedAxis':
-                new_query.append( ('pInvertedAxis', "") )
-
+                new_query.append( (item[0], "checked") )
+            elif item[0] == 'pCorrelativeData' and item[1] == "true":
+                new_query.append( (item[0], "checked") )
             elif item[0] == 'pPage' and item[1]:
                 new_query.append( item)
 
