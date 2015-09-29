@@ -36,13 +36,13 @@
     <div class="ao-tabs col-xs-12">
         <div class="tabs-in relative">
             <ul class="tabsList clearfix">
-                <li class="tab tab-selected">
+                <li class="tab tab-selected" data-tab="id_descriptionTab">
                     <div class="clearfix">
                         <a>Descripción</a>
                     </div>
                 </li>
                 {% if dataset.datastreams or dataset.visualizations %}
-                <li class="tab">
+                <li class="tab" data-tab="id_relatedTab">
                     <div class="clearfix">
                         <a>Recursos asociados</a>
                     </div>
@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="resource-detail box" id="id_dataStreamContainer">
+    <div class="resource-detail box">
       
       {% include "viewDataset/description.html" %}
 

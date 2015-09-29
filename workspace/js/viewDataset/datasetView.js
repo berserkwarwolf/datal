@@ -8,7 +8,8 @@ var datasetView = Backbone.Epoxy.View.extend({
 	events: {
 		'click #id_delete': 'onDeleteButtonClicked',
 		'click #id_approve, #id_reject, #id_publish, #id_sendToReview': 'changeStatus',
-		'click #id_unpublish': 'onUnpublishButtonClicked'
+		'click #id_unpublish': 'onUnpublishButtonClicked',
+		'click li[data-tab]': 'onTabButtonClicked'
 	},
 
 	initialize: function(){
@@ -19,60 +20,8 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	render: function() {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.setContentHeight();
 		return this;
 	},
-
-	setContentHeight: function(){
-
-		var self = this;
-
-		$(document).ready(function(){
-
-			var otherHeights = 0;
-
-			self.setHeights( '.resources-table', otherHeights );
-
-		});
-
-	},
-
-	setHeights: function(theContainer, theHeight){
-
-		if(typeof theHeight == 'undefined'){
-			theHeight = 0;
-		}
-
-		var heightContainer = String(theContainer),
-			tabsHeight = parseFloat( $('.main-navigation').height() ),
-			otherHeight = theHeight,
-			minHeight = tabsHeight - otherHeight;
-
-		$(window).resize(function(){
-
-			var windowHeight;
-			if( $(window).height() < 600){
-			// Set window height minimum value to 600
-				windowHeight = 600;
-			}else{
-				windowHeight = $(window).height();
-			}
-
-			var sectionContentHeight =
-			windowHeight
-			- parseFloat( otherHeight )
-			- $('.header').height()
-			- $('.main-section .section-title').height()
-			- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] )
-			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
-			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
-			- 20; // to set some space at the bottom
-
-			$(heightContainer).css('height', sectionContentHeight+'px');
-
-		}).resize();
-
-	}, 
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
@@ -169,6 +118,17 @@ var datasetView = Backbone.Epoxy.View.extend({
 			}
 		});
 
+	},
+
+	onTabButtonClicked: function(event){
+		var $target = $(event.currentTarget),
+			tab = $target.attr('data-tab');
+
+		$target.siblings('li').removeClass('tab-selected');
+		$target.addClass('tab-selected');
+
+		$('.tabContent').hide();
+		$('#'+tab).show();
 	}
 
 });

@@ -2,12 +2,12 @@
 {% load extra_tags components dataset_tags %}
 
 <!-- Resources List -->
-<div class="row" style="display:none;">
+<div class="row tabContent" id="id_relatedTab" style="display:none;">
 
     <div class="col-xs-12">
 
         <div class="resources-list">
-            <div id="id_resourcesList" class="resources-table">
+            <div class="resources-table">
 
                 {# If impl_type is not allowed to create a Data View #}
                 {% if dataset.collect_type == 0 and dataset.impl_type in datastream_impl_not_valid_choices %}
@@ -15,7 +15,7 @@
                     {% include "viewDataset/no_resources.html" %}
 
                 {% else %}
-                
+
                     {% if dataset.datastreams or dataset.visualizations %}
                         <table id='dataset_table_list'>
                             <thead>
