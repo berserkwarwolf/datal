@@ -92,7 +92,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    resources,total_resources = DataStreamDBDAO().query(
+    total_resources = request.stats['account_total_datastreams']
+
+    resources,total_entries = DataStreamDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -107,7 +109,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['dataset__last_revision__id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources, 'total_entries': total_entries}
     response = DatastreamList().render(data)
     
     return JSONHttpResponse(response)

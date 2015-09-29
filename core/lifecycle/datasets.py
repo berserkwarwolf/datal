@@ -255,7 +255,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         # Tener en cuenta que si es necesario ejecutar varios delete, debemos crear un nuevo objecto LifeCycle
-
+        if settings.DEBUG: logger.info('removing dataset rev %d all:%s' % (self.dataset_revision.id, str(killemall)))
         if self.dataset_revision.status not in allowed_states:
             raise IllegalStateException(
                                     from_state=self.dataset_revision.status,
@@ -283,7 +283,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self._update_last_revisions()
         self._log_activity(ActionStreams.DELETE)
+        if settings.DEBUG: logger.info('Clean Caches')
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
+        self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
+
 
     def _remove_all(self):
         # Remove all asociated datastreams revisions
@@ -292,6 +295,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset.delete()
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
+        self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
+
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """

@@ -3,21 +3,27 @@
 <div class="col-xs-12">
 
 	<div class="collapsedBar DN" id="id_title_tables_container">
-		<header>
-			<h3 id="id_dataHeader">{% trans "CREATE-STEP1-SUBTITLE" %}</h3>
+		<div class="section-title">
+			
+			<div id="id_dataHeader">
+				<header>
+					<h3>{% trans "CREATE-STEP1-SUBTITLE" %}</h3>
+				</header>
+			</div>
 
-			<h3 id="id_noDataHeader">{% trans "APP-WOOPSNODATA-TEXT" %}</h3>
+			<h1 id="id_noDataHeader">{% trans "APP-WOOPSNODATA-TEXT" %}</h1>
 
 			<div class="navigation FR">
 				<a id="id_step0CancelButton" href="javascript:;" title="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha">{% trans "APP-CANCEL-TEXT" %}</a>
 				<a id="id_step0NextButton" title="{% trans 'BTN-NEXT-TEXT' %}" href="javascript:;" class="button primary next">{% trans "BTN-NEXT-TEXT" %}</a>
 			</div>	
-		</header>
+		</div>
 	</div>
 
 	<!-- DISCLAMERS -->
 	<div class="disclamers" id="id_noTables_container" style="display:none;">
-			<div class="title">{% trans "APP-KEEPINMIND-TEXT" %}:</div>
+		<div class="error-container">
+		<div class="title">{% trans "APP-KEEPINMIND-TEXT" %}:</div>
 		<div class="disclaimerContent">
 			<ul>
 				<li>{% trans "CREATE-STEP1-DISCLAIMER0" %}</li>
@@ -33,6 +39,7 @@
 				<!--<span class="Icon ic_Skype">&nbsp;</span>-->
 				<p><strong>{% trans "APP-ANYDOUBTS-TEXT2" %}</strong> <a href="mailto:support@junar.com">{% trans "APP-CALLUSONSKYPE-TEXT2" %}</a>.</p>
 			</div>
+		</div>
 		</div>
 	</div>
 

@@ -15,6 +15,7 @@ import logging
 
 class EngineCommand(object):
     endpoint = 'defalt_endpoint'
+    method = 'GET'
     logger = logging.getLogger(__name__)
     
     def __init__(self, query):
@@ -30,7 +31,7 @@ class EngineCommand(object):
     def _get_url(self):
         return get_domain_with_protocol('engine') + self.endpoint
 
-    def _request(self, query, method = 'GET'):
+    def _request(self, query):
         url = self._get_url()
         response = None
 
@@ -39,9 +40,9 @@ class EngineCommand(object):
             self.logger.info("URL: %s Params: %s query: %s" %(url, params, query))
 
             try:
-                if method == 'GET':
+                if self.method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
-                elif method == 'POST':
+                elif self.method == 'POST':
                     response = urllib.urlopen(url, params)
             except Exception, e:
                 self.logger.error('Error trying to access to %s | %s (%s) ' % (url, str(params), str(e)))
@@ -51,7 +52,10 @@ class EngineCommand(object):
             if response:
                 if response.getcode() == 200:
                     ret = response.read()
-                    mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
+                    if len(response.info().getplist()) > 0:
+                        mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
+                    else:
+                        mimetype = 'application; json'
                     return ret, mimetype
 
             raise IOError('Error code %d at %s+%s' % (response.getcode(), url, str(params)))
@@ -83,10 +87,11 @@ class EngineChartCommand(EngineCommand):
 
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
+    method = 'POST'
 
 class EngineLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_LOADER_SERVLET
 
 class EnginePreviewCommand(EngineCommand):
     endpoint = settings.END_POINT_PREVIEWER_SERVLET
-
+    method = 'POST'
