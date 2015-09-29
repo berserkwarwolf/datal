@@ -60,7 +60,7 @@
 
 		    {% if dataset.sources %} 
 		    <div class="row">
-		        <div class="title">{% trans 'APP-SOURCES-TEXT' %}</div>
+		        <div class="title">{% trans 'APP-VIEW-DATASET-SOURCE-TEXT' %}</div>
 		        {% for source in dataset.sources %}
 		        <p><a href="{{source.source__url}}" title="{{source.source__name|capfirst}}" target="_blank">{{source.source__name|capfirst}} <span class="icon icon-view-site icon-inline icon-right"></span></a></p>
 		        {% endfor %}
@@ -69,7 +69,7 @@
 
 		    {% if dataset.notes %}
 		    <div class="row">
-		        <div class="title">{% trans 'APP-NOTES-TEXT' %}</div>
+		        <div class="title">{% trans 'APP-VIEW-DATASET-NOTES-TEXT' %}</div>
 		        <div class="notes">{{dataset.notes|safe|urlize}}</div>
 		    </div>
 		    {% endif %}
@@ -80,6 +80,7 @@
 
 	<div class="col-xs-4 col-xs-offset-2">
 
+		{% if dataset.license_url or dataset.frequency or dataset.mbox or dataset.spatial %}
 		<div class="sidebar sidebar-view">
 
 		    {% if dataset.license_url %}
@@ -91,7 +92,7 @@
 
 			{% if dataset.frequency %}
 		    <div class="row">
-		        <div class="title">{% trans 'APP-FREQUENCY-TEXT' %}</div>
+		        <div class="title">{% trans 'APP-VIEW-DATASET-FREQUENCY-TEXT' %}</div>
 		        <p>{{dataset.frequency|capfirst}}</p>
 		    </div>
 		    {% endif %}
@@ -105,12 +106,13 @@
 
 			{% if dataset.spatial %}
 		    <div class="row">
-		        <div class="title">{% trans 'APP-REGION-TEXT' %}</div>
+		        <div class="title">{% trans 'APP-VIEW-DATASET-REGION-TEXT' %}</div>
 				<p>{{dataset.spatial|capfirst}}</p>
 		    </div>
 		    {% endif %}
 
 		</div>
+		{% endif %}
 
 	</div>
 

@@ -38,13 +38,13 @@
             <ul class="tabsList clearfix">
                 <li class="tab tab-selected" data-tab="id_descriptionTab">
                     <div class="clearfix">
-                        <a>Descripción</a>
+                        <a>{% trans 'APP-DESCRIPTION-TEXT' %}</a>
                     </div>
                 </li>
                 {% if dataset.datastreams or dataset.visualizations %}
                 <li class="tab" data-tab="id_relatedTab">
                     <div class="clearfix">
-                        <a>Recursos asociados</a>
+                        <a>{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
                     </div>
                 </li>
                 {% endif %}

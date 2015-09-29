@@ -2,10 +2,26 @@
 @import 'variables';
 @import 'functions';
 
+/* Tabs */
+.ao-tabs {
+	.tabsList{
+		padding-left:0 !important;
+
+		.tab{
+			padding:8px !important;
+
+			div{
+				a{font-size:$font-size-m;}
+			}
+		}
+	}
+}
+
+/* Content */
 .row{
 	margin:20px 0;
 	
-	.title{margin-bottom:0;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;padding:0 0 5px;line-height:21px;}
+	.title{margin-bottom:0;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;line-height:21px;}
 	p,
 	.sourcesContent,
 	.notes{

@@ -3234,3 +3234,18 @@ msgstr "Unpublish Dataset "
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "This action cannot be undone. Please, confirm how to proceed:"
+
+msgid "APP-RELATED-RESOURCES-TEXT"
+msgstr "Related resources"
+
+msgid "APP-VIEW-DATASET-SOURCE-TEXT"
+msgstr "What is the origin or source of this data?"
+
+msgid "APP-VIEW-DATASET-NOTES-TEXT"
+msgstr "Annotations or clarification"
+
+msgid "APP-VIEW-DATASET-FREQUENCY-TEXT"
+msgstr "Update frequency"
+
+msgid "APP-VIEW-DATASET-REGION-TEXT"
+msgstr "What region apply this data?"

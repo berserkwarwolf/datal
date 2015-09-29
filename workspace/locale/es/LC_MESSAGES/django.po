@@ -3218,3 +3218,18 @@ msgstr "Despublicar visualización"
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-RELATED-RESOURCES-TEXT"
+msgstr "Recurso asociados"
+
+msgid "APP-VIEW-DATASET-SOURCE-TEXT"
+msgstr "¿Cuál es el origen o fuente de estos datos?"
+
+msgid "APP-VIEW-DATASET-NOTES-TEXT"
+msgstr "Anotaciones o aclaraciones adicionales"
+
+msgid "APP-VIEW-DATASET-FREQUENCY-TEXT"
+msgstr "Frecuencia de actualización"
+
+msgid "APP-VIEW-DATASET-REGION-TEXT"
+msgstr "¿En que región aplican estos datos?"
