@@ -378,6 +378,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.status = form_status
                 self.dataset_revision.save()
 
+        self._log_activity(ActionStreams.EDIT)
         return self.dataset_revision
 
     def _move_childs_to_draft(self):

@@ -130,6 +130,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 **fields
             )
         
+        self._log_activity(ActionStreams.EDIT)
         return self.visualization_revision
 
     def _move_childs_to_draft(self):

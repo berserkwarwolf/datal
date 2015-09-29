@@ -2275,13 +2275,13 @@ msgid "LANDINGPAGE-ACTIVITY-TIME"
 msgstr "Modificación"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
-msgstr "ha creado"
+msgstr "creó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
-msgstr "ha editado"
+msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "ha borrado"
+msgstr "borró"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -2674,10 +2674,10 @@ msgid "APP-EDIT-DATAVIEW-TEXT"
 msgstr "Editar Vista de Datos"
 
 msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
-msgstr "ha publicado"
+msgstr "publicó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
-msgstr "ha despublicado"
+msgstr "despublicó"
 
 msgid "ACCOUNT-DOMAIN-TIP-1"
 msgstr "Este dominio no debe comenzar con &quot;api&quot;."
@@ -3221,3 +3221,12 @@ msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realiza
 
 msgid "APP-PARAMETERS-TEXT"
 msgstr "Parámetros"
+
+msgid "LANDINGPAGE-ACTIVITY-HASREJECTED"
+msgstr "rechazó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASACCEPTED"
+msgstr "aceptó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
+msgstr "envió a revisión"

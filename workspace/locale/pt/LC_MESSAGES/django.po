@@ -2285,13 +2285,13 @@ msgid "LANDINGPAGE-ACTIVITY-TIME"
 msgstr "Modification"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
-msgstr "has created"
+msgstr "created"
 
 msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
-msgstr "has edited"
+msgstr "edited"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "has deleted"
+msgstr "deleted"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Today"
@@ -2684,10 +2684,10 @@ msgid "APP-EDIT-DATAVIEW-TEXT"
 msgstr "Edit Data View"
 
 msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
-msgstr "has published"
+msgstr "published"
 
 msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
-msgstr "has unpublished"
+msgstr "unpublished"
 
 msgid "ACCOUNT-DOMAIN-TIP-1"
 msgstr "This domain must not start with &quot;api&quot;."
@@ -3237,3 +3237,12 @@ msgstr "This action cannot be undone. Please, confirm how to proceed:"
 
 msgid "APP-PARAMETERS-TEXT"
 msgstr "Parameters"
+
+msgid "LANDINGPAGE-ACTIVITY-HASREJECTED"
+msgstr "rejected"
+
+msgid "LANDINGPAGE-ACTIVITY-HASACCEPTED"
+msgstr "accepted"
+
+msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
+msgstr "sent to review"

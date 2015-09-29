@@ -347,6 +347,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.datastream_revision.status = form_status
                 self.datastream_revision.save()
 
+        self._log_activity(ActionStreams.EDIT)
         return self.datastream_revision
 
     def _move_childs_to_draft(self):
