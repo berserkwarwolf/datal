@@ -3218,3 +3218,6 @@ msgstr "Despublicar visualización"
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-PARAMETERS-TEXT"
+msgstr "Parámetros"
