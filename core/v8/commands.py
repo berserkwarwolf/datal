@@ -99,10 +99,8 @@ class EngineChartCommand(EngineCommand):
 
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
-    method = 'POST'
 
     def _set_defaults(self, query):
-
         new_query=[]
         for item in query:
             if item[0] == 'pInvertData' and item[1] == "true":
@@ -131,7 +129,6 @@ class EnginePreviewChartCommand(EngineCommand):
             elif item[1]:
                 new_query.append(item)
                 
-    
         return new_query
 
 class EngineLoadCommand(EngineCommand):
