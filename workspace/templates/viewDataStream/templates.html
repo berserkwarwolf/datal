@@ -132,21 +132,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>
-
-		<%= title %>
-		
-		{% if datastream.parameters %}
-			<span class="parameters">
-				(
-				{% for parameter in datastream.parameters %}
-					{{parameter.name|capfirst}}: <a id="id_changeParam{{forloop.counter0}}Button" title="{% trans 'APP-PARAM-TEXT' %}">{{parameter.value}}</a> {% if not forloop.last %}, {%endif%}
-				{%endfor%}
-				)
-			</span>
-		{%endif%}
-
-		</h1>
+		<h1><%= title %></h1>
 
 		<div class="status-row clearfix">
 
