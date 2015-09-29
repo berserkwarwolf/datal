@@ -50,7 +50,7 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     nullValuePreset = forms.CharField(required=False)
     # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion
     headers = forms.CharField(required=False)
-
+    
 class VisualizationPreviewMapForm(VisualizationRequestForm):
     # pLatitudSelection:  Rango para la seleccion de las latitudes de los puntos del mapa
     lat = forms.CharField(required=True)
@@ -58,5 +58,4 @@ class VisualizationPreviewMapForm(VisualizationRequestForm):
     lon = forms.CharField(required=True)
     # pTraceSelection: Rango para la seleccion de los trazos del mapa   
     traces = forms.CharField(required=False)
-
 
