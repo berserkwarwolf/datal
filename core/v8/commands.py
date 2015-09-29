@@ -26,8 +26,14 @@ class EngineCommand(object):
         self.key_prefix = self._get_cache_key()
 
     def _set_defaults(self, query):
-        # metodo vacio, implementar en c/command
-        return query
+
+        # limpia los vacios
+        new_query=[]
+        for item in query:
+            if item[1]:
+                new_query.append(item)
+        
+        return new_query
 
     def _get_cache_key(self):
         params=str(hash(frozenset(sorted(self.query))))
@@ -43,8 +49,9 @@ class EngineCommand(object):
         try:
             params = urllib.urlencode(query)
             
-            self.logger.info("URL: %s Params: %s query: %s" %(url, params, query))
+            self.logger.info("URL: %s Params: %s query: %s method: %s" %(url, params, query, self.method))
 
+        
             try:
                 if self.method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
@@ -93,10 +100,8 @@ class EngineChartCommand(EngineCommand):
 
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
-    method = 'POST'
 
     def _set_defaults(self, query):
-
         new_query=[]
         for item in query:
             if item[0] == 'pInvertData' and item[1] == "true":
@@ -125,7 +130,6 @@ class EnginePreviewChartCommand(EngineCommand):
             elif item[1]:
                 new_query.append(item)
                 
-    
         return new_query
 
 class EngineLoadCommand(EngineCommand):
