@@ -21,11 +21,11 @@ class EngineCommand(object):
     def __init__(self, query):
 
         # set defaults values
-        self.query = self._set_defaults(query)
+        self.query = self._build_query(query)
 
         self.key_prefix = self._get_cache_key()
 
-    def _set_defaults(self, query):
+    def _build_query(self, query):
 
         # limpia los vacios
         new_query=[]
@@ -101,18 +101,17 @@ class EngineChartCommand(EngineCommand):
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
 
-    def _set_defaults(self, query):
+    def _build_query(self, query):
         new_query=[]
         for item in query:
-            if item[0] == 'pInvertData' and item[1] == "true":
+            # si alguno de estos 3 items tienen "true" lo transforma en "checked"
+            if item[0] in ('pInvertData','pInvertedAxis','pCorrelativeData') and item[1] == "true":
                 new_query.append( (item[0], "checked") )
-            elif item[0] == 'pInvertedAxis' and item[1] == "true":
-                new_query.append( (item[0], "checked") )
-            elif item[0] == 'pCorrelativeData' and item[1] == "true":
-                new_query.append( (item[0], "checked") )
+            # si alguno de estos 3 items tiene algo distinto que true, lo setea en ""
+            elif item[0] in ('pInvertData','pInvertedAxis','pCorrelativeData'):
+                new_query.append( (item[0], "") )
             elif item[0] == 'pPage' and item[1]:
                 new_query.append( item)
-
             elif item[0] == 'pLimit' and item[1]:
                 new_query.append(item)
 
