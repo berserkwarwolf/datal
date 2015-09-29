@@ -22,6 +22,17 @@
     }
 },
 {
+    "pk": 3562,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 529,
+        "created_at": "2012-06-04T14:13:06",
+        "role": 3,
+        "user": null,
+        "guest": null
+    }
+},
+    {
     "pk": 3561,
     "model": "core.grant",
     "fields": {
