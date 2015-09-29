@@ -10,7 +10,7 @@ class DatastreamPreviewForm(forms.Form):
     # pEndPoint: end poibnt del dataset relacionado al ds
     end_point = forms.CharField(required=True)
     # pImplType: Tipo de implementacion del dataset relacionado al datastream       
-    impl_type = forms.CharField(required=False)
+    impl_type = forms.CharField(required=True)
     # pImplDetails: XML con detales de implementacion del dataset relacionado al datastream
     impl_details = forms.CharField(required=True)
     # pDataSource: XML describiendo la estructura del dataset

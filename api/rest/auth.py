@@ -65,6 +65,9 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
 
     def resolve_account(self, request):
         domain = get_domain_by_request(request)
+
+        # creo que en algun punto desreferencia a Account
+        from core.models import Account
         try:
             return Account.objects.filter(
                 preference__key='account.api.domain', 
@@ -74,7 +77,6 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
             if domain.find(".api.dev") > -1:
                 dom = domain.split(".")[0]
                 if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
-                from core.models import Account
                 return Account.objects.get(pk=int(dom))
             else:
                 return None
