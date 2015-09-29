@@ -45,7 +45,7 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     # pLabelSelection
     labels = forms.CharField(required=False)
     # pNullValueAction: Nombre de la accion a realizar en caso de encontrar un valor vacio
-    nullValueAction = forms.CharField(required=True)
+    nullValueAction = forms.CharField(required=False)
     # pNullValuePreset: Valor a utilizar en caso que la accion sea preset
     nullValuePreset = forms.CharField(required=False)
     # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion

@@ -20,9 +20,14 @@ class EngineCommand(object):
     
     def __init__(self, query):
 
-        self.query = query
+        # set defaults values
+        self.query = self._set_defaults(query)
 
         self.key_prefix = self._get_cache_key()
+
+    def _set_defaults(self, query):
+        # metodo vacio, implementar en c/command
+        return query
 
     def _get_cache_key(self):
         params=str(hash(frozenset(sorted(self.query))))
@@ -37,6 +42,7 @@ class EngineCommand(object):
 
         try:
             params = urllib.urlencode(query)
+            
             self.logger.info("URL: %s Params: %s query: %s" %(url, params, query))
 
             try:
@@ -88,6 +94,39 @@ class EngineChartCommand(EngineCommand):
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
     method = 'POST'
+
+    def _set_defaults(self, query):
+
+        new_query=[]
+        for item in query:
+            if item[0] == 'pInvertData' and item[1] == "true":
+                new_query.append( ('pInvertData', "checked") )
+            # validar el caso contrario de "true"
+            elif item[0] == 'pInvertData':
+                new_query.append( ('pInvertData', "") )
+    
+            elif item[0] == 'pInvertedAxis' and item[1] == "true":
+                new_query.append( ('pInvertedAxis', "checked") )
+            elif item[0] == 'pInvertedAxis':
+                new_query.append( ('pInvertedAxis', "") )
+
+            elif item[0] == 'pPage' and item[1]:
+                new_query.append( item)
+
+            elif item[0] == 'pLimit' and item[1]:
+                new_query.append(item)
+
+            # param que si o si deben viajar, sean nulos o no
+            elif item[0] in ( 'pId', 'pType', 'pNullValueAction', 'pNullValuePreset', 'pData', 'pLabelSelection', 'pHeaderSelection'):
+                new_query.append(item)
+
+            # saliendo de los param que si o si deben viajar,
+            # ahora nos fijamos los param que tengan un valor 
+            elif item[1]:
+                new_query.append(item)
+                
+    
+        return new_query
 
 class EngineLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_LOADER_SERVLET
