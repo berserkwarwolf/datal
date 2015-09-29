@@ -26,8 +26,14 @@ class EngineCommand(object):
         self.key_prefix = self._get_cache_key()
 
     def _set_defaults(self, query):
-        # metodo vacio, implementar en c/command
-        return query
+
+        # limpia los vacios
+        new_query=[]
+        for item in query:
+            if item[1]:
+                new_query.append(item)
+        
+        return new_query
 
     def _get_cache_key(self):
         params=str(hash(frozenset(sorted(self.query))))
@@ -70,9 +76,9 @@ class EngineCommand(object):
                 response.close()
 
     def run(self):
-        result = cache.get(self.key_prefix)
-        if result:
-            return result
+        #result = cache.get(self.key_prefix)
+        #if result:
+        #    return result
 
         try:
             answer = self._request(self.query)
