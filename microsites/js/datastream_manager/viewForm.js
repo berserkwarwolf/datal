@@ -359,7 +359,7 @@ function onSuccessDataServiceExecute(pResponse){
 		$('.dataStreamContainer').addClass('flexibleGridTable');
 		
 		$('.tableDS').flexigrid({
-			url: '/rest/datastreams/' + $('#id_datastreamGrid').serializeArray()['datastream_id'] + '/data.json',
+			url: '/rest/datastreams/' + $('#id_datastreamGrid').serializeArray()['datastream_id'] + '/data.grid',
 			dataType : 'json',
 			colModel : lColumns,
 			autoload : false,
