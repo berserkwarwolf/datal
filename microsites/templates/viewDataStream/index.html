@@ -131,8 +131,8 @@ $(document).ready(function(){
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
-    exportCSVURL: "{% url 'datastreams-data' datastream.datastream_id 'csv' %}",
-    exportXLSURL: "{% url 'datastreams-data' datastream.datastream_id 'xls' %}",
+    exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",
+    exportXLSURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'xls' %}",
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 

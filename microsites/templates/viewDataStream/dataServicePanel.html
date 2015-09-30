@@ -135,8 +135,8 @@
                         <div class="menuInner">
                             <ul class="In">
                                 <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
-                                <li class="Item"><a href="{% url "datastreams-data" datastream.datastream_id 'csv' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
-                                <li class="Item"><a href="{% url "datastreams-data" datastream.datastream_id 'xls' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
+                                <li class="Item"><a href="{% url "datastreams-data" datastream.last_published_revision_id 'csv' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                <li class="Item"><a href="{% url "datastreams-data" datastream.last_published_revision_id 'xls' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
                                 <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
                                 <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
                                 
