@@ -173,14 +173,15 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             dataset__id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
-                 'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id')
+                 'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
+                 'datastream__last_published_revision')
 
         related['visualizations'] = VisualizationRevision.objects.select_related().filter(
             visualization__datastream__datastreamrevision__dataset__id=dataset_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
-                 'visualization__guid', 'visualization__id')
+                 'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
 
         return related
 
