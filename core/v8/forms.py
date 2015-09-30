@@ -20,6 +20,7 @@ class RequestForm(forms.Form):
 #    if_modified_since = forms.IntegerField(required=False)
 #    ttl = forms.IntegerField(required=False)
 
+
 class DatastreamRequestForm(RequestForm):
     tableid = forms.CharField(required=False)
     # pWhereExpr: Condicion logica para unit los filtros
