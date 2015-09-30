@@ -248,7 +248,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/rest/datastreams/' + dataStream.last_published_revision_id + '/data.grid',
+			url: '/rest/datastreams/' + dataStream.lastPublishRevisionId + '/data.grid',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
@@ -260,7 +260,8 @@ var dataTableView = Backbone.View.extend({
 			minheight: 400,
 			usepager: true,
 			useRp: true,
-			rp: 50,
+			page: self.model.get('page') + 1,
+			rp: self.model.get('rows'),
 			singleSelect: true,
 			resizable: true,
 			total: result.fLength,
