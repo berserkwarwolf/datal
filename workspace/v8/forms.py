@@ -12,7 +12,7 @@ class DatastreamPreviewForm(forms.Form):
     # pImplType: Tipo de implementacion del dataset relacionado al datastream       
     impl_type = forms.CharField(required=True)
     # pImplDetails: XML con detales de implementacion del dataset relacionado al datastream
-    impl_details = forms.CharField(required=True)
+    impl_details = forms.CharField(required=False)
     # pDataSource: XML describiendo la estructura del dataset
     datasource = forms.CharField(required=True)
     # pSelectStatement: XML con la sentencia SQL para scrapear los datos desde la fuente
