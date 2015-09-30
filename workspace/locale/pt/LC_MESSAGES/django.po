@@ -3167,16 +3167,16 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graph"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "1. Which are the data intervals?"
+msgstr "Which are the data intervals?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "2. Tags (X axis)"
+msgstr "Tags (X axis)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
 msgstr "Categories to compare"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "3. Header/s"
+msgstr "Header/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
 msgstr "You can compare data from various categories in parallel. They shall be specified in the referencais or legends."
