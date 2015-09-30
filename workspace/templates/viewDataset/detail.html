@@ -36,7 +36,7 @@
 												<span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ datastream_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}</span>
 											</td>
 											<td><i class="icon-resources icon-dataview">{% trans "APP-DATASTREAM-TEXT" %}</i></td>
-											<td><i class="user-thumbnail"></i>{{ datastream_revision.datastream__user__nick }}</td>
+											<td><i class="user-thumbnail"></i>{{ datastream_revision.datastream__user__name }}</td>
 											<td>{{ datastream_revision.status|status_str }}</td>
 										</tr>
 									{% endif %}
@@ -52,7 +52,7 @@
 												<span class="date">{% trans 'DATASET-TABLE-HEADER-MODIFIED' %}: {{ visualizations_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}</span>
 											</td>
 											<td><i class="icon-resources icon-visualization">{% trans "APP-VISUALIZATION-TEXT" %}</i></td>
-											<td><i class="user-thumbnail"></i>{{ visualizations_revision.visualization__user__nick }}</td>
+											<td><i class="user-thumbnail"></i>{{ visualizations_revision.visualization__user__name }}</td>
 											<td>{{ visualizations_revision.status|status_str }}</td>
 										</tr>
 									{% endif %}

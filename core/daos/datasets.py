@@ -143,7 +143,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         total_resources = query.count()
 
-        query = query.values('filename', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
+        query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
                              'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
                              'dataseti18n__title', 'dataseti18n__description', 'created_at', 'modified_at', 'size', 'end_point',
                              'dataset__user__id', 'dataset__last_revision_id')
@@ -172,7 +172,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         related['datastreams'] = DataStreamRevision.objects.select_related().filter(
             dataset__id=dataset_id,
             datastreami18n__language=language
-        ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__nick',
+        ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
 
@@ -180,7 +180,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             visualization__datastream__datastreamrevision__dataset__id=dataset_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
-                 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
+                 'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
 
         return related

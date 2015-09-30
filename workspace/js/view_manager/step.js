@@ -1286,7 +1286,7 @@ var Step3 = Step.extend({
         var category = step2.attributes.$Category.val();
         lHtml += '</span>';
         lHtml +=    '<span class="infoDS">' +
-                            '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.nick+'</strong></span> <span class="dateDS"> 0' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
+                            '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.name+'</strong></span> <span class="dateDS"> 0' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
                     '</span>' +
                 '</span>' +
             '</h2>';
@@ -1428,7 +1428,7 @@ var Step3 = Step.extend({
         var category = step2.attributes.$Category.val();
             lHtml +=   '</span>';
             lHtml +=        '<span class="infoDS">' +
-                                        '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.nick+'</strong></span> <span class="dateDS">0 ' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
+                                        '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.name+'</strong></span> <span class="dateDS">0 ' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
                                     '</span>' +
                                 '</span>' +
                             '</h2>';
