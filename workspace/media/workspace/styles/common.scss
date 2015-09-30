@@ -635,11 +635,20 @@ i.icon.TNCLIMA{}
 border-color: #ccc;}
 
 /* Tabs */
-.ao-tabs{padding:0 10px;background:none;border:0;}
-.ao-tabs .tabsList .tab.tab-selected div a, 
-.ao-tabs .tabsList .tab.tab-selected:hover div a{color:$font-color-semi-light;font-weight:normal;}
-.ao-tabs .tabs-in ul{display:block;box-shadow:0 -1px 0 #e4e4e4 inset;padding-left:20px;}
-.ao-tabs .tabs-in li{position:relative;}
+.tab-nav{  
+  box-shadow:0 -1px 0 #e4e4e4 inset;width:100%;float:left;
+
+  ul{     
+    padding:0 10px;
+
+    li{ 
+      margin-right:-1px;float:left; 
+ 
+      a{color:$font-color-light;padding:8px;display:block;text-transform:uppercase;border:1px solid #e4e4e4;}
+      a.active{color:$font-color-base;border-bottom:1px solid #fff;}
+    } 
+  }
+}                             
 
 /* Rich text editor */
 .nicEdit-main{
