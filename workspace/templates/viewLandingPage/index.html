@@ -15,8 +15,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %}, {{auth_manager.nick}}</h1>
-
+		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %}, {{auth_manager.name}}</h1>
 	</div>
 
 	<!-- Column Right -->
@@ -71,11 +70,7 @@
 									<div class="col-xs-9">
 										<p>
 											
-											{% if activity.user_name %}
-												{{activity.user_name}}
-											{% else %}
-												{{activity.user_nick}}
-											{% endif %}
+											{{activity.user_name}}
 											
 											{% get_activity_type activity.action_id as the_activity %}
 											
