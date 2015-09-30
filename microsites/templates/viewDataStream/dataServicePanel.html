@@ -157,7 +157,7 @@
           $datastream.data("dataservice_parameters", "{% for parameter in datastream.parameters %}{% if not forloop.first %}, {% endif %}{{parameter.name}}{%endfor%}");
           $datastream.data("datasource_end_point", "{{datastream.end_point|escapejs}}");
           $datastream.data("dataservice_title", "{{datastream.title}}");
-          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url "datastream_manager.embed" datastream.guid %}?header_row=0&fixed_column=0{%if parameters_query%}&{{parameters_query}}{%endif%}");
+          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url 'viewDataStream.embed' datastream.guid %}?header_row=0&fixed_column=0{%if parameters_query%}&{{parameters_query}}{%endif%}");
           $datastream.data("permalink", "{{base_uri}}{{ datastream.permalink }}{%if parameters_query%}?{{parameters_query}}{%endif%}");
           $datastream.data("guid", "{{datastream.guid}}");
           $datastream.data("datastreamrevision_id", "{{datastream.datastreamrevision_id}}");
