@@ -644,7 +644,10 @@ border-color: #ccc;}
     li{ 
       margin-right:-1px;float:left; 
  
-      a{color:$font-color-light;padding:8px;display:block;text-transform:uppercase;border:1px solid #e4e4e4;}
+      a{
+        color:$font-color-light;padding:8px;display:block;text-transform:uppercase;border:1px solid #e4e4e4;
+        &:hover{color:$font-color-base;}                  
+      }
       a.active{color:$font-color-base;border-bottom:1px solid #fff;}
     } 
   }
