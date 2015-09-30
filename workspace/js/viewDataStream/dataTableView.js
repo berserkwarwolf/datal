@@ -260,7 +260,7 @@ var dataTableView = Backbone.View.extend({
 			minheight: 400,
 			usepager: true,
 			useRp: true,
-			page: self.model.get('page') + 1,
+			page: self.model.get('page'),
 			rp: self.model.get('rows'),
 			singleSelect: true,
 			resizable: true,
