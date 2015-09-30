@@ -305,8 +305,12 @@ var dataTableView = Backbone.View.extend({
 
 			},
 			onSuccess: function(result){
+			    console.log('OK');
+			    console.log(result);
 			},
 			onError: function(result){				
+    			console.log('ERROR');
+    			console.log(result);
 			}
 		});
 	
