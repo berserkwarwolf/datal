@@ -17,7 +17,7 @@
 					{% if dataset.collect_type == 0 %}
 
 						<span class="sourceName">
-							{{dataset.filename}} <span class="size">({{ dataset.size }})</span>
+							{{dataset.filename}} <span class="size">({% widthratio dataset.size 1024 1 %} KB)</span>
 						</span>
 
 						<a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="link" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
