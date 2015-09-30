@@ -11,6 +11,7 @@ class CommandFactory(object):
     """Factory de comandos"""
 
     CONV_DICT={
+        "rp": "pLimit",
         "page": "pPage",
         "limit": "pLimit",
         "id": "pId",

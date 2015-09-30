@@ -21,11 +21,6 @@ class EngineViewSetMixin(object):
             mutable_get['revision_id'] = resource[self.dao_pk]
         items = dict(mutable_get.items())
 
-        # flexigrid uses RP (results per page), no LIMIT
-        if items.get('rp', None) and not items.get('limit', None):
-            items['limit'] = items['rp']
-            del items['rp']
-            
         if settings.DEBUG: logger.info('Engine_CALL %s %s' % (str(items), engine_method))
         
         formset=formset_factory(form_class, formset=RequestFormSet)
