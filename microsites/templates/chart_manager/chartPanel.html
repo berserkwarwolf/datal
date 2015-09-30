@@ -132,7 +132,7 @@
                         <div class="menuInner">
                             <ul class="In">
                                 <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
-                                <li class="Item"><a href="{% url "datastream_manager.csv" visualization_revision.datastream_id visualization_revision.slug %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                <li class="Item"><a href="{% url "datastreams-data" visualization_revision.datastream_id 'csv' %}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
                                 <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
                                 
                             </ul>
