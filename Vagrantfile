@@ -4,7 +4,13 @@
 Vagrant.configure(2) do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
+  
+  # Maquina Virtual Ubuntu Trusty
   config.vm.box = "ubuntu/trusty64"
+  
+  # Maquina Virtual Debian 8.2
+  # config.vm.box = "boxcutter/debian82"
+
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]

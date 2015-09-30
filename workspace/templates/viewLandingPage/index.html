@@ -15,8 +15,7 @@
 	<!-- Column Left -->
 	<div class="col-xs-7">    
 		
-		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %}, {{auth_manager.nick}}</h1>
-
+		<h1>{% trans "LANDINGPAGE-SECTION-TITLE" %}, {{auth_manager.name}}</h1>
 	</div>
 
 	<!-- Column Right -->
@@ -64,28 +63,30 @@
 					</header>
 
 					<div class="box-content">
+
 						{% for activity in account_activities %}
 							<article class="clearfix">
 								<div class="row">
 									<div class="col-xs-9">
 										<p>
-										{{activity.user_nick}}
-										{% get_activity_type activity.action_id as the_activity %}
-										{{the_activity}}
+											
+											{{activity.user_name}}
+											
+											{% get_activity_type activity.action_id as the_activity %}
+											
+											{{the_activity}}
+											
+											{# 1 == DELETE -> No tiene link #}
+											{% if activity.action_id != 1 %}
+												<a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
+														<span>{{activity.title}}</span>
+												</a>
+											{% else %}
+												<span class="noLink">{{activity.title}}</span>
+											{% endif%}
 
-{% if activity.resource_link %}
-    <a class="resource" href="{{activity.resource_link}}" title="{{activity.title}}">
-        <span>{{activity.title}}</span>
-    </a>
-
-{% else %}
-
-    <span class="noLink">{{activity.title}}</span>
-
-{% endif%}
-
-{# las VZ todavia no tienen categorias #}
-{% if activity.category %} | {{activity.category}} {% endif %}
+											{# las VZ todavia no tienen categorias #}
+											{% if activity.category %} <span class="sep">|</span> <span class="category">{{activity.category}}</span> {% endif %}
 
 										</p>
 									</div>
@@ -100,7 +101,7 @@
 
 				{% else %}
 
-                <div class="row center">
+								<div class="row center">
 					<div class="col-xs-4">
 						<div class="step1">
 							<div class="arrowRight"></div>

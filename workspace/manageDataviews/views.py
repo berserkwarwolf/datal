@@ -40,7 +40,7 @@ def action_view(request, revision_id):
     credentials = request.auth_manager
     categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
     status_options = credentials.get_allowed_actions()
-    
+
     return render_to_response('viewDataStream/index.html', locals())
 
 
@@ -109,7 +109,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['dataset__last_revision__id']})
 
-    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources, 'total_entries': total_entries}
     response = DatastreamList().render(data)
     
     return JSONHttpResponse(response)

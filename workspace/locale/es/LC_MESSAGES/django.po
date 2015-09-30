@@ -2275,13 +2275,13 @@ msgid "LANDINGPAGE-ACTIVITY-TIME"
 msgstr "Modificación"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
-msgstr "ha creado"
+msgstr "creó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
-msgstr "ha editado"
+msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "ha borrado"
+msgstr "borró"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -2674,10 +2674,10 @@ msgid "APP-EDIT-DATAVIEW-TEXT"
 msgstr "Editar Vista de Datos"
 
 msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
-msgstr "ha publicado"
+msgstr "publicó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
-msgstr "ha despublicado"
+msgstr "despublicó"
 
 msgid "ACCOUNT-DOMAIN-TIP-1"
 msgstr "Este dominio no debe comenzar con &quot;api&quot;."
@@ -3157,16 +3157,16 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graficar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "1. ¿Cuáles son los intervalos con datos?"
+msgstr "¿Cuáles son los intervalos con datos?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "2. Etiquetas (Eje X)"
+msgstr "Etiquetas (Eje X)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
 msgstr "Las categorías a comparar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "3. Encabezado/s"
+msgstr "Encabezado/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
 msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
@@ -3233,3 +3233,15 @@ msgstr "Frecuencia de actualización"
 
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "¿En que región aplican estos datos?"
+
+msgid "APP-PARAMETERS-TEXT"
+msgstr "Parámetros"
+
+msgid "LANDINGPAGE-ACTIVITY-HASREJECTED"
+msgstr "rechazó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASACCEPTED"
+msgstr "aceptó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
+msgstr "envió a revisión"
