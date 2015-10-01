@@ -2294,7 +2294,7 @@ msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
 msgstr "edited"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "deleted"
+msgstr "deleted revision of"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Today"
