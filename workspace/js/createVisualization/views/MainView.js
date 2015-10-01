@@ -77,22 +77,10 @@ var MainView = Backbone.View.extend({
           el: this.$('.step-1-view-map')
         }).init();
 
-       /* var mapMetadataView = new MapMetadataView({
-          name: gettext('APP-VIZ-METADATA-TEXT'), 
-          model: this.model,
-          el: this.$('.step-2-view-map')
-        }).init();*/
-
-        var mapFinishView = new MapFinishView({
-          name: gettext('APP-VIZ-FINISH-TEXT'),
-          model: this.model,
-          el: this.$('.step-3-view-map')
-        }).init();
-
         //Register maps views
         this.register( mapView, 'maps'  );
         this.register( metadataView, 'maps'  );
-        this.register( mapFinishView, 'maps'  );
+        this.register( finishView, 'maps'  );
 
         this.start();
 
