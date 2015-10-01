@@ -3240,3 +3240,6 @@ msgstr "accepted"
 
 msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
 msgstr "sent to review"
+
+msgid "APP-RELATED-RESOURCES-TEXT"
+msgstr "Related resources"

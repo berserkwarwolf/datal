@@ -3224,3 +3224,6 @@ msgstr "aceptó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
 msgstr "envió a revisión"
+
+msgid "APP-RELATED-RESOURCES-TEXT"
+msgstr "Recursos asociados"
