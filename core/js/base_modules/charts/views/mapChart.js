@@ -208,9 +208,9 @@ charts.views.MapChart = charts.views.Chart.extend({
 
     /**
      * Get the boundaries of the current map
-     * @param  {HTMLelement} div Container of the map
      */
-    handleBoundChanges: function(div){
+    handleBoundChanges: function(){
+
         var center = this.mapInstance.getCenter(),
             bounds = this.mapInstance.getBounds(),
             zoom = this.mapInstance.getZoom();
