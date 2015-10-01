@@ -1,42 +1,42 @@
 {% load i18n %}
-<div class="col-xs-12">
-            <nav class="tab-nav" role="tablist">
-        <ul>
-            <li>
+<div class="ao-tabs col-xs-12">
+    <div class="tabs-in relative">
+        <ul class="tabsList clearfix">
+            <li class="tab{% if account_info %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_info' %}" class="{% if account_info %}active{% endif %}">{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</a>
+                    <a href="{% url 'admin_manager.action_info' %}">{% trans "ACCOUNT-ACCOUNTINFORMATION-TEXT" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if users %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_users' %}" class="{% if users %}active{% endif %}">{% trans "ACCOUNT-USERS-TAB" %}</a>
+                    <a href="{% url 'admin_manager.action_users' %}">{% trans "ACCOUNT-USERS-TAB" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if branding %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_branding' %}" class="{% if branding %}active{% endif %}">{% trans "APP-BRANDING-TEXT" %}</a>
+                    <a href="{% url 'admin_manager.action_branding' %}">{% trans "APP-BRANDING-TEXT" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if social %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_social' %}" class="{% if social %}active{% endif %}">{% trans "APP-SOCIAL-TEXT" %}</a>
+                    <a href="{% url 'admin_manager.action_social' %}">{% trans "APP-SOCIAL-TEXT" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if default_domain %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_domain' %}" class="{% if default_domain %}active{% endif %}">{% trans "ACCOUNT-DOMAINSETTINGS-TAB" %}</a>
+                    <a href="{% url 'admin_manager.action_domain' %}">{% trans "ACCOUNT-DOMAINSETTINGS-TAB" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if categories %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_categories' %}" class="{% if categories %}active{% endif %}">{% trans "ACCOUNT-CATEGORIES-TAB" %}</a>
+                    <a href="{% url 'admin_manager.action_categories' %}">{% trans "ACCOUNT-CATEGORIES-TAB" %}</a>
                 </div>
             </li>
-            <li>
+            <li class="tab{% if home_tab %} tab-selected{% endif %}">
                 <div class="clearfix">
-                    <a href="{% url 'admin_manager.action_home' %}" class="{% if home_tab %}active{% endif %}">{% trans "ACCOUNT-HOME-TAB" %}</a>
+                    <a href="{% url 'admin_manager.action_home' %}">{% trans "ACCOUNT-HOME-TAB" %}</a>
                 </div>
             </li>
         </ul>
-</nav>
+    </div>
 </div>

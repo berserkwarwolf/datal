@@ -30,9 +30,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
-
-		console.log(this.model.toJSON());
-
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
 		return this;
 	},

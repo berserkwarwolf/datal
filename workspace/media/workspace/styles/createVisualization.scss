@@ -11,7 +11,7 @@
         width:310px;border-right:1px solid $color-base-extra-light;min-height:500px;
 
           /* Items */
-          li{font-family:$font-titles-family, sans-serif;font-weight:300;font-size:$font-size-l;padding:30px 10px;cursor:pointer;color:$font-color-semi-light;border-bottom:1px solid $color-base-extra-light;}
+          li{font-family:$font-titles-family, sans-serif;font-weight:300;font-size:$font-size-l;padding:30px 10px;cursor:pointer;color:$font-color-semi-light;border-bottom:1px solid $color-base-extra-light;background-image:none;}
           li:hover{background:$color-base-extra-light;}
           li.active{background:#8fceea;color:$font-color-base;}
 
@@ -28,7 +28,7 @@
 
           /* Items */
           li{
-            font-size:$font-size-l;color:$accent-color;float:left;padding:20px 30px;float:left;width:100%;
+            font-size:$font-size-l;color:$accent-color;float:left;padding:20px 30px;float:left;width:100%;background-image:none;
 
               h4{line-height:1.6;}
 
