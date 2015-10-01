@@ -31,6 +31,9 @@ var MapView = StepViewSPA.extend({
         });
         this.modalView.on('open', function () {
             this.model.set('select_data',true);
+            if(this.dataTableView){
+                this.dataTableView.render();
+            }
         });
 
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
@@ -91,10 +94,10 @@ var MapView = StepViewSPA.extend({
     },
 
     onClickZoom: function (event) {
+        event.preventDefault();
         var $target = $(event.currentTarget),
             increment = $target.data('zoom'),
             currentZoom = this.chartInstance.mapInstance.getZoom();
-        event.preventDefault();
         this.chartInstance.mapInstance.setZoom(currentZoom + increment);
     },
 

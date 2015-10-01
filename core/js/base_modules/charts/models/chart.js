@@ -341,7 +341,7 @@ charts.models.Chart = Backbone.Model.extend({
             if (this.get('isMap')) {
 
                 console.log('validate de la data para mapa');
-                valid = (this.data.get('fields').length >0);
+                // valid = (this.data.get('fields').length >0);
 
             } else {
     

@@ -25,12 +25,12 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-        this.chartSelectDataModalView = new ChartSelectDataModalView({
+        this.modalView = new ChartSelectDataModalView({
           el: '#ChartSelectDataModal',
           model: this.model,
           dataStreamModel: options.dataStreamModel
         });
-        this.chartSelectDataModalView.on('open', function () {
+        this.modalView.on('open', function () {
         	this.model.set('select_data',true);
         	if(this.dataTableView){
         		this.dataTableView.render();
@@ -84,7 +84,7 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
+		this.listenTo(this.modalView, 'close', this.onCloseModal, this);
 
 		this.nextBtn.addClass('disabled');
 
@@ -135,12 +135,12 @@ var ChartView = StepViewSPA.extend({
 
 	onChartContentClicked: function(){
 		if(!this.chartInstance || !this.chartInstance.chart){
-			this.chartSelectDataModalView.open();
+			this.modalView.open();
 		}
 	},
 
 	onSelectDataClicked: function(){
-		this.chartSelectDataModalView.open();
+		this.modalView.open();
 	},
 
 	onChartTypeClicked: function(e){
