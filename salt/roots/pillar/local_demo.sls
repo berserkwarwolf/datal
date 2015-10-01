@@ -1,27 +1,14 @@
-email:
-    host: ''
-    port: ''
-    user: ''
-    password: ''
-    tls: True
+system:
+  user: datal
+  group: datal
+  home: /home/datal
+  user_password: datal
+  user_password_hash: $6$Bf0FZDFR$MfmKpg9cV52NEHXHdo1q/45ZqN9no4eTv92PBmr1EJffOPSsCOTTP5gvBosiM78xSx0cswngP2OmfJl27Myy01
 
-social:
-  twitter_profile_url: ''
-  facebook_profile_url: ''
+application:
+  path: /home/datal/app
+  statics_dir: /home/datal/static
 
-mail_list:
-  list_company: ''
-  list_description: ''
-  list_unsubscribe: ''
-  list_update_profile: ''
-  welcome_template_es: ''
-  welcome_template_en: ''
-  mailchimp:
-    uri: ''
-    api_key: ''
-    lists:
-      workspace_users_list:
-        es_id: ''
-        en_id: ''
-  mandrill:
-    api_key: ''
+virtualenv:
+  path: /home/datal/env
+  requirements: /home/datal/app/requirements.txt
