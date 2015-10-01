@@ -338,28 +338,38 @@ charts.models.Chart = Backbone.Model.extend({
         //Si alguna vez intentó seleccionar algo de data
         if(this.get('select_data')){
 
-            //General validation
-            var lFields = this.data.get('fields').length;
+            if (this.get('isMap')) {
 
-            var check = _.reduce(this.data.get('rows'), 
-                function(memo, ar){
-                 return (ar.length==lFields)?memo:memo + 1; 
-                }, 0);
+                console.log('validate de la data para mapa');
+                valid = (this.data.get('fields').length >0);
 
-            if (check!=0){
-                this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
-                valid = false;
-            }
+            } else {
+    
+                //General validation
+                var lFields = this.data.get('fields').length;
 
-            if(valid){
-                //TODO specific validation for chart type
-                switch(this.get('type')){
-                    case 'piechart':
-                        console.log('is pie chart');
-                        //validar que no haya números negativos en la primer serie que se usa para el pie
-                    break;
+                var check = _.reduce(this.data.get('rows'), 
+                    function(memo, ar){
+                     return (ar.length==lFields)?memo:memo + 1; 
+                    }, 0);
+
+                if (check!=0){
+                    this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
+                    valid = false;
                 }
+
+                if(valid){
+                    //TODO specific validation for chart type
+                    switch(this.get('type')){
+                        case 'piechart':
+                            console.log('is pie chart');
+                            //validar que no haya números negativos en la primer serie que se usa para el pie
+                        break;
+                    }
+                }
+                
             }
+
 
 
         }

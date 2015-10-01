@@ -36,6 +36,11 @@ var MapView = StepViewSPA.extend({
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
         // Event binding
         this.listenTo(this.model, 'change:mapType', this.onChartChanged, this);
+
+        this.nextBtn.addClass('disabled');
+        
+        this.setupChart();
+
     }, 
 
     fetchPreviewData: function(){
@@ -67,8 +72,8 @@ var MapView = StepViewSPA.extend({
     },
 
     onChartChanged: function(){
-        if(this.model.get('isMap') && this.model.get('select_data')){
-            if(this.selectDataBtn.hasClass('icon-add')){
+        if(this.model.get('isMap') && this.model.get('select_data') ){
+             if(this.selectDataBtn.hasClass('icon-add')){
                 this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');       
                 this.vizContent.addClass('dataSelected');
             }
@@ -165,7 +170,13 @@ var MapView = StepViewSPA.extend({
             lib: 'google',
             type: 'mapchart'
         });
-    }
+    },
+
+    finish: function(){
+        this.constructor.__super__.finish.apply(this);
+
+        this.destroyChartInstance();
+    },
 
 
 });

@@ -13,7 +13,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     styles: {},
     initialize: function(){
         this.bindEvents();
-        this.createCoogleMapInstance();
+        this.createGoogleMapInstance();
     },
 
     render: function () {
@@ -58,7 +58,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     /**
      * Creates a new map google map instance
      */
-    createCoogleMapInstance: function () {
+    createGoogleMapInstance: function () {
         this.mapInstance = new google.maps.Map(this.el, {
             zoom: this.model.get('options').zoom,
             center: new google.maps.LatLng(this.model.get('options').center.lat,
