@@ -31,37 +31,25 @@
 {% endblock %}
 
 {% block content %}
-  <div class="detail hash-tabs" id="id_viewDataset">
+  <div class="detail col-xs-12" id="id_viewDataset">
 
-    <article class="tab-container">
-      <div class="col-xs-12">
-            <nav class="tab-nav" role="tablist">
-              <ul>        
-              <li>
-                      <a href="#description" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#description" tab-index="0">{% trans 'APP-DESCRIPTION-TEXT' %}</a>
-              </li>
-              {% if dataset.datastreams or dataset.visualizations %}
-              <li>
-                      <a href="#related-resources" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#related-resources" tab-index="-1">{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
-              </li>
-              </ul>
-              {% endif %}
-            </nav>
-          </div>
+    <div class="wrapper1">
+      <div class="wrapper2 clearfix">
+        <div class="wrapper3">
 
-      <div class="resource-detail">
-        <div class="tab-pane-container">
-        
-          {% include "viewDataset/description.html" %}
+          <!-- Sidebar -->
+          <section class="sidebar-container">
+            {% include "viewDataset/sidebar.html" %}
+          </section>
 
-          {% if dataset.datastreams or dataset.visualizations %}
-            {% include "viewDataset/related_resources.html" %}
-          {% endif %}
+          <!-- Detail -->
+          <section class="detail-container">
+            {% include "viewDataset/detail.html" %}
+          </section>
 
         </div>
       </div>
-
-    </article>
+    </div>
   </div>
 
   {% include "viewDataset/templates.html" %}
@@ -69,7 +57,6 @@
 {% endblock %}
 
 {% block bottom_js %}
-<script type="text/javascript" src="/js_core/plugins/jquery.hash-tabs.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var Dataset = new DatasetModel({

@@ -1,6 +1,6 @@
 nginx:
   ng:
-    install_from_ppa: True
+    install_from_ppa: False
     ppa_version: 'stable'
 
     lookup:

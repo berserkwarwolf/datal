@@ -1,7 +1,1 @@
-var ManageDatasetsModel = Backbone.Model.extend({
-
-   defaults: {
-    total_entries: 0
-   }
-
-});
+var ManageDatasetsModel = Backbone.Model.extend({});

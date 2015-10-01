@@ -20,8 +20,8 @@ class CommandFactory(object):
         "orderBy": "pOrderBy",
         "output": "pOutput",
         'data':'pData',
-        'headerSelection':'pHeaderSelection',
-        'labelSelection':'pLabelSelection',
+        'headers':'pHeaderSelection',
+        'labels':'pLabelSelection',
         'type':'pType',
         'invertData':'pInvertData',
         'invertedAxis':'pInvertedAxis',
@@ -52,7 +52,6 @@ class CommandFactory(object):
        
         new=[]
         for item in filters:
-            print item
             if item[0] in self.CONV_DICT:
                 new.append( (self.CONV_DICT[item[0]], item[1]) )
             elif item[0].startswith('pFilter'):
@@ -63,7 +62,6 @@ class CommandFactory(object):
                 num = key[-1:]
                 filters['pUniqueBy%s' % num] = item[1]
                 # <<<<<
-
                 new.append( ('pUniqueBy%s' % num, item[1]) )
             else:
                 new.append(item)
@@ -94,13 +92,16 @@ class CommandFactory(object):
     def _process_items(self, items):
         post_query=[]
         for item in items:
-            if "argument" in item.keys():
-                post_query.append((item['argument'],item['value'].encode('utf-8')))
+            # buscamos que sea un tipo de argumento (ej.: pArgument o filter)
+            if "name" in item.keys():
+                post_query.append((item['name'],item['value'].encode('utf-8')))
             else:
                 for i in item.keys():
                     # filtra los parametros vacios
                     if item[i]:
                         post_query.append((i, item[i]))
+                    else:
+                        post_query.append((i, ""))
     
 
         return self._fix_params(post_query)

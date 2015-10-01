@@ -480,12 +480,6 @@ msgstr "Exportar a XLS / XLSx"
 msgid "VIEWDS-EXPORT-GS"
 msgstr "Usar en Google Spreadsheet"
 
-msgid "APP-PARAM-TEXT"
-msgstr "Editar Argumentos"
-
-msgid "OVERLAY-PARAM-TIP"
-msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
-
 msgid "VIEWDS-NOTES-TITLE"
 msgstr "Notas"
 

@@ -16,4 +16,5 @@ urlpatterns = patterns(
     url(r'^related_resources$', related_resources, name='manageVisualizations.related_resources'),
     url(r'^edit$', edit, name='manageVisualizations.edit'),
     url(r'^edit/(?P<revision_id>\d+)$', edit, name='manageVisualizations.edit'),
+    url(r'^filters.json$', get_filters_json, name='manageVisualizations.get_filters'),
 )
