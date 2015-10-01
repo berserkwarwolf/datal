@@ -104,7 +104,6 @@ class EnginePreviewChartCommand(EngineCommand):
     def _build_query(self, query):
         new_query=[]
         for item in query:
-            # este còdigo me parte el alma!! mativs
             # si alguno de estos 3 items tienen "true" lo transforma en "checked"
             if item[0] in ('pInvertData','pInvertedAxis','pCorrelativeData') and item[1] == "true":
                 new_query.append( (item[0], "checked") )
@@ -119,10 +118,6 @@ class EnginePreviewChartCommand(EngineCommand):
             # param que si o si deben viajar, sean nulos o no
             elif item[0] in ( 'pNullValueAction', 'pNullValuePreset', 'pLabelSelection', 'pHeaderSelection', 'pTraceSelection'):
                 new_query.append(item)
-
-            # si el pType viene vacio le pongo mapchart
-            elif item[0] == 'pType' and item[1] == "":
-                new_query.append((item[0], 'mapchart'))
 
             # saliendo de los param que si o si deben viajar,
             # ahora nos fijamos los param que tengan un valor 

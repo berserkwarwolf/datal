@@ -2281,7 +2281,7 @@ msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
 msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "borró"
+msgstr "borró revisión de"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -3224,3 +3224,6 @@ msgstr "aceptó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
 msgstr "envió a revisión"
+
+msgid "APP-RELATED-RESOURCES-TEXT"
+msgstr "Recursos asociados"
