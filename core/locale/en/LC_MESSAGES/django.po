@@ -977,3 +977,6 @@ msgstr "Change the values of the arguments in order to interact with the differe
 
 msgid "OVERLAY-DSEMBED-CHART-TITLE"
 msgstr "Add this Visualization everywhere!"
+
+msgid "OVERLAY-DSEMBED-CHART-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"

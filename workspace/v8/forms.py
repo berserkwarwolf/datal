@@ -31,11 +31,18 @@ class VisualizationRequestForm(RequestForm):
     zoom = forms.IntegerField(required=False)
     # pWhereExpr: Condicion logica para unit los filtros
     whereExpr= forms.CharField(required=False)
-
-
-class VisualizationPreviewForm(VisualizationRequestForm):
+    # pNullValueAction: Nombre de la accion a realizar en caso de encontrar un valor vacio
+    nullValueAction = forms.CharField(required=False)
+    # pNullValuePreset: Valor a utilizar en caso que la accion sea preset
+    nullValuePreset = forms.CharField(required=False)
+    # pType
+    type = forms.ChoiceField(required=False, choices=VISUALIZATION_TYPES)
+    # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion
+    headers = forms.CharField(required=False)
     # pData: Rango para la seleccion de la serie de datos de la visualizacion
     data = forms.CharField(required=True)
+
+class VisualizationPreviewForm(VisualizationRequestForm):
     # pType
     type = forms.ChoiceField(required=True, choices=VISUALIZATION_TYPES)
     # pInvertData
@@ -44,14 +51,9 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     invertedAxis = forms.CharField(required=False)
     # pLabelSelection
     labels = forms.CharField(required=False)
-    # pNullValueAction: Nombre de la accion a realizar en caso de encontrar un valor vacio
-    nullValueAction = forms.CharField(required=False)
-    # pNullValuePreset: Valor a utilizar en caso que la accion sea preset
-    nullValuePreset = forms.CharField(required=False)
-    # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion
-    headers = forms.CharField(required=False)
     
-class VisualizationPreviewMapForm(VisualizationRequestForm):
+    
+class VisualizationPreviewMapForm(VisualizationPreviewForm):
     # pLatitudSelection:  Rango para la seleccion de las latitudes de los puntos del mapa
     lat = forms.CharField(required=True)
     # pLongitudSelection Rango para la seleccion de las longitudes de los puntos del mapa
