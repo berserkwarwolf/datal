@@ -175,12 +175,12 @@ charts.models.Chart = Backbone.Model.extend({
         var self = this;
 
         var params = {
-                nullValueAction: self.get('nullValueAction'),
-                nullValuePreset:  self.get('nullValuePreset'),
-                data: self.get('range_data'),
-                lat: self.get('range_lat'),
-                lon: self.get('range_lon'),
-                revision_id: self.get('datastream_revision_id')
+                nullValueAction: this.get('nullValueAction'),
+                nullValuePreset:  this.get('nullValuePreset'),
+                data: this.serializeServerExcelRange(this.get('range_data')),
+                lat: this.serializeServerExcelRange(this.get('range_lat')),
+                lon: this.serializeServerExcelRange(this.get('range_lon')),
+                revision_id: this.get('datastream_revision_id')
             },
             url = '/rest/maps/sample.json';
 
