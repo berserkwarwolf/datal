@@ -13,6 +13,7 @@ Instalacion de Datal en equipo (Debian - Ubuntu)
 9. curl -L https://bootstrap.saltstack.com | bash /dev/stdin
 10. Reemplazar el /etc/salt/minion con
 
+    ```
     file_client: local
     
     file_roots:
@@ -25,6 +26,7 @@ Instalacion de Datal en equipo (Debian - Ubuntu)
     pillar_roots:
       base:
         - /home/vagrant/app/salt/roots/pillar
+    ```
 
 11. Reiniciar el servicio salt-minion
 12. Ejecutar el provision: salt-call state.highstate
