@@ -2398,12 +2398,6 @@ msgstr "Error on deleteing the dataset revision."
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "The datastream and the associated resources have been deleted."
 
-msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
-msgstr "Error on deleting the datastream and the associated resources."
-
-msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
-msgstr "Error on deleting the visualization and the associated resources."
-
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
 msgstr "The datastream revision has been deleted."
 

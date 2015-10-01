@@ -20,7 +20,7 @@ charts.models.Chart = Backbone.Model.extend({
         select_data: false,
 
         //validation
-        message: gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"),
+        message: '',
 
         //metadata
         meta_title: undefined,
@@ -72,6 +72,11 @@ charts.models.Chart = Backbone.Model.extend({
 
     },
     initialize: function () {
+        //Se inicializa acá para prevenir error en embed
+        if(window.gettext){
+            this.set('message',gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"));
+        }
+
         this.data = new charts.models.ChartData({
             id: this.get('resourceID'),
             type: this.get('type')

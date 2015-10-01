@@ -20,6 +20,7 @@ class RequestForm(forms.Form):
     if_modified_since = forms.IntegerField(required=False)
     ttl = forms.IntegerField(required=False)
 
+
 class DatastreamRequestForm(RequestForm):
     tableid = forms.CharField(required=False)
     # pWhereExpr: Condicion logica para unit los filtros
@@ -29,6 +30,17 @@ class DatastreamRequestForm(RequestForm):
 
     # pTableFormat: Objeto en notacion json con el formato a aplicar sobre cada columna del datastream. ver http://wiki.junar.com/index.php/API#Formateo_de_Datos
     format= forms.CharField(required=False)
+
+class UpdateGridRequestForm(RequestForm):
+    # pLimit
+    rp = forms.IntegerField(required=False)
+    # se usa para luego armar un pFilter0
+    query = forms.CharField(required=False)
+    # pOrderBy
+    sortname = forms.CharField(required=False)
+    # pOrderType
+    sortorder = forms.CharField(required=False)
+
 
 class RequestFormSet(BaseFormSet):
     _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match

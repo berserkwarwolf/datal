@@ -2,9 +2,10 @@ from rest_framework.decorators import detail_route
 from core.daos.datastreams import DataStreamDBDAO
 from core.v8.serializers import EngineSerializer
 from core.rest.views import ResourceViewSet
-from core.v8.forms import DatastreamRequestForm
+from core.v8.forms import DatastreamRequestForm, UpdateGridRequestForm
 from rest_framework import renderers
-from core.v8.renderers import CSVEngineRenderer, XLSEngineRenderer, HTMLEngineRenderer
+from core.v8.renderers import (CSVEngineRenderer, XLSEngineRenderer, 
+                               HTMLEngineRenderer, GridEngineRenderer)
 
 class RestDataStreamViewSet(ResourceViewSet):
     queryset = DataStreamDBDAO() 
@@ -19,8 +20,13 @@ class RestDataStreamViewSet(ResourceViewSet):
         renderers.BrowsableAPIRenderer,
         CSVEngineRenderer,
         XLSEngineRenderer,
-        HTMLEngineRenderer])
+        HTMLEngineRenderer,
+        GridEngineRenderer])
     def data(self, request, format=None, *args, **kwargs):
+        if format == 'grid':
+            return self.engine_call( request, 'invoke', 'json',
+                form_class=UpdateGridRequestForm,
+                serialize=False)    
         return self.engine_call( request, 'invoke', format,
             form_class=DatastreamRequestForm,
             serialize=False)

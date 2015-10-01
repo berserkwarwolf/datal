@@ -1,0 +1,42 @@
+{% load i18n core_components components %}
+
+{% overlay id_embedContainer %}
+    <div class="embedPopup">
+        <div class="In clearfix">
+            <div>
+                <h4>{% trans "APP-EMBED-TEXT" %}</h4>
+
+                <h5><strong>{% trans "OVERLAY-DSEMBED-CHART-TITLE" %}</strong></h5>
+                <p>{% trans "OVERLAY-DSEMBED-TIP" %}.</p>
+                
+                <div class="form clearfix">
+                    <form action="" onsubmit="return false" novalidate>
+                        <table class="ao-dialogue">
+                            <tr>
+                                <td>
+                                    <textarea id="id_embedCode" cols="" rows="" readonly="readonly"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="id_embedWidth">{% trans "APP-WIDTH-TEXT" %}:</label>
+                                    <input id="id_embedWidth" name="id_embedWidth" type="text" size="3" value="" title="Enter width value"/>
+                                    <label for="id_embedHeight">{% trans "APP-HEIGHT-TEXT" %}:</label>
+                                    <input id="id_embedHeight" name="id_embedHeight" type="text" size="3" value="" title="Enter height value"/>
+                                    <label for="id_embedHeaders">{% trans "APP-FREEZE-TEXT" %}</label>
+                                    <input id="id_embedHeaders" name="embedHeaders" type="text" size="3" value="" title="Enter the number of rows to freeze" style="width:12px;"/>
+                                    <label for="id_embedHeaders">{% trans "APP-ROWS-TEXT" %}</label>
+                                    <!--
+        							<label for="id_embedColumns">{% trans "APP-FREEZE-TEXT" %}</label>
+                                    <input id="id_embedColumns" name="embedColumns" type="text" size="3" value="" title="Enter the number of columns to freeze" style="width:12px;"/>
+                                    <label for="id_embedColumns">{% trans "APP-COLUMNS-TEXT" %}</label>
+                                    -->
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endoverlay %}

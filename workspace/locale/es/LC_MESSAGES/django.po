@@ -389,7 +389,7 @@ msgid "APP-DATASTREAM-DELETECACHEKEYS-TEXT"
 msgstr "Cambios guardados exitosamente"
 
 msgid "APP-VISUALIZATION-TEXT"
-msgstr "Visualizaciones"
+msgstr "Visualización"
 
 msgid "APP-DATASTREAM-TEXT"
 msgstr "Vista"
@@ -2372,12 +2372,6 @@ msgstr "Los siguientes recursos están asociados a este conjunto de datos y tamb
 
 msgid "APP-DELETE-DATASTREAM-ACTION-TEXT"
 msgstr "La vista y sus recusros asociados, han sido eliminados."
-
-msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
-msgstr "Error al eliminar la vista y sus recursos asociados."
-
-msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
-msgstr "Error al eliminar la visualización y sus recursos asociados."
 
 msgid "APP-DELETE-DATASTREAM-REV-ACTION-TEXT"
 msgstr "La revisión de la vista ha sido eliminada."
