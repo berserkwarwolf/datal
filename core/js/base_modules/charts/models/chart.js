@@ -140,7 +140,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         var params = {
-            revision_id: self.get('datastream_revision_id'),
+            datastream_revision_id: self.get('datastream_revision_id'),
             data: this.serializeServerExcelRange(this.get('range_data')),
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),

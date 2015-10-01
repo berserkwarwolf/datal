@@ -56,7 +56,7 @@
 
 									<!-- My Account Tab -->
 									<div class="tab pulldown FR">
-										<a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">{% gravatar auth_manager "small" "" %} {{auth_manager.name}}<span class="icon icon-right icon-pulldown"></span></a>
+										<a href="{% url 'accounts.my_account' %}" title="{{auth_manager.nick}}">{% gravatar auth_manager "small" "" %} {{auth_manager.nick}}<span class="icon icon-right icon-pulldown"></span></a>
 										<div class="submenu border-box" style="display:none;">
 												<ul>
 													<li><a href="{% url 'accounts.my_account' %}" title="{% trans 'HEADER-ACCOUNTDETAILLS-TEXT' %}">{% trans "HEADER-ACCOUNTDETAILLS-TEXT" %}</a></li>

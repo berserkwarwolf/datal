@@ -1,1 +1,7 @@
-var ManageVisualizationsModel = Backbone.Model.extend({});
+var ManageVisualizationsModel = Backbone.Model.extend({
+
+	defaults: {
+    	total_entries: 0
+   	}
+
+});

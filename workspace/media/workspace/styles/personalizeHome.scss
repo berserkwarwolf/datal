@@ -5,7 +5,7 @@
 /* Theme Tabs */
 .themeTabs{margin-bottom:15px;}
 .themeTabs > ul{position:relative;z-index:2;border-bottom:1px solid #e2e0e0;padding-bottom:5px;}
-.themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;background:none;padding:0;}
+.themeTabs > ul li{margin:0 20px 20px 0;float:left;width:220px;}
 .themeTabs > ul li:nth-child(4n){margin-right:0;}
 .themeTabs > ul li a{display:block;cursor:pointer;padding:0 0 10px;text-align:center;}
 .themeTabs > ul li a .text{display:block;height:46px;line-height:46px;font-size:14px;color:$font-color-base;text-shadow:0 1px 0 #fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;text-align:center;position:relative;}

@@ -69,7 +69,7 @@
         jQuery.data(lDashboardDataserviceContainer, "user_email", "{{dashboard_dataservice.user_email|md5}}");
         jQuery.data(lDashboardDataserviceContainer, "created_at", "{{dashboard_dataservice.dataservice_created_at|timesince }}");
         jQuery.data(lDashboardDataserviceContainer, "dataservice_category_name", "{{dashboard_dataservice.category_name}}");
-        jQuery.data(lDashboardDataserviceContainer, "datastream_html_link", "{{base_uri}}{% url 'datastreams-data' dashboard_dataservice.dataservice_id 'html' %}{% if dashboard_dataservice.dataservice_end_point %}?_={{dashboard_dataservice.dataservice_end_point|escapejs}}{% endif %}");
+        jQuery.data(lDashboardDataserviceContainer, "datastream_html_link", "{{base_uri}}{% url "datastream_manager.html" dashboard_dataservice.dataservice_id dashboard_dataservice.slug %}{% if dashboard_dataservice.dataservice_end_point %}?_={{dashboard_dataservice.dataservice_end_point|escapejs}}{% endif %}");
         jQuery.data(lDashboardDataserviceContainer, "base_uri", "{{base_uri}}");
     </script>
 {%endfor%}

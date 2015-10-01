@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
 
 {% block SEO %}
   <title>{{datastream.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -110,10 +110,7 @@
 
 	</div>
 </div>
-
-{# templates backbone #}
-{% include "viewDataStream/templates.html" %}
-
+{% load i18n local_tags %}
 <script type="text/javascript">
 $(document).ready(function(){
   var dataStreaModel = new dataStream({
@@ -131,8 +128,8 @@ $(document).ready(function(){
     embedUrl: "{{base_uri}}{{ datastream.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
-    exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",
-    exportXLSURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'xls' %}",
+    exportCSVURL: "{% url "datastream-data" datastream.datastream_id 'csv' %}",
+    exportXLSURL: "{% url "datastream-data" datastream.datastream_id 'xls' %}",
   });
   var dataStreamView = new viewDataStreamView({model: dataStreaModel});
 

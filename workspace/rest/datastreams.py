@@ -19,7 +19,7 @@ class RestDataStreamViewSet(ResourceViewSet):
             form_class=DatastreamRequestForm,
             serialize=False)
 
-    @list_route(methods=['get', 'post'])
+    @list_route(methods=['get'])
     def sample(self, request, format=None, *args, **kwargs):
         return self.engine_call( request, 'preview', 
             form_class=DatastreamPreviewForm,

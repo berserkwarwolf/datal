@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 def add_facets_to_doc(resource, account, doc):
-
+    logger = logging.getLogger(__name__)
     faceted = account.faceted_fields()
     if resource.meta_text:
         try:
@@ -165,12 +165,8 @@ class Account(models.Model):
         total_datasets = c.get('account_total_datasets_' + str(self.id))
         if not total_datasets:
             total_datasets =  Dataset.objects.filter(user__in=users).count()
-            if settings.DEBUG: logger.info('get_total_datasets from database %d' % total_datasets)
             if total_datasets > 0:
                 c.set('account_total_datasets_' + str(self.id), total_datasets, settings.REDIS_STATS_TTL)
-        else:
-            if settings.DEBUG: logger.info('get_total_datasets from cache %s' % total_datasets)
-            
         return total_datasets
 
     def get_total_datastreams(self):

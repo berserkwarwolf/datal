@@ -5,21 +5,18 @@
 /* Activity */
 .activity {
 	min-height:680px;
-
-	& > header .title{padding:10px;}
 	
 	article{float:left;width:100%;
 
 		&:nth-child(2n+1){background:$background-color-list;}
 		&:first-child{margin-top:0;}
 
-		p{line-height:20px;margin:0 !important;font-size:$font-size-m;padding:10px;
+		p{line-height:20px;margin-bottom:0;font-size:$font-size-m;margin-top:15px;
 			
 			&:first-letter{text-transform:uppercase;}
 			a{color:$link-color;}
 			span.noLink{color:$font-color-light;}
-			.sep{color:#ababab;padding:0 4px;}
-			.category{color:#4d4d4d;}
+			* > *{vertical-align:middle;}
 		}
 	}
 

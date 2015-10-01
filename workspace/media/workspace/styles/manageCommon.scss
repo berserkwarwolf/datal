@@ -51,7 +51,7 @@
     .filters-container .activeFilters li a:hover{color:#c00202;text-decoration:none;}
 
     /* Normal filters */
-    .filters-container .filters li{padding:0 0 15px 15px;background:none;}
+    .filters-container .filters li{padding:0 0 15px 15px;}
     .filters-container .filters li a{word-break:break-word;}
 
 /* List */
@@ -75,7 +75,7 @@
 .list-container table .filename a{color:#3a3a3a;}
 .list-container table .date{display:block;color:$font-color-light;}
 .list-container table .actions{padding-top:10px;}
-.list-container table .actions li{float:left;visibility:hidden;background:none;padding:0;} 
+.list-container table .actions li{float:left;visibility:hidden;}
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
 .list-container table .actions li:first-child:before{display:none;}
 .list-container table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}

@@ -48,7 +48,6 @@ var ChartSelectDataModalView = ModalView.extend({
                 this.rangeHeadersModel
                 ]);
             this.setHeights();
-            this.setAxisTitles();
         }, this);
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
@@ -151,12 +150,5 @@ var ChartSelectDataModalView = ModalView.extend({
             table.css('height', sidebarHeight+'px');
 
         }).resize();
-    },
-
-    setAxisTitles: function(){
-        var invertedAxis = (_.isUndefined(this.model.get('invertedAxis')))?'false':this.model.get('invertedAxis');
-        var invertedAxisClass = 'invertedAxis-' + invertedAxis;
-        this.$('.invertedAxisLabel').hide();
-        this.$('.'+invertedAxisClass).show();
-    }
+    }, 
 });

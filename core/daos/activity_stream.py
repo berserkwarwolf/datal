@@ -81,7 +81,6 @@ class ActivityStreamDAO:
                 user = users[user_id]
             h['user_nick'] = user.nick
             h['user_email'] = user.email
-            h['user_name'] = user.name
                 
             activities.append(h)
 

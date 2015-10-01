@@ -2288,13 +2288,13 @@ msgid "LANDINGPAGE-ACTIVITY-TIME"
 msgstr "Modification"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
-msgstr "created"
+msgstr "has created"
 
 msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
-msgstr "edited"
+msgstr "has edited"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "deleted"
+msgstr "has deleted"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Today"
@@ -2687,10 +2687,10 @@ msgid "APP-EDIT-DATAVIEW-TEXT"
 msgstr "Edit Data View"
 
 msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
-msgstr "published"
+msgstr "has published"
 
 msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
-msgstr "unpublished"
+msgstr "has unpublished"
 
 msgid "ACCOUNT-DOMAIN-TIP-1"
 msgstr "This domain must not start with &quot;api&quot;."
@@ -3173,16 +3173,16 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graph"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "Which are the data intervals?"
+msgstr "1. Which are the data intervals?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "Tags (X axis)"
+msgstr "2. Tags (X axis)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
 msgstr "Categories to compare"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "Header/s"
+msgstr "3. Header/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
 msgstr "You can compare data from various categories in parallel. They shall be specified in the referencais or legends."
@@ -3249,15 +3249,3 @@ msgstr "Update frequency"
 
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "What region apply this data?"
-
-msgid "APP-PARAMETERS-TEXT"
-msgstr "Parameters"
-
-msgid "LANDINGPAGE-ACTIVITY-HASREJECTED"
-msgstr "rejected"
-
-msgid "LANDINGPAGE-ACTIVITY-HASACCEPTED"
-msgstr "accepted"
-
-msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
-msgstr "sent to review"

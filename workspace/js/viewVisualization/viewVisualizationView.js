@@ -14,10 +14,10 @@ var viewVisualizationView = Backbone.View.extend({
 		this.template = _.template( $("#context-menu-template").html() );
 		this.chartsFactory = new charts.ChartsFactory();
 
-		this.listenTo(this.model, "change", this.render);
-		
 		this.setupChart();
-		this.render();
+		//this.render();
+		this.listenTo(this.model, 'newDataReceived',this.render,this);
+		//this.listenTo(this.model, "change", this.render);
 	},
 	setupChart: function () {
 		this.model.set('chart', {
@@ -33,6 +33,7 @@ var viewVisualizationView = Backbone.View.extend({
 	},
 	render: function () {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
+		this.chartInstance.render();
 		return this;
 	},
 	initializeChart: function () {
