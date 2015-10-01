@@ -974,3 +974,6 @@ msgstr "Edit Arguments"
 
 msgid "OVERLAY-PARAM-TIP"
 msgstr "Change the values of the arguments in order to interact with the different views of the data:"
+
+msgid "OVERLAY-DSEMBED-CHART-TITLE"
+msgstr "Add this Visualization everywhere!"
