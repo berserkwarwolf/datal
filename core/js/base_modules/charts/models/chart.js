@@ -403,6 +403,14 @@ charts.models.Chart = Backbone.Model.extend({
             headerSelection: this.serializeServerExcelRange(this.get('range_headers')),
             data: this.serializeServerExcelRange(this.get('range_data')),
             labelSelection: this.serializeServerExcelRange(this.get('range_labels'))
+
+        };
+
+        if (this.get('isMap')) {
+            settings = _.extend( settings, {
+                latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
+                longitudSelection: this.serializeServerExcelRange(this.get('range_lon'))
+            });
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
