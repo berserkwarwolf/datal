@@ -50,7 +50,7 @@ var DeleteItemView = Backbone.View.extend({
 
             success: function(response, a) {
                 $.gritter.add({
-                    title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
+                    title: gettext('APP-DELETE-VISUALIZATION-TEXT'),
                     text:  resource + ": "+ gettext('APP-DELETE-DATASET-ACTION-TEXT'),
                     image: '/static/workspace/images/common/ic_validationOk32.png',
                     sticky: false,
@@ -72,8 +72,8 @@ var DeleteItemView = Backbone.View.extend({
 
             error: function() {
                 $.gritter.add({
-                    title: gettext('APP-OVERLAY-DELETE-DATASET-CONFIRM-TITLE'),
-                    text: resource + ": "+  gettext('APP-DELETE-DATASET-ACTION-ERROR-TEXT'),
+                    title: gettext('APP-DELETE-VISUALIZATION-TEXT'),
+                    text: resource + ": "+  gettext('APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT'),
                     image: '/static/workspace/images/common/ic_validationError32.png',
                     sticky: true,
                     time: 2500
