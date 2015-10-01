@@ -51,7 +51,7 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion
     headers = forms.CharField(required=False)
     
-class VisualizationPreviewMapForm(VisualizationRequestForm):
+class VisualizationPreviewMapForm(VisualizationPreviewForm):
     # pLatitudSelection:  Rango para la seleccion de las latitudes de los puntos del mapa
     lat = forms.CharField(required=True)
     # pLongitudSelection Rango para la seleccion de las longitudes de los puntos del mapa
