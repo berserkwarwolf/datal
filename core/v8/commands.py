@@ -20,20 +20,9 @@ class EngineCommand(object):
     
     def __init__(self, query):
 
-        # set defaults values
-        self.query = self._build_query(query)
+        self.query = query
 
         self.key_prefix = self._get_cache_key()
-
-    def _build_query(self, query):
-
-        # limpia los vacios
-        new_query=[]
-        for item in query:
-            if item[1]:
-                new_query.append(item)
-        
-        return new_query
 
     def _get_cache_key(self):
         params=str(hash(frozenset(sorted(self.query))))
@@ -48,10 +37,8 @@ class EngineCommand(object):
 
         try:
             params = urllib.urlencode(query)
-            
-            self.logger.info("URL: %s Params: %s query: %s method: %s" %(url, params, query, self.method))
+            self.logger.info("URL: %s Params: %s" %(url, params))
 
-        
             try:
                 if self.method == 'GET':
                     response = urllib.urlopen(url + '?' + params)
@@ -65,10 +52,7 @@ class EngineCommand(object):
             if response:
                 if response.getcode() == 200:
                     ret = response.read()
-                    if len(response.info().getplist()) > 0:
-                        mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
-                    else:
-                        mimetype = 'application; json'
+                    mimetype = '{0}; {1}'.format(response.info().gettype(), response.info().getplist()[0])
                     return ret, mimetype
 
             raise IOError('Error code %d at %s+%s' % (response.getcode(), url, str(params)))
@@ -100,31 +84,7 @@ class EngineChartCommand(EngineCommand):
 
 class EnginePreviewChartCommand(EngineCommand):
     endpoint = settings.END_POINT_CHART_PREVIEWER_SERVLET
-
-    def _build_query(self, query):
-        new_query=[]
-        for item in query:
-            # si alguno de estos 3 items tienen "true" lo transforma en "checked"
-            if item[0] in ('pInvertData','pInvertedAxis','pCorrelativeData') and item[1] == "true":
-                new_query.append( (item[0], "checked") )
-            # si alguno de estos 3 items tiene algo distinto que true, lo setea en ""
-            elif item[0] in ('pInvertData','pInvertedAxis','pCorrelativeData'):
-                new_query.append( (item[0], "") )
-            elif item[0] == 'pPage' and item[1]:
-                new_query.append( item)
-            elif item[0] == 'pLimit' and item[1]:
-                new_query.append(item)
-
-            # param que si o si deben viajar, sean nulos o no
-            elif item[0] in ( 'pNullValueAction', 'pNullValuePreset', 'pLabelSelection', 'pHeaderSelection'):
-                new_query.append(item)
-
-            # saliendo de los param que si o si deben viajar,
-            # ahora nos fijamos los param que tengan un valor 
-            elif item[1]:
-                new_query.append(item)
-                
-        return new_query
+    method = 'POST'
 
 class EngineLoadCommand(EngineCommand):
     endpoint = settings.END_POINT_LOADER_SERVLET

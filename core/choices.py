@@ -70,7 +70,6 @@ class ActionStreams():
     REJECT = 4
     ACCEPT = 5
     REVIEW = 6
-    EDIT = 7
 
 # TODO: Create just one STATUS_CHOICES after we remove in a clean way UNDER_REVIEW and REJECTED choices
 STATUS_CHOICES = Choices(

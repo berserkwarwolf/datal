@@ -120,7 +120,6 @@
 		var authManager = new AuthManager({
 			id: {{auth_manager.id|default_if_none:"null"}}, 
 			nick: "{{auth_manager.nick}}", 
-			name: "{{auth_manager.name}}",
 			roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
 			privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
 			account_level : "{{ auth_manager.account_level }}", 

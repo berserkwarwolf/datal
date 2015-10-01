@@ -16,8 +16,6 @@ from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
 from microsites.viewDataStream import forms
 from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy
-from django.template import loader, Context
 
 def view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL

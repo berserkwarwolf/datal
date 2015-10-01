@@ -1,6 +1,6 @@
 var dataTableView = Backbone.View.extend({
 
-	el: '.detail',	 
+	el: '.detail-container',	 
 	
 	template: null,
 	parentView: null,

@@ -4,7 +4,7 @@
     "model": "core.user",
     "fields": {
         "account": 2,
-        "name": "Jane Publisher",
+        "name": "Publisher",
         "language": "en",
         "country": "US",
         "created_at": "2011-10-20T00:36:51",
@@ -23,7 +23,7 @@
     "model": "core.user",
     "fields": {
         "account": 2,
-        "name": "John Administrator",
+        "name": "Administrator",
         "language": "en",
         "country": "US",
         "created_at": "2011-12-06T12:20:30",
@@ -42,7 +42,7 @@
     "model": "core.user", 
     "fields": {
         "account": 1,
-        "name": "Juana Publicadora", 
+        "name": "Publicador", 
         "language": "es", 
         "country": "CL", 
         "created_at": "2011-10-20T00:36:51", 
@@ -61,7 +61,7 @@
     "model": "core.user", 
     "fields": {
         "account": 1, 
-        "name": "Juan Administrador", 
+        "name": "Administrador", 
         "language": "es", 
         "country": "CL", 
         "created_at": "2011-12-06T12:20:30", 
@@ -80,7 +80,7 @@
     "model": "core.user", 
     "fields": {
         "account": 1, 
-        "name": "Roberto Editor", 
+        "name": "Editor", 
         "language": "es", 
         "country": "CL", 
         "created_at": "2011-10-20T00:36:51", 

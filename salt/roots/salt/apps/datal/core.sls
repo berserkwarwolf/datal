@@ -1,13 +1,6 @@
 {% set user = pillar['system']['user'] %}
 {% set group = pillar['system']['group'] %}
 
-{% if salt['grains.get']('os') == 'Debian' %}
-install_ruby:
-  pkg.installed:
-    - names:
-      - ruby
-{% endif %}
-
 sass_install:
   gem.installed:
     - name: sass
