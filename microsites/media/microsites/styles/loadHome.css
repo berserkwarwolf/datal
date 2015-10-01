@@ -63,7 +63,8 @@ body,
   .gridContainer{padding-left:10px;padding-right:0;}
   .workspaceGrid table{width:100%;}
   .workspaceGrid table th,
-  .workspaceGrid table td{line-height:18px;padding:2px 5px 2px 22px;border-bottom:1px solid #e0e0e0;background-color:#fff;color:#333;word-break:break-word;vertical-align:top;}
+  .workspaceGrid table td{line-height:17px;padding:5px;border-bottom:1px solid #e0e0e0;background-color:#fff;color:#333;word-break:break-word;vertical-align:top;}
+    .workspaceGrid table td{padding:10px 5px;}
   .workspaceGrid table th{text-align:left;background:#f6f5f5;color:#aaa;text-shadow:0 1px 0 #fff;font-weight:bold;}
   .workspaceGrid table tr:nth-child(even) > td{background-color:#fcfcfc;}
   .workspaceGrid .viewInfo .sep{color:#e0e0e0;padding:0 2px;}

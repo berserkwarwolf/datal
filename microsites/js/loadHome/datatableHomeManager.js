@@ -53,8 +53,8 @@ var DatatableHomeManager = DatatableManager.extend({
 
         var templ = "<tr id='id_<%= revision.id %>'>";
         
-        templ += "<td class='viewInfo " + className + "'>\
-                <a href='<%= revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
+        templ += "<td class='viewInfo'>\
+                <div class='" + className + "''></div><a href='<%= revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
            
         var date = new Date(msg.created_at);
         templ += "<td class='date' data-sort-value='" + date.getTime() + "'><span class='longDateFormat'>" + $.datepicker.formatDate( (Configuration.language == "en")?"MM d, yy":"d 'de' MM 'de' yy" 
