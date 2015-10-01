@@ -389,7 +389,7 @@ msgid "APP-DATASTREAM-DELETECACHEKEYS-TEXT"
 msgstr "Cambios guardados exitosamente"
 
 msgid "APP-VISUALIZATION-TEXT"
-msgstr "Visualizaciones"
+msgstr "Visualización"
 
 msgid "APP-DATASTREAM-TEXT"
 msgstr "Vista"
@@ -2275,13 +2275,13 @@ msgid "LANDINGPAGE-ACTIVITY-TIME"
 msgstr "Modificación"
 
 msgid "LANDINGPAGE-ACTIVITY-HASCREATED"
-msgstr "ha creado"
+msgstr "creó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
-msgstr "ha editado"
+msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "ha borrado"
+msgstr "borró"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -2674,10 +2674,10 @@ msgid "APP-EDIT-DATAVIEW-TEXT"
 msgstr "Editar Vista de Datos"
 
 msgid "LANDINGPAGE-ACTIVITY-HASPUBLISHED"
-msgstr "ha publicado"
+msgstr "publicó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASUNPUBLISHED"
-msgstr "ha despublicado"
+msgstr "despublicó"
 
 msgid "ACCOUNT-DOMAIN-TIP-1"
 msgstr "Este dominio no debe comenzar con &quot;api&quot;."
@@ -3157,16 +3157,16 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graficar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "1. ¿Cuáles son los intervalos con datos?"
+msgstr "¿Cuáles son los intervalos con datos?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "2. Etiquetas (Eje X)"
+msgstr "Etiquetas (Eje X)"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
 msgstr "Las categorías a comparar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "3. Encabezado/s"
+msgstr "Encabezado/s"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
 msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
@@ -3213,11 +3213,20 @@ msgstr "La columna completa"
 msgid "APP-HOW-TO-SELECT-ROW-TEXT"
 msgstr "O bien, la fila completa"
 
-msgid "APP-CHOOSE-MAP-TEXT"
-msgstr "Elige un mapa"
-
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
 msgstr "Despublicar visualización"
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
 msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+
+msgid "APP-PARAMETERS-TEXT"
+msgstr "Parámetros"
+
+msgid "LANDINGPAGE-ACTIVITY-HASREJECTED"
+msgstr "rechazó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASACCEPTED"
+msgstr "aceptó"
+
+msgid "LANDINGPAGE-ACTIVITY-HASSENTTOREVIEW"
+msgstr "envió a revisión"

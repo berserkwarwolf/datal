@@ -38,8 +38,9 @@
 
                 {% if dataset.datastreams %}
                     {% for datastream_revision in dataset.datastreams %}
+
                         {# Muestro solamente si es la ultima revision #}
-                        {% if datastream_revision.id == datastream_revision.datastream__last_revision %}
+                        {% if datastream_revision.id == datastream_revision.datastream__last_published_revision %}
                         <tr>
                           <td>
                             <i class="icon-resources dataview">
@@ -61,7 +62,7 @@
                 {% if dataset.visualizations %}
                     {% for visualizations_revision in dataset.visualizations %}
                         {# Muestro solamente si es la ultima revision #}
-                        {% if visualizations_revision.id == visualizations_revision.visualization__last_revision %}
+                        {% if visualizations_revision.id == visualizations_revision.visualization__last_published_revision %}
                         <tr>
                           <td>
                             <i class="icon-resources visualization">

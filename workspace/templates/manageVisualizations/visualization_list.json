@@ -2,6 +2,7 @@
 
 {
   "total_entries": {{total_entries}},
+  "total_resources": {{total_resources}},
   "items": [
     {% for item in items %}
     {

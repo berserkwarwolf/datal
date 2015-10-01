@@ -16,7 +16,8 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin, viewsets.Ge
     data_types = ['dt', 'ds', 'vz']
         
     def list(self, request, format='json'):
-        limit = self.request.query_params.get('limit', None)
+        rp = self.request.query_params.get('rp', None) # TODO check for rp arguemnt used in some grids
+        limit = self.request.query_params.get('limit', rp)
         offset = self.request.query_params.get('offset', '0')
         page_num = int(offset)/int(limit) + 1 if limit else 0
 

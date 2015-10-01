@@ -5,7 +5,7 @@
 	"items":[
 		{% for resource in data.resources %}
 		{
-			"author": "{{resource.dataset__user__nick}}", 
+			"author": "{{resource.dataset__user__name}}", 
 			"status": {{resource.status}}, 
 			"status_nice": "{{resource.status|status_str|capfirst}}", 
 			"user_id": "{{resource.dataset__user__id}}", 

@@ -10,9 +10,9 @@ class DatastreamPreviewForm(forms.Form):
     # pEndPoint: end poibnt del dataset relacionado al ds
     end_point = forms.CharField(required=True)
     # pImplType: Tipo de implementacion del dataset relacionado al datastream       
-    impl_type = forms.CharField(required=False)
+    impl_type = forms.CharField(required=True)
     # pImplDetails: XML con detales de implementacion del dataset relacionado al datastream
-    impl_details = forms.CharField(required=True)
+    impl_details = forms.CharField(required=False)
     # pDataSource: XML describiendo la estructura del dataset
     datasource = forms.CharField(required=True)
     # pSelectStatement: XML con la sentencia SQL para scrapear los datos desde la fuente
@@ -45,12 +45,12 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     # pLabelSelection
     labels = forms.CharField(required=False)
     # pNullValueAction: Nombre de la accion a realizar en caso de encontrar un valor vacio
-    nullValueAction = forms.CharField(required=True)
+    nullValueAction = forms.CharField(required=False)
     # pNullValuePreset: Valor a utilizar en caso que la accion sea preset
     nullValuePreset = forms.CharField(required=False)
     # pHeaderSelection: Rango para la seleccion de las cabeceras de la visualizacion
     headers = forms.CharField(required=False)
-
+    
 class VisualizationPreviewMapForm(VisualizationRequestForm):
     # pLatitudSelection:  Rango para la seleccion de las latitudes de los puntos del mapa
     lat = forms.CharField(required=True)
@@ -58,5 +58,4 @@ class VisualizationPreviewMapForm(VisualizationRequestForm):
     lon = forms.CharField(required=True)
     # pTraceSelection: Rango para la seleccion de los trazos del mapa   
     traces = forms.CharField(required=False)
-
 
