@@ -125,7 +125,7 @@ $(document).ready(function(){
     type: "{{datastream.type}}",
     source: "{{datastream.end_point|escapejs}}",
     {% for parameter in datastream.parameters %}
-    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
+    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
     {% endfor %}
     permaLink: "{{base_uri}}{{ datastream.permalink }}{%if url_query%}?{{url_query}}{%endif%}",
     embedUrl: "{{ datastream.embed_url }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
