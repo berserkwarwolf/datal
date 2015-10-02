@@ -340,7 +340,7 @@ var dataTableView = Backbone.View.extend({
 			onBeforeSend: function(settings){
 				
 				self.setFilterParams(settings);
-				
+				settings.url = settings.url.replace(/(page=).*?(&)/, '$1' + (this.newp - 1).toString() + '$2')
 				return true;
 
 			},
