@@ -17,6 +17,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
+        console.log('render map!');
         //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
         if(this.latestDataUpdate != this.latestDataRender){
             if(this.model.data.get('points') && this.model.data.get('points').length){
@@ -211,22 +212,27 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     handleBoundChanges: function(){
 
-        var center = this.mapInstance.getCenter(),
-            bounds = this.mapInstance.getBounds(),
-            zoom = this.mapInstance.getZoom();
+        if(this.mapInstance){
 
-        this.model.set('options', {
-            center: {
-                lat: center.lat(),
-                long: center.lng(),
-            },
-            zoom: zoom,
-            bounds: [
-                bounds.getNorthEast().lat(), 
-                bounds.getNorthEast().lng(), 
-                bounds.getSouthWest().lat(), 
-                bounds.getSouthWest().lng()
-            ]
-        });
+            var center = this.mapInstance.getCenter(),
+                bounds = this.mapInstance.getBounds(),
+                zoom = this.mapInstance.getZoom();
+
+            this.model.set('options', {
+                center: {
+                    lat: center.lat(),
+                    long: center.lng(),
+                },
+                zoom: zoom,
+                bounds: [
+                    bounds.getNorthEast().lat(), 
+                    bounds.getNorthEast().lng(), 
+                    bounds.getSouthWest().lat(), 
+                    bounds.getSouthWest().lng()
+                ]
+            });
+
+        }
+
     }
 });
