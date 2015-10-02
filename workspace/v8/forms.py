@@ -8,7 +8,7 @@ class DatasetLoadForm(RequestForm):
     def clean(self):
         cleaned_data = super(DatasetLoadForm, self).clean()
         for key, valor in self.data.items():
-            if key not in cleaned_data:
+            if key not in cleaned_data and not key.startswith('form'):
                 cleaned_data[key]=valor
         return cleaned_data
 
