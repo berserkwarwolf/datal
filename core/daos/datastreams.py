@@ -112,11 +112,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
-        #parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
-
-        # TODO: [modo dani on] poner tambo tambo y fixear parametros en 0
-        # falsas promesas,tu cariño mi dolor / falsas promesas,me dejaste sin amor 
-        parameters = []
+        parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
 
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)
