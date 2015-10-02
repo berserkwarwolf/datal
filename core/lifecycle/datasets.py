@@ -325,6 +325,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data,
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
+        else:
+            fields['file_size'] = self.dataset_revision.size
+            fields['file_name'] = self.dataset_revision.filename
+            fields['end_point'] = self.dataset_revision.end_point
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
