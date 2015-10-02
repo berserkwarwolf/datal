@@ -718,7 +718,8 @@ class Visualization(GuidModel):
 
 class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
-    datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
+    datastream_revision = models.ForeignKey('DataStreamRevision',
+                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     lib = models.CharField(max_length=10, choices=choices.VISUALIZATION_LIBS)
     impl_details = models.TextField(blank=True)
@@ -745,11 +746,14 @@ class VisualizationRevision(RevisionModel):
 
     def clone(self, status=choices.StatusChoices.DRAFT):
         visualization_revision = VisualizationRevision(
-            visualization = self.visualization,
-            user = self.user,
-            impl_details = self.impl_details,
-            meta_text = self.meta_text,
-            status = status
+            visualization=self.visualization,
+            datastream_revision=self.datastream_revision,
+            user=self.user,
+            lib=self.lib,
+            impl_details=self.impl_details,
+            meta_text=self.meta_text,
+            status=status,
+            parameters=self.parameters
         )
 
         visualization_revision.save()
