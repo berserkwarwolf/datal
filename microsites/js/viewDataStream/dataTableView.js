@@ -21,8 +21,6 @@ var dataTableView = Backbone.View.extend({
 		this.listenTo(this.model, "change:result", this.render);
 	  
 	  //When page, rows or dataStream's arguments change then invoke
-	  this.listenTo(this.model, "change:page", this.invoke); 
-	  this.listenTo(this.model, "change:rows", this.invoke);		
 	  var i=0;
 		while(i < $parameters.size()){
 			var name = 'parameter' + i;
@@ -148,8 +146,6 @@ var dataTableView = Backbone.View.extend({
 		  error: _.bind(this.onInvokeError, this)
 	  });
 
-	  // ajaxManager.register( 1, ajax );	
-
 	},
 
 	onInvokeBeforeSend: function(){
@@ -159,7 +155,6 @@ var dataTableView = Backbone.View.extend({
 	
 	onInvokeSuccess: function(response){
 		this.setLastUpdate(response);
-		//HERE IS SET THE DATA
 		this.model.set('result', response);
 	},
 	
@@ -188,7 +183,6 @@ var dataTableView = Backbone.View.extend({
 		    - parseFloat( $('.brandingHeader').height() )
 		    - parseFloat( $('.content').css('padding-top').split('px')[0] )
 		    - parseFloat( $('.content').css('padding-bottom').split('px')[0] )
-		    // - parseFloat( $('.brandingFooter').height() )
 		    - parseFloat( $('.miniFooterJunar').height() );
 		    
 		  $(heightContainer).height(height);
@@ -327,7 +321,7 @@ var dataTableView = Backbone.View.extend({
 			usepager: true,
 			useRp: true,
 			rp: self.model.get('rows'),
-			page: self.model.get('page'),
+			page: self.model.get('page') + 1,
 			singleSelect: true,
 			resizable: true,
 			total: result.fLength,
