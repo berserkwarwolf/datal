@@ -279,7 +279,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                                                 datastreami18n__language=language,
                                                 category__categoryi18n__language=language)
 
-        query = query.values('datastream__user__nick', 'status',
+        query = query.values('datastream__user__nick', 'datastream__user__name', 'status',
                              'category__categoryi18n__name')
 
         filters = set([])
@@ -295,7 +295,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                     res.get('category__categoryi18n__name')))
             if res.get('datastream__user__nick'):
                 filters.add(('author', res.get('datastream__user__nick'),
-                    res.get('datastream__user__nick')))
+                    res.get('datastream__user__name')))
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
