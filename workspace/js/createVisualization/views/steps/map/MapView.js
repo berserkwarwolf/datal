@@ -40,6 +40,8 @@ var MapView = StepViewSPA.extend({
         // Event binding
         this.listenTo(this.model, 'change:mapType', this.onChartChanged, this);
 
+        this.listenTo(this.model, 'newDataReceived',this.onChartChanged,this);
+
         this.nextBtn.addClass('disabled');
         
         this.setupChart();
