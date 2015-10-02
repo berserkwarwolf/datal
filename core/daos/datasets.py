@@ -275,7 +275,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language,
                                                category__categoryi18n__language=language)
 
-        query = query.values('dataset__user__nick', 'status', 'impl_type',
+        query = query.values('dataset__user__nick', 'dataset__user__name', 'status', 'impl_type',
                              'category__categoryi18n__name')
 
         filters = set([])
@@ -297,7 +297,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                     res.get('category__categoryi18n__name')))
             if res.get('dataset__user__nick'):
                 filters.add(('author', res.get('dataset__user__nick'),
-                    res.get('dataset__user__nick')))
+                    res.get('dataset__user__name')))
+
+        logger.info(filters)
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
