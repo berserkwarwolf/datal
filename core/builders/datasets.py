@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import logging
+from django.conf import settings
 from core.choices import SourceImplementationChoices
 
 logger = logging.getLogger(__name__)
@@ -105,6 +106,8 @@ class SOAPImplBuilder(DefaultImplBuilder):
         useCache = self.fields.get('use_cache', False)
         parameters = self.fields.get('parameters')
 
+        if settings.DEBUG: logger.info('Building SOAP impl_details (%s) (%s) (%s) (%s)' % (method_name, namespace, str(useCache), str(parameters)))
+        
         impl_details = '<wsOperation useCache="%s">' % useCache
         impl_details += '<methodName>%s</methodName>' % method_name
         impl_details += '<targetNamespace>%s</targetNamespace>' % namespace
