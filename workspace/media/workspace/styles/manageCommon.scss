@@ -60,7 +60,7 @@
 .list-container table th{text-align:left;color:#999;font-size:$font-size-m;font-family:$font-titles-family;text-transform:uppercase;height:30px;border-bottom:1px solid #e4e4e4;vertical-align:middle;padding:0 10px 0 10px;line-height:27px;font-weight:normal;}
 .list-container table .select-all-header-cell input[type=checkbox]{position:relative;top:3px;}
 .list-container table tr{}
-.list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:12px 10px 12px 10px;line-height:18px;
+.list-container table td{border-bottom:1px solid #e4e4e4;vertical-align:top;padding:14px 10px;line-height:18px;
     -webkit-box-shadow:inset 0 1px 0 0 #fff;
        -moz-box-shadow:inset 0 1px 0 0 #fff;
             box-shadow:inset 0 1px 0 0 #fff;
@@ -73,8 +73,9 @@
 .list-container table h3 span.sep{color:#e0e0e0;padding:0 2px;}
 .list-container table .filename{display:block;}
 .list-container table .filename a{color:#3a3a3a;}
-.list-container table .date{display:block;color:$font-color-light;}
-.list-container table .actions{padding-top:10px;}
+.list-container table .date{display:block;color:$font-color-light;margin-top:4px;}
+.list-container table .type{color:$font-color-light;}
+.list-container table .actions{padding:5px 0;}
 .list-container table .actions li{float:left;visibility:hidden;background:none;padding:0;} 
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
 .list-container table .actions li:first-child:before{display:none;}

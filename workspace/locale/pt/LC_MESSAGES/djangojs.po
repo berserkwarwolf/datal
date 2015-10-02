@@ -863,3 +863,6 @@ msgstr "Error on deleting the datastream and the associated resources."
 
 msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
 msgstr "Error on deleting the visualization and the associated resources."
+
+msgid "APP-GRID-CELL-MODIFIED"
+msgstr "Modified"

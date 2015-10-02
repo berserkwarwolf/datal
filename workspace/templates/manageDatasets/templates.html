@@ -95,27 +95,7 @@
 <script type="text/template" id="grid-titlecell-template">
 	
 	{# Title #}
-	<h3><a href="<%=url%>" title="<%=title%>"><%=title%></a></h3>
-	
-	{# End Point #}
-	<span class="filename">
-		<% 
-			// If FILE
-			if(collect_type == 0){
-		%>
-			<%= filename %>
-		<% 
-			// Else, if URL or WEBSERVICE
-			} else if( collect_type == 1 || collect_type == 2 ){
-		%>
-			<%= end_point %>
-		<% } %>
-	</span>
-	
-	{# Last Modified #}
-	<% if(modified_at != ""){%>
-    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= modified_at %></span>
-  <% } %>
+	<h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> | <%=category%></h3>
 	
 	{# Actions #}
 	<ul class="actions clearfix">
@@ -170,7 +150,7 @@
 				// If FILE
 				if(collect_type == 0){
 			%>
-				<a rel="nofollow" href="/datasets/action_request_file?dataset_revision_id=<%=id%>" id="id_downloadLink" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
+				<a rel="nofollow" href="/datasets/action_request_file?dataset_revision_id=<%=id%>" id="id_downloadLink" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a> <span class="type">(.<%= type_nice %>, <%= size = Math.floor(size / 1024) %> KB)</span>
 			<% 
 				// Else, if URL or WEBSERVICE
 				} else if( collect_type == 1 || collect_type == 2 ){
@@ -180,6 +160,11 @@
 		</li>
 
 	</ul>
+	
+	{# Last Modified #}
+	<% if(modified_at != ""){%>
+    <span class="date">{% trans "APP-LAST-PUBLISHED-REVISION-TEXT" %}: <%= modified_at %></span>
+  	<% } %>
 </script>
 
 {# Grid - Type Cell #}
