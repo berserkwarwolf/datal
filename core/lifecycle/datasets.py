@@ -288,7 +288,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
         self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
 
-
     def _remove_all(self):
         # Remove all asociated datastreams revisions
         for datastream_revision in DataStreamRevision.objects.filter(dataset=self.dataset.id):
@@ -297,7 +296,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
         self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
-
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """
@@ -328,6 +326,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
 
+        impl_details = DatasetImplBuilderWrapper(**fields).build()
+
         if old_status == StatusChoices.PUBLISHED:
             if form_status == StatusChoices.DRAFT:
                 logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
@@ -339,8 +339,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     self.dataset_revision.id
                 ))
                 self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
-                )
+                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
+                    **fields)
                 logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
                     self.dataset_revision.id
                 ))
