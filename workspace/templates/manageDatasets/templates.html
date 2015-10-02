@@ -161,9 +161,9 @@
 
 	</ul>
 	
-	{# Last Modified #}
-	<% if(modified_at != ""){%>
-    <span class="date">{% trans "APP-LAST-PUBLISHED-REVISION-TEXT" %}: <%= modified_at %></span>
+	{# Last published revision date #}
+	<% if(last_published_revision_modified_at != ""){%>
+    <span class="icon icon-arrow-down-right FL"></span><span class="date">{% trans "APP-LAST-PUBLISHED-REVISION-TEXT" %}: <%= last_published_revision_modified_at %></span>
   	<% } %>
 </script>
 

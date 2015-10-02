@@ -83,6 +83,10 @@
 	.icon-help.icon-inline{background-position:-16px -1096px;}
 
 
+	/* Arrows */
+	.icon-arrow-down-right{background-position:-12px -1128px;}
+
+
 	/* Actions */
 	.icon-edit{background-position:-12px -264px;}
 	.button:hover .icon-edit{background-position:-48px -264px;}
