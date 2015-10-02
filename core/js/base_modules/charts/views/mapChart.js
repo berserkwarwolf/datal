@@ -17,7 +17,6 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
-        console.log('render map!');
         //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
         if(this.latestDataUpdate != this.latestDataRender){
             if(this.model.data.get('points') && this.model.data.get('points').length){

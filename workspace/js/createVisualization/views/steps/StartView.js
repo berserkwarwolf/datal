@@ -22,10 +22,7 @@ var StartView = StepViewSPA.extend({
 		this.model.set('isMap', false);
 		this.model.set('type', type);
 		this.setFlow('charts');
-
 		this.next();
-		//this.goTo(1);
-		//this.trigger('step', 1);
 	},
 
 	onChooseMap: function (e) {
@@ -36,8 +33,6 @@ var StartView = StepViewSPA.extend({
 		this.model.set('type', type);
 		this.setFlow('maps');
 		this.next();
-		//this.goTo(1); // first of map
-		//this.trigger('step', 1);
 	},
 
 	nav: function(){

@@ -122,6 +122,8 @@ var MapView = StepViewSPA.extend({
     renderChart: function () {
         if (this.ChartViewClass) {
 
+            this.destroyChartInstance();
+
             this.chartInstance = new this.ChartViewClass({
                 el: this.$('#mapContainer'),
                 model: this.model,
@@ -172,9 +174,13 @@ var MapView = StepViewSPA.extend({
         this.constructor.__super__.start.apply(this);
 
         this.model.set({
-            lib: 'google',
-            type: 'mapchart'
+            lib: 'google'
         });
+
+        if(this.model.data.get('clusters').length){
+            this.onChartChanged();
+        }
+
     },
 
     finish: function(){
