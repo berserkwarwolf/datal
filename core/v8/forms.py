@@ -7,11 +7,21 @@ from django.forms.formsets import BaseFormSet
 from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 
+class DefaultForm(forms.Form):
+    def clean(self):
+        cleaned_data = super(DefaultForm, self).clean()
+        for field in self:
+            if (field.field.initial and (field.name not in cleaned_data or 
+                                         not cleaned_data[field.name])):
+                cleaned_data[field.name] = field.field.initial
+       
+        return cleaned_data
+
 class ArgumentForm(forms.Form):
     name=forms.CharField(max_length=16, widget=forms.TextInput(), required=True)
     value=forms.CharField(max_length=100, widget=forms.TextInput(), required=True)
 
-class RequestForm(forms.Form):
+class RequestForm(DefaultForm):
     revision_id = forms.IntegerField(required=True)
     page = forms.IntegerField(required=False)
     limit = forms.IntegerField(required=False)

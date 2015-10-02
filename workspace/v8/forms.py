@@ -58,4 +58,6 @@ class VisualizationPreviewMapForm(VisualizationPreviewForm):
     lon = forms.CharField(required=True)
     # pTraceSelection: Rango para la seleccion de los trazos del mapa   
     traces = forms.CharField(required=False)
+    # pType
+    type = forms.ChoiceField(required=False, choices=VISUALIZATION_TYPES, initial='mapchart')
 
