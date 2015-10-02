@@ -17,6 +17,8 @@ from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
 from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from django.core.exceptions import FieldError
+
 from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
 from core.lib.searchify import SearchifyIndex
@@ -112,11 +114,10 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
-        #parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
-
-        # TODO: [modo dani on] poner tambo tambo y fixear parametros en 0
-        # falsas promesas,tu cariño mi dolor / falsas promesas,me dejaste sin amor 
-        parameters = []
+        try:
+            parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value')
+        except FieldError:
+            parameters = []
 
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)
@@ -125,11 +126,17 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         # Muestro el link del micrositio solo si esta publicada la revision
         public_url = ''
+        embed_url = ''
         if datastream_revision.datastream.last_published_revision:
             domain = datastream_revision.user.account.get_preference('account.domain')
             if not domain.startswith('http'):
                 domain = 'http://' + domain
             public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+            embed_url = '{}{}'.format(domain, reverse(
+                'viewDataStream.embed',
+                urlconf='microsites.urls',
+                kwargs={'guid': datastream_revision.datastream.guid}
+            ))
 
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
@@ -160,6 +167,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             parameters=parameters,
             public_url=public_url,
             slug= slugify(datastreami18n.title),
+            embed_url=embed_url
         )
 
         return datastream
@@ -193,6 +201,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         total_resources = query.count()
         query = query.values(
             'datastream__user__nick',
+            'datastream__user__name',
             'status',
             'id',
             'datastream__guid',
@@ -205,6 +214,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
+            'datastream__last_published_revision__modified_at',
             'dataset__last_revision__dataseti18n__title',
             'dataset__last_revision__impl_type',
             'dataset__last_revision__id'
@@ -278,7 +288,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                                                 datastreami18n__language=language,
                                                 category__categoryi18n__language=language)
 
-        query = query.values('datastream__user__nick', 'status',
+        query = query.values('datastream__user__nick', 'datastream__user__name', 'status',
                              'category__categoryi18n__name')
 
         filters = set([])
@@ -294,7 +304,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                     res.get('category__categoryi18n__name')))
             if res.get('datastream__user__nick'):
                 filters.add(('author', res.get('datastream__user__nick'),
-                    res.get('datastream__user__nick')))
+                    res.get('datastream__user__name')))
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 

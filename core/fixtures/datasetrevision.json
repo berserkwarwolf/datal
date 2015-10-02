@@ -11,7 +11,7 @@
             "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 61643,
+            "dataset": 1,
             "impl_details": "",
             "size": 0
         }
@@ -113,7 +113,7 @@
             "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 61643,
+            "dataset": 1,
             "impl_details": "",
             "size": 0
         }
@@ -215,7 +215,7 @@
             "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 61643,
+            "dataset": 1,
             "impl_details": "",
             "size": 0
         }
@@ -334,7 +334,7 @@
             "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 61472,
+            "dataset": 5,
             "impl_details": null,
             "size": 0
         }
@@ -402,7 +402,7 @@
             "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 61643,
+            "dataset": 1,
             "impl_details": null,
             "size": 0
         }
@@ -589,7 +589,7 @@
             "filename": "http://deis.minsal.cl/vitales/vitales2009/Mortalidad_Gral_area_region_2009.htm",
             "impl_type": 0,
             "user": 1472,
-            "dataset": 61632,
+            "dataset": 4,
             "impl_details": null,
             "size": 0
         }
@@ -606,7 +606,7 @@
             "filename": "http://www.chileatiende.cl/oficinas/exportacsv",
             "impl_type": 10,
             "user": 1472,
-            "dataset": 844,
+            "dataset": 3,
             "impl_details": null,
             "size": 0
         }
@@ -623,7 +623,7 @@
             "filename": "http://www.dipres.gob.cl/572/articles-45401_doc_xls_GCT1.xls",
             "impl_type": 4,
             "user": 1472,
-            "dataset": 576,
+            "dataset": 2,
             "impl_details": null,
             "size": 0
         }

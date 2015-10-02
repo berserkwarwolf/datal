@@ -237,7 +237,9 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'visualization__id',
             'visualization__guid',
             'visualization__user__nick',
+            'visualization__user__name',
             'visualization__last_revision_id',
+            'visualization__last_published_revision__modified_at',
             'visualization__datastream__id',
             'visualization__datastream__last_revision__id',
             'visualization__datastream__last_revision__category__id',
@@ -327,7 +329,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             visualization__datastream__last_revision__category__categoryi18n__language=language
         )
 
-        query = query.values('visualization__user__nick', 'status',
+        query = query.values('visualization__user__nick', 'visualization__user__name', 'status',
                              'visualization__datastream__last_revision__category__categoryi18n__name')
 
         filters = set([])
@@ -343,7 +345,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                     res.get('visualization__datastream__last_revision__category__categoryi18n__name')))
             if res.get('visualization__user__nick'):
                 filters.add(('author', res.get('visualization__user__nick'),
-                    res.get('visualization__user__nick')))
+                    res.get('visualization__user__name')))
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 

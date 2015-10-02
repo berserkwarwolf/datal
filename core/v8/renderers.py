@@ -142,7 +142,7 @@ class GridEngineRenderer(EngineRenderer):
         except:
             return '{"page": 1, "rows": [], "total":1}'
 
-        l_lists["page"] = renderer_context['request'].REQUEST.get('page')
+        l_lists["page"] = str(int(renderer_context['request'].REQUEST.get('page')) + 1)
         l_lists["total"] = p_response['fLength']
         l_lists["rows"] = []
 

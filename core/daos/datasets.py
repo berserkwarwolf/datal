@@ -146,10 +146,11 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         total_resources = query.count()
 
-        query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
-                             'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
-                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'modified_at', 'size', 'end_point',
-                             'dataset__user__id', 'dataset__last_revision_id')
+        query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id',
+                             'impl_type', 'dataset__guid', 'category__id', 'dataset__id', 'id',
+                             'category__categoryi18n__name', 'dataseti18n__title', 'dataseti18n__description',
+                             'created_at', 'modified_at', 'size', 'end_point', 'dataset__user__id',
+                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',
             'guid':'ao_datasets.guid','category_id':'ao_categories.id', 'dataset_id':'ao_datasets.id',
@@ -275,7 +276,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language,
                                                category__categoryi18n__language=language)
 
-        query = query.values('dataset__user__nick', 'status', 'impl_type',
+        query = query.values('dataset__user__nick', 'dataset__user__name', 'status', 'impl_type',
                              'category__categoryi18n__name')
 
         filters = set([])
@@ -297,7 +298,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                     res.get('category__categoryi18n__name')))
             if res.get('dataset__user__nick'):
                 filters.add(('author', res.get('dataset__user__nick'),
-                    res.get('dataset__user__nick')))
+                    res.get('dataset__user__name')))
+
+        logger.info(filters)
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
