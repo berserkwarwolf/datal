@@ -6,6 +6,8 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 from core.primitives import PrimitiveComputer
 from core.v8.commands import *
+from django.forms.formsets import formset_factory
+from core.v8.forms import RequestFormSet
 
 class CommandFactory(object):
     """Factory de comandos"""
@@ -134,4 +136,20 @@ class AbstractCommandFactory(object):
             engine = LoadCommandFactory(resourse_type).create(data)
         elif command_type == 'preview':
             engine = PreviewCommandFactory(resourse_type).create(data)
+        return engine
+
+class AbstractCommandFactory2(object):
+    def create(self, command_type, resourse_type, form_class, items):
+        formset=formset_factory(form_class, formset=RequestFormSet)
+        form = formset(items)
+        if not form.is_valid():
+            raise Exception("Wrong arguments")        
+
+        engine = None
+        if command_type == 'invoke':
+            engine = InvokeCommandFactory(resourse_type).create(form.cleaned_data)
+        elif command_type == 'load':
+            engine = LoadCommandFactory(resourse_type).create(items)
+        elif command_type == 'preview':
+            engine = PreviewCommandFactory(resourse_type).create(form.cleaned_data)
         return engine
