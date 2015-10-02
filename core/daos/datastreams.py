@@ -17,6 +17,8 @@ from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
 from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from django.core.exceptions import FieldError
+
 from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
 from core.lib.searchify import SearchifyIndex
@@ -112,7 +114,10 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
-        parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+        try:
+            parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+        except FieldError:
+            parameters = []
 
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)
