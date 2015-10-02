@@ -6,7 +6,7 @@ from django.forms.formsets import formset_factory
 from django.forms.util import ErrorDict
 
 from core.choices import *
-from workspace.common.forms import TagForm, SourceForm
+from workspace.common.forms import TagForm, SourceForm, ParameterForm
 
 
 class DeleteDataviewForm(forms.Form):
@@ -32,22 +32,26 @@ class CreateDataStreamForm(forms.Form):
         super(CreateDataStreamForm, self).__init__(data, *args)
         TagFormSet = formset_factory(TagForm)
         SourceFormSet = formset_factory(SourceForm)
+        ParameterFormSet = formset_factory(ParameterForm)
 
         if not data:
             self.tag_formset = TagFormSet(prefix='tags')
             self.source_formset = SourceFormSet(prefix='sources')
+            self.parameter_formset = ParameterFormSet(prefix='parameters')
         else:
             self.tag_formset = TagFormSet(data, prefix='tags')
             self.source_formset = SourceFormSet(data, prefix='sources')
+            self.parameter_formset = ParameterFormSet(data, prefix='parameters')
 
     def is_valid(self):
         is_valid = super(CreateDataStreamForm, self).is_valid()
         is_valid = is_valid and self.tag_formset.is_valid()
         is_valid = is_valid and self.source_formset.is_valid()
+        is_valid = is_valid and self.parameter_formset.is_valid()
 
         # Django does not allow to change form.errors, so we use form._errors
         if not is_valid:
-            if self.tag_formset._errors or self.source_formset._errors:
+            if self.tag_formset._errors or self.source_formset._errors or self.parameter_formset._errors:
                 self._errors = dict(self._errors)
 
                 for error in self.tag_formset._errors:
@@ -55,10 +59,15 @@ class CreateDataStreamForm(forms.Form):
 
                 for error in self.source_formset._errors:
                     self._errors.update(dict(error))
+
+                for error in self.parameter_formset._errors:
+                    self._errors.update(dict(error))
+
                 self._errors = ErrorDict(self._errors)
         else:
             self.cleaned_data['tags'] = [form.cleaned_data for form in self.tag_formset]
             self.cleaned_data['sources'] = [form.cleaned_data for form in self.source_formset]
+            self.cleaned_data['parameters'] = [form.cleaned_data for form in self.parameter_formset]
 
         return is_valid
 
