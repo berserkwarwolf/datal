@@ -6,6 +6,8 @@ from django import forms
 from django.forms.formsets import BaseFormSet
 from core.primitives import PrimitiveComputer
 from core.v8.commands import *
+from django.forms.formsets import formset_factory
+from core.v8.forms import RequestFormSet
 
 class CommandFactory(object):
     """Factory de comandos"""
