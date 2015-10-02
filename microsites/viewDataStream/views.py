@@ -62,6 +62,7 @@ def view(request, id, slug):
 
     return render_to_response('viewDataStream/index.html', locals())
 
+
 def hits_stats(request, id, channel_type=None):
     """ hits stats for chart datastreams """
 
@@ -77,6 +78,7 @@ def hits_stats(request, id, channel_type=None):
     c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": hits_dao.from_cache})
 
     return HttpResponse(t.render(c), content_type="application/json")
+
 
 @xframe_options_exempt
 def embed(request, guid):
@@ -100,6 +102,7 @@ def embed(request, guid):
     fixed_column = request.REQUEST.get('fixed_column', False)
 
     return render_to_response('viewDataStream/embed.html', locals())
+
 
 @require_http_methods(["GET"])
 def download(request, id, slug):

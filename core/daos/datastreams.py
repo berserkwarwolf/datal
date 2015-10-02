@@ -126,11 +126,17 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         # Muestro el link del micrositio solo si esta publicada la revision
         public_url = ''
+        embed_url = ''
         if datastream_revision.datastream.last_published_revision:
             domain = datastream_revision.user.account.get_preference('account.domain')
             if not domain.startswith('http'):
                 domain = 'http://' + domain
             public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+            embed_url = '{}{}'.format(domain, reverse(
+                'viewDataStream.embed',
+                urlconf='microsites.urls',
+                kwargs={'guid': datastream_revision.datastream.guid}
+            ))
 
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
@@ -161,6 +167,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             parameters=parameters,
             public_url=public_url,
             slug= slugify(datastreami18n.title),
+            embed_url=embed_url
         )
 
         return datastream
