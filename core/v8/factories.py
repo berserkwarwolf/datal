@@ -109,7 +109,7 @@ class CommandFactory(object):
 class LoadCommandFactory(CommandFactory):
     def create(self, items):
         if self.resourse_type == 'dt':
-            return EngineLoadCommand(self._process_items(items))
+            return EngineLoadCommand(self._fix_params(items))
 
 class PreviewCommandFactory(CommandFactory):
     def create(self, items):
