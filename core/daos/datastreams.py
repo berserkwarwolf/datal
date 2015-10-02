@@ -193,6 +193,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         total_resources = query.count()
         query = query.values(
             'datastream__user__nick',
+            'datastream__user__name',
             'status',
             'id',
             'datastream__guid',
