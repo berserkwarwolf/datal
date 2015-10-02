@@ -396,10 +396,11 @@ class DataStreamRevision(RevisionModel):
     def add_parameters(self, parameters):
         self.datastreamparameter_set.clear()
         
-        for name, default, position, description in parameters:
-            parameters = DataStreamParameter.objects.create(name=name, position=position, default=default,
-                                                            description=description)
-            self.datastreamparameter_set.add(parameters)
+        for parameter in parameters:
+            self.datastreamparameter_set.add(DataStreamParameter.objects.create(name=parameter['name']
+                                                                                , position=parameter['position']
+                                                                                , default=parameter['default']
+                                                                                , description=parameter['description']))
 
         self.save()
 

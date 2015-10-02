@@ -4,7 +4,6 @@ from django.core.urlresolvers import reverse
 from django.core.validators import validate_comma_separated_integer_list as vil
 from django.forms.formsets import formset_factory
 from django.forms.util import ErrorDict
-
 from core.choices import *
 from workspace.common.forms import TagForm, SourceForm, ParameterForm
 
@@ -126,7 +125,6 @@ class ViewDataStreamForm(forms.Form):
 
 class InitalizeCollectForm(forms.Form):
     dataset_revision_id = forms.IntegerField(label=ugettext_lazy('APP-DATASETREVISION-TEXT'), required=True)
-
 
 class PreviewForm(forms.Form):
     end_point = forms.CharField(required=False)
