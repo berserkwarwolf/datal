@@ -12,7 +12,7 @@
       "status": {{ item.status }},
       "status_name": "{{ item.status|status_str|capfirst }}",
       "user_id": {{ item.visualization__user__id }},
-      "user": "{{ item.visualization__user__nick }}",
+      "user": "{{ item.visualization__user__name }}",
       "category_id": {{ item.visualization__datastream__last_revision__category__id }},
       "category": "{{ item.visualization__datastream__last_revision__category__categoryi18n__name }}",
       "datastream_title": "{{ item.visualization__datastream__last_revision__datastreami18n__title}}",
