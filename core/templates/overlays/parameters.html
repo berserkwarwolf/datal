@@ -13,7 +13,7 @@
                         {% for parameter in datastream.parameters %}
                             <div class="row">
                                 <label for="id_param{{forloop.counter0}}">{{parameter.name}}</label>
-                                <input id="id_param{{forloop.counter0}}" name="param{{forloop.counter0}}" type="text" size="30" value="{{parameter.value}}" class="field"/>
+                                <input id="id_param{{forloop.counter0}}" name="param{{forloop.counter0}}" type="text" size="30" value="{{parameter.default}}" class="field"/>
                             </div>
                         {% endfor %}
                     </form>
