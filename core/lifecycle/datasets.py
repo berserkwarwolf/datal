@@ -4,9 +4,10 @@ from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IllegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
@@ -382,7 +383,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         return self.dataset_revision
 
     def _move_childs_to_draft(self):
-
+        """
+        Muevo las vistas y las visualizaciones asociadas a este dataset a BORRADOR
+        :return:
+        """
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
@@ -392,6 +396,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             for datastream_revision in datastream_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).save_as_draft()
+
+            visualization_revs = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__last_revision__dataset__id=self.dataset.id,
+                id=F('visualization__last_revision__id'),
+                status=StatusChoices.PUBLISHED
+            )
+
+            for revision in visualization_revs:
+                VisualizationLifeCycleManager(self.user, visualization_revision_id=revision.id).save_as_draft()
 
     def save_as_draft(self):
         self.dataset_revision.clone()
