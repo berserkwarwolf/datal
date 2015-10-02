@@ -3,6 +3,11 @@ import urllib
 
 from django.conf import settings
 from django.http import Http404
+from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy
+from django.template import loader, Context
+from django.views.decorators.http import require_http_methods
+from django.views.decorators.clickjacking import xframe_options_exempt
 
 from core.http import get_domain_with_protocol
 from core.utils import set_dataset_impl_type_nice
@@ -10,14 +15,11 @@ from core.models import DataStream, Account, DataStreamRevision
 from core.helpers import RequestProcessor
 from core.decorators import datal_cache_page
 from core.choices import ChannelTypes
-from django.views.decorators.http import require_http_methods
-from django.views.decorators.clickjacking import xframe_options_exempt
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
+from core.lib.datastore import *
 from microsites.viewDataStream import forms
-from django.http import HttpResponse
-from django.utils.translation import ugettext_lazy
-from django.template import loader, Context
+
 
 def view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL
@@ -65,7 +67,7 @@ def hits_stats(request, id, channel_type=None):
 
     try:
         datastream = DataStream.objects.get(pk=int(id))
-    except Visualization.DoesNotExist:
+    except DataStream.DoesNotExist:
         raise Http404
 
     hits_dao = DatastreamHitsDAO(datastream)
