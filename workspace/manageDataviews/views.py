@@ -193,7 +193,6 @@ def create(request):
             dataset=dataset_revision.dataset,
             language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
-            parameters=[], #TODO: Add parameters to UI
             **form.cleaned_data
         )
 
