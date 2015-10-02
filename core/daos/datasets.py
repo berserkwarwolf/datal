@@ -18,6 +18,9 @@ from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import CollectTypeChoices, SOURCE_IMPLEMENTATION_CHOICES, StatusChoices
 from core.models import DataStreamRevision, VisualizationRevision
 
+import logging
+
+logger = logging.getLogger(__name__)
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
     """ class for manage access to datasets' database tables """
@@ -238,6 +241,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         return dataset, dataset_revision
 
     def update(self, dataset_revision, changed_fields, **fields):
+        if settings.DEBUG: logger.info('Updating dataset %s' % str(fields))
         builder = DatasetImplBuilderWrapper(changed_fields=changed_fields, **fields).builder
 
         # TODO: Fix that

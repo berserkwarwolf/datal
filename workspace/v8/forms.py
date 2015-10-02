@@ -4,6 +4,14 @@ from django import forms
 from core.choices import VISUALIZATION_TYPES
 from core.v8.forms import RequestForm
 
+class DatasetLoadForm(RequestForm):
+    def clean(self):
+        cleaned_data = super(DatasetLoadForm, self).clean()
+        for key, valor in self.data.items():
+            if key not in cleaned_data and not key.startswith('form'):
+                cleaned_data[key]=valor
+        return cleaned_data
+
 
 # es el único que no hereda del RequestForm
 class DatastreamPreviewForm(forms.Form):
@@ -58,4 +66,6 @@ class VisualizationPreviewMapForm(VisualizationPreviewForm):
     lon = forms.CharField(required=True)
     # pTraceSelection: Rango para la seleccion de los trazos del mapa   
     traces = forms.CharField(required=False)
+    # pType
+    type = forms.ChoiceField(required=False, choices=VISUALIZATION_TYPES, initial='mapchart')
 
