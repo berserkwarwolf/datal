@@ -78,7 +78,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         this.data = new charts.models.ChartData({
-            id: this.get('resourceID'),
+            id: this.get('id'),
             type: this.get('type')
         });
 
@@ -134,13 +134,24 @@ charts.models.Chart = Backbone.Model.extend({
 
                 range_lat: this.parseColumnFormat(res.latitudSelection),
                 range_lon: this.parseColumnFormat(res.longitudSelection),
-                mapType: res.mapType.toUpperCase(),
+                mapType: res.mapType? res.mapType.toUpperCase(): undefined,
                 options:{
                     zoom: res.zoom,
-                    bounds: res.bounds.split(';')
+                    bounds: res.bounds? res.bounds.split(';'): undefined
                 }
 
             });
+            if (res.type === 'mapchart') {
+                data = _.extend(data,{
+                    range_lat: this.parseColumnFormat(res.latitudSelection),
+                    range_lon: this.parseColumnFormat(res.longitudSelection),
+                    mapType: res.mapType.toUpperCase(),
+                    options:{
+                        zoom: res.zoom,
+                        bounds: res.bounds? res.bounds.split(';'): undefined
+                    }
+                });
+            };
         }
         this.set(data);
     },
@@ -184,23 +195,21 @@ charts.models.Chart = Backbone.Model.extend({
 
         var params = {
                 nullValueAction: this.get('nullValueAction'),
-                nullValuePreset:  this.get('nullValuePreset'),
                 data: this.serializeServerExcelRange(this.get('range_data')),
                 lat: this.serializeServerExcelRange(this.get('range_lat')),
                 lon: this.serializeServerExcelRange(this.get('range_lon')),
                 revision_id: this.get('datastream_revision_id')
-            },
-            url = '/rest/maps/sample.json';
+            };
 
-        console.log(params);
+        if (this.has('nullValuePreset')) {
+            params.nullValuePreset = this.get('nullValuePreset');
+        }
 
-        return $.getJSON(url, params)
-            .then(function (response) {
-                self.parseMapResponse(response);
-            })
-            .error(function(response){
-                console.error('error en fetch');
-            });
+        this.data.set('filters', params);
+        return this.data.fetch().then(function () {
+            self.trigger("newDataReceived");
+        });
+
     },
 
     /**
@@ -242,6 +251,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     onChangeType: function (model, type) {
         console.log('type has changed to:', type);
+        this.data.set('type', type);
         if (type === 'mapchart') {
 
         };
@@ -251,16 +261,16 @@ charts.models.Chart = Backbone.Model.extend({
      * Default fetch filter updater
      */
     updateFetchFilters: function () {
-        var filters = this.get('options');
+        var filters = this.data.get('filters');
 
         if(this.get('type') == 'mapchart'){
-            filters = {
+            _.extend(filters, {
                 zoom: this.get('options').zoom,
                 bounds: this.get('options').bounds.join(';')
-            };
+            });
         }
 
-        this.data.set('fetchFilters', filters);
+        this.data.set('filters', filters).fetch();
     },
 
     /**
@@ -333,6 +343,9 @@ charts.models.Chart = Backbone.Model.extend({
 
     parseColumnFormat: function (serverExcelRange) {
         var col;
+        if (_.isUndefined(serverExcelRange)) {
+            return serverExcelRange;
+        };
         if (serverExcelRange.indexOf('Column:') !== -1) {
             col = serverExcelRange.replace('Column:', '');
             serverExcelRange = [col, ':', col].join('');

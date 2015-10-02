@@ -61,11 +61,8 @@ var MapView = StepViewSPA.extend({
 
     fetchPreviewData: function(){
         $("#ajax_loading_overlay").show();
-            this.model.fetchMapPreviewData()
-        .then(function () {
-            $("#ajax_loading_overlay").hide();
-        })
-        .error(function(response){
+
+        this.model.fetchMapPreviewData().always(function(){
             $("#ajax_loading_overlay").hide();
         });;
     },

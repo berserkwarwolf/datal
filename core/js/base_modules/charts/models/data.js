@@ -5,11 +5,10 @@ var charts = charts || {
 
 charts.models.ChartData = Backbone.Model.extend({
     type: 'line',
+    idAttribute: 'visualization_revision_id',
+    urlRoot: '/rest/charts/',
     defaults: {
-        urlRoot: '/rest/charts/',
-        urlMethod: '/data.json',
-        idAttribute: 'visualization_revision_id',
-        fetchFilters: {},
+        filters: {},
         type: 'line',
         fields: [
             // [fieldtype, fieldname]
@@ -31,7 +30,7 @@ charts.models.ChartData = Backbone.Model.extend({
     },
 
     initialize: function () {
-        this.on('change:fetchFilters', this.handleFetchFiltersChange, this);
+        this.on('change:filters', this.handleFetchFiltersChange, this);
     },
 
     /**
@@ -62,8 +61,21 @@ charts.models.ChartData = Backbone.Model.extend({
      * Se arma la url para el fetch utilizando los attributos pasados al modelo y los filtros existentes
      */
     url: function () {
-        var filters = this.get('fetchFilters');
-        var url = this.get('urlRoot') + this.get('id') + this.get('urlMethod') + '?' + $.param(filters);
+        var filters = this.get('filters'),
+            id = this.get('id'), // ID existe cuando la visualizacion está siendo editada
+            url,
+            endpoint = 'charts/';
+
+        if (this.get('type') === 'mapchart') {
+            endpoint = 'maps/';
+        }
+
+        if (_.isUndefined(id)) {
+            url = '/rest/' + endpoint + 'sample.json' + '?' + $.param(filters);
+        } else {
+            url = '/rest/' + endpoint + id + '/data.json' + '?' + $.param(filters);
+        }
+
         return url;
     }
 });
