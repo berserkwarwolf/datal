@@ -115,7 +115,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
         try:
-            parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
+            parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value')
         except FieldError:
             parameters = []
 
