@@ -80,7 +80,7 @@ var MainView = Backbone.View.extend({
         //Register maps views
         this.register( mapView, 'maps'  );
         this.register( metadataView, 'maps'  );
-        this.register( finishView, 'maps'  );
+        this.register( finishView, 'maps' );
 
         this.start();
 
@@ -187,8 +187,13 @@ var MainView = Backbone.View.extend({
 
         //edit
         if(this.model.get('isEdit')){
-            this.model.set('isMap', false);
-            this.currentFlow = 'charts';
+            if(this.model.get('type')=='mapchart'){
+                this.model.set('isMap', true);
+                this.currentFlow = 'maps';
+            }else{
+                this.model.set('isMap', false);
+                this.currentFlow = 'charts';
+            }
         }
         
         this.steps[this.currentFlow][this.index].start();

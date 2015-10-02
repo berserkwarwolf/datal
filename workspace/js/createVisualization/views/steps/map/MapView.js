@@ -36,6 +36,19 @@ var MapView = StepViewSPA.extend({
             }
         });
 
+                //edit
+        if(this.model.get('isEdit')){
+            
+            this.changeMapType(this.model.get('mapType'));
+
+            var that = this;
+            
+            console.log(this.model.get('mapType'));
+
+            $("#ajax_loading_overlay").show();
+
+        }
+
         // Event binding
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
         this.listenTo(this.model, 'newDataReceived',this.onChartChanged,this);
@@ -69,9 +82,13 @@ var MapView = StepViewSPA.extend({
     onClickMapTypeId: function(e){
         e.preventDefault();
         var type = $(e.currentTarget).data('type');
+        this.changeMapType(type);
+        this.model.set('mapType',type);
+    },
+
+    changeMapType: function(type){
         this.$('.mapTypeId').removeClass('active');
         this.$('[data-type="' + type + '"].mapTypeId').addClass('active');
-        this.model.set('mapType',type);
     },
 
     onChartChanged: function(){

@@ -180,6 +180,13 @@
         labelSelection: '{{ visualization_revision.chart.labelSelection }}',
         headerSelection: '{{ visualization_revision.chart.headerSelection }}',
         is3D: '{{ visualization_revision.chart.is3D }}',
+        {% if visualization_revision.format.type == 'mapchart' %}
+          longitudSelection: '{{ visualization_revision.chart.longitudSelection }}',
+          latitudSelection: '{{ visualization_revision.chart.latitudSelection }}',
+          mapType: '{{ visualization_revision.chart.mapType }}',
+          zoom: {{ visualization_revision.chart.zoom }},
+          bounds: '{{ visualization_revision.chart.bounds }}',
+        {% endif %}
       {% endif %}
     }
 

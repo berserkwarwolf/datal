@@ -55,9 +55,14 @@ var StartView = StepViewSPA.extend({
 		this.setFlow(null);
 
 		if(this.model.get('isEdit')){
-        	this.model.set('isMap', false);
 			this.model.set('type', this.model.get('type'));
-			this.setFlow('charts');
+			if(this.model.get('type')=='mapchart'){
+	            this.model.set('isMap', true);
+	            this.setFlow('maps');
+	        }else{
+	            this.model.set('isMap', false);
+	            this.setFlow('charts');
+        	}
 			this.next();
         }
 	}
