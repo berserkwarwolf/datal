@@ -239,6 +239,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'visualization__user__nick',
             'visualization__user__name',
             'visualization__last_revision_id',
+            'visualization__last_published_revision__modified_at',
             'visualization__datastream__id',
             'visualization__datastream__last_revision__id',
             'visualization__datastream__last_revision__category__id',

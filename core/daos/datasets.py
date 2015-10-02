@@ -146,10 +146,11 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         total_resources = query.count()
 
-        query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id', 'impl_type',
-                             'dataset__guid', 'category__id', 'dataset__id', 'id', 'category__categoryi18n__name',
-                             'dataseti18n__title', 'dataseti18n__description', 'created_at', 'modified_at', 'size', 'end_point',
-                             'dataset__user__id', 'dataset__last_revision_id')
+        query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id',
+                             'impl_type', 'dataset__guid', 'category__id', 'dataset__id', 'id',
+                             'category__categoryi18n__name', 'dataseti18n__title', 'dataseti18n__description',
+                             'created_at', 'modified_at', 'size', 'end_point', 'dataset__user__id',
+                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',
             'guid':'ao_datasets.guid','category_id':'ao_categories.id', 'dataset_id':'ao_datasets.id',
