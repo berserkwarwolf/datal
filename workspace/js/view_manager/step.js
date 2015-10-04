@@ -11,7 +11,6 @@ var Step = Backbone.Model.extend({
         this.resizeContainer();
     },
     init : function(){
-        console.log("Size")
     },
     start : function(){
         this.attributes.$Container.show();
@@ -1081,8 +1080,7 @@ var Step2 = Step.extend({
                     var lToken = "=" + lName + "&";
                     if(lData.indexOf(lToken) < 0){
                         var lDescription = $lTooltip.find('input[id*=id_parameter-description_]').val();
-                        var lDefault = $lTooltip.find('input[id*=id_parameter-description_]').val();
-
+                        var lDefault = $lTooltip.find('input[id*=id_parameterValue_]').val();
                         lData = lData + 'parameters-' + lPosition + '-name=' + lName;
                         lData = lData + '&parameters-' + lPosition + '-position=' + lPosition;
                         lData = lData + '&parameters-' + lPosition + '-description=' + lDescription;
