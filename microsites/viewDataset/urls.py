@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, url
 
-from core.downloadDataset.views import download
+from workspace.downloadDataset.views import download
 from microsites.viewDataset.views import view
 
 urlpatterns = patterns('',

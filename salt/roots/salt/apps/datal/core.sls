@@ -1,6 +1,13 @@
 {% set user = pillar['system']['user'] %}
 {% set group = pillar['system']['group'] %}
 
+{% if salt['grains.get']('os') == 'Debian' %}
+install_ruby:
+  pkg.installed:
+    - names:
+      - ruby
+{% endif %}
+
 sass_install:
   gem.installed:
     - name: sass
@@ -21,7 +28,7 @@ sass_install:
     - makedirs: True
 
 # Create data store resources directory
-{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
+{{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}:
   file.directory:
     - user: {{ user }}
     - group: {{ group }}
@@ -29,7 +36,7 @@ sass_install:
     - makedirs: True
 
 # Create data store temporary directory
-{{ salt['user.info'](user).home }}/{{ pillar['datastore']['sftp']['local_tmp_folder'] }}:
+{{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['local_tmp_folder'] }}:
   file.directory:
     - user: {{ user }}
     - group: {{ group }}

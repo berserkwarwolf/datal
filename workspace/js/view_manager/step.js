@@ -11,7 +11,6 @@ var Step = Backbone.Model.extend({
         this.resizeContainer();
     },
     init : function(){
-
     },
     start : function(){
         this.attributes.$Container.show();
@@ -203,6 +202,7 @@ var Step0 = Step.extend({
             $('.header').removeClass('fixedBar');
             $('.sectionTitleContainer').removeClass('fixedBar');
             $('.collapsedBar').removeClass('fixedBar');
+            $('.main-section').find('.context-menu').hide();
         }
     },
     loadDatastreamData : function(){
@@ -1080,8 +1080,7 @@ var Step2 = Step.extend({
                     var lToken = "=" + lName + "&";
                     if(lData.indexOf(lToken) < 0){
                         var lDescription = $lTooltip.find('input[id*=id_parameter-description_]').val();
-                        var lDefault = $lTooltip.find('input[id*=id_parameter-description_]').val();
-
+                        var lDefault = $lTooltip.find('input[id*=id_parameterValue_]').val();
                         lData = lData + 'parameters-' + lPosition + '-name=' + lName;
                         lData = lData + '&parameters-' + lPosition + '-position=' + lPosition;
                         lData = lData + '&parameters-' + lPosition + '-description=' + lDescription;
@@ -1234,7 +1233,7 @@ var Step3 = Step.extend({
 		$('#id_tags').html(contents);
 	},
 	requestDataStreamPreview : function(){
-		var lUrl 	= '/dataviews/action_preview';
+		var lUrl 	= '/rest/datastreams/sample.json';
 	    var lData 	= 'end_point=' + $.URLEncode(CreationManager.attributes.endPoint)
 	    			+ '&impl_type=' + CreationManager.attributes.implType
 	    			+ '&impl_details=' + CreationManager.attributes.implDetails
@@ -1285,7 +1284,7 @@ var Step3 = Step.extend({
         var category = step2.attributes.$Category.val();
         lHtml += '</span>';
         lHtml +=    '<span class="infoDS">' +
-                            '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.nick+'</strong></span> <span class="dateDS"> 0' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
+                            '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.name+'</strong></span> <span class="dateDS"> 0' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
                     '</span>' +
                 '</span>' +
             '</h2>';
@@ -1427,7 +1426,7 @@ var Step3 = Step.extend({
         var category = step2.attributes.$Category.val();
             lHtml +=   '</span>';
             lHtml +=        '<span class="infoDS">' +
-                                        '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.nick+'</strong></span> <span class="dateDS">0 ' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
+                                        '<span class="categoryDS">'+step2.attributes.$Category.find('option[value='+category+']').text()+'</span> <span class="sep">|</span> <span class="authorDS">' + gettext( "APP-BY-TEXT" ) + ' <strong>'+authManager.attributes.name+'</strong></span> <span class="dateDS">0 ' + gettext( "APP-MINUTESAGO-TEXT" ) + '</span>' +
                                     '</span>' +
                                 '</span>' +
                             '</h2>';

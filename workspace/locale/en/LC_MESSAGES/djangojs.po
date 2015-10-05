@@ -858,3 +858,15 @@ msgstr "Select the data you want to represent"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES"
 msgstr "Headlines and columns length must be the equal"
+
+msgid "APP-DELETE-DATAVIEW-TEXT"
+msgstr "Delete Dataview"
+
+msgid "APP-DELETE-VISUALIZATION-TEXT"
+msgstr "Delete Visualization"
+
+msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the datastream and the associated resources."
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error on deleting the visualization and the associated resources."

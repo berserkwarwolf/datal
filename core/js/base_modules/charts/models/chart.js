@@ -20,7 +20,7 @@ charts.models.Chart = Backbone.Model.extend({
         select_data: false,
 
         //validation
-        message: gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"),
+        message: '',
 
         //metadata
         meta_title: undefined,
@@ -72,6 +72,11 @@ charts.models.Chart = Backbone.Model.extend({
 
     },
     initialize: function () {
+        //Se inicializa acá para prevenir error en embed
+        if(window.gettext){
+            this.set('message',gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"));
+        }
+
         this.data = new charts.models.ChartData({
             id: this.get('resourceID'),
             type: this.get('type')
@@ -140,7 +145,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         var params = {
-            datastream_revision_id: self.get('datastream_revision_id'),
+            revision_id: self.get('datastream_revision_id'),
             data: this.serializeServerExcelRange(this.get('range_data')),
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),
@@ -157,7 +162,7 @@ charts.models.Chart = Backbone.Model.extend({
             params['invertedAxis'] = true;
         }
 
-        return $.getJSON('/visualizations/preview', params)
+        return $.getJSON('/rest/charts/sample.json', params)
         .then(function (response) {
             self.formatResponseData(response.series, response.values, response.labels);
         })

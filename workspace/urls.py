@@ -3,7 +3,18 @@ import os
 from django.conf.urls import *
 from django.conf import settings
 from django.views.i18n import javascript_catalog
+from workspace.rest.datasets import RestDataSetViewSet
+from workspace.rest.datastreams import RestDataStreamViewSet
+from workspace.rest.maps import RestMapViewSet
+from workspace.rest.charts import RestChartViewSet
+from rest_framework import routers
 
+
+router = routers.DefaultRouter()
+router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
+router.register(r'maps', RestMapViewSet, base_name='maps')
+router.register(r'charts', RestChartViewSet, base_name='charts')
+router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
 
 def jsi18n(request, packages=None, domain=None):
     if not domain:
@@ -46,6 +57,7 @@ urlpatterns = patterns('',
     (r'^js_workspace/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'workspace', 'js')}),
     # Please leave me always as the last url pattern
     url(r'^(?P<admin_url>[A-Za-z0-9\-]+)/$', 'workspace.manageMyAccount.views.signin', name='accounts.account_signin'),
+    (r'^rest/', include(router.urls)), 
 )
 
 handler404 = 'core.views.action404'

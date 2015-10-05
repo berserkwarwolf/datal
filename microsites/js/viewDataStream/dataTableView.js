@@ -21,8 +21,6 @@ var dataTableView = Backbone.View.extend({
 		this.listenTo(this.model, "change:result", this.render);
 	  
 	  //When page, rows or dataStream's arguments change then invoke
-	  this.listenTo(this.model, "change:page", this.invoke); 
-	  this.listenTo(this.model, "change:rows", this.invoke);		
 	  var i=0;
 		while(i < $parameters.size()){
 			var name = 'parameter' + i;
@@ -123,7 +121,7 @@ var dataTableView = Backbone.View.extend({
 
 		var dataStream = this.options.dataStream.attributes;
 
-	  var data = "datastream_revision_id=" + dataStream.id + "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
+	  var data = "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
 
 	  // Add DataStream pArguments
 	  var params = [],
@@ -139,7 +137,7 @@ var dataTableView = Backbone.View.extend({
 		}
 	    
 	  var ajax = $.ajax({ 
-			url: '/dataviews/invoke', 
+			url: '/rest/datastreams/' + dataStream.id + '/data.json', 
 		  type:'GET', 
 		  data: data, 
 		  dataType: 'json', 
@@ -147,8 +145,6 @@ var dataTableView = Backbone.View.extend({
 		  success: _.bind(this.onInvokeSuccess, this), 
 		  error: _.bind(this.onInvokeError, this)
 	  });
-
-	  // ajaxManager.register( 1, ajax );	
 
 	},
 
@@ -159,7 +155,6 @@ var dataTableView = Backbone.View.extend({
 	
 	onInvokeSuccess: function(response){
 		this.setLastUpdate(response);
-		//HERE IS SET THE DATA
 		this.model.set('result', response);
 	},
 	
@@ -188,7 +183,6 @@ var dataTableView = Backbone.View.extend({
 		    - parseFloat( $('.brandingHeader').height() )
 		    - parseFloat( $('.content').css('padding-top').split('px')[0] )
 		    - parseFloat( $('.content').css('padding-bottom').split('px')[0] )
-		    // - parseFloat( $('.brandingFooter').height() )
 		    - parseFloat( $('.miniFooterJunar').height() );
 		    
 		  $(heightContainer).height(height);
@@ -314,7 +308,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/datastreams/updategrid',
+			url: '/rest/datastreams/' + dataStream.id + '/data.grid',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
@@ -326,7 +320,8 @@ var dataTableView = Backbone.View.extend({
 			minheight: 400,
 			usepager: true,
 			useRp: true,
-			rp: 50,
+			rp: self.model.get('rows'),
+			page: self.model.get('page') + 1,
 			singleSelect: true,
 			resizable: true,
 			total: result.fLength,
@@ -345,7 +340,7 @@ var dataTableView = Backbone.View.extend({
 			onBeforeSend: function(settings){
 				
 				self.setFilterParams(settings);
-				
+				settings.url = settings.url.replace(/(page=).*?(&)/, '$1' + (this.newp - 1).toString() + '$2')
 				return true;
 
 			},
@@ -361,12 +356,6 @@ var dataTableView = Backbone.View.extend({
 					});
 					n++;					
 				}
-
-				// Add DataStream ID
-				params.push({
-					name: 'datastream_id',
-					value: dataStream.id
-				});
 
 				// Set Flex options
 				$('.dataTable .data .result').flexOptions({

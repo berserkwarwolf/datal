@@ -966,3 +966,15 @@ msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una n
 
 msgid "APP-THEOPENDATAPLATFORM-TEXT"
 msgstr "Plataforma de Datos Abiertos"
+
+msgid "APP-EDITPARAM-TEXT"
+msgstr "Editar Argumentos"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
+
+msgid "OVERLAY-DSEMBED-CHART-TITLE"
+msgstr "¡Agrega esta visualización donde quieras!"
+
+msgid "OVERLAY-DSEMBED-CHART-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"

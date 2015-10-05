@@ -4,9 +4,10 @@ from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n
+from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
+from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IllegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
@@ -255,7 +256,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         """ Elimina una revision o todas las revisiones de un dataset y la de sus datastreams hijos en cascada """
 
         # Tener en cuenta que si es necesario ejecutar varios delete, debemos crear un nuevo objecto LifeCycle
-
+        if settings.DEBUG: logger.info('removing dataset rev %d all:%s' % (self.dataset_revision.id, str(killemall)))
         if self.dataset_revision.status not in allowed_states:
             raise IllegalStateException(
                                     from_state=self.dataset_revision.status,
@@ -283,7 +284,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self._update_last_revisions()
         self._log_activity(ActionStreams.DELETE)
+        if settings.DEBUG: logger.info('Clean Caches')
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
+        self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
 
     def _remove_all(self):
         # Remove all asociated datastreams revisions
@@ -292,6 +295,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset.delete()
         self._log_activity(ActionStreams.DELETE)
         self._delete_cache(cache_key='my_total_datasets_%d' % self.dataset.user.id)
+        self._delete_cache(cache_key='account_total_datasets_%d' % self.dataset.user.account.id)
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """
@@ -321,6 +325,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data,
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
+        else:
+            fields['file_size'] = self.dataset_revision.size
+            fields['file_name'] = self.dataset_revision.filename
+            fields['end_point'] = self.dataset_revision.end_point
+
+        impl_details = DatasetImplBuilderWrapper(**fields).build()
 
         if old_status == StatusChoices.PUBLISHED:
             if form_status == StatusChoices.DRAFT:
@@ -333,8 +343,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     self.dataset_revision.id
                 ))
                 self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, **fields
-                )
+                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
+                    **fields)
                 logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
                     self.dataset_revision.id
                 ))
@@ -373,10 +383,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.status = form_status
                 self.dataset_revision.save()
 
+        self._log_activity(ActionStreams.EDIT)
         return self.dataset_revision
 
     def _move_childs_to_draft(self):
-
+        """
+        Muevo las vistas y las visualizaciones asociadas a este dataset a BORRADOR
+        :return:
+        """
         with transaction.atomic():
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
@@ -386,6 +400,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             for datastream_revision in datastream_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).save_as_draft()
+
+            visualization_revs = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__last_revision__dataset__id=self.dataset.id,
+                id=F('visualization__last_revision__id'),
+                status=StatusChoices.PUBLISHED
+            )
+
+            for revision in visualization_revs:
+                VisualizationLifeCycleManager(self.user, visualization_revision_id=revision.id).save_as_draft()
 
     def save_as_draft(self):
         self.dataset_revision.clone()

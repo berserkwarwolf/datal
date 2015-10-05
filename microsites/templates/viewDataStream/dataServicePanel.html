@@ -1,0 +1,200 @@
+{% load i18n %}
+{% load extra_tags components %}
+
+<!-- COLUMNS -->
+<div class="columns clearfix" itemscope itemtype="http://schema.org/WebPage">
+
+    <!-- COLUMN - Right -->
+    <div class="CR dsInfoBox relative">
+
+        <!-- SHADOWS -->
+        <div class="cv tl"></div>
+
+        <!-- COLUMN CONTENT -->
+        <div class="columnContent clearfix">
+
+            <!-- DATA SOURCE BOX -->
+            <div id="" class="boxCR dataSourceBox">
+                <div class="boxTitle">
+                    <h4>{% trans "APP-DATASET-TEXT" %}</h4>
+                </div>
+                <div class="boxInner clearfix">
+                    
+                {% if datastream.datastream_type == 'URL' %}
+                    <div class="img FL clearfix">
+                        <img src="http://open.thumbshots.org/image.pxf?url={{datastream.end_point|urlEncode}}" alt="{{datastream.end_point}}" title="{{datastream.end_point}}" class="FL" width="66"/>
+                    </div>
+                    <div class="text FR">
+                {% elif datastream.datastream_type == 'SELF PUBLISH' %}
+                    <div class="text spImage">
+                {% elif datastream.datastream_type == 'WEBSERVICE' %}
+                    <div class="text spImage soapImage">
+                {% endif %}
+
+                        <div id="id_dataservice_goToSource_{{forloop.counter0}}" class="gotosource">
+                            {% if datastream.datastream_type == 'URL' %}
+                                <div class="gotosourceInner">
+                                    <a id="id_gotosource" href="{{datastream.end_point}}" target="_blank" rel="nofollow" title="{{datastream.end_point}}">{{datastream.end_point}}</a>
+                                </div>
+                            {% elif datastream.datastream_type == 'SELF PUBLISH' %}
+                                <div class="gotosourceInner">
+                                    <p class="userText">{% trans "APP-USERUPLOAD-TEXT" %}</p>
+                                </div>
+                            {% elif datastream.datastream_type == 'WEBSERVICE' %}
+                                <div class="gotosourceInner">
+                                    <p class="userText">{% trans "APP-SOAP-TEXT" %}</p>
+                                </div>
+                            {% endif %}
+                            <span class="transparency">&nbsp;</span>
+                        </div>
+                        {% if datastream.created_at and not preferences.account_hidelastupdate%}
+                            <p style="font-size:11px"><strong>{% trans "APP-LAST-MODIFIED" %}</strong><br>{{datastream.created_at}}</p>
+                        {% endif %}
+                        {% if datastream.datastream_type == 'SELF PUBLISH' %}
+                            <a rel="nofollow" href="{% url "datastream_manager.download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="button small" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}"><span>{% trans "APP-DOWNLOADDATASET-TEXT" %}</span></a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            {% if datastream.get_sources %}
+             <div id="id_guid_container" class="boxCR GUIDBox sourcesBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_Sources">{% trans "APP-SOURCES-TEXT" %}:</h5>
+                    <ul class="clearfix">
+                    {% for source in datastream.get_sources %}
+                        <li class="FL"><a href="{{source.url|addhttp}}" target="_blank" title="{{source.name}}">{{source.name}}</a>{% if not forloop.last %}<em class="comma">,&nbsp;</em>{% endif %}</li>
+                    {%endfor%}
+                    </ul>
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- GUID BOX -->
+            <div id="id_guid_container" class="boxCR GUIDBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_GUID">GUID:</h5>
+                    <p class="FL textGUID">{{datastream.guid}}</p>
+                    <p class="clear tip">{% trans "DSDET-GUID-TIP" %}</p>
+                </div>
+            </div>
+
+            <!-- STAT BOX -->
+            <div id="id_stat_container" class="boxCR GUIDBox statsBox">
+                <div class="boxInner toolbar clearfix">
+                    <h5 class="FL Icon ic_Stats">{% trans "DSDET-STAT-TEXT" %}</h5>
+                    <div id="id_statChart"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- COLUMN - Left -->
+    <div id="id_dataStreamContainer" class="CL minHeight">
+
+        <!-- ACTIONS TOOLBAR -->
+        <div id="id_dataservice_toolbar_{{datastream.datastream_id}}" class="actionsToolbar toolbar clearfix DN">
+
+            <!-- RELOAD -->
+            <a href="javascript:;" id="id_resetDataServiceButton_{{datastream.datastream_id}}" title="{% trans 'APP-RELOAD-TEXT' %}" class="FR Icon ic_Refresh">{% trans "APP-RELOAD-TEXT" %}</a>
+
+            <span class="Sep FR"><span class="DN">|</span></span>
+
+            <!-- EXPAND -->
+            <a href="javascript:;" id="id_expandDataServiceButton_{{datastream.datastream_id}}" title="{% trans 'APP-EXPAND-TEXT' %}" class="FR Icon ic_Expand">{% trans "APP-EXPAND-TEXT" %}</a>
+
+            <!-- COLLAPSE -->
+            <a href="javascript:;" id="id_collapseDataServiceButton_{{datastream.datastream_id}}" title="{% trans 'APP-COLLAPSE-TEXT' %}" class="FR Icon ic_Collapse" style="display:none;">{% trans "APP-COLLAPSE-TEXT" %}</a>
+            
+            <span class="Sep FR"><span class="DN">|</span></span>
+
+            <!-- PIVOT TABLE -->
+            {% if preferences.account_pivottable %}
+            <a href="javascript:;" id="id_pivotDataServiceButton_{{datastream.datastream_id}}" title="{% trans 'DSDET-PIVOTTABLE-ICON' %}" class="FR Icon ic_PivotTable">{% trans "DSDET-PIVOTTABLE-ICON" %}</a>
+            {% endif %}
+
+        </div>
+
+        <!-- DATA STREAM CONTAINER -->
+        <div class="dataStreamContainer" id="id_datastreamResult">{{datastream_html|safe}}</div>
+
+        <!-- DATA STREAMS ACTIONS - bottom -->
+        <div class="dataStreamActions bottomActions DN">
+            <div class="actionsInner toolbar clearfix">
+
+                <!-- CACHE NOTIFICATION -->
+                <div class="cacheNotification toolbar FL relative" id="id_notification" style="display:none;">
+                    <span id="id_notificationMessage" class="FL"></span>
+                    <span class="sep FL"><span class="DN">|</span></span>
+                </div>
+
+                <!-- ACTIONS MENU -->
+                <div class="actionsMenu relative FR">
+                    <a title="{% trans 'APP-ACTIONS-TEXT' %}" class="Icon FR ic_Menu" id="id_menuDataServiceButton_{{datastream.datastream_id}}" href="javascript:;"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a>
+                    <div id="id_tooltipDataServiceButton_{{datastream.datastream_id}}" class="dashboard-dataservice-tooltip">
+                        <div class="menuInner">
+                            <ul class="In">
+                                <li class="J"><a class="Icon FR ic_Menu open" title="Actions" href="javascript:;" rel="nofollow"><span>{% trans "APP-ACTIONS-TEXT" %}</span></a></li>
+                                <li class="Item"><a href="{% url "datastreams-data" datastream.last_published_revision_id 'csv' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-TITLE' %}" class="Icon ic_CSV" rel="nofollow">{% trans "APP-EXPORTDS-TEXT" %}</a></li>
+                                <li class="Item"><a href="{% url "datastreams-data" datastream.last_published_revision_id 'xls' %}{%if parameters_query%}?{{parameters_query}}{%endif%}" title="{% trans 'APP-EXPORTDS-XLS' %}" class="Icon ic_XLS" rel="nofollow">{% trans "APP-EXPORTDS-XLS" %}</a></li>
+                                <li class="Item"> <a href="javascript:;" id="id_googlespreadsheetDataStreamButton_" title="{% trans 'APP-GOOGLESPREADSHEETS-TITLE' %}" class="Icon ic_GoogleDocs" rel="nofollow">{% trans "DSDET-GOOGLESPREADSHEETS-TITLE" %}</a></li>
+                                <li class="Item"> <a href="javascript:;" id="id_addEmbedDataServiceButton_" title="{% trans 'DSDET-EMBED-TITLE' %}" class="Icon ic_AddEmbed" rel="nofollow">{% trans "APP-GETEMBEDCODE-TEXT" %}</a></li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="sep FR"><span class="DN">|</span></div>
+
+            </div>
+        </div>
+
+        <script type="text/javascript">
+          var $datastream = $("#id_dataStreamContainer");
+          $datastream.data("user_nick", "{{datastream.user_nick}}");
+          $datastream.data("dataservice_id", "{{datastream.datastream_id}}");
+          $datastream.data("dataservice_end_point", "{%if parameters_query%}\u0026{{parameters_query|escapejs}}{%endif%}");
+          $datastream.data("dataservice_parameters", "{% for parameter in datastream.parameters %}{% if not forloop.first %}, {% endif %}{{parameter.name}}{%endfor%}");
+          $datastream.data("datasource_end_point", "{{datastream.end_point|escapejs}}");
+          $datastream.data("dataservice_title", "{{datastream.title}}");
+          $datastream.data("dataservice_embed_url", "{{base_uri}}{% url 'viewDataStream.embed' datastream.guid %}?header_row=0&fixed_column=0{%if parameters_query%}&{{parameters_query}}{%endif%}");
+          $datastream.data("permalink", "{{base_uri}}{{ datastream.permalink }}{%if parameters_query%}?{{parameters_query}}{%endif%}");
+          $datastream.data("guid", "{{datastream.guid}}");
+          $datastream.data("datastreamrevision_id", "{{datastream.datastreamrevision_id}}");
+        </script>
+
+    </div>
+
+</div>
+
+<!-- GRAY CONTAINER -->
+<div class="grayContainer">
+
+    <!-- COLUMNS -->
+    <div class="columns clearfix">
+
+        <!-- COLUMN - Left -->
+        <div class="CL">
+
+            {% include "datastream_manager/dataServiceNotesPanel.html" %}
+
+            {% if messages %}
+            <style>
+            ul.clarin{border-top: 1px solid #E1E0E0;padding-top: 10px;margin-bottom: 45px;}
+            ul.clarin li {border-bottom: 1px solid #E1E0E0;font-size: 14px;line-height: 23px;padding: 0 0 10px;margin-bottom: 10px;}
+            ul.clarin li strong {font-size: 12px;}
+            h3.clarin{padding-bottom: 13px;font-size: 18px;color: #F28000;}
+            </style>
+
+            <h3 class="clarin">Histórico</h3>
+            <ul class="clarin">
+            {% for msg in messages %}
+            <li><strong>{{msg.created_at}}</strong> <span class="sep">–</span> {{msg.msg|safe}}</li>
+            {%endfor%}
+            </ul>
+            {% endif %}
+
+        </div>
+
+    </div>
+</div>

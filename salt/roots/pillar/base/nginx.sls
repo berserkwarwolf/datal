@@ -1,6 +1,6 @@
 nginx:
   ng:
-    install_from_ppa: True
+    install_from_ppa: False
     ppa_version: 'stable'
 
     lookup:
@@ -54,7 +54,7 @@ nginx:
           enabled: True
           config:
             - server:
-              - server_name: 'api.dev'
+              - server_name: 'api.dev *.api.dev'
               - access_log: /var/log/nginx/api-access.log
               - error_log: /var/log/nginx/api-error.log
               - client_max_body_size: 48m
@@ -75,6 +75,7 @@ nginx:
           config:
             - server:
               - server_name: 'datastore.dev'
+              - listen: 8888
               - access_log: /var/log/nginx/datastore-access.log
               - error_log: /var/log/nginx/datastore-error.log
               - root: /home/vagrant/datastore/
@@ -83,7 +84,7 @@ nginx:
           enabled: True
           config:
             - server:
-              - server_name: 'microsites.dev microsite.dev'
+              - server_name: 'microsites.dev microsite.dev *.microsites.dev'
               - access_log: /var/log/nginx/microsites-access.log
               - error_log /var/log/nginx/microsites-error.log
               - client_max_body_size: 48m

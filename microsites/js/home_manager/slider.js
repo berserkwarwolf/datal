@@ -98,8 +98,8 @@ function startWaitMessage(pHTMLElement){
 
 function invokeDataService(pEndPoint, pDataServiceId){
 
-    var lUrl = '/dataviews/invoke';
-    var lData= $.param({datastream_revision_id: pDataServiceId, limit: 50});
+    var lUrl = '/rest/datastreams/' + pDataServiceId + '/data.json';
+    var lData= $.param({limit: 50});
     if (pEndPoint) {
       lData += pEndPoint;
     }
@@ -248,8 +248,8 @@ var HomeChart = Backbone.Model.extend({
     },  
     executeDataStream : function(){
         var att     = this.attributes;
-        var lUrl    = '/datastreams/invoke';
-        var lData   = 'datastream_revision_id=' + att.dataStreamId;
+        var lUrl    = '/rest/datastreams/'+ att.dataStreamId + '/data.json';
+        var lData   = '';
         
         startWaitMessage(att.$Container.find('#id_chartDisplay'));
         

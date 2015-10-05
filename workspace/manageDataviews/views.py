@@ -17,8 +17,10 @@ from core.exceptions import DataStreamNotFoundException, DatasetNotFoundExceptio
 from workspace.exceptions import DatastreamSaveException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core import engine
+from core.decorators import datal_cache_page
+from core.v8.factories import AbstractCommandFactory
 from core.utils import DateTimeEncoder
+
 
 
 logger = logging.getLogger(__name__)
@@ -38,7 +40,7 @@ def action_view(request, revision_id):
     credentials = request.auth_manager
     categories = CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id','name')
     status_options = credentials.get_allowed_actions()
-    
+
     return render_to_response('viewDataStream/index.html', locals())
 
 
@@ -90,7 +92,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         if bb_request.get('order')=="desc":
             sort_by = "-"+ sort_by
 
-    resources,total_resources = DataStreamDBDAO().query(
+    total_resources = request.stats['account_total_datastreams']
+
+    resources,total_entries = DataStreamDBDAO().query(
         account_id=request.account.id,
         language=request.user.language,
         page=page,
@@ -105,7 +109,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['dataset__last_revision__id']})
 
-    data = {'total_resources': total_resources, 'resources': resources}
+    data = {'total_entries': total_entries, 'total_resources': total_resources, 'resources': resources, 'total_entries': total_entries}
     response = DatastreamList().render(data)
     
     return JSONHttpResponse(response)
@@ -189,7 +193,6 @@ def create(request):
             dataset=dataset_revision.dataset,
             language=request.auth_manager.language,
             category_id=form.cleaned_data['category'],
-            parameters=[], #TODO: Add parameters to UI
             **form.cleaned_data
         )
 
@@ -360,30 +363,3 @@ def change_status(request, datastream_revision_id=None):
 
         return JSONHttpResponse(json.dumps(response, cls=DateTimeEncoder))
     
-@csrf_exempt
-@require_http_methods(["POST"])
-def action_preview(request):
-    form = PreviewForm(request.POST)
-    if form.is_valid():
-
-        query = { 'pEndPoint': form.cleaned_data['end_point'],
-                  'pImplType': form.cleaned_data['impl_type'],
-                  'pImplDetails': form.cleaned_data['impl_details'],
-                  'pBucketName': form.cleaned_data['bucket_name'],
-                  'pDataSource': form.cleaned_data['datasource'],
-                  'pSelectStatement': form.cleaned_data['select_statement'],
-                  'pRdfTemplate': form.cleaned_data['rdf_template'],
-                  'pUserId': request.auth_manager.id,
-                  'pLimit': form.cleaned_data['limit']
-                }
-
-        getdict = request.POST.dict()
-        for k in ['end_point', 'impl_type', 'datasource', 'select_statement', 'limit', 'rdf_template']:
-            if getdict.has_key(k): getdict.pop(k)
-        query.update(getdict)
-        response, mimetype = engine.preview(query)
-        # return HttpResponse(engine.preview(query), mimetype='application/json;charset=utf-8')
-        return HttpResponse(response, mimetype)
-
-    else:
-        raise Http404(form.get_error_description())

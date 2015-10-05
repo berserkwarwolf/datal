@@ -1,11 +1,12 @@
 {% load datastream_tags %}
 {
-  "total_entries":{{data.total_resources}},
+  "total_entries":{{data.total_entries}},
+  "total_resources":{{data.total_resources}},
   "items":
     [
     {% for resource in data.resources %}
     {
-        "author": "{{resource.datastream__user__nick}}"
+        "author": "{{resource.datastream__user__name}}"
         , "status": {{resource.status}}
         , "status_nice": "{{resource.status|status_str|capfirst}}"
         , "user_id": "{{resource.datastream__user__id}}" 

@@ -843,3 +843,15 @@ msgstr "Seleccione los datos que desea representar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES"
 msgstr "La cantidad de columnas deben coincidir con la cantidad de encabezados seleccionados"
+
+msgid "APP-DELETE-DATAVIEW-TEXT"
+msgstr "Eliminar Vista de Datos"
+
+msgid "APP-DELETE-VISUALIZATION-TEXT"
+msgstr "Eliminar Visualización"
+
+msgid "APP-DELETE-DATASTREAM-ACTION-ERROR-TEXT"
+msgstr "Error al eliminar la vista y sus recursos asociados."
+
+msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
+msgstr "Error al eliminar la visualización y sus recursos asociados."

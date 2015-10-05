@@ -14,65 +14,24 @@ var datasetView = Backbone.Epoxy.View.extend({
 	initialize: function(){
 		this.template = _.template( $("#context-menu-template").html() );
 		this.listenTo(this.model, "change", this.render);
+		this.onTabActive();
 		this.render();
 	},
 
 	render: function() {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
-		this.setContentHeight();
 		return this;
 	},
 
-	setContentHeight: function(){
-
-		var self = this;
-
-		$(document).ready(function(){
-
-			var otherHeights = 0;
-
-			self.setHeights( '.resources-table', otherHeights );
-
-		});
-
+	onTabActive:function() {
+		var $dataTabs;
+	    $dataTabs = $(".detail").hashTabs({
+	      smoothScroll: {
+	        enabled: true,
+	        initialTabId: "smooth-scroller"
+	      }
+	    });
 	},
-
-	setHeights: function(theContainer, theHeight){
-
-		if(typeof theHeight == 'undefined'){
-			theHeight = 0;
-		}
-
-		var heightContainer = String(theContainer),
-			tabsHeight = parseFloat( $('.main-navigation').height() ),
-			otherHeight = theHeight,
-			minHeight = tabsHeight - otherHeight;
-
-		$(window).resize(function(){
-
-			var windowHeight;
-			if( $(window).height() < 600){
-			// Set window height minimum value to 600
-				windowHeight = 600;
-			}else{
-				windowHeight = $(window).height();
-			}
-
-			var sectionContentHeight =
-			windowHeight
-			- parseFloat( otherHeight )
-			- $('.header').height()
-			- $('.main-section .section-title').height()
-			- parseFloat( $('.main-section .section-content').css('padding-top').split('px')[0] )
-			- parseInt($('.main-section .section-content .detail').css('padding-top').split('px')[0])
-			- parseInt($('.main-section .section-content .detail').css('padding-bottom').split('px')[0])
-			- 20; // to set some space at the bottom
-
-			$(heightContainer).css('height', sectionContentHeight+'px');
-
-		}).resize();
-
-	}, 
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
@@ -169,6 +128,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 			}
 		});
 
-	}
+	},
+
 
 });

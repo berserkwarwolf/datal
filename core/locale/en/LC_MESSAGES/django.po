@@ -968,3 +968,15 @@ msgstr "It might have been removed, or its URL has been changed because of a new
 
 msgid "APP-THEOPENDATAPLATFORM-TEXT"
 msgstr "The Open Data Platform"
+
+msgid "APP-EDITPARAM-TEXT"
+msgstr "Edit Arguments"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Change the values of the arguments in order to interact with the different views of the data:"
+
+msgid "OVERLAY-DSEMBED-CHART-TITLE"
+msgstr "Add this Visualization everywhere!"
+
+msgid "OVERLAY-DSEMBED-CHART-TIP"
+msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"

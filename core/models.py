@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 
 
 def add_facets_to_doc(resource, account, doc):
-    logger = logging.getLogger(__name__)
+
     faceted = account.faceted_fields()
     if resource.meta_text:
         try:
@@ -165,8 +165,12 @@ class Account(models.Model):
         total_datasets = c.get('account_total_datasets_' + str(self.id))
         if not total_datasets:
             total_datasets =  Dataset.objects.filter(user__in=users).count()
+            if settings.DEBUG: logger.info('get_total_datasets from database %d' % total_datasets)
             if total_datasets > 0:
                 c.set('account_total_datasets_' + str(self.id), total_datasets, settings.REDIS_STATS_TTL)
+        else:
+            if settings.DEBUG: logger.info('get_total_datasets from cache %s' % total_datasets)
+            
         return total_datasets
 
     def get_total_datastreams(self):
@@ -392,10 +396,11 @@ class DataStreamRevision(RevisionModel):
     def add_parameters(self, parameters):
         self.datastreamparameter_set.clear()
         
-        for name, default, position, description in parameters:
-            parameters = DataStreamParameter.objects.create(name=name, position=position, default=default,
-                                                            description=description)
-            self.datastreamparameter_set.add(parameters)
+        for parameter in parameters:
+            self.datastreamparameter_set.add(DataStreamParameter.objects.create(name=parameter['name']
+                                                                                , position=parameter['position']
+                                                                                , default=parameter['default']
+                                                                                , description=parameter['description']))
 
         self.save()
 
@@ -563,7 +568,7 @@ class DatasetRevision(RevisionModel):
         if settings.USE_DATASTORE == 'sftp':
             # We MUST rewrite all file storage logic very SOON
             return '{}/{}/{}'.format(
-                settings.SFTP_INTERNAL_BASE_URL,
+                settings.SFTP_BASE_URL,
                 settings.AWS_BUCKET_NAME,
                 self.end_point.replace('file://', '')
             )
@@ -713,7 +718,8 @@ class Visualization(GuidModel):
 
 class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
-    datastream_revision = models.ForeignKey('DataStreamRevision', verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
+    datastream_revision = models.ForeignKey('DataStreamRevision',
+                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     lib = models.CharField(max_length=10, choices=choices.VISUALIZATION_LIBS)
     impl_details = models.TextField(blank=True)
@@ -740,11 +746,14 @@ class VisualizationRevision(RevisionModel):
 
     def clone(self, status=choices.StatusChoices.DRAFT):
         visualization_revision = VisualizationRevision(
-            visualization = self.visualization,
-            user = self.user,
-            impl_details = self.impl_details,
-            meta_text = self.meta_text,
-            status = status
+            visualization=self.visualization,
+            datastream_revision=self.datastream_revision,
+            user=self.user,
+            lib=self.lib,
+            impl_details=self.impl_details,
+            meta_text=self.meta_text,
+            status=status,
+            parameters=self.parameters
         )
 
         visualization_revision.save()

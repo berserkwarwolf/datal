@@ -17,10 +17,16 @@ from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
 from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
+from django.core.exceptions import FieldError
+
 from core.choices import STATUS_CHOICES
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
 from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
+
+from django.core.urlresolvers import reverse
+from core import helpers
+
 
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
@@ -108,8 +114,11 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         tags = datastream_revision.tagdatastream_set.all().values('tag__name', 'tag__status', 'tag__id')
         sources = datastream_revision.sourcedatastream_set.all().values('source__name', 'source__url', 'source__id')
-        #parameters = datastream_revision.datastreamparameter_set.all().values('name', 'value') # TODO: Reveer
-        parameters = []
+
+        try:
+            parameters = datastream_revision.datastreamparameter_set.all().values('name', 'default', 'position', 'description')
+        except FieldError, e:
+            parameters = []
 
         # Get category name
         category = datastream_revision.category.categoryi18n_set.get(language=language)
@@ -118,11 +127,17 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         # Muestro el link del micrositio solo si esta publicada la revision
         public_url = ''
+        embed_url = ''
         if datastream_revision.datastream.last_published_revision:
             domain = datastream_revision.user.account.get_preference('account.domain')
             if not domain.startswith('http'):
                 domain = 'http://' + domain
             public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
+            embed_url = '{}{}'.format(domain, reverse(
+                'viewDataStream.embed',
+                urlconf='microsites.urls',
+                kwargs={'guid': datastream_revision.datastream.guid}
+            ))
 
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
@@ -153,6 +168,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             parameters=parameters,
             public_url=public_url,
             slug= slugify(datastreami18n.title),
+            embed_url=embed_url
         )
 
         return datastream
@@ -186,6 +202,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         total_resources = query.count()
         query = query.values(
             'datastream__user__nick',
+            'datastream__user__name',
             'status',
             'id',
             'datastream__guid',
@@ -198,6 +215,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
+            'datastream__last_published_revision__modified_at',
             'dataset__last_revision__dataseti18n__title',
             'dataset__last_revision__impl_type',
             'dataset__last_revision__id'
@@ -212,6 +230,54 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return query, total_resources
 
+    def query_hot_n(self, limit, lang, hot = None):
+
+        if not hot:
+            hot = Setting.objects.get(pk = settings.HOT_DATASTREAMS).value
+
+        sql = """SELECT `ao_datastream_revisions`.`id` as 'datastream_revision_id',
+                   `ao_datastream_revisions`.`datastream_id` as 'datastream_id',
+                   `ao_datastream_i18n`.`title`,
+                   `ao_datastream_i18n`.`description`,
+                   `ao_categories_i18n`.`name` AS `category_name`,
+                   `ao_users`.`nick` AS `user_nick`,
+                   `ao_users`.`email` AS `user_email`,
+                   `ao_users`.`account_id`
+            FROM `ao_datastream_revisions`
+            INNER JOIN `ao_datastream_i18n` ON (`ao_datastream_revisions`.`id` = `ao_datastream_i18n`.`datastream_revision_id`)
+            INNER JOIN `ao_categories` ON (`ao_datastream_revisions`.`category_id` = `ao_categories`.`id`)
+            INNER JOIN `ao_categories_i18n` ON (`ao_categories`.`id` = `ao_categories_i18n`.`category_id`)
+            INNER JOIN `ao_datastreams` ON (`ao_datastream_revisions`.`datastream_id` = `ao_datastreams`.`id`)
+            INNER JOIN `ao_users` ON (`ao_datastreams`.`user_id` = `ao_users`.`id`)
+            WHERE `ao_datastream_revisions`.`id` IN (
+                SELECT MAX(`ao_datastream_revisions`.`id`)
+                FROM `ao_datastream_revisions`
+                 WHERE `ao_datastream_revisions`.`datastream_id` IN (""" + hot + """)
+                       AND `ao_datastream_revisions`.`status` = 3
+                GROUP BY `datastream_id`
+            ) -- AND `ao_categories_i18n`.`language` = %s"""
+
+        cursor = connection.cursor()
+        cursor.execute(sql, [lang])
+        row = cursor.fetchone()
+        datastreams = []
+        while row:
+            datastream_id = row[1]
+            title = row[2]
+            slug = slugify(title)
+            permalink = reverse('datastreams-invoke', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
+            datastreams.append({'id'          : row[0],
+                                'title'        : title,
+                                'description'  : row[3],
+                                'category_name': row[4],
+                                'user_nick'    : row[5],
+                                'user_email'   : row[6],
+                                'permalink'    : permalink,
+                                'account_id'   : row[7]
+                                })
+            row = cursor.fetchone()
+        return datastreams
+
     def query_filters(self, account_id=None, language=None):
         """
         Reads available filters from a resource array. Returns an array with objects and their
@@ -223,7 +289,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                                                 datastreami18n__language=language,
                                                 category__categoryi18n__language=language)
 
-        query = query.values('datastream__user__nick', 'status',
+        query = query.values('datastream__user__nick', 'datastream__user__name', 'status',
                              'category__categoryi18n__name')
 
         filters = set([])
@@ -239,7 +305,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
                     res.get('category__categoryi18n__name')))
             if res.get('datastream__user__nick'):
                 filters.add(('author', res.get('datastream__user__nick'),
-                    res.get('datastream__user__nick')))
+                    res.get('datastream__user__name')))
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 

@@ -1,6 +1,6 @@
 var dataTableView = Backbone.View.extend({
 
-	el: '.detail-container',	 
+	el: '.detail',	 
 	
 	template: null,
 	parentView: null,
@@ -92,7 +92,7 @@ var dataTableView = Backbone.View.extend({
 
 		var dataStream = this.options.dataStream.attributes;
 
-	  var data = "datastream_revision_id=" + dataStream.id + "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
+	  var data = "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
 
 	  // Add DataStream pArguments
 	  var params = [],
@@ -108,7 +108,7 @@ var dataTableView = Backbone.View.extend({
 		}
 	    
 	  var ajax = $.ajax({ 
-			url: '/dataviews/invoke', 
+			url: '/rest/datastreams/' + dataStream.id + '/data.json', 
 		  type:'GET', 
 		  data: data, 
 		  dataType: 'json', 
@@ -248,7 +248,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/dataviews/action_updategrid',
+			url: '/rest/datastreams/' + dataStream.lastPublishRevisionId + '/data.grid',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
@@ -260,7 +260,8 @@ var dataTableView = Backbone.View.extend({
 			minheight: 400,
 			usepager: true,
 			useRp: true,
-			rp: 50,
+			page: self.model.get('page') + 1,
+			rp: self.model.get('rows'),
 			singleSelect: true,
 			resizable: true,
 			total: result.fLength,
@@ -279,7 +280,7 @@ var dataTableView = Backbone.View.extend({
 			onBeforeSend: function(settings){
 				
 				self.setFilterParams(settings);
-				
+				settings.url = settings.url.replace(/(page=).*?(&)/, '$1' + (this.newp - 1).toString() + '$2')
 				return true;
 
 			},
@@ -296,12 +297,6 @@ var dataTableView = Backbone.View.extend({
 					n++;					
 				}
 
-				// Add DataStream ID
-				params.push({
-					name: 'datastream_id',
-					value: dataStream.id
-				});
-
 				// Set Flex options
 				$('.dataTable .data .result').flexOptions({
 					params: params
@@ -311,8 +306,12 @@ var dataTableView = Backbone.View.extend({
 
 			},
 			onSuccess: function(result){
+			    console.log('OK');
+			    console.log(result);
 			},
 			onError: function(result){				
+    			console.log('ERROR');
+    			console.log(result);
 			}
 		});
 	

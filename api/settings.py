@@ -35,6 +35,24 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 #API_TYPE['04'] = {'max_calls_per_month': 1000000, 'calls_per_day': 33333, 'lapse_between_calls': 0}
 
 
+REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
+    'rest_framework.authentication.SessionAuthentication',
+    'api.rest.auth.DatalApiAuthentication',
+)
+
+REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
+    'rest_framework.permissions.IsAuthenticated',
+    'api.rest.permissions.DatalApiPermission',
+)
+
+REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (
+    'rest_framework.throttling.UserRateThrottle',
+)
+
+REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
+    'user': '20/minute'
+}
+
 try:
     from api.local_settings import *
 except ImportError:
