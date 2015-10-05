@@ -73,7 +73,7 @@ var FinishView = StepViewSPA.extend({
 			dataType: 'json'
 		}).then(function (response) {
 			if(response.status=='ok'){
-				//console.log(response);
+				console.log(response);
 				window.location = '/visualizations/'+response.revision_id;
 			} else {
 				console.error(response);
