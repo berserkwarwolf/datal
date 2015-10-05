@@ -38,6 +38,8 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
             user, {
                 'account': account,
                 'preferences': preferences,
+                'application': application,
+                'auth_key': auth_key,
                 'language': preferences['account.language'],
                 'microsite_domain': get_domain(account.id),
             }
