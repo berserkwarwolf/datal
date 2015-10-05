@@ -568,7 +568,7 @@ class DatasetRevision(RevisionModel):
         if settings.USE_DATASTORE == 'sftp':
             # We MUST rewrite all file storage logic very SOON
             return '{}/{}/{}'.format(
-                settings.SFTP_INTERNAL_BASE_URL,
+                settings.SFTP_BASE_URL,
                 settings.AWS_BUCKET_NAME,
                 self.end_point.replace('file://', '')
             )

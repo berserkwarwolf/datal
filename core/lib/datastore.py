@@ -108,7 +108,7 @@ class datastore_sftp(datastore):
         # Local base folder for saving temporary files before upload
         self.tmp_folder = settings.SFTP_DATASTORE_LOCALTMPFOLDER
         # url for donwloading resources
-        self.public_base_url = settings.SFTP_PUBLIC_BASE_URL
+        self.public_base_url = settings.SFTP_BASE_URL
         self.buckets = []
         self.connection = None
         self.ssh_client = SSHClient()
