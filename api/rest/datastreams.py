@@ -3,6 +3,8 @@ from core.daos.datastreams import DataStreamDBDAO
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 from rest_framework import serializers
+from api.rest.auth import (DatalApiPrivateForWritePermission, 
+    DatalApiPermission)
 
 
 class DataStreamSerializer(ResourceSerializer):
