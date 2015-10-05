@@ -63,7 +63,9 @@ def suggest(request):
     else:
         account_id = account.id
 
-    query = request.GET.get('term', '')
+    # es para salvar el problema de que la consulta se hace con
+    # un * en el term, esto deberia ir en el front
+    query = request.GET.get('term', '').replace("*","")
     if query:
         resources = request.GET.getlist('resources[]', 'all')
         fm = FinderManager(ThemeFinder)
