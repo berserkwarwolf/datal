@@ -125,6 +125,12 @@ var FinishView = StepViewSPA.extend({
 			this.chartInstance = new this.ChartViewClass({
 				el: this.chartContent,
 				model: this.model,
+				mapOptions: {
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false,
+                    draggable: false
+                }
 			});
 			
 			if(this.model.valid()){

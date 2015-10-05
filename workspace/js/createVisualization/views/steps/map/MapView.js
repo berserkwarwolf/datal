@@ -139,6 +139,11 @@ var MapView = StepViewSPA.extend({
             this.chartInstance = new this.ChartViewClass({
                 el: this.$('#mapContainer'),
                 model: this.model,
+                mapOptions: {
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false
+                }
             });
 
             //Validate data
@@ -149,11 +154,6 @@ var MapView = StepViewSPA.extend({
                     this.nextBtn.removeClass('disabled');
                     this.message.hide();
                     this.chartInstance.render();
-                    this.chartInstance.mapInstance.setOptions({
-                        disableDefaultUI: true,
-                        disableDoubleClickZoom: true,
-                        scrollwheel: false
-                    });
                 } else {
                     this.nextBtn.addClass('disabled');
                     this.vizContent.removeClass('dataSelected');

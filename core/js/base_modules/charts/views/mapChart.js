@@ -11,7 +11,8 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataUpdate: null,
     latestDataRender: null,
     styles: {},
-    initialize: function(){
+    initialize: function(options){
+        this.mapOptions = options.mapOptions;
         this.bindEvents();
         this.createGoogleMapInstance();
     },
@@ -75,6 +76,7 @@ charts.views.MapChart = charts.views.Chart.extend({
                 this.model.get('options').center.long),
             mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
         });
+        this.mapInstance.setOptions(this.mapOptions || {});
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
     },
