@@ -46,13 +46,16 @@ charts.models.ChartData = Backbone.Model.extend({
      */
     fetch: function () {
         var self = this;
+        this.trigger('fetch:start');
 
         if(this.fetchXhr && this.fetchXhr.readyState > 0 && this.fetchXhr.readyState < 4){
             this.fetchXhr.abort();
+            self.trigger('fetch:end');
         }
         this.fetchXhr = Backbone.Model.prototype.fetch.apply(this, arguments);
         this.fetchXhr.always(function () {
             self.trigger('data_updated');
+            self.trigger('fetch:end');
         });
         return this.fetchXhr;
     },

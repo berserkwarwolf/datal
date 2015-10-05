@@ -11,7 +11,8 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataUpdate: null,
     latestDataRender: null,
     styles: {},
-    initialize: function(){
+    initialize: function(options){
+        this.mapOptions = options.mapOptions;
         this.bindEvents();
         this.createGoogleMapInstance();
     },
@@ -37,9 +38,9 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     bindEvents: function () {
-        this.model.on('change', this.render, this);
+        this.listenTo(this.model, 'change', this.render, this);
         this.listenTo(this.model, 'change:mapType', this.onChangeMapType, this);
-        this.model.on('data_updated', this.handleDataUpdated, this);
+        this.listenTo(this.model, 'data_updated', this.handleDataUpdated, this);
     },
 
     onChangeMapType: function (model, type) {
@@ -65,6 +66,7 @@ charts.views.MapChart = charts.views.Chart.extend({
                 this.model.get('options').center.long),
             mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
         });
+        this.mapInstance.setOptions(this.mapOptions || {});
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
     },

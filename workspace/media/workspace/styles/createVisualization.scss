@@ -116,6 +116,14 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
+    position: relative;
+    .loading {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 20px;
+      z-index: 400;
+    }
   }
 
   .visualizationContainer.dataSelected{cursor:default;

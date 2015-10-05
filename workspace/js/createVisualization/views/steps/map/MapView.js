@@ -53,6 +53,9 @@ var MapView = StepViewSPA.extend({
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
         this.listenTo(this.model, 'newDataReceived',this.onChartChanged,this);
 
+        this.listenTo(this.model, 'fetch:data:start', this.onFetchStart, this);
+        this.listenTo(this.model, 'fetch:data:end', this.onFetchEnd, this);
+
         this.nextBtn.addClass('disabled');
         
         this.setupChart();
@@ -65,6 +68,16 @@ var MapView = StepViewSPA.extend({
         this.model.fetchMapPreviewData().always(function(){
             $("#ajax_loading_overlay").hide();
         });;
+    },
+
+    onFetchStart: function () {
+        console.info('MapChart: fetch data started');
+        this.$('.visualizationContainer .loading').removeClass('hidden');
+    },
+
+    onFetchEnd: function () {
+        console.info('MapChart: fetch data ended');
+        this.$('.visualizationContainer .loading').addClass('hidden');
     },
 
     onSelectDataClicked: function(){
@@ -139,6 +152,11 @@ var MapView = StepViewSPA.extend({
             this.chartInstance = new this.ChartViewClass({
                 el: this.$('#mapContainer'),
                 model: this.model,
+                mapOptions: {
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false
+                }
             });
 
             //Validate data
@@ -149,11 +167,6 @@ var MapView = StepViewSPA.extend({
                     this.nextBtn.removeClass('disabled');
                     this.message.hide();
                     this.chartInstance.render();
-                    this.chartInstance.mapInstance.setOptions({
-                        disableDefaultUI: true,
-                        disableDoubleClickZoom: true,
-                        scrollwheel: false
-                    });
                 } else {
                     this.nextBtn.addClass('disabled');
                     this.vizContent.removeClass('dataSelected');
