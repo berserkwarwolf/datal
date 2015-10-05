@@ -30,13 +30,13 @@ charts.models.ChartData = Backbone.Model.extend({
     },
 
     initialize: function () {
-        this.on('change:filters', this.handleFetchFiltersChange, this);
+        this.on('change:filters', this.onFiltersChange, this);
     },
 
     /**
      * Se actualiza la data mediante el metodo fetch cada vez que se escucha un cambio en los filtros
      */
-    handleFetchFiltersChange: function () {
+    onFiltersChange: function () {
         return this.fetch();
     },
 
@@ -58,6 +58,36 @@ charts.models.ChartData = Backbone.Model.extend({
             self.trigger('fetch:end');
         });
         return this.fetchXhr;
+    },
+
+    parse: function (response) {
+        var columns = [],
+            fields =[],
+            labels = response.labels;
+
+        if (this.get('type') === 'mapchart') {
+            return response;
+        } else {
+
+            //TODO: arreglar este hack para crear labels vacios
+            if (!labels.length) {
+                labels = Array.apply(null, {length: response.values[0].length}).map(Number.call, Number);
+                fields.push(['number', 'labels']);
+            } else {
+                //TODO: revisar el formato del lable
+                fields.push(['string', 'labels']);
+            }
+            columns.push(labels);
+
+            columns = columns.concat(response.values);
+            fields = fields.concat(_.map(response.series, function (item) {
+                return ['number', item.name];
+            }));
+
+            this.set('fields', fields);
+            this.set('rows', _.clone(_.unzip(columns)));
+
+        }
     },
 
     /**
