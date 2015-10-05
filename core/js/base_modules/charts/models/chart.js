@@ -102,7 +102,7 @@ charts.models.Chart = Backbone.Model.extend({
         }, this);
     },
 
-    parseResponse: function (res) {
+    parse: function (res) {
         var data = {
             datastream_revision_id: res.datastream_revision_id,
             meta_tags:  res.datastream_tags,
@@ -163,6 +163,14 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     fetchPreviewData: function () {
+        if (this.get('type') === 'mapchart') {
+            this.fetchMapPreviewData();
+        } else {
+            this.fetchChartPreviewData();
+        }
+    },
+
+    fetchChartPreviewData: function () {
         var self = this;
 
         if(!this.isValid()){
@@ -187,19 +195,15 @@ charts.models.Chart = Backbone.Model.extend({
             params['invertedAxis'] = true;
         }
 
-        return $.getJSON('/rest/charts/sample.json', params)
-        .then(function (response) {
-            self.parseChartResponse(response.series, response.values, response.labels);
-        })
-        .error(function(response){
-            console.error('error en fetch');
+        this.data.set('filters', params);
+        return this.data.fetch().then(function () {
+            self.trigger("newDataReceived");
         });
     },
 
     fetchMapPreviewData: function () {
-        var self = this;
-
-        var params = {
+        var self = this,
+            params = {
                 nullValueAction: this.get('nullValueAction'),
                 data: this.serializeServerExcelRange(this.get('range_data')),
                 lat: this.serializeServerExcelRange(this.get('range_lat')),
@@ -215,39 +219,6 @@ charts.models.Chart = Backbone.Model.extend({
         return this.data.fetch().then(function () {
             self.trigger("newDataReceived");
         });
-
-    },
-
-    /**
-     * Ajusta el formato de los datos obtenidos por el preview o el invoke
-     * @param  {array} series
-     * @param  {array} values
-     * @param  {array} labels
-     */
-    parseChartResponse: function (series, values, labels) {
-        var columns = [],
-            fields =[];
-
-        //TODO: arreglar este hack para crear labels vacios
-        if (!labels.length) {
-            labels = Array.apply(null, {length: values[0].length}).map(Number.call, Number);
-            fields.push(['number', 'labels']);
-        } else {
-            //TODO: revisar el formato del lable
-            fields.push(['string', 'labels']);
-        }
-        columns.push(labels);
-
-        columns = columns.concat(values);
-        fields = fields.concat(_.map(series, function (item) {
-            return ['number', item.name];
-        }));
-
-        this.data.set('fields', fields);
-        this.data.set('rows', _.clone(_.unzip(columns)));
-
-        this.trigger("newDataReceived");
-
     },
 
     parseMapResponse: function (response) {
@@ -256,11 +227,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     onChangeType: function (model, type) {
-        console.log('type has changed to:', type);
         this.data.set('type', type);
-        if (type === 'mapchart') {
-
-        };
     },
 
     /**
@@ -286,8 +253,6 @@ charts.models.Chart = Backbone.Model.extend({
     handleDataUpdate: function () {
         if(this.get('type') == 'mapchart'){
             this.set('styles', this.parseKmlStyles(this.data.get('styles')));
-        } else {
-            this.parseChartResponse(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
         }
 
         this.trigger('data_updated');
