@@ -32,8 +32,7 @@ datastore:
     passphrase:
     remote_base_folder: datastore/resources/
     local_tmp_folder: datastore/tmp/
-    internal_base_url: 'http://datastore.dev/resources'
-    public_base_url: 'http://datastore.dev:8080/resources'
+    base_url: 'http://datastore.dev:8888/resources'
 
 domains:
   microsites: 'microsites.dev'
