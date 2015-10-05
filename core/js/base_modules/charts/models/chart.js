@@ -94,6 +94,12 @@ charts.models.Chart = Backbone.Model.extend({
         this.on('change:options', this.updateFetchFilters);
         this.on('change:type', this.onChangeType);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
+        this.listenTo(this.data, 'fetch:start', function () {
+            this.trigger('fetch:data:start');
+        }, this);
+        this.listenTo(this.data, 'fetch:end', function () {
+            this.trigger('fetch:data:end', 'fetch:data:start');
+        }, this);
     },
 
     parseResponse: function (res) {

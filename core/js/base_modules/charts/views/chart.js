@@ -51,5 +51,6 @@ charts.views.Chart = Backbone.View.extend({
                 this.chart.clearChart();
             }            
         }
+        this.stopListening();
     }
 });
