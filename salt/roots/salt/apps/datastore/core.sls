@@ -11,14 +11,14 @@ datastore_resources_dir:
     - makedirs: True
     - force: True
 
-#datastore_resources_temp_dir:
-#  file.directory:
-#    - name: {{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
-#    - user: {{ user }}
-#    - group: {{ group }}
-#    - mode: 755
-#    - makedirs: True
-#    - force: True
+datastore_resources_temp_dir:
+  file.directory:
+    - name: {{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
+    - user: {{ user }}
+    - group: {{ group }}
+    - mode: 755
+    - makedirs: True
+    - force: True
 
 datastore_resources_base_dir:
   file.directory:
