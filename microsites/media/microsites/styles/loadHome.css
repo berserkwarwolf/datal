@@ -26,6 +26,10 @@ body,
 .dataStreamBox h2 a .txt .titleDS .infoDS .authorDS{display:none}
 .dataStreamBox h2 a .txt .titleDS strong{height:17px;max-height:32px;display:block;} 
 
+/*PILLS*/
+.pills{background:#fff;padding:15px 15px 15px 25px !important;margin-bottom:20px;border:1px solid #ececec;border-left:5px solid #ececec;}
+.pills span{color:#999;}
+
 /*RESOURCES TABLE*/
 .resourcesTable{margin-bottom:20px;}
 
