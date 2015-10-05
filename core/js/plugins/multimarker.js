@@ -1,5 +1,5 @@
 
-multimarkersUsed = [];
+var multimarkersUsed = [];
 multimarker.prototype = new google.maps.OverlayView();
 
 /** @constructor */

@@ -89,6 +89,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     clearOverlay: function (overlayCollection) {
         _.each(overlayCollection, function (overlayElement, index) {
+            if (_.isUndefined(overlayElement)) return;
             overlayElement.setMap(null);
             //Elimina los eventos asociados al elemento
             if(overlayElement.events){
@@ -203,9 +204,9 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapCluster: function (cluster, index) {
         cluster.noWrap = true;
-        cluster.counter = parseInt(cluster.info);
 
-        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('options').joinIntersectedClusters);
+        // Se desabilita la funcionalidad de joinIntersectedClusters porque contiene problemas
+        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, false /* joinIntersectedClusters */);
     },
 
     /**
