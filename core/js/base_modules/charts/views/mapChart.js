@@ -38,19 +38,9 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     bindEvents: function () {
-        this.listenTo(this.model, 'fetch:data:start', this.onFetchStart, this);
-        this.listenTo(this.model, 'fetch:data:end', this.onFetchEnd, this);
         this.listenTo(this.model, 'change', this.render, this);
         this.listenTo(this.model, 'change:mapType', this.onChangeMapType, this);
         this.listenTo(this.model, 'data_updated', this.handleDataUpdated, this);
-    },
-
-    onFetchStart: function () {
-        console.info('MapChart: fetch data started');
-    },
-
-    onFetchEnd: function () {
-        console.info('MapChart: fetch data ended');
     },
 
     onChangeMapType: function (model, type) {
