@@ -5,23 +5,21 @@ from django.utils.translation import ugettext_lazy as _
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 from rest_framework import serializers
-from api.rest.auth import (DatalApiPrivateForWritePermission, 
-    DatalApiPermission)
 
 
 class DataStreamSerializer(ResourceSerializer):
     title = serializers.CharField(
-        label=ugettext_lazy( 'APP-TITLE-TEXT' ),
+        label=_('APP-TITLE-TEXT' ),
         help_text=_(u'Título del conjunto de datos'))
     description = serializers.CharField(
-        label=ugettext_lazy( 'APP-DESCRIPTION-TEXT' ),
+        label=_('APP-DESCRIPTION-TEXT' ),
         help_text=_(u'Descripción del conjunto de datos'))
-    category = serializers.ChoiceField(
-        label=ugettext_lazy( 'APP-CATEGORY-TEXT'),
-        help_text=_(u'Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta'))
+    #category = serializers.ChoiceField(tuple(),
+        #label=_('APP-CATEGORY-TEXT'),
+    #    help_text=_(u'Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta'))
     notes = serializers.CharField(
         required=False,
-        label=ugettext_lazy( 'APP-NOTES-TEXT' ),
+        label=_('APP-NOTES-TEXT' ),
         help_text=_(u'Texto de la nota del conjunto de datos'))
     table_id = serializers.IntegerField(
         required=False, 
@@ -34,12 +32,12 @@ class DataStreamSerializer(ResourceSerializer):
     dataset = serializers.CharField(
         help_text=_(u'GUID del conjunto de datos asociado a la vista'))
 
-    def __init__(self, *args, **kwargs):
-        super(DataStreamSerializer, self).__init__(*args, **kwargs)
+    #def __init__(self, *args, **kwargs):
+    #    super(DataStreamSerializer, self).__init__(*args, **kwargs)
 
         # TODO: ver como se levantan las categorias de la cuenta
-        self.fields['category'].choices=map(lambda x: (x.valor, x.name),
-            self.context['request']['account'].category_set.all())
+        #self.fields['category'].choices=map(lambda x: (x.valor, x.name),
+        #    self.context['request']['account'].category_set.all())
         
 
     def to_representation(self, obj):

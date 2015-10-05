@@ -6,7 +6,8 @@ class ApiPermission(permissions.BasePermission):
                 obj['account_id'] == request.auth['account'].id)
 
 class ApiPrivateForWritePermission(permissions.BasePermission):
-    if request.method not in permissions.SAFE_METHODS:
-        return request.auth['application'].is_private_auth_key(
-            request.auth['auth_key'])
-    return True
+    def has_object_permission(self, request, view, obj):
+        if request.method not in permissions.SAFE_METHODS:
+            return request.auth['application'].is_private_auth_key(
+                request.auth['auth_key'])
+        return True
