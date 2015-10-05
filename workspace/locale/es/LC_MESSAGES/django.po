@@ -2281,7 +2281,7 @@ msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
 msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "borró revisión de"
+msgstr "borró la revisión de"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -3239,3 +3239,15 @@ msgstr "Frecuencia de actualización"
 
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "¿En que región aplican estos datos?"
+
+msgid "LANDINGPAGE-ACTIVITY-DATASET"
+msgstr "el conjunto de datos"
+
+msgid "LANDINGPAGE-ACTIVITY-DATAVIEW"
+msgstr "la vista"
+
+msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
+msgstr "la visualización"
+
+msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
+msgstr "la colección"

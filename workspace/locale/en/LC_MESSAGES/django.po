@@ -3255,3 +3255,15 @@ msgstr "Update frequency"
 
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "What region apply this data?"
+
+msgid "LANDINGPAGE-ACTIVITY-DATASET"
+msgstr "the Dataset"
+
+msgid "LANDINGPAGE-ACTIVITY-DATAVIEW"
+msgstr "the Data View"
+
+msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
+msgstr "the Visualization"
+
+msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
+msgstr "the Dashboard"
