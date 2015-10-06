@@ -92,7 +92,7 @@ def create(request):
         user.password = form.cleaned_data.get('password')
         user.account = account
         user.language = language
-        user.name = form.cleaned_data('name')
+        user.name = form.cleaned_data.get('name')
         user.save()
 
         admin_role = Role.objects.get(code='ao-account-admin')
