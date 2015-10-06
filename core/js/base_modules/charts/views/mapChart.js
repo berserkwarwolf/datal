@@ -18,8 +18,6 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
-        console.log('RENDER');
-        //this.createGoogleMapInstance();
         //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
         if(this.latestDataUpdate != this.latestDataRender){
             if(this.model.data.get('points') && this.model.data.get('points').length){
@@ -40,7 +38,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     bindEvents: function () {
-        //this.listenTo(this.model, 'change', this.render, this);
+        this.listenTo(this.model, 'change', this.render, this);
         this.listenTo(this.model, 'change:mapType', this.onChangeMapType, this);
         this.listenTo(this.model, 'data_updated', this.handleDataUpdated, this);
     },
@@ -62,12 +60,10 @@ charts.views.MapChart = charts.views.Chart.extend({
      * Creates a new map google map instance
      */
     createGoogleMapInstance: function () {
-        console.log('createGoogleMapInstance');
         this.mapInstance = new google.maps.Map(this.el, {
             zoom: this.model.get('options').zoom,
-            bounds: this.model.get('options').bounds,
-           /* center: new google.maps.LatLng(this.model.get('options').center.lat,
-                this.model.get('options').center.long),*/
+            center: new google.maps.LatLng(this.model.get('options').center.lat,
+                this.model.get('options').center.long),
             mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
         });
         this.mapInstance.setOptions(this.mapOptions || {});
@@ -218,15 +214,13 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     handleBoundChanges: function(){
 
-        console.log('handleBound',this.mapInstance);
-
         if(this.mapInstance){
 
             var center = this.mapInstance.getCenter(),
                 bounds = this.mapInstance.getBounds(),
                 zoom = this.mapInstance.getZoom();
 
-/*            this.model.set('options', {
+            this.model.set('options', {
                 center: {
                     lat: center.lat(),
                     long: center.lng(),
@@ -239,19 +233,6 @@ charts.views.MapChart = charts.views.Chart.extend({
                     bounds.getSouthWest().lng()
                 ]
             });
-            this.model.set('options', {
-                center: {
-                    lat: 0,
-                    long: 0,
-                },
-                zoom: 2,
-                bounds: [
-                    bounds.getNorthEast().lat(), 
-                    bounds.getNorthEast().lng(), 
-                    bounds.getSouthWest().lat(), 
-                    bounds.getSouthWest().lng()
-                ]
-            });*/
 
         }
 
