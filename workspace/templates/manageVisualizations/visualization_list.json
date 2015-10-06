@@ -19,6 +19,7 @@
       "datastream_url": "{{ item.datastream_url }}",
       "visualization_id": {{ item.visualization__id }},
       "last_revision_id": {{ item.visualization__last_revision_id }},
+      "last_published_revision_modified_at":"{{item.visualization__last_published_revision__modified_at|date:'F d'|capfirst}}",
       "guid": "{{ item.visualization__guid }}",
       "url": "{{ item.url }}",
       "created_at": "{{ item.created_at|date:'F d, Y, h:i A'|capfirst }}",
