@@ -64,7 +64,7 @@ charts.models.Chart = Backbone.Model.extend({
         options: {
             zoom: 5,
             center: {
-                lat: 0, 
+                lat: 0,
                 long: 0
             },
             bounds: []
@@ -154,7 +154,8 @@ charts.models.Chart = Backbone.Model.extend({
                     mapType: res.mapType.toUpperCase(),
                     options:{
                         zoom: res.zoom,
-                        bounds: res.bounds? res.bounds.split(';'): undefined
+                        bounds: res.bounds? res.bounds.split(';'): undefined,
+                        center: {lat: 0, long: 0}
                     }
                 });
             };
