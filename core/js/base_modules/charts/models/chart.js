@@ -164,9 +164,9 @@ charts.models.Chart = Backbone.Model.extend({
 
     fetchPreviewData: function () {
         if (this.get('type') === 'mapchart') {
-            this.fetchMapPreviewData();
+            return this.fetchMapPreviewData();
         } else {
-            this.fetchChartPreviewData();
+            return this.fetchChartPreviewData();
         }
     },
 

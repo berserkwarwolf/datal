@@ -26,6 +26,8 @@ var MainView = Backbone.View.extend({
         if (options.chart_model.revision_id) {
             this.stateModel.set('isEdit', true);
             this.chartModel.fetchPreviewData();
+        }else{
+            this.stateModel.set('isEdit', false);
         };
 
         //Buttons views
@@ -41,6 +43,7 @@ var MainView = Backbone.View.extend({
         var startView = new StartView({
           name: gettext('APP-START-TEXT'),
           model: this.chartModel,
+          stateModel: this.stateModel,
           el: this.$('.step-0-view')
         }).init();
         
@@ -49,7 +52,8 @@ var MainView = Backbone.View.extend({
         //Create charts steps
         var chartView = new ChartView({
           name: gettext('APP-CHART-TEXT'), 
-          model: this.chartModel,
+          model: this.chartModel,   
+          stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view')
         }).init();
@@ -75,6 +79,7 @@ var MainView = Backbone.View.extend({
         var mapView = new MapView({
           name: gettext('APP-MAP-TEXT'), 
           model: this.chartModel,
+          stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view-map')
         }).init();

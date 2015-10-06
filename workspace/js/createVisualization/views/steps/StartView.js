@@ -1,12 +1,14 @@
 var StartView = StepViewSPA.extend({
 
-	initialize: function(){
+	initialize: function(options){
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 			'click .chart-type':'onChooseType',
 			'click .map-type':'onChooseMap'
 		});
+
+		this.stateModel = options.stateModel;
 
 		// Bind model validation to view
 		//Backbone.Validation.bind(this);
@@ -19,7 +21,7 @@ var StartView = StepViewSPA.extend({
 		e.stopPropagation();
 		var $target = $(e.currentTarget),
 			type = $target.data('type');
-		this.model.set('isMap', false);
+		this.stateModel.set('isMap', false);
 		this.model.set('type', type);
 		this.setFlow('charts');
 		this.next();
@@ -29,7 +31,7 @@ var StartView = StepViewSPA.extend({
 		e.stopPropagation();
 		var $target = $(e.currentTarget),
 			type = $target.data('type');
-		this.model.set('isMap', true);
+		this.stateModel.set('isMap', true);
 		this.model.set('type', type);
 		this.setFlow('maps');
 		this.next();
@@ -54,13 +56,13 @@ var StartView = StepViewSPA.extend({
 		this.constructor.__super__.start.apply(this);
 		this.setFlow(null);
 
-		if(this.model.get('isEdit')){
+		if(this.stateModel.get('isEdit')){
 			this.model.set('type', this.model.get('type'));
 			if(this.model.get('type')=='mapchart'){
-	            this.model.set('isMap', true);
+	            this.stateModel.set('isMap', true);
 	            this.setFlow('maps');
 	        }else{
-	            this.model.set('isMap', false);
+	            this.stateModel.set('isMap', false);
 	            this.setFlow('charts');
         	}
 			this.next();

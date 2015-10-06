@@ -6,6 +6,8 @@ var ChartView = StepViewSPA.extend({
 
 	initialize: function(options){
 
+		this.stateModel = options.stateModel;
+
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
@@ -45,7 +47,7 @@ var ChartView = StepViewSPA.extend({
 		this.optionsItemConfig = this.$el.find('div.optionsItemConfig');
 
 		//edit
-		if(this.model.get('isEdit')){
+		if(this.stateModel.get('isEdit')){
 			var that = this;
 			
 			//library

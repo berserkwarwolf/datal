@@ -6,6 +6,8 @@ var MapView = StepViewSPA.extend({
 
     initialize: function(options){
 
+        this.stateModel = options.stateModel;
+
         // Right way to extend events without overriding the parent ones
         this.addEvents({
             'click a.backButton':           'onPreviousButtonClicked',
@@ -37,13 +39,11 @@ var MapView = StepViewSPA.extend({
         });
 
                 //edit
-        if(this.model.get('isEdit')){
+        if(this.stateModel.get('isEdit')){
             
             this.changeMapType(this.model.get('mapType'));
 
             var that = this;
-            
-            console.log(this.model.get('mapType'));
 
             $("#ajax_loading_overlay").show();
 
@@ -102,7 +102,7 @@ var MapView = StepViewSPA.extend({
     },
 
     onChartChanged: function(){
-        if(this.model.get('isMap') && this.model.get('select_data') ){
+        if(this.stateModel.get('isMap') && this.model.get('select_data') ){
              if(this.selectDataBtn.hasClass('icon-add')){
                 this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');       
                 this.vizContent.addClass('dataSelected');
