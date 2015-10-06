@@ -23,7 +23,10 @@ msgid "APP-ADMIN-URL-TEXT"
 msgstr "Admin url"
 
 msgid "APP-USERNAME-TEXT"
-msgstr "Username"
+msgstr "User name"
+
+msgid "APP-USERNICK-TEXT"
+msgstr "Nickname"
 
 msgid "APP-PASSWORD-TEXT"
 msgstr "Password"
