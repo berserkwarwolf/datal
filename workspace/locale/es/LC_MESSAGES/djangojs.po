@@ -858,3 +858,6 @@ msgstr "Error al eliminar la visualización y sus recursos asociados."
 
 msgid "APP-GRID-CELL-MODIFIED"
 msgstr "Modificación"
+
+msgid "APP-VIEW-DATASET-TEXT"
+msgstr "Ver conjunto de datos"

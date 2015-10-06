@@ -873,3 +873,6 @@ msgstr "Error on deleting the visualization and the associated resources."
 
 msgid "APP-GRID-CELL-MODIFIED"
 msgstr "Modified"
+
+msgid "APP-VIEW-DATASET-TEXT"
+msgstr "View dataset"
