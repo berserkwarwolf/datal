@@ -84,7 +84,9 @@
 								<div class="mapContent">
 
 									<button class="icon icon-add fill-background corner-position selectData"></button>
-									<div class="loading light hidden"></div>
+									<div class="ajaxLoadingOverlay" id="ajax_loading_overlay">
+								        <p>{% trans "APP-LOADING-TEXT" %}</p>
+								    </div>
 									<div id="mapContainer" class="chart-preview-view">
 									</div>
 									<p class="message"></p>
