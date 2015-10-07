@@ -80,6 +80,7 @@
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
 .list-container table .actions li:first-child:before{display:none;}
 .list-container table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}
+.list-container table .actions li a .icon{margin:-3px -2px 0 -7px;}
 .list-container table .actions li.review{visibility:visible;}
 .list-container table .actions li.review a{padding-left:23px;background:url(../images/common/ic_warning_orange.png) no-repeat 0 1px;}
 .list-container table button.small{float:left;padding:0;background:none;}

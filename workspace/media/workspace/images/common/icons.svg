@@ -2,9 +2,9 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="120px"
-	 height="1164px" viewBox="0 0 120 1164" enable-background="new 0 0 120 1164" xml:space="preserve">
+	 height="1235.667px" viewBox="0 0 120 1235.667" enable-background="new 0 0 120 1235.667" xml:space="preserve">
 <g id="Background" display="none">
-	<rect display="inline" fill="#EFA14D" width="120" height="1164"/>
+	<rect display="inline" fill="#EFA14D" width="120" height="1235.667"/>
 </g>
 <g id="Icons">
 	<g>
@@ -470,6 +470,26 @@
 		<rect x="19" y="1133" fill="#999999" width="1" height="9"/>
 		<rect x="19" y="1142" fill="#999999" width="9" height="1"/>
 	</g>
+	<polygon fill="#0066CC" points="23.999,1181.06 28.12,1176.94 24.999,1176.94 24.999,1170.94 22.999,1170.94 22.999,1176.94 
+		19.88,1176.94 	"/>
+	<polygon fill="#0066FF" points="59.999,1181.06 64.12,1176.94 60.999,1176.94 60.999,1170.94 58.999,1170.94 58.999,1176.94 
+		55.88,1176.94 	"/>
+	<polygon fill="#999999" points="95.999,1181.06 100.12,1176.94 96.999,1176.94 96.999,1170.94 94.999,1170.94 94.999,1176.94 
+		91.88,1176.94 	"/>
+	<g>
+		<polygon fill="#0066CC" points="27.817,1215.802 20.183,1215.802 20.183,1208.167 24,1208.167 24,1206.895 20.183,1206.895 
+			18.915,1206.895 18.91,1206.895 18.91,1215.802 18.91,1217.074 20.183,1217.074 27.817,1217.074 29.09,1217.074 29.09,1215.802 
+			29.09,1211.984 27.817,1211.984 		"/>
+		<polygon fill="#0066CC" points="22.429,1212.669 23.328,1213.567 27.408,1209.49 26.589,1208.671 27.447,1209.523 
+			28.665,1210.734 29.09,1206.895 25.254,1207.343 26.507,1208.591 		"/>
+	</g>
+	<g>
+		<polygon fill="#0066FF" points="63.817,1215.802 56.183,1215.802 56.183,1208.167 60,1208.167 60,1206.895 56.183,1206.895 
+			54.915,1206.895 54.91,1206.895 54.91,1215.802 54.91,1217.074 56.183,1217.074 63.817,1217.074 65.09,1217.074 65.09,1215.802 
+			65.09,1211.984 63.817,1211.984 		"/>
+		<polygon fill="#0066FF" points="58.428,1212.669 59.328,1213.568 63.407,1209.489 62.589,1208.671 63.448,1209.523 
+			64.665,1210.733 65.09,1206.895 61.254,1207.344 62.508,1208.59 		"/>
+	</g>
 </g>
 <g id="Labels" display="none">
 	<rect x="12" y="516" display="inline" fill="none" width="24" height="24"/>
@@ -595,5 +615,11 @@
 	<rect x="84" y="588" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1164" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1164" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1164" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1199.984" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1199.984" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1199.984" display="inline" fill="none" width="24" height="24"/>
 </g>
 </svg>

@@ -66,6 +66,9 @@
 	.button:hover .icon-view-site{background-position:-48px -696px;}
 	.icon-view-site.icon-inline{background-position:-16px -700px;}
 
+	.icon-view-site-xs{background-position:-12px -1200px;}
+	.icon-view-site-xs:hover{background-position:-48px -1200px;}
+
 	.icon-new-tab{background-position:-12px -1056px;}
 	.button:hover .icon-new-tab{background-position:-48px -1056px;}
 	.icon-new-tab.icon-inline{background-position:-16px -1060px;}
@@ -105,6 +108,9 @@
 
 	.icon-zoom-out{background-position:-12px -480px;}
 	.icon-zoom-out:active{background-position:-84px -480px;}
+
+	.icon-download{background-position:-12px -1164px;}
+	.icon-download:hover{background-position:-48px -1164px;}
 
 		/* Hover */
 		.icon-edit:hover,
