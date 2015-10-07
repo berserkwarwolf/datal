@@ -73,9 +73,9 @@
 .list-container table h3 span.sep{color:#e0e0e0;padding:0 2px;}
 .list-container table .filename{display:block;}
 .list-container table .filename a{color:#3a3a3a;}
-.list-container table .date{display:block;color:$font-color-light;margin-top:5px;}
+.list-container table .date{display:inline-block;color:$font-color-light;margin-top:5px;}
 .list-container table .type{color:$font-color-light;}
-.list-container table .actions{padding:5px 0;}
+.list-container table .actions{padding:9px 0 0 7px;}
 .list-container table .actions li{float:left;visibility:hidden;background:none;padding:0;} 
 .list-container table .actions li:before{content:"|";padding:0 7px;color:#e1e1e1;display:inline;position:relative;float:left;}
 .list-container table .actions li:first-child:before{display:none;}

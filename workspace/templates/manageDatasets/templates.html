@@ -97,6 +97,11 @@
 	{# Title #}
 	<h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> | <%=category%></h3>
 	
+	{# Last published revision date #}
+	<% if(last_published_revision_modified_at != ""){%>
+    <span class="icon icon-arrow-down-right FL"></span><span class="date">{% trans "APP-LAST-PUBLISHED-REVISION-TEXT" %}: <%= last_published_revision_modified_at %></span>
+  	<% } %>
+	
 	{# Actions #}
 	<ul class="actions clearfix">
 
@@ -160,11 +165,6 @@
 		</li>
 
 	</ul>
-	
-	{# Last published revision date #}
-	<% if(last_published_revision_modified_at != ""){%>
-    <span class="icon icon-arrow-down-right FL"></span><span class="date">{% trans "APP-LAST-PUBLISHED-REVISION-TEXT" %}: <%= last_published_revision_modified_at %></span>
-  	<% } %>
 </script>
 
 {# Grid - Type Cell #}
