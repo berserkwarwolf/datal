@@ -233,29 +233,14 @@ var ManageDatasetsView = Backbone.View.extend({
 			sortable: true,
 			editable: false
 		}, {
-			name: "category",
-			label: gettext('APP-GRID-CELL-CATEGORY'),
-			cell: "string",
+			name: "author",
+			label: gettext('APP-GRID-CELL-AUTHOR'),
+			cell: "text",
 			sortable: true,
 			editable: false
 		}, {
-			name: "type_nice",
-			label: gettext('APP-GRID-CELL-TYPE'),
-			cell: Backgrid.StringCell.extend({
-				render: function() {
-					var typeCellView = new TypeCellView({
-						model: this.model,
-						itemCollection: self.listResources
-					});
-					this.$el.html(typeCellView.render().el);
-					return this;
-				}
-			}),
-			sortable: false,
-			editable: false
-		}, {
-			name: "author",
-			label: gettext('APP-GRID-CELL-AUTHOR'),
+			name: "modified_at",
+			label: gettext('APP-GRID-CELL-MODIFIED'),
 			cell: "text",
 			sortable: true,
 			editable: false

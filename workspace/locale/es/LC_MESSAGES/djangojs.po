@@ -855,3 +855,12 @@ msgstr "Error al eliminar la vista y sus recursos asociados."
 
 msgid "APP-DELETE-VISUALIZATION-ACTION-ERROR-TEXT"
 msgstr "Error al eliminar la visualización y sus recursos asociados."
+
+msgid "APP-GRID-CELL-MODIFIED"
+msgstr "Modificación"
+
+msgid "APP-VIEW-DATASET-TEXT"
+msgstr "Ver conjunto de datos"
+
+msgid "APP-VIEW-DATASTREAM-TEXT"
+msgstr "Ver vista"

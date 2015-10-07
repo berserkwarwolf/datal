@@ -3259,6 +3259,12 @@ msgstr "Update frequency"
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "What region apply this data?"
 
+msgid "APP-LAST-PUBLISHED-REVISION-TEXT"
+msgstr "Last published revision"
+
+msgid "APP-DOWNLOAD-ORIGINAL-TEXT"
+msgstr "Download original"
+
 msgid "LANDINGPAGE-ACTIVITY-DATASET"
 msgstr "the Dataset"
 
