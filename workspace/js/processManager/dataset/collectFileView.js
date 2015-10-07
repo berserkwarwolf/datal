@@ -18,8 +18,8 @@ var CollectFileView = StepView.extend({
 		var eventsObject = {}
 		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
 		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
-		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
 		eventsObject['change #id_file_data'] = 'onInputFileChange';
+		eventsObject['drop #id_dropzone'] = 'onFilesChange';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -32,10 +32,6 @@ var CollectFileView = StepView.extend({
 	render: function(){
 
 		var self = this;
-
-		// Check if is the value is "other", and set that in the model.
-		this.isOtherValue('frequency');
-		this.isOtherValue('license_url');
 
 		// Set template
 		this.$el.find('.formContent').html( this.template( this.model.toJSON() ) );	
@@ -83,45 +79,6 @@ var CollectFileView = StepView.extend({
 
 	},
 
-	isOtherValue: function(field){
-
-		var value = this.model.get(field),
-			valuesToCheck = [];
-			htmlString = this.parseHTML(this.templateHTML),
-			values = htmlString.find('[name='+field+'] option');
-
-		for(i=0;i<values.length;i++){
-			valuesToCheck.push( values.eq(i).val() );
-		}
-
-		if( $.inArray(value, valuesToCheck) == -1 ){
-			this.model.set(field, 'other');
-			this.model.set(field+'_other', value);
-		}
-
-	},
-
-	parseHTML:function(htmlString){
-		var fakeEl = $( '<div></div>' );
-		fakeEl.html( htmlString );
-		return $(fakeEl);
-	},
-
-	onSelectChange: function(event){
-
-		var element = event.currentTarget,
-			value = $(element).val(),
-			otherElement = $(element).attr('data-other'),
-			otherRow = this.$el.find(otherElement);
-
-		if(value == 'other'){
-			otherRow.show();
-		}else{
-			otherRow.hide();
-		}
-
-	},
-
 	onInputFileChange: function(event){
 
 		var element = event.currentTarget,
@@ -131,7 +88,7 @@ var CollectFileView = StepView.extend({
 
 		// Erase C:\Fakepath\ from string (comes in chrome)
 		try {
-		  if( !_.isUndefined( value ) ){
+			if( !_.isUndefined( value ) ){
 				var checkValue = value.split('\\');
 				if( typeof checkValue !== 'string' ){
 					value = checkValue[ (checkValue.length-1) ];
@@ -143,20 +100,26 @@ var CollectFileView = StepView.extend({
 		}
 
 		otherRow.val(value);
+
+		this.onNextButtonClicked();
+		
+	},
+
+
+	onFilesChange: function(){
+		
+		var files = this.model.get('files'),		
+			value = files[0].name,
+			otherElement = $('#id_file_data').attr('data-other'),
+			otherRow = this.$el.find(otherElement);
+
+		otherRow.val(value);
+
+		this.onNextButtonClicked();
 		
 	},
 
 	setIndividualError: function(element, name, error){
-
-		// If license_url, use error in license_url_other
-		if(name == 'license_url'){
-			element = $('#id_license_url_other')
-		}
-
-		// If frequency, use error in frequency_other
-		if(name == 'frequency'){
-			element = $('#id_frequency_other')
-		}
 
 		if(name == 'file_data'){
 			element = $('.step[data-step='+this.name+'] .input-file');
@@ -177,7 +140,7 @@ var CollectFileView = StepView.extend({
 	},
 
 	initFileUpload: function(){
-		
+		var self = this;
 		$( this.model.get('inputFileId') ).fileupload({
 			url: '/datasets/upload',
 			acceptFileTypes: '/(\.|\/)(doc|docx|docm|dotx|dotm|xls|xlsx|xlsm|xltx|xltm|xlsb|xlam|xll|odt|ods|csv|txt|pdf|html|htm|xml|kml|kmz)$/i',
@@ -189,19 +152,21 @@ var CollectFileView = StepView.extend({
 			fail: _.bind(this.onFileUploadFail, this),
 			start: function(){
 				$("#ajax_loading_overlay").show();
-			}
+			},
+			dropZone: $('#id_dropzone'),
+			drop: _.bind(this.onFileUploadAdd, this),
 		});
 
 	},
 
 	onFileUploadAdd: function(event, data) {
-	  this.model.set('files',data.files);
+		this.model.set('files',data.files);
 	},
 
 	onFileUploadFail:function(event, data){
-        // Hide Loadings
-        $("#ajax_loading_overlay").hide();
-        datalEvents.trigger('datal:application-error', data);
+				// Hide Loadings
+				$("#ajax_loading_overlay").hide();
+				datalEvents.trigger('datal:application-error', data);
 	},
 
 });

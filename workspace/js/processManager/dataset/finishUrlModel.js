@@ -6,10 +6,6 @@ var FinishUrlModel = FinishModel.extend({
 			data = this.get('data');
 
 		data.end_point = output.end_point;
-		data.mbox = output.mbox;
-		data.spatial = output.spatial;
-		data.license_url = output.license_url;
-		data.frequency = output.frequency;
 		data.collect_type = output.collect_type;
 		data.impl_type = output.impl_type;
 

@@ -15,12 +15,6 @@ var CollectWebserviceModel = StepModel.extend({
 		namespace: "",
 		use_cache: "",
 		params: [],
-		mbox: "",
-		license_url: "",
-		license_url_other: null,
-		spatial: "",
-		frequency: 'ondemand',
-		frequency_other: null,
 		collect_type: 2
 	},
 
@@ -48,35 +42,6 @@ var CollectWebserviceModel = StepModel.extend({
 			}
 
 		},
-		mbox: [
-			{
-				required: false
-			},{
-				pattern: 'email',
-				msg: gettext('VALIDATE-EMAILNOTVALID-TEXT')
-			}
-		],
-		license_url: function(value, attr, computedState){
-			if(value === 'other' && $.trim(computedState.license_url_other) === '' ) {
-				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
-			}
-		},
-		license_url_other: [
-			{
-				required: false
-			},{
-				pattern: /^(?:(ht|f|sf)tp(s?)\:\/\/)/,
-				msg: gettext('VALIDATE-PROTOCOLNOTALLOWED-TEXT')
-			},{
-				pattern: 'url',
-				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
-			}
-		],
-		frequency: function(value, attr, computedState){
-			if(value === 'other' && $.trim(computedState.frequency_other) === '' ) {
-				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
-			}
-		},
 		signature: {
 			maxLength: 256,
 			msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 256 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
@@ -91,7 +56,6 @@ var CollectWebserviceModel = StepModel.extend({
 
 		var output = this.get('output');
 		
-		output.mbox = $.trim( this.get('mbox') );
 		output.end_point = $.trim( this.get('end_point') );
 		output.impl_type = $.trim( this.get('impl_type') );
 		output.path_to_headers = $.trim( this.get('path_to_headers') );
@@ -104,21 +68,8 @@ var CollectWebserviceModel = StepModel.extend({
 		output.method_name = $.trim( this.get('method_name') );
 		output.namespace = $.trim( this.get('namespace') );
 		output.use_cache = $.trim( this.get('use_cache') );
-		output.spatial = $.trim( this.get('spatial') );
-		output.license_url = $.trim( this.get('license_url') );
-		output.frequency = $.trim( this.get('frequency') );
 		output.collect_type = this.get('collect_type');
 		output.params = this.get('params');
-
-		// Check if license is "other"
-		if( output.license_url == 'other' ){
-			output.license_url = $.trim( this.get('license_url_other') );
-		}
-
-		// Check if frequency is "other"
-		if( output.frequency == 'other' ){
-			output.frequency = $.trim( this.get('frequency_other') );
-		}
 
 		// Set new output
 		this.set('output',output);

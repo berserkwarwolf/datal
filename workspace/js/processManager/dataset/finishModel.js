@@ -9,12 +9,16 @@ var FinishModel = StepModel.extend({
 		tags: [],
 		notes: null,
 		data: {},
+		mbox: "",
+		license_url: "",
+		spatial: "",
+		frequency: ""
 	},
 
-    initialize: function(){
-        
-    },
-            
+	initialize: function(){
+			
+	},
+						
 	validation: {
 		title: [
 			{
@@ -40,13 +44,31 @@ var FinishModel = StepModel.extend({
 				}
 			}
 		],
+		mbox: [
+			{
+				required: false
+			},{
+				pattern: 'email',
+				msg: gettext('VALIDATE-EMAILNOTVALID-TEXT')
+			}
+		],
+		license_url: function(value, attr, computedState){
+			if(value === 'other' && $.trim(computedState.license_url_other) === '' ) {
+				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+			}
+		},
+		frequency: function(value, attr, computedState){
+			if(value === 'other' && $.trim(computedState.frequency_other) === '' ) {
+				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+			}
+		}
 	},
 
-    // notes use NicEditor, so can't be validated as always (?)
-    validate_notes: function(){
-        max_length = $("#notes_reference").data('max_length');
-        return (this.get('data').notes.length < max_length)
-    },
+	// notes use NicEditor, so can't be validated as always (?)
+	validate_notes: function(){
+			max_length = $("#notes_reference").data('max_length');
+			return (this.get('data').notes.length < max_length)
+	},
 
 	setData: function(){
 
@@ -63,6 +85,10 @@ var FinishModel = StepModel.extend({
 		data.description = $.trim( this.get('description') );
 		data.category = $('#id_category option:selected').val();
 		data.status = $('#id_status option:selected').val();
+		data.mbox = $.trim( this.get('mbox') );
+		data.spatial = $.trim( this.get('spatial') );
+		data.license_url = $.trim( this.get('license_url') );
+		data.frequency = $.trim( this.get('frequency') );
 		
 		// Prepare Sources for Data
 		data['sources-TOTAL_FORMS'] = sources.length;

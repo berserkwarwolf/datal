@@ -1,11 +1,14 @@
 var FinishWebserviceModel = FinishModel.extend({
 
+	defaults:{
+		frequency: 'ondemand'
+	},
+
 	setDataFromOutput: function(){
 
 		var output = this.get('output'),
 			data = this.get('data');
 
-		data.mbox = output.mbox;
 		data.end_point = output.end_point;
 		data.impl_type = output.impl_type;
 		data.path_to_headers = output.path_to_headers;
@@ -21,9 +24,6 @@ var FinishWebserviceModel = FinishModel.extend({
 		data.param_name = output.param_name;
 		data.default_value = output.default_value;
 		data.enable_editable = output.enable_editable;
-		data.spatial = output.spatial;
-		data.license_url = output.license_url;
-		data.frequency = output.frequency;
 		data.collect_type = output.collect_type;
 		
 		// Prepare Params for Data

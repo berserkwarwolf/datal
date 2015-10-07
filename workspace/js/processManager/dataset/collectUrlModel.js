@@ -24,36 +24,7 @@ var CollectUrlModel = StepModel.extend({
 				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			}
-		],
-		mbox: [
-			{
-				required: false
-			},{
-				pattern: 'email',
-				msg: gettext('VALIDATE-EMAILNOTVALID-TEXT')
-			}
-		],
-		license_url: function(value, attr, computedState){
-			if(value === 'other' && $.trim(computedState.license_url_other) === '' ) {
-				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
-			}
-		},
-		license_url_other: [
-			{
-				required: false
-			},{
-				pattern: /^(?:(ht|f|sf)tp(s?)\:\/\/)/,
-				msg: gettext('VALIDATE-PROTOCOLNOTALLOWED-TEXT')
-			},{
-				pattern: 'url',
-				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
-			}
-		],
-		frequency: function(value, attr, computedState){
-			if(value === 'other' && $.trim(computedState.frequency_other) === '' ) {
-				return gettext('VALIDATE-REQUIREDFIELD-TEXT');
-			}
-		}
+		]
 	},
 
 	setOutput: function(){
@@ -61,22 +32,8 @@ var CollectUrlModel = StepModel.extend({
 		var output = this.get('output');
 		
 		output.end_point = $.trim( this.get('end_point') );
-		output.mbox = $.trim( this.get('mbox') );
-		output.spatial = $.trim( this.get('spatial') );
-		output.license_url = $.trim( this.get('license_url') );
-		output.frequency = $.trim( this.get('frequency') );
 		output.collect_type = this.get('collect_type');
 		output.impl_type = this.get('impl_type');
-
-		// Check if license is "other"
-		if( output.license_url == 'other' ){
-			output.license_url = $.trim( this.get('license_url_other') );
-		}
-
-		// Check if frequency is "other"
-		if( output.frequency == 'other' ){
-			output.frequency = $.trim( this.get('frequency_other') );
-		}
 
 		// Set new output
 		this.set('output',output);

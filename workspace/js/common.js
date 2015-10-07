@@ -16,6 +16,7 @@ var BaseView = Backbone.View.extend({
 		this.showHiddenElements();
 		this.setNavigationActiveTab();
 		this.initOpenDataSiteButton();
+		this.preventDefaultDragAndDrop();
 		
 		var self = this;
 		$(window).scroll(function(){
@@ -27,6 +28,13 @@ var BaseView = Backbone.View.extend({
 
 	render: function(){
 		return this;
+	},
+
+	// PreventDefault on Drag & Drop browser behaviour
+	preventDefaultDragAndDrop: function(){
+		$(document).bind('drop dragover', function (e) {
+    	e.preventDefault();
+		});
 	},
 
 	// Shows up hidden elements

@@ -63,6 +63,41 @@
 
 </fieldset>
 
+<hr class="separator">
+
+<div class="title">{% trans 'APP-DATASET-INFORMATION-TEXT' %}</div>
+<fieldset>
+
+	{# mbox #}
+	<div class="row clearfix">
+		{{ form.mbox.label_tag }}
+		{{ form.mbox }}
+		<p class="tip">{% trans 'APP-CONTACT-EMAIL-TIP' %}</p>
+	</div>
+
+	{# license_url #}
+	<div class="row clearfix">
+		{{ form.license_url.label_tag }}
+		{{ form.license_url }}
+		<p class="tip">{% trans 'APP-LICENSE-TIP' %} <a href="http://project-open-data.github.io/license-examples/" title="{% trans 'APP-LICENSE-EXAMPLE-TITLE' %}" target="_blank" tabindex="-1">http://project-open-data.github.io/license-examples/</a>.</p>
+	</div>
+
+	{# spatial #}
+	<div class="row clearfix">
+		{{ form.spatial.label_tag }}
+		{{ form.spatial }}
+		<p class="tip">{% trans 'APP-COLLECT-REGION-TIP' %}</p>
+	</div>
+
+	{# frequency #}
+	<div class="row clearfix">
+		{{ form.frequency.label_tag }}
+		{{ form.frequency }}
+		<p class="tip">{% trans 'APP-FREQUENCY-TIP' %}</p>
+	</div>
+
+</fieldset>
+
 </script>
 
 {# Backbone Template #}

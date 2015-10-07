@@ -4,6 +4,9 @@
 
 <fieldset>
 	
+	<div id="id_dropzone" style="border:2px dashed red;">DROP HERE</div>
+
+
 	{# file_data #}
 	<div class="row editDataset clearfix">
 		{{ form.file_data.label_tag }}
@@ -14,9 +17,6 @@
 		</div>
 		<span class="required">*</span>
 	</div>
-	
-	{# Common Fields #}
-	{% include "processManager/dataset/templates/collectCommonTemplate.html" %}
 
 </fieldset>
 

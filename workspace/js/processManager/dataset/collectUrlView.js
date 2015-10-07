@@ -18,7 +18,6 @@ var CollectUrlView = StepView.extend({
 		var eventsObject = {}
 		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
 		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
-		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -31,10 +30,6 @@ var CollectUrlView = StepView.extend({
 	render: function(){
 
 		var self = this;
-
-		// Check if is the value is "other", and set that in the model.
-		this.isOtherValue('frequency');
-		this.isOtherValue('license_url');
 
 		this.$el.find('.formContent').html( this.template( this.model.toJSON() ) );	
 
@@ -109,56 +104,7 @@ var CollectUrlView = StepView.extend({
 		}
 	},
 
-	isOtherValue: function(field){
-
-		var value = this.model.get(field),
-			valuesToCheck = [],
-			htmlString = this.parseHTML(this.templateHTML),
-			values = htmlString.find('[name='+field+'] option');
-
-		for(i=0;i<values.length;i++){
-			valuesToCheck.push( values.eq(i).val() );
-		}
-
-		if( $.inArray(value, valuesToCheck) == -1 ){
-			this.model.set(field, 'other');
-			this.model.set(field+'_other', value);
-		}
-
-	},
-
-	parseHTML:function(htmlString){
-		var fakeEl = $( '<div></div>' );
-		fakeEl.html( htmlString );
-		return $(fakeEl);
-	},
-
-	onSelectChange: function(event){
-
-		var element = event.currentTarget,
-			value = $(element).val(),
-			otherElement = $(element).attr('data-other'),
-			otherRow = this.$el.find(otherElement);
-
-		if(value == 'other'){
-			otherRow.show();
-		}else{
-			otherRow.hide();
-		}
-
-	},
-
 	setIndividualError: function(element, name, error){
-
-		// If license_url, use error in license_url_other
-		if( name == 'license_url'){
-			element = $('#id_license_url_other')
-		}
-
-		// If frequency, use error in frequency_other
-		if( name == 'frequency'){
-			element = $('#id_frequency_other')
-		}
 
 		// If not valid
 		if( error != ''){

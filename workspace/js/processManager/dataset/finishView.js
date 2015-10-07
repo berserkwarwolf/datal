@@ -18,10 +18,13 @@ var FinishView = StepView.extend({
 		var eventsObject = {}
 		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
 		eventsObject['click .step[data-step='+this.name+'] .navigation .saveButton'] = 'onSaveButtonClicked';
+		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
 		Backbone.Validation.bind(this);	
+
+		console
 
 		this.render();
 
@@ -61,13 +64,27 @@ var FinishView = StepView.extend({
 		}).panelInstance('id_notes');
 	},
 
+	onSelectChange: function(event){
+
+		var element = event.currentTarget,
+			value = $(element).val(),
+			otherElement = $(element).attr('data-other'),
+			otherRow = this.$el.find(otherElement);
+
+		if(value == 'other'){
+			otherRow.show();
+		}else{
+			otherRow.hide();
+		}
+
+	},
+
 	onPreviousButtonClicked: function(){
 		this.previous();
 	},
 
 	onSaveButtonClicked: function(){	
 	
-            
 		if(this.model.isValid(true)){
 
 			// Set sources and tags
@@ -77,12 +94,12 @@ var FinishView = StepView.extend({
 			// Set model data attribute
 			this.model.setData();	
 			if (!this.model.validate_notes()){
-                max_length = $("#notes_reference").data('max_length');
-                msg = gettext('VALIDATE-MAXLENGTH-TEXT-1') + max_length + gettext('VALIDATE-MAXLENGTH-TEXT-2');
-			    this.setIndividualError(null, 'notes', msg);
-			    return false;
-            }
-        
+								max_length = $("#notes_reference").data('max_length');
+								msg = gettext('VALIDATE-MAXLENGTH-TEXT-1') + max_length + gettext('VALIDATE-MAXLENGTH-TEXT-2');
+					this.setIndividualError(null, 'notes', msg);
+					return false;
+						}
+				
 
 			// Get Output and Data
 			var output = this.model.get('output'),
@@ -148,12 +165,13 @@ var FinishView = StepView.extend({
 	},
 
 	onSaveError: function(response){
-        // Hide Loadings
-        $("#ajax_loading_overlay").hide();
-        datalEvents.trigger('datal:application-error', response);
+		// Hide Loadings
+		$("#ajax_loading_overlay").hide();
+		datalEvents.trigger('datal:application-error', response);
 	},
 
 	setIndividualError: function(element, name, error){
+		
 		var textarea = $('.textarea');
 
 		// If not valid
@@ -181,15 +199,15 @@ var FinishView = StepView.extend({
 	},
 
 	initSourceList: function(){
-		 var sourceModel = new SourceModel();
-						this.sources = new Sources(this.model.get('sources'));
-		 new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
-	 },
+		var sourceModel = new SourceModel();
+		this.sources = new Sources(this.model.get('sources'));
+		new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
+	},
 
-	 initTagList: function(){
-						var tagModel = new TagModel();
-						this.tags = new Tags(this.model.get('tags'));
-						new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
-	 }
+	initTagList: function(){
+		var tagModel = new TagModel();
+		this.tags = new Tags(this.model.get('tags'));
+		new TagsView({collection: this.tags, parentView:this, model: tagModel, parentModel: this.model});
+	}
 
 });
