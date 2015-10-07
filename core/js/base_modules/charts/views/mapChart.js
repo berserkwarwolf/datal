@@ -82,29 +82,29 @@ charts.views.MapChart = charts.views.Chart.extend({
 
 
         var mapInitialOptions = {
-            zoom: this.model.get('mapOptions').zoom,
+            zoom: this.model.get('options').zoom,
             mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
         };
 
-        if(this.model.get('mapOptions').center){
+        if(this.model.get('options').center){
             mapInitialOptions.center = new google.maps.LatLng(
-                    this.model.get('mapOptions').center.lat,
-                    this.model.get('mapOptions').center.long
+                    this.model.get('options').center.lat,
+                    this.model.get('options').center.long
                     );
         }
 
         this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
         this.mapInstance.setOptions(this.googleMapOptions);
 
-        if(this.model.get('mapOptions').bounds){
-            var b = this.model.get('mapOptions').bounds;
+        if(this.model.get('options').bounds){
+            var b = this.model.get('options').bounds;
             var southWest = new google.maps.LatLng(parseFloat(b[2]),parseFloat(b[3])),
                 northEast = new google.maps.LatLng(parseFloat(b[0]),parseFloat(b[1])),
                 bounds = new google.maps.LatLngBounds(southWest,northEast);
             this.mapInstance.fitBounds(bounds);
         }
 
-        //this.mapInstance.setOptions(this.mapOptions || {});
+        //this.mapInstance.setOptions(this.options || {});
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
     },
@@ -278,7 +278,7 @@ charts.views.MapChart = charts.views.Chart.extend({
                 };
             }
 
-            this.model.set('mapOptions', updatedOptions);
+            this.model.set('options', updatedOptions);
 
         }
 

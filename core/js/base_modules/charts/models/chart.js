@@ -42,7 +42,7 @@ charts.models.Chart = Backbone.Model.extend({
         needToReloadData: false, //special case where I zoom on a heatMap
         mapType : 'ROADMAP',
         styles: {},
-        mapOptions: {
+        options: {
             zoom: 5,
             center: {
                 lat: 0,
@@ -68,7 +68,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     bindEvents: function () {
         //Se actualizan los filtros de los datos cuando se cambian las options
-        this.on('change:mapOptions', this.updateFetchFilters);
+        this.on('change:options', this.updateFetchFilters);
         this.on('change:type', this.onChangeType);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
@@ -118,7 +118,7 @@ charts.models.Chart = Backbone.Model.extend({
                     range_lat: this.parseColumnFormat(res.latitudSelection),
                     range_lon: this.parseColumnFormat(res.longitudSelection),
                     mapType: res.mapType? res.mapType.toUpperCase(): undefined,
-                    mapOptions:{
+                    options:{
                         zoom: res.zoom,
                         bounds: res.bounds? res.bounds.split(';'): undefined,
                         center: {lat: 0, long: 0}
@@ -200,8 +200,8 @@ charts.models.Chart = Backbone.Model.extend({
 
         if(this.get('type') == 'mapchart'){
             _.extend(filters, {
-                zoom: this.get('mapOptions').zoom,
-                bounds: (this.get('mapOptions').bounds)?this.get('mapOptions').bounds.join(';'):undefined
+                zoom: this.get('options').zoom,
+                bounds: (this.get('options').bounds)?this.get('options').bounds.join(';'):undefined
             });
         }
 
@@ -354,8 +354,8 @@ charts.models.Chart = Backbone.Model.extend({
                 latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
                 longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
                 mapType: this.get('mapType').toLowerCase(),
-                zoom: this.get('mapOptions').zoom,
-                bounds: this.get('mapOptions').bounds.join(';')
+                zoom: this.get('options').zoom,
+                bounds: this.get('options').bounds.join(';')
             });
         };
 
