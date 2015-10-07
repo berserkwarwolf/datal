@@ -11,6 +11,25 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataUpdate: null,
     latestDataRender: null,
     styles: {},
+    stylesDefault: {
+        'marker': {
+            icon : 'https://maps.gstatic.com/mapfiles/ms2/micons/red-pushpin.png'
+        },
+        'lineStyle': {
+            'strokeColor': '#00FFaa',
+            'strokeOpacity': 1.0,
+            'strokeWeight': 2,
+            'fillColor': '#FF0000',
+            'fillOpacity': 0.01
+        },
+        'polyStyle': {
+            'strokeColor': '#FF0000',
+            'strokeOpacity': 1.0,
+            'strokeWeight': 3,
+            'fillColor': '#FF0000',
+            'fillOpacity': 0.35
+        },
+    },
     initialize: function(options){
         this.mapOptions = options.mapOptions;
         this.bindEvents();
@@ -106,7 +125,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapPoints: function () {
         var self = this,
-            styles = this.model.get('styles');
+            styles = this.parseKmlStyles(this.model.get('styles'));
         _.each(this.model.data.get('points'), function (point, index) {
             if(point.trace){
                 this.createMapTrace(point, index, styles);
@@ -236,5 +255,84 @@ charts.views.MapChart = charts.views.Chart.extend({
 
         }
 
+    },
+
+    /**
+     * Convierte estilos de tipo kml al necesario para usar en los mapas
+     * @param  {object} styles
+     * @return {object}
+     */
+    parseKmlStyles: function (styles) {
+        styles = styles || [];
+        var parsedStyles = this.stylesDefault;
+
+        if(styles.length && styles[0].styles){
+            //Obtiene el primer estilo encontrado en la data
+            styles = styles[0].styles;
+            if(styles.lineStyle){
+                parsedStyles.lineStyle = this.kmlStyleToLine(styles.lineStyle);
+            }
+            if(styles.polyStyle){
+                parsedStyles.polyStyle = this.kmlStyleToPolygon(parsedStyles.lineStyle, styles.polyStyle);
+            }
+        }
+
+        return parsedStyles;
+    },
+
+    /**
+     * Prser para los estilos desde un kml a lineas de google maps
+     * @param  {object} lineStyle
+     * @return {object
+     */
+    kmlStyleToLine: function(lineStyle) {
+        var defaultStyle = this.get('stylesDefault').lineStyle;
+        return {
+            "strokeColor": this.getStyleFromKml(lineStyle, 'color', 'color', defaultStyle.strokeColor),
+            "strokeOpacity": this.getStyleFromKml(lineStyle, 'color', 'opacity', defaultStyle.strokeOpacity),
+            "strokeWeight": this.getStyleFromKml(lineStyle, 'width', 'width', defaultStyle.strokeWeight)
+        };
+    },
+
+    /**
+     * Parser para los estilos de un kml a polygons de google maps
+     * @param  {object} lineStyle
+     * @param  {object} polyStyle
+     * @return {object}
+     */
+    kmlStyleToPolygon: function (lineStyle, polyStyle) {
+        var defaultStyle = this.get('stylesDefault').polyStyle;
+        var opacity = this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight);
+        return {
+            "strokeColor": lineStyle.strokeColor,
+            "strokeOpacity": lineStyle.strokeOpacity,
+            "strokeWeight": lineStyle.strokeWeight,
+            "fillColor": this.getStyleFromKml(polyStyle, 'fill', 'color', defaultStyle.strokeWeight),
+            "fillOpacity": this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight)
+        };
+    },
+
+    /**
+     * Obtiene un estilo de un objeto de estilos Kml para ser usado en google maps
+     * @param  {object} kmlStyles
+     * @param  {string} attribute
+     * @param  {string} type
+     * @param  {string} defaultStyle
+     * @return {string}
+     */
+    getStyleFromKml: function (kmlStyles, attribute, type, defaultStyle) {
+        var style = kmlStyles[attribute] || null;
+        if(style == null) return defaultStyle;
+
+        //Convierte el color de formato ARGB a RGB
+        if(type == 'color')
+            return '#' + style.substring(2);
+        //La opacidad se extrae del color y convierte de hexadecimal a entero
+        if(type == 'opacity')
+            return parseInt(style.substring(0, 2), 16) / 256;
+
+        return style;
     }
+
+
 });

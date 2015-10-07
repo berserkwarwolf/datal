@@ -64,7 +64,7 @@ var FinishView = StepViewSPA.extend({
 		this.previous();
 	},
 
-	onFinishButtonClicked: function(){		
+	onFinishButtonClicked: function(){
 		var data = this.model.save().then(function (response) {
 			window.location = '/visualizations/'+response.revision_id;
 		}).fail(function (rejection) {
