@@ -104,7 +104,6 @@ charts.views.MapChart = charts.views.Chart.extend({
             this.mapInstance.fitBounds(bounds);
         }
 
-        //this.mapInstance.setOptions(this.options || {});
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
     },
