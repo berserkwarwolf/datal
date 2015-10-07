@@ -43,11 +43,11 @@
    </div>
    <% }%>
 
-   <% if (type.length !== 0) {%>
+   <% if (status.length !== 0) {%>
    <div class="filters">
-      <h3 class="">{% trans 'APP-TYPE-TEXT' %}</h3>
+      <h3 class="">{% trans 'APP-STATUS-TEXT' %}</h3>
       <ul>
-       	<% _(type).each(function( item ){ %>
+       	<% _(status).each(function( item ){ %>
 				<li>
 					<a class="filter-add link black" data-cid="<%= item.cid %>">
 						<%= item.title %>
@@ -63,21 +63,6 @@
       <h3 class="">{% trans 'APP-AUTHOR-TEXT' %}</h3>
       <ul>
        	<% _(author).each(function( item ){ %>
-				<li>
-					<a class="filter-add link black" data-cid="<%= item.cid %>">
-						<%= item.title %>
-					</a>
-				</li>
-       	<% }); %>
-      </ul>
-   </div>
-   <% }%>
-
-   <% if (status.length !== 0) {%>
-   <div class="filters">
-      <h3 class="">{% trans 'APP-STATUS-TEXT' %}</h3>
-      <ul>
-       	<% _(status).each(function( item ){ %>
 				<li>
 					<a class="filter-add link black" data-cid="<%= item.cid %>">
 						<%= item.title %>
