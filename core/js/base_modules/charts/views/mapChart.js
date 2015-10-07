@@ -31,6 +31,7 @@ charts.views.MapChart = charts.views.Chart.extend({
         },
     },
     initialize: function(options){
+        this.googleMapOptions = options.mapOptions;
         this.bindEvents();
         this.createGoogleMapInstance();
     },
@@ -93,6 +94,7 @@ charts.views.MapChart = charts.views.Chart.extend({
         }
 
         this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
+        this.mapInstance.setOptions(this.googleMapOptions);
 
         if(this.model.get('mapOptions').bounds){
             var b = this.model.get('mapOptions').bounds;
@@ -201,7 +203,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapMarker: function (point, index, styles) {
         var self = this,
-            markerIcon = this.model.get('stylesDefault').marker.icon;
+            markerIcon = this.stylesDefault.marker.icon;
 
         //Obtiene el estilo del marcador
         if(styles && styles.iconStyle){

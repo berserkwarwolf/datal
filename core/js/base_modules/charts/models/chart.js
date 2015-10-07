@@ -63,10 +63,6 @@ charts.models.Chart = Backbone.Model.extend({
             type: this.get('type')
         });
 
-        if(this.get('isEdit')){
-            this.fetchPreviewData();
-        }
-
         this.bindEvents();
     },
 
@@ -134,14 +130,22 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     fetchPreviewData: function () {
+        var self = this,
+            filters = {};
+
         if (this.get('type') === 'mapchart') {
-            return this.fetchMapPreviewData();
+            filters = this.getMapPreviewFilters();
         } else {
-            return this.fetchChartPreviewData();
+            filters = this.getChartPreviewFilters();
         }
+
+        this.data.set('filters', filters);
+        return this.data.fetch().then(function () {
+            self.trigger("newDataReceived");
+        });
     },
 
-    fetchChartPreviewData: function () {
+    getChartPreviewFilters: function () {
         var self = this;
 
         if(!this.isValid()){
@@ -165,14 +169,10 @@ charts.models.Chart = Backbone.Model.extend({
         if(self.get('invertedAxis')===true){
             params['invertedAxis'] = true;
         }
-
-        this.data.set('filters', params);
-        return this.data.fetch().then(function () {
-            self.trigger("newDataReceived");
-        });
+        return params;
     },
 
-    fetchMapPreviewData: function () {
+    getMapPreviewFilters: function () {
         var self = this,
             params = {
                 nullValueAction: this.get('nullValueAction'),
@@ -185,16 +185,7 @@ charts.models.Chart = Backbone.Model.extend({
         if (this.has('nullValuePreset')) {
             params.nullValuePreset = this.get('nullValuePreset');
         }
-
-        this.data.set('filters', params);
-        return this.data.fetch().then(function () {
-            self.trigger("newDataReceived");
-        });
-    },
-
-    parseMapResponse: function (response) {
-        this.data.set(response);
-        this.trigger("newDataReceived");
+        return params;
     },
 
     onChangeType: function (model, type) {
