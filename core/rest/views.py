@@ -10,7 +10,8 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
+class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin, 
+    viewsets.GenericViewSet):
     queryset = GuidModel
     lookup_field = 'guid'
     data_types = ['dt', 'ds', 'vz']
