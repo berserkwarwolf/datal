@@ -861,3 +861,6 @@ msgstr "Modificación"
 
 msgid "APP-VIEW-DATASET-TEXT"
 msgstr "Ver conjunto de datos"
+
+msgid "APP-VIEW-DATASTREAM-TEXT"
+msgstr "Ver vista"

@@ -869,3 +869,6 @@ msgstr "Modified"
 
 msgid "APP-VIEW-DATASET-TEXT"
 msgstr "View dataset"
+
+msgid "APP-VIEW-DATASTREAM-TEXT"
+msgstr "View dataview"

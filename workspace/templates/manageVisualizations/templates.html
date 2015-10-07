@@ -67,11 +67,6 @@
 	{# Title #}
   <h3><a href="<%=url%>" title="<%=title%>"><%=title%></a> <span class="sep" style="<% if(category == ""){ %>display:none;<% } %>"> | </span> <%=category%></h3>
 
-  {# Last Modified #}
-  <% if(modified_at != ""){%>
-    <span class="date">{% trans "APP-LAST-MODIFIED" %}: <%= modified_at %></span>
-  <% } %>
-
   {# Actions #}
   <ul class="actions clearfix">
 
@@ -102,6 +97,9 @@
     %>
       <li class="delete"><a title=<%= gettext('APP-DELETE-TEXT') %> class="red"><%= gettext('APP-DELETE-TEXT') %></a></li>
     <% } %>
+
+    {# View dataview #}
+    <li><a title="<%= datastream_title %>" href="<%= datastream_url %>"><%= gettext('APP-VIEW-DATASTREAM-TEXT') %></a></li>
 
   </ul>
   
