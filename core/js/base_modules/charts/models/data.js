@@ -50,7 +50,6 @@ charts.models.ChartData = Backbone.Model.extend({
 
         if(this.fetchXhr && this.fetchXhr.readyState > 0 && this.fetchXhr.readyState < 4){
             this.fetchXhr.abort();
-            self.trigger('fetch:end');
         }
         this.fetchXhr = Backbone.Model.prototype.fetch.apply(this, arguments);
         this.fetchXhr.always(function () {

@@ -53,8 +53,8 @@ var MapView = StepViewSPA.extend({
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
         this.listenTo(this.model, 'newDataReceived',this.onChartChanged,this);
 
-        this.listenTo(this.model, 'fetch:data:start', this.onFetchStart, this);
-        this.listenTo(this.model, 'fetch:data:end', this.onFetchEnd, this);
+        this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
+        this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);
 
         this.nextBtn.addClass('disabled');
         

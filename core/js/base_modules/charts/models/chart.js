@@ -75,12 +75,6 @@ charts.models.Chart = Backbone.Model.extend({
         this.on('change:mapOptions', this.updateFetchFilters);
         this.on('change:type', this.onChangeType);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
-        this.listenTo(this.data, 'fetch:start', function () {
-            this.trigger('fetch:data:start');
-        }, this);
-        this.listenTo(this.data, 'fetch:end', function () {
-            this.trigger('fetch:data:end', 'fetch:data:start');
-        }, this);
     },
 
     parse: function (res) {
@@ -228,10 +222,6 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
-        if(this.get('type') == 'mapchart'){
-            this.set('styles', this.parseKmlStyles(this.data.get('styles')));
-        }
-
         this.trigger('data_updated');
     },
 
