@@ -198,7 +198,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChartChanged: function(){
-		if(!this.model.get('isMap')){
+		if(!this.stateModel.get('isMap')){
 			console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
 			this.setupChart();
 			this.renderChart();
