@@ -114,16 +114,6 @@
 		</li>
 		 <% } %>
 
-		{# Delete #}
-		<% 
-			// Status Pending Review = 1
-			if( status !== 1 ){ 
-		%>
-			<li class="delete">
-				<a title=<%= gettext('APP-DELETE-TEXT') %> class="red"><%= gettext('APP-DELETE-TEXT') %></a>
-			</li>
-		<% } %>
-
 		{# Edit #}
 		<% 
 			// Status Pending Review = 1
@@ -131,6 +121,16 @@
 		%>
 			<li class="edit">
 				<a href="{% url 'manageDatasets.edit' %}/<%=id%>/" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>
+			</li>
+		<% } %>
+
+		{# Delete #}
+		<% 
+			// Status Pending Review = 1
+			if( status !== 1 ){ 
+		%>
+			<li class="delete">
+				<a title=<%= gettext('APP-DELETE-TEXT') %> class="red"><%= gettext('APP-DELETE-TEXT') %></a>
 			</li>
 		<% } %>
 
