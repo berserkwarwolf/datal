@@ -138,9 +138,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         this.data.set('filters', filters);
-        return this.data.fetch().then(function () {
-            self.trigger("newDataReceived");
-        });
+        return this.data.fetch();
     },
 
     getChartPreviewFilters: function () {
@@ -156,7 +154,7 @@ charts.models.Chart = Backbone.Model.extend({
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),
             nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset'),
+            nullValuePreset:  self.get('nullValuePreset') || '',
             type: self.get('type')
         };
 

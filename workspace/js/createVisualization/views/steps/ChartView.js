@@ -83,7 +83,7 @@ var ChartView = StepViewSPA.extend({
 		}
 
 		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
-		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
+		this.listenTo(this.model, 'data_updated',this.onChangeData,this);
 		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 		this.listenTo(this.modalView, 'close', this.onCloseModal, this);

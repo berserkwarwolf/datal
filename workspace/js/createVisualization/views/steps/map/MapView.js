@@ -51,7 +51,7 @@ var MapView = StepViewSPA.extend({
 
         // Event binding
         this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
-        this.listenTo(this.model, 'newDataReceived',this.onChartChanged,this);
+        this.listenTo(this.model, 'data_updated',this.onChartChanged,this);
 
         this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
         this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);

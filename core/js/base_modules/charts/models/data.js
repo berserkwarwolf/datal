@@ -69,7 +69,7 @@ charts.models.ChartData = Backbone.Model.extend({
         } else {
 
             //TODO: arreglar este hack para crear labels vacios
-            if (!labels.length) {
+            if (labels && !labels.length) {
                 labels = Array.apply(null, {length: response.values[0].length}).map(Number.call, Number);
                 fields.push(['number', 'labels']);
             } else {
