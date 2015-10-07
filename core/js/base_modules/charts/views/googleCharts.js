@@ -20,7 +20,7 @@ charts.views.GoogleLineChart = charts.views.LineChart.extend({
     render: function () {
         var dataTable = this.formatData(this.model.data.toJSON());
 
-        var options = this.model.get('options');
+        var options = this.model.get('mapOptions');
 
         this.chart = new google.visualization.LineChart(this.el);
 
@@ -47,7 +47,7 @@ charts.views.GoogleAreaChart = charts.views.AreaChart.extend({
     render: function () {
         var dataTable = this.formatData(this.model.data.toJSON());
 
-        var options = this.model.get('options');
+        var options = this.model.get('mapOptions');
 
         options.isStacked = true;
 

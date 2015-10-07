@@ -61,7 +61,7 @@ charts.models.Chart = Backbone.Model.extend({
                 "fillOpacity": 0.35
             },
         },
-        options: {
+        mapOptions: {
             zoom: 5,
             center: {
                 lat: 0,
@@ -71,7 +71,7 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
     },
-    initialize: function () {
+    initialize: function (options) {
         //Se inicializa acá para prevenir error en embed
         if(window.gettext){
             this.set('message',gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"));
@@ -91,7 +91,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     bindEvents: function () {
         //Se actualizan los filtros de los datos cuando se cambian las options
-        this.on('change:options', this.updateFetchFilters);
+        this.on('change:mapOptions', this.updateFetchFilters);
         this.on('change:type', this.onChangeType);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
         this.listenTo(this.data, 'fetch:start', function () {
@@ -139,20 +139,15 @@ charts.models.Chart = Backbone.Model.extend({
                 range_labels: this.parseColumnFormat(res.labelSelection),
 
                 range_lat: this.parseColumnFormat(res.latitudSelection),
-                range_lon: this.parseColumnFormat(res.longitudSelection),
-                mapType: res.mapType? res.mapType.toUpperCase(): undefined,
-                options:{
-                    zoom: res.zoom,
-                    bounds: res.bounds? res.bounds.split(';'): undefined
-                }
+                range_lon: this.parseColumnFormat(res.longitudSelection)
 
             });
             if (res.type === 'mapchart') {
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.latitudSelection),
                     range_lon: this.parseColumnFormat(res.longitudSelection),
-                    mapType: res.mapType.toUpperCase(),
-                    options:{
+                    mapType: res.mapType? res.mapType.toUpperCase(): undefined,
+                    mapOptions:{
                         zoom: res.zoom,
                         bounds: res.bounds? res.bounds.split(';'): undefined,
                         center: {lat: 0, long: 0}
@@ -239,8 +234,8 @@ charts.models.Chart = Backbone.Model.extend({
 
         if(this.get('type') == 'mapchart'){
             _.extend(filters, {
-                zoom: this.get('options').zoom,
-                bounds: this.get('options').bounds.join(';')
+                zoom: this.get('mapOptions').zoom,
+                bounds: (this.get('mapOptions').bounds)?this.get('mapOptions').bounds.join(';'):undefined
             });
         }
 
@@ -405,8 +400,8 @@ charts.models.Chart = Backbone.Model.extend({
                 latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
                 longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
                 mapType: this.get('mapType').toLowerCase(),
-                zoom: this.get('options').zoom,
-                bounds: this.get('options').bounds.join(';')
+                zoom: this.get('mapOptions').zoom,
+                bounds: this.get('mapOptions').bounds.join(';')
             });
         };
 
