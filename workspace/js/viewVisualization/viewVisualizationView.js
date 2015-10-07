@@ -20,6 +20,7 @@ var viewVisualizationView = Backbone.View.extend({
 		this.render();
 	},
 	setupChart: function () {
+
 		this.model.set('chart', {
 			lib: this.model.get('chartLib'),
 			type: JSON.parse(this.model.get('chartJson')).format.type
@@ -41,10 +42,29 @@ var viewVisualizationView = Backbone.View.extend({
 		}
 	},
 	createChartInstance: function () {
-		var chartModelInstance = new this.ChartModelClass({
+		var initialOptions = {
 			type: this.model.get('chart').type,
 			id: this.model.get('id')
-		});
+		};
+
+		if(initialOptions.type=="mapchart"){
+			var origOptions = JSON.parse(this.model.get('chartJson'));
+			_.extend(initialOptions,{
+				mapType: origOptions.chart.mapType.toUpperCase(),
+				mapOptions:{
+					bounds: origOptions.chart.bounds.split(';'),
+					zoom: origOptions.chart.zoom,
+				}
+			});
+
+			if(origOptions.chart.center){
+				initialOptions.mapOptions.center = origOptions.chart.center;
+			} else {
+				initialOptions.mapOptions.center = null;
+			}
+		}
+
+		var chartModelInstance = new this.ChartModelClass(initialOptions);
 
 		this.chartInstance = new this.ChartViewClass({
 			el: this.chartContainer,
