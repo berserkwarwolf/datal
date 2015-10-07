@@ -502,7 +502,7 @@ def action_check_email(request):
 
 @require_POST
 def action_check_username(request):
-    nick = request.POST.get('username')
+    nick = request.POST.get('nick')
     user_id = request.POST.get('user_id')
     query = User.objects.filter(nick=nick)
     if user_id:

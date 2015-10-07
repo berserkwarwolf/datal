@@ -79,15 +79,15 @@ class RequestProcessor:
         args = {}
 
         for parameter in paramaters:
-            key = 'pArgument%d' % parameter.position
+            key = 'pArgument%d' % parameter['position']
             value = self.request.REQUEST.get(key, '')
             if value == '':
-                parameter.value = parameter.default
-                args[key] = parameter.value
+                parameter['value'] = parameter['default']
+                args[key] = parameter['value']
             else:
-                parameter.value = unicode(value).encode('utf-8')
-                args[key] = parameter.value
-                parameter.default = parameter.value
+                parameter['value'] = unicode(value).encode('utf-8')
+                args[key] = parameter['value']
+                parameter['default'] = parameter['value']
 
         return args
 

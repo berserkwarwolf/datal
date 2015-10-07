@@ -181,7 +181,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                  'datastream__last_published_revision')
 
         related['visualizations'] = VisualizationRevision.objects.select_related().filter(
-            visualization__datastream__datastreamrevision__dataset__id=dataset_id,
+            visualization__datastream__last_revision__dataset__id=dataset_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',

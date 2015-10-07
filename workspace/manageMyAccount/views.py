@@ -87,11 +87,12 @@ def create(request):
             preference.save()
 
         user = User()
-        user.nick = form.cleaned_data.get('username')
+        user.nick = form.cleaned_data.get('nick')
         user.email = form.cleaned_data.get('email')
         user.password = form.cleaned_data.get('password')
         user.account = account
         user.language = language
+        user.name = form.cleaned_data.get('name')
         user.save()
 
         admin_role = Role.objects.get(code='ao-account-admin')
@@ -104,6 +105,7 @@ def create(request):
         return redirect('/')
     else:
         return redirect('accounts.signup')
+
 
 def signin(request, admin_url=''):
     auth_manager = request.auth_manager

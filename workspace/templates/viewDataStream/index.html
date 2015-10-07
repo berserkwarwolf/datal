@@ -109,7 +109,7 @@ $(document).ready(function(){
     id: {{datastream.datastream_revision_id}},
     datastream_id: {{ datastream.datastream_id }},
     {% for parameter in datastream.parameters %}
-    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.value}}"},
+    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
     {% endfor %}
     filter: "",
     status: {{ datastream.status }},

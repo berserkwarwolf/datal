@@ -23,7 +23,10 @@ msgid "APP-ADMIN-URL-TEXT"
 msgstr "Url administrativa"
 
 msgid "APP-USERNAME-TEXT"
-msgstr "Usuario"
+msgstr "Nombre usuario"
+
+msgid "APP-USERNICK-TEXT"
+msgstr "Apodo"
 
 msgid "APP-PASSWORD-TEXT"
 msgstr "Contraseña"
@@ -2281,7 +2284,7 @@ msgid "LANDINGPAGE-ACTIVITY-HASEDITED"
 msgstr "editó"
 
 msgid "LANDINGPAGE-ACTIVITY-HASDELETED"
-msgstr "borró revisión de"
+msgstr "borró la revisión de"
 
 msgid "LANDINGPAGE-ACTIVITY-TODAY"
 msgstr "Hoy"
@@ -3245,3 +3248,15 @@ msgstr "Última versión publicada"
 
 msgid "APP-DOWNLOAD-ORIGINAL-TEXT"
 msgstr "Descargar original"
+
+msgid "LANDINGPAGE-ACTIVITY-DATASET"
+msgstr "el conjunto de datos"
+
+msgid "LANDINGPAGE-ACTIVITY-DATAVIEW"
+msgstr "la vista"
+
+msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
+msgstr "la visualización"
+
+msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
+msgstr "la colección"

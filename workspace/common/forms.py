@@ -1,7 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy
 
-
 class TagForm(forms.Form):
 
     # name
@@ -38,18 +37,24 @@ class ParameterForm(forms.Form):
 
     position= forms.IntegerField(
         required=False,
-        label=ugettext_lazy('APP-URL-TEXT'),
         widget=forms.TextInput()
     )
 
     description = forms.CharField(
         required=False,
-        label=ugettext_lazy('APP-URL-TEXT'),
         widget=forms.TextInput()
     )
 
     default = forms.CharField(
         required=False,
-        label=ugettext_lazy('APP-URL-TEXT'),
         widget=forms.TextInput()
     )
+
+    def clean_default(self):
+
+        data = self.cleaned_data['default']
+
+        return data.strip()[0:30]
+
+
+

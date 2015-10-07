@@ -79,7 +79,7 @@ var SignUpModel = Backbone.Model.extend({
 
     }],
 
-    username: [{
+    nick: [{
       required: true,
       msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
     },{
@@ -91,6 +91,14 @@ var SignUpModel = Backbone.Model.extend({
     },{
       ifUsernameExists: false,
       msg: gettext( 'VALIDATE-USERNAME' )
+    }],
+
+    name: [{
+      required: true,
+      msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
+    },{
+      maxLength: 30,
+      msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 30 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
     }],
 
     password: {
