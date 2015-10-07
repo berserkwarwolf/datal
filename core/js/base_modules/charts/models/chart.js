@@ -400,7 +400,7 @@ charts.models.Chart = Backbone.Model.extend({
 
         };
 
-        if (this.get('isMap')) {
+        if (this.get('type') === 'mapchart') {
             settings = _.extend( settings, {
                 latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
                 longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
@@ -422,6 +422,23 @@ charts.models.Chart = Backbone.Model.extend({
             attr[e] = that.get(e);
         });
         return attr;
+    },
+
+    save: function (attrs, options) {
+        var data = this.getFormData();
+
+        return $.ajax({
+            type:'POST',
+            data: data,
+            dataType: 'json'
+        }).then(function (response) {
+            if(response.status=='ok'){
+                console.log(response);
+                return response;
+            } else {
+                console.error(response);
+            }
+        });
     },
 
     /**
