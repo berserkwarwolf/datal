@@ -401,6 +401,7 @@ body{background:$color-base;height:100%;min-width:998px;}
 .form{
   label{display:block;height:inherit;margin-bottom:6px;color:$font-color-light;line-height:21px;font-size:$font-size-base;}
   input{border-radius:0;padding:7px;width:445px;color:$font-color-base;font-size:$font-size-m;}
+  .tip{margin:8px 0 0;line-height:14px;color:$font-color-light;font-size:$font-size-s;display:inline-block;}
 }
 
 /* Box */
@@ -581,9 +582,7 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .ov-content ul.ul-overlay li:last-child{border-bottom:none; padding-bottom:0;}
 .ao-popup-overlay .ov-content ul.ul-overlay li span, .ao-popup-overlay .ov-alert span{margin: 0 5px -5px 0;}
 .ao-popup-overlay .ov-content .selectTitle{text-transform: uppercase; font-weight: bold; padding: 0 10px 5px 10px;}
-.ao-popup-overlay .ov-content p{padding:0 0 15px 0;}
 .ao-popup-overlay .ov-content p.text{font-size:14px;line-height:18px;}
-.ao-popup-overlay .ov-content p:last-child{padding:0;}
 .ao-popup-overlay .ov-content p.more-padding{padding:15px 0 !important;}
 .ao-popup-overlay .ov-content select{font-size: 12px; width: 100%;}
 .ao-popup-overlay .ov-bottom{background-color:$accent-color-05; border-top: 1px solid #d7d7d7; padding: 15px; min-height: 57px;}
