@@ -32,7 +32,7 @@ var MapView = StepViewSPA.extend({
           dataStreamModel: options.dataStreamModel
         });
         this.modalView.on('open', function () {
-            this.model.set('select_data',true);
+            this.model.set('select_data', true);
             if(this.dataTableView){
                 this.dataTableView.render();
             }
@@ -42,11 +42,9 @@ var MapView = StepViewSPA.extend({
         if(this.stateModel.get('isEdit')){
             
             this.changeMapType(this.model.get('mapType'));
-
-            var that = this;
+            this.model.set('select_data', true);
 
             $("#ajax_loading_overlay").show();
-
         }
 
 

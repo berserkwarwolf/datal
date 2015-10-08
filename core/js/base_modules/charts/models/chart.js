@@ -266,7 +266,7 @@ charts.models.Chart = Backbone.Model.extend({
         //Si alguna vez intentó seleccionar algo de data
         if(this.get('select_data')){
 
-            if (this.get('isMap')) {
+            if (this.get('type') === 'mapchart') {
 
                 valid = (this.data.get('clusters').length >0);
                 console.log('valid',valid);

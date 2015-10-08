@@ -65,9 +65,10 @@ charts.models.ChartData = Backbone.Model.extend({
     parse: function (response) {
         var columns = [],
             fields =[],
-            labels = response.labels;
+            labels = response.labels,
+            filters = this.get('filters');
 
-        if (this.get('type') === 'mapchart') {
+        if (filters.type === 'mapchart') {
             return response;
         } else {
 

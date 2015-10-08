@@ -82,12 +82,6 @@ var ChartView = StepViewSPA.extend({
 			this.optionsItemConfig.hide();
 		}
 
-		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
-		this.listenTo(this.model, 'data_updated',this.onChangeData,this);
-		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
-		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-		this.listenTo(this.modalView, 'close', this.onCloseModal, this);
-
 		this.nextBtn.addClass('disabled');
 
 		this.setupChart();
@@ -281,6 +275,12 @@ var ChartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 
+		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.listenTo(this.model, 'data_updated',this.onChangeData,this);
+		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
+		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
+		this.listenTo(this.modalView, 'close', this.onCloseModal, this);
+
 		// chart type from first step
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
@@ -293,6 +293,7 @@ var ChartView = StepViewSPA.extend({
 
 	finish: function(){
 		this.constructor.__super__.finish.apply(this);
+		this.stopListening();
 
 		if(this.chartInstance){
 			this.chartInstance.destroy();
