@@ -51,16 +51,16 @@ var viewVisualizationView = Backbone.View.extend({
 			var origOptions = JSON.parse(this.model.get('chartJson'));
 			_.extend(initialOptions,{
 				mapType: origOptions.chart.mapType.toUpperCase(),
-				mapOptions:{
+				options:{
 					bounds: origOptions.chart.bounds.split(';'),
 					zoom: origOptions.chart.zoom,
 				}
 			});
 
 			if(origOptions.chart.center){
-				initialOptions.mapOptions.center = origOptions.chart.center;
+				initialOptions.options.center = origOptions.chart.center;
 			} else {
-				initialOptions.mapOptions.center = null;
+				initialOptions.options.center = null;
 			}
 		}
 
@@ -68,7 +68,12 @@ var viewVisualizationView = Backbone.View.extend({
 
 		this.chartInstance = new this.ChartViewClass({
 			el: this.chartContainer,
-			model: chartModelInstance
+			model: chartModelInstance,
+			mapOptions: {
+                        disableDefaultUI: true,
+                        disableDoubleClickZoom: true,
+                        scrollwheel: false
+                    }
 		});
 
 		this.setChartContainerSize();
