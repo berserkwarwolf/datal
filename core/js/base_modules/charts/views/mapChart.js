@@ -37,6 +37,7 @@ charts.views.MapChart = charts.views.Chart.extend({
     },
 
     render: function () {
+        this.clearMapOverlays();
         if(this.model.data.get('points') && this.model.data.get('points').length){
             this.createMapPoints();
         }
