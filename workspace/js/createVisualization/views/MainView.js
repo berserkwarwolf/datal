@@ -18,17 +18,23 @@ var MainView = Backbone.View.extend({
 
         this.dataStreamModel = new DataStreamModel({
             datastream_revision_id: options.chart_model.datastream_revision_id
-        });
-        this.dataStreamModel.fetch();
+        }).fetch();
 
         this.chartModel.parse(options.chart_model);
 
         if (options.chart_model.revision_id) {
             this.stateModel.set('isEdit', true);
-            // this.chartModel.fetchData();
-        }else{
+        }
+        else {
             this.stateModel.set('isEdit', false);
         };
+
+        if (this.chartModel.get('type')=='mapchart') {
+            this.stateModel.set('isMap', true);
+        }
+        else {
+            this.stateModel.set('isMap', false);
+        }
 
         //Buttons views
         this.buttonsView = new ButtonsView({

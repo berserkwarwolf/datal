@@ -44,7 +44,6 @@ var MapView = StepViewSPA.extend({
             this.changeMapType(this.model.get('mapType'));
             this.model.set('select_data', true);
 
-            $("#ajax_loading_overlay").show();
         }
 
 

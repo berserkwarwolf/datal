@@ -268,7 +268,9 @@ charts.models.Chart = Backbone.Model.extend({
 
             if (this.get('type') === 'mapchart') {
 
-                valid = (this.data.get('clusters').length >0);
+                // example validation
+                // valid = (this.data.get('clusters').length >0);
+                valid = true;
                 console.log('valid',valid);
 
             } else {

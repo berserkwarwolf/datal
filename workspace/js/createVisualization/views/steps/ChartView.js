@@ -47,7 +47,7 @@ var ChartView = StepViewSPA.extend({
 		this.optionsItemConfig = this.$el.find('div.optionsItemConfig');
 
 		//edit
-		if(this.stateModel.get('isEdit')){
+		if(this.stateModel.get('isEdit') && !this.stateModel.get('isMap')){
 			var that = this;
 			
 			//library
