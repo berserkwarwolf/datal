@@ -168,16 +168,24 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     getMapPreviewFilters: function () {
+        var id = this.get('id');
+
         var filters = {
-                nullValueAction: this.get('nullValueAction'),
-                data: this.serializeServerExcelRange(this.get('range_data')),
-                lat: this.serializeServerExcelRange(this.get('range_lat')),
-                lon: this.serializeServerExcelRange(this.get('range_lon')),
-                revision_id: this.get('datastream_revision_id'),
+                revision_id: id,
                 zoom: this.get('options').zoom,
                 bounds: (this.get('options').bounds)?this.get('options').bounds.join(';'):undefined,
                 type: this.get('type')
-            };
+        };
+
+        if(_.isUndefined(id)){
+            filters = _.extend(filters,{
+                revision_id: this.get('datastream_revision_id'),
+                nullValueAction: this.get('nullValueAction'),
+                data: this.serializeServerExcelRange(this.get('range_data')),
+                lat: this.serializeServerExcelRange(this.get('range_lat')),
+                lon: this.serializeServerExcelRange(this.get('range_lon'))                
+            });
+        }
 
         if (this.has('nullValuePreset')) {
             filters.nullValuePreset = this.get('nullValuePreset');
