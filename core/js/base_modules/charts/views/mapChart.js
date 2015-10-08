@@ -92,17 +92,17 @@ charts.views.MapChart = charts.views.Chart.extend({
                     this.model.get('options').center.long
                     );
         }
-
-        this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
-        this.mapInstance.setOptions(this.googleMapOptions);
-
+        
         if(this.model.get('options').bounds){
             var b = this.model.get('options').bounds;
             var southWest = new google.maps.LatLng(parseFloat(b[2]),parseFloat(b[3])),
                 northEast = new google.maps.LatLng(parseFloat(b[0]),parseFloat(b[1])),
                 bounds = new google.maps.LatLngBounds(southWest,northEast);
-            this.mapInstance.fitBounds(bounds);
+                mapInitialOptions.center = bounds.getCenter();
         }
+
+        this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
+        this.mapInstance.setOptions(this.googleMapOptions);
 
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
