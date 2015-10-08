@@ -49,16 +49,8 @@ var MapView = StepViewSPA.extend({
 
         }
 
-        // Event binding
-        this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
-        this.listenTo(this.model, 'data_updated',this.onChartChanged,this);
-
-        this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
-        this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);
 
         this.nextBtn.addClass('disabled');
-        
-        this.setupChart();
 
     }, 
 
@@ -102,16 +94,14 @@ var MapView = StepViewSPA.extend({
     },
 
     onChartChanged: function(){
-        if(this.stateModel.get('isMap') && this.model.get('select_data') ){
+        if( this.model.get('select_data') ){
              if(this.selectDataBtn.hasClass('icon-add')){
                 this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');       
                 this.vizContent.addClass('dataSelected');
             }
 
-            console.log('you selected type: ', this.model.get('type'), ' mapType:', this.model.get('mapType') );
-            this.setupChart();
-            this.renderChart();
         }
+        this.setupChart();
     },
 
     onMapContentClicked: function(){
@@ -146,18 +136,17 @@ var MapView = StepViewSPA.extend({
 
     renderChart: function () {
         if (this.ChartViewClass) {
-
-            this.destroyChartInstance();
-
-            this.chartInstance = new this.ChartViewClass({
-                el: this.$('#mapContainer'),
-                model: this.model,
-                mapOptions: {
-                    disableDefaultUI: true,
-                    disableDoubleClickZoom: true,
-                    scrollwheel: false
-                }
-            });
+            if (!this.chartInstance) {
+                this.chartInstance = new this.ChartViewClass({
+                    el: this.$('#mapContainer'),
+                    model: this.model,
+                    mapOptions: {
+                        disableDefaultUI: true,
+                        disableDoubleClickZoom: true,
+                        scrollwheel: false
+                    }
+                });
+            }        
 
             //Validate data
             var validation = this.model.valid(); //valida datos por tipo de gráfico
@@ -173,7 +162,6 @@ var MapView = StepViewSPA.extend({
                 }
             }   else {
                 this.message.show();
-                this.destroyChartInstance();
                 this.nextBtn.addClass('disabled');
                 this.vizContent.removeClass('dataSelected');
             }
@@ -198,19 +186,28 @@ var MapView = StepViewSPA.extend({
     start: function(){
         this.constructor.__super__.start.apply(this);
 
+        // Event binding
+        this.listenTo(this.modalView, 'close', this.fetchPreviewData, this);
+        this.listenTo(this.model, 'data_updated',this.renderChart,this);
+
+        this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
+        this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);
+
+        
         this.model.set({
             lib: 'google'
         });
+        this.setupChart();
 
-        if(this.model.data.get('clusters').length){
-            this.onChartChanged();
+        if(this.stateModel.get('isEdit')){
+            this.renderChart();
         }
 
     },
 
     finish: function(){
         this.constructor.__super__.finish.apply(this);
-
+        this.stopListening();
         this.destroyChartInstance();
     },
 

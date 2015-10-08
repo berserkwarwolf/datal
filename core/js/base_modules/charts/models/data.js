@@ -52,8 +52,10 @@ charts.models.ChartData = Backbone.Model.extend({
             this.fetchXhr.abort();
         }
         this.fetchXhr = Backbone.Model.prototype.fetch.apply(this, arguments);
-        this.fetchXhr.always(function () {
+        this.fetchXhr.then(function () {
             self.trigger('data_updated');
+        });
+        this.fetchXhr.always(function () {
             self.trigger('fetch:end');
         });
         return this.fetchXhr;

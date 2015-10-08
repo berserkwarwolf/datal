@@ -276,7 +276,9 @@ charts.views.MapChart = charts.views.Chart.extend({
                     long: center.lng(),
                 };
             }
-
+            console.log('zoom', updatedOptions.zoom)
+            console.log('center', updatedOptions.center)
+            console.log('bounds', updatedOptions.bounds)
             this.model.set('options', updatedOptions);
 
         }

@@ -237,7 +237,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     serializeServerExcelRange: function(selection){
-        if (_.isUndefined(selection)) return;
+        if (_.isUndefined(selection)) return '';
         var range = selection.split(":");
         var left = range[0];
         var right = range[1];
