@@ -68,8 +68,7 @@ charts.models.Chart = Backbone.Model.extend({
 
     bindEvents: function () {
         //Se actualizan los filtros de los datos cuando se cambian las options
-        this.on('change:options', this.updateFetchFilters);
-        this.on('change:type', this.onChangeType);
+        this.on('change', this.bindDataModel, this);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
 
@@ -129,7 +128,7 @@ charts.models.Chart = Backbone.Model.extend({
         this.set(data);
     },
 
-    fetchPreviewData: function () {
+    bindDataModel: function () {
         var self = this,
             filters = {};
 
@@ -140,70 +139,50 @@ charts.models.Chart = Backbone.Model.extend({
         }
 
         this.data.set('filters', filters);
-        return this.data.fetch();
     },
 
     getChartPreviewFilters: function () {
-        var self = this;
 
         if(!this.isValid()){
             console.error('error en valid');
         }
 
-        var params = {
-            revision_id: self.get('datastream_revision_id'),
+        var filters = {
+            revision_id: this.get('datastream_revision_id'),
             data: this.serializeServerExcelRange(this.get('range_data')),
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),
-            nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset') || '',
-            type: self.get('type')
+            nullValueAction: this.get('nullValueAction'),
+            nullValuePreset:  this.get('nullValuePreset') || '',
+            type: this.get('type')
         };
 
-        if(self.get('invertData')===true){
-            params['invertData'] = true;
+        if(this.get('invertData')===true){
+            filters['invertData'] = true;
         }
 
-        if(self.get('invertedAxis')===true){
-            params['invertedAxis'] = true;
+        if(this.get('invertedAxis')===true){
+            filters['invertedAxis'] = true;
         }
-        return params;
+        return filters;
     },
 
     getMapPreviewFilters: function () {
-        var self = this,
-            params = {
+        var filters = {
                 nullValueAction: this.get('nullValueAction'),
                 data: this.serializeServerExcelRange(this.get('range_data')),
                 lat: this.serializeServerExcelRange(this.get('range_lat')),
                 lon: this.serializeServerExcelRange(this.get('range_lon')),
-                revision_id: this.get('datastream_revision_id')
+                revision_id: this.get('datastream_revision_id'),
+                zoom: this.get('options').zoom,
+                bounds: (this.get('options').bounds)?this.get('options').bounds.join(';'):undefined,
+                type: this.get('type')
             };
 
         if (this.has('nullValuePreset')) {
-            params.nullValuePreset = this.get('nullValuePreset');
+            filters.nullValuePreset = this.get('nullValuePreset');
         }
-        return params;
-    },
-
-    onChangeType: function (model, type) {
-        this.data.set('type', type);
-    },
-
-    /**
-     * Default fetch filter updater
-     */
-    updateFetchFilters: function () {
-        var filters = this.data.get('filters');
-
-        if(this.get('type') == 'mapchart'){
-            _.extend(filters, {
-                zoom: this.get('options').zoom,
-                bounds: (this.get('options').bounds)?this.get('options').bounds.join(';'):undefined
-            });
-        }
-
-        this.data.set('filters', filters).fetch();
+        return filters;
     },
 
     /**

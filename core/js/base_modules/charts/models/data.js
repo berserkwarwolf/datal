@@ -36,8 +36,9 @@ charts.models.ChartData = Backbone.Model.extend({
     /**
      * Se actualiza la data mediante el metodo fetch cada vez que se escucha un cambio en los filtros
      */
-    onFiltersChange: function () {
-        return this.fetch();
+    onFiltersChange: function (model, value) {
+        console.log('filters updated', value);
+        this.fetch();
     },
 
     /**
@@ -100,7 +101,7 @@ charts.models.ChartData = Backbone.Model.extend({
             url,
             endpoint = 'charts/';
 
-        if (this.get('type') === 'mapchart') {
+        if (filters.type === 'mapchart') {
             endpoint = 'maps/';
         }
 

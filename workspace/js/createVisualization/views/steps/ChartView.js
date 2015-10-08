@@ -108,7 +108,7 @@ var ChartView = StepViewSPA.extend({
 
 	fetchPreviewData: function(){
 		$("#ajax_loading_overlay").show();
-		this.model.fetchPreviewData()
+		this.model.fetchData()
 		.then(function () {
 			$("#ajax_loading_overlay").hide();
 		})

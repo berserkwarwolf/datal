@@ -25,7 +25,7 @@ var MainView = Backbone.View.extend({
 
         if (options.chart_model.revision_id) {
             this.stateModel.set('isEdit', true);
-            this.chartModel.fetchPreviewData();
+            // this.chartModel.fetchData();
         }else{
             this.stateModel.set('isEdit', false);
         };
