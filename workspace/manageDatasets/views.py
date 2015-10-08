@@ -87,7 +87,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     filters_param = bb_request.get('filters')
     filters_dict = dict()
     filter_name = ''
-    sort_by = '-id'
+    sort_by = bb_request.get("sort_by",None)
+    order = bb_request.get("order","asc")
     exclude = None
 
     if filters_param is not None and filters_param != '':
@@ -113,15 +114,21 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
                 'impl_type__in': DATASTREAM_IMPL_NOT_VALID_CHOICES
             }
 
-    if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
-        if bb_request.get('sort_by') == "category":
+    # define la forma de ordenamiento
+    if sort_by:
+        if sort_by == "category":
             sort_by ="category__categoryi18n__name"
-        if bb_request.get('sort_by') == "title":
+        elif sort_by == "title":
             sort_by ="dataseti18n__title"
-        if bb_request.get('sort_by') == "author":
+        elif sort_by == "author":
             sort_by ="dataset__user__nick"
-        if bb_request.get('order')=="desc":
+
+        if order == "desc":
             sort_by = "-"+ sort_by
+    else:
+        # no se por que setea un orden de este tipo si no
+        # se envia el parametro
+        sort_by='-id'
 
     total_resources = request.stats['account_total_datasets']
             

@@ -160,6 +160,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 'status','id','impl_type','guid', 'category_id','dataset_id','category','title',
                 'description','last_revision_id','created_at','size','end_point')
         """
+
         query = query.order_by(sort_by)
 
         # Limit the size.
