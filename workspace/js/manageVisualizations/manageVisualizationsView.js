@@ -259,19 +259,10 @@ var ManageVisualizationsView = Backbone.View.extend({
 			}),
 			sortable: true,
 			editable: false
-		},{
-			name: "datastream_title",
-			label: gettext('APP-GRID-CELL-DATASTREAM-NAME'),
-			// cell: "text",
-			cell: Backgrid.StringCell.extend({
-				render: function() {
-					var datastreamCellView = new DatastreamCellView({
-						model: this.model
-					});
-					this.$el.html(datastreamCellView.render().el);
-					return this;
-				}
-			}),
+		}, {
+			name: "modified_at",
+			label: gettext('APP-GRID-CELL-MODIFIED'),
+			cell: "text",
 			sortable: true,
 			editable: false
 		}, {

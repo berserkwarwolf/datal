@@ -26,12 +26,6 @@ var FiltersView = Backbone.View.extend({
             return _.extend(model.toJSON(), {cid: model.cid});
         });
 
-        var type = _.filter(this.collection.models, function (model) {
-            return model.get('type') === 'type' && !model.get('active');
-        }).map(function (model) {
-            return _.extend(model.toJSON(), {cid: model.cid});
-        });
-
         var author = _.filter(this.collection.models, function (model) {
             return model.get('type') === 'author' && !model.get('active');
         }).map(function (model) {
@@ -47,7 +41,6 @@ var FiltersView = Backbone.View.extend({
         this.$el.html(this.template({
             active: active,
             category: category,
-            type: type,
             author: author,
             status: status
         }));

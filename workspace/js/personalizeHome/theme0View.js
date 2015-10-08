@@ -112,8 +112,7 @@ var theme0View = Backbone.Epoxy.View.extend({
 				})).done( function(data){
 					$('#id_theme0NameSuggest').taggingSources({
 						source:function(request, response) {
-							    /* $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds','chart']}, response); */
-							    $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds']}, response);
+							    $.getJSON("/admin/suggest", { term: request.term, resources:['ds']}, response);
 						}
 						, minLength: 3
 						, sources:data							

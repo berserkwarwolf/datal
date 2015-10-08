@@ -45,7 +45,8 @@ var SignUpView = Backbone.View.extend({
 
     var account_name = this.formContainer.find('#id_account_name').val();
     var admin_url = this.formContainer.find('#id_admin_url').val();
-    var username = this.formContainer.find('#id_username').val();
+    var name = this.formContainer.find('#id_name').val();
+    var nick = this.formContainer.find('#id_nick').val();
     var password = this.formContainer.find('#id_password').val();
     var password_again = this.formContainer.find('#id_password_again').val();
     var email = this.formContainer.find('#id_email').val();
@@ -53,7 +54,8 @@ var SignUpView = Backbone.View.extend({
 
     this.model.set('account_name', account_name);
     this.model.set('admin_url', admin_url);
-    this.model.set('username', username);
+    this.model.set('name', name);
+    this.model.set('nick', nick);
     this.model.set('password', password);
     this.model.set('password_again', password_again);
     this.model.set('email', email);

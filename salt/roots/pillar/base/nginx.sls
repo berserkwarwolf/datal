@@ -75,6 +75,7 @@ nginx:
           config:
             - server:
               - server_name: 'datastore.dev'
+              - listen: 8888
               - access_log: /var/log/nginx/datastore-access.log
               - error_log: /var/log/nginx/datastore-error.log
               - root: /home/vagrant/datastore/

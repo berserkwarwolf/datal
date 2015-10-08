@@ -260,18 +260,9 @@ var ManageDataviewsView = Backbone.View.extend({
 			sortable: true,
 			editable: false
 		},{
-			name: "dataset_title",
-			label: gettext('APP-GRID-CELL-DATASET-NAME'),
-			// cell: "text",
-			cell: Backgrid.StringCell.extend({
-				render: function() {
-					var datasetCellView = new DatasetCellView({
-						model: this.model
-					});
-					this.$el.html(datasetCellView.render().el);
-					return this;
-				}
-			}),
+			name: "modified_at",
+			label: gettext('APP-GRID-CELL-MODIFIED'),
+			cell: "text",
 			sortable: true,
 			editable: false
 		}, {

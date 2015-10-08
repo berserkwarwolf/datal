@@ -34,7 +34,7 @@
             <header>
                 <h1>{% trans 'VIEWDS-INFO-LASTUPDATE' %}</h1>
             </header>
-            <p id="id_lastUpdate">{{dataset.created_at|date:'F d, Y, h:i A'|capfirst}}</p>
+            <p id="id_lastUpdate">{{dataset.modified_at|date:'F d, Y, h:i A'|capfirst}}</p>
         </article>
         
         {% if dataset.frequency %}
