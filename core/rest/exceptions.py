@@ -14,7 +14,9 @@ def datal_exception_handler(exception, context):
     # Now add the HTTP status code to the response.
     if response is not None:
         response.data['status'] = response.status_code
-        response.data['description'] = response.data.pop('detail')
+        response.data['description'] = ''
+        if 'detail' in response.data:
+            response.data['description'] =  response.data.pop('detail')
         response.data['error'] = str(exception.__class__.__name__)
         response.data['type'] = 'api-error'
     elif not settings.DEBUG:
