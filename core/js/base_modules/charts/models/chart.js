@@ -43,12 +43,12 @@ charts.models.Chart = Backbone.Model.extend({
         mapType : 'ROADMAP',
         styles: {},
         options: {
-            zoom: 5,
+            zoom: 2,
             center: {
                 lat: 0,
                 long: 0
             },
-            bounds: []
+            bounds: [85,180,-85,-180]
         }
 
     },
@@ -173,7 +173,7 @@ charts.models.Chart = Backbone.Model.extend({
         var filters = {
                 revision_id: id,
                 zoom: this.get('options').zoom,
-                bounds: (this.get('options').bounds)?this.get('options').bounds.join(';'):undefined,
+                bounds: (this.get('options').bounds)? this.get('options').bounds.join(';'): undefined,
                 type: this.get('type')
         };
 
