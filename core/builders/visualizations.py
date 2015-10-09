@@ -24,6 +24,7 @@ class VisualizationImplBuilder:
         field['chart']['headerSelection'] = self.fields['headerSelection']
         field['chart']['latitudSelection'] = self.fields['latitudSelection']
         field['chart']['longitudSelection'] = self.fields['longitudSelection']
+        field['chart']['traceSelection'] = self.fields['traceSelection']
         field['chart']['mapType'] = self.fields['mapType']
         field['chart']['zoom'] = self.fields['zoom']
         field['chart']['bounds'] = self.fields['bounds']

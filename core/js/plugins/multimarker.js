@@ -59,7 +59,7 @@ multimarker.prototype.onAdd = function() {
   $(p).css("z-index", "900");
   $(p).css("text-align", "center");
   $(p).css("font-size", "14px");
-  mrg = (this.sizes[this.iconSelected]/2) - 7;
+  var mrg = (this.sizes[this.iconSelected]/2) - 7;
   $(p).css("width", "100%");
   $(p).css("margin", mrg + 'px auto 0');
   $(p).css("color", "black");

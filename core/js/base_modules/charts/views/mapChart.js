@@ -31,7 +31,7 @@ charts.views.MapChart = charts.views.Chart.extend({
         },
     },
     initialize: function(options){
-        this.googleMapOptions = options.mapOptions;
+        this.googleMapOptions = options.mapOptions || {};
         this.bindEvents();
         this.createGoogleMapInstance();
     },

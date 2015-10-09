@@ -69,11 +69,7 @@ var viewVisualizationView = Backbone.View.extend({
 		this.chartInstance = new this.ChartViewClass({
 			el: this.chartContainer,
 			model: chartModelInstance,
-			mapOptions: {
-                        disableDefaultUI: true,
-                        disableDoubleClickZoom: true,
-                        scrollwheel: false
-                    }
+			mapOptions: {}
 		});
 
 		this.setChartContainerSize();

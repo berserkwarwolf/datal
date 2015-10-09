@@ -1,12 +1,13 @@
 from rest_framework.decorators import detail_route
 from core.daos.visualizations import VisualizationDBDAO
-from core.v8.serializers import EngineSerializer
+from api.rest.visualizations import VisualizationSerializer
 from core.rest.views import ResourceViewSet
-from microsites.v8.forms import VisualizationRequestForm
+from workspace.v8.forms import VisualizationRequestForm
+
 
 class RestMapViewSet(ResourceViewSet):
     queryset = VisualizationDBDAO()
-    serializer_class = EngineSerializer
+    serializer_class = VisualizationSerializer
     lookup_field = 'id'
     dao_get_param = 'visualization_revision_id'
     data_types = ['vz']
