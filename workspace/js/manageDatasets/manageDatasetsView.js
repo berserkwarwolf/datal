@@ -233,14 +233,14 @@ var ManageDatasetsView = Backbone.View.extend({
 			sortable: true,
 			editable: false
 		}, {
-			name: "author",
-			label: gettext('APP-GRID-CELL-AUTHOR'),
+			name: "modified_at",
+			label: gettext('APP-GRID-CELL-MODIFIED'),
 			cell: "text",
 			sortable: true,
 			editable: false
 		}, {
-			name: "modified_at",
-			label: gettext('APP-GRID-CELL-MODIFIED'),
+			name: "author",
+			label: gettext('APP-GRID-CELL-AUTHOR'),
 			cell: "text",
 			sortable: true,
 			editable: false
