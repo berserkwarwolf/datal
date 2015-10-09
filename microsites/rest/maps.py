@@ -1,8 +1,9 @@
-from rest_framework.decorators import detail_route
-from core.daos.visualizations import VisualizationDBDAO
 from api.rest.visualizations import VisualizationSerializer
+from core.daos.visualizations import VisualizationDBDAO
 from core.rest.views import ResourceViewSet
+from rest_framework.decorators import detail_route
 from workspace.v8.forms import VisualizationRequestForm
+from workspace.v8.forms import VisualizationPreviewMapForm
 
 
 class RestMapViewSet(ResourceViewSet):
