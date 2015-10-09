@@ -1,30 +1,20 @@
 {% load i18n extra_tags components %}
 
 <div class="step collect" data-step="collect" style="display:none;">
-
-	<header>
-		<h3>{% trans 'APP-COLLECT-UPLOAD-TITLE' %} <span>{% trans 'APP-MANDATORY-FIELDS-TEXT' %}</span></h3>
-		<div class="navigation FR">
-			<a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha backButton">{% trans 'APP-CANCEL-TEXT' %}</a>
-			<a title="{% trans 'BTN-NEXT-TEXT' %}" class="button primary next nextButton">{% trans 'BTN-NEXT-TEXT' %}</a>
-		</div>
-	</header>
 	
-	<div class="columns clearfix">
-		
-		<div class="CL formContent"></div>
+	<div class="formContent"></div>
+	
+	<footer>
 
-		<div class="CR">
-			<div class="helpBox">
-				<div class="helpBoxInner">
-					<h6>{% trans 'DSFIND-HELPTIP-TITLE' %}</h6>
-					<p>{% trans 'DSCRE-UPLOAD-TIP' %}</p>
-					<p>{% trans 'APP-ANYDOUBTS-TEXT2' %} <a href="mailto:support@junar.com">{% trans 'APP-CALLUSONSKYPE-TEXT2' %}</a></p>
-				</div>
-			</div>
-		</div>
-		
-	</div>
+		{% url 'manageDatasets.create_type' 'url' as create_url %}
+		{% url 'manageDatasets.create_type' 'webservice' as create_webservice %}
+
+		<p>
+		{% blocktrans with create_url=create_url create_webservice=create_webservice %}
+       ¿La información esta online? Publica desde una <a href="{{ create_url }}">página web/archivo remoto</a> o bien, desde un <a href="{{ create_webservice }}">servicio web</a>.
+    {% endblocktrans %}
+    </p>
+	</footer>
 
 </div>
 

@@ -1,23 +1,24 @@
 {% load i18n extra_tags components %}
 
 <script type="text/template" id="id_collectFileTemplate">
-
-<fieldset>
 	
-	<div id="id_dropzone" style="border:2px dashed red;">DROP HERE</div>
+	<div id="id_dropzone" style="border:2px dashed red;">
+
+		<h3 class="title">
+			Arrastra y suelta el archivo o 
+			<span class="input-file">
+				<a title="{% trans 'APP-SELECT-FILE-TEXT' %}" tabindex="-1">{% trans 'APP-SELECT-FILE-TEXT' %}</a>
+				{{ form.file_data }}
+				{{ form.file_name }}
+			</span>
+		</h3>	
+		<p>Evita errores. Los archivos deben estar encodeados con <a>UTF-8</a>.</p>
 
 
-	{# file_data #}
-	<div class="row editDataset clearfix">
-		{{ form.file_data.label_tag }}
-		<div class="input-file">
-			<a title="{% trans 'APP-SELECT-FILE-TEXT' %}" class="button small FL" tabindex="-1">{% trans 'APP-SELECT-FILE-TEXT' %}</a>
-			{{ form.file_data }}
-			{{ form.file_name }}
-		</div>
-		<span class="required">*</span>
+		<h4 class="tip">Formatos admitidos para crear vistas:</h4>
+		<p class="formats">XLS, XLSX, CSV, TXT, TSV, HTM, HTML, KML, KMZ, XML.</p>
+		<p class="tip">Si solo deseas subir un conjunto de datos, estos formatos también son admitidos: PDF, TXT, DOC, DOCX, ZIP, RAR, JPG, JPEG, GIF, PNG, DOCM, DOTX, DOTM, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS.</p>
+
 	</div>
-
-</fieldset>
 
 </script>

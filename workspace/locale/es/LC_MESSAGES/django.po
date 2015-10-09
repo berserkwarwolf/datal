@@ -1216,9 +1216,6 @@ msgstr "Una página web"
 msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Envíanos un correo"
 
-msgid "DSCRE-UPLOAD-TIP"
-msgstr "Estos son los formatos de archivo permitidos: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Los archivos deben estar encodeados con UTF-8"
-
 msgid "HOME-SEARCH-TIP"
 msgstr "Para que una URL sea una fuente de datos, debe ser una página web que contenga etiquetas &lt;table&gt;.<br/>Los archivos CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML también pueden ser fuentes de datos."
 
@@ -2533,7 +2530,7 @@ msgid "APP-UPLOAD-FILE-TEXT"
 msgstr "Desde un archivo..."
 
 msgid "APP-SELECT-FILE-TEXT"
-msgstr "Seleccionar"
+msgstr "Selecciona desde tu computadora"
 
 msgid "APP-CONTACT-EMAIL-TEXT"
 msgstr "E-mail de contacto"
@@ -2980,7 +2977,7 @@ msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recuperar contraseña"
 
 msgid "APP-CREATE-A-DATASET-TEXT"
-msgstr "Crea un conjunto de datos"
+msgstr "Nuevo conjunto de datos"
 
 msgid "APP-EDIT-DATASET-TEXT"
 msgstr "Editar conjunto de datos"
@@ -3260,3 +3257,6 @@ msgstr "la visualización"
 
 msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
 msgstr "la colección"
+
+msgid "APP-CREATE-DATASET-FILE"
+msgstr "Desde un archivo"

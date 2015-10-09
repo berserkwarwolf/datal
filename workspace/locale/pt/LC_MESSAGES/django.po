@@ -1234,9 +1234,6 @@ msgstr "A website page"
 msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Send us an email"
 
-msgid "DSCRE-UPLOAD-TIP"
-msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Files must be encoded in UTF-8."
-
 msgid "APP-LOADING-TEXT"
 msgstr "loading"
 
@@ -2546,7 +2543,7 @@ msgid "APP-UPLOAD-FILE-TEXT"
 msgstr "From a file..."
 
 msgid "APP-SELECT-FILE-TEXT"
-msgstr "Select file"
+msgstr "Select 	from computer"
 
 msgid "APP-CONTACT-EMAIL-TEXT"
 msgstr "Contact e-mail"
@@ -2990,7 +2987,7 @@ msgid "APP-RECOVER-TITLE-TEXT"
 msgstr "Recover password"
 
 msgid "APP-CREATE-A-DATASET-TEXT"
-msgstr "Create a Dataset"
+msgstr "New Dataset"
 
 msgid "APP-EDIT-DATASET-TEXT"
 msgstr "Edit Dataset"
@@ -3276,3 +3273,13 @@ msgstr "the Visualization"
 
 msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
 msgstr "the Dashboard"
+
+msgid "APP-CREATE-DATASET-FILE"
+msgstr "From a file"
+
+
+
+
+
+msgid ""
+msgstr "¿La información esta online? Publica desde una"
