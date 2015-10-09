@@ -3,10 +3,10 @@ from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.decorators import detail_route
 from core.daos.datastreams import DataStreamDBDAO
 from core.daos.datasets import DatasetDBDAO
+from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from django.utils.translation import ugettext_lazy as _
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
-from core.models import CategoryI18n
 from rest_framework import serializers
 from rest_framework import mixins
 from core.choices import StatusChoices
@@ -38,11 +38,8 @@ class DataStreamSerializer(ResourceSerializer):
     def __init__(self, *args, **kwargs):
         super(DataStreamSerializer, self).__init__(*args, **kwargs)
 
-        self.fields['category']= serializers.ChoiceField(map(lambda x: (x.slug, x.name),
-            CategoryI18n.objects.filter(
-                language=self.context['request'].auth['language'],
-                category__account=self.context['request'].auth['account']
-            )),
+        self.fields['category']= serializers.ChoiceField(
+            self.getAccountCategoriesChoices(),
             help_text=self.fields['category'].help_text
         )
         
@@ -69,10 +66,9 @@ class DataStreamSerializer(ResourceSerializer):
         return data
 
     def create(self, validated_data):
-        dao = DataStreamDBDAO()
-        validated_data['user'] = self.context['request'].user
+        lcycle = DatastreamLifeCycleManager(self.context['request'].user)
         validated_data['status'] = StatusChoices.PENDING_REVIEW
-        dao.create(**validated_data)
+        lcycle.create(**validated_data)
 
 class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     queryset = DataStreamDBDAO() 
