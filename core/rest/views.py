@@ -5,6 +5,8 @@ from rest_framework import mixins
 from core.models import GuidModel
 from core.search.elastic import ElasticFinderManager
 from core.v8.views import EngineViewSetMixin
+from django.core.exceptions import ObjectDoesNotExist
+from rest_framework.exceptions import NotFound
 
 import logging
 
@@ -50,12 +52,15 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
     def get_queryset(self):
         params = {'language': self.request.auth['language'] }
         params[self.dao_get_param] = self.kwargs[self.lookup_field]
-        return super(ResourceViewSet, self).get_queryset().get(**params)
+        try:
+            return super(ResourceViewSet, self).get_queryset().get(**params)
+        except ObjectDoesNotExist:
+            raise NotFound()
 
     def get_object(self):
         obj = self.get_queryset()
         if not obj:
-            raise Http404
+            raise NotFound()
 
         self.check_object_permissions(self.request, obj)
         return obj

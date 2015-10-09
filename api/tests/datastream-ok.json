@@ -1,0 +1,9 @@
+{
+    "title": "Agencias de Viaje",
+    "description": "Descripción Agencia de Viaje",
+    "category": "salud",
+    "notes": "Nota de agencias",
+    "table_id": 0,
+    "header_row": 0,
+    "dataset": "AGENC-DE-VIAJE"
+}

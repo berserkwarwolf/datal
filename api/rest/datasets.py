@@ -28,6 +28,7 @@ class DataSetSerializer(ResourceSerializer):
     end_point = serializers.URLField(
         required=False,
         allow_null=True,
+        allow_blank=True,
         help_text=_(u'Url apuntando al recurso con los datos (archivos o página web).'))
     file = serializers.FileField(
         allow_null=True,
@@ -92,6 +93,9 @@ class DataSetSerializer(ResourceSerializer):
             language=self.context['request'].auth['language'])
 
     def create(self, validated_data):
+        if 'file_data' not in validated_data and 'end_point' not in validated_data:
+            raise serializers.ValidationError({'description': 'O end_point o file. No puede estar ambas vacias.'})
+
         return self.getDao(
             DatasetLifeCycleManager(self.context['request'].user).create(**validated_data)
         )

@@ -10,24 +10,28 @@ import re
 
 logger = logging.getLogger(__name__)
 
-class DatalApiAuthentication(authentication.BaseAuthentication):
+class DatalApiAuthentication(authentication.TokenAuthentication):
     def authenticate(self, request):
+        self.request = request
+        auth_key = request.query_params.get("auth_key", 
+            None)
+        if not auth_key:
+            return super(DatalApiAuthentication, self).authenticate(request)
+        return self.authenticate_credentials(auth_key)
+
+    def authenticate_credentials(self, auth_key):
         user_id = None
         account_id = None
 
-        auth_key = request.query_params.get('auth_key', None)
-        if not auth_key:
-            return None
-
-        account = self.resolve_account(request)
+        account = self.resolve_account(self.request)
         if not account:
             raise exceptions.AuthenticationFailed('Invalid Account.')
 
-        application = self.resolve_application(request, auth_key)
+        application = self.resolve_application(self.request, auth_key)
         if not application:
             raise exceptions.AuthenticationFailed('Auth Key does not exist.')
         if application.is_public_auth_key(auth_key):
-            if not self.check_referer(request, application):
+            if not self.check_referer(self.request, application):
                 raise exceptions.AuthenticationFailed('Invalid referer')
 
         user = self.resolve_user(application, account)
@@ -44,6 +48,10 @@ class DatalApiAuthentication(authentication.BaseAuthentication):
                 'microsite_domain': get_domain(account.id),
             }
         )
+
+
+    def authenticate_header(self, request):
+        return 'Token'
     
     def check_referer(self, request, application):
 
