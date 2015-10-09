@@ -7,6 +7,7 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from django.utils.translation import ugettext_lazy as _
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
+from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
 from core.choices import StatusChoices
@@ -51,9 +52,11 @@ class DataStreamSerializer(ResourceSerializer):
 
     def validate(self, data):
         try:
+            guid = data.pop('dataset')
             self.dataset = DatasetDBDAO().get(
                 self.context['request'].auth['language'],
-                guid=data['dataset'])
+                guid=guid)
+            data['dataset']=Dataset.objects.get(id=self.dataset['dataset_id'])
         except ObjectDoesNotExist:
             # TODO: mejorar errores
             raise serializers.ValidationError('Dataset no existe')
@@ -62,13 +65,26 @@ class DataStreamSerializer(ResourceSerializer):
             table_id = data.pop('table_id')
             data['select_statement'] = SelectStatementBuilder().build(table_id)
             data['data_source'] = DataSourceBuilder().build(table_id,
-                self.dataset['dataset_id'])
+                self.dataset['last_published_revision_id'])
+
+        if 'category' in data and data['category']:
+            data['category'] = self.getCategory(data['category'])
+
+        data['status'] = StatusChoices.PENDING_REVIEW
+
+        data['language'] = self.context['request'].auth['language']
+
         return data
 
+    def getDao(self, datastream_revision):
+        return DataStreamDBDAO().get(
+            datastream_revision_id=datastream_revision.id,
+            language=self.context['request'].auth['language'])
+
     def create(self, validated_data):
-        lcycle = DatastreamLifeCycleManager(self.context['request'].user)
-        validated_data['status'] = StatusChoices.PENDING_REVIEW
-        lcycle.create(**validated_data)
+        return self.getDao(DatastreamLifeCycleManager(self.context['request'].user).create(
+            **validated_data)
+        )
 
 class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     queryset = DataStreamDBDAO() 

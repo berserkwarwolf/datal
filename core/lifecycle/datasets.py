@@ -386,6 +386,26 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.dataset_revision
 
+    def update_file(self, **fields):
+        """ Create new revision or update it """
+        file_data = fields.get('file_data', None)
+        if file_data is not None:
+            fields['file_size'] = file_data.size
+            fields['file_name'] = file_data.name
+            fields['end_point'] = 'file://' + active_datastore.create(settings.AWS_BUCKET_NAME, file_data,
+                                                                      self.user.account.id, self.user.id)
+            changed_fields = ['file_size', 'file_name', 'end_point']
+
+            # Actualizo sin el estado
+            self.dataset_revision = DatasetDBDAO().update(
+                self.dataset_revision,
+                changed_fields=changed_fields,
+                **fields
+            )
+
+        self._log_activity(ActionStreams.EDIT)
+        return self.dataset_revision
+
     def _move_childs_to_draft(self):
         """
         Muevo las vistas y las visualizaciones asociadas a este dataset a BORRADOR

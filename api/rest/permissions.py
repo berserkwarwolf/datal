@@ -17,5 +17,5 @@ class ApiIsUserForWritePermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         if request.method not in permissions.SAFE_METHODS:
             return (request.user and 
-                    not isinstance(self.user, AccountAnonymousUser) )
+                    not isinstance(request.user, AccountAnonymousUser) )
         return True

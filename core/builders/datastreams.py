@@ -13,16 +13,15 @@ class SelectStatementBuilder(object):
 
 
 class DataSourceBuilder(object):
-    def build(self, table_id, dataset_id):
+    def build(self, table_id, dataset_revision_id):
 
-        data = {'pId': dataset_id, 'pLimit': 50}
+        data = {'pId': dataset_revision_id, 'pLimit': 50}
         command = AbstractCommandFactory().create("load", "dt", [data])
         result = command.run()
         if not result:
             # TODO: correct handling
             raise Exception('Wrong engine answer')
 
-        raise Exception(result[0])
         soup = BeautifulSoup(result[0])
         table = soup.find(attrs={'tableid': table_id or 'table0'})
         try:

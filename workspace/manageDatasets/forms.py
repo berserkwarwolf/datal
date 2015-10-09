@@ -412,25 +412,3 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
             self, req, fp, code, msg, headers)
         result.status = code
         return result
-
-class MimeTypeForm(forms.Form):
-    url = forms.CharField(required=True)
-
-    def get_mimetype(self, url):
-        try:
-            request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
-            connection = urllib2.urlopen(request)
-            mimetype = connection.info().getheader('Content-Type').strip().replace('"', '')
-            try:
-                opener = urllib2.build_opener(SmartRedirectHandler())
-                f = opener.open(url)
-                status = f.status
-                url = f.url
-            except:
-                status = 200
-                url = url
-        except:
-            mimetype = ''
-            status = ''
-
-        return (mimetype, status, url)

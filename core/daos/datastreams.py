@@ -59,12 +59,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             language=fields['language'],
             title=fields['title'].strip().replace('\n', ' '),
             description=fields['description'].strip().replace('\n', ' '),
-            notes=fields['notes'].strip()
+            notes=fields['notes'].strip() if 'notes' in fields else ''
         )
 
-        datastream_revision.add_tags(fields['tags'])
-        datastream_revision.add_sources(fields['sources'])
-        datastream_revision.add_parameters(fields['parameters'])
+        if 'tags' in fields:
+            datastream_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            datastream_revision.add_sources(fields['sources'])
+        if 'parameters' in fields:
+            datastream_revision.add_parameters(fields['parameters'])
 
         return datastream, datastream_revision
 

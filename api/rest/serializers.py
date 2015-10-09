@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework.compat import OrderedDict
-from core.models import CategoryI18n
+from core.models import CategoryI18n, Category
 import json
 
 class ResourceSerializer(serializers.Serializer):
@@ -10,6 +10,12 @@ class ResourceSerializer(serializers.Serializer):
                 language=self.context['request'].auth['language'],
                 category__account=self.context['request'].auth['account']
             )))
+
+    def getCategoryId(self, category_slug):
+        return CategoryI18n.objects.get(slug=category_slug).category.id
+
+    def getCategory(self, category_slug):
+        return CategoryI18n.objects.get(slug=category_slug).category
 
     def tryKeysOnDict(self, toDict, toKey, fromDict, fromKeys):
         toDict[toKey] = None
