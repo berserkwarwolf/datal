@@ -6,6 +6,8 @@ var ChartView = StepViewSPA.extend({
 
 	initialize: function(options){
 
+		this.stateModel = options.stateModel;
+
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
@@ -25,12 +27,12 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-        this.chartSelectDataModalView = new ChartSelectDataModalView({
+        this.modalView = new ChartSelectDataModalView({
           el: '#ChartSelectDataModal',
           model: this.model,
           dataStreamModel: options.dataStreamModel
         });
-        this.chartSelectDataModalView.on('open', function () {
+        this.modalView.on('open', function () {
         	this.model.set('select_data',true);
         	if(this.dataTableView){
         		this.dataTableView.render();
@@ -45,7 +47,7 @@ var ChartView = StepViewSPA.extend({
 		this.optionsItemConfig = this.$el.find('div.optionsItemConfig');
 
 		//edit
-		if(this.model.get('isEdit')){
+		if(this.stateModel.get('isEdit') && !this.stateModel.get('isMap')){
 			var that = this;
 			
 			//library
@@ -80,12 +82,6 @@ var ChartView = StepViewSPA.extend({
 			this.optionsItemConfig.hide();
 		}
 
-		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
-		this.listenTo(this.model, 'newDataReceived',this.onChangeData,this);
-		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
-		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
-		this.listenTo(this.chartSelectDataModalView, 'close', this.onCloseModal, this);
-
 		this.nextBtn.addClass('disabled');
 
 		this.setupChart();
@@ -106,7 +102,7 @@ var ChartView = StepViewSPA.extend({
 
 	fetchPreviewData: function(){
 		$("#ajax_loading_overlay").show();
-		this.model.fetchPreviewData()
+		this.model.fetchData()
 		.then(function () {
 			$("#ajax_loading_overlay").hide();
 		})
@@ -135,12 +131,12 @@ var ChartView = StepViewSPA.extend({
 
 	onChartContentClicked: function(){
 		if(!this.chartInstance || !this.chartInstance.chart){
-			this.chartSelectDataModalView.open();
+			this.modalView.open();
 		}
 	},
 
 	onSelectDataClicked: function(){
-		this.chartSelectDataModalView.open();
+		this.modalView.open();
 	},
 
 	onChartTypeClicked: function(e){
@@ -196,7 +192,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	onChartChanged: function(){
-		if(!this.model.get('isMap')){
+		if(!this.stateModel.get('isMap')){
 			console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
 			this.setupChart();
 			this.renderChart();
@@ -279,6 +275,12 @@ var ChartView = StepViewSPA.extend({
 	start: function(){
 		this.constructor.__super__.start.apply(this);
 
+		//this.listenTo(this.model.data, 'change:rows', this.onChangeData, this);
+		this.listenTo(this.model, 'data_updated',this.onChangeData,this);
+		this.listenTo(this.model, 'change:lib', this.onChartChanged, this);
+		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
+		this.listenTo(this.modalView, 'close', this.onCloseModal, this);
+
 		// chart type from first step
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
@@ -291,6 +293,7 @@ var ChartView = StepViewSPA.extend({
 
 	finish: function(){
 		this.constructor.__super__.finish.apply(this);
+		this.stopListening();
 
 		if(this.chartInstance){
 			this.chartInstance.destroy();

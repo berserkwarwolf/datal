@@ -32,6 +32,8 @@ INCLUDE_EXCLUDE = (
 MAP_TYPE_FIELD = (
     ('hybrid', 'hybrid'),
     ('satellite', 'satellite'),
+    ('terrain', 'terrain'),
+    ('roadmap', 'roadmap'),
     ('map', 'map')
 )
 

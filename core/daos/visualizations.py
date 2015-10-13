@@ -190,6 +190,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         fields.pop('longitudSelection')
         fields.pop('traceSelection')
         fields.pop('mapType')
+        fields.pop('zoom')
+        fields.pop('bounds')
 
         VisualizationRevision.objects.filter(id=visualization_revision.id).update(**fields)
 

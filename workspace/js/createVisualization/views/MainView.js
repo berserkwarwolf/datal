@@ -12,19 +12,30 @@ var MainView = Backbone.View.extend({
 
         var self = this;
 
-        this.model = new charts.models.Chart();
+        this.stateModel = new Backbone.Model();
+
+        this.chartModel = new charts.models.Chart();
 
         this.dataStreamModel = new DataStreamModel({
             datastream_revision_id: options.chart_model.datastream_revision_id
-        });
+        })
         this.dataStreamModel.fetch();
 
-        this.model.parseResponse(options.chart_model);
+        this.chartModel.parse(options.chart_model);
 
         if (options.chart_model.revision_id) {
-            this.model.set('isEdit', true);
-            this.model.fetchPreviewData();
+            this.stateModel.set('isEdit', true);
+        }
+        else {
+            this.stateModel.set('isEdit', false);
         };
+
+        if (this.chartModel.get('type')=='mapchart') {
+            this.stateModel.set('isMap', true);
+        }
+        else {
+            this.stateModel.set('isMap', false);
+        }
 
         //Buttons views
         this.buttonsView = new ButtonsView({
@@ -38,7 +49,8 @@ var MainView = Backbone.View.extend({
         //Create & register main step: zero
         var startView = new StartView({
           name: gettext('APP-START-TEXT'),
-          model: this.model,
+          model: this.chartModel,
+          stateModel: this.stateModel,
           el: this.$('.step-0-view')
         }).init();
         
@@ -47,20 +59,21 @@ var MainView = Backbone.View.extend({
         //Create charts steps
         var chartView = new ChartView({
           name: gettext('APP-CHART-TEXT'), 
-          model: this.model,
+          model: this.chartModel,   
+          stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view')
         }).init();
 
         var metadataView = new MetadataView({
           name: gettext('APP-VIZ-METADATA-TEXT'), 
-          model: this.model,
+          model: this.chartModel,
           el: this.$('.step-2-view')
         }).init();
 
         var finishView = new FinishView({
           name: gettext('APP-VIZ-FINISH-TEXT'),
-          model: this.model,
+          model: this.chartModel,
           el: this.$('.step-3-view')
         }).init();
 
@@ -72,27 +85,16 @@ var MainView = Backbone.View.extend({
         //Create maps steps
         var mapView = new MapView({
           name: gettext('APP-MAP-TEXT'), 
-          model: this.model,
+          model: this.chartModel,
+          stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view-map')
-        }).init();
-
-       /* var mapMetadataView = new MapMetadataView({
-          name: gettext('APP-VIZ-METADATA-TEXT'), 
-          model: this.model,
-          el: this.$('.step-2-view-map')
-        }).init();*/
-
-        var mapFinishView = new MapFinishView({
-          name: gettext('APP-VIZ-FINISH-TEXT'),
-          model: this.model,
-          el: this.$('.step-3-view-map')
         }).init();
 
         //Register maps views
         this.register( mapView, 'maps'  );
         this.register( metadataView, 'maps'  );
-        this.register( mapFinishView, 'maps'  );
+        this.register( finishView, 'maps' );
 
         this.start();
 
@@ -152,7 +154,7 @@ var MainView = Backbone.View.extend({
     
         // Go to first "Static" Step
         }else{
-            window.location = this.model.get('startUrl');
+            window.location = this.chartModel.get('startUrl');
         }
 
     },
@@ -198,9 +200,14 @@ var MainView = Backbone.View.extend({
         this.$el.find('.process_manager_step').hide();
 
         //edit
-        if(this.model.get('isEdit')){
-            this.model.set('isMap', false);
-            this.currentFlow = 'charts';
+        if(this.stateModel.get('isEdit')){
+            if(this.chartModel.get('type')=='mapchart'){
+                this.stateModel.set('isMap', true);
+                this.currentFlow = 'maps';
+            }else{
+                this.stateModel.set('isMap', false);
+                this.currentFlow = 'charts';
+            }
         }
         
         this.steps[this.currentFlow][this.index].start();
@@ -209,7 +216,6 @@ var MainView = Backbone.View.extend({
 
     finish: function(){
         this.steps[this.currentFlow][this.index].finish();
-        //window.location = this.model.get('finishUrl');
     },
 
     onGoTo: function(index){

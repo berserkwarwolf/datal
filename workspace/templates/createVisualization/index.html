@@ -33,6 +33,7 @@
 
 <!-- Libs -->
 <script language="javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script language="javascript" src="/js_core/plugins/multimarker.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Process Manager -->
 <script language="javascript" src="/js_workspace/createVisualization/views/StepView.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -58,7 +59,6 @@
 
 <!-- Create Map StepViews -->
 <script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -95,7 +95,6 @@
   
     <!-- Include map templates -->  
     {% include "createVisualization/steps/map/1_map.html" %}
-    {% include "createVisualization/steps/map/3_map_finish.html" %}
 
   </div>
 
@@ -180,6 +179,13 @@
         labelSelection: '{{ visualization_revision.chart.labelSelection }}',
         headerSelection: '{{ visualization_revision.chart.headerSelection }}',
         is3D: '{{ visualization_revision.chart.is3D }}',
+        {% if visualization_revision.format.type == 'mapchart' %}
+          longitudSelection: '{{ visualization_revision.chart.longitudSelection }}',
+          latitudSelection: '{{ visualization_revision.chart.latitudSelection }}',
+          mapType: '{{ visualization_revision.chart.mapType }}',
+          zoom: {{ visualization_revision.chart.zoom }},
+          bounds: '{{ visualization_revision.chart.bounds }}',
+        {% endif %}
       {% endif %}
     }
 
