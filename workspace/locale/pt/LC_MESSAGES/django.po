@@ -23,7 +23,10 @@ msgid "APP-ADMIN-URL-TEXT"
 msgstr "Admin url"
 
 msgid "APP-USERNAME-TEXT"
-msgstr "Username"
+msgstr "User name"
+
+msgid "APP-USERNICK-TEXT"
+msgstr "Nickname"
 
 msgid "APP-PASSWORD-TEXT"
 msgstr "Password"
@@ -3255,6 +3258,12 @@ msgstr "Update frequency"
 
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "What region apply this data?"
+
+msgid "APP-LAST-PUBLISHED-REVISION-TEXT"
+msgstr "Last published revision"
+
+msgid "APP-DOWNLOAD-ORIGINAL-TEXT"
+msgstr "Download original"
 
 msgid "LANDINGPAGE-ACTIVITY-DATASET"
 msgstr "the Dataset"

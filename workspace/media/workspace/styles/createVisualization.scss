@@ -116,6 +116,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
     &:hover{border-color:$color-base-light;}
     &:hover .icon{background-color:$accent-shine;}
     .chart-preview-view{height:100%;}
+    position: relative;
   }
 
   .visualizationContainer.dataSelected{cursor:default;
@@ -129,7 +130,7 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .mapContent,
   .mapContentFinish{height:480px;background-position:center center;background-repeat:no-repeat;}
 
-  p{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
+  p.message{font-size:$font-size-xl;text-align:center;color:$font-color-base;position:absolute;top:45%;width:100%;}
 
   /* Vistas previas */
   .previewArea{
