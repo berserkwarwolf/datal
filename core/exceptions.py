@@ -39,18 +39,24 @@ class DATALException(Exception):
         return []
 
 class ExceptionManager():
-    def __init__(self,response, auth_manager, output,exception, application):
+    def __init__(self,response, auth_manager, output,exception, application,template):
 
         self.application = application #Puede ser workspace, api, microsites
         self.output = output #html/json
         self.auth_manager = auth_manager #Objeto con informacion sobre el usuario autenticado
         self.exception = exception # Objeto de la excepcion atrapada    
-        self.response = response     
+        self.response = response
+        self.template = template     
 
     def process(self):
         logger = logging.getLogger(__name__)
         logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
             self.exception.description))
+        tpl = get_template(self.template)
+        context = Context({
+            "exception":self.exception,
+            "auth_manager": self.auth_manager
+        })
         return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
 
 class LifeCycleException(DATALException):

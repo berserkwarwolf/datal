@@ -65,6 +65,6 @@ class ExceptionManager(object):
             "auth_manager": request.auth_manager
         })
         response = tpl.render(context)
-        return ExceptionManagerCore(response=response, auth_manager=request.auth_manager, output=mimetype,exception=exception, application="workspace").process()
+        return ExceptionManagerCore(response=response, auth_manager=request.auth_manager, output=mimetype,exception=exception, application="workspace",template=template).process()
         #return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
 
