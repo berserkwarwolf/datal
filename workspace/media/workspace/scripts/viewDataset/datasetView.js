@@ -35,7 +35,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
-		this.deleteListResources.push(this.options.model);
+		this.deleteListResources.push(this.model);
 		var deleteItemView = new DeleteItemView({
 				models: this.deleteListResources,
 				type: "datastreams"
@@ -44,7 +44,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	onUnpublishButtonClicked: function(){
 		this.unpublishListResources = new Array();
-		this.unpublishListResources.push(this.options.model);
+		this.unpublishListResources.push(this.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
 				type: "datastreams",

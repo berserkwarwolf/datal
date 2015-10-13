@@ -1,6 +1,8 @@
 var MetadataView = StepViewSPA.extend({
 
 	initialize: function(){
+		MetadataView.__super__.initialize.apply(this, arguments);
+
 		this.$el.find('.validate-msg').hide();
 		this.addEvents({
 			'click .step-2-view a.backButton': 'onPreviousButtonClicked',

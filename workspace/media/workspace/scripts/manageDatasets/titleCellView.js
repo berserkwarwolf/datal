@@ -8,7 +8,8 @@ var TitleCellView = Backbone.View.extend({
 
     initialize: function(options) {
         this.options = options;
-        this.parentView = this.options.parentView;
+        this.parentView = options.parentView;
+        this.itemCollection = options.itemCollection;
 
         // Make visible on template a variable with the valid impl_type choices for creating a Data View
         this.model.set('datastreamImplValidChoices', this.parentView.datastreamImplValidChoices);
@@ -24,9 +25,9 @@ var TitleCellView = Backbone.View.extend({
     deleteDataset: function() {
         self = this;
         this.deleteListResources = new Array();
-        this.deleteListResources.push(this.options.model);
+        this.deleteListResources.push(this.model);
         var deleteItemView = new DeleteItemView({
-            itemCollection: self.options.itemCollection,
+            itemCollection: self.itemCollection,
             models: this.deleteListResources,
             type: "datastreams",
             parentView: this.parentView

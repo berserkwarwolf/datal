@@ -5,6 +5,7 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	initialize: function(options){
+		ChartView.__super__.initialize.apply(this, arguments);
 
 		this.stateModel = options.stateModel;
 

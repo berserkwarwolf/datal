@@ -52,7 +52,7 @@ var MainView = Backbone.View.extend({
           model: this.chartModel,
           stateModel: this.stateModel,
           el: this.$('.step-0-view')
-        }).init();
+        });
 
         this.register( startView );
 
@@ -63,19 +63,19 @@ var MainView = Backbone.View.extend({
           stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view')
-        }).init();
+        });
 
         var metadataView = new MetadataView({
           name: gettext('APP-VIZ-METADATA-TEXT'),
           model: this.chartModel,
           el: this.$('.step-2-view')
-        }).init();
+        });
 
         var finishView = new FinishView({
           name: gettext('APP-VIZ-FINISH-TEXT'),
           model: this.chartModel,
           el: this.$('.step-3-view')
-        }).init();
+        });
 
         //Register charts views
         this.register( chartView, 'charts' );
@@ -89,7 +89,7 @@ var MainView = Backbone.View.extend({
           stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view-map')
-        }).init();
+        });
 
         //Register maps views
         this.register( mapView, 'maps'  );

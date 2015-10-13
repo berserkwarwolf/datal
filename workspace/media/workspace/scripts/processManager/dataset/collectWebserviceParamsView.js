@@ -10,9 +10,9 @@ var CollectWebserviceParamsView = Backbone.View.extend({
 		'click #id_applyParamButton': 'onAddParamButtonClicked'
 	},
 
-	initialize: function(){
+	initialize: function(options){
   	this.template = _.template( $("#id_CollectWebserviceAddParamTemplate").html() );
-		this.parentView = this.options.parentView;
+		this.parentView = options.parentView;
 		this.listenTo(this.collection, 'add', this.addParam);
 		this.listenTo(this.collection, 'remove', this.removeParam);
 

@@ -24,8 +24,9 @@ var ManageDataviewsView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.sourceUrl = this.options.sourceUrl;
-		this.tagUrl = this.options.tagUrl;
+		this.sourceUrl = options.sourceUrl;
+		this.tagUrl = options.tagUrl;
+		this.dataViewCreationStepsUrl = options.dataViewCreationStepsUrl;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());
@@ -42,7 +43,7 @@ var ManageDataviewsView = Backbone.View.extend({
 		this.listenTo(this.listResources, 'error', this.hideLoading);
 		this.listenTo(this.listResources, 'sync', this.updateTotalResources);
 		this.listenTo(this.model, 'change:total_resources', this.onTotalResourcesChange);
-			
+
 		this.setHeights();
 
 		// Render
@@ -177,7 +178,7 @@ var ManageDataviewsView = Backbone.View.extend({
 
 	onAddNewButtonClicked: function() {
 		var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
-			dataViewCreationStepsUrl: this.options.dataViewCreationStepsUrl,
+			dataViewCreationStepsUrl: this.dataViewCreationStepsUrl,
 		});
 	},
 
