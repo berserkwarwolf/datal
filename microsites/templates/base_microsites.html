@@ -12,6 +12,9 @@
 {% endblock %}
 
 {% block js_includes %}
+
+	{% include "js.html" %}
+
 	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 	<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
 	<script type="text/javascript" src="/js_core/plugins/json2.js?id={{settings.VERSION_JS_CSS}}"></script>
