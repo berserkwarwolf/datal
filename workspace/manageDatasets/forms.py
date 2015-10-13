@@ -340,7 +340,7 @@ class FileForm(DatasetForm):
             'tabindex':0,
             'data-other':'#id_file_name',
             'autofocus':'autofocus',
-            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
+            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv,.zip,.rar,.jpg,.jpeg,.gif,.png',
         })
     )
 

@@ -616,7 +616,7 @@ msgid "APP-FILTER-TEXT"
 msgstr "Filter"
 
 msgid "APP-VALIDATE-FILE-TYPE-TEXT"
-msgstr "Invalid file type, please select one of the following supported types: CSV, DOC, DOCX, KML, KMZ, TSV, TXT, XLS, XLSX, XML."
+msgstr "Invalid file type, please select one of the supported types."
 
 msgid "APP-NO-RESOURCES-FOUND-TEXT"
 msgstr "Sorry, no resources matched your search criteria. Please, try with other criterias."
@@ -872,3 +872,6 @@ msgstr "View dataset"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "View dataview"
+
+msgid "APP-VALIDATE-FILE-NOFILE"
+msgstr "No file was selected. Please select or drop one here to continue."

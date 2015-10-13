@@ -3277,9 +3277,44 @@ msgstr "the Dashboard"
 msgid "APP-CREATE-DATASET-FILE"
 msgstr "From a file"
 
+msgid "APP-CREATE-DATASET-FILE-FOOTER1"
+msgstr "Is the information online? Publish from a "
 
+msgid "APP-CREATE-DATASET-FILE-FOOTER2"
+msgstr "Webpage / web-hosted file"
 
+msgid "APP-CREATE-DATASET-FILE-FOOTER3"
+msgstr ", or from a "
 
+msgid "APP-CREATE-DATASET-FILE-FOOTER4"
+msgstr "Web service"
 
-msgid ""
-msgstr "¿La información esta online? Publica desde una"
+msgid "APP-CREATE-DATASET-FILE-TEXT1"
+msgstr "Drag & drop a file or "
+
+msgid "APP-CREATE-DATASET-FILE-TEXT2"
+msgstr "Avoid mistakes. Files must be encodeados with "
+
+msgid "APP-CREATE-DATASET-FILE-TEXT3"
+msgstr "Supported formats to create Data Views:"
+
+msgid "APP-CREATE-DATASET-FILE-TEXT4"
+msgstr "XLS, XLSX, CSV, TSV, HTM, HTML, KML, KMZ, XML."
+
+msgid "APP-CREATE-DATASET-FILE-TEXT5"
+msgstr "If you only want to upload a dataset, these formats are also supported: PDF, TXT, DOC, DOCX, ZIP, RAR, JPG, JPEG, GIF, PNG, DOCM, DOTX, DOTM, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS."
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TITLE"
+msgstr "What is UTF-8?"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-SUBTITLE"
+msgstr "UTF-8 belongs to Unicode and has some advantages:"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-LIST"
+msgstr ""
+"<li>It supports all the characters.</li>"
+"<li>Compatibility between pages and programs.</li>"
+"<li>Less configurations and strange things happening server side.</li>"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TEXT"
+msgstr "If your file is not encoded in UTF-8, probably when someone writes with a set of characters different to the one that you selected, the text might be full of strange symbols like these: IÃ±tÃ«rnÃ¢tiÃ´nÃ lizÃ¦tiÃ"

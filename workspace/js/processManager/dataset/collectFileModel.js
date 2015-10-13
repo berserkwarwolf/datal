@@ -15,17 +15,28 @@ var CollectFileModel = StepModel.extend({
 	},
 
 	validation: {
-		/*file_data: {
+		file_data: {
 			fn: function(value, attr, computedState, model){
-				// Required
+
+				// Entro por drop
 				if(value === 'undefined' || value === null){
-					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
-				// Check if File type is one of the following
-				}else if(!value.toLowerCase().match(/(\.|\/)(doc|docx|docm|dotx|dotm|xls|xlsx|xlsm|xltx|xltm|xlsb|xlam|xll|odt|ods|csv|txt|pdf|html|htm|xml|kml|kmz|tsv|zip|rar|jpg|jpeg|png|gif)$/i)) {
+
+					// Si no esta definido un file en el model
+					if( !_.isUndefined(computedState.files[0]) ){
+						value = computedState.files[0].name;
+					}else{
+						return gettext('APP-VALIDATE-FILE-NOFILE');
+					}
+					
+				} 
+
+				// Valido que sea una extension permitida
+				if(!value.toLowerCase().match(/(\.|\/)(doc|docx|docm|dotx|dotm|xls|xlsx|xlsm|xltx|xltm|xlsb|xlam|xll|odt|ods|csv|txt|pdf|html|htm|xml|kml|kmz|tsv|zip|rar|jpg|jpeg|png|gif)$/i)) {
 				  return gettext('APP-VALIDATE-FILE-TYPE-TEXT');
 				}
+
 			}
-		}*/
+		}
 		
 	},
 
@@ -44,7 +55,6 @@ var CollectFileModel = StepModel.extend({
 	},
 
 	checkExtension : function(filename){
-		//console.log(filename);
 		var filename = filename.split('/');
 		filename = filename[filename.length - 1];
 		var extension = filename.split('.')[1].toLowerCase();

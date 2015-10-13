@@ -16,10 +16,9 @@ var CollectFileView = StepView.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
-		eventsObject['change #id_file_data'] = 'onInputFileChange';
-		eventsObject['drop #id_dropzone'] = 'onFilesChange';
+		eventsObject['change #id_file_data'] = 'onNextButtonClicked';
+		eventsObject['drop #id_dropzone'] = 'onNextButtonClicked';
+		eventsObject['click #id_avoidErrorsFile'] = 'onAvoidErrorsLinkClicked';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view
@@ -35,6 +34,9 @@ var CollectFileView = StepView.extend({
 
 		// Set template
 		this.$el.find('.formContent').html( this.template( this.model.toJSON() ) );	
+
+		// Init resize on dropzone
+		this.setDropzoneHeight();
 
 		// Init file upload
 		this.initFileUpload();
@@ -56,8 +58,8 @@ var CollectFileView = StepView.extend({
 		this.previous();
 	},
 
-	onNextButtonClicked: function(){		
-		
+	onNextButtonClicked: function(){
+
 		var filename = "",
 			files = this.model.get('files');
 
@@ -77,46 +79,6 @@ var CollectFileView = StepView.extend({
 			this.next();
 		}
 
-	},
-
-	onInputFileChange: function(event){
-
-		var element = event.currentTarget,
-			value = $(element).val(),
-			otherElement = $(element).attr('data-other'),
-			otherRow = this.$el.find(otherElement);
-
-		// Erase C:\Fakepath\ from string (comes in chrome)
-		try {
-			if( !_.isUndefined( value ) ){
-				var checkValue = value.split('\\');
-				if( typeof checkValue !== 'string' ){
-					value = checkValue[ (checkValue.length-1) ];
-				}
-			}
-		}
-		catch(error) {
-			// Do nothing
-		}
-
-		otherRow.val(value);
-
-		this.onNextButtonClicked();
-		
-	},
-
-
-	onFilesChange: function(){
-		
-		var files = this.model.get('files'),		
-			value = files[0].name,
-			otherElement = $('#id_file_data').attr('data-other'),
-			otherRow = this.$el.find(otherElement);
-
-		otherRow.val(value);
-
-		this.onNextButtonClicked();
-		
 	},
 
 	setIndividualError: function(element, name, error){
@@ -168,5 +130,57 @@ var CollectFileView = StepView.extend({
 				$("#ajax_loading_overlay").hide();
 				datalEvents.trigger('datal:application-error', data);
 	},
+
+	onAvoidErrorsLinkClicked: function(){
+
+		var $overlay = $('#id_avoidErrorsOverlay');
+
+		// init Overlay
+		$overlay.overlay({
+			top: 'center',
+			left: 'center',
+			mask: {
+				color: '#000',
+				loadSpeed: 200,
+				opacity: 0.5,
+				zIndex: 99999
+			}
+		});
+
+		// Load overlay
+		$overlay.data('overlay').load();
+
+	},
+
+	setDropzoneHeight: function(){
+
+		$(window).resize(function(){
+
+			var windowHeight;
+			if( $(window).height() < 600){
+				// Set window height minimum value to 600
+				windowHeight = 600;
+			}else{
+				windowHeight = $(window).height();
+		 	}
+
+			var theHeight =
+				windowHeight
+				- $('.header').height()
+				- $('.section-title').height()
+				- parseInt($('.section-content > div').css('padding-top').split('px')[0])
+				- parseInt($('.section-content > div').css('padding-bottom').split('px')[0])
+				- parseInt($('#id_dropzone').css('border-top').split('px')[0])
+				- parseInt($('#id_dropzone').css('border-bottom').split('px')[0])
+				- parseInt($('#id_dropzone').css('padding-top').split('px')[0])
+				- parseInt($('#id_dropzone').css('padding-bottom').split('px')[0])
+				- parseInt($('#id_dropzone').css('margin-bottom').split('px')[0])
+				- $('.collect footer').height();
+
+			$('#id_dropzone .td').css('height', theHeight+'px');
+
+		}).resize();
+
+	},  
 
 });

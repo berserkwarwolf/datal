@@ -3260,3 +3260,45 @@ msgstr "la colección"
 
 msgid "APP-CREATE-DATASET-FILE"
 msgstr "Desde un archivo"
+
+msgid "APP-CREATE-DATASET-FILE-FOOTER1"
+msgstr "¿La información esta online? Publica desde una "
+
+msgid "APP-CREATE-DATASET-FILE-FOOTER2"
+msgstr "Página web/archivo remoto"
+
+msgid "APP-CREATE-DATASET-FILE-FOOTER3"
+msgstr "o bien, desde un "
+
+msgid "APP-CREATE-DATASET-FILE-FOOTER4"
+msgstr "Servicio web"
+
+msgid "APP-CREATE-DATASET-FILE-TEXT1"
+msgstr "Arrastra y suelta el archivo o "
+
+msgid "APP-CREATE-DATASET-FILE-TEXT2"
+msgstr "Evita errores. Los archivos deben estar encodeados con "
+
+msgid "APP-CREATE-DATASET-FILE-TEXT3"
+msgstr "Formatos admitidos para crear vistas:"
+
+msgid "APP-CREATE-DATASET-FILE-TEXT4"
+msgstr "XLS, XLSX, CSV, TSV, HTM, HTML, KML, KMZ, XML."
+
+msgid "APP-CREATE-DATASET-FILE-TEXT5"
+msgstr "Si solo deseas subir un conjunto de datos, estos formatos también son admitidos: PDF, TXT, DOC, DOCX, ZIP, RAR, JPG, JPEG, GIF, PNG, DOCM, DOTX, DOTM, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS."
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TITLE"
+msgstr "¿Qué es UTF-8?"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-SUBTITLE"
+msgstr "UTF-8 pertenece a Unicode y tiene algunas ventajas:"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-LIST"
+msgstr ""
+"<li>Da soporte a todos los caracteres.</li>"
+"<li>Compatibilidad entre páginas y programas.</li>"
+"<li>Menos configuraciones y cosas raras en el servidor.</li>"
+
+msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TEXT"
+msgstr "Si tu archivo no está codificado con UTF-8, probablemente cuando alguien escriba con un set de caracteres diferentes al que has seleccionado el texto se vea lleno de símbolos raros como estos: IÃ±tÃ«rnÃ¢tiÃ´nÃ lizÃ¦tiÃ"

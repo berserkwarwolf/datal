@@ -33,13 +33,13 @@
 
 {% block sectionTitle %}
 	<div class="context-menu clearfix">
-    <div class="col-xs-8">
-        <h1 class="sub-heading">{% trans "APP-CREATE-A-DATASET-TEXT" %}</h1>
-        <h2 class="title">{% trans "APP-CREATE-DATASET-FILE" %}</h2>
-    </div>
-    <div class="col-xs-4 context-buttons clearfix">
-    	
-    </div>
+		<div class="col-xs-8">
+				<h1 class="sub-heading">{% trans "APP-CREATE-A-DATASET-TEXT" %}</h1>
+				<h2 class="title">{% trans "APP-CREATE-DATASET-FILE" %}</h2>
+		</div>
+		<div class="col-xs-4 context-buttons clearfix">
+			
+		</div>
 	</div>
 {% endblock %}
 
@@ -66,8 +66,8 @@ $(document).ready(function(){
 	var finishModel = new FinishFileModel({
 		name: 'finish',
 		saveUrl: "{% url 'manageDatasets.create_type' 'file' %}",
-    sourceUrl: '/source_manager/action_search',
-    tagUrl: '/tag_manager/action_search',
+		sourceUrl: '/source_manager/action_search',
+		tagUrl: '/tag_manager/action_search',
 	});
 	var finishView = new FinishView({model: finishModel});
 
@@ -83,5 +83,20 @@ $(document).ready(function(){
 
 });
 </script>
+
+{% endblock %}
+
+{% block popupsOverlay %}
+
+	{% overlay id_avoidErrorsOverlay %}
+	<div class="In clearfix">
+		 <h4>{% trans 'APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TITLE' %}</h4>
+		 <div class="ov-content">
+		 		<h5>{% trans 'APP-OVERLAY-DATASET-FILE-AVOIDERRORS-SUBTITLE' %}</h5>
+				<ul>{% trans 'APP-OVERLAY-DATASET-FILE-AVOIDERRORS-LIST' %}</ul>
+				<p>{% trans 'APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TEXT' %}</p>
+		 </div>
+	</div>
+	{% endoverlay %}
 
 {% endblock %}

@@ -2,22 +2,26 @@
 
 <script type="text/template" id="id_collectFileTemplate">
 	
-	<div id="id_dropzone" style="border:2px dashed red;">
+	<div id="id_dropzone" class="dropzone relative">
+	
+		<div class="tr">
+			<div class="td">
+				<h3>
+					{% trans 'APP-CREATE-DATASET-FILE-TEXT1' %}
+					<span class="input-file">
+						<a title="{% trans 'APP-SELECT-FILE-TEXT' %}" tabindex="-1">{% trans 'APP-SELECT-FILE-TEXT' %}</a>
+						{{ form.file_data }}
+					</span>
+				</h3>	
+				<p>{% trans 'APP-CREATE-DATASET-FILE-TEXT2' %}<a id="id_avoidErrorsFile" title="UTF-8">UTF-8 <span class="icon icon-help icon-inline"></span></a>.</p>
+			</div>
+		</div>
 
-		<h3 class="title">
-			Arrastra y suelta el archivo o 
-			<span class="input-file">
-				<a title="{% trans 'APP-SELECT-FILE-TEXT' %}" tabindex="-1">{% trans 'APP-SELECT-FILE-TEXT' %}</a>
-				{{ form.file_data }}
-				{{ form.file_name }}
-			</span>
-		</h3>	
-		<p>Evita errores. Los archivos deben estar encodeados con <a>UTF-8</a>.</p>
-
-
-		<h4 class="tip">Formatos admitidos para crear vistas:</h4>
-		<p class="formats">XLS, XLSX, CSV, TXT, TSV, HTM, HTML, KML, KMZ, XML.</p>
-		<p class="tip">Si solo deseas subir un conjunto de datos, estos formatos también son admitidos: PDF, TXT, DOC, DOCX, ZIP, RAR, JPG, JPEG, GIF, PNG, DOCM, DOTX, DOTM, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS.</p>
+		<div class="help absolute">	
+			<h4 class="tip">{% trans 'APP-CREATE-DATASET-FILE-TEXT3' %}</h4>
+			<p class="formats">{% trans 'APP-CREATE-DATASET-FILE-TEXT4' %}</p>
+			<p class="tip">{% trans 'APP-CREATE-DATASET-FILE-TEXT5' %}</p>
+		</div>
 
 	</div>
 

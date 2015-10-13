@@ -5,15 +5,9 @@
 	<div class="formContent"></div>
 	
 	<footer>
-
 		{% url 'manageDatasets.create_type' 'url' as create_url %}
 		{% url 'manageDatasets.create_type' 'webservice' as create_webservice %}
-
-		<p>
-		{% blocktrans with create_url=create_url create_webservice=create_webservice %}
-       ¿La información esta online? Publica desde una <a href="{{ create_url }}">página web/archivo remoto</a> o bien, desde un <a href="{{ create_webservice }}">servicio web</a>.
-    {% endblocktrans %}
-    </p>
+		<p>{% trans 'APP-CREATE-DATASET-FILE-FOOTER1' %} <a href="{{ create_url }}" title="{% trans 'APP-CREATE-DATASET-FILE-FOOTER2' %}">{% trans 'APP-CREATE-DATASET-FILE-FOOTER2' %}</a> {% trans 'APP-CREATE-DATASET-FILE-FOOTER3' %} <a href="{{ create_webservice }}" title="{% trans 'APP-CREATE-DATASET-FILE-FOOTER4' %}">{% trans 'APP-CREATE-DATASET-FILE-FOOTER4' %}</a>.</p>
 	</footer>
 
 </div>
