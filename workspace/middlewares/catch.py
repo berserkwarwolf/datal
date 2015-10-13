@@ -2,7 +2,8 @@
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
-from core.exceptions import DATALException
+from core.exceptions import DATALException 
+from core.exceptions import ExceptionManager as ExceptionManagerCore
 
 from django.template import Context, Template
 from django.template.loader import get_template
@@ -50,21 +51,20 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
-
+        
         if not hasattr(request, 'user') or not request.user or not isinstance(exception, DATALException):
             self.log_error(exception)
             raise
 
-        logger = logging.getLogger(__name__)
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
         template = 'workspace_errors/%s.%s' % (exception.template, extension)
-        logger.warning('[CatchError] %s. %s' % (exception.title, 
-            exception.description))
         tpl = get_template(template)
         context = Context({
             "exception":exception,
             "auth_manager": request.auth_manager
         })
         response = tpl.render(context)
-        return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
+        return ExceptionManagerCore(response=response, auth_manager=request.auth_manager, output=mimetype,exception=exception, application="workspace").process()
+        #return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
+

@@ -4,6 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 # from django.core.urlresolvers import reverse
 from core.actions import *
 
+from django.http import HttpResponse
+from django.template import TemplateDoesNotExist
+from django.template import Context, Template
+from django.template.loader import get_template
+import logging
 
 class DATALException(Exception):
     """DATAL Exception class: Base class for handling exceptions."""
@@ -33,6 +38,20 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
+class ExceptionManager():
+    def __init__(self,response, auth_manager, output,exception, application):
+
+        self.application = application #Puede ser workspace, api, microsites
+        self.output = output #html/json
+        self.auth_manager = auth_manager #Objeto con informacion sobre el usuario autenticado
+        self.exception = exception # Objeto de la excepcion atrapada    
+        self.response = response     
+
+    def process(self):
+        logger = logging.getLogger(__name__)
+        logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
+            self.exception.description))
+        return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
 
 class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
@@ -115,7 +134,6 @@ class VisualizationNotFoundException(LifeCycleException):
     description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND')
     tipo = 'visualization-not-found'
     status_code = 404
-
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
@@ -335,3 +353,4 @@ class BigDataInvalidQuery(Http401):
     def __init__(self, error):
         # description = 'BigData unauthorized query. %s' % error
         super(BigDataInvalidQuery, self).__init__()
+
