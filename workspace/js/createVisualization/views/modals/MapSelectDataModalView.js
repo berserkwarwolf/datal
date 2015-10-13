@@ -10,33 +10,42 @@ var MapSelectDataModalView = ModalView.extend({
         //init table
         this.collection = new DataTableSelectedCollection();
 
-        this.rangeLatModel = new DataTableSelectionModel({id: 1});
-        this.rangeLonModel = new DataTableSelectionModel({id: 2});
-        this.rangeInfoModel = new DataTableSelectionModel({id: 3});
+        this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat'});
+        this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon'});
+        this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
 
         this.dataStreamModel = options.dataStreamModel;
-        console.log('map', this.dataStreamModel)
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            rangeLatModel: this.rangeLatModel,
-            rangeLonModel: this.rangeLonModel,
-            rangeInfoModel: this.rangeInfoModel
+            models: [
+                this.rangeLatModel,
+                this.rangeLonModel,
+                this.rangeInfoModel
+            ]
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
         });
 
-        this.listenTo(this.selectedCellRangeView, 'edit-input', function (name, val) {
-            console.log('edit-input', name, val);
-            // this.dataTableView.selectRange(val);
-        });
-
-        this.listenTo(this.dataStreamModel, 'change', this.createDataTableView, this);
+        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
 
         this.on('open', function () {
             this.selectedCellRangeView.focus();
+            this._cached_lat = this.model.get('range_lat');
+            this._cached_lon = this.model.get('range_lon');
+            this._cached_data = this.model.get('range_data');
+            this.rangeLatModel.set('excelRange', this._cached_lat);
+            this.rangeLonModel.set('excelRange', this._cached_lon);
+            this.rangeInfoModel.set('excelRange', this._cached_data);
+            this.collection.add([
+                this.rangeLatModel,
+                this.rangeLonModel,
+                this.rangeInfoModel
+                ]);
+            this.setHeights();
+            this.setAxisTitles();
         }, this);
 
         this.listenTo(this.collection, 'add change remove reset', this.validate, this);
@@ -45,19 +54,24 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     onClickDone: function (e) {
-        var selection = this.collection.getSelectionChartStyle();
-        console.log('result of the selection to be posted to the API', selection);
-        this.model.set(selection);
+        this.model.set({
+            range_lat: this.rangeLatModel.get('excelRange'),
+            range_lon: this.rangeLonModel.get('excelRange'),
+            range_data: this.rangeInfoModel.get('excelRange')
+        });
         this.close();
     },
 
+
     onClickCancel: function (e) {
-        this.collection.reset();
-        this.selectedCellRangeView.clear();
-        this.close(); //Close modal
+        this.rangeLatModel.set('excelRange', this._cached_lat);
+        this.rangeLonModel.set('excelRange', this._cached_lon);
+        this.rangeInfoModel.set('excelRange', this._cached_data);
+        this.onClickDone();
+        this.close();
     },
 
-    createDataTableView: function (model) {
+    onLoadDataStream: function (model) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
@@ -73,28 +87,25 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     addSelection: function (name) {
-        var selection = this.dataTableView.getSelection(name);
+        var selection = this.dataTableView.getSelection(),
+            model;
 
-        if (_.isString(name)) {
-          // When name is defined, the selection mode only allows setting selection to certain models
-          // with fixed id (so that the color is stable)
-          names = {'range_lat': 1, 'range_lon': 2, 'range_data': 3};
-          model = new DataTableSelectionModel(_.extend(selection, {
-            id: names[name],
-            name: name
-          }));
-        } else {
-          // when no name is provided, the selection is a multiselection collection.
-          // model = new DataTableSelectionModel(_.extend(selection, {
-          //   id: newId,
-          // }));
+        if (name === 'range_lat') {
+            this.collection.remove(1);
+            model = this.rangeLatModel;
+        } else if (name === 'range_lon') {
+            this.collection.remove(2);
+            model = this.rangeLonModel;
+        } else if (name === 'range_data') {
+            this.collection.remove(3);
+            model = this.rangeInfoModel;
         }
+        model.set(selection);
 
         if (model.isValid()) {
-            this.collection.remove(model.get('id'));
             this.collection.add(model);
         } else {
-            alert(model.validationError)
+            // alert(model.validationError)
         }
     },
 
@@ -104,6 +115,35 @@ var MapSelectDataModalView = ModalView.extend({
         } else {
             this.$('button.btn-done').removeAttr('disabled');
         }
-    }
+    },
 
+    setHeights: function(t){
+        var self = this;
+
+        var sidebar = $('.modal').find('.sidebar'),
+            table = $('.modal').find('.table-view');
+
+        $(window).resize(function(){
+
+            windowHeight = $(window).height();
+            
+            var sidebarHeight =
+              windowHeight
+            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
+            - 30 // As margin bottom
+            ;
+
+            sidebar.css('height', sidebarHeight+'px');
+            table.css('height', sidebarHeight+'px');
+
+        }).resize();
+    },
+
+    setAxisTitles: function(){
+        var invertedAxis = (_.isUndefined(this.model.get('invertedAxis')))?'false':this.model.get('invertedAxis');
+        var invertedAxisClass = 'invertedAxis-' + invertedAxis;
+        this.$('.invertedAxisLabel').hide();
+        this.$('.'+invertedAxisClass).show();
+    }
 });
