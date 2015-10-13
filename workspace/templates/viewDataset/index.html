@@ -8,15 +8,15 @@
 {% endcompress %}
 
 <script type="text/javascript" src="/js_core/models.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/deleteItemView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/unpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionDeleteView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/affectedResourcesCollectionUnpublishView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/datasetModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/viewDataset/datasetView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/deleteItemView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/unpublishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/affectedResourcesModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/affectedResourcesView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/affectedResourcesCollection.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/affectedResourcesCollectionDeleteView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/affectedResourcesCollectionUnpublishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/datasetModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewDataset/datasetView.js' %}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}

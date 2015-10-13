@@ -18,7 +18,7 @@ var my_form_error_messages = new Array();
 <link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
-<script type="text/javascript" src="/js_workspace/accounts/myAccount.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/myAccount.js' %}"></script>
 <meta name="main-option" content="id_account_option"/>
 {% endblock %}
 
