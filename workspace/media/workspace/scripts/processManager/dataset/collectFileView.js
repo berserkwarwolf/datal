@@ -35,11 +35,13 @@ var CollectFileView = StepView.extend({
 		// Set template
 		this.$el.find('.formContent').html( this.template( this.model.toJSON() ) );	
 
-		// Init resize on dropzone
-		this.setDropzoneHeight();
-
 		// Init file upload
 		this.initFileUpload();
+
+		// Init resize on dropzone
+		setTimeout(function(){
+			self.setDropzoneHeight();
+		}, 0);
 
 		// Bind custom model validation callbacks
 		Backbone.Validation.bind(this, {
@@ -117,6 +119,8 @@ var CollectFileView = StepView.extend({
 			},
 			dropZone: $('#id_dropzone'),
 			drop: _.bind(this.onFileUploadAdd, this),
+			dragover: _.bind(this.onDragOver, this),
+			progress: _.bind(this.onFileUploadProgress, this),
 		});
 
 	},
@@ -162,7 +166,7 @@ var CollectFileView = StepView.extend({
 				windowHeight = 600;
 			}else{
 				windowHeight = $(window).height();
-		 	}
+			}
 
 			var theHeight =
 				windowHeight
@@ -175,12 +179,46 @@ var CollectFileView = StepView.extend({
 				- parseInt($('#id_dropzone').css('padding-top').split('px')[0])
 				- parseInt($('#id_dropzone').css('padding-bottom').split('px')[0])
 				- parseInt($('#id_dropzone').css('margin-bottom').split('px')[0])
-				- $('.collect footer').height();
+				- $('.collect footer').height()
+				- 4; //fix to perfection
 
 			$('#id_dropzone .td').css('height', theHeight+'px');
 
 		}).resize();
 
 	},  
+
+	onDragOver: function(e){
+		
+		var dropZone = $('#id_dropzone'),
+			timeout = window.dropZoneTimeout;
+		if (timeout) {
+			clearTimeout(timeout);
+		}
+		var found = false,
+			node = e.target;
+		do {
+			if (node === dropZone[0]) {
+				found = true;
+				break;
+			}
+			node = node.parentNode;
+		} while (node != null);
+		if (found) {
+			dropZone.addClass('hover');
+		} else {
+			dropZone.removeClass('hover');
+		}
+		window.dropZoneTimeout = setTimeout(function () {
+			window.dropZoneTimeout = null;
+			dropZone.removeClass('hover');
+		}, 100);
+
+	},
+
+	onFileUploadProgress: function(event, data){
+		console.log('progress');
+		console.log(data);
+	}
 
 });
