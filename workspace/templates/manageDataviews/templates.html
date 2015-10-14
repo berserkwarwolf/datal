@@ -166,23 +166,21 @@
 
 {# Edit - Data View #}
 <script type="text/template" id="id_editTemplate">
-<form novalidate>
+<form class="form" novalidate>
   <div class="ov-content">
     <div class="col-1">
      <fieldset>
 
       {# title #}
       <div class="row clearfix">
-        <label for="id_title">{% trans 'APP-TITLE-TEXT' %}</label>
+        <label for="id_title">{% trans 'APP-TITLE-TEXT' %}<span class="required">*</span></label>
         <input type="text" name="title" id="title" data-bind="value:title,events:['keyup']" tabindex="0" autofocus>
-        <span class="required">*</span>
       </div>
 
       {# description #}
       <div class="row clearfix">
-        <label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}</label>
+        <label for="id_description">{% trans 'APP-DESCRIPTION-TEXT' %}<span class="required">*</span></label>
         <input type="text" name="description" id="id_description" data-bind="value:description,events:['keyup']" tabindex="0">
-        <span class="required">*</span>
       </div>
 
       {# category #}
@@ -194,10 +192,9 @@
 
       {# status #}
       <div class="row clearfix" style="display:none;">
-        <label for="id_status">{% trans 'APP-STATUS-TEXT' %}</label>
+        <label for="id_status">{% trans 'APP-STATUS-TEXT' %}<span class="required">*</span></label>
         <select name="status" class="FL" id="id_status" data-bind="value:status,options:allStatus">
         </select>
-        <span class="required">*</span>
       </div>
 
       {# Sources #}
@@ -225,10 +222,10 @@
       {# Notes #}
       <div class="row clearfix">
         <label for="id_notes">{% trans 'APP-NOTES-TEXT' %}</label>
-      </div>
-      <div class="row clearfix">
-        <div class="textarea clearfix FL">
-          <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
+        <div class="row clearfix">
+          <div class="textarea clearfix FL">
+            <textarea name="notes" id="id_notes" rows="10" data-bind="value:notes,events:['keyup']" tabindex="0"><%= notes %></textarea>
+          </div>
         </div>
       </div>
      </fieldset>

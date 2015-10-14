@@ -15,14 +15,9 @@
 .ao-tabs .tabs-in li{position:relative;}
 
 /*FORMS*/
-.dataStreamForm .form .row label{font-size:$form-label-size;width:160px;float:left;text-shadow:0 1px 0 #fff;color:$form-label-color;line-height:normal;padding-top:5px;}
-.dataStreamForm .form .row input, 
-.dataStreamForm .form .row textarea,
-.dataStreamForm .form .row select{width:350px;}
 .dataStreamForm .form .row input[type=file],
 .dataStreamForm .form .row input[type=checkbox],
 .dataStreamForm .form .row input[type=radio]{width:auto !important;}
-.dataStreamForm .form p.tip{padding-left:160px;}
 .dataStreamForm .form p.socialTip{padding:0 0 0 23px;}
 .dataStreamForm .form .row .iframeSettings input{width:238px;}
 .dataStreamForm .form .row .heightContainer{float:left;margin-left:10px;}
@@ -63,16 +58,13 @@
 .formContainer .contentForm .row input[type="file"]{padding:0;}
 .formContainer .contentForm .row label{font-size:12px;width:115px;line-height:inherit;height:inherit;}
 
-.formContainer .columns{margin-top:30px;}
-
 /*OVERLAY*/
 .ao-popup-overlay .columns .CL{width:440px;}
 .ao-popup-overlay .columns .CR{width:220px;margin-right:20px;}
 .ao-popup-overlay .dataStreamForm .form .row input, 
 .ao-popup-overlay .dataStreamForm .form .row textarea,
 .ao-popup-overlay .dataStreamForm .form .row select{width:280px;}
-.ao-popup-overlay .dataStreamForm .form .row label{width:115px;}
-.ao-popup-overlay .dataStreamForm .form p.tip{padding-left:115px;font-size:$font-size-s;}
+.ao-popup-overlay .dataStreamForm .form p.tip{font-size:$font-size-s;}
 .ao-popup-overlay .noPaddingForTips{min-height:0;}
 .ao-popup-overlay .noPaddingForTips .creationTips{padding-left:0;}
 .ao-popup-overlay .noPaddingForTips .creationTips p{font-size:11px;line-height:14px;padding:0 0 5px;}
@@ -100,4 +92,4 @@
 .imgContainer .textContainer div.formErrorMessageContainer{float:none !important;}
 
 /*MY ACCOUNT*/
-.dataStreamForm .row .passwordStrength{position:absolute;top:11px;right:11px;}
+.dataStreamForm .row .passwordStrength{position:absolute;top:40px;right:11px;}
