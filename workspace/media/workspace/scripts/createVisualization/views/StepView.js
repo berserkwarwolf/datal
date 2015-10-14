@@ -28,7 +28,7 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 
 	initialize: function (options) {
 		this.name = options.name;
-		console.log('other options', options);
+
 		this.$el.addClass('process_manager_step');
 		this.$el.hide();
 		this.render();
