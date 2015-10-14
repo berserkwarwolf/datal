@@ -19,13 +19,6 @@ class ElasticsearchFinder(Finder):
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
 
-        # agrego el "" para evitar que lo intente escapar,
-        # es más barato reasignarle un "" que tratar de escaparlo
-        if self.query in ["%", "*",".",";",""]:
-            self.query=""
-        else:
-            self.query = re.escape(self.query)
-        
         self.order =  kwargs.get('order')
 
         if self.order and self.order=='top':

@@ -64,21 +64,13 @@ var FinishView = StepViewSPA.extend({
 		this.previous();
 	},
 
-	onFinishButtonClicked: function(){		
-		var data = this.model.getFormData();
-
-		$.ajax({
-			type:'POST',
-			data: data,
-			dataType: 'json'
-		}).then(function (response) {
-			if(response.status=='ok'){
-				//console.log(response);
-				window.location = '/visualizations/'+response.revision_id;
-			} else {
-				console.error(response);
-			}
+	onFinishButtonClicked: function(){
+		var data = this.model.save().then(function (response) {
+			window.location = '/visualizations/'+response.revision_id;
+		}).fail(function (rejection) {
+			console.error(rejection);
 		});
+
 	},
 
 	start: function(){
@@ -125,6 +117,12 @@ var FinishView = StepViewSPA.extend({
 			this.chartInstance = new this.ChartViewClass({
 				el: this.chartContent,
 				model: this.model,
+				mapOptions: {
+                    disableDefaultUI: true,
+                    disableDoubleClickZoom: true,
+                    scrollwheel: false,
+                    draggable: false
+                }
 			});
 			
 			if(this.model.valid()){

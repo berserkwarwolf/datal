@@ -6,8 +6,8 @@
 <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script type="text/javascript" src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/accounts/activateModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/accounts/activateView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/activateModel.js' %}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/activateView.js' %}"></script>
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 {% endblock %}
 

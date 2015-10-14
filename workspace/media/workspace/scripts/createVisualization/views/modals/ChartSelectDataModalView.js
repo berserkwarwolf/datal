@@ -10,26 +10,23 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
-        this.rangeDataModel = new DataTableSelectionModel({id: 1});
-        this.rangeLabelsModel = new DataTableSelectionModel({id: 2});
-        this.rangeHeadersModel = new DataTableSelectionModel({id: 3});
+        this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data'});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2, name: 'range_labels'});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3, name: 'range_headers'});
 
         this.dataStreamModel = options.dataStreamModel;
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            rangeDataModel: this.rangeDataModel,
-            rangeLabelsModel: this.rangeLabelsModel,
-            rangeHeadersModel: this.rangeHeadersModel
+            models: [
+                this.rangeDataModel,
+                this.rangeLabelsModel,
+                this.rangeHeadersModel
+            ]
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
-        });
-
-        this.listenTo(this.selectedCellRangeView, 'edit-input', function (name, val) {
-            console.log('edit-input', name, val);
-            // this.dataTableView.selectRange(val);
         });
 
         this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
@@ -66,11 +63,9 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     onClickCancel: function (e) {
-        // this.collection.reset();
         this.rangeDataModel.set('excelRange', this._cached_range_data);
         this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
         this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
-        // this.selectedCellRangeView.clear();
         this.onClickDone();
         this.close();
     },
