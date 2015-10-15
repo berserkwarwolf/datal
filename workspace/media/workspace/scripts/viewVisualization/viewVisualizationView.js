@@ -15,7 +15,7 @@ var viewVisualizationView = Backbone.View.extend({
 		this.chartsFactory = new charts.ChartsFactory();
 
 		this.listenTo(this.model, "change", this.render);
-		
+
 		this.setupChart();
 		this.render();
 	},
@@ -71,6 +71,8 @@ var viewVisualizationView = Backbone.View.extend({
 			model: chartModelInstance,
 			mapOptions: {}
 		});
+        this.listenTo(this.chartInstance.model.data, 'fetch:start', this.onFetchStart, this);
+        this.listenTo(this.chartInstance.model.data, 'fetch:end', this.onFetchEnd, this);
 
 		this.setChartContainerSize();
 
@@ -213,4 +215,13 @@ var viewVisualizationView = Backbone.View.extend({
 		});
 	},
 
+    onFetchStart: function () {
+        console.info('MapChart: fetch data started');
+        this.$('.visualizationContainer .loading').removeClass('hidden');
+    },
+
+    onFetchEnd: function () {
+        console.info('MapChart: fetch data ended');
+        this.$('.visualizationContainer .loading').addClass('hidden');
+    }
 });
