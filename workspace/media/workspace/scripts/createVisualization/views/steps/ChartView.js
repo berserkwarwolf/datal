@@ -154,8 +154,17 @@ var ChartView = StepViewSPA.extend({
 
 	onInputChanged: function(e){
 		var input = $(e.currentTarget);
-		this.model.set(input.data('ref'), input.val());
-		this.fetchPreviewData();
+			value = input.val();
+
+		var valid = this.model.set(input.data('ref'), input.val(), {validate: true});
+
+		if (valid) {
+			this.fetchPreviewData();
+			input.removeClass('has-error');
+		} else {
+			console.error(this.model.validationError);
+			input.addClass('has-error');
+		}
 	},
 
 	onRadioChanged: function(e){

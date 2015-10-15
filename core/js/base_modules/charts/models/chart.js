@@ -361,6 +361,18 @@ charts.models.Chart = Backbone.Model.extend({
         return attr;
     },
 
+    validate: function (attrs, options) {
+        var nullValuePreset = attrs.nullValuePreset;
+
+        if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
+
+            if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
+                return 'Invalid value';
+            }
+
+        }
+    },
+
     save: function (attrs, options) {
         var data = this.getFormData();
 
