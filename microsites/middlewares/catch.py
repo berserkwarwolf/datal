@@ -1,15 +1,14 @@
     # -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
-from workspace.exceptions import *
+from microsites.exceptions import *
 from core.exceptions import DATALException 
 from core.exceptions import ExceptionManager as ExceptionManagerCore
-from django.contrib.auth.models import AnonymousUser, User
+
 from django.template import Context, Template
 from django.template.loader import get_template
 import logging
 import sys, traceback
-from django.conf import settings
 
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
@@ -17,6 +16,7 @@ EXTRAS_KEY = 'extras'
 
 
 class ExceptionManager(object):
+
     def get_content_type(self, request):
         content_type = None
         if request.META.get('CONTENT_TYPE', False):
@@ -51,21 +51,21 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
+        print "___ process_exception ___"
         if not hasattr(request, 'user') or not request.user or not isinstance(exception, DATALException):
             self.log_error(exception)
             raise
-        
+
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
-        template = 'workspace_errors/%s.%s' % (exception.template, extension)
+        template = 'microsites_errors/%s.%s' % (exception.template, extension)
         tpl = get_template(template)
-
-        auth_manager = request.auth_manager
-
         context = Context({
             "exception":exception,
-            "auth_manager": auth_manager
+            "auth_manager": request.auth_manager
         })
-
         response = tpl.render(context)
-        return ExceptionManagerCore(response=response, output=mimetype,exception=exception, application="workspace",template=template).process()
+        return ExceptionManagerCore(response=response, auth_manager=request.auth_manager, output=mimetype,exception=exception, application="workspace",template=template).process()
+        ''' return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
+            Se delego a la clase ExceptionManager que se encuentra en Core '''
+

@@ -5,9 +5,13 @@ from core.shortcuts import render_to_response
 from core.models import Category
 from microsites.search import forms
 from microsites.managers import *
+from microsites.exceptions import *
 
+import logging
 
 def action_browse(request, category_slug=None, page=1):
+    logger = logging.getLogger(__name__)
+    logger.error('action_browse')
     account = request.account
     preferences = request.preferences
     category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
@@ -29,6 +33,9 @@ def do_search(request, category_filters=None, datasets=None):
     form = forms.SearchForm(request.GET)
 
     if form.is_valid():
+        print "__InvalidFormSearch__"
+        raise InvalidFormSearch()
+
         query = form.get_query()
         page = form.cleaned_data.get('page')
         order = form.cleaned_data.get('order')

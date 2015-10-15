@@ -38,25 +38,32 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
+'''
+ExceptionManager
+Class to receive exceptions from middlewares and other classes and return the HttpResponse Object.
+Arguments:
+    response: Object response of Django.
+    auth_manager: Object with user information
+    output: type of return html or json
+    exception: type of exception 500, 404, etc
+    application: string api/microsites/workspace
+    template: string width the template to return de view.
+'''
 class ExceptionManager():
-    def __init__(self,response, auth_manager, output,exception, application,template):
+    def __init__(self,response, output,exception, application,template):
 
-        self.application = application #Puede ser workspace, api, microsites
-        self.output = output #html/json
-        self.auth_manager = auth_manager #Objeto con informacion sobre el usuario autenticado
-        self.exception = exception # Objeto de la excepcion atrapada    
+        self.application = application
+        self.output = output
+        self.exception = exception
         self.response = response
         self.template = template     
 
     def process(self):
+        print "__ process ExceptionManagerCore"
         logger = logging.getLogger(__name__)
         logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
             self.exception.description))
-        tpl = get_template(self.template)
-        context = Context({
-            "exception":self.exception,
-            "auth_manager": self.auth_manager
-        })
+        print "__ExceptionManager__"
         return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
 
 class LifeCycleException(DATALException):
