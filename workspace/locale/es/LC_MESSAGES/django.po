@@ -2595,9 +2595,6 @@ msgstr "Otro"
 msgid "APP-OTHER-FREQUENCY-TEXT"
 msgstr "Por favor, introduzca la frecuencia de actualización personalizada de este conjunto de datos."
 
-msgid "APP-CREATE-DATASET-FINISH-SUBTITLE"
-msgstr "Háganos saber de que se trata este conjunto de datos. Los campos marcados con (<span class='required'>*</span>) son requeridos."
-
 msgid "APP-ACCOUNT-INFORMATION-TITLE"
 msgstr "Información de la cuenta y contacto"
 

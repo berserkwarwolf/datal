@@ -5,7 +5,7 @@
 
 /* File Input */
 .create{
-	header{padding-top:0;}
+	header{padding:0;}
 	.title{text-transform:uppercase;margin-bottom:20px;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;line-height:21px;}
 	input[readonly]{background-color:white !important;cursor:text !important;}
 	.formContent .row input.form-control{left:0;position:absolute;top:0;padding-left:110px;}
@@ -46,6 +46,42 @@
 
 		}
 		footer a{text-transform:lowercase;}
+
+	}
+
+	/* Finish */
+	.finish{
+
+		/* Content */
+		.row{
+			margin:20px 0 25px;
+
+			.title{margin-bottom:0;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;line-height:21px;padding-bottom:10px;}
+			p,
+			.sourcesContent,
+			.notes{
+				padding-left:10px;line-height:18px;display:inline-block;
+
+				img{max-width:100%;}
+			}
+
+			.sourceName{margin-right:10px;}
+			.size{color:$font-color-light;}
+		}
+
+		/* Sidebar */
+		.sidebar-view{
+			background:#f5f5f5;padding:10px 25px;margin-top:20px;
+
+			.row{
+				padding-bottom:25px;border-bottom:1px solid $color-base-extra-light;
+				&:last-child{border-bottom:none;padding-bottom:0;}
+
+				.title{text-transform:none;}
+				p{padding-left:0;margin-left:0;}
+			}
+
+		}
 
 	}
 

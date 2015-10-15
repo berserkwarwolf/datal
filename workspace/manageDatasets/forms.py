@@ -37,7 +37,8 @@ class DatasetForm(forms.Form):
         widget=forms.TextInput(attrs={
             'data-bind':'value:title,events:[\'keyup\']',
             'tabindex':0,
-            'autofocus':'autofocus'
+            'autofocus':'autofocus',
+            'required':'required'
         })
     )
 
@@ -48,7 +49,8 @@ class DatasetForm(forms.Form):
         max_length=140,
         widget=forms.TextInput(attrs={
             'data-bind':'value:description,events:[\'keyup\']',
-            'tabindex':0
+            'tabindex':0,
+            'required':'required'
         })
     )
 
@@ -64,13 +66,10 @@ class DatasetForm(forms.Form):
     )
 
     # Status
-    status = forms.ChoiceField(
+    status = forms.CharField(
         required=True,
-        label=ugettext_lazy('APP-STATUS-TEXT'),
-        choices=[],
-        widget=forms.Select(attrs={
-            'data-bind':'value:status,events:[\'keyup\']',
-            'tabindex':0
+        widget=forms.HiddenInput(attrs={
+            'value':choices.StatusChoices.DRAFT
         })
     )
 

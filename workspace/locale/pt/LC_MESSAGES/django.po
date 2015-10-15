@@ -2608,9 +2608,6 @@ msgstr "Other"
 msgid "APP-OTHER-FREQUENCY-TEXT"
 msgstr "Please, input the custom update frequency of this dataset."
 
-msgid "APP-CREATE-DATASET-FINISH-SUBTITLE"
-msgstr "Let us know what is your dataset about. Fields with (<span class='required'>*</span>) are mandatory."
-
 msgid "APP-ACCOUNT-INFORMATION-TITLE"
 msgstr "Account and contact information"
 

@@ -2,101 +2,132 @@
 
 <script type="text/template" id="id_finishTemplate">
 
-<fieldset>
-	
-	{# title #}
-	<div class="row clearfix">
-		{{ form.title.label_tag }}
-		{{ form.title }}
-		<span class="required">*</span>
-	</div>
-	
-	{# description #}
-	<div class="row clearfix">
-		{{ form.description.label_tag }}
-		{{ form.description }}
-		<span class="required">*</span>
-	</div>
-	
-	{# category #}
-	<div class="row clearfix">
-		{{ form.category.label_tag }}
-		{{ form.category }}
-		{# <span class="required">*</span> #}
-	</div>
-	
-	{# status #}
-	<div class="row clearfix" style="display:none;">
-		{{ form.status.label_tag }}
+
+
+	<div class="col-xs-6">
+
+		{% comment %}
+		{# Tipo de collect #}
+		<div class="row">
+			
+			<!-- Type -->
+			<i class="icon {# dataset.impl_type|type_classname #}"></i> 
+
+			<!-- Type file -->
+			{% if dataset.collect_type == 0 %}
+
+				<span class="sourceName">
+					{{dataset.filename}} <span class="size">({% widthratio dataset.size 1024 1 %} KB)</span>
+				</span>
+
+				<a id="id_download" href="/datasets/action_request_file?dataset_revision_id={{dataset.dataset_revision_id}}" class="link" title="{% trans 'APP-DOWNLOAD-TEXT' %}">{% trans 'APP-DOWNLOAD-TEXT' %}</a>
+
+			<!-- Type URL and webservice -->
+			{% elif dataset.collect_type == 1 or dataset.collect_type == 2 %}
+
+				<a id="id_gotosource" class="link" rel="nofollow" href="{{ dataset.end_point }}" target="_blank" title="{% trans 'APP-SOURCE-TEXT' %}">{{ dataset.end_point }}</a>
+
+			{% endif %}
+		
+		</div>
+		{% endcomment %}
+
+			 
+
+
+		{# status - hidden field #}
 		{{ form.status }}
-		{# <span class="required">*</span> #}
-	</div>
-	
-	<hr class="separator">
-	
-	{# Sources #}
-	<div class="row clearfix">
-		<div id="sourceForm">
-			<div id="addSource"></div>
-			<div class="sourcesContent"></div>
-			<div id="addNewSource"></div>
+
+		{# title #}
+		<div class="row">
+			<label for="id_{{form.title.name}}" class="required">{{ form.title.label }}</label>
+			{{ form.title }}
 		</div>
-	</div>
-	
-	{# Tags #}
-	<div class="row clearfix">
-		<div id="tagForm">
-			<div id="addTag"></div>
-			<div class="tagsContent"></div>
+		
+		{# description #}
+		<div class="row">
+			<label for="id_{{form.description.name}}" class="required">{{ form.description.label }}</label>
+			{{ form.description }}
 		</div>
-	</div>
-
-	<hr class="separator">
-	
-	{# notes #}
-	<div class="row clearfix" id='notes_reference' data-ver=4 data-max_length='{{form.notes.field.max_length}}'>
-		{{ form.notes.label_tag }}
-		<div class="textarea clearfix FL">
-			{{ form.notes }}
+		
+		{# category #}
+		<div class="row">
+			{{ form.category.label_tag }}
+			{{ form.category }}
 		</div>
+		
+		<hr class="separator">
+		
+		{# Sources #}
+		<div class="row">
+			<div id="sourceForm">
+				<div id="addSource"></div>
+				<div class="sourcesContent"></div>
+				<div id="addNewSource"></div>
+			</div>
+		</div>
+		
+		{# Tags #}
+		<div class="row">
+			<div id="tagForm">
+				<div id="addTag"></div>
+				<div class="tagsContent"></div>
+			</div>
+		</div>
+
+		<hr class="separator">
+		
+		{# notes #}
+		<div class="row" id='notes_reference' data-ver=4 data-max_length='{{form.notes.field.max_length}}'>
+			{{ form.notes.label_tag }}
+			<div class="textarea clearfix FL">
+				{{ form.notes }}
+			</div>
+		</div>
+
+
+
+
+
+
+
 	</div>
 
-</fieldset>
+	<div class="col-xs-4 col-xs-offset-2">
 
-<hr class="separator">
+		<div class="sidebar-view">
 
-<div class="title">{% trans 'APP-DATASET-INFORMATION-TEXT' %}</div>
-<fieldset>
+			{# license_url #}
+			<div class="row">
+				{{ form.license_url.label_tag }}
+				{{ form.license_url }}
+				<p class="tip">{% trans 'APP-LICENSE-TIP' %} <a href="http://project-open-data.github.io/license-examples/" title="{% trans 'APP-LICENSE-EXAMPLE-TITLE' %}" target="_blank" tabindex="-1">http://project-open-data.github.io/license-examples/</a>.</p>
+			</div>
 
-	{# mbox #}
-	<div class="row clearfix">
-		{{ form.mbox.label_tag }}
-		{{ form.mbox }}
-		<p class="tip">{% trans 'APP-CONTACT-EMAIL-TIP' %}</p>
+			{# frequency #}
+			<div class="row">
+				{{ form.frequency.label_tag }}
+				{{ form.frequency }}
+				<p class="tip">{% trans 'APP-FREQUENCY-TIP' %}</p>
+			</div>
+
+			{# mbox #}
+			<div class="row">
+				{{ form.mbox.label_tag }}
+				{{ form.mbox }}
+				<p class="tip">{% trans 'APP-CONTACT-EMAIL-TIP' %}</p>
+			</div>
+
+			{# spatial #}
+			<div class="row">
+				{{ form.spatial.label_tag }}
+				{{ form.spatial }}
+				<p class="tip">{% trans 'APP-COLLECT-REGION-TIP' %}</p>
+			</div>
+
+		</div>
+
 	</div>
-
-	{# license_url #}
-	<div class="row clearfix">
-		{{ form.license_url.label_tag }}
-		{{ form.license_url }}
-		<p class="tip">{% trans 'APP-LICENSE-TIP' %} <a href="http://project-open-data.github.io/license-examples/" title="{% trans 'APP-LICENSE-EXAMPLE-TITLE' %}" target="_blank" tabindex="-1">http://project-open-data.github.io/license-examples/</a>.</p>
-	</div>
-
-	{# spatial #}
-	<div class="row clearfix">
-		{{ form.spatial.label_tag }}
-		{{ form.spatial }}
-		<p class="tip">{% trans 'APP-COLLECT-REGION-TIP' %}</p>
-	</div>
-
-	{# frequency #}
-	<div class="row clearfix">
-		{{ form.frequency.label_tag }}
-		{{ form.frequency }}
-		<p class="tip">{% trans 'APP-FREQUENCY-TIP' %}</p>
-	</div>
-
-</fieldset>
 
 </script>
 
