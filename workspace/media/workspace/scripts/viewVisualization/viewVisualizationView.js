@@ -74,13 +74,17 @@ var viewVisualizationView = Backbone.View.extend({
 
 		this.setChartContainerSize();
 
-		this.chartInstance.model.fetchData();
+		this.chartInstance.model.fetchData().then(function(){
+			$("#ajax_loading_overlay").hide();
+		});
 	},
 	setLoading: function () {
 		
 		var height = this.$el.find('#id_visualizationResult').height();
 
 		this.$el.find('#id_visualizationResult .loading').height(height);
+
+		$("#ajax_loading_overlay").show();
 	},
 
 	setChartContainerSize:function(){

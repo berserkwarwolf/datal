@@ -10,6 +10,6 @@ $ python manage.py runserver_plus 0.0.0.0:3015 --settings=workspace.settings
 ```
 
 El puerto 3015 está vinculado al 8015 de la maquina host. 
-Habra en un navegador la url `http://localhost:8015/`. 
+Abra en un navegador la url `http://workspace.dev:8015/`. 
 
 De la misma forma, para las demás aplicaciones django, existen puertos vinculados (vea `/Vagrantfile` para mas información).

@@ -124,7 +124,7 @@ var ChartView = StepViewSPA.extend({
 		}
 		$("#ajax_loading_overlay").hide();
 		console.log('the data for your chart has changed', this.model.data.toJSON());
-		this.optionsItemConfig.show();
+		//this.optionsItemConfig.show();
 		// TODO: should call this.chartView.render();
 		this.renderChart();
 	},
@@ -243,10 +243,12 @@ var ChartView = StepViewSPA.extend({
 					this.nextBtn.removeClass('disabled');
 					this.message.hide();
 					this.chartInstance.render();
+					this.optionsItemConfig.show();
 				} else {
 					this.nextBtn.addClass('disabled');
 					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 					this.vizContent.removeClass('dataSelected');
+					this.optionsItemConfig.hide();
 				}
 			}	else {
 				this.message.show();
@@ -254,6 +256,7 @@ var ChartView = StepViewSPA.extend({
 				this.nextBtn.addClass('disabled');
 				this.vizContent.removeClass('dataSelected');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
+				this.optionsItemConfig.hide();
 			}
 		}
 	},
