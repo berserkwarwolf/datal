@@ -864,3 +864,9 @@ msgstr "Ver conjunto de datos"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "Ver vista"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT1"
+msgstr "La fuente '"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT2"
+msgstr "' ya contiene ésta URL."

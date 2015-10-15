@@ -25,9 +25,28 @@ var AddSourceModel = Backbone.Model.extend({
 			},{
 				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
+			},{
+				fn: 'ifSourceUrlExists'
 			}
 		]
+	},
+
+	ifSourceUrlExists: function(value, attr, computedState) {
+		var url = '/check_source_url',
+			data = {};
+		data[attr] = value;
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			dataType: 'json',
+			async: false,
+			success: function(response){
+				if(response != false){
+					return gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
+				}
+			}
+		});
 	}
 
 });
-

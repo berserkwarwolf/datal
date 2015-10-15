@@ -872,3 +872,9 @@ msgstr "View dataset"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "View dataview"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT1"
+msgstr "The source '"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT2"
+msgstr "' already has this URL."
