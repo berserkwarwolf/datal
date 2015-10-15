@@ -128,8 +128,8 @@ var ChartSelectDataModalView = ModalView.extend({
     setHeights: function(t){
         var self = this;
 
-        var sidebar = $('.modal').find('.sidebar'),
-            table = $('.modal').find('.table-view');
+        var sidebar =  this.$el.find('.sidebar'),
+            table =  this.$el.find('.table-view');
 
         $(window).resize(function(){
 
@@ -137,7 +137,7 @@ var ChartSelectDataModalView = ModalView.extend({
             
             var sidebarHeight =
               windowHeight
-            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat(  self.$el.find('.context-menu').height() )
             - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
             - 30 // As margin bottom
             ;
