@@ -175,7 +175,8 @@ var ChartView = StepViewSPA.extend({
 			$('#nullValuePreset').show();
 		}else{
 			this.fetchPreviewData();
-			$('#nullValuePreset').hide();
+			this.model.unset('nullValuePreset');
+			$('#nullValuePreset').hide().val('');
 		}
 	},
 
