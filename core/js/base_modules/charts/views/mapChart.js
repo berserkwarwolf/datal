@@ -79,7 +79,8 @@ charts.views.MapChart = charts.views.Chart.extend({
 
         var mapInitialOptions = {
             zoom: this.model.get('options').zoom,
-            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
+            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')],
+            backgroundColor:'#FFFFFF'
         };
 
         if(this.model.get('options').center){
