@@ -980,3 +980,6 @@ msgstr "Add this Visualization everywhere!"
 
 msgid "OVERLAY-DSEMBED-CHART-TIP"
 msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"
+
+msgid "ERROR-DUPLICATED-CATEGORY"
+msgstr "Duplicated category"
