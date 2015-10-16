@@ -170,6 +170,22 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
+  _rmAllCellsMeta: function (selId) {
+    var ids,
+      rows = this.table.countRows(), 
+      cols = this.table.countCols(),
+      cells = this.coordsToCells({from:{row:0, col:0}, to:{row: rows, col: cols}}),
+      at;
+
+    for (var i = 0; i < cells.length; i++) {
+      ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
+      at = ids.indexOf(selId);
+      if (at === -1) continue;
+      ids.splice(at, 1);
+      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', ids);
+    };
+  },
+
   getDataFromRange: function (range) {
     var data;
 
@@ -209,14 +225,23 @@ var DataTableView = Backbone.View.extend({
   },
 
   onChageSelected: function (model) {
-    var previousCells = this.coordsToCells(model.getPreviousRange()),
+    var id = model.get('id');
+    var previousRange = model.getPreviousRange();
+    if (previousRange === null) {
+      this._rmAllCellsMeta(id);
+      this.table.render();
+      return; 
+    }
+    var previousCells = this.coordsToCells(previousRange),
       cells;
     if (!model.isValid()) {
+      this._rmAllCellsMeta(id);
+      this.table.render();
       return;
     }
     cells = this.coordsToCells(model.getRange());
-    this._rmCellsMeta(previousCells, model.get('id'));
-    this._addCellsMeta(cells, model.get('id'));
+    this._rmCellsMeta(previousCells, id);
+    this._addCellsMeta(cells, id);
     this.table.render();
   },
 

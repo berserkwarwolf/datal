@@ -1,11 +1,12 @@
 var DataTableSelectionModel = Backbone.Model.extend({
 	validate: function (attrs, options) {
 		var excelRange = attrs.excelRange;
+        if (excelRange === '') return;
+
         try {
             DataTableUtils.excelToRange(excelRange);
         } catch(exception){
-            console.log(exception);
-            return 'Invalid range';
+            return 'invalid-range';
         }
 	},
 
@@ -19,6 +20,17 @@ var DataTableSelectionModel = Backbone.Model.extend({
     },
 
     getPreviousRange: function () {
-        return DataTableUtils.excelToRange(this.previous('excelRange'));
+        var prevExcelRange = this.previous('excelRange'),
+            result = null;
+        if (prevExcelRange !== '') {
+            try {
+                result = DataTableUtils.excelToRange(prevExcelRange);
+            } catch (exception) {
+                console.log(exception);
+            }
+            return result;
+        } else {
+            return null;
+        }
     }
 });

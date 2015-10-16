@@ -8,7 +8,7 @@ var DataTableUtils = {
     var parts = excelRange.split(':');
 
     if (parts.length !== 2) {
-      throw 'InvalidRange';
+      //throw 'InvalidRange';
     }
 
     var from = this.excelCellToCoords(parts[0]);

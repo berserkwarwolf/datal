@@ -10,8 +10,8 @@ var MapSelectDataModalView = ModalView.extend({
         //init table
         this.collection = new DataTableSelectedCollection();
 
-        this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat'});
-        this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon'});
+        this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat', notEmpty: true});
+        this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon', notEmpty: true});
         this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
 
         this.dataStreamModel = options.dataStreamModel;
@@ -48,7 +48,7 @@ var MapSelectDataModalView = ModalView.extend({
             this.setAxisTitles();
         }, this);
 
-        this.listenTo(this.collection, 'add change remove reset', this.validate, this);
+        this.listenTo(this.collection, 'change remove reset', this.validate, this);
 
         return this;
     },
@@ -91,29 +91,25 @@ var MapSelectDataModalView = ModalView.extend({
             model;
 
         if (name === 'range_lat') {
-            this.collection.remove(1);
             model = this.rangeLatModel;
         } else if (name === 'range_lon') {
-            this.collection.remove(2);
             model = this.rangeLonModel;
         } else if (name === 'range_data') {
-            this.collection.remove(3);
             model = this.rangeInfoModel;
         }
         model.set(selection);
 
-        if (model.isValid()) {
-            this.collection.add(model);
-        } else {
-            // alert(model.validationError)
-        }
+        this.validate();
     },
 
     validate: function () {
-        if (this.collection.length < 3) {
-            this.$('button.btn-done').attr('disabled', 'disabled');
+        var hasLat = this.rangeLatModel.get('excelRange') !== '';
+        var hasLon = this.rangeLonModel.get('excelRange') !== '';
+
+        if (hasLat && hasLon) {
+            this.$('button.btn-done').removeAttr('disabled'); 
         } else {
-            this.$('button.btn-done').removeAttr('disabled');
+            this.$('button.btn-done').attr('disabled', 'disabled');
         }
     },
 
