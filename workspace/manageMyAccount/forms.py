@@ -9,7 +9,8 @@ from core import choices
 class SignUpForm(forms.Form):
     account_name = forms.CharField(required=True, label=ugettext_lazy('APP-ACCOUNT-NAME-TEXT'))
     admin_url = forms.CharField(required=True, label=ugettext_lazy('APP-ADMIN-URL-TEXT'))
-    username = forms.CharField(required=True, label=ugettext_lazy('APP-USERNAME-TEXT'))
+    nick = forms.CharField(required=True, label=ugettext_lazy('APP-USERNICK-TEXT'))
+    name = forms.CharField(required=True, label=ugettext_lazy('APP-USERNAME-TEXT'))
     password = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('APP-PASSWORD-TEXT'))
     password_again = forms.CharField(required=True, widget=forms.PasswordInput(render_value=False), label=ugettext_lazy('UPDATE-PASSWORD-CONFIRMPSW'))
     email = forms.CharField(required=True, label=ugettext_lazy('APP-EMAIL-TEXT'))

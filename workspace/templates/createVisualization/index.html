@@ -3,7 +3,18 @@
 
 {% block meta %}
 
-{% load static %}
+
+
+{% compress css %}
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
+<meta name="main-option" content="id_visualizations_option"/>
+
 <!-- Libraries -->
 <script type="text/javascript"
           src="https://www.google.com/jsapi?autoload={
@@ -19,46 +30,19 @@
 <script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
 <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
-
-
-{% compress css %}
-<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'c3/c3.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'workspace/styles/createVisualization.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'core/styles/forms.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-{% endcompress %}
-<meta name="main-option" content="id_visualizations_option"/>
-
-<!-- Libs -->
-<script language="javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<!-- Process Manager -->
-<script language="javascript" src="/js_workspace/createVisualization/views/StepView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/plugins/multimarker.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Charts types & instances -->
-<script language="javascript" src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/ChartsFactory.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/models/data.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/models/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<script language="javascript" src="/js_core/base_modules/charts/views/chart.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/views/charts.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/views/googleCharts.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<!-- Create Viz StepViews -->
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/StartView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<!-- Create Chats StepViews -->
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/ChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/MetadataView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/FinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<!-- Create Map StepViews -->
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/steps/map/MapFinishView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% endblock %}
 
@@ -85,17 +69,13 @@
 
 <div class="col-xs-12">
 
-  <div id="id_createVisualization_container" class="createVizualization create main-view relative">  
+  <div id="id_createVisualization_container" class="createVizualization create main-view relative">
 
-    <!-- Include charts templates -->
     {% include "createVisualization/steps/0_start.html" %}
     {% include "createVisualization/steps/1_chart.html" %}
     {% include "createVisualization/steps/2_metadata.html" %}
     {% include "createVisualization/steps/3_finish.html" %}
-  
-    <!-- Include map templates -->  
     {% include "createVisualization/steps/map/1_map.html" %}
-    {% include "createVisualization/steps/map/3_map_finish.html" %}
 
   </div>
 
@@ -114,19 +94,24 @@
 {# templates backbone #}
 {% include "createVisualization/templates.html" %}
 
-<!-- Viz modals -->
-<script language="javascript" src="/js_workspace/createVisualization/views/ModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/modals/ChartSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/createVisualization/views/modals/MapSelectDataModalView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<script src="/js_workspace/createVisualization/models/DataTableSelectionModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/models/DataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/collections/DataTableSelectedCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/table/DataTableUtils.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/table/DataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/ButtonsView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/MainView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script src="/js_workspace/createVisualization/views/table/SelectedCellRangeView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/StepView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/steps/StartView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/steps/ChartView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/steps/MetadataView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/steps/FinishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/steps/map/MapView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/ModalView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/modals/ChartSelectDataModalView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/modals/MapSelectDataModalView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/models/DataTableSelectionModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/models/DataStreamModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/collections/DataTableSelectedCollection.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/table/DataTableUtils.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/table/DataTable.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/ButtonsView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/MainView.js' %}"></script>
+<script src="{% static 'workspace/scripts/createVisualization/views/table/SelectedCellRangeView.js' %}"></script>
 
 <script type="text/javascript">
   var tags = [];
@@ -180,6 +165,13 @@
         labelSelection: '{{ visualization_revision.chart.labelSelection }}',
         headerSelection: '{{ visualization_revision.chart.headerSelection }}',
         is3D: '{{ visualization_revision.chart.is3D }}',
+        {% if visualization_revision.format.type == 'mapchart' %}
+          longitudSelection: '{{ visualization_revision.chart.longitudSelection }}',
+          latitudSelection: '{{ visualization_revision.chart.latitudSelection }}',
+          mapType: '{{ visualization_revision.chart.mapType }}',
+          zoom: {{ visualization_revision.chart.zoom }},
+          bounds: '{{ visualization_revision.chart.bounds }}',
+        {% endif %}
       {% endif %}
     }
 

@@ -32,11 +32,25 @@ charts.views.Chart = Backbone.View.extend({
     },
 
     destroy: function(){
-        if(this.chart && this.chart.destroy){ //c3
-            this.chart.destroy();
+        if (this.model.get('isMap')) {
+            //No se puede destruir oficialmente una instancia de googleMaps - https://code.google.com/p/gmaps-api-issues/issues/detail?id=3803
+            if(this.mapInstance){
+                this.$el.attr('style','');
+                this.$el.empty();
+                google.maps.event.clearInstanceListeners(window);
+                google.maps.event.clearInstanceListeners(document);
+                google.maps.event.clearInstanceListeners(this.el);
+                delete this.mapInstance;
+            }
+
+        }else{
+            if(this.chart && this.chart.destroy){ //c3
+                this.chart.destroy();
+            }
+            if(this.chart && this.chart.clearChart){ //google
+                this.chart.clearChart();
+            }            
         }
-        if(this.chart && this.chart.clearChart){ //google
-            this.chart.clearChart();
-        }
+        this.stopListening();
     }
 });

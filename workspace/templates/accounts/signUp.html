@@ -6,8 +6,8 @@
 <link href="{% sass_src 'workspace/styles/accounts.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script type="text/javascript" src="/js_core/plugins/jquery.passwordStrength.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/accounts/signUpModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/accounts/signUpView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/signUpModel.js' %}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/signUpView.js' %}"></script>
 {% endblock %}
 
 {% block body %}
@@ -40,8 +40,13 @@
             </div>
 
             <div class="row">
-                {{form.username.label_tag}}
-                {{form.username}}
+                {{form.nick.label_tag}}
+                {{form.nick}}
+            </div>
+
+            <div class="row">
+                {{form.name.label_tag}}
+                {{form.name}}
             </div>
 
             <div class="row">

@@ -42,61 +42,37 @@ charts.models.Chart = Backbone.Model.extend({
         needToReloadData: false, //special case where I zoom on a heatMap
         mapType : 'ROADMAP',
         styles: {},
-        stylesDefault: {
-            "marker": {
-                icon : "https://maps.gstatic.com/mapfiles/ms2/micons/red-pushpin.png"
-            },
-            "lineStyle": {
-                "strokeColor": "#00FFaa",
-                "strokeOpacity": 1.0,
-                "strokeWeight": 2,
-                "fillColor": '#FF0000',
-                "fillOpacity": 0.01
-            },
-            "polyStyle": {
-                "strokeColor": "#FF0000",
-                "strokeOpacity": 1.0,
-                "strokeWeight": 3,
-                "fillColor": '#FF0000',
-                "fillOpacity": 0.35
-            },
-        },
         options: {
-            zoom: 5,
+            zoom: 2,
             center: {
-                lat: 0, 
+                lat: 0,
                 long: 0
             },
-            bounds: []
+            bounds: [85,180,-85,-180]
         }
 
     },
-    initialize: function () {
+    initialize: function (options) {
         //Se inicializa acá para prevenir error en embed
         if(window.gettext){
             this.set('message',gettext("APP-CUSTOMIZE-VISUALIZATION-SELECT-DATA-TEXT"));
         }
 
         this.data = new charts.models.ChartData({
-            id: this.get('resourceID'),
+            id: this.get('id'),
             type: this.get('type')
         });
-
-        if(this.get('isEdit')){
-            this.fetchPreviewData();
-        }
 
         this.bindEvents();
     },
 
     bindEvents: function () {
         //Se actualizan los filtros de los datos cuando se cambian las options
-        this.on('change:options', this.updateFetchFilters);
-        this.on('change:type', this.onChangeType);
+        this.on('change', this.bindDataModel, this);
         this.listenTo(this.data, 'data_updated', this.handleDataUpdate);
     },
 
-    parseResponse: function (res) {
+    parse: function (res) {
         var data = {
             datastream_revision_id: res.datastream_revision_id,
             meta_tags:  res.datastream_tags,
@@ -130,100 +106,91 @@ charts.models.Chart = Backbone.Model.extend({
                 //data
                 range_data: this.parseColumnFormat(res.data),
                 range_headers: this.parseColumnFormat(res.headerSelection),
-                range_labels: this.parseColumnFormat(res.labelSelection)
+                range_labels: this.parseColumnFormat(res.labelSelection),
+
+                range_lat: this.parseColumnFormat(res.latitudSelection),
+                range_lon: this.parseColumnFormat(res.longitudSelection)
 
             });
+            if (res.type === 'mapchart') {
+                data = _.extend(data,{
+                    range_lat: this.parseColumnFormat(res.latitudSelection),
+                    range_lon: this.parseColumnFormat(res.longitudSelection),
+                    mapType: res.mapType? res.mapType.toUpperCase(): undefined,
+                    options:{
+                        zoom: res.zoom,
+                        bounds: res.bounds? res.bounds.split(';'): undefined,
+                        center: {lat: 0, long: 0}
+                    }
+                });
+            };
         }
         this.set(data);
     },
 
-    fetchPreviewData: function () {
-        var self = this;
+    bindDataModel: function () {
+        var self = this,
+            filters = {};
+
+        if (this.get('type') === 'mapchart') {
+            filters = this.getMapPreviewFilters();
+        } else {
+            filters = this.getChartPreviewFilters();
+        }
+
+        this.data.set('filters', filters);
+    },
+
+    getChartPreviewFilters: function () {
 
         if(!this.isValid()){
             console.error('error en valid');
         }
 
-        var params = {
-            revision_id: self.get('datastream_revision_id'),
+        var filters = {
+            revision_id: this.get('datastream_revision_id'),
             data: this.serializeServerExcelRange(this.get('range_data')),
             headers: this.serializeServerExcelRange(this.get('range_headers')),
             labels: this.serializeServerExcelRange(this.get('range_labels')),
-            nullValueAction: self.get('nullValueAction'),
-            nullValuePreset:  self.get('nullValuePreset'),
-            type: self.get('type')
+            nullValueAction: this.get('nullValueAction'),
+            nullValuePreset:  this.get('nullValuePreset') || '',
+            type: this.get('type')
         };
 
-        if(self.get('invertData')===true){
-            params['invertData'] = true;
+        if(this.get('invertData')===true){
+            filters['invertData'] = true;
         }
 
-        if(self.get('invertedAxis')===true){
-            params['invertedAxis'] = true;
+        if(this.get('invertedAxis')===true){
+            filters['invertedAxis'] = true;
         }
-
-        return $.getJSON('/rest/charts/sample.json', params)
-        .then(function (response) {
-            self.formatResponseData(response.series, response.values, response.labels);
-        })
-        .error(function(response){
-            console.error('error en fetch');
-        });
+        return filters;
     },
 
-    /**
-     * Ajusta el formato de los datos obtenidos por el preview o el invoke
-     * @param  {array} series
-     * @param  {array} values
-     * @param  {array} labels
-     */
-    formatResponseData: function (series, values, labels) {
-        var columns = [],
-            fields =[];
+    getMapPreviewFilters: function () {
+        var id = this.get('id');
 
-        //TODO: arreglar este hack para crear labels vacios
-        if (!labels.length) {
-            labels = Array.apply(null, {length: values[0].length}).map(Number.call, Number);
-            fields.push(['number', 'labels']);
-        } else {
-            //TODO: revisar el formato del lable
-            fields.push(['string', 'labels']);
-        }
-        columns.push(labels);
-
-        columns = columns.concat(values);
-        fields = fields.concat(_.map(series, function (item) {
-            return ['number', item.name];
-        }));
-
-        this.data.set('fields', fields);
-        this.data.set('rows', _.clone(_.unzip(columns)));
-
-        this.trigger("newDataReceived");
-
-    },
-
-    onChangeType: function (model, type) {
-        console.log('type has changed to:', type);
-        if (type === 'mapchart') {
-
-        };
-    },
-
-    /**
-     * Default fetch filter updater
-     */
-    updateFetchFilters: function () {
-        var filters = this.get('options');
-
-        if(this.get('type') == 'mapchart'){
-            filters = {
+        var filters = {
+                revision_id: id,
                 zoom: this.get('options').zoom,
-                bounds: this.get('options').bounds.join(';')
-            };
+                bounds: (this.get('options').bounds)? this.get('options').bounds.join(';'): undefined,
+                type: this.get('type')
+        };
+
+        if(_.isUndefined(id)){
+            filters = _.extend(filters,{
+                revision_id: this.get('datastream_revision_id'),
+                nullValueAction: this.get('nullValueAction'),
+                data: this.serializeServerExcelRange(this.get('range_data')),
+                lat: this.serializeServerExcelRange(this.get('range_lat')),
+                lon: this.serializeServerExcelRange(this.get('range_lon'))                
+            });
         }
 
-        this.data.set('fetchFilters', filters);
+        if (this.has('nullValuePreset')) {
+            filters.nullValuePreset = this.get('nullValuePreset');
+        }
+        return filters;
     },
 
     /**
@@ -231,12 +198,6 @@ charts.models.Chart = Backbone.Model.extend({
      * @return {[type]} [description]
      */
     handleDataUpdate: function () {
-        if(this.get('type') == 'mapchart'){
-            this.set('styles', this.parseKmlStyles(this.data.get('styles')));
-        } else {
-            this.formatResponseData(this.data.get('series'), this.data.get('values'), this.data.get('labels'));
-        }
-
         this.trigger('data_updated');
     },
 
@@ -248,14 +209,10 @@ charts.models.Chart = Backbone.Model.extend({
         return this.data.fetch();
     },
 
-    render: function(){
-        return true;
-    },
-
     getFormData: function(){
         var formData = this.getMeta();
-        formData = _.extend( formData,this.getSettings() );
-        return formData; 
+        _.extend(formData, this.getSettings());
+        return formData;
     },
 
     getMeta: function(){
@@ -263,17 +220,13 @@ charts.models.Chart = Backbone.Model.extend({
             title: this.get('meta_title'),
             description: this.get('meta_description'),
             notes: this.get('meta_notes'),
-            
-/*            category: this.get('meta_category'),
-            source: this.get('meta_sources'),
-            tags: this.get('meta_tags')*/
         };
 
         return metadata;
     },
 
     serializeServerExcelRange: function(selection){
-        if (_.isUndefined(selection)) return;
+        if (_.isUndefined(selection)) return '';
         var range = selection.split(":");
         var left = range[0];
         var right = range[1];
@@ -296,6 +249,9 @@ charts.models.Chart = Backbone.Model.extend({
 
     parseColumnFormat: function (serverExcelRange) {
         var col;
+        if (_.isUndefined(serverExcelRange)) {
+            return serverExcelRange;
+        };
         if (serverExcelRange.indexOf('Column:') !== -1) {
             col = serverExcelRange.replace('Column:', '');
             serverExcelRange = [col, ':', col].join('');
@@ -310,28 +266,40 @@ charts.models.Chart = Backbone.Model.extend({
         //Si alguna vez intentó seleccionar algo de data
         if(this.get('select_data')){
 
-            //General validation
-            var lFields = this.data.get('fields').length;
+            if (this.get('type') === 'mapchart') {
 
-            var check = _.reduce(this.data.get('rows'), 
-                function(memo, ar){
-                 return (ar.length==lFields)?memo:memo + 1; 
-                }, 0);
+                // example validation
+                // valid = (this.data.get('clusters').length >0);
+                valid = true;
+                console.log('valid',valid);
 
-            if (check!=0){
-                this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
-                valid = false;
-            }
+            } else {
 
-            if(valid){
-                //TODO specific validation for chart type
-                switch(this.get('type')){
-                    case 'piechart':
-                        console.log('is pie chart');
-                        //validar que no haya números negativos en la primer serie que se usa para el pie
-                    break;
+                //General validation
+                var lFields = this.data.get('fields').length;
+
+                var check = _.reduce(this.data.get('rows'), 
+                    function(memo, ar){
+                     return (ar.length==lFields)?memo:memo + 1; 
+                    }, 0);
+
+                if (check!=0){
+                    this.set("message",gettext("APP-CUSTOMIZE-VISUALIZATION-VALIDATE-HEADLINES")); //reemplazar por locale
+                    valid = false;
                 }
+
+                if(valid){
+                    //TODO specific validation for chart type
+                    switch(this.get('type')){
+                        case 'piechart':
+                            console.log('is pie chart');
+                            //validar que no haya números negativos en la primer serie que se usa para el pie
+                        break;
+                    }
+                }
+
             }
+
 
 
         }
@@ -345,7 +313,7 @@ charts.models.Chart = Backbone.Model.extend({
             fields:{
                 'title':  _.isEmpty(this.get('meta_title')),
                 'description':  _.isEmpty(this.get('meta_description'))
-            }    
+            }
         }
         return validation
     },
@@ -365,6 +333,18 @@ charts.models.Chart = Backbone.Model.extend({
             headerSelection: this.serializeServerExcelRange(this.get('range_headers')),
             data: this.serializeServerExcelRange(this.get('range_data')),
             labelSelection: this.serializeServerExcelRange(this.get('range_labels'))
+
+        };
+
+        if (this.get('type') === 'mapchart') {
+            settings = _.extend( settings, {
+                latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
+                longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
+                traceSelection: '',
+                mapType: this.get('mapType').toLowerCase(),
+                zoom: this.get('options').zoom,
+                bounds: this.get('options').bounds.join(';')
+            });
         };
 
         settings = _.extend( settings,this.getChartAttributes() );
@@ -381,85 +361,44 @@ charts.models.Chart = Backbone.Model.extend({
         return attr;
     },
 
-    /**
-     * MAP SPECIFIC METHODS
-     */
+    validate: function (attrs, options) {
+        var nullValuePreset = attrs.nullValuePreset;
 
-    /**
-     * Convierte estilos de tipo kml al necesario para usar en los mapas
-     * @param  {object} styles
-     * @return {object}
-     */
-    parseKmlStyles: function (styles) {
-        styles = styles || [];
-        var parsedStyles = this.get('stylesDefault');
+        if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
 
-        if(styles.length && styles[0].styles){
-            //Obtiene el primer estilo encontrado en la data
-            styles = styles[0].styles;
-            if(styles.lineStyle){
-                parsedStyles.lineStyle = this.kmlStyleToLine(styles.lineStyle);
+            if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
+                return 'Invalid value';
             }
-            if(styles.polyStyle){
-                parsedStyles.polyStyle = this.kmlStyleToPolygon(parsedStyles.lineStyle, styles.polyStyle);
-            }
+
         }
-
-        return parsedStyles;
     },
 
-    /**
-     * Prser para los estilos desde un kml a lineas de google maps
-     * @param  {object} lineStyle
-     * @return {object
-     */
-    kmlStyleToLine: function(lineStyle) {
-        var defaultStyle = this.get('stylesDefault').lineStyle;
-        return {
-            "strokeColor": this.getStyleFromKml(lineStyle, 'color', 'color', defaultStyle.strokeColor),
-            "strokeOpacity": this.getStyleFromKml(lineStyle, 'color', 'opacity', defaultStyle.strokeOpacity),
-            "strokeWeight": this.getStyleFromKml(lineStyle, 'width', 'width', defaultStyle.strokeWeight)
-        };
+    save: function (attrs, options) {
+        var data = this.getFormData();
+
+        return $.ajax({
+            type:'POST',
+            data: data,
+            dataType: 'json'
+        }).then(function (response) {
+            if(response.status=='ok'){
+                console.log(response);
+                return response;
+            } else {
+                console.error(response);
+            }
+        });
     },
 
-    /**
-     * Parser para los estilos de un kml a polygons de google maps
-     * @param  {object} lineStyle
-     * @param  {object} polyStyle
-     * @return {object}
-     */
-    kmlStyleToPolygon: function (lineStyle, polyStyle) {
-        var defaultStyle = this.get('stylesDefault').polyStyle;
-        var opacity = this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight);
-        return {
-            "strokeColor": lineStyle.strokeColor,
-            "strokeOpacity": lineStyle.strokeOpacity,
-            "strokeWeight": lineStyle.strokeWeight,
-            "fillColor": this.getStyleFromKml(polyStyle, 'fill', 'color', defaultStyle.strokeWeight),
-            "fillOpacity": this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight)
-        };
+    remove: function (options) {
+        var opts = _.extend({url: 'remove/' + this.id}, options || {});
+
+        return Backbone.Model.prototype.destroy.call(this, opts);
     },
 
-    /**
-     * Obtiene un estilo de un objeto de estilos Kml para ser usado en google maps
-     * @param  {object} kmlStyles
-     * @param  {string} attribute
-     * @param  {string} type
-     * @param  {string} defaultStyle
-     * @return {string}
-     */
-    getStyleFromKml: function (kmlStyles, attribute, type, defaultStyle) {
-        var style = kmlStyles[attribute] || null;
-        if(style == null) return defaultStyle;
+    remove_revision: function (options) {
+        var opts = _.extend({url: 'remove/revision/' + this.id}, options || {});
 
-        //Convierte el color de formato ARGB a RGB
-        if(type == 'color')
-            return '#' + style.substring(2);
-        //La opacidad se extrae del color y convierte de hexadecimal a entero
-        if(type == 'opacity')
-            return parseInt(style.substring(0, 2), 16) / 256;
-
-        return style;
+        return Backbone.Model.prototype.destroy.call(this, opts);
     }
-
 });

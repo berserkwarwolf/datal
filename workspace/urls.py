@@ -42,9 +42,9 @@ urlpatterns = patterns('',
 
     #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
-    
+
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
-   
+
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
     (r'^accounts/', include('workspace.manageMyAccount.urls')),
     (r'^tag_manager/', include('workspace.searchTags.urls')),

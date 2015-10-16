@@ -7,7 +7,7 @@
 <link href="{% sass_src 'workspace/styles/accountAdmin.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
 <script src="/js_core/plugins/jquery.enable.disable.plugin.min.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
-<script src="/js_workspace/admin_manager/domain.js?id={{settings.VERSION_JS_CSS}}" type="text/javascript"></script>
+<script src="{% static 'workspace/scripts/admin_manager/domain.js' %}" type="text/javascript"></script>
 
 <meta name="main-option" content="id_settings_option"/>
 {% endblock %}

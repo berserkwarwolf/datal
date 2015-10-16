@@ -5,11 +5,10 @@ var charts = charts || {
 
 charts.models.ChartData = Backbone.Model.extend({
     type: 'line',
+    idAttribute: 'visualization_revision_id',
+    urlRoot: '/rest/charts/',
     defaults: {
-        urlRoot: '/rest/charts/',
-        urlMethod: '/data.json',
-        idAttribute: 'visualization_revision_id',
-        fetchFilters: {},
+        filters: {},
         type: 'line',
         fields: [
             // [fieldtype, fieldname]
@@ -31,14 +30,15 @@ charts.models.ChartData = Backbone.Model.extend({
     },
 
     initialize: function () {
-        this.on('change:fetchFilters', this.handleFetchFiltersChange, this);
+        this.on('change:filters', this.onFiltersChange, this);
     },
 
     /**
      * Se actualiza la data mediante el metodo fetch cada vez que se escucha un cambio en los filtros
      */
-    handleFetchFiltersChange: function () {
-        return this.fetch();
+    onFiltersChange: function (model, value) {
+        console.log('filters updated', value);
+        this.fetch();
     },
 
     /**
@@ -47,23 +47,71 @@ charts.models.ChartData = Backbone.Model.extend({
      */
     fetch: function () {
         var self = this;
+        this.trigger('fetch:start');
 
         if(this.fetchXhr && this.fetchXhr.readyState > 0 && this.fetchXhr.readyState < 4){
             this.fetchXhr.abort();
         }
         this.fetchXhr = Backbone.Model.prototype.fetch.apply(this, arguments);
-        this.fetchXhr.always(function () {
+        this.fetchXhr.then(function () {
             self.trigger('data_updated');
         });
+        this.fetchXhr.always(function () {
+            self.trigger('fetch:end');
+        });
         return this.fetchXhr;
+    },
+
+    parse: function (response) {
+        var columns = [],
+            fields =[],
+            labels = response.labels,
+            filters = this.get('filters');
+
+        if (filters.type === 'mapchart') {
+            return response;
+        } else {
+
+            //TODO: arreglar este hack para crear labels vacios
+            if (labels && !labels.length) {
+                labels = Array.apply(null, {length: response.values[0].length}).map(Number.call, Number);
+                fields.push(['number', 'labels']);
+            } else {
+                //TODO: revisar el formato del lable
+                fields.push(['string', 'labels']);
+            }
+            columns.push(labels);
+
+            columns = columns.concat(response.values);
+            fields = fields.concat(_.map(response.series, function (item) {
+                return ['number', item.name];
+            }));
+
+            this.set('fields', fields);
+            this.set('rows', _.clone(_.unzip(columns)));
+
+        }
     },
 
     /**
      * Se arma la url para el fetch utilizando los attributos pasados al modelo y los filtros existentes
      */
     url: function () {
-        var filters = this.get('fetchFilters');
-        var url = this.get('urlRoot') + this.get('id') + this.get('urlMethod') + '?' + $.param(filters);
+        var filters = this.get('filters'),
+            id = this.get('id'), // ID existe cuando la visualizacion está siendo editada
+            url,
+            endpoint = 'charts/';
+
+        if (filters.type === 'mapchart') {
+            endpoint = 'maps/';
+        }
+
+        if (_.isUndefined(id)) {
+            url = '/rest/' + endpoint + 'sample.json' + '?' + $.param(filters);
+        } else {
+            url = '/rest/' + endpoint + id + '/data.json' + '?' + $.param(filters);
+        }
+
         return url;
     }
 });

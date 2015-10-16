@@ -4,6 +4,11 @@
 var viewChartView = Backbone.View.extend({
     el : "body",
     chartContainer: "#id_visualizationResult",
+        
+    events:{
+        'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage' 
+    },
+
     initialize : function() {
         var self = this;
 
@@ -176,7 +181,7 @@ var viewChartView = Backbone.View.extend({
     createChartInstance: function () {
         var chartModelInstance = new this.ChartModelClass({
             type: this.model.get('chart').type,
-            resourceID: this.model.get('visualizationrevision_id')
+            id: this.model.get('visualizationrevision_id')
         });
 
         this.chartInstance = new this.ChartViewClass({
@@ -226,6 +231,23 @@ var viewChartView = Backbone.View.extend({
         });
         chartInstance.render();
     },
+
+    setWaitingMessage: function(event){
+
+        var titleText;
+
+        titleText = gettext("VIEWDS-WAITMESSAGEEXPORT-TITLE");
+
+        $.gritter.add({
+          title: titleText,
+          text: gettext("VIEWDS-WAITMESSAGEDOWNLOAD-TEXT"),
+          image: '/static/microsites/images/microsites/ic_download.gif',
+          sticky: false,
+          time: ''
+        });
+
+    },
+
     /**
      * Render de la vista
      */
