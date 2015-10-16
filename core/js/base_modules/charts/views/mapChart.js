@@ -99,6 +99,7 @@ charts.views.MapChart = charts.views.Chart.extend({
 
         this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
         this.mapInstance.setOptions(this.googleMapOptions);
+        this.mapInstance.setOptions({minZoom: 1});
 
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
