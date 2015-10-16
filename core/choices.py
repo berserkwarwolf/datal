@@ -26,7 +26,9 @@ BOOLEAN_FIELD = (
 
 INCLUDE_EXCLUDE = (
     ('include', 'include'),
-    ('exclude', 'exclude')
+    ('exclude', 'exclude'),
+    ('previous', 'previous'),
+    ('given', 'given')
 )
 
 MAP_TYPE_FIELD = (
