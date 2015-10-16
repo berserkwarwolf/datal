@@ -1,13 +1,12 @@
 {% load compress sass_tags %}
 
 {% compress css %}
-<!-- Emeplo de uso de SCSS -->
-
 <!-- NEW -->
+<link href="{% sass_src 'select2/dist/css/select2.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'core/styles/plugins/jquery.gritter.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/reset.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/buttons.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 <link href="{% sass_src 'core/styles/icons.css' %}" type="text/css" rel="stylesheet" media="screen"/>
-<link href="{% sass_src 'core/styles/plugins/jquery.gritter.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 
 <!-- OLD -->
 <link href="{% sass_src 'core/styles/plugins/jquery-ui-1.8.6.custom.css' %}" type="text/css" rel="stylesheet" media="screen"/>

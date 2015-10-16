@@ -2,9 +2,12 @@
 
 <script type="text/template" id="id_finishTemplate">
 
-
-
 	<div class="col-xs-6">
+
+
+
+
+
 
 		{% comment %}
 		{# Tipo de collect #}
@@ -32,7 +35,9 @@
 		</div>
 		{% endcomment %}
 
-			 
+
+
+
 
 
 		{# status - hidden field #}
@@ -59,6 +64,17 @@
 		<hr class="separator">
 		
 		{# Sources #}
+		SOURCES
+		<select id="id_sources" multiple="multiple"></select>
+
+		TAGS
+		<select id="id_tags" multiple="multiple"></select>
+
+
+
+
+
+
 		<div class="row">
 			<div id="sourceForm">
 				<div id="addSource"></div>
@@ -84,12 +100,6 @@
 				{{ form.notes }}
 			</div>
 		</div>
-
-
-
-
-
-
 
 	</div>
 

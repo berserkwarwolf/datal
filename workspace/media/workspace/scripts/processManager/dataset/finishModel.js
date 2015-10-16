@@ -4,7 +4,7 @@ var FinishModel = StepModel.extend({
 		title: null,
 		description: null,
 		category: null,
-		status: null,
+		status: StatusChoices.DRAFT,
 		sources: [],
 		tags: [],
 		notes: null,
@@ -84,7 +84,7 @@ var FinishModel = StepModel.extend({
 		data.title = $.trim( this.get('title') );
 		data.description = $.trim( this.get('description') );
 		data.category = $('#id_category option:selected').val();
-		data.status = $('#id_status option:selected').val();
+		data.status = this.get('status');
 		data.mbox = $.trim( this.get('mbox') );
 		data.spatial = $.trim( this.get('spatial') );
 		data.license_url = $.trim( this.get('license_url') );

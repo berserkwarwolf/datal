@@ -106,14 +106,17 @@ a:hover{color:$link-hover-color;}
 }
 
 /* Lists */
+/* TODO @juan33650 @dbleyenda: revisar esto */
 .section-content,
 .ao-popup-overlay{
-ol,
-ul{padding-left:20px;}
-ol li,
-ul li{line-height:19px;}
-ol li{list-style:inside;list-style-type:decimal;}
-ul li{list-style-type:none;padding:0 0 5px 10px;background:url(/static/workspace/images/common/ic_VM.png) no-repeat 0 5px;}
+  .list{
+    &ol,
+    &ul{padding-left:20px;}
+    &ol li,
+    &ul li{line-height:19px;}
+    &ol li{list-style:inside;list-style-type:decimal;}
+    &ul li{list-style-type:none;padding:0 0 5px 10px;background:url(/static/workspace/images/common/ic_VM.png) no-repeat 0 5px;}
+  }
 }
 
 /* Red text, button or link - Delete / Reject */

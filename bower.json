@@ -28,7 +28,8 @@
     "jquery.cookie": "~1.4.1",
     "jquery": ">=2.1.4",
     "underscore": ">= 1.8.3",
-    "c3": "~0.4.10"
+    "c3": "~0.4.10",
+    "select2": "~4.0.0"
   },
   "resolutions": {
     "jquery": ">=2.1.4",

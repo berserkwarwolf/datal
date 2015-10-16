@@ -199,6 +199,71 @@ var FinishView = StepView.extend({
 	},
 
 	initSourceList: function(){
+
+		console.log(this.model.toJSON());
+
+		$('#id_sources').select2({
+			width: "100%",
+			tags: true,
+			allowClear: true, // Permite borrar todos
+			//placeholder: "Enter to search...",
+			ajax: {
+				url: this.model.get('sourceUrl'),
+				dataType: 'json',
+				delay: 250,
+				data: function (params) {
+					return {
+						term: params.term, // search term
+						page: params.page
+					};
+				},
+				processResults: function (data, page) {
+					// parse the results into the format expected by Select2.
+					// since we are using custom formatting functions we do not need to
+					// alter the remote JSON data
+					return {
+						results: data
+					};
+				},
+				cache: true
+			},
+
+
+
+
+			//tags: true,
+			//tags: this.model.get('sources'), // => tagging support, allow use add new entry
+			//tokenSeparators: [" "], // => to separate entries
+			/*
+			formatSelection: instance.function (item) {
+				if (item.id === item.text) {
+					return "<div style='height: 16px;'>" + item.text + "</div>";
+				}
+				return "<img style='width: 16px; height: 16px;' src='images/" + item.logo + "'> " + item.text + " </img>";
+			}, // => "on select" : useful to handle "unidentified" entry (should return new tag)
+			*/
+			//formatResult: instance.formatItem, // => "after select" : useful to handle "unidentified" entry (should return new tag)
+			/*
+			createSearchChoice: function (text) { // => find suitable tag
+				var tag = utils.findBy(tags, "text", text);
+				if (tag === undefined) {
+					tag = {id: text, text: text};
+				}
+				return tag;
+			},
+			*/
+			//createSearchChoicePosition: "bottom",
+			
+			//openOnEnter: false,
+			//escapeMarkup: function (markup) { return markup; }
+		});
+
+		$('#id_tags').select2({
+			width: "100%",
+			tags: true,			
+		});
+
+
 		var sourceModel = new SourceModel();
 		this.sources = new Sources(this.model.get('sources'));
 		new SourcesView({collection: this.sources, parentView:this, model: sourceModel, parentModel: this.model});
