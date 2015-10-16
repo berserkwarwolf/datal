@@ -12,6 +12,7 @@ var FinishView = StepViewSPA.extend({
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
 		this.chartContent = this.$el.find('.chartContentFinish');
+		this.finishBtn = this.$el.find('a.finishButton');
 
 	}, 
 
@@ -64,18 +65,24 @@ var FinishView = StepViewSPA.extend({
 		this.previous();
 	},
 
-	onFinishButtonClicked: function(){
-		var data = this.model.save().then(function (response) {
-			window.location = '/visualizations/'+response.revision_id;
-		}).fail(function (rejection) {
-			console.error(rejection);
-		});
+	onFinishButtonClicked: function(e){
+		if(!this.finishBtn.hasClass('saving')){
+			$("#ajax_loading_overlay").show();
+			this.finishBtn.addClass('saving');
+			var data = this.model.save().then(function (response) {
+				window.location = '/visualizations/'+response.revision_id;
+			}).fail(function (rejection) {
+				this.finishBtn.removeClass('saving');
+				$("#ajax_loading_overlay").hide();
+				console.error(rejection);
+			});
+		}
 
 	},
 
 	start: function(){
 		this.constructor.__super__.start.apply(this);
-
+		this.finishBtn.removeClass('saving');
 		this.setupChart();
 		this.renderChart();
 

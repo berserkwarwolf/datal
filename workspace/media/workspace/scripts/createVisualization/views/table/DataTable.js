@@ -75,9 +75,16 @@ var DataTableView = Backbone.View.extend({
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       if (self._fullRowMode) {
         self.cacheSelection({
-          from: {row: r1, col: -1},
-          to: {row: r2, col: -1}
+          from: {row: r1, col: c1},
+          to: {row: r2, col: c2}
         });
+        // We are changing the selection behavior in the case of full columns because the engine
+        // does not currently support them (i.e. 6:6). The following is how one would re-enable 
+        // full row selection in the same way as is done for columns.
+        // self.cacheSelection({
+        //   from: {row: r1, col: -1},
+        //   to: {row: r2, col: -1}
+        // });
       } else if (self._fullColumnMode) {
         self.cacheSelection({
           from: {row: -1, col: c1},

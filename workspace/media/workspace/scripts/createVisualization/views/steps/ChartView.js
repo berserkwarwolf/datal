@@ -161,9 +161,11 @@ var ChartView = StepViewSPA.extend({
 		if (valid) {
 			this.fetchPreviewData();
 			input.removeClass('has-error');
+			this.nextBtn.removeClass('enabled');
 		} else {
 			console.error(this.model.validationError);
 			input.addClass('has-error');
+			this.nextBtn.addClass('disabled');
 		}
 	},
 
@@ -175,7 +177,8 @@ var ChartView = StepViewSPA.extend({
 			$('#nullValuePreset').show();
 		}else{
 			this.fetchPreviewData();
-			$('#nullValuePreset').hide();
+			this.model.unset('nullValuePreset');
+			$('#nullValuePreset').hide().val('');
 		}
 	},
 

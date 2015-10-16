@@ -18,8 +18,7 @@ var ManageVisualizationsView = Backbone.View.extend({
 		"click #id_applyBulkActions": "runBulkAction",
 		"change #id_bulkActions": "enableApplyBulkActionsButton",
 		"click #grid input[type=checkbox]": "onInputCheckboxSelected",
-		"click #id_addNewButton": "onAddNewButtonClicked",
-		"click .actions .edit a": "onEditButtonClicked"
+		"click #id_addNewButton": "onAddNewButtonClicked"
 	},
 
 	initialize: function(options) {
@@ -178,26 +177,6 @@ var ManageVisualizationsView = Backbone.View.extend({
 	onAddNewButtonClicked: function() {
 		var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView({
 			visualizationCreationStepsUrl: this.options.visualizationCreationStepsUrl,
-		});
-	},
-
-	onEditButtonClicked: function(event){
-		var visualizationEditItemModel = new VisualizationEditItemModel({
-			sourceUrl: this.sourceUrl,
-			tagUrl: this.tagUrl,
-			id: $(event.currentTarget).data("id"),
-			url: $(event.currentTarget).data("url")
-		});
-
-		var self = this;
-
-		visualizationEditItemModel.fetch({
-			success:function(){
-				var visualizationEditItemView = new VisualizationEditItemView({
-					model: visualizationEditItemModel,
-					parentView: self
-				});
-			}
 		});
 	},
 
