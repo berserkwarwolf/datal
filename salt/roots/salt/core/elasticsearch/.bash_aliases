@@ -15,3 +15,7 @@ alias core="python manage.py runserver 0.0.0.0:3015 --settings=core.settings"
 alias core-shell="python manage.py shell --settings=core.settings"
 
 alias reindex="python manage.py index --settings=workspace.settings --re-index"
+
+alias compile-msg-core="/home/vagrant/env/bin/python /home/vagrant/app/manage.py compilemessages --settings='core.settings'"
+alias compile-msg-workspace="/home/vagrant/env/bin/python /home/vagrant/app/manage.py compilemessages --settings='workspace.settings'"
+alias compile-msg-microsites="/home/vagrant/env/bin/python /home/vagrant/app/manage.py compilemessages --settings='microsites.settings'"

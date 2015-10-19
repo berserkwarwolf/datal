@@ -89,3 +89,10 @@ Ejemplo:
 SASS: http://sass-lang.com/
 
 Documentación SASS: http://sass-lang.com/documentation/file.SASS_REFERENCE.html
+
+
+Releases
+--------
+
+
+Pude ver la información de cada release en https://github.com/datal-org/datal/releases
