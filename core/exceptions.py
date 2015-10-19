@@ -128,13 +128,13 @@ class VisualizationRequiredException(LifeCycleException):
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
-class VisualizationParentNotPuslishedException(LifeCycleException):
+class VisualizationParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED')
     tipo = 'illegal-state'
 
 
-class ParentNotPuslishedException(LifeCycleException):
+class ParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
     tipo = 'illegal-state'
