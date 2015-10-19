@@ -6,7 +6,7 @@ from django.conf import settings
 from core.daos.visualizations import VisualizationSearchDAOFactory, VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, VisualizationI18n
 from core.choices import StatusChoices, ActionStreams
-from core.exceptions import VisualizationNotFoundException, IllegalStateException, ParentNotPuslishedException
+from core.exceptions import VisualizationNotFoundException, IllegalStateException, ParentNotPuslishedException, VisualizationParentNotPuslishedException
 from .resource import AbstractLifeCycleManager
 
 logger = logging.getLogger(__name__)
@@ -327,7 +327,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )
         if parent_status != StatusChoices.PUBLISHED:
             if self.visualization_revision.visualization.datastream.last_revision.status != StatusChoices.PUBLISHED:
-                raise ParentNotPuslishedException()
+                raise VisualizationParentNotPuslishedException()
 
         self._publish_childs()
         self.visualization_revision.status = StatusChoices.PUBLISHED
