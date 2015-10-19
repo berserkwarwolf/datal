@@ -47,12 +47,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django_extensions',
     'core',
-    'addons',
     'raven.contrib.django',
     "compressor",
     "post_office",
     'djangobower',
     "rest_framework",
+    'djangoplugins',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
