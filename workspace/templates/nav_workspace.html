@@ -1,4 +1,5 @@
-{% load i18n staticfiles %}
+{% load i18n staticfiles plugins %}
+
 <nav class="main-navigation border-box collapsed">
   <ul>
 
@@ -29,26 +30,29 @@
         <span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}
       </a>
     </li>
-    
-    {% comment %}
-    <!-- Dashboards -->
-    <li>
-      <a id="id_dashboards_option" href="#" class="button primary nav-dashboards"><span class="icon icon-dashboards"></span>{% trans 'APP-DASHBOARDS-TEXT' %}</a>
-    </li>
-    {% endcomment %}
+
+    <!-- Top Nav items from plugins -->
+    {% get_plugins core.plugins.DatalPluginPoint as plugins %}
+    {% for plugin in plugins %}
+      {% if plugin.is_active and plugin.top_nav %}
+        {% autoescape off %}
+          {{ plugin.top_nav }}
+        {% endautoescape %}
+      {% endif %}
+    {% endfor %}
 
   </ul>
 
   <ul class="bottom-navigation">
-
-    {% comment %}
-    {% if 'workspace.can_access_report' in auth_manager.privileges %}
-    <!-- Reports -->
-    <li>
-      <a id="id_reports_option" href="/reports/action_query" class="button primary nav-reports"><span class="icon icon-reports"></span>{% trans 'APP-REPORTS-TEXT' %}</a>
-    </li>
-    {% endif %}
-    {% endcomment %}
+    <!-- Bottom Nav items from plugins -->
+    {% get_plugins core.plugins.DatalPluginPoint as plugins %}
+    {% for plugin in plugins %}
+      {% if plugin.is_active and plugin.bottom_nav %}
+        {% autoescape off %}
+          {{ plugin.bottom_nav }}
+        {% endautoescape %}
+      {% endif %}
+    {% endfor %}
 
     {% if 'workspace.can_access_admin' in auth_manager.privileges %}
     <!-- Settings -->
