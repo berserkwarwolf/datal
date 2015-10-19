@@ -3279,3 +3279,9 @@ msgstr "the Dashboard"
 
 msgid "APP-CHOOSE-MAP-TEXT"
 msgstr "Maps"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Invalid range"
+
+msgid "APP-INVALID-NOT-EMPTY"
+msgstr "Required"
