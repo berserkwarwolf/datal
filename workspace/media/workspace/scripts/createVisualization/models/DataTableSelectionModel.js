@@ -21,16 +21,14 @@ var DataTableSelectionModel = Backbone.Model.extend({
 
     getPreviousRange: function () {
         var prevExcelRange = this.previous('excelRange'),
-            result = null;
-        if (prevExcelRange !== '') {
+            result = undefined;
+        if (prevExcelRange !== undefined && prevExcelRange !== '') {
             try {
                 result = DataTableUtils.excelToRange(prevExcelRange);
             } catch (exception) {
-                console.log(exception);
+                console.error(exception);
             }
-            return result;
-        } else {
-            return null;
         }
+        return result;
     }
 });

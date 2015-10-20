@@ -226,22 +226,27 @@ var DataTableView = Backbone.View.extend({
 
   onChageSelected: function (model) {
     var id = model.get('id');
-    var previousRange = model.getPreviousRange();
-    if (previousRange === null) {
+    var previousRange = model.getPreviousRange(),
+      range = model.getRange(),
+      previousCells = [],
+      cells = [];
+
+    if (previousRange === undefined) {
       this._rmAllCellsMeta(id);
-      this.table.render();
-      return; 
+    } else {
+      previousCells = this.coordsToCells(previousRange);
     }
-    var previousCells = this.coordsToCells(previousRange),
-      cells;
+    this._rmCellsMeta(previousCells, id);
+
     if (!model.isValid()) {
       this._rmAllCellsMeta(id);
-      this.table.render();
-      return;
     }
-    cells = this.coordsToCells(model.getRange());
-    this._rmCellsMeta(previousCells, id);
+
+    if (range !== undefined) {
+      cells = this.coordsToCells(model.getRange());
+    }
     this._addCellsMeta(cells, id);
+
     this.table.render();
   },
 

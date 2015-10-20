@@ -9,6 +9,7 @@ var DataTableUtils = {
 
     if (parts.length !== 2) {
       //throw 'InvalidRange';
+      return;
     }
 
     var from = this.excelCellToCoords(parts[0]);
