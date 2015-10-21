@@ -1,6 +1,8 @@
+import json
+
 from rest_framework import serializers
 from rest_framework.compat import OrderedDict
-import json
+
 
 class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()
@@ -17,11 +19,10 @@ class ResourceSerializer(serializers.Serializer):
         toDict[toKey] = None
         for key in fromKeys:
             if key in fromDict:
-                toDict[toKey]=fromDict[key]
-
+                toDict[toKey] = fromDict[key]
 
     def to_representation(self, obj):
-        answer={}
+        answer = {}
 
         self.tryKeysOnDict(answer, 'guid', obj, ['guid'])
         self.tryKeysOnDict(answer, 'title', obj, ['title'])
