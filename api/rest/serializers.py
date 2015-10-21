@@ -3,6 +3,8 @@ import json
 from rest_framework import serializers
 from rest_framework.compat import OrderedDict
 
+import logging
+logger = logging.getLogger(__name__)
 
 class ResourceSerializer(serializers.Serializer):
     id = serializers.CharField()
@@ -36,8 +38,14 @@ class ResourceSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
         self.tryKeysOnDict(answer, 'result', obj, ['result'])
 
-        if 'format' in obj and obj['format'].startswith('application/json'):
-            answer['result'] = json.loads(answer['result']) 
+        logger.info("format: %s" % obj['format'])
+
+        try:
+            if 'format' in obj and obj['format'].startswith('application/json'):
+                answer['result'] = json.loads(answer['result']) 
+        except AttributeError:
+            # TODO: ver esto, plis
+            pass
 
         if answer['link']:
             domain = self.context['request'].auth['microsite_domain']
