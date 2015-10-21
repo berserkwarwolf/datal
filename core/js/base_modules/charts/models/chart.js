@@ -132,7 +132,7 @@ charts.models.Chart = Backbone.Model.extend({
         var self = this,
             filters = {};
 
-        if (this.get('type') === 'mapchart') {
+        if (this.get('type') === 'mapchart' || this.get('type') === 'trace') {
             filters = this.getMapPreviewFilters();
         } else {
             filters = this.getChartPreviewFilters();
