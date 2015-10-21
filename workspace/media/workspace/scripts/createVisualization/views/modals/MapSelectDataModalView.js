@@ -103,10 +103,13 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     validate: function () {
-        var hasLat = this.rangeLatModel.get('excelRange') !== '';
-        var hasLon = this.rangeLonModel.get('excelRange') !== '';
+        var hasLat = this.rangeLatModel.get('excelRange') !== '',
+            hasLon = this.rangeLonModel.get('excelRange') !== '',
+            validLat = this.rangeLatModel.isValid(),
+            validLon = this.rangeLonModel.isValid(),
+            validInfo = this.rangeInfoModel.isValid();
 
-        if (hasLat && hasLon) {
+        if (hasLat && hasLon && validLat && validLon && validInfo) {
             this.$('button.btn-done').removeAttr('disabled'); 
         } else {
             this.$('button.btn-done').attr('disabled', 'disabled');

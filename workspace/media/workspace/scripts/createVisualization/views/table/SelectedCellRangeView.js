@@ -73,11 +73,11 @@ var SelectedCellRangeView = Backbone.View.extend({
 		if (model.get('notEmpty')) {
 			$input.siblings('p.validation-not-empty')
 				.toggleClass('hidden', model.get('excelRange') !== '');
+			$input.toggleClass('has-error', model.get('excelRange') === '');
 		}
 
-		$input.toggleClass('has-error', !!model.validationError);
-
 		if (model.validationError === 'invalid-range') {
+			$input.toggleClass('has-error', !!model.validationError);
 			$input.siblings('p.validation-invalid-range').removeClass('hidden');
 		} else {
 			$input.siblings('p.validation-invalid-range').addClass('hidden');
