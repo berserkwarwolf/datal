@@ -5,6 +5,8 @@ from django.views.decorators.http import require_http_methods
 from core.auth.decorators import login_required
 from core.models import Source
 
+from core.exceptions import Http400
+
 
 @login_required
 @require_http_methods(["GET", "POST"])
@@ -25,6 +27,6 @@ def validate_source_url(request):
         except Source.DoesNotExist:
             name=False
     else:
-        raise Source.DoesNotExist("The template url param is wrong or empty")
+        raise Http400("The template url param is wrong or empty")
 
     return HttpResponse(json.dumps({"name":name}), content_type='application/json')
