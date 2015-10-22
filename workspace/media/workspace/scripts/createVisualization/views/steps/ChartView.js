@@ -124,7 +124,7 @@ var ChartView = StepViewSPA.extend({
 		}
 		$("#ajax_loading_overlay").hide();
 		console.log('the data for your chart has changed', this.model.data.toJSON());
-		this.optionsItemConfig.show();
+		//this.optionsItemConfig.show();
 		// TODO: should call this.chartView.render();
 		this.renderChart();
 	},
@@ -154,8 +154,19 @@ var ChartView = StepViewSPA.extend({
 
 	onInputChanged: function(e){
 		var input = $(e.currentTarget);
-		this.model.set(input.data('ref'), input.val());
-		this.fetchPreviewData();
+			value = input.val();
+
+		var valid = this.model.set(input.data('ref'), input.val(), {validate: true});
+
+		if (valid) {
+			this.fetchPreviewData();
+			input.removeClass('has-error');
+			this.nextBtn.removeClass('enabled');
+		} else {
+			console.error(this.model.validationError);
+			input.addClass('has-error');
+			this.nextBtn.addClass('disabled');
+		}
 	},
 
 	onRadioChanged: function(e){
@@ -166,7 +177,8 @@ var ChartView = StepViewSPA.extend({
 			$('#nullValuePreset').show();
 		}else{
 			this.fetchPreviewData();
-			$('#nullValuePreset').hide();
+			this.model.unset('nullValuePreset');
+			$('#nullValuePreset').hide().val('');
 		}
 	},
 
@@ -243,10 +255,12 @@ var ChartView = StepViewSPA.extend({
 					this.nextBtn.removeClass('disabled');
 					this.message.hide();
 					this.chartInstance.render();
+					this.optionsItemConfig.show();
 				} else {
 					this.nextBtn.addClass('disabled');
 					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 					this.vizContent.removeClass('dataSelected');
+					this.optionsItemConfig.hide();
 				}
 			}	else {
 				this.message.show();
@@ -254,6 +268,7 @@ var ChartView = StepViewSPA.extend({
 				this.nextBtn.addClass('disabled');
 				this.vizContent.removeClass('dataSelected');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
+				this.optionsItemConfig.hide();
 			}
 		}
 	},

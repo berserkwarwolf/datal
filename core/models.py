@@ -335,12 +335,20 @@ class DataStreamRevision(RevisionModel):
         return True if self.status == choices.StatusChoices.PENDING_REVIEW else False
 
     @staticmethod
+    def related_to_dataset(dataset):
+        """
+        traigo todas las revisiones de DataStream asociados a un dataset en particular y su DataStream
+        """
+        return DataStreamRevision.objects.filter(dataset=dataset)
+
+
+    @staticmethod
     def remove_related_to_dataset(dataset):
         """
         Elimino las revisiones de DataStream asociados a un dataset en particular y su DataStream
         """
         datastream_ids = set()
-        datastream_revisions = DataStreamRevision.objects.filter(dataset=dataset)
+        datastream_revisions = DataStreamRevision.related_to_dataset(dataset)
         for datastreamrevision in datastream_revisions:
             datastream_ids.add(datastreamrevision.id)
             datastreamrevision.delete()

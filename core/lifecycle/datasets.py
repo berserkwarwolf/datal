@@ -4,7 +4,7 @@ from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
+from core.models import DatasetRevision, Dataset, DataStream, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
@@ -271,8 +271,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
+
                 # Elimino todos las revisiones que dependen de este Dataset
-                DataStreamRevision.remove_related_to_dataset(self.dataset)
+                datastreams_revision = DataStreamRevision.related_to_dataset(self.dataset)
+                datastream_ids = []
+                for datastream_revision in datastreams_revision:
+                    datastream_ids.append(datastream_revision.id)
+                    DatastreamLifeCycleManager(self.user, datastream_revision).remove()
+                DataStream.objects.filter(pk__in=datastream_ids).delete()
 
             # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
             # completa el valor correspondiente.

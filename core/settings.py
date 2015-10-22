@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     "post_office",
     'djangobower',
     "rest_framework",
+    'djangoplugins',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

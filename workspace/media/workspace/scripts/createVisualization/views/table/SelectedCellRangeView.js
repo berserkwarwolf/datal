@@ -51,23 +51,37 @@ var SelectedCellRangeView = Backbone.View.extend({
 
 	onKeyupInput: function (event) {
 		var $target = $(event.currentTarget),
-			name = $target.attr('name');
+			name = $target.attr('name'),
 			value = $target.val(),
-			model = _.findWhere(this.models, function (model) {
-				return model.get('name') === name;
+			model = _.find(this.models, function (item) {
+				return item.get('name') === name;
 			});
-		model.set('excelRange', value, {validate: true});
-		this.showValidations();
+
+		var valid = model.set('excelRange', value);
+		this.showValidations(model);
 	},
 
 	onChangeExcelRange: function (model, value) {
 		this.$('input[name="' + model.get('name') + '"]').val(value);
-		this.showValidations();
+		this.showValidations(model);
 	},
 
-	showValidations: function () {
-		_.each(this.models, function (model) {
-			this.$('input[name="' + model.get('name') + '"]').toggleClass('has-error', !!model.validationError);
-		});
+	showValidations: function (model) {
+		var $input = this.$('input[name="' + model.get('name') + '"]');
+		model.isValid();
+
+		if (model.get('notEmpty')) {
+			$input.siblings('p.validation-not-empty')
+				.toggleClass('hidden', model.get('excelRange') !== '');
+			$input.toggleClass('has-error', model.get('excelRange') === '');
+		}
+
+		if (model.validationError === 'invalid-range') {
+			$input.toggleClass('has-error', !!model.validationError);
+			$input.siblings('p.validation-invalid-range').removeClass('hidden');
+		} else {
+			$input.siblings('p.validation-invalid-range').addClass('hidden');
+		}
+
 	}
 })

@@ -38,7 +38,7 @@ var MapView = StepViewSPA.extend({
             }
         });
 
-                //edit
+        //edit
         if(this.stateModel.get('isEdit')){
             
             this.changeMapType(this.model.get('mapType'));
@@ -162,7 +162,7 @@ var MapView = StepViewSPA.extend({
                 this.nextBtn.addClass('disabled');
                 this.vizContent.removeClass('dataSelected');
             }
-
+            $("#ajax_loading_overlay").hide();
         }
     },
 

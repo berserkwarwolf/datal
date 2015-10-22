@@ -3260,3 +3260,12 @@ msgstr "la visualización"
 
 msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
 msgstr "la colección"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Mapas"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Rango inválido"
+
+msgid "APP-INVALID-REQUIRED"
+msgstr "Requerido"

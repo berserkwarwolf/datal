@@ -879,6 +879,12 @@ msgstr "Change of status denied."
 msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
 msgstr "The change of status you are requesting is not allowed.."
 
+msgid "EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "Vizualization can't be published"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "A previous step is needed."
+
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "Resource can't be published"
 
@@ -980,3 +986,6 @@ msgstr "Add this Visualization everywhere!"
 
 msgid "OVERLAY-DSEMBED-CHART-TIP"
 msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualization"
+
+msgid "ERROR-DUPLICATED-CATEGORY"
+msgstr "Duplicated category"

@@ -361,6 +361,18 @@ charts.models.Chart = Backbone.Model.extend({
         return attr;
     },
 
+    validate: function (attrs, options) {
+        var nullValuePreset = attrs.nullValuePreset;
+
+        if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
+
+            if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
+                return 'Invalid value';
+            }
+
+        }
+    },
+
     save: function (attrs, options) {
         var data = this.getFormData();
 
@@ -376,5 +388,17 @@ charts.models.Chart = Backbone.Model.extend({
                 console.error(response);
             }
         });
+    },
+
+    remove: function (options) {
+        var opts = _.extend({url: 'remove/' + this.id}, options || {});
+
+        return Backbone.Model.prototype.destroy.call(this, opts);
+    },
+
+    remove_revision: function (options) {
+        var opts = _.extend({url: 'remove/revision/' + this.id}, options || {});
+
+        return Backbone.Model.prototype.destroy.call(this, opts);
     }
 });

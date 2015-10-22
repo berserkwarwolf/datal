@@ -11,7 +11,7 @@
 /* Zero Results */
 .zeroResults{position:absolute;height:180px;width:250px;left:50%;top:50%;margin:-110px 0 0 -125px;text-align:center;}
 .zeroResults p{color:#ccc;font-size:20px;margin-top:20px;}
-.zeroIcon{height:184px;width:100%;background-image:url(../images/common/zeroResults.png);background-repeat:no-repeat;}
+.zeroIcon{height:184px;width:100%;background-image:url(/static/workspace/images/common/zeroResults.png);background-repeat:no-repeat;}
 .zeroDatasets{background-position:50% 0;}
 .zeroDataviews{background-position:50% -184px;}
 .zeroVisualizations{background-position:50% -368px;}
@@ -20,7 +20,7 @@
 .startAdding p{float:left;font:20px "permanent_marker";text-align:right;width:340px;text-transform:uppercase;}
 .startAdding p.first{margin-top:30px;}
 .startAdding p.second{margin:-6px 0 0 15px;}
-.startAddingArrows{width:54px;height:63px;background-image:url(../images/common/startAdding.png);background-repeat:no-repeat;float:right;}
+.startAddingArrows{width:54px;height:63px;background-image:url(/static/workspace/images/common/startAdding.png);background-repeat:no-repeat;float:right;}
 
 /* Bulk Actions */
 .bulk-actions{/*display:none;*/padding-top:8px;padding-left:24px;}
@@ -82,7 +82,7 @@
 .list-container table .actions li a{line-height:18px;display:inline-block;cursor:pointer;}
 .list-container table .actions li a .icon{margin:-3px -2px 0 -7px;}
 .list-container table .actions li.review{visibility:visible;}
-.list-container table .actions li.review a{padding-left:23px;background:url(../images/common/ic_warning_orange.png) no-repeat 0 1px;}
+.list-container table .actions li.review a{padding-left:23px;background:url(/static/workspace/images/common/ic_warning_orange.png) no-repeat 0 1px;}
 .list-container table button.small{float:left;padding:0;background:none;}
 .list-container table i{font-style:normal;display:inline-block;}
 .list-container table i.type_nice.icon{display:inline;}

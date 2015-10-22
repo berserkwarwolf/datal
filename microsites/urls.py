@@ -15,6 +15,7 @@ router.register(r'maps', RestMapViewSet, base_name='maps')
 router.register(r'charts', RestChartViewSet, base_name='charts')
 
 
+
 def jsi18n(request, packages = None, domain = None):
     if not domain:
         domain = 'djangojs'

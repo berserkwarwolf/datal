@@ -10,9 +10,9 @@ var ChartSelectDataModalView = ModalView.extend({
 		//init table
 		this.collection = new DataTableSelectedCollection();
 
-        this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data'});
-        this.rangeLabelsModel = new DataTableSelectionModel({id: 2, name: 'range_labels'});
-        this.rangeHeadersModel = new DataTableSelectionModel({id: 3, name: 'range_headers'});
+        this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data', notEmpty: true});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2, name: 'range_labels', notEmpty: true});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3, name: 'range_headers', notEmpty: true});
 
         this.dataStreamModel = options.dataStreamModel;
 
@@ -110,10 +110,17 @@ var ChartSelectDataModalView = ModalView.extend({
     },
 
     validate: function () {
-        if (this.collection.length < 3) {
-            this.enableDoneBtn(true);
-        } else {
+        var hasData = this.rangeDataModel.get('excelRange') !== '',
+            hasLabels = this.rangeLabelsModel.get('excelRange') !== '',
+            hasHeaders = this.rangeHeadersModel.get('excelRange') !== '',
+            validData = this.rangeDataModel.isValid(),
+            validLabels = this.rangeLabelsModel.isValid(),
+            validHeaders = this.rangeHeadersModel.isValid();
+
+        if (hasData && hasLabels && validHeaders && validData && validLabels && validHeaders) {
             this.enableDoneBtn(false);
+        } else {
+            this.enableDoneBtn(true);
         }
     },
 
@@ -128,8 +135,8 @@ var ChartSelectDataModalView = ModalView.extend({
     setHeights: function(t){
         var self = this;
 
-        var sidebar = $('.modal').find('.sidebar'),
-            table = $('.modal').find('.table-view');
+        var sidebar =  this.$el.find('.sidebar'),
+            table =  this.$el.find('.table-view');
 
         $(window).resize(function(){
 
@@ -137,7 +144,7 @@ var ChartSelectDataModalView = ModalView.extend({
             
             var sidebarHeight =
               windowHeight
-            - parseFloat( $('.modal').find('.context-menu').height() )
+            - parseFloat(  self.$el.find('.context-menu').height() )
             - parseFloat( sidebar.parent().css('padding-top').split('px')[0] )
             - 30 // As margin bottom
             ;

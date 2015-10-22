@@ -28,6 +28,8 @@
 							<div class="hot-sel-1">
 								<span class="color"></span>
 								<input name="range_lat" type="text" />
+								<p class="validation-not-empty hidden">{% trans "APP-INVALID-REQUIRED" %}</p>
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 
@@ -36,6 +38,8 @@
 							<div class="hot-sel-2">
 								<span class="color"></span>
 								<input name="range_lon" type="text" />
+								<p class="validation-not-empty hidden">{% trans "APP-INVALID-REQUIRED" %}</p>
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 
@@ -45,6 +49,7 @@
 							<div class="hot-sel-3">
 								<span class="color"></span>
 								<input name="range_data" type="text" />
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 					</form>

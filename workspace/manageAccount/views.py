@@ -368,6 +368,13 @@ def action_create_category(request):
     if form.is_valid():
         auth_manager = request.auth_manager
         category_name = form.cleaned_data['name']
+        # check for duplicates in this account
+        duplicated = CategoryI18n.objects.filter(name=category_name, category__account__id=auth_manager.account_id)
+        if len(duplicated) > 0:
+            errors = [ugettext('ERROR-DUPLICATED-CATEGORY')]
+            response = {'status': 'error', 'messages': errors}
+            return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+
         category = Category.objects.create(account_id=auth_manager.account_id)
         categoryi18n = CategoryI18n.objects.create(
             category=category,
