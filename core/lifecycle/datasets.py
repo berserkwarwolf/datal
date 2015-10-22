@@ -31,7 +31,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
 
-        print "Despublicamos: ", killemall, " status: ", self.dataset_revision.status
         if self.dataset_revision.status not in allowed_states:
             raise IllegalStateException(
                 from_state=self.dataset_revision.status,
@@ -43,7 +42,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self._unpublish_all()
         else:
             revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
-            print "no matamos a todos: ", revcount
 
             if revcount == 1:
                 self._unpublish_all()
