@@ -32,7 +32,7 @@ var AddSourceModel = Backbone.Model.extend({
 	},
 
 	validateSourceUrl: function(value, attr, computedState) {
-		var url = '/check_source_url',
+		var url = '/source_manager/validate_source_url/',
 			data = {};
 		data[attr] = value;
 		$.ajax({
@@ -42,8 +42,8 @@ var AddSourceModel = Backbone.Model.extend({
 			dataType: 'json',
 			async: false,
 			success: function(response){
-				if(response != false){
-					return gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
+				if( response.name != false){
+					return gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response.name + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
 				}
 			}
 		});
