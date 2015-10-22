@@ -26,12 +26,12 @@ var AddSourceModel = Backbone.Model.extend({
 				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
 			},{
-				fn: 'ifSourceUrlExists'
+				fn: 'validateSourceUrl'
 			}
 		]
 	},
 
-	ifSourceUrlExists: function(value, attr, computedState) {
+	validateSourceUrl: function(value, attr, computedState) {
 		var url = '/check_source_url',
 			data = {};
 		data[attr] = value;
