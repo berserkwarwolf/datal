@@ -13,44 +13,49 @@ var MapSelectDataModalView = ModalView.extend({
         this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat', notEmpty: true});
         this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon', notEmpty: true});
         this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
+        this.rangeTraceModel = new DataTableSelectionModel({id: 4, name: 'range_trace', notEmpty: true});
 
         this.dataStreamModel = options.dataStreamModel;
 
+        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
+
+        this.on('open', this.onOpen, this);
+        this.on('close', this.onClose, this);
+
+        this.listenTo(this.model, 'change:type', this.onChangeType, this);
+
+        this.listenTo(this.collection, 'change remove reset', this.validate, this);
+
         this.selectedCellRangeView = new SelectedCellRangeView({
-            el: this.$('.selected-ranges-view'),
-            models: [
-                this.rangeLatModel,
-                this.rangeLonModel,
-                this.rangeInfoModel
-            ]
+			el: this.$('.selected-ranges-view'),
+            collection: this.collection
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
         });
-
-        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
-
-        this.on('open', function () {
-            this.selectedCellRangeView.focus();
-            this._cached_lat = this.model.get('range_lat');
-            this._cached_lon = this.model.get('range_lon');
-            this._cached_data = this.model.get('range_data');
-            this.rangeLatModel.set('excelRange', this._cached_lat);
-            this.rangeLonModel.set('excelRange', this._cached_lon);
-            this.rangeInfoModel.set('excelRange', this._cached_data);
-            this.collection.add([
-                this.rangeLatModel,
-                this.rangeLonModel,
-                this.rangeInfoModel
-                ]);
-            this.setHeights();
-            this.setAxisTitles();
-        }, this);
-
-        this.listenTo(this.collection, 'change remove reset', this.validate, this);
-
         return this;
+    },
+
+    onOpen: function () {
+        this.selectedCellRangeView.render();
+        this._cached_lat = this.model.get('range_lat');
+        this._cached_lon = this.model.get('range_lon');
+        this._cached_data = this.model.get('range_data');
+        this.rangeLatModel.set('excelRange', this._cached_lat);
+        this.rangeLonModel.set('excelRange', this._cached_lon);
+        this.rangeInfoModel.set('excelRange', this._cached_data);
+        this.setHeights();
+        this.setAxisTitles();
+    },
+
+    onChangeType: function (model, type) {
+        console.log('type changed', type, model);
+        if (type === 'mapchart') {
+            this.collection.reset([this.rangeLatModel, this.rangeLonModel, this.rangeInfoModel]);
+        } else if (type === 'trace') {
+            this.collection.reset([this.rangeTraceModel, this.rangeInfoModel]);
+        }
     },
 
     onClickDone: function (e) {
@@ -61,7 +66,6 @@ var MapSelectDataModalView = ModalView.extend({
         });
         this.close();
     },
-
 
     onClickCancel: function (e) {
         this.rangeLatModel.set('excelRange', this._cached_lat);
@@ -96,6 +100,8 @@ var MapSelectDataModalView = ModalView.extend({
             model = this.rangeLonModel;
         } else if (name === 'range_data') {
             model = this.rangeInfoModel;
+        } else if (name === 'range_trace') {
+            model = this.rangeTraceModel;
         }
         model.set(selection);
 

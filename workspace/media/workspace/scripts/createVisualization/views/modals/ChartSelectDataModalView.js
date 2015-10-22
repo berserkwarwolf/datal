@@ -18,11 +18,7 @@ var ChartSelectDataModalView = ModalView.extend({
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
-            models: [
-                this.rangeDataModel,
-                this.rangeLabelsModel,
-                this.rangeHeadersModel
-            ]
+            collection: this.collection,
         });
 
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
