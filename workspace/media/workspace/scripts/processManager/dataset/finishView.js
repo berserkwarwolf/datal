@@ -199,9 +199,7 @@ var FinishView = StepView.extend({
 	},
 
 	initSourceList: function(){
-
-		console.log(this.model.toJSON());
-
+/*
 		$('#id_sources').select2({
 			width: "100%",
 			tags: true,
@@ -213,22 +211,50 @@ var FinishView = StepView.extend({
 				delay: 250,
 				data: function (params) {
 					return {
-						term: params.term, // search term
-						page: params.page
+						term: params.term
 					};
 				},
 				processResults: function (data, page) {
 					// parse the results into the format expected by Select2.
-					// since we are using custom formatting functions we do not need to
-					// alter the remote JSON data
+					
+					var data_array = [];
+
+					for(var i=0;i<data.length;i++){
+						var obj = {
+							id: i,
+							text: data[i]
+						}
+						data_array.push(obj);
+					}
+
 					return {
-						results: data
+						results: data_array
 					};
 				},
 				cache: true
 			},
+			minimumInputLength: 3,
+			minimumResultsForSearch: 10,
+			*/
+			//language: Configuration.language,
+			//escapeMarkup: function (markup) { return markup; },
+			/*
+			formatNoMatches: function(term) {
+				// customize the no matches output
+				return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>Create</a>"
+			},
+			*/
 
 
+			/*
+			formatResult: function(term) {
+				return "<input class='form-control' id='newTerm' value='"+term+"'><a href='#' id='addNew' class='btn btn-default'>RESULT</a>"
+			},
+			*/
+
+
+			
+			//tokenSeparators: [','],
 
 
 			//tags: true,
@@ -253,15 +279,158 @@ var FinishView = StepView.extend({
 			},
 			*/
 			//createSearchChoicePosition: "bottom",
-			
 			//openOnEnter: false,
 			//escapeMarkup: function (markup) { return markup; }
-		});
+		//});
+	
+
+
+
+
+
+/*
+
+	$('#id_sources').select2({
+		width:'100%',
+		ajax: {
+			url: "https://api.github.com/search/repositories",
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					q: params.term, // search term
+					page: params.page
+				};
+			},
+			processResults: function (data, params) {
+
+				console.log(data);
+				console.log(params);	
+
+
+				// parse the results into the format expected by Select2
+				// since we are using custom formatting functions we do not need to
+				// alter the remote JSON data, except to indicate that infinite
+				// scrolling can be used
+				params.page = params.page || 1;
+
+				return {
+					results: data.items,
+					pagination: {
+						more: (params.page * 30) < data.total_count
+					}
+				};
+			},
+			cache: true
+		},
+		escapeMarkup: function (markup) { return markup; },
+		minimumInputLength: 1,
+		templateResult: function (repo) {
+			if (repo.loading) return repo.text;
+
+			var markup = '<div class="clearfix">' +
+			'<div class="col-sm-1">' +
+			'<img src="' + repo.owner.avatar_url + '" style="max-width: 100%" />' +
+			'</div>' +
+			'<div clas="col-sm-10">' +
+			'<div class="clearfix">' +
+			'<div class="col-sm-6">' + repo.full_name + '</div>' +
+			'<div class="col-sm-3"><i class="fa fa-code-fork"></i> ' + repo.forks_count + '</div>' +
+			'<div class="col-sm-2"><i class="fa fa-star"></i> ' + repo.stargazers_count + '</div>' +
+			'</div>';
+
+			if (repo.description) {
+				markup += '<div>' + repo.description + '</div>';
+			}
+
+			markup += '</div></div>';
+
+			return markup;
+		},
+		templateSelection: function (repo) {
+			return repo.full_name || repo.text;
+		}
+	});
+*/
+
+
+$('#id_sources').select2({
+		width:'100%',
+		ajax: {
+			url: this.model.get('sourceUrl'),
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					term: params.term, // search term
+					page: params.page
+				};
+			},
+			processResults: function (data, params) {
+
+				// parse the results into the format expected by Select2.
+					
+				/*
+				var data_array = [];
+
+				for(var i=0;i<data.length;i++){
+					var obj = {
+						id: i,
+						text: data[i]
+					}
+					data_array.push(obj);
+				}*/
+
+				// parse the results into the format expected by Select2
+				// since we are using custom formatting functions we do not need to
+				// alter the remote JSON data, except to indicate that infinite
+				// scrolling can be used
+				params.page = params.page || 1;
+
+				return {
+					//results: data_array,
+					results: data.items,
+					pagination: {
+						more: (params.page * 30) < data.total_count
+					}
+				};
+			},
+			cache: true
+		},
+		escapeMarkup: function (markup) { return markup; },
+		minimumInputLength: 1,
+		templateResult: function (item) {
+
+			console.log(item);
+
+			if (item.loading) return item.text;
+
+			return '<div>' + item.name + '</div>';
+		},
+		templateSelection: function (item) {
+			console.log('item');
+			console.log(item);
+			return item.name;
+		},
+		language: {
+			noResults: function() {
+				return "No sources found. <a id='id_addNewSourceButton'>Add new source</a>.";
+			}
+		},
+	});
+
+
+
+
+
 
 		$('#id_tags').select2({
 			width: "100%",
 			tags: true,			
 		});
+
+
+
 
 
 		var sourceModel = new SourceModel();
@@ -276,3 +445,208 @@ var FinishView = StepView.extend({
 	}
 
 });
+
+
+
+
+
+
+
+
+
+/*
+
+
+
+var $states = $(".js-source-states");
+var statesOptions = $states.html();
+$states.remove();
+
+$(".js-states").append(statesOptions);
+
+$("[data-fill-from]").each(function () {
+	var $this = $(this);
+
+	var codeContainer = $this.data("fill-from");
+	var $container = $(codeContainer);
+
+	var code = $.trim($container.html());
+
+	$this.text(code);
+	$this.addClass("prettyprint linenums");
+});
+
+prettyPrint();
+
+$.fn.select2.amd.require(
+		["select2/core", "select2/utils", "select2/compat/matcher"],
+		function (Select2, Utils, oldMatcher) {
+	var $basicSingle = $(".js-example-basic-single");
+	var $basicMultiple = $(".js-example-basic-multiple");
+	var $limitMultiple = $(".js-example-basic-multiple-limit");
+
+	var $dataArray = $(".js-example-data-array");
+	var $dataArraySelected = $(".js-example-data-array-selected");
+
+	var data = [{ id: 0, text: 'enhancement' }, { id: 1, text: 'bug' }, { id: 2, text: 'duplicate' }, { id: 3, text: 'invalid' }, { id: 4, text: 'wontfix' }];
+
+	var $ajax = $(".js-example-data-ajax");
+
+	var $disabledResults = $(".js-example-disabled-results");
+
+	var $tags = $(".js-example-tags");
+
+	var $matcherStart = $('.js-example-matcher-start');
+
+	var $diacritics = $(".js-example-diacritics");
+	var $language = $(".js-example-language");
+
+	$basicSingle.select2();
+	$basicMultiple.select2();
+	$limitMultiple.select2({
+		maximumSelectionLength: 2
+	});
+
+	function formatState (state) {
+		if (!state.id) {
+			return state.text;
+		}
+		var $state = $(
+			'<span>' +
+				'<img src="vendor/images/flags/' +
+					state.element.value.toLowerCase() +
+				'.png" class="img-flag" /> ' +
+				state.text +
+			'</span>'
+		);
+		return $state;
+	};
+
+	$(".js-example-templating").select2({
+		templateResult: formatState,
+		templateSelection: formatState
+	});
+
+	$dataArray.select2({
+		data: data
+	});
+
+	$dataArraySelected.select2({
+		data: data
+	});
+
+	function formatRepo (repo) {
+		if (repo.loading) return repo.text;
+
+		var markup = '<div class="clearfix">' +
+		'<div class="col-sm-1">' +
+		'<img src="' + repo.owner.avatar_url + '" style="max-width: 100%" />' +
+		'</div>' +
+		'<div clas="col-sm-10">' +
+		'<div class="clearfix">' +
+		'<div class="col-sm-6">' + repo.full_name + '</div>' +
+		'<div class="col-sm-3"><i class="fa fa-code-fork"></i> ' + repo.forks_count + '</div>' +
+		'<div class="col-sm-2"><i class="fa fa-star"></i> ' + repo.stargazers_count + '</div>' +
+		'</div>';
+
+		if (repo.description) {
+			markup += '<div>' + repo.description + '</div>';
+		}
+
+		markup += '</div></div>';
+
+		return markup;
+	}
+
+	function formatRepoSelection (repo) {
+		return repo.full_name || repo.text;
+	}
+
+	$ajax.select2({
+		ajax: {
+			url: "https://api.github.com/search/repositories",
+			dataType: 'json',
+			delay: 250,
+			data: function (params) {
+				return {
+					q: params.term, // search term
+					page: params.page
+				};
+			},
+			processResults: function (data, params) {
+				// parse the results into the format expected by Select2
+				// since we are using custom formatting functions we do not need to
+				// alter the remote JSON data, except to indicate that infinite
+				// scrolling can be used
+				params.page = params.page || 1;
+
+				return {
+					results: data.items,
+					pagination: {
+						more: (params.page * 30) < data.total_count
+					}
+				};
+			},
+			cache: true
+		},
+		escapeMarkup: function (markup) { return markup; },
+		minimumInputLength: 1,
+		templateResult: formatRepo,
+		templateSelection: formatRepoSelection
+	});
+
+	$(".js-example-disabled").select2();
+	$(".js-example-disabled-multi").select2();
+
+	$(".js-example-responsive").select2();
+
+	$disabledResults.select2();
+
+	$(".js-example-programmatic").select2();
+	$(".js-example-programmatic-multi").select2();
+
+	$eventSelect.select2();
+
+	$tags.select2({
+		tags: ['red', 'blue', 'green']
+	});
+
+	$(".js-example-tokenizer").select2({
+		tags: true,
+		tokenSeparators: [',', ' ']
+	});
+
+	function matchStart (term, text) {
+		if (text.toUpperCase().indexOf(term.toUpperCase()) == 0) {
+			return true;
+		}
+
+		return false;
+	}
+
+	$matcherStart.select2({
+		matcher: oldMatcher(matchStart)
+	});
+
+	$(".js-example-basic-hide-search").select2({
+		minimumResultsForSearch: Infinity
+	});
+
+	$diacritics.select2();
+
+	$language.select2({
+		language: "es"
+	});
+
+	$(".js-example-theme-single").select2({
+		theme: "classic"
+	});
+
+	$(".js-example-theme-multiple").select2({
+		theme: "classic"
+	});
+
+	$(".js-example-rtl").select2();
+});
+
+*/
