@@ -25,6 +25,6 @@ def validate_source_url(request):
         except Source.DoesNotExist:
             name=False
     else:
-        raise Source.DoesNotExist("debe proveer una url")
+        raise Source.DoesNotExist("The template url param is wrong or empty")
 
     return HttpResponse(json.dumps({"name":name}), content_type='application/json')
