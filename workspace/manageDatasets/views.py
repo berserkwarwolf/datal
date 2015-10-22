@@ -415,7 +415,7 @@ def change_status(request, dataset_revision_id=None):
 @login_required
 @require_privilege("workspace.can_create_datastream")
 @require_http_methods(["GET"])
-def check_source_url(request):
+def check_endpoint_url(request):
 
     mimetype_form = MimeTypeForm(request.GET)
     status = ''
