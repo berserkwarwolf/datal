@@ -31,6 +31,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
         """ Despublica la revision de un dataset """
 
+        print "Despublicamos: ", killemall, " status: ", self.dataset_revision.status
         if self.dataset_revision.status not in allowed_states:
             raise IllegalStateException(
                 from_state=self.dataset_revision.status,
@@ -42,6 +43,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self._unpublish_all()
         else:
             revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
+            print "no matamos a todos: ", revcount
 
             if revcount == 1:
                 self._unpublish_all()
@@ -55,6 +57,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
+
 
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
@@ -441,8 +444,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
 
+            # si hay un last_published_revision_id, dejamos ese como ultimo publicado
+            # además mandamos al indexador esa version que estaba publicada
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                search_dao = DatasetSearchDAOFactory().create(self.dataset.last_published_revision)
+                search_dao.add()
+
+                self._log_activity(ActionStreams.PUBLISH)
             else:
                 self.dataset.last_published_revision = None
 
