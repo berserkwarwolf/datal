@@ -96,8 +96,13 @@ var SourcesView = Backbone.View.extend({
 	},
 
 	onAddSourceButtonClicked: function(){
+
+		if( !_.isUndefined(this.addSourceView) ){
+			this.addSourceView.undelegateEvents();
+		}
+
     var addSourceModel = new AddSourceModel();
-		new AddSourceView({ model: addSourceModel, sources: this.collection });
+    this.addSourceView = new AddSourceView({ model: addSourceModel, sources: this.collection });		
 	}
 
 });

@@ -881,3 +881,6 @@ msgstr "' already has this URL."
 
 msgid "VALIDATE-SOURCENAMEALREADYEXIST-TEXT"
 msgstr "This name already exists."
+
+msgid "VALIDATE-SOURCENAMEINCOLLECTION-TEXT"
+msgstr "You already have a source with that name. Please, choose another."

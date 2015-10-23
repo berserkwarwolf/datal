@@ -13,8 +13,12 @@ var AddSourceView = Backbone.View.extend({
   	this.template = _.template( $("#id_AddNewSourceTemplate").html() );
     this.sources = this.options.sources;
 
+    this.listenTo(this.sources, 'validateAdd', this.validateNameOnAdd);
+
     // Bind model validation to view
-    Backbone.Validation.bind(this);
+    Backbone.Validation.bind(this, {
+      collection: this.sources
+    });
 
   	this.render();
   },
@@ -53,18 +57,32 @@ var AddSourceView = Backbone.View.extend({
 
   onAddNewSourceButtonClicked:function(){
 
-    var name = $('#id_name').val(),
-        url = $.trim($('#id_url_source').val());
+    var name = $.trim($('#id_name').val()),
+      url = $.trim($('#id_url_source').val());
 
     this.model.set('name', name);
     this.model.set('url', url);
     
     if(this.model.isValid(true)){
       this.sources.add(this.model.toJSON());
-      this.$el.hide();
-      this.undelegateEvents();
     }
     
+  },
+
+  validateNameOnAdd: function(error){
+    // Is valid
+    if( error == '' ){
+      this.hideForm();
+
+    // Is invalid
+    }else{
+      this.setIndividualError(this.$el.find('[name=name]'), 'name', error);
+    }
+  },
+
+  hideForm: function(){
+    this.$el.hide();
+    this.undelegateEvents();
   }
 
 });
