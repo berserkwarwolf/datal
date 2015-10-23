@@ -183,7 +183,8 @@ charts.models.Chart = Backbone.Model.extend({
                 nullValueAction: this.get('nullValueAction'),
                 data: this.serializeServerExcelRange(this.get('range_data')),
                 lat: this.serializeServerExcelRange(this.get('range_lat')),
-                lon: this.serializeServerExcelRange(this.get('range_lon'))                
+                lon: this.serializeServerExcelRange(this.get('range_lon')),
+                traces: this.serializeServerExcelRange(this.get('range_trace'))
             });
         }
 

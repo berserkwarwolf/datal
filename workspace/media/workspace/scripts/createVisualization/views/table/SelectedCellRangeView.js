@@ -1,5 +1,4 @@
 var SelectedCellRangeView = Backbone.View.extend({
-	skipFocusFlag: 0,
 
 	events: {
 		'focusin input[@type="text"]': 'onFocusInput',
@@ -48,15 +47,15 @@ var SelectedCellRangeView = Backbone.View.extend({
 			});
 
 		var valid = model.set('excelRange', value);
-		this.showValidations(model);
+		this.validate(model);
 	},
 
 	onChangeExcelRange: function (model, value) {
 		this.$('input[name="' + model.get('name') + '"]').val(value);
-		this.showValidations(model);
+		this.validate(model);
 	},
 
-	showValidations: function (model) {
+	validate: function (model) {
 		var $input = this.$('input[name="' + model.get('name') + '"]');
 		model.isValid();
 
