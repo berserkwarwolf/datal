@@ -56,6 +56,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.UNPUBLISH)
 
+
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
         # Internal used resources (optional). You could start by dataset or revision
@@ -441,8 +442,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
 
+            # si hay un last_published_revision_id, dejamos ese como ultimo publicado
+            # además mandamos al indexador esa version que estaba publicada
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                search_dao = DatasetSearchDAOFactory().create(self.dataset.last_published_revision)
+                search_dao.add()
+
+                self._log_activity(ActionStreams.PUBLISH)
             else:
                 self.dataset.last_published_revision = None
 
