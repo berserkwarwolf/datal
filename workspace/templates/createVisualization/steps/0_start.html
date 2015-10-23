@@ -57,18 +57,18 @@
     					<li>{% trans "APP-CREATE-VISUALIZATION-START-MAP-ELEMENTS-TEXT" %}
 
     						<ul class="navCreatorPicker">
-                                <li class="marker map-type" data-type="mapchart">
+                                <li class="marker map-type" data-type="mapchart" data-geotype="points">
                                     <span class="icon icon-map-marker size-48"></span>
                                     <h4>{% trans "APP-MARKERS-MAP-TEXT" %}</h4>
                                     <p>{% trans "APP-CREATE-VISUALIZATION-START-MARKERS-COMMENT-TEXT" %}</p>
                                 </li>
-    							<li class="trace map-type" data-type="trace">
+    							<li class="trace map-type" data-type="mapchart" data-geotype="traces">
                                     <span class="icon icon-map-trace size-48"></span>
                                     <h4>{% trans "APP-TRACE-MAP-TEXT" %}</h4>
                                     <p>{% trans "APP-CREATE-VISUALIZATION-START-TRACE-COMMENT-TEXT" %}</p>
     							</li>
 <!-- 
-    							<li class="geo map-type" data-type="geo">
+    							<li class="geo map-type" data-type="mapchart" data-geotypes="polygons">
                                     <span class="icon icon-map-geo size-48"></span>
                                     <h4>{% trans "APP-GEO-MAP-TEXT" %}</h4>
                                     <p>{% trans "APP-CREATE-VISUALIZATION-START-GEO-COMMENT-TEXT" %}</p>

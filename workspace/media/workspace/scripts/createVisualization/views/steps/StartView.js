@@ -30,9 +30,12 @@ var StartView = StepViewSPA.extend({
 	onChooseMap: function (e) {
 		e.stopPropagation();
 		var $target = $(e.currentTarget),
-			type = $target.data('type');
+			type = $target.data('type'),
+			geotype = $target.data('geotype');
 		this.stateModel.set('isMap', true);
+		this.stateModel.set('geotype', geotype);
 		this.model.set('type', type);
+		this.model.set('geotype', geotype);
 		this.setFlow('maps');
 		this.next();
 	},

@@ -174,7 +174,7 @@ charts.models.Chart = Backbone.Model.extend({
                 revision_id: id,
                 zoom: this.get('options').zoom,
                 bounds: (this.get('options').bounds)? this.get('options').bounds.join(';'): undefined,
-                type: this.get('type')
+                type: 'mapchart'
         };
 
         if(_.isUndefined(id)){
