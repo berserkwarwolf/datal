@@ -117,7 +117,7 @@ class EnginePreviewChartCommand(EngineCommand):
 
             # param que si o si deben viajar, sean nulos o no
             elif item[0] in ( 'pNullValueAction', 'pNullValuePreset', 'pLabelSelection',
-                              'pHeaderSelection', 'pTraceSelection', 'pLatitudSelection'
+                              'pHeaderSelection', 'pTraceSelection', 'pLatitudSelection',
                               'pLongitudSelection'):
                 new_query.append(item)
 

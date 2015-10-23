@@ -18,7 +18,9 @@ var SelectedCellRangeView = Backbone.View.extend({
 		});
 		this.$('.input-row:not(.hidden) input[type="text"]').first().focus();
 	},
+	focus: function () {
 
+	},
 	clear: function () {
 		this.$('input[type="text"]').val('');
 	},

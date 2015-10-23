@@ -23,6 +23,7 @@ var MapSelectDataModalView = ModalView.extend({
 
         this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
         this.listenTo(this.model, 'change:type', this.onChangeType, this);
+        this.listenTo(this.model, 'change:geotype', this.onChangeType, this);
         this.listenTo(this.collection, 'change remove reset', this.validate, this);
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
@@ -44,21 +45,24 @@ var MapSelectDataModalView = ModalView.extend({
         this.setAxisTitles();
     },
 
-    onChangeType: function (model, type) {
+    onChangeType: function (model, value) {
+        var type = model.get('type'),
+            geotype = model.get('geotype');
         if (type === 'mapchart') {
-            this.collection.reset([this.rangeLatModel, this.rangeLonModel, this.rangeInfoModel]);
-        } else if (type === 'trace') {
-            this.collection.reset([this.rangeTraceModel, this.rangeInfoModel]);
+            if (geotype === 'points') {
+                this.collection.reset([this.rangeLatModel, this.rangeLonModel, this.rangeInfoModel]);
+            } else if (geotype === 'traces') {
+                this.collection.reset([this.rangeTraceModel, this.rangeInfoModel]);
+            }
         }
     },
 
     onClickDone: function (e) {
-        this.model.set({
-            range_lat: this.rangeLatModel.get('excelRange'),
-            range_lon: this.rangeLonModel.get('excelRange'),
-            range_data: this.rangeInfoModel.get('excelRange'),
-            range_trace: this.rangeTraceModel.get('excelRange')
-        });
+        var result = this.collection.reduce(function (memo, m) {
+            memo[m.get('name')] = m.get('excelRange');
+            return memo;
+        }, {});
+        this.model.set(result);
         this.close();
     },
 
@@ -105,11 +109,16 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     validate: function () {
-        var type = this.model.get('type');
+        var type = this.model.get('type'),
+            geotype = this.model.get('geotype');
+
         if (type === 'mapchart') {
-            this.validateLatLon();
+            if (geotype === 'points') {
+                this.validateLatLon();
+            } else if (geotype === 'traces') {
+                this.validateTrace();
+            }
         } else if (type === 'trace') {
-            this.validateTrace();
         }
     },
 
