@@ -1,10 +1,11 @@
-var MapSelectDataModalView = ModalView.extend({
+var MapSelectDataModalView = Backbone.View.extend({
 	events: {
         'click button.btn-done':'onClickDone',
 		'click button.btn-cancel':'onClickCancel'
 	},
 
 	initialize: function(options){
+        // models
         this.collection = new DataTableSelectedCollection();
         this.dataStreamModel = options.dataStreamModel;
 
@@ -13,14 +14,18 @@ var MapSelectDataModalView = ModalView.extend({
         this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
         this.rangeTraceModel = new DataTableSelectionModel({id: 4, name: 'range_trace', notEmpty: true});
 
+        this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data', notEmpty: true});
+        this.rangeLabelsModel = new DataTableSelectionModel({id: 2, name: 'range_labels', notEmpty: true});
+        this.rangeHeadersModel = new DataTableSelectionModel({id: 3, name: 'range_headers', notEmpty: true});
+
+        // subviews
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
             collection: this.collection
         });
 
+        // events
         this.on('open', this.onOpen, this);
-        this.on('close', this.onClose, this);
-
         this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
         this.listenTo(this.model, 'change:type', this.onChangeType, this);
         this.listenTo(this.model, 'change:geotype', this.onChangeType, this);
@@ -33,14 +38,16 @@ var MapSelectDataModalView = ModalView.extend({
 
     onOpen: function () {
         this.selectedCellRangeView.render();
-        this._cached_lat = this.model.get('range_lat');
-        this._cached_lon = this.model.get('range_lon');
-        this._cached_data = this.model.get('range_data');
-        this._cached_trace = this.model.get('range_trace');
-        this.rangeLatModel.set('excelRange', this._cached_lat);
-        this.rangeLonModel.set('excelRange', this._cached_lon);
-        this.rangeInfoModel.set('excelRange', this._cached_data);
-        this.rangeTraceModel.set('excelRange', this._cached_trace);
+
+        this.rangeLatModel.set('excelRange', this.model.get('range_lat'));
+        this.rangeLonModel.set('excelRange', this.model.get('range_lon'));
+        this.rangeInfoModel.set('excelRange', this.model.get('range_data'));
+        this.rangeTraceModel.set('excelRange', this.model.get('range_trace'));
+        this.rangeDataModel.set('excelRange', this.model.get('range_data'));
+        this.rangeLabelsModel.set('excelRange', this.model.get('range_labels'));
+        this.rangeHeadersModel.set('excelRange', this.model.get('range_headers'));
+
+        this.collection.setCache();
         this.setHeights();
         this.setAxisTitles();
     },
@@ -54,6 +61,8 @@ var MapSelectDataModalView = ModalView.extend({
             } else if (geotype === 'traces') {
                 this.collection.reset([this.rangeTraceModel, this.rangeInfoModel]);
             }
+        } else {
+            this.collection.reset([this.rangeDataModel, this.rangeLabelsModel, this.rangeHeadersModel]);
         }
     },
 
@@ -67,10 +76,7 @@ var MapSelectDataModalView = ModalView.extend({
     },
 
     onClickCancel: function (e) {
-        this.rangeLatModel.set('excelRange', this._cached_lat);
-        this.rangeLonModel.set('excelRange', this._cached_lon);
-        this.rangeInfoModel.set('excelRange', this._cached_data);
-        this.rangeTraceModel.set('excelRange', this._cached_trace);
+        this.collection.revert();
         this.onClickDone();
         this.close();
     },
@@ -92,19 +98,10 @@ var MapSelectDataModalView = ModalView.extend({
 
     addSelection: function (name) {
         var selection = this.dataTableView.getSelection(),
-            model;
-
-        if (name === 'range_lat') {
-            model = this.rangeLatModel;
-        } else if (name === 'range_lon') {
-            model = this.rangeLonModel;
-        } else if (name === 'range_data') {
-            model = this.rangeInfoModel;
-        } else if (name === 'range_trace') {
-            model = this.rangeTraceModel;
-        }
+            model = this.collection.find(function (model) {
+            return model.get('name') === name;
+        });
         model.set(selection);
-
         this.validate();
     },
 
@@ -118,7 +115,8 @@ var MapSelectDataModalView = ModalView.extend({
             } else if (geotype === 'traces') {
                 this.validateTrace();
             }
-        } else if (type === 'trace') {
+        } else {
+            this.validateData();
         }
     },
 
@@ -130,9 +128,9 @@ var MapSelectDataModalView = ModalView.extend({
             validInfo = this.rangeInfoModel.isValid();
 
         if (hasLat && hasLon && validLat && validLon && validInfo) {
-            this.$('button.btn-done').removeAttr('disabled'); 
+            this.enable();
         } else {
-            this.$('button.btn-done').attr('disabled', 'disabled');
+            this.disable();
         }
     },
 
@@ -142,10 +140,33 @@ var MapSelectDataModalView = ModalView.extend({
             validInfo = this.rangeInfoModel.isValid();
 
         if (hasTrace && validTrace && validInfo) {
-            this.$('button.btn-done').removeAttr('disabled'); 
+            this.enable();
         } else {
-            this.$('button.btn-done').attr('disabled', 'disabled');
+            this.disable();
         }
+    },
+
+    validateData: function () {
+        var hasData = this.rangeDataModel.get('excelRange') !== '',
+            hasLabels = this.rangeLabelsModel.get('excelRange') !== '',
+            hasHeaders = this.rangeHeadersModel.get('excelRange') !== '',
+            validData = this.rangeDataModel.isValid(),
+            validLabels = this.rangeLabelsModel.isValid(),
+            validHeaders = this.rangeHeadersModel.isValid();
+
+        if (hasData && hasLabels && validHeaders && validData && validLabels && validHeaders) {
+            this.enable();
+        } else {
+            this.disable();
+        }
+    },
+
+    enable: function () {
+        this.$('button.btn-done').removeAttr('disabled');
+    },
+
+    disable: function () {
+        this.$('button.btn-done').attr('disabled', 'disabled');
     },
 
     setHeights: function(t){
@@ -176,5 +197,19 @@ var MapSelectDataModalView = ModalView.extend({
         var invertedAxisClass = 'invertedAxis-' + invertedAxis;
         this.$('.invertedAxisLabel').hide();
         this.$('.'+invertedAxisClass).show();
+    },
+
+    open: function(){
+        $('body').css('overflow', 'hidden');
+        $('.process-manager-modal').addClass('hidden');
+        this.$el.removeClass('hidden');
+        this.trigger('open');
+    },
+
+    close: function(){
+        $('body').css('overflow', 'auto');
+        this.$el.addClass('hidden');
+        this.trigger('close');
     }
+
 });

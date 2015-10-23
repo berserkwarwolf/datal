@@ -1,6 +1,22 @@
 var DataTableSelectedCollection = Backbone.Collection.extend({
 	model: DataTableSelectionModel,
 
+	setCache: function () {
+		this._cache = this.reduce(function (memo, m) {
+            memo[m.get('name')] = m.get('excelRange');
+            return memo;
+        }, {});
+        return this._cache;
+	},
+
+	revert: function () {
+		_.each(this._cache, function (value, key) {
+			var m = this.find(function (model) {
+				return model.get('name') === key;
+			}).set('excelRange', value);
+		}, this);
+	},
+
 	getSelectionExcelStyle: function () {
 		return _.map(this.models, function (model) {
 			return model.get('selection');

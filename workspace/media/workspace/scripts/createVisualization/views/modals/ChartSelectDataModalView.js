@@ -5,48 +5,42 @@ var ChartSelectDataModalView = ModalView.extend({
 	},
 
 	initialize: function(options){
-		var self = this;
-
-		//init table
 		this.collection = new DataTableSelectedCollection();
+        this.dataStreamModel = options.dataStreamModel;
 
         this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data', notEmpty: true});
         this.rangeLabelsModel = new DataTableSelectionModel({id: 2, name: 'range_labels', notEmpty: true});
         this.rangeHeadersModel = new DataTableSelectionModel({id: 3, name: 'range_headers', notEmpty: true});
 
-        this.dataStreamModel = options.dataStreamModel;
 
         this.selectedCellRangeView = new SelectedCellRangeView({
             el: this.$('.selected-ranges-view'),
             collection: this.collection,
         });
 
+        this.on('open', this.onOpen, this);
+        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
+
+
+        this.listenTo(this.collection, 'add change remove reset', this.validate, this);
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
         });
-
-        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
-
-        this.on('open', function () {
-            this.selectedCellRangeView.focus();
-            this._cached_range_data = this.model.get('range_data');
-            this._cached_range_labels = this.model.get('range_labels');
-            this._cached_range_headers = this.model.get('range_headers');
-            this.rangeDataModel.set('excelRange', this._cached_range_data);
-            this.rangeLabelsModel.set('excelRange', this._cached_range_labels);
-            this.rangeHeadersModel.set('excelRange', this._cached_range_headers);
-            this.collection.add([
-                this.rangeDataModel,
-                this.rangeLabelsModel,
-                this.rangeHeadersModel
-                ]);
-            this.setHeights();
-            this.setAxisTitles();
-        }, this);
-
-        this.listenTo(this.collection, 'add change remove reset', this.validate, this);
-
         return this;
+    },
+
+    onOpen: function () {
+        this.selectedCellRangeView.focus();
+        this._cached_lat = this.model.get('range_lat');
+        this._cached_lon = this.model.get('range_lon');
+        this._cached_data = this.model.get('range_data');
+        this._cached_trace = this.model.get('range_trace');
+        this.rangeLatModel.set('excelRange', this._cached_lat);
+        this.rangeLonModel.set('excelRange', this._cached_lon);
+        this.rangeInfoModel.set('excelRange', this._cached_data);
+        this.rangeTraceModel.set('excelRange', this._cached_trace);
+        this.setHeights();
+        this.setAxisTitles();
     },
 
     onClickDone: function (e) {
