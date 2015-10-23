@@ -80,3 +80,20 @@ class DefaultCoreError(Template):
         context = {"error_title": title, "error_description": description, "extras": json.dumps(extras), "auth_manager": request.auth_manager}
         ctx = Context(context)
         return super(DefaultCoreError, self).render(ctx)
+
+class DefaultAnswer(Template):
+    """ 
+    respuesta predeterminada con status (bool) + messages (list)
+    puede usar campos extras
+    """
+    
+    def __init__(self, template="defaul_answer.json"):
+        tmpl = "{%% include '%s' %%}" % template
+        super(DefaultAnswer, self).__init__(tmpl)
+
+    def render(self, status=True, messages=[], extras=[]):
+        data = {"status": status, "messages": messages, "extras": extras}
+        context = {"data": data}
+        ctx = Context(context)
+        return super(DefaultAnswer, self).render(ctx)
+    
