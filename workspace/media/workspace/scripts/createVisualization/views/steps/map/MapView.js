@@ -26,7 +26,7 @@ var MapView = StepViewSPA.extend({
 
         this.chartsFactory = new charts.ChartsFactory();
 
-        this.modalView = new MapSelectDataModalView({
+        this.modalView = new ModalView({
           el: '#MapSelectDataModal',
           model: this.model,
           dataStreamModel: options.dataStreamModel

@@ -26,6 +26,7 @@ class VisualizationImplBuilder:
         field['chart']['longitudSelection'] = self.fields['longitudSelection']
         field['chart']['traceSelection'] = self.fields['traceSelection']
         field['chart']['mapType'] = self.fields['mapType']
+        field['chart']['geoType'] = self.fields['geoType']
         field['chart']['zoom'] = self.fields['zoom']
         field['chart']['bounds'] = self.fields['bounds']
         field['chart']['is3D'] = self.fields['is3D'] if self.fields['is3D'] else 'false'
