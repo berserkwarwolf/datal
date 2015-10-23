@@ -340,8 +340,9 @@ charts.models.Chart = Backbone.Model.extend({
             settings = _.extend( settings, {
                 latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
                 longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
-                traceSelection: '',
+                traceSelection: this.serializeServerExcelRange(this.get('range_trace')),
                 mapType: this.get('mapType').toLowerCase(),
+                geoType: this.get('geoType'),
                 zoom: this.get('options').zoom,
                 bounds: this.get('options').bounds.join(';')
             });

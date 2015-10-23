@@ -28,11 +28,14 @@ var MapSelectDataModalView = Backbone.View.extend({
         this.on('open', this.onOpen, this);
         this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
         this.listenTo(this.model, 'change:type', this.onChangeType, this);
-        this.listenTo(this.model, 'change:geotype', this.onChangeType, this);
+        this.listenTo(this.model, 'change:geoType', this.onChangeType, this);
         this.listenTo(this.collection, 'change remove reset', this.validate, this);
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
             this._cacheFocusedInput = name;
         });
+
+        // initialization
+        this.onChangeType();
         return this;
     },
 
@@ -52,13 +55,13 @@ var MapSelectDataModalView = Backbone.View.extend({
         this.setAxisTitles();
     },
 
-    onChangeType: function (model, value) {
-        var type = model.get('type'),
-            geotype = model.get('geotype');
+    onChangeType: function () {
+        var type = this.model.get('type'),
+            geoType = this.model.get('geoType');
         if (type === 'mapchart') {
-            if (geotype === 'points') {
+            if (geoType === 'points') {
                 this.collection.reset([this.rangeLatModel, this.rangeLonModel, this.rangeInfoModel]);
-            } else if (geotype === 'traces') {
+            } else if (geoType === 'traces') {
                 this.collection.reset([this.rangeTraceModel, this.rangeInfoModel]);
             }
         } else {
@@ -107,12 +110,12 @@ var MapSelectDataModalView = Backbone.View.extend({
 
     validate: function () {
         var type = this.model.get('type'),
-            geotype = this.model.get('geotype');
+            geoType = this.model.get('geoType');
 
         if (type === 'mapchart') {
-            if (geotype === 'points') {
+            if (geoType === 'points') {
                 this.validateLatLon();
-            } else if (geotype === 'traces') {
+            } else if (geoType === 'traces') {
                 this.validateTrace();
             }
         } else {
