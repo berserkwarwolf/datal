@@ -167,7 +167,9 @@
         {% if visualization_revision.format.type == 'mapchart' %}
           longitudSelection: '{{ visualization_revision.chart.longitudSelection }}',
           latitudSelection: '{{ visualization_revision.chart.latitudSelection }}',
+          traceSelection: '{{ visualization_revision.chart.traceSelection }}',
           mapType: '{{ visualization_revision.chart.mapType }}',
+          geoType: '{{ visualization_revision.chart.geoType }}',
           zoom: {{ visualization_revision.chart.zoom }},
           bounds: '{{ visualization_revision.chart.bounds }}',
         {% endif %}

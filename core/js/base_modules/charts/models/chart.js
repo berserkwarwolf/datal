@@ -115,7 +115,9 @@ charts.models.Chart = Backbone.Model.extend({
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.latitudSelection),
                     range_lon: this.parseColumnFormat(res.longitudSelection),
+                    range_trace: this.parseColumnFormat(res.traceSelection),
                     mapType: res.mapType? res.mapType.toUpperCase(): undefined,
+                    geoType: res.geoType,
                     options:{
                         zoom: res.zoom,
                         bounds: res.bounds? res.bounds.split(';'): undefined,
