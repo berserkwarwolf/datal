@@ -870,3 +870,6 @@ msgstr "La fuente '"
 
 msgid "VALIDATE-SOURCEALREADYEXIST-TEXT2"
 msgstr "' ya contiene ésta URL."
+
+msgid "VALIDATE-SOURCENAMEALREADYEXIST-TEXT"
+msgstr "Este nombre ya existe."

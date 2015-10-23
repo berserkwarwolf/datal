@@ -13,6 +13,8 @@ var AddSourceModel = Backbone.Model.extend({
 			},{
 				maxLength: 40,
 				msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 40 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+			},{
+				fn: 'validateSourceName'
 			}
 		],
 		url: [
@@ -31,9 +33,10 @@ var AddSourceModel = Backbone.Model.extend({
 		]
 	},
 
-	validateSourceUrl: function(value, attr, computedState) {
-		var url = '/source_manager/validate_source_url/',
-			data = {};
+	validateSourceName: function(value, attr, computedState) {
+		var url = '/source_manager/validate_source_name/',
+			data = {},
+			msg = false;
 		data[attr] = value;
 		$.ajax({
 			url: url,
@@ -43,10 +46,32 @@ var AddSourceModel = Backbone.Model.extend({
 			async: false,
 			success: function(response){
 				if( response.name != false){
-					return gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response.name + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
+					msg = gettext( 'VALIDATE-SOURCENAMEALREADYEXIST-TEXT' );	
 				}
 			}
 		});
+		return msg;
+	},
+
+	validateSourceUrl: function(value, attr, computedState) {
+		var url = '/source_manager/validate_source_url/',
+			data = {},
+			msg = false;
+		data[attr] = value;
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: data,
+			dataType: 'json',
+			//async: false,
+			success: function(response){
+				console.log(response);
+				if( response.name != false){
+					msg =  gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response.name + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
+				}
+			}
+		});
+		return msg;
 	}
 
 });
