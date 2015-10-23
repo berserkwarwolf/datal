@@ -1,5 +1,4 @@
 var SelectedCellRangeView = Backbone.View.extend({
-	skipFocusFlag: 0,
 
 	events: {
 		'focusin input[@type="text"]': 'onFocusInput',
@@ -8,30 +7,22 @@ var SelectedCellRangeView = Backbone.View.extend({
 	},
 
 	initialize: function (options) {
-        this.models = options.models;
-
-        _.each(this.models, function (model, i) {
-        	this.listenTo(model, 'change:excelRange', this.onChangeExcelRange, this);
-        }, this);
-
+        this.listenTo(this.collection, 'change:excelRange', this.onChangeExcelRange, this);
+        this.listenTo(this.collection, 'add reset', this.render, this);
 	},
 
+	render: function  () {
+		this.$('.input-row').addClass('hidden');
+		this.collection.each(function (model) {
+			this.$('[data-name="' + model.get('name')+ '"].input-row ').removeClass('hidden');
+		});
+		this.$('.input-row:not(.hidden) input[type="text"]').first().focus();
+	},
+	focus: function () {
+
+	},
 	clear: function () {
 		this.$('input[type="text"]').val('');
-	},
-
-	focusNext: function () {
-		if (this.skipFocusFlag >= 2) return;
-		if (this.selectedInput.attr('name') === 'range_data') {
-			this.$('input[name="range_labels"]').focus();
-		} else if (this.selectedInput.attr('name') === 'range_labels') {
-			this.$('input[name="range_headers"]').focus();
-		}
-		this.skipFocusFlag += 1;
-	},
-
-	focus: function  () {
-		this.$('input[type="text"]').first().focus();
 	},
 
 	onFocusInput: function (event) {
@@ -53,20 +44,20 @@ var SelectedCellRangeView = Backbone.View.extend({
 		var $target = $(event.currentTarget),
 			name = $target.attr('name'),
 			value = $target.val(),
-			model = _.find(this.models, function (item) {
-				return item.get('name') === name;
+			model = this.collection.find(function (model) {
+				return model.get('name') === name;
 			});
 
 		var valid = model.set('excelRange', value);
-		this.showValidations(model);
+		this.validate(model);
 	},
 
 	onChangeExcelRange: function (model, value) {
 		this.$('input[name="' + model.get('name') + '"]').val(value);
-		this.showValidations(model);
+		this.validate(model);
 	},
 
-	showValidations: function (model) {
+	validate: function (model) {
 		var $input = this.$('input[name="' + model.get('name') + '"]');
 		model.isValid();
 
@@ -77,9 +68,10 @@ var SelectedCellRangeView = Backbone.View.extend({
 		}
 
 		if (model.validationError === 'invalid-range') {
-			$input.toggleClass('has-error', !!model.validationError);
+			$input.addClass('has-error');
 			$input.siblings('p.validation-invalid-range').removeClass('hidden');
 		} else {
+			$input.removeClass('has-error');
 			$input.siblings('p.validation-invalid-range').addClass('hidden');
 		}
 

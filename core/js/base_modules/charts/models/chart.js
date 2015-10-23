@@ -6,7 +6,6 @@ var charts = charts || {
 charts.models.Chart = Backbone.Model.extend({
     urlRoot: '/api/charts/',
     defaults: {
-        type: 'linechart',
         lib: 'google',
 
         showLegend: true,
@@ -116,7 +115,9 @@ charts.models.Chart = Backbone.Model.extend({
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.latitudSelection),
                     range_lon: this.parseColumnFormat(res.longitudSelection),
+                    range_trace: this.parseColumnFormat(res.traceSelection),
                     mapType: res.mapType? res.mapType.toUpperCase(): undefined,
+                    geoType: res.geoType,
                     options:{
                         zoom: res.zoom,
                         bounds: res.bounds? res.bounds.split(';'): undefined,
@@ -132,7 +133,7 @@ charts.models.Chart = Backbone.Model.extend({
         var self = this,
             filters = {};
 
-        if (this.get('type') === 'mapchart') {
+        if (this.get('type') === 'mapchart' || this.get('type') === 'trace') {
             filters = this.getMapPreviewFilters();
         } else {
             filters = this.getChartPreviewFilters();
@@ -174,7 +175,7 @@ charts.models.Chart = Backbone.Model.extend({
                 revision_id: id,
                 zoom: this.get('options').zoom,
                 bounds: (this.get('options').bounds)? this.get('options').bounds.join(';'): undefined,
-                type: this.get('type')
+                type: 'mapchart'
         };
 
         if(_.isUndefined(id)){
@@ -183,7 +184,8 @@ charts.models.Chart = Backbone.Model.extend({
                 nullValueAction: this.get('nullValueAction'),
                 data: this.serializeServerExcelRange(this.get('range_data')),
                 lat: this.serializeServerExcelRange(this.get('range_lat')),
-                lon: this.serializeServerExcelRange(this.get('range_lon'))                
+                lon: this.serializeServerExcelRange(this.get('range_lon')),
+                traces: this.serializeServerExcelRange(this.get('range_trace'))
             });
         }
 
@@ -340,8 +342,9 @@ charts.models.Chart = Backbone.Model.extend({
             settings = _.extend( settings, {
                 latitudSelection: this.serializeServerExcelRange(this.get('range_lat')),
                 longitudSelection: this.serializeServerExcelRange(this.get('range_lon')),
-                traceSelection: '',
+                traceSelection: this.serializeServerExcelRange(this.get('range_trace')),
                 mapType: this.get('mapType').toLowerCase(),
+                geoType: this.get('geoType'),
                 zoom: this.get('options').zoom,
                 bounds: this.get('options').bounds.join(';')
             });
