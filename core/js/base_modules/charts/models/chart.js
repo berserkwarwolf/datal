@@ -22,12 +22,12 @@ charts.models.Chart = Backbone.Model.extend({
         message: '',
 
         //metadata
-        meta_title: undefined,
-        meta_description: undefined,
-        meta_notes: undefined,
-        meta_category: undefined,
-        meta_sources: undefined,
-        meta_tags: undefined,
+        title: undefined,
+        description: undefined,
+        notes: undefined,
+        datastream_category: undefined,
+        datastream_sources: undefined,
+        datastream_tags: undefined,
 
         //data selection
         range_headers: undefined,
@@ -74,9 +74,9 @@ charts.models.Chart = Backbone.Model.extend({
     parse: function (res) {
         var data = {
             datastream_revision_id: res.datastream_revision_id,
-            meta_tags:  res.datastream_tags,
-            meta_sources: res.datastream_sources,
-            meta_category: res.datastream_category
+            datastream_tags:  res.datastream_tags,
+            datastream_sources: res.datastream_sources,
+            datastream_category: res.datastream_category
         };
 
         _.extend(data, _.pick(res, [
@@ -92,35 +92,35 @@ charts.models.Chart = Backbone.Model.extend({
         if(res.revision_id){
             data = _.extend(data,{
                 select_data:true,
-                meta_notes: _.unescape(res.notes),
-                meta_title: res.title,
-                meta_description: res.description,
+                notes: _.unescape(res.notes),
+                title: res.title,
+                description: res.description,
 
                 //config
-                showLegend: true,
+                showLegend: res.showLegend,
 
                 invertData: (res.invertData=='checked'),
                 invertedAxis: (res.invertedAxis=='checked'),
 
                 //data
                 range_data: this.parseColumnFormat(res.data),
-                range_headers: this.parseColumnFormat(res.headerSelection),
-                range_labels: this.parseColumnFormat(res.labelSelection),
+                range_headers: this.parseColumnFormat(res.chart.headerSelection),
+                range_labels: this.parseColumnFormat(res.chart.labelSelection),
 
-                range_lat: this.parseColumnFormat(res.latitudSelection),
-                range_lon: this.parseColumnFormat(res.longitudSelection)
+                range_lat: this.parseColumnFormat(res.chart.latitudSelection),
+                range_lon: this.parseColumnFormat(res.chart.longitudSelection)
 
             });
             if (res.type === 'mapchart') {
                 data = _.extend(data,{
-                    range_lat: this.parseColumnFormat(res.latitudSelection),
-                    range_lon: this.parseColumnFormat(res.longitudSelection),
-                    range_trace: this.parseColumnFormat(res.traceSelection),
-                    mapType: res.mapType? res.mapType.toUpperCase(): undefined,
-                    geoType: res.geoType,
+                    range_lat: this.parseColumnFormat(res.chart.latitudSelection),
+                    range_lon: this.parseColumnFormat(res.chart.longitudSelection),
+                    range_trace: this.parseColumnFormat(res.chart.traceSelection),
+                    mapType: res.chart.mapType? res.chart.mapType.toUpperCase(): undefined,
+                    geoType: res.chart.geoType,
                     options:{
-                        zoom: res.zoom,
-                        bounds: res.bounds? res.bounds.split(';'): undefined,
+                        zoom: res.chart.zoom,
+                        bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
                         center: {lat: 0, long: 0}
                     }
                 });
@@ -211,22 +211,6 @@ charts.models.Chart = Backbone.Model.extend({
         return this.data.fetch();
     },
 
-    getFormData: function(){
-        var formData = this.getMeta();
-        _.extend(formData, this.getSettings());
-        return formData;
-    },
-
-    getMeta: function(){
-        var metadata = {
-            title: this.get('meta_title'),
-            description: this.get('meta_description'),
-            notes: this.get('meta_notes'),
-        };
-
-        return metadata;
-    },
-
     serializeServerExcelRange: function(selection){
         if (_.isUndefined(selection)) return '';
         var range = selection.split(":");
@@ -311,10 +295,10 @@ charts.models.Chart = Backbone.Model.extend({
 
     validateMetadata: function(){
         var validation = {
-            valid: (  !_.isEmpty(this.get('meta_title')) &&  !_.isEmpty(this.get('meta_description'))  ),
+            valid: (  !_.isEmpty(this.get('title')) &&  !_.isEmpty(this.get('description'))  ),
             fields:{
-                'title':  _.isEmpty(this.get('meta_title')),
-                'description':  _.isEmpty(this.get('meta_description'))
+                'title':  _.isEmpty(this.get('title')),
+                'description':  _.isEmpty(this.get('description'))
             }
         }
         return validation
@@ -322,6 +306,10 @@ charts.models.Chart = Backbone.Model.extend({
 
     getSettings: function(){
         var settings = {
+            title: this.get('title'),
+            description: this.get('description'),
+            notes: this.get('notes'),
+
             type: this.get('type'),
             lib: this.get('lib'),
             showLegend: this.get('showLegend'),
@@ -377,7 +365,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     save: function (attrs, options) {
-        var data = this.getFormData();
+        var data = this.getSettings();
 
         return $.ajax({
             type:'POST',
