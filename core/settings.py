@@ -24,8 +24,9 @@ DATABASES = {
 }
 
 USE_DATASTORE = 's3' # uses s3 | sftp
-USE_SEARCHINDEX = 'searchify'
 USE_SEARCHINDEX = 'elasticsearch'
+
+PAGINATION_RESULTS_PER_PAGE = 10
 
 TIME_ZONE = 'America/Santiago'
 
