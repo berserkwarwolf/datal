@@ -97,30 +97,30 @@ charts.models.Chart = Backbone.Model.extend({
                 description: res.description,
 
                 //config
-                showLegend: true,
+                showLegend: res.showLegend,
 
                 invertData: (res.invertData=='checked'),
                 invertedAxis: (res.invertedAxis=='checked'),
 
                 //data
                 range_data: this.parseColumnFormat(res.data),
-                range_headers: this.parseColumnFormat(res.headerSelection),
-                range_labels: this.parseColumnFormat(res.labelSelection),
+                range_headers: this.parseColumnFormat(res.chart.headerSelection),
+                range_labels: this.parseColumnFormat(res.chart.labelSelection),
 
-                range_lat: this.parseColumnFormat(res.latitudSelection),
-                range_lon: this.parseColumnFormat(res.longitudSelection)
+                range_lat: this.parseColumnFormat(res.chart.latitudSelection),
+                range_lon: this.parseColumnFormat(res.chart.longitudSelection)
 
             });
             if (res.type === 'mapchart') {
                 data = _.extend(data,{
-                    range_lat: this.parseColumnFormat(res.latitudSelection),
-                    range_lon: this.parseColumnFormat(res.longitudSelection),
-                    range_trace: this.parseColumnFormat(res.traceSelection),
-                    mapType: res.mapType? res.mapType.toUpperCase(): undefined,
-                    geoType: res.geoType,
+                    range_lat: this.parseColumnFormat(res.chart.latitudSelection),
+                    range_lon: this.parseColumnFormat(res.chart.longitudSelection),
+                    range_trace: this.parseColumnFormat(res.chart.traceSelection),
+                    mapType: res.chart.mapType? res.chart.mapType.toUpperCase(): undefined,
+                    geoType: res.chart.geoType,
                     options:{
-                        zoom: res.zoom,
-                        bounds: res.bounds? res.bounds.split(';'): undefined,
+                        zoom: res.chart.zoom,
+                        bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
                         center: {lat: 0, long: 0}
                     }
                 });
