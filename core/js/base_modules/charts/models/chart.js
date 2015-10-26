@@ -22,9 +22,9 @@ charts.models.Chart = Backbone.Model.extend({
         message: '',
 
         //metadata
-        meta_title: undefined,
-        meta_description: undefined,
-        meta_notes: undefined,
+        title: undefined,
+        description: undefined,
+        notes: undefined,
         meta_category: undefined,
         meta_sources: undefined,
         meta_tags: undefined,
@@ -92,9 +92,9 @@ charts.models.Chart = Backbone.Model.extend({
         if(res.revision_id){
             data = _.extend(data,{
                 select_data:true,
-                meta_notes: _.unescape(res.notes),
-                meta_title: res.title,
-                meta_description: res.description,
+                notes: _.unescape(res.notes),
+                title: res.title,
+                description: res.description,
 
                 //config
                 showLegend: true,
@@ -211,22 +211,6 @@ charts.models.Chart = Backbone.Model.extend({
         return this.data.fetch();
     },
 
-    getFormData: function(){
-        var formData = this.getMeta();
-        _.extend(formData, this.getSettings());
-        return formData;
-    },
-
-    getMeta: function(){
-        var metadata = {
-            title: this.get('meta_title'),
-            description: this.get('meta_description'),
-            notes: this.get('meta_notes'),
-        };
-
-        return metadata;
-    },
-
     serializeServerExcelRange: function(selection){
         if (_.isUndefined(selection)) return '';
         var range = selection.split(":");
@@ -311,10 +295,10 @@ charts.models.Chart = Backbone.Model.extend({
 
     validateMetadata: function(){
         var validation = {
-            valid: (  !_.isEmpty(this.get('meta_title')) &&  !_.isEmpty(this.get('meta_description'))  ),
+            valid: (  !_.isEmpty(this.get('title')) &&  !_.isEmpty(this.get('description'))  ),
             fields:{
-                'title':  _.isEmpty(this.get('meta_title')),
-                'description':  _.isEmpty(this.get('meta_description'))
+                'title':  _.isEmpty(this.get('title')),
+                'description':  _.isEmpty(this.get('description'))
             }
         }
         return validation
@@ -322,6 +306,10 @@ charts.models.Chart = Backbone.Model.extend({
 
     getSettings: function(){
         var settings = {
+            title: this.get('title'),
+            description: this.get('description'),
+            notes: this.get('notes'),
+
             type: this.get('type'),
             lib: this.get('lib'),
             showLegend: this.get('showLegend'),
@@ -377,7 +365,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     save: function (attrs, options) {
-        var data = this.getFormData();
+        var data = this.getSettings();
 
         return $.ajax({
             type:'POST',

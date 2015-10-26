@@ -10,10 +10,10 @@ var MetadataView = StepViewSPA.extend({
 	},
 
 	bindings: {
-		"input.title": 			"value:meta_title,		events:['keyup']",
-		"input.description": 	"value:meta_description,events:['keyup']",
+		"input.title": 			"value:title,		events:['keyup']",
+		"input.description": 	"value:description,events:['keyup']",
 		"select.category": 		"value:meta_category,	events:['change']",
-		//"textarea.notes": 		"value:meta_notes,		events:['keyup']"
+		//"textarea.notes": 		"value:notes,		events:['keyup']"
 	},
 
 	onPreviousButtonClicked: function(e){
@@ -32,7 +32,7 @@ var MetadataView = StepViewSPA.extend({
 				notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
 		}
 
-		this.model.set('meta_notes',notes);
+		this.model.set('notes',notes);
 
 		var validation = this.model.validateMetadata();
 		if( validation.valid ){
@@ -55,8 +55,8 @@ var MetadataView = StepViewSPA.extend({
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
 
-		if(this.model.get('meta_notes')){
-			this.notesInstance.instanceById('id_notes').setContent(this.model.get('meta_notes'));
+		if(this.model.get('notes')){
+			this.notesInstance.instanceById('id_notes').setContent(this.model.get('notes'));
 		}
 
     },
