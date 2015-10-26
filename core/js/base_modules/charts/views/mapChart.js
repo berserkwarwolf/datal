@@ -183,9 +183,9 @@ charts.views.MapChart = charts.views.Chart.extend({
         });
     },
 
-    createMapPolyline: function (paths, styles) {
+    createMapPolyline: function (path, styles) {
         return new google.maps.Polyline({
-            paths: paths,
+            path: path,
             strokeColor: styles.strokeColor,
             strokeOpacity: styles.strokeOpacity,
             strokeWeight: styles.strokeWeight

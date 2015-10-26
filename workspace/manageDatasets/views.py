@@ -16,6 +16,7 @@ from core.exceptions import DatasetSaveException
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
+from core.templates import DefaultAnswer
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
 from core.daos.visualizations import VisualizationDBDAO
@@ -181,19 +182,19 @@ def remove(request, dataset_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-
+        
+        response = DefaultAnswer().render(status=True, 
+                               messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')], 
+                               extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
+        return HttpResponse(response, mimetype="application/json")
+        
     else:
         lifecycle.remove(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
+
+        response = DefaultAnswer().render(status=True, 
+                               messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')], 
+                               extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
+        return HttpResponse(response, mimetype="application/json")
 
 
 @login_required

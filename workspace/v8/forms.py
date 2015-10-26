@@ -61,9 +61,9 @@ class VisualizationPreviewForm(VisualizationRequestForm):
     
 class VisualizationPreviewMapForm(VisualizationPreviewForm):
     # pLatitudSelection:  Rango para la seleccion de las latitudes de los puntos del mapa
-    lat = forms.CharField(required=True)
+    lat = forms.CharField(required=False)
     # pLongitudSelection Rango para la seleccion de las longitudes de los puntos del mapa
-    lon = forms.CharField(required=True)
+    lon = forms.CharField(required=False)
     # pTraceSelection: Rango para la seleccion de los trazos del mapa   
     traces = forms.CharField(required=False)
     # pType
