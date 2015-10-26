@@ -11,24 +11,66 @@
     </li>
 
     <!-- Datasets -->
-    <li>
+    <li class="has-submenu not-current-submenu">
       <a id="id_datasets_option" href="{% url 'manageDatasets.index' %}" class="button primary nav-datasets">
         <span class="icon icon-datasets"></span>{% trans 'APP-DATASETS-TEXT' %}
       </a>
+      <ul class="submenu">
+        <li class="submenu-header"><a>{% trans 'APP-DATASETS-TEXT' %}</a></li>
+        <li>
+          <a title="Lista">
+            <span class="icon icon-list-all-xs"></span>
+            Lista
+          </a>
+        </li>
+        <li>
+          <a title="{% trans 'APP-ADDNEWDATASET-TEXT' %}">
+            <span class="icon icon-add-xs"></span>
+            {% trans 'APP-ADDNEWDATASET-TEXT' %}
+          </a>
+          <ul>
+            <li><a>Desde archivo</a></li>
+            <li><a>Desde URL o sitio web</a></li>
+            <li><a>Desde servicio web</a></li>
+          </ul>
+        </li>
+      </ul>
     </li>
 
     <!-- Data Views -->
-    <li>
-        <a id="id_dataviews_option" href="{% url 'manageDataviews.index' %}" class="button primary nav-dataviews ">
-          <span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}
-        </a>
+    <li class="has-submenu has-current-submenu">
+      <a id="id_dataviews_option" href="{% url 'manageDataviews.index' %}" class="button primary nav-dataviews ">
+        <span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}
+      </a>
+      <ul class="submenu">
+        <li class="submenu-header">
+          <a>{% trans 'APP-DATAVIEWS-TEXT' %}</a>
+        </li>
+        <li>
+          <a title="Lista">
+            <span class="icon icon-list-all-xs"></span>
+            Lista
+          </a>
+        </li>
+        <li>
+          <a title="{% trans 'APP-ADDNEWDATAVIEW-TEXT' %}">
+            <span class="icon icon-add-xs"></span>
+            {% trans 'APP-ADDNEWDATAVIEW-TEXT' %}
+          </a>
+        </li>
+      </ul>
     </li>
 
     <!-- Visualizations -->
-    <li>
+    <li class="has-submenu not-current-submenu">
       <a id="id_visualizations_option" href="{% url 'manageVisualizations.index' %}" class="button primary nav-visualizations">
         <span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}
       </a>
+      <ul class="submenu">
+        <li class="submenu-header"><a>{% trans 'APP-VISUALIZATIONS-TEXT' %}</a></li>
+        <li><a>Lista</a></li>
+        <li><a>{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}</a></li>
+      </ul>
     </li>
 
     <!-- Top Nav items from plugins -->
@@ -56,8 +98,18 @@
 
     {% if 'workspace.can_access_admin' in auth_manager.privileges %}
     <!-- Settings -->
-    <li>
+    <li class="has-submenu not-current-submenu bottom-submenu">
       <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
+      <ul class="submenu">
+        <li class="submenu-header"><a>{% trans 'APP-SETTINGS-TEXT' %}</a></li>
+        <li><a>{% trans 'ACCOUNT-ACCOUNTINFORMATION-TEXT' %}</a></li>
+        <li><a>{% trans 'ACCOUNT-USERS-TAB' %}</a></li>
+        <li><a>{% trans 'APP-BRANDING-TEXT' %}</a></li>
+        <li><a>{% trans 'APP-SOCIAL-TEXT' %}</a></li>
+        <li><a>{% trans 'ACCOUNT-DOMAINSETTINGS-TAB' %}</a></li>
+        <li><a>{% trans 'ACCOUNT-CATEGORIES-TAB' %}</a></li>
+        <li><a>{% trans 'ACCOUNT-HOME-TAB' %}</a></li>
+      </ul>
     </li>
     {% endif %}
 

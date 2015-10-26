@@ -251,36 +251,123 @@ body{background:$color-base;height:100%;min-width:998px;}
 
 }
 
-/* Main Nav */
-.main-navigation{padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
-  li{@include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));
-    & > a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
+/* Local nav */
+.main-navigation{
+  padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
+  
+  /* Default local nav */
+  ul{
 
-      /* Hover */
-      &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
+    /* Default nav item */
+    li{
+      @include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));position:relative;
+      
+      a.button{
+        display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
 
-      /* Active */
-      &.active,
-      &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
+        /* Hover */
+        &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
 
-      /* Erase button active state */
-      &:active{@include box-shadow(0 0 0 transparent);}
+        /* Active */
+        &.active,
+        &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
 
-      /* Disabled */
-      &.disabled{@include opacity(30);cursor:default;
-        &:hover{background:none;}
+        /* Erase button active state */
+        &:active{@include box-shadow(0 0 0 transparent);}
+
+        /* Disabled */
+        &.disabled{@include opacity(30);cursor:default;
+          &:hover{background:none;}
+        }
+
       }
+    }
 
+    /* If has submenu */
+    li.has-submenu{
+      ul.submenu{
+        display:none;background:$nav-secondary-bg;padding:10px 0;
+
+        @include media-query(min-width, $break-lg) {
+          padding:10px 0 10px 55px;
+        }
+
+        li{
+          @include box-shadow(0 0 0 transparent);
+
+          a{
+            display:block;padding:10px 0;color:$nav-secondary-text;
+            &:hover{color:$nav-hover-text;}
+
+            span.icon{
+              top:5px;
+              @include media-query(min-width, $break-lg) {
+                display:none;
+              }
+            }
+          }
+
+          ul{padding-left:20px;}
+        }
+
+        li.submenu-header{
+          @include media-query(min-width, $break-lg) {
+            display:none;
+          }
+          a{color:$nav-text;font-size:$font-size-m;}
+        }
+      }
+    }
+
+    /* If is current submenu */
+    li.has-current-submenu{
+      ul.submenu{
+        display:block;
+        li.submenu-header{display:none;}
+      }
+    }
+
+    /* If not current submenu */
+    li.not-current-submenu{
+      &:hover ul.submenu{
+        display:block;position:absolute;width:145px;top:-1px;left:54px;padding:10px 20px;
+
+        @include media-query(min-width, $break-lg) {
+          left:200px;
+        }
+        
+        li{
+          a{
+            text-indent:0;
+            span.icon{
+                display:none;
+              }
+          }
+        }
+      }
+    }
+    
+    /* If is bottom submenu */
+    li.bottom-submenu{
+      &:hover ul.submenu{top:inherit;bottom:-1px;}
     }
   }
-  ul.bottom-navigation{position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,.4);
+
+  /* Bottom local nav */
+  ul.bottom-navigation{
+    position:absolute;bottom:0;left:0;width:100%;
+    
     li{@include box-shadow(inset 0 1px 0 0 rgba(255,255,255,.1));}
-    .footer{color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
-      & > a{color:rgba(255,255,255,.7);
+
+    li.footer{
+      color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
+      
+      a{color:rgba(255,255,255,.7);
         &:hover{color:#fff}
       }
     }
   }
+
 }
 
 /* Collapsed Navigation */
