@@ -63,7 +63,7 @@ var AddSourceModel = Backbone.Model.extend({
 			type: 'POST',
 			data: data,
 			dataType: 'json',
-			//async: false,
+			async: false,
 			success: function(response){
 				if( response.name != false){
 					msg =  gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response.name + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
