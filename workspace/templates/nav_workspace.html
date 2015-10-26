@@ -34,9 +34,9 @@
     <!-- Top Nav items from plugins -->
     {% get_plugins core.plugins.DatalPluginPoint as plugins %}
     {% for plugin in plugins %}
-      {% if plugin.is_active and plugin.top_nav %}
+      {% if plugin.is_active and plugin.workspace_top_nav %}
         {% autoescape off %}
-          {{ plugin.top_nav }}
+          {{ plugin.workspace_top_nav }}
         {% endautoescape %}
       {% endif %}
     {% endfor %}
@@ -47,9 +47,9 @@
     <!-- Bottom Nav items from plugins -->
     {% get_plugins core.plugins.DatalPluginPoint as plugins %}
     {% for plugin in plugins %}
-      {% if plugin.is_active and plugin.bottom_nav %}
+      {% if plugin.is_active and plugin.workspace_bottom_nav %}
         {% autoescape off %}
-          {{ plugin.bottom_nav }}
+          {{ plugin.workspace_bottom_nav }}
         {% endautoescape %}
       {% endif %}
     {% endfor %}
