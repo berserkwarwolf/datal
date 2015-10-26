@@ -12,7 +12,7 @@ var MetadataView = StepViewSPA.extend({
 	bindings: {
 		"input.title": 			"value:title,		events:['keyup']",
 		"input.description": 	"value:description,events:['keyup']",
-		"select.category": 		"value:meta_category,	events:['change']",
+		"select.category": 		"value:datastream_category,	events:['change']",
 		//"textarea.notes": 		"value:notes,		events:['keyup']"
 	},
 

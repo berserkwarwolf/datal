@@ -25,9 +25,9 @@ charts.models.Chart = Backbone.Model.extend({
         title: undefined,
         description: undefined,
         notes: undefined,
-        meta_category: undefined,
-        meta_sources: undefined,
-        meta_tags: undefined,
+        datastream_category: undefined,
+        datastream_sources: undefined,
+        datastream_tags: undefined,
 
         //data selection
         range_headers: undefined,
@@ -74,9 +74,9 @@ charts.models.Chart = Backbone.Model.extend({
     parse: function (res) {
         var data = {
             datastream_revision_id: res.datastream_revision_id,
-            meta_tags:  res.datastream_tags,
-            meta_sources: res.datastream_sources,
-            meta_category: res.datastream_category
+            datastream_tags:  res.datastream_tags,
+            datastream_sources: res.datastream_sources,
+            datastream_category: res.datastream_category
         };
 
         _.extend(data, _.pick(res, [
