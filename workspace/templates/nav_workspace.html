@@ -16,9 +16,11 @@
         <span class="icon icon-datasets"></span>{% trans 'APP-DATASETS-TEXT' %}
       </a>
       <ul class="submenu">
-        <li class="submenu-header"><a>{% trans 'APP-DATASETS-TEXT' %}</a></li>
+        <li class="submenu-header">
+          <a href="{% url 'manageDatasets.index' %}">{% trans 'APP-DATASETS-TEXT' %}</a>
+        </li>
         <li>
-          <a title="Lista">Listado</a>
+          <a href="{% url 'manageDatasets.index' %}" title="Lista">Listado</a>
         </li>
         <li>
           <a class="no-link">Nuevo</a>
@@ -38,10 +40,10 @@
       </a>
       <ul class="submenu">
         <li class="submenu-header">
-          <a>{% trans 'APP-DATAVIEWS-TEXT' %}</a>
+          <a href="{% url 'manageDataviews.index' %}">{% trans 'APP-DATAVIEWS-TEXT' %}</a>
         </li>
         <li>
-          <a title="Lista">Listado</a>
+          <a href="{% url 'manageDataviews.index' %}" title="Lista">Listado</a>
         </li>
         <li>
           <a title="{% trans 'APP-ADDNEWDATAVIEW-TEXT' %}">Nueva</a>
@@ -55,9 +57,9 @@
         <span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}
       </a>
       <ul class="submenu">
-        <li class="submenu-header"><a>{% trans 'APP-VISUALIZATIONS-TEXT' %}</a></li>
+        <li class="submenu-header"><a href="{% url 'manageVisualizations.index' %}">{% trans 'APP-VISUALIZATIONS-TEXT' %}</a></li>
         <li>
-          <a title="Lista">Listado</a>
+          <a href="{% url 'manageVisualizations.index' %}" title="Lista">Listado</a>
         </li>
         <li>
           <a title="{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}">Nueva</a>
@@ -93,14 +95,14 @@
     <li id="id_settings_option" class="has-submenu bottom-submenu">
       <a href="{% url 'admin_manager.action_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
       <ul class="submenu">
-        <li class="submenu-header"><a>{% trans 'APP-SETTINGS-TEXT' %}</a></li>
-        <li><a>{% trans 'ACCOUNT-ACCOUNTINFORMATION-TEXT' %}</a></li>
-        <li><a>{% trans 'ACCOUNT-USERS-TAB' %}</a></li>
-        <li><a>{% trans 'APP-BRANDING-TEXT' %}</a></li>
-        <li><a>{% trans 'APP-SOCIAL-TEXT' %}</a></li>
-        <li><a>{% trans 'ACCOUNT-DOMAINSETTINGS-TAB' %}</a></li>
-        <li><a>{% trans 'ACCOUNT-CATEGORIES-TAB' %}</a></li>
-        <li><a>{% trans 'ACCOUNT-HOME-TAB' %}</a></li>
+        <li class="submenu-header"><a href="{% url 'admin_manager.action_info' %}">{% trans 'APP-SETTINGS-TEXT' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_info' %}">{% trans 'ACCOUNT-ACCOUNTINFORMATION-TEXT' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_users' %}">{% trans 'ACCOUNT-USERS-TAB' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_branding' %}">{% trans 'APP-BRANDING-TEXT' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_social' %}">{% trans 'APP-SOCIAL-TEXT' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_domain' %}">{% trans 'ACCOUNT-DOMAINSETTINGS-TAB' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_categories' %}">{% trans 'ACCOUNT-CATEGORIES-TAB' %}</a></li>
+        <li><a href="{% url 'admin_manager.action_home' %}">{% trans 'ACCOUNT-HOME-TAB' %}</a></li>
       </ul>
     </li>
     {% endif %}
