@@ -9,18 +9,19 @@ from core.utils import slugify
 from core import helpers, choices
 from core.exceptions import SearchIndexNotFoundException
 
+logger = logging.getLogger(__name__)
+
 class FinderManager:
 
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
         self.finder = None
-        self.logger.info('FinderManager start in %s (index: %s)' % (str(settings.SEARCH_INDEX['url']), settings.SEARCH_INDEX['index']))
+        logger.info('FinderManager start in %s (index: %s)' % (str(settings.SEARCH_INDEX['url']), settings.SEARCH_INDEX['index']))
 
     def get_finder(self):
         if not self.finder:
             self.finder = self.finder_class()
 
-        self.logger.info('FinderManager return %s finder' % self.finder)
+        logger.info('FinderManager return %s finder' % self.finder)
         return self.finder
 
     def get_failback_finder(self):
@@ -37,7 +38,13 @@ class FinderManager:
             return self.get_failback_finder().search(*args, **kwargs)
 
 from core.lib.elastic import ElasticsearchIndex
-from core.lib.searchify import SearchifyIndex
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
+
+
 
 class Finder:
 
@@ -45,8 +52,7 @@ class Finder:
 
     def __init__(self):
 
-        self.logger = logging.getLogger(__name__)
-        self.logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
+        logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
         if settings.USE_SEARCHINDEX == 'searchify':
             self.index = SearchifyIndex()
         elif settings.USE_SEARCHINDEX == 'elasticsearch':
