@@ -260,43 +260,56 @@ body{background:$color-base;height:100%;min-width:998px;}
 
     /* Default nav item */
     li{
-      @include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));position:relative;
-      
-      a.button{
-        display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
+      @include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.05));position:relative;
 
-        /* Hover */
-        &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
+      /* Active */
+      &.active{
+        background:$nav-active-bg;
 
-        /* Active */
-        &.active,
-        &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
+        a.button{
+          color:$nav-active-text;
+          &:hover{color:$nav-hover-text;}
+        }
+      }
 
-        /* Erase button active state */
-        &:active{@include box-shadow(0 0 0 transparent);}
+      /* Erase button active state */
+      &:active{@include box-shadow(0 0 0 transparent);}
 
-        /* Disabled */
-        &.disabled{@include opacity(30);cursor:default;
+      /* Hover */
+      &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;
+        a.button{color:$nav-hover-text;}
+      }
+
+      /* Disabled */
+      &.disabled{
+        a{
+          @include opacity(30);cursor:default;
           &:hover{background:none;}
         }
-
       }
+      
+      a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;}
     }
 
     /* If has submenu */
     li.has-submenu{
-      ul.submenu{
-        display:none;background:$nav-secondary-bg;padding:10px 0;
+      ul.submenu{display:none;}
+
+      &:hover ul.submenu{
+        background:$nav-secondary-bg;/*padding:10px 0;*/
+        display:block !important;position:absolute;width:145px;top:0;left:54px;padding:10px 20px;
 
         @include media-query(min-width, $break-lg) {
-          padding:10px 0 10px 55px;
+          left:200px;
         }
 
         li{
-          @include box-shadow(0 0 0 transparent);
+          position:relative;@include box-shadow(0 0 0 transparent);
+          &:hover{background:none;}
+          &:hover ul{display:block;}
 
           a{
-            display:block;padding:10px 0;color:$nav-secondary-text;
+            display:block;padding:10px 0;color:$nav-secondary-text;text-indent:0;
             &:hover{color:$nav-hover-text;}
 
             span.icon{
@@ -307,6 +320,9 @@ body{background:$color-base;height:100%;min-width:998px;}
             }
           }
 
+          /* If has no link */
+          a.no-link{color:$nav-secondary-no-link-text;font-style:italic;cursor:default;}
+
           ul{padding-left:20px;}
         }
 
@@ -315,34 +331,6 @@ body{background:$color-base;height:100%;min-width:998px;}
             display:none;
           }
           a{color:$nav-text;font-size:$font-size-m;}
-        }
-      }
-    }
-
-    /* If is current submenu */
-    li.has-current-submenu{
-      ul.submenu{
-        display:block;
-        li.submenu-header{display:none;}
-      }
-    }
-
-    /* If not current submenu */
-    li.not-current-submenu{
-      &:hover ul.submenu{
-        display:block;position:absolute;width:145px;top:-1px;left:54px;padding:10px 20px;
-
-        @include media-query(min-width, $break-lg) {
-          left:200px;
-        }
-        
-        li{
-          a{
-            text-indent:0;
-            span.icon{
-                display:none;
-              }
-          }
         }
       }
     }
@@ -356,12 +344,11 @@ body{background:$color-base;height:100%;min-width:998px;}
   /* Bottom local nav */
   ul.bottom-navigation{
     position:absolute;bottom:0;left:0;width:100%;
-    
-    li{@include box-shadow(inset 0 1px 0 0 rgba(255,255,255,.1));}
 
     li.footer{
       color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
-      
+      &:hover{background:none;}
+
       a{color:rgba(255,255,255,.7);
         &:hover{color:#fff}
       }

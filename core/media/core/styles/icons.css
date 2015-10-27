@@ -26,39 +26,39 @@
 
 	/* Nav local */
 	.icon-home,
-	.button:hover .icon-home{background-position:-12px -12px;}
+	li:hover .button .icon-home{background-position:-12px -12px;}
 	.icon-home:hover,
-	.button.active .icon-home{background-position:-48px -12px;}
+	li.active .icon-home{background-position:-48px -12px;}
 
 	.icon-datasets,
-	.button:hover .icon-datasets{background-position:-12px -48px;}
+	li:hover .button .icon-datasets{background-position:-12px -48px;}
 	.icon-datasets:hover,
-	.button.active .icon-datasets{background-position:-48px -48px;}
+	li.active .icon-datasets{background-position:-48px -48px;}
 
 	.icon-dataviews,
-	.button:hover .icon-dataviews{background-position:-12px -84px;}
+	li:hover .button .icon-dataviews{background-position:-12px -84px;}
 	.icon-dataviews:hover,
-	.button.active .icon-dataviews{background-position:-48px -84px;}
+	li.active .icon-dataviews{background-position:-48px -84px;}
 	
 	.icon-visualizations,
-	.button:hover .icon-visualizations{background-position:-12px -120px;}
+	li:hover .button .icon-visualizations{background-position:-12px -120px;}
 	.icon-visualizations:hover,
-	.button.active .icon-visualizations{background-position:-48px -120px;}
+	li.active .icon-visualizations{background-position:-48px -120px;}
 	
 	.icon-dashboards,
-	.button:hover .icon-dashboards{background-position:-12px -156px;}
+	li:hover .button .icon-dashboards{background-position:-12px -156px;}
 	.icon-dashboards:hover,
-	.button.active .icon-dashboards{background-position:-48px -156px;}
+	li.active .icon-dashboards{background-position:-48px -156px;}
 
 	.icon-reports,
-	.button:hover .icon-reports{background-position:-12px -192px;}
+	li:hover .button .icon-reports{background-position:-12px -192px;}
 	.icon-reports:hover,
-	.button.active .icon-reports{background-position:-48px -192px;}
+	li.active .icon-reports{background-position:-48px -192px;}
 
 	.icon-settings,
-	.button:hover .icon-settings{background-position:-12px -228px;}
+	li:hover .button .icon-settings{background-position:-12px -228px;}
 	.icon-settings:hover,
-	.button.active .icon-settings{background-position:-48px -228px;}
+	li.active .icon-settings{background-position:-48px -228px;}
 
 
 	/* General icons */
