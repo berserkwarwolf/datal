@@ -384,3 +384,8 @@ try:
     INSTALLED_APPS += INSTALLED_PLUGINS
 except:
     pass
+
+try:
+    LOCALE_PATHS += PLUGIN_LOCALES
+except:
+    pass
