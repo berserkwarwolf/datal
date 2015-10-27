@@ -673,9 +673,6 @@ msgstr "Publicados"
 msgid "APP-VIEWS-TEXT"
 msgstr "Vistas"
 
-# msgid "APP-DASHBOARDS-TEXT"
-# msgstr "Colecciones"
-
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
@@ -2255,9 +2252,6 @@ msgstr "Vistas"
 
 msgid "APP-VISUALIZATIONS-TEXT"
 msgstr "Visualizaciones"
-
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
 
 msgid "APP-REPORTS-TEXT"
 msgstr "Reportes"
