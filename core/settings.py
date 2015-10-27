@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'djangobower',
     "rest_framework",
     'djangoplugins',
+    'plugins.dashboards'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
