@@ -147,40 +147,19 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=StatusChoices.PUBLISHED,
                                     allowed_states=allowed_states)
 
-        # si tiene publicado una revision y la ultima revision es distinta a la publicada, evalua
-        # si los hijos estan TODOS en aprobados para poder publicar la revisión
-        if self.dataset.last_published_revision and self.dataset.last_revision != self.dataset.last_published_revision:
-            # si estan todos en aprovados, continua
-            if not self._childs_approved():
-                logger.info('[LifeCycle - Dataset - Edit] Rev. %s El estado %s no tiene a sus hijos en status "%s".' % 
-                    (self.dataset_revision.id, self.dataset_revision.status,ugettext_lazy('MODEL_STATUS_APPROVED')))
-                # aca deberia salir un error de no aprobado
-                raise Dataset.DoesNotExist("Error")
-
-
         self.dataset_revision.status = StatusChoices.PUBLISHED
         self.dataset_revision.save()
             
         self._update_last_revisions()
             
-        self._publish_childs()
+        # si hay DataStreams en DRAFT/Pending no publica a lo shijos
+        if DataStreamRevision.objects.filter(dataset=self.dataset, status__in=ACCEPT_ALLOWED_STATES).count() == 0:
+            self._publish_childs()
             
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
             
         self._log_activity(ActionStreams.PUBLISH)
-
-    def _childs_approved(self):
-        """devuelve True si todos los hijos del DT estan en aprobado"""
-
-        childs = DatasetDBDAO().query_childs(dataset_id=self.dataset.id,language=self.dataset.user.language)
-
-        for doc_type in childs.keys():
-            for child in childs[doc_type]:
-                if child['status'] != StatusChoices.APPROVED:
-                    return False
-        return True
-
 
     def _publish_childs(self):
         """ Intenta publicar la ultima revision de los datastreams hijos"""
@@ -202,6 +181,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     )
                 except IllegalStateException:
                     publish_fail.append(datastream_revision)
+
+
+            ## Aca deberia ir lo mismo que los ds, pero para las vz?
 
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)

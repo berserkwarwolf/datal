@@ -196,9 +196,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         return related
 
-    def count_revision(self, dataset_id):
-        return DatasetRevision.objects.filter(dataset__id=dataset_id).count()
-
     def create(self, dataset=None, user=None, collect_type='', impl_details=None, **fields):
         """create a new dataset if needed and a dataset_revision"""
 
