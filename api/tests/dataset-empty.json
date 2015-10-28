@@ -3,7 +3,7 @@
     "description": "Descripción de Prueba",
     "category": "salud",
     "notes": "Nota de prueba",
-    "end_point": "",
+    "end_point": null,
     "file": null,
     "license": "http://creativecommons.org/licenses/by/4.0/",
     "spatial": "Buenos Aires",
