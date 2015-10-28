@@ -10,8 +10,8 @@
   {% endcompress %}
 {% endblock %}
 
-<script type="text/javascript" src="/js_workspace/accounts/signInModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_workspace/accounts/signInView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/signInModel.js' %}"></script>
+<script type="text/javascript" src="{% static 'workspace/scripts/accounts/signInView.js' %}"></script>
 {% endblock %}
 
 {% block body %}

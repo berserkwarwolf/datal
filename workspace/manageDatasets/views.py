@@ -16,6 +16,7 @@ from core.exceptions import DatasetSaveException
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
+from core.templates import DefaultAnswer
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
 from core.daos.visualizations import VisualizationDBDAO
@@ -87,7 +88,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     filters_param = bb_request.get('filters')
     filters_dict = dict()
     filter_name = ''
-    sort_by = '-id'
+    sort_by = bb_request.get("sort_by",None)
+    order = bb_request.get("order","asc")
     exclude = None
 
     if filters_param is not None and filters_param != '':
@@ -113,15 +115,21 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
                 'impl_type__in': DATASTREAM_IMPL_NOT_VALID_CHOICES
             }
 
-    if bb_request.get('sort_by') is not None and bb_request.get('sort_by') != '':
-        if bb_request.get('sort_by') == "category":
+    # define la forma de ordenamiento
+    if sort_by:
+        if sort_by == "category":
             sort_by ="category__categoryi18n__name"
-        if bb_request.get('sort_by') == "title":
+        elif sort_by == "title":
             sort_by ="dataseti18n__title"
-        if bb_request.get('sort_by') == "author":
+        elif sort_by == "author":
             sort_by ="dataset__user__nick"
-        if bb_request.get('order')=="desc":
+
+        if order == "desc":
             sort_by = "-"+ sort_by
+    else:
+        # no se por que setea un orden de este tipo si no
+        # se envia el parametro
+        sort_by='-id'
 
     total_resources = request.stats['account_total_datasets']
             
@@ -174,19 +182,19 @@ def remove(request, dataset_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
-        return JSONHttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
-            'revision_id': last_revision_id
-        }))
-
+        
+        response = DefaultAnswer().render(status=True, 
+                               messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')], 
+                               extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
+        return HttpResponse(response, mimetype="application/json")
+        
     else:
         lifecycle.remove(killemall=True)
-        return HttpResponse(json.dumps({
-            'status': True,
-            'messages': [ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
-            'revision_id': -1,
-        }), content_type='text/plain')
+
+        response = DefaultAnswer().render(status=True, 
+                               messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')], 
+                               extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
+        return HttpResponse(response, mimetype="application/json")
 
 
 @login_required

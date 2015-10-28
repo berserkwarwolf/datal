@@ -23,7 +23,10 @@ msgid "APP-ADMIN-URL-TEXT"
 msgstr "Url administrativa"
 
 msgid "APP-USERNAME-TEXT"
-msgstr "Usuario"
+msgstr "Nombre usuario"
+
+msgid "APP-USERNICK-TEXT"
+msgstr "Apodo"
 
 msgid "APP-PASSWORD-TEXT"
 msgstr "Contraseña"
@@ -669,9 +672,6 @@ msgstr "Publicados"
 
 msgid "APP-VIEWS-TEXT"
 msgstr "Vistas"
-
-# msgid "APP-DASHBOARDS-TEXT"
-# msgstr "Colecciones"
 
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
@@ -2253,9 +2253,6 @@ msgstr "Vistas"
 msgid "APP-VISUALIZATIONS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-REPORTS-TEXT"
 msgstr "Reportes"
 
@@ -3240,6 +3237,12 @@ msgstr "Frecuencia de actualización"
 msgid "APP-VIEW-DATASET-REGION-TEXT"
 msgstr "¿En que región aplican estos datos?"
 
+msgid "APP-LAST-PUBLISHED-REVISION-TEXT"
+msgstr "Última versión publicada"
+
+msgid "APP-DOWNLOAD-ORIGINAL-TEXT"
+msgstr "Descargar original"
+
 msgid "LANDINGPAGE-ACTIVITY-DATASET"
 msgstr "el conjunto de datos"
 
@@ -3251,3 +3254,12 @@ msgstr "la visualización"
 
 msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
 msgstr "la colección"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Mapas"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Rango inválido"
+
+msgid "APP-INVALID-REQUIRED"
+msgstr "Requerido"

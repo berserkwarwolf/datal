@@ -10,6 +10,7 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 MIDDLEWARE_CLASSES += (
+    'microsites.middlewares.search.SearchManager',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',

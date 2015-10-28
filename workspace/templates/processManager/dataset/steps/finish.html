@@ -1,19 +1,17 @@
-{% load i18n extra_tags components %}
+{% load i18n extra_tags components staticfiles %}
 
 {% block meta %}
 
-<script language="javascript" src="/js_workspace/processManager/dataset/sourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/sourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/sourcesCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/sourcesView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<script language="javascript" src="/js_workspace/processManager/dataset/addSourceModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/addSourceView.js?id={{settings.VERSION_JS_CSS}}"></script>
-
-<script language="javascript" src="/js_workspace/processManager/dataset/tagModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/tagView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/tagsCollection.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/tagsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/sourceModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/sourceView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/sourcesCollection.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/sourcesView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/addSourceModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/addSourceView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/tagModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/tagView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/tagsCollection.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/tagsView.js' %}"></script>
 
 <script type="text/javascript" src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>

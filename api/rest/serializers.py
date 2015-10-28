@@ -1,3 +1,5 @@
+import json
+
 from rest_framework import serializers
 from rest_framework.compat import OrderedDict
 from core.models import CategoryI18n, Category
@@ -21,11 +23,10 @@ class ResourceSerializer(serializers.Serializer):
         toDict[toKey] = None
         for key in fromKeys:
             if key in fromDict:
-                toDict[toKey]=fromDict[key]
-
+                toDict[toKey] = fromDict[key]
 
     def to_representation(self, obj):
-        answer={}
+        answer = {}
 
         self.tryKeysOnDict(answer, 'guid', obj, ['guid'])
         self.tryKeysOnDict(answer, 'title', obj, ['title'])
@@ -39,8 +40,12 @@ class ResourceSerializer(serializers.Serializer):
         self.tryKeysOnDict(answer, 'parameters', obj, ['parameters'])
         self.tryKeysOnDict(answer, 'result', obj, ['result'])
 
-        if 'format' in obj and obj['format'].startswith('application/json'):
-            answer['result'] = json.loads(answer['result']) 
+        try:
+            if 'format' in obj and obj['format'].startswith('application/json'):
+                answer['result'] = json.loads(answer['result']) 
+        except AttributeError:
+            # TODO: ver esto, plis
+            pass
 
         if answer['link']:
             domain = self.context['request'].auth['microsite_domain']

@@ -3,11 +3,15 @@ import os
 from django.conf.urls import *
 from django.conf import settings
 from django.views.i18n import javascript_catalog
+
+from rest_framework import routers
+from djangoplugins.utils import include_plugins
+
+from core.plugins import DatalPluginPoint
 from workspace.rest.datasets import RestDataSetViewSet
 from workspace.rest.datastreams import RestDataStreamViewSet
 from workspace.rest.maps import RestMapViewSet
 from workspace.rest.charts import RestChartViewSet
-from rest_framework import routers
 
 
 router = routers.DefaultRouter()
@@ -15,6 +19,7 @@ router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
 router.register(r'maps', RestMapViewSet, base_name='maps')
 router.register(r'charts', RestChartViewSet, base_name='charts')
 router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
+
 
 def jsi18n(request, packages=None, domain=None):
     if not domain:
@@ -27,6 +32,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    (r'^', include_plugins(DatalPluginPoint, urls='workspace_urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
     url(r'^$', 'workspace.views.home', name='workspace.home'),
@@ -42,9 +48,9 @@ urlpatterns = patterns('',
 
     #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
-    
+
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
-   
+
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
     (r'^accounts/', include('workspace.manageMyAccount.urls')),
     (r'^tag_manager/', include('workspace.searchTags.urls')),

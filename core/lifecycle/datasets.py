@@ -4,7 +4,7 @@ from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
+from core.models import DatasetRevision, Dataset, DataStream, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
@@ -55,6 +55,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
+
 
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
@@ -271,8 +272,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
+
                 # Elimino todos las revisiones que dependen de este Dataset
-                DataStreamRevision.remove_related_to_dataset(self.dataset)
+                datastreams_revision = DataStreamRevision.related_to_dataset(self.dataset)
+                datastream_ids = []
+                for datastream_revision in datastreams_revision:
+                    datastream_ids.append(datastream_revision.id)
+                    DatastreamLifeCycleManager(self.user, datastream_revision).remove()
+                DataStream.objects.filter(pk__in=datastream_ids).delete()
 
             # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
             # completa el valor correspondiente.
@@ -455,8 +462,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
 
+            # si hay un last_published_revision_id, dejamos ese como ultimo publicado
+            # además mandamos al indexador esa version que estaba publicada
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                search_dao = DatasetSearchDAOFactory().create(self.dataset.last_published_revision)
+                search_dao.add()
+
+                self._log_activity(ActionStreams.PUBLISH)
             else:
                 self.dataset.last_published_revision = None
 

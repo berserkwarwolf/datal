@@ -3,7 +3,8 @@ from django.conf import settings
 
 
 class SearchForm(forms.Form):
-    q = forms.RegexField(label='Query', max_length=512, required=False, regex = r'[a-zA-Z0-9]+|%')
+#    q = forms.RegexField(label='Query', max_length=512, required=False, regex = r'[a-zA-Z0-9]+|%')
+    q = forms.CharField(label='Query', max_length=512, required=False)
     page = forms.IntegerField(label='Page', required=False)
     tag = forms.RegexField(label='Tag', required=False, regex = r'[a-zA-Z0-9]+')
     order = forms.RegexField(label='Order', required=False, regex = r'[a-zA-Z0-9]+')

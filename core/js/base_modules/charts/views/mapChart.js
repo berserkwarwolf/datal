@@ -11,35 +11,51 @@ charts.views.MapChart = charts.views.Chart.extend({
     latestDataUpdate: null,
     latestDataRender: null,
     styles: {},
-    initialize: function(){
+    stylesDefault: {
+        'marker': {
+            icon : 'https://maps.gstatic.com/mapfiles/ms2/micons/red-pushpin.png'
+        },
+        'lineStyle': {
+            'strokeColor': '#00FFaa',
+            'strokeOpacity': 1.0,
+            'strokeWeight': 2,
+            'fillColor': '#FF0000',
+            'fillOpacity': 0.01
+        },
+        'polyStyle': {
+            'strokeColor': '#FF0000',
+            'strokeOpacity': 1.0,
+            'strokeWeight': 3,
+            'fillColor': '#FF0000',
+            'fillOpacity': 0.35
+        },
+    },
+    initialize: function(options){
+        this.googleMapOptions = options.mapOptions || {};
         this.bindEvents();
-        this.createCoogleMapInstance();
+        this.createGoogleMapInstance();
     },
 
     render: function () {
-        //Se chequea que la se haya actualizado la data antes de hacer nuevamente el render
-        if(this.latestDataUpdate != this.latestDataRender){
-            if(this.model.data.get('points') && this.model.data.get('points').length){
-                this.createMapPoints();
-            }
-            if(this.model.data.get('clusters') && this.model.data.get('clusters').length){
-                this.createMapClusters();
-            }
-            this.latestDataRender = this.latestDataUpdate;
+        this.clearMapOverlays();
+        if(this.model.data.get('points') && this.model.data.get('points').length){
+            this.createMapPoints();
+        }
+        if(this.model.data.get('clusters') && this.model.data.get('clusters').length){
+            this.createMapClusters();
         }
         return this;
     },
 
     handleDataUpdated: function () {
-        this.latestDataUpdate = Date.now();
         this.clearMapOverlays();
         this.render();
     },
 
     bindEvents: function () {
-        this.model.on('change', this.render, this);
+        this.listenTo(this.model, 'change', this.render, this);
         this.listenTo(this.model, 'change:mapType', this.onChangeMapType, this);
-        this.model.on('data_updated', this.handleDataUpdated, this);
+        this.listenTo(this.model, 'data_updated', this.handleDataUpdated, this);
     },
 
     onChangeMapType: function (model, type) {
@@ -58,13 +74,34 @@ charts.views.MapChart = charts.views.Chart.extend({
     /**
      * Creates a new map google map instance
      */
-    createCoogleMapInstance: function () {
-        this.mapInstance = new google.maps.Map(this.el, {
+    createGoogleMapInstance: function () {
+
+
+        var mapInitialOptions = {
             zoom: this.model.get('options').zoom,
-            center: new google.maps.LatLng(this.model.get('options').center.lat,
-                this.model.get('options').center.long),
-            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
-        });
+            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')],
+            backgroundColor:'#FFFFFF'
+        };
+
+        if(this.model.get('options').center){
+            mapInitialOptions.center = new google.maps.LatLng(
+                    this.model.get('options').center.lat,
+                    this.model.get('options').center.long
+                    );
+        }
+        
+        if(this.model.get('options').bounds){
+            var b = this.model.get('options').bounds;
+            var southWest = new google.maps.LatLng(parseFloat(b[2]),parseFloat(b[3])),
+                northEast = new google.maps.LatLng(parseFloat(b[0]),parseFloat(b[1])),
+                bounds = new google.maps.LatLngBounds(southWest,northEast);
+                mapInitialOptions.center = bounds.getCenter();
+        }
+
+        this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
+        this.mapInstance.setOptions(this.googleMapOptions);
+        this.mapInstance.setOptions({minZoom: 1});
+
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
     },
@@ -87,6 +124,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     clearOverlay: function (overlayCollection) {
         _.each(overlayCollection, function (overlayElement, index) {
+            if (_.isUndefined(overlayElement)) return;
             overlayElement.setMap(null);
             //Elimina los eventos asociados al elemento
             if(overlayElement.events){
@@ -103,7 +141,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapPoints: function () {
         var self = this,
-            styles = this.model.get('styles');
+            styles = this.parseKmlStyles(this.model.get('styles'));
         _.each(this.model.data.get('points'), function (point, index) {
             if(point.trace){
                 this.createMapTrace(point, index, styles);
@@ -145,9 +183,9 @@ charts.views.MapChart = charts.views.Chart.extend({
         });
     },
 
-    createMapPolyline: function (paths, styles) {
+    createMapPolyline: function (path, styles) {
         return new google.maps.Polyline({
-            paths: paths,
+            path: path,
             strokeColor: styles.strokeColor,
             strokeOpacity: styles.strokeOpacity,
             strokeWeight: styles.strokeWeight
@@ -162,7 +200,7 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapMarker: function (point, index, styles) {
         var self = this,
-            markerIcon = this.model.get('stylesDefault').marker.icon;
+            markerIcon = this.stylesDefault.marker.icon;
 
         //Obtiene el estilo del marcador
         if(styles && styles.iconStyle){
@@ -201,32 +239,124 @@ charts.views.MapChart = charts.views.Chart.extend({
      */
     createMapCluster: function (cluster, index) {
         cluster.noWrap = true;
-        cluster.counter = parseInt(cluster.info);
 
-        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, this.model.get('options').joinIntersectedClusters);
+        // Se desabilita la funcionalidad de joinIntersectedClusters porque contiene problemas
+        this.mapClusters[index] = new multimarker(cluster, cluster.info, this.mapInstance, false /* joinIntersectedClusters */);
     },
 
     /**
      * Get the boundaries of the current map
-     * @param  {HTMLelement} div Container of the map
      */
-    handleBoundChanges: function(div){
-        var center = this.mapInstance.getCenter(),
-            bounds = this.mapInstance.getBounds(),
-            zoom = this.mapInstance.getZoom();
+    handleBoundChanges: function(){
 
-        this.model.set('options', {
-            center: {
-                lat: center.lat(),
-                long: center.lng(),
-            },
-            zoom: zoom,
-            bounds: [
-                bounds.getNorthEast().lat(), 
-                bounds.getNorthEast().lng(), 
-                bounds.getSouthWest().lat(), 
-                bounds.getSouthWest().lng()
-            ]
-        });
+        if(this.mapInstance){
+
+            var center = this.mapInstance.getCenter(),
+                bounds = this.mapInstance.getBounds(),
+                zoom = this.mapInstance.getZoom();
+
+            var updatedOptions = {
+                zoom: zoom
+            };
+
+            if(bounds){
+                updatedOptions.bounds = [
+                        bounds.getNorthEast().lat(), 
+                        bounds.getNorthEast().lng(), 
+                        bounds.getSouthWest().lat(), 
+                        bounds.getSouthWest().lng()
+                    ];
+            }
+
+            if(center){
+                updatedOptions.center = {
+                    lat: center.lat(),
+                    long: center.lng(),
+                };
+            }
+
+            this.model.set('options', updatedOptions);
+
+        }
+
+    },
+
+    /**
+     * Convierte estilos de tipo kml al necesario para usar en los mapas
+     * @param  {object} styles
+     * @return {object}
+     */
+    parseKmlStyles: function (styles) {
+        styles = styles || [];
+        var parsedStyles = this.stylesDefault;
+
+        if(styles.length && styles[0].styles){
+            //Obtiene el primer estilo encontrado en la data
+            styles = styles[0].styles;
+            if(styles.lineStyle){
+                parsedStyles.lineStyle = this.kmlStyleToLine(styles.lineStyle);
+            }
+            if(styles.polyStyle){
+                parsedStyles.polyStyle = this.kmlStyleToPolygon(parsedStyles.lineStyle, styles.polyStyle);
+            }
+        }
+
+        return parsedStyles;
+    },
+
+    /**
+     * Prser para los estilos desde un kml a lineas de google maps
+     * @param  {object} lineStyle
+     * @return {object
+     */
+    kmlStyleToLine: function(lineStyle) {
+        var defaultStyle = this.get('stylesDefault').lineStyle;
+        return {
+            "strokeColor": this.getStyleFromKml(lineStyle, 'color', 'color', defaultStyle.strokeColor),
+            "strokeOpacity": this.getStyleFromKml(lineStyle, 'color', 'opacity', defaultStyle.strokeOpacity),
+            "strokeWeight": this.getStyleFromKml(lineStyle, 'width', 'width', defaultStyle.strokeWeight)
+        };
+    },
+
+    /**
+     * Parser para los estilos de un kml a polygons de google maps
+     * @param  {object} lineStyle
+     * @param  {object} polyStyle
+     * @return {object}
+     */
+    kmlStyleToPolygon: function (lineStyle, polyStyle) {
+        var defaultStyle = this.get('stylesDefault').polyStyle;
+        var opacity = this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight);
+        return {
+            "strokeColor": lineStyle.strokeColor,
+            "strokeOpacity": lineStyle.strokeOpacity,
+            "strokeWeight": lineStyle.strokeWeight,
+            "fillColor": this.getStyleFromKml(polyStyle, 'fill', 'color', defaultStyle.strokeWeight),
+            "fillOpacity": this.getStyleFromKml(polyStyle, 'fill', 'opacity', defaultStyle.strokeWeight)
+        };
+    },
+
+    /**
+     * Obtiene un estilo de un objeto de estilos Kml para ser usado en google maps
+     * @param  {object} kmlStyles
+     * @param  {string} attribute
+     * @param  {string} type
+     * @param  {string} defaultStyle
+     * @return {string}
+     */
+    getStyleFromKml: function (kmlStyles, attribute, type, defaultStyle) {
+        var style = kmlStyles[attribute] || null;
+        if(style == null) return defaultStyle;
+
+        //Convierte el color de formato ARGB a RGB
+        if(type == 'color')
+            return '#' + style.substring(2);
+        //La opacidad se extrae del color y convierte de hexadecimal a entero
+        if(type == 'opacity')
+            return parseInt(style.substring(0, 2), 16) / 256;
+
+        return style;
     }
+
+
 });

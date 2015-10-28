@@ -5,7 +5,7 @@
 {% compress css %}
 <link href="{% sass_src 'workspace/styles/viewReports.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 {% endcompress %}
-<script language="javascript" src="/js_workspace/viewReports/viewReports.js"></script>
+<script src="{% static 'workspace/scripts/viewReports/viewReports.js' %}"></script>
 {% endblock %}
 
 {% block sectionTitle %}

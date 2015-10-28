@@ -513,15 +513,6 @@
     }
 },
 {
-    "pk": 70, 
-    "model": "core.preference", 
-    "fields": {
-        "account": 2, 
-        "value": "1", 
-        "key": "account.default.category"
-    }
-},
-{
     "pk": 71, 
     "model": "core.preference", 
     "fields": {

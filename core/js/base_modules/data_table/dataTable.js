@@ -675,7 +675,7 @@ var DataTableCreation = DataTable.extend({
 							      							'</td>'+
 							      							'<td>'+
 																'<div class="formErrorMessageContainer">'+
-							      									'<input id="id_parameterValue_' + lColId + '_' + lTableId + '" type="text" value="" name="parameterValue_' + lColId + '_' + lTableId + '" size="33" maxlength="100" class="ao-field"/>'+
+							      									'<input id="id_parameterValue_' + lColId + '_' + lTableId + '" type="text" value="" name="parameterValue_' + lColId + '_' + lTableId + '" size="33" maxlength="30" class="ao-field"/>'+
 							      								'</div>'+
 															'</td>'+
 							      						'</tr>'+
@@ -713,9 +713,9 @@ var DataTableCreation = DataTable.extend({
 			var lOptions = new Object();
 			lOptions['rules'] = new Object();
 			lOptions['messages'] = new Object();
-			lOptions['rules']['parameter-name_' + lColId + '_' + lTableId] = {'required': true, 'maxlength': 40, 'regex': /^[a-zA-ZñÑ\s\W]/};
-			lOptions['rules']['parameter-description_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 40, 'regex': /^[a-zA-ZñÑ\s\W]/};
-			lOptions['rules']['parameterValue_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 40};
+			lOptions['rules']['parameter-name_' + lColId + '_' + lTableId] = {'required': true, 'maxlength': 30, 'regex': /^[a-zA-ZñÑ\s\W]/};
+			lOptions['rules']['parameter-description_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 100, 'regex': /^[a-zA-ZñÑ\s\W]/};
+			lOptions['rules']['parameterValue_' + lColId + '_' + lTableId] = {'required':true, 'maxlength': 30};
 			
 			lOptions['messages']['parameter-name_' + lColId + '_' + lTableId] = {'regex': gettext( "VALIDATE-REGEX" )};
 			lOptions['messages']['parameter-description_' + lColId + '_' + lTableId] = {'regex': gettext( "VALIDATE-REGEX" )};
@@ -726,7 +726,7 @@ var DataTableCreation = DataTable.extend({
 			var lOptions2 = new Object();
 			lOptions2['rules'] = new Object();
 			lOptions2['messages'] = new Object();
-			lOptions2['rules']['fixed-value_' + lColId + '_' + lTableId] = {'required': true, 'maxlength': 40, 'regex': /^[a-zA-Z0-9 ]+$/};
+			lOptions2['rules']['fixed-value_' + lColId + '_' + lTableId] = {'required': true, 'maxlength': 30, 'regex': /^[a-zA-Z0-9 ]+$/};
 			lOptions2['messages']['fixed-value_' + lColId + '_' + lTableId] = {'regex': gettext( "VALIDATE-REGEX" ) };
 			
 			$('#id_fixedValueForm_'+lColId+'_'+lTableId).validate(lOptions2);

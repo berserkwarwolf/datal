@@ -1,8 +1,10 @@
-from rest_framework.decorators import detail_route, list_route
-from core.daos.visualizations import VisualizationDBDAO
 from api.rest.visualizations import VisualizationSerializer
+from core.daos.visualizations import VisualizationDBDAO
 from core.rest.views import ResourceViewSet
-from workspace.v8.forms import VisualizationRequestForm, VisualizationPreviewMapForm
+from rest_framework.decorators import detail_route, list_route
+from workspace.v8.forms import VisualizationRequestForm
+from workspace.v8.forms import VisualizationPreviewMapForm
+
 
 class RestMapViewSet(ResourceViewSet):
     queryset = VisualizationDBDAO()

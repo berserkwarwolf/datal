@@ -12,15 +12,15 @@
 {% endcompress %}
 <script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<script language="javascript" src="/js_workspace/processManager/stepModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/stepView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/collectUrlModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/collectUrlView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/finishModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/finishUrlModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/dataset/finishView.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/processManagerModel.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script language="javascript" src="/js_workspace/processManager/processManagerView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="{% static 'workspace/scripts/processManager/stepModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/stepView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/collectUrlModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/collectUrlView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/finishModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/finishUrlModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/dataset/finishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/processManagerModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/processManager/processManagerView.js' %}"></script>
 
 <meta name="main-option" content="id_datasets_option"/>
 {% endblock %}

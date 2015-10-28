@@ -11,7 +11,6 @@ from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
 from core.lib.datastore import *
-from core.lib.searchify import SearchifyIndex
 from core.http import get_domain_with_protocol
 from workspace.manageAccount import forms
 from core.utils import generate_ajax_form_errors
@@ -368,6 +367,13 @@ def action_create_category(request):
     if form.is_valid():
         auth_manager = request.auth_manager
         category_name = form.cleaned_data['name']
+        # check for duplicates in this account
+        duplicated = CategoryI18n.objects.filter(name=category_name, category__account__id=auth_manager.account_id)
+        if len(duplicated) > 0:
+            errors = [ugettext('ERROR-DUPLICATED-CATEGORY')]
+            response = {'status': 'error', 'messages': errors}
+            return HttpResponse(json.dumps(response), content_type='application/json', status = 400)
+
         category = Category.objects.create(account_id=auth_manager.account_id)
         categoryi18n = CategoryI18n.objects.create(
             category=category,
@@ -502,7 +508,7 @@ def action_check_email(request):
 
 @require_POST
 def action_check_username(request):
-    nick = request.POST.get('username')
+    nick = request.POST.get('nick')
     user_id = request.POST.get('user_id')
     query = User.objects.filter(nick=nick)
     if user_id:

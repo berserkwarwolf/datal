@@ -108,7 +108,7 @@ Los recursos que maneja la API son:
 
 # Métodos 
 
-# Listados
+# GET Listados
 
 Busca un listado de datastreams.
 
@@ -183,7 +183,7 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 }
 ```
 
-## Get
+## GET
 
 Trae la información asociada a una vista
 
@@ -225,3 +225,93 @@ Un ejemplo de resultado de un datastream sería así
     "category_name": "Educación"
 }
 ```
+
+## POST / PUT / PATCH
+
+Creación, Edición y Edición Parcial de recursos.
+
+Al momento solo podemos crear y editar datasets y vistas.
+
+Para probaar algunos de los ejemplos que aparecen en la documentación se deben utilizar los archivos en la carpeta api/tests
+
+### Datasets
+
+
+```
+POST /api/v1/datasets
+PUT/PATCH /api/v1/datasets/:guid
+``` 
+
+- **title**: Título del conjunto de datos
+- **description**: Descripción del conjunto de datos
+- **category**: Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **notes**: Opcional. Texto de la nota del conjunto de datos
+- **end_point**: Opcional. Url apuntando al recurso con los datos (archivos o página web).
+- **file**: Opcional. Archivo a subir a la plataforma
+- **license**: Opcional. Tipo de licencia que aplica sobre el conjunto de datos
+- **spatial**: Opcional. Zona geográfica a la cual aplica el conjunto de datos
+- **frequency**: Opcional. Tipo de licencia que aplica sobre el conjunto de datos
+- **mbox**: Opcional. Correo electronico de quien administra el conjunto de datos
+
+Ejemplo de llamada sin subir una fuente
+
+```
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/dataset-empty.json "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada subiendo una fuente online
+```
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/dataset-endpoint.json "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada subiendo una fuente desde un archivo local
+```
+curl -H 'Accept: application/json; indent=4' -X POST -F "title=Restaurantes" -F "description=Restaurantes" -F "category=salud" -F "file=@api/tests/restaurantes.csv" "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada de una edición de contenido total (cambian todos los valores)
+```
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PUT -d @api/tests/dataset-edit.json "http://api.dev:8080/api/v1/datasets/AGENC-DE-VIAJE.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada de una edición de contenido parcial (solo cambian los valores que se mandan)
+```
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PATCH -d @api/tests/dataset-edit.json "http://api.dev:8080/api/v1/datasets/AGENC-DE-VIAJE.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada modificando fuente (no cambia revisión)
+```
+curl -H 'Accept: application/json; indent=4' -X PATCH -F "file=@api/tests/restaurantes2.csv" "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+Ejemplo de llamada modificando fuente y otros valores (cambia revisión)
+```
+curl -H 'Accept: application/json; indent=4' -X PATCH -F "title=Restaurantes" -F "description=Restaurantes" -F "category=salud" -F "file=@api/tests/restaurantes2.csv" "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+```
+
+
+### Datastreams
+```
+POST /api/v1/datastreams
+PUT/PATCH /api/v1/datastreams/:guid
+``` 
+
+- **title**: Título del conjunto de datos
+- **description**: Descripción del conjunto de datos
+- **category**: Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **notes**: Opcional. Texto de la nota del conjunto de datos
+- **table_id**: Opcional. Indice de la tabla en el conjunto de datos, comenzando de cero.
+- **header_row**: Opcional. Indice de la fila a usar como cabecera de la tabla comenzando de cero. Por defecto es vacio
+- **dataset**: GUID del conjunto de datos asociado a la vista
+
+Ejemplo de llamada para crear un datastream 
+
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+
+Ejemplo de llamada de una edición de contenido total
+
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PUT -d @api/tests/datastream-edit.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+
+Ejemplo de llamada de una edición de contenido parcial
+
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PATCH -d @api/tests/datastream-patch-edit.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
