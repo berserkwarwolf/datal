@@ -152,8 +152,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             
         self._update_last_revisions()
             
-        # si hay DataStreams en DRAFT/Pending no publica a lo shijos
-        if DataStreamRevision.objects.filter(dataset=self.dataset, status__in=ACCEPT_ALLOWED_STATES).count() == 0:
+        # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists()
             self._publish_childs()
             
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
