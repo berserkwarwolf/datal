@@ -13,8 +13,6 @@ var AddSourceModel = Backbone.Model.extend({
 			},{
 				maxLength: 40,
 				msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 40 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
-			},{
-				fn: 'validateSourceName'
 			}
 		],
 		url: [
@@ -27,17 +25,15 @@ var AddSourceModel = Backbone.Model.extend({
 			},{
 				pattern: 'url',
 				msg: gettext('VALIDATE-URLNOTVALID-TEXT')
-			},{
-				fn: 'validateSourceUrl'
 			}
 		]
 	},
 
-	validateSourceName: function(value, attr, computedState) {
+	validateSourceNameAlreadyExist: function() {
 		var url = '/source_manager/validate_source_name/',
 			data = {},
 			msg = false;
-		data[attr] = value;
+		data['name'] = this.get('name');
 		$.ajax({
 			url: url,
 			type: 'POST',
@@ -53,11 +49,11 @@ var AddSourceModel = Backbone.Model.extend({
 		return msg;
 	},
 
-	validateSourceUrl: function(value, attr, computedState) {
+	validateSourceUrlAlreadyExist: function() {
 		var url = '/source_manager/validate_source_url/',
 			data = {},
 			msg = false;
-		data[attr] = value;
+		data['url'] = this.get('url');
 		$.ajax({
 			url: url,
 			type: 'POST',
