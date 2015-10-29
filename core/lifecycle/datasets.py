@@ -340,9 +340,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
         else:
-            fields['file_size'] = self.dataset_revision.size
-            fields['file_name'] = self.dataset_revision.filename
-            fields['end_point'] = self.dataset_revision.end_point
+            if fields.has_key('end_point') and not fields['end_point']:
+                fields['file_size'] = self.dataset_revision.size
+                fields['file_name'] = self.dataset_revision.filename
+                fields['end_point'] = self.dataset_revision.end_point
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
