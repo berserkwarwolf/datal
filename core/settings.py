@@ -24,8 +24,9 @@ DATABASES = {
 }
 
 USE_DATASTORE = 's3' # uses s3 | sftp
-USE_SEARCHINDEX = 'searchify'
 USE_SEARCHINDEX = 'elasticsearch'
+
+PAGINATION_RESULTS_PER_PAGE = 10
 
 TIME_ZONE = 'America/Santiago'
 
@@ -38,7 +39,7 @@ LANGUAGES = (
 USE_I18N = True
 USE_L10N = True
 
-SECRET_KEY = ''
+SECRET_KEY = '1'
 
 INSTALLED_APPS = (
     'sass_processor',
@@ -377,4 +378,14 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 try:
     from core.local_settings import *
 except ImportError:
+    pass
+
+try:
+    INSTALLED_APPS += INSTALLED_PLUGINS
+except:
+    pass
+
+try:
+    LOCALE_PATHS += PLUGIN_LOCALES
+except:
     pass

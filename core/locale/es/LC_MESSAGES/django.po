@@ -447,9 +447,6 @@ msgstr "Vistas"
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-EMBED-TEXT"
 msgstr "Incrustar"
 

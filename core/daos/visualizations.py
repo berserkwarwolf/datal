@@ -16,7 +16,7 @@ from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
 from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization, Setting
 from core.exceptions import SearchIndexNotFoundException
-from core.lib.searchify import SearchifyIndex
+
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
 from core.builders.visualizations import VisualizationImplBuilder
@@ -27,6 +27,11 @@ from core import helpers
 from datetime import date, timedelta
 
 logger = logging.getLogger(__name__)
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
 
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):

@@ -97,7 +97,7 @@ charts.models.Chart = Backbone.Model.extend({
                 description: res.description,
 
                 //config
-                showLegend: res.showLegend,
+                showLegend: (res.showLegend=='checked'),
 
                 invertData: (res.invertData=='checked'),
                 invertedAxis: (res.invertedAxis=='checked'),
