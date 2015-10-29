@@ -502,7 +502,7 @@ class DataStreamParameter(models.Model):
         null=True
     )
     name = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
-    default = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
+    default = models.CharField(max_length=50, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
     position = models.PositiveSmallIntegerField()
     impl_details = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_DETAILS_LABEL'))
     description = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))

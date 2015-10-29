@@ -54,7 +54,7 @@ class ParameterForm(forms.Form):
 
         data = self.cleaned_data['default']
 
-        return data.strip()[0:30]
+        return data.strip()[:50]
 
 
 
