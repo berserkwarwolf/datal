@@ -879,3 +879,6 @@ msgstr "View dataset"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "View dataview"
+
+msgid "INVALID-TAG"
+msgstr "Invalid Tag"
