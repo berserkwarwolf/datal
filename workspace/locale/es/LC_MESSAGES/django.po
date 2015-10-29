@@ -673,9 +673,6 @@ msgstr "Publicados"
 msgid "APP-VIEWS-TEXT"
 msgstr "Vistas"
 
-# msgid "APP-DASHBOARDS-TEXT"
-# msgstr "Colecciones"
-
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
@@ -2253,9 +2250,6 @@ msgstr "Vistas"
 msgid "APP-VISUALIZATIONS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-REPORTS-TEXT"
 msgstr "Reportes"
 
@@ -3299,3 +3293,12 @@ msgstr ""
 
 msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TEXT"
 msgstr "Si tu archivo no está codificado con UTF-8, probablemente cuando alguien escriba con un set de caracteres diferentes al que has seleccionado el texto se vea lleno de símbolos raros como estos: IÃ±tÃ«rnÃ¢tiÃ´nÃ lizÃ¦tiÃ"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Mapas"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Rango inválido"
+
+msgid "APP-INVALID-REQUIRED"
+msgstr "Requerido"

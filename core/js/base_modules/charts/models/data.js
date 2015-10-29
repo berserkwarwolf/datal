@@ -102,7 +102,7 @@ charts.models.ChartData = Backbone.Model.extend({
             url,
             endpoint = 'charts/';
 
-        if (filters.type === 'mapchart') {
+        if (filters.type === 'mapchart' || filters.type === 'trace' ) {
             endpoint = 'maps/';
         }
 

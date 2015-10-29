@@ -23,28 +23,43 @@
 
 				<div class="selected-ranges-view">
 					<form class="form" novalidate>
-						<div class="row">
+						<div class="row input-row hidden" data-name="range_lat">
 							<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT" %}</label>
 							<div class="hot-sel-1">
 								<span class="color"></span>
 								<input name="range_lat" type="text" />
+								<p class="validation-not-empty hidden">{% trans "APP-INVALID-REQUIRED" %}</p>
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row input-row hidden" data-name="range_lon">
 							<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT" %}</label>
 							<div class="hot-sel-2">
 								<span class="color"></span>
 								<input name="range_lon" type="text" />
+								<p class="validation-not-empty hidden">{% trans "APP-INVALID-REQUIRED" %}</p>
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 
-						<div class="row">
+						<div class="row input-row hidden" data-name="range_trace">
+							<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-TRACE-TEXT" %}</label>
+							<div class="hot-sel-4">
+								<span class="color"></span>
+								<input name="range_trace" type="text" />
+								<p class="validation-not-empty hidden">{% trans "APP-INVALID-REQUIRED" %}</p>
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
+							</div>
+						</div>
+
+						<div class="row input-row hidden" data-name="range_data">
 							<label>{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT" %}</label>
 							<p class="tip">{% trans "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT" %}</p>
 							<div class="hot-sel-3">
 								<span class="color"></span>
 								<input name="range_data" type="text" />
+								<p class="validation-invalid-range hidden">{% trans "APP-INVALID-RANGE" %}</p>
 							</div>
 						</div>
 					</form>

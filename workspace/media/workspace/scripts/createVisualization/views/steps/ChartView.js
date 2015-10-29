@@ -27,7 +27,7 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-        this.modalView = new ChartSelectDataModalView({
+        this.modalView = new ModalView({
           el: '#ChartSelectDataModal',
           model: this.model,
           dataStreamModel: options.dataStreamModel
@@ -154,8 +154,19 @@ var ChartView = StepViewSPA.extend({
 
 	onInputChanged: function(e){
 		var input = $(e.currentTarget);
-		this.model.set(input.data('ref'), input.val());
-		this.fetchPreviewData();
+			value = input.val();
+
+		var valid = this.model.set(input.data('ref'), input.val(), {validate: true});
+
+		if (valid) {
+			this.fetchPreviewData();
+			input.removeClass('has-error');
+			this.nextBtn.removeClass('enabled');
+		} else {
+			console.error(this.model.validationError);
+			input.addClass('has-error');
+			this.nextBtn.addClass('disabled');
+		}
 	},
 
 	onRadioChanged: function(e){
@@ -166,7 +177,8 @@ var ChartView = StepViewSPA.extend({
 			$('#nullValuePreset').show();
 		}else{
 			this.fetchPreviewData();
-			$('#nullValuePreset').hide();
+			this.model.unset('nullValuePreset');
+			$('#nullValuePreset').hide().val('');
 		}
 	},
 

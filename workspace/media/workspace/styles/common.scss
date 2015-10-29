@@ -453,7 +453,7 @@ body{background:$color-base;height:100%;min-width:998px;}
 .icon-visualization,
 .icon-dashboard,
 .icon-warning,
-.icon-check{background:url(../images/common/ic_resources.png) no-repeat;width:20px;height:20px;display:inline-block;}
+.icon-check{background:url(/static/workspace/images/common/ic_resources.png) no-repeat;width:20px;height:20px;display:inline-block;}
 .icon-dataset{background-position:0 0;}
 .icon-dataview{background-position:0 -20px;}
 .icon-visualization{background-position:0 -40px;}
@@ -557,7 +557,7 @@ i.icon.TNCLIMA{}
 }
   .alert p, .alert a{display:inline;color:#FFF;line-height:24px;text-shadow:0 1px #1750b7;font-size:14px;}
   /* Alerts - Icons */
-  .alert i.icon{background-image:url('../images/common/ic_resources.png');background-repeat:no-repeat;width:17px;height:17px;margin:3px 6px 3px 3px;padding:0;float:left;}
+  .alert i.icon{background-image:url('/static/workspace/images/common/ic_resources.png');background-repeat:no-repeat;width:17px;height:17px;margin:3px 6px 3px 3px;padding:0;float:left;}
   .alert i.icon.info{background-position:0 -81px;}
   /* Alerts - Buttons */
   .alert .alpha{color:#FFF;}
@@ -602,7 +602,7 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .ov-content input{width:100px;}
 .ao-popup-overlay .contentForm .row{padding-bottom:15px;}
 .ao-popup-overlay .contentForm input, .ao-popup-overlay .contentForm .row select{width:100%;background:#fff;box-shadow:0 0 5px rgba(0, 0, 0, 0.1) inset;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;padding:5px;font-size:12px;}
-.ao-popup-overlay input.search{width:200px;color:#999;font-style:italic;background-image:url('../images/common/ic_search.png');background-repeat:no-repeat;background-position:8px 10px;padding:10px 0 10px 30px;}
+.ao-popup-overlay input.search{width:200px;color:#999;font-style:italic;background-image:url('/static/workspace/images/common/ic_search.png');background-repeat:no-repeat;background-position:8px 10px;padding:10px 0 10px 30px;}
 
 .ao-popup-overlay .In .dataStreamForm{padding:0;}
 .ao-popup-overlay .In h4,
@@ -709,7 +709,7 @@ border-color: #ccc;}
        -moz-box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
             box-shadow:inset 0 0 5px 0 rgba(0,0,0,.35);
 }
-.pagination .pager .pagination-button,{text-indent:-10000px;width:30px;background-image:url(../images/common/ic_paginationButtons.png);background-repeat:no-repeat;
+.pagination .pager .pagination-button{text-indent:-10000px;width:30px;background-image:url(/static/workspace/images/common/ic_paginationButtons.png);background-repeat:no-repeat;
     -webkit-transition:background-position .1s ease-in-out;
        -moz-transition:background-position .1s ease-in-out;
         -ms-transition:background-position .1s ease-in-out;

@@ -1,34 +1,66 @@
 [
 {
-    "pk": 5603, 
+    "pk": 5605, 
     "model": "core.visualizationrevision", 
     "fields": {
-        "status": 3,
-        "visualization": 1734, 
+        "status": 3, 
+        "visualization": 1736, 
         "parameters": "", 
         "lib": "google", 
-        "created_at": "2015-09-08T12:45:26",
-        "modified_at": "2013-10-22T10:56:34",
+        "created_at": "2015-10-28T12:02:55", 
+        "modified_at": "2015-10-28T12:07:33", 
         "user": 1647, 
         "meta_text": "", 
-        "datastream_revision": 61455, 
-        "impl_details": "{\"title\": \"Mortalidad por Accidentes del Trabajo Rama de actividad econ\\u00f3mica 2005-2009\", \"data\": \"B3:K12\", \"chart\": {\"headerSelection\": \"B1:K1\", \"is3D\": \"false\", \"labelSelection\": \"A3:A12\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertedAxis\": \"\", \"correlativeData\": \"false\", \"type\": \"piechart\", \"nullValueAction\": \"exclude\"}}"
+        "datastream_revision": 61453, 
+        "impl_details": "{\"title\": \"N\\u00f3minas de Iniciativas de Inversi\\u00f3n (M$) Biblioteca del Congreso Nacional\", \"data\": \"C4:C7\", \"chart\": {\"is3D\": \"false\", \"labelSelection\": \"B4:B7\", \"latitudSelection\": \"\", \"headerSelection\": \"C3:C3\", \"zoom\": null, \"bounds\": \"\", \"mapType\": \"\", \"longitudSelection\": \"\", \"traceSelection\": \"\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertData\": \"\", \"invertedAxis\": \"\", \"nullValueAction\": \"exclude\", \"type\": \"columnchart\", \"correlativeData\": \"false\"}}"
     }
 },
 {
-    "pk": 5604, 
+    "pk": 5606, 
     "model": "core.visualizationrevision", 
     "fields": {
-        "status": 3,
-        "visualization": 1735, 
+        "status": 3, 
+        "visualization": 1737, 
         "parameters": "", 
         "lib": "google", 
-        "created_at": "2015-09-08T13:28:46", 
-        "modified_at": "2013-10-22T10:56:34",
-        "user": 1647,
+        "created_at": "2015-10-28T12:06:29", 
+        "modified_at": "2015-10-28T12:07:27", 
+        "user": 1647, 
         "meta_text": "", 
-        "datastream_revision": 61456, 
-        "impl_details": "{\"title\": \" Serie de tasa global de fecundidad 1992-2009 \", \"data\": \"B2:S2\", \"chart\": {\"headerSelection\": \"B1:S1\", \"is3D\": \"false\", \"labelSelection\": \"A2:A2\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertedAxis\": \"checked\", \"correlativeData\": \"false\", \"type\": \"linechart\", \"nullValueAction\": \"exclude\"}}"
+        "datastream_revision": 61452, 
+        "impl_details": "{\"title\": \"IEP Primer Trimestre 2012 Ministerio de Defensa Nacional \", \"data\": \"C2:E22\", \"chart\": {\"is3D\": \"false\", \"labelSelection\": \"B2:B22\", \"latitudSelection\": \"\", \"headerSelection\": \"C1:E1\", \"zoom\": null, \"bounds\": \"\", \"mapType\": \"\", \"longitudSelection\": \"\", \"traceSelection\": \"\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertData\": \"\", \"invertedAxis\": \"\", \"nullValueAction\": \"exclude\", \"type\": \"columnchart\", \"correlativeData\": \"false\"}}"
+    }
+},
+{
+    "pk": 5607, 
+    "model": "core.visualizationrevision", 
+    "fields": {
+        "status": 3, 
+        "visualization": 1738, 
+        "parameters": "", 
+        "lib": "google", 
+        "created_at": "2015-10-28T12:17:15", 
+        "modified_at": "2015-10-28T12:17:17", 
+        "user": 1647, 
+        "meta_text": "", 
+        "datastream_revision": 404, 
+        "impl_details": "{\"title\": \"Ingresos de Operaciones de Gobierno  1990 A 2010\", \"data\": \"D10:X15\", \"chart\": {\"is3D\": \"false\", \"labelSelection\": \"B10:B15\", \"latitudSelection\": \"\", \"headerSelection\": \"D6:X6\", \"zoom\": null, \"bounds\": \"\", \"mapType\": \"\", \"longitudSelection\": \"\", \"traceSelection\": \"\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertData\": \"\", \"invertedAxis\": \"checked\", \"nullValueAction\": \"exclude\", \"type\": \"columnchart\", \"correlativeData\": \"false\"}}"
+    }
+},
+{
+    "pk": 5608, 
+    "model": "core.visualizationrevision", 
+    "fields": {
+        "status": 3, 
+        "visualization": 1739, 
+        "parameters": "", 
+        "lib": "google", 
+        "created_at": "2015-10-28T12:25:27", 
+        "modified_at": "2015-10-28T12:25:55", 
+        "user": 1647, 
+        "meta_text": "", 
+        "datastream_revision": 404, 
+        "impl_details": "{\"title\": \"Gastos de Operaciones de Gobierno 1990 A 2010\", \"data\": \"D17:X22\", \"chart\": {\"is3D\": \"false\", \"labelSelection\": \"B17:B22\", \"latitudSelection\": \"\", \"headerSelection\": \"D6:X6\", \"zoom\": null, \"bounds\": \"\", \"mapType\": \"\", \"longitudSelection\": \"\", \"traceSelection\": \"\"}, \"format\": {\"showLegend\": \"checked\", \"chartTemplate\": \"basicchart\", \"nullValuePreset\": \"\", \"invertData\": \"\", \"invertedAxis\": \"checked\", \"nullValueAction\": \"exclude\", \"type\": \"columnchart\", \"correlativeData\": \"false\"}}"
     }
 }
 ]

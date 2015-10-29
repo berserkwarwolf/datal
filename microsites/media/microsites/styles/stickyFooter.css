@@ -16,7 +16,7 @@ body > .layout{height:auto;min-height:100%;}
 .miniFooterJunar ul li:before{content:"·";color:#3d3e3e;padding:0 5px;display:inline-block;}
 .miniFooterJunar ul li:first-child:before{display:none;}
 .miniFooterJunar p{float:right;}
-.miniFooterJunar p .logoJunar{background:url(../images/microsites/lg_junarFooter.png) no-repeat right -34px;display:block;width:120px;height:34px;line-height:33px;float:left;color:#3d3e3e;position:relative;top:5px;}
+.miniFooterJunar p .logoJunar{background:url(/static/microsites/images/microsites/lg_junarFooter.png) no-repeat right -34px;display:block;width:120px;height:34px;line-height:33px;float:left;color:#3d3e3e;position:relative;top:5px;}
 .miniFooterJunar p .logoJunar strong{text-indent:-10000px;display:inline-block;}
 .miniFooterJunar p .logoJunar:hover{text-decoration:none;}
 .miniFooterJunar p span{position:relative;top:13px;display:block;float:left;padding-left:10px;}

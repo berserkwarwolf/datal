@@ -66,8 +66,8 @@ var FinishModel = StepModel.extend({
 
 	// notes use NicEditor, so can't be validated as always (?)
 	validate_notes: function(){
-			max_length = $("#notes_reference").data('max_length');
-			return (this.get('data').notes.length < max_length)
+		max_length = $("#notes_reference").data('max_length');
+		return (this.get('data').notes.length < max_length)
 	},
 
 	setData: function(){

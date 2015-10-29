@@ -105,7 +105,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                                     allowed_states=allowed_states)
         if parent_status != StatusChoices.PUBLISHED:
             if self.datastream_revision.dataset.last_revision.status != StatusChoices.PUBLISHED:
-                raise ParentNotPuslishedException()
+                raise ParentNotPublishedException()
 
         self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()
@@ -146,25 +146,25 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             if publish_fail:
                 raise ChildNotApprovedException(self.datastream.last_revision)
 
-    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
+    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES, to_status=StatusChoices.DRAFT):
         """ Despublica la revision de un dataset """
 
         if self.datastream_revision.status not in allowed_states:
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
-                                    to_state=StatusChoices.DRAFT,
+                                    to_state=to_status,
                                     allowed_states=allowed_states)
 
 
         if killemall:
-            self._unpublish_all()
+            self._unpublish_all(to_status=to_status)
         else:
             revcount = DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).count()
 
             if revcount == 1:
                 self._unpublish_all()
             else:
-                self.datastream_revision.status = StatusChoices.DRAFT
+                self.datastream_revision.status = to_status
                 self.datastream_revision.save()
 
         search_dao = DatastreamSearchDAOFactory().create(self.datastream_revision)
@@ -174,11 +174,11 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         self._log_activity(ActionStreams.UNPUBLISH)
 
-    def _unpublish_all(self):
+    def _unpublish_all(self, to_status=StatusChoices.DRAFT):
         """ Despublica todas las revisiones del datastream y la de todos sus visualization hijos en cascada """
 
         DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED)\
-            .update(status=StatusChoices.DRAFT)
+            .update(status=to_status)
 
         with transaction.atomic():
             visualization_revisions = VisualizationRevision.objects.select_for_update().filter(
@@ -188,7 +188,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
             for visualization_rev in visualization_revisions:
                 VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization_rev.id).unpublish(
-                    killemall=True
+                    killemall=True, to_status=to_status
                 )
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):

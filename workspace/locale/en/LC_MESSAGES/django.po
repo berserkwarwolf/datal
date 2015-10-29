@@ -679,9 +679,6 @@ msgstr "Published"
 msgid "APP-VIEWS-TEXT"
 msgstr "Data Views"
 
-# msgid "APP-DASHBOARDS-TEXT"
-# msgstr "Dashboards"
-
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizations"
 
@@ -2266,9 +2263,6 @@ msgstr "Data Views"
 msgid "APP-VISUALIZATIONS-TEXT"
 msgstr "Visualizations"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Dashboards"
-
 msgid "APP-REPORTS-TEXT"
 msgstr "Reports"
 
@@ -3315,3 +3309,12 @@ msgstr ""
 
 msgid "APP-OVERLAY-DATASET-FILE-AVOIDERRORS-TEXT"
 msgstr "If your file is not encoded in UTF-8, probably when someone writes with a set of characters different to the one that you selected, the text might be full of strange symbols like these: IÃ±tÃ«rnÃ¢tiÃ´nÃ lizÃ¦tiÃ"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Maps"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Invalid range"
+
+msgid "APP-INVALID-NOT-EMPTY"
+msgstr "Required"

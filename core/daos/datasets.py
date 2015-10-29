@@ -11,7 +11,6 @@ from core.utils import slugify
 from core import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
-from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
@@ -21,6 +20,13 @@ from core.models import DataStreamRevision, VisualizationRevision
 import logging
 
 logger = logging.getLogger(__name__)
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
+
+
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
     """ class for manage access to datasets' database tables """

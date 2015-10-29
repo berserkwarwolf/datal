@@ -21,7 +21,7 @@
 .sidebar .filters dd span:hover{background:#eee;}
 .sidebar .filters .filter-active,
 .sidebar .filters dd.filter-active span,
-.sidebar .filters dd.filter-active span:hover{background:#eee url(../../images/_workspace/ic_filtersArrow.gif) no-repeat right 7px;font-weight:bold;color:#333;}
+.sidebar .filters dd.filter-active span:hover{background:#eee url(/static/workspace/images/_workspace/ic_filtersArrow.gif) no-repeat right 7px;font-weight:bold;color:#333;}
 .sidebar .filters dd.filter-active{background:none;}
 
 /*RESOURCE ICONS*/

@@ -14,8 +14,10 @@ var viewVisualizationView = Backbone.View.extend({
 		this.template = _.template( $("#context-menu-template").html() );
 		this.chartsFactory = new charts.ChartsFactory();
 
+		$("#ajax_loading_overlay").show();
+
 		this.listenTo(this.model, "change", this.render);
-		
+
 		this.setupChart();
 		this.render();
 	},
@@ -71,6 +73,8 @@ var viewVisualizationView = Backbone.View.extend({
 			model: chartModelInstance,
 			mapOptions: {}
 		});
+        this.listenTo(this.chartInstance.model.data, 'fetch:start', this.onFetchStart, this);
+        this.listenTo(this.chartInstance.model.data, 'fetch:end', this.onFetchEnd, this);
 
 		this.setChartContainerSize();
 
@@ -84,7 +88,6 @@ var viewVisualizationView = Backbone.View.extend({
 
 		this.$el.find('#id_visualizationResult .loading').height(height);
 
-		$("#ajax_loading_overlay").show();
 	},
 
 	setChartContainerSize:function(){
@@ -213,4 +216,14 @@ var viewVisualizationView = Backbone.View.extend({
 		});
 	},
 
+    onFetchStart: function () {
+        console.info('MapChart: fetch data started');
+        this.$('.visualizationContainer .loading').removeClass('hidden');
+    },
+
+    onFetchEnd: function () {
+        console.info('MapChart: fetch data ended');
+        this.$('.visualizationContainer .loading').addClass('hidden');
+        $("#ajax_loading_overlay").hide();
+    }
 });
