@@ -11,6 +11,8 @@ Vangrant (Version 1.7.2):https://www.vagrantup.com/download-archive/v1.7.2.html
 
 VirtualBox: https://www.virtualbox.org/
 
+En Windows también se debe instalar GIT: http://git-scm.com/download/win
+
 
 Instalacion
 -----------
