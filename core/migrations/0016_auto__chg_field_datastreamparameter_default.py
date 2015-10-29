@@ -10,7 +10,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
 
         # Changing field 'DataStreamParameter.default'
-        db.alter_column('ao_datastream_parameters', 'default', self.gf('django.db.models.fields.CharField')(max_length=50))
+        db.alter_column('ao_datastream_parameters', 'default', self.gf('django.db.models.fields.CharField')(max_length=100))
 
     def backwards(self, orm):
 

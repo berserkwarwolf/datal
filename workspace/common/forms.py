@@ -54,7 +54,8 @@ class ParameterForm(forms.Form):
 
         data = self.cleaned_data['default']
 
-        return data.strip()[:50]
+        # El modelo de datos soporta 100 caracteres solamente
+        return data.strip()[:100]
 
 
 
