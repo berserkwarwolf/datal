@@ -560,7 +560,7 @@ class DatasetRevision(RevisionModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
-    spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
+    spatial = models.CharField(max_length=80, blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
 
