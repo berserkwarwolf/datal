@@ -30,7 +30,7 @@ var CreateDashboard = Backbone.Model.extend({
 		
         this.attributes.$Container.find('#id_dashboard_tag').tagging({
             tagContainer : '#'+this.attributes.$Container.attr("id") +' #id_tag_container',
-            source: '/tag_manager/action_search',
+            source: '/rest/tags.json',
             minLength: 3
         });
     },

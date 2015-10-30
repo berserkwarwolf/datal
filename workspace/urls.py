@@ -12,6 +12,8 @@ from workspace.rest.datasets import RestDataSetViewSet
 from workspace.rest.datastreams import RestDataStreamViewSet
 from workspace.rest.maps import RestMapViewSet
 from workspace.rest.charts import RestChartViewSet
+from workspace.rest.sources import RestSourceViewSet
+from workspace.rest.tags import RestTagViewSet
 
 
 router = routers.DefaultRouter()
@@ -19,7 +21,8 @@ router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
 router.register(r'maps', RestMapViewSet, base_name='maps')
 router.register(r'charts', RestChartViewSet, base_name='charts')
 router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
-
+router.register(r'sources', RestSourceViewSet, base_name='sources')
+router.register(r'tags', RestTagViewSet, base_name='tags')
 
 def jsi18n(request, packages=None, domain=None):
     if not domain:
@@ -53,8 +56,6 @@ urlpatterns = patterns('',
 
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
     (r'^accounts/', include('workspace.manageMyAccount.urls')),
-    (r'^tag_manager/', include('workspace.searchTags.urls')),
-    (r'^source_manager/', include('workspace.searchSources.urls')),
     (r'^viewLandingPage/', include('workspace.viewLandingPage.urls')),
     (r'^admin/', include('workspace.manageAccount.urls')),
     (r'^auth/', include('core.auth.urls')),

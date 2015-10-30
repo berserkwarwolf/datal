@@ -71,8 +71,8 @@ $(document).ready(function(){
   var finishModel = new FinishWebserviceModel({
     name: 'finish',
     saveUrl: "{% url 'manageDatasets.create_type' 'webservice' %}",
-    sourceUrl: '/source_manager/action_search',
-    tagUrl: '/tag_manager/action_search',
+    sourceUrl: '/rest/sources.json',
+    tagUrl: '/rest/tags.json',
   });
   var finishView = new FinishView({model: finishModel});
 
