@@ -984,3 +984,9 @@ msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualizaci�
 
 msgid "ERROR-DUPLICATED-CATEGORY"
 msgstr "Categoría duplicada"
+
+msgid "EXCEPTION-TITLE-UNKNOWN"
+msgstr "Error desconocido"
+
+msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
+msgstr "Error desconocido con nombre %(exception_name)s y trace '%(exception_trace)s'"
