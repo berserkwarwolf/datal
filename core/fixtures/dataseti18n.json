@@ -1,409 +1,50 @@
 [
-    {
-        "pk": 631,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 631,
-            "created_at": "2011-10-28T12:25:21",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Estado de Operaciones de Gobierno"
-        }
-    },
-    {
-        "pk": 899,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 899,
-            "created_at": "2012-05-14T15:27:45",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Sucursales ChileAtiende"
-        }
-    },
-    {
-        "pk": 61698,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61699,
-            "created_at": "2012-05-15T13:49:03",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Defunciones y Mortalidad 2009"
-        }
-    },
-    {
-        "pk": 61699,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61700,
-            "created_at": "2012-05-16T10:40:31",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Mortalidad  por Accidentes de Trabajo"
-        }
-    },
-    {
-        "pk": 61700,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61701,
-            "created_at": "2012-05-16T12:14:57",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "IEP Primer Trimestre 2012"
-        }
-    },
-    {
-        "pk": 61701,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61702,
-            "created_at": "2012-05-17T17:12:11",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "N\u00f3minas de Iniciativas de Inversi\u00f3n (M$)"
-        }
-    },
-    {
-        "pk": 61702,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61703,
-            "created_at": "2012-05-18T11:46:13",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Mortalidad  por Accidentes de Trabajo"
-        }
-    },
-    {
-        "pk": 61703,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61704,
-            "created_at": "2012-05-18T12:04:00",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Mortalidad por Accidentes del Trabajo"
-        }
-    },
-    {
-        "pk": 61704,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61705,
-            "created_at": "2012-05-18T13:09:15",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Serie de tasa global de fecundidad"
-        }
-    },
-    {
-        "pk": 61705,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61706,
-            "created_at": "2012-05-18T13:36:37",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2006"
-        }
-    },
-    {
-        "pk": 61706,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61707,
-            "created_at": "2012-05-18T13:44:22",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2007"
-        }
-    },
-    {
-        "pk": 61707,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61708,
-            "created_at": "2012-05-18T13:51:15",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2008"
-        }
-    },
-    {
-        "pk": 61708,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61709,
-            "created_at": "2012-05-18T16:50:44",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2009"
-        }
-    },
-    {
-        "pk": 61709,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61710,
-            "created_at": "2012-05-18T16:52:25",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2010"
-        }
-    },
-    {
-        "pk": 61710,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61711,
-            "created_at": "2012-05-18T17:10:21",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2006"
-        }
-    },
-    {
-        "pk": 61711,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61712,
-            "created_at": "2012-05-18T17:13:06",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2007"
-        }
-    },
-    {
-        "pk": 61712,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61713,
-            "created_at": "2012-05-18T17:27:30",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2008"
-        }
-    },
-    {
-        "pk": 61713,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61714,
-            "created_at": "2012-05-18T17:29:55",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2009"
-        }
-    },
-    {
-        "pk": 61714,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61715,
-            "created_at": "2012-05-21T10:44:13",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Rendimiento 2010"
-        }
-    },
-    {
-        "pk": 61715,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 61716,
-            "created_at": "2012-05-21T10:52:00",
-            "description": "Descripcion del conjuto de datos",
-            "language": "es",
-            "title": "Nivel de Calificaciones 2006"
-        }
-    },
-    {
-        "pk": 66880,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66880,
-            "created_at": "2013-08-09T16:27:38",
-            "description": "A\u00f1o 2006 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34451"
-        }
-    },
-    {
-        "pk": 66882,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66882,
-            "created_at": "2013-08-09T16:27:52",
-            "description": "A\u00f1o 2007 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34457"
-        }
-    },
-    {
-        "pk": 66884,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66884,
-            "created_at": "2013-08-09T16:28:05",
-            "description": "A\u00f1o 2008 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34463"
-        }
-    },
-    {
-        "pk": 66887,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66887,
-            "created_at": "2013-08-09T16:28:17",
-            "description": "A\u00f1o 2009 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34469"
-        }
-    },
-    {
-        "pk": 66891,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66891,
-            "created_at": "2013-08-09T16:28:29",
-            "description": "A\u00f1o 2010 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34475"
-        }
-    },
-    {
-        "pk": 66900,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66900,
-            "created_at": "2013-08-09T16:33:33",
-            "description": "A\u00f1o 2006 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34451"
-        }
-    },
-    {
-        "pk": 66903,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66903,
-            "created_at": "2013-08-09T16:33:45",
-            "description": "A\u00f1o 2007 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34457"
-        }
-    },
-    {
-        "pk": 66906,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66906,
-            "created_at": "2013-08-09T16:33:50",
-            "description": "A\u00f1o 2006 - CSV",
-            "language": "es",
-            "title": "Nivel Calificaciones: 2006 al 2010 - 8448"
-        }
-    },
-    {
-        "pk": 66909,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66909,
-            "created_at": "2013-08-09T16:33:56",
-            "description": "A\u00f1o 2008 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34463"
-        }
-    },
-    {
-        "pk": 66917,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66917,
-            "created_at": "2013-08-09T16:34:07",
-            "description": "A\u00f1o 2009 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34469"
-        }
-    },
-    {
-        "pk": 66926,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 66926,
-            "created_at": "2013-08-09T16:34:19",
-            "description": "A\u00f1o 2010 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34475"
-        }
-    },
-    {
-        "pk": 67380,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67380,
-            "created_at": "2013-08-27T16:48:11",
-            "description": "A\u00f1o 2006 - CSV",
-            "language": "es",
-            "title": "Nivel Calificaciones 2006"
-        }
-    },
-    {
-        "pk": 67393,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67393,
-            "created_at": "2013-08-27T16:53:49",
-            "description": "A\u00f1o 2006 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento 2006"
-        }
-    },
-    {
-        "pk": 67394,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67394,
-            "created_at": "2013-08-27T16:54:03",
-            "description": "A\u00f1o 2007 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento 2007"
-        }
-    },
-    {
-        "pk": 67395,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67395,
-            "created_at": "2013-08-27T16:54:17",
-            "description": "A\u00f1o 2008 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento 2008"
-        }
-    },
-    {
-        "pk": 67396,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67396,
-            "created_at": "2013-08-27T16:54:33",
-            "description": "A\u00f1o 2009 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento 2009"
-        }
-    },
-    {
-        "pk": 67397,
-        "model": "core.dataseti18n",
-        "fields": {
-            "dataset_revision": 67397,
-            "created_at": "2013-08-27T16:55:19",
-            "description": "A\u00f1o 2010 - CSV",
-            "language": "es",
-            "title": "Nivel Rendimiento 2010"
-        }
+{
+    "pk": 631, 
+    "model": "core.dataseti18n", 
+    "fields": {
+        "description": "Descripcion del conjuto de datos", 
+        "language": "es", 
+        "title": "Estado de Operaciones de Gobierno", 
+        "created_at": "2011-10-28T12:25:21", 
+        "dataset_revision": 631, 
+        "notes": ""
     }
+},
+{
+    "pk": 899, 
+    "model": "core.dataseti18n", 
+    "fields": {
+        "description": "Descripcion del conjuto de datos", 
+        "language": "es", 
+        "title": "Sucursales ChileAtiende", 
+        "created_at": "2012-05-14T15:27:45", 
+        "dataset_revision": 899, 
+        "notes": ""
+    }
+},
+{
+    "pk": 61700, 
+    "model": "core.dataseti18n", 
+    "fields": {
+        "description": "Descripcion del conjuto de datos", 
+        "language": "es", 
+        "title": "IEP Primer Trimestre 2012", 
+        "created_at": "2012-05-16T12:14:57", 
+        "dataset_revision": 61701, 
+        "notes": ""
+    }
+},
+{
+    "pk": 61701, 
+    "model": "core.dataseti18n", 
+    "fields": {
+        "description": "Descripcion del conjuto de datos", 
+        "language": "es", 
+        "title": "N\u00f3minas de Iniciativas de Inversi\u00f3n (M$)", 
+        "created_at": "2012-05-17T17:12:11", 
+        "dataset_revision": 61702, 
+        "notes": ""
+    }
+}
 ]

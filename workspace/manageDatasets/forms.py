@@ -129,6 +129,7 @@ class DatasetForm(forms.Form):
     #Spatial
     spatial = forms.CharField(
         required=False,
+        max_length=80,
         label=ugettext_lazy('APP-REGION-TEXT'),
         widget=forms.TextInput(attrs={
             'data-bind':'value:spatial,events:[\'keyup\']',

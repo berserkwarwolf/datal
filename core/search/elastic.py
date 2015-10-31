@@ -3,6 +3,9 @@ from django.conf import settings
 
 from core.search.finder import Finder, FinderManager
 import re
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class ElasticsearchFinder(Finder):
@@ -11,7 +14,7 @@ class ElasticsearchFinder(Finder):
 
     def search(self, *args, **kwargs):
 
-        #self.logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
+        logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
         self.query = kwargs.get('query', '')
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
@@ -44,7 +47,7 @@ class ElasticsearchFinder(Finder):
         scoring = kwargs.get('scoring', 1)
 
         query = self.__build_query()
-        #self.logger.info("Query arguments: %s (%s)" % (query, self.sort))
+        logger.info("Query arguments: %s (%s)" % (query, self.sort))
 
         results = self.index.es.search(index=settings.SEARCH_INDEX['index'],
                                        body=query,
@@ -72,7 +75,7 @@ class ElasticsearchFinder(Finder):
         return results, meta_data, facets
 
     def __build_query(self):
-        #self.logger.info("El query es: %s" % self.query)
+        logger.info("El query es: %s" % self.query)
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":

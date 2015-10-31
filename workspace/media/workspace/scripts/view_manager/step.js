@@ -113,12 +113,24 @@ var Step0 = Step.extend({
         $args.each(function(index){
             var name = this.nodeName;
             var element = $(this);
-            if(typeof element.attr('editable') != "undefined" && element.attr('editable') != "false"){
+
+            console.log(element.attr('editable'));
+
+            console.log(typeof element.attr('editable'));
+
+
+            var html = '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" ';
+            if(typeof element.attr('editable') != undefined && element.attr('editable') != "False"){
+                console.log('log true')
                 isEditable = true;
-                inputs += '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" data-edit="true" id="param'+index+'" type="text"/></div></div>';
+                html +=' data-edit="true" ';
             }else{
-                inputs += '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" data-edit="false" id="param'+index+'" type="text" disabled="disabled"/></div></div>';
+                console.log('log true')
+                html +=' data-edit="false" readonly="readonly" ';
             }
+            html += ' id="param'+index+'" type="text"/></div></div>';
+            inputs += html
+
         });
 
         $('#id_parameters_container').append(inputs);

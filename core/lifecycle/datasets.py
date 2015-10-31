@@ -11,6 +11,8 @@ from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IllegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
+from django.utils.translation import ugettext_lazy
+
 
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -147,14 +149,16 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = StatusChoices.PUBLISHED
         self.dataset_revision.save()
-
+            
         self._update_last_revisions()
-
-        self._publish_childs()
-
+            
+        # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists():
+            self._publish_childs()
+            
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
-
+            
         self._log_activity(ActionStreams.PUBLISH)
 
     def _publish_childs(self):
@@ -178,6 +182,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 except IllegalStateException:
                     publish_fail.append(datastream_revision)
 
+
+            ## Aca deberia ir lo mismo que los ds, pero para las vz?
+
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)
 
@@ -196,7 +203,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             for datastream_revision in datastream_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).unpublish(
-                    killemall=True)
+                    killemall=True, to_status=StatusChoices.PENDING_REVIEW)
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
@@ -333,9 +340,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
         else:
-            fields['file_size'] = self.dataset_revision.size
-            fields['file_name'] = self.dataset_revision.filename
-            fields['end_point'] = self.dataset_revision.end_point
+            if fields.has_key('end_point') and not fields['end_point']:
+                fields['file_size'] = self.dataset_revision.size
+                fields['file_name'] = self.dataset_revision.filename
+                fields['end_point'] = self.dataset_revision.end_point
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
