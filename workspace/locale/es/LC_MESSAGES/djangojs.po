@@ -864,3 +864,6 @@ msgstr "Ver conjunto de datos"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "Ver vista"
+
+msgid "INVALID-TAG"
+msgstr "Tag invalido"

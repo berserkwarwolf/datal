@@ -33,6 +33,19 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
+class UnkownException(DATALException):
+    title = _('EXCEPTION-TITLE-UNKNOWN')
+    description = _('EXCEPTION-DESCRIPTION-UNKNOWN')
+    tipo = 'unknown'
+
+    def __init__(self, name, trace):
+        super(UnkownException, self).__init__(
+            exception_name=name,
+            exception_trace=trace)
+
+    def get_actions(self):
+        return [ContactUsExceptionAction()]
+
 
 class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')

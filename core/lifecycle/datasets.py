@@ -152,8 +152,8 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             
         self._update_last_revisions()
             
-        # si hay DataStreams en DRAFT/Pending no publica a lo shijos
-        if DataStreamRevision.objects.filter(dataset=self.dataset, status__in=ACCEPT_ALLOWED_STATES).count() == 0:
+        # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists():
             self._publish_childs()
             
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
@@ -203,7 +203,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             for datastream_revision in datastream_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).unpublish(
-                    killemall=True)
+                    killemall=True, to_status=StatusChoices.PENDING_REVIEW)
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
@@ -340,9 +340,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
         else:
-            fields['file_size'] = self.dataset_revision.size
-            fields['file_name'] = self.dataset_revision.filename
-            fields['end_point'] = self.dataset_revision.end_point
+            if fields.has_key('end_point') and not fields['end_point']:
+                fields['file_size'] = self.dataset_revision.size
+                fields['file_name'] = self.dataset_revision.filename
+                fields['end_point'] = self.dataset_revision.end_point
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 

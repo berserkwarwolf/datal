@@ -48,6 +48,28 @@ var CollectWebserviceModel = StepModel.extend({
 			}
 
 		},
+		method_name: function(value, attr, computedState){
+
+			var impl_type = parseInt(computedState.impl_type);
+
+			if(impl_type == 1){
+				if($.trim(value).length == 0){
+					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+				}
+			}
+
+		},
+		namespace: function(value, attr, computedState){
+
+			var impl_type = parseInt(computedState.impl_type);
+
+			if(impl_type == 1){
+				if($.trim(value).length == 0){
+					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+				}
+			}
+
+		},		
 		mbox: [
 			{
 				required: false
