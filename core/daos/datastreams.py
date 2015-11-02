@@ -170,7 +170,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             notes=datastreami18n.notes,
             tags=tags,
             sources=sources,
-            parameters=parameters,
+            parameters=list(parameters),
             public_url=public_url,
             slug= slugify(datastreami18n.title),
             embed_url=embed_url

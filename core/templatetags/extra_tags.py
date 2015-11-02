@@ -1,3 +1,5 @@
+import json
+
 from django import template
 from django.core.urlresolvers import reverse
 from django.template.defaultfilters import stringfilter
@@ -180,8 +182,6 @@ def format(value, arg):
         return value % arg
     except:
         return value
-
-import json
 
 
 @register.filter(name='jsonize')
