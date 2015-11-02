@@ -106,7 +106,7 @@ class Migration(SchemaMigration):
             'meta_text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'modified_at': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'size': ('django.db.models.fields.IntegerField', [], {'default': '0'}),
-            'spatial': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'spatial': ('django.db.models.fields.CharField', [], {'max_length': '80', 'blank': 'True'}),
             'status': ('django.db.models.fields.IntegerField', [], {}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.User']", 'on_delete': 'models.PROTECT'})
         },
@@ -146,7 +146,7 @@ class Migration(SchemaMigration):
         u'core.datastreamparameter': {
             'Meta': {'ordering': "['position']", 'unique_together': "(('datastream_revision', 'name'),)", 'object_name': 'DataStreamParameter', 'db_table': "'ao_datastream_parameters'"},
             'datastream_revision': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['core.DataStreamRevision']", 'null': 'True'}),
-            'default': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'default': ('django.db.models.fields.CharField', [], {'max_length': '100'}),
             'description': ('django.db.models.fields.CharField', [], {'max_length': '100', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'impl_details': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
