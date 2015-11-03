@@ -14,7 +14,8 @@ Las respuestas básicas son de la forma:
 }
 ```
 
-La clase **DefaultAnswer** permite emitir este tipo de respuestas. 
+La clase **DefaultAnswer** permite emitir este tipo de respuestas. Usa 
+[este](https://github.com/datal-org/datal/blob/develop/core/templates/defaul_answer.json) template.  
   
 Para las respuestas no normalizadas (sin *status* por ejemplo) se puede 
 usar la clase **DefaultDictToJson** que 
