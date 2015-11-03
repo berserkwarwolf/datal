@@ -244,7 +244,7 @@ PUT/PATCH /api/v1/datasets/:guid
 
 - **title**: Título del conjunto de datos
 - **description**: Descripción del conjunto de datos
-- **category**: Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **category**: Slug de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
 - **notes**: Opcional. Texto de la nota del conjunto de datos
 - **end_point**: Opcional. Url apuntando al recurso con los datos (archivos o página web).
 - **file**: Opcional. Archivo a subir a la plataforma
@@ -291,7 +291,7 @@ POST /api/v1/datastreams
 
 - **title**: Título del conjunto de datos
 - **description**: Descripción del conjunto de datos
-- **category**: Nombre de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **category**: Slug de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
 - **notes**: Opcional. Texto de la nota del conjunto de datos
 - **table_id**: Opcional. Indice de la tabla en el conjunto de datos, comenzando de cero.
 - **header_row**: Opcional. Indice de la fila a usar como cabecera de la tabla comenzando de cero. Por defecto es vacio
