@@ -230,9 +230,9 @@ Un ejemplo de resultado de un datastream sería así
 
 Creación, Edición y Edición Parcial de recursos.
 
-Al momento solo podemos crear y editar datasets y vistas.
+Al momento solo podemos crear y editar datasets y vistas. Y para poder 
+hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario.
 
-Para probaar algunos de los ejemplos que aparecen en la documentación se deben utilizar los archivos en la carpeta api/tests
 
 ### Datasets
 
@@ -252,36 +252,6 @@ PUT/PATCH /api/v1/datasets/:guid
 - **spatial**: Opcional. Zona geográfica a la cual aplica el conjunto de datos
 - **frequency**: Opcional. Tipo de licencia que aplica sobre el conjunto de datos
 - **mbox**: Opcional. Correo electronico de quien administra el conjunto de datos
-
-Ejemplo de llamada subiendo una fuente online
-```
-curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/dataset-endpoint.json "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
-
-Ejemplo de llamada subiendo una fuente desde un archivo local
-```
-curl -H 'Accept: application/json; indent=4' -X POST -F "title=Restaurantes" -F "description=Restaurantes" -F "category=salud" -F "file=@api/tests/restaurantes.csv" "http://api.dev:8080/api/v1/datasets.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
-
-Ejemplo de llamada de una edición de contenido total (cambian todos los valores)
-```
-curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PUT -d @api/tests/dataset-edit.json "http://api.dev:8080/api/v1/datasets/AGENC-DE-VIAJE.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
-
-Ejemplo de llamada de una edición de contenido parcial (solo cambian los valores que se mandan)
-```
-curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X PATCH -d @api/tests/dataset-patch-edit.json "http://api.dev:8080/api/v1/datasets/AGENC-DE-VIAJE.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
-
-Ejemplo de llamada modificando fuente (no cambia revisión)
-```
-curl -H 'Accept: application/json; indent=4' -X PATCH -F "file=@api/tests/restaurantes2.csv" "http://api.dev:8080/api/v1/datasets/RESTA.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
-
-Ejemplo de llamada modificando fuente y otros valores (cambia revisión)
-```
-curl -H 'Accept: application/json; indent=4' -X PATCH -F "title=Restaurantes" -F "description=Restaurantes (REV)" -F "category=salud" -F "file=@api/tests/restaurantes2.csv" "http://api.dev:8080/api/v1/datasets/RESTA.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
-```
 
 
 ### Datastreams
