@@ -4,6 +4,7 @@ from django.template.defaultfilters import slugify as django_slugify
 from django.template.defaultfilters import date as _date
 from django.db.models.base import ModelState
 
+from core.choices import SOURCE_IMPLEMENTATION_CHOICES
 from core.choices import SourceImplementationChoices
 
 import re
