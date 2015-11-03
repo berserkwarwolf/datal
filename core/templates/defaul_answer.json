@@ -1,0 +1,12 @@
+{
+    "status": {{data.status|lower}},
+    "messages":[
+        {% for message in data.messages %}"{{message}}"{% if not forloop.last %}, {% endif%}{% endfor %}
+        ],
+    
+    {% for extra in data.extras %}
+        {% if extra.type = 'string' %}"{{extra.field}}": "{{extra.value}}"{% endif %}
+        {% if extra.type = 'literal' %}"{{extra.field}}": {{extra.value}}{% endif %}
+        {% if not forloop.last %}, {% endif%}    
+    {% endfor %}
+}

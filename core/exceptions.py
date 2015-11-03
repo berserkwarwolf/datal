@@ -38,6 +38,7 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
+<<<<<<< HEAD
 '''
 ExceptionManager
 Class to receive exceptions from middlewares and other classes and return the HttpResponse Object.
@@ -63,6 +64,21 @@ class ExceptionManager():
         logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
             self.exception.description))
         return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
+=======
+class UnkownException(DATALException):
+    title = _('EXCEPTION-TITLE-UNKNOWN')
+    description = _('EXCEPTION-DESCRIPTION-UNKNOWN')
+    tipo = 'unknown'
+
+    def __init__(self, name, trace):
+        super(UnkownException, self).__init__(
+            exception_name=name,
+            exception_trace=trace)
+
+    def get_actions(self):
+        return [ContactUsExceptionAction()]
+
+>>>>>>> develop
 
 class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
@@ -158,8 +174,13 @@ class VisualizationRequiredException(LifeCycleException):
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
+class VisualizationParentNotPublishedException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED')
+    tipo = 'illegal-state'
 
-class ParentNotPuslishedException(LifeCycleException):
+
+class ParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
     tipo = 'illegal-state'

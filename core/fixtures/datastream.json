@@ -1,432 +1,212 @@
 [
-    {
-        "pk": 78694, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-CALIF-2006-AL-2010", 
-            "user": 1472, 
-            "last_published_revision": 68649, 
-            "last_revision": 68649
-        }
-    }, 
-    {
-        "pk": 78654, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-2012", 
-            "user": 1472, 
-            "last_published_revision": 68624, 
-            "last_revision": 68624
-        }
-    }, 
-    {
-        "pk": 78667, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-90712", 
-            "user": 1472, 
-            "last_published_revision": 68631, 
-            "last_revision": 68631
-        }
-    }, 
-    {
-        "pk": 78662, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-15809", 
-            "user": 1472, 
-            "last_published_revision": 68628, 
-            "last_revision": 68628
-        }
-    }, 
-    {
-        "pk": 78658, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-87472", 
-            "user": 1472, 
-            "last_published_revision": 68626, 
-            "last_revision": 68626
-        }
-    }, 
-    {
-        "pk": 78673, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-11436", 
-            "user": 1472, 
-            "last_published_revision": 68634, 
-            "last_revision": 68634
-        }
-    }, 
-    {
-        "pk": 78673, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-11436", 
-            "user": 1472, 
-            "last_published_revision": 68634, 
-            "last_revision": 68634
-        }
-    }, 
-    {
-        "pk": 78667, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-90712", 
-            "user": 1472, 
-            "last_published_revision": 68631, 
-            "last_revision": 68631
-        }
-    }, 
-    {
-        "pk": 78662, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-15809", 
-            "user": 1472, 
-            "last_published_revision": 68628, 
-            "last_revision": 68628
-        }
-    }, 
-    {
-        "pk": 78658, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-87472", 
-            "user": 1472, 
-            "last_published_revision": 68626, 
-            "last_revision": 68626
-        }
-    }, 
-    {
-        "pk": 78654, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-2012", 
-            "user": 1472, 
-            "last_published_revision": 68624, 
-            "last_revision": 68624
-        }
-    }, 
-    {
-        "pk": 78694, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-CALIF-2006-AL-2010", 
-            "user": 1472, 
-            "last_published_revision": 68649, 
-            "last_revision": 68649
-        }
-    }, 
-    {
-        "pk": 78673, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-11436", 
-            "user": 1472, 
-            "last_published_revision": 68634, 
-            "last_revision": 68634
-        }
-    }, 
-    {
-        "pk": 78667, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-90712", 
-            "user": 1472, 
-            "last_published_revision": 68631, 
-            "last_revision": 68631
-        }
-    }, 
-    {
-        "pk": 78662, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-15809", 
-            "user": 1472, 
-            "last_published_revision": 68628, 
-            "last_revision": 68628
-        }
-    }, 
-    {
-        "pk": 78694, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-CALIF-2006-AL-2010", 
-            "user": 1472, 
-            "last_published_revision": 68649, 
-            "last_revision": 68649
-        }
-    }, 
-    {
-        "pk": 78658, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-87472", 
-            "user": 1472, 
-            "last_published_revision": 68626, 
-            "last_revision": 68626
-        }
-    }, 
-    {
-        "pk": 78654, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-2012", 
-            "user": 1472, 
-            "last_published_revision": 68624, 
-            "last_revision": 68624
-        }
-    }, 
-    {
-        "pk": 78673, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-11436", 
-            "user": 1472, 
-            "last_published_revision": 68634, 
-            "last_revision": 68634
-        }
-    }, 
-    {
-        "pk": 78667, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-90712", 
-            "user": 1472, 
-            "last_published_revision": 68631, 
-            "last_revision": 68631
-        }
-    }, 
-    {
-        "pk": 78662, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-15809", 
-            "user": 1472, 
-            "last_published_revision": 68628, 
-            "last_revision": 68628
-        }
-    }, 
-    {
-        "pk": 78658, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-87472", 
-            "user": 1472, 
-            "last_published_revision": 68626, 
-            "last_revision": 68626
-        }
-    }, 
-    {
-        "pk": 78654, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-RENDI-2006-AL-2012", 
-            "user": 1472, 
-            "last_published_revision": 68624, 
-            "last_revision": 68624
-        }
-    }, 
-    {
-        "pk": 69651, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "MORTA-POR-RAMA-DE-ACTIV", 
-            "user": 1472, 
-            "last_published_revision": 61455, 
-            "last_revision": 61455
-        }
-    }, 
-    {
-        "pk": 69672, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-CALIF-TOTAL-PAIS", 
-            "user": 1472, 
-            "last_published_revision": 61467, 
-            "last_revision": 61467
-        }
-    }, 
-    {
-        "pk": 69671, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-REGIO-22518", 
-            "user": 1472, 
-            "last_published_revision": 61466, 
-            "last_revision": 61466
-        }
-    }, 
-    {
-        "pk": 69670, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-REGIO-73138", 
-            "user": 1472, 
-            "last_published_revision": 61465, 
-            "last_revision": 61465
-        }
-    }, 
-    {
-        "pk": 69669, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-REGIO-39347", 
-            "user": 1472, 
-            "last_published_revision": 61464, 
-            "last_revision": 61464
-        }
-    }, 
-    {
-        "pk": 69668, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-REGIO-85173", 
-            "user": 1472, 
-            "last_published_revision": 61463, 
-            "last_revision": 61463
-        }
-    }, 
-    {
-        "pk": 69667, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-REGIO-METRO", 
-            "user": 1472, 
-            "last_published_revision": 61462, 
-            "last_revision": 61462
-        }
-    }, 
-    {
-        "pk": 69662, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-TOTAL-48689", 
-            "user": 1472, 
-            "last_published_revision": 61461, 
-            "last_revision": 61461
-        }
-    }, 
-    {
-        "pk": 69661, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-TOTAL-59588", 
-            "user": 1472, 
-            "last_published_revision": 61460, 
-            "last_revision": 61460
-        }
-    }, 
-    {
-        "pk": 69657, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-TOTAL-71583", 
-            "user": 1472, 
-            "last_published_revision": 61459, 
-            "last_revision": 61459
-        }
-    }, 
-    {
-        "pk": 69656, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-TOTAL-12360", 
-            "user": 1472, 
-            "last_published_revision": 61458, 
-            "last_revision": 61458
-        }
-    }, 
-    {
-        "pk": 69655, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NIVEL-DE-RENDI-TOTAL-PAIS", 
-            "user": 1472, 
-            "last_published_revision": 61457, 
-            "last_revision": 61457
-        }
-    }, 
-    {
-        "pk": 69654, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "SERIE-DE-TASA-1992-2009", 
-            "user": 1472, 
-            "last_published_revision": 61456, 
-            "last_revision": 61456
-        }
-    },
-    {
-        "pk": 69650, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "MORTA-POR-SEGUN-SEXO-49690", 
-            "user": 1472, 
-            "last_published_revision": 61454, 
-            "last_revision": 61454
-        }
-    }, 
-    {
-        "pk": 69645, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "NOMIN-DE-BIBLI-DEL-12877", 
-            "user": 1472, 
-            "last_published_revision": 61453, 
-            "last_revision": 61453
-        }
-    }, 
-    {
-        "pk": 69620, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "IEP-PRIME-MINIS-DE-DEFEN", 
-            "user": 1472, 
-            "last_published_revision": 61452, 
-            "last_revision": 61452
-        }
-    }, 
-    {
-        "pk": 69619, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "MORTA-POR-SEGUN-SEXO-2002", 
-            "user": 1472, 
-            "last_published_revision": 61451, 
-            "last_revision": 61451
-        }
-    }, 
-    {
-        "pk": 69615, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "DEFUN-Y-SEGUN-AREA-86445", 
-            "user": 1472, 
-            "last_published_revision": 61450, 
-            "last_revision": 61450
-        }
-    }, 
-    {
-        "pk": 69575, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "SUCUR-CHILE-A-LO-LARGO", 
-            "user": 1472, 
-            "last_published_revision": 672, 
-            "last_revision": 672
-        }
-    }, 
-    {
-        "pk": 43445, 
-        "model": "core.datastream", 
-        "fields": {
-            "guid": "OPERA-DEL-EN-MILLO-DE", 
-            "user": 1472, 
-            "last_published_revision": 404, 
-            "last_revision": 404
-        }
+{
+    "pk": 43445, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "OPERA-DEL-EN-MILLO-DE", 
+        "user": 1472, 
+        "last_published_revision": 404, 
+        "last_revision": 404
     }
+},
+{
+    "pk": 69575, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "SUCUR-CHILE-A-LO-LARGO", 
+        "user": 1472, 
+        "last_published_revision": 672, 
+        "last_revision": 672
+    }
+},
+{
+    "pk": 69620, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "IEP-PRIME-MINIS-DE-DEFEN", 
+        "user": 1472, 
+        "last_published_revision": 61452, 
+        "last_revision": 61452
+    }
+},
+{
+    "pk": 69645, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NOMIN-DE-BIBLI-DEL-12877", 
+        "user": 1472, 
+        "last_published_revision": 61453, 
+        "last_revision": 61453
+    }
+},
+{
+    "pk": 69655, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-TOTAL-PAIS", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69656, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-TOTAL-12360", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69657, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-TOTAL-71583", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69661, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-TOTAL-59588", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69662, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-TOTAL-48689", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69667, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-REGIO-METRO", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69668, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-REGIO-85173", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69669, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-REGIO-39347", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69670, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-REGIO-73138", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69671, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-RENDI-REGIO-22518", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 69672, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-DE-CALIF-TOTAL-PAIS", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78654, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-RENDI-2006-AL-2012", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78658, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-RENDI-2006-AL-87472", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78662, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-RENDI-2006-AL-15809", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78667, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-RENDI-2006-AL-90712", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78673, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-RENDI-2006-AL-11436", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+},
+{
+    "pk": 78694, 
+    "model": "core.datastream", 
+    "fields": {
+        "guid": "NIVEL-CALIF-2006-AL-2010", 
+        "user": 1472, 
+        "last_published_revision": null, 
+        "last_revision": null
+    }
+}
 ]

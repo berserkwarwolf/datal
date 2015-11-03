@@ -75,9 +75,16 @@ var DataTableView = Backbone.View.extend({
     this.table.addHook('afterSelection', function (r1, c1, r2, c2) {
       if (self._fullRowMode) {
         self.cacheSelection({
-          from: {row: r1, col: -1},
-          to: {row: r2, col: -1}
+          from: {row: r1, col: c1},
+          to: {row: r2, col: c2}
         });
+        // We are changing the selection behavior in the case of full columns because the engine
+        // does not currently support them (i.e. 6:6). The following is how one would re-enable 
+        // full row selection in the same way as is done for columns.
+        // self.cacheSelection({
+        //   from: {row: r1, col: -1},
+        //   to: {row: r2, col: -1}
+        // });
       } else if (self._fullColumnMode) {
         self.cacheSelection({
           from: {row: -1, col: c1},
@@ -163,6 +170,22 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
+  _rmAllCellsMeta: function (selId) {
+    var ids,
+      rows = this.table.countRows(), 
+      cols = this.table.countCols(),
+      cells = this.coordsToCells({from:{row:0, col:0}, to:{row: rows, col: cols}}),
+      at;
+
+    for (var i = 0; i < cells.length; i++) {
+      ids = this.table.getCellMeta(cells[i].row, cells[i].col).classArray || [];
+      at = ids.indexOf(selId);
+      if (at === -1) continue;
+      ids.splice(at, 1);
+      this.table.setCellMeta(cells[i].row, cells[i].col, 'classArray', ids);
+    };
+  },
+
   getDataFromRange: function (range) {
     var data;
 
@@ -202,14 +225,28 @@ var DataTableView = Backbone.View.extend({
   },
 
   onChageSelected: function (model) {
-    var previousCells = this.coordsToCells(model.getPreviousRange()),
-      cells;
-    if (!model.isValid()) {
-      return;
+    var id = model.get('id');
+    var previousRange = model.getPreviousRange(),
+      range = model.getRange(),
+      previousCells = [],
+      cells = [];
+
+    if (previousRange === undefined) {
+      this._rmAllCellsMeta(id);
+    } else {
+      previousCells = this.coordsToCells(previousRange);
     }
-    cells = this.coordsToCells(model.getRange());
-    this._rmCellsMeta(previousCells, model.get('id'));
-    this._addCellsMeta(cells, model.get('id'));
+    this._rmCellsMeta(previousCells, id);
+
+    if (!model.isValid()) {
+      this._rmAllCellsMeta(id);
+    }
+
+    if (range !== undefined) {
+      cells = this.coordsToCells(model.getRange());
+    }
+    this._addCellsMeta(cells, id);
+
     this.table.render();
   },
 

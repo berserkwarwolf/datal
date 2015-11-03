@@ -8,6 +8,10 @@
 
 /* Loading */
 #id_visualizationResult .loading{background:url(#{$loader-url-light}) no-repeat center center;height:400px;text-indent:-10000px;overflow:hidden;}
-	
+
 /* Result */
 #id_visualizationResult{padding:10px;}
+
+.chart-container {
+    position: relative;
+}

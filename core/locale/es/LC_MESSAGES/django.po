@@ -447,9 +447,6 @@ msgstr "Vistas"
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-EMBED-TEXT"
 msgstr "Incrustar"
 
@@ -877,8 +874,14 @@ msgstr "Archivo no valido"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Ingrese un tipo de archivo valido."
 
+msgid "EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "No se puede publicar la visualización"
+
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar el recurso"
+
+msgid "EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "Es necesario publicar la vista asociada"
 
 msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
 msgstr "Es necesario publicar el conjunto de datos asociado"
@@ -978,3 +981,12 @@ msgstr "¡Agrega esta visualización donde quieras!"
 
 msgid "OVERLAY-DSEMBED-CHART-TIP"
 msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
+
+msgid "ERROR-DUPLICATED-CATEGORY"
+msgstr "Categoría duplicada"
+
+msgid "EXCEPTION-TITLE-UNKNOWN"
+msgstr "Error desconocido"
+
+msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
+msgstr "Error desconocido con nombre %(exception_name)s y trace '%(exception_trace)s'"

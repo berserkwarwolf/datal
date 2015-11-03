@@ -4,13 +4,15 @@ from django.db import transaction
 
 from core.builders.datasets import DatasetImplBuilderWrapper
 from core.choices import ActionStreams, StatusChoices
-from core.models import DatasetRevision, Dataset, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
+from core.models import DatasetRevision, Dataset, DataStream, DataStreamRevision, DatasetI18n, Visualization, VisualizationRevision
 from core.lifecycle.resource import AbstractLifeCycleManager
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.lib.datastore import *
 from core.exceptions import DatasetNotFoundException, IllegalStateException
 from core.daos.datasets import DatasetDBDAO, DatasetSearchDAOFactory
+from django.utils.translation import ugettext_lazy
+
 
 
 CREATE_ALLOWED_STATES = [StatusChoices.DRAFT, StatusChoices.PENDING_REVIEW, StatusChoices.APPROVED, StatusChoices.PUBLISHED]
@@ -55,6 +57,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
+
 
     def __init__(self, user, resource=None, language=None, dataset_id=0, dataset_revision_id=0):
         super(DatasetLifeCycleManager, self).__init__(user, language)
@@ -146,14 +149,16 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         self.dataset_revision.status = StatusChoices.PUBLISHED
         self.dataset_revision.save()
-
+            
         self._update_last_revisions()
-
-        self._publish_childs()
-
+            
+        # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists():
+            self._publish_childs()
+            
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.add()
-
+            
         self._log_activity(ActionStreams.PUBLISH)
 
     def _publish_childs(self):
@@ -177,6 +182,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 except IllegalStateException:
                     publish_fail.append(datastream_revision)
 
+
+            ## Aca deberia ir lo mismo que los ds, pero para las vz?
+
             if publish_fail:
                 raise ChildNotApprovedException(self.dataset.last_revision)
 
@@ -195,7 +203,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
             for datastream_revision in datastream_revisions:
                 DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).unpublish(
-                    killemall=True)
+                    killemall=True, to_status=StatusChoices.PENDING_REVIEW)
 
     def send_to_review(self, allowed_states=SEND_TO_REVIEW_ALLOWED_STATES):
         """ Envia a revision un dataset """
@@ -271,8 +279,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
                 self._unpublish_all()
+
                 # Elimino todos las revisiones que dependen de este Dataset
-                DataStreamRevision.remove_related_to_dataset(self.dataset)
+                datastreams_revision = DataStreamRevision.related_to_dataset(self.dataset)
+                datastream_ids = []
+                for datastream_revision in datastreams_revision:
+                    datastream_ids.append(datastream_revision.id)
+                    DatastreamLifeCycleManager(self.user, datastream_revision).remove()
+                DataStream.objects.filter(pk__in=datastream_ids).delete()
 
             # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
             # completa el valor correspondiente.
@@ -326,9 +340,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                                                       self.user.account.id, self.user.id)
             changed_fields += ['file_size', 'file_name', 'end_point']
         else:
-            fields['file_size'] = self.dataset_revision.size
-            fields['file_name'] = self.dataset_revision.filename
-            fields['end_point'] = self.dataset_revision.end_point
+            if fields.has_key('end_point') and not fields['end_point']:
+                fields['file_size'] = self.dataset_revision.size
+                fields['file_name'] = self.dataset_revision.filename
+                fields['end_point'] = self.dataset_revision.end_point
 
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
@@ -435,8 +450,14 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 status=StatusChoices.PUBLISHED).aggregate(Max('id')
             )['id__max']
 
+            # si hay un last_published_revision_id, dejamos ese como ultimo publicado
+            # además mandamos al indexador esa version que estaba publicada
             if last_published_revision_id:
                 self.dataset.last_published_revision = DatasetRevision.objects.get(pk=last_published_revision_id)                   
+                search_dao = DatasetSearchDAOFactory().create(self.dataset.last_published_revision)
+                search_dao.add()
+
+                self._log_activity(ActionStreams.PUBLISH)
             else:
                 self.dataset.last_published_revision = None
 

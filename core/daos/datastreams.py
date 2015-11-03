@@ -21,13 +21,18 @@ from django.core.exceptions import FieldError
 
 from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
-from core.lib.searchify import SearchifyIndex
+
 from core.lib.elastic import ElasticsearchIndex
 
 from django.core.urlresolvers import reverse
 from core import helpers
 
+logger = logging.getLogger(__name__)
 
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
@@ -442,7 +447,6 @@ class DatastreamHitsDAO():
         self.datastream = datastream
         #self.datastream_revision = datastream.last_published_revision
         self.search_index = ElasticsearchIndex()
-        self.logger=logging.getLogger(__name__)
         self.cache=Cache()
 
     def add(self,  channel_type):
@@ -467,7 +471,7 @@ class DatastreamHitsDAO():
             # esta correcto esta excepcion?
             raise DataStreamNotFoundException()
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
+        logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
 
         # armo el documento para actualizar el index.
         doc={'docid':"DS::%s" % guid,

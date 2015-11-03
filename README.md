@@ -11,6 +11,8 @@ Vangrant (Version 1.7.2):https://www.vagrantup.com/download-archive/v1.7.2.html
 
 VirtualBox: https://www.virtualbox.org/
 
+En Windows también se debe instalar GIT: http://git-scm.com/download/win
+
 
 Instalacion
 -----------
@@ -89,3 +91,10 @@ Ejemplo:
 SASS: http://sass-lang.com/
 
 Documentación SASS: http://sass-lang.com/documentation/file.SASS_REFERENCE.html
+
+
+Releases
+--------
+
+
+Pude ver la información de cada release en https://github.com/datal-org/datal/releases

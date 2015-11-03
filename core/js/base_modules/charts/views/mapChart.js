@@ -79,7 +79,8 @@ charts.views.MapChart = charts.views.Chart.extend({
 
         var mapInitialOptions = {
             zoom: this.model.get('options').zoom,
-            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')]
+            mapTypeId: google.maps.MapTypeId[this.model.get('mapType')],
+            backgroundColor:'#FFFFFF'
         };
 
         if(this.model.get('options').center){
@@ -99,6 +100,7 @@ charts.views.MapChart = charts.views.Chart.extend({
 
         this.mapInstance = new google.maps.Map(this.el, mapInitialOptions);
         this.mapInstance.setOptions(this.googleMapOptions);
+        this.mapInstance.setOptions({minZoom: 1});
 
         this.infoWindow = new google.maps.InfoWindow();
         this.bindMapEvents();
@@ -181,9 +183,9 @@ charts.views.MapChart = charts.views.Chart.extend({
         });
     },
 
-    createMapPolyline: function (paths, styles) {
+    createMapPolyline: function (path, styles) {
         return new google.maps.Polyline({
-            paths: paths,
+            path: path,
             strokeColor: styles.strokeColor,
             strokeOpacity: styles.strokeOpacity,
             strokeWeight: styles.strokeWeight

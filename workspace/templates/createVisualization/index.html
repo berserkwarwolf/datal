@@ -102,8 +102,6 @@
 <script src="{% static 'workspace/scripts/createVisualization/views/steps/FinishView.js' %}"></script>
 <script src="{% static 'workspace/scripts/createVisualization/views/steps/map/MapView.js' %}"></script>
 <script src="{% static 'workspace/scripts/createVisualization/views/ModalView.js' %}"></script>
-<script src="{% static 'workspace/scripts/createVisualization/views/modals/ChartSelectDataModalView.js' %}"></script>
-<script src="{% static 'workspace/scripts/createVisualization/views/modals/MapSelectDataModalView.js' %}"></script>
 <script src="{% static 'workspace/scripts/createVisualization/models/DataTableSelectionModel.js' %}"></script>
 <script src="{% static 'workspace/scripts/createVisualization/models/DataStreamModel.js' %}"></script>
 <script src="{% static 'workspace/scripts/createVisualization/collections/DataTableSelectedCollection.js' %}"></script>
@@ -142,6 +140,7 @@
       {% if visualization_revision %}
         id: {{ visualization_revision.visualization_id }},
         revision_id: {{ visualization_revision.visualization_revision_id }},
+
         title: '{{ visualization_revision.title }}',
         description: '{{ visualization_revision.description }}',
         notes: '{{ visualization_revision.notes }}',
@@ -153,7 +152,10 @@
         public_url: '{{ visualization_revision.public_url }}',
         slug: '{{ visualization_revision.slug }}',
         lib: '{{ visualization_revision.lib }}',
+
         type: '{{ visualization_revision.format.type }}',
+        data: '{{ visualization_revision.data }}',
+        
         chartTemplate: '{{ visualization_revision.format.chartTemplate }}',
         showLegend: '{{ visualization_revision.format.showLegend }}',
         invertedAxis: '{{ visualization_revision.format.invertedAxis }}',
@@ -161,17 +163,9 @@
         correlativeData: '{{ visualization_revision.format.correlativeData }}',
         nullValueAction: '{{ visualization_revision.format.nullValueAction }}',
         nullValuePreset: '{{ visualization_revision.format.nullValuePreset }}',
-        data: '{{ visualization_revision.data }}',
-        labelSelection: '{{ visualization_revision.chart.labelSelection }}',
-        headerSelection: '{{ visualization_revision.chart.headerSelection }}',
-        is3D: '{{ visualization_revision.chart.is3D }}',
-        {% if visualization_revision.format.type == 'mapchart' %}
-          longitudSelection: '{{ visualization_revision.chart.longitudSelection }}',
-          latitudSelection: '{{ visualization_revision.chart.latitudSelection }}',
-          mapType: '{{ visualization_revision.chart.mapType }}',
-          zoom: {{ visualization_revision.chart.zoom }},
-          bounds: '{{ visualization_revision.chart.bounds }}',
-        {% endif %}
+
+        chart: {{ visualization_revision.chart | jsonify }},
+
       {% endif %}
     }
 

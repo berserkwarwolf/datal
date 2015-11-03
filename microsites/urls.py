@@ -1,13 +1,19 @@
+import os
+
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
+
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
+from djangoplugins.utils import include_plugins
+
+from core.plugins import DatalPluginPoint
 from microsites.rest.datastreams import RestDataStreamViewSet
 from microsites.rest.maps import RestMapViewSet
 from microsites.rest.charts import RestChartViewSet
 from microsites.rest.routers import MicrositeEngineRouter
-from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
-import os
+
 
 router = MicrositeEngineRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
@@ -27,6 +33,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    (r'^', include_plugins(DatalPluginPoint, urls='microsites_urls')),
     url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
