@@ -45,7 +45,7 @@ def action_view(request, revision_id):
 
 
 @login_required
-# quitarlo por que ya se maneja dentro @requires_any_dataset() #account must have almost one dataset
+@requires_any_dataset()
 @require_privilege("workspace.can_query_datastream")
 @require_GET
 def index(request):
