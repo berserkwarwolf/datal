@@ -107,6 +107,9 @@ class DefaultDictToJson(Template):
     No se requiere un template, se deslpiega el contenido del 
         diccionario (o una version normalizada {status: true|false, data: CONTENIDO})
     """
+
+    def __init__(self):
+        super(DefaultDictToJson, self).__init__(template="")
     
     def render(self, data, normalize=False):
         """ render dictionario. Normalize es para enviar status y data con el contenido"""

@@ -8,6 +8,7 @@ from core.primitives import PrimitiveComputer
 from core.v8.commands import *
 from django.forms.formsets import formset_factory
 from core.v8.forms import RequestFormSet
+import json
 
 class CommandFactory(object):
     """Factory de comandos"""
@@ -100,10 +101,13 @@ class CommandFactory(object):
             else:
                 for i in item.keys():
                     # filtra los parametros vacios
-                    if item[i]:
-                        post_query.append((i, item[i]))
-                    else:
+                    if not item[i]:
                         post_query.append((i, ""))
+                    elif i == 'wargs':
+                        for wi, wval in json.loads(item[i]).items():
+                            post_query.append((wi, wval))
+                    else:
+                        post_query.append((i, item[i]))
     
 
         return self._fix_params(post_query)

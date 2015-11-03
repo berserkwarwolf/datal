@@ -2,9 +2,11 @@ var DataTableSelectionModel = Backbone.Model.extend({
 	validate: function (attrs, options) {
 		var excelRange = attrs.excelRange,
             r = /^(([a-zA-Z]*)?(\d*)?:([a-zA-Z]*)?(\d*)?)?$/,
-            validRange;
+            validRange = true;
 
-        if (excelRange !== undefined) {
+        if (excelRange === undefined) {
+            return;
+        } else {
             validRange = r.test(excelRange);
         }
 
@@ -12,6 +14,10 @@ var DataTableSelectionModel = Backbone.Model.extend({
             return 'invalid-range';
         }
 	},
+
+    hasRange: function () {
+        return this.has('excelRange') && this.get('excelRange') !== '';
+    },
 
     getRange: function () {
         var excelRange = this.get('excelRange');
