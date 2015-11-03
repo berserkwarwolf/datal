@@ -12,6 +12,7 @@ from core.choices import StatusChoices, CollectTypeChoices
 from core.forms import MimeTypeForm
 from core.http import get_impl_type
 from core.utils import get_file_type_from_extension
+import urllib
 
 
 class DataSetSerializer(ResourceSerializer):
@@ -75,6 +76,7 @@ class DataSetSerializer(ResourceSerializer):
 
         if 'file' in data:
             file_data = data.pop('file')
+            file_data.name = urllib.unquote(file_data.name)
             data['file_data'] = file_data
             data['impl_type'] = get_file_type_from_extension(
                 file_data.name.split('.')[-1]
