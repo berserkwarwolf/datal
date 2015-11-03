@@ -59,11 +59,9 @@ class ExceptionManager():
         self.template = template     
 
     def process(self):
-        print "__ process ExceptionManagerCore"
         logger = logging.getLogger(__name__)
         logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
             self.exception.description))
-        print "__ExceptionManager__"
         return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
 
 class LifeCycleException(DATALException):
@@ -91,6 +89,7 @@ class ChildNotApprovedException(LifeCycleException):
 
 
 class SaveException(LifeCycleException):
+
     title = _('EXCEPTION-TITLE-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-SAVE-ERROR')
     tipo = 'save-error'
