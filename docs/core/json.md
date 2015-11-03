@@ -3,7 +3,8 @@
 El microstio y workspace requieren muchas veces respuestas internas desde ajax.  
 En estos casos estanadarizamos y reutilizamos templates para cada caso tratando de simplificar este proceso.  
   
-Hay templates especificos para micrositios o workspace, algunos de uso común están en *core/templates.py*.  
+Hay templates especificos para micrositios o workspace, algunos de uso común están en
+ [core/templates.py](https://github.com/datal-org/datal/blob/develop/core/templates.py).  
 Las respuestas básicas son de la forma:  
 
 ```
