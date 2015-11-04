@@ -36,7 +36,7 @@ var AddSourceModel = Backbone.Model.extend({
 		data['name'] = this.get('name');
 		$.ajax({
 			url: url,
-			type: 'POST',
+			type: 'GET',
 			data: data,
 			dataType: 'json',
 			async: false,
@@ -56,7 +56,7 @@ var AddSourceModel = Backbone.Model.extend({
 		data['url'] = this.get('url');
 		$.ajax({
 			url: url,
-			type: 'POST',
+			type: 'GET',
 			data: data,
 			dataType: 'json',
 			async: false,

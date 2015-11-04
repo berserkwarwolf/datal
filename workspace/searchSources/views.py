@@ -17,7 +17,7 @@ def action_search_source(request):
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def validate_source_url(request):
     url = request.REQUEST.get('url', None)
     
@@ -35,7 +35,7 @@ def validate_source_url(request):
 
 
 @login_required
-@require_http_methods(["GET", "POST"])
+@require_http_methods(["GET"])
 def validate_source_name(request):
     name_param = request.REQUEST.get('name', None)
 
