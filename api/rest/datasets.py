@@ -86,7 +86,7 @@ class DataSetSerializer(ResourceSerializer):
             not data['impl_type'] or 
             data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 # TODO: mejorar errores
-                raise serializers.ValidationError('Tipo de Archivo Invalido %s' % data['impl_type'])
+                raise serializers.ValidationError('Tipo de Archivo Invalido')
 
         if 'license' in data:
             data['license_url'] = data.pop('license')
