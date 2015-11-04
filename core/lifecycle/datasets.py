@@ -276,8 +276,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         else:
             revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
 
-            if revcount == 1:
-                # Si la revision a eliminar es la unica publicada entonces despublicar todos los datastreams en cascada
+            # Si la revision a eliminar es la unica publicada y es la que vamos a eliminar,
+            # entonces despublicar todos los datastreams en cascada
+            if revcount == 1 and self.dataset.last_published_revision == self.dataset_revision:
                 self._unpublish_all()
 
                 # Elimino todos las revisiones que dependen de este Dataset
@@ -431,6 +432,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def _log_activity(self, action_id):
         resource_category = self.dataset_revision.category.categoryi18n_set.all()[0].name
+
         return super(DatasetLifeCycleManager, self)._log_activity(action_id, self.dataset.id, 
                                                                   settings.TYPE_DATASET,
                                                                   self.dataset_revision.id, 
@@ -457,7 +459,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 search_dao = DatasetSearchDAOFactory().create(self.dataset.last_published_revision)
                 search_dao.add()
 
-                self._log_activity(ActionStreams.PUBLISH)
+                # esto pasa cuando borras un DT rev que no esta publicado
+                # al volver a publicar la ultima rev, se ejecutaba el log_activity
+                # y fallaba porque self.dataset_revision esta en None (porque fue eliminado)
+                # pero ademas, en la actividad se mostraba que se publicaba una revision, que ya estaba publicada
+                if not self.dataset_revision:
+                    self._log_activity(ActionStreams.PUBLISH)
             else:
                 self.dataset.last_published_revision = None
 

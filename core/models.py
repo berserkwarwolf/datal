@@ -502,7 +502,7 @@ class DataStreamParameter(models.Model):
         null=True
     )
     name = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
-    default = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
+    default = models.CharField(max_length=100, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
     position = models.PositiveSmallIntegerField()
     impl_details = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_DETAILS_LABEL'))
     description = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
@@ -560,7 +560,7 @@ class DatasetRevision(RevisionModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
-    spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
+    spatial = models.CharField(max_length=80, blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
 

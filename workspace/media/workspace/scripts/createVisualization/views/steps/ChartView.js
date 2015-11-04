@@ -300,6 +300,8 @@ var ChartView = StepViewSPA.extend({
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
 
+		this.setupChart();
+
 		if(this.model.data.get('rows').length){
 			this.onChartChanged();
 		}

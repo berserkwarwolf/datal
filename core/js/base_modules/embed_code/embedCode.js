@@ -175,9 +175,7 @@ var EmbedCodeCharts = EmbedCode.extend({
 		lEmbedUrl        = lEmbedUrl.replace(/width=\d*/, 'width=' + lWidth)
 		lEmbedUrl        = lEmbedUrl.replace(/height=\d*/, 'height=' + lChartHeight)
 
-        //lEmbedUrl = lBaseUri + "/portal/Charts/actionEmbed?sov_id=" + lSovId + lEndPoint + "&width=" + lWidth+ "&height=" + lChartHeight;
-		
-		return {
+        return {
             title: lTitle 
             , width: lWidth
             , height: lHeight

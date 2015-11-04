@@ -16,7 +16,7 @@ from core.exceptions import DatasetSaveException
 from core.models import DatasetRevision
 from workspace.decorators import *
 from workspace.templates import DatasetList
-from core.templates import DefaultAnswer
+from core.templates import DefaultAnswer, DefaultDictToJson
 from workspace.manageDatasets.forms import *
 from core.daos.datasets import DatasetDBDAO
 from core.daos.visualizations import VisualizationDBDAO
@@ -160,9 +160,13 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_GET
 def get_filters_json(request):
     """ List all Filters available """
+    if settings.DEBUG: logger.info('GET FILTERs')
     filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
-    return JSONHttpResponse(json.dumps(filters))
+                                    
+    response = DefaultDictToJson().render(data=filters) # normalize=True #TODO check
+    
+    return HttpResponse(response, mimetype="application/json")
 
 
 @requires_review
@@ -170,8 +174,8 @@ def get_filters_json(request):
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
 def remove(request, dataset_revision_id, type="resource"):
-
     """ remove resource """
+
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':

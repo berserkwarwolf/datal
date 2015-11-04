@@ -11,7 +11,7 @@ var ModalView = Backbone.View.extend({
 
         this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat', notEmpty: true});
         this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon', notEmpty: true});
-        this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
+        this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data', notEmpty: true});
         this.rangeTraceModel = new DataTableSelectionModel({id: 4, name: 'range_trace', notEmpty: true});
 
         this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data', notEmpty: true});
@@ -124,13 +124,14 @@ var ModalView = Backbone.View.extend({
     },
 
     validateLatLon: function () {
-        var hasLat = this.rangeLatModel.get('excelRange') !== '',
-            hasLon = this.rangeLonModel.get('excelRange') !== '',
+        var hasLat = this.rangeLatModel.hasRange(),
+            hasLon = this.rangeLonModel.hasRange(),
+            hasInfo = this.rangeInfoModel.hasRange(),
             validLat = this.rangeLatModel.isValid(),
             validLon = this.rangeLonModel.isValid(),
             validInfo = this.rangeInfoModel.isValid();
 
-        if (hasLat && hasLon && validLat && validLon && validInfo) {
+        if (hasLat && hasLon && hasInfo && validLat && validLon && validInfo) {
             this.enable();
         } else {
             this.disable();
@@ -138,11 +139,12 @@ var ModalView = Backbone.View.extend({
     },
 
     validateTrace: function () {
-        var hasTrace = this.rangeTraceModel.get('excelRange') !== '',
+        var hasTrace = this.rangeTraceModel.hasRange(),
+            hasInfo = this.rangeInfoModel.hasRange(),
             validTrace = this.rangeTraceModel.isValid(),
             validInfo = this.rangeInfoModel.isValid();
 
-        if (hasTrace && validTrace && validInfo) {
+        if (hasTrace && hasInfo && validTrace && validInfo) {
             this.enable();
         } else {
             this.disable();
@@ -150,14 +152,14 @@ var ModalView = Backbone.View.extend({
     },
 
     validateData: function () {
-        var hasData = this.rangeDataModel.get('excelRange') !== '',
-            hasLabels = this.rangeLabelsModel.get('excelRange') !== '',
-            hasHeaders = this.rangeHeadersModel.get('excelRange') !== '',
+        var hasData = this.rangeDataModel.hasRange(),
+            hasLabels = this.rangeLabelsModel.hasRange(),
+            hasHeaders = this.rangeHeadersModel.hasRange(),
             validData = this.rangeDataModel.isValid(),
             validLabels = this.rangeLabelsModel.isValid(),
             validHeaders = this.rangeHeadersModel.isValid();
 
-        if (hasData && hasLabels && validHeaders && validData && validLabels && validHeaders) {
+        if (hasData && hasLabels && hasHeaders && validData && validLabels && validHeaders) {
             this.enable();
         } else {
             this.disable();

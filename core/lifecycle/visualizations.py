@@ -327,6 +327,9 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )
         if parent_status != StatusChoices.PUBLISHED:
             if self.visualization_revision.visualization.datastream.last_revision.status != StatusChoices.PUBLISHED:
+                # en caso de que el padre no este publicado, lo dejamos como aprobado
+                self.visualization_revision.status = StatusChoices.APPROVED
+                self.visualization_revision.save()
                 raise VisualizationParentNotPublishedException()
 
         self._publish_childs()

@@ -884,3 +884,6 @@ msgstr "This name already exists."
 
 msgid "VALIDATE-SOURCENAMEINCOLLECTION-TEXT"
 msgstr "You already have a source with that name. Please, choose another."
+
+msgid "INVALID-TAG"
+msgstr "Invalid Tag"

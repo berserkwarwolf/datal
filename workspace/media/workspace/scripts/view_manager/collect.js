@@ -5,7 +5,7 @@ var Collect = Backbone.Model.extend({
 		$EndPoint : null,
 		$WebForm : null,
 		$StartButton : null,
-		webservice_args : ''
+		webservice_args : {}
 	},
 	initialize : function(){
 
@@ -91,8 +91,14 @@ var Collect = Backbone.Model.extend({
 	},
 	loadDataSource: function(){
 		var lUrl  = '/rest/datasets/' + $('#id_datastream-dataset_revision_id').val() + '/tables.html'
-		var lData = '&limit=100'
-				+ this.attributes.webservice_args;
+
+		var lData = '&limit=100';
+
+		if (Object.keys(this.attributes.webservice_args).length) {
+			lData = '&wargs=' + JSON.stringify(this.attributes.webservice_args)
+		}
+				
+
 
 	    $.ajax({ url: lUrl
 	            , type:'GET'
