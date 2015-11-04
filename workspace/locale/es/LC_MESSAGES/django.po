@@ -3278,3 +3278,6 @@ msgstr "Eventos de la próxima semana"
 
 msgid "APP-RANGE-OF-EVENTS-NEXT-10-TEXT"
 msgstr "Próximos 10 eventos"
+
+msgid "APP-CALENDAR-TEXT"
+msgstr "Calendario"

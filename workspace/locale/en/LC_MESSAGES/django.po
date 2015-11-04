@@ -3294,3 +3294,6 @@ msgstr "Next week events"
 
 msgid "APP-RANGE-OF-EVENTS-NEXT-10-TEXT"
 msgstr "Next 10 events"
+
+msgid "APP-CALENDAR-TEXT"
+msgstr "Calendar"

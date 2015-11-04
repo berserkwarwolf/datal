@@ -37,14 +37,17 @@
         <nav class="tab-nav" role="tablist">
           <ul>
           <li>
-                  <a href="#description" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#description" tab-index="0">{% trans 'APP-DESCRIPTION-TEXT' %}</a>
+            <a href="#description" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#description" tab-index="0">{% trans 'APP-DESCRIPTION-TEXT' %}</a>
           </li>
           {% if dataset.datastreams or dataset.visualizations %}
           <li>
-                  <a href="#related-resources" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#related-resources" tab-index="-1">{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
+            <a href="#related-resources" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#related-resources" tab-index="-1">{% trans 'APP-RELATED-RESOURCES-TEXT' %}</a>
+          </li>
+          {% endif %}
+          <li>
+            <a href="#calendar" id="2" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#calendar">{% trans 'APP-CALENDAR-TEXT' %}</a>
           </li>
           </ul>
-          {% endif %}
         </nav>
       </div>
       <div class="resource-detail">
@@ -55,6 +58,8 @@
           {% if dataset.datastreams or dataset.visualizations %}
             {% include "viewDataset/related_resources.html" %}
           {% endif %}
+
+          {% include "viewDataset/calendar.html" %}
 
         </div>
       </div>
