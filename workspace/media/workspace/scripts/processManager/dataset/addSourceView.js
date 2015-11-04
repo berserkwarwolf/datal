@@ -67,13 +67,14 @@ var AddSourceView = Backbone.View.extend({
 
 			// Validate URL and NAME with some rules using a custom method with an async ajax call
 			// (needs to be this way because backbone.validation plugin does not support custom methods with built-in ones)
-			if( this.model.validateSourceNameAlreadyExist() != false ){
-				var error = this.model.validateSourceNameAlreadyExist();
+			var error = this.model.validateSourceNameAlreadyExist();
+			if( error != false ){
 				this.setIndividualError( this.$el.find('[name=name]'), 'name', error );
 				return false;
 			}
-			if( this.model.validateSourceUrlAlreadyExist() != false ){
-				var error = this.model.validateSourceUrlAlreadyExist();
+			
+			error = this.model.validateSourceUrlAlreadyExist();
+			if( error != false ){
 				this.setIndividualError( this.$el.find('[name=url]'), 'url', error );
 				return false;
 			}
