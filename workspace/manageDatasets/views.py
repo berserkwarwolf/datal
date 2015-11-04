@@ -263,10 +263,21 @@ def edit(request, dataset_revision_id=None):
     # TODO: Review. Category was not loading options from form init.
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
+    # Get data set and the right template depending on the collected type
+    dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
+
+    initial_values = dict(
+        # Dataset Form
+        dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
+        category=dataset.get('category_id'), status=dataset.get('status'),
+        notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
+        impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
+        frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
+        tags=dataset.get('tags')
+    )
+
     if request.method == 'GET':
         status_options = auth_manager.get_allowed_actions()
-        # Get data set and the right template depending on the collected type
-        dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
 
 
@@ -279,18 +290,7 @@ def edit(request, dataset_revision_id=None):
         className = ''.join(str(elem) for elem in className)
         mod = __import__('workspace.manageDatasets.forms', fromlist=[className])
 
-        initial_values = dict(
-            # Dataset Form
-            dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
-            category=dataset.get('category_id'), status=dataset.get('status'),
-            notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
-            impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
-            frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
-            tags=dataset.get('tags')
-        )
-
         form = getattr(mod, className)(status_options=status_options)
-
         form.label_suffix = ''
         form.fields['category'].choices = category_choices
         form.initial = initial_values
@@ -301,6 +301,9 @@ def edit(request, dataset_revision_id=None):
         form = DatasetFormFactory(request.POST.get('collect_type')).create(
             request, account_id=account_id, language=language, status_choices=auth_manager.get_allowed_actions()
         )
+
+        # Agrego los valores iniciales para que el changed_data de correctamente
+        form.initial = initial_values
 
         if form.is_valid():
             lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
