@@ -83,6 +83,9 @@ class DataSetSerializer(ResourceSerializer):
             )
             data['collect_type'] = CollectTypeChoices.SELF_PUBLISH
 
+        if 'license' in data:
+            data['license_url'] = data.pop('license')
+
         data['status'] = StatusChoices.PENDING_REVIEW
 
         data['language'] = self.context['request'].auth['language']
