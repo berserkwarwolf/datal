@@ -1,0 +1,21 @@
+{% load i18n extra_tags components %}
+
+<div class="step collect" data-step="collect">
+
+	<header id="contentHeder">
+		<div class="navigation FR">
+			<a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-CANCEL-TEXT' %}" class="button alpha backButton">{% trans 'APP-CANCEL-TEXT' %}</a>
+			<a title="{% trans 'BTN-NEXT-TEXT' %}" class="button primary next nextButton">{% trans 'BTN-NEXT-TEXT' %}</a>
+		</div>
+	</header>
+	
+	<div class="columns clearfix">
+		
+		<div class="CL formContent"></div>
+		
+	</div>
+
+</div>
+
+{# Backbone Templates #}
+{% include "processManager/dataset/templates/collectWebserviceTemplate.html" %}

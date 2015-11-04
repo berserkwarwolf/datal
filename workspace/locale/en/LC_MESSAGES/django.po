@@ -3282,3 +3282,15 @@ msgstr "Invalid range"
 
 msgid "APP-INVALID-NOT-EMPTY"
 msgstr "Required"
+
+msgid "APP-SELECT-CALENDAR-TEXT"
+msgstr "Select calendar"
+
+msgid "APP-RANGE-OF-EVENTS-TEXT"
+msgstr "What events will be obtained?"
+
+msgid "APP-RANGE-OF-EVENTS-NEXT-WEEK-TEXT"
+msgstr "Next week events"
+
+msgid "APP-RANGE-OF-EVENTS-NEXT-10-TEXT"
+msgstr "Next 10 events"

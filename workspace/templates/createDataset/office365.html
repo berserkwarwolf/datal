@@ -1,0 +1,82 @@
+{% extends 'base_workspace.html' %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags %}
+
+{% block meta %}
+{% compress css %}
+<link href="{% sass_src 'core/styles/dataStreamForm.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
+{% endcompress %}
+<script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<script language="javascript" src="{% static 'workspace/scripts/processManager/stepModel.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/stepView.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/dataset/collectOffice365Model.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/dataset/collectOffice365View.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/dataset/finishModel.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/dataset/finishFileModel.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/dataset/finishView.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/processManagerModel.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/processManager/processManagerView.js' %}"></script>
+
+<meta name="main-option" content="id_datasets_option"/>
+{% endblock %}
+
+{% block header_navigation %}
+<!-- Back Link -->
+<a href="{% url 'manageDatasets.index' %}" id="id_backLink" class="button alpha back FL" title="{% trans 'APP-BACK-TEXT' %}">{% trans 'APP-BACK-TEXT' %}</a>
+{% endblock %}
+
+{% block sectionTitle %}
+	<div class="context-menu clearfix">
+    <div class="col-xs-8">
+        <h1 class="sub-heading">{% trans "APP-CREATE-A-DATASET-TEXT" %}</h1>
+        <h1>{% trans "APP-FROMOFFICE365CALENDAR-TEXT" %}</h1>
+    </div>
+    <div class="col-xs-4 context-buttons clearfix">
+    	
+    </div>
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="col-xs-12">
+		<form action="" class="create relative" id="id_createDataset" novalidate>
+			{% include "processManager/dataset/steps/collectOffice365.html" %}
+			{% include "processManager/dataset/steps/finish.html" %}
+		</form>
+	</div>
+
+{% endblock %}
+
+{% block bottom_js %}
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+	var collectOffice365Model = new CollectOffice365Model({
+		name: 'collect',
+	});
+	var collectOffice365View = new CollectOffice365View({model: collectOffice365Model});
+
+	var finishModel = new FinishFileModel({
+		name: 'finish',
+		saveUrl: "{% url 'manageDatasets.create_type' 'office365' %}",
+    sourceUrl: '/source_manager/action_search',
+    tagUrl: '/tag_manager/action_search',
+	});
+	var finishView = new FinishView({model: finishModel});
+
+	var processManagerModel = new ProcessManagerModel({
+		finishUrl: "{% url 'manageDatasets.index' %}"
+	});
+	var processManagerView = new ProcessManagerView({model: processManagerModel});
+
+	processManagerView.register( collectFileView );
+	processManagerView.register( finishView );
+
+	processManagerView.start();
+
+});
+</script>
+
+{% endblock %}

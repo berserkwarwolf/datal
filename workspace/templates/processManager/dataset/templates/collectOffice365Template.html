@@ -1,0 +1,27 @@
+{% load i18n extra_tags components %}
+
+<script type="text/template" id="id_collectOffice365Template">
+
+	{# calendar #}
+	<div class="row clearfix">
+		<label for="id_calendar">{% trans 'APP-SELECT-CALENDAR-TEXT' %}</label>
+		<select multiple name="calendar" id="id_calendar">
+			<optgroup>Mis calendarios</optgroup>
+				<option>#Eventos Junar</option>
+				<option>#Cumpleaños</option>
+			<optgroup>Otros calendarios</optgroup>
+				<option>#Días festivos</option>
+		</select>
+		<span class="required">*</span>
+	</div>
+
+	{# range #}
+	<div class="row clearfix">
+		<label for="id_range">{% trans 'APP-RANGE-OF-EVENTS-TEXT' %}</label>
+		<select name="range" id="id_range">
+			<option value="{% trans 'APP-RANGE-OF-EVENTS-NEXT-WEEK-TEXT' %}">{% trans 'APP-RANGE-OF-EVENTS-NEXT-WEEK-TEXT' %}</option>
+			<option value="{% trans 'APP-RANGE-OF-EVENTS-NEXT-10-TEXT' %}">{% trans 'APP-RANGE-OF-EVENTS-NEXT-10-TEXT' %}</option>
+		</select>
+	</div>
+
+</script>

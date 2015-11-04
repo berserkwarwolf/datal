@@ -3266,3 +3266,15 @@ msgstr "Rango inválido"
 
 msgid "APP-INVALID-REQUIRED"
 msgstr "Requerido"
+
+msgid "APP-SELECT-CALENDAR-TEXT"
+msgstr "Seleccionar calendario"
+
+msgid "APP-RANGE-OF-EVENTS-TEXT"
+msgstr "¿Qué eventos se obtendrán?"
+
+msgid "APP-RANGE-OF-EVENTS-NEXT-WEEK-TEXT"
+msgstr "Eventos de la próxima semana"
+
+msgid "APP-RANGE-OF-EVENTS-NEXT-10-TEXT"
+msgstr "Próximos 10 eventos"
