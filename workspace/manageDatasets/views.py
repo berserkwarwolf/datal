@@ -213,7 +213,7 @@ def create(request, collect_type='index'):
     language = auth_manager.language
 
     # TODO: Put line in a common place
-    collect_types = {'index': -1, 'file': 0, 'url': 1, 'webservice': 2}
+    collect_types = {'index': -1, 'file': 0, 'url': 1, 'webservice': 2, 'office365': 3}
 
     collect_type_id = collect_types[collect_type]
 

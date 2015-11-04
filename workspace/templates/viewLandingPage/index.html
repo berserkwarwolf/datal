@@ -28,7 +28,7 @@
 				<li><a  href="{% url 'manageDatasets.create_type' 'file' %}" class="button primary" title="{% trans 'APP-UPLOAD-FILE-TEXT' %}">{% trans 'APP-UPLOAD-FILE-TEXT' %}</a></li>
 				<li><a href="{% url 'manageDatasets.create_type' 'url' %}" class="button primary" title="{% trans 'APP-WEBSITE-TEXT' %}">{% trans 'APP-WEBSITE-TEXT' %}</a></li>
 				<li><a href="{% url 'manageDatasets.create_type' 'webservice' %}" class="button primary" title="{% trans 'APP-WEBSERVICE-TEXT' %}">{% trans 'APP-WEBSERVICE-TEXT' %}</a></li>
-				<li><a href="#" class="button primary" title="{% trans 'APP-FROMOFFICE365CALENDAR-TEXT' %}">{% trans 'APP-FROMOFFICE365CALENDAR-TEXT' %}</a></li>
+				<li><a href="{% url 'manageDatasets.create_type' 'office365' %}" class="button primary" title="{% trans 'APP-FROMOFFICE365CALENDAR-TEXT' %}">{% trans 'APP-FROMOFFICE365CALENDAR-TEXT' %}</a></li>
 			</ul>
 		</div>
 		{% endif %}
