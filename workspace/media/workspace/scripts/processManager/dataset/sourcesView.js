@@ -15,7 +15,7 @@ var SourcesView = Backbone.View.extend({
 	},
 
 	initialize: function(){
-  	this.template = _.template( $("#id_AddSourceTemplate").html() );
+		this.template = _.template( $("#id_AddSourceTemplate").html() );
 		this.parentView = this.options.parentView;
 		this.parentModel = this.options.parentModel;
 		this.listenTo(this.collection, 'add', this.addSource);
@@ -27,13 +27,13 @@ var SourcesView = Backbone.View.extend({
 		this.render();
 	},
 
-  render: function() {
-  	this.collection.forEach(this.addSource, this);
-    this.$el.find('#addSource').html( this.template() );
-  	this.initAutocomplete();
+	render: function() {
+		this.collection.forEach(this.addSource, this);
+		this.$el.find('#addSource').html( this.template() );
+		this.initAutocomplete();
 
-    // Bind custom model validation callbacks
-    var self = this;
+		// Bind custom model validation callbacks
+		var self = this;
 		Backbone.Validation.bind(this, {
 			valid: function (view, attr, selector) {
 				self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
@@ -43,19 +43,19 @@ var SourcesView = Backbone.View.extend({
 			}
 		});
 
-    return this;
-  },
+		return this;
+	},
 
-  addSource: function(model){
+	addSource: function(model){
 
-  	// Add new active source to DOM
-    var theView = new SourceView({ model: model });
-    this.$el.find('.sourcesContent').append( theView.render().el );
+		// Add new active source to DOM
+		var theView = new SourceView({ model: model });
+		this.$el.find('.sourcesContent').append( theView.render().el );
 
-    // Clear Add source form
-    this.clearSourceForm();
+		// Clear Add source form
+		this.clearSourceForm();
 
-  },
+	},
 
 	removeSource: function(model){
 	},
@@ -78,26 +78,31 @@ var SourcesView = Backbone.View.extend({
 		$('#id_source_name').val("");
 	},
 
-  initAutocomplete: function(){
-    var self = this;
-    $('#id_source_name').autocomplete({
-      source: self.parentModel.get('sourceUrl'),
-      minLength: 3,
-      select: function (e, ui) {
-      	e.preventDefault();
-      	self.model.set('name', ui.item.value);
-      	self.model.set('url', '');
-      	if(self.model.isValid(true)){
+	initAutocomplete: function(){
+		var self = this;
+		$('#id_source_name').autocomplete({
+			source: self.parentModel.get('sourceUrl'),
+			minLength: 3,
+			select: function (e, ui) {
+				e.preventDefault();
+				self.model.set('name', ui.item.value);
+				self.model.set('url', '');
+				if(self.model.isValid(true)){
 					self.collection.add(self.model.toJSON());
 					$(e.target).val('');
 				}
-	    }
-    });
+			}
+		});
 	},
 
 	onAddSourceButtonClicked: function(){
-    var addSourceModel = new AddSourceModel();
-		new AddSourceView({ model: addSourceModel, sources: this.collection });
+
+		if( !_.isUndefined(this.addSourceView) ){
+			this.addSourceView.undelegateEvents();
+		}
+
+		var addSourceModel = new AddSourceModel();
+		this.addSourceView = new AddSourceView({ model: addSourceModel, sources: this.collection });
 	}
 
 });

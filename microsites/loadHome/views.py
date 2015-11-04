@@ -6,11 +6,11 @@ from core.models import *
 from core.managers import *
 from core.shortcuts import render_to_response
 from core.http import add_domains_to_permalinks
-from microsites.loadHome.forms import *
+from microsites.loadHome.forms import QueryDatasetForm
 from microsites.loadHome import utils
 from utils import *
 from core.communitymanagers import *
-from microsites.home_manager.managers import HomeFinder
+from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
 from django.utils.translation import ugettext
 
@@ -80,50 +80,6 @@ def load(request):
         # For the moment, redirect to search, but this needs to be erased
         return redirect('/search/')
 
-        # """ shows a no-home page"""
-        # we first check the account preferences
-        # if there are not hots setted, we retrieve the really hot
-        #    resources_for_hot = [('account_hot_datastreams', DataStream),
-        #                         ('account_hot_visualizations', Visualization)]
-        #
-        #    for key, manager in resources_for_hot:
-        #        if not preferences[key]:
-        #            top = manager.objects.get_top(account.id)
-        #            preferences[key] = ','.join([ str(i) for i in top ])
-
-        # hot_datastreams = preferences['account_hot_datastreams']
-        # hot_visualizations = preferences['account_hot_visualizations']
-
-        # datastreams = []
-        # if hot_datastreams:
-        #     datastreams = DataStream.objects.query_hot_n(10, language, hot = hot_datastreams)
-
-        # if hot_visualizations:
-        #     datastreams += Visualization.objects.query_hot_n(language, hot = hot_visualizations)
-        #     #random.shuffle(datastreams)
-
-        # if preferences['account_home_filters'] == 'featured_accounts':
-        #     featured_accounts = Account.objects.get_featured_accounts(account.id)
-        #     account_id = [featured_account['id'] for featured_account in featured_accounts]
-        #     for index, f in enumerate(featured_accounts):
-        #         featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
-
-        #     categories = Category.objects.get_for_home(language, account_id)
-        # else:
-        #     account_id = account.id
-        #     categories = Category.objects.get_for_home(language, account_id)
-
-        # results, search_time, facets = FinderManager(HomeFinder).search(max_results = 250,
-        #                                                             order = '1',
-        #                                                             account_id = account_id)
-
-        # paginator = Paginator(results, 25)
-        # revisions = paginator.page(1)
-
-        # if preferences['account_home_filters'] == 'featured_accounts':
-        #     add_domains_to_permalinks(revisions.object_list + datastreams)
-
-        # return render_to_response('home_manager/queryList.html', locals())
 
 @require_POST
 def update_list(request):
