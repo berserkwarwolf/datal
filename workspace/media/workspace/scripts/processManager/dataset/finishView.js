@@ -67,23 +67,21 @@ var FinishView = StepView.extend({
 
 	onSaveButtonClicked: function(){	
 	
-            
 		if(this.model.isValid(true)){
 
 			// Set sources and tags
 			this.model.set('sources', this.sources.toJSON());
 			this.model.set('tags', this.tags.toJSON());
-				
+
 			// Set model data attribute
 			this.model.setData();	
 			if (!this.model.validate_notes()){
-                max_length = $("#notes_reference").data('max_length');
-                msg = gettext('VALIDATE-MAXLENGTH-TEXT-1') + max_length + gettext('VALIDATE-MAXLENGTH-TEXT-2');
-			    this.setIndividualError(null, 'notes', msg);
-			    return false;
-            }
-        
-
+				max_length = $("#notes_reference").data('max_length');
+				msg = gettext('VALIDATE-MAXLENGTH-TEXT-1') + max_length + gettext('VALIDATE-MAXLENGTH-TEXT-2');
+				this.setIndividualError(null, 'notes', msg);
+				return false;
+			}
+				
 			// Get Output and Data
 			var output = this.model.get('output'),
 				data = this.model.get('data');
@@ -148,9 +146,9 @@ var FinishView = StepView.extend({
 	},
 
 	onSaveError: function(response){
-        // Hide Loadings
-        $("#ajax_loading_overlay").hide();
-        datalEvents.trigger('datal:application-error', response);
+				// Hide Loadings
+				$("#ajax_loading_overlay").hide();
+				datalEvents.trigger('datal:application-error', response);
 	},
 
 	setIndividualError: function(element, name, error){

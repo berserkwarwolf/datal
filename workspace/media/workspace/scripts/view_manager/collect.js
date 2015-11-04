@@ -19,7 +19,7 @@ var Collect = Backbone.Model.extend({
 		this.loadDataSource();
 	},
 	checkMimeType : function(){
-		var lUrl  = '/datasets/check_source_url';
+		var lUrl  = '/datasets/check_endpoint_url';
 		var lData = "url="+ $.URLEncode(CreationManager.attributes.endPoint);
         
 	    $.ajax({ url: lUrl,

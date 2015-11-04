@@ -865,5 +865,17 @@ msgstr "Ver conjunto de datos"
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "Ver vista"
 
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT1"
+msgstr "La fuente '"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT2"
+msgstr "' ya contiene ésta URL."
+
+msgid "VALIDATE-SOURCENAMEALREADYEXIST-TEXT"
+msgstr "Este nombre ya existe."
+
+msgid "VALIDATE-SOURCENAMEINCOLLECTION-TEXT"
+msgstr "Ya tenes una fuente con ese nombre. Elegí otra."
+
 msgid "INVALID-TAG"
 msgstr "Tag invalido"
