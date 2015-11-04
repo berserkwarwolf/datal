@@ -7,6 +7,7 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from django.utils.translation import ugettext_lazy as _
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
+from core.choices import DATASTREAM_IMPL_VALID_CHOICES
 from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
@@ -60,6 +61,9 @@ class DataStreamSerializer(ResourceSerializer):
         except ObjectDoesNotExist:
             # TODO: mejorar errores
             raise serializers.ValidationError('Dataset no existe')
+
+        if data['dataset'].last_revision.impl_type not in DATASTREAM_IMPL_VALID_CHOICES:
+            raise serializers.ValidationError('El tipo de archivo no permite creacion de vistas')
 
         if 'table_id' in data:
             table_id = data.pop('table_id')

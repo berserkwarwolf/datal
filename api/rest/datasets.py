@@ -3,15 +3,14 @@ from rest_framework.decorators import detail_route
 from core.daos.datasets import DatasetDBDAO
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
-from core.choices import ODATA_LICENSES, ODATA_FREQUENCY
+from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_CHOICES
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from rest_framework import serializers
 from rest_framework import mixins
 from django.utils.translation import ugettext_lazy as _
 from core.choices import StatusChoices, CollectTypeChoices
 from core.forms import MimeTypeForm
-from core.http import get_impl_type
-from core.utils import get_file_type_from_extension
+from core.http import get_impl_type, get_file_type_from_extension
 import urllib
 
 
@@ -82,6 +81,12 @@ class DataSetSerializer(ResourceSerializer):
                 file_data.name.split('.')[-1]
             )
             data['collect_type'] = CollectTypeChoices.SELF_PUBLISH
+
+        if ('impl_type' not in data or
+            not data['impl_type'] or 
+            data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
+                # TODO: mejorar errores
+                raise serializers.ValidationError('Tipo de Archivo Invalido %s' % data['impl_type'])
 
         if 'license' in data:
             data['license_url'] = data.pop('license')

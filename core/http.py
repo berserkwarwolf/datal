@@ -76,6 +76,37 @@ def add_domains_to_permalinks(resources):
             resource['permalink'] = 'http://' + account_domain + resource['permalink']
             resource['account_name'] = r[account_id]['account.name']
 
+def get_file_type_from_extension(extension):
+
+    if extension.lower() in ["doc", "docx", "docm", "dotx", "dotm"]:
+        return SourceImplementationChoices.DOC
+    elif extension.lower() in ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"]:
+        return SourceImplementationChoices.XLS
+    elif extension.lower() in ["odt"]:
+        return SourceImplementationChoices.ODT
+    elif extension.lower() in ["ods"]:
+        return SourceImplementationChoices.ODS
+    elif extension.lower() in ["pdf"]:
+        return SourceImplementationChoices.PDF
+    elif extension.lower() in ["html", "htm"]:
+        return SourceImplementationChoices.HTML
+    elif extension.lower() in ["txt"]:
+        return SourceImplementationChoices.TXT
+    elif extension.lower() in ["csv"]:
+        return SourceImplementationChoices.CSV
+    elif extension.lower() in ["tsv"]:
+        return SourceImplementationChoices.TSV    
+    elif extension.lower() in ["xml"]:
+        return SourceImplementationChoices.XML
+    elif extension.lower() in ["kml"]:
+        return SourceImplementationChoices.KML
+    elif extension.lower() in ["kmz"]:
+        return SourceImplementationChoices.KMZ
+    elif extension.lower() in ["png", "jpg", "jpeg", "gif"]:
+        return SourceImplementationChoices.IMAGE
+    elif extension.lower() in ["zip", "gz", "tar"]:
+        return SourceImplementationChoices.ZIP
+
 def get_impl_type(mimetype, end_point):
     mimetype = mimetype.split(';')[0]
     impl_types = {
@@ -105,38 +136,6 @@ def get_impl_type(mimetype, end_point):
     except KeyError:
         try:
             extension = end_point.split('/')[-1].split('.')[-1]
-            extensions = {
-             'doc': SourceImplementationChoices.DOC,
-             'docx': SourceImplementationChoices.DOC,
-             'docm': SourceImplementationChoices.DOC,
-             'dotx': SourceImplementationChoices.DOC,
-             'dotm': SourceImplementationChoices.DOC,
-             'xlsx': SourceImplementationChoices.XLS,
-             'xlsm': SourceImplementationChoices.XLS,
-             'xls': SourceImplementationChoices.XLS,
-             'xltx': SourceImplementationChoices.XLS,
-             'xltm': SourceImplementationChoices.XLS,
-             'xlsb': SourceImplementationChoices.XLS,
-             'xlam': SourceImplementationChoices.XLS,
-             'xll': SourceImplementationChoices.XLS,
-             'odt': SourceImplementationChoices.ODT,
-             'ods': SourceImplementationChoices.ODS,
-             'html': SourceImplementationChoices.HTML,
-             'csv': SourceImplementationChoices.CSV,
-             'txt': SourceImplementationChoices.CSV,
-             'tsv': SourceImplementationChoices.TSV,             
-             'kml': SourceImplementationChoices.KML,
-             'xml': SourceImplementationChoices.XML,
-             'kmz': SourceImplementationChoices.KMZ,
-             'zip': SourceImplementationChoices.ZIP,
-             'tar': SourceImplementationChoices.ZIP,
-             'gz': SourceImplementationChoices.ZIP,
-             'jpg': SourceImplementationChoices.IMAGE,
-             'jpeg': SourceImplementationChoices.IMAGE,
-             'gif': SourceImplementationChoices.IMAGE,
-             'png': SourceImplementationChoices.IMAGE
-
-            }
-            return extensions[extension]
+            return get_file_type_from_extension(extension)
         except KeyError:
-            return SourceImplementationChoices.HTML
+            return None
