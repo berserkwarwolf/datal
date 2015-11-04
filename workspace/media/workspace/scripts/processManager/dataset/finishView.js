@@ -67,13 +67,12 @@ var FinishView = StepView.extend({
 
 	onSaveButtonClicked: function(){	
 	
-						
 		if(this.model.isValid(true)){
 
 			// Set sources and tags
 			this.model.set('sources', this.sources.toJSON());
 			this.model.set('tags', this.tags.toJSON());
-				
+
 			// Set model data attribute
 			this.model.setData();	
 			if (!this.model.validate_notes()){
