@@ -2525,10 +2525,10 @@ msgid "APP-COLLECT-SUBTITLE"
 msgstr "Choose an option to continue."
 
 msgid "APP-WEBSITE-TEXT"
-msgstr "From an url or website... "
+msgstr "From an url or website"
 
 msgid "APP-WEBSERVICE-TEXT"
-msgstr "From a web service..."
+msgstr "From a web service"
 
 msgid "APP-COLLECT-UPLOAD-TITLE"
 msgstr "Collect from your computer"
@@ -2537,7 +2537,10 @@ msgid "APP-MANDATORY-FIELDS-TEXT"
 msgstr "Fields marked with (<span class='required'>*</span>) are mandatory."
 
 msgid "APP-UPLOAD-FILE-TEXT"
-msgstr "From a file..."
+msgstr "From a file"
+
+msgid "APP-FROMOFFICE365CALENDAR-TEXT"
+msgstr "From Office 365 calendar"
 
 msgid "APP-SELECT-FILE-TEXT"
 msgstr "Select file"
