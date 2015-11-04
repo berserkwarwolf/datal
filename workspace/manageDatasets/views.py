@@ -8,21 +8,51 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.models import DatasetRevision
+from core.models import DatasetRevision, Dataset
+from core.templates import DefaultAnswer, DefaultDictToJson
+from core.daos.datasets import DatasetDBDAO
+from core.utils import DateTimeEncoder
+from core.lib.datastore import active_datastore
 from workspace.decorators import *
 from workspace.templates import DatasetList
-from core.templates import DefaultAnswer, DefaultDictToJson
 from workspace.manageDatasets.forms import *
-from core.daos.datasets import DatasetDBDAO
-from core.daos.visualizations import VisualizationDBDAO
-from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
+
+
+@require_http_methods(["GET"])
+def download(request, dataset_id, slug):
+    """ download dataset file directly """
+    logger = logging.getLogger(__name__)
+
+    # get public url for datastream id
+    try:
+        dataset_revision_id = Dataset.objects.get(pk=dataset_id).last_published_revision.id
+        dataset = DatasetDBDAO().get(request.auth_manager.language, dataset_revision_id=dataset_revision_id)
+    except Exception, e:
+        logger.info("Can't find the dataset: %s [%s]" % (dataset_id, str(e)))
+        raise Http404
+    else:
+        filename = dataset['filename'].encode('utf-8')
+        # ensure it's a downloadable file on S3
+        if dataset['end_point'][:7] != "file://":
+            return HttpResponse("No downloadable file!")
+
+        url = active_datastore.build_url(
+            request.bucket_name,
+            dataset['end_point'].replace("file://", ""),
+            {'response-content-disposition': 'attachment; filename={0}'.format(filename)}
+        )
+
+        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(dataset['impl_type']))
+        redirect = HttpResponse(status=302, mimetype=content_type)
+        redirect['Location'] = url
+
+        return redirect
 
 
 @login_required
