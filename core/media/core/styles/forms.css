@@ -16,6 +16,7 @@ textarea{background:#fff;border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit
 input[type=text], 
 input[type=password]{padding-left:10px;padding-right:10px;}
 select{padding:2px;}
+select[multiple]{height:auto;min-height:150px;}
 textarea{padding:10px;}
 
     /*TRANSITION*/

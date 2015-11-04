@@ -6,11 +6,13 @@
 	<div class="row clearfix">
 		<label for="id_calendar">{% trans 'APP-SELECT-CALENDAR-TEXT' %}</label>
 		<select multiple name="calendar" id="id_calendar">
-			<optgroup>Mis calendarios</optgroup>
+			<optgroup label="#Mis calendarios">
 				<option>#Eventos Junar</option>
 				<option>#Cumpleaños</option>
-			<optgroup>Otros calendarios</optgroup>
+			</optgroup>
+			<optgroup label="#Otros calendarios">
 				<option>#Días festivos</option>
+			</optgroup>
 		</select>
 		<span class="required">*</span>
 	</div>
