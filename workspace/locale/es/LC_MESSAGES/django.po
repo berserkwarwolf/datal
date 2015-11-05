@@ -3192,6 +3192,12 @@ msgstr "Invertir"
 msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "Este campo es requerido"
 
+msgid "VALIDATE-MAXLENGTH-TEXT-1"
+msgstr "No se deben superar los "
+
+msgid "VALIDATE-MAXLENGTH-TEXT-2"
+msgstr " caracteres."
+
 msgid "APP-HOW-TO-SELECT-TITLE"
 msgstr "¿Cómo seleccionar?"
 
