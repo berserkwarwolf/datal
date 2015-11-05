@@ -1,4 +1,4 @@
-    # -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from microsites.exceptions import *
@@ -55,7 +55,6 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
-
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html'
         preferences = request.preferences
@@ -77,7 +76,4 @@ class ExceptionManager(object):
         })
         response = tpl.render(context)
         return ExceptionManagerCore(response=response, output=mimetype,exception=exception, application="microsities",template=template).process()
-
-    """ return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
-    Se delego a la clase ExceptionManager que se encuentra en Core """
 
