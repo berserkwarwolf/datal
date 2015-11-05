@@ -9,7 +9,10 @@ from django.template import Context, Template
 from django.template.loader import get_template
 import logging
 import sys, traceback
-from pprint import pprint
+
+import sys, traceback
+from django.conf import settings
+
 
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
@@ -52,14 +55,20 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
-        print exception
+
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
-
-        template = 'microsities_errors/%s.%s' % (exception.template, extension)
-        
         preferences = request.preferences
+
+        if not isinstance(exception, DATALException):
+            if extension == 'json':
+                exception = UnkownException(str(exception.__class__.__name__),
+                    self.get_trace())
+            else:
+                self.log_error(exception)
+                raise        
         
+        template = 'microsities_errors/%s.%s' % (exception.template, extension)
         tpl = get_template(template)
         context = Context({
             'preferences':preferences,

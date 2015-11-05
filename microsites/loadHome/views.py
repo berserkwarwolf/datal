@@ -27,7 +27,7 @@ def load(request):
     """
     Shows the microsite's home page
     """
-    raise DataStreamDoesNotExist
+    
     jsonObject = None
     language = request.auth_manager.language
     account = request.account

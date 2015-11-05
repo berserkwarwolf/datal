@@ -137,3 +137,6 @@ def action_embed(request, guid):
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
+
+def visualization_error_404(request,id):
+    raise VisualizationRevisionDoesNotExist
