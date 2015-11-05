@@ -143,13 +143,13 @@ var Step0 = Step.extend({
     loadWebserviceData : function(){
         $('#id_steps_navbar').removeClass('stepsNavbar0').addClass('stepsNavbar1');
         $('#id_loading').show();
-        var queryString = '';
+        var queryString = {};
         $('.webservice_args').each(function(i){
             var name = $(this).find('label').text();
             var value = $(this).find('input').val();
             var edit = $(this).find('input').attr('data-edit');
             if(edit == "true"){
-                queryString += '&'+name + '=' + value;
+                queryString[name] = value;
             }
         });
 

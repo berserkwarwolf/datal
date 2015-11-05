@@ -105,6 +105,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                                     allowed_states=allowed_states)
         if parent_status != StatusChoices.PUBLISHED:
             if self.datastream_revision.dataset.last_revision.status != StatusChoices.PUBLISHED:
+                # en caso de que el padre no este publicado, lo dejamos como aprobado
+                self.datastream_revision.status = StatusChoices.APPROVED
+                self.datastream_revision.save()
                 raise ParentNotPublishedException()
 
         self.datastream_revision.status = StatusChoices.PUBLISHED

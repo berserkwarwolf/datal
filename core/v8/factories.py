@@ -94,6 +94,7 @@ class CommandFactory(object):
 
     def _process_items(self, items):
         post_query=[]
+        no_fix=[]
         for item in items:
             # buscamos que sea un tipo de argumento (ej.: pArgument o filter)
             if "name" in item.keys():
@@ -105,12 +106,14 @@ class CommandFactory(object):
                         post_query.append((i, ""))
                     elif i == 'wargs':
                         for wi, wval in json.loads(item[i]).items():
-                            post_query.append((wi, wval))
+                            no_fix.append((wi, wval))
                     else:
                         post_query.append((i, item[i]))
     
 
-        return self._fix_params(post_query)
+        fixed_params = self._fix_params(post_query)
+        fixed_params.extend(no_fix)
+        return fixed_params
 
 class LoadCommandFactory(CommandFactory):
     def create(self, items):

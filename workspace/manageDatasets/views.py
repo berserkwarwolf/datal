@@ -8,21 +8,52 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.models import DatasetRevision
+from core.models import DatasetRevision, Dataset
+from core.templates import DefaultAnswer, DefaultDictToJson
+from core.daos.datasets import DatasetDBDAO
+from core.utils import DateTimeEncoder
+from core.lib.datastore import active_datastore
+from core.forms import MimeTypeForm
 from workspace.decorators import *
 from workspace.templates import DatasetList
-from core.templates import DefaultAnswer, DefaultDictToJson
 from workspace.manageDatasets.forms import *
-from core.daos.datasets import DatasetDBDAO
-from core.daos.visualizations import VisualizationDBDAO
-from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
+
+
+@require_http_methods(["GET"])
+def download(request, dataset_id, slug):
+    """ download dataset file directly """
+    logger = logging.getLogger(__name__)
+
+    # get public url for datastream id
+    try:
+        dataset_revision_id = Dataset.objects.get(pk=dataset_id).last_published_revision.id
+        dataset = DatasetDBDAO().get(request.auth_manager.language, dataset_revision_id=dataset_revision_id)
+    except Exception, e:
+        logger.info("Can't find the dataset: %s [%s]" % (dataset_id, str(e)))
+        raise Http404
+    else:
+        filename = dataset['filename'].encode('utf-8')
+        # ensure it's a downloadable file on S3
+        if dataset['end_point'][:7] != "file://":
+            return HttpResponse("No downloadable file!")
+
+        url = active_datastore.build_url(
+            request.bucket_name,
+            dataset['end_point'].replace("file://", ""),
+            {'response-content-disposition': 'attachment; filename={0}'.format(filename)}
+        )
+
+        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(dataset['impl_type']))
+        redirect = HttpResponse(status=302, mimetype=content_type)
+        redirect['Location'] = url
+
+        return redirect
 
 
 @login_required
@@ -174,8 +205,8 @@ def get_filters_json(request):
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
 def remove(request, dataset_revision_id, type="resource"):
-
     """ remove resource """
+
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':
@@ -263,10 +294,21 @@ def edit(request, dataset_revision_id=None):
     # TODO: Review. Category was not loading options from form init.
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
+    # Get data set and the right template depending on the collected type
+    dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
+
+    initial_values = dict(
+        # Dataset Form
+        dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
+        category=dataset.get('category_id'), status=dataset.get('status'),
+        notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
+        impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
+        frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
+        tags=dataset.get('tags')
+    )
+
     if request.method == 'GET':
         status_options = auth_manager.get_allowed_actions()
-        # Get data set and the right template depending on the collected type
-        dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
 
 
@@ -279,18 +321,7 @@ def edit(request, dataset_revision_id=None):
         className = ''.join(str(elem) for elem in className)
         mod = __import__('workspace.manageDatasets.forms', fromlist=[className])
 
-        initial_values = dict(
-            # Dataset Form
-            dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
-            category=dataset.get('category_id'), status=dataset.get('status'),
-            notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
-            impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
-            frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
-            tags=dataset.get('tags')
-        )
-
         form = getattr(mod, className)(status_options=status_options)
-
         form.label_suffix = ''
         form.fields['category'].choices = category_choices
         form.initial = initial_values
@@ -301,6 +332,9 @@ def edit(request, dataset_revision_id=None):
         form = DatasetFormFactory(request.POST.get('collect_type')).create(
             request, account_id=account_id, language=language, status_choices=auth_manager.get_allowed_actions()
         )
+
+        # Agrego los valores iniciales para que el changed_data de correctamente
+        form.initial = initial_values
 
         if form.is_valid():
             lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
@@ -420,7 +454,7 @@ def change_status(request, dataset_revision_id=None):
 @login_required
 @require_privilege("workspace.can_create_datastream")
 @require_http_methods(["GET"])
-def check_source_url(request):
+def check_endpoint_url(request):
 
     mimetype_form = MimeTypeForm(request.GET)
     status = ''

@@ -18,6 +18,12 @@ class RestSourceViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         queryset = self.queryset
         term = self.request.query_params.get('term', None)
-        if term is not None:
+        if term :
             queryset = queryset.filter(name__icontains=term)
+        url = self.request.query_params.get('url', None)
+        if url:
+            queryset = queryset.filter(url=url)
+        name = self.request.query_params.get('name', None)
+        if name:
+            queryset = queryset.filter(name=name)
         return queryset

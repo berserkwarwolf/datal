@@ -43,10 +43,6 @@ urlpatterns = patterns('',
     (r'^visualizations/', include('microsites.viewChart.urls')),
     url(r'^visualizations/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.viewChart.views.action_embed', name='chart_manager.action_embed'),
 
-    #(r'^visualizationsb/', include('microsites.chart_manager.urls')),
-    #url(r'^visualizationsb/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.chart_manager.views.action_embed', name='chart_manager.action_embedb'),
-
-
     # dejamos datastreams para no romper,
     # dataviews como deberia quedar definitivamente
     (r'^datastreams/', include('microsites.viewDataStream.urls')),
@@ -63,8 +59,6 @@ urlpatterns = patterns('',
     url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
 
 #    url(r'^portal/DataServicesManager/actionEmbed/$', 'microsites.viewDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
-    url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
-
     url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),
     (r'^home/', include('microsites.loadHome.urls')),
     (r'^home', include('microsites.loadHome.urls')),
