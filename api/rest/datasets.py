@@ -65,7 +65,7 @@ class DataSetSerializer(ResourceSerializer):
                 data.pop(key)
 
         if 'category' in data and data['category']:
-            data['category'] = self.getCategoryId(data['category'])
+            data['category'] = self.getCategory(data['category']).id
 
         if 'end_point' in data and data['end_point']:
             mimetype, status, url = MimeTypeForm().get_mimetype(data['end_point'])

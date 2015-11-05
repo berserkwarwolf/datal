@@ -13,11 +13,10 @@ class ResourceSerializer(serializers.Serializer):
                 category__account=self.context['request'].auth['account']
             )))
 
-    def getCategoryId(self, category_slug):
-        return CategoryI18n.objects.get(slug=category_slug).category.id
-
     def getCategory(self, category_slug):
-        return CategoryI18n.objects.get(slug=category_slug).category
+        return CategoryI18n.objects.get(
+            slug=category_slug,
+            language=self.context['request'].auth['language']).category
 
     def tryKeysOnDict(self, toDict, toKey, fromDict, fromKeys):
         toDict[toKey] = None
