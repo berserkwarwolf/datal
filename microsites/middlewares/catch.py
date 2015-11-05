@@ -2,7 +2,7 @@
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from microsites.exceptions import *
-from core.exceptions import DATALException 
+from core.exceptions import DATALException
 from core.exceptions import ExceptionManager as ExceptionManagerCore
 
 from django.template import Context, Template
@@ -57,7 +57,7 @@ class ExceptionManager(object):
     def process_exception(self, request, exception):
 
         mimetype = self.get_mime_type(request)
-        extension = 'json' if self.is_json(mimetype) else 'html' 
+        extension = 'json' if self.is_json(mimetype) else 'html'
         preferences = request.preferences
 
         if not isinstance(exception, DATALException):
@@ -66,8 +66,8 @@ class ExceptionManager(object):
                     self.get_trace())
             else:
                 self.log_error(exception)
-                raise        
-        
+                raise
+
         template = 'microsities_errors/%s.%s' % (exception.template, extension)
         tpl = get_template(template)
         context = Context({

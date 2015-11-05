@@ -27,7 +27,7 @@ def load(request):
     """
     Shows the microsite's home page
     """
-    
+
     jsonObject = None
     language = request.auth_manager.language
     account = request.account
@@ -101,7 +101,7 @@ def update_list(request):
         category_filters = form.cleaned_data.get('category_filters')
         if category_filters:
             category_filters=category_filters.lower().split(",")
-        
+
 
         if preferences['account_home_filters'] == 'featured_accounts':
 

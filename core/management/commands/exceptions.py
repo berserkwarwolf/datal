@@ -1,14 +1,20 @@
 from django.core.management.base import BaseCommand
 from optparse import make_option
 from workspace.exceptions import *
-from workspace.middlewares.catch import ExceptionManager as ExceptionManagerMiddleWare
+from microsites.exceptions import *
+from workspace.middlewares.catch import ExceptionManager as WorkspaceExceptionManagerMiddleWare
+from microsites.middlewares.catch import ExceptionManager as MicrositesExceptionManagerMiddleWare
 from django.test.client import RequestFactory
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
 import os
 from core.auth.auth import AuthManager
 import re
+from core.shortcuts import render_to_response
 from workspace.manageDatasets.forms import *
+from django.template import Context,Template
+from django.template.loader import add_to_builtins
+add_to_builtins('microsites.templatetags.local_tags')
 
 class Colors:
     HEADER = '\033[95m'
@@ -49,6 +55,25 @@ class Command(BaseCommand):
         request.auth_manager = AuthManager(language="en")
         return request
 
+    def PrintTitulo(self,exception):
+        print "\n"
+        print "======================================================================"
+        print Colors.BLUE + "Testing" + exception + Colors.END
+        print "----------------------------------------------------------------------"
+
+    def GenerateException(self,space,type_response,e):
+        request = self.FakeRequest(space,type_response)
+        if space == 'workspace':
+            middleware = WorkspaceExceptionManagerMiddleWare()
+
+        if space == 'microsites':
+            middleware = MicrositesExceptionManagerMiddleWare()
+            request.preferences = lambda: None
+            setattr(request.preferences, 'TestFieldCreated', 'TestValueCreated')
+
+        ObjHttpResponse = middleware.process_exception(request,e)
+        self.ProcessException(ObjHttpResponse,e,request)
+
     def ProcessException(self,ObjHttpResponse,e,request):
         html = ObjHttpResponse._container[0]
         title = unicode(e.title)
@@ -86,68 +111,40 @@ class Command(BaseCommand):
         argument = Object()
 
         if options['exception']:
-            print "======================================================================"
-            print Colors.BLUE + "Testing" + options['exception'] + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo(options['exception'])
             e = Exception.__new__(eval(options['exception']))
             space = 'workspace'
             type_response = 'text/html'
             request = self.FakeRequest(space,type_response)
-            middleware = ExceptionManagerMiddleWare()
+            if space == 'workspace':
+                middleware = WorkspaceExceptionManagerMiddleWare()
+
+            if space == 'microsites':
+                middleware = MicrositesExceptionManagerMiddleWare()
 
             ObjHttpResponse = middleware.process_exception(request,e)
             self.ProcessException(ObjHttpResponse,e,request)
 
         if options['all']:
-            print "======================================================================"
-            print Colors.BLUE + "Testing DATALException" + Colors.END
-            print "----------------------------------------------------------------------"
+            self.PrintTitulo("DATALException")
             e = DATALException()
             space = 'workspace'
             type_response = 'text/html'
-            request = self.FakeRequest(space,type_response)
-            middleware = ExceptionManagerMiddleWare()
+            self.GenerateException(space,type_response,e)
 
-            ObjHttpResponse = middleware.process_exception(request,e)
-            self.ProcessException(ObjHttpResponse,e,request)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing LifeCycleException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("LifeCycleException")
             space = 'workspace'
             type_response ='text/html'
             e = LifeCycleException()
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space,type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-            self.ProcessException(ObjHttpResponse,e,request)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing ChildNotApprovedException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("ChildNotApprovedException")
             space = 'workspace'
             type_response ='text/html'
-
             e = ChildNotApprovedException(argument)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space,type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing SaveException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("SaveException")
             space = 'workspace'
             type_response = 'text/html'
 
@@ -155,16 +152,9 @@ class Command(BaseCommand):
                 print Colors.FAIL + "Valid form, no expection generated." + Colors.END
             else:
                 e = SaveException(InstancedForm)
-                request = self.FakeRequest(space, type_response)
-                middleware = ExceptionManagerMiddleWare()
-                ObjHttpResponse = middleware.process_exception(request, e)
-                self.ProcessException(ObjHttpResponse,e,request)
+                self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatastreamSaveException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatastreamSaveException")
             space = 'workspace'
             type_response ='text/html'
 
@@ -172,16 +162,9 @@ class Command(BaseCommand):
                 print "Valid form, no expection generated."
             else:
                 e = DatastreamSaveException(InstancedForm)
-                request = self.FakeRequest(space, type_response)
-                middleware = ExceptionManagerMiddleWare()
-                ObjHttpResponse = middleware.process_exception(request, e)
-                self.ProcessException(ObjHttpResponse,e,request)
+                self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing VisualizationSaveException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("VisualizationSaveException")
             space = 'workspace'
             type_response ='text/html'
 
@@ -189,386 +172,168 @@ class Command(BaseCommand):
                 print "Valid form, no expection generated."
             else:
                 e = VisualizationSaveException(InstancedForm)
-                request = self.FakeRequest(space, type_response)
-                middleware = ExceptionManagerMiddleWare()
-                ObjHttpResponse = middleware.process_exception(request, e)
-                self.ProcessException(ObjHttpResponse,e,request)
+                self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatasetNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatasetNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = DatasetNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DataStreamNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DataStreamNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = DataStreamNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing VisualizationNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("VisualizationNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = VisualizationNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing VisualizationRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("VisualizationRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = VisualizationRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing ParentNotPuslishedException" + Colors.END
-            print "----------------------------------------------------------------------"
-
-            space = 'workspace'
-            type_response ='text/html'
-
-            e = ParentNotPuslishedException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing IllegalStateException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("IllegalStateException")
             space = 'workspace'
             type_response ='text/html'
 
             e = IllegalStateException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing FileTypeNotValidException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("FileTypeNotValidException")
             space = 'workspace'
             type_response ='text/html'
 
             e = FileTypeNotValidException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing ApplicationException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("ApplicationException")
             space = 'workspace'
             type_response ='text/html'
 
             e = ApplicationException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatastoreNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatastoreNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = DatastoreNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing MailServiceNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("MailServiceNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = MailServiceNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing SearchIndexNotFoundException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("SearchIndexNotFoundException")
             space = 'workspace'
             type_response ='text/html'
-
             e = SearchIndexNotFoundException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing S3CreateException" + Colors.END
-            print "----------------------------------------------------------------------"
 
+            self.PrintTitulo("S3CreateException")
             space = 'workspace'
             type_response ='text/html'
-
             e = S3CreateException("Descripcion error class in __init__")
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing S3UpdateException" + Colors.END
-            print "----------------------------------------------------------------------"
 
+            self.PrintTitulo("S3UpdateException")
             space = 'workspace'
             type_response ='text/html'
-
             e = S3UpdateException("Descripcion error class in __init__")
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing ParentNotPublishedException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("ParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
-
             e = ParentNotPublishedException("Descripcion error class in __init__")
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatastreamParentNotPublishedException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatastreamParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
             request = self.FakeRequest(space, type_response)
             e = DatastreamParentNotPublishedException(argument)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing VisualizationParentNotPublishedException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("VisualizationParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
-
             e = VisualizationParentNotPublishedException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing ResourceRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("ResourceRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = ResourceRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing AnyResourceRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("AnyResourceRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = AnyResourceRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatasetRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatasetRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = DatasetRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing DatastreamRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("DatastreamRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = DatastreamRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing AnyDatasetRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("AnyDatasetRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = AnyDatasetRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing AnyDatastreamRequiredException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("AnyDatastreamRequiredException")
             space = 'workspace'
             type_response ='text/html'
-
             e = AnyDatastreamRequiredException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
-
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
+            self.GenerateException(space,type_response,e)
 
 
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing InsufficientPrivilegesException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("InsufficientPrivilegesException")
             space = 'workspace'
             type_response ='text/html'
-
             e = InsufficientPrivilegesException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-
-            ObjHttpResponse = middleware.process_exception(request,e)
-
-            print "\n"
-            print "======================================================================"
-            print Colors.BLUE + "Testing RequiresReviewException" + Colors.END
-            print "----------------------------------------------------------------------"
-
+            self.PrintTitulo("RequiresReviewException")
             space = 'workspace'
             type_response ='text/html'
-
             e = RequiresReviewException()
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
-            ObjHttpResponse = middleware.process_exception(request, e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.GenerateException(space,type_response,e)
 
-            request = self.FakeRequest(space, type_response)
-            middleware = ExceptionManagerMiddleWare()
+            '''
+            Test microsites exceptions
+            '''
 
-            ObjHttpResponse = middleware.process_exception(request,e)
+            '''
+            TODO
+            django.template.base.TemplateSyntaxError: 'local_tags' is not a valid tag library:
+            Template library local_tags not found
+
+            self.PrintTitulo("VisualizationRevisionDoesNotExist")
+            space = 'microsites'
+            type_response ='text/html'
+            e = VisualizationRevisionDoesNotExist()
+            self.GenerateException(space,type_response,e)
+            '''
 
             print "\n"
             print Colors.BLUE + " \~ END TEST \~" + Colors.END

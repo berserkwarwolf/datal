@@ -40,7 +40,7 @@ def hits_stats(request, vz_id, channel_type=None):
     c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
     return HttpResponse(t.render(c), content_type="application/json")
 
-def action_view(request, id, slug):
+def action_view(request, id, slug=None):
     """
     Show a microsite view
     """
