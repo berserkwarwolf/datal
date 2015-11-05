@@ -1585,7 +1585,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38920,
-            "status": 4,
+            "status": 0,
             "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year1.json",
             "created_at": "2015-06-03T19:14:48",
             "modified_at": "2015-06-03T19:14:48",
@@ -1603,7 +1603,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38920,
-            "status": 4,
+            "status": 0,
             "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year2.json",
             "created_at": "2015-06-03T19:13:00",
             "modified_at": "2015-06-03T19:13:00",
@@ -1621,7 +1621,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38920,
-            "status": 4,
+            "status": 0,
             "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year3.json",
             "created_at": "2015-06-03T19:11:03",
             "modified_at": "2015-06-03T19:11:03",
@@ -2809,7 +2809,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38919,
-            "status": 4,
+            "status": 0,
             "end_point": "file://4575/7195/d1cb47f7-f11f-4dce-9e4d-4cb440499e1c",
             "created_at": "2014-02-13T19:31:51",
             "modified_at": "2014-02-13T19:31:51",
@@ -4033,7 +4033,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38767,
-            "status": 4,
+            "status": 0,
             "end_point": "file://4575/0475/2d37a1c1-e19b-4931-98ac-8213eae25dcd",
             "created_at": "2013-06-11T18:00:49",
             "modified_at": "2013-06-11T18:00:49",
@@ -4123,7 +4123,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38767,
-            "status": 4,
+            "status": 0,
             "end_point": "file://4575/0475/dd916ca5-557b-411a-ad39-7f58efdfab1b",
             "created_at": "2013-06-06T12:42:56",
             "modified_at": "2013-06-06T12:42:56",
@@ -4141,7 +4141,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38767,
-            "status": 4,
+            "status": 0,
             "end_point": "file://4575/0475/55c10485-75a9-434a-9049-35d753dead1a",
             "created_at": "2013-06-05T17:51:19",
             "modified_at": "2013-06-05T17:51:19",
@@ -4177,7 +4177,7 @@
         "model": "core.datasetrevision",
         "fields": {
             "category": 38767,
-            "status": 4,
+            "status": 0,
             "end_point": "file://4575/0475/3145a7c9-7d54-4d56-94a2-e2e3174d0119",
             "created_at": "2013-05-30T18:24:45",
             "modified_at": "2013-05-30T18:24:45",

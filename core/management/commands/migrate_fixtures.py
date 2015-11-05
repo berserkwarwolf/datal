@@ -134,6 +134,12 @@ class Command(BaseCommand):
         # Dataset Revision
         dataset_revisions = []
         for row in self.datasetrevision:
+            # Si hay estados en UNPUBLISHED lo paso A DRAFT
+            if row['fields']["status"] == 4:
+                row['fields']["status"] = 0
+            # Si hay estados en UNDER_REVIEW lo paso A PENDING_REVIEW
+            if row['fields']["status"] == 2:
+                row['fields']["status"] = 1
             row['fields']["modified_at"] = row['fields']["created_at"]
             dataset_revisions.append(row)
 
@@ -169,6 +175,12 @@ class Command(BaseCommand):
         datatream_revisions = []
         for row in self.datastream_revision:
             row['fields']["modified_at"] = row['fields']["created_at"]
+            # Si hay estados en UNPUBLISHED lo paso A DRAFT
+            if row['fields']["status"] == 4:
+                row['fields']["status"] = 0
+            # Si hay estados en UNDER_REVIEW lo paso A PENDING_REVIEW
+            if row['fields']["status"] == 2:
+                row['fields']["status"] = 1
             add = True
 
             if not row['fields']["rdf_template"]:
