@@ -108,6 +108,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 # en caso de que el padre no este publicado, lo dejamos como aprobado
                 self.datastream_revision.status = StatusChoices.APPROVED
                 self.datastream_revision.save()
+                transaction.commit()
                 raise ParentNotPublishedException()
 
         self.datastream_revision.status = StatusChoices.PUBLISHED
