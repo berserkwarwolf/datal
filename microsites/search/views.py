@@ -6,6 +6,8 @@ from core.models import Category
 from microsites.search import forms
 from microsites.managers import *
 from microsites.exceptions import *
+from core.exceptions import *
+from microsites.exceptions import *
 
 import logging
 
@@ -19,7 +21,7 @@ def action_browse(request, category_slug=None, page=1):
     try:
         results, search_time, facets = FinderManager().search(category_id=category['id'], account_id=account.id)
     except InvalidPage:
-        raise Http404
+        raise InvalidPage
 
     paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
     page_results = paginator.page(page).object_list
@@ -33,9 +35,6 @@ def do_search(request, category_filters=None, datasets=None):
     form = forms.SearchForm(request.GET)
 
     if form.is_valid():
-        print "__InvalidFormSearch__"
-        raise InvalidFormSearch()
-
         query = form.get_query()
         page = form.cleaned_data.get('page')
         order = form.cleaned_data.get('order')
@@ -53,7 +52,7 @@ def do_search(request, category_filters=None, datasets=None):
                 resource=resources
             )
         except InvalidPage:
-            raise Http404
+            raise InvalidPage
 
 
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)

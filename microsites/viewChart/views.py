@@ -12,6 +12,8 @@ from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
 from core.v8.factories import AbstractCommandFactory
+from core.exceptions import *
+from microsites.exceptions import *
 
 import urllib
 import json
@@ -25,7 +27,7 @@ def hits_stats(request, vz_id, channel_type=None):
     try:
         vz = Visualization.objects.get(pk=int(vz_id))
     except Visualization.DoesNotExist:
-        raise Http404
+        raise VisualizationDoesNotExist
 
 
     dao=VisualizationHitsDAO(vz)
@@ -51,7 +53,7 @@ def action_view(request, id, slug):
             account = Account.objects.get(pk=account_id)
             is_free = True
         except (Visualization.DoesNotExist, Account.DoesNotExist), e:
-            return HttpResponse("Viz doesn't exist!")  # TODO
+            raise VisualizationDoesNotExist
 
     preferences = request.preferences
     if not is_free:
@@ -69,7 +71,7 @@ def action_view(request, id, slug):
         # verify if this account is the owner of this viz
         visualization = Visualization.objects.get(pk=id)
         if account.id != visualization.user.account.id:
-            raise Http404
+            raise NotAccesVisualization
 
         #for datastream sidebar functions (downloads and others)
         datastream = DataStreamDBDAO().get(
@@ -78,7 +80,7 @@ def action_view(request, id, slug):
         )
         impl_type_nice = set_dataset_impl_type_nice(datastream["impl_type"]).replace('/', ' ')
     except VisualizationRevision.DoesNotExist:
-        return HttpResponse("Viz-Rev doesn't exist!")  # TODO
+        raise VisualizationRevisionDoesNotExist
     else:
 
         # url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))

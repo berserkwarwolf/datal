@@ -14,10 +14,11 @@ from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
 from core.daos.visualizations import VisualizationHitsDAO, VisualizationDBDAO
 from microsites.chart_manager import forms
+from core.exceptions import *
+from microsites.exceptions import *
 
 
 def action_view(request, id, slug):
-    
     try:
         account = request.account
         is_free = False
@@ -27,8 +28,7 @@ def action_view(request, id, slug):
             account = Account.objects.get(pk=account_id)
             is_free = True
         except (Visualization.DoesNotExist, Account.DoesNotExist), e:
-            raise Http404
-
+            raise VisualizationDoesNotExist
     preferences = request.preferences
     if not is_free:
         base_uri = 'http://' + preferences['account_domain']
@@ -42,7 +42,7 @@ def action_view(request, id, slug):
             published=True
         )
     except VisualizationRevision.DoesNotExist:
-        raise Http404
+        raise VisualizationRevisionDoesNotExist
     else:
         VisualizationHitsDAO(visualization_revision['visualization']).add(ChannelTypes.WEB)
 

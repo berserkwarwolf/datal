@@ -38,7 +38,6 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
-<<<<<<< HEAD
 '''
 ExceptionManager
 Class to receive exceptions from middlewares and other classes and return the HttpResponse Object.
@@ -64,7 +63,7 @@ class ExceptionManager():
         logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
             self.exception.description))
         return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
-=======
+
 class UnkownException(DATALException):
     title = _('EXCEPTION-TITLE-UNKNOWN')
     description = _('EXCEPTION-DESCRIPTION-UNKNOWN')
@@ -77,8 +76,6 @@ class UnkownException(DATALException):
 
     def get_actions(self):
         return [ContactUsExceptionAction()]
-
->>>>>>> develop
 
 class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')

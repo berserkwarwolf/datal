@@ -7,6 +7,8 @@ from core.daos.datasets import DatasetDBDAO
 from core.templatetags.core_components import permalink as get_permalink
 from microsites.daos.datasets import DatasetDAO
 from core.utils import set_dataset_impl_type_nice
+from core.exceptions import *
+from microsites.exceptions import *
 
 
 def view(request, dataset_id, slug):
@@ -18,11 +20,11 @@ def view(request, dataset_id, slug):
     try:
         dataset_orig = Dataset.objects.get(pk=dataset_id)
     except Dataset.DoesNotExist, DatasetRevision.DoesNotExist:
-        logger.error('Datset doesn\'t exists [%s|%s]' % (str(dataset_id), str(account.id)))
-        raise Http404
+        logger.error('Dataset doesn\'t exists [%s|%s]' % (str(dataset_id), str(account.id)))
+        raise DatasetDoesNotExist
     except Exception, e:
-        logger.error('Datset error [%s|%s]=%s' % (str(dataset_id), str(account.id), repr(e)))
-        raise Http404
+        logger.error('Dataset error [%s|%s]=%s' % (str(dataset_id), str(account.id), repr(e)))
+        raise DatasetError
 
     if not dataset_orig.last_published_revision:
         logger.error('Dataset {} has no published revision'.format(dataset_id))

@@ -620,3 +620,52 @@ msgstr "Minutely"
 
 msgid "APP-OTHER-TEXT"
 msgstr "Other"
+
+# —————————— Exceptions
+msgid "EXCEPTION-TITLE-REVISION-NOT-EXIST"
+msgstr "A exibição não existe"
+
+msgid "EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST"
+msgstr "A revisão da exibição não existe"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-EXIST"
+msgstr "A visualização não existe"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-EXIST"
+msgstr "A visualização não existe."
+
+msgid "EXCEPTION-TITLE-ACCOUNT-NOT-EXIST"
+msgstr "Essa conta não existe"
+
+msgid "EXCEPTION-DESCRIPTION-ACCOUNT-NOT-EXIST"
+msgstr "A conta que você tentar usar não existe."
+
+msgid "EXCEPTION-TITLE-INVALID-PAGE"
+msgstr "Página inválida"
+
+msgid "EXCEPTION-DESCRIPTION-INVALID-PAGE"
+msgstr "A página que você está tentando acessar, é inválido."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-EXIST"
+msgstr "O fluxo de dados não existe"
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-EXIST"
+msgstr "O fluxo de dados que você está tentando usar não existe"
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-EXIST"
+msgstr "O conjunto de dados não existe"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-EXIST"
+msgstr "O conjunto de dados que você está tentando usar não existe."
+
+msgid "EXCEPTION-TITLE-DATASET-ERROR"
+msgstr "Erro no conjunto de dados."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTET-ERROR"
+msgstr "Erro no conjunto de dados."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-ACCESS"
+msgstr "Não acesso a visualização"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-ACCESS"
+msgstr "Sua conta não tem acesso à visualização"

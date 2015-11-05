@@ -2,14 +2,11 @@
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from workspace.exceptions import *
-<<<<<<< HEAD
-from core.exceptions import DATALException 
 from core.exceptions import ExceptionManager as ExceptionManagerCore
 from django.contrib.auth.models import AnonymousUser, User
-=======
+
 from core.exceptions import DATALException, UnkownException
 
->>>>>>> develop
 from django.template import Context, Template
 from django.template.loader import get_template
 import logging
@@ -59,18 +56,11 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
-<<<<<<< HEAD
-        if not hasattr(request, 'user') or not request.user or not isinstance(exception, DATALException):
-            self.log_error(exception)
-            raise
-        
-=======
 
         if not hasattr(request, 'user') or not request.user:
             self.log_error(exception)
             raise
 
->>>>>>> develop
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
 

@@ -9,6 +9,7 @@ from django.template import Context, Template
 from django.template.loader import get_template
 import logging
 import sys, traceback
+from pprint import pprint
 
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
@@ -51,21 +52,23 @@ class ExceptionManager(object):
 
     """ Middleware for error handling """
     def process_exception(self, request, exception):
-        print "___ process_exception ___"
-        if not hasattr(request, 'user') or not request.user or not isinstance(exception, DATALException):
-            self.log_error(exception)
-            raise
-
+        print exception
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html' 
-        template = 'microsites_errors/%s.%s' % (exception.template, extension)
+
+        template = 'microsities_errors/%s.%s' % (exception.template, extension)
+        
+        preferences = request.preferences
+        
         tpl = get_template(template)
         context = Context({
+            'preferences':preferences,
             "exception":exception,
             "auth_manager": request.auth_manager
         })
         response = tpl.render(context)
-        return ExceptionManagerCore(response=response, auth_manager=request.auth_manager, output=mimetype,exception=exception, application="workspace",template=template).process()
-        ''' return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
-            Se delego a la clase ExceptionManager que se encuentra en Core '''
+        return ExceptionManagerCore(response=response, output=mimetype,exception=exception, application="microsities",template=template).process()
+
+    """ return HttpResponse(response, mimetype=mimetype, status=exception.status_code)
+    Se delego a la clase ExceptionManager que se encuentra en Core """
 

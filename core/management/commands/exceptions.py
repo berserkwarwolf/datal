@@ -77,7 +77,6 @@ class Command(BaseCommand):
         settings.TEMPLATE_DIRS = list(settings.TEMPLATE_DIRS)
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'workspace', 'templates'))
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'microsites', 'templates'))
-        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'api', 'templates'))
         settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS)
 
         print Colors.HEADER + "\_/ Testing expection \_/" + Colors.END

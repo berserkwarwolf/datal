@@ -69,7 +69,7 @@ def hits_stats(request, id, channel_type=None):
     try:
         datastream = DataStream.objects.get(pk=int(id))
     except DataStream.DoesNotExist:
-        raise Http404
+        raise DataStreamDoesNotExist
 
     hits_dao = DatastreamHitsDAO(datastream)
     hits = hits_dao.count_by_days(30, channel_type)
@@ -111,7 +111,7 @@ def download(request, id, slug):
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
         datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
-        raise Http404
+        raise DataStreamDoesNotExist
     else:
         url = active_datastore.build_url(
             request.bucket_name,
