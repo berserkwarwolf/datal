@@ -168,6 +168,7 @@ class Command(BaseCommand):
         # Datastream Revision
         datatream_revisions = []
         for row in self.datastream_revision:
+            row['fields']["modified_at"] = row['fields']["created_at"]
             add = True
 
             if not row['fields']["rdf_template"]:

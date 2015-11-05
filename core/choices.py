@@ -149,6 +149,7 @@ class SourceImplementationChoices():
     IMAGE = 18
     ZIP = 19
     TSV = 20
+    PUS = 21
 
 SOURCE_IMPLEMENTATION_CHOICES = (
      (SourceImplementationChoices.HTML, 'HTML')
@@ -172,6 +173,7 @@ SOURCE_IMPLEMENTATION_CHOICES = (
     ,(SourceImplementationChoices.IMAGE, 'IMAGE')
     ,(SourceImplementationChoices.ZIP, 'ZIP')
     ,(SourceImplementationChoices.TSV, 'TSV')
+    ,(SourceImplementationChoices.PUS, 'PublicStuff')
 )
 
 # These are the impl_type that are valid to create a Data View from Self Publish 
