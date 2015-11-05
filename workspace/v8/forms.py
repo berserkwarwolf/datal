@@ -5,6 +5,8 @@ from core.choices import VISUALIZATION_TYPES
 from core.v8.forms import RequestForm
 
 class DatasetLoadForm(RequestForm):
+    wargs = forms.CharField(required=False)
+    
     def clean(self):
         cleaned_data = super(DatasetLoadForm, self).clean()
         for key, valor in self.data.items():

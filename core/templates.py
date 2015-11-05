@@ -109,7 +109,7 @@ class DefaultDictToJson(Template):
     """
 
     def __init__(self):
-        super(DefaultDictToJson, self).__init__(template="")
+        super(DefaultDictToJson, self).__init__("")
     
     def render(self, data, normalize=False):
         """ render dictionario. Normalize es para enviar status y data con el contenido"""
