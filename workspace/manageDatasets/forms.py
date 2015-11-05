@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy
 
 from core import choices
 from core.models import CategoryI18n
+from core.choices import SOURCE_EXTENSION_LIST, SOURCE_MIMETYPE_LIST
 from core.exceptions import FileTypeNotValidException
 from workspace.common.forms import TagForm, SourceForm
 
@@ -341,14 +342,13 @@ class FileForm(DatasetForm):
             'tabindex':0,
             'data-other':'#id_file_name',
             'autofocus':'autofocus',
-            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
+            'accept': ",".join(map(lambda x: ".%s" % x, SOURCE_EXTENSION_LIST))
         })
     )
 
     def clean(self):
         if 'file_data' in self.cleaned_data.keys() and self.cleaned_data['file_data']:
-            if self.cleaned_data['file_data'].content_type in ['image/jpeg', 'application/zip',
-                                                               'application/x-rar']:
+            if self.cleaned_data['file_data'].content_type in SOURCE_MIMETYPE_LIST:
                  raise FileTypeNotValidException()
         return self.cleaned_data
 

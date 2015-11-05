@@ -2,7 +2,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Q
-from core.choices import SourceImplementationChoices
+from core.choices import (SourceImplementationChoices, 
+    SOURCE_IMPLEMENTATION_EXTENSION_CHOICES,
+    SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES)
 
 class JSONHttpResponse(HttpResponse):
     """ A custom HttpResponse that handles the headers for our JSON responses """
@@ -77,65 +79,38 @@ def add_domains_to_permalinks(resources):
             resource['account_name'] = r[account_id]['account.name']
 
 def get_file_type_from_extension(extension):
-
-    if extension.lower() in ["doc", "docx", "docm", "dotx", "dotm"]:
-        return SourceImplementationChoices.DOC
-    elif extension.lower() in ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"]:
-        return SourceImplementationChoices.XLS
-    elif extension.lower() in ["odt"]:
-        return SourceImplementationChoices.ODT
-    elif extension.lower() in ["ods"]:
-        return SourceImplementationChoices.ODS
-    elif extension.lower() in ["pdf"]:
-        return SourceImplementationChoices.PDF
-    elif extension.lower() in ["html", "htm"]:
-        return SourceImplementationChoices.HTML
-    elif extension.lower() in ["txt"]:
-        return SourceImplementationChoices.TXT
-    elif extension.lower() in ["csv"]:
-        return SourceImplementationChoices.CSV
-    elif extension.lower() in ["tsv"]:
-        return SourceImplementationChoices.TSV    
-    elif extension.lower() in ["xml"]:
-        return SourceImplementationChoices.XML
-    elif extension.lower() in ["kml"]:
-        return SourceImplementationChoices.KML
-    elif extension.lower() in ["kmz"]:
-        return SourceImplementationChoices.KMZ
-    elif extension.lower() in ["png", "jpg", "jpeg", "gif"]:
-        return SourceImplementationChoices.IMAGE
-    elif extension.lower() in ["zip", "gz", "tar"]:
-        return SourceImplementationChoices.ZIP
+    for source_id, extensions in SOURCE_IMPLEMENTATION_EXTENSION_CHOICES:
+        if extension in extensions:
+            return source_id
 
 def get_impl_type(mimetype, end_point):
     mimetype = mimetype.split(';')[0]
-    impl_types = {
-      "application/vnd.ms-xpsdocument": SourceImplementationChoices.DOC
-    , "application/vnd.ms-excel": SourceImplementationChoices.XLS
-    , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": SourceImplementationChoices.XLS
-    , "application/vnd.oasis.opendocument.text": SourceImplementationChoices.ODT
-    , "application/vnd.oasis.opendocument.text-web": SourceImplementationChoices.ODT
-    , "application/vnd.oasis.opendocument.spreadsheet": SourceImplementationChoices.ODS
-    , "application/msword": SourceImplementationChoices.DOC
-    , "text/html": SourceImplementationChoices.HTML
-    , "text/csv": SourceImplementationChoices.TXT
-    , "text/x-comma-separated-values": SourceImplementationChoices.HTML
-    , "text/plain": SourceImplementationChoices.HTML
-    , "application/pdf": SourceImplementationChoices.PDF
-    , "application/vnd.google-earth.kml+xml": SourceImplementationChoices.KML
-    , "image/jpeg": SourceImplementationChoices.IMAGE
-    , "image/png": SourceImplementationChoices.IMAGE
-    , "image/gif": SourceImplementationChoices.IMAGE
-    , "application/zip": SourceImplementationChoices.ZIP
-    , "application/x-gzip": SourceImplementationChoices.ZIP
-    , "application/x-tar": SourceImplementationChoices.ZIP
-    }
+    
+#    impl_types = {
+#      "application/vnd.ms-xpsdocument": SourceImplementationChoices.DOC
+#    , "application/vnd.ms-excel": SourceImplementationChoices.XLS
+#    , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": SourceImplementationChoices.XLS
+#    , "application/vnd.oasis.opendocument.text": SourceImplementationChoices.ODT
+#    , "application/vnd.oasis.opendocument.text-web": SourceImplementationChoices.ODT
+#    , "application/vnd.oasis.opendocument.spreadsheet": SourceImplementationChoices.ODS
+#    , "application/msword": SourceImplementationChoices.DOC
+#    , "text/html": SourceImplementationChoices.HTML
+#    , "text/csv": SourceImplementationChoices.TXT
+#    , "text/x-comma-separated-values": SourceImplementationChoices.HTML
+#    , "text/plain": SourceImplementationChoices.HTML
+#    , "application/pdf": SourceImplementationChoices.PDF
+#    , "application/vnd.google-earth.kml+xml": SourceImplementationChoices.KML
+#    , "image/jpeg": SourceImplementationChoices.IMAGE
+#    , "image/png": SourceImplementationChoices.IMAGE
+#    , "image/gif": SourceImplementationChoices.IMAGE
+#    , "application/zip": SourceImplementationChoices.ZIP
+#    , "application/x-gzip": SourceImplementationChoices.ZIP
+#    , "application/x-tar": SourceImplementationChoices.ZIP
+#    }
 
-    try:
-        return impl_types[mimetype]
-    except KeyError:
-        try:
-            extension = end_point.split('/')[-1].split('.')[-1]
-            return get_file_type_from_extension(extension)
-        except KeyError:
-            return None
+    for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES:
+        if mimetype in mimetypes:
+            return source_id
+
+    extension = end_point.split('/')[-1].split('.')[-1]
+    return get_file_type_from_extension(extension)

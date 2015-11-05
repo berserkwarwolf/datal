@@ -1232,7 +1232,7 @@ msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Send us an email"
 
 msgid "DSCRE-UPLOAD-TIP"
-msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Files must be encoded in UTF-8."
+msgstr "The following file types are allowed and must be encoded in UTF-8:"
 
 msgid "APP-LOADING-TEXT"
 msgstr "loading"
