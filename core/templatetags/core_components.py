@@ -75,22 +75,6 @@ def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_cho
         base_route = 'dataset_manager/dataset/'
         filter_button_template = base_route + filter_button_file
 
-    if tab_prefix == 'publish' and table_prefix == 'dataset':
-        base_route = 'review_manager/dataset/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'datastream':
-        base_route = 'review_manager/datastream/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'dashboard':
-        base_route = 'review_manager/dashboard/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'visualization':
-        base_route = 'review_manager/visualization/'
-        extra_filters_template = base_route + extra_filters_file
-
     if tab_prefix == 'microsites' and table_prefix == 'home':
         base_route = 'home_manager/resources/'
         override_filters = True
@@ -119,13 +103,6 @@ def datatable(revisions=None, categories=None, table_prefix='', tab_prefix='', a
         row_button_template = base_route + row_button_file
         row_data_template = base_route + row_data_file
         table_body_template = base_route + table_body_file
-
-    if tab_prefix == 'publish':
-        base_route = 'review_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_button_template = base_route + row_button_file
-        row_data_template = base_route + row_data_file
 
     elif tab_prefix == 'reports':
         base_route = 'reports_manager/' + table_prefix + '/'

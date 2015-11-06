@@ -22,7 +22,6 @@ urlpatterns = patterns('',
 
     (r'^accounts/', include('workspace.manageMyAccount.urls')),
     (r'^dataset/', include('workspace.dataset_manager.urls')),
-    (r'^review/', include('workspace.review_manager.urls')),
 
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
 
