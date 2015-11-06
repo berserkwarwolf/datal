@@ -73,7 +73,11 @@ var ChartView = StepViewSPA.extend({
 			});
 
 			//nullValue
-			this.$el.find('input#nullValuePreset').val(this.model.get('nullValuePreset'));
+			if (this.model.get('nullValueAction') === 'given') {
+				this.$('#nullValuePreset').show().val(this.model.get('nullValuePreset'));
+			} else {
+				this.$('#nullValuePreset').hide();
+			}
 
 			$("#ajax_loading_overlay").show();
 
