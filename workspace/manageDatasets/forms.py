@@ -10,7 +10,7 @@ from core import choices
 from core.http import get_impl_type
 from core.forms import MimeTypeForm
 from core.models import CategoryI18n
-from core.choices import SOURCE_EXTENSION_LIST, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import SOURCE_EXTENSION_LIST, SOURCE_IMPLEMENTATION_CHOICES, SourceImplementationChoices
 from core.exceptions import FileTypeNotValidException
 from workspace.common.forms import TagForm, SourceForm
 
@@ -353,7 +353,7 @@ class FileForm(DatasetForm):
         if 'file_data' in cleaned_data.keys() and cleaned_data['file_data']:
             cleaned_data['impl_type'] = get_impl_type(cleaned_data['file_data'].content_type, 
                                               cleaned_data['file_data'].name)
-            if ('impl_type' not in cleaned_data or not cleaned_data['impl_type'] or
+            if ('impl_type' not in cleaned_data or cleaned_data['impl_type'] is None or
                 cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 raise FileTypeNotValidException(file_type=cleaned_data['file_data'].content_type,
                     valid_types=SOURCE_EXTENSION_LIST)
@@ -365,8 +365,10 @@ class URLForm(DatasetForm):
         cleaned_data = super(URLForm, self).clean()
         if 'end_point' in  cleaned_data.keys() and  cleaned_data['end_point']:
             mimetype, status, url = MimeTypeForm().get_mimetype( cleaned_data['end_point'])
-            cleaned_data['impl_type']  = get_impl_type(mimetype, url)
-            if ('impl_type' not in cleaned_data or not cleaned_data['impl_type'] or
+            cleaned_data['impl_type'] = get_impl_type(mimetype, url)
+            if cleaned_data['impl_type'] is None:
+                cleaned_data['impl_type'] = SourceImplementationChoices.HTML
+            if ('impl_type' not in cleaned_data or cleaned_data['impl_type'] is None or
                 cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                  raise FileTypeNotValidException(file_type=mimetype,
                     valid_types=SOURCE_EXTENSION_LIST)

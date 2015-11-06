@@ -3,7 +3,7 @@ from rest_framework.decorators import detail_route
 from core.daos.datasets import DatasetDBDAO
 from api.rest.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
-from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_CHOICES, SourceImplementationChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from rest_framework import serializers
 from rest_framework import mixins
@@ -70,6 +70,8 @@ class DataSetSerializer(ResourceSerializer):
         if 'end_point' in data and data['end_point']:
             mimetype, status, url = MimeTypeForm().get_mimetype(data['end_point'])
             data['impl_type']  = get_impl_type(mimetype, url)
+            if not data['impl_type']:
+                data['impl_type'] = SourceImplementationChoices.HTML
             data['collect_type'] = CollectTypeChoices.URL
             data['file_name'] = data['end_point']
 
@@ -81,7 +83,7 @@ class DataSetSerializer(ResourceSerializer):
             data['collect_type'] = CollectTypeChoices.SELF_PUBLISH
 
         if ('impl_type' not in data or
-            not data['impl_type'] or 
+            data['impl_type'] is None or 
             data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 # TODO: mejorar errores
                 raise serializers.ValidationError('Tipo de Archivo Invalido')
