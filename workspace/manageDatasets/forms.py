@@ -7,8 +7,10 @@ from django.forms.util import ErrorDict
 from django.utils.translation import ugettext_lazy
 
 from core import choices
+from core.http import get_impl_type
+from core.forms import MimeTypeForm
 from core.models import CategoryI18n
-from core.choices import SOURCE_EXTENSION_LIST, SOURCE_MIMETYPE_LIST
+from core.choices import SOURCE_EXTENSION_LIST, SOURCE_IMPLEMENTATION_CHOICES
 from core.exceptions import FileTypeNotValidException
 from workspace.common.forms import TagForm, SourceForm
 
@@ -347,10 +349,28 @@ class FileForm(DatasetForm):
     )
 
     def clean(self):
-        if 'file_data' in self.cleaned_data.keys() and self.cleaned_data['file_data']:
-            if self.cleaned_data['file_data'].content_type in SOURCE_MIMETYPE_LIST:
-                 raise FileTypeNotValidException()
-        return self.cleaned_data
+        cleaned_data = super(FileForm, self).clean()
+        if 'file_data' in cleaned_data.keys() and cleaned_data['file_data']:
+            cleaned_data['impl_type'] = get_impl_type(cleaned_data['file_data'].content_type, 
+                                              cleaned_data['file_data'].name)
+            if ('impl_type' not in cleaned_data or not cleaned_data['impl_type'] or
+                cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
+                raise FileTypeNotValidException(file_type=cleaned_data['file_data'].content_type,
+                    valid_types=SOURCE_EXTENSION_LIST)
+        return cleaned_data
+
+
+class URLForm(DatasetForm):
+    def clean(self):
+        cleaned_data = super(URLForm, self).clean()
+        if 'end_point' in  cleaned_data.keys() and  cleaned_data['end_point']:
+            mimetype, status, url = MimeTypeForm().get_mimetype( cleaned_data['end_point'])
+            cleaned_data['impl_type']  = get_impl_type(mimetype, url)
+            if ('impl_type' not in cleaned_data or not cleaned_data['impl_type'] or
+                cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
+                 raise FileTypeNotValidException(file_type=mimetype,
+                    valid_types=SOURCE_EXTENSION_LIST)
+        return cleaned_data 
 
 
 class DatasetFormFactory:
@@ -364,7 +384,7 @@ class DatasetFormFactory:
         elif int(self.collect_type) == choices.CollectTypeChoices().SELF_PUBLISH:
             form = FileForm
         elif int(self.collect_type) == choices.CollectTypeChoices().URL:
-            form = DatasetForm
+            form = URLForm
         else:
             form = DatasetForm
         return request is None and form(*args, **kwargs) or form(request.POST, request.FILES, *args, **kwargs)

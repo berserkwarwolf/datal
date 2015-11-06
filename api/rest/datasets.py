@@ -77,9 +77,7 @@ class DataSetSerializer(ResourceSerializer):
             file_data = data.pop('file')
             file_data.name = urllib.unquote(file_data.name)
             data['file_data'] = file_data
-            data['impl_type'] = get_file_type_from_extension(
-                file_data.name.split('.')[-1]
-            )
+            data['impl_type'] = get_impl_type(file_data.content_type, file_data.name)
             data['collect_type'] = CollectTypeChoices.SELF_PUBLISH
 
         if ('impl_type' not in data or

@@ -136,7 +136,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language, category__categoryi18n__language=language
                                                )
         if exclude:
-            query.exclude(**exclude)
+            query = query.exclude(**exclude)
 
         if filter_name:
             query = query.filter(dataseti18n__title__icontains=filter_name)

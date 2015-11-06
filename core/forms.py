@@ -66,6 +66,7 @@ class MimeTypeForm(forms.Form):
             request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
             connection = urllib2.urlopen(request)
             mimetype = connection.info().getheader('Content-Type').strip().replace('"', '')
+            raise Exception(mimetype)
             try:
                 opener = urllib2.build_opener(SmartRedirectHandler())
                 f = opener.open(url)

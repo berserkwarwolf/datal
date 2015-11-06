@@ -2795,7 +2795,7 @@ msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Invalid file format"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
-msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+msgstr "The file type %(file_type)s is not allowed."
 
 msgid "APP-BACK-TEXT"
 msgstr "Back"

@@ -169,6 +169,11 @@ class FileTypeNotValidException(LifeCycleException):
     title = _('EXCEPTION-TITLE-FILE-INVALID')
     description = _('EXCEPTION-DESCRIPTION-FILE-INVALID')
     tipo = 'illegal-state'
+    file_type = '' #valor defaault
+    valid_types = [] #valor default
+
+    def get_actions(self):
+        return [ValidFileType(self._context['valid_types'])]
 
 
 class ApplicationException(DATALException):

@@ -211,15 +211,15 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
     #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
     #,(SourceImplementationChoices.DALLAS, 'DALLAS')
     #,(SourceImplementationChoices.XML, 'XML')
-    ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel",
-                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
+    ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel"])
     ,(SourceImplementationChoices.PDF, ["application/pdf"])
     ,(SourceImplementationChoices.DOC, ["application/vnd.ms-xpsdocument",
                                         "application/msword"])
     ,(SourceImplementationChoices.ODT, ["application/vnd.oasis.opendocument.text",
                                         "application/vnd.oasis.opendocument.text-web"])
     #,(SourceImplementationChoices.ODP, 'ODP')
-    ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet"])
+    ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet",
+                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
     ,(SourceImplementationChoices.CSV, ["text/x-comma-separated-values",
                                         "text/csv"])
     ,(SourceImplementationChoices.KML, ["application/vnd.google-earth.kml+xml"])
@@ -254,7 +254,7 @@ DATASTREAM_IMPL_VALID_CHOICES = [
     SourceImplementationChoices.TXT]
 
 # These are the impl_type that are not valid to create a Data View from Self Publish
-DATASTREAM_IMPL_NOT_VALID_CHOICES = list( set([ value for key, value in SourceImplementationChoices.__dict__.items() if not key.startswith('__') ]) - set(DATASTREAM_IMPL_VALID_CHOICES) )
+DATASTREAM_IMPL_NOT_VALID_CHOICES = list( set(dict(SOURCE_IMPLEMENTATION_CHOICES).keys()) - set(DATASTREAM_IMPL_VALID_CHOICES) )
 
 WEBSERVICE_IMPLEMENTATION_CHOICES = (
     (SourceImplementationChoices.REST, 'REST/JSON'),
@@ -272,6 +272,11 @@ COLLECT_TYPE_CHOICES = (
     ,(CollectTypeChoices.URL, 'URL') # a web page for scrape internal tables
     ,(CollectTypeChoices.WEBSERVICE, 'WEBSERVICE') # api or webservice
 )
+
+COLLECT_TYPE_FILTERABLES = [
+     CollectTypeChoices.SELF_PUBLISH
+    ,CollectTypeChoices.URL
+]
 
 COUNTRY_CHOICES = (
     ('US', ugettext_lazy( 'MODEL-COUNTRY-US'))

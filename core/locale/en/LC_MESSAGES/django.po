@@ -810,6 +810,9 @@ msgstr "Create visualization."
 msgid "EXCEPTION-ACTION-CONTACT-US"
 msgstr "If the problem persists please contact us."
 
+msgid "EXCEPTION-ACTION-VALID-FILE-TYPE"
+msgstr "Please choose one ot this choices %(choices)s"
+
 msgid "EXCEPTION-TITLE-GENERIC"
 msgstr "Error"
 

@@ -2782,7 +2782,7 @@ msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Tipo de archivo no soportado"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
-msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+msgstr "Los tipos de archivo %(file_type)s no son permitidos."
 
 msgid "APP-BACK-TEXT"
 msgstr "Volver"
