@@ -69,6 +69,7 @@ $(document).ready(function(){
 		spatial: '{{ dataset.spatial }}',
 		frequency: '{{ dataset.frequency }}',
 		license_url: '{{ dataset.license_url }}',
+        valid_extensions: {{extensions_list|safe}},
 		
 	});
 	var collectFileView = new CollectFileView({model: collectFileModel});
