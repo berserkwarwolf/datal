@@ -246,7 +246,6 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     valid: function(){
-        console.log('Validation from charts.models.Chart');
         var valid = true;
 
         //Si alguna vez intentó seleccionar algo de data
@@ -294,14 +293,18 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     validateMetadata: function(){
-        var validation = {
-            valid: (  !_.isEmpty(this.get('title')) &&  !_.isEmpty(this.get('description'))  ),
-            fields:{
-                'title':  _.isEmpty(this.get('title')),
-                'description':  _.isEmpty(this.get('description'))
-            }
-        }
-        return validation
+        var validTitle = !_.isEmpty(this.get('title')),
+            validDescription = !_.isEmpty(this.get('description')),
+            validNotes = this.get('notes').length < 2048;
+
+        return {
+                valid: (  validTitle &&  validDescription && validNotes ),
+                fields:{
+                    'title':  !validTitle,
+                    'description':  !validDescription,
+                    'notes': !validNotes
+                }
+            };
     },
 
     getSettings: function(){

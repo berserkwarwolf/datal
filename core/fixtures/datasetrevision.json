@@ -86,5 +86,4198 @@
         "impl_details": null, 
         "size": 0
     }
-}
+},{
+        "pk": 91292,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/109489956389605674176706928864471273067",
+            "created_at": "2015-11-05T10:00:11",
+            "modified_at": "2015-11-05T10:00:11",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91291,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/22510412955642874870796822698442256706",
+            "created_at": "2015-11-05T10:00:05",
+            "modified_at": "2015-11-05T10:00:05",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91290,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/117807462054224831440818760277448267591",
+            "created_at": "2015-11-05T10:00:03",
+            "modified_at": "2015-11-05T10:00:03",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 91289,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/298860253390158377182513458958469177734",
+            "created_at": "2015-11-05T08:00:08",
+            "modified_at": "2015-11-05T08:00:08",
+            "filename": "bot_data.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65919,
+            "impl_details": "",
+            "size": 16808387
+        }
+    },
+    {
+        "pk": 91286,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/90263604762787877692663694609677667471",
+            "created_at": "2015-11-05T01:01:37",
+            "modified_at": "2015-11-05T01:01:37",
+            "filename": "SacramentoIssued_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66132,
+            "impl_details": "",
+            "size": 2884978
+        }
+    },
+    {
+        "pk": 91236,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/13123505010873749419425152772182008613",
+            "created_at": "2015-11-04T15:25:04",
+            "modified_at": "2015-11-04T15:25:04",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72221,
+            "impl_details": "",
+            "size": 2321867
+        }
+    },
+    {
+        "pk": 91202,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/154675868058753813947270537385476655595",
+            "created_at": "2015-11-04T10:00:37",
+            "modified_at": "2015-11-04T10:00:37",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91201,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/16472242678127114668498493505341596078",
+            "created_at": "2015-11-04T10:00:04",
+            "modified_at": "2015-11-04T10:00:04",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91200,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/94968489841756661047344375637628370257",
+            "created_at": "2015-11-04T10:00:02",
+            "modified_at": "2015-11-04T10:00:02",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 91199,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/319181149759681811994807367149152474466",
+            "created_at": "2015-11-04T09:00:18",
+            "modified_at": "2015-11-04T09:00:18",
+            "filename": "issuedchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65920,
+            "impl_details": "",
+            "size": 18475869
+        }
+    },
+    {
+        "pk": 91198,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/167373072272306039331071377171790559309",
+            "created_at": "2015-11-04T08:00:10",
+            "modified_at": "2015-11-04T08:00:10",
+            "filename": "bot_data.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65919,
+            "impl_details": "",
+            "size": 16808387
+        }
+    },
+    {
+        "pk": 91195,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/116290762675430405887107222691500181322",
+            "created_at": "2015-11-04T01:01:27",
+            "modified_at": "2015-11-04T01:01:27",
+            "filename": "SacramentoIssued_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66132,
+            "impl_details": "",
+            "size": 2881996
+        }
+    },
+    {
+        "pk": 91171,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/27444716776940825188571892540928062684",
+            "created_at": "2015-11-03T15:25:05",
+            "modified_at": "2015-11-03T15:25:05",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72221,
+            "impl_details": "",
+            "size": 2323621
+        }
+    },
+    {
+        "pk": 91167,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/41913321851535413755666205042519348328",
+            "created_at": "2015-11-03T10:00:08",
+            "modified_at": "2015-11-03T10:00:08",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91166,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/197625906050026839194039350705153626573",
+            "created_at": "2015-11-03T10:00:05",
+            "modified_at": "2015-11-03T10:00:05",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91165,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/72325264573691918769638991899962235150",
+            "created_at": "2015-11-03T10:00:03",
+            "modified_at": "2015-11-03T10:00:03",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 91164,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/307620712405824034657189269743999544610",
+            "created_at": "2015-11-03T08:00:11",
+            "modified_at": "2015-11-03T08:00:11",
+            "filename": "bot_data.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65919,
+            "impl_details": "",
+            "size": 16808387
+        }
+    },
+    {
+        "pk": 91162,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/164248577976615180150923134406789278129",
+            "created_at": "2015-11-03T01:01:23",
+            "modified_at": "2015-11-03T01:01:23",
+            "filename": "SacramentoIssued_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66132,
+            "impl_details": "",
+            "size": 2871600
+        }
+    },
+    {
+        "pk": 91045,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/73541174995048085102682578556363579758",
+            "created_at": "2015-11-02T15:25:04",
+            "modified_at": "2015-11-02T15:25:04",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72221,
+            "impl_details": "",
+            "size": 2319861
+        }
+    },
+    {
+        "pk": 91027,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/251098911718082699133975484261695272749",
+            "created_at": "2015-11-02T10:00:15",
+            "modified_at": "2015-11-02T10:00:15",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91026,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/163268240548070773125181590702551432223",
+            "created_at": "2015-11-02T10:00:13",
+            "modified_at": "2015-11-02T10:00:13",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91025,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/0475/75456115080839136420501332163776558746",
+            "created_at": "2015-11-02T10:00:05",
+            "modified_at": "2015-11-02T10:00:05",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66948,
+            "impl_details": "",
+            "size": 4400521
+        }
+    },
+    {
+        "pk": 91024,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/299017212383842075436705237026684169478",
+            "created_at": "2015-11-02T10:00:03",
+            "modified_at": "2015-11-02T10:00:03",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 91023,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/192803864747953481042800108699135604135",
+            "created_at": "2015-11-02T08:00:12",
+            "modified_at": "2015-11-02T08:00:12",
+            "filename": "bot_data.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65919,
+            "impl_details": "",
+            "size": 16808387
+        }
+    },
+    {
+        "pk": 91020,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/46273444454940636616933302378012140643",
+            "created_at": "2015-11-02T01:02:54",
+            "modified_at": "2015-11-02T01:02:54",
+            "filename": "SacramentoIssued_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66132,
+            "impl_details": "",
+            "size": 2857858
+        }
+    },
+    {
+        "pk": 91019,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/329356965633682832880918674769692057329",
+            "created_at": "2015-11-01T15:25:05",
+            "modified_at": "2015-11-01T15:25:05",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72221,
+            "impl_details": "",
+            "size": 2321051
+        }
+    },
+    {
+        "pk": 91018,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/0475/122857184248081557495347241251696911014",
+            "created_at": "2015-11-01T10:01:15",
+            "modified_at": "2015-11-01T10:01:15",
+            "filename": "animal-intakeoutcome.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66151,
+            "impl_details": "",
+            "size": 3342431
+        }
+    },
+    {
+        "pk": 91017,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/38807426426032725941181784504966769479",
+            "created_at": "2015-11-01T10:01:07",
+            "modified_at": "2015-11-01T10:01:07",
+            "filename": "purchaseorder.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72001,
+            "impl_details": "",
+            "size": 4662698
+        }
+    },
+    {
+        "pk": 91016,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/144460180495954167103285853990885970259",
+            "created_at": "2015-11-01T10:00:08",
+            "modified_at": "2015-11-01T10:00:08",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91015,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/78224024841368291121619973029745199615",
+            "created_at": "2015-11-01T10:00:06",
+            "modified_at": "2015-11-01T10:00:06",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91014,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/135124694412365605619671664141571550957",
+            "created_at": "2015-11-01T10:00:04",
+            "modified_at": "2015-11-01T10:00:04",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 91013,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/103819657374706657330422108376371168586",
+            "created_at": "2015-11-01T08:00:16",
+            "modified_at": "2015-11-01T08:00:16",
+            "filename": "bot_data.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65919,
+            "impl_details": "",
+            "size": 16808387
+        }
+    },
+    {
+        "pk": 91012,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/281251015644823494939166471075222714555",
+            "created_at": "2015-11-01T08:00:05",
+            "modified_at": "2015-11-01T08:00:05",
+            "filename": "outstandingchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65844,
+            "impl_details": "",
+            "size": 351648
+        }
+    },
+    {
+        "pk": 91011,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40870,
+            "status": 3,
+            "end_point": "file://4575/0475/107349896360248332226861194308064948634",
+            "created_at": "2015-11-01T05:01:07",
+            "modified_at": "2015-11-01T05:01:07",
+            "filename": "councilexp.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69050,
+            "impl_details": "",
+            "size": 8657772
+        }
+    },
+    {
+        "pk": 91008,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/83780736369122304195672257798056381434",
+            "created_at": "2015-11-01T00:01:26",
+            "modified_at": "2015-11-01T00:01:26",
+            "filename": "SacramentoIssued_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66132,
+            "impl_details": "",
+            "size": 2877655
+        }
+    },
+    {
+        "pk": 91007,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/266441289014044103570248368391955580431",
+            "created_at": "2015-10-31T14:25:05",
+            "modified_at": "2015-10-31T14:25:05",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72221,
+            "impl_details": "",
+            "size": 2318768
+        }
+    },
+    {
+        "pk": 91006,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/151807508573863354430867289778641700872",
+            "created_at": "2015-10-31T09:00:13",
+            "modified_at": "2015-10-31T09:00:13",
+            "filename": "UCRYearToYearComparison.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72417,
+            "impl_details": "",
+            "size": 1390
+        }
+    },
+    {
+        "pk": 91005,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/332785405797047038458732966396000301100",
+            "created_at": "2015-10-31T09:00:11",
+            "modified_at": "2015-10-31T09:00:11",
+            "filename": "YTDCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72415,
+            "impl_details": "",
+            "size": 352
+        }
+    },
+    {
+        "pk": 91004,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/0475/219871298749506178610841025483032244828",
+            "created_at": "2015-10-31T09:00:05",
+            "modified_at": "2015-10-31T09:00:05",
+            "filename": "AnnualCrimeStats.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72416,
+            "impl_details": "",
+            "size": 366
+        }
+    },
+    {
+        "pk": 90871,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/200582171657961693616724749360584954789",
+            "created_at": "2015-10-28T08:00:25",
+            "modified_at": "2015-10-28T08:00:25",
+            "filename": "issuedchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65920,
+            "impl_details": "",
+            "size": 18478069
+        }
+    },
+    {
+        "pk": 90829,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40870,
+            "status": 3,
+            "end_point": "file://4575/0475/151673791109405869558443414194132874103",
+            "created_at": "2015-10-26T20:59:00",
+            "modified_at": "2015-10-26T20:59:00",
+            "filename": "councilexp.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69050,
+            "impl_details": "",
+            "size": 8625237
+        }
+    },
+    {
+        "pk": 87143,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/63702088108726415520970356247654004520",
+            "created_at": "2015-10-25T07:00:09",
+            "modified_at": "2015-10-25T07:00:09",
+            "filename": "outstandingchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65844,
+            "impl_details": "",
+            "size": 336160
+        }
+    },
+    {
+        "pk": 83394,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/168186304565276220814471101514829176166",
+            "created_at": "2015-10-21T08:00:17",
+            "modified_at": "2015-10-21T08:00:17",
+            "filename": "issuedchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65920,
+            "impl_details": "",
+            "size": 18449557
+        }
+    },
+    {
+        "pk": 83330,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/16814280455524668324760330550675356542",
+            "created_at": "2015-10-18T07:00:09",
+            "modified_at": "2015-10-18T07:00:09",
+            "filename": "outstandingchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65844,
+            "impl_details": "",
+            "size": 372416
+        }
+    },
+    {
+        "pk": 83225,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/42726503797392385108663360242833400665",
+            "created_at": "2015-10-14T08:00:18",
+            "modified_at": "2015-10-14T08:00:18",
+            "filename": "issuedchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65920,
+            "impl_details": "",
+            "size": 18433101
+        }
+    },
+    {
+        "pk": 83174,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/295952220437882438771887316362670375903",
+            "created_at": "2015-10-11T07:00:14",
+            "modified_at": "2015-10-11T07:00:14",
+            "filename": "outstandingchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65844,
+            "impl_details": "",
+            "size": 347336
+        }
+    },
+    {
+        "pk": 83047,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/58470639026964300812012235481952140394",
+            "created_at": "2015-10-07T22:31:51",
+            "modified_at": "2015-10-07T22:31:51",
+            "filename": "SacramentoApplied_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66131,
+            "impl_details": "",
+            "size": 2913734
+        }
+    },
+    {
+        "pk": 83031,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/70513844107407813660115048487057437442",
+            "created_at": "2015-10-07T07:00:16",
+            "modified_at": "2015-10-07T07:00:16",
+            "filename": "issuedchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65920,
+            "impl_details": "",
+            "size": 18441461
+        }
+    },
+    {
+        "pk": 83006,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/157126065561116224644967813038861963752",
+            "created_at": "2015-10-05T22:32:44",
+            "modified_at": "2015-10-05T22:32:44",
+            "filename": "SacramentoApplied_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66131,
+            "impl_details": "",
+            "size": 2907282
+        }
+    },
+    {
+        "pk": 82990,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/147724225317683942225516825055726869806",
+            "created_at": "2015-10-04T22:32:54",
+            "modified_at": "2015-10-04T22:32:54",
+            "filename": "SacramentoApplied_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66131,
+            "impl_details": "",
+            "size": 2904969
+        }
+    },
+    {
+        "pk": 82984,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/49023748332532006442332930024802577941",
+            "created_at": "2015-10-04T06:01:19",
+            "modified_at": "2015-10-04T06:01:19",
+            "filename": "outstandingchecks.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65844,
+            "impl_details": "",
+            "size": 392040
+        }
+    },
+    {
+        "pk": 82944,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/0475/185300327477647769145955217402315292569",
+            "created_at": "2015-10-02T08:00:05",
+            "modified_at": "2015-10-02T08:00:05",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66948,
+            "impl_details": "",
+            "size": 4388743
+        }
+    },
+    {
+        "pk": 82898,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/0475/65895386347062139531100775343092716654",
+            "created_at": "2015-10-01T08:01:14",
+            "modified_at": "2015-10-01T08:01:14",
+            "filename": "animal-intakeoutcome.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66151,
+            "impl_details": "",
+            "size": 3320530
+        }
+    },
+    {
+        "pk": 82897,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/65833840318430196179751108053767811198",
+            "created_at": "2015-10-01T08:01:07",
+            "modified_at": "2015-10-01T08:01:07",
+            "filename": "purchaseorder.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72001,
+            "impl_details": "",
+            "size": 4662698
+        }
+    },
+    {
+        "pk": 82892,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40870,
+            "status": 3,
+            "end_point": "file://4575/0475/284630826317888324393541175851195432319",
+            "created_at": "2015-10-01T04:00:59",
+            "modified_at": "2015-10-01T04:00:59",
+            "filename": "councilexp.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69050,
+            "impl_details": "",
+            "size": 7482174
+        }
+    },
+    {
+        "pk": 82889,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/221450332241681155306058314691423737305",
+            "created_at": "2015-09-30T22:32:49",
+            "modified_at": "2015-09-30T22:32:49",
+            "filename": "SacramentoApplied_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66131,
+            "impl_details": "",
+            "size": 2904220
+        }
+    },
+    {
+        "pk": 82865,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/274949061437890441449615554667001230681",
+            "created_at": "2015-09-29T22:32:45",
+            "modified_at": "2015-09-29T22:32:45",
+            "filename": "SacramentoApplied_Adhoc.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66131,
+            "impl_details": "",
+            "size": 2903007
+        }
+    },
+    {
+        "pk": 82774,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/cityclerk/CampaignFinanceDisclosure.json",
+            "created_at": "2015-09-25T14:48:55",
+            "modified_at": "2015-09-25T14:48:55",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/cityclerk/CampaignFinanceDisclosure.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 73597,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 82633,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/0475/109111336174803459513249768738890249404",
+            "created_at": "2015-09-18T12:01:06",
+            "modified_at": "2015-09-18T12:01:06",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66948,
+            "impl_details": "",
+            "size": 4388743
+        }
+    },
+    {
+        "pk": 82632,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/0475/157228053468077177088828880453540490173",
+            "created_at": "2015-09-18T11:56:25",
+            "modified_at": "2015-09-18T11:56:25",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66948,
+            "impl_details": "",
+            "size": 4388743
+        }
+    },
+    {
+        "pk": 81882,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/test/nf.json",
+            "created_at": "2015-09-01T16:24:27",
+            "modified_at": "2015-09-01T16:24:27",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/test/nf.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 73339,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.results</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 81824,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/0475/146509647988299756265098367451103309118",
+            "created_at": "2015-09-01T08:01:15",
+            "modified_at": "2015-09-01T08:01:15",
+            "filename": "animal-intakeoutcome.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66151,
+            "impl_details": "",
+            "size": 3312039
+        }
+    },
+    {
+        "pk": 81823,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/80661390681365855762475708072513187711",
+            "created_at": "2015-09-01T08:01:07",
+            "modified_at": "2015-09-01T08:01:07",
+            "filename": "purchaseorder.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72001,
+            "impl_details": "",
+            "size": 4662698
+        }
+    },
+    {
+        "pk": 81818,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40870,
+            "status": 3,
+            "end_point": "file://4575/0475/175757716633953664533222648473632789953",
+            "created_at": "2015-09-01T04:01:23",
+            "modified_at": "2015-09-01T04:01:23",
+            "filename": "councilexp.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69050,
+            "impl_details": "",
+            "size": 7482174
+        }
+    },
+    {
+        "pk": 81679,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/test/TrafficCount.json",
+            "created_at": "2015-08-26T16:59:53",
+            "modified_at": "2015-08-26T16:59:53",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/test/TrafficCount.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 73216,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 81674,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 0,
+            "end_point": "file://4575/7195/3ff5f7d8-9b78-4d9b-816b-f58741e6184b",
+            "created_at": "2015-08-26T14:56:13",
+            "modified_at": "2015-08-26T14:56:13",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 73173,
+            "impl_details": "",
+            "size": 4388106
+        }
+    },
+    {
+        "pk": 81658,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/7195/0b4bca37-7668-4ac8-8b98-7e8e2228735e",
+            "created_at": "2015-08-25T22:50:44",
+            "modified_at": "2015-08-25T22:50:44",
+            "filename": "TrafficCount.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66948,
+            "impl_details": "",
+            "size": 3723708
+        }
+    },
+    {
+        "pk": 81555,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40723,
+            "status": 3,
+            "end_point": "file://4575/7195/3ff5f7d8-9b78-4d9b-816b-f58741e6184b",
+            "created_at": "2015-08-20T15:56:09",
+            "modified_at": "2015-08-20T15:56:09",
+            "filename": "TrafficCount.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 73173,
+            "impl_details": "",
+            "size": 4049307
+        }
+    },
+    {
+        "pk": 81060,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/0475/35322811787191386025057071313876259904",
+            "created_at": "2015-08-01T08:01:15",
+            "modified_at": "2015-08-01T08:01:15",
+            "filename": "animal-intakeoutcome.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66151,
+            "impl_details": "",
+            "size": 3292996
+        }
+    },
+    {
+        "pk": 81059,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/142978259077090568773179311235568795131",
+            "created_at": "2015-08-01T08:01:08",
+            "modified_at": "2015-08-01T08:01:08",
+            "filename": "purchaseorder.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72001,
+            "impl_details": "",
+            "size": 4662698
+        }
+    },
+    {
+        "pk": 81057,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40870,
+            "status": 3,
+            "end_point": "file://4575/0475/173371393758397380864834911474796605801",
+            "created_at": "2015-08-01T04:00:51",
+            "modified_at": "2015-08-01T04:00:51",
+            "filename": "councilexp.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69050,
+            "impl_details": "",
+            "size": 7311546
+        }
+    },
+    {
+        "pk": 80948,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/out.json",
+            "created_at": "2015-07-27T19:46:24",
+            "modified_at": "2015-07-27T19:46:24",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/out.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72967,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.data.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80867,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-23T14:01:37",
+            "modified_at": "2015-07-23T14:01:37",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72809,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders>$.fees.*</pathToHeaders><pathToData></pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80866,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-23T13:59:49",
+            "modified_at": "2015-07-23T13:59:49",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72934,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.fees.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80865,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-23T13:57:12",
+            "modified_at": "2015-07-23T13:57:12",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72933,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.fees.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80855,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-23T12:31:59",
+            "modified_at": "2015-07-23T12:31:59",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72924,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.fees.*</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80825,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "https://www.publicstuff.com/api/2.1/requests_list?return_type=json&limit=10&client_id=529",
+            "created_at": "2015-07-21T18:41:51",
+            "modified_at": "2015-07-21T18:41:51",
+            "filename": "https://www.publicstuff.com/api/2.1/requests_list?return_type=json&limit=10&client_id=529",
+            "impl_type": 21,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72907,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.response.requests[*].request</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80824,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-21T18:24:38",
+            "modified_at": "2015-07-21T18:24:38",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72809,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders>$.fees.*</pathToHeaders><pathToData></pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80823,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-21T17:58:11",
+            "modified_at": "2015-07-21T17:58:11",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72809,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders>$..*</pathToHeaders><pathToData></pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80822,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-21T17:57:33",
+            "modified_at": "2015-07-21T17:57:33",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72809,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders>$..fees[*]</pathToHeaders><pathToData></pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80821,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "created_at": "2015-07-21T17:56:33",
+            "modified_at": "2015-07-21T17:56:33",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/testjson.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72809,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders>$.fees.*</pathToHeaders><pathToData></pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 80297,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/0475/240499517077960008177673118814648081450",
+            "created_at": "2015-07-01T08:01:11",
+            "modified_at": "2015-07-01T08:01:11",
+            "filename": "animal-intakeoutcome.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66151,
+            "impl_details": "",
+            "size": 3272425
+        }
+    },
+    {
+        "pk": 80296,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/100722895142233713046726207463224484715",
+            "created_at": "2015-07-01T08:01:07",
+            "modified_at": "2015-07-01T08:01:07",
+            "filename": "purchaseorder.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72001,
+            "impl_details": "",
+            "size": 4662698
+        }
+    },
+    {
+        "pk": 79886,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year1.json",
+            "created_at": "2015-06-03T19:14:48",
+            "modified_at": "2015-06-03T19:14:48",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year1.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72523,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.general_offenses_year1</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79885,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year2.json",
+            "created_at": "2015-06-03T19:13:00",
+            "modified_at": "2015-06-03T19:13:00",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year2.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72522,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.general_offenses_year2</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79884,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 0,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year3.json",
+            "created_at": "2015-06-03T19:11:03",
+            "modified_at": "2015-06-03T19:11:03",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/general_offenses_year3.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72521,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.general_offenses_year3</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79883,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year1.json",
+            "created_at": "2015-06-03T19:07:44",
+            "modified_at": "2015-06-03T19:07:44",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year1.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72520,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.cad_calls_year1</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79881,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year2.json",
+            "created_at": "2015-06-03T19:04:39",
+            "modified_at": "2015-06-03T19:04:39",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year2.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72518,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.cad_calls_year2</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79880,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year3.json",
+            "created_at": "2015-06-03T19:01:21",
+            "modified_at": "2015-06-03T19:01:21",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls_year3.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72517,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.cad_calls_year3</pathToData><uriSignatures /><args /></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 79792,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/277584875007255596774549675730743729254",
+            "created_at": "2015-06-02T06:00:03",
+            "modified_at": "2015-06-02T06:00:03",
+            "filename": "Lobbyist Report_Raw Data.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67428,
+            "impl_details": "",
+            "size": 696320
+        }
+    },
+    {
+        "pk": 79650,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/d60374a2-34cc-47f7-a3d5-9e37fb9638fb",
+            "created_at": "2015-05-22T16:46:29",
+            "modified_at": "2015-05-22T16:46:29",
+            "filename": "OpenBudget - FY14 actuals FY15 Approved FY16 Proposed OpenSpending .xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72426,
+            "impl_details": "",
+            "size": 4958963
+        }
+    },
+    {
+        "pk": 79648,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/d60374a2-34cc-47f7-a3d5-9e37fb9638fb",
+            "created_at": "2015-05-22T15:50:02",
+            "modified_at": "2015-05-22T15:50:02",
+            "filename": "OpenBudget - FY14 actuals FY15 Approved FY16 Proposed OpenSpending .xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72426,
+            "impl_details": "",
+            "size": 5189362
+        }
+    },
+    {
+        "pk": 79647,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/d60374a2-34cc-47f7-a3d5-9e37fb9638fb",
+            "created_at": "2015-05-22T14:42:22",
+            "modified_at": "2015-05-22T14:42:22",
+            "filename": "OpenBudget - FY14 actuals FY15 Approved FY16 Proposed OpenSpending.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72426,
+            "impl_details": "",
+            "size": 7304311
+        }
+    },
+    {
+        "pk": 79586,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/bd1bbc4c-e791-4e81-98af-37621f8ad50f",
+            "created_at": "2015-05-18T12:27:20",
+            "modified_at": "2015-05-18T12:27:20",
+            "filename": "Total Opened Cases by Type_Yr2014.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72412,
+            "impl_details": "",
+            "size": 10230
+        }
+    },
+    {
+        "pk": 79585,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/040586ee-a7c6-479f-a9e5-764f75fa4e28",
+            "created_at": "2015-05-18T12:26:24",
+            "modified_at": "2015-05-18T12:26:24",
+            "filename": "Total Opened Cases by Type_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72411,
+            "impl_details": "",
+            "size": 10325
+        }
+    },
+    {
+        "pk": 79281,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/c1fed52e-63ad-4055-9bef-97cac3ed7496",
+            "created_at": "2015-05-11T11:05:27",
+            "modified_at": "2015-05-11T11:05:27",
+            "filename": "CIP data Proposed.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72283,
+            "impl_details": "",
+            "size": 420823
+        }
+    },
+    {
+        "pk": 79250,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/ef5e031f-d2d6-4327-aab0-d3635ec487af",
+            "created_at": "2015-05-08T13:05:20",
+            "modified_at": "2015-05-08T13:05:20",
+            "filename": "Total Opened Cases by CD_Yr2014.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72272,
+            "impl_details": "",
+            "size": 10565
+        }
+    },
+    {
+        "pk": 79249,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/cd5243ac-0638-4639-92dd-56e78c2cd53a",
+            "created_at": "2015-05-08T13:04:45",
+            "modified_at": "2015-05-08T13:04:45",
+            "filename": "Total Opened Cases by CD_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72271,
+            "impl_details": "",
+            "size": 9746
+        }
+    },
+    {
+        "pk": 79248,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/896e4528-a40e-4a59-8a2a-bfc05a46627a",
+            "created_at": "2015-05-08T13:02:43",
+            "modified_at": "2015-05-08T13:02:43",
+            "filename": "Total Opened by Month_Yr2014.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72270,
+            "impl_details": "",
+            "size": 11737
+        }
+    },
+    {
+        "pk": 79247,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/a94b4f41-bf69-4c8f-9c11-5e117f5d52f4",
+            "created_at": "2015-05-08T13:00:01",
+            "modified_at": "2015-05-08T13:00:01",
+            "filename": "Total Opened by Month_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72269,
+            "impl_details": "",
+            "size": 11739
+        }
+    },
+    {
+        "pk": 79246,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/59880d2c-84b1-488c-9020-2b2d3a4207f9",
+            "created_at": "2015-05-08T12:56:45",
+            "modified_at": "2015-05-08T12:56:45",
+            "filename": "List of RHIP Registered Cases_Yr2014.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72268,
+            "impl_details": "",
+            "size": 717805
+        }
+    },
+    {
+        "pk": 79245,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/0a17fe04-ea32-46c7-9164-bcf8153ed483",
+            "created_at": "2015-05-08T12:55:56",
+            "modified_at": "2015-05-08T12:55:56",
+            "filename": "List of RHIP Registered Cases_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72267,
+            "impl_details": "",
+            "size": 675310
+        }
+    },
+    {
+        "pk": 79244,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/d12e34c2-cbb5-454f-a8a8-ed6c47d5dc52",
+            "created_at": "2015-05-08T12:52:57",
+            "modified_at": "2015-05-08T12:52:57",
+            "filename": "List of Opened Cases_Yr2014.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72266,
+            "impl_details": "",
+            "size": 1331495
+        }
+    },
+    {
+        "pk": 79243,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 0,
+            "end_point": "file://4575/8695/49a02ad0-9d48-4176-9d00-b6f346495fed",
+            "created_at": "2015-05-08T12:51:01",
+            "modified_at": "2015-05-08T12:51:01",
+            "filename": "List of Opened Cases_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72265,
+            "impl_details": "",
+            "size": 1175945
+        }
+    },
+    {
+        "pk": 79226,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/3293d2b2-d129-40ba-97d6-4ce232bda185",
+            "created_at": "2015-05-06T22:06:28",
+            "modified_at": "2015-05-06T22:06:28",
+            "filename": "IT_DATA PLATFORM-Final FY16 Proposed.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72257,
+            "impl_details": "",
+            "size": 3673523
+        }
+    },
+    {
+        "pk": 79221,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/3293d2b2-d129-40ba-97d6-4ce232bda185",
+            "created_at": "2015-05-06T17:09:00",
+            "modified_at": "2015-05-06T17:09:00",
+            "filename": "IT_DATA PLATFORM-Final FY16 Proposed.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72257,
+            "impl_details": "",
+            "size": 1092360
+        }
+    },
+    {
+        "pk": 79213,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/3293d2b2-d129-40ba-97d6-4ce232bda185",
+            "created_at": "2015-05-06T13:17:17",
+            "modified_at": "2015-05-06T13:17:17",
+            "filename": "IT_DATA PLATFORM-Final FY16 Proposed.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 72257,
+            "impl_details": "",
+            "size": 973232
+        }
+    },
+    {
+        "pk": 79132,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/337601943435642413643053014486019216807",
+            "created_at": "2015-05-02T06:00:04",
+            "modified_at": "2015-05-02T06:00:04",
+            "filename": "Lobbyist Report_Raw Data.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67428,
+            "impl_details": "",
+            "size": 696320
+        }
+    },
+    {
+        "pk": 78294,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7595/e9132135-a107-4fcb-9cb6-4499b769bd73",
+            "created_at": "2015-04-03T17:32:00",
+            "modified_at": "2015-04-03T17:32:00",
+            "filename": "budget-expense-14-15.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71741,
+            "impl_details": "",
+            "size": 522
+        }
+    },
+    {
+        "pk": 78293,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7595/8ac7238e-960c-4b2a-8413-40864bb37ff2",
+            "created_at": "2015-04-03T17:30:51",
+            "modified_at": "2015-04-03T17:30:51",
+            "filename": "Budget-revenue-14-15.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71740,
+            "impl_details": "",
+            "size": 149
+        }
+    },
+    {
+        "pk": 78283,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/257144575182036830673735331698797136646",
+            "created_at": "2015-04-02T06:00:04",
+            "modified_at": "2015-04-02T06:00:04",
+            "filename": "Lobbyist Report_Raw Data.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67428,
+            "impl_details": "",
+            "size": 684032
+        }
+    },
+    {
+        "pk": 78205,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/cityclerk/CampaignFinanceDisclosure.json",
+            "created_at": "2015-03-30T04:31:23",
+            "modified_at": "2015-03-30T04:31:23",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/cityclerk/CampaignFinanceDisclosure.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71690,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.results</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 77932,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/889d8390-83b6-4c98-abb7-efa41ea3ed4e",
+            "created_at": "2015-03-11T12:11:44",
+            "modified_at": "2015-03-11T12:11:44",
+            "filename": "Year-Dep-Spending.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71560,
+            "impl_details": "",
+            "size": 464
+        }
+    },
+    {
+        "pk": 77561,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/52949754331846734268160106985306719659",
+            "created_at": "2015-03-02T08:00:04",
+            "modified_at": "2015-03-02T08:00:04",
+            "filename": "Lobbyist Report_Raw Data.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67428,
+            "impl_details": "",
+            "size": 684032
+        }
+    },
+    {
+        "pk": 77473,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 1,
+            "end_point": "file://4575/7195/c031f538-8075-4453-8a85-dab2216e12af",
+            "created_at": "2015-02-24T21:03:36",
+            "modified_at": "2015-02-24T21:03:36",
+            "filename": "GetNFIRSRespondReport.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71365,
+            "impl_details": "",
+            "size": 3163069
+        }
+    },
+    {
+        "pk": 77100,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/ca94dc5a-c44d-447e-95f0-4d07f3c56514",
+            "created_at": "2015-02-12T17:51:12",
+            "modified_at": "2015-02-12T17:51:12",
+            "filename": "311OpenData_test.CSV",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71135,
+            "impl_details": "",
+            "size": 148567
+        }
+    },
+    {
+        "pk": 77021,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/306faf24-2030-490b-bd2d-2859ad0a3fb0",
+            "created_at": "2015-02-04T14:30:17",
+            "modified_at": "2015-02-04T14:30:17",
+            "filename": "parking.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 71117,
+            "impl_details": "",
+            "size": 5072924
+        }
+    },
+    {
+        "pk": 76975,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/332221624550326814325627860596604147926",
+            "created_at": "2015-02-02T08:00:03",
+            "modified_at": "2015-02-02T08:00:03",
+            "filename": "Lobbyist Report_Raw Data.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67428,
+            "impl_details": "",
+            "size": 679936
+        }
+    },
+    {
+        "pk": 76684,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/4316/0efb6256-370a-4427-88de-7c6cf0328321",
+            "created_at": "2015-01-23T00:40:24",
+            "modified_at": "2015-01-23T00:40:24",
+            "filename": "XYpts_6000KML.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70919,
+            "impl_details": "",
+            "size": 322106
+        }
+    },
+    {
+        "pk": 76542,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7595/3b4edd32-5b82-4999-8ef6-8b47f88b18a2",
+            "created_at": "2015-01-12T22:08:47",
+            "modified_at": "2015-01-12T22:08:47",
+            "filename": "energy.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70882,
+            "impl_details": "",
+            "size": 269325
+        }
+    },
+    {
+        "pk": 76280,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 0,
+            "end_point": "file://4575/4316/a31a4537-2573-484d-a10b-9408bce39b5e",
+            "created_at": "2014-12-29T19:53:14",
+            "modified_at": "2014-12-29T19:53:14",
+            "filename": "XYpts_6.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70750,
+            "impl_details": "",
+            "size": 325020
+        }
+    },
+    {
+        "pk": 75983,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/14a34d76-5e76-4e77-8757-f1e4c0c4053b",
+            "created_at": "2014-12-12T17:01:55",
+            "modified_at": "2014-12-12T17:01:55",
+            "filename": "Event_Lines_fromGIS4.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70584,
+            "impl_details": "",
+            "size": 8841
+        }
+    },
+    {
+        "pk": 75862,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/9598d84c-f71e-4dde-a833-16a2a7e76624",
+            "created_at": "2014-12-05T21:43:48",
+            "modified_at": "2014-12-05T21:43:48",
+            "filename": "Dec5_14_2014_Events.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70523,
+            "impl_details": "",
+            "size": 18432
+        }
+    },
+    {
+        "pk": 75861,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/8dab831c-164e-4270-a703-43f2c9cbc1af",
+            "created_at": "2014-12-05T21:06:22",
+            "modified_at": "2014-12-05T21:06:22",
+            "filename": "Dec5_14_2014_Events.kml",
+            "impl_type": 11,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70522,
+            "impl_details": "",
+            "size": 272587
+        }
+    },
+    {
+        "pk": 75598,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls.json",
+            "created_at": "2014-11-20T18:15:44",
+            "modified_at": "2014-11-20T18:15:44",
+            "filename": "https://apps.cityofsacramento.org/opendata/json/publicsafety/cad_calls.json",
+            "impl_type": 14,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70395,
+            "impl_details": "<wsOperation useCache=\"false\"><pathToHeaders></pathToHeaders><pathToData>$.cad_calls</pathToData><uriSignatures/><args/></wsOperation>",
+            "size": 0
+        }
+    },
+    {
+        "pk": 75565,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/8d85e3e5-c79e-41b0-8164-c04c55853d03",
+            "created_at": "2014-11-19T16:47:51",
+            "modified_at": "2014-11-19T16:47:51",
+            "filename": "energy.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70374,
+            "impl_details": "",
+            "size": 269325
+        }
+    },
+    {
+        "pk": 75564,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/8d85e3e5-c79e-41b0-8164-c04c55853d03",
+            "created_at": "2014-11-19T16:42:59",
+            "modified_at": "2014-11-19T16:42:59",
+            "filename": "energy.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70374,
+            "impl_details": "",
+            "size": 269786
+        }
+    },
+    {
+        "pk": 75339,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/1695/debf446b-c860-4d78-ae01-244664149b3c",
+            "created_at": "2014-11-06T20:32:41",
+            "modified_at": "2014-11-06T20:32:41",
+            "filename": "Sacramento2010Race.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70257,
+            "impl_details": "",
+            "size": 11457
+        }
+    },
+    {
+        "pk": 75235,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/aeba349a-04b2-41b7-8516-d6ecd273e618",
+            "created_at": "2014-10-31T11:46:28",
+            "modified_at": "2014-10-31T11:46:28",
+            "filename": "cad_calls.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 70205,
+            "impl_details": "",
+            "size": 362
+        }
+    },
+    {
+        "pk": 74926,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/80883862855240953637803680808064125899",
+            "created_at": "2014-10-15T12:27:02",
+            "modified_at": "2014-10-15T12:27:02",
+            "filename": "budget.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65985,
+            "impl_details": "",
+            "size": 246553
+        }
+    },
+    {
+        "pk": 74925,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/323440862086497394832363311697820849741",
+            "created_at": "2014-10-15T12:14:03",
+            "modified_at": "2014-10-15T12:14:03",
+            "filename": "budget.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65985,
+            "impl_details": "",
+            "size": 246553
+        }
+    },
+    {
+        "pk": 74924,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/112317316596675398016770287029003500594",
+            "created_at": "2014-10-15T12:10:51",
+            "modified_at": "2014-10-15T12:10:51",
+            "filename": "budget.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65985,
+            "impl_details": "",
+            "size": 246553
+        }
+    },
+    {
+        "pk": 74907,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/146109309989354248319226321561872604809",
+            "created_at": "2014-10-14T22:48:16",
+            "modified_at": "2014-10-14T22:48:16",
+            "filename": "budget.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65985,
+            "impl_details": "",
+            "size": 246553
+        }
+    },
+    {
+        "pk": 74904,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/146109309989354248319226321561872604809",
+            "created_at": "2014-10-14T20:12:18",
+            "modified_at": "2014-10-14T20:12:18",
+            "filename": "budget.tsv",
+            "impl_type": 20,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65985,
+            "impl_details": "",
+            "size": 246545
+        }
+    },
+    {
+        "pk": 73486,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 0,
+            "end_point": "file://4575/7195/c9450db6-6300-45b8-a359-4403ce78ff2b",
+            "created_at": "2014-08-06T16:41:55",
+            "modified_at": "2014-08-06T16:41:55",
+            "filename": "Firestations071814.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69081,
+            "impl_details": "",
+            "size": 3631
+        }
+    },
+    {
+        "pk": 73197,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 3,
+            "end_point": "file://4575/7195/c9450db6-6300-45b8-a359-4403ce78ff2b",
+            "created_at": "2014-07-15T17:05:36",
+            "modified_at": "2014-07-15T17:05:36",
+            "filename": "Firestations062714.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69081,
+            "impl_details": "",
+            "size": 3631
+        }
+    },
+    {
+        "pk": 73147,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 0,
+            "end_point": "file://4575/0475/54e95448-7292-41bf-877c-f3acf8096aee",
+            "created_at": "2014-07-08T12:03:17",
+            "modified_at": "2014-07-08T12:03:17",
+            "filename": "monthlycheckissued.txt",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66242,
+            "impl_details": "",
+            "size": 1727
+        }
+    },
+    {
+        "pk": 73146,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 0,
+            "end_point": "file://4575/0475/74240417-87d1-419e-b125-78e3b0e49768",
+            "created_at": "2014-07-08T11:02:02",
+            "modified_at": "2014-07-08T11:02:02",
+            "filename": "daysoutstanding.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66244,
+            "impl_details": "",
+            "size": 156
+        }
+    },
+    {
+        "pk": 73140,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 0,
+            "end_point": "file://4575/7195/b8479f78-5a70-4991-aa56-a452bcec76f7",
+            "created_at": "2014-07-07T19:44:38",
+            "modified_at": "2014-07-07T19:44:38",
+            "filename": "top10vendor.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66342,
+            "impl_details": "",
+            "size": 615
+        }
+    },
+    {
+        "pk": 73139,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/b8479f78-5a70-4991-aa56-a452bcec76f7",
+            "created_at": "2014-07-07T19:19:10",
+            "modified_at": "2014-07-07T19:19:10",
+            "filename": "top10vendor.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66342,
+            "impl_details": "",
+            "size": 637
+        }
+    },
+    {
+        "pk": 73138,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/b8479f78-5a70-4991-aa56-a452bcec76f7",
+            "created_at": "2014-07-07T19:08:50",
+            "modified_at": "2014-07-07T19:08:50",
+            "filename": "top10vendor.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66342,
+            "impl_details": "",
+            "size": 615
+        }
+    },
+    {
+        "pk": 73137,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/54e95448-7292-41bf-877c-f3acf8096aee",
+            "created_at": "2014-07-07T19:08:22",
+            "modified_at": "2014-07-07T19:08:22",
+            "filename": "monthlycheckissued.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66242,
+            "impl_details": "",
+            "size": 1727
+        }
+    },
+    {
+        "pk": 73136,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/74240417-87d1-419e-b125-78e3b0e49768",
+            "created_at": "2014-07-07T19:07:48",
+            "modified_at": "2014-07-07T19:07:48",
+            "filename": "daysoutstanding.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66244,
+            "impl_details": "",
+            "size": 156
+        }
+    },
+    {
+        "pk": 73135,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/b8479f78-5a70-4991-aa56-a452bcec76f7",
+            "created_at": "2014-07-07T18:56:03",
+            "modified_at": "2014-07-07T18:56:03",
+            "filename": "CheckIssed2Top10vendors.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66342,
+            "impl_details": "",
+            "size": 397
+        }
+    },
+    {
+        "pk": 73050,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/c9450db6-6300-45b8-a359-4403ce78ff2b",
+            "created_at": "2014-06-27T19:29:33",
+            "modified_at": "2014-06-27T19:29:33",
+            "filename": "Firestations062714.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69081,
+            "impl_details": "",
+            "size": 3631
+        }
+    },
+    {
+        "pk": 72854,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38920,
+            "status": 1,
+            "end_point": "file://4575/0475/72942e5b-797f-4cce-b8f4-b0fef01bf244",
+            "created_at": "2014-06-02T12:45:38",
+            "modified_at": "2014-06-02T12:45:38",
+            "filename": "Fire Station Location - Copy.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 69024,
+            "impl_details": "",
+            "size": 13739
+        }
+    },
+    {
+        "pk": 71044,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 1,
+            "end_point": "file://4575/0475/280f4c7f-062d-4086-9c6f-e3f77c3212b5",
+            "created_at": "2014-05-13T19:03:51",
+            "modified_at": "2014-05-13T19:03:51",
+            "filename": "List of Opened Cases_Yr2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67516,
+            "impl_details": "",
+            "size": 1168089
+        }
+    },
+    {
+        "pk": 70442,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/886ddfa5-1e26-45e4-b20e-eb376dd71301",
+            "created_at": "2014-03-27T13:56:18",
+            "modified_at": "2014-03-27T13:56:18",
+            "filename": "CallSource_Monthly_2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67195,
+            "impl_details": "",
+            "size": 9545
+        }
+    },
+    {
+        "pk": 70440,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/5541d264-6bf5-4429-b966-9ede9faa3904",
+            "created_at": "2014-03-27T13:34:52",
+            "modified_at": "2014-03-27T13:34:52",
+            "filename": "Report_Source_Reason_ZipCode.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 67193,
+            "impl_details": "",
+            "size": 1358605
+        }
+    },
+    {
+        "pk": 70071,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/7195/d1cb47f7-f11f-4dce-9e4d-4cb440499e1c",
+            "created_at": "2014-02-25T17:34:38",
+            "modified_at": "2014-02-25T17:34:38",
+            "filename": "OffStreet_Parking_Open_Data_Table.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66974,
+            "impl_details": "",
+            "size": 2744
+        }
+    },
+    {
+        "pk": 70053,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/7195/d1cb47f7-f11f-4dce-9e4d-4cb440499e1c",
+            "created_at": "2014-02-25T15:20:45",
+            "modified_at": "2014-02-25T15:20:45",
+            "filename": "OffStreet_Parking_Open_Data_Table.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66974,
+            "impl_details": "",
+            "size": 2744
+        }
+    },
+    {
+        "pk": 70009,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 0,
+            "end_point": "file://4575/7195/d1cb47f7-f11f-4dce-9e4d-4cb440499e1c",
+            "created_at": "2014-02-13T19:31:51",
+            "modified_at": "2014-02-13T19:31:51",
+            "filename": "OffStreet_Parking_Open_Data_Table.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66974,
+            "impl_details": "",
+            "size": 2676
+        }
+    },
+    {
+        "pk": 69851,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/7195/504ff403-6ab5-4405-b4bc-3f6a1047b899",
+            "created_at": "2014-02-03T20:27:32",
+            "modified_at": "2014-02-03T20:27:32",
+            "filename": "PGE 1311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66879,
+            "impl_details": "",
+            "size": 48917
+        }
+    },
+    {
+        "pk": 69574,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/731296b6-5e9d-4c2e-8237-a66a2370c8b5",
+            "created_at": "2014-01-10T19:53:53",
+            "modified_at": "2014-01-10T19:53:53",
+            "filename": "42 Sacramento financials.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64507,
+            "impl_details": "",
+            "size": 15012
+        }
+    },
+    {
+        "pk": 69517,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/2d37a1c1-e19b-4931-98ac-8213eae25dcd",
+            "created_at": "2014-01-06T20:29:45",
+            "modified_at": "2014-01-06T20:29:45",
+            "filename": "council_webMercator.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64777,
+            "impl_details": "",
+            "size": 93195
+        }
+    },
+    {
+        "pk": 69516,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/1911710c-3370-4280-8e32-969d1a736d3f",
+            "created_at": "2014-01-06T20:29:41",
+            "modified_at": "2014-01-06T20:29:41",
+            "filename": "Parking_Spaces_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66072,
+            "impl_details": "",
+            "size": 2971087
+        }
+    },
+    {
+        "pk": 69515,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/7338f74c-e8ce-4bea-b1d8-5239b344ccd8",
+            "created_at": "2014-01-06T20:29:38",
+            "modified_at": "2014-01-06T20:29:38",
+            "filename": "Signs_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66071,
+            "impl_details": "",
+            "size": 1976798
+        }
+    },
+    {
+        "pk": 69514,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/f473a479-92d7-4101-ac07-d36c771b5851",
+            "created_at": "2014-01-06T20:29:36",
+            "modified_at": "2014-01-06T20:29:36",
+            "filename": "Parks.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66069,
+            "impl_details": "",
+            "size": 426494
+        }
+    },
+    {
+        "pk": 69513,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/350d115f-c434-4499-8a5d-6bf384723445",
+            "created_at": "2014-01-06T20:29:32",
+            "modified_at": "2014-01-06T20:29:32",
+            "filename": "SacTrees_DD2.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66070,
+            "impl_details": "",
+            "size": 9381780
+        }
+    },
+    {
+        "pk": 69511,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/f473a479-92d7-4101-ac07-d36c771b5851",
+            "created_at": "2014-01-06T18:01:56",
+            "modified_at": "2014-01-06T18:01:56",
+            "filename": "Parks.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66069,
+            "impl_details": "",
+            "size": 426494
+        }
+    },
+    {
+        "pk": 69510,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/f473a479-92d7-4101-ac07-d36c771b5851",
+            "created_at": "2014-01-06T18:01:19",
+            "modified_at": "2014-01-06T18:01:19",
+            "filename": "Parks.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66069,
+            "impl_details": "",
+            "size": 426494
+        }
+    },
+    {
+        "pk": 69428,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/350d115f-c434-4499-8a5d-6bf384723445",
+            "created_at": "2013-12-27T15:52:44",
+            "modified_at": "2013-12-27T15:52:44",
+            "filename": "SacTrees_DD2.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66070,
+            "impl_details": "",
+            "size": 9381780
+        }
+    },
+    {
+        "pk": 69427,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/7338f74c-e8ce-4bea-b1d8-5239b344ccd8",
+            "created_at": "2013-12-27T15:52:41",
+            "modified_at": "2013-12-27T15:52:41",
+            "filename": "Signs_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66071,
+            "impl_details": "",
+            "size": 1976798
+        }
+    },
+    {
+        "pk": 69426,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/1911710c-3370-4280-8e32-969d1a736d3f",
+            "created_at": "2013-12-27T15:52:37",
+            "modified_at": "2013-12-27T15:52:37",
+            "filename": "Parking_Spaces_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66072,
+            "impl_details": "",
+            "size": 2971087
+        }
+    },
+    {
+        "pk": 69425,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/f473a479-92d7-4101-ac07-d36c771b5851",
+            "created_at": "2013-12-27T15:52:33",
+            "modified_at": "2013-12-27T15:52:33",
+            "filename": "Parks.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66069,
+            "impl_details": "",
+            "size": 426494
+        }
+    },
+    {
+        "pk": 68935,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/2d37a1c1-e19b-4931-98ac-8213eae25dcd",
+            "created_at": "2013-12-09T14:31:54",
+            "modified_at": "2013-12-09T14:31:54",
+            "filename": "council_webMercator.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64777,
+            "impl_details": "",
+            "size": 93195
+        }
+    },
+    {
+        "pk": 68922,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40605,
+            "status": 3,
+            "end_point": "http://quickfacts.census.gov/qfd/states/06/0664000.html",
+            "created_at": "2013-12-09T02:10:56",
+            "modified_at": "2013-12-09T02:10:56",
+            "filename": "http://quickfacts.census.gov/qfd/states/06/0664000.html",
+            "impl_type": 0,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66034,
+            "impl_details": "",
+            "size": 0
+        }
+    },
+    {
+        "pk": 68886,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/b8479f78-5a70-4991-aa56-a452bcec76f7",
+            "created_at": "2013-12-05T19:55:32",
+            "modified_at": "2013-12-05T19:55:32",
+            "filename": "CheckIssed2Top10vendors.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66342,
+            "impl_details": "",
+            "size": 397
+        }
+    },
+    {
+        "pk": 68878,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/8448ba64-f17d-4be9-bb07-23e0f66b8169",
+            "created_at": "2013-12-05T05:30:36",
+            "modified_at": "2013-12-05T05:30:36",
+            "filename": "adoption.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66130,
+            "impl_details": "",
+            "size": 9048
+        }
+    },
+    {
+        "pk": 68877,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/4997b3f7-57fe-4f02-a8ca-273b038d9333",
+            "created_at": "2013-12-05T05:29:40",
+            "modified_at": "2013-12-05T05:29:40",
+            "filename": "tags.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66129,
+            "impl_details": "",
+            "size": 3757512
+        }
+    },
+    {
+        "pk": 68876,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/8448ba64-f17d-4be9-bb07-23e0f66b8169",
+            "created_at": "2013-12-05T05:29:20",
+            "modified_at": "2013-12-05T05:29:20",
+            "filename": "adoption.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66130,
+            "impl_details": "",
+            "size": 9048
+        }
+    },
+    {
+        "pk": 68870,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/1695/93a38d1a-05a3-43fe-ab78-6ceb4e85c57b",
+            "created_at": "2013-12-04T20:52:08",
+            "modified_at": "2013-12-04T20:52:08",
+            "filename": "purchase-orders.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66337,
+            "impl_details": "",
+            "size": 405502
+        }
+    },
+    {
+        "pk": 68858,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/8695/2ef3d1be-ebab-4888-b67c-c8cd1195a865",
+            "created_at": "2013-12-04T16:30:26",
+            "modified_at": "2013-12-04T16:30:26",
+            "filename": "Building Permits Issued - 2013.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66325,
+            "impl_details": "",
+            "size": 2382336
+        }
+    },
+    {
+        "pk": 68854,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/1695/9429e967-78ca-470b-9aef-b5e34931786a",
+            "created_at": "2013-12-03T20:51:00",
+            "modified_at": "2013-12-03T20:51:00",
+            "filename": "awarded_bids.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66326,
+            "impl_details": "",
+            "size": 73374
+        }
+    },
+    {
+        "pk": 68853,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/8695/2ef3d1be-ebab-4888-b67c-c8cd1195a865",
+            "created_at": "2013-12-03T20:41:17",
+            "modified_at": "2013-12-03T20:41:17",
+            "filename": "Building Permits Issued - 2013.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66325,
+            "impl_details": "",
+            "size": 2738688
+        }
+    },
+    {
+        "pk": 68694,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/74240417-87d1-419e-b125-78e3b0e49768",
+            "created_at": "2013-11-22T05:14:00",
+            "modified_at": "2013-11-22T05:14:00",
+            "filename": "daysoutstanding.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66244,
+            "impl_details": "",
+            "size": 151
+        }
+    },
+    {
+        "pk": 68692,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/54e95448-7292-41bf-877c-f3acf8096aee",
+            "created_at": "2013-11-22T05:01:43",
+            "modified_at": "2013-11-22T05:01:43",
+            "filename": "monthlycheckissued.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66242,
+            "impl_details": "",
+            "size": 10420
+        }
+    },
+    {
+        "pk": 68604,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "http://www.cityofsacramento.org/generalservices/animal-care/statistics.cfm",
+            "created_at": "2013-11-20T15:43:20",
+            "modified_at": "2013-11-20T15:43:20",
+            "filename": "http://www.cityofsacramento.org/generalservices/animal-care/statistics.cfm",
+            "impl_type": 0,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64769,
+            "impl_details": "",
+            "size": 0
+        }
+    },
+    {
+        "pk": 68603,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/4997b3f7-57fe-4f02-a8ca-273b038d9333",
+            "created_at": "2013-11-20T15:26:56",
+            "modified_at": "2013-11-20T15:26:56",
+            "filename": "tags.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66129,
+            "impl_details": "",
+            "size": 3757512
+        }
+    },
+    {
+        "pk": 68602,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/8448ba64-f17d-4be9-bb07-23e0f66b8169",
+            "created_at": "2013-11-20T15:26:46",
+            "modified_at": "2013-11-20T15:26:46",
+            "filename": "adoption.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66130,
+            "impl_details": "",
+            "size": 9048
+        }
+    },
+    {
+        "pk": 68578,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/350d115f-c434-4499-8a5d-6bf384723445",
+            "created_at": "2013-11-18T19:19:31",
+            "modified_at": "2013-11-18T19:19:31",
+            "filename": "SacTrees_DD2.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66070,
+            "impl_details": "",
+            "size": 9381780
+        }
+    },
+    {
+        "pk": 68577,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/7338f74c-e8ce-4bea-b1d8-5239b344ccd8",
+            "created_at": "2013-11-18T19:18:34",
+            "modified_at": "2013-11-18T19:18:34",
+            "filename": "Signs_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66071,
+            "impl_details": "",
+            "size": 1976798
+        }
+    },
+    {
+        "pk": 68576,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/1911710c-3370-4280-8e32-969d1a736d3f",
+            "created_at": "2013-11-18T19:18:30",
+            "modified_at": "2013-11-18T19:18:30",
+            "filename": "Parking_Spaces_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66072,
+            "impl_details": "",
+            "size": 2971087
+        }
+    },
+    {
+        "pk": 68575,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/f473a479-92d7-4101-ac07-d36c771b5851",
+            "created_at": "2013-11-18T19:07:11",
+            "modified_at": "2013-11-18T19:07:11",
+            "filename": "Parks.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66069,
+            "impl_details": "",
+            "size": 426494
+        }
+    },
+    {
+        "pk": 68574,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/350d115f-c434-4499-8a5d-6bf384723445",
+            "created_at": "2013-11-18T19:03:43",
+            "modified_at": "2013-11-18T19:03:43",
+            "filename": "SacTrees_DD2.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66070,
+            "impl_details": "",
+            "size": 9381780
+        }
+    },
+    {
+        "pk": 68554,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/602cf87c-2420-4745-89e0-24aa6f32134e",
+            "created_at": "2013-11-15T17:03:08",
+            "modified_at": "2013-11-15T17:03:08",
+            "filename": "311MonthlyData.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66166,
+            "impl_details": "",
+            "size": 174096
+        }
+    },
+    {
+        "pk": 68553,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 6,
+            "end_point": "file://4575/9595/602cf87c-2420-4745-89e0-24aa6f32134e",
+            "created_at": "2013-11-15T16:46:55",
+            "modified_at": "2013-11-15T16:46:55",
+            "filename": "311MonthlyData.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66166,
+            "impl_details": "",
+            "size": 174088
+        }
+    },
+    {
+        "pk": 68551,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/74595447-f4e5-4c0c-b991-fcfbb4a982b1",
+            "created_at": "2013-11-15T16:33:35",
+            "modified_at": "2013-11-15T16:33:35",
+            "filename": "StreetMaintenanceRequestsYTD.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66164,
+            "impl_details": "",
+            "size": 9628
+        }
+    },
+    {
+        "pk": 68550,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/296e2503-c0db-4ac5-8cdb-0363c76d437c",
+            "created_at": "2013-11-15T16:03:38",
+            "modified_at": "2013-11-15T16:03:38",
+            "filename": "Request Category.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66163,
+            "impl_details": "",
+            "size": 9529
+        }
+    },
+    {
+        "pk": 68549,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 6,
+            "end_point": "file://4575/9595/296e2503-c0db-4ac5-8cdb-0363c76d437c",
+            "created_at": "2013-11-15T15:59:31",
+            "modified_at": "2013-11-15T15:59:31",
+            "filename": "Request Category.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66163,
+            "impl_details": "",
+            "size": 9469
+        }
+    },
+    {
+        "pk": 68541,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/2203d279-d825-4f75-a86b-4bbce450b202",
+            "created_at": "2013-11-15T15:43:09",
+            "modified_at": "2013-11-15T15:43:09",
+            "filename": "Source of Requests.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66150,
+            "impl_details": "",
+            "size": 9236
+        }
+    },
+    {
+        "pk": 68535,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/488243eb-d900-4bd9-9cc6-8e2b0e879bec",
+            "created_at": "2013-11-15T15:22:20",
+            "modified_at": "2013-11-15T15:22:20",
+            "filename": "Missed Solid Waste Services.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66152,
+            "impl_details": "",
+            "size": 9379
+        }
+    },
+    {
+        "pk": 68533,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/4997b3f7-57fe-4f02-a8ca-273b038d9333",
+            "created_at": "2013-11-15T15:13:31",
+            "modified_at": "2013-11-15T15:13:31",
+            "filename": "tags.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66129,
+            "impl_details": "",
+            "size": 3757512
+        }
+    },
+    {
+        "pk": 68532,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40619,
+            "status": 3,
+            "end_point": "file://4575/7195/8448ba64-f17d-4be9-bb07-23e0f66b8169",
+            "created_at": "2013-11-15T15:12:51",
+            "modified_at": "2013-11-15T15:12:51",
+            "filename": "adoption.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66130,
+            "impl_details": "",
+            "size": 9048
+        }
+    },
+    {
+        "pk": 68531,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/2203d279-d825-4f75-a86b-4bbce450b202",
+            "created_at": "2013-11-15T14:50:03",
+            "modified_at": "2013-11-15T14:50:03",
+            "filename": "Source of Requests.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66150,
+            "impl_details": "",
+            "size": 9228
+        }
+    },
+    {
+        "pk": 68529,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/71bdb3ca-4352-4683-98db-eb81d8194dab",
+            "created_at": "2013-11-15T14:36:57",
+            "modified_at": "2013-11-15T14:36:57",
+            "filename": "top10_October2013.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66148,
+            "impl_details": "",
+            "size": 14783
+        }
+    },
+    {
+        "pk": 68527,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/e0f8bd9a-44e3-47ed-9c20-1a8e0f94e7c7",
+            "created_at": "2013-11-15T14:19:30",
+            "modified_at": "2013-11-15T14:19:30",
+            "filename": "311CallVolume_OpenData.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66146,
+            "impl_details": "",
+            "size": 11620
+        }
+    },
+    {
+        "pk": 68507,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/8448ba64-f17d-4be9-bb07-23e0f66b8169",
+            "created_at": "2013-11-14T18:35:19",
+            "modified_at": "2013-11-14T18:35:19",
+            "filename": "adoption.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66130,
+            "impl_details": "",
+            "size": 9048
+        }
+    },
+    {
+        "pk": 68506,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/4997b3f7-57fe-4f02-a8ca-273b038d9333",
+            "created_at": "2013-11-14T18:13:15",
+            "modified_at": "2013-11-14T18:13:15",
+            "filename": "tags.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66129,
+            "impl_details": "",
+            "size": 3757512
+        }
+    },
+    {
+        "pk": 68464,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/9595/3941ac89-32f6-4080-8b41-7cbc2ce2bcbf",
+            "created_at": "2013-11-08T15:48:22",
+            "modified_at": "2013-11-08T15:48:22",
+            "filename": "TicketSource_11082013_2.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66119,
+            "impl_details": "",
+            "size": 10083
+        }
+    },
+    {
+        "pk": 68335,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/1911710c-3370-4280-8e32-969d1a736d3f",
+            "created_at": "2013-11-05T12:19:41",
+            "modified_at": "2013-11-05T12:19:41",
+            "filename": "Parking_Spaces_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66072,
+            "impl_details": "",
+            "size": 2971087
+        }
+    },
+    {
+        "pk": 68334,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/7338f74c-e8ce-4bea-b1d8-5239b344ccd8",
+            "created_at": "2013-11-05T12:13:44",
+            "modified_at": "2013-11-05T12:13:44",
+            "filename": "Signs_DD.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66071,
+            "impl_details": "",
+            "size": 1976798
+        }
+    },
+    {
+        "pk": 68333,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/350d115f-c434-4499-8a5d-6bf384723445",
+            "created_at": "2013-11-05T12:09:28",
+            "modified_at": "2013-11-05T12:09:28",
+            "filename": "SacTrees_DD2.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66070,
+            "impl_details": "",
+            "size": 9381780
+        }
+    },
+    {
+        "pk": 68317,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/b4c96da1-cb76-4356-bae2-2c123d8588f7",
+            "created_at": "2013-11-03T23:36:13",
+            "modified_at": "2013-11-03T23:36:13",
+            "filename": "CADData-all-groups.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66056,
+            "impl_details": "",
+            "size": 18746
+        }
+    },
+    {
+        "pk": 68316,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/7195/73e0a3ac-8805-4784-b633-f9e4ff1f5d22",
+            "created_at": "2013-11-03T23:05:41",
+            "modified_at": "2013-11-03T23:05:41",
+            "filename": "RMSData-all-groups.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66055,
+            "impl_details": "",
+            "size": 18746
+        }
+    },
+    {
+        "pk": 68309,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/61e167a5-0d4d-4215-899d-a63039e4d062",
+            "created_at": "2013-11-01T20:29:17",
+            "modified_at": "2013-11-01T20:29:17",
+            "filename": "#3 - PO_information_FY14_to_date(final).xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66054,
+            "impl_details": "",
+            "size": 570880
+        }
+    },
+    {
+        "pk": 68308,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/7ce7100f-0029-4399-915b-ea1758e38f69",
+            "created_at": "2013-11-01T20:27:05",
+            "modified_at": "2013-11-01T20:27:05",
+            "filename": "#2 -Bid Activity Report.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66053,
+            "impl_details": "",
+            "size": 55617
+        }
+    },
+    {
+        "pk": 68293,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/72aaed31-0191-4004-8c97-b77134533b98",
+            "created_at": "2013-10-30T16:02:05",
+            "modified_at": "2013-10-30T16:02:05",
+            "filename": "HR2010-11983475200.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66046,
+            "impl_details": "",
+            "size": 2038523
+        }
+    },
+    {
+        "pk": 68270,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "http://quickfacts.census.gov/qfd/states/06/0664000.html",
+            "created_at": "2013-10-28T15:21:48",
+            "modified_at": "2013-10-28T15:21:48",
+            "filename": "http://quickfacts.census.gov/qfd/states/06/0664000.html",
+            "impl_type": 0,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66034,
+            "impl_details": "",
+            "size": 0
+        }
+    },
+    {
+        "pk": 68237,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/0475/192527920967828467876135009563635714781",
+            "created_at": "2013-10-22T17:55:00",
+            "modified_at": "2013-10-22T17:55:00",
+            "filename": "311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66010,
+            "impl_details": "",
+            "size": 10081185
+        }
+    },
+    {
+        "pk": 68235,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/0475/184528959216029917980075711063694209118",
+            "created_at": "2013-10-22T17:26:09",
+            "modified_at": "2013-10-22T17:26:09",
+            "filename": "311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66010,
+            "impl_details": "",
+            "size": 10080347
+        }
+    },
+    {
+        "pk": 68234,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/7195/dd0cd9cf-0fb8-4ca2-8404-f66fdf061ac8",
+            "created_at": "2013-10-22T17:00:59",
+            "modified_at": "2013-10-22T17:00:59",
+            "filename": "311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66010,
+            "impl_details": "",
+            "size": 1811646
+        }
+    },
+    {
+        "pk": 68233,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/7195/dd0cd9cf-0fb8-4ca2-8404-f66fdf061ac8",
+            "created_at": "2013-10-22T16:46:02",
+            "modified_at": "2013-10-22T16:46:02",
+            "filename": "311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66010,
+            "impl_details": "",
+            "size": 10080347
+        }
+    },
+    {
+        "pk": 68213,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/7195/dd0cd9cf-0fb8-4ca2-8404-f66fdf061ac8",
+            "created_at": "2013-10-22T15:05:14",
+            "modified_at": "2013-10-22T15:05:14",
+            "filename": "311.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 66010,
+            "impl_details": "",
+            "size": 10463565
+        }
+    },
+    {
+        "pk": 68034,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/7195/bd2a2245-f8b4-40e2-b0c7-4c5b995f3e56",
+            "created_at": "2013-10-11T11:25:37",
+            "modified_at": "2013-10-11T11:25:37",
+            "filename": "Current_Citywide_contracts.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65957,
+            "impl_details": "",
+            "size": 41900
+        }
+    },
+    {
+        "pk": 67588,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/0475/311549092206949583821817269270126610640",
+            "created_at": "2013-09-19T14:38:24",
+            "modified_at": "2013-09-19T14:38:24",
+            "filename": "2014 Open Budget.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65703,
+            "impl_details": "",
+            "size": 222830
+        }
+    },
+    {
+        "pk": 67519,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/0475/134265182892056128519675573456576717842",
+            "created_at": "2013-09-12T13:31:44",
+            "modified_at": "2013-09-12T13:31:44",
+            "filename": "2014 Open Budget.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65703,
+            "impl_details": "",
+            "size": 222830
+        }
+    },
+    {
+        "pk": 67517,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/0475/187339337992056852484916953064179579188",
+            "created_at": "2013-09-12T13:28:53",
+            "modified_at": "2013-09-12T13:28:53",
+            "filename": "2014 Open Budget.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65703,
+            "impl_details": "",
+            "size": 222830
+        }
+    },
+    {
+        "pk": 67516,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 1,
+            "end_point": "file://4575/0475/2926711693222944428819084723734474540",
+            "created_at": "2013-09-12T13:27:43",
+            "modified_at": "2013-09-12T13:27:43",
+            "filename": "2014 Open Budget.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 65703,
+            "impl_details": "",
+            "size": 222830
+        }
+    },
+    {
+        "pk": 66056,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "file://4575/0475/2d37a1c1-e19b-4931-98ac-8213eae25dcd",
+            "created_at": "2013-06-11T18:00:49",
+            "modified_at": "2013-06-11T18:00:49",
+            "filename": "council_webMercator.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64777,
+            "impl_details": "",
+            "size": 93195
+        }
+    },
+    {
+        "pk": 66042,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "http://www.cityofsacramento.org/generalservices/animal-care/statistics.cfm",
+            "created_at": "2013-06-07T16:03:50",
+            "modified_at": "2013-06-07T16:03:50",
+            "filename": "http://www.cityofsacramento.org/generalservices/animal-care/statistics.cfm",
+            "impl_type": 0,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64769,
+            "impl_details": "",
+            "size": 0
+        }
+    },
+    {
+        "pk": 66033,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/0475/96a84387-b916-4c93-aebc-45ef494ff537",
+            "created_at": "2013-06-06T19:12:19",
+            "modified_at": "2013-06-06T19:12:19",
+            "filename": "Siebel_SR_Extract.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64762,
+            "impl_details": "",
+            "size": 18447042
+        }
+    },
+    {
+        "pk": 66031,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 40437,
+            "status": 3,
+            "end_point": "file://4575/0475/96a84387-b916-4c93-aebc-45ef494ff537",
+            "created_at": "2013-06-06T18:38:50",
+            "modified_at": "2013-06-06T18:38:50",
+            "filename": "Siebel_SR_Extract.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64762,
+            "impl_details": "",
+            "size": 18447042
+        }
+    },
+    {
+        "pk": 66030,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "http://www.sacgis.org/GISDataPub/Data/GENERAL_PLAN_2030.kmz",
+            "created_at": "2013-06-06T17:17:26",
+            "modified_at": "2013-06-06T17:17:26",
+            "filename": "http://www.sacgis.org/GISDataPub/Data/GENERAL_PLAN_2030.kmz",
+            "impl_type": 12,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64761,
+            "impl_details": "",
+            "size": 0
+        }
+    },
+    {
+        "pk": 66023,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "file://4575/0475/dd916ca5-557b-411a-ad39-7f58efdfab1b",
+            "created_at": "2013-06-06T12:42:56",
+            "modified_at": "2013-06-06T12:42:56",
+            "filename": "Siebel_SR_Extract.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64755,
+            "impl_details": "",
+            "size": 8764852
+        }
+    },
+    {
+        "pk": 66017,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "file://4575/0475/55c10485-75a9-434a-9049-35d753dead1a",
+            "created_at": "2013-06-05T17:51:19",
+            "modified_at": "2013-06-05T17:51:19",
+            "filename": "Siebel_SR_Extract.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64750,
+            "impl_details": "",
+            "size": 8764852
+        }
+    },
+    {
+        "pk": 66005,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/59ef6d36-5e74-4f73-aff5-19c474763aca",
+            "created_at": "2013-06-03T15:58:53",
+            "modified_at": "2013-06-03T15:58:53",
+            "filename": "eCAPS payments 1-1-12 to 12-31-12 for SACTO.xls",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64740,
+            "impl_details": "",
+            "size": 3049472
+        }
+    },
+    {
+        "pk": 65849,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 0,
+            "end_point": "file://4575/0475/3145a7c9-7d54-4d56-94a2-e2e3174d0119",
+            "created_at": "2013-05-30T18:24:45",
+            "modified_at": "2013-05-30T18:24:45",
+            "filename": "Siebel_SR_Extract.CSV",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64594,
+            "impl_details": "",
+            "size": 10678984
+        }
+    },
+    {
+        "pk": 65847,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38767,
+            "status": 3,
+            "end_point": "file://4575/0475/f8d93122-fbf8-401d-b3dd-c0ed0b8cd9c2",
+            "created_at": "2013-05-30T18:07:42",
+            "modified_at": "2013-05-30T18:07:42",
+            "filename": "parkingtickets.csv",
+            "impl_type": 10,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64592,
+            "impl_details": "",
+            "size": 4442798
+        }
+    },
+    {
+        "pk": 65837,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 39512,
+            "status": 3,
+            "end_point": "file://4575/0475/0b3dc088-0d7a-46fd-a86e-ba4ba82f1052",
+            "created_at": "2013-05-30T14:55:12",
+            "modified_at": "2013-05-30T14:55:12",
+            "filename": "Building Issued 06-01-11 to 05-30-13.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64582,
+            "impl_details": "",
+            "size": 1274715
+        }
+    },
+    {
+        "pk": 65757,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/bf7dfc28-eeab-49e5-bfa1-5d11de73545c",
+            "created_at": "2013-05-28T15:44:05",
+            "modified_at": "2013-05-28T15:44:05",
+            "filename": "Parks.kml",
+            "impl_type": 11,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64509,
+            "impl_details": "",
+            "size": 1992112
+        }
+    },
+    {
+        "pk": 65756,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38919,
+            "status": 3,
+            "end_point": "file://4575/0475/9504d472-c66e-4bab-ad6e-68df4a02c935",
+            "created_at": "2013-05-28T15:38:29",
+            "modified_at": "2013-05-28T15:38:29",
+            "filename": "CC_Parking.kml",
+            "impl_type": 11,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64508,
+            "impl_details": "",
+            "size": 8344
+        }
+    },
+    {
+        "pk": 65755,
+        "model": "core.datasetrevision",
+        "fields": {
+            "category": 38922,
+            "status": 3,
+            "end_point": "file://4575/0475/731296b6-5e9d-4c2e-8237-a66a2370c8b5",
+            "created_at": "2013-05-28T15:07:27",
+            "modified_at": "2013-05-28T15:07:27",
+            "filename": "42 Sacramento financials.xlsx",
+            "impl_type": 4,
+            "user": 2,
+            "meta_text": "",
+            "dataset": 64507,
+            "impl_details": "",
+            "size": 38954
+        }
+    }
 ]

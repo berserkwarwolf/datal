@@ -148,7 +148,8 @@ class SourceImplementationChoices():
     IMAGE = 18
     ZIP = 19
     TSV = 20
-    TXT = 21
+    PUS = 21
+    TXT = 22
 
 SOURCE_IMPLEMENTATION_CHOICES = (
      (SourceImplementationChoices.HTML, 'HTML')
@@ -172,7 +173,8 @@ SOURCE_IMPLEMENTATION_CHOICES = (
     ,(SourceImplementationChoices.IMAGE, 'IMAGE')
     ,(SourceImplementationChoices.ZIP, 'ZIP')
     ,(SourceImplementationChoices.TSV, 'TSV')
-    ,(SourceImplementationChoices.TSV, 'TXT')
+    ,(SourceImplementationChoices.TXT, 'TXT')
+    ,(SourceImplementationChoices.PUS, 'PublicStuff')
 )
 
 SOURCE_IMPLEMENTATION_EXTENSION_CHOICES = (
@@ -197,6 +199,7 @@ SOURCE_IMPLEMENTATION_EXTENSION_CHOICES = (
     ,(SourceImplementationChoices.IMAGE, ["png", "jpg", "jpeg", "gif"])
     ,(SourceImplementationChoices.ZIP, ["zip", "gz", "tar"])
     ,(SourceImplementationChoices.TSV, ["tsv"])
+    #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["txt"])
 )
 
@@ -234,6 +237,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
                                         "application/x-gzip",
                                         "application/x-tar"])
     #,(SourceImplementationChoices.TSV, 'TSV')
+    #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["text/csv"])
 )
 

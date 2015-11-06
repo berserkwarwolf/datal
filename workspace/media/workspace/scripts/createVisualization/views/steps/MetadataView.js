@@ -12,8 +12,7 @@ var MetadataView = StepViewSPA.extend({
 	bindings: {
 		"input.title": 			"value:title,		events:['keyup']",
 		"input.description": 	"value:description,events:['keyup']",
-		"select.category": 		"value:datastream_category,	events:['change']",
-		//"textarea.notes": 		"value:notes,		events:['keyup']"
+		"select.category": 		"value:datastream_category,	events:['change']"
 	},
 
 	onPreviousButtonClicked: function(e){
@@ -29,20 +28,23 @@ var MetadataView = StepViewSPA.extend({
 		if($('.nicEdit-main').length > 0
 				&& $('.nicEdit-main').html() != '<br>' // When notes initialice empty, nicEdit initialice with <br>, so we check if that is the case
 		){
-				notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
+			notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
 		}
 
-		this.model.set('notes',notes);
+		this.model.set('notes', notes);
 
 		var validation = this.model.validateMetadata();
 		if( validation.valid ){
 			this.next();
 		}else{
 			var that = this;
-			_.each(validation.fields,function(invalid,field){
+			_.each(validation.fields, function(invalid, field){
 				if(invalid){
 					that.$el.find('input.'+field).addClass('has-error');
 					that.$el.find('input.'+field).siblings('.validate-msg').show();
+				}
+				if (field === 'notes' && invalid) {
+					that.$el.find('.notes-field .validate-msg').show();
 				}
 			});
 		};
