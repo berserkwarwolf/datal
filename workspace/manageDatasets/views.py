@@ -17,6 +17,7 @@ from core.templates import DefaultAnswer, DefaultDictToJson
 from core.daos.datasets import DatasetDBDAO
 from core.utils import DateTimeEncoder
 from core.lib.datastore import active_datastore
+from core.forms import MimeTypeForm
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
@@ -241,6 +242,7 @@ def create(request, collect_type='index'):
     auth_manager = request.auth_manager
     account_id = auth_manager.account_id
     language = auth_manager.language
+    extensions_list = SOURCE_EXTENSION_LIST
 
     # TODO: Put line in a common place
     collect_types = {'index': -1, 'file': 0, 'url': 1, 'webservice': 2}
@@ -286,6 +288,7 @@ def edit(request, dataset_revision_id=None):
     auth_manager = request.auth_manager
     language = request.auth_manager.language
     user_id = request.auth_manager.id
+    extensions_list = SOURCE_EXTENSION_LIST
 
     # TODO: Put line in a common place
     collect_types = {0: 'file', 1: 'url', 2: 'webservice'}

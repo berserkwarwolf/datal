@@ -18,7 +18,10 @@
 			<div class="helpBox">
 				<div class="helpBoxInner">
 					<h6>{% trans 'DSFIND-HELPTIP-TITLE' %}</h6>
-					<p>{% trans 'DSCRE-UPLOAD-TIP' %}</p>
+					<p>
+						{% trans 'DSCRE-UPLOAD-TIP' %}
+						 <br/> {{extensions_list|join:", "|upper}} <br/> 
+					</p>
 					<p>{% trans 'APP-ANYDOUBTS-TEXT2' %} <a href="mailto:support@junar.com">{% trans 'APP-CALLUSONSKYPE-TEXT2' %}</a></p>
 				</div>
 			</div>

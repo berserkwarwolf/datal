@@ -257,9 +257,12 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         #    # Build impl_details if necessary
         fields['impl_details'] = builder.build()
 
-        fields['title'] = fields['title'].strip().replace('\n', ' ')
-        fields['description'] = fields['description'].strip().replace('\n', ' ')
-        fields['notes'] = fields['notes'].strip()
+        if 'title' in fields:
+            fields['title'] = fields['title'].strip().replace('\n', ' ')
+        if 'description' in fields:
+            fields['description'] = fields['description'].strip().replace('\n', ' ')
+        if 'notes' in fields:
+            fields['notes'] = fields['notes'].strip()
 
         changed_fields.append('impl_details')
 
@@ -269,8 +272,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             changed_fields, **fields
         )
 
-        dataset_revision.add_tags(fields['tags'])
-        dataset_revision.add_sources(fields['sources'])
+        if 'tags' in fields:
+            dataset_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            dataset_revision.add_sources(fields['sources'])
 
         return dataset_revision
 

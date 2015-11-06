@@ -30,7 +30,7 @@ var AddSourceModel = Backbone.Model.extend({
 	},
 
 	validateSourceNameAlreadyExist: function() {
-		var url = '/source_manager/validate_source_name/',
+		var url = '/rest/sources.json	',
 			data = {},
 			msg = false;
 		data['name'] = this.get('name');
@@ -41,7 +41,7 @@ var AddSourceModel = Backbone.Model.extend({
 			dataType: 'json',
 			async: false,
 			success: function(response){
-				if( response.name != false){
+				if( response.length > 0){
 					msg = gettext( 'VALIDATE-SOURCENAMEALREADYEXIST-TEXT' );	
 				}
 			}
@@ -50,7 +50,7 @@ var AddSourceModel = Backbone.Model.extend({
 	},
 
 	validateSourceUrlAlreadyExist: function() {
-		var url = '/source_manager/validate_source_url/',
+		var url = '/rest/sources.json',
 			data = {},
 			msg = false;
 		data['url'] = this.get('url');
@@ -61,8 +61,8 @@ var AddSourceModel = Backbone.Model.extend({
 			dataType: 'json',
 			async: false,
 			success: function(response){
-				if( response.name != false){
-					msg =  gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response.name + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
+				if( response.length > 0){
+					msg =  gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT1' ) + response[0] + gettext( 'VALIDATE-SOURCEALREADYEXIST-TEXT2' );	
 				}
 			}
 		});

@@ -997,6 +997,9 @@ class Application(models.Model):
     def get_name(self):
         return self.name and self.name or 'No name'
 
+    def is_private_auth_key(self, auth_key):
+        return self.auth_key == auth_key
+
     def is_public_auth_key(self, auth_key):
         return self.public_auth_key == auth_key
 
