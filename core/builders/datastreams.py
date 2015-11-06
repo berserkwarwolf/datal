@@ -2,6 +2,7 @@
 from BeautifulSoup import BeautifulSoup
 from core.http import get_domain_with_protocol
 from core.v8.factories import AbstractCommandFactory
+from core.exceptions import DatasetTableNotFoundException
 import urllib
 import logging
 
@@ -23,8 +24,10 @@ class DataSourceBuilder(object):
             raise Exception('Wrong engine answer')
 
         soup = BeautifulSoup(result[0])
-        table = soup.find(attrs={'tableid': table_id or 'table0'})
+        table = soup.find(attrs={'tableid': 'table%d' % table_id or 'table0'})
         try:
+            if not table:
+                raise DatasetTableNotFoundException(table_id) 
             number_of_columns = len(table.findAll('tr')[0].findAll())
         except:
             logger.error("DataSourceBuilder ERROR --> %s" % result[0])

@@ -112,6 +112,12 @@ class DatasetNotFoundException(LifeCycleException):
     def get_actions(self):
         return [ViewDatasetListExceptionAction()]
 
+class DatasetTableNotFoundException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND')
+    tipo = 'dataset-table-not-found'
+    status_code = 404
+    table_id = 0 # valor defaault
 
 class DataStreamNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASTREAM-NOT-FOUND')
