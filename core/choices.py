@@ -244,6 +244,7 @@ SOURCE_MIMETYPE_LIST = sorted([mimetype for source_id, mimetypes in SOURCE_IMPLE
                            for mimetype in mimetypes])
 
 DATASTREAM_IMPL_VALID_CHOICES = [
+    SourceImplementationChoices.HTML,
     SourceImplementationChoices.XML, 
     SourceImplementationChoices.XLS, 
     SourceImplementationChoices.DOC, 
