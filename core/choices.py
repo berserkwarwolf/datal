@@ -207,9 +207,7 @@ SOURCE_EXTENSION_LIST = sorted([extension for source_id, extensions in SOURCE_IM
                            for extension in extensions])
 
 SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
-     (SourceImplementationChoices.HTML, ["text/html",
-                                         "text/x-comma-separated-values",
-                                         "text/plain"])
+     (SourceImplementationChoices.HTML, ["text/html"])
     #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
     #,(SourceImplementationChoices.DALLAS, 'DALLAS')
     #,(SourceImplementationChoices.XML, 'XML')
@@ -222,7 +220,8 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
                                         "application/vnd.oasis.opendocument.text-web"])
     #,(SourceImplementationChoices.ODP, 'ODP')
     ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet"])
-    #,(SourceImplementationChoices.CSV, 'CSV')
+    ,(SourceImplementationChoices.CSV, ["text/x-comma-separated-values",
+                                        "text/csv"])
     ,(SourceImplementationChoices.KML, ["application/vnd.google-earth.kml+xml"])
     #,(SourceImplementationChoices.KMZ, 'KMZ')
     #,(SourceImplementationChoices.GIS0, 'geoportal/GetRecords')
@@ -238,7 +237,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
                                         "application/x-tar"])
     #,(SourceImplementationChoices.TSV, 'TSV')
     #,(SourceImplementationChoices.PUS, 'PublicStuff')
-    ,(SourceImplementationChoices.TXT, ["text/csv"])
+    ,(SourceImplementationChoices.TXT, ["text/plain"])
 )
 
 SOURCE_MIMETYPE_LIST = sorted([mimetype for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES
