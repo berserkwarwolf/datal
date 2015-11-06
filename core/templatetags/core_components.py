@@ -104,12 +104,6 @@ def datatable(revisions=None, categories=None, table_prefix='', tab_prefix='', a
         row_data_template = base_route + row_data_file
         table_body_template = base_route + table_body_file
 
-    elif tab_prefix == 'reports':
-        base_route = 'reports_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_data_template = base_route + row_data_file
-
     elif tab_prefix == 'home':
         base_route = 'home_manager/' + table_prefix + '/'
         header_template = base_route + header_file
