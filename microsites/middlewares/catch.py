@@ -13,7 +13,6 @@ import sys, traceback
 import sys, traceback
 from django.conf import settings
 
-
 ERROR_KEY = 'error'
 DESCRIPTION_KEY = 'message'
 EXTRAS_KEY = 'extras'
@@ -57,7 +56,6 @@ class ExceptionManager(object):
     def process_exception(self, request, exception):
         mimetype = self.get_mime_type(request)
         extension = 'json' if self.is_json(mimetype) else 'html'
-        preferences = request.preferences
 
         if not isinstance(exception, DATALException):
             if extension == 'json':
@@ -69,11 +67,25 @@ class ExceptionManager(object):
 
         template = 'microsities_errors/%s.%s' % (exception.template, extension)
         tpl = get_template(template)
+
+        if hasattr(request, 'preferences'):
+            preferences = request.preferences
+        else:
+            preferences = {
+                'account_header_uri':False,
+                'account_header_height':False,
+                'account_footer_uri':False,
+                'account_footer_height':False,
+                'branding_footer':'',
+                'branding_header':'',
+            }
+
         context = Context({
             'preferences':preferences,
             "exception":exception,
             "auth_manager": request.auth_manager
         })
+
         response = tpl.render(context)
         return ExceptionManagerCore(response=response, output=mimetype,exception=exception, application="microsities",template=template).process()
 

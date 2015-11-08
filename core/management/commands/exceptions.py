@@ -13,8 +13,6 @@ import re
 from core.shortcuts import render_to_response
 from workspace.manageDatasets.forms import *
 from django.template import Context,Template
-from django.template.loader import add_to_builtins
-add_to_builtins('microsites.templatetags.local_tags')
 
 class Colors:
     HEADER = '\033[95m'
@@ -23,8 +21,6 @@ class Colors:
     WARNING = '\033[93m'
     FAIL = '\033[91m'
     END = '\033[0m'
-    BOLD = '\033[1m'
-    UNDERLINE = '\033[4m'
 
 class Object(object):
     def __init__(self):
@@ -68,8 +64,6 @@ class Command(BaseCommand):
 
         if space == 'microsites':
             middleware = MicrositesExceptionManagerMiddleWare()
-            request.preferences = lambda: None
-            setattr(request.preferences, 'TestFieldCreated', 'TestValueCreated')
 
         ObjHttpResponse = middleware.process_exception(request,e)
         self.ProcessException(ObjHttpResponse,e,request)
@@ -78,7 +72,6 @@ class Command(BaseCommand):
         html = ObjHttpResponse._container[0]
         title = unicode(e.title)
         description = unicode(e.description)
-
         if not self.SearchText(html,description):
             print Colors.FAIL + "Description not found in html" + Colors.END
         else:
@@ -93,7 +86,6 @@ class Command(BaseCommand):
         print "Template:", request.META['PATH_INFO']+e.template
         print "Type of response:",request.META['HTTP_ACCEPT']
         print "Type Exception:", e.tipo
-        print "Message:", e.message
 
 
 
@@ -103,6 +95,11 @@ class Command(BaseCommand):
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'workspace', 'templates'))
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'microsites', 'templates'))
         settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS)
+
+        settings.INSTALLED_APPS = list(settings.INSTALLED_APPS)
+        settings.INSTALLED_APPS.append('microsites')
+        settings.INSTALLED_APPS = tuple(settings.INSTALLED_APPS)
+
 
         print Colors.HEADER + "\_/ Testing expection \_/" + Colors.END
 
@@ -323,17 +320,13 @@ class Command(BaseCommand):
             Test microsites exceptions
             '''
 
-            '''
-            TODO
-            django.template.base.TemplateSyntaxError: 'local_tags' is not a valid tag library:
-            Template library local_tags not found
-
-            self.PrintTitulo("VisualizationRevisionDoesNotExist")
+            self.PrintTitulo("RequiresReviewException")
             space = 'microsites'
             type_response ='text/html'
-            e = VisualizationRevisionDoesNotExist()
+            e = RequiresReviewException()
             self.GenerateException(space,type_response,e)
-            '''
+
+
 
             print "\n"
             print Colors.BLUE + " \~ END TEST \~" + Colors.END
