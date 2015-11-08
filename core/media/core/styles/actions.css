@@ -1,20 +1,20 @@
 /*GO TO SOURCE*/
 .gotosource{font-size:11px;margin-top:7px;position:relative;width:70%;overflow:hidden;}
 .gotosource .gotosourceInner{width:100000px;}
-.gotosource .gotosourceInner span{background: url(../images/common/ic_actions.png) no-repeat scroll 6px -2100px transparent;color:#8A8A8A;font-weight:bold;padding-left:26px;text-transform:uppercase;}
+.gotosource .gotosourceInner span{background: url(/static/core/images/common/ic_actions.png) no-repeat scroll 6px -2100px transparent;color:#8A8A8A;font-weight:bold;padding-left:26px;text-transform:uppercase;}
 .gotosource .gotosourceInner .comma{font-style:normal;color:#8A8A8A;}
 .gotosource .gotosourceInner .comma:last-child{display:none;}
 
 /*EDIT BUTTON*/
-.editButton{background:url(../images/common/ic_actions.png) no-repeat right -1825px;display:inline-block;padding:0 24px 0 0;height:20px;position:relative;top:-2px;font-size:11px;font-weight:normal;float:left;}
+.editButton{background:url(/static/core/images/common/ic_actions.png) no-repeat right -1825px;display:inline-block;padding:0 24px 0 0;height:20px;position:relative;top:-2px;font-size:11px;font-weight:normal;float:left;}
 .editButton .sep{color:#D1CCCC;padding:0 6px;}
 .editButton:hover{background-position:right -1850px;text-decoration:none;}
 .editButton:hover span{text-decoration:underline;}
 .editButton:hover .sep{text-decoration:none;}
 
 /*TOOLBAR - Actions menu*/
-.toolbar .Icon{background:url(../images/common/ic_actions.png) no-repeat 0 0;width:16px;height:20px;display:block;}
-.toolbar .Sep{width:10px;height:20px;background:url(../images/common/fd_Sep.gif) no-repeat center center;display:block;}
+.toolbar .Icon{background:url(/static/core/images/common/ic_actions.png) no-repeat 0 0;width:16px;height:20px;display:block;}
+.toolbar .Sep{width:10px;height:20px;background:url(/static/core/images/common/fd_Sep.gif) no-repeat center center;display:block;}
 .toolbar .ic_Left{background-position:0 0;}
 .toolbar .ic_Left:hover{background-position:0 -20px;}
 .toolbar .ic_Right{background-position:0 -40px;}
@@ -40,7 +40,7 @@
 .toolbar .ic_Widgets{background-position:0 -775px;}
 .toolbar .ic_Share{background-position:0 -240px;}
 .toolbar .ic_AddEmbed{background-position:0 -359px;}
-.toolbar .ao-wink .Icon{background:url(../images/common/ic_actions.png) no-repeat;width:auto;padding-left:20px;display:inline-block;height:15px;margin-bottom:5px;}
+.toolbar .ao-wink .Icon{background:url(/static/core/images/common/ic_actions.png) no-repeat;width:auto;padding-left:20px;display:inline-block;height:15px;margin-bottom:5px;}
 .toolbar .ao-wink .like{background-position:3px -735px;}
 .toolbar .ao-wink .like:hover,
 .toolbar .ao-wink .like.hover{background-position:3px -750px;}
@@ -103,7 +103,7 @@
 .toolbar .ao-disabled-item .ic_Totals{background-position:0 -1750px;}
 .toolbar .ic_Aliases{background-position:0 -1775px;width:auto;height:auto;padding-left:22px;}
 .toolbar .ao-disabled-item .ic_Aliases{background-position:0 -1800px;}
-.toolbar .ic_RemoveItem{width:8px;height:16px;overflow:hidden;background:url(../images/dashboardManager/ic_Tabs.gif) no-repeat 0 -3px;}
+.toolbar .ic_RemoveItem{width:8px;height:16px;overflow:hidden;background:url(/static/core/images/dashboardManager/ic_Tabs.gif) no-repeat 0 -3px;}
 .toolbar .ic_RemoveItem:hover{background-position:0 -28px;}
 .toolbar .ic_Skype{background-position:0 -2025px;}
 .toolbar .ic_Private{background-position:0 -2075px;}
@@ -117,7 +117,7 @@
 .toolbar .ic_Download{background-position:0 -2250px;}
 
 /*MENU, SHARE and ACTION BUTTONS - ACTIONS TOOLBAR*/
-.toolbar .ic_Menu{background:url(../images/common/bt_actionsMenu.png) -5px -5px no-repeat;width:62px;padding-left:8px;}
+.toolbar .ic_Menu{background:url(/static/core/images/common/bt_actionsMenu.png) -5px -5px no-repeat;width:62px;padding-left:8px;}
 .toolbar .ic_Menu,
 .toolbar .actionButton{font-size:11px;text-shadow:0 1px 0 #fff;line-height:22px;}
 .toolbar .actionButton{padding:0 8px;}
@@ -125,7 +125,7 @@
 .toolbar .actionButton:hover{background-position:-5px -30px;text-decoration:none;}
 
 	/*MENU ARROW*/
-	.toolbar .ic_Menu span{background:url(../images/common/ic_openCloseDiv.png) no-repeat right 0;padding-right:12px;margin-right:5px;}
+	.toolbar .ic_Menu span{background:url(/static/core/images/common/ic_openCloseDiv.png) no-repeat right 0;padding-right:12px;margin-right:5px;}
 	.toolbar .ic_Menu:hover span{background-position:right -15px;}
 	.toolbar .ic_Menu.open span{background-position:right -30px;}
 	.toolbar .ic_Menu.open:hover span{background-position:right -45px;}
@@ -136,7 +136,7 @@
 	.dataStreamActions .toolbar .actionButton span{width:auto;}
 	.dataStreamActions .toolbar .ic_Menu{background:none;}
 	.dataStreamActions .toolbar .ic_Menu:hover,
-	.dataStreamActions .toolbar .actionButton:hover{background:url(../images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;}
+	.dataStreamActions .toolbar .actionButton:hover{background:url(/static/core/images/dashboardManager/dg_dataStreamActions.gif) repeat-x 0 bottom;}
 	
 	/*ACTIONS TOOLBAR*/
 	.actionsToolbar .ic_Collapse,
@@ -154,7 +154,7 @@
 	
 /*DROP DOWN MENU*/
 .dropDownMenu .ic_Menu,
-.dropDownMenu .dashboard-dataservice-tooltip .J a{background:url(../images/common/ic_dropDownMenu.png) no-repeat 0 0;width:30px;height:25px;padding:0;display:inline-block;}
+.dropDownMenu .dashboard-dataservice-tooltip .J a{background:url(/static/core/images/common/ic_dropDownMenu.png) no-repeat 0 0;width:30px;height:25px;padding:0;display:inline-block;}
 .dropDownMenu .ic_Menu:hover{background-position:0 -25px;}
 .dropDownMenu .dashboard-dataservice-tooltip{top:13px;}
 .dropDownMenu .dashboard-dataservice-tooltip .J{background:none;padding:0;width:30px;height:25px;top:-20px;right:-7px;}

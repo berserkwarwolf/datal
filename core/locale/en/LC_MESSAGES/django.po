@@ -448,9 +448,6 @@ msgstr "Data Views"
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizations"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Dashboards"
-
 msgid "APP-EMBED-TEXT"
 msgstr "Embed"
 
@@ -813,6 +810,9 @@ msgstr "Create visualization."
 msgid "EXCEPTION-ACTION-CONTACT-US"
 msgstr "If the problem persists please contact us."
 
+msgid "EXCEPTION-ACTION-VALID-FILE-TYPE"
+msgstr "Please choose one ot this choices %(choices)s"
+
 msgid "EXCEPTION-TITLE-GENERIC"
 msgstr "Error"
 
@@ -861,6 +861,12 @@ msgstr "The URL requested is invalid or no longer available."
 msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND"
 msgstr "It might have been removed, or its URL has been changed because of a new revision."
 
+msgid "EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND"
+msgstr "Wrong table id"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND"
+msgstr "The dataset has no table with id equal to '%(table_id)s"
+
 msgid "EXCEPTION-TITLE-DATASTREAM-NOT-FOUND"
 msgstr "The URL requested is invalid or no longer available."
 
@@ -878,6 +884,12 @@ msgstr "Change of status denied."
 
 msgid "EXCEPTION-DESCRIPTION-ILLEGAL-STATE"
 msgstr "The change of status you are requesting is not allowed.."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "Vizualization can't be published"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "A previous step is needed."
 
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "Resource can't be published"
@@ -983,3 +995,9 @@ msgstr "Copy &amp; Paste the code below anywhere you want to show this Visualiza
 
 msgid "ERROR-DUPLICATED-CATEGORY"
 msgstr "Duplicated category"
+
+msgid "EXCEPTION-TITLE-UNKNOWN"
+msgstr "Unknown Error"
+
+msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
+msgstr "Unknown Error of name %(exception_name)s and trace '%(exception_trace)s'"

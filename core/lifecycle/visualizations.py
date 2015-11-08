@@ -2,11 +2,13 @@
 import logging
 from django.db.models import F, Max
 from django.conf import settings
+from django.db import transaction
+
 
 from core.daos.visualizations import VisualizationSearchDAOFactory, VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, VisualizationI18n
 from core.choices import StatusChoices, ActionStreams
-from core.exceptions import VisualizationNotFoundException, IllegalStateException, ParentNotPuslishedException
+from core.exceptions import VisualizationNotFoundException, IllegalStateException, ParentNotPublishedException, VisualizationParentNotPublishedException
 from .resource import AbstractLifeCycleManager
 
 logger = logging.getLogger(__name__)
@@ -232,7 +234,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self.visualization_revision.save()
         self._log_activity(ActionStreams.ACCEPT)
 
-    def _unpublish_all(self):
+    def _unpublish_all(self, to_status=StatusChoices.DRAFT):
         """
         Despublica todas las revisiones de la visualizacion y la de todos sus dashboards hijos en cascada
         No se implementa ya que visualizaciones no tiene modelos hijo
@@ -240,7 +242,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         VisualizationRevision.objects.filter(
             visualization__id=self.visualization.id,
             status=StatusChoices.PUBLISHED)\
-        .update(status=StatusChoices.DRAFT)
+        .update(status=to_status)
 
     def remove(self, killemall=False, allowed_states=REMOVE_ALLOWED_STATES):
         """ Elimina una revision o todas las revisiones de un visualizacion """
@@ -281,7 +283,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._delete_cache(cache_key='my_total_visualizations_%d' % self.visualization.user.id)
         self._delete_cache(cache_key='account_total_visualization_%d' % self.visualization.user.account.id)
 
-    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES):
+    def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES, to_status=StatusChoices.DRAFT):
         """ Despublica la revision de un dataset """
         if self.visualization_revision.status not in allowed_states:
             raise IllegalStateException(
@@ -291,7 +293,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )
 
         if killemall:
-            self._unpublish_all()
+            self._unpublish_all(to_status=to_status)
         else:
             revcount = VisualizationRevision.objects.filter(
                 visualization=self.visualization.id,
@@ -301,7 +303,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             if revcount == 1:
                 self._unpublish_all()
             else:
-                self.visualization_revision.status = StatusChoices.DRAFT
+                self.visualization_revision.status = tu_status
                 self.visualization_revision.save()
 
         search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
@@ -327,7 +329,11 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )
         if parent_status != StatusChoices.PUBLISHED:
             if self.visualization_revision.visualization.datastream.last_revision.status != StatusChoices.PUBLISHED:
-                raise ParentNotPuslishedException()
+                # en caso de que el padre no este publicado, lo dejamos como aprobado
+                self.visualization_revision.status = StatusChoices.APPROVED
+                self.visualization_revision.save()
+                transaction.commit()
+                raise VisualizationParentNotPublishedException()
 
         self._publish_childs()
         self.visualization_revision.status = StatusChoices.PUBLISHED

@@ -448,9 +448,6 @@ msgstr "Data Views"
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizations"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Dashboards"
-
 msgid "APP-EMBED-TEXT"
 msgstr "Embed"
 

@@ -32,6 +32,7 @@ class VisualizationForm(forms.Form):
     longitudSelection = forms.CharField(required=False, max_length=200)
     traceSelection = forms.CharField(required=False, max_length=200)
     mapType = forms.ChoiceField(required=False, choices=MAP_TYPE_FIELD)
+    geoType = forms.CharField(required=False, max_length=20)
     zoom = forms.IntegerField(required=False)
     bounds = forms.CharField(required=False, max_length=200)
 

@@ -11,7 +11,8 @@ var CollectFileModel = StepModel.extend({
 		frequency: "",
 		frequency_other: null,
 		collect_type: 0,
-		impl_type: ""
+		impl_type: "",
+		valid_extensions: []
 	},
 
 	validation: {
@@ -50,8 +51,8 @@ var CollectFileModel = StepModel.extend({
 				if(value === 'undefined' || value === null){
 					return gettext('VALIDATE-REQUIREDFIELD-TEXT');
 				// Check if File type is one of the following
-				}else if(!value.toLowerCase().match(/(\.|\/)(doc|docx|docm|dotx|dotm|xls|xlsx|xlsm|xltx|xltm|xlsb|xlam|xll|odt|ods|csv|txt|pdf|html|htm|xml|kml|kmz|tsv|zip|rar|jpg|jpeg|png|gif)$/i)) {
-				  return gettext('APP-VALIDATE-FILE-TYPE-TEXT');
+				}else if( _.indexOf(this.get('valid_extensions'), _.last(value.toLowerCase().split('.'))) < 0) {
+				  return gettext('APP-VALIDATE-FILE-TYPE-TEXT') + " " + this.get('valid_extensions').join(", ").toUpperCase();
 				}
 			}
 		}

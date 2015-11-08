@@ -1,13 +1,19 @@
+import os
+
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
+
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
+from djangoplugins.utils import include_plugins
+
+from core.plugins import DatalPluginPoint
 from microsites.rest.datastreams import RestDataStreamViewSet
 from microsites.rest.maps import RestMapViewSet
 from microsites.rest.charts import RestChartViewSet
 from microsites.rest.routers import MicrositeEngineRouter
-from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
-import os
+
 
 router = MicrositeEngineRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
@@ -27,6 +33,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    (r'^', include_plugins(DatalPluginPoint, urls='microsites_urls')),
     url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
@@ -35,10 +42,6 @@ urlpatterns = patterns('',
 
     (r'^visualizations/', include('microsites.viewChart.urls')),
     url(r'^visualizations/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.viewChart.views.action_embed', name='chart_manager.action_embed'),
-
-    #(r'^visualizationsb/', include('microsites.chart_manager.urls')),
-    #url(r'^visualizationsb/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.chart_manager.views.action_embed', name='chart_manager.action_embedb'),
-
 
     # dejamos datastreams para no romper,
     # dataviews como deberia quedar definitivamente
@@ -56,8 +59,6 @@ urlpatterns = patterns('',
     url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
 
 #    url(r'^portal/DataServicesManager/actionEmbed/$', 'microsites.viewDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
-    url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
-
     url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),
     (r'^home/', include('microsites.loadHome.urls')),
     (r'^home', include('microsites.loadHome.urls')),

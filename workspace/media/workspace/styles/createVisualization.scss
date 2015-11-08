@@ -164,13 +164,13 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .sidebar{overflow-y:auto;margin-right:20px;
 
     .row{
-      padding-bottom:25px;
+      padding-bottom:30px;margin-bottom:0;
 
       /* Sidebar */
-      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-m;font-weight:lighter;display:block;height:inherit;line-height:23px;}
+      label{text-transform:uppercase;color:$font-color-base;font-family:$font-secondary-family;font-size:$font-size-base;font-weight:lighter;display:block;height:inherit;line-height:19px;}
 
       /* Tip */
-      p{color:$font-color-light;margin-left:15px;}
+      p{color:$font-color-light;margin-left:15px;margin-right:15px;}
 
       input{
         height:28px;border-radius:0;border-color:$font-color-base;width:75%;padding-bottom:0;padding-top:0;
@@ -184,7 +184,8 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   /* Identificador por color */
   .hot-sel-1,
   .hot-sel-2,
-  .hot-sel-3{
+  .hot-sel-3,
+  .hot-sel-4{
     margin-top:10px;
 
     span.color{
@@ -200,12 +201,15 @@ button{background-color:$accent-color;border:none;outline:none;border-radius:non
   .hot-sel-3 span.color, 
   td.hot-sel-3{background-color:#d6ebff;}
 
+  .hot-sel-4 span.color,
+  td.hot-sel-4{background-color:#9AB2B9;}
+
   input.active{font-weight:bold;background-color:$modal-table-selected-color;}
   .handsontable td.area{background:$modal-table-selected-color;}
 
   /* Cómo seleccionar */
   .helpTips{
-    margin-top:30px;float:left;width:100%;
+    float:left;width:100%;
 
     div:first-child{margin-top:15px;}
     div{

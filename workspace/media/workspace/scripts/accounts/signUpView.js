@@ -62,7 +62,25 @@ var SignUpView = Backbone.View.extend({
     this.model.set('language', language);
 
     if(this.model.isValid(true)){
-      //console.log('model valid');
+      
+      // Validate admin_url, name, and email with some rules using a custom method with an async ajax call
+      // (needs to be this way because backbone.validation plugin does not support custom methods with built-in ones)
+      if( this.model.ifAdminUrlExists() != false ){
+        var error = this.model.ifAdminUrlExists();
+        this.setIndividualError( this.$el.find('[name=admin_url]'), 'admin_url', error );
+        return false;
+      }
+      if( this.model.ifNickExists() != false ){
+        var error = this.model.ifNickExists();
+        this.setIndividualError( this.$el.find('[name=nick]'), 'nick', error );
+        return false;
+      }
+      if( this.model.ifEmailExists() != false ){
+        var error = this.model.ifEmailExists();
+        this.setIndividualError( this.$el.find('[name=email]'), 'email', error );
+        return false;
+      }
+
       this.formContainer[0].submit();
     }
   }, 

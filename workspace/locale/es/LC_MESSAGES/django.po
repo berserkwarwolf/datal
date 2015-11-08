@@ -673,9 +673,6 @@ msgstr "Publicados"
 msgid "APP-VIEWS-TEXT"
 msgstr "Vistas"
 
-# msgid "APP-DASHBOARDS-TEXT"
-# msgstr "Colecciones"
-
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
@@ -1217,7 +1214,7 @@ msgid "APP-CALLUSONSKYPE-TEXT2"
 msgstr "Envíanos un correo"
 
 msgid "DSCRE-UPLOAD-TIP"
-msgstr "Estos son los formatos de archivo permitidos: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Los archivos deben estar encodeados con UTF-8"
+msgstr "Estos son los formatos de archivo permitidos que deben estar encodeados con UTF-8:"
 
 msgid "HOME-SEARCH-TIP"
 msgstr "Para que una URL sea una fuente de datos, debe ser una página web que contenga etiquetas &lt;table&gt;.<br/>Los archivos CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML también pueden ser fuentes de datos."
@@ -2256,9 +2253,6 @@ msgstr "Vistas"
 msgid "APP-VISUALIZATIONS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-REPORTS-TEXT"
 msgstr "Reportes"
 
@@ -2788,7 +2782,7 @@ msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Tipo de archivo no soportado"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
-msgstr "Estos son los formatos de archivo permitidos:DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+msgstr "Los tipos de archivo %(file_type)s no son permitidos."
 
 msgid "APP-BACK-TEXT"
 msgstr "Volver"
@@ -3198,6 +3192,12 @@ msgstr "Invertir"
 msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "Este campo es requerido"
 
+msgid "VALIDATE-MAXLENGTH-TEXT-1"
+msgstr "No se deben superar los "
+
+msgid "VALIDATE-MAXLENGTH-TEXT-2"
+msgstr " caracteres."
+
 msgid "APP-HOW-TO-SELECT-TITLE"
 msgstr "¿Cómo seleccionar?"
 
@@ -3260,3 +3260,12 @@ msgstr "la visualización"
 
 msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
 msgstr "la colección"
+
+msgid "APP-CHOOSE-MAP-TEXT"
+msgstr "Mapas"
+
+msgid "APP-INVALID-RANGE"
+msgstr "Rango inválido"
+
+msgid "APP-INVALID-REQUIRED"
+msgstr "Requerido"

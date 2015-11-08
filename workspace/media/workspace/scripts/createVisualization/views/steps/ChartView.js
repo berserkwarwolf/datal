@@ -27,7 +27,7 @@ var ChartView = StepViewSPA.extend({
 
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
-        this.modalView = new ChartSelectDataModalView({
+        this.modalView = new ModalView({
           el: '#ChartSelectDataModal',
           model: this.model,
           dataStreamModel: options.dataStreamModel
@@ -73,7 +73,11 @@ var ChartView = StepViewSPA.extend({
 			});
 
 			//nullValue
-			this.$el.find('input#nullValuePreset').val(this.model.get('nullValuePreset'));
+			if (this.model.get('nullValueAction') === 'given') {
+				this.$('#nullValuePreset').show().val(this.model.get('nullValuePreset'));
+			} else {
+				this.$('#nullValuePreset').hide();
+			}
 
 			$("#ajax_loading_overlay").show();
 
@@ -299,6 +303,8 @@ var ChartView = StepViewSPA.extend({
 		// chart type from first step
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
+
+		this.setupChart();
 
 		if(this.model.data.get('rows').length){
 			this.onChartChanged();

@@ -447,9 +447,6 @@ msgstr "Vistas"
 msgid "APP-CHARTS-TEXT"
 msgstr "Visualizaciones"
 
-msgid "APP-DASHBOARDS-TEXT"
-msgstr "Colecciones"
-
 msgid "APP-EMBED-TEXT"
 msgstr "Incrustar"
 
@@ -805,6 +802,9 @@ msgstr "Crear una visualización"
 msgid "EXCEPTION-ACTION-CONTACT-US"
 msgstr "Si el problema persiste contactarnos."
 
+msgid "EXCEPTION-ACTION-VALID-FILE-TYPE"
+msgstr "Elija una de estas opciones %(choices)s"
+
 msgid "EXCEPTION-TITLE-GENERIC"
 msgstr "Error"
 
@@ -853,6 +853,12 @@ msgstr "La url que éstas solicitando no es válida o ya no está disponible"
 msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND"
 msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
 
+msgid "EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND"
+msgstr "Table Id Equivocado"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND"
+msgstr "El conjunto de daatos no tiene una tabla con id igual a '%(table_id)s"
+
 msgid "EXCEPTION-TITLE-DATASTREAM-NOT-FOUND"
 msgstr "La url que éstas solicitando no es válida o ya no está disponible"
 
@@ -877,8 +883,14 @@ msgstr "Archivo no valido"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Ingrese un tipo de archivo valido."
 
+msgid "EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "No se puede publicar la visualización"
+
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar el recurso"
+
+msgid "EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "Es necesario publicar la vista asociada"
 
 msgid "EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED"
 msgstr "Es necesario publicar el conjunto de datos asociado"
@@ -981,3 +993,9 @@ msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualizaci�
 
 msgid "ERROR-DUPLICATED-CATEGORY"
 msgstr "Categoría duplicada"
+
+msgid "EXCEPTION-TITLE-UNKNOWN"
+msgstr "Error desconocido"
+
+msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
+msgstr "Error desconocido con nombre %(exception_name)s y trace '%(exception_trace)s'"

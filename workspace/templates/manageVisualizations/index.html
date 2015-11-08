@@ -121,8 +121,8 @@
     var manageVisualizationsView =  new ManageVisualizationsView({
       model: manageVisualizationsModel,
       visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
-      sourceUrl: '/source_manager/action_search',
-      tagUrl: '/tag_manager/action_search',
+      sourceUrl: '/rest/sources.json',
+      tagUrl: '/rest/tags.json',
       filters: {{filters|jsonify}}
     });
   });

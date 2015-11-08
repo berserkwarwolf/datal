@@ -19,7 +19,7 @@ class DependencyInjector(object):
 
         try:
             # check for develop domains
-            if settings.DOMAINS['microsites'] != domain:
+            if settings.DOMAINS['microsites'].split(":")[0] != domain.split(":")[0]:
                 account = Account.objects.get_by_domain(domain)
             else:
                 # use default account if exists

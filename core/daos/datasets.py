@@ -11,7 +11,6 @@ from core.utils import slugify
 from core import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
-from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
@@ -21,6 +20,13 @@ from core.models import DataStreamRevision, VisualizationRevision
 import logging
 
 logger = logging.getLogger(__name__)
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
+
+
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
     """ class for manage access to datasets' database tables """
@@ -130,7 +136,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language, category__categoryi18n__language=language
                                                )
         if exclude:
-            query.exclude(**exclude)
+            query = query.exclude(**exclude)
 
         if filter_name:
             query = query.filter(dataseti18n__title__icontains=filter_name)
@@ -251,9 +257,12 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         #    # Build impl_details if necessary
         fields['impl_details'] = builder.build()
 
-        fields['title'] = fields['title'].strip().replace('\n', ' ')
-        fields['description'] = fields['description'].strip().replace('\n', ' ')
-        fields['notes'] = fields['notes'].strip()
+        if 'title' in fields:
+            fields['title'] = fields['title'].strip().replace('\n', ' ')
+        if 'description' in fields:
+            fields['description'] = fields['description'].strip().replace('\n', ' ')
+        if 'notes' in fields:
+            fields['notes'] = fields['notes'].strip()
 
         changed_fields.append('impl_details')
 
@@ -263,8 +272,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             changed_fields, **fields
         )
 
-        dataset_revision.add_tags(fields['tags'])
-        dataset_revision.add_sources(fields['sources'])
+        if 'tags' in fields:
+            dataset_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            dataset_revision.add_sources(fields['sources'])
 
         return dataset_revision
 

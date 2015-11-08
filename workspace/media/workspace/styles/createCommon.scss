@@ -14,7 +14,7 @@
 .edit .navigation{position:absolute;top:-90px;right:0;}
 .create .navigation a{float:left;margin-left:10px;}
 .create .navigation a.alpha{font-family:Arial,Helvetica,sans-serif;}
-.create .navigation a i{background-image:url(../images/common/ic_navigationArrows.png);width:4px;height:25px;}
+.create .navigation a i{background-image:url(/static/workspace/images/common/ic_navigationArrows.png);width:4px;height:25px;}
 .create .navigation a i.left-arrow{background-position: 0 center;}
 .create .navigation a i.right-arrow{background-position: -4px center;margin: 0 0 0 8px;}
 .create .required{color:#d21717;padding-left:5px;font-size:16px;vertical-align:top;}

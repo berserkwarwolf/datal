@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from core.choices import (SourceImplementationChoices, 
+    SOURCE_IMPLEMENTATION_EXTENSION_CHOICES,
+    SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES)
 
 class JSONHttpResponse(HttpResponse):
     """ A custom HttpResponse that handles the headers for our JSON responses """
@@ -74,3 +77,40 @@ def add_domains_to_permalinks(resources):
             account_domain = r[account_id]['account.domain']
             resource['permalink'] = 'http://' + account_domain + resource['permalink']
             resource['account_name'] = r[account_id]['account.name']
+
+def get_file_type_from_extension(extension):
+    for source_id, extensions in SOURCE_IMPLEMENTATION_EXTENSION_CHOICES:
+        if extension in extensions:
+            return source_id
+
+def get_impl_type(mimetype, end_point):
+    mimetype = mimetype.split(';')[0]
+    
+#    impl_types = {
+#      "application/vnd.ms-xpsdocument": SourceImplementationChoices.DOC
+#    , "application/vnd.ms-excel": SourceImplementationChoices.XLS
+#    , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": SourceImplementationChoices.XLS
+#    , "application/vnd.oasis.opendocument.text": SourceImplementationChoices.ODT
+#    , "application/vnd.oasis.opendocument.text-web": SourceImplementationChoices.ODT
+#    , "application/vnd.oasis.opendocument.spreadsheet": SourceImplementationChoices.ODS
+#    , "application/msword": SourceImplementationChoices.DOC
+#    , "text/html": SourceImplementationChoices.HTML
+#    , "text/csv": SourceImplementationChoices.TXT
+#    , "text/x-comma-separated-values": SourceImplementationChoices.HTML
+#    , "text/plain": SourceImplementationChoices.HTML
+#    , "application/pdf": SourceImplementationChoices.PDF
+#    , "application/vnd.google-earth.kml+xml": SourceImplementationChoices.KML
+#    , "image/jpeg": SourceImplementationChoices.IMAGE
+#    , "image/png": SourceImplementationChoices.IMAGE
+#    , "image/gif": SourceImplementationChoices.IMAGE
+#    , "application/zip": SourceImplementationChoices.ZIP
+#    , "application/x-gzip": SourceImplementationChoices.ZIP
+#    , "application/x-tar": SourceImplementationChoices.ZIP
+#    }
+
+    for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES:
+        if mimetype in mimetypes:
+            return source_id
+
+    extension = end_point.split('/')[-1].split('.')[-1]
+    return get_file_type_from_extension(extension)
