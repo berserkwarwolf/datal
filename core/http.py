@@ -83,7 +83,14 @@ def get_file_type_from_extension(extension):
         if extension in extensions:
             return source_id
 
-def get_impl_type(mimetype, end_point):
+def get_impl_type(mimetype, end_point, old_impl_type=None):
+    
+    if old_impl_type:
+        try:
+            return int(old_impl_type)
+        except ValueError:
+            pass
+
     mimetype = mimetype.split(';')[0]
     
 #    impl_types = {
