@@ -23,7 +23,7 @@
     "model": "core.application",
     "fields": {
         "category": "",
-        "account": 2,
+        "account": 5754,
         "description": "",
         "auth_key": "f9db0aece11e841d9a800f0013dc9a651cc2f220",
         "locale": "",
