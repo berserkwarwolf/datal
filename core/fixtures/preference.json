@@ -274,7 +274,7 @@
     "model": "core.preference", 
     "fields": {
         "account": 5754,
-        "value": "Open Data",
+        "value": "Open Data City",
         "key": "account.name"
     }
 },
@@ -301,7 +301,7 @@
     "model": "core.preference",
     "fields": {
         "account": 5754,
-        "value": "{\"config\":{\"mainTitle\":\"\u00a1Bienvenidos a DATAL!\",\"mainSection\":\"<p>DATAL es datos abiertos para Am\u00e9rica Latina. Es una iniciativa co-gobernada por el Gobierno de Chile y Junar que busca liberar, en c\u00f3digo abierto, una plataforma que permita abrir datos p\u00fablicos con los m\u00e1s altos est\u00e1ndares internacionales. \u00a1Queremos bajar la barrera de acceso para iniciativas de datos abiertos en nuestra regi\u00f3n, y en nuestro idioma!. <\\/p><p>Para esto, hemos desarrollado los primeros m\u00f3dulos de publicaci\u00f3n de conjuntos de datos y algunos recursos de datos abiertos, los cuales pueden ser facilmente gestionados y puestos a disposici\u00f3n de la ciudadan\u00eda para su descarga en m\u00faltiples formatos. Los datos abiertos quedan tambi\u00e9n disponibles para consumirse a trav\u00e9s de una <a href='\\/developers' >API REST<\\/a>, lo que permite su reutilizaci\u00f3n por otros desarrolladores y asi crear aplicaciones web o m\u00f3viles que entreguen servicios digitales a la ciudadan\u00eda. <\\/p><h2>Pero \u00bfc\u00f3mo se realiza la apertura de datos?<\\/h2><\\/p>DATAL contiene un \u00e1rea de trabajo que permite manejar de inicio a fin el proceso de producci\u00f3n, creaci\u00f3n y publicaci\u00f3n de conjuntos de datos y de recursos de datos abiertos. En esta \u00e1rea usted puede elegir el origen de los datos (desde su computador, una fuente en l\u00ednea o un servicio web), asignar metadatos a cada recurso y definir su estatus de publicaci\u00f3n para que sea liberado solo cuando usted y su organizaci\u00f3n lo deseen. De esta manera, los datos pueden ser curados y revisados para asegurar su calidad antes de ser puestos a disposici\u00f3n a trav\u00e9s de su portal de datos abiertos. Si usted no posee tiempo o recursos para desarrollar un sitio, DATAL tambi\u00e9n le ofrece la posibilidad de configurar una p\u00e1gina de inicio con un cat\u00e1logo y una identidad gr\u00e1fica personalizada. Esta p\u00e1gina que usted est\u00e1 viendo, por ejemplo, fue creada completamente desde la interfaz de configuraci\u00f3n de DATAL.<\\/p><p>Ingrese al <a href='http:\\/\\/workspace.dev:8080' >\u00e1rea de trabajo<\\/a> para administrar los recursos que desea abrir. Para esta cuenta de demostraci\u00f3n, las credenciales para un usuario administrador por defecto son 'administrador' y su contrase\u00f1a 'administrador'.<\\/p><p>Creemos firmemente que datos abiertos debiera ser un proceso donde la tecnolog\u00eda no sea una dificultad, para que usted pueda ocupar sus energ\u00edas en desarrollar su proyecto de datos abiertos. \u00a1Esperamos que pueda disfrutar de la facilidad de abrir datos con DATAL!<\\/p>\",\"coverUrl\":\"http:\\/\\/datastore.dev:8080\\/resources\\/datal_cdn\\/\\/1\\/datal-portada.jpg\",\"sliderSection\":[],\"linkSection\":[],\"resourcesTable\":true},\"theme\":\"4\",\"type\":\"save\"}",
+        "value": "{\"config\":{\"mainTitle\":\"Welcome to DATAL!\",\"mainSection\":\"DATAL is Open Data for Latin America. It is an initiative co-governed by the Government of Chile and Junar that seeks to free an open source platform for Open Public Data to the highest international standards. We want to lower the barrier to entry for initiatives of Open Data in our region!\",\"coverUrl\":\"http:\\/\\/datastore.dev:8080\\/resources\\/datal_cdn\\/\\/1\\/datal-portada.jpg\",\"sliderSection\":[{\"id\":\"id\",\"type\":\"source\"},{\"id\":\"id\",\"type\":\"source\"},{\"id\":\"id\",\"type\":\"source\"}],\"linkSection\":[{\"id\":\"id\",\"type\":\"source\"},{\"id\":\"id\",\"type\":\"source\"},{\"id\":\"id\",\"type\":\"source\"}],\"resourcesTable\":true},\"theme\":\"4\",\"type\":\"save\"}",
         "key": "account.home"
     }
 },
@@ -346,7 +346,7 @@
     "model": "core.preference",
     "fields": {
         "account": 5754,
-        "value": "http://microsites.dev:8080/",
+        "value": "http://opencity.site.demo.junar.com",
         "key": "account.link"
     }
 },
