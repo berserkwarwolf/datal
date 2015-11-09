@@ -375,8 +375,8 @@
     "fields": {
         "guid": "LISTI-OF-CHECK-ISSUE", 
         "user": 2, 
-        "last_published_revision": 94161, 
-        "last_revision": 94161
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -395,8 +395,8 @@
     "fields": {
         "guid": "OUTST-CHECK-91513", 
         "user": 2, 
-        "last_published_revision": 94055, 
-        "last_revision": 94055
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -795,8 +795,8 @@
     "fields": {
         "guid": "TRAFF-COUNT", 
         "user": 2, 
-        "last_published_revision": 92189, 
-        "last_revision": 92189
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -905,8 +905,8 @@
     "fields": {
         "guid": "COUNC-OFFIC-EXPEN-41670", 
         "user": 2, 
-        "last_published_revision": 93932, 
-        "last_revision": 93932
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -936,7 +936,7 @@
         "guid": "CAD-CALLS-TESTI", 
         "user": 2, 
         "last_published_revision": null, 
-        "last_revision": 82010
+        "last_revision": null
     }
 },
 {
@@ -1006,7 +1006,7 @@
         "guid": "FORMA-DATA-VIEW-TEST", 
         "user": 2, 
         "last_published_revision": null, 
-        "last_revision": 83769
+        "last_revision": null
     }
 },
 {
@@ -1095,8 +1095,8 @@
     "fields": {
         "guid": "PERMI-DATA-ISSUE-66709", 
         "user": 2, 
-        "last_published_revision": 102650, 
-        "last_revision": 102650
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -1115,8 +1115,8 @@
     "fields": {
         "guid": "PERMI-DATA-APPLI-10185", 
         "user": 2, 
-        "last_published_revision": 93904, 
-        "last_revision": 93904
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -1125,8 +1125,8 @@
     "fields": {
         "guid": "SACRA-FIRE-DEPAR-911-60625", 
         "user": 2, 
-        "last_published_revision": 102649, 
-        "last_revision": 102649
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -1255,8 +1255,8 @@
     "fields": {
         "guid": "YEAR-TO-DATE-CRIME-STATI", 
         "user": 2, 
-        "last_published_revision": 102647, 
-        "last_revision": 102647
+        "last_published_revision": null, 
+        "last_revision": null
     }
 },
 {
@@ -1375,8 +1375,8 @@
     "fields": {
         "guid": "BUSIN-OPERA-TAX-INFOR-51968", 
         "user": 2, 
-        "last_published_revision": 102655, 
-        "last_revision": 102655
+        "last_published_revision": null, 
+        "last_revision": null
     }
 }
 ]
