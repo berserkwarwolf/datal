@@ -28,6 +28,21 @@ var DataTableSelectionModel = Backbone.Model.extend({
         }
     },
 
+    validateMaxCol: function (max) {
+        var range = this.getRange();
+        if (!_.isUndefined(range)) {
+            return (range.from.col < max && range.to.col < max);
+        }
+    },
+
+    validateMaxRow: function (max) {
+        var range = this.getRange();
+        console.info('validating max col', max);
+        if (!_.isUndefined(range)) {
+            return (range.from.col < max && range.to.col < max);
+        }
+    },
+
     getPreviousRange: function () {
         var prevExcelRange = this.previous('excelRange'),
             result = undefined;

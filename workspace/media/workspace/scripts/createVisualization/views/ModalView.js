@@ -90,6 +90,7 @@ var ModalView = Backbone.View.extend({
             collection: this.collection,
             datastream: model.toJSON()
         });
+        this.collection.setMaxCols(15);
         this.dataTableView.render();
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
             this.addSelection(this._cacheFocusedInput);
@@ -102,8 +103,8 @@ var ModalView = Backbone.View.extend({
     addSelection: function (name) {
         var selection = this.dataTableView.getSelection(),
             model = this.collection.find(function (model) {
-            return model.get('name') === name;
-        });
+                return model.get('name') === name;
+            });
         model.set(selection);
         this.validate();
     },
@@ -121,6 +122,9 @@ var ModalView = Backbone.View.extend({
         } else {
             this.validateData();
         }
+
+        var valid = this.collection.validateMaxCols();
+        console.info('max col validation', valid);
     },
 
     validateLatLon: function () {
