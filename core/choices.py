@@ -247,7 +247,6 @@ DATASTREAM_IMPL_VALID_CHOICES = [
     SourceImplementationChoices.HTML,
     SourceImplementationChoices.XML, 
     SourceImplementationChoices.XLS, 
-    SourceImplementationChoices.DOC, 
     SourceImplementationChoices.CSV, 
     SourceImplementationChoices.KML, 
     SourceImplementationChoices.KMZ, 
