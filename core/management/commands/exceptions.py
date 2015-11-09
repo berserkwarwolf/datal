@@ -41,24 +41,24 @@ class Command(BaseCommand):
             help='Raise all exception')
     )
 
-    def SearchText(self,text,expression):
+    def search_text(self,text,expression):
         pattern=re.compile(expression, flags=re.IGNORECASE)
         return re.search(pattern, text)
 
-    def FakeRequest(self, space, type_response):
+    def fake_request(self, space, type_response):
         request = RequestFactory().get('/'+space+'/', HTTP_ACCEPT=type_response)
         request.user = AnonymousUser()
         request.auth_manager = AuthManager(language="en")
         return request
 
-    def PrintTitulo(self,exception):
+    def print_titulo(self,exception):
         print "\n"
         print "======================================================================"
-        print Colors.BLUE + "Testing" + exception + Colors.END
+        print Colors.BLUE + "Testing " + exception + Colors.END
         print "----------------------------------------------------------------------"
 
-    def GenerateException(self,space,type_response,e):
-        request = self.FakeRequest(space,type_response)
+    def generate_exception(self,space,type_response,e):
+        request = self.fake_request(space,type_response)
         if space == 'workspace':
             middleware = WorkspaceExceptionManagerMiddleWare()
 
@@ -66,18 +66,18 @@ class Command(BaseCommand):
             middleware = MicrositesExceptionManagerMiddleWare()
 
         ObjHttpResponse = middleware.process_exception(request,e)
-        self.ProcessException(ObjHttpResponse,e,request)
+        self.process_exception(ObjHttpResponse,e,request)
 
-    def ProcessException(self,ObjHttpResponse,e,request):
+    def process_exception(self,ObjHttpResponse,e,request):
         html = ObjHttpResponse._container[0]
         title = unicode(e.title)
         description = unicode(e.description)
-        if not self.SearchText(html,description):
+        if not self.search_text(html,description):
             print Colors.FAIL + "Description not found in html" + Colors.END
         else:
             print Colors.GREEN + "Description found in html:",description + Colors.END
 
-        if not self.SearchText(html,title):
+        if not self.search_text(html,title):
             print Colors.FAIL + "Title not found in html" + Colors.END
         else:
             print Colors.GREEN + "Title found in html:", title + Colors.END
@@ -108,11 +108,11 @@ class Command(BaseCommand):
         argument = Object()
 
         if options['exception']:
-            self.PrintTitulo(options['exception'])
+            self.print_titulo(options['exception'])
             e = Exception.__new__(eval(options['exception']))
             space = 'workspace'
             type_response = 'text/html'
-            request = self.FakeRequest(space,type_response)
+            request = self.fake_request(space,type_response)
             if space == 'workspace':
                 middleware = WorkspaceExceptionManagerMiddleWare()
 
@@ -120,28 +120,28 @@ class Command(BaseCommand):
                 middleware = MicrositesExceptionManagerMiddleWare()
 
             ObjHttpResponse = middleware.process_exception(request,e)
-            self.ProcessException(ObjHttpResponse,e,request)
+            self.process_exception(ObjHttpResponse,e,request)
 
         if options['all']:
-            self.PrintTitulo("DATALException")
+            self.print_titulo("DATALException")
             e = DATALException()
             space = 'workspace'
             type_response = 'text/html'
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("LifeCycleException")
+            self.print_titulo("LifeCycleException")
             space = 'workspace'
             type_response ='text/html'
             e = LifeCycleException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("ChildNotApprovedException")
+            self.print_titulo("ChildNotApprovedException")
             space = 'workspace'
             type_response ='text/html'
             e = ChildNotApprovedException(argument)
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("SaveException")
+            self.print_titulo("SaveException")
             space = 'workspace'
             type_response = 'text/html'
 
@@ -149,9 +149,9 @@ class Command(BaseCommand):
                 print Colors.FAIL + "Valid form, no expection generated." + Colors.END
             else:
                 e = SaveException(InstancedForm)
-                self.GenerateException(space,type_response,e)
+                self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatastreamSaveException")
+            self.print_titulo("DatastreamSaveException")
             space = 'workspace'
             type_response ='text/html'
 
@@ -159,9 +159,9 @@ class Command(BaseCommand):
                 print "Valid form, no expection generated."
             else:
                 e = DatastreamSaveException(InstancedForm)
-                self.GenerateException(space,type_response,e)
+                self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("VisualizationSaveException")
+            self.print_titulo("VisualizationSaveException")
             space = 'workspace'
             type_response ='text/html'
 
@@ -169,164 +169,204 @@ class Command(BaseCommand):
                 print "Valid form, no expection generated."
             else:
                 e = VisualizationSaveException(InstancedForm)
-                self.GenerateException(space,type_response,e)
+                self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatasetNotFoundException")
+            self.print_titulo("DatasetNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = DatasetNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DataStreamNotFoundException")
+            self.print_titulo("DataStreamNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = DataStreamNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("VisualizationNotFoundException")
+            self.print_titulo("VisualizationNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = VisualizationNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("VisualizationRequiredException")
+            self.print_titulo("VisualizationRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = VisualizationRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("IllegalStateException")
+            self.print_titulo("IllegalStateException")
             space = 'workspace'
             type_response ='text/html'
 
             e = IllegalStateException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("FileTypeNotValidException")
+            self.print_titulo("FileTypeNotValidException")
             space = 'workspace'
             type_response ='text/html'
 
             e = FileTypeNotValidException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("ApplicationException")
+            self.print_titulo("ApplicationException")
             space = 'workspace'
             type_response ='text/html'
 
             e = ApplicationException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatastoreNotFoundException")
+            self.print_titulo("DatastoreNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = DatastoreNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("MailServiceNotFoundException")
+            self.print_titulo("MailServiceNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = MailServiceNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("SearchIndexNotFoundException")
+            self.print_titulo("SearchIndexNotFoundException")
             space = 'workspace'
             type_response ='text/html'
             e = SearchIndexNotFoundException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
 
-            self.PrintTitulo("S3CreateException")
+            self.print_titulo("S3CreateException")
             space = 'workspace'
             type_response ='text/html'
             e = S3CreateException("Descripcion error class in __init__")
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
 
-            self.PrintTitulo("S3UpdateException")
+            self.print_titulo("S3UpdateException")
             space = 'workspace'
             type_response ='text/html'
             e = S3UpdateException("Descripcion error class in __init__")
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("ParentNotPublishedException")
+            self.print_titulo("ParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
             e = ParentNotPublishedException("Descripcion error class in __init__")
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatastreamParentNotPublishedException")
+            self.print_titulo("DatastreamParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
-            request = self.FakeRequest(space, type_response)
+            request = self.fake_request(space, type_response)
             e = DatastreamParentNotPublishedException(argument)
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("VisualizationParentNotPublishedException")
+            self.print_titulo("VisualizationParentNotPublishedException")
             space = 'workspace'
             type_response ='text/html'
             e = VisualizationParentNotPublishedException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("ResourceRequiredException")
+            self.print_titulo("ResourceRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = ResourceRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("AnyResourceRequiredException")
+            self.print_titulo("AnyResourceRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = AnyResourceRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatasetRequiredException")
+            self.print_titulo("DatasetRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = DatasetRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("DatastreamRequiredException")
+            self.print_titulo("DatastreamRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = DatastreamRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("AnyDatasetRequiredException")
+            self.print_titulo("AnyDatasetRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = AnyDatasetRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("AnyDatastreamRequiredException")
+            self.print_titulo("AnyDatastreamRequiredException")
             space = 'workspace'
             type_response ='text/html'
             e = AnyDatastreamRequiredException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
 
-            self.PrintTitulo("InsufficientPrivilegesException")
+            self.print_titulo("InsufficientPrivilegesException")
             space = 'workspace'
             type_response ='text/html'
             e = InsufficientPrivilegesException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
-            self.PrintTitulo("RequiresReviewException")
+            self.print_titulo("RequiresReviewException")
             space = 'workspace'
             type_response ='text/html'
             e = RequiresReviewException()
-            self.GenerateException(space,type_response,e)
+            self.generate_exception(space,type_response,e)
 
             '''
             Test microsites exceptions
             '''
 
-            self.PrintTitulo("RequiresReviewException")
+            self.print_titulo("VisualizationRevisionDoesNotExist")
             space = 'microsites'
             type_response ='text/html'
-            e = RequiresReviewException()
-            self.GenerateException(space,type_response,e)
+            e = VisualizationRevisionDoesNotExist()
+            self.generate_exception(space,type_response,e)
 
+            self.print_titulo("VisualizationDoesNotExist")
+            space = 'microsites'
+            type_response ='text/html'
+            e = VisualizationDoesNotExist()
+            self.generate_exception(space,type_response,e)
 
+            self.print_titulo("AccountDoesNotExist")
+            space = 'microsites'
+            type_response ='text/html'
+            e = AccountDoesNotExist()
+            self.generate_exception(space,type_response,e)
+
+            self.print_titulo("InvalidPage")
+            space = 'microsites'
+            type_response ='text/html'
+            e = InvalidPage()
+            self.generate_exception(space,type_response,e)
+
+            self.print_titulo("DataStreamDoesNotExist")
+            space = 'microsites'
+            type_response ='text/html'
+            e = DataStreamDoesNotExist()
+            self.generate_exception(space,type_response,e)
+
+            self.print_titulo("DatasetDoesNotExist")
+            space = 'microsites'
+            type_response ='text/html'
+            e = DatasetDoesNotExist()
+            self.generate_exception(space,type_response,e)
+
+            self.print_titulo("DatsetError")
+            space = 'microsites'
+            type_response ='text/html'
+            e = DatsetError()
+            self.generate_exception(space,type_response,e)
+
+            self.print_titulo("NotAccesVisualization")
+            space = 'microsites'
+            type_response ='text/html'
+            e = NotAccesVisualization()
+            self.generate_exception(space,type_response,e)
 
             print "\n"
             print Colors.BLUE + " \~ END TEST \~" + Colors.END

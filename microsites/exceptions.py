@@ -3,9 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 from core.exceptions import *
 from core.actions import *
 
-class VisualizationRevisionDoesNotExist(DATALException):
-	title =  _('EXCEPTION-TITLE-REVISION-NOT-EXIST')
-	description = _('EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST')
+class VisualizationRevisionDoesNotExist(LifeCycleException):
+	title = _('EXCEPTION-TITLE-REVISION-NOT-EXIST2')
+	description = _('EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST2')
 	tipo = 'revision-no-exist'
 	status_code = 404
 
