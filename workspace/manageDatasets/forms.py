@@ -350,9 +350,12 @@ class FileForm(DatasetForm):
 
     def clean(self):
         cleaned_data = super(FileForm, self).clean()
-        if 'file_data' in cleaned_data.keys() and cleaned_data['file_data']:
-            cleaned_data['impl_type'] = get_impl_type(cleaned_data['file_data'].content_type, 
-                                              cleaned_data['file_data'].name)
+        if 'file_data' in cleaned_data.keys() and cleaned_data['file_data']:    
+            cleaned_data['impl_type'] = get_impl_type(
+                cleaned_data['file_data'].content_type, 
+                cleaned_data['file_data'].name,
+                cleaned_data['impl_type'] if 'impl_type' in cleaned_data else None
+            )
             if ('impl_type' not in cleaned_data or cleaned_data['impl_type'] is None or
                 cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 raise FileTypeNotValidException(file_type=cleaned_data['file_data'].content_type,
