@@ -211,15 +211,15 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
     #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
     #,(SourceImplementationChoices.DALLAS, 'DALLAS')
     #,(SourceImplementationChoices.XML, 'XML')
-    ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel"])
+    ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel",
+                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
     ,(SourceImplementationChoices.PDF, ["application/pdf"])
     ,(SourceImplementationChoices.DOC, ["application/vnd.ms-xpsdocument",
                                         "application/msword"])
     ,(SourceImplementationChoices.ODT, ["application/vnd.oasis.opendocument.text",
                                         "application/vnd.oasis.opendocument.text-web"])
     #,(SourceImplementationChoices.ODP, 'ODP')
-    ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet",
-                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
+    ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet"])
     ,(SourceImplementationChoices.CSV, ["text/x-comma-separated-values",
                                         "text/csv"])
     ,(SourceImplementationChoices.KML, ["application/vnd.google-earth.kml+xml"])
