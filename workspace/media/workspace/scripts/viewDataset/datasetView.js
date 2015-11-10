@@ -96,18 +96,16 @@ var datasetView = Backbone.Epoxy.View.extend({
 						'modifiedAt': response.result.modified_at,
 					});
 
-					// Update Heights
-					setTimeout(function(){
-						self.setContentHeight();
-					}, 0);
-
 					// Set OK Message
 					$.gritter.add({
 						title: response.messages.title,
 						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
-						time: 2500
+						time: 2500,
+						after_close: function () {
+							window.location.reload();
+						}
 					});
 
 				}else{
