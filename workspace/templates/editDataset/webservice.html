@@ -68,7 +68,7 @@ $(document).ready(function(){
     name: 'collect',
 
     // Initialize Model
-    end_point: '{{ dataset.end_point }}',
+    end_point: '{% autoescape off %}{{ dataset.end_point }}{% endautoescape %}',
     impl_type: '{{ dataset.impl_type }}',
     impl_details: '{{ dataset.impl_details }}',
     path_to_headers: '{{ dataset.path_to_headers }}',
