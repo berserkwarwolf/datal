@@ -18,7 +18,7 @@ var MainView = Backbone.View.extend({
 
         this.dataStreamModel = new DataStreamModel({
             datastream_revision_id: options.chart_model.datastream_revision_id
-        })
+        });
         this.dataStreamModel.fetch();
 
         this.chartModel.parse(options.chart_model);
@@ -28,7 +28,7 @@ var MainView = Backbone.View.extend({
         }
         else {
             this.stateModel.set('isEdit', false);
-        };
+        }
 
         if (this.chartModel.get('type')=='mapchart') {
             this.stateModel.set('isMap', true);
@@ -53,20 +53,20 @@ var MainView = Backbone.View.extend({
           stateModel: this.stateModel,
           el: this.$('.step-0-view')
         }).init();
-        
+
         this.register( startView );
 
         //Create charts steps
         var chartView = new ChartView({
-          name: gettext('APP-CHART-TEXT'), 
-          model: this.chartModel,   
+          name: gettext('APP-CHART-TEXT'),
+          model: this.chartModel,
           stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
           el: this.$('.step-1-view')
         }).init();
 
         var metadataView = new MetadataView({
-          name: gettext('APP-VIZ-METADATA-TEXT'), 
+          name: gettext('APP-VIZ-METADATA-TEXT'),
           model: this.chartModel,
           el: this.$('.step-2-view')
         }).init();
@@ -84,7 +84,7 @@ var MainView = Backbone.View.extend({
 
         //Create maps steps
         var mapView = new MapView({
-          name: gettext('APP-MAP-TEXT'), 
+          name: gettext('APP-MAP-TEXT'),
           model: this.chartModel,
           stateModel: this.stateModel,
           dataStreamModel: this.dataStreamModel,
@@ -151,7 +151,7 @@ var MainView = Backbone.View.extend({
             }
             this.selectNavigationTab(this.index);
             this.steps[this.currentFlow][this.index].start();
-    
+
         // Go to first "Static" Step
         }else{
             window.location = this.chartModel.get('startUrl');
@@ -182,7 +182,7 @@ var MainView = Backbone.View.extend({
 
             if( !_.isUndefined(newRevisionId) ){
                 var newURL = this.model.get('finishUrl') + newRevisionId;
-                this.model.set('finishUrl',  newURL);   
+                this.model.set('finishUrl',  newURL);
             };*/
 
             this.finish();
@@ -209,9 +209,9 @@ var MainView = Backbone.View.extend({
                 this.currentFlow = 'charts';
             }
         }
-        
+
         this.steps[this.currentFlow][this.index].start();
-        
+
     },
 
     finish: function(){
@@ -224,7 +224,7 @@ var MainView = Backbone.View.extend({
             this.goTo(index);
             this.selectNavigationTab(index);
         }
-        
+
     },
 
     // TODO: this should be handled by the ButtonsView

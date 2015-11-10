@@ -3,9 +3,9 @@ function HandsontableClassRendererPatch(TD, cellProperties) {
     TD.className = '';
     for (var i = 0; i < cellProperties.classArray.length; i++) {
       TD.classList.add('hot-sel-' + cellProperties.classArray[i]);
-    };
-  };
-};
+    }
+  }
+}
 
 Handsontable.renderers.registerRenderer('selectedTextRenderer', function () {
   HandsontableClassRendererPatch(arguments[1], arguments[6]);
@@ -79,7 +79,7 @@ var DataTableView = Backbone.View.extend({
           to: {row: r2, col: c2}
         });
         // We are changing the selection behavior in the case of full columns because the engine
-        // does not currently support them (i.e. 6:6). The following is how one would re-enable 
+        // does not currently support them (i.e. 6:6). The following is how one would re-enable
         // full row selection in the same way as is done for columns.
         // self.cacheSelection({
         //   from: {row: r1, col: -1},
@@ -172,7 +172,7 @@ var DataTableView = Backbone.View.extend({
 
   _rmAllCellsMeta: function (selId) {
     var ids,
-      rows = this.table.countRows(), 
+      rows = this.table.countRows(),
       cols = this.table.countCols(),
       cells = this.coordsToCells({from:{row:0, col:0}, to:{row: rows, col: cols}}),
       at;
@@ -193,7 +193,7 @@ var DataTableView = Backbone.View.extend({
       data = this.table.getDataAtCol(range.from.col);
     } else {
       data = this.table.getData(range.from.row, range.from.col, range.to.row, range.to.col);
-      // TODO: this takes only the first item from the selection. To support many column selection, 
+      // TODO: this takes only the first item from the selection. To support many column selection,
       // it should do something else, like split the columns into separate series.
       data = _.map(data, _.first);
     }

@@ -1,29 +1,27 @@
 var DataTableSelectedCollection = Backbone.Collection.extend({
-	model: DataTableSelectionModel,
+    model: DataTableSelectionModel,
 
-	setCache: function () {
-		this._cache = this.reduce(function (memo, m) {
+    setCache: function () {
+        this._cache = this.reduce(function (memo, m) {
             memo[m.get('name')] = m.get('excelRange');
             return memo;
         }, {});
         return this._cache;
-	},
+    },
 
-	revert: function () {
-		_.each(this._cache, function (value, key) {
-			var m = this.find(function (model) {
-				return model.get('name') === key;
-			}).set('excelRange', value);
-		}, this);
-	},
+    revert: function () {
+        _.each(this._cache, function (value, key) {
+            var m = this.find(function (model) {
+                return model.get('name') === key;
+            }).set('excelRange', value);
+        }, this);
+    },
 
-	setMaxCols: function (maxCols) {
-		this.maxCols = maxCols;
-	},
+    setMaxCols: function (maxCols) {
+        this.maxCols = maxCols;
+    },
 
-	validateMaxCols: function () {
-		return this.every(function (model) {
-			return model.validateMaxCol(this.maxCols);
-		}, this);
-	}
+    setMaxRows: function (maxRows) {
+        this.maxRows = maxRows;
+    }
 });

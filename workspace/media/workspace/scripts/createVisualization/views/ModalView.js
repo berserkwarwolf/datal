@@ -90,8 +90,9 @@ var ModalView = Backbone.View.extend({
             collection: this.collection,
             datastream: model.toJSON()
         });
-        this.collection.setMaxCols(15);
         this.dataTableView.render();
+        this.collection.setMaxCols(this.dataTableView.table.countCols());
+        this.collection.setMaxRows(this.dataTableView.table.countSourceRows());
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
             this.addSelection(this._cacheFocusedInput);
         }, this);
@@ -122,9 +123,6 @@ var ModalView = Backbone.View.extend({
         } else {
             this.validateData();
         }
-
-        var valid = this.collection.validateMaxCols();
-        console.info('max col validation', valid);
     },
 
     validateLatLon: function () {
@@ -187,7 +185,7 @@ var ModalView = Backbone.View.extend({
         $(window).resize(function(){
 
             windowHeight = $(window).height();
-            
+
             var sidebarHeight =
               windowHeight
             - parseFloat( self.$el.find('.context-menu').height() )
