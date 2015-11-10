@@ -3269,3 +3269,6 @@ msgstr "Rango inválido"
 
 msgid "APP-INVALID-REQUIRED"
 msgstr "Requerido"
+
+msgid "APP-INVALID-VALUE"
+msgstr "Valor inválido"

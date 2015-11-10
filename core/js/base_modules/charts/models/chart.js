@@ -263,9 +263,9 @@ charts.models.Chart = Backbone.Model.extend({
                 //General validation
                 var lFields = this.data.get('fields').length;
 
-                var check = _.reduce(this.data.get('rows'), 
+                var check = _.reduce(this.data.get('rows'),
                     function(memo, ar){
-                     return (ar.length==lFields)?memo:memo + 1; 
+                     return (ar.length==lFields)?memo:memo + 1;
                     }, 0);
 
                 if (check!=0){
@@ -361,7 +361,7 @@ charts.models.Chart = Backbone.Model.extend({
         if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
 
             if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
-                return 'Invalid value';
+                return 'invalid-value';
             }
 
         }

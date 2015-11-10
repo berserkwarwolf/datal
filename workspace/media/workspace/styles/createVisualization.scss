@@ -53,12 +53,9 @@
 /* Formularios */
 .radio,
 .checkbox{
-  position:relative;padding-left:20px;line-height:19px;padding-left:22px;
-
+  line-height:19px;
     label{display:block;padding:5px 0;}
 
-    input,
-    input{position:absolute;left:0;}
 }
 
 fieldset{margin-bottom:20px;}

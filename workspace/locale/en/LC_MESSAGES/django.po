@@ -3286,4 +3286,5 @@ msgstr "Invalid range"
 msgid "APP-INVALID-REQUIRED"
 msgstr "Required"
 
-
+msgid "APP-INVALID-VALUE"
+msgstr "Invalid value"

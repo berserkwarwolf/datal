@@ -33,7 +33,8 @@ var OptionsView = Backbone.View.extend({
             this.$('#nullValuePreset').show();
         } else {
             this.model.unset('nullValuePreset');
-            this.$('#nullValuePreset').hide();
+            this.$('#nullValuePreset').hide()
+                .siblings('p.validation-invalid-value').addClass('hidden');
         }
     },
 
@@ -48,11 +49,12 @@ var OptionsView = Backbone.View.extend({
 
         var valid = this.model.set(input.data('ref'), input.val(), {validate: true});
 
-        if (valid) {
-            input.removeClass('has-error');
+        if (this.model.validationError === 'invalid-value') {
+            input.siblings('p.validation-invalid-value').removeClass('hidden');
         } else {
-            input.addClass('has-error');
+            input.siblings('p.validation-invalid-value').addClass('hidden');
         }
+        input.toggleClass('has-error', !valid);
     },
 
     show: function () {
