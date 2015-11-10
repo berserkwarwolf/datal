@@ -46,5 +46,41 @@
         "visualization_revision": 5608, 
         "created_at": "2015-10-28T12:25:27"
     }
+},
+{
+    "pk": 16,
+    "model": "core.visualizationi18n",
+    "fields": {
+        "description": "Display of points where accidents are happening in the city.",
+        "language": "en",
+        "title": "Map of Traffic Accidents",
+        "notes": "",
+        "visualization_revision": 5615,
+        "created_at": "2015-11-10T10:58:53"
+    }
+},
+{
+    "pk": 17,
+    "model": "core.visualizationi18n",
+    "fields": {
+        "description": "This visualization displays the total calls received on the 311 service this year.",
+        "language": "en",
+        "title": "How many calls is the 311 service receiving per month",
+        "notes": "",
+        "visualization_revision": 5616,
+        "created_at": "2015-11-10T11:57:47"
+    }
+},
+{
+    "pk": 20,
+    "model": "core.visualizationi18n",
+    "fields": {
+        "description": "Prueba Grande",
+        "language": "es",
+        "title": "Prueba",
+        "notes": "",
+        "visualization_revision": 5619,
+        "created_at": "2015-11-10T13:20:53"
+    }
 }
 ]
