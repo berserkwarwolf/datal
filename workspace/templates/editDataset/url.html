@@ -62,7 +62,7 @@ $(document).ready(function(){
 		name: 'collect',
 
 		// Initialize Model
-		end_point: '{{ dataset.end_point }}',
+		end_point: '{% autoescape off %}{{ dataset.end_point }}{% endautoescape %}',
 		mbox: '{{ dataset.mbox }}',
 		spatial: '{{ dataset.spatial }}',
 		frequency: '{{ dataset.frequency }}',
