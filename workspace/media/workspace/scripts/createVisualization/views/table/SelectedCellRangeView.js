@@ -73,4 +73,4 @@ var SelectedCellRangeView = Backbone.View.extend({
 		$input.siblings('p.validation-invalid-range').toggleClass('hidden', !hasInvalidError);
 		$input.toggleClass('has-error', hasInvalidError || hasRangeError);
 	}
-})
+});
