@@ -500,7 +500,7 @@ msgid "VALIDATE-PASSWORDMATCH-TEXT"
 msgstr "Passwords don't match."
 
 msgid "VALIDATE-EMAILNOTVALID-TEXT"
-msgstr "Enter a valid e-mail adress."
+msgstr "Enter a valid e-mail address."
 
 msgid "SIGNUP-ERRORS-MESSAGE"
 msgstr "Correct the errors in the fields below to continue."
