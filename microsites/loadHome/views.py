@@ -31,12 +31,11 @@ def load(request):
     language = request.auth_manager.language
     account = request.account
     preferences = request.preferences
-
-    if('preview' in request.GET and request.GET['preview'] == 'true') or preferences["account_home"]:
+    is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
+    if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
-        if'preview' in request.GET and request.GET['preview'] == 'true':
+        if is_preview:
             jsonObject = json.loads(preferences["account_preview"], strict=False)
-            pageTitle = ugettext('APP-PREVIEWWINDOW-TITLE')
         elif preferences["account_has_home"]:
             jsonObject = json.loads(preferences["account_home"], strict=False)
 

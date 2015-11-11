@@ -2,7 +2,7 @@
 {% load i18n humanize extra_tags core_components compress staticfiles sass_tags %}
 
 {% block SEO %}
-	<title>{% if pageTitle %}{{pageTitle}}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
+	<title>{% if is_preview %}{% trans "APP-PREVIEWWINDOW-TITLE" %}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
 {% endblock %}
 
 {% block meta %}
