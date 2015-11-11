@@ -1,0 +1,23 @@
+{
+  "number_of_pages": {% if paginator  %}{{paginator.num_pages}}{%else%}0{% endif %}, 
+  "errors": [{% if error %} "{{error}}"{% endif %}],
+  "revisions": [
+  {% for obj in results %}
+    {
+        "category": "{{obj.category}}",
+        "permalink": "{{obj.permalink}}",
+        "account_id": {{obj.account_id}},
+        "title": "{{obj.title}}",
+        "created_at": "{{obj.created_at|date:'Y-m-d\Th:i:s'|capfirst}}",
+        "type": "{{obj.type}}",
+        "id": {{obj.id}}
+    }{% if not forloop.last %},{% endif %}
+
+  {% endfor %}
+  ],
+  "categories_asked_dbg": [
+    {% for cat in category_filters  %}
+        "{{cat}}"{% if not forloop.last %},{% endif %}
+    {% endfor %}
+  ]
+}

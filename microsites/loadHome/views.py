@@ -2,6 +2,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_POST, require_GET
 from django.core.serializers.json import DjangoJSONEncoder
+from django.template import loader, Context
 from core.models import *
 from core.managers import *
 from core.shortcuts import render_to_response
@@ -155,26 +156,17 @@ def update_list(request):
         revisions = paginator.page(page and page or 1)
         if preferences['account_home_filters'] == 'featured_accounts':
             add_domains_to_permalinks(revisions.object_list)
+        error = ''
 
-        response = {
-            "number_of_pages": paginator.num_pages,
-             "errors": [],
-             "revisions": revisions.object_list
-        }
         results = revisions.object_list
     else:
-        response = {
-            "number_of_pages": 0,
-            "errors": ['Invalid data'],
-            "errores_locos": form.errors,
-            "revisions": []
-        }
+        error = 'Invalid data'
         results=[]
         categories=[]
 
-    response["results_dbg"] = results
-    response["categories_asked_dbg"] = category_filters
-    return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
+    t = loader.get_template('loadHome/table.json')
+    c = Context(locals())
+    return HttpResponse(t.render(c), content_type="application/json")
 
 
 @require_GET
