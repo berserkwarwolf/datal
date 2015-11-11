@@ -154,7 +154,6 @@ def related_resources(request):
 def remove(request, datastream_revision_id, type="resource"):
     """ remove resource """
     lifecycle = DatastreamLifeCycleManager(user=request.user, datastream_revision_id=datastream_revision_id)
-    print lifecycle
 
     if type == 'revision':
         lifecycle.remove()
