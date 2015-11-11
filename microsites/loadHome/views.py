@@ -13,6 +13,7 @@ from core.communitymanagers import *
 from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
 from django.utils.translation import ugettext
+from core.search.finder import FinderQuerySet
 
 import json
 
@@ -61,9 +62,10 @@ def load(request):
                 account_id = account.id
                 categories = Category.objects.get_for_home(language, account_id)
 
-            results, search_time, facets = FinderManager(HomeFinder).search(max_results=250, account_id=account_id)
+            queryset = FinderQuerySet(FinderManager(HomeFinder), max_results=250, account_id=account_id )
+            
 
-            paginator = Paginator(results, 25)
+            paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
 
             if preferences['account_home_filters'] == 'featured_accounts':
@@ -114,14 +116,15 @@ def update_list(request):
             if typef:
                 resources = [typef]
 
-            results, search_time, facets = FinderManager(HomeFinder).search(
-                                                                    query = query,
-                                                                    max_results = 250,
-                                                                    account_id = accounts_ids,
-                                                                    resource = resources,
-                                                                    category_filters=category_filters,
-                                                                    order = order,
-                                                                    order_type = order_type)
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
+                query = query,
+                max_results = 250,
+                account_id = accounts_ids,
+                resource = resources,
+                category_filters=category_filters,
+                order = order,
+                order_type = order_type
+            ) 
 
         else:
             all_resources = form.cleaned_data.get('all')
@@ -131,7 +134,7 @@ def update_list(request):
                 for resource_name in resources_type.split(','):
                     resources.append(resource_name)
 
-            results, search_time, facets = FinderManager(HomeFinder).search(
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
                 category_filters= category_filters,
                 query=query,
                 resource=resources,
@@ -148,23 +151,25 @@ def update_list(request):
         #    if r['category'] in categories or categories==[]:
         #        results2.append(r)
 
-        paginator = Paginator(results, 25)
+        paginator = Paginator(queryset, 25)
 
+        revisions = paginator.page(page and page or 1)
         if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(results)
+            add_domains_to_permalinks(revisions.object_list)
 
         response = {
             "number_of_pages": paginator.num_pages,
              "errors": [],
-             "revisions": paginator.page(page and page or 1).object_list
-       }
+             "revisions": revisions.object_list
+        }
+        results = revisions.object_list
     else:
         response = {
             "number_of_pages": 0,
             "errors": ['Invalid data'],
             "errores_locos": form.errors,
             "revisions": []
-       }
+        }
         results=[]
         categories=[]
 
