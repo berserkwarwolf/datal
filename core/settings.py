@@ -389,3 +389,8 @@ try:
     LOCALE_PATHS += PLUGIN_LOCALES
 except:
     pass
+
+try:
+    STATICFILES_DIRS += PLUGIN_STATIC_DIRS
+except:
+    pass
