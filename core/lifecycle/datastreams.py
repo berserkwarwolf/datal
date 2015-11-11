@@ -399,3 +399,5 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.datastream.id:
                 self.datastream.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.datastream.last_revision_id=last_revision_id
