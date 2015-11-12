@@ -49,6 +49,38 @@ class ExpectionsTest(TransactionTestCase):
         self.assertContains(ObjHttpResponse._container[0],unicode(e.title),html=True)
         self.assertContains(ObjHttpResponse._container[0],unicode(e.description),html=True)
 
+class ExpectionsTest(TransactionTestCase):
+    def setUp(self):
+        self.user_nick = 'administrador'
+        self.user = User.objects.get(nick=self.user_nick)
+
+        settings.TEMPLATE_DIRS = list(settings.TEMPLATE_DIRS)
+        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'workspace', 'templates'))
+        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'microsites', 'templates'))
+        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'api', 'templates'))
+        settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS)
+
+    def SearchText(self,text,expression):
+        pattern=re.compile(expression, flags=re.IGNORECASE)
+        return re.search(pattern, text)
+
+    def FakeRequest(self, space, type_response):
+        request = RequestFactory().get('/'+space+'/', HTTP_ACCEPT=type_response)
+        request.user = AnonymousUser()
+        request.auth_manager = AuthManager(language="en")
+        return request
+
+    def test_exception_generator(self):
+        e = Exception.__new__(eval(options['exception']))
+        space = 'workspace'
+        type_response = 'text/html'
+        request = self.FakeRequest(space,type_response)
+        middleware = ExceptionManagerMiddleWare()
+
+        ObjHttpResponse = middleware.process_exception(request,e)
+        self.assertContains(ObjHttpResponse._container[0],unicode(e.title),html=True)
+        self.assertContains(ObjHttpResponse._container[0],unicode(e.description),html=True)
+
 
 
 
