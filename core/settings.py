@@ -294,6 +294,12 @@ LOGGING = {
             'handlers': ['file'],
             'propagate': False,
         },
+
+        'elasticsearch.trace': {
+            'level': 'INFO',
+            'handlers': ['file'],
+            'propagate': False,
+        },
     }
 }
 
