@@ -37,10 +37,7 @@
 <script src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<!-- Screen JS -->
-<script src="{% static 'workspace/scripts/viewVisualization/deleteItemView.js' %}"></script>
-<script src="{% static 'workspace/scripts/viewVisualization/unpublishView.js' %}"></script>
-<script src="{% static 'workspace/scripts/viewVisualization/viewVisualizationView.js' %}"></script>
+
 
 <meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
@@ -78,6 +75,10 @@
 {% endblock %}
 
 {% block bottom_js %}
+<script src="{% static 'workspace/scripts/viewVisualization/deleteItemView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/unpublishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/ChartView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/MainView.js' %}"></script>
 <script type="text/javascript">
 
 google.load('visualization', '1', {packages: ['corechart', 'geomap']});
@@ -124,7 +125,7 @@ chartModel.parse({
     chart: {{ visualization_revision.chart | jsonify }},
 });
 
-var chartView = new viewVisualizationView({
+var chartView = new MainView({
     model: chartModel
 });
 
