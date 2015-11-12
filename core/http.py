@@ -2,6 +2,9 @@ from django.http import HttpResponse
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db.models import Q
+from core.choices import (SourceImplementationChoices, 
+    SOURCE_IMPLEMENTATION_EXTENSION_CHOICES,
+    SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES)
 
 class JSONHttpResponse(HttpResponse):
     """ A custom HttpResponse that handles the headers for our JSON responses """
@@ -74,3 +77,25 @@ def add_domains_to_permalinks(resources):
             account_domain = r[account_id]['account.domain']
             resource['permalink'] = 'http://' + account_domain + resource['permalink']
             resource['account_name'] = r[account_id]['account.name']
+
+def get_file_type_from_extension(extension):
+    for source_id, extensions in SOURCE_IMPLEMENTATION_EXTENSION_CHOICES:
+        if extension in extensions:
+            return source_id
+
+def get_impl_type(mimetype, end_point, old_impl_type=None):
+    
+    if old_impl_type:
+        try:
+            return int(old_impl_type)
+        except ValueError:
+            pass
+
+    mimetype = mimetype.split(';')[0]
+    
+    for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES:
+        if mimetype in mimetypes:
+            return source_id
+
+    extension = end_point.split('/')[-1].split('.')[-1]
+    return get_file_type_from_extension(extension)

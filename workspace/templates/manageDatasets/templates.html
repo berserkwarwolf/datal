@@ -104,7 +104,6 @@
 		<% 
 			// If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button.
 			if( 
-				collect_type == 1 ||
 				collect_type == 2 ||
 				_.contains( datastreamImplValidChoices, impl_type)
 			){ 

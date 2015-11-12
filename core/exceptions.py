@@ -143,6 +143,12 @@ class DatasetNotFoundException(LifeCycleException):
     def get_actions(self):
         return [ViewDatasetListExceptionAction()]
 
+class DatasetTableNotFoundException(LifeCycleException):
+    title = _('EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND')
+    description = _('EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND')
+    tipo = 'dataset-table-not-found'
+    status_code = 404
+    table_id = 0 # valor defaault
 
 class DataStreamNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASTREAM-NOT-FOUND')
@@ -193,6 +199,11 @@ class FileTypeNotValidException(LifeCycleException):
     title = _('EXCEPTION-TITLE-FILE-INVALID')
     description = _('EXCEPTION-DESCRIPTION-FILE-INVALID')
     tipo = 'illegal-state'
+    file_type = '' #valor defaault
+    valid_types = [] #valor default
+
+    def get_actions(self):
+        return [ValidFileType(self._context['valid_types'])]
 
 
 class ApplicationException(DATALException):

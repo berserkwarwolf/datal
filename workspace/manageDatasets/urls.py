@@ -16,6 +16,6 @@ urlpatterns = patterns(
     url(r'^remove/(?P<dataset_revision_id>\d+)$', remove, name='manageDatasets.remove'),
     url(r'^related_resources$', related_resources, name='manageDatasets.related_resources'),
     url(r'^change_status/(?P<dataset_revision_id>\d+)/$', change_status, name='manageDatasets.change_status'),
-    url(r'^action_request_file$', action_request_file, name='dataset_manager.action_request_file'),
+    url(r'^action_request_file$', action_request_file, name='manageDatasets.action_request_file'),
     url(r'^check_endpoint_url$', check_endpoint_url, name='check_endpoint_url'),
 )

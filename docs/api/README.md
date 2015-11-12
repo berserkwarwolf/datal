@@ -108,7 +108,7 @@ Los recursos que maneja la API son:
 
 # Métodos 
 
-# Listados
+# GET Listados
 
 Busca un listado de datastreams.
 
@@ -183,7 +183,7 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 }
 ```
 
-## Get
+## GET
 
 Trae la información asociada a una vista
 
@@ -224,4 +224,51 @@ Un ejemplo de resultado de un datastream sería así
     "guid": "NIVEL-DE-CALIF-2006-53010",
     "category_name": "Educación"
 }
+```
+
+## POST / PUT / PATCH
+
+Creación, Edición y Edición Parcial de recursos.
+
+Al momento solo podemos crear y editar datasets y vistas. Y para poder 
+hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario.
+
+
+### Datasets
+
+
+```
+POST /api/v1/datasets
+PUT/PATCH /api/v1/datasets/:guid
+``` 
+
+- **title**: Título del conjunto de datos
+- **description**: Descripción del conjunto de datos
+- **category**: Slug de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **notes**: Opcional. Texto de la nota del conjunto de datos
+- **end_point**: Opcional. Url apuntando al recurso con los datos (archivos o página web).
+- **file**: Opcional. Archivo a subir a la plataforma
+- **license**: Opcional. Tipo de licencia que aplica sobre el conjunto de datos
+- **spatial**: Opcional. Zona geográfica a la cual aplica el conjunto de datos
+- **frequency**: Opcional. Tipo de licencia que aplica sobre el conjunto de datos
+- **mbox**: Opcional. Correo electronico de quien administra el conjunto de datos
+
+
+### Datastreams
+```
+POST /api/v1/datastreams
+``` 
+
+- **title**: Título del conjunto de datos
+- **description**: Descripción del conjunto de datos
+- **category**: Slug de la categoría para clasificar los recursos. Debe coincidir con alguna de las categorías de la cuenta
+- **notes**: Opcional. Texto de la nota del conjunto de datos
+- **table_id**: Opcional. Indice de la tabla en el conjunto de datos, comenzando de cero.
+- **header_row**: Opcional. Indice de la fila a usar como cabecera de la tabla comenzando de cero. Por defecto es vacio
+- **dataset**: GUID del conjunto de datos asociado a la vista
+
+Ejemplo de llamada para crear un datastream 
+
+```
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
 ```

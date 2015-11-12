@@ -810,6 +810,9 @@ msgstr "Create visualization."
 msgid "EXCEPTION-ACTION-CONTACT-US"
 msgstr "If the problem persists please contact us."
 
+msgid "EXCEPTION-ACTION-VALID-FILE-TYPE"
+msgstr "Please choose one ot this choices %(choices)s"
+
 msgid "EXCEPTION-TITLE-GENERIC"
 msgstr "Error"
 
@@ -857,6 +860,12 @@ msgstr "The URL requested is invalid or no longer available."
 
 msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND"
 msgstr "It might have been removed, or its URL has been changed because of a new revision."
+
+msgid "EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND"
+msgstr "Wrong table id"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND"
+msgstr "The dataset has no table with id equal to '%(table_id)s"
 
 msgid "EXCEPTION-TITLE-DATASTREAM-NOT-FOUND"
 msgstr "The URL requested is invalid or no longer available."

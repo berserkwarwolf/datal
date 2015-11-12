@@ -136,7 +136,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language, category__categoryi18n__language=language
                                                )
         if exclude:
-            query.exclude(**exclude)
+            query = query.exclude(**exclude)
 
         if filter_name:
             query = query.filter(dataseti18n__title__icontains=filter_name)
@@ -212,7 +212,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             prev_revision = DatasetRevision.objects.filter(dataset=dataset).order_by('-id').first()
             size = prev_revision.size
             file_name = prev_revision.filename
-        elif int(collect_type) == CollectTypeChoices().URL:
+        elif int(collect_type) == CollectTypeChoices().URL or int(collect_type) == CollectTypeChoices().WEBSERVICE:
             size = 0
             file_name = fields['file_name']
         else:
@@ -257,9 +257,12 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         #    # Build impl_details if necessary
         fields['impl_details'] = builder.build()
 
-        fields['title'] = fields['title'].strip().replace('\n', ' ')
-        fields['description'] = fields['description'].strip().replace('\n', ' ')
-        fields['notes'] = fields['notes'].strip()
+        if 'title' in fields:
+            fields['title'] = fields['title'].strip().replace('\n', ' ')
+        if 'description' in fields:
+            fields['description'] = fields['description'].strip().replace('\n', ' ')
+        if 'notes' in fields:
+            fields['notes'] = fields['notes'].strip()
 
         changed_fields.append('impl_details')
 
@@ -269,8 +272,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             changed_fields, **fields
         )
 
-        dataset_revision.add_tags(fields['tags'])
-        dataset_revision.add_sources(fields['sources'])
+        if 'tags' in fields:
+            dataset_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            dataset_revision.add_sources(fields['sources'])
 
         return dataset_revision
 

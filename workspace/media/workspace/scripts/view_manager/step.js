@@ -242,7 +242,7 @@ var Step0 = Step.extend({
         }, this));
 
         $('#id_sourceNameSuggest').taggingSources({
-            source: '/source_manager/action_search'
+            source: '/rest/sources.json'
             , sourceContainer : "#id_source_container"
             , minLength: 3
             , sources: initialSources
@@ -257,7 +257,7 @@ var Step0 = Step.extend({
         }, this));
 
         $('#id_operation-tag').tagging({
-            source: '/tag_manager/action_search'
+            source: '/rest/tags.json'
             , minLength: 3
             , tags: initialTtags
         });
@@ -949,13 +949,13 @@ var Step2 = Step.extend({
             var initialSources = suggestedSources;
 
             $('#id_operation-tag', this.attributes.$Container).tagging({
-                source: '/tag_manager/action_search',
+                source: '/rest/tags.json',
                 minLength: 3,
                 tags: initialTags
             });
 
             $('#id_sourceNameSuggest', this.attributes.$Container).taggingSources({
-                source: '/source_manager/action_search',
+                source: '/rest/sources.json',
                 sourceContainer: "#id_source_container",
                 minLength: 3,
                 sources: initialSources

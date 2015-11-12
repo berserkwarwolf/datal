@@ -75,3 +75,4 @@ tomcat-service:
       - file: /var/lib/tomcat7/webapps/workspace/AgileOfficeServer/WEB-INF/conf/commons.xml
       - file: /var/lib/tomcat7/webapps/microsites/AgileOfficeServer/WEB-INF/conf/commons.xml
       - file: /var/lib/tomcat7/conf/server.xml
+      - file: /usr/share/tomcat7/bin/setenv.sh

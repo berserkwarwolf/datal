@@ -602,7 +602,7 @@ msgid "APP-FILTER-TEXT"
 msgstr "Filtrar"
 
 msgid "APP-VALIDATE-FILE-TYPE-TEXT"
-msgstr "El tipo de archivo no es válido, por favor seleccione uno de los siguientes admitidos: CSV, DOC, DOCX, KML, KMZ, TSV, TXT, XLS, XLSX, XML."
+msgstr "El tipo de archivo no es válido, por favor seleccione uno de los siguientes admitidos:"
 
 msgid "APP-NO-RESOURCES-FOUND-TEXT"
 msgstr "Lo sentimos, sus criterios de búsqueda no arrojaron resultados. Por favor, intente con otros criterios."

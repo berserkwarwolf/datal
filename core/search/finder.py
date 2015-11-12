@@ -44,7 +44,27 @@ try:
 except ImportError:
     logger.warning("ImportError: No module named indextank.client.")
 
+class FinderQuerySet(object):
+    def __init__(self, finder, *args, **kwargs):
+        self.values = {}
+        self.finder = finder
+        for key, value in kwargs.items():
+            self.values[key] = value
+        
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            start = 0 if key.start is None else key.start
+            stop = 0 if key.stop is None else key.stop
+            limit = int(stop-start)
+            page = int(start / limit) + 1 if limit else 1
+            self.results, self.search_time, self.facets = self.finder.search(
+                slice=limit, page=page, **self.values)
+            return self.results
 
+    def __len__(self):
+        if not hasattr(self, 'search_time'):
+            self[0:25]
+        return self.search_time['count']
 
 class Finder:
 

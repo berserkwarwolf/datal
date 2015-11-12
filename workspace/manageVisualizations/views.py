@@ -29,7 +29,6 @@ logger = logging.getLogger(__name__)
 
 
 @login_required
-@requires_any_dataset()
 @requires_any_datastream()
 @require_GET
 def index(request):

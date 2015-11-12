@@ -2,6 +2,8 @@
 import logging
 from django.db.models import F, Max
 from django.conf import settings
+from django.db import transaction
+
 
 from core.daos.visualizations import VisualizationSearchDAOFactory, VisualizationDBDAO
 from core.models import VisualizationRevision, Visualization, VisualizationI18n
@@ -175,6 +177,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.visualization.id:
                 self.visualization.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.visualization.last_revision_id=last_revision_id
 
     def _publish_childs(self):
         """
@@ -330,6 +334,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 # en caso de que el padre no este publicado, lo dejamos como aprobado
                 self.visualization_revision.status = StatusChoices.APPROVED
                 self.visualization_revision.save()
+                transaction.commit()
                 raise VisualizationParentNotPublishedException()
 
         self._publish_childs()

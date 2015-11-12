@@ -2795,7 +2795,7 @@ msgid "EXCEPTION-TITLE-FILE-INVALID"
 msgstr "Invalid file format"
 
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
-msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV"
+msgstr "The file type %(file_type)s is not allowed."
 
 msgid "APP-BACK-TEXT"
 msgstr "Back"
@@ -3208,6 +3208,12 @@ msgstr "Invert"
 msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "This field is required"
 
+msgid "VALIDATE-MAXLENGTH-TEXT-1"
+msgstr "This field must be at most "
+
+msgid "VALIDATE-MAXLENGTH-TEXT-2"
+msgstr " characters."
+
 msgid "APP-HOW-TO-SELECT-TITLE"
 msgstr "How to select?"
 
@@ -3277,5 +3283,8 @@ msgstr "Maps"
 msgid "APP-INVALID-RANGE"
 msgstr "Invalid range"
 
-msgid "APP-INVALID-NOT-EMPTY"
+msgid "APP-INVALID-REQUIRED"
 msgstr "Required"
+
+msgid "APP-INVALID-VALUE"
+msgstr "Invalid value"
