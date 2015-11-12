@@ -278,11 +278,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             revision_published_count = _revisions.filter(status=StatusChoices.PUBLISHED).count()
             revision_count = _revisions.count()
 
-            # Si la revision a eliminar es la unica publicada y es la que vamos a eliminar,
-            # entonces despublicar todos los datastreams en cascada
-            if revision_published_count == 1 and self.dataset.last_published_revision == self.dataset_revision:
-                self._unpublish_all()
-
             # si la revision a eliminar es la unica revision
             # elimino todos los recursos asociados a ella
             if revision_count == 1:
@@ -294,6 +289,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                     datastream_ids.append(datastream_revision.id)
                     DatastreamLifeCycleManager(self.user, datastream_revision).remove()
                 DataStream.objects.filter(pk__in=datastream_ids).delete()
+
+
+            # Si la revision a eliminar es la unica publicada y es la que vamos a eliminar,
+            # entonces despublicar todos los datastreams en cascada
+            elif revision_published_count == 1 and self.dataset.last_published_revision == self.dataset_revision:
+                self._unpublish_all()
 
             # Fix para evitar el fallo de FK con las published revision. Luego la funcion update_last_revisions
             # completa el valor correspondiente.
