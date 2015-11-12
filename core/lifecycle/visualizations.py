@@ -177,6 +177,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.visualization.id:
                 self.visualization.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.visualization.last_revision_id=last_revision_id
 
     def _publish_childs(self):
         """
