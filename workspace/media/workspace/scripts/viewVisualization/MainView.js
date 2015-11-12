@@ -26,6 +26,7 @@ var MainView = Backbone.View.extend({
 		this.render();
         this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
         this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);
+        this.chartView.render();
 	},
 
 	render: function () {
