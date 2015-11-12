@@ -42,7 +42,9 @@ REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
     'rest_framework.permissions.IsAuthenticated',
-    'api.rest.permissions.DatalApiPermission',
+    'api.rest.permissions.ApiPermission',
+    'api.rest.permissions.ApiPrivateForWritePermission',
+    'api.rest.permissions.ApiIsUserForWritePermission',
 )
 
 REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (

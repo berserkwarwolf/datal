@@ -150,7 +150,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
-            datastream_revision_id=visualization_revision.datastream_revision_id
+            datastream_revision_id=visualization_revision.datastream_revision_id,
+            filename='' # nice to have
         )
         visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 

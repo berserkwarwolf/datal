@@ -12,7 +12,9 @@ class RestChartViewSet(ResourceViewSet):
     dao_get_param = 'visualization_revision_id'
     data_types = ['vz']
     dao_pk = 'visualization_revision_id' 
-
+    dao_title = 'title'
+    dao_filename = 'filename'
+    
     @detail_route(methods=['get'])
     def data(self, request, format=None, *args, **kwargs):
         return self.engine_call( request, 'invoke', format,

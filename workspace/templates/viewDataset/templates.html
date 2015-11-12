@@ -52,7 +52,6 @@
 
 	<!-- Column Right -->
 	<div class="col-xs-5 context-buttons clearfix">
-
 		<% if( status != StatusChoices.REJECTED ){ %>
 
 			{% if auth_manager.is_publisher or auth_manager.is_admin %}
@@ -67,10 +66,11 @@
 
 				<% }else{ %>
 
-					{# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
-					{% if collect_type == 1 or collect_type == 2 or impl_type not in datastream_impl_not_valid_choices %}
+					{# If dataset.collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
+					{% if dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
 
 						<!-- Main Action - Create Data View -->
+						
 						<a id="id_create" class="button primary FR" href="<%= createDataViewUrl %>" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>
 
 					{% endif %}
@@ -86,8 +86,8 @@
 
 			{% elif auth_manager.is_editor %}
 
-				{# If collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
-				{% if collect_type == 1 or collect_type == 2 or impl_type not in datastream_impl_not_valid_choices %}
+				{# If dataset.collect_type is URL or WEBSERVICE, or if impl_type is one of the allowed (for FILE), then enable "create data view" button #}
+				{% if dataset.collect_type == 2 or dataset.impl_type not in datastream_impl_not_valid_choices %}
 
 					<!-- Main Action - Create Data View -->
 					<a id="id_create" class="button primary FR" href="<%= createDataViewUrl %>" title="{% trans 'APP-ACTIONS-CREATEVIEW' %}">{% trans 'APP-ACTIONS-CREATEVIEW' %}</a>

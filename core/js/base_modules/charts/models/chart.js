@@ -246,7 +246,6 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     valid: function(){
-        console.log('Validation from charts.models.Chart');
         var valid = true;
 
         //Si alguna vez intentó seleccionar algo de data
@@ -264,9 +263,9 @@ charts.models.Chart = Backbone.Model.extend({
                 //General validation
                 var lFields = this.data.get('fields').length;
 
-                var check = _.reduce(this.data.get('rows'), 
+                var check = _.reduce(this.data.get('rows'),
                     function(memo, ar){
-                     return (ar.length==lFields)?memo:memo + 1; 
+                     return (ar.length==lFields)?memo:memo + 1;
                     }, 0);
 
                 if (check!=0){
@@ -294,14 +293,18 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     validateMetadata: function(){
-        var validation = {
-            valid: (  !_.isEmpty(this.get('title')) &&  !_.isEmpty(this.get('description'))  ),
-            fields:{
-                'title':  _.isEmpty(this.get('title')),
-                'description':  _.isEmpty(this.get('description'))
-            }
-        }
-        return validation
+        var validTitle = !_.isEmpty(this.get('title')),
+            validDescription = !_.isEmpty(this.get('description')),
+            validNotes = this.get('notes').length < 2048;
+
+        return {
+                valid: (  validTitle &&  validDescription && validNotes ),
+                fields:{
+                    'title':  !validTitle,
+                    'description':  !validDescription,
+                    'notes': !validNotes
+                }
+            };
     },
 
     getSettings: function(){
@@ -358,7 +361,7 @@ charts.models.Chart = Backbone.Model.extend({
         if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
 
             if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
-                return 'Invalid value';
+                return 'invalid-value';
             }
 
         }

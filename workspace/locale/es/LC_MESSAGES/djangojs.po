@@ -602,7 +602,7 @@ msgid "APP-FILTER-TEXT"
 msgstr "Filtrar"
 
 msgid "APP-VALIDATE-FILE-TYPE-TEXT"
-msgstr "El tipo de archivo no es válido, por favor seleccione uno de los siguientes admitidos: CSV, DOC, DOCX, KML, KMZ, TSV, TXT, XLS, XLSX, XML."
+msgstr "El tipo de archivo no es válido, por favor seleccione uno de los siguientes admitidos:"
 
 msgid "APP-NO-RESOURCES-FOUND-TEXT"
 msgstr "Lo sentimos, sus criterios de búsqueda no arrojaron resultados. Por favor, intente con otros criterios."
@@ -864,6 +864,18 @@ msgstr "Ver conjunto de datos"
 
 msgid "APP-VIEW-DATASTREAM-TEXT"
 msgstr "Ver vista"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT1"
+msgstr "La fuente '"
+
+msgid "VALIDATE-SOURCEALREADYEXIST-TEXT2"
+msgstr "' ya contiene ésta URL."
+
+msgid "VALIDATE-SOURCENAMEALREADYEXIST-TEXT"
+msgstr "Este nombre ya existe."
+
+msgid "VALIDATE-SOURCENAMEINCOLLECTION-TEXT"
+msgstr "Ya tenes una fuente con ese nombre. Elegí otra."
 
 msgid "INVALID-TAG"
 msgstr "Tag invalido"

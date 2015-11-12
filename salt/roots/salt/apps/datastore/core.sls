@@ -38,18 +38,3 @@ root_tmp_datastore_bucket:
   file.symlink:
     - name: /{{ pillar['amazon']['S3']['temporary_bucket'] }}
     - target: {{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['temporary_bucket'] }}
-
-# For fixed uploaded file for theme
-{{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['cdn_bucket'] }}/1:
-  file.directory:
-    - user: {{ user }}
-    - group: {{ group }}
-    - mode: 755
-    - makedirs: True
-
-fixed_image:
-  file.managed:
-    - name: {{ pillar['system']['home'] }}/{{ pillar['datastore']['sftp']['remote_base_folder'] }}/{{ pillar['amazon']['S3']['cdn_bucket'] }}/1/datal-portada.jpg
-    - source: salt://apps/datastore/datal-portada.jpg
-    - user: {{ user }}
-    - group: {{ group }}
