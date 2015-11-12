@@ -62,8 +62,6 @@ charts.ChartsFactory = function(){
             type = type || 'linechart';
             lib = lib || 'google';
 
-            console.log('Chart Factory:', type, lib);
-
             if( _.has(this.availableCharts,lib) &&
                 _.has(this.availableCharts[lib],type) ){
                 return this.availableCharts[lib][type];
