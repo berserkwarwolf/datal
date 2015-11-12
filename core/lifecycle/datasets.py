@@ -274,12 +274,18 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         if killemall:
             self._remove_all()
         else:
-            revcount = DatasetRevision.objects.filter(dataset=self.dataset.id, status=StatusChoices.PUBLISHED).count()
+            _revisions = DatasetRevision.objects.filter(dataset=self.dataset.id)
+            revision_published_count = _revisions.filter(status=StatusChoices.PUBLISHED).count()
+            revision_count = _revisions.count()
 
             # Si la revision a eliminar es la unica publicada y es la que vamos a eliminar,
             # entonces despublicar todos los datastreams en cascada
-            if revcount == 1 and self.dataset.last_published_revision == self.dataset_revision:
+            if revision_published_count == 1 and self.dataset.last_published_revision == self.dataset_revision:
                 self._unpublish_all()
+
+            # si la revision a eliminar es la unica revision
+            # elimino todos los recursos asociados a ella
+            if revision_count == 1:
 
                 # Elimino todos las revisiones que dependen de este Dataset
                 datastreams_revision = DataStreamRevision.related_to_dataset(self.dataset)
