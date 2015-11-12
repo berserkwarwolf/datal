@@ -109,6 +109,21 @@ var chartModel = new charts.models.Chart({
 
 });
 
+chartModel.parse({
+    id: {{ visualization_revision.visualization_id }},
+    revision_id: {{ visualization_revision.visualization_revision_id }},
+
+    title: '{{ visualization_revision.title }}',
+    description: '{{ visualization_revision.description }}',
+    notes: '{{ visualization_revision.notes }}',
+    lib: '{{ visualization_revision.lib }}',
+
+    data: '{{ visualization_revision.data }}',
+
+    format: {{ visualization_revision.format | jsonify }},
+    chart: {{ visualization_revision.chart | jsonify }},
+});
+
 var chartView = new viewVisualizationView({
     model: chartModel
 });
