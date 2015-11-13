@@ -84,11 +84,12 @@ charts.models.Chart = Backbone.Model.extend({
             'lib'
             ]));
 
-        data.type = res.format.type;
 
         //edit
         if(res.revision_id){
             data = _.extend(data,{
+                type: res.format.type,
+
                 select_data:true,
                 notes: _.unescape(res.notes),
                 title: res.title,
