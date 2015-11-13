@@ -3246,9 +3246,6 @@ msgstr "¿En que región aplican estos datos?"
 msgid "APP-LAST-PUBLISHED-REVISION-TEXT"
 msgstr "Última versión publicada"
 
-msgid "APP-DOWNLOAD-ORIGINAL-TEXT"
-msgstr "Descargar original"
-
 msgid "LANDINGPAGE-ACTIVITY-DATASET"
 msgstr "el conjunto de datos"
 
