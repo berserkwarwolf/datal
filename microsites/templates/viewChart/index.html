@@ -66,10 +66,10 @@
 <!-- BRANDED CSS -->
 <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
 {% endcompress %}
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <!-- BRANDED JS -->
-<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url "microsites.get_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
   
 {% endblock %}
 

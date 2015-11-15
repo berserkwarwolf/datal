@@ -1,5 +1,5 @@
 {% load i18n extra_tags %}
-{% url "search.action_search" as search_url %}
+{% url "search.search" as search_url %}
 <div id="id_dataservice_container_{{item.datastream_id}}" class="panel clearfix">
     <h2><a class="ic_Data" id="id_viewDataServiceButton_{{ item.datastream_id }}" rel="{{ item.datastream_id }}" href="{{ item.permalink }}">
     <strong>{{item.title}}</strong>{% for parameter in item.parameters %}{% if not forloop.first %}, {%else%}({% endif %}{{parameter.name}}{% if forloop.last %}){% endif %}{%endfor%}

@@ -13,19 +13,19 @@ register = template.Library()
 def permalink(pk, obj_type):
     if obj_type == 'dataset':
         return reverse(
-            'manageDatasets.action_view',
+            'manageDatasets.view',
             'microsites.urls',
             kwargs={'dataset_id': pk, 'slug': '-'}
         )
     elif obj_type == 'datastream':
         return reverse(
-            'manageDataviews.action_view',
+            'manageDataviews.view',
             'microsites.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
     elif obj_type == 'visualization':
         return reverse(
-            'manageVisualizations.action_view',
+            'manageVisualizations.view',
             'workspace.urls',
             kwargs={'id': pk, 'slug': '-'}
         )

@@ -1151,7 +1151,7 @@ function onSuccessDataServiceExecute(pResponse){
     var lTitle                          = $lDashboardDataServiceContainer.data('dataservice_title');
     var lDescription                    = $lDashboardDataServiceContainer.data('dataservice_description');
     var lParameters                     = $lDashboardDataServiceContainer.data('dataservice_parameters');
-    var lURL                            = '/dataviews/action_view?datastream_revision_id=' + lDataserviceId + lEndPoint;
+    var lURL                            = '/dataviews/view?datastream_revision_id=' + lDataserviceId + lEndPoint;
 
     // hiding the notification button
     $lDashboardDataServiceContainer.find('[id*=id_notificationMessage_]').html('').parent('[id*=id_notification_]').fadeOut();

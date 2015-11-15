@@ -310,7 +310,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id = row[2]
             visualization_id = row[3]
             title = row[5]
-            permalink = reverse('chart_manager.action_view', kwargs={'id': visualization_id, 'slug': slugify(title)})
+            permalink = reverse('chart_manager.view', kwargs={'id': visualization_id, 'slug': slugify(title)})
             visualizations.append({'id'           : row[0],
                                    'sov_id'       : row[1],
                                    'impl_details' : row[4],

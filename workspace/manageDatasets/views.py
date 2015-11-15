@@ -59,7 +59,7 @@ def download(request, dataset_id, slug):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def action_request_file(request):
+def download_file(request):
     form = RequestFileForm(request.GET)
 
     if form.is_valid():
@@ -96,7 +96,7 @@ def index(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     user_id = request.auth_manager.id
@@ -352,7 +352,7 @@ def edit(request, dataset_revision_id=None):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     language = request.auth_manager.language
     dataset_id = request.GET.get('dataset_id', '')
 

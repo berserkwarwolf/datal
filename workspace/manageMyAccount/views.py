@@ -192,7 +192,7 @@ def activate(request):
 
 
 @require_POST
-def action_check_admin_url(request):
+def check_admin_url(request):
     admin_url = request.POST.get('admin_url')
     exists = Preference.objects.filter(key='account.url', value=admin_url).exists()
     return HttpResponse(str(not exists).lower(), content_type='application/json')

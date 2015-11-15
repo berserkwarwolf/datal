@@ -28,7 +28,7 @@ def redirect_to_login(next, login_url=None, redirect_field_name=REDIRECT_FIELD_N
     return HttpResponseRedirect(urlparse.urlunparse(login_url_parts))
 
 @login_required
-def action_grant_datastream(request):
+def grant_datastream(request):
 
     auth_manager = request.auth_manager
     private_datastream_share_form = forms.PrivateDataStreamShareForm(request.POST, prefix='private_share_form')
@@ -79,7 +79,7 @@ def action_grant_datastream(request):
     return HttpResponse('{"pStatus": "OK", "pMessage": "'+ugettext("PRIV-SHARING-UPDATED")+'"}', content_type='application/json')
 
 @login_required
-def action_grant_dashboard(request):
+def grant_dashboard(request):
 
     auth_manager = request.auth_manager
     private_dashboard_share_form = forms.PrivateDashboardShareForm(request.POST, prefix='private_share_form')
@@ -129,7 +129,7 @@ def action_grant_dashboard(request):
     return HttpResponse('{"pStatus": "OK", "pMessage": "'+ugettext("PRIV-SHARING-UPDATED")+'"}', content_type='application/json')
 
 @login_required
-def action_grant_visualization(request):
+def grant_visualization(request):
 
     auth_manager = request.auth_manager
     private_visualization_share_form = forms.PrivateVisualizationShareForm(request.POST, prefix='private_share_form')
@@ -178,7 +178,7 @@ def action_grant_visualization(request):
 
     return HttpResponse('{"pStatus": "OK", "pMessage": "'+ugettext("PRIV-SHARING-UPDATED")+'"}', content_type='application/json')
 
-def action_get_email_info(request):
+def get_email_info(request):
     auth_manager = request.auth_manager
     email_form = forms.EmailForm(request.GET)
 
