@@ -883,7 +883,7 @@ msgstr "Archivo no valido"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Ingrese un tipo de archivo valido."
 
-msgid "EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgid "EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar la visualización"
 
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"

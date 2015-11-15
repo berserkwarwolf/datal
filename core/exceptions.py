@@ -148,7 +148,7 @@ class VisualizationRequiredException(LifeCycleException):
         return [ViewVisualizationListExceptionAction()]
 
 class VisualizationParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED')
+    title = _('EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED')
     tipo = 'illegal-state'
 
