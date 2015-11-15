@@ -205,8 +205,7 @@ class Command(BaseCommand):
             self.print_titulo("FileTypeNotValidException")
             space = 'workspace'
             type_response ='text/html'
-
-            e = FileTypeNotValidException()
+            e = FileTypeNotValidException('')
             self.generate_exception(space,type_response,e)
 
             self.print_titulo("ApplicationException")

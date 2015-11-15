@@ -4,8 +4,8 @@
 {% block css_includes %}
 		{% compress css %}
 		<link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
-		<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
 		{% endcompress %}
+		<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block js_includes %}
@@ -26,7 +26,7 @@
 	<div class="layout">
 
 		{% block header %}
-			
+
 			<!--[if lt IE 8]>
 			<div class="ieMsg">
 				<div class="w960 clearfix">
@@ -115,16 +115,16 @@
 		{% include "errorManager/errorManager.html" %}
 
 	<script type="text/javascript">
-		
+
 		{% if auth_manager %}
 		var authManager = new AuthManager({
-			id: {{auth_manager.id|default_if_none:"null"}}, 
-			nick: "{{auth_manager.nick}}", 
+			id: {{auth_manager.id|default_if_none:"null"}},
+			nick: "{{auth_manager.nick}}",
 			name: "{{auth_manager.name}}",
-			roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
-			privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}], 
-			account_level : "{{ auth_manager.account_level }}", 
-			isAuthenticated: {{ auth_manager.is_authenticated|lower }}, 
+			roles: [{% for role in auth_manager.roles %}'{{role}}'{%if not forloop.last%}, {%endif%}{% endfor %}],
+			privileges: [{% for privilege in auth_manager.privileges %}'{{privilege}}'{%if not forloop.last%}, {%endif%}{% endfor %}],
+			account_level : "{{ auth_manager.account_level }}",
+			isAuthenticated: {{ auth_manager.is_authenticated|lower }},
 			email: "{{ auth_manager.email|lower }}"
 		});
 		{% endif %}
@@ -136,7 +136,7 @@
 		Configuration.language = "{{LANGUAGE_CODE}}";
 
 		csrfmiddlewaretoken = '{{ csrf_token }}';
-		
+
 		function csrfSafeMethod(method) {
 			// these HTTP methods do not require CSRF protection
 			return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
@@ -146,15 +146,15 @@
 		-------------------------------------------------------------------------
 		WARNING: beforeSend method in jQuery $.ajax()
 		-------------------------------------------------------------------------
-		
+
 		If you use a custom beforeSend in your jQuery $.ajax() calls, you will need to include the following in order to prevent overriding the csrf token that is set globally.
 
 		$.ajax({
 			beforeSend : function(xhr, settings){
-				
+
 				// call global beforeSend func
 				$.ajaxSettings.beforeSend(xhr, settings);
-				
+
 				// your code here
 
 			}

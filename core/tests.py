@@ -8,7 +8,9 @@ from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
 
 from workspace.exceptions import *
-from workspace.middlewares.catch import ExceptionManager as ExceptionManagerMiddleWare
+from microsites.exceptions import *
+from workspace.middlewares.catch import ExceptionManager as WorkspaceExceptionManagerMiddleWare
+from microsites.middlewares.catch import ExceptionManager as MicrositesExceptionManagerMiddleWare
 from django.test.client import RequestFactory
 from django.contrib.auth.models import AnonymousUser
 from django.conf import settings
@@ -17,38 +19,261 @@ from core.auth.auth import AuthManager
 import re
 from workspace.manageDatasets.forms import *
 
-class ExpectionsTest(TransactionTestCase):
-    def setUp(self):
-        self.user_nick = 'administrador'
-        self.user = User.objects.get(nick=self.user_nick)
 
+class ExpectionsTest(TransactionTestCase):
+    class Object(object):
+        def __init__(self):
+            self.id = 0
+            self.revision = 0
+            self._context = {
+                'valid_types':'valid_types'
+            }
+
+    def setUp(self):
         settings.TEMPLATE_DIRS = list(settings.TEMPLATE_DIRS)
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'workspace', 'templates'))
         settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'microsites', 'templates'))
-        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'api', 'templates'))
         settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS)
 
-    def SearchText(self,text,expression):
-        pattern=re.compile(expression, flags=re.IGNORECASE)
-        return re.search(pattern, text)
+        settings.INSTALLED_APPS = list(settings.INSTALLED_APPS)
+        settings.INSTALLED_APPS.append('microsites')
+        settings.INSTALLED_APPS = tuple(settings.INSTALLED_APPS)
 
-    def FakeRequest(self, space, type_response):
+    def fake_request(self, space, type_response):
         request = RequestFactory().get('/'+space+'/', HTTP_ACCEPT=type_response)
         request.user = AnonymousUser()
         request.auth_manager = AuthManager(language="en")
         return request
 
+    def assert_contains(self, response, title, description, code):
+        self.assertContains(response, title, count=None, status_code=code, html=False)
+        self.assertContains(response, description, count=None, status_code=code, html=False)
+
+    def process(self, e, space, type_response):
+        request = self.fake_request(space,type_response)
+        if space == 'workspace':
+            middleware = WorkspaceExceptionManagerMiddleWare()
+
+        if space == 'microsites':
+            middleware = MicrositesExceptionManagerMiddleWare()
+
+        response = middleware.process_exception(request,e)
+        self.assert_contains(response, unicode(e.title), unicode(e.description), e.status_code)
+
     def test_exception_generator(self):
-    	print "============== test_exception_generator ======================"
-        e = Exception.__new__(eval(options['exception']))
+        """
+        [Exceptions Test] Test de prueba de excepciones
+        """
+
+        ''' Instance generic Objects for test '''
+        InstancedForm = DatasetFormFactory(0).create()
+        argument = self.Object()
+
+        e = LifeCycleException()
         space = 'workspace'
         type_response = 'text/html'
-        request = self.FakeRequest(space,type_response)
-        middleware = ExceptionManagerMiddleWare()
+        self.process(e, space, type_response)
 
-        ObjHttpResponse = middleware.process_exception(request,e)
-        self.assertContains(ObjHttpResponse._container[0],unicode(e.title),html=True)
-        self.assertContains(ObjHttpResponse._container[0],unicode(e.description),html=True)
+        e = DATALException()
+        space = 'workspace'
+        type_response = 'text/html'
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = LifeCycleException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ChildNotApprovedException(argument)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response = 'text/html'
+        e = SaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastreamSaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationSaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatasetNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DataStreamNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = IllegalStateException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ApplicationException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastoreNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = MailServiceNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SearchIndexNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = S3CreateException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = S3UpdateException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SFTPCreateException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SFTPUpdateException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = NoStatusProvidedException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ParentNotPublishedException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        request = self.fake_request(space, type_response)
+        e = DatastreamParentNotPublishedException(argument)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationParentNotPublishedException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ResourceRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyResourceRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatasetRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastreamRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyDatasetRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyDatastreamRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = InsufficientPrivilegesException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = RequiresReviewException()
+        self.process(e, space, type_response)
+
+        '''
+        Test microsites exceptions
+        '''
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = VisualizationRevisionDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = VisualizationDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = AccountDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = InvalidPage()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DataStreamDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DatasetDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DatsetError()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = NotAccesVisualization()
+        self.process(e, space, type_response)
+
 
 
 

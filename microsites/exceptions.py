@@ -4,8 +4,8 @@ from core.exceptions import *
 from core.actions import *
 
 class VisualizationRevisionDoesNotExist(LifeCycleException):
-	title = _('EXCEPTION-TITLE-REVISION-NOT-EXIST2')
-	description = _('EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST2')
+	title = _('EXCEPTION-TITLE-REVISION-NOT-EXIST')
+	description = _('EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST')
 	tipo = 'revision-no-exist'
 	status_code = 404
 
