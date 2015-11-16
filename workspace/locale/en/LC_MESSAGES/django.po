@@ -1428,7 +1428,7 @@ msgid "APP-ADVANCEDOPTIONS-TEXT"
 msgstr "Advanced Options"
 
 msgid "CREATION-SIDEBAR-ADVANCEDTIP"
-msgstr "In the advanced mode, there are various functions you can perform, such as: set table headers, add filters, calculate averages and totals. If you use our API, you can also set your aliases in this mode"
+msgstr "In the advanced mode, there are various functions that you can perform, such as: set table headers, add filters, calculate averages and totals. If you use our API, you can also set your aliases in this mode"
 
 msgid "CREATION-ENABLE-ADVANCE"
 msgstr "Enable advanced mode"
