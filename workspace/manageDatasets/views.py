@@ -49,10 +49,20 @@ def download(request, dataset_id, slug):
         content_type = settings.CONTENT_TYPES.get(impl_type)
         if settings.DEBUG: logger.info('Dataset download %s -- %s -- %s -- %s -- %s' % (filename, content_type, url, dataset['impl_type'], impl_type))
 
-        redirect = HttpResponse(content_type=content_type)
+        """ no funciona asi 
+        redirect = HttpResponse(status=302, content_type=content_type)
         redirect['Location'] = url
         redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
-        
+        """
+
+        redirect = HttpResponse(content_type=content_type) # si no funcionara => redirect = HttpResponse(mimetype='application/force-download')
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        redir = urllib2.urlopen(url)
+        status = redir.getcode()
+        resp = redir.read()
+        if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, redir.geturl(), redir.info()))
+        redirect.write(resp)
+
         return redirect
 
 
