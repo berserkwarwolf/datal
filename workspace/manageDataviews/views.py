@@ -234,7 +234,7 @@ def create(request):
             impl_details = dataset_revision.impl_details
             bucket_name = request.bucket_name
 
-            return render_to_response('view_manager/insertForm.html', locals())
+            return render_to_response('createDataview/index.html', locals())
         else:
             raise Http404
 

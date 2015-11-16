@@ -87,16 +87,16 @@
 	           <input id="id_rdf_template" type="hidden" value="{{datastream_revision.rdf_template}}"/>
 		
 		<div id="id_step0_container" class="step1 create clearfix" style="display:none">
-		    {% include "view_manager/step1.html" %}
+		    {% include "createDataview/step1.html" %}
 		</div>
 		<div id="id_step1_container" class="step2 create clearfix" style="display:none">
-		    {% include "view_manager/step2.html" %}
+		    {% include "createDataview/step2.html" %}
 		</div>
 		<div id="id_step2_container" class="step3 create clearfix" style="display:none">
-		    {% include "view_manager/step3.html" %}
+		    {% include "createDataview/step3.html" %}
 		</div>
 		<div id="id_step3_container" class="step4 create clearfix" style="display:none">
-		    {% include "view_manager/step4.html" %}
+		    {% include "createDataview/step4.html" %}
 		</div>
 		<div id="id_loading">
 			<table class="Loading bigLoader">
@@ -107,5 +107,5 @@
 {% endblock %}
 
 {% block popupsOverlay %}
-	{% include "view_manager/helpTipsOverlays.html" %}
+	{% include "createDataview/helpTipsOverlays.html" %}
 {% endblock %}

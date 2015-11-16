@@ -104,7 +104,7 @@ def dataStreamForm(is_update_selection, datastream_revision_id, dataset_revision
         'sources': sources
     }
 
-register.inclusion_tag('view_manager/dataStreamForm.html')(dataStreamForm)
+register.inclusion_tag('createDataview/dataStreamForm.html')(dataStreamForm)
 
 
 def get_activity_type(activity):
