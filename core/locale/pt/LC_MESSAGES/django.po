@@ -616,7 +616,7 @@ msgid "NEW-PASSWORD-MISMATCH"
 msgstr "New passwords do not match."
 
 msgid "EMAIL-EXISTS"
-msgstr "Email already exists."
+msgstr "E-mail already exists."
 
 msgid "HEADER-IE-MESSAGES"
 msgstr "<p><strong>Warning:</strong> DATAL runs correctly in Internet Explorer versions 8 or higher and may not work properly in older versions of this browser, or in <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='Compatibility view' target='_blank'>compatibility view</a> mode. Please <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Upgrade it' target='_blank'>upgrade it</a> or <a href='http://abetterbrowser.org/' title='Use another browser' target='_blank'>use another browser</a>.</p>"
@@ -733,7 +733,7 @@ msgid "PRIV-SHARE-VZ-ERROR"
 msgstr "Oops! We couldn't share your visualization"
 
 msgid "PRIV-SHARE-EMAIL-ERROR"
-msgstr "Oops! We couldn't process this email"
+msgstr "Oops! We couldn't process this e-mail"
 
 msgid "FOOTER-OPENDATA-BUTTON"
 msgstr "This material is Open Data"

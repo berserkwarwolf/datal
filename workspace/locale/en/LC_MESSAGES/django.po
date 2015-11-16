@@ -53,7 +53,7 @@ msgid "INVALID-USER-OR-PASS"
 msgstr "Invalid username or password."
 
 msgid "FORGOT-USER-NOFOUND"
-msgstr "User not found.<br/>Please try with another user or email."
+msgstr "User not found.<br/>Please try with another user or e-mail."
 
 msgid "ACCOUNT-FORM-NAME-LABEL"
 msgstr "Organization Name"
@@ -524,7 +524,7 @@ msgid "FORGOT-PASSWORD-LABEL"
 msgstr "Username or E-mail"
 
 msgid "FORGOT-PASSWORD-TIP"
-msgstr "You will receive instructions to get a new password via email."
+msgstr "You will receive instructions to get a new password via e-mail."
 
 msgid "APP-RECOVERIT-TEX"
 msgstr "Get new password"
@@ -539,7 +539,7 @@ msgid "APP-PICTURE-TEXT"
 msgstr "Picture"
 
 msgid "DSFIND-HELPTIP-TITLE"
-msgstr "Helpful Tips"
+msgstr "Helpfull Tips"
 
 msgid "USR-GRAVATAR-TIP1"
 msgstr "DATAL uses the power of"
@@ -831,10 +831,10 @@ msgid "APP-LAST-ACTIVITY-TEXT"
 msgstr "Last activity"
 
 msgid "APP-USER-TIP"
-msgstr "<h6>HELPFUL TIPS</h6><p>There are 3 types of roles:</p><p><strong>Editor:</strong><br> Can collect and transform datasets into Data Views and Visualizations, and use those in Dashboards.</p><p><strong>Publishers:</strong><br> Same privileges as Editor, plus the permition to publish the resources to the Branded Open Data Site.</p><p><strong>Account administrators:</strong><br> Same privileges as Editor and Publisher, plus management of account settings.</p>"
+msgstr "<h6>HELPFULL TIPS</h6><p>There are 3 types of roles:</p><p><strong>Editor:</strong><br> Can collect and transform datasets into Data Views and Visualizations, and use those in Dashboards.</p><p><strong>Publishers:</strong><br> Same privileges as Editor, plus the permition to publish the resources to the Branded Open Data Site.</p><p><strong>Account administrators:</strong><br> Same privileges as Editor and Publisher, plus management of account settings.</p>"
 
 msgid "APP-USER-TIP-PRIVATE"
-msgstr "<h6>HELPFUL TIPS</h6><p>There are 4 roles in the DATAL Private Data Platform:</p><p><strong>Editor:</strong><br> Collect and transform datasets into richer and more usable formats such as Data Views, Visualizations, and themed Dashboards.</p><p><strong>Publishers:</strong><br> Collect and enhance datasets, and approve which data to publish in the Branded Private Data Site</p><p><strong>Administrators:</strong> Collect, Enhance, and Publish datasets and manageaccount settings.</p><p><strong>Members:</strong><br>Chance to access to private resources.</p>"
+msgstr "<h6>HELPFULL TIPS</h6><p>There are 4 roles in the DATAL Private Data Platform:</p><p><strong>Editor:</strong><br> Collect and transform datasets into richer and more usable formats such as Data Views, Visualizations, and themed Dashboards.</p><p><strong>Publishers:</strong><br> Collect and enhance datasets, and approve which data to publish in the Branded Private Data Site</p><p><strong>Administrators:</strong> Collect, Enhance, and Publish datasets and manageaccount settings.</p><p><strong>Members:</strong><br>Chance to access to private resources.</p>"
 
 msgid "CHRT-XAXISNAME-TEXT"
 msgstr "X axis name"
@@ -1230,7 +1230,7 @@ msgid "STEP0-AWEBSITEPAGE-TEXT"
 msgstr "A website page"
 
 msgid "APP-CALLUSONSKYPE-TEXT2"
-msgstr "Send us an email"
+msgstr "Send us an e-mail"
 
 msgid "DSCRE-UPLOAD-TIP"
 msgstr "The following file types are allowed: <br/> DOC, DOCX, DOCM, DOTX, DOTM, XLS, XLSX, XLSM, XLTX, XLTM, XLSB, XLAM, XLL, ODT, ODS, CSV, TXT, PDF, HTML, HTM, XML, KML, KMZ, TSV. <br/> Files must be encoded in UTF-8."
@@ -1350,7 +1350,7 @@ msgid "OVEDITDS-NAME-TIP"
 msgstr "What's the data about? Type a general topic that explains the data you are extracting"
 
 msgid "EDITDS-SOURCE-TIP1"
-msgstr "Type the first 3 letters of a source and select one from the autocomplete list. If it doesn't appear, please"
+msgstr "Type the first 3 letters of a source and select one of them from the autocomplete list. If it doesn't appear, please"
 
 msgid "EDITDS-SOURCE-TIP2"
 msgstr "add a new one"
@@ -1428,7 +1428,7 @@ msgid "APP-ADVANCEDOPTIONS-TEXT"
 msgstr "Advanced Options"
 
 msgid "CREATION-SIDEBAR-ADVANCEDTIP"
-msgstr "In the advanced mode, there are various functions you can perform, such as: set table headers, add filters, calculate averages and totals. If you use our API, you can also set your aliases in this mode"
+msgstr "In the advanced mode, there are various functions that you can perform, such as: set table headers, add filters, calculate averages and totals. If you use our API, you can also set your aliases in this mode"
 
 msgid "CREATION-ENABLE-ADVANCE"
 msgstr "Enable advanced mode"
@@ -1572,7 +1572,7 @@ msgid "CREATE-STEP1-DISCLAIMER0"
 msgstr "Maximum sizes allowed for datasets are:<ol><li><strong>- CSV:</strong> 500.000 rows and 100 columns</li><li><strong>- XLSx / XLS:</strong> 100.000 rows and 50 columns</li><li><strong>- KML:</strong> 100.000 placemarks</li><li><strong>- HTML, XML and other formats:</strong> 50.000 rows and 30 columns</li></ol>"
 
 msgid "CREATE-STEP1-DISCLAIMER1"
-msgstr "For a URL to be a data source, it must be a HTML webpage that contains HTML &lt;table&gt; tags"
+msgstr "For an URL to be a data source, it must be a HTML webpage that contains HTML &lt;table&gt; tags"
 
 msgid "CREATE-STEP1-DISCLAIMER2"
 msgstr "CSV, KML, KMZ, TSV, TXT, XLS, XLSX, XML files can also be used as data sources"
@@ -1929,10 +1929,10 @@ msgid "WORKSPACE-METHODNAME-TIP"
 msgstr "Defines the name of the operation to invoke."
 
 msgid "WORKSPACE-NAMESPACE-TIP"
-msgstr "Define the namespace for the operation."
+msgstr "Defines the namespace for the operation."
 
 msgid "WORKSPACE-WSTYPE-TIP"
-msgstr "Define the Webservice type."
+msgstr "Defines the Webservice type."
 
 msgid "WORKSPACE-TOKEN-TIP"
 msgstr "Enter the token to sign the request to the webservice."
@@ -1944,13 +1944,13 @@ msgid "WORKSPACE-SIGNATURE-TIP"
 msgstr "Enter the name of the argument that will contain the signature."
 
 msgid "WORKSPACE-PATHTOHEADERS-TIP"
-msgstr "Define the path(xpath or json-path) to table headers."
+msgstr "Defines the path (xpath or json-path) to table headers."
 
 msgid "WORKSPACE-PATHTODATA-TIP"
-msgstr "Define the path(xpath or json-path) to table data."
+msgstr "Defines the path(xpath or json-path) to table data."
 
 msgid "WORKSPACE-CACHE-TIP"
-msgstr "Define if webservice result should be cached or not"
+msgstr "Defines if webservice result should be cached or not"
 
 msgid "WEBSERVICE-STEP1-TITLE"
 msgstr "Filter your selection as you need"
@@ -2306,7 +2306,7 @@ msgid "APP-GOBACKTO-TEXT"
 msgstr "Go back to DATAL website"
 
 msgid "FORGOT-ACTIVATION-EMAIL"
-msgstr "An activation link for your new password has been sent to your email."
+msgstr "An activation link for your new password has been sent to your e-mail."
 
 msgid "APP-ACTIVEFILTERS-TEXT"
 msgstr "Active filters"
@@ -3209,7 +3209,7 @@ msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "This field is required"
 
 msgid "VALIDATE-MAXLENGTH-TEXT-1"
-msgstr "This field must be at most "
+msgstr "This field supports up to  "
 
 msgid "VALIDATE-MAXLENGTH-TEXT-2"
 msgstr " characters."

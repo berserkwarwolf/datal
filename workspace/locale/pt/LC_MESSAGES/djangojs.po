@@ -478,7 +478,7 @@ msgstr "The time expected for this operation has been exceeded.</br>Please try a
 # NEW WORKSPACE KEYS -----------------------------------------
 
 msgid "VALIDATE-REQUIRED-TEXT"
-msgstr "Enter your username or email address in the field to continue."
+msgstr "Enter your username or e-mail address in the field to continue."
 
 msgid "VALIDATE-USERNAME-REQUIRED-TEXT"
 msgstr "Enter your username."
@@ -490,7 +490,7 @@ msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "This field is required."
 
 msgid "VALIDATE-MAXLENGTH-TEXT-1"
-msgstr "This field must be at most "
+msgstr "This field supports up to "
 
 msgid "VALIDATE-MAXLENGTH-TEXT-2"
 msgstr " characters."
