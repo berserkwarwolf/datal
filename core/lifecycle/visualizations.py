@@ -167,8 +167,10 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.visualization.last_published_revision = VisualizationRevision.objects.get(
-                        pk=last_published_revision_id)
+                self.visualization.last_published_revision = VisualizationRevision.objects.get(
+                    pk=last_published_revision_id)
+                search_dao = VisualizationSearchDAOFactory().create(self.visualization.last_published_revision)
+                search_dao.add()
             else:
                 self.visualization.last_published_revision = None
 
@@ -273,9 +275,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.visualization.last_published_revision=None
             self.visualization.save()
-
-            search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
-            search_dao.remove()
 
             self.visualization_revision.delete()
 

@@ -389,8 +389,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.datastream.last_published_revision = DataStreamRevision.objects.get(
+                self.datastream.last_published_revision = DataStreamRevision.objects.get(
                         pk=last_published_revision_id)
+                search_dao = DatastreamSearchDAOFactory().create(self.datastream.last_published_revision)
+                search_dao.add()
             else:
                 self.datastream.last_published_revision = None
 

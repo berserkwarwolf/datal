@@ -53,7 +53,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
         search_dao.remove()
-
         self._update_last_revisions()
 
         self._log_activity(ActionStreams.UNPUBLISH)
