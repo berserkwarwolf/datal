@@ -3,6 +3,7 @@ from django.conf import settings
 from elasticsearch import Elasticsearch, NotFoundError, RequestError
 import logging
 
+
 class ElasticsearchIndex():
     """ Gestor para indice elasticsearch"""
     
@@ -153,7 +154,6 @@ class ElasticsearchIndex():
                 }
               }
         }
-
  
     def __get_visualization_mapping(self):
         return {"chart" : {
@@ -189,17 +189,24 @@ class ElasticsearchIndex():
                 }
               }
         }
- 
-        
+
     def indexit(self, document):
         """add document to index"""
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
             try:
-                return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.create(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
             except:
-                return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.index(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
