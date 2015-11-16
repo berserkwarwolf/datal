@@ -22,6 +22,7 @@
 	<!-- COMPONENT -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'workspace/styles/createDataView.scss' %}"/>
 	
+	<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 	<!--[if IE]>
 		<link href="{% sass_src 'workspace/styles/ao.tableStyles.css' %}" media="screen" rel="stylesheet" type="text/css"/>
 	<![endif]-->
@@ -56,24 +57,40 @@
 {% endblock %}
 
 {% block sectionTitle %}
-	<div class="context-menu clearfix">
+  <div class="context-menu-view clearfix">
     <div class="col-xs-8">
-        <h1 class="sub-heading">{% trans "APP-CREATE-A-DATAVIEW-TEXT" %}</h1>
-        <ul id="id_steps_navbar" class="buttons-bar" data-step="0">
-					<li class="step0"><a id="id_goToStep0Button" href="javascript:;" title="{% trans 'DS-STEP1-TEXT' %}">{% trans "DS-STEP1-TEXT" %}</a></li>
-					<li class="step1"><a id="id_goToStep1Button" href="javascript:;" title="{% trans 'DS-STEP2-TEXT' %}">{% trans "DS-STEP2-TEXT" %}</a></li>
-					<li class="step2"><a id="id_goToStep2Button" href="javascript:;" title="{% trans 'DS-STEP3-TEXT' %}">{% trans "DS-STEP3-TEXT" %}</a></li>
-					<li class="step3"><a id="id_goToStep3Button" href="javascript:;" title="{% trans 'DS-STEP4-TEXT' %}">{% trans "DS-STEP4-TEXT" %}</a></li>
-				</ul>
+        <h1 class="sub-heading">{% trans "APP-CREATE-DATAVIEW-TEXT" %}</h1>
+
+        <div class="buttons_view_container">
+    	  <ul class="buttons-bar">
+		    <li class="step step-0 hidden">
+		      <a title="First Step">First Step</a>
+		    </li>
+		    <li class="step step-1 hidden">
+		      <a title="Second Step">Second Step</a>
+		    </li>
+		    <li class="step step-2 hidden">
+		      <a title="Third Step">Third Step</a>
+		    </li>
+		  </ul>
+        </div>
     </div>
     <div class="col-xs-4 context-buttons clearfix">
-    	
+	    <div class="FR">
+			<a class="button alpha btn-cancel">Cancelar</a>
+			<a class="button primary btn-continue">Continuar</a>
+		</div>
     </div>
-	</div>
+  </div>
 {% endblock %}
+
 
 {% block content %}
 	<input type="hidden" id="id_datastream-dataset_revision_id" name="id_datastream-dataset_revision_id" value="{{data_set_id}}" />
+
+	<div class="step-container">
+
+	</div>
 	<div id="id_steps_container">
 		<input id="id_is_update" type="hidden" value="{{is_update}}"/>
 		<input id="id_is_edit_selection" type="hidden" value="{{is_update_selection}}"/>
@@ -108,4 +125,19 @@
 
 {% block popupsOverlay %}
 	{% include "createDataview/helpTipsOverlays.html" %}
+{% endblock %}
+
+
+{% block bottom_js %}
+
+	<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+
+	<script src="{% static 'workspace/scripts/createDataview/views/StepBar.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createDataview/views/ChooseTableView.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createDataview/views/MainView.js' %}"></script>
+	<script>
+		var mainView = new MainView();
+		mainView.render();
+	</script>
+
 {% endblock %}

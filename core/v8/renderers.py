@@ -38,8 +38,9 @@ class JSONEngineRenderer(EngineRenderer):
 
         for x_table in x_tree.xpath('//table'):
             table = []
-            for x_row in x_table.xpath('//tr'):
-                table.append(x_row.xpath('td/text()'))
+            for x_row in x_table.xpath('tr'):
+                row = [x_cell.text_content() for x_cell in x_row.xpath('td')]
+                table.append(row)
 
             result.append(table)
 

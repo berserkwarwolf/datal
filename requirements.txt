@@ -22,6 +22,7 @@ greenlet==0.4.5
 jdcal==1.0
 kombu==3.0.26
 libsass==0.8.2
+lxml==3.5.0
 mailchimp==2.0.9
 mandrill==1.0.57
 MySQL-python==1.2.5
