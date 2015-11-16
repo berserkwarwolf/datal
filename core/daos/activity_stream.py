@@ -38,9 +38,6 @@ class ActivityStreamDAO:
             elif resource_type == settings.TYPE_DATASET:
                 l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})
-            elif resource_type == settings.TYPE_DASHBOARD:
-                l_permalink = LocalHelper.build_permalink('dashboard_manager.view',
-                                                          '&dashboard_revision_id=' + str(revision_id))
             
         list_key = 'activity_stream::%s' % str(account_id)
         n=c.incr("%s_counter" % list_key) # count any use of the list indexing hash and never repeat an ID
