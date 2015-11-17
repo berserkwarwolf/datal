@@ -135,8 +135,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.visualization_revision
 
-    def _move_childs_to_draft(self):
-        pass
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a visualization revision """
@@ -197,8 +195,12 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         """
         pass
 
-    def save_as_draft(self):
-        self.visualization_revision.clone()
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
+        pass
+
+
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.visualization_revision.clone(status)
         self._update_last_revisions()
 
     def _remove_all(self):

@@ -324,7 +324,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 **fields
             )
 
-            self._move_childs_to_draft()
+            self._move_childs_to_status()
 
             if form_status == StatusChoices.DRAFT:
                 self.unpublish()
@@ -354,19 +354,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.datastream_revision
 
-    def _move_childs_to_draft(self):
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
-                id=F('datastream__last_revision__id'),
-                status=StatusChoices.PUBLISHED)
+            visualizations = VisualizationRevision.objects.select_for_update().filter(
+                datastream=self.datastream.id,
+                id=f('visualization__last_revision__id'),
+                status=statuschoices.published)
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).save_as_draft()
+            for visualization in visualizations:
+               VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization.id).save_as_status(status)
 
-    def save_as_draft(self):
-        self.datastream_revision.clone()
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.datastream_revision.clone(status)
         self._update_last_revisions()
 
     def _log_activity(self, action_id):

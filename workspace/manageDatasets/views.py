@@ -19,6 +19,7 @@ from core.daos.datasets import DatasetDBDAO
 from core.utils import DateTimeEncoder
 from core.lib.datastore import active_datastore
 from core.forms import MimeTypeForm
+from core.signals import dataset_removed, dataset_changed, dataset_unpublished
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
@@ -28,7 +29,12 @@ logger = logging.getLogger(__name__)
 
 @require_http_methods(["GET"])
 def download(request, dataset_id, slug):
-    """ download dataset file directly """
+    """ download dataset file directly
+    :param slug:
+    :param dataset_id:
+    :param request:
+    """
+    logger = logging.getLogger(__name__)
 
     # get public url for datastream id
     try:
@@ -93,7 +99,9 @@ def download_file(request):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def index(request):
-    """ List all Datasets """
+    """ List all Datasets
+    :param request:
+    """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
     filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
@@ -122,7 +130,11 @@ def view(request, revision_id):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
-    """ filter resources """
+    """ filter resources
+    :param itemsxpage:
+    :param page:
+    :param request:
+    """
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
@@ -197,7 +209,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def get_filters_json(request):
-    """ List all Filters available """
+    """ List all Filters available
+    :param request:
+    """
     if settings.DEBUG: logger.info('GET FILTERs')
     filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
@@ -212,7 +226,11 @@ def get_filters_json(request):
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
 def remove(request, dataset_revision_id, type="resource"):
-    """ remove resource """
+    """ remove resource
+    :param type:
+    :param dataset_revision_id:
+    :param request:
+    """
 
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
@@ -224,18 +242,25 @@ def remove(request, dataset_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
-        
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
+        # Send signal
+        dataset_rev_removed.send(sender='remove_view', id=dataset_revision_id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
         
     else:
         lifecycle.remove(killemall=True)
 
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
+        # Send signal
+        dataset_removed.send(sender='remove_view', id=lifecycle.dataset.id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
 
 
@@ -351,6 +376,9 @@ def edit(request, dataset_revision_id=None):
             dataset_revision = lifecycle.edit(collect_type=request.POST.get('collect_type'),
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
+            # Signal
+            dataset_changed.send_robust(sender='edit_view', id=dataset_revision.dataset.id)
+
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
@@ -399,6 +427,10 @@ def change_status(request, dataset_revision_id=None):
 
         if action == 'approve':
             lifecycle.accept()
+
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -408,6 +440,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'reject':
             lifecycle.reject()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -417,6 +451,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -431,6 +467,11 @@ def change_status(request, dataset_revision_id=None):
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
+
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -440,6 +481,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
