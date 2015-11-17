@@ -62,7 +62,6 @@ var FinishModel = StepModel.extend({
 		data.title = $.trim( this.get('title') );
 		data.description = $.trim( this.get('description') );
 		data.category = $('#id_category option:selected').val();
-		data.status = $('#id_status option:selected').val();
 		
 		// Prepare Sources for Data
 		data['sources-TOTAL_FORMS'] = sources.length;
