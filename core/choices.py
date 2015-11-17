@@ -258,6 +258,7 @@ DATASTREAM_IMPL_VALID_CHOICES = [
     SourceImplementationChoices.CSV, 
     SourceImplementationChoices.KML, 
     SourceImplementationChoices.KMZ, 
+    SourceImplementationChoices.DOC,
     SourceImplementationChoices.TSV,
     SourceImplementationChoices.TXT]
 
