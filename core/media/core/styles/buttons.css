@@ -26,6 +26,9 @@
   /* Next */
   .button.next:after{content:" >";}
 
+  /* Add */
+  .button.add:after{content:" +";}
+
 /* Button icons */
 .button i{width:12px;position:relative;left:-1px;margin-right:8px;height:26px;vertical-align:bottom;display:inline-block;background:url(/static/workspace/images/common/ic_buttons.png) no-repeat;}
 .button i.new{background-position:center 0;}
