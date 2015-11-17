@@ -369,26 +369,6 @@
     }
 },
 {
-    "pk": 640,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_datastream",
-        "name": "workspace.can_query_enhancer_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 641,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_visualization",
-        "name": "workspace.can_query_enhancer_visualization",
-        "description": ""
-    }
-},
-{
     "pk": 646,
     "model": "core.privilege",
     "fields": {
