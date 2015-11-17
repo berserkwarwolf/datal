@@ -13,7 +13,7 @@ input[type=email],
 input[type=url], 
 input[type=search],
 select,
-textarea{background:#fff;border:1px solid #cbcbcb;margin:0;font:14px Arial, Helvetica, sans-serif;color:#000;outline:none;height:28px;padding:5px;}
+textarea{background:#fff;border:1px solid #cbcbcb;margin:0;font:12px Arial, Helvetica, sans-serif;color:#000;outline:none;height:28px;padding:5px;box-sizing:border-box}
 input[type=text], 
 input[type=password]{padding-left:10px;padding-right:10px;}
 select{padding:2px;}
