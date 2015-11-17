@@ -87,6 +87,14 @@ STATUS_CHOICES = Choices(
     (StatusChoices.APPROVED, ugettext_lazy('MODEL_STATUS_APPROVED'))
     )
 
+STATUS_CHOICES_REST = Choices(
+    (StatusChoices.DRAFT, "draft"),
+    (StatusChoices.PENDING_REVIEW, "pending"),
+    (StatusChoices.APPROVED, "approved"),
+    (StatusChoices.PUBLISHED, "published"),
+    (StatusChoices.REJECTED, "rejected")
+    )
+
 VALID_STATUS_CHOICES = (
      (StatusChoices.DRAFT,  ugettext_lazy('MODEL_STATUS_DRAFT')),
      (StatusChoices.PENDING_REVIEW,  ugettext_lazy('MODEL_STATUS_PENDING_REVIEW')),
