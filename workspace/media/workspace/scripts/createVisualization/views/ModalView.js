@@ -31,7 +31,6 @@ var ModalView = Backbone.View.extend({
         this.listenTo(this.model, 'change:geoType', this.onChangeType, this);
         this.listenTo(this.collection, 'change remove reset', this.validate, this);
         this.listenTo(this.selectedCellRangeView, 'focus-input', function (name) {
-            console.log(name);
             this._cacheFocusedInput = name;
         });
 

@@ -104,7 +104,7 @@ var ChartView = StepViewSPA.extend({
 			.then(function () {
 				self.hideLoading();
 			})
-			.error(function(response){
+			.fail(function(response){
 				self.hideLoading();
 	        });
 	},
@@ -270,6 +270,9 @@ var ChartView = StepViewSPA.extend({
 		this.selectGraphType(initial);
 
 		this.setupChart();
+
+		console.log(initial);
+		console.log(this.model.data.get('rows'));
 
 		if(this.model.data.get('rows').length){
 			this.onChartChanged();
