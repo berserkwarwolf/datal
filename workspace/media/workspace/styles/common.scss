@@ -618,6 +618,12 @@ i.icon.TNCLIMA{}
 /* Overlays Pagination */
 .ao-popup-overlay .pagination{padding:0;}
 
+/* Modals */
+.modal{
+  position:fixed;top:0;left:0;right:0;bottom:0;background:white;z-index:1;z-index:300;
+  .main-section{margin:0;}
+}
+
 /* Backgrid - Override */
 .backgrid thead th{background:none !important;text-align:left !important;}
 .backgrid thead th a{color:#999;}
