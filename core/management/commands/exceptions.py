@@ -14,6 +14,8 @@ from core.shortcuts import render_to_response
 from workspace.manageDatasets.forms import *
 from django.template import Context,Template
 
+
+
 class Colors:
     HEADER = '\033[95m'
     BLUE = '\033[94m'
@@ -42,6 +44,7 @@ class Command(BaseCommand):
     )
 
     def search_text(self,text,expression):
+        expression = expression.replace("'", "&#39;")
         pattern=re.compile(expression, flags=re.IGNORECASE)
         return re.search(pattern, text)
 
@@ -72,15 +75,16 @@ class Command(BaseCommand):
         html = ObjHttpResponse._container[0]
         title = unicode(e.title)
         description = unicode(e.description)
+        print "Descripcion", description
         if not self.search_text(html,description):
             print Colors.FAIL + "Description not found in html" + Colors.END
         else:
             print Colors.GREEN + "Description found in html:",description + Colors.END
 
-        if not self.search_text(html,title):
+        '''if not self.search_text(html,title):
             print Colors.FAIL + "Title not found in html" + Colors.END
         else:
-            print Colors.GREEN + "Title found in html:", title + Colors.END
+            print Colors.GREEN + "Title found in html:", title + Colors.END'''
 
         print "Status Code:", e.status_code
         print "Template:", request.META['PATH_INFO']+e.template
@@ -110,7 +114,7 @@ class Command(BaseCommand):
         if options['exception']:
             self.print_titulo(options['exception'])
             e = Exception.__new__(eval(options['exception']))
-            space = 'workspace'
+            space = 'microsites'
             type_response = 'text/html'
             request = self.fake_request(space,type_response)
             if space == 'workspace':
@@ -200,12 +204,6 @@ class Command(BaseCommand):
             type_response ='text/html'
 
             e = IllegalStateException()
-            self.generate_exception(space,type_response,e)
-
-            self.print_titulo("FileTypeNotValidException")
-            space = 'workspace'
-            type_response ='text/html'
-            e = FileTypeNotValidException('')
             self.generate_exception(space,type_response,e)
 
             self.print_titulo("ApplicationException")

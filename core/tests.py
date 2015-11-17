@@ -46,6 +46,10 @@ class ExpectionsTest(TransactionTestCase):
         return request
 
     def assert_contains(self, response, title, description, code):
+        
+        description = description.replace("'", "&#39;")
+        title = title.replace("'", "&#39;")
+
         self.assertContains(response, title, count=None, status_code=code, html=False)
         self.assertContains(response, description, count=None, status_code=code, html=False)
 
