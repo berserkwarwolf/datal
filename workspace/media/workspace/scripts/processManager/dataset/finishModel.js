@@ -3,7 +3,7 @@ var FinishModel = StepModel.extend({
 	defaults:{
 		title: null,
 		description: null,
-		category: null,
+		category: undefined,
 		status: null,
 		sources: [],
 		tags: [],

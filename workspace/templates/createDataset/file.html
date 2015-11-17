@@ -74,6 +74,7 @@ $(document).ready(function(){
 		saveUrl: "{% url 'manageDatasets.create_type' 'file' %}",
         sourceUrl: '/rest/sources.json',
         tagUrl: '/rest/tags.json',
+        category: {{form.initial.category}}
 	});
 	var finishView = new FinishView({model: finishModel});
 
