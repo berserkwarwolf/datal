@@ -3269,3 +3269,18 @@ msgstr "Requerido"
 
 msgid "APP-INVALID-VALUE"
 msgstr "Valor inválido"
+
+msgid "APP-SEARCH-PLACEHOLDER-TEXT"
+msgstr "Buscar..."
+
+msgid "APP-ALL-CATEGORIES-TEXT"
+msgstr "Todas las categorías"
+
+msgid "APP-ALL-AUTHORS-TEXT"
+msgstr "Todos los autores"
+
+msgid "APP-X-AVAILABLE-RESOURCES-TEXT"
+msgstr "recursos disponibles"
+
+msgid "APP-X-RESOURCES-ADDED-TEXT"
+msgstr "recursos agregados"
