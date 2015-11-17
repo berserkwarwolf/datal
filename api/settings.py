@@ -5,13 +5,17 @@ USE_L10N = False
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'api.urls'
 
 INSTALLED_APPS += (
     'api',
+    'corsheaders',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (

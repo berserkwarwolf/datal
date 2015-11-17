@@ -1,4 +1,5 @@
 import urllib2, logging
+from django.conf import settings
 
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
@@ -48,15 +49,25 @@ def download(request, dataset_id, slug):
         if dataset['end_point'][:7] != "file://":
             return HttpResponse("No downloadable file!")
 
-        url = active_datastore.build_url(
-            request.bucket_name,
-            dataset['end_point'].replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(filename)}
-        )
+        url = active_datastore.build_url(request.bucket_name, dataset['end_point'].replace("file://", ""))
 
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(dataset['impl_type']))
-        redirect = HttpResponse(status=302, mimetype=content_type)
+        impl_type = settings.IMPL_TYPES.get(str(dataset['impl_type']))
+        content_type = settings.CONTENT_TYPES.get(impl_type)
+        if settings.DEBUG: logger.info('Dataset download %s -- %s -- %s -- %s -- %s' % (filename, content_type, url, dataset['impl_type'], impl_type))
+
+        """ no funciona asi 
+        redirect = HttpResponse(status=302, content_type=content_type)
         redirect['Location'] = url
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        """
+
+        redirect = HttpResponse(content_type=content_type) # si no funcionara => redirect = HttpResponse(mimetype='application/force-download')
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        redir = urllib2.urlopen(url)
+        status = redir.getcode()
+        resp = redir.read()
+        if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, redir.geturl(), redir.info()))
+        redirect.write(resp)
 
         return redirect
 
@@ -74,8 +85,6 @@ def download_file(request):
             response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
             response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
         except Exception:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.error(dataset_revision.end_point)
     else:
         response = dict(
@@ -204,7 +213,8 @@ def get_filters_json(request):
     :param request:
     """
     if settings.DEBUG: logger.info('GET FILTERs')
-    filters = DatasetDBDAO().query_filters(account_id=request.user.account.id, language=request.user.language)
+    filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
+                                    language=request.user.language)
                                     
     response = DefaultDictToJson().render(data=filters) # normalize=True #TODO check
     

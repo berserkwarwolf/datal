@@ -388,7 +388,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
                     self.dataset_revision.id
                 ))
-                self._move_childs_to_draft()
+                self._move_childs_to_status()
 
                 self._update_last_revisions()
         else:
@@ -448,7 +448,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.dataset_revision
 
-    def _move_childs_to_draft(self):
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
         """
         Muevo las vistas y las visualizaciones asociadas a este dataset a BORRADOR
         :return:
@@ -461,7 +461,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             )
 
             for datastream_revision in datastream_revisions:
-                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).save_as_draft()
+                DatastreamLifeCycleManager(self.user, datastream_revision_id=datastream_revision.id).save_as_status(status)
 
             visualization_revs = VisualizationRevision.objects.select_for_update().filter(
                 visualization__datastream__last_revision__dataset__id=self.dataset.id,
@@ -470,10 +470,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             )
 
             for revision in visualization_revs:
-                VisualizationLifeCycleManager(self.user, visualization_revision_id=revision.id).save_as_draft()
+                VisualizationLifeCycleManager(self.user, visualization_revision_id=revision.id).save_as_status(status)
 
-    def save_as_draft(self):
-        self.dataset_revision.clone()
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.dataset_revision.clone(status)
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
