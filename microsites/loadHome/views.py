@@ -170,7 +170,7 @@ def update_list(request):
 
 
 @require_GET
-def action_update_categories(request):
+def update_categories(request):
     language = request.auth_manager.language
     params = request.GET
     account_id = params.get('account_id','')

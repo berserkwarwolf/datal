@@ -24,7 +24,7 @@ def custom_pages(request, page):
         raise Http404()
 
 
-def action_css(request, id):
+def get_css(request, id):
     http_referer = request.META.get('HTTP_REFERER')
     key = get_key(http_referer)
     try:
@@ -34,7 +34,7 @@ def action_css(request, id):
     return HttpResponse(css, content_type='text/css')
 
 
-def action_js(request, id):
+def get_js(request, id):
     http_referer = request.META.get('HTTP_REFERER')
     key = get_key(http_referer)
     try:
@@ -71,7 +71,7 @@ def get_key(http_referer):
     return key + '.full'
 
 
-def action_new_css(request, id):
+def get_new_css(request, id):
     try:
         account = request.account
         preferences = account.get_preferences()
@@ -99,13 +99,13 @@ def action_new_css(request, id):
         return HttpResponse('', content_type='text/css')
 
 
-def action_is_live(request):
+def is_live(request):
     callback = request.GET.get('callback')
     response = '%s(true)' % callback
     return HttpResponse(response, content_type='text/javascript')
 
 
-def action_catalog_xml(request):
+def get_catalog_xml(request):
     logger = logging.getLogger(__name__)
 
     account_id = request.account.id
@@ -115,7 +115,7 @@ def action_catalog_xml(request):
     domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
-    developers_link = 'http://' + domain + reverse('manageDeveloper.action_query')
+    developers_link = 'http://' + domain + reverse('manageDeveloper.filter')
     datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(
         datastream__user__account_id=account_id, status=StatusChoices.PUBLISHED
     )

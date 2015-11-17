@@ -14,6 +14,7 @@ from workspace.rest.maps import RestMapViewSet
 from workspace.rest.charts import RestChartViewSet
 from workspace.rest.sources import RestSourceViewSet
 from workspace.rest.tags import RestTagViewSet
+from workspace.rest.resources import MultipleResourceViewSet
 
 
 router = routers.DefaultRouter()
@@ -23,6 +24,7 @@ router.register(r'charts', RestChartViewSet, base_name='charts')
 router.register(r'datasets', RestDataSetViewSet, base_name='datasets')
 router.register(r'sources', RestSourceViewSet, base_name='sources')
 router.register(r'tags', RestTagViewSet, base_name='tags')
+router.register(r'resources', MultipleResourceViewSet, base_name='resources')
 
 def jsi18n(request, packages=None, domain=None):
     if not domain:

@@ -150,7 +150,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
-            datastream_revision_id=visualization_revision.datastream_revision_id
+            datastream_revision_id=visualization_revision.datastream_revision_id,
+            filename='' # nice to have
         )
         visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
@@ -309,7 +310,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id = row[2]
             visualization_id = row[3]
             title = row[5]
-            permalink = reverse('chart_manager.action_view', kwargs={'id': visualization_id, 'slug': slugify(title)})
+            permalink = reverse('chart_manager.view', kwargs={'id': visualization_id, 'slug': slugify(title)})
             visualizations.append({'id'           : row[0],
                                    'sov_id'       : row[1],
                                    'impl_details' : row[4],

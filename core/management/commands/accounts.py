@@ -268,35 +268,6 @@ class Command(BaseCommand):
                     if options['delete']:
                         dashboard.delete()
 
-                # Remove DashboardRevision
-                for dashboardrevision in DashboardRevision.objects.filter(user=user):
-
-                    # Remove DashboardI18n
-                    for dashboardi18n in DashboardI18n.objects.filter(dashboard_revision=dashboardrevision):
-                        self.stdout.write('\tDashboardI18n ID {}.'.format(dashboardi18n.id))
-
-                        if options['delete']:
-                            dashboardi18n.delete()
-
-                    # Remove TagDashboard
-                    for tagdashboard in TagDashboard.objects.filter(dashboardrevision=dashboardrevision):
-                        self.stdout.write('\tTagDashboard ID {}.'.format(tagdashboard.id))
-
-                        if options['delete']:
-                            tagdashboard.delete()
-
-                    # Remove DashboardWidget
-                    for dashboardwidget in DashboardWidget.objects.filter(dashboard_revision=dashboardrevision):
-                        self.stdout.write('\tDashboardWidget ID {}.'.format(dashboardwidget.id))
-
-                        if options['delete']:
-                            dashboardwidget.delete()
-
-                    self.stdout.write('\tDashboardRevision ID {}.'.format(dashboardrevision.id))
-
-                    if options['delete']:
-                        dashboardrevision.delete()
-
                 # Remove Log
                 for log in Log.objects.filter(user=user):
                     self.stdout.write('\tLog ID {}.'.format(log.id))
