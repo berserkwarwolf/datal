@@ -6,7 +6,7 @@ var ProcessManagerView = Backbone.View.extend({
 	index: 0,
 
 	events: {
-		'click .section-title .buttons-bar a[data-step]': 'onNavigationButtonClicked',
+		'click .section-title .buttons-bar .stepBtn[data-step]': 'onNavigationButtonClicked',
 	},
 
 	initialize: function(){

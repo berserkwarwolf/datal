@@ -35,17 +35,18 @@
 <script src="/js_core/base_modules/placeholder.js?id={{settings.VERSION_JS_CSS}}"></script>
 <![endif]-->
 
-	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
-	<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
-	<script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
-	<script type="text/javascript" src="/js_core/plugins/jquery.validate.custom.methods.js?id={{settings.VERSION_JS_CSS}}"></script>
-	<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
+<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.validate.custom.methods.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-	<!-- NEW -->
-	<script type="text/javascript" src="{% static 'workspace/scripts/common.js' %}"></script>
-	<!-- Error Manager Module -->
-	<script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerModel.js' %}"></script>
-	<script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerView.js' %}"></script>
+<!-- NEW -->
+<script type="text/javascript" src="{% static 'workspace/scripts/common.js' %}"></script>
+<!-- Error Manager Module -->
+<script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerModel.js' %}"></script>
+<script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerView.js' %}"></script>
+	
 {% endblock %}
 
 {% block body %}
