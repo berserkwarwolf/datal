@@ -11,7 +11,9 @@ var UnpublishView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		this.parentView = options.parentView;
+    this.models = options.models;
+    this.type = options.type;
 
 		// init Overlay
 		this.$el.overlay({
@@ -39,8 +41,8 @@ var UnpublishView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionUnpublishView = new AffectedResourcesCollectionUnpublishView({
 			collection: affectedResourcesCollection,
-			models: this.options.models,
-			type: this.options.type,
+			models: this.models,
+			type: this.type,
 			parentView: this.parentView
 		});
 

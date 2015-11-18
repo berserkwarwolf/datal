@@ -7,8 +7,8 @@ var TitleCellView = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        this.options = options;
-        this.parentView = this.options.parentView;
+        this.itemCollection = options.itemCollection;
+        this.parentView = options.parentView;
         this.template = _.template($("#grid-titlecell-template").html());
     },
 
@@ -19,9 +19,9 @@ var TitleCellView = Backbone.View.extend({
     deleteVisualization: function() {
         self = this;
         this.deleteListResources = new Array();
-        this.deleteListResources.push(this.options.model);
+        this.deleteListResources.push(this.model);
         var deleteItemView = new DeleteItemView({
-            itemCollection: self.options.itemCollection,
+            itemCollection: self.itemCollection,
             models: this.deleteListResources,
             type: "visualizations",
             parentView: this.parentView

@@ -5,14 +5,13 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	initialize: function(options){
-
-		this.stateModel = options.stateModel;
+		ChartView.__super__.initialize.apply(this, arguments);
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
-			'click .step-1-view a.backButton': 			'onPreviousButtonClicked',
-			'click .step-1-view a.nextButton': 			'onNextButtonClicked',
+			'click a.backButton': 			'onPreviousButtonClicked',
+			'click a.nextButton': 			'onNextButtonClicked',
 			'click button.selectData': 		'onSelectDataClicked',
 			'click button.chartType': 		'onChartTypeClicked',
 			'change select#chartLibrary': 	'onChartLibraryChanged',
@@ -20,6 +19,8 @@ var ChartView = StepViewSPA.extend({
 
 		});
 
+		this.stateModel = options.stateModel;
+		
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
         this.modalView = new ModalView({
@@ -103,7 +104,7 @@ var ChartView = StepViewSPA.extend({
 			.then(function () {
 				self.hideLoading();
 			})
-			.error(function(response){
+			.fail(function(response){
 				self.hideLoading();
 	        });
 	},
@@ -240,7 +241,7 @@ var ChartView = StepViewSPA.extend({
 		this.previous();
 	},
 
-	onNextButtonClicked: function(){		
+	onNextButtonClicked: function(){
 		this.next();
 	},
 
@@ -269,6 +270,9 @@ var ChartView = StepViewSPA.extend({
 		this.selectGraphType(initial);
 
 		this.setupChart();
+
+		console.log(initial);
+		console.log(this.model.data.get('rows'));
 
 		if(this.model.data.get('rows').length){
 			this.onChartChanged();

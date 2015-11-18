@@ -18,12 +18,13 @@ from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
+from core.exceptions import VisualizationNotFoundException
 from core.v8.factories import AbstractCommandFactory
 from core.exceptions import DataStreamNotFoundException
+from core.signals import visualization_changed, visualization_removed, visualization_unpublished
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
-from core.exceptions import VisualizationNotFoundException
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +33,9 @@ logger = logging.getLogger(__name__)
 @requires_any_datastream()
 @require_GET
 def index(request):
-    """ list all dataviews """
+    """ list all dataviews
+    :param request:
+    """
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
@@ -50,7 +53,11 @@ def index(request):
 @require_GET
 #@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
-    """ filter resources """
+    """ filter resources
+    :param itemsxpage:
+    :param page:
+    :param request:
+    """
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
@@ -112,7 +119,11 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 #@requires_review
 @transaction.commit_on_success
 def remove(request, visualization_revision_id, type="resource"):
-    """ remove resource """
+    """ remove resource
+    :param type:
+    :param visualization_revision_id:
+    :param request:
+    """
     lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
 
     if type == 'revision':
@@ -257,7 +268,7 @@ def create(request):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     visualization_revision_id = request.GET.get('revision_id', '')
     visualization_id = request.GET.get('visualization_id', '')
     visualizations = VisualizationDBDAO().query_childs(
@@ -271,7 +282,7 @@ def related_resources(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
 
     try:
         visualization_revision = VisualizationDBDAO().get(
@@ -327,7 +338,8 @@ def edit(request, revision_id=None):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def get_filters_json(request):
-    """ List all Filters available """
-    filters = VisualizationDBDAO().query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
+    """ List all Filters available
+    :param request:
+    """
+    filters = VisualizationDBDAO().query_filters(account_id=request.user.account.id, language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))

@@ -5,6 +5,7 @@ var MapView = StepViewSPA.extend({
     },
 
     initialize: function(options){
+        MapView.__super__.initialize.apply(this, arguments);
 
         this.stateModel = options.stateModel;
 

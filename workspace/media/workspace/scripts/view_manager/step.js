@@ -1515,7 +1515,7 @@ var Step3 = Step.extend({
     },
     onSaveSuccess : function(pResponse){
         if(pResponse.status == 'ok'){
-            //window.location.replace('/dataviews/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
+            //window.location.replace('/dataviews/view?datastream_revision_id='+pResponse.datastream_revision_id);
             window.location.replace('/dataviews/'+pResponse.datastream_revision_id);
         }else{
             datalEvents.trigger('datal:application-error', pResponse);

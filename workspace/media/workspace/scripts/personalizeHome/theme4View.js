@@ -8,8 +8,11 @@ var theme4View = Backbone.Epoxy.View.extend({
 		"click #id_btnRemoveCover" : "removeCover",
 	},
 
-	initialize: function(){
-		this.options.currentView.helpAndTips('show');
+	initialize: function(options){
+		this.currentView = options.currentView;
+		this.currentModel = options.currentModel;
+
+		this.currentView.helpAndTips('show');
 		this.template = _.template( $("#id_theme4Template").html() );		
 		this.initSliderSection();
 		this.initLinkSection();
@@ -18,10 +21,34 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
+		var self = this;
+		Backbone.Validation.bind(this, {
+            valid: function (view, attr, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, '');
+            },
+            invalid: function (view, attr, error, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, error);
+            }
+        });
 	        
 		this.$el.html(this.template(this.model.attributes));
 		return this;
 	},
+
+	setIndividualError: function(element, name, error){
+
+        // If not valid
+        if( error != ''){
+            element.addClass('has-error');
+            element.after('<p class="has-error">'+error+'</p>');
+
+        // If valid
+        }else{
+            element.removeClass('has-error');
+            element.next('p').remove();
+        }
+
+    },
 	
 	initInput: function () {
 		var that = this;
@@ -319,15 +346,16 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	savePreference: function(event){
+	  if(this.model.isValid(true)){
 		this.setSliderSection();
 		this.setLinkSection();
 		var btn_id = $(event.currentTarget).attr("id")
 		var ob={};
 		if (btn_id === 'id_save' || btn_id === 'id_save_top') {
-			this.options.currentModel.attributes.config = this.model.toJSON();
-			this.options.currentModel.attributes.themeID = '4';
-			ob['config'] = this.options.currentModel.attributes.config;
-			ob['theme'] = this.options.currentModel.attributes.themeID;
+			this.currentModel.attributes.config = this.model.toJSON();
+			this.currentModel.attributes.themeID = '4';
+			ob['config'] = this.currentModel.attributes.config;
+			ob['theme'] = this.currentModel.attributes.themeID;
 			ob['type'] = 'save';
 		} else {
 			ob['config'] = this.model.toJSON();
@@ -377,7 +405,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 			},
 			url: '/personalizeHome/save/'
 		});	
-
+	  }
 	}
 
 });

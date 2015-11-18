@@ -10,9 +10,10 @@ form table td{text-align:left;border:1px solid #eee;padding:3px;vertical-align:m
 input[type=text], 
 input[type=password],
 input[type=email], 
-input[type=url],
+input[type=url], 
+input[type=search],
 select,
-textarea{background:#fff;border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;border-radius:3px;margin:0;font:14px Arial, Helvetica, sans-serif;color:#4d4d4d;outline:none;}
+textarea{background:#fff;border:1px solid #cbcbcb;margin:0;font:12px Arial, Helvetica, sans-serif;color:#000;outline:none;height:28px;padding:5px;box-sizing:border-box}
 input[type=text], 
 input[type=password]{padding-left:10px;padding-right:10px;}
 select{padding:2px;}
@@ -21,6 +22,7 @@ textarea{padding:10px;}
     /*TRANSITION*/
     input[type=text],
     input[type=password],
+    input[type=search],
     select,
     textarea{
         -webkit-transition:all 0.30s ease-in-out;
@@ -29,16 +31,20 @@ textarea{padding:10px;}
              -o-transition:all 0.30s ease-in-out;
                 transition:all 0.30s ease-in-out;    
     }
- 
+  
+    input:focus,
     input[type=text]:focus, 
     input[type=password]:focus,
+    input[type=search]:focus,
     select:focus, 
     textarea:focus,
+    input:active,
     input[type=text]:active, 
     input[type=password]:active,
+    input[type=search]:active,
     select:active, 
     textarea:active{
-        border:1px solid rgba(208,208,208,1);
+        border:1px solid #0066cc;
         -webkit-box-shadow:0 0 5px rgba(208,208,208,1);
            -moz-box-shadow:0 0 5px rgba(208,208,208,1);
                 box-shadow:0 0 5px rgba(208,208,208,1);
