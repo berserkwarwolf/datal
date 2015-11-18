@@ -1,4 +1,6 @@
-import urllib2, logging
+# -*- coding: utf-8 -*-
+import urllib2
+import logging
 from django.conf import settings
 
 from django.db import transaction
@@ -19,7 +21,7 @@ from core.daos.datasets import DatasetDBDAO
 from core.utils import DateTimeEncoder
 from core.lib.datastore import active_datastore
 from core.forms import MimeTypeForm
-from core.signals import dataset_removed, dataset_changed, dataset_unpublished
+from core.signals import dataset_removed, dataset_changed, dataset_unpublished, dataset_rev_removed
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
