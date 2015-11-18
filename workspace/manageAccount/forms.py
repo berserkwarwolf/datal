@@ -7,12 +7,15 @@ from core.models import Role
 
 
 class AccountInfoForm(forms.Form):
+    """La informacion de la cuenta segraba en forma de preferencias
+    Estas tienen un campo de tipo TextField sin max_length definido.
+    De todas formas cada campo debe tener algun limite"""
     account_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-NAME-LABEL'), required=True)
     account_link = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-LINK-LABEL'), required=False)
-    account_contact_person_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL'), required=False)
-    account_contact_person_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-EMAIL-LABEL'), required=False)
-    account_contact_dataperson_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-DATAPERSON-EMAIL-LABEL'), required=False)
-    account_contact_person_phone = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-PHONE-LABEL'), required=False)
+    account_contact_person_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL'), required=False, max_length=80)
+    account_contact_person_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-EMAIL-LABEL'), required=False, max_length=120)
+    account_contact_dataperson_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-DATAPERSON-EMAIL-LABEL'), required=False, max_length=120)
+    account_contact_person_phone = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-PHONE-LABEL'), required=False, max_length=80)
     account_contact_person_country = forms.ChoiceField(choices=choices.COUNTRY_CHOICES, label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-COUNTRY-LABEL'), required=False)
 
     def action(self):
