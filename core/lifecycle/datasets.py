@@ -373,11 +373,10 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
                 dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
                 **fields)
-            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a DRAFT.'.format(
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a PENDING_REVISION.'.format(
                 self.dataset_revision.id
             ))
             self._move_childs_to_status()
-
             self._update_last_revisions()
         else:
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} Actualizo sin crear nueva revision por su estado {}.'.format(
@@ -419,7 +418,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
         """
-        Muevo las vistas y las visualizaciones asociadas a este dataset a BORRADOR
+        Muevo las vistas y las visualizaciones asociadas a este dataset a status 
         :return:
         """
         with transaction.atomic():
