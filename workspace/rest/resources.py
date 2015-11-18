@@ -66,6 +66,6 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             answer.extend(list(queryset))
         return answer
 
-    @cache_response(60 * 5, cache_errors=False)
-    def list(self, request):
+    #@cache_response(60 * 5, cache_errors=False)
+    def list(self, request, format, *args, **kwargs):
         return super(MultipleResourceViewSet, self).list(request)
