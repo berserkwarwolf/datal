@@ -343,23 +343,12 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def edit(self, allowed_states=EDIT_ALLOWED_STATES, changed_fields=None, **fields):
         """ Create new revision or update it """
-        form_status = None
         old_status = self.dataset_revision.status
-
-        if 'status' in fields.keys():
-            # el fields.pop trae un unicode y falla al comparar con los Status
-            form_status = int(fields.pop('status', None))
 
         if old_status not in allowed_states:
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.dataset_revision.id, old_status
             ))
-            # Si el estado fallido era publicado, queda aceptado
-            if form_status and form_status == StatusChoices.PUBLISHED:
-                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Queda en estado ACEPTADO.'.format(
-                    self.dataset_revision.id, old_status
-                ))
-                self.accept()
             raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
 
         file_data = fields.get('file_data', None)
@@ -378,24 +367,17 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         impl_details = DatasetImplBuilderWrapper(**fields).build()
 
         if old_status == StatusChoices.PUBLISHED:
-            if form_status == StatusChoices.DRAFT:
-                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
-                    self.dataset_revision.id
-                ))
-                self.unpublish()
-            else:
-                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Creo nueva revision por estar PUBLISHED.'.format(
-                    self.dataset_revision.id
-                ))
-                self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                    dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
-                    **fields)
-                logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a PENDING_REVISION.'.format(
-                    self.dataset_revision.id
-                ))
-                self._move_childs_to_status()
-
-                self._update_last_revisions()
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Creo nueva revision por estar PUBLISHED.'.format(
+                self.dataset_revision.id
+            ))
+            self.dataset, self.dataset_revision = DatasetDBDAO().create(
+                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
+                **fields)
+            logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a PENDING_REVISION.'.format(
+                self.dataset_revision.id
+            ))
+            self._move_childs_to_status()
+            self._update_last_revisions()
         else:
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} Actualizo sin crear nueva revision por su estado {}.'.format(
                 self.dataset_revision.id, old_status
@@ -408,25 +390,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 changed_fields=changed_fields,
                 **fields
             )
-
-            if form_status == StatusChoices.PUBLISHED:
-                # Intento publicar, si falla, queda aceptado
-                try:
-                    logger.info('[LifeCycle - Dataset - Edit] Rev. {} Despublico revision ya el nuevo estado es DRAFT.'.format(
-                        self.dataset_revision.id
-                    ))
-                    self.publish()
-                except:
-                    logger.info('[LifeCycle - Dataset - Edit] Rev. {} Fallo la publicacion. Revision queda como ACEPTADA.'.format(
-                        self.dataset_revision.id
-                    ))
-                    self.accept()
-                    raise
-
-            else:
-                # Actualizo el estado segun el valor en formulario
-                self.dataset_revision.status = form_status
-                self.dataset_revision.save()
 
         self._log_activity(ActionStreams.EDIT)
         return self.dataset_revision

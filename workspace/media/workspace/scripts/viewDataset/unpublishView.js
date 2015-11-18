@@ -24,8 +24,11 @@ var UnpublishView = Backbone.View.extend({
 		});
 
 		// Set Parent View
-		this.parentView = this.options.parentView;
-		
+    this.parentView = options.parentView;
+    this.itemCollection = options.itemCollection;
+    this.models = options.models;
+		this.type = options.type;
+
 		// Render
 		this.render();
 	},
@@ -39,9 +42,9 @@ var UnpublishView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionUnpublishView = new AffectedResourcesCollectionUnpublishView({
 			collection: affectedResourcesCollection,
-			itemCollection: this.options.itemCollection,
-			models: this.options.models,
-			type: this.options.type,
+			itemCollection: this.itemCollection,
+			models: this.models,
+			type: this.type,
 			parentView: this.parentView
 		});
 

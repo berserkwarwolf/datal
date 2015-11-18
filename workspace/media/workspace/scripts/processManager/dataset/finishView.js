@@ -16,8 +16,8 @@ var FinishView = StepView.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click .step[data-step='+this.name+'] .navigation .saveButton'] = 'onSaveButtonClicked';
+		eventsObject['click .backButton'] = 'onPreviousButtonClicked';
+		eventsObject['click .saveButton'] = 'onSaveButtonClicked';
 		this.addEvents(eventsObject);
 
 		// Bind model validation to view

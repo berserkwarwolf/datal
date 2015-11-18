@@ -20,8 +20,7 @@ var ManageDatasetsView = Backbone.View.extend({
 	},
 
 	initialize: function(options) {
-
-		this.datastreamImplValidChoices = this.options.datastreamImplValidChoices;
+		this.datastreamImplValidChoices = options.datastreamImplValidChoices;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());

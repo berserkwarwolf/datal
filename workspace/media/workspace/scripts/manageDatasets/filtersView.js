@@ -5,7 +5,7 @@ var FiltersView = Backbone.View.extend({
         'click a.filter-add': 'onClickAdd',
     },
 
-    initialize: function(options){
+    initialize: function(){
         this.template = _.template($('#filters-template').html());
 
         this.listenTo(this.collection, 'change', this.onFilterChange, this);

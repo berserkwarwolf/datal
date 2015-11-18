@@ -14,10 +14,10 @@ var SourcesView = Backbone.View.extend({
 		'click #id_addSourceButton': 'onAddSourceButtonClicked'
 	},
 
-	initialize: function(){
-		this.template = _.template( $("#id_AddSourceTemplate").html() );
-		this.parentView = this.options.parentView;
-		this.parentModel = this.options.parentModel;
+	initialize: function(options){
+  	this.template = _.template( $("#id_AddSourceTemplate").html() );
+		this.parentView = options.parentView;
+		this.parentModel = options.parentModel;
 		this.listenTo(this.collection, 'add', this.addSource);
 		this.listenTo(this.collection, 'remove', this.removeSource);
 

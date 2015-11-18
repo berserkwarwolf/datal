@@ -11,9 +11,10 @@ var dataTableView = Backbone.View.extend({
 
 	$parameters: null,
 	
-	initialize: function() {
+	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		this.parentView = options.parentView;
+		this.dataStream = options.dataStream;
 
 		$parameters = this.$el.find('a[id^="id_changeParam"]');
 		this.template = _.template( $("#id_dataTableTemplate").html() );
@@ -25,7 +26,7 @@ var dataTableView = Backbone.View.extend({
 	  var i=0;
 		while(i < $parameters.size()){
 			var name = 'parameter' + i;
-			this.listenTo(this.options.dataStream, "change:"+name, this.invoke);
+			this.listenTo(this.dataStream, "change:"+name, this.invoke);
 			i++;
 		} 
 	  
@@ -34,7 +35,7 @@ var dataTableView = Backbone.View.extend({
 	
 	render: function() {
 
-		var dataStream = this.options.dataStream.attributes;
+		var dataStream = this.dataStream.attributes;
 
 		// Set Template
 		this.$el.find('#id_datastreamResult > div').html(this.template(this.model.attributes));
@@ -56,7 +57,7 @@ var dataTableView = Backbone.View.extend({
 
 		// If not disabled
 		if( !$(button).parents('.parameters').hasClass('isDisabled') ){
-			new changeDataStreamParametersView({model: new changeDataStreamParameters(), dataStream: this.options.dataStream});
+			new changeDataStreamParametersView({model: new changeDataStreamParameters(), dataStream: this.dataStream});
 		}
 		
 	},
@@ -67,7 +68,7 @@ var dataTableView = Backbone.View.extend({
 
 		// If not disabled
 		if( !$(button).hasClass('isDisabled') ){
-			this.options.dataStream.set('filter', '');
+			this.dataStream.set('filter', '');
 			this.invoke();
 		}
 
@@ -75,7 +76,7 @@ var dataTableView = Backbone.View.extend({
 
 	updateParametersButtonsValues: function(){
 
-		var dataStream = this.options.dataStream;
+		var dataStream = this.dataStream;
 
 		var i=0;
 		while(i < $parameters.size()){
@@ -90,7 +91,7 @@ var dataTableView = Backbone.View.extend({
 	
 	invoke: function(){
 
-		var dataStream = this.options.dataStream.attributes;
+		var dataStream = this.dataStream.attributes;
 
 	  var data = "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
 
@@ -176,7 +177,7 @@ var dataTableView = Backbone.View.extend({
 
 	initFlexigrid: function(result){
 
-		var dataStream = this.options.dataStream.attributes,
+		var dataStream = this.dataStream.attributes,
 			tableWidth = $('#id_datastreamResult > div').width(),
 	    cellWidth = 100,
 	    colModel = [],
@@ -356,7 +357,7 @@ var dataTableView = Backbone.View.extend({
 
 		}
 
-		this.options.dataStream.set('filter', url);
+		this.dataStream.set('filter', url);
 
 
 	},

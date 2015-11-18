@@ -153,7 +153,7 @@ var MainView = Backbone.View.extend({
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
-		this.deleteListResources.push(this.options.model);
+		this.deleteListResources.push(this.model);
 		var deleteItemView = new DeleteItemView({
 			models: this.deleteListResources
 		});
@@ -161,7 +161,7 @@ var MainView = Backbone.View.extend({
 
 	onUnpublishButtonClicked: function(){
 		this.unpublishListResources = new Array();
-		this.unpublishListResources.push(this.options.model);
+		this.unpublishListResources.push(this.model);
 		var unpublishView = new UnpublishView({
 			models: this.unpublishListResources,
 			parentView: this
