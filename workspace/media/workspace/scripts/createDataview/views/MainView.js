@@ -14,7 +14,7 @@ var MainView = Backbone.View.extend({
         });
         this.datasetModel.fetch();
 
-        this.dataviewModel = new Backbone.Model();
+        this.dataviewModel = new DataviewModel();
 
         this.listenToOnce(this.datasetModel, 'change:tables', function () {
             this.render();
@@ -42,11 +42,17 @@ var MainView = Backbone.View.extend({
                 datasetModel: this.datasetModel
             });
         } else if (step === 2) {
-            this.currentView = new MetadataBiew({
+            this.currentView = new MetadataView({
                 el: this.$('.metadata-view'),
-                datasetModel: this.datasetModel
+                model: this.dataviewModel
             });
-        }
+        } else if (step === 3) {
+            this.dataviewModel.save().then(function (response) {
+                console.log(response);
+            }).fail(function (response) {
+                this.model.set('step', 2);
+            });
+        };
 
         this.stepBarView.render();
         this.currentView.render();
