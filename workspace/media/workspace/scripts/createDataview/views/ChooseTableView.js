@@ -7,20 +7,13 @@ var ChooseTableView = Backbone.View.extend({
     },
 
     render: function () {
-        console.log(this.$el);
-        var data = [
-          ["", "Ford", "Volvo", "Toyota", "Honda"],
-          ["2014", 10, 11, 12, 13],
-          ["2015", 20, 11, 14, 13],
-          ["2016", 30, 15, 12, 13]
-        ];
-        var container = this.$el.get(0);
+        var container = $('.choose-table-container').get(0);
         var hot = new Handsontable(container, {
           data: this.tables[0],
           minSpareRows: 1,
           rowHeaders: true,
           colHeaders: true,
-          contextMenu: true
+          contextMenu: false
         });
     }
 });

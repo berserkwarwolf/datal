@@ -7,6 +7,9 @@ var MainView = Backbone.View.extend({
             el: '.context-menu-view',
             model: this.model
         });
+
+        this.dataviewModel = new Backbone.Model();
+
         this.listenTo(this.model, 'change:step', this.render, this);
     },
 
@@ -19,7 +22,8 @@ var MainView = Backbone.View.extend({
             delete this.currentView;
         };
         this.currentView = new ChooseTableView({
-            el: $('.step-container')
+            el: this.$('.choose-table-step'),
+            model: this.dataviewModel
         });
         this.currentView.fetch().then(function () {
             self.currentView.render();

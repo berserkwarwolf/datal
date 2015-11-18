@@ -86,11 +86,15 @@
 
 
 {% block content %}
-	<input type="hidden" id="id_datastream-dataset_revision_id" name="id_datastream-dataset_revision_id" value="{{data_set_id}}" />
 
-	<div class="step-container">
-
+	<div class="row choose-table-step">
+		<div class="col-xs-12">
+			<div class="choose-table-container"></div>
+		</div>
 	</div>
+
+
+	<input type="hidden" id="id_datastream-dataset_revision_id" name="id_datastream-dataset_revision_id" value="{{data_set_id}}" />
 	<div id="id_steps_container">
 		<input id="id_is_update" type="hidden" value="{{is_update}}"/>
 		<input id="id_is_edit_selection" type="hidden" value="{{is_update_selection}}"/>
