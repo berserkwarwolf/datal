@@ -18,7 +18,8 @@ var CollectFileView = StepView.extend({
 		var eventsObject = {}
 		eventsObject['click .backButton'] = 'onPreviousButtonClicked';
 		eventsObject['click .nextButton'] = 'onNextButtonClicked';
-		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
+		eventsObject['change #id_license_url'] = 'onSelectChange';
+		eventsObject['change #id_frequency'] = 'onSelectChange';
 		eventsObject['change #id_file_data'] = 'onInputFileChange';
 		this.addEvents(eventsObject);
 
