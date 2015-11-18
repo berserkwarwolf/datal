@@ -7,6 +7,7 @@ import hashlib
 import urllib
 import re
 from urlparse import urlparse
+from core.choices import AccountRoles
 
 register = template.Library()
 
@@ -160,9 +161,9 @@ def account_logo(account, klass, roles):
     account_logo = preferences['account_logo']
     account_domain = preferences['account_domain']
     href = ''
-    if 'ao-account-admin' in roles and account_logo == '':
+    if AccountRoles.ADMIN in roles and account_logo == '':
         account_domain = reverse('admin_manager.action_info')
-    elif 'ao-account-admin' in roles and account_domain == '':
+    elif AccountRoles.ADMIN in roles and account_domain == '':
         account_domain = reverse('admin_manager.action_domain')
     elif 'ao-free-user' in roles:
         return ''

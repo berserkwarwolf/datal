@@ -7,12 +7,7 @@
 /*
 .dataStreamForm .form .row label{text-align:right;font-size:12px;color:#767676;font-weight:bold;display:block;float:left;width:90px;padding-right:8px;}
 */
-.dataStreamForm .form .row input, .dataStreamForm .form .row textarea{background: none repeat scroll 0 0 #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) inset;
-    box-sizing: border-box;
-    font-size: 12px;
-    padding: 5px;
-    width: 440px;}
+.dataStreamForm .form .row input, .dataStreamForm .form .row textarea{width:440px;}
 .dataStreamForm .form .row select{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:6px;font:normal 12px Arial, Helvetica, sans-serif;width:440px;}
 .dataStreamForm .form .row textarea{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:4px;font:normal 12px Arial, Helvetica, sans-serif;width:502px;height:50px;}
 .dataStreamForm .form .row.checkbox{padding-left:98px;}

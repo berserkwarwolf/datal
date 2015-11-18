@@ -3285,3 +3285,18 @@ msgstr "Required"
 
 msgid "APP-INVALID-VALUE"
 msgstr "Invalid value"
+
+msgid "APP-SEARCH-PLACEHOLDER-TEXT"
+msgstr "Search..."
+
+msgid "APP-ALL-CATEGORIES-TEXT"
+msgstr "All categories"
+
+msgid "APP-ALL-AUTHORS-TEXT"
+msgstr "All authors"
+
+msgid "APP-X-AVAILABLE-RESOURCES-TEXT"
+msgstr "available resources"
+
+msgid "APP-X-RESOURCES-ADDED-TEXT"
+msgstr "resources added"

@@ -178,25 +178,6 @@
         "name": "workspace.can_query_datastream",
         "description": ""
     }
-},{
-    "pk": 557,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_query_publisher_datastream",
-        "name": "workspace.can_query_publisher_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 559,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_query_publisher_visualization",
-        "name": "workspace.can_query_publisher_visualization",
-        "description": ""
-    }
 },
 {
     "pk": 561,
@@ -365,26 +346,6 @@
         "created_at": "2012-06-04T14:08:57",
         "code": "workspace.can_submit_dataset_revision",
         "name": "workspace.can_submit_dataset_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 640,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_datastream",
-        "name": "workspace.can_query_enhancer_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 641,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_visualization",
-        "name": "workspace.can_query_enhancer_visualization",
         "description": ""
     }
 },

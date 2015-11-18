@@ -44,6 +44,12 @@ VISUALIZATION_LIBS = (
     ('d3', 'D3')
 )
 
+class AccountRoles():
+    PUBLISHER='ao-publisher'
+    EDITOR='ao-editor'
+    ADMIN='ao-account-admin'
+
+    ALL=(PUBLISHER, EDITOR, ADMIN)
 
 class ChannelTypes():
     WEB = 0
