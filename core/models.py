@@ -225,13 +225,13 @@ class User(models.Model):
         return self.nick
 
     def is_admin(self):
-        return True if Role.objects.get(code="ao-account-admin") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.ADMIN) in self.roles.all() else False
 
     def is_publisher(self):
-        return True if Role.objects.get(code="ao-publisher") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.PUBLISHER) in self.roles.all() else False
 
     def is_editor(self):
-        return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.EDITOR) in self.roles.all() else False
 
     def is_authenticated(self):
         return True

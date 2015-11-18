@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from core.auth.decorators import login_required, privilege_required
 from core.decorators import threshold
-from core.choices import TicketChoices, StatusChoices
+from core.choices import TicketChoices, StatusChoices, AccountRoles
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
@@ -72,7 +72,7 @@ def action_info_update(request):
 def action_users(request):
     auth_manager = request.auth_manager
     preferences = auth_manager.get_account().get_preferences()
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles)
     users = User.objects.values('id', 'name', 'nick', 'last_visit', 'email', 'roles__name', 'roles__code').filter(
         account=auth_manager.account_id, roles__code__in=roles).all()
@@ -86,7 +86,7 @@ def action_users(request):
 @require_POST
 def action_create_user(request):
     logger = logging.getLogger(__name__)
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -148,7 +148,7 @@ def action_create_user(request):
 @privilege_required('workspace.can_access_admin')
 @require_POST
 def action_edit_user(request):
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
