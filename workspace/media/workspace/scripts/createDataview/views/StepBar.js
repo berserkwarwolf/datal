@@ -10,7 +10,6 @@ var StepBar = Backbone.View.extend({
 
     render: function () {
         var step = this.model.get('step');
-        console.log('step is:', '.step .step-' + step)
         this.$('.step.step-' + step).removeClass('hidden');
         return this;
     },

@@ -1,5 +1,6 @@
 var MainView = Backbone.View.extend({
-    initialize: function () {
+    initialize: function (options) {
+        var self = this;
         this.model = new Backbone.Model({
             step: 0
         });
@@ -8,25 +9,46 @@ var MainView = Backbone.View.extend({
             model: this.model
         });
 
+        this.datasetModel = new DatasetModel({
+            dataset_revision_id: options.dataset_revision_id
+        });
+        this.datasetModel.fetch();
+
         this.dataviewModel = new Backbone.Model();
 
-        this.listenTo(this.model, 'change:step', this.render, this);
+        this.listenToOnce(this.datasetModel, 'change:tables', function () {
+            this.render();
+            this.listenTo(this.model, 'change:step', this.render, this);
+        }, this);
+
     },
 
     render: function () {
-        var self = this;
+        var self = this,
+            step = this.model.get('step');
 
-        this.stepBarView.render();
         if (this.currentView) {
             this.currentView.$el.empty();
             delete this.currentView;
-        };
-        this.currentView = new ChooseTableView({
-            el: this.$('.choose-table-step'),
-            model: this.dataviewModel
-        });
-        this.currentView.fetch().then(function () {
-            self.currentView.render();
-        });
+        }
+        if (step === 0) {
+            this.currentView = new ChooseTableView({
+                el: this.$('.choose-table-view'),
+                datasetModel: this.datasetModel
+            });
+        } else if (step === 1) {
+            this.currentView = new SelectDataView({
+                el: this.$('.select-data-view'),
+                datasetModel: this.datasetModel
+            });
+        } else if (step === 2) {
+            this.currentView = new MetadataBiew({
+                el: this.$('.metadata-view'),
+                datasetModel: this.datasetModel
+            });
+        }
+
+        this.stepBarView.render();
+        this.currentView.render();
     }
 });

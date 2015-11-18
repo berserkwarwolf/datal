@@ -1,0 +1,31 @@
+{% load i18n extra_tags core_components components %}
+
+<script type="text/template" id="choose_table_template">
+    <h2>Hacé click sobre los datos que deseas utilizar para seleccionarlos.</h2>
+    <div class="col-xs-2 tables-select-view">
+      <h4>Seleccione una tabla</h4>
+      <ul>
+        <% _(tables).each(function(table){ %>
+        <li>
+          <a class="select-table-item" data-table-id="<%= table %>"><%= table %></a>
+        </li>
+        <% }); %>
+      </ul>
+    </div>
+    <div class="col-xs-10">
+      <h4>Tabla seleccionada</h4>
+      <div class="table-container"></div>
+    </div>
+</script>
+
+<script type="text/template" id="select_data_template">
+    <h2>Indique las partes especificas de la tabla que necesita</h2>
+    <div class="col-xs-2 selection-controls-view">
+      <p>Aqui va la vista con la seleccion actual de datos y los controles</p>
+    </div>
+    <div class="col-xs-10">
+      <h4>Tabla de datos</h4>
+      <div class="table-container">
+      </div>
+    </div>
+</script>

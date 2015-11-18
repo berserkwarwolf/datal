@@ -87,11 +87,9 @@
 
 {% block content %}
 
-	<div class="row choose-table-step">
-		<div class="col-xs-12">
-			<div class="choose-table-container"></div>
-		</div>
-	</div>
+	<div class="row choose-table-view"></div>
+
+	<div class="row select-data-view"></div>
 
 
 	<input type="hidden" id="id_datastream-dataset_revision_id" name="id_datastream-dataset_revision_id" value="{{data_set_id}}" />
@@ -134,14 +132,21 @@
 
 {% block bottom_js %}
 
+	{# templates backbone #}
+	{% include "createDataview/templates.html" %}
+
 	<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
 
+	<script src="{% static 'workspace/scripts/createDataview/models/DatasetModel.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/StepBar.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/ChooseTableView.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createDataview/views/steps/SelectDataView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/MainView.js' %}"></script>
 	<script>
-		var mainView = new MainView();
-		mainView.render();
+		var mainView = new MainView({
+			el: '.main-section',
+			dataset_revision_id: {{dataset_revision.id}}
+		});
 	</script>
 
 {% endblock %}
