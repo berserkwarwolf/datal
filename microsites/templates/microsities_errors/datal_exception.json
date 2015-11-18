@@ -1,0 +1,14 @@
+{
+    "error": "{{exception.title}}",
+    "description": "{{exception.description}}",
+    "status": "{{exception.status_code}}",
+    "type": "{{exceptions.tipo}}",
+    "actions": [
+        {% for action in exception.get_actions %}
+            {
+            "link": "{{action.url}}",
+            "description": "{{action.description}}"
+            }{% if not forloop.last %},{% endif %}
+        {% endfor %}
+    ]
+}

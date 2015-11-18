@@ -14,6 +14,8 @@ from core.communitymanagers import *
 from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
 from django.utils.translation import ugettext
+from core.exceptions import *
+from microsites.exceptions import *
 from core.search.finder import FinderQuerySet
 
 import json
@@ -101,7 +103,7 @@ def update_list(request):
         category_filters = form.cleaned_data.get('category_filters')
         if category_filters:
             category_filters=category_filters.lower().split(",")
-        
+
 
         if preferences['account_home_filters'] == 'featured_accounts':
 

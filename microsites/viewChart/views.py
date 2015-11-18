@@ -12,6 +12,8 @@ from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
 from core.v8.factories import AbstractCommandFactory
+from core.exceptions import *
+from microsites.exceptions import *
 
 import urllib
 import json
@@ -25,7 +27,7 @@ def hits_stats(request, vz_id, channel_type=None):
     try:
         vz = Visualization.objects.get(pk=int(vz_id))
     except Visualization.DoesNotExist:
-        raise Http404
+        raise VisualizationDoesNotExist
 
 
     dao=VisualizationHitsDAO(vz)
@@ -38,7 +40,8 @@ def hits_stats(request, vz_id, channel_type=None):
     c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
     return HttpResponse(t.render(c), content_type="application/json")
 
-def view(request, id, slug):
+
+def action_view(request, id, slug=None):
     """
     Show a microsite view
     """
@@ -51,7 +54,7 @@ def view(request, id, slug):
             account = Account.objects.get(pk=account_id)
             is_free = True
         except (Visualization.DoesNotExist, Account.DoesNotExist), e:
-            return HttpResponse("Viz doesn't exist!")  # TODO
+            raise VisualizationDoesNotExist
 
     preferences = request.preferences
     if not is_free:
@@ -69,7 +72,7 @@ def view(request, id, slug):
         # verify if this account is the owner of this viz
         visualization = Visualization.objects.get(pk=id)
         if account.id != visualization.user.account.id:
-            raise Http404
+            raise NotAccesVisualization
 
         #for datastream sidebar functions (downloads and others)
         datastream = DataStreamDBDAO().get(
@@ -78,7 +81,7 @@ def view(request, id, slug):
         )
         impl_type_nice = set_dataset_impl_type_nice(datastream["impl_type"]).replace('/', ' ')
     except VisualizationRevision.DoesNotExist:
-        return HttpResponse("Viz-Rev doesn't exist!")  # TODO
+        raise VisualizationRevisionDoesNotExist
     else:
 
         # url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
@@ -135,3 +138,6 @@ def embed(request, guid):
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
     return render_to_response('viewChart/embed.html', locals())
+
+def visualization_error_404(request,id):
+    raise VisualizationRevisionDoesNotExist

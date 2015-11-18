@@ -20,7 +20,9 @@ class DatastreamParentNotPublishedException(LifeCycleException):
     tipo = 'parent-not-published'
 
     def get_actions(self):
-        return [ViewDatasetExceptionAction(self.revision)]
+        #Prevent exepction for Exception Test script to prevent fall in the view.
+        if hasattr(self, 'revision'): #
+            return [ViewDatasetExceptionAction(self.revision)]
 
 class VisualizationParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASET-PARENT-NOT-PUBLISHED')
@@ -28,7 +30,8 @@ class VisualizationParentNotPublishedException(LifeCycleException):
     tipo = 'parent-not-published'
 
     def get_actions(self):
-        return [ViewDatastreamExceptionAction(self.revision)]
+        if hasattr(self, 'revision'):#Prevent exepction for Exception Test script to prevent fall in the view.
+            return [ViewDatastreamExceptionAction(self.revision)]
 
 
 class ResourceRequiredException(LifeCycleException):

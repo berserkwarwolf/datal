@@ -4,6 +4,11 @@ from django.utils.translation import ugettext_lazy as _
 # from django.core.urlresolvers import reverse
 from core.actions import *
 
+from django.http import HttpResponse
+from django.template import TemplateDoesNotExist
+from django.template import Context, Template
+from django.template.loader import get_template
+import logging
 
 class DATALException(Exception):
     """DATAL Exception class: Base class for handling exceptions."""
@@ -33,6 +38,32 @@ class DATALException(Exception):
     def get_actions(self):
         return []
 
+'''
+ExceptionManager
+Class to receive exceptions from middlewares and other classes and return the HttpResponse Object.
+Arguments:
+    response: Object response of Django.
+    auth_manager: Object with user information
+    output: type of return html or json
+    exception: type of exception 500, 404, etc
+    application: string api/microsites/workspace
+    template: string width the template to return de view.
+'''
+class ExceptionManager():
+    def __init__(self,response, output,exception, application,template):
+
+        self.application = application
+        self.output = output
+        self.exception = exception
+        self.response = response
+        self.template = template     
+
+    def process(self):
+        logger = logging.getLogger(__name__)
+        logger.warning('[CatchError]  %s. %s' % (self.exception.title, 
+            self.exception.description))
+        return HttpResponse(self.response, mimetype=self.output, status=self.exception.status_code)
+
 class UnkownException(DATALException):
     title = _('EXCEPTION-TITLE-UNKNOWN')
     description = _('EXCEPTION-DESCRIPTION-UNKNOWN')
@@ -45,7 +76,6 @@ class UnkownException(DATALException):
 
     def get_actions(self):
         return [ContactUsExceptionAction()]
-
 
 class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
@@ -72,6 +102,7 @@ class ChildNotApprovedException(LifeCycleException):
 
 
 class SaveException(LifeCycleException):
+
     title = _('EXCEPTION-TITLE-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-SAVE-ERROR')
     tipo = 'save-error'
@@ -134,7 +165,6 @@ class VisualizationNotFoundException(LifeCycleException):
     description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND')
     tipo = 'visualization-not-found'
     status_code = 404
-
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
@@ -364,3 +394,4 @@ class BigDataInvalidQuery(Http401):
     def __init__(self, error):
         # description = 'BigData unauthorized query. %s' % error
         super(BigDataInvalidQuery, self).__init__()
+
