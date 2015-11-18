@@ -18,10 +18,34 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
+		var self = this;
+		Backbone.Validation.bind(this, {
+            valid: function (view, attr, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, '');
+            },
+            invalid: function (view, attr, error, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, error);
+            }
+        });
 	        
 		this.$el.html(this.template(this.model.attributes));
 		return this;
 	},
+
+	setIndividualError: function(element, name, error){
+
+        // If not valid
+        if( error != ''){
+            element.addClass('has-error');
+            element.after('<p class="has-error">'+error+'</p>');
+
+        // If valid
+        }else{
+            element.removeClass('has-error');
+            element.next('p').remove();
+        }
+
+    },
 	
 	initInput: function () {
 		var that = this;
@@ -319,6 +343,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	savePreference: function(event){
+	  if(this.model.isValid(true)){
 		this.setSliderSection();
 		this.setLinkSection();
 		var btn_id = $(event.currentTarget).attr("id")
@@ -377,7 +402,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 			},
 			url: '/personalizeHome/save/'
 		});	
-
+	  }
 	}
 
 });
