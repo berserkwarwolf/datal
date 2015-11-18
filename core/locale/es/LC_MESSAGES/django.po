@@ -608,7 +608,7 @@ msgid "NEW-PASSWORD-MISMATCH"
 msgstr "Las nuevas contraseñas no coincide."
 
 msgid "EMAIL-EXISTS"
-msgstr "Este email ya existe."
+msgstr "Este e-mail ya existe."
 
 msgid "HEADER-IE-MESSAGES"
 msgstr "<p><strong>Precaución:</strong> DATAL funciona correctamente en Internet Explorer 8 o superior y puede no funcionar correctamente en versiones antiguas de este navegador, o en modo <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='vista de compatibilidad' target='_blank'>vista de compatibilidad</a>. Por favor <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Actualice su navegador a la última versión' target='_blank'>actualice su navegador a la última versión</a> o <a href='http://abetterbrowser.org/' title='Use otro navegador' target='_blank'>use otro navegador</a>.</p>"
@@ -731,7 +731,7 @@ msgid "PRIV-SHARE-VZ-ERROR"
 msgstr "Oops! No pudimos compartir tu gráfico"
 
 msgid "PRIV-SHARE-EMAIL-ERROR"
-msgstr "Oops! No pudimos procesar el email"
+msgstr "Oops! No pudimos procesar el e-mail"
 
 msgid "FOOTER-OPENDATA-BUTTON"
 msgstr "Este material es datos abiertos"
@@ -917,7 +917,7 @@ msgstr "Archivo no valido"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Ingrese un tipo de archivo valido."
 
-msgid "EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgid "EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar la visualización"
 
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"

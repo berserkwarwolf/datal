@@ -44,6 +44,12 @@ VISUALIZATION_LIBS = (
     ('d3', 'D3')
 )
 
+class AccountRoles():
+    PUBLISHER='ao-publisher'
+    EDITOR='ao-editor'
+    ADMIN='ao-account-admin'
+
+    ALL=(PUBLISHER, EDITOR, ADMIN)
 
 class ChannelTypes():
     WEB = 0
@@ -85,6 +91,14 @@ STATUS_CHOICES = Choices(
     (StatusChoices.UNPUBLISHED, ugettext_lazy('MODEL_STATUS_UNPUBLISHED')),
     (StatusChoices.REJECTED, ugettext_lazy('MODEL_STATUS_REJECTED')),
     (StatusChoices.APPROVED, ugettext_lazy('MODEL_STATUS_APPROVED'))
+    )
+
+STATUS_CHOICES_REST = Choices(
+    (StatusChoices.DRAFT, "draft"),
+    (StatusChoices.PENDING_REVIEW, "pending"),
+    (StatusChoices.APPROVED, "approved"),
+    (StatusChoices.PUBLISHED, "published"),
+    (StatusChoices.REJECTED, "rejected")
     )
 
 VALID_STATUS_CHOICES = (
@@ -250,6 +264,7 @@ DATASTREAM_IMPL_VALID_CHOICES = [
     SourceImplementationChoices.CSV, 
     SourceImplementationChoices.KML, 
     SourceImplementationChoices.KMZ, 
+    SourceImplementationChoices.DOC,
     SourceImplementationChoices.TSV,
     SourceImplementationChoices.TXT]
 

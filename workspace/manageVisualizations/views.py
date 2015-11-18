@@ -257,7 +257,7 @@ def create(request):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     visualization_revision_id = request.GET.get('revision_id', '')
     visualization_id = request.GET.get('visualization_id', '')
     visualizations = VisualizationDBDAO().query_childs(
@@ -271,7 +271,7 @@ def related_resources(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
 
     try:
         visualization_revision = VisualizationDBDAO().get(

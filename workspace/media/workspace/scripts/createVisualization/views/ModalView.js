@@ -161,11 +161,25 @@ var ModalView = Backbone.View.extend({
             validLabels = this.rangeLabelsModel.isValid(),
             validHeaders = this.rangeHeadersModel.isValid();
 
-        if (hasData && hasLabels && hasHeaders && validData && validLabels && validHeaders) {
+        if (hasData && hasLabels && hasHeaders && validData && validLabels && validHeaders &&
+            this.validateDataHeaders(this.rangeDataModel, this.rangeHeadersModel)) {
             this.enable();
         } else {
             this.disable();
         }
+    },
+
+    validateDataHeaders: function(validData, validHeaders) {
+        if (validData && validHeaders) {
+            var dataCols = validData.getRange().to.col - validData.getRange().from.col + 1;
+            var headersRows = validHeaders.getRange().to.row - validHeaders.getRange().from.row + 1;
+            if (validHeaders.getRange().to.row == -1 || validHeaders.getRange().from.row == -1) {
+                headersRows = 0;
+            }
+            var headersCols = validHeaders.getRange().to.col - validHeaders.getRange().from.col + 1;
+            return dataCols == headersCols * headersRows
+        }
+        return false
     },
 
     enable: function () {

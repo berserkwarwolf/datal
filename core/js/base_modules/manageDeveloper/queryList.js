@@ -17,7 +17,7 @@ function onSuccessValidateUser( pResponse ) {
     // preventing multiple clicks
     $('#id_try_button').unbind( 'click');
     
-    lUrl = "/manageDeveloper/action_insert";
+    lUrl = "/manageDeveloper/create";
     $( '#id_confirmation_key_container' ).data( "overlay" ).load( );
     
     $.ajax({

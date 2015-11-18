@@ -337,19 +337,19 @@ msgid "ADMIN-HOME-DESCRIPTION-NOTHEME"
 msgstr "By selecting this option, your Open Data site will not have a home page, and the user will be redirected to search page."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME0"
-msgstr "The <em>Classic</em> theme provides a two column layout that includes several text sections, a resources slider, and a resources list."
+msgstr "The <em>Classic</em> theme provides two column layout that includes several text sections, a resources slider, and a resources list."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME1"
-msgstr "The <em>Minimal</em> theme provides a single column layout with a main text section and a resources list."
+msgstr "The <em>Minimal</em> theme provides single column layout with a main text section and a resources list."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME2"
-msgstr "The <em>Resources</em> theme provides a single column layout with two text sections, a resources slider and a resources list."
+msgstr "The <em>Resources</em> theme provides single column layout with two text sections, a resources slider and a resources list."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME3"
-msgstr "The <em>Carrousel</em> theme provides a single column layout with an images carrousel, a main text section, and a resources list."
+msgstr "The <em>Carrousel</em> theme provides single column layout with an images carrousel, a main text section, and a resources list."
 
 msgid "ADMIN-HOME-DESCRIPTION-THEME4"
-msgstr "The <em>Cover</em> theme provides a two column layout with a full width featured image at the top, a main text section, a resources slider, quick links section and a resources list."
+msgstr "The <em>Cover</em> theme provides two column layout with a full width featured image at the top, a main text section, a resources slider, quick links section and a resources list."
 
 
 msgid "ADMIN-HOME-SECTION-MAINTITLE"
@@ -479,7 +479,7 @@ msgstr "The time expected for this operation has been exceeded.</br>Please try a
 # NEW WORKSPACE KEYS -----------------------------------------
 
 msgid "VALIDATE-REQUIRED-TEXT"
-msgstr "Enter your username or email address in the field to continue."
+msgstr "Enter your username or e-mail address in the field to continue."
 
 msgid "VALIDATE-USERNAME-REQUIRED-TEXT"
 msgstr "Enter your username."
@@ -491,7 +491,7 @@ msgid "VALIDATE-REQUIREDFIELD-TEXT"
 msgstr "This field is required."
 
 msgid "VALIDATE-MAXLENGTH-TEXT-1"
-msgstr "This field must be at most "
+msgstr "This field supports up to "
 
 msgid "VALIDATE-MAXLENGTH-TEXT-2"
 msgstr " characters."

@@ -10,13 +10,6 @@
             <div class="resources-list">
                 <div class="resources-table">
 
-                    {# If impl_type is not allowed to create a Data View #}
-                    {% if dataset.collect_type == 0 and dataset.impl_type in datastream_impl_not_valid_choices %}
-                 
-                        {% include "viewDataset/no_resources.html" %}
-
-                    {% else %}
-
                         {% if dataset.datastreams or dataset.visualizations %}
                             <table id='dataset_table_list'>
                                 <thead>
@@ -67,9 +60,6 @@
                         {% if not dataset.datastreams and not dataset.visualizations %}
                             {% include "viewDataset/no_resources.html" %}
                         {% endif %}
-
-                    {% endif %}
-
                 </div>
             </div>
 

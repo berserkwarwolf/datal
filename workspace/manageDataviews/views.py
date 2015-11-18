@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
     
     language = request.auth_manager.language
     try:
@@ -133,7 +133,7 @@ def get_filters_json(request):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     language = request.auth_manager.language
     revision_id = request.GET.get('datastream_id', '')
     associated_visualizations = DataStreamDBDAO().query_childs(datastream_id=revision_id, language=language)['visualizations']

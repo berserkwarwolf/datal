@@ -53,6 +53,7 @@ FLEXMONSTER_DEFAULT_LOCALE = 'en'
 BOTS = ['Googlebot', 'AdsBot-Google'] #, 'Googlebot-Mobile', 'Googlebot-Image', 'Mediapartners-Google', 'Slurp', 'YahooSeeker/M1A1-R2D2', 'MSNBot', 'MSNBot-Media', 'MSNBot-NewsBlogs', 'MSNBot-Products', 'MSNBot-Academic', 'Teoma']
 
 STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/media/'),)
+STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/static/'),)
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
     'core.rest.auth.RestAuthentication',

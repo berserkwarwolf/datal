@@ -90,15 +90,6 @@
     }
 },
 {
-    "pk": 11,
-    "model": "core.preference",
-    "fields": {
-        "account": 1,
-        "value": "1",
-        "key": "account.default.dashboard"
-    }
-},
-{
     "pk": 12,
     "model": "core.preference",
     "fields": {
@@ -357,15 +348,6 @@
         "account": 5754,
         "value": "datosgobcl",
         "key": "account.url"
-    }
-},
-{
-    "pk": 53,
-    "model": "core.preference",
-    "fields": {
-        "account": 5754,
-        "value": "1",
-        "key": "account.default.dashboard"
     }
 },
 {
