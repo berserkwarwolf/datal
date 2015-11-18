@@ -15,8 +15,8 @@ var theme4Model = Backbone.Model.extend({
                 required: true,
                 msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
             },{
-                maxLength: 30,
-                msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 30 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+                maxLength: 55,
+                msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 55 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
             }
         ]
     },
