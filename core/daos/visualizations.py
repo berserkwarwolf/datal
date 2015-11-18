@@ -215,7 +215,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         return visualization_revision
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
         """ Consulta y filtra las visualizaciones por diversos campos """
 
         query = VisualizationRevision.objects.filter(
@@ -238,6 +238,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             q_list = [Q(x) for x in predicates]
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
+        if filter_status:
+            query = query.filter(status__in=fileter_status)
 
         total_resources = query.count()
         query = query.values(
