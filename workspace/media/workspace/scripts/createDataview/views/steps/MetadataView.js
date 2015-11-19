@@ -14,7 +14,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
         Backbone.Validation.bind(this, {
             attributes: function(view) {
                 console.log(view, 'attributes')
-                return ['title'];
+                return ['title', 'description'];
             },
             valid: function (view, attr, selector) {
                 self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
