@@ -1,0 +1,23 @@
+{% extends 'base_microsites.html' %}
+{% load i18n %}
+
+{% block sectionTitle %}
+    <h1>{% trans "EXCEPTION-TITLE-UNEXPECTED" %}</h1>
+{% endblock %}
+
+{% block content %}
+{% block error_content %}
+  <section class="box">
+
+        <div class="box-content clearfix">
+        {% block error_text %}
+            {% trans "EXCEPTION-DESCRIPTION-UNEXPECTED" %}
+        {% endblock %}
+        </div>
+
+  </section>
+{% endblock %}
+{% endblock %}
+
+{% block extras %}
+{% endblock %}

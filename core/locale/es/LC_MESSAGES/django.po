@@ -766,6 +766,40 @@ msgstr "El"
 msgid "APP-AT-TEXT"
 msgstr "a las"
 
+msgid "APP-ONDEMAND-TEXT"
+msgstr "Bajo demanda"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Diaria"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Cada hora"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Semanal"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Mensual"
+
+msgid "APP-THEOPENDATAPLATFORM-TEXT"
+msgstr "Plataforma de Datos Abiertos"
+
+msgid "APP-EDITPARAM-TEXT"
+msgstr "Editar Argumentos"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
+
+msgid "OVERLAY-DSEMBED-CHART-TITLE"
+msgstr "¡Agrega esta visualización donde quieras!"
+
+msgid "OVERLAY-DSEMBED-CHART-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
+
+msgid "ERROR-DUPLICATED-CATEGORY"
+msgstr "Categoría duplicada"
+
+# —————————— Exceptions
 msgid "EXCEPTION-ACTION-GENERIC"
 msgstr "Si el problema persiste contactarnos."
 
@@ -955,47 +989,64 @@ msgstr "El recurso está pendiente de aprobación."
 msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
 msgstr "Hasta que no se apruebe el recurso no se puede editar."
 
-msgid "APP-ONDEMAND-TEXT"
-msgstr "Bajo demanda"
-
-msgid "APP-DAILY-TEXT"
-msgstr "Diaria"
-
-msgid "APP-HOURLY-TEXT"
-msgstr "Cada hora"
-
-msgid "APP-WEEKLY-TEXT"
-msgstr "Semanal"
-
-msgid "APP-MONTHLY-TEXT"
-msgstr "Mensual"
-
 msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND"
 msgstr "La url que éstas solicitando no es válida o ya no está disponible"
 
 msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND"
 msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
 
-msgid "APP-THEOPENDATAPLATFORM-TEXT"
-msgstr "Plataforma de Datos Abiertos"
-
-msgid "APP-EDITPARAM-TEXT"
-msgstr "Editar Argumentos"
-
-msgid "OVERLAY-PARAM-TIP"
-msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
-
-msgid "OVERLAY-DSEMBED-CHART-TITLE"
-msgstr "¡Agrega esta visualización donde quieras!"
-
-msgid "OVERLAY-DSEMBED-CHART-TIP"
-msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
-
-msgid "ERROR-DUPLICATED-CATEGORY"
-msgstr "Categoría duplicada"
-
 msgid "EXCEPTION-TITLE-UNKNOWN"
 msgstr "Error desconocido"
 
 msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
 msgstr "Error desconocido con nombre %(exception_name)s y trace '%(exception_trace)s'"
+
+# —————————— Exceptions Microsites
+
+msgid "EXCEPTION-TITLE-REVISION-NOT-EXIST"
+msgstr "La visualización no existe"
+
+msgid "EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST"
+msgstr "La revisión de la visualización no existe"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-EXIST"
+msgstr "La visualización no existe."
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-EXIST"
+msgstr "La visualización no existe."
+
+msgid "EXCEPTION-TITLE-ACCOUNT-NOT-EXIST"
+msgstr "La cuenta no existe"
+
+msgid "EXCEPTION-DESCRIPTION-ACCOUNT-NOT-EXIST"
+msgstr "La cuenta de usuario que intenta usar no exista."
+
+msgid "EXCEPTION-TITLE-INVALID-PAGE"
+msgstr "Página inválida."
+
+msgid "EXCEPTION-DESCRIPTION-INVALID-PAGE"
+msgstr "La págin a la que intenta acceder es invalida."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-EXIST"
+msgstr "El datastream no existe."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-EXIST"
+msgstr "El datasteram al que intenta acceder no existe."
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-EXIST"
+msgstr "Dataset no existe"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-EXIST"
+msgstr "El dataset al que intenta acceder no existe."
+
+msgid "EXCEPTION-TITLE-DATASET-ERROR"
+msgstr "Error en el dataset."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTET-ERROR"
+msgstr "Error en el dataset."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-ACCESS"
+msgstr "No tiene acceso a la visualización"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-ACCESS"
+msgstr "Su cuenta no tiene acceso a la visualziación"

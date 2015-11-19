@@ -21,7 +21,8 @@ from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import VisualizationNotFoundException
 from core.v8.factories import AbstractCommandFactory
 from core.exceptions import DataStreamNotFoundException
-from core.signals import visualization_changed, visualization_removed, visualization_unpublished
+from core.signals import visualization_changed, visualization_removed, visualization_unpublished, \
+    visualization_rev_removed
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
@@ -134,6 +135,9 @@ def remove(request, visualization_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
+        # Send signal
+        visualization_rev_removed.send(sender='remove_view', id=visualization_revision_id)
+
         return JSONHttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
@@ -142,6 +146,10 @@ def remove(request, visualization_revision_id, type="resource"):
         
     else:
         lifecycle.remove(killemall=True)
+
+        # Send signal
+        visualization_removed.send(sender='remove_view', id=lifecycle.visualization.id)
+
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
@@ -168,6 +176,10 @@ def change_status(request, visualization_revision_id=None):
 
         if action == 'approve':
             lifecycle.accept()
+
+            # Signal
+            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -177,6 +189,10 @@ def change_status(request, visualization_revision_id=None):
             )
         elif action == 'reject':
             lifecycle.reject()
+
+            # Signal
+            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -186,6 +202,10 @@ def change_status(request, visualization_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
+
+            # Signal
+            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -196,6 +216,11 @@ def change_status(request, visualization_revision_id=None):
         elif action == 'unpublish':
             killemall = True if request.POST.get('killemall', False) == 'true' else False
             lifecycle.unpublish(killemall=killemall)
+
+            # Signal
+            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+            visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -205,6 +230,10 @@ def change_status(request, visualization_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
+
+            # Signal
+            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -330,6 +359,9 @@ def edit(request, revision_id=None):
             visualization_revision_id=revision_id
         )
         response = form.save(request, visualization_rev=visualization_rev)
+
+        # Signal
+        visualization_changed.send_robust(sender='edit_view', id=visualization_rev['visualization_revision_id'])
 
         return JSONHttpResponse(json.dumps(response))
 

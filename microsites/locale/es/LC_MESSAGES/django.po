@@ -614,4 +614,3 @@ msgstr "Cada minuto"
 
 msgid "APP-OTHER-TEXT"
 msgstr "Otro"
-

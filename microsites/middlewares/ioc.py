@@ -8,7 +8,8 @@ from django.shortcuts import redirect
 from core.models import Account
 from core.http import get_domain_by_request
 from core.http import get_domain_with_protocol
-
+from core.exceptions import *
+from microsites.exceptions import *
 
 class DependencyInjector(object):
     """ Gets the current site & account """
@@ -27,7 +28,7 @@ class DependencyInjector(object):
         except Account.DoesNotExist:
             logger = logging.getLogger(__name__)
             logger.error('The account do not exists: %s' % domain)
-            raise Http404
+            raise AccountDoesNotExist
 
         request.account = account
 

@@ -362,9 +362,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         with transaction.atomic():
             visualizations = VisualizationRevision.objects.select_for_update().filter(
-                datastream=self.datastream.id,
+                visualization__datastream__id=self.datastream.id,
                 id=F('visualization__last_revision__id'),
-                status=StatusChoices.published)
+                status=StatusChoices.PUBLISHED)
 
             for visualization in visualizations:
                VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization.id).save_as_status(status)
