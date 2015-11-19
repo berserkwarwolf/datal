@@ -15,12 +15,20 @@ var ChooseTableView = Backbone.View.extend({
 
         var container = this.$('.table-container').get(0);
         this.table = new Handsontable(container, {
-          data: this.datasetModel.get('tables')[0],
-          minSpareRows: 1,
-          rowHeaders: true,
-          colHeaders: true,
-          contextMenu: false
-          // TODO: make read only
+            rowHeaders: true,
+            colHeaders: true,
+            readOnly: true,
+            readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
+            allowInsertRow: false,
+            allowInsertColumn: false,
+            disableVisualSelection: ['current'],
+            colWidths: 80,
+            manualColumnResize: true,
+            manualRowResize: true,
+            rowHeaders: true,
+            colHeaders: true,
+            contextMenu: false,
+            data: this.datasetModel.get('tables')[0]
         });
     },
 

@@ -21,13 +21,15 @@ var DataviewModel = Backbone.Model.extend({
         limit: 50
     },
 
-    url: function () {
-
-        return '/rest/datastreams/sample.json';
+    initialize: function () {
+        this.data = new Backbone.Model();
     },
 
+    url: '/rest/datastreams/sample.json',
+
     fetch: function (options) {
-        var params = this.pick([
+        var self = this,
+            params = this.pick([
                 'end_point',
                 'impl_type',
                 'impl_details',
@@ -41,10 +43,26 @@ var DataviewModel = Backbone.Model.extend({
 
         return $.ajax({
                 type: "POST",
-                url: this.url(),
+                url: this.url,
                 data: params,
                 dataType: 'json'
+            }).then(function (response) {
+                self.parse(response);
+                return response;
             });
+    },
+
+    parse: function (response) {
+
+        var columns = _.first(response.fArray, response.fCols);
+
+        var rows = _.map(_.range(0, response.fRows), function (i) {
+          var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
+          return _.pluck(row, 'fStr');
+        });
+
+        this.data.set('columns', columns);
+        this.data.set('rows', rows);
     },
 
     validation: {

@@ -1,74 +1,39 @@
-var MetadataView = Backbone.Epoxy.View.extend({
-    events:  {
-        'click button.btn-save': 'validate'
-    },
+var PreviewView = Backbone.View.extend({
 
-    bindings: {
-        "input.title":          "value:title, events:['keyup']",
-        "input.description":    "value:description, events:['keyup']",
-        "select.category":      "value:datastream_category, events:['change']"
+    typeToRenderer: {
+        TEXT: 'selectedTextRenderer',
+        LINK: 'selectedLinkRenderer',
+        NUMBER: 'selectedNumericRenderer',
+        DATE: 'selectedDateRenderer'
     },
 
     initialize: function () {
-        var self = this;
-        Backbone.Validation.bind(this, {
-            valid: function (view, attr, selector) {
-                self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
-            },
-            invalid: function (view, attr, error, selector) {
-                self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
-            }
-        });
-        // TODO: fix the notes editor
-        // this.initNotes();
+        this.model.fetch();
+        this.listenTo(this.model.data, 'change:rows', this.render, this);
     },
 
     render: function () {
-        this.$el.removeClass('hidden');
-    },
+        var container = this.$('.table-container').get(0),
+            tableRows = this.model.data.get('rows');
 
-    initNotes: function(){
-        
-        this.notesInstance = new nicEditor({
-            buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
-            iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
-        }).panelInstance('id_notes');
-
-        if(this.model.get('notes')){
-            this.notesInstance.instanceById('id_notes').setContent(this.model.get('notes'));
+        if (!_.isUndefined(tableRows)) {
+            this.table = new Handsontable(container, {
+              disableVisualSelection: true,
+              rowHeaders: true,
+              colHeaders: true,
+              readOnly: true,
+              readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
+              allowInsertRow: false,
+              allowInsertColumn: false,
+              disableVisualSelection: ['current'],
+              colWidths: 80,
+              manualColumnResize: true,
+              manualRowResize: true,
+              rowHeaders: true,
+              colHeaders: true,
+              contextMenu: false,
+              data: tableRows,
+            });
         }
-
-    },
-
-    setIndividualError: function(element, name, error){
-        var textarea = $('.textarea');
-
-        // If not valid
-        if( error != ''){
-
-            if(name == 'notes'){
-                textarea.addClass('has-error');
-                textarea.next('p.has-error').remove();
-                textarea.after('<p class="has-error">'+error+'</p>');           
-            }else{
-                element.addClass('has-error');
-                element.next('p.has-error').remove();
-                element.after('<p class="has-error">'+error+'</p>');
-            }
-
-        // If valid
-        }else{
-            element.removeClass('has-error');
-            element.next('p.has-error').remove();
-
-            textarea.removeClass('has-error');
-            textarea.next('p.has-error').remove();          
-        }
-
-    },
-
-    validate: function () {
-        console.info('MetadataView: validate');
-        this.model.isValid(true)
     }
-})
+});

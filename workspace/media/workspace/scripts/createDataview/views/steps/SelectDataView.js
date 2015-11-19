@@ -12,10 +12,19 @@ var SelectDataView = Backbone.View.extend({
 
         this.table = new Handsontable(container, {
             data: this.datasetModel.get('tables')[0],
-            minSpareRows: 1,
             rowHeaders: true,
             colHeaders: true,
-            contextMenu: false
+            readOnly: true,
+            readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
+            allowInsertRow: false,
+            allowInsertColumn: false,
+            disableVisualSelection: ['current'],
+            colWidths: 80,
+            manualColumnResize: true,
+            manualRowResize: true,
+            rowHeaders: true,
+            colHeaders: true,
+            contextMenu: false,
         });
     }
 });

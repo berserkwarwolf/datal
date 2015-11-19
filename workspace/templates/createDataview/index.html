@@ -73,6 +73,9 @@
 		    <li class="step step-2 hidden">
 		      <a title="Third Step">Third Step</a>
 		    </li>
+		    <li class="step step-3 hidden">
+		      <a title="Fourth Step">Fourth Step</a>
+		    </li>
 		  </ul>
         </div>
     </div>
@@ -93,67 +96,11 @@
 	<div class="row select-data-view"></div>
 
 	<div class="row metadata-view hidden create">
-	<button class="button btn-save">SAVE</button>
-		<div class="columns clearfix">
-			
-			<div class="CL formContent">
+		{% include "createDataview/MetadataView.html" %}
+	</div>
 
-				<fieldset>
-		
-					<div class="row clearfix">
-						<label for="title">{% trans "APP-TITLE-TEXT" %}</label>
-						<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
-						<span class="required">*</span>
-						<!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
-					</div>
-		
-					<div class="row clearfix">
-						<label for="description">{% trans "APP-DESCRIPTION-TEXT" %}</label>
-						<input type="text" class="description" name="description" maxlength="140" data-bind="">
-						<span class="required">*</span>
-						<!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
-					</div>
-
-					<!-- TO DO 
-					<div class="row clearfix">
-						<label for="id_tag_name">{% trans 'APP-TAGS-TEXT' %}</label>
-						<div class="input-button">
-							<a class="button small" title="{% trans 'APP-ADD-TEXT' %}">{% trans 'APP-ADD-TEXT' %}</a>
-							<input type="text" data-bind="">
-						</div>
-						<p class="tip">{% trans 'APP-LABELS-TIP-TEXT' %}</p>
-
-						<div class="tagsContent">
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">que buena etiqueta</span>
-									<a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
-								</span>
-							</div>
-							<div class="tag">
-								<span class="tagInner clearfix">
-									<span class="tagTxt">no tanto como esta</span>
-									<a class="remove"><span class="DN">{% trans 'APP-REMOVE-TEXT' %}</span></a>
-								</span>
-							</div>
-						</div>
-					</div>
-					-->
-
-					<div class="row clearfix notes-field">
-						<label for="id_notes">{% trans "APP-NOTES-TEXT" %}</label>
-						<div class="textarea clearfix FL">
-							<textarea id="id_notes" class="notes" maxlength="2048"></textarea>
-						</div>
-						<p class="has-error validate-msg">{% trans "VALIDATE-MAXLENGTH-TEXT-1" %} 2048 {% trans "VALIDATE-MAXLENGTH-TEXT-2" %}</p>
-					</div>
-
-				</fieldset>
-
-			</div>
-
-		</div>
-
+	<div class="row preview-view">
+		<div class="table-container"></div>
 	</div>
 
 
@@ -208,6 +155,7 @@
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/ChooseTableView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/SelectDataView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/MetadataView.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createDataview/views/steps/PreviewView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/MainView.js' %}"></script>
 	<script>
 		var mainView = new MainView({

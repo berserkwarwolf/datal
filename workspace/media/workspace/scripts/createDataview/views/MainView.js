@@ -47,6 +47,11 @@ var MainView = Backbone.View.extend({
                 model: this.dataviewModel
             });
         } else if (step === 3) {
+            this.currentView = new PreviewView({
+                el: this.$('.preview-view'),
+                model: this.dataviewModel
+            });
+        } else if (step === 4) {
             this.dataviewModel.save().then(function (response) {
                 console.log(response);
             }).fail(function (response) {
