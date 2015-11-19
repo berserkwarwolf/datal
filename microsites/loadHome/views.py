@@ -16,11 +16,11 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext
 from core.exceptions import *
 from microsites.exceptions import *
+import json
+import logging
+
 from core.search.finder import FinderQuerySet
 
-import json
-
-import logging
 logger = logging.getLogger(__name__)
 
 
@@ -28,8 +28,8 @@ logger = logging.getLogger(__name__)
 def load(request):
     """
     Shows the microsite's home page
+    :param request:
     """
-
     jsonObject = None
     language = request.auth_manager.language
     account = request.account

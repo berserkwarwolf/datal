@@ -35,7 +35,7 @@ class ElasticsearchIndex():
         # Ya existe un index
         except KeyError:
             pass
-            
+
         self.logger = logging.getLogger(__name__)
 
     def __get_mapping(self, doc_type):
