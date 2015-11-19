@@ -3185,13 +3185,16 @@ msgid "APP-CREATE-MAP-TEXT"
 msgstr "Create map"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-LATITUDE-TEXT"
-msgstr "1. Latitude"
+msgstr "Latitude"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT"
-msgstr "2. Longitude"
+msgstr "Longitude"
+
+msgid "APP-CUSTOMIZE-MAP-SELECT-TRACE-TEXT"
+msgstr "Trace information"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
-msgstr "3. Markers information"
+msgstr "Markers information"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
 msgstr "It's what you will see in the tooltip map"
