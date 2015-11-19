@@ -5,12 +5,15 @@ var StepBar = Backbone.View.extend({
     },
 
     initialize: function () {
+        this.template = _.template( $('#step_bar_template').html() );
         this.listenTo(this.model, 'change:step', this.render, this);
     },
 
     render: function () {
         var step = this.model.get('step');
-        this.$('.step.step-' + step).removeClass('hidden');
+        this.$el.html(this.template({
+            step: step
+        }));
         return this;
     },
 

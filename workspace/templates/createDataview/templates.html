@@ -29,8 +29,12 @@
   </div>
   <div class="col-xs-10">
     <h4>Tabla de datos</h4>
-    <div class="table-container">
+
+    <div class="data-table-view">
+      <div class="table-view">
+      </div>
     </div>
+
   </div>
 </script>
 
@@ -98,25 +102,36 @@
 
     <div class="buttons_view_container">
       <ul class="buttons-bar">
-        <li class="step step-0 hidden">
+        <li class="step step-0">
           <a title="First Step">First Step</a>
         </li>
-        <li class="step step-1 hidden">
+        <% if (step > 0) {%>
+        <li class="step step-1">
           <a title="Second Step">Second Step</a>
         </li>
-        <li class="step step-2 hidden">
+        <% } %>
+        <% if (step > 1) {%>
+        <li class="step step-2">
           <a title="Third Step">Third Step</a>
         </li>
-        <li class="step step-3 hidden">
+        <% } %>
+        <% if (step > 2) {%>
+        <li class="step step-3">
           <a title="Fourth Step">Fourth Step</a>
         </li>
+        <% } %>
       </ul>
     </div>
   </div>
   <div class="col-xs-4 context-buttons clearfix">
     <div class="pull-right">
-      <a class="button alpha btn-cancel">Cancelar</a>
-      <a class="button primary btn-continue">Continuar</a>
+      <a class="button alpha btn-cancel">Back</a>
+      <% if (step < 3) {%>
+      <a class="button primary btn-continue">Next</a>
+      <% } %>
+      <% if (step === 3) {%>
+        <a class="button primary btn-continue">Save</a>
+      <% } %>
     </div>
   </div>
 </script>

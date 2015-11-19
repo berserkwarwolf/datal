@@ -41,15 +41,18 @@ var DataTableView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    var self = this;
+    var self = this,
+      columns;
 
     this.utils = DataTableUtils;
 
-    var columns = _.map(options.dataview.columns, function (col) {
-      return {
-        renderer: self.typeToRenderer[col.fType]
-      };
-    });
+    if (options.dataview.columns) {
+      columns = _.map(options.dataview.columns, function (col) {
+        return {
+          renderer: self.typeToRenderer[col.fType]
+        };
+      });
+    }
 
     this.data = options.dataview.rows;
 

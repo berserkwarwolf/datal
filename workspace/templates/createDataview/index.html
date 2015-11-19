@@ -58,34 +58,7 @@
 {% endblock %}
 
 {% block sectionTitle %}
-  <div class="context-menu-view clearfix">
-    <div class="col-xs-8">
-        <h1 class="sub-heading">{% trans "APP-CREATE-DATAVIEW-TEXT" %}</h1>
-
-        <div class="buttons_view_container">
-    	  <ul class="buttons-bar">
-		    <li class="step step-0 hidden">
-		      <a title="First Step">First Step</a>
-		    </li>
-		    <li class="step step-1 hidden">
-		      <a title="Second Step">Second Step</a>
-		    </li>
-		    <li class="step step-2 hidden">
-		      <a title="Third Step">Third Step</a>
-		    </li>
-		    <li class="step step- hidden">
-		      <a title="Third Step">Third Step</a>
-		    </li>
-		  </ul>
-        </div>
-    </div>
-    <div class="col-xs-4 context-buttons clearfix">
-	    <div class="pull-right">
-			<a class="button alpha btn-cancel">Cancelar</a>
-			<a class="button primary btn-continue">Continuar</a>
-		</div>
-    </div>
-  </div>
+  <div class="context-menu-view clearfix"></div>
 {% endblock %}
 
 
@@ -148,6 +121,11 @@
 	{% include "createDataview/templates.html" %}
 
 	<script type="text/javascript" src="{% static 'handsontable/dist/handsontable.full.js' %}"></script>
+
+	<script src="{% static 'workspace/scripts/createVisualization/models/DataTableSelectionModel.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createVisualization/collections/DataTableSelectedCollection.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createVisualization/views/table/DataTable.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createVisualization/views/table/DataTableUtils.js' %}"></script>
 
 	<script src="{% static 'workspace/scripts/createDataview/models/DatasetModel.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/models/DataviewModel.js' %}"></script>

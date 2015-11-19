@@ -8,6 +8,8 @@ var DatasetModel = Backbone.Model.extend({
     },
 
     parse: function (response) {
-        this.set('tables', response);
+        return {
+                tables: response
+            };
     }
 })
