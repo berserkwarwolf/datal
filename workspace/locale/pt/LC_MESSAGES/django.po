@@ -3184,6 +3184,9 @@ msgstr "1. Latitude"
 msgid "APP-CUSTOMIZE-MAP-SELECT-LONGITUDE-TEXT"
 msgstr "2. Longitude"
 
+msgid "APP-CUSTOMIZE-MAP-SELECT-TRACE-TEXT"
+msgstr "2. Trace information"
+
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
 msgstr "3. Markers information"
 
