@@ -36,7 +36,6 @@ class ElasticsearchIndex():
         except KeyError:
             pass
             
-
         self.logger = logging.getLogger(__name__)
 
     def __get_mapping(self, doc_type):
@@ -191,7 +190,9 @@ class ElasticsearchIndex():
         }
 
     def indexit(self, document):
-        """add document to index"""
+        """add document to index
+        :param document:
+        """
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
@@ -246,19 +247,20 @@ class ElasticsearchIndex():
         return self.es.indices.delete(index=settings.SEARCH_INDEX['index'], ignore=[400, 404])
 
     def delete_documents(self, documents):
-        """Delete from a list. Return [list(deleted), list(notdeleted)] """
-
-
+        """Delete from a list. Return [list(deleted), list(notdeleted)]
+        :param documents:
+        """
         result = map(self.delete_document, documents)
 
         documents_deleted=filter(self.__filterDeleted,result)
         documents_not_deleted=filter(self.__filterNotDeleted,result)
 
-
         return [documents_deleted, documents_not_deleted]
 
     def update(self, document):
-        """ update by id"""
+        """ Update by id
+        :param document:
+        """
         # Me lo pediste vos nacho, despues no me putees
         return True
         # try:
