@@ -1,31 +1,123 @@
 {% load i18n extra_tags core_components components %}
 
 <script type="text/template" id="choose_table_template">
-    <h2>Hacé click sobre los datos que deseas utilizar para seleccionarlos.</h2>
-    <div class="col-xs-2 tables-select-view">
-      <h4>Seleccione una tabla</h4>
-      <ul>
-        <% _(tables).each(function(table){ %>
+  <header>
+    <h3>Hacé click sobre los datos que deseas utilizar para seleccionarlos.</h3>
+  </header>
+  <div class="col-xs-2 tables-select-view">
+    <h4>Seleccione una tabla</h4>
+    <ul>
+      <% _(tables).each(function(table){ %>
         <li>
           <a class="select-table-item" data-table-id="<%= table %>"><%= table %></a>
         </li>
         <% }); %>
-      </ul>
-    </div>
-    <div class="col-xs-10">
-      <h4>Tabla seleccionada</h4>
-      <div class="table-container"></div>
-    </div>
+    </ul>
+  </div>
+  <div class="col-xs-10">
+    <h4>Tabla seleccionada</h4>
+    <div class="table-container"></div>
+  </div>
 </script>
 
 <script type="text/template" id="select_data_template">
-    <h2>Indique las partes especificas de la tabla que necesita</h2>
-    <div class="col-xs-2 selection-controls-view">
-      <p>Aqui va la vista con la seleccion actual de datos y los controles</p>
+  <header>
+    <h3>Indique las partes especificas de la tabla que necesita</h3>
+  </header>
+  <div class="col-xs-2 selection-controls-view">
+    <p>Aqui va la vista con la seleccion actual de datos y los controles</p>
+  </div>
+  <div class="col-xs-10">
+    <h4>Tabla de datos</h4>
+    <div class="table-container">
     </div>
-    <div class="col-xs-10">
-      <h4>Tabla de datos</h4>
-      <div class="table-container">
-      </div>
+  </div>
+</script>
+
+<script type="text/template" id="metadata_view_template">
+  <header>
+    <h3 id="id_dataHeader">Cuéntanos sobre que se trata tu vista.
+      <span>Los campos con (<span class="required">*</span>) son obligatorios.</span>
+    </h3>
+  </header>
+  <div class="columns clearfix">
+    
+    <div class="CL formContent">
+
+      <fieldset>
+
+        <div class="row clearfix">
+          <label for="title">{% trans "APP-TITLE-TEXT" %}</label>
+          <input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
+          <span class="required">*</span>
+          <!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
+        </div>
+
+        <div class="row clearfix">
+          <label for="description">{% trans "APP-DESCRIPTION-TEXT" %}</label>
+          <input type="text" class="description" name="description" maxlength="140" data-bind="">
+          <span class="required">*</span>
+          <!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
+        </div>
+
+        <div class="row clearfix notes-field">
+          <label for="id_notes_2">{% trans "APP-NOTES-TEXT" %}</label>
+          <div class="textarea clearfix FL">
+            <textarea id="id_notes_2" class="notes" maxlength="2048"></textarea>
+          </div>
+          <p class="has-error validate-msg">{% trans "VALIDATE-MAXLENGTH-TEXT-1" %} 2048 {% trans "VALIDATE-MAXLENGTH-TEXT-2" %}</p>
+        </div>
+
+      </fieldset>
+
     </div>
+
+  </div>
+  <button class="button btn-save">SAVE</button>
+</script>
+
+<script type="text/template" id="preview_dataview_template">
+  <header>
+    <h3>Asegurate que todo va bien con tu vista. 
+      <span class="txt">Para archivos extensos mostramos aquí sólo hasta 100 filas. Podrás verlo completo al finalizar.</span>
+    </h3>
+  </header>
+
+  <div class="col-xs-2 selection-controls-view">
+    <p>placeholder para los metadatos</p>
+  </div>
+  <div class="col-xs-10">
+    <h4>Tabla de datos</h4>
+    <div class="table-container">
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="step_bar_template">
+  <div class="col-xs-8">
+    <h1 class="sub-heading">Create Dataview</h1>
+
+    <div class="buttons_view_container">
+      <ul class="buttons-bar">
+        <li class="step step-0 hidden">
+          <a title="First Step">First Step</a>
+        </li>
+        <li class="step step-1 hidden">
+          <a title="Second Step">Second Step</a>
+        </li>
+        <li class="step step-2 hidden">
+          <a title="Third Step">Third Step</a>
+        </li>
+        <li class="step step-3 hidden">
+          <a title="Fourth Step">Fourth Step</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-4 context-buttons clearfix">
+    <div class="pull-right">
+      <a class="button alpha btn-cancel">Cancelar</a>
+      <a class="button primary btn-continue">Continuar</a>
+    </div>
+  </div>
 </script>

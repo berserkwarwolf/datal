@@ -10,7 +10,13 @@ var MetadataView = Backbone.Epoxy.View.extend({
     },
 
     initialize: function () {
+        this.template = _.template( $('#metadata_view_template').html() );
+        this.$el.html(this.template());
+    },
+
+    render: function () {
         var self = this;
+
         Backbone.Validation.bind(this, {
             attributes: function(view) {
                 return ['title', 'description'];
@@ -22,12 +28,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
                 self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
             },
         });
-        // TODO: fix the notes editor
-        // this.initNotes();
-    },
-
-    render: function () {
-        this.$el.removeClass('hidden');
+        this.initNotes();
     },
 
     initNotes: function(){
@@ -35,10 +36,10 @@ var MetadataView = Backbone.Epoxy.View.extend({
         this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
-        }).panelInstance('id_notes_g');
+        }).panelInstance('id_notes_2');
 
         if(this.model.get('notes')){
-            this.notesInstance.instanceById('id_notes_g').setContent(this.model.get('notes'));
+            this.notesInstance.instanceById('id_notes_2').setContent(this.model.get('notes'));
         }
 
     },

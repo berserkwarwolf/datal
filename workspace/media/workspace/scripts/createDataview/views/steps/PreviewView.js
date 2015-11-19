@@ -8,11 +8,14 @@ var PreviewView = Backbone.View.extend({
     },
 
     initialize: function () {
+        this.template = _.template( $('#preview_dataview_template').html() );
         this.model.fetch();
         this.listenTo(this.model.data, 'change:rows', this.render, this);
     },
 
     render: function () {
+        this.$el.html(this.template());
+
         var container = this.$('.table-container').get(0),
             tableRows = this.model.data.get('rows');
 

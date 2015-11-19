@@ -26,7 +26,7 @@ var ModalView = Backbone.View.extend({
 
         // events
         this.on('open', this.onOpen, this);
-        this.listenTo(this.dataStreamModel, 'change', this.onLoadDataStream, this);
+        this.listenTo(this.dataStreamModel.data, 'change:rows', this.onLoadDataStream, this);
         this.listenTo(this.model, 'change:type', this.onChangeType, this);
         this.listenTo(this.model, 'change:geoType', this.onChangeType, this);
         this.listenTo(this.collection, 'change remove reset', this.validate, this);
@@ -84,11 +84,11 @@ var ModalView = Backbone.View.extend({
         this.close();
     },
 
-    onLoadDataStream: function (model) {
+    onLoadDataStream: function (dataviewModel) {
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
-            datastream: model.toJSON()
+            dataview: dataviewModel.toJSON()
         });
         this.dataTableView.render();
         this.collection.setMaxCols(this.dataTableView.table.countCols());

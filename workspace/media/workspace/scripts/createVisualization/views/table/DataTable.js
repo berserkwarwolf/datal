@@ -41,23 +41,17 @@ var DataTableView = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    var self = this,
-      invoke = options.datastream;
+    var self = this;
 
     this.utils = DataTableUtils;
 
-    var columns = _.map(_.first(invoke.fArray, invoke.fCols), function (col) {
+    var columns = _.map(options.dataview.columns, function (col) {
       return {
         renderer: self.typeToRenderer[col.fType]
       };
     });
 
-    var rows = _.map(_.range(0, invoke.fRows), function (i) {
-      var row = invoke.fArray.slice(i*invoke.fCols, (i+1)*invoke.fCols);
-      return _.pluck(row, 'fStr');
-    });
-
-    this.data = rows;
+    this.data = options.dataview.rows;
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true,
