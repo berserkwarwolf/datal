@@ -2,18 +2,49 @@ var DataviewModel = Backbone.Model.extend({
     idAttribute: 'dataview_revision_id',
     
     defaults:{
-        title: null,
-        description: null,
+        title: undefined,
+        description: undefined,
         category: undefined,
         sources: [],
         tags: [],
-        notes: null,
+        notes: undefined,
+
+        // TODO: remove this hardcoded params and use the model's data
+        end_point: 'file://1/7461/5029f04a-9afd-494f-83c5-30f78e0d9e73',
+        impl_type: 10,
+        impl_details: '',
+        datasource: '<dataSource><DataStructure><Field id="table0"><type></type><format><languaje></languaje><country></country><style></style></format><Table><Field id="column0"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column1"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column2"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field></Table></Field></DataStructure></dataSource>',
+        select_statement: '<selectStatement><Select><Column>*</Column></Select><From><Table>table0</Table></From><Where/></selectStatement>',
+        rdf_template: '',
+        bucket_name: 'datal',
+        user_id: 1647,
+        limit: 50
     },
 
     url: function () {
-        return ['/rest/dataview/',
-            this.get('dataview_revision_id'),
-            '/tables.json?&limit=100&_=1447703003254'].join('');
+
+        return '/rest/datastreams/sample.json';
+    },
+
+    fetch: function (options) {
+        var params = this.pick([
+                'end_point',
+                'impl_type',
+                'impl_details',
+                'datasource',
+                'select_statement',
+                'rdf_template',
+                'bucket_name',
+                'user_id',
+                'limit',
+            ]);
+
+        return $.ajax({
+                type: "POST",
+                url: this.url(),
+                data: params,
+                dataType: 'json'
+            });
     },
 
     validation: {

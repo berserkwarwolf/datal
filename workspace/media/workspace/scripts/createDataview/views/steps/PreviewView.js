@@ -12,16 +12,12 @@ var MetadataView = Backbone.Epoxy.View.extend({
     initialize: function () {
         var self = this;
         Backbone.Validation.bind(this, {
-            attributes: function(view) {
-                console.log(view, 'attributes')
-                return ['title'];
-            },
             valid: function (view, attr, selector) {
                 self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
             },
             invalid: function (view, attr, error, selector) {
                 self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
-            },
+            }
         });
         // TODO: fix the notes editor
         // this.initNotes();
@@ -36,10 +32,10 @@ var MetadataView = Backbone.Epoxy.View.extend({
         this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
-        }).panelInstance('id_notes_g');
+        }).panelInstance('id_notes');
 
         if(this.model.get('notes')){
-            this.notesInstance.instanceById('id_notes_g').setContent(this.model.get('notes'));
+            this.notesInstance.instanceById('id_notes').setContent(this.model.get('notes'));
         }
 
     },
@@ -72,7 +68,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
     },
 
     validate: function () {
-        var valid = this.model.isValid(true);
-        console.info('MetadataView: validate', valid);
+        console.info('MetadataView: validate');
+        this.model.isValid(true)
     }
 })

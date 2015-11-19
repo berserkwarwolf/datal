@@ -77,7 +77,7 @@
         </div>
     </div>
     <div class="col-xs-4 context-buttons clearfix">
-	    <div class="FR">
+	    <div class="pull-right">
 			<a class="button alpha btn-cancel">Cancelar</a>
 			<a class="button primary btn-continue">Continuar</a>
 		</div>
@@ -92,7 +92,7 @@
 
 	<div class="row select-data-view"></div>
 
-	<div class="row metadata-view hidden">
+	<div class="row metadata-view hidden create">
 	<button class="button btn-save">SAVE</button>
 		<div class="columns clearfix">
 			
@@ -104,14 +104,14 @@
 						<label for="title">{% trans "APP-TITLE-TEXT" %}</label>
 						<input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
 						<span class="required">*</span>
-						<p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p>
+						<!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
 					</div>
 		
 					<div class="row clearfix">
 						<label for="description">{% trans "APP-DESCRIPTION-TEXT" %}</label>
 						<input type="text" class="description" name="description" maxlength="140" data-bind="">
 						<span class="required">*</span>
-						<p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p>
+						<!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
 					</div>
 
 					<!-- TO DO 
