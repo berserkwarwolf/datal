@@ -168,14 +168,6 @@ charts.models.Chart = Backbone.Model.extend({
         if(this.get('invertedAxis')===true){
             filters['invertedAxis'] = true;
         }
-
-        if(!filters['data']) {
-            filters['data'] = "A1:A1";
-        }
-
-        if(!filters['type']) {
-            filters['type'] = 'linechart'
-        }
         return filters;
     },
 
