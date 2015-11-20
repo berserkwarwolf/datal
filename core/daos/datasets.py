@@ -5,7 +5,7 @@ import logging
 import operator
 
 from django.template import loader, Context
-from django.db.models import Q, F, Max
+from django.db.models import Q, F
 
 from core.utils import slugify
 from core import settings
