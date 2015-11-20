@@ -7,6 +7,7 @@ charts.models.Chart = Backbone.Model.extend({
     urlRoot: '/api/charts/',
     defaults: {
         lib: 'google',
+        type: 'linechart',
 
         showLegend: true,
         invertData: undefined,
