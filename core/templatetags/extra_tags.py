@@ -7,7 +7,7 @@ import hashlib
 import urllib
 import re
 from urlparse import urlparse
-from core.choices import AccountRoles, SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import AccountRoles, SOURCE_IMPLEMENTATION_CHOICES, COLLECT_TYPE_CHOICES
 
 register = template.Library()
 
@@ -142,6 +142,15 @@ def impl_type_nice(item):
     impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1]).replace('/', '-').replace(' ', '-')
 
     return impl_type_nice
+
+@register.filter(name='collect_type_nice')
+def collect_type_nice(item):
+    """ obtener el nombre desde SOURCE_IMPLEMENTATION_CHOICES """
+    collect_type_nice = unicode(COLLECT_TYPE_CHOICES[int(item)][1]).replace('/', '-').replace(' ', '-')
+
+    return collect_type_nice
+
+
     
 @register.simple_tag
 def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
