@@ -2830,7 +2830,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "El conjunto de datos y sus recursos asociados han sido puestos como borrador, y no están más disponibles en el sitio de datos."
+msgstr "El conjunto de datos y sus recursos asociados han sido puestos como pendientes de aprobación, y no están más disponibles en el sitio de datos."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Conjunto de datos enviado a revisión"
