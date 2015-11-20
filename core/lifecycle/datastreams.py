@@ -99,10 +99,6 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             logger.info('[LifeCycle - Datastreams - Publish] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.datastream_revision.id, self.datastream_revision.status
             ))
-            # por el ticket #103673168
-            self.datastream_revision.status = StatusChoices.APPROVED
-            self.datastream_revision.save()
-            transaction.commit()
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PUBLISHED,
