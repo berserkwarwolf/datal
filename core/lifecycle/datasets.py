@@ -150,11 +150,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.dataset_revision.id, self.dataset_revision.status
             ))
-            # por el ticket #103673168
-            self.dataset.status = StatusChoices.APPROVED
-            self.dataset.save()
-            transaction.commit()
-
             raise IllegalStateException(
                                     from_state=self.dataset_revision.status,
                                     to_state=StatusChoices.PUBLISHED,
