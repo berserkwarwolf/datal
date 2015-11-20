@@ -52,7 +52,7 @@ def index(request):
 
 @login_required
 @require_GET
-#@require_privilege("workspace.can_query_visualization")
+@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     """ filter resources
     :param itemsxpage:
@@ -366,8 +366,7 @@ def edit(request, revision_id=None):
         return JSONHttpResponse(json.dumps(response))
 
 @login_required
-#@require_privilege("workspace.can_query_visualization")
-@require_privilege("workspace.can_query_dataset")
+@require_privilege("workspace.can_query_visualization")
 @require_GET
 def get_filters_json(request):
     """ List all Filters available
