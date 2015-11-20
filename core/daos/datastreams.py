@@ -158,7 +158,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_name=category.name,
             end_point=dataset_revision.end_point,
             filename=dataset_revision.filename,
-            collect_type=dataset_revision.impl_type,
+            collect_type=dataset_revision.dataset.type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
             modified_at=datastream_revision.modified_at,
