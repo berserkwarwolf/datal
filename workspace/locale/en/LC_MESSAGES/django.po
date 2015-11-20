@@ -3104,7 +3104,7 @@ msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
 msgstr "Markers information"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
-msgstr "It's what you will see in the tooltip map"
+msgstr "It's what you will see in the marker's tooltip"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "New Visualization"
