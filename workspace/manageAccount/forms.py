@@ -19,7 +19,7 @@ class AccountInfoForm(forms.Form):
     account_contact_person_country = forms.ChoiceField(choices=choices.COUNTRY_CHOICES, label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-COUNTRY-LABEL'), required=False)
 
     def action(self):
-        return reverse('admin_manager.action_info_update')
+        return reverse('admin_manager.edit_info_update')
 
 
 class AccountBrandingForm(forms.Form):
@@ -44,7 +44,7 @@ class AccountBrandingForm(forms.Form):
     account_header_border_color = forms.CharField(label=ugettext_lazy('ACCOUNT-BORDER-COLOR'), required=False, widget=forms.HiddenInput())
 
     def action(self):
-        return reverse('admin_manager.action_branding_update')
+        return reverse('admin_manager.edit_branding_update')
 
 
 class AccountSocialForm(forms.Form):
@@ -55,7 +55,7 @@ class AccountSocialForm(forms.Form):
     account_dataset_download = forms.BooleanField(label=ugettext_lazy('ACCOUNT-ENABLE-DOWNLOADS-LABEL'), required=False)
 
     def action(self):
-        return reverse('admin_manager.action_social_update')
+        return reverse('admin_manager.edit_social_update')
 
 
 class AccountDomainForm(forms.Form):
@@ -68,7 +68,7 @@ class AccountDomainForm(forms.Form):
     pick_a_domain = forms.ChoiceField(choices=(('internal', 'internal'),('external', 'external')), required=True, widget=forms.RadioSelect())
 
     def action(self):
-        return reverse('admin_manager.action_domain_update')
+        return reverse('admin_manager.edit_domain_update')
 
 
 class CategoryCreateForm(forms.Form):
