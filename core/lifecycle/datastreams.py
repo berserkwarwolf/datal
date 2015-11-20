@@ -163,7 +163,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if killemall:
             self._unpublish_all(to_status=to_status)
         else:
-            revcount = DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).count()
+            revcount = DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).count()
 
             if revcount == 1:
                 self._unpublish_all()
