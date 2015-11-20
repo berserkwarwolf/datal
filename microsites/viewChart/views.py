@@ -40,7 +40,7 @@ def hits_stats(request, vz_id, channel_type=None):
     return HttpResponse(t.render(c), content_type="application/json")
 
 
-def action_view(request, id, slug=None):
+def view(request, id, slug=None):
     """
     Show a microsite view
     """

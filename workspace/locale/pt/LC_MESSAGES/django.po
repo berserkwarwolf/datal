@@ -1816,93 +1816,6 @@ msgstr "Region"
 msgid "APP-REGION-TIP"
 msgstr "Region names must be in english for better results."
 
-msgid "APP-ACTIVITYSTREAM-TXT1"
-msgstr "Open Data made easy"
-
-msgid "APP-ACTIVITYSTREAM-TXT1-PRIVATE"
-msgstr "Private Data made easy"
-
-msgid "APP-ACTIVITYSTREAM-TXT2"
-msgstr "Follow these simple steps to get started"
-
-msgid "APP-ACTIVITYSTREAM-TXT3"
-msgstr "<a href='/admin/info' title='Set-up Account'>Set-up Account</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT4"
-msgstr "Customize the <a href='/admin/info' title='Customize the account settings'>account settings</a> and <a href='/admin/users' title='Assign users'>assign users</a> with different roles."
-
-msgid "APP-ACTIVITYSTREAM-TXT5"
-msgstr "<a href='/dataset/action_query' title='Collect Data'>Collect Data</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT6"
-msgstr "<a href='/dataset/action_query' title='Choose the datasets'>Choose the datasets</a> that you want to upload from your computer or the Web."
-
-msgid "APP-ACTIVITYSTREAM-TXT7"
-msgstr "<a href='/resource/action_query' title='Enhance your Data'>Enhance</a> and <a href='/review/action_query' title='Publish your Data'>Publish</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT8"
-msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a> and <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a>, and finally <a href='/review/action_query' title='Publish your resources'>publish them</a> on your <a href='/admin/domain' title='Configure your domain settings'>branded Open Data site</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT8-PRIVATE"
-msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a> and <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a>, and finally <a href='/review/action_query' title='Publish your resources'>publish them</a> on your <a href='/admin/domain' title='Configure your domain settings'>branded Private Data site</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT9"
-msgstr "Enhance your Data"
-
-msgid "APP-ACTIVITYSTREAM-TXT10"
-msgstr "The Datasets that you have collected can be enhanced in <a href='/resource/action_query' title='Data Views'>Data Views</a>, <a href='/resource/action_query' title='Visualizations'>Visualizations</a> and <a href='/resource/action_query' title='Dashboards'>Dashboards</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT11"
-msgstr "Your Open Data Site"
-
-msgid "APP-ACTIVITYSTREAM-TXT11-PRIVATE"
-msgstr "Your Private Data Site"
-
-msgid "APP-ACTIVITYSTREAM-TXT12"
-msgstr "Your Data is automatically published in your"
-
-msgid "APP-ACTIVITYSTREAM-TXT13"
-msgstr "Open Data Site"
-
-msgid "APP-ACTIVITYSTREAM-TXT13-PRIVATE"
-msgstr "Private Data Site"
-
-msgid "APP-ACTIVITYSTREAM-TXT14"
-msgstr "hosted on the DATAL Platform"
-
-msgid "APP-ACTIVITYSTREAM-TXT15"
-msgstr "<a href='/accounts/my_account' title='Personalize your settings'>Account settings</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT16"
-msgstr "<a href='/accounts/my_account' title='Personalize your settings'>Complete your profile</a>, <a href='/accounts/my_account' title='Personalize your settings'>change your password</a> or <a href='/accounts/my_account' title='Personalize your settings'>select a profile picture</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT17"
-msgstr "<a href='/dataset/action_query' title='Collect Data'>Collect</a> and <a href='/resource/action_query' title='Enhance your Data'>Enhance</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT18"
-msgstr "<a href='/dataset/action_query' title='Choose the datasets'>Choose the datasets</a> that you want to upload from your computer or the Web, and create <a href='/resource/action_query' title='Create Data Views'>Data Views</a>, <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a> and <a href='/resource/action_query' title='Create Dashboards'>Dashboards</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT19"
-msgstr "<a href='/review/action_query' title='Publish Data'>Publish Data</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT20"
-msgstr "Select the <a href='/review/action_query' title='Publish your resources'>Data Views, live Visualizations, and Dashboards</a> that you want to feature on your branded Open Data site."
-
-msgid "APP-ACTIVITYSTREAM-TXT20-PRIVATE"
-msgstr "Select the <a href='/review/action_query' title='Publish your resources'>Data Views, live Visualizations, and Dashboards</a> that you want to feature on your branded Private Data site."
-
-msgid "APP-ACTIVITYSTREAM-TXT21"
-msgstr "<a href='/resource/action_query' title='Enhance and submit'>Enhance and submit</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT22"
-msgstr "Transform your datasets into <a href='/resource/action_query' title='Create Data Views'>Data Views</a>, <a href='/resource/action_query' title='Create live Visualizations'>live Visualizations</a> and <a href='/resource/action_query' title='Create Dashboards'>Dashboards</a>. Finally, submit them for review."
-
-msgid "APP-ACTIVITYSTREAM-TXT23"
-msgstr "<a href='/dataset/action_query' title='Send Datasets to review'>Send to review</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT24"
-msgstr "<a href='/dataset/action_query' title='Submit the Datasets to review'>Submit the datasets</a> that you have collected for review and approval."
-
 msgid "STEP0-WEBSERVICE-TEXT"
 msgstr "Web service"
 
@@ -2840,7 +2753,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "The Dataset and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
+msgstr "The Dataset and it's asociated resources have been set as pending for review, and are no longer available on your Open Data site."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
@@ -3158,19 +3071,13 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graph"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "Which are the data intervals?"
+msgstr "Data intervals?"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "Tags (X axis)"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
-msgstr "Categories to compare"
+msgstr "Labels"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "Header/s"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
-msgstr "You can compare data from various categories in parallel. They shall be specified in the referencais or legends."
+msgstr "Legend"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
 msgstr "Select values for the map (columns or rows)"
@@ -3221,7 +3128,7 @@ msgid "APP-HOW-TO-SELECT-TITLE"
 msgstr "How to select?"
 
 msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
-msgstr "Select multiple cells in a column or row"
+msgstr "Select a range of cells"
 
 msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
 msgstr "The entire column"
