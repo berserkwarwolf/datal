@@ -116,8 +116,8 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 
 
 @login_required
-#@require_privilege("workspace.can_delete_datastream")
-#@requires_review
+@require_privilege("workspace.can_delete_visualization")
+@requires_review
 @transaction.commit_on_success
 def remove(request, visualization_revision_id, type="resource"):
     """ remove resource

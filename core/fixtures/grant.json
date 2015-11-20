@@ -770,6 +770,17 @@
     }
 },
 {
+    "pk": 3948,
+    "model": "core.grant",
+    "fields": {
+        "privilege": 577,
+        "created_at": "2015-04-08T13:55:52",
+        "role": 2,
+        "user": null,
+        "guest": null
+    }
+},
+{
     "pk": 3654,
     "model": "core.grant",
     "fields": {
@@ -1644,17 +1655,6 @@
     "model": "core.grant",
     "fields": {
         "privilege": 575,
-        "created_at": "2015-04-08T13:55:52",
-        "role": 2,
-        "user": null,
-        "guest": null
-    }
-},
-{
-    "pk": 3948,
-    "model": "core.grant",
-    "fields": {
-        "privilege": 577,
         "created_at": "2015-04-08T13:55:52",
         "role": 2,
         "user": null,
