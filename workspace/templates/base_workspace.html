@@ -38,6 +38,11 @@
 <script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 <script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.validate.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% if preference.account_language == 'es' %}
+<script type="text/javascript" src="/js_core/plugins/localization/messages_es.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% elif preference.account_language == 'pt' %}
+<script type="text/javascript" src="/js_core/plugins/localization/messages_pt.js?id={{settings.VERSION_JS_CSS}}"></script>
+{% endif %}
 <script type="text/javascript" src="/js_core/plugins/jquery.validate.custom.methods.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/jquery_tools/jquery.tools.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 
