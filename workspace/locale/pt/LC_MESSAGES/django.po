@@ -2840,7 +2840,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "The Dataset and it's asociated resources have been set as draft, and are no longer available on your Open Data site."
+msgstr "The Dataset and it's asociated resources have been set as pending for review, and are no longer available on your Open Data site."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
