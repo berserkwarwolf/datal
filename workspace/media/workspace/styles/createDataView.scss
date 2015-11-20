@@ -223,3 +223,18 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .step4 .button{margin-right:0;}
 .step4 .dataStreamBox{height:auto;}
 
+/* Handsontable version */
+
+.handsontable td.area{background:$modal-table-selected-color;}
+
+.hot-sel-1 span.color,
+td.hot-sel-1{background-color:#86ad7f;}
+
+.hot-sel-2 span.color,
+td.hot-sel-2{background-color:#ffb796;}
+
+.hot-sel-3 span.color, 
+td.hot-sel-3{background-color:#d6ebff;}
+
+.hot-sel-4 span.color,
+td.hot-sel-4{background-color:#9AB2B9;}

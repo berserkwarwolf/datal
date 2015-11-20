@@ -7,6 +7,8 @@
 
 {% block meta %}
     {% compress css %}
+	<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+
 	<!-- ACTIONS -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/actions.css' %}"/>
 	<!-- DATA TABLE -->
@@ -22,7 +24,6 @@
 	<!-- COMPONENT -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'workspace/styles/createDataView.scss' %}"/>
 	
-	<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 	<!--[if IE]>
 		<link href="{% sass_src 'workspace/styles/ao.tableStyles.css' %}" media="screen" rel="stylesheet" type="text/css"/>
 	<![endif]-->

@@ -29,10 +29,6 @@ Handsontable.renderers.registerRenderer('selectedLinkRenderer', function () {
 
 var DataTableView = Backbone.View.extend({
 
-  // Holds available selection identifiers
-  // these are maped to classes 'hot-sel-1', 'hot-sel-2', ...
-  available: _.range(12, 0, -1),
-
   typeToRenderer: {
     TEXT: 'selectedTextRenderer',
     LINK: 'selectedLinkRenderer',
@@ -42,19 +38,27 @@ var DataTableView = Backbone.View.extend({
 
   initialize: function (options) {
     var self = this,
+      tableData = options.dataview,
       columns;
 
     this.utils = DataTableUtils;
 
-    if (options.dataview.columns) {
-      columns = _.map(options.dataview.columns, function (col) {
+    // Si el 
+    if (tableData.columns) {
+      columns = _.map(tableData.columns, function (col) {
         return {
           renderer: self.typeToRenderer[col.fType]
         };
       });
+    } else {
+      columns = _.map(tableData.rows[0], function (cell) {
+        return {
+          renderer: self.typeToRenderer['TEXT']
+        };
+      });
     }
 
-    this.data = options.dataview.rows;
+    this.data = tableData.rows;
 
     this.table = new Handsontable(this.$('.table-view').get(0), {
       rowHeaders: true, colHeaders: true,
@@ -183,21 +187,6 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  getDataFromRange: function (range) {
-    var data;
-
-    if (range.from.row === -1) {
-      data = this.table.getDataAtCol(range.from.col);
-    } else {
-      data = this.table.getData(range.from.row, range.from.col, range.to.row, range.to.col);
-      // TODO: this takes only the first item from the selection. To support many column selection,
-      // it should do something else, like split the columns into separate series.
-      data = _.map(data, _.first);
-    }
-
-    return data;
-  },
-
   getSelection: function () {
     return {
       excelRange: this.utils.rangeToExcel(this._selectedCoordsCache)
@@ -208,7 +197,7 @@ var DataTableView = Backbone.View.extend({
     var range = model.getRange();
     if (!range) return;
     var cells = this.coordsToCells(range);
-    this._addCellsMeta(cells, model.get('id'));
+    this._addCellsMeta(cells, model.get('classname'));
     this.table.render();
   },
 
@@ -216,20 +205,19 @@ var DataTableView = Backbone.View.extend({
     var range = model.getRange();
     if (!range) return;
     var cells = this.coordsToCells(range);
-    this.available.push(model.get('id'));
-    this._rmCellsMeta(cells, model.get('id'));
+    this._rmCellsMeta(cells, model.get('classname'));
     this.table.render();
   },
 
   onChageSelected: function (model) {
-    var id = model.get('id');
+    var id = model.get('classname');
     var previousRange = model.getPreviousRange(),
       range = model.getRange(),
       previousCells = [],
       cells = [];
 
     if (previousRange === undefined) {
-      this._rmAllCellsMeta(id);
+      // this._rmAllCellsMeta(id);
     } else {
       previousCells = this.coordsToCells(previousRange);
     }
