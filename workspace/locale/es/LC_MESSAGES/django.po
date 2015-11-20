@@ -3148,19 +3148,13 @@ msgid "APP-GRAPH-TEXT"
 msgstr "Graficar"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-RANGE-TEXT"
-msgstr "¿Cuáles son los intervalos con datos?"
+msgstr "Intervalos con datos"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-TEXT"
-msgstr "Etiquetas (Eje X)"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-LABEL-HINT"
-msgstr "Las categorías a comparar"
+msgstr "Etiquetas"
 
 msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-TEXT"
-msgstr "Encabezado/s"
-
-msgid "APP-CUSTOMIZE-VISUALIZATION-SELECT-HEADERS-HINT"
-msgstr "Podrás comparar los datos de varias categorías en paralelo. Se especificarán en las referencais o leyendas."
+msgstr "Leyenda"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-DATA-TEXT"
 msgstr "Seleccione los valores para el mapa (columnas o filas)"
@@ -3205,7 +3199,7 @@ msgid "APP-HOW-TO-SELECT-TITLE"
 msgstr "¿Cómo seleccionar?"
 
 msgid "APP-HOW-TO-SELECT-MULTIPLE-TEXT"
-msgstr "Seleccioná varias celdas de una columna o fila"
+msgstr "Seleccioná un rango de celdas"
 
 msgid "APP-HOW-TO-SELECT-COLUMN-TEXT"
 msgstr "La columna completa"
