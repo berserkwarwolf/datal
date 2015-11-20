@@ -7,7 +7,7 @@ import hashlib
 import urllib
 import re
 from urlparse import urlparse
-from core.choices import AccountRoles
+from core.choices import AccountRoles, SOURCE_IMPLEMENTATION_CHOICES
 
 register = template.Library()
 
@@ -136,6 +136,13 @@ def addhttp(url):
         return '#'
 
 
+@register.filter(name='impl_type_nice')
+def impl_type_nice(item):
+    """ obtener el nombre desde SOURCE_IMPLEMENTATION_CHOICES """
+    impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1]).replace('/', '-').replace(' ', '-')
+
+    return impl_type_nice
+    
 @register.simple_tag
 def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
     """ auth_manager param can also be a user object or dict with user nick and email """

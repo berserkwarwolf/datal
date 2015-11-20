@@ -8,7 +8,6 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 from core.http import get_domain_with_protocol
 from core.shortcuts import render_to_response
-from core.utils import set_dataset_impl_type_nice
 from core.daos.visualizations import VisualizationHitsDAO
 from django.template import loader, Context
 from core.v8.factories import AbstractCommandFactory
@@ -79,7 +78,7 @@ def action_view(request, id, slug=None):
             preferences['account_language'],
             datastream_revision_id=visualization_revision["datastream_revision_id"]
         )
-        impl_type_nice = set_dataset_impl_type_nice(datastream["impl_type"]).replace('/', ' ')
+        
     except VisualizationRevision.DoesNotExist:
         raise VisualizationRevisionDoesNotExist
     else:
