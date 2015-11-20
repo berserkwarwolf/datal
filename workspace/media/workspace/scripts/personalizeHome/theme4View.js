@@ -229,6 +229,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					});
 				});
 	},
+
 	setSliderSection: function(){
 	
 		var resourceList = [];		

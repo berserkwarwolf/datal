@@ -1,0 +1,10 @@
+[
+  {% for object in objects %}
+  {
+    "type": "{{ object.type }}",
+    "id": "{{ object.id }}",
+    "value": "{{ object.value }}",
+    "label": "{{ object.label }}"
+  }{% if not forloop.last %},{%endif %}
+  {% endfor %}
+]

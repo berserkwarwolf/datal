@@ -11,6 +11,7 @@ from core.exceptions import SearchIndexNotFoundException
 
 logger = logging.getLogger(__name__)
 
+
 class FinderManager:
 
     def __init__(self):
