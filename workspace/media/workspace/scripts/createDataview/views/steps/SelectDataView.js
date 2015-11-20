@@ -29,6 +29,12 @@ var SelectDataView = Backbone.View.extend({
         }, this);
 
         this.dataTableView.render();
+
+        this.selectionView = new SelectionView({
+            el: this.$('.selection-view'),
+            collection: this.collection
+        });
+        this.selectionView.render();
     },
 
     addSelection: function (name) {

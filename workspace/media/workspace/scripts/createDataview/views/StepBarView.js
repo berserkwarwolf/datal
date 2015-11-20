@@ -1,4 +1,4 @@
-var StepBar = Backbone.View.extend({
+var StepBarView = Backbone.View.extend({
     events: {
         'click .btn-continue': 'onClickContinue',
         'click .btn-cancel': 'onClickCancel'

@@ -4,7 +4,7 @@ var MainView = Backbone.View.extend({
         this.model = new Backbone.Model({
             step: 0
         });
-        this.stepBarView = new StepBar({
+        this.stepBarView = new StepBarView({
             el: '.context-menu-view',
             model: this.model
         });
