@@ -295,9 +295,14 @@ var ManageDataviewsView = Backbone.View.extend({
 
 		// Fetch List Resources
 		this.listResources.fetch({
-			reset: true
+			reset: true,
+			error: self.onFetchError
 		});
 
-	}
+	},
+    onFetchError: function(obj, response, options){
+	    err = response.responseJSON;
+	    $("#id_manageDatastreams").html('<h1>'+err.error+'</h1><h2>'+err.description+'</h2>');
+    },
 
 });

@@ -1798,90 +1798,6 @@ msgstr "Región"
 msgid "APP-REGION-TIP"
 msgstr "Los nombres de las regiones deben estar en inglés para obtener mejores resultados."
 
-msgid "APP-ACTIVITYSTREAM-TXT1"
-msgstr "Abra sus datos facilmente"
-
-msgid "APP-ACTIVITYSTREAM-TXT1-PRIVATE"
-msgstr "Distribuya sus datos facilmente"
-
-msgid "APP-ACTIVITYSTREAM-TXT2"
-msgstr "Siga estos pasos"
-
-msgid "APP-ACTIVITYSTREAM-TXT3"
-msgstr "<a href='/admin/info' title='Configure su cuenta'>Configure su cuenta</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT4"
-msgstr "Personalice las <a href='/admin/info' title='Personalice las opciones de la cuenta'>opciones de la cuenta</a> y <a href='/admin/users' title='Asigne usuarios'>asigne usuarios</a> con diferentes roles."
-
-msgid "APP-ACTIVITYSTREAM-TXT5"
-msgstr "<a href='/dataset/action_query' title='Recolecte sus datos'>Recolecte sus datos</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT6"
-msgstr "<a href='/dataset/action_query' title='Elija los conjuntos de datos'>Elija los conjuntos de datos</a> que desea cargar desde el ordenador o la Web."
-
-msgid "APP-ACTIVITYSTREAM-TXT7"
-msgstr "<a href='/resource/action_query' title='Mejore sus datos'>Mejore</a> y <a href='/review/action_query' title='Publique sus datos'>Publíque</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT8"
-msgstr "Transforme sus conjuntos de datos en <a href='/resource/action_query' title='Cree vistas de datos'>vistas de datos</a> y <a href='/resource/action_query' title='Cree Visualizaciones'>visualizaciones</a>, y finalmente <a href='/review/action_query' title='Publíque sus recursos'>publíquelos</a> en su <a href='/admin/domain' title='Configure las preferencias de su dominio'>sitio de datos abiertos</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT9"
-msgstr "Mejora tus datos"
-
-msgid "APP-ACTIVITYSTREAM-TXT10"
-msgstr "Los Conjuntos de datos que has colectado puede ser mejorados en <a href='/resource/action_query' title='Vistas de datos'>Vistas de datos</a>, <a href='/resource/action_query' title='Visualizaciones'>Visualizaciones</a> y <a href='/resource/action_query' title='Colecciones'>Colecciones</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT11"
-msgstr "Tu sitio de datos abiertos"
-
-msgid "APP-ACTIVITYSTREAM-TXT11-PRIVATE"
-msgstr "Tu sitio de datos privado"
-
-msgid "APP-ACTIVITYSTREAM-TXT12"
-msgstr "Tus datos son automaticamente publicados en tu"
-
-msgid "APP-ACTIVITYSTREAM-TXT13"
-msgstr "sitio de datos abiertos"
-
-msgid "APP-ACTIVITYSTREAM-TXT13-PRIVATE"
-msgstr "sitio de datos privado"
-
-msgid "APP-ACTIVITYSTREAM-TXT14"
-msgstr "alojado en la plataforma de DATAL"
-
-msgid "APP-ACTIVITYSTREAM-TXT15"
-msgstr "<a href='/accounts/my_account' title='Ajustes de cuenta'>Ajustes de cuenta</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT16"
-msgstr "<a href='/accounts/my_account' title='Ajustes de cuenta'>Complete su perfil</a>, <a href='/accounts/my_account' title='Ajustes de cuenta'>cambie su contraseña</a> o <a href='/accounts/my_account' title='Ajustes de cuenta'>seleccione una foto de perfil</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT17"
-msgstr "<a href='/dataset/action_query' title='Recolecte sus datos'>Recolecte</a> y <a href='/resource/action_query' title='Mejore sus datos'>Mejore</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT18"
-msgstr "<a href='/dataset/action_query' title='Elija lo conjuntos de datos'>Elija lo conjuntos de datos</a> que desea cargar desde el ordenador o la Web, y cree <a href='/resource/action_query' title='Cree vistas de datos'>vistas de datos</a>, <a href='/resource/action_query' title='Cree Visualizaciones'>visualizaciones</a> y <a href='/resource/action_query' title='Cree Colecciones'>Colecciones</a>."
-
-msgid "APP-ACTIVITYSTREAM-TXT19"
-msgstr "<a href='/review/action_query' title='Publíque sus datos'>Publíque sus datos</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT20"
-msgstr "Seleccione las <a href='/review/action_query' title='Publíque sus recursos'>vistas de datos, visualizaciones, y colecciones</a> que desea destacar en su sitio de datos abiertos."
-
-msgid "APP-ACTIVITYSTREAM-TXT20-PRIVATE"
-msgstr "Seleccione las <a href='/review/action_query' title='Publíque sus recursos'>vistas de datos, visualizaciones, y colecciones</a> que desea destacar en su sitio de datos privado."
-
-msgid "APP-ACTIVITYSTREAM-TXT21"
-msgstr "<a href='/resource/action_query' title='Mejore y Envíe'>Mejore y Envíe</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT22"
-msgstr "Transforme sus conjuntos de datos en <a href='/resource/action_query' title='Cree vistas de datos'>vistas de datos</a>, <a href='/resource/action_query' title='Cree Visualizaciones'>visualizaciones</a> y <a href='/resource/action_query' title='Cree colecciones'>colecciones</a>. Finalmente, envíelos para revisión."
-
-msgid "APP-ACTIVITYSTREAM-TXT23"
-msgstr "<a href='/dataset/action_query' title='Envíe los conjuntos de datos a revisión'>Envíe a revisión</a>"
-
-msgid "APP-ACTIVITYSTREAM-TXT24"
-msgstr "<a href='/dataset/action_query' title='Envíe los conjuntos de datos a revisión'>Envíe los conjuntos</a> que usted ha recolectado a revisión y aprobación."
-
 msgid "STEP0-WEBSERVICE-TEXT"
 msgstr "Servicio web"
 
@@ -3175,7 +3091,7 @@ msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-TEXT"
 msgstr "Información de marcadores"
 
 msgid "APP-CUSTOMIZE-MAP-SELECT-MARKERS-HINT"
-msgstr "Es lo que verás en el tooltip del mapa"
+msgstr "Es lo que verás en el tooltip del marcador"
 
 msgid "APP-ADDNEWVISUALIZATION-TEXT"
 msgstr "Nueva visualización"

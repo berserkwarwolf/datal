@@ -56,7 +56,7 @@ a:hover{color:$link-hover-color;}
   &.active{
     & > .button.primary{background-color:$button-primary-hover-color;}
   }
-  .dropdown{display:none;position:absolute;top:47px;right:0;z-index:300;background:#fff;min-width:100%;
+  .dropdown{display:none;position:absolute;top:47px;right:0;z-index:190;background:#fff;min-width:100%;
     li{border-top:1px solid #3580cc;
       &:first-child{border:0;}
       .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
