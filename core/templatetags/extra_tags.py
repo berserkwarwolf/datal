@@ -178,9 +178,9 @@ def account_logo(account, klass, roles):
     account_domain = preferences['account_domain']
     href = ''
     if AccountRoles.ADMIN in roles and account_logo == '':
-        account_domain = reverse('admin_manager.action_info')
+        account_domain = reverse('admin_manager.edit_info')
     elif AccountRoles.ADMIN in roles and account_domain == '':
-        account_domain = reverse('admin_manager.action_domain')
+        account_domain = reverse('admin_manager.edit_domain')
     elif 'ao-free-user' in roles:
         return ''
     else:
