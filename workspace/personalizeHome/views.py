@@ -77,17 +77,19 @@ def suggest(request):
         account_id = account.id
 
     query = request.GET.get('term', '')
+    ids = request.GET.get('ids', '')
+    resources = request.GET.getlist('resources[]', 'all')
+    fm = FinderManager(ThemeFinder)
+
     if query:
-        resources = request.GET.getlist('resources[]', 'all')
-        fm = FinderManager(ThemeFinder)
         results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
         # optionally shows extra info
         # results.append({"extras": {"query": fm.get_finder().last_query, "time": time, "facets": facets}})
-        data = render_to_response('personalizeHome/suggest.json', {'objects': results})
+    elif ids:
+        results, time, facets = fm.search(account_id=account_id, ids=ids, resource=resources)
     else:
-        data = ''
-    #else:
-    #    data = 'fail'
+        results = ''
+    data = render_to_response('personalizeHome/suggest.json', {'objects': results})
 
     return HttpResponse(data,  content_type='application/json')
 

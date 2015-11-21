@@ -118,6 +118,17 @@ class Finder:
 
         self.terms = [ subquery for subquery in self.terms if subquery ]
 
+    def get_id_name(self, r):
+        if r == 'ds':
+            return "datastream_id"
+        elif r == 'db':
+            return "dashboard_id"
+        elif r == 'vz':
+            return "visualization_id"
+        elif r == 'dt':
+            return "dataset_id"
+
+
     def get_dictionary(self, doc):
         if doc['type'] == 'ds':
             return self.get_datastream_dictionary(doc)

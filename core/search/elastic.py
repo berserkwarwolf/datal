@@ -16,6 +16,7 @@ class ElasticsearchFinder(Finder):
 
         logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
         self.query = kwargs.get('query', '')
+        self.ids= kwargs.get('ids', None)
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
@@ -106,6 +107,14 @@ class ElasticsearchFinder(Finder):
                 "categories.name": self.category_filters
             }})
 
+        if self.ids:
+            # este método solo funciona si o si pasando como param UN tipo de recurso.
+            id_name=self.get_id_name(self.resource[0])
+            filters.append({"terms": {
+                id_name: filter(None,self.ids.split(","))
+            }})
+
+
         query = {
             "query": {
                 "filtered": {
@@ -130,7 +139,6 @@ class ElasticsearchFinder(Finder):
                 }
             }
         }
-
         return query
 
 class ElasticFinderManager(FinderManager):
