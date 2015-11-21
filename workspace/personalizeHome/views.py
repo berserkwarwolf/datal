@@ -78,7 +78,7 @@ def suggest(request):
 
     query = request.GET.get('term', '')
     ids = request.GET.get('ids', '')
-    resources = request.GET.getlist('resources[]', 'all')
+    resources = request.GET.getlist('resources[]', None)
     fm = FinderManager(ThemeFinder)
 
     if query:
