@@ -11,7 +11,7 @@ from django.core.exceptions import ValidationError
 
 from core.auth.decorators import login_required, privilege_required
 from core.http import get_domain_with_protocol
-from core.communitymanagers import *
+from core.communitymanagers import FinderManager
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
 
@@ -48,6 +48,7 @@ def save(request):
         account = request.auth_manager.get_account()
         jsonContent = request.POST.get('jsonString')
         jsonObj = json.loads(jsonContent)
+        print jsonObj
         preferences = account.get_preferences()
         if jsonObj['type'] == 'save':
             if jsonObj['theme'] is None:
