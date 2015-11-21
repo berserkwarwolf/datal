@@ -66,7 +66,7 @@
                         <tr>
                           <td>
                             <i class="icon-resources visualization">
-                                <h3><a href="{% url 'chart_manager.action_view' id=visualizations_revision.visualization__id slug=visualizations_revision.visualization__guid %}" title="{{ visualizations_revision.visualizationi18n__title }}">{{ visualizations_revision.visualizationi18n__title }}</a></h3>
+                                <h3><a href="{% url 'chart_manager.view' id=visualizations_revision.visualization__id slug=visualizations_revision.visualization__guid %}" title="{{ visualizations_revision.visualizationi18n__title }}">{{ visualizations_revision.visualizationi18n__title }}</a></h3>
                                 <p>{{ visualizations_revision.visualizationi18n__description }}</p>
                               <div class="api_example">
                                 <p>{% trans 'VIEWDS-API-EXAMPLES' %}</p>

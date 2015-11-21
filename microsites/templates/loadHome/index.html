@@ -2,7 +2,7 @@
 {% load i18n humanize extra_tags core_components compress staticfiles sass_tags %}
 
 {% block SEO %}
-	<title>{% if pageTitle %}{{pageTitle}}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
+	<title>{% if is_preview %}{% trans "APP-PREVIEWWINDOW-TITLE" %}{% else %}{{preferences.account_page_titles}}{% endif %}</title>
 {% endblock %}
 
 {% block meta %}
@@ -16,8 +16,8 @@
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
     {% endcompress %}
             
-	<link type="text/css" rel="stylesheet" media="screen" href="{% url 'microsites.action_css' preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-	<link type="text/css" rel="stylesheet" media="screen" href="{% url 'microsites.action_new_css' preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% url 'microsites.get_css' preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% url 'microsites.get_new_css' preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 
 	<!-- JS -->
 	{% ifequal LANGUAGE_CODE 'es'%}

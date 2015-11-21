@@ -10,8 +10,9 @@ var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        
-        this.options = options;
+
+        this.models = options.models;
+        this.type = options.type;
 
         // init Overlay
         this.$el.overlay({
@@ -25,17 +26,17 @@ var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
             }
         });
 
-        var total = this.options.models.length,
+        var total = this.models.length,
             self = this;
 
         // For each selected model, fetch related resources
-        _.each(this.options.models, function(model, index) {
+        _.each(this.models, function(model, index) {
 
             self.collection.fetch({
                 data: $.param({
                     revision_id: model.get('id'),
                     datastream_id: model.get('datastream_id'),
-                    type: self.options.type
+                    type: self.type
                 }),
                 success: function(model, response) {
 
@@ -83,7 +84,7 @@ var AffectedResourcesCollectionDeleteItemView = Backbone.View.extend({
 
     deleteRelatedResources: function() {
         var self = this;
-        _.each(this.options.models, function(model) {
+        _.each(this.models, function(model) {
             resource = model.get('title')
             model.remove({
                 

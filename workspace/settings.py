@@ -72,3 +72,8 @@ try:
     from workspace.local_settings import *
 except ImportError:
     pass
+
+try:
+    MIDDLEWARE_CLASSES += WORKSPACE_PLUGIN_MIDDLEWARE_CLASSES
+except:
+    pass

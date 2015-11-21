@@ -1,6 +1,7 @@
 var StartView = StepViewSPA.extend({
 
 	initialize: function(options){
+		StartView.__super__.initialize.apply(this, arguments);
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({

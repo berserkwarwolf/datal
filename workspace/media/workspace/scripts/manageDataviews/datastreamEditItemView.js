@@ -13,8 +13,8 @@ var DatastreamEditItemView = Backbone.Epoxy.View.extend({
 
     initialize: function(options) {
         var self = this;
-        this.options = options;
-        this.parentView = this.options.parentView;
+
+        this.parentView = options.parentView;
         this.template = _.template( $("#id_editTemplate").html() );
 
         // Init Overlay

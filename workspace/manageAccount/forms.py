@@ -7,16 +7,19 @@ from core.models import Role
 
 
 class AccountInfoForm(forms.Form):
+    """La informacion de la cuenta segraba en forma de preferencias
+    Estas tienen un campo de tipo TextField sin max_length definido.
+    De todas formas cada campo debe tener algun limite"""
     account_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-NAME-LABEL'), required=True)
     account_link = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-LINK-LABEL'), required=False)
-    account_contact_person_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL'), required=False)
-    account_contact_person_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-EMAIL-LABEL'), required=False)
-    account_contact_dataperson_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-DATAPERSON-EMAIL-LABEL'), required=False)
-    account_contact_person_phone = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-PHONE-LABEL'), required=False)
+    account_contact_person_name = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-NAME-LABEL'), required=False, max_length=80)
+    account_contact_person_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-EMAIL-LABEL'), required=False, max_length=120)
+    account_contact_dataperson_email = forms.EmailField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-DATAPERSON-EMAIL-LABEL'), required=False, max_length=120)
+    account_contact_person_phone = forms.CharField(label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-PHONE-LABEL'), required=False, max_length=80)
     account_contact_person_country = forms.ChoiceField(choices=choices.COUNTRY_CHOICES, label=ugettext_lazy('ACCOUNT-FORM-CONTACT-PERSON-COUNTRY-LABEL'), required=False)
 
     def action(self):
-        return reverse('admin_manager.action_info_update')
+        return reverse('admin_manager.edit_info_update')
 
 
 class AccountBrandingForm(forms.Form):
@@ -41,7 +44,7 @@ class AccountBrandingForm(forms.Form):
     account_header_border_color = forms.CharField(label=ugettext_lazy('ACCOUNT-BORDER-COLOR'), required=False, widget=forms.HiddenInput())
 
     def action(self):
-        return reverse('admin_manager.action_branding_update')
+        return reverse('admin_manager.edit_branding_update')
 
 
 class AccountSocialForm(forms.Form):
@@ -52,7 +55,7 @@ class AccountSocialForm(forms.Form):
     account_dataset_download = forms.BooleanField(label=ugettext_lazy('ACCOUNT-ENABLE-DOWNLOADS-LABEL'), required=False)
 
     def action(self):
-        return reverse('admin_manager.action_social_update')
+        return reverse('admin_manager.edit_social_update')
 
 
 class AccountDomainForm(forms.Form):
@@ -65,7 +68,7 @@ class AccountDomainForm(forms.Form):
     pick_a_domain = forms.ChoiceField(choices=(('internal', 'internal'),('external', 'external')), required=True, widget=forms.RadioSelect())
 
     def action(self):
-        return reverse('admin_manager.action_domain_update')
+        return reverse('admin_manager.edit_domain_update')
 
 
 class CategoryCreateForm(forms.Form):

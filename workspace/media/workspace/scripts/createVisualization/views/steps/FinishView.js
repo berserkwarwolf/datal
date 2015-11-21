@@ -1,6 +1,7 @@
 var FinishView = StepViewSPA.extend({
 
 	initialize: function(){
+		FinishView.__super__.initialize.apply(this, arguments);
 
 		this.addEvents({
 			'click a.backButton': 'onPreviousButtonClicked',

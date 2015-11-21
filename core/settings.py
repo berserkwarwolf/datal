@@ -294,6 +294,12 @@ LOGGING = {
             'handlers': ['file'],
             'propagate': False,
         },
+
+        'elasticsearch.trace': {
+            'level': 'INFO',
+            'handlers': ['file'],
+            'propagate': False,
+        },
     }
 }
 
@@ -387,5 +393,10 @@ except:
 
 try:
     LOCALE_PATHS += PLUGIN_LOCALES
+except:
+    pass
+
+try:
+    STATICFILES_DIRS += PLUGIN_STATIC_DIRS
 except:
     pass

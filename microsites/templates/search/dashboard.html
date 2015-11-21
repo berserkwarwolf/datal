@@ -1,5 +1,5 @@
 {% load i18n extra_tags %}
-{% url "search.action_search" as search_url %}
+{% url "search.search" as search_url %}
 <div id="id_dashboard_container_{{item.dashboard_id}}" class="panel clearfix">
     <h2><a class="ic_Dashboard" id="id_viewDashboardButton_{{ item.dashboard_id }}" rel="{{ item.dashboard_id }}" href="{{ item.permalink }}">
         <strong>{{item.title}}</strong></a>

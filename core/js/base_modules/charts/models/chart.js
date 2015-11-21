@@ -81,26 +81,29 @@ charts.models.Chart = Backbone.Model.extend({
 
         _.extend(data, _.pick(res, [
             'revision_id',
-            'lib',
-            'type',
-            'chartTemplate',
-            'nullValueAction',
-            'nullValuePreset'
+            'lib'
             ]));
+
 
         //edit
         if(res.revision_id){
             data = _.extend(data,{
+                type: res.format.type,
+
                 select_data:true,
                 notes: _.unescape(res.notes),
                 title: res.title,
                 description: res.description,
 
                 //config
-                showLegend: (res.showLegend=='checked'),
+                showLegend: (res.format.showLegend == 'checked'),
+                chartTemplate: res.format.chartTemplate,
 
-                invertData: (res.invertData=='checked'),
-                invertedAxis: (res.invertedAxis=='checked'),
+                invertData: (res.format.invertData == 'checked'),
+                invertedAxis: (res.format.invertedAxis == 'checked'),
+
+                nullValueAction: res.format.nullValueAction,
+                nullValuePreset: res.format.nullValuePreset,
 
                 //data
                 range_data: this.parseColumnFormat(res.data),
@@ -111,7 +114,7 @@ charts.models.Chart = Backbone.Model.extend({
                 range_lon: this.parseColumnFormat(res.chart.longitudSelection)
 
             });
-            if (res.type === 'mapchart') {
+            if (data.type === 'mapchart') {
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.chart.latitudSelection),
                     range_lon: this.parseColumnFormat(res.chart.longitudSelection),
@@ -263,9 +266,9 @@ charts.models.Chart = Backbone.Model.extend({
                 //General validation
                 var lFields = this.data.get('fields').length;
 
-                var check = _.reduce(this.data.get('rows'), 
+                var check = _.reduce(this.data.get('rows'),
                     function(memo, ar){
-                     return (ar.length==lFields)?memo:memo + 1; 
+                     return (ar.length==lFields)?memo:memo + 1;
                     }, 0);
 
                 if (check!=0){
@@ -361,7 +364,7 @@ charts.models.Chart = Backbone.Model.extend({
         if (!_.isUndefined(attrs.nullValueAction) && attrs.nullValueAction === 'given') {
 
             if (!_.isUndefined(nullValuePreset) && isNaN(nullValuePreset)) {
-                return 'Invalid value';
+                return 'invalid-value';
             }
 
         }

@@ -16,8 +16,8 @@ var CollectUrlView = StepView.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
+		eventsObject['click .backButton'] = 'onPreviousButtonClicked';
+		eventsObject['click .nextButton'] = 'onNextButtonClicked';
 		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
 		this.addEvents(eventsObject);
 

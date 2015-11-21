@@ -1,9 +1,9 @@
 var SelectedCellRangeView = Backbone.View.extend({
 
 	events: {
-		'focusin input[@type="text"]': 'onFocusInput',
-		'focusout input[@type="text"]': 'onFocusOutInput',
-		'keyup input[@type="text"]': 'onKeyupInput'
+		'focusin input[type="text"]': 'onFocusInput',
+		'focusout input[type="text"]': 'onFocusOutInput',
+		'keyup input[type="text"]': 'onKeyupInput'
 	},
 
 	initialize: function (options) {
@@ -73,4 +73,4 @@ var SelectedCellRangeView = Backbone.View.extend({
 		$input.siblings('p.validation-invalid-range').toggleClass('hidden', !hasInvalidError);
 		$input.toggleClass('has-error', hasInvalidError || hasRangeError);
 	}
-})
+});

@@ -12,10 +12,10 @@ var TagsView = Backbone.View.extend({
 		'keyup input#id_tag_name': 'onAddTagKey'
 	},
 
-	initialize: function(){
+	initialize: function(options){
   	this.template = _.template( $("#id_AddTagTemplate").html() );
-		this.parentView = this.options.parentView;
-		this.parentModel = this.options.parentModel;
+		this.parentView = options.parentView;
+		this.parentModel = options.parentModel;
 		this.listenTo(this.collection, 'add', this.addTag);
 		this.listenTo(this.collection, 'remove', this.removeTag);
 

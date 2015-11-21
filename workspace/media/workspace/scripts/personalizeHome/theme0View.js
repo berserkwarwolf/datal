@@ -8,8 +8,11 @@ var theme0View = Backbone.Epoxy.View.extend({
 		
 	},
 
-	initialize: function(){
-		this.options.currentView.helpAndTips('show');
+	initialize: function(options){
+		this.currentView = options.currentView;
+		this.currentModel = options.currentModel;
+
+		this.currentView.helpAndTips('show');
 		this.template = _.template( $("#id_theme0Template").html() );
 		this.initSliderSection();
 		this.render();
@@ -27,10 +30,10 @@ var theme0View = Backbone.Epoxy.View.extend({
 		this.setSliderSection();
 		var ob={};
 		if (btn_id === 'id_save' || btn_id === 'id_save_top') {
-			this.options.currentModel.attributes.config = this.model.toJSON();
-			this.options.currentModel.attributes.themeID = '0';
-			ob['config'] = this.options.currentModel.attributes.config;
-			ob['theme'] = this.options.currentModel.attributes.themeID;
+			this.currentModel.attributes.config = this.model.toJSON();
+			this.currentModel.attributes.themeID = '0';
+			ob['config'] = this.currentModel.attributes.config;
+			ob['theme'] = this.currentModel.attributes.themeID;
 			ob['type'] = 'save';
 		} else {
 			ob['config'] = this.model.toJSON();
