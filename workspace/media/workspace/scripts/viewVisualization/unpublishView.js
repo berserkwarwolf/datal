@@ -23,8 +23,8 @@ var UnpublishView = Backbone.View.extend({
 			}
 		});
 
-		this.parentView = this.options.parentView;
-		
+    this.parentView = options.parentView;
+
 		// Render
 		this.render();
 

@@ -22,6 +22,7 @@ _.extend(StepView.prototype, Backbone.Epoxy.View.prototype, {
 
 	addEvents: function(eventObj) {
 		this.inheritedEvents.push(eventObj);
+		this.delegateEvents();
 	},
 
 	// Step functions

@@ -1,7 +1,7 @@
 var VisualizationCellView = Backbone.View.extend({
     template: null,
 
-    initialize: function(options) {
+    initialize: function() {
         this.template = _.template($("#grid-visualizationcell-template").html());
     },
 

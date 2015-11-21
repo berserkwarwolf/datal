@@ -66,17 +66,6 @@ class DatasetForm(forms.Form):
         }),
     )
 
-    # Status
-    status = forms.ChoiceField(
-        required=True,
-        label=ugettext_lazy('APP-STATUS-TEXT'),
-        choices=[],
-        widget=forms.Select(attrs={
-            'data-bind':'value:status,events:[\'keyup\']',
-            'tabindex':0
-        })
-    )
-
     # Notes
     notes = forms.CharField(
         required=False,
@@ -168,7 +157,6 @@ class DatasetForm(forms.Form):
 
         super(DatasetForm, self).__init__(data, *args)
 
-        self.fields['status'].choices = kwargs.get('status_options', choices.VALID_STATUS_CHOICES)
         self.fields['impl_type'].choices = kwargs.get('impl_type_choices', choices.SOURCE_IMPLEMENTATION_CHOICES)
 
         account_id = kwargs.get('account_id')

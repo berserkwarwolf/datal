@@ -19,20 +19,22 @@
     "backbone.epoxy": "~1.3.1",
     "backbone.paginator": "~2.0.2",
     "backbone.validation": "~0.7.1",
-    "backbone": "~1.2.1",
+    "backbone": "1.2.3",
     "backgrid-filter": "~0.3.5",
     "backgrid-paginator": "~0.3.5",
     "backgrid-select-all": "~0.3.5",
     "backgrid-text-cell": "~0.3.5",
-    "handsontable": "~0.18.0",
+    "handsontable": "~0.20.0",
     "jquery.cookie": "~1.4.1",
-    "jquery": ">=2.1.4",
     "underscore": ">= 1.8.3",
-    "c3": "~0.4.10"
+    "c3": "~0.4.10",
+    "jquery": "1.11.2",
+    "jquery-ui": "~1.11.4",
+    "jquery-file-upload": "~9.11.2"
   },
   "resolutions": {
-    "jquery": ">=2.1.4",
-    "backbone": "~1.2.1",
+    "jquery": "1.11.2",
+    "backbone": "1.2.3",
     "underscore": ">= 1.8.3"
   }
 }

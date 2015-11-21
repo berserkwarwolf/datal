@@ -247,7 +247,7 @@ msgid "APP-INCATEGORY-TEXT"
 msgstr "in category"
 
 msgid "DSFIND-HELPTIP-TITLE"
-msgstr "Helpful Tips"
+msgstr "Helpfull Tips"
 
 msgid "APP-DIDYOUKNOW-TEXT"
 msgstr "Did you know?"
@@ -466,7 +466,7 @@ msgid "VIEWDS-API-NEEDHELP"
 msgstr "Need help?"
 
 msgid "VIEWDS-API-NEEDHELP-1"
-msgstr "Send us an email"
+msgstr "Send us an e-mail"
 
 msgid "VIEWDS-API-NEEDHELP-2"
 msgstr "We are always happy to help!"
@@ -620,3 +620,4 @@ msgstr "Minutely"
 
 msgid "APP-OTHER-TEXT"
 msgstr "Other"
+

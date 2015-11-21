@@ -23,8 +23,8 @@
 	<!-- OVERLAY -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/overlay.css' %}"/>
     {% endcompress %}
-    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+    <link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 
 	<script type="text/javascript" src="/js_core/libs/underscore/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script type="text/javascript" src="/js_core/libs/backbone/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -38,7 +38,7 @@
 	<script type="text/javascript" src="/js_microsites/viewDataStream/embedActions.js?id={{settings.VERSION_JS_CSS}}"></script>
 <!--	<script type="text/javascript" charset="utf-8" src="http://bit.ly/javascript-api.js?version=latest&amp;login=junar&amp;apiKey=R_4da011b2ee9f2ee2cf80ed8122b73391"></script>
 	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script> -->
-	<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+	<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 {% endif %}
 
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>

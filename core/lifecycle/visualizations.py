@@ -135,8 +135,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.visualization_revision
 
-    def _move_childs_to_draft(self):
-        pass
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a visualization revision """
@@ -167,8 +165,10 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.visualization.last_published_revision = VisualizationRevision.objects.get(
-                        pk=last_published_revision_id)
+                self.visualization.last_published_revision = VisualizationRevision.objects.get(
+                    pk=last_published_revision_id)
+                search_dao = VisualizationSearchDAOFactory().create(self.visualization.last_published_revision)
+                search_dao.add()
             else:
                 self.visualization.last_published_revision = None
 
@@ -177,6 +177,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.visualization.id:
                 self.visualization.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.visualization.last_revision_id=last_revision_id
 
     def _publish_childs(self):
         """
@@ -193,8 +195,12 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         """
         pass
 
-    def save_as_draft(self):
-        self.visualization_revision.clone()
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
+        pass
+
+
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.visualization_revision.clone(status)
         self._update_last_revisions()
 
     def _remove_all(self):
@@ -271,9 +277,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.visualization.last_published_revision=None
             self.visualization.save()
-
-            search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
-            search_dao.remove()
 
             self.visualization_revision.delete()
 

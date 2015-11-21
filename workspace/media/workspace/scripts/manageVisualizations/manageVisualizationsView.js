@@ -23,8 +23,9 @@ var ManageVisualizationsView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.sourceUrl = this.options.sourceUrl;
-		this.tagUrl = this.options.tagUrl;
+		this.sourceUrl = options.sourceUrl;
+		this.tagUrl = options.tagUrl;
+		this.visualizationCreationStepsUrl = options.visualizationCreationStepsUrl;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());
@@ -176,7 +177,7 @@ var ManageVisualizationsView = Backbone.View.extend({
 
 	onAddNewButtonClicked: function() {
 		var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView({
-			visualizationCreationStepsUrl: this.options.visualizationCreationStepsUrl,
+			visualizationCreationStepsUrl: this.visualizationCreationStepsUrl,
 		});
 	},
 
@@ -273,9 +274,15 @@ var ManageVisualizationsView = Backbone.View.extend({
 
 		// Fetch List Resources
 		this.listResources.fetch({
-			reset: true
+			reset: true,
+			error: self.onFetchError
 		});
 
-	}
+	},
+    onFetchError: function(obj, response, options){
+	    err = response.responseJSON;
+	    $("#id_manageVisualizations").html('<h1>'+err.error+'</h1><h2>'+err.description+'</h2>');
+    },
+    
 
 });

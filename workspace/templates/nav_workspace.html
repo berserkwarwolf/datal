@@ -57,7 +57,7 @@
     {% if 'workspace.can_access_admin' in auth_manager.privileges %}
     <!-- Settings -->
     <li>
-      <a id="id_settings_option" href="{% url 'admin_manager.action_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
+      <a id="id_settings_option" href="{% url 'admin_manager.edit_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
     </li>
     {% endif %}
 

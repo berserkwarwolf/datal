@@ -1,3 +1,4 @@
+# coding=utf-8
 import re
 import json
 
@@ -5,6 +6,7 @@ from django.views.decorators.http import require_POST
 from django.utils.translation import ugettext
 from django.views.decorators.csrf import csrf_exempt
 from django.shortcuts import render_to_response, HttpResponse
+from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError
 
 from core.auth.decorators import login_required, privilege_required
@@ -18,13 +20,18 @@ from workspace.personalizeHome.managers import ThemeFinder
 @privilege_required('workspace.can_access_admin')
 @csrf_exempt
 def load(request):
+    """
+    Vista de configuración de página de inicio
+    :param request:
+    :return:
+    """
     auth_manager = request.auth_manager
     account = auth_manager.get_account()
     preference = account.get_preferences()
-    stats = request.stats #TODO this must be loaded at context_procesor but it's not working 
+    stats = request.stats
     jsonContent = preference["account_home"]
     home_tab = True
-    return render_to_response('personalizeHome/index.html/', locals())
+    return render_to_response('personalizeHome/index.html', locals())
 
 
 @login_required
@@ -32,6 +39,11 @@ def load(request):
 @csrf_exempt
 @require_POST
 def save(request):
+    """
+    Vista de configuración de página de inicio. Método POST
+    :param request:
+    :return:
+    """
     if request.method == 'POST':
         account = request.auth_manager.get_account()
         jsonContent = request.POST.get('jsonString')
@@ -68,11 +80,9 @@ def suggest(request):
         resources = request.GET.getlist('resources[]', 'all')
         fm = FinderManager(ThemeFinder)
         results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
-
         # optionally shows extra info
         # results.append({"extras": {"query": fm.get_finder().last_query, "time": time, "facets": facets}})
-
-        data = json.dumps(results)
+        data = render_to_response('personalizeHome/suggest.json', {'objects': results})
     else:
         data = ''
     #else:

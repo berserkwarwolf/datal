@@ -10,8 +10,11 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
     },
 
     initialize: function(options) {
-        
-        this.options = options;
+
+        this.parentView = options.parentView;
+        this.itemCollection = options.itemCollection;
+        this.models = options.models;
+        this.type = options.type;
 
         // init Overlay
         this.$el.overlay({
@@ -25,11 +28,11 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
             }
         });
 
-        var total = this.options.models.length,
+        var total = this.models.length,
             self = this;
 
         // For each selected model, fetch related resources
-        _.each(this.options.models, function(model, index) {
+        _.each(this.models, function(model, index) {
 
             console.log(model);
 
@@ -37,7 +40,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                 data: $.param({
                     revision_id: model.get('id'),
                     datastream_id: model.get('datastream_id'),
-                    type: self.options.type
+                    type: self.type
                 }),
                 success: function(model, response) {
 
@@ -85,7 +88,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
 
     deleteRelatedResources: function() {
         var self = this;
-        _.each(this.options.models, function(model) {
+        _.each(this.models, function(model) {
             resource = model.get('title')
             model.remove({
 
@@ -99,7 +102,7 @@ var AffectedResourcesCollectionView = Backbone.View.extend({
                     });
                     self.closeOverlay();
                     self.undelegateEvents();
-                    self.options.itemCollection.fetch({
+                    self.itemCollection.fetch({
                         reset: true
                     });
                 },

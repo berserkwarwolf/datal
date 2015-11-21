@@ -11,14 +11,13 @@ var DeleteItemView = Backbone.View.extend({
 	},
 
 	initialize: function(options) {
-
-		this.parentView = this.options.parentView;
+		this.parentView = options.parentView;
 
 		// Check if is a Bulk Actions Overlay
-		if( _.isUndefined( this.options.bulkActions ) ){
+		if( _.isUndefined( options.bulkActions ) ){
 			this.bulkActions = false;
 		}else{
-			this.bulkActions = this.options.bulkActions;
+			this.bulkActions = options.bulkActions;
 		}
 
 		// Then, if is a Bulk Actions Overlay, change the el and $el

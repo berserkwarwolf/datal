@@ -1,4 +1,4 @@
-var viewVisualizationView = Backbone.View.extend({
+var MainView = Backbone.View.extend({
 
 	el : ".main-section",
 
@@ -9,79 +9,31 @@ var viewVisualizationView = Backbone.View.extend({
 	},
 
 	chartContainer: "#id_visualizationResult",
+
 	initialize : function() {
 
 		this.template = _.template( $("#context-menu-template").html() );
-		this.chartsFactory = new charts.ChartsFactory();
 
 		$("#ajax_loading_overlay").show();
 
 		this.listenTo(this.model, "change", this.render);
 
-		this.setupChart();
-		this.render();
-	},
-	setupChart: function () {
-
-		this.model.set('chart', {
-			lib: this.model.get('chartLib'),
-			type: JSON.parse(this.model.get('chartJson')).format.type
+		this.chartView = new ChartView({
+			el: '#id_visualizationResult',
+			model: this.model
 		});
-
-		var chartSettings = this.chartsFactory.create(this.model.get('chart').type, this.model.get('chart').lib);
-
-		this.ChartViewClass = chartSettings.Class;
-		this.ChartModelClass = charts.models.Chart;
-		this.initializeChart();
+		this.setChartContainerSize();
+		this.render();
+        this.listenTo(this.model.data, 'fetch:start', this.onFetchStart, this);
+        this.listenTo(this.model.data, 'fetch:end', this.onFetchEnd, this);
+        this.chartView.render();
 	},
+
 	render: function () {
 		this.$el.find('.context-menu').html( this.template( this.model.toJSON() ) );
 		return this;
 	},
-	initializeChart: function () {
-		if(typeof this.chartInstance === 'undefined'){
-			this.createChartInstance();
-		}
-	},
-	createChartInstance: function () {
-		var initialOptions = {
-			type: this.model.get('chart').type,
-			id: this.model.get('id')
-		};
 
-		if(initialOptions.type=="mapchart"){
-			var origOptions = JSON.parse(this.model.get('chartJson'));
-			_.extend(initialOptions,{
-				mapType: origOptions.chart.mapType.toUpperCase(),
-				options:{
-					bounds: origOptions.chart.bounds.split(';'),
-					zoom: origOptions.chart.zoom,
-				}
-			});
-
-			if(origOptions.chart.center){
-				initialOptions.options.center = origOptions.chart.center;
-			} else {
-				initialOptions.options.center = null;
-			}
-		}
-
-		var chartModelInstance = new this.ChartModelClass(initialOptions);
-
-		this.chartInstance = new this.ChartViewClass({
-			el: this.chartContainer,
-			model: chartModelInstance,
-			mapOptions: {}
-		});
-        this.listenTo(this.chartInstance.model.data, 'fetch:start', this.onFetchStart, this);
-        this.listenTo(this.chartInstance.model.data, 'fetch:end', this.onFetchEnd, this);
-
-		this.setChartContainerSize();
-
-		this.chartInstance.model.fetchData().then(function(){
-			$("#ajax_loading_overlay").hide();
-		});
-	},
 	setLoading: function () {
 		
 		var height = this.$el.find('#id_visualizationResult').height();
@@ -91,7 +43,7 @@ var viewVisualizationView = Backbone.View.extend({
 	},
 
 	setChartContainerSize:function(){
-		var chartInstance = this.chartInstance,
+		var chartInstance = this.chartView.chartInstance,
 			container = $(this.chartContainer),
 			$window = $(window),
 			$mainHeader = $('header.header'),
@@ -201,7 +153,7 @@ var viewVisualizationView = Backbone.View.extend({
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
-		this.deleteListResources.push(this.options.model);
+		this.deleteListResources.push(this.model);
 		var deleteItemView = new DeleteItemView({
 			models: this.deleteListResources
 		});
@@ -209,7 +161,7 @@ var viewVisualizationView = Backbone.View.extend({
 
 	onUnpublishButtonClicked: function(){
 		this.unpublishListResources = new Array();
-		this.unpublishListResources.push(this.options.model);
+		this.unpublishListResources.push(this.model);
 		var unpublishView = new UnpublishView({
 			models: this.unpublishListResources,
 			parentView: this
@@ -217,12 +169,10 @@ var viewVisualizationView = Backbone.View.extend({
 	},
 
     onFetchStart: function () {
-        console.info('MapChart: fetch data started');
         this.$('.visualizationContainer .loading').removeClass('hidden');
     },
 
     onFetchEnd: function () {
-        console.info('MapChart: fetch data ended');
         this.$('.visualizationContainer .loading').addClass('hidden');
         $("#ajax_loading_overlay").hide();
     }

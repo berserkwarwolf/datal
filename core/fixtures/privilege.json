@@ -30,26 +30,6 @@
     }
 },
 {
-    "pk": 538,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_load_featured_dashboard",
-        "name": "workspace.can_load_featured_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 539,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_save_featured_dashboard",
-        "name": "workspace.can_save_featured_dashboard",
-        "description": ""
-    }
-},
-{
     "pk": 540,
     "model": "core.privilege",
     "fields": {
@@ -66,16 +46,6 @@
         "created_at": "2012-06-04T09:55:12",
         "code": "workspace.can_publish_datastream",
         "name": "workspace.can_publish_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 542,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_publish_dashboard",
-        "name": "workspace.can_publish_dashboard",
         "description": ""
     }
 },
@@ -110,16 +80,6 @@
     }
 },
 {
-    "pk": 546,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_unpublish_dashboard_revision",
-        "name": "workspace.can_unpublish_dashboard_revision",
-        "description": ""
-    }
-},
-{
     "pk": 547,
     "model": "core.privilege",
     "fields": {
@@ -150,16 +110,6 @@
     }
 },
 {
-    "pk": 550,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_approve_dashboard_revision",
-        "name": "workspace.can_approve_dashboard_revision",
-        "description": ""
-    }
-},
-{
     "pk": 551,
     "model": "core.privilege",
     "fields": {
@@ -186,16 +136,6 @@
         "created_at": "2012-06-04T09:55:12",
         "code": "workspace.can_reject_datastream_revision",
         "name": "workspace.can_reject_datastream_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 554,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_reject_dashboard_revision",
-        "name": "workspace.can_reject_dashboard_revision",
         "description": ""
     }
 },
@@ -236,35 +176,6 @@
         "created_at": "2012-06-04T09:55:12",
         "code": "workspace.can_query_datastream",
         "name": "workspace.can_query_datastream",
-        "description": ""
-    }
-},{
-    "pk": 557,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_query_publisher_datastream",
-        "name": "workspace.can_query_publisher_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 558,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_query_publisher_dashboard",
-        "name": "workspace.can_query_publisher_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 559,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:12",
-        "code": "workspace.can_query_publisher_visualization",
-        "name": "workspace.can_query_publisher_visualization",
         "description": ""
     }
 },
@@ -409,62 +320,12 @@
     }
 },
 {
-    "pk": 576,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:13",
-        "code": "workspace.can_delete_dashboard",
-        "name": "workspace.can_delete_dashboard",
-        "description": ""
-    }
-},
-{
     "pk": 577,
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T09:55:13",
         "code": "workspace.can_delete_visualization",
         "name": "workspace.can_delete_visualization",
-        "description": ""
-    }
-},
-{
-    "pk": 578,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:13",
-        "code": "workspace.can_create_dashboard_as_approved",
-        "name": "workspace.can_create_dashboard_as_approved",
-        "description": ""
-    }
-},
-{
-    "pk": 579,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:13",
-        "code": "workspace.can_create_dashboard_as_published",
-        "name": "workspace.can_create_dashboard_as_published",
-        "description": ""
-    }
-},
-{
-    "pk": 580,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:13",
-        "code": "workspace.can_edit_dashboard_as_approved",
-        "name": "workspace.can_edit_dashboard_as_approved",
-        "description": ""
-    }
-},
-{
-    "pk": 581,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T09:55:13",
-        "code": "workspace.can_edit_dashboard_as_published",
-        "name": "workspace.can_edit_dashboard_as_published",
         "description": ""
     }
 },
@@ -489,52 +350,12 @@
     }
 },
 {
-    "pk": 640,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_datastream",
-        "name": "workspace.can_query_enhancer_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 641,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_visualization",
-        "name": "workspace.can_query_enhancer_visualization",
-        "description": ""
-    }
-},
-{
-    "pk": 642,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_query_enhancer_dashboard",
-        "name": "workspace.can_query_enhancer_dashboard",
-        "description": ""
-    }
-},
-{
     "pk": 646,
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-06-04T14:08:57",
         "code": "workspace.can_submit_datastream_revision",
         "name": "workspace.can_submit_datastream_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 647,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:57",
-        "code": "workspace.can_submit_dashboard_revision",
-        "name": "workspace.can_submit_dashboard_revision",
         "description": ""
     }
 },
@@ -729,102 +550,12 @@
     }
 },
 {
-    "pk": 668,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_view_dashboard",
-        "name": "workspace.can_view_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 669,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_create_dashboard_as_draft",
-        "name": "workspace.can_create_dashboard_as_draft",
-        "description": ""
-    }
-},
-{
-    "pk": 670,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_create_dashboard_as_pending_review",
-        "name": "workspace.can_create_dashboard_as_pending_review",
-        "description": ""
-    }
-},
-{
-    "pk": 671,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_edit_dashboard_revision",
-        "name": "workspace.can_edit_dashboard_revision",
-        "description": ""
-    }
-},
-{
-    "pk": 672,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_edit_dashboard_as_draft",
-        "name": "workspace.can_edit_dashboard_as_draft",
-        "description": ""
-    }
-},
-{
-    "pk": 673,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_edit_dashboard_as_pending_review",
-        "name": "workspace.can_edit_dashboard_as_pending_review",
-        "description": ""
-    }
-},
-{
-    "pk": 674,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-06-04T14:08:58",
-        "code": "workspace.can_create_dashboard",
-        "name": "workspace.can_create_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 675,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-07-06T12:00:24",
-        "code": "workspace.can_create_private_dashboard",
-        "name": "workspace.can_create_private_dashboard",
-        "description": ""
-    }
-},
-{
     "pk": 676,
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-07-06T12:00:24",
         "code": "workspace.can_create_private_datastream",
         "name": "workspace.can_create_private_datastream",
-        "description": ""
-    }
-},
-{
-    "pk": 677,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-07-06T12:00:24",
-        "code": "workspace.can_create_dashboard_notes",
-        "name": "workspace.can_create_dashboard_notes",
         "description": ""
     }
 },
@@ -839,42 +570,12 @@
     }
 },
 {
-    "pk": 679,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-07-06T12:00:24",
-        "code": "workspace.can_edit_dashboard_notes",
-        "name": "workspace.can_edit_dashboard_notes",
-        "description": ""
-    }
-},
-{
     "pk": 680,
     "model": "core.privilege",
     "fields": {
         "created_at": "2012-07-06T12:00:24",
         "code": "workspace.can_edit_datastream_notes",
         "name": "workspace.can_edit_datastream_notes",
-        "description": ""
-    }
-},
-{
-    "pk": 681,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-07-06T12:00:24",
-        "code": "workspace.can_add_widgets_dashboard",
-        "name": "workspace.can_add_widgets_dashboard",
-        "description": ""
-    }
-},
-{
-    "pk": 682,
-    "model": "core.privilege",
-    "fields": {
-        "created_at": "2012-07-06T12:00:24",
-        "code": "workspace.can_move_widgets_dashboard",
-        "name": "workspace.can_move_widgets_dashboard",
         "description": ""
     }
 },

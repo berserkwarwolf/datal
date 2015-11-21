@@ -123,6 +123,7 @@ $(document).ready(function(){
 
     $form.validate({
         rules: {
+                account_page_titles: { maxlength: 65 },
                 account_header_uri: { url: true },
                 account_footer_uri: { url: true },
                 account_header_height: { number: true },

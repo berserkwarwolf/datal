@@ -5,7 +5,7 @@ var StepViewSPA = function(options) {
 }
 
 _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
-		
+
 	// Extend functions
 
 	baseEvents: {},
@@ -22,11 +22,14 @@ _.extend(StepViewSPA.prototype, Backbone.Epoxy.View.prototype, {
 
 	addEvents: function(eventObj) {
 		this.inheritedEvents.push(eventObj);
+		this.delegateEvents();
 	},
 
 	// Step functions
 
-	init: function(){
+	initialize: function (options) {
+		this.name = options.name;
+
 		this.$el.addClass('process_manager_step');
 		this.$el.hide();
 		this.render();

@@ -3,6 +3,7 @@ from django.conf import settings
 from elasticsearch import Elasticsearch, NotFoundError, RequestError
 import logging
 
+
 class ElasticsearchIndex():
     """ Gestor para indice elasticsearch"""
     
@@ -34,7 +35,6 @@ class ElasticsearchIndex():
         # Ya existe un index
         except KeyError:
             pass
-            
 
         self.logger = logging.getLogger(__name__)
 
@@ -153,7 +153,6 @@ class ElasticsearchIndex():
                 }
               }
         }
-
  
     def __get_visualization_mapping(self):
         return {"chart" : {
@@ -189,17 +188,26 @@ class ElasticsearchIndex():
                 }
               }
         }
- 
-        
+
     def indexit(self, document):
-        """add document to index"""
+        """add document to index
+        :param document:
+        """
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
             try:
-                return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.create(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
             except:
-                return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.index(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
@@ -239,19 +247,20 @@ class ElasticsearchIndex():
         return self.es.indices.delete(index=settings.SEARCH_INDEX['index'], ignore=[400, 404])
 
     def delete_documents(self, documents):
-        """Delete from a list. Return [list(deleted), list(notdeleted)] """
-
-
+        """Delete from a list. Return [list(deleted), list(notdeleted)]
+        :param documents:
+        """
         result = map(self.delete_document, documents)
 
         documents_deleted=filter(self.__filterDeleted,result)
         documents_not_deleted=filter(self.__filterNotDeleted,result)
 
-
         return [documents_deleted, documents_not_deleted]
 
     def update(self, document):
-        """ update by id"""
+        """ Update by id
+        :param document:
+        """
         # Me lo pediste vos nacho, despues no me putees
         return True
         # try:

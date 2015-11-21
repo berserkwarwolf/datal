@@ -163,7 +163,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if killemall:
             self._unpublish_all(to_status=to_status)
         else:
-            revcount = DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).count()
+            revcount = DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).count()
 
             if revcount == 1:
                 self._unpublish_all()
@@ -324,7 +324,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 **fields
             )
 
-            self._move_childs_to_draft()
+            self._move_childs_to_status()
 
             if form_status == StatusChoices.DRAFT:
                 self.unpublish()
@@ -354,19 +354,19 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.datastream_revision
 
-    def _move_childs_to_draft(self):
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
 
         with transaction.atomic():
-            datastreams = DataStreamRevision.objects.select_for_update().filter(
-                dataset=self.datastream.id,
-                id=F('datastream__last_revision__id'),
+            visualizations = VisualizationRevision.objects.select_for_update().filter(
+                visualization__datastream__id=self.datastream.id,
+                id=F('visualization__last_revision__id'),
                 status=StatusChoices.PUBLISHED)
 
-            for datastream in datastreams:
-               DatastreamLifeCycleManager(self.user, datastream_id=datastream.id).save_as_draft()
+            for visualization in visualizations:
+               VisualizationLifeCycleManager(self.user, visualization_revision_id=visualization.id).save_as_status(status)
 
-    def save_as_draft(self):
-        self.datastream_revision.clone()
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.datastream_revision.clone(status)
         self._update_last_revisions()
 
     def _log_activity(self, action_id):
@@ -389,8 +389,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.datastream.last_published_revision = DataStreamRevision.objects.get(
+                self.datastream.last_published_revision = DataStreamRevision.objects.get(
                         pk=last_published_revision_id)
+                search_dao = DatastreamSearchDAOFactory().create(self.datastream.last_published_revision)
+                search_dao.add()
             else:
                 self.datastream.last_published_revision = None
 
@@ -399,3 +401,5 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.datastream.id:
                 self.datastream.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.datastream.last_revision_id=last_revision_id

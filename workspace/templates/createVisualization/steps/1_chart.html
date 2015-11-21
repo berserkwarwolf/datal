@@ -80,31 +80,37 @@
 										<fieldset>
 											<div class="checkbox">
 												<label>
-													{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %} <input class="checkboxControl" value="checked" name="invertedAxis" type="checkbox">
+                                                    <input class="checkboxControl" value="checked" name="invertedAxis" type="checkbox">
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-CHANGE-ROWS-COLS-TITLE" %}
 												</label>
 											</div>
 											<div class="checkbox">
 												<label>
-													{% trans "APP-INVERT-TEXT" %} <input class="invertData" value="checked" name="invertData" type="checkbox">
+                                                    <input class="invertData" value="checked" name="invertData" type="checkbox">
+													{% trans "APP-INVERT-TEXT" %}
 												</label>
 											</div>
 										</fieldset>
 
 										<fieldset>
-											
+
 											<div class="subtitle">{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-TEXT" %}</div>
-											
+
 											<div class="radio">
 												<label>
-													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %} <input name="nullValueAction" value="exclude" type="radio">
+                                                    <input name="nullValueAction" value="exclude" type="radio">
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-EXCLUDED-TEXT" %}
 												</label>
 												<label>
-													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT" %} <input name="nullValueAction" value="previous" type="radio">
+                                                    <input name="nullValueAction" value="previous" type="radio">
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-PREVIOWS-TEXT" %}
 												</label>
 												<label>
-													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT" %} <input name="nullValueAction" value="given" type="radio">
+                                                    <input name="nullValueAction" value="given" type="radio">
+													{% trans "APP-CUSTOMIZE-VISUALIZATION-EMPTY-CELLS-SET-GIVEN-TEXT" %}
 												</label>
-												<input id="nullValuePreset" data-ref="nullValuePreset" type="text" class="hide">
+												<input id="nullValuePreset" data-ref="nullValuePreset" type="text"/>
+                                                <p class="validation-invalid-value hidden">{% trans "APP-INVALID-VALUE" %}</p>
 											</div>
 
 										</fieldset>
@@ -141,7 +147,7 @@
 					</div>
 
 				</div>
-			
+
 			</div>
 		</div>
 	</div>
