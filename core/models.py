@@ -1130,6 +1130,7 @@ def unindex_dataset_revision(sender, instance, **kwargs):
         search_dao = DatasetSearchDAOFactory().create(instance)
         search_dao.remove()
 
+
 @receiver(pre_delete, sender=DataStreamRevision, dispatch_uid="unindex_datastream_revision")
 def unindex_datastream_revision(sender, instance, **kwargs):
     # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
@@ -1137,6 +1138,7 @@ def unindex_datastream_revision(sender, instance, **kwargs):
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
         search_dao.remove()
+
 
 @receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
 def unindex_visualization_revision(sender, instance, **kwargs):
