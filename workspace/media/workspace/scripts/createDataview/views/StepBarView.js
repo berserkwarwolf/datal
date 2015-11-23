@@ -1,7 +1,8 @@
 var StepBarView = Backbone.View.extend({
     events: {
-        'click .btn-continue': 'onClickContinue',
-        'click .btn-cancel': 'onClickCancel'
+        'click .btn-next': 'onClickNext',
+        'click .btn-prev': 'onClickPrev',
+        'click .btn-save': 'onClickSave'
     },
 
     initialize: function () {
@@ -17,11 +18,20 @@ var StepBarView = Backbone.View.extend({
         return this;
     },
 
-    onClickContinue: function () {
-        this.model.set('step', this.model.get('step') + 1);
+    onClickNext: function () {
+        this.trigger('next');
     },
 
-    onClickCancel: function () {
-        this.model.set('step', this.model.get('step') - 1);
+    onClickPrev: function () {
+        this.trigger('prev');
+    },
+
+    onClickSave: function () {
+        this.trigger('save');
+    },
+
+    enable: function (enabled) {
+        this.$('.btn-next').toggleClass('disabled', !enabled);
     }
+
 })

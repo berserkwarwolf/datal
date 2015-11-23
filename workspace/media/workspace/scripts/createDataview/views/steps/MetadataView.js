@@ -1,6 +1,6 @@
 var MetadataView = Backbone.Epoxy.View.extend({
     events:  {
-        'click button.btn-save': 'validate'
+        'click button.btn-save': 'isValid'
     },
 
     bindings: {
@@ -71,8 +71,8 @@ var MetadataView = Backbone.Epoxy.View.extend({
 
     },
 
-    validate: function () {
+    isValid: function () {
         var valid = this.model.isValid(true);
-        console.info('MetadataView: validate', valid);
+        return valid;
     }
 })

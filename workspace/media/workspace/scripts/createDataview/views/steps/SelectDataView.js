@@ -3,8 +3,6 @@ var SelectDataView = Backbone.View.extend({
 
     initialize: function (options) {
         this.template = _.template( $('#select_data_template').html() );
-        this.collection = new DataTableSelectedCollection();
-
         this.datasetModel = options.datasetModel;
     },
 
@@ -70,6 +68,9 @@ var SelectDataView = Backbone.View.extend({
             return model.get('excelRange') === item.get('excelRange');
         });
         return existing;
-    }
+    },
 
+    isValid: function () {
+        return true;
+    }
 });

@@ -41,5 +41,9 @@ var ChooseTableView = Backbone.View.extend({
 
         // TODO: render this view, highlighting the selected table in the UL
         // and showing the table on the right panel.
+    },
+
+    isValid: function () {
+        return true;
     }
 });

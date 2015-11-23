@@ -23,6 +23,7 @@ var DataviewModel = Backbone.Model.extend({
 
     initialize: function () {
         this.data = new Backbone.Model();
+        this.selection = new DataTableSelectedCollection();
     },
 
     url: '/rest/datastreams/sample.json',
@@ -93,13 +94,18 @@ var DataviewModel = Backbone.Model.extend({
     },
 
     save: function () {
-        console.log(this.toJSON());
+        console.info('selectStatement:', this.getSelectStatement());
+        console.info('dataview model:', this.toJSON());
         return $.ajax({
                 type: "POST",
                 url: 'http://httpbin.org/post',
                 data: this.toJSON(),
                 dataType: 'json'
             });
+    },
+
+    getSelectStatement: function () {
+        return this.selection.toJSON();
     }
 
 })

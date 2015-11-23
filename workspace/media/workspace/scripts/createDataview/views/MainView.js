@@ -1,12 +1,14 @@
 var MainView = Backbone.View.extend({
+
     initialize: function (options) {
-        var self = this;
-        this.model = new Backbone.Model({
+
+        this.stateModel = new StateModel({
             step: 0
         });
+
         this.stepBarView = new StepBarView({
             el: '.context-menu-view',
-            model: this.model
+            model: this.stateModel
         });
 
         this.datasetModel = new DatasetModel({
@@ -18,14 +20,17 @@ var MainView = Backbone.View.extend({
 
         this.listenToOnce(this.datasetModel, 'change:tables', function () {
             this.render();
-            this.listenTo(this.model, 'change:step', this.render, this);
+            this.listenTo(this.stateModel, 'change:step', this.render, this);
         }, this);
+        this.listenTo(this.stepBarView, 'save', this.onClickSave, this);
+        this.listenTo(this.stepBarView, 'next', this.onClickNext, this);
+        this.listenTo(this.stepBarView, 'prev', this.onClickPrev, this);
 
     },
 
     render: function () {
         var self = this,
-            step = this.model.get('step');
+            step = this.stateModel.get('step');
 
         if (this.currentView) {
             this.currentView.$el.empty();
@@ -39,27 +44,41 @@ var MainView = Backbone.View.extend({
         } else if (step === 1) {
             this.currentView = new SelectDataView({
                 el: this.$('.select-data-view'),
-                datasetModel: this.datasetModel
+                datasetModel: this.datasetModel,
+                collection: this.dataviewModel.selection
             });
         } else if (step === 2) {
             this.currentView = new MetadataView({
                 el: this.$('.metadata-view'),
                 model: this.dataviewModel
             });
+            this.listenTo(this.currentView, 'valid', this.enable, this);
         } else if (step === 3) {
             this.currentView = new PreviewView({
                 el: this.$('.preview-view'),
                 model: this.dataviewModel
             });
-        } else if (step === 4) {
-            this.dataviewModel.save().then(function (response) {
-                console.log(response);
-            }).fail(function (response) {
-                this.model.set('step', 2);
-            });
         };
 
         this.stepBarView.render();
         this.currentView.render();
+    },
+
+    onClickNext: function () {
+        if (this.currentView.isValid()) {
+            this.stateModel.next();
+        }
+    },
+
+    onClickPrev: function () {
+        this.stateModel.prev();
+    },
+
+    onClickSave: function () {
+        this.dataviewModel.save().then(function (response) {
+            console.log(response);
+        }).fail(function (response) {
+            this.stateModel.set('step', 2);
+        });        
     }
 });
