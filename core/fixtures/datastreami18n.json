@@ -1,530 +1,98 @@
 [
-    {
-        "pk": 401, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Tipo de cambio promedio mensual moneda nacional + moneda extranjera expresada en Millones de Pesos", 
-            "language": "es", 
-            "title": "Estado de Operaciones de Gobierno  1990 A 2010", 
-            "notes": "", 
-            "datastream_revision": 404, 
-            "created_at": "2011-10-28T12:25:21"
-        }
-    }, 
-    {
-        "pk": 669, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Listado total de oficinas geolocalizadas de ChileAtiende a lo largo de Chile", 
-            "language": "es", 
-            "title": "Sucursales ChileAtiende En todo Chile", 
-            "notes": "", 
-            "datastream_revision": 672, 
-            "created_at": "2012-05-14T15:27:45"
-        }
-    }, 
-    {
-        "pk": 61552, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Tabla que permite observar el n\u00famero de defunciones y muertes seg\u00fan \u00e1rea urbano-rural por regi\u00f3n", 
-            "language": "es", 
-            "title": "Defunciones y Mortalidad 2009 Seg\u00fan \u00c1rea Urbano-Rural ", 
-            "notes": "", 
-            "datastream_revision": 61450, 
-            "created_at": "2012-05-15T13:49:03"
-        }
-    }, 
-    {
-        "pk": 61553, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales y la tasa, seg\u00fan sexo", 
-            "language": "es", 
-            "title": "Mortalidad  por Accidentes de Trabajo Seg\u00fan sexo 2002-2009 ", 
-            "notes": "", 
-            "datastream_revision": 61451, 
-            "created_at": "2012-05-16T10:40:31"
-        }
-    }, 
-    {
-        "pk": 61554, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Valores en pesos chilenos", 
-            "language": "es", 
-            "title": "IEP Primer Trimestre 2012 Ministerio de Defensa Nacional", 
-            "notes": "", 
-            "datastream_revision": 61452, 
-            "created_at": "2012-05-16T12:14:57"
-        }
-    }, 
-    {
-        "pk": 61555, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Inversiones BCN durante el a\u00f1o 2011 seg\u00fan art. 24 de Ley de Presupuestos N\u00b0 18.482", 
-            "language": "es", 
-            "title": "N\u00f3minas de Iniciativas de Inversi\u00f3n (M$) Biblioteca del Congreso Nacional", 
-            "notes": "", 
-            "datastream_revision": 61453, 
-            "created_at": "2012-05-17T17:12:11"
-        }
-    }, 
-    {
-        "pk": 61556, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales y la tasa, seg\u00fan sexo", 
-            "language": "es", 
-            "title": "Mortalidad  por Accidentes de Trabajo Seg\u00fan sexo 2002-2009 ", 
-            "notes": "", 
-            "datastream_revision": 61454, 
-            "created_at": "2012-05-18T11:46:13"
-        }
-    }, 
-    {
-        "pk": 61557, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales seg\u00fan las grandes ramas de actividades econ\u00f3micas", 
-            "language": "es", 
-            "title": "Mortalidad por Accidentes del Trabajo Rama de actividad econ\u00f3mica 2005-2009", 
-            "notes": "", 
-            "datastream_revision": 61455, 
-            "created_at": "2012-05-18T12:04:00"
-        }
-    }, 
-    {
-        "pk": 61558, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Muestra la evoluci\u00f3n de la TGF entre los a\u00f1os 1992-2009", 
-            "language": "es", 
-            "title": "Serie de tasa global de fecundidad 1992-2009 ", 
-            "notes": "", 
-            "datastream_revision": 61456, 
-            "created_at": "2012-05-18T13:09:15"
-        }
-    }, 
-    {
-        "pk": 61559, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2006 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61457, 
-            "created_at": "2012-05-18T13:36:37"
-        }
-    }, 
-    {
-        "pk": 61560, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2007 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61458, 
-            "created_at": "2012-05-18T13:44:22"
-        }
-    }, 
-    {
-        "pk": 61561, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2008 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61459, 
-            "created_at": "2012-05-18T13:51:15"
-        }
-    }, 
-    {
-        "pk": 61562, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2009 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61460, 
-            "created_at": "2012-05-18T16:50:44"
-        }
-    }, 
-    {
-        "pk": 61563, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2010 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61461, 
-            "created_at": "2012-05-18T16:52:25"
-        }
-    }, 
-    {
-        "pk": 61564, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2006 Region Metropolitana", 
-            "notes": "", 
-            "datastream_revision": 61462, 
-            "created_at": "2012-05-18T17:10:21"
-        }
-    }, 
-    {
-        "pk": 61565, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2007 Region Metropolitana", 
-            "notes": "", 
-            "datastream_revision": 61463, 
-            "created_at": "2012-05-18T17:13:06"
-        }
-    }, 
-    {
-        "pk": 61566, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2008 Region Metropolitana", 
-            "notes": "", 
-            "datastream_revision": 61464, 
-            "created_at": "2012-05-18T17:27:30"
-        }
-    }, 
-    {
-        "pk": 61567, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2009 Region Metropolitana", 
-            "notes": "", 
-            "datastream_revision": 61465, 
-            "created_at": "2012-05-18T17:29:55"
-        }
-    }, 
-    {
-        "pk": 61568, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza.", 
-            "language": "es", 
-            "title": "Nivel de Rendimiento 2010 Region Metropolitana", 
-            "notes": "", 
-            "datastream_revision": 61466, 
-            "created_at": "2012-05-21T10:44:13"
-        }
-    }, 
-    {
-        "pk": 61569, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Promedio anual de calificaciones para Ense\u00f1anza B\u00e1sica y Ense\u00f1anza Media", 
-            "language": "es", 
-            "title": "Nivel de Calificaciones 2006 Total Pais", 
-            "notes": "", 
-            "datastream_revision": 61467, 
-            "created_at": "2012-05-21T10:52:00"
-        }
-    }, 
-    {
-        "pk": 68587, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Muestra la cantidad de accidentes fatales seg\u00fan las grandes ramas de actividades econ\u00f3micas 2005-2009", 
-            "language": "es", 
-            "title": "Mortalidad por Accidentes Rama de actividad econ\u00f3mica ", 
-            "notes": "", 
-            "datastream_revision": 68509, 
-            "created_at": "2013-08-08T14:55:00"
-        }
-    }, 
-    {
-        "pk": 68702, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2006 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34451", 
-            "notes": "", 
-            "datastream_revision": 68624, 
-            "created_at": "2013-08-09T16:27:41"
-        }
-    }, 
-    {
-        "pk": 68704, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2007 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34457", 
-            "notes": "", 
-            "datastream_revision": 68626, 
-            "created_at": "2013-08-09T16:27:53"
-        }
-    }, 
-    {
-        "pk": 68706, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2008 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34463", 
-            "notes": "", 
-            "datastream_revision": 68628, 
-            "created_at": "2013-08-09T16:28:06"
-        }
-    }, 
-    {
-        "pk": 68709, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2009 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34469", 
-            "notes": "", 
-            "datastream_revision": 68631, 
-            "created_at": "2013-08-09T16:28:19"
-        }
-    }, 
-    {
-        "pk": 68712, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2010 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34475", 
-            "notes": "", 
-            "datastream_revision": 68634, 
-            "created_at": "2013-08-09T16:28:31"
-        }
-    }, 
-    {
-        "pk": 68723, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2006 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34451", 
-            "notes": "", 
-            "datastream_revision": 68645, 
-            "created_at": "2013-08-09T16:33:35"
-        }
-    }, 
-    {
-        "pk": 68726, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2007 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34457", 
-            "notes": "", 
-            "datastream_revision": 68648, 
-            "created_at": "2013-08-09T16:33:46"
-        }
-    }, 
-    {
-        "pk": 68727, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2006 - CSV", 
-            "language": "es", 
-            "title": "Nivel Calificaciones: 2006 al 2010 - 8448", 
-            "notes": "", 
-            "datastream_revision": 68649, 
-            "created_at": "2013-08-09T16:33:52"
-        }
-    }, 
-    {
-        "pk": 68730, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2008 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34463", 
-            "notes": "", 
-            "datastream_revision": 68652, 
-            "created_at": "2013-08-09T16:33:57"
-        }
-    }, 
-    {
-        "pk": 68738, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2009 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34469", 
-            "notes": "", 
-            "datastream_revision": 68660, 
-            "created_at": "2013-08-09T16:34:08"
-        }
-    }, 
-    {
-        "pk": 68747, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2010 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento: 2006 al 2012 - 34475", 
-            "notes": "", 
-            "datastream_revision": 68669, 
-            "created_at": "2013-08-09T16:34:20"
-        }
-    }, 
-    {
-        "pk": 69585, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2006 - CSV", 
-            "language": "es", 
-            "title": "Nivel Calificaciones 2006", 
-            "notes": "", 
-            "datastream_revision": 69507, 
-            "created_at": "2013-08-27T16:48:13"
-        }
-    }, 
-    {
-        "pk": 69598, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2006 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2006", 
-            "notes": "", 
-            "datastream_revision": 69520, 
-            "created_at": "2013-08-27T16:53:50"
-        }
-    }, 
-    {
-        "pk": 69599, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2007 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2007", 
-            "notes": "", 
-            "datastream_revision": 69521, 
-            "created_at": "2013-08-27T16:54:04"
-        }
-    }, 
-    {
-        "pk": 69600, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2008 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2008", 
-            "notes": "", 
-            "datastream_revision": 69522, 
-            "created_at": "2013-08-27T16:54:18"
-        }
-    }, 
-    {
-        "pk": 69601, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2009 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2009", 
-            "notes": "", 
-            "datastream_revision": 69523, 
-            "created_at": "2013-08-27T16:54:34"
-        }
-    }, 
-    {
-        "pk": 69602, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "A\u00f1o 2010 - CSV", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2010", 
-            "notes": "", 
-            "datastream_revision": 69524, 
-            "created_at": "2013-08-27T16:55:20"
-        }
-    }, 
-    {
-        "pk": 70767, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza del establecimiento.", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2010", 
-            "notes": "", 
-            "datastream_revision": 70689, 
-            "created_at": "2013-10-22T10:47:13"
-        }
-    }, 
-    {
-        "pk": 70768, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza del establecimiento.", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2007", 
-            "notes": "", 
-            "datastream_revision": 70690, 
-            "created_at": "2013-10-22T10:47:45"
-        }
-    }, 
-    {
-        "pk": 70769, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza del establecimiento.", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2008", 
-            "notes": "", 
-            "datastream_revision": 70691, 
-            "created_at": "2013-10-22T10:48:01"
-        }
-    }, 
-    {
-        "pk": 70770, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza del establecimiento.", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2009", 
-            "notes": "", 
-            "datastream_revision": 70692, 
-            "created_at": "2013-10-22T10:48:13"
-        }
-    }, 
-    {
-        "pk": 70771, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para total de alumnos aprobados, reprobados y retirados para todos los niveles de ense\u00f1anza del establecimiento.", 
-            "language": "es", 
-            "title": "Nivel Rendimiento 2006", 
-            "notes": "", 
-            "datastream_revision": 70693, 
-            "created_at": "2013-10-22T10:48:27"
-        }
-    }, 
-    {
-        "pk": 70778, 
-        "model": "core.datastreami18n", 
-        "fields": {
-            "description": "Contiene indicadores para promedio anual de calificaciones (para Ense\u00f1anza B\u00e1sica de Ni\u00f1os y Ense\u00f1anza Media de J\u00f3venes).", 
-            "language": "es", 
-            "title": "Nivel Calificaciones 2006", 
-            "notes": "", 
-            "datastream_revision": 70700, 
-            "created_at": "2013-10-22T10:56:34"
-        }
+{
+    "pk": 401, 
+    "model": "core.datastreami18n", 
+    "fields": {
+        "description": "Tipo de cambio promedio mensual moneda nacional + moneda extranjera expresada en Millones de Pesos", 
+        "language": "es", 
+        "title": "Estado de Operaciones de Gobierno  1990 A 2010", 
+        "created_at": "2011-10-28T12:25:21", 
+        "datastream_revision": 404, 
+        "notes": ""
     }
+},
+{
+    "pk": 669, 
+    "model": "core.datastreami18n", 
+    "fields": {
+        "description": "Listado total de oficinas geolocalizadas de ChileAtiende a lo largo de Chile", 
+        "language": "es", 
+        "title": "Sucursales ChileAtiende En todo Chile", 
+        "created_at": "2012-05-14T15:27:45", 
+        "datastream_revision": 672, 
+        "notes": ""
+    }
+},
+{
+    "pk": 61554, 
+    "model": "core.datastreami18n", 
+    "fields": {
+        "description": "Valores en pesos chilenos", 
+        "language": "es", 
+        "title": "IEP Primer Trimestre 2012 Ministerio de Defensa Nacional", 
+        "created_at": "2012-05-16T12:14:57", 
+        "datastream_revision": 61452, 
+        "notes": ""
+    }
+},
+{
+    "pk": 61555, 
+    "model": "core.datastreami18n", 
+    "fields": {
+        "description": "Inversiones BCN durante el a\u00f1o 2011 seg\u00fan art. 24 de Ley de Presupuestos N\u00b0 18.482", 
+        "language": "es", 
+        "title": "N\u00f3minas de Iniciativas de Inversi\u00f3n (M$) Biblioteca del Congreso Nacional", 
+        "created_at": "2012-05-17T17:12:11", 
+        "datastream_revision": 61453, 
+        "notes": ""
+    }
+},
+{
+    "pk": 61562,
+    "model": "core.datastreami18n",
+    "fields": {
+        "description": "A custom selection of the parent dataset.",
+        "language": "en",
+        "title": "Traffic Counts",
+        "created_at": "2015-11-10T10:43:10",
+        "datastream_revision": 61460,
+        "notes": ""
+    }
+},
+{
+    "pk": 61564,
+    "model": "core.datastreami18n",
+    "fields": {
+        "description": "Georeferenced data.",
+        "language": "en",
+        "title": "Traffic Incidents",
+        "created_at": "2015-11-10T10:55:01",
+        "datastream_revision": 61462,
+        "notes": ""
+    }
+},
+{
+    "pk": 61566,
+    "model": "core.datastreami18n",
+    "fields": {
+        "description": "All 311 calls received during this year, disaggregated by month.",
+        "language": "en",
+        "title": "311 Monthly Data",
+        "created_at": "2015-11-10T11:49:33",
+        "datastream_revision": 61464,
+        "notes": ""
+    }
+},
+{
+    "pk": 61569,
+    "model": "core.datastreami18n",
+    "fields": {
+        "description": "All public purchases made for the City.",
+        "language": "en",
+        "title": "Purchase Orders",
+        "created_at": "2015-11-10T12:48:28",
+        "datastream_revision": 61467,
+        "notes": ""
+    }
+}
 ]

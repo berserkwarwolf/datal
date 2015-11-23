@@ -61,14 +61,15 @@
 
 <script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewChart/visualizationHitsView.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_microsites/viewChart/ChartView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% compress css %}
 <!-- BRANDED CSS -->
 <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
 {% endcompress %}
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <!-- BRANDED JS -->
-<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url "microsites.get_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
   
 {% endblock %}
 
@@ -107,32 +108,49 @@
 
 google.load('visualization', '1', {packages: ['corechart', 'geomap']});
 
+var chartModel = new charts.models.Chart({
+    title: "{{visualization_revision.title}}", 
+    description: "{{visualization_revision.description|escapejs}}", 
+    visualizationJson : '{{result|escapejs}}',
+    chartJson : '{{visualization_revision.impl_details|escapejs}}',
+    chartLib: "{{visualization_revision.lib}}",
+    status : '{{visualization_revision.status}}',
+    createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
+    modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
+    lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
+    publicUrl: "{{ visualization_revision.public_url }}",
+    lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
 
-$(document).ready(function(){
+    // Validar si es necesario
+    guid: "{{visualization_revision.guid}}",
 
-    var visualizationModel = new visualization({
-        id: "{{datastream.datastreamrevision_id}}",
-        datastream_id: "{{datastream.datastream_id}}",
-        visualization_id: "{{visualization_revision.visualization_id}}",
-        title: "{{visualization_revision.title}}" , 
-        description: "{{visualization_revision.description|escapejs}}", 
-        guid: "{{visualization_revision.guid}}",
-        visualizationJson : '{{result|escapejs}}',
-        chartJson : '{{visualization_revision.impl_details|escapejs}}',
-        chartLib : '{{visualization_revision.lib}}',
-        status : '{{visualization_revision.status}}',
-        visualizationrevision_id : '{{visualization_revision.visualization_revision_id}}',
-        datastreamrevision_id : '{{visualization_revision.datastreamrevision_id}}',
-        embedUrl: "{{base_uri}}{% url "chart_manager.action_embed" visualization_revision.guid %}?end_point={%if url_query%}&{{url_query}}{%endif%}",
-        permaLink: "{{base_uri}}{{ visualization_revision.permalink }}",
-        joinIntersectedClusters: "{{join_intersected_clusters}}",
-    });
-    var chartView = new viewChartView({
-        model: visualizationModel
-    });
-
-    chartView.setLoading();
+    // Revisar
+    id: "{{ visualization_revision.last_revision_id }}",
+    visualization_id: "{{ visualization_revision.visualization_id }}",
 });
+
+
+chartModel.parse({
+    id: {{ visualization_revision.visualization_id }},
+    revision_id: {{ visualization_revision.visualization_revision_id }},
+
+    title: '{{ visualization_revision.title }}',
+    description: '{{ visualization_revision.description }}',
+    notes: '{{ visualization_revision.notes }}',
+    lib: '{{ visualization_revision.lib }}',
+
+    data: '{{ visualization_revision.data }}',
+
+    format: {{ visualization_revision.format | jsonify }},
+    chart: {{ visualization_revision.chart | jsonify }},
+});
+
+
+var chartView = new viewChartView({
+    model: chartModel
+});
+
+
 </script>
 {# <!-- ID {{id}} base uri {{base_uri}} viz rev id {{visualizationrevision_id}} RES TEST {{result}}  --> #}
 {% endblock %}

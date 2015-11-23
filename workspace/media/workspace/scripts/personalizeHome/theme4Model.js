@@ -7,6 +7,20 @@ var theme4Model = Backbone.Model.extend({
 		linkSection:[],
 		resourcesTable:true,
 	},
+
+
+	validation: {
+        mainTitle: [
+            {
+                required: true,
+                msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
+            },{
+                maxLength: 55,
+                msg: gettext('VALIDATE-MAXLENGTH-TEXT-1') + ' 55 ' + gettext('VALIDATE-MAXLENGTH-TEXT-2')
+            }
+        ]
+    },
+    
 	initialize: function(attr){	
 		if (!_.isUndefined(attr)){
 			var themeConfig = attr.config

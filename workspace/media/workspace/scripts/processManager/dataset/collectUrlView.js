@@ -16,8 +16,8 @@ var CollectUrlView = StepView.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
+		eventsObject['click .backButton'] = 'onPreviousButtonClicked';
+		eventsObject['click .nextButton'] = 'onNextButtonClicked';
 		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
 		this.addEvents(eventsObject);
 
@@ -63,7 +63,7 @@ var CollectUrlView = StepView.extend({
 		if(this.model.isValid(true)){
 
 			var self = this,
-				ajaxUrl  = '/datasets/check_source_url',
+				ajaxUrl  = '/datasets/check_endpoint_url',
 				ajaxData = "url="+ encodeURI(this.model.get('end_point'));
 
 			$.when(

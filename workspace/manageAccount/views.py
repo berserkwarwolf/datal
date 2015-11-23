@@ -6,12 +6,11 @@ from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 from core.auth.decorators import login_required, privilege_required
 from core.decorators import threshold
-from core.choices import TicketChoices, StatusChoices
+from core.choices import TicketChoices, StatusChoices, AccountRoles
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
 from core.lib.datastore import *
-from core.lib.searchify import SearchifyIndex
 from core.http import get_domain_with_protocol
 from workspace.manageAccount import forms
 from core.utils import generate_ajax_form_errors
@@ -26,7 +25,7 @@ import re
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_info(request):
+def edit_info(request):
     account = request.auth_manager.get_account()
     keys = [
         'account.name', 
@@ -47,7 +46,7 @@ def action_info(request):
 @privilege_required('workspace.can_access_admin')
 @require_POST
 @csrf_exempt
-def action_info_update(request):
+def edit_info_update(request):
 
     form = forms.AccountInfoForm(request.POST)
     if form.is_valid():
@@ -70,10 +69,10 @@ def action_info_update(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_users(request):
+def index_users(request):
     auth_manager = request.auth_manager
     preferences = auth_manager.get_account().get_preferences()
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles)
     users = User.objects.values('id', 'name', 'nick', 'last_visit', 'email', 'roles__name', 'roles__code').filter(
         account=auth_manager.account_id, roles__code__in=roles).all()
@@ -85,9 +84,9 @@ def action_users(request):
 @privilege_required('workspace.can_access_admin')
 @threshold("workspace.create_user_limit")
 @require_POST
-def action_create_user(request):
+def create_user(request):
     logger = logging.getLogger(__name__)
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -148,8 +147,8 @@ def action_create_user(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
-def action_edit_user(request):
-    roles = ['ao-publisher', 'ao-editor', 'ao-account-admin']
+def edit_user(request):
+    roles = AccountRoles.ALL
     form = forms.UserForm(roles, request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -175,7 +174,7 @@ def action_edit_user(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_branding(request):
+def edit_branding(request):
     account = request.auth_manager.get_account()
     preferences = account.get_preferences()
     keys = [
@@ -208,7 +207,7 @@ def action_branding(request):
 @privilege_required('workspace.can_access_admin')
 @require_POST
 @csrf_exempt
-def action_branding_update(request):
+def edit_branding_update(request):
     logger = logging.getLogger(__name__)
     form = forms.AccountBrandingForm(request.POST)
 
@@ -263,7 +262,7 @@ def action_branding_update(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_social(request):
+def edit_social(request):
     account = request.auth_manager.get_account()
     preferences = account.get_preferences()
     keys = ['account.comments', 'enable.embed.options', 'account.enable.sharing', 'account.enable.notes', 'account.dataset.download']
@@ -275,7 +274,7 @@ def action_social(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
-def action_social_update(request):
+def edit_social_update(request):
 
     form = forms.AccountSocialForm(request.POST)
     if form.is_valid():
@@ -296,7 +295,7 @@ def action_social_update(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_domain(request):
+def edit_domain(request):
     default_domain = '.' + settings.DOMAINS['microsites']
     account = request.auth_manager.get_account()
     preferences = account.get_preferences()
@@ -318,7 +317,7 @@ def action_domain(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
-def action_domain_update(request):
+def edit_domain_update(request):
 
     form = forms.AccountDomainForm(request.POST)
     if form.is_valid():
@@ -341,7 +340,7 @@ def action_domain_update(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_categories(request):
+def index_categories(request):
     logger = logging.getLogger(__name__)
     auth_manager = request.auth_manager
     account = auth_manager.get_account()
@@ -363,7 +362,7 @@ def action_categories(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
-def action_create_category(request):
+def create_categories(request):
     form = forms.CategoryCreateForm(request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -398,7 +397,7 @@ def action_create_category(request):
 
 @login_required
 @privilege_required('workspace.can_access_admin')
-def action_edit_category(request):
+def edit_categories(request):
     form = forms.CategoryEditForm(request.POST)
     if form.is_valid():
         auth_manager = request.auth_manager
@@ -445,7 +444,7 @@ def action_edit_category(request):
 @login_required
 @privilege_required('workspace.can_access_admin')
 @require_POST
-def action_delete_category(request):
+def delete_categories(request):
     logger = logging.getLogger(__name__)
     form = forms.CategoryDeleteForm(request.POST)
     if form.is_valid():
@@ -498,7 +497,7 @@ def action_delete_category(request):
 
 
 @require_POST
-def action_check_email(request):
+def check_email(request):
     email = request.POST.get('email')
     user_id = request.POST.get('user_id')
     query = User.objects.filter(email=email)
@@ -508,7 +507,7 @@ def action_check_email(request):
 
 
 @require_POST
-def action_check_username(request):
+def check_username(request):
     nick = request.POST.get('nick')
     user_id = request.POST.get('user_id')
     query = User.objects.filter(nick=nick)
@@ -518,7 +517,7 @@ def action_check_username(request):
 
 
 @require_POST
-def action_check_domain(request):
+def check_domain(request):
     account_id = request.auth_manager.account_id
     domain = request.POST.get('domain')
     exists = Preference.objects.filter(key='account.domain', value=domain).exclude(account_id=account_id).exists()

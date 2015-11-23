@@ -12,10 +12,10 @@ var TagsView = Backbone.View.extend({
 		'keyup input#id_tag_name': 'onAddTagKey'
 	},
 
-	initialize: function(){
+	initialize: function(options){
   	this.template = _.template( $("#id_AddTagTemplate").html() );
-		this.parentView = this.options.parentView;
-		this.parentModel = this.options.parentModel;
+		this.parentView = options.parentView;
+		this.parentModel = options.parentModel;
 		this.listenTo(this.collection, 'add', this.addTag);
 		this.listenTo(this.collection, 'remove', this.removeTag);
 
@@ -88,7 +88,27 @@ var TagsView = Backbone.View.extend({
 			}
 			if(this.model.isValid(true)){
 				this.collection.add(this.model.toJSON());
+				$('#id_tag_name').removeClass('has-error');
+				$('#tag_error_f').hide();
 			}
+			else {
+			    //tag name is too large (40 chars max)
+			    $('#id_tag_name').addClass('has-error');
+			    var msg = this.model.validation.name.msg;
+			    $('#tag_error_f').html(msg);
+			    $('#tag_error_f').show();
+			    
+			    /* cant see it
+			    self = this;
+			    $.gritter.add({
+        			title: gettext('INVALID-TAG'),
+        			text: msg,
+        			image: '/static/workspace/images/common/ic_validationError32.png',
+        			sticky: true,
+        			time: ''
+        		});
+        		*/
+			    }
 		}
 	},
 

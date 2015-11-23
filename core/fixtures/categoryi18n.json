@@ -310,5 +310,125 @@
             "slug": "mercado-publico",
             "name": "Mercado P\u00fablico"
         }
+    },
+      {
+    "pk": 36531,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 38767,
+      "description": "",
+      "language": "en",
+      "created_at": "2013-05-22T14:21:16",
+      "slug": "other",
+      "name": "Other"
     }
+  },
+  {
+    "pk": 36683,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 38919,
+      "description": "Maps and geographic information systems data",
+      "language": "en",
+      "created_at": "2013-05-27T11:08:53",
+      "slug": "gis",
+      "name": "GIS"
+    }
+  },
+  {
+    "pk": 36684,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 38920,
+      "description": "",
+      "language": "en",
+      "created_at": "2013-05-27T11:09:11",
+      "slug": "public-safety",
+      "name": "Public Safety"
+    }
+  },
+  {
+    "pk": 36686,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 38922,
+      "description": "",
+      "language": "en",
+      "created_at": "2013-05-27T11:09:51",
+      "slug": "financial",
+      "name": "Financial"
+    }
+  },
+  {
+    "pk": 37276,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 39512,
+      "description": "CDD data set",
+      "language": "en",
+      "created_at": "2013-05-30T14:49:34",
+      "slug": "community-development",
+      "name": "Community Development"
+    }
+  },
+  {
+    "pk": 38201,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 40437,
+      "description": "",
+      "language": "en",
+      "created_at": "2013-06-06T12:57:15",
+      "slug": "311-service-requests",
+      "name": "311 Service Requests"
+    }
+  },
+  {
+    "pk": 38369,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 40605,
+      "description": "",
+      "language": "en",
+      "created_at": "2013-10-31T17:04:27",
+      "slug": "census-data",
+      "name": "Census Data"
+    }
+  },
+  {
+    "pk": 38383,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 40619,
+      "description": "Animal Shelter related datasets",
+      "language": "en",
+      "created_at": "2013-11-15T15:12:27",
+      "slug": "animal-shelter",
+      "name": "Animal Shelter"
+    }
+  },
+  {
+    "pk": 38487,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 40723,
+      "description": "",
+      "language": "en",
+      "created_at": "2014-02-25T22:46:05",
+      "slug": "transportation",
+      "name": "Transportation"
+    }
+  },
+  {
+    "pk": 38634,
+    "model": "core.categoryi18n",
+    "fields": {
+      "category": 40870,
+      "description": "",
+      "language": "en",
+      "created_at": "2014-07-01T12:35:41",
+      "slug": "council-expenses",
+      "name": "Council Expenses"
+    }
+  }
 ]

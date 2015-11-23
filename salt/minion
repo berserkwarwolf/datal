@@ -616,3 +616,7 @@ pillar_roots:
 # Which returner(s) will be used for minion's result:
 #return: mysql
 
+# Datal Roles
+#grains:
+#  roles:
+#    - webserver

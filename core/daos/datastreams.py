@@ -21,13 +21,18 @@ from django.core.exceptions import FieldError
 
 from core.choices import STATUS_CHOICES
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
-from core.lib.searchify import SearchifyIndex
+
 from core.lib.elastic import ElasticsearchIndex
 
 from django.core.urlresolvers import reverse
 from core import helpers
 
+logger = logging.getLogger(__name__)
 
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
 
 class DataStreamDBDAO(AbstractDataStreamDBDAO):
     """ class for manage access to datastreams' database tables """
@@ -59,12 +64,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             language=fields['language'],
             title=fields['title'].strip().replace('\n', ' '),
             description=fields['description'].strip().replace('\n', ' '),
-            notes=fields['notes'].strip()
+            notes=fields['notes'].strip() if 'notes' in fields else ''
         )
 
-        datastream_revision.add_tags(fields['tags'])
-        datastream_revision.add_sources(fields['sources'])
-        datastream_revision.add_parameters(fields['parameters'])
+        if 'tags' in fields:
+            datastream_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            datastream_revision.add_sources(fields['sources'])
+        if 'parameters' in fields:
+            datastream_revision.add_parameters(fields['parameters'])
 
         return datastream, datastream_revision
 
@@ -150,7 +158,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_name=category.name,
             end_point=dataset_revision.end_point,
             filename=dataset_revision.filename,
-            collect_type=dataset_revision.impl_type,
+            collect_type=dataset_revision.dataset.type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
             modified_at=datastream_revision.modified_at,
@@ -174,7 +182,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         return datastream
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(
@@ -198,6 +206,9 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             q_list = [Q(x) for x in predicates]
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
+
+        if filter_status:
+            query = query.filter(status__in=fileter_status)
 
         total_resources = query.count()
         query = query.values(
@@ -442,7 +453,6 @@ class DatastreamHitsDAO():
         self.datastream = datastream
         #self.datastream_revision = datastream.last_published_revision
         self.search_index = ElasticsearchIndex()
-        self.logger=logging.getLogger(__name__)
         self.cache=Cache()
 
     def add(self,  channel_type):
@@ -467,7 +477,7 @@ class DatastreamHitsDAO():
             # esta correcto esta excepcion?
             raise DataStreamNotFoundException()
 
-        self.logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
+        logger.info("DatastreamHitsDAO hit! (guid: %s)" % ( guid))
 
         # armo el documento para actualizar el index.
         doc={'docid':"DS::%s" % guid,

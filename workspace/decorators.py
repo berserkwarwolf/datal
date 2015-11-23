@@ -153,6 +153,7 @@ def requires_review(a_view):
             if DataStreamRevision.objects.get(pk=kwargs["datastream_revision_id"]).is_pending_review() and \
                     request.user.is_editor():
                 raise RequiresReviewException()
+                
         return a_view(request, *args, **kwargs)
     return _wrapped_view
 

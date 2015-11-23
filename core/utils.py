@@ -5,6 +5,7 @@ from django.template.defaultfilters import date as _date
 from django.db.models.base import ModelState
 
 from core.choices import SOURCE_IMPLEMENTATION_CHOICES
+from core.choices import SourceImplementationChoices
 
 import re
 import json
@@ -35,13 +36,6 @@ def slugify(value):
     value = re.sub('\-+', '-', value)
     value = re.sub('\-$', '', value)
     return value
-
-
-# Esto debera estar implementado en las revisiones y a su vez devuelto
-# en el DAO, ahora una vez devuelto el resulado del dao se calculo el 
-# impl_type_nice sobre el impl_type de la respuesta del DAO
-def set_dataset_impl_type_nice(item):
-    return unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1])
 
 
 # Esto solo se usa en un lugar no se si vale la pena que ete aca

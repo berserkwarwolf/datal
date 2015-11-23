@@ -1,0 +1,24 @@
+{% extends 'base_microsites.html' %}
+
+{% block content %}
+{% block error_content %}
+	<h1>{{exception.title}}</h1>
+	<section class="box error-container">
+
+		<div class="box-content clearfix">
+		{% block error_text %}
+			{{exception.description}}
+			<ul>
+				{% for action in exception.get_actions %}
+					<li><a href="{{action.url}}">{{action.description}}</a></li>
+				{% endfor %}
+			</ul>
+		{% endblock %}
+		</div>
+
+	</section>
+{% endblock %}
+{% endblock %}
+
+{% block extras %}
+{% endblock %}

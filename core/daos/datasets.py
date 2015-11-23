@@ -11,7 +11,6 @@ from core.utils import slugify
 from core import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
-from core.lib.searchify import SearchifyIndex
 from core.lib.elastic import ElasticsearchIndex
 from core.daos.resource import AbstractDatasetDBDAO
 from core.builders.datasets import DatasetImplBuilderWrapper
@@ -21,6 +20,13 @@ from core.models import DataStreamRevision, VisualizationRevision
 import logging
 
 logger = logging.getLogger(__name__)
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
+
+
 
 class DatasetDBDAO(AbstractDatasetDBDAO):
     """ class for manage access to datasets' database tables """
@@ -65,7 +71,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             except DatasetRevision.DoesNotExist:
                 logger.error('DatasetRev Not exist dataset_id=%d' % dataset_id)
                 raise
-                
+
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 
@@ -122,7 +128,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         return dataset
         
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
 
         """ Query for full dataset lists"""
 
@@ -130,7 +136,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                                                dataseti18n__language=language, category__categoryi18n__language=language
                                                )
         if exclude:
-            query.exclude(**exclude)
+            query = query.exclude(**exclude)
 
         if filter_name:
             query = query.filter(dataseti18n__title__icontains=filter_name)
@@ -143,6 +149,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             q_list = [Q(x) for x in predicates]
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
+
+        if filter_status:
+             query = query.filter(status__in=fileter_status)
 
         total_resources = query.count()
 
@@ -170,23 +179,49 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         return query, total_resources
 
-    def query_childs(self, dataset_id, language):
+    def query_childs(self, dataset_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
 
         related = dict()
-        related['datastreams'] = DataStreamRevision.objects.select_related().filter(
-            dataset__id=dataset_id,
-            datastreami18n__language=language
-        ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
+        ###################################################
+        ## Datastreams
+
+        # solo obtenemos los id de las ultimas revisiones
+        last_revision_ids=list(set([x["datastream__last_revision"] for x in DataStreamRevision.objects.select_related().filter(dataset__id=dataset_id, datastreami18n__language=language).values("datastream__last_revision")]))
+
+        query = DataStreamRevision.objects.select_related().filter(
+            id__in=last_revision_ids, # filtramos por los ids de las ultimas revisiones
+            ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
 
-        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
-            visualization__datastream__last_revision__dataset__id=dataset_id,
-            visualizationi18n__language=language
+        # si se pasa un Status (pensado para microsites)
+        if status:
+            query=query.filter(status=status)
+
+        # ordenamos desde el mas viejo
+        related['datastreams'] = query.order_by("created_at")
+
+        ###################################################
+        ##  visualizations 
+
+        # solo obtenemos los id de las ultimas revisiones
+        last_revision_ids=list(set([x["visualization__last_revision"] for x in VisualizationRevision.objects.select_related().filter(
+                    visualization__datastream__last_revision__dataset__id=dataset_id,
+                    visualizationi18n__language=language).values("visualization__last_revision")]))
+
+
+        query = VisualizationRevision.objects.select_related().filter(
+            id__in=last_revision_ids
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
+
+        # si se pasa un Status (pensado para microsites)
+        if status:
+            query=query.filter(status=status)
+
+        related['visualizations'] = query.order_by("created_at")
 
         return related
 
@@ -206,7 +241,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             prev_revision = DatasetRevision.objects.filter(dataset=dataset).order_by('-id').first()
             size = prev_revision.size
             file_name = prev_revision.filename
-        elif int(collect_type) == CollectTypeChoices().URL:
+        elif int(collect_type) == CollectTypeChoices().URL or int(collect_type) == CollectTypeChoices().WEBSERVICE:
             size = 0
             file_name = fields['file_name']
         else:
@@ -251,9 +286,12 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         #    # Build impl_details if necessary
         fields['impl_details'] = builder.build()
 
-        fields['title'] = fields['title'].strip().replace('\n', ' ')
-        fields['description'] = fields['description'].strip().replace('\n', ' ')
-        fields['notes'] = fields['notes'].strip()
+        if 'title' in fields:
+            fields['title'] = fields['title'].strip().replace('\n', ' ')
+        if 'description' in fields:
+            fields['description'] = fields['description'].strip().replace('\n', ' ')
+        if 'notes' in fields:
+            fields['notes'] = fields['notes'].strip()
 
         changed_fields.append('impl_details')
 
@@ -263,8 +301,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             changed_fields, **fields
         )
 
-        dataset_revision.add_tags(fields['tags'])
-        dataset_revision.add_sources(fields['sources'])
+        if 'tags' in fields:
+            dataset_revision.add_tags(fields['tags'])
+        if 'sources' in fields:
+            dataset_revision.add_sources(fields['sources'])
 
         return dataset_revision
 

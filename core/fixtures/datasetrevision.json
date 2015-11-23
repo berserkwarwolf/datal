@@ -1,631 +1,288 @@
 [
-    {
-        "pk": 67397,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "created_at": "2013-08-27T16:55:19",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 1,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 67396,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "created_at": "2013-08-27T16:54:33",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61642,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 67395,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "created_at": "2013-08-27T16:54:17",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61641,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 67394,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "created_at": "2013-08-27T16:54:03",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61640,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 67393,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "created_at": "2013-08-27T16:53:49",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61639,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 67380,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "created_at": "2013-08-27T16:48:11",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61649,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66926,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "created_at": "2013-08-09T16:34:19",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 1,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66917,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "created_at": "2013-08-09T16:34:07",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61642,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66909,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "created_at": "2013-08-09T16:33:56",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61641,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66906,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "created_at": "2013-08-09T16:33:50",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61649,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66903,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "created_at": "2013-08-09T16:33:45",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61640,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66900,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "created_at": "2013-08-09T16:33:33",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61639,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66891,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "created_at": "2013-08-09T16:28:29",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 1,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66887,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "created_at": "2013-08-09T16:28:17",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61642,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66884,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "created_at": "2013-08-09T16:28:05",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61641,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66882,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "created_at": "2013-08-09T16:27:52",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61640,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 66880,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "created_at": "2013-08-09T16:27:38",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61639,
-            "impl_details": "",
-            "size": 0
-        }
-    },
-    {
-        "pk": 61716,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "created_at": "2012-05-21T10:52:00",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Calificaciones_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61649,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61715,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "created_at": "2012-05-21T10:44:13",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61648,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61714,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "created_at": "2012-05-18T17:29:55",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 5,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61713,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "created_at": "2012-05-18T17:27:30",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61646,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61712,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "created_at": "2012-05-18T17:13:06",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61645,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61711,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "created_at": "2012-05-18T17:10:21",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61644,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61710,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "created_at": "2012-05-18T16:52:25",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2010.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 1,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61709,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "created_at": "2012-05-18T16:50:44",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2009.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61642,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61708,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "created_at": "2012-05-18T13:51:15",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2008.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61641,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61707,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "created_at": "2012-05-18T13:44:22",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2007.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61640,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61706,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 69,
-            "status": 3,
-            "end_point": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "created_at": "2012-05-18T13:36:37",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://datastorage.mineduc.cl/tablas/Nivel_Rendimiento_anio_2006.csv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 61639,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61705,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://deis.minsal.cl/deis/vitales/natalidad/TGF_%20Chile_%201992_2009.htm",
-            "created_at": "2012-05-18T13:09:15",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://deis.minsal.cl/deis/vitales/natalidad/TGF_%20Chile_%201992_2009.htm",
-            "impl_type": 0,
-            "user": 1472,
-            "dataset": 61638,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61704,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_28122011/Acc_trabajo_act_economica_2005_2009.htm",
-            "created_at": "2012-05-18T12:04:00",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_28122011/Acc_trabajo_act_economica_2005_2009.htm",
-            "impl_type": 0,
-            "user": 1472,
-            "dataset": 61637,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61703,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm",
-            "created_at": "2012-05-18T11:46:13",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm",
-            "impl_type": 0,
-            "user": 1472,
-            "dataset": 61636,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61702,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 70,
-            "status": 3,
-            "end_point": "http://www.dipres.gob.cl/574/articles-74267_doc_xls.xls",
-            "created_at": "2012-05-17T17:12:11",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://www.dipres.gob.cl/574/articles-74267_doc_xls.xls",
-            "impl_type": 4,
-            "user": 1472,
-            "dataset": 61635,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61701,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 70,
-            "status": 3,
-            "end_point": "http://www.dipres.gob.cl/574/articles-87684_doc_xls.xls",
-            "created_at": "2012-05-16T12:14:57",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://www.dipres.gob.cl/574/articles-87684_doc_xls.xls",
-            "impl_type": 4,
-            "user": 1472,
-            "dataset": 61634,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61700,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm",
-            "created_at": "2012-05-16T10:40:31",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://intradeis.minsal.cl/Intradeis/DEF_ACC_TRAB_TRAY/MORT_ACC_TRAB_06092011/At_sexo.htm",
-            "impl_type": 0,
-            "user": 1472,
-            "dataset": 61633,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 61699,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://deis.minsal.cl/vitales/vitales2009/Mortalidad_Gral_area_region_2009.htm",
-            "created_at": "2012-05-15T13:49:03",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://deis.minsal.cl/vitales/vitales2009/Mortalidad_Gral_area_region_2009.htm",
-            "impl_type": 0,
-            "user": 1472,
-            "dataset": 4,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 899,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 67,
-            "status": 3,
-            "end_point": "http://www.chileatiende.cl/oficinas/exportacsv",
-            "created_at": "2012-05-14T15:27:45",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://www.chileatiende.cl/oficinas/exportacsv",
-            "impl_type": 10,
-            "user": 1472,
-            "dataset": 3,
-            "impl_details": null,
-            "size": 0
-        }
-    },
-    {
-        "pk": 631,
-        "model": "core.datasetrevision",
-        "fields": {
-            "category": 42,
-            "status": 3,
-            "end_point": "http://www.dipres.gob.cl/572/articles-45401_doc_xls_GCT1.xls",
-            "created_at": "2011-10-28T12:25:21",
-            "modified_at": "2013-10-22T10:56:34",
-            "filename": "http://www.dipres.gob.cl/572/articles-45401_doc_xls_GCT1.xls",
-            "impl_type": 4,
-            "user": 1472,
-            "dataset": 2,
-            "impl_details": null,
-            "size": 0
-        }
+{
+    "pk": 631, 
+    "model": "core.datasetrevision", 
+    "fields": {
+        "category": 42, 
+        "status": 3, 
+        "end_point": "http://www.dipres.gob.cl/572/articles-45401_doc_xls_GCT1.xls", 
+        "created_at": "2011-10-28T12:25:21", 
+        "modified_at": "2013-10-22T10:56:34", 
+        "filename": "http://www.dipres.gob.cl/572/articles-45401_doc_xls_GCT1.xls", 
+        "impl_type": 4, 
+        "frequency": "", 
+        "license_url": "", 
+        "user": 1472, 
+        "meta_text": "", 
+        "spatial": "", 
+        "dataset": 2, 
+        "mbox": "", 
+        "impl_details": null, 
+        "size": 0
     }
+},
+{
+    "pk": 899, 
+    "model": "core.datasetrevision", 
+    "fields": {
+        "category": 67, 
+        "status": 3, 
+        "end_point": "http://www.chileatiende.cl/oficinas/exportacsv", 
+        "created_at": "2012-05-14T15:27:45", 
+        "modified_at": "2013-10-22T10:56:34", 
+        "filename": "http://www.chileatiende.cl/oficinas/exportacsv", 
+        "impl_type": 10, 
+        "frequency": "", 
+        "license_url": "", 
+        "user": 1472, 
+        "meta_text": "", 
+        "spatial": "", 
+        "dataset": 3, 
+        "mbox": "", 
+        "impl_details": null, 
+        "size": 0
+    }
+},
+{
+    "pk": 61701, 
+    "model": "core.datasetrevision", 
+    "fields": {
+        "category": 70, 
+        "status": 3, 
+        "end_point": "http://www.dipres.gob.cl/574/articles-87684_doc_xls.xls", 
+        "created_at": "2012-05-16T12:14:57", 
+        "modified_at": "2013-10-22T10:56:34", 
+        "filename": "http://www.dipres.gob.cl/574/articles-87684_doc_xls.xls", 
+        "impl_type": 4, 
+        "frequency": "", 
+        "license_url": "", 
+        "user": 1472, 
+        "meta_text": "", 
+        "spatial": "", 
+        "dataset": 61634, 
+        "mbox": "", 
+        "impl_details": null, 
+        "size": 0
+    }
+},
+{
+    "pk": 61702, 
+    "model": "core.datasetrevision", 
+    "fields": {
+        "category": 70, 
+        "status": 3, 
+        "end_point": "http://www.dipres.gob.cl/574/articles-74267_doc_xls.xls", 
+        "created_at": "2012-05-17T17:12:11", 
+        "modified_at": "2013-10-22T10:56:34", 
+        "filename": "http://www.dipres.gob.cl/574/articles-74267_doc_xls.xls", 
+        "impl_type": 4, 
+        "frequency": "", 
+        "license_url": "", 
+        "user": 1472, 
+        "meta_text": "", 
+        "spatial": "", 
+        "dataset": 61635, 
+        "mbox": "", 
+        "impl_details": null, 
+        "size": 0
+    }
+},
+{
+    "pk": 79899,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 40723,
+        "status": 3,
+        "end_point": "file://4575/2/87173573767659697843969916021176211236",
+        "created_at": "2015-11-10T10:39:22",
+        "modified_at": "2015-11-10T10:41:30",
+        "filename": "TrafficCount.csv",
+        "impl_type": 10,
+        "frequency": "daily",
+        "license_url": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "United States",
+        "dataset": 72537,
+        "mbox": "contact@mycity.org",
+        "impl_details": "",
+        "size": 3723708
+    }
+},
+{
+    "pk": 79900,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 40723,
+        "status": 3,
+        "end_point": "file://4575/2/87173573767659697843969916021176211236",
+        "created_at": "2015-11-10T10:41:48",
+        "modified_at": "2015-11-10T10:41:50",
+        "filename": "TrafficCount.csv",
+        "impl_type": 10,
+        "frequency": "daily",
+        "license_url": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "United States",
+        "dataset": 72537,
+        "mbox": "contact@mycity.org",
+        "impl_details": "",
+        "size": 3723708
+    }
+},
+{
+    "pk": 79902,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 2,
+        "status": 3,
+        "end_point": "http://www.torreon.gob.mx/datos/Accidentes.kmz",
+        "created_at": "2015-11-10T10:53:50",
+        "modified_at": "2015-11-10T10:53:57",
+        "filename": "",
+        "impl_type": 12,
+        "frequency": "monthly",
+        "license_url": "http://opendatacommons.org/licenses/by/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "",
+        "dataset": 72539,
+        "mbox": "gis@mycity.org",
+        "impl_details": "",
+        "size": 0
+    }
+},
+{
+    "pk": 79903,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 38767,
+        "status": 3,
+        "end_point": "http://api.eia.gov/series/?api_key=6BD76F7BD13489FC161809DCA11097CB&series_id=ELEC.PRICE.US-IND.M",
+        "created_at": "2015-11-10T11:44:49",
+        "modified_at": "2015-11-10T12:51:27",
+        "filename": "",
+        "impl_type": 14,
+        "frequency": "yearly",
+        "license_url": "http://creativecommons.org/licenses/by/4.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "",
+        "dataset": 72540,
+        "mbox": "",
+        "impl_details": "<wsOperation useCache=\"False\"><pathToHeaders></pathToHeaders><pathToData>$..data</pathToData><uriSignatures/><args/><authentication/></wsOperation>",
+        "size": 0
+    }
+},
+{
+    "pk": 79904,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 40437,
+        "status": 3,
+        "end_point": "file://4575/2/330129335205641429734956052395107240381",
+        "created_at": "2015-11-10T11:48:29",
+        "modified_at": "2015-11-10T11:48:52",
+        "filename": "311CallVolume_OpenData.xlsx",
+        "impl_type": 4,
+        "frequency": "ondemand",
+        "license_url": "http://creativecommons.org/licenses/by-sa/4.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "My City",
+        "dataset": 72541,
+        "mbox": "311@mycity.org",
+        "impl_details": "",
+        "size": 11988
+    }
+},
+{
+    "pk": 79905,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 2,
+        "status": 0,
+        "end_point": "file://4575/2/87010854878705613479864271929587171010",
+        "created_at": "2015-11-10T12:12:49",
+        "modified_at": "2015-11-10T12:12:49",
+        "filename": "69 Sacramento Crime DATA.xlsx",
+        "impl_type": 4,
+        "frequency": "monthly",
+        "license_url": "http://opendefinition.org/licenses/odc-pddl/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "City of Sacramento",
+        "dataset": 72542,
+        "mbox": "diego.may@junar.com",
+        "impl_details": "",
+        "size": 9848
+    }
+},
+{
+    "pk": 79906,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 2,
+        "status": 3,
+        "end_point": "file://4575/2/1807857120468265070892450113825528242",
+        "created_at": "2015-11-10T12:22:54",
+        "modified_at": "2015-11-10T12:22:56",
+        "filename": "69 Sacramento Crime DATA.xlsx",
+        "impl_type": 4,
+        "frequency": "monthly",
+        "license_url": "http://opendefinition.org/licenses/odc-pddl/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "Sacramento",
+        "dataset": 72543,
+        "mbox": "diego.may@junar.com",
+        "impl_details": "",
+        "size": 9848
+    }
+},
+{
+    "pk": 79907,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 3,
+        "status": 3,
+        "end_point": "file://4575/2/120854311209614628472257872109804730900",
+        "created_at": "2015-11-10T12:41:42",
+        "modified_at": "2015-11-10T12:47:04",
+        "filename": "purchaseorder.csv",
+        "impl_type": 10,
+        "frequency": "",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "",
+        "dataset": 72544,
+        "mbox": "contact@mycity.org",
+        "impl_details": "",
+        "size": 4662698
+    }
+},
+{
+    "pk": 79908,
+    "model": "core.datasetrevision",
+    "fields": {
+        "category": 3,
+        "status": 3,
+        "end_point": "file://4575/2/120854311209614628472257872109804730900",
+        "created_at": "2015-11-10T12:47:15",
+        "modified_at": "2015-11-10T12:47:20",
+        "filename": "purchaseorder.csv",
+        "impl_type": 10,
+        "frequency": "",
+        "license_url": "http://creativecommons.org/publicdomain/zero/1.0/",
+        "user": 2,
+        "meta_text": "",
+        "spatial": "",
+        "dataset": 72544,
+        "mbox": "contact@mycity.org",
+        "impl_details": "",
+        "size": 4662698
+    }
+}
 ]

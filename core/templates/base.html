@@ -11,32 +11,31 @@
 
 	<meta http-equiv="CACHE-CONTROL" content="max-age=0, no-store" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	
+
 	{% block head %}{% endblock %}
-	
+
     {% block favicon %}
         <link rel="shortcut icon" href="{% static 'core/images/favicon/datal.ico' %}" />
     {% endblock %}
 
 	{% include "css.html" %}
     {% block css_includes %}{% endblock %}
-	
-	{% include "js.html" %}
+
     {% block js_includes %}{% endblock %}
-	
+
     {% block facebook %}{% endblock %}
 
 	{% block meta %}{% endblock %}
 </head>
 <body class="{% block body_class %}{% endblock %}">
 	{% block body %}
-	
+
 	{% endblock %}
 
     {% block popupsOverlay %}
-    
+
     {% endblock %}
-	
+
 	<!-- Overlay Mask -->
 	<div id="id_overlayMask" class="overlayMask"></div>
 
@@ -48,18 +47,18 @@
 
     {% block ga_code %}
     <script type="text/javascript">
- 
+
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-15500152-1']);
       _gaq.push(['_setDomainName', 'junar.com']);
       _gaq.push(['_trackPageview']);
-     
+
       (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
         ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
         var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
-     
+
     </script>
     {% endblock %}
 

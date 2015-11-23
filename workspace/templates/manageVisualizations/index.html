@@ -64,7 +64,7 @@
   <!-- Column Right -->
   <div class="col-xs-5 context-buttons clearfix">
     
-    <a id="id_addNewButton" class="button primary FR" title="{% trans 'APP-ADDNEWVISUALIZATIONTEXT' %}">{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}</a>
+    <a id="id_addNewButton" class="button primary FR" title="{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}">{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}</a>
 
   </div>
 
@@ -104,7 +104,7 @@
     <div class="startAdding">
       <div class="startAddingArrows startDataviews"></div>
       <p class="first">{% trans 'APP-START-ADDING-TEXT' %}</p>
-      <p class="second">{% trans 'APP-START-ADDING-NEW-DATAVIEW-TEXT' %}</p>
+      <p class="second">{% trans 'APP-START-ADDING-NEW-VISUALIZATION-TEXT' %}</p>
     </div>
   </div>
 
@@ -121,8 +121,8 @@
     var manageVisualizationsView =  new ManageVisualizationsView({
       model: manageVisualizationsModel,
       visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
-      sourceUrl: '/source_manager/action_search',
-      tagUrl: '/tag_manager/action_search',
+      sourceUrl: '/rest/sources.json',
+      tagUrl: '/rest/tags.json',
       filters: {{filters|jsonify}}
     });
   });

@@ -10,26 +10,19 @@ var viewChartView = Backbone.View.extend({
     },
 
     initialize : function() {
-        var self = this;
 
-        this.chartsFactory = new charts.ChartsFactory();
         this.$window = $(window);
 
         // init Sidebars
         this.initSidebarTabs();
 
-        this.setupChart();
-        this.render();
-        this.listenTo(this.model, "change", this.render);
-        this.bindEvents();
-        $(function () {
-            self.onDocumentReady.call(self);
+        this.chartView = new ChartView({
+            el: '#id_visualizationResult',
+            model: this.model
         });
-    },
-    /**
-     * Maneja acciones a reliazar cuando termina la primera carga de la pagina
-     */
-    onDocumentReady: function () {
+
+        this.render();
+        this.bindEvents();
         this.handleResizeEnd();
     },
     /**
@@ -152,46 +145,6 @@ var viewChartView = Backbone.View.extend({
         
     },
     /**
-     * Configura el chart de la visualización
-     */
-    setupChart: function () {
-        this.$chartContainer = $(this.chartContainer);
-
-        this.model.set('chart', {
-            lib: this.model.get('chartLib'),
-            type: JSON.parse(this.model.get('chartJson')).format.type
-        });
-
-        var chartSettings = this.chartsFactory.create(this.model.get('chart').type, this.model.get('chart').lib);
-
-        this.ChartViewClass = chartSettings.Class;
-        this.ChartModelClass = charts.models.Chart;
-    },
-    /**
-     * Initcializa el chart de la vista
-     */
-    initializeChart: function () {
-        if(typeof this.chartInstance === 'undefined'){
-            this.createChartInstance();
-        }
-    },
-    /**
-     * Crea una instancia del chart para ser insertado en la vista
-     */
-    createChartInstance: function () {
-        var chartModelInstance = new this.ChartModelClass({
-            type: this.model.get('chart').type,
-            id: this.model.get('visualizationrevision_id')
-        });
-
-        this.chartInstance = new this.ChartViewClass({
-            el: this.chartContainer,
-            model: chartModelInstance
-        });
-
-        this.chartInstance.model.fetchData();
-    },
-    /**
      * Muestra un elemento UI para indicar el estado de carga
      */
     setLoading: function () {
@@ -219,7 +172,7 @@ var viewChartView = Backbone.View.extend({
 
         //Calucla el alto que deberá tener el contenedor del chart
         var height = this.$window.height() - otherHeights - 70;
-        this.$chartContainer.css({
+        this.chartView.$el.css({
             height: height + 'px',
             maxHeight: height + 'px',
             minHeight: height + 'px',
@@ -229,7 +182,7 @@ var viewChartView = Backbone.View.extend({
         this.$sidebarContainer.css({
             height: height + 'px'
         });
-        chartInstance.render();
+        this.chartView.render();
     },
 
     setWaitingMessage: function(event){
@@ -252,8 +205,7 @@ var viewChartView = Backbone.View.extend({
      * Render de la vista
      */
     render: function () {
-        this.initializeChart();
-        this.chartInstance.render();
+        this.chartView.render();
         return this;
     }
 });

@@ -5,7 +5,8 @@
 .icon-inline,
 .button .icon{display:inline-block;vertical-align:middle;position:relative;top:-2px;}
 .button .icon.icon-right,
-.icon-inline.icon-right{margin-right:0;}
+.icon-inline.icon-right,
+.button.alpha-icon .icon{margin-right:0;}
 
 	/* When used inline in text - Apply to small icons (16x16px in the 24x24px space for icon sprite) */
 	.icon-inline{width:16px;height:16px;margin-right:3px;top:-1px;}
@@ -85,15 +86,8 @@
 	.button:hover .icon-help{background-position:-48px -1092px;}
 	.icon-help.icon-inline{background-position:-16px -1096px;}
 
-	.icon-list-all-xs{background-position:-12px -1236px;}
-	.icon-list-all-xs:hover{background-position:-48px -1236px;}
-
-	.icon-add-xs{background-position:-12px -1272px;}
-	.icon-add-xs:hover{background-position:-48px -1272px;}
-
-	.icon-favorite-xs{background-position:-12px -1308px;}
-	.icon-favorite-xs:hover{background-position:-48px -1308px;}
-
+	.icon-notifications{background-position:-12px -1236px;}
+	.icon-notifications:hover{background-position:-48px -1236px;}
 
 	/* Arrows */
 	.icon-arrow-down-right{background-position:-12px -1128px;}

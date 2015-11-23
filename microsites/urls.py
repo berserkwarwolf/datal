@@ -1,19 +1,24 @@
+import os
+
 from django.conf.urls import *
 from django.conf import settings
 from django.views.generic import RedirectView
+
+from rest_framework import routers
+from rest_framework.urlpatterns import format_suffix_patterns
+from djangoplugins.utils import include_plugins
+
+from core.plugins import DatalPluginPoint
 from microsites.rest.datastreams import RestDataStreamViewSet
 from microsites.rest.maps import RestMapViewSet
 from microsites.rest.charts import RestChartViewSet
 from microsites.rest.routers import MicrositeEngineRouter
-from rest_framework import routers
-from rest_framework.urlpatterns import format_suffix_patterns
-import os
+
 
 router = MicrositeEngineRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
 router.register(r'maps', RestMapViewSet, base_name='maps')
 router.register(r'charts', RestChartViewSet, base_name='charts')
-
 
 
 def jsi18n(request, packages = None, domain = None):
@@ -28,6 +33,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    (r'^', include_plugins(DatalPluginPoint, urls='microsites_urls')),
     url(r'^$', RedirectView.as_view(pattern_name='loadHome.load')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
@@ -35,11 +41,7 @@ urlpatterns = patterns('',
     url(r'^a/(\w+)$', 'microsites.views.custom_pages'),
 
     (r'^visualizations/', include('microsites.viewChart.urls')),
-    url(r'^visualizations/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.viewChart.views.action_embed', name='chart_manager.action_embed'),
-
-    #(r'^visualizationsb/', include('microsites.chart_manager.urls')),
-    #url(r'^visualizationsb/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.chart_manager.views.action_embed', name='chart_manager.action_embedb'),
-
+    url(r'^visualizations/embed/(?P<guid>[A-Z0-9\-]+)$', 'microsites.viewChart.views.embed', name='chart_manager.embed'),
 
     # dejamos datastreams para no romper,
     # dataviews como deberia quedar definitivamente
@@ -49,27 +51,25 @@ urlpatterns = patterns('',
 
     (r'^search/', include('microsites.search.urls')),
     #(r'^search$', include('microsites.search.urls')),
-    url(r'^developers/$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
-    url(r'^developers$', 'core.manageDeveloper.views.action_query', name='manageDeveloper.action_query'),
-    url(r'^manageDeveloper/action_insert$', 'core.manageDeveloper.views.action_insert', name='manageDeveloper.action_insert'),
-    url(r'^branded/css/(?P<id>\d+).css$', 'microsites.views.action_css', name='microsites.action_css'),
-    url(r'^branded/js/(?P<id>\d+).js$', 'microsites.views.action_js', name='microsites.action_js'),
-    url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.action_new_css', name='microsites.action_new_css'),
+    url(r'^developers/$', 'core.manageDeveloper.views.filter', name='manageDeveloper.filter'),
+    url(r'^developers$', 'core.manageDeveloper.views.filter', name='manageDeveloper.filter'),
+    url(r'^manageDeveloper/create$', 'core.manageDeveloper.views.create', name='manageDeveloper.create'),
+    url(r'^branded/css/(?P<id>\d+).css$', 'microsites.views.get_css', name='microsites.get_css'),
+    url(r'^branded/js/(?P<id>\d+).js$', 'microsites.views.get_js', name='microsites.get_js'),
+    url(r'^branded/newcss/(?P<id>\d+).css$', 'microsites.views.get_new_css', name='microsites.get_new_css'),
 
 #    url(r'^portal/DataServicesManager/actionEmbed/$', 'microsites.viewDataStream.views.legacy_embed', name='datastream_manager.legacy_embed'),
-    url(r'^portal/Charts/actionEmbed/$', 'core.chart_manager.views.action_legacy_embed', name='chart_manager.action_legacy_embed'),
-
-    url(r'^is_live$', 'microsites.views.action_is_live', name='microsites.action_is_live'),
+    url(r'^is_live$', 'microsites.views.is_live', name='microsites.is_live'),
     (r'^home/', include('microsites.loadHome.urls')),
     (r'^home', include('microsites.loadHome.urls')),
-    url(r'^catalog.xml$', 'microsites.views.action_catalog_xml'),
+    url(r'^catalog.xml$', 'microsites.views.get_catalog_xml'),
     (r'^auth/', include('core.auth.urls')),
 
     
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
     (r'^js_microsites/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'microsites', 'js')}),
 
-    url(r'^sitemap', 'microsites.home_manager.views.action_sitemap', name='home_manager.action_sitemap'),
+    url(r'^sitemap', 'microsites.home_manager.views.sitemap', name='home_manager.sitemap'),
     (r'^rest/', include(format_suffix_patterns(router.urls))), 
 )
 

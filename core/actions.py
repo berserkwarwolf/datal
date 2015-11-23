@@ -95,3 +95,12 @@ class ViewVisualizationCreateExceptionAction(ExceptionAction):
 
 class ContactUsExceptionAction(ExceptionAction):
     description = _('EXCEPTION-ACTION-CONTACT-US')
+
+
+class ValidFileType(ExceptionAction):
+    description = _('EXCEPTION-ACTION-VALID-FILE-TYPE')
+    choices = [] # default
+
+    def __init__(self, choices):
+        super(ValidFileType, self).__init__(
+            description=self.description % {'choices':", ".join(choices).upper()})

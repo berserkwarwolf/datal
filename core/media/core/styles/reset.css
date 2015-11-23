@@ -18,7 +18,7 @@ blockquote:before, blockquote:after{content:'';content:none;}
 .clearfix{display:block;}
 
 /* Common */
-.DN{display:none;}
+.DN{display:block ;}
 .hidden{display: none !important;}
 .show{display:block !important;}
 .FL{float:left;}
@@ -30,6 +30,7 @@ blockquote:before, blockquote:after{content:'';content:none;}
 .absolute{position:absolute;}
 .imageText{overflow:hidden;text-indent:10000px;}
 .w960{width:960px;padding-left:10px;padding-right:10px;margin:0 auto;}
+hr{border:0 none;margin:15px 0;min-height:1px;}
 div,
 header,
 footer,

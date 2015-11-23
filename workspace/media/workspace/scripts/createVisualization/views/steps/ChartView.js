@@ -5,26 +5,22 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	initialize: function(options){
-
-		this.stateModel = options.stateModel;
+		ChartView.__super__.initialize.apply(this, arguments);
 
 		// Right way to extend events without overriding the parent ones
 		this.addEvents({
 	
-			'click .step-1-view a.backButton': 			'onPreviousButtonClicked',
-			'click .step-1-view a.nextButton': 			'onNextButtonClicked',
+			'click a.backButton': 			'onPreviousButtonClicked',
+			'click a.nextButton': 			'onNextButtonClicked',
 			'click button.selectData': 		'onSelectDataClicked',
 			'click button.chartType': 		'onChartTypeClicked',
 			'change select#chartLibrary': 	'onChartLibraryChanged',
-			
-			'keyup input#nullValuePreset': 	'onInputChanged',
-			
-			'change input[type=radio]': 	'onRadioChanged',
-			'change input[type=checkbox]': 	'onCheckboxChanged',
 			'click div.chartContent': 		'onChartContentClicked'
 
 		});
 
+		this.stateModel = options.stateModel;
+		
 		this.chartsFactory = new charts.ChartsFactory(); // create ChartsFactory
 
         this.modalView = new ModalView({
@@ -38,13 +34,16 @@ var ChartView = StepViewSPA.extend({
         		this.dataTableView.render();
         	}
         });
+        this.optionsView = new OptionsView({
+        	el: this.$('.optionsItemConfig'),
+        	model: this.model
+        });
 
 		this.vizContent = this.$el.find('.visualizationContainer');
 		this.chartContent = this.$el.find('.chartContent');
 		this.selectDataBtn = this.$el.find('.visualizationContainer button.selectData');
 		this.nextBtn = this.$el.find('a.nextButton');
 		this.message = this.$el.find('p.message');
-		this.optionsItemConfig = this.$el.find('div.optionsItemConfig');
 
 		//edit
 		if(this.stateModel.get('isEdit') && !this.stateModel.get('isMap')){
@@ -72,14 +71,11 @@ var ChartView = StepViewSPA.extend({
 				}
 			});
 
-			//nullValue
-			this.$el.find('input#nullValuePreset').val(this.model.get('nullValuePreset'));
-
-			$("#ajax_loading_overlay").show();
+			this.showLoading();
 
 			//this.renderChart();
 		} else {
-			this.optionsItemConfig.hide();
+			this.optionsView.hide();
 		}
 
 		this.nextBtn.addClass('disabled');
@@ -101,20 +97,16 @@ var ChartView = StepViewSPA.extend({
 	},
 
 	fetchPreviewData: function(){
-		$("#ajax_loading_overlay").show();
-		this.model.fetchData()
-		.then(function () {
-			$("#ajax_loading_overlay").hide();
-		})
-		.error(function(response){
-			$("#ajax_loading_overlay").hide();
-        });;
-	},
+		var self = this;
+		this.showLoading();
 
-	onCheckboxChanged: function(e){
-		var input = $(e.target);
-		this.model.set(input.attr('name'), input.prop('checked') );
-		this.fetchPreviewData();
+		this.model.fetchData()
+			.then(function () {
+				self.hideLoading();
+			})
+			.fail(function(response){
+				self.hideLoading();
+	        });
 	},
 
 	onChangeData: function () {
@@ -122,10 +114,7 @@ var ChartView = StepViewSPA.extend({
 			this.selectDataBtn.removeClass('icon-add').addClass('icon-edit');		
 			this.vizContent.addClass('dataSelected');
 		}
-		$("#ajax_loading_overlay").hide();
-		console.log('the data for your chart has changed', this.model.data.toJSON());
-		//this.optionsItemConfig.show();
-		// TODO: should call this.chartView.render();
+		this.hideLoading();
 		this.renderChart();
 	},
 
@@ -152,36 +141,6 @@ var ChartView = StepViewSPA.extend({
 		this.model.set('lib',lib);
 	},
 
-	onInputChanged: function(e){
-		var input = $(e.currentTarget);
-			value = input.val();
-
-		var valid = this.model.set(input.data('ref'), input.val(), {validate: true});
-
-		if (valid) {
-			this.fetchPreviewData();
-			input.removeClass('has-error');
-			this.nextBtn.removeClass('enabled');
-		} else {
-			console.error(this.model.validationError);
-			input.addClass('has-error');
-			this.nextBtn.addClass('disabled');
-		}
-	},
-
-	onRadioChanged: function(e){
-		var input = $(e.currentTarget);
-		this.model.set(input.attr('name'), input.val());
-
-		if(input.val()=='given'){
-			$('#nullValuePreset').show();
-		}else{
-			this.fetchPreviewData();
-			this.model.unset('nullValuePreset');
-			$('#nullValuePreset').hide().val('');
-		}
-	},
-
 	selectGraphType: function(type){
 		$('.chartType').removeClass('active');
 		$('.chartType.'+type).addClass('active');
@@ -205,7 +164,6 @@ var ChartView = StepViewSPA.extend({
 
 	onChartChanged: function(){
 		if(!this.stateModel.get('isMap')){
-			console.log('you selected type: ', this.model.get('type') + ' - '+ this.model.get('lib') );
 			this.setupChart();
 			this.renderChart();
 		}
@@ -230,7 +188,7 @@ var ChartView = StepViewSPA.extend({
 
 		} else {
 			delete this.ChartViewClass;
-			console.log('There are not class for this');
+			console.error('There are not class for this');
 		}
 
 	},
@@ -255,12 +213,12 @@ var ChartView = StepViewSPA.extend({
 					this.nextBtn.removeClass('disabled');
 					this.message.hide();
 					this.chartInstance.render();
-					this.optionsItemConfig.show();
+					this.optionsView.show();
 				} else {
 					this.nextBtn.addClass('disabled');
 					this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
 					this.vizContent.removeClass('dataSelected');
-					this.optionsItemConfig.hide();
+					this.optionsView.hide();
 				}
 			}	else {
 				this.message.show();
@@ -268,7 +226,7 @@ var ChartView = StepViewSPA.extend({
 				this.nextBtn.addClass('disabled');
 				this.vizContent.removeClass('dataSelected');
 				this.chartContent.addClass(this.bgClasses[this.model.get('type')]);
-				this.optionsItemConfig.hide();
+				this.optionsView.hide();
 			}
 		}
 	},
@@ -283,8 +241,16 @@ var ChartView = StepViewSPA.extend({
 		this.previous();
 	},
 
-	onNextButtonClicked: function(){		
+	onNextButtonClicked: function(){
 		this.next();
+	},
+
+	showLoading: function () {
+		$("#ajax_loading_overlay").show();
+	},
+
+	hideLoading: function () {
+		$("#ajax_loading_overlay").hide();
 	},
 
 	start: function(){
@@ -296,9 +262,17 @@ var ChartView = StepViewSPA.extend({
 		this.listenTo(this.model, 'change:type', this.onChartChanged, this);
 		this.listenTo(this.modalView, 'close', this.onCloseModal, this);
 
+		this.listenTo(this.model.data, 'fetch:start', this.showLoading, this);
+		this.listenTo(this.model.data, 'fetch:end', this.hideLoading, this);
+
 		// chart type from first step
 		var initial = this.model.get('type');
 		this.selectGraphType(initial);
+
+		this.setupChart();
+
+		console.log(initial);
+		console.log(this.model.data.get('rows'));
 
 		if(this.model.data.get('rows').length){
 			this.onChartChanged();

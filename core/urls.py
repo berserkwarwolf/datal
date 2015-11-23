@@ -3,10 +3,6 @@ import os
 from django.conf.urls import *
 from django.conf import settings
 
-from djangoplugins.utils import include_plugins
-
-from core.plugins import DatalPluginPoint
-
 
 def jsi18n(request, packages = None, domain = None):
     if not domain:
@@ -20,15 +16,11 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
-    (r'^plugin/', include_plugins(DatalPluginPoint)),
-
     # i18n
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
 
     (r'^accounts/', include('workspace.manageMyAccount.urls')),
-    (r'^dataset/', include('workspace.dataset_manager.urls')),
-    (r'^review/', include('workspace.review_manager.urls')),
 
     (r'^js_core/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'core', 'js')}),
 

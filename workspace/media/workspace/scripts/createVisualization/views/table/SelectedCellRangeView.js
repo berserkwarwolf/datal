@@ -1,9 +1,9 @@
 var SelectedCellRangeView = Backbone.View.extend({
 
 	events: {
-		'focusin input[@type="text"]': 'onFocusInput',
-		'focusout input[@type="text"]': 'onFocusOutInput',
-		'keyup input[@type="text"]': 'onKeyupInput'
+		'focusin input[type="text"]': 'onFocusInput',
+		'focusout input[type="text"]': 'onFocusOutInput',
+		'keyup input[type="text"]': 'onKeyupInput'
 	},
 
 	initialize: function (options) {
@@ -48,7 +48,11 @@ var SelectedCellRangeView = Backbone.View.extend({
 				return model.get('name') === name;
 			});
 
-		var valid = model.set('excelRange', value);
+		if (value === '') {
+			model.unset('excelRange');
+		} else {
+			model.set('excelRange', value);
+		}
 		this.validate(model);
 	},
 
@@ -58,22 +62,15 @@ var SelectedCellRangeView = Backbone.View.extend({
 	},
 
 	validate: function (model) {
-		var $input = this.$('input[name="' + model.get('name') + '"]');
+		var $input = this.$('input[name="' + model.get('name') + '"]'),
+			hasRangeError, hasInvalidError;
+
 		model.isValid();
+		hasRangeError = (model.get('notEmpty') && !model.hasRange());
+		hasInvalidError = (model.validationError === 'invalid-range');
 
-		if (model.get('notEmpty')) {
-			$input.siblings('p.validation-not-empty')
-				.toggleClass('hidden', model.get('excelRange') !== '');
-			$input.toggleClass('has-error', model.get('excelRange') === '');
-		}
-
-		if (model.validationError === 'invalid-range') {
-			$input.addClass('has-error');
-			$input.siblings('p.validation-invalid-range').removeClass('hidden');
-		} else {
-			$input.removeClass('has-error');
-			$input.siblings('p.validation-invalid-range').addClass('hidden');
-		}
-
+		$input.siblings('p.validation-not-empty').toggleClass('hidden', !hasRangeError);
+		$input.siblings('p.validation-invalid-range').toggleClass('hidden', !hasInvalidError);
+		$input.toggleClass('has-error', hasInvalidError || hasRangeError);
 	}
-})
+});

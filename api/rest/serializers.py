@@ -2,17 +2,21 @@ import json
 
 from rest_framework import serializers
 from rest_framework.compat import OrderedDict
+from core.models import CategoryI18n, Category
+import json
 
 class ResourceSerializer(serializers.Serializer):
-    id = serializers.CharField()
-    title = serializers.CharField()
-    description = serializers.CharField()
-    user = serializers.CharField()
-    tags = serializers.ListField(child=serializers.CharField())
-    created_at = serializers.DateTimeField()
-    endpoint = serializers.CharField()
-    link = serializers.CharField()
-    category_name = serializers.CharField()
+    def getAccountCategoriesChoices(self):
+        return (map(lambda x: (x.slug, x.name),
+            CategoryI18n.objects.filter(
+                language=self.context['request'].auth['language'],
+                category__account=self.context['request'].auth['account']
+            )))
+
+    def getCategory(self, category_slug):
+        return CategoryI18n.objects.get(
+            slug=category_slug,
+            language=self.context['request'].auth['language']).category
 
     def tryKeysOnDict(self, toDict, toKey, fromDict, fromKeys):
         toDict[toKey] = None

@@ -13,19 +13,19 @@ register = template.Library()
 def permalink(pk, obj_type):
     if obj_type == 'dataset':
         return reverse(
-            'manageDatasets.action_view',
+            'manageDatasets.view',
             'microsites.urls',
             kwargs={'dataset_id': pk, 'slug': '-'}
         )
     elif obj_type == 'datastream':
         return reverse(
-            'manageDataviews.action_view',
+            'manageDataviews.view',
             'microsites.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
     elif obj_type == 'visualization':
         return reverse(
-            'manageVisualizations.action_view',
+            'manageVisualizations.view',
             'workspace.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
@@ -40,7 +40,7 @@ def download(dataset_revision):
     :param dataset:
     :return:
     """
-    return reverse('dataset_manager.download', 'microsites.urls',
+    return reverse('manageDatasets.download', 'microsites.urls',
                    kwargs={'dataset_id': str(dataset_revision['dataset_id']), 'slug': dataset_revision['slug']})
 
 
@@ -71,34 +71,6 @@ def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_cho
     if kwargs.has_key('featured_accounts'):
         featured_accounts = kwargs['featured_accounts']
 
-    if tab_prefix == 'collect' and table_prefix == 'dataset':
-        base_route = 'dataset_manager/dataset/'
-        filter_button_template = base_route + filter_button_file
-
-    if tab_prefix == 'enhance' and table_prefix == 'datastream':
-        base_route = 'resource_manager/datastream/'
-        filter_button_template = base_route + filter_button_file
-
-    if tab_prefix == 'enhance' and table_prefix == 'dashboard':
-        base_route = 'resource_manager/dashboard/'
-        filter_button_template = base_route + filter_button_file
-
-    if tab_prefix == 'publish' and table_prefix == 'dataset':
-        base_route = 'review_manager/dataset/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'datastream':
-        base_route = 'review_manager/datastream/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'dashboard':
-        base_route = 'review_manager/dashboard/'
-        extra_filters_template = base_route + extra_filters_file
-
-    if tab_prefix == 'publish' and table_prefix == 'visualization':
-        base_route = 'review_manager/visualization/'
-        extra_filters_template = base_route + extra_filters_file
-
     if tab_prefix == 'microsites' and table_prefix == 'home':
         base_route = 'home_manager/resources/'
         override_filters = True
@@ -121,45 +93,8 @@ def datatable(revisions=None, categories=None, table_prefix='', tab_prefix='', a
     row_button_file = 'row_buttons.html'
     row_data_file = 'row_data.html'
 
-    if tab_prefix == 'collect':
-        base_route = 'dataset_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        row_button_template = base_route + row_button_file
-        row_data_template = base_route + row_data_file
-        table_body_template = base_route + table_body_file
-    if tab_prefix == 'dataset_overlay':
-        base_route = 'resource_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        row_button_template = base_route + row_button_file
-        row_data_template = base_route + row_data_file
-        table_body_template = base_route + table_body_file
-    elif tab_prefix == 'enhance':
-        base_route = 'resource_manager/' + table_prefix  + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_button_template = base_route + row_button_file
-        row_data_template = base_route + row_data_file
-
-    elif tab_prefix == 'publish':
-        base_route = 'review_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_button_template = base_route + row_button_file
-        row_data_template = base_route + row_data_file
-
-    elif tab_prefix == 'reports':
-        base_route = 'reports_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_data_template = base_route + row_data_file
-
-    elif tab_prefix == 'home':
+    if tab_prefix == 'home':
         base_route = 'home_manager/' + table_prefix + '/'
-        header_template = base_route + header_file
-        table_body_template = base_route + table_body_file
-        row_data_template = base_route + row_data_file
-    elif tab_prefix == 'activity_stream':
-        base_route = 'viewLandingPage/' + table_prefix + '/'
         header_template = base_route + header_file
         table_body_template = base_route + table_body_file
         row_data_template = base_route + row_data_file

@@ -7,7 +7,10 @@ from django.forms.util import ErrorDict
 from django.utils.translation import ugettext_lazy
 
 from core import choices
+from core.http import get_impl_type
+from core.forms import MimeTypeForm
 from core.models import CategoryI18n
+from core.choices import SOURCE_EXTENSION_LIST, SOURCE_IMPLEMENTATION_CHOICES, SourceImplementationChoices
 from core.exceptions import FileTypeNotValidException
 from workspace.common.forms import TagForm, SourceForm
 
@@ -61,17 +64,6 @@ class DatasetForm(forms.Form):
             'data-bind':'value:category,events:[\'keyup\']',
             'tabindex':0
         }),
-    )
-
-    # Status
-    status = forms.ChoiceField(
-        required=True,
-        label=ugettext_lazy('APP-STATUS-TEXT'),
-        choices=[],
-        widget=forms.Select(attrs={
-            'data-bind':'value:status,events:[\'keyup\']',
-            'tabindex':0
-        })
     )
 
     # Notes
@@ -129,6 +121,7 @@ class DatasetForm(forms.Form):
     #Spatial
     spatial = forms.CharField(
         required=False,
+        max_length=80,
         label=ugettext_lazy('APP-REGION-TEXT'),
         widget=forms.TextInput(attrs={
             'data-bind':'value:spatial,events:[\'keyup\']',
@@ -164,7 +157,6 @@ class DatasetForm(forms.Form):
 
         super(DatasetForm, self).__init__(data, *args)
 
-        self.fields['status'].choices = kwargs.get('status_options', choices.VALID_STATUS_CHOICES)
         self.fields['impl_type'].choices = kwargs.get('impl_type_choices', choices.SOURCE_IMPLEMENTATION_CHOICES)
 
         account_id = kwargs.get('account_id')
@@ -340,16 +332,38 @@ class FileForm(DatasetForm):
             'tabindex':0,
             'data-other':'#id_file_name',
             'autofocus':'autofocus',
-            'accept': '.doc,.docx,.docm,.dotx,.dotm,.xls,.xlsx,.xlsm,.xltx,.xltm,.xlsb,.xlam,.xll,.odt,.ods,.csv,.txt,.pdf,.html,.htm,.xml,.kml,.kmz,.tsv',
+            'accept': ",".join(map(lambda x: ".%s" % x, SOURCE_EXTENSION_LIST))
         })
     )
 
     def clean(self):
-        if 'file_data' in self.cleaned_data.keys() and self.cleaned_data['file_data']:
-            if self.cleaned_data['file_data'].content_type in ['image/jpeg', 'application/zip',
-                                                               'application/x-rar']:
-                 raise FileTypeNotValidException()
-        return self.cleaned_data
+        cleaned_data = super(FileForm, self).clean()
+        if 'file_data' in cleaned_data.keys() and cleaned_data['file_data']:    
+            cleaned_data['impl_type'] = get_impl_type(
+                cleaned_data['file_data'].content_type, 
+                cleaned_data['file_data'].name,
+                cleaned_data['impl_type'] if 'impl_type' in cleaned_data else None
+            )
+            if ('impl_type' not in cleaned_data or cleaned_data['impl_type'] is None or
+                cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
+                raise FileTypeNotValidException(file_type=cleaned_data['file_data'].content_type,
+                    valid_types=SOURCE_EXTENSION_LIST)
+        return cleaned_data
+
+
+class URLForm(DatasetForm):
+    def clean(self):
+        cleaned_data = super(URLForm, self).clean()
+        if 'end_point' in  cleaned_data.keys() and  cleaned_data['end_point']:
+            mimetype, status, url = MimeTypeForm().get_mimetype( cleaned_data['end_point'])
+            cleaned_data['impl_type'] = get_impl_type(mimetype, url)
+            if cleaned_data['impl_type'] is None:
+                cleaned_data['impl_type'] = SourceImplementationChoices.HTML
+            if ('impl_type' not in cleaned_data or cleaned_data['impl_type'] is None or
+                cleaned_data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
+                 raise FileTypeNotValidException(file_type=mimetype,
+                    valid_types=SOURCE_EXTENSION_LIST)
+        return cleaned_data 
 
 
 class DatasetFormFactory:
@@ -363,7 +377,7 @@ class DatasetFormFactory:
         elif int(self.collect_type) == choices.CollectTypeChoices().SELF_PUBLISH:
             form = FileForm
         elif int(self.collect_type) == choices.CollectTypeChoices().URL:
-            form = DatasetForm
+            form = URLForm
         else:
             form = DatasetForm
         return request is None and form(*args, **kwargs) or form(request.POST, request.FILES, *args, **kwargs)
@@ -412,25 +426,3 @@ class SmartRedirectHandler(urllib2.HTTPRedirectHandler):
             self, req, fp, code, msg, headers)
         result.status = code
         return result
-
-class MimeTypeForm(forms.Form):
-    url = forms.CharField(required=True)
-
-    def get_mimetype(self, url):
-        try:
-            request = urllib2.Request(url, headers={'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:11.0) Gecko/20100101 Firefox/11.0"})
-            connection = urllib2.urlopen(request)
-            mimetype = connection.info().getheader('Content-Type').strip().replace('"', '')
-            try:
-                opener = urllib2.build_opener(SmartRedirectHandler())
-                f = opener.open(url)
-                status = f.status
-                url = f.url
-            except:
-                status = 200
-                url = url
-        except:
-            mimetype = ''
-            status = ''
-
-        return (mimetype, status, url)

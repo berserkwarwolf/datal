@@ -19,7 +19,7 @@ from random import choice
 from core.http import get_domain_with_protocol
 from core.auth.auth import AuthManager
 from core.auth.decorators import login_required
-from core.choices import TicketChoices
+from core.choices import TicketChoices, AccountRoles
 from core.models import *
 from core.shortcuts import render_to_response
 from core.lib.mail import mail
@@ -95,7 +95,7 @@ def create(request):
         user.name = form.cleaned_data.get('name')
         user.save()
 
-        admin_role = Role.objects.get(code='ao-account-admin')
+        admin_role = Role.objects.get(code=AccountRoles.ADMIN)
         user.roles.add(admin_role)
 
         # login the user
@@ -192,7 +192,7 @@ def activate(request):
 
 
 @require_POST
-def action_check_admin_url(request):
+def check_admin_url(request):
     admin_url = request.POST.get('admin_url')
     exists = Preference.objects.filter(key='account.url', value=admin_url).exists()
     return HttpResponse(str(not exists).lower(), content_type='application/json')

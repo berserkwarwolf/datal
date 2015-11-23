@@ -44,6 +44,12 @@ VISUALIZATION_LIBS = (
     ('d3', 'D3')
 )
 
+class AccountRoles():
+    PUBLISHER='ao-publisher'
+    EDITOR='ao-editor'
+    ADMIN='ao-account-admin'
+
+    ALL=(PUBLISHER, EDITOR, ADMIN)
 
 class ChannelTypes():
     WEB = 0
@@ -85,6 +91,14 @@ STATUS_CHOICES = Choices(
     (StatusChoices.UNPUBLISHED, ugettext_lazy('MODEL_STATUS_UNPUBLISHED')),
     (StatusChoices.REJECTED, ugettext_lazy('MODEL_STATUS_REJECTED')),
     (StatusChoices.APPROVED, ugettext_lazy('MODEL_STATUS_APPROVED'))
+    )
+
+STATUS_CHOICES_REST = Choices(
+    (StatusChoices.DRAFT, "draft"),
+    (StatusChoices.PENDING_REVIEW, "pending"),
+    (StatusChoices.APPROVED, "approved"),
+    (StatusChoices.PUBLISHED, "published"),
+    (StatusChoices.REJECTED, "rejected")
     )
 
 VALID_STATUS_CHOICES = (
@@ -138,7 +152,6 @@ class SourceImplementationChoices():
     ODP = 8
     ODS = 9
     CSV = 10
-    TXT = 10
     KML = 11
     KMZ = 12
     GIS0 = 13
@@ -149,6 +162,8 @@ class SourceImplementationChoices():
     IMAGE = 18
     ZIP = 19
     TSV = 20
+    PUS = 21
+    TXT = 22
 
 SOURCE_IMPLEMENTATION_CHOICES = (
      (SourceImplementationChoices.HTML, 'HTML')
@@ -172,20 +187,89 @@ SOURCE_IMPLEMENTATION_CHOICES = (
     ,(SourceImplementationChoices.IMAGE, 'IMAGE')
     ,(SourceImplementationChoices.ZIP, 'ZIP')
     ,(SourceImplementationChoices.TSV, 'TSV')
+    ,(SourceImplementationChoices.TXT, 'TXT')
+    ,(SourceImplementationChoices.PUS, 'PublicStuff')
 )
 
-# These are the impl_type that are valid to create a Data View from Self Publish 
-# 3 = xml, 
-# 4 = xls|xlsx, 
-# 6 = doc|docx, 
-# 10 = csv|txt, 
-# 11 = kml, 
-# 12 = kmz, 
-# 20 = tsv
-DATASTREAM_IMPL_VALID_CHOICES = [3, 4, 6, 10, 11, 12, 20]
+SOURCE_IMPLEMENTATION_EXTENSION_CHOICES = (
+     (SourceImplementationChoices.HTML, ["html", "htm"] )
+    #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
+    #,(SourceImplementationChoices.DALLAS, 'DALLAS')
+    ,(SourceImplementationChoices.XML, ["xml"])
+    ,(SourceImplementationChoices.XLS, ["xlsx", "xlsm", "xls", "xltx", "xltm", "xlsb", "xlam", "xll"])
+    ,(SourceImplementationChoices.PDF, ["pdf"])
+    ,(SourceImplementationChoices.DOC, ["doc", "docx", "docm", "dotx", "dotm"])
+    ,(SourceImplementationChoices.ODT, ["odt"])
+    #,(SourceImplementationChoices.ODP, 'ODP')
+    ,(SourceImplementationChoices.ODS, ["ods"])
+    ,(SourceImplementationChoices.CSV, ["csv"])
+    ,(SourceImplementationChoices.KML, ["kml"])
+    ,(SourceImplementationChoices.KMZ, ["kmz"])
+    #,(SourceImplementationChoices.GIS0, 'geoportal/GetRecords')
+    #,(SourceImplementationChoices.REST, 'REST/JSON')
+    #,(SourceImplementationChoices.GIS1, 'geoportal/getxml')
+    #,(SourceImplementationChoices.ARC0, 'MapServer/find')
+    #,(SourceImplementationChoices.IBEN, 'iBencinas')
+    ,(SourceImplementationChoices.IMAGE, ["png", "jpg", "jpeg", "gif"])
+    ,(SourceImplementationChoices.ZIP, ["zip", "gz", "tar"])
+    ,(SourceImplementationChoices.TSV, ["tsv"])
+    #,(SourceImplementationChoices.PUS, 'PublicStuff')
+    ,(SourceImplementationChoices.TXT, ["txt"])
+)
+
+SOURCE_EXTENSION_LIST = sorted([extension for source_id, extensions in SOURCE_IMPLEMENTATION_EXTENSION_CHOICES
+                           for extension in extensions])
+
+SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
+     (SourceImplementationChoices.HTML, ["text/html"])
+    #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
+    #,(SourceImplementationChoices.DALLAS, 'DALLAS')
+    #,(SourceImplementationChoices.XML, 'XML')
+    ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel",
+                                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
+    ,(SourceImplementationChoices.PDF, ["application/pdf"])
+    ,(SourceImplementationChoices.DOC, ["application/vnd.ms-xpsdocument",
+                                        "application/msword"])
+    ,(SourceImplementationChoices.ODT, ["application/vnd.oasis.opendocument.text",
+                                        "application/vnd.oasis.opendocument.text-web"])
+    #,(SourceImplementationChoices.ODP, 'ODP')
+    ,(SourceImplementationChoices.ODS, ["application/vnd.oasis.opendocument.spreadsheet"])
+    ,(SourceImplementationChoices.CSV, ["text/x-comma-separated-values",
+                                        "text/csv"])
+    ,(SourceImplementationChoices.KML, ["application/vnd.google-earth.kml+xml"])
+    #,(SourceImplementationChoices.KMZ, 'KMZ')
+    #,(SourceImplementationChoices.GIS0, 'geoportal/GetRecords')
+    #,(SourceImplementationChoices.REST, 'REST/JSON')
+    #,(SourceImplementationChoices.GIS1, 'geoportal/getxml')
+    #,(SourceImplementationChoices.ARC0, 'MapServer/find')
+    #,(SourceImplementationChoices.IBEN, 'iBencinas')
+    ,(SourceImplementationChoices.IMAGE, ["image/jpeg",
+                                          "image/png",
+                                          "image/gif"])
+    ,(SourceImplementationChoices.ZIP, ["application/zip",
+                                        "application/x-gzip",
+                                        "application/x-tar"])
+    #,(SourceImplementationChoices.TSV, 'TSV')
+    #,(SourceImplementationChoices.PUS, 'PublicStuff')
+    ,(SourceImplementationChoices.TXT, ["text/plain"])
+)
+
+SOURCE_MIMETYPE_LIST = sorted([mimetype for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES
+                           for mimetype in mimetypes])
+
+DATASTREAM_IMPL_VALID_CHOICES = [
+    SourceImplementationChoices.HTML,
+    SourceImplementationChoices.XML, 
+    SourceImplementationChoices.XLS, 
+    SourceImplementationChoices.CSV, 
+    SourceImplementationChoices.KML, 
+    SourceImplementationChoices.KMZ, 
+    SourceImplementationChoices.DOC,
+    SourceImplementationChoices.TSV,
+    SourceImplementationChoices.TXT]
 
 # These are the impl_type that are not valid to create a Data View from Self Publish
-DATASTREAM_IMPL_NOT_VALID_CHOICES = list( set([ value for key, value in SourceImplementationChoices.__dict__.items() if not key.startswith('__') ]) - set(DATASTREAM_IMPL_VALID_CHOICES) )
+DATASTREAM_IMPL_NOT_VALID_CHOICES = list( set(dict(SOURCE_IMPLEMENTATION_CHOICES).keys()) - set(DATASTREAM_IMPL_VALID_CHOICES) )
 
 WEBSERVICE_IMPLEMENTATION_CHOICES = (
     (SourceImplementationChoices.REST, 'REST/JSON'),
@@ -203,6 +287,11 @@ COLLECT_TYPE_CHOICES = (
     ,(CollectTypeChoices.URL, 'URL') # a web page for scrape internal tables
     ,(CollectTypeChoices.WEBSERVICE, 'WEBSERVICE') # api or webservice
 )
+
+COLLECT_TYPE_FILTERABLES = [
+     CollectTypeChoices.SELF_PUBLISH
+    ,CollectTypeChoices.URL
+]
 
 COUNTRY_CHOICES = (
     ('US', ugettext_lazy( 'MODEL-COUNTRY-US'))

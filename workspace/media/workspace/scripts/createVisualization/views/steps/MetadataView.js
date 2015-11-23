@@ -1,19 +1,20 @@
 var MetadataView = StepViewSPA.extend({
 
 	initialize: function(){
+		MetadataView.__super__.initialize.apply(this, arguments);
+
 		this.$el.find('.validate-msg').hide();
 		this.addEvents({
-			'click .step-2-view a.backButton': 'onPreviousButtonClicked',
-			'click .step-2-view a.nextButton': 'onNextButtonClicked'
+			'click a.backButton': 'onPreviousButtonClicked',
+			'click a.nextButton': 'onNextButtonClicked'
 		});
 		this.initNotes();
 	},
 
 	bindings: {
-		"input.title": 			"value:meta_title,		events:['keyup']",
-		"input.description": 	"value:meta_description,events:['keyup']",
-		"select.category": 		"value:meta_category,	events:['change']",
-		//"textarea.notes": 		"value:meta_notes,		events:['keyup']"
+		"input.title": 			"value:title,		events:['keyup']",
+		"input.description": 	"value:description,events:['keyup']",
+		"select.category": 		"value:datastream_category,	events:['change']"
 	},
 
 	onPreviousButtonClicked: function(e){
@@ -29,20 +30,23 @@ var MetadataView = StepViewSPA.extend({
 		if($('.nicEdit-main').length > 0
 				&& $('.nicEdit-main').html() != '<br>' // When notes initialice empty, nicEdit initialice with <br>, so we check if that is the case
 		){
-				notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
+			notes = $.trim( this.notesInstance.instanceById('id_notes').getContent() );
 		}
 
-		this.model.set('meta_notes',notes);
+		this.model.set('notes', notes);
 
 		var validation = this.model.validateMetadata();
 		if( validation.valid ){
 			this.next();
 		}else{
 			var that = this;
-			_.each(validation.fields,function(invalid,field){
+			_.each(validation.fields, function(invalid, field){
 				if(invalid){
 					that.$el.find('input.'+field).addClass('has-error');
 					that.$el.find('input.'+field).siblings('.validate-msg').show();
+				}
+				if (field === 'notes' && invalid) {
+					that.$el.find('.notes-field .validate-msg').show();
 				}
 			});
 		};
@@ -55,8 +59,8 @@ var MetadataView = StepViewSPA.extend({
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes');
 
-		if(this.model.get('meta_notes')){
-			this.notesInstance.instanceById('id_notes').setContent(this.model.get('meta_notes'));
+		if(this.model.get('notes')){
+			this.notesInstance.instanceById('id_notes').setContent(this.model.get('notes'));
 		}
 
     },

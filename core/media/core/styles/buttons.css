@@ -17,14 +17,19 @@
   .button:hover{color:#0066ff;}
 
   /* Alpha */
-  .button.alpha{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;}
+  .button.alpha,
+  .button.alpha-icon{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;}
   .button.alpha:hover{text-decoration:none;}
+  .button.alpha-icon{min-width:inherit !important;}
     
   /* Back */
   .button.back:before{content:"< ";}
 
   /* Next */
   .button.next:after{content:" >";}
+
+  /* Add */
+  .button.add:after{content:" +";}
 
 /* Button icons */
 .button i{width:12px;position:relative;left:-1px;margin-right:8px;height:26px;vertical-align:bottom;display:inline-block;background:url(/static/workspace/images/common/ic_buttons.png) no-repeat;}

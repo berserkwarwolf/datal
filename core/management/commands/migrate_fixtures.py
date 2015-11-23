@@ -116,6 +116,7 @@ class Command(BaseCommand):
         f_datastreami18n.close()
         f_datastream_parameters.close()
 
+        # Dataset
         datasets = []
         for row in self.dataset:
             revision_id = self.get_last_dataset_revision(row['pk'])
@@ -129,6 +130,22 @@ class Command(BaseCommand):
         f_dataset = open('{}.migrated'.format(DATASET_FIXTURES), 'w')
         f_dataset.writelines(json.dumps(datasets, indent=4))
         f_dataset.close()
+
+        # Dataset Revision
+        dataset_revisions = []
+        for row in self.datasetrevision:
+            # Si hay estados en UNPUBLISHED lo paso A DRAFT
+            if row['fields']["status"] == 4:
+                row['fields']["status"] = 0
+            # Si hay estados en UNDER_REVIEW lo paso A PENDING_REVIEW
+            if row['fields']["status"] == 2:
+                row['fields']["status"] = 1
+            row['fields']["modified_at"] = row['fields']["created_at"]
+            dataset_revisions.append(row)
+
+        f_datasetrevision = open('{}.migrated'.format(DATASETREVISION_FIXTURES), 'w')
+        f_datasetrevision.writelines(json.dumps(dataset_revisions, indent=4))
+        f_datasetrevision.close()
 
         # Datastream
         f_datastream = open(DATASTREAM_FIXTURES, 'r')
@@ -157,6 +174,13 @@ class Command(BaseCommand):
         # Datastream Revision
         datatream_revisions = []
         for row in self.datastream_revision:
+            row['fields']["modified_at"] = row['fields']["created_at"]
+            # Si hay estados en UNPUBLISHED lo paso A DRAFT
+            if row['fields']["status"] == 4:
+                row['fields']["status"] = 0
+            # Si hay estados en UNDER_REVIEW lo paso A PENDING_REVIEW
+            if row['fields']["status"] == 2:
+                row['fields']["status"] = 1
             add = True
 
             if not row['fields']["rdf_template"]:

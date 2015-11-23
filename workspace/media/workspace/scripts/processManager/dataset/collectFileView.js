@@ -16,9 +16,10 @@ var CollectFileView = StepView.extend({
 
 		// Right way to extend events without overriding the parent ones
 		var eventsObject = {}
-		eventsObject['click .step[data-step='+this.name+'] .navigation .backButton'] = 'onPreviousButtonClicked';
-		eventsObject['click .step[data-step='+this.name+'] .navigation .nextButton'] = 'onNextButtonClicked';
-		eventsObject['change #id_license_url, #id_frequency'] = 'onSelectChange';
+		eventsObject['click .backButton'] = 'onPreviousButtonClicked';
+		eventsObject['click .nextButton'] = 'onNextButtonClicked';
+		eventsObject['change #id_license_url'] = 'onSelectChange';
+		eventsObject['change #id_frequency'] = 'onSelectChange';
 		eventsObject['change #id_file_data'] = 'onInputFileChange';
 		this.addEvents(eventsObject);
 

@@ -11,7 +11,7 @@ var ModalView = Backbone.View.extend({
 
         this.rangeLatModel = new DataTableSelectionModel({id: 1, name: 'range_lat', notEmpty: true});
         this.rangeLonModel = new DataTableSelectionModel({id: 2, name: 'range_lon', notEmpty: true});
-        this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data'});
+        this.rangeInfoModel = new DataTableSelectionModel({id: 3, name: 'range_data', notEmpty: true});
         this.rangeTraceModel = new DataTableSelectionModel({id: 4, name: 'range_trace', notEmpty: true});
 
         this.rangeDataModel = new DataTableSelectionModel({id: 1, name: 'range_data', notEmpty: true});
@@ -91,6 +91,8 @@ var ModalView = Backbone.View.extend({
             datastream: model.toJSON()
         });
         this.dataTableView.render();
+        this.collection.setMaxCols(this.dataTableView.table.countCols());
+        this.collection.setMaxRows(this.dataTableView.table.countSourceRows());
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
             this.addSelection(this._cacheFocusedInput);
         }, this);
@@ -102,8 +104,8 @@ var ModalView = Backbone.View.extend({
     addSelection: function (name) {
         var selection = this.dataTableView.getSelection(),
             model = this.collection.find(function (model) {
-            return model.get('name') === name;
-        });
+                return model.get('name') === name;
+            });
         model.set(selection);
         this.validate();
     },
@@ -124,13 +126,14 @@ var ModalView = Backbone.View.extend({
     },
 
     validateLatLon: function () {
-        var hasLat = this.rangeLatModel.get('excelRange') !== '',
-            hasLon = this.rangeLonModel.get('excelRange') !== '',
+        var hasLat = this.rangeLatModel.hasRange(),
+            hasLon = this.rangeLonModel.hasRange(),
+            hasInfo = this.rangeInfoModel.hasRange(),
             validLat = this.rangeLatModel.isValid(),
             validLon = this.rangeLonModel.isValid(),
             validInfo = this.rangeInfoModel.isValid();
 
-        if (hasLat && hasLon && validLat && validLon && validInfo) {
+        if (hasLat && hasLon && hasInfo && validLat && validLon && validInfo) {
             this.enable();
         } else {
             this.disable();
@@ -138,11 +141,12 @@ var ModalView = Backbone.View.extend({
     },
 
     validateTrace: function () {
-        var hasTrace = this.rangeTraceModel.get('excelRange') !== '',
+        var hasTrace = this.rangeTraceModel.hasRange(),
+            hasInfo = this.rangeInfoModel.hasRange(),
             validTrace = this.rangeTraceModel.isValid(),
             validInfo = this.rangeInfoModel.isValid();
 
-        if (hasTrace && validTrace && validInfo) {
+        if (hasTrace && hasInfo && validTrace && validInfo) {
             this.enable();
         } else {
             this.disable();
@@ -150,18 +154,32 @@ var ModalView = Backbone.View.extend({
     },
 
     validateData: function () {
-        var hasData = this.rangeDataModel.get('excelRange') !== '',
-            hasLabels = this.rangeLabelsModel.get('excelRange') !== '',
-            hasHeaders = this.rangeHeadersModel.get('excelRange') !== '',
+        var hasData = this.rangeDataModel.hasRange(),
+            hasLabels = this.rangeLabelsModel.hasRange(),
+            hasHeaders = this.rangeHeadersModel.hasRange(),
             validData = this.rangeDataModel.isValid(),
             validLabels = this.rangeLabelsModel.isValid(),
             validHeaders = this.rangeHeadersModel.isValid();
 
-        if (hasData && hasLabels && validHeaders && validData && validLabels && validHeaders) {
+        if (hasData && hasLabels && hasHeaders && validData && validLabels && validHeaders &&
+            this.validateDataHeaders(this.rangeDataModel, this.rangeHeadersModel)) {
             this.enable();
         } else {
             this.disable();
         }
+    },
+
+    validateDataHeaders: function(validData, validHeaders) {
+        if (validData && validHeaders) {
+            var dataCols = validData.getRange().to.col - validData.getRange().from.col + 1;
+            var headersRows = validHeaders.getRange().to.row - validHeaders.getRange().from.row + 1;
+            if (validHeaders.getRange().to.row == -1 || validHeaders.getRange().from.row == -1) {
+                headersRows = 0;
+            }
+            var headersCols = validHeaders.getRange().to.col - validHeaders.getRange().from.col + 1;
+            return dataCols == headersCols * headersRows
+        }
+        return false
     },
 
     enable: function () {
@@ -181,7 +199,7 @@ var ModalView = Backbone.View.extend({
         $(window).resize(function(){
 
             windowHeight = $(window).height();
-            
+
             var sidebarHeight =
               windowHeight
             - parseFloat( self.$el.find('.context-menu').height() )

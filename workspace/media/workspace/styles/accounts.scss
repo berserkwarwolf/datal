@@ -6,7 +6,7 @@
 html,
 body{background:$nav-bg;}
 
-.account-box{width:320px;margin:0 auto;padding-top:30px;}
+.account-box{width:390px;margin:0 auto;padding-top:30px;}
 .account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;background-image:url(#{$logo-signin-svg-url});height:$logo-signin-height;margin-bottom:30px;}
 .account-box .account-box-content{background:#fff;padding:20px;border:1px solid $brand-color-bold;
   -webkit-border-radius:3px;
@@ -34,7 +34,7 @@ body{background:$nav-bg;}
 .account-box .row h2{font-size:14px;line-height:21px;padding-bottom:8px;}
 .account-box .row.buttons{}
 .account-box .row.buttons .button{display:inline-block;} 
-.account-box .row.remember{border-top:1px solid #e2e0e0;margin-top:20px;}
+.account-box .row.remember{margin-top:20px;}
 .account-box .row.remember input[type=checkbox]{float:none;}
 .account-box .row.remember label{float:none;font-size:$font-size-base;line-height:15px;display:inline-block;}
 .account-box .account-box-footer ul{padding:12px 20px 20px;}

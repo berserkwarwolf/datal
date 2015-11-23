@@ -113,12 +113,24 @@ var Step0 = Step.extend({
         $args.each(function(index){
             var name = this.nodeName;
             var element = $(this);
-            if(typeof element.attr('editable') != "undefined" && element.attr('editable') != "false"){
+
+            console.log(element.attr('editable'));
+
+            console.log(typeof element.attr('editable'));
+
+
+            var html = '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" ';
+            if(typeof element.attr('editable') != undefined && element.attr('editable') != "False"){
+                console.log('log true')
                 isEditable = true;
-                inputs += '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" data-edit="true" id="param'+index+'" type="text"/></div></div>';
+                html +=' data-edit="true" ';
             }else{
-                inputs += '<div class="webservice_args row clearfix"><label for="param'+index+'">'+name+'</label><div class="formErrorMessageContainer"><input value="'+element.text()+'" data-edit="false" id="param'+index+'" type="text" disabled="disabled"/></div></div>';
+                console.log('log true')
+                html +=' data-edit="false" readonly="readonly" ';
             }
+            html += ' id="param'+index+'" type="text"/></div></div>';
+            inputs += html
+
         });
 
         $('#id_parameters_container').append(inputs);
@@ -131,13 +143,13 @@ var Step0 = Step.extend({
     loadWebserviceData : function(){
         $('#id_steps_navbar').removeClass('stepsNavbar0').addClass('stepsNavbar1');
         $('#id_loading').show();
-        var queryString = '';
+        var queryString = {};
         $('.webservice_args').each(function(i){
             var name = $(this).find('label').text();
             var value = $(this).find('input').val();
             var edit = $(this).find('input').attr('data-edit');
             if(edit == "true"){
-                queryString += '&'+name + '=' + value;
+                queryString[name] = value;
             }
         });
 
@@ -230,7 +242,7 @@ var Step0 = Step.extend({
         }, this));
 
         $('#id_sourceNameSuggest').taggingSources({
-            source: '/source_manager/action_search'
+            source: '/rest/sources.json'
             , sourceContainer : "#id_source_container"
             , minLength: 3
             , sources: initialSources
@@ -245,7 +257,7 @@ var Step0 = Step.extend({
         }, this));
 
         $('#id_operation-tag').tagging({
-            source: '/tag_manager/action_search'
+            source: '/rest/tags.json'
             , minLength: 3
             , tags: initialTtags
         });
@@ -937,13 +949,13 @@ var Step2 = Step.extend({
             var initialSources = suggestedSources;
 
             $('#id_operation-tag', this.attributes.$Container).tagging({
-                source: '/tag_manager/action_search',
+                source: '/rest/tags.json',
                 minLength: 3,
                 tags: initialTags
             });
 
             $('#id_sourceNameSuggest', this.attributes.$Container).taggingSources({
-                source: '/source_manager/action_search',
+                source: '/rest/sources.json',
                 sourceContainer: "#id_source_container",
                 minLength: 3,
                 sources: initialSources
@@ -1503,7 +1515,7 @@ var Step3 = Step.extend({
     },
     onSaveSuccess : function(pResponse){
         if(pResponse.status == 'ok'){
-            //window.location.replace('/dataviews/action_view?datastream_revision_id='+pResponse.datastream_revision_id);
+            //window.location.replace('/dataviews/view?datastream_revision_id='+pResponse.datastream_revision_id);
             window.location.replace('/dataviews/'+pResponse.datastream_revision_id);
         }else{
             datalEvents.trigger('datal:application-error', pResponse);

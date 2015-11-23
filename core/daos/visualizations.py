@@ -16,7 +16,7 @@ from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
 from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization, Setting
 from core.exceptions import SearchIndexNotFoundException
-from core.lib.searchify import SearchifyIndex
+
 from core.lib.elastic import ElasticsearchIndex
 from core.choices import STATUS_CHOICES, StatusChoices
 from core.builders.visualizations import VisualizationImplBuilder
@@ -27,6 +27,11 @@ from core import helpers
 from datetime import date, timedelta
 
 logger = logging.getLogger(__name__)
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
 
 
 class VisualizationDBDAO(AbstractVisualizationDBDAO):
@@ -145,7 +150,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
-            datastream_revision_id=visualization_revision.datastream_revision_id
+            datastream_revision_id=visualization_revision.datastream_revision_id,
+            filename='' # nice to have
         )
         visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
@@ -209,7 +215,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         return visualization_revision
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
         """ Consulta y filtra las visualizaciones por diversos campos """
 
         query = VisualizationRevision.objects.filter(
@@ -232,6 +238,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             q_list = [Q(x) for x in predicates]
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
+        if filter_status:
+            query = query.filter(status__in=fileter_status)
 
         total_resources = query.count()
         query = query.values(
@@ -304,7 +312,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             datastream_id = row[2]
             visualization_id = row[3]
             title = row[5]
-            permalink = reverse('chart_manager.action_view', kwargs={'id': visualization_id, 'slug': slugify(title)})
+            permalink = reverse('chart_manager.view', kwargs={'id': visualization_id, 'slug': slugify(title)})
             visualizations.append({'id'           : row[0],
                                    'sov_id'       : row[1],
                                    'impl_details' : row[4],

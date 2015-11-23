@@ -12,6 +12,8 @@ var DeleteItemView = Backbone.View.extend({
 	initialize: function(options) {
 
 		// this.parentView = this.options.parentView;
+    this.models = options.models;
+    this.type = options.type;
 
 		// init Overlay
 		this.$el.overlay({
@@ -38,8 +40,8 @@ var DeleteItemView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionDeleteItemView = new AffectedResourcesCollectionDeleteItemView({
 			collection: affectedResourcesCollection,
-			models: this.options.models,
-			type: this.options.type
+			models: this.models,
+			type: this.type
 		});
 		this.closeOverlay();
 		this.undelegateEvents();
@@ -47,7 +49,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	deleteRevision: function() {
 		self = this;
-		_.each(this.options.models, function(model) {
+		_.each(this.models, function(model) {
 
 			var resource = model.get('title');
 

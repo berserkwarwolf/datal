@@ -5,13 +5,17 @@ USE_L10N = False
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'api.urls'
 
 INSTALLED_APPS += (
     'api',
+    'corsheaders',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -42,7 +46,9 @@ REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
     'rest_framework.permissions.IsAuthenticated',
-    'api.rest.permissions.DatalApiPermission',
+    'api.rest.permissions.ApiPermission',
+    'api.rest.permissions.ApiPrivateForWritePermission',
+    'api.rest.permissions.ApiIsUserForWritePermission',
 )
 
 REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (

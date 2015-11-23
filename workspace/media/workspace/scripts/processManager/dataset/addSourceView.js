@@ -1,70 +1,103 @@
 var AddSourceView = Backbone.View.extend({
 
-  el: '#addNewSource',
+	el: '#addNewSource',
 
-  sources: null,
-  template: null,
+	sources: null,
+	template: null,
 
-  events: {
-    'click #id_addNewSourceButton': 'onAddNewSourceButtonClicked'
-  },
+	events: {
+		'click #id_addNewSourceButton': 'onAddNewSourceButtonClicked'
+	},
 
-  initialize: function(){
-  	this.template = _.template( $("#id_AddNewSourceTemplate").html() );
-    this.sources = this.options.sources;
+	initialize: function(options){
+		this.template = _.template( $("#id_AddNewSourceTemplate").html() );
+		this.sources = options.sources;
 
-    // Bind model validation to view
-    Backbone.Validation.bind(this);
+		this.listenTo(this.sources, 'validateAdd', this.validateNameOnAdd);
 
-  	this.render();
-  },
+		// Bind model validation to view
+		Backbone.Validation.bind(this, {
+			collection: this.sources
+		});
 
-  render: function(){
-    this.$el.html( this.template() );
-    this.$el.show();
+		this.render();
+	},
 
-    // Bind custom model validation callbacks
-    var self = this;
-    Backbone.Validation.bind(this, {
-      valid: function (view, attr, selector) {
-        self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
-      },
-      invalid: function (view, attr, error, selector) {
-        self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
-      }
-    });
+	render: function(){
+		this.$el.html( this.template() );
+		this.$el.show();
 
-    return this;
-  },
+		// Bind custom model validation callbacks
+		var self = this;
+		Backbone.Validation.bind(this, {
+			valid: function (view, attr, selector) {
+				self.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
+			},
+			invalid: function (view, attr, error, selector) {
+				self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
+			}
+		});
 
-  setIndividualError: function(element, name, error){
-    // If not valid
-    if( error != ''){
-      element.addClass('has-error');
-      element.next('p.has-error').remove();
-      element.after('<p class="has-error">'+error+'</p>');
+		return this;
+	},
 
-    // If valid
-    }else{
-      element.removeClass('has-error');
-      element.next('p.has-error').remove();
-    }
-  },
+	setIndividualError: function(element, name, error){
+		// If not valid
+		if( error != ''){
+			element.addClass('has-error');
+			element.next('p.has-error').remove();
+			element.after('<p class="has-error">'+error+'</p>');
 
-  onAddNewSourceButtonClicked:function(){
+		// If valid
+		}else{
+			element.removeClass('has-error');
+			element.next('p.has-error').remove();
+		}
+	},
 
-    var name = $('#id_name').val(),
-        url = $.trim($('#id_url_source').val());
+	onAddNewSourceButtonClicked:function(){
 
-    this.model.set('name', name);
-    this.model.set('url', url);
-    
-    if(this.model.isValid(true)){
-      this.sources.add(this.model.toJSON());
-      this.$el.hide();
-      this.undelegateEvents();
-    }
-    
-  }
+		var name = $.trim($('#id_name').val()),
+			url = $.trim($('#id_url_source').val());
+
+		this.model.set('name', name);
+		this.model.set('url', url);
+		
+		if(this.model.isValid(true)){
+
+			// Validate URL and NAME with some rules using a custom method with an async ajax call
+			// (needs to be this way because backbone.validation plugin does not support custom methods with built-in ones)
+			var error = this.model.validateSourceNameAlreadyExist();
+			if( error != false ){
+				this.setIndividualError( this.$el.find('[name=name]'), 'name', error );
+				return false;
+			}
+			
+			error = this.model.validateSourceUrlAlreadyExist();
+			if( error != false ){
+				this.setIndividualError( this.$el.find('[name=url]'), 'url', error );
+				return false;
+			}
+
+			this.sources.add(this.model.toJSON());
+		}
+		
+	},
+
+	validateNameOnAdd: function(error){
+		// Is valid
+		if( error == '' ){
+			this.hideForm();
+
+		// Is invalid
+		}else{
+			this.setIndividualError(this.$el.find('[name=name]'), 'name', error);
+		}
+	},
+
+	hideForm: function(){
+		this.$el.hide();
+		this.undelegateEvents();
+	}
 
 });

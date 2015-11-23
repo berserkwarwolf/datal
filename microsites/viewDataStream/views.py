@@ -10,7 +10,6 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.clickjacking import xframe_options_exempt
 
 from core.http import get_domain_with_protocol
-from core.utils import set_dataset_impl_type_nice
 from core.models import DataStream, Account, DataStreamRevision
 from core.helpers import RequestProcessor
 from core.decorators import datal_cache_page
@@ -44,7 +43,6 @@ def view(request, id, slug):
         base_uri = get_domain_with_protocol('microsites')
 
     datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
-    impl_type_nice = set_dataset_impl_type_nice(datastream['impl_type']).replace('/',' ')
 
     """ #TODO this must be at middleware
     # verify if this account is the owner of this viz
@@ -69,7 +67,7 @@ def hits_stats(request, id, channel_type=None):
     try:
         datastream = DataStream.objects.get(pk=int(id))
     except DataStream.DoesNotExist:
-        raise Http404
+        raise DataStreamDoesNotExist
 
     hits_dao = DatastreamHitsDAO(datastream)
     hits = hits_dao.count_by_days(30, channel_type)
@@ -111,7 +109,7 @@ def download(request, id, slug):
         datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
         datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
     except:
-        raise Http404
+        raise DataStreamDoesNotExist
     else:
         url = active_datastore.build_url(
             request.bucket_name,

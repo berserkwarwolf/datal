@@ -225,13 +225,13 @@ class User(models.Model):
         return self.nick
 
     def is_admin(self):
-        return True if Role.objects.get(code="ao-account-admin") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.ADMIN) in self.roles.all() else False
 
     def is_publisher(self):
-        return True if Role.objects.get(code="ao-publisher") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.PUBLISHER) in self.roles.all() else False
 
     def is_editor(self):
-        return True if Role.objects.get(code="ao-editor") in self.roles.all() else False
+        return True if Role.objects.get(code=AccountRoles.EDITOR) in self.roles.all() else False
 
     def is_authenticated(self):
         return True
@@ -502,7 +502,7 @@ class DataStreamParameter(models.Model):
         null=True
     )
     name = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_NAME_LABEL'))
-    default = models.CharField(max_length=30, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
+    default = models.CharField(max_length=100, verbose_name=ugettext_lazy('MODEL_DEFAULT_LABEL'))
     position = models.PositiveSmallIntegerField()
     impl_details = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_IMPLEMENTATION_DETAILS_LABEL'))
     description = models.CharField(max_length=100, blank=True, verbose_name=ugettext_lazy('MODEL_DESCRIPTION_LABEL'))
@@ -560,7 +560,7 @@ class DatasetRevision(RevisionModel):
     created_at = models.DateTimeField(editable=False, auto_now_add=True)
     modified_at = models.DateTimeField(editable=False, auto_now=True)
     license_url = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_LICENSE_LABEL'))
-    spatial = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
+    spatial = models.CharField(max_length=80, blank=True, verbose_name=ugettext_lazy('MODEL_SPATIAL_LABEL'))
     frequency = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_FREQUENCY_LABEL'))
     mbox = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_MBOX_LABEL'))
 
@@ -997,6 +997,9 @@ class Application(models.Model):
     def get_name(self):
         return self.name and self.name or 'No name'
 
+    def is_private_auth_key(self, auth_key):
+        return self.auth_key == auth_key
+
     def is_public_auth_key(self, auth_key):
         return self.public_auth_key == auth_key
 
@@ -1127,6 +1130,7 @@ def unindex_dataset_revision(sender, instance, **kwargs):
         search_dao = DatasetSearchDAOFactory().create(instance)
         search_dao.remove()
 
+
 @receiver(pre_delete, sender=DataStreamRevision, dispatch_uid="unindex_datastream_revision")
 def unindex_datastream_revision(sender, instance, **kwargs):
     # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
@@ -1134,6 +1138,7 @@ def unindex_datastream_revision(sender, instance, **kwargs):
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
         search_dao.remove()
+
 
 @receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
 def unindex_visualization_revision(sender, instance, **kwargs):

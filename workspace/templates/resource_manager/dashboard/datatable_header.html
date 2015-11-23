@@ -1,9 +1,0 @@
-{% load i18n %}
-<th><input type="checkbox"></th>
-<th>{% trans "APP-TITLE-TEXT" %}</th>
-<th>{% trans "DATASET-TABLE-HEADER-OWNER" %}</th>
-<th>{% trans "DATASET-TABLE-HEADER-MODIFIED" %}</th>
-{% if not 'ao-free-user' in auth_manager.roles %}
-    <th>{% trans "DATASET-TABLE-HEADER-STATUS" %}</th>
-{%endif%}
-<th>{% trans "APP-ACTIONS-TEXT" %}</th>

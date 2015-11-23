@@ -1,4 +1,7 @@
-import urllib2, logging
+# -*- coding: utf-8 -*-
+import urllib2
+import logging
+from django.conf import settings
 
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
@@ -8,27 +11,73 @@ from django.utils.translation import ugettext
 from django.http import Http404, HttpResponse
 
 from core.http import JSONHttpResponse
-from core.v8.factories import AbstractCommandFactory
 from core.shortcuts import render_to_response
 from core.auth.decorators import login_required
 from core.choices import *
 from core.exceptions import DatasetSaveException
-from core.models import DatasetRevision
+from core.models import DatasetRevision, Dataset
+from core.templates import DefaultAnswer, DefaultDictToJson
+from core.daos.datasets import DatasetDBDAO
+from core.utils import DateTimeEncoder
+from core.lib.datastore import active_datastore
+from core.forms import MimeTypeForm
+from core.signals import dataset_removed, dataset_changed, dataset_unpublished, dataset_rev_removed
 from workspace.decorators import *
 from workspace.templates import DatasetList
-from core.templates import DefaultAnswer
 from workspace.manageDatasets.forms import *
-from core.daos.datasets import DatasetDBDAO
-from core.daos.visualizations import VisualizationDBDAO
-from core.utils import DateTimeEncoder
 
 logger = logging.getLogger(__name__)
+
+
+@require_http_methods(["GET"])
+def download(request, dataset_id, slug):
+    """ download dataset file directly
+    :param slug:
+    :param dataset_id:
+    :param request:
+    """
+    logger = logging.getLogger(__name__)
+
+    # get public url for datastream id
+    try:
+        dataset_revision_id = Dataset.objects.get(pk=dataset_id).last_published_revision.id
+        dataset = DatasetDBDAO().get(request.auth_manager.language, dataset_revision_id=dataset_revision_id)
+    except Exception, e:
+        logger.info("Can't find the dataset: %s [%s]" % (dataset_id, str(e)))
+        raise Http404
+    else:
+        filename = dataset['filename'].encode('utf-8')
+        # ensure it's a downloadable file on S3
+        if dataset['end_point'][:7] != "file://":
+            return HttpResponse("No downloadable file!")
+
+        url = active_datastore.build_url(request.bucket_name, dataset['end_point'].replace("file://", ""))
+
+        impl_type = settings.IMPL_TYPES.get(str(dataset['impl_type']))
+        content_type = settings.CONTENT_TYPES.get(impl_type)
+        if settings.DEBUG: logger.info('Dataset download %s -- %s -- %s -- %s -- %s' % (filename, content_type, url, dataset['impl_type'], impl_type))
+
+        """ no funciona asi 
+        redirect = HttpResponse(status=302, content_type=content_type)
+        redirect['Location'] = url
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        """
+
+        redirect = HttpResponse(content_type=content_type) # si no funcionara => redirect = HttpResponse(mimetype='application/force-download')
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        redir = urllib2.urlopen(url)
+        status = redir.getcode()
+        resp = redir.read()
+        if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, redir.geturl(), redir.info()))
+        redirect.write(resp)
+
+        return redirect
 
 
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def action_request_file(request):
+def download_file(request):
     form = RequestFileForm(request.GET)
 
     if form.is_valid():
@@ -38,8 +87,6 @@ def action_request_file(request):
             response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
             response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
         except Exception:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.error(dataset_revision.end_point)
     else:
         response = dict(
@@ -54,7 +101,9 @@ def action_request_file(request):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def index(request):
-    """ List all Datasets """
+    """ List all Datasets
+    :param request:
+    """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
     filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
@@ -65,7 +114,7 @@ def index(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     user_id = request.auth_manager.id
@@ -83,7 +132,11 @@ def action_view(request, revision_id):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
-    """ filter resources """
+    """ filter resources
+    :param itemsxpage:
+    :param page:
+    :param request:
+    """
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
@@ -109,9 +162,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 
     if bb_request.get('collect_type', None) is not None:
         # If File Dataset, set impl_types as valid ones. File = 0
-        if bb_request.get('collect_type') == '0':
+        if bb_request.get('collect_type') in map(lambda x: str(x), COLLECT_TYPE_FILTERABLES):
             exclude = {
-                'dataset__type': bb_request.get('collect_type'),
+                'dataset__type__in': COLLECT_TYPE_FILTERABLES,
                 'impl_type__in': DATASTREAM_IMPL_NOT_VALID_CHOICES
             }
 
@@ -143,7 +196,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         filter_name=filter_name,
         exclude=exclude
     )
-
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -159,10 +211,16 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def get_filters_json(request):
-    """ List all Filters available """
+    """ List all Filters available
+    :param request:
+    """
+    if settings.DEBUG: logger.info('GET FILTERs')
     filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
-    return JSONHttpResponse(json.dumps(filters))
+                                    
+    response = DefaultDictToJson().render(data=filters) # normalize=True #TODO check
+    
+    return HttpResponse(response, mimetype="application/json")
 
 
 @requires_review
@@ -170,8 +228,12 @@ def get_filters_json(request):
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
 def remove(request, dataset_revision_id, type="resource"):
+    """ remove resource
+    :param type:
+    :param dataset_revision_id:
+    :param request:
+    """
 
-    """ remove resource """
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
     if type == 'revision':
@@ -182,18 +244,25 @@ def remove(request, dataset_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
-        
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
+        # Send signal
+        dataset_rev_removed.send(sender='remove_view', id=dataset_revision_id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
         
     else:
         lifecycle.remove(killemall=True)
 
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
+        # Send signal
+        dataset_removed.send(sender='remove_view', id=lifecycle.dataset.id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
 
 
@@ -207,6 +276,7 @@ def create(request, collect_type='index'):
     auth_manager = request.auth_manager
     account_id = auth_manager.account_id
     language = auth_manager.language
+    extensions_list = SOURCE_EXTENSION_LIST
 
     # TODO: Put line in a common place
     collect_types = {'index': -1, 'file': 0, 'url': 1, 'webservice': 2}
@@ -252,6 +322,7 @@ def edit(request, dataset_revision_id=None):
     auth_manager = request.auth_manager
     language = request.auth_manager.language
     user_id = request.auth_manager.id
+    extensions_list = SOURCE_EXTENSION_LIST
 
     # TODO: Put line in a common place
     collect_types = {0: 'file', 1: 'url', 2: 'webservice'}
@@ -259,10 +330,21 @@ def edit(request, dataset_revision_id=None):
     # TODO: Review. Category was not loading options from form init.
     category_choices = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
 
+    # Get data set and the right template depending on the collected type
+    dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
+
+    initial_values = dict(
+        # Dataset Form
+        dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
+        category=dataset.get('category_id'), status=dataset.get('status'),
+        notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
+        impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
+        frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
+        tags=dataset.get('tags')
+    )
+
     if request.method == 'GET':
         status_options = auth_manager.get_allowed_actions()
-        # Get data set and the right template depending on the collected type
-        dataset = DatasetDBDAO().get(language=language, dataset_revision_id=dataset_revision_id)
         url = 'editDataset/{0}.html'.format(collect_types[dataset['collect_type']])
 
 
@@ -275,18 +357,7 @@ def edit(request, dataset_revision_id=None):
         className = ''.join(str(elem) for elem in className)
         mod = __import__('workspace.manageDatasets.forms', fromlist=[className])
 
-        initial_values = dict(
-            # Dataset Form
-            dataset_id=dataset.get('id'), title=dataset.get('title'), description=dataset.get('description'),
-            category=dataset.get('category_id'), status=dataset.get('status'),
-            notes=dataset.get('notes'), file_name=dataset.get('filename'), end_point=dataset.get('end_point'),
-            impl_type=dataset.get('impl_type'), license_url=dataset.get('license_url'), spatial=dataset.get('spatial'),
-            frequency=dataset.get('frequency'), mbox=dataset.get('mbox'), sources=dataset.get('sources'),
-            tags=dataset.get('tags')
-        )
-
         form = getattr(mod, className)(status_options=status_options)
-
         form.label_suffix = ''
         form.fields['category'].choices = category_choices
         form.initial = initial_values
@@ -298,11 +369,17 @@ def edit(request, dataset_revision_id=None):
             request, account_id=account_id, language=language, status_choices=auth_manager.get_allowed_actions()
         )
 
+        # Agrego los valores iniciales para que el changed_data de correctamente
+        form.initial = initial_values
+
         if form.is_valid():
             lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
             dataset_revision = lifecycle.edit(collect_type=request.POST.get('collect_type'),
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
+
+            # Signal
+            dataset_changed.send_robust(sender='edit_view', id=dataset_revision.dataset.id)
 
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
@@ -313,7 +390,7 @@ def edit(request, dataset_revision_id=None):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     language = request.auth_manager.language
     dataset_id = request.GET.get('dataset_id', '')
 
@@ -352,6 +429,10 @@ def change_status(request, dataset_revision_id=None):
 
         if action == 'approve':
             lifecycle.accept()
+
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -361,6 +442,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'reject':
             lifecycle.reject()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -370,6 +453,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -384,6 +469,11 @@ def change_status(request, dataset_revision_id=None):
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
+
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+
             response = dict(
                 status='ok',
                 messages={
@@ -393,6 +483,8 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
+            # Signal
+            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -416,7 +508,7 @@ def change_status(request, dataset_revision_id=None):
 @login_required
 @require_privilege("workspace.can_create_datastream")
 @require_http_methods(["GET"])
-def check_source_url(request):
+def check_endpoint_url(request):
 
     mimetype_form = MimeTypeForm(request.GET)
     status = ''

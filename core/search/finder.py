@@ -9,18 +9,20 @@ from core.utils import slugify
 from core import helpers, choices
 from core.exceptions import SearchIndexNotFoundException
 
+logger = logging.getLogger(__name__)
+
+
 class FinderManager:
 
     def __init__(self):
-        self.logger = logging.getLogger(__name__)
         self.finder = None
-        self.logger.info('FinderManager start in %s (index: %s)' % (str(settings.SEARCH_INDEX['url']), settings.SEARCH_INDEX['index']))
+        logger.info('FinderManager start in %s (index: %s)' % (str(settings.SEARCH_INDEX['url']), settings.SEARCH_INDEX['index']))
 
     def get_finder(self):
         if not self.finder:
             self.finder = self.finder_class()
 
-        self.logger.info('FinderManager return %s finder' % self.finder)
+        logger.info('FinderManager return %s finder' % self.finder)
         return self.finder
 
     def get_failback_finder(self):
@@ -37,7 +39,33 @@ class FinderManager:
             return self.get_failback_finder().search(*args, **kwargs)
 
 from core.lib.elastic import ElasticsearchIndex
-from core.lib.searchify import SearchifyIndex
+
+try:
+    from core.lib.searchify import SearchifyIndex
+except ImportError:
+    logger.warning("ImportError: No module named indextank.client.")
+
+class FinderQuerySet(object):
+    def __init__(self, finder, *args, **kwargs):
+        self.values = {}
+        self.finder = finder
+        for key, value in kwargs.items():
+            self.values[key] = value
+        
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            start = 0 if key.start is None else key.start
+            stop = 0 if key.stop is None else key.stop
+            limit = int(stop-start)
+            page = int(start / limit) + 1 if limit else 1
+            self.results, self.search_time, self.facets = self.finder.search(
+                slice=limit, page=page, **self.values)
+            return self.results
+
+    def __len__(self):
+        if not hasattr(self, 'search_time'):
+            self[0:25]
+        return self.search_time['count']
 
 class Finder:
 
@@ -45,8 +73,7 @@ class Finder:
 
     def __init__(self):
 
-        self.logger = logging.getLogger(__name__)
-        self.logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
+        logger.info('New %sIndex INIT' % settings.USE_SEARCHINDEX)
         if settings.USE_SEARCHINDEX == 'searchify':
             self.index = SearchifyIndex()
         elif settings.USE_SEARCHINDEX == 'elasticsearch':
@@ -91,6 +118,17 @@ class Finder:
 
         self.terms = [ subquery for subquery in self.terms if subquery ]
 
+    def get_id_name(self, r):
+        if r == 'ds':
+            return "datastream_id"
+        elif r == 'db':
+            return "dashboard_id"
+        elif r == 'vz':
+            return "visualization_id"
+        elif r == 'dt':
+            return "dataset_id"
+
+
     def get_dictionary(self, doc):
         if doc['type'] == 'ds':
             return self.get_datastream_dictionary(doc)
@@ -131,7 +169,7 @@ class Finder:
         dataset_id = document['dataset_id']
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('manageDatasets.action_view', urlconf='microsites.urls', kwargs={'dataset_id': dataset_id,'slug': slug})
+        permalink = reverse('manageDatasets.view', urlconf='microsites.urls', kwargs={'dataset_id': dataset_id,'slug': slug})
 
         dataset = dict(id=dataset_id, revision_id=document['datasetrevision_id'], title=title, description=document['description'], parameters=parameters,
                           tags=[ tag.strip() for tag in document['tags'].split(',') ], permalink=permalink,
@@ -154,7 +192,7 @@ class Finder:
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('chart_manager.action_view',  urlconf='microsites.urls',
+        permalink = reverse('chart_manager.view',  urlconf='microsites.urls',
             kwargs={'id': document['visualization_id'], 'slug': slug})
 
         visualization = dict(id=document['visualization_id'], revision_id=document['visualization_revision_id'], title=title, description=document['description'],
@@ -168,7 +206,7 @@ class Finder:
 
         title = document['title']
         slug = slugify(title)
-        permalink = reverse('dashboard_manager.action_view',  urlconf='microsites.urls',
+        permalink = reverse('dashboard_manager.view',  urlconf='microsites.urls',
             kwargs={'id': document['dashboard_id'], 'slug': slug})
 
         dashboard_dict = dict (id=document['dashboard_id'], title=title, description=document['description'],
