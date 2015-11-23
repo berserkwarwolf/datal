@@ -150,16 +150,14 @@
 
 <script type="text/template" id="selection_template">
   <h4>Data selection</h4>
-  <button>Add All</button>  
-  <button>Filter Columns</button>  
-  <button>Filter Rows</button>  
+
+  <button class="button btn-clear">Clear</button>
+
   <div class="col-xs-8">
     <ul>
     <% _.each(collection, function (item) { %>
       <li>
-        <span> <%= item.excelRange %></span>
-        <button>Add</button>
-        <button>Remove</button>
+        <span> <%= item.mode %> <%= item.excelRange %></span>
       </li>
 
     <% }); %>

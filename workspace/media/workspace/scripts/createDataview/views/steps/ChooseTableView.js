@@ -21,7 +21,7 @@ var ChooseTableView = Backbone.View.extend({
             readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
             allowInsertRow: false,
             allowInsertColumn: false,
-            disableVisualSelection: ['current'],
+            disableVisualSelection: ['current', 'area'],
             colWidths: 80,
             manualColumnResize: true,
             manualRowResize: true,

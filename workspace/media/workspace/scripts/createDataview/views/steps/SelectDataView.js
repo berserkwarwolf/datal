@@ -4,9 +4,6 @@ var SelectDataView = Backbone.View.extend({
     initialize: function (options) {
         this.template = _.template( $('#select_data_template').html() );
         this.collection = new DataTableSelectedCollection();
-        this.rangeLatModel = new DataTableSelectionModel({classname: 1, name: 'range_lat', notEmpty: true});
-
-        this.collection.reset([this.rangeLatModel]);
 
         this.datasetModel = options.datasetModel;
     },
@@ -19,13 +16,16 @@ var SelectDataView = Backbone.View.extend({
             collection: this.collection,
             dataview: {
                 rows: this.datasetModel.get('tables')[0]
-            }
+            },
+            enableFulllRowSelection: true
         });
         this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            this.addSelection(this._cacheFocusedInput);
+            // console.log('afterSelection', range);
+            // this.addSelection();
         }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
-            this.addSelection(this._cacheFocusedInput);
+            // console.log('afterSelectionEnd');
+            this.addSelection();
         }, this);
 
         this.dataTableView.render();
@@ -37,11 +37,39 @@ var SelectDataView = Backbone.View.extend({
         this.selectionView.render();
     },
 
-    addSelection: function (name) {
+    addSelection: function () {
         var selection = this.dataTableView.getSelection(),
-            model = this.collection.find(function (model) {
-                return model.get('name') === name;
-            });
+            model;
+        console.log('selection.mode:', selection.mode)
+        if (selection.mode === 'col') {
+            model = new DataTableSelectionModel({classname: 1});
+        } else if (selection.mode === 'row') {
+            model = new DataTableSelectionModel({classname: 2});
+        } else if (selection.mode === 'table') {
+            model = new DataTableSelectionModel({classname: 3});
+        } else if (selection.mode === 'cell') {
+            model = new DataTableSelectionModel({classname: 4});
+        } else {
+            return;
+        }
+
         model.set(selection);
+        var existing = this.checkExisting(model);
+        if (existing) {
+            this.collection.remove(existing);
+        } else {
+            this.collection.add(model);
+        }
+    },
+
+    checkExisting: function (model) {
+        var items = this.collection.filter(function (item) {
+            return item.get('mode') === model.get('mode');
+        });
+        var existing = _.find(items, function (item) {
+            return model.get('excelRange') === item.get('excelRange');
+        });
+        return existing;
     }
+
 });
