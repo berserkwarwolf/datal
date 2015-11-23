@@ -17,4 +17,4 @@ var SelectionView = Backbone.View.extend({
     onClickClear: function () {
         this.collection.reset();
     }
-})
+});

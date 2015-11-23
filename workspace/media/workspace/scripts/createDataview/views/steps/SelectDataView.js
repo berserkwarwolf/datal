@@ -1,5 +1,11 @@
 var SelectDataView = Backbone.View.extend({
+
+    events: {
+        'click button.btn-headers': 'onClickHeaders'
+    },
+
     _cacheFocusedInput: 'range_lat',
+    _mode: 'data',
 
     initialize: function (options) {
         this.template = _.template( $('#select_data_template').html() );
@@ -33,23 +39,29 @@ var SelectDataView = Backbone.View.extend({
             collection: this.collection
         });
         this.selectionView.render();
+        this.listenTo(this.selectionView, 'headers', this.onSelectHeaders, this);
     },
 
     addSelection: function () {
         var selection = this.dataTableView.getSelection(),
             model;
-        console.log('selection.mode:', selection.mode)
-        if (selection.mode === 'col') {
-            model = new DataTableSelectionModel({classname: 1});
-        } else if (selection.mode === 'row') {
-            model = new DataTableSelectionModel({classname: 2});
-        } else if (selection.mode === 'table') {
-            model = new DataTableSelectionModel({classname: 3});
-        } else if (selection.mode === 'cell') {
-            model = new DataTableSelectionModel({classname: 4});
-        } else {
-            return;
-        }
+
+        if (this._mode === 'data') {            
+
+            if (selection.mode === 'col') {
+                model = new DataTableSelectionModel({classname: 1});
+            } else if (selection.mode === 'row') {
+                model = new DataTableSelectionModel({classname: 2});
+            } else if (selection.mode === 'table') {
+                model = new DataTableSelectionModel({classname: 3});
+            } else if (selection.mode === 'cell') {
+                model = new DataTableSelectionModel({classname: 4});
+            } else {
+                return;
+            }
+        } else if (this._mode === 'headers') {
+            model = new DataTableSelectionModel({classname: 5});
+        };
 
         model.set(selection);
         var existing = this.checkExisting(model);
@@ -68,6 +80,10 @@ var SelectDataView = Backbone.View.extend({
             return model.get('excelRange') === item.get('excelRange');
         });
         return existing;
+    },
+
+    onClickHeaders: function () {
+        this._mode = 'headers';
     },
 
     isValid: function () {
