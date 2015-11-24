@@ -194,7 +194,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             ## Aca deberia ir lo mismo que los ds, pero para las vz?
 
             if publish_fail:
-                raise ChildNotApprovedException(self.dataset.last_revision)
+                raise ChildNotApprovedException(self.dataset.last_revision, settings.TYPE_DATASTREAM)
 
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """

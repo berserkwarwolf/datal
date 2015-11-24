@@ -148,7 +148,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(visualization_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(self.datastream.last_revision)
+                raise ChildNotApprovedException(self.datastream.last_revision.dataset.last_revision, 
+                                                settings.TYPE_VISUALIZATION)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES, to_status=StatusChoices.DRAFT):
         """ Despublica la revision de un dataset """

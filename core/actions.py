@@ -49,8 +49,12 @@ class ViewDatasetExceptionAction(ExceptionAction):
         super(ViewDatasetExceptionAction, self).__init__(url)
 
 
-class ReviewDatasetStreamsAndPublishExceptionAction(ViewDatasetExceptionAction):
-    description = _('EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH')
+class ReviewAssociatedResources(ViewDatasetExceptionAction):
+    description = _('EXCEPTION-ACTION-ASSOCIATED-RESOURCES')
+
+    def __init__(self, revision):
+        super(ReviewAssociatedResources, self).__init__(revision)
+        self.url = self.url + "#related-resources"
 
 
 class ViewDatasetListExceptionAction(ExceptionAction):

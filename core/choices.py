@@ -1,7 +1,7 @@
 from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
 from model_utils import Choices
-
+from django.conf import settings
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -42,6 +42,12 @@ MAP_TYPE_FIELD = (
 VISUALIZATION_LIBS = (
     ('google', 'Google Charts'),
     ('d3', 'D3')
+)
+
+RESOURCES_CHOICES = (
+    (settings.TYPE_DATASET, ugettext_lazy('MODEL_DATASET_LABEL')),
+    (settings.TYPE_DATASTREAM, ugettext_lazy('MODEL_DATASTREAM_LABEL')),
+    (settings.TYPE_VISUALIZATION, ugettext_lazy('MODEL_VISUALIZATION_LABEL')),
 )
 
 class AccountRoles():

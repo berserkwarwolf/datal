@@ -3,7 +3,8 @@
 from django.utils.translation import ugettext_lazy as _
 # from django.core.urlresolvers import reverse
 from core.actions import *
-
+from django.conf import settings
+from core.choices import RESOURCES_CHOICES
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from django.template import Context, Template
@@ -91,14 +92,19 @@ class ChildNotApprovedException(LifeCycleException):
     tipo = 'child-not-approved'
     _context = {
         'count': 0,
+        'resource_type': settings.TYPE_DATASTREAM 
     }
 
-    def __init__(self, revision):
+    def __init__(self, revision, resource_type):
         self.revision = revision
-        super(ChildNotApprovedException, self).__init__()
+        for tipo, texto in RESOURCES_CHOICES:
+            if resource_type == tipo:
+                self.resource_type = texto
+                break 
+        super(ChildNotApprovedException, self).__init__(resource_type=self.resource_type)
 
     def get_actions(self):
-        return [ReviewDatasetStreamsAndPublishExceptionAction(self.revision)]
+        return [ReviewAssociatedResources(self.revision)]
 
 
 class SaveException(LifeCycleException):
