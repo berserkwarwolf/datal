@@ -1,13 +1,12 @@
 var SelectDataView = Backbone.View.extend({
 
-    events: {
-        'click button.btn-headers': 'onClickHeaders'
-    },
-
-    _cacheFocusedInput: 'range_lat',
     _mode: 'data',
 
     initialize: function (options) {
+        this.internalState = new Backbone.Model({
+            mode: 'data'
+        });
+
         this.template = _.template( $('#select_data_template').html() );
         this.datasetModel = options.datasetModel;
     },
@@ -36,7 +35,8 @@ var SelectDataView = Backbone.View.extend({
 
         this.selectionView = new SelectionView({
             el: this.$('.selection-view'),
-            collection: this.collection
+            collection: this.collection,
+            model: this.internalState
         });
         this.selectionView.render();
         this.listenTo(this.selectionView, 'headers', this.onSelectHeaders, this);
@@ -46,7 +46,7 @@ var SelectDataView = Backbone.View.extend({
         var selection = this.dataTableView.getSelection(),
             model;
 
-        if (this._mode === 'data') {            
+        if (this.internalState.get('mode') === 'data') {
 
             if (selection.mode === 'col') {
                 model = new DataTableSelectionModel({classname: 1});
@@ -59,8 +59,9 @@ var SelectDataView = Backbone.View.extend({
             } else {
                 return;
             }
-        } else if (this._mode === 'headers') {
+        } else if (this.internalState.get('mode') === 'headers') {
             model = new DataTableSelectionModel({classname: 5});
+            selection.mode = 'header';
         };
 
         model.set(selection);
@@ -80,10 +81,6 @@ var SelectDataView = Backbone.View.extend({
             return model.get('excelRange') === item.get('excelRange');
         });
         return existing;
-    },
-
-    onClickHeaders: function () {
-        this._mode = 'headers';
     },
 
     isValid: function () {

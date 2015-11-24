@@ -227,6 +227,19 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 
 .handsontable td.area{background:$modal-table-selected-color;}
 
+/* Identificador por color */
+.hot-sel-1,
+.hot-sel-2,
+.hot-sel-3,
+.hot-sel-4{
+	margin-top:10px;
+	
+	span.color{
+	  float:left;height:30px;margin-right:10px;width:5px;
+	}
+}
+
+
 .hot-sel-1 span.color,
 td.hot-sel-1{background-color:#86ad7f;}
 

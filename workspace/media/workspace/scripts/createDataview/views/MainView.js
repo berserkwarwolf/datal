@@ -16,7 +16,9 @@ var MainView = Backbone.View.extend({
         });
         this.datasetModel.fetch();
 
-        this.dataviewModel = new DataviewModel();
+        this.dataviewModel = new DataviewModel({
+            dataset_revision_id: options.dataset_revision_id
+        });
 
         this.listenToOnce(this.datasetModel, 'change:tables', function () {
             this.render();

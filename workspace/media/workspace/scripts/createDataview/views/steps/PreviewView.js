@@ -1,12 +1,5 @@
 var PreviewView = Backbone.View.extend({
 
-    typeToRenderer: {
-        TEXT: 'selectedTextRenderer',
-        LINK: 'selectedLinkRenderer',
-        NUMBER: 'selectedNumericRenderer',
-        DATE: 'selectedDateRenderer'
-    },
-
     initialize: function () {
         this.template = _.template( $('#preview_dataview_template').html() );
         this.model.fetch();

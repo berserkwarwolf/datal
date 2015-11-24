@@ -106,7 +106,6 @@ var DataTableView = Backbone.View.extend({
           to: {row: r2, col: c2}
         });
       }
-      console.log('Table: afterSelection', r1, c1, r2, c2);
       self.triggerAfterSelection();
     });
     this.table.addHook('afterDeselect', function () {

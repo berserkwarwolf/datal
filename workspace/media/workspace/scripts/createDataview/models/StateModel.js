@@ -10,5 +10,5 @@ var StateModel = Backbone.Model.extend({
         if (step > 0) {
             this.set('step', step - 1);
         }
-    } 
+    }
 });
