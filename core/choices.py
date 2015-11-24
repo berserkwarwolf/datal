@@ -102,8 +102,10 @@ STATUS_CHOICES = Choices(
 STATUS_CHOICES_REST = Choices(
     (StatusChoices.DRAFT, "draft"),
     (StatusChoices.PENDING_REVIEW, "pending"),
+    (StatusChoices.UNDER_REVIEW, "under_review"),
     (StatusChoices.APPROVED, "approved"),
     (StatusChoices.PUBLISHED, "published"),
+    (StatusChoices.UNPUBLISHED, "unpublished"),
     (StatusChoices.REJECTED, "rejected")
     )
 
