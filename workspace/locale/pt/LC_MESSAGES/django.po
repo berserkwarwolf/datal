@@ -1363,6 +1363,9 @@ msgstr "Url"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Keywords to help identify your data view content. Separate the tags with commas"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Keywords to help identify your dataset content. Separate the tags with commas"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Recomended Tags"
 

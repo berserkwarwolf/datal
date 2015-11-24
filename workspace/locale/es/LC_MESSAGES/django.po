@@ -1345,6 +1345,9 @@ msgstr "URL"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu vista"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Palabras clave para ayudar a identificar el contenido de tu conjunto de datos"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Etiquetas Recomendadas"
 
