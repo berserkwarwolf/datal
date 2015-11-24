@@ -182,7 +182,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         return datastream
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(
@@ -207,8 +208,15 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
 
-        if filter_status:
-            query = query.filter(status__in=fileter_status)
+        if filter_status is not None:
+            query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(datastreami18n__title__icontains=filter_text) | 
+                                 Q(datastreami18n__description__icontains=filter_text))
 
         total_resources = query.count()
         query = query.values(
@@ -219,6 +227,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'datastream__guid',
             'category__id',
             'datastream__id',
+            'category__categoryi18n__slug',
             'category__categoryi18n__name',
             'datastreami18n__title',
             'datastreami18n__description',
