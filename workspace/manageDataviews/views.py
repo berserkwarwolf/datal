@@ -212,7 +212,7 @@ def create(request):
         form = CreateDataStreamForm(request.POST)
 
         if not form.is_valid():
-            raise DatastreamSaveException('Invalid form data: %s' % str(form.errors.as_text()))
+            raise DatastreamSaveException(form)
 
         dataset_revision = DatasetRevision.objects.get(pk=form.cleaned_data['dataset_revision_id'])
 
