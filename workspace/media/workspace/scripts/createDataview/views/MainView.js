@@ -35,31 +35,30 @@ var MainView = Backbone.View.extend({
             step = this.stateModel.get('step');
 
         if (this.currentView) {
-            this.currentView.$el.empty();
+            this.currentView.remove();
             delete this.currentView;
         }
         if (step === 0) {
             this.currentView = new SelectDataView({
-                el: this.$('.select-data-view'),
                 datasetModel: this.datasetModel,
                 collection: this.dataviewModel.selection,
                 model: this.dataviewModel
             });
+            
         } else if (step === 1) {
             this.currentView = new MetadataView({
-                el: this.$('.metadata-view'),
                 model: this.dataviewModel
             });
             this.listenTo(this.currentView, 'valid', this.enable, this);
         } else if (step === 2) {
             this.currentView = new PreviewView({
-                el: this.$('.preview-view'),
                 model: this.dataviewModel
             });
         };
+        this.$('.current-step').append(this.currentView.$el);
 
-        this.stepBarView.render();
         this.currentView.render();
+        this.stepBarView.render();
     },
 
     onClickNext: function () {

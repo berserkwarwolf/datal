@@ -5,19 +5,25 @@ var SelectDataView = Backbone.View.extend({
     },
 
     initialize: function (options) {
+        var tableId = this.model.get('tableId');
+
+        this.datasetModel = options.datasetModel;
         this.internalState = new Backbone.Model({
             mode: 'data'
         });
 
         this.template = _.template( $('#select_data_template').html() );
-        this.datasetModel = options.datasetModel;
+
+        this.$el.html(this.template({tables: [1,2,3]}));
+        this.$('.select-table').val(tableId);
     },
 
     render: function () {
         var tableId = this.model.get('tableId');
 
-        this.$el.html(this.template({tables: [1,2,3]}));
-        this.$('.select-table').val(tableId);
+        if (this.dataTableView) {
+            this.dataTableView.$('.table-view').empty();
+        }
 
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
@@ -32,12 +38,16 @@ var SelectDataView = Backbone.View.extend({
         }, this);
         this.dataTableView.render();
 
+        if (this.selectionView) {
+            this.selectionView.remove();
+            delete this.selectionView;
+        }
         this.selectionView = new SelectionView({
-            el: this.$('.selection-view'),
             collection: this.collection,
             model: this.internalState
         });
         this.selectionView.render();
+        this.$('.selection-view').append(this.selectionView.$el);
     },
 
     addSelection: function () {
@@ -63,6 +73,8 @@ var SelectDataView = Backbone.View.extend({
         };
 
         model.set(selection);
+
+        // TODO: Esta funcionalidad deberia estar encapsulada en collection.toggleModel()
         var existing = this.checkExisting(model);
         if (existing) {
             this.collection.remove(existing);

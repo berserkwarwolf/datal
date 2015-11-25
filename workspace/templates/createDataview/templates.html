@@ -1,26 +1,11 @@
 {% load i18n extra_tags core_components components %}
 
-<script type="text/template" id="choose_table_template">
-  <div class="col-xs-2 tables-select-view">
-    <h4>Seleccione una tabla</h4>
-    <select class="select-table">
-      <% _(tables).each(function(table){ %>
-        <option value="<%= table %>"><%= table %></option>
-        <% }); %>
-    </select>
-  </div>
-  <div class="col-xs-10">
-    <h4>Tabla seleccionada</h4>
-    <div class="table-container"></div>
-  </div>
-</script>
-
 <script type="text/template" id="select_data_template">
   <div class="col-xs-3">
     <h2>Página / Tabla del dataset</h2>
     <select class="select-table">
       <% _(tables).each(function(table){ %>
-        <option value="<%= table %>"><%= table %></option>
+        <option value="<%= table %>">Hoja número <%= table %></option>
         <% }); %>
     </select>
 
