@@ -130,8 +130,9 @@ var DataTableView = Backbone.View.extend({
     var self = this;
     this.table.loadData(this.data);
     _.each(this.collection.models, function (model) {
-      self.onAddSelected(model);
+      self.onAddSelected(model, false);
     });
+    this.table.render();
   },
 
   cacheSelection: function (coords) {
@@ -237,12 +238,14 @@ var DataTableView = Backbone.View.extend({
     };
   },
 
-  onAddSelected: function (model) {
+  onAddSelected: function (model, render) {
     var range = model.getRange();
     if (!range) return;
     var cells = this.coordsToCells(range);
     this._addCellsMeta(cells, model.get('classname'));
-    this.table.render();
+    if (!_.isUndefined(render) && render) {
+      this.table.render();
+    }
   },
 
   onRmSelected: function (model) {
