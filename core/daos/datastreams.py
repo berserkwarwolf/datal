@@ -285,7 +285,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             datastream_id = row[1]
             title = row[2]
             slug = slugify(title)
-            permalink = reverse('datastreams-invoke', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
+            permalink = reverse('datastreams-data', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
             datastreams.append({'id'          : row[0],
                                 'title'        : title,
                                 'description'  : row[3],
