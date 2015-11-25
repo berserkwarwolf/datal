@@ -20,7 +20,7 @@ var DataviewModel = Backbone.Model.extend({
         dataset_revision_id: undefined,
         csrfmiddlewaretoken: '24c4CtkSSEasa0R1l7QnP9DXLDQi7J6C',
 
-        tableId: 0,
+        tableId: 1,
         status: 0,
 
         // TODO: remove this hardcoded params and use the model's data

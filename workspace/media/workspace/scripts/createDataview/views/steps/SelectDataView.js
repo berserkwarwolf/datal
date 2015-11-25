@@ -1,5 +1,9 @@
 var SelectDataView = Backbone.View.extend({
 
+    events: {
+        'change select.select-table': 'onClickSelectTable'
+    },
+
     _mode: 'data',
 
     initialize: function (options) {
@@ -12,13 +16,15 @@ var SelectDataView = Backbone.View.extend({
     },
 
     render: function () {
-        this.$el.html(this.template());
+        this.$el.html(this.template({tables: [1,2,3]}));
+        var tableId = this.model.get('tableId');
+        this.$('.select-table').val(tableId);
 
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
             collection: this.collection,
             dataview: {
-                rows: this.datasetModel.get('tables')[0]
+                rows: this.datasetModel.get('tables')[tableId-1]
             },
             enableFulllRowSelection: true
         });
@@ -39,7 +45,6 @@ var SelectDataView = Backbone.View.extend({
             model: this.internalState
         });
         this.selectionView.render();
-        this.listenTo(this.selectionView, 'headers', this.onSelectHeaders, this);
     },
 
     addSelection: function () {
@@ -81,6 +86,19 @@ var SelectDataView = Backbone.View.extend({
             return model.get('excelRange') === item.get('excelRange');
         });
         return existing;
+    },
+
+    onClickSelectTable: function (e) {
+        e.preventDefault();
+        var $target = $(e.currentTarget),
+            tableId = $target.val();
+
+        this.model.set('tableId', tableId);
+        this.render();
+        console.info('ChooseTableView: selected table with id', tableId);
+
+        // TODO: render this view, highlighting the selected table in the UL
+        // and showing the table on the right panel.
     },
 
     isValid: function () {

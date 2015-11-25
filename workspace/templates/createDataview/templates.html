@@ -1,18 +1,13 @@
 {% load i18n extra_tags core_components components %}
 
 <script type="text/template" id="choose_table_template">
-  <header>
-    <h3>Hacé click sobre los datos que deseas utilizar para seleccionarlos.</h3>
-  </header>
   <div class="col-xs-2 tables-select-view">
     <h4>Seleccione una tabla</h4>
-    <ul>
+    <select class="select-table">
       <% _(tables).each(function(table){ %>
-        <li>
-          <a class="select-table-item" data-table-id="<%= table %>"><%= table %></a>
-        </li>
+        <option value="<%= table %>"><%= table %></option>
         <% }); %>
-    </ul>
+    </select>
   </div>
   <div class="col-xs-10">
     <h4>Tabla seleccionada</h4>
@@ -21,22 +16,22 @@
 </script>
 
 <script type="text/template" id="select_data_template">
-  <header>
-    <h3>Indique las partes especificas de la tabla que necesita</h3>
-  </header>
-  <div class="col-xs-2">
-    <div class="selection-view">
+  <div class="col-xs-3">
+    <h2>Página / Tabla del dataset</h2>
+    <select class="select-table">
+      <% _(tables).each(function(table){ %>
+        <option value="<%= table %>"><%= table %></option>
+        <% }); %>
+    </select>
+
+    <h2>Data selection</h2>
+    <div class="row selection-view">
     </div>
   </div>
 
-  <div class="col-xs-10">
-    <h4>Tabla de datos</h4>
-
-    <div class="data-table-view">
-      <div class="table-view">
-      </div>
+  <div class="col-xs-9 data-table-view">
+    <div class="table-view">
     </div>
-
   </div>
 </script>
 
@@ -100,26 +95,21 @@
 
 <script type="text/template" id="step_bar_template">
   <div class="col-xs-8">
-    <h1 class="sub-heading">Create Dataview</h1>
+    <h1 class="sub-heading">Crear una vista</h1>
 
     <div class="buttons_view_container">
       <ul class="buttons-bar">
         <li class="step step-0">
-          <a title="First Step">First Step</a>
+          <a title="Selección de datos">1. Selección de datos</a>
         </li>
         <% if (step > 0) {%>
         <li class="step step-1">
-          <a title="Second Step">Second Step</a>
+          <a title="Descripción">2. Descripción</a>
         </li>
         <% } %>
         <% if (step > 1) {%>
         <li class="step step-2">
-          <a title="Third Step">Third Step</a>
-        </li>
-        <% } %>
-        <% if (step > 2) {%>
-        <li class="step step-3">
-          <a title="Fourth Step">Fourth Step</a>
+          <a title="Revisión">3. Revisión</a>
         </li>
         <% } %>
       </ul>
@@ -127,23 +117,26 @@
   </div>
   <div class="col-xs-4 context-buttons clearfix">
     <div class="pull-right">
-      <a class="button alpha btn-prev">Back</a>
-      <% if (step < 3) {%>
-      <a class="button primary btn-next">Next</a>
+      <% if (step === 0) {%>
+      <a href="/dataviews/" class="button alpha">Cancelar</a>
+      <% } else { %>
+      <a class="button alpha back btn-prev">Retroceder</a>
       <% } %>
-      <% if (step === 3) {%>
-        <a class="button primary btn-save">Save</a>
+      <% if (step < 2) {%>
+      <a class="button primary next btn-next">Continuar</a>
+      <% } %>
+      <% if (step === 2) {%>
+        <a class="button primary btn-save">Guardar</a>
       <% } %>
     </div>
   </div>
 </script>
 
 <script type="text/template" id="selection_template">
-  <h3>Data selection</h3>
 
   <% if (columns.length > 0) { %>
     <div class="row hot-sel-1">
-    <h4>Columns</h4>
+    <h6>Columns</h6>
     <span class="color"></span>
       <% _.each(columns, function (item) { %>
         <span><%= item.excelRange %>;</span>
@@ -153,7 +146,7 @@
 
   <% if (rows.length > 0) { %>
     <div class="row hot-sel-2">
-    <h4>Rows</h4>
+    <h6>Rows</h6>
     <span class="color"></span>
       <% _.each(rows, function (item) { %>
         <span><%= item.excelRange %>;</span>
@@ -163,7 +156,7 @@
 
   <% if (cells.length > 0) { %>
     <div class="row hot-sel-3">
-    <h4>Cells</h4>
+    <h6>Cells</h6>
     <span class="color"></span>
       <% _.each(cells, function (item) { %>
         <span><%= item.excelRange %>;</span>
@@ -173,7 +166,7 @@
 
   <% if (headers.length > 0) { %>
     <div class="row hot-sel-4">
-    <h4>Headers</h4>
+    <h6>Headers</h6>
     <span class="color"></span>
       <% _.each(headers, function (item) { %>
         <span><%= item.excelRange %>;</span>
@@ -190,7 +183,7 @@
 
   <h3>Advanced options</h3>
 
-  <h4>Headers</h4>
+  <h6>Headers</h6>
   <% if (state.mode === 'headers') { %>
     <button class="btn-headers">Done</button>
     <button class="btn-cancel">Cancel</button>
