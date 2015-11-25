@@ -196,17 +196,20 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ## Datastreams
 
         # solo obtenemos los id de las ultimas revisiones
-        last_revision_ids=list(set([x["datastream__last_revision"] for x in DataStreamRevision.objects.select_related().filter(dataset__id=dataset_id, datastreami18n__language=language).values("datastream__last_revision")]))
-
-        query = DataStreamRevision.objects.select_related().filter(
-            id__in=last_revision_ids, # filtramos por los ids de las ultimas revisiones
-            ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
-                 'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
-                 'datastream__last_published_revision')
+        last_revision_ids=list(set([x["datastream__last_revision"] 
+            for x in DataStreamRevision.objects.
+                filter(dataset__id=dataset_id,
+                        datastreami18n__language=language).values("datastream__last_revision")]))
 
         # si se pasa un Status (pensado para microsites)
+        query = DataStreamRevision.objects.select_related().filter(
+                # filtramos por los ids de las ultimas revisiones
+                id__in=last_revision_ids)
+
         if status:
-            query=query.filter(status=status)
+            query=query.filter(datastream__last_published_revision__in=last_revision_ids)
+
+        query=query.values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick', 'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id', 'datastream__last_published_revision')
 
         # ordenamos desde el mas viejo
         related['datastreams'] = query.order_by("created_at")
