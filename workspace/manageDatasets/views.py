@@ -537,7 +537,7 @@ def query_childs(request, revision_id):
 
     language = request.auth_manager.language
     dataset_revision = DatasetRevision.objects.get(pk=revision_id)
-    print dataset_revision.dataset.id
+
     try:
         childs = DatasetDBDAO().query_childs(language=language, dataset_id=dataset_revision.dataset.id)
     except DatasetRevision.DoesNotExist:
