@@ -4,8 +4,6 @@ var SelectDataView = Backbone.View.extend({
         'change select.select-table': 'onClickSelectTable'
     },
 
-    _mode: 'data',
-
     initialize: function (options) {
         this.internalState = new Backbone.Model({
             mode: 'data'
@@ -16,8 +14,9 @@ var SelectDataView = Backbone.View.extend({
     },
 
     render: function () {
-        this.$el.html(this.template({tables: [1,2,3]}));
         var tableId = this.model.get('tableId');
+
+        this.$el.html(this.template({tables: [1,2,3]}));
         this.$('.select-table').val(tableId);
 
         this.dataTableView = new DataTableView({
@@ -28,15 +27,9 @@ var SelectDataView = Backbone.View.extend({
             },
             enableFulllRowSelection: true
         });
-        this.listenTo(this.dataTableView, 'afterSelection', function (range) {
-            // console.log('afterSelection', range);
-            // this.addSelection();
-        }, this);
         this.listenTo(this.dataTableView, 'afterSelectionEnd', function () {
-            // console.log('afterSelectionEnd');
             this.addSelection();
         }, this);
-
         this.dataTableView.render();
 
         this.selectionView = new SelectionView({
@@ -89,16 +82,11 @@ var SelectDataView = Backbone.View.extend({
     },
 
     onClickSelectTable: function (e) {
-        e.preventDefault();
         var $target = $(e.currentTarget),
             tableId = $target.val();
 
         this.model.set('tableId', tableId);
         this.render();
-        console.info('ChooseTableView: selected table with id', tableId);
-
-        // TODO: render this view, highlighting the selected table in the UL
-        // and showing the table on the right panel.
     },
 
     isValid: function () {
