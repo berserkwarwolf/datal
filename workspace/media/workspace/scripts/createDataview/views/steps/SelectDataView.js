@@ -1,7 +1,8 @@
 var SelectDataView = Backbone.View.extend({
 
     events: {
-        'change select.select-table': 'onClickSelectTable'
+        'change select.select-table': 'onClickSelectTable',
+        'click button.btn-headers': 'onClickHeaders'
     },
 
     initialize: function (options) {
@@ -16,6 +17,8 @@ var SelectDataView = Backbone.View.extend({
 
         this.$el.html(this.template({tables: [1,2,3]}));
         this.$('.select-table').val(tableId);
+
+        this.listenTo(this.internalState, 'change:mode', this.onChangeMode, this);
     },
 
     render: function () {
@@ -48,6 +51,18 @@ var SelectDataView = Backbone.View.extend({
         });
         this.selectionView.render();
         this.$('.selection-view').append(this.selectionView.$el);
+
+        if (this.headersOptionsView) {
+            this.headersOptionsView.remove();
+            delete this.headersOptionsView;
+        }
+        this.headersOptionsView = new HeadersOptionsView({
+            collection: this.collection,
+            model: this.internalState
+        });
+        this.headersOptionsView.render();
+        this.headersOptionsView.$el.hide();
+        this.$('.advanced-options-view').append(this.headersOptionsView.$el);
     },
 
     addSelection: function () {
@@ -99,6 +114,26 @@ var SelectDataView = Backbone.View.extend({
 
         this.model.set('tableId', tableId);
         this.render();
+    },
+
+    onClickHeaders: function () {
+        var mode = this.model.get('mode');
+        if (mode === 'headers') {
+            this.model.set('mode', 'data');
+        } else {
+            this.model.set('mode', 'headers');
+        };
+    },
+
+    onChangeMode: function (model, value) {
+        console.info('changed mode to ', value);
+        if (value === 'headers') {
+            this.selectionView.$el.hide();
+            this.headersOptionsView.$el.show();
+        } else {
+            this.selectionView.$el.show();
+            this.headersOptionsView.$el.hide();
+        }
     },
 
     isValid: function () {

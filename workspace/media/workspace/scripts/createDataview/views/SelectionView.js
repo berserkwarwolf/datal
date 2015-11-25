@@ -1,8 +1,9 @@
 var SelectionView = Backbone.View.extend({
     events: {
         'click button.btn-clear': 'onClickClear',
-        'click button.btn-cancel': 'onClickCancel',
-        'click button.btn-headers': 'onClickHeaders'
+        'click button.btn-headers': 'onClickHeaders',
+        'click button.btn-filters': 'onClickFilters',
+        'click button.btn-formats': 'onClickFormats'
     },
 
     initialize: function () {
@@ -28,21 +29,12 @@ var SelectionView = Backbone.View.extend({
         }));
     },
 
-    onClickCancel: function () {
-        this.model.set('mode', 'data');
-    },
-
     onClickClear: function () {
         this.collection.reset();
     },
 
     onClickHeaders: function () {
-        var mode = this.model.get('mode');
-        if (mode === 'headers') {
-            this.model.set('mode', 'data');
-        } else {
-            this.model.set('mode', 'headers');
-        };
+        this.model.set('mode', 'headers');
     },
 
     filter: function (mode) {

@@ -9,8 +9,10 @@
         <% }); %>
     </select>
 
-    <h2>Data selection</h2>
     <div class="row selection-view">
+    </div>
+
+    <div class="row advanced-options-view">
     </div>
   </div>
 
@@ -119,6 +121,12 @@
 
 <script type="text/template" id="selection_template">
 
+<% if (state.mode === 'data') {%>
+
+  <% if (total > 0) { %>
+    <h2>Data selection</h2>
+  <% } %>
+
   <% if (columns.length > 0) { %>
     <div class="row hot-sel-1">
     <h6>Columns</h6>
@@ -160,29 +168,42 @@
   <% } %>
 
   <% if (total > 0) { %>
-  <div>
-    <button class="btn-clear">Clear</button>
-  </div>
+    <div>
+      <button class="btn-clear">Clear</button>
+    </div>
 
-  <hr>
+    <hr>
 
-  <h3>Advanced options</h3>
+    <h2>Advanced options</h2>
 
-  <h6>Headers</h6>
+    <h6>Headers</h6>
+    <button class="btn-headers">Set headers</button>
+    <h6>Filters</h6>
+    <button class="btn-filters">Set filters</button>
+    <h6>Formats</h6>
+    <button class="btn-formats">Set data types and formats</button>
+
+  <% } %>
+
+<% } %>
+</script>
+
+<script type="text/template" id="headers_options_template">
+
+  <button class="button small back btn-back">Atrás</button>
+
+  <h2>Cabeceras de la tabla</h2>
+  <p>Seleccionar las filas de la tabla que representan cabeceras</p>
   <% if (state.mode === 'headers') { %>
-    <button class="btn-headers">Done</button>
-    <button class="btn-cancel">Cancel</button>
-  <% } else { %>
-    <button class="btn-headers">Select headers</button>
+    <button class="button small btn-ok">Ok</button>
+    <button class="button small btn-clear">Limpiar</button>
   <% } %>
 
   <!--
-  <h4>Filters</h4>
+  <h6>Filters</h6>
   <button class="btn-filters">Select headers</button>
-  <h4>Formats</h4>
+  <h6>Formats</h6>
   <button class="btn-formats">Select headers</button>
    -->
-
-  <% } %>
 
 </script>
