@@ -102,17 +102,17 @@ class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     dao_pk = 'datastream_revision_id'
 
     @detail_route(methods=['get'], renderer_classes=[
-        renderers.JSONRenderer,
         renderers.BrowsableAPIRenderer,
+        renderers.JSONRenderer,
         CSVEngineRenderer,
-        XLSEngineRenderer,
+        XLSNonRedirectEngineRenderer,
         TSVEngineRenderer,
         XMLEngineRenderer,
         PJSONEngineRenderer,
         AJSONEngineRenderer,])
     def data(self, request, pk=None, format=None,  *args, **kwargs):
-        if format == 'json':
+        if format == 'json' or not format:
             return self.engine_call(request, 'invoke')
         return self.engine_call(request, 'invoke', format, 
-            serialize=False,
-            form_class=DatastreamRequestForm)
+            serialize=False, form_class=DatastreamRequestForm,
+            download=False)

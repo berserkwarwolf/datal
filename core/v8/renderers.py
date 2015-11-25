@@ -1,5 +1,6 @@
 from rest_framework import renderers
 from babel import numbers, dates
+from rest_framework.renderers import JSONRenderer
 import json
 import datetime
 import sys
@@ -17,16 +18,17 @@ class TSVEngineRenderer(EngineRenderer):
     media_type="text/tab-separated-values"
     format = "tsv"
 
-class PJSONEngineRenderer(EngineRenderer):
-    media_type="application/json"
+class PJSONEngineRenderer(JSONRenderer):
     format = "pjson"
 
-class AJSONEngineRenderer(EngineRenderer):
-    media_type="application/json"
+class AJSONEngineRenderer(JSONRenderer):
     format = "ajson"
 
 class XLSEngineRenderer(EngineRenderer):
     media_type="application/vnd.ms-excel"
+    format = "xls"
+
+class XLSNonRedirectEngineRenderer(JSONRenderer):
     format = "xls"
 
 class XMLEngineRenderer(EngineRenderer):

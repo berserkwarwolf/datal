@@ -11,7 +11,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 class EngineViewSetMixin(object):
-    def engine_call(self, request, engine_method, format=None, is_detail=True, form_class=RequestForm, serialize=True):
+    def engine_call(self, request, engine_method, format=None, is_detail=True, 
+                    form_class=RequestForm, serialize=True, download=True):
         mutable_get = request.GET.copy()
         mutable_get.update(request.POST.copy())
         mutable_get['output'] = 'json'
@@ -51,7 +52,7 @@ class EngineViewSetMixin(object):
 
         serializer = EngineSerializer(resource, 
             context={'dao_filename': self.dao_filename})
-        if 'redirect' in serializer.data and serializer.data['redirect']:
+        if download and 'redirect' in serializer.data and serializer.data['redirect']:
             response = HttpResponse(mimetype='application/force-download')
             response['Content-Disposition'] = 'attachment; filename="{0}"'.format(serializer.data['filename'])
             redir = urllib2.urlopen(serializer.data['result']['fUri'])
@@ -61,11 +62,11 @@ class EngineViewSetMixin(object):
             response.write(resp)
             return response
 
-        response = Response(serializer.data['result'], content_type=result[1])
+        response = Response(serializer.data['result'], content_type=resource['format'])
         
         #TODO hacer una lista de los formatos que esperan forzar una descarga y los que se mostraran en pantalla
         output = mutable_get['output']
-        if output != 'json' and output != 'html': 
+        if download and output not in ['json', 'html']: 
             # reemplazar la extension si la tuviera
             filename = serializer.data['filename']
             name = filename if len(filename.split('.')) == 1 else '.'.join(filename.split('.')[:-1])
