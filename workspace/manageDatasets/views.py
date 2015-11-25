@@ -389,28 +389,6 @@ def edit(request, dataset_revision_id=None):
 
 
 @login_required
-@require_GET
-def retrieve_childs(request):
-    language = request.auth_manager.language
-    dataset_id = request.GET.get('dataset_id', '')
-
-    # For now, we'll fetch datastreams
-    associated_resources = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)
-
-    list_result = []
-    for associated_resource in associated_resources['datastreams']:
-        associated_resource['type'] = 'dataview'
-        list_result.append(associated_resource)
-
-    for associated_resource in associated_resources['visualizations']:
-        associated_resource['type'] = 'visualization'
-        list_result.append(associated_resource)
-
-    dump = json.dumps(list_result, cls=DjangoJSONEncoder)
-    return HttpResponse(dump, mimetype="application/json")
-
-
-@login_required
 @require_POST
 @transaction.commit_on_success
 def change_status(request, dataset_revision_id=None):
@@ -521,3 +499,58 @@ def check_endpoint_url(request):
         return HttpResponse(json.dumps(sources), content_type='application/json')
     else:
         raise Http404
+
+@login_required
+@require_GET
+def retrieve_childs(request):
+    language = request.auth_manager.language
+    dataset_id = request.GET.get('dataset_id', '')
+
+    # For now, we'll fetch datastreams
+    associated_resources = DatasetDBDAO().query_childs(dataset_id=dataset_id, language=language)
+
+    list_result = []
+    for associated_resource in associated_resources['datastreams']:
+        associated_resource['type'] = 'dataview'
+        list_result.append(associated_resource)
+
+    for associated_resource in associated_resources['visualizations']:
+        associated_resource['type'] = 'visualization'
+        list_result.append(associated_resource)
+
+    dump = json.dumps(list_result, cls=DjangoJSONEncoder)
+    return HttpResponse(dump, mimetype="application/json")
+
+
+from workspace.manageDatasets.serializers import ChildDataStreamSerializer, ChildVisualizationSerializer
+from rest_framework.renderers import JSONRenderer
+
+@login_required
+@require_GET
+def query_childs(request, revision_id):
+    """
+    get all childs of a dataset
+    :param request:
+    :param revision_id:
+    :return: JSON Object
+    """
+
+    language = request.auth_manager.language
+    dataset_revision = DatasetRevision.objects.get(pk=revision_id)
+    try:
+        childs = DatasetDBDAO().query_childs(language=language, dataset_id=dataset_revision.dataset.id)
+    except DatasetRevision.DoesNotExist:
+        raise DatasetNotFoundException()
+
+    data = {}
+    for key in childs.keys():
+        data[key]=[]
+        for child in childs[key]:
+            try:
+                serializer=ChildDataStreamSerializer(child)
+                data[key].append(serializer.data)
+            except KeyError:
+                serializer=ChildVisualizationSerializer(child)
+                data[key].append(serializer.data)
+
+    return HttpResponse(JSONRenderer().render(data, renderer_context={'indent':4}), content_type='application/json')
