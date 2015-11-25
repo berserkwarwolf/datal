@@ -63,6 +63,18 @@ var SelectDataView = Backbone.View.extend({
         this.headersOptionsView.render();
         this.headersOptionsView.hide();
         this.$('.headers-options-view').append(this.headersOptionsView.$el);
+
+        if (this.filtersOptionsView) {
+            this.filtersOptionsView.remove();
+            delete this.filtersOptionsView;
+        }
+        this.filtersOptionsView = new FiltersOptionsView({
+            collection: this.collection,
+            model: this.internalState
+        });
+        this.filtersOptionsView.render();
+        this.filtersOptionsView.hide();
+        this.$('.headers-options-view').append(this.filtersOptionsView.$el);
     },
 
     addSelection: function () {
@@ -130,9 +142,13 @@ var SelectDataView = Backbone.View.extend({
         if (value === 'headers') {
             this.selectionView.hide();
             this.headersOptionsView.show();
+        } else if (value === 'filters') {
+            this.selectionView.hide();
+            this.filtersOptionsView.show();
         } else {
-            this.selectionView.show();
+            this.filtersOptionsView.hide();
             this.headersOptionsView.hide();
+            this.selectionView.show();
         }
     },
 

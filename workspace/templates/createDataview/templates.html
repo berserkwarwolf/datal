@@ -194,10 +194,9 @@
 
   <h2>Cabeceras de la tabla</h2>
   <p>Seleccionar las filas de la tabla que representan cabeceras</p>
-  <% if (state.mode === 'headers') { %>
-    <button class="button small btn-ok">Ok</button>
-    <button class="button small btn-clear">Limpiar</button>
-  <% } %>
+
+  <button class="button small btn-ok">Ok</button>
+  <button class="button small btn-clear">Limpiar</button>
 
 </script>
 
@@ -205,11 +204,63 @@
 
   <button class="button small back btn-back">Atrás</button>
 
-  <h2>Cabeceras de la tabla</h2>
-  <p>Seleccionar las filas de la tabla que representan cabeceras</p>
-  <% if (state.mode === 'headers') { %>
-    <button class="button small btn-ok">Ok</button>
-    <button class="button small btn-clear">Limpiar</button>
-  <% } %>
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Filtrar datos</h2>
+      <p>Agregar nuevo filtro</p>
+      <select class="select-column">
+          <option>Seleccione una columna...</option>
+          <% _(columns).each(function(column, i){ %>
+            <option value="<%= i %>">Columna <%= column %></option>
+          <% }); %>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <select class="select-operation">
+          <option>Seleccione una operación...</option>
+          <option>Es igual a</option>
+          <option>No es igual a</option>
+          <option>Mayor que</option>
+          <option>Menor que</option>
+          <option>Contiene</option>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <select class="select-operator">
+          <option>Seleccione un operador...</option>
+          <option>Valor fijo</option>
+          <option>Parámetro</option>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row fixed-value-input">
+    <div class="col-xs-12">
+      <input type="text" class="fixed-value" placeholder="Ingrese valor fijo">
+    </div>
+  </div>
+
+  <div class="row parameter-input">
+    <div class="col-xs-12">
+      <input type="text" class="parameter-name" placeholder="Nombre">
+      <input type="text" class="parameter-description" placeholder="Descripción (opcional)">
+      <input type="text" class="parameter-default-value" placeholder="Valor por defecto">
+    </div>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="button small btn-ok">Ok</button>
+      <button class="button small btn-clear">Limpiar</button>
+    </div>
+  </div>
 
 </script>

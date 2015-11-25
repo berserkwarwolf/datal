@@ -37,6 +37,14 @@ var SelectionView = Backbone.View.extend({
         this.model.set('mode', 'headers');
     },
 
+    onClickFilters: function () {
+        this.model.set('mode', 'filters');
+    },
+
+    onClickFormats: function () {
+        this.model.set('mode', 'formats');
+    },
+
     show: function () {
         this.$el.removeClass('hidden');
     },
