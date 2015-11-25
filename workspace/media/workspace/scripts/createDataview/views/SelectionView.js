@@ -37,6 +37,14 @@ var SelectionView = Backbone.View.extend({
         this.model.set('mode', 'headers');
     },
 
+    show: function () {
+        this.$el.removeClass('hidden');
+    },
+
+    hide: function () {
+        this.$el.addClass('hidden');
+    },
+
     filter: function (mode) {
         return this.collection.filter(function (model) {
             return model.get('mode') === mode;

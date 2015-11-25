@@ -30,5 +30,13 @@ var HeadersOptionsView = Backbone.View.extend({
 
     onClickOk: function () {
         this.model.set('mode', 'data');
-    }
+    },
+
+    show: function () {
+        this.$el.removeClass('hidden');
+    },
+
+    hide: function () {
+        this.$el.addClass('hidden');
+    },
 });

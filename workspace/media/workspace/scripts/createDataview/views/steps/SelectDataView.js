@@ -61,8 +61,8 @@ var SelectDataView = Backbone.View.extend({
             model: this.internalState
         });
         this.headersOptionsView.render();
-        this.headersOptionsView.$el.hide();
-        this.$('.advanced-options-view').append(this.headersOptionsView.$el);
+        this.headersOptionsView.hide();
+        this.$('.headers-options-view').append(this.headersOptionsView.$el);
     },
 
     addSelection: function () {
@@ -128,11 +128,11 @@ var SelectDataView = Backbone.View.extend({
     onChangeMode: function (model, value) {
         console.info('changed mode to ', value);
         if (value === 'headers') {
-            this.selectionView.$el.hide();
-            this.headersOptionsView.$el.show();
+            this.selectionView.hide();
+            this.headersOptionsView.show();
         } else {
-            this.selectionView.$el.show();
-            this.headersOptionsView.$el.hide();
+            this.selectionView.show();
+            this.headersOptionsView.hide();
         }
     },
 

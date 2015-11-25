@@ -12,7 +12,7 @@
     <div class="row selection-view">
     </div>
 
-    <div class="row advanced-options-view">
+    <div class="row headers-options-view">
     </div>
   </div>
 
@@ -121,71 +121,71 @@
 
 <script type="text/template" id="selection_template">
 
-<% if (state.mode === 'data') {%>
+  <% if (state.mode === 'data') {%>
 
-  <% if (total > 0) { %>
-    <h2>Data selection</h2>
+    <% if (total > 0) { %>
+      <h2>Data selection</h2>
+    <% } %>
+
+    <% if (columns.length > 0) { %>
+      <div class="row hot-sel-1">
+      <h6>Columns</h6>
+      <span class="color"></span>
+        <% _.each(columns, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (rows.length > 0) { %>
+      <div class="row hot-sel-2">
+      <h6>Rows</h6>
+      <span class="color"></span>
+        <% _.each(rows, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (cells.length > 0) { %>
+      <div class="row hot-sel-3">
+      <h6>Cells</h6>
+      <span class="color"></span>
+        <% _.each(cells, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (headers.length > 0) { %>
+      <div class="row hot-sel-4">
+      <h6>Headers</h6>
+      <span class="color"></span>
+        <% _.each(headers, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+    <% } %>
+
+    <% if (total > 0) { %>
+      <div>
+        <button class="btn-clear">Clear</button>
+      </div>
+
+      <hr>
+
+      <h2>Advanced options</h2>
+
+      <h6>Headers</h6>
+      <button class="btn-headers">Set headers</button>
+      <h6>Filters</h6>
+      <button class="btn-filters">Set filters</button>
+      <h6>Formats</h6>
+      <button class="btn-formats">Set data types and formats</button>
+
+    <% } %>
+
   <% } %>
-
-  <% if (columns.length > 0) { %>
-    <div class="row hot-sel-1">
-    <h6>Columns</h6>
-    <span class="color"></span>
-      <% _.each(columns, function (item) { %>
-        <span><%= item.excelRange %>;</span>
-      <% }); %>
-    </div>
-  <% } %>
-
-  <% if (rows.length > 0) { %>
-    <div class="row hot-sel-2">
-    <h6>Rows</h6>
-    <span class="color"></span>
-      <% _.each(rows, function (item) { %>
-        <span><%= item.excelRange %>;</span>
-      <% }); %>
-    </div>
-  <% } %>
-
-  <% if (cells.length > 0) { %>
-    <div class="row hot-sel-3">
-    <h6>Cells</h6>
-    <span class="color"></span>
-      <% _.each(cells, function (item) { %>
-        <span><%= item.excelRange %>;</span>
-      <% }); %>
-    </div>
-  <% } %>
-
-  <% if (headers.length > 0) { %>
-    <div class="row hot-sel-4">
-    <h6>Headers</h6>
-    <span class="color"></span>
-      <% _.each(headers, function (item) { %>
-        <span><%= item.excelRange %>;</span>
-      <% }); %>
-    </div>
-  <% } %>
-
-  <% if (total > 0) { %>
-    <div>
-      <button class="btn-clear">Clear</button>
-    </div>
-
-    <hr>
-
-    <h2>Advanced options</h2>
-
-    <h6>Headers</h6>
-    <button class="btn-headers">Set headers</button>
-    <h6>Filters</h6>
-    <button class="btn-filters">Set filters</button>
-    <h6>Formats</h6>
-    <button class="btn-formats">Set data types and formats</button>
-
-  <% } %>
-
-<% } %>
 </script>
 
 <script type="text/template" id="headers_options_template">
@@ -199,11 +199,17 @@
     <button class="button small btn-clear">Limpiar</button>
   <% } %>
 
-  <!--
-  <h6>Filters</h6>
-  <button class="btn-filters">Select headers</button>
-  <h6>Formats</h6>
-  <button class="btn-formats">Select headers</button>
-   -->
+</script>
+
+<script type="text/template" id="filters_options_template">
+
+  <button class="button small back btn-back">Atrás</button>
+
+  <h2>Cabeceras de la tabla</h2>
+  <p>Seleccionar las filas de la tabla que representan cabeceras</p>
+  <% if (state.mode === 'headers') { %>
+    <button class="button small btn-ok">Ok</button>
+    <button class="button small btn-clear">Limpiar</button>
+  <% } %>
 
 </script>
