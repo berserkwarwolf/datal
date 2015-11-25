@@ -161,7 +161,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self._update_last_revisions()
             
         # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
-        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists():
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=True).exists():
             self._publish_childs()
             
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)

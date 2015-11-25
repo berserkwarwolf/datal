@@ -48,7 +48,6 @@ def save(request):
         account = request.auth_manager.get_account()
         jsonContent = request.POST.get('jsonString')
         jsonObj = json.loads(jsonContent)
-        print jsonObj
         preferences = account.get_preferences()
         if jsonObj['type'] == 'save':
             if jsonObj['theme'] is None:
