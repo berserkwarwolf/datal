@@ -102,6 +102,9 @@
 	.icon-add{background-position:-12px -336px;}
 	.icon-add.fill-background{background-position:0 -360px;}
 
+	.icon-add-xs{background-position:-12px -1272px;}
+	.icon-add-xs:hover{background-position:-48px -1272px;}
+
 	.icon-delete{background-position:-12px -408px;}
 	.icon-delete:hover,
 	.button:hover .icon-delete{background-position:-48px -408px;}
