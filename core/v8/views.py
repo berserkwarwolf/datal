@@ -14,7 +14,11 @@ class EngineViewSetMixin(object):
     def engine_call(self, request, engine_method, format=None, is_detail=True, form_class=RequestForm, serialize=True):
         mutable_get = request.GET.copy()
         mutable_get.update(request.POST.copy())
-        mutable_get['output'] = format or 'json'
+        mutable_get['output'] = 'json'
+        if format is not None:
+            format = 'prettyjson' if format == 'pjson' else format
+            format = 'json_array' if format == 'ajson' else format
+            mutable_get['output'] = format 
         
         resource = {}
         if is_detail:

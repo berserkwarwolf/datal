@@ -13,9 +13,25 @@ class CSVEngineRenderer(EngineRenderer):
     media_type="text/csv"
     format = "csv"
 
+class TSVEngineRenderer(EngineRenderer):
+    media_type="text/tab-separated-values"
+    format = "tsv"
+
+class PJSONEngineRenderer(EngineRenderer):
+    media_type="application/json"
+    format = "pjson"
+
+class AJSONEngineRenderer(EngineRenderer):
+    media_type="application/json"
+    format = "ajson"
+
 class XLSEngineRenderer(EngineRenderer):
     media_type="application/vnd.ms-excel"
     format = "xls"
+
+class XMLEngineRenderer(EngineRenderer):
+    media_type="text/xml"
+    format = "xml"
 
 class HTMLEngineRenderer(EngineRenderer):
     media_type="text/html"

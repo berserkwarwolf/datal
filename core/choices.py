@@ -220,7 +220,7 @@ SOURCE_IMPLEMENTATION_EXTENSION_CHOICES = (
     #,(SourceImplementationChoices.IBEN, 'iBencinas')
     ,(SourceImplementationChoices.IMAGE, ["png", "jpg", "jpeg", "gif"])
     ,(SourceImplementationChoices.ZIP, ["zip", "gz", "tar"])
-    ,(SourceImplementationChoices.TSV, ["tsv"])
+    ,(SourceImplementationChoices.TSV, ["tsv", "tab"])
     #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["txt"])
 )
@@ -232,7 +232,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
      (SourceImplementationChoices.HTML, ["text/html"])
     #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
     #,(SourceImplementationChoices.DALLAS, 'DALLAS')
-    #,(SourceImplementationChoices.XML, 'XML')
+    ,(SourceImplementationChoices.XML, ["text/xml"])
     ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel",
                                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
     ,(SourceImplementationChoices.PDF, ["application/pdf"])
@@ -257,7 +257,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
     ,(SourceImplementationChoices.ZIP, ["application/zip",
                                         "application/x-gzip",
                                         "application/x-tar"])
-    #,(SourceImplementationChoices.TSV, 'TSV')
+    ,(SourceImplementationChoices.TSV, ["text/tab-separated-values"])
     #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["text/plain"])
 )

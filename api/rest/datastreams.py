@@ -12,7 +12,10 @@ from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
 from core.choices import StatusChoices
+from core.v8.forms import DatastreamRequestForm
+from rest_framework import renderers
 from core.builders.datastreams import SelectStatementBuilder, DataSourceBuilder
+from core.v8.renderers import *
 
 class DataStreamSerializer(ResourceSerializer):
     title = serializers.CharField(
@@ -98,6 +101,18 @@ class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     dao_get_param = 'guid'
     dao_pk = 'datastream_revision_id'
 
-    @detail_route(methods=['get'])
-    def data(self, request, pk=None, *args, **kwargs):
-        return self.engine_call(request, 'invoke')
+    @detail_route(methods=['get'], renderer_classes=[
+        renderers.JSONRenderer,
+        renderers.BrowsableAPIRenderer,
+        CSVEngineRenderer,
+        XLSEngineRenderer,
+        TSVEngineRenderer,
+        XMLEngineRenderer,
+        PJSONEngineRenderer,
+        AJSONEngineRenderer,])
+    def data(self, request, pk=None, format=None,  *args, **kwargs):
+        if format == 'json':
+            return self.engine_call(request, 'invoke')
+        return self.engine_call(request, 'invoke', format, 
+            serialize=False,
+            form_class=DatastreamRequestForm)
