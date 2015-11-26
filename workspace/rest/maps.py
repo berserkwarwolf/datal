@@ -13,6 +13,7 @@ class RestMapViewSet(ResourceViewSet):
     dao_get_param = 'visualization_revision_id'
     data_types = ['vz']
     dao_pk = 'visualization_revision_id'
+    app = 'workspace'
 
     @detail_route(methods=['get'])
     def data(self, request, format=None, *args, **kwargs):

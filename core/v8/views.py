@@ -35,7 +35,7 @@ class EngineViewSetMixin(object):
             # TODO: correct handling
             raise Exception("Wrong arguments")        
 
-        command = AbstractCommandFactory().create(engine_method, 
+        command = AbstractCommandFactory(self.app).create(engine_method, 
             self.data_types[0], form.cleaned_data)
         result = command.run()
         if not result:

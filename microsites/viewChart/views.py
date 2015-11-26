@@ -115,7 +115,7 @@ def embed(request, guid):
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
     visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
     
-    command = AbstractCommandFactory().create("invoke", 
+    command = AbstractCommandFactory('microsites').create("invoke", 
             "vz", (visualization_revision_parameters,))
     json, type = command.run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)

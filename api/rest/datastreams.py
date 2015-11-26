@@ -72,7 +72,7 @@ class DataStreamSerializer(ResourceSerializer):
             table_id = data.pop('table_id')
             data['select_statement'] = SelectStatementBuilder().build(table_id)
             data['data_source'] = DataSourceBuilder().build(table_id,
-                self.dataset['last_published_revision_id'])
+                self.dataset['last_published_revision_id'], 'microsites')
 
         if 'category' in data and data['category']:
             data['category'] = self.getCategory(data['category'])
@@ -100,6 +100,7 @@ class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     data_types = ['ds']
     dao_get_param = 'guid'
     dao_pk = 'datastream_revision_id'
+    app = 'microsites'
 
     @detail_route(methods=['get'], renderer_classes=[
         renderers.BrowsableAPIRenderer,
