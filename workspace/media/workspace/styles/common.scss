@@ -533,20 +533,10 @@ i.icon.DALLAS{}
 i.icon.TNCLIMA{}
 
 /* Alerts */
-.alert{padding:7px;margin-bottom:10px;color:#FFF;font-style:18px;background-color:#4d8fff;margin-right:-310px;
-  -webkit-border-radius:3px;
-     -moz-border-radius:3px;
-          border-radius:3px;
-  -webkit-box-shadow:0 1px 0 #f9f9fb;
-     -moz-box-shadow:0 1px 0 #f9f9fb;
-          box-shadow:0 1px 0 #f9f9fb;
+.alert{
+  padding:20px 15px;margin-bottom:15px;
+  &.alert-danger{background:$background-color-danger;color:$red;}
 }
-  .alert p, .alert a{display:inline;color:#FFF;line-height:24px;text-shadow:0 1px #1750b7;font-size:14px;}
-  /* Alerts - Icons */
-  .alert i.icon{background-image:url('/static/workspace/images/common/ic_resources.png');background-repeat:no-repeat;width:17px;height:17px;margin:3px 6px 3px 3px;padding:0;float:left;}
-  .alert i.icon.info{background-position:0 -81px;}
-  /* Alerts - Buttons */
-  .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
 .helpBox{
