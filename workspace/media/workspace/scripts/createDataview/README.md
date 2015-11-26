@@ -95,3 +95,69 @@ Data Source
 	</From>
 	<Where/>
 </selectStatement>
+
+
+Seleccionado primera fila como header
+<dataSource>
+	<DataStructure>
+		<Field id="table0">
+			<Headers>
+				<Row>row0</Row>
+			</Headers>
+			<type/>
+			<format>
+				<languaje/>
+				<country/>
+				<style/>
+			</format>
+			<Table>
+				<Field id="column0">
+					<alias/>
+					<type/>
+					<format>
+						<languaje/>
+						<country/>
+						<style/>
+					</format>
+				</Field>
+				<Field id="column1">
+					<alias/>
+					<type/>
+					<format>
+						<languaje/>
+						<country/>
+						<style/>
+					</format>
+				</Field>
+				<Field id="column2">
+					<alias/>
+					<type/>
+					<format>
+						<languaje/>
+						<country/>
+						<style/>
+					</format>
+				</Field>
+			</Table>
+		</Field>
+	</DataStructure>
+</dataSource>
+
+
+Solo se pueden agregar filtros cuando se seleccionan columnas completas, no cuando se filtra por fila
+<selectStatement>
+	<Select>
+		<Column>column0</Column>
+		<Column>column1</Column>
+	</Select>
+	<From>
+		<Table>table0</Table>
+	</From>
+	<Where>
+		<Filter>
+			<Operand1>column2</Operand1>
+			<LogicalOperator>00</LogicalOperator>
+			<Operand2>parameter0</Operand2>
+		</Filter>
+	</Where>
+</selectStatement>
