@@ -2,9 +2,11 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="120px"
-	 height="1308.001px" viewBox="0 0 120 1308.001" enable-background="new 0 0 120 1308.001" xml:space="preserve">
+	 height="1344px" viewBox="0 0 120 1344" enable-background="new 0 0 120 1344" xml:space="preserve">
+<symbol  id="New_Symbol_2">
+</symbol>
 <g id="Background" display="none">
-	<rect display="inline" fill="#EFA14D" width="120" height="1308.001"/>
+	<rect display="inline" fill="#EFA14D" width="120" height="1344"/>
 </g>
 <g id="Icons">
 	<g>
@@ -220,6 +222,8 @@
 		<polygon fill="#999999" points="102.296,273.591 93.295,282.593 92.13,281.428 101.132,272.427 99.577,270.873 90.576,279.875 
 			89.41,278.71 98.412,269.708 97.636,268.931 87.469,279.097 92.906,284.536 103.073,274.369 		"/>
 	</g>
+	
+		<use xlink:href="#New_Symbol_2"  width="-32766" height="-32766" id="XMLID_1_" x="16383" y="16383" transform="matrix(1.2903 0 0 -1.2903 71.5273 407.3701)" overflow="visible"/>
 	<path fill="#B32300" d="M68.419,414.067h-3.881v-1.332v-0.575c0-2.593-1.297-2.593-2.594-2.593c-1.296,0-1.296,0-3.89,0
 		s-2.593,1.297-2.593,2.593c0,0.405,0,0.557,0,0.575v1.332H51.58c-0.581,0-1.052,0.471-1.052,1.052v1.053
 		c0,0.581,0.471,1.052,1.052,1.052h0.526v13.208h15.788v-13.208h0.525c0.582,0,1.054-0.471,1.054-1.052v-1.053
@@ -568,13 +572,21 @@
 		c0.534,0,0.962,0.468,0.962,1.003c0,0.044,0,0.208,0,0.439c2.137,0.452,3.632,2.308,3.632,4.567c0,0.334,0,1.536,0,3.006
 		l1.496,1.535V1252.318L102.09,1252.318z"/>
 	<g>
-		<path fill="#0066CC" d="M23.097,1289.143v-4.267h-4.239v-1.783h4.239v-4.235h1.806v4.235h4.239v1.783h-4.239v4.267H23.097z"/>
+		<path fill="#0066CC" d="M22.79,1290.893v-5.719h-5.682v-2.39h5.682v-5.677h2.42v5.677h5.682v2.39H25.21v5.719H22.79z"/>
 	</g>
 	<g>
-		<path fill="#0066FF" d="M59.097,1289.143v-4.267h-4.239v-1.783h4.239v-4.235h1.806v4.235h4.24v1.783h-4.24v4.267H59.097z"/>
+		<path fill="#0066FF" d="M58.79,1290.893v-5.719h-5.682v-2.39h5.682v-5.677h2.42v5.677h5.683v2.39H61.21v5.719H58.79z"/>
 	</g>
 	<g>
-		<path fill="#999999" d="M95.098,1289.143v-4.267h-4.24v-1.783h4.24v-4.235h1.805v4.235h4.24v1.783h-4.24v4.267H95.098z"/>
+		<path fill="#999999" d="M94.79,1290.893v-5.719h-5.683v-2.39h5.683v-5.677h2.42v5.677h5.683v2.39H97.21v5.719H94.79z"/>
+	</g>
+	<g>
+		<path fill="#999999" d="M18.271,1324.034l4.044-4.044l-4.018-4.018l1.69-1.69l4.018,4.019l4.014-4.015l1.711,1.711l-4.014,4.015
+			l4.018,4.018l-1.689,1.689l-4.018-4.018l-4.043,4.044L18.271,1324.034z"/>
+	</g>
+	<g>
+		<path d="M54.271,1324.033l4.044-4.043l-4.018-4.019l1.689-1.689l4.018,4.018l4.014-4.014l1.711,1.711l-4.015,4.015l4.019,4.018
+			l-1.689,1.689l-4.019-4.018l-4.043,4.044L54.271,1324.033z"/>
 	</g>
 </g>
 <g id="Labels" display="none">
@@ -592,34 +604,58 @@
 	<rect x="12" y="588" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="552" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 532)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-column  (  D: -12px -516px;  )</text>
+	<text transform="matrix(1 0 0 1 140 27)" display="inline" font-family="'Roboto-Regular'" font-size="10">home  (  D: -12px -12px;   H: -48px -12px;  A: -12px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 64)" display="inline" font-family="'Roboto-Regular'" font-size="10">datasets  (  D: -12px -48px;   H: -48px -48px;  A: -48px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 568)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-line  (  D: -12px -552px;  )</text>
+	<text transform="matrix(1 0 0 1 140 604)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-area  (  D: -12px -588px;  )</text>
+	<text transform="matrix(1 0 0 1 140 640)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-pie  (  D: -12px -624 px;  )</text>
+	<text transform="matrix(1 0 0 1 140 676)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-bar  (  D: -12px -660px;  )</text>
+	<text transform="matrix(1 0 0 1 140 712)" display="inline" font-family="'Roboto-Regular'" font-size="10">view-site  (  D: -12px -696px;   H: -48px -696px;  )</text>
+	<text transform="matrix(1 0 0 1 140 748)" display="inline" font-family="'Roboto-Regular'" font-size="10">more  (  D: -12px -732px;   H: -48px -732px;  )</text>
 	<rect x="48" y="768" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="768" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 784)" display="inline" font-family="'Roboto-Regular'" font-size="10">down  (  D: -12px -768px;  )</text>
 	<rect x="12" y="804" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="804" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="804" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 820)" display="inline" font-family="'Roboto-Regular'" font-size="10">down  (  D: -12px -804px;  )</text>
 	<rect x="12" y="840" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="840" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="840" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 856)" display="inline" font-family="'Roboto-Regular'" font-size="10">up  (  D: -12px -840px;  )</text>
 	<rect x="12" y="876" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="876" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="876" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 892)" display="inline" font-family="'Roboto-Regular'" font-size="10">up  (  D: -12px -876px;  )</text>
 	<rect x="12" y="912" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="912" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="912" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 928)" display="inline" font-family="'Roboto-Regular'" font-size="10">public  (  D: -12px -912px;  )</text>
 	<rect x="12" y="948" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="948" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="948" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 964)" display="inline" font-family="'Roboto-Regular'" font-size="10">map-marker  (  D: -12px -948px;  H: -48px -948px;  A: -84px -948px;  )</text>
 	<rect x="12" y="984" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="984" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="984" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1000)" display="inline" font-family="'Roboto-Regular'" font-size="10">map-trace  (  D: -12px -984px;  H: -48px -984px;  A: -84px -984px;  )</text>
 	<rect x="12" y="1020" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1020" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1020" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="1128" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1128" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1128" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1036)" display="inline" font-family="'Roboto-Regular'" font-size="10">map-geo  (  D: -12px -1020px;  H: -48px -1020px;  A: -84px -1020px;  )</text>
 	<rect x="12" y="12" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="48" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 100)" display="inline" font-family="'Roboto-Regular'" font-size="10">views  (  D: -12px -84px;   H: -48px -84px;  A: -84px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 136)" display="inline" font-family="'Roboto-Regular'" font-size="10">visualizations  (  D: -12px -120px;   H: -48px -120px;  A: -120px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 172)" display="inline" font-family="'Roboto-Regular'" font-size="10">dashboards  (  D: -12px -156px;   H: -48px -156px;  A: -156px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 208)" display="inline" font-family="'Roboto-Regular'" font-size="10">reports  (  D: -12px -192px;   H: -48px -192px;  A: -192px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 244)" display="inline" font-family="'Roboto-Regular'" font-size="10">config  (  D: -12px -228px;   H: -48px -228px;  A: -228px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 279)" display="inline" font-family="'Roboto-Regular'" font-size="10">edit  (  D: -12px -264px;   A: -84px -264px;  )</text>
+	<text transform="matrix(1 0 0 1 140 424)" display="inline" font-family="'Roboto-Regular'" font-size="10">delete  (  D: -12px -408px;   H: -48px -408px;  )</text>
 	<rect x="12" y="84" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="120" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="156" display="inline" fill="none" width="24" height="24"/>
@@ -639,9 +675,11 @@
 	<rect x="12" y="408" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="408" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="408" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 460)" display="inline" font-family="'Roboto-Regular'" font-size="10">zoom-in  (  D: -12px -444px;   A: -84px -444px;  )</text>
 	<rect x="12" y="444" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="444" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="444" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 496)" display="inline" font-family="'Roboto-Regular'" font-size="10">zoom-out  (  D: -12px -480px;   A: -84px -480px;  )</text>
 	<rect x="12" y="480" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="480" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="480" display="inline" fill="none" width="24" height="24"/>
@@ -653,13 +691,16 @@
 	<rect x="84" y="588" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 388)" display="inline" font-family="'Roboto-Regular'" font-size="10">add  (  D: -12px -372px;  )</text>
 	<rect x="12" y="372" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="372" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="372" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 352)" display="inline" font-family="'Roboto-Regular'" font-size="10">add  (  D: -12px -336x;   A: -84px -336px;  )</text>
 	<rect x="12" y="336" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="336" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="336" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="264" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 315)" display="inline" font-family="'Roboto-Regular'" font-size="10">edit  (  D: -12px -300px;  )</text>
 	<rect x="12" y="300" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="300" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="300" display="inline" fill="none" width="24" height="24"/>
@@ -670,6 +711,10 @@
 	<rect x="48" y="156" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="192" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="228" display="inline" fill="none" width="24" height="24"/>
+	<rect x="-24" display="inline" fill="none" width="12" height="1308.016"/>
+	<text transform="matrix(0 -1 1 0 28.0005 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(D)  DEFAULT</text>
+	<text transform="matrix(0 -1 1 0 64 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(H)  HOVER</text>
+	<text transform="matrix(0 -1 1 0 100 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(A)  ACTIVE</text>
 	<rect x="48" y="660" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="660" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="516" display="inline" fill="none" width="24" height="24"/>
@@ -701,17 +746,31 @@
 	<rect x="84" y="588" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
+	
+		<image display="inline" overflow="visible" width="2732" height="768" xlink:href="DE69F311.jpg"  transform="matrix(1 0 0 1 -8072 -7668)">
+	</image>
+	<text transform="matrix(1 0 0 1 140 1072)" display="inline" font-family="'Roboto-Regular'" font-size="10">new-tab  (  D: -12px -1056px;   H: -48px -1056px;  )</text>
+	<text transform="matrix(1 0 0 1 140 1104.1035)" display="inline" font-family="'Roboto-Regular'" font-size="10">ayuda  (  D: -12px -1092px;   H: -48px -1092px; A: -84px -1092px;  )</text>
+	<text transform="matrix(1 0 0 1 140 1142.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">arrow-down-right  (  D: -12px -1128px;  )</text>
 	<rect x="12" y="1164" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1164" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1164" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1178.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">download  (  D: -12px -1164px;  )</text>
 	<rect x="12" y="1199.984" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1199.984" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1199.984" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1214.7539)" display="inline" font-family="'Roboto-Regular'" font-size="10">view-site-xs  (  D: -12px -1200px;  )</text>
 	<rect x="12" y="1236" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1236" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1236" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1250.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">notifications  (  D: -12px -1236px;   H: -48px -1236px;  )</text>
 	<rect x="12" y="1272" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1272" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1272" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1308.016" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1308.016" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1308.016" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1286.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">add-xs  (  D: -12px -1272px;   H: -48px -1272px;   A: -84px -1272px; )</text>
+	<text transform="matrix(1 0 0 1 140 1324.6025)" display="inline" font-family="'Roboto-Regular'" font-size="10">close  (  D: -12px -1308px;   H: -48px -1308px;  )</text>
 </g>
 </svg>
