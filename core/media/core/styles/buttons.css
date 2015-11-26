@@ -18,9 +18,9 @@
 
   /* Alpha */
   .button.alpha,
-  .button.alpha-icon{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;}
+  .button.alpha-icon{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;min-width:inherit !important;}
   .button.alpha:hover{text-decoration:none;}
-  .button.alpha-icon{min-width:inherit !important;}
+  .button.alpha-icon:active{box-shadow:none;}
     
   /* Back */
   .button.back:before{content:"< ";}
