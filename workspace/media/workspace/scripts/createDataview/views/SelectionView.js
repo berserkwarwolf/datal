@@ -34,6 +34,7 @@ var SelectionView = Backbone.View.extend({
 
     onClickClear: function () {
         this.dataviewModel.selection.reset();
+        this.dataviewModel.filters.reset();
     },
 
     onClickHeaders: function () {

@@ -1,6 +1,65 @@
+var select_statement_template = ['<selectStatement>',
+    '<Select>',
+    '<% _.each(columns, function (number) { %>',
+        '<Column>column<%= number %></Column>',
+    '<% }); %>',
+    '</Select>',
+    '<From>',
+        '<Table>table<%= tableId %></Table>',
+    '</From>',
+    '<Where>',
+        '<% _.each(rows, function (number) { %>',
+        '<Filter>',
+            '<Operand1>rownum</Operand1>',
+            '<LogicalOperator>00</LogicalOperator>',
+            '<Operand2><%= number %></Operand2>',
+        '</Filter>',
+        '<% }); %>',
+        '<% _.each(filters, function (filter, index) { %>',
+        '<Filter>',
+            '<Operand1>column<%= filter.column %></Operand1>',
+            '<LogicalOperator><%= filter.operator %></LogicalOperator>',
+            '<% if (filter.value) {%>',
+                '<Operand2><%= filter.value %></Operand2>',
+            '<% } else {%>',
+                '<Operand2>parameter<%= index %></Operand2>',
+            '<% } %>',
+        '</Filter>',
+        '<% }); %>',
+    '</Where>',
+'</selectStatement>',
+].join('');
+
+var data_source_template = ['<dataSource>',
+    '<DataStructure>',
+        '<Field id="table<%= tableId %>">',
+            '<type/>',
+            '<format>',
+                '<languaje/>',
+                '<country/>',
+                '<style/>',
+            '</format>',
+            '<Table>',
+                '<% _.each(columns, function (number) { %>',
+                '<Field id="column<%= number %>">',
+                    '<alias/>',
+                    '<type/>',
+                    '<format>',
+                        '<languaje/>',
+                        '<country/>',
+                        '<style/>',
+                    '</format>',
+                '</Field>',
+                '<% }); %>',
+            '</Table>',
+        '</Field>',
+    '</DataStructure>',
+'</dataSource>'].join('');
+
 var DataviewModel = Backbone.Model.extend({
 
-    template: _.template("<selectStatement><Select><% _.each(columns, function (number) { %><Column>column<%= number %></Column><% }); %></Select><From><Table>table<%= tableId %></Table></From><Where><% _.each(rows, function (number) { %><Filter><Operand1>rownum</Operand1><LogicalOperator>00</LogicalOperator><Operand2><%= number %></Operand2></Filter><% }); %></Where></selectStatement>"),
+    select_statement_template: _.template(select_statement_template),
+    data_source_template: _.template(data_source_template),
 
     idAttribute: 'dataview_revision_id',
 
@@ -20,12 +79,12 @@ var DataviewModel = Backbone.Model.extend({
         dataset_revision_id: undefined,
         csrfmiddlewaretoken: '24c4CtkSSEasa0R1l7QnP9DXLDQi7J6C',
 
-        tableId: 1,
+        tableId: 0,
         status: 0,
 
         // TODO: remove this hardcoded params and use the model's data
-        end_point: 'file://1/7461/7f70200b-71dc-42bd-b0d3-e424bd5849a0',
-        impl_type: 10,
+        end_point: 'file://1/7461/08c6faa4-689f-489b-a31c-94753ea52486',
+        impl_type: 4,
         impl_details: '',
         data_source: '<dataSource><DataStructure><Field id="table0"><type></type><format><languaje></languaje><country></country><style></style></format><Table><Field id="column0"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column1"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column2"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field></Table></Field></DataStructure></dataSource>',
         rdf_template: '',
@@ -58,7 +117,8 @@ var DataviewModel = Backbone.Model.extend({
                 'limit',
             ]);
 
-        params.datasource = this.get('data_source');
+        // NOTE: here the datasource param does not contain an underscore, like it does in save
+        params.datasource = this.getDataSource();
         params.select_statement = this.getSelectStatement();
 
         return $.ajax({
@@ -135,6 +195,7 @@ var DataviewModel = Backbone.Model.extend({
             ]);
 
         params.select_statement = this.getSelectStatement();
+        params.data_source = this.getDataSource();
 
         return $.ajax({
                 type: 'POST',
@@ -146,16 +207,31 @@ var DataviewModel = Backbone.Model.extend({
 
     getSelectStatement: function () {
         var tableId = this.get('tableId'),
-            // columns = this.selection.filter(function (model) {
-            //     return model.get('mode') === 'col';
-            // }),
-            columns = [0,2],
-            rows = [0,1,2];
+            columnModels = this.selection.getItemsByMode('col'),
+            columns = _.map(columnModels, function (model) {
+                return model.getRange().from.col;
+            }),
+            rowModels = this.selection.getItemsByMode('row'),
+            rows = _.map(rowModels, function (model) {
+                return model.getRange().from.row;
+            });
 
-        return this.template({
+
+        return this.select_statement_template({
             tableId: tableId,
             columns: columns,
-            rows: rows
+            rows: rows,
+            filters: this.filters.toJSON()
+        });
+    },
+
+    getDataSource: function () {
+        var tableId = this.get('tableId'),
+            columns = _.range(0, this.get('totalCols'));
+
+        return this.data_source_template({
+            tableId: tableId,
+            columns: columns
         });
     },
 

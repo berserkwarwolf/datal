@@ -17,7 +17,7 @@ var SelectDataView = Backbone.View.extend({
 
         this.template = _.template( $('#select_data_template').html() );
 
-        this.$el.html(this.template({tables: [1,2,3]}));
+        this.$el.html(this.template({tables: [0,1,2]}));
         this.$('.select-table').val(tableId);
 
         this.listenTo(this.internalState, 'change:mode', this.onChangeMode, this);
@@ -25,6 +25,11 @@ var SelectDataView = Backbone.View.extend({
 
     render: function () {
         var tableId = this.dataviewModel.get('tableId');
+        var rows = this.datasetModel.get('tables')[tableId];
+
+        // TODO: move this elsewhere!
+        this.dataviewModel.set('totalRows', rows.length);
+        this.dataviewModel.set('totalCols', rows[0].length);
 
         if (this.dataTableView) {
             this.dataTableView.$('.table-view').empty();
@@ -34,7 +39,7 @@ var SelectDataView = Backbone.View.extend({
             el: this.$('.data-table-view'),
             collection: this.dataviewModel.selection,
             dataview: {
-                rows: this.datasetModel.get('tables')[tableId-1]
+                rows: rows
             },
             enableFulllRowSelection: true
         });
@@ -134,6 +139,8 @@ var SelectDataView = Backbone.View.extend({
             tableId = $target.val();
 
         this.dataviewModel.set('tableId', tableId);
+        var table = this.datasetModel.get('tables')[tableId];
+        this.dataviewModel.set('totalCols', table[0].length);
         this.render();
     },
 

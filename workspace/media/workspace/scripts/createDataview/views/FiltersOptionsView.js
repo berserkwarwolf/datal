@@ -4,8 +4,8 @@ var FiltersOptionsView = Backbone.View.extend({
         'click button.btn-back': 'onClickBack',
         'click button.btn-ok': 'onClickOk',
         'change select.select-column': 'onChangeColumn',
-        'change select.select-operation': 'onChangeOperation',
         'change select.select-operator': 'onChangeOperator',
+        'change select.select-value-type': 'onChangeValueType',
         'change input:text': 'onChangeInput'
     },
 
@@ -45,23 +45,10 @@ var FiltersOptionsView = Backbone.View.extend({
         var value = $(e.currentTarget).val();
         if (value !== '') {
             this.model.set('column', value);
-            this.$('.row-operation').removeClass('hidden');
-        } else {
-            this.model.unset('column');
-            this.$('.row-operation').addClass('hidden');
-            this.$('.row-operator').addClass('hidden');
-            this.$('.row-fixed-value').addClass('hidden');
-            this.$('.row-parameter').addClass('hidden');
-        }
-    },
-
-    onChangeOperation: function (e) {
-        var value = $(e.currentTarget).val();
-        if (value !== '') {
-            this.model.set('operation', value);
             this.$('.row-operator').removeClass('hidden');
         } else {
-            this.model.unset('operation');
+            this.model.unset('column');
+            this.$('.row-operator').addClass('hidden');
             this.$('.row-operator').addClass('hidden');
             this.$('.row-fixed-value').addClass('hidden');
             this.$('.row-parameter').addClass('hidden');
@@ -70,15 +57,25 @@ var FiltersOptionsView = Backbone.View.extend({
 
     onChangeOperator: function (e) {
         var value = $(e.currentTarget).val();
-        if (value === '') {
+        if (value !== '') {
+            this.model.set('operator', value);
+            this.$('.row-value-type').removeClass('hidden');
+        } else {
             this.model.unset('operator');
+            this.$('.row-value-type').addClass('hidden');
+            this.$('.row-fixed-value').addClass('hidden');
+            this.$('.row-parameter').addClass('hidden');
+        }
+    },
+
+    onChangeValueType: function (e) {
+        var value = $(e.currentTarget).val();
+        if (value === '') {
             this.$('.row-operator').removeClass('hidden');
         } else if (value === 'fixed') {
-            this.model.set('operator', value);
             this.$('.row-fixed-value').removeClass('hidden');
             this.$('.row-parameter').addClass('hidden');
         } else if (value === 'parameter') {
-            this.model.set('operator', value);
             this.$('.row-fixed-value').addClass('hidden');
             this.$('.row-parameter').removeClass('hidden');
         }
@@ -93,7 +90,6 @@ var FiltersOptionsView = Backbone.View.extend({
         } else {
             this.model.unset(name);
         }
-        console.log('onChangeInput', this.model.toJSON());
     },
 
     show: function () {

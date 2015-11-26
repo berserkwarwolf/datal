@@ -176,7 +176,7 @@
       <h6>Filters</h6>
       <span class="color"></span>
         <% _.each(filters, function (item) { %>
-          <span><%= item.column %>; <%= item.operation %></span>
+          <span>column<%= item.column %>; <%= item.operator %></span>
         <% }); %>
       </div>
       <hr>
@@ -222,7 +222,7 @@
       <h2>Filtrar datos</h2>
       <p>Agregar nuevo filtro</p>
       <select class="select-column">
-          <option value="">Seleccione una columna...</option>
+          <option value="">Columna...</option>
           <% _(columns).each(function(column, i){ %>
             <option value="<%= i %>">Columna <%= column %></option>
           <% }); %>
@@ -230,23 +230,23 @@
     </div>
   </div>
 
-  <div class="row row-operation hidden">
+  <div class="row row-operator hidden">
     <div class="col-xs-12">
-      <select class="select-operation">
-          <option value="">Seleccione una operación...</option>
-          <option value="equals">Es igual a</option>
-          <option value="not-equals">No es igual a</option>
-          <option value="greater-than">Mayor que</option>
-          <option value="smaller-than">Menor que</option>
-          <option value="contains">Contiene</option>
+      <select class="select-operator">
+          <option value="">Operación...</option>
+          <option value="00">Es igual a</option>
+          <option value="01">No es igual a</option>
+          <option value="02">Mayor que</option>
+          <option value="03">Menor que</option>
+          <option value="04">Contiene</option>
       </select>  
     </div>
   </div>
 
-  <div class="row row-operator hidden">
+  <div class="row row-value-type hidden">
     <div class="col-xs-12">
-      <select class="select-operator">
-          <option value="">Seleccione un operador...</option>
+      <select class="select-value-type">
+          <option value="">Tipo de valor objetivo...</option>
           <option value="fixed">Valor fijo</option>
           <option value="parameter">Parámetro</option>
       </select>  
@@ -255,7 +255,7 @@
 
   <div class="row row-fixed-value hidden">
     <div class="col-xs-12">
-      <input type="text" name="fixed" class="fixed-value" placeholder="Ingrese valor fijo">
+      <input type="text" name="value" class="fixed-value" placeholder="Ingrese valor fijo">
     </div>
   </div>
 

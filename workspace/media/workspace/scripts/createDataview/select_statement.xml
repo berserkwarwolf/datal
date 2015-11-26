@@ -1,0 +1,34 @@
+<selectStatement>
+    <Select>
+    <% _.each(columns, function (number) { %>
+        <Column>column<%= number %></Column>
+    <% }); %>
+    </Select>
+    <From>
+        <Table>table<%= tableId %></Table>
+    </From>
+    <Where>
+        <% _.each(rows, function (number) { %>
+        <Filter>
+            <Operand1>rownum</Operand1>
+            <LogicalOperator>00</LogicalOperator>
+            <Operand2><%= number %></Operand2>
+        </Filter>
+        <% }); %>
+
+        <% _.each(filters, function (filter, index) { %>
+        <Filter>
+            <Operand1>column<%= filter.column %></Operand1>
+            <LogicalOperator><%= filter.operator %></LogicalOperator>
+            <% if (filter.value) {%>
+                <Operand2><%= filter.value %></Operand2>
+            <% } else {%>
+                <Operand2>parameter<%= index %></Operand2>
+            <% } %>
+        </Filter>
+        <% }); %>
+    </Where>
+</selectStatement>
+
+[
+]
