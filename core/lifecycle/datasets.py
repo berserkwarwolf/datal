@@ -159,7 +159,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset_revision.save()
             
         self._update_last_revisions()
-            
+
         # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
         if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=True).exists():
             self._publish_childs()
@@ -176,7 +176,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_revision__id'),
-                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for datastream_revision in datastream_revisions:
@@ -188,7 +187,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                         allowed_states=[StatusChoices.APPROVED], parent_status=StatusChoices.PUBLISHED
                     )
                 except IllegalStateException:
-                    publish_fail.append(datastream_revision)
+                    # si no tiene ninguna revision publicada, que no lo agregue a la lista de fallas
+                    if datastream_revision.last_published_revision.exists():
+                        publish_fail.append(datastream_revision)
 
 
             ## Aca deberia ir lo mismo que los ds, pero para las vz?
