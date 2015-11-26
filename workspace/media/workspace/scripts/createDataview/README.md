@@ -145,6 +145,7 @@ Seleccionado primera fila como header
 
 
 Solo se pueden agregar filtros cuando se seleccionan columnas completas, no cuando se filtra por fila
+
 <selectStatement>
 	<Select>
 		<Column>column0</Column>
@@ -161,3 +162,23 @@ Solo se pueden agregar filtros cuando se seleccionan columnas completas, no cuan
 		</Filter>
 	</Where>
 </selectStatement>
+
+El parámetro creado se envia al guardar así
+parameters-0-name:nombreparam
+parameters-0-position:0
+parameters-0-description:descparam
+parameters-0-default:valorparam
+parameters-TOTAL_FORMS:1
+parameters-INITIAL_FORMS:0
+
+Los tags se envian 
+tags-0-name:dasda
+tags-1-name:asdasd
+tags-TOTAL_FORMS:2
+tags-INITIAL_FORMS:0
+
+y los sources
+sources-0-name:unafuente
+sources-0-url:http://google.com
+sources-TOTAL_FORMS:1
+sources-INITIAL_FORMS:0
