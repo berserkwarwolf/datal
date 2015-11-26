@@ -736,7 +736,6 @@ class VisualizationRevision(RevisionModel):
     modified_at = models.DateTimeField(editable=False, auto_now=True)
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    objects = managers.VisualizationRevisionManager()
 
     class Meta:
         db_table = 'ao_visualizations_revisions'

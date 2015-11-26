@@ -85,11 +85,8 @@ def embed(request, guid):
     base_uri = 'http://' + preferences['account_domain']
 
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_by_guid(guid)
         datastream = DataStreamDBDAO().get(
-            preferences['account_language'],
-            datastream_revision_id=datastreamrevision_id
-        )
+            preferences['account_language'], guid=guid, published=True )
         parameters_query = RequestProcessor(request).get_arguments(datastream.parameters)
     except Http404:
         return render_to_response('viewDataStream/embed404.html', {'settings': settings, 'request': request})
@@ -106,8 +103,7 @@ def embed(request, guid):
 def download(request, id, slug):
     """ download internal dataset file """
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_id=id, published=True)
     except:
         raise DataStreamDoesNotExist
     else:
