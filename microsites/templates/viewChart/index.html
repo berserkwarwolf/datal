@@ -4,7 +4,7 @@
 {% block SEO %}
     <title>{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}</title>
     <meta name="description" content="{{ visualization_revision.description }}" />
-    <link rel="canonical" href="http://{{ preferences.account_domain}}/{{visualization_revision.permalink}}" />
+    <link rel="canonical" href="http://{{ preferences.account_domain}}{{visualization_revision.visualization_id|permalink:"visualization"}}" />
 {% endblock %}
 
 {% if preferences.account_enable_sharing %} 
