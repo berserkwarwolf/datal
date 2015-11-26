@@ -3210,3 +3210,21 @@ msgstr "available resources"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "resources added"
+
+msgid "APP-UPLOAD-FILE-LINK"
+msgstr "From file"
+
+msgid "APP-WEBSITE-LINK"
+msgstr "From URL or website"
+
+msgid "APP-WEBSERVICE-LINK"
+msgstr "From webservice"
+
+msgid "APP-LISTRESOURCES-TEXT"
+msgstr "List"
+
+msgid "APP-NEWFEMALE-TEXT"
+msgstr "New"
+
+msgid "APP-NEWMALE-TEXT"
+msgstr "New"
