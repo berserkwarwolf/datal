@@ -47,7 +47,6 @@ def view(request, id, slug=None):
     account = request.account
 
     preferences = request.preferences
-    base_uri = 'http://' + preferences['account_domain']
 
     try:
         visualization_revision = VisualizationDBDAO().get(

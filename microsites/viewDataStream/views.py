@@ -27,7 +27,6 @@ def view(request, id, slug):
     account = request.account
 
     preferences = request.preferences
-    base_uri = 'http://' + preferences['account_domain']
 
     datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
 
@@ -42,7 +41,6 @@ def view(request, id, slug):
 
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
 
-    #DataStreamDBDAO().hit(id, ChannelTypes.WEB)
     notes = datastream['notes']
 
     return render_to_response('viewDataStream/index.html', locals())
