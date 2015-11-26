@@ -135,16 +135,18 @@
           <span><%= item.excelRange %>;</span>
         <% }); %>
       </div>
+      <hr>
     <% } %>
 
     <% if (rows.length > 0) { %>
       <div class="row hot-sel-2">
-      <h6>Rows</h6>
-      <span class="color"></span>
+        <h6>Rows</h6>
+        <span class="color"></span>
         <% _.each(rows, function (item) { %>
           <span><%= item.excelRange %>;</span>
         <% }); %>
       </div>
+      <hr>
     <% } %>
 
     <% if (cells.length > 0) { %>
@@ -155,6 +157,7 @@
           <span><%= item.excelRange %>;</span>
         <% }); %>
       </div>
+      <hr>
     <% } %>
 
     <% if (headers.length > 0) { %>
@@ -165,11 +168,23 @@
           <span><%= item.excelRange %>;</span>
         <% }); %>
       </div>
+      <hr>
+    <% } %>
+
+    <% if (filters.length > 0) { %>
+      <div class="row hot-sel-4">
+      <h6>Filters</h6>
+      <span class="color"></span>
+        <% _.each(filters, function (item) { %>
+          <span><%= item.column %>; <%= item.operation %></span>
+        <% }); %>
+      </div>
+      <hr>
     <% } %>
 
     <% if (total > 0) { %>
-      <div>
-        <button class="btn-clear">Clear</button>
+      <div class="row">
+        <button class="button small btn-clear">Clear</button>
       </div>
 
       <hr>
@@ -179,9 +194,7 @@
       <h6>Headers</h6>
       <button class="btn-headers">Set headers</button>
       <h6>Filters</h6>
-      <button class="btn-filters">Set filters</button>
-      <h6>Formats</h6>
-      <button class="btn-formats">Set data types and formats</button>
+      <button class="btn-filters">Add filter</button>
 
     <% } %>
 
@@ -209,7 +222,7 @@
       <h2>Filtrar datos</h2>
       <p>Agregar nuevo filtro</p>
       <select class="select-column">
-          <option>Seleccione una columna...</option>
+          <option value="">Seleccione una columna...</option>
           <% _(columns).each(function(column, i){ %>
             <option value="<%= i %>">Columna <%= column %></option>
           <% }); %>
@@ -217,40 +230,40 @@
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-operation hidden">
     <div class="col-xs-12">
       <select class="select-operation">
-          <option>Seleccione una operación...</option>
-          <option>Es igual a</option>
-          <option>No es igual a</option>
-          <option>Mayor que</option>
-          <option>Menor que</option>
-          <option>Contiene</option>
+          <option value="">Seleccione una operación...</option>
+          <option value="equals">Es igual a</option>
+          <option value="not-equals">No es igual a</option>
+          <option value="greater-than">Mayor que</option>
+          <option value="smaller-than">Menor que</option>
+          <option value="contains">Contiene</option>
       </select>  
     </div>
   </div>
 
-  <div class="row">
+  <div class="row row-operator hidden">
     <div class="col-xs-12">
       <select class="select-operator">
-          <option>Seleccione un operador...</option>
-          <option>Valor fijo</option>
-          <option>Parámetro</option>
+          <option value="">Seleccione un operador...</option>
+          <option value="fixed">Valor fijo</option>
+          <option value="parameter">Parámetro</option>
       </select>  
     </div>
   </div>
 
-  <div class="row fixed-value-input">
+  <div class="row row-fixed-value hidden">
     <div class="col-xs-12">
-      <input type="text" class="fixed-value" placeholder="Ingrese valor fijo">
+      <input type="text" name="fixed" class="fixed-value" placeholder="Ingrese valor fijo">
     </div>
   </div>
 
-  <div class="row parameter-input">
+  <div class="row row-parameter hidden">
     <div class="col-xs-12">
-      <input type="text" class="parameter-name" placeholder="Nombre">
-      <input type="text" class="parameter-description" placeholder="Descripción (opcional)">
-      <input type="text" class="parameter-default-value" placeholder="Valor por defecto">
+      <input type="text" name="parameter-name" placeholder="Nombre">
+      <input type="text" name="parameter-description" placeholder="Descripción (opcional)">
+      <input type="text" name="parameter-default-value" placeholder="Valor por defecto">
     </div>
   </div>
 

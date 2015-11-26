@@ -41,8 +41,7 @@ var MainView = Backbone.View.extend({
         if (step === 0) {
             this.currentView = new SelectDataView({
                 datasetModel: this.datasetModel,
-                collection: this.dataviewModel.selection,
-                model: this.dataviewModel
+                dataviewModel: this.dataviewModel,
             });
         } else if (step === 1) {
             this.currentView = new MetadataView({

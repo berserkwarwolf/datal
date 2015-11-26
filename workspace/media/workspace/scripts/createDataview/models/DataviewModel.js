@@ -36,10 +36,12 @@ var DataviewModel = Backbone.Model.extend({
 
     initialize: function () {
         this.data = new Backbone.Model();
-        this.tags = new Backbone.Collection();
-        this.parameters = new Backbone.Collection();
-        this.sources = new Backbone.Collection();
         this.selection = new DataTableSelectedCollection();
+
+        this.filters = new FiltersCollection();
+
+        this.tags = new Backbone.Collection();
+        this.sources = new Backbone.Collection();
     },
 
     url: '/rest/datastreams/sample.json',

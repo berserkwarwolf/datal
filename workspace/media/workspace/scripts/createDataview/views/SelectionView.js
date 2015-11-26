@@ -6,9 +6,11 @@ var SelectionView = Backbone.View.extend({
         'click button.btn-formats': 'onClickFormats'
     },
 
-    initialize: function () {
+    initialize: function (options) {
+        this.dataviewModel = options.dataviewModel;
+
         this.template = _.template( $('#selection_template').html() );
-        this.listenTo(this.collection, 'add change remove reset', this.render, this);
+        this.listenTo(this.dataviewModel.selection, 'add change remove reset', this.render, this);
         this.listenTo(this.model, 'change', this.render, this);
     },
 
@@ -17,7 +19,7 @@ var SelectionView = Backbone.View.extend({
             rows = this.filter('row'),
             cells = this.filter('cell'),
             headers = this.filter('header'),
-            total = this.collection.length;
+            total = this.dataviewModel.selection.length;
 
         this.$el.html(this.template({
             columns: columns,
@@ -25,12 +27,13 @@ var SelectionView = Backbone.View.extend({
             cells: cells,
             headers: headers,
             total: total,
+            filters: this.dataviewModel.filters.toJSON(),
             state: this.model.toJSON()
         }));
     },
 
     onClickClear: function () {
-        this.collection.reset();
+        this.dataviewModel.selection.reset();
     },
 
     onClickHeaders: function () {
@@ -38,7 +41,7 @@ var SelectionView = Backbone.View.extend({
     },
 
     onClickFilters: function () {
-        this.model.set('mode', 'filters');
+        this.model.set('mode', 'add-filter');
     },
 
     onClickFormats: function () {
@@ -54,7 +57,7 @@ var SelectionView = Backbone.View.extend({
     },
 
     filter: function (mode) {
-        return this.collection.filter(function (model) {
+        return this.dataviewModel.selection.filter(function (model) {
             return model.get('mode') === mode;
         }).map(function (model) {
             return model.toJSON();

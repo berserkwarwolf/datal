@@ -1,17 +1,19 @@
 var SelectDataView = Backbone.View.extend({
 
     events: {
-        'change select.select-table': 'onClickSelectTable',
-        'click button.btn-headers': 'onClickHeaders'
+        'change select.select-table': 'onClickSelectTable'
     },
 
     initialize: function (options) {
-        var tableId = this.model.get('tableId');
+        var tableId;
 
+        this.dataviewModel = options.dataviewModel;
         this.datasetModel = options.datasetModel;
         this.internalState = new Backbone.Model({
             mode: 'data'
         });
+
+        tableId = this.dataviewModel.get('tableId');
 
         this.template = _.template( $('#select_data_template').html() );
 
@@ -22,7 +24,7 @@ var SelectDataView = Backbone.View.extend({
     },
 
     render: function () {
-        var tableId = this.model.get('tableId');
+        var tableId = this.dataviewModel.get('tableId');
 
         if (this.dataTableView) {
             this.dataTableView.$('.table-view').empty();
@@ -30,7 +32,7 @@ var SelectDataView = Backbone.View.extend({
 
         this.dataTableView = new DataTableView({
             el: this.$('.data-table-view'),
-            collection: this.collection,
+            collection: this.dataviewModel.selection,
             dataview: {
                 rows: this.datasetModel.get('tables')[tableId-1]
             },
@@ -46,7 +48,8 @@ var SelectDataView = Backbone.View.extend({
             delete this.selectionView;
         }
         this.selectionView = new SelectionView({
-            collection: this.collection,
+            collection: this.dataviewModel.selection,
+            dataviewModel: this.dataviewModel,
             model: this.internalState
         });
         this.selectionView.render();
@@ -57,24 +60,30 @@ var SelectDataView = Backbone.View.extend({
             delete this.headersOptionsView;
         }
         this.headersOptionsView = new HeadersOptionsView({
-            collection: this.collection,
             model: this.internalState
         });
         this.headersOptionsView.render();
         this.headersOptionsView.hide();
         this.$('.headers-options-view').append(this.headersOptionsView.$el);
+    },
 
+    attachFiltersView: function () {
+        this.destroyFiltersView();
+
+        this.filtersOptionsView = new FiltersOptionsView({
+            stateModel: this.internalState,
+            collection: this.dataviewModel.filters,
+            model: new Backbone.Model()
+        });
+        this.filtersOptionsView.render();
+        this.$('.headers-options-view').append(this.filtersOptionsView.$el);
+    },
+
+    destroyFiltersView: function () {
         if (this.filtersOptionsView) {
             this.filtersOptionsView.remove();
             delete this.filtersOptionsView;
         }
-        this.filtersOptionsView = new FiltersOptionsView({
-            collection: this.collection,
-            model: this.internalState
-        });
-        this.filtersOptionsView.render();
-        this.filtersOptionsView.hide();
-        this.$('.headers-options-view').append(this.filtersOptionsView.$el);
     },
 
     addSelection: function () {
@@ -104,14 +113,14 @@ var SelectDataView = Backbone.View.extend({
         // TODO: Esta funcionalidad deberia estar encapsulada en collection.toggleModel()
         var existing = this.checkExisting(model);
         if (existing) {
-            this.collection.remove(existing);
+            this.dataviewModel.selection.remove(existing);
         } else {
-            this.collection.add(model);
+            this.dataviewModel.selection.add(model);
         }
     },
 
     checkExisting: function (model) {
-        var items = this.collection.filter(function (item) {
+        var items = this.dataviewModel.selection.filter(function (item) {
             return item.get('mode') === model.get('mode');
         });
         var existing = _.find(items, function (item) {
@@ -124,29 +133,19 @@ var SelectDataView = Backbone.View.extend({
         var $target = $(e.currentTarget),
             tableId = $target.val();
 
-        this.model.set('tableId', tableId);
+        this.dataviewModel.set('tableId', tableId);
         this.render();
     },
 
-    onClickHeaders: function () {
-        var mode = this.model.get('mode');
-        if (mode === 'headers') {
-            this.model.set('mode', 'data');
-        } else {
-            this.model.set('mode', 'headers');
-        };
-    },
-
     onChangeMode: function (model, value) {
-        console.info('changed mode to ', value);
         if (value === 'headers') {
             this.selectionView.hide();
             this.headersOptionsView.show();
-        } else if (value === 'filters') {
+        } else if (value === 'add-filter') {
             this.selectionView.hide();
-            this.filtersOptionsView.show();
+            this.attachFiltersView();
         } else {
-            this.filtersOptionsView.hide();
+            this.destroyFiltersView();
             this.headersOptionsView.hide();
             this.selectionView.show();
         }
