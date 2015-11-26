@@ -18,27 +18,28 @@ import logging
 logger = logging.getLogger(__name__)
 
 class ResourceSerializer(serializers.Serializer):
-    resources = ['dataset', 'datastream', 'visualization']
+    resources = (
+        ('dataset', settings.TYPE_DATASET),
+        ('datastream', settings.TYPE_DATASTREAM),
+        ('visualization', settings.TYPE_VISUALIZATION)
+    )
     resource_type = serializers.CharField()
     created_at = serializers.DateTimeField()
 
     @classmethod
     def get_mapping_dict(cls):
         return {
-            'title': map(lambda x: x + 'i18n__title', cls.resources),
-            'description': map(lambda x: x + 'i18n__description', cls.resources),
-            'user': map(lambda x: x + '__user__name', cls.resources),
-            'category': ['category__categoryi18n__slug', 'visualization__datastream__last_revision__category__categoryi18n__slug']
-
+            'title': dict(map(lambda x: (x[1], x[0] + 'i18n__title'), cls.resources)),
+            'description': dict(map(lambda x: (x[1], x[0] + 'i18n__description'), cls.resources)),
+            'user': dict(map(lambda x: (x[1], x[0] + '__user__name'), cls.resources)),
+            'category': {
+                settings.TYPE_DATASET: 'category__categoryi18n__slug',
+                settings.TYPE_DATASTREAM: 'category__categoryi18n__slug',
+                settings.TYPE_VISUALIZATION: 'visualization__datastream__last_revision__category__categoryi18n__slug',
+            },
+            'revision_id': dict(map(lambda x: (x[1], x[0] + '__last_revision_id'), cls.resources)),
         }
-
-    @classmethod
-    def tryKeysOnDict(cls, toDict, toKey, fromDict, fromKeys):
-        toDict[toKey] = None
-        for key in fromKeys:
-            if key in fromDict:
-                toDict[toKey] = fromDict[key]
-
+    
     def get_status_name(self, status_id):
         for id, valor in STATUS_CHOICES_REST:
             if id == status_id:
@@ -47,19 +48,18 @@ class ResourceSerializer(serializers.Serializer):
     def to_representation(self, obj):
         answer = super(ResourceSerializer, self).to_representation(obj)
         for key, value in self.get_mapping_dict().items():
-            self.tryKeysOnDict(answer, key, obj, value)
+            answer[key] = obj[value[answer['resource_type']]]
 
         answer['status'] = self.get_status_name(obj['status'])
 
         return OrderedDict(answer)
 
 
-def order_method(lista):
+def order_method(dic):
     def order_inner(obj):
-        for ele in lista:
-            if ele in obj:
-                return obj[ele]
-        return ele['id']
+        if isintance(dic, dict):
+            return ele[dic[obj['resource_type']]]
+        return ele[dic]
     return order_inner
 
 class CacheKeyConstructor(DefaultKeyConstructor):
@@ -95,7 +95,7 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
             if ordering in mapping_dict.keys():
                 order_list = mapping_dict[ordering]
             else:
-                order_list = [ordering]
+                order_list = ordering
             return sorted(queryset, key=order_method(order_list), reverse=reverse)
         return queryset
 
