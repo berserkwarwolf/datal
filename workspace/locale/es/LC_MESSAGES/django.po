@@ -3200,3 +3200,6 @@ msgstr "recursos disponibles"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "recursos agregados"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "no existe, intente nuevamente con otra palabra clave."

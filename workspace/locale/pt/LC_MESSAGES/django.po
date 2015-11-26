@@ -3213,3 +3213,6 @@ msgstr "available resources"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "resources added"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "does not exist, try again with other keywords."
