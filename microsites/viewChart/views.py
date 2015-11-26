@@ -44,22 +44,9 @@ def view(request, id, slug=None):
     """
     Show a microsite view
     """
-    try:
-        account = request.account
-        is_free = False
-    except AttributeError:
-        try:
-            account_id = Visualization.objects.values('user__account_id').get(pk=id)['user__account_id']
-            account = Account.objects.get(pk=account_id)
-            is_free = True
-        except (Visualization.DoesNotExist, Account.DoesNotExist), e:
-            raise VisualizationDoesNotExist
+    account = request.account
 
     preferences = request.preferences
-    if not is_free:
-        base_uri = 'http://' + preferences['account_domain']
-    else:
-        base_uri = get_domain_with_protocol('microsites')
 
     try:
         visualization_revision = VisualizationDBDAO().get(
@@ -128,7 +115,7 @@ def embed(request, guid):
     visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
     visualization_revision_parameters['pId'] = visualization_revision["datastream_revision_id"]
     
-    command = AbstractCommandFactory().create("invoke", 
+    command = AbstractCommandFactory('microsites').create("invoke", 
             "vz", (visualization_revision_parameters,))
     json, type = command.run()
     visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)

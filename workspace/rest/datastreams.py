@@ -15,6 +15,7 @@ class RestDataStreamViewSet(ResourceViewSet):
     data_types = ['ds']
     dao_get_param = 'datastream_revision_id'
     dao_pk = 'datastream_revision_id'
+    app = 'workspace'
     
     @detail_route(methods=['get'], renderer_classes=[
         renderers.JSONRenderer,

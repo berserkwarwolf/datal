@@ -19,7 +19,6 @@ from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
 from core.exceptions import VisualizationNotFoundException
-from core.v8.factories import AbstractCommandFactory
 from core.exceptions import DataStreamNotFoundException
 from core.signals import visualization_changed, visualization_removed, visualization_unpublished, \
     visualization_rev_removed

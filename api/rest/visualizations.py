@@ -13,3 +13,4 @@ class VisualizationViewSet(ResourceViewSet):
     lookup_field = 'guid'
     dao_get_param = 'guid'
     data_types = ['vz']
+    app = 'microsites'
