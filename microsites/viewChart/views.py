@@ -111,11 +111,8 @@ def embed(request, guid):
     base_uri = 'http://' + preferences['account_domain']
 
     try:
-        visualizationrevision_id = VisualizationRevision.objects.get_last_published_by_guid(guid)
         visualization_revision = VisualizationDBDAO().get(
-            preferences['account_language'],
-            visualization_revision_id=visualizationrevision_id
-        )
+            preferences['account_language'], published=True, guid=guid )
 
         datastream = DataStreamDBDAO().get(
             preferences['account_language'],
