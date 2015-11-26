@@ -2,9 +2,10 @@ var FiltersOptionsView = Backbone.View.extend({
     events: {
         'click button.btn-clear': 'onClickClear',
         'click button.btn-back': 'onClickBack',
-        'click button.btn-ok': 'onClickOk'
+        'click button.btn-ok': 'onClickOk',
+        'change select.select-column': 'onChangeColumn',
+        'change select.select-operation': 'onChangeOperantion'
     },
-
 
     initialize: function () {
         this.template = _.template( $('#filters_options_template').html() );
@@ -34,6 +35,16 @@ var FiltersOptionsView = Backbone.View.extend({
     onClickOk: function () {
         this.model.set('mode', 'data');
     },
+
+    onChangeColumn: function (e) {
+        console.log(e, 'onChangeColumn');
+    },
+
+
+    onChangeOperation: function (e) {
+        console.log(e, 'onChangeOperation');
+    },
+
 
     show: function () {
         this.$el.removeClass('hidden');
