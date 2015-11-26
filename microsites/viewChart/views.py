@@ -44,22 +44,10 @@ def view(request, id, slug=None):
     """
     Show a microsite view
     """
-    try:
-        account = request.account
-        is_free = False
-    except AttributeError:
-        try:
-            account_id = Visualization.objects.values('user__account_id').get(pk=id)['user__account_id']
-            account = Account.objects.get(pk=account_id)
-            is_free = True
-        except (Visualization.DoesNotExist, Account.DoesNotExist), e:
-            raise VisualizationDoesNotExist
+    account = request.account
 
     preferences = request.preferences
-    if not is_free:
-        base_uri = 'http://' + preferences['account_domain']
-    else:
-        base_uri = get_domain_with_protocol('microsites')
+    base_uri = 'http://' + preferences['account_domain']
 
     try:
         visualization_revision = VisualizationDBDAO().get(
