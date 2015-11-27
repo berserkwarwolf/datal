@@ -3189,6 +3189,9 @@ msgstr "Valor inválido"
 msgid "APP-SEARCH-PLACEHOLDER-TEXT"
 msgstr "Buscar..."
 
+msgid "APP-ALL-TYPES-TEXT"
+msgstr "Todos los tipos"
+
 msgid "APP-ALL-CATEGORIES-TEXT"
 msgstr "Todas las categorías"
 
