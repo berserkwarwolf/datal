@@ -2,11 +2,11 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="120px"
-	 height="1380px" viewBox="0 0 120 1380" enable-background="new 0 0 120 1380" xml:space="preserve">
+	 height="1416.25px" viewBox="0 0 120 1416.25" enable-background="new 0 0 120 1416.25" xml:space="preserve">
 <symbol  id="New_Symbol_2">
 </symbol>
 <g id="Background" display="none">
-	<rect display="inline" fill="#EFA14D" width="120" height="1380"/>
+	<rect display="inline" fill="#EFA14D" width="120" height="1416.25"/>
 </g>
 <g id="Icons">
 	<g>
@@ -606,6 +606,18 @@
 			C99.594,1358.04,97.985,1359.649,96,1359.649z"/>
 		<circle fill="#0066FF" cx="96" cy="1356.055" r="1.886"/>
 	</g>
+	<g>
+		<path fill="#999999" d="M28.748,1394.813c0.773-1.152,1.227-2.539,1.227-4.03c0-4.006-3.246-7.249-7.25-7.249
+			c-4.002,0-7.247,3.243-7.247,7.249c0,4.002,3.245,7.247,7.247,7.247c1.549,0,2.982-0.49,4.161-1.317l3.758,3.755l1.879-1.879
+			L28.748,1394.813z M22.725,1395.814c-2.776,0-5.034-2.259-5.034-5.032c0-2.777,2.258-5.035,5.034-5.035
+			c2.777,0,5.036,2.258,5.036,5.035C27.76,1393.556,25.501,1395.814,22.725,1395.814z"/>
+	</g>
+	<g>
+		<path d="M64.748,1394.813c0.772-1.152,1.227-2.539,1.227-4.03c0-4.006-3.246-7.249-7.25-7.249c-4.002,0-7.247,3.243-7.247,7.249
+			c0,4.002,3.245,7.247,7.247,7.247c1.549,0,2.982-0.49,4.161-1.317l3.758,3.755l1.879-1.879L64.748,1394.813z M58.725,1395.814
+			c-2.776,0-5.034-2.259-5.034-5.032c0-2.777,2.258-5.035,5.034-5.035c2.776,0,5.036,2.258,5.036,5.035
+			C63.761,1393.556,61.501,1395.814,58.725,1395.814z"/>
+	</g>
 </g>
 <g id="Labels" display="none">
 	<rect x="12" y="516" display="inline" fill="none" width="24" height="24"/>
@@ -623,8 +635,8 @@
 	<rect x="12" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="552" display="inline" fill="none" width="24" height="24"/>
 	<text transform="matrix(1 0 0 1 140 532)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-column  (  D: -12px -516px;  )</text>
-	<text transform="matrix(1 0 0 1 140 27)" display="inline" font-family="'Roboto-Regular'" font-size="10">home  (  D: -12px -12px;   H: -48px -12px;  A: -12px -84px;  )</text>
-	<text transform="matrix(1 0 0 1 140 64)" display="inline" font-family="'Roboto-Regular'" font-size="10">datasets  (  D: -12px -48px;   H: -48px -48px;  A: -48px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 27)" display="inline" font-family="'Roboto-Regular'" font-size="10">home  (  D: -12px -12px;   H: -48px -12px;  A: -84px -12px;  )</text>
+	<text transform="matrix(1 0 0 1 140 64)" display="inline" font-family="'Roboto-Regular'" font-size="10">datasets  (  D: -12px -48px;   H: -48px -48px;  A: -84px -48px;  )</text>
 	<text transform="matrix(1 0 0 1 140 568)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-line  (  D: -12px -552px;  )</text>
 	<text transform="matrix(1 0 0 1 140 604)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-area  (  D: -12px -588px;  )</text>
 	<text transform="matrix(1 0 0 1 140 640)" display="inline" font-family="'Roboto-Regular'" font-size="10">chart-pie  (  D: -12px -624 px;  )</text>
@@ -668,10 +680,10 @@
 	<rect x="12" y="12" display="inline" fill="none" width="24" height="24"/>
 	<rect x="12" y="48" display="inline" fill="none" width="24" height="24"/>
 	<text transform="matrix(1 0 0 1 140 100)" display="inline" font-family="'Roboto-Regular'" font-size="10">views  (  D: -12px -84px;   H: -48px -84px;  A: -84px -84px;  )</text>
-	<text transform="matrix(1 0 0 1 140 136)" display="inline" font-family="'Roboto-Regular'" font-size="10">visualizations  (  D: -12px -120px;   H: -48px -120px;  A: -120px -84px;  )</text>
-	<text transform="matrix(1 0 0 1 140 172)" display="inline" font-family="'Roboto-Regular'" font-size="10">dashboards  (  D: -12px -156px;   H: -48px -156px;  A: -156px -84px;  )</text>
-	<text transform="matrix(1 0 0 1 140 208)" display="inline" font-family="'Roboto-Regular'" font-size="10">reports  (  D: -12px -192px;   H: -48px -192px;  A: -192px -84px;  )</text>
-	<text transform="matrix(1 0 0 1 140 244)" display="inline" font-family="'Roboto-Regular'" font-size="10">config  (  D: -12px -228px;   H: -48px -228px;  A: -228px -84px;  )</text>
+	<text transform="matrix(1 0 0 1 140 136)" display="inline" font-family="'Roboto-Regular'" font-size="10">visualizations  (  D: -12px -120px;   H: -48px -120px;  A: -84px -120px ;  )</text>
+	<text transform="matrix(1 0 0 1 140 172)" display="inline" font-family="'Roboto-Regular'" font-size="10">dashboards  (  D: -12px -156px;   H: -48px -156px;  A: -84px -156px;  )</text>
+	<text transform="matrix(1 0 0 1 140 208)" display="inline" font-family="'Roboto-Regular'" font-size="10">reports  (  D: -12px -192px;   H: -48px -192px;  A: -84px -192px;  )</text>
+	<text transform="matrix(1 0 0 1 140 244)" display="inline" font-family="'Roboto-Regular'" font-size="10">config  (  D: -12px -228px;   H: -48px -228px;  A: -84px -228px;  )</text>
 	<text transform="matrix(1 0 0 1 140 279)" display="inline" font-family="'Roboto-Regular'" font-size="10">edit  (  D: -12px -264px;   A: -84px -264px;  )</text>
 	<text transform="matrix(1 0 0 1 140 424)" display="inline" font-family="'Roboto-Regular'" font-size="10">delete  (  D: -12px -408px;   H: -48px -408px;  )</text>
 	<rect x="12" y="84" display="inline" fill="none" width="24" height="24"/>
@@ -729,7 +741,7 @@
 	<rect x="48" y="156" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="192" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="228" display="inline" fill="none" width="24" height="24"/>
-	<rect x="-24" display="inline" fill="#9B6A3A" width="12" height="1344.016"/>
+	<rect x="-24" display="inline" fill="#9B6A3A" width="12" height="1380"/>
 	<text transform="matrix(0 -1 1 0 28.0005 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(D)  DEFAULT</text>
 	<text transform="matrix(0 -1 1 0 64 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(H)  HOVER</text>
 	<text transform="matrix(0 -1 1 0 100 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(A)  ACTIVE</text>
@@ -765,7 +777,7 @@
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="624" display="inline" fill="none" width="24" height="24"/>
 	
-		<image display="inline" overflow="visible" width="2732" height="768" xlink:href="DE69F312.jpg"  transform="matrix(1 0 0 1 -8072 -7668)">
+		<image display="inline" overflow="visible" width="2732" height="768" xlink:href="DE69F311.jpg"  transform="matrix(1 0 0 1 -8072 -7668)">
 	</image>
 	<text transform="matrix(1 0 0 1 140 1072)" display="inline" font-family="'Roboto-Regular'" font-size="10">new-tab  (  D: -12px -1056px;   H: -48px -1056px;  )</text>
 	<text transform="matrix(1 0 0 1 140 1104.1035)" display="inline" font-family="'Roboto-Regular'" font-size="10">ayuda  (  D: -12px -1092px;   H: -48px -1092px; A: -84px -1092px;  )</text>
@@ -791,8 +803,12 @@
 	<rect x="12" y="1344.016" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1344.016" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1344.016" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1380" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1380" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1380" display="inline" fill="none" width="24" height="24"/>
 	<text transform="matrix(1 0 0 1 140 1286.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">add-xs  (  D: -12px -1272px;   H: -48px -1272px;   A: -84px -1272px; )</text>
 	<text transform="matrix(1 0 0 1 140 1324.6025)" display="inline" font-family="'Roboto-Regular'" font-size="10">close  (  D: -12px -1308px;   H: -48px -1308px;  )</text>
 	<text transform="matrix(1 0 0 1 140 1356.0156)" display="inline" font-family="'Roboto-Regular'" font-size="10">eye  (  D: -12px -1344px;   H: -48px -1344px;   A: -84px -1344px; )</text>
+	<text transform="matrix(1 0 0 1 140 1393.9756)" display="inline" font-family="'Roboto-Regular'" font-size="10">search-form  (  D: -12px -1380px;   H: -48px -1380px;   A: -84px -1380px; )</text>
 </g>
 </svg>
