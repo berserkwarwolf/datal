@@ -2696,7 +2696,7 @@ msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "here"
 
 msgid "APP-SELECT-DATASET-TEXT"
-msgstr "Select Dataset"
+msgstr "New Data View"
 
 msgid "APP-SELECT-DATASTREAM-TEXT"
 msgstr "Select View"

@@ -1,9 +1,19 @@
 {% extends 'base.html' %}
-{% load i18n extra_tags compress staticfiles sass_tags %}
+{% load i18n extra_tags compress staticfiles sass_tags core_components components %}
 
 {% block css_includes %}
 		{% compress css %}
 		<link href="{% sass_src 'workspace/styles/common.scss' %}" rel="stylesheet" type="text/css" />
+		
+
+
+		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-paginator.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-text-cell.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
+
+
+
 		{% endcompress %}
 		<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
 {% endblock %}
@@ -51,6 +61,24 @@
 <!-- Error Manager Module -->
 <script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerModel.js' %}"></script>
 <script language="javascript" src="{% static 'workspace/scripts/errorManager/errorManagerView.js' %}"></script>
+
+
+
+
+
+<script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
+<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
+
+
+<script src="{% static 'workspace/scripts/manageDataviews/datasetItemModel.js' %}"></script>
+<script src="{% static 'workspace/scripts/manageDataviews/listDatasets.js' %}"></script>
+<script src="{% static 'workspace/scripts/manageDataviews/datasetItemView.js' %}"></script>
+<script src="{% static 'workspace/scripts/manageDataviews/manageDatasetsOverlayView.js' %}"></script>
+
 	
 {% endblock %}
 
@@ -146,11 +174,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<!-- Global Overlays - Used on all screens -->
+	{% include "global_overlays_workspace.html" %}
+
 {% endblock %}
 
 {% block base_bottom_js %}
 
-		{% include "errorManager/errorManager.html" %}
+	{% include "errorManager/errorManager.html" %}
 
 	<script type="text/javascript">
 
@@ -172,6 +204,7 @@
 		Configuration.apiUri = "{{settings.API_URI}}";
 		Configuration.apiKey = "{{settings.PUBLIC_KEY}}";
 		Configuration.language = "{{LANGUAGE_CODE}}";
+		Configuration.createDataViewUrl = "{% url 'manageDataviews.create' %}";
 
 		csrfmiddlewaretoken = '{{ csrf_token }}';
 

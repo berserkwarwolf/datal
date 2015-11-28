@@ -2689,7 +2689,7 @@ msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "aquí"
 
 msgid "APP-SELECT-DATASET-TEXT"
-msgstr "Seleccionar un Conjunto de datos"
+msgstr "Nueva vista"
 
 msgid "APP-SELECT-DATASTREAM-TEXT"
 msgstr "Seleccionar una Vista"

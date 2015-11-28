@@ -26,7 +26,6 @@ var ManageDataviewsView = Backbone.View.extend({
 
 		this.sourceUrl = options.sourceUrl;
 		this.tagUrl = options.tagUrl;
-		this.dataViewCreationStepsUrl = options.dataViewCreationStepsUrl;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());
@@ -177,9 +176,7 @@ var ManageDataviewsView = Backbone.View.extend({
 	},
 
 	onAddNewButtonClicked: function() {
-		var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
-			dataViewCreationStepsUrl: this.dataViewCreationStepsUrl,
-		});
+		var manageDatasetsOverlayView = new ManageDatasetsOverlayView();
 	},
 
 	onEditButtonClicked: function(event){
