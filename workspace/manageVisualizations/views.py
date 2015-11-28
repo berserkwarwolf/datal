@@ -176,9 +176,6 @@ def change_status(request, visualization_revision_id=None):
         if action == 'approve':
             lifecycle.accept()
 
-            # Signal
-            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -189,9 +186,6 @@ def change_status(request, visualization_revision_id=None):
         elif action == 'reject':
             lifecycle.reject()
 
-            # Signal
-            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -201,9 +195,6 @@ def change_status(request, visualization_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
-
-            # Signal
-            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
 
             response = dict(
                 status='ok',
@@ -217,7 +208,6 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.unpublish(killemall=killemall)
 
             # Signal
-            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
             visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
 
             response = dict(
@@ -229,9 +219,6 @@ def change_status(request, visualization_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-
-            # Signal
-            visualization_changed.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
 
             response = dict(
                 status='ok',

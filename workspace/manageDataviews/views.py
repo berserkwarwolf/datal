@@ -335,9 +335,6 @@ def change_status(request, datastream_revision_id=None):
         if action == 'approve':
             lifecycle.accept()
 
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -348,9 +345,6 @@ def change_status(request, datastream_revision_id=None):
         elif action == 'reject':
             lifecycle.reject()
 
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -360,9 +354,6 @@ def change_status(request, datastream_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
-
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
 
             response = dict(
                 status='ok',
@@ -380,7 +371,6 @@ def change_status(request, datastream_revision_id=None):
                 description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
 
             # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
             datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
 
             response = dict(
@@ -392,9 +382,6 @@ def change_status(request, datastream_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
 
             response = dict(
                 status='ok',

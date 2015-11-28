@@ -430,9 +430,6 @@ def change_status(request, dataset_revision_id=None):
         if action == 'approve':
             lifecycle.accept()
 
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -442,8 +439,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'reject':
             lifecycle.reject()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -453,8 +448,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -471,7 +464,6 @@ def change_status(request, dataset_revision_id=None):
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
 
             # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
 
             response = dict(
@@ -483,8 +475,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
