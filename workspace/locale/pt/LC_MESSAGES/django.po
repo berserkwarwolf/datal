@@ -2699,7 +2699,7 @@ msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "here"
 
 msgid "APP-SELECT-DATASET-TEXT"
-msgstr "Select Dataset"
+msgstr "New Data View"
 
 msgid "APP-SELECT-DATASTREAM-TEXT"
 msgstr "Select View"
@@ -2918,6 +2918,9 @@ msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Create a new dataset to begin"
 
 msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "New Visualization"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
 msgstr "Which dataview you want to use?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"
@@ -3216,6 +3219,24 @@ msgstr "available resources"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "resources added"
+
+msgid "APP-UPLOAD-FILE-LINK"
+msgstr "From file"
+
+msgid "APP-WEBSITE-LINK"
+msgstr "From URL or website"
+
+msgid "APP-WEBSERVICE-LINK"
+msgstr "From webservice"
+
+msgid "APP-LISTRESOURCES-TEXT"
+msgstr "List"
+
+msgid "APP-NEWFEMALE-TEXT"
+msgstr "New"
+
+msgid "APP-NEWMALE-TEXT"
+msgstr "New"
 
 msgid "APP-DOES-NOT-EXIST-TEXT"
 msgstr "does not exist, try again with other keywords."

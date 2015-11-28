@@ -93,9 +93,3 @@
 
 .list-container .backgrid th, 
 .list-container .backgrid td{border:0;max-width:300px;}
-
-/* Overlays */
-.ao-popup-overlay table th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}
-
-#id_addDataview #dataset_grid, 
-#id_addVisualization #visualization_grid{height:280px;overflow:auto;overflow-x:hidden;}

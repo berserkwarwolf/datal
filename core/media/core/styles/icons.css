@@ -20,10 +20,8 @@
 /* Icons with background */
 .fill-background{width:48px;height:48px;background-color:#0066cc;}
 
-
 /* Position */
 .corner-position{position:absolute;top:0;right:0;z-index:100;}
-
 
 /* 48px icons */
 .size-48{
@@ -31,47 +29,46 @@
 
 /* Nav local */
 .icon-home,
-.button:hover .icon-home{background-position:-12px -12px;}
+li:hover .button .icon-home{background-position:-12px -12px;}
 .icon-home:hover,
-.button.active .icon-home{background-position:-48px -12px;}
+li.active .icon-home{background-position:-48px -12px;}
 .icon-home.inactive{background-position:-84px -12px;}
 
 .icon-datasets,
-.button:hover .icon-datasets{background-position:-12px -48px;}
+li:hover .button .icon-datasets{background-position:-12px -48px;}
 .icon-datasets:hover,
-.button.active .icon-datasets{background-position:-48px -48px;}
+li.active .icon-datasets{background-position:-48px -48px;}
 .icon-datasets.inactive{background-position:-84px -48px;}
 
 .icon-dataviews,
-.button:hover .icon-dataviews{background-position:-12px -84px;}
+li:hover .button .icon-dataviews{background-position:-12px -84px;}
 .icon-dataviews:hover,
-.button.active .icon-dataviews{background-position:-48px -84px;}
+li.active .icon-dataviews{background-position:-48px -84px;}
 .icon-dataviews.inactive{background-position:-84px -84px;}
 
 .icon-visualizations,
-.button:hover .icon-visualizations{background-position:-12px -120px;}
+li:hover .button .icon-visualizations{background-position:-12px -120px;}
 .icon-visualizations:hover,
-.button.active .icon-visualizations{background-position:-48px -120px;}
+li.active .icon-visualizations{background-position:-48px -120px;}
 .icon-visualizations.inactive{background-position:-84px -120px;}
 
 .icon-dashboards,
-.button:hover .icon-dashboards{background-position:-12px -156px;}
+li:hover .button .icon-dashboards{background-position:-12px -156px;}
 .icon-dashboards:hover,
-.button.active .icon-dashboards{background-position:-48px -156px;}
+li.active .icon-dashboards{background-position:-48px -156px;}
 .icon-dashboards.inactive{background-position:-84px -156px;}
 
 .icon-reports,
-.button:hover .icon-reports{background-position:-12px -192px;}
+li:hover .button .icon-reports{background-position:-12px -192px;}
 .icon-reports:hover,
-.button.active .icon-reports{background-position:-48px -192px;}
+li.active .icon-reports{background-position:-48px -192px;}
 .icon-reports.inactive{background-position:-84px -192px;}
 
 .icon-settings,
-.button:hover .icon-settings{background-position:-12px -228px;}
+li:hover .button .icon-settings{background-position:-12px -228px;}
 .icon-settings:hover,
-.button.active .icon-settings{background-position:-48px -228px;}
+li.active .icon-settings{background-position:-48px -228px;}
 .icon-settings.inactive{background-position:-84px -228px;}
-
 
 /* General icons */
 .icon-view-site{background-position:-12px -696px;}
@@ -112,7 +109,6 @@
 
 /* Arrows */
 .icon-arrow-down-right{background-position:-12px -1128px;}
-
 
 /* Actions */
 .icon-edit{background-position:-12px -264px;}
@@ -162,7 +158,6 @@
 	.tab.pulldown .icon-pulldown,
 	.tab.pulldown .icon-pulldown.icon-right{margin:0;}
 
-
 /* Charts */
 .icon-chart-column{background-position:-12px -516px;}
 .icon-chart-column.size-48{background-position:-24px -1032px;}
@@ -178,7 +173,6 @@
 
 .icon-chart-bar{background-position:-12px -660px;}
 .icon-chart-bar.size-48{background-position:-24px -1320px;}
-
 
 /* Maps */
 .icon-map-marker{background-position:-12px -948px;}

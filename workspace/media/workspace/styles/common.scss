@@ -251,35 +251,99 @@ body{background:$color-base;height:100%;min-width:998px;}
 
 }
 
-/* Main Nav */
-.main-navigation{padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
-  li{@include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));
-    & > a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
+/* Local nav */
+.main-navigation{
+  padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
+  
+  /* Default list */
+  ul{
 
-      /* Hover */
-      &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
+    /* Bottom list*/
+    &.bottom-navigation{
+      position:absolute;bottom:0;left:0;width:100%;
 
-      /* Active */
-      &.active,
-      &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
-
-      /* Erase button active state */
-      &:active{@include box-shadow(0 0 0 transparent);}
-
-      /* Disabled */
-      &.disabled{@include opacity(30);cursor:default;
+      li.footer{
+        color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
         &:hover{background:none;}
-      }
 
-    }
-  }
-  ul.bottom-navigation{position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,.4);
-    li{@include box-shadow(inset 0 1px 0 0 rgba(255,255,255,.1));}
-    .footer{color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
-      & > a{color:rgba(255,255,255,.7);
-        &:hover{color:#fff}
+        a{color:rgba(255,255,255,.7);
+          &:hover{color:#fff;}
+        }
       }
     }
+
+      /* Default list item */
+      li{
+        @include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.05));position:relative;
+
+        /* Default item button */
+        a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;}
+
+        /* List item :active */
+        &.active{
+          background:$nav-active-bg;
+
+          /* Active button */
+          a.button{
+            color:$nav-active-text;
+            &:hover{color:$nav-hover-text;}
+          }
+        }
+
+        /* List item :hover */
+        &:hover{
+          background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;
+          a.button{color:$nav-hover-text;}
+        }
+
+        /* List item :disabled */
+        &.disabled{
+          a{@include opacity(30);cursor:default;
+            &:hover{background:none;}
+          }
+        }
+
+          /* List item with submenu */
+          &.has-submenu{
+            ul.submenu{display:none;}
+
+            /* Submenu list */
+            &:hover ul.submenu{
+              position:absolute;display:block !important;background:$nav-secondary-bg;width:145px;top:0;left:54px;padding:10px 20px;z-index:400;
+              @include media-query(min-width, $break-lg){left:200px;}
+
+              /* Submenu list item */
+              li{
+                position:relative;@include box-shadow(0 0 0 transparent);
+                &:hover{background:none;}
+
+                /* Submenu list title */
+                &.submenu-header{
+                  @include media-query(min-width, $break-lg){display:none;}
+                  a{color:$nav-text;font-size:$font-size-m;}
+                }
+
+                /* Submenu item buttom */
+                a{
+                  display:block;padding:10px 0;color:$nav-secondary-text;text-indent:0;
+                  &:hover{color:$nav-hover-text;}
+                }
+
+                /* Submenu item with no link */
+                a.no-link{color:$nav-secondary-no-link-text;font-style:italic;cursor:default;}
+
+                ul{padding-left:20px;}
+              }
+              
+            }
+          }
+
+          /* Bottom list item */
+          &.bottom-submenu{
+            &:hover ul.submenu{top:inherit;bottom:-1px;}
+          }
+
+      }
   }
 }
 
@@ -601,6 +665,11 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .backgrid tr:hover td h3,
 .ao-popup-overlay .backgrid tr:hover td a,
 .ao-popup-overlay .backgrid tr:hover td p{background-color:$accent-color;color:#FFF;cursor:pointer;text-shadow:0 1px 0 $accent-color-bold;}
+.ao-popup-overlay .backgrid th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}
+
+/* Overlay Add Data View / Add Visualization */
+#id_addDataview #dataset_grid, 
+#id_addVisualization #visualization_grid{height:280px;overflow:auto;overflow-x:hidden;}
 
 /* Override For Empty */
 .empty{}
