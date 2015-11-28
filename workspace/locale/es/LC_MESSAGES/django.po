@@ -2908,6 +2908,9 @@ msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Crea un nuevo conjunto de datos para comenzar"
 
 msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "Nueva visualización"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
 msgstr "¿Qué vista quieres usar?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"

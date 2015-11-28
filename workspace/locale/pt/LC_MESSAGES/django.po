@@ -2915,6 +2915,9 @@ msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Create a new dataset to begin"
 
 msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "New Visualization"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
 msgstr "Which dataview you want to use?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"
