@@ -10,7 +10,8 @@ var BaseView = Backbone.View.extend({
 	events: {
 		"click .header .tab.pulldown > a": "onHeaderPulldownButtonClicked",
 		"click .button-pulldown .button": "toggleDropDownMenu",
-		"click #id_navNewDataview": "onNewDataviewButtonCLicked",
+		"click #id_navNewDataview": "onNewDataviewButtonClicked",
+		"click #id_navNewVisualization": "onNewVisualizationButtonClicked",
 	},
 
 	initialize: function(){
@@ -122,8 +123,13 @@ var BaseView = Backbone.View.extend({
 	},
 
 	// New Data View Local Nav clicked
-	onNewDataviewButtonCLicked: function(){
+	onNewDataviewButtonClicked: function(){
 		var manageDatasetsOverlayView = new ManageDatasetsOverlayView();
-	}
+	},
+
+	// New Visualization Local Nav clicked
+	onNewVisualizationButtonClicked: function(){
+		var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView();
+	},
 
 });

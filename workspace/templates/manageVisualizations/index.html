@@ -15,27 +15,17 @@
 <script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/backbone_paginator/backbone.paginator.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid/backgrid.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid_paginator/backgrid-paginator.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-text-cell/backgrid-text-cell.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-select-all/backgrid-select-all.min.js"></script>
-<script type="text/javascript" src="/js_core/libs/backgrid-filter/backgrid-filter.min.js"></script>
 <script type="text/javascript" src="/js_core/plugins/nicEdit/nicEdit-2014.js"></script>
 
 {# JS for this screen #}
 <script src="{% static 'workspace/scripts/manageVisualizations/resourceItemModel.js' %}"></script>
-<script src="{% static 'workspace/scripts/manageVisualizations/datastreamItemModel.js' %}"></script>
-<script src="{% static 'workspace/scripts/manageVisualizations/datastreamItemView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/manageVisualizationsModel.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/manageVisualizationsView.js' %}"></script>
-<script src="{% static 'workspace/scripts/manageVisualizations/manageDatastreamsOverlayView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/datastreamCellView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/titleCellView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/visualizationCellView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/filtersView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/listResources.js' %}"></script>
-<script src="{% static 'workspace/scripts/manageVisualizations/listDatastreams.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/deleteItemView.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/affectedResourcesModel.js' %}"></script>
 <script src="{% static 'workspace/scripts/manageVisualizations/affectedResourcesCollectionView.js' %}"></script>
@@ -116,7 +106,6 @@
 
     var manageVisualizationsView =  new ManageVisualizationsView({
       model: manageVisualizationsModel,
-      visualizationCreationStepsUrl: "{% url 'manageVisualizations.create' %}",
       sourceUrl: '/rest/sources.json',
       tagUrl: '/rest/tags.json',
       filters: {{filters|jsonify}}
