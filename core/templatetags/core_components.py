@@ -19,14 +19,14 @@ def permalink(pk, obj_type):
         )
     elif obj_type == 'datastream':
         return reverse(
-            'manageDataviews.view',
+            'viewDataStream.view',
             'microsites.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
     elif obj_type == 'visualization':
         return reverse(
-            'manageVisualizations.view',
-            'workspace.urls',
+            'chart_manager.view',
+            'microsites.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
     else:

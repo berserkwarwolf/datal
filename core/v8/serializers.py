@@ -7,7 +7,7 @@ logger = logging.getLogger(__name__)
 
 class EngineSerializer(serializers.Serializer):
 
-    def get_filename(self, obj, engine_result=None):
+    def get_filename(self, obj, engine_result=None, redirect=False):
         # busco nombre original
         filename = None
         dao_filename = self.context['dao_filename']
@@ -17,7 +17,7 @@ class EngineSerializer(serializers.Serializer):
         # busco segunda opcion
         filename2 = None
         redirect_to = ''
-        if engine_result and engine_result.get('fType') == 'REDIRECT':
+        if redirect:
             redirect_to = engine_result.get('fUri')
             filename2 = redirect_to.split('/')[-1:][0].encode('utf-8')
             extension = redirect_to.split('.')[-1:][0]
@@ -40,9 +40,9 @@ class EngineSerializer(serializers.Serializer):
             redirect = False
             if ('format' in obj and obj['format'].startswith('application/json') and obj['result']):
                 json_data = json.loads(obj['result'])
-                redirect = json_data.get('fType') == 'REDIRECT'
+                redirect = isinstance(json_data, dict) and json_data.get('fType') == 'REDIRECT'
             
-            filename = self.get_filename(obj, json_data)
+            filename = self.get_filename(obj, json_data, redirect)
             return {'result': json_data or obj['result'], 
                     'redirect': redirect, 
                     'filename': filename 

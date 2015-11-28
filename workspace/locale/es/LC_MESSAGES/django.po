@@ -1345,6 +1345,9 @@ msgstr "URL"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu vista"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Palabras clave para ayudar a identificar el contenido de tu conjunto de datos"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Etiquetas Recomendadas"
 
@@ -2746,7 +2749,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "El conjunto de datos y sus recursos asociados han sido puestos como pendientes de aprobación, y no están más disponibles en el sitio de datos."
+msgstr "El conjunto de datos se puso como borrador y sus recursos asociados han sido puestos como pendientes de aprobación, y ambos no están más disponibles en el sitio de datos."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Conjunto de datos enviado a revisión"
@@ -3189,6 +3192,9 @@ msgstr "Valor inválido"
 msgid "APP-SEARCH-PLACEHOLDER-TEXT"
 msgstr "Buscar..."
 
+msgid "APP-ALL-TYPES-TEXT"
+msgstr "Todos los tipos"
+
 msgid "APP-ALL-CATEGORIES-TEXT"
 msgstr "Todas las categorías"
 
@@ -3218,3 +3224,6 @@ msgstr "Nueva"
 
 msgid "APP-NEWMALE-TEXT"
 msgstr "Nuevo"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "no existe, intente nuevamente con otra palabra clave."

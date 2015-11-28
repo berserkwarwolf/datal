@@ -128,7 +128,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         return dataset
         
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None):
 
         """ Query for full dataset lists"""
 
@@ -150,14 +151,22 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
 
-        if filter_status:
-             query = query.filter(status__in=fileter_status)
+        if filter_status is not None:
+             query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(dataseti18n__title__icontains=filter_text) | 
+                                 Q(dataseti18n__description__icontains=filter_text))
 
         total_resources = query.count()
 
         query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id',
                              'impl_type', 'dataset__guid', 'category__id', 'dataset__id', 'id',
-                             'category__categoryi18n__name', 'dataseti18n__title', 'dataseti18n__description',
+                             'category__categoryi18n__name', 'category__categoryi18n__slug',
+                             'dataseti18n__title', 'dataseti18n__description',
                              'created_at', 'modified_at', 'size', 'end_point', 'dataset__user__id',
                              'dataset__last_revision_id', 'dataset__last_published_revision__modified_at')
         """

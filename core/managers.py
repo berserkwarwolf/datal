@@ -327,14 +327,6 @@ class DataStreamRevisionManager(models.Manager):
         return last_guids
 
 
-class VisualizationRevisionManager(models.Manager):
-    def get_last_published_by_guid(self, guid):
-        return super(VisualizationRevisionManager, self).filter(
-            visualization__guid=guid,
-            status=choices.StatusChoices.PUBLISHED
-        ).aggregate(models.Max('id'))['id__max']
-
-
 class ObjectGrantManager(models.Manager):
 
     def get_collaborators(self, object_id, object_type):

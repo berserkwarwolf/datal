@@ -1367,6 +1367,9 @@ msgstr "Url"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Keywords to help identify your data view content. Separate the tags with commas"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Keywords to help identify your dataset content. Separate the tags with commas"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Recomended Tags"
 
@@ -2759,7 +2762,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "The Dataset and it's asociated resources have been set as pending for review, and are no longer available on your Open Data site."
+msgstr "The Dataset has been set as draft and it's asociated resources have been set as pending for review, and both are no longer available on your Open Data site."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
@@ -3202,6 +3205,9 @@ msgstr "Invalid value"
 msgid "APP-SEARCH-PLACEHOLDER-TEXT"
 msgstr "Search..."
 
+msgid "APP-ALL-TYPES-TEXT"
+msgstr "All types"
+
 msgid "APP-ALL-CATEGORIES-TEXT"
 msgstr "All categories"
 
@@ -3231,3 +3237,6 @@ msgstr "New"
 
 msgid "APP-NEWMALE-TEXT"
 msgstr "New"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "does not exist, try again with other keywords."

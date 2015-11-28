@@ -127,3 +127,4 @@ class DataSetViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, ResourceV
     lookup_field = 'guid'
     dao_get_param = 'guid'
     data_types = ['dt']
+    app = 'microsites'

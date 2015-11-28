@@ -15,7 +15,6 @@ from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevisi
 from core.http import JSONHttpResponse
 from core.decorators import datal_cache_page
 from core.signals import datastream_changed, datastream_removed, datastream_unpublished, datastream_rev_removed
-from core.v8.factories import AbstractCommandFactory
 from core.utils import DateTimeEncoder
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *

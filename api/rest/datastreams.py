@@ -12,7 +12,10 @@ from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
 from core.choices import StatusChoices
+from core.v8.forms import DatastreamRequestForm
+from rest_framework import renderers
 from core.builders.datastreams import SelectStatementBuilder, DataSourceBuilder
+from core.v8.renderers import *
 
 class DataStreamSerializer(ResourceSerializer):
     title = serializers.CharField(
@@ -69,7 +72,7 @@ class DataStreamSerializer(ResourceSerializer):
             table_id = data.pop('table_id')
             data['select_statement'] = SelectStatementBuilder().build(table_id)
             data['data_source'] = DataSourceBuilder().build(table_id,
-                self.dataset['last_published_revision_id'])
+                self.dataset['last_published_revision_id'], 'microsites')
 
         if 'category' in data and data['category']:
             data['category'] = self.getCategory(data['category'])
@@ -97,7 +100,20 @@ class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
     data_types = ['ds']
     dao_get_param = 'guid'
     dao_pk = 'datastream_revision_id'
+    app = 'microsites'
 
-    @detail_route(methods=['get'])
-    def data(self, request, pk=None, *args, **kwargs):
-        return self.engine_call(request, 'invoke')
+    @detail_route(methods=['get'], renderer_classes=[
+        renderers.BrowsableAPIRenderer,
+        renderers.JSONRenderer,
+        CSVEngineRenderer,
+        XLSNonRedirectEngineRenderer,
+        TSVEngineRenderer,
+        XMLEngineRenderer,
+        PJSONEngineRenderer,
+        AJSONEngineRenderer,])
+    def data(self, request, pk=None, format=None,  *args, **kwargs):
+        if format == 'json' or not format:
+            return self.engine_call(request, 'invoke')
+        return self.engine_call(request, 'invoke', format, 
+            serialize=False, form_class=DatastreamRequestForm,
+            download=False)

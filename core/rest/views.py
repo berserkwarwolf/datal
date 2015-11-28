@@ -18,6 +18,7 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
     lookup_field = 'guid'
     data_types = ['dt', 'ds', 'vz']
     dao_filename = 'filename'
+    app = 'workspace'
         
     def list(self, request, format='json'):
         rp = self.request.query_params.get('rp', None) # TODO check for rp arguemnt used in some grids

@@ -6,7 +6,8 @@ var viewChartView = Backbone.View.extend({
     chartContainer: "#id_visualizationResult",
         
     events:{
-        'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage' 
+        'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage',
+        'click #id_permalink, #id_GUID': 'onInputClicked',
     },
 
     initialize : function() {
@@ -15,6 +16,7 @@ var viewChartView = Backbone.View.extend({
 
         // init Sidebars
         this.initSidebarTabs();
+        this.initInfoSidebar();
 
         this.chartView = new ChartView({
             el: '#id_visualizationResult',
@@ -133,11 +135,49 @@ var viewChartView = Backbone.View.extend({
     },
     initInfoSidebar: function () {
         // Permalink
-        // this.permalinkHelper();
+        this.permalinkHelper();
 
         // Hits
         new visualizationHitsView({model: new visualizationHits(), visualization: this.model});
     },
+    permalinkHelper: function(){
+        //var permalink = this.model.attributes.permaLink,
+        // debería ir permalink?!?!?!
+        var permalink = this.model.attributes.publicUrl,
+        self = this;
+$('#id_permalink').val(permalink);
+
+        if (typeof(BitlyClient) != 'undefined') {
+      BitlyClient.shorten( permalink, function(pData){
+
+                var response,
+                  shortUrl;
+
+                for(var r in pData.results) {
+                response = pData.results[r];
+                break;
+                }
+
+                shortUrl = response['shortUrl'];
+
+            if(shortUrl){
+              self.model.attributes.shortUrl = shortUrl;
+              $('#id_permalink').val(shortUrl);
+            }
+
+            });
+
+    }
+
+
+    },
+    onInputClicked: function(event) {
+
+        var input = event.currentTarget;
+        $(input).select();
+
+    },
+
     initAPISidebar: function () {
         
     },

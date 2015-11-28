@@ -24,23 +24,9 @@ def view(request, id, slug):
     DOC_API_URL = settings.DOC_API_URL
     logger = logging.getLogger(__name__)
 
-    try:
-        account = request.account
-        is_free = False
-    except AttributeError:
-        try:
-            account_id = DataStream.objects.values('user__account_id').get(pk=id)['user__account_id']
-            account = Account.objects.get(pk=account_id)
-            is_free = True
-        except (DataStream.DoesNotExist, Account.DoesNotExist), e:
-            logger.debug('Datstream or account doesn\'t exists [%s|%s]=%s' % (str(id), str(account_id), repr(e)))
-            raise Http404
+    account = request.account
 
     preferences = request.preferences
-    if not is_free:
-        base_uri = 'http://' + preferences['account_domain']
-    else:
-        base_uri = get_domain_with_protocol('microsites')
 
     datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
 
@@ -55,7 +41,6 @@ def view(request, id, slug):
 
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)
 
-    #DataStreamDBDAO().hit(id, ChannelTypes.WEB)
     notes = datastream['notes']
 
     return render_to_response('viewDataStream/index.html', locals())
@@ -85,11 +70,8 @@ def embed(request, guid):
     base_uri = 'http://' + preferences['account_domain']
 
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_by_guid(guid)
         datastream = DataStreamDBDAO().get(
-            preferences['account_language'],
-            datastream_revision_id=datastreamrevision_id
-        )
+            preferences['account_language'], guid=guid, published=True )
         parameters_query = RequestProcessor(request).get_arguments(datastream.parameters)
     except Http404:
         return render_to_response('viewDataStream/embed404.html', {'settings': settings, 'request': request})
@@ -106,8 +88,7 @@ def embed(request, guid):
 def download(request, id, slug):
     """ download internal dataset file """
     try:
-        datastreamrevision_id = DataStreamRevision.objects.get_last_published_id(id)
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_revision_id=datastreamrevision_id)
+        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_id=id, published=True)
     except:
         raise DataStreamDoesNotExist
     else:
