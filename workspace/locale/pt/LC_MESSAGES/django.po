@@ -3243,3 +3243,6 @@ msgstr "does not exist, try again with other keywords."
 
 msgid "APP-FEATUREDFEMALE-TEXT"
 msgstr "Featured"
+
+msgid "APP-DONE-TEXT"
+msgstr "Done"

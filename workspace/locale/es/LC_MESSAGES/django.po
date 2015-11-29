@@ -3230,3 +3230,6 @@ msgstr "no existe, intente nuevamente con otra palabra clave."
 
 msgid "APP-FEATUREDFEMALE-TEXT"
 msgstr "Destacadas"
+
+msgid "APP-DONE-TEXT"
+msgstr "Listo"
