@@ -3240,3 +3240,6 @@ msgstr "New"
 
 msgid "APP-DOES-NOT-EXIST-TEXT"
 msgstr "does not exist, try again with other keywords."
+
+msgid "APP-FEATUREDFEMALE-TEXT"
+msgstr "Featured"

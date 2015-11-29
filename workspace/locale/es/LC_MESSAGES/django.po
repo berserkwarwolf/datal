@@ -3227,3 +3227,6 @@ msgstr "Nuevo"
 
 msgid "APP-DOES-NOT-EXIST-TEXT"
 msgstr "no existe, intente nuevamente con otra palabra clave."
+
+msgid "APP-FEATUREDFEMALE-TEXT"
+msgstr "Destacadas"
