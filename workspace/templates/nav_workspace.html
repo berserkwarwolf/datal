@@ -20,14 +20,14 @@
 					<a href="{% url 'manageDatasets.index' %}">{% trans 'APP-DATASETS-TEXT' %}</a>
 				</li>
 				<li>
-					<a href="{% url 'manageDatasets.index' %}" title="{% trans 'APP-LISTRESOURCES-TEXT' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
+					<a href="{% url 'manageDatasets.index' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
 				</li>
 				<li>
 					<a class="no-link">{% trans 'APP-NEWMALE-TEXT' %}</a>
 					<ul>
-						<li><a  href="{% url 'manageDatasets.create_type' 'file' %}" title="{% trans 'APP-UPLOAD-FILE-LINK' %}">{% trans 'APP-UPLOAD-FILE-LINK' %}</a></li>
-						<li><a href="{% url 'manageDatasets.create_type' 'url' %}" title="{% trans 'APP-WEBSITE-LINK' %}">{% trans 'APP-WEBSITE-LINK' %}</a></li>
-						<li><a href="{% url 'manageDatasets.create_type' 'webservice' %}" title="{% trans 'APP-WEBSERVICE-LINK' %}">{% trans 'APP-WEBSERVICE-LINK' %}</a></li>
+						<li><a  href="{% url 'manageDatasets.create_type' 'file' %}">{% trans 'APP-UPLOAD-FILE-LINK' %}</a></li>
+						<li><a href="{% url 'manageDatasets.create_type' 'url' %}">{% trans 'APP-WEBSITE-LINK' %}</a></li>
+						<li><a href="{% url 'manageDatasets.create_type' 'webservice' %}">{% trans 'APP-WEBSERVICE-LINK' %}</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -43,10 +43,10 @@
 					<a href="{% url 'manageDataviews.index' %}">{% trans 'APP-DATAVIEWS-TEXT' %}</a>
 				</li>
 				<li>
-					<a href="{% url 'manageDataviews.index' %}" title="{% trans 'APP-LISTRESOURCES-TEXT' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
+					<a href="{% url 'manageDataviews.index' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
 				</li>
 				<li>
-					<a title="{% trans 'APP-ADDNEWDATAVIEW-TEXT' %}" id="id_navNewDataview">{% trans 'APP-NEWFEMALE-TEXT' %}</a>
+					<a id="id_navNewDataview">{% trans 'APP-NEWFEMALE-TEXT' %}</a>
 				</li>
 			</ul>
 		</li>
@@ -59,10 +59,10 @@
 			<ul class="submenu">
 				<li class="submenu-header"><a href="{% url 'manageVisualizations.index' %}">{% trans 'APP-VISUALIZATIONS-TEXT' %}</a></li>
 				<li>
-					<a href="{% url 'manageVisualizations.index' %}" title="{% trans 'APP-LISTRESOURCES-TEXT' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
+					<a href="{% url 'manageVisualizations.index' %}">{% trans 'APP-LISTRESOURCES-TEXT' %}</a>
 				</li>
 				<li>
-					<a title="{% trans 'APP-ADDNEWVISUALIZATION-TEXT' %}" id="id_navNewVisualization">{% trans 'APP-NEWFEMALE-TEXT' %}</a>
+					<a id="id_navNewVisualization">{% trans 'APP-NEWFEMALE-TEXT' %}</a>
 				</li>
 			</ul>
 		</li>
@@ -107,7 +107,7 @@
 		</li>
 		{% endif %}
 
-		<li class="footer">&copy; 2009-{%now "Y" %}, <a href="http://www.datal.org" title="DATAL" target="_blank">DATAL</a></li>
+		<li class="footer">&copy; 2009-{%now "Y" %}, <a href="http://www.datal.org" target="_blank">DATAL</a></li>
 
 	</ul>
 </nav>
