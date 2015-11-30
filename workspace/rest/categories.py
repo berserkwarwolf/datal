@@ -4,7 +4,7 @@ from rest_framework import serializers, viewsets
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = CategoryI18n
-        fields = ('name', 'slug')
+        fields = ('id', 'name', 'slug')
 
 # ViewSets define the view behavior.
 class RestCategoryViewSet(viewsets.ReadOnlyModelViewSet):

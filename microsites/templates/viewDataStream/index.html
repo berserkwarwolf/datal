@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags plugins %}
 
 {% block SEO %}
   <title>{{datastream.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -24,6 +24,16 @@
 <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/viewDataStream.css' %}"/>
 {% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
+
+<!-- Styles items from plugins -->
+{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+{% for plugin in plugins %}
+    {% if plugin.is_active and plugin.microsites_view_datastream_styles %}
+        {% autoescape off %}
+            {{ plugin.microsites_view_datastream_styles }}
+        {% endautoescape %}
+    {% endif %}
+{% endfor %}
 
 <!-- JS LIBS -->
 <!--[if lt IE 9]>
@@ -68,6 +78,17 @@
 <script type="text/javascript" src="/js_microsites/viewDataStream/pivotDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewDataStream/pivotDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endif %}
+
+<!-- Styles items from plugins -->
+{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+{% for plugin in plugins %}
+  {% if plugin.is_active and plugin.microsites_view_datastream_scripts %}
+    {% autoescape off %}
+      {{ plugin.microsites_view_datastream_scripts }}
+    {% endautoescape %}
+  {% endif %}
+{% endfor %}
+
 <script type="text/javascript" src="/js_microsites/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- BRANDED CSS -->

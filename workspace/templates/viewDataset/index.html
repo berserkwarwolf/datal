@@ -66,7 +66,7 @@
 {% endblock %}
 
 {% block bottom_js %}
-<script type="text/javascript" src="/js_core/plugins/jquery.hash-tabs.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% static 'hash-tabs/dist/jquery.hash-tabs.min.js' %}"></script>
 <script type="text/javascript">
 $(document).ready(function(){
   var Dataset = new DatasetModel({
