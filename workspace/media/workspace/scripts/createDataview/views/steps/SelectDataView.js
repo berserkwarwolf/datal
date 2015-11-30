@@ -1,7 +1,7 @@
 var SelectDataView = Backbone.View.extend({
 
     events: {
-        'change select.select-table': 'onClickSelectTable'
+        'change select.select-table': 'onChangeTable'
     },
 
     initialize: function (options) {
@@ -17,7 +17,7 @@ var SelectDataView = Backbone.View.extend({
 
         this.template = _.template( $('#select_data_template').html() );
 
-        this.$el.html(this.template({tables: [0,1,2]}));
+        this.$el.html(this.template({tables: this.datasetModel.getTables()}));
         this.$('.select-table').val(tableId);
 
         this.listenTo(this.internalState, 'change:mode', this.onChangeMode, this);
@@ -108,6 +108,7 @@ var SelectDataView = Backbone.View.extend({
             } else {
                 return;
             }
+
         } else if (this.internalState.get('mode') === 'headers') {
             model = new DataTableSelectionModel({classname: 5});
             selection.mode = 'header';
@@ -134,7 +135,7 @@ var SelectDataView = Backbone.View.extend({
         return existing;
     },
 
-    onClickSelectTable: function (e) {
+    onChangeTable: function (e) {
         var $target = $(e.currentTarget),
             tableId = $target.val();
 

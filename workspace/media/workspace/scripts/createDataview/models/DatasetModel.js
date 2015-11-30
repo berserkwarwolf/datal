@@ -11,5 +11,9 @@ var DatasetModel = Backbone.Model.extend({
         return {
                 tables: response
             };
+    },
+
+    getTables: function () {
+        return _.range(0, this.get('tables').length);
     }
 })
