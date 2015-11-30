@@ -57,7 +57,7 @@ class ResourceSerializer(serializers.Serializer):
 
 def order_method(dic):
     def order_inner(obj):
-        if isintance(dic, dict):
+        if isinstance(dic, dict):
             return ele[dic[obj['resource_type']]]
         return ele[dic]
     return order_inner
