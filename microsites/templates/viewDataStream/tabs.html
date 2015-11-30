@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load extra_tags components %}
+{% load extra_tags components plugins %}
 
 <ul class="icons">
 	<li>
@@ -14,6 +14,17 @@
 			<span>{% trans 'VIEWDS-TABS-REFRESH' %}</span>
 		</a>
 	</li>
+
+	<!-- Nav items from plugins -->
+	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+	{% for plugin in plugins %}
+		{% if plugin.is_active and plugin.microsites_view_datastream_nav %}
+			{% autoescape off %}
+				{{ plugin.microsites_view_datastream_nav }}
+			{% endautoescape %}
+		{% endif %}
+	{% endfor %}
+
 	{% if preferences.account_pivottable %}
 	<li>
 		<a class="icon pivot border-box" id="id_pivotComponentButton">
