@@ -340,7 +340,7 @@ def edit(request, revision_id=None):
         # Formulario
         form = VisualizationForm(request.POST)
         if not form.is_valid():
-            logger.info(form._errors)
+            logger.info(form.errors)
             raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         visualization_rev = VisualizationDBDAO().get(
