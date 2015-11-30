@@ -32,6 +32,7 @@ class ResourceSerializer(serializers.Serializer):
             'title': dict(map(lambda x: (x[1], x[0] + 'i18n__title'), cls.resources)),
             'description': dict(map(lambda x: (x[1], x[0] + 'i18n__description'), cls.resources)),
             'user': dict(map(lambda x: (x[1], x[0] + '__user__name'), cls.resources)),
+            'nick': dict(map(lambda x: (x[1], x[0] + '__user__nick'), cls.resources)),
             'category': {
                 settings.TYPE_DATASET: 'category__categoryi18n__slug',
                 settings.TYPE_DATASTREAM: 'category__categoryi18n__slug',
@@ -104,7 +105,7 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         status_id = self.get_status_id(status)
         category = self.request.query_params.get('category', None)
         query = self.request.query_params.get('query', None)
-        
+        user = self.request.query_params.get('user', None)
 
         types = dict(self.resources_types)
         resources_types = (self.request.query_params.get('resources', None) or 
@@ -119,7 +120,8 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                     language=self.request.auth['language'],
                     filter_status=status_id,
                     filter_category=category,
-                    filter_text=query
+                    filter_text=query,
+                    filter_user=user
                 )
                 for result in list(queryset):
                     result['resource_type'] = res_type
