@@ -58,8 +58,8 @@ class ResourceSerializer(serializers.Serializer):
 def order_method(dic):
     def order_inner(obj):
         if isinstance(dic, dict):
-            return ele[dic[obj['resource_type']]]
-        return ele[dic]
+            return obj[dic[obj['resource_type']]]
+        return obj[dic]
     return order_inner
 
 class CacheKeyConstructor(DefaultKeyConstructor):
@@ -91,12 +91,12 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                 reverse = True
                 ordering = ordering.strip('-')
             mapping_dict = ResourceSerializer.get_mapping_dict()
-            order_list = []
+            order_dict = {}
             if ordering in mapping_dict.keys():
-                order_list = mapping_dict[ordering]
+                order_dict = mapping_dict[ordering]
             else:
-                order_list = ordering
-            return sorted(queryset, key=order_method(order_list), reverse=reverse)
+                order_dict = ordering
+            return sorted(queryset, key=order_method(order_dict), reverse=reverse)
         return queryset
 
     def filter_queryset(self, querysets):
