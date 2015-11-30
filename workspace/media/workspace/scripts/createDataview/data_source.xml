@@ -1,6 +1,11 @@
 <dataSource>
     <DataStructure>
         <Field id="table<%= tableId %>">
+            <Headers>,
+                <% _.each(headers, function (row) { %>,
+                    <Row>row<%= row %></Row>,
+                <% }); %>,
+            </Headers>,
             <type/>
             <format>
                 <languaje/>

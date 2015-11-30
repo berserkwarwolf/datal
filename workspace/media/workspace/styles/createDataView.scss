@@ -254,9 +254,11 @@ td.hot-sel-3{background-color:#d6ebff;}
 .hot-sel-4 span.color,
 td.hot-sel-4{background-color:#9AB2B9;}
 
-.hot-sel-5 span.color,
-td.hot-sel-5{
-	background-color: yellow;
-	font-size: 1.2em;
+
+td.hot-sel-5.hot-sel-1{
+	// Original
+	// background-color: #FCDE15; 
+	// color: #FFFFFF;
+	background-color: #DBDBDB;
 	font-weight: bold;
 }

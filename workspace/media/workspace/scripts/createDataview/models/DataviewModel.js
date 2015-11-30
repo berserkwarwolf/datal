@@ -33,6 +33,11 @@ var select_statement_template = ['<selectStatement>',
 var data_source_template = ['<dataSource>',
     '<DataStructure>',
         '<Field id="table<%= tableId %>">',
+            '<Headers>',
+                '<% _.each(headers, function (row) { %>',
+                    '<Row>row<%= row %></Row>',
+                '<% }); %>',
+            '</Headers>',
             '<type/>',
             '<format>',
                 '<languaje/>',
@@ -77,7 +82,6 @@ var DataviewModel = Backbone.Model.extend({
         'sources-INITIAL_FORMS': 0,
 
         dataset_revision_id: undefined,
-        csrfmiddlewaretoken: '24c4CtkSSEasa0R1l7QnP9DXLDQi7J6C',
 
         tableId: 0,
         status: 0,
@@ -86,7 +90,6 @@ var DataviewModel = Backbone.Model.extend({
         end_point: 'file://1/7461/08c6faa4-689f-489b-a31c-94753ea52486',
         impl_type: 4,
         impl_details: '',
-        data_source: '<dataSource><DataStructure><Field id="table0"><type></type><format><languaje></languaje><country></country><style></style></format><Table><Field id="column0"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column1"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field><Field id="column2"><alias></alias><type></type><format><languaje></languaje><country></country><style></style></format></Field></Table></Field></DataStructure></dataSource>',
         rdf_template: '',
         bucket_name: '',
         user_id: 1647,
@@ -227,10 +230,15 @@ var DataviewModel = Backbone.Model.extend({
 
     getDataSource: function () {
         var tableId = this.get('tableId'),
-            columns = _.range(0, this.get('totalCols'));
+            columns = _.range(0, this.get('totalCols')),
+            headerModels = this.selection.getItemsByMode('header'),
+            headers = _.map(headerModels, function (model) {
+                return model.getRange().from.row;
+            });
 
         return this.data_source_template({
             tableId: tableId,
+            headers: headers,
             columns: columns
         });
     },
