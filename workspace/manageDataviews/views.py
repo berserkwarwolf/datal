@@ -177,7 +177,8 @@ def remove(request, datastream_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        datastream_rev_removed.send(sender='remove_view', id=datastream_revision_id)
+        datastream_rev_removed.send_robust(sender='remove_view', id=lifecycle.datastream.id,
+                                           rev_id=datastream_revision_id)
 
         return JSONHttpResponse(json.dumps({
             'status': True,
@@ -189,7 +190,8 @@ def remove(request, datastream_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        datastream_removed.send(sender='remove_view', id=lifecycle.datastream.id)
+        datastream_removed.send_robust(sender='remove_view', id=lifecycle.datastream.id,
+                                rev_id=lifecycle.datastream_revision.id)
 
         return HttpResponse(json.dumps({
             'status': True,
@@ -304,7 +306,8 @@ def edit(request, datastream_revision_id=None):
             )
 
             # Signal
-            datastream_changed.send_robust(sender='edit_view', id=lifecycle.datastream.id)
+            datastream_changed.send_robust(sender='edit_view', id=lifecycle.datastream.id,
+                                           rev_id=lifecycle.datastream_revision.id)
 
             response = dict(
                 status='ok',
@@ -371,7 +374,8 @@ def change_status(request, datastream_revision_id=None):
                 description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
 
             # Signal
-            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
+            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id,
+                                               rev_id=lifecycle.datastream_revision.id)
 
             response = dict(
                 status='ok',

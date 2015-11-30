@@ -245,7 +245,7 @@ def remove(request, dataset_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        dataset_rev_removed.send(sender='remove_view', id=dataset_revision_id)
+        dataset_rev_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=dataset_revision_id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -257,7 +257,7 @@ def remove(request, dataset_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        dataset_removed.send(sender='remove_view', id=lifecycle.dataset.id)
+        dataset_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=lifecycle.dataset_revision.id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -379,7 +379,8 @@ def edit(request, dataset_revision_id=None):
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
             # Signal
-            dataset_changed.send_robust(sender='edit_view', id=dataset_revision.dataset.id)
+            dataset_changed.send_robust(sender='edit_view', id=lifecycle.dataset.id,
+                                        rev_id=lifecycle.dataset_revision.id)
 
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
@@ -464,7 +465,8 @@ def change_status(request, dataset_revision_id=None):
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
 
             # Signal
-            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
+                                            rev_id=lifecycle.dataset_revision.id)
 
             response = dict(
                 status='ok',

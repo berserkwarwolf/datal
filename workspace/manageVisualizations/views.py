@@ -135,7 +135,8 @@ def remove(request, visualization_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        visualization_rev_removed.send(sender='remove_view', id=visualization_revision_id)
+        visualization_rev_removed.send_robust(sender='remove_view', id=lifecycle.visualization.id,
+                                       rev_id=visualization_revision_id)
 
         return JSONHttpResponse(json.dumps({
             'status': True,
@@ -147,7 +148,8 @@ def remove(request, visualization_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        visualization_removed.send(sender='remove_view', id=lifecycle.visualization.id)
+        visualization_removed.send_robust(sender='remove_view', id=lifecycle.visualization.id,
+                                   rev_id=lifecycle.visualization_revision.id)
 
         return HttpResponse(json.dumps({
             'status': True,
@@ -208,7 +210,8 @@ def change_status(request, visualization_revision_id=None):
             lifecycle.unpublish(killemall=killemall)
 
             # Signal
-            visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id)
+            visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id,
+                                                  rev_id=lifecycle.visualization_revision.id)
 
             response = dict(
                 status='ok',
@@ -347,7 +350,8 @@ def edit(request, revision_id=None):
         response = form.save(request, visualization_rev=visualization_rev)
 
         # Signal
-        visualization_changed.send_robust(sender='edit_view', id=visualization_rev['visualization_revision_id'])
+        visualization_changed.send_robust(sender='edit_view', id=visualization_rev['visualization_id'],
+                                          rev_id=visualization_rev['visualization_revision_id'])
 
         return JSONHttpResponse(json.dumps(response))
 
