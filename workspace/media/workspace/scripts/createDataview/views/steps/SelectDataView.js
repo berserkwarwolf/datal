@@ -110,8 +110,15 @@ var SelectDataView = Backbone.View.extend({
             }
 
         } else if (this.internalState.get('mode') === 'headers') {
-            model = new DataTableSelectionModel({classname: 5});
-            selection.mode = 'header';
+
+            // Solo seleccionar filas en el modo headers
+            if (selection.mode === 'row') {
+                model = new DataTableSelectionModel({classname: 5});
+                selection.mode = 'header';
+            } else {
+                return;
+            }
+
         };
 
         model.set(selection);
