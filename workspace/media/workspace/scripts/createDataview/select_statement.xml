@@ -1,8 +1,12 @@
 <selectStatement>
     <Select>
-    <% _.each(columns, function (number) { %>
-        <Column>column<%= number %></Column>
-    <% }); %>
+        <% if (isFullTable) { %>
+            <Column>*</Column>
+        <% } else { %>
+            <% _.each(columns, function (number) { %>
+                <Column>column<%= number %></Column>
+            <% }); %>
+        <% } %>
     </Select>
     <From>
         <Table>table<%= tableId %></Table>

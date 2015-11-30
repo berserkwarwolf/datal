@@ -1,8 +1,12 @@
 var select_statement_template = ['<selectStatement>',
     '<Select>',
-    '<% _.each(columns, function (number) { %>',
-        '<Column>column<%= number %></Column>',
-    '<% }); %>',
+        '<% if (isFullTable) { %>',
+            '<Column>*</Column>',
+        '<% } else { %>',
+            '<% _.each(columns, function (number) { %>',
+                '<Column>column<%= number %></Column>',
+            '<% }); %>',
+        '<% } %>',
     '</Select>',
     '<From>',
         '<Table>table<%= tableId %></Table>',
@@ -210,6 +214,7 @@ var DataviewModel = Backbone.Model.extend({
 
     getSelectStatement: function () {
         var tableId = this.get('tableId'),
+            isFullTable = this.selection.hasItemsByMode('table'),
             columnModels = this.selection.getItemsByMode('col'),
             columns = _.map(columnModels, function (model) {
                 return model.getRange().from.col;
@@ -221,6 +226,7 @@ var DataviewModel = Backbone.Model.extend({
 
 
         return this.select_statement_template({
+            isFullTable: isFullTable,
             tableId: tableId,
             columns: columns,
             rows: rows,

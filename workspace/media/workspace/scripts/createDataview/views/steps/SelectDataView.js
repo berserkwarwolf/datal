@@ -91,20 +91,39 @@ var SelectDataView = Backbone.View.extend({
         }
     },
 
+    canSelectMode: function (mode) {
+        var collection = this.dataviewModel.selection,
+            hasCells = collection.hasItemsByMode('cell'),
+            hasTable = collection.hasItemsByMode('table'),
+            hasRows = collection.hasItemsByMode('row'),
+            hasCols = collection.hasItemsByMode('col');
+
+        if (mode === 'col' || mode === 'row') {
+            return !(hasCells || hasTable);
+        } else if (mode === 'table'){
+            return !(hasCols || hasRows || hasCells);
+        } else if (mode === 'cell'){
+            return !(hasCols || hasRows || hasTable);
+        } else {
+            return true;
+        }
+    },
+
     addSelection: function () {
         var selection = this.dataTableView.getSelection(),
             model;
 
+
         if (this.internalState.get('mode') === 'data') {
 
-            if (selection.mode === 'col') {
-                model = new DataTableSelectionModel({classname: 1});
-            } else if (selection.mode === 'row') {
-                model = new DataTableSelectionModel({classname: 2});
-            } else if (selection.mode === 'table') {
-                model = new DataTableSelectionModel({classname: 3});
-            } else if (selection.mode === 'cell') {
-                model = new DataTableSelectionModel({classname: 4});
+            if (selection.mode === 'cell' && this.canSelectMode('cell')) {
+                model = new DataTableSelectionModel({classname: 'cell'});
+            } else if (selection.mode === 'col' && this.canSelectMode('col')) {
+                model = new DataTableSelectionModel({classname: 'col'});
+            } else if (selection.mode === 'row' && this.canSelectMode('row')) {
+                model = new DataTableSelectionModel({classname: 'row'});
+            } else if (selection.mode === 'table' && this.canSelectMode('table')) {
+                model = new DataTableSelectionModel({classname: 'table'});
             } else {
                 return;
             }
@@ -113,7 +132,7 @@ var SelectDataView = Backbone.View.extend({
 
             // Solo seleccionar filas en el modo headers
             if (selection.mode === 'row') {
-                model = new DataTableSelectionModel({classname: 5});
+                model = new DataTableSelectionModel({classname: 'header'});
                 selection.mode = 'header';
             } else {
                 return;
