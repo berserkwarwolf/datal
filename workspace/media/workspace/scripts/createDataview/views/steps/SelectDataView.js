@@ -4,6 +4,8 @@ var SelectDataView = Backbone.View.extend({
         'change select.select-table': 'onChangeTable'
     },
 
+    _selectionEnabled: true,
+
     initialize: function (options) {
         var tableId;
 
@@ -65,7 +67,8 @@ var SelectDataView = Backbone.View.extend({
             delete this.headersOptionsView;
         }
         this.headersOptionsView = new HeadersOptionsView({
-            model: this.internalState
+            model: this.internalState,
+            collection: this.dataviewModel.selection
         });
         this.headersOptionsView.render();
         this.headersOptionsView.hide();
@@ -78,6 +81,7 @@ var SelectDataView = Backbone.View.extend({
         this.filtersOptionsView = new FiltersOptionsView({
             stateModel: this.internalState,
             collection: this.dataviewModel.filters,
+            totalCols: this.dataviewModel.get('totalCols'),
             model: new Backbone.Model()
         });
         this.filtersOptionsView.render();
@@ -109,10 +113,21 @@ var SelectDataView = Backbone.View.extend({
         }
     },
 
+    disableSelection: function () {
+        this._selectionEnabled = false;
+    },
+
+    enableSelection: function () {
+        this._selectionEnabled = true;
+    },
+
     addSelection: function () {
         var selection = this.dataTableView.getSelection(),
             model;
 
+        if (!this._selectionEnabled) {
+            return;
+        }
 
         if (this.internalState.get('mode') === 'data') {
 
@@ -176,9 +191,11 @@ var SelectDataView = Backbone.View.extend({
             this.selectionView.hide();
             this.headersOptionsView.show();
         } else if (value === 'add-filter') {
+            this.disableSelection();
             this.selectionView.hide();
             this.attachFiltersView();
         } else {
+            this.enableSelection();
             this.destroyFiltersView();
             this.headersOptionsView.hide();
             this.selectionView.show();
