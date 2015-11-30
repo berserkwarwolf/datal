@@ -3233,3 +3233,9 @@ msgstr "Destacadas"
 
 msgid "APP-DONE-TEXT"
 msgstr "Listo"
+
+msgid "APP-EDIT-DESCRIPTION-TEXT"
+msgstr "Editar descripción"
+
+msgid "APP-EDIT-VISUALIZATION-TEXT"
+msgstr "Editar visualización"

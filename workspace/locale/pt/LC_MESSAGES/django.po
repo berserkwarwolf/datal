@@ -3246,3 +3246,9 @@ msgstr "Featured"
 
 msgid "APP-DONE-TEXT"
 msgstr "Done"
+
+msgid "APP-EDIT-DESCRIPTION-TEXT"
+msgstr "Edit description"
+
+msgid "APP-EDIT-VISUALIZATION-TEXT"
+msgstr "Edit visualization"
