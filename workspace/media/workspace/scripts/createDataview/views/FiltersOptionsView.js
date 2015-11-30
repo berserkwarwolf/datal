@@ -12,11 +12,13 @@ var FiltersOptionsView = Backbone.View.extend({
     initialize: function (options) {
         this.template = _.template( $('#filters_options_template').html() );
         this.stateModel = options.stateModel;
+        this.totalCols = options.totalCols;
     },
 
     render: function () {
-        // TODO: enumerar las columnas disponibles
-        var columns = ['A', 'B', 'C', 'D'];
+        var columns = _.map(_.range(0, this.totalCols), function (number) {
+            return DataTableUtils.intToExcelCol(number + 1);
+        });
 
         this.$el.html(this.template({
             columns: columns,
@@ -26,14 +28,12 @@ var FiltersOptionsView = Backbone.View.extend({
     },
 
     onClickBack: function () {
-        // TODO: clear 'header' elements from the collection
-        console.info('TODO: clear header elements from the collection');
+        this.collection.reset();
         this.stateModel.set('mode', 'data');
     },
 
     onClickClear: function () {
-        // TODO: clear 'header' elements from the collection
-        console.info('TODO: clear header elements from the collection');
+        this.collection.reset();
     },
 
     onClickOk: function () {
@@ -45,9 +45,11 @@ var FiltersOptionsView = Backbone.View.extend({
         var value = $(e.currentTarget).val();
         if (value !== '') {
             this.model.set('column', value);
+            this.model.set('excelCol', DataTableUtils.intToExcelCol(value + 1));
             this.$('.row-operator').removeClass('hidden');
         } else {
             this.model.unset('column');
+            this.model.unset('excelCol');
             this.$('.row-operator').addClass('hidden');
             this.$('.row-operator').addClass('hidden');
             this.$('.row-fixed-value').addClass('hidden');
