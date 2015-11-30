@@ -18,14 +18,12 @@ var HeadersOptionsView = Backbone.View.extend({
     },
 
     onClickBack: function () {
-        // TODO: clear 'header' elements from the collection
-        console.info('TODO: clear header elements from the collection');
+        this.collection.removeItemsByMode('header');
         this.model.set('mode', 'data');
     },
 
     onClickClear: function () {
-        // TODO: clear 'header' elements from the collection
-        console.info('TODO: clear header elements from the collection');
+        this.collection.removeItemsByMode('header');
     },
 
     onClickOk: function () {
