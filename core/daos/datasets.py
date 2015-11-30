@@ -129,7 +129,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
-          filter_category=None, filter_text=None):
+          filter_category=None, filter_text=None, filter_user=None):
 
         """ Query for full dataset lists"""
 
@@ -160,6 +160,9 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         if filter_text is not None:
             query = query.filter(Q(dataseti18n__title__icontains=filter_text) | 
                                  Q(dataseti18n__description__icontains=filter_text))
+
+        if filter_user is not None:
+            query = query.filter(dataset__user__nick=filter_user)
 
         total_resources = query.count()
 

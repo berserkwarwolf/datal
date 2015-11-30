@@ -32,6 +32,7 @@ class ResourceSerializer(serializers.Serializer):
             'title': dict(map(lambda x: (x[1], x[0] + 'i18n__title'), cls.resources)),
             'description': dict(map(lambda x: (x[1], x[0] + 'i18n__description'), cls.resources)),
             'user': dict(map(lambda x: (x[1], x[0] + '__user__name'), cls.resources)),
+            'nick': dict(map(lambda x: (x[1], x[0] + '__user__nick'), cls.resources)),
             'category': {
                 settings.TYPE_DATASET: 'category__categoryi18n__slug',
                 settings.TYPE_DATASTREAM: 'category__categoryi18n__slug',
@@ -57,9 +58,9 @@ class ResourceSerializer(serializers.Serializer):
 
 def order_method(dic):
     def order_inner(obj):
-        if isintance(dic, dict):
-            return ele[dic[obj['resource_type']]]
-        return ele[dic]
+        if isinstance(dic, dict):
+            return obj[dic[obj['resource_type']]]
+        return obj[dic]
     return order_inner
 
 class CacheKeyConstructor(DefaultKeyConstructor):
@@ -91,12 +92,12 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                 reverse = True
                 ordering = ordering.strip('-')
             mapping_dict = ResourceSerializer.get_mapping_dict()
-            order_list = []
+            order_dict = {}
             if ordering in mapping_dict.keys():
-                order_list = mapping_dict[ordering]
+                order_dict = mapping_dict[ordering]
             else:
-                order_list = ordering
-            return sorted(queryset, key=order_method(order_list), reverse=reverse)
+                order_dict = ordering
+            return sorted(queryset, key=order_method(order_dict), reverse=reverse)
         return queryset
 
     def filter_queryset(self, querysets):
@@ -104,7 +105,7 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         status_id = self.get_status_id(status)
         category = self.request.query_params.get('category', None)
         query = self.request.query_params.get('query', None)
-        
+        user = self.request.query_params.get('user', None)
 
         types = dict(self.resources_types)
         resources_types = (self.request.query_params.get('resources', None) or 
@@ -119,7 +120,8 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                     language=self.request.auth['language'],
                     filter_status=status_id,
                     filter_category=category,
-                    filter_text=query
+                    filter_text=query,
+                    filter_user=user
                 )
                 for result in list(queryset):
                     result['resource_type'] = res_type
