@@ -24,8 +24,12 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         rp = self.request.query_params.get('rp', None) # TODO check for rp arguemnt used in some grids
         limit = self.request.query_params.get('limit', rp)
         offset = self.request.query_params.get('offset', '0')
+        order = request.query_params.get('order', None)
+        reverse = order and order[0] == '-'
+        order = order and order.strip('-')
         page_num = int(offset)/int(limit) + 1 if limit else 0
 
+        
         resources, time, facets = ElasticFinderManager().search(
             query=request.query_params.get('query', ''),
             slice=int(limit) if limit else None,
@@ -33,7 +37,8 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
             account_id=request.auth['account'].id,
             user_id=request.user.id,
             resource=self.get_data_types(),
-            order=request.query_params.get('order', ''))
+            order=order,
+            reverse=reverse)
 
         page = self.paginate_queryset(resources)
         if page is not None:

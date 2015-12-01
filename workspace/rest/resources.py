@@ -12,7 +12,7 @@ from rest_framework_extensions.key_constructor.constructors import DefaultKeyCon
 from rest_framework_extensions.key_constructor.bits import QueryParamsKeyBit, PaginationKeyBit
 from django.conf import settings
 
-
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -41,6 +41,9 @@ class ResourceSerializer(serializers.Serializer):
             'revision_id': dict(map(lambda x: (x[1], x[0] + '__last_revision_id'), cls.resources)),
             'published_revision_id': dict(map(lambda x: (x[1], x[0] + '__last_published_revision_id'), cls.resources)),
             'resource_id': dict(map(lambda x: (x[1], x[0] + '__id'), cls.resources)),
+            'lib': {
+                settings.TYPE_VISUALIZATION: 'lib'
+            },
         }
     
     def get_status_name(self, status_id):
@@ -48,12 +51,21 @@ class ResourceSerializer(serializers.Serializer):
             if id == status_id:
                 return valor
 
+    def get_type(self, obj):
+        if 'impl_details' in obj:
+            json_obj = json.loads(obj['impl_details'])
+            return json_obj['format']['type']
+
     def to_representation(self, obj):
         answer = super(ResourceSerializer, self).to_representation(obj)
         for key, value in self.get_mapping_dict().items():
-            answer[key] = obj[value[answer['resource_type']]]
+            if answer['resource_type'] in value:
+                answer[key] = obj[value[answer['resource_type']]]
+            else:
+                answer[key] = None
 
         answer['status'] = self.get_status_name(obj['status'])
+        answer['type'] = self.get_type(obj)
 
         return OrderedDict(answer)
 
@@ -61,7 +73,8 @@ class ResourceSerializer(serializers.Serializer):
 def order_method(dic):
     def order_inner(obj):
         if isinstance(dic, dict):
-            return obj[dic[obj['resource_type']]]
+            if obj['resource_type'] in dic:
+                return obj[dic[obj['resource_type']]]
         return obj[dic]
     return order_inner
 

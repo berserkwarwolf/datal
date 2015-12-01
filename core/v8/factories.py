@@ -57,9 +57,9 @@ class CommandFactory(object):
         for item in filters:
             if item[0] in self.CONV_DICT:
                 new.append( (self.CONV_DICT[item[0]], item[1]) )
-            elif item[0].startswith('pFilter'):
+            elif item[0].startswith('filter'):
                 v1 = item[1]
-                new.append((item[0],self._parseOperator(value=v1)))
+                new.append((item[0].replace('filter', 'pFilter'),self._parseOperator(value=v1)))
             elif item[0].startswith('uniqueBy'):
                 #>>>>> estas dos lineas de donde sale?
                 num = key[-1:]
