@@ -15,9 +15,10 @@ body,
 .homeColumns .searchContainer .FR{float:none;}
 .homeColumns .searchContainer .search{background-color:#fff;}
 .homeColumns .searchContainer .search .field{width:327px;padding:11px 11px 11px 48px;font-size:14px;height:auto;background:url(/static/core/images/homeManager/ic_searchHome.png) 14px center no-repeat;}
+.homeColumns .homeMainContent{padding-right:30px;}
 
 /*SLIDER CONTAINER*/
-.sliderContainer{top:0;}
+.sliderContainer{top:0;margin-bottom:30px;}
 .paddingSlider{padding-top:255px;}
 .dataStreamBox h2 a .txt{width:auto;float:none}
 .dataStreamBox h2 a img{display:none;}
@@ -25,6 +26,13 @@ body,
 .dataStreamBox h2 a .txt .titleDS .infoDS .sep,
 .dataStreamBox h2 a .txt .titleDS .infoDS .authorDS{display:none}
 .dataStreamBox h2 a .txt .titleDS strong{height:17px;max-height:32px;display:block;} 
+
+.sliderWrapper, 
+.sliderWrapper .dataStreamContainer, 
+.sliderWrapper .dataStreamBorder, 
+.dataStreamBox{width:410px;height:230px;}
+.sliderWrapper{overflow:hidden;border-radius:5px;}
+.sliderWrapper .dataStreamContainer{float: left;overflow: hidden; }
 
 /*PILLS*/
 .pills{background:#fff;padding:15px 15px 15px 25px !important;margin-bottom:20px;border:1px solid #ececec;border-left:5px solid #ececec;}
