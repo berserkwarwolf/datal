@@ -41,6 +41,9 @@ class ResourceSerializer(serializers.Serializer):
             'revision_id': dict(map(lambda x: (x[1], x[0] + '__last_revision_id'), cls.resources)),
             'published_revision_id': dict(map(lambda x: (x[1], x[0] + '__last_published_revision_id'), cls.resources)),
             'resource_id': dict(map(lambda x: (x[1], x[0] + '__id'), cls.resources)),
+            'lib': {
+                settings.TYPE_VISUALIZATION: 'lib'
+            }
         }
     
     def get_status_name(self, status_id):
@@ -51,7 +54,10 @@ class ResourceSerializer(serializers.Serializer):
     def to_representation(self, obj):
         answer = super(ResourceSerializer, self).to_representation(obj)
         for key, value in self.get_mapping_dict().items():
-            answer[key] = obj[value[answer['resource_type']]]
+            if answer['resource_type'] in value:
+                answer[key] = obj[value[answer['resource_type']]]
+            else:
+                answer[key] = None
 
         answer['status'] = self.get_status_name(obj['status'])
 
@@ -61,7 +67,8 @@ class ResourceSerializer(serializers.Serializer):
 def order_method(dic):
     def order_inner(obj):
         if isinstance(dic, dict):
-            return obj[dic[obj['resource_type']]]
+            if obj['resource_type'] in dic:
+                return obj[dic[obj['resource_type']]]
         return obj[dic]
     return order_inner
 

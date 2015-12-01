@@ -257,6 +257,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         query = query.values(
             'status',
             'id',
+            'lib',
             'visualization__id',
             'visualization__guid',
             'visualization__user__nick',
