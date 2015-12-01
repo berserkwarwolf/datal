@@ -107,7 +107,7 @@ class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
         renderers.JSONRenderer,
         CSVEngineRenderer,
         XLSNonRedirectEngineRenderer,
-        TSVEngineRenderer,
+        #TSVEngineRenderer,
         XMLEngineRenderer,
         PJSONEngineRenderer,
         AJSONEngineRenderer,])
