@@ -16,7 +16,7 @@ router.register(r'datasets', DataSetViewSet, base_name='datasets')
 router.register(r'visualizations', VisualizationViewSet, base_name='visualizations')
 
 urlpatterns = patterns('',
-    (r'^', include_plugins(DatalPluginPoint, urls='microsites_urls')),
+    (r'^', include_plugins(DatalPluginPoint, urls='api_urls')),
     (r'^api/v1/', include(router.urls)),
 )
 
