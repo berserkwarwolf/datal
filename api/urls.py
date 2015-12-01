@@ -15,6 +15,14 @@ router.register(r'datastreams', DataStreamViewSet, base_name='datastreams')
 router.register(r'datasets', DataSetViewSet, base_name='datasets')
 router.register(r'visualizations', VisualizationViewSet, base_name='visualizations')
 
+# Implemento los routers que tenga el plugin
+plugins = DatalPluginPoint.get_plugins()
+for plugin in plugins:
+    if plugin.is_active() and hasattr(plugin, 'api_routers'):
+        for router in plugin.api_routers:
+            router.register(router[0], router[1], base_name=router[2])
+
+
 urlpatterns = patterns('',
     (r'^', include_plugins(DatalPluginPoint, urls='api_urls')),
     (r'^api/v1/', include(router.urls)),
