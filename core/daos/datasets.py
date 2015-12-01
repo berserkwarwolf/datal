@@ -88,6 +88,13 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
                 domain = 'http://' + domain
             public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
 
+        # en caso de que haya una revisión publicada y sea distinta a la ultima revisión
+        # entonces es que hay más de una revisión (nos ahorramos un query)
+        if dataset_revision.dataset.last_published_revision and dataset_revision.dataset.last_published_revision != dataset_revision.dataset.last_revision:
+            unique = False
+        else:
+            unique = DatasetRevision.objects.filter(dataset__id=dataset_revision.dataset.id).count() == 1 or False
+
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
@@ -122,6 +129,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             sources=sources,
             public_url=public_url,
             slug=slugify(dataseti18n.title),
+            unique=unique
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
