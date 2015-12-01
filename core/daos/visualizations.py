@@ -258,6 +258,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             'status',
             'id',
             'lib',
+            'impl_details',
             'visualization__id',
             'visualization__guid',
             'visualization__user__nick',

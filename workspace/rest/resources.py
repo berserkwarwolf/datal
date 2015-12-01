@@ -12,7 +12,7 @@ from rest_framework_extensions.key_constructor.constructors import DefaultKeyCon
 from rest_framework_extensions.key_constructor.bits import QueryParamsKeyBit, PaginationKeyBit
 from django.conf import settings
 
-
+import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -43,13 +43,18 @@ class ResourceSerializer(serializers.Serializer):
             'resource_id': dict(map(lambda x: (x[1], x[0] + '__id'), cls.resources)),
             'lib': {
                 settings.TYPE_VISUALIZATION: 'lib'
-            }
+            },
         }
     
     def get_status_name(self, status_id):
         for id, valor in STATUS_CHOICES_REST:
             if id == status_id:
                 return valor
+
+    def get_type(self, obj):
+        if 'impl_details' in obj:
+            json_obj = json.loads(obj['impl_details'])
+            return json_obj['format']['type']
 
     def to_representation(self, obj):
         answer = super(ResourceSerializer, self).to_representation(obj)
@@ -60,6 +65,7 @@ class ResourceSerializer(serializers.Serializer):
                 answer[key] = None
 
         answer['status'] = self.get_status_name(obj['status'])
+        answer['type'] = self.get_type(obj)
 
         return OrderedDict(answer)
 
