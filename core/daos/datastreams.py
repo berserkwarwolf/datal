@@ -238,6 +238,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
+            'datastream__last_published_revision_id',
             'datastream__last_published_revision__modified_at',
             'dataset__last_revision__dataseti18n__title',
             'dataset__last_revision__impl_type',

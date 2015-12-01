@@ -39,6 +39,8 @@ class ResourceSerializer(serializers.Serializer):
                 settings.TYPE_VISUALIZATION: 'visualization__datastream__last_revision__category__categoryi18n__slug',
             },
             'revision_id': dict(map(lambda x: (x[1], x[0] + '__last_revision_id'), cls.resources)),
+            'published_revision_id': dict(map(lambda x: (x[1], x[0] + '__last_published_revision_id'), cls.resources)),
+            'resource_id': dict(map(lambda x: (x[1], x[0] + '__id'), cls.resources)),
         }
     
     def get_status_name(self, status_id):
