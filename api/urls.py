@@ -19,8 +19,8 @@ router.register(r'visualizations', VisualizationViewSet, base_name='visualizatio
 plugins = DatalPluginPoint.get_plugins()
 for plugin in plugins:
     if plugin.is_active() and hasattr(plugin, 'api_routers'):
-        for router in plugin.api_routers:
-            router.register(router[0], router[1], base_name=router[2])
+        for router_list in plugin.api_routers:
+            router.register(router_list[0], router_list[1], base_name=router_list[2])
 
 
 urlpatterns = patterns('',
