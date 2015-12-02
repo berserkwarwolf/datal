@@ -126,11 +126,10 @@ class Finder:
         elif r == 'dt':
             return "dataset_id"
 
-        for plugin in DatalPluginPoint.get_plugins():
-            if plugin.is_active() and hasattr(plugin, 'finder_class'):
-                finder = plugin.finder_class()
-                if finder.doc_type == r:
-                    return finder.id_name
+        for plugin in DatalPluginPoint.get_active_with_att('finder_class'):
+            finder = plugin.finder_class()
+            if finder.doc_type == r:
+                return finder.id_name
 
 
     def get_dictionary(self, doc):
@@ -141,11 +140,10 @@ class Finder:
         elif doc['type'] == 'dt':
             return self.get_dataset_dictionary(doc)
 
-        for plugin in DatalPluginPoint.get_plugins():
-            if plugin.is_active() and hasattr(plugin, 'finder_class'):
-                finder = plugin.finder_class()
-                if finder.doc_type == r:
-                    return finder.get_dictionary()
+        for plugin in DatalPluginPoint.get_active_with_att('finder_class'):
+            finder = plugin.finder_class()
+            if finder.doc_type == r:
+                return finder.get_dictionary()
 
 
     def get_datastream_dictionary(self, document):

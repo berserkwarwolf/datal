@@ -47,12 +47,10 @@ class ElasticsearchIndex():
         elif doc_type == "vz":
             return self.__get_visualization_mapping()
 
-        plugins = DatalPluginPoint.get_plugins()
-        for plugin in plugins:
-            if plugin.is_active() and hasattr(plugin, 'finder_class'):
-                finder = plugin.finder_class()
-                if finder.doc_type == doc_type:
-                    return finder.get_mapping()
+        for plugin in DatalPluginPoint.get_active_with_att('finder_class'):
+            finder = plugin.finder_class()
+            if finder.doc_type == doc_type:
+                return finder.get_mapping()
 
     def __get_datastream_mapping(self):
         return {"ds" : {
