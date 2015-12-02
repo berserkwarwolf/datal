@@ -114,14 +114,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             language=language
         )
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        if visualization_revision.visualization.last_published_revision:
-            domain = visualization_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/visualizations/{}/{}'.format(domain, visualization_revision.visualization.id, slugify(visualizationi18n.title))
-
         visualization = dict(
             visualization=visualization_revision.visualization,
             visualization_id=visualization_revision.visualization.id,
@@ -146,7 +138,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
-            public_url=public_url,
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,

@@ -32,6 +32,16 @@ def permalink(pk, obj_type):
     else:
         return None
 
+@register.filter(name="embedlink")
+def embedlink(guid, obj_type):
+    if obj_type == 'datastream':
+        return reverse(
+            'viewDataStream.embed',
+            'microsites.urls',
+            kwargs={'guid': guid, 'slug': '-'}
+        )
+    else:
+        return None
 
 @register.filter(name="download")
 def download(dataset_revision):

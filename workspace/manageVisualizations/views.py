@@ -235,6 +235,8 @@ def change_status(request, visualization_revision_id=None):
 
         # Limpio un poco
         response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
+        response['result']['public_url'] = reverse('chart_manager.view', urlconf='microsites.urls', 
+            kwargs={'id': response['result']['visualization_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')

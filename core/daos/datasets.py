@@ -80,14 +80,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        if dataset_revision.dataset.last_published_revision:
-            domain = dataset_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
-
         # en caso de que haya una revisión publicada y sea distinta a la ultima revisión
         # entonces es que hay más de una revisión (nos ahorramos un query)
         if dataset_revision.dataset.last_published_revision and dataset_revision.dataset.last_published_revision != dataset_revision.dataset.last_revision:
@@ -127,7 +119,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             notes=dataseti18n.notes,
             tags=tags,
             sources=sources,
-            public_url=public_url,
             slug=slugify(dataseti18n.title),
             unique=unique
         )

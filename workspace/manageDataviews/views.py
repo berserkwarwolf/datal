@@ -115,7 +115,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for resource in resources:
-        # resources[i]['url'] = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(resources[i]['id']))
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls',
                                   kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls',
@@ -399,6 +398,8 @@ def change_status(request, datastream_revision_id=None):
 
         # Limpio un poco
         response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
+        response['result']['public_url'] = reverse('viewDataStream.view', urlconf='microsites.urls', 
+            kwargs={'id': response['result']['datastream_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')
