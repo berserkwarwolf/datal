@@ -38,7 +38,7 @@ def embedlink(guid, obj_type):
         return reverse(
             'viewDataStream.embed',
             'microsites.urls',
-            kwargs={'guid': guid, 'slug': '-'}
+            kwargs={'guid': guid}
         )
     else:
         return None
@@ -146,17 +146,6 @@ def privateDataStreamShareForm(datastream_id=None, auth_manager=None):
     available_users = ObjectGrant.objects.get_available_users(datastream_id, 'datastream', auth_manager.account_id)
     return locals()
 register.inclusion_tag('auth/privateShareForm.html')(privateDataStreamShareForm)
-
-
-def privateDashboardShareForm(dashboard_id=None, auth_manager=None):
-
-    private_share_form = auth_forms.PrivateDashboardShareForm(prefix='private_share_form', initial={'id': dashboard_id})
-    collaborators = ObjectGrant.objects.get_collaborators(dashboard_id, 'dashboard')
-    collaborator_formset = formset_factory(auth_forms.CollaboratorForm, extra=0)
-    collaborator_forms = collaborator_formset(prefix='private_share_form_collaborators', initial=collaborators)
-    available_users = ObjectGrant.objects.get_available_users(dashboard_id, 'dashboard', auth_manager.account_id)
-    return locals()
-register.inclusion_tag('auth/privateShareForm.html')(privateDashboardShareForm)
 
 
 def privateVisualizationShareForm(visualization_id=None, auth_manager=None):

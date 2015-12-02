@@ -322,7 +322,6 @@ OCUPATION_CHOICES = (
 
 THRESHOLD_NAME_CHOICES = (
      ('self_publish.can_upload', 'self_publish.can_upload')
-    ,('private_dashboard.can_create', 'private_dashboard.can_create')
     ,('private_datastream.can_create', 'private_datastream.can_create')
     ,('api.account_monthly_calls', 'api.account_monthly_calls')
     ,('workspace.create_user_limit', 'workspace.create_user_limit')
@@ -358,7 +357,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.url', 'account.url')
     ,('account.domain', 'account.domain')
     ,('account.api.domain', 'account.api.domain')
-    ,('account.hot.dashboards', 'account.hot.dashboards')
     ,('account.hot.datastreams', 'account.hot.datastreams')
     ,('account.hot.visualizations', 'account.hot.visualizations')
     ,('account.favicon', 'account.favicon')
@@ -378,7 +376,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.footer.height', 'account.footer.height')
     ,('enable.embed.options', 'enable.embed.options')
     ,('enable.junar.footer', 'enable.junar.footer')
-    ,('account.featured.dashboards', 'account.featured.dashboards')
     ,('account.enable.sharing', 'account.enable.sharing') # BOOLEAN
     ,('account.enable.notes', 'account.enable.notes') # BOOLEAN
     ,('account.title.color', 'account.title.color')

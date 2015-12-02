@@ -75,9 +75,6 @@ def load(request):
 
             return render_to_response('loadHome/home_'+themeid+'.html', locals())
         else:
-            # No Home, return to featured Dashboards
-            # return redirect('/dashboards/')
-
             # For the moment, redirect to search
             return redirect('/search/')
     else:

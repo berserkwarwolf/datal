@@ -242,7 +242,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
 
     def _unpublish_all(self, to_status=StatusChoices.DRAFT):
         """
-        Despublica todas las revisiones de la visualizacion y la de todos sus dashboards hijos en cascada
+        Despublica todas las revisiones de la visualizacion y la de todos sus hijos en cascada
         No se implementa ya que visualizaciones no tiene modelos hijo
         """
         VisualizationRevision.objects.filter(

@@ -3,7 +3,8 @@ from rest_framework.response import Response
 from rest_framework import viewsets
 from rest_framework import mixins
 from core.models import GuidModel
-from core.search.elastic import ElasticFinderManager
+from core.communitymanagers import FinderManager
+from core.search.elastic import ElasticsearchFinder
 from core.v8.views import EngineViewSetMixin
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import NotFound
@@ -30,7 +31,7 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         page_num = int(offset)/int(limit) + 1 if limit else 0
 
         
-        resources, time, facets = ElasticFinderManager().search(
+        resources, time, facets = FinderManager(ElasticsearchFinder).search(
             query=request.query_params.get('query', ''),
             slice=int(limit) if limit else None,
             page=page_num,

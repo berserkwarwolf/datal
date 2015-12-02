@@ -151,10 +151,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def query_childs(self, visualization_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = dict(
-            dashboards=dict()
-        )
-        return related
+        return dict()
 
     def update(self, visualization_revision, changed_fields, **fields):
         visualizationi18n = dict()

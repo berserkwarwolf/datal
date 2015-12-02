@@ -121,23 +121,32 @@ class Finder:
     def get_id_name(self, r):
         if r == 'ds':
             return "datastream_id"
-        elif r == 'db':
-            return "dashboard_id"
         elif r == 'vz':
             return "visualization_id"
         elif r == 'dt':
             return "dataset_id"
 
+        for plugin in DatalPluginPoint.get_plugins():
+            if plugin.is_active() and hasattr(plugin, 'finder_class'):
+                finder = plugin.finder_class()
+                if finder.doc_type == r:
+                    return finder.id_name
+
 
     def get_dictionary(self, doc):
         if doc['type'] == 'ds':
             return self.get_datastream_dictionary(doc)
-        elif doc['type'] == 'db':
-            return self.get_dashboard_dictionary(doc)
         elif doc['type'] == 'vz':
             return self.get_visualization_dictionary(doc)
         elif doc['type'] == 'dt':
             return self.get_dataset_dictionary(doc)
+
+        for plugin in DatalPluginPoint.get_plugins():
+            if plugin.is_active() and hasattr(plugin, 'finder_class'):
+                finder = plugin.finder_class()
+                if finder.doc_type == r:
+                    return finder.get_dictionary()
+
 
     def get_datastream_dictionary(self, document):
 
@@ -201,18 +210,6 @@ class Finder:
                              type=document['type'], category=document['category_id'], category_name=document['category_name'], guid=document['docid'].split("::")[1]
                              ,end_point=document.get('end_point', None), timestamp=document['timestamp'], owner_nick=document['owner_nick'])
         return visualization
-
-    def get_dashboard_dictionary(self, document):
-
-        title = document['title']
-        slug = slugify(title)
-        permalink = reverse('dashboard_manager.view',  urlconf='microsites.urls',
-            kwargs={'id': document['dashboard_id'], 'slug': slug})
-
-        dashboard_dict = dict (id=document['dashboard_id'], title=title, description=document['description'],
-                               tags=[tag.strip() for tag in document['tags'].split(',')], user_nick=document['owner_nick'],
-                               permalink=permalink, type = document['type'])
-        return dashboard_dict
 
     def _get_query(self, values, boolean_operator = 'AND'):
         self._validate_boolean_operator(boolean_operator)
