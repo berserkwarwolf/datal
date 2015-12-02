@@ -148,8 +148,8 @@ $(document).ready(function(){
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
     {% endfor %}
-    permaLink: "http://{{preferences.account_domain}}{{datastream.datastream_id|permalink:"datastream"}}{%if url_query%}?{{url_query}}{%endif%}",
-    embedUrl: "{{ datastream.guid|embedlink:'datastream' }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
+    permaLink: "http://{{preference.account.domain}}{{datastream.datastream_id|permalink:'datastream'}}{%if url_query%}?{{url_query}}{%endif%}",
+    embedUrl: "http://{{preference.account.domain}}{{ datastream.guid|embedlink:'datastream' }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
     exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",

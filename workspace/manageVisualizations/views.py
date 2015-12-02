@@ -235,7 +235,7 @@ def change_status(request, visualization_revision_id=None):
 
         # Limpio un poco
         response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
-        response['result']['public_url'] = reverse('chart_manager.view', urlconf='microsites.urls', 
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('chart_manager.view', urlconf='microsites.urls', 
             kwargs={'id': response['result']['visualization_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')
@@ -294,7 +294,7 @@ def retrieve_childs(request):
     visualizations = VisualizationDBDAO().query_childs(
         visualization_id=visualization_id,
         language=request.auth_manager.language
-    )['dashboards']
+    )
 
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")

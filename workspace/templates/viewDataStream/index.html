@@ -110,7 +110,7 @@ $(document).ready(function(){
     createVizUrl: "{% url 'manageVisualizations.create' %}?datastream_revision_id={{datastream.datastream_revision_id}}",
     editUrl: "{% url 'manageDataviews.edit' %}/{{datastream.datastream_revision_id}}/",
     lastPublishDate: "{{datastream.last_published_date|date:'F d, Y, h:i A'|capfirst }}",
-    publicUrl: "{{ datastream.datastream_id|permalink:'datastream' }}",
+    publicUrl: "http://{{preference.account_domain}}{{ datastream.datastream_id|permalink:'datastream' }}",
     createdAt: "{{ datastream.created_at|date:'F d, Y, h:i A'|capfirst  }}",
     modifiedAt: "{{ datastream.modified_at|date:'F d, Y, h:i A'|capfirst  }}"
   });

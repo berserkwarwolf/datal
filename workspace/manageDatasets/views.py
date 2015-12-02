@@ -489,7 +489,7 @@ def change_status(request, dataset_revision_id=None):
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
-        response['result']['public_url'] = reverse('manageDatasets.view', urlconf='microsites.urls', 
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
             kwargs={'dataset_id': response['result']['dataset_id'], 'slug': '-'})
         response['result'].pop('datastreams')
         response['result'].pop('visualizations')
