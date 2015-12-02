@@ -11,13 +11,11 @@ var MainView = Backbone.View.extend({
             model: this.stateModel
         });
 
-        this.datasetModel = options.datasetModel;
         this.dataviewModel = options.dataviewModel;
 
-        this.datasetModel.fetch();
+        this.dataviewModel.dataset.fetch();
 
-
-        this.listenToOnce(this.datasetModel, 'change:tables', function () {
+        this.listenToOnce(this.dataviewModel.dataset, 'change:tables', function () {
             this.render();
             this.listenTo(this.stateModel, 'change:step', this.render, this);
         }, this);
@@ -37,7 +35,7 @@ var MainView = Backbone.View.extend({
         }
         if (step === 0) {
             this.currentView = new SelectDataView({
-                datasetModel: this.datasetModel,
+                datasetModel: this.dataviewModel.dataset,
                 dataviewModel: this.dataviewModel,
             });
         } else if (step === 1) {

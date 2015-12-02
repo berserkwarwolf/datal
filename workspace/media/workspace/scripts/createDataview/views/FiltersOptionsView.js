@@ -74,10 +74,13 @@ var FiltersOptionsView = Backbone.View.extend({
         var value = $(e.currentTarget).val();
         if (value === '') {
             this.$('.row-operator').removeClass('hidden');
+            this.model.unset('type');
         } else if (value === 'fixed') {
+            this.model.set('type', 'fixed');
             this.$('.row-fixed-value').removeClass('hidden');
             this.$('.row-parameter').addClass('hidden');
         } else if (value === 'parameter') {
+            this.model.set('type', 'parameter');
             this.$('.row-fixed-value').addClass('hidden');
             this.$('.row-parameter').removeClass('hidden');
         }

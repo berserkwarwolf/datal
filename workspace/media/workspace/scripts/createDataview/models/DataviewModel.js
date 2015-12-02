@@ -23,10 +23,10 @@ var select_statement_template = ['<selectStatement>',
         '<Filter>',
             '<Operand1>column<%= filter.column %></Operand1>',
             '<LogicalOperator><%= filter.operator %></LogicalOperator>',
-            '<% if (filter.value) {%>',
+            '<% if (filter.type === \'fixed\') {%>',
                 '<Operand2><%= filter.value %></Operand2>',
             '<% } else {%>',
-                '<Operand2>parameter<%= index %></Operand2>',
+                '<Operand2>parameter<%= filter.id %></Operand2>',
             '<% } %>',
         '</Filter>',
         '<% }); %>',
@@ -35,6 +35,16 @@ var select_statement_template = ['<selectStatement>',
 ].join('');
 
 var data_source_template = ['<dataSource>',
+    '<% if (args.length > 0) {%>',
+    '<EndPointMappings>',
+        '<% _.each(args, function (arg, index) { %>',
+            '<Mapping>',
+                '<key><%= arg.name%></key>',
+                '<value>parameter<%= index%></value>',
+            '</Mapping>',
+        '<% }); %>',
+    '</EndPointMappings>',
+    '<% } %>',
     '<DataStructure>',
         '<Field id="table<%= tableId %>">',
             '<Headers>',
@@ -91,9 +101,6 @@ var DataviewModel = Backbone.Model.extend({
         status: 0,
 
         // TODO: remove this hardcoded params and use the model's data
-        end_point: 'file://1/7461/08c6faa4-689f-489b-a31c-94753ea52486',
-        impl_type: 4,
-        impl_details: '',
         rdf_template: '',
         bucket_name: '',
         user_id: 1647,
@@ -112,20 +119,27 @@ var DataviewModel = Backbone.Model.extend({
 
     url: '/rest/datastreams/sample.json',
 
+    attachDataset: function (attributes) {
+        this.dataset = new DatasetModel(attributes);
+    },
+
     fetch: function (options) {
         var self = this,
-            params = this.pick([
+            params = this.dataset.pick([
                 'end_point',
                 'impl_type',
                 'impl_details',
                 'rdf_template',
                 'bucket_name',
-                'user_id',
                 'limit',
             ]);
 
+        var filters = this.filters.toSampleFilters();
+        _.extend(params, filters);
+
         // NOTE: here the datasource param does not contain an underscore, like it does in save
         params.datasource = this.getDataSource();
+
         params.select_statement = this.getSelectStatement();
 
         return $.ajax({
@@ -140,7 +154,6 @@ var DataviewModel = Backbone.Model.extend({
     },
 
     parse: function (response) {
-
         var columns = _.first(response.fArray, response.fCols);
 
         var rows = _.map(_.range(0, response.fRows), function (i) {
@@ -182,9 +195,6 @@ var DataviewModel = Backbone.Model.extend({
     save: function () {
         var self = this,
             params = this.pick([
-                'dataset_revision_id',
-
-                'data_source',
                 'rdf_template',
 
                 'title',
@@ -201,6 +211,7 @@ var DataviewModel = Backbone.Model.extend({
                 'sources-INITIAL_FORMS',
             ]);
 
+        params.dataset_revision_id = this.dataset.get('dataset_revision_id');
         params.select_statement = this.getSelectStatement();
         params.data_source = this.getDataSource();
 
@@ -224,7 +235,6 @@ var DataviewModel = Backbone.Model.extend({
                 return model.getRange().from.row;
             });
 
-
         return this.select_statement_template({
             isFullTable: isFullTable,
             tableId: tableId,
@@ -240,9 +250,18 @@ var DataviewModel = Backbone.Model.extend({
             headerModels = this.selection.getItemsByMode('header'),
             headers = _.map(headerModels, function (model) {
                 return model.getRange().from.row;
-            });
+            }),
+            argsList = this.dataset.get('args'),
+            args;
+
+        args = _.filter(argsList, function (arg) {
+            return arg.editable;
+        }).map(function (arg) {
+            return arg;
+        });
 
         return this.data_source_template({
+            args: args,
             tableId: tableId,
             headers: headers,
             columns: columns

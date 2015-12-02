@@ -135,21 +135,18 @@
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/PreviewView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/MainView.js' %}"></script>
 	<script>
-		var datasetModel = new DatasetModel({
-            dataset_revision_id: {{dataset_revision.id}}
-        });
 
-        var dataviewModel = new DataviewModel({
+
+        var dataviewModel = new DataviewModel();
+        dataviewModel.attachDataset({
             dataset_revision_id: {{dataset_revision.id}},
-
-			end_point: '{{dataset_revision.end_point}}',
+        	end_point: '{{dataset_revision.end_point}}',
 			impl_type: {{dataset_revision.impl_type}},
 			impl_details: '{{dataset_revision.impl_details|safe}}',
         });
 
 		var mainView = new MainView({
 			el: '.main-section',
-			datasetModel: datasetModel,
 			dataviewModel: dataviewModel
 		});
 	</script>
