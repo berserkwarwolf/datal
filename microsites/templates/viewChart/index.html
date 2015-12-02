@@ -128,7 +128,7 @@ var chartModel = new charts.models.Chart({
     createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
     modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ visualization_revision.public_url }}",
+    publicUrl: "{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
 
     // Validar si es necesario
