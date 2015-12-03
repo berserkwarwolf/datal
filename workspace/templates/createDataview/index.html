@@ -9,15 +9,10 @@
     {% compress css %}
 	<link href="{% static 'handsontable/dist/handsontable.full.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 
-	<!-- ACTIONS -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/actions.css' %}"/>
-	<!-- DATA TABLE -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataTable.css' %}"/>
-	<!-- DATA STREAM BOX -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamBox.css' %}"/>
-	<!-- DATA STREAM FORM -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/dataStreamForm.css' %}"/>
-	<!-- TAGS CONTAINER -->
 	<link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'core/styles/tagsContainer.css' %}"/>
 	<!-- COMMON -->
 	<link href="{% sass_src 'workspace/styles/createCommon.scss' %}" type="text/css" rel="stylesheet" media="screen"/>
@@ -37,15 +32,9 @@
 	<script src="/js_core/plugins/tagging.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script src="/js_core/plugins/taggingSources.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script src="/js_core/plugins/jquery.ba-bbq.min.js?id={{settings.VERSION_JS_CSS}}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/advancedOptions.js' %}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/ProcessManager.js' %}"></script>
 	<script src="/js_core/base_modules/view_manager/DataServicePublisher.js?id={{settings.VERSION_JS_CSS}}"></script>
 	<script src="/js_core/base_modules/view_manager/XmlHandler.js?id={{settings.VERSION_JS_CSS}}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/TagSuggestor.js' %}"></script>
 	<script src="/js_core/base_modules/data_table/dataTable.js?id={{settings.VERSION_JS_CSS}}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/collect.js' %}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/step.js' %}"></script>
-	<script src="{% static 'workspace/scripts/view_manager/insertForm.js' %}"></script>
 	<script src="/js_core/plugins/customSelectable.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
     <script src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -62,53 +51,13 @@
   <div class="context-menu-view clearfix"></div>
 {% endblock %}
 
-
 {% block content %}
 
 	<div class="create">		
-
 		<div class="row current-step"></div>
-
 	</div>
 
-
-	<input type="hidden" id="id_datastream-dataset_revision_id" name="id_datastream-dataset_revision_id" value="{{data_set_id}}" />
-	<div id="id_steps_container">
-		<input id="id_is_update" type="hidden" value="{{is_update}}"/>
-		<input id="id_is_edit_selection" type="hidden" value="{{is_update_selection}}"/>
-		<input id="id_type_collect" type="hidden" value="{{type}}"/>
-		<input id="id_impl_type" type="hidden" value="{{impl_type}}"/>
-		<input id="id_end_point" type="hidden" value="{{end_point}}"/>
-		<input id="id_impl_details" type="hidden" value="{{impl_details|default_if_none:""}}"/>
-		<input id="id_bucket_name" type="hidden" value="{{bucket_name}}"/>		
-		<input id="id_data_source" type="hidden" value="{{datastream_revision.data_source}}"/>
-		<input id="id_select_statement" type="hidden" value="{{datastream_revision.select_statement}}"/>
-	           <input id="id_rdf_template" type="hidden" value="{{datastream_revision.rdf_template}}"/>
-		
-		<div id="id_step0_container" class="step1 create clearfix" style="display:none">
-		    {% include "createDataview/step1.html" %}
-		</div>
-		<div id="id_step1_container" class="step2 create clearfix" style="display:none">
-		    {% include "createDataview/step2.html" %}
-		</div>
-		<div id="id_step2_container" class="step3 create clearfix" style="display:none">
-		    {% include "createDataview/step3.html" %}
-		</div>
-		<div id="id_step3_container" class="step4 create clearfix" style="display:none">
-		    {% include "createDataview/step4.html" %}
-		</div>
-		<div id="id_loading">
-			<table class="Loading bigLoader">
-				<tr><td></td></tr>
-			</table>
-		</div>
-	</div>
 {% endblock %}
-
-{% block popupsOverlay %}
-	{% include "createDataview/helpTipsOverlays.html" %}
-{% endblock %}
-
 
 {% block bottom_js %}
 
@@ -135,9 +84,8 @@
 	<script src="{% static 'workspace/scripts/createDataview/views/steps/PreviewView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/MainView.js' %}"></script>
 	<script>
-
-
         var dataviewModel = new DataviewModel();
+
         dataviewModel.attachDataset({
             dataset_revision_id: {{dataset_revision.id}},
         	end_point: '{{dataset_revision.end_point}}',
