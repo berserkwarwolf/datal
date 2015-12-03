@@ -200,7 +200,9 @@ var DataviewModel = Backbone.Model.extend({
         var viewParameters = this.filters.toFormSet();
 
         var parametersParams = this.toFormSet(viewParameters, 'parameters');
-        // TODO: add dataset arguments to parameters
+        
+        var datasetArguments = this.dataset.get('args');
+
 
         var tagsParams = this.toFormSet([], 'tags');
         var sourcesParams = this.toFormSet([], 'sources');
