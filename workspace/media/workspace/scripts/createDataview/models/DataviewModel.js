@@ -24,9 +24,9 @@ var select_statement_template = ['<selectStatement>',
             '<Operand1>column<%= filter.column %></Operand1>',
             '<LogicalOperator><%= filter.operator %></LogicalOperator>',
             '<% if (filter.type === \'fixed\') {%>',
-                '<Operand2><%= filter.value %></Operand2>',
+                '<Operand2><%= filter.default %></Operand2>',
             '<% } else {%>',
-                '<Operand2>parameter<%= filter.id %></Operand2>',
+                '<Operand2>parameter<%= filter.position %></Operand2>',
             '<% } %>',
         '</Filter>',
         '<% }); %>',
@@ -87,13 +87,6 @@ var DataviewModel = Backbone.Model.extend({
         description: undefined,
         category: 41,
         notes: '',
-
-        'tags-TOTAL_FORMS': 0,
-        'tags-INITIAL_FORMS': 0,
-        'parameters-TOTAL_FORMS': 0,
-        'parameters-INITIAL_FORMS': 0,
-        'sources-TOTAL_FORMS': 0,
-        'sources-INITIAL_FORMS': 0,
 
         dataset_revision_id: undefined,
 
@@ -202,14 +195,19 @@ var DataviewModel = Backbone.Model.extend({
                 'category',
                 'notes',
                 'status',
-
-                'tags-TOTAL_FORMS',
-                'tags-INITIAL_FORMS',
-                'parameters-TOTAL_FORMS',
-                'parameters-INITIAL_FORMS',
-                'sources-TOTAL_FORMS',
-                'sources-INITIAL_FORMS',
             ]);
+
+        var viewParameters = this.filters.toFormSet();
+
+        var parametersParams = this.toFormSet(viewParameters, 'parameters');
+        // TODO: add dataset arguments to parameters
+
+        var tagsParams = this.toFormSet([], 'tags');
+        var sourcesParams = this.toFormSet([], 'sources');
+
+        _.extend(params, parametersParams);
+        _.extend(params, tagsParams);
+        _.extend(params, sourcesParams);
 
         params.dataset_revision_id = this.dataset.get('dataset_revision_id');
         params.select_statement = this.getSelectStatement();
@@ -221,6 +219,20 @@ var DataviewModel = Backbone.Model.extend({
                 data: params,
                 dataType: 'json'
             });
+    },
+
+    toFormSet: function (list, prefix) {
+        var result = {},
+            total = list.length;
+
+        _.each(list, function (item, index) {
+            _.each(item, function (value, key) {
+                result[prefix + '-' + index + '-' + key] = value;
+            });
+        });
+        result[prefix + '-TOTAL_FORMS'] = total;
+        result[prefix + '-INITIAL_FORMS'] = 0;
+        return result;
     },
 
     getSelectStatement: function () {

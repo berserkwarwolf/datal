@@ -45,7 +45,7 @@ var FiltersOptionsView = Backbone.View.extend({
         var value = $(e.currentTarget).val();
         if (value !== '') {
             this.model.set('column', value);
-            this.model.set('excelCol', DataTableUtils.intToExcelCol(value + 1));
+            this.model.set('excelCol', DataTableUtils.intToExcelCol(Number(value) + 1));
             this.$('.row-operator').removeClass('hidden');
         } else {
             this.model.unset('column');
