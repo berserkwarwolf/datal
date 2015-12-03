@@ -11,6 +11,7 @@ var SelectionView = Backbone.View.extend({
 
         this.template = _.template( $('#selection_template').html() );
         this.listenTo(this.dataviewModel.selection, 'add change remove reset', this.render, this);
+        this.listenTo(this.dataviewModel.filters, 'add change remove reset', this.render, this);
         this.listenTo(this.model, 'change', this.render, this);
     },
 
@@ -32,9 +33,14 @@ var SelectionView = Backbone.View.extend({
         }));
     },
 
-    onClickClear: function () {
-        this.dataviewModel.selection.reset();
-        this.dataviewModel.filters.reset();
+    onClickClear: function (e) {
+        var mode = $(e.currentTarget).data('mode');
+        console.log('clear mode:', mode);
+        if (mode === 'filter') {
+            this.dataviewModel.filters.reset();
+        } else {
+            this.clearByMode(this.dataviewModel.selection, mode);
+        }
     },
 
     onClickHeaders: function () {
@@ -58,10 +64,13 @@ var SelectionView = Backbone.View.extend({
     },
 
     filter: function (mode) {
-        return this.dataviewModel.selection.filter(function (model) {
-            return model.get('mode') === mode;
-        }).map(function (model) {
+        return this.dataviewModel.selection.filterByMode(mode).map(function (model) {
             return model.toJSON();
         });
+    },
+
+    clearByMode: function (collection, mode) {
+        collection.remove(collection.filterByMode(mode));
     }
+
 });

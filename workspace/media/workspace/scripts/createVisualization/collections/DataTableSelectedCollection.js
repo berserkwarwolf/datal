@@ -37,5 +37,11 @@ var DataTableSelectedCollection = Backbone.Collection.extend({
 
     removeItemsByMode: function (mode) {
         return this.remove(this.getItemsByMode(mode));
+    },
+
+    filterByMode: function (mode) {
+        return this.filter(function (model) {
+            return model.get('mode') === mode;
+        });
     }
 });

@@ -142,7 +142,7 @@
             dataset_revision_id: {{dataset_revision.id}},
         	end_point: '{{dataset_revision.end_point}}',
 			impl_type: {{dataset_revision.impl_type}},
-			impl_details: '{{dataset_revision.impl_details|safe}}',
+			impl_details: '{{dataset_revision.impl_details|default_if_none:""|safe}}',
         });
 
 		var mainView = new MainView({
