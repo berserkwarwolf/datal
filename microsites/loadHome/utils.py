@@ -29,15 +29,12 @@ def retrieveResourcePermalinks(resourceIds, language):
 
     datastreamIds = []
     visualizationIds = []
-    dashboardIds = []
             
     for resource in resourceIds:
         if resource['type']== 'chart':
             visualizationIds.append(resource['id'])
         elif resource['type']== 'ds':
             datastreamIds.append(resource['id'])
-        elif resource['type']== 'db':
-            dashboardIds.append(resource['id'])
             
     resources = []
     if datastreamIds:

@@ -247,6 +247,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 		/* Visitors */
 		.sidebar .infoBox .visitors > i{background-position:0 -120px;}
 		.sidebar .infoBox .visitors #id_datastreamHits{left:-15px;position:relative;}
+		.sidebar .infoBox .visitors #id_visualizationHits{left:-15px;position:relative;}
 
 		/* Text Overflow */
 		.sidebar .infoBox .dataCollectedFrom .icon,

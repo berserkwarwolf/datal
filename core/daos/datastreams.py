@@ -133,20 +133,6 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         datastreami18n = DatastreamI18n.objects.get(datastream_revision=datastream_revision, language=language)
         dataset_revision = datastream_revision.dataset.last_revision
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        embed_url = ''
-        if datastream_revision.datastream.last_published_revision:
-            domain = datastream_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/dataviews/{}/{}'.format(domain, datastream_revision.datastream.id, slugify(datastreami18n.title))
-            embed_url = '{}{}'.format(domain, reverse(
-                'viewDataStream.embed',
-                urlconf='microsites.urls',
-                kwargs={'guid': datastream_revision.datastream.guid}
-            ))
-
         datastream = dict(
             datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
@@ -158,7 +144,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             category_name=category.name,
             end_point=dataset_revision.end_point,
             filename=dataset_revision.filename,
-            collect_type=dataset_revision.impl_type,
+            collect_type=dataset_revision.dataset.type,
             impl_type=dataset_revision.impl_type,
             status=datastream_revision.status,
             modified_at=datastream_revision.modified_at,
@@ -174,15 +160,14 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
-            public_url=public_url,
-            slug= slugify(datastreami18n.title),
-            embed_url=embed_url
+            slug= slugify(datastreami18n.title)
         )
 
         return datastream
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None, filter_user=None):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(
@@ -207,8 +192,18 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
 
-        if filter_status:
-            query = query.filter(status__in=fileter_status)
+        if filter_status is not None:
+            query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(datastreami18n__title__icontains=filter_text) | 
+                                 Q(datastreami18n__description__icontains=filter_text))
+
+        if filter_user is not None:
+            query = query.filter(datastream__user__nick=filter_user)
 
         total_resources = query.count()
         query = query.values(
@@ -219,6 +214,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'datastream__guid',
             'category__id',
             'datastream__id',
+            'category__categoryi18n__slug',
             'category__categoryi18n__name',
             'datastreami18n__title',
             'datastreami18n__description',
@@ -226,6 +222,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'modified_at',
             'datastream__user__id',
             'datastream__last_revision_id',
+            'datastream__last_published_revision_id',
             'datastream__last_published_revision__modified_at',
             'dataset__last_revision__dataseti18n__title',
             'dataset__last_revision__impl_type',
@@ -276,7 +273,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             datastream_id = row[1]
             title = row[2]
             slug = slugify(title)
-            permalink = reverse('datastreams-invoke', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
+            permalink = reverse('datastreams-data', kwargs={'id': datastream_id, 'format': 'json'}, urlconf='microsites.urls')
             datastreams.append({'id'          : row[0],
                                 'title'        : title,
                                 'description'  : row[3],

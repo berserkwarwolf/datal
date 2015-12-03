@@ -3,7 +3,8 @@
 from django.utils.translation import ugettext_lazy as _
 # from django.core.urlresolvers import reverse
 from core.actions import *
-
+from django.conf import settings
+from core.choices import RESOURCES_CHOICES
 from django.http import HttpResponse
 from django.template import TemplateDoesNotExist
 from django.template import Context, Template
@@ -68,6 +69,7 @@ class UnkownException(DATALException):
     title = _('EXCEPTION-TITLE-UNKNOWN')
     description = _('EXCEPTION-DESCRIPTION-UNKNOWN')
     tipo = 'unknown'
+    status_code = 500 # Internal Server Error
 
     def __init__(self, name, trace):
         super(UnkownException, self).__init__(
@@ -81,6 +83,7 @@ class LifeCycleException(DATALException):
     title = _('EXCEPTION-TITLE-LIFE-CYCLE')
     description = _('EXCEPTION-DESCRIPTION-LIFE-CYCLE')
     tipo = 'life-cycle'
+    status_code = 409 # Conflict
 
 
 class ChildNotApprovedException(LifeCycleException):
@@ -89,16 +92,22 @@ class ChildNotApprovedException(LifeCycleException):
     # Translators: Ejemplo, "Existen %(count)s hijos sin aprobar"
     description = _('EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED')
     tipo = 'child-not-approved'
+    status_code =  409 # Conflict
     _context = {
         'count': 0,
+        'resource_type': settings.TYPE_DATASTREAM 
     }
 
-    def __init__(self, revision):
+    def __init__(self, revision, resource_type):
         self.revision = revision
-        super(ChildNotApprovedException, self).__init__()
+        for tipo, texto in RESOURCES_CHOICES:
+            if resource_type == tipo:
+                self.resource_type = texto
+                break 
+        super(ChildNotApprovedException, self).__init__(resource_type=self.resource_type)
 
     def get_actions(self):
-        return [ReviewDatasetStreamsAndPublishExceptionAction(self.revision)]
+        return [ReviewAssociatedResources(self.revision)]
 
 
 class SaveException(LifeCycleException):
@@ -106,6 +115,7 @@ class SaveException(LifeCycleException):
     title = _('EXCEPTION-TITLE-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-SAVE-ERROR')
     tipo = 'save-error'
+    status_code = 503 # Service Unavailable
 
     def __init__(self, form):
         self.form = form
@@ -120,7 +130,6 @@ class DatasetSaveException(SaveException):
     title = _('EXCEPTION-TITLE-DATASET-SAVE-ERROR')
     description = _('EXCEPTION-DESCRIPTION-DATASET-SAVE-ERROR')
     tipo = 'dataset-save-error'
-
 
 class DatastreamSaveException(SaveException):
     title = _('EXCEPTION-TITLE-DATASTREAM-SAVE-ERROR')
@@ -138,7 +147,7 @@ class DatasetNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASET-NOT-FOUND')
     description = _('EXCEPTION-DESCRIPTION-DATASET-NOT-FOUND')
     tipo = 'dataset-not-found'
-    status_code = 404
+    status_code = 404  # Not Found
 
     def get_actions(self):
         return [ViewDatasetListExceptionAction()]
@@ -147,14 +156,14 @@ class DatasetTableNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASET-TABLE-NOT-FOUND')
     description = _('EXCEPTION-DESCRIPTION-DATASET-TABLE-NOT-FOUND')
     tipo = 'dataset-table-not-found'
-    status_code = 404
+    status_code = 404 # Not Found
     table_id = 0 # valor defaault
 
 class DataStreamNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-DATASTREAM-NOT-FOUND')
     description = _('EXCEPTION-DESCRIPTION-DATASTREAM-NOT-FOUND')
     tipo = 'datastream-not-found'
-    status_code = 404
+    status_code = 404 # Not Found
 
     def get_actions(self):
         return [ViewDatastreamListExceptionAction()]
@@ -164,7 +173,7 @@ class VisualizationNotFoundException(LifeCycleException):
     title = _('EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND')
     description = _('EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND')
     tipo = 'visualization-not-found'
-    status_code = 404
+    status_code = 404 # Not Found
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
@@ -173,26 +182,44 @@ class VisualizationRequiredException(LifeCycleException):
     title = _('EXCEPTION-TITLE-VIZUALIZATION-REQUIRED')
     description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-REQUIRED')
     tipo = 'vizualization-required'
+    status_code = 410 # Gone
 
     def get_actions(self):
         return [ViewVisualizationListExceptionAction()]
 
-class VisualizationParentNotPublishedException(LifeCycleException):
-    title = _('EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED')
-    description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED')
-    tipo = 'illegal-state'
-
-
 class ParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
-    tipo = 'illegal-state'
+    tipo = 'parent-not-published'
+    status_code =  205 # Reset Content
+
+    def __init__(self, revision):
+        self.revision = revision
+        super(ParentNotPublishedException, self).__init__()
+
+class VisualizationParentNotPublishedException(ParentNotPublishedException):
+    title = _('EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED')
+
+    def get_actions(self):
+        if hasattr(self, 'revision'):#Prevent exepction for Exception Test script to prevent fall in the view.
+            return [ViewDatastreamExceptionAction(self.revision)]
+
+class DatastreamParentNotPublishedException(ParentNotPublishedException):
+    title = _('EXCEPTION-TITLE-DATASTREM-PARENT-NOT-PUBLISHED')
+    description = _('EXCEPTION-DESCRIPTION-DATASTREM-PARENT-NOT-PUBLISHED')
+
+    def get_actions(self):
+        #Prevent exepction for Exception Test script to prevent fall in the view.
+        if hasattr(self, 'revision'): #
+            return [ViewDatasetExceptionAction(self.revision)]
 
 
 class IllegalStateException(LifeCycleException):
     title = _('EXCEPTION-TITLE-ILLEGAL-STATE')
     description = _('EXCEPTION-DESCRIPTION-ILLEGAL-STATE')
     tipo = 'illegal-state'
+    status_code =  409 # Conflict
 
 
 class FileTypeNotValidException(LifeCycleException):
@@ -200,6 +227,7 @@ class FileTypeNotValidException(LifeCycleException):
     description = _('EXCEPTION-DESCRIPTION-FILE-INVALID')
     tipo = 'illegal-state'
     file_type = '' #valor defaault
+    status_code =  400 # Bad Request
     valid_types = [] #valor default
 
     def get_actions(self):

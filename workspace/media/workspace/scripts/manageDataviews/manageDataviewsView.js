@@ -26,7 +26,6 @@ var ManageDataviewsView = Backbone.View.extend({
 
 		this.sourceUrl = options.sourceUrl;
 		this.tagUrl = options.tagUrl;
-		this.dataViewCreationStepsUrl = options.dataViewCreationStepsUrl;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());
@@ -177,9 +176,7 @@ var ManageDataviewsView = Backbone.View.extend({
 	},
 
 	onAddNewButtonClicked: function() {
-		var manageDatasetsOverlayView = new ManageDatasetsOverlayView({
-			dataViewCreationStepsUrl: this.dataViewCreationStepsUrl,
-		});
+		var manageDatasetsOverlayView = new ManageDatasetsOverlayView();
 	},
 
 	onEditButtonClicked: function(event){
@@ -295,9 +292,14 @@ var ManageDataviewsView = Backbone.View.extend({
 
 		// Fetch List Resources
 		this.listResources.fetch({
-			reset: true
+			reset: true,
+			error: self.onFetchError
 		});
 
-	}
+	},
+    onFetchError: function(obj, response, options){
+	    err = response.responseJSON;
+	    $("#id_manageDatastreams").html('<h1>'+err.error+'</h1><h2>'+err.description+'</h2>');
+    },
 
 });

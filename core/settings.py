@@ -176,16 +176,34 @@ GRAVATAR = {
     }
 }
 
-TYPE_DASHBOARD      = 'db'
-TYPE_DATASET        = 'dt'
-TYPE_DATASTREAM     = 'ds'
-TYPE_VISUALIZATION  = 'vz'
+TYPE_DATASET = 'dt'
+TYPE_DATASTREAM = 'ds'
+TYPE_VISUALIZATION = 'vz'
 
 # Term exclusion lists for searches and usernames
-ENGLISH_EXCLUSION_LIST          = ['abaft', 'aboard', 'about', 'above', 'absent', 'across', 'afore', 'after', 'against', 'along', 'alongside', 'amid', 'amidst', 'among', 'amongst', 'an', 'apropos', 'around', 'as', 'aside', 'astride', 'at', 'athwart', 'atop', 'barring', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'betwixt', 'beyond', 'but', 'by', 'circa', 'concerning', 'despite', 'down', 'during', 'except', 'excluding', 'failing', 'following', 'for', 'from', 'given', 'in', 'including', 'inside', 'into', 'like', 'mid', 'midst', 'minus', 'near', 'next', 'notwithstanding', 'of', 'off', 'on', 'onto', 'opposite', 'out', 'outside', 'over', 'pace', 'past', 'per', 'plus', 'pro', 'qua', 'regarding', 'round', 'sans', 'save', 'since', 'than', 'through', 'thru', 'throughout', 'thruout', 'the', 'till', 'times', 'to', 'toward', 'towards', 'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'vs', 'via', 'vice', 'with', 'within', 'without', 'worth', 'it', 'the', 'a', 'an']
-SPANISH_EXCLUSION_LIST          = ['a', 'con', 'contra', 'de', 'desde', 'durante', 'en', 'entre', 'hacia', 'hasta', 'mediante', 'para', 'por', 'segun', 'sin', 'so', 'sobre', 'tras', 'via', 'excepto', 'el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas']
-SEARCH_TERMS_EXCLUSION_LIST     = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIST
-BLOCKED_USERNAMES               = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home', 'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support', 'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams', 'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams', 'data.stream', 'dashboards', 'dashboard', 'data']
+ENGLISH_EXCLUSION_LIST = ['abaft', 'aboard', 'about', 'above', 'absent', 'across', 'afore', 'after', 'against', 'along',
+                          'alongside', 'amid', 'amidst', 'among', 'amongst', 'an', 'apropos', 'around', 'as', 'aside',
+                          'astride', 'at', 'athwart', 'atop', 'barring', 'before', 'behind', 'below', 'beneath',
+                          'beside', 'besides', 'between', 'betwixt', 'beyond', 'but', 'by', 'circa', 'concerning',
+                          'despite', 'down', 'during', 'except', 'excluding', 'failing', 'following', 'for', 'from',
+                          'given', 'in', 'including', 'inside', 'into', 'like', 'mid', 'midst', 'minus', 'near', 'next',
+                          'notwithstanding', 'of', 'off', 'on', 'onto', 'opposite', 'out', 'outside', 'over', 'pace',
+                          'past', 'per', 'plus', 'pro', 'qua', 'regarding', 'round', 'sans', 'save', 'since', 'than',
+                          'through', 'thru', 'throughout', 'thruout', 'the', 'till', 'times', 'to', 'toward', 'towards',
+                          'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'vs', 'via', 'vice', 'with',
+                          'within', 'without', 'worth', 'it', 'the', 'a', 'an'
+]
+SPANISH_EXCLUSION_LIST = ['a', 'con', 'contra', 'de', 'desde', 'durante', 'en', 'entre', 'hacia', 'hasta', 'mediante',
+                          'para', 'por', 'segun', 'sin', 'so', 'sobre', 'tras', 'via', 'excepto', 'el', 'la', 'los',
+                          'las', 'un', 'una', 'unos', 'unas'
+]
+SEARCH_TERMS_EXCLUSION_LIST = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIST
+BLOCKED_USERNAMES = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home',
+                     'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support',
+                     'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams',
+                     'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams',
+                     'data.stream', 'data'
+]
 
 # unificamos toda la config de los indexadores en una sola
 # para indextank usamos una sola url
@@ -197,7 +215,6 @@ SEARCH_INDEX = {
 
 # Settings Keys
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'
-HOT_DASHBOARDS  = 'HOT_DASHBOARDS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
 DOC_API_URL = 'https://github.com/datal-org/datal/tree/develop/docs/api'
 PAGINATION_RESULTS_PER_PAGE = 10

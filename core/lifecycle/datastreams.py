@@ -99,10 +99,6 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             logger.info('[LifeCycle - Datastreams - Publish] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.datastream_revision.id, self.datastream_revision.status
             ))
-            # por el ticket #103673168
-            self.datastream_revision.status = StatusChoices.APPROVED
-            self.datastream_revision.save()
-            transaction.commit()
             raise IllegalStateException(
                                     from_state=self.datastream_revision.status,
                                     to_state=StatusChoices.PUBLISHED,
@@ -152,7 +148,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(visualization_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(self.datastream.last_revision)
+                raise ChildNotApprovedException(self.datastream.last_revision.dataset.last_revision, 
+                                                settings.TYPE_VISUALIZATION)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES, to_status=StatusChoices.DRAFT):
         """ Despublica la revision de un dataset """
@@ -167,7 +164,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
         if killemall:
             self._unpublish_all(to_status=to_status)
         else:
-            revcount = DatasetRevision.objects.filter(dataset=self.datastream.id, status=StatusChoices.PUBLISHED).count()
+            revcount = DataStreamRevision.objects.filter(datastream=self.datastream.id, status=StatusChoices.PUBLISHED).count()
 
             if revcount == 1:
                 self._unpublish_all()

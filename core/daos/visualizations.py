@@ -114,14 +114,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             language=language
         )
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        if visualization_revision.visualization.last_published_revision:
-            domain = visualization_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/visualizations/{}/{}'.format(domain, visualization_revision.visualization.id, slugify(visualizationi18n.title))
-
         visualization = dict(
             visualization=visualization_revision.visualization,
             visualization_id=visualization_revision.visualization.id,
@@ -146,7 +138,6 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
-            public_url=public_url,
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
@@ -160,10 +151,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
     def query_childs(self, visualization_id, language):
         """ Devuelve la jerarquia completa para medir el impacto """
 
-        related = dict(
-            dashboards=dict()
-        )
-        return related
+        return dict()
 
     def update(self, visualization_revision, changed_fields, **fields):
         visualizationi18n = dict()
@@ -215,9 +203,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         return visualization_revision
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None, filter_user=None):
         """ Consulta y filtra las visualizaciones por diversos campos """
-
+        """ filter_category existe para poder llamar a todos los daos con la misma firma """
         query = VisualizationRevision.objects.filter(
             id=F('visualization__last_revision'),
             visualization__user__account=account_id,
@@ -238,23 +227,38 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             q_list = [Q(x) for x in predicates]
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
-        if filter_status:
-            query = query.filter(status__in=fileter_status)
+        
+        if filter_status is not None:
+            query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(visualization__datastream__last_revision__category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(visualizationi18n__title__icontains=filter_text) |
+                                 Q(visualizationi18n__description__icontains=filter_text))
+
+        if filter_user is not None:
+            query = query.filter(visualization__user__nick=filter_user)
 
         total_resources = query.count()
         query = query.values(
             'status',
             'id',
+            'lib',
+            'impl_details',
             'visualization__id',
             'visualization__guid',
             'visualization__user__nick',
             'visualization__user__name',
             'visualization__last_revision_id',
             'visualization__last_published_revision__modified_at',
+            'visualization__last_published_revision_id',
             'visualization__datastream__id',
             'visualization__datastream__last_revision__id',
             'visualization__datastream__last_revision__category__id',
             'visualization__datastream__last_revision__category__categoryi18n__name',
+            'visualization__datastream__last_revision__category__categoryi18n__slug',
             'visualization__datastream__last_revision__datastreami18n__title',
             'visualizationi18n__title',
             'visualizationi18n__description', 'created_at', 'modified_at', 'visualization__user__id',

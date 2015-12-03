@@ -49,9 +49,7 @@ def get_key(http_referer):
     if not http_referer:
         raise Http404
 
-    if re.search('^.*dashboards/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
-        key = 'db.detail'
-    elif re.search('^.*datastreams/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+    if re.search('^.*datastreams/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
         key = 'ds.detail'
     elif re.search('^.*/datastreams/embed/[A-Z0-9\-]+.*$' , http_referer):
         key = 'ds.embed'

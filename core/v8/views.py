@@ -11,10 +11,15 @@ import logging
 logger = logging.getLogger(__name__)
 
 class EngineViewSetMixin(object):
-    def engine_call(self, request, engine_method, format=None, is_detail=True, form_class=RequestForm, serialize=True):
+    def engine_call(self, request, engine_method, format=None, is_detail=True, 
+                    form_class=RequestForm, serialize=True, download=True):
         mutable_get = request.GET.copy()
         mutable_get.update(request.POST.copy())
-        mutable_get['output'] = format or 'json'
+        mutable_get['output'] = 'json'
+        if format is not None:
+            format = 'prettyjson' if format == 'pjson' else format
+            format = 'json_array' if format == 'ajson' else format
+            mutable_get['output'] = format 
         
         resource = {}
         if is_detail:
@@ -30,7 +35,7 @@ class EngineViewSetMixin(object):
             # TODO: correct handling
             raise Exception("Wrong arguments")        
 
-        command = AbstractCommandFactory().create(engine_method, 
+        command = AbstractCommandFactory(self.app).create(engine_method, 
             self.data_types[0], form.cleaned_data)
         result = command.run()
         if not result:
@@ -47,7 +52,7 @@ class EngineViewSetMixin(object):
 
         serializer = EngineSerializer(resource, 
             context={'dao_filename': self.dao_filename})
-        if 'redirect' in serializer.data and serializer.data['redirect']:
+        if download and 'redirect' in serializer.data and serializer.data['redirect']:
             response = HttpResponse(mimetype='application/force-download')
             response['Content-Disposition'] = 'attachment; filename="{0}"'.format(serializer.data['filename'])
             redir = urllib2.urlopen(serializer.data['result']['fUri'])
@@ -57,11 +62,11 @@ class EngineViewSetMixin(object):
             response.write(resp)
             return response
 
-        response = Response(serializer.data['result'], content_type=result[1])
+        response = Response(serializer.data['result'], content_type=resource['format'])
         
         #TODO hacer una lista de los formatos que esperan forzar una descarga y los que se mostraran en pantalla
         output = mutable_get['output']
-        if output != 'json' and output != 'html': 
+        if download and output not in ['json', 'html']: 
             # reemplazar la extension si la tuviera
             filename = serializer.data['filename']
             name = filename if len(filename.split('.')) == 1 else '.'.join(filename.split('.')[:-1])

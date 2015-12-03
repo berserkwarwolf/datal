@@ -7,7 +7,7 @@ import hashlib
 import urllib
 import re
 from urlparse import urlparse
-from core.choices import AccountRoles
+from core.choices import AccountRoles, SOURCE_IMPLEMENTATION_CHOICES, COLLECT_TYPE_CHOICES
 
 register = template.Library()
 
@@ -136,6 +136,22 @@ def addhttp(url):
         return '#'
 
 
+@register.filter(name='impl_type_nice')
+def impl_type_nice(item):
+    """ obtener el nombre desde SOURCE_IMPLEMENTATION_CHOICES """
+    impl_type_nice = unicode(SOURCE_IMPLEMENTATION_CHOICES[int(item)][1]).replace('/', '-').replace(' ', '-')
+
+    return impl_type_nice
+
+@register.filter(name='collect_type_nice')
+def collect_type_nice(item):
+    """ obtener el nombre desde SOURCE_IMPLEMENTATION_CHOICES """
+    collect_type_nice = unicode(COLLECT_TYPE_CHOICES[int(item)][1]).replace('/', '-').replace(' ', '-')
+
+    return collect_type_nice
+
+
+    
 @register.simple_tag
 def gravatar(auth_manager, size, klass, user_nick=None, user_email=None):
     """ auth_manager param can also be a user object or dict with user nick and email """
@@ -162,9 +178,9 @@ def account_logo(account, klass, roles):
     account_domain = preferences['account_domain']
     href = ''
     if AccountRoles.ADMIN in roles and account_logo == '':
-        account_domain = reverse('admin_manager.action_info')
+        account_domain = reverse('admin_manager.edit_info')
     elif AccountRoles.ADMIN in roles and account_domain == '':
-        account_domain = reverse('admin_manager.action_domain')
+        account_domain = reverse('admin_manager.edit_domain')
     elif 'ao-free-user' in roles:
         return ''
     else:

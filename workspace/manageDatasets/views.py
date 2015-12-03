@@ -245,7 +245,7 @@ def remove(request, dataset_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        dataset_rev_removed.send(sender='remove_view', id=dataset_revision_id)
+        dataset_rev_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=dataset_revision_id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -257,7 +257,7 @@ def remove(request, dataset_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        dataset_removed.send(sender='remove_view', id=lifecycle.dataset.id)
+        dataset_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=lifecycle.dataset_revision.id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -379,7 +379,8 @@ def edit(request, dataset_revision_id=None):
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
             # Signal
-            dataset_changed.send_robust(sender='edit_view', id=dataset_revision.dataset.id)
+            dataset_changed.send_robust(sender='edit_view', id=lifecycle.dataset.id,
+                                        rev_id=lifecycle.dataset_revision.id)
 
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
@@ -430,9 +431,6 @@ def change_status(request, dataset_revision_id=None):
         if action == 'approve':
             lifecycle.accept()
 
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -442,8 +440,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'reject':
             lifecycle.reject()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -453,8 +449,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -471,8 +465,8 @@ def change_status(request, dataset_revision_id=None):
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
 
             # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
+                                            rev_id=lifecycle.dataset_revision.id)
 
             response = dict(
                 status='ok',
@@ -483,8 +477,6 @@ def change_status(request, dataset_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
             response = dict(
                 status='ok',
                 messages={
@@ -497,6 +489,8 @@ def change_status(request, dataset_revision_id=None):
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
+            kwargs={'dataset_id': response['result']['dataset_id'], 'slug': '-'})
         response['result'].pop('datastreams')
         response['result'].pop('visualizations')
         response['result'].pop('tags')

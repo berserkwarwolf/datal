@@ -16,18 +16,19 @@ class ElasticsearchFinder(Finder):
 
         logger.info("Search arguments:\n\t[args]: %s\n\t[kwargs]: %s" % (args,kwargs))
         self.query = kwargs.get('query', '')
+        self.ids= kwargs.get('ids', None)
         self.account_id = kwargs.get('account_id')
         self.resource = kwargs.get('resource', 'all')
         page = kwargs.get('page', 0)
         max_results = kwargs.get('max_results', settings.SEARCH_MAX_RESULTS)
         slice = kwargs.get('slice', settings.PAGINATION_RESULTS_PER_PAGE)
-
+        reverse = kwargs.get('reverse', False)
         self.order =  kwargs.get('order')
 
         if self.order and self.order=='top':
-            self.sort = "hits: desc"
+            self.sort = "hits: %s" % ("asc" if reverse else "desc")
         elif self.order and self.order=='last':
-            self.sort =  "timestamp:asc"
+            self.sort =  "timestamp:%s" % ("asc" if reverse else "desc")
         else:
             self.sort = self.order_by        
 
@@ -106,6 +107,13 @@ class ElasticsearchFinder(Finder):
                 "categories.name": self.category_filters
             }})
 
+        if self.ids:
+            # este método solo funciona si o si pasando como param UN tipo de recurso.
+            id_name=self.get_id_name(self.resource[0])
+            filters.append({"terms": {
+                id_name: filter(None,self.ids.split(","))
+            }})
+
         query = {
             "query": {
                 "filtered": {
@@ -130,7 +138,6 @@ class ElasticsearchFinder(Finder):
                 }
             }
         }
-
         return query
 
 class ElasticFinderManager(FinderManager):

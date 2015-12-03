@@ -6,7 +6,6 @@ from core.models import Dataset, DatasetRevision
 from core.daos.datasets import DatasetDBDAO
 from core.templatetags.core_components import permalink as get_permalink
 from microsites.daos.datasets import DatasetDAO
-from core.utils import set_dataset_impl_type_nice
 from core.exceptions import *
 from microsites.exceptions import *
 
@@ -35,7 +34,6 @@ def view(request, dataset_id, slug):
         dataset_revision_id=dataset_orig.last_published_revision.id
     )
 
-    impl_type_nice = set_dataset_impl_type_nice(dataset_orig.last_published_revision.impl_type)
-    permalink = 'http://%s%s' % (preferences['account_domain'], get_permalink(dataset_id, 'dataset'))
+    #permalink = 'http://%s%s' % (preferences['account_domain'], get_permalink(dataset_id, 'dataset'))
     
     return render_to_response('viewDataset/index.html', locals())

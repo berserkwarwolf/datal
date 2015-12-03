@@ -1,5 +1,5 @@
 /* Button */
-.button{height:48px;line-height:46px;font-size:15px;padding:0 15px;display:inline-block;border:1px solid transparent;font-family:'robotoregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
+.button{height:48px;line-height:44px;font-size:15px;padding:0 15px;display:inline-block;border:1px solid transparent;font-family:'robotoregular',arial,helvetica,sans-serif;text-align:center;cursor:pointer;
   -webkit-box-sizing:border-box;
      -moz-box-sizing:border-box;
           box-sizing:border-box;
@@ -17,8 +17,10 @@
   .button:hover{color:#0066ff;}
 
   /* Alpha */
-  .button.alpha{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;}
+  .button.alpha,
+  .button.alpha-icon{font-size:12px;text-transform:none;font-family:Arial, Helvetica, sans-serif !important;border-color:transparent;background:none;font-weight:normal;min-width:inherit !important;}
   .button.alpha:hover{text-decoration:none;}
+  .button.alpha-icon:active{box-shadow:none;}
     
   /* Back */
   .button.back:before{content:"< ";}

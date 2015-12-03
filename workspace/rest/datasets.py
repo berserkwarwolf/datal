@@ -12,6 +12,7 @@ class RestDataSetViewSet(ResourceViewSet):
     data_types = ['dt']
     dao_get_param = 'dataset_revision_id'
     dao_pk = 'dataset_revision_id'
+    app = 'workspace'
 
     @detail_route(methods=['get'], renderer_classes=[
         JSONEngineRenderer,

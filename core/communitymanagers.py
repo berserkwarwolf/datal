@@ -6,6 +6,7 @@ from core import helpers
 
 from core.search import *
 
+
 # CategoryManager
 def get_for_browse(self, category_slug, language):
     category_query = super(managers.CategoryManager, self).values('id', 'categoryi18n__name')

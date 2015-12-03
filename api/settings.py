@@ -59,6 +59,12 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
     'user': '20/minute'
 }
 
+REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
+    'rest_framework.renderers.JSONRenderer',
+    'rest_framework_jsonp.renderers.JSONPRenderer',
+    'rest_framework.renderers.BrowsableAPIRenderer',
+)
+
 try:
     from api.local_settings import *
 except ImportError:

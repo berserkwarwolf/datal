@@ -4,7 +4,7 @@
 {% block SEO %}
     <title>{{visualization_revision.title}} &middot; {{preferences.account_page_titles}}</title>
     <meta name="description" content="{{ visualization_revision.description }}" />
-    <link rel="canonical" href="{{base_uri}}{{visualization_revision.permalink}}" />
+    <link rel="canonical" href="http://{{ preferences.account_domain}}{{visualization_revision.visualization_id|permalink:"visualization"}}" />
 {% endblock %}
 
 {% if preferences.account_enable_sharing %} 
@@ -31,8 +31,18 @@
 <script type="text/javascript" src="/js_core/plugins/date.toISOString.js?id={{settings.VERSION_JS_CSS}}"></script>
 <![endif]-->
 
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+<!-- Libraries -->
+<script type="text/javascript"
+          src="https://www.google.com/jsapi?autoload={
+            'modules':[{
+              'name':'visualization',
+              'version':'1',
+              'packages':['corechart']
+            }]
+    }"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=visualization"></script>
+
+
 <script type="text/javascript" src="/js_core/plugins/multimarker.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 {% if preferences.account_enable_sharing %}
@@ -118,14 +128,14 @@ var chartModel = new charts.models.Chart({
     createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
     modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ visualization_revision.public_url }}",
+    publicUrl: "{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
 
     // Validar si es necesario
     guid: "{{visualization_revision.guid}}",
 
     // Revisar
-    id: "{{ visualization_revision.last_revision_id }}",
+    id: "{{ visualization_revision.last_published_revision_id }}",
     visualization_id: "{{ visualization_revision.visualization_id }}",
 });
 

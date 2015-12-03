@@ -15,7 +15,6 @@ from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevisi
 from core.http import JSONHttpResponse
 from core.decorators import datal_cache_page
 from core.signals import datastream_changed, datastream_removed, datastream_unpublished, datastream_rev_removed
-from core.v8.factories import AbstractCommandFactory
 from core.utils import DateTimeEncoder
 from workspace.decorators import *
 from workspace.manageDataviews.forms import *
@@ -116,7 +115,6 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
     )
 
     for resource in resources:
-        # resources[i]['url'] = LocalHelper.build_permalink('manageDataviews.view', '&datastream_revision_id=' + str(resources[i]['id']))
         resource['url'] = reverse('manageDataviews.view', urlconf='workspace.urls',
                                   kwargs={'revision_id': resource['id']})
         resource['dataset_url'] = reverse('manageDatasets.view', urlconf='workspace.urls',
@@ -178,7 +176,8 @@ def remove(request, datastream_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        datastream_rev_removed.send(sender='remove_view', id=datastream_revision_id)
+        datastream_rev_removed.send_robust(sender='remove_view', id=lifecycle.datastream.id,
+                                           rev_id=datastream_revision_id)
 
         return JSONHttpResponse(json.dumps({
             'status': True,
@@ -190,7 +189,8 @@ def remove(request, datastream_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        datastream_removed.send(sender='remove_view', id=lifecycle.datastream.id)
+        datastream_removed.send_robust(sender='remove_view', id=lifecycle.datastream.id,
+                                rev_id=lifecycle.datastream_revision.id)
 
         return HttpResponse(json.dumps({
             'status': True,
@@ -305,7 +305,8 @@ def edit(request, datastream_revision_id=None):
             )
 
             # Signal
-            datastream_changed.send_robust(sender='edit_view', id=lifecycle.datastream.id)
+            datastream_changed.send_robust(sender='edit_view', id=lifecycle.datastream.id,
+                                           rev_id=lifecycle.datastream_revision.id)
 
             response = dict(
                 status='ok',
@@ -336,9 +337,6 @@ def change_status(request, datastream_revision_id=None):
         if action == 'approve':
             lifecycle.accept()
 
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -349,9 +347,6 @@ def change_status(request, datastream_revision_id=None):
         elif action == 'reject':
             lifecycle.reject()
 
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
-
             response = dict(
                 status='ok',
                 messages={
@@ -361,9 +356,6 @@ def change_status(request, datastream_revision_id=None):
             )
         elif action == 'publish':
             lifecycle.publish()
-
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
 
             response = dict(
                 status='ok',
@@ -381,8 +373,8 @@ def change_status(request, datastream_revision_id=None):
                 description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
 
             # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
-            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
+            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id,
+                                               rev_id=lifecycle.datastream_revision.id)
 
             response = dict(
                 status='ok',
@@ -393,9 +385,6 @@ def change_status(request, datastream_revision_id=None):
             )
         elif action == 'send_to_review':
             lifecycle.send_to_review()
-
-            # Signal
-            datastream_changed.send_robust(sender='change_status_view', id=lifecycle.datastream.id)
 
             response = dict(
                 status='ok',
@@ -409,6 +398,8 @@ def change_status(request, datastream_revision_id=None):
 
         # Limpio un poco
         response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('viewDataStream.view', urlconf='microsites.urls', 
+            kwargs={'id': response['result']['datastream_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')

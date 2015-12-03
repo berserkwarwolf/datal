@@ -736,7 +736,6 @@ class VisualizationRevision(RevisionModel):
     modified_at = models.DateTimeField(editable=False, auto_now=True)
     status = models.IntegerField(choices=choices.STATUS_CHOICES, verbose_name=ugettext_lazy('MODEL_STATUS_LABEL'))
     parameters = models.CharField(max_length=2048, verbose_name=ugettext_lazy( 'MODEL-URL-TEXT' ), blank=True)
-    objects = managers.VisualizationRevisionManager()
 
     class Meta:
         db_table = 'ao_visualizations_revisions'
@@ -1130,6 +1129,7 @@ def unindex_dataset_revision(sender, instance, **kwargs):
         search_dao = DatasetSearchDAOFactory().create(instance)
         search_dao.remove()
 
+
 @receiver(pre_delete, sender=DataStreamRevision, dispatch_uid="unindex_datastream_revision")
 def unindex_datastream_revision(sender, instance, **kwargs):
     # Elimino del indexador todas las revision publicadas cada vez que elimino una revision
@@ -1137,6 +1137,7 @@ def unindex_datastream_revision(sender, instance, **kwargs):
         from core.daos.datastreams import DatastreamSearchDAOFactory
         search_dao = DatastreamSearchDAOFactory().create(instance)
         search_dao.remove()
+
 
 @receiver(pre_delete, sender=VisualizationRevision, dispatch_uid="unindex_visualization_revision")
 def unindex_visualization_revision(sender, instance, **kwargs):
