@@ -260,6 +260,7 @@ var DataviewModel = Backbone.Model.extend({
 
     getDataSource: function () {
         var tableId = this.get('tableId'),
+            filterCount = this.filters.length,
             columns = _.range(0, this.get('totalCols')),
             headerModels = this.selection.getItemsByMode('header'),
             headers = _.map(headerModels, function (model) {
@@ -271,7 +272,7 @@ var DataviewModel = Backbone.Model.extend({
         args = _.filter(argsList, function (arg) {
             return arg.editable;
         }).map(function (arg, index) {
-            arg.position = this.filters.length + index;
+            arg.position = filterCount + index;
             return arg;
         });
 
