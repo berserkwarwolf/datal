@@ -20,7 +20,7 @@ from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundExce
 from django.core.exceptions import FieldError
 
 from core.choices import STATUS_CHOICES
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting, DataStreamParameter
 
 from core.lib.elastic import ElasticsearchIndex
 
@@ -167,7 +167,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
-          filter_category=None, filter_text=None, filter_user=None):
+          filter_category=None, filter_text=None, filter_user=None, full=False):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(
@@ -231,6 +231,18 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         query = query.order_by(sort_by)
 
+        if full:
+            parameters = DataStreamParameter.objects.filter(
+                    datastream_revision_id__in=[x['id'] for x in query]
+                ).values(
+                    'name', 'default', 'position', 'description', 'datastream_revision_id'
+                )
+            par_dict = {}
+            for parameter in parameters:
+                par_dict.setdefault(parameter['datastream_revision_id'], []).append(parameter)
+            for datastream in query:
+                datastream['parameters'] = par_dict.setdefault(datastream['id'], [])
+        
         # Limit the size.
         nfrom = page * itemsxpage
         nto = nfrom + itemsxpage

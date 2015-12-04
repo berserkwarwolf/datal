@@ -44,6 +44,9 @@ class ResourceSerializer(serializers.Serializer):
             'lib': {
                 settings.TYPE_VISUALIZATION: 'lib'
             },
+            'parameters': {
+                settings.TYPE_DATASTREAM: 'parameters'
+            }
         }
     
     def get_status_name(self, status_id):
@@ -136,7 +139,8 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
                     filter_status=status_id,
                     filter_category=category,
                     filter_text=query,
-                    filter_user=user
+                    filter_user=user,
+                    full=True
                 )
                 for result in list(queryset):
                     result['resource_type'] = res_type
