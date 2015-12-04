@@ -191,9 +191,9 @@ class ParentNotPublishedException(LifeCycleException):
     title = _('EXCEPTION-TITLE-PARENT-NOT-PUBLISHED')
     description = _('EXCEPTION-DESCRIPTION-PARENT-NOT-PUBLISHED')
     tipo = 'parent-not-published'
-    status_code =  205 # Reset Content
+    status_code =  499 # Own status code for refresh
 
-    def __init__(self, revision):
+    def __init__(self, revision=None):
         self.revision = revision
         super(ParentNotPublishedException, self).__init__()
 

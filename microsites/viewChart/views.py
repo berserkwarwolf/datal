@@ -69,14 +69,6 @@ def view(request, id, slug=None):
     except VisualizationRevision.DoesNotExist:
         raise VisualizationRevisionDoesNotExist
     else:
-
-        # url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream.parameters))
-        chartSizes = settings.DEFAULT_MICROSITE_CHART_SIZES
-        chartWidth = chartSizes["embed"]["width"]
-        chartHeight = chartSizes["embed"]["height"]
-        url_query = "width=%d&height=%d" % (chartWidth, chartHeight)
-
-
         # VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])

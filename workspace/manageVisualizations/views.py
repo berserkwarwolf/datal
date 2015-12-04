@@ -168,70 +168,46 @@ def change_status(request, visualization_revision_id=None):
     :param visualization_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and visualization_revision_id:
+    if visualization_revision_id:
         lifecycle = VisualizationLifeCycleManager(
             user=request.user,
             visualization_revision_id=visualization_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
+            raise NoStatusProvidedException()
 
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
-                }
-            )
-        elif action == 'reject':
-            lifecycle.reject()
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
-                }
-            )
-        elif action == 'publish':
-            lifecycle.publish()
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
-                }
-            )
-        elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
-
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
             # Signal
             visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id,
                                                   rev_id=lifecycle.visualization_revision.id)
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
-                }
-            )
-        elif action == 'send_to_review':
-            lifecycle.send_to_review()
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
-                }
-            )
         else:
-            raise NoStatusProvidedException()
+            getattr(lifecycle, action)()
+
+        if action == 'accept':
+            title = ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-APPROVED-TEXT')
+        elif action == 'reject':
+            title = ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-REJECTED-TEXT')
+        elif action == 'publish':
+            title = ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
+        elif action == 'unpublish':
+            title = ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
+            description = ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
+        elif action == 'send_to_review':
+            title = ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
+            description = ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
+
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)

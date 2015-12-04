@@ -109,7 +109,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.datastream_revision.status = StatusChoices.APPROVED
                 self.datastream_revision.save()
                 transaction.commit()
-                raise ParentNotPublishedException()
+                raise ParentNotPublishedException(self.datastream_revision)
 
         self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()

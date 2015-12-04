@@ -204,7 +204,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
-          filter_category=None, filter_text=None, filter_user=None):
+          filter_category=None, filter_text=None, filter_user=None, full=False):
         """ Consulta y filtra las visualizaciones por diversos campos """
         """ filter_category existe para poder llamar a todos los daos con la misma firma """
         query = VisualizationRevision.objects.filter(

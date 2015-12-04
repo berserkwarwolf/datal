@@ -16,10 +16,10 @@ from django.shortcuts import redirect
 from django.utils.translation import ugettext
 from core.exceptions import *
 from microsites.exceptions import *
+from core.search.finder import FinderQuerySet
+from core.builders.themes import ThemeBuilder
 import json
 import logging
-
-from core.search.finder import FinderQuerySet
 
 logger = logging.getLogger(__name__)
 
@@ -35,45 +35,26 @@ def load(request):
     account = request.account
     preferences = request.preferences
     is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
+    
+    builder = ThemeBuilder(preferences, is_preview, language, account)
     if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
-        if is_preview:
-            jsonObject = json.loads(preferences["account_preview"], strict=False)
-        elif preferences["account_has_home"]:
-            jsonObject = json.loads(preferences["account_home"], strict=False)
-
-        if jsonObject:
-            themeid = jsonObject['theme']
-            config = jsonObject['config']
-            datastreams = []
-            resources = []
-            if config:
-                if 'sliderSection' in config:
-                    datastreams = retrieveDatastreams(config['sliderSection'], language)
-                if 'linkSection' in config:
-                    resources = retrieveResourcePermalinks(config['linkSection'], language)
-
-            if preferences['account_home_filters'] == 'featured_accounts': # the account have federated accounts (childs)
-                featured_accounts = Account.objects.get_featured_accounts(account.id)
-                account_id = [featured_account['id'] for featured_account in featured_accounts]
-                for index, f in enumerate(featured_accounts):
-                    featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
-
-                categories = Category.objects.get_for_home(language, account_id)
-            else:
-                account_id = account.id
-                categories = Category.objects.get_for_home(language, account_id)
-
-            queryset = FinderQuerySet(FinderManager(HomeFinder), max_results=250, account_id=account_id )
-            
+        data = builder.parse()
+        if data:
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
+                max_results=250, account_id=data['account_id'] )
 
             paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
 
-            if preferences['account_home_filters'] == 'featured_accounts':
+            if data['has_featured_accounts']:
                 add_domains_to_permalinks(revisions.object_list)
 
-            return render_to_response('loadHome/home_'+themeid+'.html', locals())
+            context = data.copy()
+            context['request'] = request
+            context['paginator'] = paginator
+            context['revisions'] = revisions
+            return render_to_response(data['template_path'], context)
         else:
             # For the moment, redirect to search
             return redirect('/search/')

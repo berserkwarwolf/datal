@@ -19,8 +19,8 @@ from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from django.core.exceptions import FieldError
 
-from core.choices import STATUS_CHOICES
-from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting
+from core.choices import STATUS_CHOICES, StatusChoices
+from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting, DataStreamParameter
 
 from core.lib.elastic import ElasticsearchIndex
 
@@ -167,7 +167,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
           sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
-          filter_category=None, filter_text=None, filter_user=None):
+          filter_category=None, filter_text=None, filter_user=None, full=False):
         """ Consulta y filtra los datastreams por diversos campos """
 
         query = DataStreamRevision.objects.filter(
@@ -231,6 +231,18 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         query = query.order_by(sort_by)
 
+        if full:
+            parameters = DataStreamParameter.objects.filter(
+                    datastream_revision_id__in=[x['id'] for x in query]
+                ).values(
+                    'name', 'default', 'position', 'description', 'datastream_revision_id'
+                )
+            par_dict = {}
+            for parameter in parameters:
+                par_dict.setdefault(parameter['datastream_revision_id'], []).append(parameter)
+            for datastream in query:
+                datastream['parameters'] = par_dict.setdefault(datastream['id'], [])
+        
         # Limit the size.
         nfrom = page * itemsxpage
         nto = nfrom + itemsxpage
@@ -317,15 +329,27 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
-    def query_childs(self, datastream_id, language):
+    def query_childs(self, datastream_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
 
         related = dict()
-        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+
+        query = VisualizationRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(visualization__last_published_revision_id=F('id'))
+        else:
+            query = query.filter(visualization__last_revision_id=F('id'))
+
+        query = query.filter(
             visualization__datastream__id=datastream_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__nick', 'created_at', 'visualization__last_revision')
+
+        # ordenamos desde el mas viejo
+        related['visualizations'] = query.order_by("created_at")
+
         return related
 
 
