@@ -327,74 +327,49 @@ def change_status(request, datastream_revision_id=None):
     :param datastream_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and datastream_revision_id:
+    if datastream_revision_id:
         lifecycle = DatastreamLifeCycleManager(
             user=request.user,
             datastream_revision_id=datastream_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
+            raise NoStatusProvidedException()
 
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATAVIEW-APPROVED-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-APPROVED-TEXT')
-                }
-            )
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
+            # Signal
+            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id,
+                                               rev_id=lifecycle.datastream_revision.id)
+        else:
+            getattr(lifecycle, action)()
+
+        if action == 'accept':
+            title = ugettext('APP-DATAVIEW-APPROVED-TITLE'),
+            description = ugettext('APP-DATAVIEW-APPROVED-TEXT')
         elif action == 'reject':
-            lifecycle.reject()
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATAVIEW-REJECTED-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-REJECTED-TEXT')
-                }
-            )
+            title = ugettext('APP-DATAVIEW-REJECTED-TITLE'),
+            description = ugettext('APP-DATAVIEW-REJECTED-TEXT')
         elif action == 'publish':
-            lifecycle.publish()
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
-                }
-            )
+            title = ugettext('APP-DATAVIEW-PUBLISHED-TITLE'),
+            description = ugettext('APP-DATAVIEW-PUBLISHED-TEXT')
         elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
             if killemall:
                 description = ugettext('APP-DATAVIEW-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATAVIEW-UNPUBLISH-TEXT')
-
-            # Signal
-            datastream_unpublished.send_robust(sender='change_status_view', id=lifecycle.datastream.id,
-                                               rev_id=lifecycle.datastream_revision.id)
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
-                    'description': description
-                }
-            )
+            title = ugettext('APP-DATAVIEW-UNPUBLISH-TITLE'),
         elif action == 'send_to_review':
-            lifecycle.send_to_review()
+            title = ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
+            description = ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')
 
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATAVIEW-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-DATAVIEW-SENDTOREVIEW-TEXT')
-                }
-            )
-        else:
-            raise NoStatusProvidedException()
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)

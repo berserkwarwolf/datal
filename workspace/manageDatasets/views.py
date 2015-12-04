@@ -421,71 +421,49 @@ def change_status(request, dataset_revision_id=None):
     :param dataset_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and dataset_revision_id:
+    if dataset_revision_id:
         lifecycle = DatasetLifeCycleManager(
             user=request.user,
             dataset_revision_id=dataset_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
+            raise NoStatusProvidedException()
 
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-APPROVED-TITLE'),
-                    'description': ugettext('APP-DATASET-APPROVED-TEXT')
-                }
-            )
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
+            # Signal
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
+                                            rev_id=lifecycle.dataset_revision.id)
+        else:
+            getattr(lifecycle, action)()
+
+        if action == 'accept':
+            title= ugettext('APP-DATASET-APPROVED-TITLE'),
+            description= ugettext('APP-DATASET-APPROVED-TEXT')
         elif action == 'reject':
-            lifecycle.reject()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-REJECTED-TITLE'),
-                    'description': ugettext('APP-DATASET-REJECTED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-REJECTED-TITLE'),
+            description= ugettext('APP-DATASET-REJECTED-TEXT')
         elif action == 'publish':
-            lifecycle.publish()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-PUBLISHED-TITLE'),
+            description= ugettext('APP-DATASET-PUBLISHED-TEXT')
         elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
             if killemall:
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
-
-            # Signal
-            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
-                                            rev_id=lifecycle.dataset_revision.id)
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': description
-                }
-            )
+            title= ugettext('APP-DATASET-UNPUBLISH-TITLE'),
         elif action == 'send_to_review':
-            lifecycle.send_to_review()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
-                }
-            )
-        else:
-            raise NoStatusProvidedException()
+            title= ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
+            description= ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
