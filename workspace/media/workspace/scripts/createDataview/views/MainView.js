@@ -69,6 +69,6 @@ var MainView = Backbone.View.extend({
             window.location.replace('/dataviews/' + response.datastream_revision_id);
         }).fail(function (response) {
             this.stateModel.set('step', 2);
-        });        
+        });
     }
 });

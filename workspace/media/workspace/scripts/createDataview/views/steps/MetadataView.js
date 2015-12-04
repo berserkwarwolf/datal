@@ -1,6 +1,6 @@
 var MetadataView = Backbone.Epoxy.View.extend({
     events:  {
-        'click button.btn-save': 'isValid'
+        'click a.add-source': 'onAddSource'
     },
 
     bindings: {
@@ -11,11 +11,11 @@ var MetadataView = Backbone.Epoxy.View.extend({
 
     initialize: function () {
         this.template = _.template( $('#metadata_view_template').html() );
-        this.$el.html(this.template());
     },
 
     render: function () {
         var self = this;
+        this.$el.html(this.template());
 
         Backbone.Validation.bind(this, {
             attributes: function(view) {
@@ -32,7 +32,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
     },
 
     initNotes: function(){
-        
+
         this.notesInstance = new nicEditor({
             buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
@@ -42,6 +42,15 @@ var MetadataView = Backbone.Epoxy.View.extend({
             this.notesInstance.instanceById('id_notes_2').setContent(this.model.get('notes'));
         }
 
+    },
+
+    onAddSource: function (e) {
+        this.editSourceView = new EditSourceView({
+            model: new Backbone.Model(),
+            collection: this.model.sources
+        });
+        this.editSourceView.render();
+        this.$('.edit-source-view').append(this.editSourceView.$el);
     },
 
     setIndividualError: function(element, name, error){
