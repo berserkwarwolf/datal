@@ -48,5 +48,21 @@ var DatasetModel = Backbone.Model.extend({
 
     getTables: function () {
         return _.range(0, this.get('tables').length);
+    },
+
+    getArgsAsParams: function (offset) {
+        var args = this.get('args'),
+            offset = offset || 0;
+
+        return _.filter(args, function (arg) {
+                return arg.editable;
+            }).map(function (arg, index) {
+                return {
+                    position: offset + index,
+                    name: arg.name,
+                    description: '',
+                    'default': arg.value
+                };
+            });
     }
 })

@@ -37,10 +37,10 @@ var select_statement_template = ['<selectStatement>',
 var data_source_template = ['<dataSource>',
     '<% if (args.length > 0) {%>',
     '<EndPointMappings>',
-        '<% _.each(args, function (arg, index) { %>',
+        '<% _.each(args, function (arg) { %>',
             '<Mapping>',
                 '<key><%= arg.name%></key>',
-                '<value>parameter<%= index%></value>',
+                '<value>parameter<%= arg.position%></value>',
             '</Mapping>',
         '<% }); %>',
     '</EndPointMappings>',
@@ -197,13 +197,13 @@ var DataviewModel = Backbone.Model.extend({
                 'status',
             ]);
 
-        var viewParameters = this.filters.toFormSet();
-
-        var parametersParams = this.toFormSet(viewParameters, 'parameters');
+        var filterParameters = this.filters.toFormSet();
         
-        var datasetArguments = this.dataset.get('args');
+        var datasetArguments = this.dataset.getArgsAsParams(filterParameters.length);
 
+        dataviewParameters = filterParameters.concat(datasetArguments);
 
+        var parametersParams = this.toFormSet(dataviewParameters, 'parameters');
         var tagsParams = this.toFormSet([], 'tags');
         var sourcesParams = this.toFormSet([], 'sources');
 
@@ -270,7 +270,8 @@ var DataviewModel = Backbone.Model.extend({
 
         args = _.filter(argsList, function (arg) {
             return arg.editable;
-        }).map(function (arg) {
+        }).map(function (arg, index) {
+            arg.position = this.filters.length + index;
             return arg;
         });
 
