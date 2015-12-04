@@ -114,6 +114,7 @@ var DataviewModel = Backbone.Model.extend({
 
     attachDataset: function (attributes) {
         this.dataset = new DatasetModel(attributes);
+        this.sources = this.dataset.sources.clone();
     },
 
     fetch: function (options) {
