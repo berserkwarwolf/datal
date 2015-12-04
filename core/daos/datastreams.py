@@ -19,7 +19,7 @@ from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from django.core.exceptions import FieldError
 
-from core.choices import STATUS_CHOICES
+from core.choices import STATUS_CHOICES, StatusChoices
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting, DataStreamParameter
 
 from core.lib.elastic import ElasticsearchIndex
@@ -329,15 +329,27 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
 
         return [{'type':k, 'value':v, 'title':title} for k,v,title in filters]
 
-    def query_childs(self, datastream_id, language):
+    def query_childs(self, datastream_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
 
         related = dict()
-        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
+
+        query = VisualizationRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(visualization__last_published_revision_id=F('id'))
+        else:
+            query = query.filter(visualization__last_revision_id=F('id'))
+
+        query = query.filter(
             visualization__datastream__id=datastream_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__nick', 'created_at', 'visualization__last_revision')
+
+        # ordenamos desde el mas viejo
+        related['visualizations'] = query.order_by("created_at")
+
         return related
 
 

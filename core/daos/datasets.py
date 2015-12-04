@@ -198,17 +198,19 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ## Datastreams
 
-        query = DataStreamRevision.objects.select_related().filter(
-            datastream__last_revision=F('id'),
+        query = DataStreamRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(datastream__last_published_revision_id=F('id') )
+        else:
+            query = query.filter(datastream__last_revision_id=F('id') )
+
+        query = query.filter(
             dataset_id=dataset_id,
             datastreami18n__language=language
-            ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
+        ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
-
-        # si se pasa un Status (pensado para microsites)
-        if status:
-            query=query.filter(status=status)
 
         # ordenamos desde el mas viejo
         related['datastreams'] = query.order_by("created_at")
@@ -216,17 +218,19 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ##  visualizations 
 
-        query = VisualizationRevision.objects.select_related().filter(
-            visualization__last_revision=F('id'),
+        query = VisualizationRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(visualization__last_published_revision_id=F('id'))
+        else:
+            query = query.filter(visualization__last_revision_id=F('id'))
+
+        query = query.filter(
             visualization__datastream__last_revision__dataset_id=dataset_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
-
-        # si se pasa un Status (pensado para microsites)
-        if status:
-            query=query.filter(status=status)
 
         related['visualizations'] = query.order_by("created_at")
 
