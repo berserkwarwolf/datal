@@ -59,8 +59,8 @@ class ThemeBuilder(object):
 
         return resources
 
-    def build(self):
-        answer = {
+    def parse(self):
+        response = {
             'preferences': self.preferences,
             'account': self.account,
             'is_preview': self.is_preview,
@@ -82,26 +82,26 @@ class ThemeBuilder(object):
 
 
         if jsonObject:
-            answer['config'] = config = jsonObject['config']
-            answer['template_path'] = 'loadHome/home_'+jsonObject['theme']+'.html'
+            response['config'] = config = jsonObject['config']
+            response['template_path'] = 'loadHome/home_'+jsonObject['theme']+'.html'
 
             if config:
                 if 'sliderSection' in config:
-                    answer['datastreams'] = self.retrieveDatastreams(
+                    response['datastreams'] = self.retrieveDatastreams(
                         config['sliderSection'], self.language)
                 if 'linkSection' in config:
-                    answer['resources'] = self.retrieveResourcePermalinks(
+                    response['resources'] = self.retrieveResourcePermalinks(
                         config['linkSection'], self.language)
 
-            answer['has_featured_accounts'] = self.preferences['account_home_filters'] == 'featured_accounts'
-            if answer['has_featured_accounts']: # the account have federated accounts (childs)
+            response['has_featured_accounts'] = self.preferences['account_home_filters'] == 'featured_accounts'
+            if response['has_featured_accounts']: # the account have federated accounts (childs)
                 featured_accounts = Account.objects.get_featured_accounts(self.account.id)
-                answer['account_id'] = [featured_account['id'] for featured_account in featured_accounts]
+                response['account_id'] = [featured_account['id'] for featured_account in featured_accounts]
                 for index, f in enumerate(featured_accounts):
                     featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
-                answer['featured_accounts'] = featured_accounts
+                response['featured_accounts'] = featured_accounts
             else:
-                answer['account_id'] = self.account.id
+                response['account_id'] = self.account.id
 
-            answer['categories'] = Category.objects.get_for_home(self.language, answer['account_id'])
-            return answer
+            response['categories'] = Category.objects.get_for_home(self.language, response['account_id'])
+            return response

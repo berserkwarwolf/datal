@@ -39,7 +39,7 @@ def load(request):
     builder = ThemeBuilder(preferences, is_preview, language, account)
     if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
-        data = builder.build()
+        data = builder.parse()
         if data:
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
                 max_results=250, account_id=data['account_id'] )
