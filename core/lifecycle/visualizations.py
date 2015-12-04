@@ -336,7 +336,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 self.visualization_revision.status = StatusChoices.APPROVED
                 self.visualization_revision.save()
                 transaction.commit()
-                raise VisualizationParentNotPublishedException()
+                raise VisualizationParentNotPublishedException(self.visualization_revision_id)
 
         self._publish_childs()
         self.visualization_revision.status = StatusChoices.PUBLISHED
