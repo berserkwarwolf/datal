@@ -2,13 +2,16 @@ from rest_framework import renderers
 from babel import numbers, dates
 from rest_framework.renderers import JSONRenderer
 import json
+from lxml import html
 import datetime
 import sys
 import re
 
+
 class EngineRenderer(renderers.BaseRenderer):
     def render(self, data, media_type=None, renderer_context=None):
         return data
+
 
 class CSVEngineRenderer(EngineRenderer):
     media_type="text/csv"
@@ -38,6 +41,27 @@ class XMLEngineRenderer(EngineRenderer):
 class HTMLEngineRenderer(EngineRenderer):
     media_type="text/html"
     format = "html"
+
+
+class JSONEngineRenderer(EngineRenderer):
+    media_type="application/json"
+    format = "json"
+
+    def render(self, data, media_type=None, renderer_context=None):
+        x_tree = html.fromstring(data.decode('utf-8'))
+
+        result = []
+
+        for x_table in x_tree.xpath('//table'):
+            table = []
+            for x_row in x_table.xpath('tr'):
+                row = [x_cell.text_content() for x_cell in x_row.xpath('td')]
+                table.append(row)
+
+            result.append(table)
+
+        return json.dumps(result)
+
 
 class GridEngineRenderer(EngineRenderer):
     media_type="application/json"

@@ -223,3 +223,54 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', e
 .step4 .button{margin-right:0;}
 .step4 .dataStreamBox{height:auto;}
 
+/* Handsontable version */
+
+.handsontable td.area{background:$modal-table-selected-color;}
+
+/* Identificador por color */
+.hot-sel-col,
+.hot-sel-row,
+.hot-sel-table,
+.hot-sel-header,
+.hot-sel-cell{
+	margin-top:10px;
+	
+	span.color{
+	  float:left;height:30px;margin-right:10px;width:5px;
+	}
+}
+
+
+.hot-sel-col span.color,
+td.hot-sel-col{
+	background-color:#86ad7f;
+}
+
+.hot-sel-row span.color,
+td.hot-sel-row{
+	background-color:#ffb796;
+}
+
+td.hot-sel-row.hot-sel-col{
+	background-color:#777777;
+}
+
+.hot-sel-table span.color, 
+td.hot-sel-table{
+	background-color:#d6ebff;
+}
+
+.hot-sel-cell span.color,
+td.hot-sel-cell{
+	background-color:#9AB2B9;
+}
+
+
+td.hot-sel-header.hot-sel-col,
+td.hot-sel-header.hot-sel-cell{
+	// Original
+	// background-color: #FCDE15; 
+	// color: #FFFFFF;
+	background-color: #DBDBDB;
+	font-weight: bold;
+}

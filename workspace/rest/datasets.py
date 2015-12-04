@@ -3,7 +3,7 @@ from core.rest.views import ResourceViewSet
 from core.daos.datasets import DatasetDBDAO
 from api.rest.datasets import DataSetSerializer
 from workspace.v8.forms import DatasetLoadForm
-from core.v8.renderers import HTMLEngineRenderer
+from core.v8.renderers import (HTMLEngineRenderer, JSONEngineRenderer)
 
 class RestDataSetViewSet(ResourceViewSet):
     queryset = DatasetDBDAO()
@@ -14,7 +14,9 @@ class RestDataSetViewSet(ResourceViewSet):
     dao_pk = 'dataset_revision_id'
     app = 'workspace'
 
-    @detail_route(methods=['get'], renderer_classes=[HTMLEngineRenderer])
+    @detail_route(methods=['get'], renderer_classes=[
+        JSONEngineRenderer,
+        HTMLEngineRenderer])
     def tables(self, request, pk=None, *args, **kwargs):
         return self.engine_call( request, 'load', 
             form_class=DatasetLoadForm,
