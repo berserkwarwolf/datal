@@ -198,11 +198,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ## Datastreams
 
-        # solo obtenemos los id de las ultimas revisiones
-        last_revision_ids=list(set([x["datastream__last_revision"] for x in DataStreamRevision.objects.select_related().filter(dataset__id=dataset_id, datastreami18n__language=language).values("datastream__last_revision")]))
-
         query = DataStreamRevision.objects.select_related().filter(
-            id__in=last_revision_ids, # filtramos por los ids de las ultimas revisiones
+            datastream__last_revision=F('id'),
+            dataset_id=dataset_id,
+            datastreami18n__language=language
             ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
@@ -217,14 +216,10 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ##  visualizations 
 
-        # solo obtenemos los id de las ultimas revisiones
-        last_revision_ids=list(set([x["visualization__last_revision"] for x in VisualizationRevision.objects.select_related().filter(
-                    visualization__datastream__last_revision__dataset__id=dataset_id,
-                    visualizationi18n__language=language).values("visualization__last_revision")]))
-
-
         query = VisualizationRevision.objects.select_related().filter(
-            id__in=last_revision_ids
+            visualization__last_revision=F('id'),
+            visualization__datastream__last_revision__dataset_id=dataset_id,
+            visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
