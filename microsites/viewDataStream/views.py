@@ -21,7 +21,6 @@ from microsites.viewDataStream import forms
 
 
 def view(request, id, slug):
-    DOC_API_URL = settings.DOC_API_URL
     logger = logging.getLogger(__name__)
 
     account = request.account
