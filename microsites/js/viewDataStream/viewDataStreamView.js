@@ -1,9 +1,17 @@
-var viewDataStreamView = Backbone.View.extend({
-	el: "body",
+var viewDataStreamView = function(options) {
+	this.inheritedEvents = [];
 
-	theDataTable: null,
+	Backbone.View.call(this, options);
+}
+
+_.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 		
-	events:{
+	// Extend functions
+
+	baseEvents: {
+
+		// Add View Data Stream events as Base Events
+
 		'click #id_embedButton': 'onEmbedButtonClicked',
 		'click #id_googleSpreadSheetButton': 'onGoogleSpreadSheetButtonClicked',
 		'click #id_openInfoButton, #id_openAPIButton, #id_openNotesButton': 'onOpenSidebarButtonClicked',
@@ -11,7 +19,40 @@ var viewDataStreamView = Backbone.View.extend({
 		'click #id_googleSpreadSheetButton, #id_exportToXLSButton, #id_exportToCSVButton, #id_exportButton': 'onExportButtonClicked',		
 		'click #id_permalink, #id_GUID': 'onInputClicked',
 		'click #id_downloadLink, #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage'	
+
 	},
+
+	events: function() {
+		var e = _.extend({}, this.baseEvents);
+
+		_.each(this.inheritedEvents, function(events) {
+			e = _.extend(e, events);
+		});
+
+		return e;
+	},
+
+	addEvents: function(eventObj) {
+		this.inheritedEvents.push(eventObj);
+		this.delegateEvents();
+	},
+
+	// viewDataStreamView functions
+
+//var viewDataStreamView = Backbone.View.extend({
+	el: "body",
+
+	theDataTable: null,
+		
+	// events:{
+	// 	'click #id_embedButton': 'onEmbedButtonClicked',
+	// 	'click #id_googleSpreadSheetButton': 'onGoogleSpreadSheetButtonClicked',
+	// 	'click #id_openInfoButton, #id_openAPIButton, #id_openNotesButton': 'onOpenSidebarButtonClicked',
+	// 	'click #id_closeInfoButton, #id_closeAPIButton, #id_closeNotesButton': 'onCloseSidebarButtonClicked',
+	// 	'click #id_googleSpreadSheetButton, #id_exportToXLSButton, #id_exportToCSVButton, #id_exportButton': 'onExportButtonClicked',		
+	// 	'click #id_permalink, #id_GUID': 'onInputClicked',
+	// 	'click #id_downloadLink, #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage'	
+	// },
 	
 	initialize: function() {
 		
@@ -294,3 +335,5 @@ var viewDataStreamView = Backbone.View.extend({
   }
 
 });
+
+viewDataStreamView.extend = Backbone.View.extend;

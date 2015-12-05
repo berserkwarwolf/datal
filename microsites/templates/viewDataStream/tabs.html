@@ -15,12 +15,12 @@
 		</a>
 	</li>
 
-	<!-- Nav items from plugins -->
+	<!-- Tabs from plugins -->
 	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
 	{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_datastream_nav %}
+		{% if plugin.is_active and plugin.microsites_view_datastream_tabs %}
 			{% autoescape off %}
-				{{ plugin.microsites_view_datastream_nav }}
+				{{ plugin.microsites_view_datastream_tabs }}
 			{% endautoescape %}
 		{% endif %}
 	{% endfor %}
