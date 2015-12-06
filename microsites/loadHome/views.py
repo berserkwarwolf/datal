@@ -43,9 +43,8 @@ def load(request):
         data = builder.parse()
 
         if data:
-            accounts_ids = [featured_account['id'] for featured_account in data['featured_accounts']]
 
-            accounts_ids=[featured_account['id'] for featured_account in account.account_set.values('id').all()] + [account.id]
+            accounts_ids=data['federated_accounts'] + [account.id]
 
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
                 max_results=250, account_id=accounts_ids )

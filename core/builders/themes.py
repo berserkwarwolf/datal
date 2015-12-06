@@ -69,6 +69,9 @@ class ThemeBuilder(object):
             'datastreams': [],
             'resources': [],
             'featured_accounts': [],
+            #devuelve los ID de las cuentas federadas
+            # faltaria resolver que hacer con los featured_accounts
+            'federated_accounts': [x['id'] for x in self.account.account_set.values('id').all()],
             'categories': [],
             'account_id': None,
             'template_path': None
@@ -93,6 +96,8 @@ class ThemeBuilder(object):
                     response['resources'] = self.retrieveResourcePermalinks(
                         config['linkSection'], self.language)
 
+            # en caso de que has_featured_accounts == True, falla el SQL contenido en Account.objects.get_featured_accounts
+            # esta porción de código no funciona nunca.
             response['has_featured_accounts'] = self.preferences['account_home_filters'] == 'featured_accounts'
             if response['has_featured_accounts']: # the account have federated accounts (childs)
                 featured_accounts = Account.objects.get_featured_accounts(self.account.id)
