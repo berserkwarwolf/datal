@@ -101,8 +101,6 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			},
 			success: function(response){
 
-				console.log(response.status);
-
 				if(response.status == 'ok'){
 
 					// Update some model attributes
