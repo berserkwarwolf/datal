@@ -4,8 +4,8 @@ var EditSourceView = Backbone.Epoxy.View.extend({
   },
 
   bindings: {
-    "input.name": "value:source__name, events:['keyup']",
-    "input.url": "value:source__url, events:['keyup']"
+    "input.source-name": "value:source__name, events:['keyup']",
+    "input.source-url": "value:source__url, events:['keyup']"
   },
 
   initialize: function (options) {
