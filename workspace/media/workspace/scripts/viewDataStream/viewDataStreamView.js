@@ -101,6 +101,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			},
 			success: function(response){
 
+				console.log(response.status);
+
 				if(response.status == 'ok'){
 
 					// Update some model attributes
@@ -132,6 +134,10 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 			error:function(response){
 
 				datalEvents.trigger('datal:application-error', response);
+
+				if( response.status == '499'){
+					setTimeout(function(){ window.location.reload(true); }, 2000);
+				}
 
 			},
 			complete:function(response){
