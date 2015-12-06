@@ -37,12 +37,16 @@ def load(request):
     is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
     
     builder = ThemeBuilder(preferences, is_preview, language, account)
+
     if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
         data = builder.parse()
+
         if data:
+            accounts_ids = [featured_account['id'] for featured_account in data['featured_accounts']]
+
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
-                max_results=250, account_id=[data['account_id']] )
+                max_results=250, account_id=[data['account_id']]+accounts_ids )
 
             paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
@@ -68,7 +72,6 @@ def update_list(request):
     account         = request.account
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
-
 
     form = QueryDatasetForm(request.POST)
     if form.is_valid():
