@@ -16,6 +16,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
     render: function () {
         var self = this;
         this.$el.html(this.template());
+        this.applyBindings();
 
         Backbone.Validation.bind(this, {
             attributes: function(view) {
