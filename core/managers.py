@@ -3,7 +3,7 @@ import types
 import logging
 from django.db import models, connection
 from django.conf import settings
-from django.eore.paginator import InvalidPage
+from django.core.paginator import InvalidPage
 from django.core.urlresolvers import reverse
 from core.utils import slugify
 from core import helpers, choices
