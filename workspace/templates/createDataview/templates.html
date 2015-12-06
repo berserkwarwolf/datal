@@ -60,11 +60,13 @@
           <div>
             <input id="id_sourceNameSuggest" name="source-name" type="text" class="inputNewTag" maxlength="80"/>
             <p class="tip">{% trans "EDITDS-SOURCE-TIP1" %} <a class="add-source">{% trans "EDITDS-SOURCE-TIP2" %}</a>.</p>
-            <div id="id_source_container" class="tagsContent"></div>
+            <div class="sourcesContent sources-view">
+            </div>
           </div>
         </div>
 
-        <div class="edit-source-view"></div>
+        <div class="edit-source-view addNewSource">
+        </div>
 
       </fieldset>
 
@@ -119,18 +121,27 @@
 </script>
 
 <script type="text/template" id="edit_source_template">
-  <div class="addNewSource">
-    <h6>{% trans "APP-ADDNEWSOURCE-TEXT" %}</h6>
-    <div class="row clearfix">
-      <label for="">{% trans "MODEL-NAME-TEXT" %}:</label>
-      <input class="source-name" type="text" maxlength="80"/>
-    </div>
-    <div class="row clearfix">
-      <label for="">{% trans "MODEL-URL-TEXT" %}:</label>
-      <input class="source-url" type="text"/>
-    </div>
-    <a class="button primary small btn-add" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+  <h6>{% trans "APP-ADDNEWSOURCE-TEXT" %}</h6>
+  <div class="row clearfix">
+    <label for="">{% trans "MODEL-NAME-TEXT" %}:</label>
+    <input class="source__name" name="source__name" type="text" maxlength="80"/>
   </div>
+  <div class="row clearfix">
+    <label for="">{% trans "MODEL-URL-TEXT" %}:</label>
+    <input class="source__url" name="source__url" type="text"/>
+  </div>
+  <a class="button primary small btn-add" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+</script>
+
+<script type="text/template" id="sources_template">
+  <% _.each(sources, function (source, index) { %>
+  <div class="tag">
+    <span class="tagInner clearfix">
+      <span class="tagTxt"><%= source.source__name %></span>
+      <a class="remove" data-index="<%= index %>"><span class="DN">Eliminar</span></a>
+    </span>
+  </div>
+  <% }); %>
 </script>
 
 <script type="text/template" id="preview_dataview_template">

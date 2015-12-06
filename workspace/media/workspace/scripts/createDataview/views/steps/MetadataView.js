@@ -29,6 +29,11 @@ var MetadataView = Backbone.Epoxy.View.extend({
                 self.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
             },
         });
+        this.sourcesView = new SourcesView({
+            el: this.$('.sources-view'),
+            collection: this.model.sources
+        });
+        this.sourcesView.render();
         this.initNotes();
     },
 
@@ -47,11 +52,11 @@ var MetadataView = Backbone.Epoxy.View.extend({
 
     onAddSource: function (e) {
         this.editSourceView = new EditSourceView({
-            model: new Backbone.Model(),
+            model: new SourceModel(),
             collection: this.model.sources
         });
         this.editSourceView.render();
-        this.$('.edit-source-view').append(this.editSourceView.$el);
+        this.$('.edit-source-view').html(this.editSourceView.$el);
     },
 
     setIndividualError: function(element, name, error){
