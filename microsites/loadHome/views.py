@@ -45,8 +45,10 @@ def load(request):
         if data:
             accounts_ids = [featured_account['id'] for featured_account in data['featured_accounts']]
 
+            accounts_ids=[featured_account['id'] for featured_account in account.account_set.values('id').all()] + [account.id]
+
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
-                max_results=250, account_id=[data['account_id']]+accounts_ids )
+                max_results=250, account_id=accounts_ids )
 
             paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)

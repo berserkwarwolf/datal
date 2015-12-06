@@ -48,7 +48,7 @@ def do_search(request, category_filters=None, datasets=None):
 
         featured_accounts = account.account_set.values('id').all()
         if featured_accounts:
-            accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
+            accounts_ids = [featured_account['id'] for featured_account in featured_accounts] + account.id
         else:
             accounts_ids = account.id
 
