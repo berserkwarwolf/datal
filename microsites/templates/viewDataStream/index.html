@@ -41,12 +41,20 @@
 <![endif]-->
 <script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/plugins/jquery.gritter.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/libs/backbone100/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
+
+<!-- Lib items from plugins -->
+{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+{% for plugin in plugins %}
+	{% if plugin.is_active and plugin.microsites_view_datastream_libs %}
+		{% autoescape off %}
+			{{ plugin.microsites_view_datastream_libs }}
+		{% endautoescape %}
+	{% endif %}
+{% endfor %}
+
 
 {# add spanish support for dates#}
 <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -130,6 +138,10 @@
 
 			<aside class="sidebar FL transition">
 				{% include "viewDataStream/sidebarInfo.html" %}
+				{% include "viewDataStream/sidebarAPI.html" %}
+				{% if notes and preferences.account_enable_notes %}
+					{% include "viewDataStream/sidebarNotes.html" %}
+				{% endif %}
 
 				<!-- Plugins Sidebar Includes -->
 				{% get_plugins core.plugins.DatalPluginPoint as plugins %}
@@ -139,12 +151,8 @@
 										{{ plugin.microsites_view_datastream_sidebar_includes }}
 								{% endautoescape %}
 						{% endif %}
-				{% endfor %}	
+				{% endfor %}
 
-				{% include "viewDataStream/sidebarAPI.html" %}
-				{% if notes and preferences.account_enable_notes %}
-					{% include "viewDataStream/sidebarNotes.html" %}
-				{% endif %}
 			</aside>
 
 			<section class="section transition">
@@ -209,8 +217,6 @@ $(document).ready(function(){
 					{% endautoescape %}
 			{% endif %}
 	{% endfor %}	
-
-	console.log(DataStreamModel);
 
 	var DataStreamView = new viewDataStreamView({
 		model: new dataStream( DataStreamModel )
