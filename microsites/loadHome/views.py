@@ -42,7 +42,7 @@ def load(request):
         data = builder.parse()
         if data:
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
-                max_results=250, account_id=data['account_id'] )
+                max_results=250, account_id=[data['account_id']] )
 
             paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
