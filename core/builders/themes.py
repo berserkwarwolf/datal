@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from core.models import *
 from core.http import add_domains_to_permalinks
 from core.daos.datastreams import DataStreamDBDAO
@@ -100,8 +102,12 @@ class ThemeBuilder(object):
             # esta porción de código no funciona nunca.
             response['has_featured_accounts'] = self.preferences['account_home_filters'] == 'featured_accounts'
             if response['has_featured_accounts']: # the account have federated accounts (childs)
+
                 featured_accounts = Account.objects.get_featured_accounts(self.account.id)
                 response['account_id'] = [featured_account['id'] for featured_account in featured_accounts]
+
+                # bypass para eliminar el error de sql ya que el método Account.objects.get_featured_accounts no trae nada
+                response['account_id'] = response['federated_accounts']
                 for index, f in enumerate(featured_accounts):
                     featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
                 response['featured_accounts'] = featured_accounts
@@ -109,4 +115,5 @@ class ThemeBuilder(object):
                 response['account_id'] = self.account.id
 
             response['categories'] = Category.objects.get_for_home(self.language, response['account_id'])
+
             return response
