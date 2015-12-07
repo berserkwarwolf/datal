@@ -472,6 +472,10 @@ class DatastreamHitsDAO():
 
     def __init__(self, datastream):
         self.datastream = datastream
+        if isinstance(self.datastream, dict):
+            self.datastream_id = self.datastream['datastream_id']
+        else:
+            self.datastream_id = self.datastream.id 
         #self.datastream_revision = datastream.last_published_revision
         self.search_index = ElasticsearchIndex()
         self.cache=Cache()
@@ -508,17 +512,7 @@ class DatastreamHitsDAO():
         return self.search_index.update(doc)
 
     def count(self):
-        return DataStreamHits.objects.filter(datastream_id=self.datastream['datastream_id']).count()
-
-    def _get_cache(self, cache_key):
-
-        cache=self.cache.get(cache_key)
-
-        return cache
-
-    def _set_cache(self, cache_key, value):
-
-        return self.cache.set(cache_key, value, self.TTL)
+        return DataStreamHits.objects.filter(datastream_id=self.datastream_id).count()
 
     def count_by_days(self, day=30, channel_type=None):
         """trae un dict con los hits totales de los ultimos day y los hits particulares de los días desde day hasta today"""
@@ -527,55 +521,37 @@ class DatastreamHitsDAO():
         if day < 1:
             return {}
 
-        cache_key="%s_hits_%s_%s" % ( self.doc_type, self.datastream.guid, day)
+        # tenemos la fecha de inicio
+        start_date=datetime.today()-timedelta(days=day)
+
+        # tomamos solo la parte date
+        truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
+
+        qs=DataStreamHits.objects.filter(datastream_id=self.datastream_id,created_at__gte=start_date)
 
         if channel_type:
-            cache_key+="_channel_type_%s" % channel_type
+            qs=qs.filter(channel_type=channel_type)
 
-        hits = self._get_cache(cache_key)
+        hits=qs.extra(select={'_date': truncate_date, "fecha": 'DATE(created_at)'}).values("fecha").order_by("created_at").annotate(hits=Count("created_at"))
 
-        # me cachendié! no esta en la cache
-        if not hits :
-            # tenemos la fecha de inicio
-            start_date=datetime.today()-timedelta(days=day)
+        control=[ date.today()-timedelta(days=x) for x in range(day-1,0,-1)]
+        control.append(date.today())
+        
+        for i in hits:
+            try:
+                control.remove(i['fecha'])
+            except ValueError:
+                pass
 
-            # tomamos solo la parte date
-            truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
-
-            qs=DataStreamHits.objects.filter(datastream=self.datastream,created_at__gte=start_date)
-
-            if channel_type:
-                qs=qs.filter(channel_type=channel_type)
-
-            hits=qs.extra(select={'_date': truncate_date, "fecha": 'DATE(created_at)'}).values("fecha").order_by("created_at").annotate(hits=Count("created_at"))
-
-            control=[ date.today()-timedelta(days=x) for x in range(day-1,0,-1)]
-            control.append(date.today())
+        hits=list(hits)
             
-            for i in hits:
-                try:
-                    control.remove(i['fecha'])
-                except ValueError:
-                    pass
+        for i in control:
+            hits.append({"fecha": i, "hits": 0})
 
-            hits=list(hits)
-                
-            for i in control:
-                hits.append({"fecha": i, "hits": 0})
+        hits = sorted(hits, key=lambda k: k['fecha']) 
 
-            hits = sorted(hits, key=lambda k: k['fecha']) 
-
-            # transformamos las fechas en isoformat
-            hits=map(self._date_isoformat, hits)
-
-            # lo dejamos, amablemente, en la cache!
-            self._set_cache(cache_key, json.dumps(hits, cls=DjangoJSONEncoder))
-
-            self.from_cache=False
-        else:
-            hits=json.loads(hits)
-            self.from_cache = True
-
+        # transformamos las fechas en isoformat
+        hits=map(self._date_isoformat, hits)
         return hits
 
     def _date_isoformat(self, row):
