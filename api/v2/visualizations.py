@@ -1,5 +1,5 @@
 from core.daos.visualizations import VisualizationDBDAO
-from api.rest.serializers import ResourceSerializer
+from api.v2.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 
 

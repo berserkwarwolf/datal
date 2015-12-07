@@ -5,7 +5,7 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.datasets import DatasetDBDAO
 from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from django.utils.translation import ugettext_lazy as _
-from api.rest.serializers import ResourceSerializer
+from api.v2.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 from core.choices import DATASTREAM_IMPL_VALID_CHOICES
 from core.models import Dataset

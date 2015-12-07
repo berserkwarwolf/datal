@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from rest_framework.decorators import detail_route
 from core.daos.datasets import DatasetDBDAO
-from api.rest.serializers import ResourceSerializer
+from api.v2.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_CHOICES, SourceImplementationChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
