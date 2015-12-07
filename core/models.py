@@ -125,7 +125,7 @@ class Account(models.Model):
     created_at = models.DateTimeField(editable=False, auto_now_add=True, verbose_name=ugettext_lazy('MODEL_CREATED_AT_LABEL'))
     expires_at = models.DateTimeField(verbose_name=ugettext_lazy('MODEL_EXPIRES_AT_LABEL'))
     objects = managers.AccountManager()
-    parent = models.ForeignKey('Account', null=True, on_delete=models.PROTECT, blank=True)
+    parent = models.ManyToManyField('Account', null=True, blank=True)
 
     class Meta:
         db_table = 'ao_accounts'

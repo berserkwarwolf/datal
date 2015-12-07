@@ -8,9 +8,8 @@ from core.daos.visualizations import VisualizationDBDAO
 from core.choices import STATUS_CHOICES_REST
 from rest_framework.compat import OrderedDict
 from rest_framework_extensions.cache.decorators import cache_response
-from rest_framework_extensions.key_constructor.constructors import DefaultKeyConstructor
-from rest_framework_extensions.key_constructor.bits import QueryParamsKeyBit, PaginationKeyBit
 from django.conf import settings
+from core.rest.cache import CacheKeyConstructor
 
 import json
 import logging
@@ -80,10 +79,6 @@ def order_method(dic):
                 return obj[dic[obj['resource_type']]]
         return obj[dic]
     return order_inner
-
-class CacheKeyConstructor(DefaultKeyConstructor):
-    params = QueryParamsKeyBit()
-    pagination = PaginationKeyBit()
 
 class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = ResourceSerializer
