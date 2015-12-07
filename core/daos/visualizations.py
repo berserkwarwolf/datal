@@ -376,6 +376,10 @@ class VisualizationHitsDAO():
 
     def __init__(self, visualization):
         self.visualization=visualization
+        if isinstance(self.visualization, dict):
+            self.visualization_id = self.visualization['visualization_id']
+        else:
+            self.visualization_id = self.visualization.id 
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
         self.cache=Cache()
@@ -383,8 +387,21 @@ class VisualizationHitsDAO():
     def add(self,  channel_type):
         """agrega un hit al datastream. """
 
+        # TODO: Fix temporal por el paso de DT a DAO.
+        # Es problema es que por momentos el datastream viene de un queryset y otras veces de un DAO y son objetos
+        # distintos
         try:
-            hit=VisualizationHits.objects.create(visualization_id=self.visualization.visualization_id, channel_type=channel_type)
+            visualization_id = self.visualization.visualization_id
+        except:
+            visualization_id = self.visualization['visualization_id']
+
+        try:
+            guid = self.visualization.guid
+        except:
+            guid = self.visualization['guid']
+
+        try:
+            hit=VisualizationHits.objects.create(visualization_id=visualization_id, channel_type=channel_type)
         except IntegrityError:
             # esta correcto esta excepcion?
             raise VisualizationNotFoundException()
@@ -399,17 +416,7 @@ class VisualizationHitsDAO():
         return self.search_index.update(doc)
 
     def count(self):
-        return VisualizationHits.objects.filter(visualization_id=self.visualization.visualization_id).count()
-
-    def _get_cache(self, cache_key):
-
-        cache=self.cache.get(cache_key)
-
-        return cache
-
-    def _set_cache(self, cache_key, value):
-
-        return self.cache.set(cache_key, value, self.TTL)
+        return VisualizationHits.objects.filter(visualization_id=self.visualization_id).count()
 
     def count_by_day(self,day):
         """retorna los hits de un día determinado"""
@@ -438,55 +445,38 @@ class VisualizationHitsDAO():
         if day < 1:
             return {}
 
-        cache_key="%s_hits_%s_%s" % ( self.doc_type, self.visualization.guid, day)
+        # tenemos la fecha de inicio
+        start_date=datetime.today()-timedelta(days=day)
+
+        # tomamos solo la parte date
+        truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
+
+        qs=VisualizationHits.objects.filter(visualization_id=self.visualization_id,created_at__gte=start_date)
 
         if channel_type:
-            cache_key+="_channel_type_%s" % channel_type
+            qs=qs.filter(channel_type=channel_type)
 
-        hits = self._get_cache(cache_key)
+        hits=qs.extra(select={'_date': truncate_date, "fecha": 'DATE(created_at)'}).values("fecha").order_by("created_at").annotate(hits=Count("created_at"))
 
-        # me cachendié! no esta en la cache
-        if not hits :
-            # tenemos la fecha de inicio
-            start_date=datetime.today()-timedelta(days=day)
+        control=[ date.today()-timedelta(days=x) for x in range(day-1,0,-1)]
+        control.append(date.today())
 
-            # tomamos solo la parte date
-            truncate_date = connection.ops.date_trunc_sql('day', 'created_at')
+        
+        for i in hits:
+            try:
+                control.remove(i['fecha'])
+            except ValueError:
+                pass
 
-            qs=VisualizationHits.objects.filter(visualization=self.visualization,created_at__gte=start_date)
-
-            if channel_type:
-                qs=qs.filter(channel_type=channel_type)
-
-            hits=qs.extra(select={'_date': truncate_date, "fecha": 'DATE(created_at)'}).values("fecha").order_by("created_at").annotate(hits=Count("created_at"))
-
-            control=[ date.today()-timedelta(days=x) for x in range(day-1,0,-1)]
-            control.append(date.today())
-
+        hits=list(hits)
             
-            for i in hits:
-                try:
-                    control.remove(i['fecha'])
-                except ValueError:
-                    pass
+        for i in control:
+            hits.append({"fecha": i, "hits": 0})
 
-            hits=list(hits)
-                
-            for i in control:
-                hits.append({"fecha": i, "hits": 0})
+        hits = sorted(hits, key=lambda k: k['fecha']) 
 
-            hits = sorted(hits, key=lambda k: k['fecha']) 
-
-            # transformamos las fechas en isoformat
-            hits=map(self._date_isoformat, hits)
-
-            # lo dejamos, amablemente, en la cache!
-            self._set_cache(cache_key, json.dumps(hits, cls=DjangoJSONEncoder))
-
-            self.from_cache=False
-        else:
-            hits=json.loads(hits)
-            self.from_cache=True
+        # transformamos las fechas en isoformat
+        hits=map(self._date_isoformat, hits)
 
         return hits
 
