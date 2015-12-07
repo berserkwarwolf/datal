@@ -220,13 +220,12 @@ SEARCH_INDEX = {
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
 DOC_API_URL = 'https://github.com/datal-org/datal/tree/develop/docs/api'
-PAGINATION_RESULTS_PER_PAGE = 10
 
 # develop & staging sentry
 SENTRY_DSN = 'http://sentrydsn@sentry.com/1'
 
 TWITTER_PROFILE_URL = 'https://twitter.com/tuCuenta'
-FACEBOOK_PROFILE_URL= 'https://facebook.com/tuFanPage'
+FACEBOOK_PROFILE_URL = 'https://facebook.com/tuFanPage'
 MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '', 
              'LIST_UNSUBSCRIBE': '', 'LIST_UPDATE_PROFILE': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
@@ -325,7 +324,7 @@ LOGGING = {
 
 IS_WORKSPACE = False
 
-STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
 
