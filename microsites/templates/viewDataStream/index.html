@@ -231,4 +231,14 @@ $(document).ready(function(){
 	
 	{% include "viewDataStream/overlays.html" %}
 
+	<!-- overlays from plugins -->
+	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+	{% for plugin in plugins %}
+			{% if plugin.is_active and plugin.microsites_view_datastream_overlays %}
+					{% autoescape off %}
+							{{ plugin.microsites_view_datastream_overlays }}
+					{% endautoescape %}
+			{% endif %}
+	{% endfor %}
+
 {% endblock %}

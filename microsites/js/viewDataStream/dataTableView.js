@@ -18,6 +18,7 @@ var dataTableView = Backbone.View.extend({
 
 		$parameters = this.$el.find('a[id^="id_changeParam"]');
 		this.template = _.template( $("#id_dataTableTemplate").html() );
+		
 		this.listenTo(this.model, "change:result", this.render);
 	  
 	  //When page, rows or dataStream's arguments change then invoke
@@ -339,7 +340,7 @@ var dataTableView = Backbone.View.extend({
 			nomsg: gettext('VIEWDS-FLEXIGRID-NOMSG'),
 			onBeforeSend: function(settings){
 
-				console.log('before-send');
+				self.trigger('flexigrid-beforeSend', result);
 				
 				self.setFilterParams(settings);
 				settings.url = settings.url.replace(/(page=).*?(&)/, '$1' + (this.newp - 1).toString() + '$2')
@@ -347,6 +348,8 @@ var dataTableView = Backbone.View.extend({
 
 			},
 			onSubmit: function(settings){
+
+				self.trigger('flexigrid-submit', result);
 			
 				var params = [];
 
@@ -367,8 +370,12 @@ var dataTableView = Backbone.View.extend({
 				return true;
 
 			},
-			onSuccess: self.onFlexigridSuccess(),
-			onError: function(result){}
+			onSuccess: function(flexigridResponse, result){
+				self.trigger('flexigrid-success', result);
+			},
+			onError: function(result){
+				self.trigger('flexigrid-error', result);
+			}
 		});
 	
 		// Set Flexigrid Height
@@ -394,36 +401,60 @@ var dataTableView = Backbone.View.extend({
 
 	},
 
-	onFlexigridSuccess: function(flexigridResponse, result){
-
-	},
-
 	setFilterParams: function(settings){
 
-		var hash = settings.url.split('?')[1],
-			split = hash.split('&'),
-			obj = {};
+		// var hash = settings.url.split('?')[1],
+		// 	split = hash.split('&'),
+		// 	obj = {};
 
-		for(var i = 0; i < split.length; i++){
-			var kv = split[i].split('=');
-			obj[kv[0]] = kv[1];
-		}
+		// for(var i = 0; i < split.length; i++){
+		// 	var kv = split[i].split('=');
+		// 	obj[kv[0]] = kv[1];
+		// }
+
+		// var url = '';
+
+		// if( obj.query != "" ){
+
+		// 	url = 'pFilter0='+encodeURIComponent(obj.qtype)+'[contains]'+encodeURIComponent(obj.query);
+
+		// 	if( $parameters.length > 0 ){
+		// 		url = '&' + url;
+		// 	}else{
+		// 		url = '?' + url;
+		// 	}
+
+		// }
+
+		// this.options.dataStream.set('filter', url);
 
 		var url = '';
 
-		if( obj.query != "" ){
+		// Just flexigrid filter
+		if( !_.isUndefined( settings ) ){
+			var hash = settings.url.split('&'),
+			obj = {};
 
-			url = 'pFilter0='+encodeURIComponent(obj.qtype)+'[contains]'+encodeURIComponent(obj.query);
+			for(var i = 0; i < hash.length; i++){
+				var kv = hash[i].split('=');
+				obj[kv[0]] = kv[1];
+			}
 
+			if( obj.query != "" ){
+				url = 'filter0='+encodeURIComponent(obj.qtype)+'[contains]'+encodeURIComponent(obj.query);
+			}
+
+		}
+
+		if( url != ''){
 			if( $parameters.length > 0 ){
 				url = '&' + url;
 			}else{
 				url = '?' + url;
 			}
-
 		}
 
-		this.options.dataStream.set('filter', url);
+		this.dataStream.set('filter', url);
 
 	},
 
