@@ -181,21 +181,22 @@ $(document).ready(function(){
 
 	var DataStreamModel = {
 		id: "{{datastream.datastream_revision_id}}",
-		datastream_id: "{{datastream.datastream_id}}",
-		title: "{{datastream.title}}",
-		description: "{{datastream.description|escapejs}}",
-		guid: "{{datastream.guid}}",
-		type: "{{datastream.type}}",
-		source: "{{datastream.end_point|escapejs}}",
-		{% for parameter in datastream.parameters %}
-		parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
-		{% endfor %}
-		permaLink: "http://{{preference.account.domain}}{{datastream.datastream_id|permalink:'datastream'}}{%if url_query%}?{{url_query}}{%endif%}",
-		embedUrl: "http://{{preference.account.domain}}{{ datastream.guid|embedlink:'datastream' }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
-		createdAt: "{{datastream.created_at|date:'c'}}",
-		filter: "",
-		exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",
-		exportXLSURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'xls' %}",
+    datastream_id: "{{datastream.datastream_id}}",
+    revision_id: "{{datastream.datastream_revision_id}}",
+    title: "{{datastream.title}}",
+    description: "{{datastream.description|escapejs}}",
+    guid: "{{datastream.guid}}",
+    type: "{{datastream.type}}",
+    source: "{{datastream.end_point|escapejs}}",
+    {% for parameter in datastream.parameters %}
+    parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
+    {% endfor %}
+    permaLink: "http://{{preference.account.domain}}{{datastream.datastream_id|permalink:'datastream'}}{%if url_query%}?{{url_query}}{%endif%}",
+    embedUrl: "http://{{preference.account.domain}}{{ datastream.guid|embedlink:'datastream' }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
+    createdAt: "{{datastream.created_at|date:'c'}}",
+    filter: "",
+    exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",
+    exportXLSURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'xls' %}",
 	}
 
   // Plugins - Extend Main Model
@@ -204,16 +205,6 @@ $(document).ready(function(){
 			{% if plugin.is_active and plugin.microsites_view_datastream_js_extend_main_model %}
 					{% autoescape off %}
 							{{ plugin.microsites_view_datastream_js_extend_main_model }}
-					{% endautoescape %}
-			{% endif %}
-	{% endfor %}	
-  
-   // Plugins - Extend Main View
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-			{% if plugin.is_active and plugin.microsites_view_datastream_js_extend_main_view %}
-					{% autoescape off %}
-							{{ plugin.microsites_view_datastream_js_extend_main_view }}
 					{% endautoescape %}
 			{% endif %}
 	{% endfor %}	

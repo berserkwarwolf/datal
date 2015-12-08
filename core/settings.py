@@ -110,7 +110,7 @@ REQUESTS_QUEUE = 'test_requests_queue'
 
 LOGIN_URL = '/signin'
 
-END_POINT_SERVLET       = '/AgileOfficeServer/DataStreamRequesterServlet'
+END_POINT_SERVLET = '/AgileOfficeServer/DataStreamRequesterServlet'
 END_POINT_CHART_SERVLET = '/AgileOfficeServer/ChartInvokeServlet'
 END_POINT_LOADER_SERVLET= '/AgileOfficeServer/DataSourceLoaderServlet'
 END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
@@ -130,41 +130,44 @@ PRIVATE_ACCOUNT = 'private'
 
 ACCOUNT_DOMAIN_PREFERENCE_NAME = 'account.domain'
 
-DOMAINS = { 'api': 'api',
-            'microsites': 'microsites',
-            'workspace': 'workspace',
-            'engine': '',
-            'website': 'website',
-            'cdn': '',
-           }
+DOMAINS = {
+    'api': 'api',
+    'microsites': 'microsites',
+    'workspace': 'workspace',
+    'engine': '',
+    'website': 'website',
+    'cdn': '',
+}
 
-CONTENT_TYPES = { 'json': 'application/json;charset=utf-8',
-            'prettyjson': 'application/json;charset=utf-8',
-            'json_array': 'application/json;charset=utf-8',
-            'csv': 'text/csv;charset=utf-8',
-            'html': 'text/html;charset=utf-8',
-            'xml': 'text/xml;charset=utf-8',
-            'xls': 'application/json;charset=utf-8',
-            'kml': 'application/vnd.google-earth.kml+xml',
-            'kmz': 'application/vnd.google-earth.kmz',
-            'pdf': 'application/pdf',
-            'jpg': 'image/jpeg',
-            'jpeg': 'image/jpeg',
-            'png': 'image/png',
-            'gif': 'image/gif',
-            'zip': 'application/zip',
-            'tar': 'application/x-tar',
-            'gz': 'application/x-gzip'
-           }
+CONTENT_TYPES = {
+    'json': 'application/json;charset=utf-8',
+    'prettyjson': 'application/json;charset=utf-8',
+    'json_array': 'application/json;charset=utf-8',
+    'csv': 'text/csv;charset=utf-8',
+    'html': 'text/html;charset=utf-8',
+    'xml': 'text/xml;charset=utf-8',
+    'xls': 'application/json;charset=utf-8',
+    'kml': 'application/vnd.google-earth.kml+xml',
+    'kmz': 'application/vnd.google-earth.kmz',
+    'pdf': 'application/pdf',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'zip': 'application/zip',
+    'tar': 'application/x-tar',
+    'gz': 'application/x-gzip'
+}
 
-IMPL_TYPES = {'4': 'xls',
-              '5': 'pdf',
-            '10': 'csv',
-            '11': 'kml',
-            '12': 'kmz',
-            '18': 'jpg', #maybe we need a special value for each file type who has different mime type
-            '19': 'zip'
-           }
+IMPL_TYPES = {
+    '4': 'xls',
+    '5': 'pdf',
+    '10': 'csv',
+    '11': 'kml',
+    '12': 'kmz',
+    '18': 'jpg', #maybe we need a special value for each file type who has different mime type
+    '19': 'zip'
+}
 
 GRAVATAR = {
     'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
@@ -217,13 +220,12 @@ SEARCH_INDEX = {
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
 DOC_API_URL = 'https://github.com/datal-org/datal/tree/develop/docs/api'
-PAGINATION_RESULTS_PER_PAGE = 10
 
 # develop & staging sentry
 SENTRY_DSN = 'http://sentrydsn@sentry.com/1'
 
 TWITTER_PROFILE_URL = 'https://twitter.com/tuCuenta'
-FACEBOOK_PROFILE_URL= 'https://facebook.com/tuFanPage'
+FACEBOOK_PROFILE_URL = 'https://facebook.com/tuFanPage'
 MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '', 
              'LIST_UNSUBSCRIBE': '', 'LIST_UPDATE_PROFILE': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
@@ -322,7 +324,7 @@ LOGGING = {
 
 IS_WORKSPACE = False
 
-STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
 

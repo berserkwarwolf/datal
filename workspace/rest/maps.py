@@ -1,4 +1,4 @@
-from api.rest.visualizations import VisualizationSerializer
+from api.v2.visualizations import VisualizationSerializer
 from core.daos.visualizations import VisualizationDBDAO
 from core.rest.views import ResourceViewSet
 from rest_framework.decorators import detail_route, list_route

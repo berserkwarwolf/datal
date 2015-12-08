@@ -17,29 +17,6 @@ from microsites.exceptions import *
 import urllib
 import json
 
-
-def hits_stats(request, vz_id, channel_type=None):
-    """
-    hits stats for chart visualization
-    """
-
-    try:
-        vz = Visualization.objects.get(pk=int(vz_id))
-    except Visualization.DoesNotExist:
-        raise VisualizationDoesNotExist
-
-
-    dao=VisualizationHitsDAO(vz)
-    hits=dao.count_by_days(30, channel_type)
-
-    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
-
-
-    t = loader.get_template('viewChart/hits_stats.json') 
-    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
-    return HttpResponse(t.render(c), content_type="application/json")
-
-
 def view(request, id, slug=None):
     """
     Show a microsite view

@@ -91,7 +91,7 @@ class ElasticsearchFinder(Finder):
         # Asi que si llega solo un account_id, lo mete en un list igual
         if type(self.account_id) in (type(str()), type(int()), type(long()), type(float())):
             account_ids=[int(self.account_id)]
-        elif type(self.account_id) == type([]):
+        elif type(self.account_id) in (type([]), type(())):
             account_ids=self.account_id
         else:
             #debería ir un raise?!?!?

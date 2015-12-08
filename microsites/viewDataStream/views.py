@@ -44,24 +44,6 @@ def view(request, id, slug):
 
     return render_to_response('viewDataStream/index.html', locals())
 
-
-def hits_stats(request, id, channel_type=None):
-    """ hits stats for chart datastreams """
-
-    try:
-        datastream = DataStream.objects.get(pk=int(id))
-    except DataStream.DoesNotExist:
-        raise DataStreamDoesNotExist
-
-    hits_dao = DatastreamHitsDAO(datastream)
-    hits = hits_dao.count_by_days(30, channel_type)
-    field_names = [unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
-    t = loader.get_template('viewDataStream/hits_stats.json')
-    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": hits_dao.from_cache})
-
-    return HttpResponse(t.render(c), content_type="application/json")
-
-
 @xframe_options_exempt
 def embed(request, guid):
     account = request.account

@@ -1,6 +1,6 @@
 from rest_framework.decorators import detail_route, list_route
 from core.daos.datastreams import DataStreamDBDAO
-from api.rest.datastreams import DataStreamSerializer
+from api.v2.datastreams import DataStreamSerializer
 from core.rest.views import ResourceViewSet
 from core.v8.forms import DatastreamRequestForm, UpdateGridRequestForm
 from workspace.v8.forms import DatastreamPreviewForm
