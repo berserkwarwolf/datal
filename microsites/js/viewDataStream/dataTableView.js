@@ -43,7 +43,13 @@ var dataTableView = Backbone.View.extend({
 
 		// If Array, Init Flexigrid
 		if(this.model.attributes.result.fType == 'ARRAY'){
+
+			// Trigger init on flexigrid to listenTo on plugins
+			this.trigger('flexigrid-init', this.model.attributes.result);
+
+			// Init flexigrid
 			this.initFlexigrid(this.model.attributes.result);
+
 		}else{
 			this.setTableHeight();
 		}
@@ -252,12 +258,6 @@ var dataTableView = Backbone.View.extend({
 	    cellWidth = tableWidth / result.fCols;
 	  }
 
-	  // TODO: CHECK PROBLEM WHEN SIDEBAR IS OPENED
-	  // Remove Horizontal Scroll if not needed
-	  //if( cellWidth * result.fCols <= tableWidth ){
-	    //$('.dataTable .data').addClass('noHorizontalScroll');
-	  //} 
-
 	  // Create Flexigrid colModel
 		if(result.headerCells.length > 0){
 			for (var j = 0; j < result.fCols; j++) {
@@ -338,24 +338,26 @@ var dataTableView = Backbone.View.extend({
 			procmsg: gettext('VIEWDS-FLEXIGRID-PROCMSG'),
 			nomsg: gettext('VIEWDS-FLEXIGRID-NOMSG'),
 			onBeforeSend: function(settings){
+
+				console.log('before-send');
 				
 				self.setFilterParams(settings);
 				settings.url = settings.url.replace(/(page=).*?(&)/, '$1' + (this.newp - 1).toString() + '$2')
 				return true;
 
 			},
-			onSubmit: function(){
-				
+			onSubmit: function(settings){
+			
 				var params = [];
-				var n = 0;
-				// Add DataStream pArguments
-				while(!_.isUndefined(dataStream['parameter'+n])){
-					params.push({
-						name: 'pArgument'+n,
-						value: dataStream['parameter'+n].value
-					});
-					n++;					
-				}
+
+				// Add DataStream ID
+				params.push({
+					name: 'datastream_id',
+					value: self.dataStream.attributes.id
+				});
+
+				// Add the rest of the params
+				$.merge( params, self.setPOSTParams() );
 
 				// Set Flex options
 				$('.dataTable .data .result').flexOptions({
@@ -365,29 +367,34 @@ var dataTableView = Backbone.View.extend({
 				return true;
 
 			},
-			onSuccess: function(result){
-			},
-			onError: function(result){				
-			}
+			onSuccess: self.onFlexigridSuccess(),
+			onError: function(result){}
 		});
 	
 		// Set Flexigrid Height
-	  $(document).ready(function(){
+		self.setTableHeight();
 
-	  	var otherHeights = 
-	  		parseFloat( $('.dataTable header').height() )
-	    	+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-	    	+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-	  		+ parseFloat( $('.flexigrid .hDiv').height() )
-		    + parseFloat( $('.flexigrid .pDiv').height() )
-		    + parseFloat( $('.flexigrid .pDiv').css('border-top-width').split('px')[0] )
-		    + parseFloat( $('.flexigrid .pDiv').css('border-bottom-width').split('px')[0] )
-				+ 2;// Fix to perfection;
+	},
 
-		  self.setHeights( '.flexigrid div.bDiv', otherHeights );
+	setPOSTParams: function(){	
 
-		});	
+		var params = [],	
+			n = 0;
+
+		// Add DataStream pArguments
+		while(!_.isUndefined(this.dataStream.attributes['parameter'+n])){
+			params.push({
+				name: 'pArgument'+n,
+				value: this.dataStream.attributes['parameter'+n].value
+			});
+			n++;					
+		}
+
+		return params;
+
+	},
+
+	onFlexigridSuccess: function(flexigridResponse, result){
 
 	},
 
@@ -416,8 +423,7 @@ var dataTableView = Backbone.View.extend({
 
 		}
 
-					this.options.dataStream.set('filter', url);
-
+		this.options.dataStream.set('filter', url);
 
 	},
 

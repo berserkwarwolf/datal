@@ -20,6 +20,14 @@ section{
 .miniFooterJunar .w960{width:auto;padding:0 10px;margin:0;}
 body .brandingFooter{display:none !important;}
 
+/* Errors */
+.errorsBox{text-align:center;padding-top:13px;font-size:11px;color:#aa2222;}
+.has-error{border:1px solid #fa4848 !important;
+	-webkit-box-shadow:0 0 3px 0 #fa4848;
+	   -moz-box-shadow:0 0 3px 0 #fa4848;
+					box-shadow:0 0 3px 0 #fa4848;
+}
+
 /* Box */
 .box{background:#fff;border:1px solid #dadada;background:#fff;
 	-webkit-border-radius:5px;
@@ -197,7 +205,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 
 		/* Data Collected From */
 		.sidebar .infoBox .dataCollectedFrom > i{background-position:0 -40px;}
-		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;}
+		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:auto;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WEB{background-position:0 -20px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.FILE{background-position:0 -40px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WB{background-position:0 -60px;}
@@ -522,7 +530,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 			.flexigrid .pSearch:hover{background-position:0 -197px !important;}
 
 		/* Search */
-		.flexigrid div.sDiv{border:0;border-top:1px solid #DADADA;background:#fafafa;background:rgba(250,250,250,.85);width:100%;position:absolute;bottom:32px;left:0;}
+		.flexigrid div.sDiv{border:0 !important;border-top:1px solid #DADADA !important;background:#fafafa;background:rgba(250,250,250,.85);width:100%;/*position:absolute;bottom:32px;left:0;*/}
 		.flexigrid div.sDiv input{height:18px;font-size:11px;margin-left:5px;}
 		.flexigrid div.sDiv select{font-size:11px;height:22px;}
 		.flexigrid div.sDiv div.sDiv2{padding-left:10px;text-shadow:0 1px 0 #fff;}
