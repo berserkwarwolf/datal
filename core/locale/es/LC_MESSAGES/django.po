@@ -542,7 +542,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "Algunas puntos importantes en el request anterior"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/api/v2/da2astreams/"
+msgstr "/api/v2/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
