@@ -52,7 +52,7 @@ var SelectionView = Backbone.View.extend({
     },
 
     onClickFormats: function () {
-        this.model.set('mode', 'formats');
+        this.model.set('mode', 'set-formats');
     },
 
     show: function () {

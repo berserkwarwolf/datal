@@ -105,6 +105,7 @@ var DataviewModel = Backbone.Model.extend({
         this.selection = new DataTableSelectedCollection();
 
         this.filters = new FiltersCollection();
+        this.formats = new Backbone.Collection();
     },
 
     url: '/rest/datastreams/sample.json',

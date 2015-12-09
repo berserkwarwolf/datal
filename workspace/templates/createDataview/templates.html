@@ -161,7 +161,6 @@
       
       <hr class="separator">
     <% }); %>
-
 </script>
 
 <script type="text/template" id="preview_dataview_template">
@@ -298,6 +297,8 @@
       <button class="button small btn-headers">Set headers</button>
       <h6>Filters</h6>
       <button class="button small btn-filters">Add filter</button>
+      <h6>Formats</h6>
+      <button class="button small btn-formats">Set column formats</button>
 
     <% } %>
 
@@ -366,6 +367,77 @@
       <input type="text" name="name" placeholder="Nombre">
       <input type="text" name="description" placeholder="Descripción (opcional)">
       <input type="text" name="default" placeholder="Valor por defecto">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="button small btn-ok">Ok</button>
+      <button class="button small btn-clear">Limpiar</button>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="formats_template">
+
+  <button class="button small back btn-back">Atrás</button>
+  <h3>Data types and Formats</h3>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Filtrar datos</h2>
+      <p>Agregar nuevo filtro</p>
+      <label>Columna</label>
+      <select class="select-column">
+          <option value="">Columna...</option>
+          <% _(columns).each(function(column, i){ %>
+            <option value="<%= i %>">Columna <%= column %></option>
+          <% }); %>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row row-data-type hidden">
+    <div class="col-xs-12">
+    <label>Tipo de dato de la columna</label>
+      <select class="select-data-type">
+          <option value="00">Texto</option>
+          <option value="01">Numero</option>
+          <option value="02">Fecha</option>
+      </select>  
+    </div>
+  </div>
+
+  <h5><strong>Configure el formato de numero</strong></h5>
+
+  <h4>Origen</h4>
+
+  <div class="row row-value-type">
+    <div class="col-xs-12">
+      <label>Cual es el patrón del formato de origen?</label>
+      <select class="select-value-type">
+          <option value="">Tipo de valor objetivo...</option>
+          <option value="fixed">Valor fijo</option>
+          <option value="parameter">Personalizado</option>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row row-fixed-value">
+    <div class="col-xs-12">
+    <label>Patrón personalizado</label>
+      <input type="text" name="default" placeholder="Ingrese valor fijo">
+    </div>
+  </div>
+
+  <div class="row row-value-type">
+    <div class="col-xs-12">
+      <label>Localización</label>
+      <select class="select-value-type">
+          <option value="">Seleccione...</option>
+          <option value="AR">Argentina</option>
+          <option value="CA">Canada</option>
+      </select>  
     </div>
   </div>
 

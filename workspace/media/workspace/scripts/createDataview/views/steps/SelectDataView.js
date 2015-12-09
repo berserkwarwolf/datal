@@ -73,6 +73,9 @@ var SelectDataView = Backbone.View.extend({
         this.headersOptionsView.render();
         this.headersOptionsView.hide();
         this.$('.headers-options-view').append(this.headersOptionsView.$el);
+
+
+
     },
 
     attachFiltersView: function () {
@@ -92,6 +95,26 @@ var SelectDataView = Backbone.View.extend({
         if (this.filtersOptionsView) {
             this.filtersOptionsView.remove();
             delete this.filtersOptionsView;
+        }
+    },
+
+    attachFormatsView: function () {
+        this.destroyFormatsView();
+
+        this.formatsView = new FormatsView({
+            stateModel: this.internalState,
+            collection: this.dataviewModel.formats,
+            totalCols: this.dataviewModel.get('totalCols'),
+            model: new Backbone.Model()
+        });
+        this.formatsView.render();
+        this.$('.headers-options-view').append(this.formatsView.$el);
+    },
+
+    destroyFormatsView: function () {
+        if (this.formatsView) {
+            this.formatsView.remove();
+            delete this.formatsView;
         }
     },
 
@@ -194,9 +217,14 @@ var SelectDataView = Backbone.View.extend({
             this.disableSelection();
             this.selectionView.hide();
             this.attachFiltersView();
+        } else if (value === 'set-formats') {
+            this.disableSelection();
+            this.selectionView.hide();
+            this.attachFormatsView();
         } else {
             this.enableSelection();
             this.destroyFiltersView();
+            this.destroyFormatsView();
             this.headersOptionsView.hide();
             this.selectionView.show();
         }
