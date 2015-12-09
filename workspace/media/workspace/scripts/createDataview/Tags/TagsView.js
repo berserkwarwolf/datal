@@ -5,7 +5,6 @@ var TagsView = Backbone.View.extend({
     },
 
     initialize: function () {
-        var self = this;
         this.template = _.template( $('#tags_template').html() );
     },
 

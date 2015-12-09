@@ -34,11 +34,18 @@ var MetadataView = Backbone.Epoxy.View.extend({
             collection: this.model.sources
         });
         this.sourcesView.render();
+
         this.tagsView = new TagsView({
             el: this.$('.tags-view'),
             collection: this.model.tags
         });
         this.tagsView.render();
+
+        this.paramsView = new ParamsView({
+            el: this.$('.params-view'),
+            model: this.model.dataset
+        });
+        this.paramsView.render();
 
         this.initNotes();
         this.$('.input-source').autocomplete({

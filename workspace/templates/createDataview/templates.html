@@ -70,16 +70,7 @@
 
       <hr class="separator">
 
-      <fieldset class="from clearfix">
-        <div id="id_webservice_container" class="wsParamsContainer DN">
-          <div class="title">{% trans "APP-DSWEBSERVICE-TEXT" %}</div>
-          <fieldset>
-            <div id="id_args_container"></div>
-          </fieldset>
-        </div>
-      </fieldset>
-
-      <hr class="separator">
+      <div class="params-view"></div>
 
       <fieldset class="form clearfix">
 
@@ -141,6 +132,20 @@
       </span>
     </div>
   <% }); %>
+</script>
+
+<script type="text/template" id="params_template">
+  <div class="title">{% trans "APP-DSWEBSERVICE-TEXT" %}</div>
+    <% _.each(args, function(arg) { %>
+      <div class="row clearfix">
+        <label for="input-tag">{% trans "APP-TAGS-TEXT" %}:</label>
+        <div>
+          <input name="input-tag" type="text" class="input-tag" maxlength="40" value="<%= arg.name %>"/>
+          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
+        </div>
+      </div>
+    <% }); %>
+  <hr class="separator">
 </script>
 
 <script type="text/template" id="preview_dataview_template">
