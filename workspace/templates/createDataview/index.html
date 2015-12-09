@@ -76,6 +76,7 @@
 	<script src="{% static 'workspace/scripts/createDataview/models/DataviewModel.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/Tags/TagsModel.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/Tags/TagsCollection.js' %}"></script>
+	<script src="{% static 'workspace/scripts/createDataview/Tags/TagsCollectionView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/Tags/TagsView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/SourcesView.js' %}"></script>
 	<script src="{% static 'workspace/scripts/createDataview/views/EditSourceView.js' %}"></script>
@@ -92,16 +93,17 @@
 
         dataviewModel.attachDataset({
             dataset_revision_id: {{dataset_revision.id}},
-        	end_point: '{{dataset_revision.end_point}}',
-			impl_type: {{dataset_revision.impl_type}},
-			impl_details: '{{dataset_revision.impl_details|default_if_none:""|safe}}',
-        	sources: {{sources|jsonify}}
+            end_point: '{{dataset_revision.end_point}}',
+            impl_type: {{dataset_revision.impl_type}},
+            impl_details: '{{dataset_revision.impl_details|default_if_none:""|safe}}',
+            sources: {{sources|jsonify}},
+            tags: {{tags|jsonify}}
         });
 
-		var mainView = new MainView({
-			el: '.main-section',
-			dataviewModel: dataviewModel
-		});
+        var mainView = new MainView({
+            el: '.main-section',
+            dataviewModel: dataviewModel
+        });
 	</script>
 
 {% endblock %}

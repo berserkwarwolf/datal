@@ -105,16 +105,16 @@ var DataviewModel = Backbone.Model.extend({
         this.selection = new DataTableSelectedCollection();
 
         this.filters = new FiltersCollection();
-
-        this.tags = new Backbone.Collection();
-        this.sources = new Backbone.Collection();
     },
 
     url: '/rest/datastreams/sample.json',
 
     attachDataset: function (attributes) {
         this.dataset = new DatasetModel(attributes);
+
+        // Dataview sources and Tags are initially cloned from those in the dataset.
         this.sources = this.dataset.sources.clone();
+        this.tags = this.dataset.tags.clone();
     },
 
     fetch: function (options) {
@@ -201,11 +201,15 @@ var DataviewModel = Backbone.Model.extend({
         var filterParameters = this.filters.toFormSet();
         
         var datasetArguments = this.dataset.getArgsAsParams(filterParameters.length);
-
         dataviewParameters = filterParameters.concat(datasetArguments);
 
         var parametersParams = this.toFormSet(dataviewParameters, 'parameters');
-        var tagsParams = this.toFormSet([], 'tags');
+
+        var tags = this.tags.map(function (model) {
+            return {name: model.get('tag__name')};
+        });
+
+        var tagsParams = this.toFormSet(tags, 'tags');
         var sourcesParams = this.toFormSet([], 'sources');
 
         _.extend(params, parametersParams);

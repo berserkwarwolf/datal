@@ -254,7 +254,8 @@ def create(request):
             impl_type = dataset_revision.impl_type
             impl_details = dataset_revision.impl_details
             bucket_name = request.bucket_name
-            sources = [s for s in dataset_revision.get_sources()]
+            sources = [source for source in dataset_revision.get_sources()]
+            tags = [tag for tag in dataset_revision.get_tags()]
 
             return render_to_response('createDataview/index.html', locals())
         else:

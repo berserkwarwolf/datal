@@ -23,6 +23,7 @@ var DatasetModel = Backbone.Model.extend({
     initialize: function (attributes) {
         this.parseImplDetails(attributes.impl_details);
         this.sources = new Backbone.Collection(attributes.sources || []);
+        this.tags = new Backbone.Collection(attributes.tags || []);
     },
 
     parse: function (response) {
