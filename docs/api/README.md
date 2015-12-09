@@ -6,7 +6,7 @@ En resumen, se estructurarán las URLs de la API siguiendo el patrón REST, asig
 URLs a recursos, utilizando los verbos GET, POST, PUT, PATCH, DELETE para las correspondientes 
 acciones y la extension del formato en que se recibiran los resultados, por ejemplo:
 
-GET /api/v1/datasets/12345.json
+GET /api/v2/datasets/12345.json
 
 para solicitar un dataset identificado por el ID 12345 en formato JSON.
 
@@ -113,19 +113,19 @@ Los recursos que maneja la API son:
 Busca un listado de datastreams.
 
 ```
-GET /api/v1/datastreams
+GET /api/v2/datastreams
 ```
 
 Busca un listado de datasets.
 
 ```
-GET /api/v1/datasets
+GET /api/v2/datasets
 ```
 
 Busca un listado de visualizaciones.
 
 ```
-GET /api/v1/visualizations
+GET /api/v2/visualizations
 ```
 
 Si no hay parametros GET la API devuelve todos los recursos que le corresponden a la cuenta 
@@ -148,7 +148,7 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 ```
 {
     "count": 20,
-    "next": "http://api.dev:8080/api/v1/datasets/?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e&limit=2&offset=2",
+    "next": "http://api.dev:8080/api/v2/datasets/?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e&limit=2&offset=2",
     "previous": null,
     "results": [
         {
@@ -188,25 +188,25 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 Trae la información asociada a una vista
 
 ```
-GET /api/v1/datastreams/:guid
+GET /api/v2/datastreams/:guid
 ``` 
 
 Trae la información asociada completa (incluye los valores de la vista) a una vista
 
 ```
-GET /api/v1/datastreams/:guid/data
+GET /api/v2/datastreams/:guid/data
 ``` 
 
 Trae la información asociada a un dataset
 
 ```
-GET /api/v1/datasets/:guid
+GET /api/v2/datasets/:guid
 ``` 
 
 Trae la información asociada a una visualización
 
 ```
-GET /api/v1/visualizations/:guid
+GET /api/v2/visualizations/:guid
 ``` 
 
 Un ejemplo de resultado de un datastream sería así
@@ -238,8 +238,8 @@ hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario
 
 
 ```
-POST /api/v1/datasets
-PUT/PATCH /api/v1/datasets/:guid
+POST /api/v2/datasets
+PUT/PATCH /api/v2/datasets/:guid
 ``` 
 
 - **title**: Título del conjunto de datos
@@ -256,7 +256,7 @@ PUT/PATCH /api/v1/datasets/:guid
 
 ### Datastreams
 ```
-POST /api/v1/datastreams
+POST /api/v2/datastreams
 ``` 
 
 - **title**: Título del conjunto de datos
@@ -270,5 +270,5 @@ POST /api/v1/datastreams
 Ejemplo de llamada para crear un datastream 
 
 ```
-curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v2/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
 ```

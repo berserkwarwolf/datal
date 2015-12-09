@@ -550,7 +550,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "A few things to note in the request above"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/api/v1/datastreams/"
+msgstr "/api/vr2/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
