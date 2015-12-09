@@ -2,7 +2,7 @@ var DatasetModel = Backbone.Model.extend({
     idAttribute: 'dataset_revision_id',
 
     url: function () {
-        var args = this.get('args');
+        var args = this.args.toJSON();
         var wargs = {};
 
         _.filter(args, function (arg) {
@@ -21,9 +21,10 @@ var DatasetModel = Backbone.Model.extend({
     },
 
     initialize: function (attributes) {
-        this.parseImplDetails(attributes.impl_details);
         this.sources = new SourcesCollection(attributes.sources || []);
         this.tags = new TagsCollection(attributes.tags || []);
+        this.args = new ArgumentsCollection();
+        this.parseImplDetails(attributes.impl_details);
     },
 
     parse: function (response) {
@@ -40,12 +41,12 @@ var DatasetModel = Backbone.Model.extend({
             var $node = $(arg);
             return {
                     name: arg.nodeName,
+                    mappedName: arg.nodeName,
                     value: $node.text(),
                     editable: ($node.attr('editable') === 'True')
                 };
         });
-
-        this.set('args', args);
+        this.args.reset(args);
     },
 
     getTables: function () {
@@ -53,7 +54,7 @@ var DatasetModel = Backbone.Model.extend({
     },
 
     getArgsAsParams: function (offset) {
-        var args = this.get('args'),
+        var args = this.args.toJSON(),
             offset = offset || 0;
 
         return _.filter(args, function (arg) {
@@ -61,7 +62,7 @@ var DatasetModel = Backbone.Model.extend({
             }).map(function (arg, index) {
                 return {
                     position: offset + index,
-                    name: arg.name,
+                    name: arg.mappedName,
                     description: '',
                     'default': arg.value
                 };

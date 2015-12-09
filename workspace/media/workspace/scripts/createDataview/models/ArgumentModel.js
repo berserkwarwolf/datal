@@ -1,0 +1,1 @@
+var ArgumentModel = Backbone.Model.extend({});

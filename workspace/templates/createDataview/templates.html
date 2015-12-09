@@ -135,17 +135,33 @@
 </script>
 
 <script type="text/template" id="params_template">
-  <div class="title">{% trans "APP-DSWEBSERVICE-TEXT" %}</div>
-    <% _.each(args, function(arg) { %>
+  <h3>{% trans "APP-DSWEBSERVICE-TEXT" %}</h3>
+
+    <% _.each(args, function(arg, index) { %>
       <div class="row clearfix">
-        <label for="input-tag">{% trans "APP-TAGS-TEXT" %}:</label>
+        <label for="input-tag">{% trans "WEBSERVICE-ORIGINALARG-TEXT" %}:</label>
         <div>
-          <input name="input-tag" type="text" class="input-tag" maxlength="40" value="<%= arg.name %>"/>
-          <p class="tip">{% trans "OVEDITDS-TAGS-TIP" %}.</p>
+          <input name="input-tag" type="text" class="input-tag" maxlength="40" value="<%= arg.name %>" disabled="disabled"/>
         </div>
       </div>
+
+      <div class="row clearfix">
+        <label for="name">{% trans "WEBSERVICE-NEW-NAME-LABEL" %}:</label>
+        <div>
+          <input name="mappedName" type="text" maxlength="40" value="<%= arg.mappedName %>" data-index="<%= index %>"/>
+        </div>
+      </div>
+
+      <div class="row clearfix">
+        <label for="value">{% trans "WORKSPACE-PARAM-DEFAULT" %}:</label>
+        <div>
+          <input name="value" type="text" maxlength="40" value="<%= arg.value %>" data-index="<%= index %>"/>
+        </div>
+      </div>
+      
+      <hr class="separator">
     <% }); %>
-  <hr class="separator">
+
 </script>
 
 <script type="text/template" id="preview_dataview_template">

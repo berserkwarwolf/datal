@@ -145,7 +145,7 @@ msgstr "Crear categoría"
 msgid "WORKSPACE-CATEGORY-DESCRIPTION-LABEL"
 msgstr "Descripción"
 
-msgid "APP-NAME-TEXT"
+msgid "WEBSERVICE-NEW-NAME-LABEL"
 msgstr "Nombre"
 
 msgid "APP-DESCRIPTION-TEXT"
@@ -3239,3 +3239,6 @@ msgstr "Editar descripción"
 
 msgid "APP-EDIT-VISUALIZATION-TEXT"
 msgstr "Editar visualización"
+
+msgid "WEBSERVICE-ORIGINALARG-TEXT"
+msgstr "Nombre original"

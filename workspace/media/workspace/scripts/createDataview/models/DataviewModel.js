@@ -39,7 +39,7 @@ var data_source_template = ['<dataSource>',
     '<EndPointMappings>',
         '<% _.each(args, function (arg) { %>',
             '<Mapping>',
-                '<key><%= arg.name%></key>',
+                '<key><%= arg.mappedName%></key>',
                 '<value>parameter<%= arg.position%></value>',
             '</Mapping>',
         '<% }); %>',
@@ -278,7 +278,7 @@ var DataviewModel = Backbone.Model.extend({
             headers = _.map(headerModels, function (model) {
                 return model.getRange().from.row;
             }),
-            argsList = this.dataset.get('args'),
+            argsList = this.dataset.args.toJSON(),
             args;
 
         args = _.filter(argsList, function (arg) {

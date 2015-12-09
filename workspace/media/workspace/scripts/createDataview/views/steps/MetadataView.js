@@ -43,7 +43,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
 
         this.paramsView = new ParamsView({
             el: this.$('.params-view'),
-            model: this.model.dataset
+            collection: this.model.dataset.args
         });
         this.paramsView.render();
 
