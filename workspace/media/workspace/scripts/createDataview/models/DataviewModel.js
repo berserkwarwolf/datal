@@ -209,8 +209,15 @@ var DataviewModel = Backbone.Model.extend({
             return {name: model.get('tag__name')};
         });
 
+        var sources = this.sources.map(function (model) {
+            return {
+                name: model.get('source__name'),
+                url: model.get('source__url')
+            };
+        });
+
         var tagsParams = this.toFormSet(tags, 'tags');
-        var sourcesParams = this.toFormSet([], 'sources');
+        var sourcesParams = this.toFormSet(sources, 'sources');
 
         _.extend(params, parametersParams);
         _.extend(params, tagsParams);
