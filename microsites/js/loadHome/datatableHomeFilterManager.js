@@ -64,7 +64,7 @@ var DatatableHomeFilterManager = DatatableFilterManager.extend({
       var $el = $(event.currentTarget);
       var val = $el.find("option:selected").val();
       $.ajax({
-        url: "update_categories",
+        url: "/home/update_categories",
         data: {account_id: val}
       })
     },

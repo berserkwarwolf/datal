@@ -14,6 +14,7 @@ from core.http import get_domain_with_protocol
 from core.communitymanagers import FinderManager
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
+from core.builders.themes import ThemeBuilder
 
 
 @login_required
@@ -69,9 +70,14 @@ def save(request):
 def suggest(request):
     account = request.user.account
     preferences = account.get_preferences()
-    if preferences['account_home_filters'] == 'featured_accounts':
-        featured_accounts = Account.objects.get_featured_accounts(account.id)
-        account_id = [featured_account['id'] for featured_account in featured_accounts]
+    language = request.auth_manager.language
+
+    builder = ThemeBuilder(preferences, False, language, account)
+    data = builder.parse()
+
+    if data['federated_accounts_ids']:
+        federated_accounts = data['federated_accounts']
+        account_id = data['federated_accounts_ids']+[account.id]
     else:
         account_id = account.id
 

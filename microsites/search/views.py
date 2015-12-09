@@ -22,8 +22,7 @@ def browse(request, category_slug=None, page=1):
     preferences = request.preferences
     category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
 
-    featured_accounts = account.account_set.values('id').all()
-    accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
+    accounts_ids =  [x['id'] for x in account.account_set.values('id').all()] + [account.id]
 
     try:
         results, search_time, facets = FinderManager().search(category_id=category['id'], account_id=[account.id]+accounts_ids)
@@ -46,11 +45,7 @@ def do_search(request, category_filters=None, datasets=None):
         page = form.cleaned_data.get('page')
         order = form.cleaned_data.get('order')
 
-        featured_accounts = account.account_set.values('id').all()
-        if featured_accounts:
-            accounts_ids = [featured_account['id'] for featured_account in featured_accounts] + account.id
-        else:
-            accounts_ids = account.id
+        accounts_ids =  [x['id'] for x in account.account_set.values('id').all()] + [account.id]
 
         try:
             resources = ["ds", "db", "vz", "dt"]
