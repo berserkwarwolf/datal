@@ -4,6 +4,7 @@ var SourcesView = Backbone.View.extend({
   },
 
   initialize: function () {
+    var self = this;
     this.template = _.template( $('#sources_template').html() );
     this.listenTo(this.collection, 'add remove change', this.render, this);
   },

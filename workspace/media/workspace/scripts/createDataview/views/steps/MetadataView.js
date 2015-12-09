@@ -34,7 +34,26 @@ var MetadataView = Backbone.Epoxy.View.extend({
             collection: this.model.sources
         });
         this.sourcesView.render();
+        this.tagsView = new TagsView({
+            el: this.$('.tags-view'),
+            collection: this.model.tags
+        });
+        this.tagsView.render();
+
         this.initNotes();
+        this.$('.input-source').autocomplete({
+          source: '/rest/sources.json',
+          minLength: 3,
+          select: function (e, ui) {
+            e.preventDefault();
+            self.model.set('name', ui.item.value);
+            self.model.set('url', '');
+            if(self.model.isValid(true)){
+              self.collection.add(self.model.toJSON());
+              $(e.target).val('');
+            }
+          }
+        });
     },
 
     initNotes: function(){
