@@ -32,7 +32,9 @@ class ElasticsearchIndex():
         try:
             if indices['acknowledged']:
                 for doc_type in ["ds","dt","db","vz"]:
-                    self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=doc_type, body=self.__get_mapping(doc_type))
+                    mapping = self.__get_mapping(doc_type)
+                    if mapping:
+                        self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=doc_type, body=mapping)
         # Ya existe un index
         except KeyError:
             pass
