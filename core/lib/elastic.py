@@ -31,8 +31,10 @@ class ElasticsearchIndex():
         # primera vez que empuja el index
         try:
             if indices['acknowledged']:
-                for doc_type in ["ds","dt","db","vz"]:
+                for doc_type in ["ds","dt","vz"]:
                     self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=doc_type, body=self.__get_mapping(doc_type))
+                for plugin in DatalPluginPoint.get_active_with_att('doc_type'):
+                    self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=plugin.doc_type, body=self.__get_mapping(doc_type))
         # Ya existe un index
         except KeyError:
             pass
