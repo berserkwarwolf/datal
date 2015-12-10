@@ -12,12 +12,10 @@ var FormatsView = Backbone.Epoxy.View.extend({
         'input[name="customPattern"]': "value:customPattern, events:['keyup']",
         "select.decimal-separator": "value:decimalSeparator, events:['change']",
         "select.thousand-separator": "value:thousandSeparator, events:['change']",
-        "select.origin-pattern": "value:originPattern, events:['change']",
         "select[name=inputLocale]": "value:inputLocale, events:['change']"
     },
 
     initialize: function (options) {
-        window.modelFormat = this.model;
         this.template = _.template( $('#formats_template').html() );
         this.stateModel = options.stateModel;
         this.totalCols = options.totalCols;
@@ -36,6 +34,22 @@ var FormatsView = Backbone.Epoxy.View.extend({
             columns: columns,
         }));
         this.applyBindings();
+
+        this.inputPatternView = new PatternView({
+            el: this.$('.input-pattern-view'),
+        });
+        this.inputPatternView.on('change', function (value) {
+            this.model.set('originPattern', value);
+        }, this);
+        this.inputPatternView.render();
+
+        this.displayPatternView = new PatternView({
+            el: this.$('.display-pattern-view'),
+        });
+        this.displayPatternView.on('change', function (value) {
+            this.model.set('displayPattern', value);
+        }, this);
+        this.displayPatternView.render();
 
         Backbone.Validation.bind(this, {
             valid: function (view, attr, selector) {

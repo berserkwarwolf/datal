@@ -25,6 +25,13 @@ var ColumnModel = Backbone.Model.extend({
             }
         ],
 
+        displayPattern: [
+            {
+                required: true,
+                msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
+            }
+        ],
+
         customPattern: function(value, attr) {
             if (this.get('originPattern') === 'custom') {
                 if(_.isUndefined(value)) {

@@ -416,14 +416,7 @@
     <div class="row row-value-type">
       <div class="col-xs-12">
         <label>Cual es el patrón del formato de origen?</label>
-        <select class="form-control origin-pattern" name="originPattern">
-          <option value="" selected="selected">Select...</option>
-          <option value="#,###">#,###</option>
-          <option value="$ #,###">$ #,###</option>
-          <option value="#,###.##">#,###.##</option>
-          <option value="$ #,###.##">$ #,###.##</option>
-          <option value="custom">Custom</option>
-        </select>
+        <div class="input-pattern-view" name="originPattern"></div>
       </div>
     </div>
 
@@ -513,6 +506,14 @@
 
 
     <h3>Formato Salida</h3>
+    
+    <div class="row row-value-type">
+      <div class="col-xs-12">
+        <label>Cual es el patrón del formato de salida?</label>
+        <div class="display-pattern-view" name="displayPattern"></div>
+      </div>
+    </div>
+
 
     <div class="row">
       <div class="col-xs-12">
@@ -524,7 +525,7 @@
 </script>
 
 <script type="text/template" id="pattern_template">
-  <select class="form-control">
+  <select class="form-control" name="pattern">
     <option value="" selected="selected">Select...</option>
     <option value="#,###">#,###</option>
     <option value="$ #,###">$ #,###</option>
