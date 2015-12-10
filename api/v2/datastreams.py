@@ -11,6 +11,7 @@ from core.choices import DATASTREAM_IMPL_VALID_CHOICES
 from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
+from rest_framework import exceptions
 from core.choices import StatusChoices
 from core.v8.forms import DatastreamRequestForm
 from rest_framework import renderers
@@ -38,6 +39,7 @@ class DataStreamSerializer(ResourceSerializer):
         allow_null=True,
         help_text=_(u'Indice de la fila a usar como cabecera de la tabla comenzando de cero. Por defecto es vacio'))
     dataset = serializers.CharField(
+        required=False,
         help_text=_(u'GUID del conjunto de datos asociado a la vista'))
 
     def __init__(self, *args, **kwargs):
@@ -55,27 +57,29 @@ class DataStreamSerializer(ResourceSerializer):
         return answer
 
     def validate(self, data):
-        try:
-            guid = data.pop('dataset')
-            self.dataset = DatasetDBDAO().get(
-                self.context['request'].auth['language'],
-                guid=guid)
-            data['dataset']=Dataset.objects.get(id=self.dataset['dataset_id'])
-        except ObjectDoesNotExist:
-            # TODO: mejorar errores
-            raise serializers.ValidationError('Dataset no existe')
+        guid = data.pop('dataset', None)
+        if guid:
+            try:
+                self.dataset = DatasetDBDAO().get(
+                    self.context['request'].auth['language'],
+                    guid=guid)
+                data['dataset']=Dataset.objects.get(id=self.dataset['dataset_id'])
+            except ObjectDoesNotExist:
+                # TODO: mejorar errores
+                raise exceptions.ValidationError({'dataset':'Dataset no existe'})
 
-        if data['dataset'].last_revision.impl_type not in DATASTREAM_IMPL_VALID_CHOICES:
-            raise serializers.ValidationError('El tipo de archivo no permite creacion de vistas')
+            if data['dataset'].last_revision.impl_type not in DATASTREAM_IMPL_VALID_CHOICES:
+                # TODO: mejorar errores
+                raise exceptions.ValidationError({'dataset':'El tipo de archivo no permite creacion de vistas'})
 
-        if 'table_id' in data:
-            table_id = data.pop('table_id')
-            data['select_statement'] = SelectStatementBuilder().build(table_id)
-            data['data_source'] = DataSourceBuilder().build(table_id,
-                self.dataset['last_published_revision_id'], 'microsites')
+            if 'table_id' in data:
+                table_id = data.pop('table_id')
+                data['select_statement'] = SelectStatementBuilder().build(table_id)
+                data['data_source'] = DataSourceBuilder().build(table_id,
+                    data['dataset'].last_published_revision_id, 'microsites')
 
         if 'category' in data and data['category']:
-            data['category'] = self.getCategory(data['category'])
+            data['category'] = self.getCategory(data['category']).id
 
         data['status'] = StatusChoices.PENDING_REVIEW
 
@@ -89,11 +93,28 @@ class DataStreamSerializer(ResourceSerializer):
             language=self.context['request'].auth['language'])
 
     def create(self, validated_data):
+        if 'dataset' not in validated_data:
+            raise exceptions.ValidationError({'dataset': 'No hay dataset'})
+
         return self.getDao(DatastreamLifeCycleManager(self.context['request'].user).create(
             **validated_data)
         )
 
-class DataStreamViewSet(mixins.CreateModelMixin, ResourceViewSet):
+    def update(self, instance, validated_data):
+        lcycle = DatastreamLifeCycleManager(self.context['request'].user,
+            datastream_id=instance['datastream_id'])
+        instance.update(validated_data)
+        instance.pop('datastream', None)
+        instance.pop('dataset', None)
+        instance.pop('user', None)
+        instance.pop('status', None)
+        instance.pop('parameters', None)
+        if 'category' not in instance:
+            instance['category'] = instance['category_id']
+        return self.getDao(lcycle.edit(changed_fields=validated_data.keys(),
+                **instance))
+
+class DataStreamViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, ResourceViewSet):
     queryset = DataStreamDBDAO() 
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'

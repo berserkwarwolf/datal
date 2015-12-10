@@ -46,7 +46,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             # Create a new datastream (TITLE is for automatic GUID creation)
             datastream = DataStream.objects.create(user=user, title=fields['title'])
 
-        if isinstance(fields['category'], int):
+        if isinstance(fields['category'], int) or isinstance(fields['category'], long):
             fields['category'] = Category.objects.get(id=fields['category'])
 
         datastream_revision = DataStreamRevision.objects.create(
@@ -160,6 +160,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
+            data_source=datastream_revision.data_source,
+            select_statement=datastream_revision.select_statement,
             slug= slugify(datastreami18n.title)
         )
 

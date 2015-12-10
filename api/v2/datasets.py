@@ -7,6 +7,7 @@ from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from rest_framework import serializers
 from rest_framework import mixins
+from rest_framework import exceptions
 from django.utils.translation import ugettext_lazy as _
 from core.choices import StatusChoices, CollectTypeChoices
 from core.forms import MimeTypeForm
@@ -86,7 +87,7 @@ class DataSetSerializer(ResourceSerializer):
             data['impl_type'] is None or 
             data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 # TODO: mejorar errores
-                raise serializers.ValidationError('Tipo de Archivo Invalido')
+                raise exceptions.ValidationError({'impl_type': 'Tipo de Archivo Invalido'})
 
         if 'license' in data:
             data['license_url'] = data.pop('license')
@@ -104,7 +105,7 @@ class DataSetSerializer(ResourceSerializer):
 
     def create(self, validated_data):
         if 'file_data' not in validated_data and 'end_point' not in validated_data:
-            raise serializers.ValidationError({'description': 'O end_point o file. No puede estar ambas vacias.'})
+            raise exceptions.ValidationError({'description': 'O end_point o file. No puede estar ambas vacias.'})
 
         return self.getDao(
             DatasetLifeCycleManager(self.context['request'].user).create(**validated_data)
