@@ -3242,3 +3242,9 @@ msgstr "Editar visualización"
 
 msgid "WEBSERVICE-ORIGINALARG-TEXT"
 msgstr "Nombre original"
+
+msgid "APP-DATA-SELECTION-TEXT"
+msgstr "Selección de datos"
+
+msgid "APP-REVISION-TEXT"
+msgstr "Revisión"

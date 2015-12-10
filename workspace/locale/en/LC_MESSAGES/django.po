@@ -3252,3 +3252,9 @@ msgstr "Edit description"
 
 msgid "APP-EDIT-VISUALIZATION-TEXT"
 msgstr "Edit visualization"
+
+msgid "APP-DATA-SELECTION-TEXT"
+msgstr "Data selection"
+
+msgid "APP-REVISION-TEXT"
+msgstr "Revision"
