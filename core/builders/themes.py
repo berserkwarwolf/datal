@@ -76,7 +76,7 @@ class ThemeBuilder(object):
             'account_id': self.account.id,
             'template_path': None
         }
-        
+
         jsonObject = None
         if self.is_preview:
             jsonObject = json.loads(self.preferences["account_preview"], strict=False)
