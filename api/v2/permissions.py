@@ -4,7 +4,7 @@ from core.models import AccountAnonymousUser
 class ApiPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         return ('account_id' in obj and 
-                obj['account_id'] == request.auth['account'].id)
+                obj['account_id'] in [x['id'] for x in request.auth['account'].account_set.values('id').all()] + [request.auth['account'].id])
 
 class ApiPrivateForWritePermission(permissions.BasePermission):
     def has_permission(self, request, view):
