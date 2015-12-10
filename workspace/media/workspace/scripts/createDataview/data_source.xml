@@ -24,6 +24,90 @@
                     </format>
                 </Field>
                 <% }); %>
+
+                EJEMPLO de columna de TEXT
+                <Field id="column1">
+                    <alias/>
+                    <type>TEXT</type>
+                    <format>
+                        <language/>
+                        <country/>
+                        <style/>
+                        <pattern/>
+                    </format>
+                </Field>
+
+                EJEMPLO de columna de DATE
+                <Field id="column0">
+                    <alias/>
+                    <type>DATE</type>
+                    <format>
+                        <Symbols>
+                            <decimals/>
+                            <thousands/>
+                        </Symbols>
+                        <language>en</language>
+                        <country>en</country>
+                        <style>dd/MM/yyyy</style>
+                        <pattern/>
+                    </format>
+                    <DisplayFormat>
+                        <pattern>yy-mm-dd</pattern>
+                        <locale>es</locale>
+                    </DisplayFormat>
+                </Field>
+
+                EJEMPLO de columna de NUMBER
+                <Field id="column3">
+                    <alias/>
+                    <type>NUMBER</type>
+                    <format>
+                        <Symbols>
+                            <decimals/>
+                            <thousands/>
+                        </Symbols>
+                        <language/>
+                        <country/>
+                        <style/>
+                        <pattern>$ #,###.##</pattern>
+                    </format>
+                    <DisplayFormat>
+                        <pattern>$ #,###</pattern>
+                        <locale>us</locale>
+                    </DisplayFormat>
+                </Field>
+
+            </Table>
+        </Field>
+    </DataStructure>
+</dataSource>
+
+
+
+<dataSource>
+    <DataStructure>
+        <Field id="table0">
+            <Headers>
+                <Row>row0</Row>
+            </Headers>
+            <type/>
+            <format>
+                <language/>
+                <country/>
+                <style/>
+                <pattern/>
+            </format>
+            <Table>
+                <Field id="column2">
+                    <alias/>
+                    <type>TEXT</type>
+                    <format>
+                        <language/>
+                        <country/>
+                        <style/>
+                        <pattern/>
+                    </format>
+                </Field>
             </Table>
         </Field>
     </DataStructure>

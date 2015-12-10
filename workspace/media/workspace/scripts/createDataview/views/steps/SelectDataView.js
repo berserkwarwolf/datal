@@ -105,7 +105,7 @@ var SelectDataView = Backbone.View.extend({
             stateModel: this.internalState,
             collection: this.dataviewModel.formats,
             totalCols: this.dataviewModel.get('totalCols'),
-            model: new Backbone.Model()
+            model: new ColumnModel()
         });
         this.formatsView.render();
         this.$('.headers-options-view').append(this.formatsView.$el);

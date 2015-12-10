@@ -295,7 +295,5 @@ var DataviewModel = Backbone.Model.extend({
             headers: headers,
             columns: columns
         });
-    },
-
-
+    }
 })
