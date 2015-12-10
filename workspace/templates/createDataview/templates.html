@@ -379,17 +379,19 @@
   <button class="button small back btn-back">Atrás</button>
   <h3>Data types and Formats</h3>
 
+  <h5><strong>Configure una columna</strong></h5>
+
   <div class="row">
     <div class="col-xs-12">
-      <h2>Filtrar datos</h2>
-      <p>Agregar nuevo filtro</p>
-      <label>Columna</label>
-      <select class="form-control select-column" name="column">
-          <option value="">Columna...</option>
-          <% _(columns).each(function(column, i){ %>
-            <option value="<%= i %>">Columna <%= column %></option>
-          <% }); %>
-      </select>  
+      <div class="form-group">
+        <label for="column">Columna</label>
+        <select class="form-control select-column" name="column">
+            <option value="">Columna...</option>
+            <% _(columns).each(function(column, i){ %>
+              <option value="<%= i %>">Columna <%= column %></option>
+            <% }); %>
+        </select>  
+      </div>
     </div>
   </div>
 
@@ -476,7 +478,7 @@
     <div class="row input-locale hidden">
       <div class="col-xs-12">
         <label>Localización</label>
-        <select class="form-control">
+        <select class="form-control" name="inputLocale">
           <option value="" selected="selected">Select...</option>
           <option value="us">United States</option>
           <option value="es">Spain &amp; Latam</option>

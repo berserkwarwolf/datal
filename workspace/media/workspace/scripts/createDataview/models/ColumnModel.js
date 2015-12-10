@@ -8,6 +8,7 @@ var ColumnModel = Backbone.Model.extend({
         separatorType: 'symbol',
         thousandSeparator: undefined,
         decimalSeparator: undefined,
+        inputLocale: undefined,
     },
 
     validation: {
@@ -34,7 +35,7 @@ var ColumnModel = Backbone.Model.extend({
 
         thousandSeparator: function(value, attr) {
             if (this.get('separatorType') === 'symbol') {
-                if(_.isUndefined(value)) {
+                if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
             } 
@@ -42,7 +43,15 @@ var ColumnModel = Backbone.Model.extend({
 
         decimalSeparator: function(value, attr) {
             if (this.get('separatorType') === 'symbol') {
-                if(_.isUndefined(value)) {
+                if(_.isUndefined(value) || value === '') {
+                    return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+                }
+            } 
+        },
+
+        inputLocale: function(value, attr) {
+            if (this.get('separatorType') === 'locale') {
+                if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
             } 

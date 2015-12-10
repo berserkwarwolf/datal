@@ -12,7 +12,8 @@ var FormatsView = Backbone.Epoxy.View.extend({
         'input[name="customPattern"]': "value:customPattern, events:['keyup']",
         "select.decimal-separator": "value:decimalSeparator, events:['change']",
         "select.thousand-separator": "value:thousandSeparator, events:['change']",
-        "select.origin-pattern": "value:originPattern, events:['change']"
+        "select.origin-pattern": "value:originPattern, events:['change']",
+        "select[name=inputLocale]": "value:inputLocale, events:['change']"
     },
 
     initialize: function (options) {
