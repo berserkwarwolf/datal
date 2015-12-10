@@ -11,6 +11,7 @@ from core.choices import DATASTREAM_IMPL_VALID_CHOICES
 from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
+from rest_framework import exceptions
 from core.choices import StatusChoices
 from core.v8.forms import DatastreamRequestForm
 from rest_framework import renderers
@@ -65,11 +66,11 @@ class DataStreamSerializer(ResourceSerializer):
                 data['dataset']=Dataset.objects.get(id=self.dataset['dataset_id'])
             except ObjectDoesNotExist:
                 # TODO: mejorar errores
-                raise serializers.ValidationError('Dataset no existe')
+                raise exceptions.ValidationError({'dataset':'Dataset no existe'})
 
             if data['dataset'].last_revision.impl_type not in DATASTREAM_IMPL_VALID_CHOICES:
                 # TODO: mejorar errores
-                raise serializers.ValidationError('El tipo de archivo no permite creacion de vistas')
+                raise exceptions.ValidationError({'dataset':'El tipo de archivo no permite creacion de vistas'})
 
             if 'table_id' in data:
                 table_id = data.pop('table_id')
@@ -93,7 +94,7 @@ class DataStreamSerializer(ResourceSerializer):
 
     def create(self, validated_data):
         if 'dataset' not in validated_data:
-            raise serializers.ValidationError('No hay dataset')
+            raise exceptions.ValidationError({'dataset': 'No hay dataset'})
 
         return self.getDao(DatastreamLifeCycleManager(self.context['request'].user).create(
             **validated_data)
