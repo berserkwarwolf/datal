@@ -55,7 +55,6 @@
 	{% endif %}
 {% endfor %}
 
-
 {# add spanish support for dates#}
 <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% if preferences.account_enable_sharing %}
@@ -175,6 +174,10 @@
 				{% endautoescape %}
 		{% endif %}
 {% endfor %}
+
+{% endblock %}
+
+{% block microsites_bottom_js %}
 
 <script type="text/javascript">
 $(document).ready(function(){

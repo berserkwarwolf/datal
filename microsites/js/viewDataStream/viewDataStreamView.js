@@ -39,20 +39,9 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 
 	// viewDataStreamView functions
 
-//var viewDataStreamView = Backbone.View.extend({
 	el: "body",
 
 	theDataTable: null,
-		
-	// events:{
-	// 	'click #id_embedButton': 'onEmbedButtonClicked',
-	// 	'click #id_googleSpreadSheetButton': 'onGoogleSpreadSheetButtonClicked',
-	// 	'click #id_openInfoButton, #id_openAPIButton, #id_openNotesButton': 'onOpenSidebarButtonClicked',
-	// 	'click #id_closeInfoButton, #id_closeAPIButton, #id_closeNotesButton': 'onCloseSidebarButtonClicked',
-	// 	'click #id_googleSpreadSheetButton, #id_exportToXLSButton, #id_exportToCSVButton, #id_exportButton': 'onExportButtonClicked',		
-	// 	'click #id_permalink, #id_GUID': 'onInputClicked',
-	// 	'click #id_downloadLink, #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage'	
-	// },
 	
 	initialize: function() {
 		
@@ -222,32 +211,32 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 
 	permalinkHelper: function(){
 
-		// var permalink = this.model.attributes.permaLink,
-		// 	self = this;
+		var permalink = this.model.attributes.permaLink,
+			self = this;
 
-		// $('#id_permalink').val(permalink);
+		$('#id_permalink').val(permalink);
 
-		// if (typeof(BitlyClient) != 'undefined') {
-  //     BitlyClient.shorten( permalink, function(pData){
+		if (typeof(BitlyClient) != 'undefined') {
+      BitlyClient.shorten( permalink, function(pData){
 
-		// 		var response,
-		// 		  shortUrl;
+				var response,
+				  shortUrl;
 				
-		// 		for(var r in pData.results) {
-		//     	response = pData.results[r];
-		//   		break;
-		// 		}
+				for(var r in pData.results) {
+		    	response = pData.results[r];
+		  		break;
+				}
 
-		// 		shortUrl = response['shortUrl'];
+				shortUrl = response['shortUrl'];
 
-		//     if(shortUrl){
-		//       self.model.attributes.shortUrl = shortUrl;
-		//       $('#id_permalink').val(shortUrl);
-		//     }
+		    if(shortUrl){
+		      self.model.attributes.shortUrl = shortUrl;
+		      $('#id_permalink').val(shortUrl);
+		    }
 
-		// 	});
+			});
 
-  //   }
+    }
 
 	},
 

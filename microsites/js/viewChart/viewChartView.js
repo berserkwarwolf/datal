@@ -1,14 +1,40 @@
-/**
- * Backbone View for charts and maps
- */
-var viewChartView = Backbone.View.extend({
-    el : "body",
-    chartContainer: "#id_visualizationResult",
+var viewVisualizationView = function(options) {
+    this.inheritedEvents = [];
+
+    Backbone.View.call(this, options);
+}
+
+_.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
         
-    events:{
+    // Extend functions
+
+    baseEvents: {
+
+        // Add View Visualization events as Base Events
         'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage',
         'click #id_permalink, #id_GUID': 'onInputClicked',
+
     },
+
+    events: function() {
+        var e = _.extend({}, this.baseEvents);
+
+        _.each(this.inheritedEvents, function(events) {
+            e = _.extend(e, events);
+        });
+
+        return e;
+    },
+
+    addEvents: function(eventObj) {
+        this.inheritedEvents.push(eventObj);
+        this.delegateEvents();
+    },
+
+    // viewVisualizationView functions
+
+    el : "body",
+    chartContainer: "#id_visualizationResult",
 
     initialize : function() {
 
@@ -141,33 +167,33 @@ var viewChartView = Backbone.View.extend({
         new visualizationHitsView({model: new visualizationHits(), visualization: this.model});
     },
     permalinkHelper: function(){
-        //var permalink = this.model.attributes.permaLink,
-        // debería ir permalink?!?!?!
-        var permalink = this.model.attributes.publicUrl,
-        self = this;
-$('#id_permalink').val(permalink);
+        // //var permalink = this.model.attributes.permaLink,
+        // // debería ir permalink?!?!?!
+        // var permalink = this.model.attributes.publicUrl,
+        // self = this;
+        // $('#id_permalink').val(permalink);
 
-        if (typeof(BitlyClient) != 'undefined') {
-      BitlyClient.shorten( permalink, function(pData){
+        // if (typeof(BitlyClient) != 'undefined') {
+        //     BitlyClient.shorten( permalink, function(pData){
 
-                var response,
-                  shortUrl;
+        //         var response,
+        //           shortUrl;
 
-                for(var r in pData.results) {
-                response = pData.results[r];
-                break;
-                }
+        //         for(var r in pData.results) {
+        //         response = pData.results[r];
+        //         break;
+        //         }
 
-                shortUrl = response['shortUrl'];
+        //         shortUrl = response['shortUrl'];
 
-            if(shortUrl){
-              self.model.attributes.shortUrl = shortUrl;
-              $('#id_permalink').val(shortUrl);
-            }
+        //         if(shortUrl){
+        //           self.model.attributes.shortUrl = shortUrl;
+        //           $('#id_permalink').val(shortUrl);
+        //         }
 
-            });
+        //     });
 
-    }
+        // }
 
 
     },
@@ -210,7 +236,7 @@ $('#id_permalink').val(permalink);
             overflowX = 'auto';
         }
 
-        //Calucla el alto que deberá tener el contenedor del chart
+        //Calcula el alto que deberá tener el contenedor del chart
         var height = this.$window.height() - otherHeights - 70;
         this.chartView.$el.css({
             height: height + 'px',
@@ -249,3 +275,5 @@ $('#id_permalink').val(permalink);
         return this;
     }
 });
+
+viewVisualizationView.extend = Backbone.View.extend;

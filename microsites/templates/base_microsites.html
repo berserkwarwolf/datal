@@ -58,6 +58,10 @@
 	
 	<!-- MINI FOOTER JUNAR -->
 	{% include "miniFooterJunar.html" %}
+
+{% endblock %}
+
+{% block base_bottom_js %}
 	
 	<script type="text/javascript">
 		/* <![CDATA[ */
@@ -106,6 +110,11 @@
 
 		/* ]]> */
 	</script>
+
+	{% block microsites_bottom_js %}
+		
+	{% endblock %}
+
 {% endblock %}
 
 {% block ga_code %}

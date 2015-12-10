@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load extra_tags components %}
+{% load extra_tags components plugins %}
 
 <ul class="icons">
 	<li>
@@ -22,6 +22,39 @@
 		</a>
 	</li>
 	{% endif %}
+	
+	<!-- Tabs from plugins -->
+	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+	{% for plugin in plugins %}
+		{% if plugin.is_active and plugin.microsites_view_visualization_tabs %}
+			{% autoescape off %}
+				{{ plugin.microsites_view_visualization_tabs }}
+			{% endautoescape %}
+		{% endif %}
+	{% endfor %}
+	
+	{# Dejo esto provisoriamente aca porque no me funciona el get_plugins de arriba #}
+	{# DESDE ACA #}
+	<li style="display:none;">
+		<a class="icon filter border-box sidebarIcon" id="id_openFiltersButton" rel="id_filtersSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-FILTERS' %}</span>
+		</a>
+	</li>
+	<li style="display:none;">
+		<a class="icon sort border-box sidebarIcon" id="id_openSortsButton" rel="id_sortSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-SORT' %}</span>
+		</a>
+	</li>
+	<li style="display:none;">
+		<a class="icon customviews border-box sidebarIcon" id="id_openCustomViewsButton" rel="id_customViewsSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-CUSTOMVIEWS' %}</span>
+		</a>
+	</li>
+	{# HASTA ACA #}
+
 	{% if preferences.account_pivottable %}
 		{% if chart_type != "mapchart" and 1 == 2 %}
 		<li>
