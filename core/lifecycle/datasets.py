@@ -159,9 +159,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
         self.dataset_revision.save()
             
         self._update_last_revisions()
-            
+
         # si hay DataStreamRevision publicados, no dispara la publicacion en cascada
-        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=False).exists():
+        if DataStreamRevision.objects.filter(dataset=self.dataset, last_published_revision__isnull=True).exists():
             self._publish_childs()
             
         search_dao = DatasetSearchDAOFactory().create(self.dataset_revision)
@@ -176,7 +176,6 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             datastream_revisions = DataStreamRevision.objects.select_for_update().filter(
                 dataset=self.dataset.id,
                 id=F('datastream__last_revision__id'),
-                status__in=[StatusChoices.APPROVED, StatusChoices.PENDING_REVIEW]
             )
             publish_fail = list()
             for datastream_revision in datastream_revisions:
@@ -188,13 +187,15 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                         allowed_states=[StatusChoices.APPROVED], parent_status=StatusChoices.PUBLISHED
                     )
                 except IllegalStateException:
-                    publish_fail.append(datastream_revision)
+                    # si no tiene ninguna revision publicada, que no lo agregue a la lista de fallas
+                    if datastream_revision.last_published_revision.exists():
+                        publish_fail.append(datastream_revision)
 
 
             ## Aca deberia ir lo mismo que los ds, pero para las vz?
 
             if publish_fail:
-                raise ChildNotApprovedException(self.dataset.last_revision)
+                raise ChildNotApprovedException(self.dataset.last_revision, settings.TYPE_DATASTREAM)
 
     def _unpublish_all(self):
         """ Despublica todas las revisiones del dataset y la de todos sus datastreams hijos en cascada """
@@ -344,7 +345,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.dataset_revision.id, old_status
             ))
-            raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
+            raise IllegalStateException(from_state=old_status, to_state=fields.pop('status', None), allowed_states=allowed_states)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -366,7 +367,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.id
             ))
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
+                dataset=self.dataset, user=self.user, 
+                status=fields.pop('status', StatusChoices.DRAFT), 
+                impl_details=impl_details,
                 **fields)
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a PENDING_REVISION.'.format(
                 self.dataset_revision.id
@@ -381,7 +384,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision,
-                status=old_status,
+                status=fields.pop('status', old_status), 
                 changed_fields=changed_fields,
                 **fields
             )

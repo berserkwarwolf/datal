@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 from rest_framework.decorators import detail_route
 from core.daos.datasets import DatasetDBDAO
-from api.rest.serializers import ResourceSerializer
+from api.v2.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 from core.choices import ODATA_LICENSES, ODATA_FREQUENCY, SOURCE_IMPLEMENTATION_CHOICES, SourceImplementationChoices
 from core.lifecycle.datasets import DatasetLifeCycleManager
 from rest_framework import serializers
 from rest_framework import mixins
+from rest_framework import exceptions
 from django.utils.translation import ugettext_lazy as _
 from core.choices import StatusChoices, CollectTypeChoices
 from core.forms import MimeTypeForm
@@ -86,7 +87,7 @@ class DataSetSerializer(ResourceSerializer):
             data['impl_type'] is None or 
             data['impl_type'] not in dict(SOURCE_IMPLEMENTATION_CHOICES).keys()):
                 # TODO: mejorar errores
-                raise serializers.ValidationError('Tipo de Archivo Invalido')
+                raise exceptions.ValidationError({'impl_type': 'Tipo de Archivo Invalido'})
 
         if 'license' in data:
             data['license_url'] = data.pop('license')
@@ -100,11 +101,12 @@ class DataSetSerializer(ResourceSerializer):
     def getDao(self, dataset_revision):
         return DatasetDBDAO().get(
             dataset_revision_id=dataset_revision.id,
-            language=self.context['request'].auth['language'])
+            language=self.context['request'].auth['language'],
+            published=False)
 
     def create(self, validated_data):
         if 'file_data' not in validated_data and 'end_point' not in validated_data:
-            raise serializers.ValidationError({'description': 'O end_point o file. No puede estar ambas vacias.'})
+            raise exceptions.ValidationError({'description': 'O end_point o file. No puede estar ambas vacias.'})
 
         return self.getDao(
             DatasetLifeCycleManager(self.context['request'].user).create(**validated_data)
@@ -127,3 +129,4 @@ class DataSetViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, ResourceV
     lookup_field = 'guid'
     dao_get_param = 'guid'
     data_types = ['dt']
+    app = 'microsites'

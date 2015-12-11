@@ -6,7 +6,6 @@ from django.conf import settings
 
 
 def filter(request):
-    DOC_API_URL = settings.DOC_API_URL
     if hasattr(request, 'account'):
         account = request.account
         preferences = account.get_preferences()

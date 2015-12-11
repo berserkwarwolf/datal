@@ -46,6 +46,9 @@ class ResourceSerializer(serializers.Serializer):
             # TODO: ver esto, plis
             pass
 
+        if answer['tags']:
+            answer['tags'] = filter(lambda x: x, answer['tags'])
+
         if answer['link']:
             domain = self.context['request'].auth['microsite_domain']
             answer['link'] = domain + answer['link']

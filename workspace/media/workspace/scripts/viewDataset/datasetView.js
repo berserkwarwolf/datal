@@ -112,6 +112,10 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 					datalEvents.trigger('datal:application-error', response);
 
+					if( response.status == '499'){
+						setTimeout(function(){ window.location.reload(true); }, 2000);
+					}
+
 				}
 
 			},

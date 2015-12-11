@@ -1,10 +1,10 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags plugins %}
 
 {% block SEO %}
   <title>{{datastream.title}} &middot; {{preferences.account_page_titles}}</title>
   <meta name="description" content="{{ datastream.description }}" />
-  <link rel="canonical" href="{{base_uri}}{{datastream.permalink}}" />
+  <link rel="canonical" href="http://{{preferences.account_domain}}{{datastream.datastream_id|permalink:"datastream"}}" />
 {% endblock %}
 
 {% if preferences.account_enable_sharing %}
@@ -24,6 +24,16 @@
 <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/viewDataStream.css' %}"/>
 {% endcompress %}
 <link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
+
+<!-- Styles items from plugins -->
+{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+{% for plugin in plugins %}
+    {% if plugin.is_active and plugin.microsites_view_datastream_styles %}
+        {% autoescape off %}
+            {{ plugin.microsites_view_datastream_styles }}
+        {% endautoescape %}
+    {% endif %}
+{% endfor %}
 
 <!-- JS LIBS -->
 <!--[if lt IE 9]>
@@ -68,6 +78,17 @@
 <script type="text/javascript" src="/js_microsites/viewDataStream/pivotDataStreamModel.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/viewDataStream/pivotDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endif %}
+
+<!-- Styles items from plugins -->
+{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+{% for plugin in plugins %}
+  {% if plugin.is_active and plugin.microsites_view_datastream_scripts %}
+    {% autoescape off %}
+      {{ plugin.microsites_view_datastream_scripts }}
+    {% endautoescape %}
+  {% endif %}
+{% endfor %}
+
 <script type="text/javascript" src="/js_microsites/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- BRANDED CSS -->
@@ -119,6 +140,7 @@ $(document).ready(function(){
   var dataStreaModel = new dataStream({
     id: "{{datastream.datastream_revision_id}}",
     datastream_id: "{{datastream.datastream_id}}",
+    revision_id: "{{datastream.datastream_revision_id}}",
     title: "{{datastream.title}}",
     description: "{{datastream.description|escapejs}}",
     guid: "{{datastream.guid}}",
@@ -127,8 +149,8 @@ $(document).ready(function(){
     {% for parameter in datastream.parameters %}
     parameter{{forloop.counter0}}: {name: "{{parameter.name}}", value: "{{parameter.default}}"},
     {% endfor %}
-    permaLink: "{{base_uri}}{{ datastream.permalink }}{%if url_query%}?{{url_query}}{%endif%}",
-    embedUrl: "{{ datastream.embed_url }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
+    permaLink: "http://{{preference.account.domain}}{{datastream.datastream_id|permalink:'datastream'}}{%if url_query%}?{{url_query}}{%endif%}",
+    embedUrl: "http://{{preference.account.domain}}{{ datastream.guid|embedlink:'datastream' }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{datastream.created_at|date:'c'}}",
     filter: "",
     exportCSVURL: "{% url 'datastreams-data' datastream.last_published_revision_id 'csv' %}",

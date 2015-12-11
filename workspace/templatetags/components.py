@@ -46,13 +46,6 @@ def workspace_open_data_metrics(auth_manager):
         total_datastreams = DataStream.objects.filter(user__account=account_id).count()
         c.set('total_datastreams_' + str(account_id), total_datastreams, settings.REDIS_STATS_TTL)
 
-    published_dashboards = c.get('published_dashboards_' + str(account_id))
-    if not published_dashboards:
-        cursor.execute("SELECT COUNT(1) as val FROM ao_dashboards d JOIN ao_users u ON u.id=d.user_id JOIN ao_accounts ac ON u.account_id=ac.id WHERE ac.id = %s and EXISTS(SELECT * FROM ao_dashboard_revisions b WHERE b.dashboard_id = d.id AND NOT EXISTS(SELECT * FROM ao_dashboard_revisions c WHERE c.created_at > b.created_at AND c.status = 4 AND b.dashboard_id = c.dashboard_id) AND b.status = 3)", [str(account_id)])
-        row = cursor.fetchone()
-        published_dashboards = row[0]
-        c.set('published_dashboards_' + str(account_id), published_dashboards, settings.REDIS_STATS_TTL)
-
     published_visualizations = c.get('published_visualizations_' + str(account_id))
     if not published_visualizations:
         cursor.execute("SELECT COUNT(1) as val FROM ao_visualizations d JOIN ao_users u ON u.id=d.user_id JOIN ao_accounts ac ON u.account_id=ac.id WHERE ac.id = %s and EXISTS(SELECT * FROM ao_visualizations_revisions b WHERE b.visualization_id = d.id AND NOT EXISTS(SELECT * FROM ao_visualizations_revisions c WHERE c.created_at > b.created_at AND c.status = 4 AND b.visualization_id = c.visualization_id) AND b.status = 3)", [str(account_id)])

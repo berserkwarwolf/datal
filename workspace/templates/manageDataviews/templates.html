@@ -92,8 +92,7 @@
 
     {# Edit #}
 		<% 
-      // Status Pending Review = 1
-      if( status !== 1 ){ 
+      if( [StatusChoices.DRAFT, StatusChoices.PUBLISHED].indexOf(status) >= 0) { 
     %>
     	<li class="edit">
     		<a data-id="<%=id%>" data-url="{% url 'manageDataviews.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>

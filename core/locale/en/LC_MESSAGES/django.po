@@ -550,7 +550,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "A few things to note in the request above"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/api/v1/datastreams/"
+msgstr "/api/v2/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
@@ -789,8 +789,8 @@ msgstr "Create datastream."
 msgid "EXCEPTION-ACTION-VIEW-DATASET"
 msgstr "Review the dataset."
 
-msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
-msgstr "Review dataviews, approve them and the publish."
+msgid "EXCEPTION-ACTION-ASSOCIATED-RESOURCES"
+msgstr "Review associated resources."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
 msgstr "Review datasets"
@@ -826,10 +826,10 @@ msgid "EXCEPTION-DESCRIPTION-LIFE-CYCLE"
 msgstr "We found an error on the publication cycle."
 
 msgid "EXCEPTION-TITLE-CHILD-NOT-APPROVED"
-msgstr "Dataviews need approval."
+msgstr "Associated resources need approval."
 
 msgid "EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED"
-msgstr "You need to approve the associated dataviews to publish. "
+msgstr "You need to approve one or more associated resources of type %(resource_type)s to publish. "
 
 msgid "EXCEPTION-TITLE-SAVE-ERROR"
 msgstr "Resource could not be saved."

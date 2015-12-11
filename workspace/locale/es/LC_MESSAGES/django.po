@@ -1345,6 +1345,9 @@ msgstr "URL"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Palabras clave para ayudar a identificar el contenido de tu vista"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Palabras clave para ayudar a identificar el contenido de tu conjunto de datos"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Etiquetas Recomendadas"
 
@@ -2689,7 +2692,7 @@ msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "aquí"
 
 msgid "APP-SELECT-DATASET-TEXT"
-msgstr "Seleccionar un Conjunto de datos"
+msgstr "Nueva vista"
 
 msgid "APP-SELECT-DATASTREAM-TEXT"
 msgstr "Seleccionar una Vista"
@@ -2746,7 +2749,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "El conjunto de datos ha sido puesto como borrador, y no está más disponible en el sitio de datos."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "El conjunto de datos y sus recursos asociados han sido puestos como pendientes de aprobación, y no están más disponibles en el sitio de datos."
+msgstr "El conjunto de datos se puso como borrador y sus recursos asociados han sido puestos como pendientes de aprobación, y ambos no están más disponibles en el sitio de datos."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Conjunto de datos enviado a revisión"
@@ -2908,6 +2911,9 @@ msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Crea un nuevo conjunto de datos para comenzar"
 
 msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "Nueva visualización"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
 msgstr "¿Qué vista quieres usar?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"
@@ -3186,6 +3192,9 @@ msgstr "Valor inválido"
 msgid "APP-SEARCH-PLACEHOLDER-TEXT"
 msgstr "Buscar..."
 
+msgid "APP-ALL-TYPES-TEXT"
+msgstr "Todos los tipos"
+
 msgid "APP-ALL-CATEGORIES-TEXT"
 msgstr "Todas las categorías"
 
@@ -3197,3 +3206,36 @@ msgstr "recursos disponibles"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "recursos agregados"
+
+msgid "APP-UPLOAD-FILE-LINK"
+msgstr "Desde archivo"
+
+msgid "APP-WEBSITE-LINK"
+msgstr "Desde URL o sitio web"
+
+msgid "APP-WEBSERVICE-LINK"
+msgstr "Desde servicio web"
+
+msgid "APP-LISTRESOURCES-TEXT"
+msgstr "Listado"
+
+msgid "APP-NEWFEMALE-TEXT"
+msgstr "Nueva"
+
+msgid "APP-NEWMALE-TEXT"
+msgstr "Nuevo"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "no existe, intente nuevamente con otra palabra clave."
+
+msgid "APP-FEATUREDFEMALE-TEXT"
+msgstr "Destacadas"
+
+msgid "APP-DONE-TEXT"
+msgstr "Listo"
+
+msgid "APP-EDIT-DESCRIPTION-TEXT"
+msgstr "Editar descripción"
+
+msgid "APP-EDIT-VISUALIZATION-TEXT"
+msgstr "Editar visualización"

@@ -12,7 +12,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 	},
 
 	initialize: function(options) {
-		this.visualizationCreationStepsUrl = options.visualizationCreationStepsUrl;
+
 		// Init Overlay
 		this.$el.overlay({
 			top: 'center',
@@ -59,7 +59,7 @@ var ManageDatastreamsOverlayView = Backbone.View.extend({
 				"click": "rowClicked"
 			},
 			rowClicked: function () {
-				window.location = self.visualizationCreationStepsUrl + '?datastream_revision_id=' + this.model.get('id');
+				window.location = Configuration.createVisualizationUrl + '?datastream_revision_id=' + this.model.get('id');
 			}
 		});
 

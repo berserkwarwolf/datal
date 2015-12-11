@@ -4,11 +4,11 @@
         <div id="my_datatable" class="columns clearfix relative">
             <div class="CL sidebar">
                 <div class="sidebarInner referencesContainer">
-                    {% ifequal preferences.account_home_filters 'featured_accounts' %}
-                        {% datatable_filter categories 'home' 'microsites' source_choices choices auth_manager featured_accounts=featured_accounts %}
+                    {% if has_federated_accounts %}
+                        {% datatable_filter categories 'home' 'microsites' source_choices choices auth_manager federated_accounts=federated_accounts %}
                     {% else %}
                         {% include "loadHome/resources/filter_categories.html" %}
-                    {% endifequal %}
+                    {% endif %}
                     <div class="references">
                         <strong>{% trans "HOME-REFENCES-TEXT" %}</strong> 
                         <span class="DST">{% trans "HOME-DATASET-TEXT" %}</span> 

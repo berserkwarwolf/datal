@@ -368,7 +368,10 @@ var theme6View = Backbone.Epoxy.View.extend({
 			}
 		}).on("click", function(e) {
 			e.preventDefault();
-			$(this).parent().find('input[type=file]').trigger("click");
+
+			// Esto triggerea un comportamiento erroneo en todos los campos input. Les hace abrir una ventana de subir archivo.
+			//$(this).parent().find('input[type=file]').trigger("click");
+			
 		});
 
 	},
