@@ -298,8 +298,8 @@
       <p>Agregar nuevo filtro</p>
       <select class="select-column">
           <option value="">Columna...</option>
-          <% _(columns).each(function(column, i){ %>
-            <option value="<%= i %>">Columna <%= column %></option>
+          <% _(columns).each(function(column){ %>
+            <option value="<%= column.index %>">Columna <%= column.label %></option>
           <% }); %>
       </select>  
     </div>
