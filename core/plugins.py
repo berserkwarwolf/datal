@@ -12,5 +12,5 @@ class DatalPluginPoint(PluginPoint):
 
     @classmethod
     def get_active_with_att(cls, att):
-        return filter(lambda x: x.is_active() and hasattr(x, att), cls.get_plugins())
+        return map(lambda x: getattr(x, att), filter(lambda x: x.is_active() and hasattr(x, att), cls.get_plugins()))
 
