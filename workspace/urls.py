@@ -30,6 +30,13 @@ router.register(r'resources', MultipleResourceViewSet, base_name='resources')
 router.register(r'categories', RestCategoryViewSet, base_name='categories')
 router.register(r'users', RestUserViewSet, base_name='users')
 
+# Implemento los routers que tenga el plugin
+plugins = DatalPluginPoint.get_plugins()
+for plugin in plugins:
+    if plugin.is_active() and hasattr(plugin, 'workspace_routers'):
+        for router_list in plugin.workspace_routers:
+            router.register(router_list[0], router_list[1], base_name=router_list[2])
+
 def jsi18n(request, packages=None, domain=None):
     if not domain:
         domain = 'djangojs'
