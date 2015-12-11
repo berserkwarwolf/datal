@@ -126,8 +126,7 @@ class Finder:
         elif r == 'dt':
             return "dataset_id"
 
-        for plugin in DatalPluginPoint.get_active_with_att('finder_class'):
-            finder = plugin.finder_class()
+        for finder in DatalPluginPoint.get_active_with_att('finder'):
             if finder.doc_type == r:
                 return finder.id_name
 
@@ -140,8 +139,7 @@ class Finder:
         elif doc['type'] == 'dt':
             return self.get_dataset_dictionary(doc)
 
-        for plugin in DatalPluginPoint.get_active_with_att('finder_class'):
-            finder = plugin.finder_class()
+        for finder in DatalPluginPoint.get_active_with_att('finder'):
             if finder.doc_type == r:
                 return finder.get_dictionary()
 

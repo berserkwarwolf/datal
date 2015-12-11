@@ -1,4 +1,4 @@
-{% load i18n staticfiles plugins %}
+{% load i18n staticfiles plugins_tags %}
 
 <nav class="main-navigation border-box collapsed">
 	<ul>
@@ -68,27 +68,14 @@
 		</li>
 
 		<!-- Top Nav items from plugins -->
-		{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-		{% for plugin in plugins %}
-			{% if plugin.is_active and plugin.workspace_top_nav %}
-				{% autoescape off %}
-					{{ plugin.workspace_top_nav }}
-				{% endautoescape %}
-			{% endif %}
-		{% endfor %}
+		{% plugins_call 'workspace_top_nav' %}
 
 	</ul>
 
 	<ul class="bottom-navigation">
+
 		<!-- Bottom Nav items from plugins -->
-		{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-		{% for plugin in plugins %}
-			{% if plugin.is_active and plugin.workspace_bottom_nav %}
-				{% autoescape off %}
-					{{ plugin.workspace_bottom_nav }}
-				{% endautoescape %}
-			{% endif %}
-		{% endfor %}
+		{% plugins_call 'workspace_bottom_nav' %}
 
 		{% if 'workspace.can_access_admin' in auth_manager.privileges %}
 		<!-- Settings -->

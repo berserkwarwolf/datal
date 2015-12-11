@@ -10,6 +10,7 @@ from rest_framework.compat import OrderedDict
 from rest_framework_extensions.cache.decorators import cache_response
 from django.conf import settings
 from core.rest.cache import CacheKeyConstructor
+from core.plugins import DatalPluginPoint
 
 import json
 import logging
@@ -27,7 +28,7 @@ class ResourceSerializer(serializers.Serializer):
 
     @classmethod
     def get_mapping_dict(cls):
-        return {
+        answer = {
             'title': dict(map(lambda x: (x[1], x[0] + 'i18n__title'), cls.resources)),
             'description': dict(map(lambda x: (x[1], x[0] + 'i18n__description'), cls.resources)),
             'user': dict(map(lambda x: (x[1], x[0] + '__user__name'), cls.resources)),
@@ -47,6 +48,11 @@ class ResourceSerializer(serializers.Serializer):
                 settings.TYPE_DATASTREAM: 'parameters'
             }
         }
+        for multiple_resources in DatalPluginPoint.get_active_with_att('multiple_resources'):
+            for key, value in multiple_resources.get_mapping_dict().items():
+                inner = answer.setdefault(key, {})
+                inner.update(value)
+        return answer
     
     def get_status_name(self, status_id):
         for id, valor in STATUS_CHOICES_REST:
@@ -82,14 +88,19 @@ def order_method(dic):
 
 class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
     serializer_class = ResourceSerializer
-    resources_types = (
-        (DatasetDBDAO, settings.TYPE_DATASET),
-        (DataStreamDBDAO, settings.TYPE_DATASTREAM),
-        (VisualizationDBDAO, settings.TYPE_VISUALIZATION)
-    )
+
+    def get_resources_types(self):
+        resources_types = [
+            (DatasetDBDAO, settings.TYPE_DATASET),
+            (DataStreamDBDAO, settings.TYPE_DATASTREAM),
+            (VisualizationDBDAO, settings.TYPE_VISUALIZATION)
+        ]
+        for multiple_resources in DatalPluginPoint.get_active_with_att('multiple_resources'):
+            resources_types.append(multiple_resources.get_resources_types())
+        return resources_types
         
     def get_queryset(self):
-        return map(lambda x: x(), dict(self.resources_types).keys())
+        return map(lambda x: x(), dict(self.get_resources_types()).keys())
 
     def get_status_id(self, status):
         if status:
@@ -120,7 +131,7 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
         query = self.request.query_params.get('query', None)
         user = self.request.query_params.get('user', None)
 
-        types = dict(self.resources_types)
+        types = dict(self.get_resources_types())
         resources_types = (self.request.query_params.get('resources', None) or 
                            types.values())
 

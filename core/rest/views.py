@@ -30,12 +30,14 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         order = order and order.strip('-')
         page_num = int(offset)/int(limit) + 1 if limit else 0
 
+        # tenemos en cuenta los accounts federados
+        account_ids = [x['id'] for x in request.auth['account'].account_set.values('id').all()] + [request.auth['account'].id]
         
         resources, time, facets = FinderManager(ElasticsearchFinder).search(
             query=request.query_params.get('query', ''),
             slice=int(limit) if limit else None,
             page=page_num,
-            account_id=request.auth['account'].id,
+            account_id=account_ids,
             user_id=request.user.id,
             resource=self.get_data_types(),
             order=order,

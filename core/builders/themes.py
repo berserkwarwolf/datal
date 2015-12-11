@@ -70,15 +70,11 @@ class ThemeBuilder(object):
             'config': {},
             'datastreams': [],
             'resources': [],
-            'featured_accounts': [],
-            #devuelve los ID de las cuentas federadas
-            # faltaria resolver que hacer con los featured_accounts
-            'federated_accounts': [x['id'] for x in self.account.account_set.values('id').all()],
             'categories': [],
-            'account_id': None,
+            'account_id': self.account.id,
             'template_path': None
         }
-        
+
         jsonObject = None
         if self.is_preview:
             jsonObject = json.loads(self.preferences["account_preview"], strict=False)
@@ -98,22 +94,18 @@ class ThemeBuilder(object):
                     response['resources'] = self.retrieveResourcePermalinks(
                         config['linkSection'], self.language)
 
-            # en caso de que has_featured_accounts == True, falla el SQL contenido en Account.objects.get_featured_accounts
-            # esta porción de código no funciona nunca.
-            response['has_featured_accounts'] = self.preferences['account_home_filters'] == 'featured_accounts'
-            if response['has_featured_accounts']: # the account have federated accounts (childs)
+            #devuelve los ID de las cuentas federadas
+            response['federated_accounts_ids']=[x['id'] for x in self.account.account_set.values('id').all()]
 
-                featured_accounts = Account.objects.get_featured_accounts(self.account.id)
-                response['account_id'] = [featured_account['id'] for featured_account in featured_accounts]
-
-                # bypass para eliminar el error de sql ya que el método Account.objects.get_featured_accounts no trae nada
-                response['account_id'] = response['federated_accounts']
-                for index, f in enumerate(featured_accounts):
-                    featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
-                response['featured_accounts'] = featured_accounts
+            if response['federated_accounts_ids']: # si hay IDS, es que es una cuenta federada
+                federated_accounts=[]
+                for pk in response['federated_accounts_ids']:
+                    domain = Account.objects.get(id=pk).get_preference('account.domain')
+                    name = Account.objects.get(id=pk).get_preference('account.name')
+                    federated_accounts.append({"id": pk, "domain": domain, "link": domain, "name": name})
+                response['federated_accounts'] = federated_accounts
+                response['categories'] = Category.objects.get_for_home(self.language, response['federated_accounts_ids']+[response['account_id']])
             else:
-                response['account_id'] = self.account.id
-
-            response['categories'] = Category.objects.get_for_home(self.language, response['account_id'])
+                response['categories'] = Category.objects.get_for_home(self.language, response['account_id'])
 
             return response
