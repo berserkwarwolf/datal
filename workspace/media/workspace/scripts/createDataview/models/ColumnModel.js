@@ -2,13 +2,20 @@ var ColumnModel = Backbone.Model.extend({
     defaults: {
         column: undefined,
         type: 'TEXT',
-        originPattern: undefined,
-        customPattern: undefined,
+
+        inputPattern: undefined,
+        inputCustomPattern: undefined,
 
         separatorType: 'symbol',
         thousandSeparator: undefined,
         decimalSeparator: undefined,
         inputLocale: undefined,
+
+        outputPattern: undefined,
+        outputCustomPattern: undefined,
+        inputCustomPattern: undefined,
+        numberDisplayLocale: undefined,
+        dateDisplayLocale: undefined,
     },
 
     validation: {
@@ -18,23 +25,31 @@ var ColumnModel = Backbone.Model.extend({
                 msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
             }
         ],
-        originPattern: [
+        inputPattern: [
             {
                 required: true,
                 msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
             }
         ],
 
-        displayPattern: [
+        outputPattern: [
             {
                 required: true,
                 msg: gettext('VALIDATE-REQUIREDFIELD-TEXT')
             }
         ],
 
-        customPattern: function(value, attr) {
-            if (this.get('originPattern') === 'custom') {
-                if(_.isUndefined(value)) {
+        inputCustomPattern: function(value, attr) {
+            if (this.get('inputPattern') === 'custom') {
+                if(_.isUndefined(value) || value === '') {
+                    return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+                }
+            } 
+        },
+
+        outputCustomPattern: function(value, attr) {
+            if (this.get('outputPattern') === 'custom') {
+                if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
             } 
@@ -58,6 +73,22 @@ var ColumnModel = Backbone.Model.extend({
 
         inputLocale: function(value, attr) {
             if (this.get('separatorType') === 'locale') {
+                if(_.isUndefined(value) || value === '') {
+                    return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+                }
+            } 
+        },
+
+        numberDisplayLocale: function(value, attr) {
+            if (this.get('type') === 'NUMBER') {
+                if(_.isUndefined(value) || value === '') {
+                    return gettext('VALIDATE-REQUIREDFIELD-TEXT');
+                }
+            } 
+        },
+
+        dateDisplayLocale: function(value, attr) {
+            if (this.get('type') === 'DATE') {
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }

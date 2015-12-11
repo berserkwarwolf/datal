@@ -5,10 +5,15 @@ var PatternView = Backbone.View.extend({
 
     initialize: function (options) {
         this.template = _.template( $('#pattern_template').html() );
+        this.type = options.type;
+        this.subtype = options.subtype;
     },
 
     render: function () {
-        this.$el.html(this.template());
+        this.$el.html(this.template({
+            type: this.type,
+            subtype: this.subtype
+        }));
     },
 
     onChange: function (e) {
