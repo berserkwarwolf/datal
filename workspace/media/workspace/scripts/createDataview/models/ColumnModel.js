@@ -1,4 +1,6 @@
 var ColumnModel = Backbone.Model.extend({
+    idAttribute: "column",
+
     defaults: {
         column: undefined,
         type: 'TEXT',

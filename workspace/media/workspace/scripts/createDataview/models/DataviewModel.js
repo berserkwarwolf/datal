@@ -59,8 +59,8 @@ var data_source_template = ['<dataSource>',
                 '<style/>',
             '</format>',
             '<Table>',
-                '<% _.each(columns, function (number) { %>',
-                '<Field id="column<%= number %>">',
+                '<% _.each(columns, function (column) { %>',
+                '<Field id="column<%= column.column %>">',
                     '<alias/>',
                     '<type/>',
                     '<format>',
@@ -105,7 +105,7 @@ var DataviewModel = Backbone.Model.extend({
         this.selection = new DataTableSelectedCollection();
 
         this.filters = new FiltersCollection();
-        this.formats = new Backbone.Collection();
+        this.formats = new ColumnsCollection();
     },
 
     url: '/rest/datastreams/sample.json',
@@ -283,10 +283,23 @@ var DataviewModel = Backbone.Model.extend({
         });
     },
 
+    getColumns: function () {
+        var self = this;
+        var formats = this.formats.clone();
+        var availableColumns = _.range(0, this.get('totalCols'));
+
+        _(availableColumns).each(function (columnId) {
+            if (_.isUndefined(formats.get(columnId))) {
+                formats.add({column: String(columnId)});
+            }
+        });
+        return formats.toJSON();
+    },
+
     getDataSource: function () {
         var tableId = this.get('tableId'),
             filterCount = this.filters.length,
-            columns = _.range(0, this.get('totalCols')),
+            columns = this.getColumns(),
             headerModels = this.selection.getItemsByMode('header'),
             headers = _.map(headerModels, function (model) {
                 return model.getRange().from.row;
