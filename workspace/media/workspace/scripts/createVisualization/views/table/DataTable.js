@@ -75,6 +75,7 @@ var DataTableView = Backbone.View.extend({
       columns: columns,
       manualColumnResize: true,
       manualRowResize: true,
+      stretchH: 'all'
     });
 
     // Selects a range
@@ -124,6 +125,8 @@ var DataTableView = Backbone.View.extend({
     this.listenTo(this.collection, 'remove', this.onRmSelected, this);
     this.listenTo(this.collection, 'reset', this.onReset, this);
     this.listenTo(this.collection, 'change', this.onChageSelected, this);
+
+    this.setTableHeight();
   },
 
   render: function () {
@@ -133,6 +136,27 @@ var DataTableView = Backbone.View.extend({
       self.onAddSelected(model, false);
     });
     this.table.render();
+  },
+
+  setTableHeight: function(){
+
+    $(window).resize(function(){
+
+      var table = $('.handsontable'),
+          windowHeight = $(window).height();
+
+      var tableHeight =
+        windowHeight
+      - parseFloat( $('.global-navigation').height() )
+      - parseFloat( $('.context-menu').height() )
+      - parseFloat( table.parent().css('padding-top').split('px')[0] )
+      - 30 // As margin bottom
+      ;
+
+      table.css('height', tableHeight+'px');
+
+    }).resize();
+      
   },
 
   cacheSelection: function (coords) {

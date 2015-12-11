@@ -599,6 +599,9 @@ body{background:$color-base;height:100%;min-width:998px;}
 .tabs-list .tab.tab-selected a,
 .tabs-list .tab.tab-selected a:hover{background:#fff;font-weight:bold;color:#999;cursor:default;border-bottom:1px solid #fff;margin-bottom:0;font-size:12px;}
 
+/* Tables */
+.handsontable{width:100%;overflow:hidden;}
+
 /* Implementation Types Icons */
 i.icon{display:inline;padding:2px 0 2px 21px;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:inherit;height:inherit;}
 i.icon.WEB{background-position:0 -20px;}
