@@ -39,6 +39,11 @@
 <!--[if lt IE 9]>
 <script type="text/javascript" src="/js_core/plugins/date.toISOString.js?id={{settings.VERSION_JS_CSS}}"></script>
 <![endif]-->
+<script type="text/javascript" src="/js_core/plugins/jquery.client.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/imagesPreLoader.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/flexigrid.4/source/flexigrid.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jshashtable-2.1.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Lib items from plugins -->
 {% get_plugins core.plugins.DatalPluginPoint as plugins %}
@@ -215,7 +220,6 @@ var viewVisualizationModel = {
     {% endif %}
 {% endfor %}
 
-
 var visualizationModel = new charts.models.Chart( viewVisualizationModel );
 
 visualizationModel.parse({
@@ -233,6 +237,9 @@ visualizationModel.parse({
     chart: {{ visualization_revision.chart | jsonify }},
 }); 
 
+// PROVISORIO PORQUE NO SE LE PUEDE PASAR AUN PARAMETROS DENTRO DE LOS PLUGINS
+//viewVisualizationModel['datastream_revision_id'] = "{{datastream.datastream_revision_id}}"; // Este se necesita para el data table
+visualizationModel.set('datastream_revision_id', "{{datastream.datastream_revision_id}}");
 
 var visualizationView = new viewVisualizationView({
     model: visualizationModel

@@ -123,35 +123,37 @@ var dataTableView = Backbone.View.extend({
 		}
 
 	},
-	
+
 	invoke: function(){
 
-		var dataStream = this.options.dataStream.attributes;
+		var params = [];
+		
+		// Add DataStream ID, Limit, Page
+		params.push({
+			name: 'limit',
+			value: this.model.get("rows")
+		},{
+			name: 'page',
+			value: this.model.get("page")
+		});
 
-	  var data = "&limit=" + this.model.get("rows") + "&page=" + this.model.get("page");
+		// Set flexigrid search to ''
+		$('.flexigrid input[name=q]').val('');
 
-	  // Add DataStream pArguments
-	  var params = [],
-			n = 0;
-
-		while( dataStream['parameter' + n ] != undefined ){
-			params.push('&pArgument' + n + '=' + dataStream['parameter'+n].value);
-			n++;					
-		}
-
-		if(params.length > 0){
-			data += params.join('');
-		}
-	    
-	  var ajax = $.ajax({ 
-			url: '/rest/datastreams/' + dataStream.id + '/data.json', 
+		// Add the rest of the params
+		$.merge( params, this.setPOSTParams() );
+		
+		console.log(this.dataStream.toJSON());
+			
+		var ajax = $.ajax({
+			url: '/rest/datastreams/' + this.dataStream.get('datastream_revision_id') + '/data.json', 
 		  type:'GET', 
-		  data: data, 
+		  data: params, 
 		  dataType: 'json', 
 		  beforeSend: _.bind(this.onInvokeBeforeSend, this),
 		  success: _.bind(this.onInvokeSuccess, this), 
 		  error: _.bind(this.onInvokeError, this)
-	  });
+		});
 
 	},
 
