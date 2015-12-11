@@ -73,9 +73,6 @@ var SelectDataView = Backbone.View.extend({
         this.headersOptionsView.render();
         this.headersOptionsView.hide();
         this.$('.headers-options-view').append(this.headersOptionsView.$el);
-
-
-
     },
 
     attachFiltersView: function () {
