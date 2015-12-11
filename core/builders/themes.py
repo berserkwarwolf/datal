@@ -95,7 +95,7 @@ class ThemeBuilder(object):
                         config['linkSection'], self.language)
 
             #devuelve los ID de las cuentas federadas
-            response['federated_accounts_ids']=[x['id'] for x in self.account.account_set.values('id').all()],
+            response['federated_accounts_ids']=[x['id'] for x in self.account.account_set.values('id').all()]
 
             if response['federated_accounts_ids']: # si hay IDS, es que es una cuenta federada
                 federated_accounts=[]
