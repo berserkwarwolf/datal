@@ -4,6 +4,7 @@ from django.conf import settings
 from core.search.finder import Finder, FinderManager
 import re
 import logging
+from core.plugins import DatalPluginPoint
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +81,8 @@ class ElasticsearchFinder(Finder):
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
-            self.resource = ["ds", "dt", "db", "vz"]
+            self.resource = ["ds", "dt", "vz"]
+            self.resource.extend([plugin.doc_type for plugin in DatalPluginPoint.get_active_with_att('doc_type')])
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
