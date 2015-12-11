@@ -634,6 +634,11 @@ i.icon.TNCLIMA{}
   &.alert-danger{background:$background-color-danger;color:$red;}
 }
 
+/* List groups */
+.list-group{
+  .list-group-item{display:block;margin-bottom:8px;}
+}
+
 /* Help box & Tips */
 .helpBox{
   &:first-child{background-color:$color-base-extra-light;padding:15px;float:right;margin-bottom:20px;}

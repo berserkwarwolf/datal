@@ -1,6 +1,6 @@
 var FiltersOptionsView = Backbone.View.extend({
     events: {
-        'click button.btn-clear': 'onClickClear',
+        'click a.btn-clear': 'onClickClear',
         'click button.btn-back': 'onClickBack',
         'click button.btn-ok': 'onClickOk',
         'change select.select-column': 'onChangeColumn',

@@ -3248,3 +3248,15 @@ msgstr "Selección de datos"
 
 msgid "APP-REVISION-TEXT"
 msgstr "Revisión"
+
+msgid "APP-ADVANCED-MODE-TEXT"
+msgstr "Modo avanzado"
+
+msgid "APP-SELECT-TABLE-HEADERS-TEXT"
+msgstr "Seleccionar las cabeceras de la tabla"
+
+msgid "APP-FILTER-DATA-TEXT"
+msgstr "Filtrar los datos"
+
+msgid "APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT"
+msgstr "Configurar tipo de dato y formato de columnas"
