@@ -101,7 +101,8 @@ class DataSetSerializer(ResourceSerializer):
     def getDao(self, dataset_revision):
         return DatasetDBDAO().get(
             dataset_revision_id=dataset_revision.id,
-            language=self.context['request'].auth['language'])
+            language=self.context['request'].auth['language'],
+            published=False)
 
     def create(self, validated_data):
         if 'file_data' not in validated_data and 'end_point' not in validated_data:

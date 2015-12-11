@@ -239,6 +239,7 @@ Creación, Edición y Edición Parcial de recursos.
 Al momento solo podemos crear y editar datasets y vistas. Y para poder 
 hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario.
 
+Por lo tanto la operación de edición y creación se realiza sobre las últimas revisiones de los recursos y no sobre laas últimas revisiones publicadas de los mismos.
 
 ### Datasets
 

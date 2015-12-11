@@ -62,7 +62,7 @@ class DataStreamSerializer(ResourceSerializer):
             try:
                 self.dataset = DatasetDBDAO().get(
                     self.context['request'].auth['language'],
-                    guid=guid)
+                    guid=guid, published=False)
                 data['dataset']=Dataset.objects.get(id=self.dataset['dataset_id'])
             except ObjectDoesNotExist:
                 # TODO: mejorar errores
@@ -76,7 +76,7 @@ class DataStreamSerializer(ResourceSerializer):
                 table_id = data.pop('table_id')
                 data['select_statement'] = SelectStatementBuilder().build(table_id)
                 data['data_source'] = DataSourceBuilder().build(table_id,
-                    data['dataset'].last_published_revision_id, 'microsites')
+                    data['dataset'].last_revision_id, 'microsites')
 
         if 'category' in data and data['category']:
             data['category'] = self.getCategory(data['category']).id
@@ -90,7 +90,8 @@ class DataStreamSerializer(ResourceSerializer):
     def getDao(self, datastream_revision):
         return DataStreamDBDAO().get(
             datastream_revision_id=datastream_revision.id,
-            language=self.context['request'].auth['language'])
+            language=self.context['request'].auth['language'],
+            published=False)
 
     def create(self, validated_data):
         if 'dataset' not in validated_data:
