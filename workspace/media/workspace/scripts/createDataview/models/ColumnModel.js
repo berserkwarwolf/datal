@@ -1,4 +1,4 @@
-var ColumnModel = Backbone.Model.extend({
+var ColumnModel = Backbone.Epoxy.Model.extend({
     idAttribute: "column",
 
     defaults: {
@@ -8,16 +8,28 @@ var ColumnModel = Backbone.Model.extend({
         inputPattern: undefined,
         inputCustomPattern: undefined,
 
+        inputLocale: undefined,
         separatorType: 'symbol',
         thousandSeparator: undefined,
         decimalSeparator: undefined,
-        inputLocale: undefined,
 
         outputPattern: undefined,
         outputCustomPattern: undefined,
-        inputCustomPattern: undefined,
         numberDisplayLocale: undefined,
         dateDisplayLocale: undefined,
+    },
+
+    computeds: {
+        // inputLanguaje: function() {
+        //     if (this.has('inputLocale')) {
+        //         return this.get("inputLocale").split('_')[0];
+        //     }
+        // },
+        // inputCountry: function() {
+        //     if (this.has('inputLocale')) {
+        //         return this.get("inputLocale").split('_')[1];
+        //     }
+        // }
     },
 
     validation: {
