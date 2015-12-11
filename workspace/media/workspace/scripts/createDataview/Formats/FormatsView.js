@@ -9,10 +9,13 @@ var FormatsView = Backbone.Epoxy.View.extend({
     bindings: {
         "select.select-column": "value:column, events:['change']",
         "select.select-data-type": "value:type, events:['change']",
-        'input[name="customPattern"]': "value:customPattern, events:['keyup']",
+        'input[name="inputCustomPattern"]': "value:inputCustomPattern, events:['keyup']",
+        'input[name="outputCustomPattern"]': "value:outputCustomPattern, events:['keyup']",
         "select.decimal-separator": "value:decimalSeparator, events:['change']",
         "select.thousand-separator": "value:thousandSeparator, events:['change']",
-        "select[name=inputLocale]": "value:inputLocale, events:['change']"
+        "select[name=inputLocale]": "value:inputLocale, events:['change']",
+        "select[name=numberDisplayLocale]": "value:numberDisplayLocale, events:['change']",
+        "select[name=dateDisplayLocale]": "value:dateDisplayLocale, events:['change']"
     },
 
     initialize: function (options) {
@@ -22,7 +25,8 @@ var FormatsView = Backbone.Epoxy.View.extend({
 
         this.listenTo(this.model, 'change:column', this.onChangeColumn, this);
         this.listenTo(this.model, 'change:type', this.onChangeType, this);
-        this.listenTo(this.model, 'change:originPattern', this.onChangeOriginPattern, this);
+        this.listenTo(this.model, 'change:inputPattern', this.onChangeInputPattern, this);
+        this.listenTo(this.model, 'change:outputPattern', this.onChangeOutputPattern, this);
     },
 
     render: function () {
@@ -35,21 +39,7 @@ var FormatsView = Backbone.Epoxy.View.extend({
         }));
         this.applyBindings();
 
-        this.inputPatternView = new PatternView({
-            el: this.$('.input-pattern-view'),
-        });
-        this.inputPatternView.on('change', function (value) {
-            this.model.set('originPattern', value);
-        }, this);
-        this.inputPatternView.render();
-
-        this.displayPatternView = new PatternView({
-            el: this.$('.display-pattern-view'),
-        });
-        this.displayPatternView.on('change', function (value) {
-            this.model.set('displayPattern', value);
-        }, this);
-        this.displayPatternView.render();
+        this.attachPatternViews('TEXT');
 
         Backbone.Validation.bind(this, {
             valid: function (view, attr, selector) {
@@ -59,6 +49,38 @@ var FormatsView = Backbone.Epoxy.View.extend({
                 view.setIndividualError(view.$('[name=' + attr + ']'), attr, error);
             },
         });
+    },
+
+    attachPatternViews: function (type) {
+        this.destroyChildView('inputPatternView');
+        this.inputPatternView = new PatternView({
+            el: this.$('.input-pattern-view'),
+            type: type,
+            subtype: 'input'
+        });
+        this.inputPatternView.on('change', function (value) {
+            this.model.set('inputPattern', value);
+        }, this);
+
+        this.destroyChildView('displayPatternView');
+
+        this.displayPatternView = new PatternView({
+            el: this.$('.display-pattern-view'),
+            type: type,
+            subtype: 'output'
+        });
+        this.displayPatternView.on('change', function (value) {
+            this.model.set('outputPattern', value);
+        }, this);
+        this.displayPatternView.render();
+        this.inputPatternView.render();
+    },
+
+    destroyChildView: function (childViewName) {
+        if (this[childViewName]) {
+            this[childViewName].$el.empty();
+            delete this[childViewName];
+        }
     },
 
     onClickBack: function () {
@@ -78,41 +100,39 @@ var FormatsView = Backbone.Epoxy.View.extend({
     },
 
     onChangeColumn: function (model, value) {
+        this.$('.row-data-type').toggleClass('hidden', value === '');
         if (value !== '') {
             this.model.set('excelCol', DataTableUtils.intToExcelCol(Number(value) + 1));
-            this.$('.row-data-type').removeClass('hidden');
         } else {
+            this.model.set('type', 'TEXT');
             this.model.unset('excelCol');
-            this.$('.row-data-type').addClass('hidden');
         }
     },
 
     onChangeType: function (model, value) {
-        if (value === 'TEXT') {
-            this.$('.input-output-view').addClass('hidden');
-        } else if (value === 'NUMBER' || value === 'DATE') {
-            this.$('.input-output-view').removeClass('hidden');
+        this.$('.input-output-view').toggleClass('hidden', value === 'TEXT');
+        this.$('.number-display-locale').toggleClass('hidden', value !== 'NUMBER');
+        this.$('.date-display-locale').toggleClass('hidden', value !== 'DATE');
+        this.model.set('outputPattern', '');
+        this.model.set('inputPattern', '');
+        if (value === 'NUMBER' || value === 'DATE') {
+            this.attachPatternViews(value);
         }
     },
 
-    onChangeOriginPattern: function (model, value) {
-        if (value === 'custom') {
-            this.$('.row-custom-pattern').removeClass('hidden');
-        } else {
-            this.$('.row-custom-pattern').addClass('hidden');
-        }
+    onChangeInputPattern: function (model, value) {
+        this.$('.custom-origin-pattern').toggleClass('hidden', value !== 'custom');
+    },
+
+    onChangeOutputPattern: function (model, value) {
+        this.$('.custom-display-pattern').toggleClass('hidden', value !== 'custom');
     },
 
     onChangeSeparatorType: function (e) {
         var value = $(e.currentTarget).val();
         this.model.set('separatorType', value);
-        if (value === 'symbol') {
-            this.$('.input-locale').addClass('hidden');
-            this.$('.separators').removeClass('hidden');
-        } else {
-            this.$('.input-locale').removeClass('hidden');
-            this.$('.separators').addClass('hidden');
-        }
+        this.$('.input-locale').toggleClass('hidden', value === 'symbol');
+        this.$('.separators').toggleClass('hidden', value === 'locale');
     },
 
     onChangeInput: function (e) {
@@ -135,13 +155,5 @@ var FormatsView = Backbone.Epoxy.View.extend({
             element.removeClass('has-error');
             element.next('p.has-error').remove();
         }
-    },
-
-    show: function () {
-        this.$el.removeClass('hidden');
-    },
-
-    hide: function () {
-        this.$el.addClass('hidden');
     },
 });
