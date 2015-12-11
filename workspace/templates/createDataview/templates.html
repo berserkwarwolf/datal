@@ -251,8 +251,12 @@
 
     <% if (filters.length > 0) { %>
       <div class="hot-sel-4">
-        <p>{% trans 'APP-FILTERS-TEXT' %} <a class="btn-clear" data-mode="filter">x</a></p>
-        <span class="color"></span>
+        <p>{% trans 'APP-FILTERS-TEXT' %}</p>
+        <ul>
+        <% _.each(filters, function (item) { %>
+          <li>{% trans 'APP-COLUMN-TEXT' %} <%= item.column %> <a class="btn-clear" data-mode="filter">x</a></li>
+        <% }); %>
+        </ul>
       </div>
     <% } %>
 

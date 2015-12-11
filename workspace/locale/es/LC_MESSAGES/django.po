@@ -3260,3 +3260,6 @@ msgstr "Filtrar los datos"
 
 msgid "APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT"
 msgstr "Configurar tipo de dato y formato de columnas"
+
+msgid "APP-COLUMN-TEXT"
+msgstr "Columna"

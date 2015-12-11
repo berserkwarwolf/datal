@@ -3270,3 +3270,6 @@ msgstr "Filter data"
 
 msgid "APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT"
 msgstr "Set datatype and columns format"
+
+msgid "APP-COLUMN-TEXT"
+msgstr "Column"
