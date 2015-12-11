@@ -48,6 +48,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    (r'^rest/', include(router.urls)), 
     (r'^', include_plugins(DatalPluginPoint, urls='workspace_urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
     (r'^jsi18n/$', 'django.views.i18n.javascript_catalog', js_info_dict),
@@ -77,7 +78,6 @@ urlpatterns = patterns('',
     (r'^js_workspace/(?P<path>.*)$', 'django.views.static.serve', {'document_root': os.path.join(settings.PROJECT_PATH, 'workspace', 'js')}),
     # Please leave me always as the last url pattern
     url(r'^(?P<admin_url>[A-Za-z0-9\-]+)/$', 'workspace.manageMyAccount.views.signin', name='accounts.account_signin'),
-    (r'^rest/', include(router.urls)), 
 )
 
 handler404 = 'core.views.action404'
