@@ -3258,3 +3258,15 @@ msgstr "Data selection"
 
 msgid "APP-REVISION-TEXT"
 msgstr "Revision"
+
+msgid "APP-ADVANCED-MODE-TEXT"
+msgstr "Modo avanzado"
+
+msgid "APP-SELECT-TABLE-HEADERS-TEXT"
+msgstr "Select table headers"
+
+msgid "APP-FILTER-DATA-TEXT"
+msgstr "Filter data"
+
+msgid "APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT"
+msgstr "Set datatype and columns format"

@@ -1,9 +1,9 @@
 var SelectionView = Backbone.View.extend({
     events: {
-        'click button.btn-clear': 'onClickClear',
-        'click button.btn-headers': 'onClickHeaders',
-        'click button.btn-filters': 'onClickFilters',
-        'click button.btn-formats': 'onClickFormats'
+        'click a.btn-clear': 'onClickClear',
+        'click a.btn-headers': 'onClickHeaders',
+        'click a.btn-filters': 'onClickFilters',
+        'click a.btn-formats': 'onClickFormats'
     },
 
     initialize: function (options) {
