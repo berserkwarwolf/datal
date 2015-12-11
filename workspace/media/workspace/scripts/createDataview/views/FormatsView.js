@@ -30,8 +30,17 @@ var FormatsView = Backbone.Epoxy.View.extend({
     },
 
     render: function () {
-        var columns = _.map(_.range(0, this.totalCols), function (number) {
-                return DataTableUtils.intToExcelCol(number + 1);
+        var existingColumns = this.collection.map(function (model) {
+            return Number(model.get('column'));
+        });
+        var availableCols = _.reject(_.range(0, this.totalCols), function (item) {
+            return existingColumns.indexOf(item) !== -1;
+        });
+        var columns = _.map(availableCols, function (number) {
+                return {
+                    label: DataTableUtils.intToExcelCol(number + 1),
+                    index: number
+                };
             });
 
         this.$el.html(this.template({

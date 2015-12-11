@@ -29,6 +29,7 @@ var SelectionView = Backbone.View.extend({
             headers: headers,
             total: total,
             filters: this.dataviewModel.filters.toJSON(),
+            formats: this.dataviewModel.formats.toJSON(),
             state: this.model.toJSON()
         }));
     },

@@ -112,6 +112,12 @@ var DataviewModel = Backbone.Model.extend({
 
     attachDataset: function (attributes) {
         this.dataset = new DatasetModel(attributes);
+        this.on('change:tableId', this.onChangeTableId, this);
+
+        // Trigger initially to get the default table rows and cols
+        this.listenTo(this.dataset, 'change:tables', function () {
+            this.onChangeTableId(this.dataset, 0);
+        }, this);
 
         // Dataview sources and Tags are initially cloned from those in the dataset.
         this.sources = this.dataset.sources.clone();
@@ -234,6 +240,12 @@ var DataviewModel = Backbone.Model.extend({
                 data: params,
                 dataType: 'json'
             });
+    },
+
+    onChangeTableId: function (model, value) {
+        var rows = this.dataset.get('tables')[value];
+        this.set('totalCols', rows[0].length);
+        this.set('totalRows', rows.length);
     },
 
     toFormSet: function (list, prefix) {

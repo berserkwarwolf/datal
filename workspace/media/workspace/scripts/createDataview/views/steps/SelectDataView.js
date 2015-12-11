@@ -29,10 +29,6 @@ var SelectDataView = Backbone.View.extend({
         var tableId = this.dataviewModel.get('tableId');
         var rows = this.datasetModel.get('tables')[tableId];
 
-        // TODO: move this elsewhere!
-        this.dataviewModel.set('totalRows', rows.length);
-        this.dataviewModel.set('totalCols', rows[0].length);
-
         if (this.dataTableView) {
             this.dataTableView.$('.table-view').empty();
         }

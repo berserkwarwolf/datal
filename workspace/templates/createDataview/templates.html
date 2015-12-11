@@ -363,8 +363,8 @@
         <label for="column">Columna</label>
         <select class="form-control select-column" name="column">
             <option value="">Columna...</option>
-            <% _(columns).each(function(column, i){ %>
-              <option value="<%= i %>">Columna <%= column %></option>
+            <% _(columns).each(function(column){ %>
+              <option value="<%= column.index %>">Columna <%= column.label %></option>
             <% }); %>
         </select>  
       </div>
