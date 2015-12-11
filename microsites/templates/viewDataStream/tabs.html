@@ -1,4 +1,4 @@
-{% load i18n extra_tags components plugins %}
+{% load i18n extra_tags components plugins_tags %}
 
 <ul class="icons">
 	<li>
@@ -15,36 +15,7 @@
 	</li>
 
 	<!-- Tabs from plugins -->
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_datastream_tabs %}
-			{% autoescape off %}
-				{{ plugin.microsites_view_datastream_tabs }}
-			{% endautoescape %}
-		{% endif %}
-	{% endfor %}
-	
-	{# Dejo esto provisoriamente aca porque no me funciona el get_plugins de arriba #}
-	{# DESDE ACA #}
-	<li style="display:none;">
-		<a class="icon filter border-box sidebarIcon" id="id_openFiltersButton" rel="id_filtersSidebar">
-			<i></i>
-			<span>{% trans 'VIEWDS-TABS-FILTERS' %}</span>
-		</a>
-	</li>
-	<li style="display:none;">
-		<a class="icon sort border-box sidebarIcon" id="id_openSortsButton" rel="id_sortSidebar">
-			<i></i>
-			<span>{% trans 'VIEWDS-TABS-SORT' %}</span>
-		</a>
-	</li>
-	<li style="display:none;">
-		<a class="icon customviews border-box sidebarIcon" id="id_openCustomViewsButton" rel="id_customViewsSidebar">
-			<i></i>
-			<span>{% trans 'VIEWDS-TABS-CUSTOMVIEWS' %}</span>
-		</a>
-	</li>
-	{# HASTA ACA #}
+	{% plugins_call 'microsites_view_datastream_tabs' %}
 
 	{% if preferences.account_pivottable %}
 	<li>

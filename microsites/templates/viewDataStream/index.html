@@ -1,5 +1,5 @@
 {% extends 'base_microsites.html' %}
-{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags plugins %}
+{% load i18n extra_tags core_components components compress staticfiles sass_tags local_tags plugins_tags %}
 
 {% block SEO %}
 	<title>{{datastream.title}} &middot; {{preferences.account_page_titles}}</title>
@@ -26,14 +26,7 @@
 <link type="text/css" rel="stylesheet" media="screen" href="/js_core/plugins/flexigrid.4/styles/flexigrid.pack.css" />
 
 <!-- Styles items from plugins -->
-{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_datastream_styles %}
-				{% autoescape off %}
-						{{ plugin.microsites_view_datastream_styles }}
-				{% endautoescape %}
-		{% endif %}
-{% endfor %}
+{% plugins_call 'microsites_view_datastream_styles' %}
 
 <!-- JS LIBS -->
 <!--[if lt IE 9]>
@@ -46,14 +39,7 @@
 <script type="text/javascript" src="/js_core/plugins/jquery.numberformatter-1.2.3.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Lib items from plugins -->
-{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-{% for plugin in plugins %}
-	{% if plugin.is_active and plugin.microsites_view_datastream_libs %}
-		{% autoescape off %}
-			{{ plugin.microsites_view_datastream_libs }}
-		{% endautoescape %}
-	{% endif %}
-{% endfor %}
+{% plugins_call 'microsites_view_datastream_libs' %}
 
 {# add spanish support for dates#}
 <script type="text/javascript" src="/js_core/libs/jquery_ui/jquery.ui.datepicker-es.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -89,14 +75,7 @@
 <script type="text/javascript" src="/js_microsites/viewDataStream/viewDataStreamView.js?id={{settings.VERSION_JS_CSS}}"></script>
 
 <!-- Styles items from plugins -->
-{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-{% for plugin in plugins %}
-	{% if plugin.is_active and plugin.microsites_view_datastream_scripts %}
-		{% autoescape off %}
-			{{ plugin.microsites_view_datastream_scripts }}
-		{% endautoescape %}
-	{% endif %}
-{% endfor %}
+{% plugins_call 'microsites_view_datastream_scripts' %}
 
 <!-- BRANDED CSS -->
 {% compress css %}
@@ -113,14 +92,7 @@
 {% block messageBar %}
 
 <!-- Message Bar from plugins -->
-{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-{% for plugin in plugins %}
-	{% if plugin.is_active and plugin.microsites_view_datastream_message_bar %}
-		{% autoescape off %}
-			{{ plugin.microsites_view_datastream_message_bar }}
-		{% endautoescape %}
-	{% endif %}
-{% endfor %}
+{% plugins_call 'microsites_view_datastream_message_bar' %}
 
 {% endblock %}
 
@@ -143,14 +115,7 @@
 				{% endif %}
 
 				<!-- Plugins Sidebar Includes -->
-				{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-				{% for plugin in plugins %}
-						{% if plugin.is_active and plugin.microsites_view_datastream_sidebar_includes %}
-								{% autoescape off %}
-										{{ plugin.microsites_view_datastream_sidebar_includes }}
-								{% endautoescape %}
-						{% endif %}
-				{% endfor %}
+				{% plugins_call 'microsites_view_datastream_sidebar_includes' %}
 
 			</aside>
 
@@ -166,14 +131,8 @@
 {# templates backbone #}
 {% include "viewDataStream/templates.html" %}
 
-{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_datastream_templates_backbone %}
-				{% autoescape off %}
-						{{ plugin.microsites_view_datastream_templates_backbone }}
-				{% endautoescape %}
-		{% endif %}
-{% endfor %}
+<!-- plugins templates backbone -->
+{% plugins_call 'microsites_view_datastream_templates_backbone' %}
 
 {% endblock %}
 
@@ -204,14 +163,7 @@ $(document).ready(function(){
 	}
 
   // Plugins - Extend Main Model
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-			{% if plugin.is_active and plugin.microsites_view_datastream_js_extend_main_model %}
-					{% autoescape off %}
-							{{ plugin.microsites_view_datastream_js_extend_main_model }}
-					{% endautoescape %}
-			{% endif %}
-	{% endfor %}	
+  {% plugins_call 'microsites_view_datastream_js_extend_main_model' %}
 
 	var DataStreamView = new viewDataStreamView({
 		model: new dataStream( DataStreamModel )
@@ -227,13 +179,6 @@ $(document).ready(function(){
 	{% include "viewDataStream/overlays.html" %}
 
 	<!-- overlays from plugins -->
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-			{% if plugin.is_active and plugin.microsites_view_datastream_overlays %}
-					{% autoescape off %}
-							{{ plugin.microsites_view_datastream_overlays }}
-					{% endautoescape %}
-			{% endif %}
-	{% endfor %}
+	{% plugins_call 'microsites_view_datastream_overlays' %}
 
 {% endblock %}

@@ -1,5 +1,5 @@
 {% load i18n %}
-{% load extra_tags components plugins %}
+{% load extra_tags components plugins_tags %}
 
 <div class="dataTable box relative" id="id_dataStreamContainer">
 	
@@ -29,27 +29,9 @@
     <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
   </div>
 
+	<!-- Space for render a Data Table from plugins -->
+	{% plugins_call 'microsites_view_visualization_data_table' %}
 	
-	
-
-	<!-- Tabs from plugins -->
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_visualization_data_table %}
-			{% autoescape off %}
-				{{ plugin.microsites_view_visualization_data_table }}
-			{% endautoescape %}
-		{% endif %}
-	{% endfor %}
-	
-	{# Dejo esto provisoriamente aca porque no me funciona el get_plugins de arriba #}
-	{# DESDE ACA #}
-	<div id="id_datastreamResult" style="display:none;"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
-	{# HASTA ACA #}
-	
-
-
-
   <!-- Mini Loading -->
   <div id="id_miniLoading" style="display:none;" class="absolute">{% trans 'VIEWCHART-MINILOADING-TEXT' %}</div>
 
