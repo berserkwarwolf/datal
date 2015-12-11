@@ -78,18 +78,7 @@ class DatalApiAuthentication(authentication.TokenAuthentication):
 
         # creo que en algun punto desreferencia a Account
         from core.models import Account
-        try:
-            return Account.objects.filter(
-                preference__key='account.api.domain', 
-                preference__value=domain, 
-                status = Account.ACTIVE).first()
-        except Account.DoesNotExist:
-            if domain.find(".api.dev") > -1:
-                dom = domain.split(".")[0]
-                if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
-                return Account.objects.get(pk=int(dom))
-            else:
-                return None
+        return Account.get_by_domain(domain)
 
     def resolve_application(self, request, auth_key):
         try:
