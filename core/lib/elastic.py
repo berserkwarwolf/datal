@@ -59,7 +59,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string", 
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -95,7 +96,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -130,7 +132,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
