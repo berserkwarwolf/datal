@@ -280,79 +280,85 @@
 </script>
 
 <script type="text/template" id="headers_options_template">
+  
+  <div class="row">
 
-  <button class="button small alpha back btn-back FL"></button>
+    <button class="button small alpha back btn-back FL"></button>
 
-  <div class="title">{% trans 'APP-TABLE-HEADERS-TEXT' %}</div>
-  <p>{% trans 'APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT' %}</p>
+    <div class="title">{% trans 'APP-TABLE-HEADERS-TEXT' %}</div>
+    <p>{% trans 'APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT' %}</p>
 
-  <div class="center">
-    <button class="button small red btn-clear">{% trans 'APP-CLEAR-TEXT' %}</button>
-    <button class="button small primary btn-ok">{% trans 'APP-DONE-TEXT' %}</button>
+    <div class="center">
+      <button class="button small red btn-clear">{% trans 'APP-CLEAR-TEXT' %}</button>
+      <button class="button small primary btn-ok">{% trans 'APP-DONE-TEXT' %}</button>
+    </div>
+
   </div>
 
 </script>
 
 <script type="text/template" id="filters_options_template">
 
-  <button class="button small back btn-back">{% trans 'APP-BACK-TEXT' %}</button>
+  <button class="button small alpha back btn-back FL"></button>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <h2>Filtrar datos</h2>
-      <p>Agregar nuevo filtro</p>
-      <select class="select-column">
-          <option value="">Columna...</option>
-          <% _(columns).each(function(column){ %>
-            <option value="<%= column.index %>">Columna <%= column.label %></option>
-          <% }); %>
+  <div class="title">{% trans 'APP-FILTER-DATA-TEXT' %}</div>
+  <p><strong>{% trans 'APP-ADD-NEW-FILTER-TEXT' %}</strong></p>
+
+  <div class="form-group">
+    <label>{% trans 'APP-COLUMN-TEXT' %}</label>
+    <select class="form-control select-column">
+        <option value="">{% trans 'APP-SELECT-TEXT' %}...</option>
+        <% _(columns).each(function(column){ %>
+          <option value="<%= column.index %>">{% trans 'APP-COLUMN-TEXT' %} <%= column.label %></option>
+        <% }); %>
+    </select>  
+  </div>
+
+  <div class="row-operator hidden">
+    <div class="form-group">
+      <label>{% trans 'APP-OPERATION-TEXT' %}</label>
+      <select class="form-control select-operator">
+          <option value="">{% trans 'APP-SELECT-TEXT' %}...</option>
+          <option value="00">{% trans 'APP-EQUAL-TO-TEXT' %}</option>
+          <option value="01">{% trans 'APP-NOT-EQUAL-TO-TEXT' %}</option>
+          <option value="02">{% trans 'APP-HIGHER-THAN-TEXT' %}</option>
+          <option value="03">{% trans 'APP-LOWER-THAN-TEXT' %}</option>
+          <option value="04">{% trans 'APP-CONTAINS-TEXT' %}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="row-value-type hidden">
+    <div class="form-group">
+      <label>{% trans 'APP-OPERATOR-TEXT' %}</label>
+      <select class="form-control select-value-type">
+          <option value="">{% trans 'APP-SELECT-TEXT' %}...</option>
+          <option value="fixed">{% trans 'APP-FIXED-VALUE-TEXT' %}</option>
+          <option value="parameter">{% trans 'APP-PARAMETER-TEXT' %}</option>
       </select>  
     </div>
   </div>
 
-  <div class="row row-operator hidden">
-    <div class="col-xs-12">
-      <select class="select-operator">
-          <option value="">Operación...</option>
-          <option value="00">Es igual a</option>
-          <option value="01">No es igual a</option>
-          <option value="02">Mayor que</option>
-          <option value="03">Menor que</option>
-          <option value="04">Contiene</option>
-      </select>  
+  <div class="row-fixed-value hidden">
+    <div class="form-group">
+      <label>{% trans 'APP-OPERATION-TEXT' %}</label>
+      <input class="form-control" type="text" name="default" placeholder="Ingrese valor fijo">
     </div>
   </div>
 
-  <div class="row row-value-type hidden">
-    <div class="col-xs-12">
-      <select class="select-value-type">
-          <option value="">Tipo de valor objetivo...</option>
-          <option value="fixed">Valor fijo</option>
-          <option value="parameter">Parámetro</option>
-      </select>  
-    </div>
-  </div>
-
-  <div class="row row-fixed-value hidden">
-    <div class="col-xs-12">
-      <input type="text" name="default" placeholder="Ingrese valor fijo">
-    </div>
-  </div>
-
-  <div class="row row-parameter hidden">
-    <div class="col-xs-12">
+  <div class="row-parameter hidden">
+    <div class="form-group">
       <input type="text" name="name" placeholder="Nombre">
       <input type="text" name="description" placeholder="Descripción (opcional)">
       <input type="text" name="default" placeholder="Valor por defecto">
     </div>
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="button small btn-ok">Ok</button>
-      <button class="button small btn-clear">Limpiar</button>
-    </div>
+  <div class="center">
+    <button class="button small red btn-clear">{% trans 'APP-CLEAR-TEXT' %}</button>
+    <button class="button small primary btn-ok">{% trans 'APP-DONE-TEXT' %}</button>
   </div>
+
 </script>
 
 <script type="text/template" id="formats_template">

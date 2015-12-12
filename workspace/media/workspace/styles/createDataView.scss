@@ -4,14 +4,36 @@
 @import 'mixins';
 
 /* Sidebar (then merge this with common.scss) */
-.sidebar{width:100% !important;}
+.sidebar{
+	width: 100% !important;
+
+	.form-group{
+		margin-left: 10px;
+	}
+}
+
+/* Forms (then move and merge with old forms) */
+.form-group{
+	margin-bottom: 15px;
+
+	label{
+		display: inline-block;
+	    max-width: 100%;
+	    margin-bottom: 5px;
+	}
+
+	.form-control{
+		display: block;
+    	width: 100%;
+	}
+}
 
 /* Handsontable version */
-
-.handsontable td.area{background:$modal-table-selected-color;}
+.handsontable td.area{
+	background:$modal-table-selected-color;
+}
 
 /* Identificador por color */
-
 .hot-sel-col span.color,
 td.hot-sel-col{
 	background-color:#86ad7f;

@@ -3282,3 +3282,33 @@ msgstr "Table headers"
 
 msgid "APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT"
 msgstr "Select the rows of the table that represent headers"
+
+msgid "APP-ADD-NEW-FILTER-TEXT"
+msgstr "Add new filter"
+
+msgid "APP-OPERATION-TEXT"
+msgstr "Operation"
+
+msgid "APP-EQUAL-TO-TEXT"
+msgstr "Equal to"
+
+msgid "APP-NOT-EQUAL-TO-TEXT"
+msgstr "Not equal to"
+
+msgid "APP-HIGHER-THAN-TEXT"
+msgstr "Higher than"
+
+msgid "APP-LOWER-THAN-TEXT"
+msgstr "Lower than"
+
+msgid "APP-CONTAINS-TEXT"
+msgstr "It contains"
+
+msgid "APP-OPERATOR-TEXT"
+msgstr "Operator"
+
+msgid "APP-FIXED-VALUE-TEXT"
+msgstr "Fixed value"
+
+msgid "APP-PARAMETER-TEXT"
+msgstr "Parameter"

@@ -3272,3 +3272,33 @@ msgstr "Cabeceras de la tabla"
 
 msgid "APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT"
 msgstr "Seleccionar las filas de la tabla que representan cabeceras"
+
+msgid "APP-ADD-NEW-FILTER-TEXT"
+msgstr "Agregar nuevo filtro"
+
+msgid "APP-OPERATION-TEXT"
+msgstr "Operación"
+
+msgid "APP-EQUAL-TO-TEXT"
+msgstr "Es igual a"
+
+msgid "APP-NOT-EQUAL-TO-TEXT"
+msgstr "No es igual a"
+
+msgid "APP-HIGHER-THAN-TEXT"
+msgstr "Es mayor a"
+
+msgid "APP-LOWER-THAN-TEXT"
+msgstr "Es menor a"
+
+msgid "APP-CONTAINS-TEXT"
+msgstr "Contiene"
+
+msgid "APP-OPERATOR-TEXT"
+msgstr "Operador"
+
+msgid "APP-FIXED-VALUE-TEXT"
+msgstr "Valor fijo"
+
+msgid "APP-PARAMETER-TEXT"
+msgstr "Parámetro"
