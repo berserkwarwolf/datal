@@ -3273,3 +3273,12 @@ msgstr "Set datatype and columns format"
 
 msgid "APP-COLUMN-TEXT"
 msgstr "Column"
+
+msgid "APP-CREATE-DATAVIEW-DATA-SELECTION-TIP-TEXT"
+msgstr "Select intervals to use. You can select the entire table, rows/columns, or individual cells."
+
+msgid "APP-TABLE-HEADERS-TEXT"
+msgstr "Table headers"
+
+msgid "APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT"
+msgstr "Select the rows of the table that represent headers"

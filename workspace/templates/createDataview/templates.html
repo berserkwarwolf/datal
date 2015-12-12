@@ -12,7 +12,7 @@
       </select>
       <% } %>
 
-      <div class="row selection-view">
+      <div class="selection-view">
       </div>
 
       <div class="row headers-options-view">
@@ -221,8 +221,10 @@
 
   <% if (state.mode === 'data') {%>
 
-    <% if (total > 0) { %>
-      <div class="title">{% trans 'DSCRE-SIDEBAR-COLLECTTITLE' %}</div>
+    <div class="title">{% trans 'DSCRE-SIDEBAR-COLLECTTITLE' %}</div>
+
+    <% if (total == 0) { %>
+      <p>{% trans 'APP-CREATE-DATAVIEW-DATA-SELECTION-TIP-TEXT' %}</p>
     <% } %>
 
     <% if (columns.length > 0) { %>
@@ -279,18 +281,21 @@
 
 <script type="text/template" id="headers_options_template">
 
-  <button class="button small back btn-back">Atrás</button>
+  <button class="button small alpha back btn-back FL"></button>
 
-  <h2>Cabeceras de la tabla</h2>
-  <p>Seleccionar las filas de la tabla que representan cabeceras</p>
+  <div class="title">{% trans 'APP-TABLE-HEADERS-TEXT' %}</div>
+  <p>{% trans 'APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT' %}</p>
 
-  <button class="button small btn-ok">Ok</button>
-  <button class="button small btn-clear">Limpiar</button>
+  <div class="center">
+    <button class="button small red btn-clear">{% trans 'APP-CLEAR-TEXT' %}</button>
+    <button class="button small primary btn-ok">{% trans 'APP-DONE-TEXT' %}</button>
+  </div>
+
 </script>
 
 <script type="text/template" id="filters_options_template">
 
-  <button class="button small back btn-back">Atrás</button>
+  <button class="button small back btn-back">{% trans 'APP-BACK-TEXT' %}</button>
 
   <div class="row">
     <div class="col-xs-12">

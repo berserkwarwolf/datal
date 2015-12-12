@@ -3263,3 +3263,12 @@ msgstr "Configurar tipo de dato y formato de columnas"
 
 msgid "APP-COLUMN-TEXT"
 msgstr "Columna"
+
+msgid "APP-CREATE-DATAVIEW-DATA-SELECTION-TIP-TEXT"
+msgstr "Seleccione los intervalos que desea utilizar. Puede seleccionar toda la tabla, filas/columnas, o celdas individuales."
+
+msgid "APP-TABLE-HEADERS-TEXT"
+msgstr "Cabeceras de la tabla"
+
+msgid "APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT"
+msgstr "Seleccionar las filas de la tabla que representan cabeceras"
