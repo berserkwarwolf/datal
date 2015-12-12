@@ -3312,3 +3312,15 @@ msgstr "Fixed value"
 
 msgid "APP-PARAMETER-TEXT"
 msgstr "Parameter"
+
+msgid "APP-ENTER-A-FIXED-VALUE-TEXT"
+msgstr "Enter a fixed value"
+
+msgid "APP-CONFIGURE-OPERATOR-TEXT"
+msgstr "Configure the operator"
+
+msgid "APP-PARAMETER-NAME-TEXT"
+msgstr "Parameter name"
+
+msgid "APP-OPTIONAL-TEXT"
+msgstr "Optional"

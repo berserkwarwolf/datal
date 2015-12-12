@@ -284,7 +284,6 @@
   <div class="row">
 
     <button class="button small alpha back btn-back FL"></button>
-
     <div class="title">{% trans 'APP-TABLE-HEADERS-TEXT' %}</div>
     <p>{% trans 'APP-CREATE-DATAVIEW-TABLE-HEADERS-TIP-TEXT' %}</p>
 
@@ -300,7 +299,6 @@
 <script type="text/template" id="filters_options_template">
 
   <button class="button small alpha back btn-back FL"></button>
-
   <div class="title">{% trans 'APP-FILTER-DATA-TEXT' %}</div>
   <p><strong>{% trans 'APP-ADD-NEW-FILTER-TEXT' %}</strong></p>
 
@@ -340,17 +338,26 @@
   </div>
 
   <div class="row-fixed-value hidden">
+    <p><strong>{% trans 'APP-CONFIGURE-OPERATOR-TEXT' %}</strong></p>
     <div class="form-group">
-      <label>{% trans 'APP-OPERATION-TEXT' %}</label>
-      <input class="form-control" type="text" name="default" placeholder="Ingrese valor fijo">
+      <label>{% trans 'APP-ENTER-A-FIXED-VALUE-TEXT' %}</label>
+      <input class="form-control" type="text" name="default">
     </div>
   </div>
 
   <div class="row-parameter hidden">
+    <p><strong>{% trans 'APP-CONFIGURE-OPERATOR-TEXT' %}</strong></p>
     <div class="form-group">
-      <input type="text" name="name" placeholder="Nombre">
-      <input type="text" name="description" placeholder="Descripción (opcional)">
-      <input type="text" name="default" placeholder="Valor por defecto">
+      <label>{% trans 'APP-PARAMETER-NAME-TEXT' %}</label>
+      <input class="form-control" type="text" name="name">
+    </div>
+    <div class="form-group">
+      <label>{% trans 'APP-DESCRIPTION-TEXT' %} ({% trans 'APP-OPTIONAL-TEXT' %})</label>
+      <textarea class="form-control" name="description"></textarea>
+    </div>
+    <div class="form-group">
+      <label>{% trans 'WORKSPACE-PARAM-DEFAULT' %}</label>
+      <input class="form-control" type="text" name="default">
     </div>
   </div>
 

@@ -3302,3 +3302,15 @@ msgstr "Valor fijo"
 
 msgid "APP-PARAMETER-TEXT"
 msgstr "Parámetro"
+
+msgid "APP-ENTER-A-FIXED-VALUE-TEXT"
+msgstr "Ingrese un valor fijo"
+
+msgid "APP-CONFIGURE-OPERATOR-TEXT"
+msgstr "Configure el operador"
+
+msgid "APP-PARAMETER-NAME-TEXT"
+msgstr "Nombre del parámetro"
+
+msgid "APP-OPTIONAL-TEXT"
+msgstr "Optional"
