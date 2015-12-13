@@ -298,6 +298,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         if 'status' in fields.keys():
             form_status = int(fields.pop('status', None))
+        else:
+            form_status = StatusChoices.DRAFT
+
 
         old_status = self.datastream_revision.status
 

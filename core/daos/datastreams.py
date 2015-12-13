@@ -19,7 +19,7 @@ from core import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from django.core.exceptions import FieldError
 
-from core.choices import STATUS_CHOICES, StatusChoices
+from core.choices import STATUS_CHOICES, StatusChoices, ChannelTypes
 from core.models import DatastreamI18n, DataStream, DataStreamRevision, Category, VisualizationRevision, DataStreamHits, Setting, DataStreamParameter
 
 from core.lib.elastic import ElasticsearchIndex
@@ -46,7 +46,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             # Create a new datastream (TITLE is for automatic GUID creation)
             datastream = DataStream.objects.create(user=user, title=fields['title'])
 
-        if isinstance(fields['category'], int):
+        if isinstance(fields['category'], int) or isinstance(fields['category'], long):
             fields['category'] = Category.objects.get(id=fields['category'])
 
         datastream_revision = DataStreamRevision.objects.create(
@@ -160,6 +160,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             tags=tags,
             sources=sources,
             parameters=parameters,
+            data_source=datastream_revision.data_source,
+            select_statement=datastream_revision.select_statement,
             slug= slugify(datastreami18n.title)
         )
 
@@ -423,7 +425,8 @@ class DatastreamSearchDAO():
                      'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
-                     'hits': 0,
+                     'web_hits': 0,
+                     'api_hits': 0,
                      'end_point': self.datastream_revision.dataset.last_published_revision.end_point,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
@@ -470,6 +473,8 @@ class DatastreamHitsDAO():
     # cache ttl, 1 hora
     TTL=3600 
 
+    CHANNEL_TYPE=("web","api")
+
     def __init__(self, datastream):
         self.datastream = datastream
         if isinstance(self.datastream, dict):
@@ -507,12 +512,12 @@ class DatastreamHitsDAO():
         # armo el documento para actualizar el index.
         doc={'docid':"DS::%s" % guid,
                 "type": "ds",
-                "script": "ctx._source.fields.hits+=1"}
+                "script": "ctx._source.fields.%s_hits+=1" % self.CHANNEL_TYPE[channel_type]}
 
         return self.search_index.update(doc)
 
-    def count(self):
-        return DataStreamHits.objects.filter(datastream_id=self.datastream_id).count()
+    def count(self, channel_type=ChannelTypes.WEB):
+        return DataStreamHits.objects.filter(datastream_id=self.datastream_id, channel_type=channel_type).count()
 
     def count_by_days(self, day=30, channel_type=None):
         """trae un dict con los hits totales de los ultimos day y los hits particulares de los días desde day hasta today"""

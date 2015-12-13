@@ -70,13 +70,11 @@ class ThemeBuilder(object):
             'config': {},
             'datastreams': [],
             'resources': [],
-            #devuelve los ID de las cuentas federadas
-            'federated_accounts_ids': [x['id'] for x in self.account.account_set.values('id').all()],
             'categories': [],
             'account_id': self.account.id,
             'template_path': None
         }
-        
+
         jsonObject = None
         if self.is_preview:
             jsonObject = json.loads(self.preferences["account_preview"], strict=False)
@@ -95,6 +93,9 @@ class ThemeBuilder(object):
                 if 'linkSection' in config:
                     response['resources'] = self.retrieveResourcePermalinks(
                         config['linkSection'], self.language)
+
+            #devuelve los ID de las cuentas federadas
+            response['federated_accounts_ids']=[x['id'] for x in self.account.account_set.values('id').all()]
 
             if response['federated_accounts_ids']: # si hay IDS, es que es una cuenta federada
                 federated_accounts=[]

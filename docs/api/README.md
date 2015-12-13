@@ -141,6 +141,7 @@ y sino se pueden pasar los siguientes parametros para ordenar o filtrar la búsq
 - **offset**: a partir de que datastream traer el resultado (se usa para paginar)
 - **limit**: junto con offset se usa para limitar la cantidad de resultados 
 - **order**: pudiendo ser su valor *top* o *last* y ordenando el resultado según esos criterios.
+- **categories**: listado de categorias
 
 Cuando se aplican limites a las busquedas el resultado se devuelve encapsulando los objetos en otros paramteros.
 
@@ -239,6 +240,7 @@ Creación, Edición y Edición Parcial de recursos.
 Al momento solo podemos crear y editar datasets y vistas. Y para poder 
 hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario.
 
+Por lo tanto la operación de edición y creación se realiza sobre las últimas revisiones de los recursos y no sobre laas últimas revisiones publicadas de los mismos.
 
 ### Datasets
 

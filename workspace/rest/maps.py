@@ -14,6 +14,7 @@ class RestMapViewSet(ResourceViewSet):
     data_types = ['vz']
     dao_pk = 'visualization_revision_id'
     app = 'workspace'
+    published = False
 
     @detail_route(methods=['get'])
     def data(self, request, format=None, *args, **kwargs):

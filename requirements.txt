@@ -43,7 +43,7 @@ zope.interface==4.1.1
 python-sftp-client==0.2
 django-post-office==1.1.2
 django-model-utils==2.2
-djangorestframework==3.2.0
+djangorestframework==3.2.5
 djangorestframework-jsonp==1.0.2
 elasticsearch
 PyVirtualDisplay==0.1.5
