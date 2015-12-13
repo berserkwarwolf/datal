@@ -3324,3 +3324,18 @@ msgstr "Parameter name"
 
 msgid "APP-OPTIONAL-TEXT"
 msgstr "Optional"
+
+msgid "APP-CONFIGURE-A-COLUMN-TEXT"
+msgstr "Configure column"
+
+msgid "APP-COLUMN-DATA-TYPE-TEXT"
+msgstr "Column data type"
+
+msgid "APP-TEXT-TEXT"
+msgstr "Text"
+
+msgid "APP-NUMBER-TEXT"
+msgstr "Number"
+
+msgid "APP-DATE-TEXT"
+msgstr "Date"

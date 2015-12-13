@@ -3313,4 +3313,19 @@ msgid "APP-PARAMETER-NAME-TEXT"
 msgstr "Nombre del parámetro"
 
 msgid "APP-OPTIONAL-TEXT"
-msgstr "Optional"
+msgstr "Opcional"
+
+msgid "APP-CONFIGURE-A-COLUMN-TEXT"
+msgstr "Configurar una columna"
+
+msgid "APP-COLUMN-DATA-TYPE-TEXT"
+msgstr "Tipo de dato de la columna"
+
+msgid "APP-TEXT-TEXT"
+msgstr "Texto"
+
+msgid "APP-NUMBER-TEXT"
+msgstr "Número"
+
+msgid "APP-DATE-TEXT"
+msgstr "Fecha"

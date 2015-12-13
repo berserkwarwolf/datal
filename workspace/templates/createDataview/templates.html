@@ -370,322 +370,344 @@
 
 <script type="text/template" id="formats_template">
 
-  <button class="button small back btn-back">Atrás</button>
-  <h3>Data types and Formats</h3>
+  <button class="button small alpha back btn-back FL"></button>
+  <div class="title">{% trans 'APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT' %}</div>
+  <p><strong>{% trans 'APP-CONFIGURE-A-COLUMN-TEXT' %}</strong></p>
 
-  <h5><strong>Configure una columna</strong></h5>
-
-  <div class="row">
-    <div class="col-xs-12">
-      <div class="form-group">
-        <label for="column">Columna</label>
-        <select class="form-control select-column" name="column">
-            <option value="">Columna...</option>
-            <% _(columns).each(function(column){ %>
-              <option value="<%= column.index %>">Columna <%= column.label %></option>
-            <% }); %>
-        </select>  
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="column">{% trans 'APP-COLUMN-TEXT' %}</label>
+    <select class="form-control select-column" name="column">
+        <option value="">{% trans 'APP-SELECT-TEXT' %}...</option>
+        <% _(columns).each(function(column){ %>
+          <option value="<%= column.index %>">{% trans 'APP-COLUMN-TEXT' %} <%= column.label %></option>
+        <% }); %>
+    </select>  
   </div>
 
   <div class="row row-data-type hidden">
-    <div class="col-xs-12">
-    <label>Tipo de dato de la columna</label>
+    <div class="form-group">
+      <label>{% trans 'APP-COLUMN-DATA-TYPE-TEXT' %}</label>
       <select class="form-control select-data-type" name="type">
-          <option value="TEXT">Text</option>
-          <option value="NUMBER">Number</option>
-          <option value="DATE">Date</option>
+          <option value="TEXT">{% trans 'APP-TEXT-TEXT' %}</option>
+          <option value="NUMBER">{% trans 'APP-NUMBER-TEXT' %}</option>
+          <option value="DATE">{% trans 'APP-DATE-TEXT' %}</option>
       </select>  
     </div>
   </div>
 
-
   <div class="input-output-view hidden">
 
-    <h5><strong>Configure el formato</strong></h5>
+    <p><strong>Configure el formato</strong></p>
+    <div role="separator" class="divider divider-xs"></div>
 
-    <h4>Formato Origen</h4>
-    
-    <div class="row row-value-type">
-      <div class="col-xs-12">
-        <label>Cual es el patrón del formato de origen?</label>
-        <div class="input-pattern-view" name="inputPattern"></div>
-      </div>
-    </div>
+    <div class="tabs hash-tabs">
+      <article class="tab-container">
 
-    <div class="row custom-origin-pattern hidden">
-      <div class="col-xs-12">
-      <label>Patrón personalizado</label>
-        <input type="text" name="inputCustomPattern" placeholder="Ingrese valor fijo">
-      </div>
-    </div>
+        <nav class="tab-nav tab-nav-sm" role="tablist">
+          <ul>
+            <li>
+              <a href="#formatorigin" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#formatorigin" tab-index="0">Formato origen</a>
+            </li>
+            <li>
+              <a href="#formatoutput" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#formatoutput" tab-index="-1">Formato salida</a>
+            </li>
+          </ul>
+        </nav>
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="radio">
-          <label>
-            <input type="radio" name="separator" value="symbol" checked></input>
-            Symbols
-          </label>
+        <div role="separator" class="divider divider-xs"></div>
+
+        <div class="tab-pane-container">
+
+          <section id="formatorigin" role="tabpanel" aria-labeledby="0" style="display: block;">
+          
+            <div class="row-value-type">
+              <div class="form-group">
+                <label>Cual es el patrón del formato de origen?</label>
+                <div class="input-pattern-view" name="inputPattern"></div>
+              </div>
+            </div>
+
+            <div class="custom-origin-pattern hidden">
+              <div class="form-group">
+                <label>Patrón personalizado</label>
+                <input class="form-control" type="text" name="inputCustomPattern">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Indicadores de miles / decimales</label>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="separator" value="symbol" checked></input>
+                    Symbols
+                  </label>
+                </div>
+                <div class="radio">
+                  <label>
+                    <input type="radio" name="separator" value="locale"></input>
+                    Locale
+                  </label>
+                </div>
+            </div>
+
+            <div class="separators">
+
+              <div class="form-group">
+                  <label>Thousands indicator</label> 
+                  <select class="form-control thousand-separator" name="thousandSeparator">
+                    <option value="" selected="selected">Select...</option>
+                    <option value=".">. (dot)</option>
+                    <option value=",">, (comma)</option>
+                  </select>
+              </div>
+
+              <div class="form-group">
+                  <label>Decimal indicator</label> 
+                  <select class="form-control decimal-separator" name="decimalSeparator">
+                    <option value="" selected="selected">Select...</option>
+                    <option value=".">. (dot)</option>
+                    <option value=",">, (comma)</option>
+                  </select>
+              </div>
+
+            </div>
+
+            <div class="input-locale hidden">
+              <div class="form-group">
+                <label>Localización</label>
+                <select class="form-control" name="inputLocale">
+                  <option selected="selected" value="">Select...</option>
+                  <option value="en">English</option>
+                  <option value="en_us">English (United States)</option>
+                  <option value="es">Spanish (Spain)</option>
+                  <option value="es_mx">Spanish (Mexico)</option>
+                  <option value="es_gt">Spanish (Guatemala)</option>
+                  <option value="es_cr">Spanish (Costa Rica)</option>
+                  <option value="es_pa">Spanish (Panama)</option>
+                  <option value="es_do">Spanish (Dominican Republic)</option>
+                  <option value="es_ve">Spanish (Venezuela)</option>
+                  <option value="es_co">Spanish (Colombia)</option>
+                  <option value="es_pe">Spanish (Peru)</option>
+                  <option value="es_ar">Spanish (Argentina)</option>
+                  <option value="es_ec">Spanish (Ecuador)</option>
+                  <option value="es_cl">Spanish (Chile)</option>
+                  <option value="es_uy">Spanish (Uruguay)</option>
+                  <option value="es_py">Spanish (Paraguay)</option>
+                  <option value="es_bo">Spanish (Bolivia)</option>
+                  <option value="es_sv">Spanish (El Salvador)</option>
+                  <option value="es_hn">Spanish (Honduras)</option>
+                  <option value="es_ni">Spanish (Nicaragua)</option>
+                  <option value="es_pr">Spanish (Puerto Rico)</option>
+                  <option value="pt_br">Portuguese (Brazil)</option>
+                  <option value="pt">Portuguese (Portugal)</option>
+                  <option value="af">Afrikaans</option>
+                  <option value="sq">Albanian</option>
+                  <option value="ar_sa">Arabic (Saudi Arabia)</option>
+                  <option value="ar_iq">Arabic (Iraq)</option>
+                  <option value="ar_eg">Arabic (Egypt)</option>
+                  <option value="ar_ly">Arabic (Libya)</option>
+                  <option value="ar_dz">Arabic (Algeria)</option>
+                  <option value="ar_ma">Arabic (Morocco)</option>
+                  <option value="ar_tn">Arabic (Tunisia)</option>
+                  <option value="ar_om">Arabic (Oman)</option>
+                  <option value="ar_ye">Arabic (Yemen)</option>
+                  <option value="ar_sy">Arabic (Syria)</option>
+                  <option value="ar_jo">Arabic (Jordan)</option>
+                  <option value="ar_lb">Arabic (Lebanon)</option>
+                  <option value="ar_kw">Arabic (Kuwait)</option>
+                  <option value="ar_ae">Arabic (U.A.E.)</option>
+                  <option value="ar_bh">Arabic (Bahrain)</option>
+                  <option value="ar_qa">Arabic (Qatar)</option>
+                  <option value="eu">Basque (Basque)</option>
+                  <option value="bg">Bulgarian</option>
+                  <option value="be">Belarusian</option>
+                  <option value="ca">Catalan</option>
+                  <option value="zh_tw">Chinese (Taiwan)</option>
+                  <option value="zh_cn">Chinese (PRC)</option>
+                  <option value="zh_hk">Chinese (Hong Kong SAR)</option>
+                  <option value="zh_sg">Chinese (Singapore)</option>
+                  <option value="hr">Croatian</option>
+                  <option value="cs">Czech</option>
+                  <option value="da">Danish</option>
+                  <option value="nl">Dutch (Standard)</option>
+                  <option value="nl_be">Dutch (Belgium)</option>
+                  <option value="en_gb">English (United Kingdom)</option>
+                  <option value="en_au">English (Australia)</option>
+                  <option value="en_ca">English (Canada)</option>
+                  <option value="en_nz">English (New Zealand)</option>
+                  <option value="en_ie">English (Ireland)</option>
+                  <option value="en_za">English (South Africa)</option>
+                  <option value="en_jm">English (Jamaica)</option>
+                  <option value="en">English (Caribbean)</option>
+                  <option value="en_bz">English (Belize)</option>
+                  <option value="en_tt">English (Trinidad)</option>
+                  <option value="et">Estonian</option>
+                  <option value="fo">Faeroese</option>
+                  <option value="fa">Farsi</option>
+                  <option value="fi">Finnish</option>
+                  <option value="fr">French (Standard)</option>
+                  <option value="fr_be">French (Belgium)</option>
+                  <option value="fr_ca">French (Canada)</option>
+                  <option value="fr_ch">French (Switzerland)</option>
+                  <option value="fr_lu">French (Luxembourg)</option>
+                  <option value="gd">Gaelic (Scotland)</option>
+                  <option value="ga">Irish</option>
+                  <option value="de">German (Standard)</option>
+                  <option value="de_ch">German (Switzerland)</option>
+                  <option value="de_at">German (Austria)</option>
+                  <option value="de_lu">German (Luxembourg)</option>
+                  <option value="de_li">German (Liechtenstein)</option>
+                  <option value="el">Greek</option>
+                  <option value="he">Hebrew</option>
+                  <option value="hi">Hindi</option>
+                  <option value="hu">Hungarian</option>
+                  <option value="is">Icelandic</option>
+                  <option value="id">Indonesian</option>
+                  <option value="it">Italian (Standard)</option>
+                  <option value="it_ch">Italian (Switzerland)</option>
+                  <option value="ja">Japanese</option>
+                  <option value="ko">Korean</option>
+                  <option value="ko">Korean (Johab)</option>
+                  <option value="lv">Latvian</option>
+                  <option value="lt">Lithuanian</option>
+                  <option value="mk">Macedonian (FYROM)</option>
+                  <option value="ms">Malaysian</option>
+                  <option value="mt">Maltese</option>
+                  <option value="no">Norwegian (Bokmal)</option>
+                  <option value="no">Norwegian (Nynorsk)</option>
+                  <option value="pl">Polish</option>
+                  <option value="rm">Rhaeto-Romanic </option>
+                  <option value="ro">Romanian</option>
+                  <option value="ro_mo">Romanian (Republic of Moldova)</option>
+                  <option value="ru">Russian</option>
+                  <option value="ru_mo">Russian (Republic of Moldova)</option>
+                  <option value="sz">Sami (Lappish)</option>
+                  <option value="sr">Serbian (Cyrillic)</option>
+                  <option value="sr">Serbian (Latin)</option>
+                  <option value="sk">Slovak</option>
+                  <option value="sl">Slovenian</option>
+                  <option value="sb">Sorbian</option>
+                  <option value="sx">Sutu</option>
+                  <option value="sv">Swedish</option>
+                  <option value="sv_fi">Swedish (Finland)</option>
+                  <option value="th">Thai</option>
+                  <option value="ts">Tsonga</option>
+                  <option value="tn">Tswana</option>
+                  <option value="tr">Turkish</option>
+                  <option value="uk">Ukrainian</option>
+                  <option value="ur">Urdu</option>
+                  <option value="ve">Venda</option>
+                  <option value="vi">Vietnamese</option>
+                  <option value="xh">Xhosa</option>
+                  <option value="ji">Yiddish</option>
+                  <option value="zu">Zulu</option>
+                </select>
+              </div>
+            </div>
+
+          </section>
+
+          <section id="formatoutput" role="tabpanel" aria-labeledby="1" style="display:none;">
+            
+            <div class="row-value-type">
+              <div class="form-group">
+                <label>Cual es el patrón del formato de salida?</label>
+                <div class="display-pattern-view" name="outputPattern"></div>
+              </div>
+            </div>
+
+            <div class="custom-display-pattern hidden">
+              <div class="form-group">
+              <label>Patrón personalizado</label>
+                <input class="form-control" type="text" name="outputCustomPattern">
+              </div>
+            </div>
+
+            <div class="number-display-locale">
+              <div class="form-group">
+                <label>Localización</label>
+                <select class="form-control" name="numberDisplayLocale">
+                  <option value="" selected="selected">Select...</option>
+                  <option value="us">United States</option>
+                  <option value="es">Spain &amp; Latam</option>
+                  <option value="ae">Arab Emirates</option>
+                  <option value="eg">Egypt</option>
+                  <option value="il">Israel</option>
+                  <option value="jp">Japan</option>
+                  <option value="kr">South Korea</option>
+                  <option value="th">Thailand</option>
+                  <option value="cn">China</option>
+                  <option value="hk">Hong Kong</option>
+                  <option value="tw">Taiwan</option>
+                  <option value="au">Australia</option>
+                  <option value="ca">Canada</option>
+                  <option value="gb">Great Britain</option>
+                  <option value="in">India</option>
+                  <option value="de">Germany</option>
+                  <option value="vn">Vietnam</option>
+                  <option value="dk">Denmark</option>
+                  <option value="at">Austria</option>
+                  <option value="gr">Greece</option>
+                  <option value="br">Brazil</option>
+                  <option value="cz">Czech</option>
+                  <option value="fr">France</option>
+                  <option value="fi">Finland</option>
+                  <option value="ru">Russia</option>
+                  <option value="se">Sweden</option>
+                  <option value="ch">Switzerland</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="date-display-locale">
+              <div class="form-group">
+                <label>Localización</label>
+                <select class="form-control" name="dateDisplayLocale">
+                  <option selected="selected" value="">Select...</option>
+                  <option value="en">English</option>
+                  <option value="en_us">English (United States)</option>
+                  <option value="es">Spanish (Spain)</option>
+                  <option value="es_mx">Spanish (Mexico)</option>
+                  <option value="es_gt">Spanish (Guatemala)</option>
+                  <option value="es_cr">Spanish (Costa Rica)</option>
+                  <option value="es_pa">Spanish (Panama)</option>
+                  <option value="es_do">Spanish (Dominican Republic)</option>
+                  <option value="es_ve">Spanish (Venezuela)</option>
+                  <option value="es_co">Spanish (Colombia)</option>
+                  <option value="es_pe">Spanish (Peru)</option>
+                  <option value="es_ar">Spanish (Argentina)</option>
+                  <option value="es_ec">Spanish (Ecuador)</option>
+                  <option value="es_cl">Spanish (Chile)</option>
+                  <option value="es_uy">Spanish (Uruguay)</option>
+                  <option value="es_py">Spanish (Paraguay)</option>
+                  <option value="es_bo">Spanish (Bolivia)</option>
+                  <option value="es_sv">Spanish (El Salvador)</option>
+                  <option value="es_hn">Spanish (Honduras)</option>
+                  <option value="es_ni">Spanish (Nicaragua)</option>
+                  <option value="es_pr">Spanish (Puerto Rico)</option>
+                </select>
+              </div>
+            </div>
+
+          </section>
+
         </div>
-        <div class="radio">
-          <label>
-            <input type="radio" name="separator" value="locale"></input>
-            Locale
-          </label>
-        </div>
-      </div>
-    </div>
 
-    <div class="separators">
-      <div class="row">
-        <div class="col-xs-12">
-          <label>Thousands indicator</label> 
-          <select class="form-control thousand-separator" name="thousandSeparator">
-            <option value="" selected="selected">Select...</option>
-            <option value=".">. (dot)</option>
-            <option value=",">, (comma)</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="row">
-        <div class="col-xs-12">
-          <label>Decimal indicator</label> 
-          <select class="form-control decimal-separator" name="decimalSeparator">
-            <option value="" selected="selected">Select...</option>
-            <option value=".">. (dot)</option>
-            <option value=",">, (comma)</option>
-          </select>
-        </div>
-      </div>
-    </div>
-
-    <div class="row input-locale hidden">
-      <div class="col-xs-12">
-        <label>Localización</label>
-        <select class="form-control" name="inputLocale">
-          <option selected="selected" value="">Select...</option>
-          <option value="en">English</option>
-          <option value="en_us">English (United States)</option>
-          <option value="es">Spanish (Spain)</option>
-          <option value="es_mx">Spanish (Mexico)</option>
-          <option value="es_gt">Spanish (Guatemala)</option>
-          <option value="es_cr">Spanish (Costa Rica)</option>
-          <option value="es_pa">Spanish (Panama)</option>
-          <option value="es_do">Spanish (Dominican Republic)</option>
-          <option value="es_ve">Spanish (Venezuela)</option>
-          <option value="es_co">Spanish (Colombia)</option>
-          <option value="es_pe">Spanish (Peru)</option>
-          <option value="es_ar">Spanish (Argentina)</option>
-          <option value="es_ec">Spanish (Ecuador)</option>
-          <option value="es_cl">Spanish (Chile)</option>
-          <option value="es_uy">Spanish (Uruguay)</option>
-          <option value="es_py">Spanish (Paraguay)</option>
-          <option value="es_bo">Spanish (Bolivia)</option>
-          <option value="es_sv">Spanish (El Salvador)</option>
-          <option value="es_hn">Spanish (Honduras)</option>
-          <option value="es_ni">Spanish (Nicaragua)</option>
-          <option value="es_pr">Spanish (Puerto Rico)</option>
-          <option value="pt_br">Portuguese (Brazil)</option>
-          <option value="pt">Portuguese (Portugal)</option>
-          <option value="af">Afrikaans</option>
-          <option value="sq">Albanian</option>
-          <option value="ar_sa">Arabic (Saudi Arabia)</option>
-          <option value="ar_iq">Arabic (Iraq)</option>
-          <option value="ar_eg">Arabic (Egypt)</option>
-          <option value="ar_ly">Arabic (Libya)</option>
-          <option value="ar_dz">Arabic (Algeria)</option>
-          <option value="ar_ma">Arabic (Morocco)</option>
-          <option value="ar_tn">Arabic (Tunisia)</option>
-          <option value="ar_om">Arabic (Oman)</option>
-          <option value="ar_ye">Arabic (Yemen)</option>
-          <option value="ar_sy">Arabic (Syria)</option>
-          <option value="ar_jo">Arabic (Jordan)</option>
-          <option value="ar_lb">Arabic (Lebanon)</option>
-          <option value="ar_kw">Arabic (Kuwait)</option>
-          <option value="ar_ae">Arabic (U.A.E.)</option>
-          <option value="ar_bh">Arabic (Bahrain)</option>
-          <option value="ar_qa">Arabic (Qatar)</option>
-          <option value="eu">Basque (Basque)</option>
-          <option value="bg">Bulgarian</option>
-          <option value="be">Belarusian</option>
-          <option value="ca">Catalan</option>
-          <option value="zh_tw">Chinese (Taiwan)</option>
-          <option value="zh_cn">Chinese (PRC)</option>
-          <option value="zh_hk">Chinese (Hong Kong SAR)</option>
-          <option value="zh_sg">Chinese (Singapore)</option>
-          <option value="hr">Croatian</option>
-          <option value="cs">Czech</option>
-          <option value="da">Danish</option>
-          <option value="nl">Dutch (Standard)</option>
-          <option value="nl_be">Dutch (Belgium)</option>
-          <option value="en_gb">English (United Kingdom)</option>
-          <option value="en_au">English (Australia)</option>
-          <option value="en_ca">English (Canada)</option>
-          <option value="en_nz">English (New Zealand)</option>
-          <option value="en_ie">English (Ireland)</option>
-          <option value="en_za">English (South Africa)</option>
-          <option value="en_jm">English (Jamaica)</option>
-          <option value="en">English (Caribbean)</option>
-          <option value="en_bz">English (Belize)</option>
-          <option value="en_tt">English (Trinidad)</option>
-          <option value="et">Estonian</option>
-          <option value="fo">Faeroese</option>
-          <option value="fa">Farsi</option>
-          <option value="fi">Finnish</option>
-          <option value="fr">French (Standard)</option>
-          <option value="fr_be">French (Belgium)</option>
-          <option value="fr_ca">French (Canada)</option>
-          <option value="fr_ch">French (Switzerland)</option>
-          <option value="fr_lu">French (Luxembourg)</option>
-          <option value="gd">Gaelic (Scotland)</option>
-          <option value="ga">Irish</option>
-          <option value="de">German (Standard)</option>
-          <option value="de_ch">German (Switzerland)</option>
-          <option value="de_at">German (Austria)</option>
-          <option value="de_lu">German (Luxembourg)</option>
-          <option value="de_li">German (Liechtenstein)</option>
-          <option value="el">Greek</option>
-          <option value="he">Hebrew</option>
-          <option value="hi">Hindi</option>
-          <option value="hu">Hungarian</option>
-          <option value="is">Icelandic</option>
-          <option value="id">Indonesian</option>
-          <option value="it">Italian (Standard)</option>
-          <option value="it_ch">Italian (Switzerland)</option>
-          <option value="ja">Japanese</option>
-          <option value="ko">Korean</option>
-          <option value="ko">Korean (Johab)</option>
-          <option value="lv">Latvian</option>
-          <option value="lt">Lithuanian</option>
-          <option value="mk">Macedonian (FYROM)</option>
-          <option value="ms">Malaysian</option>
-          <option value="mt">Maltese</option>
-          <option value="no">Norwegian (Bokmal)</option>
-          <option value="no">Norwegian (Nynorsk)</option>
-          <option value="pl">Polish</option>
-          <option value="rm">Rhaeto-Romanic </option>
-          <option value="ro">Romanian</option>
-          <option value="ro_mo">Romanian (Republic of Moldova)</option>
-          <option value="ru">Russian</option>
-          <option value="ru_mo">Russian (Republic of Moldova)</option>
-          <option value="sz">Sami (Lappish)</option>
-          <option value="sr">Serbian (Cyrillic)</option>
-          <option value="sr">Serbian (Latin)</option>
-          <option value="sk">Slovak</option>
-          <option value="sl">Slovenian</option>
-          <option value="sb">Sorbian</option>
-          <option value="sx">Sutu</option>
-          <option value="sv">Swedish</option>
-          <option value="sv_fi">Swedish (Finland)</option>
-          <option value="th">Thai</option>
-          <option value="ts">Tsonga</option>
-          <option value="tn">Tswana</option>
-          <option value="tr">Turkish</option>
-          <option value="uk">Ukrainian</option>
-          <option value="ur">Urdu</option>
-          <option value="ve">Venda</option>
-          <option value="vi">Vietnamese</option>
-          <option value="xh">Xhosa</option>
-          <option value="ji">Yiddish</option>
-          <option value="zu">Zulu</option>
-        </select>
-      </div>
-    </div>
-
-
-    <h3>Formato Salida</h3>
-    
-    <div class="row row-value-type">
-      <div class="col-xs-12">
-        <label>Cual es el patrón del formato de salida?</label>
-        <div class="display-pattern-view" name="outputPattern"></div>
-      </div>
-    </div>
-
-    <div class="row custom-display-pattern hidden">
-      <div class="col-xs-12">
-      <label>Patrón personalizado</label>
-        <input type="text" name="outputCustomPattern" placeholder="Ingrese valor fijo">
-      </div>
-    </div>
-
-    <div class="row number-display-locale">
-      <div class="col-xs-12">
-        <label>Localización</label>
-        <select class="form-control" name="numberDisplayLocale">
-          <option value="" selected="selected">Select...</option>
-          <option value="us">United States</option>
-          <option value="es">Spain &amp; Latam</option>
-          <option value="ae">Arab Emirates</option>
-          <option value="eg">Egypt</option>
-          <option value="il">Israel</option>
-          <option value="jp">Japan</option>
-          <option value="kr">South Korea</option>
-          <option value="th">Thailand</option>
-          <option value="cn">China</option>
-          <option value="hk">Hong Kong</option>
-          <option value="tw">Taiwan</option>
-          <option value="au">Australia</option>
-          <option value="ca">Canada</option>
-          <option value="gb">Great Britain</option>
-          <option value="in">India</option>
-          <option value="de">Germany</option>
-          <option value="vn">Vietnam</option>
-          <option value="dk">Denmark</option>
-          <option value="at">Austria</option>
-          <option value="gr">Greece</option>
-          <option value="br">Brazil</option>
-          <option value="cz">Czech</option>
-          <option value="fr">France</option>
-          <option value="fi">Finland</option>
-          <option value="ru">Russia</option>
-          <option value="se">Sweden</option>
-          <option value="ch">Switzerland</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="row date-display-locale">
-      <div class="col-xs-12">
-        <label>Localización</label>
-        <select class="form-control" name="dateDisplayLocale">
-          <option selected="selected" value="">Select...</option>
-          <option value="en">English</option>
-          <option value="en_us">English (United States)</option>
-          <option value="es">Spanish (Spain)</option>
-          <option value="es_mx">Spanish (Mexico)</option>
-          <option value="es_gt">Spanish (Guatemala)</option>
-          <option value="es_cr">Spanish (Costa Rica)</option>
-          <option value="es_pa">Spanish (Panama)</option>
-          <option value="es_do">Spanish (Dominican Republic)</option>
-          <option value="es_ve">Spanish (Venezuela)</option>
-          <option value="es_co">Spanish (Colombia)</option>
-          <option value="es_pe">Spanish (Peru)</option>
-          <option value="es_ar">Spanish (Argentina)</option>
-          <option value="es_ec">Spanish (Ecuador)</option>
-          <option value="es_cl">Spanish (Chile)</option>
-          <option value="es_uy">Spanish (Uruguay)</option>
-          <option value="es_py">Spanish (Paraguay)</option>
-          <option value="es_bo">Spanish (Bolivia)</option>
-          <option value="es_sv">Spanish (El Salvador)</option>
-          <option value="es_hn">Spanish (Honduras)</option>
-          <option value="es_ni">Spanish (Nicaragua)</option>
-          <option value="es_pr">Spanish (Puerto Rico)</option>
-        </select>
-      </div>
+      </article>
     </div>
 
   </div>
 
-  <div class="row">
-    <div class="col-xs-12">
-      <button class="button small btn-ok">Ok</button>
-      <button class="button small btn-clear">Limpiar</button>
-    </div>
+  <div class="center">
+    <button class="button small red btn-clear">{% trans 'APP-CLEAR-TEXT' %}</button>
+    <button class="button small primary btn-ok">{% trans 'APP-DONE-TEXT' %}</button>
   </div>
+
+  <script>
+    var $tabs;
+    $tabs = $(".tabs").hashTabs();      
+  </script>
+
 </script>
 
 <script type="text/template" id="pattern_template">

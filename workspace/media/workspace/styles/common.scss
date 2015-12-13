@@ -559,6 +559,14 @@ body{background:$color-base;height:100%;min-width:998px;}
   }
 }
 
+.tab-nav-sm{
+  ul{
+    li{
+      a{padding:5px 8px;font-size:$font-size-s;}
+    }
+  }
+}
+
 .tabs-list{padding:10px 3px 0;
   background:#e1e1e1;
   background:-moz-linear-gradient(top, #cfcfcf 0%, #e2e2e2 15%, #e1e1e1 100%);
@@ -838,3 +846,10 @@ border-color: #ccc;}
     li{padding-top:5px;padding-left:0;background:none;}
   }
 }
+
+/* Helpers */
+.divider{height:1px;overflow:hidden;width:100%;}
+.divider-xs{margin:5px 0;}
+.divider-sm{margin:10px 0;}
+.divider-md{margin:15px 0;}
+.divider-lg{margin:20px 0;}
