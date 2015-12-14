@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from elasticsearch import Elasticsearch, NotFoundError, RequestError
+from core.plugins import DatalPluginPoint
 import logging
+
 
 class ElasticsearchIndex():
     """ Gestor para indice elasticsearch"""
@@ -29,12 +31,13 @@ class ElasticsearchIndex():
         # primera vez que empuja el index
         try:
             if indices['acknowledged']:
-                for doc_type in ["ds","dt","db","chart"]:
+                for doc_type in ["ds","dt","vz"]:
                     self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=doc_type, body=self.__get_mapping(doc_type))
+                for finder in DatalPluginPoint.get_active_with_att('finder'):
+                    self.es.indices.put_mapping(index=settings.SEARCH_INDEX['index'], doc_type=finder.doc_type, body=self.__get_mapping(finder.doc_type))
         # Ya existe un index
         except KeyError:
             pass
-            
 
         self.logger = logging.getLogger(__name__)
 
@@ -43,10 +46,12 @@ class ElasticsearchIndex():
             return self.__get_datastream_mapping()
         elif doc_type == "dt":
             return self.__get_dataset_mapping()
-        elif doc_type == "db":
-            return self.__get_dashboard_mapping()
-        elif doc_type == "chart":
+        elif doc_type == "vz":
             return self.__get_visualization_mapping()
+
+        for finder in DatalPluginPoint.get_active_with_att('finder'):
+            if finder.doc_type == doc_type:
+                return finder.get_mapping()
 
     def __get_datastream_mapping(self):
         return {"ds" : {
@@ -54,7 +59,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string", 
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -73,7 +79,8 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
-                      "hits" : { "type" : "integer" },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -90,7 +97,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -119,49 +127,14 @@ class ElasticsearchIndex():
               }
         }
  
-    def __get_dashboard_mapping(self):
-        return {"db" : {
-                "properties" : {
-                  "categories" : {
-                    "properties" : {
-                      "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
-                    }
-                  }, # categories
-                  "docid" : { "type" : "string" },
-                  "fields" : {
-                    "properties" : {
-                      "account_id" : { "type" : "long" },
-                      "databoardrevision_id" : { "type" : "long" },
-                      "databoard_id" : { "type" : "long" },
-                      "description" : { "type" : "string" },
-                      "end_point" : { "type" : "string" },
-                      "owner_nick" : { "type" : "string" },
-                      "parameters" : { "type" : "string" },
-                      "tags" : { "type" : "string" },
-                      "text" : {
-                        "type" : "string",
-                        "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
-                      },
-                      "timestamp" : { "type" : "long" },
-                      "title" : { "type" : "string" ,
-                        "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
-                          },
-                      "type" : { "type" : "string" }
-                    }
-                  } # fields
-                }
-              }
-        }
-
- 
     def __get_visualization_mapping(self):
-        return {"chart" : {
+        return {"vz" : {
                 "properties" : {
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -179,6 +152,8 @@ class ElasticsearchIndex():
                         "type" : "string",
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "timestamp" : { "type" : "long" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
@@ -189,17 +164,26 @@ class ElasticsearchIndex():
                 }
               }
         }
- 
-        
+
     def indexit(self, document):
-        """add document to index"""
+        """add document to index
+        :param document:
+        """
 
         if document:
             self.logger.info('Elasticsearch: Agregar al index %s' % str(document))
             try:
-                return self.es.create(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.create(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
             except:
-                return self.es.index(index=settings.SEARCH_INDEX['index'], body=document, doc_type=document['fields']['type'], id=document['docid'])
+                return self.es.index(
+                    index=settings.SEARCH_INDEX['index'],
+                    body=document,
+                    doc_type=document['fields']['type'],
+                    id=document['docid'])
 
 
         logger.error(u"Elasticsearch: Ningún documento para indexar")
@@ -239,25 +223,27 @@ class ElasticsearchIndex():
         return self.es.indices.delete(index=settings.SEARCH_INDEX['index'], ignore=[400, 404])
 
     def delete_documents(self, documents):
-        """Delete from a list. Return [list(deleted), list(notdeleted)] """
-
-
+        """Delete from a list. Return [list(deleted), list(notdeleted)]
+        :param documents:
+        """
         result = map(self.delete_document, documents)
 
         documents_deleted=filter(self.__filterDeleted,result)
         documents_not_deleted=filter(self.__filterNotDeleted,result)
 
-
         return [documents_deleted, documents_not_deleted]
 
     def update(self, document):
-        """ update by id"""
+        """ Update by id
+        :param document:
+        """
         # Me lo pediste vos nacho, despues no me putees
-        return True
-        # try:
-        #     return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
-        # except RequestError,e:
-        #     raise RequestError(e)
-        # except NotFoundError,e:
-        #     raise NotFoundError,(e)
+        # te tengo que putear, seas quien seas
+        #return True
+        try:
+            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
+        except RequestError,e:
+            raise RequestError(e)
+        except NotFoundError,e:
+            raise NotFoundError,(e)
 

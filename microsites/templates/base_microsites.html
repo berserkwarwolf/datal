@@ -12,6 +12,9 @@
 {% endblock %}
 
 {% block js_includes %}
+
+	{% include "js.html" %}
+
 	<script type="text/javascript" src="{% url 'django.views.i18n.javascript_catalog' %}"></script>
 	<script type="text/javascript" src="/js_core/base_modules/auth_manager.js"></script>
 	<script type="text/javascript" src="/js_core/plugins/json2.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -90,7 +93,7 @@
 	    Configuration.apiKey = "{{settings.PUBLIC_KEY}}";	    
 	    Configuration.language = "{{LANGUAGE_CODE}}";
 	    Configuration.showLastUpdate = {% if not preferences.account_hidelastupdate %}true{% else %}false{% endif %};
-	    Configuration.chartSize = {"embed":{"width":"{{chartSizes.embed.width}}", "height":"{{chartSizes.embed.height}}" }, "normal":{"width":"{{chartSizes.normal.width}}", "height":"{{chartSizes.normal.height}}" }};
+	    Configuration.chartSize = {"embed":{"width":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.embed.width}}", "height":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.embed.height}}" }, "normal":{"width":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.normal.width}}", "height":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.normal.height}}" }};
 
 	    {% if preferences.account_embed_powered_by %}
 	    Configuration.embedPoweredBy = ["http://{{preferences.account_domain}}","{{preferences.account_name}}"];
@@ -100,6 +103,11 @@
 
 		/* ]]> */
 	</script>
+
+	{% block microsites_bottom_js %}
+		
+	{% endblock %}
+	
 {% endblock %}
 
 {% block ga_code %}

@@ -5,17 +5,29 @@ from core.shortcuts import render_to_response
 from core.models import Category
 from microsites.search import forms
 from microsites.managers import *
+from microsites.exceptions import *
+from core.exceptions import *
+from microsites.exceptions import *
+
+import logging
 
 
 def action_browse(request, category_slug=None, page=1):
+    logger = logging.getLogger(__name__)
+    logger.error('action_browse')
+
+def browse(request, category_slug=None, page=1):
+
     account = request.account
     preferences = request.preferences
     category = Category.objects.get_for_browse(category_slug, account.id, preferences['account_language'])
 
+    accounts_ids =  [x['id'] for x in account.account_set.values('id').all()] + [account.id]
+
     try:
-        results, search_time, facets = FinderManager().search(category_id=category['id'], account_id=account.id)
+        results, search_time, facets = FinderManager().search(category_id=category['id'], account_id=[account.id]+accounts_ids)
     except InvalidPage:
-        raise Http404
+        raise InvalidPage
 
     paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
     page_results = paginator.page(page).object_list
@@ -24,6 +36,7 @@ def action_browse(request, category_slug=None, page=1):
 
 
 def do_search(request, category_filters=None, datasets=None):
+
     account = request.account
     preferences = request.preferences
     form = forms.SearchForm(request.GET)
@@ -33,11 +46,7 @@ def do_search(request, category_filters=None, datasets=None):
         page = form.cleaned_data.get('page')
         order = form.cleaned_data.get('order')
 
-        featured_accounts = account.account_set.values('id').all()
-        if featured_accounts:
-            accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
-        else:
-            accounts_ids = account.id
+        accounts_ids =  [x['id'] for x in account.account_set.values('id').all()] + [account.id]
 
         try:
             resources = ["ds", "db", "vz", "dt"]
@@ -46,7 +55,7 @@ def do_search(request, category_filters=None, datasets=None):
                 resource=resources
             )
         except InvalidPage:
-            raise Http404
+            raise InvalidPage
 
 
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
@@ -56,11 +65,11 @@ def do_search(request, category_filters=None, datasets=None):
     else:
         raise Http404
 
-def action_search(request):
+def search(request):
     return do_search(request)
 
 
-def action_search_by_query_and_category(request, category):
+def search_by_query_and_category(request, category):
     try:
         datasets = request.GET.get("datasets", None)
         return do_search(request, category_filters=[category], datasets=datasets)

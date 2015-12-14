@@ -86,7 +86,7 @@ def requires_published_parent():
                     if resource.dataset_revision.status != StatusChoices.PUBLISHED:
                         raise VisualizationParentNotPublishedException(resource.dataset_revision)
                 else:
-                    raise ParentNotPublishedException('Parent resource not found')
+                    raise ParentNotPublishedException()
 
             return view_func(request, *args, **kwargs)
 
@@ -153,6 +153,7 @@ def requires_review(a_view):
             if DataStreamRevision.objects.get(pk=kwargs["datastream_revision_id"]).is_pending_review() and \
                     request.user.is_editor():
                 raise RequiresReviewException()
+                
         return a_view(request, *args, **kwargs)
     return _wrapped_view
 

@@ -1,7 +1,7 @@
 var DatastreamCellView = Backbone.View.extend({
     template: null,
 
-    initialize: function(options) {
+    initialize: function() {
         this.template = _.template($("#grid-datastreamcell-template").html());
     },
 

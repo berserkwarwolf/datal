@@ -1,4 +1,7 @@
-import urllib2, logging
+# -*- coding: utf-8 -*-
+import urllib2
+import logging
+from django.conf import settings
 
 from django.db import transaction
 from django.views.decorators.http import require_GET, require_POST, require_http_methods
@@ -18,6 +21,7 @@ from core.daos.datasets import DatasetDBDAO
 from core.utils import DateTimeEncoder
 from core.lib.datastore import active_datastore
 from core.forms import MimeTypeForm
+from core.signals import dataset_removed, dataset_changed, dataset_unpublished, dataset_rev_removed
 from workspace.decorators import *
 from workspace.templates import DatasetList
 from workspace.manageDatasets.forms import *
@@ -27,7 +31,11 @@ logger = logging.getLogger(__name__)
 
 @require_http_methods(["GET"])
 def download(request, dataset_id, slug):
-    """ download dataset file directly """
+    """ download dataset file directly
+    :param slug:
+    :param dataset_id:
+    :param request:
+    """
     logger = logging.getLogger(__name__)
 
     # get public url for datastream id
@@ -43,15 +51,25 @@ def download(request, dataset_id, slug):
         if dataset['end_point'][:7] != "file://":
             return HttpResponse("No downloadable file!")
 
-        url = active_datastore.build_url(
-            request.bucket_name,
-            dataset['end_point'].replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(filename)}
-        )
+        url = active_datastore.build_url(request.bucket_name, dataset['end_point'].replace("file://", ""))
 
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(dataset['impl_type']))
-        redirect = HttpResponse(status=302, mimetype=content_type)
+        impl_type = settings.IMPL_TYPES.get(str(dataset['impl_type']))
+        content_type = settings.CONTENT_TYPES.get(impl_type)
+        if settings.DEBUG: logger.info('Dataset download %s -- %s -- %s -- %s -- %s' % (filename, content_type, url, dataset['impl_type'], impl_type))
+
+        """ no funciona asi 
+        redirect = HttpResponse(status=302, content_type=content_type)
         redirect['Location'] = url
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        """
+
+        redirect = HttpResponse(content_type=content_type) # si no funcionara => redirect = HttpResponse(mimetype='application/force-download')
+        redirect['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
+        redir = urllib2.urlopen(url)
+        status = redir.getcode()
+        resp = redir.read()
+        if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, redir.geturl(), redir.info()))
+        redirect.write(resp)
 
         return redirect
 
@@ -59,7 +77,7 @@ def download(request, dataset_id, slug):
 @login_required
 @require_privilege("workspace.can_query_dataset")
 @require_GET
-def action_request_file(request):
+def download_file(request):
     form = RequestFileForm(request.GET)
 
     if form.is_valid():
@@ -69,8 +87,6 @@ def action_request_file(request):
             response['Content-Disposition'] = 'attachment; filename="{}"'.format(dataset_revision.filename.encode('utf-8'))
             response.write(urllib2.urlopen(dataset_revision.get_endpoint_full_url()).read())
         except Exception:
-            import logging
-            logger = logging.getLogger(__name__)
             logger.error(dataset_revision.end_point)
     else:
         response = dict(
@@ -85,7 +101,9 @@ def action_request_file(request):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def index(request):
-    """ List all Datasets """
+    """ List all Datasets
+    :param request:
+    """
     account_domain = request.preferences['account.domain']
     ds_dao = DatasetDBDAO()
     filters = ds_dao.query_filters(account_id=request.user.account.id, language=request.user.language)
@@ -96,7 +114,7 @@ def index(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
     account_id = request.auth_manager.account_id
     credentials = request.auth_manager
     user_id = request.auth_manager.id
@@ -114,7 +132,11 @@ def action_view(request, revision_id):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
-    """ filter resources """
+    """ filter resources
+    :param itemsxpage:
+    :param page:
+    :param request:
+    """
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
@@ -189,7 +211,9 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 @require_privilege("workspace.can_query_dataset")
 @require_GET
 def get_filters_json(request):
-    """ List all Filters available """
+    """ List all Filters available
+    :param request:
+    """
     if settings.DEBUG: logger.info('GET FILTERs')
     filters = DatasetDBDAO().query_filters(account_id=request.user.account.id,
                                     language=request.user.language)
@@ -204,7 +228,11 @@ def get_filters_json(request):
 @require_privilege("workspace.can_delete_dataset")
 @transaction.commit_on_success
 def remove(request, dataset_revision_id, type="resource"):
-    """ remove resource """
+    """ remove resource
+    :param type:
+    :param dataset_revision_id:
+    :param request:
+    """
 
     lifecycle = DatasetLifeCycleManager(user=request.user, dataset_revision_id=dataset_revision_id)
 
@@ -216,18 +244,25 @@ def remove(request, dataset_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
-        
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
+        # Send signal
+        dataset_rev_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=dataset_revision_id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-REV-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": last_revision_id, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
         
     else:
         lifecycle.remove(killemall=True)
 
-        response = DefaultAnswer().render(status=True, 
-                               messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')], 
-                               extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
+        # Send signal
+        dataset_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=lifecycle.dataset_revision.id)
+
+        response = DefaultAnswer().render(
+            status=True,
+            messages=[ugettext('APP-DELETE-DATASET-ACTION-TEXT')],
+            extras=[{"field": 'revision_id', "value": -1, "type": "literal"}])
         return HttpResponse(response, mimetype="application/json")
 
 
@@ -343,6 +378,10 @@ def edit(request, dataset_revision_id=None):
             dataset_revision = lifecycle.edit(collect_type=request.POST.get('collect_type'),
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
+            # Signal
+            dataset_changed.send_robust(sender='edit_view', id=lifecycle.dataset.id,
+                                        rev_id=lifecycle.dataset_revision.id)
+
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
             return HttpResponse(json.dumps(data), content_type='text/plain')
@@ -352,7 +391,7 @@ def edit(request, dataset_revision_id=None):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     language = request.auth_manager.language
     dataset_id = request.GET.get('dataset_id', '')
 
@@ -382,68 +421,54 @@ def change_status(request, dataset_revision_id=None):
     :param dataset_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and dataset_revision_id:
+    if dataset_revision_id:
         lifecycle = DatasetLifeCycleManager(
             user=request.user,
             dataset_revision_id=dataset_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-APPROVED-TITLE'),
-                    'description': ugettext('APP-DATASET-APPROVED-TEXT')
-                }
-            )
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
+            raise NoStatusProvidedException()
+
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
+            # Signal
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
+                                            rev_id=lifecycle.dataset_revision.id)
+        else:
+            getattr(lifecycle, action)()
+
+        if action == 'accept':
+            title= ugettext('APP-DATASET-APPROVED-TITLE'),
+            description= ugettext('APP-DATASET-APPROVED-TEXT')
         elif action == 'reject':
-            lifecycle.reject()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-REJECTED-TITLE'),
-                    'description': ugettext('APP-DATASET-REJECTED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-REJECTED-TITLE'),
+            description= ugettext('APP-DATASET-REJECTED-TEXT')
         elif action == 'publish':
-            lifecycle.publish()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-PUBLISHED-TITLE'),
+            description= ugettext('APP-DATASET-PUBLISHED-TEXT')
         elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
             if killemall:
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': description
-                }
-            )
+            title= ugettext('APP-DATASET-UNPUBLISH-TITLE'),
         elif action == 'send_to_review':
-            lifecycle.send_to_review()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
-                }
-            )
-        else:
-            raise NoStatusProvidedException()
+            title= ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
+            description= ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
+            kwargs={'dataset_id': response['result']['dataset_id'], 'slug': '-'})
         response['result'].pop('datastreams')
         response['result'].pop('visualizations')
         response['result'].pop('tags')

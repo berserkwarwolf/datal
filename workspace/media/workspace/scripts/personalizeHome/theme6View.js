@@ -17,8 +17,11 @@ var theme6View = Backbone.Epoxy.View.extend({
 		"click #id_btnRemoveRightBottom" : "removeRightBottomImage",
 	},
 
-	initialize: function() {
-		this.options.currentView.helpAndTips('hide');
+	initialize: function(options) {
+		this.currentView = options.currentView;
+		this.currentModel = options.currentModel;
+
+		this.currentView.helpAndTips('hide');
 		that = this;
 		this.template = _.template($("#id_theme6Template").html());
 		this.render();
@@ -365,7 +368,10 @@ var theme6View = Backbone.Epoxy.View.extend({
 			}
 		}).on("click", function(e) {
 			e.preventDefault();
-			$(this).parent().find('input[type=file]').trigger("click");
+
+			// Esto triggerea un comportamiento erroneo en todos los campos input. Les hace abrir una ventana de subir archivo.
+			//$(this).parent().find('input[type=file]').trigger("click");
+			
 		});
 
 	},
@@ -1097,10 +1103,10 @@ var theme6View = Backbone.Epoxy.View.extend({
 		var btn_id = $(event.currentTarget).attr("id");
 		var ob = {};
 		if (btn_id === 'id_save' || btn_id === 'id_save_top') {
-			this.options.currentModel.attributes.config = this.model.toJSON();
-			this.options.currentModel.attributes.themeID = '6';
-			ob['config'] = this.options.currentModel.attributes.config;
-			ob['theme'] = this.options.currentModel.attributes.themeID;
+			this.currentModel.attributes.config = this.model.toJSON();
+			this.currentModel.attributes.themeID = '6';
+			ob['config'] = this.currentModel.attributes.config;
+			ob['theme'] = this.currentModel.attributes.themeID;
 			ob['type'] = 'save';
 		} else {
 			ob['config'] = this.model.toJSON();

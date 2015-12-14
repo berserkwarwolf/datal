@@ -12,13 +12,16 @@ var DeleteItemView = Backbone.View.extend({
 
 	initialize: function(options) {
 
-		this.parentView = this.options.parentView;
+		this.parentView = options.parentView;
+		this.itemCollection = options.itemCollection;
+		this.models = options.models;
+		this.type = options.type;
 
 		// Check if is a Bulk Actions Overlay
-		if( _.isUndefined( this.options.bulkActions ) ){
+		if( _.isUndefined( options.bulkActions ) ){
 			this.bulkActions = false;
 		}else{
-			this.bulkActions = this.options.bulkActions;
+			this.bulkActions = options.bulkActions;
 		}
 
 		// Then, if is a Bulk Actions Overlay, change the el and $el
@@ -52,9 +55,9 @@ var DeleteItemView = Backbone.View.extend({
 		var affectedResourcesCollection = new AffectedResourcesCollection();
 		var affectedResourcesCollectionView = new AffectedResourcesCollectionView({
 			collection: affectedResourcesCollection,
-			itemCollection: this.options.itemCollection,
-			models: this.options.models,
-			type: this.options.type
+			itemCollection: this.itemCollection,
+			models: this.models,
+			type: this.type
 		});
 		this.parentView.resetBulkActions();
 		this.closeOverlay();
@@ -63,7 +66,7 @@ var DeleteItemView = Backbone.View.extend({
 
 	deleteRevision: function() {
 		self = this;
-		_.each(this.options.models, function(model) {
+		_.each(this.models, function(model) {
 			
 			var resource = model.get('title');
 
@@ -79,7 +82,7 @@ var DeleteItemView = Backbone.View.extend({
 					});
 					self.closeOverlay();
 					self.undelegateEvents();
-					self.options.itemCollection.fetch({
+					self.itemCollection.fetch({
 						reset: true
 					});
 				},

@@ -1,6 +1,6 @@
 {% extends "base_microsites.html" %}
 {% load i18n extra_tags components compress staticfiles sass_tags %}
-{% url "search.action_search" as search_url %}
+{% url "search.search" as search_url %}
 
 {% block SEO %}
 <title>{% trans "APP-SEARCHRESULTS-TEXT" %}{% if query %} {% trans "APP-FOR-TEXT" %} {{query}}{% endif %} {% if category %}{% trans "APP-INCATEGORY-TEXT" %} {{category.name}}{% endif %} &middot; {{preferences.account_page_titles}}</title>
@@ -15,10 +15,10 @@
 <!-- BRANDED -->
 <link type="text/css" rel="stylesheet" media="screen" href="{% sass_src 'microsites/styles/brandedFull.css' %}"/>
 {% endcompress %}
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
-<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.action_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
+<link type="text/css" rel="stylesheet" media="screen" href="{% url "microsites.get_new_css" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"/>
 <script type="text/javascript" src="/js_microsites/search/searchList.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="{% url "microsites.action_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
+<script type="text/javascript" src="{% url "microsites.get_js" preferences.account_id %}?id={{settings.VERSION_JS_CSS}}"></script>
 {% endblock %}
 
 {% block content %}
@@ -59,7 +59,7 @@
                 <div class="boxInner">
                     {% for item in facets %}
                         <h5 class="minnorPaddingBottom">
-                            <a href="{% url "search.action_search" %}/category/{{item.term}}?q={{query}}">{{ item.term|title}}</a> ({{ item.count }})
+                            <a href="{% url "search.search" %}/category/{{item.term}}?q={{query}}">{{ item.term|title}}</a> ({{ item.count }})
                             </h5>
                     {% endfor %}
                 </div>

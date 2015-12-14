@@ -9,9 +9,9 @@ var AddSourceView = Backbone.View.extend({
     'click #id_addNewSourceButton': 'onAddNewSourceButtonClicked'
   },
 
-  initialize: function(){
+  initialize: function(options){
     this.template = _.template( $("#id_AddNewSourceTemplate").html() );
-    this.sources = this.options.sources;
+    this.sources = options.sources;
 
     // Bind model validation to view
     Backbone.Validation.bind(this);

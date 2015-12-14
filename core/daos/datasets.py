@@ -71,7 +71,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             except DatasetRevision.DoesNotExist:
                 logger.error('DatasetRev Not exist dataset_id=%d' % dataset_id)
                 raise
-                
+
         tags = dataset_revision.get_tags()
         sources = dataset_revision.get_sources()
 
@@ -80,13 +80,12 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        if dataset_revision.dataset.last_published_revision:
-            domain = dataset_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
+        # en caso de que haya una revisión publicada y sea distinta a la ultima revisión
+        # entonces es que hay más de una revisión (nos ahorramos un query)
+        if dataset_revision.dataset.last_published_revision and dataset_revision.dataset.last_published_revision != dataset_revision.dataset.last_revision:
+            unique = False
+        else:
+            unique = DatasetRevision.objects.filter(dataset__id=dataset_revision.dataset.id).count() == 1 or False
 
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
@@ -120,15 +119,16 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             notes=dataseti18n.notes,
             tags=tags,
             sources=sources,
-            public_url=public_url,
             slug=slugify(dataseti18n.title),
+            unique=unique
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
         return dataset
         
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None, filter_user=None, full=False):
 
         """ Query for full dataset lists"""
 
@@ -150,13 +150,28 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
 
+        if filter_status is not None:
+             query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(dataseti18n__title__icontains=filter_text) | 
+                                 Q(dataseti18n__description__icontains=filter_text))
+
+        if filter_user is not None:
+            query = query.filter(dataset__user__nick=filter_user)
+
         total_resources = query.count()
 
         query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id',
                              'impl_type', 'dataset__guid', 'category__id', 'dataset__id', 'id',
-                             'category__categoryi18n__name', 'dataseti18n__title', 'dataseti18n__description',
+                             'category__categoryi18n__name', 'category__categoryi18n__slug',
+                             'dataseti18n__title', 'dataseti18n__description',
                              'created_at', 'modified_at', 'size', 'end_point', 'dataset__user__id',
-                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at')
+                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at',
+                             'dataset__last_published_revision_id')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',
             'guid':'ao_datasets.guid','category_id':'ao_categories.id', 'dataset_id':'ao_datasets.id',
@@ -176,23 +191,48 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
         return query, total_resources
 
-    def query_childs(self, dataset_id, language):
+    def query_childs(self, dataset_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
 
         related = dict()
-        related['datastreams'] = DataStreamRevision.objects.select_related().filter(
-            dataset__id=dataset_id,
+        ###################################################
+        ## Datastreams
+
+        query = DataStreamRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(datastream__last_published_revision_id=F('id') )
+        else:
+            query = query.filter(datastream__last_revision_id=F('id') )
+
+        query = query.filter(
+            dataset_id=dataset_id,
             datastreami18n__language=language
         ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
 
-        related['visualizations'] = VisualizationRevision.objects.select_related().filter(
-            visualization__datastream__last_revision__dataset__id=dataset_id,
+        # ordenamos desde el mas viejo
+        related['datastreams'] = query.order_by("created_at")
+
+        ###################################################
+        ##  visualizations 
+
+        query = VisualizationRevision.objects.select_related()
+
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(visualization__last_published_revision_id=F('id'))
+        else:
+            query = query.filter(visualization__last_revision_id=F('id'))
+
+        query = query.filter(
+            visualization__datastream__last_revision__dataset_id=dataset_id,
             visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
+
+        related['visualizations'] = query.order_by("created_at")
 
         return related
 

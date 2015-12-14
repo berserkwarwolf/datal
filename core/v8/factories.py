@@ -57,9 +57,9 @@ class CommandFactory(object):
         for item in filters:
             if item[0] in self.CONV_DICT:
                 new.append( (self.CONV_DICT[item[0]], item[1]) )
-            elif item[0].startswith('pFilter'):
+            elif item[0].startswith('filter'):
                 v1 = item[1]
-                new.append((item[0],self._parseOperator(value=v1)))
+                new.append((item[0].replace('filter', 'pFilter'),self._parseOperator(value=v1)))
             elif item[0].startswith('uniqueBy'):
                 #>>>>> estas dos lineas de donde sale?
                 num = key[-1:]
@@ -116,31 +116,36 @@ class CommandFactory(object):
         return fixed_params
 
 class LoadCommandFactory(CommandFactory):
-    def create(self, items):
+    def create(self, items, app):
         if self.resourse_type == 'dt':
-            return EngineLoadCommand(self._process_items(items))
+            return EngineLoadCommand(self._process_items(items), app)
 
 class PreviewCommandFactory(CommandFactory):
-    def create(self, items):
+    def create(self, items, app):
         if self.resourse_type == 'ds':
-            return EnginePreviewCommand(self._process_items(items))
+            return EnginePreviewCommand(self._process_items(items), app)
         elif self.resourse_type == 'vz':
-            return EnginePreviewChartCommand(self._process_items(items))
+            return EnginePreviewChartCommand(self._process_items(items), app)
         
 class InvokeCommandFactory(CommandFactory):
-    def create(self, items):
+    def create(self, items, app):
         if self.resourse_type == 'ds':
-            return EngineInvokeCommand(self._process_items(items))
+            return EngineInvokeCommand(self._process_items(items), app)
         elif self.resourse_type == 'vz':
-            return EngineChartCommand(self._process_items(items))
+            return EngineChartCommand(self._process_items(items), app)
 
 class AbstractCommandFactory(object):
+
+    def __init__(self, app):
+        self.app = app 
+
+
     def create(self, command_type, resourse_type, data={}):
         engine = None
         if command_type == 'invoke':
-            engine = InvokeCommandFactory(resourse_type).create(data)
+            engine = InvokeCommandFactory(resourse_type).create(data, self.app)
         elif command_type == 'load':
-            engine = LoadCommandFactory(resourse_type).create(data)
+            engine = LoadCommandFactory(resourse_type).create(data, self.app)
         elif command_type == 'preview':
-            engine = PreviewCommandFactory(resourse_type).create(data)
+            engine = PreviewCommandFactory(resourse_type).create(data, self.app)
         return engine

@@ -10,7 +10,6 @@ TEMPLATE_CONTEXT_PROCESSORS += (
 )
 
 MIDDLEWARE_CLASSES += (
-    'microsites.middlewares.search.SearchManager',
     'django.middleware.gzip.GZipMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -18,8 +17,9 @@ MIDDLEWARE_CLASSES += (
     'django.middleware.csrf.CsrfViewMiddleware',
     'microsites.middlewares.auth.AccessManager',
     'microsites.middlewares.ioc.DependencyInjector',
+    'microsites.middlewares.catch.ExceptionManager',
     'django.middleware.locale.LocaleMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware'
 )
 
 ROOT_URLCONF = 'microsites.urls'
@@ -52,6 +52,7 @@ FLEXMONSTER_DEFAULT_LOCALE = 'en'
 BOTS = ['Googlebot', 'AdsBot-Google'] #, 'Googlebot-Mobile', 'Googlebot-Image', 'Mediapartners-Google', 'Slurp', 'YahooSeeker/M1A1-R2D2', 'MSNBot', 'MSNBot-Media', 'MSNBot-NewsBlogs', 'MSNBot-Products', 'MSNBot-Academic', 'Teoma']
 
 STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/media/'),)
+STATICFILES_DIRS += ( os.path.join(PROJECT_PATH,'microsites/static/'),)
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
     'core.rest.auth.RestAuthentication',

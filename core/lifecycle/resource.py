@@ -75,11 +75,11 @@ class AbstractLifeCycleManager():
         pass
 
     @abstractmethod
-    def _move_childs_to_draft(self):
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
         pass
 
     @abstractmethod
-    def save_as_draft(sef):
+    def save_as_status(sef,status=StatusChoices.DRAFT):
         pass
 
     @abstractmethod

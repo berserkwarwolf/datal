@@ -5,13 +5,17 @@ USE_L10N = False
 
 MIDDLEWARE_CLASSES += (
     'django.middleware.gzip.GZipMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'api.urls'
 
 INSTALLED_APPS += (
     'api',
+    'corsheaders',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -37,14 +41,14 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 REST_FRAMEWORK['DEFAULT_AUTHENTICATION_CLASSES'] = (
     'rest_framework.authentication.SessionAuthentication',
-    'api.rest.auth.DatalApiAuthentication',
+    'api.v2.auth.DatalApiAuthentication',
 )
 
 REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
     'rest_framework.permissions.IsAuthenticated',
-    'api.rest.permissions.ApiPermission',
-    'api.rest.permissions.ApiPrivateForWritePermission',
-    'api.rest.permissions.ApiIsUserForWritePermission',
+    'api.v2.permissions.ApiPermission',
+    'api.v2.permissions.ApiPrivateForWritePermission',
+    'api.v2.permissions.ApiIsUserForWritePermission',
 )
 
 REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (
@@ -54,6 +58,12 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (
 REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
     'user': '20/minute'
 }
+
+REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
+    'rest_framework.renderers.JSONRenderer',
+    'rest_framework_jsonp.renderers.JSONPRenderer',
+    'rest_framework.renderers.BrowsableAPIRenderer',
+)
 
 try:
     from api.local_settings import *

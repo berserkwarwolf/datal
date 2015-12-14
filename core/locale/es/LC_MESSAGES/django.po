@@ -133,7 +133,7 @@ msgid "MODEL_IS_PRIVATE_LABEL"
 msgstr "Es privado"
 
 msgid "MODEL_DATASTREAM_LABEL"
-msgstr "Vista de Datos"
+msgstr "Vista"
 
 msgid "MODEL_DATASET_LABEL"
 msgstr "Conjunto de Datos"
@@ -238,7 +238,7 @@ msgid "MODEL_DATASET_REVISION_LABEL"
 msgstr "Revisión del Conjunto de Datos"
 
 msgid "MODEL_VISUALIZATION_LABEL"
-msgstr "Gráfico"
+msgstr "Visualización"
 
 msgid "MODEL_SLUG_LABEL"
 msgstr ""
@@ -542,7 +542,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "Algunas puntos importantes en el request anterior"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/api/v1/datastreams/"
+msgstr "/api/v2/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
@@ -608,7 +608,7 @@ msgid "NEW-PASSWORD-MISMATCH"
 msgstr "Las nuevas contraseñas no coincide."
 
 msgid "EMAIL-EXISTS"
-msgstr "Este email ya existe."
+msgstr "Este e-mail ya existe."
 
 msgid "HEADER-IE-MESSAGES"
 msgstr "<p><strong>Precaución:</strong> DATAL funciona correctamente en Internet Explorer 8 o superior y puede no funcionar correctamente en versiones antiguas de este navegador, o en modo <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='vista de compatibilidad' target='_blank'>vista de compatibilidad</a>. Por favor <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Actualice su navegador a la última versión' target='_blank'>actualice su navegador a la última versión</a> o <a href='http://abetterbrowser.org/' title='Use otro navegador' target='_blank'>use otro navegador</a>.</p>"
@@ -731,7 +731,7 @@ msgid "PRIV-SHARE-VZ-ERROR"
 msgstr "Oops! No pudimos compartir tu gráfico"
 
 msgid "PRIV-SHARE-EMAIL-ERROR"
-msgstr "Oops! No pudimos procesar el email"
+msgstr "Oops! No pudimos procesar el e-mail"
 
 msgid "FOOTER-OPENDATA-BUTTON"
 msgstr "Este material es datos abiertos"
@@ -766,6 +766,40 @@ msgstr "El"
 msgid "APP-AT-TEXT"
 msgstr "a las"
 
+msgid "APP-ONDEMAND-TEXT"
+msgstr "Bajo demanda"
+
+msgid "APP-DAILY-TEXT"
+msgstr "Diaria"
+
+msgid "APP-HOURLY-TEXT"
+msgstr "Cada hora"
+
+msgid "APP-WEEKLY-TEXT"
+msgstr "Semanal"
+
+msgid "APP-MONTHLY-TEXT"
+msgstr "Mensual"
+
+msgid "APP-THEOPENDATAPLATFORM-TEXT"
+msgstr "Plataforma de Datos Abiertos"
+
+msgid "APP-EDITPARAM-TEXT"
+msgstr "Editar Argumentos"
+
+msgid "OVERLAY-PARAM-TIP"
+msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
+
+msgid "OVERLAY-DSEMBED-CHART-TITLE"
+msgstr "¡Agrega esta visualización donde quieras!"
+
+msgid "OVERLAY-DSEMBED-CHART-TIP"
+msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
+
+msgid "ERROR-DUPLICATED-CATEGORY"
+msgstr "Categoría duplicada"
+
+# —————————— Exceptions
 msgid "EXCEPTION-ACTION-GENERIC"
 msgstr "Si el problema persiste contactarnos."
 
@@ -781,8 +815,8 @@ msgstr "Crear una vista."
 msgid "EXCEPTION-ACTION-VIEW-DATASET"
 msgstr "Revisar el conjunto de datos."
 
-msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
-msgstr "Revisar vistas, aprobarlas y publicar."
+msgid "EXCEPTION-ACTION-ASSOCIATED-RESOURCES"
+msgstr "Revisar los recursos asociados."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
 msgstr "Revisar conjuntos de datos."
@@ -818,10 +852,10 @@ msgid "EXCEPTION-DESCRIPTION-LIFE-CYCLE"
 msgstr "Hubo un error en el ciclo de publicación de recursos."
 
 msgid "EXCEPTION-TITLE-CHILD-NOT-APPROVED"
-msgstr "Vistas sin aprobar"
+msgstr "Recursos asociados sin aprobar"
 
 msgid "EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED"
-msgstr "Es necesario aprobar las vistas asociadas para poder publicar."
+msgstr "Es necesario aprobar uno o más recursos asociados del tipo %(resource_type)s para poder publicar."
 
 msgid "EXCEPTION-TITLE-SAVE-ERROR"
 msgstr "Error al guardar recurso."
@@ -883,7 +917,7 @@ msgstr "Archivo no valido"
 msgid "EXCEPTION-DESCRIPTION-FILE-INVALID"
 msgstr "Ingrese un tipo de archivo valido."
 
-msgid "EXCEPTION-TITLE-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgid "EXCEPTION-TITLE-VISUALIZATION-PARENT-NOT-PUBLISHED"
 msgstr "No se puede publicar la visualización"
 
 msgid "EXCEPTION-TITLE-PARENT-NOT-PUBLISHED"
@@ -955,47 +989,64 @@ msgstr "El recurso está pendiente de aprobación."
 msgid "EXCEPTION-DESCRIPTION-REQUIRES-REVIEW"
 msgstr "Hasta que no se apruebe el recurso no se puede editar."
 
-msgid "APP-ONDEMAND-TEXT"
-msgstr "Bajo demanda"
-
-msgid "APP-DAILY-TEXT"
-msgstr "Diaria"
-
-msgid "APP-HOURLY-TEXT"
-msgstr "Cada hora"
-
-msgid "APP-WEEKLY-TEXT"
-msgstr "Semanal"
-
-msgid "APP-MONTHLY-TEXT"
-msgstr "Mensual"
-
 msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-FOUND"
 msgstr "La url que éstas solicitando no es válida o ya no está disponible"
 
 msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-FOUND"
 msgstr "Puede ser que la misma haya sido eliminada, o que se haya generado una nueva revisión dejando sin efecto ésta url."
 
-msgid "APP-THEOPENDATAPLATFORM-TEXT"
-msgstr "Plataforma de Datos Abiertos"
-
-msgid "APP-EDITPARAM-TEXT"
-msgstr "Editar Argumentos"
-
-msgid "OVERLAY-PARAM-TIP"
-msgstr "Cambie los valores de los argumentos para interactuar con las diferentes vistas de los datos:"
-
-msgid "OVERLAY-DSEMBED-CHART-TITLE"
-msgstr "¡Agrega esta visualización donde quieras!"
-
-msgid "OVERLAY-DSEMBED-CHART-TIP"
-msgstr "Copia y Pega el código de abajo donde quieras mostrar esta visualización"
-
-msgid "ERROR-DUPLICATED-CATEGORY"
-msgstr "Categoría duplicada"
-
 msgid "EXCEPTION-TITLE-UNKNOWN"
 msgstr "Error desconocido"
 
 msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
 msgstr "Error desconocido con nombre %(exception_name)s y trace '%(exception_trace)s'"
+
+# —————————— Exceptions Microsites
+
+msgid "EXCEPTION-TITLE-REVISION-NOT-EXIST"
+msgstr "La visualización no existe"
+
+msgid "EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST"
+msgstr "La revisión de la visualización no existe"
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-EXIST"
+msgstr "La visualización no existe."
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-EXIST"
+msgstr "La visualización no existe."
+
+msgid "EXCEPTION-TITLE-ACCOUNT-NOT-EXIST"
+msgstr "La cuenta no existe"
+
+msgid "EXCEPTION-DESCRIPTION-ACCOUNT-NOT-EXIST"
+msgstr "La cuenta de usuario que intenta usar no exista."
+
+msgid "EXCEPTION-TITLE-INVALID-PAGE"
+msgstr "Página inválida."
+
+msgid "EXCEPTION-DESCRIPTION-INVALID-PAGE"
+msgstr "La págin a la que intenta acceder es invalida."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-EXIST"
+msgstr "El datastream no existe."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-EXIST"
+msgstr "El datasteram al que intenta acceder no existe."
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-EXIST"
+msgstr "Dataset no existe"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-EXIST"
+msgstr "El dataset al que intenta acceder no existe."
+
+msgid "EXCEPTION-TITLE-DATASET-ERROR"
+msgstr "Error en el dataset."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTET-ERROR"
+msgstr "Error en el dataset."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-ACCESS"
+msgstr "No tiene acceso a la visualización"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-ACCESS"
+msgstr "Su cuenta no tiene acceso a la visualziación"

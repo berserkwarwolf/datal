@@ -4,7 +4,7 @@ from core.daos.datastreams import DataStreamDBDAO
 from core.daos.visualizations import VisualizationDBDAO
 
 
-def action_sitemap(request):
+def sitemap(request):
     import datetime
 
     language = request.auth_manager.language

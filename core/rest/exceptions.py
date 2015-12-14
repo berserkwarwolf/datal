@@ -13,7 +13,7 @@ def datal_exception_handler(exception, context):
     response = exception_handler(exception, context)
 
     # Now add the HTTP status code to the response.
-    if response is not None:
+    if not response is None:
         response.data['status'] = response.status_code
         if not 'description' in response.data:
             response.data['description'] = ''

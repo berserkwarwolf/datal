@@ -108,6 +108,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         :param fields:
         :return: VisualizationRevision Model Object
         """
+        old_status = self.visualization_revision.status
+        
         if self.visualization_revision.status not in allowed_states:
             raise IllegalStateException(
                 from_state=self.visualization_revision.status,
@@ -120,7 +122,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 visualization=self.visualization,
                 datastream_rev=self.visualization_revision.datastream_revision,
                 user=self.visualization_revision.user,
-                status=StatusChoices.DRAFT,
+                status=fields.pop('status', StatusChoices.DRAFT),
                 **fields
             )
             self._update_last_revisions()
@@ -128,6 +130,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Actualizo sin el estado
             self.visualization_revision = VisualizationDBDAO().update(
                 self.visualization_revision,
+                status=fields.pop('status', old_status), 
                 changed_fields=changed_fields,
                 **fields
             )
@@ -135,8 +138,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         self._log_activity(ActionStreams.EDIT)
         return self.visualization_revision
 
-    def _move_childs_to_draft(self):
-        pass
 
     def reject(self, allowed_states=REJECT_ALLOWED_STATES):
         """ reject a visualization revision """
@@ -167,8 +168,10 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             )['id__max']
 
             if last_published_revision_id:
-                    self.visualization.last_published_revision = VisualizationRevision.objects.get(
-                        pk=last_published_revision_id)
+                self.visualization.last_published_revision = VisualizationRevision.objects.get(
+                    pk=last_published_revision_id)
+                search_dao = VisualizationSearchDAOFactory().create(self.visualization.last_published_revision)
+                search_dao.add()
             else:
                 self.visualization.last_published_revision = None
 
@@ -177,6 +180,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Si fue eliminado pero falta el commit, evito borrarlo nuevamente
             if self.visualization.id:
                 self.visualization.delete()
+            # si no se actualiza esto, luego falla en la vista al intentar actualizar el last_revision
+            self.visualization.last_revision_id=last_revision_id
 
     def _publish_childs(self):
         """
@@ -193,8 +198,12 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         """
         pass
 
-    def save_as_draft(self):
-        self.visualization_revision.clone()
+    def _move_childs_to_status(self, status=StatusChoices.PENDING_REVIEW):
+        pass
+
+
+    def save_as_status(self, status=StatusChoices.DRAFT):
+        self.visualization_revision.clone(status)
         self._update_last_revisions()
 
     def _remove_all(self):
@@ -236,7 +245,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
 
     def _unpublish_all(self, to_status=StatusChoices.DRAFT):
         """
-        Despublica todas las revisiones de la visualizacion y la de todos sus dashboards hijos en cascada
+        Despublica todas las revisiones de la visualizacion y la de todos sus hijos en cascada
         No se implementa ya que visualizaciones no tiene modelos hijo
         """
         VisualizationRevision.objects.filter(
@@ -271,9 +280,6 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # completa el valor correspondiente.
             self.visualization.last_published_revision=None
             self.visualization.save()
-
-            search_dao = VisualizationSearchDAOFactory().create(self.visualization_revision)
-            search_dao.remove()
 
             self.visualization_revision.delete()
 
@@ -333,7 +339,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 self.visualization_revision.status = StatusChoices.APPROVED
                 self.visualization_revision.save()
                 transaction.commit()
-                raise VisualizationParentNotPublishedException()
+                raise VisualizationParentNotPublishedException(self.visualization_revision_id)
 
         self._publish_childs()
         self.visualization_revision.status = StatusChoices.PUBLISHED

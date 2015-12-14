@@ -2,10 +2,284 @@ from django.test import TestCase, TransactionTestCase, LiveServerTestCase
 from django.db.models import F, Max
 
 from core.search.elastic import ElasticsearchFinder
-from core.engine import preview_chart
+#from core.engine import preview_chart
 from core.choices import CollectTypeChoices, SourceImplementationChoices, StatusChoices, ODATA_FREQUENCY
 from core.models import User, Category, Dataset, DatasetRevision
 from core.lifecycle.datasets import DatasetLifeCycleManager
+
+from workspace.exceptions import *
+from microsites.exceptions import *
+from workspace.middlewares.catch import ExceptionManager as WorkspaceExceptionManagerMiddleWare
+from microsites.middlewares.catch import ExceptionManager as MicrositesExceptionManagerMiddleWare
+from django.test.client import RequestFactory
+from django.contrib.auth.models import AnonymousUser
+from django.conf import settings
+import os
+from core.auth.auth import AuthManager
+import re
+from workspace.manageDatasets.forms import *
+
+
+class ExpectionsTest(TransactionTestCase):
+    class Object(object):
+        def __init__(self):
+            self.id = 0
+            self.revision = 0
+            self._context = {
+                'valid_types':'valid_types'
+            }
+
+    def setUp(self):
+        settings.TEMPLATE_DIRS = list(settings.TEMPLATE_DIRS)
+        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'workspace', 'templates'))
+        settings.TEMPLATE_DIRS.append(os.path.join(settings.PROJECT_PATH, 'microsites', 'templates'))
+        settings.TEMPLATE_DIRS = tuple(settings.TEMPLATE_DIRS)
+
+        settings.INSTALLED_APPS = list(settings.INSTALLED_APPS)
+        settings.INSTALLED_APPS.append('microsites')
+        settings.INSTALLED_APPS = tuple(settings.INSTALLED_APPS)
+
+    def fake_request(self, space, type_response):
+        request = RequestFactory().get('/'+space+'/', HTTP_ACCEPT=type_response)
+        request.user = AnonymousUser()
+        request.auth_manager = AuthManager(language="en")
+        return request
+
+    def assert_contains(self, response, title, description, code):
+        
+        description = description.replace("'", "&#39;")
+        title = title.replace("'", "&#39;")
+
+        self.assertContains(response, title, count=None, status_code=code, html=False)
+        self.assertContains(response, description, count=None, status_code=code, html=False)
+
+    def process(self, e, space, type_response):
+        request = self.fake_request(space,type_response)
+        if space == 'workspace':
+            middleware = WorkspaceExceptionManagerMiddleWare()
+
+        if space == 'microsites':
+            middleware = MicrositesExceptionManagerMiddleWare()
+
+        response = middleware.process_exception(request,e)
+        self.assert_contains(response, unicode(e.title), unicode(e.description), e.status_code)
+
+    def test_exception_generator(self):
+        """
+        [Exceptions Test] Test de prueba de excepciones
+        """
+
+        ''' Instance generic Objects for test '''
+        InstancedForm = DatasetFormFactory(0).create()
+        argument = self.Object()
+
+        e = LifeCycleException()
+        space = 'workspace'
+        type_response = 'text/html'
+        self.process(e, space, type_response)
+
+        e = DATALException()
+        space = 'workspace'
+        type_response = 'text/html'
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = LifeCycleException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ChildNotApprovedException(argument)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response = 'text/html'
+        e = SaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastreamSaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationSaveException(InstancedForm)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatasetNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DataStreamNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = IllegalStateException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ApplicationException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastoreNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = MailServiceNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SearchIndexNotFoundException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = S3CreateException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = S3UpdateException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SFTPCreateException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = SFTPUpdateException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = NoStatusProvidedException("description string")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ParentNotPublishedException("Descripcion error class in __init__")
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        request = self.fake_request(space, type_response)
+        e = DatastreamParentNotPublishedException(argument)
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = VisualizationParentNotPublishedException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = ResourceRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyResourceRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatasetRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = DatastreamRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyDatasetRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = AnyDatastreamRequiredException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = InsufficientPrivilegesException()
+        self.process(e, space, type_response)
+
+        space = 'workspace'
+        type_response ='text/html'
+        e = RequiresReviewException()
+        self.process(e, space, type_response)
+
+        '''
+        Test microsites exceptions
+        '''
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = VisualizationRevisionDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = VisualizationDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = AccountDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = InvalidPage()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DataStreamDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DatasetDoesNotExist()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = DatsetError()
+        self.process(e, space, type_response)
+
+        space = 'microsites'
+        type_response ='text/html'
+        e = NotAccesVisualization()
+        self.process(e, space, type_response)
+
+
+
 
 
 class LifeCycleManagerTestCase(TransactionTestCase):
@@ -350,66 +624,66 @@ class LifeCycleManagerTestCase(TransactionTestCase):
     #     self.assertIs(Dataset.objects.filter(id=old_dataset.id).count(), 0)
 
 
-class TestEngine(TestCase):
+# class TestEngine(TestCase):
+#
+#     def test_preview_chart(self):
+#         """
+#         [Engine] Test de vista previa de graficos
+#         """
+#         query = {
+#             'pInvertedAxis': u'',
+#             'pNullValuePreset': u'',
+#             'pHeaderSelection': u'K1:K1',
+#             'pId': 70703,
+#             'pType': u'linechart',
+#             'pData': u'K2:K4',
+#             'pNullValueAction': u'exclude',
+#             'pLabelSelection': u'C2:C4',
+#             'pInvertData': u''
+#         }
+#         result, content_type = preview_chart(query)
+#         # print result
+#         assert content_type == 'application/json; charset=UTF-8'
+#
+#     def test_preview_map(self):
+#         """
+#         [Engine] Test de vista previa de mapas
+#         """
+#         query = {
+#             'pId': 70703,
+#             'pType': 'mapchart',
+#             'pNullValueAction': 'exclude',
+#             'pNullValuePreset': '',
+#             'pData': 'C2:C12',
+#             'pLatitudSelection': 'K2:K12',
+#             'pLongitudSelection': 'L2:L12',
+#             'pHeaderSelection': '',
+#             'pTraceSelection': '',
+#             # 'pZoom': '1',
+#             # 'pBounds': '-24.237324317659557;-45.949525292619;-42.98732431765956;-95.230775292619'
+#         }
+#         result, content_type = preview_chart(query)
+#         # print result, content_type
+#         assert content_type == 'application/json; charset=UTF-8'
 
-    def test_preview_chart(self):
-        """
-        [Engine] Test de vista previa de graficos
-        """
-        query = {
-            'pInvertedAxis': u'',
-            'pNullValuePreset': u'',
-            'pHeaderSelection': u'K1:K1',
-            'pId': 70703,
-            'pType': u'linechart',
-            'pData': u'K2:K4',
-            'pNullValueAction': u'exclude',
-            'pLabelSelection': u'C2:C4',
-            'pInvertData': u''
-        }
-        result, content_type = preview_chart(query)
-        # print result
-        assert content_type == 'application/json; charset=UTF-8'
 
-    def test_preview_map(self):
-        """
-        [Engine] Test de vista previa de mapas
-        """
-        query = {
-            'pId': 70703,
-            'pType': 'mapchart',
-            'pNullValueAction': 'exclude',
-            'pNullValuePreset': '',
-            'pData': 'C2:C12',
-            'pLatitudSelection': 'K2:K12',
-            'pLongitudSelection': 'L2:L12',
-            'pHeaderSelection': '',
-            'pTraceSelection': '',
-            # 'pZoom': '1',
-            # 'pBounds': '-24.237324317659557;-45.949525292619;-42.98732431765956;-95.230775292619'
-        }
-        result, content_type = preview_chart(query)
-        # print result, content_type
-        assert content_type == 'application/json; charset=UTF-8'
-
-
-class TestElasticSearch(TestCase):
-
-    def test_es_search(self):
-        """
-        [ElasticSearch] Test de busqueda en elastic search
-        """
-        es = ElasticsearchFinder()
-        resource = ["ds", "dt", "db", "chart", "vt"]
-
-        query = 'iniciativas'
-        category_filters = ['finanzas']
-        results, searchtime, facets = es.search(
-            query=query,
-            account_id=1,
-            category_filters=category_filters
-        )
-        for result in results:
-            pass
-
-        assert len(results) == 2
+# class TestElasticSearch(TestCase):
+#
+#     def test_es_search(self):
+#         """
+#         [ElasticSearch] Test de busqueda en elastic search
+#         """
+#         es = ElasticsearchFinder()
+#         resource = ["ds", "dt", "db", "chart", "vt"]
+#
+#         query = 'iniciativas'
+#         category_filters = ['finanzas']
+#         results, searchtime, facets = es.search(
+#             query=query,
+#             account_id=1,
+#             category_filters=category_filters
+#         )
+#         for result in results:
+#             pass
+#
+#         assert len(results) == 2

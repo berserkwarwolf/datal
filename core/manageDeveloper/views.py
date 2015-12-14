@@ -5,8 +5,7 @@ from core.models import Application, DataStream
 from django.conf import settings
 
 
-def action_query(request):
-    DOC_API_URL = settings.DOC_API_URL
+def filter(request):
     if hasattr(request, 'account'):
         account = request.account
         preferences = account.get_preferences()
@@ -26,7 +25,7 @@ def action_query(request):
     return render_to_response('manageDeveloper/query_list.html', locals())
 
 
-def action_insert(request):
+def create(request):
     try:
         account = request.account
     except AttributeError, e:

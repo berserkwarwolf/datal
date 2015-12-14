@@ -550,7 +550,7 @@ msgid "DEV-CREATEREQUEST-TEX3"
 msgstr "A few things to note in the request above"
 
 msgid "DEV-CREATEREQUEST-TEX4"
-msgstr "/api/v1/datastreams/"
+msgstr "/api/v2/datastreams/"
 
 msgid "DEV-CREATEREQUEST-TEX5"
 msgstr ""
@@ -616,7 +616,7 @@ msgid "NEW-PASSWORD-MISMATCH"
 msgstr "New passwords do not match."
 
 msgid "EMAIL-EXISTS"
-msgstr "Email already exists."
+msgstr "E-mail already exists."
 
 msgid "HEADER-IE-MESSAGES"
 msgstr "<p><strong>Warning:</strong> DATAL runs correctly in Internet Explorer versions 8 or higher and may not work properly in older versions of this browser, or in <a href='http://blogs.msdn.com/b/ie/archive/2008/08/27/introducing-compatibility-view.aspx' title='Compatibility view' target='_blank'>compatibility view</a> mode. Please <a href='http://windows.microsoft.com/en-us/internet-explorer/products/ie/home' title='Upgrade it' target='_blank'>upgrade it</a> or <a href='http://abetterbrowser.org/' title='Use another browser' target='_blank'>use another browser</a>.</p>"
@@ -739,7 +739,7 @@ msgid "PRIV-SHARE-VZ-ERROR"
 msgstr "Oops! We couldn't share your visualization"
 
 msgid "PRIV-SHARE-EMAIL-ERROR"
-msgstr "Oops! We couldn't process this email"
+msgstr "Oops! We couldn't process this e-mail"
 
 msgid "FOOTER-OPENDATA-BUTTON"
 msgstr "This material is Open Data"
@@ -789,8 +789,8 @@ msgstr "Create datastream."
 msgid "EXCEPTION-ACTION-VIEW-DATASET"
 msgstr "Review the dataset."
 
-msgid "EXCEPTION-ACTION-REVIEW-DATASET-STREAMS-AND-PUBLISH"
-msgstr "Review dataviews, approve them and the publish."
+msgid "EXCEPTION-ACTION-ASSOCIATED-RESOURCES"
+msgstr "Review associated resources."
 
 msgid "EXCEPTION-ACTION-VIEW-DATASET-LIST"
 msgstr "Review datasets"
@@ -826,10 +826,10 @@ msgid "EXCEPTION-DESCRIPTION-LIFE-CYCLE"
 msgstr "We found an error on the publication cycle."
 
 msgid "EXCEPTION-TITLE-CHILD-NOT-APPROVED"
-msgstr "Dataviews need approval."
+msgstr "Associated resources need approval."
 
 msgid "EXCEPTION-DESCRIPTION-CHILD-NOT-APPROVED"
-msgstr "You need to approve the associated dataviews to publish. "
+msgstr "You need to approve one or more associated resources of type %(resource_type)s to publish. "
 
 msgid "EXCEPTION-TITLE-SAVE-ERROR"
 msgstr "Resource could not be saved."
@@ -1001,3 +1001,52 @@ msgstr "Unknown Error"
 
 msgid "EXCEPTION-DESCRIPTION-UNKNOWN"
 msgstr "Unknown Error of name %(exception_name)s and trace '%(exception_trace)s'"
+
+# —————————— Exceptions Microsites
+msgid "EXCEPTION-TITLE-REVISION-NOT-EXIST"
+msgstr "Visualization does not exist"
+
+msgid "EXCEPTION-DESCRIPTION-REVISION-NOT-EXIST"
+msgstr "The Visualization's revision does not exist."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-EXIST"
+msgstr "The visualization does not exist"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-EXIST"
+msgstr "The visualization does not exist."
+
+msgid "EXCEPTION-TITLE-ACCOUNT-NOT-EXIST"
+msgstr "The account does not exist"
+
+msgid "EXCEPTION-DESCRIPTION-ACCOUNT-NOT-EXIST"
+msgstr "The account you try to use does not exist."
+
+msgid "EXCEPTION-TITLE-INVALID-PAGE"
+msgstr "Invalid page"
+
+msgid "EXCEPTION-DESCRIPTION-INVALID-PAGE"
+msgstr "The page you are trying to access, is invalid."
+
+msgid "EXCEPTION-TITLE-DATASTREAM-NOT-EXIST"
+msgstr "The datastream does not exist"
+
+msgid "EXCEPTION-DESCRIPTION-DATASTREAM-NOT-EXIST"
+msgstr "The datastream you are trying to use does not exist"
+
+msgid "EXCEPTION-TITLE-DATASET-NOT-EXIST"
+msgstr "Dataset does not exist"
+
+msgid "EXCEPTION-DESCRIPTION-DATASET-NOT-EXIST"
+msgstr "The dataset you are trying to use does not exist."
+
+msgid "EXCEPTION-TITLE-DATASET-ERROR"
+msgstr "Error in dataset."
+
+msgid "EXCEPTION-DESCRIPTION-DATASTET-ERROR"
+msgstr "Error in dataset."
+
+msgid "EXCEPTION-TITLE-VISUALIZATION-NOT-ACCESS"
+msgstr "Not access to visualization"
+
+msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-ACCESS"
+msgstr "Your account has no access to the visualization"

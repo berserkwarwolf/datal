@@ -6,30 +6,25 @@ var viewChartView = Backbone.View.extend({
     chartContainer: "#id_visualizationResult",
         
     events:{
-        'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage' 
+        'click #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage',
+        'click #id_permalink, #id_GUID': 'onInputClicked',
     },
 
     initialize : function() {
-        var self = this;
 
-        this.chartsFactory = new charts.ChartsFactory();
         this.$window = $(window);
 
         // init Sidebars
         this.initSidebarTabs();
+        this.initInfoSidebar();
 
-        this.setupChart();
-        this.render();
-        this.listenTo(this.model, "change", this.render);
-        this.bindEvents();
-        $(function () {
-            self.onDocumentReady.call(self);
+        this.chartView = new ChartView({
+            el: '#id_visualizationResult',
+            model: this.model
         });
-    },
-    /**
-     * Maneja acciones a reliazar cuando termina la primera carga de la pagina
-     */
-    onDocumentReady: function () {
+
+        this.render();
+        this.bindEvents();
         this.handleResizeEnd();
     },
     /**
@@ -140,56 +135,54 @@ var viewChartView = Backbone.View.extend({
     },
     initInfoSidebar: function () {
         // Permalink
-        // this.permalinkHelper();
+        this.permalinkHelper();
 
         // Hits
         new visualizationHitsView({model: new visualizationHits(), visualization: this.model});
     },
+    permalinkHelper: function(){
+        //var permalink = this.model.attributes.permaLink,
+        // debería ir permalink?!?!?!
+        var permalink = this.model.attributes.publicUrl,
+        self = this;
+$('#id_permalink').val(permalink);
+
+        if (typeof(BitlyClient) != 'undefined') {
+      BitlyClient.shorten( permalink, function(pData){
+
+                var response,
+                  shortUrl;
+
+                for(var r in pData.results) {
+                response = pData.results[r];
+                break;
+                }
+
+                shortUrl = response['shortUrl'];
+
+            if(shortUrl){
+              self.model.attributes.shortUrl = shortUrl;
+              $('#id_permalink').val(shortUrl);
+            }
+
+            });
+
+    }
+
+
+    },
+    onInputClicked: function(event) {
+
+        var input = event.currentTarget;
+        $(input).select();
+
+    },
+
     initAPISidebar: function () {
         
     },
     initNotesSidebar: function () {
         
-    },
-    /**
-     * Configura el chart de la visualización
-     */
-    setupChart: function () {
-        this.$chartContainer = $(this.chartContainer);
-
-        this.model.set('chart', {
-            lib: this.model.get('chartLib'),
-            type: JSON.parse(this.model.get('chartJson')).format.type
-        });
-
-        var chartSettings = this.chartsFactory.create(this.model.get('chart').type, this.model.get('chart').lib);
-
-        this.ChartViewClass = chartSettings.Class;
-        this.ChartModelClass = charts.models.Chart;
-    },
-    /**
-     * Initcializa el chart de la vista
-     */
-    initializeChart: function () {
-        if(typeof this.chartInstance === 'undefined'){
-            this.createChartInstance();
-        }
-    },
-    /**
-     * Crea una instancia del chart para ser insertado en la vista
-     */
-    createChartInstance: function () {
-        var chartModelInstance = new this.ChartModelClass({
-            type: this.model.get('chart').type,
-            id: this.model.get('visualizationrevision_id')
-        });
-
-        this.chartInstance = new this.ChartViewClass({
-            el: this.chartContainer,
-            model: chartModelInstance
-        });
-
-        this.chartInstance.model.fetchData();
     },
     /**
      * Muestra un elemento UI para indicar el estado de carga
@@ -219,7 +212,7 @@ var viewChartView = Backbone.View.extend({
 
         //Calucla el alto que deberá tener el contenedor del chart
         var height = this.$window.height() - otherHeights - 70;
-        this.$chartContainer.css({
+        this.chartView.$el.css({
             height: height + 'px',
             maxHeight: height + 'px',
             minHeight: height + 'px',
@@ -229,7 +222,7 @@ var viewChartView = Backbone.View.extend({
         this.$sidebarContainer.css({
             height: height + 'px'
         });
-        chartInstance.render();
+        this.chartView.render();
     },
 
     setWaitingMessage: function(event){
@@ -252,8 +245,7 @@ var viewChartView = Backbone.View.extend({
      * Render de la vista
      */
     render: function () {
-        this.initializeChart();
-        this.chartInstance.render();
+        this.chartView.render();
         return this;
     }
 });

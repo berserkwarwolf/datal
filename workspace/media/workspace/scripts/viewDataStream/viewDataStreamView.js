@@ -15,15 +15,15 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 		"click #id_edit": "onEditButtonClicked",
 	},
 
-	initialize: function(){
+	initialize: function(options){
 		this.template = _.template( $("#context-menu-template").html() );
 		this.listenTo(this.model, "change", this.render);
 		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 		this.render();
 
-		this.sourceUrl = this.options.sourceUrl;
-		this.tagUrl = this.options.tagUrl;
-		this.datastreamEditItemModel = this.options.datastreamEditItemModel;
+		this.sourceUrl = options.sourceUrl;
+		this.tagUrl = options.tagUrl;
+		this.datastreamEditItemModel = options.datastreamEditItemModel;
 
 		// Init Filters
 		this.initFilters();
@@ -133,6 +133,10 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 				datalEvents.trigger('datal:application-error', response);
 
+				if( response.status == '499'){
+					setTimeout(function(){ window.location.reload(true); }, 2000);
+				}
+
 			},
 			complete:function(response){
 				// Hide Loading
@@ -178,7 +182,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 	onDeleteButtonClicked: function(){
 		self = this;
 		this.deleteListResources = new Array();
-		this.deleteListResources.push(this.options.model);
+		this.deleteListResources.push(this.model);
 		var deleteItemView = new DeleteItemView({
 			models: this.deleteListResources,
 			type: "visualizations"
@@ -187,7 +191,7 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 	onUnpublishButtonClicked: function(){
 		this.unpublishListResources = new Array();
-		this.unpublishListResources.push(this.options.model);
+		this.unpublishListResources.push(this.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
 				type: "visualizations",

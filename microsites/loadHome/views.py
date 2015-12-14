@@ -2,21 +2,23 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse, Http404
 from django.views.decorators.http import require_POST, require_GET
 from django.core.serializers.json import DjangoJSONEncoder
+from django.template import loader, Context
 from core.models import *
 from core.managers import *
 from core.shortcuts import render_to_response
 from core.http import add_domains_to_permalinks
 from microsites.loadHome.forms import QueryDatasetForm
-from microsites.loadHome import utils
-from utils import *
 from core.communitymanagers import *
 from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
 from django.utils.translation import ugettext
-
+from core.exceptions import *
+from microsites.exceptions import *
+from core.search.finder import FinderQuerySet
+from core.builders.themes import ThemeBuilder
 import json
-
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -24,56 +26,40 @@ logger = logging.getLogger(__name__)
 def load(request):
     """
     Shows the microsite's home page
+    :param request:
     """
-
     jsonObject = None
     language = request.auth_manager.language
     account = request.account
     preferences = request.preferences
+    is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
+    
+    builder = ThemeBuilder(preferences, is_preview, language, account)
 
-    if('preview' in request.GET and request.GET['preview'] == 'true') or preferences["account_home"]:
+    if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
-        if'preview' in request.GET and request.GET['preview'] == 'true':
-            jsonObject = json.loads(preferences["account_preview"], strict=False)
-            pageTitle = ugettext('APP-PREVIEWWINDOW-TITLE')
-        elif preferences["account_has_home"]:
-            jsonObject = json.loads(preferences["account_home"], strict=False)
+        data = builder.parse()
 
-        if jsonObject:
-            themeid = jsonObject['theme']
-            config = jsonObject['config']
-            datastreams = []
-            resources = []
-            if config:
-                if 'sliderSection' in config:
-                    datastreams = retrieveDatastreams(config['sliderSection'], language)
-                if 'linkSection' in config:
-                    resources = retrieveResourcePermalinks(config['linkSection'], language)
+        if data:
 
-            if preferences['account_home_filters'] == 'featured_accounts': # the account have federated accounts (childs)
-                featured_accounts = Account.objects.get_featured_accounts(account.id)
-                account_id = [featured_account['id'] for featured_account in featured_accounts]
-                for index, f in enumerate(featured_accounts):
-                    featured_accounts[index]['link'] = Account.objects.get(id=f['id']).get_preference('account.domain')
+            accounts_ids=data['federated_accounts_ids'] + [account.id]
 
-                categories = Category.objects.get_for_home(language, account_id)
-            else:
-                account_id = account.id
-                categories = Category.objects.get_for_home(language, account_id)
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
+                max_results=250, account_id=accounts_ids )
 
-            results, search_time, facets = FinderManager(HomeFinder).search(max_results=250, account_id=account_id)
-
-            paginator = Paginator(results, 25)
+            paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
 
-            if preferences['account_home_filters'] == 'featured_accounts':
+            if data['federated_accounts_ids']:
                 add_domains_to_permalinks(revisions.object_list)
 
-            return render_to_response('loadHome/home_'+themeid+'.html', locals())
+            context = data.copy()
+            context['has_federated_accounts'] = data['federated_accounts_ids'] != []
+            context['request'] = request
+            context['paginator'] = paginator
+            context['revisions'] = revisions
+            return render_to_response(data['template_path'], context)
         else:
-            # No Home, return to featured Dashboards
-            # return redirect('/dashboards/')
-
             # For the moment, redirect to search
             return redirect('/search/')
     else:
@@ -86,7 +72,7 @@ def update_list(request):
     account         = request.account
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
-
+    language        = request.auth_manager.language
 
     form = QueryDatasetForm(request.POST)
     if form.is_valid():
@@ -98,30 +84,32 @@ def update_list(request):
         resources = ['ds', 'db', 'vz', 'dt']
         category_filters = form.cleaned_data.get('category_filters')
         if category_filters:
-            category_filters=category_filters.lower().split(",")
-        
+            category_filters=category_filters.split(",")
 
-        if preferences['account_home_filters'] == 'featured_accounts':
+        builder = ThemeBuilder(preferences, False, language, account)
+        data = builder.parse()
+
+        if data['federated_accounts_ids']:
 
             entity = form.cleaned_data.get('entity_filters')
             if entity:
                 accounts_ids = [int(entity)]
             else:
-                featured_accounts = account.account_set.values('id').all()
-                accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
+                accounts_ids = data['federated_accounts_ids'] + [account.id]
 
             typef = form.cleaned_data.get('type_filters')
             if typef:
                 resources = [typef]
 
-            results, search_time, facets = FinderManager(HomeFinder).search(
-                                                                    query = query,
-                                                                    max_results = 250,
-                                                                    account_id = accounts_ids,
-                                                                    resource = resources,
-                                                                    category_filters=category_filters,
-                                                                    order = order,
-                                                                    order_type = order_type)
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
+                query = query,
+                max_results = 250,
+                account_id = accounts_ids,
+                resource = resources,
+                category_filters=category_filters,
+                order = order,
+                order_type = order_type
+            ) 
 
         else:
             all_resources = form.cleaned_data.get('all')
@@ -131,7 +119,7 @@ def update_list(request):
                 for resource_name in resources_type.split(','):
                     resources.append(resource_name)
 
-            results, search_time, facets = FinderManager(HomeFinder).search(
+            queryset = FinderQuerySet(FinderManager(HomeFinder), 
                 category_filters= category_filters,
                 query=query,
                 resource=resources,
@@ -141,40 +129,26 @@ def update_list(request):
                 account_id=account.id
             )
 
+        paginator = Paginator(queryset, 25)
 
-        ## manual temporary fix for indextank fails
-        #results2 = []
-        #for r in results:
-        #    if r['category'] in categories or categories==[]:
-        #        results2.append(r)
+        revisions = paginator.page(page and page or 1)
+        if data['federated_accounts_ids']:
+            add_domains_to_permalinks(revisions.object_list)
+        error = ''
 
-        paginator = Paginator(results, 25)
-
-        if preferences['account_home_filters'] == 'featured_accounts':
-            add_domains_to_permalinks(results)
-
-        response = {
-            "number_of_pages": paginator.num_pages,
-             "errors": [],
-             "revisions": paginator.page(page and page or 1).object_list
-       }
+        results = revisions.object_list
     else:
-        response = {
-            "number_of_pages": 0,
-            "errors": ['Invalid data'],
-            "errores_locos": form.errors,
-            "revisions": []
-       }
+        error = 'Invalid data'
         results=[]
         categories=[]
 
-    response["results_dbg"] = results
-    response["categories_asked_dbg"] = category_filters
-    return HttpResponse(json.dumps(response, cls=DjangoJSONEncoder), mimetype='application/json')
+    t = loader.get_template('loadHome/table.json')
+    c = Context(locals())
+    return HttpResponse(t.render(c), content_type="application/json")
 
 
 @require_GET
-def action_update_categories(request):
+def update_categories(request):
     language = request.auth_manager.language
     params = request.GET
     account_id = params.get('account_id','')
@@ -183,14 +157,15 @@ def action_update_categories(request):
     if account_id == '':
         account = request.account
         preferences = request.preferences
-        if preferences['account_home_filters'] == 'featured_accounts':
-            featured_accounts = Account.objects.get_featured_accounts(account.id)
-            account_id = [featured_account['id'] for featured_account in featured_accounts]
-            for index, f in enumerate(featured_accounts):
-                featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
+        builder = ThemeBuilder(preferences, False, language, account)
+        data = builder.parse()
 
-
-    # account_id is single account or a list of featured accounts
-    categories = Category.objects.get_for_home(language, account_id)
+        if data['federated_accounts_ids']:
+            federated_accounts=data['federated_accounts']
+    
+        categories = data['categories']
+    else:
+        # account_id is single account or a list of federated accounts
+        categories = Category.objects.get_for_home(language, account_id)
 
     return render_to_response('loadHome/categories.js', locals(), mimetype="text/javascript")

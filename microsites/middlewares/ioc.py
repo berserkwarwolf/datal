@@ -8,7 +8,8 @@ from django.shortcuts import redirect
 from core.models import Account
 from core.http import get_domain_by_request
 from core.http import get_domain_with_protocol
-
+from core.exceptions import *
+from microsites.exceptions import *
 
 class DependencyInjector(object):
     """ Gets the current site & account """
@@ -18,16 +19,11 @@ class DependencyInjector(object):
         request.bucket_name = settings.AWS_BUCKET_NAME
 
         try:
-            # check for develop domains
-            if settings.DOMAINS['microsites'].split(":")[0] != domain.split(":")[0]:
-                account = Account.objects.get_by_domain(domain)
-            else:
-                # use default account if exists
-                account = Account.objects.get(pk=1)
+            account = Account.get_by_domain(domain)
         except Account.DoesNotExist:
             logger = logging.getLogger(__name__)
             logger.error('The account do not exists: %s' % domain)
-            raise Http404
+            raise AccountDoesNotExist
 
         request.account = account
 

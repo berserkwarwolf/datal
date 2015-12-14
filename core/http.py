@@ -42,20 +42,6 @@ def gravatar_url(email, size):
     default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
 
-def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
-
-    l_query = ''
-    if p_end_point.startswith('&'):
-        l_query = '?' + p_end_point[1:]
-
-    l_domain = ''
-    if p_is_absolute:
-        l_domain = settings.BASE_URI
-
-    l_url = reverse(p_view_name)
-
-    return l_domain + l_url + l_query
-
 def add_domains_to_permalinks(resources):
     from core.models import Preference
     accounts_ids = [ item['account_id'] for item in resources ]
@@ -93,28 +79,6 @@ def get_impl_type(mimetype, end_point, old_impl_type=None):
 
     mimetype = mimetype.split(';')[0]
     
-#    impl_types = {
-#      "application/vnd.ms-xpsdocument": SourceImplementationChoices.DOC
-#    , "application/vnd.ms-excel": SourceImplementationChoices.XLS
-#    , "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": SourceImplementationChoices.XLS
-#    , "application/vnd.oasis.opendocument.text": SourceImplementationChoices.ODT
-#    , "application/vnd.oasis.opendocument.text-web": SourceImplementationChoices.ODT
-#    , "application/vnd.oasis.opendocument.spreadsheet": SourceImplementationChoices.ODS
-#    , "application/msword": SourceImplementationChoices.DOC
-#    , "text/html": SourceImplementationChoices.HTML
-#    , "text/csv": SourceImplementationChoices.TXT
-#    , "text/x-comma-separated-values": SourceImplementationChoices.HTML
-#    , "text/plain": SourceImplementationChoices.HTML
-#    , "application/pdf": SourceImplementationChoices.PDF
-#    , "application/vnd.google-earth.kml+xml": SourceImplementationChoices.KML
-#    , "image/jpeg": SourceImplementationChoices.IMAGE
-#    , "image/png": SourceImplementationChoices.IMAGE
-#    , "image/gif": SourceImplementationChoices.IMAGE
-#    , "application/zip": SourceImplementationChoices.ZIP
-#    , "application/x-gzip": SourceImplementationChoices.ZIP
-#    , "application/x-tar": SourceImplementationChoices.ZIP
-#    }
-
     for source_id, mimetypes in SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES:
         if mimetype in mimetypes:
             return source_id

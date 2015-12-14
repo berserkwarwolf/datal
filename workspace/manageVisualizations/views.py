@@ -18,22 +18,24 @@ from core.choices import *
 from core.models import VisualizationRevision
 from core.daos.visualizations import VisualizationDBDAO
 from core.lifecycle.visualizations import VisualizationLifeCycleManager
-from core.v8.factories import AbstractCommandFactory
+from core.exceptions import VisualizationNotFoundException
 from core.exceptions import DataStreamNotFoundException
+from core.signals import visualization_changed, visualization_removed, visualization_unpublished, \
+    visualization_rev_removed
 from workspace.manageVisualizations import forms
 from workspace.decorators import *
 from .forms import VisualizationForm, ViewChartForm
-from core.exceptions import VisualizationNotFoundException
 
 logger = logging.getLogger(__name__)
 
 
 @login_required
-@requires_any_dataset()
 @requires_any_datastream()
 @require_GET
 def index(request):
-    """ list all dataviews """
+    """ list all dataviews
+    :param request:
+    """
     dao = VisualizationDBDAO()
 
     resources, total_resources = dao.query(account_id=request.account.id, language=request.user.language)
@@ -49,9 +51,13 @@ def index(request):
 
 @login_required
 @require_GET
-#@require_privilege("workspace.can_query_visualization")
+@require_privilege("workspace.can_query_visualization")
 def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
-    """ filter resources """
+    """ filter resources
+    :param itemsxpage:
+    :param page:
+    :param request:
+    """
     bb_request = request.GET
     filters_param = bb_request.get('filters')
     filters_dict = dict()
@@ -109,11 +115,15 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
 
 
 @login_required
-#@require_privilege("workspace.can_delete_datastream")
-#@requires_review
+@require_privilege("workspace.can_delete_visualization")
+@requires_review
 @transaction.commit_on_success
 def remove(request, visualization_revision_id, type="resource"):
-    """ remove resource """
+    """ remove resource
+    :param type:
+    :param visualization_revision_id:
+    :param request:
+    """
     lifecycle = VisualizationLifeCycleManager(user=request.user, visualization_revision_id=visualization_revision_id)
 
     if type == 'revision':
@@ -124,6 +134,10 @@ def remove(request, visualization_revision_id, type="resource"):
         else:
             last_revision_id = -1
 
+        # Send signal
+        visualization_rev_removed.send_robust(sender='remove_view', id=lifecycle.visualization.id,
+                                       rev_id=visualization_revision_id)
+
         return JSONHttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-REV-ACTION-TEXT')],
@@ -132,6 +146,11 @@ def remove(request, visualization_revision_id, type="resource"):
         
     else:
         lifecycle.remove(killemall=True)
+
+        # Send signal
+        visualization_removed.send_robust(sender='remove_view', id=lifecycle.visualization.id,
+                                   rev_id=lifecycle.visualization_revision.id)
+
         return HttpResponse(json.dumps({
             'status': True,
             'messages': [ugettext('APP-DELETE-VISUALIZATION-ACTION-TEXT')],
@@ -149,64 +168,51 @@ def change_status(request, visualization_revision_id=None):
     :param visualization_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and visualization_revision_id:
+    if visualization_revision_id:
         lifecycle = VisualizationLifeCycleManager(
             user=request.user,
             visualization_revision_id=visualization_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-APPROVED-TEXT')
-                }
-            )
-        elif action == 'reject':
-            lifecycle.reject()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-REJECTED-TEXT')
-                }
-            )
-        elif action == 'publish':
-            lifecycle.publish()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
-                }
-            )
-        elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
-                }
-            )
-        elif action == 'send_to_review':
-            lifecycle.send_to_review()
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
-                }
-            )
-        else:
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
             raise NoStatusProvidedException()
+
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
+            # Signal
+            visualization_unpublished.send_robust(sender='change_status_view', id=lifecycle.visualization.id,
+                                                  rev_id=lifecycle.visualization_revision.id)
+        else:
+            getattr(lifecycle, action)()
+
+        if action == 'accept':
+            title = ugettext('APP-VISUALIZATION-APPROVED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-APPROVED-TEXT')
+        elif action == 'reject':
+            title = ugettext('APP-VISUALIZATION-REJECTED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-REJECTED-TEXT')
+        elif action == 'publish':
+            title = ugettext('APP-VISUALIZATION-PUBLISHED-TITLE'),
+            description = ugettext('APP-VISUALIZATION-PUBLISHED-TEXT')
+        elif action == 'unpublish':
+            title = ugettext('APP-VISUALIZATION-UNPUBLISH-TITLE'),
+            description = ugettext('APP-VISUALIZATION-UNPUBLISH-TEXT')
+        elif action == 'send_to_review':
+            title = ugettext('APP-VISUALIZATION-SENDTOREVIEW-TITLE'),
+            description = ugettext('APP-VISUALIZATION-SENDTOREVIEW-TEXT')
+
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = VisualizationDBDAO().get(request.user.language, visualization_revision_id=visualization_revision_id)
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('chart_manager.view', urlconf='microsites.urls', 
+            kwargs={'id': response['result']['visualization_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')
         response['result'].pop('sources')
@@ -258,13 +264,13 @@ def create(request):
 
 @login_required
 @require_GET
-def related_resources(request):
+def retrieve_childs(request):
     visualization_revision_id = request.GET.get('revision_id', '')
     visualization_id = request.GET.get('visualization_id', '')
     visualizations = VisualizationDBDAO().query_childs(
         visualization_id=visualization_id,
         language=request.auth_manager.language
-    )['dashboards']
+    )
 
     list_result = [associated_visualization for associated_visualization in visualizations]
     return HttpResponse(json.dumps(list_result), mimetype="application/json")
@@ -272,7 +278,7 @@ def related_resources(request):
 
 @login_required
 @require_GET
-def action_view(request, revision_id):
+def view(request, revision_id):
 
     try:
         visualization_revision = VisualizationDBDAO().get(
@@ -312,7 +318,7 @@ def edit(request, revision_id=None):
         # Formulario
         form = VisualizationForm(request.POST)
         if not form.is_valid():
-            logger.info(form._errors)
+            logger.info(form.errors)
             raise VisualizationSaveException('Invalid form data: %s' % str(form.errors.as_text()))
 
         visualization_rev = VisualizationDBDAO().get(
@@ -321,14 +327,18 @@ def edit(request, revision_id=None):
         )
         response = form.save(request, visualization_rev=visualization_rev)
 
+        # Signal
+        visualization_changed.send_robust(sender='edit_view', id=visualization_rev['visualization_id'],
+                                          rev_id=visualization_rev['visualization_revision_id'])
+
         return JSONHttpResponse(json.dumps(response))
 
 @login_required
-#@require_privilege("workspace.can_query_visualization")
-@require_privilege("workspace.can_query_dataset")
+@require_privilege("workspace.can_query_visualization")
 @require_GET
 def get_filters_json(request):
-    """ List all Filters available """
-    filters = VisualizationDBDAO().query_filters(account_id=request.user.account.id,
-                                    language=request.user.language)
+    """ List all Filters available
+    :param request:
+    """
+    filters = VisualizationDBDAO().query_filters(account_id=request.user.account.id, language=request.user.language)
     return JSONHttpResponse(json.dumps(filters))

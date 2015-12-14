@@ -8,8 +8,11 @@ var theme4View = Backbone.Epoxy.View.extend({
 		"click #id_btnRemoveCover" : "removeCover",
 	},
 
-	initialize: function(){
-		this.options.currentView.helpAndTips('show');
+	initialize: function(options){
+		this.currentView = options.currentView;
+		this.currentModel = options.currentModel;
+
+		this.currentView.helpAndTips('show');
 		this.template = _.template( $("#id_theme4Template").html() );		
 		this.initSliderSection();
 		this.initLinkSection();
@@ -18,10 +21,34 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	render: function(){
+		var self = this;
+		Backbone.Validation.bind(this, {
+            valid: function (view, attr, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, '');
+            },
+            invalid: function (view, attr, error, selector) {
+                self.setIndividualError(view.$('[name=id_theme4' + attr + ']'), attr, error);
+            }
+        });
 	        
 		this.$el.html(this.template(this.model.attributes));
 		return this;
 	},
+
+	setIndividualError: function(element, name, error){
+
+        // If not valid
+        if( error != ''){
+            element.addClass('has-error');
+            element.after('<p class="has-error">'+error+'</p>');
+
+        // If valid
+        }else{
+            element.removeClass('has-error');
+            element.next('p').remove();
+        }
+
+    },
 	
 	initInput: function () {
 		var that = this;
@@ -161,7 +188,10 @@ var theme4View = Backbone.Epoxy.View.extend({
 			}
 		}).on("click", function(e){
 			e.preventDefault();
-			$(this).parent().find('input[type=file]').trigger("click");
+
+			// Esto triggerea un comportamiento erroneo en todos los campos input. Les hace abrir una ventana de subir archivo.
+			//$(this).parent().find('input[type=file]').trigger("click");
+			
 		});
 
 	},
@@ -171,18 +201,8 @@ var theme4View = Backbone.Epoxy.View.extend({
 		var sources = [];
 		var resourceQuery='';
 		_.each(this.model.attributes.sliderSection, function(item, index){
-			if (index > 0){
-				resourceQuery += " OR ";
-			}
-			switch (item.type){
-				case 'ds':
-					resourceQuery += "(datastream_id:"+ item.id+" AND type:"+item.type+")";
-					break;
-				case 'chart':
-					resourceQuery += "(visualization_id:"+ item.id+" AND type:"+item.type+")";
-					break;
-			}
-			   
+			resourceType=item.type;
+            resourceQuery += item.id+",";
 		});		
 		$.when(
 				$.ajax({
@@ -190,7 +210,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {term: resourceQuery, resources:['ds','chart']},				
+					data: {ids: resourceQuery, resources:[resourceType]},				
 				})).done( function(data){
 					$('#id_theme4nameSuggest').taggingSources({
 						source:function(request, response) {
@@ -202,6 +222,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					});
 				});
 	},
+
 	setSliderSection: function(){
 	
 		var resourceList = [];		
@@ -226,21 +247,8 @@ var theme4View = Backbone.Epoxy.View.extend({
 		var sources = [];
 		var resourceQuery='';
 		_.each(this.model.attributes.linkSection, function(item, index){
-			if (index > 0){
-				resourceQuery += " OR ";
-			}
-			switch (item.type){
-				case 'ds':
-					resourceQuery += "(datastream_id:"+ item.id+" AND type:"+item.type+")";
-					break;
-				case 'chart':
-					resourceQuery += "(visualization_id:"+ item.id+" AND type:"+item.type+")";
-					break;
-				case 'db':
-					resourceQuery += "(dashboard_id:"+ item.id+" AND type:"+item.type+")";
-					break;
-			}
-			   
+			resourceQuery += item.id+",";
+			resourceType= item.type;
 		});		
 		$.when(
 				$.ajax({
@@ -248,7 +256,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {term: resourceQuery, resources:['ds','chart','db']},				
+					data: {ids: resourceQuery, resources:[resourceType]},				
 				})).done( function(data){
 					$('#id_theme4nameLinkSuggest').taggingSources({
 						source:function(request, response) {
@@ -319,15 +327,16 @@ var theme4View = Backbone.Epoxy.View.extend({
 	},
 
 	savePreference: function(event){
+	  if(this.model.isValid(true)){
 		this.setSliderSection();
 		this.setLinkSection();
 		var btn_id = $(event.currentTarget).attr("id")
 		var ob={};
 		if (btn_id === 'id_save' || btn_id === 'id_save_top') {
-			this.options.currentModel.attributes.config = this.model.toJSON();
-			this.options.currentModel.attributes.themeID = '4';
-			ob['config'] = this.options.currentModel.attributes.config;
-			ob['theme'] = this.options.currentModel.attributes.themeID;
+			this.currentModel.attributes.config = this.model.toJSON();
+			this.currentModel.attributes.themeID = '4';
+			ob['config'] = this.currentModel.attributes.config;
+			ob['theme'] = this.currentModel.attributes.themeID;
 			ob['type'] = 'save';
 		} else {
 			ob['config'] = this.model.toJSON();
@@ -377,7 +386,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 			},
 			url: '/personalizeHome/save/'
 		});	
-
+	  }
 	}
 
 });

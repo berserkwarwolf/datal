@@ -37,10 +37,7 @@
 <script src="/js_core/base_modules/charts/views/mapChart.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="/js_core/base_modules/charts/views/c3Charts.js?id={{settings.VERSION_JS_CSS}}"></script>
 
-<!-- Screen JS -->
-<script src="{% static 'workspace/scripts/viewVisualization/deleteItemView.js' %}"></script>
-<script src="{% static 'workspace/scripts/viewVisualization/unpublishView.js' %}"></script>
-<script src="{% static 'workspace/scripts/viewVisualization/viewVisualizationView.js' %}"></script>
+
 
 <meta name="main-option" content="id_visualizations_option"/>
 {% endblock %}
@@ -78,6 +75,10 @@
 {% endblock %}
 
 {% block bottom_js %}
+<script src="{% static 'workspace/scripts/viewVisualization/deleteItemView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/unpublishView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/ChartView.js' %}"></script>
+<script src="{% static 'workspace/scripts/viewVisualization/MainView.js' %}"></script>
 <script type="text/javascript">
 
 google.load('visualization', '1', {packages: ['corechart', 'geomap']});
@@ -95,7 +96,7 @@ var chartModel = new charts.models.Chart({
     createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
     modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ visualization_revision.public_url }}",
+    publicUrl: "http://{{preference.account_domain}}{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     changeStatusUrl: "{% url 'manageVisualizations.change_status' visualization_revision.visualization_revision_id %}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
     editUrl: "{% url 'manageVisualizations.edit' visualization_revision.last_revision_id %}",
@@ -109,7 +110,22 @@ var chartModel = new charts.models.Chart({
 
 });
 
-var chartView = new viewVisualizationView({
+chartModel.parse({
+    id: {{ visualization_revision.visualization_id }},
+    revision_id: {{ visualization_revision.visualization_revision_id }},
+
+    title: '{{ visualization_revision.title }}',
+    description: '{{ visualization_revision.description }}',
+    notes: '{{ visualization_revision.notes }}',
+    lib: '{{ visualization_revision.lib }}',
+
+    data: '{{ visualization_revision.data }}',
+
+    format: {{ visualization_revision.format | jsonify }},
+    chart: {{ visualization_revision.chart | jsonify }},
+});
+
+var chartView = new MainView({
     model: chartModel
 });
 

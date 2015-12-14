@@ -11,7 +11,7 @@ var ManageDatasetsOverlayView = Backbone.View.extend({
 
 	},
 
-	initialize: function() {
+	initialize: function(options) {
 
 		// Init Overlay
 		this.$el.overlay({
@@ -53,7 +53,7 @@ var ManageDatasetsOverlayView = Backbone.View.extend({
 				"click": "rowClicked"
 			},
 			rowClicked: function () {
-				window.location = self.options.dataViewCreationStepsUrl + '?dataset_revision_id=' + this.model.get('id');
+				window.location = Configuration.createDataViewUrl + '?dataset_revision_id=' + this.model.get('id');
 			}
 		});
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from core.models import *
-from core.choices import StatusChoices
+from core.choices import StatusChoices, AccountRoles
 from django.utils.translation import ugettext_lazy, ugettext
 
 
@@ -35,13 +35,13 @@ class AuthManager:
         return not self.is_authenticated
 
     def is_admin(self):
-        return self.has_role('ao-account-admin')
+        return self.has_role(AccountRoles.ADMIN)
 
     def is_editor(self):
-        return self.has_role('ao-editor')
+        return self.has_role(AccountRoles.EDITOR)
 
     def is_publisher(self):
-        return self.has_role('ao-publisher')
+        return self.has_role(AccountRoles.PUBLISHER)
 
     def has_privilege(self, p_privilege = ''):
         return p_privilege in self.privileges
@@ -68,7 +68,7 @@ class AuthManager:
     def has_privilege_on_object(self, object_id, object_type, privilege, is_workspace = True):
         """
             Privelege in view, share, export
-            object_type in datastream, dashboard, visualization
+            object_type in datastream, visualization
         """
         if is_workspace:
             return self.has_privilege('workspace.can_'+privilege+'_'+object_type)

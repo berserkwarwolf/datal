@@ -35,7 +35,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	onDeleteButtonClicked: function(){
 		this.deleteListResources = new Array();
-		this.deleteListResources.push(this.options.model);
+		this.deleteListResources.push(this.model);
 		var deleteItemView = new DeleteItemView({
 				models: this.deleteListResources,
 				type: "datastreams"
@@ -44,7 +44,7 @@ var datasetView = Backbone.Epoxy.View.extend({
 
 	onUnpublishButtonClicked: function(){
 		this.unpublishListResources = new Array();
-		this.unpublishListResources.push(this.options.model);
+		this.unpublishListResources.push(this.model);
 		var unpublishView = new UnpublishView({
 				models: this.unpublishListResources,
 				type: "datastreams",
@@ -96,23 +96,25 @@ var datasetView = Backbone.Epoxy.View.extend({
 						'modifiedAt': response.result.modified_at,
 					});
 
-					// Update Heights
-					setTimeout(function(){
-						self.setContentHeight();
-					}, 0);
-
 					// Set OK Message
 					$.gritter.add({
 						title: response.messages.title,
 						text: response.messages.description,
 						image: '/static/workspace/images/common/ic_validationOk32.png',
 						sticky: false,
-						time: 2500
+						time: 2500,
+						after_close: function () {
+							window.location.reload();
+						}
 					});
 
 				}else{
 
 					datalEvents.trigger('datal:application-error', response);
+
+					if( response.status == '499'){
+						setTimeout(function(){ window.location.reload(true); }, 2000);
+					}
 
 				}
 

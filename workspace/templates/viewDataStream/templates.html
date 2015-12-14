@@ -148,7 +148,7 @@
 
 			<span class="publish-version">
 
-				<% if(publicUrl != ''){ %> 
+				<% if(lastPublishRevisionId != ''){ %> 
 
 					<% if(status != StatusChoices.PUBLISHED){ %> 
 						{% trans 'APP-LASTPUBLISHDATE-TEXT' %}
@@ -231,7 +231,9 @@
 				</div>
 				<ul class="dropdown" style="display:none;">
 					<li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
-					<li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+					<% if(status != StatusChoices.APPROVED){ %>
+						<li id="id_edit"><a class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+					<% } %>
 				</ul>
 			</div>   
 
@@ -304,16 +306,7 @@ if(result.fType != 'ARRAY'){
 				<%
 				for(var col=0;col<result.fCols;col++){
 			var cell = result.fArray[i],value = '';
-			if (cell.fType == "TEXT" && ! _.isUndefined(cell.fDisplayFormat))
-				{
-				//console.log("Fixing?");
-				fmt = cell.fDisplayFormat.fPattern;
-				if (fmt.indexOf("#") == -1)
-					{
-				//console.log("Fix==");
-					cell.fType = "DATE";
-					}
-			}
+
 					switch(cell.fType){
 						case "TEXT":
 							value = ( cell.fStr.length != 1 ) ? cell.fStr : cell.fStr.replace('-', '&nbsp;');

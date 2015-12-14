@@ -15,6 +15,7 @@
 .zeroDatasets{background-position:50% 0;}
 .zeroDataviews{background-position:50% -184px;}
 .zeroVisualizations{background-position:50% -368px;}
+.zeroDashboards{background-position:50% -567px;}
 
 .startAdding{height:87px;width:410px;right:80px;top:0;position:absolute;text-align:right;}
 .startAdding p{float:left;font:20px "permanent_marker";text-align:right;width:340px;text-transform:uppercase;}
@@ -92,9 +93,3 @@
 
 .list-container .backgrid th, 
 .list-container .backgrid td{border:0;max-width:300px;}
-
-/* Overlays */
-.ao-popup-overlay table th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}
-
-#id_addDataview #dataset_grid, 
-#id_addVisualization #visualization_grid{height:280px;overflow:auto;overflow-x:hidden;}

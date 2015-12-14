@@ -46,16 +46,7 @@ if(result.fType != 'ARRAY'){
         <%
         for(var col=0;col<result.fCols;col++){
       var cell = result.fArray[i],value = '';
-      if (cell.fType == "TEXT" && ! _.isUndefined(cell.fDisplayFormat))
-        {
-        //console.log("Fixing?");
-        fmt = cell.fDisplayFormat.fPattern;
-        if (fmt.indexOf("#") == -1)
-          {
-        //console.log("Fix==");
-          cell.fType = "DATE";
-          }
-      }
+
           switch(cell.fType){
             case "TEXT":
               value = ( cell.fStr.length != 1 ) ? cell.fStr : cell.fStr.replace('-', '&nbsp;');

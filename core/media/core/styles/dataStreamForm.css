@@ -7,12 +7,7 @@
 /*
 .dataStreamForm .form .row label{text-align:right;font-size:12px;color:#767676;font-weight:bold;display:block;float:left;width:90px;padding-right:8px;}
 */
-.dataStreamForm .form .row input, .dataStreamForm .form .row textarea{background: none repeat scroll 0 0 #fff;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1) inset;
-    box-sizing: border-box;
-    font-size: 12px;
-    padding: 5px;
-    width: 440px;}
+.dataStreamForm .form .row input, .dataStreamForm .form .row textarea{width:440px;}
 .dataStreamForm .form .row select{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:6px;font:normal 12px Arial, Helvetica, sans-serif;width:440px;}
 .dataStreamForm .form .row textarea{border:1px solid #e2e0e0;-moz-border-radius:3px;-webkit-border-radius:3px;-border-radius:3px;background:#fff;padding:4px;font:normal 12px Arial, Helvetica, sans-serif;width:502px;height:50px;}
 .dataStreamForm .form .row.checkbox{padding-left:98px;}
@@ -27,10 +22,7 @@
 .dataStreamForm .form .row .tagsContent{padding:0;margin-top:2px;}
 .dataStreamForm .form .row .inputNewTag{float:none;}
 .tag .tagInner{padding:0;}
-.tag .tagTxt{background:#e2e2e2;word-wrap:break-word;display:block;float:left;padding:2px 10px;color:#000;font-size:11px;line-height:20px;height:20px;}
 .tag .tagInner a, .param .paramInner a{display:block;float:left;width:17px;height:20px;background:#e2e2e2 url(/static/core/images/common/ic_tagCloseCuration.png) no-repeat 0 1px;padding:2px;cursor:pointer;}
-.tag .tagInner a:hover,
-.tag .tagTxt.isEditing{background-position:0 -18px;border-color:#ccc;}
 .tag .tagTxt.isEditing{border-color:#bbb;}
 .tag .tagTxt.isEditing input{border:0;font-size:11px;padding:0;margin:0;background:0;font-style:italic;}
 .tag .tagInner a.toApprove,

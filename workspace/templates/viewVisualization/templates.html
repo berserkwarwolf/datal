@@ -21,7 +21,7 @@
 
       <span class="publish-version">
 
-        <% if(publicUrl != ''){ %> 
+        <% if(lastPublishRevisionId != ''){ %> 
 
           <% if(status != StatusChoices.PUBLISHED){ %> 
             {% trans 'APP-LASTPUBLISHDATE-TEXT' %}
@@ -99,7 +99,9 @@
         </div>
         <ul class="dropdown" style="display:none;">
           <li id="id_delete"><a class="button red" title="{% trans 'APP-DELETE-TEXT' %}"><span class="icon icon-delete"></span>{% trans 'APP-DELETE-TEXT' %}</a></li>
-          <li id="id_edit"><a href="<%= editUrl %>" class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+          <% if(status != StatusChoices.APPROVED){ %>
+            <li id="id_edit"><a href="<%= editUrl %>" class="button" title="{% trans 'APP-EDIT-TEXT' %}"><span class="icon icon-edit"></span>{% trans 'APP-EDIT-TEXT' %}</a></li>
+          <% } %>
         </ul>
       </div>   
 

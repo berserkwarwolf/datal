@@ -6,9 +6,15 @@ En resumen, se estructurarán las URLs de la API siguiendo el patrón REST, asig
 URLs a recursos, utilizando los verbos GET, POST, PUT, PATCH, DELETE para las correspondientes 
 acciones y la extension del formato en que se recibiran los resultados, por ejemplo:
 
-GET /api/v1/datasets/12345.json
+GET /api/v2/datasets/12345.json
 
 para solicitar un dataset identificado por el ID 12345 en formato JSON.
+
+# Autorización
+1. Lo primero que se hace es tratar de identificar la cuenta (Account) mediante el dominio. Si no se puede identificar no se permite el acceso. 
+2. Luego se intenta identificar la auth_key (privada o pública). Si no se puede indentificar no se permite el acceso.
+3. Si la auth_key es publica se chequea el referer. Si no se puede identificar no se permite el acceso.
+4. Se trata de identificar al usuario. Si no se puede identificar se trata de un usuario 'anónimo'
 
 # Recursos
 
@@ -113,19 +119,19 @@ Los recursos que maneja la API son:
 Busca un listado de datastreams.
 
 ```
-GET /api/v1/datastreams
+GET /api/v2/datastreams
 ```
 
 Busca un listado de datasets.
 
 ```
-GET /api/v1/datasets
+GET /api/v2/datasets
 ```
 
 Busca un listado de visualizaciones.
 
 ```
-GET /api/v1/visualizations
+GET /api/v2/visualizations
 ```
 
 Si no hay parametros GET la API devuelve todos los recursos que le corresponden a la cuenta 
@@ -135,6 +141,7 @@ y sino se pueden pasar los siguientes parametros para ordenar o filtrar la búsq
 - **offset**: a partir de que datastream traer el resultado (se usa para paginar)
 - **limit**: junto con offset se usa para limitar la cantidad de resultados 
 - **order**: pudiendo ser su valor *top* o *last* y ordenando el resultado según esos criterios.
+- **categories**: listado de categorias
 
 Cuando se aplican limites a las busquedas el resultado se devuelve encapsulando los objetos en otros paramteros.
 
@@ -148,7 +155,7 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 ```
 {
     "count": 20,
-    "next": "http://api.dev:8080/api/v1/datasets/?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e&limit=2&offset=2",
+    "next": "http://api.dev:8080/api/v2/datasets/?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e&limit=2&offset=2",
     "previous": null,
     "results": [
         {
@@ -188,25 +195,25 @@ Un ejemplo de resultados con limit igual a 2 sería asi
 Trae la información asociada a una vista
 
 ```
-GET /api/v1/datastreams/:guid
+GET /api/v2/datastreams/:guid
 ``` 
 
 Trae la información asociada completa (incluye los valores de la vista) a una vista
 
 ```
-GET /api/v1/datastreams/:guid/data
+GET /api/v2/datastreams/:guid/data
 ``` 
 
 Trae la información asociada a un dataset
 
 ```
-GET /api/v1/datasets/:guid
+GET /api/v2/datasets/:guid
 ``` 
 
 Trae la información asociada a una visualización
 
 ```
-GET /api/v1/visualizations/:guid
+GET /api/v2/visualizations/:guid
 ``` 
 
 Un ejemplo de resultado de un datastream sería así
@@ -233,13 +240,14 @@ Creación, Edición y Edición Parcial de recursos.
 Al momento solo podemos crear y editar datasets y vistas. Y para poder 
 hacerlo hay que tener acceso a una clave privada que esté asociada a un usuario.
 
+Por lo tanto la operación de edición y creación se realiza sobre las últimas revisiones de los recursos y no sobre laas últimas revisiones publicadas de los mismos.
 
 ### Datasets
 
 
 ```
-POST /api/v1/datasets
-PUT/PATCH /api/v1/datasets/:guid
+POST /api/v2/datasets
+PUT/PATCH /api/v2/datasets/:guid
 ``` 
 
 - **title**: Título del conjunto de datos
@@ -256,7 +264,7 @@ PUT/PATCH /api/v1/datasets/:guid
 
 ### Datastreams
 ```
-POST /api/v1/datastreams
+POST /api/v2/datastreams
 ``` 
 
 - **title**: Título del conjunto de datos
@@ -270,5 +278,5 @@ POST /api/v1/datastreams
 Ejemplo de llamada para crear un datastream 
 
 ```
-curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v1/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
+curl -H 'Accept: application/json; indent=4' -H "Content-Type: application/json" -X POST -d @api/tests/datastream-ok.json "http://api.dev:8080/api/v2/datastreams.json?auth_key=576bba0dd5a27df9aaac12d1d7ec25c8411fe29e"
 ```
