@@ -78,7 +78,7 @@ var SelectDataView = Backbone.View.extend({
             stateModel: this.internalState,
             collection: this.dataviewModel.filters,
             totalCols: this.dataviewModel.get('totalCols'),
-            model: new Backbone.Model()
+            model: new FilterModel()
         });
         this.filtersOptionsView.render();
         this.$('.headers-options-view').append(this.filtersOptionsView.$el);

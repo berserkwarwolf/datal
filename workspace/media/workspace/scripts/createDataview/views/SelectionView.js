@@ -12,6 +12,7 @@ var SelectionView = Backbone.View.extend({
         this.template = _.template( $('#selection_template').html() );
         this.listenTo(this.dataviewModel.selection, 'add change remove reset', this.render, this);
         this.listenTo(this.dataviewModel.filters, 'add change remove reset', this.render, this);
+        this.listenTo(this.dataviewModel.formats, 'add change remove reset', this.render, this);
         this.listenTo(this.model, 'change', this.render, this);
     },
 
@@ -35,10 +36,13 @@ var SelectionView = Backbone.View.extend({
     },
 
     onClickClear: function (e) {
-        var mode = $(e.currentTarget).data('mode');
-        console.log('clear mode:', mode);
+        var mode = $(e.currentTarget).data('mode'),
+            col = $(e.currentTarget).data('col');
+
         if (mode === 'filter') {
-            this.dataviewModel.filters.reset();
+            this.dataviewModel.filters.remove(col);
+        } else if (mode === 'format') {
+            this.dataviewModel.formats.remove(col);
         } else {
             this.clearByMode(this.dataviewModel.selection, mode);
         }

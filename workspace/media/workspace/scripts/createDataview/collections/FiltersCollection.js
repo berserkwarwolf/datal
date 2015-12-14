@@ -1,4 +1,8 @@
 var FiltersCollection = Backbone.Collection.extend({
+    model: FilterModel,
+
+    comparator: 'column',
+
     add: function(models, options){
         var l = this.countBy(function (model) {
             return model.get('type');
