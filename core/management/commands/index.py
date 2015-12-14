@@ -50,6 +50,7 @@ class Command(BaseCommand):
                     "type": "vz",
                     "doc": {
                         "fields": {
+                            "hits": h.count(),
                             "web_hits": h.count(channel_type=0),
                             "api_hits": h.count(channel_type=1)
                         }
@@ -78,6 +79,7 @@ class Command(BaseCommand):
                     "type": "ds",
                     "doc": {
                         "fields": {
+                            "hits": h.count(),
                             "web_hits": h.count(channel_type=0),
                             "api_hits": h.count(channel_type=1)
                         }
