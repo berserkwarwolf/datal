@@ -12,12 +12,12 @@ from core.models import Dataset
 from rest_framework import serializers
 from rest_framework import mixins
 from rest_framework import exceptions
+from rest_framework.response import Response
 from core.choices import StatusChoices
 from core.v8.forms import DatastreamRequestForm
 from rest_framework import renderers
 from core.builders.datastreams import SelectStatementBuilder, DataSourceBuilder
 from core.v8.renderers import *
-from api.v2.mixins import RetriveHitsMixin
 
 class DataStreamSerializer(ResourceSerializer):
     title = serializers.CharField(
@@ -116,7 +116,7 @@ class DataStreamSerializer(ResourceSerializer):
         return self.getDao(lcycle.edit(changed_fields=validated_data.keys(),
                 **instance))
 
-class DataStreamViewSet(mixins.CreateModelMixin, RetriveHitsMixin, mixins.UpdateModelMixin, ResourceViewSet):
+class DataStreamViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, ResourceViewSet):
     queryset = DataStreamDBDAO() 
     serializer_class = DataStreamSerializer
     lookup_field = 'guid'
@@ -124,7 +124,6 @@ class DataStreamViewSet(mixins.CreateModelMixin, RetriveHitsMixin, mixins.Update
     dao_get_param = 'guid'
     dao_pk = 'datastream_revision_id'
     app = 'microsites'
-    hits_dao = DatastreamHitsDAO
 
     @detail_route(methods=['get'], renderer_classes=[
         renderers.BrowsableAPIRenderer,
@@ -136,6 +135,8 @@ class DataStreamViewSet(mixins.CreateModelMixin, RetriveHitsMixin, mixins.Update
         PJSONEngineRenderer,
         AJSONEngineRenderer,])
     def data(self, request, pk=None, format=None,  *args, **kwargs):
+        instance = self.get_object()
+        DatastreamHitsDAO(instance).add(1)
         if format == 'json' or not format:
             return self.engine_call(request, 'invoke')
         return self.engine_call(request, 'invoke', format, 
