@@ -279,11 +279,11 @@
 
       <div class="title">{% trans 'APP-ADVANCED-MODE-TEXT' %}</div>
 
-      <div class="list-group">
-        <a class="list-group-item btn-headers">{% trans 'APP-SELECT-TABLE-HEADERS-TEXT' %}</a>
-        <a class="list-group-item btn-filters">{% trans 'APP-FILTER-DATA-TEXT' %}</a>
-        <a class="list-group-item btn-formats">{% trans 'APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT' %}</a>
-      </div>
+      <ul>
+        <li><a class="btn-headers">{% trans 'APP-SELECT-TABLE-HEADERS-TEXT' %}</a></li>
+        <li><a class="btn-filters">{% trans 'APP-FILTER-DATA-TEXT' %}</a></li>
+        <li><a class="btn-formats">{% trans 'APP-CONFIG-DATA-TYPE-AND-COLUMN-FORMAT-TEXT' %}</a></li>
+      </ul>
 
     <% } %>
 
@@ -445,18 +445,29 @@
 
             <div class="form-group clearfix symbols-locale-option">
               <label>Indicadores de miles / decimales</label>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="separator" value="symbol" checked></input>
-                    Symbols
-                  </label>
+
+                <div class="list-group">
+
+                  <div class="list-group-item">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="separator" value="symbol" checked></input>
+                        Symbols
+                      </label>
+                    </div>
+                  </div>
+
+                  <div class="list-group-item">
+                    <div class="radio">
+                      <label>
+                        <input type="radio" name="separator" value="locale"></input>
+                        Locale
+                      </label>
+                    </div>
+                  </div>
+
                 </div>
-                <div class="radio">
-                  <label>
-                    <input type="radio" name="separator" value="locale"></input>
-                    Locale
-                  </label>
-                </div>
+
             </div>
 
             <div class="separators">
