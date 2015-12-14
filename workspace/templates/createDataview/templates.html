@@ -1,0 +1,281 @@
+{% load i18n extra_tags core_components components %}
+
+<script type="text/template" id="select_data_template">
+  <div class="col-xs-3">
+    <% if (tables.length > 1) {%>
+    <h2>Página / Tabla del dataset</h2>
+    <select class="select-table">
+      <% _(tables).each(function(table){ %>
+        <option value="<%= table %>">Hoja número <%= table %></option>
+        <% }); %>
+    </select>
+    <% } %>
+
+    <div class="row selection-view">
+    </div>
+
+    <div class="row headers-options-view">
+    </div>
+  </div>
+
+  <div class="col-xs-9 data-table-view">
+    <div class="table-view">
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="metadata_view_template">
+  <header>
+    <h3 id="id_dataHeader">Cuéntanos sobre que se trata tu vista.
+      <span>Los campos con (<span class="required">*</span>) son obligatorios.</span>
+    </h3>
+  </header>
+  <div class="columns clearfix">
+
+    <div class="CL formContent">
+
+      <fieldset>
+
+        <div class="row clearfix">
+          <label for="title">{% trans "APP-TITLE-TEXT" %}</label>
+          <input type="text" class="title" name="title" maxlength="80" data-bind="" autofocus="autofocus">
+          <span class="required">*</span>
+          <!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
+        </div>
+
+        <div class="row clearfix">
+          <label for="description">{% trans "APP-DESCRIPTION-TEXT" %}</label>
+          <input type="text" class="description" name="description" maxlength="140" data-bind="">
+          <span class="required">*</span>
+          <!-- <p class="has-error validate-msg">{% trans 'VALIDATE-REQUIREDFIELD-TEXT' %}</p> -->
+        </div>
+
+        <div class="row clearfix notes-field">
+          <label for="id_notes_2">{% trans "APP-NOTES-TEXT" %}</label>
+          <div class="textarea clearfix FL">
+            <textarea id="id_notes_2" class="notes" maxlength="2048"></textarea>
+          </div>
+        </div>
+
+      </fieldset>
+
+    </div>
+
+  </div>
+
+</script>
+
+<script type="text/template" id="preview_dataview_template">
+  <header>
+    <h3>Asegurate que todo va bien con tu vista. 
+      <span class="txt">Para archivos extensos mostramos aquí sólo hasta 100 filas. Podrás verlo completo al finalizar.</span>
+    </h3>
+  </header>
+
+  <div class="col-xs-2 selection-controls-view">
+    <p>placeholder para los metadatos</p>
+  </div>
+  <div class="col-xs-10">
+    <h4>Tabla de datos</h4>
+    <div class="table-container">
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="step_bar_template">
+  <div class="col-xs-8">
+    <h1 class="sub-heading">Crear una vista</h1>
+
+    <div class="buttons_view_container">
+      <ul class="buttons-bar">
+        <li class="step step-0">
+          <a title="Selección de datos">1. Selección de datos</a>
+        </li>
+        <% if (step > 0) {%>
+        <li class="step step-1">
+          <a title="Descripción">2. Descripción</a>
+        </li>
+        <% } %>
+        <% if (step > 1) {%>
+        <li class="step step-2">
+          <a title="Revisión">3. Revisión</a>
+        </li>
+        <% } %>
+      </ul>
+    </div>
+  </div>
+  <div class="col-xs-4 context-buttons clearfix">
+    <div class="pull-right">
+      <% if (step === 0) {%>
+      <a href="/dataviews/" class="button alpha">Cancelar</a>
+      <% } else { %>
+      <a class="button alpha back btn-prev">Retroceder</a>
+      <% } %>
+      <% if (step < 2) {%>
+      <a class="button primary next btn-next">Continuar</a>
+      <% } %>
+      <% if (step === 2) {%>
+        <a class="button primary btn-save">Guardar</a>
+      <% } %>
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="selection_template">
+
+  <% if (state.mode === 'data') {%>
+
+    <% if (total > 0) { %>
+      <h2>Data selection</h2>
+    <% } %>
+
+    <% if (columns.length > 0) { %>
+      <div class="row hot-sel-col">
+        <h6>Columns</h6>
+        <button class="button small btn-clear pull-right" data-mode="col">x</button>
+        <span class="color"></span>
+        <% _.each(columns, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (rows.length > 0) { %>
+      <div class="row hot-sel-row">
+        <h6>Rows</h6>
+        <button class="button small btn-clear pull-right" data-mode="row">x</button>
+        <span class="color"></span>
+        <% _.each(rows, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (cells.length > 0) { %>
+      <div class="row hot-sel-cell">
+        <h6>Cells</h6>
+        <button class="button small btn-clear pull-right" data-mode="cell">x</button>
+        <span class="color"></span>
+        <% _.each(cells, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (headers.length > 0) { %>
+      <div class="row hot-sel-header">
+        <h6>Headers</h6>
+        <button class="button small btn-clear pull-right" data-mode="header">x</button>
+        <span class="color"></span>
+        <% _.each(headers, function (item) { %>
+          <span><%= item.excelRange %>;</span>
+        <% }); %>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (filters.length > 0) { %>
+      <div class="row hot-sel-4">
+        <h6>Filters</h6>
+        <button class="button small btn-clear pull-right" data-mode="filter">x</button>
+        <span class="color"></span>
+        <% _.each(filters, function (item) { %>
+          <span>column<%= item.column %>; <%= item.operator %></span>
+        <% }); %>
+      </div>
+      <hr>
+    <% } %>
+
+    <% if (total > 0) { %>
+
+      <hr>
+
+      <h2>Advanced options</h2>
+
+      <h6>Headers</h6>
+      <button class="button small btn-headers">Set headers</button>
+      <h6>Filters</h6>
+      <button class="button small btn-filters">Add filter</button>
+
+    <% } %>
+
+  <% } %>
+</script>
+
+<script type="text/template" id="headers_options_template">
+
+  <button class="button small back btn-back">Atrás</button>
+
+  <h2>Cabeceras de la tabla</h2>
+  <p>Seleccionar las filas de la tabla que representan cabeceras</p>
+
+  <button class="button small btn-ok">Ok</button>
+  <button class="button small btn-clear">Limpiar</button>
+
+</script>
+
+<script type="text/template" id="filters_options_template">
+
+  <button class="button small back btn-back">Atrás</button>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <h2>Filtrar datos</h2>
+      <p>Agregar nuevo filtro</p>
+      <select class="select-column">
+          <option value="">Columna...</option>
+          <% _(columns).each(function(column, i){ %>
+            <option value="<%= i %>">Columna <%= column %></option>
+          <% }); %>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row row-operator hidden">
+    <div class="col-xs-12">
+      <select class="select-operator">
+          <option value="">Operación...</option>
+          <option value="00">Es igual a</option>
+          <option value="01">No es igual a</option>
+          <option value="02">Mayor que</option>
+          <option value="03">Menor que</option>
+          <option value="04">Contiene</option>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row row-value-type hidden">
+    <div class="col-xs-12">
+      <select class="select-value-type">
+          <option value="">Tipo de valor objetivo...</option>
+          <option value="fixed">Valor fijo</option>
+          <option value="parameter">Parámetro</option>
+      </select>  
+    </div>
+  </div>
+
+  <div class="row row-fixed-value hidden">
+    <div class="col-xs-12">
+      <input type="text" name="default" placeholder="Ingrese valor fijo">
+    </div>
+  </div>
+
+  <div class="row row-parameter hidden">
+    <div class="col-xs-12">
+      <input type="text" name="name" placeholder="Nombre">
+      <input type="text" name="description" placeholder="Descripción (opcional)">
+      <input type="text" name="default" placeholder="Valor por defecto">
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="button small btn-ok">Ok</button>
+      <button class="button small btn-clear">Limpiar</button>
+    </div>
+  </div>
+
+</script>
