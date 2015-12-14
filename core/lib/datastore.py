@@ -106,7 +106,7 @@ class s3(Datastore):
 
         return self.connection.generate_url(300, 'GET', bucket_name, key, response_headers = response_headers,
                                             force_http=force_http)
-
+    
     def update(self, bucket_name, file_name, file_data):
         """ Actualiza un archivo en S3. El nombre del archivo se encuentra precedido por la ruta hacia el mismo."""        
         try:
@@ -195,7 +195,7 @@ class datastore_sftp(datastore):
         logger.info(remote_path)
         logger.info(remote_file)
         self.sftp.putfo(file_data, remotepath=remote_file)
-
+        
     def save_checking_path(self, uploaded_file, folder, file_name):
         """ ensure path and save """
         self.connect()
