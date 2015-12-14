@@ -169,11 +169,18 @@ var DataviewModel = Backbone.Model.extend({
         var columns = _.first(response.fArray, response.fCols);
 
         var rows = _.map(_.range(0, response.fRows), function (i) {
-          var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
-          return _.pluck(row, 'fStr');
+            var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
+            return _.pluck(row, 'fStr');
+        });
+
+        var rowsRaw = _.map(_.range(0, response.fRows), function (i) {
+            var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
+            return row;
         });
 
         this.data.set('columns', columns);
+        this.data.set('rowsRaw', rowsRaw);
+        this.data.set('response', response);
         this.data.set('rows', rows);
     },
 
