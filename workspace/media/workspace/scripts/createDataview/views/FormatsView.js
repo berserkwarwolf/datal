@@ -120,11 +120,19 @@ var FormatsView = Backbone.Epoxy.View.extend({
         this.$('.input-output-view').toggleClass('hidden', value === 'TEXT');
         this.$('.number-display-locale').toggleClass('hidden', value !== 'NUMBER');
         this.$('.date-display-locale').toggleClass('hidden', value !== 'DATE');
+        this.$('.separators').toggleClass('hidden', value !== 'NUMBER');
+        this.$('.symbols-locale-option').toggleClass('hidden', value !== 'NUMBER');
+
         this.model.set('outputPattern', '');
         this.model.set('inputPattern', '');
         if (value === 'NUMBER' || value === 'DATE') {
             this.attachPatternViews(value);
         }
+        if (value === 'NUMBER' && this.model.get('separatorType') === 'locale' || value === 'DATE') {
+            this.$('.input-locale').removeClass('hidden');
+        } else {
+            this.$('.input-locale').addClass('hidden');
+        };
     },
 
     onChangeInputPattern: function (model, value) {
