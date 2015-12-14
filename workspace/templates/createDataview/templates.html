@@ -160,14 +160,14 @@
           <input name="value" type="text" maxlength="40" value="<%= arg.value %>" data-index="<%= index %>"/>
         </div>
       </div>
-      
+
       <hr class="separator">
     <% }); %>
 </script>
 
 <script type="text/template" id="preview_dataview_template">
   <header>
-    <h3>Asegurate que todo va bien con tu vista. 
+    <h3>Asegurate que todo va bien con tu vista.
       <span class="txt">Para archivos extensos mostramos aquí sólo hasta 100 filas. Podrás verlo completo al finalizar.</span>
     </h3>
   </header>
@@ -319,7 +319,7 @@
         <% _(columns).each(function(column){ %>
           <option value="<%= column.index %>">{% trans 'APP-COLUMN-TEXT' %} <%= column.label %></option>
         <% }); %>
-    </select>  
+    </select>
   </div>
 
   <div class="row-operator hidden">
@@ -343,7 +343,7 @@
           <option value="">{% trans 'APP-SELECT-TEXT' %}...</option>
           <option value="fixed">{% trans 'APP-FIXED-VALUE-TEXT' %}</option>
           <option value="parameter">{% trans 'APP-PARAMETER-TEXT' %}</option>
-      </select>  
+      </select>
     </div>
   </div>
 
@@ -390,7 +390,7 @@
         <% _(columns).each(function(column){ %>
           <option value="<%= column.index %>">{% trans 'APP-COLUMN-TEXT' %} <%= column.label %></option>
         <% }); %>
-    </select>  
+    </select>
   </div>
 
   <div class="row row-data-type hidden">
@@ -400,7 +400,7 @@
           <option value="TEXT">{% trans 'APP-TEXT-TEXT' %}</option>
           <option value="NUMBER">{% trans 'APP-NUMBER-TEXT' %}</option>
           <option value="DATE">{% trans 'APP-DATE-TEXT' %}</option>
-      </select>  
+      </select>
     </div>
   </div>
 
@@ -428,7 +428,7 @@
         <div class="tab-pane-container">
 
           <section id="formatorigin" role="tabpanel" aria-labeledby="0" style="display: block;">
-          
+
             <div class="row-value-type">
               <div class="form-group">
                 <label>Cual es el patrón del formato de origen?</label>
@@ -462,7 +462,7 @@
             <div class="separators">
 
               <div class="form-group">
-                  <label>Thousands indicator</label> 
+                  <label>Thousands indicator</label>
                   <select class="form-control thousand-separator" name="thousandSeparator">
                     <option value="" selected="selected">Select...</option>
                     <option value=".">. (dot)</option>
@@ -471,7 +471,7 @@
               </div>
 
               <div class="form-group">
-                  <label>Decimal indicator</label> 
+                  <label>Decimal indicator</label>
                   <select class="form-control decimal-separator" name="decimalSeparator">
                     <option value="" selected="selected">Select...</option>
                     <option value=".">. (dot)</option>
@@ -617,7 +617,7 @@
           </section>
 
           <section id="formatoutput" role="tabpanel" aria-labeledby="1" style="display:none;">
-            
+
             <div class="row-value-type">
               <div class="form-group">
                 <label>Cual es el patrón del formato de salida?</label>
