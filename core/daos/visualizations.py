@@ -408,12 +408,26 @@ class VisualizationHitsDAO():
         # armo el documento para actualizar el index.
         doc={'docid':"%s::%s" % (self.doc_type.upper(), guid),
                 "type": self.doc_type,
-                "script": "ctx._source.fields.%s_hits+=1" % self.CHANNEL_TYPE[channel_type]}
+                "script": "ctx._source.fields.hits+=1",
+                }
+        self.search_index.update(doc)
+
+        # ahora sumamos al hit del channel especifico
+        doc['script']="ctx._source.fields.%s_hits+=1" % self.CHANNEL_TYPE[channel_type]
 
         return self.search_index.update(doc)
 
-    def count(self, channel_type=ChannelTypes.WEB):
-        return VisualizationHits.objects.filter(visualization__id=self.visualization_id, channel_type=channel_type).count()
+    def count(self, channel_type=None):
+        """devuelve cuantos hits tiene por canal o en general
+            :param: channel_type: filtra por canal
+            :return: int"""
+
+        query=VisualizationHits.objects.filter(visualization__id=self.visualization_id)
+
+        if channel_type in (0,1):
+            query=query.filter(channel_type=channel_type)
+
+        return query.count()
 
     def count_by_day(self,day):
         """retorna los hits de un día determinado"""
@@ -554,6 +568,7 @@ class VisualizationSearchDAO():
                      'account_id' : self.visualization_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
+                     'hits': 0,
                      'web_hits': 0,
                      'api_hits': 0,
                     },

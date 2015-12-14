@@ -10,6 +10,7 @@ class SearchForm(forms.Form):
     page = forms.IntegerField(label='Page', required=False)
     tag = forms.RegexField(label='Tag', required=False, regex = r'[a-zA-Z0-9]+')
     order = forms.CharField(label='Order', required=False)
+    reverse = forms.CharField(label='Reverse', required=False)
 
     def clean_page(self):
         # default page
@@ -27,6 +28,9 @@ class SearchForm(forms.Form):
 
     def clean_tag(self):
         return self.cleaned_data['tag'].strip()
+
+    def clean_reverse(self):
+        return self.cleaned_data['reverse'].strip()
 
     def _escape(self):
         """metodo que devuelve el q limpio de caracteres especiales"""
