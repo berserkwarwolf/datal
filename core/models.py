@@ -214,7 +214,7 @@ class Account(models.Model):
                 dom = domain.split(".")[0]
                 if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
 
-                if dom == "microsites":
+                if dom in ("microsites", "api"):
                     return Account.objects.get(pk=1) 
                 else:
                     return Account.objects.get(pk=int(dom)) 
