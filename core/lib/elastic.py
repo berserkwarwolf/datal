@@ -79,6 +79,7 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
+                      "hits" : { "type" : "integer" },
                       "web_hits" : { "type" : "integer" },
                       "api_hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
@@ -117,6 +118,9 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
+                      "hits" : { "type" : "integer" },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -152,6 +156,7 @@ class ElasticsearchIndex():
                         "type" : "string",
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
+                      "hits" : { "type" : "integer" },
                       "web_hits" : { "type" : "integer" },
                       "api_hits" : { "type" : "integer" },
                       "timestamp" : { "type" : "long" },
