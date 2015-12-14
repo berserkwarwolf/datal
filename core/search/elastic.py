@@ -27,7 +27,7 @@ class ElasticsearchFinder(Finder):
         self.order =  kwargs.get('order')
 
         if self.order and self.order=='top':
-            self.sort = "hits: %s" % ("asc" if reverse else "desc")
+            self.sort = "web_hits: %s" % ("asc" if reverse else "desc")
         elif self.order and self.order=='last':
             self.sort =  "timestamp:%s" % ("asc" if reverse else "desc")
         else:

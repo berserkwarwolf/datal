@@ -36,6 +36,7 @@ def browse(request, category_slug=None, page=1):
 
 
 def do_search(request, category_filters=None, datasets=None):
+
     account = request.account
     preferences = request.preferences
     form = forms.SearchForm(request.GET)
