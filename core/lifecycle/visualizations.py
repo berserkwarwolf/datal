@@ -108,6 +108,8 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         :param fields:
         :return: VisualizationRevision Model Object
         """
+        old_status = self.visualization_revision.status
+        
         if self.visualization_revision.status not in allowed_states:
             raise IllegalStateException(
                 from_state=self.visualization_revision.status,
@@ -120,7 +122,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
                 visualization=self.visualization,
                 datastream_rev=self.visualization_revision.datastream_revision,
                 user=self.visualization_revision.user,
-                status=StatusChoices.DRAFT,
+                status=fields.pop('status', StatusChoices.DRAFT),
                 **fields
             )
             self._update_last_revisions()
@@ -128,6 +130,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             # Actualizo sin el estado
             self.visualization_revision = VisualizationDBDAO().update(
                 self.visualization_revision,
+                status=fields.pop('status', old_status), 
                 changed_fields=changed_fields,
                 **fields
             )

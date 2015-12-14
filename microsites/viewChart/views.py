@@ -17,29 +17,6 @@ from microsites.exceptions import *
 import urllib
 import json
 
-
-def hits_stats(request, vz_id, channel_type=None):
-    """
-    hits stats for chart visualization
-    """
-
-    try:
-        vz = Visualization.objects.get(pk=int(vz_id))
-    except Visualization.DoesNotExist:
-        raise VisualizationDoesNotExist
-
-
-    dao=VisualizationHitsDAO(vz)
-    hits=dao.count_by_days(30, channel_type)
-
-    field_names=[unicode(ugettext_lazy('REPORT-CHART-DATE')),unicode(ugettext_lazy('REPORT-CHART-TOTAL_HITS'))]
-
-
-    t = loader.get_template('viewChart/hits_stats.json') 
-    c = Context({'data': list(hits), 'field_names': field_names, "request": request, "cache": dao.from_cache})
-    return HttpResponse(t.render(c), content_type="application/json")
-
-
 def view(request, id, slug=None):
     """
     Show a microsite view
@@ -69,7 +46,7 @@ def view(request, id, slug=None):
     except VisualizationRevision.DoesNotExist:
         raise VisualizationRevisionDoesNotExist
     else:
-        # VisualizationHitsDAO(visualization_revision["visualization"]).add(ChannelTypes.WEB)
+        VisualizationHitsDAO(visualization_revision).add(ChannelTypes.WEB)
 
         visualization_revision_parameters = RequestProcessor(request).get_arguments(visualization_revision["parameters"])
 
@@ -100,7 +77,7 @@ def embed(request, guid):
     except:
         return render_to_response('viewChart/embed404.html',{'settings': settings, 'request' : request})
 
-    # VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
+    VisualizationHitsDAO(visualization_revision.visualization).add(ChannelTypes.WEB)
     width = request.REQUEST.get('width', False) # TODO get default value from somewhere
     height = request.REQUEST.get('height', False) # TODO get default value from somewhere
 

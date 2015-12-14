@@ -4,6 +4,7 @@ from django.conf import settings
 from core.search.finder import Finder, FinderManager
 import re
 import logging
+from core.plugins import DatalPluginPoint
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +81,8 @@ class ElasticsearchFinder(Finder):
 
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
-            self.resource = ["ds", "dt", "db", "vz"]
+            self.resource = ["ds", "dt", "vz"]
+            self.resource.extend([finder.doc_type for finder in DatalPluginPoint.get_active_with_att('finder')])
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
@@ -91,7 +93,7 @@ class ElasticsearchFinder(Finder):
         # Asi que si llega solo un account_id, lo mete en un list igual
         if type(self.account_id) in (type(str()), type(int()), type(long()), type(float())):
             account_ids=[int(self.account_id)]
-        elif type(self.account_id) == type([]):
+        elif type(self.account_id) in (type([]), type(())):
             account_ids=self.account_id
         else:
             #debería ir un raise?!?!?

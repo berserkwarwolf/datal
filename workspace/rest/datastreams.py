@@ -1,6 +1,6 @@
 from rest_framework.decorators import detail_route, list_route
 from core.daos.datastreams import DataStreamDBDAO
-from api.rest.datastreams import DataStreamSerializer
+from api.v2.datastreams import DataStreamSerializer
 from core.rest.views import ResourceViewSet
 from core.v8.forms import DatastreamRequestForm, UpdateGridRequestForm
 from workspace.v8.forms import DatastreamPreviewForm
@@ -16,6 +16,7 @@ class RestDataStreamViewSet(ResourceViewSet):
     dao_get_param = 'datastream_revision_id'
     dao_pk = 'datastream_revision_id'
     app = 'workspace'
+    published = False
     
     @detail_route(methods=['get'], renderer_classes=[
         renderers.JSONRenderer,

@@ -8,6 +8,8 @@ from django.conf import settings
 from django.dispatch import receiver
 from django.db.models.signals import pre_delete
 from django.contrib.auth.models import AnonymousUser
+from django.db.models import Q
+
 
 from core.utils import slugify
 from core import choices
@@ -124,8 +126,7 @@ class Account(models.Model):
     meta_data = models.TextField(blank=True, verbose_name=ugettext_lazy('MODEL_METADATA_LABEL'))
     created_at = models.DateTimeField(editable=False, auto_now_add=True, verbose_name=ugettext_lazy('MODEL_CREATED_AT_LABEL'))
     expires_at = models.DateTimeField(verbose_name=ugettext_lazy('MODEL_EXPIRES_AT_LABEL'))
-    objects = managers.AccountManager()
-    parent = models.ForeignKey('Account', null=True, on_delete=models.PROTECT, blank=True)
+    parent = models.ManyToManyField('Account', null=True, blank=True)
 
     class Meta:
         db_table = 'ao_accounts'
@@ -193,6 +194,32 @@ class Account(models.Model):
                 c.set('account_total_visualization_' + str(self.id), total_visualizations, settings.REDIS_STATS_TTL)
         return total_visualizations
 
+    @staticmethod
+    def get_by_domain(domain, status=ACTIVE):
+        """Devuelve el account dependiendo del dominio
+            :param: domain: dominio asociado a la preferencia
+            :param: status: por default, cuentas activas, en caso de querer las TIRAL, pasarle Account.TRIAL
+            :return: instancia Account """
+
+        try:
+            return Account.objects.get(
+                Q(preference__key='account.api.domain', preference__value=domain) | 
+                Q(preference__key='account.domain', preference__value=domain),
+                status = status)
+        except Account.DoesNotExist:
+            # generalmente usamos algo.dev:port
+            if domain.split(":")[0][-4:] == ".dev":
+                # obtenemos la primer parte, que en las demos/ambiente de dev
+                # es el ID del Account
+                dom = domain.split(".")[0]
+                if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
+
+                if dom in ("microsites", "api"):
+                    return Account.objects.get(pk=1) 
+                else:
+                    return Account.objects.get(pk=int(dom)) 
+
+        raise Account.DoesNotExist
 
 class AccountAnonymousUser(AnonymousUser):
 

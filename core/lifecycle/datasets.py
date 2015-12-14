@@ -345,7 +345,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} El estado {} no esta entre los estados de edicion permitidos.'.format(
                 self.dataset_revision.id, old_status
             ))
-            raise IllegalStateException(from_state=old_status, to_state=form_status, allowed_states=allowed_states)
+            raise IllegalStateException(from_state=old_status, to_state=fields.pop('status', None), allowed_states=allowed_states)
 
         file_data = fields.get('file_data', None)
         if file_data is not None:
@@ -367,7 +367,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                 self.dataset_revision.id
             ))
             self.dataset, self.dataset_revision = DatasetDBDAO().create(
-                dataset=self.dataset, user=self.user, status=StatusChoices.DRAFT, impl_details=impl_details,
+                dataset=self.dataset, user=self.user, 
+                status=fields.pop('status', StatusChoices.DRAFT), 
+                impl_details=impl_details,
                 **fields)
             logger.info('[LifeCycle - Dataset - Edit] Rev. {} Muevo sus hijos a PENDING_REVISION.'.format(
                 self.dataset_revision.id
@@ -382,7 +384,7 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
             # Actualizo sin el estado
             self.dataset_revision = DatasetDBDAO().update(
                 self.dataset_revision,
-                status=old_status,
+                status=fields.pop('status', old_status), 
                 changed_fields=changed_fields,
                 **fields
             )

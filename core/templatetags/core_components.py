@@ -78,8 +78,8 @@ def datatable_filter(categories=None, table_prefix='', tab_prefix='', source_cho
     override_filters = False
     filter_template = None
 
-    if kwargs.has_key('featured_accounts'):
-        featured_accounts = kwargs['featured_accounts']
+    if kwargs.has_key('federated_accounts'):
+        federated_accounts = kwargs['federated_accounts']
 
     if tab_prefix == 'microsites' and table_prefix == 'home':
         base_route = 'home_manager/resources/'

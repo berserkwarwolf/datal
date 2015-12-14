@@ -6,11 +6,13 @@ from rest_framework import routers
 from djangoplugins.utils import include_plugins
 
 from core.plugins import DatalPluginPoint
-from api.rest.datastreams import DataStreamViewSet
-from api.rest.datasets import DataSetViewSet
-from api.rest.visualizations import VisualizationViewSet
+from api.v2.datastreams import DataStreamViewSet
+from api.v2.datasets import DataSetViewSet
+from api.v2.visualizations import VisualizationViewSet
+from api.v2.resources import APIResourceViewSet
 
 router = routers.DefaultRouter()
+router.register(r'resources', APIResourceViewSet, base_name='resources')
 router.register(r'datastreams', DataStreamViewSet, base_name='datastreams')
 router.register(r'datasets', DataSetViewSet, base_name='datasets')
 router.register(r'visualizations', VisualizationViewSet, base_name='visualizations')
@@ -25,7 +27,7 @@ for plugin in plugins:
 
 urlpatterns = patterns('',
     (r'^', include_plugins(DatalPluginPoint, urls='api_urls')),
-    (r'^api/v1/', include(router.urls)),
+    (r'^api/v2/', include(router.urls)),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

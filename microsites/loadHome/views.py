@@ -8,8 +8,6 @@ from core.managers import *
 from core.shortcuts import render_to_response
 from core.http import add_domains_to_permalinks
 from microsites.loadHome.forms import QueryDatasetForm
-from microsites.loadHome import utils
-from utils import *
 from core.communitymanagers import *
 from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
@@ -37,20 +35,26 @@ def load(request):
     is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
     
     builder = ThemeBuilder(preferences, is_preview, language, account)
+
     if is_preview or preferences["account_home"]:
         """ shows the home page new version"""
         data = builder.parse()
+
         if data:
+
+            accounts_ids=data['federated_accounts_ids'] + [account.id]
+
             queryset = FinderQuerySet(FinderManager(HomeFinder), 
-                max_results=250, account_id=data['account_id'] )
+                max_results=250, account_id=accounts_ids )
 
             paginator = Paginator(queryset, 25)
             revisions = paginator.page(1)
 
-            if data['has_featured_accounts']:
+            if data['federated_accounts_ids']:
                 add_domains_to_permalinks(revisions.object_list)
 
             context = data.copy()
+            context['has_federated_accounts'] = data['federated_accounts_ids'] != []
             context['request'] = request
             context['paginator'] = paginator
             context['revisions'] = revisions
@@ -68,7 +72,7 @@ def update_list(request):
     account         = request.account
     auth_manager    = request.auth_manager
     preferences     = account.get_preferences()
-
+    language        = request.auth_manager.language
 
     form = QueryDatasetForm(request.POST)
     if form.is_valid():
@@ -80,17 +84,18 @@ def update_list(request):
         resources = ['ds', 'db', 'vz', 'dt']
         category_filters = form.cleaned_data.get('category_filters')
         if category_filters:
-            category_filters=category_filters.lower().split(",")
+            category_filters=category_filters.split(",")
 
+        builder = ThemeBuilder(preferences, False, language, account)
+        data = builder.parse()
 
-        if preferences['account_home_filters'] == 'featured_accounts':
+        if data['federated_accounts_ids']:
 
             entity = form.cleaned_data.get('entity_filters')
             if entity:
                 accounts_ids = [int(entity)]
             else:
-                featured_accounts = account.account_set.values('id').all()
-                accounts_ids = [featured_account['id'] for featured_account in featured_accounts]
+                accounts_ids = data['federated_accounts_ids'] + [account.id]
 
             typef = form.cleaned_data.get('type_filters')
             if typef:
@@ -124,17 +129,10 @@ def update_list(request):
                 account_id=account.id
             )
 
-
-        ## manual temporary fix for indextank fails
-        #results2 = []
-        #for r in results:
-        #    if r['category'] in categories or categories==[]:
-        #        results2.append(r)
-
         paginator = Paginator(queryset, 25)
 
         revisions = paginator.page(page and page or 1)
-        if preferences['account_home_filters'] == 'featured_accounts':
+        if data['federated_accounts_ids']:
             add_domains_to_permalinks(revisions.object_list)
         error = ''
 
@@ -159,14 +157,15 @@ def update_categories(request):
     if account_id == '':
         account = request.account
         preferences = request.preferences
-        if preferences['account_home_filters'] == 'featured_accounts':
-            featured_accounts = Account.objects.get_featured_accounts(account.id)
-            account_id = [featured_account['id'] for featured_account in featured_accounts]
-            for index, f in enumerate(featured_accounts):
-                featured_accounts[index]['link'] = Account.objects.get(id = f['id']).get_preference('account.domain')
+        builder = ThemeBuilder(preferences, False, language, account)
+        data = builder.parse()
 
-
-    # account_id is single account or a list of featured accounts
-    categories = Category.objects.get_for_home(language, account_id)
+        if data['federated_accounts_ids']:
+            federated_accounts=data['federated_accounts']
+    
+        categories = data['categories']
+    else:
+        # account_id is single account or a list of federated accounts
+        categories = Category.objects.get_for_home(language, account_id)
 
     return render_to_response('loadHome/categories.js', locals(), mimetype="text/javascript")
