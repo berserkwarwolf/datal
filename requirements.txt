@@ -51,3 +51,4 @@ django-nose==1.4.1
 django-plugins==0.2.5
 django-cors-headers==1.1.0
 drf-extensions==0.2.8
+python-dateutil==2.4.2
