@@ -45,7 +45,7 @@ var FormatsView = Backbone.Epoxy.View.extend({
             columns: columns,
         }));
         this.applyBindings();
-
+        this.$(".tabs").hashTabs();
         this.attachPatternViews('TEXT');
 
         Backbone.Validation.bind(this, {
