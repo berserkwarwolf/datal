@@ -70,7 +70,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
         },
 
         thousandSeparator: function(value, attr) {
-            if (this.get('separatorType') === 'symbol') {
+            if (this.get('type') === 'NUMBER' && this.get('separatorType') === 'symbol') {
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
@@ -78,7 +78,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
         },
 
         decimalSeparator: function(value, attr) {
-            if (this.get('separatorType') === 'symbol') {
+            if (this.get('type') === 'NUMBER' && this.get('separatorType') === 'symbol') {
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
