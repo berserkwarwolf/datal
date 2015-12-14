@@ -58,7 +58,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         outputCustomPattern: function(value, attr) {
@@ -66,7 +66,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         thousandSeparator: function(value, attr) {
@@ -74,7 +74,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         decimalSeparator: function(value, attr) {
@@ -82,7 +82,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         inputLocale: function(value, attr) {
@@ -90,7 +90,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         numberDisplayLocale: function(value, attr) {
@@ -98,7 +98,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         },
 
         dateDisplayLocale: function(value, attr) {
@@ -106,7 +106,7 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
                 if(_.isUndefined(value) || value === '') {
                     return gettext('VALIDATE-REQUIREDFIELD-TEXT');
                 }
-            } 
+            }
         }
     },
 
