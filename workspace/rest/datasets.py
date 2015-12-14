@@ -13,6 +13,7 @@ class RestDataSetViewSet(ResourceViewSet):
     dao_get_param = 'dataset_revision_id'
     dao_pk = 'dataset_revision_id'
     app = 'workspace'
+    published = False
 
     @detail_route(methods=['get'], renderer_classes=[HTMLEngineRenderer])
     def tables(self, request, pk=None, *args, **kwargs):

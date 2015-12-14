@@ -82,7 +82,7 @@ class ElasticsearchFinder(Finder):
         # decide que conjunto de recursos va a filtrar
         if self.resource == "all":
             self.resource = ["ds", "dt", "vz"]
-            self.resource.extend([plugin.doc_type for plugin in DatalPluginPoint.get_active_with_att('doc_type')])
+            self.resource.extend([finder.doc_type for finder in DatalPluginPoint.get_active_with_att('finder')])
 
         # previene un error al pasarle un string y no un LIST
         if isinstance(self.resource, str):
