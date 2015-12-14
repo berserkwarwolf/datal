@@ -10,6 +10,15 @@
 	.form-group{
 		margin-left: 10px;
 	}
+
+	ul{
+		padding-left: 10px;
+		
+		li{
+			background: none !important;
+			padding-left: 0 !important;
+		}	
+	}
 }
 
 /* Forms (then move and merge with old forms) */
@@ -21,12 +30,23 @@
 	    max-width: 100%;
 	    margin-bottom: 5px;
 	    color: $color-base-light;
+	    float: inherit !important;
 	}
 
 	.form-control{
 		display: block;
     	width: 100%;
 	}
+}
+
+/* Lists (then move and merge with old forms) */
+.list-group-item{
+	position: relative;
+	display: block;
+	border-top:1px solid $color-base-extra-light;
+	border-bottom:1px solid $color-base-extra-light;
+	padding: 5px 0;
+	margin-bottom: -1px;
 }
 
 /* Handsontable version */
