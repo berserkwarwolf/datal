@@ -403,6 +403,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 APPLICATION_DETAILS = {
     'name': 'Datal',
     'website': 'http://www.datal.org',
+    'mail':'alguien@datal.org'
 }
 
 try:
