@@ -40,7 +40,7 @@ var PreviewView = Backbone.View.extend({
     formatCell: function (cell) {
         var value;
 
-        if (cell.fType === 'TEXT') {:
+        if (cell.fType === 'TEXT') {
               value = (cell.fStr.length !== 1)? cell.fStr: cell.fStr.replace('-', '&nbsp;');
               value = value.replace(/(<([^>]+)>)/ig," "); // remove html tags from string
         } else if (cell.fType === 'DATE') {

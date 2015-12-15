@@ -57,6 +57,10 @@
 
 {% endblock %}
 
+{% block popupsOverlay %}
+<div id="overlay"></div>
+{% endblock %}
+
 {% block bottom_js %}
 
 	{# templates backbone #}
@@ -88,6 +92,7 @@
     <script src="{% static 'workspace/scripts/createDataview/Sources/SourcesView.js' %}"></script>
     <script src="{% static 'workspace/scripts/createDataview/Sources/EditSourceView.js' %}"></script>
     <script src="{% static 'workspace/scripts/createDataview/Params/ParamsView.js' %}"></script>
+    <script src="{% static 'workspace/scripts/createDataview/views/EditArgumentOverlayView.js' %}"></script>
     <script src="{% static 'workspace/scripts/createDataview/views/FormatsView.js' %}"></script>
     <script src="{% static 'workspace/scripts/createDataview/views/PatternView.js' %}"></script>
     <script src="{% static 'workspace/scripts/createDataview/views/SelectionView.js' %}"></script>

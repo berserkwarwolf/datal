@@ -1,1 +1,3 @@
-var ArgumentModel = Backbone.Model.extend({});
+var ArgumentModel = Backbone.Model.extend({
+  idAttribute: 'name',
+});

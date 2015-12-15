@@ -1,13 +1,13 @@
 var SelectDataView = Backbone.View.extend({
 
     events: {
-        'change select.select-table': 'onChangeTable'
+        'change select.select-table': 'onChangeTable',
+        'click a.edit-arg': 'onClickEditArg'
     },
 
     _selectionEnabled: true,
 
     initialize: function (options) {
-        var tableId;
 
         this.dataviewModel = options.dataviewModel;
         this.datasetModel = options.datasetModel;
@@ -15,17 +15,29 @@ var SelectDataView = Backbone.View.extend({
             mode: 'data'
         });
 
-        tableId = this.dataviewModel.get('tableId');
-
         this.template = _.template( $('#select_data_template').html() );
 
-        this.$el.html(this.template({tables: this.datasetModel.getTables()}));
-        this.$('.select-table').val(tableId);
-
         this.listenTo(this.internalState, 'change:mode', this.onChangeMode, this);
+        this.listenTo(this.dataviewModel.dataset, 'change:tables', this.render, this);
     },
 
     render: function () {
+        var tableId = tableId = this.dataviewModel.get('tableId');
+
+        var editableArgs = this.datasetModel.args.where({editable: true}).map(function (m) {
+            return m.toJSON()
+        });
+
+        this.$el.html(this.template({
+            tables: this.datasetModel.getTables(),
+            args: editableArgs
+        }));
+        this.$('.select-table').val(tableId);
+
+        this.attachChildrenViews();
+    },
+
+    attachChildrenViews: function () {
         var tableId = this.dataviewModel.get('tableId');
         var rows = this.datasetModel.get('tables')[tableId];
 
@@ -199,7 +211,19 @@ var SelectDataView = Backbone.View.extend({
         this.dataviewModel.set('tableId', tableId);
         var table = this.datasetModel.get('tables')[tableId];
         this.dataviewModel.set('totalCols', table[0].length);
-        this.render();
+        this.attachChildrenViews();
+    },
+
+    onClickEditArg: function (e) {
+        var argName = $(e.currentTarget).data('name'),
+            model = this.datasetModel.args.get(argName);
+        e.preventDefault();
+
+        this.editArgumentsOverlayView = new EditArgumentOverlayView({
+            el: '#overlay',
+            model: model
+        });
+        this.editArgumentsOverlayView.render();
     },
 
     onChangeMode: function (model, value) {

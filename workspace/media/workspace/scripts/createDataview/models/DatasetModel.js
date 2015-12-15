@@ -25,6 +25,9 @@ var DatasetModel = Backbone.Model.extend({
         this.tags = new TagsCollection(attributes.tags || []);
         this.args = new ArgumentsCollection();
         this.parseImplDetails(attributes.impl_details);
+        this.listenTo(this.args, 'change:value', function (model, value, other) {
+            this.fetch();
+        }, this);
     },
 
     parse: function (response) {

@@ -13,6 +13,7 @@ var SelectionView = Backbone.View.extend({
         this.listenTo(this.dataviewModel.selection, 'add change remove reset', this.render, this);
         this.listenTo(this.dataviewModel.filters, 'add change remove reset', this.render, this);
         this.listenTo(this.dataviewModel.formats, 'add change remove reset', this.render, this);
+        this.listenTo(this.dataviewModel.args, 'add change remove reset', this.render, this);
         this.listenTo(this.model, 'change', this.render, this);
     },
 

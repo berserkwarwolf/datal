@@ -3,13 +3,22 @@
 <script type="text/template" id="select_data_template">
   <div class="col-xs-3">
     <div class="sidebar">
+      <% if (args.length !== 0) {%>
+      <div class="title">{% trans 'APP-DATASET-PARAMETERS' %}</div>
+      <div class="form-group">
+        <% _(args).each(function(arg, index){ %>
+          <p> <%= arg.name %>: <a class="edit-arg" data-name="<%= arg.name %>"> <%= arg.value %></a></p>
+        <% }); %>
+      </div>
+      <% } %>
+
       <% if (tables.length > 1) {%>
       <div class="title">{% trans 'APP-SELECT-DATASET-TABLE' %}</div>
       <div class="form-group">
         <select class="form-control select-table">
           <% _(tables).each(function(table){ %>
             <option value="<%= table %>">Hoja número <%= table %></option>
-            <% }); %>
+          <% }); %>
         </select>
       </div>
       <% } %>
@@ -810,4 +819,34 @@
     <option value="se">Sweden</option>
     <option value="ch">Switzerland</option>
   </select>
+</script>
+
+<script type="text/template" id="edit_arguments_overlay_template">
+  <div class="ao-popup-overlay">
+    <a class="close btn-cancel"></a>
+    <div class="argumentsOverlay">
+      <div class="In clearfix">
+        <div>
+          <h4>{% trans "APP-EDITPARAM-TEXT" %}</h4>
+
+          <p class="info">{% trans "OVERLAY-PARAM-TIP" %}</p>
+
+          <div class="form clearfix">
+            <form action="" onsubmit="return false" autocomplete="off" novalidate="">
+              <div class="row">
+                <label for="param"><%= arg.name %></label>
+                <input name="param" type="text" size="30" value="<%= arg.value %>" class="field">
+              </div>
+            </form>
+          </div>
+
+          <div class="buttons center">
+          <a class="button btn-cancel" title="{% trans 'APP-CANCEL-TEXT' %}">{% trans "APP-CANCEL-TEXT" %}</a>
+          <a class="button primary btn-accept" title="{% trans 'APP-DONE-TEXT' %}"><span>{% trans "APP-DONE-TEXT" %}</span></a> 
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </script>
