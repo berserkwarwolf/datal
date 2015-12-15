@@ -6,6 +6,7 @@ from core.models import GuidModel, CategoryI18n
 from core.communitymanagers import FinderManager
 from core.search.elastic import ElasticsearchFinder
 from core.v8.views import EngineViewSetMixin
+from core.plugins import DatalPluginPoint
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import NotFound
 
@@ -24,9 +25,9 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
     published = True
         
     def list(self, request, format='json'):
-        rp = self.request.query_params.get('rp', None) # TODO check for rp arguemnt used in some grids
-        limit = self.request.query_params.get('limit', rp)
-        offset = self.request.query_params.get('offset', '0')
+        rp = request.query_params.get('rp', None) # TODO check for rp arguemnt used in some grids
+        limit = request.query_params.get('limit', rp)
+        offset = request.query_params.get('offset', '0')
         order = request.query_params.get('order', None)
         reverse = order and order[0] == '-'
         order = order and order.strip('-')
@@ -62,9 +63,16 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         return Response(serializer.data)
 
     def get_data_types(self):
-        if hasattr(self, 'data_types'):
-            return self.data_types
-        return []
+        resources = self.request.query_params.get('resources', None)
+        if resources:
+            answer = resources.split(',')
+        else:
+            answer = []
+            if hasattr(self, 'data_types'):
+                answer = self.data_types
+            for finder in DatalPluginPoint.get_active_with_att('finder'):
+                answer.append(finder.doc_type)
+        return answer
 
     def get_queryset(self):
         params = {'language': self.request.auth['language'] }
