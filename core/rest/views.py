@@ -34,6 +34,9 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         categories= request.query_params.get('categories', None)
         category_filters = map(lambda x: str(urllib.unquote(x)), categories.split(',')) if categories else None
 
+        if order == 'viewed': order = 'web_top'
+        elif order == 'downloaded': order = 'api_top'
+
         # tenemos en cuenta los accounts federados
         account_ids = [x['id'] for x in request.auth['account'].account_set.values('id').all()] + [request.auth['account'].id]
         resources, time, facets = FinderManager(ElasticsearchFinder).search(
