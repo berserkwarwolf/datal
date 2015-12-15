@@ -2,8 +2,8 @@ from django.http import HttpResponseRedirect
 from core.shortcuts import render_to_response
 
 
-def sass(request):
-    return render_to_response('sass.sass', locals())
+def scss(request):
+    return render_to_response('scss.scss', locals())
 
 
 def home(request):

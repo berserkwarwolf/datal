@@ -8,7 +8,7 @@ from rest_framework import routers
 from djangoplugins.utils import include_plugins
 
 from core.plugins import DatalPluginPoint
-from .views import sass
+from .views import scss
 from workspace.rest.datasets import RestDataSetViewSet
 from workspace.rest.datastreams import RestDataStreamViewSet
 from workspace.rest.maps import RestMapViewSet
@@ -50,7 +50,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
-    url(r'sass.sass', sass, name='sass'),
+    url(r'scss.scss', scss, name='scss'),
     (r'^rest/', include(router.urls)), 
     (r'^', include_plugins(DatalPluginPoint, urls='workspace_urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
