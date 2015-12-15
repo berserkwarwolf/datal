@@ -96,3 +96,24 @@ td.hot-sel-header.hot-sel-cell{
 .argumentsOverlay .form label{display:block;font-weight:bold;height:auto;line-height:normal;padding-bottom:10px;}
 .argumentsOverlay .form .field{height:28px;width:306px;margin-bottom:15px;}
 .argumentsOverlay .buttons a{margin:0 5px;cursor:pointer;}
+
+.preview-datastream {
+	table {
+		min-width:100%;
+		tr{
+			background-color:#FFF;
+		}
+		tr:nth-child(even){
+			background-color:#fafafa;
+		}
+		td{
+			border:1px solid #efefef;
+			padding:5px 10px;
+		}
+		th{
+			border:1px solid #efefef;
+			padding:5px 10px;
+			text-align: left;
+		}
+	}
+}

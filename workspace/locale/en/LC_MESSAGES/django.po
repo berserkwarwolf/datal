@@ -3339,3 +3339,15 @@ msgstr "Number"
 
 msgid "APP-DATE-TEXT"
 msgstr "Date"
+
+msgid "APP-DATASET-PARAMETERS"
+msgstr "Dataset Parameters"
+
+msgid "APP-SELECT-DATASET-TABLE"
+msgstr "Page/sheet"
+
+msgid "APP-COLS-TEXT"
+msgstr "Columns"
+
+msgid "APP-COL-FORMAT-TEXT"
+msgstr "Formats"

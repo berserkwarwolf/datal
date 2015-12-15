@@ -15,26 +15,6 @@ var PreviewView = Backbone.View.extend({
           rowsRaw: rowsRaw
         }));
 
-
-        if (!_.isUndefined(rows)) {
-            this.table = new Handsontable(container, {
-              disableVisualSelection: true,
-              rowHeaders: true,
-              colHeaders: true,
-              readOnly: true,
-              readOnlyCellClassName: 'htDimmed-datal', // the regular class paints text cells grey
-              allowInsertRow: false,
-              allowInsertColumn: false,
-              disableVisualSelection: ['current'],
-              colWidths: 80,
-              manualColumnResize: true,
-              manualRowResize: true,
-              rowHeaders: true,
-              colHeaders: true,
-              contextMenu: false,
-              data: rows,
-            });
-        }
     },
 
     formatCell: function (cell) {
