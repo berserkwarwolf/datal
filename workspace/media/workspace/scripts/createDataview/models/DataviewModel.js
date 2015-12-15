@@ -54,7 +54,7 @@ var data_source_template = ['<dataSource>',
             '</Headers>',
             '<type/>',
             '<format>',
-                '<languaje/>',
+                '<language/>',
                 '<country/>',
                 '<style/>',
             '</format>',
@@ -68,15 +68,24 @@ var data_source_template = ['<dataSource>',
                             '<decimals><%= column.thousandSeparator %></decimals>',
                             '<thousands><%= column.decimalSeparator %></thousands>',
                         '</Symbols>',
-                        '<languaje><%= column.inputLocale %></languaje>',
-                        '<country></country>',
-                        '<style/>',
-                        '<pattern><%= column.inputPattern %></pattern>',
+                        '<language><%= column.inputLanguage %></language>',
+                        '<country><%= column.inputCountry || column.inputLanguage %></country>',
+                        '<% if (column.type === \'NUMBER\') { %>',
+                            '<style/>',
+                            '<pattern><%= column.inputPattern %></pattern>',
+                        '<% } else if (column.type === \'DATE\') { %>',
+                            '<style><%= column.inputPattern %></style>',
+                            '<pattern/>',
+                        '<% } %>',
                     '</format>',
                     '<% if (column.type !== \'TEXT\') { %>',
                         '<DisplayFormat>',
                             '<pattern><%= column.outputPattern %></pattern>',
-                            '<locale><%= column.numberDisplayLocale %></locale>',
+                            '<% if (column.type === \'NUMBER\') { %>',
+                                '<locale><%= column.numberDisplayLocale %></locale>',
+                            '<% } else if (column.type === \'DATE\') { %>',
+                                '<locale><%= column.dateDisplayLocale %></locale>',
+                            '<% } %>',
                         '</DisplayFormat>',
                     '<% } %>',
                 '</Field>',
@@ -311,7 +320,15 @@ var DataviewModel = Backbone.Model.extend({
                 formats.add({column: String(columnId)});
             }
         });
-        return formats.toJSON();
+        return formats.map(function (model) {
+            var obj = model.toJSON();
+            if (!_.isUndefined(obj.inputLocale)) {
+                var parts = obj.inputLocale.split('_');
+                obj.inputLanguage = parts[0];
+                obj.inputCountry = (parts.length > 1)? parts[1]: undefined;
+            }
+            return obj;
+        });
     },
 
     getDataSource: function () {

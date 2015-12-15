@@ -32,135 +32,28 @@
                             <decimals><%= column.thousandSeparator %></decimals>
                             <thousands><%= column.decimalSeparator %></thousands>
                         </Symbols>
-                        <languaje><%= column.inputLocale %></languaje>
-                        <country></country>
-                        <style/>
-                        <pattern><%= column.inputPattern %></pattern>
+                        <languaje><%= column.inputLanguage %></languaje>
+                        <country><%= column.inputCountry || column.inputLanguage %></country>
+                        <% if (column.type === 'NUMBER') { %>
+                            <style/>
+                            <pattern><%= column.inputPattern %></pattern>
+                        <% } else if (column.type === 'DATE') { %>
+                            <style><%= column.inputPattern %></style>
+                            <pattern/>
+                        <% } %>
                     </format>
                     <% if (column.type !== 'TEXT') { %>
                         <DisplayFormat>
                             <pattern><%= column.outputPattern %></pattern>
-                            <locale><%= column.numberDisplayLocale %></locale>
+                            <% if (column.type === 'NUMBER') { %>
+                                <locale><%= column.numberDisplayLocale %></locale>
+                            <% } else if (column.type === 'DATE') { %>
+                                <locale><%= column.dateDisplayLocale %></locale>
+                            <% } %>
                         </DisplayFormat>
                     <% } %>
                 </Field>
                 <% }); %>
-            </Table>
-        </Field>
-    </DataStructure>
-</dataSource>
-
-
-<dataSource>
-    <DataStructure>
-        <Field id="table<%= tableId %>">
-            <Headers>,
-                <% _.each(headers, function (row) { %>,
-                    <Row>row<%= row %></Row>,
-                <% }); %>,
-            </Headers>,
-            <type/>
-            <format>
-                <languaje/>
-                <country/>
-                <style/>
-            </format>
-            <Table>
-                <% _.each(columns, function (number) { %>
-                <Field id="column<%= number %>">
-                    <alias/>
-                    <type/>
-                    <format>
-                        <languaje/>
-                        <country/>
-                        <style/>
-                    </format>
-                </Field>
-                <% }); %>
-
-                EJEMPLO de columna de TEXT
-                <Field id="column1">
-                    <alias/>
-                    <type>TEXT</type>
-                    <format>
-                        <language/>
-                        <country/>
-                        <style/>
-                        <pattern/>
-                    </format>
-                </Field>
-
-                EJEMPLO de columna de DATE
-                <Field id="column0">
-                    <alias/>
-                    <type>DATE</type>
-                    <format>
-                        <Symbols>
-                            <decimals/>
-                            <thousands/>
-                        </Symbols>
-                        <language>en</language>
-                        <country>en</country>
-                        <style>dd/MM/yyyy</style>
-                        <pattern/>
-                    </format>
-                    <DisplayFormat>
-                        <pattern>yy-mm-dd</pattern>
-                        <locale>es</locale>
-                    </DisplayFormat>
-                </Field>
-
-                EJEMPLO de columna de NUMBER
-                <Field id="column3">
-                    <alias/>
-                    <type>NUMBER</type>
-                    <format>
-                        <Symbols>
-                            <decimals/>
-                            <thousands/>
-                        </Symbols>
-                        <language/>
-                        <country/>
-                        <style/>
-                        <pattern>$ #,###.##</pattern>
-                    </format>
-                    <DisplayFormat>
-                        <pattern>$ #,###</pattern>
-                        <locale>us</locale>
-                    </DisplayFormat>
-                </Field>
-
-            </Table>
-        </Field>
-    </DataStructure>
-</dataSource>
-
-
-
-<dataSource>
-    <DataStructure>
-        <Field id="table0">
-            <Headers>
-                <Row>row0</Row>
-            </Headers>
-            <type/>
-            <format>
-                <language/>
-                <country/>
-                <style/>
-                <pattern/>
-            </format>
-            <Table>
-                <Field id="column2">
-                    <alias/>
-                    <type>TEXT</type>
-                    <format>
-                        <language/>
-                        <country/>
-                        <style/>
-                        <pattern/>
-                    </format>
-                </Field>
             </Table>
         </Field>
     </DataStructure>

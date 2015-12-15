@@ -190,7 +190,6 @@
       <tbody>
         <% _.each(rowsRaw, function(cells, row) { %>
           <tr>
-            <!-- <th><%= row + 1 %></th> -->
             <% _.each(cells, function(cell, col) { %>
               <% if (!_.isUndefined(cell.fHeader) && cell.fHeader) { %>
                 <th><%= cell.fStr %></th>

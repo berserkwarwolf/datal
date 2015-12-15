@@ -19,19 +19,6 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
         dateDisplayLocale: undefined,
     },
 
-    computeds: {
-        // inputLanguaje: function() {
-        //     if (this.has('inputLocale')) {
-        //         return this.get("inputLocale").split('_')[0];
-        //     }
-        // },
-        // inputCountry: function() {
-        //     if (this.has('inputLocale')) {
-        //         return this.get("inputLocale").split('_')[1];
-        //     }
-        // }
-    },
-
     validation: {
         column: [
             {
