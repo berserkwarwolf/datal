@@ -45,6 +45,7 @@ def do_search(request, category_filters=None, datasets=None):
         query = form.get_query()
         page = form.cleaned_data.get('page')
         order = form.cleaned_data.get('order')
+        reverse = form.cleaned_data.get('reverse')
 
         accounts_ids =  [x['id'] for x in account.account_set.values('id').all()] + [account.id]
 
@@ -52,7 +53,7 @@ def do_search(request, category_filters=None, datasets=None):
             resources = ["ds", "db", "vz", "dt"]
             results, search_time, facets = FinderManager().search(
                 query=query, account_id=accounts_ids, category_filters=category_filters, order=order,
-                resource=resources
+                resource=resources, reverse=reverse
             )
         except InvalidPage:
             raise InvalidPage

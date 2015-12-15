@@ -80,12 +80,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
-        # en caso de que haya una revisión publicada y sea distinta a la ultima revisión
-        # entonces es que hay más de una revisión (nos ahorramos un query)
-        if dataset_revision.dataset.last_published_revision and dataset_revision.dataset.last_published_revision != dataset_revision.dataset.last_revision:
-            unique = False
-        else:
-            unique = DatasetRevision.objects.filter(dataset__id=dataset_revision.dataset.id).count() == 1 or False
 
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
@@ -120,7 +114,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             tags=tags,
             sources=sources,
             slug=slugify(dataseti18n.title),
-            unique=unique
+            cant=DatasetRevision.objects.filter(dataset__id=dataset_revision.dataset.id).count(),
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
@@ -434,6 +428,9 @@ class DatasetSearchIndexDAO():
                      'tags' : ','.join(tags),
                      'account_id' : self.dataset_revision.dataset.user.account.id,
                      'parameters': "",
+                     'hits': 0,
+                     'web_hits': 0,
+                     'api_hits': 0,
                      'timestamp': int(time.mktime(self.dataset_revision.created_at.timetuple())),
                      'end_point': self.dataset_revision.end_point,
                     },
