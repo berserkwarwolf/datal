@@ -26,10 +26,12 @@ class ElasticsearchFinder(Finder):
         reverse = kwargs.get('reverse', False)
         self.order =  kwargs.get('order')
 
-        if self.order and self.order=='top':
-            self.sort = "web_hits: %s" % ("asc" if reverse else "desc")
-        if self.order and self.order=='api_top':
-            self.sort = "api_hits: %s" % ("asc" if reverse else "desc")
+        if self.order and self.order == 'top':
+            self.sort = "hits:%s" % ("asc" if reverse else "desc")
+        elif self.order and self.order=='web_top':
+            self.sort = "web_hits:%s" % ("asc" if reverse else "desc")
+        elif self.order and self.order=='api_top':
+            self.sort = "api_hits:%s" % ("asc" if reverse else "desc")
         elif self.order and self.order=='last':
             self.sort =  "timestamp:%s" % ("asc" if reverse else "desc")
         elif self.order:

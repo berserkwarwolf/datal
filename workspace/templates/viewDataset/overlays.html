@@ -10,7 +10,9 @@
    <div class="ov-bottom">
       <div class="ov-buttons">
          <a id="id_deleteResource" class="button red" title="{% trans 'APP-DELETE-RESOURCE-TEXT' %}">{% trans 'APP-DELETE-RESOURCE-TEXT' %}</a>
+        {% if dataset.cant  > 1 %}
          <a id="id_deleteRevision" class="button delete" title="{% trans 'APP-DELETE-REVISION-TEXT' %}">{% trans 'APP-DELETE-REVISION-TEXT' %}</a>
+        {% endif %}
       </div>
    </div>
 </div>

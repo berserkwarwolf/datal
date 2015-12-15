@@ -109,7 +109,7 @@ def upload(request):
             name = data.name
 
             accountid = str(request.auth_manager.account_id)
-            keyname = "%s/%s" %(accountid[::-1], name)
+            keyname = "%s/%s" % (accountid, name)
 
             active_datastore.upload(settings.AWS_CDN_BUCKET_NAME, name, data, str(request.auth_manager.account_id))
             value = get_domain_with_protocol('cdn') + '/' + keyname
