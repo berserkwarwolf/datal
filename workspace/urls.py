@@ -8,6 +8,7 @@ from rest_framework import routers
 from djangoplugins.utils import include_plugins
 
 from core.plugins import DatalPluginPoint
+from .views import sass
 from workspace.rest.datasets import RestDataSetViewSet
 from workspace.rest.datastreams import RestDataStreamViewSet
 from workspace.rest.maps import RestMapViewSet
@@ -37,6 +38,7 @@ for plugin in plugins:
         for router_list in plugin.workspace_routers:
             router.register(router_list[0], router_list[1], base_name=router_list[2])
 
+
 def jsi18n(request, packages=None, domain=None):
     if not domain:
         domain = 'djangojs'
@@ -48,6 +50,7 @@ js_info_dict = {
 }
 
 urlpatterns = patterns('',
+    url(r'sass.sass', sass, name='sass'),
     (r'^rest/', include(router.urls)), 
     (r'^', include_plugins(DatalPluginPoint, urls='workspace_urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
@@ -65,7 +68,6 @@ urlpatterns = patterns('',
 
     #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
-
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
 
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
