@@ -162,7 +162,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             parameters=parameters,
             data_source=datastream_revision.data_source,
             select_statement=datastream_revision.select_statement,
-            slug= slugify(datastreami18n.title)
+            slug= slugify(datastreami18n.title),
+            cant=DataStreamRevision.objects.filter(dataset__id=datastream_revision.dataset.id).count(),
         )
 
         return datastream

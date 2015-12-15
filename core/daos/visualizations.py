@@ -142,7 +142,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id,
-            filename='' # nice to have
+            filename='', # nice to have
+            cant=VisualizationRevision.objects.filter(visualization__id=visualization_revision.visualization.id).count(),
         )
         visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
