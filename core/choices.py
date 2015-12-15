@@ -1,7 +1,9 @@
-from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
-from model_utils import Choices
 from django.conf import settings
+
+from model_utils import Choices
+
+from core.plugins import DatalPluginPoint
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -421,7 +423,10 @@ API_APPLICATION_TYPE_CHOICES = (
 )
 
 
-class TicketChoices():
+class TicketChoices:
+    def __init__(self):
+        pass
+
     PASSWORD_RECOVERY = 'PASS'
     API_AUTHORIZATION = 'API'
     USER_ACTIVATION = 'USER_ACTIVATION'

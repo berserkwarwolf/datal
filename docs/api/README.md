@@ -140,8 +140,9 @@ y sino se pueden pasar los siguientes parametros para ordenar o filtrar la búsq
 - **query**: texto que se busca en todos los parametros del datastream
 - **offset**: a partir de que datastream traer el resultado (se usa para paginar)
 - **limit**: junto con offset se usa para limitar la cantidad de resultados 
-- **order**: pudiendo ser su valor *top* o *last* y ordenando el resultado según esos criterios.
-- **categories**: listado de categorias
+- **order**: pudiendo ser su valor *top*, *viewed*, *downloaded* o *last* y ordenando el resultado según esos criterios.
+- **categories**: listado de categorias 
+- **resources**: listado de recursos (Ej. "dt,ds,vz")
 
 Cuando se aplican limites a las busquedas el resultado se devuelve encapsulando los objetos en otros paramteros.
 
