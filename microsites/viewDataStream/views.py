@@ -29,13 +29,6 @@ def view(request, id, slug):
 
     datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
 
-    """ #TODO this must be at middleware
-    # verify if this account is the owner of this viz
-    dats = DataStream.objects.get(pk=id)
-    if account.id != dats.user.account.id:
-        logger.debug('Can\'t show. Not owner [%s|%s]=%s' % (id, str(account.id), str(dats.user.account.id), "Not owner"))
-        raise Http404
-    """
     url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream['parameters']))
 
     DatastreamHitsDAO(datastream).add(ChannelTypes.WEB)

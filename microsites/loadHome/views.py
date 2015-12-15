@@ -8,8 +8,6 @@ from core.managers import *
 from core.shortcuts import render_to_response
 from core.http import add_domains_to_permalinks
 from microsites.loadHome.forms import QueryDatasetForm
-from microsites.loadHome import utils
-from utils import *
 from core.communitymanagers import *
 from microsites.loadHome.managers import HomeFinder
 from django.shortcuts import redirect
