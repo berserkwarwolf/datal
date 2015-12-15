@@ -4,12 +4,14 @@
   <div class="col-xs-3">
     <div class="sidebar">
       <% if (tables.length > 1) {%>
-      <h2>Página / Tabla del dataset</h2>
-      <select class="select-table">
-        <% _(tables).each(function(table){ %>
-          <option value="<%= table %>">Hoja número <%= table %></option>
-          <% }); %>
-      </select>
+      <div class="title">{% trans 'APP-SELECT-DATASET-TABLE' %}</div>
+      <div class="form-group">
+        <select class="form-control select-table">
+          <% _(tables).each(function(table){ %>
+            <option value="<%= table %>">Hoja número <%= table %></option>
+            <% }); %>
+        </select>
+      </div>
       <% } %>
 
       <div class="selection-view">
