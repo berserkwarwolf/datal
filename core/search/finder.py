@@ -142,7 +142,7 @@ class Finder:
 
         for finder in DatalPluginPoint.get_active_with_att('finder'):
             if finder.doc_type == doc['type']:
-                return finder.get_dictionary()
+                return finder.get_dictionary(doc)
 
 
     def get_datastream_dictionary(self, document):
