@@ -131,13 +131,8 @@ var MainView = Backbone.View.extend({
 					});
 
 				}else{
-
+					response.onClose = function(){ window.location.reload(true)}; 
 					datalEvents.trigger('datal:application-error', response);
-
-					if( response.status == '499'){
-						setTimeout(function(){ window.location.reload(true); }, 2000);
-					}
-
 				}
 
 			},

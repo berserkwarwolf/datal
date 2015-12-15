@@ -130,13 +130,8 @@ var ViewDataStreamView = Backbone.Epoxy.View.extend({
 
 			},
 			error:function(response){
-
+				response.onClose = function(){ window.location.reload(true)}; 
 				datalEvents.trigger('datal:application-error', response);
-
-				if( response.status == '499'){
-					setTimeout(function(){ window.location.reload(true); }, 2000);
-				}
-
 			},
 			complete:function(response){
 				// Hide Loading
