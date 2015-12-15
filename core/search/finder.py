@@ -141,7 +141,7 @@ class Finder:
             return self.get_dataset_dictionary(doc)
 
         for finder in DatalPluginPoint.get_active_with_att('finder'):
-            if finder.doc_type == r:
+            if finder.doc_type == doc['type']:
                 return finder.get_dictionary()
 
 
