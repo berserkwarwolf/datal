@@ -143,21 +143,21 @@
       <div class="row clearfix">
         <label for="input-tag">{% trans "WEBSERVICE-ORIGINALARG-TEXT" %}:</label>
         <div>
-          <input name="input-tag" type="text" class="input-tag" maxlength="40" value="<%= arg.name %>" disabled="disabled"/>
+          <input class="form-control" name="input-tag" type="text" maxlength="40" value="<%= arg.name %>" disabled="disabled"/>
         </div>
       </div>
 
       <div class="row clearfix">
         <label for="name">{% trans "WEBSERVICE-NEW-NAME-LABEL" %}:</label>
         <div>
-          <input name="mappedName" type="text" maxlength="40" value="<%= arg.mappedName %>" data-index="<%= index %>"/>
+          <input class="form-control" name="mappedName" type="text" maxlength="40" value="<%= arg.mappedName %>" data-index="<%= index %>" <%= !arg.editable? 'disabled': '' %>/>
         </div>
       </div>
 
       <div class="row clearfix">
         <label for="value">{% trans "WORKSPACE-PARAM-DEFAULT" %}:</label>
         <div>
-          <input name="value" type="text" maxlength="40" value="<%= arg.value %>" data-index="<%= index %>"/>
+          <input class="form-control" name="value" type="text" maxlength="40" value="<%= arg.value %>" data-index="<%= index %>" <%= !arg.editable? 'disabled': '' %>/>
         </div>
       </div>
 
