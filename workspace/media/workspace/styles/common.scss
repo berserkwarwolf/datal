@@ -59,7 +59,7 @@ a:hover{color:$link-hover-color;}
   .dropdown{display:none;position:absolute;top:47px;right:0;z-index:190;background:#fff;min-width:100%;
     li{border-top:1px solid $button-primary-color;
       &:first-child{border:0;}
-      .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
+      .button.primary{background-color:rgba($button-primary-color,.6);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
         &:hover{background-color:$button-primary-hover-color;}
       }
     }
@@ -97,7 +97,7 @@ a:hover{color:$link-hover-color;}
 
   /* Link black */
   &.black{color:#000;font-weight:bold;
-    &:hover{color:$button-primary-color;}
+    &:hover{color:$link-black-color-hover;}
   }
 
   &.disabled,
