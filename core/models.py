@@ -210,20 +210,25 @@ class Account(models.Model):
             # generalmente usamos algo.dev:port
             if settings.DEBUG: logger.info('NO domain (%s)' % domain)
 
-            if domain.find('.site.demo.junar.com') > -1:
-                account_id = int(domain.split('.')[0])
-                return Account.objects.get(pk=account_id)
-                
-            elif domain.split(":")[0][-4:] == ".dev":
-                # obtenemos la primer parte, que en las demos/ambiente de dev
-                # es el ID del Account
-                dom = domain.split(".")[0]
-                if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
-
-                if dom in ("microsites", "api"):
-                    return Account.objects.get(pk=1) 
-                else:
-                    return Account.objects.get(pk=int(dom)) 
+            try:
+                if domain.find('.site.demo.junar.com') > -1:
+                    account_id = int(domain.split('.')[0])
+                    return Account.objects.get(pk=account_id)
+                    
+                elif domain.split(":")[0][-4:] == ".dev":
+                    # obtenemos la primer parte, que en las demos/ambiente de dev
+                    # es el ID del Account
+                    dom = domain.split(".")[0]
+                    if settings.DEBUG: logger.info('API Test domain (%s)' % dom)
+    
+                    if dom in ("microsites", "api"):
+                        return Account.objects.get(pk=1) 
+                    else:
+                        return Account.objects.get(pk=int(dom)) 
+            # en caso de que no le haya pegado a nada, que tire un
+            # Account.DoesNotExist
+            except:
+                pass
 
         raise Account.DoesNotExist
 
