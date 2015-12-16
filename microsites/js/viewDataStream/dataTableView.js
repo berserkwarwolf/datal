@@ -405,31 +405,6 @@ var dataTableView = Backbone.View.extend({
 
 	setFilterParams: function(settings){
 
-		// var hash = settings.url.split('?')[1],
-		// 	split = hash.split('&'),
-		// 	obj = {};
-
-		// for(var i = 0; i < split.length; i++){
-		// 	var kv = split[i].split('=');
-		// 	obj[kv[0]] = kv[1];
-		// }
-
-		// var url = '';
-
-		// if( obj.query != "" ){
-
-		// 	url = 'pFilter0='+encodeURIComponent(obj.qtype)+'[contains]'+encodeURIComponent(obj.query);
-
-		// 	if( $parameters.length > 0 ){
-		// 		url = '&' + url;
-		// 	}else{
-		// 		url = '?' + url;
-		// 	}
-
-		// }
-
-		// this.options.dataStream.set('filter', url);
-
 		var url = '';
 
 		// Just flexigrid filter
