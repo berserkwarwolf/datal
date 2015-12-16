@@ -329,8 +329,9 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
 
     def _remove_all(self):
         # Remove all asociated datastreams revisions
+
         for datastream_revision in DataStreamRevision.objects.filter(dataset=self.dataset.id):
-            datastream_revision.delete()
+            DatastreamLifeCycleManager(self.user,resource=datastream_revision).remove(killemall=True)
 
         self.dataset.delete()
         self._log_activity(ActionStreams.DELETE)

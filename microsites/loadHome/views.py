@@ -84,7 +84,7 @@ def update_list(request):
         resources = ['ds', 'db', 'vz', 'dt']
         category_filters = form.cleaned_data.get('category_filters')
         if category_filters:
-            category_filters=category_filters.lower().split(",")
+            category_filters=category_filters.split(",")
 
         builder = ThemeBuilder(preferences, False, language, account)
         data = builder.parse()

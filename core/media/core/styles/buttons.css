@@ -47,3 +47,4 @@
 /* Buttons group */
 .btn-group{display:inline-block;}
 .btn-group .button{float:left;}
+.btn-group .button + .button{margin-left:-1px;}

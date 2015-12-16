@@ -189,13 +189,19 @@ class SourceAdmin(admin.ModelAdmin):
 
 admin.site.register(Source, SourceAdmin)
 
-
 class DataStreamHitsAdmin(admin.ModelAdmin):
-    list_display = ('datastream', 'created_at')
+    list_display = ('datastream', 'created_at', 'channel_type')
     search_fields = ('datastream', 'created_at')
     list_per_page = 25
 
 admin.site.register(DataStreamHits, DataStreamHitsAdmin)
+
+class VisualizationHitsAdmin(admin.ModelAdmin):
+    list_display = ('visualization', 'created_at', 'channel_type')
+    search_fields = ('visualization', 'created_at')
+    list_per_page = 25
+
+admin.site.register(VisualizationHits, VisualizationHitsAdmin)
 
 
 class DataStreamCommentAdmin(admin.ModelAdmin):

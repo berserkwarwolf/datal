@@ -59,7 +59,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string", 
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -79,6 +80,8 @@ class ElasticsearchIndex():
                       },
                       "timestamp" : { "type" : "long" },
                       "hits" : { "type" : "integer" },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -95,7 +98,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -114,6 +118,9 @@ class ElasticsearchIndex():
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
                       "timestamp" : { "type" : "long" },
+                      "hits" : { "type" : "integer" },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                           },
@@ -130,7 +137,8 @@ class ElasticsearchIndex():
                   "categories" : {
                     "properties" : {
                       "id" : { "type" : "string" },
-                      "name" : { "type" : "string" }
+                      "name" : { "type" : "string",
+                                 "index" : "not_analyzed" }
                     }
                   }, # categories
                   "docid" : { "type" : "string" },
@@ -148,6 +156,9 @@ class ElasticsearchIndex():
                         "type" : "string",
                         "fields": {"text_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
                       },
+                      "hits" : { "type" : "integer" },
+                      "web_hits" : { "type" : "integer" },
+                      "api_hits" : { "type" : "integer" },
                       "timestamp" : { "type" : "long" },
                       "title" : { "type" : "string" ,
                         "fields": {"title_lower_sort": {"type":"string", "analyzer": "case_insensitive_sort"}}
@@ -232,11 +243,12 @@ class ElasticsearchIndex():
         :param document:
         """
         # Me lo pediste vos nacho, despues no me putees
-        return True
-        # try:
-        #     return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
-        # except RequestError,e:
-        #     raise RequestError(e)
-        # except NotFoundError,e:
-        #     raise NotFoundError,(e)
+        # te tengo que putear, seas quien seas
+        #return True
+        try:
+            return self.es.update(index=settings.SEARCH_INDEX['index'], id=document['docid'], doc_type=document['type'], body=document)
+        except RequestError,e:
+            raise RequestError(e)
+        except NotFoundError,e:
+            raise NotFoundError,(e)
 

@@ -158,7 +158,7 @@ var viewVisualizationModel = {
     createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
     modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "{{ visualization_revision.visualization_id|permalink:'visualization' }}",
+    publicUrl: "http://{{ preferences.account_domain }}{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
 
     // Validar si es necesario

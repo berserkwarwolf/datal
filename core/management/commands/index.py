@@ -43,6 +43,24 @@ class Command(BaseCommand):
                 search_dao = VisualizationSearchDAOFactory().create(vz_revision)
                 search_dao.add()
 
+                h = VisualizationHitsDAO(vz_revision)
+
+                doc={
+                    'docid': "VZ::%s" % vz.guid,
+                    "type": "vz",
+                    "doc": {
+                        "fields": {
+                            "hits": h.count(),
+                            "web_hits": h.count(channel_type=0),
+                            "api_hits": h.count(channel_type=1)
+                        }
+                    }
+                }
+                try:
+                    es.update(doc)
+                except:
+                    pass
+
             # TODO Hay que usar el metodo query del DAO
             for datastream in DataStream.objects.filter(last_published_revision__status=StatusChoices.PUBLISHED):
                 datastreamrevision=datastream.last_published_revision
@@ -61,7 +79,9 @@ class Command(BaseCommand):
                     "type": "ds",
                     "doc": {
                         "fields": {
-                            "hits": h.count()
+                            "hits": h.count(),
+                            "web_hits": h.count(channel_type=0),
+                            "api_hits": h.count(channel_type=1)
                         }
                     }
                 }

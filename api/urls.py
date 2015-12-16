@@ -9,8 +9,10 @@ from core.plugins import DatalPluginPoint
 from api.v2.datastreams import DataStreamViewSet
 from api.v2.datasets import DataSetViewSet
 from api.v2.visualizations import VisualizationViewSet
+from api.v2.resources import APIResourceViewSet
 
 router = routers.DefaultRouter()
+router.register(r'resources', APIResourceViewSet, base_name='resources')
 router.register(r'datastreams', DataStreamViewSet, base_name='datastreams')
 router.register(r'datasets', DataSetViewSet, base_name='datasets')
 router.register(r'visualizations', VisualizationViewSet, base_name='visualizations')

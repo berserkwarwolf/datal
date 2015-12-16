@@ -18,7 +18,7 @@ from core.models import VisualizationRevision, VisualizationHits, VisualizationI
 from core.exceptions import SearchIndexNotFoundException
 
 from core.lib.elastic import ElasticsearchIndex
-from core.choices import STATUS_CHOICES, StatusChoices
+from core.choices import STATUS_CHOICES, StatusChoices, ChannelTypes
 from core.builders.visualizations import VisualizationImplBuilder
 
 from django.core.urlresolvers import reverse
@@ -142,7 +142,8 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
             datastream_revision_id=visualization_revision.datastream_revision_id,
-            filename='' # nice to have
+            filename='', # nice to have
+            cant=VisualizationRevision.objects.filter(visualization__id=visualization_revision.visualization.id).count(),
         )
         visualization.update(VisualizationImplBuilder().parse(visualization_revision.impl_details))
 
@@ -374,12 +375,14 @@ class VisualizationHitsDAO():
     # cache ttl, 1 hora
     TTL=3600 
 
+    CHANNEL_TYPE=("web","api")
+
     def __init__(self, visualization):
         self.visualization=visualization
         if isinstance(self.visualization, dict):
             self.visualization_id = self.visualization['visualization_id']
         else:
-            self.visualization_id = self.visualization.id 
+            self.visualization_id = self.visualization.visualization_id
         self.search_index = ElasticsearchIndex()
         self.logger=logging.getLogger(__name__)
         self.cache=Cache()
@@ -391,32 +394,41 @@ class VisualizationHitsDAO():
         # Es problema es que por momentos el datastream viene de un queryset y otras veces de un DAO y son objetos
         # distintos
         try:
-            visualization_id = self.visualization.visualization_id
-        except:
-            visualization_id = self.visualization['visualization_id']
-
-        try:
             guid = self.visualization.guid
         except:
             guid = self.visualization['guid']
 
         try:
-            hit=VisualizationHits.objects.create(visualization_id=visualization_id, channel_type=channel_type)
+            hit=VisualizationHits.objects.create(visualization_id=self.visualization_id, channel_type=channel_type)
         except IntegrityError:
             # esta correcto esta excepcion?
             raise VisualizationNotFoundException()
 
-        self.logger.info("VisualizationHitsDAO hit! (guid: %s)" % ( self.datastream.guid))
+        self.logger.info("VisualizationHitsDAO hit! (id: %s)" % ( self.visualization_id))
 
         # armo el documento para actualizar el index.
-        doc={'docid':"%s::%s" % (self.doc_type.upper(), self.visualization.guid),
+        doc={'docid':"%s::%s" % (self.doc_type.upper(), guid),
                 "type": self.doc_type,
-                "script": "ctx._source.fields.hits+=1"}
+                "script": "ctx._source.fields.hits+=1",
+                }
+        self.search_index.update(doc)
+
+        # ahora sumamos al hit del channel especifico
+        doc['script']="ctx._source.fields.%s_hits+=1" % self.CHANNEL_TYPE[channel_type]
 
         return self.search_index.update(doc)
 
-    def count(self):
-        return VisualizationHits.objects.filter(visualization_id=self.visualization_id).count()
+    def count(self, channel_type=None):
+        """devuelve cuantos hits tiene por canal o en general
+            :param: channel_type: filtra por canal
+            :return: int"""
+
+        query=VisualizationHits.objects.filter(visualization__id=self.visualization_id)
+
+        if channel_type in (0,1):
+            query=query.filter(channel_type=channel_type)
+
+        return query.count()
 
     def count_by_day(self,day):
         """retorna los hits de un día determinado"""
@@ -558,6 +570,8 @@ class VisualizationSearchDAO():
                      'parameters': "",
                      'timestamp': int(time.mktime(self.visualization_revision.created_at.timetuple())),
                      'hits': 0,
+                     'web_hits': 0,
+                     'api_hits': 0,
                     },
                 'categories': {'id': unicode(category.category_id), 'name': category.name}
                 }
