@@ -286,6 +286,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
 
     def _remove_all(self):
+
+        for visualization_revision in VisualizationRevision.objects.filter(datastream_revision=self.datastream_revision):
+            VisualizationLifeCycleManager(user=self.user, resource=visualization_revision).remove(killemall=True)
+
         self.datastream.delete()
         self._log_activity(ActionStreams.DELETE)
         if settings.DEBUG: logger.info('Clean Caches')

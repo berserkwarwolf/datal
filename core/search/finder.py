@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from core.utils import slugify
 from core import helpers, choices
 from core.exceptions import SearchIndexNotFoundException
+from core.plugins import DatalPluginPoint
 
 logger = logging.getLogger(__name__)
 
@@ -140,8 +141,8 @@ class Finder:
             return self.get_dataset_dictionary(doc)
 
         for finder in DatalPluginPoint.get_active_with_att('finder'):
-            if finder.doc_type == r:
-                return finder.get_dictionary()
+            if finder.doc_type == doc['type']:
+                return finder.get_dictionary(doc)
 
 
     def get_datastream_dictionary(self, document):

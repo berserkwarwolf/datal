@@ -86,9 +86,13 @@
     <% } %>
 
     {# Create Visualization #}
-    <li class="create">
-    	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
-    </li>
+    <% 
+      if( status != StatusChoices.PENDING_REVIEW ){ 
+    %>
+      <li class="create">
+      	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+      </li>
+    <% } %>
 
     {# Edit #}
 		<% 

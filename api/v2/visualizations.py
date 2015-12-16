@@ -1,4 +1,4 @@
-from core.daos.visualizations import VisualizationDBDAO
+from core.daos.visualizations import VisualizationDBDAO, VisualizationHitsDAO
 from api.v2.serializers import ResourceSerializer
 from core.rest.views import ResourceViewSet
 
@@ -14,3 +14,4 @@ class VisualizationViewSet(ResourceViewSet):
     dao_get_param = 'guid'
     data_types = ['vz']
     app = 'microsites'
+    hits_dao = VisualizationHitsDAO
