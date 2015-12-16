@@ -17,7 +17,7 @@
       <div class="form-group">
         <select class="form-control select-table">
           <% _(tables).each(function(table){ %>
-            <option value="<%= table %>">Hoja número <%= table %></option>
+            <option value="<%= table %>">Hoja número <%= table + 1 %></option>
           <% }); %>
         </select>
       </div>
