@@ -105,7 +105,7 @@ var DataviewModel = Backbone.Model.extend({
     defaults:{
         title: undefined,
         description: undefined,
-        category: 41,
+        category: undefined,
         notes: '',
 
         dataset_revision_id: undefined,
@@ -151,8 +151,7 @@ var DataviewModel = Backbone.Model.extend({
                 'impl_type',
                 'impl_details',
                 'rdf_template',
-                'bucket_name',
-                'limit',
+                'bucket_name'
             ]);
 
         var filters = this.filters.toSampleFilters();
@@ -162,6 +161,7 @@ var DataviewModel = Backbone.Model.extend({
         params.datasource = this.getDataSource();
 
         params.select_statement = this.getSelectStatement();
+        params.limit = 50;
 
         return $.ajax({
                 type: "POST",
