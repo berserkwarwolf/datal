@@ -45,13 +45,19 @@ def get_js(request, id):
 
 
 def get_key(http_referer):
-
+    logger = logging.getLogger(__name__)
+    
     if not http_referer:
+        logger.error('No http referer')
         raise Http404
 
-    if re.search('^.*datastreams/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+    if re.search('^.*/(datastreams|dataviews)/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
         key = 'ds.detail'
-    elif re.search('^.*/datastreams/embed/[A-Z0-9\-]+.*$' , http_referer):
+    elif re.search('^.*/(datastreams|dataviews)/embed/[A-Z0-9\-]+.*$' , http_referer):
+        key = 'ds.embed'
+    elif re.search('^.*/(datastreams|dataviews)/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'ds.detail'
+    elif re.search('^.*/(datastreams|dataviews)/embed/[A-Z0-9\-]+$' , http_referer):
         key = 'ds.embed'
     elif re.search('^.*/search/.*$' , http_referer):
         key = 'search'
@@ -64,6 +70,8 @@ def get_key(http_referer):
     elif re.search('^.*/developers' , http_referer):
         key = 'developers'
     else:
+        #  http referer error http://microsites.dev:8080/dataviews/69620/iep-primer-trimestre-2012-ministerio-de-defensa-nacional
+        logger.error('http referer error %s' % http_referer)
         raise Http404
 
     return key + '.full'
