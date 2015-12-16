@@ -27,7 +27,7 @@ def view(request, id, slug):
 
     preferences = request.preferences
 
-    datastream = DataStreamDBDAO().get(preferences['account_language'], datastream_id=id, published=True)
+    datastream = DataStreamDBDAO().get(language= preferences['account_language'], datastream_id=id, published=True)
 
     url_query = urllib.urlencode(RequestProcessor(request).get_arguments(datastream['parameters']))
 
