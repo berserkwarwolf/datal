@@ -186,6 +186,11 @@
   <div class="col-xs-12 preview-datastream">
     <table>
       <thead>
+        <tr>
+          <% _.each(headers, function(cell) { %>
+            <th><%= cell %></th>
+          <% }); %>
+        </tr>
       </thead>
       <tbody>
         <% _.each(rows, function(cells, row) { %>

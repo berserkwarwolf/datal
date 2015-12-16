@@ -3,16 +3,18 @@ var PreviewView = Backbone.View.extend({
     initialize: function () {
         this.template = _.template( $('#preview_dataview_template').html() );
         this.model.fetch();
-        this.listenTo(this.model.data, 'change:rows', this.render, this);
+        this.listenTo(this.model.data, 'change:rowsRaw change:headers', this.render, this);
     },
 
     render: function () {
         var container = this.$('.table-container').get(0),
-            rowsRaw = this.model.data.get('rowsRaw');
+            rowsRaw = this.model.data.get('rowsRaw'),
+            headers = this.model.data.get('headers');
 
 
         this.$el.html(this.template({
-          rows: this.formatRows(rowsRaw)
+          rows: this.formatRows(rowsRaw),
+          headers: _.map(headers, this.formatCell.bind(this))
         }));
 
     },
@@ -22,11 +24,9 @@ var PreviewView = Backbone.View.extend({
         var self = this;
         var result = _.map(rows, function (cells) {
             return _.map(cells, function (cell) {
-                console.log(self.formatCell(cell));
                 return self.formatCell(cell);
             });
         });
-        console.log(result)
         return result;
     },
 

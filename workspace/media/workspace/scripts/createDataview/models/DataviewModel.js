@@ -185,9 +185,17 @@ var DataviewModel = Backbone.Model.extend({
         var rowsRaw = _.map(_.range(0, response.fRows), function (i) {
             var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
             return row;
+        }).filter(function (row) {
+            // filtrar las filas que son headers
+            return _.isUndefined(row[0].fHeader) || !row[0].fHeader;
+        });
+
+        var headers = _.filter(response.fArray, function (cell) {
+            return !_.isUndefined(cell.fHeader) && cell.fHeader;
         });
 
         this.data.set('columns', columns);
+        this.data.set('headers', headers);
         this.data.set('rowsRaw', rowsRaw);
         this.data.set('response', response);
         this.data.set('rows', rows);
