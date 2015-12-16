@@ -2527,10 +2527,10 @@ msgid "APP-OVERLAY-DELETE-DATASET-TITLE"
 msgstr "Eliminar conjunto de datos"
 
 msgid "APP-OVERLAY-DELETE-DATASET-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-OVERLAY-DELETE-VISUALIZATION-TITLE"
 msgstr "Eliminar visualización"
@@ -2830,7 +2830,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASET-TITLE"
 msgstr "Despublicar conjunto de datos"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASET-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-UNPUBLISH-RESOURCE-TEXT"
 msgstr "Despublicar todas las revisiones"
@@ -2851,7 +2851,7 @@ msgid "APP-OVERLAY-DELETE-DATASTREAM-TITLE"
 msgstr "Eliminar vista"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-OVERLAY-DELETE-DATASTREAM-CONFIRM-TITLE"
 msgstr "Eliminar vista"
@@ -2863,7 +2863,7 @@ msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TITLE"
 msgstr "Despublicar vista"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-OVERLAY-UNPUBLISH-DATASTREAM-CONFIRM-TITLE"
 msgstr "Despublicar vista"
@@ -3133,7 +3133,7 @@ msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TITLE"
 msgstr "Despublicar visualización"
 
 msgid "APP-OVERLAY-UNPUBLISH-VISUALIZATION-TEXT"
-msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea realizar:"
+msgstr "Esta acción no se puede deshacer. Por favor, confirme que desea hacer:"
 
 msgid "APP-PARAMETERS-TEXT"
 msgstr "Parámetros"
