@@ -55,7 +55,7 @@ var ManageDatasetsView = Backbone.View.extend({
 	},
 
 	updateTotalResources: function(models, response){
-		this.model.set('total_resources',response.total_resources);
+		this.model.set('total_resources',response.total_entries);
 	},
 
 	onTotalResourcesChange: function(){
