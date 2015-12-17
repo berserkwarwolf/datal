@@ -3341,3 +3341,6 @@ msgstr "Columnas"
 
 msgid "APP-COL-FORMAT-TEXT"
 msgstr "Formatos"
+
+msgid "APP-NAME-TEXT"
+msgstr "Nombre"
