@@ -45,14 +45,17 @@ function initDataServices(){
 
 function initDataService(pDataServiceId){
 
+    var container = $('#id_dataservice_container_' + pDataServiceId);
+
     var $lDataServiceContainer = $fDataServicesContainer.find('#id_dataservice_container_' + pDataServiceId);
     var $lIframe = $lDataServiceContainer.find('#id_dataservice_' + pDataServiceId);
 
+
+    $fDataServicesContainer.data("caca",pDataServiceId);
+
     startWaitMessage($lIframe);
 
-    var lEndPoint   = jQuery.data($lDataServiceContainer[0], "dataservice_end_point");
-
-    invokeDataService(lEndPoint, pDataServiceId);
+    invokeDataService(container.data("jsonURL"), pDataServiceId);
 }
 
 function startWaitMessage(pHTMLElement){
@@ -63,14 +66,10 @@ function startWaitMessage(pHTMLElement){
     pHTMLElement.html(lHtml);
 }
 
-function invokeDataService(pEndPoint, pDataServiceId){
+function invokeDataService(lUrl, pDataServiceId){
 
-    var lUrl = '/rest/datastreams/' + pDataServiceId + '/data.json';
-    var lData= $.param({limit: 50});
-    if (pEndPoint) {
-      lData += pEndPoint;
-    }
-
+    var lData= $.param({limit: 50, revision_id: pDataServiceId});
+    
     $.ajax({ url: lUrl
             , type:'GET'
             , data: lData
@@ -86,7 +85,7 @@ function onSuccessDataServiceExecute(pResponse){
 
     ds_results = pResponse; //global, for later use
     $.url.setUrl(this.url);
-    var lDataServiceId          = $.url.param("datastream_revision_id");
+    var lDataServiceId          = $.url.param("revision_id");
     var $lDataServiceContainer  = $fDataServicesContainer.find('#id_dataservice_container_' + lDataServiceId);
     var lDataserviceId          = $lDataServiceContainer.data('dataservice_id');
 
