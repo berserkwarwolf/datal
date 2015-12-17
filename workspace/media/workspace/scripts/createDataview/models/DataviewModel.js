@@ -54,7 +54,7 @@ var data_source_template = ['<dataSource>',
             '</Headers>',
             '<type/>',
             '<format>',
-                '<language/>',
+                '<languaje/>',
                 '<country/>',
                 '<style/>',
             '</format>',
@@ -65,8 +65,8 @@ var data_source_template = ['<dataSource>',
                     '<type><%= column.type %></type>',
                     '<format>',
                         '<Symbols>',
-                            '<decimals><%= column.thousandSeparator %></decimals>',
-                            '<thousands><%= column.decimalSeparator %></thousands>',
+                            '<decimals><%= column.decimalSeparator %></decimals>',
+                            '<thousands><%= column.thousandSeparator %></thousands>',
                         '</Symbols>',
                         '<language><%= column.inputLanguage %></language>',
                         '<country><%= column.inputCountry || column.inputLanguage %></country>',
@@ -105,7 +105,7 @@ var DataviewModel = Backbone.Model.extend({
     defaults:{
         title: undefined,
         description: undefined,
-        category: 41,
+        category: undefined,
         notes: '',
 
         dataset_revision_id: undefined,
@@ -151,8 +151,7 @@ var DataviewModel = Backbone.Model.extend({
                 'impl_type',
                 'impl_details',
                 'rdf_template',
-                'bucket_name',
-                'limit',
+                'bucket_name'
             ]);
 
         var filters = this.filters.toSampleFilters();
@@ -162,6 +161,7 @@ var DataviewModel = Backbone.Model.extend({
         params.datasource = this.getDataSource();
 
         params.select_statement = this.getSelectStatement();
+        params.limit = 50;
 
         return $.ajax({
                 type: "POST",
@@ -185,9 +185,17 @@ var DataviewModel = Backbone.Model.extend({
         var rowsRaw = _.map(_.range(0, response.fRows), function (i) {
             var row = response.fArray.slice(i*response.fCols, (i+1)*response.fCols);
             return row;
+        }).filter(function (row) {
+            // filtrar las filas que son headers
+            return _.isUndefined(row[0].fHeader) || !row[0].fHeader;
+        });
+
+        var headers = _.filter(response.fArray, function (cell) {
+            return !_.isUndefined(cell.fHeader) && cell.fHeader;
         });
 
         this.data.set('columns', columns);
+        this.data.set('headers', headers);
         this.data.set('rowsRaw', rowsRaw);
         this.data.set('response', response);
         this.data.set('rows', rows);
