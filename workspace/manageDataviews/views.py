@@ -254,7 +254,11 @@ def create(request):
             impl_type = dataset_revision.impl_type
             impl_details = dataset_revision.impl_details
             bucket_name = request.bucket_name
-            # categories = [[category['category__id'], category['name']] for category in CategoryI18n.objects.filter(language=language, category__account=account_id).values('category__id', 'name')]
+            categoriesQuery = CategoryI18n.objects\
+                                .filter(language=request.auth_manager.language,
+                                        category__account=request.auth_manager.account_id)\
+                                .values('category__id', 'name')
+            categories = [[category['category__id'], category['name']] for category in categoriesQuery]
             sources = [source for source in dataset_revision.get_sources()]
             tags = [tag for tag in dataset_revision.get_tags()]
 

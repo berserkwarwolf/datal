@@ -61,6 +61,15 @@
           <span class="required">*</span>
         </div>
 
+        <div class="row clearfix">
+          <label>Categoría</label>
+          <select class="category" name="category">
+            <% _.each(categories, function (category) { %>
+              <option value="<%= category[0] %>"><%= category[1] %></option>
+            <% }); %>
+          </select>
+        </div>
+
       </fieldset>
 
       <hr class="separator">

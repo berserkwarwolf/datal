@@ -105,7 +105,7 @@ var DataviewModel = Backbone.Model.extend({
     defaults:{
         title: undefined,
         description: undefined,
-        category: undefined,
+        category: 41,
         notes: '',
 
         dataset_revision_id: undefined,

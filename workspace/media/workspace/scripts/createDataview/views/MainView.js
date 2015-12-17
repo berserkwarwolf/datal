@@ -12,6 +12,7 @@ var MainView = Backbone.View.extend({
         });
 
         this.dataviewModel = options.dataviewModel;
+        this.categories = options.categories;
 
         this.dataviewModel.dataset.fetch();
 
@@ -40,7 +41,8 @@ var MainView = Backbone.View.extend({
             });
         } else if (step === 1) {
             this.currentView = new MetadataView({
-                model: this.dataviewModel
+                model: this.dataviewModel,
+                categories: this.categories
             });
             this.listenTo(this.currentView, 'valid', this.enable, this);
         } else if (step === 2) {

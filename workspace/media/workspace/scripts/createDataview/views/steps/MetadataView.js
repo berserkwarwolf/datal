@@ -6,16 +6,19 @@ var MetadataView = Backbone.Epoxy.View.extend({
     bindings: {
         "input.title":          "value:title, events:['keyup']",
         "input.description":    "value:description, events:['keyup']",
-        "select.category":      "value:datastream_category, events:['change']"
+        "select.category":      "value:category, events:['change']"
     },
 
-    initialize: function () {
+    initialize: function (options) {
         this.template = _.template( $('#metadata_view_template').html() );
+        this.categories = options.categories;
     },
 
     render: function () {
         var self = this;
-        this.$el.html(this.template());
+        this.$el.html(this.template({
+            categories: this.categories
+        }));
         this.applyBindings();
 
         Backbone.Validation.bind(this, {
