@@ -152,6 +152,9 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 	.tabs .download > i{background-position:center -700px;}
 	.tabs .download:hover > i,
 	.tabs .download.active > i{background-position:center -733px;}
+	.tabs .related > i{background-position:center -768px;}
+	.tabs .related:hover > i,
+	.tabs .related.active > i{background-position:center -803px;}
 
 /* Sidebar */
 .sidebar .box{width:300px;display:none;}
