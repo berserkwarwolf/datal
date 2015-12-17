@@ -100,16 +100,21 @@
 </script>
 
 <script type="text/template" id="edit_source_template">
-  <h6>{% trans "APP-ADDNEWSOURCE-TEXT" %}</h6>
-  <div class="row clearfix">
-    <label for="">{% trans "MODEL-NAME-TEXT" %}:</label>
-    <input class="source__name" name="source__name" type="text" maxlength="80"/>
+<div class="FL">
+  <div class="nolabel">
+    <div class="insetFormTitle">{% trans "APP-ADDNEWSOURCE-TEXT" %}</div>
+    <div class="row clearfix">
+      <input class="source__name" name="source__name" type="text" maxlength="80"/ placeholder="{% trans "MODEL-NAME-TEXT" %}">
+    </div>
+    <div class="row clearfix">
+      <input class="source__url" name="source__url" type="text" placeholder="{% trans "MODEL-URL-TEXT" %}">
+    </div>
+    <div class="row clearfix">
+      <a class="button small FL" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+    </div>
   </div>
-  <div class="row clearfix">
-    <label for="">{% trans "MODEL-URL-TEXT" %}:</label>
-    <input class="source__url" name="source__url" type="text"/>
-  </div>
-  <a class="button primary small btn-add" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+</div>
+<div role="separator" class="divider divider-lg"></div>
 </script>
 
 <script type="text/template" id="sources_template">
