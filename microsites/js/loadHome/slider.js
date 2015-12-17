@@ -50,9 +50,6 @@ function initDataService(pDataServiceId){
     var $lDataServiceContainer = $fDataServicesContainer.find('#id_dataservice_container_' + pDataServiceId);
     var $lIframe = $lDataServiceContainer.find('#id_dataservice_' + pDataServiceId);
 
-
-    $fDataServicesContainer.data("caca",pDataServiceId);
-
     startWaitMessage($lIframe);
 
     invokeDataService(container.data("jsonURL"), pDataServiceId);
