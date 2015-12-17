@@ -201,10 +201,19 @@ var theme4View = Backbone.Epoxy.View.extend({
 		var sources = [];
 		var resourceQuery='';
 		_.each(this.model.attributes.sliderSection, function(item, index){
+            console.log("hole "+item.type);
 			resourceType=item.type;
             resourceQuery += item.id+",";
 		});		
+
+        // TODO (ignacio feijoo): Por favor, revisar porque no hay un sliderSection
+        // en una cuenta recien creada
+        // this.model.attributes.sliderSection = Array[0]
+        if (typeof resourceType == 'undefined'){
+            resourceType="source";
+        }
 		$.when(
+                    
 				$.ajax({
 					url: "/admin/suggest",
 					type: "GET",
