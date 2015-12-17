@@ -145,9 +145,6 @@ msgstr "Create category"
 msgid "WORKSPACE-CATEGORY-DESCRIPTION-LABEL"
 msgstr "Description"
 
-msgid "APP-NAME-TEXT"
-msgstr "Name"
-
 msgid "APP-DESCRIPTION-TEXT"
 msgstr "Description"
 
@@ -3351,3 +3348,6 @@ msgstr "Columns"
 
 msgid "APP-COL-FORMAT-TEXT"
 msgstr "Formats"
+
+msgid "APP-NAME-TEXT"
+msgstr "Name"
