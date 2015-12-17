@@ -59,6 +59,9 @@ class CommandFactory(object):
             elif item[0].startswith('filter'):
                 v1 = item[1]
                 new.append((item[0].replace('filter', 'pFilter'),self._parseOperator(value=v1)))
+            elif item[0].startswith('pFilter'):
+                v1 = item[1]
+                new.append((item[0].replace('filter', 'pFilter'),self._parseOperator(value=v1)))
             elif item[0].startswith('order'):
                 new.append((item[0].replace('order', 'pOrder'), item[1]))
             elif item[0].startswith('uniqueBy'):
