@@ -272,7 +272,14 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=VisualizationRevision.objects.filter(visualization__id=item['visualization__id']).count()
+
 
     def query_hot_n(self, lang, hot = None):
 
