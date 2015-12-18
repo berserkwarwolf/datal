@@ -5,8 +5,8 @@
     <meta charset="utf-8">
 
     {% block SEO %}
-    <title>{% block title %}DATAL &middot; {% trans 'APP-THEOPENDATAPLATFORM-TEXT' %}{% endblock %}</title>
-    <meta name="description" content="DATAL delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
+    <title>{% block title %}{{ settings.APPLICATION_DETAILS.name }} &middot; {% trans 'APP-THEOPENDATAPLATFORM-TEXT' %}{% endblock %}</title>
+    <meta name="description" content="{{ settings.APPLICATION_DETAILS.name }} delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
     {% endblock %}
 
 	<meta http-equiv="CACHE-CONTROL" content="max-age=0, no-store" />

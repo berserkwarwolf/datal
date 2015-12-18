@@ -4,7 +4,7 @@
     {% if datastream.sov_id %}
         <div class="dataStreamContainer clearfix">
             <div id="id_chartBox_{{datastream.id}}" class="chartBox">
-                <h2 class="chartTitle"><a href="{{datastream.permalink}}" title="{{datastream.title}}" target="_blank"><span class="txt"><strong>{{datastream.title}}</strong></span></a></h2>
+                <h2 class="chartTitle"><a href="{% url "viewDataStream.view" datastream.datastream_id %}" title="{{datastream.title}}" target="_blank"><span class="txt"><strong>{{datastream.title}}</strong></span></a></h2>
                 <div class="chartContainer">
                 	<div id="id_chartDisplay" class="chartContainerInner clearfix"></div>
                 </div>
@@ -21,9 +21,9 @@
         <!-- DATA STREAM CONTAINER -->
         <div class="dataStreamContainer clearfix">
             <!-- DATA STREAM BOX -->
-            <div id="id_dataservice_container_{{datastream.id}}" class="dataStreamBox clearfix">
+            <div id="id_dataservice_container_{{datastream.datastream_id}}" class="dataStreamBox clearfix">
                 <h2>
-                    <a id="id_dataservice_link_{{datastream.id}}" href="{{datastream.permalink}}" target="_blank" title="{{datastream.description}}" class="clearfix">
+                    <a id="id_dataservice_link_{{datastream.datastream_id}}" href="{% url "viewDataStream.view" datastream.datastream_id %}" target="_blank" title="{{datastream.description}}" class="clearfix">
                         <span class="txt">
                             <span class="titleDS"><strong>{{datastream.title}}</strong></span>
                             <span class="descriptionDS">{{datastream.description|truncate:"50"}}</span>
@@ -35,11 +35,13 @@
                         </span>
                     </a>
                 </h2>
-                <div id="id_dataservice_{{datastream.id}}"></div>
+                <div id="id_dataservice_{{datastream.datastream_id}}"></div>
 
                 <script type="text/javascript">
-                    var lDataService = $("#id_dataservice_container_{{datastream.id}}")[0];
-                    jQuery.data(lDataService, "dataservice_id", "{{datastream.id}}");
+                    $("#id_dataservice_container_{{datastream.datastream_id}}").data("jsonURL", "{% url 'datastreams-data' datastream.last_published_revision_id "json" %}");
+
+                    var lDataService = $("#id_dataservice_container_{{datastream.datastream_id}}")[0];
+                    jQuery.data(lDataService, "dataservice_id", "{{datastream.datastream_id}}");
                     jQuery.data(lDataService, "dataservice_title", "{{datastream.title}}");
                     jQuery.data(lDataService, "dataservice_description", "{{datastream.description}}");
                     jQuery.data(lDataService, "user_nick", "{{datastream.user_nick}}");

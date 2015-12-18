@@ -215,6 +215,7 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             'status',
             'id',
             'datastream__guid',
+            'datastream__id',
             'category__id',
             'datastream__id',
             'category__categoryi18n__slug',
@@ -251,7 +252,14 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=DataStreamRevision.objects.filter(datastream__id=item['datastream__id']).count()
+
 
     def query_hot_n(self, limit, lang, hot = None):
 

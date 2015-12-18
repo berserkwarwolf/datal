@@ -28,7 +28,7 @@
 {% endblock %}
 
 {% block facebook %}
-    <meta property="og:description" content="DATAL delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
+    <meta property="og:description" content="{{ settings.APPLICATION_DETAILS.name }} delivers the easiest to use, cloud-based, Open Data Platform that enables data-rich organizations to achieve greater transparency, citizen engagement, efficiencies and innovation." />
     <meta property="og:image" content="{% static 'core/images/common/im_defaultAvatar_90x90.jpg' %}" />
 {% endblock %}
 
@@ -105,8 +105,13 @@
 	    {% if preferences.account_embed_powered_by %}
 	    Configuration.embedPoweredBy = ["http://{{preferences.account_domain}}","{{preferences.account_name}}"];
   		{% else %}
-  		Configuration.embedPoweredBy = ["http://www.datal.org","DATAL"];
+  		Configuration.embedPoweredBy = ["{{ settings.APPLICATION_DETAILS.website }}","{{ settings.APPLICATION_DETAILS.name }}"];
   		{% endif %}
+
+  		Configuration.APPLICATION_DETAILS = {}
+			Configuration.APPLICATION_DETAILS.name = "{{ settings.APPLICATION_DETAILS.name }}";
+			Configuration.APPLICATION_DETAILS.website = "{{ settings.APPLICATION_DETAILS.website }}";
+			Configuration.APPLICATION_DETAILS.mail = "{{ settings.APPLICATION_DETAILS.mail }}";
 
 		/* ]]> */
 	</script>

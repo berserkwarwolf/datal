@@ -5,14 +5,14 @@
 
 		<!-- Home -->
 		<li id="id_home_option">
-			<a href="/welcome" class="button primary nav-home">
+			<a href="/welcome" class="button nav-home">
 				<span class="icon icon-home"></span>{% trans 'APP-HOME-TEXT' %}
 			</a>
 		</li>
 
 		<!-- Datasets -->
 		<li id="id_datasets_option" class="has-submenu">
-			<a href="{% url 'manageDatasets.index' %}" class="button primary nav-datasets">
+			<a href="{% url 'manageDatasets.index' %}" class="button nav-datasets">
 				<span class="icon icon-datasets"></span>{% trans 'APP-DATASETS-TEXT' %}
 			</a>
 			<ul class="submenu">
@@ -35,7 +35,7 @@
 
 		<!-- Data Views -->
 		<li id="id_dataviews_option" class="has-submenu">
-			<a href="{% url 'manageDataviews.index' %}" class="button primary nav-dataviews ">
+			<a href="{% url 'manageDataviews.index' %}" class="button nav-dataviews ">
 				<span class="icon icon-dataviews"></span>{% trans 'APP-DATAVIEWS-TEXT' %}
 			</a>
 			<ul class="submenu">
@@ -53,7 +53,7 @@
 
 		<!-- Visualizations -->
 		<li id="id_visualizations_option" class="has-submenu">
-			<a href="{% url 'manageVisualizations.index' %}" class="button primary nav-visualizations">
+			<a href="{% url 'manageVisualizations.index' %}" class="button nav-visualizations">
 				<span class="icon icon-visualizations"></span>{% trans 'APP-VISUALIZATIONS-TEXT' %}
 			</a>
 			<ul class="submenu">
@@ -80,7 +80,7 @@
 		{% if 'workspace.can_access_admin' in auth_manager.privileges %}
 		<!-- Settings -->
 		<li id="id_settings_option" class="has-submenu bottom-submenu">
-			<a href="{% url 'admin_manager.edit_info' %}" class="button primary nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
+			<a href="{% url 'admin_manager.edit_info' %}" class="button nav-settings"><span class="icon icon-settings"></span>{% trans 'APP-SETTINGS-TEXT' %}</a>
 			<ul class="submenu">
 				<li class="submenu-header"><a href="{% url 'admin_manager.edit_info' %}">{% trans 'APP-SETTINGS-TEXT' %}</a></li>
 				<li><a href="{% url 'admin_manager.edit_info' %}">{% trans 'ACCOUNT-ACCOUNTINFORMATION-TEXT' %}</a></li>
@@ -94,7 +94,7 @@
 		</li>
 		{% endif %}
 
-		<li class="footer">&copy; 2009-{%now "Y" %}, <a href="http://www.datal.org" target="_blank">DATAL</a></li>
+		<li class="footer">&copy; 2009-{%now "Y" %}, <a href="{{ settings.APPLICATION_DETAILS.website }}" target="_blank">{{ settings.APPLICATION_DETAILS.name }}</a></li>
 
 	</ul>
 </nav>

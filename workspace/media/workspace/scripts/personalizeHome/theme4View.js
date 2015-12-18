@@ -204,7 +204,15 @@ var theme4View = Backbone.Epoxy.View.extend({
 			resourceType=item.type;
             resourceQuery += item.id+",";
 		});		
+
+        // TODO (ignacio feijoo): Por favor, revisar porque no hay un sliderSection
+        // en una cuenta recien creada
+        // this.model.attributes.sliderSection = Array[0]
+        if (typeof resourceType == 'undefined'){
+            resourceType="source";
+        }
 		$.when(
+                    
 				$.ajax({
 					url: "/admin/suggest",
 					type: "GET",
@@ -214,7 +222,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 				})).done( function(data){
 					$('#id_theme4nameSuggest').taggingSources({
 						source:function(request, response) {
-						    $.getJSON("/admin/suggest", { term: request.term, resources:['ds']}, response);
+						    $.getJSON("/admin/suggest", { term: request.term, resources:['ds', 'vz']}, response);
 						}
 						, minLength: 3
 						, sources: data
@@ -260,8 +268,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 				})).done( function(data){
 					$('#id_theme4nameLinkSuggest').taggingSources({
 						source:function(request, response) {
-						    /* $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds','chart','db']}, response); */
-						    $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds']}, response);
+						    $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds','vz']}, response);
 						}
 						, minLength: 3
 						, sources: data

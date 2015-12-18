@@ -415,7 +415,10 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.transparency.createdcategories', 'account.transparency.createdcategories')
     ,('account.transparency.categories', 'account.transparency.categories')
     ,('account.contact.dataperson.email', 'account.contact.dataperson.email')
-    ,('account.dataset.showhome', 'account.dataset.showhome')
+    ,('account.dataset.showhome', 'account.dataset.showhome'),
+
+    # TODO: Mover al plugin
+    ('account.featured.dashboards', 'account.featured.dashboards')
 )
 
 API_APPLICATION_TYPE_CHOICES = (
