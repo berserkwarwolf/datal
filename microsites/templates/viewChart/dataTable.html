@@ -26,11 +26,13 @@
 
 	<!-- Data -->
 	<div class="data">
+    
     <div id="id_visualizationResult"><div class="result"><div class="loading">{% trans 'APP-LOADING-TEXT' %}</div></div></div>
+    
+    <!-- Space for render a Data Table from plugins -->
+		{% plugins_call 'microsites_view_visualization_data_table' %}
+		
   </div>
-
-	<!-- Space for render a Data Table from plugins -->
-	{% plugins_call 'microsites_view_visualization_data_table' %}
 	
   <!-- Mini Loading -->
   <div id="id_miniLoading" style="display:none;" class="absolute">{% trans 'VIEWCHART-MINILOADING-TEXT' %}</div>

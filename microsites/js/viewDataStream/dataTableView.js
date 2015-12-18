@@ -163,7 +163,6 @@ var dataTableView = Backbone.View.extend({
 	},
 	
 	onInvokeSuccess: function(response){
-		this.setLastUpdate(response);
 		this.model.set('result', response);
 	},
 	
@@ -433,89 +432,6 @@ var dataTableView = Backbone.View.extend({
 
 		this.dataStream.set('filter', url);
 
-	},
-
-	setLastUpdate: function(response){
-
-		// Check if it has already been executed
-		if( !$('#id_lastUpdate').hasClass('updated') ){
-
-	    if(response.fTimestamp && response.fTimestamp != 0) {
-
-	  		var dataStream = this.options.dataStream.attributes,
-
-	  			// Last Update
-	      	lastUpdate = new Date(response.fTimestamp).toISOString(),
-	      	lastUpdateNumber = parseFloat( lastUpdate.split('T')[0].split('-').join('') + lastUpdate.split('T')[1].split('Z')[0].split('.')[0].split(':').join('') ),
-
-	      	// Created At
-	      	createdAt = new Date(dataStream.createdAt).toISOString(),
-	      	createdAtNumber = parseFloat( createdAt.split('T')[0].split('-').join('') + createdAt.split('T')[1].split('Z')[0].split('.')[0].split(':').join('') );
-
-	      // If lastUpdate > createAt set new date in sidebarInfo
-	    	if( lastUpdateNumber > createdAtNumber ){
-
-	    		lastUpdate = new Date(response.fTimestamp);
-
-	        var day = lastUpdate.getDate() < 10 ? '0' + lastUpdate.getDate() : lastUpdate.getDate();
-	        var month = lastUpdate.getMonth() + 1;
-	        switch (month){
-						case 1:
-						  month = gettext('DATE-MONTH-1');
-						  break;
-						case 2:
-						  month = gettext('DATE-MONTH-2');
-						  break;
-						case 3:
-						  month = gettext('DATE-MONTH-3');
-						  break;
-						case 4:
-						  month = gettext('DATE-MONTH-4');
-						  break;
-						case 5:
-						  month = gettext('DATE-MONTH-5');
-						  break;
-						case 6:
-						  month = gettext('DATE-MONTH-6');
-						  break;
-						case 7:
-						  month = gettext('DATE-MONTH-7');
-						  break;
-						case 8:
-						  month = gettext('DATE-MONTH-8');
-						  break;
-						case 9:
-						  month = gettext('DATE-MONTH-9');
-						  break;
-						case 10:
-						  month = gettext('DATE-MONTH-10');
-						  break;
-						case 11:
-						  month = gettext('DATE-MONTH-11');
-						  break;
-						case 12:
-						  month = gettext('DATE-MONTH-12');
-						  break;
-					}
-	        var year = lastUpdate.getFullYear();
-	        var hours = lastUpdate.getHours();
-	        var minutes = lastUpdate.getMinutes();
-	        var meridiem = 'AM';
-	        if (hours > 12) {
-	            hours = hours - 12;
-	            hours = hours < 10 ? '0' + hours : hours;
-	            meridiem = 'PM';
-	        }
-	        var lastUpdateStr = month + ' ' + day + ', ' + year + ', ' + hours + ':' + minutes + ' ' + meridiem;
-
-	        $('#id_lastUpdate').html(lastUpdateStr).addClass('updated');
-
-	    	}
-
-	    }
-
-    }
-    
 	},
 
   onPivotComponentButtonClicked: function(event){

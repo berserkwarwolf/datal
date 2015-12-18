@@ -155,9 +155,6 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 	.tabs .pivot > i{background-position:center -560px;}
 	.tabs .pivot:hover > i,
 	.tabs .pivot.active > i{background-position:center -595px;}
-	.tabs .heatmap > i{background-position:center -630px;}
-	.tabs .heatmap:hover > i,
-	.tabs .heatmap.active > i{background-position:center -665px;}
 	.tabs .download > i{background-position:center -700px;}
 	.tabs .download:hover > i,
 	.tabs .download.active > i{background-position:center -733px;}
