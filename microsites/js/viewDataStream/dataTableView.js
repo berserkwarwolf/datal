@@ -142,8 +142,6 @@ var dataTableView = Backbone.View.extend({
 
 		// Add the rest of the params
 		$.merge( params, this.setPOSTParams() );
-		
-		console.log(this.dataStream.toJSON());
 			
 		var ajax = $.ajax({
 			url: '/rest/datastreams/' + this.dataStream.get('datastream_revision_id') + '/data.json', 
@@ -310,7 +308,7 @@ var dataTableView = Backbone.View.extend({
 
 		// Init Flexigrid
 		$('.dataTable .data .result').flexigrid({
-			url: '/rest/datastreams/' + dataStream.id + '/data.grid',
+			url: '/rest/datastreams/' + dataStream.datastream_revision_id + '/data.grid',
 			dataType: 'json',
 			colModel: colModel,
 			searchitems : searchArray,
@@ -353,12 +351,6 @@ var dataTableView = Backbone.View.extend({
 				self.trigger('flexigrid-submit', result);
 			
 				var params = [];
-
-				// Add DataStream ID
-				params.push({
-					name: 'datastream_id',
-					value: self.dataStream.attributes.id
-				});
 
 				// Add the rest of the params
 				$.merge( params, self.setPOSTParams() );

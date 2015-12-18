@@ -332,62 +332,72 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 
 
 		// NEW
+		
+
 		this.chartView = new ChartView({
-			el: '#id_visualizationResult',
+			el: this.chartContainer,
 			model: this.model
 		});
 
 
 
 
-
-
-
-
-		
-		// init Sidebars
-		this.initInfoSidebar();
-		this.initAPISidebar();
-		this.initNotesSidebar();
+		// Init Sidebars
+		this.initSidebars();
 
 		// Render
 		this.render();
 
+		// Handle Visualization Resize
+		this.bindVisualizationResize();
+		this.handleVisualizationResize();
+
 	},
 
-	//
-	loadExtraDatatable: function(){ // dual work on filters active. First read from python view, if filter, read from ajax (paginated))
-		var mdl = new dataTable();
-		// mdl.set('rows', 0); // remove limit pagination in this cases
-		this.theDataTable = new dataTableView({model: mdl, dataStream: this.model, parentView: this});
+	bindVisualizationResize: function () {
+
+		var self = this;
+		this.$window = $(window);
+
+		this.$window.on('resize', function () {
+			if(this.resizeTo) clearTimeout(this.resizeTo);
+			this.resizeTo = setTimeout(function() {
+				self.handleVisualizationResize.call(self);
+			}, 500);
+		});
+
+	},
+
+	loadDatatable: function(){
+		this.theDataTable = new dataTableView({model: new dataTable(), dataStream: this.model, parentView: this});
 	},
 
 	setLoading : function() {
 		var otherHeights =
-		parseFloat( $('.dataTable header').height() )
-		+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-		+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-		+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+			parseFloat( $('.dataTable header').height() )
+			+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
+			+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
+			+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
 			+ 2;// Fix to perfection;
 
-			this.setHeights('#' + this.chartContainer + ' .loading', otherHeights);
-			$('#id_visualizationResult').html('<div class="result"><div class="loading">'+ gettext('APP-LOADING-TEXT') + '</div></div>');
+			this.setHeights(this.chartContainer + ' .loading', otherHeights);
+			$(this.chartContainer).html('<div class="result"><div class="loading">'+ gettext('APP-LOADING-TEXT') + '</div></div>');
 	},
 
-	setMiniLoading: function(){
-		$("#id_miniLoading").show();
-	},
+	// setMiniLoading: function(){
+	// 	$("#id_miniLoading").show();
+	// },
 
-	unsetLoading: function(){
-		$("#id_miniLoading").hide();
-	},
+	// unsetLoading: function(){
+	// 	$("#id_miniLoading").hide();
+	// },
 
 	render : function() {
 		this.chartView.render();
+		//this.setChartContainerHeight();
 		return this;
 	},
 
-	// open the embed from form iframe code
 	onEmbedButtonClicked : function() {
 		new embedChartView({
 			model : new embedChart({
@@ -458,7 +468,7 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 				if( $(button).attr('id') == 'id_openFiltersButton' ){
 					// if it's the first time call the data!
 					if (null === this.theDataTable)
-						{this.loadExtraDatatable();}
+						{this.loadDatatable();}
 					$('#id_toggleComponent a').removeClass('active');
 					$('#id_toggleComponent a[rel=table]').addClass('active');
 					this.toggleDataTable('show');
@@ -511,6 +521,21 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 
 	},
 
+	initSidebars: function(){
+
+		var self = this;
+
+		this.$('#id_columns .sidebar').on('transitionend webkitTransitionEnd', function (e) {
+			self.handleVisualizationResize.call(self);
+		});
+
+		// init Sidebars
+		this.initInfoSidebar();
+		this.initAPISidebar();
+		this.initNotesSidebar();
+
+	},
+
 	initInfoSidebar : function() {
 
 		// Set Height
@@ -549,7 +574,7 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 
 			var height =
 				parseFloat( $(window).height() )
-				- parseFloat( otherHeight   )
+				- parseFloat( otherHeight )
 				- parseFloat( $('.brandingHeader').height() )
 				- parseFloat( $('.content').css('padding-top').split('px')[0] )
 				- parseFloat( $('.content').css('padding-bottom').split('px')[0] )
@@ -562,28 +587,28 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 
 	},
 
-	setChartContainerHeight:function(){
+	// setChartContainerHeight:function(){
 		
-		var self = this;
+	// 	var self = this;
 
-		$(document).ready(function(){
+	// 	$(document).ready(function(){
 
-			var otherHeights = 
-				parseFloat( $('.dataTable header').height() )
-				+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-				+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
-				+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-				+ 2;// Fix to perfection;
+	// 		var otherHeights = 
+	// 			parseFloat( $('.dataTable header').height() )
+	// 			+ parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
+	// 			+ parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] )
+	// 			+ parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
+	// 			+ 2;// Fix to perfection;
 
-			self.setHeights( '#' + self.chartContainer, otherHeights );
+	// 		self.setHeights( self.chartContainer, otherHeights );
 
-			$('#' + self.chartContainer).css({
-				overflow: 'auto'
-			})
+	// 		$(self.chartContainer).css({
+	// 			overflow: 'auto'
+	// 		})
 
-		});
+	// 	});
 
-	},
+	// },
 
 	setSidebarHeight : function() {
 
@@ -648,7 +673,7 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 		$.gritter.add({
 			title : titleText,
 			text : gettext("VIEWDS-WAITMESSAGEDOWNLOAD-TEXT"),
-			image : '/media_microsites/images/microsites/ic_download.gif',
+			image : '/static/microsites/images/microsites/ic_download.gif',
 			sticky : false,
 			time : ''
 		});
@@ -675,14 +700,15 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 	},
 			
 	onRefreshButtonClicked : function() {
-		// by now only maps has an ajax function activated.
-		var chType = this.model.attributes.chart_type;
-		if (chType != "mapchart")
-			window.location.reload();
-		else {
-			this.setMiniLoading();
-			this.refreshData(true);
-		}
+		this.render();
+		// // by now only maps has an ajax function activated.
+		// var chType = this.model.attributes.chart_type;
+		// if (chType != "mapchart")
+		// 	window.location.reload();
+		// else {
+		// 	this.setMiniLoading();
+		// 	this.refreshData(true);
+		// }
 	},
 
 	updateExportsURL: function(){
@@ -701,6 +727,40 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 		$('#id_exportToCSVButton').attr('href',CSV+paramsQuery+filter);
 		$('#id_exportToXLSButton').attr('href',XLS+paramsQuery+filter);
 
+	},
+
+	handleVisualizationResize: function () {
+		var chartInstance = this.chartInstance,
+			overflowX =  'hidden',
+			overflowY =  'hidden',
+			$mainHeader = $('.brandingHeader'),
+			$chartHeader = $('.dataTable header');
+
+		//Calcula el alto de los headers
+		var otherHeights = $mainHeader.outerHeight(true) + $chartHeader.outerHeight(true);
+
+		//Ajusta overflow si se está mostrando el sidebar		
+		if( $('#id_columns').hasClass('showSidebar') ){
+				overflowX = 'auto';
+		}
+
+		//Calcula el alto que deberá tener el contenedor del chart
+		var height = this.$window.height() - otherHeights - 65, // fix. 65 ajusta el alto del chart
+			tabsHeight = this.$el.find('#id_wrapper .tabs').height() - $chartHeader.outerHeight(true);
+
+		// Min height para que no sea mas chico que las tabs
+		if( height < tabsHeight ){
+			height = tabsHeight;
+		}
+
+		this.chartView.$el.css({
+			height: height + 'px',
+			maxHeight: height + 'px',
+			minHeight: height + 'px',
+			overflowX: overflowX,
+			overflowY: overflowY
+		});
+		this.render();
 	},
 
 

@@ -13,6 +13,12 @@
 /* Junar Info Window - Fix to remove scrollbars */
 .junarinfowindow{line-height:1.35;overflow:hidden;
 	-webkit-box-sizing:content-box;
-	   -moz-box-sizing:content-box;
-			box-sizing:content-box;
+		 -moz-box-sizing:content-box;
+			    box-sizing:content-box;
+}
+
+#id_visualizationResult{
+	-webkit-border-radius:5px;
+		 -moz-border-radius:5px;
+					border-radius:5px;
 }
