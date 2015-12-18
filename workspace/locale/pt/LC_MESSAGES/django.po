@@ -3252,3 +3252,12 @@ msgstr "Edit description"
 
 msgid "APP-EDIT-VISUALIZATION-TEXT"
 msgstr "Edit visualization"
+
+msgid "ADMIN-HOME-THEMES-THEME7-TEXT"
+msgstr "Responsive"
+
+msgid "ADMIN-HOME-THEMES-THEME8-TEXT"
+msgstr "Catalog"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION7-DESCRIPTION"
+msgstr "Add icons, set titles, descriptions and links. Assigns a background color for descriptions. Finally, rearrange the location of each button. Recommended icon size: 50 x 50 pixels."
