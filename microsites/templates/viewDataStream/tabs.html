@@ -7,6 +7,14 @@
 			<span>{% trans 'VIEWDS-TABS-INFO' %}</span>
 		</a>
 	</li>
+	{% if notes and preferences.account_enable_notes and preferences.account_description_enhancement %}
+	<li>
+		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-DESCRIPTION' %}</span>
+		</a>
+	</li>
+	{% endif %}
 	<li>
 		<a class="icon refresh border-box" id="id_refreshButton">
 			<i></i>
@@ -34,7 +42,7 @@
 	</li>
 	{% endif %}
 	{% if notes and preferences.account_enable_notes %}
-	<li>
+	<li style="{%if preferences.account_description_enhancement %}display:none;{% endif %}">
 		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
 			<i></i>
 			<span>{% trans 'VIEWDS-TABS-NOTES' %}</span>
