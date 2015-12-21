@@ -1,18 +1,43 @@
-var dataTableView = Backbone.View.extend({
+var dataTableView = function(options) {
+	this.inheritedEvents = [];
+
+	Backbone.View.call(this, options);
+}
+
+_.extend(dataTableView.prototype, Backbone.View.prototype, {
+
+	// Extend functions
+
+	baseEvents: {
+
+		// Add Data Table events as Base Events
+		'click #id_refreshButton, #id_retryButton': 'onRefreshButtonClicked',
+		'click a[id^="id_changeParam"]': 'onChangeParamButtonClicked',
+
+	},
+
+	events: function() {
+		var e = _.extend({}, this.baseEvents);
+
+		_.each(this.inheritedEvents, function(events) {
+			e = _.extend(e, events);
+		});
+
+		return e;
+	},
+
+	addEvents: function(eventObj) {
+		this.inheritedEvents.push(eventObj);
+		this.delegateEvents();
+	},
+	
+	// Data Table functions
 
 	el: '#id_wrapper',	 
 	
 	template: null,
-	
-	events:{
-		'click #id_refreshButton, #id_retryButton': 'onRefreshButtonClicked',
-		'click a[id^="id_changeParam"]': 'onChangeParamButtonClicked',
-		'click #id_pivotComponentButton': 'onPivotComponentButtonClicked'
-	},
 
 	$parameters: null,
-	
-	pivot: null,
 	
 	initialize: function() {
 
@@ -423,61 +448,6 @@ var dataTableView = Backbone.View.extend({
 
 	},
 
-  onPivotComponentButtonClicked: function(event){
-	  
-		var dataStream = this.options.dataStream;
-
-  	// If Pivot Component exists in model
-    if( dataStream.attributes.pivotTableLicense ){ 
-
-    	// If it is not created, init Pivot Component
-	    if( this.pivot == null ){
-	    	this.pivot = new pivotDataStreamView({model: new pivotDataStream(), dataStream: dataStream});
-	    }
-
-	    // Toggle Pivot Component
-	    this.togglePivotComponent(event);
-
-	  }
-
-  },
-  
-	togglePivotComponent: function(event){
-		var button = event.currentTarget;
-
-    if( $(button).hasClass('active') ){
-
-    	this.pivot.hide();
-		  $('#id_datastreamResult').show();
-		  $('.dataTable').removeClass('pivotEnabled');
-		  $('#id_refreshButton, .dataTable header h1 span').removeClass('isDisabled');
-		  $(button).removeClass('active');
-
-    }else{
-
-    	this.pivot.show();
-      $('#id_datastreamResult').hide();
-      $('.dataTable').addClass('pivotEnabled');
-      $('#id_refreshButton, .dataTable header h1 span').addClass('isDisabled');
-      $(button).addClass('active');
-
-      // Set Pivot Component Height
-      var self = this;
-
-      $(document).ready(function(){
-
-        var otherHeights = 
-          parseFloat( $('.dataTable header').height() ) 
-          + parseFloat( $('.dataTable header').css('padding-top').split('px')[0] )
-          + parseFloat( $('.dataTable header').css('padding-bottom').split('px')[0] ) 
-          + parseFloat( $('.dataTable header').css('border-bottom-width').split('px')[0] )
-          + 2;// Fix to perfection;
-
-        self.parentView.setHeights( '#'+self.pivot.$el.attr('id'), otherHeights );
-
-      });
-
-    } 
-	}
-
 });
+
+dataTableView.extend = Backbone.View.extend;

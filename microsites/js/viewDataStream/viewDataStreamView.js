@@ -19,7 +19,7 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 		'click #id_googleSpreadSheetButton, #id_exportToXLSButton, #id_exportToCSVButton, #id_exportButton': 'onExportButtonClicked',		
 		'click #id_permalink, #id_GUID': 'onInputClicked',
 		'click #id_downloadLink, #id_exportToXLSButton, #id_exportToCSVButton': 'setWaitingMessage',
-		'click #id_openNotesLink': 'onViewMoreDescriptionLinkClicked',
+		'click #id_openNotesLink': 'onViewMoreDescriptionLinkClicked'
 
 	},
 
@@ -55,7 +55,6 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 		//if data changes, then redraw
 		this.listenTo(this.model, "change", this.render);
 		this.listenTo(this.model, "change:filter", this.updateExportsURL);
-		this.listenTo(this.model, "change:pivotTableLicense", this.fixLicense);
 		var i=0;
 		while(i < $parameters.size()){
 			var name = 'parameter' + i;
@@ -112,7 +111,7 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 
 		if( $(button).hasClass('active') ){
 
-			this.onCloseSidebarButtonClicked();
+			this.onCloseSidebarButtonClicked(button);
 
 		}else{
 
@@ -141,7 +140,7 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 
 	},
 	
-	onCloseSidebarButtonClicked: function(){	
+	onCloseSidebarButtonClicked: function(button){	
 		$('.tabs .sidebarIcon').removeClass('active');
 		$('#id_columns').removeClass('showSidebar');
 
@@ -151,15 +150,6 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 
 		this.trigger('close-sidebar', button);
 
-	},
-
-	fixLicense: function(){
-		var ptl = this.model.attributes.pivotTableLicense;
-		if (ptl.indexOf("\n") > -1)
-				ptl = ptl.replace("\n", "");
-		if (ptl.indexOf("<br />") > -1)
-				ptl = ptl.replace("<br />", "");
-		this.model.attributes.pivotTableLicense = ptl;
 	},
 	
 	onExportButtonClicked: function(event){
@@ -336,7 +326,6 @@ _.extend(viewDataStreamView.prototype, Backbone.View.prototype, {
 			filter = this.model.get('filter'),
 			CSV = this.model.get('exportCSVURL'),
 			XLS = this.model.get('exportXLSURL');
-			pivotTablesConfigUrl = this.model.get('pivotTableConfig');
 
 		while( this.model.get('parameter' + n ) != undefined ){
 			var param = 'pArgument' + n + '=' + this.model.get('parameter' + n ).value;
