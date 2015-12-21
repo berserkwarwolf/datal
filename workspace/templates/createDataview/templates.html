@@ -109,21 +109,21 @@
 </script>
 
 <script type="text/template" id="edit_source_template">
-<div class="FL">
-  <div class="nolabel">
-    <div class="insetFormTitle">{% trans "APP-ADDNEWSOURCE-TEXT" %}</div>
-    <div class="row clearfix">
-      <input class="source__name" name="source__name" type="text" maxlength="80"/ placeholder="{% trans "MODEL-NAME-TEXT" %}">
-    </div>
-    <div class="row clearfix">
-      <input class="source__url" name="source__url" type="text" placeholder="{% trans "MODEL-URL-TEXT" %}">
-    </div>
-    <div class="row clearfix">
-      <a class="button small FL btn-add" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+  <div class="FL">
+    <div class="nolabel">
+      <div class="insetFormTitle">{% trans "APP-ADDNEWSOURCE-TEXT" %}</div>
+      <div class="row clearfix">
+        <input class="source__name" name="source__name" type="text" maxlength="80"/ placeholder="{% trans "MODEL-NAME-TEXT" %}">
+      </div>
+      <div class="row clearfix">
+        <input class="source__url" name="source__url" type="text" placeholder="{% trans "MODEL-URL-TEXT" %}">
+      </div>
+      <div class="row clearfix">
+        <a class="button small FL btn-add" title="{% trans 'APP-ADD-TEXT' %}"><span>{% trans "APP-ADD-TEXT" %}</span></a>
+      </div>
     </div>
   </div>
-</div>
-<div role="separator" class="divider divider-lg"></div>
+  <div role="separator" class="divider divider-lg"></div>
 </script>
 
 <script type="text/template" id="sources_template">
@@ -264,6 +264,12 @@
 
     <% if (total == 0) { %>
       <p>{% trans 'APP-CREATE-DATAVIEW-DATA-SELECTION-TIP-TEXT' %}</p>
+    <% } %>
+
+    <% if (tables.length > 0) { %>
+      <div class="hot-sel-col">
+        <p>{% trans 'APP-FULL-TABLE-TEXT' %} <a class="btn-clear" data-mode="table">x</a></p>
+      </div>
     <% } %>
 
     <% if (columns.length > 0) { %>

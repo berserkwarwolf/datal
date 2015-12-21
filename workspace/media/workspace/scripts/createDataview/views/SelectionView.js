@@ -21,6 +21,7 @@ var SelectionView = Backbone.View.extend({
         var columns = this.filter('col'),
             rows = this.filter('row'),
             cells = this.filter('cell'),
+            tables = this.filter('table'),
             headers = this.filter('header'),
             total = this.dataviewModel.selection.length;
 
@@ -28,6 +29,7 @@ var SelectionView = Backbone.View.extend({
             columns: columns,
             rows: rows,
             cells: cells,
+            tables: tables,
             headers: headers,
             total: total,
             filters: this.dataviewModel.filters.toJSON(),

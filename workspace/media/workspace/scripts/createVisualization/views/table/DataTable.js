@@ -116,9 +116,10 @@ var DataTableView = Backbone.View.extend({
       self.trigger('afterSelectionEnd');
     });
     this.table.addHook('afterOnCellMouseOver', function (event, coords, TD) {
-      self._fullColumnMode = (coords.row === -1);
-      self._fullRowMode = (coords.col === -1);
       self._fullTableMode = false;
+      self._fullColumnMode = (coords.row === -1 && coords.col !== -1);
+      self._fullRowMode = (coords.col === -1 && coords.row !== -1);
+      self._fullTableMode = (coords.col === -1 && coords.row === -1);
     });
 
     this.listenTo(this.collection, 'add', this.onAddSelected, this);
@@ -170,7 +171,6 @@ var DataTableView = Backbone.View.extend({
   },
 
   onClickCorner: function (e) {
-    console.log('clicked corner')
     this.cacheSelection({
       from: {row: -1, col: -1},
       to: {row: -1, col: -1}
@@ -246,12 +246,12 @@ var DataTableView = Backbone.View.extend({
   getSelection: function () {
     var mode;
 
-    if (this._fullColumnMode) {
+    if (this._fullTableMode) {
+      mode = 'table';
+    } else if (this._fullColumnMode) {
       mode = 'col';
     } else if (this._fullRowMode) {
       mode = 'row';
-    } else if (this._fullTableMode) {
-      mode = 'table';
     } else {
       mode = 'cell';
     }

@@ -3339,6 +3339,9 @@ msgstr "Página / Tabla"
 msgid "APP-COLS-TEXT"
 msgstr "Columnas"
 
+msgid "APP-FULL-TABLE-TEXT"
+msgstr "Tabla Completa"
+
 msgid "APP-COL-FORMAT-TEXT"
 msgstr "Formatos"
 

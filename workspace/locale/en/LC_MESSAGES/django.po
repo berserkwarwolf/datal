@@ -3346,6 +3346,9 @@ msgstr "Page/sheet"
 msgid "APP-COLS-TEXT"
 msgstr "Columns"
 
+msgid "APP-FULL-TABLE-TEXT"
+msgstr "Full Table"
+
 msgid "APP-COL-FORMAT-TEXT"
 msgstr "Formats"
 
