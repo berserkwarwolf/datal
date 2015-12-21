@@ -12,8 +12,13 @@ var theme8View = Backbone.Epoxy.View.extend({
 		"click #links_section tr .remove" : "removeRow"
 	},
 
-	initialize: function(){
-		this.options.currentView.helpAndTips('show');
+	initialize: function(options){
+
+		// Inint options
+		this.currentView = options.currentView;
+		this.currentModel = options.currentModel;
+
+		this.currentView.helpAndTips('show');
 		that = this;
 		this.template = _.template( $("#id_theme8Template").html() );
 		this.initSliderSection();
@@ -620,10 +625,10 @@ var theme8View = Backbone.Epoxy.View.extend({
 		var btn_id = $(event.currentTarget).attr("id")
 		var ob={};
 		if (btn_id === 'id_save') {
-			this.options.currentModel.attributes.config = this.model.toJSON();
-			this.options.currentModel.attributes.themeID = '8';
-			ob['config'] = this.options.currentModel.attributes.config;
-			ob['theme'] = this.options.currentModel.attributes.themeID;
+			this.currentModel.attributes.config = this.model.toJSON();
+			this.currentModel.attributes.themeID = '8';
+			ob['config'] = this.currentModel.attributes.config;
+			ob['theme'] = this.currentModel.attributes.themeID;
 			ob['type'] = 'save';
 		} else {
 			ob['config'] = this.model.toJSON();
@@ -631,15 +636,18 @@ var theme8View = Backbone.Epoxy.View.extend({
 			ob['type'] = 'preview';
 		}
 		console.log(ob);
-		console.log(this.options.currentModel.attributes);
+		console.log(this.currentModel.attributes);
 		$.ajax({
 			type: 'POST',
 			data: {
 				'jsonString': saferStringify(ob)
-			}, 
+			},
 			dataType: 'json',
-			contentType:'application/json; charset=utf-8',
-			beforeSend: function(){
+			beforeSend: function(xhr, settings) {
+
+				// call global beforeSend func
+				$.ajaxSettings.beforeSend(xhr, settings);
+
 				$("#ajax_loading_overlay").show();
 			},
 			success: function(response) {
