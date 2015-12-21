@@ -65,13 +65,15 @@ def get_key(http_referer):
         key = 'home'
     elif re.search('^.*/developers' , http_referer):
         key = 'developers'
-    elif re.search('^.*visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+    elif re.search('^.*/visualizations/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'chart.detail'
+    elif re.search('^.*/visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
         key = 'chart.detail'
 
     #TODO encontrar la forma de llevar esto al plugin
-    elif re.search('^.*/advanced_filtering/customDataViz/\d+/[A-Za-z0-9\-]+$' , http_referer):
+    elif re.search('^.*/advanced_filtering/customDataViz/\d+/[A-Za-z0-9\-]+.*$' , http_referer):
         key = 'chart.detail'
-    elif re.search('^.*/advanced_filtering/customDataView/\d+/[A-Za-z0-9\-]+$' , http_referer):
+    elif re.search('^.*/advanced_filtering/customDataView/\d+/[A-Za-z0-9\-]+.*$' , http_referer):
         key = 'ds.detail'
     
     else:
