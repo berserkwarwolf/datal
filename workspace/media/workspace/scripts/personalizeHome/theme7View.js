@@ -60,7 +60,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 
 						'<div class=\"FL clearfix\">' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
@@ -108,7 +108,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 
 						'<div class=\"FL clearfix\">' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
@@ -163,7 +163,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 
 						'<div class=\"FL clearfix\">' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
@@ -219,7 +219,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 						'<div class=\"FL clearfix\">' +
 							'<img src=\"' + item.image + '\" alt=\"\" class=\"FL\"/>' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
@@ -270,7 +270,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 						'<div class=\"FL clearfix\">' +
 							'<img src=\"' + item.image + '\" alt=\"\" class=\"FL\"/>' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
@@ -328,7 +328,7 @@ var theme7View = Backbone.Epoxy.View.extend({
 						'<div class=\"FL clearfix\">' +
 							'<img src=\"' + item.image + '\" alt=\"\" class=\"FL\"/>' +
 							'<div class=\"crop relative clearfix FL\">' +
-								'<button class=\"absolute genericButton actionButton\">' + buttonText + '</button>' +
+								'<button class=\"button small\">' + buttonText + '</button>' +
 								'<input type=\"file\" id=\"' + inputId + '\" class=\"file FL\" tabindex=\"-1\"/>' +
 							'</div>' +
 						'</div>' +
