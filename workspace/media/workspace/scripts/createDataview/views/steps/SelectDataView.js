@@ -187,9 +187,17 @@ var SelectDataView = Backbone.View.extend({
 
         // TODO: Esta funcionalidad deberia estar encapsulada en collection.toggleModel()
         var existing = this.checkExisting(model);
+        var existingHeader;
         if (existing) {
             this.dataviewModel.selection.remove(existing);
         } else {
+            // Permitir solo la seleccion de 1 fila headers. Si existe una seleccionada, quitarla.
+            if (this.internalState.get('mode') === 'headers' && selection.mode === 'header')  {
+                if (this.dataviewModel.selection.hasItemsByMode('header')) {
+                    existingHeader = this.dataviewModel.selection.find({mode: 'header'});
+                    this.dataviewModel.selection.remove(existingHeader);
+                };
+            }
             this.dataviewModel.selection.add(model);
         }
     },
