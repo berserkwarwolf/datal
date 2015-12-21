@@ -57,18 +57,23 @@ def get_key(http_referer):
         key = 'ds.embed'
     elif re.search('^.*/(datastreams|dataviews)/\d+/[A-Za-z0-9\-]+$' , http_referer):
         key = 'ds.detail'
-    elif re.search('^.*/(datastreams|dataviews)/embed/[A-Z0-9\-]+$' , http_referer):
-        key = 'ds.embed'
     elif re.search('^.*/search/.*$' , http_referer):
         key = 'search'
     elif re.search('^.*/visualizations/embed/[A-Z0-9\-]+.*$' , http_referer):
         key = 'chart.embed'
-    elif re.search('^.*visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
-        key = 'chart.detail'
     elif re.search('^.*/home' , http_referer):
         key = 'home'
     elif re.search('^.*/developers' , http_referer):
         key = 'developers'
+    elif re.search('^.*visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+        key = 'chart.detail'
+
+    #TODO encontrar la forma de llevar esto al plugin
+    elif re.search('^.*/advanced_filtering/customDataViz/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'chart.detail'
+    elif re.search('^.*/advanced_filtering/customDataView/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'ds.detail'
+    
     else:
         #  http referer error http://microsites.dev:8080/dataviews/69620/iep-primer-trimestre-2012-ministerio-de-defensa-nacional
         logger.error('http referer error %s' % http_referer)
