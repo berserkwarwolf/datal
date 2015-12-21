@@ -59,6 +59,8 @@ def load(request):
             context['request'] = request
             context['paginator'] = paginator
             context['revisions'] = revisions
+            context['categories'] = Category.objects.get_for_home(language, accounts_ids)
+
             return render_to_response(data['template_path'], context)
         else:
             # For the moment, redirect to search
