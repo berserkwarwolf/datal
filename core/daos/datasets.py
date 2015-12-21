@@ -183,7 +183,13 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=DatasetRevision.objects.filter(dataset__id=item['dataset__id']).count()
 
     def query_childs(self, dataset_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """

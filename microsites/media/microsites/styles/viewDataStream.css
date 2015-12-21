@@ -200,7 +200,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 
 		/* Data Collected From */
 		.sidebar .infoBox .dataCollectedFrom > i{background-position:0 -40px;}
-		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;}
+		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:inherit;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WEB{background-position:0 -20px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.FILE{background-position:0 -40px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WB{background-position:0 -60px;}

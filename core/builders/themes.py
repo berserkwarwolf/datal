@@ -26,15 +26,26 @@ class ThemeBuilder(object):
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
                 
-        datastreams = []
-        if datastreamIds:
-            idsDataStream = ','.join(datastreamIds)
-            datastreams =  DataStreamDBDAO().query_hot_n(10,language, hot = idsDataStream)
-                
-        if visualizationIds:
-            idsVisualization = ','.join(visualizationIds)
-            datastreams +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
-        return datastreams
+        data = []
+
+        # TODO (ignacio f): hacer desaparecer esto
+        #if datastreamIds:
+            #idsDataStream = ','.join(datastreamIds)
+            #datastreams =  DataStreamDBDAO().query_hot_n(10,language, hot = idsDataStream)
+               
+        #if visualizationIds:
+        #    idsVisualization = ','.join(visualizationIds)
+        #    datastreams +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
+        #return datastreams
+
+        # usamos el DAO
+        for i in datastreamIds:
+                data.append(DataStreamDBDAO().get(language,datastream_id=i))
+
+        for i in visualizationIds:
+                data.append(VisualizationDBDAO().get(language,visualization_id=i))
+ 
+        return data
 
     def retrieveResourcePermalinks(self, resourceIds, language):
 
