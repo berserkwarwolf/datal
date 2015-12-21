@@ -241,7 +241,7 @@ var DataviewModel = Backbone.Model.extend({
             ]);
 
         var filterParameters = this.filters.toFormSet();
-        
+
         var datasetArguments = this.dataset.getArgsAsParams(filterParameters.length);
         dataviewParameters = filterParameters.concat(datasetArguments);
 
@@ -278,9 +278,13 @@ var DataviewModel = Backbone.Model.extend({
     },
 
     onChangeTableId: function (model, value) {
-        var rows = this.dataset.get('tables')[value];
-        this.set('totalCols', rows[0].length);
-        this.set('totalRows', rows.length);
+        var tables = this.dataset.get('tables'),
+            rows;
+        if (tables.length !== 0) {
+            rows = tables[value];
+            this.set('totalCols', rows[0].length);
+            this.set('totalRows', rows.length);
+        }
     },
 
     toFormSet: function (list, prefix) {

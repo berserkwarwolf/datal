@@ -2,6 +2,7 @@
 
 <script type="text/template" id="select_data_template">
   <div class="col-xs-3">
+
     <div class="sidebar">
       <% if (args.length !== 0) {%>
       <div class="title">{% trans 'APP-DATASET-PARAMETERS' %}</div>
@@ -33,6 +34,30 @@
 
   <div class="col-xs-9 data-table-view">
     <div class="table-view">
+    </div>
+  </div>
+</script>
+
+<script type="text/template" id="disclamer_template">
+  <h1>{% trans "APP-WOOPSNODATA-TEXT" %}</h1>
+
+  <div class="disclamers">
+    <div class="error-container">
+    <div class="title">{% trans "APP-KEEPINMIND-TEXT" %}:</div>
+    <div class="disclaimerContent">
+      <ul>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER0" %}</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER1" %}.</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER2" %}.</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER3" %}.</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER4" %}.</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER5" %}.</li>
+        <li>{% trans "CREATE-STEP1-DISCLAIMER6" %}.</li>
+      </ul>
+      <div class="doubts toolbar">
+        <p><strong>{% trans "APP-ANYDOUBTS-TEXT2" %}</strong> <a href="mailto:support@junar.com">{% trans "APP-CALLUSONSKYPE-TEXT2" %}</a>.</p>
+      </div>
+    </div>
     </div>
   </div>
 </script>

@@ -34,7 +34,12 @@ var MainView = Backbone.View.extend({
             this.currentView.remove();
             delete this.currentView;
         }
-        if (step === 0) {
+
+
+        if (this.dataviewModel.dataset.get('tables').length === 0) {
+            this.stepBarView.$el.addClass('hidden');
+            this.currentView = new DisclamerView();
+        } else if (step === 0) {
             this.currentView = new SelectDataView({
                 datasetModel: this.dataviewModel.dataset,
                 dataviewModel: this.dataviewModel,
