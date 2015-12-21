@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from datetime import datetime, date, timedelta
 from core.utils import slugify
-from core import settings
+from django.conf import settings
 from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
 from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization, Setting

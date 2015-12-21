@@ -8,7 +8,7 @@ from django.template import loader, Context
 from django.db.models import Q, F
 
 from core.utils import slugify
-from core import settings
+from django.conf import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.elastic import ElasticsearchIndex
