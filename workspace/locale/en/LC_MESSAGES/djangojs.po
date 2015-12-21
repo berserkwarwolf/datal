@@ -954,3 +954,9 @@ msgstr "Add icons, set titles, descriptions and links. Assigns a background colo
 
 msgid "ADMIN-HOME-SECTION-PIORITIES-ADD-BUTTONS-TEXT"
 msgstr "Add buttons"
+
+msgid "ADMIN-HOME-SECTION-VIDEOTEXT"
+msgstr "Video"
+
+msgid "ADMIN-HOME-SECTION-VIDEOPLACEHOLDER"
+msgstr "Embed video code (optional)"

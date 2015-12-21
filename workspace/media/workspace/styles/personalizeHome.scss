@@ -224,3 +224,9 @@
 .buttonSideContent{position:absolute;left:252px;top:22px;}
 .buttonSideContent label{padding-top:3px;float:left;}
 .buttonSideContent .colorPicker{margin-top:-7px;}
+
+/* Theme 6 */
+.configs .buttonsSection #id_radios label{text-align:left !important;}
+.configs .buttonsSection #id_radios label.radioLabel{width:inherit !important;}
+.configs .buttonsSection.section3 #id_radios .videoLabel,
+.configs .buttonsSection.section3 #id_radios .videoRadio{display:none !important;}

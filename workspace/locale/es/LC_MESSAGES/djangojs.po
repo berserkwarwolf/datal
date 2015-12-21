@@ -939,3 +939,9 @@ msgstr "Agregue íconos, configure sus títulos, descripciones y enlaces. Asigne
 
 msgid "ADMIN-HOME-SECTION-PIORITIES-ADD-BUTTONS-TEXT"
 msgstr "Agregar botones"
+
+msgid "ADMIN-HOME-SECTION-VIDEOTEXT"
+msgstr "Video"
+
+msgid "ADMIN-HOME-SECTION-VIDEOPLACEHOLDER"
+msgstr "Embeber código de video (opcional)"
