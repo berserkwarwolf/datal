@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, date
 from core.utils import slugify
 from core.cache import Cache
 from core.daos.resource import AbstractDataStreamDBDAO
-from core import settings
+from django.conf import settings
 from core.exceptions import SearchIndexNotFoundException, DataStreamNotFoundException
 from django.core.exceptions import FieldError
 
