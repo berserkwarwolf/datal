@@ -248,6 +248,15 @@ var SelectDataView = Backbone.View.extend({
     },
 
     isValid: function () {
+        var model;
+        if (this.dataviewModel.selection.length === 0) {
+            model = new DataTableSelectionModel({
+                classname: 'table',
+                excelRange: ':',
+                mode: 'table'
+            });
+        };
+        this.dataviewModel.selection.add(model);
         return true;
     }
 });
