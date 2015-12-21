@@ -2,11 +2,11 @@
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="120px"
-	 height="1416.25px" viewBox="0 0 120 1416.25" enable-background="new 0 0 120 1416.25" xml:space="preserve">
+	 height="1592.5px" viewBox="0 0 120 1592.5" enable-background="new 0 0 120 1592.5" xml:space="preserve">
 <symbol  id="New_Symbol_2">
 </symbol>
 <g id="Background" display="none">
-	<rect display="inline" fill="#EFA14D" width="120" height="1416.25"/>
+	<rect display="inline" fill="#EFA14D" width="120" height="1592.5"/>
 </g>
 <g id="Icons">
 	<g>
@@ -529,6 +529,18 @@
 	</g>
 	<polygon fill="#0066CC" points="23.999,1181.06 28.12,1176.94 24.999,1176.94 24.999,1170.94 22.999,1170.94 22.999,1176.94 
 		19.88,1176.94 	"/>
+	<polygon fill="#0066CC" points="24.001,1421.107 18.954,1426.152 22.776,1426.152 22.776,1435.003 25.226,1435.003 
+		25.226,1426.152 29.047,1426.152 	"/>
+	<polygon fill="#0066FF" points="60.001,1421.107 54.953,1426.152 58.776,1426.152 58.776,1435.003 61.225,1435.003 
+		61.225,1426.152 65.047,1426.152 	"/>
+	<polygon fill="#999999" points="96.002,1421.107 90.953,1426.152 94.776,1426.152 94.776,1435.003 97.225,1435.003 
+		97.225,1426.152 101.047,1426.152 	"/>
+	<polygon fill="#0066CC" points="23.999,1470.948 29.046,1465.903 25.224,1465.903 25.224,1457.053 22.774,1457.053 
+		22.774,1465.903 18.953,1465.903 	"/>
+	<polygon fill="#0066FF" points="59.999,1470.948 65.047,1465.903 61.224,1465.903 61.224,1457.053 58.775,1457.053 
+		58.775,1465.903 54.953,1465.903 	"/>
+	<polygon fill="#999999" points="95.998,1470.948 101.047,1465.903 97.224,1465.903 97.224,1457.053 94.775,1457.053 
+		94.775,1465.903 90.953,1465.903 	"/>
 	<polygon fill="#0066FF" points="59.999,1181.06 64.12,1176.94 60.999,1176.94 60.999,1170.94 58.999,1170.94 58.999,1176.94 
 		55.88,1176.94 	"/>
 	<polygon fill="#999999" points="95.999,1181.06 100.12,1176.94 96.999,1176.94 96.999,1170.94 94.999,1170.94 94.999,1176.94 
@@ -617,6 +629,24 @@
 			c0,4.002,3.245,7.247,7.247,7.247c1.549,0,2.982-0.49,4.161-1.317l3.758,3.755l1.879-1.879L64.748,1394.813z M58.725,1395.814
 			c-2.776,0-5.034-2.259-5.034-5.032c0-2.777,2.258-5.035,5.034-5.035c2.776,0,5.036,2.258,5.036,5.035
 			C63.761,1393.556,61.501,1395.814,58.725,1395.814z"/>
+	</g>
+	<g>
+		<path fill="#999999" d="M24,1492.475c-4.157,0-7.526,3.369-7.526,7.525c0,4.157,3.369,7.526,7.526,7.526
+			c4.156,0,7.525-3.369,7.525-7.526C31.526,1495.844,28.157,1492.475,24,1492.475z M24,1505.411c-2.984,0-5.411-2.428-5.411-5.411
+			s2.427-5.41,5.411-5.41c2.983,0,5.41,2.427,5.41,5.41S26.984,1505.411,24,1505.411z"/>
+		<polygon fill="#999999" points="24.925,1496.313 22.825,1496.313 22.825,1499.697 22.825,1501.797 24.925,1501.797 
+			27.167,1501.797 27.167,1499.697 24.925,1499.697 		"/>
+	</g>
+	<path fill="#999999" d="M27.997,1538.461c-0.612,0-1.189,0.247-1.602,0.627l-4.014-2.477c0.05-0.198,0.099-0.396,0.099-0.596
+		c0-0.23-0.049-0.429-0.099-0.611l4.014-2.46c0.43,0.363,1.008,0.595,1.602,0.595c1.371,0,2.494-1.106,2.494-2.478
+		c0-1.354-1.106-2.478-2.494-2.478c-1.354,0-2.478,1.106-2.478,2.478c0,0.198,0.016,0.413,0.099,0.578l-4.013,2.494
+		c-0.429-0.364-1.024-0.611-1.618-0.611c-1.355,0-2.478,1.106-2.478,2.493c0,1.355,1.107,2.445,2.478,2.445
+		c0.594,0,1.189-0.215,1.618-0.578l4.013,2.461c-0.083,0.182-0.099,0.38-0.099,0.595c0,1.354,1.106,2.478,2.478,2.478
+		s2.494-1.106,2.494-2.478S29.385,1538.461,27.997,1538.461z"/>
+	<g>
+		<circle fill="#999999" cx="16.826" cy="1571.749" r="2.268"/>
+		<circle fill="#999999" cx="24" cy="1571.749" r="2.268"/>
+		<circle fill="#999999" cx="31.174" cy="1571.749" r="2.268"/>
 	</g>
 </g>
 <g id="Labels" display="none">
@@ -741,7 +771,7 @@
 	<rect x="48" y="156" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="192" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="228" display="inline" fill="none" width="24" height="24"/>
-	<rect x="-24" display="inline" fill="#9B6A3A" width="12" height="1380"/>
+	<rect x="-24" display="inline" fill="#9B6A3A" width="12" height="1560"/>
 	<text transform="matrix(0 -1 1 0 28.0005 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(D)  DEFAULT</text>
 	<text transform="matrix(0 -1 1 0 64 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(H)  HOVER</text>
 	<text transform="matrix(0 -1 1 0 100 -12)" display="inline" font-family="'MyriadPro-Regular'" font-size="12">(A)  ACTIVE</text>
@@ -806,9 +836,29 @@
 	<rect x="12" y="1380" display="inline" fill="none" width="24" height="24"/>
 	<rect x="48" y="1380" display="inline" fill="none" width="24" height="24"/>
 	<rect x="84" y="1380" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1416" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1416" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1416" display="inline" fill="none" width="24" height="24"/>
 	<text transform="matrix(1 0 0 1 140 1286.7695)" display="inline" font-family="'Roboto-Regular'" font-size="10">add-xs  (  D: -12px -1272px;   H: -48px -1272px;   A: -84px -1272px; )</text>
 	<text transform="matrix(1 0 0 1 140 1324.6025)" display="inline" font-family="'Roboto-Regular'" font-size="10">close  (  D: -12px -1308px;   H: -48px -1308px;  )</text>
 	<text transform="matrix(1 0 0 1 140 1356.0156)" display="inline" font-family="'Roboto-Regular'" font-size="10">eye  (  D: -12px -1344px;   H: -48px -1344px;   A: -84px -1344px; )</text>
 	<text transform="matrix(1 0 0 1 140 1393.9756)" display="inline" font-family="'Roboto-Regular'" font-size="10">search-form  (  D: -12px -1380px;   H: -48px -1380px;   A: -84px -1380px; )</text>
+	<text transform="matrix(1 0 0 1 140 1429.9385)" display="inline" font-family="'Roboto-Regular'" font-size="10">arrow-up  (  D: -12px -1416px;   H: -48px -1416px;   A: -84px -1416px; )</text>
+	<rect x="12" y="1452" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1452" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1452" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1488" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1488" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1488" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1524" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1524" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1524" display="inline" fill="none" width="24" height="24"/>
+	<rect x="12" y="1560" display="inline" fill="none" width="24" height="24"/>
+	<rect x="48" y="1560" display="inline" fill="none" width="24" height="24"/>
+	<rect x="84" y="1560" display="inline" fill="none" width="24" height="24"/>
+	<text transform="matrix(1 0 0 1 140 1465.9385)" display="inline" font-family="'Roboto-Regular'" font-size="10">arrow-down  (  D: -12px -1452px;   H: -48px -1452px;   A: -84px -1452px; )</text>
+	<text transform="matrix(1 0 0 1 140 1501.7969)" display="inline" font-family="'Roboto-Regular'" font-size="10">time  (  D: -12px -1488px;   H: -48px -1488px;   A: -84px -1488px; )</text>
+	<text transform="matrix(1 0 0 1 140 1539.4629)" display="inline" font-family="'Roboto-Regular'" font-size="10">share  (  D: -12px -1524px;   H: -48px -1524px;   A: -84px -1524px; )</text>
+	<text transform="matrix(1 0 0 1 140 1574.0166)" display="inline" font-family="'Roboto-Regular'" font-size="10">more-xs  (  D: -12px -1560px;   H: -48px -1560px;   A: -84px -1560px; )</text>
 </g>
 </svg>

@@ -135,14 +135,10 @@ class DataStreamViewSet(mixins.CreateModelMixin, mixins.UpdateModelMixin, Resour
         PJSONEngineRenderer,
         AJSONEngineRenderer,])
     def data(self, request, pk=None, format=None,  *args, **kwargs):
+        instance = self.get_object()
+        DatastreamHitsDAO(instance).add(1)
         if format == 'json' or not format:
             return self.engine_call(request, 'invoke')
         return self.engine_call(request, 'invoke', format, 
             serialize=False, form_class=DatastreamRequestForm,
             download=False)
-
-    def retrieve(self, request, *args, **kwargs):
-        instance = self.get_object()
-        DatastreamHitsDAO(instance).add(1)
-        serializer = self.get_serializer(instance)
-        return Response(serializer.data)

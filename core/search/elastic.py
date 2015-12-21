@@ -26,10 +26,16 @@ class ElasticsearchFinder(Finder):
         reverse = kwargs.get('reverse', False)
         self.order =  kwargs.get('order')
 
-        if self.order and self.order=='top':
-            self.sort = "hits: %s" % ("asc" if reverse else "desc")
+        if self.order and self.order == 'top':
+            self.sort = "hits:%s" % ("asc" if reverse else "desc")
+        elif self.order and self.order=='web_top':
+            self.sort = "web_hits:%s" % ("asc" if reverse else "desc")
+        elif self.order and self.order=='api_top':
+            self.sort = "api_hits:%s" % ("asc" if reverse else "desc")
         elif self.order and self.order=='last':
             self.sort =  "timestamp:%s" % ("asc" if reverse else "desc")
+        elif self.order:
+            self.sort=self.order
         else:
             self.sort = self.order_by        
 
@@ -40,7 +46,7 @@ class ElasticsearchFinder(Finder):
             end = max_results < slice and max_results or slice
             start = (page - 1) * end
 
-        if self.sort == "" or self.sort == "1":
+        if self.sort in ("", "1", "2"):
             self.sort = self.order_by
 
         # Tengo que saber para qué se usa esto

@@ -1,4 +1,5 @@
 from django.http import HttpResponseRedirect
+from core.shortcuts import render_to_response
 
 def home(request):
     auth_manager = request.auth_manager

@@ -4,10 +4,10 @@
 @import 'functions';
 
 html,
-body{background:$nav-bg;}
+body{background:$account-bg;}
 
 .account-box{width:390px;margin:0 auto;padding-top:30px;}
-.account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;background-image:url(#{$logo-signin-svg-url});height:$logo-signin-height;margin-bottom:30px;}
+.account-box .logo-signin-brand{background:url(#{$logo-signin-url}) no-repeat center center;height:$logo-signin-height;margin-bottom:30px;}
 .account-box .account-box-content{background:#fff;padding:20px;}
 .account-box .row{padding-top:15px;}
 .account-box .row:first-child{padding-top:0;}

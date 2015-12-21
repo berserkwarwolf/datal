@@ -307,7 +307,7 @@ LOGGING = {
         'microsites': {'handlers': ['file'], 'level': 'INFO'},
         'admin': {'handlers': ['file'], 'level': 'INFO'},
         'core': {'handlers': ['file'], 'level': 'INFO'},
-
+        'plugins': {'handlers': ['file'], 'level': 'INFO'},
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['file'],
@@ -403,6 +403,7 @@ TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 APPLICATION_DETAILS = {
     'name': 'Datal',
     'website': 'http://www.datal.org',
+    'mail':'alguien@datal.org'
 }
 
 try:

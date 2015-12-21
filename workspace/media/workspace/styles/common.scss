@@ -1,4 +1,4 @@
-/* Imports */
+/* Import SASS variables */
 @import 'variables';
 @import 'mixins';
 @import 'functions';
@@ -57,9 +57,9 @@ a:hover{color:$link-hover-color;}
     & > .button.primary{background-color:$button-primary-hover-color;}
   }
   .dropdown{display:none;position:absolute;top:47px;right:0;z-index:190;background:#fff;min-width:100%;
-    li{border-top:1px solid #3580cc;
+    li{border-top:1px solid $button-primary-color;
       &:first-child{border:0;}
-      .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
+      .button.primary{background-color:rgba($button-primary-color,.6);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
         &:hover{background-color:$button-primary-hover-color;}
       }
     }
@@ -97,7 +97,7 @@ a:hover{color:$link-hover-color;}
 
   /* Link black */
   &.black{color:#000;font-weight:bold;
-    &:hover{color:$button-primary-color;}
+    &:hover{color:$link-black-color-hover;}
   }
 
   &.disabled,
@@ -818,7 +818,6 @@ border-color: #ccc;}
 .ajaxLoadingOverlay{background:#fff url(#{$loader-url-light}) center center no-repeat;}
 
 .loading{background-color:#fff;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;bottom:0;left:0;right:0;z-index:1;opacity:.75;}
-.loading.dark{background-image:url(#{$loader-url-dark});}
 .loading.semi-light{background-image:url(#{$loader-url-semi-light});}
 .loading.light{background-image:url(#{$loader-url-light});}
 

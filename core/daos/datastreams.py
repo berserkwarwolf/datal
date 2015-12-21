@@ -162,7 +162,8 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
             parameters=parameters,
             data_source=datastream_revision.data_source,
             select_statement=datastream_revision.select_statement,
-            slug= slugify(datastreami18n.title)
+            slug= slugify(datastreami18n.title),
+            cant=DataStreamRevision.objects.filter(dataset__id=datastream_revision.dataset.id).count(),
         )
 
         return datastream
@@ -425,6 +426,7 @@ class DatastreamSearchDAO():
                      'account_id' : self.datastream_revision.user.account.id,
                      'parameters': "",
                      'timestamp': int(time.mktime(self.datastream_revision.created_at.timetuple())),
+                     'hits': 0,
                      'web_hits': 0,
                      'api_hits': 0,
                      'end_point': self.datastream_revision.dataset.last_published_revision.end_point,

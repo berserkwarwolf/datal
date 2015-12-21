@@ -37,6 +37,7 @@ for plugin in plugins:
         for router_list in plugin.workspace_routers:
             router.register(router_list[0], router_list[1], base_name=router_list[2])
 
+
 def jsi18n(request, packages=None, domain=None):
     if not domain:
         domain = 'djangojs'
@@ -65,7 +66,6 @@ urlpatterns = patterns('',
 
     #TODO fix all urls (streams -> dataviews)
     url(r'^dataviews/', include('workspace.manageDataviews.urls')),
-
     url(r'^visualizations/', include('workspace.manageVisualizations.urls')),
 
     # TODO Nacho: Added by Nacho. This should be implemented different. Andres, please review
