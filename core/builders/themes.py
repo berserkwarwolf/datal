@@ -21,7 +21,7 @@ class ThemeBuilder(object):
         visualizationIds = []
                 
         for resource in resourceIds:
-            if resource['type']== 'chart':
+            if resource['type']== 'vz':
                 visualizationIds.append(resource['id'])
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
