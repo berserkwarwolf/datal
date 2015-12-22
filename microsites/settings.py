@@ -42,7 +42,6 @@ INSTALLED_APPS += (
 BASE_URI = 'microsites'
 MEDIA_URI = BASE_URI
 WORKSPACE_URI = 'workspace'
-MEMCACHED_ENGINE_END_POINT = ['127.0.0.1:11211']
 
 BOTS = ['Googlebot', 'AdsBot-Google'] #, 'Googlebot-Mobile', 'Googlebot-Image', 'Mediapartners-Google', 'Slurp', 'YahooSeeker/M1A1-R2D2', 'MSNBot', 'MSNBot-Media', 'MSNBot-NewsBlogs', 'MSNBot-Products', 'MSNBot-Academic', 'Teoma']
 
