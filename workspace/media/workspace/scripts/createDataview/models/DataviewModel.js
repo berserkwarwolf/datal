@@ -2,9 +2,13 @@ var select_statement_template = ['<selectStatement>',
     '<Select>',
         '<% if (isFullTable) { %>',
             '<Column>*</Column>',
-        '<% } else { %>',
+        '<% } else if (columns.length !== 0) { %>',
             '<% _.each(columns, function (number) { %>',
                 '<Column>column<%= number %></Column>',
+            '<% }); %>',
+        '<% } else if (cells.length !== 0) { %>',
+            '<% _.each(cells, function (number) { %>',
+                '<Column>cell<%= number %></Column>',
             '<% }); %>',
         '<% } %>',
     '</Select>',
@@ -308,6 +312,12 @@ var DataviewModel = Backbone.Model.extend({
             columns = _.map(columnModels, function (model) {
                 return model.getRange().from.col;
             }),
+            totalCols = this.get('totalCols'),
+            cellModels = this.selection.getItemsByMode('cell'),
+            cells = _.map(cellModels, function (cell) {
+                var range = cell.getRange();
+                return range.from.col + range.from.row * totalCols;
+            });
             rowModels = this.selection.getItemsByMode('row'),
             rows = _.map(rowModels, function (model) {
                 return model.getRange().from.row;
@@ -317,6 +327,7 @@ var DataviewModel = Backbone.Model.extend({
             isFullTable: isFullTable,
             tableId: tableId,
             columns: columns,
+            cells: cells,
             rows: rows,
             filters: this.filters.toJSON()
         });
