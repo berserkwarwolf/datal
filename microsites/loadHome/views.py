@@ -59,6 +59,7 @@ def load(request):
             context['request'] = request
             context['paginator'] = paginator
             context['revisions'] = revisions
+
             return render_to_response(data['template_path'], context)
         else:
             # For the moment, redirect to search
