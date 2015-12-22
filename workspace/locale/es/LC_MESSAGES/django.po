@@ -3174,9 +3174,6 @@ msgstr "la vista"
 msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
 msgstr "la visualización"
 
-msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
-msgstr "la colección"
-
 msgid "APP-CHOOSE-MAP-TEXT"
 msgstr "Mapas"
 
