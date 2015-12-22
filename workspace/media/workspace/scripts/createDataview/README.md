@@ -1,4 +1,5 @@
 Data Source
+```
 <dataSource>
 	<DataStructure>
 		<Field id="table0">
@@ -40,7 +41,7 @@ Data Source
 		</Field>
 	</DataStructure>
 </dataSource>
-
+```
 
 
 
@@ -48,6 +49,7 @@ Data Source
 
 
 ## Full Table
+```
 <selectStatement>
 	<Select>
 		<Column>*</Column>
@@ -57,9 +59,10 @@ Data Source
 	</From>
 	<Where/>
 </selectStatement>
-
+```
 
 ## Coumna A, C, Fila 2 y 3
+```
 <selectStatement>
 	<Select>
 		<Column>column0</Column>
@@ -81,9 +84,10 @@ Data Source
 		</Filter>
 	</Where>
 </selectStatement>
-
+```
 
 ## Celdas B2, C2, A3
+```
 <selectStatement>
 	<Select>
 		<Column>cell4</Column>
@@ -95,9 +99,10 @@ Data Source
 	</From>
 	<Where/>
 </selectStatement>
-
+```
 
 Seleccionado primera fila como header
+```
 <dataSource>
 	<DataStructure>
 		<Field id="table0">
@@ -142,10 +147,10 @@ Seleccionado primera fila como header
 		</Field>
 	</DataStructure>
 </dataSource>
-
+```
 
 Solo se pueden agregar filtros cuando se seleccionan columnas completas, no cuando se filtra por fila
-
+```
 <selectStatement>
 	<Select>
 		<Column>column0</Column>
@@ -162,6 +167,7 @@ Solo se pueden agregar filtros cuando se seleccionan columnas completas, no cuan
 		</Filter>
 	</Where>
 </selectStatement>
+```
 
 El parámetro creado se envia al guardar así
 parameters-0-name:nombreparam
