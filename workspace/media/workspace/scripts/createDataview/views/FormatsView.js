@@ -110,6 +110,7 @@ var FormatsView = Backbone.Epoxy.View.extend({
         this.$('.row-data-type').toggleClass('hidden', value === '');
         if (value !== '') {
             this.model.set('excelCol', DataTableUtils.intToExcelCol(Number(value) + 1));
+            this.model.set('type', 'NUMBER');
         } else {
             this.model.set('type', 'TEXT');
             this.model.unset('excelCol');
