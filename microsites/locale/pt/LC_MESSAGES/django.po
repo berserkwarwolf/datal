@@ -632,3 +632,6 @@ msgstr "More information"
 
 msgid "VIEWDS-VIEWLESS-INFORMATION-TEXT"
 msgstr "Hide information"
+
+msgid "APP-EXPORT-TO-EXCEL-TEXT"
+msgstr "Export to Excel"

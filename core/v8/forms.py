@@ -53,7 +53,7 @@ class UpdateGridRequestForm(RequestForm):
 
 
 class RequestFormSet(BaseFormSet):
-    _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
+    _is_argument=re.compile("argument(?P<order>\d+)").match
 
     def __init__(self, *args, **kwargs):
         new_args=[]
