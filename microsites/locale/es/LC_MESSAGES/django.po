@@ -614,3 +614,6 @@ msgstr "Cada minuto"
 
 msgid "APP-OTHER-TEXT"
 msgstr "Otro"
+
+msgid "APP-EXPORT-TO-EXCEL-TEXT"
+msgstr "Exportar a Excel"
