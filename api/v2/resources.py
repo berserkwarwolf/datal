@@ -13,7 +13,6 @@ class APIResourceSerializer(ResourceSerializer):
 
 class APIResourceViewSet(ResourceViewSet):
     serializer_class = APIResourceSerializer
-    data_types = [settings.TYPE_DATASET, settings.TYPE_DATASTREAM, settings.TYPE_VISUALIZATION]
     app = 'microsites'        
 
     def get_object(self):
