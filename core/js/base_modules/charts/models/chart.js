@@ -219,9 +219,9 @@ charts.models.Chart = Backbone.Model.extend({
         var range = DataTableUtils.excelToRange(selection);
 
         if (range.from.row === -1 && range.to.row === -1) {
-            selection = _.reduce(_.range(range.from.col, range.to.col + 1), function (memo, col) {
-                return memo + 'Column:' + DataTableUtils.intToExcelCol(col + 1) + ';';
-            }, '');
+            selection = _.map(_.range(range.from.col, range.to.col + 1), function (col) {
+                return 'Column:' + DataTableUtils.intToExcelCol(col + 1);
+            }).join(',');
         }
 
         return selection;
