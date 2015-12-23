@@ -69,6 +69,7 @@ function initDataService(){
     $fDataServiceContainer.find('a[id*=id_resetDataServiceButton_]').bind('click', onResetDataServiceButtonClicked);
     startWaitMessage($fDataService);
     var lEndPoint = $fDataServiceContainer.data('dataservice_end_point');
+
     invokeDataService(lEndPoint);
 
     if (areEmbedOptionsEnabled) {
