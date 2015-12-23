@@ -55,6 +55,7 @@ var MainView = Backbone.View.extend({
                 model: this.dataviewModel
             });
         }
+        this.$('.current-step').empty();
         this.$('.current-step').append(this.currentView.$el);
 
         this.currentView.render();
