@@ -62,6 +62,12 @@ def do_search(request, category_filters=None, datasets=None):
         paginator = Paginator(results, settings.PAGINATION_RESULTS_PER_PAGE)
         page_results = paginator.page(page).object_list
 
+        pref_search_tips = preferences['account_search_tips']
+        if pref_search_tips: 
+            search_tips = json.loads(pref_search_tips)
+        else:
+            search_tips = {}
+
         return render_to_response('search/search.html', locals())
     else:
         raise Http404

@@ -39,6 +39,9 @@
 	    	<!-- HEADER -->
 	    	{% include "header_microsites.html" %}
 			{% endblock %}
+
+			{# Used in viewDataStream / viewChart #}
+			{% block messageBar %}{% endblock %}
 		
 	    <!-- CONTENT -->
 	    <div class="content">
@@ -55,6 +58,10 @@
 	
 	<!-- MINI FOOTER JUNAR -->
 	{% include "miniFooterJunar.html" %}
+
+{% endblock %}
+
+{% block base_bottom_js %}
 	
 	<script type="text/javascript">
 		/* <![CDATA[ */
@@ -112,7 +119,7 @@
 	{% block microsites_bottom_js %}
 		
 	{% endblock %}
-	
+
 {% endblock %}
 
 {% block ga_code %}
