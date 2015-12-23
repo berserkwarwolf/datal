@@ -116,11 +116,9 @@ var MetadataView = Backbone.Epoxy.View.extend({
     },
 
     isValid: function () {
-        //hago set aquí porque Epoxy no se banca nicedit
-
         var notes = '';
         var content = this.notesInstance.instanceById('id_notes_2').getContent();
-        debugger
+
         // When notes initialice empty, nicEdit initialices with <br>
         if (content > 0 && content !== '<br>') {
             notes = $.trim( content );
