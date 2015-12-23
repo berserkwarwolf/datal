@@ -69,7 +69,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
     initNotes: function(){
 
         this.notesInstance = new nicEditor({
-            buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'], 
+            buttonList : ['bold','italic','underline','ul', 'ol', 'link', 'hr'],
             iconsPath: '/js_core/plugins/nicEdit/nicEditorIcons-2014.gif'
         }).panelInstance('id_notes_2');
 
@@ -97,7 +97,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
             if(name == 'notes'){
                 textarea.addClass('has-error');
                 textarea.next('p.has-error').remove();
-                textarea.after('<p class="has-error">'+error+'</p>');           
+                textarea.after('<p class="has-error">'+error+'</p>');
             }else{
                 element.addClass('has-error');
                 element.next('p.has-error').remove();
