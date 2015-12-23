@@ -1,6 +1,6 @@
 from django import template
 
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 
 register = template.Library()
 
