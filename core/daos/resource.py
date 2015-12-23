@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from abc import ABCMeta, abstractmethod
-from core import settings
+from django.conf import settings
 
 
 class AbstractDatasetDBDAO():

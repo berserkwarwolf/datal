@@ -53,7 +53,8 @@ class UpdateGridRequestForm(RequestForm):
 
 
 class RequestFormSet(BaseFormSet):
-    _is_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
+    _is_multi_argument=re.compile("(?P<argument>\D+)(?P<order>\d+)").match
+    _is_primitive_argument=re.compile("argument(?P<order>\d+)").match
 
     def __init__(self, *args, **kwargs):
         new_args=[]
@@ -92,13 +93,13 @@ class RequestFormSet(BaseFormSet):
             if key[0:4] == "form":
                 continue
 
-            match=self._is_argument(key)
-
             # si es AlgoNN
-            if match:
+            if self._is_multi_argument(key):
                 try:
-
-                    f=ArgumentForm({"name": key, 'value': PrimitiveComputer().compute(self.data[key])})
+                    valor = self.data[key]
+                    if self._is_primitive_argument(key):
+                        valor =  PrimitiveComputer().compute(self.data[key])
+                    f=ArgumentForm({"name": key, 'value':valor})
                     if f.is_valid():
                         self.forms.append(f)
                     else:

@@ -6,6 +6,7 @@ from core.models import User
 from core import http as LocalHelper
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext
+from core.plugins import DatalPluginPoint
 import redis
 import datetime
 import logging
@@ -38,6 +39,12 @@ class ActivityStreamDAO:
             elif resource_type == settings.TYPE_DATASET:
                 l_permalink = reverse('manageDatasets.view', urlconf='workspace.urls',
                                       kwargs={'revision_id': revision_id})
+            else:
+                for plugin in DatalPluginPoint.get_plugins():
+                    if (plugin.is_active() and hasattr(plugin, 'doc_type') and 
+                        plugin.doc_type == resource_type and 
+                        hasattr(plugin, 'workspace_permalink')):
+                        l_permalink = plugin.workspace_permalink(revision_id)
             
         list_key = 'activity_stream::%s' % str(account_id)
         n=c.incr("%s_counter" % list_key) # count any use of the list indexing hash and never repeat an ID
