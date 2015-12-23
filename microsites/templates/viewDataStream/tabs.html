@@ -1,5 +1,4 @@
-{% load i18n %}
-{% load extra_tags components plugins %}
+{% load i18n extra_tags components plugins_tags %}
 
 <ul class="icons">
 	<li>
@@ -8,6 +7,14 @@
 			<span>{% trans 'VIEWDS-TABS-INFO' %}</span>
 		</a>
 	</li>
+	{% if notes and preferences.account_enable_notes and preferences.account_description_enhancement %}
+	<li>
+		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
+			<i></i>
+			<span>{% trans 'VIEWDS-TABS-DESCRIPTION' %}</span>
+		</a>
+	</li>
+	{% endif %}
 	<li>
 		<a class="icon refresh border-box" id="id_refreshButton">
 			<i></i>
@@ -15,15 +22,8 @@
 		</a>
 	</li>
 
-	<!-- Nav items from plugins -->
-	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
-	{% for plugin in plugins %}
-		{% if plugin.is_active and plugin.microsites_view_datastream_nav %}
-			{% autoescape off %}
-				{{ plugin.microsites_view_datastream_nav }}
-			{% endautoescape %}
-		{% endif %}
-	{% endfor %}
+	<!-- Tabs from plugins -->
+	{% plugins_call 'microsites_view_datastream_tabs' %}
 
 	{% if preferences.account_pivottable %}
 	<li>
@@ -42,7 +42,7 @@
 	</li>
 	{% endif %}
 	{% if notes and preferences.account_enable_notes %}
-	<li>
+	<li style="{%if preferences.account_description_enhancement %}display:none;{% endif %}">
 		<a class="icon notes border-box sidebarIcon" id="id_openNotesButton" rel="id_notesSidebar">
 			<i></i>
 			<span>{% trans 'VIEWDS-TABS-NOTES' %}</span>
