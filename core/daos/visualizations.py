@@ -116,6 +116,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         visualization = dict(
             visualization=visualization_revision.visualization,
+
+            resource_id=visualization_revision.visualization.id,
+            revision_id=visualization_revision.id,
+
             visualization_id=visualization_revision.visualization.id,
             visualization_revision_id=visualization_revision.id,
             user_id=visualization_revision.user.id,
@@ -565,6 +569,8 @@ class VisualizationSearchDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.visualization_revision.visualization.id,
+                     'revision_id': self.visualization_revision.id,
                      'visualization_id': self.visualization_revision.visualization.id,
                      'visualization_revision_id': self.visualization_revision.id,
                      'datastream_id': self.visualization_revision.visualization.datastream.id,

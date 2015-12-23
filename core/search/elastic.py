@@ -117,10 +117,11 @@ class ElasticsearchFinder(Finder):
 
         if self.ids:
             # este método solo funciona si o si pasando como param UN tipo de recurso.
-            id_name=self.get_id_name(self.resource[0])
             filters.append({"terms": {
-                id_name: filter(None,self.ids.split(","))
+                "resource_id": filter(None,self.ids.split(","))
             }})
+            print self.resource
+            print filters
 
         query = {
             "query": {

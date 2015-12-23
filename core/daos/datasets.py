@@ -82,6 +82,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
 
         dataset = dict(
+            revision_id=dataset_revision.id,
+            resource_id=dataset_revision.dataset.id,
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
             user_id=dataset_revision.user.id,
@@ -425,6 +427,8 @@ class DatasetSearchIndexDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.dataset_revision.dataset.id,
+                     'revision_id': self.dataset_revision.id,
                      'dataset_id': self.dataset_revision.dataset.id,
                      'datasetrevision_id': self.dataset_revision.id,
                      'title': dataseti18n.title,
