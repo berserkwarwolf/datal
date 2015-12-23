@@ -80,7 +80,7 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         params[self.dao_get_param] = self.kwargs[self.lookup_field]
         try:
             return super(ResourceViewSet, self).get_queryset().get(**params)
-        except ObjectDoesNotExist:
+        except (ObjectDoesNotExist, ValueError):
             raise NotFound()
 
     def get_object(self):
