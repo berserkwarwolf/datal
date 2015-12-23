@@ -1,4 +1,4 @@
-/* Imports */
+/* Import SASS variables */
 @import 'variables';
 @import 'mixins';
 @import 'functions';
@@ -57,9 +57,9 @@ a:hover{color:$link-hover-color;}
     & > .button.primary{background-color:$button-primary-hover-color;}
   }
   .dropdown{display:none;position:absolute;top:47px;right:0;z-index:190;background:#fff;min-width:100%;
-    li{border-top:1px solid #3580cc;
+    li{border-top:1px solid $button-primary-color;
       &:first-child{border:0;}
-      .button.primary{background-color:rgba($button-primary-color,.5);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
+      .button.primary{background-color:rgba($button-primary-color,.6);@include box-shadow(0 0 0 transparent);white-space:nowrap;width:auto;display:block;text-align:left;
         &:hover{background-color:$button-primary-hover-color;}
       }
     }
@@ -97,7 +97,7 @@ a:hover{color:$link-hover-color;}
 
   /* Link black */
   &.black{color:#000;font-weight:bold;
-    &:hover{color:$button-primary-color;}
+    &:hover{color:$link-black-color-hover;}
   }
 
   &.disabled,
@@ -251,35 +251,99 @@ body{background:$color-base;height:100%;min-width:998px;}
 
 }
 
-/* Main Nav */
-.main-navigation{padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
-  li{@include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.1));
-    & > a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;
+/* Local nav */
+.main-navigation{
+  padding-top:$header-height;position:fixed;top:0;z-index:100;background:$nav-bg;height:100%;@include box-sizing(border-box);
+  
+  /* Default list */
+  ul{
 
-      /* Hover */
-      &:hover{background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;}
+    /* Bottom list*/
+    &.bottom-navigation{
+      position:absolute;bottom:0;left:0;width:100%;
 
-      /* Active */
-      &.active,
-      &.active:hover{background:$nav-active-bg;color:$nav-active-text;}
-
-      /* Erase button active state */
-      &:active{@include box-shadow(0 0 0 transparent);}
-
-      /* Disabled */
-      &.disabled{@include opacity(30);cursor:default;
+      li.footer{
+        color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
         &:hover{background:none;}
-      }
 
-    }
-  }
-  ul.bottom-navigation{position:absolute;bottom:0;left:0;width:100%;background:rgba(0,0,0,.4);
-    li{@include box-shadow(inset 0 1px 0 0 rgba(255,255,255,.1));}
-    .footer{color:rgba(255,255,255,.7);padding:0 15px;height:40px;font:10px/40px 'robotoregular', arial, helvetica, sans-serif;
-      & > a{color:rgba(255,255,255,.7);
-        &:hover{color:#fff}
+        a{color:rgba(255,255,255,.7);
+          &:hover{color:#fff;}
+        }
       }
     }
+
+      /* Default list item */
+      li{
+        @include box-shadow(inset 0 -1px 0 0 rgba(255,255,255,.05));position:relative;
+
+        /* Default item button */
+        a.button{display:block;color:$nav-text;background:none;padding:0 15px;border:0;text-align:left;}
+
+        /* List item :active */
+        &.active{
+          background:$nav-active-bg;
+
+          /* Active button */
+          a.button{
+            color:$nav-active-text;
+            &:hover{color:$nav-hover-text;}
+          }
+        }
+
+        /* List item :hover */
+        &:hover{
+          background:$nav-hover-bg;color:$nav-hover-text;text-decoration:none;
+          a.button{color:$nav-hover-text;}
+        }
+
+        /* List item :disabled */
+        &.disabled{
+          a{@include opacity(30);cursor:default;
+            &:hover{background:none;}
+          }
+        }
+
+          /* List item with submenu */
+          &.has-submenu{
+            ul.submenu{display:none;}
+
+            /* Submenu list */
+            &:hover ul.submenu{
+              position:absolute;display:block !important;background:$nav-secondary-bg;width:145px;top:0;left:54px;padding:10px 20px;z-index:400;
+              @include media-query(min-width, $break-lg){left:200px;}
+
+              /* Submenu list item */
+              li{
+                position:relative;@include box-shadow(0 0 0 transparent);
+                &:hover{background:none;}
+
+                /* Submenu list title */
+                &.submenu-header{
+                  @include media-query(min-width, $break-lg){display:none;}
+                  a{color:$nav-text;font-size:$font-size-m;}
+                }
+
+                /* Submenu item buttom */
+                a{
+                  display:block;padding:10px 0;color:$nav-secondary-text;text-indent:0;
+                  &:hover{color:$nav-hover-text;}
+                }
+
+                /* Submenu item with no link */
+                a.no-link{color:$nav-secondary-no-link-text;font-style:italic;cursor:default;}
+
+                ul{padding-left:20px;}
+              }
+              
+            }
+          }
+
+          /* Bottom list item */
+          &.bottom-submenu{
+            &:hover ul.submenu{top:inherit;bottom:-1px;}
+          }
+
+      }
   }
 }
 
@@ -367,6 +431,27 @@ body{background:$color-base;height:100%;min-width:998px;}
 
     }
 
+  }
+
+}
+
+/* Rows with titles and descriptions */
+.description{
+
+  .row{
+    margin:20px 0 25px;
+
+    .title{margin-bottom:0;color:$font-color-light;font-family:$font-titles-family;font-size:$font-size-m;line-height:21px;padding-bottom:10px;}
+    p,
+    .sourcesContent,
+    .notes{
+      padding-left:10px;line-height:18px;display:inline-block;
+
+      img{max-width:100%;}
+    }
+
+    .sourceName{margin-right:10px;}
+    .size{color:$font-color-light;}
   }
 
 }
@@ -466,6 +551,14 @@ body{background:$color-base;height:100%;min-width:998px;}
   }
 }
 
+.tab-nav-lg{
+  ul{
+    li{
+      a{padding:10px;line-height:24px;}
+    }
+  }
+}
+
 .tabs-list{padding:10px 3px 0;
   background:#e1e1e1;
   background:-moz-linear-gradient(top, #cfcfcf 0%, #e2e2e2 15%, #e1e1e1 100%);
@@ -533,20 +626,10 @@ i.icon.DALLAS{}
 i.icon.TNCLIMA{}
 
 /* Alerts */
-.alert{padding:7px;margin-bottom:10px;color:#FFF;font-style:18px;background-color:#4d8fff;margin-right:-310px;
-  -webkit-border-radius:3px;
-     -moz-border-radius:3px;
-          border-radius:3px;
-  -webkit-box-shadow:0 1px 0 #f9f9fb;
-     -moz-box-shadow:0 1px 0 #f9f9fb;
-          box-shadow:0 1px 0 #f9f9fb;
+.alert{
+  padding:20px 15px;margin-bottom:15px;
+  &.alert-danger{background:$background-color-danger;color:$red;}
 }
-  .alert p, .alert a{display:inline;color:#FFF;line-height:24px;text-shadow:0 1px #1750b7;font-size:14px;}
-  /* Alerts - Icons */
-  .alert i.icon{background-image:url('/static/workspace/images/common/ic_resources.png');background-repeat:no-repeat;width:17px;height:17px;margin:3px 6px 3px 3px;padding:0;float:left;}
-  .alert i.icon.info{background-position:0 -81px;}
-  /* Alerts - Buttons */
-  .alert .alpha{color:#FFF;}
 
 /* Help box & Tips */
 .helpBox{
@@ -565,7 +648,7 @@ i.icon.TNCLIMA{}
 }
 
 /* Overlays */
-.ao-popup-overlay .ov-content{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box; width: 590px; display: inline-block; padding: 15px;}
+.ao-popup-overlay .ov-content{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box; width: 590px; display: inline-block; padding: 15px 25px;}
 .ao-popup-overlay .ov-content .left, .ao-popup-overlay .ov-content .right{float: left; display: inline;}
 .ao-popup-overlay .ov-content .left{width: 70%;}
 .ao-popup-overlay .ov-content .right{width: 30%; padding-left: 15px;}
@@ -611,6 +694,11 @@ i.icon.TNCLIMA{}
 .ao-popup-overlay .backgrid tr:hover td h3,
 .ao-popup-overlay .backgrid tr:hover td a,
 .ao-popup-overlay .backgrid tr:hover td p{background-color:$accent-color;color:#FFF;cursor:pointer;text-shadow:0 1px 0 $accent-color-bold;}
+.ao-popup-overlay .backgrid th{text-transform:uppercase;font-family:$font-secondary-family;line-height:25px;color:#999;font-weight:normal;}
+
+/* Overlay Add Data View / Add Visualization */
+#id_addDataview #dataset_grid, 
+#id_addVisualization #visualization_grid{height:280px;overflow:auto;overflow-x:hidden;}
 
 /* Override For Empty */
 .empty{}
@@ -657,7 +745,7 @@ i.icon.TNCLIMA{}
   background:#e2e2e2;
   word-wrap:break-word;display:block;float:left;padding:2px 8px;font-size:11px;line-height:20px;height:20px;}
 
-.tag .tagInner a:hover, .tag .tagTxt.isEditing, .param .paramInner a:hover{background-position: 0 bottom;
+.tag .tagInner a:hover, .tag .tagTxt.isEditing, .param .paramInner a:hover{background-position: 0 -19px;
 border-color: #ccc;}
 
 /* Rich text editor */
@@ -719,7 +807,6 @@ border-color: #ccc;}
 .ajaxLoadingOverlay{background:#fff url(#{$loader-url-light}) center center no-repeat;}
 
 .loading{background-color:#fff;background-position:center center;background-repeat:no-repeat;position:absolute;top:0;bottom:0;left:0;right:0;z-index:1;opacity:.75;}
-.loading.dark{background-image:url(#{$loader-url-dark});}
 .loading.semi-light{background-image:url(#{$loader-url-semi-light});}
 .loading.light{background-image:url(#{$loader-url-light});}
 

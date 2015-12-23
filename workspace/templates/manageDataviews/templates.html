@@ -86,14 +86,17 @@
     <% } %>
 
     {# Create Visualization #}
-    <li class="create">
-    	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
-    </li>
+    <% 
+      if( status != StatusChoices.PENDING_REVIEW ){ 
+    %>
+      <li class="create">
+      	<a href="{% url 'manageVisualizations.create' %}?datastream_revision_id=<%=id%>" title="{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}">{% trans 'APP-ACTIONS-CREATE_VISUALIZATION' %}</a>
+      </li>
+    <% } %>
 
     {# Edit #}
 		<% 
-      // Status Pending Review = 1
-      if( status !== 1 ){ 
+      if( [StatusChoices.DRAFT, StatusChoices.PUBLISHED].indexOf(status) >= 0) { 
     %>
     	<li class="edit">
     		<a data-id="<%=id%>" data-url="{% url 'manageDataviews.edit' %}" title=<%= gettext('APP-EDIT-TEXT') %>><%= gettext('APP-EDIT-TEXT') %></a>

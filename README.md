@@ -35,8 +35,7 @@ Luego de haber clonado el repositorio, dentro del mismo ejecutar:
     
     sudo supervisorctl start uwsgi
 
-6. Para probar la demo local luego de la instalación, en tu navegador ingresá a http://workspace.dev:8080/
-7. Para probar la demo alojada en nuestros servidores, ingresá a http://workspace.demo.junar.com/ . Los datos en este entorno se limpian periodicamente. 
+6. Para probar la demo, en tu navegador ingresá a http://workspace.dev:8080/
 
 
 Usuarios y claves para acceder a la demo

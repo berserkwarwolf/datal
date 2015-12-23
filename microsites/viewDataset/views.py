@@ -34,6 +34,4 @@ def view(request, dataset_id, slug):
         dataset_revision_id=dataset_orig.last_published_revision.id
     )
 
-    permalink = 'http://%s%s' % (preferences['account_domain'], get_permalink(dataset_id, 'dataset'))
-    
     return render_to_response('viewDataset/index.html', locals())

@@ -30,7 +30,8 @@
     "c3": "~0.4.10",
     "jquery": "1.11.2",
     "jquery-ui": "~1.11.4",
-    "jquery-file-upload": "~9.11.2"
+    "jquery-file-upload": "~9.11.2",
+    "hash-tabs": "*"
   },
   "resolutions": {
     "jquery": "1.11.2",

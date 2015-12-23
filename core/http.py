@@ -42,20 +42,6 @@ def gravatar_url(email, size):
     default_image = urllib.quote(settings.GRAVATAR['default_image'], safe='')
     return settings.GRAVATAR['url'] % (email_hash, size, default_image)
 
-def build_permalink(p_view_name, p_end_point='', p_is_absolute = False):
-
-    l_query = ''
-    if p_end_point.startswith('&'):
-        l_query = '?' + p_end_point[1:]
-
-    l_domain = ''
-    if p_is_absolute:
-        l_domain = settings.BASE_URI
-
-    l_url = reverse(p_view_name)
-
-    return l_domain + l_url + l_query
-
 def add_domains_to_permalinks(resources):
     from core.models import Preference
     accounts_ids = [ item['account_id'] for item in resources ]

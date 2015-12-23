@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <meta http-equiv="CACHE-CONTROL" content="max-age=0, no-store" />
-<title>{% trans "APP-ERROR-TEXT" %} 404 &middot; {% trans "APP-PAGENOTFOUND-TEXT" %} &middot; DATAL&middot; {% trans "APP-DISCOVERINGDATA-TEXT" %}</title>
-<meta name="description" content="DATAL is a platform that allows users to track and search for data all around the internet in one place. Change they way you search, track and use data forever!" />
+<title>{% trans "APP-ERROR-TEXT" %} 404 &middot; {% trans "APP-PAGENOTFOUND-TEXT" %} &middot; {{ settings.APPLICATION_DETAILS.name }} &middot; {% trans "APP-DISCOVERINGDATA-TEXT" %}</title>
+<meta name="description" content="{{ settings.APPLICATION_DETAILS.name }} is a platform that allows users to track and search for data all around the internet in one place. Change they way you search, track and use data forever!" />
 <link rel="shortcut icon" href="{{settings.MEDIA_URI}}/images/favicon/datal.ico" />
 
 <!-- CSS -->
@@ -64,7 +64,7 @@ var DSYear = {%now "Y" %} - 2009;
                             <span class="infoDS">
                                 <span class="categoryDS">{% trans "APP-TECNOLOGY-TEXT" %}</span>
                                 <span class="sep">|</span>
-                                <span class="authorDS">{% trans "APP-BY-TEXT" %} <strong>DATAL</strong></span>
+                                <span class="authorDS">{% trans "APP-BY-TEXT" %} <strong>{{ settings.APPLICATION_DETAILS.name }}</strong></span>
                                 <span class="dateDS"><script type="text/javascript">document.write(DSYear);</script> {% trans "APP-YEARSAGO-TEXT" %}</span>
                             </span>
                         </span>

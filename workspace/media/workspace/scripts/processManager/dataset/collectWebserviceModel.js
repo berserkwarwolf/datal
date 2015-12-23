@@ -190,7 +190,7 @@ var CollectWebserviceModel = StepModel.extend({
 				default_value = element.text(),
 				editable = false;
 
-			if(typeof element.attr('editable') != "undefined" && element.attr('editable') != "false"){
+			if(typeof element.attr('editable') != "undefined" && element.attr('editable') !== "False"){
 				editable = true;
 			}
 

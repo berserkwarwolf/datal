@@ -1367,6 +1367,9 @@ msgstr "Url"
 msgid "OVEDITDS-TAGS-TIP"
 msgstr "Keywords to help identify your data view content. Separate the tags with commas"
 
+msgid "OVEDITDS-DATASET-TAGS-TIP"
+msgstr "Keywords to help identify your dataset content. Separate the tags with commas"
+
 msgid "CREATE-RECOMENDEDTAGS-TEXT"
 msgstr "Recomended Tags"
 
@@ -2699,7 +2702,7 @@ msgid "CHILD_NOT_ACCEPTED-2"
 msgstr "here"
 
 msgid "APP-SELECT-DATASET-TEXT"
-msgstr "Select Dataset"
+msgstr "New Data View"
 
 msgid "APP-SELECT-DATASTREAM-TEXT"
 msgstr "Select View"
@@ -2759,7 +2762,7 @@ msgid "APP-DATASET-UNPUBLISH-TEXT"
 msgstr "The Dataset has been set as draft, and is no longer available on your Open Data site."
 
 msgid "APP-DATASET-UNPUBLISHALL-TEXT"
-msgstr "The Dataset and it's asociated resources have been set as pending for review, and are no longer available on your Open Data site."
+msgstr "The Dataset has been set as draft and it's asociated resources have been set as pending for review, and both are no longer available on your Open Data site."
 
 msgid "APP-DATASET-SENDTOREVIEW-TITLE"
 msgstr "Dataset has been sent to review"
@@ -2921,6 +2924,9 @@ msgid "LANDINGPAGE-NOACTIVITY-START"
 msgstr "Create a new dataset to begin"
 
 msgid "APP-SELECT-VISUALIZATION-TEXT"
+msgstr "New Visualization"
+
+msgid "APP-ADD-VISUALIZATION-HINT"
 msgstr "Which dataview you want to use?"
 
 msgid "APP-CREATE-VISUALIZATION-TEXT"
@@ -3181,9 +3187,6 @@ msgstr "the Data View"
 msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
 msgstr "the Visualization"
 
-msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
-msgstr "the Dashboard"
-
 msgid "APP-CHOOSE-MAP-TEXT"
 msgstr "Maps"
 
@@ -3199,6 +3202,9 @@ msgstr "Invalid value"
 msgid "APP-SEARCH-PLACEHOLDER-TEXT"
 msgstr "Search..."
 
+msgid "APP-ALL-TYPES-TEXT"
+msgstr "All types"
+
 msgid "APP-ALL-CATEGORIES-TEXT"
 msgstr "All categories"
 
@@ -3210,3 +3216,36 @@ msgstr "available resources"
 
 msgid "APP-X-RESOURCES-ADDED-TEXT"
 msgstr "resources added"
+
+msgid "APP-UPLOAD-FILE-LINK"
+msgstr "From file"
+
+msgid "APP-WEBSITE-LINK"
+msgstr "From URL or website"
+
+msgid "APP-WEBSERVICE-LINK"
+msgstr "From webservice"
+
+msgid "APP-LISTRESOURCES-TEXT"
+msgstr "List"
+
+msgid "APP-NEWFEMALE-TEXT"
+msgstr "New"
+
+msgid "APP-NEWMALE-TEXT"
+msgstr "New"
+
+msgid "APP-DOES-NOT-EXIST-TEXT"
+msgstr "does not exist, try again with other keywords."
+
+msgid "APP-FEATUREDFEMALE-TEXT"
+msgstr "Featured"
+
+msgid "APP-DONE-TEXT"
+msgstr "Done"
+
+msgid "APP-EDIT-DESCRIPTION-TEXT"
+msgstr "Edit description"
+
+msgid "APP-EDIT-VISUALIZATION-TEXT"
+msgstr "Edit visualization"

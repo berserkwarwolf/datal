@@ -152,6 +152,9 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 	.tabs .download > i{background-position:center -700px;}
 	.tabs .download:hover > i,
 	.tabs .download.active > i{background-position:center -733px;}
+	.tabs .related > i{background-position:center -768px;}
+	.tabs .related:hover > i,
+	.tabs .related.active > i{background-position:center -803px;}
 
 /* Sidebar */
 .sidebar .box{width:300px;display:none;}
@@ -197,7 +200,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 
 		/* Data Collected From */
 		.sidebar .infoBox .dataCollectedFrom > i{background-position:0 -40px;}
-		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;}
+		.sidebar .infoBox .dataCollectedFrom .icon{padding-left:21px;height:16px;line-height:16px;display:inline-block;background:url(/static/microsites/images/microsites/ic_implTypes.png) 0 0 no-repeat;width:inherit;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WEB{background-position:0 -20px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.FILE{background-position:0 -40px;}
 		.sidebar .infoBox .dataCollectedFrom .icon.WB{background-position:0 -60px;}
@@ -247,6 +250,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 		/* Visitors */
 		.sidebar .infoBox .visitors > i{background-position:0 -120px;}
 		.sidebar .infoBox .visitors #id_datastreamHits{left:-15px;position:relative;}
+		.sidebar .infoBox .visitors #id_visualizationHits{left:-15px;position:relative;}
 
 		/* Text Overflow */
 		.sidebar .infoBox .dataCollectedFrom .icon,

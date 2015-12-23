@@ -131,9 +131,8 @@ var MainView = Backbone.View.extend({
 					});
 
 				}else{
-
+					response.onClose = function(){ window.location.reload(true)}; 
 					datalEvents.trigger('datal:application-error', response);
-
 				}
 
 			},

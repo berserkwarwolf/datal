@@ -196,6 +196,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         filter_name=filter_name,
         exclude=exclude
     )
+
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -245,7 +246,7 @@ def remove(request, dataset_revision_id, type="resource"):
             last_revision_id = -1
 
         # Send signal
-        dataset_rev_removed.send(sender='remove_view', id=dataset_revision_id)
+        dataset_rev_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=dataset_revision_id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -257,7 +258,7 @@ def remove(request, dataset_revision_id, type="resource"):
         lifecycle.remove(killemall=True)
 
         # Send signal
-        dataset_removed.send(sender='remove_view', id=lifecycle.dataset.id)
+        dataset_removed.send_robust(sender='remove_view', id=lifecycle.dataset.id, rev_id=lifecycle.dataset_revision.id)
 
         response = DefaultAnswer().render(
             status=True,
@@ -379,7 +380,8 @@ def edit(request, dataset_revision_id=None):
                                               changed_fields=form.changed_data, language=language,  **form.cleaned_data)
 
             # Signal
-            dataset_changed.send_robust(sender='edit_view', id=dataset_revision.dataset.id)
+            dataset_changed.send_robust(sender='edit_view', id=lifecycle.dataset.id,
+                                        rev_id=lifecycle.dataset_revision.id)
 
             data = dict(status='ok', messages=[ugettext('APP-DATASET-CREATEDSUCCESSFULLY-TEXT')],
                         dataset_revision_id=dataset_revision.id)
@@ -420,83 +422,54 @@ def change_status(request, dataset_revision_id=None):
     :param dataset_revision_id:
     :return: JSON Object
     """
-    if request.method == 'POST' and dataset_revision_id:
+    if dataset_revision_id:
         lifecycle = DatasetLifeCycleManager(
             user=request.user,
             dataset_revision_id=dataset_revision_id
         )
         action = request.POST.get('action')
+        action = 'accept' if action == 'approve'else action # fix para poder llamar dinamicamente al metodo de lifecycle
+        killemall = True if request.POST.get('killemall', False) == 'true' else False
 
-        if action == 'approve':
-            lifecycle.accept()
+        if action not in ['accept', 'reject', 'publish', 'unpublish', 'send_to_review']:
+            raise NoStatusProvidedException()
 
+        if action == 'unpublish':
+            getattr(lifecycle, action)(killemall)
             # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
+            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id,
+                                            rev_id=lifecycle.dataset_revision.id)
+        else:
+            getattr(lifecycle, action)()
 
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-APPROVED-TITLE'),
-                    'description': ugettext('APP-DATASET-APPROVED-TEXT')
-                }
-            )
+        if action == 'accept':
+            title= ugettext('APP-DATASET-APPROVED-TITLE'),
+            description= ugettext('APP-DATASET-APPROVED-TEXT')
         elif action == 'reject':
-            lifecycle.reject()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-REJECTED-TITLE'),
-                    'description': ugettext('APP-DATASET-REJECTED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-REJECTED-TITLE'),
+            description= ugettext('APP-DATASET-REJECTED-TEXT')
         elif action == 'publish':
-            lifecycle.publish()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-PUBLISHED-TITLE'),
-                    'description': ugettext('APP-DATASET-PUBLISHED-TEXT')
-                }
-            )
+            title= ugettext('APP-DATASET-PUBLISHED-TITLE'),
+            description= ugettext('APP-DATASET-PUBLISHED-TEXT')
         elif action == 'unpublish':
-            killemall = True if request.POST.get('killemall', False) == 'true' else False
-            lifecycle.unpublish(killemall=killemall)
             if killemall:
                 description = ugettext('APP-DATASET-UNPUBLISHALL-TEXT')
             else:
                 description = ugettext('APP-DATASET-UNPUBLISH-TEXT')
-
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-            dataset_unpublished.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-UNPUBLISH-TITLE'),
-                    'description': description
-                }
-            )
+            title= ugettext('APP-DATASET-UNPUBLISH-TITLE'),
         elif action == 'send_to_review':
-            lifecycle.send_to_review()
-            # Signal
-            dataset_changed.send_robust(sender='change_status_view', id=lifecycle.dataset.id)
-            response = dict(
-                status='ok',
-                messages={
-                    'title': ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
-                    'description': ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
-                }
-            )
-        else:
-            raise NoStatusProvidedException()
+            title= ugettext('APP-DATASET-SENDTOREVIEW-TITLE'),
+            description= ugettext('APP-DATASET-SENDTOREVIEW-TEXT')
+
+        response = dict(
+            status='ok',
+            messages={'title': title, 'description': description }
+        )
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
+        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
+            kwargs={'dataset_id': response['result']['dataset_id'], 'slug': '-'})
         response['result'].pop('datastreams')
         response['result'].pop('visualizations')
         response['result'].pop('tags')

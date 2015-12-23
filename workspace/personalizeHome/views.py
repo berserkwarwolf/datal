@@ -11,9 +11,10 @@ from django.core.exceptions import ValidationError
 
 from core.auth.decorators import login_required, privilege_required
 from core.http import get_domain_with_protocol
-from core.communitymanagers import *
+from core.communitymanagers import FinderManager
 from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
+from core.builders.themes import ThemeBuilder
 
 
 @login_required
@@ -69,24 +70,31 @@ def save(request):
 def suggest(request):
     account = request.user.account
     preferences = account.get_preferences()
-    if preferences['account_home_filters'] == 'featured_accounts':
-        featured_accounts = Account.objects.get_featured_accounts(account.id)
-        account_id = [featured_account['id'] for featured_account in featured_accounts]
+    language = request.auth_manager.language
+
+    builder = ThemeBuilder(preferences, False, language, account)
+    data = builder.parse()
+
+    if data['federated_accounts_ids']:
+        federated_accounts = data['federated_accounts']
+        account_id = data['federated_accounts_ids']+[account.id]
     else:
         account_id = account.id
 
     query = request.GET.get('term', '')
+    ids = request.GET.get('ids', '')
+    resources = request.GET.getlist('resources[]', None)
+    fm = FinderManager(ThemeFinder)
+
     if query:
-        resources = request.GET.getlist('resources[]', 'all')
-        fm = FinderManager(ThemeFinder)
         results, time, facets = fm.search(account_id=account_id, query=query, resource=resources)
         # optionally shows extra info
         # results.append({"extras": {"query": fm.get_finder().last_query, "time": time, "facets": facets}})
-        data = render_to_response('personalizeHome/suggest.json', {'objects': results})
+    elif ids:
+        results, time, facets = fm.search(account_id=account_id, ids=ids, resource=resources)
     else:
-        data = ''
-    #else:
-    #    data = 'fail'
+        results = ''
+    data = render_to_response('personalizeHome/suggest.json', {'objects': results})
 
     return HttpResponse(data,  content_type='application/json')
 
@@ -101,7 +109,7 @@ def upload(request):
             name = data.name
 
             accountid = str(request.auth_manager.account_id)
-            keyname = "%s/%s" %(accountid[::-1], name)
+            keyname = "%s/%s" % (accountid, name)
 
             active_datastore.upload(settings.AWS_CDN_BUCKET_NAME, name, data, str(request.auth_manager.account_id))
             value = get_domain_with_protocol('cdn') + '/' + keyname

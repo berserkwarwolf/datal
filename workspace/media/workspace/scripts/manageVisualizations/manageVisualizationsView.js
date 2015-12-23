@@ -25,7 +25,6 @@ var ManageVisualizationsView = Backbone.View.extend({
 
 		this.sourceUrl = options.sourceUrl;
 		this.tagUrl = options.tagUrl;
-		this.visualizationCreationStepsUrl = options.visualizationCreationStepsUrl;
 
 		// Init template
 		this.template = _.template($("#total-resources-template").html());
@@ -58,7 +57,7 @@ var ManageVisualizationsView = Backbone.View.extend({
 	},
 
 	updateTotalResources: function(models, response){
-		this.model.set('total_resources',response.total_resources);
+		this.model.set('total_resources',response.total_entries);
 	},
 
 	onTotalResourcesChange: function(){
@@ -176,9 +175,7 @@ var ManageVisualizationsView = Backbone.View.extend({
 	},
 
 	onAddNewButtonClicked: function() {
-		var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView({
-			visualizationCreationStepsUrl: this.visualizationCreationStepsUrl,
-		});
+		var manageDatastreamsOverlayView = new ManageDatastreamsOverlayView();
 	},
 
 	initFilters: function(filters){

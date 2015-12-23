@@ -4,7 +4,7 @@
 {% block SEO %}
   <title>{{dataset.title}} &middot; {{preferences.account_page_titles}}</title>
   <meta name="description" content="{{ dataset.description }}" />
-  <link rel="canonical" href="{{base_uri}}{{dataset.dataset_revision_id|permalink:'dataset'}}" />
+  <link rel="canonical" href="http://{{preferences.account_domain}}{{dataset.dataset_id|permalink:'dataset'}}" />
 {% endblock %}
 
 {% if preferences.account_enable_sharing %}
@@ -65,7 +65,6 @@
 
 <div class="wrapper clearfix" id="id_wrapper">
   <div class="wrapperInner">
-  
     <nav class="tabs border-box">
       {% include "viewDataset/tabs.html" %}
     </nav>
@@ -98,8 +97,8 @@ $(document).ready(function(){
     guid: "{{dataset.guid}}",
     type: "{{dataset.impl_type}}",
     source: "{{dataset.end_point|escapejs}}",
-    permaLink: "{{base_uri}}{{ dataset.dataset_revision_id|permalink:'dataset' }}{%if url_query%}?{{url_query}}{%endif%}",
-    embedUrl: "{{base_uri}}{{ dataset.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
+    permaLink: "http://{{ preferences.account_domain }}{{ dataset.dataset_id|permalink:'dataset' }}{%if url_query%}?{{url_query}}{%endif%}",
+    embedUrl: "http://{{ dataset.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{dataset.created_at|date:'c'}}"
   });
 

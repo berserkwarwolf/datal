@@ -1,5 +1,5 @@
 {% extends 'base_workspace.html' %}
-{% load i18n extra_tags components compress staticfiles sass_tags %}
+{% load i18n extra_tags components compress staticfiles sass_tags plugins%}
 
 {% block meta %}
 {% compress css %}
@@ -82,8 +82,16 @@
 												{% trans "LANDINGPAGE-ACTIVITY-DATAVIEW" %}
 											{% elif activity.type == 'vz' %}
 												{% trans "LANDINGPAGE-ACTIVITY-VISUALIZATION" %}
-											{% elif activity.type == 'db' %}
-												{% trans "LANDINGPAGE-ACTIVITY-DASHBOARD" %}
+											{% else %}
+												 	<!-- Nav items from plugins -->
+										    	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+										    	{% for plugin in plugins %}
+										    		{% if plugin.is_active and plugin.doc_type == activity.type %}
+										    			{% autoescape off %}
+										    				{{ plugin.landing_list_item }}
+										     			{% endautoescape %}
+										     		{% endif %}
+										     	{% endfor %}
 											{% endif %}
 											
 											{# 1 == DELETE -> No tiene link #}

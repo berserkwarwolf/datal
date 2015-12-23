@@ -91,6 +91,7 @@ REDIS_PORT = 6379
 REDIS_DB   = 0
 REDIS_STATS_TTL = 1
 MEMCACHED_ENGINE_END_POINT = ['127.0.0.1:11211']
+MEMCACHED_API_END_POINT = ['127.0.0.1:11211']
 MEMCACHED_DEFAULT_TTL = 60 # seconds
 MEMCACHED_LONG_TTL = 86400 # one day
 
@@ -110,7 +111,7 @@ REQUESTS_QUEUE = 'test_requests_queue'
 
 LOGIN_URL = '/signin'
 
-END_POINT_SERVLET       = '/AgileOfficeServer/DataStreamRequesterServlet'
+END_POINT_SERVLET = '/AgileOfficeServer/DataStreamRequesterServlet'
 END_POINT_CHART_SERVLET = '/AgileOfficeServer/ChartInvokeServlet'
 END_POINT_LOADER_SERVLET= '/AgileOfficeServer/DataSourceLoaderServlet'
 END_POINT_PREVIEWER_SERVLET = '/AgileOfficeServer/DataStreamPreviewerServlet'
@@ -130,41 +131,44 @@ PRIVATE_ACCOUNT = 'private'
 
 ACCOUNT_DOMAIN_PREFERENCE_NAME = 'account.domain'
 
-DOMAINS = { 'api': 'api',
-            'microsites': 'microsites',
-            'workspace': 'workspace',
-            'engine': '',
-            'website': 'website',
-            'cdn': '',
-           }
+DOMAINS = {
+    'api': 'api',
+    'microsites': 'microsites',
+    'workspace': 'workspace',
+    'engine': '',
+    'website': 'website',
+    'cdn': '',
+}
 
-CONTENT_TYPES = { 'json': 'application/json;charset=utf-8',
-            'prettyjson': 'application/json;charset=utf-8',
-            'json_array': 'application/json;charset=utf-8',
-            'csv': 'text/csv;charset=utf-8',
-            'html': 'text/html;charset=utf-8',
-            'xml': 'text/xml;charset=utf-8',
-            'xls': 'application/json;charset=utf-8',
-            'kml': 'application/vnd.google-earth.kml+xml',
-            'kmz': 'application/vnd.google-earth.kmz',
-            'pdf': 'application/pdf',
-            'jpg': 'image/jpeg',
-            'jpeg': 'image/jpeg',
-            'png': 'image/png',
-            'gif': 'image/gif',
-            'zip': 'application/zip',
-            'tar': 'application/x-tar',
-            'gz': 'application/x-gzip'
-           }
+CONTENT_TYPES = {
+    'json': 'application/json;charset=utf-8',
+    'prettyjson': 'application/json;charset=utf-8',
+    'json_array': 'application/json;charset=utf-8',
+    'csv': 'text/csv;charset=utf-8',
+    'html': 'text/html;charset=utf-8',
+    'xml': 'text/xml;charset=utf-8',
+    'xls': 'application/json;charset=utf-8',
+    'kml': 'application/vnd.google-earth.kml+xml',
+    'kmz': 'application/vnd.google-earth.kmz',
+    'pdf': 'application/pdf',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'png': 'image/png',
+    'gif': 'image/gif',
+    'zip': 'application/zip',
+    'tar': 'application/x-tar',
+    'gz': 'application/x-gzip'
+}
 
-IMPL_TYPES = {'4': 'xls',
-              '5': 'pdf',
-            '10': 'csv',
-            '11': 'kml',
-            '12': 'kmz',
-            '18': 'jpg', #maybe we need a special value for each file type who has different mime type
-            '19': 'zip'
-           }
+IMPL_TYPES = {
+    '4': 'xls',
+    '5': 'pdf',
+    '10': 'csv',
+    '11': 'kml',
+    '12': 'kmz',
+    '18': 'jpg', #maybe we need a special value for each file type who has different mime type
+    '19': 'zip'
+}
 
 GRAVATAR = {
     'url': 'https://www.gravatar.com/avatar/%s?s=%d&d=%s',
@@ -176,16 +180,34 @@ GRAVATAR = {
     }
 }
 
-TYPE_DASHBOARD      = 'db'
-TYPE_DATASET        = 'dt'
-TYPE_DATASTREAM     = 'ds'
-TYPE_VISUALIZATION  = 'vz'
+TYPE_DATASET = 'dt'
+TYPE_DATASTREAM = 'ds'
+TYPE_VISUALIZATION = 'vz'
 
 # Term exclusion lists for searches and usernames
-ENGLISH_EXCLUSION_LIST          = ['abaft', 'aboard', 'about', 'above', 'absent', 'across', 'afore', 'after', 'against', 'along', 'alongside', 'amid', 'amidst', 'among', 'amongst', 'an', 'apropos', 'around', 'as', 'aside', 'astride', 'at', 'athwart', 'atop', 'barring', 'before', 'behind', 'below', 'beneath', 'beside', 'besides', 'between', 'betwixt', 'beyond', 'but', 'by', 'circa', 'concerning', 'despite', 'down', 'during', 'except', 'excluding', 'failing', 'following', 'for', 'from', 'given', 'in', 'including', 'inside', 'into', 'like', 'mid', 'midst', 'minus', 'near', 'next', 'notwithstanding', 'of', 'off', 'on', 'onto', 'opposite', 'out', 'outside', 'over', 'pace', 'past', 'per', 'plus', 'pro', 'qua', 'regarding', 'round', 'sans', 'save', 'since', 'than', 'through', 'thru', 'throughout', 'thruout', 'the', 'till', 'times', 'to', 'toward', 'towards', 'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'vs', 'via', 'vice', 'with', 'within', 'without', 'worth', 'it', 'the', 'a', 'an']
-SPANISH_EXCLUSION_LIST          = ['a', 'con', 'contra', 'de', 'desde', 'durante', 'en', 'entre', 'hacia', 'hasta', 'mediante', 'para', 'por', 'segun', 'sin', 'so', 'sobre', 'tras', 'via', 'excepto', 'el', 'la', 'los', 'las', 'un', 'una', 'unos', 'unas']
-SEARCH_TERMS_EXCLUSION_LIST     = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIST
-BLOCKED_USERNAMES               = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home', 'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support', 'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams', 'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams', 'data.stream', 'dashboards', 'dashboard', 'data']
+ENGLISH_EXCLUSION_LIST = ['abaft', 'aboard', 'about', 'above', 'absent', 'across', 'afore', 'after', 'against', 'along',
+                          'alongside', 'amid', 'amidst', 'among', 'amongst', 'an', 'apropos', 'around', 'as', 'aside',
+                          'astride', 'at', 'athwart', 'atop', 'barring', 'before', 'behind', 'below', 'beneath',
+                          'beside', 'besides', 'between', 'betwixt', 'beyond', 'but', 'by', 'circa', 'concerning',
+                          'despite', 'down', 'during', 'except', 'excluding', 'failing', 'following', 'for', 'from',
+                          'given', 'in', 'including', 'inside', 'into', 'like', 'mid', 'midst', 'minus', 'near', 'next',
+                          'notwithstanding', 'of', 'off', 'on', 'onto', 'opposite', 'out', 'outside', 'over', 'pace',
+                          'past', 'per', 'plus', 'pro', 'qua', 'regarding', 'round', 'sans', 'save', 'since', 'than',
+                          'through', 'thru', 'throughout', 'thruout', 'the', 'till', 'times', 'to', 'toward', 'towards',
+                          'under', 'underneath', 'unlike', 'until', 'up', 'upon', 'versus', 'vs', 'via', 'vice', 'with',
+                          'within', 'without', 'worth', 'it', 'the', 'a', 'an'
+]
+SPANISH_EXCLUSION_LIST = ['a', 'con', 'contra', 'de', 'desde', 'durante', 'en', 'entre', 'hacia', 'hasta', 'mediante',
+                          'para', 'por', 'segun', 'sin', 'so', 'sobre', 'tras', 'via', 'excepto', 'el', 'la', 'los',
+                          'las', 'un', 'una', 'unos', 'unas'
+]
+SEARCH_TERMS_EXCLUSION_LIST = ENGLISH_EXCLUSION_LIST + SPANISH_EXCLUSION_LIST
+BLOCKED_USERNAMES = ['accounts', 'account', 'blog', 'contact', 'css', 'faq', 'form', 'email', 'error', 'help', 'home',
+                     'images', 'image', 'js', 'privacy', 'news', 'rss', 'search', 'services', 'service', 'support',
+                     'video', 'junardata', 'junar_data', 'junar-data', 'junar.data', 'NN', 'anonymous', 'datastreams',
+                     'datastream', 'data-streams', 'data-stream', 'data_streams', 'data_stream', 'data.streams',
+                     'data.stream', 'data'
+]
 
 # unificamos toda la config de los indexadores en una sola
 # para indextank usamos una sola url
@@ -197,16 +219,14 @@ SEARCH_INDEX = {
 
 # Settings Keys
 HOT_DATASTREAMS = 'HOT_DATASTREAMS'
-HOT_DASHBOARDS  = 'HOT_DASHBOARDS'
 HOT_VISUALIZATIONS = 'HOT_VISUALIZATIONS'
 DOC_API_URL = 'https://github.com/datal-org/datal/tree/develop/docs/api'
-PAGINATION_RESULTS_PER_PAGE = 10
 
 # develop & staging sentry
 SENTRY_DSN = 'http://sentrydsn@sentry.com/1'
 
 TWITTER_PROFILE_URL = 'https://twitter.com/tuCuenta'
-FACEBOOK_PROFILE_URL= 'https://facebook.com/tuFanPage'
+FACEBOOK_PROFILE_URL = 'https://facebook.com/tuFanPage'
 MAIL_LIST = {'LIST_COMPANY' : '', 'LIST_DESCRIPTION': '', 
              'LIST_UNSUBSCRIBE': '', 'LIST_UPDATE_PROFILE': '',
              'WELCOME_TEMPLATE_ES': 'template_name',
@@ -288,7 +308,7 @@ LOGGING = {
         'microsites': {'handlers': ['file'], 'level': 'INFO'},
         'admin': {'handlers': ['file'], 'level': 'INFO'},
         'core': {'handlers': ['file'], 'level': 'INFO'},
-
+        'plugins': {'handlers': ['file'], 'level': 'INFO'},
         'sentry.errors': {
             'level': 'DEBUG',
             'handlers': ['file'],
@@ -305,7 +325,7 @@ LOGGING = {
 
 IS_WORKSPACE = False
 
-STATIC_ROOT= os.path.join(PROJECT_PATH,'static/')
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static/')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (os.path.join(PROJECT_PATH, 'core/media/'),)
 
@@ -380,6 +400,12 @@ CACHES = {
 }
 
 TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
+
+APPLICATION_DETAILS = {
+    'name': 'Datal',
+    'website': 'http://www.datal.org',
+    'mail':'alguien@datal.org'
+}
 
 try:
     from core.local_settings import *

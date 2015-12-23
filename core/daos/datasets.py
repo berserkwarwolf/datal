@@ -8,7 +8,7 @@ from django.template import loader, Context
 from django.db.models import Q, F
 
 from core.utils import slugify
-from core import settings
+from django.conf import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.elastic import ElasticsearchIndex
@@ -80,13 +80,6 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         category = dataset_revision.category.categoryi18n_set.get(language=language)
         dataseti18n = DatasetI18n.objects.get(dataset_revision=dataset_revision, language=language)
 
-        # Muestro el link del micrositio solo si esta publicada la revision
-        public_url = ''
-        if dataset_revision.dataset.last_published_revision:
-            domain = dataset_revision.user.account.get_preference('account.domain')
-            if not domain.startswith('http'):
-                domain = 'http://' + domain
-            public_url = '{}/datasets/{}/{}'.format(domain, dataset_revision.dataset.id, slugify(dataseti18n.title))
 
         dataset = dict(
             dataset_revision_id=dataset_revision.id,
@@ -120,15 +113,16 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             notes=dataseti18n.notes,
             tags=tags,
             sources=sources,
-            public_url=public_url,
             slug=slugify(dataseti18n.title),
+            cant=DatasetRevision.objects.filter(dataset__id=dataset_revision.dataset.id).count(),
         )
         dataset.update(self.query_childs(dataset_revision.dataset.id, language))
 
         return dataset
         
     def query(self, account_id=None, language=None, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE,
-          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None):
+          sort_by='-id', filters_dict=None, filter_name=None, exclude=None, filter_status=None,
+          filter_category=None, filter_text=None, filter_user=None, full=False):
 
         """ Query for full dataset lists"""
 
@@ -150,16 +144,28 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             if predicates:
                 query = query.filter(reduce(operator.and_, q_list))
 
-        if filter_status:
-             query = query.filter(status__in=fileter_status)
+        if filter_status is not None:
+             query = query.filter(status__in=[filter_status])
+
+        if filter_category is not None:
+            query = query.filter(category__categoryi18n__slug=filter_category)
+
+        if filter_text is not None:
+            query = query.filter(Q(dataseti18n__title__icontains=filter_text) | 
+                                 Q(dataseti18n__description__icontains=filter_text))
+
+        if filter_user is not None:
+            query = query.filter(dataset__user__nick=filter_user)
 
         total_resources = query.count()
 
         query = query.values('filename', 'dataset__user__name', 'dataset__user__nick', 'dataset__type', 'status', 'id',
                              'impl_type', 'dataset__guid', 'category__id', 'dataset__id', 'id',
-                             'category__categoryi18n__name', 'dataseti18n__title', 'dataseti18n__description',
+                             'category__categoryi18n__name', 'category__categoryi18n__slug',
+                             'dataseti18n__title', 'dataseti18n__description',
                              'created_at', 'modified_at', 'size', 'end_point', 'dataset__user__id',
-                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at')
+                             'dataset__last_revision_id', 'dataset__last_published_revision__modified_at',
+                             'dataset__last_published_revision_id')
         """
         query = query.extra(select={'author':'ao_users.nick','user_id':'ao_users.id','type':'ao_datasets.type',
             'guid':'ao_datasets.guid','category_id':'ao_categories.id', 'dataset_id':'ao_datasets.id',
@@ -177,7 +183,13 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=DatasetRevision.objects.filter(dataset__id=item['dataset__id']).count()
 
     def query_childs(self, dataset_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
@@ -186,18 +198,19 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ## Datastreams
 
-        # solo obtenemos los id de las ultimas revisiones
-        last_revision_ids=list(set([x["datastream__last_revision"] for x in DataStreamRevision.objects.select_related().filter(dataset__id=dataset_id, datastreami18n__language=language).values("datastream__last_revision")]))
+        query = DataStreamRevision.objects.select_related()
 
-        query = DataStreamRevision.objects.select_related().filter(
-            id__in=last_revision_ids, # filtramos por los ids de las ultimas revisiones
-            ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(datastream__last_published_revision_id=F('id') )
+        else:
+            query = query.filter(datastream__last_revision_id=F('id') )
+
+        query = query.filter(
+            dataset_id=dataset_id,
+            datastreami18n__language=language
+        ).values('status', 'id', 'datastreami18n__title', 'datastreami18n__description', 'datastream__user__name', 'datastream__user__nick',
                  'created_at', 'modified_at', 'datastream__last_revision', 'datastream__guid', 'datastream__id',
                  'datastream__last_published_revision')
-
-        # si se pasa un Status (pensado para microsites)
-        if status:
-            query=query.filter(status=status)
 
         # ordenamos desde el mas viejo
         related['datastreams'] = query.order_by("created_at")
@@ -205,21 +218,19 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         ###################################################
         ##  visualizations 
 
-        # solo obtenemos los id de las ultimas revisiones
-        last_revision_ids=list(set([x["visualization__last_revision"] for x in VisualizationRevision.objects.select_related().filter(
-                    visualization__datastream__last_revision__dataset__id=dataset_id,
-                    visualizationi18n__language=language).values("visualization__last_revision")]))
+        query = VisualizationRevision.objects.select_related()
 
+        if status == StatusChoices.PUBLISHED:
+            query = query.filter(visualization__last_published_revision_id=F('id'))
+        else:
+            query = query.filter(visualization__last_revision_id=F('id'))
 
-        query = VisualizationRevision.objects.select_related().filter(
-            id__in=last_revision_ids
+        query = query.filter(
+            visualization__datastream__last_revision__dataset_id=dataset_id,
+            visualizationi18n__language=language
         ).values('status', 'id', 'visualizationi18n__title', 'visualizationi18n__description',
                  'visualization__user__name', 'visualization__user__nick', 'created_at', 'modified_at', 'visualization__last_revision',
                  'visualization__guid', 'visualization__id', 'visualization__last_published_revision')
-
-        # si se pasa un Status (pensado para microsites)
-        if status:
-            query=query.filter(status=status)
 
         related['visualizations'] = query.order_by("created_at")
 
@@ -423,6 +434,9 @@ class DatasetSearchIndexDAO():
                      'tags' : ','.join(tags),
                      'account_id' : self.dataset_revision.dataset.user.account.id,
                      'parameters': "",
+                     'hits': 0,
+                     'web_hits': 0,
+                     'api_hits': 0,
                      'timestamp': int(time.mktime(self.dataset_revision.created_at.timetuple())),
                      'end_point': self.dataset_revision.end_point,
                     },

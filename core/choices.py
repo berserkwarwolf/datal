@@ -1,7 +1,9 @@
-from django.utils.translation import ugettext as _
 from django.utils.translation import ugettext_lazy
+from django.conf import settings
+
 from model_utils import Choices
 
+from core.plugins import DatalPluginPoint
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -42,6 +44,12 @@ MAP_TYPE_FIELD = (
 VISUALIZATION_LIBS = (
     ('google', 'Google Charts'),
     ('d3', 'D3')
+)
+
+RESOURCES_CHOICES = (
+    (settings.TYPE_DATASET, ugettext_lazy('MODEL_DATASET_LABEL')),
+    (settings.TYPE_DATASTREAM, ugettext_lazy('MODEL_DATASTREAM_LABEL')),
+    (settings.TYPE_VISUALIZATION, ugettext_lazy('MODEL_VISUALIZATION_LABEL')),
 )
 
 class AccountRoles():
@@ -96,8 +104,10 @@ STATUS_CHOICES = Choices(
 STATUS_CHOICES_REST = Choices(
     (StatusChoices.DRAFT, "draft"),
     (StatusChoices.PENDING_REVIEW, "pending"),
+    (StatusChoices.UNDER_REVIEW, "under_review"),
     (StatusChoices.APPROVED, "approved"),
     (StatusChoices.PUBLISHED, "published"),
+    (StatusChoices.UNPUBLISHED, "unpublished"),
     (StatusChoices.REJECTED, "rejected")
     )
 
@@ -212,7 +222,7 @@ SOURCE_IMPLEMENTATION_EXTENSION_CHOICES = (
     #,(SourceImplementationChoices.IBEN, 'iBencinas')
     ,(SourceImplementationChoices.IMAGE, ["png", "jpg", "jpeg", "gif"])
     ,(SourceImplementationChoices.ZIP, ["zip", "gz", "tar"])
-    ,(SourceImplementationChoices.TSV, ["tsv"])
+    ,(SourceImplementationChoices.TSV, ["tsv", "tab"])
     #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["txt"])
 )
@@ -224,7 +234,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
      (SourceImplementationChoices.HTML, ["text/html"])
     #,(SourceImplementationChoices.SOAP, 'SOAP/XML')
     #,(SourceImplementationChoices.DALLAS, 'DALLAS')
-    #,(SourceImplementationChoices.XML, 'XML')
+    ,(SourceImplementationChoices.XML, ["text/xml"])
     ,(SourceImplementationChoices.XLS, ["application/vnd.ms-excel",
                                         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"])
     ,(SourceImplementationChoices.PDF, ["application/pdf"])
@@ -249,7 +259,7 @@ SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES = (
     ,(SourceImplementationChoices.ZIP, ["application/zip",
                                         "application/x-gzip",
                                         "application/x-tar"])
-    #,(SourceImplementationChoices.TSV, 'TSV')
+    ,(SourceImplementationChoices.TSV, ["text/tab-separated-values"])
     #,(SourceImplementationChoices.PUS, 'PublicStuff')
     ,(SourceImplementationChoices.TXT, ["text/plain"])
 )
@@ -314,7 +324,6 @@ OCUPATION_CHOICES = (
 
 THRESHOLD_NAME_CHOICES = (
      ('self_publish.can_upload', 'self_publish.can_upload')
-    ,('private_dashboard.can_create', 'private_dashboard.can_create')
     ,('private_datastream.can_create', 'private_datastream.can_create')
     ,('api.account_monthly_calls', 'api.account_monthly_calls')
     ,('workspace.create_user_limit', 'workspace.create_user_limit')
@@ -350,7 +359,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.url', 'account.url')
     ,('account.domain', 'account.domain')
     ,('account.api.domain', 'account.api.domain')
-    ,('account.hot.dashboards', 'account.hot.dashboards')
     ,('account.hot.datastreams', 'account.hot.datastreams')
     ,('account.hot.visualizations', 'account.hot.visualizations')
     ,('account.favicon', 'account.favicon')
@@ -370,7 +378,6 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.footer.height', 'account.footer.height')
     ,('enable.embed.options', 'enable.embed.options')
     ,('enable.junar.footer', 'enable.junar.footer')
-    ,('account.featured.dashboards', 'account.featured.dashboards')
     ,('account.enable.sharing', 'account.enable.sharing') # BOOLEAN
     ,('account.enable.notes', 'account.enable.notes') # BOOLEAN
     ,('account.title.color', 'account.title.color')
@@ -408,7 +415,10 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.transparency.createdcategories', 'account.transparency.createdcategories')
     ,('account.transparency.categories', 'account.transparency.categories')
     ,('account.contact.dataperson.email', 'account.contact.dataperson.email')
-    ,('account.dataset.showhome', 'account.dataset.showhome')
+    ,('account.dataset.showhome', 'account.dataset.showhome'),
+
+    # TODO: Mover al plugin
+    ('account.featured.dashboards', 'account.featured.dashboards')
 )
 
 API_APPLICATION_TYPE_CHOICES = (
@@ -416,7 +426,10 @@ API_APPLICATION_TYPE_CHOICES = (
 )
 
 
-class TicketChoices():
+class TicketChoices:
+    def __init__(self):
+        pass
+
     PASSWORD_RECOVERY = 'PASS'
     API_AUTHORIZATION = 'API'
     USER_ACTIVATION = 'USER_ACTIVATION'

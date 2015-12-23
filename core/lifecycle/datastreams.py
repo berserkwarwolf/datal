@@ -109,7 +109,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 self.datastream_revision.status = StatusChoices.APPROVED
                 self.datastream_revision.save()
                 transaction.commit()
-                raise ParentNotPublishedException()
+                raise ParentNotPublishedException(self.datastream_revision)
 
         self.datastream_revision.status = StatusChoices.PUBLISHED
         self.datastream_revision.save()
@@ -148,7 +148,8 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                     publish_fail.append(visualization_revision)
 
             if publish_fail:
-                raise ChildNotApprovedException(self.datastream.last_revision)
+                raise ChildNotApprovedException(self.datastream.last_revision.dataset.last_revision, 
+                                                settings.TYPE_VISUALIZATION)
 
     def unpublish(self, killemall=False, allowed_states=UNPUBLISH_ALLOWED_STATES, to_status=StatusChoices.DRAFT):
         """ Despublica la revision de un dataset """
@@ -285,6 +286,10 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
 
     def _remove_all(self):
+
+        for visualization_revision in VisualizationRevision.objects.filter(datastream_revision=self.datastream_revision):
+            VisualizationLifeCycleManager(user=self.user, resource=visualization_revision).remove(killemall=True)
+
         self.datastream.delete()
         self._log_activity(ActionStreams.DELETE)
         if settings.DEBUG: logger.info('Clean Caches')
@@ -297,6 +302,9 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
 
         if 'status' in fields.keys():
             form_status = int(fields.pop('status', None))
+        else:
+            form_status = StatusChoices.DRAFT
+
 
         old_status = self.datastream_revision.status
 
@@ -319,7 +327,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 datastream=self.datastream,
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
-                status=StatusChoices.DRAFT,
+                status=fields.pop('status', StatusChoices.DRAFT),
                 parameters=self.datastream_revision.datastreamparameter_set.all(),
                 **fields
             )
@@ -334,7 +342,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
             # Actualizo sin el estado
             self.datastream_revision = DataStreamDBDAO().update(
                 self.datastream_revision,
-                status=old_status,
+                status=fields.pop('status', old_status), 
                 changed_fields=changed_fields,
                 **fields
             )

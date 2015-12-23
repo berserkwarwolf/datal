@@ -9,17 +9,7 @@ def request_context(request):
         ga_obj = account.get_preference('account.ga')
         if ga_obj == '':
             ga_obj = '{}'
-        if path == '/':
-            if 'dashboard_view' in json.loads(ga_obj):
-                final = {}
-                final['dashboard_view'] = json.loads(ga_obj)['dashboard_view']
-                obj.update({'ga': json.dumps(final)})
-        elif 'dashboards' in path and 'embed' not in path:
-            if 'dashboard_view' in json.loads(ga_obj):
-                final = {}
-                final['dashboard_view'] = json.loads(ga_obj)['dashboard_view']
-                obj.update({'ga': json.dumps(final)})
-        elif 'visualizations' in path and 'embed' not in path:
+        if 'visualizations' in path and 'embed' not in path:
             if 'dataview_view' in json.loads(ga_obj):
                 final = {}
                 final['dataview_view'] = json.loads(ga_obj)['dataview_view']
