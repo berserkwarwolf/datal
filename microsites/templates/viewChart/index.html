@@ -190,9 +190,8 @@ visualizationModel.parse({
     chart: {{ visualization_revision.chart | jsonify }},
 }); 
 
-// PROVISORIO PORQUE NO SE LE PUEDE PASAR AUN PARAMETROS DENTRO DE LOS PLUGINS
-//viewVisualizationModel['datastream_revision_id'] = "{{datastream.datastream_revision_id}}"; // Este se necesita para el data table
-visualizationModel.set('datastream_revision_id', "{{datastream.datastream_revision_id}}");
+// Plugins- Extend Main Model After Parse
+{% plugins_call 'microsites_view_visualization_js_extend_main_model_after_parse' %}
 
 var visualizationView = new viewVisualizationView({
     model: visualizationModel
