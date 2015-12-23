@@ -9,6 +9,7 @@ from core.v8.views import EngineViewSetMixin
 from core.plugins import DatalPluginPoint
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework.exceptions import NotFound
+from django.conf import settings
 
 import logging
 import urllib
@@ -19,8 +20,8 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
     viewsets.GenericViewSet):
     queryset = GuidModel
     lookup_field = 'guid'
-    data_types = ['dt', 'ds', 'vz']
     dao_filename = 'filename'
+    _data_types = [settings.TYPE_DATASET, settings.TYPE_DATASTREAM, settings.TYPE_VISUALIZATION]
     app = 'workspace'
     published = True
         
@@ -63,15 +64,16 @@ class ResourceViewSet(EngineViewSetMixin, mixins.RetrieveModelMixin,
         return Response(serializer.data)
 
     def get_data_types(self):
+        if hasattr(self, 'data_types'):
+            return self.data_types
+        
         resources = self.request.query_params.get('resources', None)
         if resources:
-            answer = resources.split(',')
-        else:
-            answer = []
-            if hasattr(self, 'data_types'):
-                answer = self.data_types
-            for finder in DatalPluginPoint.get_active_with_att('finder'):
-                answer.append(finder.doc_type)
+            return resources.split(',')
+        
+        answer = self._data_types
+        for finder in DatalPluginPoint.get_active_with_att('finder'):
+            answer.append(finder.doc_type)
         return answer
 
     def get_queryset(self):
