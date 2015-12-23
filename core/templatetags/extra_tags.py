@@ -209,3 +209,8 @@ def jsonize(obj):
 @register.filter
 def jsonify(o):
     return mark_safe(simplejson.dumps(o))
+
+
+@register.filter(name='key')
+def key(d, key_name):
+    return d.get(key_name, "")

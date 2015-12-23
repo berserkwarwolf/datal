@@ -925,6 +925,15 @@ msgstr "Sección de prioridades"
 msgid "ADMIN-HOME-SECTION-PIORITIES-DESCRIPTION"
 msgstr "Esta sección contiene un carrusel con imágenes, títulos, descripciones y enlaces. Tamaño máximo de cada imagen: 5 MB."
 
+msgid "ADMIN-HOME-DESCRIPTION-THEME8"
+msgstr "Tema personalizado diseñado para el <em>Condado de Arlington</em>. Contiene texto de bienvenida, un carrusel de recursos e íconos animados. ¿Necesita un tema personalizado? Pida el suyo <a href='mailto:support@junar.com' title='support@junar.com'>aquí</a>."
+
+msgid "ADMIN-HOME-SECTION-CATEGORY-TO-OPEN-TEXT"
+msgstr "Categoría a mostrar"
+
+msgid "ADMIN-HOME-SECTION-MOUSEOVER-BACKGROUND-TEXT"
+msgstr "Color de fondo"
+
 msgid "ADMIN-HOME-SECTION-SECTION-TITLE-LABEL"
 msgstr "Título de la sección:"
 
@@ -936,6 +945,12 @@ msgstr "Agregar imágenes"
 
 msgid "ADMIN-HOME-SECTION-NAVIGATION7-DESCRIPTION"
 msgstr "Agregue íconos, configure sus títulos, descripciones y enlaces. Asigne un color de fondo para las descripciones. Finalmente, reorganice la ubicación de cada botón. Tamaño de ícono recomendado: 50 x 50 pixeles."
+
+msgid "ADMIN-HOME-SECTION-SECTION-STARTINGCATEGORY-LABEL"
+msgstr "Categoría inicial:"
+
+msgid "ADMIN-HOME-SECTION-SECTION-BACKGROUND-COLOR-LABEL"
+msgstr "Color de fondo de la sección:"
 
 msgid "ADMIN-HOME-SECTION-PIORITIES-ADD-BUTTONS-TEXT"
 msgstr "Agregar botones"

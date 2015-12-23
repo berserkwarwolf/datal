@@ -75,7 +75,6 @@ docs/_build/
 # SASS Cache
 .sass-cache/
 
-components/
 node_modules/
-
+components/bower_components/
 plugins/

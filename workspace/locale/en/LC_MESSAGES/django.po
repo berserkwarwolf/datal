@@ -3255,3 +3255,6 @@ msgstr "Edit visualization"
 
 msgid "ADMIN-HOME-THEMES-THEME7-TEXT"
 msgstr "Responsive"
+
+msgid "ADMIN-HOME-THEMES-THEME8-TEXT"
+msgstr "Catalog"

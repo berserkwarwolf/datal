@@ -16,6 +16,8 @@ from core.lib.datastore import *
 from workspace.personalizeHome.managers import ThemeFinder
 from core.builders.themes import ThemeBuilder
 
+from core.models import Category
+
 
 @login_required
 @privilege_required('workspace.can_access_admin')
@@ -31,7 +33,14 @@ def load(request):
     preference = account.get_preferences()
     stats = request.stats
     jsonContent = preference["account_home"]
+    language = request.auth_manager.language
     home_tab = True
+
+    # arlington theme (8) need categories
+    # incluye las cuentas federadas
+    federated_accounts_ids = [x['id'] for x in account.account_set.values('id').all()]
+    categories = Category.objects.get_for_home(language, federated_accounts_ids+[account.id])
+
     return render_to_response('personalizeHome/index.html', locals())
 
 

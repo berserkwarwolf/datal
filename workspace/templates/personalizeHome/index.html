@@ -39,6 +39,8 @@
 <script src="{% static 'workspace/scripts/personalizeHome/theme6View.js' %}"></script>
 <script src="{% static 'workspace/scripts/personalizeHome/theme7Model.js' %}"></script>
 <script src="{% static 'workspace/scripts/personalizeHome/theme7View.js' %}"></script>
+<script src="{% static 'workspace/scripts/personalizeHome/theme8Model.js' %}"></script>
+<script src="{% static 'workspace/scripts/personalizeHome/theme8View.js' %}"></script>
 <script src="{% static 'workspace/scripts/personalizeHome/personalizeHomeModel.js' %}"></script>
 <script src="{% static 'workspace/scripts/personalizeHome/personalizeHomeView.js' %}"></script>
 <meta name="main-option" content="id_settings_option"/>
@@ -184,6 +186,14 @@
 						<i class="i6">6</i>
 						<i class="i7">7</i>
 						<i class="i8">8</i>
+			<li class="theme8">
+				<a id="id_theme8Button" rel="8">
+					<span class="text">{% trans "ADMIN-HOME-THEMES-THEME8-TEXT" %}</span>
+					<span class="img">
+						<img src="{% static 'workspace/images/personalizeHome/im_theme8.gif' %}"/>
+						<i class="i1">1</i>
+						<i class="i2">2</i>
+						<i class="i3">3</i>
 					</span>
 				</a>
 			</li>
@@ -262,6 +272,7 @@
 {% include "personalizeHome/theme5.html" %}
 {% include "personalizeHome/theme6.html" %}
 {% include "personalizeHome/theme7.html" %}
+{% include "personalizeHome/theme8.html" %}
 
 <script type="text/javascript">
   $(document).ready(function(){
