@@ -623,3 +623,6 @@ msgstr "Other"
 
 msgid "APP-EXPORT-TO-EXCEL-TEXT"
 msgstr "Export to Excel"
+
+msgid "APP-BACK-TEXT"
+msgstr "Back"
