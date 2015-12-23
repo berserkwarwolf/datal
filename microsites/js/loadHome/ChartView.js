@@ -18,7 +18,6 @@ var ChartView = Backbone.View.extend({
 
         } else {
             delete this.ChartViewClass;
-            console.log('There are not class for this');
         }
 
     },

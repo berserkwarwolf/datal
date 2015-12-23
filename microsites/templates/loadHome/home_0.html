@@ -4,7 +4,7 @@
 
 {% block themeMeta %}
 
-{% if datastreams %}
+{% if resources_slider %}
 <script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/loadHome/sliderThemes.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -27,7 +27,7 @@
     </div>
     {% endif %}
 
-    {% if config.mainSection or datastreams or config.sideBarSection %}
+    {% if config.mainSection or resources_slider or config.sideBarSection %}
     <!-- HOME COLUMNS -->
     <div class="homeColumns clearfix">
 
@@ -44,7 +44,7 @@
         <!-- COLUMN - Right -->
         <div class="CR FR relative">
 
-            {% if datastreams %}
+            {% if resources_slider %}
             <!-- SLIDER CONTAINER -->  
             <div class="sliderContainer">
                 <div class="sliderWrapper">
