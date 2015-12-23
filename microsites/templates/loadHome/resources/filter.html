@@ -1,4 +1,4 @@
-{% load i18n extra_tags %}
+{% load i18n extra_tags plugins_tags %}
 
 <div id="{{table_prefix}}_filter" class="sidebarPadding">
     
@@ -39,7 +39,8 @@
                 <option value="" selected="selected">{% trans "FILTER-TYPE-OPTION" %}</option>
                 <option value="ds">{% trans 'APP-DATAVIEWS-TEXT' %}</option>
                 <option value="chart">{% trans 'APP-CHARTS-TEXT' %}</option>
-                <option value="db">{% trans 'APP-DASHBOARDS-TEXT' %}</option>
+                <!-- filter from plugins -->
+                {% plugins_call 'microsites_home_filter' %}
             </select>
 
             <!-- FILTER BY: CATEGORY -->

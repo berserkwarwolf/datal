@@ -1,4 +1,4 @@
-{% load i18n extra_tags %}
+{% load i18n extra_tags plugins_tags %}
 {% url "search.search" as search_url %}
     <!-- SEARCH RESULTS -->
     <div class="searchResults">
@@ -18,19 +18,21 @@ s            	{% if category %}<span class="font">{% trans "APP-INCATEGORY-TEXT"
             <div class="DataBox">
                 {%if page_results %}
                     {% for item in page_results %}
+                        
                         {% ifequal item.type 'ds' %}
                             {% include "search/datastream.html" %}
-                        {% else %}
-                            {% ifequal item.type 'db' %}
-                                {% include "search/dashboard.html" %}
-                            {% else %}
-                                {% ifequal item.type 'dt' %}
-                                    {% include "search/dataset.html" %}
-                                {% else %}
-                                    {% include "search/visualization.html" %}
-                                {% endifequal %}
-                            {% endifequal %}
                         {% endifequal %}
+                        
+                        {% ifequal item.type 'dt' %}
+                            {% include "search/dataset.html" %}
+                        {% endifequal %}
+
+                        {% ifequal item.type 'vz' %}
+                            {% include "search/visualization.html" %}
+                        {% endifequal %}
+
+                        {% plugins_call 'microsites_search_results' %}
+
                     {%endfor%}
 
                 <div class="pagButtons clearfix pagination">
