@@ -91,12 +91,12 @@ var FormatsView = Backbone.Epoxy.View.extend({
     },
 
     onClickBack: function () {
-        this.collection.reset();
         this.stateModel.set('mode', 'data');
     },
 
     onClickClear: function () {
-        this.collection.reset();
+        this.model.reset();
+        this.model.set('type', 'NUMBER');
     },
 
     onClickOk: function () {

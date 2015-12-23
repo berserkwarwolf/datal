@@ -97,4 +97,8 @@ var ColumnModel = Backbone.Epoxy.Model.extend({
         }
     },
 
+    reset: function () {
+        var keep = this.pick(['column', 'excelCol']);
+        this.clear().set(keep);
+    }
 });
