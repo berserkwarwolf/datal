@@ -134,6 +134,10 @@ class DataStreamDBDAO(AbstractDataStreamDBDAO):
         dataset_revision = datastream_revision.dataset.last_revision
 
         datastream = dict(
+
+            resource_id=datastream_revision.datastream.id,
+            revision_id=datastream_revision.id,
+
             datastream_id=datastream_revision.datastream.id,
             datastream_revision_id=datastream_revision.id,
             dataset_id=datastream_revision.dataset.id,
@@ -424,6 +428,8 @@ class DatastreamSearchDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.datastream_revision.datastream.id,
+                     'revision_id': self.datastream_revision.id,
                      'datastream_id': self.datastream_revision.datastream.id,
                      'datastream__revision_id': self.datastream_revision.id,
                      'title': datastreami18n.title,
