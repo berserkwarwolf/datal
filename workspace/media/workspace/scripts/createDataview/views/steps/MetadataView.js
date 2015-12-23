@@ -110,7 +110,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
             element.next('p.has-error').remove();
 
             textarea.removeClass('has-error');
-            textarea.next('p.has-error').remove();          
+            textarea.next('p.has-error').remove();
         }
 
     },
@@ -120,7 +120,7 @@ var MetadataView = Backbone.Epoxy.View.extend({
         var content = this.notesInstance.instanceById('id_notes_2').getContent();
 
         // When notes initialice empty, nicEdit initialices with <br>
-        if (content > 0 && content !== '<br>') {
+        if (content.length > 0 && content !== '<br>') {
             notes = $.trim( content );
         }
 
