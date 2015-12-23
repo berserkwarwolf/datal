@@ -15,28 +15,18 @@ class ThemeBuilder(object):
         self.account = account
 
 
-    def retrieveDatastreams(self, resourceIds, language):
+    def retrieve_resources_for_slider(self, resourceIds, language):
 
         datastreamIds = []
         visualizationIds = []
                 
         for resource in resourceIds:
-            if resource['type']== 'chart':
+            if resource['type']== 'vz':
                 visualizationIds.append(resource['id'])
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
                 
         data = []
-
-        # TODO (ignacio f): hacer desaparecer esto
-        #if datastreamIds:
-            #idsDataStream = ','.join(datastreamIds)
-            #datastreams =  DataStreamDBDAO().query_hot_n(10,language, hot = idsDataStream)
-               
-        #if visualizationIds:
-        #    idsVisualization = ','.join(visualizationIds)
-        #    datastreams +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
-        #return datastreams
 
         # usamos el DAO
         for i in datastreamIds:
@@ -53,7 +43,7 @@ class ThemeBuilder(object):
         visualizationIds = []
                 
         for resource in resourceIds:
-            if resource['type']== 'chart':
+            if resource['type']== 'vz':
                 visualizationIds.append(resource['id'])
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
@@ -99,7 +89,7 @@ class ThemeBuilder(object):
 
             if config:
                 if 'sliderSection' in config:
-                    response['datastreams'] = self.retrieveDatastreams(
+                    response['resources_slider'] = self.retrieve_resources_for_slider(
                         config['sliderSection'], self.language)
                 if 'linkSection' in config:
                     response['resources'] = self.retrieveResourcePermalinks(
