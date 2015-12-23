@@ -68,6 +68,11 @@ REST_FRAMEWORK['DEFAULT_PERMISSION_CLASSES'] = (
     'rest_framework.permissions.IsAuthenticated',
 )
 
+try: 
+    from plugins.settings import *
+except:
+    pass
+
 try:
     from workspace.local_settings import *
 except ImportError:
