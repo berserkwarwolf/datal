@@ -54,6 +54,8 @@ def view(request, id, slug=None):
 
         visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
+        notes = visualization_revision['notes']
+
         return render_to_response('viewChart/index.html', locals())
 
 

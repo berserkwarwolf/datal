@@ -615,5 +615,17 @@ msgstr "Cada minuto"
 msgid "APP-OTHER-TEXT"
 msgstr "Otro"
 
+msgid "VIEWDS-TABS-DESCRIPTION"
+msgstr "Descripción"
+
+msgid "VIEWDS-DESCRIPTION-TITLE"
+msgstr "Descripción"
+
+msgid "VIEWDS-VIEWMORE-INFORMATION-TEXT"
+msgstr "Más información"
+
+msgid "VIEWDS-VIEWLESS-INFORMATION-TEXT"
+msgstr "Ocultar información"
+
 msgid "APP-EXPORT-TO-EXCEL-TEXT"
 msgstr "Exportar a Excel"
