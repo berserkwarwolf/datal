@@ -2,6 +2,7 @@ var PreviewView = Backbone.View.extend({
 
     initialize: function () {
         this.template = _.template( $('#preview_dataview_template').html() );
+        this.model.data.clear();
         this.model.fetch();
         this.listenTo(this.model.data, 'change:rowsRaw change:headers', this.render, this);
     },

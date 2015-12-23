@@ -1,6 +1,7 @@
 {% load i18n extra_tags core_components components %}
 
 <script type="text/template" id="select_data_template">
+
   <div class="col-xs-3">
 
     <div class="sidebar">
@@ -224,6 +225,9 @@
   </header>
 
   <div class="col-xs-12 preview-datastream">
+    <% if (rows.length === 0) { %>
+      <div class="loading light"></div>
+    <% } %>
     <table>
       <thead>
         <tr>
