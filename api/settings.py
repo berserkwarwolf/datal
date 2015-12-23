@@ -61,12 +61,8 @@ REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
     'rest_framework.renderers.BrowsableAPIRenderer',
 )
 
-try: 
-    from plugins.settings import *
-except:
-    pass
-
 try:
     from api.local_settings import *
 except ImportError:
     pass
+
