@@ -2,12 +2,13 @@ from django import template
 from django.forms.formsets import formset_factory
 from django.template.loader import render_to_string
 from django.core.urlresolvers import reverse
+from core.plugins import DatalPluginPoint
+
 
 from core.auth import forms as auth_forms
 from core.models import ObjectGrant
 
 register = template.Library()
-
 
 @register.filter(name="permalink")
 def permalink(pk, obj_type):
@@ -29,8 +30,13 @@ def permalink(pk, obj_type):
             'microsites.urls',
             kwargs={'id': pk, 'slug': '-'}
         )
-    else:
-        return None
+
+    for permalink in DatalPluginPoint.get_active_with_att('permalink'):
+            if permalink.doc_type == obj_type:
+                return permalink.permalink(pk)
+
+
+    return None
 
 @register.filter(name="embedlink")
 def embedlink(guid, obj_type):

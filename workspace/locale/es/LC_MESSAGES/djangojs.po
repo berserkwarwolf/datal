@@ -879,3 +879,84 @@ msgstr "Ya tenes una fuente con ese nombre. Elegí otra."
 
 msgid "INVALID-TAG"
 msgstr "Tag invalido"
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME7"
+msgstr "Tema personalizado diseñado para la ciudad de <em>Mesa</em>. Contiene imagen de bienvenida, dos carruseles, íconos animados y más. ¿Necesita un tema personalizado? Pida el suyo <a href='mailto:support@junar.com' title='support@junar.com'>aquí</a>."
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOXTITLE"
+msgstr "Sección de bienvenida"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOXDESCRIPTION"
+msgstr "Este contenido es mostrado en la parte superior izquierda. Contiene una imagen de fondo, título, descripción y botón. Tamaño máximo de imagen: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-IMAGE-LABEL"
+msgstr "Imagen:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-TITLE-LABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-DESCRIPTION-LABEL"
+msgstr "Descripción:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-LINK-LABEL"
+msgstr "Título de botón:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-URL-LABEL"
+msgstr "URL de botón:"
+
+msgid "ADMIN-HOME-SECTION-WELCOMEBOX-BACKGROUND-COLOR-LABEL"
+msgstr "Color de fondo para textos:"
+
+msgid "ADMIN-HOME-SECTION-SLIDERTHEME7-TITLE"
+msgstr "Sección carrusel destacado"
+
+msgid "ADMIN-HOME-SECTION-SLIDERTHEME7-DESCRIPTION"
+msgstr "Añada imágenes al carrusel y ordénelas. Si lo desea incorpore títulos. Este contenido se muestra en la parte superior derecha del portal. Tamaño máximo de cada imagen: 5 MB."
+
+msgid "ADMIN-HOME-SECTION-TITLE-LABEL"
+msgstr "Título:"
+
+msgid "ADMIN-HOME-SECTION-TITLE-TEXT"
+msgstr "Ingrese un título (opcional)"
+
+msgid "ADMIN-HOME-SECTION-PIORITIES-TITLE"
+msgstr "Sección de prioridades"
+
+msgid "ADMIN-HOME-SECTION-PIORITIES-DESCRIPTION"
+msgstr "Esta sección contiene un carrusel con imágenes, títulos, descripciones y enlaces. Tamaño máximo de cada imagen: 5 MB."
+
+msgid "ADMIN-HOME-DESCRIPTION-THEME8"
+msgstr "Tema personalizado diseñado para el <em>Condado de Arlington</em>. Contiene texto de bienvenida, un carrusel de recursos e íconos animados. ¿Necesita un tema personalizado? Pida el suyo <a href='mailto:support@junar.com' title='support@junar.com'>aquí</a>."
+
+msgid "ADMIN-HOME-SECTION-CATEGORY-TO-OPEN-TEXT"
+msgstr "Categoría a mostrar"
+
+msgid "ADMIN-HOME-SECTION-MOUSEOVER-BACKGROUND-TEXT"
+msgstr "Color de fondo"
+
+msgid "ADMIN-HOME-SECTION-SECTION-TITLE-LABEL"
+msgstr "Título de la sección:"
+
+msgid "ADMIN-HOME-SECTION-SECTION-DESCRIPTION-LABEL"
+msgstr "Descripción de la sección:"
+
+msgid "ADMIN-HOME-SECTION-PIORITIES-ADD-SLIDES-TEXT"
+msgstr "Agregar imágenes"
+
+msgid "ADMIN-HOME-SECTION-NAVIGATION7-DESCRIPTION"
+msgstr "Agregue íconos, configure sus títulos, descripciones y enlaces. Asigne un color de fondo para las descripciones. Finalmente, reorganice la ubicación de cada botón. Tamaño de ícono recomendado: 50 x 50 pixeles."
+
+msgid "ADMIN-HOME-SECTION-SECTION-STARTINGCATEGORY-LABEL"
+msgstr "Categoría inicial:"
+
+msgid "ADMIN-HOME-SECTION-SECTION-BACKGROUND-COLOR-LABEL"
+msgstr "Color de fondo de la sección:"
+
+msgid "ADMIN-HOME-SECTION-PIORITIES-ADD-BUTTONS-TEXT"
+msgstr "Agregar botones"
+
+msgid "ADMIN-HOME-SECTION-VIDEOTEXT"
+msgstr "Video"
+
+msgid "ADMIN-HOME-SECTION-VIDEOPLACEHOLDER"
+msgstr "Embeber código de video (opcional)"

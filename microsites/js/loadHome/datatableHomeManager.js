@@ -66,7 +66,8 @@ var DatatableHomeManager = DatatableManager.extend({
 
         templ +="</tr>";
 
-        return _.template(templ, {variable: 'revision'})(msg);
+        // return _.template(templ, {variable: 'revision'})(msg);
+        return _.template(templ, {revision: msg});
     },
     drawRow: function(msg) {
         $('table tbody', this.get("selector")).append(this.getRowTemplate(msg));
