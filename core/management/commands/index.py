@@ -94,5 +94,5 @@ class Command(BaseCommand):
                     pass
 
         for plugin in DatalPluginPoint.get_active_with_att('reindex'):
-            plugin.reindex()
+            plugin.reindex(es)
 
