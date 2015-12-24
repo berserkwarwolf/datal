@@ -120,7 +120,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
         if self.visualization_revision.status == StatusChoices.PUBLISHED:
             self.visualization, self.visualization_revision = VisualizationDBDAO().create(
                 visualization=self.visualization,
-                datastream_rev=self.visualization_revision.datastream_revision,
+                datastream_rev=self.visualization_revision.datastream.last_revision,
                 user=self.visualization_revision.user,
                 status=fields.pop('status', StatusChoices.DRAFT),
                 **fields
@@ -218,7 +218,7 @@ class VisualizationLifeCycleManager(AbstractLifeCycleManager):
             self.visualizationi18n = self.visualization_revision.visualizationi18n_set.all()[0] # TODO at at DAO
 
         title = self.visualizationi18n.title
-        resource_category = self.visualization_revision.datastream_revision.category.categoryi18n_set.all()[0] # todo add language
+        resource_category = self.visualization_revision.datastream.last_revision.category.categoryi18n_set.all()[0] # todo add language
         
         return super(VisualizationLifeCycleManager, self)._log_activity(
             action_id,
