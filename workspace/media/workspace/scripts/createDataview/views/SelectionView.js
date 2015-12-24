@@ -1,6 +1,7 @@
 var SelectionView = Backbone.View.extend({
     events: {
         'click a.btn-clear': 'onClickClear',
+        'click a.btn-edit': 'onClickEdit',
         'click a.btn-headers': 'onClickHeaders',
         'click a.btn-filters': 'onClickFilters',
         'click a.btn-formats': 'onClickFormats'
@@ -46,6 +47,24 @@ var SelectionView = Backbone.View.extend({
             this.dataviewModel.filters.remove(col);
         } else if (mode === 'format') {
             this.dataviewModel.formats.remove(col);
+        } else {
+            this.clearByMode(this.dataviewModel.selection, mode);
+        }
+    },
+
+    onClickEdit: function (e) {
+        var mode = $(e.currentTarget).data('mode'),
+            model,
+            col = $(e.currentTarget).data('col');
+
+        if (mode === 'filter') {
+            model = this.dataviewModel.filters.get(col);
+            this.model.set('currently-editing-model', model);
+            this.model.set('mode', 'add-filter');
+        } else if (mode === 'format') {
+            model = this.dataviewModel.formats.get(col);
+            this.model.set('currently-editing-model', model);
+            this.model.set('mode', 'set-formats');
         } else {
             this.clearByMode(this.dataviewModel.selection, mode);
         }
