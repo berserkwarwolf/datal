@@ -485,7 +485,7 @@
     </select>
   </div>
 
-  <div class="row row-data-type hidden">
+  <div class="row row-data-type<%= _.isUndefined(column.column)? ' hidden': '' %>">
     <div class="form-group">
       <label>{% trans 'APP-COLUMN-DATA-TYPE-TEXT' %}</label>
       <select class="form-control select-data-type" name="type">
@@ -495,7 +495,7 @@
     </div>
   </div>
 
-  <div class="input-output-view hidden">
+  <div class="input-output-view<%= (!_.isUndefined(column.type) && column.type === 'TEXT')? ' hidden': '' %>">
 
     <p><strong>{% trans 'APP-CONFIGURE-FORMAT' %}</strong></p>
     <div role="separator" class="divider divider-xs"></div>

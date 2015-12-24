@@ -33,6 +33,10 @@ var FormatsView = Backbone.Epoxy.View.extend({
         var existingColumns = this.collection.map(function (model) {
             return Number(model.get('column'));
         });
+        var editingCol = this.model.get('column');
+        if (!_.isUndefined(editingCol)) {
+            existingColumns.splice(existingColumns.indexOf(Number(editingCol)), 1);
+        }
         var availableCols = _.difference(_.range(0, this.totalCols), existingColumns);
         var columns = _.map(availableCols, function (number) {
                 return {
@@ -43,10 +47,11 @@ var FormatsView = Backbone.Epoxy.View.extend({
 
         this.$el.html(this.template({
             columns: columns,
+            column: this.model.toJSON()
         }));
-        this.applyBindings();
         this.$(".tabs").hashTabs();
-        this.attachPatternViews('TEXT');
+        this.attachPatternViews(this.model.get('type'));
+        this.applyBindings();
 
         Backbone.Validation.bind(this, {
             valid: function (view, attr, selector) {
