@@ -3350,3 +3350,42 @@ msgstr "Responsive"
 
 msgid "ADMIN-HOME-THEMES-THEME8-TEXT"
 msgstr "Catálogo"
+
+msgid "APP-THOUSAND-INDICATOR"
+msgstr "Indicador de miles"
+
+msgid "APP-DECIMAL-INDICATOR"
+msgstr "Indicador de decimales"
+
+msgid "APP-SYMBOLS"
+msgstr "Símbolos"
+
+msgid "APP-LOCALE"
+msgstr "Localización"
+
+msgid "APP-CUSTOM-PATTERN"
+msgstr "Patrón personalizado"
+
+msgid "APP-CONFIGURE-FORMAT"
+msgstr "Configurar formatos"
+
+msgid "APP-ORIGIN-FORMAT"
+msgstr "Formato de origen"
+
+msgid "APP-OUTPUT-FORMAT"
+msgstr "Formato de salida"
+
+msgid "APP-THOUSANDS-DECIMALS-INDICATORS"
+msgstr "Indicadores de decimales / miles"
+
+msgid "APP-WHAT-IS-THE-ORIGINAL-PATTERN"
+msgstr "¿Cuál es el patrón del formato de origen?"
+
+msgid "APP-WHAT-IS-THE-OUTPUT-PATTERN"
+msgstr "¿Cuál es el patrón del formato de salida?"
+
+msgid "APP-DOT"
+msgstr "punto"
+
+msgid "APP-COMMA"
+msgstr "coma"

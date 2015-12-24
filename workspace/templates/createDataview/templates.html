@@ -479,7 +479,7 @@
 
   <div class="input-output-view hidden">
 
-    <p><strong>Configure el formato</strong></p>
+    <p><strong>{% trans 'APP-CONFIGURE-FORMAT' %}</strong></p>
     <div role="separator" class="divider divider-xs"></div>
 
     <div class="tabs hash-tabs">
@@ -488,10 +488,10 @@
         <nav class="tab-nav tab-nav-sm" role="tablist">
           <ul>
             <li>
-              <a href="#formatorigin" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#formatorigin" tab-index="0">Formato origen</a>
+              <a href="#formatorigin" id="0" role="tab" aria-selected="true" aria-expanded="true" aria-controls="#formatorigin" tab-index="0">{% trans 'APP-ORIGIN-FORMAT' %}</a>
             </li>
             <li>
-              <a href="#formatoutput" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#formatoutput" tab-index="-1">Formato salida</a>
+              <a href="#formatoutput" id="1" role="tab" aria-selected="false" aria-expanded="false" aria-controls="#formatoutput" tab-index="-1">{% trans 'APP-OUTPUT-FORMAT' %}</a>
             </li>
           </ul>
         </nav>
@@ -504,20 +504,20 @@
 
             <div class="row-value-type">
               <div class="form-group">
-                <label>Cual es el patrón del formato de origen?</label>
+                <label>{% trans 'APP-WHAT-IS-THE-ORIGINAL-PATTERN' %}</label>
                 <div class="input-pattern-view" name="inputPattern"></div>
               </div>
             </div>
 
             <div class="custom-origin-pattern hidden">
               <div class="form-group">
-                <label>Patrón personalizado</label>
+                <label>{% trans 'APP-CUSTOM-PATTERN' %}</label>
                 <input class="form-control" type="text" name="inputCustomPattern">
               </div>
             </div>
 
             <div class="form-group clearfix symbols-locale-option">
-              <label>Indicadores de miles / decimales</label>
+              <label>{% trans 'APP-THOUSANDS-DECIMALS-INDICATORS' %}</label>
 
                 <div class="list-group">
 
@@ -525,7 +525,7 @@
                     <div class="radio">
                       <label>
                         <input type="radio" name="separator" value="symbol" checked></input>
-                        Symbols
+                        {% trans 'APP-SYMBOLS' %}
                       </label>
                     </div>
                   </div>
@@ -534,7 +534,7 @@
                     <div class="radio">
                       <label>
                         <input type="radio" name="separator" value="locale"></input>
-                        Locale
+                        {% trans 'APP-LOCALE' %}
                       </label>
                     </div>
                   </div>
@@ -546,20 +546,20 @@
             <div class="separators">
 
               <div class="form-group">
-                  <label>Thousands indicator</label>
+                  <label>{% trans 'APP-THOUSAND-INDICATOR' %}</label>
                   <select class="form-control thousand-separator" name="thousandSeparator">
-                    <option value="" selected="selected">Select...</option>
-                    <option value=".">. (dot)</option>
-                    <option value=",">, (comma)</option>
+                    <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
+                    <option value=".">. ({% trans 'APP-DOT' %})</option>
+                    <option value=",">, ({% trans 'APP-COMMA' %})</option>
                   </select>
               </div>
 
               <div class="form-group">
-                  <label>Decimal indicator</label>
+                  <label>{% trans 'APP-DECIMAL-INDICATOR' %}</label>
                   <select class="form-control decimal-separator" name="decimalSeparator">
-                    <option value="" selected="selected">Select...</option>
-                    <option value=".">. (dot)</option>
-                    <option value=",">, (comma)</option>
+                    <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
+                    <option value=".">. ({% trans 'APP-DOT' %})</option>
+                    <option value=",">, ({% trans 'APP-COMMA' %})</option>
                   </select>
               </div>
 
@@ -567,9 +567,9 @@
 
             <div class="input-locale hidden">
               <div class="form-group">
-                <label>Localización</label>
+                <label>{% trans 'APP-LOCALE' %}</label>
                 <select class="form-control" name="inputLocale">
-                  <option selected="selected" value="">Select...</option>
+                  <option selected="selected" value="">{% trans 'APP-SELECT-TEXT' %}...</option>
                   <option value="en">English</option>
                   <option value="en_us">English (United States)</option>
                   <option value="es">Spanish (Spain)</option>
@@ -704,23 +704,23 @@
 
             <div class="row-value-type">
               <div class="form-group">
-                <label>Cual es el patrón del formato de salida?</label>
+                <label>{% trans 'APP-WHAT-IS-THE-OUTPUT-PATTERN' %}</label>
                 <div class="display-pattern-view" name="outputPattern"></div>
               </div>
             </div>
 
             <div class="custom-display-pattern hidden">
               <div class="form-group">
-              <label>Patrón personalizado</label>
+              <label>{% trans 'APP-CUSTOM-PATTERN' %}</label>
                 <input class="form-control" type="text" name="outputCustomPattern">
               </div>
             </div>
 
             <div class="number-display-locale">
               <div class="form-group">
-                <label>Localización</label>
+                <label>{% trans 'APP-LOCALE' %}</label>
                 <select class="form-control" name="numberDisplayLocale">
-                  <option value="" selected="selected">Select...</option>
+                  <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
                   <option value="us">United States</option>
                   <option value="es">Spain &amp; Latam</option>
                   <option value="ae">Arab Emirates</option>
@@ -754,9 +754,9 @@
 
             <div class="date-display-locale">
               <div class="form-group">
-                <label>Localización</label>
+                <label>{% trans 'APP-LOCALE' %}</label>
                 <select class="form-control" name="dateDisplayLocale">
-                  <option selected="selected" value="">Select...</option>
+                  <option selected="selected" value="">{% trans 'APP-SELECT-TEXT' %}...</option>
                   <option value="en">English</option>
                   <option value="en_us">English (United States)</option>
                   <option value="es">Spanish (Spain)</option>
@@ -799,7 +799,7 @@
 
 <script type="text/template" id="pattern_template">
   <select class="form-control" name="pattern">
-    <option value="" selected="selected">Select...</option>
+    <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
     <% if (type === 'NUMBER') { %>
       <option value="#,###">#,###</option>
       <option value="$ #,###">$ #,###</option>
@@ -820,24 +820,24 @@
       <option value="mm/dd/yy">mm/dd/yy</option>
       <option value="mm-dd-yy">mm-dd-yy</option>
     <% }%>
-    <option value="custom">Custom</option>
+    <option value="custom">{% trans 'APP-CUSTOMIZE-TEXT' %}</option>
   </select>
 </script>
 
 <script type="text/template" id="date_pattern_template">
   <select class="form-control" name="pattern">
-    <option value="" selected="selected">Select...</option>
+    <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
     <option value="#,###">#,###</option>
     <option value="$ #,###">$ #,###</option>
     <option value="#,###.##">#,###.##</option>
     <option value="$ #,###.##">$ #,###.##</option>
-    <option value="custom">Custom</option>
+    <option value="custom">{% trans 'APP-CUSTOMIZE-TEXT' %}</option>
   </select>
 </script>
 
 <script type="text/template" id="number_output_template">
   <select class="form-control">
-    <option value="" selected="selected">Select...</option>
+    <option value="" selected="selected">{% trans 'APP-SELECT-TEXT' %}...</option>
     <option value="us">United States</option>
     <option value="es">Spain &amp; Latam</option>
     <option value="ae">Arab Emirates</option>

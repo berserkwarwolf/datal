@@ -3357,3 +3357,42 @@ msgstr "Responsive"
 
 msgid "ADMIN-HOME-THEMES-THEME8-TEXT"
 msgstr "Catalog"
+
+msgid "APP-THOUSAND-INDICATOR"
+msgstr "Thousand indicator"
+
+msgid "APP-DECIMAL-INDICATOR"
+msgstr "Decimal indicator"
+
+msgid "APP-SYMBOLS"
+msgstr "Symbols"
+
+msgid "APP-LOCALE"
+msgstr "Locale"
+
+msgid "APP-CUSTOM-PATTERN"
+msgstr "Custom pattern"
+
+msgid "APP-CONFIGURE-FORMAT"
+msgstr "Configure formats"
+
+msgid "APP-ORIGIN-FORMAT"
+msgstr "Origin format"
+
+msgid "APP-OUTPUT-FORMAT"
+msgstr "Output format"
+
+msgid "APP-THOUSANDS-DECIMALS-INDICATORS"
+msgstr "Decimals / Thousands indicators"
+
+msgid "APP-WHAT-IS-THE-ORIGINAL-PATTERN"
+msgstr "What is the original pattern?"
+
+msgid "APP-WHAT-IS-THE-OUTPUT-PATTERN"
+msgstr "What is the output pattern?"
+
+msgid "APP-DOT"
+msgstr "dot"
+
+msgid "APP-COMMA"
+msgstr "comma"
