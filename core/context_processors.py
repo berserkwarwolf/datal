@@ -17,7 +17,7 @@ def request_context(request):
         'APIPROTOCOL': 'http',
     }
 
-    f hasattr(request, 'account'):
+    if hasattr(request, 'account'):
         account = request.account
         msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
         apiprotocol = 'https' if account.get_preference('account.api.https').lower() == 'true' else 'http'
