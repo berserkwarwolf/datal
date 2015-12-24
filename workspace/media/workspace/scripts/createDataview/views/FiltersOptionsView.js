@@ -19,6 +19,11 @@ var FiltersOptionsView = Backbone.View.extend({
         var existingColumns = this.collection.map(function (model) {
             return Number(model.get('column'));
         });
+        var editingCol = Number(this.model.get('column'));
+        if (!_.isUndefined(editingCol)) {
+            existingColumns.splice(existingColumns.indexOf(editingCol), 1);
+        }
+
         var availableCols = _.difference(_.range(0, this.totalCols), existingColumns);
         var columns = _.map(availableCols, function (number) {
                 return {
@@ -35,7 +40,6 @@ var FiltersOptionsView = Backbone.View.extend({
     },
 
     onClickBack: function () {
-        this.collection.reset();
         this.stateModel.set('mode', 'data');
     },
 
