@@ -3370,10 +3370,10 @@ msgid "APP-CONFIGURE-FORMAT"
 msgstr "Configurar formatos"
 
 msgid "APP-ORIGIN-FORMAT"
-msgstr "Formato de origen"
+msgstr "Formato origen"
 
 msgid "APP-OUTPUT-FORMAT"
-msgstr "Formato de salida"
+msgstr "Formato salida"
 
 msgid "APP-THOUSANDS-DECIMALS-INDICATORS"
 msgstr "Indicadores de decimales / miles"
