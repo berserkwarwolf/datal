@@ -330,7 +330,16 @@
         <p>{% trans 'APP-FILTERS-TEXT' %}</p>
         <ul>
         <% _.each(filters, function (item) { %>
-          <li>{% trans 'APP-COLUMN-TEXT' %} <%= item.excelCol %> <a class="btn-clear" data-col="<%= item.column %>" data-mode="filter">x</a></li>
+          <li>{% trans 'APP-COLUMN-TEXT' %} <%= item.excelCol %>
+            <a class="btn-edit" data-col="<%= item.column %>" data-mode="filter">
+              <!-- <span class="icon icon-edit"></span> -->
+              editar
+            </a>
+            <a class="btn-clear" data-col="<%= item.column %>" data-mode="filter">
+              <!-- <span class="icon icon-delete"></span> -->
+              x
+            </a>
+          </li>
         <% }); %>
         </ul>
       </div>
@@ -341,7 +350,16 @@
         <p>{% trans 'APP-COL-FORMAT-TEXT' %}</p>
         <ul>
         <% _.each(formats, function (item) { %>
-          <li>{% trans 'APP-COLUMN-TEXT' %} <%= item.excelCol %> <a class="btn-clear" data-col="<%= item.column %>" data-mode="format">x</a></li>
+          <li>{% trans 'APP-COLUMN-TEXT' %} <%= item.excelCol %>
+            <a class="btn-edit" data-col="<%= item.column %>" data-mode="format">
+              <!-- <span class="icon icon-edit"></span> -->
+              editar
+            </a>
+            <a class="btn-clear" data-col="<%= item.column %>" data-mode="format">
+              <!-- <span class="icon icon-delete"></span> -->
+              x
+            </a>
+          </li>
         <% }); %>
         </ul>
       </div>
