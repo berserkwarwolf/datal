@@ -12,7 +12,6 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from core.http import get_domain_with_protocol
 from core.models import DataStream, Account, DataStreamRevision
 from core.helpers import RequestProcessor
-from core.decorators import datal_cache_page
 from core.choices import ChannelTypes
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
