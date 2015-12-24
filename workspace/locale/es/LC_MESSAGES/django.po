@@ -3237,7 +3237,6 @@ msgstr "Editar descripción"
 msgid "APP-EDIT-VISUALIZATION-TEXT"
 msgstr "Editar visualización"
 
-<<<<<<< HEAD
 msgid "WEBSERVICE-ORIGINALARG-TEXT"
 msgstr "Nombre original"
 
