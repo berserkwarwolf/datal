@@ -420,7 +420,7 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.search.tips', 'account.search.tips')
 
     # TODO: Mover al plugin
-    ,('account.featured.dashboards', 'account.featured.dashboards')
+    ,('account.featured.dashboards', 'account.featured.dashboards'),
 
     # https for microsites or api
     ('account.microsite.https', 'account.microsite.https'),
