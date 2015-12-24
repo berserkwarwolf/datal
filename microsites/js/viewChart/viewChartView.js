@@ -305,30 +305,30 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 	},
 
 	permalinkHelper: function(){
-		// var permalink = this.model.attributes.publicUrl,
-		// self = this;
-		// $('#id_permalink').val(permalink);
+		var permalink = this.model.attributes.publicUrl,
+		self = this;
+		$('#id_permalink').val(permalink);
 
-		// if (typeof(BitlyClient) != 'undefined') {
-		// 	BitlyClient.shorten( permalink, function(pData){
+		if (typeof(BitlyClient) != 'undefined') {
+			BitlyClient.shorten( permalink, function(pData){
 
-		// 		var response,
-		// 		  shortUrl;
+				var response,
+				  shortUrl;
 
-		// 		for(var r in pData.results) {
-		// 		response = pData.results[r];
-		// 		break;
-		// 		}
+				for(var r in pData.results) {
+				response = pData.results[r];
+				break;
+				}
 
-		// 		shortUrl = response['shortUrl'];
+				shortUrl = response['shortUrl'];
 
-		// 		if(shortUrl){
-		// 		  self.model.attributes.shortUrl = shortUrl;
-		// 		  $('#id_permalink').val(shortUrl);
-		// 		}
+				if(shortUrl){
+				  self.model.attributes.shortUrl = shortUrl;
+				  $('#id_permalink').val(shortUrl);
+				}
 		
-		// 	});
-		// }
+			});
+		}
 	},
 
 	onInputClicked : function(event) {

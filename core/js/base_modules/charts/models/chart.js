@@ -216,21 +216,12 @@ charts.models.Chart = Backbone.Model.extend({
 
     serializeServerExcelRange: function(selection){
         if (_.isUndefined(selection)) return '';
-        var range = selection.split(":");
-        var left = range[0];
-        var right = range[1];
+        var range = DataTableUtils.excelToRange(selection);
 
-        // Columna completa o celda
-        if(left == right){
-            var index = left.search(/\d/g);
-
-            // Columna completa
-            if(index == -1){
-                selection = 'Column:' + left;
-            }
-        }
-        else{
-            // TO-DO: Validar que no sea un rango de columnas completas
+        if (range.from.row === -1 && range.to.row === -1) {
+            selection = _.map(_.range(range.from.col, range.to.col + 1), function (col) {
+                return 'Column:' + DataTableUtils.intToExcelCol(col + 1);
+            }).join(',');
         }
 
         return selection;

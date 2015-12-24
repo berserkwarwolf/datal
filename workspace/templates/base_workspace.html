@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n extra_tags compress staticfiles sass_tags core_components components %}
+{% load i18n extra_tags compress staticfiles sass_tags core_components components plugins_tags %}
 
 {% block css_includes %}
 		{% compress css %}
@@ -131,6 +131,8 @@
 
 									<!-- ODS Button -->
 									<a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-view-site icon-right"></span></a>
+
+									{% plugins_call 'workspace_header' %}
 
 								</div>
 

@@ -218,7 +218,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {ids: resourceQuery, resources:[resourceType]},				
+					data: {ids: resourceQuery, resources:["ds","vz"]},				
 				})).done( function(data){
 					$('#id_theme4nameSuggest').taggingSources({
 						source:function(request, response) {
@@ -264,7 +264,7 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {ids: resourceQuery, resources:[resourceType]},				
+					data: {ids: resourceQuery, resources:["ds","vz"]},				
 				})).done( function(data){
 					$('#id_theme4nameLinkSuggest').taggingSources({
 						source:function(request, response) {

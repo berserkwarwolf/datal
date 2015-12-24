@@ -2179,7 +2179,7 @@ msgid "APP-SETTINGS-TEXT"
 msgstr "Configuraciones"
 
 msgid "APP-FEEDBACK-TEXT"
-msgstr "Feedback"
+msgstr "Reportar problema"
 
 msgid "LANDINGPAGE-SECTION-TITLE"
 msgstr "Bienvenido"

@@ -79,6 +79,7 @@ html, body{background:url(/static/microsites/images/microsites/bg_body.gif) repe
 .tooltip:after{content:"";width:0;height:0;padding:0;border:0;border-top:10px solid transparent;border-bottom:10px solid transparent;border-right:10px solid #343434;border-right-color:rgba(30,30,30,.9);position:absolute;top:50%;margin-top:-10px;left:-10px;}
 .tooltip > li{}
 .tooltip > li a{color:#fff;font-size:12px;white-space:nowrap;padding:0 7px;height:30px;line-height:30px;display:block;}
+.tooltip > li span{color:#fff;}
 .tooltip > li a:hover{cursor:pointer;text-decoration:none;background:#111;background:rgba(0,0,0,.7);
 	-webkit-border-radius:3px;
 	   -moz-border-radius:3px;
