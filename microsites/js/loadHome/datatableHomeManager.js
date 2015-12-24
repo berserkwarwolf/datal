@@ -50,7 +50,6 @@ var DatatableHomeManager = DatatableManager.extend({
             className = 'ic_Chart';
         }
 
-
         var templ = "<tr id='id_<%= revision.id %>'>";
         
         templ += "<td class='viewInfo'>\
@@ -64,8 +63,11 @@ var DatatableHomeManager = DatatableManager.extend({
 				    + "</span></td>";
         templ +="</tr>";
 
+        var tpl = _.template(templ); // , {variable: 'revision'});
+        var html = tpl({revision: msg});
+        return html;
         // return _.template(templ, {variable: 'revision'})(msg);
-        return _.template(templ, {revision: msg});
+        // return _.template(templ, {revision: msg});
     },
     drawRow: function(msg) {
         $('table tbody', this.get("selector")).append(this.getRowTemplate(msg));
