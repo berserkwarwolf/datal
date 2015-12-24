@@ -13,8 +13,17 @@ def request_context(request):
         'DOMAINS': settings.DOMAINS,
         'DOC_API_URL': settings.DOC_API_URL,
         'APPLICATION_DETAILS': settings.APPLICATION_DETAILS,
+        'MSPROTOCOL': 'http',
+        'APIPROTOCOL': 'http',
     }
-                  
+
+    f hasattr(request, 'account'):
+        account = request.account
+        msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+        apiprotocol = 'https' if account.get_preference('account.api.https').lower() == 'true' else 'http'
+        my_settings['MSPROTOCOL'] = msprotocol
+        my_settings['APIPROTOCOL'] = apiprotocol
+        
     d['settings'] = my_settings
     d['preference'] = request.preferences
     if hasattr(request, 'stats'):

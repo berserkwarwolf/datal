@@ -5,6 +5,7 @@ from django.db.models import Q
 from core.choices import (SourceImplementationChoices, 
     SOURCE_IMPLEMENTATION_EXTENSION_CHOICES,
     SOURCE_IMPLEMENTATION_MIMETYPE_CHOICES)
+from core.models import Account
 
 class JSONHttpResponse(HttpResponse):
     """ A custom HttpResponse that handles the headers for our JSON responses """
@@ -18,12 +19,10 @@ def get_domain_with_protocol(app, protocol = 'http'):
     return protocol + '://' + settings.DOMAINS[app]
 
 def get_domain(account_id):
-    from core.models import Preference
-    try:
-        account_domain = Preference.objects.values('value').get(key='account.domain', account = account_id)['value']
-        account_domain = 'http://' + account_domain
-    except Preference.DoesNotExist:
-        account_domain = get_domain_with_protocol('microsites')
+    account = Account.objects.get(pk=account_id)
+    protocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    account_domain = account.get_preference('account.domain')
+    account_domain = '{}://{}'.format(protocol, account_domain)
     return account_domain
 
 def get_domain_by_request(request, default_domain = ''):
