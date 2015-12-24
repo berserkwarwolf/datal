@@ -155,6 +155,6 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
         return self.order_queryset(answer)
 
-    @cache_response(60 * 5, cache_errors=False, key_func=CacheKeyConstructor())
+    #@cache_response(60 * 5, cache_errors=False, key_func=CacheKeyConstructor())
     def list(self, request, *args, **kwargs):
         return super(MultipleResourceViewSet, self).list(request, *args, **kwargs)
