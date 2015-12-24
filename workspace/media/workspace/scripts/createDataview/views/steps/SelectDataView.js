@@ -83,14 +83,14 @@ var SelectDataView = Backbone.View.extend({
         this.$('.headers-options-view').append(this.headersOptionsView.$el);
     },
 
-    attachFiltersView: function () {
+    attachFiltersView: function (model) {
         this.destroyFiltersView();
 
         this.filtersOptionsView = new FiltersOptionsView({
             stateModel: this.internalState,
             collection: this.dataviewModel.filters,
             totalCols: this.dataviewModel.get('totalCols'),
-            model: new FilterModel()
+            model: model || new FilterModel()
         });
         this.filtersOptionsView.render();
         this.$('.headers-options-view').append(this.filtersOptionsView.$el);
@@ -103,14 +103,14 @@ var SelectDataView = Backbone.View.extend({
         }
     },
 
-    attachFormatsView: function () {
+    attachFormatsView: function (model) {
         this.destroyFormatsView();
 
         this.formatsView = new FormatsView({
             stateModel: this.internalState,
             collection: this.dataviewModel.formats,
             totalCols: this.dataviewModel.get('totalCols'),
-            model: new ColumnModel()
+            model: model || new ColumnModel()
         });
         this.formatsView.render();
         this.$('.headers-options-view').append(this.formatsView.$el);
@@ -235,18 +235,20 @@ var SelectDataView = Backbone.View.extend({
     },
 
     onChangeMode: function (model, value) {
+        var currentlyEditingModel = model.get('currently-editing-model');
         if (value === 'headers') {
             this.selectionView.hide();
             this.headersOptionsView.show();
         } else if (value === 'add-filter') {
             this.disableSelection();
             this.selectionView.hide();
-            this.attachFiltersView();
+            this.attachFiltersView(currentlyEditingModel);
         } else if (value === 'set-formats') {
             this.disableSelection();
             this.selectionView.hide();
-            this.attachFormatsView();
+            this.attachFormatsView(currentlyEditingModel);
         } else {
+            model.unset('currently-editing-model');
             this.enableSelection();
             this.destroyFiltersView();
             this.destroyFormatsView();
