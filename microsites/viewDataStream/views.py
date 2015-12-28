@@ -67,11 +67,11 @@ def download(request, id, slug):
     else:
         url = active_datastore.build_url(
             request.bucket_name,
-            datastream.end_point.replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
+            datastream['end_point'].replace("file://", ""),
+            {'response-content-disposition': 'attachment; filename={0}'.format(datastream['filename'].encode('utf-8'))}
         )
 
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream.impl_type))
+        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream['impl_type']))
         redirect = HttpResponse(status=302, mimetype=content_type)
         redirect['Location'] = url
 
