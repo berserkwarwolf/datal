@@ -92,6 +92,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             category_id=dataset_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            end_point_full_url=dataset_revision.get_endpoint_full_url(),
             filename=dataset_revision.filename,
             impl_details=dataset_revision.impl_details,
             impl_type=dataset_revision.impl_type,
