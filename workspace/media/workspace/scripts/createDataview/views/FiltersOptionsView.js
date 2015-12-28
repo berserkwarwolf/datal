@@ -1,27 +1,33 @@
-var FiltersOptionsView = Backbone.View.extend({
+var FiltersOptionsView = Backbone.Epoxy.View.extend({
+
     events: {
         'click a.btn-clear': 'onClickClear',
         'click button.btn-back': 'onClickBack',
         'click button.btn-ok': 'onClickOk',
-        'change select.select-column': 'onChangeColumn',
         'change select.select-operator': 'onChangeOperator',
         'change select.select-value-type': 'onChangeValueType',
         'change input:text': 'onChangeInput'
+    },
+
+    bindings: {
+        "select.select-column": "value:column, events:['change']"
     },
 
     initialize: function (options) {
         this.template = _.template( $('#filters_options_template').html() );
         this.stateModel = options.stateModel;
         this.totalCols = options.totalCols;
+
+        this.listenTo(this.model, 'change:column', this.onChangeColumn, this);
     },
 
     render: function () {
         var existingColumns = this.collection.map(function (model) {
             return Number(model.get('column'));
         });
-        var editingCol = Number(this.model.get('column'));
+        var editingCol = this.model.get('column');
         if (!_.isUndefined(editingCol)) {
-            existingColumns.splice(existingColumns.indexOf(editingCol), 1);
+            existingColumns.splice(existingColumns.indexOf(Number(editingCol)), 1);
         }
 
         var availableCols = _.difference(_.range(0, this.totalCols), existingColumns);
@@ -34,9 +40,10 @@ var FiltersOptionsView = Backbone.View.extend({
 
         this.$el.html(this.template({
             columns: columns,
-            filter: this.model.toJSON(),
+            column: this.model.toJSON(),
             state: this.stateModel.toJSON()
         }));
+        this.applyBindings();
     },
 
     onClickBack: function () {
@@ -52,14 +59,11 @@ var FiltersOptionsView = Backbone.View.extend({
         this.stateModel.set('mode', 'data');
     },
 
-    onChangeColumn: function (e) {
-        var value = $(e.currentTarget).val();
+    onChangeColumn: function (model, value) {
         if (value !== '') {
-            this.model.set('column', value);
             this.model.set('excelCol', DataTableUtils.intToExcelCol(Number(value) + 1));
             this.$('.row-operator').removeClass('hidden');
         } else {
-            this.model.unset('column');
             this.model.unset('excelCol');
             this.$('.row-operator').addClass('hidden');
             this.$('.row-operator').addClass('hidden');
