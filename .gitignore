@@ -78,3 +78,4 @@ docs/_build/
 node_modules/
 components/bower_components/
 plugins/
+components/
