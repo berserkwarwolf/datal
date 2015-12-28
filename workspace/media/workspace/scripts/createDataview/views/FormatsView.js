@@ -53,6 +53,20 @@ var FormatsView = Backbone.Epoxy.View.extend({
         this.attachPatternViews(this.model.get('type'));
         this.applyBindings();
 
+        // Set Initial Values
+        var separatorType = this.model.get('separatorType');
+        var type = this.model.get('type');
+        if (type === 'NUMBER' && !_.isUndefined(separatorType)) {
+            this.$('.separators').toggleClass('hidden', separatorType === 'locale');
+            this.$('input:radio[name="separator"][value="' + separatorType + '"]').prop('checked', true);
+        }
+        if (type === 'NUMBER' && separatorType === 'locale' || type === 'DATE') {
+            this.$('.input-locale').removeClass('hidden');
+        } else {
+            this.$('.input-locale').addClass('hidden');
+        };
+
+
         Backbone.Validation.bind(this, {
             valid: function (view, attr, selector) {
                 view.setIndividualError(view.$('[name=' + attr + ']'), attr, '');
@@ -86,6 +100,10 @@ var FormatsView = Backbone.Epoxy.View.extend({
         }, this);
         this.displayPatternView.render();
         this.inputPatternView.render();
+
+        // Set Initial states
+        this.displayPatternView.setValue(this.model.get('outputPattern'));
+        this.inputPatternView.setValue(this.model.get('inputPattern'));
     },
 
     destroyChildView: function (childViewName) {

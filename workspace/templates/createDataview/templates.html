@@ -534,7 +534,7 @@
               </div>
             </div>
 
-            <div class="form-group clearfix symbols-locale-option">
+            <div class="form-group clearfix symbols-locale-option<%= (!_.isUndefined(column.type) && column.type !== 'NUMBER')? ' hidden': '' %>">
               <label>{% trans 'APP-THOUSANDS-DECIMALS-INDICATORS' %}</label>
 
                 <div class="list-group">
@@ -561,7 +561,7 @@
 
             </div>
 
-            <div class="separators">
+            <div class="separators<%= (!_.isUndefined(column.type) && column.type !== 'NUMBER')? ' hidden': '' %>">
 
               <div class="form-group">
                   <label>{% trans 'APP-THOUSAND-INDICATOR' %}</label>
@@ -734,7 +734,7 @@
               </div>
             </div>
 
-            <div class="number-display-locale">
+            <div class="number-display-locale<%= (!_.isUndefined(column.type) && column.type !== 'NUMBER')? ' hidden': '' %>">
               <div class="form-group">
                 <label>{% trans 'APP-LOCALE' %}</label>
                 <select class="form-control" name="numberDisplayLocale">
@@ -770,7 +770,7 @@
               </div>
             </div>
 
-            <div class="date-display-locale">
+            <div class="date-display-locale<%= (!_.isUndefined(column.type) && column.type !== 'DATE')? ' hidden': '' %>">
               <div class="form-group">
                 <label>{% trans 'APP-LOCALE' %}</label>
                 <select class="form-control" name="dateDisplayLocale">

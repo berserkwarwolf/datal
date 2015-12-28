@@ -19,5 +19,9 @@ var PatternView = Backbone.View.extend({
     onChange: function (e) {
         var value = $(e.currentTarget).val();
         this.trigger('change', value);
+    },
+
+    setValue: function (value) {
+        this.$('select[name=pattern]').val(value);
     }
 })
