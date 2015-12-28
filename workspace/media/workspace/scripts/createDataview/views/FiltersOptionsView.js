@@ -5,13 +5,13 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
         'click button.btn-back': 'onClickBack',
         'click button.btn-ok': 'onClickOk',
 
-        'change select.select-value-type': 'onChangeValueType',
         'change input:text': 'onChangeInput'
     },
 
     bindings: {
         "select.select-column": "value:column, events:['change']",
-        "select.select-operator": "value:operator, events:['change']"
+        "select.select-operator": "value:operator, events:['change']",
+        "select.select-value-type": "value:type, events:['change']"
     },
 
     initialize: function (options) {
@@ -21,6 +21,7 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
 
         this.listenTo(this.model, 'change:column', this.onChangeColumn, this);
         this.listenTo(this.model, 'change:operator', this.onChangeOperator, this);
+        this.listenTo(this.model, 'change:type', this.onChangeValueType, this);
     },
 
     render: function () {
@@ -85,17 +86,13 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
         }
     },
 
-    onChangeValueType: function (e) {
-        var value = $(e.currentTarget).val();
+    onChangeValueType: function (model, value) {
         if (value === '') {
             this.$('.row-operator').removeClass('hidden');
-            this.model.unset('type');
         } else if (value === 'fixed') {
-            this.model.set('type', 'fixed');
             this.$('.row-fixed-value').removeClass('hidden');
             this.$('.row-parameter').addClass('hidden');
         } else if (value === 'parameter') {
-            this.model.set('type', 'parameter');
             this.$('.row-fixed-value').addClass('hidden');
             this.$('.row-parameter').removeClass('hidden');
         }

@@ -3,7 +3,8 @@ var FilterModel = Backbone.Epoxy.Model.extend({
 
     defaults: {
         column: undefined,
-        operator: undefined
+        operator: undefined,
+        type: undefined
     },
 
 });
