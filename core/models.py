@@ -765,8 +765,10 @@ class Visualization(GuidModel):
 
 class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
-    datastream_revision = models.ForeignKey('DataStreamRevision',
-                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
+
+    datastream = models.ForeignKey('DataStream',
+                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
+
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     lib = models.CharField(max_length=10, choices=choices.VISUALIZATION_LIBS)
     impl_details = models.TextField(blank=True)

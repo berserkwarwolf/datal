@@ -51,7 +51,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             )
 
         visualization_rev = VisualizationRevision.objects.create(
-            datastream_revision=datastream_rev,
+            datastream=datastream_rev.datastream,
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
@@ -95,12 +95,12 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                 visualization__id=visualization_id
             )
 
-        tags = visualization_revision.datastream_revision.tagdatastream_set.all().values(
+        tags = visualization_revision.datastream.last_revision.tagdatastream_set.all().values(
             'tag__name',
             'tag__status',
             'tag__id'
         )
-        sources = visualization_revision.datastream_revision.sourcedatastream_set.all().values(
+        sources = visualization_revision.datastream.last_revision.sourcedatastream_set.all().values(
             'source__name',
             'source__url',
             'source__id'
@@ -108,7 +108,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         parameters = []
 
         # Get category name
-        category = visualization_revision.datastream_revision.category.categoryi18n_set.get(language=language)
+        category = visualization_revision.datastream.last_revision.category.categoryi18n_set.get(language=language)
         visualizationi18n = VisualizationI18n.objects.get(
             visualization_revision=visualization_revision,
             language=language
@@ -145,7 +145,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
-            datastream_revision_id=visualization_revision.datastream_revision_id,
+            datastream_revision_id=visualization_revision.datastream.last_revision_id,
             filename='', # nice to have
             cant=VisualizationRevision.objects.filter(visualization__id=visualization_revision.visualization.id).count(),
         )

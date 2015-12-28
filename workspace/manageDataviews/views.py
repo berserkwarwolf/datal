@@ -13,7 +13,6 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.exceptions import DataStreamNotFoundException, DatasetNotFoundException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core.decorators import datal_cache_page
 from core.signals import datastream_changed, datastream_removed, datastream_unpublished, datastream_rev_removed
 from core.utils import DateTimeEncoder
 from workspace.decorators import *
