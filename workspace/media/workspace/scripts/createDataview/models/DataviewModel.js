@@ -179,6 +179,19 @@ var DataviewModel = Backbone.Model.extend({
     },
 
     parse: function (response) {
+        if (response.fType === 'TEXT') {
+            response = {
+                "fLength":1,
+                "fType":"ARRAY",
+                "fTimestamp":response.fTimestamp,
+                "fArray":[{
+                    "fStr":response.fStr,
+                    "fType":"TEXT"
+                }],
+                "fRows":1,
+                "fCols":1
+            };
+        }
         var columns = _.first(response.fArray, response.fCols);
 
         var rows = _.map(_.range(0, response.fRows), function (i) {
