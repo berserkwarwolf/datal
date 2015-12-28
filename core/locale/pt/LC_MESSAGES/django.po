@@ -852,3 +852,6 @@ msgstr "Não acesso a visualização"
 
 msgid "EXCEPTION-DESCRIPTION-VISUALIZATION-NOT-ACCESS"
 msgstr "Sua conta não tem acesso à visualização"
+
+msgid "EXCEPTION-DESCRIPTION-VIZUALIZATION-PARENT-NOT-PUBLISHED"
+msgstr "Você deve publicar a vista associada"
