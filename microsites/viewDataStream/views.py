@@ -55,24 +55,3 @@ def embed(request, guid):
     fixed_column = request.REQUEST.get('fixed_column', False)
 
     return render_to_response('viewDataStream/embed.html', locals())
-
-
-@require_http_methods(["GET"])
-def download(request, id, slug):
-    """ download internal dataset file """
-    try:
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_id=id, published=True)
-    except:
-        raise DataStreamDoesNotExist
-    else:
-        url = active_datastore.build_url(
-            request.bucket_name,
-            datastream['end_point'].replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(datastream['filename'].encode('utf-8'))}
-        )
-
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream['impl_type']))
-        redirect = HttpResponse(status=302, mimetype=content_type)
-        redirect['Location'] = url
-
-        return redirect

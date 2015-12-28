@@ -41,7 +41,7 @@
 
           {% elif datastream.collect_type|collect_type_nice == 'SELF-PUBLISH' %}
              
-              <a rel="nofollow" href="{% url "viewDataStream.download" datastream.datastream_id datastream.slug %}" id="id_downloadLink" class="icon FILE {{ datastream.impl_type|impl_type_nice }}" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}">{% if auth_manager.language == 'es' %} {% trans 'APP-FILE-TEXT' %} {% endif %} {{ datastream.impl_type|impl_type_nice }} {% if auth_manager.language == 'en' %} {% trans 'APP-FILE-TEXT' %} {% endif %}</a>
+              <a rel="nofollow" href="{% url "manageDatasets.download" datastream.dataset_id datastream.slug %}" id="id_downloadLink" class="icon FILE {{ datastream.impl_type|impl_type_nice }}" title="{% trans 'APP-DOWNLOADDATASET-TEXT' %}">{{datastream.filename}}</a>
 
           {% elif datastream.collect_type|collect_type_nice == 'WEBSERVICE' %}
 
