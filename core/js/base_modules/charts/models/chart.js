@@ -115,6 +115,14 @@ charts.models.Chart = Backbone.Model.extend({
 
             });
             if (data.type === 'mapchart') {
+
+                // asegurar bounds
+                if (! res.chart.bounds)  {
+                    var div = '#id_visualizationResult'; // (?)
+                    center = [0, 0]; // (?)
+                    res.chart.bounds = this.getBoundsByCenterAndZoom(div, center, res.chart.zoom)
+                    }
+                
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.chart.latitudSelection),
                     range_lon: this.parseColumnFormat(res.chart.longitudSelection),
@@ -130,6 +138,22 @@ charts.models.Chart = Backbone.Model.extend({
             };
         }
         this.set(data);
+    },
+
+    /* obtener los bound dados el centro, el zoom y el element donde se mostrara*/
+    getBoundsByCenterAndZoom: function(div, center, zoom){
+            var d = $(div);
+            var zf = Math.pow(2, zoom) * 2;
+            var dw = d.width()  / zf;
+            var dh = d.height() / zf;
+
+            var map_bounds = [];
+            map_bounds[0] = center[0] + dh; //NE lat
+            map_bounds[1] = center[1] + dw; //NE lng
+            map_bounds[2] = center[0] - dh; //SW lat
+            map_bounds[3] = center[1] - dw; //SW lng
+
+            return map_bounds;
     },
 
     bindDataModel: function () {
