@@ -77,7 +77,7 @@ class ActivityStreamDAO:
         activities = []
         users = {} # avoid duplicated sql queries
         for h in pipeline.execute():
-            user_id = h['user_id']
+            user_id = h.get('user_id', None)
             if not users.get(user_id, None):
                 user = User.objects.get(pk=user_id)
                 users[user_id] = user
