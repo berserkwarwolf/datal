@@ -8,7 +8,7 @@ import re
 
 class EngineRenderer(renderers.BaseRenderer):
     def render(self, data, media_type=None, renderer_context=None):
-        return data
+        return bytes(data.encode('utf-8'))
 
 class CSVEngineRenderer(EngineRenderer):
     media_type="text/csv"
