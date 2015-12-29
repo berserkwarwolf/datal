@@ -20,7 +20,7 @@ def get_domain_with_protocol(app, protocol = 'http'):
 
 def get_domain(account_id):
     account = Account.objects.get(pk=account_id)
-    protocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    protocol = 'https' if account.get_preference('account.microsite.https') else 'http'
     account_domain = account.get_preference('account.domain')
     account_domain = '{}://{}'.format(protocol, account_domain)
     return account_domain
