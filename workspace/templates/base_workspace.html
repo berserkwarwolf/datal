@@ -212,6 +212,12 @@
 		Configuration.APPLICATION_DETAILS.website = "{{ settings.APPLICATION_DETAILS.website }}";
 		Configuration.APPLICATION_DETAILS.mail = "{{ settings.APPLICATION_DETAILS.mail }}";
 
+		{% if preferences.account_microsite_https %}
+			Configuration.microsite_protocol = 'https://';
+		{% else %}
+			Configuration.microsite_protocol = 'http://'
+		{% endif %}
+
 		csrfmiddlewaretoken = '{{ csrf_token }}';
 
 		function csrfSafeMethod(method) {
