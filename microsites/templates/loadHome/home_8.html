@@ -10,7 +10,7 @@
 <script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
 {% endif %}
 
-<script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
+<script src="{% static 'underscore/underscore-min.js' %}?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/backbone100/backbone-min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/libs/epoxy/backbone.epoxy.min.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/loadHome/theme8Model.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -45,7 +45,7 @@
 
         {% if resources_slider %}
         <!-- COLUMN - Right -->
-        <div class="CR FR relative{% if resources_slider %} paddingSlider{% endif %}">
+        <div class="CR FR relative">
 
             {% if resources_slider %}
             <!-- SLIDER CONTAINER -->  
