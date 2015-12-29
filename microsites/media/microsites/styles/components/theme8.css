@@ -24,7 +24,7 @@
 .theme8 .buttons input.search_datatable{border:0 none;outline:0 none;position:absolute;top:64px;width:400px;right:25px;height:35px;padding-left:15px;border-radius:0;background:#FFF url(/static/workspace/images/common/ic_search.png) no-repeat 375px 11px;}
 
 /* Buttons section */
-.theme8 .buttons{background:#f3f3f3;margin-top:30px;padding:40px 0 60px 0;}
+.theme8 .buttons{background:#f3f3f3;margin-top:20px;padding:40px 0 60px 0;}
 .theme8 .buttons-grid{clear:both;display:block;float:left;width:100%;}
 .theme8 .buttons-grid li{padding:10px 20px;margin-bottom:30px;height:190px;position:relative;text-align:center;border-radius:3px;cursor:pointer;}
 .theme8 .buttons-grid li:active{-ms-transform: scale(0.99,0.99);-webkit-transform: scale(0.99,0.99);transform: scale(0.99,0.99);}
@@ -70,7 +70,7 @@ body,
 .miniFooterJunar .w960{padding-left:30px;padding-right:30px;}
 .headerAuto form{right:10px !important;margin-top:inherit !important;top:38px !important;}
 
-.homeContent{padding-bottom:0 !important;}
+.homeContent{padding-bottom:0 !important;padding-top:50px;}
 
 .container,
 .columns .sidebar{position:relative;}
