@@ -15,6 +15,7 @@ from core.utils import slugify
 from core import choices
 from core import managers
 from core.cache import Cache
+from core.lib.datastore import *
 
 
 logger = logging.getLogger(__name__)
@@ -619,6 +620,10 @@ class DatasetRevision(RevisionModel):
                 settings.AWS_BUCKET_NAME,
                 self.end_point.replace('file://', '')
             )
+
+        if settings.USE_DATASTORE == 's3':
+            return active_datastore.generate_url(settings.AWS_BUCKET_NAME, key=self.end_point.replace('file://', ''))
+
         return self.end_point
 
     def is_pending_review(self):
