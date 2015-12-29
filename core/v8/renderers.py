@@ -32,7 +32,7 @@ class XLSNonRedirectEngineRenderer(JSONRenderer):
     format = "xls"
 
 class XMLEngineRenderer(EngineRenderer):
-    media_type="text/xml"
+    media_type="application/xml"
     format = "xml"
 
 class HTMLEngineRenderer(EngineRenderer):
