@@ -38,7 +38,7 @@ def view(request, dataset_id, slug):
     return render_to_response('viewDataset/index.html', locals())
 
 @require_http_methods(["GET"])
-def download(request, id, slug):
+def download(request, dataset_id, slug):
     """ download internal dataset file """
     try:
         dataset = DatasetDBDAO().get(request.auth_manager.language, dataset_id=id, published=True)
