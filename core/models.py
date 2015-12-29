@@ -620,6 +620,7 @@ class DatasetRevision(RevisionModel):
                 settings.AWS_BUCKET_NAME,
                 self.end_point.replace('file://', '')
             )
+
         if settings.USE_DATASTORE == 's3':
             return active_datastore.generate_url(settings.AWS_BUCKET_NAME, key=self.end_point.replace('file://', ''))
 

@@ -2,20 +2,12 @@
 {% load i18n humanize extra_tags core_components compress staticfiles %}
 
 {% block themeMeta %}
-{% if datastreams %}
+{% if resources_slider %}
 <script type="text/javascript" src="/js_core/plugins/jquery.easing.1.3.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_core/plugins/jquery.carouFredSel-5.5.0-packed.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/loadHome/sliderThemes.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script type="text/javascript" src="/js_microsites/loadHome/slider.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="/js_core/base_modules/chart_manager/junarCharts.js?id={{settings.VERSION_JS_CSS}}"></script>    
 <script type="text/javascript" src="/js_core/plugins/markerclusterer.js?id={{settings.VERSION_JS_CSS}}"></script>
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<script type="text/javascript">
-  google.load('visualization', '1', {
-    packages: ['corechart','geomap']
-  });
-</script>
 {% endif %}
 
 <script type="text/javascript" src="/js_core/libs/underscore151/underscore-min.js?id={{settings.VERSION_JS_CSS}}"></script>
@@ -38,7 +30,7 @@
     </div>
     {% endif %}
 
-    {% if config.mainSection or datastreams %}
+    {% if config.mainSection or resources_slider %}
     <!-- HOME COLUMNS -->
     <div class="homeColumns clearfix">
 
@@ -51,11 +43,11 @@
         </div>
         {% endif %}
 
-        {% if datastreams %}
+        {% if resources_slider %}
         <!-- COLUMN - Right -->
-        <div class="CR FR relative{% if datastreams %} paddingSlider{% endif %}">
+        <div class="CR FR relative{% if resources_slider %} paddingSlider{% endif %}">
 
-            {% if datastreams %}
+            {% if resources_slider %}
             <!-- SLIDER CONTAINER -->  
             <div class="sliderContainer">
                 <div class="sliderWrapper">
