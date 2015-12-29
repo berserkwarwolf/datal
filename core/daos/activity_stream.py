@@ -68,7 +68,7 @@ class ActivityStreamDAO:
         c = Cache(db=settings.CACHE_DATABASES['activity_resources'])
         list_key = 'activity_stream::%s' % str(account_id)
         activity_keys = c.lrange(str(list_key),0, limit)
-        r = redis.Redis(host='localhost', port=settings.REDIS_PORT,
+        r = redis.Redis(host=settings.REDIS_READER_HOST, port=settings.REDIS_PORT,
             db=settings.CACHE_DATABASES['activity_resources'])
         pipeline=r.pipeline()
 
