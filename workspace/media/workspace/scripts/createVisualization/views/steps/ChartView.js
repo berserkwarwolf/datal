@@ -73,6 +73,8 @@ var ChartView = StepViewSPA.extend({
 
 			this.showLoading();
 
+			this.$el.find('a.backButton').hide();
+
 			//this.renderChart();
 		} else {
 			this.optionsView.hide();
