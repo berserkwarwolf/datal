@@ -33,7 +33,6 @@
 
 .dataStreamBox h2 a:hover{background:#ef7f10 url(/static/core/images/common/dg_Servicio.gif) repeat-x 0 -53px;color:#fff;text-decoration:none;border-color:#c87629;}
 .dataStreamBox h2 a:hover img{border-color:#e0ab4e;}
-.dataStreamBox h2 a:hover .txt{text-shadow:0 1px 0 #C56B12;}
 .dataStreamBox h2 a:hover .txt .titleDS{color:#fff;}
 .dataStreamBox h2 a:hover .txt .titleDS strong{/*color:#290302;*/}
 .dataStreamBox h2 a:hover .txt .titleDS .sep{color:#a75e1c;}
@@ -46,7 +45,7 @@
 
 /*DATA STREAM RESULT*/
 .dataStreamBox .dataStreamResult{border:1px solid #e2e0e0;border-top:0;-moz-border-radius:0 0 5px 5px;-webkit-border-radius:0 0 5px 5px;border-radius:0 0 5px 5px;overflow:hidden;}
-.dataStreamBox .Mensaje{height:124px;width:100%;float:left;background:#fff;overflow:hidden;}
+.dataStreamBox .Mensaje{width:100%;float:left;background:#fff;overflow:hidden;}
 .dataStreamBox:hover .Mensaje{overflow:auto;}
 .dataStreamBox .Mensaje,
 .dataStreamBox .Mensaje table,
