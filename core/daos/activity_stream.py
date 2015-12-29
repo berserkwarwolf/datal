@@ -77,15 +77,20 @@ class ActivityStreamDAO:
         activities = []
         users = {} # avoid duplicated sql queries
         for h in pipeline.execute():
-            user_id = h['user_id']
-            if not users.get(user_id, None):
-                user = User.objects.get(pk=user_id)
-                users[user_id] = user
+            user_id = h.get('user_id', None)
+            if not user_id:
+                h['user_nick'] = 'unknown'
+                h['user_email'] = 'unknown'
+                h['user_name'] = 'unknown'
             else:
-                user = users[user_id]
-            h['user_nick'] = user.nick
-            h['user_email'] = user.email
-            h['user_name'] = user.name
+                if not users.get(user_id, None):
+                    user = User.objects.get(pk=user_id)
+                    users[user_id] = user
+                else:
+                    user = users[user_id]
+                h['user_nick'] = user.nick
+                h['user_email'] = user.email
+                h['user_name'] = user.name
                 
             activities.append(h)
 
