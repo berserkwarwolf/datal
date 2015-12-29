@@ -19,7 +19,7 @@
               'packages':['corechart']
             }]
     }"></script>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=visualization"></script>
 
 <script type="text/javascript" src="{% static 'd3/d3.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'c3/c3.min.js' %}"></script>
@@ -97,7 +97,7 @@ var chartModel = new charts.models.Chart({
     createdAt: "{{ visualization_revision.created_at|date:'F d, Y, h:i A'|capfirst }}",
     modifiedAt: "{{ visualization_revision.modified_at|date:'F d, Y, h:i A'|capfirst }}",
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
-    publicUrl: "http://{{preference.account_domain}}{{ visualization_revision.visualization_id|permalink:'visualization' }}",
+    publicUrl: "{{settings.MSPROTOCOL}}://{{preference.account_domain}}{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     changeStatusUrl: "{% url 'manageVisualizations.change_status' visualization_revision.visualization_revision_id %}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
     editUrl: "{% url 'manageVisualizations.edit' visualization_revision.last_revision_id %}",
