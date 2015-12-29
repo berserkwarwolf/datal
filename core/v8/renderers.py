@@ -8,7 +8,7 @@ import re
 
 class EngineRenderer(renderers.BaseRenderer):
     def render(self, data, media_type=None, renderer_context=None):
-        return bytes(data.encode('utf-8'))
+        return data
 
 class CSVEngineRenderer(EngineRenderer):
     media_type="text/csv"
@@ -32,7 +32,7 @@ class XLSNonRedirectEngineRenderer(JSONRenderer):
     format = "xls"
 
 class XMLEngineRenderer(EngineRenderer):
-    media_type="application/xml"
+    media_type="text/xml"
     format = "xml"
 
 class HTMLEngineRenderer(EngineRenderer):
