@@ -28,6 +28,12 @@ class TagAdmin(admin.ModelAdmin):
 admin.site.register(Tag, TagAdmin)
 
 
+class GrantAdmin(admin.ModelAdmin):
+    list_per_page = 25
+
+admin.site.register(Grant, GrantAdmin)
+
+
 class SettingAdmin(admin.ModelAdmin):
     fields = ('key', 'description', 'value')
     list_display = ('key', 'description', 'value')
