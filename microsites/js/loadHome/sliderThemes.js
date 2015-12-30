@@ -3,12 +3,12 @@ function initSlider(){
         circular: true,
         infinite: false,
         width: 410,
-        height: 260,
+        height: 230,
         items: {
             minimum: 1,
             visible: 1,
             width: 410,
-            height: 260
+            height: 230
         },
         scroll: {
             items: 1,
