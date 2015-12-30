@@ -15,6 +15,7 @@ class Command(BaseCommand):
         # TODO
         for rev in VisualizationRevision.objects.all():
             imp = json.loads(rev.impl_details)
+
             if 'labelSelection' in imp['chart']:
                 header = imp['chart']['labelSelection'].replace(' ', '')
                 answer = []
@@ -24,8 +25,6 @@ class Command(BaseCommand):
                     else:
                         answer.append(mh)
                 imp['chart']['labelSelection'] = ','.join(answer)
-            if 'latitudSelection' in imp['chart']:
-                imp['chart']['latitudSelection'] = imp['chart']['latitudSelection'].replace(' ', '')
             if 'headerSelection' in imp['chart']:
                 header = imp['chart']['headerSelection'].replace(' ', '')
                 answer = []
@@ -35,10 +34,14 @@ class Command(BaseCommand):
                     else:
                         answer.append(mh)
                 imp['chart']['headerSelection'] = ','.join(answer)
-            if 'longitudSelection' in imp['chart']:
-                imp['chart']['longitudSelection'] = imp['chart']['longitudSelection'].replace(' ', '')
-            if 'traceSelection' in imp['chart']:
-                imp['chart']['traceSelection'] = imp['chart']['traceSelection'].replace(' ', '')
+
+            spaces=('latitudSelection', 'longitudSelection', 'traceSelection', 'data')
+
+            for s in spaces:
+                if s in imp['chart']:
+                    imp['chart'][s] = imp['chart'][s].replace(' ', '')
+                elif s in imp:
+                    imp[s] = imp[s].replace(' ', '')
 
             renames=( ("zoomLevel", "zoom"),
                 ("mapCenter","center"),
@@ -47,5 +50,11 @@ class Command(BaseCommand):
                 if rename[0] in imp['chart']:
                     imp['chart'][rename[1]]=imp['chart'][rename[0]]
                     imp['chart'].pop(rename[0])
+
+            if 'headerSelection' in imp['chart'] and imp['chart']['headerSelection'] == ":":
+                imp['chart']['headerSelection'] = ''
+
+
+
             rev.impl_details = json.dumps(imp)
             rev.save()
