@@ -39,5 +39,13 @@ class Command(BaseCommand):
                 imp['chart']['longitudSelection'] = imp['chart']['longitudSelection'].replace(' ', '')
             if 'traceSelection' in imp['chart']:
                 imp['chart']['traceSelection'] = imp['chart']['traceSelection'].replace(' ', '')
+
+            renames=( ("zoomLevel", "zoom"),
+                ("mapCenter","center"),
+            )
+            for rename in renames:
+                if rename[0] in imp['chart']:
+                    imp['chart'][rename[1]]=imp['chart'][rename[0]]
+                    imp['chart'].pop(rename[0])
             rev.impl_details = json.dumps(imp)
             rev.save()
