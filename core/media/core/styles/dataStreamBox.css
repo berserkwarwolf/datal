@@ -9,8 +9,7 @@
 .dataStreamBox .Contenedor td{border:0;margin:0;padding:0;border-collapse:collapse;}
 .dataStreamBox .Contenedor{width:100%;float:none;}
 
-.dataStreamBox{overflow:hidden;display:block;cursor:default;margin:0 auto;position:relative;width:410px;border:1px solid #e2e0e0;}
-.sliderContent{overflow-y:auto;max-height:190px;}
+.dataStreamBox{overflow:hidden;height:191px;display:block;cursor:default;margin:0 auto;position:relative;}
 
 /*DATA STREAM TITLE*/
 .dataStreamBox h2{font-weight:normal;}
