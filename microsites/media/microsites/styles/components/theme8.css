@@ -21,7 +21,7 @@
 .theme8 .buttons .head a.back:hover{text-decoration:none;cursor:pointer;}
 .theme8 .buttons .head a.back:before{content:"";margin:0 6px 0 0;background-image:url(/static/core/images/common/ic_next-prev.gif);width:10px;height:10px;background-position:center -16px;display:inline-block;}
 .theme8 .buttons .head h2{font-family:'Open Sans',sans-serif;color:#424753;line-height:23px;font-size:22px;margin:10px 0;}
-.theme8 .buttons input.search_datatable{border:0 none;outline:0 none;position:absolute;top:64px;width:400px;right:25px;height:35px;padding-left:15px;border-radius:0;background:#FFF url(/static/workspace/images/common/ic_search.png) no-repeat 375px 11px;}
+.theme8 .buttons input.search_datatable{border:0 none;outline:0 none;position:absolute;top:10px;width:400px;right:25px;height:35px;padding-left:15px;border-radius:0;background:#FFF url(/static/workspace/images/common/ic_search.png) no-repeat 375px 11px;}
 
 /* Buttons section */
 .theme8 .buttons{background:#f3f3f3;margin-top:20px;padding:40px 0 60px 0;}
