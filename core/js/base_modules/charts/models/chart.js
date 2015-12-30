@@ -124,7 +124,7 @@ charts.models.Chart = Backbone.Model.extend({
                     options:{
                         zoom: res.chart.zoom,
                         bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
-                        center: {lat: 0, long: 0}
+                        center: {lat: res.chart.center[0], long: res.chart.center[1]}
                     }
                 });
             };
