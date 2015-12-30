@@ -14,3 +14,11 @@ def plugins_call(context, method_name):
             method = getattr(plugin, method_name)
             response += method(context)
     return response
+
+@register.filter(name='ifplugin')
+def inplugin(value):
+    plugins = DatalPluginPoint().get_plugins()
+    for plugin in plugins:
+        if plugin.is_active() and hasattr(plugin, value) and getattr(plugin, value):
+            return True
+    return False
