@@ -30,7 +30,7 @@ body,
 .sliderWrapper, 
 .sliderWrapper .dataStreamContainer, 
 .sliderWrapper .dataStreamBorder, 
-.dataStreamBox{width:410px;height:230px;}
+.dataStreamBox{width:410px;}
 .sliderWrapper{overflow:hidden;border-radius:5px;}
 .sliderWrapper .dataStreamContainer{float: left;overflow: hidden; }
 
