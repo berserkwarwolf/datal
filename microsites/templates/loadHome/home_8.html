@@ -80,6 +80,12 @@
                     <h2 data-bind="text:titleUpgradeable"></h2>
                     <h3>{{config.buttonsSectionDescription}}</h3>
                 </div>
+
+                <form method="get" action="/search/" class="search buttons-search clearfix" target="_blank">
+                   <input type="text" name="q" class="buttons-field" placeholder="{% trans 'HEADERAUTO-SEARCH-PLACEHOLDER' %}">
+                   <input type="submit" value="" class="buttons-search-button">
+               </form>
+
             </div>
             
             
