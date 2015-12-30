@@ -620,3 +620,21 @@ msgstr "Minutely"
 
 msgid "APP-OTHER-TEXT"
 msgstr "Other"
+
+msgid "VIEWDS-TABS-DESCRIPTION"
+msgstr "Description"
+
+msgid "VIEWDS-DESCRIPTION-TITLE"
+msgstr "Description"
+
+msgid "VIEWDS-VIEWMORE-INFORMATION-TEXT"
+msgstr "More information"
+
+msgid "VIEWDS-VIEWLESS-INFORMATION-TEXT"
+msgstr "Hide information"
+
+msgid "APP-EXPORT-TO-EXCEL-TEXT"
+msgstr "Export to Excel"
+
+msgid "APP-BACK-TEXT"
+msgstr "Back"

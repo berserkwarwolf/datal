@@ -48,7 +48,8 @@ var BaseView = Backbone.View.extend({
 		// If link is empty
 		if( 
 			$('#id_openDataSiteButton').attr('href') == '' ||
-			$('#id_openDataSiteButton').attr('href') == 'http://'
+			$('#id_openDataSiteButton').attr('href') == 'http://' ||
+			$('#id_openDataSiteButton').attr('href') == 'https://'
 		){
 			$('#id_openDataSiteButton').removeAttr('href');
 			this.events["click #id_openDataSiteButton"] = "onOpenDataSiteButtonClicked"
@@ -64,7 +65,7 @@ var BaseView = Backbone.View.extend({
 
 		// If is admin, change message
 		if( authManager.isAdmin() ){
-			message = gettext('APP-INEXISTENT-DOMAIN-ADMIN-1') + '<a href="http://' + Configuration.baseUri + '/admin/domain" title="' + gettext('APP-INEXISTENT-DOMAIN-ADMIN-2') + '">' + gettext('APP-INEXISTENT-DOMAIN-ADMIN-2') + '</a>.';			
+			message = gettext('APP-INEXISTENT-DOMAIN-ADMIN-1') + '<a href="https://' + Configuration.baseUri + '/admin/domain" title="' + gettext('APP-INEXISTENT-DOMAIN-ADMIN-2') + '">' + gettext('APP-INEXISTENT-DOMAIN-ADMIN-2') + '</a>.';			
 		}
 
 		$.gritter.add({

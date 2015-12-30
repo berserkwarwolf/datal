@@ -50,23 +50,24 @@ var DatatableHomeManager = DatatableManager.extend({
             className = 'ic_Chart';
         }
 
-
         var templ = "<tr id='id_<%= revision.id %>'>";
         
         templ += "<td class='viewInfo'>\
                 <div class='" + className + "'></div><a href='<%= revision.permalink %>' target='_blank'><strong><%= revision.title %></strong> </a> <% if(revision.account_name){ %> <span class='sep'> | </span> <%= revision.account_name %> <% } %> <span class='sep'> | </span>  <%= revision.category %></td>";
            
         var date = new Date(msg.created_at);
-        templ += "<td class='date' data-sort-value='" + date.getTime() + "'><span class='longDateFormat'>" + $.datepicker.formatDate( (Configuration.language == "en")?"MM d, yy":"d 'de' MM 'de' yy" 
-        																					, date
-        																					, {
-        																						monthNames: $.datepicker.regional[ (Configuration.language == "en")? "": Configuration.language ].monthNames
-        																					}) 
-        														+ "</span></td>";
-
+        templ += "<td class='date' data-sort-value='" + date.getTime() + 
+                    "'><span class='longDateFormat'>" + 
+                    $.datepicker.formatDate( (Configuration.language == "en")?"MM d, yy":"d 'de' MM 'de' yy", date
+				    , { monthNames: $.datepicker.regional[ (Configuration.language == "en")? "": Configuration.language ].monthNames }) 
+				    + "</span></td>";
         templ +="</tr>";
 
-        return _.template(templ, {variable: 'revision'})(msg);
+        var tpl = _.template(templ); // , {variable: 'revision'});
+        var html = tpl({revision: msg});
+        return html;
+        // return _.template(templ, {variable: 'revision'})(msg);
+        // return _.template(templ, {revision: msg});
     },
     drawRow: function(msg) {
         $('table tbody', this.get("selector")).append(this.getRowTemplate(msg));

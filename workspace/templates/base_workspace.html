@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n extra_tags compress staticfiles sass_tags core_components components %}
+{% load i18n extra_tags compress staticfiles sass_tags core_components components plugins_tags %}
 
 {% block css_includes %}
 		{% compress css %}
@@ -9,7 +9,7 @@
 		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-text-cell.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 		<link href="{% sass_src 'core/styles/plugins/backgrid/backgrid-filter.min.css' %}" type="text/css" rel="stylesheet" media="screen"/>
 		{% endcompress %}
-		<link href='http://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Roboto:700,400' rel='stylesheet' type='text/css'>
 {% endblock %}
 
 {% block js_includes %}
@@ -20,7 +20,7 @@
 
 <script src="/js_core/constants.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="{% static 'jquery/dist/jquery.min.js' %}"></script>
-<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 
 <script src="/js_core/libs/jquery/jquery.parseHTML.js?id={{settings.VERSION_JS_CSS}}"></script>
 <script src="{% static 'jquery-ui/jquery-ui.min.js' %}"></script>
@@ -132,6 +132,8 @@
 									<!-- ODS Button -->
 									<a id="id_openDataSiteButton" href="http://{{ preference.account_domain }}" target="_blank" class="button alpha FR" title="{% trans 'HEADER-ODS-BUTTON' %}">{% trans 'HEADER-ODS-BUTTON' %}<span class="icon icon-view-site icon-right"></span></a>
 
+									{% plugins_call 'workspace_header' %}
+
 								</div>
 
 							</div>
@@ -209,6 +211,12 @@
 		Configuration.APPLICATION_DETAILS.name = "{{ settings.APPLICATION_DETAILS.name }}";
 		Configuration.APPLICATION_DETAILS.website = "{{ settings.APPLICATION_DETAILS.website }}";
 		Configuration.APPLICATION_DETAILS.mail = "{{ settings.APPLICATION_DETAILS.mail }}";
+
+		{% if preferences.account_microsite_https %}
+			Configuration.microsite_protocol = 'https://';
+		{% else %}
+			Configuration.microsite_protocol = 'http://'
+		{% endif %}
 
 		csrfmiddlewaretoken = '{{ csrf_token }}';
 

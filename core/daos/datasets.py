@@ -8,7 +8,7 @@ from django.template import loader, Context
 from django.db.models import Q, F
 
 from core.utils import slugify
-from core import settings
+from django.conf import settings
 from core.models import DatasetI18n, Dataset, DatasetRevision, Category
 from core.exceptions import SearchIndexNotFoundException
 from core.lib.elastic import ElasticsearchIndex
@@ -82,6 +82,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
 
         dataset = dict(
+            revision_id=dataset_revision.id,
+            resource_id=dataset_revision.dataset.id,
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
             user_id=dataset_revision.user.id,
@@ -90,6 +92,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             category_id=dataset_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            end_point_full_url=dataset_revision.get_endpoint_full_url(),
             filename=dataset_revision.filename,
             impl_details=dataset_revision.impl_details,
             impl_type=dataset_revision.impl_type,
@@ -183,7 +186,13 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=DatasetRevision.objects.filter(dataset__id=item['dataset__id']).count()
 
     def query_childs(self, dataset_id, language, status=None):
         """ Devuelve la jerarquia completa para medir el impacto """
@@ -419,6 +428,8 @@ class DatasetSearchIndexDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.dataset_revision.dataset.id,
+                     'revision_id': self.dataset_revision.id,
                      'dataset_id': self.dataset_revision.dataset.id,
                      'datasetrevision_id': self.dataset_revision.id,
                      'title': dataseti18n.title,

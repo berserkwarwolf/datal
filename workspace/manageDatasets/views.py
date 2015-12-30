@@ -196,6 +196,7 @@ def filter(request, page=0, itemsxpage=settings.PAGINATION_RESULTS_PER_PAGE):
         filter_name=filter_name,
         exclude=exclude
     )
+
     for resource in resources:
         resource['url'] = reverse('manageDatasets.view', urlconf='workspace.urls', kwargs={'revision_id': resource['id']})
 
@@ -467,7 +468,9 @@ def change_status(request, dataset_revision_id=None):
 
         # Limpio un poco
         response['result'] = DatasetDBDAO().get(request.user.language, dataset_revision_id=dataset_revision_id)
-        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
+        account = request.account
+        msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+        response['result']['public_url'] = msprotocol + "://" + request.preferences['account.domain'] + reverse('manageDatasets.view', urlconf='microsites.urls', 
             kwargs={'dataset_id': response['result']['dataset_id'], 'slug': '-'})
         response['result'].pop('datastreams')
         response['result'].pop('visualizations')

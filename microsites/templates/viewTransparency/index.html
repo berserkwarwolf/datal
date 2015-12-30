@@ -1,5 +1,5 @@
 {% extends "base_microsites.html" %}
-{% load i18n extra_tags components core_components compress staticfiles sass_tags %}
+{% load i18n extra_tags components core_components compress staticfiles sass_tags plugins_tags %}
 
 {% block SEO %}
     <title>{% trans "APP-TRANSPARENCY-TITLE" %} &middot; {{preferences.account_page_titles}}</title>
@@ -71,7 +71,7 @@
                 <li class="dataset">{% trans "HOME-DATASET-TEXT" %}</li>
                 <li class="dataview">{% trans "HOME-DS-TEXT" %}</li>
                 <li class="visualization">{% trans "HOME-VZ-TEXT" %}</li>
-                <li class="dashboard">{% trans "HOME-DB-TEXT" %}</li>
+                {% plugins_call 'microsites_transparency_index' %}
   	</ul>
   </div>
 </section>

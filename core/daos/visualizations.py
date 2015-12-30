@@ -11,7 +11,7 @@ from django.core.serializers.json import DjangoJSONEncoder
 
 from datetime import datetime, date, timedelta
 from core.utils import slugify
-from core import settings
+from django.conf import settings
 from core.cache import Cache
 from core.daos.resource import AbstractVisualizationDBDAO
 from core.models import VisualizationRevision, VisualizationHits, VisualizationI18n, Preference, Visualization, Setting
@@ -51,7 +51,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             )
 
         visualization_rev = VisualizationRevision.objects.create(
-            datastream_revision=datastream_rev,
+            datastream=datastream_rev.datastream,
             visualization=visualization,
             user=user,
             status=StatusChoices.DRAFT,
@@ -95,12 +95,12 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
                 visualization__id=visualization_id
             )
 
-        tags = visualization_revision.datastream_revision.tagdatastream_set.all().values(
+        tags = visualization_revision.datastream.last_revision.tagdatastream_set.all().values(
             'tag__name',
             'tag__status',
             'tag__id'
         )
-        sources = visualization_revision.datastream_revision.sourcedatastream_set.all().values(
+        sources = visualization_revision.datastream.last_revision.sourcedatastream_set.all().values(
             'source__name',
             'source__url',
             'source__id'
@@ -108,7 +108,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         parameters = []
 
         # Get category name
-        category = visualization_revision.datastream_revision.category.categoryi18n_set.get(language=language)
+        category = visualization_revision.datastream.last_revision.category.categoryi18n_set.get(language=language)
         visualizationi18n = VisualizationI18n.objects.get(
             visualization_revision=visualization_revision,
             language=language
@@ -116,6 +116,10 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
 
         visualization = dict(
             visualization=visualization_revision.visualization,
+
+            resource_id=visualization_revision.visualization.id,
+            revision_id=visualization_revision.id,
+
             visualization_id=visualization_revision.visualization.id,
             visualization_revision_id=visualization_revision.id,
             user_id=visualization_revision.user.id,
@@ -141,7 +145,7 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
             slug=slugify(visualizationi18n.title),
             lib=visualization_revision.lib,
             datastream_id=visualization_revision.visualization.datastream.id,
-            datastream_revision_id=visualization_revision.datastream_revision_id,
+            datastream_revision_id=visualization_revision.datastream.last_revision_id,
             filename='', # nice to have
             cant=VisualizationRevision.objects.filter(visualization__id=visualization_revision.visualization.id).count(),
         )
@@ -272,7 +276,14 @@ class VisualizationDBDAO(AbstractVisualizationDBDAO):
         nto = nfrom + itemsxpage
         query = query[nfrom:nto]
 
+        # sumamos el field cant
+        map(self.__add_cant, query)
+
         return query, total_resources
+
+    def __add_cant(self, item):
+            item['cant']=VisualizationRevision.objects.filter(visualization__id=item['visualization__id']).count()
+
 
     def query_hot_n(self, lang, hot = None):
 
@@ -558,6 +569,8 @@ class VisualizationSearchDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.visualization_revision.visualization.id,
+                     'revision_id': self.visualization_revision.id,
                      'visualization_id': self.visualization_revision.visualization.id,
                      'visualization_revision_id': self.visualization_revision.id,
                      'datastream_id': self.visualization_revision.visualization.datastream.id,

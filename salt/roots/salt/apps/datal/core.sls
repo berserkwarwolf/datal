@@ -12,6 +12,12 @@ sass_install:
   gem.installed:
     - name: sass
 
+clean_caches:
+  cmd.run:
+    - names:
+      - echo 'flush_all' | nc localhost 11211
+      - redis-cli FLUSHALL
+
 # Create static files directory
 {{ pillar['application']['statics_dir'] }}:
   file.directory:

@@ -15,26 +15,27 @@ class ThemeBuilder(object):
         self.account = account
 
 
-    def retrieveDatastreams(self, resourceIds, language):
+    def retrieve_resources_for_slider(self, resourceIds, language):
 
         datastreamIds = []
         visualizationIds = []
                 
         for resource in resourceIds:
-            if resource['type']== 'chart':
+            if resource['type']== 'vz':
                 visualizationIds.append(resource['id'])
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
                 
-        datastreams = []
-        if datastreamIds:
-            idsDataStream = ','.join(datastreamIds)
-            datastreams =  DataStreamDBDAO().query_hot_n(10,language, hot = idsDataStream)
-                
-        if visualizationIds:
-            idsVisualization = ','.join(visualizationIds)
-            datastreams +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
-        return datastreams
+        data = []
+
+        # usamos el DAO
+        for i in datastreamIds:
+                data.append(DataStreamDBDAO().get(language,datastream_id=i))
+
+        for i in visualizationIds:
+                data.append(VisualizationDBDAO().get(language,visualization_id=i))
+ 
+        return data
 
     def retrieveResourcePermalinks(self, resourceIds, language):
 
@@ -42,7 +43,7 @@ class ThemeBuilder(object):
         visualizationIds = []
                 
         for resource in resourceIds:
-            if resource['type']== 'chart':
+            if resource['type']== 'vz':
                 visualizationIds.append(resource['id'])
             elif resource['type']== 'ds':
                 datastreamIds.append(resource['id'])
@@ -54,7 +55,7 @@ class ThemeBuilder(object):
                 
         if visualizationIds:
             idsVisualization = ','.join(visualizationIds)
-            resources +=  VisualizationDBDAO.query_hot_n(language, hot = idsVisualization)
+            resources +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
 
      
         add_domains_to_permalinks(resources)
@@ -88,7 +89,7 @@ class ThemeBuilder(object):
 
             if config:
                 if 'sliderSection' in config:
-                    response['datastreams'] = self.retrieveDatastreams(
+                    response['resources_slider'] = self.retrieve_resources_for_slider(
                         config['sliderSection'], self.language)
                 if 'linkSection' in config:
                     response['resources'] = self.retrieveResourcePermalinks(

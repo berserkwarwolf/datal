@@ -15,6 +15,7 @@ from core.utils import slugify
 from core import choices
 from core import managers
 from core.cache import Cache
+from core.lib.datastore import *
 
 
 logger = logging.getLogger(__name__)
@@ -231,6 +232,7 @@ class Account(models.Model):
                 pass
 
         raise Account.DoesNotExist
+
 
 class AccountAnonymousUser(AnonymousUser):
 
@@ -618,6 +620,10 @@ class DatasetRevision(RevisionModel):
                 settings.AWS_BUCKET_NAME,
                 self.end_point.replace('file://', '')
             )
+
+        if settings.USE_DATASTORE == 's3':
+            return active_datastore.generate_url(settings.AWS_BUCKET_NAME, key=self.end_point.replace('file://', ''))
+
         return self.end_point
 
     def is_pending_review(self):
@@ -764,8 +770,10 @@ class Visualization(GuidModel):
 
 class VisualizationRevision(RevisionModel):
     visualization = models.ForeignKey('Visualization', verbose_name=ugettext_lazy('MODEL_VISUALIZATION_LABEL'))
-    datastream_revision = models.ForeignKey('DataStreamRevision',
-                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_REV_LABEL'))
+
+    datastream = models.ForeignKey('DataStream',
+                                            verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
+
     user = models.ForeignKey('User', verbose_name=ugettext_lazy('MODEL_USER_LABEL'), on_delete=models.PROTECT)
     lib = models.CharField(max_length=10, choices=choices.VISUALIZATION_LIBS)
     impl_details = models.TextField(blank=True)
@@ -949,7 +957,7 @@ class Grant(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
-
+# :TODO: Sin Migrar aun
 class ObjectGrant(models.Model):
     grant           = models.ForeignKey('Grant', verbose_name=ugettext_lazy('MODEL_GRANT_LABEL'))
     datastream      = models.ForeignKey('DataStream', null=True, verbose_name=ugettext_lazy('MODEL_DATASTREAM_LABEL'))
@@ -964,6 +972,7 @@ class ObjectGrant(models.Model):
 
     def __unicode__(self):
         return unicode(self.id)
+
 
 class Guest( models.Model ):
     email       = models.CharField( max_length=100, verbose_name=ugettext_lazy('MODEL_EMAIL_LABEL'))
@@ -1066,7 +1075,7 @@ class UserPassTickets(models.Model):
     def __unicode__(self):
         return unicode(self.id)
 
-
+# :TODO: Sin Migrar aun
 class Source(models.Model):
     name = models.CharField(unique=True, max_length=40, blank=False)
     url = models.CharField(max_length=2048, blank=False)
@@ -1085,7 +1094,7 @@ class SourceDataset(models.Model):
     class Meta:
         db_table = 'ao_sources_dataset_revision'
 
-
+# :TODO: Sin Migrar aun
 class SourceDatastream(models.Model):
     source = models.ForeignKey('Source', null=True)
     datastreamrevision = models.ForeignKey('DataStreamRevision', null=True)

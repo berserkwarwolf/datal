@@ -64,7 +64,7 @@
                 		iconType = "ic_Data";
                 		break;
                 	
-                	case "chart":
+                	case "vz":
                 		iconType = "ic_Chart";
                 		break;
 
@@ -80,8 +80,9 @@
                 }
             	$( "<li></li>" )
                 .data( "ui-autocomplete-item", item )
-                .append( "<a><span class='"+ iconType+ "'>"+item.label+"</span></a>" )
+                .append( "<a><span class='" + iconType + "'>" + item.label + "</span></a>" )
                 .appendTo( ul);
+                console.log(iconType);
             	
             	return;
             	

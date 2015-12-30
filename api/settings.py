@@ -55,10 +55,6 @@ REST_FRAMEWORK['DEFAULT_THROTTLE_CLASSES'] = (
     'rest_framework.throttling.UserRateThrottle',
 )
 
-REST_FRAMEWORK['DEFAULT_THROTTLE_RATES'] = {
-    'user': '20/minute'
-}
-
 REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = (
     'rest_framework.renderers.JSONRenderer',
     'rest_framework_jsonp.renderers.JSONPRenderer',

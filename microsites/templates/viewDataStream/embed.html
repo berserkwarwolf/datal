@@ -190,11 +190,10 @@
 			</div>
 		</div>
 	</div>
-
 	<script type="text/javascript">
 	      var lDataService = $("#id_dataservice_container")[0];
 	      jQuery.data(lDataService, "datastream_id", "{{datastream.datastream_id}}");
-	      jQuery.data(lDataService, "datastreamrevision_id", "{{datastreamrevision_id}}");
+	      jQuery.data(lDataService, "datastreamrevision_id", "{{ datastream.last_published_revision_id}}");
 	      jQuery.data(lDataService, "dataservice_end_point", "{% if end_point%}\u0026{{end_point|escapejs}}{% endif %}");
 	      jQuery.data(lDataService, "dataservice_title", "{{datastream.title}}");
 	      jQuery.data(lDataService, "dataservice_description", "{{datastream.description}}");

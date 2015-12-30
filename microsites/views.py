@@ -45,25 +45,40 @@ def get_js(request, id):
 
 
 def get_key(http_referer):
-
+    logger = logging.getLogger(__name__)
+    
     if not http_referer:
+        logger.error('No http referer')
         raise Http404
 
-    if re.search('^.*datastreams/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+    if re.search('^.*/(datastreams|dataviews)/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
         key = 'ds.detail'
-    elif re.search('^.*/datastreams/embed/[A-Z0-9\-]+.*$' , http_referer):
+    elif re.search('^.*/(datastreams|dataviews)/embed/[A-Z0-9\-]+.*$' , http_referer):
         key = 'ds.embed'
+    elif re.search('^.*/(datastreams|dataviews)/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'ds.detail'
     elif re.search('^.*/search/.*$' , http_referer):
         key = 'search'
     elif re.search('^.*/visualizations/embed/[A-Z0-9\-]+.*$' , http_referer):
         key = 'chart.embed'
-    elif re.search('^.*visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
-        key = 'chart.detail'
     elif re.search('^.*/home' , http_referer):
         key = 'home'
     elif re.search('^.*/developers' , http_referer):
         key = 'developers'
+    elif re.search('^.*/visualizations/\d+/[A-Za-z0-9\-]+$' , http_referer):
+        key = 'chart.detail'
+    elif re.search('^.*/visualizations/\d+/[A-Za-z0-9\-]+/.*$' , http_referer):
+        key = 'chart.detail'
+
+    #TODO encontrar la forma de llevar esto al plugin
+    elif re.search('^.*/advanced_filtering/customDataViz/\d+/[A-Za-z0-9\-]+.*$' , http_referer):
+        key = 'chart.detail'
+    elif re.search('^.*/advanced_filtering/customDataView/\d+/[A-Za-z0-9\-]+.*$' , http_referer):
+        key = 'ds.detail'
+    
     else:
+        #  http referer error http://microsites.dev:8080/dataviews/69620/iep-primer-trimestre-2012-ministerio-de-defensa-nacional
+        logger.error('http referer error %s' % http_referer)
         raise Http404
 
     return key + '.full'
@@ -109,11 +124,15 @@ def get_catalog_xml(request):
     account_id = request.account.id
     language = request.auth_manager.language
     preferences = request.preferences
-
+    account = request.account
+    
     domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
-    developers_link = 'http://' + domain + reverse('manageDeveloper.filter')
+    account = Account.objects.get(pk=account_id)
+    msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    apiprotocol = 'https' if account.get_preference('account.api.https').lower() == 'true' else 'http'
+    developers_link = msprotocol + '://' + domain + reverse('manageDeveloper.filter')
     datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(
         datastream__user__account_id=account_id, status=StatusChoices.PUBLISHED
     )
@@ -125,16 +144,10 @@ def get_catalog_xml(request):
             logger.error('catalog ERROR %s %s' % (datastream_revision_id, language))
             continue
 
-        ds.link = 'http://{}{}'.format(domain, ds.permalink())
-        ds.export_csv_link = 'http://{}{}'.format(
-            domain,
-            reverse('viewDataStream.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
-        )
-        ds.export_html_link = 'http://{}{}'.format(
-            domain,
-            reverse('viewDataStream.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
-        )
-        ds.api_link = 'http://' + api_domain + '/datastreams/' + ds.guid + '/data/?auth_key=your_authkey'
+        ds.link = '{}://{}{}'.format(msprotocol, domain, ds.permalink())
+        ds.export_csv_link = '{}://{}{}'.format(msprotocol, domain,reverse('viewDataStream.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug}))
+        ds.export_html_link = '{}://{}{}'.format(msprotocol, domain, reverse('viewDataStream.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug}) )
+        ds.api_link = apiprotocol + '://' + api_domain + '/datastreams/' + ds.guid + '/data/?auth_key=your_authkey'
 
         ds.visualizations = []
         visualization_revision_ids = VisualizationRevision.objects.values_list('id').filter(
@@ -147,7 +160,7 @@ def get_catalog_xml(request):
             except:
                 logger.error('catalog VIZ ERROR %s %s' % (visualization_revision_id, language))
                 continue
-            vz['link'] = 'http://' + domain + vz.permalink()
+            vz['link'] = msprotocol + '://' + domain + vz.permalink()
             ds.visualizations.append(vz)
         resources.append(ds)
 

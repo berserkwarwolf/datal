@@ -328,7 +328,7 @@ class DatastreamLifeCycleManager(AbstractLifeCycleManager):
                 dataset=self.datastream_revision.dataset,
                 user=self.datastream_revision.user,
                 status=fields.pop('status', StatusChoices.DRAFT),
-                parameters=self.datastream_revision.datastreamparameter_set.all(),
+                parameters=self.datastream_revision.datastreamparameter_set.values(),
                 **fields
             )
 

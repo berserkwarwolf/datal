@@ -45,14 +45,14 @@ function initDataServices(){
 
 function initDataService(pDataServiceId){
 
+    container = $('#id_dataservice_container_' + pDataServiceId);
+
     var $lDataServiceContainer = $fDataServicesContainer.find('#id_dataservice_container_' + pDataServiceId);
     var $lIframe = $lDataServiceContainer.find('#id_dataservice_' + pDataServiceId);
 
     startWaitMessage($lIframe);
 
-    var lEndPoint   = jQuery.data($lDataServiceContainer[0], "dataservice_end_point");
-
-    invokeDataService(lEndPoint, pDataServiceId);
+    invokeDataService(container.data("jsonURL"),container.data("pId"));
 }
 
 function startWaitMessage(pHTMLElement){
@@ -63,36 +63,36 @@ function startWaitMessage(pHTMLElement){
     pHTMLElement.html(lHtml);
 }
 
-function invokeDataService(pEndPoint, pDataServiceId){
+function invokeDataService(lUrl, pDataServiceId){
 
-    var lUrl = '/rest/datastreams/' + pDataServiceId + '/data.json';
-    var lData= $.param({limit: 50});
-    if (pEndPoint) {
-      lData += pEndPoint;
-    }
+    var lData= $.param({limit: 50, revision_id: pDataServiceId});
+    
+    if ( pDataServiceId != undefined ){
 
-    $.ajax({ url: lUrl
+        $.ajax({ url: lUrl
             , type:'GET'
             , data: lData
             , dataType: 'json'
             , timeoutNumber : 30000
             , success: onSuccessDataServiceExecute
             , error: onErrorDataServiceExecute
-            }
-    );
+        });
+    }
 }
 
 function onSuccessDataServiceExecute(pResponse){
 
     ds_results = pResponse; //global, for later use
     $.url.setUrl(this.url);
-    var lDataServiceId          = $.url.param("datastream_revision_id");
+    var lDataServiceId          = $.url.param("revision_id");
     var $lDataServiceContainer  = $fDataServicesContainer.find('#id_dataservice_container_' + lDataServiceId);
     var lDataserviceId          = $lDataServiceContainer.data('dataservice_id');
 
     var lHtml = '';
 
     if( pResponse != null && pResponse.fType != 'ERROR' ){
+
+        // si es array
         if(pResponse.fType!='ARRAY'){
             var lValue = '';
             if(pResponse.fType == 'TEXT'){
@@ -134,6 +134,8 @@ function onSuccessDataServiceExecute(pResponse){
                 lValue = '<table class="Texto"><tr><td><a target="_blank" href="' + pResponse.fUri + '" rel="nofollow" title="' + pResponse.fStr + '">' + pResponse.fStr + '</a></td></tr></table>';
             }
             lHtml  = lHtml + '<div class="dataStreamResult clearfix"><div class="Mensaje">' + lValue +'</div></div></div>';
+
+        // si no es array
         }else {
             i = 0;
             lHtml  = lHtml + '<div class="dataStreamResult clearfix"><div class="Mensaje"><table class="Tabla">';
@@ -200,14 +202,12 @@ function onSuccessDataServiceExecute(pResponse){
         }
         $lDataServiceContainer.find('#id_dataservice_' + lDataserviceId).html(lHtml);
         $lDataServiceContainer.removeClass('DN');
-    } else {
-        //removeIfIsNotBeingDisplayed(lDataserviceId);
-    }
+    } 
 }
 
 function onErrorDataServiceExecute(pRequest){
     $.url.setUrl(this.url);
-    var lDataServiceId = $.url.param("pId");
+    var lDataServiceId = $.url.param("revision_id");
 
     var $lDataServiceContainer         = $fDataServicesContainer.find('#id_dataservice_container_' + lDataServiceId);
     var lRetries                       = jQuery.data($lDataServiceContainer[0], "retries");

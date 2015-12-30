@@ -33,6 +33,7 @@ def load(request):
     account = request.account
     preferences = request.preferences
     is_preview = 'preview' in request.GET and request.GET['preview'] == 'true'
+
     
     builder = ThemeBuilder(preferences, is_preview, language, account)
 
@@ -58,6 +59,13 @@ def load(request):
             context['request'] = request
             context['paginator'] = paginator
             context['revisions'] = revisions
+            context['categories'] = Category.objects.get_for_home(language, accounts_ids)
+
+            context['categories_dict'] = {}
+            for cat in context['categories']:
+                key = str(cat['id'])
+                context['categories_dict'][key] = cat['name']
+
             return render_to_response(data['template_path'], context)
         else:
             # For the moment, redirect to search

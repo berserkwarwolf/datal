@@ -201,7 +201,6 @@ var theme4View = Backbone.Epoxy.View.extend({
 		var sources = [];
 		var resourceQuery='';
 		_.each(this.model.attributes.sliderSection, function(item, index){
-            console.log("hole "+item.type);
 			resourceType=item.type;
             resourceQuery += item.id+",";
 		});		
@@ -219,11 +218,11 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {ids: resourceQuery, resources:[resourceType]},				
+					data: {ids: resourceQuery, resources:["ds","vz"]},				
 				})).done( function(data){
 					$('#id_theme4nameSuggest').taggingSources({
 						source:function(request, response) {
-						    $.getJSON("/admin/suggest", { term: request.term, resources:['ds']}, response);
+						    $.getJSON("/admin/suggest", { term: request.term, resources:['ds', 'vz']}, response);
 						}
 						, minLength: 3
 						, sources: data
@@ -265,12 +264,11 @@ var theme4View = Backbone.Epoxy.View.extend({
 					type: "GET",
 					dataType: "json",
 					contentType: "application/json; charset=utf-8",
-					data: {ids: resourceQuery, resources:[resourceType]},				
+					data: {ids: resourceQuery, resources:["ds","vz"]},				
 				})).done( function(data){
 					$('#id_theme4nameLinkSuggest').taggingSources({
 						source:function(request, response) {
-						    /* $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds','chart','db']}, response); */
-						    $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds']}, response);
+						    $.getJSON("/admin/suggest", { term: request.term.concat("*"), resources:['ds','vz']}, response);
 						}
 						, minLength: 3
 						, sources: data

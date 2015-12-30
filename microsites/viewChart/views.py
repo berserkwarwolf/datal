@@ -54,6 +54,8 @@ def view(request, id, slug=None):
 
         visualization_revision_parameters = urllib.urlencode(visualization_revision_parameters)
 
+        notes = visualization_revision['notes']
+
         return render_to_response('viewChart/index.html', locals())
 
 
@@ -64,7 +66,8 @@ def embed(request, guid):
     """
     account = request.account
     preferences = request.preferences
-    base_uri = 'http://' + preferences['account_domain']
+    msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    base_uri = msprotocol + '://' + preferences['account_domain']
 
     try:
         visualization_revision = VisualizationDBDAO().get(

@@ -2186,7 +2186,7 @@ msgid "APP-SETTINGS-TEXT"
 msgstr "Settings"
 
 msgid "APP-FEEDBACK-TEXT"
-msgstr "Feedback"
+msgstr "Report a problem"
 
 msgid "LANDINGPAGE-SECTION-TITLE"
 msgstr "Welcome"
@@ -3187,9 +3187,6 @@ msgstr "the Data View"
 msgid "LANDINGPAGE-ACTIVITY-VISUALIZATION"
 msgstr "the Visualization"
 
-msgid "LANDINGPAGE-ACTIVITY-DASHBOARD"
-msgstr "the Dashboard"
-
 msgid "APP-CHOOSE-MAP-TEXT"
 msgstr "Maps"
 
@@ -3252,3 +3249,9 @@ msgstr "Edit description"
 
 msgid "APP-EDIT-VISUALIZATION-TEXT"
 msgstr "Edit visualization"
+
+msgid "ADMIN-HOME-THEMES-THEME7-TEXT"
+msgstr "Responsive"
+
+msgid "ADMIN-HOME-THEMES-THEME8-TEXT"
+msgstr "Catalog"
