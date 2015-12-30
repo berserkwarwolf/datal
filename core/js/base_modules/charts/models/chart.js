@@ -72,6 +72,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     parse: function (res) {
+
         var data = {
             datastream_revision_id: res.datastream_revision_id,
             datastream_tags:  res.datastream_tags,
