@@ -114,6 +114,11 @@ charts.models.Chart = Backbone.Model.extend({
                 range_lon: this.parseColumnFormat(res.chart.longitudSelection)
 
             });
+
+            /* hack para simular producción
+            res.chart.bounds = false;
+            res.chart.center = [44,55];*/
+
             if (data.type === 'mapchart') {
                 data = _.extend(data,{
                     range_lat: this.parseColumnFormat(res.chart.latitudSelection),
@@ -124,7 +129,7 @@ charts.models.Chart = Backbone.Model.extend({
                     options:{
                         zoom: res.chart.zoom,
                         bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
-                        center: {lat: res.chart.center[0], long: res.chart.center[1]}
+                        center: res.chart.center? {lat: res.chart.center[0], long: res.chart.center[1]}: undefined
                     }
                 });
             };
