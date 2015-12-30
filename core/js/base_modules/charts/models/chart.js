@@ -72,6 +72,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     parse: function (res) {
+
         var data = {
             datastream_revision_id: res.datastream_revision_id,
             datastream_tags:  res.datastream_tags,
@@ -124,8 +125,7 @@ charts.models.Chart = Backbone.Model.extend({
                     options:{
                         zoom: res.chart.zoom,
                         bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
-                        center: {lat: res.chart.center[0], long: res.chart.center[1]}
-                    }
+                        center: res.chart.center? {lat: res.chart.center[0], long: res.chart.center[1]}: undefined                    }
                 });
             };
         }
