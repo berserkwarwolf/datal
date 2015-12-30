@@ -19,7 +19,7 @@
                         </span>
                     </a>
                 </h2>
-                <div id="id_dataservice_{{resource.visualization_id}}"></div>
+                <div class="sliderContent" id="id_dataservice_{{resource.visualization_id}}"></div>
 
                 <script type="text/javascript">
 
@@ -86,7 +86,7 @@
                         </span>
                     </a>
                 </h2>
-                <div id="id_dataservice_{{resource.datastream_id}}"></div>
+                <div class="sliderContent" id="id_dataservice_{{resource.datastream_id}}"></div>
 
                 <script type="text/javascript">
                     $("#id_dataservice_container_{{resource.datastream_id}}").data("jsonURL", "{% url 'datastreams-data' resource.last_published_revision_id "json" %}");
