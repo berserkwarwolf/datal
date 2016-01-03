@@ -289,12 +289,13 @@ class DatasetLifeCycleManager(AbstractLifeCycleManager):
                                     to_state=None,
                                     allowed_states=allowed_states)
 
-        _revisions = DatasetRevision.objects.filter(dataset=self.dataset.id)
-        revision_count = _revisions.count()
+        if not killemall:
+            _revisions = DatasetRevision.objects.filter(dataset=self.dataset.id)
+            killemall = _revisions.count() == 1
 
         # si la revision a eliminar es la unica revision
         # elimino todos los recursos asociados a ella
-        if killemall or revision_count == 1:
+        if killemall:
             self._remove_all()
 
         else:
