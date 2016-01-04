@@ -84,7 +84,7 @@
 												{% trans "LANDINGPAGE-ACTIVITY-VISUALIZATION" %}
 											{% else %}
 												 	<!-- Nav items from plugins -->
-										    	{% get_plugins core.plugins.DatalPluginPoint as plugins %}
+										    	{% get_plugins core.plugins_point.DatalPluginPoint as plugins %}
 										    	{% for plugin in plugins %}
 										    		{% if plugin.is_active and plugin.doc_type == activity.type %}
 										    			{% autoescape off %}
