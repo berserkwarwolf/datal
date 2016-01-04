@@ -2,7 +2,7 @@ from rest_framework import renderers
 from babel import numbers, dates
 from rest_framework.renderers import JSONRenderer
 import json
-from lxml import html
+from lxml import html, etree
 import datetime
 import sys
 import re
@@ -48,14 +48,15 @@ class JSONEngineRenderer(EngineRenderer):
     format = "json"
 
     def render(self, data, media_type=None, renderer_context=None):
-        x_tree = html.fromstring(data.decode('utf-8'))
+        parser = etree.HTMLParser(encoding='utf-8')
+        x_tree = html.fromstring(data, parser=parser)
 
         result = []
 
         for x_table in x_tree.xpath('//table'):
             table = []
             for x_row in x_table.xpath('tr'):
-                row = [x_cell.text_content() for x_cell in x_row.xpath('td')]
+                row = [x_cell.text for x_cell in x_row.xpath('td')]
                 table.append(row)
 
             result.append(table)
