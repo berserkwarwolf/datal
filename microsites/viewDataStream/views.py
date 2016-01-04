@@ -12,7 +12,6 @@ from django.views.decorators.clickjacking import xframe_options_exempt
 from core.http import get_domain_with_protocol
 from core.models import DataStream, Account, DataStreamRevision
 from core.helpers import RequestProcessor
-from core.decorators import datal_cache_page
 from core.choices import ChannelTypes
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.shortcuts import render_to_response
@@ -41,7 +40,8 @@ def view(request, id, slug):
 def embed(request, guid):
     account = request.account
     preferences = request.preferences
-    base_uri = 'http://' + preferences['account_domain']
+    msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    base_uri = msprotocol + '://' + preferences['account_domain']
 
     try:
         datastream = DataStreamDBDAO().get(
@@ -56,24 +56,3 @@ def embed(request, guid):
     fixed_column = request.REQUEST.get('fixed_column', False)
 
     return render_to_response('viewDataStream/embed.html', locals())
-
-
-@require_http_methods(["GET"])
-def download(request, id, slug):
-    """ download internal dataset file """
-    try:
-        datastream = DataStreamDBDAO().get(request.auth_manager.language, datastream_id=id, published=True)
-    except:
-        raise DataStreamDoesNotExist
-    else:
-        url = active_datastore.build_url(
-            request.bucket_name,
-            datastream.end_point.replace("file://", ""),
-            {'response-content-disposition': 'attachment; filename={0}'.format(datastream.filename.encode('utf-8'))}
-        )
-
-        content_type = settings.CONTENT_TYPES.get(settings.IMPL_TYPES.get(datastream.impl_type))
-        redirect = HttpResponse(status=302, mimetype=content_type)
-        redirect['Location'] = url
-
-        return redirect

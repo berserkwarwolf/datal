@@ -72,6 +72,7 @@ charts.models.Chart = Backbone.Model.extend({
     },
 
     parse: function (res) {
+
         var data = {
             datastream_revision_id: res.datastream_revision_id,
             datastream_tags:  res.datastream_tags,
@@ -124,8 +125,7 @@ charts.models.Chart = Backbone.Model.extend({
                     options:{
                         zoom: res.chart.zoom,
                         bounds: res.chart.bounds? res.chart.bounds.split(';'): undefined,
-                        center: {lat: 0, long: 0}
-                    }
+                        center: res.chart.center? {lat: res.chart.center[0], long: res.chart.center[1]}: undefined                    }
                 });
             };
         }
@@ -219,9 +219,9 @@ charts.models.Chart = Backbone.Model.extend({
         var range = DataTableUtils.excelToRange(selection);
 
         if (range.from.row === -1 && range.to.row === -1) {
-            selection = _.reduce(_.range(range.from.col, range.to.col + 1), function (memo, col) {
-                return memo + 'Column:' + DataTableUtils.intToExcelCol(col + 1) + ';';
-            }, '');
+            selection = _.map(_.range(range.from.col, range.to.col + 1), function (col) {
+                return 'Column:' + DataTableUtils.intToExcelCol(col + 1);
+            }).join(',');
         }
 
         return selection;

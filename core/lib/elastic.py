@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from django.conf import settings
 from elasticsearch import Elasticsearch, NotFoundError, RequestError
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 import logging
 
 
@@ -69,6 +69,8 @@ class ElasticsearchIndex():
                       "account_id" : { "type" : "long" },
                       "datastream__revision_id" : { "type" : "long" },
                       "datastream_id" : { "type" : "long" },
+                      "resource_id" : { "type" : "long" },
+                      "revision_id" : { "type" : "long" },
                       "description" : { "type" : "string" },
                       "end_point" : { "type" : "string" },
                       "owner_nick" : { "type" : "string" },
@@ -108,6 +110,8 @@ class ElasticsearchIndex():
                       "account_id" : { "type" : "long" },
                       "datasetrevision_id" : { "type" : "long" },
                       "dataset_id" : { "type" : "long" },
+                      "resource_id" : { "type" : "long" },
+                      "revision_id" : { "type" : "long" },
                       "description" : { "type" : "string" },
                       "end_point" : { "type" : "string" },
                       "owner_nick" : { "type" : "string" },
@@ -145,6 +149,8 @@ class ElasticsearchIndex():
                   "fields" : {
                     "properties" : {
                       "account_id" : { "type" : "long" },
+                      "resource_id" : { "type" : "long" },
+                      "revision_id" : { "type" : "long" },
                       "visualization_revision_id" : { "type" : "long" },
                       "visualization_id" : { "type" : "long" },
                       "description" : { "type" : "string" },

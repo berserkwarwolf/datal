@@ -3,7 +3,7 @@ from django.conf import settings
 
 from model_utils import Choices
 
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 
 VISUALIZATION_TYPES = (
     ('columnchart', 'columnchart'),
@@ -420,7 +420,11 @@ ACCOUNT_PREFERENCES_AVAILABLE_KEYS = (
     ,('account.search.tips', 'account.search.tips')
 
     # TODO: Mover al plugin
-    ,('account.featured.dashboards', 'account.featured.dashboards')
+    ,('account.featured.dashboards', 'account.featured.dashboards'),
+
+    # https for microsites or api
+    ('account.microsite.https', 'account.microsite.https'),
+    ('account.api.https', 'account.api.https'),
 )
 
 API_APPLICATION_TYPE_CHOICES = (

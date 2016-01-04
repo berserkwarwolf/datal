@@ -82,6 +82,8 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
 
 
         dataset = dict(
+            revision_id=dataset_revision.id,
+            resource_id=dataset_revision.dataset.id,
             dataset_revision_id=dataset_revision.id,
             dataset_id=dataset_revision.dataset.id,
             user_id=dataset_revision.user.id,
@@ -90,6 +92,7 @@ class DatasetDBDAO(AbstractDatasetDBDAO):
             category_id=dataset_revision.category.id,
             category_name=category.name,
             end_point=dataset_revision.end_point,
+            end_point_full_url=dataset_revision.get_endpoint_full_url(),
             filename=dataset_revision.filename,
             impl_details=dataset_revision.impl_details,
             impl_type=dataset_revision.impl_type,
@@ -425,6 +428,8 @@ class DatasetSearchIndexDAO():
                 'docid' : self._get_id(),
                 'fields' :
                     {'type' : self.TYPE,
+                     'resource_id': self.dataset_revision.dataset.id,
+                     'revision_id': self.dataset_revision.id,
                      'dataset_id': self.dataset_revision.dataset.id,
                      'datasetrevision_id': self.dataset_revision.id,
                      'title': dataseti18n.title,

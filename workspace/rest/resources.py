@@ -10,7 +10,7 @@ from rest_framework.compat import OrderedDict
 from rest_framework_extensions.cache.decorators import cache_response
 from django.conf import settings
 from core.rest.cache import CacheKeyConstructor
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 
 import json
 import logging
@@ -53,6 +53,10 @@ class ResourceSerializer(serializers.Serializer):
                 inner = answer.setdefault(key, {})
                 inner.update(value)
         return answer
+
+    def get_impl_details(self, obj):
+        if 'impl_details' in obj:
+            return json.loads(obj['impl_details'])
     
     def get_status_name(self, status_id):
         for id, valor in STATUS_CHOICES_REST:
@@ -74,6 +78,7 @@ class ResourceSerializer(serializers.Serializer):
 
         answer['status'] = self.get_status_name(obj['status'])
         answer['type'] = self.get_type(obj)
+        answer['impl_details'] = self.get_impl_details(obj)
 
         return OrderedDict(answer)
 
@@ -155,6 +160,6 @@ class MultipleResourceViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
 
         return self.order_queryset(answer)
 
-    @cache_response(60 * 5, cache_errors=False, key_func=CacheKeyConstructor())
+    #@cache_response(60 * 5, cache_errors=False, key_func=CacheKeyConstructor())
     def list(self, request, *args, **kwargs):
         return super(MultipleResourceViewSet, self).list(request, *args, **kwargs)

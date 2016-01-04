@@ -12,6 +12,9 @@ from core.lifecycle.datastreams import DatastreamSearchDAOFactory
 from core.daos.datastreams import DatastreamHitsDAO, DataStreamDBDAO
 from core.daos.visualizations import *
 
+from core.plugins_point import DatalPluginPoint
+
+
 
 class Command(BaseCommand):
     help = "Index datasets."
@@ -89,3 +92,7 @@ class Command(BaseCommand):
                     es.update(doc)
                 except:
                     pass
+
+        for plugin in DatalPluginPoint.get_active_with_att('reindex'):
+            plugin.reindex(es)
+

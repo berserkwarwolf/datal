@@ -103,7 +103,7 @@
 	    Configuration.chartSize = {"embed":{"width":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.embed.width}}", "height":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.embed.height}}" }, "normal":{"width":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.normal.width}}", "height":"{{settings.DEFAULT_MICROSITE_CHART_SIZES.normal.height}}" }};
 
 	    {% if preferences.account_embed_powered_by %}
-	    Configuration.embedPoweredBy = ["http://{{preferences.account_domain}}","{{preferences.account_name}}"];
+	    Configuration.embedPoweredBy = ["{{settings.MSPROTOCOL}}://{{preferences.account_domain}}","{{preferences.account_name}}"];
   		{% else %}
   		Configuration.embedPoweredBy = ["{{ settings.APPLICATION_DETAILS.website }}","{{ settings.APPLICATION_DETAILS.name }}"];
   		{% endif %}

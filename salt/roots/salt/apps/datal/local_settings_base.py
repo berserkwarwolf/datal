@@ -30,7 +30,7 @@ DOMAINS = {'api': '{{  pillar["application"]["settings"]["domains"]["api"] }}',
            'cdn': '{{  pillar["application"]["cdn"] }}',
 }
 
-WORKSPACE_URI = 'http://{{  pillar["application"]["settings"]["domains"]["workspace"] }}'
+WORKSPACE_URI = '{{pillar["application"]["settings"]["workspace_protocol"]}}://{{  pillar["application"]["settings"]["domains"]["workspace"] }}'
 
 EMAIL_HOST = '{{  pillar["email"]["host"] }}'
 EMAIL_HOST_USER = '{{  pillar["email"]["user"] }}'

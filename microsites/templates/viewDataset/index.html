@@ -97,8 +97,8 @@ $(document).ready(function(){
     guid: "{{dataset.guid}}",
     type: "{{dataset.impl_type}}",
     source: "{{dataset.end_point|escapejs}}",
-    permaLink: "http://{{ preferences.account_domain }}{{ dataset.dataset_id|permalink:'dataset' }}{%if url_query%}?{{url_query}}{%endif%}",
-    embedUrl: "http://{{ dataset.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
+    permaLink: "{{settings.MSPROTOCOL}}://{{ preferences.account_domain }}{{ dataset.dataset_id|permalink:'dataset' }}{%if url_query%}?{{url_query}}{%endif%}",
+    embedUrl: "{{settings.MSPROTOCOL}}://{{ dataset.embedUrl }}?header_row=0&fixed_column=0{%if url_query%}&{{url_query}}{%endif%}" ,
     createdAt: "{{dataset.created_at|date:'c'}}"
   });
 

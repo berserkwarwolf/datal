@@ -124,11 +124,15 @@ def get_catalog_xml(request):
     account_id = request.account.id
     language = request.auth_manager.language
     preferences = request.preferences
-
+    account = request.account
+    
     domain = get_domain_by_request(request)
     api_domain = preferences['account_api_domain']
     transparency_domain = preferences['account_api_transparency']
-    developers_link = 'http://' + domain + reverse('manageDeveloper.filter')
+    account = Account.objects.get(pk=account_id)
+    msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+    apiprotocol = 'https' if account.get_preference('account.api.https').lower() == 'true' else 'http'
+    developers_link = msprotocol + '://' + domain + reverse('manageDeveloper.filter')
     datastreams_revision_ids = DataStreamRevision.objects.values_list('id').filter(
         datastream__user__account_id=account_id, status=StatusChoices.PUBLISHED
     )
@@ -140,16 +144,10 @@ def get_catalog_xml(request):
             logger.error('catalog ERROR %s %s' % (datastream_revision_id, language))
             continue
 
-        ds.link = 'http://{}{}'.format(domain, ds.permalink())
-        ds.export_csv_link = 'http://{}{}'.format(
-            domain,
-            reverse('viewDataStream.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
-        )
-        ds.export_html_link = 'http://{}{}'.format(
-            domain,
-            reverse('viewDataStream.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug})
-        )
-        ds.api_link = 'http://' + api_domain + '/datastreams/' + ds.guid + '/data/?auth_key=your_authkey'
+        ds.link = '{}://{}{}'.format(msprotocol, domain, ds.permalink())
+        ds.export_csv_link = '{}://{}{}'.format(msprotocol, domain,reverse('viewDataStream.csv', kwargs={'id': ds.datastream_id, 'slug': ds.slug}))
+        ds.export_html_link = '{}://{}{}'.format(msprotocol, domain, reverse('viewDataStream.html', kwargs={'id': ds.datastream_id, 'slug': ds.slug}) )
+        ds.api_link = apiprotocol + '://' + api_domain + '/datastreams/' + ds.guid + '/data/?auth_key=your_authkey'
 
         ds.visualizations = []
         visualization_revision_ids = VisualizationRevision.objects.values_list('id').filter(
@@ -162,7 +160,7 @@ def get_catalog_xml(request):
             except:
                 logger.error('catalog VIZ ERROR %s %s' % (visualization_revision_id, language))
                 continue
-            vz['link'] = 'http://' + domain + vz.permalink()
+            vz['link'] = msprotocol + '://' + domain + vz.permalink()
             ds.visualizations.append(vz)
         resources.append(ds)
 

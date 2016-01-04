@@ -48,6 +48,7 @@ var personalizeView = Backbone.View.extend({
 				break;
 			case '7':
 				this.selectTheme7();
+				break;
 			case '8':
 				this.selectTheme8();
 				break;

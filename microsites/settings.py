@@ -60,3 +60,8 @@ try:
     from microsites.local_settings import *
 except ImportError:
     pass
+
+try:    
+    from plugins.local_settings import *
+except ImportError:
+    pass

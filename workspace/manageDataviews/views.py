@@ -13,7 +13,6 @@ from core.lifecycle.datastreams import DatastreamLifeCycleManager
 from core.exceptions import DataStreamNotFoundException, DatasetNotFoundException
 from core.models import DatasetRevision, Account, CategoryI18n, DataStreamRevision
 from core.http import JSONHttpResponse
-from core.decorators import datal_cache_page
 from core.signals import datastream_changed, datastream_removed, datastream_unpublished, datastream_rev_removed
 from core.utils import DateTimeEncoder
 from workspace.decorators import *
@@ -380,7 +379,9 @@ def change_status(request, datastream_revision_id=None):
 
         # Limpio un poco
         response['result'] = DataStreamDBDAO().get(request.user.language, datastream_revision_id=datastream_revision_id)
-        response['result']['public_url'] = "http://" + request.preferences['account.domain'] + reverse('viewDataStream.view', urlconf='microsites.urls', 
+        account = request.account
+        msprotocol = 'https' if account.get_preference('account.microsite.https').lower() == 'true' else 'http'
+        response['result']['public_url'] = msprotocol + "://" + request.preferences['account.domain'] + reverse('viewDataStream.view', urlconf='microsites.urls', 
             kwargs={'id': response['result']['datastream_id'], 'slug': '-'})
         response['result'].pop('parameters')
         response['result'].pop('tags')

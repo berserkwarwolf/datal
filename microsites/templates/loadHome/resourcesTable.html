@@ -1,4 +1,4 @@
-{% load i18n humanize extra_tags core_components %}
+{% load i18n humanize extra_tags core_components plugins_tags %}
 <div class="resourcesTable">
     <div class="resourcesTableInner">
         <div id="my_datatable" class="columns clearfix relative">
@@ -14,7 +14,7 @@
                         <span class="DST">{% trans "HOME-DATASET-TEXT" %}</span> 
                         <span class="DS">{% trans "HOME-DS-TEXT" %}</span> 
                         <span class="VZ">{% trans "HOME-VZ-TEXT" %}</span>
-                        <span class="DB">{% trans "HOME-DB-TEXT" %}</span>
+                        {% plugins_call 'microsites_home_resources_table' %}
                     </div>
                 </div>
             </div>

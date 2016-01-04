@@ -3,9 +3,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from rest_framework import routers
-from djangoplugins.utils import include_plugins
+from core.utils import include_notroot_plugins
 
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 from api.v2.datastreams import DataStreamViewSet
 from api.v2.datasets import DataSetViewSet
 from api.v2.visualizations import VisualizationViewSet
@@ -26,8 +26,8 @@ for plugin in plugins:
 
 
 urlpatterns = patterns('',
-    (r'^', include_plugins(DatalPluginPoint, urls='api_urls')),
     (r'^api/v2/', include(router.urls)),
+    (r'^', include_notroot_plugins(DatalPluginPoint, urls='root_api_urls')),
 )
 
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

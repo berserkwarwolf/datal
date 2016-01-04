@@ -55,7 +55,7 @@ class ThemeBuilder(object):
                 
         if visualizationIds:
             idsVisualization = ','.join(visualizationIds)
-            resources +=  VisualizationDBDAO.query_hot_n(language, hot = idsVisualization)
+            resources +=  VisualizationDBDAO().query_hot_n(language, hot = idsVisualization)
 
      
         add_domains_to_permalinks(resources)
