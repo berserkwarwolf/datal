@@ -1,17 +1,19 @@
 var FiltersOptionsView = Backbone.Epoxy.View.extend({
 
     events: {
-        'click a.btn-clear': 'onClickClear',
+        'click button.btn-clear': 'onClickClear',
         'click button.btn-back': 'onClickBack',
         'click button.btn-ok': 'onClickOk',
 
-        'change input:text': 'onChangeInput'
+        'change input[name="default"]': 'onChangeInput'
     },
 
     bindings: {
         "select.select-column": "value:column, events:['change']",
         "select.select-operator": "value:operator, events:['change']",
-        "select.select-value-type": "value:type, events:['change']"
+        "select.select-value-type": "value:type, events:['change']",
+        'input[name="name"]': "value:name, events:['keyup']",
+        'textarea[name="description"]': "value:description, events:['keyup']",
     },
 
     initialize: function (options) {
@@ -47,6 +49,22 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
             state: this.stateModel.toJSON()
         }));
         this.applyBindings();
+
+        this.setInitialState();
+    },
+
+    setInitialState: function () {
+        // Set initial values
+        var column = this.model.get('column');
+        var operator = this.model.get('operator');
+        var type = this.model.get('type');
+        var defaultParam = this.model.get('default');
+
+        this.onChangeColumn(null, _.isUndefined(column)? '': column);
+        this.onChangeOperator(null, _.isUndefined(operator)? '': operator);
+        this.onChangeValueType(null, _.isUndefined(type)? '': type);
+
+        this.$('input[name="default"]').val(defaultParam);
     },
 
     onClickBack: function () {
@@ -54,7 +72,8 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
     },
 
     onClickClear: function () {
-        this.collection.reset();
+        this.model.reset();
+        this.setInitialState();
     },
 
     onClickOk: function () {
@@ -68,15 +87,13 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
             this.$('.row-operator').removeClass('hidden');
         } else {
             this.model.unset('excelCol');
-            this.$('.row-operator').addClass('hidden');
-            this.$('.row-operator').addClass('hidden');
+            this.$('.row-operator').addClass('hidden')
             this.$('.row-fixed-value').addClass('hidden');
             this.$('.row-parameter').addClass('hidden');
         }
     },
 
     onChangeOperator: function (model, value) {
-        console.log(value)
         if (value !== '') {
             this.$('.row-value-type').removeClass('hidden');
         } else {
@@ -88,7 +105,8 @@ var FiltersOptionsView = Backbone.Epoxy.View.extend({
 
     onChangeValueType: function (model, value) {
         if (value === '') {
-            this.$('.row-operator').removeClass('hidden');
+            this.$('.row-fixed-value').addClass('hidden');
+            this.$('.row-parameter').addClass('hidden');
         } else if (value === 'fixed') {
             this.$('.row-fixed-value').removeClass('hidden');
             this.$('.row-parameter').addClass('hidden');
