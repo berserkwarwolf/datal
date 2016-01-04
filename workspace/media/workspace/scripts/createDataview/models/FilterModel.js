@@ -4,7 +4,14 @@ var FilterModel = Backbone.Epoxy.Model.extend({
     defaults: {
         column: undefined,
         operator: undefined,
-        type: undefined
+        type: undefined,
+        name: undefined,
+        description: undefined,
+        'default': undefined
     },
 
+    reset: function () {
+        var keep = this.pick(['column', 'excelCol']);
+        this.set(this.defaults).set(keep);
+    }
 });
