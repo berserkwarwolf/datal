@@ -13,7 +13,7 @@ from microsites.rest.datastreams import RestDataStreamViewSet
 from microsites.rest.maps import RestMapViewSet
 from microsites.rest.charts import RestChartViewSet
 from microsites.rest.routers import MicrositeEngineRouter
-from core.plugins import DatalPluginPoint
+from core.plugins_point import DatalPluginPoint
 
 router = MicrositeEngineRouter()
 router.register(r'datastreams', RestDataStreamViewSet, base_name='datastreams')
