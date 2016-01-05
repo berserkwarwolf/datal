@@ -19,9 +19,6 @@ class EngineSerializer(serializers.Serializer):
         redirect_to = ''
         if redirect:
             redirect_to = engine_result.get('fUri')
-            # UGLY HOTFIX
-            # ENGINE SEND SOMETHING LIKE 
-            ### Nivel_Rendimiento_anio_2008.xlsx-AWSAccessKeyId=AKIAI65****H2VI25OA&Expires=1452008148&Signature=u84IIwXrpIoE%3D
             redirect_to = redirect_to.split('-AWSAccessKeyId')[0]
             filename2 = redirect_to.split('/')[-1:][0].encode('utf-8')
             extension = redirect_to.split('.')[-1:][0]
@@ -32,6 +29,13 @@ class EngineSerializer(serializers.Serializer):
             # la extension real
             name = filename if len(filename.split('.')) == 1 else '.'.join(filename.split('.')[:-1])
             filename2 = '{}.{}'.format(name, extension)
+
+        # UGLY HOTFIX
+        # ENGINE SEND SOMETHING LIKE 
+        ### Nivel_Rendimiento_anio_2008.xlsx-AWSAccessKeyId=AKIAI65****H2VI25OA&Expires=1452008148&Signature=u84IIwXrpIoE%3D
+        filename2 = filename2.split('-AWSAccessKeyId')[0]
+        filename = filename.split('-AWSAccessKeyId')[0]
+
             
         if settings.DEBUG and filename2: 
             logger.info('Redirect %s %s %s' % (redirect_to, filename, filename2))
