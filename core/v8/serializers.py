@@ -19,7 +19,6 @@ class EngineSerializer(serializers.Serializer):
         redirect_to = ''
         if redirect:
             redirect_to = engine_result.get('fUri')
-            redirect_to = redirect_to.split('-AWSAccessKeyId')[0]
             filename2 = redirect_to.split('/')[-1:][0].encode('utf-8')
             extension = redirect_to.split('.')[-1:][0]
         
