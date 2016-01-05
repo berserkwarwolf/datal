@@ -54,11 +54,18 @@ class EngineViewSetMixin(object):
             context={'dao_filename': self.dao_filename})
         if download and 'redirect' in serializer.data and serializer.data['redirect']:
             response = HttpResponse(mimetype='application/force-download')
-            response['Content-Disposition'] = 'attachment; filename="{0}"'.format(serializer.data['filename'])
+            filename = serializer.data['filename']
+            # UGLY HOTFIX
+            # ENGINE SEND SOMETHING LIKE 
+            ### Nivel_Rendimiento_anio_2008.xlsx-AWSAccessKeyId=AKIAI65****H2VI25OA&Expires=1452008148&Signature=u84IIwXrpIoE%3D
+            filename = filename.split('-AWSAccessKeyId')[0]
+            
+            response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename)
             redir = urllib2.urlopen(serializer.data['result']['fUri'])
             status = redir.getcode()
             resp = redir.read()
-            if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, redir.geturl(), redir.info()))
+            url = redir.geturl()
+            if settings.DEBUG: logger.info('REDIR %d %s -- %s' % (status, url, redir.info()))
             response.write(resp)
             return response
 
