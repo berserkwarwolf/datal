@@ -8,9 +8,7 @@ var embedChart = Backbone.Model.extend({
         'fixedColumns': "0"
     },
     initialize: function(){
-        //load the default values
-        this.attributes.width = Configuration.chartSize.embed.width;
-        this.attributes.height = Configuration.chartSize.embed.height;
+        
     },
     validate: function(attributes, options){
         var errors  = {};       

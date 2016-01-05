@@ -112,10 +112,17 @@ _.extend(viewVisualizationView.prototype, Backbone.View.prototype, {
 	},
 
 	onEmbedButtonClicked : function() {
+
+		var embedSettings = this.model.get('embedSettings');
+
+		console.log(embedSettings)
+
 		new embedChartView({
 			model : new embedChart({
-				title : this.model.get("title"),
-				url : this.model.get("embedUrl")
+				title: this.model.get("title"),
+				url: this.model.get("embedUrl"),
+				height: embedSettings.embed.height,
+				width: embedSettings.embed.width
 			}, {
 				validate : true
 			})

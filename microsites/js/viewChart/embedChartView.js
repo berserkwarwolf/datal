@@ -17,6 +17,9 @@ var embedChartView = Backbone.View.extend({
     $headersInput: null,    
     
     initialize: function() {
+
+        console.log(this.model.toJSON());
+
         $widthInput     = this.$el.find('#id_embedWidth').val(this.model.get('width'));
         $heightInput    = this.$el.find('#id_embedHeight').val(this.model.get('height'));
         $headersInput   = this.$el.find('#id_embedHeaders').val(this.model.get('headerRows'));
