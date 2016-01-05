@@ -19,6 +19,10 @@ class EngineSerializer(serializers.Serializer):
         redirect_to = ''
         if redirect:
             redirect_to = engine_result.get('fUri')
+            # UGLY HOTFIX
+            # ENGINE SEND SOMETHING LIKE 
+            ### Nivel_Rendimiento_anio_2008.xlsx-AWSAccessKeyId=AKIAI65****H2VI25OA&Expires=1452008148&Signature=u84IIwXrpIoE%3D
+            redirect_to = redirect_to.split('-AWSAccessKeyId')[0]
             filename2 = redirect_to.split('/')[-1:][0].encode('utf-8')
             extension = redirect_to.split('.')[-1:][0]
         
