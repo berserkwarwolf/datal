@@ -139,6 +139,9 @@ charts.views.C3BarChart = charts.views.BarChart.extend({
                 width: {
                     ratio: 0.5 // this makes bar width 50% of length between ticks
                 }
+            },
+            legend: {
+                position: 'right'
             }
         });
     }
@@ -176,6 +179,9 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
                 width: {
                     ratio: 0.5 // this makes bar width 50% of length between ticks
                 }
+            },
+            legend: {
+                position: 'right'
             }
         });
     }
@@ -206,6 +212,9 @@ charts.views.C3PieChart = charts.views.PieChart.extend({
             data: {
                 type: 'pie',
                 columns: rows,
+            },
+            legend: {
+                position: 'right'
             }
         });
     }
