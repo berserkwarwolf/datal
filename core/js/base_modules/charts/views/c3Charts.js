@@ -190,6 +190,7 @@ charts.views.C3ColumnChart = charts.views.BarChart.extend({
 charts.views.C3PieChart = charts.views.PieChart.extend({
     initialize: function (options) {
         this.constructor.__super__.initialize.apply(this, arguments);
+        this.hideLegend = false;
     },
 
     formatData: function (dataModel) {
@@ -205,6 +206,7 @@ charts.views.C3PieChart = charts.views.PieChart.extend({
     },
 
     render: function () {
+        var self = this;
         var rows = this.formatData(this.model.data);
 
         this.chart = c3.generate({
@@ -214,7 +216,18 @@ charts.views.C3PieChart = charts.views.PieChart.extend({
                 columns: rows,
             },
             legend: {
-                position: 'right'
+                position: 'right',
+                hide: self.hideLegend
+            },
+            onrendered: function () {
+                var previousHideLegend = self.hideLegend;
+
+                if (self.chart) {
+                    self.hideLegend = (this.width < 500);
+                    if (self.hideLegend !== previousHideLegend) {
+                        self.render();
+                    }
+                }
             }
         });
     }
