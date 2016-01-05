@@ -60,6 +60,11 @@ class EngineViewSetMixin(object):
             # ENGINE SEND SOMETHING LIKE 
             ### Nivel_Rendimiento_anio_2008.xlsx?AWSAccessKeyId=AKIAI65****H2VI25OA&Expires=1452008148&Signature=u84IIwXrpIoE%3D
             filename2 = filename.split('?AWSAccessKeyId')[0]
+            if filename2.startswith('temp_'):
+                filename = serializer.data['filename']
+                name = filename if len(filename.split('.')) == 1 else '.'.join(filename.split('.')[:-1])
+                extension = ''  if len(filename.split('.')) == 0 else filename.split('.')[1]
+                filename2 = '{}.{}'.format(name, extension)
             
             response['Content-Disposition'] = 'attachment; filename="{0}"'.format(filename2)
             redir = urllib2.urlopen(serializer.data['result']['fUri'])
