@@ -18,6 +18,8 @@ from core.builders.themes import ThemeBuilder
 
 from core.models import Category
 
+# Need this to get a variable of SETTINGS reach html templates
+from core.shortcuts import render_to_response
 
 @login_required
 @privilege_required('workspace.can_access_admin')
