@@ -4,6 +4,9 @@ from django.template import RequestContext
 
 
 def render_to_response(template, dictionary, mimetype=settings.DEFAULT_CONTENT_TYPE):
-    request = dictionary.pop('request')
+    try:
+        request = dictionary.pop('request')
+    except:
+        pass #dale que va
     context_instance = RequestContext(request)
     return django_render_to_response(template, dictionary, context_instance, mimetype=mimetype)
