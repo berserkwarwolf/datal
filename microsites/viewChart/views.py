@@ -56,9 +56,6 @@ def view(request, id, slug=None):
 
         notes = visualization_revision['notes']
 
-        
-        embed_settings=settings.DEFAULT_MICROSITE_CHART_SIZES
-
         return render_to_response('viewChart/index.html', locals())
 
 

@@ -162,15 +162,12 @@ var viewVisualizationModel = {
     lastPublishDate: "{{visualization_revision.last_published_date|date:'F d, Y, h:i A'|capfirst}}",
     publicUrl: "{{settings.MSPROTOCOL}}://{{ preferences.account_domain }}{{ visualization_revision.visualization_id|permalink:'visualization' }}",
     lastPublishRevisionId: "{{ visualization_revision.last_published_revision_id }}",
-
-    // Validar si es necesario
     guid: "{{visualization_revision.guid}}",
 
     // Revisar
     id: "{{ visualization_revision.last_published_revision_id }}",
     visualization_id: "{{ visualization_revision.visualization_id }}",
-    embedUrl: "{{base_uri}}{% url 'viewChart.embed' visualization_revision.guid %}?end_point={%if url_query%}&{{url_query}}{%endif%}",
-    embedSettings: {{ embed_settings|safe  }}
+    embedUrl: "{{settings.MSPROTOCOL}}://{{ preferences.account_domain }}{% url 'viewChart.embed' visualization_revision.guid %}"
 }
 
 // Plugins - Extend Main Model
