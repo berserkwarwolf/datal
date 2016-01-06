@@ -5,7 +5,7 @@ import json
 from django.views.decorators.http import require_POST
 from django.utils.translation import ugettext
 from django.views.decorators.csrf import csrf_exempt
-from django.shortcuts import render_to_response, HttpResponse
+from django.shortcuts import HttpResponse
 from django.template.loader import render_to_string
 from django.core.exceptions import ValidationError
 
@@ -18,8 +18,11 @@ from core.builders.themes import ThemeBuilder
 
 from core.models import Category
 
-# Need this to get a variable of SETTINGS reach html templates
-from core.shortcuts import render_to_response
+# Éste es usado para traer la variable de SETTINGS que necesito en el template HTML
+#from core.shortcuts import render_to_response
+
+# Éste ya estaba acá, si comento éste y descomento la anterior, da error en el metodo suggest.
+from django.shortcuts import render_to_response
 
 @login_required
 @privilege_required('workspace.can_access_admin')
